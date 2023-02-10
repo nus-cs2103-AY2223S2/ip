@@ -1,5 +1,7 @@
 package peppa;
 
+import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -55,6 +57,15 @@ public class Ui {
                 + "> " + ExitCommand.COMMAND_WORD + "\n";
     }
 
+    public static String getDataSources(ArrayList<File> sources) {
+        StringBuilder response = new StringBuilder("Oink! Peppa found "
+                + sources.size() + " data sources: \n");
+        for (int i = 0; i < sources.size(); i++) {
+            response.append((i + 1) + ". " + sources.get(i).getName() + "\n");
+        }
+        return response + "\n";
+    }
+
     /**
      * Returns custom message upon a successful delete task operation.
      *
@@ -73,6 +84,10 @@ public class Ui {
 
     public static void displayMessage(String message) {
         System.out.println(message);
+    }
+
+    public static String getLoadFileMessage() {
+        return "Please select a file to load data from: \n";
     }
 
     /**
@@ -107,6 +122,11 @@ public class Ui {
             response.append("\n");
         }
         return response.toString();
+    }
+
+    public static String getSelectFileMessage(File f) {
+        return "Oink! Peppa has successfully loaded data from " + f.getName() + ".\n"
+                + "How can Peppa assist you today?\n";
     }
 
     /**

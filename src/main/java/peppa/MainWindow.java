@@ -32,10 +32,19 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setPeppa(Peppa p) {
-
         this.peppa = p;
-        this.dialogContainer.getChildren().add(DialogBox.getPeppaDialog("Oink! I'm Peppa. Nice to meet you! "
-                + "How can I assist you today?", peppaImage));
+        String response = "Initialising data...\n\n";
+        if (!this.peppa.isFileSet()) {
+            response += peppa.getResponse("files");
+            setPeppaDialog(response);
+        } else {
+            setPeppaDialog(response + "Oink! I'm Peppa. Nice to meet you! How can I assist you today?");
+        }
+        // set sendWelcomeMsg --> False
+    }
+
+    public void setPeppaDialog(String msg) {
+        this.dialogContainer.getChildren().add(DialogBox.getPeppaDialog(msg, peppaImage));
     }
 
     /**

@@ -11,11 +11,13 @@ import peppa.commands.DeadlineCommand;
 import peppa.commands.DeleteCommand;
 import peppa.commands.EventCommand;
 import peppa.commands.ExitCommand;
+import peppa.commands.FilesCommand;
 import peppa.commands.FindCommand;
 import peppa.commands.IncorrectCommand;
 import peppa.commands.InvalidCommand;
 import peppa.commands.ListCommand;
 import peppa.commands.MarkCommand;
+import peppa.commands.SelectCommand;
 import peppa.commands.TodoCommand;
 import peppa.commands.UnmarkCommand;
 
@@ -38,6 +40,10 @@ public class Parser {
         String[] args = fullCommand.split(" ");
         String commandType = args[0];
         switch (commandType) {
+        case FilesCommand.COMMAND_WORD:
+            return new FilesCommand();
+        case SelectCommand.COMMAND_WORD:
+            return parseSelectCommand(args);
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case MarkCommand.COMMAND_WORD:
@@ -192,6 +198,16 @@ public class Parser {
         try {
             String idxStr = args[1];
             return new MarkCommand(Integer.parseInt(idxStr) - 1);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
+                    + "Please enter a valid integer and try again.");
+        }
+    }
+
+    public static Command parseSelectCommand(String[] args) {
+        try {
+            String idxStr = args[1];
+            return new SelectCommand(Integer.parseInt(idxStr) - 1);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return new IncorrectCommand("Boink! Peppa could not process the request. "
                     + "Please enter a valid integer and try again.");
