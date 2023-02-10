@@ -34,7 +34,7 @@ public class DukeExceptions {
      * @throws DontKnowWhatThatMeansException the Exception thrown when it is not a valid command
      */
     static void checkCommand(String[] command) throws DontKnowWhatThatMeansException {
-        String[] commandArray = {"mark", "unmark", "todo", "delete", "deadline", "event", "list", "bye", "find"};
+        String[] commandArray = {"mark", "unmark", "todo", "delete", "deadline", "event", "list", "bye", "find", "greet"};
         boolean check = false;
         for (int i = 0; i < commandArray.length; i++) {
             if (command[0].equals(commandArray[i])) {
