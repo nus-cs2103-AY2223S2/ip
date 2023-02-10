@@ -65,6 +65,9 @@ public class UwUke extends Application {
         stage.setScene(scene);
         stage.show();
 
+        DialogBox.setDukeImage(duke);
+        DialogBox.setUserImage(user);
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -76,26 +79,17 @@ public class UwUke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-    
-        return textToAdd;
-    }
-
     private void handleUserInput() {
         String inputString = userInput.getText();
         Label userText = new Label(inputString);
-        DialogBox userBox = DialogBox.getUserDialogBox(userText, new ImageView(user));
-        Label dukeText = new Label(getResponse(inputString));
-        DialogBox dukeBox = DialogBox.getDukeDialogBox(dukeText, new ImageView(duke));
-
-        dialogContainer.getChildren().addAll(userBox, dukeBox);
+        DialogBox userBox = DialogBox.getUserDialogBox(userText);
+        displayDukeResponse(inputString);
+        dialogContainer.getChildren().add(userBox);
         userInput.clear();
     }
 
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    private void displayDukeResponse(String input) {
+        run(input);
     }
 
     private static void setStage(Stage stage) {
@@ -163,6 +157,9 @@ public class UwUke extends Application {
             case FIND:
                 tasks.findTask(input);
                 break;
+            case BYE:
+                saveTask();
+                break;
             default:
                 Printer.printWithDecorations(Advisor.advise(input));
             }
@@ -189,28 +186,21 @@ public class UwUke extends Application {
         }
     }
 
-    private static void run() {
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                handleIllegalCharacter(input);
-                performCommand(input);
-                input = sc.nextLine();
-            } catch (DukeException e) {
-                Printer.printError(e.getMessage());
-            } catch (NoSuchElementException e) {
-                Printer.printError("Error occurred when trying to read next line, try again.");
-                input = "";
-            } catch (Exception e) {
-                Printer.printError("Unknown Error Ocurred");
-            }
+    private static void run(String input) {
+        try {
+            handleIllegalCharacter(input);
+            performCommand(input);
+        } catch (DukeException e) {
+            Printer.printError(e.getMessage());
+        } catch (NoSuchElementException e) {
+            Printer.printError("Error occurred when trying to read next line, try again.");
+        } catch (Exception e) {
+            Printer.printError("Unknown error ocurred");
         }
-        saveTask();
     }
 
     public static void main(String[] args) {
         inititialise();
-        run();
         sc.close();
         Printer.printBye();
     }

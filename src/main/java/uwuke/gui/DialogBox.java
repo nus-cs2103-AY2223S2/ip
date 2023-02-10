@@ -5,12 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
+    private static Image userImage;
+    private static Image dukeImage;
 
     public DialogBox(Label l, ImageView iv) {
         text = l;
@@ -22,6 +25,14 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+    }
+
+    public static void setUserImage(Image userImage) {
+        DialogBox.userImage = userImage;
+    }
+
+    public static void setDukeImage(Image dukeImage) {
+        DialogBox.dukeImage = dukeImage;
     }
     
     private void flip() {
@@ -38,8 +49,8 @@ public class DialogBox extends HBox {
      * @param picView
      * @return
      */
-    public static DialogBox getUserDialogBox(Label text, ImageView picView) {
-        return new DialogBox(text, picView);
+    public static DialogBox getUserDialogBox(Label text) {
+        return new DialogBox(text, new ImageView(userImage));
     }
     
     /**
@@ -49,8 +60,8 @@ public class DialogBox extends HBox {
      * @param picView
      * @return
      */
-    public static DialogBox getDukeDialogBox(Label text, ImageView picView) {
-        DialogBox db = new DialogBox(text, picView);
+    public static DialogBox getDukeDialogBox(Label text) {
+        DialogBox db = new DialogBox(text, new ImageView(dukeImage));
         db.flip();
         return db;
     }

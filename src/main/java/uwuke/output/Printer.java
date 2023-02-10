@@ -2,21 +2,31 @@ package uwuke.output;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import uwuke.task.Task;
 
 /**
  * Helper class that prints out everything in required format to System.out
  */
 public class Printer {
+
+    private static VBox dialogContainer; 
+
+    public static void setDialogContainer(VBox dialogContainer) {
+        Printer.dialogContainer = dialogContainer;
+    }
+
     /**
      * Prints the string with some OwO's
      * 
      * @param input message that should be displayed
      */
     public static void printWithDecorations(String input) {
-        System.out.println("\nOwO OwO OwO OwO OwO OwO");
-        System.out.println(input);
-        System.out.println("OwO OwO OwO OwO OwO OwO\n");
+        StringBuilder sb = new StringBuilder("OwO OwO OwO OwO OwO OwO");
+        sb.append(input);
+        sb.append("\nOwO OwO OwO OwO OwO OwO");
+        dialogContainer.getChildren().add(new Label(sb.toString()));
     }
 
     /**

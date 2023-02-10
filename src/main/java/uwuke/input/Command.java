@@ -4,7 +4,7 @@ package uwuke.input;
  * Enum thats lists all possible commands
  */
 public enum Command {
-    TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, UNKNOWN;
+    TODO, DEADLINE, EVENT, LIST, MARK, UNMARK, DELETE, FIND, UNKNOWN, BYE;
 
     public static Command matchCommand(String input) {
         if (input.equals("list")) {
@@ -23,6 +23,8 @@ public enum Command {
             return Command.DELETE;
         } else if (input.matches("find\\s.+")) {
             return Command.FIND;
+        } else if (input.equals("bye")) {
+            return Command.BYE;
         } else {
             return Command.UNKNOWN;
         }
