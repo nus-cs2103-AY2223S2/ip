@@ -30,6 +30,9 @@ public class Parser {
         if (str.startsWith("delete ")) {
             return "delete";
         }
+        if (str.startsWith("find ")) {
+            return "find";
+        }
         if (str.equals("bye")) {
             ui.bye();
             return "do nothing";
@@ -56,7 +59,7 @@ public class Parser {
         case "todo":
             Task a;
             try {
-                a = new Todo(str.replace("todo", ""));
+                a = new Todo(str.replace("todo ", ""));
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 break;
@@ -66,7 +69,7 @@ public class Parser {
         case "deadline":
             Task b = null;
             try {
-                String[] descriptionBy = str.replace("deadline", "").split(" /by ");
+                String[] descriptionBy = str.replace("deadline ", "").split(" /by ");
                 b = new Deadline(descriptionBy[0], descriptionBy[1]);
                 b.isDate();
             } catch (DukeException e) {
@@ -78,7 +81,7 @@ public class Parser {
         case "event":
             Task c = null;
             try {
-                String[] descriptionFromTo = str.replace("event", "").split(" /from ");
+                String[] descriptionFromTo = str.replace("event ", "").split(" /from ");
                 String[] fromTo = descriptionFromTo[1].split(" /to ");
                 c = new Event(descriptionFromTo[0], fromTo[0], fromTo[1]);
                 c.isDate();
@@ -93,7 +96,10 @@ public class Parser {
             int nD = Integer.parseInt(num_D) - 1;
             taskList.delete(nD);
             break;
-
+        case "find":
+            String keyword = str.replace("find ", "");
+            taskList.find(keyword);
+            break;
         case "na":
             ui.unknownCommand();
             break;

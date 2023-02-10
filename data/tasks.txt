@@ -1,5 +1,2 @@
-E |   |  hello |f n |t n
-D |   |  hi |by    ten
-T |   |  wow
-T |   |  hello
-E |   |  Test |f Jan 1 2021 |t Jan 3 2021
+T |   | hello
+T |   | my name is
