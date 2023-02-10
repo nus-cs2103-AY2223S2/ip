@@ -57,8 +57,8 @@ public class Parser {
             throw new exceptions.missing.Parameter(this.keyword);
         }
         try {
-            int ind = Integer.parseInt(userInSplit[0]);
-            return ind - 1; // Count starting from 0
+            int userSuppliedIndex = Integer.parseInt(userInSplit[0]);
+            return userSuppliedIndex - 1; // Count starting from 0
         } catch (NumberFormatException e) {
             throw new exceptions.invalid.Input(String.format("%s is not an integer!", userInSplit[0]));
         }
