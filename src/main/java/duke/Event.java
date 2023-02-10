@@ -1,23 +1,30 @@
 package duke;
 public class Event extends Task {
 
-    private final String from;
-    private final String to;
+    private final String FROM;
+    private final String TO;
 
+    /**
+     * constructs a Event object detailing an event.
+     * @param description name of the event.
+     * @param from start date of event.
+     * @param to end date of event.
+     * @throws EmptyDescriptionException
+     */
     public Event(String description, String from, String to) throws EmptyDescriptionException{
         super(description);
-        this.from = from;
-        this.to = to;
+        this.FROM = from;
+        this.TO = to;
 
     }
     @Override
     public  String getFileDescription() {
         return "E | " + super.getStatusIcon() + " | "
-                + super.description + " | "  + this.from + " | " + this.to;
+                + super.description + " | "  + this.FROM + " | " + this.TO;
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + "to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + FROM + "to: " + TO + ")";
     }
 }
 

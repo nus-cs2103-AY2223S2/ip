@@ -2,8 +2,8 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String welcomeMsg = "Hello Boss.\n" + "How may i help you?\n";
-    private static final String line = "__________________________________________\n";
+    private static final String WELCOME_MESSAGE = "Hello Boss.\n" + "How may i help you?\n";
+    private static final String LINE = "__________________________________________\n";
 
     private Scanner sc;
 
@@ -17,7 +17,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println(welcomeMsg + line);
+        System.out.println(WELCOME_MESSAGE + LINE);
     }
 
     public void showAdd(Task task) {

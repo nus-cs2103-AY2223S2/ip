@@ -3,6 +3,12 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * constructs a task object.
+     *
+     * @param description describes the task.
+     * @throws EmptyDescriptionException
+     */
     public Task(String description) throws EmptyDescriptionException{
         if (description.equals("") || description.equals(" ")) {
             throw new EmptyDescriptionException();
@@ -12,15 +18,25 @@ public abstract class Task {
         }
     }
     public abstract String getFileDescription();
-    
+
+    /**
+     * obtain the icon for the status of the task.
+     * @return String where an X demarcates a task that is done.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * set a task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * set a task as undone.
+     */
     public void unmark() {
         this.isDone = false;
     }

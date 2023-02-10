@@ -8,6 +8,11 @@ import java.util.Scanner;
 public class Storage {
     private static File f;
 
+    /**
+     * construct a Storage object that stores data into a file.
+     * @param filePath file path leading to data directory.
+     * @throws DukeException
+     */
     public Storage(String filePath) throws DukeException{
         f = new File(filePath);
         try {
@@ -17,6 +22,13 @@ public class Storage {
         }
     }
 
+    /**
+     * loads the tasks from the file into the CLI.
+     *
+     * @return ArrayList of tasks that was stored in the data directory.
+     * @throws DukeException
+     * @throws FileNotFoundException
+     */
     public static ArrayList<Task> load() throws DukeException, FileNotFoundException {
         Scanner sc = new Scanner(f);
         ArrayList<Task> list = new ArrayList<>();

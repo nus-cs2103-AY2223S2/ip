@@ -9,6 +9,13 @@ public class Deadline extends Task {
 
     protected LocalTime time = null;
 
+    /**
+     * constructs a deadline task.
+     *
+     * @param description describe the deadline
+     * @param by deadline of this task
+     * @throws EmptyDescriptionException
+     */
     public Deadline(String description, String by) throws EmptyDescriptionException {
         super(description);
         String[] str = by.split(" ");
@@ -17,6 +24,7 @@ public class Deadline extends Task {
             this.time = LocalTime.parse(str[1], DateTimeFormatter.ofPattern("HHmm"));
         }
     }
+
     @Override
     public String getFileDescription() {
         String dateString = date.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy"));

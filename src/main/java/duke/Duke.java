@@ -2,38 +2,48 @@ package duke;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    private final Storage storage;
-    private final Ui ui;
+    private final Storage STORAGE;
+    private final Ui UI;
     private TaskList tasks;
 
+    /**
+     * constructs a Duke object with a file path
+     * leading to the data text that stores the tasks.
+     *
+     * @param filePath relative path to data directory for storing tasks.
+     * @throws DukeException
+     */
     public Duke(String filePath) throws DukeException {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        UI = new Ui();
+        STORAGE = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(STORAGE.load());
         } catch (DukeException e) {
-            ui.showError();
+            UI.showError();
             tasks = new TaskList();
         } catch (FileNotFoundException e) {
             throw new DukeException(e.toString());
         }
     }
 
+    /**
+     * starts up the Duke chatbot.
+     */
     public void run(){
-        ui.showWelcome();
-        String cmd = ui.readCommand();
+        UI.showWelcome();
+        String cmd = UI.readCommand();
         boolean isTerminated = false;
         while (!isTerminated) {
             if (!cmd.equals("bye")) {
                 try {
                     Parser.parse(cmd, tasks);
-                    cmd = ui.readCommand();
+                    cmd = UI.readCommand();
                 } catch (DukeException e) {
                     System.out.println("something went wrong.");
                 }
             } else {
                 isTerminated = true;
-                ui.showBye();
+                UI.showBye();
             }
         }
     }

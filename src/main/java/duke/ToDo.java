@@ -1,5 +1,10 @@
 package duke;
 public class ToDo extends Task {
+    /**
+     * constructs a toDo task object.
+     * @param description description of this task.
+     * @throws EmptyDescriptionException
+     */
     public ToDo(String description) throws EmptyDescriptionException {
         super(description);
     }
