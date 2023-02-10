@@ -76,7 +76,11 @@ public class FileStorage implements Storage {
 
     private void ensureDirectoriesExist() throws IOException {
         try {
-            Files.createDirectories(path.getParent());
+            Path parentDir = path.getParent();
+
+            if (parentDir != null) {
+                Files.createDirectories(path.getParent());
+            }
         } catch (FileAlreadyExistsException e) {
             // Nothing to do as the directories already exist
         }
