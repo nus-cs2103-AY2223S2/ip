@@ -84,8 +84,8 @@ public class UwUke extends Application {
         String inputString = userInput.getText();
         Label userText = new Label(inputString);
         DialogBox userBox = DialogBox.getUserDialogBox(userText);
-        displayDukeResponse(inputString);
         dialogContainer.getChildren().add(userBox);
+        displayDukeResponse(inputString);
         userInput.clear();
     }
 
@@ -134,36 +134,36 @@ public class UwUke extends Application {
      */
     private static void performCommand(String input) throws DukeException {
         switch (Command.matchCommand(input)) {
-            case LIST:
-                Printer.printTasks(tasks.getList());
-                break;
-            case DEADLINE:
-                tasks.addDeadline(input);
-                break;
-            case EVENT:
-                tasks.addEvent(input);
-                break;
-            case TODO:
-                tasks.addTodo(input);
-                break;
-            case MARK:
-                tasks.markTask(input);
-                break;
-            case UNMARK:
-                tasks.unmarkTask(input);
-                break;
-            case DELETE:
-                tasks.deleteTask(input);
-                break;
-            case FIND:
-                tasks.findTask(input);
-                break;
-            case BYE:
-                saveTask();
-                break;
-            default:
-                Printer.printWithDecorations(Advisor.advise(input));
-            }
+        case LIST:
+            Printer.printTasks(tasks.getList());
+            break;
+        case DEADLINE:
+            tasks.addDeadline(input);
+            break;
+        case EVENT:
+            tasks.addEvent(input);
+            break;
+        case TODO:
+            tasks.addTodo(input);
+            break;
+        case MARK:
+            tasks.markTask(input);
+            break;
+        case UNMARK:
+            tasks.unmarkTask(input);
+            break;
+        case DELETE:
+            tasks.deleteTask(input);
+            break;
+        case FIND:
+            tasks.findTask(input);
+            break;
+        case BYE:
+            saveTask();
+            break;
+        default:
+            Printer.printWithDecorations(Advisor.advise(input));
+        }
     }
 
     /**

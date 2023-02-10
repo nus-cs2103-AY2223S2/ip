@@ -61,7 +61,7 @@ public class Printer {
         "      __\\///\\\\\\\\\\\\\\\\\\/________\\//\\\\\\__\\//\\\\\\________\\///\\\\\\\\\\\\\\\\\\/___ \n"+
         "       ____\\/////////___________\\///____\\///___________\\/////////_____\n";
        
-        System.out.print(uwu);
+        Printer.printWithDecorations(uwu);
     }
 
     /**
@@ -123,8 +123,7 @@ public class Printer {
      * @param errorMessage description of the error
      */
     public static void printError(String errorMessage) {
-        System.err.println(errorMessage);
-        System.err.println("Please try again.");
+        printWithDecorations(errorMessage);
     }
 
     /**
