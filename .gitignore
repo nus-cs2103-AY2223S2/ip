@@ -1,6 +1,9 @@
 # Java class files
 *.class
 
+# User data
+data/
+
 # IDEA files
 /.idea/
 /out/
