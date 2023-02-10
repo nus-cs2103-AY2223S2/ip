@@ -63,6 +63,7 @@ public class TaskList {
         }
     }
 
+
     /**
      * Returns the size of the list.
      *
@@ -89,7 +90,7 @@ public class TaskList {
         }
         String s = "";
         for (int i = 0; i < toDoList.size(); i++){
-            s += toDoList.get(i).toString() +"\n";
+            s += Integer.toString(i+1) + ". " + toDoList.get(i).toString() +"\n";
         }
         return s;
     }

@@ -11,6 +11,10 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public void updateDate(LocalDate newDate) {
+        this.date = newDate;
+    }
+
     /**
      * Output the deadline task (with date) for user to see.
      */
@@ -19,6 +23,11 @@ public class Deadline extends Task {
         System.out.print("[D]");
         super.printTask();
         System.out.println("(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 

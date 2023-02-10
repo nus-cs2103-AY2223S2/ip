@@ -14,6 +14,10 @@ public class Task {
         this.inpString = inpString;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /**
      * Mark a Task as done, and output the task for the user to see.
      */

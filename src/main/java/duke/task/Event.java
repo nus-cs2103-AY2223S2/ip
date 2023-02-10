@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
@@ -10,6 +11,11 @@ public class Event extends Task {
         super(name, inpString);
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public void updateDate(LocalDate newStartDate, LocalDate newEndDate) {
+        this.startDate = newStartDate;
+        this.endDate = newEndDate;
     }
 
     /**
@@ -22,5 +28,11 @@ public class Event extends Task {
         System.out.println("(from: " + startDate + " to: " + endDate + ")");
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (from: " + startDate + " to: " + endDate + ")";
+    }
+
 
 }

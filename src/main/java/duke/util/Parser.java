@@ -45,6 +45,9 @@ public class Parser {
      */
     public static String operationHandler(String task) throws DukeException{
         String[] inpArr = task.split(" ");
+        int deadlineLength = 9;
+        int eventLength = 6;
+        int snoozeLength = 7;
         if (inpArr[0].equals("list")) {
             return list();
         } else if (inpArr[0].equals("mark")) {
@@ -66,7 +69,6 @@ public class Parser {
                 return "Added :)";
             } else if (inpArr[0].equals("deadline")) { // need to handle exception
                 assert inpArr.length > 1: "input array elements are wrong";
-                int deadlineLength = 9;
                 String[] processedString = stringProcessorForDatedTasks(true, task.substring(deadlineLength));
                 Deadline newDeadline = new Deadline(processedString[0], task,
                         LocalDate.parse(processedString[1]));
@@ -74,7 +76,6 @@ public class Parser {
                 return "Added :)";
             } else if (inpArr[0].equals("event")){ // need to handle exception
                 assert inpArr.length > 1: "input array elements are wrong";
-                int eventLength = 6;
                 String[] processedString = stringProcessorForDatedTasks(false, task.substring(eventLength));
                 Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
                         LocalDate.parse(processedString[2]));
@@ -87,6 +88,21 @@ public class Parser {
             } else if (inpArr[0].equals("find")) {
                 System.out.println("here ya go :)");
                 return taskList.find(inpArr[1]);
+            } else if (inpArr[0].equals("snooze")){
+                String[] datedTask = task.split("/");
+                if (datedTask.length == 2) {
+                    String[] processedString = stringProcessorForDatedTasks(true, task.substring(snoozeLength));
+                    Deadline deadlineToBeUpdated = (Deadline) taskList.get(Integer.parseInt(inpArr[1])-1);
+                    deadlineToBeUpdated.updateDate(LocalDate.parse(processedString[1]));
+                    return "Snoozed zzz.";
+                } else if (datedTask.length == 3) {
+                    String[] processedString = stringProcessorForDatedTasks(false, task.substring(snoozeLength));
+                    Event eventToBeUpdated = (Event) taskList.get(Integer.parseInt(inpArr[1])-1);
+                    eventToBeUpdated.updateDate(LocalDate.parse(processedString[1]), LocalDate.parse(processedString[2]));
+                    return "Snoozed zzz.";
+                } else {
+                    return "Your input is wrong.";
+                }
             } else {
                 //throw new DukeException("Invalid Input!");
                 return "I am sorry, I don't understand.";
@@ -158,7 +174,7 @@ public class Parser {
     /**
      * Saves the current list to a file.
      */
-    public static void saveFile(String filePath){
+    public static void saveFile(String filePath) {
         try {
             FileWriter myWriter = new FileWriter(filePath);
             for (int i=0; i<taskList.size(); i++) {
@@ -171,5 +187,9 @@ public class Parser {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    public static void snooze() {
+
     }
 }
