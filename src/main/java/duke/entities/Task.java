@@ -131,7 +131,7 @@ public abstract class Task implements Cloneable {
      */
     public String markTask() {
         isDone = true;
-        return "Nice! I've marked this task as done:\n [X] " + description;
+        return "Nice! I've marked this task as done:\n" + this;
     }
 
     /**
@@ -139,7 +139,7 @@ public abstract class Task implements Cloneable {
      */
     public String unmarkTask() {
         isDone = false;
-        return "OK, I've marked this task as not done yet:\n [ ] " + description;
+        return "OK, I've marked this task as not done yet:\n" + this;
     }
 
     @Override
