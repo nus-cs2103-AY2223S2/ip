@@ -60,7 +60,7 @@ public class ToDo extends Task {
     private static void validateNoMissingData(String[] args) throws DukeException {
         assert args != null;
 
-        if (args.length != 3) {
+        if (args.length != EXPECTED_ARG_COUNT) {
             throw new DukeException("A to-do in storage has missing data!");
         }
     }
