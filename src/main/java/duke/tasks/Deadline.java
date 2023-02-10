@@ -6,7 +6,7 @@ import duke.helper.DateTimeParser;
 
 
 
-//solution adapted from 2103 website
+
 
 /**
  * A class that encapsulates deadlines given by the user
@@ -20,11 +20,6 @@ public class Deadline extends Task {
     private static final String type = "D";
 
     protected LocalDate endTime;
-
-
-
-
-
 
 
     /**

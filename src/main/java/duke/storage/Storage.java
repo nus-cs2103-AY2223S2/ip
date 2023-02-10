@@ -77,23 +77,16 @@ public class Storage {
      * @return A list of tasks previously saved by the user.
      */
     public TaskList loadTask() {
-
         TaskList tasklist = new TaskList(100);
-
         try {
             File file = new File(this.path);
             if (!file.exists()) {
                 Files.createFile(Path.of("./duke.txt"));
-                //System.out.println("we here bois2");
             }
             Scanner sc = new Scanner(file);
-            //System.out.println("we here bois3");
             while (sc.hasNextLine()) {
-                //System.out.println("we here bois1");
                 String temp1 = sc.nextLine();
                 String[] input = temp1.split("/");
-                //System.out.println(temp1);
-                //System.out.println(Arrays.toString(input));
                 if (input[0].equals("T")) {
                     Todo temp = new Todo(input[2]);
                     if (input[1].equals("true")) {
@@ -121,7 +114,6 @@ public class Storage {
             System.out.println("bro where tf is ur file");
             System.out.println(exception.getMessage());
         }
-        //System.out.println("we here bois4");
         return tasklist;
     }
 }

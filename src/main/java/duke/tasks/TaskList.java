@@ -1,7 +1,7 @@
 package duke.tasks;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 import duke.exceptions.InvalidTaskDescriptionException;
 
@@ -28,21 +28,13 @@ public class TaskList {
         this.tasks = new ArrayList<>(size);
     }
 
-    //getter for arraylist
-
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
-
-
-
-    //getter for current size
     public int getCurrentSize() {
         return this.tasks.size();
     }
-
-    //generic method to add any duke.tasks
 
     /**
      * Adds an already constructed task to the list.
@@ -76,7 +68,6 @@ public class TaskList {
         return msg;
     }
 
-    //add event
 
     /**
      * Creates an event object and adds it into the tasklist.
@@ -99,7 +90,6 @@ public class TaskList {
         return msg;
     }
 
-    //add deadline
 
     /**
      * Creates a deadline object and adds it into the tasklist.
@@ -113,8 +103,6 @@ public class TaskList {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
         String[] newInput = input.split("/");
-        //System.out.println(Arrays.toString(newInput));
-        //System.out.println(newInput[1]);
         tasks.add(this.getCurrentSize(), new Deadline(newInput[0], newInput[1]));
         String msg = "";
         msg += "Gotchu fam\n";
@@ -123,9 +111,7 @@ public class TaskList {
         msg += String.format("shag bro now u got %d tasks\n", this.getCurrentSize());
         return msg;
     }
-
-
-    //delete
+    
 
     /**
      * Deletes a task from the tasklist.
