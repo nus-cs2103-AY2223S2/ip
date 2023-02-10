@@ -17,7 +17,7 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
-    private static final Color USERCOLOR = Color.ALICEBLUE;
+    private static final Color USERCOLOR = Color.ANTIQUEWHITE;
     private static final Color DUKECOLOR = Color.BEIGE;
 
     public DialogBox(Label l, ImageView iv, Color color) {

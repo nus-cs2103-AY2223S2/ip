@@ -32,7 +32,7 @@ public class Gui extends Application {
 
     private Duke duke;
 
-    private static final Color SIDECOLOR = Color.GRAY;
+    private static final Color SIDECOLOR = Color.BURLYWOOD;
 
     @Override
     public void start(Stage stage) {
@@ -62,7 +62,7 @@ public class Gui extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(398, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
@@ -70,13 +70,13 @@ public class Gui extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(60.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 5.0);
+        AnchorPane.setRightAnchor(sendButton, 5.0);
+        AnchorPane.setLeftAnchor(userInput, 5.0);
+        AnchorPane.setBottomAnchor(userInput, 5.0);
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -97,7 +97,7 @@ public class Gui extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
+        Label userText = new Label("\n" + userInput.getText());
         try {
             Label dukeText = new Label(getResponse(userInput.getText()));
             dialogContainer.getChildren().addAll(
