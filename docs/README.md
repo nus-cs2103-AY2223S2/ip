@@ -12,7 +12,7 @@ Welcome to
 a text-based task management application.
 
 ## Setup
-1. Download `book.jar` under Releases
+1. Download `book.jar` under [Releases](https://github.com/chia-yh/ip/releases)
 2. Double-click `book.jar`
 
 ## Commands (case sensitive):
