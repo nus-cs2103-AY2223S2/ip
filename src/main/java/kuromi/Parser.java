@@ -100,6 +100,9 @@ public class Parser {
         if (keyword.equals("")) {
             throw new KuromiException("☹ OOPS!!! The keyword cannot be empty.");
         }
+        if (keyword.contains(" ")) {
+            throw new KuromiException("☹ OOPS!!! The keyword can only contain 1 word.");
+        }
         return new FindCommand(keyword);
     }
 
