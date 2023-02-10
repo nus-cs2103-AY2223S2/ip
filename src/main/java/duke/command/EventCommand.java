@@ -4,6 +4,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
 
+/**
+ * The EventCommand class encapsulates the variables and methods related to Event commands.
+ */
 public class EventCommand extends Command {
     public static final String EVENT_COMMAND = "event";
     private final Event event;

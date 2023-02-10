@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Todo;
 
+/**
+ * The TodoCommand class encapsulates the variables and methods related to Todo commands.
+ */
 public class ToDoCommand extends Command {
     public static final String TODO_COMMAND = "todo";
     private final Todo todo;

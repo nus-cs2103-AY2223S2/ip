@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The MarkCommand class encapsulates the variables and methods related to Mark commands.
+ */
 public class MarkCommand extends Command {
     public static final String MARK_COMMAND = "mark";
     private final int index;

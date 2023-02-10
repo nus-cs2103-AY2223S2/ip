@@ -47,13 +47,13 @@ public class Storage {
 
     /**
      * Stores data in given list of tasks into the file path of Storage.
-     * @param lst contains list of tasks from an instance of Duke.
+     * @param taskList contains list of tasks from an instance of Duke.
      */
-    public void saveToFile(TaskList lst) {
+    public void saveToFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(this.filePath);
-            for (int i = 0; i < lst.getSize(); i++) {
-                String taskText = lst.getTask(i).toFile();
+            for (int i = 0; i < taskList.getSize(); i++) {
+                String taskText = taskList.getTask(i).toFile();
                 writer.write(taskText);
             }
             writer.close();
@@ -64,20 +64,20 @@ public class Storage {
 
     /**
      * Loads file data into a TaskList.
-     * @param lst TaskList file data is to be laoded into.
+     * @param taskList TaskList file data is to be laoded into.
      * @throws DukeException If file does not exist.
      */
-    public void loadFileInto(TaskList lst) throws DukeException {
+    public void loadFileInto(TaskList taskList) throws DukeException {
         try {
             Scanner fileData = new Scanner(this.file);
             while (fileData.hasNextLine()) {
                 String taskString = fileData.nextLine();
-                lst.addTaskFromString(taskString);
+                taskList.addTaskFromString(taskString);
             }
             fileData.close();
         } catch (FileNotFoundException e) {
             this.createFile(this.filePath);
-            this.loadFileInto(lst);
+            this.loadFileInto(taskList);
         }
     }
 }

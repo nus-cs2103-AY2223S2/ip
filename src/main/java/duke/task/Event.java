@@ -93,7 +93,7 @@ public class Event extends Task {
         String s;
         String start = this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String endDate = this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        if (this.completed) {
+        if (this.isCompleted) {
             s = "[E]" + super.toString()
                     + " (from: " + start + " to: " + endDate + ")";
         } else {

@@ -4,7 +4,7 @@ package duke.task;
  * Abstract class contains variables and methods related to Tasks.
  */
 public abstract class Task {
-    protected boolean completed;
+    protected boolean isCompleted;
     protected String taskName;
 
     /**
@@ -13,21 +13,21 @@ public abstract class Task {
      */
     public Task(String taskname) {
         this.taskName = taskname;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
      * Marks task as done.
      */
     public void markAsDone() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
      * Marks task as undone.
      */
     public void markAsUndone() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public String getTaskName() {
@@ -35,7 +35,7 @@ public abstract class Task {
     }
 
     public boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -43,7 +43,7 @@ public abstract class Task {
      * @param status
      */
     public void setCompleted(boolean status) { 
-        this.completed = status; 
+        this.isCompleted = status;
     }
 
     /**
@@ -51,7 +51,7 @@ public abstract class Task {
      * @return String formatted for fie input.
      */
     public String toFile() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return String.format("1 | %s", this.taskName);
         } else {
             return String.format("0 | %s", this.taskName);
@@ -65,7 +65,7 @@ public abstract class Task {
     @Override
     public String toString() {
         String s;
-        if (this.completed) {
+        if (this.isCompleted) {
             s = "[X] " + this.taskName;
         } else {
             s = "[ ] " + this.taskName;

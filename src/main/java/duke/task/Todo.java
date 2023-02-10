@@ -44,7 +44,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String s;
-        if (this.completed) {
+        if (this.isCompleted) {
             s = "[T]" + super.toString();
         } else {
             s = "[T]" + super.toString();

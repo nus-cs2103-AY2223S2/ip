@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * The DeleteCommand class encapsulates the variables and methods related to Delete commands.
+ */
 public class DeleteCommand extends Command {
     public static final String DELETE_COMMAND = "delete";
     private final int index;

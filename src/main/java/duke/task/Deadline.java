@@ -84,7 +84,7 @@ public class Deadline extends Task {
     public String toString() {
         String s;
         String deadline = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        if (this.completed) {
+        if (this.isCompleted) {
             s = "[D]" + super.toString() + " (by: " + deadline + ")";
         } else {
             s = "[D]" + super.toString() + " (by: " + deadline + ")";

@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The FindCommand class encapsulates the variables and methods related to Find commands.
+ */
 public class FindCommand extends Command {
     public static final String FIND_COMMAND = "find";
     private final String keyword;

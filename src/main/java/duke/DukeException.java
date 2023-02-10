@@ -26,30 +26,40 @@ public class DukeException extends Exception {
             this.errorMsg = "The task description cannot be empty.";
         } else if (indexError.contains(command)) {
             this.errorMsg = "Please remember to enter an index!";
-        } else if (command.equals("bounds")) {
-            this.errorMsg = "This index is out of bounds!";
-        } else if (command.equals("timing")) {
-            this.errorMsg = "The task timings cannot be empty!";
-        } else if (command.equals("missing details")) {
-            this.errorMsg = "The task input is missing some details!";
         } else if (fileError.contains(command)) {
             this.errorMsg = "An error occurred when/as " + command;
-        } else if (command.equals("date format")) {
-            this.errorMsg = "The date is not the correct format!\n"
-                    + "Please enter a date with this format: yyyy-mm-dd";
-        } else if (command.equals("wrong order")) {
-            this.errorMsg = "The dates entered are in the wrong order!\n"
-                    + "The correct formats are as follows:\n"
-                    + "deadline task_name/by yyyy-mm-dd\n"
-                    + "event task_name/from yyyy-mm-dd/by yyyy-mm-dd";
-        } else if (command.equals("too many details")) {
-            this.errorMsg = "The command shouldn't be followed by other details!";
-        } else if (command.equals("input type")) {
-            this.errorMsg = "The input following the command is the wrong type!";
         } else if (findError.contains(command)) {
             this.errorMsg = "Find keyword cannot be empty!";
         } else {
-            this.errorMsg = "I'm sorry but I don't know what that means :(";
+            switch (command) {
+            case "bounds":
+                this.errorMsg = "This index is out of bounds!";
+                break;
+            case "timing":
+                this.errorMsg = "The task timings cannot be empty!";
+                break;
+            case "missing details":
+                this.errorMsg = "The task input is missing some details!";
+                break;
+            case "date format":
+                this.errorMsg = "The date is not the correct format!\n"
+                        + "Please enter a date with this format: yyyy-mm-dd";
+                break;
+            case "wrong order":
+                this.errorMsg = "The dates entered are in the wrong order!\n"
+                        + "The correct formats are as follows:\n"
+                        + "deadline task_name/by yyyy-mm-dd\n"
+                        + "event task_name/from yyyy-mm-dd/by yyyy-mm-dd";
+                break;
+            case "too many details":
+                this.errorMsg = "The command shouldn't be followed by other details!";
+                break;
+            case "input type":
+                this.errorMsg = "Find keyword cannot be empty!";
+                break;
+            default:
+                this.errorMsg = "I'm sorry but I don't know what that means :(";
+            }
         }
     }
 

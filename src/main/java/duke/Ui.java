@@ -12,7 +12,7 @@ import duke.task.Todo;
  * Class contains variables and methods related to interactions with the user.
  */
 public class Ui {
-    private static final String line = "____________________________________________________________";
+    private static final String LINE = "____________________________________________________________";
     private final Scanner input;
 
     /**
@@ -34,7 +34,7 @@ public class Ui {
      * Prints a line.
      */
     public void showLine() {
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /**

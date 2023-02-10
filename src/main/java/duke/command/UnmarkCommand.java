@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The UnmarkCommand class encapsulates the variables and methods related to Unmark commands.
+ */
 public class UnmarkCommand extends Command {
     public static final String UNMARK_COMMAND = "unmark";
     private final int index;
