@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Process Event to String to store in duke.txt
+     * Processes Event to String to store in duke.txt
      * @return Processed String
      */
     public String toFile() {

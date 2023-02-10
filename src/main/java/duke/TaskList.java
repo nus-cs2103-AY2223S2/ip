@@ -30,6 +30,10 @@ public class TaskList {
         this.tasks.remove(id);
     }
 
+    /**
+     * Handles the list command from user
+     * @return list of all Tasks
+     */
     public String handleList() {
         String output = "";
         try { //check if list is empty
@@ -51,15 +55,15 @@ public class TaskList {
     }
 
     private String handleMark(String input) {
-            String[] inp = input.split(" ");
-            int id = Integer.parseInt(inp[1]);
-            try {
-                Task marked = tasks.get(id - 1);
-                marked.setIsDone(true);
-                return "Good job! This task is now marked done!\n" + marked;
-            } catch (Exception e) {
-                return "No such task found!";
-            }
+        String[] inp = input.split(" ");
+        int id = Integer.parseInt(inp[1]);
+        try {
+            Task marked = tasks.get(id - 1);
+            marked.setIsDone(true);
+            return "Good job! This task is now marked done!\n" + marked;
+        } catch (Exception e) {
+            return "No such task found!";
+        }
     }
 
     private String handleUnmark(String input) {
@@ -111,8 +115,7 @@ public class TaskList {
         String output = "";
         String keyword = input.substring(5);
         ArrayList<Task> tasksFound = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task tsk = tasks.get(i);
+        for (Task tsk : tasks) {
             String desc = tsk.getDesc();
             if (desc.contains(keyword)) {
                 tasksFound.add(tsk);

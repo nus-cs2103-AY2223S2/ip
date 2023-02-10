@@ -1,8 +1,8 @@
 package duke.javafx;
 
+import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
-import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private TaskList tasks;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Orbital Logo.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LicensePhoto.jpg"));
-
+    /** To initalise the main stage of JavaFX*/
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
