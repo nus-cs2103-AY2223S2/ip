@@ -40,11 +40,14 @@ public class EditCommand extends Command {
         String text = "";
         //ui.showLine();
         try {
-            int num = readNumber(fullCommand, tasks.getLength());
+            int lengthTasks = tasks.getLength();
+            // ArrayList of tasks has to be non-empty to be able to mark/unmark a task.
+            assert (lengthTasks > 0);
+            int editIndex = readNumber(fullCommand, lengthTasks);
             if (isMark) {
-                text = tasks.markTask(num - 1);
+                text = tasks.markTask(editIndex - 1);
             } else {
-                text = tasks.unmarkTask(num - 1);
+                text = tasks.unmarkTask(editIndex - 1);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
