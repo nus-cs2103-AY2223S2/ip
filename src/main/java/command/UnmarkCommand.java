@@ -20,6 +20,7 @@ public class UnmarkCommand extends Command {
 
     @Override
     public String run(TaskList taskList) throws InvalidArgumentException {
+        assert this.index >= 0;
         try {
             taskList.unmarkTask(this.index);
             return "OK, I've marked this task as not done yet:\n" + taskList.showTask(this.index);

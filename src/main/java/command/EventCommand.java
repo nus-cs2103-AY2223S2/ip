@@ -28,6 +28,7 @@ public class EventCommand extends Command {
 
     @Override
     public String run(TaskList taskList) throws InvalidArgumentException {
+        assert this.task.trim() != "";
         if (this.endTime.isBefore(this.startTime)) {
             throw new InvalidArgumentException("End date must not be earlier than start date.");
         }

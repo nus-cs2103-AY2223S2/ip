@@ -24,6 +24,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String run(TaskList taskList) {
+        assert this.task.trim() != "";
         Deadline newDeadline = taskList.createDeadline(this.task, this.deadline);
         return "Got it. I've added this task:\n" + newDeadline + "\nNow you have " + taskList.countTask()
                 + " tasks in the list.";
