@@ -9,6 +9,10 @@ public abstract class Task {
     protected String description;
     private boolean isDone;
 
+    private boolean isPriority;
+
+    private int num; //priority number
+
 
     /**
      * Constructor for Task class.
@@ -19,14 +23,31 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.isPriority = false;
+        this.num = 0;
     }
 
     public boolean getIsDone() {
         return this.isDone;
     }
 
+    public boolean getIsPriority() {
+        return this.isPriority;
+    }
+
+    public void setIsPriority(boolean isPriority) {
+        this.isPriority = isPriority;
+    }
+
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public int getLvlNum() {
+        return this.num;
+    }
+    public void setPriorityNum(int num) {
+        this.num = num;
     }
 
     /**
@@ -39,12 +60,16 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String getPriorityLevel() {
+        return (isPriority ? "priority level" : " ");
+    }
+
     /**
      *  Returns the description of the task
      *
      */
     public String getDescription() {
-        assert !this.description.equals(""): "Empty description!";
+        assert !this.description.equals("") : "Empty description!";
         return this.description;
     }
 
@@ -53,7 +78,13 @@ public abstract class Task {
      *
      */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        if (this.isPriority == true) {
+            return "[" + this.getStatusIcon() + "] " + this.description + " "
+                    + "(" + this.getPriorityLevel() + " " + this.num + ")";
+        } else {
+            return "[" + this.getStatusIcon() + "] " + this.description;
+        }
+
     }
 
 
@@ -64,7 +95,5 @@ public abstract class Task {
     public String toPrint() {
         return this.toString();
     }
-
-
 
 }

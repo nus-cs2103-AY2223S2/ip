@@ -8,6 +8,7 @@ import crystal.command.EventCommand;
 import crystal.command.FindCommand;
 import crystal.command.ListCommand;
 import crystal.command.MarkCommand;
+import crystal.command.PriorityCommand;
 import crystal.command.TodoCommand;
 import crystal.command.UnmarkCommand;
 
@@ -53,6 +54,10 @@ public class Parser {
             } else if (command.contains("delete")) {
                 int num = getNumber(command);
                 return new DeleteCommand(num);
+            } else if (command.contains("priority")) {
+                String[] stringNoPriority = getPriority(command);
+                return new PriorityCommand(Integer.parseInt(stringNoPriority[0]),
+                        Integer.parseInt(stringNoPriority[1]));
             } else {
                 throw new CrystalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -112,6 +117,14 @@ public class Parser {
         String tempOne = arr[2];
         String subStringNoTo = tempOne.replace("to", ""); //to
         return new String[] {subString, subStringNoFrom, subStringNoTo};
+    }
+
+    private static String[] getPriority(String command) {
+        String stringNoPriority = command.replace("priority item", "");
+        String[] arr = stringNoPriority.split(" level ");
+        String noItem = arr[0].replace("item", "");
+        String nolevel = arr[1];
+        return new String[] {noItem.trim(), nolevel.trim()};
     }
 
 
