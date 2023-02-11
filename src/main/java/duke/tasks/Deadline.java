@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a deadline task.
  *
@@ -8,7 +11,7 @@ package duke.tasks;
 public class Deadline extends Task {
 
     private String desc;
-    private String dueDate;
+    private LocalDate dueDate;
 
     /**
      * Creates a deadline task.
@@ -20,7 +23,7 @@ public class Deadline extends Task {
     public Deadline(int id, String description, String dueDate) {
         super(id);
         desc = description;
-        this.dueDate = dueDate;
+        this.dueDate = LocalDate.parse(dueDate);
     }
 
     @Override
@@ -31,7 +34,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String isDone = isCompleted() ? "X" : " ";
-        return String.format("[D][%s] %s (by: %s)", isDone, description(), dueDate);
+        return String.format("[D][%s] %s (by: %s)", isDone, description(),
+                dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     @Override

@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an event.
  *
@@ -8,8 +11,8 @@ package duke.tasks;
 public class Event extends Task {
 
     private String desc;
-    private String from;
-    private String to;
+    private LocalDate from;
+    private LocalDate to;
 
     /**
      * Creates a new Event.
@@ -22,8 +25,9 @@ public class Event extends Task {
     public Event(int id, String description, String from, String to) {
         super(id);
         desc = description;
-        this.from = from;
-        this.to = to;
+        // TODO: Handle invalid dates.
+        this.from = LocalDate.parse(from);
+        this.to = LocalDate.parse(to);
     }
 
     @Override
@@ -34,7 +38,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         String isDone = isCompleted() ? "X" : " ";
-        return String.format("[E][%s] %s (from: %s to %s)", isDone, description(), from, to);
+        return String.format("[E][%s] %s (from: %s to %s)", isDone, description(),
+                from.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                to.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     @Override
