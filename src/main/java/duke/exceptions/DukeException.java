@@ -1,8 +1,8 @@
 package duke.exceptions;
 
 /**
- * A Duke-related exception.
- * Any Duke-related exceptions should inherit from this class.
+ * A Duke-related exception. Any Duke-related exceptions should inherit from
+ * this class.
  */
 public abstract class DukeException extends Exception {
     /** The error-message-prefix for Duke to display. */

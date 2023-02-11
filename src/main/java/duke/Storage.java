@@ -44,7 +44,8 @@ public class Storage {
      *
      * @param filePath The path of the file to be written to.
      * @param content The contents to write into the file.
-     * @throws DukeSaveLoadException If there's an error accessing/writing to the file.
+     * @throws DukeSaveLoadException If there's an error accessing/writing to the
+     *         file.
      */
     private static void writeStringToFile(String filePath, String content) throws DukeSaveLoadException {
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -79,7 +80,8 @@ public class Storage {
      * Saves a task list into a local file, to be loaded later.
      *
      * @param tasks The task list to be saved.
-     * @throws DukeSaveLoadException If there's an error accessing/writing to the file.
+     * @throws DukeSaveLoadException If there's an error accessing/writing to the
+     *         file.
      */
     public void save(TaskList tasks) throws DukeSaveLoadException {
         Storage.writeStringToFile(this.filePath, tasks.encodeAsString());

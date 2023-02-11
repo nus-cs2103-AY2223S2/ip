@@ -42,10 +42,9 @@ public abstract class Task {
     }
 
     /**
-     * Encodes an array of arbitrary values into a single-line string for
-     * saving into a file.
-     * Since the delimiter " | " is used in the encoding, any vertical bar "|"
-     * in the values is escaped.
+     * Encodes an array of arbitrary values into a single-line string for saving
+     * into a file. Since the delimiter " | " is used in the encoding, any vertical
+     * bar "|" in the values is escaped.
      *
      * @param values The array of values to encode.
      * @return The encoded values.
@@ -59,9 +58,8 @@ public abstract class Task {
 
     /**
      * Decodes an encoded string of values (encoded by 'encodeValues') into an
-     * array.
-     * Since the delimiter " | " is used in the encoding, any escaped vertical
-     * bar "|" in encoded string is unescaped before returning.
+     * array. Since the delimiter " | " is used in the encoding, any escaped
+     * vertical bar "|" in encoded string is unescaped before returning.
      *
      * @param encodedValues The encoded values.
      * @return The deencoded array of values.
@@ -78,7 +76,8 @@ public abstract class Task {
      *
      * @param input The encoded task.
      * @return The task that was encoded.
-     * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
+     * @throws DukeSaveLoadException If there's a problem in parsing the encoded
+     *         task.
      */
     public static Task loadFromString(String input) throws DukeSaveLoadException {
         String[] values = Task.decodeValues(input);

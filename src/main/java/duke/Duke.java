@@ -126,7 +126,8 @@ public class Duke {
     /**
      * Handles the adding of deadline-type tasks by the "deadline" command.
      *
-     * @throws DukeInvalidArgumentException If no or invalid description/by-param are given.
+     * @throws DukeInvalidArgumentException If no or invalid description/by-param
+     *         are given.
      */
     private void addDeadline() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
@@ -155,7 +156,8 @@ public class Duke {
     /**
      * Handles the adding of event-type tasks by the "event" command.
      *
-     * @throws DukeInvalidArgumentException If no or invalid description/from-param/to-param are given.
+     * @throws DukeInvalidArgumentException If no or invalid
+     *         description/from-param/to-param are given.
      */
     private void addEvent() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
@@ -241,7 +243,6 @@ public class Duke {
         task.markAsNotDone();
         this.ui.show("OK, I've marked this task as not done yet:\n" + "  " + task.toString());
     }
-
 
     /**
      * Handles the deleting of tasks by the "delete" command.
