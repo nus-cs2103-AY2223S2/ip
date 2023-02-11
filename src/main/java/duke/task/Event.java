@@ -56,7 +56,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return the end time of this Event.
+     * Returns the end time of this Event.
      *
      * @return End time of the event.
      */

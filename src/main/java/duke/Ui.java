@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Customise how messages are printed to console.
+ * Customises how messages are printed to console.
  * Allow messages to be printed elsewhere (eg. GUI) in batches.
  */
 public class Ui {

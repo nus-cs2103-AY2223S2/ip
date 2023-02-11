@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Contains test for Ui class
+ * Contains test for Ui class.
  * Reference: https://www.baeldung.com/java-testing-system-out-println
  */
 public class UiTest {

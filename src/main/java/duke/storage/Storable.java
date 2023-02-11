@@ -1,7 +1,7 @@
 package duke.storage;
 
 /**
- * Provide a interface standard for objects that are meant to be stored in file.
+ * Provides a interface standard for objects that are meant to be stored in file.
  * Similar to Java's `Serializable` interface.
  */
 public interface Storable {

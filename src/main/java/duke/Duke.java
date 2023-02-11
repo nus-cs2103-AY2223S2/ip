@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Is the main class of the program.
+ * Serves as the main logic of the program.
  */
 public class Duke extends Application {
 
@@ -54,7 +54,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Display the number of task in taskList to user.
+     * Displays the number of task in taskList to user.
      */
     public void displayTaskCount() {
         assert taskList != null : "Duke has no taskList instance";
@@ -99,7 +99,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Start Duke program as a Command Line Interface.
+     * Starts Duke program as a Command Line Interface.
      */
     void startAsCli() {
         // Program Intro

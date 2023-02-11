@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Constructs an instance of UnmarkCommand.
-     * Using the specified user input, extract which task(s) to unmark.
+     * Extracts which task(s) to un-mark using the specified user input.
      *
      * @param userInput String containing the whole input provided by the user.
      * @throws DukeException If did not indicate which task(s) to unmark.

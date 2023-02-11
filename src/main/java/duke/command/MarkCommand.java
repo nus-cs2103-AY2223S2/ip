@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
 
     /**
      * Constructs an instance of MarkCommand.
-     * Using the specified user input, extract which task(s) to mark.
+     * Extracts which task(s) to mark using the specified user input.
      *
      * @param userInput String containing the whole input provided by the user.
      * @throws DukeException If user did not indicate which task(s) to mark.

@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs an instance of DeleteCommand.
-     * Using the specified user input, extract which task(s) to delete.
+     * Extracts which task(s) to delete using the specified user input.
      *
      * @param userInput String containing the whole input provided by the user.
      * @throws DukeException If user did not indicate which task(s) to delete.

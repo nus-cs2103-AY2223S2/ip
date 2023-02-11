@@ -30,7 +30,7 @@ public abstract class Command {
     public abstract ReturnCode execute(Duke duke) throws DukeException;
 
     /**
-     * Parse a String (provided by user) into the correct Command.
+     * Parses a String (provided by user) into the correct Command.
      *
      * @param userInput String containing the whole input provided by the user.
      * @return A new instance of the correct Command.
