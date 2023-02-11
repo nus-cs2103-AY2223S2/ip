@@ -48,7 +48,7 @@ public class Parser {
         case "tag":
             return Commands.executeTagCommand(body, taskList, storage);
         default:
-            throw new DukeException("I'm sorry, I don't know what that means!");
+            throw new DukeException("Hmm... you typed an invalid command!");
         }
     }
 

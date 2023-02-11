@@ -22,23 +22,19 @@ class TextUi {
         this.out = out;
     }
 
-    public String getWelcomeMessage() {
-        return "Hello! I'm Grand Duke.\nWhat can I do for you?";
-    }
-
     public String getGoodbyeMessage() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Go do your task now!";
     }
 
     public String getTaskAddedMessage(Task task, int sizeOfList) {
-        return String.format("Got it. I've added this task:\n%s\nNow you have %s task%s in the list.",
+        return String.format("Noted. I've added this task:\n%s\nNow you have %s task%s in the list. :<",
                 task,
                 sizeOfList,
                 sizeOfList > 1 ? "s" : "");
     }
 
     public String getTaskRemovedMessage(Task task, int sizeOfList) {
-        return String.format("Noted. I've removed this task:\n%s\nNow you have %s task%s in the list.",
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %s task%s in the list. :>",
                 task,
                 sizeOfList,
                 sizeOfList > 1 ? "s" : "");
