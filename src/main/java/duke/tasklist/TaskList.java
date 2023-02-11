@@ -34,8 +34,8 @@ public class TaskList implements Serializable {
      * @param task the added task
      */
     public String addTask(Task task) {
-        String message = "Added one task!\n" + task.toString() + "\n" + this.getTotal();
         tasks.add(task);
+        String message = "Added one task!\n" + task.toString() + "\n" + this.getTotal();
         return message;
     }
 
@@ -64,8 +64,8 @@ public class TaskList implements Serializable {
      */
     public String deleteTask(int index) throws DukeException {
         try {
-            String message = "Deleted one task \n" + this.getTask(index).toString() + "\n" + this.getTotal();
             tasks.remove(index);
+            String message = "Deleted one task \n" + this.getTask(index).toString() + "\n" + this.getTotal();
             return message;
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
