@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -19,25 +20,42 @@ import javafx.scene.paint.Color;
 public class DialogBox extends HBox {
     private static double WIDTH = 100.0;
     private static double HEIGHT = 100.0;
-
-    private Label text;
-    private ImageView displayPicture;
+    private static double BORDER_WIDTH = 8;
 
     /**
      * Constructor
-     * @param l a label object
-     * @param iv an imageview object, which is the profile pic
+     *
+     * Takes a label and an image view, wraps the image with border, then renders
+     * the label and the image.
+     *
+     * @param label a label object
+     * @param imageView an imageview object, which is the profile pic
      */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    public DialogBox(Label label, ImageView imageView) {
+        label.setWrapText(true);
+        imageView.setFitWidth(WIDTH);
+        imageView.setFitHeight(HEIGHT);
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(WIDTH);
-        displayPicture.setFitHeight(HEIGHT);
+        BorderPane imageViewWrapper = addBorderToImageView(imageView, BORDER_WIDTH);
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        setAlignment(Pos.TOP_RIGHT);
+        getChildren().addAll(label, imageViewWrapper);
+    }
+
+    /**
+     * Adds a border to an image
+     *
+     * Modified from
+     * <a href="https://stackoverflow.com/questions/22614758/issue-with-background-color-in-javafx-8">...</a>
+     *
+     * @param imageView the image object to render
+     * @param boarderWidth the width of the boarder
+     * @return an image wrapped with border
+     */
+    public BorderPane addBorderToImageView(ImageView imageView, double boarderWidth) {
+        BorderPane imageViewWrapper = new BorderPane(imageView);
+        imageViewWrapper.setPadding(new Insets(boarderWidth));
+        return imageViewWrapper;
     }
 
     /**
