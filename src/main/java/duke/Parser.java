@@ -8,7 +8,6 @@ import task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 public class Parser {
     private String input;
@@ -68,7 +67,6 @@ public class Parser {
             String taskFullDetails = input.substring(detailIndex);
             String[] splitDescriptionAndDuration = taskFullDetails.split("/from");
             String[] splitStartAndEnd = splitDescriptionAndDuration[1].split("/to");
-            System.out.println(Arrays.toString(splitDescriptionAndDuration) );
             if(splitDescriptionAndDuration.length < 2) {
                 throw new DukeException("Oh no!! Please specify the start and end.");
             }

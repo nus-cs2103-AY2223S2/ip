@@ -1,7 +1,6 @@
 package task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     private LocalDate dueDate;
