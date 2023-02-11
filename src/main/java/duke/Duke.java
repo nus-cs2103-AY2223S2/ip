@@ -31,7 +31,7 @@ public class Duke {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yoda.jpeg"));
 
     /**
-     * Set up the Main Window via Duke.
+     * Sets up the Main Window via Duke.
      */
     public void setUp() {
         try {
@@ -75,7 +75,7 @@ public class Duke {
     }
 
     /**
-     * Save tasks from task list into the file specified by FILEPATH.
+     * Saves tasks from task list into the file specified by FILEPATH.
      * @return status message
      */
     public String saveTasks() {
