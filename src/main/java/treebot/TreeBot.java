@@ -18,6 +18,10 @@ public class TreeBot {
     private Storage storage;
     private Parser parser = new Parser(new TaskFactory());
 
+    public TreeBot() {
+
+    }
+
     public TreeBot(String filePath) {
         storage = new Storage(filePath);
         try {
