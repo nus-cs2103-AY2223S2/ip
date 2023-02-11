@@ -1,16 +1,12 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Handles interactions with the users.
  */
 public class Ui {
-    private final Scanner scanner;
 
     public Ui() {
         dukeGreeting();
-        scanner = new Scanner(System.in);
     }
 
     /**
@@ -43,12 +39,16 @@ public class Ui {
         return "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
     }
 
-    public String filter(TaskList tasklist) {
+    public String printMatchingTasks(TaskList tasklist) {
         String result = "Here are the matching tasks in your list:\n";
         for (int i = 1; i < tasklist.getNumberOfTasks() + 1; i++) {
             result += i + ". " + tasklist.getTask(i - 1) + "\n";
         }
         return result;
+    }
+
+    public String errorMessage(Exception e) {
+        return e.getMessage();
     }
 
     /**

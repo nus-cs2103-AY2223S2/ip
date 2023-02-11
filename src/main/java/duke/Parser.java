@@ -2,6 +2,8 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -23,102 +25,127 @@ public class Parser {
      *
      * @param input User input.
      */
-    public String parse(String input) {
+    public String parse(String input) throws WrongTask, EmptyDescription, OutOfBounds {
         String[] arrNext = input.split(" ", 2);
         String next = arrNext[0];
-        if (Objects.equals(next, "bye")) {
-            ui.exit();
-        }
-
-        try {
-            if (arrNext.length <= 1) {
-                if (Objects.equals(next, "todo") || Objects.equals(next, "deadline") ||
-                        Objects.equals(next, "event") || Objects.equals(next, "mark") ||
-                        Objects.equals(next, "unmark") || Objects.equals(next, "delete") ||
-                        Objects.equals(next, "find")) {
-                    if (!Objects.equals(next, "list") && !Objects.equals(next, "bye")) {
-                        throw new EmptyDescription(" The description of " + next + " cannot be empty.");
-                    }
-                }
-            }
-            if ((!Objects.equals(next, "todo") && !Objects.equals(next, "deadline") && !Objects.equals(next, "event"))) {
-                if (!Objects.equals(next, "list") && !Objects.equals(next, "mark") && !Objects.equals(next, "unmark") && !Objects.equals(next, "delete") && !Objects.equals(next, "bye") && !Objects.equals(next, "find")) {
-                    throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
-                }
-            }
-        } catch (EmptyDescription |
-                WrongTask e2) {
-            return e2.getMessage();
-        } finally {
-            if (Objects.equals(next, "bye")) {
-                ui.exit();
-            }
-        }
-        String after = null;
-        try {
-            after = arrNext[1];
-        } catch (ArrayIndexOutOfBoundsException exc) {
-            System.out.println("I will show your saved tasks.");
-        }
+        checkWrongTask(next);
+        checkEmptyDescription(arrNext);
 
         Task inputTask;
         switch (next) {
+        case "bye": {
+            return ui.exit();
+        }
         case "todo": {
-            inputTask = new Todo(after);
-            taskList.addTask(inputTask);
-//            System.out.println("Got it. I've added this task:\n" + "  " + inputTask);
-//            System.out.println("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");
-            storage.appendToFile(inputTask);
+            String after = arrNext[1];
+            inputTask = newTodo(storage, taskList, after);
             return ui.showTaskOutput(inputTask, taskList.getNumberOfTasks());
         }
         case "deadline": {
-            String[] split = after.split("/by ");
-            LocalDate d1 = LocalDate.parse(split[1]);
-            inputTask = new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-            taskList.addTask(inputTask);
-            storage.appendToFile(inputTask);
+            String after = arrNext[1];
+            inputTask = newDeadline(storage, taskList, after);
             return ui.showTaskOutput(inputTask, taskList.getNumberOfTasks());
         }
         case "event": {
-            String[] split = after.split("/");
-            inputTask = new Event(split[0], split[1].substring(5), split[2].substring(3));
-            taskList.addTask(inputTask);
-            storage.appendToFile(inputTask);
+            String after = arrNext[1];
+            inputTask = newEvent(storage, taskList, after);
             return ui.showTaskOutput(inputTask, taskList.getNumberOfTasks());
         }
         case "mark": {
-            storage.updateFile(taskList);
-            return taskList.mark(after);
+            String after = arrNext[1];
+            checkOutOfBounds(arrNext, taskList);
+            inputTask = markTask(storage, taskList, after);
+            return ui.showMark(inputTask);
         }
         case "list": {
             return taskList.getTaskList();
         }
         case "find": {
-            TaskList matchingTasks = new TaskList();
-            for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
-                Task task = taskList.getTask(i);
-                String descriptionOfTask = task.description;
-                String[] splitTaskString = descriptionOfTask.split(" ");
-                for (String s : splitTaskString) {
-                    if (Objects.equals(s, after)) {
-                        matchingTasks.addTask(task);
-                    }
-                }
-            }
-            return ui.filter(matchingTasks);
+            String after = arrNext[1];
+            return ui.printMatchingTasks(findTasks(taskList, after));
         }
         case "unmark": {
-            storage.updateFile(taskList);
-            return taskList.unMark(after);
+            String after = arrNext[1];
+            checkOutOfBounds(arrNext, taskList);
+            inputTask = unmarkTask(storage, taskList, after);
+            return ui.showUnmark(inputTask);
         }
         case "delete": {
-            storage.updateFile(taskList);
-            return taskList.deleteTask(after);
+            String after = arrNext[1];
+            checkOutOfBounds(arrNext, taskList);
+            inputTask = deleteTask(storage, taskList, after);
+            return ui.showDelete(inputTask, taskList.getNumberOfTasks());
         }
         default:
-            return " I'm sorry, but I don't know what that means :-(";
+            throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
         }
     }
+
+    private static Task newTodo(Storage storage, TaskList taskList, String description) {
+        Task newTodo = new Todo(description);
+        taskList.addTask(newTodo);
+        storage.appendToFile(newTodo);
+        return newTodo;
+    }
+
+    private static Task newDeadline(Storage storage, TaskList taskList, String description) {
+        String[] split = description.split("/by ");
+        LocalDate d1 = LocalDate.parse(split[1]);
+        Task newDeadline = new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        taskList.addTask(newDeadline);
+        storage.appendToFile(newDeadline);
+        return newDeadline;
+    }
+
+    private static Task newEvent(Storage storage, TaskList taskList, String description) {
+        String[] split = description.split("/");
+        Task newEvent = new Event(split[0], split[1].substring(5), split[2].substring(3));
+        taskList.addTask(newEvent);
+        storage.appendToFile(newEvent);
+        return newEvent;
+    }
+
+    private static TaskList findTasks(TaskList taskList, String description) {
+        TaskList matchingTasks = new TaskList();
+        for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
+            Task task = taskList.getTask(i);
+            String descriptionOfTask = task.description;
+            String[] splitTaskString = descriptionOfTask.split(" ");
+            for (String s : splitTaskString) {
+                if (Objects.equals(s, description)) {
+                    matchingTasks.addTask(task);
+                }
+            }
+        }
+        return matchingTasks;
+    }
+
+    private static Task markTask(Storage storage, TaskList taskList, String taskID) {
+        int number = Integer.parseInt(taskID) - 1;
+        Task toMarkDone = taskList.getTask(number);
+
+        toMarkDone.markAsDone();
+        storage.updateFile(taskList);
+        return toMarkDone;
+    }
+
+    private static Task unmarkTask(Storage storage, TaskList taskList, String taskID) {
+        int number = Integer.parseInt(taskID) - 1;
+        Task toUnmarkDone = taskList.getTask(number);
+
+        toUnmarkDone.unMarkAsDone();
+        storage.updateFile(taskList);
+        return toUnmarkDone;
+    }
+
+    private static Task deleteTask(Storage storage, TaskList taskList, String taskID) {
+        int number = Integer.parseInt(taskID) - 1;
+        Task taskToDelete = taskList.getTask(number);
+        taskList.deleteTask(taskToDelete);
+        storage.updateFile(taskList);
+        return taskToDelete;
+    }
+
 
     /**
      * Checks if a task has an empty description.
@@ -128,10 +155,25 @@ public class Parser {
      * @throws EmptyDescription If the description of task is empty.
      */
     public static boolean checkEmptyDescription(String[] checkString) throws EmptyDescription {
-        if (checkString.length == 1) {
+        if (checkString.length == 1 && !Objects.equals(checkString[0], "list") && !Objects.equals(checkString[0], "bye")) {
             throw new EmptyDescription(" The description of " + checkString[0] + " cannot be empty.");
         }
         return true;
+    }
+
+    public static void checkOutOfBounds(String[] checkString, TaskList taskList) throws OutOfBounds {
+        int number = Integer.parseInt(checkString[1]);
+        if (number < 1 || number > taskList.getNumberOfTasks()) {
+            throw new OutOfBounds(" The index given for " + checkString[0] + " is out of bound.");
+        }
+    }
+
+    public static void checkWrongTask(String keyword) throws WrongTask {
+        List<String> keywords = Arrays.asList("bye", "todo", "deadline", "event", "mark", "unmark", "list", "delete", "find");
+        boolean isKeyword = keywords.contains(keyword);
+        if (!isKeyword) {
+            throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
+        }
     }
 }
 
