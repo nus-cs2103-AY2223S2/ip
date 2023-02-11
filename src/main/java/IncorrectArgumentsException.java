@@ -1,8 +1,8 @@
 public class IncorrectArgumentsException extends DukeException {
 
     public IncorrectArgumentsException(String command, int numberExpected, int numberActual) {
-        super("Sorry, command: " + command + " expected " + numberExpected + " arguments, detected " + numberActual
-                + " arguments!");
+        super(String.format("Sorry, command: %s expected %s arguments, detected %s arguments!",
+                command, numberExpected, numberActual));
     }
 
     @Override

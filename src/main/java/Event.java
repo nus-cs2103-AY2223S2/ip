@@ -15,6 +15,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String taskToData() {
+        return String.format("[E] | %s | %s | %s | %s", this.getStatusIcon(), this.name, this.from, this.until);
+    }
+
+
+    @Override
     public String toString() {
         String[] strArr = from.split(" ", 2);
         String[] strArr2 = until.split(" ", 2);

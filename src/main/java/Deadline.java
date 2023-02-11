@@ -13,8 +13,13 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String taskToData() {
+        return String.format("[D] | %s | %s | %s", this.getStatusIcon(), this.name, this.deadline);
+    }
+
+    @Override
     public String toString() {
         String[] strArr = deadline.split(" ", 2);
-        return name + " (" + strArr[0] + ":" + " " + strArr[1] + ")";
+        return String.format("%s (%s: %s)", name, strArr[0], strArr[1]);
     }
 }

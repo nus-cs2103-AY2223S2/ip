@@ -1,35 +1,42 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    protected List<Task> list;
+    protected List<Task> tasks;
     protected int items;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+        this.items = tasks.size();
     }
 
     public String addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
         items++;
-        return "Got it. I've added this task:" + "\n" + " [" + task.getTaskType() + "][ ] " + task + "\n"
-                + "Now you have " + items + " tasks in the list.";
+        return "Got it. I've added this task:\n"
+                + String.format(" [%s][ ] %s\n Now you have %s tasks in the list.", task.getTaskType(), task, items);
     }
 
     public String deleteTask(int taskNumber) {
-        Task removedTask = list.get(taskNumber);
-        list.remove(taskNumber);
+        Task removedTask = tasks.get(taskNumber);
+        tasks.remove(taskNumber);
         items--;
-        return "Noted. I've removed this task:" + "\n" + " [" + removedTask.getTaskType() + "][ ] "
-                + removedTask + "\n" + "Now you have " + items + " tasks in the list.";
+        return "Noted. I've removed this task:\n"
+                + String.format(" [%s][%s] %s\n Now you have %s tasks in the list.",
+                removedTask.getTaskType(), removedTask.getStatusIcon() , removedTask, items);
     }
 
     public String printTaskList() {
         StringBuilder tasklist = new StringBuilder();
         tasklist.append("Here are the tasks in your list:" + "\n");
         for(int i = 0; i < items; i++) {
-            tasklist.append(i + 1).append(".").append("[").append(list.get(i).getTaskType()).append("][")
-                    .append(list.get(i).getStatusIcon()).append("] ").append(list.get(i).toString()).append("\n");
+            tasklist.append(i + 1).append(".").append("[").append(tasks.get(i).getTaskType()).append("][")
+                    .append(tasks.get(i).getStatusIcon()).append("] ").append(tasks.get(i).toString()).append("\n");
         }
         return tasklist.toString();
     }
