@@ -5,8 +5,6 @@ import Duke.Tasks.Deadline;
 import Duke.Tasks.Event;
 import Duke.Tasks.Todo;
 
-import java.util.stream.Collectors;
-
 import Exceptions.NoDeadlineException;
 import Exceptions.NoDescriptionException;
 
@@ -200,13 +198,5 @@ public class TaskList {
         System.out.println("\t--------------------------");
     }
 
-    public ArrayList<Task> findRelevantTasks(String keywords) {
-        if (keywords.trim().equals("")) {
-            throw new NoDescriptionException("The description of a todo cannot be empty.");
-        }
-        return (ArrayList<Task>) this.taskList
-                .stream().filter(task -> task.toString().contains(keywords))
-                .collect(Collectors.toList());
 
-    }
 }
