@@ -1,11 +1,14 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Task class to record the user task.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
     /**
      * Constructor for the Task class.
