@@ -22,57 +22,57 @@ public class TaskList {
 
     /**
      * Add a Todo Task to the TaskList.
-     * @param input the content of the new Todo Task
+     * @param title the content of the new Todo Task
      * @throws DukeException if the content is empty
      */
-    public String add(String input) throws DukeException {
-        if (isEmpty(input)) {
+    public String add(String title) throws DukeException {
+        if (isEmpty(title)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
-        ToDo newTask = new ToDo(input);
+        ToDo newTask = new ToDo(title);
         String res = "";
         tasks.add(newTask);
         res += "Got it. I've added this task:\n";
-        res += newTask.toString() + "\n";
+        res += newTask + "\n";
         res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
         return res;
     }
 
     /**
      * Add a Deadline Task to the TaskList.
-     * @param input the content of the new Deadline Task
+     * @param title the content of the new Deadline Task
      * @param deadline the deadline date and time of the new Deadline Task
      * @throws DukeException if the content is empty
      */
-    public String add(String input, String deadline) throws DukeException {
-        if (isEmpty(input) || isEmpty(deadline)) {
+    public String add(String title, String deadline) throws DukeException {
+        if (isEmpty(title) || isEmpty(deadline)) {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
-        Deadline newTask = new Deadline(input, deadline);
+        Deadline newTask = new Deadline(title, deadline);
         String res = "";
         tasks.add(newTask);
         res += "Got it. I've added this task:\n";
-        res += newTask.toString() + "\n";
+        res += newTask + "\n";
         res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
         return res;
     }
 
     /**
      * Add a Event Task to the TaskList.
-     * @param input the content of the new Event Task
-     * @param from the start date and time of the new Event Task
-     * @param to the end date and time of the new Event Task
+     * @param title the content of the new Event Task
+     * @param fromDateTime the start date and time of the new Event Task
+     * @param toDateTime the end date and time of the new Event Task
      * @throws DukeException if the content is empty
      */
-    public String add(String input, String from, String to) throws DukeException {
-        if (input.equals("") || from.equals("") || to.equals("")) {
+    public String add(String title, String fromDateTime, String toDateTime) throws DukeException {
+        if (title.equals("") || fromDateTime.equals("") || toDateTime.equals("")) {
             throw new DukeException("The description and duration of an event cannot be empty.");
         }
-        Event newTask = new Event(input, from, to);
+        Event newTask = new Event(title, fromDateTime, toDateTime);
         String res = "";
         tasks.add(newTask);
         res += "Got it. I've added this task:";
-        res += newTask.toString() + "\n";
+        res += newTask + "\n";
         res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
         return res;
     }
