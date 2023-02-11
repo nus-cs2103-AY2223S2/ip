@@ -15,6 +15,11 @@ public class UI {
     this.parser = parser;
   }
 
+  /**
+   * method returns a String that responds to user's input.
+   *
+   * @param input receives the string typed in by the user.
+   */
   public String respondInput(String input) {
     String received = input.trim();
     String commandType = received.split(" ")[0];
