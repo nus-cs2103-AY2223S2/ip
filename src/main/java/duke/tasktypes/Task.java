@@ -30,7 +30,7 @@ public class Task {
     }
 
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
 }
