@@ -86,8 +86,8 @@ public class Parser {
         }
         try {
             int id = Integer.parseInt(commandArr[1]);
-            boolean indexOutOfBounds = id > data.len() || id < 0;
-            if (indexOutOfBounds) {
+            boolean isOutOfBounds = id > data.len() || id < 0;
+            if (isOutOfBounds) {
                 throw new PixException("Please enter a valid number.");
             }
             return new MarkCommand(id - 1);
@@ -109,8 +109,8 @@ public class Parser {
         }
         try {
             int id = Integer.parseInt(commandArr[1]);
-            boolean indexOutOfBounds = id > data.len() || id < 0;
-            if (indexOutOfBounds) {
+            boolean isOutOfBounds = id > data.len() || id < 0;
+            if (isOutOfBounds) {
                 throw new PixException("Please enter a valid number.");
             }
             return new UnmarkCommand(id - 1);
@@ -144,9 +144,9 @@ public class Parser {
     public Command parseDeadline(String[] slashed) throws PixException {
         String description = removeCommand(slashed[0]);
         String dueDate = removeCommand(slashed[1]);
-        boolean inputNotValidLength = slashed.length != 2;
-        boolean inputEmptyValue = description.isEmpty() || dueDate.isEmpty();
-        if (inputNotValidLength || inputEmptyValue) {
+        boolean isNotValidLength = slashed.length != 2;
+        boolean isEmptyValue = description.isEmpty() || dueDate.isEmpty();
+        if (isNotValidLength || isEmptyValue) {
             throw new PixException("Invalid format.\n\n"
                     + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'");
         }
@@ -169,12 +169,12 @@ public class Parser {
         String description = removeCommand(slashed[0]);
         String eventStart = removeCommand(slashed[1]);
         String eventEnd = removeCommand(slashed[2]);
-        boolean inputNotValidLength = slashed.length != 3;
-        boolean inputEmptyValue = slashed.length != 3
+        boolean isNotValidLength = slashed.length != 3;
+        boolean isEmptyValue = slashed.length != 3
                 || description.isEmpty()
                 || eventStart.isEmpty()
                 || eventEnd.isEmpty();
-        if (inputNotValidLength || inputEmptyValue) {
+        if (isNotValidLength || isEmptyValue) {
             throw new PixException("Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
                     + "\n\ne.g. event 'description' / 'From' / 'To'");
         }
@@ -199,8 +199,8 @@ public class Parser {
         }
         try {
             int id = Integer.parseInt(commandArr[1]);
-            boolean indexOutOfBounds = id > data.len() || id < 0;
-            if (indexOutOfBounds) {
+            boolean isOutOfBounds = id > data.len() || id < 0;
+            if (isOutOfBounds) {
                 throw new PixException("Please enter a valid number.");
             }
             return new DeleteCommand(id - 1);

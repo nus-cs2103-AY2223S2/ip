@@ -7,7 +7,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Main function that launches the GUI.
+     * Launch gui.
      *
      * @param args String parameters for main function.
      */
