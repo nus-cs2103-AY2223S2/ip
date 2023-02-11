@@ -16,7 +16,7 @@ public abstract class Task implements Serializable {
     /**
      * Boolean indicating if the task is completed or otherwise
      */
-    private boolean done;
+    private boolean isDone;
 
     public Task(String task) {
         this.description = task;
@@ -29,7 +29,7 @@ public abstract class Task implements Serializable {
      * @param value True if it is done, false otherwise
      */
     public void setDone(boolean value) {
-        this.done = value;
+        this.isDone = value;
     }
 
     public String getDescription() {
@@ -46,6 +46,6 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getType(), this.done ? "X" : " ", this.description);
+        return String.format("[%s][%s] %s", getType(), this.isDone ? "X" : " ", this.description);
     }
 }

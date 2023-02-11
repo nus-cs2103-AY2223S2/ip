@@ -6,21 +6,29 @@ import duke.Duke;
 import duke.commands.Command;
 import duke.task.Task;
 
+/**
+ * Indexed Commands only take in 1 index parameter. The command
+ * will then execute using the task with that index in the Duke
+ * instance's task list
+ */
 public abstract class IndexedCommand extends Command {
     public IndexedCommand(String label) {
         super(label);
     }
     
     @Override
-    protected void execute(String[] args, final Duke instance) throws ValidationException {
+    protected final void executeInternal(String[] args, final Duke instance) throws ValidationException {
         List<Task> tasks = instance.getTaskList();
         try {
             validate(args.length > 1, String.format("Needed an index for %s", getLabel()));
 
             int index = Integer.parseInt(args[1]);
             if (index < 1 || index > tasks.size()) {
-                throw new NumberFormatException();
+                throw new ValidationException("Invalid index!\n");
             }
+
+            Task task = tasks.get(index - 1);
+            runWithTask(task, instance);
         } catch (NumberFormatException e) {
             throw new ValidationException("Invalid index!\n");
         }

@@ -17,7 +17,7 @@ public abstract class TaskCommand<T extends Task> extends Command {
     }
 
     @Override
-    protected void execute(String[] tokens, Duke instance) throws ValidationException {
+    protected final void executeInternal(String[] tokens, Duke instance) throws ValidationException {
         T task = getTask(tokens, instance);
 
         List<Task> tasks = instance.getTaskList();
@@ -27,7 +27,7 @@ public abstract class TaskCommand<T extends Task> extends Command {
 
     /**
      * Called when the command is executed to return a {@link Task task} to be added to the Duke instance. 
-     * Follows the calling conventions of {@link #execute(String[], Duke) execute}.
+     * Follows the calling conventions of {@link #executeInternal(String[], Duke) execute}.
      * @throws ValidationException
      */
     protected abstract T getTask(String[] tokens, Duke instance) throws ValidationException;

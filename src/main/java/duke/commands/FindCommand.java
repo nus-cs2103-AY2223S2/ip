@@ -14,7 +14,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    protected void execute(String[] tokens, Duke instance) throws ValidationException {
+    protected void executeInternal(String[] tokens, Duke instance) throws ValidationException {
         validate(tokens.length > 1, "Need a string to search for!");
 
         TaskList tasks = instance.getTaskList();
