@@ -34,7 +34,7 @@ public class TaskList {
     public void markTask(int index) throws DukeInvalidArgumentException {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
-                    String.format("There are only %d tasks. There is no task "
+                    String.format("There are only %d tasks, so you can't get a task "
                             + "with index %d", this.userTasks.size(), index)
             );
         }
@@ -49,7 +49,7 @@ public class TaskList {
     public void unmarkTask(int index) throws DukeInvalidArgumentException {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
-                    String.format("There are only %d tasks. There is no task "
+                    String.format("There are only %d tasks, so you can't get a task "
                             + "with index %d", this.userTasks.size(), index)
             );
         }
@@ -73,18 +73,24 @@ public class TaskList {
     public Task popTask(int index) throws DukeInvalidArgumentException {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
-                    String.format("There are only %d tasks. There is no task "
+                    String.format("There are only %d tasks, so you can't get a task "
                             + "with index %d\n", this.userTasks.size(), index)
             );
         }
         return this.userTasks.remove(index);
     }
 
+    /**
+     * Pops and returns the list of tasks with the specific indexes in the list.
+     * @param indexes Indexes of the tasks to pop in the list.
+     * @return List of Tasks that are removed.
+     * @throws DukeInvalidArgumentException If any index is out of bounds.
+     */
     public List<Task> popMultipleTasks(List<Integer> indexes) throws DukeInvalidArgumentException {
         for (Integer index: indexes) {
             if (index < 0 || index > this.userTasks.size() - 1) {
                 throw new DukeInvalidArgumentException(
-                        String.format("There are only %d tasks. There is no task "
+                        String.format("There are only %d tasks, so you can't get a task "
                                 + "with index %d\n", this.userTasks.size(), index)
                 );
             }

@@ -52,7 +52,7 @@ public class Duke {
         assert tokens.size() == 2;
         int index = Integer.parseInt(tokens.get(1)) - 1;
         this.taskApplication.unmarkTask(index);
-        return String.format("OK, I've marked this task as not done yet:\n%s", this.taskApplication.getTask(index));
+        return String.format("OK! I've marked this task as not done yet:\n%s", this.taskApplication.getTask(index));
     }
 
     private String todoCommand(List<String> tokens) {
@@ -60,7 +60,7 @@ public class Duke {
         Task newTask = new ToDo(tokens.get(1));
         this.taskApplication.addTask(newTask);
         return String.format(
-                "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
+                "OK! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 newTask, this.taskApplication.getNoOfTasks()
         );
     }
@@ -70,7 +70,7 @@ public class Duke {
         Task newTask = new Deadline(tokens.get(1), tokens.get(2));
         this.taskApplication.addTask(newTask);
         return String.format(
-                "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
+                "OK! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 newTask, this.taskApplication.getNoOfTasks()
         );
     }
@@ -80,7 +80,7 @@ public class Duke {
         Task newTask = new Event(tokens.get(1), tokens.get(2), tokens.get(3));
         this.taskApplication.addTask(newTask);
         return String.format(
-                "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
+                "OK! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 newTask, this.taskApplication.getNoOfTasks()
         );
     }
@@ -93,7 +93,7 @@ public class Duke {
                 .map(s -> Integer.parseInt(s) - 1)
                 .collect(Collectors.toList());
         List<Task> tasks = this.taskApplication.popMultipleTasks(indexes);
-        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+        return String.format("OK! I've removed this task:\n%s\nNow you have %d tasks in the list.",
                 getTasksAsString(tasks), this.taskApplication.getNoOfTasks());
     }
 
@@ -101,7 +101,7 @@ public class Duke {
         assert tokens.size() == 2;
         String keyword = tokens.get(1);
         List<Task> tasks = this.taskApplication.getTaskByKeyword(keyword);
-        return String.format("Here are the matching tasks in your list:\n%s",
+        return String.format("Here are the tasks that you want:\n%s",
                 getTasksAsString(tasks));
     }
 
@@ -132,7 +132,7 @@ public class Duke {
         case "bye":
             return this.byeCommand();
         default:
-            throw new DukeUnknownCommandException("Unknown command");
+            throw new DukeUnknownCommandException("I have no idea what you just said.");
         }
     }
     public boolean getIsExit() {

@@ -45,7 +45,7 @@ public class Parser {
 
     private void assertHasArguments(String[] tokens) throws DukeInvalidArgumentException {
         if (tokens.length <= 1) {
-            throw new DukeInvalidArgumentException("Need to supply at least one argument");
+            throw new DukeInvalidArgumentException("I urge you to supply at least one argument");
         }
     }
 
@@ -66,10 +66,10 @@ public class Parser {
             throw new DukeInvalidArgumentException("The command requires integer arguments.");
         }
     }
-    public LocalDateTime tryParseDateString(String dateString) throws DukeInvalidArgumentException {
+    private void assertIsDateString(String dateString) throws DukeInvalidArgumentException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm");
         try {
-            return LocalDateTime.parse(dateString, formatter);
+            LocalDateTime.parse(dateString, formatter);
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException("The command requires at least one argument in the format: "
                     + "yyyy-MM-dd-HH-mm. Example: 2023-02-02-02-09");
@@ -91,7 +91,7 @@ public class Parser {
         switch(tokens[0]) {
         case "list":
         case "bye":
-                break;
+            break;
         case "mark":
         case "unmark":
             assertHasArguments(tokens);
@@ -114,17 +114,17 @@ public class Parser {
             assertHasArguments(tokens);
             result.addAll(parseByRegex("^\\s*([^/]+)\\s+/by\\s+([^/]+)\\s*$", tokens[1]));
             assertTokenLength(result, 3);
-            tryParseDateString(result.get(2));
+            assertIsDateString(result.get(2));
             break;
         case "event":
             assertHasArguments(tokens);
             result.addAll(parseByRegex("^\\s*([^/]+?)\\s+/from\\s+([^/]+?)\\s+/to\\s([^/]+)\\s*$", tokens[1]));
             assertTokenLength(result, 4);
-            tryParseDateString(result.get(2));
-            tryParseDateString(result.get(3));
+            assertIsDateString(result.get(2));
+            assertIsDateString(result.get(3));
             break;
         default:
-            throw new DukeUnknownCommandException("\tUnknown command\n");
+            throw new DukeUnknownCommandException("I have no idea what you just said.");
         }
         return result;
     }
