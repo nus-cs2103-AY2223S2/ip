@@ -12,6 +12,16 @@ import java.util.Arrays;
 public class Parser {
     private FileManager fileManager;
     private TaskList taskList;
+    static final int COMMAND_INDEX = 0;
+    static final int TASK_INFO_INDEX = 1;
+    static final int USER_MESSAGE_SPLIT_COUNT = 2;
+    static final int DESCRIPTION_INDEX = 0;
+    static final int DATE_SPLIT_COUNT = 2;
+    static final int BY_INFO_INDEX = 1;
+    static final int TO_INFO_INDEX = 2;
+    static final int FROM_INFO_INDEX = 1;
+    static final int DATE_INDEX = 1;
+    static final int OPERATION_NUMBER_INDEX = 1;
 
     public Parser(FileManager fileManager, TaskList taskList) {
         this.fileManager = fileManager;
@@ -32,25 +42,25 @@ public class Parser {
      * @param userMessage String input from the user
      */
     public String parse(String userMessage) {
-        String [] parts = userMessage.split(" ", 2);
+        String [] parts = userMessage.split(" ", USER_MESSAGE_SPLIT_COUNT);
 
-        if (parts[0].equals("bye")) {
+        if (parts[COMMAND_INDEX].equals("bye")) {
             return bye();
-        } else if (parts[0].equals("list")) {
+        } else if (parts[COMMAND_INDEX].equals("list")) {
             return list();
-        } else if (parts[0].equals("mark")) {
+        } else if (parts[COMMAND_INDEX].equals("mark")) {
             return mark(userMessage);
-        } else if (parts[0].equals("unmark")) {
+        } else if (parts[COMMAND_INDEX].equals("unmark")) {
             return unmark(userMessage);
-        } else if (parts[0].equals("delete")) {
+        } else if (parts[COMMAND_INDEX].equals("delete")) {
             return delete(userMessage);
-        } else if (parts[0].equals("todo")) {
+        } else if (parts[COMMAND_INDEX].equals("todo")) {
             return todo(userMessage);
-        } else if (parts[0].equals("deadline")) {
+        } else if (parts[COMMAND_INDEX].equals("deadline")) {
             return deadline(userMessage);
-        } else if (parts[0].equals("event")) {
+        } else if (parts[COMMAND_INDEX].equals("event")) {
             return event(userMessage);
-        } else if (parts[0].equals("find")) {
+        } else if (parts[COMMAND_INDEX].equals("find")) {
             return find(userMessage);
         } else {
             return "I have no idea what are you talking about dude..";
@@ -67,9 +77,9 @@ public class Parser {
     }
 
     private String mark(String userMessage) {
-        String [] messageParts = userMessage.split(" ", 2);
+        String [] messageParts = userMessage.split(" ", USER_MESSAGE_SPLIT_COUNT);
         try {
-            int taskNumber = Integer.parseInt(messageParts[1]);
+            int taskNumber = Integer.parseInt(messageParts[OPERATION_NUMBER_INDEX]);
             assert taskNumber <= this.taskList.getList().size() : "Invalid Selection";
             return this.taskList.mark(taskNumber);
         } catch (IndexOutOfBoundsException e) {
@@ -78,9 +88,9 @@ public class Parser {
     }
 
     private String unmark(String userMessage) {
-        String [] messageParts = userMessage.split(" ", 2);
+        String [] messageParts = userMessage.split(" ", USER_MESSAGE_SPLIT_COUNT);
         try {
-            int taskNumber = Integer.parseInt(messageParts[1]);
+            int taskNumber = Integer.parseInt(messageParts[OPERATION_NUMBER_INDEX]);
             assert taskNumber <= this.taskList.getList().size() : "Invalid Selection";
             return this.taskList.unmark(taskNumber);
         } catch (IndexOutOfBoundsException e) {
@@ -89,9 +99,9 @@ public class Parser {
     }
 
     private String delete(String userMessage) {
-        String [] messageParts = userMessage.split(" ", 2);
+        String [] messageParts = userMessage.split(" ", USER_MESSAGE_SPLIT_COUNT);
         try {
-            int taskNumber = Integer.parseInt(messageParts[1]);
+            int taskNumber = Integer.parseInt(messageParts[OPERATION_NUMBER_INDEX]);
             assert taskNumber <= this.taskList.getList().size() : "Invalid Selection";
             return this.taskList.remove(taskNumber);
         } catch (IndexOutOfBoundsException e) {
@@ -113,7 +123,7 @@ public class Parser {
     private String todo(String userMessage) {
         String [] messageParts = userMessage.split(" ", 2);
         try {
-            Todo newToDo = new Todo(messageParts[1]);
+            Todo newToDo = new Todo(messageParts[TASK_INFO_INDEX]);
             return this.taskList.add(newToDo);
         } catch (IndexOutOfBoundsException e) {
             return "Bruhh.. The description of todo cannot be empty.";
@@ -123,10 +133,10 @@ public class Parser {
     private String deadline(String userMessage) {
         String [] messageParts = userMessage.split(" ", 2);
         try {
-            String[] deadlineParts = messageParts[1].split(" /");
-            String[] deadline = deadlineParts[1].split(" ", 2);
-            LocalDate byDate = LocalDate.parse(deadline[1]);
-            Deadline newDeadline = new Deadline(deadlineParts[0], byDate);
+            String[] deadlineParts = messageParts[TASK_INFO_INDEX].split(" /");
+            String[] deadline = deadlineParts[BY_INFO_INDEX].split(" ", DATE_SPLIT_COUNT);
+            LocalDate byDate = LocalDate.parse(deadline[DATE_INDEX]);
+            Deadline newDeadline = new Deadline(deadlineParts[DESCRIPTION_INDEX], byDate);
             return this.taskList.add(newDeadline);
         } catch (IndexOutOfBoundsException e) {
             return "Bruhh.. The description of deadline cannot be empty.";
@@ -138,12 +148,12 @@ public class Parser {
     private String event(String userMessage) {
         String [] messageParts = userMessage.split(" ", 2);
         try {
-            String[] eventParts = messageParts[1].split(" /");
-            String[] from = eventParts[1].split(" ", 2);
-            String[] to = eventParts[2].split(" ", 2);
-            LocalDate fromDate = LocalDate.parse(from[1]);
-            LocalDate toDate = LocalDate.parse(to[1]);
-            Event newEvent = new Event(eventParts[0], fromDate, toDate);
+            String[] eventParts = messageParts[TASK_INFO_INDEX].split(" /");
+            String[] from = eventParts[FROM_INFO_INDEX].split(" ", DATE_SPLIT_COUNT);
+            String[] to = eventParts[TO_INFO_INDEX].split(" ", DATE_SPLIT_COUNT);
+            LocalDate fromDate = LocalDate.parse(from[DATE_INDEX]);
+            LocalDate toDate = LocalDate.parse(to[DATE_INDEX]);
+            Event newEvent = new Event(eventParts[DESCRIPTION_INDEX], fromDate, toDate);
             return this.taskList.add(newEvent);
         } catch (IndexOutOfBoundsException e) {
             return "Bruhh.. The description of event cannot be empty.";
