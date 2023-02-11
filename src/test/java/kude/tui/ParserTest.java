@@ -36,7 +36,7 @@ public class ParserTest {
     }
 
     @Test
-    public void namedArgsNoArg() {
+    public void namedArgs_noArg() {
         var parser = new Parser("cmd /arg0 v /arg1 v2");
         assertEquals("cmd", parser.getCommand());
         assertEquals(Optional.empty(), parser.getArg());
@@ -46,7 +46,7 @@ public class ParserTest {
     }
 
     @Test
-    public void namedArgsIncomplete() {
+    public void namedArgs_incomplete() {
         var parser = new Parser("cmd arg /arg0 v /arg1");
         assertEquals("cmd", parser.getCommand());
         assertEquals(Optional.of("arg"), parser.getArg());
@@ -56,7 +56,7 @@ public class ParserTest {
     }
 
     @Test
-    public void namedArgsIncompleteWithSpace() {
+    public void namedArgs_incompleteWithSpace() {
         var parser = new Parser("cmd arg /arg0 v /arg1 ");
         assertEquals("cmd", parser.getCommand());
         assertEquals(Optional.of("arg"), parser.getArg());
@@ -66,7 +66,7 @@ public class ParserTest {
     }
 
     @Test
-    public void namedArgsWithSlashValues() {
+    public void namedArgs_withSlashValues() {
         var parser = new Parser("cmd arg /arg0 1/2/3");
         assertEquals("cmd", parser.getCommand());
         assertEquals(Optional.of("arg"), parser.getArg());
@@ -76,7 +76,7 @@ public class ParserTest {
     }
 
     @Test
-    public void namedArgsWithSlashValuesAndSpace() {
+    public void namedArgs_withSlashValues_space() {
         var parser = new Parser("cmd arg /arg0 1/2/3 ");
         assertEquals("cmd", parser.getCommand());
         assertEquals(Optional.of("arg"), parser.getArg());
@@ -86,7 +86,7 @@ public class ParserTest {
     }
 
     @Test
-    public void namedArgsWithSlashValuesAndAnotherArg() {
+    public void namedArgs_withSlashValues_anotherArg() {
         var parser = new Parser("cmd arg /arg0 1/2/3 /arg1 v");
         assertEquals("cmd", parser.getCommand());
         assertEquals(Optional.of("arg"), parser.getArg());
