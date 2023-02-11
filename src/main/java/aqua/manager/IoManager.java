@@ -166,6 +166,7 @@ public class IoManager {
         stage.setScene(scene);
         stage.setTitle(stageId);
         stage.getIcons().add(MainApp.ICON);
+        stage.setResizable(false);
         stageMap.put(stageId, stage);
         return stage;
     }
