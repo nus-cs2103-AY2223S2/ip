@@ -15,6 +15,14 @@ public class Ui {
         }
     }
 
+    public static void findMessage(String searchFor, TaskList tasks) {
+        System.out.println("Here are the tasks in your list that contain [" + searchFor + "]:");
+        for (int i = 0; i < tasks.size(); i++) {
+            int j = i + 1;
+            System.out.println(j + "." + tasks.get(i).toString());
+        }
+    }
+
     public static void markMessage(Task task) {
         System.out.println("Solid! I'm marking this task as done:\n" + task);
     }

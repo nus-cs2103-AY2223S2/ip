@@ -19,6 +19,9 @@ public class Parser {
 
     public TaskList parse(TaskList tasks) throws DukeException {
         String input = sc.nextLine();
+        if (isFind(input)) {
+            return find(input, tasks);
+        }
         if ("bye".equals(input)) {
             isDone = true;
             return tasks;
@@ -60,6 +63,21 @@ public class Parser {
 
     public boolean notDone() {
         return !isDone;
+    }
+
+    public boolean isFind(String input) {
+        return input.length() >= 6 && input.startsWith("find ");
+    }
+    public TaskList find(String input, TaskList tasks) {
+        String searchFor = input.substring(5);
+        TaskList found = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(searchFor)) {
+                found.add(tasks.get(i));
+            }
+        }
+        Ui.findMessage(searchFor, found);
+        return tasks;
     }
 
     public boolean isMark(String input, int listSize) {
@@ -105,7 +123,6 @@ public class Parser {
     }
 
     public boolean isEvent(String input) throws DukeException {
-
         if (input.length() >= 5 && input.startsWith("event")) {
             if (input.equals("event") || input.substring(5).isBlank()) {
                 throw new DukeException("EVENT needs a description!");
