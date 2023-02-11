@@ -58,17 +58,19 @@ public class Storage {
      */
     protected void updateData(Task t) throws DukeIoException {
         try {
-            List<String> allLine = Files.readAllLines(path);
+            List<String> allLines = Files.readAllLines(path);
             String s = t.toString().charAt(1) + " | " + t.getStatusIcon() + " | " + t.description;
             if (t instanceof Deadlines) {
+                // create string description for deadline task to store in data file
                 Deadlines d = (Deadlines) t;
                 s += " | " + d.getBy();
             } else if (t instanceof Events) {
+                // create string description for event task to store in data file
                 Events e = (Events) t;
                 s += " | " + e.getStart() + " | " + e.getEnd();
             }
-            allLine.add(s);
-            Files.write(path, allLine);
+            allLines.add(s);
+            Files.write(path, allLines);
         } catch (IOException e) {
             throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
@@ -83,14 +85,14 @@ public class Storage {
      */
     protected void updateData(int lineNumber, int status) throws DukeIoException {
         try {
-            List<String> allLine = Files.readAllLines(path);
+            List<String> allLines = Files.readAllLines(path);
 
-            // overwrite the duke.txt file
-            String line = allLine.get(lineNumber);
+            // overwrite the duke.txt file by updating the task's new status
+            String line = allLines.get(lineNumber);
             String s = line.substring(0, 4) + status + line.substring(5);
-            allLine.set(lineNumber, s);
+            allLines.set(lineNumber, s);
 
-            Files.write(path, allLine);
+            Files.write(path, allLines);
         } catch (IOException e) {
             throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
@@ -131,23 +133,7 @@ public class Storage {
             }
 
             for (String taskDescription : allLine) {
-                String[] s = taskDescription.split(" \\| ");
-
-                Task t = null;
-                boolean isDone = s[1].equals("1");
-                switch (s[0]) {
-                case "T":
-                    t = new ToDos(s[2]);
-                    break;
-                case "D":
-                    t = new Deadlines(s[2], s[3]);
-                    break;
-                case "E":
-                    t = new Events(s[2], s[3], s[4]);
-                    break;
-                }
-                assert t != null : "Attempt to create empty task when load data from storage.";
-                t.setDone(isDone);
+                Task t = createTaskFromStorage(taskDescription);
                 taskList.add(t);
             }
 
@@ -168,23 +154,7 @@ public class Storage {
 
             for (String taskDescription: allLine) {
                 if (taskDescription.contains(keyword)) {
-
-                    String[] s = taskDescription.split(" \\| ");
-
-                    Task task = null;
-                    boolean isDone = s[1].equals("1");
-                    switch (s[0]) {
-                    case "T":
-                        task = new ToDos(s[2]);
-                        break;
-                    case "D":
-                        task = new Deadlines(s[2], s[3]);
-                        break;
-                    case "E":
-                        task = new Events(s[2], s[3], s[4]);
-                        break;
-                    }
-                    task.setDone(isDone);
+                    Task task = createTaskFromStorage(taskDescription);
                     result.add(task);
                 }
             }
@@ -193,5 +163,25 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
+    }
+
+    private Task createTaskFromStorage(String description) throws DukeInvalidArgumentException {
+        String[] s = description.split(" \\| ");
+        Task t = null;
+        boolean isDone = s[1].equals("1");
+        switch (s[0]) {
+            case "T":
+                t = new ToDos(s[2]);
+                break;
+            case "D":
+                t = new Deadlines(s[2], s[3]);
+                break;
+            case "E":
+                t = new Events(s[2], s[3], s[4]);
+                break;
+        }
+        assert t != null : "Attempt to create empty task when load data from storage.";
+        t.setDone(isDone);
+        return t;
     }
 }

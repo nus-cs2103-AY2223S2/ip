@@ -20,9 +20,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
@@ -33,7 +32,7 @@ public class MainWindow extends AnchorPane {
         assert d != null : "Duke hasn't been created.";
         duke = d;
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(d.greetingMsg, dukeImage));
+                DialogBox.getDukeDialog(d.greetingMsg, DUKE_IMAGE));
     }
 
     /**
@@ -45,8 +44,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
     }

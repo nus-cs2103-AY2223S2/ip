@@ -37,7 +37,7 @@ public class Task {
         return description;
     }
 
-    public void setDone(Boolean b) {
+    public void setDone(boolean b) {
         isDone = b;
     }
 

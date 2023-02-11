@@ -17,8 +17,12 @@ public class Parser {
             DukeEmptyArgumentException, DukeInvalidArgumentException {
         String[] split = input.split(" ", 2);
         String cmd = split[0];
-        Command c;
+        return getCommand(split, cmd);
+    }
 
+    private static Command getCommand(String[] split, String cmd) throws DukeEmptyArgumentException,
+            DukeInvalidArgumentException, DukeUnknownCommandException {
+        Command c;
         switch (cmd) {
         case "exit":
             c = new ExitCommand();
@@ -47,6 +51,7 @@ public class Parser {
             throw new DukeUnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }
         assert c != null : "Attempt to create empty command.";
+
         return c;
     }
 }
