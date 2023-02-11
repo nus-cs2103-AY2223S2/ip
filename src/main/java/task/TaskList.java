@@ -38,6 +38,9 @@ public class TaskList {
         taskList.add(t);
     }
 
+    public static void addToList(Task t, int number) {
+        taskList.add(number, t);
+    }
     /**
      * This method handles the retrieval of task
      * by its serial number.
@@ -111,6 +114,9 @@ public class TaskList {
         taskList.remove(num);
     }
 
+    public static void remove(Task task) {
+        taskList.remove(task);
+    }
     /**
      * This method searches for keywords in tasks.
      * @param keyword keyword to be searched

@@ -30,6 +30,7 @@ public class FindCommand {
             throw new DukeException(Ui.printEnterKeyword());
         } else {
             keyword = inputs[1];
+            UndoCommand.find();
         }
         return TaskList.search(keyword);
 

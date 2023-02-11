@@ -71,6 +71,9 @@ public abstract class Task {
         count--;
     }
 
+    public void plus() {
+        count++;
+    }
     /**
      * Abstract method for writting of Task into file.
      *

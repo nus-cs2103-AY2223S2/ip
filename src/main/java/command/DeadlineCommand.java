@@ -55,6 +55,7 @@ public class DeadlineCommand {
             end = strBuild.toString();
             strBuild.setLength(0);
             Deadline d = new Deadline(name, end, false);
+            UndoCommand.deadline(d);
             TaskList.addToList(d);
             return Ui.printDefault(d);
         }

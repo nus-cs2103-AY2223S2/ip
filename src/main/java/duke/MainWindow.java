@@ -53,4 +53,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    @FXML
+    private void close() {
+
+    }
+
 }

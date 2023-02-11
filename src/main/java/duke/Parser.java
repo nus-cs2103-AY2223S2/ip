@@ -1,12 +1,6 @@
 package duke;
 
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.EventCommand;
-import command.FindCommand;
-import command.MarkCommand;
-import command.TodoCommand;
-import command.UnMarkCommand;
+import command.*;
 import task.TaskList;
 
 /**
@@ -20,6 +14,7 @@ public class Parser {
         String[] splitCommand = command.split(" ");
         switch(splitCommand[0].toUpperCase()) {
             case "LIST":
+                UndoCommand.list();
                 return TaskList.printList();
             case "MARK":
                 return new MarkCommand(splitCommand[1]).mark();
@@ -35,6 +30,8 @@ public class Parser {
                 return new DeleteCommand(splitCommand[1]).delete();
             case "FIND" :
                 return new FindCommand(splitCommand).find();
+            case "UNDO" :
+                return UndoCommand.undo();
             case "BYE" :
                 TaskList.writeToFile();
                 return Ui.printBye();

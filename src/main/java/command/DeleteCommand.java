@@ -27,6 +27,7 @@ public class DeleteCommand {
     public String delete() throws DukeException{
         try {
             Task curr = TaskList.get(number);
+            UndoCommand.delete(curr, number);
             curr.minus();
             TaskList.remove(number);
             return Ui.printDelete(curr);

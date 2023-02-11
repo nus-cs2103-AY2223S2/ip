@@ -1,6 +1,5 @@
 package command;
 
-import duke.Duke;
 import duke.DukeException;
 import duke.MainWindow;
 import duke.Ui;
@@ -29,6 +28,7 @@ public class MarkCommand {
     public String mark() throws DukeException{
         try {
             Task curr = TaskList.get(number);
+            UndoCommand.mark(number);
             curr.mark();
             return Ui.printMark(curr);
         } catch (Exception m){

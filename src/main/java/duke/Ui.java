@@ -167,4 +167,11 @@ public class Ui {
         return("No name identified, try again\n");
     }
 
+    public static String printUndoSuccess() {
+        return(DIVIDER + "Undone!\n" + DIVIDER);
+    }
+
+    public static String printUndoFail() {
+        return("There is nothing to undo :)\n");
+    }
 }

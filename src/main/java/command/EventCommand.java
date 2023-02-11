@@ -70,6 +70,7 @@ public class EventCommand {
             end = strBuild.toString();
             strBuild.setLength(0);
             Event event = new Event(name, start, end, false);
+            UndoCommand.event(event);
             TaskList.addToList(event);
             return Ui.printDefault(event);
         }

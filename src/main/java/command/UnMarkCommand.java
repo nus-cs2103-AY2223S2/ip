@@ -27,6 +27,7 @@ public class UnMarkCommand {
     public String unmark() throws DukeException {
         try {
             Task curr = TaskList.get(number);
+            UndoCommand.unmark(number);
             curr.unmark();
             return Ui.printUnmark(curr);
         } catch (Exception m){

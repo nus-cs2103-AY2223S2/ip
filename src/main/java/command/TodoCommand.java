@@ -43,6 +43,7 @@ public class TodoCommand {
             }
             Todo t = new Todo(strBuild.toString(), false);
             strBuild.setLength(0);
+            UndoCommand.todo(t);
             TaskList.addToList(t);
             return Ui.printDefault(t);
         }
