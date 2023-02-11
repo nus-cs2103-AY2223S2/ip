@@ -32,6 +32,7 @@ public class DeadlineCommand extends Command {
     }
 
     private Deadline createDeadline() {
+        assert TOKENS.length == 2;
         String desc = TOKENS[0];
         String byDeadline = TOKENS[1];
         return new Deadline(desc, byDeadline);
