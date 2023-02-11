@@ -40,7 +40,7 @@ public class Ui {
     }
 
     /**
-     * Let the user know when the input they made is invalid.
+     * Lets the user know when the input they made is invalid.
      */
     public void showLoadingError() {
         System.out.println("OHOH the input cannot make it!");
@@ -48,6 +48,7 @@ public class Ui {
 
     /**
      * Returns the input the user typed in.
+     * 
      * @return The input the user typed in.
      * @throws IOException When the user type in invalid input.
      */

@@ -16,6 +16,7 @@ public class Event extends Task {
 
     /**
      * Constructs an Event task with the given name, start date, and end date.
+     *
      * @param description The description of the Event Task.
      * @param start The start date of the Event Task.
      * @param end The end date of the Event Task.
@@ -30,7 +31,8 @@ public class Event extends Task {
     }
 
     /**
-     * The string representation of the Deadline object.
+     * Returns the string representation of the Deadline object.
+     *
      * @return The name of this task and the details of the timing.
      */
     @Override

@@ -13,6 +13,7 @@ public class Parser {
 
     /**
      * Constructs a Parser object with the given taskStorage.
+     *
      * @param taskStorage The given taskStorage.
      */
     public Parser(TaskStorage taskStorage) {
@@ -21,6 +22,7 @@ public class Parser {
 
     /**
      * Returns the taskStorage of the Parser object.
+     *
      * @return The taskStorage of the Parser object.
      */
     public TaskStorage getTaskStorage() {
@@ -40,8 +42,9 @@ public class Parser {
     }
 
     /**
-     * The main logic of the program,
-     * execute a command based on the string input given.
+     * The main logic of the program.
+     * Execute a command based on the string input given.
+     *
      * @param inp The string input given.
      * @return False if the input contains "Bye", otherwise return True.
      */
@@ -193,5 +196,4 @@ public class Parser {
         }
         return response;
     }
-
 }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Deadline is a type of Task.
- * All objects of class Deadline have a 'by' field to indicate the period which the task
+ * All objects of class Deadline have a 'by' field to indicate the period the task
  * must be completed by.
  */
 public class Deadline extends Task {
@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline task with the given name, and the 'by' field.
+     *
      * @param description The description of the Deadline Task.
      * @param by The deadline to finish said task.
      */
@@ -26,7 +27,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * The string representation of the Deadline object.
+     * Returns the string representation of the Deadline object.
+     *
      * @return The name of this task and the details of the timing.
      */
     @Override

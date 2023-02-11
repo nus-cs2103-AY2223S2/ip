@@ -24,7 +24,11 @@ public class Duke {
     private Ui ui;
 
 
-
+    /**
+     * Constructs a Duke object with the default filepath.
+     *
+     * The file which stores all the tasks of a user will be stored in that filepath.
+     */
     public Duke() {
         ui = new Ui();
         taskManager = new TaskManagement();
@@ -32,8 +36,9 @@ public class Duke {
     }
 
     /**
-     * Constructs a Duke object with the given filepath. The file which
-     * stores all the tasks of a user will be stored in that filepath.
+     * Constructs a Duke object with the given filepath.
+     *
+     * The file which stores all the tasks of a user will be stored in that filepath.
      * @param filepath The given filepath.
      */
     public Duke(String filepath) {
@@ -64,7 +69,8 @@ public class Duke {
     }
 
     /**
-     * This method runs the Duke object. Various changes will be made in the Duke object.
+     * Runs the Duke object. Various changes will be made in the Duke object.
+     *
      * @throws IOException When there is invalid input.
      */
     public void run() throws IOException {

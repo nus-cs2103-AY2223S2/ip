@@ -10,7 +10,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructs a Task object with the given description,
+     * Constructs a Task object with the given description.
+     *
      * @param description The description of the task.
      */
     public Task(String description) {
@@ -20,6 +21,7 @@ public class Task {
 
     /**
      * Checks if the task is done or not done.
+     *
      * @return A 'X' if the task is done, " " if the task is not done.
      */
     public String getStatusIcon() {
@@ -40,6 +42,7 @@ public class Task {
 
     /**
      * Checks if the string given is in the task description.
+     *
      * @param string The string given.
      * @return True if the string given is in the task description, and false otherwise.
      */
@@ -60,7 +63,8 @@ public class Task {
     }
 
     /**
-     * The string representation of the Task object.
+     * Returns the string representation of the Task object.
+     *
      * @return The name of this task and if the task is done or not.
      */
     public String toString() {

@@ -36,9 +36,11 @@ public class TaskManagement {
     }
 
     /**
-     * Constructs a TaskManagement object. The file which contains
-     * the tasks of the TaskManagement object will be placed in the
-     * filepath given.
+     * Constructs a TaskManagement object.
+     *
+     * The file which contains the tasks of the TaskManagement object
+     * will be placed in the filepath given.
+     *
      * @param filepath The filepath given.
      * @throws DukeException If invalid filepath input is given.
      */
@@ -70,6 +72,7 @@ public class TaskManagement {
     /**
      * Saves the tasks of the TaskStorage object into the TaskManagement object.
      * The file will be updated.
+     *
      * @param taskStorage The TaskStorage object given.
      */
     public void save(TaskStorage taskStorage) {

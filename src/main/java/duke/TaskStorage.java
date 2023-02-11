@@ -22,7 +22,7 @@ public class TaskStorage {
     }
 
     /**
-     * Add a task to the TaskStorage object with printing effects.
+     * Adds a task to the TaskStorage object with printing effects.
      * @param t The task.
      */
     public String addTask(Task t) {
@@ -37,7 +37,8 @@ public class TaskStorage {
     }
 
     /**
-     * Add a task to the TaskStorage object without printing effects.
+     * Adds a task to the TaskStorage object without printing effects.
+     *
      * @param t The task.
      */
     public void addTaskWithoutPrinting(Task t) {
@@ -54,7 +55,7 @@ public class TaskStorage {
     }
 
     /**
-     * Return the task based on the given index in the taskStorage object.
+     * Returns the task based on the given index in the taskStorage object.
      * @param i The given index.
      * @return The task at the given index.
      */
@@ -63,7 +64,8 @@ public class TaskStorage {
     }
 
     /**
-     * The given task will be deleted in the taskStorage object.
+     * Deletes the given task in the taskStorage object.
+     *
      * @param t The given task.
      */
     public String deleteTask(Task t) {
