@@ -2,11 +2,16 @@ package gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An object to show a dialog box
@@ -52,7 +57,9 @@ public class DialogBox extends HBox {
      * @return a dialog object for user
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        DialogBox dialogBox = new DialogBox(l, iv);
+        dialogBox.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(10), Insets.EMPTY)));
+        return dialogBox;
     }
 
     /**
@@ -62,8 +69,10 @@ public class DialogBox extends HBox {
      * @return a dialog object for duk e
      */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
-        db.flip();
-        return db;
+        DialogBox dialogBox = new DialogBox(l, iv);
+        dialogBox.flip();
+        // https://www.tabnine.com/code/java/methods/javafx.scene.layout.BackgroundFill/%3Cinit%3E
+        dialogBox.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(10), Insets.EMPTY)));
+        return dialogBox;
     }
 }

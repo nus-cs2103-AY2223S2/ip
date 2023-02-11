@@ -56,6 +56,7 @@ public class DukeGui extends Application {
 
         Scene scene = new Scene(mainLayout);
 
+        // set stage parameters
         stage.setTitle(STAGE_TITLE);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
