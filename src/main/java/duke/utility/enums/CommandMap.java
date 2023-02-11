@@ -1,4 +1,4 @@
-package duke.utility.parser;
+package duke.utility.enums;
 
 
 /**

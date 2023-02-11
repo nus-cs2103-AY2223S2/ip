@@ -6,6 +6,7 @@ import duke.tasklist.task_types.Deadline;
 import duke.tasklist.task_types.Event;
 import duke.tasklist.task_types.Task;
 import duke.tasklist.task_types.ToDo;
+import duke.utility.enums.CommandMap;
 
 /**
  * Represents a <code>Parser</code> object that perfroms the necessary
