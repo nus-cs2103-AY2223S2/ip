@@ -15,7 +15,7 @@ public class DatedTask extends Task {
     private LocalDate imptDate;
 
     /**
-     * Constructor for DatedTask
+     * Constructs a Dated Task.
      *
      * @param name    The name of the task.
      * @param impDate The date to be used for comparisons.
@@ -39,23 +39,22 @@ public class DatedTask extends Task {
     }
 
     @Override
-    public int compareTo(Task t) {
-        if (t.isMarkedDone() && this.isMarkedDone()) {
+    public int compareTo(Task other) {
+        // done tasks are equally unimportant
+        if (other.isMarkedDone() && this.isMarkedDone()) {
             return 0;
-        } else if (!t.isMarkedDone() && !this.isMarkedDone()) {
-            if (!t.hasDate()) {
-                return -1;
-            } else {
-                if (t instanceof DatedTask) {
-                    DatedTask other = (DatedTask) t;
-                    return imptDate.compareTo(other.imptDate);
-                }
-
-                // we are more important
-                return -1;
-            }
-        } else {
-            return this.isMarkedDone() ? 1 : -1;
         }
+
+        if (!other.isMarkedDone() && !this.isMarkedDone()) {
+            if (other instanceof DatedTask) {
+                DatedTask otherDated = (DatedTask) other;
+                return imptDate.compareTo(otherDated.imptDate);
+            }
+
+            // we are more important
+            return -1;
+        }
+
+        return this.isMarkedDone() ? 1 : -1;
     }
 }
