@@ -20,6 +20,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("C4PO");
             fxmlLoader.<MainWindow>getController().setC4PO(c4po);
             stage.show();
         } catch (IOException e) {
