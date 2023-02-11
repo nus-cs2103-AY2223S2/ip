@@ -1,9 +1,8 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

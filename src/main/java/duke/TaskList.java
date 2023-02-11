@@ -2,12 +2,11 @@ package duke;
 
 import java.util.LinkedList;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.util.LinkedList;
 
 /**
  * Class contains variables and methods related to modifying a list of Tasks.
@@ -64,12 +63,19 @@ public class TaskList {
     /**
      * Prints all the tasks in the list.
      */
-    public void printList() {
-        System.out.println("Here are the tasks in your list:");
+    public String printList() {
+        String response = "Here are the tasks in your list:\n";
         for (int i = 0; i < lst.size(); i++) {
             String elem = lst.get(i).toString();
-            System.out.println(String.format("%d. %s", i + 1, elem));
+            String formattedElem = String.format("%d. %s\n", i + 1, elem);
+            response += formattedElem;
         }
+        return response;
+//        System.out.println("Here are the tasks in your list:")
+//        for (int i = 0; i < lst.size(); i++) {
+//            String elem = lst.get(i).toString();
+//            System.out.println(String.format("%d. %s", i + 1, elem));
+//        }
     }
 
     /**
@@ -77,20 +83,23 @@ public class TaskList {
      * @param keyword String keyword from find command.
      * @throws DukeException If keyword is empty.
      */
-    public void printMatchingList(String keyword) throws DukeException {
+    public String printMatchingList(String keyword) throws DukeException {
         if (keyword.isEmpty()) {
             throw new DukeException("empty keyword");
         }
-        System.out.println("Here are the matching tasks in your list :)");
+        String response = "Here are the matching tasks in your list :)\n";
+//        System.out.println("Here are the matching tasks in your list :)");
         int count = 0;
         for (int i = 0; i < this.getSize(); i++) {
             Task task = this.getTask(i);
             String taskName = task.getTaskName();
             if (taskName.contains(keyword)) {
                 count++;
-                System.out.println(String.format("%d. %s", count, task));
+                response += String.format("%d. %s\n", count, task);
+//                System.out.println(String.format("%d. %s", count, task));
             }
         }
+        return response;
     }
 
     /**

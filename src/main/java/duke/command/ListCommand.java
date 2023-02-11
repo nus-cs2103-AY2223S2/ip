@@ -14,7 +14,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList lst, Ui ui) {
-        ui.showList(lst);
+    public String execute(TaskList lst, Ui ui) {
+        return ui.showList(lst);
     }
 }

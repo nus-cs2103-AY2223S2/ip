@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 import java.util.ArrayList;
 import java.util.Arrays;
