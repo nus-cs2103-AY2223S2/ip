@@ -67,7 +67,7 @@ public class TaskList implements Serializable {
             Storage.writeTaskList(this);
             return targetTask.toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new Error("The index is out of bound!");
+            throw new IndexOutOfBoundsException("The index is out of bound!");
         }
     }
 
@@ -86,7 +86,7 @@ public class TaskList implements Serializable {
             Storage.writeTaskList(this);
             return targetTask.toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new Error("The index is out of bound!");
+            throw new IndexOutOfBoundsException("The index is out of bound!");
         }
     }
 
@@ -104,7 +104,7 @@ public class TaskList implements Serializable {
             Storage.writeTaskList(this);
             return targetTask.toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new Error("The index is out of bound!");
+            throw new IndexOutOfBoundsException("The index is out of bound!");
         }
     }
 

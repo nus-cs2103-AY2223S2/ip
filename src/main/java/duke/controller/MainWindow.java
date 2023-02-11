@@ -14,10 +14,6 @@ import javafx.scene.layout.VBox;
 
 import duke.driver.GuiDriver;
 
-// import duke.driver.GuiDriver;
-// import duke.storage.Storage;
-// import duke.tasks.TaskList;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -62,13 +58,22 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+
+        // Get input from user
         String inputString = userInput.getText();
+
+        // Process the input
         String response = GuiDriver.getResponse(inputString);
+
+        // Create DialogBox to place what the user has typed and Duke's response
         DialogBox userBox = DialogBox.getUserDialog(inputString, userImage);
         DialogBox dukeBox = DialogBox.getDukeDialog(response, dukeImage);
         dialogContainer.getChildren().addAll(userBox, dukeBox);
+
+        // Reset user input
         userInput.clear();
 
+        // Terminate program if user typed 'bye'
         exitIfByeCommand(response);
     }
 

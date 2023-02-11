@@ -28,7 +28,4 @@ public class Gui extends Application {
         primaryStage.setMinHeight(600.0);
         primaryStage.setMinWidth(400.0);
     }
-
-
-
 }
