@@ -48,7 +48,7 @@ public class Ui {
 
     /**
      * Returns the input the user typed in.
-     * 
+     *
      * @return The input the user typed in.
      * @throws IOException When the user type in invalid input.
      */

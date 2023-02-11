@@ -42,6 +42,169 @@ public class Parser {
     }
 
     /**
+     * Returns the goodbye message.
+     *
+     * @return The goodbye message.
+     */
+    public String bye() {
+        String byeString = "Byeee! Hope to see you again! Signing off, duke.";
+        return byeString;
+    }
+
+    /**
+     * Returns a string to let the user know the task numbered at that list
+     * is marked done.
+     *
+     * Marks that task as done with a cross.
+     *
+     * @param taskNo The task number on the taskStorage object.
+     * @return The string to let the user know the task numbered at that list
+     * is marked done.
+     */
+    public String mark(String[] input) {
+        int taskNo = Integer.parseInt(input[1]);
+        String response = "";
+        try {
+            //int taskNo = Integer.parseInt(input[1]);
+            if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
+
+                throw new DukeException("Give a vaild number");
+            }
+            response = taskStorage.getTask(taskNo - 1).markAsDone();
+        } catch (NumberFormatException e) {
+            response =  "Number should be typed in";
+        } catch (DukeException e){
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
+    }
+
+    public String unMark(String[] input) {
+        String response = "";
+        int taskNoUnMark = Integer.parseInt(input[1]);
+        try {
+            if (taskNoUnMark > taskStorage.noTasks() || taskNoUnMark <= 0) {
+                throw new DukeException("Give a valid number");
+            }
+            response = taskStorage.getTask(taskNoUnMark - 1).markAsUnDone();
+        } catch (NumberFormatException e) {
+            response =  "Number should be typed in";
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
+    }
+
+    public String todo(String inp) {
+        String response = "";
+        try {
+            String[] inpTodo = inp.split(" ");
+            if (inpTodo.length == 1) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            String todoTask = inp.substring(5);
+            Task todo = new Todo(todoTask);
+            response = taskStorage.addTask(todo);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
+    }
+
+    public String deadline(String inp) {
+        String response = "";
+        try {
+            if (inp.length() == 8) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
+            }
+            String deadlineStr = inp.substring(9);
+            String[] inputDeadline = deadlineStr.split("/");
+            if (inputDeadline.length != 2) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
+            }
+            String deadLineTaskStr = inputDeadline[0];
+            String end = inputDeadline[1].substring(3);
+            Task deadLineTask = new Deadline(deadLineTaskStr, end);
+            response = taskStorage.addTask(deadLineTask);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
+    }
+
+    public String event(String inp) {
+        String response = "";
+        try {
+            if (inp.length() == 6) {
+                throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
+            }
+            String eventStr = inp.substring(6);
+
+            String[] eventStrsplit = eventStr.split("/");
+            if (eventStrsplit.length != 3) {
+                throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
+            }
+            String eventTaskStr = eventStrsplit[0];
+            String eventBegin = eventStrsplit[1].substring(5);
+            eventBegin = eventBegin.substring(0, eventBegin.length() - 1);
+            String eventEnd = eventStrsplit[2].substring(3);
+            Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
+            response = taskStorage.addTask(eventTask);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
+    }
+
+    public String delete(String inp) {
+        String response = "";
+        String[] input = inp.split(" ");
+        try {
+            int taskNo = Integer.parseInt(input[1]);
+            if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
+                throw new DukeException("Give a vaild number");
+            }
+            Task eventTask = taskStorage.getTask(taskNo - 1);
+            response = taskStorage.deleteTask(eventTask);
+        } catch (NumberFormatException e) {
+            response = "Number should be typed in";
+        } catch (DukeException e){
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
+    }
+
+    public String find(String inp) {
+        String response = "";
+        try {
+            StringBuilder chunkOfText = new StringBuilder();
+            chunkOfText.append("Here are the matching tasks in your list:\n");
+            if (inp.length() == 5) {
+                throw new DukeException("☹ OOPS!!! There's nothing to find in empty input!");
+            }
+            String findString = inp.substring(5);
+            TaskStorage findStorage = new TaskStorage();
+            for (int i = 0; i < taskStorage.noTasks(); i++) {
+                Task t = taskStorage.getTask(i);
+                if (t.isInDescription(findString)) {
+                    findStorage.addTaskWithoutPrinting(t);
+                }
+            }
+            response = findStorage.listTask();
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
+    }
+
+    /**
      * The main logic of the program.
      * Execute a command based on the string input given.
      *
@@ -58,141 +221,38 @@ public class Parser {
                 break;
 
             case "bye":
-                response = "Byeee! Hope to see you again! Signing off, duke.";
+                response = this.bye();
                 break;
 
             case "mark":
-                try {
-                    int taskNo = Integer.parseInt(input[1]);
-                    if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
-
-                        throw new DukeException("Give a vaild number");
-                    }
-                    response = taskStorage.getTask(taskNo - 1).markAsDone();
-                } catch (NumberFormatException e) {
-                    response =  "Number should be typed in";
-                } catch (DukeException e){
-                    response = e.getMessage();
-                } finally {
-                    break;
-                }
+                response = this.mark(input);
+                break;
 
             case "unmark":
-                try {
-                    int taskNoUnmark = Integer.parseInt(input[1]);
-                    if (taskNoUnmark > taskStorage.noTasks() || taskNoUnmark <= 0) {
-                        throw new DukeException("Give a valid number");
-                    }
-                    response = taskStorage.getTask(taskNoUnmark - 1).markAsUnDone();
-                } catch (NumberFormatException e) {
-                    response =  "Number should be typed in";
-                } catch (DukeException e) {
-                    response = e.getMessage();
-                } finally {
-                    break;
-                }
+                response = this.unMark(input);
+                break;
 
             case "todo":
-                try {
-                    String[] inpTodo = inp.split(" ");
-                    if (inpTodo.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    String todoTask = inp.substring(5);
-                    Task todo = new Todo(todoTask);
-                    response = taskStorage.addTask(todo);
-                } catch (DukeException e) {
-                    response = e.getMessage();
-                } finally {
-                    break;
-                }
-
+                response = this.todo(inp);
+                break;
 
             case "deadline":
-                try {
-                    if (inp.length() == 8) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
-                    }
-                    String deadlineStr = inp.substring(9);
-                    String[] inputDeadline = deadlineStr.split("/");
-                    if (inputDeadline.length != 2) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
-                    }
-                    String deadLineTaskStr = inputDeadline[0];
-                    String end = inputDeadline[1].substring(3);
-                    Task deadLineTask = new Deadline(deadLineTaskStr, end);
-                    response = taskStorage.addTask(deadLineTask);
-                } catch (DukeException e) {
-                    response = e.getMessage();
-                } finally {
-                    break;
-                }
-
+                response = this.deadline(inp);
+                break;
 
             case "event":
-                try {
-                    if (inp.length() == 6) {
-                        throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
-                    }
-                    String eventStr = inp.substring(6);
-
-                    String[] eventStrsplit = eventStr.split("/");
-                    if (eventStrsplit.length != 3) {
-                        throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
-                    }
-                    String eventTaskStr = eventStrsplit[0];
-                    String eventBegin = eventStrsplit[1].substring(5);
-                    eventBegin = eventBegin.substring(0, eventBegin.length() - 1);
-                    String eventEnd = eventStrsplit[2].substring(3);
-                    Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
-                    response = taskStorage.addTask(eventTask);
-                } catch (DukeException e) {
-                    response = e.getMessage();
-                } finally {
-                    break;
-                }
+                response = this.event(inp);
+                break;
 
             case "delete":
-                try {
-                    int taskNo = Integer.parseInt(input[1]);
-                    if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
-                        throw new DukeException("Give a vaild number");
-                    }
-                    Task eventTask = taskStorage.getTask(taskNo - 1);
-                    response = taskStorage.deleteTask(eventTask);
-                } catch (NumberFormatException e) {
-                    response = "Number should be typed in";
-                } catch (DukeException e){
-                    response = e.getMessage();
-                } finally {
-                    break;
-                }
+                response = this.delete(inp);
+                break;
 
             case "find":
-                try {
-                    StringBuilder chunkOfText = new StringBuilder();
-                    chunkOfText.append("Here are the matching tasks in your list:\n");
-                    if (inp.length() == 5) {
-                        throw new DukeException("☹ OOPS!!! There's nothing to find in empty input!");
-                    }
-                    String findString = inp.substring(5);
-                    TaskStorage findStorage = new TaskStorage();
-                    for (int i = 0; i < taskStorage.noTasks(); i++) {
-                        Task t = taskStorage.getTask(i);
-                        if (t.isInDescription(findString)) {
-                            findStorage.addTaskWithoutPrinting(t);
-                        }
-                    }
-                    response = findStorage.listTask();
-                } catch (DukeException e) {
-                    response = e.getMessage();
-                } finally {
-                    break;
-                }
+                response = this.find(inp);
 
             default:
-                DukeException dukeException = new DukeException();
-                response = dukeException.getMessage();
+                response = new DukeException().getMessage();
         }
         return response;
     }
