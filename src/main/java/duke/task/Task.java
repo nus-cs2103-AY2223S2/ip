@@ -45,7 +45,7 @@ public abstract class Task {
      * @return True if description contains s. Else False.
      */
     public boolean contain(String s) {
-        int index = description.indexOf(s);
+        int index = description.toLowerCase().indexOf(s);
 
         return index != -1;
     }

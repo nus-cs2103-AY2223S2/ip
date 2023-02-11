@@ -162,7 +162,7 @@ public class TaskList {
         }
         int index = 1;
         for (Task task : tasks) {
-            if (task.contain(s)) {
+            if (task.contain(s.toLowerCase())) {
                 output.append(String.format("%d.%s\n", index, task));
             }
             index++;
