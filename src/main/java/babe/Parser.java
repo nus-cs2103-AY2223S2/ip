@@ -21,11 +21,6 @@ class Parser {
     private static ArrayList<String> userInput = new ArrayList<>();
 
     /**
-     * Length of user input.
-     */
-    private static int userInputLen = 0;
-
-    /**
      * Rebuilds a string from ArrayList from the starting index to the ending index (not inclusive).
      * A helper function to recover the original user input from userInput starting from the startingIndex
      * to the ending index (not inclusive).
@@ -91,6 +86,14 @@ class Parser {
         }
     }
 
+    private static ArrayList<String> processIndices() {
+        String argument = Parser.rebuildUserInput(1, userInput.size());
+        argument = argument.replace(" ", "");
+        ArrayList<String> indices = new ArrayList<>(Arrays.asList(argument.split(",")));
+        return indices;
+    }
+
+
 
     public static ArrayList<String> parse(String input)
             throws NoDescriptionException, NonsenseInputException, WrongDateFormatException {
@@ -153,7 +156,7 @@ class Parser {
 
         } else if (instruction.equals("delete")) {
             checkIfDescriptionAvail(inputLength);
-            outputs.add(userInput.get(1));
+            outputs.addAll(Parser.processIndices());
 
         } else if (instruction.equals("find")) {
             checkIfDescriptionAvail(inputLength);
