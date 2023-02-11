@@ -25,6 +25,11 @@ public class Deadline extends Task {
         }
     }
 
+    public void setBy(LocalDateTime by, boolean hasTime) {
+        this.by = by;
+        this.hasTime = hasTime;
+    }
+
     /**
      * Returns the deadline due date and time in a format suitable for storage.
      * If the due date does not include a time, it returns a LocalDate. If it includes a time, it returns

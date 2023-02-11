@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -11,6 +13,7 @@ import java.util.Scanner;
  * where the data will be used in command execution.
  */
 public class Parser {
+    private static ArrayList<String> fields = new ArrayList<>(Arrays.asList("/desc", "/by", "/from", "/to"));
     /**
      * Parses the given user input (commandString) and executes the correct action based on that. Returns
      * a boolean to indicate if the application should close due to the user's input.
@@ -42,6 +45,8 @@ public class Parser {
             return handleTaskIdxCommands(commandStream, taskList, CommandTypes.DELETE);
         case "find":
             return handleFind(commandStream, taskList);
+        case "edit":
+            return handleTaskIdxCommands(commandStream, taskList, CommandTypes.EDIT);
         default:
             return new ErrorCommand(MessageGenerator.genUnknownCommandMsg());
         }
@@ -74,6 +79,8 @@ public class Parser {
                 return new MarkOrUnmarkCommand(taskIdx, taskList, false);
             case MARK:
                 return new MarkOrUnmarkCommand(taskIdx, taskList, true);
+            case EDIT:
+                return handleEdit(taskIdx, commandStream, taskList);
             }
 
         } catch (NumberFormatException e) {
@@ -190,5 +197,29 @@ public class Parser {
 
         String keyword = commandStream.next();
         return new FindCommand(keyword, taskList);
+    }
+
+    private static Command handleEdit(Integer taskIdx, Scanner commandStream, TaskList taskList) {
+        assert taskIdx != null;
+        assert taskList != null;
+
+        if (!commandStream.hasNext()) {
+            return new ErrorCommand(MessageGenerator.genMissingFieldMsg(""));
+        }
+
+        String field = commandStream.next();
+
+        if (!fields.contains(field)) {
+            return new ErrorCommand(MessageGenerator.genInvalidFieldMsg(field));
+        }
+
+        String newValue = "";
+        while (commandStream.hasNext()) {
+            newValue += commandStream.next() + " ";
+        }
+
+        newValue = newValue.trim();
+
+        return new EditCommand(taskIdx, field, newValue, taskList);
     }
 }

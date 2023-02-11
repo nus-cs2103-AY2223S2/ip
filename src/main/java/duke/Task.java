@@ -29,6 +29,10 @@ public abstract class Task {
         return this.description;
     }
 
+    public void setDescription(String desc) {
+        this.description = desc;
+    }
+
     public boolean isDone() {
         return isDone;
     }
