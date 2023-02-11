@@ -23,6 +23,7 @@ public class Storage {
     private static final String DEFAULT_SAVE_PATH = "./data/duke/tasks.csv";
 
     private final TaskList tasklist;
+    private String saveFilePath;
 
     /**
      * Constructs instance of Storage using a reference to a TaskList.
@@ -32,6 +33,7 @@ public class Storage {
      */
     public Storage(TaskList taskList) {
         this.tasklist = taskList;
+        this.saveFilePath = DEFAULT_SAVE_PATH;
     }
 
     /**
@@ -42,7 +44,7 @@ public class Storage {
 
         // Prepare data into string format for saving
         String fileDataStr = tasklist.prepareFileSave();
-        writeToFile(DEFAULT_SAVE_PATH, fileDataStr);
+        writeToFile(saveFilePath, fileDataStr);
     }
 
     /**
@@ -53,7 +55,7 @@ public class Storage {
         assert tasklist != null : "Storage has no reference to taskList instance";
 
         DateTimeParser parser = new DateTimeParser();
-        Path f = Paths.get(DEFAULT_SAVE_PATH);
+        Path f = Paths.get(saveFilePath);
 
         // No saved data file -> do nothing
         if (!Files.exists(f)) {
@@ -110,6 +112,24 @@ public class Storage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Returns the file path which this storage will write to.
+     *
+     * @return File path to write to.
+     */
+    String getSaveFilePath() {
+        return saveFilePath;
+    }
+
+    /**
+     * Updates the path of the desired save file with specified path.
+     *
+     * @param path New path of save file location.
+     */
+    void setSaveFilePath(String path) {
+        saveFilePath = path;
     }
 
 }
