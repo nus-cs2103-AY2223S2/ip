@@ -34,4 +34,10 @@
 > !	Provide deadline
 > !	Invalid format for deadline. Use `2023-02-25 23:00`
 > !	Invalid format for deadline. Use `2023-02-25 23:00`
+> <	Added [D][ ] abcd (by: 2023-02-28T12:00)
+<	List now contains 3 tasks
+> <	1. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+<	2. [D][ ] abcd (by: 2023-02-28T12:00)
+> !	Provide query
+> <	1. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
 > <<<	Bye

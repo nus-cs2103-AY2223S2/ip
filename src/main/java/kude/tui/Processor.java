@@ -101,6 +101,18 @@ public class Processor {
             ctx.getTasks().delete(task);
             ctx.notifyDeleted(task);
         });
+
+        register("find", ctx -> {
+            var query = ctx.getArg("query");
+            var idx = new Integer[] {0};
+
+            ctx.getTasks().list()
+                .filter(t -> t.getContent().toLowerCase().contains(query.toLowerCase()))
+                .forEachOrdered(task -> {
+                    idx[0]++;
+                    ctx.getUi().writeLine(idx[0] + ". " + task);
+                });
+        });
     }
 
     public void register(String command, Command cmd) {
