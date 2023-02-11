@@ -4,16 +4,16 @@ import duke.TaskList;
 import duke.commands.tasks.Task;
 
 /**
- * This class handles addition commands
+ * This class handles addition commands.
  */
 public class Add extends Command {
     private final Task task;
 
     /**
-     * Constructor
+     * Creates the Add class.
      *
-     * @param message The full command represented by this class
-     * @param task The task to be added to the task list
+     * @param message The full command represented by this class.
+     * @param task The task to be added to the task list.
      */
     public Add(String message, Task task) {
         super(message);
@@ -21,9 +21,9 @@ public class Add extends Command {
     }
 
     /**
-     * Adds the task to the specified list
+     * Adds the task to the specified list.
      *
-     * @param toDoList The task list to be edited
+     * @param toDoList The task list to be edited.
      */
     @Override
     public void execute(TaskList toDoList) {
@@ -31,7 +31,7 @@ public class Add extends Command {
     }
 
     @Override
-    public String toString() {
+    public String getResponseOutput() {
         return String.format("Got it! I've added this task:\n" + "    %s\n",
                 this.task.toString());
     }

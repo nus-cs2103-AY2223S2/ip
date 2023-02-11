@@ -6,7 +6,7 @@ import duke.commands.tasks.ToDo;
 import duke.dukeexception.DukeException;
 
 /**
- * This class interprets the user command
+ * This class interprets a user command
  */
 public class Parser {
     private final String command;
@@ -84,6 +84,11 @@ public class Parser {
      * @throws DukeException when command is invalid
      */
     public Command process() throws DukeException {
+        try {
+            checkLength(this.command);
+        } catch (DukeException ex) {
+            throw ex;
+        }
         String[] commandArr = this.command.split(" ");
         int editIndex = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
         String description = this.getTaskName();

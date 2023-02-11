@@ -18,26 +18,35 @@ import duke.dukeexception.DukeException;
 public class Storage {
     private final File fileDirectory;
     private final File file;
+    private final Ui ui;
+    private static final String INITIALIZATION_ERROR = "Unable to initialize file/directory, " +
+            "see error message here: ";
+    private static final String LOAD_ERROR = "Unable to load existing to-do list, " +
+            "see error message here: ";
+    private static final String UPDATE_ERROR = "Unable to update to-do list, " +
+            "see error message here: ";
 
     public Storage(String filePath) {
         this.fileDirectory = new File(filePath);
         this.file = new File(filePath + "/text.txt");
+        this.ui = new Ui();
     }
 
-    public TaskList initialise() throws DukeException {
+    public TaskList initialise() {
         try {
             fileDirectory.mkdirs();
             file.createNewFile();
         } catch (IOException ex) {
-            throw new DukeException("Cannot initialise directory/file");
+            this.ui.printExceptionMessage(new DukeException(Storage.INITIALIZATION_ERROR + ex.getMessage()));
+            return new TaskList();
         }
-        TaskList toDoList;
         try {
-            toDoList = loadListFromFile();
+            TaskList toDoList = loadListFromFile();
+            return toDoList;
         } catch (IOException ex) {
-            throw new DukeException("Error loading toDoList from storage!");
+            this.ui.printExceptionMessage(new DukeException(Storage.LOAD_ERROR + ex.getMessage()));
+            return new TaskList();
         }
-        return toDoList;
     }
 
     private TaskList loadListFromFile() throws IOException {
@@ -57,6 +66,7 @@ public class Storage {
         // index 1 is task completion status (done or not)
         // index 2 is task description
         // index 3 to 4 are task times
+        // todo: put those into constants
         String[] taskDescription = task.split("~");
         switch (taskDescription[0]) {
         case "T":
@@ -82,8 +92,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException ex) {
-            System.out.println("Error writing to file!");
-            System.out.println(ex.getStackTrace());
+            this.ui.printExceptionMessage(new DukeException(Storage.UPDATE_ERROR + ex.getMessage()));
         }
     }
 }

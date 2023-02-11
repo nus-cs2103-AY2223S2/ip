@@ -4,7 +4,7 @@ import duke.TaskList;
 import duke.commands.tasks.Task;
 
 /**
- * This class handles deletion commands
+ * This class handles deletion commands.
  */
 public class Delete extends Command {
     private final int index;
@@ -19,9 +19,9 @@ public class Delete extends Command {
     }
 
     /**
-     * Deletes a task from the task list
+     * Deletes a task from the task list.
      *
-     * @param toDoList The task list to be edited
+     * @param toDoList The task list to be edited.
      */
     @Override
     public void execute(TaskList toDoList) {
@@ -31,9 +31,10 @@ public class Delete extends Command {
     }
 
     @Override
-    public String toString() {
+    public String getResponseOutput() {
         return String.format("Noted. I've removed this task:\n"
-                        + "    %s\n" + "Now you have %d tasks in the list.",
+                        + "    %s\n"
+                        + "Now you have %d tasks in the list.",
                 this.removed, this.newSize);
     }
 }
