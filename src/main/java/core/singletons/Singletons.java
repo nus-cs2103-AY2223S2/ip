@@ -97,5 +97,6 @@ public class Singletons {
             lazySingletons.remove(cls);
             return object;
         }
+        throw new RuntimeException("This should never happen.");
     }
 }
