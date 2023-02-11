@@ -1,3 +1,0 @@
-T|borrow another book| 
-D|return book |X|2019-10-15T13:25
-E|project meeting | |2019-11-15T10:00|2019-11-25T12:00
