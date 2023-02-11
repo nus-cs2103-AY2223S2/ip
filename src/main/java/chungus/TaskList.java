@@ -101,7 +101,7 @@ class TaskList {
     }
 
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      * 
      * @param idx The task's index.
      */
@@ -110,7 +110,7 @@ class TaskList {
     }
 
     /**
-     * Mark a task as not done.
+     * Marks a task as not done.
      * 
      * @param idx The task's index.
      */
