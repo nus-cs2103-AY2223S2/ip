@@ -4,8 +4,8 @@ package duke;
  * Represents a Task that is an event.
  */
 public class Event extends Task {
-    protected final String from;
-    protected final String to;
+    protected String from;
+    protected String to;
 
     public Event(String description, String from, String to) {
         super(description);
@@ -13,8 +13,17 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public void setFrom(String newFrom) {
+        this.from = newFrom;
+    }
+
+    public void setTo(String newTo) {
+        this.to = newTo;
+    }
+
     /**
      * Overrides the default Object::toString.
+     *
      * @return String representation of an Event object.
      */
     @Override

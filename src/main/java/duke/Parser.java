@@ -31,8 +31,6 @@ public class Parser {
         checkWrongTask(next);
         checkEmptyDescription(arrNext);
 
-        assert next.equals("list") || after != null;
-
         Task inputTask;
         switch (next) {
         case "bye": {
@@ -77,6 +75,12 @@ public class Parser {
             checkOutOfBounds(arrNext, taskList);
             inputTask = deleteTask(storage, taskList, after);
             return ui.showDelete(inputTask, taskList.getNumberOfTasks());
+        }
+        case "update": {
+            String after = arrNext[1];
+            String[] splitUpdate = after.split(" ", 2);
+            inputTask = updateTask(storage, taskList, splitUpdate[0], splitUpdate[1]);
+            return ui.showUpdate(inputTask);
         }
         default:
             throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
@@ -148,6 +152,18 @@ public class Parser {
         return taskToDelete;
     }
 
+    private static Task updateTask(Storage storage, TaskList taskList, String taskID, String newDesc) {
+        int number = Integer.parseInt(taskID) - 1;
+        Task taskToUpdate = taskList.getTask(number);
+        if (taskToUpdate instanceof Event) {
+            String[] newDescArr = newDesc.split("/");
+            ((Event) taskToUpdate).setFrom(newDescArr[1].substring(5));
+            ((Event) taskToUpdate).setTo(newDescArr[2].substring(3));
+        }
+        storage.updateFile(taskList);
+        return taskToUpdate;
+    }
+
 
     /**
      * Checks if a task has an empty description.
@@ -171,7 +187,7 @@ public class Parser {
     }
 
     public static void checkWrongTask(String keyword) throws WrongTask {
-        List<String> keywords = Arrays.asList("bye", "todo", "deadline", "event", "mark", "unmark", "list", "delete", "find");
+        List<String> keywords = Arrays.asList("bye", "todo", "deadline", "event", "mark", "unmark", "list", "delete", "find", "update");
         boolean isKeyword = keywords.contains(keyword);
         if (!isKeyword) {
             throw new WrongTask(" I'm sorry, but I don't know what that means :-(");

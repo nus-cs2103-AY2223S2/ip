@@ -39,6 +39,10 @@ public class Ui {
         return "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
     }
 
+    public String showUpdate(Task taskToUpdate) {
+        return "OK, I've updated this task:\n" + taskToUpdate;
+    }
+
     public String printMatchingTasks(TaskList tasklist) {
         String result = "Here are the matching tasks in your list:\n";
         for (int i = 1; i < tasklist.getNumberOfTasks() + 1; i++) {
