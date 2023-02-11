@@ -67,6 +67,7 @@ public class Storage {
      */
     private void writeToFile(String s) throws DukeWriteException {
         try {
+            assert s != null;
             FileWriter fw = new FileWriter(path, true);
             fw.write(s);
             fw.close();
@@ -133,7 +134,10 @@ public class Storage {
     private void createTasks(Scanner scanner, ArrayList<Task> tasks) throws DukeUnknownCommandException {
         while (scanner.hasNext()) {
             String fn = scanner.next();
+            assert fn != null;
+            
             String[] details = scanner.nextLine().strip().split("-");
+
             switch (fn) {
                 case "todo":
                     tasks.add(new ToDos(details[0], Boolean.parseBoolean(details[1])));
