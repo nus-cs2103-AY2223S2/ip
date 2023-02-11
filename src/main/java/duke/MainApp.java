@@ -1,5 +1,6 @@
 package duke;
 
+import duke.ui.components.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class MainApp extends Application {
     private ScrollPane scrollPane;
@@ -17,6 +20,9 @@ public class MainApp extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -69,13 +75,11 @@ public class MainApp extends Application {
 
         // Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         // Scroll to bottom
@@ -88,5 +92,19 @@ public class MainApp extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 }
