@@ -136,7 +136,7 @@ public class DukeIo {
     public String showFiltered(List<Task> filteredTasks) {
         StringBuilder str = new StringBuilder();
         int taskCount = filteredTasks.size();
-        str.append("Find results:");
+        str.append("Find results:\n");
         for (Integer i = 0; i < taskCount; i++) {
             String showString = "   " + Integer.toString(i + 1) + ": "
                                  + filteredTasks.get(i).toString();

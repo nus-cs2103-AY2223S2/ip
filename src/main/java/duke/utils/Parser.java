@@ -144,16 +144,17 @@ public class Parser {
     }
 
     private Command parseFind(String[] tokens) {
+        if (tokens.length == 1) {
+            return new InvalidCommand(
+                    new InvalidCommandException(
+                            InvalidCommandException.FIND_FORMAT_EXCEPTION));
+        }
         StringBuilder s = new StringBuilder();
         for (String search : tokens) {
             if (!search.equals("find")) {
-                
+                s.append(search);
             }
         }
-        s.append(
-                Arrays.stream(tokens)
-                .filter(str -> !str.equals("find"))
-                .toArray());
         return new FindCommand(s.toString());
     }
 
