@@ -36,7 +36,7 @@ and the current number of tasks in the task list.
 
 <details>
 <summary>Example</summary>
-
+<p>
 Sample input: `todo first task`\
 Sample output:
 ```
@@ -44,6 +44,7 @@ Got it. I've added this task:
 	[T][ ] first task
 Now you have 1 task(s) in the list.
 ```
+</p>
 </details>
 
 
@@ -56,9 +57,8 @@ Expected outcome:\
 The program will give a preview of the newly added *Deadline*,
 and the current number of tasks in the task list.
 
-<details>
-<summary>Example</summary>
-
+<details><summary>Example</summary>
+<p>
 Sample input: `deadline some other task /by 2023-01-01 00:00`\
 Sample output:
 ```
@@ -66,6 +66,7 @@ Got it. I've added this task:
 	[D][ ] some other task (By: 01 JANUARY 2023 00:00)
 Now you have 2 task(s) in the list.
 ```
+</p>
 </details>
 
 ### `event` - Add an *Event* Task
