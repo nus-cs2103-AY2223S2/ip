@@ -2,6 +2,7 @@ package treebot;
 
 import commands.Command;
 import exception.TreeBotException;
+
 import tasks.TaskFactory;
 import tasks.TaskList;
 import utils.Parser;
@@ -10,17 +11,12 @@ import utils.Ui;
 
 import java.io.FileNotFoundException;
 
-
 public class TreeBot {
     private static final String EXIT_TOKEN = "bye";
     private TaskList taskList;
     private Ui ui = new Ui();
     private Storage storage;
     private Parser parser = new Parser(new TaskFactory());
-
-    public TreeBot() {
-
-    }
 
     public TreeBot(String filePath) {
         storage = new Storage(filePath);
@@ -49,6 +45,16 @@ public class TreeBot {
             }
         }
     }
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (TreeBotException e) {
+            return e.getMessage();
+        }
+    }
+
 
     public static void main(String[] args) {
         TreeBot treeBot = new TreeBot("data/treebot.txt");
