@@ -86,7 +86,7 @@ public class FileManagement {
 
 
     /**
-     * A helper method to decode encrypted information regarding a task.
+     * Decode encrypted information regarding a task.
      * @param task String encoding of task.
      * @return The task corresponding to its encoded string representation.
      * @throws InvalidDateException Throws an InvalidDateException if an invalid date format was saved for any task.
