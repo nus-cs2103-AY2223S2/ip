@@ -50,4 +50,8 @@ public class TreeBot {
         }
     }
 
+    public static void main(String[] args) {
+        TreeBot treeBot = new TreeBot("data/treebot.txt");
+        treeBot.run();
+    }
 }
