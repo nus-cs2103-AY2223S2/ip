@@ -93,11 +93,12 @@ public class MainApp extends Application {
         String response = duke.getResponse(userInput.getText());
         if (response.equals("bye")) {
             stage.close();
+            return;
         }
         Label dukeText = new Label(response);
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(userImage)),
-                new DialogBox(dukeText, new ImageView(dukeImage))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
     }
