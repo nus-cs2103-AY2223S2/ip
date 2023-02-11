@@ -131,7 +131,11 @@ public class Bob extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // Formatting
+        format(stage, mainLayout);
+    }
+
+    // Format JavaFX
+    private void format(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("Bob");
         stage.setResizable(false);
         stage.setMinHeight(600);
@@ -160,6 +164,7 @@ public class Bob extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
+
 
     private void setHandlers() {
         sendButton.setOnMouseClicked((event) -> {
