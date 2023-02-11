@@ -25,7 +25,7 @@ public class LastCommand {
     }
 
     /**
-     * Undo the last command
+     * Undoes the last command to the tasks list
      *
      * @param tasks reference to task list
      */

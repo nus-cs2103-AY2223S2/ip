@@ -53,6 +53,7 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
+            assert !input.isEmpty() : "Please type something!";
             ICommand cmd = ui.readCommand(taskManger, input);
             cmd.run();
             return cmd.getMsg();

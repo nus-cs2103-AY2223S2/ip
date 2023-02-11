@@ -79,8 +79,8 @@ public class TaskManager {
     }
 
     /**
-     * Undo an action to the task list
-     * Returns the feedback result
+     * Undoes the last action to the task list
+     * and returns the feedback result
      */
     public String undo() throws DukeException {
         String result;

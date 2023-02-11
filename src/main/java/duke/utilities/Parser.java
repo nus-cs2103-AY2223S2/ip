@@ -28,7 +28,7 @@ public class Parser {
     public static final DateFormat DATE_OUTPUT_FORMAT = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
 
 
-    private boolean processed = false;
+    private boolean isProcessed = false;
     private String input;
     private int index;
     private String description;
@@ -83,12 +83,12 @@ public class Parser {
 
 
     /**
-     * Return the 'by' date of deadline task
+     * Returns the 'by' date of deadline task
      *
      * @throws DukeException IF error occur
      */
     public Date getBy() throws DukeException {
-        assert processed : "Processed the Parser first";
+        assert isProcessed : "Processed the Parser first";
 
         if (by == null) {
             throw new ContentEmpty("'by'");
@@ -105,7 +105,7 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public void forDeadline() throws DukeException {
-        if (!processed) {
+        if (!isProcessed) {
             if (!input.contains("/by")) {
                 throw new IncompleteCommandException("/by");
             }
@@ -122,7 +122,7 @@ public class Parser {
                 throw new DateParseException(e.getMessage());
             }
 
-            processed = true;
+            isProcessed = true;
         }
     }
 
@@ -132,7 +132,7 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getFrom() throws DukeException {
-        assert processed : "Processed the Parser first";
+        assert isProcessed : "Processed the Parser first";
 
         if (from == null) {
             throw new ContentEmpty("'from'");
@@ -146,7 +146,7 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getTo() throws DukeException {
-        assert processed : "Processed the Parser first";
+        assert isProcessed : "Processed the Parser first";
 
         if (to == null) {
             throw new ContentEmpty("'to'");
@@ -177,7 +177,7 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public int getIndex() throws DukeException {
-        if (!processed) {
+        if (!isProcessed) {
             try {
                 index = Integer.parseInt(input) - 1;
             } catch (NumberFormatException e) {
@@ -186,7 +186,7 @@ public class Parser {
             if (index < 0 || index > taskManager.size() - 1) {
                 throw new InvalidMarkInput(input);
             }
-            processed = true;
+            isProcessed = true;
         }
         return index;
     }
@@ -232,7 +232,7 @@ public class Parser {
             throw new DateParseException(e.getMessage());
         }
         description = result[0].trim();
-        processed = true;
+        isProcessed = true;
 
     }
 
@@ -242,7 +242,7 @@ public class Parser {
      */
     public void forTodo() {
         description = input;
-        processed = true;
+        isProcessed = true;
     }
 
     /**
@@ -251,7 +251,7 @@ public class Parser {
      */
     public void forFind() {
         description = input;
-        processed = true;
+        isProcessed = true;
     }
 
 

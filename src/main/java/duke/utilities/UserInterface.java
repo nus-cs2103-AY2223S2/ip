@@ -45,7 +45,7 @@ public class UserInterface {
     }
 
     /**
-     * The function to show when first start up the Duke and welcome the user
+     * Prints the welcome message when first start up the Duke app
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
