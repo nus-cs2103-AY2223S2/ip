@@ -37,6 +37,8 @@ public class AddCommand extends Command {
         } catch (IOException e) {
             result += ("\nfailed to update tasks locally: " + e.getMessage());
         }
+        assert result == "-->-->-->-->-->-->-->-->-->-->-->\n    " + "Task successfully added:\n    " + task
+            + "\n<--<--<--<--<--<--<--<--<--<--\n\n" : "wrong add message";
         return result;
     }
 }

@@ -42,6 +42,15 @@ public class TaskList {
     }
 
     /**
+     * method that returns a Task at a specific index
+     * @param taskNo index of the Task to be returned
+     * @return the Task at the index specified
+     */
+    public Task get(int taskNo) {
+        return tasks.get(taskNo - 1);
+    }
+
+    /**
      * a method that marks a particular task as "Done"
      * @param taskNumber the number of the Task to be marked
      * @return the updated Task
