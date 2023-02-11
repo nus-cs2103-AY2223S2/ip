@@ -12,6 +12,7 @@ public class Duke {
 
     /**
      * The construction of duke
+     * @param filePath file path for saving data
      */
     public Duke(String filePath) {
         Ui ui = new Ui();

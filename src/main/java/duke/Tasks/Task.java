@@ -24,7 +24,7 @@ public class Task {
      * @return "X" or " "
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? "X" : "   ");
     }
 
     /**

@@ -27,7 +27,7 @@ public class Storage {
     }
 
     /**
-     * method for reading data from saving file
+     * Reads data from saving file
      * @return tasks list from saving file
      * @throws IOException exception
      */
@@ -66,7 +66,7 @@ public class Storage {
     }
 
     /**
-     * method for updating date in saving file
+     * Updates date in saving file
      * @param t task
      * @throws IOException exception
      */
