@@ -28,6 +28,7 @@ public class TaskList {
     }
 
     public Task getTask(int index) {
+        assert this.getSize() > index : "index should not be out of range";
         return this.tasks.get(index);
     }
 

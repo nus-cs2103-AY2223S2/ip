@@ -30,6 +30,7 @@ public class Duke {
 
     public String getResponse(String input) {
         String[] parsed = Parser.parse(input);
+        assert parsed.length == 2 : "result from Parser should have 2 elements";
         return Parser.execute(parsed[0], parsed[1], tasks);
     }
 
