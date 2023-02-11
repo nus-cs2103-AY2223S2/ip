@@ -4,26 +4,27 @@ package duke;
  * Class that defines the Task object
  */
 public class Task {
-    /** Whether the task is completed or not */
+
     protected boolean isCompleted = false;
-    /** Description of the task */
     protected String title;
-    /** Type of Task */
-    protected char taskType; // can be T, D or E
+    public enum TaskType {
+        T,D,E;
+    }
+    protected TaskType taskType;
 
     /**
      * Default constructor for Task objects
      *
-     * @param title specifies the description of this task object
+     * @param isCompleted Boolean that specifies whether the task is completed
+     * @param title String that specifies the description of this task object
      * @param taskType specifies whether the task is a deadline, todo or event
      */
-    public Task(boolean isCompleted, String title, char taskType) {
+    public Task(boolean isCompleted, String title, TaskType taskType) {
         this.isCompleted = isCompleted;
         this.title = title;
         this.taskType = taskType;
     }
 
-    // Methods:
     public String toString() {
         if (this.isCompleted) {
             return "[" + taskType + "]" + " [X] " + title;

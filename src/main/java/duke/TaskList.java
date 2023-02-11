@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    /** ArrayList of tasks*/
     private ArrayList<Task> taskList;
 
     /**
@@ -61,11 +60,13 @@ public class TaskList {
      */
     public TaskList findTasks(String keyword) {
         TaskList resultList = new TaskList();
+
         for (Task currTask : this.taskList) {
             if (currTask.title.contains(keyword)) {
                 resultList.addTask(currTask);
             }
         }
+
         return resultList;
     }
 
@@ -76,10 +77,12 @@ public class TaskList {
     public String printList() {
         int pos = 0;
         StringBuilder result = new StringBuilder();
+
         while (pos < this.taskList.size()) {
             result.append(pos + 1).append(". ").append(this.taskList.get(pos).toString()).append("\n");
             pos++;
         }
+
         return result.append("End of list!\n").toString();
     }
 }

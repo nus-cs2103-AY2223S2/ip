@@ -8,13 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /** Start date for this event stored as a String*/
     protected String fromDate;
-    /** Start date for this event stored as a LocalDate*/
+    /** Same value as fromDate, but stored as a LocalDate object */
     protected LocalDate startDate;
-    /** End date for this event */
     protected String toDate;
-    /** End date for this event stored as a LocalDate*/
+    /** Same value as toDate, but stored as a LocalDate object */
     protected LocalDate endDate;
 
     /**
@@ -23,7 +21,7 @@ public class Event extends Task {
      * @param userInput specifies the fromDate, toDate and title of an Event object
      */
     public Event(boolean isCompleted, String userInput) {
-        super(isCompleted, userInput.substring(6, userInput.indexOf("/from ") - 1), 'E');
+        super(isCompleted, userInput.substring(6, userInput.indexOf("/from ") - 1), TaskType.E);
         this.fromDate = userInput.substring(userInput.indexOf("/from ") + 6, userInput.indexOf("/to ") - 1);
         this.startDate = LocalDate.parse(fromDate);
         this.toDate = userInput.substring(userInput.indexOf("/to ") + 4);

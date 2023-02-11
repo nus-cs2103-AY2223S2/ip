@@ -35,10 +35,18 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Creates and returns a new DialogBox object containing user's label and image
+     * @return DialogBox containing user's label and image
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Creates and returns a new DialogBox object containing Duke's label and image
+     * @return DialogBox containing Duke's label and image
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
