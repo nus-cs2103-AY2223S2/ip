@@ -147,6 +147,7 @@ public class Parser {
      *                       e.g)
      */
     private static String createDeadline(String[] command, TaskList list) throws DukeException {
+
         if (command.length != 4) {
             throw wrongCommandFormat;
         }
@@ -206,7 +207,7 @@ public class Parser {
      */
     public static String readCommand(String input, TaskList list) throws DukeException {
         String[] command = input.trim().split(" ");
-
+        assert command.length < 7 : "Command has too many parameters!";
         try {
             switch (CommandMap.valueOf(command[0])) {
                 case list:
