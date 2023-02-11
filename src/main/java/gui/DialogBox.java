@@ -21,6 +21,14 @@ public class DialogBox extends HBox {
     private static double WIDTH = 100.0;
     private static double HEIGHT = 100.0;
     private static double BORDER_WIDTH = 8;
+    private static double cornerRadius = 10;
+
+    /*
+    More info about color can be found at
+    https://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html
+     */
+    private static Color userBoxColor = Color.ALICEBLUE;
+    private static Color dukeBoxColor = Color.LIGHTSKYBLUE;
 
     /**
      * Constructor
@@ -76,7 +84,10 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         DialogBox dialogBox = new DialogBox(l, iv);
-        dialogBox.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(10), Insets.EMPTY)));
+        dialogBox.setBackground(
+                new Background(
+                        new BackgroundFill(
+                                userBoxColor, new CornerRadii(cornerRadius), Insets.EMPTY)));
         return dialogBox;
     }
 
@@ -90,7 +101,10 @@ public class DialogBox extends HBox {
         DialogBox dialogBox = new DialogBox(l, iv);
         dialogBox.flip();
         // https://www.tabnine.com/code/java/methods/javafx.scene.layout.BackgroundFill/%3Cinit%3E
-        dialogBox.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(10), Insets.EMPTY)));
+        dialogBox.setBackground(
+                new Background(
+                        new BackgroundFill(
+                                dukeBoxColor, new CornerRadii(cornerRadius), Insets.EMPTY)));
         return dialogBox;
     }
 }
