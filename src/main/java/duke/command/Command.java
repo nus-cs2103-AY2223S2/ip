@@ -113,18 +113,12 @@ public class Command {
             return listOfTasks.toString();
 
         case MARK:
-            if (index + 1 == 0) {
-                throw new DukeException("cannot mark a number not in the list!");
-            }
             task = tasks.get(index);
             task.mark();
             storage.saveTasks(tasks);
             return "Nice! I've marked this task as done:\n" + task;
 
         case UNMARK:
-            if (index + 1 == 0) {
-                throw new DukeException("cannot unmark a number not in the list!");
-            }
             task = tasks.get(index);
             task.unmark();
             storage.saveTasks(tasks);
