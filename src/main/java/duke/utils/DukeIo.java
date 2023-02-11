@@ -16,7 +16,8 @@ public class DukeIo {
                                          + "[event] : Add an event from start time to end time\n"
                                          + "[mark] : Mark a task as completed\n"
                                          + "[unmark] : Unmark a completed task\n"
-                                         + "[delete] : Delete a task from the list\n";
+                                         + "[delete] : Delete a task from the list\n"
+                                         + "[find] : Find a task containing the keyword\n";
     private static final String HELLO = "Hello! I am Duke.\n"
                                         + "What's on your mind today?\n";
     private static final String SAVE_SUCCESS = "Successfully saved all tasks\n";
