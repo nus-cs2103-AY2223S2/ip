@@ -24,7 +24,7 @@ public class Ui {
      * @param t Task to be marked.
      */
     public static String markMSG(Task t) {
-        return "Nice! I've marked this task as done:\n" + ("[X] " + t.getMsg());
+        return "Nice! I've marked this task as done:\n" + ("[X] " + t.getMSG());
     }
 
     /**
@@ -32,7 +32,7 @@ public class Ui {
      * @param t Task to be unmarked.
      */
     public static String unmarkMSG(Task t) {
-        return "OK, I've marked this task as not done yet:\n" + ("[ ] " + t.getMsg());
+        return "OK, I've marked this task as not done yet:\n" + ("[ ] " + t.getMSG());
     }
 
 
@@ -42,6 +42,7 @@ public class Ui {
      * @param n Tasks in TaskList afterwards.
      */
     public static String deleteMSG(Task t, int n) {
+        assert n >= 0 : "Index Invalid";
         return "Noted. I've removed this task:\n"
                 + t + "\n"
                 + "Now you have " + n + " tasks in the list.";
@@ -62,7 +63,9 @@ public class Ui {
      * Show the TaskList of a Duke.
      */
     public static String showList(TaskList t, int i) {
-        String find_show  = (i == 1) ? "Here are the tasks in your list:\n" : "Here are the matching tasks in your list:\n";
+        assert i == 1 || i == 0 : "Invalid Sign";
+        String find_show  = (i == 1) ? "Here are the tasks in your list:\n"
+                                     : "Here are the matching tasks in your list:\n";
         StringBuilder ans = new StringBuilder(find_show);
         for (Task tk : t.get_list()) {
             String info = (t.get_list().indexOf(tk)+1) + "." + tk.toString() + "\n";
