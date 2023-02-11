@@ -1,6 +1,6 @@
-package duke;
+package duke.gui;
 
-import duke.dukeexception.DukeException;
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,6 +50,7 @@ public class MainWindow extends AnchorPane {
             }
         }
     }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

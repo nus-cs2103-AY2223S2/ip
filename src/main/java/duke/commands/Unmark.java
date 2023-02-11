@@ -7,6 +7,7 @@ import duke.commands.tasks.Task;
  * This class handles the command to unmark tasks as completed (i.e. they are incomplete).
  */
 public class Unmark extends Command {
+    private static final String RESPONSE_HEADER = "OK, I've marked this task as not done yet:\n";
     private final int index;
     private Task unmarkedTask;
 
@@ -34,7 +35,7 @@ public class Unmark extends Command {
 
     @Override
     public String getResponseOutput() {
-        return "OK, I've marked this task as not done yet:\n"
+        return Unmark.RESPONSE_HEADER
                 + "    "
                 + this.unmarkedTask;
     }

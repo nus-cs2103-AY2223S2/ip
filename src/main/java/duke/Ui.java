@@ -4,7 +4,7 @@ import duke.commands.Command;
 import duke.dukeexception.DukeException;
 
 /**
- * This class handles user interactions/messages
+ * This class handles user interactions/messages.
  */
 public class Ui {
     private static final String WELCOME = "Hello! Welcome to Duke. Let's start task tracking!";
@@ -13,9 +13,9 @@ public class Ui {
     private static final int INCREMENT = 1;
 
     /**
-     * Prints the current list of tasks
+     * Prints the current list of tasks.
      *
-     * @param tasks The current list of tasks to be printed
+     * @param tasks The current list of tasks to be printed.
      */
     public void printList(TaskList tasks) {
         String res = "";
@@ -26,35 +26,51 @@ public class Ui {
     }
 
     /**
-     * Prints a welcome message
+     * Prints a welcome message.
      */
     public void printWelcome() {
         System.out.println(WELCOME);
     }
 
     /**
-     * Prints a farewell message
+     * Prints a farewell message.
      */
     public void printGoodbye() {
         System.out.println(GOODBYE);
     }
 
     /**
-     * Prints a descriptive message of a command
-     * @param command The command to be described
+     * Prints a descriptive message of a command.
+     *
+     * @param command The command to be described.
      */
     public void printCommandMessage(Command command) {
         System.out.println(command);
     }
 
+    /**
+     * Generates a descriptive message of a command.
+     *
+     * @param command The command to be described.
+     */
     public String getCommandMessage(Command command) {
         return command.getResponseOutput();
     }
 
+    /**
+     * Prints a descriptive message of a DukeException.
+     *
+     * @param e The DukeException to be described.
+     */
     public void printExceptionMessage(DukeException e) {
         System.out.println(e.getMessage());
     }
 
+    /**
+     * Generates a descriptive message of a DukeException.
+     *
+     * @param e The DukeException to be described.
+     */
     public String getExceptionMessage(DukeException e) {
         return e.getMessage();
     }

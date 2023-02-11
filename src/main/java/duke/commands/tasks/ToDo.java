@@ -1,6 +1,8 @@
 package duke.commands.tasks;
 
 public class ToDo extends Task {
+    private static String IDENTIFIER = "T";
+
     public ToDo(String description) {
         super(description, false);
     }
@@ -10,12 +12,12 @@ public class ToDo extends Task {
     }
 
     /**
-     * Generates a letter representing the type of task
+     * Generates a letter representing the type of task.
      *
-     * @return a letter representing the type of this task
+     * @return a letter representing the type of this task.
      */
     public String getTaskClass() {
-        return "T";
+        return ToDo.IDENTIFIER;
     }
 
     public String toString() {

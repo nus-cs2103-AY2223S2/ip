@@ -7,6 +7,7 @@ import duke.commands.tasks.Task;
  * This class handles the command to mark tasks as done.
  */
 public class Mark extends Command {
+    private static final String RESPONSE_HEADER = "Nice! I've marked this task as done:\n";
     private final int index;
     private Task markedTask;
 
@@ -34,8 +35,8 @@ public class Mark extends Command {
 
     @Override
     public String getResponseOutput() {
-        return "Nice! I've marked this task as done:\n"
-                + "    "
+        return Mark.RESPONSE_HEADER
+                + Command.INDENT
                 + this.markedTask;
     }
 }

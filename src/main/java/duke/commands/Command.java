@@ -6,7 +6,7 @@ import duke.TaskList;
  * This class is an abstract class representing all commands.
  */
 public abstract class Command {
-    // message is the command input
+    protected static final String INDENT = "    ";
     private final String message;
 
     /**
@@ -25,5 +25,10 @@ public abstract class Command {
      */
     public abstract void execute(TaskList toDoList);
 
+    /**
+     * Generates a response for the program to print.
+     *
+     * @return a String containing the response.
+     */
     public abstract String getResponseOutput();
 }

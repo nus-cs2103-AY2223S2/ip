@@ -7,6 +7,7 @@ import duke.commands.tasks.Task;
  * This class handles deletion commands.
  */
 public class Delete extends Command {
+    private static final String RESPONSE_HEADER = "Noted. I've removed this task:\n";
     private final int index;
     private Task removed;
     private int newSize;
@@ -32,9 +33,10 @@ public class Delete extends Command {
 
     @Override
     public String getResponseOutput() {
-        return String.format("Noted. I've removed this task:\n"
-                        + "    %s\n"
-                        + "Now you have %d tasks in the list.",
+        return String.format(Delete.RESPONSE_HEADER
+                + Command.INDENT
+                + "%s\n"
+                + "Now you have %d tasks in the list.",
                 this.removed, this.newSize);
     }
 }
