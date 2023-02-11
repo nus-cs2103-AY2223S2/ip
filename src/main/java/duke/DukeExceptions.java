@@ -35,6 +35,10 @@ public class DukeExceptions extends Exception {
         if (printThisOut.equals("find")) {
             toReturn = ":( Sorry, please input a keyword!";
         }
+        if (printThisOut.equals("bad tag")) {
+            toReturn = "Hey, it appears you did not follow the tag format properly."
+                    + "No worries, try again with this format: tag index-of-task #tagname";
+        }
         return toReturn;
     }
 }

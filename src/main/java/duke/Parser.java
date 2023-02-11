@@ -21,8 +21,19 @@ public class Parser {
      * @return String representation of output.
      * @throws DukeExceptions if the user inputs an invalid command.
      */
-    public String readInput(String input, TaskList listOfTasks) throws DukeExceptions {
+    public String readInput(String input, TaskList listOfTasks, TagList listOfTags) throws DukeExceptions {
         try {
+
+            if (input.startsWith("findtag")) {
+                handleFindTag(input, listOfTasks);
+                return this.outputToReturn;
+            }
+
+            if (input.startsWith("tag")) {
+                handleTag(input, listOfTasks, listOfTags);
+                return this.outputToReturn;
+            }
+
             if (input.startsWith("todo")) {
                 handleToDoTask(input, listOfTasks);
                 return this.outputToReturn;
@@ -72,6 +83,58 @@ public class Parser {
         } catch (DukeExceptions DE) {
             this.outputToReturn = DE.toString();
             return this.outputToReturn;
+        }
+    }
+
+    /**
+     * Function to find tasks which match the given tag.
+     *
+     * @param input String representation of the user's input.
+     * @param listOfTasks The list of tasks to check for matching tag.
+     */
+    public void handleFindTag(String input, TaskList listOfTasks) {
+        String tagName = input.split(" ")[1];
+        String toSet = "Here are the tasks matching the tag ["
+                + tagName + "]:\n";
+        Integer indexToPrint = 1;
+        for (int i = 0; i < listOfTasks.getListOfTasks().size(); i++) {
+            Task currTask = listOfTasks.getListOfTasks().get(i);
+            if (tagName.equals(currTask.getTag())) {
+                String appendThis = indexToPrint.toString() + "." + currTask.toString()
+                        + " " + currTask.getTag() + "\n";
+                toSet += appendThis;
+                indexToPrint++;
+            }
+        }
+        if (indexToPrint == 1) {
+            toSet = "Hey, it appears there are no tasks that match such a tag!";
+        }
+        this.outputToReturn = toSet;
+    }
+
+    /**
+     * Function to help handle tagging command
+     *
+     * @param input String representation of the user's input.
+     * @param listOfTasks The list of tasks used by Duke chatbot.
+     * @param listOfTags The list of tags used by Duke chatbot associated with tasks.
+     */
+    public void handleTag(String input, TaskList listOfTasks, TagList listOfTags) {
+        try {
+            String[] tagDetailsInArr = input.split(" ");
+            if (tagDetailsInArr.length < 3) {
+                throw new DukeExceptions("bad tag");
+            }
+            int indexToUse = Integer.parseInt(tagDetailsInArr[1]) - 1;
+            String tagName = tagDetailsInArr[2];
+            if (indexToUse >= listOfTags.getTagListFull().size()) {
+                throw new DukeExceptions("bad tag");
+            }
+            listOfTasks.getListOfTasks().get(indexToUse).setTag(tagName);
+            String toOutput = listOfTags.setTag(indexToUse, tagName);
+            this.outputToReturn = toOutput;
+        } catch (DukeExceptions DE) {
+            this.outputToReturn = DE.toString();
         }
     }
 

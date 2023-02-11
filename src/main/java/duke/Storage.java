@@ -18,6 +18,7 @@ import duke.tasktypes.ToDo;
  */
 public class Storage {
     protected Path dataPath;
+    protected Path dataPathForTag;
 
     /**
      * Constructor to initiate a Storage instance.
@@ -26,8 +27,9 @@ public class Storage {
      * @param fileName file in which the list of tasks should or will be stored.
      * @throws IOException if force-closed.
      */
-    public Storage(String filePath, String fileName) throws IOException {
+    public Storage(String filePath, String fileName, String tagFileName) throws IOException {
         this.dataPath = getData(filePath, fileName);
+        this.dataPathForTag = getData(filePath, tagFileName);
     }
 
     /**
@@ -49,6 +51,7 @@ public class Storage {
         if (!Files.exists(fileToCheck)) {
             Files.createFile(fileToCheck);
         }
+
         assert Files.exists(fileToCheck) : "File not being freshly created despite never being initialized";
         return fileToCheck;
     }
@@ -164,6 +167,27 @@ public class Storage {
     }
 
     /**
+     * Function to load tags from the data file into an arraylist to be used by Duke chatbot.
+     *
+     * @return An arraylist containing tags loaded from the data file.
+     * @throws IOException
+     */
+    public ArrayList<String> loadTags() throws IOException {
+        ArrayList<String> useThis = new ArrayList<>();
+        Scanner scannerForFileData = new Scanner(this.dataPathForTag);
+        if (!scannerForFileData.hasNext()) {
+            scannerForFileData.close();
+            return useThis;
+        }
+        while (scannerForFileData.hasNextLine()) {
+            String tagName = scannerForFileData.nextLine();
+            useThis.add(tagName);
+        }
+        scannerForFileData.close();
+        return useThis;
+    }
+
+    /**
      * Function to store the list of tasks from the current Duke chatbot session into the dataPath file.
      *
      * @param listOfTasks The list of tasks from the current Duke chatbot session.
@@ -183,6 +207,29 @@ public class Storage {
             Task currTask = listOfTasks.get(i);
             String toUse = currIndex.toString() + "." + currTask.toString() + " \n";
             Files.write(dataPath, toUse.getBytes(), StandardOpenOption.APPEND);
+        }
+    }
+
+    /**
+     * Function to store list of tags from the current Duke chatbot session into the dataPathForTag file.
+     *
+     * @param listOfTags The list of tags from the current Duke chatbot session.
+     * @throws IOException
+     */
+    public void storeTags(ArrayList<String> listOfTags) throws IOException {
+        if (listOfTags.size() == 0) {
+            Files.write(dataPathForTag, "".getBytes());
+            return;
+        }
+        Files.write(dataPathForTag, "".getBytes());
+        String firstTag = listOfTags.get(0);
+        String toSave = firstTag + "\n";
+        Files.write(dataPathForTag, toSave.getBytes(), StandardOpenOption.APPEND);
+        for (int i = 1; i < listOfTags.size(); i++) {
+            Integer currIndex = i + 1;
+            String currTag = listOfTags.get(i);
+            String toUse = currTag + "\n";
+            Files.write(dataPathForTag, toUse.getBytes(), StandardOpenOption.APPEND);
         }
     }
 

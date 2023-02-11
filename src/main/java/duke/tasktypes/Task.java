@@ -6,6 +6,7 @@ package duke.tasktypes;
 public class Task {
     protected String name;
     protected boolean isDone;
+    protected String tag = "#Untagged";
 
     /**
      * Constructor to initialize a Task.
@@ -31,6 +32,14 @@ public class Task {
 
     public boolean isDone() {
         return this.isDone;
+    }
+
+    public String getTag() {
+        return this.tag;
+    }
+
+    public void setTag(String newTag) {
+        this.tag = newTag;
     }
 
 }

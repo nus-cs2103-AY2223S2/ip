@@ -10,14 +10,16 @@ import duke.tasktypes.Task;
  */
 public class TaskList {
     protected ArrayList<Task> listOfTasks;
+    protected TagList listOfTags;
 
     /**
      * Constructor to initialize a TaskList instance.
      *
      * @param listOfTasks An arraylist containing a list of tasks from the Duke chatbot.
      */
-    public TaskList(ArrayList<Task> listOfTasks) {
+    public TaskList(ArrayList<Task> listOfTasks, TagList listOfTags) {
         this.listOfTasks = listOfTasks;
+        this.listOfTags = listOfTags;
     }
 
     public ArrayList<Task> getListOfTasks() {
@@ -34,7 +36,8 @@ public class TaskList {
         for (int i = 0; i < listOfTasks.size(); i++) {
             Integer currIndex = i + 1;
             Task currTask = listOfTasks.get(i);
-            String toUse = currIndex.toString() + "." + currTask.toString() + "\n";
+            String toUse = currIndex.toString() + "." + currTask.toString() + " "
+                    + currTask.getTag() + "\n";
             toPrint += toUse;
         }
         return toPrint;
@@ -55,6 +58,7 @@ public class TaskList {
             }
             int sizeBeforeDelete = listOfTasks.size();
             Task gettingTask = listOfTasks.remove(indexToUse);
+            listOfTags.deleteTagAtIndex(indexToUse);
             assert sizeBeforeDelete - 1 == listOfTasks.size() : "It appears the"
                     + "task has not been successfully deleted.";
             String toOutput = "Noted. I've removed this task:\n  " + gettingTask.toString()
@@ -77,7 +81,8 @@ public class TaskList {
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task currTask = listOfTasks.get(i);
             if (currTask.getName().contains(keyword)) {
-                String printThis = "\n" + firstIndex.toString() + "." + currTask.toString();
+                String printThis = "\n" + firstIndex.toString() + "." + currTask.toString() + " "
+                        + currTask.getTag();
                 firstIndex++;
                 starter += printThis;
             }
@@ -94,6 +99,7 @@ public class TaskList {
     public String addTask(Task toAdd) {
         int sizeBeforeAdd = listOfTasks.size();
         listOfTasks.add(toAdd);
+        listOfTags.addTag(toAdd.getTag());
         assert sizeBeforeAdd + 1 == listOfTasks.size() : "It appears that"
                 + "the task has not been added successfully.";
         String toPrint = "";
