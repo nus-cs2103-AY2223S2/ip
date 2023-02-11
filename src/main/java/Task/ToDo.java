@@ -4,6 +4,7 @@ package Task;
  * Object class of ToDo
  */
 public class ToDo extends Task {
+    protected static final int TODO = 4;
     protected String type = "[T]";
 
     public ToDo(String description) {
@@ -16,7 +17,7 @@ public class ToDo extends Task {
      * @return todo object
      */
     public static ToDo createToDo(String input) {
-        String description = input.substring(5);
+        String description = input.substring(TODO + 1);
         return new ToDo((description));
     }
 
