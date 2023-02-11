@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -8,7 +9,13 @@ repositories {
     mavenCentral()
 }
 
+javafx {
+    version = "16"
+    modules = [ 'javafx.controls' ]
+}
+
 dependencies {
+    implementation 'net.runeduniverse.lib.utils:utils-scanner:1.0.6'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
