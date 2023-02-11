@@ -115,4 +115,8 @@ public class Ui {
     public String showFind(TaskList tasks) {
         return "Here are the tasks with the keyword: \n" + tasks;
     }
+
+    public String showArchivedAll() {
+        return "All your tasks are now archived, your task list is now empty!";
+    }
 }

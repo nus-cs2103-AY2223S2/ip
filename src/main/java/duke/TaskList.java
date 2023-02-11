@@ -20,6 +20,7 @@ public class TaskList {
 
     protected ArrayList<Task> arrayList;
     protected Parser parser = new Parser();
+
     /**
      * Constructor for TaskList.
      * @param arrayList ArrayList to be wrapped around TaskList.
@@ -120,6 +121,7 @@ public class TaskList {
         return t;
     }
 
+
     /**
      * Lists out the task list in order when they are added in.
      */
@@ -146,6 +148,13 @@ public class TaskList {
         return arrayList.get(i);
     }
 
+    public void archiveAll(ArchivedTaskList archives) {
+
+        while (arrayList.size() > 0) {
+            Task deleted = this.delete(arrayList.size());
+            archives.addDeletedTask(deleted);
+        }
+    }
     /**
      * Returns a string of the tasks in order of when they are added.
      * @return String of the task list.
@@ -157,4 +166,5 @@ public class TaskList {
         }
         return str;
     }
+
 }

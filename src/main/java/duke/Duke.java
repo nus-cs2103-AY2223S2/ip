@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
+import duke.task.Task;
 import javafx.scene.image.Image;
 
 import duke.exception.DukeException;
@@ -15,7 +16,11 @@ import duke.exception.DukeException;
 public class Duke  {
 
     private Storage storage;
+
+    private Storage archiveStorage;
     private TaskList tasks;
+
+    private ArchivedTaskList archives;
     private Ui ui;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/black-cat.png"));
@@ -30,8 +35,10 @@ public class Duke  {
     public Duke(String filePath, String dirPath) {
         ui = new Ui();
         storage = new Storage("src/main/data/duke.txt", "src/main/data");
+        archiveStorage = new Storage("src/main/data/archive.txt", "src/main/data");
         try {
             tasks = new TaskList(storage.load());
+            archives = new ArchivedTaskList(archiveStorage.load());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -49,6 +56,7 @@ public class Duke  {
 
                 try {
                     storage.store(tasks);
+                    archiveStorage.store(archives);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -57,12 +65,17 @@ public class Duke  {
             if (answer.equals("list")) {
                 return tasks.toString();
             }
-
+            if (answer.equals("list archive")) {
+                return archives.toString();
+            }
+            if (answer.equals("archive all")) {
+                tasks.archiveAll(archives);
+                return ui.showArchivedAll();
+            }
             if (answer.startsWith("find ")) {
                 String keyword = parser.getFindKeyword();
                 assert !keyword.isEmpty() : "find keyword should not be empty";
                 return ui.showFind(tasks.find(keyword));
-
 
             }
             if (answer.startsWith("mark ")) {
@@ -78,7 +91,9 @@ public class Duke  {
             if (answer.startsWith("delete ")) {
                 Integer index = parser.getDeleteIndex(length);
                 assert index > 0 && index <= length : "index should be in bounds";
-                return ui.showDeleted(tasks.delete(index));
+                Task deleted = tasks.delete(index);
+                archives.addDeletedTask(deleted);
+                return ui.showDeleted(deleted);
             }
             if (answer.startsWith("todo ")) {
                 String description = parser.getTodoDescription();
@@ -105,10 +120,8 @@ public class Duke  {
 
                 return ui.showAddTask(tasks.addEvent(descriptionList[0], descriptionList[1], descriptionList[2]));
 
-
             }
 
-            
             throw new DukeException("I don't know that one!");
         } catch (DukeException e) {
             return ui.showError(e.toString());
