@@ -1,11 +1,11 @@
 # User Guide
-Version 0.4
+Version 1.0
 
 
 ## Features 
 
 ### List
-List all your task that have been added into the task list.
+List all your tasks that have been added into the task list.
 
 ### Add
 Add a Todo, Deadline or Event into your task list.
@@ -23,14 +23,14 @@ After modifying your task list, the changes are saved automatically.
 
 
 ## Usage
-Note: In the usage, the following notation are used. They are not part of the command.
+Note: The following notation used are for indicative purposes and not part of the commands.
 * `{` and `}` are shown around a parameter
 * `(` and `)` are shown around **optional** parameter
 * `...` indicates that the previous parameter can be repeated for multiple times 
 
 
 ### `todo` - Add a *Todo* Task
-Add a *Todo* task, which need to be completed but has no completion timeline.\
+Add a *Todo* task, which needs to be completed but has no completion timeline.\
 Usage: `todo {task description}`
 
 Expected outcome:\
@@ -67,7 +67,7 @@ Now you have 2 task(s) in the list.
 
 
 ### `event` - Add an *Event* Task
-Add a *Event* task, which is expected to be completed within a certian start and end time.\
+Add an *Event* task, which is expected to be completed within a certain start and end time.\
 Usage: `event {task description} /from {start time} /to {end time}`\
 Note: `{start time}` and `{end time}` should be in **YYYY-MM-DD HH:MM(:SS)** format (seconds is optional)
 
@@ -85,12 +85,12 @@ Now you have 3 task(s) in the list.
 
 
 ### `list` - List all tasks
-List all the task in the task list.\
+List all tasks in the task list.\
 Usage: `list`, `ls`
 
 Expected outcome:\
-The program will print the type, status (completed or uncompleted), task description, and other revelent inforation
-of the task for every single task in the task list.
+The program will print the type, status (completed or uncompleted), task description, and other relevant information
+of the task for each task in the task list.
 
 Example:
 ```
@@ -108,8 +108,8 @@ Find task(s) that contains your search words.\
 Usage: `find {search words}`
 
 Expected outcome:
-* Displays a list of tasks which the description contains the search words, or
-* Indicate that there are no match found
+* Displays a list of tasks that contains the search words in their descriptions, or
+* Indicates no matches found
 
 Example:
 ```
