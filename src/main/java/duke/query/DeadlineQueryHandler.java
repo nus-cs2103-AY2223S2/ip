@@ -41,7 +41,6 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
         try {
             endDateTime = LocalDateTime.parse(endDateStr, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
         } catch (DateTimeParseException e) {
-            System.out.println(e);
             throw new InvalidCommandParamException(
                     String.format("Please provide a valid end date for your deadline! (%s)", DATETIME_PATTERN));
         }
