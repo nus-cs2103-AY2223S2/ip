@@ -18,7 +18,7 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(String details) {
         if (details.isBlank()) {
-            throw new DukeException(":( OOPS!!! The description of a new task cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description of a task cannot be empty.");
         }
         this.details = details;
     }

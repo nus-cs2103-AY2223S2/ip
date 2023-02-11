@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     protected String description;
     protected boolean isDone;
-    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     /**
      * Constructor for the Task class.
@@ -33,6 +33,14 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Sets the description of Task.
+     * @param newDescription the new description of the Task.
+     */
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
     }
 
     /**
