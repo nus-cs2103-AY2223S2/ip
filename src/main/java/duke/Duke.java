@@ -176,6 +176,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Output the response to user input.
+     * @param userInput Command input by the user.
+     * @return Corresponding output.
+     */
     public String getResponse(String userInput) {
         commandList.add(userInput);
         storage.saveToDisk(userInput + "\n");
