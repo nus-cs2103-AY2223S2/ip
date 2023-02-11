@@ -23,7 +23,7 @@ public class Duke {
     private Gui gui;
 
     /**
-     * Constructor for Duke.
+     * Constructs Duke.
      */
     public Duke() {
         ui = Ui.getInstance();
@@ -85,6 +85,8 @@ public class Duke {
                     }
                 }, 1300); // 1.3s
             }
+            assert response != null : "Response should not be null";
+            assert response != "" : "Response should not be empty";
             return response;
         } catch (DukeException e) {
             return gui.produceExceptionOutput(e.getMessage());
