@@ -90,13 +90,14 @@ public class Parser {
         if (input.length == 1 || input[1].isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
         }
+        String emptyDateMsg = " ☹ OOPS!!! The start & end time of an event cannot be empty.";
         String[] eventString = input[1].split(" /from ");
         if (eventString.length == 1 || eventString[1].isEmpty()) {
-            throw new DukeException(" ☹ OOPS!!! The start & end time of an event cannot be empty.");
+            throw new DukeException(emptyDateMsg);
         }
         String[] timeSplit = eventString[1].split(" /to ");
         if (timeSplit.length == 1 || timeSplit[1].isEmpty()) {
-            throw new DukeException(" ☹ OOPS!!! The start & end time of an event cannot be empty.");
+            throw new DukeException(emptyDateMsg);
         }
         try {
             String[] dateTimeString = timeSplit[0].split(" ");
