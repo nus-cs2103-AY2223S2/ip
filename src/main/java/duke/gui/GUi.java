@@ -67,7 +67,7 @@ public class GUi extends Application {
         stage.setScene(scene);
 
         stage.setTitle("PixlBot");
-//        stage.setResizable(false);
+        stage.setResizable(false);
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
 
@@ -95,6 +95,7 @@ public class GUi extends Application {
      * Initializes the Duke behaviour classes.
      */
     private void initialize() {
+        assert ui == null && storage == null && parser == null;
         isExit = false;
         ui = new Ui();
         storage = new Storage("data/Duke");
@@ -118,6 +119,8 @@ public class GUi extends Application {
      * Welcomes the user.
      */
     private void welcomeUser() {
+        assert dialogContainer != null;
+        assert ui != null;
         dialogContainer.getChildren().add(new Label(ui.open()));
     }
 
@@ -125,6 +128,12 @@ public class GUi extends Application {
      * Saves data and exits.
      */
     private void exitProgram() {
+        assert isExit;
+        assert storage != null;
+        assert list != null;
+        assert ui != null;
+        assert stage != null;
+
         try {
             storage.save(list.getList());
         } catch (DukeException de) {
@@ -138,6 +147,7 @@ public class GUi extends Application {
      * @param text The message to be displayed.
      */
     private void sayAsDuke(String text) {
+        assert dialogContainer != null;
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(new Label(text), new ImageView(duke)));
     }
@@ -147,6 +157,13 @@ public class GUi extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        assert dialogContainer != null;
+        assert userInput != null;
+
+        if (userInput.getText().isEmpty() || userInput.getText().isBlank()) {
+            return;
+        }
+
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
 
@@ -166,6 +183,8 @@ public class GUi extends Application {
     }
 
     private String getResponse(String input) {
+        assert parser != null;
+
         try {
             Command command = parser.parse(input);
             isExit = parser.getIsExit();
