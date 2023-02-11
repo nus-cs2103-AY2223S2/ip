@@ -52,10 +52,13 @@ public class Duke {
         this.storage.update(this.toDoList);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Runs the program using command line UI
+     */
+    public static void runWithCommandLineUi() {
         Ui ui = new Ui();
         ui.printWelcome();
-        Storage storage = new Storage("data");
+        Storage storage = new Storage(Duke.FILEPATH);
         TaskList toDoList;
         toDoList = storage.initialise();
         Scanner sc = new Scanner(System.in);
