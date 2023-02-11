@@ -1,6 +1,10 @@
 package domain.usecases;
 
-import domain.entities.core.*;
+import domain.entities.core.CommandRegisterable;
+import domain.entities.core.Commandable;
+import domain.entities.core.ExitStatus;
+import domain.entities.core.NestedCommandableObject;
+import domain.entities.core.Writable;
 
 /**
  * A {@link EchoUsecase} is a usecase that would echo the tokens that it

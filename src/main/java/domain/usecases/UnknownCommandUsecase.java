@@ -1,6 +1,10 @@
 package domain.usecases;
 
-import domain.entities.core.*;
+import domain.entities.core.CommandRegisterable;
+import domain.entities.core.Commandable;
+import domain.entities.core.ExitStatus;
+import domain.entities.core.NestedCommandableObject;
+import domain.entities.core.Writable;
 
 /**
  * A {@link UnknownCommandUsecase} is a usecase that would be triggered when
@@ -28,8 +32,8 @@ public class UnknownCommandUsecase implements Commandable, CommandRegisterable {
 
     @Override
     public ExitStatus execute(String[] tokens) {
-        writable.writeln("☹ OOPS!!! I'm sorry, but I don't know what that " +
-                "means :-(");
+        writable.writeln("☹ OOPS!!! I'm sorry, but I don't know what that "
+                + "means :-(");
         return ExitStatus.finishCurrentIteration;
     }
 

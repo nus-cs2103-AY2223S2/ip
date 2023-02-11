@@ -1,12 +1,7 @@
 package domain.usecases;
 
-import core.exceptions.InvalidArgumentException;
-import core.utils.fp.ThrowingFunction;
-import domain.entities.DataSaver;
-import domain.entities.core.ExitStatus;
-import domain.entities.core.IdentifiedCommandable;
-import domain.entities.core.Writable;
-import domain.entities.taskmanager.Task;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +10,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
+import core.exceptions.InvalidArgumentException;
+import core.utils.fp.ThrowingFunction;
+import domain.entities.DataSaver;
+import domain.entities.core.ExitStatus;
+import domain.entities.core.IdentifiedCommandable;
+import domain.entities.core.Writable;
+import domain.entities.taskmanager.Task;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -42,9 +43,7 @@ public class TaskManagerUsecaseTest {
     @Test
     void getAddTaskCommand_invocation_shouldReturnCommandableWithCorrectId() {
         final String id = "add";
-        final IdentifiedCommandable command = sut.getAddTaskCommand(
-                (list) -> Mockito.mock(Task.class), id
-        );
+        final IdentifiedCommandable command = sut.getAddTaskCommand((list) -> Mockito.mock(Task.class), id);
         assert command.getId().equals(id);
     }
 
@@ -96,9 +95,7 @@ public class TaskManagerUsecaseTest {
         final String id = "add";
         final String[] tokens = {"hello", "world"};
         final Task task = Mockito.mock(Task.class);
-        final IdentifiedCommandable command = sut.getAddTaskCommand(
-                (list) -> task, id
-        );
+        final IdentifiedCommandable command = sut.getAddTaskCommand((list) -> task, id);
         command.execute(tokens);
         Mockito.verify(tasks, Mockito.times(1)).add(task);
     }

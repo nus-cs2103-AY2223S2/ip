@@ -1,10 +1,11 @@
 package domain.usecases;
 
-import domain.entities.core.Writable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import domain.entities.core.Writable;
 
 @ExtendWith(MockitoExtension.class)
 public class EchoUsecaseTest {

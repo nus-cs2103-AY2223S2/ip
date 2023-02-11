@@ -22,8 +22,8 @@ public class TokenUtilities {
      * @param delim  a hashset containing the potential delimiters, a delimiter
      *               is a string that splits the tokens.
      * @return a pair, the left of which would be a string if the token does
-     * not start with a delimiter. The right would be a hash set containing the
-     * information.
+     *         not start with a delimiter. The right would be a hash set containing the
+     *         information.
      */
     public Pair<String, Map<String, String>> joinTokens(
             String[] tokens, Set<String> delim) {
@@ -59,7 +59,7 @@ public class TokenUtilities {
      * @param startIdx the start index of the subsequence.
      * @param endIdx   the end index of the subsequence.
      * @return the subsequence starting from the startIdx ending with the
-     * endIdx, inclusive of both sides.
+     *         endIdx, inclusive of both sides.
      */
     public String[] getSubsequence(String[] tokens, int startIdx, int endIdx) {
         assert (endIdx < tokens.length) : "The end index should be smaller than"

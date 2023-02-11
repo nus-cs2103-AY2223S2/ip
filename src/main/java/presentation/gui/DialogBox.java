@@ -1,5 +1,8 @@
 package presentation.gui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
-import java.util.Collections;
-
+/**
+ * A box that shows dialogs.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -24,8 +27,7 @@ public class DialogBox extends HBox {
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(MainWindow.class.getResource
-                            ("/presentation/gui/DialogBox.fxml"));
+                    new FXMLLoader(MainWindow.class.getResource("/presentation/gui/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

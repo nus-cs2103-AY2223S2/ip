@@ -23,6 +23,13 @@ public abstract class EventLoop implements Disposable {
      */
     private final Writable errorWriter;
 
+    /**
+     * Creates a new event loop.
+     *
+     * @param rootCommandable the root command in the event loop.
+     * @param reader          the reader that's responsible for feeding the event loop.
+     * @param errorWriter     the writer that's responsible for writing the error.
+     */
     public EventLoop(Commandable rootCommandable, StringReadable reader,
                      Writable errorWriter) {
         this.rootCommandable = rootCommandable;
@@ -61,15 +68,17 @@ public abstract class EventLoop implements Disposable {
     public void dispose() {
         if (rootCommandable instanceof Disposable) {
             try {
-                ((Disposable) rootCommandable).dispose();
+                final Disposable disposable = (Disposable) rootCommandable;
+                disposable.dispose();
             } catch (DisposableException e) {
-                errorWriter.writeln("Failed to dispose the root " +
-                        "executable: " + e.getMessage());
+                errorWriter.writeln("Failed to dispose the root "
+                        + "executable: " + e.getMessage());
             }
         }
         if (reader instanceof Disposable) {
             try {
-                ((Disposable) reader).dispose();
+                final Disposable disposable = (Disposable) reader;
+                disposable.dispose();
             } catch (DisposableException e) {
                 errorWriter.writeln("Failed to close the reader: "
                         + e.getMessage());

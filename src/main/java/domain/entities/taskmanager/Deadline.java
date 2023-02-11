@@ -1,15 +1,15 @@
 package domain.entities.taskmanager;
 
-import core.exceptions.InvalidArgumentException;
-import core.singletons.Singletons;
-import core.utils.Pair;
-import core.utils.TokenUtilities;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.Set;
+
+import core.exceptions.InvalidArgumentException;
+import core.singletons.Singletons;
+import core.utils.Pair;
+import core.utils.TokenUtilities;
 
 /**
  * A Deadline is a Task with a deadline.
@@ -23,7 +23,7 @@ public class Deadline extends Task {
      * The set of keys for retrieving the data.
      */
     private static final Set<String> delims = Set.of(deadlineKey,
-            Task.completeKey);
+            Task.COMPLETE_KEY);
     /**
      * The deadline.
      */

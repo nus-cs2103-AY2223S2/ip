@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 import core.exceptions.LoadException;
 import core.exceptions.WriteException;
 import core.singletons.Singletons;
@@ -22,7 +24,6 @@ import presentation.ui.DummyWritable;
 import presentation.ui.SystemErr;
 import presentation.ui.SystemOut;
 
-import java.time.format.DateTimeFormatter;
 
 /**
  * The main class for Duke.
@@ -66,23 +67,19 @@ public class Duke extends Application {
 
         // Use cases
         Singletons.registerLazySingleton(
-                ByeUsecase.class,
-                () -> new ByeUsecase(target)
+                ByeUsecase.class, () -> new ByeUsecase(target)
         );
         Singletons.registerLazySingleton(
-                EchoUsecase.class,
-                () -> new EchoUsecase(target)
+                EchoUsecase.class, () -> new EchoUsecase(target)
         );
         Singletons.registerLazySingleton(
-                TaskManagerUsecase.class,
-                () -> new TaskManagerUsecase(
+                TaskManagerUsecase.class, () -> new TaskManagerUsecase(
                         Singletons.get(DummyWritable.class),
                         target,
                         Singletons.get(DataSaver.class))
         );
         Singletons.registerLazySingleton(
-                UnknownCommandUsecase.class,
-                () -> new UnknownCommandUsecase(target)
+                UnknownCommandUsecase.class, () -> new UnknownCommandUsecase(target)
         );
         Singletons.registerLazySingleton(
                 TokenUtilities.class,
