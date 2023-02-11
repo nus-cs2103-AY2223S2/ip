@@ -20,11 +20,8 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        //ui.showLine();
-        //System.out.println("Here are the tasks in your list:");
         String text = "Here are the tasks in your list:\n";
         text += tasks.printAllTasks();
-        //ui.showLine();
         return text;
     }
 

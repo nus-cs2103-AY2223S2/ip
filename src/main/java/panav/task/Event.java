@@ -9,9 +9,9 @@ public class Event extends Task {
 
     /**
      * Constructor to initialise attributes.
-     * @param description
-     * @param from
-     * @param to
+     * @param description event description.
+     * @param from start time.
+     * @param to end time.
      */
     public Event(String description, String from, String to) {
         super(description);

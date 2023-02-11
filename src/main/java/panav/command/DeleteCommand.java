@@ -13,7 +13,7 @@ import panav.ui.Ui;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-    private String fullCommand;
+    private final String fullCommand;
 
     public DeleteCommand(String fullCommand) {
         this.fullCommand = fullCommand;
@@ -34,11 +34,6 @@ public class DeleteCommand extends Command {
             assert (lengthTasks > 0);
             int deleteIndex = readNumber(fullCommand, lengthTasks);
             Task removed = tasks.removeTask(deleteIndex - 1);
-//            ui.showLine();
-//            System.out.println("Noted. I've removed this task:");
-//            System.out.println(removed);
-//            System.out.println("Now you have " + tasks.getLength() + " tasks in the list.");
-//            ui.showLine();
             String text = "Noted. I've removed this task:\n";
             text += removed.toString() + "\n";
             text += "Now you have " + tasks.getLength() + " tasks in the list.\n";
@@ -53,13 +48,16 @@ public class DeleteCommand extends Command {
      * Returns the index number for commands which manipulate the list.
      *
      * @param command The command which is manipulating list.
-     * @param len The number of elements in the list.
+     * @param taskListLength The number of elements in the list.
      * @return Index number in command.
      * @throws InvalidNumberException If the index doesn't exist.
      */
-    public static int readNumber(String command, int len) throws InvalidNumberException {
-        int number = Integer.parseInt(String.valueOf(command.charAt(command.length() - 1)));
-        if (number > len || number < 1) {
+    public static int readNumber(String command, int taskListLength) throws InvalidNumberException {
+        int len = command.length();
+        char charNum = command.charAt(len - 1);
+        String stringNum = String.valueOf(charNum);
+        int number = Integer.parseInt(stringNum);
+        if (number > taskListLength || number < 1) {
             throw new InvalidNumberException("Oops!! There is no such index number in your list");
         } else {
             return number;
