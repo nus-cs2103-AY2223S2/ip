@@ -21,15 +21,16 @@ public class EventCommand implements Command {
      * @param taskList the TaskList the new Event is added to
      * @param ui the Ui needed to display according messages
      * @param storage the Storage used during this session
+     * @return the confirmation message that the new Event has been added successfully
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String[] s1 = input.substring(6).split("/from");
         String[] s2 = s1[1].split("/to");
 
         Event newEvent = new Event(s1[0].stripTrailing(), LocalDateTime.parse(s2[0].trim(), Event.getEventFormatter()),
                 LocalDateTime.parse(s2[1].trim(), Event.getEventFormatter()));
         taskList.addTask(newEvent);
-        ui.showAddedMessage(newEvent, taskList);
+        return ui.showAddedMessage(newEvent, taskList);
     }
 }

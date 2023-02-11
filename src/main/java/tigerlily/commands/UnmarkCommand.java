@@ -24,11 +24,12 @@ public class UnmarkCommand implements Command {
      * @param taskList the TaskList containing the Task to be updated
      * @param ui the Ui needed to display according messages
      * @param storage the Storage used to update the save file
+     * @return the message after marking a Task as uncompleted
      * @throws ForgottenArgumentException If no index is given
      * @throws InvalidIndexException If the given index is out of bounds in TaskList
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (input.length() < 8) {
             throw new ForgottenArgumentException();
         } else {
@@ -38,7 +39,7 @@ public class UnmarkCommand implements Command {
             }
             Task thisTask = taskList.getTasks().get(index);
             thisTask.unmarkDone();
-            ui.showMessage("oops...this task is now marked as not done yet: " + thisTask.toString() + "\n");
+            return ui.showMessage("oops...this task is now marked as not done yet: " + thisTask.toString() + "\n");
         }
     }
 }
