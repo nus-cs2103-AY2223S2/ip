@@ -10,118 +10,92 @@ import duke.tasks.TaskList;
  * Formatter class to format outputs to users' terminal.
  */
 public class DukeIo {
-    private static final String INPUT_PROMPT = "MyDuke >    ";
-    //CHECKSTYLE.OFF: SingleSpaceSeparator
-    private static final String LOGO =  " ____        _       \n"
-                                    + "|  _ \\ _   _| | _____\n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
-    //CHECKSTYLE.ON: SingleSpaceSeparator
-
-    private static final String SEPERATOR = "======================================================\n";
-
-    private static final String CMD_LIST = SEPERATOR
-                                         + "[list] : Show a list of all tasks currently\n"
+    private static final String CMD_LIST = "\n[list] : Show a list of all tasks currently\n"
                                          + "[todo] : Add a to-do task\n"
                                          + "[deadline] : Add a task to be completed by a date\n"
                                          + "[event] : Add an event from start time to end time\n"
                                          + "[mark] : Mark a task as completed\n"
                                          + "[unmark] : Unmark a completed task\n"
-                                         + "[delete] : Delete a task from the list\n"
-                                         + SEPERATOR;
-    private static final String REPLY = "|    ";
-    private static final String HELLO = REPLY + "Hello from\n"
-                                        + SEPERATOR
-                                        + LOGO
-                                        + SEPERATOR
-                                        + REPLY + "What's on your mind today?\n"
-                                        + SEPERATOR;
+                                         + "[delete] : Delete a task from the list\n";
+    private static final String HELLO = "Hello! I am Duke\n"
+                                        + "What's on your mind today?\n";
     private static final String SAVE_SUCCESS = "Successfully saved all tasks\n";
     private static final String SAVE_FAILURE = "FAILED TO SAVE ALL TASKS\n";
-    private static final String QUIT = SEPERATOR
-                                    + REPLY + "Quitting Duke...\n"
-                                    + REPLY + "See you soon!\n"
-                                    + SEPERATOR;
+    private static final String QUIT = "Quitting Duke...\n" + "See you soon!\n";
 
     /**
      * Displays message on screen, writes each String as a newline to standard output.
      * @param message custom message to echo
      */
-    public void echoMessage(String message) {
-        System.out.println(message);
+    public String echoMessage(String message) {
+        return message;
     }
 
     /**
      * Displays greeting message for Duke.
      */
-    public void printHello() {
-        System.out.print(HELLO);
+    public String printHello() {
+        return HELLO;
     }
 
     /**
      * Displays exit message upon quit.
      */
-    public void printQuit() {
-        System.out.print(QUIT);
+    public String printQuit() {
+        return QUIT;
     }
 
-    /**
-     * Displays an indicator to promptuser inputs.
-     */
-    public void showPrompt() {
-        System.out.print(INPUT_PROMPT);
-    }
 
     /**
      * Displays a success toast message upon addition of a Task to TaskList.
      * @param t Task object and its inherited classes.
      */
-    public void notifySuccessAdd(Task t) {
-        System.out.println(SEPERATOR
-                + REPLY + "Successfully added: " + t.toString());
+    public String notifySuccessAdd(Task t) {
+        String out = "Successfully added: " + t.toString();
+        return out;
     }
 
     /**
      * Displays a success toast message upon updating the state of the task to "Completed".
      * @param t Task obejct and its inherited classes.
      */
-    public void notifySuccessComplete(Task t) {
-        System.out.println(SEPERATOR
-                + REPLY + "Successfully completed: " + t.toString());
+    public String notifySuccessComplete(Task t) {
+        String out = "Successfully completed: " + t.toString();
+        return out;
     }
 
     /**
      * Displays a success toast upon updating the state from "Completed" to "Incomplete".
      * @param t Task object and its inherited classes.
      */
-    public void notifyUnmark(Task t) {
-        System.out.println(SEPERATOR
-                + REPLY + "Unmarked task: " + t.toString());
+    public String notifyUnmark(Task t) {
+        String out = "Unmarked task: " + t.toString();
+        return out;
     }
 
     /**
      * Displays an error toast when user tries to mark an already marked Task.
      * @param t Task object and its inherited classes.
      */
-    public void nofifyMarkFail(Task t) {
-        System.out.println(SEPERATOR
-            + REPLY + "Cannot mark completed task: " + t.toString());
+    public String notifyMarkFail(Task t) {
+        String out = "Cannot mark completed task: " + t.toString();
+        return out;
     }
 
     /**
      * Displays error toast when user tries to unmark an already unmarked Task.
      * @param t Task object and its inherited classes.
      */
-    public void notifyUnmarkFail(Task t) {
-        System.out.println(SEPERATOR
-            + REPLY + "Cannot unmark incomplete task: " + t.toString());
+    public String notifyUnmarkFail(Task t) {
+        String out = "Cannot unmark incomplete task: " + t.toString();
+        return out;
     }
 
     /**
      * Displays the number of existing tasks in the TaskList.
      */
-    public void showCount() {
+    public String showCount() {
+        StringBuilder str = new StringBuilder();
         String isare;
         String s;
         int taskCount = TaskList.getTaskCount();
@@ -132,86 +106,97 @@ public class DukeIo {
             isare = " is: ";
             s = " task";
         }
-        System.out.println(REPLY + "There" + isare + Integer.toString(taskCount)
-                             + s + " in the list.\n" + SEPERATOR);
+        str.append("There" + isare + Integer.toString(taskCount)
+                             + s + " in the list.\n");
+        return str.toString();
     }
 
     //CHECKSTYLE.OFF: SingleSpaceSeparator
     /**
      * Displays an indexed list of all existing tasks in the TaskList.
      */
-    public void showAll() {
+    public String showAll() {
+        StringBuilder str = new StringBuilder();
         int taskCount = TaskList.getTaskCount();
         ArrayList<Task> allTasks = new ArrayList<>(TaskList.getAllTasks());
-        System.out.println(SEPERATOR + "All Tasks:");
+        str.append("All Tasks:\n");
         for (Integer i = 0; i < taskCount; i++) {
             String showString = "   "  + Integer.toString(i + 1) + ": "
                                  + allTasks.get(i).toString();
-            System.out.println(showString);
+            str.append(showString);
         }
-        System.out.println(SEPERATOR);
+        return str.toString();
     }
     //CHECKSTYLE.ON: SingleSpaceSeparator
 
     /**
-     * Displays an indexe list of filtered tasks.
+     * Displays an indexed list of filtered tasks.
      * @param filteredTasks
      */
-    public void showFiltered(List<Task> filteredTasks) {
+    public String showFiltered(List<Task> filteredTasks) {
+        StringBuilder str = new StringBuilder();
         int taskCount = filteredTasks.size();
-        System.out.println(SEPERATOR + "Find results:");
+        str.append("Find results:");
         for (Integer i = 0; i < taskCount; i++) {
             String showString = "   " + Integer.toString(i + 1) + ": "
                                  + filteredTasks.get(i).toString();
-            System.out.println(showString);
+            str.append(showString);
         }
-        System.out.println(SEPERATOR);
+        return str.toString();
     }
 
     /**
      * Displays error toast when user inputs an Invalid Command.
      * A section of valid commands guide is displayed in a new line.
      */
-    public void showInvalidCommand() {
-        System.out.println(SEPERATOR
-                         + REPLY + "Invalid Command!\n"
-                         + CMD_LIST);
+    public static String showInvalidCommand() {
+        return "Invalid Command!\n"
+            + CMD_LIST;
     }
 
     /**
      * Displays error toast upon Exception.
      * @param e Exception thrown
      */
-    public void showError(Exception e) {
-        System.out.println(SEPERATOR + e.getMessage() + "\n" + SEPERATOR);
+    public String showError(Exception e) {
+        return e.getMessage() + "\n";
     }
 
     /**
      * Displays success toast after loading TaskList from saved .txt file.
      */
-    public void notifyLoad() {
-        System.out.println("Loaded successfully from previous session.");
+    public String notifyLoad() {
+        return "Loaded successfully from previous session.\n";
     }
 
     /**
      * Displays success toast after saving TaskList upon quit.
      */
-    public void notifySave() {
-        System.out.println(SAVE_SUCCESS);
+    public String notifySave() {
+        return SAVE_SUCCESS;
     }
 
     /**
      * Displays failure toast upon save failure
      */
-    public void notifySaveFailure() {
-        System.out.println(SAVE_FAILURE);
+    public String notifySaveFailure() {
+        return SAVE_FAILURE;
     }
 
     /**
      * Displays failure toast upon no find results
      */
-    public void notifyZeroHits() {
-        System.out.println(SEPERATOR + "No tasks found." + SEPERATOR);
+    public String notifyZeroHits() {
+        return "No tasks found.";
+    }
+
+    /**
+     * Displays user-friendly interpretation of task deleted.
+     * @param taskIndex
+     * @return Feedback after task has been deleted successfully.
+     */
+    public String showDeleted(int taskIndex) {
+        return TaskList.getAllTasks().get(taskIndex).toString() + " deleted.\n";
     }
 }
 

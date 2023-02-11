@@ -88,22 +88,20 @@ public class TaskList {
     /**
      * Filters all tasks to display a list of tasks containing user input keywords.
      * @param searchString Keyword to search
+     * @return List of filtered tasks
      */
-    public void showFilteredTasks(String searchString) {
+    public String showFilteredTasks(String searchString) {
         // early return if there are no tasks initially
         if (allTasks.size() == 0) {
-            dukeIo.notifyZeroHits();
-            return;
+            return dukeIo.notifyZeroHits();
         }
         List<Task> searchResults = allTasks.stream()
                                             .filter(t -> t.toString().contains(searchString))
                                             .collect(Collectors.toList());
         if (searchResults.size() == 0) {
-            dukeIo.notifyZeroHits();
-            return;
+            return dukeIo.notifyZeroHits();
         } else {
-            dukeIo.showFiltered(searchResults);
-            return;
+            return dukeIo.showFiltered(searchResults);
         }
     }
 }
