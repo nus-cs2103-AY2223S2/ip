@@ -37,37 +37,45 @@ public class Storage {
             throw new FileNotFoundException("File does not exist!");
         }
         Scanner sc = new Scanner(f);
-        ArrayList<Task> storeTasks = new ArrayList<Task>();
-        int numElem = 0;
+        ArrayList<Task> taskList = new ArrayList<Task>();
         while (sc.hasNext()) {
             String currentLine = sc.nextLine();
-            String[] arrOfDetails = currentLine.split("\\|");
-            String type = arrOfDetails[0];
-            char marker = arrOfDetails[2].charAt(0);
-            boolean isMarked = (marker == 'X') ? true : false;
-            String desc = arrOfDetails[1];
-            switch (type) {
-            case "T":// T|desc|X
-                storeTasks.add(new Todo(desc));
-                break;
-            case "D": //D|desc|X|byWhen
-                LocalDateTime byWhen = LocalDateTime.parse(arrOfDetails[3]);
-                storeTasks.add(new Deadline(desc, byWhen));
-                break;
-            case "E": //D|desc|X|from|to
-                LocalDateTime from = LocalDateTime.parse(arrOfDetails[3]);
-                LocalDateTime to = LocalDateTime.parse(arrOfDetails[4]);
-                storeTasks.add(new Event(desc, from, to));
-                break;
-            default:
-                throw new DukeException("Loading Error!!");
-            }
-            if (isMarked) {
-                storeTasks.get(numElem).markAsDone();
-            }
-            numElem++;
+            storeTask(currentLine, taskList);
         }
-        return storeTasks;
+        return taskList;
+    }
+
+    /**
+     * Stores current task into current task list
+     * @param currentLine saved input
+     * @param taskList current task list
+     * @throws DukeException when there is an error
+     */
+    private static void storeTask(String currentLine, ArrayList<Task> taskList) throws DukeException {
+        String[] arrOfDetails = currentLine.split("\\|");
+        String type = arrOfDetails[0];
+        char marker = arrOfDetails[2].charAt(0);
+        boolean isMarked = (marker == 'X') ? true : false;
+        String desc = arrOfDetails[1];
+        switch (type) {
+        case "T": // T|desc|X
+            taskList.add(new Todo(desc));
+            break;
+        case "D": //D|desc|X|byWhen
+            LocalDateTime byWhen = LocalDateTime.parse(arrOfDetails[3]);
+            taskList.add(new Deadline(desc, byWhen));
+            break;
+        case "E": //D|desc|X|from|to
+            LocalDateTime from = LocalDateTime.parse(arrOfDetails[3]);
+            LocalDateTime to = LocalDateTime.parse(arrOfDetails[4]);
+            taskList.add(new Event(desc, from, to));
+            break;
+        default:
+            throw new DukeException("Loading Error!!");
+        }
+        if (isMarked) {
+            taskList.get(taskList.size() - 1).markAsDone();
+        }
     }
 
     /**
@@ -81,30 +89,41 @@ public class Storage {
             fw.close();
             fw = new FileWriter(filePath, true);
             for (Task t: storeTasks) {
-                String type = t.getType();
-                String content = "";
-                switch (type) {
-                case "T": // T|desc|X
-                    content = String.format("%s|%s|%s", t.getType(), t.getDesc(), t.getStatusIcon());
-                    break;
-                case "D": //D|desc|X|from
-                    Deadline deadlineTask = (Deadline) t;
-                    content = String.format("%s|%s|%s|%s", t.getType(),
-                            t.getDesc(), t.getStatusIcon(), deadlineTask.getDeadline());
-                    break;
-                case "E": //D|desc|X|from|to
-                    Event eventTask = (Event) t;
-                    content = String.format("%s|%s|%s|%s|%s", t.getType(),
-                            t.getDesc(), t.getStatusIcon(), eventTask.getFrom(), eventTask.getTo());
-                    break;
-                default:
-                    throw new DukeException("Saving Error");
-                }
+                String content = getContent(t);
                 fw.write(content + "\n");
             }
             fw.close();
         } catch (IOException e) {
             new DukeException("Error with saving TODO task");
         }
+    }
+
+    /**
+     * Gets content of specified task.
+     * @param t specified task
+     * @return String of content to be saved
+     * @throws DukeException when there is an error.
+     */
+    private static String getContent(Task t) throws DukeException {
+        String type = t.getType();
+        String content = "";
+        switch (type) {
+        case "T": //T|desc|X
+            content = String.format("%s|%s|%s", t.getType(), t.getDesc(), t.getStatusIcon());
+            break;
+        case "D": //D|desc|X|from
+            Deadline deadlineTask = (Deadline) t;
+            content = String.format("%s|%s|%s|%s", t.getType(),
+                    t.getDesc(), t.getStatusIcon(), deadlineTask.getDeadline());
+            break;
+        case "E": //D|desc|X|from|to
+            Event eventTask = (Event) t;
+            content = String.format("%s|%s|%s|%s|%s", t.getType(),
+                    t.getDesc(), t.getStatusIcon(), eventTask.getFrom(), eventTask.getTo());
+            break;
+        default:
+            throw new DukeException("Saving Error");
+        }
+        return content;
     }
 }

@@ -35,20 +35,16 @@ public class Ui {
     }
 
     /**
-     * Prints exception message
-     * @param exceptionMessage
-     */
-    public static void showError(String exceptionMessage) {
-        System.out.println(exceptionMessage);
-    }
-
-    /**
      * Prints goodbye.
      */
     public void showGoodBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints specified response
+     * @param response String
+     */
     public static void showResponse(String response) {
         System.out.println(response);
     }

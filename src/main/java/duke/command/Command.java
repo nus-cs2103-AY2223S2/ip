@@ -12,10 +12,10 @@ public abstract class Command {
     protected String responseFromDukeAfterExecution = "No response because this has not been executed.";
     /**
      * Executes command specified by user.
-     * @param tasks
-     * @param ui
-     * @param storage
-     * @throws DukeException
+     * @param tasks current task list
+     * @param ui current ui
+     * @param storage current storage
+     * @throws DukeException when there is an error in executing task
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
