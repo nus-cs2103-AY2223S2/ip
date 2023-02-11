@@ -2,6 +2,7 @@ package duke.controller;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -10,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import duke.driver.GuiDriver;
 
 // import duke.driver.GuiDriver;
 // import duke.storage.Storage;
@@ -59,12 +62,19 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = input;
-        DialogBox userBox = DialogBox.getUserDialog(input, userImage);
+        String inputString = userInput.getText();
+        String response = GuiDriver.getResponse(inputString);
+        DialogBox userBox = DialogBox.getUserDialog(inputString, userImage);
         DialogBox dukeBox = DialogBox.getDukeDialog(response, dukeImage);
-
         dialogContainer.getChildren().addAll(userBox, dukeBox);
         userInput.clear();
+
+        exitIfByeCommand(response);
+    }
+
+    private void exitIfByeCommand(String response) {
+        boolean isByeCommand = response.equals("Bye. Hope to see you again soon!");
+        if (isByeCommand)
+            Platform.exit();
     }
 }

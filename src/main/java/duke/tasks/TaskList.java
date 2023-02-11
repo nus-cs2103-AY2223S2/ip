@@ -27,7 +27,8 @@ public class TaskList implements Serializable {
         String taskListString = "";
         for (int i = 0; i < taskList.size(); i++) {
             String printedString = String.format("%d. %s \n", i + 1, taskList.get(i).toString());
-            taskListString.concat(printedString);
+            // taskListString.concat(printedString);
+            taskListString += printedString;
         }
         return taskListString;
     }

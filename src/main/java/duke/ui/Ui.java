@@ -29,6 +29,10 @@ public class Ui {
         System.out.println(INDENTATION + text);
     }
 
+    private static String getTextWithIndentation(String text) {
+        return INDENTATION + text;
+    }
+
     /**
      * Prints the welcome message for Duke.
      */
@@ -47,6 +51,11 @@ public class Ui {
                 "Now you have " + numTasks + " tasks in the list.");
     }
 
+    public static String getAddTaskString(Task task, int numTasks) {
+        return getPrettyString("Got it. I've added this task:", task.toString(),
+                "Now you have " + numTasks + " tasks in the list.");
+    }
+
     /**
      * Prints the desired messages by indenting them and putting them in between bars.
      * 
@@ -58,5 +67,15 @@ public class Ui {
             printWithIndentation(textArray[i]);
         }
         printBar();
+    }
+
+    public static String getPrettyString(String... textArray) {
+        String prettyString = BAR;
+
+        for (int i = 0; i < textArray.length; i++) {
+            prettyString += getTextWithIndentation(textArray[i] + "\n");
+        }
+        prettyString += BAR;
+        return prettyString;
     }
 }
