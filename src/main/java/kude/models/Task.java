@@ -2,6 +2,9 @@ package kude.models;
 
 import java.io.Serializable;
 
+/**
+ * Base class for all tasks
+ */
 public abstract class Task implements Serializable {
     private final String content;
     private boolean isDone;
@@ -11,14 +14,23 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
+    /**
+     * Gets the content of this task
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * Get whether this task is done
+     */
     public boolean getIsDone() {
         return isDone;
     }
 
+    /**
+     * Sets whether this task is done
+     */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }

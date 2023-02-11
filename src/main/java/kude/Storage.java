@@ -10,13 +10,24 @@ import java.io.ObjectInputStream;
 import java.io.ObjectInputFilter;
 import java.io.ObjectOutputStream;
 
+/**
+ * Represents a file-backed storage container for {@link TaskList}
+ */
 public class Storage {
     private final String path;
 
+    /**
+     * Creates a new {@link Storage}
+     * @param path Path of file-backed storage.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Reads the task list from the storage medium
+     * @return The associated {@link TaskList}
+     */
     public TaskList readTaskList() throws IOException, ClassNotFoundException {
         var file = new File(path);
         if (file.createNewFile()) {
@@ -33,6 +44,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given task list to the storage medium
+     * @param list The associated {@link TaskList}
+     */
     public void writeTaskList(TaskList list) throws IOException {
         var file = new File(path);
         file.createNewFile();
