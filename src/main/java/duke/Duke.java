@@ -145,7 +145,7 @@ public class Duke {
         if (taskNum > tasks.numTasks() || taskNum <= 0) {
             throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
         }
-
+        assert taskNum <= tasks.numTasks() : "Referenced task number should be <= number existing task";
         storage.markEntry(taskNum - 1, true);
 
         Task oneTask = tasks.getTask(taskNum - 1);
@@ -161,7 +161,7 @@ public class Duke {
         if (taskNum > tasks.numTasks() || taskNum <= 0) {
             throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
         }
-
+        assert taskNum <= tasks.numTasks() : "Referenced task number should be <= number existing task";
         storage.markEntry(taskNum - 1, false);
 
         Task oneTask = tasks.getTask(taskNum - 1);
@@ -175,7 +175,7 @@ public class Duke {
         if (taskNum > tasks.numTasks() || taskNum <= 0) {
             throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
         }
-
+        assert taskNum <= tasks.numTasks() : "Referenced task number should be <= number existing task";
         storage.deleteEntry(taskNum - 1);
 
         Task delTask = tasks.getTask(taskNum - 1);

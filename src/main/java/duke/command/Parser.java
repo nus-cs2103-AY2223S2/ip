@@ -136,6 +136,7 @@ public class Parser {
         if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to mark.");
         }
+        assert input[1].matches("[0-9]+") : "Should be all numbers";
         int taskNum = Integer.parseInt(input[1]);
         return taskNum;
     }
@@ -152,6 +153,7 @@ public class Parser {
         if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to unmark.");
         }
+        assert input[1].matches("[0-9]+") : "Should be all numbers";
         int taskNum = Integer.parseInt(input[1]);
         return taskNum;
     }
@@ -168,6 +170,7 @@ public class Parser {
         if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");
         }
+        assert input[1].matches("[0-9]+") : "Should be all numbers";
         int taskNum = Integer.parseInt(input[1]);
         return taskNum;
     }
@@ -183,6 +186,7 @@ public class Parser {
         if (inputIsTooShort) {
             throw new DukeException("You didn't say what you're looking for.");
         }
+
         return input[1];
     }
 }
