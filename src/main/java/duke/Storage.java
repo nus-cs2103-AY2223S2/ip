@@ -22,6 +22,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         String home = System.getProperty("user.home"); // Get home directory
+        assert filePath.contains(".txt");
         String[] s = filePath.split("/");
 
         // Create directories
