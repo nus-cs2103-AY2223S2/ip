@@ -1,9 +1,7 @@
 package commands;
 
-import exception.TreeBotException;
 import tasks.TaskList;
 import utils.Storage;
-import utils.Ui;
 
 public class FindCommand extends Command{
     private String keyword;
@@ -15,7 +13,7 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         return toResultString();
 

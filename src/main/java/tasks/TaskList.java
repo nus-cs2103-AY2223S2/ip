@@ -73,15 +73,6 @@ public class TaskList {
         return new TaskList(result);
     }
 
-    /**
-     * Prints all the tasks in the task list.
-     */
-    public void listTasks() {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i));
-        }
-    }
-
     public String getPrintableTasks() {
         String printableTasks = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -89,8 +80,6 @@ public class TaskList {
         }
 
         return printableTasks;
-
-
     }
 
     /**

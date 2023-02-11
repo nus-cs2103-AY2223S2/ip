@@ -2,13 +2,12 @@ package commands;
 
 import tasks.TaskList;
 import utils.Storage;
-import utils.Ui;
 
 public class ListCommand extends Command{
     private TaskList taskList;
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage){
+    public String execute(TaskList taskList, Storage storage){
         this.taskList = taskList;
         return toResultString();
     }

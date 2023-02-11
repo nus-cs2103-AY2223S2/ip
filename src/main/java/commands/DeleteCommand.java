@@ -4,7 +4,6 @@ import exception.TreeBotException;
 import tasks.Task;
 import tasks.TaskList;
 import utils.Storage;
-import utils.Ui;
 
 import java.io.IOException;
 
@@ -23,7 +22,7 @@ public class DeleteCommand extends Command{
 
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
 
         this.deletedTask = taskList.deleteTask(index);
         this.taskList = taskList;

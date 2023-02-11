@@ -4,7 +4,6 @@ import exception.TreeBotException;
 import tasks.Task;
 import tasks.TaskList;
 import utils.Storage;
-import utils.Ui;
 
 import java.io.IOException;
 
@@ -26,7 +25,7 @@ public class ToggleMarkTaskCommand extends Command {
         this.isMarkAsDone = isMarkAsDone;
     }
     @Override
-    public String execute(TaskList taskList, Ui u, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         this.markedTask = !isMarkAsDone ? taskList.unmarkTask(index) : taskList.markTask(index);
         try {
             storage.saveTasks(taskList.getArrayListCopy());
