@@ -48,6 +48,15 @@ public class TaskList {
     }
 
     /**
+     * Insert one Task to TaskList.
+     * @param tk Task to be inserted.
+     * @param n Position to the list.
+     */
+    public void insert(Task tk, int n) {
+        taskList.add(n, tk);
+    }
+
+    /**
      * Remove the task from the TaskList.
      * @param n Index of the task.
      */
