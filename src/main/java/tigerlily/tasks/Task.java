@@ -2,11 +2,11 @@ package tigerlily.tasks;
 
 public class Task {
     private String description;
-    private boolean status;
+    private boolean isComplete;
 
     public Task(String description) {
         this.description = description;
-        this.status = false;
+        this.isComplete = false;
     }
 
     /**
@@ -22,14 +22,14 @@ public class Task {
      * Marks a task as completed.
      */
     public void markDone() {
-        this.status = true;
+        this.isComplete = true;
     }
 
     /**
      * Marks a task as uncompleted.
      */
     public void unmarkDone() {
-        this.status = false;
+        this.isComplete = false;
     }
 
     /**
@@ -37,8 +37,8 @@ public class Task {
      *
      * @return the completion status of a task
      */
-    public boolean isDone() {
-        return this.status;
+    public boolean getStatus() {
+        return this.isComplete;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Task {
      * @return the Task in String format for data storage
      */
     public String getDataString() {
-        if (this.isDone()) {
+        if (this.getStatus()) {
             return "1 | " + this.getDescription();
         } else {
             return "0 | " + this.getDescription();
@@ -61,7 +61,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.isDone()) {
+        if (this.getStatus()) {
             return "[X] " + this.getDescription();
         } else {
             return "[ ] " + this.getDescription();
