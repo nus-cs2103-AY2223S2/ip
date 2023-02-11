@@ -54,6 +54,16 @@ public class UiTest {
         assertEquals("OOPS! Testing warn() function", outputStreamCaptor.toString().trim());
     }
 
+    @Test
+    void getRecentMessages() {
+        ui.println("Blah blah blah");
+        ui.println("More blahs");
+        ui.warn("oh an error!");
+
+        final String s = ui.getRecentMessages();
+        assertEquals("Blah blah blah\nMore blahs\nOOPS! oh an error!\n", s);
+    }
+
     @AfterEach void tearDown() {
         System.setOut(standardOut);
     }
