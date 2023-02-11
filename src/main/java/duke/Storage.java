@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Class that deals with loading tasks from the file and saving tasks in the file
+ * Class that handles loading tasks from the file and saving tasks in the file
  */
 public class Storage {
 
@@ -53,44 +53,48 @@ public class Storage {
      * Decodes String version of tasks from text file into corresponding Task objects
      *
      * @param data String version of a task object
-     * @return A task object
+     * @return A task object created with the attributes specified in the data argument
      */
     public Task decode(String data) {
         // Use examples in qn page to decode into tasks
         char taskType = data.charAt(0);
         Task currentTask = null;
         switch (taskType) {
-            case 'T':
-                if (data.charAt(4) == 'X') {
-                    currentTask = new Todo(true, "todo " + data.substring(8));
-                } else {
-                    currentTask = new Todo(false, "todo " + data.substring(8));
-                }
-                break;
-            case 'D':
-                String tempString = data.substring(8);
-                String taskName = tempString.substring(0, tempString.indexOf(" | "));
-                String deadline = tempString.substring(tempString.indexOf(" | ") + 3);
-                String reformattedInput = "deadline " + taskName + " /by " + deadline;
-                if (data.charAt(4) == 'X') {
-                    currentTask = new Deadline(true, reformattedInput);
-                } else {
-                    currentTask = new Deadline(false, reformattedInput);
-                }
-                break;
-            case 'E':
-                String temp = data.substring(8);
-                String taskTitle = temp.substring(0, temp.indexOf(" | "));
-                String datesString = temp.substring(temp.indexOf(" | ") + 3);
-                String fromDate = datesString.substring(0, datesString.indexOf(" | "));
-                String toDate = datesString.substring(datesString.indexOf(" | ") + 3);
-                String newInput = "event " + taskTitle + " /from " + fromDate + " /to " + toDate;
-                if (data.charAt(4) == 'X') {
-                    currentTask = new Event(true, newInput);
-                } else {
-                    currentTask = new Event(false, newInput);
-                }
-                break;
+        case 'T':
+            if (data.charAt(4) == 'X') {
+                currentTask = new Todo(true, "todo " + data.substring(8));
+            } else {
+                currentTask = new Todo(false, "todo " + data.substring(8));
+            }
+            break;
+        case 'D':
+            String tempString = data.substring(8);
+            String taskName = tempString.substring(0, tempString.indexOf(" | "));
+            String deadline = tempString.substring(tempString.indexOf(" | ") + 3);
+
+            String reformattedInput = "deadline " + taskName + " /by " + deadline;
+
+            if (data.charAt(4) == 'X') {
+                currentTask = new Deadline(true, reformattedInput);
+            } else {
+                currentTask = new Deadline(false, reformattedInput);
+            }
+            break;
+        case 'E':
+            String temp = data.substring(8);
+            String taskTitle = temp.substring(0, temp.indexOf(" | "));
+            String datesString = temp.substring(temp.indexOf(" | ") + 3);
+            String fromDate = datesString.substring(0, datesString.indexOf(" | "));
+            String toDate = datesString.substring(datesString.indexOf(" | ") + 3);
+
+            String newInput = "event " + taskTitle + " /from " + fromDate + " /to " + toDate;
+
+            if (data.charAt(4) == 'X') {
+                currentTask = new Event(true, newInput);
+            } else {
+                currentTask = new Event(false, newInput);
+            }
+            break;
         }
         return currentTask;
     }

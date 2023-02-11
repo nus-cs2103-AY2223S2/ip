@@ -5,7 +5,7 @@ package duke;
  */
 public class Parser {
     /**
-     * Makes sense of the user command and calls corresponding methods
+     * Parses user input and executes the specified commands
      *
      * @param userInput String of user input read from command line
      * @param taskList TaskList object to which tasks are added to or deleted from
@@ -78,6 +78,12 @@ public class Parser {
                 ex.printStackTrace();
             }
             break;
+        default:
+            try {
+                throw new DukeException();
+            } catch (DukeException de) {
+                result += de.toString();
+            }
         }
         fileManager.writeToFile(taskList);
         return result;
