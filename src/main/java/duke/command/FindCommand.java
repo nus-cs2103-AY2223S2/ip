@@ -7,6 +7,9 @@ import duke.Ui;
 
 public class FindCommand extends Command {
 
+    private static Integer START_INDEX_OF_DESCRIPTION = 5;
+
+
     public FindCommand(String textCmd) {
         super(textCmd);
     }
@@ -35,7 +38,7 @@ public class FindCommand extends Command {
                     + "Please follow this format: find {keyword}");
         }
 
-        String keyWord = textCmd.substring(5);
+        String keyWord = textCmd.substring(START_INDEX_OF_DESCRIPTION);
         return ui.printTaskByKeyWord(taskList, keyWord);
     }
 }

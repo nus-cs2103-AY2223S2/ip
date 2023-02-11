@@ -6,7 +6,8 @@ public class Task {
 
 
     /**
-     * The building block for the 3 other tasks: Deadline, ToDos and Event.
+     * Constructs a Task class with the basic information.
+     * Basic Information includes Description and Completion Status.
      *
      * @param  description description of the user's task.
      */
@@ -16,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Completion Status of the task.
+     * Returns a String of the Completion Status of the task.
      *
      * @return a String that indicates whether the task is done.
      */
@@ -26,7 +27,7 @@ public class Task {
 
 
     /**
-     * Description of the task.
+     * Returns Description of the task.
      *
      * @return a String that details the task
      */
@@ -42,7 +43,9 @@ public class Task {
     public boolean emptyTask() {
         if (description.equals("")) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -64,7 +67,7 @@ public class Task {
     }
 
     /**
-     * Status of its completion status
+     * Returns the Completion Status of the task.
      *
      * @return Status of its completion status but in binary format for saving in Storage
      */
