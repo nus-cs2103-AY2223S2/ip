@@ -77,4 +77,18 @@ public class Task {
         return "/ " + indicator + " / " + this.description;
 
     }
+    /**
+     * Check if the task is identical with another task.
+     *
+     * @param obj the object to compare with
+     * @return true if the descriptions are identical, else false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+        Task presentTask = (Task) obj;
+        return description.equals(presentTask.description);
+    }
 }

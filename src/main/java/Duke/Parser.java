@@ -1,6 +1,7 @@
 package Duke;
 import Duke.Exceptions.DukeException;
 import Duke.Exceptions.emptyDescriptionException;
+import Duke.Exceptions.duplicateException;
 import Duke.Tasks.*;
 import Duke.Exceptions.unknownCommandException;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class Parser {
      * @param description the description of task to do
      * @param listOfTasks the TasklistOfTasks where tasks are stored in
      */
-    private static String addTodo(String description, TaskList listOfTasks) {
+    private static String addTodo(String description, TaskList listOfTasks) throws duplicateException {
         int lenBefore = listOfTasks.size();
         ToDo tdItem = new ToDo(description);
         listOfTasks.addTask(tdItem);
@@ -55,7 +56,7 @@ public class Parser {
      * @param start the starting time of the event
      * @param end the ending time of the event
      */
-    private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) {
+    private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) throws duplicateException {
         Events evItem = new Events(description, start, end);
         int lenBefore = listOfTasks.size();
         listOfTasks.addTask(evItem);
@@ -73,7 +74,7 @@ public class Parser {
      * @param doneBy the time of deadline task
      */
 
-    private static String addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) {
+    private static String addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) throws duplicateException {
         int lenBefore = listOfTasks.size();
         Deadline dlItem = new Deadline(description, doneBy);
         listOfTasks.addTask(dlItem);
