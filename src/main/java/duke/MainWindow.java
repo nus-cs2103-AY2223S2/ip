@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
         String response = "Default response";
         boolean isExit = false;
         try {
-            Command command = Parser.parseCommand(input, duke.tasks);
+            Command command = Parser.parseCommand(input);
             command.execute(duke.tasks, duke.ui, duke.storage);
             response = command.getResponse();
             isExit = command.isExit();

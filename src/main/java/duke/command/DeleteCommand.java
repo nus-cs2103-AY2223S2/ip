@@ -23,7 +23,7 @@ public class DeleteCommand extends AddCommand {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String response = "DEFAULT MESSAGE";
+        String response;
         try {
             Task taskRemoved = tasks.getTaskAtIndex(taskIndex);
             tasks.deleteTask(taskIndex);

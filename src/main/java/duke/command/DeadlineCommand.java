@@ -28,7 +28,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Deadline newTask = new Deadline(desc, byWhen);
         tasks.addTask(newTask);
-        String response = "OK! I've added:\n" + newTask.toString()
+        String response = "OK! I've added:\n" + newTask
                 + String.format("\nNow you have %d task(s) in the list.", tasks.getSize());
         Ui.showResponse(response);
         this.responseFromDukeAfterExecution = response;

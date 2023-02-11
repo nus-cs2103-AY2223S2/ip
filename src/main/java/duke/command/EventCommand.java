@@ -18,9 +18,9 @@ public class EventCommand extends AddCommand {
 
     /**
      * Constructor for EventCommand.
-     * @param desc
-     * @param from
-     * @param to
+     * @param desc description of event
+     * @param from start datetime
+     * @param to end datetime
      */
     public EventCommand(String desc, LocalDateTime from, LocalDateTime to) {
         this.desc = desc;
@@ -32,7 +32,7 @@ public class EventCommand extends AddCommand {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Event newTask = new Event(desc, from, to);
         tasks.addTask(newTask);
-        String response = "OK! I've added:\n" + newTask.toString()
+        String response = "OK! I've added:\n" + newTask
                 + String.format("\nNow you have %d task(s) in the list.", tasks.getSize());
         Ui.showResponse(response);
         this.responseFromDukeAfterExecution = response;

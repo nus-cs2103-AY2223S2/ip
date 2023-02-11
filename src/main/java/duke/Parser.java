@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
+import duke.command.ErrorCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
@@ -21,76 +22,49 @@ import duke.command.UnmarkCommand;
  * Parser handles making sense of user command.
  */
 public class Parser {
+
     /**
      * Parses command that user inputs.
      * @param userInput full user input string
-     * @param tasklist current tasklist in Duke
      * @return Command
      */
-    public static Command parseCommand(String userInput, TaskList tasklist) {
-        String[] arrOfStr = userInput.split(" ");
-        String commandWord = arrOfStr[0];
+    public static Command parseCommand(String userInput) {
+        String commandWord = getCommandWord(userInput);
         int taskIndex;
         switch (commandWord) {
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return parseList();
         case MarkCommand.COMMAND_WORD:
-            taskIndex = getTaskIndex(userInput);
-            return new MarkCommand(taskIndex);
+            return parseMark(userInput);
         case UnmarkCommand.COMMAND_WORD:
-            taskIndex = getTaskIndex(userInput);
-            return new UnmarkCommand(taskIndex);
+            return parseUnmark(userInput);
         case DeleteCommand.COMMAND_WORD:
-            taskIndex = getTaskIndex(userInput);
-            return new DeleteCommand(taskIndex);
+            return parseDelete(userInput);
         case TerminateCommand.COMMAND_WORD:
-            return new TerminateCommand();
+            return parseTerminate();
         case ToDoCommand.COMMAND_WORD:
-            try {
-                String desc = getDescToDo(userInput);
-                assert desc.length() == 0 : "Todo task description cannot be empty!";
-                return new ToDoCommand(desc);
-            } catch (DukeException e) {
-                Ui.showError(e.getMessage());
-                break;
-            }
+            return parseTodo(userInput);
         case DeadlineCommand.COMMAND_WORD:
-            try {
-                String desc = getDescDeadline(userInput);
-                assert desc.length() == 0 : "Deadline task description cannot be empty!";
-                LocalDateTime byWhen = getDeadline(userInput);
-                assert byWhen == null : "Deadline should not be null!";
-                return new DeadlineCommand(desc, byWhen);
-            } catch (DukeException e) {
-                Ui.showError(e.getMessage());
-                break;
-            }
+            return parseDeadline(userInput);
         case EventCommand.COMMAND_WORD:
-            try {
-                String desc = getDescEvent(userInput);
-                assert desc.length() == 0 : "Event task description cannot be empty!";
-                LocalDateTime from = getFrom(userInput);
-                assert from == null : "Start date/time should not be null!";
-                LocalDateTime to = getTo(userInput);
-                assert to == null : "End date/time should not be null!";
-                return new EventCommand(desc, from, to);
-            } catch (DukeException e) {
-                Ui.showError(e.getMessage());
-                break;
-            }
+            return parseEvent(userInput);
         case FindCommand.COMMAND_WORD:
-            try {
-                String keyword = getKeyword(userInput);
-                return new FindCommand(keyword);
-            } catch (DukeException e) {
-                Ui.showError(e.getMessage());
-                break;
-            }
+            return parseFind(userInput);
         default:
             return new UnknownCommand();
         }
         assert false;
-        return new UnknownCommand();
+    }
+    
+    /**
+     * Gets the command word of the user input
+     * @param userInput full user input
+     * @return command word.
+     */
+    public static String getCommandWord(String userInput) {
+        String[] arrOfStr = userInput.split(" ");
+        String commandWord = arrOfStr[0];
+        return commandWord;
     }
 
     /**
@@ -99,16 +73,10 @@ public class Parser {
      * @return index of task specified
      */
     public static int getTaskIndex(String userInput) {
-        String taskIndex = "";
-        int toMinus = 1;
-        char fromBack = userInput.charAt(userInput.length() - toMinus);
-        while (fromBack != (' ')) {
-            taskIndex = fromBack + taskIndex;
-            toMinus++;
-            fromBack = userInput.charAt(userInput.length() - toMinus);
-        }
-        int intTaskIndex = Integer.parseInt(taskIndex) - 1;
-        return intTaskIndex;
+        String[] arrOfStr = userInput.split(" ");
+        String strIndex = arrOfStr[1];
+        int intIndex = Integer.parseInt(strIndex) - 1;
+        return intIndex;
     }
 
     /**
@@ -119,16 +87,8 @@ public class Parser {
      */
     public static String getDescToDo(String userInput) throws DukeException {
         try {
-            String subString = userInput.substring(5);
-            String desc = "";
-            int index = 0;
-            char front = subString.charAt(index);
-            while (index < subString.length() - 1) {
-                desc = desc + front;
-                index++;
-                front = subString.charAt(index);
-            }
-            desc = desc + front;
+            String[] arrOfStr = userInput.split("todo ");
+            String desc = arrOfStr[1];
             return desc;
         } catch (Exception e) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -142,14 +102,12 @@ public class Parser {
      */
     public static String getDescDeadline(String userInput) throws DukeException {
         try {
-            String subString = userInput.substring(9);
-            String desc = "";
-            int index = 0;
-            char front = subString.charAt(index);
-            while (front != ('/')) {
-                desc = desc + front;
-                index++;
-                front = subString.charAt(index);
+            String[] arrOfStr = userInput.split("deadline ");
+            String descDateTime = arrOfStr[1];
+            String[] arrOfDescDateTime = descDateTime.split("/by");
+            String desc = arrOfDescDateTime[0];
+            if (desc.length() == 0) {
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
             return desc;
         } catch (Exception e) {
@@ -164,18 +122,16 @@ public class Parser {
      */
     public static String getDescEvent(String userInput) throws DukeException {
         try {
-            String subString = userInput.substring(6);
-            String desc = "";
-            int index = 0;
-            char front = subString.charAt(index);
-            while (front != ('/')) {
-                desc = desc + front;
-                index++;
-                front = subString.charAt(index);
+            String[] arrOfStr = userInput.split("event ");
+            String descDateTime = arrOfStr[1];
+            String[] arrOfDescDateTime = descDateTime.split("/from");
+            String desc = arrOfDescDateTime[0];
+            if (desc.length() == 0) {
+                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             }
             return desc;
         } catch (Exception e) {
-            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
     }
 
@@ -186,12 +142,14 @@ public class Parser {
      * @throws DukeException
      */
     public static LocalDateTime getDeadline(String userInput) throws DukeException {
-        String[] arrOfStr = userInput.split("/by");
-        String strDate = arrOfStr[1].substring(1);
         try {
+            String[] arrOfStr = userInput.split("/by ");
+            String strDate = arrOfStr[1];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(strDate, formatter);
             return dateTime;
+        } catch (ArrayIndexOutOfBoundsException ae) {
+            throw new DukeException("'/by DATETIME' is missing!");
         } catch (DateTimeParseException e) {
             throw new DukeException("INVALID DATE!!! Please enter date in YYYY-MM-DD HHMM format");
         }
@@ -204,12 +162,14 @@ public class Parser {
      * @throws DukeException
      */
     public static LocalDateTime getFrom(String userInput) throws DukeException {
-        String[] arrOfStr = userInput.split("/from ")[1].split(" /to");
-        String strFrom = arrOfStr[0];
         try {
+            String[] arrOfStr = userInput.split("/from ")[1].split(" /to");
+            String strFrom = arrOfStr[0];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime from = LocalDateTime.parse(strFrom, formatter);
             return from;
+        } catch (ArrayIndexOutOfBoundsException ae) {
+            throw new DukeException("'/from' DATETIME' is missing!");
         } catch (DateTimeParseException e) {
             throw new DukeException("INVALID 'From' DATE!!! Please enter date in YYYY-MM-DD HHMM format");
         }
@@ -222,12 +182,14 @@ public class Parser {
      * @throws DateTimeParseException
      */
     public static LocalDateTime getTo(String userInput) throws DukeException {
-        String[] arrOfStr = userInput.split("/to ");
-        String strTo = arrOfStr[1];
         try {
+            String[] arrOfStr = userInput.split("/to ");
+            String strTo = arrOfStr[1];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime to = LocalDateTime.parse(strTo, formatter);
             return to;
+        } catch (ArrayIndexOutOfBoundsException ae) {
+            throw new DukeException("'/to' DATETIME' is missing!");
         } catch (DateTimeParseException e) {
             throw new DukeException("INVALID 'To' DATE!!! Please enter date in YYYY-MM-DD HHMM format");
         }
@@ -235,7 +197,7 @@ public class Parser {
 
     /**
      * Gets keyword from full user input.
-     * @param userInput full user input string.
+     * @param userInput full user input string
      * @return
      */
     public static String getKeyword(String userInput) throws DukeException {
@@ -244,6 +206,124 @@ public class Parser {
             return keyword;
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
+        }
+    }
+
+    /**
+     * Parse list command.
+     * @return new ListCommand
+     */
+    private static Command parseList() {
+        return new ListCommand();
+    }
+
+    /**
+     * Parse mark command.
+     * @param userInput full user input
+     * @return new MarkCommand
+     */
+    private static Command parseMark(String userInput) {
+        int taskIndex = getTaskIndex(userInput);
+        return new MarkCommand(taskIndex);
+    }
+
+    /**
+     * Parse unmark command.
+     * @param userInput full user input
+     * @return new UnmarkCommand
+     */
+    private static Command parseUnmark(String userInput) {
+        int taskIndex = getTaskIndex(userInput);
+        return new UnmarkCommand(taskIndex);
+    }
+
+    /**
+     * Parse delete command.
+     * @param userInput
+     * @return new DeleteCommand
+     */
+    private static Command parseDelete(String userInput) {
+        int taskIndex = getTaskIndex(userInput);
+        return new DeleteCommand(taskIndex);
+    }
+
+    /**
+     * Parse terminate command.
+     * @return new TerminateCommand
+     */
+    private static Command parseTerminate() {
+        return new TerminateCommand();
+    }
+
+    /**
+     * Parse todo command.
+     * @param userInput full user input
+     * @return new ToDoCommand or new ErrorCommand if an error is caught
+     */
+    private static Command parseTodo(String userInput) {
+        try {
+            String desc = getDescToDo(userInput);
+            assert desc.length() == 0 : "Todo task description cannot be empty!";
+            return new ToDoCommand(desc);
+        } catch (DukeException e) {
+            Ui.showResponse(e.getMessage());
+            return new ErrorCommand(e.getMessage());
+        }
+    }
+
+    /**
+     * Parse deadline command.
+     * @param userInput full user input
+     * @return new DeadlineCommand or new ErrorCommand if an error is caught
+     */
+    private static Command parseDeadline(String userInput) {
+        try {
+            String desc = getDescDeadline(userInput);
+            assert desc.length() == 0 : "Deadline task description cannot be empty!";
+            LocalDateTime byWhen = getDeadline(userInput);
+            assert byWhen == null : "Deadline should not be null!";
+            return new DeadlineCommand(desc, byWhen);
+        } catch (DukeException e) {
+            Ui.showResponse(e.getMessage());
+            return new ErrorCommand(e.getMessage());
+        }
+    }
+
+    /**
+     * Parse event command.
+     * @param userInput full user input
+     * @return new EventCommand or new ErrorCommand if an error is caught
+     */
+    private static Command parseEvent(String userInput) {
+        try {
+            String desc = getDescEvent(userInput);
+            assert desc.length() == 0 : "Event task description cannot be empty!";
+            LocalDateTime from = getFrom(userInput);
+            assert from == null : "Start date/time should not be null!";
+            LocalDateTime to = getTo(userInput);
+            assert to == null : "End date/time should not be null!";
+            if (from.isAfter(to)) {
+                return new ErrorCommand("Error!! FROM datetime cannot be after TO datetime!!!");
+            }
+            return new EventCommand(desc, from, to);
+        } catch (DukeException e) {
+            Ui.showResponse(e.getMessage());
+            return new ErrorCommand(e.getMessage());
+        }
+    }
+   
+    /**
+     * Parse find command.
+     * @param userInput full user input
+     * @return new FindCommand or new ErrorCommand if an error is caught
+     */
+    private static Command parseFind(String userInput) {
+        try {
+            String keyword = getKeyword(userInput);
+            return new FindCommand(keyword);
+        } catch (DukeException e) {
+            Ui.showResponse(e.getMessage());
+            return new ErrorCommand(e.getMessage());
         }
     }
 }
