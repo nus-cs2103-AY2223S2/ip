@@ -5,7 +5,7 @@ public class NoSuchTask extends DukeException {
   public String noSuchTask;
   public NoSuchTask(int i) {
     this.index = i + 1;
-    this.noSuchTask = "There is no Duke.task " + index + " in the list";
+    this.noSuchTask = "There is no Duke.Duke.task " + index + " in the list";
   }
   @Override
   public String toString() {

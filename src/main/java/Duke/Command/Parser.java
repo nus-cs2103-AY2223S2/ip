@@ -34,11 +34,11 @@ public class Parser {
         curTask = new Todo(input);
         tasks.addTask(curTask);
         storage.updateList();
-        reply = "Got it. I've added this Duke.task:\n\t"
+        reply = "Got it. I've added this Duke.Duke.task:\n\t"
             + curTask.taskString()
             + "\n" + "Now you have "
             + tasks.size()
-            + " Duke.task(s) in the list.";
+            + " Duke.Duke.task(s) in the list.";
         break;
       }
       case DEADLINE: {
@@ -54,11 +54,11 @@ public class Parser {
         curTask = new Deadline(input, time);
         tasks.addTask(curTask);
         storage.updateList();
-        reply = "Got it. I've added this Duke.task:\n\t"
+        reply = "Got it. I've added this Duke.Duke.task:\n\t"
             + curTask.taskString()
             + "\n" + "Now you have "
             + tasks.size()
-            + " Duke.task(s) in the list.";
+            + " Duke.Duke.task(s) in the list.";
         break;
       }
       case EVENT: {
@@ -78,11 +78,11 @@ public class Parser {
         curTask = new Event(input, startTime, endTime);
         tasks.addTask(curTask);
         storage.updateList();
-        reply = "Got it. I've added this Duke.task:\n\t"
+        reply = "Got it. I've added this Duke.Duke.task:\n\t"
             + curTask.taskString()
             + "\n" + "Now you have "
             + tasks.size()
-            + " Duke.task(s) in the list.";
+            + " Duke.Duke.task(s) in the list.";
         break;
       }
       case MARK: {
@@ -96,7 +96,7 @@ public class Parser {
         Task object = tasks.get(curIndex);
         object.mark();
         storage.updateList();
-        reply = "Nice! I've marked this Duke.task as done: \n"
+        reply = "Nice! I've marked this Duke.Duke.task as done: \n"
             + object.taskString();
         break;
       }
@@ -111,7 +111,7 @@ public class Parser {
         Task object = tasks.get(curIndex);
         object.unmark();
         storage.updateList();
-        reply = "OK, I've marked this Duke.task as not done yet:\n"
+        reply = "OK, I've marked this Duke.Duke.task as not done yet:\n"
             + object.taskString();
         break;
       }
@@ -130,7 +130,7 @@ public class Parser {
         Task object = tasks.get(curIndex);
         tasks.delete(curIndex);
         storage.updateList();
-        reply = "Noted. I've removed this Duke.task:\n"
+        reply = "Noted. I've removed this Duke.Duke.task:\n"
             + object.taskString();
         break;
       }

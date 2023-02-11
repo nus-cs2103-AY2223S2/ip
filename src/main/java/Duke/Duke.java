@@ -6,11 +6,9 @@ import Duke.storage.Storage;
 import Duke.task.TaskList;
 import Duke.ui.UI;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
-public class Duke<Ui> {
+public class Duke {
 
   private final UI ui;
 
@@ -46,7 +44,14 @@ public class Duke<Ui> {
     }
 
     public static void main(String[] args) throws IOException {
-      new Duke("data/duke.txt").run();
+      try {
+        new Duke("data/duke.txt").run();
+      } catch (FileNotFoundException e) {
+        File data = new File("data");
+        data.mkdirs();
+        File duke = new File("data/duke.txt");
+        new Duke(duke.getPath());
+      }
     }
 
     public void greeting() {
@@ -56,7 +61,7 @@ public class Duke<Ui> {
           + "| |_| | |_| |   <  __/\n"
           + "|____/ \\__,_|_|\\_\\___|\n";
       String sayHi = "Hello from\n" + logo +
-          "\nHello! I'm Duke\n What can I do for you?";
+          "\nHello! I'm Duke.Duke\n What can I do for you?";
       System.out.println(sayHi);
   }
 }
