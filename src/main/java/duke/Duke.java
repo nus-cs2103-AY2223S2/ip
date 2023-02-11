@@ -62,16 +62,15 @@ public class Duke {
     public String getResponse(String input) {
         if (this.isExit) {
             return "Duke has been turned off. To restart, close and reopen the application again. Goodbye!";
-        } else {
-            try {
-                Command command = Parser.parse(input);
-                assert command != null : "There was an error in parsing user input into a command.";
-                String dukeResponse = command.execute(tasks, ui, storage);
-                this.isExit = command.isExit();
-                return dukeResponse;
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
+        }
+        try {
+            Command command = Parser.parse(input);
+            assert command != null : "There was an error in parsing user input into a command.";
+            String dukeResponse = command.execute(tasks, ui, storage);
+            this.isExit = command.isExit();
+            return dukeResponse;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 

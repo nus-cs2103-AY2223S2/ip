@@ -45,9 +45,8 @@ public class Event extends Task {
         String fromString = fromAndTo.substring(0, fromAndTo.indexOf(" /to"));
         String toString = fromAndTo.substring(fromAndTo.indexOf(" /to") + " /to".length() + 1);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-        LocalDateTime from = LocalDateTime.parse(fromString, formatter);
-        LocalDateTime to = LocalDateTime.parse(toString, formatter);
+        LocalDateTime from = LocalDateTime.parse(fromString, FORMATTER);
+        LocalDateTime to = LocalDateTime.parse(toString, FORMATTER);
 
         return new Event(description, from, to);
     }

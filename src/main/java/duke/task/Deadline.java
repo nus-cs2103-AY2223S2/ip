@@ -38,8 +38,7 @@ public class Deadline extends Task {
         String description = details.substring(0, details.indexOf(" /by"));
         String byString = details.substring(details.indexOf(" /by") + " /by".length() + 1);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-        LocalDateTime by = LocalDateTime.parse(byString, formatter);
+        LocalDateTime by = LocalDateTime.parse(byString, FORMATTER);
 
         return new Deadline(description, by);
     }

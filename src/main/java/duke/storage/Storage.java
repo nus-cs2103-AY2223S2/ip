@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class Storage {
     protected String filePath;
     protected File file;
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
     /**
      * Constructor for the Storage class.
@@ -34,7 +35,7 @@ public class Storage {
             this.file = new File(filePath);
             this.file.createNewFile();
         } catch (IOException e) {
-            throw new DukeException("Unable to create file \"data/duke.txt\"");
+            throw new DukeException("Unable to create file \"" + filePath + "\"");
         }
     }
 
@@ -72,45 +73,74 @@ public class Storage {
         String taskType = currentLine.substring(0, 3);
         String marked = currentLine.substring(3, 6);
         String details = currentLine.substring(7);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
         switch (taskType) {
         case "[T]":
+            return toDoParser(marked, details);
+        case "[D]":
+            return deadlineParser(marked, details);
+        case "[E]":
+            return eventParser(marked, details);
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * Parses the line of text in the file to a ToDo.
+     * @param marked the String representation of whether the task has been completed.
+     * @param details the description and relevant dates (if any) of the task.
+     * @return the created ToDo.
+     */
+    private ToDo toDoParser(String marked, String details) {
             ToDo toDo = new ToDo(details);
             if (marked.equals("[X]")) {
                 toDo.markUnmark(true);
             }
             return toDo;
-        case "[D]":
-            String description = details.substring(0, details.indexOf(" (by:"));
-            String byString = details.substring(details.indexOf(" (by:") + " (by:".length() + 1,
-                    details.indexOf(")"));
+    }
 
-            LocalDateTime by = LocalDateTime.parse(byString, formatter);
+    /**
+     * Parses the line of text in the file to a Deadline.
+     * @param marked the String representation of whether the task has been completed.
+     * @param details the description and relevant dates (if any) of the task.
+     * @return the created Deadline.
+     */
+    private Deadline deadlineParser(String marked, String details) {
+        String description = details.substring(0, details.indexOf(" (by:"));
+        String byString = details.substring(details.indexOf(" (by:") + " (by:".length() + 1,
+                details.indexOf(")"));
 
-            Deadline deadline = new Deadline(description, by);
-            if (marked.equals("[X]")) {
-                deadline.markUnmark(true);
-            }
-            return deadline;
-        case "[E]":
-            String eventDescription = details.substring(0, details.indexOf(" (from:"));
-            String fromString = details.substring(details.indexOf(" (from:") + " (from:".length() + 1,
-                    details.indexOf(" to: "));
-            String toString = details.substring(details.indexOf(" to:") + " to:".length() + 1,
-                    details.indexOf(")"));
+        LocalDateTime by = LocalDateTime.parse(byString, FORMATTER);
 
-            LocalDateTime from = LocalDateTime.parse(fromString, formatter);
-            LocalDateTime to = LocalDateTime.parse(toString, formatter);
-
-            Event event = new Event(eventDescription, from, to);
-            if (marked.equals("[X]")) {
-                event.markUnmark(true);
-            }
-            return event;
-        default:
-            return null;
+        Deadline deadline = new Deadline(description, by);
+        if (marked.equals("[X]")) {
+            deadline.markUnmark(true);
         }
+        return deadline;
+    }
+
+    /**
+     * Parses the line of text in the file to an Event.
+     * @param marked the String representation of whether the task has been completed.
+     * @param details the description and relevant dates (if any) of the task.
+     * @return the created Event.
+     */
+    private Event eventParser(String marked, String details) {
+        String eventDescription = details.substring(0, details.indexOf(" (from:"));
+        String fromString = details.substring(details.indexOf(" (from:") + " (from:".length() + 1,
+                details.indexOf(" to: "));
+        String toString = details.substring(details.indexOf(" to:") + " to:".length() + 1,
+                details.indexOf(")"));
+
+        LocalDateTime from = LocalDateTime.parse(fromString, FORMATTER);
+        LocalDateTime to = LocalDateTime.parse(toString, FORMATTER);
+
+        Event event = new Event(eventDescription, from, to);
+        if (marked.equals("[X]")) {
+            event.markUnmark(true);
+        }
+        return event;
     }
 
     /**
