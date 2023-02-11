@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.io.File;
@@ -73,7 +74,7 @@ public class Storage {
      *
      * @param tasks The list of Tasks to be written to the text file.
      */
-    public void writeTasksToFile(ArrayList<Task> tasks) {
+    public void writeTasksToFile(ArrayList<Task> tasks) throws DukeException {
         try {
 
             List<String> taskStrings = tasks
@@ -88,7 +89,7 @@ public class Storage {
             fileWriter.close();
 
         } catch (IOException e) {
-            System.out.println("An error occurred in writing the data to file :/");
+            throw new DukeException("An error occurred in writing the data to file :/");
 
         }
     }

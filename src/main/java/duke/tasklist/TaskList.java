@@ -83,7 +83,8 @@ public class TaskList {
      *
      * @param taskNumber The number to indicate which Task is to be marked as done.
      * @return The String response of the chatbot.                  
-     * @throws DukeException When the task number given is not valid.
+     * @throws DukeException When the task number given is not valid or
+     * when there is an error in writing to the file.
      */
     public String markTask(int taskNumber) throws DukeException {
         return this.markUnmark(taskNumber, true);
@@ -94,7 +95,8 @@ public class TaskList {
      *
      * @param taskNumber The number to indicate which Task is to be marked as undone.
      * @return The String response of the chatbot.                  
-     * @throws DukeException When the task number given is not valid.
+     * @throws DukeException When the task number given is not valid or
+     * when there is an error in writing to the file.
      */
     public String unmarkTask(int taskNumber) throws DukeException {
         return this.markUnmark(taskNumber, false);
@@ -105,9 +107,10 @@ public class TaskList {
      *
      * @param task The Task to be added to the list of Tasks.
      * @param taskType The type of the given task.
-     * @return The String response of the chatbot.                
+     * @return The String response of the chatbot.
+     * @throws DukeException When there is an error in writing to the file.
      */
-    public String addTask(Task task, String taskType) {
+    public String addTask(Task task, String taskType) throws DukeException {
         this.tasks.add(task);
         this.taskStorage.writeTasksToFile(this.tasks);
 
@@ -127,7 +130,8 @@ public class TaskList {
      *
      * @param taskNumber The number to indicate which Task is to be deleted.
      * @return The String response of the chatbot.
-     * @throws DukeException When the task number given is not valid.
+     * @throws DukeException When the task number given is not valid or
+     * when there is an error in writing to the file.
      */
     public String deleteTask(int taskNumber) throws DukeException {
         boolean isValidTaskNumber = (taskNumber > 0
