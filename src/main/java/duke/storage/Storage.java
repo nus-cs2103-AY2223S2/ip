@@ -86,21 +86,10 @@ public class Storage {
             DukeReadException, DukeUnknownCommandException {
         Scanner scanner;
 
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
-        // Checks if the save file's parent directory and the save file exists.
-        // Creates them if they do not exit.
-        // Returns empty list if save file does not exist.
-        try {
-            if (!saveFile.getParentFile().exists()) {
-                saveFile.getParentFile().mkdirs();
-            }
-            if (!saveFile.exists()) {
-                saveFile.createNewFile();
-                return list;
-            }
-        } catch (IOException e) {
-            throw new DukeFileCreationException();
+        if (!checkSaveFileExist()) {
+            return tasks;
         }
 
         try {
@@ -110,35 +99,54 @@ public class Storage {
         }
 
         // Reads save file line by line and creates new Tasks based on it.
+        createTasks(scanner, tasks);
+
+        return tasks;
+    }
+
+    /**
+     * Checks if the save file's parent directory and the save file exists. Creates them if they do not.
+     * @return false if they do not exist. true if they do.
+     * @throws DukeFileCreationException if error occurred while creating save file or its parent directory.
+     */
+    private boolean checkSaveFileExist() throws DukeFileCreationException {
+        try {
+            if (!saveFile.getParentFile().exists()) {
+                saveFile.getParentFile().mkdirs();
+            }
+            if (!saveFile.exists()) {
+                saveFile.createNewFile();
+                return false;
+            }
+            return true;
+        } catch (IOException e) {
+            throw new DukeFileCreationException();
+        }
+    }
+
+    /**
+     * Scanners the save file line by line and creates tasks based on the commands in the save file.
+     * @param scanner The scanner reading the save file.
+     * @param tasks The ArrayList to hold the created tasks.
+     * @throws DukeUnknownCommandException if the command in the save file cannot be recognised.
+     */
+    private void createTasks(Scanner scanner, ArrayList<Task> tasks) throws DukeUnknownCommandException {
         while (scanner.hasNext()) {
             String fn = scanner.next();
-            String[] details = scanner.nextLine()
-                    .strip()
-                    .split("-");
+            String[] details = scanner.nextLine().strip().split("-");
             switch (fn) {
-            case "todo":
-                list.add(new ToDos(details[0],
-                        Boolean.parseBoolean(details[1])
-                ));
-                break;
-            case "deadline":
-                list.add(new Deadlines(details[0],
-                        Boolean.parseBoolean(details[1]),
-                        details[2]
-                ));
-                break;
-            case "event":
-                list.add(new Events(details[0],
-                        Boolean.parseBoolean(details[1]),
-                        details[2],
-                        details[3]
-                ));
-                break;
-            default:
-                throw new DukeUnknownCommandException();
+                case "todo":
+                    tasks.add(new ToDos(details[0], Boolean.parseBoolean(details[1])));
+                    break;
+                case "deadline":
+                    tasks.add(new Deadlines(details[0], Boolean.parseBoolean(details[1]), details[2]));
+                    break;
+                case "event":
+                    tasks.add(new Events(details[0], Boolean.parseBoolean(details[1]), details[2], details[3]));
+                    break;
+                default:
+                    throw new DukeUnknownCommandException();
             }
-
         }
-        return list;
     }
 }

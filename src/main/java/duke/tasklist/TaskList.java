@@ -54,7 +54,7 @@ public class TaskList {
      * An Events Task requires a descriptions, a duration(/from and /to) in input String s
      * <p>
      * @param type The type of Task to be created
-     * @param s The containing the data required to create the new Task
+     * @param s The the data required to create the new Task
      * @return Message to user informing about successfully creation and adding the new Task into the list.
      * @throws DukeMissingDescriptionException If s does not contain a description for Task.
      * @throws DukeMissingDeadlineException If s does not contain /by which signifies the due date.
@@ -67,99 +67,14 @@ public class TaskList {
 
         switch (type) { // Interprets input string differently depending on the input type.
         case ToDos:
-            if (s.isBlank()) { // Checks if s contains a description.
-                throw new DukeMissingDescriptionException();
-            }
-
-            // Creates a new Todos object and add it to the list.
-            ToDos todo = new ToDos(s, false);
-            tasks.add(todo);
-
-            // Add object into the output String.
-            output += "  " + todo;
+            output += addTodo(s);
             break;
         case Deadlines: {
-            if (s.isBlank()) { // Checks if s is empty.
-                throw new DukeMissingDescriptionException();
-            }
-
-            // Checks for presence of due date.
-            // Throws DukeMissingDeadlineException if not found
-            int index = s.indexOf(" /by ");
-            if (index == -1 || s.substring(index + 5)
-                    .isBlank()) {
-                throw new DukeMissingDeadlineException();
-            }
-
-            // Gets the description and due date from s.
-            String desc = s.substring(0, index).strip();
-            String by = s.substring(index + 5).strip();
-
-            // Check if s contains a description.
-            if (index == 0 || desc.isEmpty()) {
-                throw new DukeMissingDescriptionException();
-            }
-
-            // Attempt to interpret the due date as a LocalDateTime object.
-            // If exception is thrown, treat deadline as a String.
-            // Create Deadlines object and add it into the list.
-            // Adds object into the output String.
-            Deadlines dueDate = null;
-            try {
-                LocalDateTime localBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-                dueDate = new Deadlines(desc, false, localBy);
-            } catch (DateTimeParseException dateTimeParseException) {
-                dueDate = new Deadlines(desc, false, by);
-            } finally {
-                tasks.add(dueDate);
-                output += "  " + dueDate;
-            }
+            output += addDeadline(s);
             break;
         }
         case Events: {
-            if (s.isBlank()) { // Checks is s is empty.
-                throw new DukeMissingDescriptionException();
-            }
-
-            // Checks from presence of duration.
-            // Throws DukeMissingEventDateException if not found.
-            int fromIndex = s.indexOf(" /from ");
-            int toIndex = s.indexOf(" /to ");
-            if (fromIndex == -1
-                    || toIndex == -1
-                    || toIndex < fromIndex + 7
-                    || s.substring(fromIndex + 7, toIndex).isBlank()
-                    || s.substring(toIndex + 5).isBlank()) {
-                throw new DukeMissingEventDateException();
-            }
-
-            // Gets description and duration from s.
-            String desc = s.substring(0, fromIndex).strip();
-            String startTime = s.substring(fromIndex + 7, toIndex).strip();
-            String endTime = s.substring(toIndex + 5).strip();
-
-            // Checks if description is empty,
-            if (fromIndex == 0 || desc.isEmpty()) {
-                throw new DukeMissingDescriptionException();
-            }
-
-            // Attempt to interpret the duration as a LocalDateTime object.
-            // If exception is thrown, treat duration as a String.
-            // Create Events object and add it into the list.
-            // Adds the object into the output string.
-            Events event = null;
-            try {
-                LocalDateTime localStartTime = LocalDateTime.parse(startTime,
-                        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-                LocalDateTime localEndTime = LocalDateTime.parse(endTime,
-                        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-                event = new Events(desc, false, localStartTime, localEndTime);
-            } catch (DateTimeParseException dateTimeParseException) {
-                event = new Events(desc, false, startTime, endTime);
-            } finally {
-                tasks.add(event);
-                output += "  " + event;
-            }
+            output += addEvent(s);
             break;
         }
         default:
@@ -277,4 +192,131 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a Todos Task and adds it into the TaskList.
+     * @param s The data required to create an Event.
+     * @return The Todos in String format.
+     * @throws DukeMissingDescriptionException if the description of the Todos is missing.
+     */
+    private String addTodo(String s) throws DukeMissingDescriptionException{
+        if (s.isBlank()) { // Checks if s contains a description.
+            throw new DukeMissingDescriptionException();
+        }
+
+        // Creates a new Todos object and add it to the list.
+        ToDos todo = new ToDos(s, false);
+        tasks.add(todo);
+
+        // Add object into the output String.
+        return "  " + todo;
+    }
+
+    /**
+     * Creates a Deadline Task and adds it into the TaskList.
+     * @param s The data required to create a Deadline.
+     * @return The Deadline in String format.
+     * @throws DukeMissingDescriptionException if the description of the deadline is missing.
+     * @throws DukeMissingDeadlineException if the due date of the deadline is missing.
+     */
+    private String addDeadline(String s) throws DukeMissingDescriptionException, DukeMissingDeadlineException {
+        if (s.isBlank()) { // Checks if s is empty.
+            throw new DukeMissingDescriptionException();
+        }
+
+        // Checks for presence of due date.
+        // Throws DukeMissingDeadlineException if not found
+        int index = s.indexOf(" /by ");
+        if (index == -1 || s.substring(index + 5).isBlank()) {
+            throw new DukeMissingDeadlineException();
+        }
+
+        // Gets the description and due date from s.
+        String desc = s.substring(0, index).strip();
+        String by = s.substring(index + 5).strip();
+
+        // Check if s contains a description.
+        if (index == 0 || desc.isEmpty()) {
+            throw new DukeMissingDescriptionException();
+        }
+
+        // Attempt to interpret the due date as a LocalDateTime object.
+        // If exception is thrown, treat deadline as a String.
+        // Create Deadlines object and add it into the list.
+        // Adds object into the output String.
+        Deadlines dueDate = null;
+        try {
+            LocalDateTime localBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            dueDate = new Deadlines(desc, false, localBy);
+        } catch (DateTimeParseException dateTimeParseException) {
+            dueDate = new Deadlines(desc, false, by);
+        } finally {
+            tasks.add(dueDate);
+            return "  " + dueDate;
+        }
+    }
+
+    /**
+     * Creates an Event Task and adds it into the TaskList.
+     * @param s The data required to create an Event.
+     * @return The Event in String format.
+     */
+    private String addEvent(String s) throws DukeMissingDescriptionException, DukeMissingEventDateException {
+        checkValidEvent(s);
+
+        // Gets duration and description from s.
+        int fromIndex = s.indexOf(" /from ");
+        int toIndex = s.indexOf(" /to ");
+        String startTime = s.substring(fromIndex + 7, toIndex).strip();
+        String endTime = s.substring(toIndex + 5).strip();
+        String desc = s.substring(0, fromIndex).strip();
+
+        // Attempt to interpret the duration as a LocalDateTime object.
+        // If exception is thrown, treat duration as a String.
+        // Create Events object and add it into the list.
+        // Adds the object into the output string.
+        Events event = null;
+        try {
+            LocalDateTime localStartTime = LocalDateTime.parse(startTime,
+                    DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            LocalDateTime localEndTime = LocalDateTime.parse(endTime,
+                    DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            event = new Events(desc, false, localStartTime, localEndTime);
+        } catch (DateTimeParseException dateTimeParseException) {
+            event = new Events(desc, false, startTime, endTime);
+        } finally {
+            tasks.add(event);
+            return "  " + event;
+        }
+    }
+
+    /**
+     * Checks if the Event data is valid.
+     * @param s The data.
+     * @throws DukeMissingDescriptionException if the description of the event is missing.
+     * @throws DukeMissingEventDateException if the duration of the event is missing.
+     */
+    private void checkValidEvent(String s) throws DukeMissingDescriptionException, DukeMissingEventDateException {
+        if (s.isBlank()) { // Checks is s is empty.
+            throw new DukeMissingDescriptionException();
+        }
+
+        // Checks from presence of duration.
+        // Throws DukeMissingEventDateException if not found.
+        int fromIndex = s.indexOf(" /from ");
+        int toIndex = s.indexOf(" /to ");
+        boolean hasHeaders = fromIndex != -1 && toIndex != -1;
+        boolean hasFrom = toIndex >= fromIndex + 7 && !s.substring(fromIndex + 7, toIndex).isBlank();
+        boolean hasTo = !s.substring(toIndex + 5).isBlank();
+        if (!hasHeaders || !hasFrom || !hasTo) {
+            throw new DukeMissingEventDateException();
+        }
+
+        // Gets description from s.
+        String desc = s.substring(0, fromIndex).strip();
+
+        // Checks if description is empty,
+        if (fromIndex == 0 || desc.isEmpty()) {
+            throw new DukeMissingDescriptionException();
+        }
+    }
 }
