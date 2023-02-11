@@ -56,7 +56,25 @@ public class Deadline extends Task {
     }
 
     /**
-     * Saved file representation of a Deadline object.
+     * Runs the Deadline read.
+     *
+     * @param s The array of strings to be read.
+     *
+     * @return String for Deadline creation.
+     */
+    public static Task readDeadline(String[] s) {
+        String deadlineName = s[2].substring(1);
+        String[] deadlineDescription = s[3].substring(1).split(" ");
+        String deadlineDate = deadlineDescription[0];
+        Deadline deadline = new Deadline(deadlineName, LocalDate.parse(deadlineDate));
+        if (s[1].charAt(1) == '1') {
+            deadline.toMark(true);
+        }
+        return deadline;
+    }
+
+    /**
+     * Represents the saved file format of a Deadline object.
      *
      * @return String format of a Deadline object in saved file form.
      */

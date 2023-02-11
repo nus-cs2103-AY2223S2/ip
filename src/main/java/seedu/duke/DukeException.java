@@ -1,4 +1,4 @@
-package seedu.duke.Exceptions;
+package seedu.duke;
 
 /**
  * DukeException to catch exceptions from DukeBot.

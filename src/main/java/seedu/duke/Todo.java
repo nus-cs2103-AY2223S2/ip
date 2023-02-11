@@ -43,7 +43,23 @@ public class Todo extends Task {
     }
 
     /**
-     * Saved file representation of a Todo object.
+     * Runs the Todo read.
+     *
+     * @param s The array of strings to be read.
+     *
+     * @return String for Todo creation.
+     */
+    public static Task readTodo(String[] s) {
+        String todoName = s[2].substring(1);
+        Todo todo = new Todo(todoName);
+        if (s[1].charAt(1) == '1') {
+            todo.toMark(true);
+        }
+        return todo;
+    }
+
+    /**
+     * Represents the saved file format of a Todo object.
      *
      * @return String format of a Todo object in saved file form.
      */

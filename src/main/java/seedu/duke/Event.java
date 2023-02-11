@@ -56,7 +56,25 @@ public class Event extends Task {
     }
 
     /**
-     * Saved file representation of an Event object.
+     * Runs the Event read.
+     *
+     * @param s The array of strings to be read.
+     *
+     * @return String for Event creation.
+     */
+    public static Task readEvent(String[] s) {
+        String eventName = s[2].substring(1);
+        String[] eventDescription = s[3].substring(1).split(" ");
+        String eventDate = eventDescription[0];
+        Event event = new Event(eventName, LocalDate.parse(eventDate));
+        if (s[1].charAt(1) == '1') {
+            event.toMark(true);
+        }
+        return event;
+    }
+
+    /**
+     * Represents the saved file format of an Event object.
      *
      * @return String format of an Event object in saved file form.
      */

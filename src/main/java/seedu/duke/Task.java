@@ -62,7 +62,7 @@ public class Task {
     }
 
     /**
-     * Saved file representation of a Task object.
+     * Represents the saved file format of a Task object.
      *
      * @return String format of a Task object in saved file form, 1 if task is done, 0 if task is not done.
      */

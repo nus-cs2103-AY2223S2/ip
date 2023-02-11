@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.Exceptions.DukeException;
-
 /**
  * Represents Parser object.
  */
