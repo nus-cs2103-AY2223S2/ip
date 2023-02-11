@@ -1,6 +1,7 @@
-# Duke project template
+# Duke <sub>copy</sub>
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+A simple task tracker. It's quick and responsive, easy-to-use, and **FREE**.\
+Developed by: @lhy-hoyin 😎
 
 ## Setting up in Intellij
 
@@ -13,12 +14,30 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. If there are any further prompts, accept the defaults.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+
+
+## Work In Progress
+- [X] README
+- [ ] Add more `Date` and `Time` parsing formats
+- [ ] Include more JUnit tests
+- [ ] Automate more using Gradle
+   - [X] Run checkstyle after building
+
+- [ ] Add more Flags to ...
+   - [ ] load configuration files
+   - [ ] open specific task list (requires multi- task lists feature)
+
+## Extra Features Ideas
+* Add `help` for in-application support (see [here](https://nus-cs2103-ay2223s2.github.io/website/se-book-adapted/projectDuke/index.html#c-help))
+* Option to `list` all uncompleted (or completed) tasks
+* Manage multiple task lists
+* Have a config file to allow user preferences
+   * Custom date/time input format
+   * Custom separator for mass operations (e.g. mark, unmark, delete)
+* Background auto-save
+
+## Known / Potential Bugs
++ *FATAL*: Catch exceptions when parsing date/time (currently assume user always enter in correct format)
++ When GUI text becomes too long, the label text are `...` (including new text)
+
+Report new bugs under [Issues](https://github.com/lhy-hoyin/ip/issues).
