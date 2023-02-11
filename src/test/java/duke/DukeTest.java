@@ -26,6 +26,7 @@ public class DukeTest {
         f.add(Flag.NO_LOAD_SAVES);
         Duke.setFlags(f);
         d = new Duke();
+        d.storage.setSaveFilePath(TestConfigs.TEST_SAVE_FILE_PATH);
     }
 
     @Test
