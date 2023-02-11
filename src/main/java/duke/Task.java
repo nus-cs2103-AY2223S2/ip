@@ -42,6 +42,9 @@ public abstract class Task {
         return "[" + getStatusIcon() + "]" +  this.description;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     public static void unmarkTask(ArrayList<Task> array, String[] splitInput) {
         array.get((Integer.parseInt(splitInput[1])-1)).markAsUnDone();

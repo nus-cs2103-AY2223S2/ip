@@ -36,7 +36,9 @@ public class Deadline extends Task {
     }
 
     
-
+    public String getDate() {
+        return by;
+    }
     public static void createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")){
             try {
