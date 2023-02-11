@@ -1,5 +1,10 @@
 package Duke.Exceptions;
 
+/**
+ * Exceptions when user inputs delete and mark command
+ * without indicating the number of the object task.
+ */
+
 public class EmptyOrder extends DukeException {
   public String emptyOrder;
   public EmptyOrder(String input) {

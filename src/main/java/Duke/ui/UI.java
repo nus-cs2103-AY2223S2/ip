@@ -5,6 +5,9 @@ import Duke.Command.Parser;
 import Duke.Exceptions.DukeException;
 import java.io.IOException;
 
+/**
+ * Class deals with interactions with the user.
+ */
 public class UI {
   public Parser parser;
 

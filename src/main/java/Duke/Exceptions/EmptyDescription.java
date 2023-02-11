@@ -2,6 +2,10 @@ package Duke.Exceptions;
 
 import Duke.task.Task;
 
+/**
+ * Exceptions when user inputs empty description for a task.
+ */
+
 public class EmptyDescription extends DukeException {
   public String emptyDescription;
   public EmptyDescription(Task task) {

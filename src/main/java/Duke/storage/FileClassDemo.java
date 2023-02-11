@@ -2,6 +2,9 @@ package Duke.storage;
 
 import java.io.File;
 
+/**
+ * Class for testing if a file exist in given path
+ */
 public class FileClassDemo {
 
   public static void main(String[] args) {

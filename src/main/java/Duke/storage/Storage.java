@@ -9,25 +9,49 @@ import Duke.task.*;
 
 import java.io.*;
 
+/**
+ * Class deals with loading tasks from the file
+ * and saving tasks in the file
+ */
 public class Storage {
   public TaskList tasks;
   public String filePath;
 
+  /**
+   * Constructor for Storage
+   *
+   * @param filePath receives String indicating the path of the data file.
+   */
   public Storage(String filePath) {
     this.filePath = filePath;
     this.tasks = new TaskList();
   }
 
+  /**
+   * method manages to write certain String information
+   * into the data file
+   *
+   * @param textToAppend receives task information
+   *                     which should be saved in
+   *                     data file.
+   */
   private void appendToFile(String textToAppend) throws IOException {
     FileWriter fw = new FileWriter(this.filePath, false);
     fw.write(textToAppend);
     fw.close();
   }
 
+  /**
+   * method manages to update the data file
+   * based on the task int eh current taskList
+   */
   public void updateList() throws IOException {
     appendToFile(TaskList.arrayListToString());
   }
 
+  /**
+   * method loads data from the file to return a taskList
+   */
   public TaskList loading() throws IOException, DontKnow, EmptyDescription, EmptyTime, NoSuchTask {
     File filename = new File(filePath);
     InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));

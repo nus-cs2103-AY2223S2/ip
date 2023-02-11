@@ -3,6 +3,9 @@ package Duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents task of the type deadline
+ */
 public class Deadline extends Task {
   public LocalDateTime time;
   public String strTime;
@@ -27,6 +30,10 @@ public class Deadline extends Task {
     return "deadline";
   }
 
+  /**
+   * Method return a String with information about a Deadline task:
+   * type, marked or not, due time.
+   */
   @Override
   public String taskString() {
     String mark;

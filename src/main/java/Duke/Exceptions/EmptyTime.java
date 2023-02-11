@@ -2,6 +2,11 @@ package Duke.Exceptions;
 
 import Duke.task.Task;
 
+/**
+ * Exceptions when user inputs deadline/event command
+ * without indicating time restrictions.
+ */
+
 public class EmptyTime extends DukeException {
   public String emptyTime;
   public EmptyTime(Task task) {

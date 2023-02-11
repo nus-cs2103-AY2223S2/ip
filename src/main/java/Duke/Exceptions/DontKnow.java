@@ -1,5 +1,9 @@
 package Duke.Exceptions;
 
+/**
+ * Exceptions when user inputs unidentifiable command type.
+ */
+
 public class DontKnow extends DukeException {
   public String dontKnow;
   public DontKnow() {

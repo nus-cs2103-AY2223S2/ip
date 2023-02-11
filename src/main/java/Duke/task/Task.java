@@ -1,5 +1,11 @@
 package Duke.task;
 
+/**
+ * Represents a general task class,
+ * with string describing the content of the task,
+ * and boolean mark representing weather the task
+ * is done.
+ */
 public class Task {
   public String string;
   public Boolean mark;

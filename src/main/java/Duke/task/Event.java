@@ -3,6 +3,9 @@ package Duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents task of the event deadline
+ */
 public class Event extends Task {
   public LocalDateTime startTime;
   public LocalDateTime endTime;
@@ -31,6 +34,10 @@ public class Event extends Task {
     return "event";
   }
 
+  /**
+   * Method return a String with information about an event task:
+   * type, marked or not, start time and end time.
+   */
   @Override
   public String taskString() {
     String mark;
