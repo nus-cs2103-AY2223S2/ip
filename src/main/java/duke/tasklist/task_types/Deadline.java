@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.duke_exception.DukeException;
 import duke.utility.date.Date;
+import duke.utility.enums.UpdateType;
 
 /**
  * Represents a <code>task</code> object that contains a string holding the <code>deadline</code>.
@@ -28,6 +29,23 @@ public class Deadline extends Task {
 
     }
 
+    public void Update(UpdateType type, String newValue) throws DukeException {
+        if(type == UpdateType.from || type == UpdateType.to) {
+            throw new DukeException("/from and /to does not exist in Deadline Object.");
+        }
+
+        if(type == UpdateType.name) {
+            super.name = newValue;
+            return;
+        }
+
+        try {
+            Date newDeadline = new Date(newValue);
+            this.deadline = newDeadline;
+        } catch (DateTimeParseException e) {
+            throw invalidDate;
+        }
+    } 
     /**
      * @return a String containing the task type and deadline details.
      */

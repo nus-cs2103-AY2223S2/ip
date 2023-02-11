@@ -2,6 +2,9 @@ package duke.tasklist.task_types;
 
 import java.io.Serializable;
 
+import duke.duke_exception.DukeException;
+import duke.utility.enums.UpdateType;
+
 /**
  * Represents a <code>task</code> object that contains a string holding the
  * <code>name</code> of the
@@ -13,7 +16,7 @@ import java.io.Serializable;
  * @author Brian Quek
  */
 
-public class Task implements Serializable {
+public abstract class Task implements Serializable {
     protected String name;
     protected boolean isMarked;
 
@@ -46,4 +49,5 @@ public class Task implements Serializable {
         return String.format("[%s] %s", this.isMarked ? "X" : " ", this.name);
     }
 
+    public abstract void Update(UpdateType type, String newValue) throws DukeException;
 }

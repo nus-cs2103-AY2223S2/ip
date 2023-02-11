@@ -1,5 +1,8 @@
 package duke.tasklist.task_types;
 
+import duke.duke_exception.DukeException;
+import duke.utility.enums.UpdateType;
+
 /**
  * Represents a <code>task</code> object that contains a string holding the
  * <code>event</code> time
@@ -19,6 +22,24 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
     }
+
+    public void Update(UpdateType type, String newValue) throws DukeException {
+        if(type == UpdateType.by) {
+            throw new DukeException("/by does not exist in Event Object.");
+        }
+
+        if(type == UpdateType.from) {
+            this.from = newValue;
+        }
+
+        if(type == UpdateType.to) {
+            this.to = newValue;
+        }
+
+        if(type == UpdateType.name) {
+            super.name = newValue;
+        }
+    } 
 
     /**
      * @return a String containing the task type and event details.
