@@ -37,6 +37,16 @@ public class TaskList {
         return taskList.get(taskId);
     }
 
+    public ArrayList<Task> getMultipleTasks(ArrayList<Integer> taskIds) {
+        ArrayList<Task> selectedTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskIds.contains(i)) {
+                selectedTasks.add(taskList.get(i));
+            }
+        }
+        return selectedTasks;
+    }
+
     /**
      * Add new task.
      *
@@ -49,10 +59,12 @@ public class TaskList {
     /**
      * Delete task based on id provided.
      *
-     * @param taskId id that identifies task to be deleted.
+     * @param taskIds id that identifies task to be deleted.
      */
-    public void deleteTask(int taskId) {
-        taskList.remove(taskId);
+    public void deleteTasks(ArrayList<Integer> taskIds) {
+        for (int i = 0; i < taskIds.size(); i++) {
+            taskList.remove(taskIds.get(i) - i);
+        }
     }
 
     /**
@@ -98,6 +110,12 @@ public class TaskList {
         return listString;
     }
 
+    /**
+     * Returns tasks whose description contains the string.
+     *
+     * @param searchStr
+     * @return String list of matching tasks
+     */
     public String getMatchingTasks(String searchStr) {
         String listString = "";
         for (int i = 0; i < taskList.size(); i++) {

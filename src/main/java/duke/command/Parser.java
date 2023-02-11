@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.exception.DukeException;
 import duke.tasks.Deadline;
@@ -131,14 +132,24 @@ public class Parser {
      * @return task id to identify task to be marked
      * @throws DukeException when user input is invalid
      */
-    public static int parseMarkTask(String[] input) throws DukeException { // returns task id
+    public static ArrayList<Integer> parseMarkTask(String[] input) throws DukeException { // returns task id
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to mark.");
         }
-        assert input[1].matches("[0-9]+") : "Should be all numbers";
-        int taskNum = Integer.parseInt(input[1]);
-        return taskNum;
+
+        String[] inputIds = input[1].split(" ");
+        ArrayList<Integer> taskIds = new ArrayList<>();
+        for (int i = 0; i < inputIds.length; i++) {
+            try {
+                int id = Integer.parseInt(inputIds[i]) - 1;
+                taskIds.add(id);
+            } catch (NumberFormatException numberFormatException) {
+                throw new DukeException("Seems like one of them is not a number.");
+            }
+        }
+
+        return taskIds;
     }
 
     /**
@@ -148,14 +159,27 @@ public class Parser {
      * @return task id to identify task to be unmarked.
      * @throws DukeException when user input is invalid.
      */
-    public static int parseUnmarkTask(String[] input) throws DukeException { // returns task id
+    public static ArrayList<Integer> parseUnmarkTask(String[] input) throws DukeException { // returns task id
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to unmark.");
         }
-        assert input[1].matches("[0-9]+") : "Should be all numbers";
-        int taskNum = Integer.parseInt(input[1]);
-        return taskNum;
+
+
+        String[] inputIds = input[1].split(" ");
+
+        ArrayList<Integer> taskIds = new ArrayList<>();
+        for (int i = 0; i < inputIds.length; i++) {
+            try {
+                int id = Integer.parseInt(inputIds[i]) - 1;
+                taskIds.add(id);
+            } catch (NumberFormatException numberFormatException) {
+                throw new DukeException("Seems like one of them is not a number.");
+            }
+        }
+
+
+        return taskIds;
     }
 
     /**
@@ -165,14 +189,26 @@ public class Parser {
      * @return task id to identify task to be deleted.
      * @throws DukeException when user input is invalid.
      */
-    public static int parseDeleteTask(String[] input) throws DukeException { // returns task id
+    public static ArrayList<Integer> parseDeleteTask(String[] input) throws DukeException { // returns task id
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");
         }
-        assert input[1].matches("[0-9]+") : "Should be all numbers";
-        int taskNum = Integer.parseInt(input[1]);
-        return taskNum;
+
+
+        String[] inputIds = input[1].split(" ");
+
+        ArrayList<Integer> taskIds = new ArrayList<>();
+        for (int i = 0; i < inputIds.length; i++) {
+            try {
+                int id = Integer.parseInt(inputIds[i]) - 1;
+                taskIds.add(id);
+            } catch (NumberFormatException numberFormatException) {
+                throw new DukeException("Seems like one of them is not a number.");
+            }
+        }
+
+        return taskIds;
     }
 
     /**
