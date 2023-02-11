@@ -20,7 +20,7 @@ public class TaskList {
      * Return a task specified by the index.
      * @param n Index of the task.
      */
-    public Task get_task(int n) {
+    public Task getTask(int n) {
         assert n < taskList.size():"Index Invalid";
         return taskList.get(n);
     }
