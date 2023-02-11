@@ -20,6 +20,10 @@ import duke.task.ToDo;
  */
 public class FileSystem {
     private File file;
+    private final int DATETIME_LENGTH = 16;
+    private final int TYPE_POS = 1;
+    private final int IS_MARK_POS = 4;
+    private final int DESC_POS = 7;
 
     /**
      * Constructor for FileSystem class
@@ -72,31 +76,21 @@ public class FileSystem {
 
         while (scanner.hasNextLine()) {
             String task = scanner.nextLine();
+            char taskType = task.charAt(TYPE_POS);
+            boolean isMark = task.charAt(IS_MARK_POS) == 'X';
+            String taskDesc = task.substring(DESC_POS);
 
-            char taskType = task.charAt(1);
-            boolean isMark = task.charAt(4) == 'X';
-
-            switch (taskType) {
-            case 'T':
-                tasks.add(new ToDo(task.substring(7), isMark));
-                break;
-            case 'D':
-                String[] deadlineDesc = task.substring(7).split("by: ");
-                String desc = deadlineDesc[0].substring(0, deadlineDesc[0].length() - 2);
-                String dateTime = deadlineDesc[1].substring(0, 16);
-                tasks.add(new Deadline(desc, dateTime, isMark));
-                break;
-            case 'E':
-                String[] eventDesc = task.substring(7).split("from: ");
+            if (taskType == 'T') {
+                tasks.add(new ToDo(taskDesc, isMark));
+            } else if (taskType == 'D') {
+                String[] deadlineDesc = taskDesc.split(" \\(by: ");
+                String dateTime = deadlineDesc[1].substring(0, DATETIME_LENGTH);
+                tasks.add(new Deadline(deadlineDesc[0], dateTime, isMark));
+            } else if (taskType == 'E') {
+                String[] eventDesc = taskDesc.split(" \\(from: ");
                 String[] dateTimeArr = eventDesc[1].split(" to: ");
-                String event = eventDesc[0].substring(0, eventDesc[0].length() - 2);
-                String to = dateTimeArr[1].substring(0, 16);
-                tasks.add(new Event(event, dateTimeArr[0], to, isMark));
-                break;
-            default:
-                if (isMark) {
-                    tasks.get(tasks.size() - 1).setIsDone(true);
-                }
+                String to = dateTimeArr[1].substring(0, DATETIME_LENGTH);
+                tasks.add(new Event(eventDesc[0], dateTimeArr[0], to, isMark));
             }
         }
         return tasks;

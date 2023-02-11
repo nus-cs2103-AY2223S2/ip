@@ -2,6 +2,9 @@ package duke.helper;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskNumException;
+import duke.exception.NotANumberException;
 import duke.task.Task;
 
 /**
@@ -47,14 +50,16 @@ public class TaskList {
      * @param taskNo Task number to be deleted
      * @return task that has been deleted
      */
-    public String deleteTask(int taskNo) {
+    public String deleteTask(int taskNo) throws DukeException{
         String output = "";
         try {
             Task task = tasks.get(taskNo);
             tasks.remove(taskNo);
             output = ui.showDelete(task, tasks.size());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(String.format("There are only %d tasks", tasks.size()));
+            throw new InvalidTaskNumException();
+        } catch (NumberFormatException e) {
+            throw new NotANumberException("delete");
         }
         return output;
     }
@@ -65,11 +70,17 @@ public class TaskList {
      * @param isDone whether the task is done
      * @param taskId id of the task
      */
-    public String mark(boolean isDone, String taskId) {
-        int taskNo = Integer.parseInt(taskId) - 1;
-        Task taskToMark = tasks.get(taskNo);
-        taskToMark.setIsDone(isDone);
-        return ui.showMark(isDone, taskToMark);
+    public String markCommand(boolean isDone, String taskId) throws DukeException {
+        try {
+            int taskNo = Integer.parseInt(taskId) - 1;
+            Task taskToMark = tasks.get(taskNo);
+            taskToMark.setIsDone(isDone);
+            return ui.showMark(isDone, taskToMark);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskNumException();
+        } catch (NumberFormatException e) {
+            throw new NotANumberException("mark");
+        }
     }
 
     /**
