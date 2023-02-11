@@ -273,7 +273,7 @@ public class Parser {
      * @return The created task.
      */
     public Task newToDo(String input, int taskSize) {
-        Task task = new ToDo(input);
+        Task task = new ToDo(input.substring(5));
         Ui.addMessage(task, taskSize);
         return task;
     }
@@ -288,7 +288,7 @@ public class Parser {
      */
     public Task newDeadline(String input, int taskSize) throws DukeException {
         int index = input.indexOf(" /by ");
-        Task task = new Deadline(input.substring(0, index), input.substring(index + 5));
+        Task task = new Deadline(input.substring(9, index), input.substring(index + 5));
         Ui.addMessage(task, taskSize);
         return task;
     }
@@ -304,7 +304,7 @@ public class Parser {
     public Task newEvent(String input, int taskSize) throws DukeException {
         int fromIndex = input.indexOf(" /from ");
         int toIndex = input.indexOf(" /to ");
-        Task task = new Event(input.substring(0, fromIndex), input.substring(fromIndex + 7, toIndex),
+        Task task = new Event(input.substring(6, fromIndex), input.substring(fromIndex + 7, toIndex),
                 input.substring(toIndex + 5));
         Ui.addMessage(task, taskSize);
         return task;
