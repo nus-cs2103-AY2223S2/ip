@@ -71,19 +71,29 @@ public abstract class Command implements BiConsumer<String[], Duke> {
     }
 
     /**
-     * Run the command with the given arguments and Duke instance
+     * Run the command with the given arguments and Duke instance. Override this function
+     * to provide implementations for commands
      * @param tokens Array of parsed tokens, including the command label
      * @param instance Instance of Duke to run the command with
      * @throws ValidationException
      */
-    protected abstract void execute(String[] tokens, final Duke instance) throws ValidationException;
+    protected abstract void executeInternal(String[] tokens, final Duke instance) throws ValidationException;
 
-    @Override
-    public final void accept(String[] tokens, final Duke instance) {
+    /**
+     * Execute the command using the given arguments and Duke instance
+     * @param tokens String array of arguments
+     * @param instance Duke instance to use
+     */
+    public void execute(String[] tokens, final Duke instance) {
         try {
-            execute(tokens, instance);
+            executeInternal(tokens, instance);
         } catch (ValidationException e) {
             output(e.getMessage());
         }
+    }
+
+    @Override
+    public final void accept(String[] tokens, final Duke instance) {
+        execute(tokens, instance);
     }
 }

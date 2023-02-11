@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    protected void execute(String[] tokens, Duke instance) {
+    protected void executeInternal(String[] tokens, Duke instance) {
         List<Task> tasks = instance.getTaskList();
 
         if (tasks.size() == 0) {

@@ -11,14 +11,14 @@ public class CommandTest {
     public void checkValidation() {
         Command test = new Command("") {
             @Override
-            public void execute(String[] tokens, Duke instance) throws ValidationException {
+            public void executeInternal(String[] tokens, Duke instance) throws ValidationException {
                 validate(false, "Error Message");
             } 
         };
 
         assertThrows(
             Command.ValidationException.class, 
-            () -> test.execute(null, null), 
+            () -> test.executeInternal(null, null), 
             "validate() should throw Validation exception when called with a false boolean condition"
         );
     }

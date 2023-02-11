@@ -11,7 +11,7 @@ public class SaveCommand extends Command {
     }
 
     @Override
-    protected void execute(String[] tokens, Duke instance) {
+    protected void executeInternal(String[] tokens, Duke instance) {
         try {
             Storage.saveToDisk("data.dat", instance.getTaskList());
             output("Saved your tasks to disk!");
