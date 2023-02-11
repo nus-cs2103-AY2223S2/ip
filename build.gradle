@@ -46,7 +46,7 @@ test {
 }
 
 application {
-    mainClassName = "panav.Panav"
+    mainClassName = "panav.Launcher"
 }
 
 shadowJar {
