@@ -1,5 +1,6 @@
 package duke.logic.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -81,6 +82,10 @@ public class Deadline extends Task {
 
     public String getDueDate() {
         return this.dueDate.format(FORMATTER);
+    }
+
+    public LocalDate getLocalDateDue() {
+        return this.dueDate.toLocalDate();
     }
 
     @Override

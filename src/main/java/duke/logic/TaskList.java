@@ -1,7 +1,10 @@
 package duke.logic;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.logic.task.Deadline;
+import duke.logic.task.Event;
 import duke.logic.task.Task;
 
 /**
@@ -61,6 +64,34 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             if (this.getTask(i).getDescription().contains(str)) {
                 arrayList.add(i);
+            }
+        }
+
+        return arrayList;
+    }
+
+    /**
+     * Given a date, searches all task and compiles the index of all tasks that
+     * has a duration in which the given localDate lies in.
+     * @param localDate LocalDate to check if is during duration of task.
+     * @return List of tasks that have duration that the localDate lies in.
+     */
+    public ArrayList<Integer> findDates(LocalDate localDate) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task task = this.getTask(i);
+            if (task.getType().equals("deadline")) {
+                boolean isDueDateMatch = ((Deadline) task).getLocalDateDue().isEqual(localDate);
+                if (isDueDateMatch) {
+                    arrayList.add(i);
+                }
+            } else if (task.getType().equals("event")) {
+                Event event = (Event) task;
+                boolean isAfterStart = !event.getLocalDateStart().isAfter(localDate);
+                boolean isBeforeEnd = !event.getLocalDateEnd().isBefore(localDate);
+                if (isAfterStart && isBeforeEnd) {
+                    arrayList.add(i);
+                }
             }
         }
 
