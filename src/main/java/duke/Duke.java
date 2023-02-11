@@ -28,6 +28,10 @@ public class Duke {
         Duke.isBye = false;
     }
 
+    /**
+     * Shows hello message upon start up.
+     * @return User-friendly interpretation of welcome message.
+     */
     public String showHello() {
         return dukeIo.printHello();
     }
