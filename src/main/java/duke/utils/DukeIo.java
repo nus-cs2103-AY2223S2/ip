@@ -27,6 +27,7 @@ public class DukeIo {
     /**
      * Displays message on screen, writes each String as a newline to standard output.
      * @param message custom message to echo
+     * @return User-friendly interpretation of message echoed to GUI.
      */
     public String echoMessage(String message) {
         return message;
@@ -34,6 +35,7 @@ public class DukeIo {
 
     /**
      * Displays greeting message for Duke.
+     * @return User-friendly interpretation of welcome message on GUI.
      */
     public String printHello() {
         return HELLO;
@@ -41,6 +43,7 @@ public class DukeIo {
 
     /**
      * Displays exit message upon quit.
+     * @return User-friendly quit message rendered on GUI.
      */
     public String printQuit() {
         return QUIT;
@@ -50,6 +53,7 @@ public class DukeIo {
     /**
      * Displays a success toast message upon addition of a Task to TaskList.
      * @param t Task object and its inherited classes.
+     * @return User-friendly success toast and task description rendered on GUI.
      */
     public String notifySuccessAdd(Task t) {
         String out = "Successfully added: " + t.toString() + "\n";
@@ -59,6 +63,7 @@ public class DukeIo {
     /**
      * Displays a success toast message upon updating the state of the task to "Completed".
      * @param t Task obejct and its inherited classes.
+     * @return User-friendly success toast and completed task rendered on GUI.
      */
     public String notifySuccessComplete(Task t) {
         String out = "Successfully completed: " + t.toString() + "\n";
@@ -68,6 +73,7 @@ public class DukeIo {
     /**
      * Displays a success toast upon updating the state from "Completed" to "Incomplete".
      * @param t Task object and its inherited classes.
+     * @return User-friendly success toast of unmarked task rendered on GUI.
      */
     public String notifyUnmark(Task t) {
         String out = "Unmarked task: " + t.toString() + "\n";
@@ -77,6 +83,7 @@ public class DukeIo {
     /**
      * Displays an error toast when user tries to mark an already marked Task.
      * @param t Task object and its inherited classes.
+     * @return User-friendly failure toast rendered on GUI.
      */
     public String notifyMarkFail(Task t) {
         String out = "Cannot mark completed task: " + t.toString() + "\n";
@@ -86,6 +93,7 @@ public class DukeIo {
     /**
      * Displays error toast when user tries to unmark an already unmarked Task.
      * @param t Task object and its inherited classes.
+     * @return User-friendly failure toast rendered on GUI.
      */
     public String notifyUnmarkFail(Task t) {
         String out = "Cannot unmark incomplete task: " + t.toString() + "\n";
@@ -94,6 +102,7 @@ public class DukeIo {
 
     /**
      * Displays the number of existing tasks in the TaskList.
+     * @return User-friendly display about number of tasks in task list rendered on GUI.
      */
     public String showCount() {
         StringBuilder str = new StringBuilder();
@@ -114,7 +123,8 @@ public class DukeIo {
 
     //CHECKSTYLE.OFF: SingleSpaceSeparator
     /**
-     * Displays an indexed list of all existing tasks in the TaskList.
+     * Displays an indexed list of all existing tasks in the TaskList
+     * @return User-friendly interpretation of indexed list of all tasks rendered on GUI.
      */
     public String showAll() {
         StringBuilder str = new StringBuilder();
@@ -132,7 +142,8 @@ public class DukeIo {
 
     /**
      * Displays an indexed list of filtered tasks.
-     * @param filteredTasks
+     * @param filteredTasks List of Tasks containing filtered tasks.
+     * @return User-friendly list of filtered tasks rendered on GUI.
      */
     public String showFiltered(List<Task> filteredTasks) {
         StringBuilder str = new StringBuilder();
@@ -149,6 +160,7 @@ public class DukeIo {
     /**
      * Displays error toast when user inputs an Invalid Command.
      * A section of valid commands guide is displayed in a new line.
+     * @return User-friendly help message rendered on GUI upon InvalidCommand.
      */
     public static String showInvalidCommand() {
         return "Invalid Command!\n"
@@ -158,6 +170,7 @@ public class DukeIo {
     /**
      * Displays error toast upon Exception.
      * @param e Exception thrown
+     * @return User-friendly feedback of recoverable exception rendered on GUI.
      */
     public String showError(Exception e) {
         return e.getMessage() + "\n";
@@ -165,6 +178,7 @@ public class DukeIo {
 
     /**
      * Displays success toast after loading TaskList from saved .txt file.
+     * @return User-friendly update upon successful load.
      */
     public String notifyLoad() {
         return "Loaded successfully from previous session.\n";
@@ -172,6 +186,7 @@ public class DukeIo {
 
     /**
      * Displays success toast after saving TaskList upon quit.
+     * @return User-friendly success toast after save upon quit.
      */
     public String notifySave() {
         return SAVE_SUCCESS;
@@ -179,6 +194,7 @@ public class DukeIo {
 
     /**
      * Displays failure toast upon save failure
+     * @return User-friendly failure toast after quit.
      */
     public String notifySaveFailure() {
         return SAVE_FAILURE;
@@ -186,6 +202,7 @@ public class DukeIo {
 
     /**
      * Displays failure toast upon no find results
+     * @return User-friendly feedback when there are no tasks matching search keyword.
      */
     public String notifyZeroHits() {
         return "No tasks found.\n";
@@ -193,7 +210,7 @@ public class DukeIo {
 
     /**
      * Displays user-friendly interpretation of task deleted.
-     * @param taskIndex
+     * @param taskIndex Index of task to be deleted from TaskList.
      * @return Feedback after task has been deleted successfully.
      */
     public String showDeleted(int taskIndex) {

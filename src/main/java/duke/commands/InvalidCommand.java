@@ -1,24 +1,24 @@
 package duke.commands;
 
-import duke.utils.DukeIo;
-import duke.tasks.TaskList;
 import duke.exception.InvalidCommandException;
+import duke.tasks.TaskList;
+import duke.utils.DukeIo;
 /**
  * A wrapper command class when there are Invalid Commands.
  */
 public class InvalidCommand extends Command {
-    private final InvalidCommandException ERR;
+    private final InvalidCommandException err;
 
     /**
      * Public constructor for InvalidCommand
-     * @param err
+     * @param err InvalidCommandException caught
      */
     public InvalidCommand(InvalidCommandException err) {
-        this.ERR = err;
+        this.err = err;
     }
 
     @Override
     public String exec(DukeIo dukeIo, TaskList tasks) {
-        return dukeIo.showError(ERR);
+        return dukeIo.showError(err);
     }
 }

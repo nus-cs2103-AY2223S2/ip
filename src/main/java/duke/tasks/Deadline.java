@@ -41,8 +41,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * User friendly guide to help users in case of InvalidCommandExcpetion.
-     * @return String representing the format of Deadline task.n
+     * User friendly guide to help users in case of InvalidCommandException.
+     *
+     * @return String representing the format of Deadline task.
      */
     public static String showFormat() {
         return "Create a `deadline` with: " + FORMAT;
@@ -51,6 +52,7 @@ public class Deadline extends Task {
     /**
      * User friendly interpretation of Deadline task object.
      * Displays Task type, description and deadline.
+     *
      * @return String representation of Deadline task.
      */
     @Override

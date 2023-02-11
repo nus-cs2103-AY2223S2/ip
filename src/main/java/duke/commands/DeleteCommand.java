@@ -7,14 +7,14 @@ import duke.utils.DukeIo;
  * DeleteCommand class that allows user to delete tasks.
  */
 public class DeleteCommand extends Command {
-    private final int INDEX;
+    private final int index;
 
     /**
      * Public constructor for delete command.
      * @param index Index (0-based) of task to be deleted from the TaskList.
      */
     public DeleteCommand(int index) {
-        this.INDEX = index;
+        this.index = index;
     }
 
     /**
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
      * @return Success toast upon deleing task and number of remaining tasks.
      */
     public String exec(DukeIo dukeIo, TaskList tasks) {
-        tasks.deleteTask(INDEX);
-        return dukeIo.showDeleted(INDEX) + dukeIo.showCount();
+        tasks.deleteTask(index);
+        return dukeIo.showDeleted(index) + dukeIo.showCount();
     }
 }

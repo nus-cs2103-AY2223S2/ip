@@ -1,27 +1,28 @@
 package duke.commands;
 
+import java.io.IOException;
+
+import duke.tasks.TaskList;
 import duke.utils.DukeIo;
 import duke.utils.Storage;
-import duke.tasks.TaskList;
-
-import java.io.IOException;
 
 /**
  * QuitCommand class which handles operations on quit.
  */
 public class QuitCommand extends Command {
-    private final Storage STORAGE;
+    private final Storage storage;
+
     /**
-     * Public constructor for Mark/unmark command.
-     * @param index User-input task index to mark/ unmark.
-     */    
+     * Public constructor for quit command.
+     * @param storage storage operator to execute clean up operations..
+     */
     public QuitCommand(Storage storage) {
-        this.STORAGE = storage;
+        this.storage = storage;
     }
 
     /**
      * Method to perform quit operations.
-     * 
+     *
      * @param dukeIo UI class used to return results
      * @param tasks TaskList containing all tasks to be marked/ unmarked.
      * @return UI feedback after successful save.
@@ -30,7 +31,7 @@ public class QuitCommand extends Command {
     public String exec(DukeIo dukeIo, TaskList tasks) {
         if (TaskList.getTaskCount() > 0) {
             try {
-                STORAGE.saveFrom(TaskList.getAllTasks());
+                storage.saveFrom(TaskList.getAllTasks());
             } catch (IOException e) {
                 return dukeIo.notifySaveFailure();
             }

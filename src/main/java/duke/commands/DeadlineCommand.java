@@ -1,21 +1,21 @@
 package duke.commands;
 
-import duke.utils.DukeIo;
-import duke.tasks.TaskList;
 import duke.tasks.Deadline;
+import duke.tasks.TaskList;
+import duke.utils.DukeIo;
 
 /**
  * DeadlineCommand adds a Deadline object to TaksList.
  */
 public class DeadlineCommand extends Command {
-    private final String[] TOKENS;
+    private final String[] tokens;
 
     /**
      * Public constructor for Deadline command.
      * @param tokens Tokenised user inputs from user.
      */
     public DeadlineCommand(String[] tokens) {
-        this.TOKENS = tokens;
+        this.tokens = tokens;
     }
 
     /**
@@ -32,9 +32,9 @@ public class DeadlineCommand extends Command {
     }
 
     private Deadline createDeadline() {
-        assert TOKENS.length == 2;
-        String desc = TOKENS[0];
-        String byDeadline = TOKENS[1];
+        assert tokens.length == 2;
+        String desc = tokens[0];
+        String byDeadline = tokens[1];
         return new Deadline(desc, byDeadline);
     }
 }

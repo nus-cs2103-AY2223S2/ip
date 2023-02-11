@@ -1,20 +1,20 @@
 package duke.commands;
 
-import duke.utils.DukeIo;
 import duke.tasks.TaskList;
+import duke.utils.DukeIo;
 
 /**
  * Find Command that lets user filter for tasks based on key.
  */
 public class FindCommand extends Command {
-    private final String SEARCH_KEY;
+    private final String searchKey;
 
     /**
      * Public constructor for FindCommand
      * @param searchKey User-input search term
      */
     public FindCommand(String searchKey) {
-        this.SEARCH_KEY = searchKey;
+        this.searchKey = searchKey;
     }
 
     /**
@@ -26,6 +26,6 @@ public class FindCommand extends Command {
      */
     @Override
     public String exec(DukeIo dukeIo, TaskList tasks) {
-        return tasks.showFilteredTasks(SEARCH_KEY);
+        return tasks.showFilteredTasks(searchKey);
     }
 }

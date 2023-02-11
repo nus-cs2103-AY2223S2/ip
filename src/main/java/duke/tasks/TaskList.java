@@ -50,7 +50,7 @@ public class TaskList {
 
     /**
      * Retreives the task from the TaskList given the index of the task.
-     * @param taskIndex
+     * @param taskIndex 0-based index of task to retrieve from task list.
      * @return Task object
      */
     public Task getTask(int taskIndex) {
