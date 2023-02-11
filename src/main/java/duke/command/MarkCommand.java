@@ -26,6 +26,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        assert taskList != null;
         return taskList.markTask(this.taskNumber);
     }
 

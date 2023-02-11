@@ -26,6 +26,9 @@ public class Storage {
     public final String filePath;
 
     public Storage(String filePath) {
+
+        assert filePath != null : "A valid filepath should be provided";
+
         this.filePath = filePath;
 
         int splitIndex = filePath.lastIndexOf("/");

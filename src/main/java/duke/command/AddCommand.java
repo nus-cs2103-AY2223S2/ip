@@ -16,6 +16,10 @@ public class AddCommand extends Command {
 
     public AddCommand(Task task, String taskType) {
         super(false);
+
+        assert task != null;
+        assert taskType != null;
+
         this.task = task;
         this.taskType = taskType;
 
@@ -29,6 +33,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+
+        assert taskList != null;
+
         return taskList.addTask(this.task, this.taskType);
     }
 
