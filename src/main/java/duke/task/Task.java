@@ -84,10 +84,12 @@ public class Task {
 
     @Override
     public String toString() {
+        String res = "";
         if (this.type == null) {
-            return "[" + this.getStatusIcon() + "]" + " " + this.description;
+            res = "[" + this.getStatusIcon() + "]" + " " + this.description;
         } else {
-            return "[" + this.type + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description;
+            res = "[" + this.type + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description;
         }
+        return res;
     }
 }

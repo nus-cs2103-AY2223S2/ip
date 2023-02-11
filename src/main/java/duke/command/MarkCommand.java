@@ -30,6 +30,7 @@ public class MarkCommand extends Command {
     public String execute(TaskList tl, Storage storage) {
         Task task = tl.getTask(this.id - 1);
         task.setMark();
-        return "Nice! I've marked this duke.task as done:\n" + task;
+        String res = "Nice! I've marked this duke.task as done:\n" + task;
+        return res;
     }
 }

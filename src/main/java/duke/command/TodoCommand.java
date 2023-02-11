@@ -33,8 +33,9 @@ public class TodoCommand extends Command {
     public String execute(TaskList tl, Storage storage) {
         Task task = new Todo(this.activity);
         tl.addTask(task);
-        return "Got it. I've added this duke.task:\n" + task
+        String res = "Got it. I've added this duke.task:\n" + task
                 + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        return res;
     }
 
 }
