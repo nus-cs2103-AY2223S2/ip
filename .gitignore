@@ -18,4 +18,8 @@ src/main/resources/docs/
 /text-ui-test/EXPECTED-UNIX.TXT
 
 # Data
-/data/
+data/
+
+# Miscellaneous
+/CONTRIBUTORS.md
+text-ui-test/
