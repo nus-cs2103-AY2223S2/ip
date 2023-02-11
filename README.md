@@ -1,7 +1,42 @@
-# Duke project template
+# Jane Project
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> “Your mind is for having ideas, not holding them.” – David Allen (source)
 
+DukePro frees your mind of having to remember things you need to do. It's,
+
+- easy to use
+* text-based
++ ~FAST~ SUPER FAST to use
+
+All you need to do is,
+1. download it from here 
+2. double click
+3. add your tasks
+
+These are the contributors:
+[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+
+Features:
+
+- [x] Managing tasks
+- [ ] Managing deadlines (coming soon)
+- [ ] Reminders (coming soon)
+
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
+and its **FREE**
+
+Have fun using it 😉
 ## Setting up in Intellij
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
