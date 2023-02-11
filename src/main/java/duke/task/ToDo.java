@@ -18,7 +18,9 @@ public class ToDo extends Task {
     public String getFileRepresentation() {
         String mark = (super.isDone) ? "X" : " ";
 
-        return "T" + "~" + mark + "~" + this.description;
+        return "T" + "~"
+                + mark + "~"
+                + this.description;
     }
 
     @Override

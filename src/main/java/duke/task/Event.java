@@ -30,15 +30,18 @@ public class Event extends Task {
     public String getFileRepresentation() {
         String mark = (super.isDone) ? "X" : " ";
 
-        return "E" + "~" + mark + "~" + this.description
-                + "~" + this.from + "~" + this.to;
+        return "E" + "~"
+                + mark + "~"
+                + this.description + "~"
+                + this.from + "~"
+                + this.to;
     }
 
     @Override
     public String toString() {
-        return "[E]"
-                + super.toString()
+        return "[E]" + super.toString()
                 + " (from: " + Task.getDateTimeString(this.from)
-                + " ; to: " + Task.getDateTimeString(this.to) + ")";
+                + " ; to: " + Task.getDateTimeString(this.to)
+                + ")";
     }
 }

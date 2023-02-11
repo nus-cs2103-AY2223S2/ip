@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+
 import duke.task.Task;
 
 import duke.tasklist.TaskList;
@@ -32,6 +33,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+
         assert taskList != null;
 
         return taskList.addTask(this.task, this.taskType);

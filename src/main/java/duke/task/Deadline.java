@@ -27,13 +27,18 @@ public class Deadline extends Task {
     public String getFileRepresentation() {
         String mark = (super.isDone) ? "X" : " ";
 
-        return "D" + "~" + mark + "~" + this.description + "~" + this.by;
+        return "D" + "~"
+                + mark + "~"
+                + this.description + "~"
+                + this.by;
     }
 
     @Override
     public String toString() {
 
-        return "[D]" + super.toString() + " (by: "
-                + Task.getDateTimeString(this.by) + ")";
+        return "[D]" + super.toString()
+                + " (by: "
+                + Task.getDateTimeString(this.by)
+                + ")";
     }
 }

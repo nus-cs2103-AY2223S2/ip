@@ -24,7 +24,7 @@ public class Duke {
         TextUi.greet();
 
         Scanner commandScanner = new Scanner(System.in);
-        boolean toExit = false;
+        boolean isEnd = false;
 
         while (true) {
 
@@ -34,7 +34,7 @@ public class Duke {
                 Command command = Parser.parse(userCommand);
                 String response = command.execute(this.taskList);
                 TextUi.show(response);
-                toExit = command.isExitCommand();
+                isEnd = command.isExitCommand();
 
             } catch (DukeException e) {
                 TextUi.showError(e);
@@ -44,7 +44,7 @@ public class Duke {
 
             }
 
-            if (toExit) {
+            if (isEnd) {
                 break;
             }
 
