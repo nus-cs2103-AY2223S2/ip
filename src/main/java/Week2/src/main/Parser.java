@@ -12,6 +12,7 @@ public class Parser {
     private static boolean isBegin = false;
 
 
+
     Ui ui = new Ui();
 
     /**
@@ -22,8 +23,6 @@ public class Parser {
         this.tasklist = tasklist;
     }
 
-    private Detect dt = new Detect(tasklist);
-
     /**
      * Uses input from user and execute it
      * @param input
@@ -33,6 +32,7 @@ public class Parser {
     public String runParser(String input) throws IOException {
         isBegin = true;
         String c = input;
+        Detect dt = new Detect(this.tasklist);
         if (c.equals("list")) {
             String rstr = "Here are the tasks in your list:";
             for (int i = 0; i < tasklist.length(); i++) {
@@ -70,38 +70,47 @@ public class Parser {
             String str3 = "Now you have " + tasklist.length() + " tasks in the list";
             return str1 + "\n" + str2 + "\n" + str3;
         } else if (c.startsWith("todo")) {
-            String doit = c.substring(5, c.length());
-            if(dt.detectDuplicate(doit)) {
-                return "Same task already exists in the list."
+            String doit = c.substring(5);
+            if(dt.isDuplicate(doit)) {
+                return "Same task already exists in the list.";
+            } else {
+                Task current = new Todo(doit);
+                tasklist.add(current);
+                String str1 = "Got it. I've added this task:";
+                String str2 = current.toString();
+                String str3 = "Now you have " + tasklist.length() + " tasks in the list";
+                Duke.writeOn(current);
+                return str1 + "\n" + str2 + "\n" + str3;
             }
-            Task current = new Todo(doit);
-            tasklist.add(current);
-            String str1 = "Got it. I've added this task:";
-            String str2 = current.toString();
-            String str3 = "Now you have " + tasklist.length() + " tasks in the list";
-            Duke.writeOn(current);
-            return str1 + "\n" + str2 + "\n" + str3;
         } else if (c.startsWith("deadline")) {
-            String doit = c.substring(9, c.length());
+            String doit = c.substring(9);
             String[] parts = doit.split("/by");
-            Task current = new Deadline(parts[0], parts[1]);
-            tasklist.add(current);
-            String str1 = "Got it. I've added this task:";
-            String str2 = current.toString();
-            String str3 = "Now you have " + tasklist.length() + " tasks in the list";
-            Duke.writeOn(current);
-            return str1 + "\n" + str2 + "\n" + str3;
+            if(dt.isDuplicate(doit)) {
+                return "Same task already exists in the list.";
+            } else {
+                Task current = new Deadline(parts[0], parts[1]);
+                tasklist.add(current);
+                String str1 = "Got it. I've added this task:";
+                String str2 = current.toString();
+                String str3 = "Now you have " + tasklist.length() + " tasks in the list";
+                Duke.writeOn(current);
+                return str1 + "\n" + str2 + "\n" + str3;
+            }
         } else if (c.startsWith("event")) {
             String doit = c.substring(6);
             String[] froms = doit.split("/from");
             String[] fromses = froms[1].split("/to");
             String[] tos = doit.split("/to");
-            Task current = new Event(froms[0], fromses[0], tos[1]);
-            tasklist.add(current);
-            String str1 = "Got it. I've added this task:";
-            String str2 = current.toString();
-            Duke.writeOn(current);
-            return str1 + "\n" + str2;
+            if(dt.isDuplicate(froms[0])) {
+                return "Same task already exists in the list.";
+            } else {
+                Task current = new Event(froms[0], fromses[0], tos[1]);
+                tasklist.add(current);
+                String str1 = "Got it. I've added this task:";
+                String str2 = current.toString();
+                Duke.writeOn(current);
+                return str1 + "\n" + str2;
+            }
         } else if (c.startsWith("find")) {
             String keyword = c.substring(6);
             Search sr = new Search(tasklist);
@@ -112,14 +121,5 @@ public class Parser {
             Duke.isBye = true;
             return ui.bye();
         }
-
     }
-
-    /**
-     * Updates the main TaskList as changed
-     */
-    public void updateTL() {
-        Duke.tasklist = this.tasklist;
-    }
-
 }

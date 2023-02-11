@@ -78,9 +78,9 @@ public class Duke extends Application {
             return ui.showEmptyError();
         } catch (FileNotFoundException e) {
             return ui.showFileError();
-        } catch (Exception e) {
-            return ui.showLoadingError();
-        }
+        } //catch (Exception e) {
+         //   return ui.showLoadingError();
+        //}
     }
 
     /**

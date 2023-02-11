@@ -95,4 +95,16 @@ public class TaskList<Task> {
         this.list.add(t);
         this.size++;
     }
+
+    /**
+     * Returns true if the task list is empty.
+     * Otherwise, returns false.
+     * @return
+     */
+    public boolean isEmpty() {
+        if(this.size == 0) {
+            return true;
+        }
+        return false;
+    }
 }
