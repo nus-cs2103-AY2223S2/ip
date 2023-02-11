@@ -105,7 +105,6 @@ public class Parser {
     }
 
     public boolean isEvent(String input) throws DukeException {
-
         if (input.length() >= 5 && input.startsWith("event")) {
             if (input.equals("event") || input.substring(5).isBlank()) {
                 throw new DukeException("EVENT needs a description!");
