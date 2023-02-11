@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 
+/**
+ * Main terminal UI-based command line runner
+ */
 public class Processor {
     private final Ui ui;
     private final TaskList tasks;
@@ -115,10 +118,18 @@ public class Processor {
         });
     }
 
+    /**
+     * Registers a command for into the processor
+     * @param command Command name
+     * @param cmd Command to execute
+     */
     public void register(String command, Command cmd) {
         this.commands.put(command, cmd);
     }
 
+    /**
+     * Main command loop
+     */
     public void run() {
         ui.writeWelcome();
 
@@ -144,6 +155,9 @@ public class Processor {
         }
     }
 
+    /**
+     * Saves the current task list
+     */
     public void saveTaskList() {
         try {
             storage.writeTaskList(tasks);

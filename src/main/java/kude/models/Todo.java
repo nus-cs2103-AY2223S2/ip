@@ -1,5 +1,8 @@
 package kude.models;
 
+/**
+ * Representation of a Todo item
+ */
 public class Todo extends Task {
     public Todo(String content) {
         super(content);

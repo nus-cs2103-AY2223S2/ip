@@ -4,6 +4,9 @@ import kude.DukeException;
 
 import java.time.LocalDateTime;
 
+/**
+ * Representation of an Event
+ */
 public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
@@ -17,10 +20,16 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Gets the starting date time
+     */
     public LocalDateTime getFrom() {
         return from;
     }
 
+    /**
+     * Gets the ending date time
+     */
     public LocalDateTime getTo() {
         return to;
     }
