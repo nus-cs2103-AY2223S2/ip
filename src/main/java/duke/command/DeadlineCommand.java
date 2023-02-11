@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 
 /**
@@ -12,6 +12,10 @@ public class DeadlineCommand extends Command {
     public static final String DEADLINE_COMMAND = "deadline";
     private final Deadline deadline;
 
+    /**
+     * Constructor creates an instance of DeadlineCommand.
+     * @param deadline An instance of Deadline.
+     */
     public DeadlineCommand(Deadline deadline) {
         super(DEADLINE_COMMAND);
         this.deadline = deadline;

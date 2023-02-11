@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.TaskList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Class contains variables and methods related to a Deadline task.
@@ -20,25 +20,6 @@ public class Deadline extends Task {
     public Deadline(String taskName, LocalDate deadline) {
         super(taskName);
         this.deadline = deadline;
-    }
-
-    public static void processDeadline(String command, TaskList lst) throws DukeException {
-        String info = command.trim();
-        if (info.isEmpty()) {
-            throw new DukeException("deadline");
-        }
-        String[] details = info.split("/");
-        if (details.length < 2) {
-            throw new DukeException("timing");
-        }
-        try {
-            String deadlineString = details[1].split(" ", 2)[1];
-            LocalDate deadline = LocalDate.parse(deadlineString);
-            Deadline d = new Deadline(details[0], deadline);
-            lst.addTask(d);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("date format");
-        }
     }
 
     @Override

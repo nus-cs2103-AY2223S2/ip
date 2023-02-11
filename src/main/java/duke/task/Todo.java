@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.TaskList;
 
 /**
  * Class contains variables and methods related to Todo task.
@@ -11,21 +10,18 @@ public class Todo extends Task {
         super(taskName);
     }
 
-    public static void processTodo(String command, TaskList lst) throws DukeException {
-        String taskName = command.trim();
-        if (taskName.isEmpty()) {
-            throw new DukeException("todo");
-        } else {
-            Todo todo = new Todo(taskName);
-            lst.addTask(todo);
-        }
-    }
-
     @Override
     public String toFile() {
         return String.format("T | %s\n", super.toFile());
     }
 
+    /**
+     * Creates an instance of Todo from parsed String in file.
+     * @param taskNameData String containing task name.
+     * @param doneData String containing whether task is completed.
+     * @return An instance of Todo.
+     * @throws DukeException if any of the inputs are empty.
+     */
     public static Todo toTodoFromFileStr(String taskNameData, String doneData) throws DukeException {
         doneData = doneData.trim();
         taskNameData = taskNameData.trim();

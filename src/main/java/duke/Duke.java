@@ -3,7 +3,6 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /** The Duke class contains variables and methods related to running an instance of Duke. */
@@ -38,6 +37,9 @@ public class Duke {
             response = command.execute(this.taskList, this.ui);
             storage.saveToFile(this.taskList);
             if (command.isExit()) {
+                //@@author wendy0107-reused
+                //Reused from https://github.com/tyw2811/ip
+                // with minor modifications.
                 PauseTransition wait = new PauseTransition(Duration.seconds(2));
                 wait.setOnFinished(event -> {
                     Platform.exit();
@@ -53,29 +55,4 @@ public class Duke {
             return response;
         }
     }
-
-    /**
-     * Reads user input and loads data from file into an instance of Duke.
-     */
-//    public void run() {
-//        ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String userInput = this.ui.readCommand();
-//                ui.showLine();
-//                Command command = parser.parse(userInput);
-//                command.execute(this.taskList, this.ui);
-//                storage.saveToFile(this.taskList);
-//                isExit = command.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.toString());
-//                ui.showLine();
-//            }
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//        new Duke(PATH).run();
-//    }
 }

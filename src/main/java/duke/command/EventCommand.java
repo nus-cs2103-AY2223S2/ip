@@ -11,6 +11,10 @@ public class EventCommand extends Command {
     public static final String EVENT_COMMAND = "event";
     private final Event event;
 
+    /**
+     * Constructor creates an instance of EventCommand.
+     * @param event An instance of Event.
+     */
     public EventCommand(Event event) {
         super(EVENT_COMMAND);
         this.event = event;

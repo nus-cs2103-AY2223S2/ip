@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Todo;
 
 /**
@@ -12,6 +12,10 @@ public class ToDoCommand extends Command {
     public static final String TODO_COMMAND = "todo";
     private final Todo todo;
 
+    /**
+     * Constructor creates an instance of TodoCommand.
+     * @param todo An instance of Todo.
+     */
     public ToDoCommand(Todo todo) {
         super(TODO_COMMAND);
         this.todo = todo;

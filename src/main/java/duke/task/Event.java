@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.TaskList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Class contains variables and methods related to Event tasks.
@@ -23,27 +23,6 @@ public class Event extends Task {
         super(taskName);
         this.start = start;
         this.end = end;
-    }
-
-    public static void processEvent(String command, TaskList lst) throws DukeException {
-        String info = command.trim();
-        if (info.isEmpty()) {
-            throw new DukeException("event");
-        }
-        String[] details = info.split("/");
-        if (details.length < 3) {
-            throw new DukeException("timing");
-        }
-        try {
-            String startString = details[1].split(" ", 2)[1];
-            String endString = details[2].split(" ", 2)[1];
-            LocalDate start = LocalDate.parse(startString);
-            LocalDate end = LocalDate.parse(endString);
-            Event e = new Event(details[0], start, end);
-            lst.addTask(e);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("date format");
-        }
     }
 
     @Override

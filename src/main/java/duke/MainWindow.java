@@ -8,13 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+//@@author wendy0107-reused
 // Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with some modifications
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private final String HELLO_MSG = "Hello! I'm Luffy.\nWhat can I do for you today?";
+    private final String HELLO_MSG = "Hello! I'm Luffy.\nWhat can I do for you today? :)";
 
     @FXML
     private ScrollPane scrollPane;

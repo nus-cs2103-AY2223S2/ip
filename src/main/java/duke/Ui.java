@@ -7,7 +7,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-
 /**
  * Class contains variables and methods related to interactions with the user.
  */
@@ -32,6 +31,7 @@ public class Ui {
 
     /**
      * Prints a line.
+     * @return LINE.
      */
     public String showLine() {
         return LINE + "\n";
@@ -39,27 +39,25 @@ public class Ui {
 
     /**
      * Prints welcome message.
+     * @return String containing welcome message.
      */
     public String showWelcome() {
         return showLine() + "Hello! I'm Luffy!\n" + "What can I do for you? :)" + "\n" + showLine();
     }
 
-    public void showLoadingError() {
-        showLine();
-        System.out.println("Sorry I wasn't able to load the file");
-        showLine();
-    }
-
     /**
      * Prints error message from an exception.
      * @param errorMsg String containing error message of exception.
+     * @return String containing error message.
      */
     public String showError(String errorMsg) {
         return errorMsg + "\n";
     }
 
+
     /**
      * Prints exit message.
+     * @return String containing exit message.
      */
     public String showExit() {
         return showLine() + "Bye bye! Luffy will go to sleep now!\nHope to see you again soon!! :>\n" + showLine();
@@ -68,93 +66,73 @@ public class Ui {
     /**
      * Prints TaskList of Duke.
      * @param lst TaskList to be printed.
+     * @return Response after printing lst.
      */
     public String showList(TaskList lst) {
-        return showLine() + lst.printList() + showLine();
+        return showLine() + "Here are the tasks in your list:\n" + lst.printList() + showLine();
     }
 
     /**
      * Prints command message after mark command is executed successfully.
      * @param task task marked as done.
+     * @return Response after task marked as done.
      */
     public String showMarkedTask(Task task) {
         return showLine() + "Okay! I've marked this task as done:\n" + task.toString() + "\n" + showLine();
-//        showLine();
-//        System.out.println("Okay! I've marked this task as done:");
-//        System.out.println(task);
-//        showLine();
     }
 
     /**
-     * Prints command message after unmark command is executed successfully.
+     * Prints response after unnmark commamnd is successfully executed.
      * @param task task marked as unDone.
+     * @return Response after task marked as undone.
      */
     public String showUnmarkedTask(Task task) {
         return showLine() + "Okay! I've marked this task as not done yet:\n"
                 + task.toString() + "\n" + showLine();
-//        showLine();
-//        System.out.println("Okay! I've marked this task as not done yet:");
-//        System.out.println(task);
-//        showLine();
     }
+
 
     /**
      * Prints command message after delete command is successfully executed.
      * @param task task deleted.
      * @param size current size of the list.
+     * @return Response after delete is successful.
      */
     public String showDeletedTask(Task task, int size) {
         return showLine() + "Okay! I've removed this task from the list:\n" + task.toString() + "\n"
                 + String.format("Now you have %d tasks in the list!\n", size) + showLine();
-//        showLine();
-//        System.out.println("Okay! I've removed this task from the list:");
-//        System.out.println(task);
-//        System.out.println(String.format("Now you have %d tasks in the list!", size));
-//        showLine();
     }
 
     /**
      * Prints command message after todoCommand is successfully executed.
      * @param todo Todo task created.
      * @param size current size of the list.
+     * @return Response after todo successfully created.
      */
     public String showTodo(Todo todo, int size) {
         return showLine() + "Got it! I've added: \n" + " " + todo.toString() + "\n"
                 + String.format("Now you have %d tasks in the list!\n", size) + showLine();
-//        showLine();
-//        System.out.println("Got it! I've added: ");
-//        System.out.println(" " + todo);
-//        System.out.println(String.format("Now you have %d tasks in the list!", size));
-//        showLine();
     }
 
     /**
      * Prints command message after deadline command is successfully executed.
      * @param deadline Deadline task created.
      * @param size current size of the list.
+     * @return Response after deadline successfully created.
      */
     public String showDeadline(Deadline deadline, int size) {
         return showLine() + "Got it! I've added: \n" + " " + deadline.toString() + "\n"
                 + String.format("Now you have %d tasks in the list!\n", size) + showLine();
-//        showLine();
-//        System.out.println("Got it! I've added: ");
-//        System.out.println(" " + deadline);
-//        System.out.println(String.format("Now you have %d tasks in the list!", size));
-//        showLine();
     }
 
     /**
      * Prints command message after event command is successfully executed.
      * @param event Event task created.
      * @param size current size of the list.
+     * @return Response after event successfully created.
      */
     public String showEvent(Event event, int size) {
         return showLine() + "Got it! I've added: \n" + " " + event.toString() + "\n"
                 + String.format("Now you have %d tasks in the list!\n", size) + showLine();
-//        showLine();
-//        System.out.println("Got it! I've added: ");
-//        System.out.println(" " + event);
-//        System.out.println(String.format("Now you have %d tasks in the list!", size));
-//        showLine();
     }
 }

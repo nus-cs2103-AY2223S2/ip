@@ -1,12 +1,12 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 /**
  * The Storage class contains variables and methods related to handling a data file for Duke.

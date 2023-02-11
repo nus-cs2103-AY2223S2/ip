@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
@@ -12,6 +12,10 @@ public class DeleteCommand extends Command {
     public static final String DELETE_COMMAND = "delete";
     private final int index;
 
+    /**
+     * Constructor creates an instance of DeleteCommand.
+     * @param index int index of task to be deleted.
+     */
     public DeleteCommand(int index) {
         super(DELETE_COMMAND);
         this.index = index;

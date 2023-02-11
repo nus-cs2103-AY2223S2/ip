@@ -42,7 +42,7 @@ public abstract class Task {
      * Marks task as done or undone depending on status.
      * @param status
      */
-    public void setCompleted(boolean status) { 
+    public void setCompleted(boolean status) {
         this.isCompleted = status;
     }
 

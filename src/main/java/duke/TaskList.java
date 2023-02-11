@@ -39,7 +39,7 @@ public class TaskList {
      * @param taskNum index of task to be marked as unDone.
      * @throws DukeException If index given is out of bounds.
      */
-    public void unmark(int taskNum) throws DukeException{
+    public void unmark(int taskNum) throws DukeException {
         if (taskNum < 0 || taskNum > lst.size() - 1) {
             throw new DukeException("bounds");
         }
@@ -52,7 +52,7 @@ public class TaskList {
      * @param taskNum index of task to be removed.
      * @throws DukeException If index given is out of bounds.
      */
-    public void deleteTask(int taskNum) throws DukeException{
+    public void deleteTask(int taskNum) throws DukeException {
         if (taskNum < 0 || taskNum > lst.size() - 1) {
             throw new DukeException("bounds");
         }
@@ -61,34 +61,30 @@ public class TaskList {
     }
 
     /**
-     * Prints all the tasks in the list.
+     * Returns the TaskList as a String.
+     * @return String containing all the tasks in the list.
      */
     public String printList() {
-        String response = "Here are the tasks in your list:\n";
+        String response = "";
         for (int i = 0; i < lst.size(); i++) {
             String elem = lst.get(i).toString();
             String formattedElem = String.format("%d. %s\n", i + 1, elem);
             response += formattedElem;
         }
         return response;
-//        System.out.println("Here are the tasks in your list:")
-//        for (int i = 0; i < lst.size(); i++) {
-//            String elem = lst.get(i).toString();
-//            System.out.println(String.format("%d. %s", i + 1, elem));
-//        }
     }
 
     /**
-     * Prints all tasks in the list which contain the keyword.
+     * Returns all tasks in the list which contain the keyword as a String.
      * @param keyword String keyword from find command.
-     * @throws DukeException If keyword is empty.
+     * @return String containing all tasks in the list which contain the keyword.
+     * @throws DukeException
      */
     public String printMatchingList(String keyword) throws DukeException {
         if (keyword.isEmpty()) {
             throw new DukeException("empty keyword");
         }
         String response = "Here are the matching tasks in your list :)\n";
-//        System.out.println("Here are the matching tasks in your list :)");
         int count = 0;
         for (int i = 0; i < this.getSize(); i++) {
             Task task = this.getTask(i);
@@ -96,7 +92,6 @@ public class TaskList {
             if (taskName.contains(keyword)) {
                 count++;
                 response += String.format("%d. %s\n", count, task);
-//                System.out.println(String.format("%d. %s", count, task));
             }
         }
         return response;
@@ -124,7 +119,7 @@ public class TaskList {
      * @param data contains inputs to creating a Task.
      * @throws DukeException If given input is empty or if the given input is of the wrong format.
      */
-    public void addTaskFromString(String data) throws DukeException{
+    public void addTaskFromString(String data) throws DukeException {
         Task task = null;
         if (data.trim().isEmpty()) {
             throw new DukeException("empty line in file");
@@ -164,9 +159,4 @@ public class TaskList {
     public int getSize() {
         return this.lst.size();
     }
-
-    public void printSize() {
-        System.out.println(String.format("Now you have %d tasks in the list!", this.getSize()));
-    }
-
 }

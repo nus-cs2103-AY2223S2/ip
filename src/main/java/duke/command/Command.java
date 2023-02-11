@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
+
 
 /**
  * The abstract Command class encapsulates the variables and methods related to commands.
