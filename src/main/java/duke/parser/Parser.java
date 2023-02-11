@@ -59,9 +59,7 @@ public class Parser {
             return new AddTaskCommand(new Event(detail, timeDescription));
         case TODO:
             if (input.split(" ").length == 1) {
-                throw new DukeException("____________________________________________________________\n"
-                    + "   OOPS!!! The description of a todo cannot be empty.\n"
-                    + "____________________________________________________________");
+                throw new DukeException("   OOPS!!! The description of a todo cannot be empty.\n");
             }
             detail = input.split(" ", 2)[1];
             return new AddTaskCommand(new Todo(detail));
@@ -74,9 +72,9 @@ public class Parser {
             detail = input.split(" ", 2)[1].trim();
             return new FindCommand(detail);
         default:
-            throw new DukeException("____________________________________________________________\n"
-                + "   OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                + "____________________________________________________________");
+            throw new DukeException(
+                "   OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+              );
         }
     }
 }

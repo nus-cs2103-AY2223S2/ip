@@ -193,7 +193,7 @@ public class Duke {
             isExit = c.isExit();
             if (isExit) {
                 String dukeText = "bye";
-                return "bye";
+                return dukeText;
 
             }
             return (c.execute(tasks, ui, storage));

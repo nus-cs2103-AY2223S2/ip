@@ -29,6 +29,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+            dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hello this is Duke, your personal task manager.\n"
+                    + "What can I do for you?", dukeImage)
+            );
     }
 
     public void setDuke(Duke d) {
@@ -45,8 +49,8 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         if (response.equals("bye")) {
             dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog("Bye. Hope to see you again soon!", userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog("bye", userImage),
+                DialogBox.getDukeDialog("Bye. Hope to see you again soon!", dukeImage)
             );
             Platform.exit();
         }
