@@ -12,16 +12,16 @@ public class Ui {
      * Displays Tigerlily To-Do's welcome message when user starts session.
      */
     public void showWelcome() {
-        System.out.println("｡ﾟﾟ･｡･ﾟﾟ｡\n" + "。 welcome to tigerlily to-do\n" + "　ﾟ･｡･ﾟ\n" +
-                "✎ . . . . add your tasks here");
+        System.out.println("｡ﾟﾟ･｡･ﾟﾟ｡\n" + "。 welcome to tigerlily to-do\n" + "　ﾟ･｡･ﾟ\n"
+                + "✎ . . . . add your tasks here");
     }
 
     /**
      * Displays Tigerlily To-Do's goodbye message when user ends session.
      */
     public void showGoodbye() {
-        System.out.println("\n(\\\\ (\\\\ \n" + "(„• ֊ •„)\n" + "━━O━O━━━━━━━━━━━━━━━\n" +
-                "bye, see you again soon!\n" + "━━━━━━━━━━━━━━━━━━━━\n");
+        System.out.println("\n(\\\\ (\\\\ \n" + "(„• ֊ •„)\n" + "━━O━O━━━━━━━━━━━━━━━\n"
+                + "bye, see you again soon!\n" + "━━━━━━━━━━━━━━━━━━━━\n");
     }
 
     /**
@@ -40,8 +40,8 @@ public class Ui {
      * @param taskList the TaskList which the Task has been added to
      */
     public void showAddedMessage(Task task, TaskList taskList) {
-        System.out.println("\nokay perf, your task: " + task.toString() + " has been added to your list\n" +
-                "there are now " + taskList.getSize() + " task(s) in your list\n" + SEPARATOR);
+        System.out.println("\nokay perf, your task: " + task.toString() + " has been added to your list\n"
+                + "there are now " + taskList.getSize() + " task(s) in your list\n" + SEPARATOR);
     }
 
     /**
