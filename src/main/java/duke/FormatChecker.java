@@ -11,10 +11,7 @@ public class FormatChecker {
      * @return whether the command has the correct deadline command format
      */
     public static boolean isCorrectDeadlineCmd(String command) {
-        if (command.matches("^.+(\\s)/by(\\s).+$")) {
-            return true;
-        }
-        return false;
+        return command.matches("^.+(\\s)/by(\\s).+$");
     }
 
     /**
@@ -23,10 +20,7 @@ public class FormatChecker {
      * @return whether the command has the correct event command format
      */
     public static boolean isCorrectEventCmd(String command) {
-        if (command.matches("^.+(\\s)/from(\\s).+(\\s)/to.*$")) {
-            return true;
-        }
-        return false;
+        return command.matches("^.+(\\s)/from(\\s).+(\\s)/to.*$");
     }
 
     /**
@@ -35,9 +29,6 @@ public class FormatChecker {
      * @return whether the command has the correct date format
      */
     public static boolean isCorrectDateInput(String dateString) {
-        if (dateString.matches("^(\\d)+/(\\d)+/(\\d)+(\\s)(\\d)+:(\\d)+$")) {
-            return true;
-        }
-        return false;
+        return dateString.matches("^(\\d)+/(\\d)+/(\\d)+(\\s)(\\d)+:(\\d)+$");
     }
 }

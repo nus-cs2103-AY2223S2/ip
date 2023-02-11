@@ -18,7 +18,7 @@ public class UnmarkCommand extends Command {
             throw new DukeException(
                 "The task with the given index does not exist.");
         }
-        String res = tasks.get(this.unmarkIdx).unmark();
+        String res = tasks.getTask(this.unmarkIdx).unmark();
         return res;
     }
 

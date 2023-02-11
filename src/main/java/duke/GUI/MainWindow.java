@@ -1,5 +1,7 @@
-package duke;
+package duke.GUI;
 
+import duke.Duke;
+import duke.GUI.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

@@ -26,7 +26,7 @@ public class Storage {
      * @throws FileNotFoundException If data file does not exist.
      */
     public TaskList load() throws FileNotFoundException {
-        File f = new File(this.filePath);
+        File f = new File(filePath);
         Scanner sc = new Scanner(f);
         ArrayList<String> rawData = new ArrayList<>();
         TaskList tasks = new TaskList();
@@ -39,12 +39,19 @@ public class Storage {
         }
         for (int i = 0; i < rawData.size(); i++) {
             String[] taskData = rawData.get(i).split("\\|");
-            switch(taskData[0]) {
+            String eventType = taskData[0];
+            String isDone = taskData[1];
+            String title = taskData[2];
+            String dateTime = "";
+            if (taskData.length > 3) {
+                dateTime = taskData[3];
+            }
+            switch(eventType) {
             case "T":
                 try {
-                    tasks.add(taskData[2]);
-                    if (taskData[1].equals("1")) {
-                        tasks.get(i + 1).markDone();
+                    tasks.add(title);
+                    if (isDone.equals("1")) {
+                        tasks.getTask(i + 1).markDone();
                     }
                 } catch (DukeException e) {
                     System.out.println(e);
@@ -52,20 +59,22 @@ public class Storage {
                 break;
             case "D":
                 try {
-                    tasks.add(taskData[2], taskData[3]);
+                    tasks.add(title, dateTime);
                     if (taskData[1].equals("1")) {
-                        tasks.get(i + 1).markDone();
+                        tasks.getTask(i + 1).markDone();
                     }
                 } catch (DukeException e) {
                     System.out.println(e);
                 }
                 break;
             case "E":
-                String[] duration = taskData[3].split("-");
+                String[] duration = dateTime.split("-");
+                String fromDateTime = duration[0];
+                String toDateTime = duration[1];
                 try {
-                    tasks.add(taskData[2], duration[0], duration[1]);
-                    if (taskData[1].equals("1")) {
-                        tasks.get(i + 1).markDone();
+                    tasks.add(title, fromDateTime, toDateTime);
+                    if (isDone.equals("1")) {
+                        tasks.getTask(i + 1).markDone();
                     }
                 } catch (DukeException e) {
                     System.out.println(e);
@@ -86,7 +95,7 @@ public class Storage {
      * @throws IOException If file cannot be written into the data file.
      */
     public void writeToFile(String dukeData) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+        FileWriter fw = new FileWriter(filePath);
         fw.write(dukeData);
         fw.close();
     }

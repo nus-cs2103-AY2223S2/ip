@@ -18,7 +18,7 @@ public class MarkCommand extends Command {
             throw new DukeException(
                 "The task with the given index does not exist.");
         }
-        String res = tasks.get(this.markIdx).markDone();
+        String res = tasks.getTask(this.markIdx).markDone();
         return res;
     }
 

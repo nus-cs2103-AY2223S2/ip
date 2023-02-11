@@ -10,14 +10,14 @@ import duke.task.ToDo;
  * List of tasks that the user can add, mark, find or delete.
  */
 public class TaskList {
-    private ArrayList<Task> list = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Class constructor of Storage.
      * Initialize by adding a zeroth element so that the index of tasks can start from 1.
      */
     public TaskList() {
-        this.list.add(new ToDo("zeroth"));
+        tasks.add(new ToDo("zeroth"));
     }
 
     /**
@@ -31,10 +31,10 @@ public class TaskList {
         }
         ToDo newTask = new ToDo(input);
         String res = "";
-        this.list.add(newTask);
+        tasks.add(newTask);
         res += "Got it. I've added this task:\n";
         res += newTask.toString() + "\n";
-        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
         return res;
     }
 
@@ -50,10 +50,10 @@ public class TaskList {
         }
         Deadline newTask = new Deadline(input, deadline);
         String res = "";
-        this.list.add(newTask);
+        tasks.add(newTask);
         res += "Got it. I've added this task:\n";
         res += newTask.toString() + "\n";
-        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
         return res;
     }
 
@@ -70,10 +70,10 @@ public class TaskList {
         }
         Event newTask = new Event(input, from, to);
         String res = "";
-        this.list.add(newTask);
+        tasks.add(newTask);
         res += "Got it. I've added this task:";
         res += newTask.toString() + "\n";
-        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
         return res;
     }
 
@@ -96,11 +96,11 @@ public class TaskList {
      */
     public String delete(int index) {
         String res = "";
-        Task removedTask = this.list.get(index);
-        this.list.remove(index);
+        Task removedTask = tasks.get(index);
+        tasks.remove(index);
         res += "Noted. I've removed this task:\n";
         res += removedTask.toString() + "\n";
-        res += "Now you have " + (this.list.size() - 1) + " tasks in the list.\n";
+        res += "Now you have " + (tasks.size() - 1) + " tasks in the list.\n";
         return res;
     }
 
@@ -109,8 +109,8 @@ public class TaskList {
      * @param index the Task to be returns
      * @return Task with the given index in the TaskList
      */
-    public Task get(int index) {
-        return this.list.get(index);
+    public Task getTask(int index) {
+        return tasks.get(index);
     }
 
     /**
@@ -122,9 +122,9 @@ public class TaskList {
         ArrayList<Task> foundTasks = new ArrayList<>();
         foundTasks.add(new ToDo("zeroth"));
         res += "Here are the matching tasks in your list:\n";
-        for (int i = 1; i < this.list.size(); i++) {
-            if (this.list.get(i).getTask().contains(target)) {
-                foundTasks.add(list.get(i));
+        for (int i = 1; i < tasks.size(); i++) {
+            if (tasks.get(i).getTask().contains(target)) {
+                foundTasks.add(tasks.get(i));
             }
         }
         for (int i = 1; i < foundTasks.size(); i++) {
@@ -140,9 +140,9 @@ public class TaskList {
     @Override
     public String toString() {
         String str = "Here are the tasks in your list:";
-        for (int i = 1; i < this.list.size(); i++) {
+        for (int i = 1; i < tasks.size(); i++) {
             str += "\n";
-            str += i + ". " + this.list.get(i).toString();
+            str += i + ". " + tasks.get(i).toString();
         }
         return str;
     }
@@ -153,8 +153,8 @@ public class TaskList {
      */
     public String toTxtString() {
         String data = "";
-        for (int i = 1; i < this.list.size(); i++) {
-            data += this.list.get(i).toTxtString() + "\n";
+        for (int i = 1; i < tasks.size(); i++) {
+            data += tasks.get(i).toTxtString() + "\n";
         }
         return data;
     }
@@ -164,6 +164,6 @@ public class TaskList {
      * @return the number of Tasks in this TaskList
      */
     public int size() {
-        return list.size();
+        return tasks.size();
     }
 }
