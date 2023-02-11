@@ -10,7 +10,16 @@ public class FindCommand extends Command {
     public FindCommand(String textCmd) {
         super(textCmd);
     }
-    
+
+    /**
+     * Produces a String for the GUI to read from.
+     * The String is the list of Tasks that contain that specific given keyword
+     *
+     * @param ui User Interface of Duke.
+     * @param storage storage of Duke.
+     * @param taskList task list containing all the tasks Duke is tracking.
+     * @return the String of all the tasks that contains the keyword.
+     */
     @Override
     public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         String[] commandSplit = textCmd.split(" ");
@@ -22,7 +31,8 @@ public class FindCommand extends Command {
         }
 
         if (commandSplit.length == 1) {
-            throw new DukeException("The keyword for your Find Command cannot be blank!\n");
+            throw new DukeException("The keyword for your Find Command cannot be blank!\n"
+                    + "Please follow this format: find {keyword}");
         }
 
         String keyWord = textCmd.substring(5);
