@@ -31,6 +31,8 @@ public class Parser {
         checkWrongTask(next);
         checkEmptyDescription(arrNext);
 
+        assert next.equals("list") || after != null;
+
         Task inputTask;
         switch (next) {
         case "bye": {
