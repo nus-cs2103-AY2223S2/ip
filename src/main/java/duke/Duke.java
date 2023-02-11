@@ -52,6 +52,82 @@ public class Duke extends Application {
                 task.toString() + "\n";
     }
 
+    private Message handleDisplayCommand(String[] tokens) throws DukeException {
+        assert(tokens[0].equals("list") || tokens[0].equals("find"));
+        switch(tokens[0]) {
+        case "list":
+            if (tokens.length == 1) {
+                return new Message(taskList.getItemListAsResponseString());
+            } else throw new DukeException("command \"list\" takes no arguments");
+
+        case "find":
+            List<Integer> indexList = taskList.getMatchingItemsIndices(tokens);
+            return new Message(taskList.getItemListAsResponseString(indexList));
+
+        default:
+            throw new DukeException("broken display command");
+        }
+    }
+
+    private Message handleEditCommand(String[] tokens) throws DukeException {
+        assert(tokens[0].equals("mark") || tokens[0].equals("unmark") || tokens[0].equals("tag"));
+        switch(tokens[0]) {
+        case "mark":
+            Task updatedTask = taskList.markListItem(tokens);
+            return new Message("Nice! I've marked this task as done:\n"
+                    + updatedTask.toString() + "\n");
+
+        case "unmark":
+            Task unmarkedTask = taskList.unmarkListItem(tokens);
+            return new Message("OK, I've marked this task as not done yet:\n"
+                    + unmarkedTask.toString() + "\n");
+
+        case "tag":
+            Task taggedTask = taskList.addTag(tokens);
+            return new Message(taskTaggedMessage(taggedTask));
+
+        default:
+            throw new DukeException("broken edit command");
+        }
+    }
+
+    private Message handleAddCommand(String[] tokens) throws DukeException {
+        assert(tokens[0].equals("todo") || tokens[0].equals("deadline") || tokens[0].equals("event"));
+        switch(tokens[0]) {
+        case "todo":
+            Task addedTodoTask = taskList.addToDo(tokens);
+            return new Message(taskAddedMessage(addedTodoTask));
+
+        case "deadline":
+            Task addedDeadlineTask = taskList.addDeadline(tokens);
+            return new Message(taskAddedMessage(addedDeadlineTask));
+
+        case "event":
+            Task addedEventTask = taskList.addEvent(tokens);
+            return new Message(taskAddedMessage(addedEventTask));
+
+        default:
+            throw new DukeException("broken add command");
+        }
+    }
+
+    private Message handleDeleteCommand(String[] tokens) throws DukeException {
+        switch(tokens[0]) {
+        case "delete":
+            Task removedTask = taskList.deleteItem(tokens, ui);
+            return new Message("Noted. I've removed this task:\n" +
+                    removedTask +
+                    "\nNow you have " + taskList.size() + " tasks in the list\n");
+
+        default:
+            throw new DukeException("broken delete command");
+        }
+    }
+
+    private Message handleUnknownCommand(String[] tokens) {
+        return new Message("unknown command\n");
+    }
+
     /**
      * Returns a <code>Message</code> that represents the response of the chatbot when prompted by an input by user.
      * @param msg A <code>Message</code> object representing the user's request
@@ -67,51 +143,15 @@ public class Duke extends Application {
             return new Message("This message should never show up");
 
         }
-        switch(tokens[0]) {
-        case "list":
-            if (tokens.length == 1) {
-                return new Message(taskList.getItemListAsResponseString());
-            }
 
-        case "mark":
-            Task updatedTask = taskList.markListItem(tokens);
-            return new Message("Nice! I've marked this task as done:\n"
-                    + updatedTask.toString() + "\n");
-
-        case "unmark":
-            Task unmarkedTask = taskList.unmarkListItem(tokens);
-            return new Message("OK, I've marked this task as not done yet:\n"
-                    + unmarkedTask.toString() + "\n");
-
-        case "todo":
-            Task addedTodoTask = taskList.addToDo(tokens);
-            return new Message(taskAddedMessage(addedTodoTask));
-
-        case "deadline":
-            Task addedDeadlineTask = taskList.addDeadline(tokens);
-            return new Message(taskAddedMessage(addedDeadlineTask));
-
-        case "event":
-            Task addedEventTask = taskList.addEvent(tokens);
-            return new Message(taskAddedMessage(addedEventTask));
-
-        case "delete":
-            Task removedTask = taskList.deleteItem(tokens, ui);
-            return new Message("Noted. I've removed this task:\n" +
-                    removedTask +
-                    "\nNow you have " + taskList.size() + " tasks in the list\n");
-
-        case "find":
-            List<Integer> indexList = taskList.getMatchingItemsIndices(tokens);
-            return new Message(taskList.getItemListAsResponseString(indexList));
-
-        case "tag":
-            Task taggedTask = taskList.addTag(tokens);
-            return new Message(taskTaggedMessage(taggedTask));
-
-        default:
-            return new Message("unknown command\n");
-        }
+        String command = tokens[0];
+        return switch (command) {
+            case "list", "find" -> handleDisplayCommand(tokens);
+            case "mark", "unmark", "tag" -> handleEditCommand(tokens);
+            case "todo", "deadline", "event" -> handleAddCommand(tokens);
+            case "delete" -> handleDeleteCommand(tokens);
+            default -> handleUnknownCommand(tokens);
+        };
     }
 
     /**
