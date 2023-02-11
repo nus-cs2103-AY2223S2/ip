@@ -22,29 +22,33 @@ public class TaskList {
     /**
      * Prints the user's tasks in list form.
      */
-    public void list() {
+    public String list() {
         int curr = 1;
+        String toPrint = "Here are your tasks:\n";
         Iterator<Task> iter = this.tasks.iterator();
         while (iter.hasNext()) {
             Task task = iter.next();
-            System.out.println(curr + ". " + task);
+            toPrint += curr + ". " + task + "\n";
             curr++;
         }
+        return toPrint;
     }
 
     /**
      * Prints the user's tasks that matches keyword in list form.
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         int curr = 1;
+        String toPrint = "";
         Iterator<Task> iter = this.tasks.iterator();
         while (iter.hasNext()) {
             Task task = iter.next();
             if (task.getName().contains(keyword)) {
-                System.out.println(curr + ". " + task);
+                toPrint += curr + ". " + task + "\n";
                 curr++;
             }
         }
+        return toPrint;
     }
 
     /**
@@ -60,30 +64,30 @@ public class TaskList {
      * Removes a task from the user's TaskList.
      * @param i Index of task to be deleted.
      */
-    public void deleteTask(int i) {
+    public String deleteTask(int i) {
         Task t = this.tasks.remove(i);
         count--;
-        System.out.println("Deleted task:\n  " + t + "\nNumber of tasks: " + count);
+        return "Deleted task:\n  " + t + "\nNumber of tasks: " + count;
     }
 
     /**
      * Marks the given task as completed.
      * @param i Index of task to be marked.
      */
-    public void markTask(int i) {
+    public String markTask(int i) {
         Task t = this.tasks.get(i);
         t.mark();
-        System.out.println("Task has been marked as done:\n " + t);
+        return "Task has been marked as done:\n " + t;
     }
 
     /**
      * Unmarks the given task as completed.
      * @param i Index of task to be unmarked.
      */
-    public void unmarkTask(int i) {
+    public String unmarkTask(int i) {
         Task t = this.tasks.get(i);
         t.unmark();
-        System.out.println("Task has been marked as not done:\n " + t);
+        return "Task has been marked as not done:\n " + t;
     }
 
     /**

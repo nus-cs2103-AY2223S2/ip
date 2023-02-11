@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import javafx.application.Platform;
 
 /**
  * Represents a class to decipher user's commands.
@@ -19,32 +20,27 @@ public class Parser {
      * @param taskList User's TaskList.
      * @throws DukeException If user enters invalid input.
      */
-    public void readInput(String[] input, TaskList taskList) throws DukeException {
+    public String readInput(String[] input, TaskList taskList) throws DukeException {
         switch (input[0]) {
         case "list":
-            taskList.list();
-            break;
+            return taskList.list();
         case "mark":
-            mark(input, taskList);
-            break;
+            return mark(input, taskList);
         case "unmark":
-            unmark(input, taskList);
-            break;
+            return unmark(input, taskList);
         case "todo":
-            todo(input, taskList);
-            break;
+            return todo(input, taskList);
         case "deadline":
-            deadline(input, taskList);
-            break;
+            return deadline(input, taskList);
         case "event":
-            event(input, taskList);
-            break;
+            return event(input, taskList);
         case "delete":
-            delete(input, taskList);
-            break;
+            return delete(input, taskList);
         case "find":
-            find(input, taskList);
-            break;
+            return find(input, taskList);
+        case "bye":
+            Platform.exit();
+            return "Goodbye!";
         default:
             throw new DukeException("Sorry I do not understand the command");
         }
@@ -56,7 +52,7 @@ public class Parser {
      * @param taskList User's TaskList
      * @throws DukeException If user enters invalid number or task that has not been created.
      */
-    public void mark(String[] input, TaskList taskList) throws DukeException {
+    public String mark(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("Mark needs a number.");
         }
@@ -69,7 +65,7 @@ public class Parser {
         if (index > taskList.size()) {
             throw new DukeException("Invalid task.");
         }
-        taskList.markTask(Integer.parseInt(input[1]) - 1);
+        return taskList.markTask(Integer.parseInt(input[1]) - 1);
     }
 
     /**
@@ -78,7 +74,7 @@ public class Parser {
      * @param taskList User's TaskList
      * @throws DukeException If user enters invalid number or task that has not been created.
      */
-    public void unmark(String[] input, TaskList taskList) throws DukeException {
+    public String unmark(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("Unmark needs a number.");
         }
@@ -91,7 +87,7 @@ public class Parser {
         if (index > taskList.size()) {
             throw new DukeException("Invalid task.");
         }
-        taskList.unmarkTask(Integer.parseInt(input[1]) - 1);
+        return taskList.unmarkTask(Integer.parseInt(input[1]) - 1);
     }
 
     /**
@@ -100,13 +96,13 @@ public class Parser {
      * @param taskList User's TaskList
      * @throws DukeException If user did not provide name of Todo.
      */
-    public void todo(String[] input, TaskList taskList) throws DukeException {
+    public String todo(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("todo needs a description");
         }
         Task t = new Todo(input[1].strip());
         taskList.addTask(t);
-        System.out.println("Added new todo:\n  " + t + "\nNumber of tasks: " + taskList.size());
+        return "Added new todo:\n  " + t + "\nNumber of tasks: " + taskList.size();
     }
 
     /**
@@ -115,7 +111,7 @@ public class Parser {
      * @param taskList User's TaskList
      * @throws DukeException If user did not enter /by date or invalid date format.
      */
-    public void deadline(String[] input, TaskList taskList) throws DukeException {
+    public String deadline(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1 || !input[1].contains("/by")) {
             throw new DukeException("Deadline needs a /by.");
         }
@@ -126,7 +122,7 @@ public class Parser {
         try {
             Task t = new Deadline(tempInput[0].strip(), tempInput[1].strip());
             taskList.addTask(t);
-            System.out.println("Added new deadline:\n  " + t + "\nNumber of tasks: " + taskList.size());
+            return "Added new deadline:\n  " + t + "\nNumber of tasks: " + taskList.size();
         } catch (DateTimeParseException e) {
             throw new DukeException("Date after /by needs to be in format yyyy-mm-dd.");
         }
@@ -138,7 +134,7 @@ public class Parser {
      * @param taskList User's TaskList
      * @throws DukeException If user did not enter /from or /to or invalid date format.
      */
-    public void event(String[] input, TaskList taskList) throws DukeException {
+    public String event(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1 || !input[1].contains("/from") || !input[1].contains("/to") ) {
             throw new DukeException("Event needs a /from and /to.");
         }
@@ -151,7 +147,7 @@ public class Parser {
         try {
             Task t = new Event(tempInput[0].strip(), from[1].strip(), to[1].strip());
             taskList.addTask(t);
-            System.out.println("Added new event:\n  " + t + "\nNumber of tasks: " + taskList.size());
+            return "Added new event:\n  " + t + "\nNumber of tasks: " + taskList.size();
         } catch (DateTimeParseException e) {
             throw new DukeException("Date after /from and /to needs to be in format yyyy-mm-dd.");
         }
@@ -163,7 +159,7 @@ public class Parser {
      * @param taskList User's TaskList
      * @throws DukeException If user enters invalid number.
      */
-    public void delete(String[] input, TaskList taskList) throws DukeException {
+    public String delete(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("Delete needs a number.");
         }
@@ -176,7 +172,7 @@ public class Parser {
         if (index > taskList.size()) {
             throw new DukeException("Invalid task.");
         }
-        taskList.deleteTask(index - 1);
+        return taskList.deleteTask(index - 1);
     }
 
     /**
@@ -185,11 +181,10 @@ public class Parser {
      * @param taskList User's TaskList
      * @throws DukeException If user did not enter a keyword.
      */
-    public void find(String[] input, TaskList taskList) throws DukeException {
+    public String find(String[] input, TaskList taskList) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("Find needs a keyword.");
         }
-        System.out.println("Here are the matching tasks in your list:");
-        taskList.findTask(input[1].strip());
+        return "Here are the matching tasks in your list:\n" + taskList.findTask(input[1].strip());
     }
 }

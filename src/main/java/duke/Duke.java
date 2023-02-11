@@ -25,12 +25,6 @@ public class Duke {
         }
     }
 
-
-    public static void main(String[] args) throws IOException, DukeException {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
     public void run() throws IOException, DukeException{
         UI.start();
         String[] input = UI.readLine();
@@ -49,4 +43,16 @@ public class Duke {
         UI.goodbye();
         storage.storeData(this.taskList.getTasks());
     }
+
+    public String getResponse(String input) {
+        String[] inputArr = input.strip().split(" ",2);
+        try {
+            String toPrint = PARSER.readInput(inputArr, taskList);
+            storage.storeData(this.taskList.getTasks());
+            return toPrint;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
 }
