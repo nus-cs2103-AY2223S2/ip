@@ -22,5 +22,5 @@ public abstract class Command {
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
     protected abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException,
-            DukeIoException;
+            DukeIoException, DukeEventOverlapException;
 }

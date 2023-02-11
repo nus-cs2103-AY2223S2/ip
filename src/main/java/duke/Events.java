@@ -1,8 +1,11 @@
 package duke;
 
+import javafx.util.Pair;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Event type of task.
@@ -19,6 +22,8 @@ public class Events extends Task {
     protected String startTime;
     protected String endTime;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    /** Store starting time and ending time of each event. */
+    private static ArrayList<Pair<LocalDateTime,LocalDateTime>> eventTimeList = new ArrayList<>();
 
     /**
      * Constructor to create an event instance.
@@ -28,13 +33,19 @@ public class Events extends Task {
      * @param end end time of events.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    public Events(String description, String start, String end) throws DukeInvalidArgumentException {
+    public Events(String description, String start, String end) throws DukeInvalidArgumentException,
+            DukeEventOverlapException {
         super(description);
         try {
             this.start = LocalDateTime.parse(start);
             this.end = LocalDateTime.parse(end);
             this.startTime = start;
             this.endTime = end;
+            if (isOverlapping()) {
+                throw new DukeEventOverlapException("Event overlap with previous event.");
+            } else {
+                eventTimeList.add(new Pair<>(this.start, this.end));
+            }
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException("The format of date-time is invalid.");
         }
@@ -46,6 +57,20 @@ public class Events extends Task {
 
     public String getEnd() {
         return endTime;
+    }
+
+    /**
+     * Checks whether scheduling anomalies occur between different events.
+     *
+     * @return true if anomalies scheduling, otherwise false.
+     */
+    private boolean isOverlapping() {
+        for (Pair<LocalDateTime,LocalDateTime> otherEvent: eventTimeList) {
+            if (!(start.isAfter(otherEvent.getValue()) || end.isBefore(otherEvent.getKey()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

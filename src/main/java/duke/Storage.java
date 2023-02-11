@@ -123,7 +123,7 @@ public class Storage {
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    protected ArrayList<Task> load() throws DukeIoException, DukeInvalidArgumentException {
+    protected ArrayList<Task> load() throws DukeIoException, DukeInvalidArgumentException, DukeEventOverlapException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             List<String> allLine = Files.readAllLines(path);
@@ -143,7 +143,8 @@ public class Storage {
         }
     }
 
-    protected TaskList findDataFromFile(String keyword) throws DukeIoException, DukeInvalidArgumentException {
+    protected TaskList findDataFromFile(String keyword) throws DukeIoException, DukeInvalidArgumentException,
+            DukeEventOverlapException {
         TaskList result = new TaskList();
         try {
             List<String> allLine = Files.readAllLines(path);
@@ -165,7 +166,8 @@ public class Storage {
         }
     }
 
-    private Task createTaskFromStorage(String description) throws DukeInvalidArgumentException {
+    private Task createTaskFromStorage(String description) throws DukeInvalidArgumentException,
+            DukeEventOverlapException {
         String[] s = description.split(" \\| ");
         Task t = null;
         boolean isDone = s[1].equals("1");

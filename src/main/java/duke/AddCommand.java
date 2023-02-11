@@ -13,7 +13,8 @@ public class AddCommand extends Command {
      * @throws DukeEmptyArgumentException indicate that a command has been passed an empty argument.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    public AddCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
+    public AddCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException,
+            DukeEventOverlapException {
         try {
             this.task = createTask(fullCommand[0], fullCommand[1]);
         } catch (IndexOutOfBoundsException e) {
@@ -21,7 +22,8 @@ public class AddCommand extends Command {
         }
     }
 
-    private Task createTask(String cmd, String description) throws DukeInvalidArgumentException {
+    private Task createTask(String cmd, String description) throws DukeInvalidArgumentException,
+            DukeEventOverlapException {
         try {
             Task task = null;
             switch (cmd) {

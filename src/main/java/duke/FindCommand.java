@@ -27,7 +27,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIoException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIoException,
+            DukeEventOverlapException {
         TaskList taskList = storage.findDataFromFile(keyword);
         return ui.responseToFindTaskCommand(taskList);
     }
