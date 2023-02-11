@@ -11,10 +11,21 @@ import fideline.exception.DataFileInteractionException;
 import fideline.exception.DataFileNotFoundException;
 import fideline.exception.UnableToCreateDataFileException;
 
+/**
+ * Handles local storage of data.
+ *
+ * @author Fun Leon
+ */
 public class Storage {
 
+    /** File where the data is stored locally */
     private File dataFile;
 
+    /**
+     * Constructs a storage instance that handles local saved data.
+     *
+     * @param fileLocation Relative path to the data file.
+     */
     public Storage(String fileLocation) {
         dataFile = new File(fileLocation);
     }
