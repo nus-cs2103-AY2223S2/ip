@@ -26,7 +26,7 @@ Features:
 If you are a Java programmer, you can use it to practice Java too. Here's the `main` method:
 
 ```java
-public class Duke {
+public class Launcher {
    public static void main(String[] args) { 
       Application.launch(Fea.class, args);
    }
