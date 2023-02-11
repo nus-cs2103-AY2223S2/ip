@@ -20,9 +20,8 @@ public class ListCommand extends Command {
     }
 
     private String getReply(TaskList tasks) {
-        String msg = "Got it. I've added this task:\n";
-        msg += tasks.toString() + "\n";
-        msg += "Now you have " + tasks.size() + " tasks in the list.";
+        String msg = "Here are the tasks in your list:\n";
+        msg += tasks.toString();
         return msg;
     }
 }

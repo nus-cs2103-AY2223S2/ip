@@ -27,18 +27,24 @@ public class Event extends Task {
      */
     public Event(String description, String by, String from) throws KuromiException {
         super(description);
-        this.by = by;
+        this.from = from;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            this.dateFrom = LocalDateTime.parse(from, format);
+        } catch (DateTimeParseException e) {
+            throw new KuromiException("☹ OOPS!!! The format of the end date must be in yyyy-MM-dd HH:mm");
+        }
+        if (this.dateFrom.isBefore(LocalDateTime.now())) {
+            throw new KuromiException("☹ OOPS!!! The start date should be greater than the current date");
+        }
+        this.by = by;
         try {
             this.dateBy = LocalDateTime.parse(by, format);
         } catch (DateTimeParseException e) {
             throw new KuromiException("☹ OOPS!!! The format of the start date must be in yyyy-MM-dd HH:mm");
         }
-        this.from = from;
-        try {
-            this.dateFrom = LocalDateTime.parse(from, format);
-        } catch (DateTimeParseException e) {
-            throw new KuromiException("☹ OOPS!!! The format of the end date must be in yyyy-MM-dd HH:mm");
+        if (this.dateBy.isBefore(this.dateFrom)) {
+            throw new KuromiException("☹ OOPS!!! The end date must be after the start date");
         }
     }
 
@@ -54,17 +60,9 @@ public class Event extends Task {
         super(description, isDone);
         this.by = by;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        try {
-            this.dateBy = LocalDateTime.parse(by, format);
-        } catch (DateTimeParseException e) {
-            throw new KuromiException("☹ OOPS!!! The format of the start date must be in yyyy-MM-dd HH:mm");
-        }
+        this.dateBy = LocalDateTime.parse(by, format);
         this.from = from;
-        try {
-            this.dateFrom = LocalDateTime.parse(from, format);
-        } catch (DateTimeParseException e) {
-            throw new KuromiException("☹ OOPS!!! The format of the end date must be in yyyy-MM-dd HH:mm");
-        }
+        this.dateFrom = LocalDateTime.parse(from, format);
     }
 
     /**

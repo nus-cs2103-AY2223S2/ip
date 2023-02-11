@@ -30,6 +30,9 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             throw new KuromiException("☹ OOPS!!! The format of the date must be in yyyy-MM-dd HH:mm");
         }
+        if (this.date.isBefore(LocalDateTime.now())) {
+            throw new KuromiException("☹ OOPS!!! The date should be greater than the current date");
+        }
     }
 
     /**
@@ -43,11 +46,7 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = by;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        try {
-            this.date = LocalDateTime.parse(by, format);
-        } catch (DateTimeParseException e) {
-            throw new KuromiException("☹ OOPS!!! The format of the date must be in yyyy-MM-dd HH:mm");
-        }
+        this.date = LocalDateTime.parse(by, format);
     }
 
     /**
