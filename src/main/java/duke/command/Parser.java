@@ -16,7 +16,9 @@ public class Parser {
      * @throws DukeException If user input is invalid.
      */
     public static Command parse(String line) throws DukeException {
+        assert line != null;
         String[] chunked = line.split(" ");
+        assert chunked.length > 0;
         String command = chunked[0];
         if (command.equals("bye")) {
             return handleBye();
