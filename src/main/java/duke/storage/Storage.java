@@ -67,6 +67,7 @@ public class Storage {
      */
     private void writeToFile(String s) throws DukeWriteException {
         try {
+            assert s != null;
             FileWriter fw = new FileWriter(path, true);
             fw.write(s);
             fw.close();
@@ -112,9 +113,11 @@ public class Storage {
         // Reads save file line by line and creates new Tasks based on it.
         while (scanner.hasNext()) {
             String fn = scanner.next();
+            assert fn != null;
             String[] details = scanner.nextLine()
                     .strip()
                     .split("-");
+            assert details.length != 0;
             switch (fn) {
             case "todo":
                 list.add(new ToDos(details[0],
