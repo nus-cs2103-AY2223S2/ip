@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDudeDialog(response, dudeImage)
         );
         userInput.clear();
-        if (Objects.equals(response, "Ciaos! See you next time.\n")) {
+        if (Objects.equals(response, "Ciaos! See you next time\n")) {
             Platform.exit();
         }
     }
