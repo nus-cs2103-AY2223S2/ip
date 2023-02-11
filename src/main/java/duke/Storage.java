@@ -70,6 +70,7 @@ public class Storage {
     }
 
     private Task getTask(String task) {
+        assert !task.isEmpty() : "Empty task!";
         String[] taskDescription = task.split(Storage.REGEX);
         switch (taskDescription[Storage.TASK_TYPE_INDEX]) {
         case "T":
