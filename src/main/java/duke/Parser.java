@@ -169,6 +169,9 @@ public class Parser {
                 try {
                     StringBuilder chunkOfText = new StringBuilder();
                     chunkOfText.append("Here are the matching tasks in your list:\n");
+                    if (inp.length() == 5) {
+                        throw new DukeException("☹ OOPS!!! There's nothing to find in empty input!");
+                    }
                     String findString = inp.substring(5);
                     TaskStorage findStorage = new TaskStorage();
                     for (int i = 0; i < taskStorage.noTasks(); i++) {
@@ -178,8 +181,8 @@ public class Parser {
                         }
                     }
                     response = findStorage.listTask();
-                } catch (Exception e) {
-
+                } catch (DukeException e) {
+                    response = e.getMessage();
                 } finally {
                     break;
                 }
