@@ -37,14 +37,6 @@ public class AddCommand extends Command {
         description = taskData[1];
     }
 
-    private String splitTask(String input) {
-        return input.split(" ", 2)[1];
-    }
-
-    private String splitDescription(String input) {
-        return splitTask(input).split(" /by ")[0];
-    }
-
     /**
      * Executes the AddCommand which adds a task of taskType into a stored task list.
      *

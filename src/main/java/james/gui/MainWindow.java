@@ -28,13 +28,13 @@ public class MainWindow extends AnchorPane {
 
     private JamesBot jamesBot;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image jamesImage = new Image(this.getClass().getResourceAsStream("/images/ben.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/dr.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getJamesDialog("Hello, I am James.\nHow may I be of service to you?", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getJamesDialog("Hello, I am James.\nHow may I be of service to you?", jamesImage));
     }
 
     public void setJames(JamesBot james) {
@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getJamesDialog(response, dukeImage)
+                DialogBox.getJamesDialog(response, jamesImage)
         );
 
         userInput.clear();

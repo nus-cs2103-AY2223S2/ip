@@ -1,4 +1,2 @@
-E | 0 | project | 20/03/2000 1900 | 20/03/2000 2000
-E | 0 | project | 20/03/2000 1900 | 20/03/2000 2000
-T | 0 | read book
-T | 0 | read book
+T | 1 | read book
+D | 0 | project | 20/03/2000 1800
