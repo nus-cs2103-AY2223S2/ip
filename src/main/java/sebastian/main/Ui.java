@@ -19,7 +19,7 @@ public class Ui {
      * @return greeting message together with the user manual
      */
     public String getGreeting() {
-        String res = "Greetings, I'm Sebastian. " + getUserGuide();
+        String res = "Greetings, I'm Sebastian." + getUserGuide();
         return getFormattedString(res);
     }
 
@@ -92,7 +92,7 @@ public class Ui {
                 + space() + "/from [new event start time\n"
                 + space() + "/to [new end time for event]\n"
                 + space() + "-- to update details of your task with flags\n"
-                + "You can start giving commands below";
+                + "How may I assist you today?";
         return guide;
     }
 }

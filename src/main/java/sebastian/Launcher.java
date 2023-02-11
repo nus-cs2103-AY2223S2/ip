@@ -1,7 +1,7 @@
 package sebastian;
 
-import sebastian.controllers.Main;
 import javafx.application.Application;
+import sebastian.controllers.Main;
 
 /**
  * Class used to launch the GUI

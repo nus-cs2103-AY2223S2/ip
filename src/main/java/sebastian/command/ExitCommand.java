@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String res = "Bye. It's my pleasure to serve you";
+        String res = "Take care, Ciel. It has been an honor serving you";
         return ui.getFormattedString(res);
     }
 

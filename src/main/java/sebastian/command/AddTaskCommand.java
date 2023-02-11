@@ -13,7 +13,7 @@ public abstract class AddTaskCommand extends Command {
      * @return notice that the task has been added
      */
     public String addTask(Task task, int totalTasks) {
-        return "Noted. I've added this task:" + "\n"
+        return "As you command. I've added this task:" + "\n"
                 + task + "\n"
                 + "Now you have a total of " + totalTasks + " tasks on the list";
     }

@@ -41,7 +41,7 @@ public class UpdateCommand extends Command {
                 String commandHeader = "update " + String.valueOf(taskIndex);
                 int commandHeaderLength = commandHeader.length();
                 String updateDetail = instruction.substring(commandHeaderLength).trim();
-                String res = "No problem, I have updated task " + taskIndex + "\n"
+                String res = "As you wish. I have updated task " + taskIndex + "\n"
                         + taskList.updateTask(taskIndex, updateDetail);
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);

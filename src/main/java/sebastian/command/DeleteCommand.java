@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
             try {
                 int taskIndex = Integer.parseInt(insArr[1]);
                 int originalSize = taskList.getTotalTasks();
-                String res = "Noted. I have deleted this task: " + "\n"
+                String res = "As you command. I have deleted this task: " + "\n"
                         + taskList.deleteTaskAtIndex(taskIndex) + "\n"
                         + "Now your have " + taskList.getTotalTasks() + " tasks in the list";
                 assert taskList.getTotalTasks() == originalSize - 1;

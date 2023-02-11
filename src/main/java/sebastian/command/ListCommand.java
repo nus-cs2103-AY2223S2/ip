@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String res = "Here are the tasks in your list: " + "\n" + taskList + "\n"
+        String res = "As you wish. Here are the tasks in your list: " + "\n" + taskList + "\n"
                 + "You have " + taskList.getTotalTasks() + " tasks";
         return ui.getFormattedString(res);
     }
