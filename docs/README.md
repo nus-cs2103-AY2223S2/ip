@@ -37,6 +37,7 @@ and the current number of tasks in the task list.
 <details>
 <summary>Example</summary>
 <p>
+
 Sample input: `todo first task`\
 Sample output:
 ```
@@ -44,6 +45,7 @@ Got it. I've added this task:
 	[T][ ] first task
 Now you have 1 task(s) in the list.
 ```
+
 </p>
 </details>
 
@@ -57,8 +59,10 @@ Expected outcome:\
 The program will give a preview of the newly added *Deadline*,
 and the current number of tasks in the task list.
 
-<details><summary>Example</summary>
+<details>
+<summary>Example</summary>
 <p>
+
 Sample input: `deadline some other task /by 2023-01-01 00:00`\
 Sample output:
 ```
@@ -66,6 +70,7 @@ Got it. I've added this task:
 	[D][ ] some other task (By: 01 JANUARY 2023 00:00)
 Now you have 2 task(s) in the list.
 ```
+
 </p>
 </details>
 
@@ -79,6 +84,7 @@ The program will give a preview of the newly added *Event*, and the current numb
 
 <details>
 <summary>Example</summary>
+<p>
 
 Sample input: `event even more tasks /from 2023-01-01 00:00 /to 2023-12-31 23:59`\
 Sample output:
@@ -87,6 +93,8 @@ Got it. I've added this task:
 	[E][ ] even more tasks (From: 01 JANUARY 2023 00:00 To: 31 DECEMBER 2023 23:59)
 Now you have 3 task(s) in the list.
 ```
+
+</p>
 </details>
 
 ### `list` - List all tasks
@@ -99,6 +107,7 @@ of the task for every single task in the task list.
 
 <details>
 <summary>Example</summary>
+<p>
 
 Sample input: `list`\
 Sample output:
@@ -108,6 +117,8 @@ You have the following task(s):
 	2. [D][ ] some other task (By: 01 JANUARY 2023 00:00)
 	3. [E][ ] even more tasks (From: 01 JANUARY 2023 00:00 To: 31 DECEMBER 2023 23:59)
 ```
+
+</p>
 </details>
 
 ### `find` - Find tasks containing search words
@@ -120,6 +131,7 @@ Expected outcome:
 
 <details>
 <summary>Example</summary>
+<p>
 
 Sample input: `find tasks`\
 Sample output:
@@ -127,6 +139,7 @@ Sample output:
 Here are the matching tasks in your list:
 	3. [E][ ] even more tasks (From: 01 JANUARY 2023 00:00 To: 31 DECEMBER 2023 23:59)
 ```
+</p>
 </details>
 
 ### `mark` - Indicate task(s) as completed
@@ -138,6 +151,7 @@ The task(s) that are marked as completed will be indicated as `[X]`.
 
 <details>
 <summary>Example</summary>
+<p>
 
 Example #1:\
 Sample input: `mark 2`\
@@ -155,6 +169,8 @@ Nice I've marked the task(s) as done:
 	1. [T][X] first task
 	3. [E][X] even more tasks (From: 01 JANUARY 2023 00:00 To: 31 DECEMBER 2023 23:59)
 ```
+
+</p>
 </details>
 
 ### `unmark` - Indicate task(s) as not completed
@@ -166,6 +182,7 @@ The task(s) that are marked as not completed will be indicated as `[ ]`.
 
 <details>
 <summary>Example</summary>
+<p>
 
 Example #1:\
 Sample input: `unmark 2`\
@@ -183,6 +200,8 @@ OK, I've marked the task(s) as not done yet:
 	1. [T][ ] first task
 	3. [E][ ] even more tasks (From: 01 JANUARY 2023 00:00 To: 31 DECEMBER 2023 23:59)
 ```
+
+</p>
 </details>
 
 ### `delete` - Delete task(s)
@@ -194,6 +213,7 @@ The task(s) are removed from the task list.
 
 <details>
 <summary>Example</summary>
+<p>
 
 Example #1:\
 Sample input: `delete 2`\
@@ -213,6 +233,8 @@ I've removed the task(s):
 	[T][ ] first task
 You do not have any task!
 ```
+
+</p>
 </details>
 
 ### `save` - Save changes
