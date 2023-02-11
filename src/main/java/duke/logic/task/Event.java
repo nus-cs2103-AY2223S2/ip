@@ -1,5 +1,6 @@
 package duke.logic.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -98,6 +99,14 @@ public class Event extends Task {
 
     public String getEndTime() {
         return this.endTime.format(FORMATTER);
+    }
+
+    public LocalDate getLocalDateStart() {
+        return this.startTime.toLocalDate();
+    }
+
+    public LocalDate getLocalDateEnd() {
+        return this.endTime.toLocalDate();
     }
 
     @Override

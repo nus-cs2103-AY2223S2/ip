@@ -1,5 +1,7 @@
 package duke.logic;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.DukeException;
@@ -120,15 +122,37 @@ public class Parser {
         } else if (command.equals("find")) {
             if (content.length() < 1) {
                 response = "☹ OOPS!!! Invalid keyword for find command.";
+                return response;
+            }
+
+            String keyWord = content.substring(1);
+            ArrayList<Integer> arrayList = taskList.findIndexesContaining(keyWord);
+            if (arrayList.size() == 0) {
+                response = "no matches found!";
             } else {
-                String keyWord = content.substring(1);
-                ArrayList<Integer> arrayList = taskList.findIndexesContaining(keyWord);
+                response = "Here are the matching tasks from your list:\n"
+                        + taskList.toStringIndexes(arrayList);
+            }
+
+
+        } else if (command.equals("schedule")) {
+            if (content.length() < 1) {
+                response = "☹ OOPS!!! Invalid keyword for schedule command.";
+                return response;
+            }
+
+            try {
+                String date = content.substring(1);
+                LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                ArrayList<Integer> arrayList = taskList.findDates(localDate);
                 if (arrayList.size() == 0) {
                     response = "no matches found!";
                 } else {
-                    response = "Here are the matching tasks from your list:\n"
+                    response = "Here are the tasks you have on the date " + localDate + " :\n"
                             + taskList.toStringIndexes(arrayList);
                 }
+            } catch (Exception e) {
+                response = "☹ OOPS!!! Invalid keyword for schedule command.";
             }
 
         } else {
