@@ -1,11 +1,6 @@
 package utils;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.ListCommand;
-import commands.ToggleMarkTaskCommand;
-import commands.FindCommand;
+import commands.*;
 
 import exception.InvalidCommandException;
 import exception.TaskFactoryException;
@@ -48,6 +43,8 @@ public class Parser {
             return new ToggleMarkTaskCommand(Integer.parseInt(splitStr[1]), false);
         case "find":
             return new FindCommand(splitStr[1]);
+        case "undo":
+            return new UndoCommand();
         default:
             throw new InvalidCommandException("Unknown command");
         }

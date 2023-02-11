@@ -13,8 +13,7 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
-        this.taskList = taskList;
+    public String execute() {
         return toResultString();
 
     }

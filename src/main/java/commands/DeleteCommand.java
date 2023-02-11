@@ -1,16 +1,14 @@
 package commands;
 
-import exception.TreeBotException;
+import interfaces.IUndoable;
 import tasks.Task;
-import tasks.TaskList;
-import utils.Storage;
+
 
 import java.io.IOException;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command implements IUndoable {
     private int index;
     private Task deletedTask;
-    private TaskList taskList;
 
     /**
      * Returns a Command that when executed deletes a task at a given index of TaskList.
@@ -22,10 +20,9 @@ public class DeleteCommand extends Command{
 
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute() {
 
         this.deletedTask = taskList.deleteTask(index);
-        this.taskList = taskList;
 
         try {
             storage.saveTasks(taskList.getArrayListCopy());
@@ -33,6 +30,10 @@ public class DeleteCommand extends Command{
         } catch (IOException e) {
             return e.getMessage();
         }
+    }
+
+    public void undo() {
+        this.taskList.addTask(deletedTask, index);
     }
 
     @Override
