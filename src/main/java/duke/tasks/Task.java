@@ -6,7 +6,7 @@ import java.io.Serializable;
  */
 public class Task implements Serializable {
     private String description;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for a Task object.
@@ -15,7 +15,7 @@ public class Task implements Serializable {
      */
     public Task(String description) {
         this.description = description.trim();
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -36,8 +36,8 @@ public class Task implements Serializable {
      * Method to mark the task as done.
      */
     public void mark() {
-        if (!this.done) {
-            this.done = true;
+        if (!this.isDone) {
+            this.isDone = true;
         }
     }
 
@@ -45,8 +45,8 @@ public class Task implements Serializable {
      * Method to unmark the task as not done.
      */
     public void unmark() {
-        if (this.done) {
-            this.done = false;
+        if (this.isDone) {
+            this.isDone = false;
         }
     }
 
@@ -59,7 +59,7 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return String.format(" [x] " + this.description);
         } else {
             return String.format(" [ ] " + this.description);

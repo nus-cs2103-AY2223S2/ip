@@ -35,7 +35,7 @@ public class Duke {
 
 
     /**
-     * Generate response based on user input.
+     * Generates a response based on user input.
      *
      * @param input The user input.
      * @return String of the response.
@@ -46,8 +46,6 @@ public class Duke {
             return c.execute(this.tasks, this.storage);
         } catch (IllegalArgumentException e) {
             return "Unrecognised command. Try again.";
-        } catch (DukeException e) {
-            return e.getMessage();
         } catch (Exception e) {
             return e.getMessage();
         }

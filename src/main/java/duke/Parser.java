@@ -23,12 +23,12 @@ public class Parser {
     }
 
     /**
-     * Method that creates appropriate objects based on the input string.
+     * Creates appropriate Commands based on the input string.
      *
      * @param input The user's input.
-     * @throws IllegalArgumentException  If user's input does not correspond to any of the cases.
+     * @throws IllegalArgumentException  when user's input does not correspond to any of the cases.
      */
-    public static Command parse(String input) throws IllegalArgumentException, DukeException {
+    public static Command parse(String input) throws IllegalArgumentException {
         String[] words = input.split(" ");
         Type t = Type.valueOf(words[0].toUpperCase());
         switch(t) {

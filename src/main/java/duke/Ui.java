@@ -9,14 +9,16 @@ import duke.tasks.Task;
 public class Ui {
 
     /**
-     * Prints an error message if loading tasks from text file fails.
+     * Returns an error message if loading tasks from text file fails.
+     * @return The String message.
      */
     public static String showLoadingError() {
         return "Unable to load tasks from storage";
     }
 
     /**
-     * Prints the welcome message on start.
+     * Returns the welcome message on start.
+     * @return The String message.
      */
     public static String showWelcomeMessage() {
         return "Hello I'm chopper\n"
@@ -37,14 +39,15 @@ public class Ui {
     }
 
     /**
-     * Prints the bye message when user inputs bye.
+     * Returns the bye message when user inputs bye.
+     * @return The String message.
      */
     public static String showByeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * The confirmation message after performing an action.
+     * Returns the confirmation message after performing an action.
      *
      * @param action String of the action.
      * @param tasks TaskList of all tasks.
@@ -140,14 +143,26 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Returns the error message for wrong update format.
+     * @return The String message.
+     */
     public static String updateWrongFormat() {
         return "Update command must be in the format\nupdate <index> /<deadline or description> <new changes>";
     }
 
+    /**
+     * Returns the error message for date has passed.
+     * @return The String message.
+     */
     public static String datePassed() {
         return "Date has passed.";
     }
 
+    /**
+     * Returns the error message for start date later than end date.
+     * @return The String message.
+     */
     public static String startDatelaterThanEnd() {
         return "End date is earlier than start date";
     }
