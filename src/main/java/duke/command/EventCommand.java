@@ -1,11 +1,9 @@
 package duke.command;
 
-import duke.DukeResponse;
-import duke.Event;
-import duke.MessageGenerator;
-import duke.TaskList;
+import duke.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class EventCommand extends Command {
     String taskDesc;
@@ -25,6 +23,27 @@ public class EventCommand extends Command {
         this.taskList = taskList;
     }
 
+    public static Command create(String taskDesc, String fromString, String toString, TaskList taskList) {
+        try {
+            LocalDateTime from = DateTimeParser.parse(fromString);
+            LocalDateTime to = DateTimeParser.parse(toString);
+
+            String[] fromParts = fromString.split(" ");
+            boolean fromHasTime = fromParts.length == 2;
+
+            String[] toParts = toString.split(" ");
+            boolean toHasTime = toParts.length == 2;
+
+            assert taskDesc != null : "taskDesc should not be null";
+            assert from != null : "/from field should not be null.";
+            assert to != null : "/to field should not be null.";
+
+            return new EventCommand(taskDesc, from, fromHasTime, to, toHasTime, taskList);
+
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand(MessageGenerator.genDateTimeParseErrorMsg());
+        }
+    }
 
     @Override
     public DukeResponse execute() {

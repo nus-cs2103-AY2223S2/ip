@@ -1,19 +1,16 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.DukeException;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.Scanner;
+
 
 /**
  * Responsible for parsing user input into relevant data. This data is used to construct a relevant command object,
  * where the data will be used in command execution.
  */
 public class Parser {
-
     /**
      * Parses the given user input (commandString) and executes the correct action based on that. Returns
      * a boolean to indicate if the application should close due to the user's input.
@@ -32,9 +29,9 @@ public class Parser {
         case "list":
             return handleList(taskList);
         case "mark":
-            return handleMark(commandStream, taskList);
+            return handleTaskIdxCommands(commandStream, taskList, CommandTypes.MARK);
         case "unmark":
-            return handleUnmark(commandStream, taskList);
+            return handleTaskIdxCommands(commandStream, taskList, CommandTypes.UNMARK);
         case "deadline":
             return handleDeadline(commandStream, taskList);
         case "event":
@@ -42,7 +39,7 @@ public class Parser {
         case "todo":
             return handleToDo(commandStream, taskList);
         case "delete":
-            return handleDelete(commandStream, taskList);
+            return handleTaskIdxCommands(commandStream, taskList, CommandTypes.DELETE);
         case "find":
             return handleFind(commandStream, taskList);
         default:
@@ -56,8 +53,9 @@ public class Parser {
         return new ListCommand(taskList);
     }
 
-    private static Command handleMark(Scanner commandStream, TaskList taskList) {
-        assert taskList != null : "Task list should not be null";
+
+    private static Command handleTaskIdxCommands(Scanner commandStream, TaskList taskList, CommandTypes type) {
+        assert taskList != null;
         if (!commandStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
@@ -69,75 +67,42 @@ public class Parser {
                 return new ErrorCommand(MessageGenerator.genTaskDoesNotExistMsg(String.valueOf(taskIdx + 1)));
             }
 
-            boolean isMark = true;
-            return new MarkOrUnmarkCommand(taskIdx, taskList, isMark);
-
-        } catch (NumberFormatException e) {
-            return new ErrorCommand(MessageGenerator.genNotANumberMsg());
-        }
-
-    }
-
-    private static Command handleUnmark(Scanner commandStream, TaskList taskList) {
-        assert taskList != null : "Task list should not be null";
-        if (!commandStream.hasNext()) {
-            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
-        }
-
-        try {
-            int taskIdx = Integer.parseInt(commandStream.next()) - 1;
-
-            if (!taskList.hasTask(taskIdx)) {
-                return new ErrorCommand(MessageGenerator.genTaskDoesNotExistMsg(String.valueOf(taskIdx + 1)));
+            switch (type) {
+            case DELETE:
+                return new DeleteCommand(taskIdx, taskList);
+            case UNMARK:
+                return new MarkOrUnmarkCommand(taskIdx, taskList, false);
+            case MARK:
+                return new MarkOrUnmarkCommand(taskIdx, taskList, true);
             }
 
-            boolean isMark = false;
-            return new MarkOrUnmarkCommand(taskIdx, taskList, isMark);
-
         } catch (NumberFormatException e) {
             return new ErrorCommand(MessageGenerator.genNotANumberMsg());
         }
 
+        assert false;
+        return new ErrorCommand("Something went wrong");
     }
 
 
-    private static Command handleDelete(Scanner commandStream, TaskList taskList) {
-        assert taskList != null : "Task list should not be null";
-        if (!commandStream.hasNext()) {
-            return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
-        }
 
-        try {
-            int taskIdx = Integer.parseInt(commandStream.next()) - 1;
-
-            if (!taskList.hasTask(taskIdx)) {
-                return new ErrorCommand(MessageGenerator.genTaskDoesNotExistMsg(String.valueOf(taskIdx + 1)));
-            }
-
-            return new DeleteCommand(taskIdx, taskList);
-
-        } catch (NumberFormatException e) {
-            return new ErrorCommand(MessageGenerator.genNotANumberMsg());
-        }
-    }
-
-    private static Command handleDeadline(Scanner stringStream, TaskList taskList) {
+    private static Command handleDeadline(Scanner commandStream, TaskList taskList) {
         assert taskList != null : "Task list should not be null";
         String taskDesc = "";
         String byString = "";
 
         boolean foundBy = false;
-        while (stringStream.hasNext()) {
-            String temp = stringStream.next();
-            if (temp.equalsIgnoreCase("/by")) {
+        while (commandStream.hasNext()) {
+            String nextWord = commandStream.next();
+            if (nextWord.equals("/by")) {
                 foundBy = true;
                 continue;
             }
 
             if (foundBy) {
-                byString += temp + " ";
+                byString += nextWord + " ";
             } else {
-                taskDesc += temp + " ";
+                taskDesc += nextWord + " ";
             }
         }
 
@@ -152,23 +117,11 @@ public class Parser {
         byString = byString.trim();
         taskDesc = taskDesc.trim();
 
-        try {
-            LocalDateTime by = DateTimeParser.parse(byString);
-            String[] parts = byString.split(" ");
-            boolean hasTime = parts.length == 2;
-
-            assert taskDesc != null : "taskDesc should not be null";
-            assert by != null : "/by field should not be null";
-
-            return new DeadlineCommand(taskDesc, by, hasTime, taskList);
-
-        } catch (DateTimeParseException e) {
-            return new ErrorCommand(MessageGenerator.genDateTimeParseErrorMsg());
-        }
-
+        return DeadlineCommand.create(taskDesc, byString, taskList);
     }
 
-    private static Command handleEvent(Scanner stringStream, TaskList taskList) {
+
+    private static Command handleEvent(Scanner commandStream, TaskList taskList) {
         assert taskList != null : "Task list should not be null";
         String taskDesc = "";
         String fromString = "";
@@ -177,23 +130,23 @@ public class Parser {
         boolean foundFrom = false;
         boolean foundTo = false;
 
-        while (stringStream.hasNext()) {
-            String temp = stringStream.next();
+        while (commandStream.hasNext()) {
+            String nextWord = commandStream.next();
 
-            if (temp.equalsIgnoreCase("/from")) {
+            if (nextWord.equals("/from")) {
                 foundFrom = true;
                 continue;
-            } else if (temp.equalsIgnoreCase("/to")) {
+            } else if (nextWord.equals("/to")) {
                 foundTo = true;
                 continue;
             }
 
             if (foundTo) {
-                toString += temp + " ";
+                toString += nextWord + " ";
             } else if (foundFrom) {
-                fromString += temp + " ";
+                fromString += nextWord + " ";
             } else {
-                taskDesc += temp + " ";
+                taskDesc += nextWord + " ";
             }
         }
 
@@ -209,34 +162,15 @@ public class Parser {
         toString = toString.trim();
         taskDesc = taskDesc.trim();
 
-        try {
-            LocalDateTime from = DateTimeParser.parse(fromString);
-            LocalDateTime to = DateTimeParser.parse(toString);
-
-            String[] fromParts = fromString.split(" ");
-            boolean fromHasTime = fromParts.length == 2;
-
-            String[] toParts = toString.split(" ");
-            boolean toHasTime = toParts.length == 2;
-
-            assert taskDesc != null : "taskDesc should not be null";
-            assert from != null : "/from field should not be null.";
-            assert to != null : "/to field should not be null.";
-
-            return new EventCommand(taskDesc, from, fromHasTime, to, toHasTime, taskList);
-
-        } catch (DateTimeParseException e) {
-            return new ErrorCommand(MessageGenerator.genDateTimeParseErrorMsg());
-        }
+        return EventCommand.create(taskDesc, fromString, toString, taskList);
     }
 
-    private static Command handleToDo(Scanner stringStream, TaskList taskList) {
+    private static Command handleToDo(Scanner commandStream, TaskList taskList) {
         assert taskList != null : "Task list should not be null";
         String taskDesc = "";
 
-        while (stringStream.hasNext()) {
-            String temp = stringStream.nextLine();
-            taskDesc += temp;
+        while (commandStream.hasNext()) {
+            taskDesc += commandStream.nextLine();
         }
 
         if (taskDesc.isEmpty()) {
@@ -248,13 +182,13 @@ public class Parser {
         return new ToDoCommand(taskDesc, taskList);
     }
 
-    private static Command handleFind(Scanner stringStream, TaskList taskList) {
+    private static Command handleFind(Scanner commandStream, TaskList taskList) {
         assert taskList != null : "Task list should not be null";
-        if (!stringStream.hasNext()) {
+        if (!commandStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("keyword"));
         }
 
-        String keyword = stringStream.next();
+        String keyword = commandStream.next();
         return new FindCommand(keyword, taskList);
     }
 }
