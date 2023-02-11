@@ -6,60 +6,52 @@ import duke.exception.DukeException;
  * Deals with making sense of the user input.
  */
 public class Parser {
+    private enum CommandName {
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
+    }
 
     /**
      * Deals with making sense of the user input.
-     * Returns a command object after decoding the user input.
+     * Returns a command object.
      * Throws exception if user input is not a recognizable command.
      *
      * @param input Contains the command name or other information to create command object.
      * @return The appropriate command object that can be executed.
      */
     public static Command parse(String input) throws DukeException {
-        String[] commandString = input.split(" ");
+        String[] inputArray = input.split(" ");
+        CommandName cn = CommandName.valueOf(inputArray[0].toUpperCase());
 
-        if (input.equalsIgnoreCase("bye")) {
-            return new Command("bye");
+        switch(cn) {
+        case BYE:
+            return new ByeCommand(input);
 
-        } else if (input.equalsIgnoreCase("list")) {
-            return new Command("list");
+        case LIST:
+            return new ListCommand(input);
 
-        } else if (input.startsWith("mark")) {
-            int index = Integer.parseInt(commandString[1]) - 1;
-            return new Command("mark", index);
+        case MARK:
+            return new MarkCommand(input);
 
-        } else if (input.startsWith("unmark")) {
-            int index = Integer.parseInt(commandString[1]) - 1;
-            return new Command("unmark", index);
+        case UNMARK:
+            return new UnmarkCommand(input);
 
-        } else if (input.startsWith("delete")) {
-            int index = Integer.parseInt(commandString[1]) - 1;
-            return new Command("delete", index);
+        case DELETE:
+            return new DeleteCommand(input);
 
-        } else if (input.startsWith("find")) {
-            String keyword = input.substring(5);
-            return new Command("find", keyword);
+        case TODO:
+            return new TodoCommand(input);
 
-        } else if (input.startsWith("todo")) {
-            String taskName = input.substring(5);
-            return new Command("todo", taskName);
+        case FIND:
+            return new FindCommand(input);
 
-        } else if (input.startsWith("deadline")) {
-            int dashIndex = input.indexOf("/");
-            String taskName = input.substring(9, dashIndex);
-            String by = input.substring(dashIndex + 4);
-            return new Command("deadline", taskName, by);
+        case DEADLINE:
+            return new DeadlineCommand(input);
 
-        } else if (input.startsWith("event")) {
-            int firstDashIndex = input.indexOf("/");
-            int secondDashIndex = input.lastIndexOf("/");
-            String taskName = input.substring(6, firstDashIndex);
-            String from = input.substring(firstDashIndex + 6, secondDashIndex);
-            String to = input.substring(secondDashIndex + 4);
-            return new Command("event", taskName, from, to);
+        case EVENT:
+            return new EventCommand(input);
 
-        } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :(((");
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
     }
 }
