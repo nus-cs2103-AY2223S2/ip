@@ -32,15 +32,20 @@ public class DeadlineCommand extends Command {
     /**
      * Overrides execute method from the abstract class of Command.
      *
-     * @param tl       list of tasks.
-     * @param storage  harddisk store using textfile.
+     * @param tl      list of tasks.
+     * @param storage harddisk store using textfile.
      * @return String  returns the result of the command execution.
      */
     public String execute(TaskList tl, Storage storage) {
+        String res = "";
         Task task = new Deadline(this.activity, this.date, this.time);
-        tl.addTask(task);
-        String res = "Got it. I've added this duke.task:\n" + task
-                + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        if (tl.isTaskDuplicate(task)) {
+            res = "Task has already been added to the task list!";
+        } else {
+            tl.addTask(task);
+            res = "Got it. I've added this duke.task:\n" + task
+                    + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        }
         return res;
     }
 }

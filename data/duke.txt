@@ -1,6 +1,3 @@
-1. [T][X] read book
-2. [T][ ] join sports club
-3. [T][ ] borrow book
-4. [D][ ] return book (by: Dec 2 2023 01:50 PM)
-5. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-6. [T][ ] borrow book
+1. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+2. [D][X] return book (by: Oct 15 2019 06:00 PM)
+3. [T][ ] read book
