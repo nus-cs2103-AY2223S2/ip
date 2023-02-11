@@ -135,21 +135,20 @@ public class Storage {
         while (scanner.hasNext()) {
             String fn = scanner.next();
             assert fn != null;
-            
             String[] details = scanner.nextLine().strip().split("-");
 
             switch (fn) {
-                case "todo":
-                    tasks.add(new ToDos(details[0], Boolean.parseBoolean(details[1])));
-                    break;
-                case "deadline":
-                    tasks.add(new Deadlines(details[0], Boolean.parseBoolean(details[1]), details[2]));
-                    break;
-                case "event":
-                    tasks.add(new Events(details[0], Boolean.parseBoolean(details[1]), details[2], details[3]));
-                    break;
-                default:
-                    throw new DukeUnknownCommandException();
+            case "todo":
+                tasks.add(new ToDos(details[0], Boolean.parseBoolean(details[1])));
+                break;
+            case "deadline":
+                tasks.add(new Deadlines(details[0], Boolean.parseBoolean(details[1]), details[2]));
+                break;
+            case "event":
+                tasks.add(new Events(details[0], Boolean.parseBoolean(details[1]), details[2], details[3]));
+                break;
+            default:
+                throw new DukeUnknownCommandException();
             }
         }
     }

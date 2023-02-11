@@ -27,7 +27,7 @@ public abstract class Task {
      */
     public String mark() {
         this.isDone = true;
-        return String.format("\t Nice! I've marked this task as done:\n\t   %s", this);
+        return String.format("Nice! I've marked this task as done:\n  %s", this);
     }
 
     /**
@@ -36,7 +36,7 @@ public abstract class Task {
      */
     public String unMark() {
         this.isDone = false;
-        return String.format("\t Ok, I've marked this task as not done yet:\n\t   %s", this);
+        return String.format("Ok, I've marked this task as not done yet:\n  %s", this);
     }
 
     /**
@@ -67,6 +67,4 @@ public abstract class Task {
     private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
-
-
 }

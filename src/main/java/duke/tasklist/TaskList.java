@@ -94,7 +94,7 @@ public class TaskList {
     public String mark(String s) throws DukeInvalidTaskNumberException, DukeTaskNumberOutOfRangeException {
         int num = TaskList.stringToInt(s);
 
-        if (num < -1 || num >= tasks.size()) {
+        if (num < -1 || num > tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
         return tasks.get(num - 1).mark();
@@ -110,7 +110,7 @@ public class TaskList {
     public String unMark(String s) throws DukeInvalidTaskNumberException, DukeTaskNumberOutOfRangeException {
         int num = TaskList.stringToInt(s);
 
-        if (num < -1 || num >= tasks.size()) {
+        if (num < -1 || num > tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
         return tasks.get(num - 1).unMark();
@@ -199,7 +199,7 @@ public class TaskList {
      * @return The Todos in String format.
      * @throws DukeMissingDescriptionException if the description of the Todos is missing.
      */
-    private String addTodo(String s) throws DukeMissingDescriptionException{
+    private String addTodo(String s) throws DukeMissingDescriptionException {
         if (s.isBlank()) { // Checks if s contains a description.
             throw new DukeMissingDescriptionException();
         }
