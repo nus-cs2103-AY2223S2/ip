@@ -49,6 +49,7 @@ public class Storage {
         if (!Files.exists(fileToCheck)) {
             Files.createFile(fileToCheck);
         }
+        assert Files.exists(fileToCheck) : "File not being freshly created despite never being initialized";
         return fileToCheck;
     }
 
