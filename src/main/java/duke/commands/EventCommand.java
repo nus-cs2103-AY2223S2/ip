@@ -28,6 +28,7 @@ public class EventCommand extends Command {
     } 
 
     private Event createEvent() {
+        assert TOKENS.length == 3;
         String desc = TOKENS[0];
         String from = TOKENS[1];
         String to = TOKENS[2];

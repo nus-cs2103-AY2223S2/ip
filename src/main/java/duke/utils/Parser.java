@@ -47,7 +47,6 @@ public class Parser {
         } catch (NullPointerException e) {
             return new InvalidCommand(new InvalidCommandException(DukeIo.showInvalidCommand()));
         }
-        // should not reach here
     }
 
     private void populateCommands() {
@@ -95,6 +94,8 @@ public class Parser {
                             InvalidCommandException.NAME_FORMAT_EXCEPTION));
         }
         String[] args = originalCmd.split("/by");
+        // There should only be 2 arguments if parsed correctly.
+        assert args.length == 2;
         return new DeadlineCommand(args);
     }
 
@@ -140,6 +141,8 @@ public class Parser {
                     new InvalidCommandException(
                             InvalidCommandException.TASK_NOT_FOUND_EXCEPTION));
         }
+        // Task index to delete should not exceed task count present
+        assert taskIndex - 1 < TaskList.getTaskCount();
         return new DeleteCommand(taskIndex - 1);
     }
 
