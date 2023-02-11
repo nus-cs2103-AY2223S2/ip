@@ -17,86 +17,108 @@ class Ui {
         System.out.print("(ɔ˘ ³˘)ɔ: ");
     }
 
-    protected static void notifyCreateSaveFile() {
-        Ui.drawLineHeader();
-        System.out.println("We can't find a save file for Babe, so we just went ahead and created one for you <3!");
-        Ui.drawLineHeader();
+    protected static String notifyCreateSaveFile() {
+        String output = "We can't find a save file for Babe, so we just went ahead and created one for you <3!";
+        printOutputMessage(output);
+        return output;
     }
 
     /**
      * Welcome users of Babe.
      * Greets user and prompts for help. This method does not expect a response.
      */
-    protected static void welcomeUser() {
-        Ui.drawLineHeader();
-        System.out.println("HELLO! Greetings from Babe <3 How may I help you?");
+    protected static String welcomeUser() {
+        String output = "HELLO! Greetings from Babe <3 How may I help you?";
+        printOutputMessage(output);
+        return output;
     }
 
-    protected static void notifyAddTask(Task item, int count) {
-        Ui.drawLineHeader();
-        System.out.println("Got it, babe. Added this for you:");
-        System.out.println(item.toString());
-        System.out.printf("Now you have %d task in the list.\n", count);
+    protected static String notifyAddTask(String taskString, int count) {
+        String output = "";
+        output += "Got it, babe. Added this for you:\n";
+        output += taskString;
+        output += String.format("\nNow you have %d task in the list.\n", count);
+        printOutputMessage(output);
+        return output;
     }
 
     /**
      * Prints list of Tasks stored in this Babe.
      * Prints a numbered list of Items stored in memory.
      */
-    protected static void printList(TaskList taskList) {
-        Ui.drawLineHeader();
+    protected static String printList(TaskList taskList) {
+        String output = "";
         if (taskList.isEmpty()) {
-            System.out.println("Nothing added yet. Add something babygorl.");
+            output += "Nothing added yet. Add something babygorl.\n";
         } else {
-            Ui.drawLineHeader();
-            System.out.println("This is your list so far:");
-            System.out.println(taskList.toString());
+            output += "This is your list so far:\n";
+            output += taskList.toString();
         }
+        printOutputMessage(output);
+        return output;
+    }
+
+    private static void printOutputMessage(String output) {
+        Ui.drawLineHeader();
+        System.out.println(output);
     }
 
     /**
      * Bids farewell to the user.
      * Prints a line of farewell before ending the program.
      */
-    protected static void sayBye() {
-        Ui.drawLineHeader();
-        System.out.println("Bye, babyboo. Can't wait to meet you again!");
+    protected static String sayBye() {
+        String output = "Bye, babyboo. Can't wait to meet you again!";
+        printOutputMessage(output);
+        return output;
     }
 
 
-    protected static void notifyDelete(Task item, int count) {
-        Ui.drawLineHeader();
-        System.out.println("One task down! I removed this from your list of tasks:");
-        System.out.println(item.toString());
-        System.out.printf("Now you have %d task(s) left!\n", count);
+    protected static String notifyDelete(String taskString, int count) {
+        String output = "";
+        output += "One task down! I removed this from your list of tasks:\n";
+        output += taskString;
+        output += String.format("\nNow you have %d task(s) left!\n", count);
+        printOutputMessage(output);
+        return output;
     }
 
-    protected static void notifyException(Exception e) {
-        Ui.drawLineHeader();
-        System.out.println(e.getMessage());
+    protected static String notifyException(Exception e) {
+        String output = e.getMessage();
+        printOutputMessage(output);
+        return output;
     }
 
-    protected static void notifyStatusChanged(Task task, boolean toMark) {
-        Ui.drawLineHeader();
-        System.out.println(toMark ? "Okay, babygorl. I've marked this as Done:" : "We have un-Done this for you:");
-        System.out.println(task.toString());
+    protected static String notifyMark(String taskString) {
+        String output = "Okay, babygorl. I've marked this as Done:\n";
+        output += taskString;
+        printOutputMessage(output);
+        return output;
     }
 
-    protected static void notifyFindResults(ArrayList<Task> tasks) {
+    protected static String notifyUnmark(String taskString) {
+        String output = "We have un-Done this for you:\n";
+        output += taskString;
+        printOutputMessage(output);
+        return output;
+    }
+
+    protected static String notifyFindResults(ArrayList<String> tasks) {
+        String output = "";
         if (tasks.size() == 0) {
-            Ui.drawLineHeader();
-            System.out.println("Oh nuuu we can't find the task you are looking for. "
+            output += "Oh nuuu we can't find the task you are looking for. "
                     + "Perhaps you haven't added the item yet?\n"
-                    + "Try 'list' command to check!");
+                    + "Try 'list' command to check!";
 
         } else {
-            Ui.drawLineHeader();
-            System.out.println("Here's what we could find: ");
+            output += "Here's what we could find:";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("%d. ", i + 1);
-                System.out.println(tasks.get(i));
+                output += String.format("\n%d. ", i + 1);
+                output += tasks.get(i);
             }
         }
+        printOutputMessage(output);
+        return output;
     }
 
 
