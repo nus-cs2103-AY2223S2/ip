@@ -25,6 +25,9 @@ import java.util.List;
 public class Parser {
 
     private static LocalDateTime parseDateTime(String dateTimeText) {
+
+        assert dateTimeText != null;
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         LocalDateTime dateTime;
 
@@ -88,6 +91,8 @@ public class Parser {
     }
 
     private static Command parseToDo(String[] commandParts) throws DukeException {
+        assert commandParts.length > 0 : "The command should not be empty";
+
         if (commandParts.length == 1) {
             throw new DukeInvalidArgumentException("Uh-oh. The description of the to-do is empty :/");
         }
@@ -102,6 +107,9 @@ public class Parser {
     }
 
     private static Command parseDeadline(String[] commandParts) throws DukeException {
+
+        assert commandParts.length > 0 : "The command should not be empty";
+
         if (commandParts.length == 1) {
             throw new DukeInvalidCommandException("Uh-oh. There is no about the deadline :/");
         }
@@ -141,6 +149,9 @@ public class Parser {
     }
 
     private static Command parseEvent(String[] commandParts) throws DukeException {
+
+        assert commandParts.length > 0 : "The command should not be empty";
+
         if (commandParts.length == 1) {
             throw new DukeInvalidCommandException("Uh-oh. There is no information about the event :/");
         }

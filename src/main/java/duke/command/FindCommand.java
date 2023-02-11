@@ -12,6 +12,8 @@ public class FindCommand extends Command {
 
     public FindCommand(String keyword) {
         super(false);
+
+        assert keyword != null;
         this.keyword = keyword;
     }
 
@@ -24,6 +26,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) {
+        assert taskList != null;
+
         return taskList.findKeywordInTasks(keyword);
     }
 }

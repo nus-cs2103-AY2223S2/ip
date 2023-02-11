@@ -111,6 +111,9 @@ public class TaskList {
      * @throws DukeException When there is an error in writing to the file.
      */
     public String addTask(Task task, String taskType) throws DukeException {
+        assert task != null;
+        assert taskType != null;
+
         this.tasks.add(task);
         this.taskStorage.writeTasksToFile(this.tasks);
 
@@ -165,6 +168,8 @@ public class TaskList {
      * @return The String response of the chatbot.
      */
     public String findKeywordInTasks(String keyword) {
+        assert keyword != null;
+
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
 
         for (int i = 0; i < this.tasks.size(); i++) {
