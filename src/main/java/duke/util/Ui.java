@@ -1,9 +1,10 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+
 
 /**
  * Interacts with the user by displaying messages.
@@ -14,7 +15,7 @@ public class Ui {
     private boolean isRunning = true;
     private Scanner sc;
 
-    public Ui () {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 

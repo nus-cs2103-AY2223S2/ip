@@ -7,11 +7,17 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline that is a Task.
  */
 public class Deadline extends Task {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("EEEE, "
+            + "MMMM d yyyy, h:mm a");
     private String doBy;
     private LocalDateTime deadline;
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("EEEE, MMMM d yyyy, h:mm a");
 
-    public Deadline (String description, String deadline) {
+    /**
+     * Constructor for Deadline
+     * @param description Description of Deadline.
+     * @param deadline Date of deadline.
+     */
+    public Deadline(String description, String deadline) {
         super(description);
         this.doBy = deadline;
         this.deadline = LocalDateTime.parse(deadline);
@@ -27,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.getDescription() +
-                " (by: " + this.deadline.format(DATE_TIME_FORMATTER) + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.getDescription()
+                + " (by: " + this.deadline.format(DATE_TIME_FORMATTER) + ")";
     }
 }

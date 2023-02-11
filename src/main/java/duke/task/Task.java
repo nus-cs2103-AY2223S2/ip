@@ -7,7 +7,11 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
-    public Task (String input) {
+    /**
+     * Constructor for Task.
+     * @param input Description of task.
+     */
+    public Task(String input) {
         this.description = input;
         this.isDone = false;
     }
@@ -41,7 +45,6 @@ public abstract class Task {
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }
-    
     public abstract String toData();
 
     @Override

@@ -1,10 +1,12 @@
 package duke.util;
 
-import duke.task.Task;
-
-import java.security.Key;
 import java.util.ArrayList;
 
+import duke.task.Task;
+
+/**
+ * Represents a list that contains the current tasks.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -69,6 +71,11 @@ public class TaskList {
         this.taskList.get(index).markAsUndone();
     }
 
+    /**
+     * Returns an ArrayList of matched tasks.
+     * @param keyword Keyword to look for in the tasks' description.
+     * @return An ArrayList of Task objects.
+     */
     public ArrayList<Task> findMatchingTasks(String keyword) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task currentTask : taskList) {
