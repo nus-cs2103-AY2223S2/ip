@@ -39,7 +39,7 @@ public class Storage {
             }
             File file = new File(filePath);
 
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(commandMsg);
             fw.close();
         } catch (IOException exception) {

@@ -178,6 +178,7 @@ public class Duke {
 
     public String getResponse(String userInput) {
         commandList.add(userInput);
+        storage.saveToDisk(userInput + "\n");
         try {
             String[] expressions = userInput.split(" ");
             String command = expressions[0];
@@ -195,11 +196,6 @@ public class Duke {
                 int index = Integer.parseInt(words[1]) - 1;
                 response = markAsDone(index);
             } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
-                String stringCommands = "";
-                for (String i: commandList) {
-                    stringCommands += (i + "\n");
-                }
-                storage.saveToDisk(stringCommands + "\n");
                 Platform.exit();
             } else if (command.equals(parser.convertEnum(Command.TODO))) {
                 parser.checkEmpty(userInput, command);
