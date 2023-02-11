@@ -47,6 +47,9 @@ public abstract class Task {
     }
 
     protected String dateTimeToString(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ofPattern("dd MMM uuuu, HH.mm a"));
+    }
+    protected String dateTimeToDiskFormat(LocalDateTime localDateTime) {
         return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm"));
     }
     @Override
