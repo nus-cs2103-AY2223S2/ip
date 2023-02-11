@@ -17,10 +17,10 @@ public class DateTimeParser {
         // Empty
     }
 
+    // TODO: need to catch exceptions
     /**
      * Parses a string representation of a date into LocalDate.
      * Expects input to be formatted as "YYYY-MM-DD" (fixed to "-" separator).
-     * TODO: need to catch exceptions
      *
      * @param dateStr String representation of a date.
      * @return Date in a LocalDate instance.
@@ -30,11 +30,11 @@ public class DateTimeParser {
         return LocalDate.parse(dateStr);
     }
 
+    // TODO: need to catch exceptions
     /**
      * Parses a string representation of a date into LocalDate.
      * Expects input to be formatted as "YYYY-MM-DD" but separator is arbitrary.
      * Arbitrary separator needs to be specified.
-     * TODO: need to catch exceptions
      *
      * @param dateStr String representation of a date.
      * @param separator Separator used to separate the day, month, year.
@@ -48,10 +48,10 @@ public class DateTimeParser {
         return LocalDate.of(dateInfo[0], dateInfo[1], dateInfo[2]);
     }
 
+    // TODO: need to catch exceptions
     /**
      * Parses a string representation of a time into LocalTime.
      * Expects input to be formatted as "HH:MM:SS" or "HH:MM" (fixed to ':' separator).
-     * TODO: need to catch exceptions
      *
      * @param timeStr String representation of a time.
      * @return Time in a LocalTime instance.
@@ -61,11 +61,11 @@ public class DateTimeParser {
         return LocalTime.parse(timeStr);
     }
 
+    // TODO: need to catch exceptions
     /**
      * Parses a string representation of a time into LocalTime.
      * Expects input to be formatted as "HH:MM:SS" or "HH:MM" but separator is arbitrary.
      * Arbitrary separator needs to be specified.
-     * TODO: need to catch exceptions
      *
      * @param timeStr String representation of a time.
      * @param separator Separator used to separate the hour, minute, (second).

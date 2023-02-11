@@ -66,20 +66,6 @@ public class Duke extends Application {
         }
     }
 
-    private void displayTasks() {
-        assert taskList != null : "Duke has no taskList instance";
-        assert ui != null : "Duke has no ui instance";
-
-        if (taskList.size() == 0) {
-            ui.println("Your list is empty.");
-        } else {
-            ui.println("You have the following task(s):");
-            for (int i = 0; i < taskList.size(); i++) {
-                ui.println("\t" + (i + 1) + ". " + taskList.get(i));
-            }
-        }
-    }
-
     /**
      * Adds the specified task the taskList.
      *
