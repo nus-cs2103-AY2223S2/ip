@@ -55,6 +55,7 @@ public class Parser {
 
 
     private static Command handleTaskIdxCommands(Scanner commandStream, TaskList taskList, CommandTypes type) {
+        assert taskList != null;
         if (!commandStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
@@ -82,6 +83,7 @@ public class Parser {
         assert false;
         return new ErrorCommand("Something went wrong");
     }
+
 
 
     private static Command handleDeadline(Scanner commandStream, TaskList taskList) {
@@ -165,7 +167,6 @@ public class Parser {
 
     private static Command handleToDo(Scanner commandStream, TaskList taskList) {
         assert taskList != null : "Task list should not be null";
-
         String taskDesc = "";
 
         while (commandStream.hasNext()) {
@@ -180,8 +181,6 @@ public class Parser {
         assert taskDesc != null : "taskDesc should not be null";
         return new ToDoCommand(taskDesc, taskList);
     }
-
-
 
     private static Command handleFind(Scanner commandStream, TaskList taskList) {
         assert taskList != null : "Task list should not be null";
