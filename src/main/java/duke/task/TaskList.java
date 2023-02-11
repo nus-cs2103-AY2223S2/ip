@@ -33,7 +33,7 @@ public class TaskList {
      * @return The Task that was removed from TaskList.
      */
     public Task remove(int idx) {
-        if (idx < 0 || idx > tasks.size()) {
+        if (idx < 0 || idx >= tasks.size()) {
             // out of bounds
             return null;
         }
@@ -74,6 +74,11 @@ public class TaskList {
      * @return Task at the specified position.
      */
     public Task get(int idx) {
+        if (idx < 0 || idx >= tasks.size()) {
+            // out of bounds
+            return null;
+        }
+
         return tasks.get(idx);
     }
 
