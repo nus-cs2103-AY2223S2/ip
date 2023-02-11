@@ -119,7 +119,7 @@ public class Storage {
      *
      * @return File path to write to.
      */
-    String getSaveFilePath() {
+    public String getSaveFilePath() {
         return saveFilePath;
     }
 
@@ -128,7 +128,7 @@ public class Storage {
      *
      * @param path New path of save file location.
      */
-    void setSaveFilePath(String path) {
+    public void setSaveFilePath(String path) {
         saveFilePath = path;
     }
 
