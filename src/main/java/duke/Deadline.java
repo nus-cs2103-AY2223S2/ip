@@ -57,6 +57,8 @@ public class Deadline extends Task {
      * @throws DateTimeParseException
      */
     public static Deadline parseDeadlineStringArray(String[] parts) throws DateTimeParseException {
+        assert parts.length == 4;
+
         String taskDesc = parts[2];
         String byString = parts[3];
         String[] byParts = byString.split(" ");
@@ -65,6 +67,7 @@ public class Deadline extends Task {
         if (Integer.parseInt(parts[1]) == 1) {
             task.mark();
         }
+        assert task != null;
         return task;
     }
 }

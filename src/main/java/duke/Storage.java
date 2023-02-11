@@ -44,17 +44,18 @@ public class Storage {
             String[] parts = taskString.split("/");
 
             try {
-                if (parts[0].equals("D")) {
+                if (parts[0].equals("D") && parts.length == 4) {
                     taskList.add(Deadline.parseDeadlineStringArray(parts));
-                } else if (parts[0].equals("E")) {
+                } else if (parts[0].equals("E") && parts.length == 5) {
                     taskList.add(Event.parseEventStringArray(parts));
-                } else if (parts[0].equals("T")) {
+                } else if (parts[0].equals("T") && parts.length == 3) {
                     taskList.add(ToDo.parseToDoStringArray(parts));
+                } else {
+                    System.out.println("Failed to load a task from " + storagePath);
                 }
             } catch (DateTimeParseException e) {
-
+                // Don't do anything
             }
-
         }
     }
 }

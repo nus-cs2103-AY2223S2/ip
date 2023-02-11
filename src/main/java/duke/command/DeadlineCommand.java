@@ -23,6 +23,11 @@ public class DeadlineCommand extends Command{
 
     @Override
     public DukeResponse execute() {
+        assert taskDesc != null;
+        assert by != null;
+        assert hasTime != null;
+        assert taskList != null;
+
         Deadline deadline = new Deadline(taskDesc, by, hasTime);
         taskList.add(deadline);
         return new DukeResponse(MessageGenerator.genAddedTaskMsg("deadline"));

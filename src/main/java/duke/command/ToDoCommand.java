@@ -16,6 +16,9 @@ public class ToDoCommand extends Command {
 
     @Override
     public DukeResponse execute() {
+        assert taskDesc != null;
+        assert taskList != null;
+
         ToDo todo = new ToDo(taskDesc);
         taskList.add(todo);
         return new DukeResponse("added todo");

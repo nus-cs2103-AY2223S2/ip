@@ -52,10 +52,12 @@ public class Parser {
 
 
     private static Command handleList(TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         return new ListCommand(taskList);
     }
 
     private static Command handleMark(Scanner commandStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         if (!commandStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
@@ -77,6 +79,7 @@ public class Parser {
     }
 
     private static Command handleUnmark(Scanner commandStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         if (!commandStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
@@ -99,6 +102,7 @@ public class Parser {
 
 
     private static Command handleDelete(Scanner commandStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         if (!commandStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("task number"));
         }
@@ -118,6 +122,7 @@ public class Parser {
     }
 
     private static Command handleDeadline(Scanner stringStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         String taskDesc = "";
         String byString = "";
 
@@ -151,6 +156,10 @@ public class Parser {
             LocalDateTime by = DateTimeParser.parse(byString);
             String[] parts = byString.split(" ");
             boolean hasTime = parts.length == 2;
+
+            assert taskDesc != null : "taskDesc should not be null";
+            assert by != null : "/by field should not be null";
+
             return new DeadlineCommand(taskDesc, by, hasTime, taskList);
 
         } catch (DateTimeParseException e) {
@@ -160,6 +169,7 @@ public class Parser {
     }
 
     private static Command handleEvent(Scanner stringStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         String taskDesc = "";
         String fromString = "";
         String toString = "";
@@ -209,6 +219,10 @@ public class Parser {
             String[] toParts = toString.split(" ");
             boolean toHasTime = toParts.length == 2;
 
+            assert taskDesc != null : "taskDesc should not be null";
+            assert from != null : "/from field should not be null.";
+            assert to != null : "/to field should not be null.";
+
             return new EventCommand(taskDesc, from, fromHasTime, to, toHasTime, taskList);
 
         } catch (DateTimeParseException e) {
@@ -217,6 +231,7 @@ public class Parser {
     }
 
     private static Command handleToDo(Scanner stringStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         String taskDesc = "";
 
         while (stringStream.hasNext()) {
@@ -229,11 +244,12 @@ public class Parser {
         }
 
         taskDesc = taskDesc.trim();
-
+        assert taskDesc != null : "taskDesc should not be null";
         return new ToDoCommand(taskDesc, taskList);
     }
 
     private static Command handleFind(Scanner stringStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         if (!stringStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("keyword"));
         }
