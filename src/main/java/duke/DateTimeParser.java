@@ -106,6 +106,8 @@ public class DateTimeParser {
     }
 
     private static String getOrdinal(final int day) {
+        assert day > 0 && day < 32;
+
         if (day >= 11 && day <= 13) {
             return "th";
         }
@@ -118,6 +120,7 @@ public class DateTimeParser {
     }
 
     private static String getAmPm(final int hour) {
+        assert hour >= 0 && hour <= 24;
         if (hour < 12) {
             return "am";
         } else {

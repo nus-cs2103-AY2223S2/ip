@@ -17,6 +17,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public DukeResponse execute() {
+        assert taskIdx != null;
+        assert taskList != null;
         Task task = taskList.remove(taskIdx);
         return new DukeResponse(MessageGenerator.genDeleteTaskMsg(task.toString()));
     }

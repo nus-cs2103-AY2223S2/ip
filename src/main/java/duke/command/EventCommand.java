@@ -28,6 +28,10 @@ public class EventCommand extends Command {
 
     @Override
     public DukeResponse execute() {
+        assert taskDesc != null;
+        assert from != null;
+        assert fromHasTime != null;
+        assert toHasTime != null;
         Event event = new Event(taskDesc, from, fromHasTime, to, toHasTime);
         taskList.add(event);
         return new DukeResponse(MessageGenerator.genAddedTaskMsg("event"));

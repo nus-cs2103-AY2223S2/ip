@@ -18,24 +18,27 @@ public class Duke {
     }
 
     public void loadTaskList(String path) {
+        assert taskList != null;
         try {
             storage = new Storage(path);
             storage.read(taskList);
         } catch (FileNotFoundException e) {
-
+            // Don't do anything
         }
     }
 
     public DukeResponse genResponse(String userInput) {
         Command command = Parser.parse(userInput, taskList);
+        assert command != null : "Command should not be null";
         return command.execute();
     }
 
     public void saveTaskList() {
+        assert storage != null : "Storage should not be null when saving.";
         try {
             storage.save(taskList.toStorageString());
         } catch(IOException e) {
-
+            // Don't do anything
         }
     }
 
