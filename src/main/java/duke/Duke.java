@@ -23,7 +23,11 @@ public class Duke {
     public String getResponse(String input) {
         String output = "";
         Parser parser = new Parser(taskList, ui, storage);
-        output = parser.parse(input);
+        try {
+            output = parser.parse(input);
+        } catch (WrongTask | OutOfBounds | EmptyDescription e) {
+            return ui.errorMessage(e);
+        }
         return output;
     }
 }

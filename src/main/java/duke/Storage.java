@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Loads the previous saved file.
+     *
      * @return Array of previous tasks.
      */
     public TaskList loadFile() {
@@ -29,21 +30,21 @@ public class Storage {
             while (sc.hasNext()) {
                 Task prevTask;
                 String data = sc.nextLine();
-                String[] commandInFile = data.split("\\|");
-                boolean isDoneInFile = commandInFile[1].charAt(0) == 'X';
-                if (commandInFile[0].equals("T")) {
+                String[] command = data.split("\\|");
+                boolean isDoneInFile = command[1].charAt(0) == 'X';
+                if (command[0].equals("T")) {
                     prevTask = new Todo(data.substring(6));
                     prevTask.isDone = isDoneInFile;
                     taskList.addTask(prevTask);
-                } else if (commandInFile[0].equals("D")) {
-                    prevTask = new Deadline(commandInFile[2].substring(1),
-                            commandInFile[3].substring(1));
+                } else if (command[0].equals("D")) {
+                    prevTask = new Deadline(command[2].substring(1),
+                            command[3].substring(1));
                     prevTask.isDone = isDoneInFile;
                     taskList.addTask(prevTask);
-                } else if (commandInFile[0].equals("E")) {
-                    String[] splitString = commandInFile[3].substring(1).
+                } else if (command[0].equals("E")) {
+                    String[] splitString = command[3].substring(1).
                             split("-");
-                    prevTask = new Event(commandInFile[2].substring(1),
+                    prevTask = new Event(command[2].substring(1),
                             splitString[0],
                             splitString[1].substring(1));
                     prevTask.isDone = isDoneInFile;
@@ -66,6 +67,7 @@ public class Storage {
 
     /**
      * Appends new tasks to the file.
+     *
      * @param task Task to be appended.
      */
     public void appendToFile(Task task) {
@@ -92,6 +94,7 @@ public class Storage {
 
     /**
      * Updates the file after mark, unmark or delete.
+     *
      * @param taskList Array of all tasks.
      */
     public void updateFile(TaskList taskList) {

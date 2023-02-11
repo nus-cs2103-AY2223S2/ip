@@ -7,11 +7,9 @@ import java.util.ArrayList;
  */
 public class TaskList {
     ArrayList<Task> taskArray;
-    private Ui ui;
 
     public TaskList() {
         taskArray = new ArrayList<>();
-        this.ui = new Ui();
     }
 
     /**
@@ -42,6 +40,9 @@ public class TaskList {
         taskArray.add(task);
     }
 
+    public void deleteTask(Task task) {
+        taskArray.remove(task);
+    }
 
     public String getTaskList() {
         String result = "Here are the tasks in your list:\n";
@@ -49,37 +50,5 @@ public class TaskList {
             result += i + 1 + "." + taskArray.get(i) + "\n";
         }
         return result;
-    }
-
-    public String mark(String taskID) {
-        int number = Integer.parseInt(taskID) - 1;
-        assert number > 0;
-        Task toMarkDone = taskArray.get(number);
-
-        toMarkDone.markAsDone();
-        return ui.showMark(toMarkDone);
-    }
-
-    public String unMark(String taskID) {
-        int number = Integer.parseInt(taskID) - 1;
-        assert number > 0;
-        Task toUnmarkDone = taskArray.get(number);
-
-        toUnmarkDone.unMarkAsDone();
-        return ui.showUnmark(toUnmarkDone);
-    }
-
-    public String deleteTask(String taskID) {
-        int number = Integer.parseInt(taskID) - 1;
-        assert number > 0;
-        String result = "";
-        try {
-            Task taskToDelete = taskArray.get(number);
-            taskArray.remove(number);
-            result = ui.showDelete(taskToDelete, taskArray.size());
-            return result;
-        } catch (IndexOutOfBoundsException e1) {
-            return "There are only " + taskArray.size() + " tasks in the list.";
-        }
     }
 }
