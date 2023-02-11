@@ -109,6 +109,7 @@ public class FileSystem {
      * @throws IOException if file cannot be created or accessed
      */
     public void appendToFile(String textToAppend) throws IOException {
+        assert !textToAppend.equals("") : "Text to append should not be empty";
         BufferedWriter fw = new BufferedWriter(new FileWriter(file, true));
         fw.write(textToAppend);
         fw.newLine();

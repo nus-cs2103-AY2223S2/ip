@@ -20,6 +20,7 @@ public class Ui {
     }
 
     public static String showErrorMsg(int size) {
+        assert size >= 0 : "Size of TaskList should be zero or more";
         return String.format("Sorry but there are only %d tasks stored!\n", size);
     }
 
@@ -38,6 +39,7 @@ public class Ui {
      * @param size number of remaining tasks
      */
     public static String showDelete(Task task, int size) {
+        assert size >= 0 : "Size of TaskList should be zero or more";
         return "Noted. I've removed this task:\n"
                 + task
                 + String.format("\nNow you have %d tasks in the list.", size);
@@ -66,6 +68,7 @@ public class Ui {
      * @param size the number of tasks after the task is added
      */
     public String showTaskOutput(Task task, int size) {
+        assert size >= 0 : "Size of TaskList should be zero or more";
         return "Got it. I've added this task:\n"
                 + task
                 + "\nNow you have " + size + " tasks in the list.";

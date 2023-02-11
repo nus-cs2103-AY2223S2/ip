@@ -13,6 +13,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import javafx.application.Platform;
 
 /**
  * Parser class to parse inputs
@@ -40,6 +41,7 @@ public class Parser {
      * @throws DukeException If input is invalid
      */
     public String parseInputs(String desc) throws DukeException {
+        assert desc.length() > 0 : "Inputs should not be empty!";
         String[] inputs = desc.split(" ", 2);
         String type = inputs[0];
 
@@ -48,10 +50,10 @@ public class Parser {
             return tasks.outputList();
 
         case "mark":
-            return tasks.mark(true, inputs[1]);
+            return tasks.changeMarkStatus(true, inputs[1]);
 
         case "unmark":
-            return tasks.mark(false, inputs[1]);
+            return tasks.changeMarkStatus(false, inputs[1]);
 
         case "todo":
             checkTaskDesc(inputs);
@@ -78,7 +80,7 @@ public class Parser {
             return ui.showTaskOutput(eventTask, tasks.getSize());
 
         case "delete":
-            int taskNo = Integer.parseInt(inputs[1]) - 1;
+            int taskNo = Integer.parseInt(inputs[1]);
             return tasks.deleteTask(taskNo);
 
         case "find":
@@ -92,6 +94,7 @@ public class Parser {
             return ui.filter(output);
 
         case "bye":
+            Platform.exit();
             return ui.showExit();
 
         default:
@@ -121,6 +124,8 @@ public class Parser {
      * @throws InvalidDateTimeException If incorrect dateTime values are given
      */
     public static LocalDateTime handleDateTime(String dateTime) throws InvalidDateTimeException {
+        assert dateTime.length() > 0 : "DateTime not provided!";
+
         try {
             return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         } catch (DateTimeParseException e) {
