@@ -6,17 +6,25 @@ import runner.Duke;
 public class Undo {
     private final Duke duke;
 
+    /**
+     * Constructor for Undo.
+     * @param duke
+     */
     public Undo(Duke duke) {
         this.duke = duke;
     }
 
+    /**
+     * Actions when undo.
+     * @return Message shown.
+     */
     public String execute() {
-        String s = duke.getRecentInput();
-        if (s.equals("")) {
+        String input = duke.getRecentInput();
+        if (input.equals("")) {
             return "Nothing needed to undo";
         }
         try {
-            String[] segments = s.split(" ", 2);
+            String[] segments = input.split(" ", 2);
             String first = segments[0];
             String arg = segments[1];
             switch (first) {
@@ -32,7 +40,7 @@ public class Undo {
                 case "event":
                     return new Delete(duke).execute(Integer.toString(duke.taskList.size()));
                 default:
-                    return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+                    return "OOPS!!! I don't know this command :-(";
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return "OOPS!!! Arguments not enough.";

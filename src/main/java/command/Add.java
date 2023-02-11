@@ -12,12 +12,22 @@ import java.time.format.DateTimeParseException;
 public class Add {
     private final Duke duke;
 
+    /**
+     * Constructor for Add.
+     * @param duke
+     */
     public Add(Duke duke) {
         this.duke = duke;
     }
 
-    public String execute(String cmd, String info) {
-        switch (cmd) {
+    /**
+     * Execute add function.
+     * @param type Type of the task.
+     * @param info Description of the task.
+     * @return Message when adding a task.
+     */
+    public String execute(String type, String info) {
+        switch (type) {
         case "todo":
             return addTodo(info);
         case "deadline":
@@ -30,7 +40,6 @@ public class Add {
 
     /**
      * Actions when adding a Todo.
-     *
      * @param action Description of a Todo.
      * @returns Add message.
      */
@@ -45,7 +54,6 @@ public class Add {
 
     /**
      * Actions when adding a Deadline.
-     *
      * @param s Description of a Deadline.
      * @returns Add message.
      */
@@ -65,7 +73,6 @@ public class Add {
 
     /**
      * Actions when adding an Event.
-     *
      * @param s Description of an Event.
      * @returns Add message.
      */

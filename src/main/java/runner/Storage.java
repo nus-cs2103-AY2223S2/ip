@@ -84,14 +84,14 @@ public class Storage {
     /**
      * Check the status of the Task and add it to the TaskList.
      * @param status Description of a Task.
-     * @param tk Task checked.
+     * @param task Task checked.
      */
-    public void checkStatusAdd(char status, Task tk) {
+    public void checkStatusAdd(char status, Task task) {
         if (status == '0') {
-            tk.uncomplete();
+            task.uncomplete();
         } else {
-            tk.complete();
+            task.complete();
         }
-        taskList.add(tk);
+        taskList.add(task);
     }
 }

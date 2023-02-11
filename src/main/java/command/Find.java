@@ -8,13 +8,16 @@ import task.Task;
 public class Find {
     private final Duke duke;
 
+    /**
+     * Constructor for Find.
+     * @param duke
+     */
     public Find(Duke duke) {
         this.duke = duke;
     }
 
     /**
      * Actions when finding keywords.
-     *
      * @param key Keyword input.
      * @returns All tasks containing the keyword in a list.
      */

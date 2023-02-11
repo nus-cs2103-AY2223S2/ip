@@ -6,10 +6,19 @@ import runner.Duke;
 public class Mark {
     private final Duke duke;
 
+    /**
+     * Constructor for Mark.
+     * @param duke
+     */
     public Mark(Duke duke) {
         this.duke = duke;
     }
 
+    /**
+     * Actions when marking.
+     * @param arg Index of a task.
+     * @return Message shown.
+     */
     public String execute(String arg) {
         try {
             int index = Integer.parseInt(arg) - 1;

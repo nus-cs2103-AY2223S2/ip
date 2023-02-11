@@ -7,6 +7,10 @@ import task.Task;
 public class Delete {
     private final Duke duke;
 
+    /**
+     * Constructor for Delete.
+     * @param duke
+     */
     public Delete(Duke duke) {
         this.duke = duke;
     }

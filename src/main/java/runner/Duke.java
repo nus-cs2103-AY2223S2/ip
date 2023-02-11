@@ -22,22 +22,40 @@ public class Duke {
         storage.loadList();
     }
 
-    public void updateInput(String s) {
-        recentInput = s;
+    /**
+     * Update recentInput.
+     * @param input New input.
+     */
+    public void updateInput(String input) {
+        recentInput = input;
     }
 
-    public void updateDeleted(Task tk) {
-        deletedTask = tk;
+    /**
+     * Update deletedTask.
+     * @param task
+     */
+    public void updateDeleted(Task task) {
+        deletedTask = task;
     }
 
+    /**
+     * @return Most recent deleted task.
+     */
     public Task getDeletedTask() {
         return deletedTask;
     }
 
+    /**
+     * @return Most recent input(command).
+     */
     public String getRecentInput() {
         return recentInput;
     }
 
+    /**
+     * @param input User input.
+     * @return Answer of Duke.
+     */
     public String getResponse(String input) {
         return parser.handle(input);
     }

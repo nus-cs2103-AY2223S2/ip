@@ -9,7 +9,6 @@ public class Parser {
     private final Duke duke;
 
     /**
-     *
      * Constructor for Parser.
      * @param duke a Duke chat-bot to work on.
      */
@@ -26,8 +25,10 @@ public class Parser {
         if (!input.contains(" ")) {
             switch (input) {
             case "hello":
+            case "hi":
                 return Ui.start();
             case "bye":
+            case"goodbye":
                 return Ui.ending();
             case "list":
                 return Ui.showList(duke.taskList, 1);
