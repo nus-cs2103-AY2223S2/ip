@@ -17,6 +17,10 @@ public class Ui {
     public void setFirstTime(boolean b) {
         isFirstTime = b;
     }
+
+    /**
+     * Displays a welcome message.
+     */
     public void showWelcome() {
         System.out.println("૮₍ ˃ ᵕ ˂ ₎ა");
         System.out.println("Hello! I'm Duke, your favourite pink bunny.");
@@ -38,7 +42,7 @@ public class Ui {
     public void showBunny() {
         System.out.println("(\\ (\\\n"
                 + "(„• ֊ •„) ♡\n"
-                + "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                + "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
     /**
@@ -55,6 +59,7 @@ public class Ui {
                 + "event DESC /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM\n"
                 + "list\n"
                 + "find KEYWORD\n"
+                + "edit TASK_NUM NEW_DESC\n"
                 + "mark TASK_NUM\n"
                 + "unmark TASK_NUM\n"
                 + "delete TASK_NUM\n"
