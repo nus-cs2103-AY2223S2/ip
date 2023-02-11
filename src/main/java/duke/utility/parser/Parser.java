@@ -6,6 +6,8 @@ import duke.tasklist.task_types.Deadline;
 import duke.tasklist.task_types.Event;
 import duke.tasklist.task_types.Task;
 import duke.tasklist.task_types.ToDo;
+import duke.utility.enums.CommandMap;
+import duke.utility.enums.UpdateType;
 
 /**
  * Represents a <code>Parser</code> object that perfroms the necessary
@@ -197,6 +199,21 @@ public class Parser {
         return list.filter(keyword);
     }
 
+    private static String updateTask(String[] command, TaskList list) throws DukeException {
+        try {
+            if (command.length != 4) {
+                throw wrongCommandFormat;
+            }
+            int index = Integer.parseInt(command[1]) - 1;
+            UpdateType type = UpdateType.parseCommand(command[2]);
+            String newValue = command[3];
+
+            return list.update(index, type, newValue);
+        } catch (NumberFormatException e) {
+            throw noNumericParam;
+        }
+    }
+
     /**
      * Reads the input of the user and parse the input accordingly.
      * 
@@ -226,6 +243,8 @@ public class Parser {
                     return createEvent(command, list);
                 case find:
                     return findTasks(command, list);
+                case update:
+                    return updateTask(command, list);
                 default:
                     return createToDo(command, list);
             }

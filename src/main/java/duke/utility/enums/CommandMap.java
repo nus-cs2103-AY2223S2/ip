@@ -1,4 +1,4 @@
-package duke.utility.parser;
+package duke.utility.enums;
 
 
 /**
@@ -8,5 +8,5 @@ package duke.utility.parser;
  * @author Brian Quek
  */
 public enum CommandMap {
-    list, mark, unmark, delete, todo, deadline, event, find, bye
+    list, mark, unmark, delete, todo, deadline, event, find, update, bye
 }
