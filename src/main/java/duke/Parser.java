@@ -58,26 +58,6 @@ public class Parser {
     }
 
     /**
-     * Formats the Date and Time given for a Deadline task by the user.
-     *
-     * @param  deadline date and time given by the users.
-     * @return the Date and Time in an array.
-     */
-    public static String[] deadlineSplit(String deadline) {
-        return deadline.split(" ", 2);
-    }
-
-    /**
-     * Formats the Date and Time given for a Eventtask by the user.
-     *
-     * @param  event date and time given by the users.
-     * @return the Date and Time in an array.
-     */
-    public static String[] eventSplit(String event) {
-        return event.split(" ", 6);
-    }
-
-    /**
      * Parses the Date and Time to LocalDateTime.
      *
      * @param  duration Date and Time given by the users.

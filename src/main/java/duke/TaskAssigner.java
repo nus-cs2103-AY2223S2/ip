@@ -11,6 +11,16 @@ import duke.tasks.ToDos;
 
 public class TaskAssigner {
 
+    private static Integer TODO_DESCRIPTION_INDEX = 5;
+    private static Integer DEADLINE_DESCRIPTION_INDEX = 9;
+    private static Integer DEADLINE_MAX_SIZE = 2;
+    private static Integer LENGTH_OF_BY = 4;
+    private static Integer EVENT_DESCRIPTION_INDEX = 6;
+    private static Integer EVENT_MAX_SIZE = 3;
+    private static Integer LENGTH_OF_FROM = 6;
+    private static Integer LENGTH_OF_TO = 4;
+    private static Integer LENGTH_OF_EVENT_END_TIME = 5;
+
     private static ArrayList<String> taskTypes = new ArrayList<>(List.of("todo", "event", "deadline"));
 
 
@@ -58,7 +68,7 @@ public class TaskAssigner {
      * @return a ToDo task.
      */
     public Task assignToDo(String command) {
-        return new ToDos(command.substring(5));
+        return new ToDos(command.substring(TODO_DESCRIPTION_INDEX));
     }
 
     /**
@@ -70,16 +80,15 @@ public class TaskAssigner {
      */
     public Task assignDeadline(String command) throws DukeException {
         String[] timestampsAsString = command.split("/by ");
-        if (timestampsAsString.length != 2) {
+        if (timestampsAsString.length != DEADLINE_MAX_SIZE) {
             throw new DukeException("Improper Deadline Format! deadline {desc} /by yyyy-mm-dd hhmm\n");
         }
 
         try {
-            int dateIndex = command.indexOf("/by ") + 4;
+            int dateIndex = command.indexOf("/by ") + LENGTH_OF_BY;
             String deadline = command.substring(dateIndex);
-            System.out.println(deadline);
             String updatedDeadline = TimeChecker.updateTime(deadline);
-            String deadlineDescription = command.substring(9, dateIndex - 4);
+            String deadlineDescription = command.substring(DEADLINE_DESCRIPTION_INDEX, dateIndex - LENGTH_OF_BY);
             return new Deadline(deadlineDescription, updatedDeadline);
         } catch (DateTimeParseException e) {
             throw new DukeException("Improper Deadline Format! deadline {desc} /by yyyy-mm-dd hhmm\n");
@@ -95,16 +104,16 @@ public class TaskAssigner {
      */
     public Task assignEvent(String command) throws DukeException {
         String[] timestampsAsString = command.split("/from | /to ");
-        if (timestampsAsString.length != 3) {
+        if (timestampsAsString.length != EVENT_MAX_SIZE) {
             throw new DukeException("Improper Event Format! Follow:\n"
                     + "event {desc} /from yyyy-mm-dd hhmm /to yyyy-mm-dd hhmm\n");
         }
         try {
-            int startIndex = command.indexOf("/from") + 6;
-            int endIndex = command.indexOf("/to") + 4;
-            String startDate = TimeChecker.updateTime(command.substring(startIndex, endIndex - 5));
+            int startIndex = command.indexOf("/from") + LENGTH_OF_FROM;
+            int endIndex = command.indexOf("/to") + LENGTH_OF_TO;
+            String startDate = TimeChecker.updateTime(command.substring(startIndex, endIndex - LENGTH_OF_EVENT_END_TIME));
             String endDate = TimeChecker.updateTime(command.substring(endIndex));
-            String eventDescription = command.substring(6, startIndex - 6);
+            String eventDescription = command.substring(EVENT_DESCRIPTION_INDEX, startIndex - LENGTH_OF_FROM);
             return new Events(eventDescription, startDate, endDate);
         } catch (DateTimeParseException e) {
             throw new DukeException("Improper Event Format! Follow:\n"

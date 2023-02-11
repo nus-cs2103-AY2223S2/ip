@@ -62,7 +62,7 @@ public class Events extends Task {
     }
 
     /**
-     * All the Information of the Event task
+     * Returns a String with all the Event Task Information.
      *
      * @return a String of all the information of the Event task to be printed by the Ui
      */
