@@ -1,6 +1,6 @@
 package babe;
 
-import babe.exception.NoDescriptionException;
+import babe.exception.NoArgumentException;
 import babe.exception.NonsenseInputException;
 import babe.exception.WrongDateFormatException;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ public class ParserTest {
 
     @Test
     public void parseTest_byeInstruction()
-            throws NonsenseInputException, NoDescriptionException, WrongDateFormatException {
+            throws NonsenseInputException, NoArgumentException, WrongDateFormatException {
         ArrayList<String> parserOutput = Parser.parse("bye");
         ArrayList<String> expectedOutput = new ArrayList<>();
         expectedOutput.add("bye");

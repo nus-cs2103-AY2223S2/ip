@@ -106,8 +106,10 @@ public class Babe {
             } else {
                 throw new NonsenseInputException();
             }
-        } catch (Exception e) {
-            output = Ui.notifyException(e);
+        } catch (Exception e1) {
+            output = Ui.notifyException(e1);
+        } catch (AssertionError e2) {
+            output = Ui.notifyError(e2);
         }
 
         return output;
