@@ -8,7 +8,7 @@ import duke.parser.Parser;
 
 import duke.tasklist.TaskList;
 
-import duke.ui.Ui;
+import duke.ui.TextUi;
 
 import java.util.Scanner;
 
@@ -21,26 +21,26 @@ public class Duke {
 
     private void run() {
 
-        Ui.greet();
+        TextUi.greet();
 
         Scanner commandScanner = new Scanner(System.in);
         boolean toExit = false;
 
         while (true) {
 
-            String userCommand = Ui.getUserCommand(commandScanner);
+            String userCommand = TextUi.getUserCommand(commandScanner);
 
             try {
                 Command command = Parser.parse(userCommand);
                 String response = command.execute(this.taskList);
-                Ui.show(response);
+                TextUi.show(response);
                 toExit = command.isExitCommand();
 
             } catch (DukeException e) {
-                Ui.showError(e);
+                TextUi.showError(e);
 
             } finally {
-                Ui.endCommand();
+                TextUi.endCommand();
 
             }
 

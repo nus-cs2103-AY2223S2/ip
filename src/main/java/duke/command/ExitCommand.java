@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command that ends the session with the chatbot.

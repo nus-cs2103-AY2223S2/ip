@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Represents the test-based user interface of the chatbot.
  */
-public class Ui {
+public class TextUi {
 
     private static final String LINE = "------------------------------------------------------------";
 
@@ -21,10 +21,10 @@ public class Ui {
      * Greets the user upon starting the session with the chatbot.
      */
     public static void greet() {
-        System.out.println("\nHello from\n" + Ui.LOGO);
+        System.out.println("\nHello from\n" + TextUi.LOGO);
 
         System.out.println("How can I help you?\n");
-        System.out.println(Ui.LINE + "\n");
+        System.out.println(TextUi.LINE + "\n");
 
     }
 
@@ -58,7 +58,7 @@ public class Ui {
      * Sets up the interface to obtain the user's next input.
      */
     public static void endCommand() {
-        System.out.println(Ui.LINE + "\n");
+        System.out.println(TextUi.LINE + "\n");
     }
 
 
