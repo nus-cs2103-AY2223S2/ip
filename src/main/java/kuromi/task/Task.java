@@ -1,10 +1,12 @@
 package kuromi.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Parent class of Todo, Deadline, and Event.
  * Contains attributes and methods that a task should have.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     /** The description of a task **/
     protected String description;
     /** The status of a task **/
@@ -89,6 +91,15 @@ public class Task {
     public void unmark() {
 
         this.isDone = false;
+    }
+
+    public LocalDateTime getEndDate() {
+        return LocalDateTime.MAX;
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        return this.getEndDate().compareTo(other.getEndDate());
     }
 
     @Override
