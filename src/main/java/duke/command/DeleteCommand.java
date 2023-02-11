@@ -21,11 +21,12 @@ public class DeleteCommand extends Command {
      * Executes the command by deleting a Task from the list of Tasks.
      *
      * @param taskList The TaskList object that manages the list of Tasks.
+     * @return The String response of the chatbot.
      * @throws DukeException If the task number given is not valid.
      */
     @Override
-    public void execute(TaskList taskList) throws DukeException {
-        taskList.deleteTask(this.taskNumber);
+    public String execute(TaskList taskList) throws DukeException {
+        return taskList.deleteTask(this.taskNumber);
     }
 
 }

@@ -8,39 +8,39 @@ import duke.parser.Parser;
 
 import duke.tasklist.TaskList;
 
-import duke.ui.Ui;
+import duke.ui.TextUi;
 
 import java.util.Scanner;
+
 
 /**
  * Represents the chatbot that helps a user maintain a list of Tasks.
  */
 public class Duke {
-
-    private final Ui ui = new Ui();
     private final TaskList taskList = new TaskList();
 
-    private void start() {
+    private void run() {
 
-        ui.greet();
+        TextUi.greet();
 
         Scanner commandScanner = new Scanner(System.in);
         boolean toExit = false;
 
         while (true) {
 
-            String userCommand = ui.getUserCommand(commandScanner);
+            String userCommand = TextUi.getUserCommand(commandScanner);
 
             try {
                 Command command = Parser.parse(userCommand);
-                command.execute(this.taskList);
+                String response = command.execute(this.taskList);
+                TextUi.show(response);
                 toExit = command.isExitCommand();
 
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                TextUi.showError(e);
 
             } finally {
-                ui.endCommand();
+                TextUi.endCommand();
 
             }
 
@@ -56,7 +56,31 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke bot = new Duke();
-        bot.start();
+        bot.run();
 
     }
+
+    /**
+     * Returns the chatbot's response to the given user command.
+     *
+     * @param userCommand The user's text input.
+     * @return The String response of the chatbot.
+     */
+    public String getResponse(String userCommand) {
+
+        String response = "";
+
+        try {
+            Command command = Parser.parse(userCommand);
+            response = command.execute(this.taskList).strip();
+
+        } catch (DukeException e) {
+            response = e.getMessage();
+
+        } finally {
+            return response;
+
+        }
+    }
+
 }

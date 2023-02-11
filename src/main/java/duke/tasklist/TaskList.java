@@ -22,40 +22,55 @@ public class TaskList {
     private final ArrayList<Task> tasks = taskStorage.readTasksFromFile();
 
     /**
-     * Displays all the Tasks in the list of Tasks.
+     * Returns all the Tasks in the list of Tasks.
+     * 
+     * @return The String response of the chatbot.
      */
-    public void listTasks() {
+    public String listTasks() {
         if (this.tasks.size() == 0) {
-            System.out.println("You do not have any tasks added to the list.");
+            return "You do not have any tasks added to the list.\n";
 
         } else {
-            System.out.println("Listing all tasks...");
+            StringBuilder response = new StringBuilder("Listing all tasks...\n");
             for (int i = 0; i < this.tasks.size(); i++) {
-                System.out.println((i + 1) + ") " + this.tasks.get(i));
+                response.append(i + 1)
+                        .append(") ")
+                        .append(this.tasks.get(i))
+                        .append("\n");
             }
+
+            return response.toString();
 
         }
 
     }
 
-    private void markUnmark(int taskNumber, boolean toMark) throws DukeException {
+    private String markUnmark(int taskNumber, boolean toMark) throws DukeException {
         boolean isValidTaskNumber = (taskNumber > 0
                 && taskNumber <= this.tasks.size());
 
         if (isValidTaskNumber) {
+            StringBuilder response = new StringBuilder();
             if (toMark) {
                 this.tasks.get(taskNumber - 1).mark();
-                System.out.println("I have marked Task " + taskNumber + " as done.");
-                System.out.println(this.tasks.get(taskNumber - 1));
+                response.append("I have marked Task ")
+                        .append(taskNumber)
+                        .append(" as done.\n")
+                        .append(this.tasks.get(taskNumber - 1))
+                        .append("\n");
 
             } else {
                 this.tasks.get(taskNumber - 1).unmark();
-                System.out.println("I have marked Task " + taskNumber + " as undone.");
-                System.out.println(this.tasks.get(taskNumber - 1));
+                response.append("I have marked Task ")
+                        .append(taskNumber)
+                        .append(" as undone.\n")
+                        .append(this.tasks.get(taskNumber - 1))
+                        .append("\n");
 
             }
 
             this.taskStorage.writeTasksToFile(this.tasks);
+            return response.toString();
 
         } else {
             throw new DukeInvalidArgumentException("Sorry... That is an invalid task number :/");
@@ -67,20 +82,22 @@ public class TaskList {
      * Marks a particular Task in the list of Tasks, as done.
      *
      * @param taskNumber The number to indicate which Task is to be marked as done.
+     * @return The String response of the chatbot.                  
      * @throws DukeException When the task number given is not valid.
      */
-    public void markTask(int taskNumber) throws DukeException {
-        this.markUnmark(taskNumber, true);
+    public String markTask(int taskNumber) throws DukeException {
+        return this.markUnmark(taskNumber, true);
     }
 
     /**
      * Marks a particular Task in the list of Tasks, as undone.
      *
      * @param taskNumber The number to indicate which Task is to be marked as undone.
+     * @return The String response of the chatbot.                  
      * @throws DukeException When the task number given is not valid.
      */
-    public void unmarkTask(int taskNumber) throws DukeException {
-        this.markUnmark(taskNumber, false);
+    public String unmarkTask(int taskNumber) throws DukeException {
+        return this.markUnmark(taskNumber, false);
     }
 
     /**
@@ -88,12 +105,20 @@ public class TaskList {
      *
      * @param task The Task to be added to the list of Tasks.
      * @param taskType The type of the given task.
+     * @return The String response of the chatbot.                
      */
-    public void addTask(Task task, String taskType) {
+    public String addTask(Task task, String taskType) {
         this.tasks.add(task);
         this.taskStorage.writeTasksToFile(this.tasks);
-        System.out.println("I have added the " + taskType + " to the list :)");
-        System.out.println(task);
+
+        StringBuilder response = new StringBuilder();
+        response.append("I have added the ")
+                .append(taskType)
+                .append(" to the list :)\n")
+                .append(task)
+                .append("\n");
+
+        return response.toString();
 
     }
 
@@ -101,18 +126,27 @@ public class TaskList {
      * Deletes a Task from the list of Tasks.
      *
      * @param taskNumber The number to indicate which Task is to be deleted.
+     * @return The String response of the chatbot.
      * @throws DukeException When the task number given is not valid.
      */
-    public void deleteTask(int taskNumber) throws DukeException {
+    public String deleteTask(int taskNumber) throws DukeException {
         boolean isValidTaskNumber = (taskNumber > 0
                 && taskNumber <= this.tasks.size());
 
         if (isValidTaskNumber) {
             Task removedTask = this.tasks.remove(taskNumber - 1);
             this.taskStorage.writeTasksToFile(this.tasks);
-            System.out.println("I have removed Task " + taskNumber + " from the list.");
-            System.out.println(removedTask);
-            System.out.println("You now have " + this.tasks.size() + " task(s) in the list.");
+
+            StringBuilder response = new StringBuilder();
+            response.append("I have removed Task ")
+                    .append(taskNumber)
+                    .append(" from the list.\n")
+                    .append(removedTask)
+                    .append("\nYou now have ")
+                    .append(this.tasks.size())
+                    .append(" task(s) in the list.\n");
+
+            return response.toString();
 
         } else {
             throw new DukeInvalidArgumentException("Sorry... That is an invalid task number :/");
@@ -121,11 +155,12 @@ public class TaskList {
     }
 
     /**
-     * Displays all the Tasks in the list of Tasks, that have the given keyword.
+     * Returns all the Tasks in the list of Tasks, that have the given keyword.
      *
      * @param keyword The keyword to search for, in the list of Tasks.
+     * @return The String response of the chatbot.
      */
-    public void findKeywordInTasks(String keyword) {
+    public String findKeywordInTasks(String keyword) {
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
 
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -141,15 +176,22 @@ public class TaskList {
         }
 
         if (tasksWithKeyword.size() == 0) {
-            System.out.println("I could not find any tasks with the keyword '"
-                    + keyword + "' :/");
+            return "I could not find any tasks with the keyword '"
+                    + keyword + "' :/\n";
 
         } else {
-            System.out.println("Listing all tasks with the keyword '"
-                    + keyword + "'...");
+            StringBuilder response = new StringBuilder();
+            response.append("Listing all tasks with the keyword '")
+                    .append(keyword)
+                    .append("'...\n");
             for (int i = 0; i < tasksWithKeyword.size(); i++) {
-                System.out.println((i + 1) + ") " + tasksWithKeyword.get(i));
+                response.append(i + 1)
+                        .append(") ")
+                        .append(tasksWithKeyword.get(i))
+                        .append("\n");
             }
+
+            return response.toString();
 
         }
 

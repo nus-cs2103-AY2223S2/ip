@@ -20,9 +20,10 @@ public class FindCommand extends Command {
      * that have the given keyword.
      * 
      * @param taskList The TaskList object that manages the list of Tasks.
+     * @return The String response of the chatbot.
      */
     @Override
-    public void execute(TaskList taskList) {
-        taskList.findKeywordInTasks(keyword);
+    public String execute(TaskList taskList) {
+        return taskList.findKeywordInTasks(keyword);
     }
 }

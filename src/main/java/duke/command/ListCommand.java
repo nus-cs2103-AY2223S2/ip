@@ -15,10 +15,11 @@ public class ListCommand extends Command {
      * Executes the command by displaying all tasks present in the List of Tasks.
      *
      * @param taskList The TaskList object that manages the list of Tasks.
+     * @return The String response of the chatbot.
      */
     @Override
-    public void execute(TaskList taskList) {
-        taskList.listTasks();
+    public String execute(TaskList taskList) {
+        return taskList.listTasks();
     }
 
 }

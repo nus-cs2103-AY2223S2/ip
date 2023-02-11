@@ -1,11 +1,13 @@
 package duke.ui;
 
+import duke.exception.DukeException;
+
 import java.util.Scanner;
 
 /**
  * Represents the test-based user interface of the chatbot.
  */
-public class Ui {
+public class TextUi {
 
     private static final String LINE = "------------------------------------------------------------";
 
@@ -18,11 +20,11 @@ public class Ui {
     /**
      * Greets the user upon starting the session with the chatbot.
      */
-    public void greet() {
-        System.out.println("\nHello from\n" + Ui.LOGO);
+    public static void greet() {
+        System.out.println("\nHello from\n" + TextUi.LOGO);
 
         System.out.println("How can I help you?\n");
-        System.out.println(Ui.LINE + "\n");
+        System.out.println(TextUi.LINE + "\n");
 
     }
 
@@ -33,7 +35,7 @@ public class Ui {
      * @param commandScanner The Scanner object used to obtain user's text input.
      * @return User's text input
      */
-    public String getUserCommand(Scanner commandScanner) {
+    public static String getUserCommand(Scanner commandScanner) {
 
         System.out.print("You:\n");
         String command = commandScanner.nextLine();
@@ -44,11 +46,19 @@ public class Ui {
 
     }
 
+    public static void show(String message) {
+        System.out.println(message);
+    }
+
+    public static void showError(DukeException exception) {
+        System.out.println(exception.getMessage() + "\n");
+    }
+
     /**
      * Sets up the interface to obtain the user's next input.
      */
-    public void endCommand() {
-        System.out.println("\n" + Ui.LINE + "\n");
+    public static void endCommand() {
+        System.out.println(TextUi.LINE + "\n");
     }
 
 
