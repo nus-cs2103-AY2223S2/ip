@@ -27,14 +27,15 @@ class TaskList {
      * Calls the ToDo constructor and inserts created ToDo into this Babe's memory.
      *
      * @param content The description of the ToDo item.
+     * @return
      */
-    public Task addToDo(String content, boolean toNotify) {
+    protected String addToDo(String content, boolean toMark) {
         ToDo item = new ToDo(content);
         tasks.add(taskCount++, item);
-        if (toNotify) {
-            Ui.notifyAddTask(item, taskCount);
+        if (toMark) {
+            item.mark();
         }
-        return item;
+        return item.toString();
     }
 
     /**
@@ -44,13 +45,13 @@ class TaskList {
      * @param content The content of the Deadline item.
      * @param date    The date of the deadline. May include time too.
      */
-    public Task addDeadline(String content, String date, boolean toNotify) {
+    protected String addDeadline(String content, String date, boolean toMark) {
         Deadline item = new Deadline(content, date);
         tasks.add(taskCount++, item);
-        if (toNotify) {
-            Ui.notifyAddTask(item, taskCount);
+        if (toMark) {
+            item.mark();
         }
-        return item;
+        return item.toString();
     }
 
     /**
@@ -61,13 +62,13 @@ class TaskList {
      * @param startDate The start date of the Event. May include time too.
      * @param endDate   The end date of the Event. May include time too.
      */
-    public Task addEvent(String content, String startDate, String endDate, boolean toNotify) {
+    protected String addEvent(String content, String startDate, String endDate, boolean toMark) {
         Event item = new Event(content, startDate, endDate);
         tasks.add(taskCount++, item);
-        if (toNotify) {
-            Ui.notifyAddTask(item, taskCount);
+        if (toMark) {
+            item.mark();
         }
-        return item;
+        return item.toString();
     }
 
     /**
@@ -75,38 +76,48 @@ class TaskList {
      *
      * @param index An integer that represents the index of the Task to be removed from memory.
      */
-    public void deleteTask(int index) {
+    protected String deleteTask(int index) {
         Task removedTask = this.tasks.remove(index - 1);
-        Ui.notifyDelete(removedTask, --taskCount);
+        taskCount--;
+        return removedTask.toString();
     }
 
     /**
-     * Marks/Unmarks the item of given index in Babe's list as Done/Undone.
-     * If user keys in "mark", this function will extract the index to be marked and sets the index to True in
-     * doneStatus. Sets the index to False if "unmark"is keyed in.
+     * Marks the item of given index in Babe's list as Done.
+     * This function will extract the index to be marked and sets the index to True in doneStatus.
+     *
+     * @param index An integer that represents the index of the item to be marked.
      */
-    public void changeStatus(boolean toMark, int index) {
+    protected String markTask(int index) {
         Task itemAtIndex = tasks.get(index - 1);
-        if (toMark) {
-            itemAtIndex.mark();
-        } else {
-            itemAtIndex.unmark();
-        }
-        Ui.notifyStatusChanged(itemAtIndex, toMark);
+        itemAtIndex.mark();
+        return itemAtIndex.toString();
+    }
+
+    /**
+     * Unmarks the item of given index in Babe's list as Undone.
+     * This function will extract the index to be un-marked and sets the index to False in doneStatus.
+     *
+     * @param index An integer that represents the index of the item to be marked.
+     */
+    protected String unmarkTask(int index) {
+        Task itemAtIndex = tasks.get(index - 1);
+        itemAtIndex.unmark();
+        return itemAtIndex.toString();
     }
 
     /**
      * Find a task in the TaskList that contains the searchKey entirely.
      *
      * @param searchKey A String input by the user.
-     * @return A Task array containing the Tasks found.
+     * @return An ArrayList containing Strings of all the Tasks found.
      */
-    public ArrayList<Task> findTasks(String searchKey) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
+    protected ArrayList<String> findTasks(String searchKey) {
+        ArrayList<String> foundTasks = new ArrayList<>();
         for (int i = 0; i < taskCount; i++) {
             Task task = tasks.get(i);
             if (task.contains(searchKey)) {
-                foundTasks.add(task);
+                foundTasks.add(task.toString());
             }
         }
 

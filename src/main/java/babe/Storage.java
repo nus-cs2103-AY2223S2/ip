@@ -27,8 +27,11 @@ class Storage {
     /**
      * Loads available saved data from fileAddress.
      * Creates a save file if it doesn't exist yet at address specified by fileAddress.
+     *
+     * @return A boolean value; True if there is an existing save file, false otherwise.
      */
-    protected static void initializeStorage(TaskList taskList) {
+    protected static boolean initializeStorage(TaskList taskList) {
+        boolean isFilePresent = true;
         if (!Files.exists(Paths.get(FILE_PATH))) {
             try {
                 File file = new File(FILE_PATH);
@@ -36,9 +39,10 @@ class Storage {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Ui.notifyCreateSaveFile();
+            isFilePresent = false;
         }
         Storage.load(taskList);
+        return isFilePresent;
     }
 
     private static void load(TaskList taskList) {
@@ -50,29 +54,22 @@ class Storage {
                 String taskType = arr[0].strip();
                 Boolean isDone = arr[1].equals("1");
                 String desc = arr[2];
-                Task item = null;
                 switch (taskType) {
                 case "T":
-                    item = taskList.addToDo(desc, false);
+                    taskList.addToDo(desc, isDone);
                     break;
                 case "D":
                     String deadline = arr[3];
-                    item = taskList.addDeadline(desc, deadline, false);
+                    taskList.addDeadline(desc, deadline, isDone);
                     break;
                 case "E":
                     String startDate = arr[3];
                     String endDate = arr[4];
-                    item = taskList.addEvent(desc, startDate, endDate, false);
+                    taskList.addEvent(desc, startDate, endDate, isDone);
                     break;
                 default:
                     // Need to add a file corruption error here
                     break;
-                }
-
-                if (isDone) {
-                    item.mark();
-                } else {
-                    item.unmark();
                 }
             }
         } catch (Exception e) {
