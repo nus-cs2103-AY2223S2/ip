@@ -31,6 +31,13 @@ public class Ui {
     }
 
     /**
+     * Returns the Intro message
+     */
+    public static String getIntro(){
+        return INTRO_MESSAGE + "\n" + GREET + "\n" + ASK_MESSAGE;
+    }
+
+    /**
      * Prints the exit message.
      */
     public static void displayExit() {
