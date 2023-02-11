@@ -18,6 +18,8 @@ public class Duke {
      * @param filePath description of the file path.
      */
     public Duke(String filePath) {
+        assert filePath != null : "Empty filepath";
+
         ui = new Ui();
         setGreetingMsg();
 

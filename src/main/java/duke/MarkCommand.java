@@ -16,6 +16,7 @@ public class MarkCommand extends Command {
     public MarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
             LINE_NUMBER = Integer.parseInt(fullCommand[1]) - 1;
+
         } catch (IndexOutOfBoundsException e) {
             throw new DukeEmptyArgumentException("The description of mark command cannot be empty.");
         } catch (NumberFormatException e) {
@@ -35,7 +36,7 @@ public class MarkCommand extends Command {
                     + " tasks in list, but want to mark " + (LINE_NUMBER + 1) + "th task.");
         }
         Task t = task.getTaskAt(LINE_NUMBER);
-
+        assert t != null : "Attempt to mark empty task";
         t.setDone(true);
         storage.updateData(LINE_NUMBER, 1);
         return ui.responseToMarkTaskCommand(t);

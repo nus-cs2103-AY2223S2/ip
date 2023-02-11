@@ -29,6 +29,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
+        assert d != null : "Duke hasn't been created.";
         duke = d;
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(d.greetingMsg, DUKE_IMAGE));

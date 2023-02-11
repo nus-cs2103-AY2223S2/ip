@@ -37,6 +37,7 @@ public class AddCommand extends Command {
                 String[] s3 = s2[1].split(" /to ", 2);
                 task = new Events(s2[0], s3[0], s3[1]);
             }
+            assert task != null : "Empty task has been created";
             return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidArgumentException("The description of " + cmd + " is invalid.");
