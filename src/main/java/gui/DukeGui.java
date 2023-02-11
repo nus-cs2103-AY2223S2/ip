@@ -25,9 +25,9 @@ public class DukeGui extends Application {
     private static String STAGE_TITLE = "Duke";
 
     private final Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/DaUser.png")));
+            this.getClass().getResourceAsStream("/images/user.jpg")));
     private final Image dukeImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/DaDuke.png")));
+            this.getClass().getResourceAsStream("/images/duke.jpg")));
     private TextField userInput;
     private VBox dialogContainer;
     private Duke duke = new Duke();
