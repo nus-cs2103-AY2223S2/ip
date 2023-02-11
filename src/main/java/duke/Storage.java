@@ -22,6 +22,8 @@ public class Storage {
     protected String filePath;
     protected String dirPath;
 
+
+
     /**
      * Constructor for Storage object.
      * @param filePath Filepath of where txt file is write into.

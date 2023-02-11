@@ -108,6 +108,7 @@ public class Duke  {
 
             }
 
+            
             throw new DukeException("I don't know that one!");
         } catch (DukeException e) {
             return ui.showError(e.toString());
