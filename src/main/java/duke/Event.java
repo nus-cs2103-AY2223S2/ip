@@ -81,7 +81,8 @@ public class Event extends Task {
                     if (period_Arr.length == 2) {
 
                         String from = period_Arr[0].strip();
-                        String to = period_Arr[1].strip();;
+                        String to = period_Arr[1].strip();
+;
 
                         if(isDate(from) && isDate(to)){
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -89,19 +90,11 @@ public class Event extends Task {
                             LocalDate ldTo = LocalDate.parse(to, formatter);
                             Event e = new Event(desc, ldFrom, ldTo);
                             array.add(e);
-                            System.out.println(divider);
-                            System.out.println("     Got it. I've added this task:");
-                            System.out.println("     " + e.toString());
-                            System.out.println("     Now you have " + array.size() + " tasks in the list.");
-                            System.out.println(divider);
+                            Ui.addTask(array, e);
                         } else {
                             Event e = new Event(desc, from, to);
                             array.add(e);
-                            System.out.println(divider);
-                            System.out.println("     Got it. I've added this task:");
-                            System.out.println("     " + e.toString());
-                            System.out.println("     Now you have " + array.size() + " tasks in the list.");
-                            System.out.println(divider);
+                            Ui.addTask(array, e);
                         }
 
                        

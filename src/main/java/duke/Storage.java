@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import util.DukeException;
 
-public class SaveData {
+public class Storage {
     // create a file object for the current location
     public static void initSaveFile() {
         File dir = new File("src/main/data/");
@@ -36,7 +36,7 @@ public class SaveData {
         }
     }
 
-    public static void loadFile(ArrayList<Task> list) throws IOException, DukeException {
+    public static void loadFile(TaskList list) throws IOException, DukeException {
         File file = new File(System.getProperty("user.dir") + "/data/duke.txt");
         File dir = new File(System.getProperty("user.dir") + "/data");
 
@@ -71,9 +71,10 @@ public class SaveData {
         }
     }
 
-    public static void saveToFile(ArrayList<Task> list) throws IOException {
+    public static void saveToFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/duke.txt");
-        for (Task t: list) {
+        ArrayList<Task> tasks = list.getList();
+        for (Task t: tasks) {
             fw.write(t.saveFormat() +  "\n");
         }
         fw.close();

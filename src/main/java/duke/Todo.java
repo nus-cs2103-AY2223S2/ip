@@ -42,11 +42,7 @@ public class Todo extends Task {
             Todo t = new Todo(desc);
             array.add(t);
 
-            System.out.println(divider);
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("     " + t.toString());
-            System.out.println("     Now you have " + array.size() + " tasks in the list.");
-            System.out.println(divider);
+            Ui.addTask(array, t);
         }
         
     }

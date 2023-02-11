@@ -12,7 +12,6 @@ import util.DukeException;
 public class Deadline extends Task {
 
     protected String by;
-    static String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
 
     public Deadline(String description, String by) {
         super(description);
@@ -63,7 +62,6 @@ public class Deadline extends Task {
                
             String date = splitInput[splitInput.length-1];
             String desc = splitInput[1];
-            System.out.println(isDate(date));
 
 
             if(isDate(date)){
@@ -71,23 +69,18 @@ public class Deadline extends Task {
                 LocalDate ld = LocalDate.parse(date, formatter);
                 Deadline d = new Deadline(desc, ld);
                 array.add(d);
-                System.out.println(divider);
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("     " + d.toString());
-                System.out.println("     Now you have " + array.size() + " tasks in the list.");
-                System.out.println(divider);
+                Ui.addTask(array, d);
             } else {
                 Deadline d = new Deadline(desc, date);
                 array.add(d);
-                System.out.println(divider);
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("     " + d.toString());
-                System.out.println("     Now you have " + array.size() + " tasks in the list.");
-                System.out.println(divider);
+                Ui.addTask(array, d);
             }
         }
         
     }
+
+
+
     
     public static boolean isDate(String date) {
 
@@ -97,7 +90,6 @@ public class Deadline extends Task {
             ld = LocalDate.parse(date, formatter);
             System.out.println(ld);
         } catch (DateTimeParseException e) {
-            System.out.println("Date " + date + " is not a date.");
             return false;
     
         }

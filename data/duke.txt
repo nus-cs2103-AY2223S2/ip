@@ -1,14 +1,4 @@
-D | 0 | hi | now
-E | 0 | gello |  now |  tomorrow
-T | 1 | hellloo
-T | 0 | hello
-D | 0 | /by | 2019-10-12
-D | 0 | hi | 2019-12-10
-D | 0 | hello | 2019-10-12
-D | 0 | hello | 2019-10-12
 D | 0 | hello | Dec 10 2019
-E | 0 | hello |  2019-12-19 |  2020-12-9
-D | 0 | hello | Dec 19 2020
-E | 0 | hello |  2019-10-12 |  2020-10-12
-E | 0 | hi |  2020-12-10 |  2022-10-12
-E | 0 | hello | Dec 10 2020 | Dec 10 2022
+T | 0 | hello
+E | 0 | read book | now | tomorrow
+T | 1 | hi
