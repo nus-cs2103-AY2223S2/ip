@@ -9,6 +9,9 @@ import duke.Times;
  * Event must have two time attribute
  */
 public class Event extends Task {
+    protected static final int EVENT = 5;
+    protected static final int FROM = 6; // /from/n = 6
+    protected static final int TO = 4; // /to/n = 4
     protected Times from;
     protected Times to;
     protected String type = "[E]";
@@ -40,9 +43,9 @@ public class Event extends Task {
             DukeException e = new TaskFormatException();
             throw e;
         }
-        String description = input.substring(6, index1 - 1);
-        String from = input.substring(index1 + 6, index2 - 1);
-        String to = input.substring(index2 + 4);
+        String description = input.substring(EVENT + 1, index1 - 1);
+        String from = input.substring(index1 + FROM, index2 - 1);
+        String to = input.substring(index2 + TO);
         Event temp = new Event(description, from, to);
         return temp;
     }

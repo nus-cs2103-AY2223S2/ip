@@ -20,6 +20,12 @@ public class Storage {
     protected Path path;
     protected File file;
 
+    /**
+     * Default Constructor of Storage
+     * Whenever duke is started, storage is initialized
+     * Thus this constructor will be invoked.
+     * It will delete the old file and create new file under /user/data/duke.txt
+     */
     public Storage() {
         path = Paths.get(home, "data", "duke.txt");
         try {

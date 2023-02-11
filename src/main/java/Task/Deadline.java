@@ -10,13 +10,17 @@ import duke.Times;
  */
 public class Deadline extends Task {
 
+    protected static final int DEADLINE = 8;
+    protected static final int BY = 4; // /by/n = 4
     protected Times ddline;
     protected String type = "[D]";
 
+
     /**
      * Constructor for Deadline
+     *
      * @param description -> Task description
-     * @param by -> String format of time deadline
+     * @param by          -> String format of time deadline
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -27,6 +31,7 @@ public class Deadline extends Task {
      * Adds new deadline task.
      * Format: "deadline {description} /by {time}
      * example: deadline return book /by 2019-10-15 1530
+     *
      * @param input Input Chat which starts with "deadline"
      * @throws DukeException if format of deadline task is wrong.
      */
@@ -36,10 +41,11 @@ public class Deadline extends Task {
             DukeException e = new TaskFormatException();
             throw e;
         }
-        String description = input.substring(9, ddlineIndex - 1);
-        String by = input.substring(ddlineIndex + 4);
+        String description = input.substring(DEADLINE + 1, ddlineIndex - 1);
+        String by = input.substring(ddlineIndex + BY);
         return new Deadline(description, by);
     }
+
     @Override
     public String toString() {
         return type + super.toString() + " (by: " + ddline + ")";

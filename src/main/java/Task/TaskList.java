@@ -88,7 +88,6 @@ public class TaskList {
     public String delete(int deleteIndex) {
         try {
             Task temp = list.remove(deleteIndex);
-            assert deleteIndex >= 0 && deleteIndex < list.size();
             s.update(list);
             return ui.showDelete(temp, list);
         } catch (IndexOutOfBoundsException E) {
