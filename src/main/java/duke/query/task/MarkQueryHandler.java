@@ -1,6 +1,7 @@
-package duke.query;
+package duke.query.task;
 
 import duke.DukeException;
+import duke.query.Query;
 import duke.task.Task;
 import duke.task.TaskTracker;
 

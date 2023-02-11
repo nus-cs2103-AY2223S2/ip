@@ -1,6 +1,8 @@
-package duke.query;
+package duke.query.task;
 
 import duke.DukeException;
+import duke.query.InvalidCommandParamException;
+import duke.query.Query;
 import duke.task.TaskTracker;
 
 /**

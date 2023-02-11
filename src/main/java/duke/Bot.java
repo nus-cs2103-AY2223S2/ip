@@ -1,20 +1,20 @@
 package duke;
 
-import duke.query.DeadlineQueryHandler;
-import duke.query.DeleteQueryHandler;
-import duke.query.EventQueryHandler;
-import duke.query.FindTaskQueryHandler;
+import duke.query.task.DeadlineQueryHandler;
+import duke.query.task.DeleteQueryHandler;
+import duke.query.task.EventQueryHandler;
+import duke.query.task.FindTaskQueryHandler;
 import duke.query.IQueryHandler;
-import duke.query.ListQueryHandler;
-import duke.query.MarkQueryHandler;
+import duke.query.task.ListQueryHandler;
+import duke.query.task.MarkQueryHandler;
 import duke.query.Query;
 import duke.query.QueryParser;
 import duke.query.QueryType;
 import duke.query.QueryTypeUtil;
 import duke.query.SimpleResponseQueryHandler;
-import duke.query.TodoQueryHandler;
+import duke.query.task.TodoQueryHandler;
 import duke.query.UnknownCommandException;
-import duke.query.UnmarkQueryHandler;
+import duke.query.task.UnmarkQueryHandler;
 import duke.task.TaskTracker;
 
 /**

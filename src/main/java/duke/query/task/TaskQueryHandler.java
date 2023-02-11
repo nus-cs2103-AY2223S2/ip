@@ -1,5 +1,6 @@
-package duke.query;
+package duke.query.task;
 
+import duke.query.IQueryHandler;
 import duke.task.TaskTracker;
 
 /**
