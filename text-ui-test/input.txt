@@ -38,6 +38,13 @@ list
 del0
 del0 -2
 del-2
+todo test one
+todo one
+todo test two
+list
+find test
+find test one
+find one
 clear
 asdf
 bye

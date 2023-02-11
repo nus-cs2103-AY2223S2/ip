@@ -17,6 +17,7 @@ public enum Views {
     DELETE_MANY_DONE_STRING("Noted. I've removed the following tasks:\n      "),
     TASK_COUNT_1_STRING("Now you have "),
     TASK_COUNT_2_STRING(" tasks in the list."),
+    LIST_STRING("Here are the tasks in your list:\n      "),
     FOUND_LIST_STRING("Here are the matching tasks in your list:\n      "),
     CANNOT_FIND_STRING("Hey, I can't find what you're searching for"),
     NO_INT_ERR_STRING("Hey, you did not enter any numbers"),

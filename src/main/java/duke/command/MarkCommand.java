@@ -74,7 +74,7 @@ public class MarkCommand extends Command {
         if (taskNumbers.length == 1) {
             int taskNum = taskNumbers[0];
             execute(tasks, storage, taskNum);
-            return ui.stringUnmarkDone(tasks, taskNum);
+            return ui.stringMarkDone(tasks, taskNum);
         } else {
             ArrayList<Task> printTasks = new ArrayList<>();
             for (int taskNum : taskNumbers) {

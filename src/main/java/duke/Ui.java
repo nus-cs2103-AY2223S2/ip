@@ -66,8 +66,8 @@ public class Ui {
      * @param tasks TaskList object to print the list
      * @throws DukeException
      */
-    public void showList(ArrayList<Task> tasks) throws DukeException {
-        printer(stringList(tasks));
+    public void showList(ArrayList<Task> tasks, boolean isQuery) throws DukeException {
+        printer(stringList(tasks, isQuery));
     }
 
     /**
@@ -78,7 +78,7 @@ public class Ui {
      * @throws DukeException when the task is not found in the list
      */
     public String stringList(TaskList tasks) throws DukeException {
-        return stringList(tasks.getList());
+        return stringList(tasks.getList(), false);
     }
 
     /**
@@ -88,8 +88,8 @@ public class Ui {
      * @return String representation of list of tasks
      * @throws DukeException when the task is not found in the list
      */
-    public String stringList(TaskList tasks, boolean isGui) throws DukeException {
-        return stringList(tasks.getList(), isGui);
+    public String stringList(TaskList tasks, boolean isGui, boolean isQuery) throws DukeException {
+        return stringList(tasks.getList(), isGui, isQuery);
     }
 
     /**
@@ -99,8 +99,8 @@ public class Ui {
      * @return String representation of list of tasks
      * @throws DukeException
      */
-    public String stringList(ArrayList<Task> tasks) throws DukeException {
-        return stringList(tasks, false);
+    public String stringList(ArrayList<Task> tasks, boolean isQuery) throws DukeException {
+        return stringList(tasks, false, isQuery);
     }
 
     /**
@@ -110,9 +110,15 @@ public class Ui {
      * @return String representation of list of tasks
      * @throws DukeException
      */
-    public String stringList(ArrayList<Task> tasks, boolean isGui) throws DukeException {
-        assert tasks.size() != 0 : Views.CANNOT_FIND_STRING.eng();
-        String returnString = Views.FOUND_LIST_STRING.eng();
+    public String stringList(ArrayList<Task> tasks, boolean isGui, boolean isQuery) throws DukeException {
+        // If Size == 0 && isQuery = throw error of cannot find
+        // Apply de morgan Size != 0 || !isQuery = !throw error of cannot find
+        assert tasks.size() != 0 || !isQuery : Views.CANNOT_FIND_STRING.eng();
+        assert tasks.size() != 0 : Views.EMPTY_LIST_STRING.eng();
+        String returnString = Views.LIST_STRING.eng();
+        if (isQuery) {
+            returnString = Views.FOUND_LIST_STRING.eng();
+        }
         if (isGui) {
             returnString = returnString.substring(0, returnString.length() - 6);
         }

@@ -16,6 +16,7 @@ public class FindCommand extends Command {
 
     /**
      * Creates Find Command
+     *
      * @param query string from user
      */
     public FindCommand(String query) {
@@ -32,7 +33,7 @@ public class FindCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> results = tasks.search(query.split(" "));
-        ui.showList(results);
+        ui.showList(results, true);
     }
 
     /**
@@ -46,7 +47,7 @@ public class FindCommand extends Command {
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> result = tasks.search(query);
-        return ui.stringList(result, true);
+        return ui.stringList(result, true, true);
     }
 
     /**
