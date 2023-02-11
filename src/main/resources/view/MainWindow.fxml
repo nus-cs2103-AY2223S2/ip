@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="MainWindow" minHeight="-Infinity"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="duke.components.MainWindow" minHeight="-Infinity"
             maxHeight="-Infinity" minWidth="-Infinity" maxWidth="-Infinity" prefHeight="600" prefWidth="400">
     <VBox>
         <ScrollPane fx:id="scrollPane" prefHeight="568">

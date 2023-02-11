@@ -1,3 +1,5 @@
+package duke.application;
+
 import java.nio.file.Path;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
@@ -20,7 +22,7 @@ public class Duke {
      * @param filePath The path to the {@code duke.txt} file. The Duke app will save the user's tasks
      *                 to {@code duke.txt} after every command, and load from it on startup.
      */
-    Duke(String filePath) {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
 

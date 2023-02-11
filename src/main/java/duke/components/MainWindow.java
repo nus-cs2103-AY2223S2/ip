@@ -1,4 +1,7 @@
+package duke.components;
+
 import java.nio.file.Path;
+import duke.application.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
