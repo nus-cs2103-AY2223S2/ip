@@ -37,6 +37,7 @@ public class AddCommand extends Command{
 
     @Override
     String toResultString() {
+        assert task != null : "Task should not be null";
         String opening = "I have added the following task:\n";
         String subject = task.toString();
         String closing = "Now you have " + taskList.getSize() + " tasks in the list";
