@@ -1,7 +1,9 @@
+import java.util.regex.PatternSyntaxException;
+
 public class Event extends Task {
     private String from;
     private String to;
-    public Event(String cmd) {
+    public Event(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         this(cmd.split(" /")[0],
                 cmd.split(" /")[1].replace("from ", ""),
                 cmd.split(" /")[2].replace("to ", ""));

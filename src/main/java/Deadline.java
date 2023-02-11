@@ -1,6 +1,8 @@
+import java.util.regex.PatternSyntaxException;
+
 public class Deadline extends Task {
     private String deadline;
-    public Deadline(String cmd) {
+    public Deadline(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         this(cmd.split(" /by")[0],
                 cmd.split(" /by")[1]);
     }

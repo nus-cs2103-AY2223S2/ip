@@ -1,8 +1,25 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.regex.PatternSyntaxException;
 
 public class Duke {
-    static final String BYE = "bye";
+    /**
+     * Minimum length of a string command is given by
+     * The length of the command +2 (for whitespace and
+     * at least 1 letter for the command)
+     */
+    static final HashMap<String, Integer> MINVALIDLENGTH = new HashMap<>(Map.of(
+            "todo", 6,
+            "deadline", 10,
+            "event", 7
+    ));
+    static final HashMap<String, String> CORRECTFORMAT = new HashMap<>(Map.of(
+            "todo", "todo THE TASK",
+            "deadline", "deadline THE TASK /by TIME",
+            "event", "event THE TASK /from TIME /to TIME"
+    ));
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println(greet());
@@ -10,7 +27,7 @@ public class Duke {
         ArrayList<Task> arr = new ArrayList<>();
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
-            if (cmd.equals(BYE)) {
+            if (cmd.equals("bye")) {
                 exit();
                 break;
             }
@@ -26,33 +43,82 @@ public class Duke {
                 printList(arr);
                 break;
             case "mark":
-                mark(words[1], arr);
+                print(mark(words[1], arr));
                 break;
             case "unmark":
-                unmark(words[1], arr);
+                print(unmark(words[1], arr));
                 break;
-            default:
+            default:    // for tasks
                 print(add(cmd, arr));
         }
-        /* if (words[0].equals("list")) {
-            printList(arr);
-        } else if (words[0].equals("mark")) {   //try catch if words have 2 elements
-            mark(words[1], arr);
-        } else if (words[0].equals("unmark")) { //try catch if words have 2 elements
-            unmark(words[1], arr);
-        } else {
-            print(add(cmd, arr));
-        }*/
     }
-    static void mark(String num, ArrayList<Task> arr) {     //try catch, possibility of error if user enter wrong cmd
-        int index = Integer.parseInt(num);
-        arr.get(index - 1).markAsDone();
-        print(String.format("Nice! I've marked this task as done: \n\t%s", arr.get(index - 1)));
+    static String add(String cmd, ArrayList<Task> arr) {
+        String[] words = cmd.split(" ");
+        String typeOfTask = words[0];
+
+        if (!MINVALIDLENGTH.containsKey(typeOfTask)) {
+            return errorMsg("I'm sorry, but I don't know what that means");
+        } else if (cmd.length() < MINVALIDLENGTH.get(typeOfTask)) {
+            return errorMsg(String.format(
+                    "The description of a %s cannot be empty.", typeOfTask));
+        }
+
+        try {
+            Task task = makeTask(typeOfTask, cmd);
+            //.replace(typeOfTask + " ", ""));
+            arr.add(task);
+            return String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", task, arr.size());
+        } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException wrongFormat) {
+            return errorMsg("Please enter the command in the correct format.") + "\n" + CORRECTFORMAT.get(typeOfTask);
+        }
     }
-    static void unmark(String num, ArrayList<Task> arr) {   //try catch, possibility of error if user enter wrong cmd
-        int index = Integer.parseInt(num);
-        arr.get(index - 1).unmarkAsDone();
-        print(String.format("Ok, I've marked this task as not done yet: \n\t%s", arr.get(index - 1)));
+    static Task makeTask(String name, String cmd) throws PatternSyntaxException {
+        Task task = new Task(cmd);
+        cmd = cmd.replace(name + " ", "");
+        switch (name) {
+            case "todo":
+                task = new ToDo(cmd);
+                break;
+            case "deadline":
+                task = new Deadline(cmd);
+                break;
+            case "event":
+                task = new Event(cmd);
+                break;
+        };
+        return task;
+    }
+    static String mark(String num, ArrayList<Task> arr) {     //try catch, possibility of error if user enter wrong cmd
+        if (arr.size() == 0) {
+            return errorMsg("You do not have any items in your list!");
+        }
+        try {
+            int index = Integer.parseInt(num) - 1;
+            arr.get(index).markAsDone();
+            return String.format("Nice! I've marked this task as done: \n\t%s", arr.get(index));
+        } catch (NumberFormatException notANumber) {
+            return errorMsg("Please enter a valid number");
+        } catch (IndexOutOfBoundsException badNumber) {
+            return errorMsg(String.format(
+                    "Please enter a number from 1 to %d",
+                    arr.size()));
+        }
+    }
+    static String unmark(String num, ArrayList<Task> arr) {   //try catch, possibility of error if user enter wrong cmd
+        if (arr.size() == 0) {
+            return errorMsg("You do not have any items in your list!");
+        }
+        try {
+            int index = Integer.parseInt(num) - 1;
+            arr.get(index).unmarkAsDone();
+            return String.format("Ok, I've marked this task as not done yet: \n\t%s", arr.get(index));
+        } catch (NumberFormatException notANumber) {
+            return errorMsg("Please enter a valid number");
+        } catch (IndexOutOfBoundsException badNumber) {
+            return errorMsg(String.format(
+                    "Please enter a number from 1 to %d",
+                    arr.size()));
+        }
     }
     static String ownName() {
         String name = " ____        _        \n"
@@ -63,33 +129,12 @@ public class Duke {
         return name;
     }
     static String greet() {
-        return String.format("Hello I am: \n%sWhat can I do for you?", ownName());
-    }
-    static String add(String cmd, ArrayList<Task> arr) {
-        String[] words = cmd.split(" ");
-        String typeOfTask = words[0];
-        Task task = new Task(cmd);
-        switch(typeOfTask) {
-            case "todo":
-                task = new ToDo(cmd.replace("todo ", ""));
-                break;
-            case "deadline":
-                task = new Deadline(cmd.replace("deadline ", ""));
-                break;
-            case "event":
-                task = new Event(cmd.replace("event ", ""));
-                break;
-        }
-        arr.add(task);
-        return String.format("Got it. I've added this task: \n\t\t%s \n\tNow you have %d tasks in the list.", task, arr.size());
+        return String.format("Hello I am:\n%sWhat can I do for you?", ownName());
     }
     static void printList(ArrayList<Task> arr) {
-        String str = "";
+        String str = "List:";
         for (int i = 0; i < arr.size(); i++) {
-            if (i != 0) {
-                str += "\n\t";
-            }
-            str += String.format("%d. %s", i+1, arr.get(i));
+            str += String.format("\n\t%d. %s", i+1, arr.get(i));
         }
         print(str);
     }
@@ -100,10 +145,12 @@ public class Duke {
      * Used to print out any reply with the correct formatting
      */
     static void print(String reply) {
-        String topBottom = "~~~~~~~~~~~~~~~~~~~~\n";
-        System.out.println(String.format("\t%s \t%s\n \t%s", topBottom, reply, topBottom));
+        String topBottom = "~~~~~~~~~~~~~~~~~~~~";
+        System.out.println(String.format("%s\n%s\n%s", topBottom, reply, topBottom));
     }
-
+    static String errorMsg(String error) {
+        return String.format("☹ OOPS!!! %s :-(", error);
+    }
     /**
      * Used in Level-1 to echo
      */

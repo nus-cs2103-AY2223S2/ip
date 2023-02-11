@@ -1,5 +1,7 @@
+import java.util.regex.PatternSyntaxException;
+
 public class ToDo extends Task {
-    public ToDo(String cmd) {
+    public ToDo(String cmd) throws PatternSyntaxException, ArrayIndexOutOfBoundsException {
         super(cmd);
     }
     /**

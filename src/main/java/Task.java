@@ -1,10 +1,13 @@
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
 /**
  * Task used to hold the string representation of tasks to be done
  */
 public class Task {
     private String task;
     private boolean isDone;
-    Task(String task) {
+    Task(String task) throws PatternSyntaxException {
         this(task, false);
     }
     Task(String task, boolean isDone) {
