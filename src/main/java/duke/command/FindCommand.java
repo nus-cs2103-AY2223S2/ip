@@ -10,7 +10,7 @@ public class FindCommand extends Command {
     public FindCommand(String textCmd) {
         super(textCmd);
     }
-
+    
     @Override
     public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         String[] commandSplit = textCmd.split(" ");
