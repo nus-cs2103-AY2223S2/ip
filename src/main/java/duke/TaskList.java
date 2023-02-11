@@ -26,6 +26,7 @@ public class TaskList {
      * @return Message of adding a new task.
      */
     public String addTask(Task task, boolean isLoad) {
+        assert task == null : "Task can't be null!";
         tasks.add(task);
         if (!isLoad) {
             return "Got it. I've added this task:\n"
@@ -88,9 +89,11 @@ public class TaskList {
     /**
      * Filters tasks with the given keyword.
      *
+     * @param keywords Keywords for searching matching tasks.
      * @return String of matching task(s).
      */
     public String findMatchingTasks(String... keywords) {
+        assert keywords.length <= 0 : "no input keywords to find!";
         StringBuilder tasksList = new StringBuilder("Here are the matching task(s): \n");
         int count = 1;
         for (Task task : tasks) {

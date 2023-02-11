@@ -42,69 +42,29 @@ public class Parser {
             selection = Actions.valueOf(commandArr[0].toUpperCase());
             switch (selection) {
             case LIST:
-                response = tasks.printList();
+                response = parsePrint();
                 break;
             case MARK:
-                Task t1 = tasks.getTask(Integer.parseInt(commandArr[1]) - 1);
-                response = t1.markDone();
-                break;
             case UNMARK:
-                Task t2 = tasks.getTask(Integer.parseInt(commandArr[1]) - 1);
-                response = t2.markNotDone();
+                response = parseMark(command);
                 break;
             case TODO:
-                if (commandArr.length < 2) {
-                    throw new DukeException("The description of a todo cannot be empty.");
-                }
-                Todo todo = new Todo(command.substring(5));
-                response = tasks.addTask(todo, false);
+                response = parseTodo(command);
                 break;
             case DEADLINE:
-                if (commandArr.length < 2) {
-                    throw new DukeException("The description of a deadline cannot be empty.");
-                }
-                String[] deadlineInfo = command.substring(9).split(" /by ");
-                if (deadlineInfo.length < 2) {
-                    throw new DukeException("Deadline cannot be empty.");
-                }
-                Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                response = tasks.addTask(deadline, false);
+                response = parseDeadline(command);
                 break;
             case EVENT:
-                if (commandArr.length < 2) {
-                    throw new DukeException("The description of a event cannot be empty.");
-                }
-                String[] eventInfo = command.substring(6).split(" /from ");
-                if (eventInfo.length < 2) {
-                    throw new DukeException("Event start time and end time are required.");
-                }
-                String[] eventTime = eventInfo[1].split(" /to ");
-                if (eventTime.length < 2) {
-                    throw new DukeException("Event start time and end time are required.");
-                }
-                Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
-                response = tasks.addTask(event, false);
+                response = parseEvent(command);
                 break;
             case DELETE:
-                if (commandArr.length < 2) {
-                    throw new DukeException("You must choose a task to delete");
-                }
-                int taskNumber = Integer.parseInt(commandArr[1]);
-                if (taskNumber > tasks.getSize() || taskNumber <= 0) {
-                    throw new DukeException("No such task found");
-                }
-                response = tasks.deleteTask(taskNumber - 1);
+                response = parseDelete(command);
                 break;
             case FIND:
-                if (commandArr.length < 2) {
-                    throw new DukeException("You must enter a keyword to find");
-                }
-                command = command.substring(5);
-                String[] keywords = command.split(" ");
-                response = tasks.findMatchingTasks(keywords);
+                response = parseFind(command);
                 break;
             case BYE:
-                response = "Bye bye!";
+                response = parseBye();
                 break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -116,6 +76,91 @@ public class Parser {
             return "Please enter a valid action!";
         }
         return response;
+    }
+
+    private String parsePrint() {
+        return tasks.printList();
+    }
+
+    private String parseMark(String command) {
+        String[] commandArr = command.split(" ");
+        Task task = tasks.getTask(Integer.parseInt(commandArr[1]) - 1);
+        if (Actions.valueOf(commandArr[0].toUpperCase()) == Actions.MARK) {
+            return task.markDone();
+        } else if (Actions.valueOf(commandArr[0].toUpperCase()) == Actions.UNMARK) {
+            return task.markNotDone();
+        } else {
+            return "Invalid action!";
+        }
+    }
+
+    private String parseTodo(String command) throws DukeException {
+        String[] commandArr = command.split(" ");
+        if (commandArr.length < 2) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+        Todo todo = new Todo(command.substring(5));
+        return tasks.addTask(todo, false);
+    }
+
+    private String parseDeadline(String command) throws DukeException {
+        String[] commandArr = command.split(" ");
+        if (commandArr.length < 2) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+
+        String[] deadlineInfo = command.substring(9).split(" /by ");
+        if (deadlineInfo.length < 2) {
+            throw new DukeException("Deadline cannot be empty.");
+        }
+        Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+        return tasks.addTask(deadline, false);
+    }
+
+    private String parseEvent(String command) throws DukeException {
+        String[] commandArr = command.split(" ");
+        if (commandArr.length < 2) {
+            throw new DukeException("The description of a event cannot be empty.");
+        }
+
+        String[] eventInfo = command.substring(6).split(" /from ");
+        if (eventInfo.length < 2) {
+            throw new DukeException("Event start time and end time are required.");
+        }
+
+        String[] eventTime = eventInfo[1].split(" /to ");
+        if (eventTime.length < 2) {
+            throw new DukeException("Event start time and end time are required.");
+        }
+
+        Event event = new Event(eventInfo[0], eventTime[0], eventTime[1]);
+        return tasks.addTask(event, false);
+    }
+
+    private String parseDelete(String command) throws DukeException {
+        String[] commandArr = command.split(" ");
+        if (commandArr.length < 2) {
+            throw new DukeException("You must choose a task to delete");
+        }
+        int taskNumber = Integer.parseInt(commandArr[1]);
+        if (taskNumber > tasks.getSize() || taskNumber <= 0) {
+            throw new DukeException("No such task found");
+        }
+        return tasks.deleteTask(taskNumber - 1);
+    }
+
+    private String parseFind(String command) throws DukeException {
+        String[] commandArr = command.split(" ");
+        if (commandArr.length < 2) {
+            throw new DukeException("You must enter a keyword to find");
+        }
+        command = command.substring(5);
+        String[] keywords = command.split(" ");
+        return tasks.findMatchingTasks(keywords);
+    }
+
+    private String parseBye() {
+        return "Bye bye!";
     }
 
     enum Actions { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE }
