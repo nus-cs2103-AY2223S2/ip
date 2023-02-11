@@ -87,6 +87,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDateTime getEndDate() {
+        return this.dateBy;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.by + ")";
     }

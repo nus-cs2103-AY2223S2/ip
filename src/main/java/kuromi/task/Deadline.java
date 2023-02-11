@@ -66,6 +66,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDateTime getEndDate() {
+        return this.date;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

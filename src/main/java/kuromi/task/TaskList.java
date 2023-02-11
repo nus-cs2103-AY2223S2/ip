@@ -3,6 +3,7 @@ package kuromi.task;
 import static java.util.stream.Collectors.toCollection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * List of tasks represented by an ArrayList of Tasks.
@@ -103,6 +104,27 @@ public class TaskList {
                 .filter((s) -> s.containsKeyword(keyword))
                 .collect(toCollection(ArrayList::new));
         return new TaskList(newTaskList);
+    }
+
+    private ArrayList<Task> deleteTodo() {
+        ArrayList<Task> newTaskList = this.tasks
+                .stream()
+                .filter((s) -> !s.getSymbol().equals("T"))
+                .collect(toCollection(ArrayList::new));
+        return newTaskList;
+    }
+
+    public TaskList getUpcomingTasks(int numberOfTasks) {
+        ArrayList<Task> filtered = new ArrayList<Task>(this.tasks);
+        Collections.sort(filtered);
+        ArrayList<Task> res = new ArrayList<Task>();
+        if (this.size() < numberOfTasks) {
+            numberOfTasks = this.size();
+        }
+        for (int i = 0; i < numberOfTasks; i++) {
+            res.add(filtered.get(i));
+        }
+        return new TaskList(res);
     }
 
     @Override

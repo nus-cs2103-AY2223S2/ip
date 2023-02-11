@@ -1,14 +1,6 @@
 package kuromi;
 
-import kuromi.command.AddCommand;
-import kuromi.command.Command;
-import kuromi.command.CommandType;
-import kuromi.command.DeleteCommand;
-import kuromi.command.ExitCommand;
-import kuromi.command.FindCommand;
-import kuromi.command.ListCommand;
-import kuromi.command.MarkCommand;
-import kuromi.command.UnmarkCommand;
+import kuromi.command.*;
 import kuromi.task.Deadline;
 import kuromi.task.Event;
 import kuromi.task.TaskList;
@@ -39,6 +31,8 @@ public class Parser {
                 return Parser.exitCommand();
             case list:
                 return Parser.listCommand();
+            case remind:
+                return Parser.remindCommand(temp);
             case find:
                 return Parser.findCommand(temp);
             case mark:
@@ -88,6 +82,14 @@ public class Parser {
 
     private static Command listCommand() {
         return new ListCommand();
+    }
+
+    private static Command remindCommand(String[] temp) {
+        if (temp.length == 1) {
+            return new RemindCommand(5);
+        }
+        int idx = Integer.parseInt(temp[1]);
+        return new RemindCommand(idx);
     }
     private static Command findCommand(String[] temp) throws KuromiException {
         String keyword = "";
