@@ -1,10 +1,10 @@
 package data;
 
-import core.exceptions.LoadException;
-import domain.entities.DataLoader;
-
 import java.io.File;
 import java.util.Scanner;
+
+import core.exceptions.LoadException;
+import domain.entities.DataLoader;
 
 /**
  * The implementation of the data loader, which will load the data from a file.

@@ -2,7 +2,11 @@ package presentation.controllers;
 
 import core.singletons.Singletons;
 import domain.entities.DataLoader;
-import domain.entities.core.*;
+import domain.entities.core.Commandable;
+import domain.entities.core.EventLoop;
+import domain.entities.core.NestedCommandableObject;
+import domain.entities.core.StringReadable;
+import domain.entities.core.Writable;
 import domain.usecases.ByeUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;

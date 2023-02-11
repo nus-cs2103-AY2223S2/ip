@@ -1,9 +1,9 @@
 package presentation.ui;
 
+import java.util.Scanner;
+
 import domain.entities.core.Disposable;
 import domain.entities.core.StringReadable;
-
-import java.util.Scanner;
 
 /**
  * The {@link StringReadable} wrapper for the {@link System#in} object.

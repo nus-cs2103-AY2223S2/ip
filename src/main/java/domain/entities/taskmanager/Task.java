@@ -1,14 +1,14 @@
 package domain.entities.taskmanager;
 
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.Set;
+
 import core.exceptions.InvalidArgumentException;
 import core.singletons.Singletons;
 import core.utils.Pair;
 import core.utils.TokenUtilities;
 import domain.entities.core.Serializable;
-
-import java.time.LocalDate;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This shall resemble a Task. The reason that no modifiers was added was
@@ -18,7 +18,7 @@ public abstract class Task implements Serializable {
     /**
      * The key for identifying if the object is marked as complete or not.
      */
-    protected static final String completeKey = "/complete";
+    protected static final String COMPLETE_KEY = "/complete";
     /**
      * The name of the list item.
      * <p>
@@ -46,8 +46,8 @@ public abstract class Task implements Serializable {
                     + "should not be null", tokens);
         }
         this.name = tmp.getLeft();
-        if (tmp.getRight().get(completeKey) != null) {
-            this.isComplete = tmp.getRight().get(completeKey).equals("true");
+        if (tmp.getRight().get(COMPLETE_KEY) != null) {
+            this.isComplete = tmp.getRight().get(COMPLETE_KEY).equals("true");
         } else {
             this.isComplete = false;
         }
@@ -95,7 +95,7 @@ public abstract class Task implements Serializable {
     @Override
     public String serialize() {
         if (isComplete) {
-            return name + " " + completeKey + " true";
+            return name + " " + COMPLETE_KEY + " true";
         } else {
             return name;
         }

@@ -1,6 +1,10 @@
 package domain.usecases;
 
-import domain.entities.core.*;
+import domain.entities.core.CommandRegisterable;
+import domain.entities.core.ExitStatus;
+import domain.entities.core.IdentifiedCommandable;
+import domain.entities.core.NestedCommandableObject;
+import domain.entities.core.Writable;
 
 /**
  * A {@link ByeUsecase} is a usecase that would terminate the program. It can

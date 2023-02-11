@@ -1,13 +1,13 @@
 package domain.entities.core;
 
-import core.exceptions.DisposableException;
-import core.singletons.Singletons;
-import core.utils.TokenUtilities;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import core.exceptions.DisposableException;
+import core.singletons.Singletons;
+import core.utils.TokenUtilities;
 
 /**
  * This class shall contain several executable objects, hence it shall be

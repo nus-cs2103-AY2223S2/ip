@@ -18,7 +18,7 @@ public class MainWindow extends AnchorPane implements Writable {
     final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    DukeEventLoop dukeEventLoop;
+    private DukeEventLoop dukeEventLoop;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -51,8 +51,7 @@ public class MainWindow extends AnchorPane implements Writable {
 
     @Override
     public void writeln(Object content) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog
-                (content.toString(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(content.toString(), dukeImage));
     }
 
     @Override

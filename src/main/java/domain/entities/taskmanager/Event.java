@@ -1,15 +1,15 @@
 package domain.entities.taskmanager;
 
-import core.exceptions.InvalidArgumentException;
-import core.singletons.Singletons;
-import core.utils.Pair;
-import core.utils.TokenUtilities;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.Set;
+
+import core.exceptions.InvalidArgumentException;
+import core.singletons.Singletons;
+import core.utils.Pair;
+import core.utils.TokenUtilities;
 
 /**
  * An Event is a Task with a starting time and a ending time.
@@ -27,7 +27,7 @@ public class Event extends Task {
      * The set for retrieval of the values from the Token Utils
      */
     private static final Set<String> delims = Set.of(startAtKey, endAtKey,
-            Task.completeKey);
+            Task.COMPLETE_KEY);
     private final LocalDate startAt;
     private final LocalDate endAt;
 

@@ -1,8 +1,8 @@
 package domain.entities.taskmanager;
 
-import core.exceptions.InvalidArgumentException;
-
 import java.util.Set;
+
+import core.exceptions.InvalidArgumentException;
 
 /**
  * A {@link ToDo} is just a very boring task.
@@ -17,7 +17,7 @@ public class ToDo extends Task {
      *                                  valid, it has to have a name.
      */
     public ToDo(String[] tokens) throws InvalidArgumentException {
-        super(tokens, Set.of(Task.completeKey));
+        super(tokens, Set.of(Task.COMPLETE_KEY));
     }
 
     @Override
