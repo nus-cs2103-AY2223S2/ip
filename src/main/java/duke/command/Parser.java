@@ -59,7 +59,7 @@ public class Parser {
             return new Command("event", taskName, from, to);
 
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :(((");
         }
     }
 }

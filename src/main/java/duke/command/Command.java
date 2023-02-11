@@ -168,10 +168,10 @@ public class Command {
             tasks.add(event);
             storage.saveTasks(tasks);
             return "Got it. I've added this task: " + event +
-                    "\now you have " + tasks.getSize() + " tasks in the list.";
+                    "\nNow you have " + tasks.getSize() + " tasks in the list.";
 
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
     }
 

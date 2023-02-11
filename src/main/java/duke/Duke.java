@@ -42,6 +42,6 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println("Unrecognized command");
         }
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!! I'm sorry, but I don't know what that means :(((((";
     }
 }

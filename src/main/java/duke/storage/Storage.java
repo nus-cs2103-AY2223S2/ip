@@ -56,35 +56,39 @@ public class Storage {
     public ArrayList<Task> load() throws IOException {
         File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<>();
-        if (file.exists()) {
-            try {
-                FileInputStream fis = new FileInputStream(this.filePath);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                Object o;
-                while (true) {
-                    try {
-                        o = ois.readObject();
-                        if (o instanceof Task) {
-                            tasks.add((Task) o);
-                        } else {
-                            System.out.println("Object is not a task");
-                        }
-                    } catch (EOFException e) {
-                        System.out.println("what happened");
-                        break;
-                    }
-                }
-                ois.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 System.out.println("Unable to create new file");
             }
+        } else {
+            try {
+                FileInputStream fis = new FileInputStream(this.filePath);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                readTasks(tasks, ois);
+                ois.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return tasks;
+    }
+
+    private void readTasks(ArrayList<Task> tasks, ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        Object o;
+        while (true) {
+            try {
+                o = ois.readObject();
+                if (o instanceof Task) {
+                    tasks.add((Task) o);
+                } else {
+                    System.out.println("Object is not a task");
+                }
+            } catch (EOFException e) {
+                System.out.println("read tasks");
+                break;
+            }
+        }
     }
 }
