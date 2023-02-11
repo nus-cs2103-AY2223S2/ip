@@ -44,6 +44,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if (response == "Undid last command") {
+            int length = dialogContainer.getChildren().size();
+            dialogContainer.getChildren().remove(length - 2, length);
+        }
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();

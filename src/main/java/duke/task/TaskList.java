@@ -20,6 +20,15 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
+     * Constructs the task list given another tasklist.
+     *
+     * @param other The other task list.
+     */
+    public TaskList(TaskList other) {
+        super(other);
+    }
+
+    /**
      * Returns a sorted copy of this tasklist.
      *
      * @return A sorted copy of this tasklist.
@@ -115,5 +124,10 @@ public class TaskList extends ArrayList<Task> {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please enter a number between 1 and " + size());
         }
+    }
+
+    public void setState(TaskList tasks) {
+        clear();
+        addAll(tasks);
     }
 }

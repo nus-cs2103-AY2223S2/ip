@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.History;
 import duke.task.TaskList;
 import duke.ui.Gui;
 import duke.ui.Ui;
@@ -21,12 +22,14 @@ public class Duke {
     private Ui ui;
     private Storage store;
     private Gui gui;
+    private History history;
 
     /**
      * Constructs Duke.
      */
     public Duke() {
         ui = Ui.getInstance();
+        history = History.getInstance();
         try {
             store = new Storage("src/main/resources/duke.txt");
             tasks = store.loadFromFile();
@@ -42,6 +45,7 @@ public class Duke {
      *
      * @param args There are no options available for now.
      */
+    @Deprecated
     public static void main(String[] args) {
         new Duke().run();
     }
@@ -49,6 +53,7 @@ public class Duke {
     /**
      * Runs Duke as a CLI chatbot.
      */
+    @Deprecated
     public void run() {
         ui.greet();
         boolean isExit = false;
@@ -57,6 +62,7 @@ public class Duke {
                 String command = ui.getCommand();
                 Command c = Parser.parseCommand(command);
                 c.execute(tasks, ui, store);
+                history.addState(tasks);
                 isExit = c.canExit();
             } catch (DukeException e) {
                 ui.produceExceptionOutput(e.getMessage());
@@ -76,6 +82,9 @@ public class Duke {
             String command = gui.getCommand();
             Command c = Parser.parseCommand(command);
             String response = c.execute(tasks, gui, store);
+            if (response != "Undid last command") {
+                history.addState(tasks);
+            }
 
             // from https://stackoverflow.com/questions/21974415
             if (c.canExit()) {
@@ -85,8 +94,7 @@ public class Duke {
                     }
                 }, 1300); // 1.3s
             }
-            assert response != null : "Response should not be null";
-            assert response != "" : "Response should not be empty";
+
             return response;
         } catch (DukeException e) {
             return gui.produceExceptionOutput(e.getMessage());

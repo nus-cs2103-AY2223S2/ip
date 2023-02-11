@@ -9,6 +9,7 @@ import duke.task.TaskList;
 /**
  * The Ui class represents Duke's command line user interface handles input and output.
  */
+@Deprecated
 public class Ui implements IoHandler {
     private static Ui instanceUi = new Ui();
     private Scanner sc;

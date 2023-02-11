@@ -37,6 +37,8 @@ public class Parser {
             return new AddEventCommand();
         case DELETE:
             return new DeleteCommand();
+        case UNDO:
+            return new UndoCommand();
         case BYE:
             return new ExitCommand();
         default:
