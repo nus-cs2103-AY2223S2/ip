@@ -28,7 +28,7 @@ public class TaskList {
      * @param userCommand The user command that contains the task description.
      * @throws DukeException If the task description is missing.
      */
-    public void addToDo(String userCommand) throws DukeException {
+    public String addToDo(String userCommand) throws DukeException {
 
         String[] userCommandParts = userCommand.split(" ", 2);
         if (userCommandParts.length < 2) {
@@ -38,7 +38,7 @@ public class TaskList {
         String taskDescription = userCommandParts[1].trim();
         ToDo toDo = new ToDo(taskDescription);
         TASKS.add(toDo);
-        System.out.println("Got it. I've added this task:\n\t" + toDo
+        return ("Got it. I've added this task:\n\t" + toDo
                 + "\nNow you have " + TASKS.size() + " task(s) in the list.");
     }
 
@@ -49,7 +49,7 @@ public class TaskList {
      *                    and the due-date.
      * @throws DukeException If the command has an invalid format.
      */
-    public void addDeadline(String userCommand) throws DukeException {
+    public String addDeadline(String userCommand) throws DukeException {
 
         String[] userCommandParts = userCommand.split(" /by", 2);
         String description = userCommandParts[0].replace("deadline", "").trim();
@@ -71,7 +71,7 @@ public class TaskList {
         Deadline deadline = new Deadline(description, dueDate);
         TASKS.add(deadline);
 
-        System.out.println("Got it. I've added this task:\n\t" + deadline
+        return ("Got it. I've added this task:\n\t" + deadline
                 + "\nNow you have " + TASKS.size() + " task(s) in the list.");
     }
 
@@ -82,7 +82,7 @@ public class TaskList {
      *                    the start date-time, and the end date-time.
      * @throws DukeException If the command has an invalid format.
      */
-    public void addEvent(String userCommand) throws DukeException {
+    public String addEvent(String userCommand) throws DukeException {
 
         String[] userCommandParts = userCommand.split(" /from", 2);
         String description = userCommandParts[0].replace("event", "").trim();
@@ -116,7 +116,7 @@ public class TaskList {
         Event event = new Event(description, startDateTime, endDateTime);
         TASKS.add(event);
 
-        System.out.println("Got it. I've added this task:\n\t" + event
+        return ("Got it. I've added this task:\n\t" + event
                 + "\nNow you have " + TASKS.size() + " task(s) in the list.");
     }
 
@@ -124,15 +124,23 @@ public class TaskList {
      * Prints the tasks in the TaskList according to
      * their string representation in an ordered list.
      */
-    public void printTaskList() {
+    public String printTaskList() {
+
+        StringBuilder result = new StringBuilder();
+
         if (TASKS.size() == 0) {
-            System.out.println("There are no tasks in your Task List!");
+            result.append("There are no tasks in your Task List!");
         } else {
-            System.out.println("Your Tasks:");
+            result.append("Your Tasks:\n");
             for (int i = 0; i < TASKS.size(); i++) {
-                System.out.println((i + 1) + ". " + TASKS.get(i));
+                result.append(i + 1)
+                        .append(". ")
+                        .append(TASKS.get(i))
+                        .append("\n");
             }
         }
+
+        return result.toString();
     }
 
     /**
@@ -142,7 +150,7 @@ public class TaskList {
      *                    of the task in the TaskList to be marked as done.
      * @throws DukeException If the given index is out of bounds or invalid.
      */
-    public void markTask(String userCommand) throws DukeException {
+    public String markTask(String userCommand) throws DukeException {
         try {
             String[] userCommandParts = userCommand.split(" ");
             if (userCommandParts.length != 2) {
@@ -153,12 +161,12 @@ public class TaskList {
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
             if (TASKS.size() == 0) {
-                System.out.println("There are no tasks in your Task List!");
+                return "There are no tasks in your Task List!";
 
             } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
                 Task task = TASKS.get(taskIndex);
                 task.setDone();
-                System.out.println("Task marked as completed\n" + task);
+                return ("Task marked as completed\n" + task);
 
             } else {
                 throw new DukeInvalidArgumentException("Please provide a valid Task number\n"
@@ -177,7 +185,7 @@ public class TaskList {
      *                    of the task in the TaskList to be marked as not done.
      * @throws DukeException If the given index is out of bounds or invalid.
      */
-    public void unmarkTask(String userCommand) throws DukeException {
+    public String unmarkTask(String userCommand) throws DukeException {
         try {
             String[] userCommandParts = userCommand.split(" ");
             if (userCommandParts.length != 2) {
@@ -188,12 +196,12 @@ public class TaskList {
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
             if (TASKS.size() == 0) {
-                System.out.println("There are no tasks in your Task List!");
+                return "There are no tasks in your Task List!";
 
             } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
                 Task task = TASKS.get(taskIndex);
                 task.setNotDone();
-                System.out.println("Task marked as not completed\n" + task);
+                return ("Task marked as not completed\n" + task);
 
             } else {
                 throw new DukeInvalidArgumentException("Please provide a valid Task number\n"
@@ -213,7 +221,7 @@ public class TaskList {
      *                    of the task in the TaskList to be deleted.
      * @throws DukeException If the given index is out of bounds or invalid.
      */
-    public void deleteTask(String userCommand) throws DukeException {
+    public String deleteTask(String userCommand) throws DukeException {
         try {
             String[] userCommandParts = userCommand.split(" ");
             if (userCommandParts.length != 2) {
@@ -224,12 +232,12 @@ public class TaskList {
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
             if (TASKS.size() == 0) {
-                System.out.println("There are no tasks in your Task List!");
+                return "There are no tasks in your Task List!";
             } else if (0 <= taskIndex && taskIndex < TASKS.size()) {
                 Task task = TASKS.get(taskIndex);
                 TASKS.remove(taskIndex);
 
-                System.out.println("Noted. I've deleted this task:\n\t" + task
+                return ("Noted. I've deleted this task:\n\t" + task
                         + "\nNow you have " + TASKS.size() + " task(s) in the list.");
             } else {
                 throw new DukeInvalidArgumentException("Please provide a valid Task number\n"
@@ -250,7 +258,7 @@ public class TaskList {
         return TASKS;
     }
 
-    public void findTask(String userCommand) throws DukeException {
+    public String findTask(String userCommand) throws DukeException {
         String[] userCommandParts = userCommand.split(" ", 2);
         if (userCommandParts.length != 2) {
             throw new DukeInvalidArgumentException("Please enter search keyword");
@@ -266,12 +274,16 @@ public class TaskList {
         }
 
         if (results.size() == 0) {
-            System.out.println("No search results for \"" + keyword + "\" :(");
+            return ("No search results for \"" + keyword + "\" :(");
         } else {
-            System.out.println("Search results for \"" + keyword + "\":");
+            StringBuilder result = new StringBuilder("Search results for \"" + keyword + "\":\n");
             for (int i = 0; i < results.size(); i++) {
-                System.out.println((i + 1) + ". " + results.get(i));
+                result.append(i + 1)
+                        .append(". ")
+                        .append(results.get(i))
+                        .append("\n");
             }
+            return result.toString();
         }
     }
 }

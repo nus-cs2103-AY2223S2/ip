@@ -62,11 +62,9 @@ public class Storage {
     public ArrayList<Task> loadTaskList() {
         try {
             if (!Files.exists(DATA_PATH)) {
-                System.out.println("Creating data folder . . .");
                 Files.createDirectories(DATA_PATH);
             }
             if (!Files.exists(TASK_LIST_PATH)) {
-                System.out.println("Creating task list file . . .");
                 Files.createFile(TASK_LIST_PATH);
             }
             return parseTaskList();
@@ -80,7 +78,7 @@ public class Storage {
         return new ArrayList<>();
     }
 
-    public void storeTaskList(ArrayList<Task> taskList) {
+    public void storeTaskList(ArrayList<Task> taskList) throws DukeStorageException {
         try {
             BufferedWriter bufferedWriter = Files.newBufferedWriter(TASK_LIST_PATH);
             for (Task task : taskList) {
@@ -91,7 +89,7 @@ public class Storage {
             bufferedWriter.close();
 
         } catch (IOException e) {
-            System.out.println("File Error: " + e.getMessage());
+            throw new DukeStorageException("File Error: " + e.getMessage());
         }
     }
 }

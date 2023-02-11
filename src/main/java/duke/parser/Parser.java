@@ -43,47 +43,48 @@ public class Parser {
      * @throws DukeException If the user's command is invalid or an error occurs
      * while processing the task list
      */
-    public static void processCommand(String userCommand, Storage storage, TaskList tasks) throws DukeException {
+    public static String processCommand(String userCommand, Storage storage, TaskList tasks) throws DukeException {
 
         if (userCommand.isEmpty()) {
             throw new DukeInvalidCommandException("Please enter a command");
         }
 
         String command = userCommand.split(" ", 2)[0];
+        String response;
 
         // Single word commands
         if (userCommand.equals("list")) {
-            tasks.printTaskList();
-            return;
+            return tasks.printTaskList();
         }
 
         // Multi-word commands
         switch (command) {
             case "todo":
-                tasks.addToDo(userCommand);
+                response = tasks.addToDo(userCommand);
                 break;
             case "deadline":
-                tasks.addDeadline(userCommand);
+                response = tasks.addDeadline(userCommand);
                 break;
             case "event":
-                tasks.addEvent(userCommand);
+                response = tasks.addEvent(userCommand);
                 break;
             case "mark":
-                tasks.markTask(userCommand);
+                response = tasks.markTask(userCommand);
                 break;
             case "unmark":
-                tasks.unmarkTask(userCommand);
+                response = tasks.unmarkTask(userCommand);
                 break;
             case "delete":
-                tasks.deleteTask(userCommand);
+                response = tasks.deleteTask(userCommand);
                 break;
             case "find":
-                tasks.findTask(userCommand);
+                response = tasks.findTask(userCommand);
                 break;
             default:
                 throw new DukeInvalidCommandException("beep...boop... unrecognized command!");
         }
 
         storage.storeTaskList(tasks.getTaskList());
+        return response;
     }
 }
