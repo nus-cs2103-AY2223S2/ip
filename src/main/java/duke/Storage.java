@@ -28,6 +28,8 @@ public class Storage {
      * @param dirPath Directory path of where txt file is put into.
      */
     public Storage(String filePath, String dirPath) {
+        assert !filePath.isEmpty() : "filePath should not be empty";
+        assert !dirPath.isEmpty() : "dirPath should not be empty";
         this.filePath = filePath;
         this.dirPath = dirPath;
 
