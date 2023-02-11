@@ -3,11 +3,6 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.Scanner;
-
-import gui.DialogBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import storage.Storage;
 import parser.Parser;
 import tasklist.TaskList;
@@ -23,6 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
+import gui.DialogBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Duke {
 
