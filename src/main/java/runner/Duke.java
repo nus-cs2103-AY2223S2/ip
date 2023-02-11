@@ -4,7 +4,6 @@ package runner;
  * Class for Duke.
  */
 public class Duke {
-    protected int exit;
     protected final Storage storage;
     protected final TaskList taskList;
 
