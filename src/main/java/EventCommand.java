@@ -1,14 +1,24 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class EventCommand extends Command {
 
     private final String name;
-    private final String from;
-    private final String until;
+    private final LocalDateTime from;
+    private final LocalDateTime until;
 
-    public EventCommand(String name, String from, String until) {
+    public EventCommand(String name, String from, String until) throws InvalidArgumentsException {
         this.name = name;
-        this.from = from;
-        this.until = until;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.from = LocalDateTime.parse(from.trim(), formatter);
+            this.until = LocalDateTime.parse(until.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentsException();
+        }
     }
+
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) {
         Event ev = new Event(name, from, until);

@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public abstract class Task {
     protected String name;
     protected boolean isDone;
@@ -21,10 +23,13 @@ public abstract class Task {
                 task = new ToDo(tokens[2]);
                 break;
             case "[D]":
-                task = new Deadline(tokens[2], tokens[3]);
+                LocalDateTime deadline = LocalDateTime.parse(tokens[3]);
+                task = new Deadline(tokens[2], deadline);
                 break;
             case "[E]":
-                task = new Event(tokens[2], tokens[3], tokens[4]);
+                LocalDateTime from = LocalDateTime.parse(tokens[3]);
+                LocalDateTime until = LocalDateTime.parse(tokens[4]);
+                task = new Event(tokens[2], from, until);
                 break;
         }
 

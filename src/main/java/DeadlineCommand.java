@@ -1,11 +1,20 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class DeadlineCommand extends Command {
 
     private final String name;
-    private final String deadline;
+    private LocalDateTime deadline;
 
-    public DeadlineCommand(String name, String deadline) {
+    public DeadlineCommand(String name, String deadline) throws InvalidArgumentsException {
         this.name = name;
-        this.deadline = deadline;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentsException();
+        }
     }
 
     @Override
@@ -14,5 +23,4 @@ public class DeadlineCommand extends Command {
         ui.showConfirmation(tasks.addTask(dl));
         storage.saveToFile(tasks.tasks);
     }
-
 }

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Parser {
     public Command parseCommand(String command) throws DukeException {
         String[] tokens = command.split(" ", 2);
@@ -30,7 +32,7 @@ public class Parser {
     }
 
     public Command handleMultiInput(String command, String details) throws IncorrectArgumentsException,
-            InvalidInputException {
+            InvalidInputException, InvalidArgumentsException {
         switch (command) {
             case "bye":
             case "list":
@@ -47,7 +49,7 @@ public class Parser {
             case "todo":
                 return new ToDoCommand(details);
             case "deadline":
-                String[] deadlineTokens = details.split("/");
+                String[] deadlineTokens = details.split("/by");
                 if (deadlineTokens.length != 2) {
                     throw new IncorrectArgumentsException("deadline", 2, deadlineTokens.length);
                 }
@@ -55,13 +57,17 @@ public class Parser {
                 String DLdueTime = deadlineTokens[1];
                 return new DeadlineCommand(DLtaskName, DLdueTime);
             case "event":
-                String[] eventTokens = details.split("/");
-                if (eventTokens.length != 3) {
-                    throw new IncorrectArgumentsException("event", 3, eventTokens.length);
+                String[] eventTokens = details.split("/from");
+                if (eventTokens.length != 2) {
+                    throw new IncorrectArgumentsException("event", 3, eventTokens.length + 1);
+                }
+                String[] eventTokens1 = eventTokens[1].split("/to");
+                if (eventTokens1.length != 2) {
+                    throw new IncorrectArgumentsException("event", 3, eventTokens.length + eventTokens1.length - 1);
                 }
                 String EtaskName = eventTokens[0];
-                String EstartTime = eventTokens[1];
-                String EendTime = eventTokens[2];
+                String EstartTime = eventTokens1[0];
+                String EendTime = eventTokens1[1];
                 return new EventCommand(EtaskName, EstartTime, EendTime);
             default:
                 throw new InvalidInputException(command);

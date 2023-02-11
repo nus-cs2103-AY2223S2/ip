@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String from;
-    protected String until;
+    protected LocalDateTime from;
+    protected LocalDateTime until;
 
-    public Event(String name, String from, String until) {
+    public Event(String name, LocalDateTime from, LocalDateTime until) {
         super(name);
         this.from = from;
         this.until = until;
@@ -22,8 +25,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String[] strArr = from.split(" ", 2);
-        String[] strArr2 = until.split(" ", 2);
-        return name + " (" + strArr[0] + ":" + " " + strArr[1] + " " + strArr2[0] + ":" + " " + strArr2[1] + ")";
+        return name + " (from: " + this.from.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                + " to: " + this.until .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
     }
 }
