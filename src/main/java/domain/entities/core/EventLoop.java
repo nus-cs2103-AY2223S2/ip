@@ -31,29 +31,30 @@ public abstract class EventLoop implements Disposable {
     }
 
     /**
-     * The function for getting the tokens for each loop iteration.
+     * Returns the tokens from the string.
      *
-     * @return the array of tokens.
+     * @param string the string to get the tokens from.
      */
-    private String[] getTokens() {
-        return reader.nextLine().trim().split(" ");
+    public static String[] getTokens(String string) {
+        return string.trim().split(" ");
     }
 
     /**
      * The function that starts the event loop.
      */
     public void run() {
-        ExitStatus status = ExitStatus.continueExecute;
-        while (true) {
-            if (!reader.hasNextLine()) {
-                break;
-            }
-            status = rootCommandable.execute(getTokens());
+        while (reader.hasNextLine()) {
+            String command = reader.nextLine();
+            ExitStatus status = rootCommandable.execute(getTokens(command));
             if (status == ExitStatus.terminate) {
                 break;
             }
         }
         dispose();
+    }
+
+    public ExitStatus runWithCommand(String command) {
+        return rootCommandable.execute(getTokens(command));
     }
 
     @Override

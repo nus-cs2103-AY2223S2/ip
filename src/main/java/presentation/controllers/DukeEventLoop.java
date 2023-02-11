@@ -6,10 +6,8 @@ import domain.entities.core.*;
 import domain.usecases.ByeUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;
-import presentation.ui.DummyWritable;
 import presentation.ui.SystemErr;
 import presentation.ui.SystemIn;
-import presentation.ui.SystemOut;
 
 /**
  * The event loop for managing Duke.
@@ -17,7 +15,7 @@ import presentation.ui.SystemOut;
  * To initialize and facilitate reading data from persistence, use the {@link
  * #createInitializingLoop()} method.
  * <p>
- * To create the actual main event loop, use the {@link #createEventLoop()}
+ * To create the actual main event loop, use the {@link #createEventLoop(Writable)} ()}
  * method.
  */
 public class DukeEventLoop extends EventLoop {
@@ -40,26 +38,24 @@ public class DukeEventLoop extends EventLoop {
      *
      * @return the main event loop for Duke.
      */
-    public static DukeEventLoop createEventLoop() {
+    public static DukeEventLoop createEventLoop(Writable target) {
         // creates a new system in instance. We want to make sure that
         // the scanner is not closed for each event loop, because scanners
         // are managed by the event loops.
         final StringReadable reader = new SystemIn();
-        Writable errorWriter = Singletons.get(SystemErr.class);
         final NestedCommandableObject executable =
-                new NestedCommandableObject(errorWriter);
+                new NestedCommandableObject(target);
         final ByeUsecase bye = Singletons.get(ByeUsecase.class);
         bye.register(executable);
         final TaskManagerUsecase manager =
                 Singletons.get(TaskManagerUsecase.class);
-        manager.redirectOutput(Singletons.get(SystemOut.class));
+        manager.redirectOutput(target);
+        manager.redirectErrorOutput(target);
         manager.register(executable);
         final UnknownCommandUsecase unknown =
                 Singletons.get(UnknownCommandUsecase.class);
         unknown.register(executable);
-        final NestedCommandableObject rootExecutable =
-                new NestedCommandableObject(errorWriter);
-        return new DukeEventLoop(executable, reader, errorWriter);
+        return new DukeEventLoop(executable, reader, target);
     }
 
     /**
@@ -74,7 +70,7 @@ public class DukeEventLoop extends EventLoop {
                 new NestedCommandableObject(errorWriter);
         final TaskManagerUsecase manager =
                 Singletons.get(TaskManagerUsecase.class);
-        manager.redirectOutput(Singletons.get(DummyWritable.class));
+        manager.redirectOutput(Singletons.get(SystemErr.class));
         manager.registerReader(executable);
         return new DukeEventLoop(executable, readable, errorWriter);
     }
