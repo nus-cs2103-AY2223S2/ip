@@ -23,7 +23,7 @@ public class Event extends Task {
         this.to = to;
     }
 
-    public void Update(UpdateType type, String newValue) throws DukeException {
+    public void update(UpdateType type, String newValue) throws DukeException {
         if(type == UpdateType.by) {
             throw new DukeException("/by does not exist in Event Object.");
         }

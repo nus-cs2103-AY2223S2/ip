@@ -17,7 +17,7 @@ public class ToDo extends Task {
         super(name);
     }
 
-    public void Update(UpdateType type, String newValue) throws DukeException {
+    public void update(UpdateType type, String newValue) throws DukeException {
         if(type != UpdateType.name) {
             throw new DukeException("/by, /from, /to does not exist in ToDo Object.");
         }

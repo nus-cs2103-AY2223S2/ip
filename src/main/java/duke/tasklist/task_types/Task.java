@@ -49,5 +49,5 @@ public abstract class Task implements Serializable {
         return String.format("[%s] %s", this.isMarked ? "X" : " ", this.name);
     }
 
-    public abstract void Update(UpdateType type, String newValue) throws DukeException;
+    public abstract void update(UpdateType type, String newValue) throws DukeException;
 }

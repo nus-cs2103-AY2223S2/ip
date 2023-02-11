@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import duke.duke_exception.DukeException;
 import duke.tasklist.task_types.Task;
+import duke.utility.enums.UpdateType;
 
 /**
  * Represents a <code>TaskList</code> object that holds an ArrayList of Tasks together with CRUD
@@ -133,6 +134,17 @@ public class TaskList implements Serializable {
                 .collect(Collectors.toList()));
         message += filteredTasks.toString();
         return message;
+    }
+
+    public String update(int index, UpdateType type, String newValue) throws DukeException {
+        try {
+            String message = "";
+            tasks.get(index).update(type, newValue);
+            message += "Updated Task: \n" + this.getTask(index).toString() + "\n";
+            return message;
+        } catch (IndexOutOfBoundsException e) {
+            throw invalidIndex;
+        }
     }
 
 

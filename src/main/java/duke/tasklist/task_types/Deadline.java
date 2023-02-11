@@ -29,7 +29,7 @@ public class Deadline extends Task {
 
     }
 
-    public void Update(UpdateType type, String newValue) throws DukeException {
+    public void update(UpdateType type, String newValue) throws DukeException {
         if(type == UpdateType.from || type == UpdateType.to) {
             throw new DukeException("/from and /to does not exist in Deadline Object.");
         }
