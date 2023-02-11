@@ -34,7 +34,7 @@ public class ToDoTest {
             Parser.readCommand("mark 1", list);
 
             Task deadline = new Deadline("test", "2020-04-12");
-            deadline.setStatus(true);
+            deadline.setMarked(true);
 
             assertEquals(list.getTask(0).toString(), deadline.toString());
         } catch (DukeException e) {
