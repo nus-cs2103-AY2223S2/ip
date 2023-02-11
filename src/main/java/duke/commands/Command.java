@@ -1,9 +1,9 @@
 package duke.commands;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import duke.Duke;
-import duke.main.Ui;
 
 /**
  * Class representing a command that Duke can execute. Override
@@ -42,8 +42,20 @@ public abstract class Command implements BiConsumer<String[], Duke> {
      */
     private final String label;
 
-    public Command(String label) {
+    private Consumer<String> outputFunc;
+
+    public Command setOutputFunc(Consumer<String> outputFunc) {
+        this.outputFunc = outputFunc;
+        return this;
+    }
+
+    public Command(String label, Consumer<String> outputFunc) {
         this.label = label;
+        this.outputFunc = outputFunc;
+    }
+
+    public Command(String label) {
+        this(label, System.out::println);
     }
 
     /**
@@ -51,8 +63,8 @@ public abstract class Command implements BiConsumer<String[], Duke> {
      * @param str String to output
      */
     protected void output(String str) {
-        Ui.print(str);
-    } 
+        outputFunc.accept(str);
+    }
 
     /**
      * Format the given string using the given arguments, and then send it to the output function

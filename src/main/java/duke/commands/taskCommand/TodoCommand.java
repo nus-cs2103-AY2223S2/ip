@@ -11,7 +11,7 @@ public class TodoCommand extends TaskCommand<ToDo> {
 
     @Override
     protected ToDo getTask(String[] args, Duke instance) throws ValidationException {
-        validate(args.length == 1, "Expected a task!");
+        validate(args.length > 1, "Expected a task!");
 
         String taskStr = Utils.stringJoiner(args, 1, args.length);
         return new ToDo(taskStr);

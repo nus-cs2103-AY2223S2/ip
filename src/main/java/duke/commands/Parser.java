@@ -7,12 +7,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import duke.Duke;
-import duke.main.Ui;
 
 /**
  * Class for parsing the input from a user into tokens that commands can use.
  */
-public class Parser implements BiConsumer<String, Duke> {
+public abstract class Parser implements BiConsumer<String, Duke> {
     private final Map<String, Command> store;
 
     public Parser(Map<String, Command> store) {
@@ -21,8 +20,14 @@ public class Parser implements BiConsumer<String, Duke> {
 
     public Parser(Stream<Command> cmds) {
         this(cmds.collect(
-            Collectors.toUnmodifiableMap(Command::getLabel, Function.identity())
-        ));
+                Collectors.toUnmodifiableMap(Command::getLabel, Function.identity())
+            ));
+    }
+
+    public abstract void output(String string);
+
+    public void output(String string, Object ...args) {
+        output(String.format(string, args));
     }
 
     /**
@@ -31,7 +36,7 @@ public class Parser implements BiConsumer<String, Duke> {
      * @param instance Instance of Duke to run the command with
      */
     public void onUnknownCommand(String input, final Duke instance) {
-        Ui.print("Unknown command '%s' :(", input);
+        output("Unknown command '%s' :(", input);
     }
 
     /**

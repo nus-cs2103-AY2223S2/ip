@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
-import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -15,7 +14,7 @@ import javafx.stage.WindowEvent;
 
 import duke.main.Storage;
 import duke.task.Task;
-import duke.ui.MainWindow;
+import duke.ui.NewMainWindow;
 import duke.ui.UI;
 
 public class App extends Application {
@@ -49,8 +48,8 @@ public class App extends Application {
         }
 
         Duke instance = new Duke(tasks);
-        MainWindow controller = new MainWindow();
-        VBox box = Utils.loadFxmlFile(getClass().getResource("/view/MainWindow.fxml"), controller);
+        NewMainWindow controller = new NewMainWindow();
+        VBox box = Utils.loadFxmlFile(getClass().getResource("/view/NewMainWindow.fxml"), controller);
         controller.setDuke(instance);
 
         Scene scene = new Scene(box);
