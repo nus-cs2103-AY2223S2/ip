@@ -2,7 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDateTime;
+
 
 import javafx.scene.image.Image;
 
@@ -60,22 +60,29 @@ public class Duke  {
 
             if (answer.startsWith("find ")) {
                 String keyword = parser.getFindKeyword();
+                assert !keyword.isEmpty() : "find keyword should not be empty";
                 return ui.showFind(tasks.find(keyword));
+
+
             }
             if (answer.startsWith("mark ")) {
                 Integer index = parser.getMarkIndex(length);
+                assert index > 0 && index <= length : "index should be in bounds";
                 return ui.showMarked(tasks.mark(index));
             }
             if (answer.startsWith("unmark ")) {
                 Integer index = parser.getUnmarkIndex(length);
+                assert index > 0 && index <= length : "index should be in bounds";
                 return ui.showUnmarked(tasks.unmark(index));
             }
             if (answer.startsWith("delete ")) {
                 Integer index = parser.getDeleteIndex(length);
+                assert index > 0 && index <= length : "index should be in bounds";
                 return ui.showDeleted(tasks.delete(index));
             }
             if (answer.startsWith("todo ")) {
                 String description = parser.getTodoDescription();
+                assert !description.isEmpty() : "find keyword should not be empty";
                 return ui.showAddTask(tasks.addTodo(description));
             }
             if (answer.startsWith("deadline ")) {
@@ -85,7 +92,19 @@ public class Duke  {
             }
             if (answer.startsWith("event ")) {
                 String[] descriptionList = parser.getEventDescription();
+
+                assert !descriptionList[0].isEmpty() && !descriptionList[1].isEmpty()
+                        : "description should not be empty";
                 return ui.showAddTask(tasks.addEvent(descriptionList[0], descriptionList[1], descriptionList[2]));
+
+            }
+            if (answer.startsWith("event ")) {
+                String[] descriptionList = parser.getEventDescription();
+                assert !descriptionList[0].isEmpty() && !descriptionList[1].isEmpty()
+                        : "description should not be empty";
+
+                return ui.showAddTask(tasks.addEvent(descriptionList[0], descriptionList[1], descriptionList[2]));
+
 
             }
 
