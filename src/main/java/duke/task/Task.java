@@ -1,12 +1,17 @@
 package duke.task;
 
+import duke.Priority;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        // priority is set to medium by default
+        this.priority = priority.MEDIUM;
     }
 
     private String getStatusIcon() {
@@ -18,10 +23,14 @@ public class Task {
     }
 
     public void mark() {
-        isDone = true;
+        this.isDone = true;
     }
 
     public void unmark() {
-        isDone = false;
+        this.isDone = false;
+    }
+
+    public void setPriority(Priority priorityLevel) {
+        this.priority = priorityLevel;
     }
 }

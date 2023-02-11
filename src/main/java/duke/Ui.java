@@ -7,17 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
     /**
-     * Displays a welcome message to the user.
-     *
-     * @return msg the welcome message
-     */
-    public String showWelcome() {
-        String msg = "Hello! I'm Chiwa, your personal chatbot (◔◡◔✿) \n";
-        msg += "What can I do for you today? \n";
-        return msg;
-    }
-
-    /**
      * Reads the command entered by the user.
      *
      * @return the input to be parsed

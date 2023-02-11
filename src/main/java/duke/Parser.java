@@ -7,6 +7,8 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.PriorityCommand;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -72,6 +74,7 @@ public class Parser {
      * Parses user inputs to create a Mark or Delete command.
      *
      * @param inputs from the user input
+     * @param command to create and execute
      * @return a Mark or Delete Command
      * @throws DukeException when user input does not follow expected format
      */
@@ -107,6 +110,33 @@ public class Parser {
         return new FindCommand(keyword);
     }
 
+    /**
+     * Parses user inputs to create a Priority command.
+     *
+     * @param inputs from the user input
+     * @param command to create and execute
+     * @return a Priority Command
+     * @throws DukeException when user input does not follow expected format
+     */
+    private static Command parsePriorityCommands(String[] inputs, String command) throws DukeException {
+        if (inputs.length <= 1) {
+            throw new DukeException("Please input the numbering of the task " +
+                    "you want to update priority for as well!");
+        }
+
+        String number = inputs[1];
+        int num = Integer.parseInt(number);
+        switch(command) {
+        case "low":
+            return new PriorityCommand(num - 1, Priority.LOW);
+        case "medium":
+            return new PriorityCommand(num - 1, Priority.MEDIUM);
+        case "high":
+            return new PriorityCommand(num - 1, Priority.HIGH);
+        default:
+            return null;
+        }
+    }
 
     /**
      * Parses the user input to obtain the intended Command.
@@ -130,8 +160,7 @@ public class Parser {
         case "mark":
         case "unmark":
         case "delete":
-            Command markOrDeleteCommand = parseMarkAndDeleteCommands(inputs, command);
-            return markOrDeleteCommand;
+            return parseMarkAndDeleteCommands(inputs, command);
 
         case "todo":
         case "deadline":
@@ -140,8 +169,12 @@ public class Parser {
             return new AddCommand(task);
 
         case "find":
-            Command findCommand = parseFindCommands(inputs);
-            return findCommand;
+            return parseFindCommands(inputs);
+
+        case "low":
+        case "medium":
+        case "high":
+            return parsePriorityCommands(inputs, command);
 
         default:
             throw new DukeException("Sorry I don't understand this command! :(");

@@ -37,7 +37,6 @@ public class Duke {
      * Catches any errors thrown when parsing user inputs.
      */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
