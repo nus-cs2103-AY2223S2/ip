@@ -1,8 +1,8 @@
 package kude.models;
 
-import kude.DukeException;
-
 import java.time.LocalDateTime;
+
+import kude.DukeException;
 
 /**
  * Representation of an Event
@@ -11,6 +11,12 @@ public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
 
+    /**
+     * Create a new Event
+     * @param content Content of Event
+     * @param from Starting timing of Event as a LocalDateTime
+     * @param to Ending timing of Event as a LocalDateTime
+     */
     public Event(String content, LocalDateTime from, LocalDateTime to) {
         super(content);
         if (to.isBefore(from)) {

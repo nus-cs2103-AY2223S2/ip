@@ -11,6 +11,11 @@ public class Ui {
     private final PrintStream out;
     private final Scanner scanner;
 
+    /**
+     * Create a new terminal UI abstraction
+     * @param in Input terminal stream
+     * @param out Output terminal stream
+     */
     public Ui(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
         this.out = out;

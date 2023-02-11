@@ -1,13 +1,13 @@
 package kude.tui;
 
-import kude.DukeException;
-import kude.models.Task;
-import kude.models.TaskList;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
+
+import kude.DukeException;
+import kude.models.Task;
+import kude.models.TaskList;
 
 /**
  * Contextual information for {@link Command}

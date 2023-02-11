@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
  * Parser for command line
  */
 public class Parser {
+    private static final String NAMED_ARGUMENT_REGEX = "\\s/(\\w+)\\s(.+?)(?=\\s/\\w+\\s.+|$)";
+
     private final String line;
     private final String cmd;
     private final String arg;
     private final HashMap<String, String> namedArgs;
-
-    private final static String ARG_FMT = "\\s/(\\w+)\\s(.+?)(?=\\s/\\w+\\s.+|$)";
 
     /**
      * Creates a parser from a String
@@ -22,10 +22,10 @@ public class Parser {
     public Parser(String line) {
         this.line = line;
         this.cmd = line.split("\\s")[0];
-        this.arg = line.substring(cmd.length()).split(ARG_FMT, 2)[0].trim();
+        this.arg = line.substring(cmd.length()).split(NAMED_ARGUMENT_REGEX, 2)[0].trim();
 
         this.namedArgs = new HashMap<>();
-        var matcher = Pattern.compile(ARG_FMT).matcher(line);
+        var matcher = Pattern.compile(NAMED_ARGUMENT_REGEX).matcher(line);
         while (matcher.find()) {
             var name = matcher.group(1).trim();
             var value = matcher.group(2).trim();

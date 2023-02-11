@@ -1,14 +1,14 @@
 package kude;
 
-import kude.models.TaskList;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectInputFilter;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import kude.models.TaskList;
 
 /**
  * Represents a file-backed storage container for {@link TaskList}
@@ -38,7 +38,7 @@ public class Storage {
         // restrict to only models
         var filter = ObjectInputFilter.Config.createFilter("kude.models.*;");
         ois.setObjectInputFilter(filter);
-        var tasks = (TaskList)ois.readObject();
+        var tasks = (TaskList) ois.readObject();
         ois.close();
         fis.close();
         return tasks;

@@ -1,15 +1,15 @@
 package kude.tui;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Optional;
+
 import kude.DukeException;
 import kude.Storage;
 import kude.models.Deadline;
 import kude.models.Event;
 import kude.models.TaskList;
 import kude.models.Todo;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Optional;
 
 /**
  * Main terminal UI-based command line runner
@@ -20,6 +20,11 @@ public class Processor {
     private final Storage storage;
     private final HashMap<String, Command> commands;
 
+    /**
+     * Create a new Processor
+     * @param ui Ui to interface with
+     * @param storage Storage instance to save to
+     */
     public Processor(Ui ui, Storage storage) {
         this.ui = ui;
         this.storage = storage;

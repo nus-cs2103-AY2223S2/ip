@@ -9,6 +9,9 @@ public abstract class Task implements Serializable {
     private final String content;
     private boolean isDone;
 
+    /**
+     * Initialize this task with the provided content
+     */
     public Task(String content) {
         this.content = content;
         this.isDone = false;
