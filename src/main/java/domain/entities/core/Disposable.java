@@ -9,7 +9,7 @@ import core.exceptions.DisposableException;
  */
 public interface Disposable {
     /**
-     * Dispose of the object.
+     * Disposes the object.
      */
     void dispose() throws DisposableException;
 }

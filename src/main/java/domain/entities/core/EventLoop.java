@@ -40,7 +40,7 @@ public abstract class EventLoop implements Disposable {
     }
 
     /**
-     * The function that starts the event loop.
+     * Starts the event loop.
      */
     public void run() {
         while (reader.hasNextLine()) {
