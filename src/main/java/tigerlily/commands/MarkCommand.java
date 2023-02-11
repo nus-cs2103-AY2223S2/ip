@@ -24,11 +24,12 @@ public class MarkCommand implements Command {
      * @param taskList the TaskList containing the Task to be updated
      * @param ui the Ui needed to display according messages
      * @param storage the Storage used to update the save file
+     * @return the message after marking a Task as completed
      * @throws ForgottenArgumentException If no index is given
      * @throws InvalidIndexException If the given index is out of bounds in TaskList
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         if (input.length() < 6) {
             throw new ForgottenArgumentException();
         } else {
@@ -38,7 +39,7 @@ public class MarkCommand implements Command {
             }
             Task thisTask = taskList.getTasks().get(index);
             thisTask.markDone();
-            ui.showMessage("well done! you've completed this task: " + thisTask + "\n");
+            return ui.showMessage("well done! you've completed this task: " + thisTask + "\n");
         }
     }
 }

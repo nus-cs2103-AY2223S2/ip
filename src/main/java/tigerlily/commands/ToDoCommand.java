@@ -23,15 +23,16 @@ public class ToDoCommand implements Command {
      * @param taskList the TaskList the new ToDo is added to
      * @param ui the Ui needed to display according messages
      * @param storage the Storage used during this session
+     * @return the confirmation message that the new ToDo has been added successfully
      * @throws ForgottenArgumentException If no description for the ToDo is given
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         try {
             String description = input.substring(5);
             ToDo newToDo = new ToDo(description);
             taskList.addTask(newToDo);
-            ui.showAddedMessage(newToDo, taskList);
+            return ui.showAddedMessage(newToDo, taskList);
         } catch (StringIndexOutOfBoundsException e) {
             throw new ForgottenArgumentException();
         }

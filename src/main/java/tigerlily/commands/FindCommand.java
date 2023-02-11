@@ -21,9 +21,10 @@ public class FindCommand implements Command {
      * @param taskList the TaskList to be searched
      * @param ui the Ui needed to display according messages
      * @param storage the Storage used to update the save file
+     * @return the Tasks which match the given request
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
         String query = input.substring(5);
         boolean hasMatch = false;
         int count = 1;
@@ -38,9 +39,9 @@ public class FindCommand implements Command {
         }
 
         if (hasMatch) {
-            ui.showMessage("here are the task(s) which match your query:" + sb.toString() + "\n");
+            return ui.showMessage("here are the task(s) which match your query:" + sb.toString() + "\n");
         } else {
-            ui.showMessage("looks like there aren't any tasks which match your query...\n");
+            return ui.showMessage("looks like there aren't any tasks which match your query...\n");
         }
     }
 }

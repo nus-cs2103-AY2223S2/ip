@@ -1,12 +1,9 @@
 package tigerlily;
 
-import tigerlily.commands.ByeCommand;
 import tigerlily.commands.Command;
 
 import tigerlily.exceptions.DukeExceptions;
 import tigerlily.tasks.TaskList;
-
-import java.util.Scanner;
 
 public class Tigerlily {
     private Parser parser;
@@ -26,28 +23,12 @@ public class Tigerlily {
         this.ui = new Ui();
     }
 
-    public void run() {
-        this.ui.showWelcome();
-        Scanner s = new Scanner(System.in);
-        while(s.hasNext()) {
-            try {
-                String input = s.nextLine();
-                Command command = this.parser.handleCommand(input);
-
-                if (command instanceof ByeCommand) {
-                    command.execute(taskList, ui, storage);
-                    break;
-                } else {
-                    command.execute(taskList, ui, storage);
-                }
-            } catch (DukeExceptions e) {
-                ui.showError(e);
-            }
+    public String getResponse(String input) {
+        try {
+            Command thisCommand = parser.handleCommand(input);
+            return thisCommand.execute(taskList, ui, storage);
+        } catch (DukeExceptions e) {
+            return ui.showError(e);
         }
-        s.close();
-    }
-
-    public static void main(String[] args) {
-        new Tigerlily("data/data.txt").run();
     }
 }

@@ -22,15 +22,16 @@ public class DeleteCommand implements Command {
      * @param taskList the TaskList the Task is removed from
      * @param ui the Ui needed to display according messages
      * @param storage the Storage used during this session
+     * @return the message after deleting a Task
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task thisTask = taskList.deleteTask(input);
-            ui.showMessage("okay, this task has been removed: " + thisTask.toString() + "\nthe list now has "
+            return ui.showMessage("okay, this task has been removed: " + thisTask.toString() + "\nthe list now has "
                     + taskList.getSize() + " task(s) left\n");
         } catch (DukeExceptions e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
     }
 }
