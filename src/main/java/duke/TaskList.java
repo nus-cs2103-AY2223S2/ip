@@ -1,5 +1,7 @@
 package duke;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import duke.tasks.Task;
@@ -105,5 +107,10 @@ public class TaskList {
             }
         }
         return tasksList.toString();
+    }
+
+    public String sortTasks() {
+        Collections.sort(tasks, Comparator.comparing(Task::isTaskDone).thenComparing(Task::getDescription));
+        return printList();
     }
 }
