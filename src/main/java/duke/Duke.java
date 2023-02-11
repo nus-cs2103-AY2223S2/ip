@@ -22,6 +22,7 @@ public class Duke {
 
     public ArrayList<String> run(String stringCommand) {
         ui.clearStatements();
+        assert ui.getStatements().size() == 0;
         Parser parser = new Parser(this.dukeList, this.storage, this.ui);
         boolean isExit;
         try {
