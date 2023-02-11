@@ -1,10 +1,12 @@
 package command;
 
+import UI.Ui;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.TaskList;
 import task.Todo;
+
 
 import java.util.Locale;
 
@@ -12,10 +14,8 @@ import static java.lang.Integer.parseInt;
 
 public class Parser {
     // Interprets user input
-    Ui ui;
     TaskList list;
-    public Parser(Ui ui, TaskList list) {
-        this.ui = ui;
+    public Parser(TaskList list) {
         this.list = list;
     }
 
@@ -23,53 +23,42 @@ public class Parser {
      * Central hub for processing user input and determining which specific process command should be used.
      * @param input the line of input that the user keyed in
      */
-    public void processInput(String input) {
+    public String processInput(String input) {
         String[] inputAnalyzed = input.split(" ");
         if (input.contains("#")) {
-            ui.showInvalidInputError("Illegal character '#'.");
-            return;
+            return Ui.showInvalidInputError("Illegal character '#'.");
         }
         try {
             switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
             case "bye":
-                processByeOperation(inputAnalyzed);
-                break;
+                return processByeOperation(inputAnalyzed);
             case "list":
-                processListOperation(inputAnalyzed);
-                break;
+                return processListOperation(inputAnalyzed);
             case "mark":
-                processMarkOperation(inputAnalyzed);
-                break;
+                return processMarkOperation(inputAnalyzed);
             case "unmark":
-                processUnmarkOperation(inputAnalyzed);
-                break;
+                return processUnmarkOperation(inputAnalyzed);
             case "deadline":
-                processDeadlineOperation(input);
-                break;
+                return processDeadlineOperation(input);
             case "todo":
-                processTodoOperation(input);
-                break;
+                return processTodoOperation(input);
             case "event":
-                processEventOperation(input);
-                break;
+                return processEventOperation(input);
             case "delete":
-                processDeleteOperation(inputAnalyzed);
-                break;
+                return processDeleteOperation(inputAnalyzed);
             case "find":
-                processFindOperation(input);
-                break;
+                return processFindOperation(input);
             default:
-                ui.unknownCommand();
+                return Ui.unknownCommand();
                 //Fallthrough
             }
         } catch (InvalidInputException e) {
-            ui.showInvalidInputError(e.getMessage());
+            return Ui.showInvalidInputError(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            ui.showArrayOutOfBoundsError();
+            return Ui.showArrayOutOfBoundsError();
         } catch (NumberFormatException e) {
-            ui.showNumberFormatError();
+            return Ui.showInvalidInputError("I only take integers for number inputs.");
         }
-
     }
 
     /**
@@ -77,12 +66,12 @@ public class Parser {
      * @param inputAnalyzed the split-up version of the user's input
      * @throws InvalidInputException for when the user types anything more than bye
      */
-    private void processByeOperation(String[] inputAnalyzed) throws InvalidInputException {
+    private String processByeOperation(String[] inputAnalyzed) throws InvalidInputException {
         //Check if there is anything other than bye
         if (inputAnalyzed.length > 1) {
             throw new InvalidInputException("Incorrect format. Correct form should be \"bye\".");
         } else {
-            ui.close();
+            return Ui.close();
         }
     }
 
@@ -91,12 +80,12 @@ public class Parser {
      * @param inputAnalyzed the split-up version of the user's input
      * @throws InvalidInputException for when the user types anything more than list
      */
-    private void processListOperation(String[] inputAnalyzed) throws InvalidInputException {
+    private String processListOperation(String[] inputAnalyzed) throws InvalidInputException {
         //Check if there is anything other than list
         if (inputAnalyzed.length > 1) {
             throw new InvalidInputException("Incorrect format. Correct form should be \"list\".");
         } else {
-            ui.showListState(list);
+            return Ui.showListState(list);
         }
     }
 
@@ -107,7 +96,7 @@ public class Parser {
      * @throws IndexOutOfBoundsException for when the user inputs an invalid index
      * @throws NumberFormatException for when the user doesn't input an integer in their input
      */
-    private void processMarkOperation(String[] inputAnalyzed) throws InvalidInputException,
+    private String processMarkOperation(String[] inputAnalyzed) throws InvalidInputException,
             IndexOutOfBoundsException, NumberFormatException {
         // Parse
         if (inputAnalyzed.length != 2) {
@@ -117,8 +106,8 @@ public class Parser {
         int index = parseInt(inputAnalyzed[1]);
         // List
         list.mark(index);
-        // command.Ui
-        ui.showMarkSuccess(list.get(index - 1));
+        // UI.Ui
+        return Ui.showMarkSuccess(list.get(index - 1));
     }
 
 
@@ -131,7 +120,7 @@ public class Parser {
      * @throws NumberFormatException for when the user doesn't input an integer in their input
      */
 
-    private void processUnmarkOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
+    private String processUnmarkOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
             NumberFormatException {
         if (inputAnalyzed.length != 2) {
             throw new InvalidInputException("Incorrect format. Correct form should be \"unmark i\", "
@@ -139,7 +128,7 @@ public class Parser {
         }
         int index = parseInt(inputAnalyzed[1]);
         list.unmark(index - 1);
-        ui.showUnmarkSuccess(list.get(index - 1));
+        return Ui.showUnmarkSuccess(list.get(index - 1));
     }
 
 
@@ -151,7 +140,7 @@ public class Parser {
      * @throws NumberFormatException for when the user doesn't input an integer in their input
      */
 
-    private void processDeleteOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
+    private String processDeleteOperation(String[] inputAnalyzed) throws InvalidInputException, IndexOutOfBoundsException,
             NumberFormatException {
         if (inputAnalyzed.length != 2) {
             throw new InvalidInputException("Incorrect format. Correct form should be \"delete i\", "
@@ -160,7 +149,7 @@ public class Parser {
         int index = parseInt(inputAnalyzed[1]);
         Task temp = list.get(index - 1);
         list.remove(index - 1);
-        ui.showDeleteSuccess(temp, list);
+        return Ui.showDeleteSuccess(temp, list);
     }
 
 
@@ -170,7 +159,7 @@ public class Parser {
      * @throws InvalidInputException for when the user inputs the deadline command in the incorrect format
      */
 
-    private void processDeadlineOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
+    private String processDeadlineOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
         String[] deadlineAnalyze = input.split("/by");
         String date;
         try {
@@ -186,7 +175,7 @@ public class Parser {
         }
         Deadline newDead = new Deadline(details, date);
         list.add(newDead);
-        ui.showAddTaskSuccess(newDead, list);
+        return Ui.showAddTaskSuccess(newDead, list);
     }
 
 
@@ -196,7 +185,7 @@ public class Parser {
      * @throws InvalidInputException for when the user inputs the to-do command in the incorrect format
      */
 
-    private void processTodoOperation(String input) throws InvalidInputException {
+    private String processTodoOperation(String input) throws InvalidInputException {
         //Possible Errors:
         //No descriptor
         String[] todoAnalyze = input.split("todo ");
@@ -209,8 +198,8 @@ public class Parser {
         }
         //List
         list.add(newTodo);
-        //command.Ui
-        ui.showAddTaskSuccess(newTodo, list);
+        //UI.Ui
+        return Ui.showAddTaskSuccess(newTodo, list);
     }
 
 
@@ -220,7 +209,7 @@ public class Parser {
      * @throws InvalidInputException for when the user inputs the event command in the incorrect format
      */
 
-    private void processEventOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
+    private String processEventOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
         //Analyze
         String[] eventAnalyze;
         String[] timeAnalyze;
@@ -241,8 +230,8 @@ public class Parser {
         //Add Item
         Event newEvent = new Event(details, start, over);
         list.add(newEvent);
-        //command.Ui Section
-        ui.showAddTaskSuccess(newEvent, list);
+        //UI.Ui Section
+        return Ui.showAddTaskSuccess(newEvent, list);
     }
 
     /**
@@ -250,7 +239,7 @@ public class Parser {
      * @param input the user's input
      * @throws InvalidInputException when the user does not input anything for a keyword
      */
-    private void processFindOperation(String input) throws InvalidInputException {
+    private String processFindOperation(String input) throws InvalidInputException {
         String[] inputAnalyzed = input.split("find ");
         String keyword;
         try {
@@ -265,6 +254,6 @@ public class Parser {
                 foundItems.add(task);
             }
         }
-        ui.showFindListState(foundItems,keyword);
+        return Ui.showFindListState(foundItems,keyword);
     }
 }

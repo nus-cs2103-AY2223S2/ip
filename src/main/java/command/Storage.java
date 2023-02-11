@@ -17,9 +17,9 @@ public class Storage {
      * Constructor for a storage object
      * @param filePath the user's provided storage path where a file may potentially be
      */
-    public Storage(String filePath) {
+    public Storage() {
         String home = System.getProperty("user.home");
-        loadPath = java.nio.file.Paths.get(home, filePath);;
+        //loadPath = java.nio.file.Paths.get(home, filePath);;
         storePath = java.nio.file.Paths.get(System.getProperty("user.dir"), "dukeData.txt");
     }
 

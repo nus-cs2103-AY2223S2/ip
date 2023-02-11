@@ -1,0 +1,134 @@
+package UI;
+
+import task.Task;
+import task.TaskList;
+
+import java.util.Scanner;
+
+public class Ui {
+    // For all interactions with the user
+
+    /**
+     * Constructor for UI object.
+     */
+    public Ui() {
+    }
+
+    //@@author IceFire
+    //Reused from https://stackoverflow.com/questions/36514289
+    // with minor modifications
+    /**
+     * Prints a dashed line.
+     */
+    private static void dashedLine()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 90; i++) {
+            sb.append("-");
+        }
+        System.out.println(sb.toString());
+    }
+
+    /**
+     * Closes the UI from accepting any more inputs.
+     */
+    public static String close() {
+        //Todo: Figure out a way to close the application when this is called
+        return "Pleasure doing business with you.";
+    }
+
+    /**
+     * Prints the corresponding error message when the user inputs a command not registered
+     *  in Duke.
+     */
+    public static String unknownCommand() {
+        return "Sorry sir, didn't quite get that.";
+    }
+
+    /**
+     * Prints the opening message for Duke.
+     */
+    public static String startMessage() {
+        return "My name is Skyler White yo \nHow can I help you?";
+    }
+
+    /**
+     * Displays an error message if Duke fails to read from the user's provided input path or the default write path
+     * of the program after it terminates.
+     */
+    public static String showLoadingError() {
+        return "Looks like you don't have any old lists for me to include. That's alright; we'll start" +
+                " from scratch!";
+    }
+
+    public static String showArrayOutOfBoundsError() {
+        return "Woah there. Got an index problem. That entry does not exist.";
+    }
+
+    /**
+     * Prints the error message for when a user makes a command, but with incorrect formatting.
+     * @param message a String that contains the details for why the command failed.
+     */
+    public static String showInvalidInputError(String message) {
+        return "Whoa. That command doesn't look right. Here's what seems to be wrong:\n" + message;
+    }
+
+    /**
+     * Prints the success message when the given task in the list has been marked as completed.
+     * @param task the task that has been marked as completed
+     */
+    public static String showMarkSuccess(Task task) {
+        return "Gotcha. Just marked this task as done:\n" + task;
+    }
+
+    /**
+     * Prints the success message when the given task in the list has been marked as not completed.
+     * @param task the task that has been marked as not completed
+     */
+    public static String showUnmarkSuccess(Task task) {
+        return "Gotcha. Just marked this task as not done:\n" + task;
+    }
+
+    /**
+     * Prints success message when the given task has been added to the list.
+     * @param task the task that was added to the list of tasks
+     * @param list the list of tasks
+     */
+    public static String showAddTaskSuccess(Task task, TaskList list) {
+        return "Gotcha. Just added this task to the list:\n" + task + "\n" + showListLength(list);
+    }
+
+    /**
+     * Prints success message when the given task has been removed from the list.
+     * @param task the task that was removed from the list of tasks
+     * @param list the list of tasks
+     */
+    public static String showDeleteSuccess(Task task, TaskList list) {
+        return "Gotcha. Just marked this task as not done:\n" + task + "\n" + showListLength(list);
+    }
+
+    /**
+     * Prints all the elements in the provided list of tasks with numerical labels.
+     * @param list the list of tasks to print
+     */
+    public static String showListState(TaskList list) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= list.size(); i++){
+            sb.append(i).append(". ").append(list.get(i - 1)).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
+    public static String showListLength(TaskList list) {
+        return "You have " + list.size() + " tasks left. Anything else?";
+    }
+
+    public static String showFindListState(TaskList list, String keyword) {
+        StringBuilder sb = new StringBuilder("Righto, here are the tasks that contain the word \""
+                + keyword + "\":");
+        for (int i = 1; i <= list.size(); i++){
+            sb.append(i).append(". ").append(list.get(i - 1)).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+}

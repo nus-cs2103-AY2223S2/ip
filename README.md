@@ -1,8 +1,13 @@
-# center.Duke project template
+# Skylar
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "My name is Skyler White yo" - Skyler White ([source](https://knowyourmeme.com/memes/my-name-is-skyler-white-yo))
 
-## Setting up in Intellij
+Thus speaks Skylar, an advanced **chat-bot** here to make your life easier. :bowtie:
+Skylar is text-based, and helps to record and organize any tasks that you need to do, all while responding in an entertaining manner!
+
+## Setting up Skylar
+
+Here
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
