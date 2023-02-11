@@ -21,12 +21,12 @@ public abstract class Command {
 
     /**
      * Executes the command and returns the response as a String.
-     * @param lst the list of tasks the command may manipulate.
+     * @param taskList the list of tasks the command may manipulate.
      * @param ui an instance of Ui that prints the outcome of a command.
      * @return outcome of command as a String
      * @throws DukeException upon input errors for a command.
      */
-    public abstract String execute(TaskList lst, Ui ui) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui) throws DukeException;
 
     /**
      * Checks whether the command is an instance of Bye command.

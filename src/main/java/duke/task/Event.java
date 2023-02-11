@@ -41,11 +41,11 @@ public class Event extends Task {
      */
     public static Event toEventFromFileStr(String taskNameData, String doneData,
                                                 String startData, String endData) throws DukeException {
-        Event event = null;
         doneData = doneData.trim();
         startData = startData.trim();
         endData = endData.trim();
         taskNameData = taskNameData.trim();
+
         if (taskNameData.isEmpty()) {
             throw new DukeException("todo");
         }
@@ -58,13 +58,14 @@ public class Event extends Task {
         try {
             LocalDate start = LocalDate.parse(startData);
             LocalDate end = LocalDate.parse(endData);
-            event = new Event(taskNameData, start, end);
+
+            Event event = new Event(taskNameData, start, end);
             boolean completed = Integer.parseInt(doneData) == 1;
             event.setCompleted(completed);
+            return event;
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }
-        return event;
     }
 
     @Override

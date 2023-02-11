@@ -23,7 +23,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String command) {
         if (commandError.contains(command)) {
-            this.errorMsg = "The task description cannot be empty.";
+            this.errorMsg = "The " + command + " description cannot be empty.";
         } else if (indexError.contains(command)) {
             this.errorMsg = "Please remember to enter an index!";
         } else if (fileError.contains(command)) {

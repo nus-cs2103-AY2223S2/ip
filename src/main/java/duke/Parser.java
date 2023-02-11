@@ -32,87 +32,65 @@ public class Parser {
      */
     public Command parse(String userInput) throws DukeException {
         String[] commandDetails = userInput.trim().split(" ", 2);
-        boolean single = commandDetails.length < 2;
         String commandType = commandDetails[0];
-        String arguments = single ? "" : commandDetails[1];
-        int index;
-        String taskName;
-        LocalDate startDate;
-        LocalDate endDate;
-        Command command = null;
+
+        checkSufficientArgs(commandType, commandDetails);
+        String arguments = commandDetails.length < 2 ? "" : commandDetails[1];
 
         switch (commandType) {
         case "bye":
-            if (!single) {
-                throw new DukeException("too many details");
-            }
-            command = new ByeCommand();
-            break;
+            return new ByeCommand();
         case "list":
-            if (!single) {
-                throw new DukeException("too many details");
-            }
-            command = new ListCommand();
-            break;
+            return new ListCommand();
         case "mark":
-            if (single) {
-                throw new DukeException(commandType);
-            }
-            index = parseIntArg(arguments);
-            command = new MarkCommand(index - 1);
-            break;
+            return new MarkCommand(parseIntArg(arguments));
         case "unmark":
-            if (single) {
-                throw new DukeException(commandType);
-            }
-            index = parseIntArg(arguments);
-            command = new UnmarkCommand(index - 1);
-            break;
+            return new UnmarkCommand(parseIntArg(arguments));
         case "delete":
-            if (single) {
-                throw new DukeException(commandType);
-            }
-            index = parseIntArg(arguments);
-            command = new DeleteCommand(index - 1);
-            break;
+             return new DeleteCommand(parseIntArg(arguments));
         case "find":
-            if (single) {
-                throw new DukeException("empty keyword");
-            }
-            command = new FindCommand(arguments);
-            break;
+            return new FindCommand(arguments);
         case "todo":
-            if (single) {
-                throw new DukeException(commandType);
-            }
             Todo todo = new Todo(parseTodo(arguments));
-            command = new ToDoCommand(todo);
-            break;
+            return new ToDoCommand(todo);
         case "deadline":
-            if (single) {
-                throw new DukeException(commandType);
-            }
             String[] deadlineDetails = parseDeadline(arguments);
-            taskName = deadlineDetails[0];
-            endDate = LocalDate.parse(deadlineDetails[1]);
-            Deadline deadline = new Deadline(taskName, endDate);
-            command = new DeadlineCommand(deadline);
-            break;
+            return new DeadlineCommand(assignDeadline(deadlineDetails));
         case "event":
-            if (single) {
-                throw new DukeException(commandType);
-            }
             String[] eventDetails = parseEvent(arguments);
-            taskName = eventDetails[0];
-            startDate = LocalDate.parse(eventDetails[1]);
-            endDate = LocalDate.parse(eventDetails[2]);
-            Event event = new Event(taskName, startDate, endDate);
-            command = new EventCommand(event);
-            break;
+            return new EventCommand(assignEvent(eventDetails));
         default:
             throw new DukeException("none");
         }
-        return command;
+    }
+
+    /**
+     * Checks if there are sufficient arguments given.
+     * @param commandType Specific command.
+     * @param commandDetails Number of arguments given.
+     * @throws DukeException if there are insufficient arguments given
+     */
+    public void checkSufficientArgs(String commandType, String[] commandDetails) throws DukeException {
+        boolean isSingle = commandDetails.length < 2;
+        boolean isSingleCommand = (commandType.equals("bye") || commandType.equals("list"));
+        boolean hasTooManyArg = !isSingle && isSingleCommand;
+        boolean hasInsufficientArgs = isSingle && !isSingleCommand;
+
+        if (hasTooManyArg) {
+            throw new DukeException("too many details");
+        } else if (hasInsufficientArgs) {
+            throw new DukeException(commandType);
+        } else {}
+    }
+
+    /**
+     * Trims whitespace from each argument.
+     * @param arguments user's command inputs.
+     */
+    public void trimArgs(String[] arguments) {
+        for (int i = 0; i < arguments.length; i++) {
+            arguments[i] = arguments[i].trim();
+        }
     }
 
     /**
@@ -125,7 +103,7 @@ public class Parser {
         int intArgument;
         try {
             intArgument = Integer.parseInt(argument.trim());
-            return intArgument;
+            return intArgument - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("input type");
         }
@@ -147,6 +125,29 @@ public class Parser {
     }
 
     /**
+     * Creates a Deadline from deadlineDetails.
+     * @param deadlineDetails contains inputs for a Deadline instance.
+     * @return a Deadline.
+     */
+    public Deadline assignDeadline(String[] deadlineDetails) {
+        String taskName = deadlineDetails[0];
+        LocalDate endDate = LocalDate.parse(deadlineDetails[1]);
+        return new Deadline(taskName, endDate);
+    }
+
+    /**
+     * Creates an Event from eventDetails.
+     * @param eventDetails contains inputs for an Event instance.
+     * @return an Event.
+     */
+    public Event assignEvent(String[] eventDetails) {
+        String taskName = eventDetails[0];
+        LocalDate startDate = LocalDate.parse(eventDetails[1]);
+        LocalDate endDate = LocalDate.parse(eventDetails[2]);
+        return new Event(taskName, startDate, endDate);
+    }
+
+    /**
      * Returns parsed inputs for creating a Deadline from the given user input.
      * @param argument String contains user input for creating a Deadline.
      * @return An array of strings containing the taskName and deadline for creating a Deadline.
@@ -160,11 +161,12 @@ public class Parser {
         String[] deadlineDetails = argument.split("/by ");
         if (deadlineDetails.length != 2) {
             throw new DukeException("timing");
+        } else if (deadlineDetails[0].isEmpty()) {
+            throw new DukeException("deadline");
         }
         try {
-            deadlineDetails[0] = deadlineDetails[0].trim();
-            LocalDate end = LocalDate.parse(deadlineDetails[1].trim());
-            deadlineDetails[1] = deadlineDetails[1].trim();
+            trimArgs(deadlineDetails);
+            LocalDate end = LocalDate.parse(deadlineDetails[1]);
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }
@@ -180,23 +182,26 @@ public class Parser {
     public String[] parseEvent(String argument) throws DukeException {
         argument = argument.trim();
         if (argument.isEmpty()) {
-            throw new DukeException("deadline");
+            throw new DukeException("event");
         }
+
         String[] eventDetails = argument.split("/from |/by ");
+
         if (eventDetails.length != 3) {
             throw new DukeException("timing");
         } else if (argument.indexOf("/from") > argument.indexOf("/by")) {
             throw new DukeException("wrong order");
+        } else if (eventDetails[0].isEmpty()) {
+            throw new DukeException("event");
         }
         try {
-            eventDetails[0] = eventDetails[0].trim();
-            LocalDate start = LocalDate.parse(eventDetails[1].trim());
-            LocalDate end = LocalDate.parse(eventDetails[2].trim());
-            eventDetails[1] = eventDetails[1].trim();
-            eventDetails[2] = eventDetails[2].trim();
+            trimArgs(eventDetails);
+            LocalDate start = LocalDate.parse(eventDetails[1]);
+            LocalDate end = LocalDate.parse(eventDetails[2]);
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }
         return eventDetails;
     }
+
 }

@@ -22,6 +22,23 @@ public class TaskList {
     }
 
     /**
+     * Returns task at given index of the list.
+     * @param index index of task to be retrieved.
+     * @return Task at given index of the list.
+     */
+    public Task getTask(int index) {
+        return this.lst.get(index);
+    }
+
+    /**
+     * Adds a task to the list.
+     * @param t Task to be added.
+     */
+    public void addTask(Task t) {
+        this.lst.add(t);
+    }
+
+    /**
      * Marks the task at the given index of the TaskList as done.
      * @param taskNum index of task to be marked as done in the TaskList.
      * @throws DukeException If index given is out of bounds.
@@ -95,23 +112,6 @@ public class TaskList {
             }
         }
         return response;
-    }
-
-    /**
-     * Returns task at given index of the list.
-     * @param index index of task to be retrieved.
-     * @return Task at given index of the list.
-     */
-    public Task getTask(int index) {
-        return this.lst.get(index);
-    }
-
-    /**
-     * Adds a task to the list.
-     * @param t Task to be added.
-     */
-    public void addTask(Task t) {
-        this.lst.add(t);
     }
 
     /**

@@ -37,10 +37,10 @@ public class Deadline extends Task {
      */
     public static Deadline toDeadlineFromFileStr(String taskNameData, String doneData, String deadlineData)
             throws DukeException {
-        Deadline d = null;
         doneData = doneData.trim();
         deadlineData = deadlineData.trim();
         taskNameData = taskNameData.trim();
+
         if (taskNameData.isEmpty()) {
             throw new DukeException("todo");
         }
@@ -52,13 +52,13 @@ public class Deadline extends Task {
         }
         try {
             LocalDate deadline = LocalDate.parse(deadlineData);
-            d = new Deadline(taskNameData, deadline);
+            Deadline d = new Deadline(taskNameData, deadline);
             boolean completed = Integer.parseInt(doneData) == 1;
             d.setCompleted(completed);
+            return d;
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }
-        return d;
     }
 
     @Override

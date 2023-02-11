@@ -8,7 +8,7 @@ import duke.task.Event;
  * The EventCommand class encapsulates the variables and methods related to Event commands.
  */
 public class EventCommand extends Command {
-    public static final String EVENT_COMMAND = "event";
+    private static final String EVENT_COMMAND = "event";
     private final Event event;
 
     /**
@@ -21,8 +21,8 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList lst, Ui ui) {
-        lst.addTask(this.event);
-        return ui.showEvent(this.event, lst.getSize());
+    public String execute(TaskList taskList, Ui ui) {
+        taskList.addTask(this.event);
+        return ui.showEvent(this.event, taskList.getSize());
     }
 }

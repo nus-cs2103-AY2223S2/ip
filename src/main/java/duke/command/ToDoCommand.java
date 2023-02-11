@@ -9,7 +9,7 @@ import duke.task.Todo;
  * The TodoCommand class encapsulates the variables and methods related to Todo commands.
  */
 public class ToDoCommand extends Command {
-    public static final String TODO_COMMAND = "todo";
+    private static final String TODO_COMMAND = "todo";
     private final Todo todo;
 
     /**
@@ -22,8 +22,8 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList lst, Ui ui) throws DukeException {
-        lst.addTask(this.todo);
-        return ui.showTodo(this.todo, lst.getSize());
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
+        taskList.addTask(this.todo);
+        return ui.showTodo(this.todo, taskList.getSize());
     }
 }
