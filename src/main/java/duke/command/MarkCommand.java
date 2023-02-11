@@ -21,11 +21,12 @@ public class MarkCommand extends Command {
      * Executes the command by marking a particular Task in the list of Tasks as done.
      *
      * @param taskList The TaskList object that manages the list of Tasks.
+     * @return The String response of the chatbot.
      * @throws DukeException If the task number given is not valid.
      */
     @Override
-    public void execute(TaskList taskList) throws DukeException {
-        taskList.markTask(this.taskNumber);
+    public String execute(TaskList taskList) throws DukeException {
+        return taskList.markTask(this.taskNumber);
     }
 
 }

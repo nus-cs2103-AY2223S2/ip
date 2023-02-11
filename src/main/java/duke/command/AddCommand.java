@@ -23,10 +23,11 @@ public class AddCommand extends Command {
      * Executes the command by adding the given Task to the list of Tasks.
      *
      * @param taskList The TaskList object that manages the list of Tasks.
+     * @return The String response of the chatbot.
      */
     @Override
-    public void execute(TaskList taskList) {
-        taskList.addTask(this.task, this.taskType);
+    public String execute(TaskList taskList) {
+        return taskList.addTask(this.task, this.taskType);
     }
 
 }

@@ -1,5 +1,7 @@
 package duke.ui;
 
+import duke.exception.DukeException;
+
 import java.util.Scanner;
 
 /**
@@ -44,12 +46,12 @@ public class Ui {
 
     }
 
-    public static void showWithoutNewLine(String message) {
+    public static void show(String message) {
         System.out.println(message);
     }
 
-    public static void showWithNewLine(String message) {
-        System.out.println(message + "\n");
+    public static void showError(DukeException exception) {
+        System.out.println(exception.getMessage() + "\n");
     }
 
     /**

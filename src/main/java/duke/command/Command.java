@@ -23,8 +23,9 @@ public abstract class Command {
      * Executes the command.
      *
      * @param taskList The TaskList object that manages the list of Tasks.
+     * @return The String response of the chatbot.
      * @throws DukeException If anything goes wrong
      */
-    public abstract void execute(TaskList taskList) throws DukeException;
+    public abstract String execute(TaskList taskList) throws DukeException;
 
 }

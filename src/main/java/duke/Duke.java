@@ -31,11 +31,12 @@ public class Duke {
 
             try {
                 Command command = Parser.parse(userCommand);
-                command.execute(this.taskList);
+                String response = command.execute(this.taskList);
+                Ui.show(response);
                 toExit = command.isExitCommand();
 
             } catch (DukeException e) {
-                Ui.showWithNewLine(e.getMessage());
+                Ui.showError(e);
 
             } finally {
                 Ui.endCommand();
