@@ -1,4 +1,4 @@
-package controllers;
+package sebastian.controllers;
 
 import java.io.IOException;
 

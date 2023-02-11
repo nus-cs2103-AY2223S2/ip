@@ -1,4 +1,6 @@
-import controllers.Main;
+package sebastian;
+
+import sebastian.controllers.Main;
 import javafx.application.Application;
 
 /**

@@ -1,4 +1,4 @@
-package controllers;
+package sebastian.controllers;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;

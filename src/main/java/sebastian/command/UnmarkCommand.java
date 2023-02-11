@@ -43,7 +43,7 @@ public class UnmarkCommand extends Command {
                 String res = "No problem, I have marked this task as uncompleted: " + "\n"
                         + taskList.unmarkTaskAtIndex(taskIndex) + "\n"
                         + "It's time to get started!";
-                assert taskIndex >= 0 && taskIndex < taskList.getTotalTasks();
+                assert taskIndex > 0 && taskIndex <= taskList.getTotalTasks();
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
             } catch (NumberFormatException e) {

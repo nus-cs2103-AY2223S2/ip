@@ -43,7 +43,7 @@ public class MarkCommand extends Command {
                 String res = "Well Done. I have marked this task as completed: " + "\n"
                         + taskList.markTaskAtIndex(taskIndex) + "\n"
                         + "You can proceed with other tasks now";
-                assert taskIndex >= 0 && taskIndex < taskList.getTotalTasks();
+                assert taskIndex > 0 && taskIndex <= taskList.getTotalTasks();
                 storage.writeToDisk(taskList);
                 return ui.getFormattedString(res);
             } catch (NumberFormatException e) {
