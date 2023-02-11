@@ -28,7 +28,7 @@ public class TaskList {
     /**
      * Return the List<Task> inside.
      */
-    public List<Task> get_list() {
+    public List<Task> getList() {
         return this.taskList;
     }
 

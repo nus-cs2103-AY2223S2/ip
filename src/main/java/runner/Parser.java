@@ -73,7 +73,7 @@ public class Parser {
      */
     public String find(String key) {
         TaskList ans = new TaskList();
-        for (Task tk : taskList.get_list()) {
+        for (Task tk : taskList.getList()) {
             if (tk.getMSG().contains(key)) {
                 ans.add(tk);
             }

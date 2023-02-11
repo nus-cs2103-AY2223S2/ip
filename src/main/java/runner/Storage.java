@@ -72,7 +72,7 @@ public class Storage {
     public void saveList() {
         try {
             FileWriter fw = new FileWriter("src/main/data/task_list.txt");
-            for (Task tk : taskList.get_list()) {
+            for (Task tk : taskList.getList()) {
                 fw.write(tk.storeInfo()+"\n");
             }
             fw.close();

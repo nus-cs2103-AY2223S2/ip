@@ -74,8 +74,8 @@ public class Ui {
         String find_show  = (i == 1) ? "Here are the tasks in your list:\n"
                                      : "Here are the matching tasks in your list:\n";
         StringBuilder ans = new StringBuilder(find_show);
-        for (Task tk : t.get_list()) {
-            String info = (t.get_list().indexOf(tk)+1) + "." + tk.toString() + "\n";
+        for (Task tk : t.getList()) {
+            String info = (t.getList().indexOf(tk)+1) + "." + tk.toString() + "\n";
             ans.append(info);
         }
         return ans.toString();
