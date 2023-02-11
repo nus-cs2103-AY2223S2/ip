@@ -37,10 +37,6 @@ public class Duke {
       } catch (IOException e) {
         File data = new File("data");
         data.mkdirs();
-        File duke = new File("data/duke.txt");
-        if(duke.exists()){
-          System.out.println("read file successful!");
-        }
       }
       ui = new UI(new Parser(tasks, storage));
     }
