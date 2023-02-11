@@ -11,7 +11,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 /**
- * Main class of Duke Application
+ * Contains Logic of Duke Application.
  */
 public class Duke {
 
