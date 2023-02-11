@@ -197,8 +197,8 @@ public class Parser {
         return list.filter(keyword);
     }
 
-    private static String sortTasks(String[] command, TaskList list) throws DukeException {
-        if (command.length > 1) {
+    private static String updateTask(String[] command, TaskList list) throws DukeException {
+        if (command.length != 4) {
             throw wrongCommandFormat;
         }
 
@@ -235,8 +235,8 @@ public class Parser {
                     return createEvent(command, list);
                 case find:
                     return findTasks(command, list);
-                case sort:
-                    return sortTasks(command, list);
+                case update:
+                    return updateTask(command, list);
                 default:
                     return createToDo(command, list);
             }
