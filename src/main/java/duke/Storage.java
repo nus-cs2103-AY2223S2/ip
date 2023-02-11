@@ -33,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * Method called to write the current data in <code>taskList</code> instance to the file specified in PATHNAME.
+     * Writes the current data in <code>taskList</code> instance to the file specified in PATHNAME.
      * This method overwrites all content in the destination file.
      * @param tasks An instance of <code>TaskList</code> that is associated with the instance of <code>Duke</code>
      *              calling this method.

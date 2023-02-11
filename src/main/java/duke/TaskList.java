@@ -110,16 +110,7 @@ public class TaskList {
         }
     }
 
-    /**
-     * Checks the validity of the format of a <code>DeadLine</code> task, and adds it to the list.
-     * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
-     * @throws DukeException In the event that the name of the task is not specified, or the from and to date times are
-     * not specified in the correct format with <code>/from</code> and <code>/to</code> tags.
-     * @return The added <code>Event</code>.
-     */
-    Event addEvent(String[] tokens) throws DukeException {
-        assert(tokens[0].equals("event"));
-        StringBuilder sb = new StringBuilder();
+    private int[] checkEventFormattingAndDelimit(String[] tokens) throws DukeException {
         int idxFrom = Arrays.asList(tokens).indexOf("/from");
         int idxTo = Arrays.asList(tokens).indexOf("/to");
         if (idxFrom == -1 || idxTo == -1) {
@@ -132,31 +123,50 @@ public class TaskList {
             throw new DukeException("please specify a start datetime after /from flag");
         } else if (tokens.length - 1 == idxTo) {
             throw new DukeException("please specify an end datetime after /to flag");
-        } else {
-            for (int i = 1; i < idxFrom; i++) {
-                sb.append(tokens[i]).append(" ");
-            }
-            String taskName = sb.deleteCharAt(sb.length()-1).toString();
-            sb.delete(0, sb.length());
-
-            for (int i = idxFrom + 1; i < idxTo; i++) {
-                sb.append(tokens[i]).append(" ");
-            }
-            String taskFrom = sb.deleteCharAt(sb.length()-1).toString();
-            sb.delete(0, sb.length());
-
-            for (int i = idxTo + 1; i < tokens.length; i++) {
-                sb.append(tokens[i]).append(" ");
-            }
-            String taskTo = sb.deleteCharAt(sb.length()-1).toString();
-            try {
-                Event task = new Event(taskName, taskFrom, taskTo);
-                addTaskToList(task);
-                return task;
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
-            }
         }
+        return new int[]{idxFrom, idxTo};
+    }
+
+    private Event buildEvent(String[] tokens, int[] delimiters) throws DukeException {
+        int idxFrom = delimiters[0];
+        int idxTo = delimiters[1];
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < idxFrom; i++) {
+            sb.append(tokens[i]).append(" ");
+        }
+        String taskName = sb.deleteCharAt(sb.length()-1).toString();
+        sb.delete(0, sb.length());
+
+        for (int i = idxFrom + 1; i < idxTo; i++) {
+            sb.append(tokens[i]).append(" ");
+        }
+        String taskFrom = sb.deleteCharAt(sb.length()-1).toString();
+        sb.delete(0, sb.length());
+
+        for (int i = idxTo + 1; i < tokens.length; i++) {
+            sb.append(tokens[i]).append(" ");
+        }
+        String taskTo = sb.deleteCharAt(sb.length()-1).toString();
+        try {
+            Event task = new Event(taskName, taskFrom, taskTo);
+            addTaskToList(task);
+            return task;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
+        }
+    }
+
+    /**
+     * Checks the validity of the format of a <code>DeadLine</code> task, and adds it to the list.
+     * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
+     * @throws DukeException In the event that the name of the task is not specified, or the from and to date times are
+     * not specified in the correct format with <code>/from</code> and <code>/to</code> tags.
+     * @return The added <code>Event</code>.
+     */
+    Event addEvent(String[] tokens) throws DukeException {
+        assert(tokens[0].equals("event"));
+        int[] delimiters = checkEventFormattingAndDelimit(tokens);
+        return buildEvent(tokens, delimiters);
     }
 
     /**
@@ -245,7 +255,7 @@ public class TaskList {
     }
 
     /**
-     * Method to format and get all current tasks in the <code>TaskList</code>.
+     * Formats and gets all current tasks in the <code>TaskList</code>.
      * @return Formatted <code>String</code> representation of all lists in list.
      */
     public String getItemListAsResponseString() {
@@ -262,7 +272,7 @@ public class TaskList {
     }
 
     /**
-     * Method to format and get the <code>Task</code> items at the indices specified.
+     * Formats and gets the <code>Task</code> items at the indices specified.
      * @param indices <code>List<Integer></code> containing desired indices to be obtained.
      * @return Formatted <code>String</code> representation of the desired items in list.
      */
