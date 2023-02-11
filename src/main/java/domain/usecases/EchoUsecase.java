@@ -23,6 +23,7 @@ public class EchoUsecase implements Commandable, CommandRegisterable {
 
     @Override
     public ExitStatus execute(String[] tokens) {
+        assert (tokens.length > 0) : "The tokens should not be empty.";
         writable.writeln(String.join(" ", tokens));
         // after this, we would want it to skip the current execution loop.
         return ExitStatus.finishCurrentIteration;
