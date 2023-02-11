@@ -15,6 +15,7 @@ public class Parser {
 
     /**
      * Function to redirect user's input to the relevant functions.
+     *
      * @param input String representation of the user's input.
      * @param listOfTasks The list of tasks which has been loaded into the Duke chatbot instance.
      * @return String representation of output.
@@ -76,6 +77,7 @@ public class Parser {
 
     /**
      * Function to handle find command from the user input
+     *
      * @param input String representation of the user's input.
      * @param listOfTasks The list of tasks which has been loaded into the Duke chatbot instance.
      * @throws DukeExceptions if the keyword given is invalid.
@@ -95,14 +97,15 @@ public class Parser {
 
     /**
      * Function to handle ToDo tasks from the user input.
+     *
      * @param input String representation of the user's input.
      * @param listOfTasks The list of tasks which has been loaded into the Duke chatbot instance.
      * @throws DukeExceptions if name of the task is not properly given by user.
      */
     public void handleToDoTask(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
-            String useForInit = input.substring(4);
-            Task toAdd = new ToDo(useForInit);
+            String todoDescription = input.substring(4);
+            Task toAdd = new ToDo(todoDescription);
             this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
             this.outputToReturn = DE.toString();
@@ -111,14 +114,15 @@ public class Parser {
 
     /**
      * Function to handle Deadlines tasks from the user's input.
+     *
      * @param input String representation of the user's input.
      * @param listOfTasks The list of tasks which has been loaded into the Duke chatbot instance.
      * @throws DukeExceptions if date of task is wrongly given or if name of task is not properly given by user.
      */
     public void handleDeadlineTask(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
-            String useForInit = input.substring(8);
-            Task toAdd = new Deadlines(useForInit);
+            String deadlineDescription = input.substring(8);
+            Task toAdd = new Deadlines(deadlineDescription);
             this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
             this.outputToReturn = DE.toString();
@@ -127,14 +131,15 @@ public class Parser {
 
     /**
      * Function to handle Events tasks from the user's input.
+     *
      * @param input String representation of the user's input.
      * @param listOfTasks The list of tasks which has been loaded into the Duke chatbot instance.
      * @throws DukeExceptions if event details (from and to dates) are not properly given by user.
      */
     public void handleEventTask(String input, TaskList listOfTasks) throws DukeExceptions {
         try {
-            String useForInit = input.substring(5);
-            Task toAdd = new Events(useForInit);
+            String eventDescription = input.substring(5);
+            Task toAdd = new Events(eventDescription);
             this.outputToReturn = listOfTasks.addTask(toAdd);
         } catch (DukeExceptions DE) {
             this.outputToReturn = DE.toString();
@@ -143,6 +148,7 @@ public class Parser {
 
     /**
      * Function to redirect listing out the list of tasks when user input is "list".
+     *
      * @param listOfTasks The arraylist containing the tasks from Duke chatbot.
      */
     public void handleList(TaskList listOfTasks) {
@@ -151,6 +157,7 @@ public class Parser {
 
     /**
      * Function to handle deleting tasks from user input.
+     *
      * @param input String representation of user input.
      * @param listOfTasks The list of tasks which has been loaded from the Duke chatbot instance.
      * @throws DukeExceptions if the index indicated in the input string is invalid (<= 0 or greater than list size)
@@ -169,6 +176,7 @@ public class Parser {
 
     /**
      * Function to redirect checking task's due date when user input is "checkdue"
+     *
      * @param input String representation of user input.
      * @param listOfTasks The list of tasks which has been loaded from the Duke chatbot instance.
      */
@@ -179,6 +187,7 @@ public class Parser {
 
     /**
      * Function to redirect marking task as done.
+     *
      * @param input String representation of user input.
      * @param listOfTasks The list of tasks which has been loaded from the Duke chatbot instance.
      * @throws DukeExceptions if the index in the input is invalid (<= 0 or greater than list size)
@@ -197,6 +206,7 @@ public class Parser {
 
     /**
      * Function to redirect marking task as not done.
+     *
      * @param input String representation of user input.
      * @param listOfTasks The list of tasks which has been loaded from the Duke chatbot instance.
      * @throws DukeExceptions if the index in the input is invalid (<= 0 or greater than list size)

@@ -19,6 +19,7 @@ public class Ui {
 
     /**
      * Function to read user input.
+     *
      * @return String representation of user input.
      * @throws IOException
      */

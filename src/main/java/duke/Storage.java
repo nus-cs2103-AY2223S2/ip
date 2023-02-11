@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Constructor to initiate a Storage instance.
+     *
      * @param filePath  directory whereby the list of tasks should be stored.
      * @param fileName file in which the list of tasks should or will be stored.
      * @throws IOException if force-closed.
@@ -30,6 +31,8 @@ public class Storage {
     }
 
     /**
+     * Method to get, or otherwise create, file containing list of tasks.
+     *
      * @param filePath
      * @param fileName
      * @return Path whereby the file containing the list of tasks is supposed to be. If there is no such file, the
@@ -52,6 +55,7 @@ public class Storage {
 
     /**
      * Helper method to handle loading of ToDo tasks from the file into the Duke chatbot.
+     *
      * @param isDone Character read from the file to indicate whether the task is done or not.
      * @param nameOfTask A string containing the name of the task to be handled.
      * @param listOfTasks The list which will have tasks written into from the file.
@@ -67,6 +71,7 @@ public class Storage {
 
     /**
      * Helper method to handle loading of Deadlines tasks from the file into the Duke chatbot.
+     *
      * @param isDone Character read from the file to indicate whether the task is done or not.
      * @param listOfTasks The list which will have tasks written into from the file.
      * @param requiredInformation A string containing the full name of the task as written into the file previously.
@@ -94,6 +99,7 @@ public class Storage {
 
     /**
      * Helper method to handle loading of Events tasks from the file into the Duke chatbot.
+     *
      * @param isDone Character read from the file to indicate whether the task is done or not.
      * @param listOfTasks The list which will have tasks written into from the file.
      * @param requiredInformation A string containing the full name of the task as written into the file previously.
@@ -122,6 +128,7 @@ public class Storage {
 
     /**
      * Function to load tasks from stored dataPath into an arraylist to be used by the Duke chatbot.
+     *
      * @return An arraylist which contains the tasks as stored from the previous session.
      * @throws IOException
      * @throws DukeExceptions
@@ -158,6 +165,7 @@ public class Storage {
 
     /**
      * Function to store the list of tasks from the current Duke chatbot session into the dataPath file.
+     *
      * @param listOfTasks The list of tasks from the current Duke chatbot session.
      * @throws IOException
      */

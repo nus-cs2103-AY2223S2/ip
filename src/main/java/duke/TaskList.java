@@ -13,6 +13,7 @@ public class TaskList {
 
     /**
      * Constructor to initialize a TaskList instance.
+     *
      * @param listOfTasks An arraylist containing a list of tasks from the Duke chatbot.
      */
     public TaskList(ArrayList<Task> listOfTasks) {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * Function to return string representation of the list of tasks currently stored in the list to the user.
+     *
      * @return String representation of the list of tasks currently stored.
      */
     public String toRead() {
@@ -40,6 +42,7 @@ public class TaskList {
 
     /**
      * Deletes the task at the indicated index.
+     *
      * @param index The index which the task is stored at.
      * @return String representation of the list of tasks after deleting indicated task.
      * @throws DukeExceptions
@@ -64,6 +67,7 @@ public class TaskList {
 
     /**
      * Finds a list of tasks containing the given keyword.
+     *
      * @param keyword String representation of the keyword.
      * @return String representation of the list of tasks containing given keyword.
      */
@@ -83,6 +87,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list of tasks.
+     *
      * @param toAdd The task which will be added to the list.
      * @return String representation of the list of tasks after adding specified task.
      */
@@ -104,6 +109,7 @@ public class TaskList {
 
     /**
      * Marks the task at the indicated index as done.
+     *
      * @param index The index at which the task should be marked as done.
      * @return String representation of the task which has been marked as done.
      * @throws DukeExceptions if the indicated index is invalid (<= 0 or larger than the size of the list)
@@ -127,6 +133,7 @@ public class TaskList {
 
     /**
      * Marks the task at the indicated index as not done.
+     *
      * @param index The index at which the task should be marked as not done.
      * @return String representation of the task which has been marked as not done.
      * @throws DukeExceptions if the indicated index is invalid (<= 0 or larger than the list size)
@@ -150,6 +157,7 @@ public class TaskList {
 
     /**
      * Checks the due date of the task if it is applicable.
+     *
      * @param index The index at which to find out the due date of.
      * @return String representation of the task's due date if applicable.
      */

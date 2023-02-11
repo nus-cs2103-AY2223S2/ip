@@ -5,23 +5,24 @@ package duke.tasktypes;
  */
 public class Task {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructor to initialize a Task.
+     *
      * @param taskName String which will be the name of the task.
      */
     Task(String taskName) {
         this.name = taskName;
-        done = false;
+        this.isDone = false;
     }
 
     public void setDone() {
-        done = true;
+        this.isDone = true;
     }
 
     public void setUndone() {
-        done = false;
+        this.isDone = false;
     }
 
     public String getName() {

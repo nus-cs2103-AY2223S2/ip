@@ -11,6 +11,7 @@ public class Events extends Task {
 
     /**
      * Constructor to initialize an event task.
+     *
      * @param taskName String containing the task's name and due date.
      * @throws DukeExceptions if there is no start & end period being input.
      */
@@ -27,12 +28,13 @@ public class Events extends Task {
 
     /**
      * Function to print String representation of Event task.
+     *
      * @return String representation of Event task.
      */
     @Override
     public String toString() {
         String toReturn = "";
-        if (this.done) {
+        if (this.isDone) {
             toReturn = "[E][X]" + this.getName() + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";
         } else {
             toReturn = "[E][ ]" + this.getName() + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";
