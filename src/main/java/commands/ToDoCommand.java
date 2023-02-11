@@ -12,6 +12,7 @@ public class ToDoCommand implements Command {
     public ToDoCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Todo todo = new Todo(getDescription());

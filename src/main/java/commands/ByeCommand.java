@@ -10,6 +10,7 @@ public class ByeCommand implements Command{
     public ByeCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.exitMessage();

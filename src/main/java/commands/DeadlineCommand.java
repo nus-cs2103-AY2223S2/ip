@@ -11,6 +11,7 @@ public class DeadlineCommand implements Command {
     public DeadlineCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Deadline deadline = new Deadline(getDescription(), getDateTime());

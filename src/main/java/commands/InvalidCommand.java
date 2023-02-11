@@ -10,6 +10,7 @@ public class InvalidCommand implements Command {
     public InvalidCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         System.out.println("Invalid");

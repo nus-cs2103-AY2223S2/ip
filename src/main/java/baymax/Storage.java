@@ -19,10 +19,11 @@ public class Storage {
     // deals with loading tasks from the file and saving tasks in the file
 
     protected String filepath;
+
     public Storage(String filepath) {
         this.filepath = filepath;
     }
-    //
+
     public ArrayList<Task> load() throws BaymaxException {
         ArrayList<Task> myList = new ArrayList<>();
         try {
@@ -44,7 +45,7 @@ public class Storage {
                     String one = data.split(" " + "[(]" + "by: ")[0].substring(7);
                     String two = data.split(" " + "[(]" + "by: ")[1];
                     int l = two.length();
-                    two = two.substring(0, l - 2);
+                    two = two.substring(0, l - 1);
                     Task deadline = new Deadline(one, two);
                     if (data.charAt(4) == 'X') {
                         deadline.markAsDone();
@@ -56,7 +57,7 @@ public class Storage {
                     String two = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[0];
                     String three = data.split(" " + "[(]" + "from: ")[1].split(" to: ")[1];
                     int l = three.length();
-                    three = three.substring(0, l - 2);
+                    three = three.substring(0, l - 1);
                     Task even = new Event(one, two, three);
                     if (data.charAt(4) == 'X') {
                         even.markAsDone();
@@ -75,7 +76,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(filepath);
             for(Task task: myList) {
-                writer.write(task.toString() + "\n");
+                writer.write(task.writeToFile() + "\n");
             }
             writer.close();
         } catch (IOException e) {

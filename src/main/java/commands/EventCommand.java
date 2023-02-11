@@ -11,6 +11,7 @@ public class EventCommand implements Command {
     public EventCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Event event = new Event(getDescription(), getStartDateTime(), getEndDateTime());
@@ -24,10 +25,10 @@ public class EventCommand implements Command {
     }
 
     public String getStartDateTime() {
-        return input.split(" /from ", 2)[1].split(" /by ", 2)[0];
+        return input.split(" /from ", 2)[1].split(" /to ", 2)[0];
     }
 
     public String getEndDateTime() {
-        return input.split(" /by ", 2)[1];
+        return input.split(" /to ", 2)[1];
     }
 }

@@ -8,10 +8,10 @@ import tasks.Event;
 
 public class Ui {
     // deals with interactions with the user
+
     public void showLoadingErrorMessage() {
         System.out.println("Unable to load previous tasks");
     }
-
     public void welcomeMessage() {
         System.out.println("Hello, I am Baymax.Baymax your personal chat bot Companion. \nWhat can I do for you today?");
     }

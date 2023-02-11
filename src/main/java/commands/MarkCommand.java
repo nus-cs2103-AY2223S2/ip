@@ -10,6 +10,7 @@ public class MarkCommand implements Command{
     public MarkCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTaskList().get(getIndex() - 1);

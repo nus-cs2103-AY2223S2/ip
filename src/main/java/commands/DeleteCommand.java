@@ -10,6 +10,7 @@ public class DeleteCommand implements Command {
     public DeleteCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.getTaskList().remove(getIndex() - 1);

@@ -9,7 +9,8 @@ public class Deadline extends Task {
     protected String deadline;
 
     protected LocalDate date;
-    protected LocalTime time = null;
+    protected LocalTime time;
+
 
     public Deadline(String description, String deadline) {
         super(description);
@@ -31,15 +32,21 @@ public class Deadline extends Task {
     }
 
     public String printDateAndTime() {
-        if (time.equals(null)) {
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if (!deadline.contains(" ")) {
+            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         else {
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + Integer.toString(time.getHour()) + Integer.toString(time.getMinute());
+            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time.getHour() + time.getMinute();
         }
     }
+
     @Override
     public String toString() {
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + printDateAndTime() + ")";
+    }
+
+    @Override
+    public String writeToFile() {
         return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + deadline + ")";
     }
 }

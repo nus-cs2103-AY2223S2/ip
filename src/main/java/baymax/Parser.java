@@ -12,6 +12,7 @@ import commands.DeleteCommand;
 import commands.InvalidCommand;
 
 public class Parser {
+    
     private enum commands {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }

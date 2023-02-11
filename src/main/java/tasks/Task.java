@@ -21,11 +21,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markAsDoneMessage() {
-        System.out.println("Tasks.Task Marked as done");
-    }
-
-    public void markAsNotDoneMessage() {
-        System.out.println("Tasks.Task marked as not done");
+    public String writeToFile() {
+        return description;
     }
 }

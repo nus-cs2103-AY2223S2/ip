@@ -11,6 +11,7 @@ public class UnmarkCommand implements Command {
     public UnmarkCommand(String input) {
         this.input = input;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTaskList().get(getIndex(input) - 1);

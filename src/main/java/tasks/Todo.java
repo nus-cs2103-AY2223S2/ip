@@ -11,4 +11,9 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + "[" + this.getStatusIcon() + "] " + this.description + " ";
     }
+
+    @Override
+    public String writeToFile() {
+        return "[T]" + "[" + this.getStatusIcon() + "] " + this.description + " ";
+    }
 }
