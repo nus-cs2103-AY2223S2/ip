@@ -17,7 +17,7 @@ public class DukeIo {
                                          + "[mark] : Mark a task as completed\n"
                                          + "[unmark] : Unmark a completed task\n"
                                          + "[delete] : Delete a task from the list\n";
-    private static final String HELLO = "Hello! I am Duke\n"
+    private static final String HELLO = "Hello! I am Duke.\n"
                                         + "What's on your mind today?\n";
     private static final String SAVE_SUCCESS = "Successfully saved all tasks\n";
     private static final String SAVE_FAILURE = "FAILED TO SAVE ALL TASKS\n";
@@ -51,7 +51,7 @@ public class DukeIo {
      * @param t Task object and its inherited classes.
      */
     public String notifySuccessAdd(Task t) {
-        String out = "Successfully added: " + t.toString();
+        String out = "Successfully added: " + t.toString() + "\n";
         return out;
     }
 
@@ -60,7 +60,7 @@ public class DukeIo {
      * @param t Task obejct and its inherited classes.
      */
     public String notifySuccessComplete(Task t) {
-        String out = "Successfully completed: " + t.toString();
+        String out = "Successfully completed: " + t.toString() + "\n";
         return out;
     }
 
@@ -69,7 +69,7 @@ public class DukeIo {
      * @param t Task object and its inherited classes.
      */
     public String notifyUnmark(Task t) {
-        String out = "Unmarked task: " + t.toString();
+        String out = "Unmarked task: " + t.toString() + "\n";
         return out;
     }
 
@@ -78,7 +78,7 @@ public class DukeIo {
      * @param t Task object and its inherited classes.
      */
     public String notifyMarkFail(Task t) {
-        String out = "Cannot mark completed task: " + t.toString();
+        String out = "Cannot mark completed task: " + t.toString() + "\n";
         return out;
     }
 
@@ -87,7 +87,7 @@ public class DukeIo {
      * @param t Task object and its inherited classes.
      */
     public String notifyUnmarkFail(Task t) {
-        String out = "Cannot unmark incomplete task: " + t.toString();
+        String out = "Cannot unmark incomplete task: " + t.toString() + "\n";
         return out;
     }
 
@@ -123,7 +123,7 @@ public class DukeIo {
         for (Integer i = 0; i < taskCount; i++) {
             String showString = "   "  + Integer.toString(i + 1) + ": "
                                  + allTasks.get(i).toString();
-            str.append(showString);
+            str.append(showString + "\n");
         }
         return str.toString();
     }
@@ -140,7 +140,7 @@ public class DukeIo {
         for (Integer i = 0; i < taskCount; i++) {
             String showString = "   " + Integer.toString(i + 1) + ": "
                                  + filteredTasks.get(i).toString();
-            str.append(showString);
+            str.append(showString + "\n");
         }
         return str.toString();
     }
@@ -187,7 +187,7 @@ public class DukeIo {
      * Displays failure toast upon no find results
      */
     public String notifyZeroHits() {
-        return "No tasks found.";
+        return "No tasks found.\n";
     }
 
     /**

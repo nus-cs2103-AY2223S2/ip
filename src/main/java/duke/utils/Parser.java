@@ -145,6 +145,11 @@ public class Parser {
 
     private Command parseFind(String[] tokens) {
         StringBuilder s = new StringBuilder();
+        for (String search : tokens) {
+            if (!search.equals("find")) {
+                
+            }
+        }
         s.append(
                 Arrays.stream(tokens)
                 .filter(str -> !str.equals("find"))
