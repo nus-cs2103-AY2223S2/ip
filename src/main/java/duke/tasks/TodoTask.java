@@ -14,6 +14,19 @@ public class TodoTask extends Task {
         super(name);
     }
 
+    /**
+     * Copy constructor for the {@code TodoTask} class.
+     *
+     * @param other The {@code TodoTask} to be deep copied.
+     */
+    public TodoTask(TodoTask other) {
+        super(other);
+    }
+
+    public TodoTask deepClone() {
+        return new TodoTask(this);
+    }
+
     public String toDukeFileString() {
         return "T|" + super.toDukeFileString();
     }

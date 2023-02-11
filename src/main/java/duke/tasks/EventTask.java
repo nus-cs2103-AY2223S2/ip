@@ -21,6 +21,21 @@ public class EventTask extends Task {
         this.to = to;
     }
 
+    /**
+     * Copy constructor for the {@code EventTask} class.
+     *
+     * @param other The {@code EventTask} to be deep copied.
+     */
+    public EventTask(EventTask other) {
+        super(other);
+        from = other.from;
+        to = other.to;
+    }
+
+    public EventTask deepClone() {
+        return new EventTask(this);
+    }
+
     public String toDukeFileString() {
         return "E|" + super.toDukeFileString() + "|" + from + "|" + to;
     }

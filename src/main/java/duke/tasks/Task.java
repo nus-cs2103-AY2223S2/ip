@@ -19,6 +19,20 @@ public class Task {
     }
 
     /**
+     * Copy constructor for the {@code Task} class.
+     *
+     * @param other The {@code Task} to be deep copied.
+     */
+    public Task(Task other) {
+        name = other.name;
+        isDone = other.isDone;
+    }
+
+    public Task deepClone() {
+        return new Task(this);
+    }
+
+    /**
      * Marks the task as done.
      */
     public void markDone() {

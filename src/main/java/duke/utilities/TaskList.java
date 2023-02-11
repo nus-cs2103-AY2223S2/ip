@@ -2,6 +2,7 @@ package duke.utilities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import duke.exceptions.DukeEmptyUndoHistoryException;
 import duke.tasks.DeadlineTask;
 import duke.tasks.Task;
 
@@ -10,13 +11,15 @@ import duke.tasks.Task;
  */
 public class TaskList {
 
-    private final ArrayList<Task> tasks;
+    private final UndoHistory undoHistory;
+    private ArrayList<Task> tasks;
 
     /**
      * Instantiates a new empty {@code TaskList} object.
      */
     public TaskList() {
         tasks = new ArrayList<>();
+        undoHistory = new UndoHistory();
     }
 
     /**
@@ -24,6 +27,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> taskList) {
         tasks = taskList;
+        undoHistory = new UndoHistory();
     }
 
     /**
@@ -32,6 +36,7 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void addTask(Task task) {
+        undoHistory.addNewState(tasks);
         tasks.add(task);
     }
 
@@ -42,6 +47,7 @@ public class TaskList {
      * @return The task that was deleted.
      */
     public Task deleteTask(int index) {
+        undoHistory.addNewState(tasks);
         return tasks.remove(index);
     }
 
@@ -62,6 +68,8 @@ public class TaskList {
      * @return The task that was marked as done.
      */
     public Task markTaskAsDone(int index) {
+        undoHistory.addNewState(tasks);
+
         Task task = tasks.get(index);
         task.markDone();
         return task;
@@ -74,6 +82,8 @@ public class TaskList {
      * @return The task that was unmarked as done.
      */
     public Task unmarkTaskAsDone(int index) {
+        undoHistory.addNewState(tasks);
+
         Task task = tasks.get(index);
         task.unmarkDone();
         return task;
@@ -114,6 +124,10 @@ public class TaskList {
         }
 
         return arrayList;
+    }
+
+    public void restorePreviousState() throws DukeEmptyUndoHistoryException {
+        tasks = undoHistory.popLastState();
     }
 
     /**
