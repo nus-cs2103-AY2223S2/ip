@@ -122,7 +122,7 @@ public class DateUtils {
 
 
     /**
-     * Return the time that is the start of the week of the given time.
+     * Returns the time that is the start of the week of the given time.
      *
      * @param time - a time.
      * @param weekStart - the {@code DayOfWeek} that is the start of the week.
