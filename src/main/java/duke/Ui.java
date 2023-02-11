@@ -388,6 +388,16 @@ public class Ui {
     }
 
     /**
+     * Prints out the error given in as a String
+     *
+     * @param err
+     * @return String representation of error
+     */
+    public static String stringError(Exception err) {
+        return err.getMessage();
+    }
+
+    /**
      * Private method to print with lines and indents
      *
      * @param to of the event ending datePrint

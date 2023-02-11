@@ -52,6 +52,7 @@ public class Duke {
 
     /**
      * Main method for running the text Version
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -60,15 +61,14 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generate response from Duke to put into UI
+     *
+     * @param input
+     * @return String response from Duke
+     * @throws DukeException
      */
-    public String getResponse(String input) {
-        try {
-            Command c = Parser.parse(input);
-            return c.executeString(tasks, ui, storage);
-        } catch (DukeException e) {
-            return ui.stringError(e.getMessage());
-        }
+    public String getResponse(String input) throws DukeException {
+        Command c = Parser.parse(input);
+        return c.executeString(tasks, ui, storage);
     }
 }
