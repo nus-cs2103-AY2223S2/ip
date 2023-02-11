@@ -20,35 +20,35 @@ public class Parser {
         String[] words = input.split(" ");
         Type t = Type.valueOf(words[0].toUpperCase());
         switch (t) {
-            case LIST:
-                return new ListCommand(input);
+        case LIST:
+            return new ListCommand(input);
 
-            case DEADLINE:
-                return new DeadlineCommand(input);
+        case DEADLINE:
+            return new DeadlineCommand(input);
 
-            case UNMARK:
-                return new UnmarkCommand(input);
+        case UNMARK:
+            return new UnmarkCommand(input);
 
-            case TODO:
-                return new TodoCommand(input);
+        case TODO:
+            return new TodoCommand(input);
 
-            case EVENT:
-                return new EventCommand(input);
+        case EVENT:
+            return new EventCommand(input);
 
-            case DELETE:
-                return new DeleteCommand(input);
+        case DELETE:
+            return new DeleteCommand(input);
 
-            case MARK:
-                return new MarkCommand(input);
+        case MARK:
+            return new MarkCommand(input);
 
-            case BYE:
-                return new ExitCommand(input);
+        case BYE:
+            return new ExitCommand(input);
 
-            case FIND:
-                return new FindCommand(input);
+        case FIND:
+            return new FindCommand(input);
 
-            default:
-                throw new IllegalArgumentException();
+        default:
+            throw new IllegalArgumentException();
         }
     }
 }

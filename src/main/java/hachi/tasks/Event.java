@@ -20,6 +20,31 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public boolean checkInput(Event taskOne, Event taskTwo) {
+        return taskOne.input.equals(taskTwo.input);
+    }
+
+    public boolean checkFrom(Event taskOne, Event taskTwo) {
+        return taskOne.from.equals(taskTwo.from);
+    }
+
+    public boolean checkTo(Event taskOne, Event taskTwo) {
+        return taskOne.to.equals(taskTwo.to);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Event) {
+            Event task = (Event) o;
+            if (checkInput(task, this) || checkFrom(task, this) || checkTo(task, this)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
     /**
      * Returns the string representation of the Event object with
      * specified description and dates.

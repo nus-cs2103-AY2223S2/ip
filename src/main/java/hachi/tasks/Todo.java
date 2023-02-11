@@ -14,6 +14,23 @@ public class Todo extends Task {
         super(input);
     }
 
+    public boolean checkInput(Todo taskOne, Todo taskTwo) {
+        return taskOne.input.equals(taskTwo.input);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Todo) {
+            Todo task = (Todo) o;
+            if (checkInput(task, this)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
     /**
      * Returns the string representation of the Todo object.
      *
