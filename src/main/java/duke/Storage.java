@@ -1,10 +1,17 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 
 // Storage: provides the place to store the file
@@ -28,11 +35,11 @@ public class Storage {
                     if (fields[0].equals("T")) {
                         currTask = new Todo(fields[2]);
                     } else if (fields[0].equals("D")) {
-                        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("ddMMuuuu HHmm");
+                        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
                         LocalDateTime by = LocalDateTime.parse(fields[3], dateformatter);
                         currTask = new Deadline(fields[2], by);
                     } else if (fields[0].equals("E")) {
-                        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("ddMMuuuu HHmm");
+                        DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
                         LocalDateTime from = LocalDateTime.parse(fields[3], dateformatter);
                         LocalDateTime to = LocalDateTime.parse(fields[4], dateformatter);
                         currTask = new Event(fields[2], from, to);
@@ -47,8 +54,8 @@ public class Storage {
                     taskList.add(currTask);
                 }
             }
-        } catch (IOException e) {
-             throw new DukeException("caught a IOException");
+        } catch (IOException | DateTimeParseException e) {
+             throw new DukeException("Loading failed");
         }
         return taskList;
     }

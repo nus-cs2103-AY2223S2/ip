@@ -1,8 +1,14 @@
 /// Let parser throw exceptions for incorrect input
+package duke;
+
 import java.util.Arrays;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import duke.command.Command;
+import duke.command.UpdateCommand;
+import duke.command.AddCommand;
+
 public class Parser {
     protected static String[] commands = {"bye", "list", "mark", "unmark", "delete", "todo", "deadline", "event"};
 
@@ -12,7 +18,7 @@ public class Parser {
 
     public static Command parse(String fullcommand, Ui ui) throws DukeException {
         int firstWord = fullcommand.length() - 1;
-        String commandName = "";
+        String commandName;
         try {
             firstWord = fullcommand.indexOf(' ');
             commandName = fullcommand.substring(0, firstWord);
@@ -66,6 +72,7 @@ public class Parser {
                 } catch (DateTimeParseException | StringIndexOutOfBoundsException | DukeException e) {
                     ui.deadlineFormatAlert();
                 }
+                break;
             }
             case "event": {
                 try {

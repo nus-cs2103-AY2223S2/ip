@@ -1,4 +1,10 @@
+package duke;
+
 import java.util.Scanner;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.TaskList;
 
 public class Ui {
     public void showLine() {
@@ -35,7 +41,7 @@ public class Ui {
         }
     }
 
-    public void addTodo(Task t) {
+    public void addTodo(Todo t) {
         System.out.println("This todo has been added!");
         System.out.println("  " + t);
     }

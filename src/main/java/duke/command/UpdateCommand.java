@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+
 public class UpdateCommand extends Command {
     protected int index;
 

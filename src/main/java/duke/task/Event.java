@@ -1,5 +1,8 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import duke.task.Task;
 public class Event extends Task {
 
     protected LocalDateTime from;
@@ -19,6 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toRecord() {
-        return "E|" + super.toRecord() + "|" + from + "|" + to;
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        return "E|" + super.toRecord() + "|" + dateFormat.format(from) + "|" + dateFormat.format(to);
     }
 }

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 public class Duke {
 
     private Storage storage;
@@ -6,6 +10,7 @@ public class Duke {
 
     public Duke(String filePath) {
         this.ui = new Ui();
+        this.tasks = new TaskList();
         this.storage = new Storage(filePath); // create new storage object with file path
         try {
             this.tasks = new TaskList(storage.load()); //create new task list from data read from storage
