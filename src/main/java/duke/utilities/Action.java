@@ -13,5 +13,6 @@ public enum Action {
     delete,
     bye,
     dueon,
-    find
+    find,
+    undo
 }

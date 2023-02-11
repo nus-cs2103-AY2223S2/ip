@@ -22,6 +22,20 @@ public class DeadlineTask extends Task {
     }
 
     /**
+     * Copy constructor for the {@code DeadlineTask} class.
+     *
+     * @param other The {@code DeadlineTask} to be deep copied.
+     */
+    public DeadlineTask(DeadlineTask other) {
+        super(other);
+        by = other.by;
+    }
+
+    public DeadlineTask deepClone() {
+        return new DeadlineTask(this);
+    }
+
+    /**
      * Checks whether this {@code DeadlineTask} is due on {@code date}
      *
      * @param date A due date.

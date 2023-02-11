@@ -14,6 +14,7 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
+import duke.commands.UndoCommand;
 import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeInvalidFileFormatException;
 import duke.exceptions.DukeUnknownActionException;
@@ -62,6 +63,8 @@ public class Parser {
             return new DueOnCommand(tokens);
         case find:
             return new FindCommand(tokens);
+        case undo:
+            return new UndoCommand();
         default:
             throw new DukeUnknownActionException();
         }
