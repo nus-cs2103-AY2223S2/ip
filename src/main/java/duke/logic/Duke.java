@@ -1,8 +1,6 @@
 package duke.logic;
 
 import duke.DukeException;
-import duke.gui.Ui;
-import javafx.application.Application;
 
 /**
  * Duke class containing all logic components of Duke.

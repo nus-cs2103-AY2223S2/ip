@@ -26,10 +26,8 @@ public class Parser {
         for (int i = 1; i < words.length; i++) {
             desc.append(words[i]);
             if (i < words.length - 1) {
-                // only add whitespace if not last word
                 desc.append(" ");
             }
-
         }
         return new String[]{command, desc.toString()};
     }
@@ -44,7 +42,7 @@ public class Parser {
      * @return String response based on the command executed.
      */
     public static String execute(String command, String content, TaskList taskList) {
-        String response = "";
+        String response;
         if (command.equals("list")) {
             response = "Here are the tasks in your list\n" + taskList.toString();
         } else if (command.equals("todo")) {
