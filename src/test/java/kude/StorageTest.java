@@ -17,7 +17,7 @@ public class StorageTest {
     private String testFilePath = "./test_duke.txt";
 
     @Test
-    public void saveAndRetrieveEmptyList() throws IOException, ClassNotFoundException {
+    public void saveTaskList_retrieveEmptyList() throws IOException, ClassNotFoundException {
         var task = new TaskList();
         var storage = new Storage(testFilePath);
         storage.writeTaskList(task);
@@ -26,7 +26,7 @@ public class StorageTest {
     }
 
     @Test
-    public void saveAndRetrieveOneTodo() throws IOException, ClassNotFoundException {
+    public void saveTaskList_retrieveOneTodo() throws IOException, ClassNotFoundException {
         var task = new TaskList();
         var todo = new Todo("i am todo");
         task.add(todo);
@@ -41,7 +41,7 @@ public class StorageTest {
     }
 
     @Test
-    public void saveAndRetrieveOneDeadline() throws IOException, ClassNotFoundException {
+    public void saveTaskList_retrieveOneDeadline() throws IOException, ClassNotFoundException {
         var task = new TaskList();
         var now = LocalDateTime.now();
         task.add(new Deadline("i am deadline", now));
@@ -56,7 +56,7 @@ public class StorageTest {
     }
 
     @Test
-    public void saveAndRetrieveOneEvent() throws IOException, ClassNotFoundException {
+    public void saveTaskList_retrieveOneEvent() throws IOException, ClassNotFoundException {
         var task = new TaskList();
         var now = LocalDateTime.now();
         task.add(new Event("i am event", now, now.plusSeconds(100)));
@@ -72,7 +72,7 @@ public class StorageTest {
     }
 
     @Test
-    public void saveAndRetrieveMultiple() throws IOException, ClassNotFoundException {
+    public void saveTaskList_retrieveMultiple() throws IOException, ClassNotFoundException {
         var task = new TaskList();
         var now = LocalDateTime.now();
         task.add(new Todo("i am todo"));
