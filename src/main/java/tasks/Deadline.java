@@ -120,7 +120,7 @@ public class Deadline extends Task implements Comparable<Deadline> {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s %s)",
+        return String.format("[%s][%s] %s\n (by: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,

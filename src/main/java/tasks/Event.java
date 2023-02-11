@@ -123,7 +123,7 @@ public class Event extends Task {
     @Override
     public void unmark() {
         super.unmark();
-        System.out.printf(" [%s][%s] %s (from: %s %s to: %s %s)%n",
+        System.out.printf(" [%s][%s] %s(from: %s %s to: %s %s)%n",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
@@ -148,7 +148,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (from: %s %s to: %s %s)",
+        return String.format("[%s][%s] %s\n (from: %s %s\n        to: %s %s)",
                 this.getTaskType(),
                 this.getStatusIcon(),
                 this.description,
