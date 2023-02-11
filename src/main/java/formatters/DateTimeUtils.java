@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 public class DateTimeUtils {
 
     /**
-     * Return true if date is of the correct format.
+     * Returns true if date is of the correct format.
      * @param date string date
      * @return true if date is of correct format
      */
@@ -26,7 +26,7 @@ public class DateTimeUtils {
     }
 
     /**
-     * Return true if time is of the correct format.
+     * Returns true if time is of the correct format.
      * @param time string time
      * @return true if time is of correct format
      */
