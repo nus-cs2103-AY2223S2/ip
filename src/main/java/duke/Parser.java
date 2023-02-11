@@ -48,6 +48,7 @@ public class Parser {
         case ToDoCommand.COMMAND_WORD:
             try {
                 String desc = getDescToDo(userInput);
+                assert desc.length() == 0 : "Todo task description cannot be empty!";
                 return new ToDoCommand(desc);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
@@ -56,7 +57,9 @@ public class Parser {
         case DeadlineCommand.COMMAND_WORD:
             try {
                 String desc = getDescDeadline(userInput);
+                assert desc.length() == 0 : "Deadline task description cannot be empty!";
                 LocalDateTime byWhen = getDeadline(userInput);
+                assert byWhen == null : "Deadline should not be null!";
                 return new DeadlineCommand(desc, byWhen);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
@@ -65,8 +68,11 @@ public class Parser {
         case EventCommand.COMMAND_WORD:
             try {
                 String desc = getDescEvent(userInput);
+                assert desc.length() == 0 : "Event task description cannot be empty!";
                 LocalDateTime from = getFrom(userInput);
+                assert from == null : "Start date/time should not be null!";
                 LocalDateTime to = getTo(userInput);
+                assert to == null : "End date/time should not be null!";
                 return new EventCommand(desc, from, to);
             } catch (DukeException e) {
                 Ui.showError(e.getMessage());
@@ -83,6 +89,7 @@ public class Parser {
         default:
             return new UnknownCommand();
         }
+        assert false;
         return new UnknownCommand();
     }
 

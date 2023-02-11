@@ -46,23 +46,27 @@ public class Storage {
             char marker = arrOfDetails[2].charAt(0);
             boolean isMarked = (marker == 'X') ? true : false;
             String desc = arrOfDetails[1];
+            assert desc.length() == 0 : "Description of task cannot be empty!";
             switch (type) {
-            case "T":// T|desc|X
+            case "T":
                 storeTasks.add(new Todo(desc));
                 break;
-            case "D": //D|desc|X|byWhen
+            case "D":
                 LocalDateTime byWhen = LocalDateTime.parse(arrOfDetails[3]);
                 storeTasks.add(new Deadline(desc, byWhen));
                 break;
-            case "E": //D|desc|X|from|to
+            case "E":
                 LocalDateTime from = LocalDateTime.parse(arrOfDetails[3]);
                 LocalDateTime to = LocalDateTime.parse(arrOfDetails[4]);
                 storeTasks.add(new Event(desc, from, to));
                 break;
             default:
+                assert false;
                 throw new DukeException("Loading Error!!");
             }
             if (isMarked) {
+                assert numElem >= storeTasks.size() :
+                        "Index of current task should not be greater than the size of the task list!";
                 storeTasks.get(numElem).markAsDone();
             }
             numElem++;
@@ -98,8 +102,10 @@ public class Storage {
                             t.getDesc(), t.getStatusIcon(), eventTask.getFrom(), eventTask.getTo());
                     break;
                 default:
+                    assert false;
                     throw new DukeException("Saving Error");
                 }
+                assert content.length() == 0 : "Content to be saved should not be an empty string!";
                 fw.write(content + "\n");
             }
             fw.close();
