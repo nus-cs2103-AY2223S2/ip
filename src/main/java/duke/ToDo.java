@@ -21,7 +21,7 @@ public class ToDo extends Task {
      * Constructs a ToDo with the given description, isDone and date.
      *
      * @param description Description of the ToDo task.
-     * @param isDone      Whether the ToDo task is done.
+     * @param isDone Whether the ToDo task is done.
      */
     public ToDo(String description, boolean isDone, ArrayList<String> tags) {
         super(description, isDone, tags);

@@ -10,9 +10,9 @@ public class Parser {
      * execution method.
      *
      * @param userInput User Input.
-     * @param taskList  TaskList.
-     * @param storage   Storage.
-     * @param textUi    TextUi.
+     * @param taskList TaskList.
+     * @param storage Storage.
+     * @param textUi TextUi.
      */
     public String parse(String userInput, TaskList taskList, Storage storage, TextUi textUi)
             throws DukeException {
