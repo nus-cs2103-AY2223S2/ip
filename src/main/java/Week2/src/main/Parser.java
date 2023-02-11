@@ -11,6 +11,7 @@ public class Parser {
     private TaskList tasklist;
     private static boolean isBegin = false;
 
+
     Ui ui = new Ui();
 
     /**
@@ -20,6 +21,8 @@ public class Parser {
     public Parser(TaskList tasklist) {
         this.tasklist = tasklist;
     }
+
+    private Detect dt = new Detect(tasklist);
 
     /**
      * Uses input from user and execute it
@@ -68,6 +71,9 @@ public class Parser {
             return str1 + "\n" + str2 + "\n" + str3;
         } else if (c.startsWith("todo")) {
             String doit = c.substring(5, c.length());
+            if(dt.detectDuplicate(doit)) {
+                return "Same task already exists in the list."
+            }
             Task current = new Todo(doit);
             tasklist.add(current);
             String str1 = "Got it. I've added this task:";
