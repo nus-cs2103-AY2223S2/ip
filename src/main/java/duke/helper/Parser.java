@@ -13,6 +13,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import javafx.application.Platform;
 
 /**
  * Parser class to parse inputs
@@ -40,6 +41,7 @@ public class Parser {
      * @throws DukeException If input is invalid
      */
     public String parseInputs(String desc) throws DukeException {
+        assert desc.length() > 0 : "Inputs should not be empty!";
         String[] inputs = desc.split(" ", 2);
         String type = inputs[0];
 
@@ -61,6 +63,7 @@ public class Parser {
         case "find":
             return findCommand(inputs[1]);
         case "bye":
+            Platform.exit();
             return ui.showExit();
         default:
             throw new InvalidTaskCommandException();
@@ -89,6 +92,8 @@ public class Parser {
      * @throws InvalidDateTimeException If incorrect dateTime values are given
      */
     public static LocalDateTime handleDateTime(String dateTime) throws InvalidDateTimeException {
+        assert dateTime.length() > 0 : "DateTime not provided!";
+
         try {
             return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         } catch (DateTimeParseException e) {
@@ -144,7 +149,7 @@ public class Parser {
     }
 
     public String deleteCommand(String input) throws DukeException{
-        int taskNo = Integer.parseInt(input) - 1;
+        int taskNo = Integer.parseInt(input);
         return tasks.deleteTask(taskNo);
     }
 }

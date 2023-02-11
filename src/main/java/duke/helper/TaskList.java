@@ -30,6 +30,7 @@ public class TaskList {
      * @param task task to be added
      */
     public void addToTasks(Task task) {
+        assert task != null : "Task should not be empty!";
         tasks.add(task);
     }
 
@@ -51,6 +52,8 @@ public class TaskList {
      * @return task that has been deleted
      */
     public String deleteTask(int taskNo) throws DukeException{
+        assert taskNo > 0 : "Task number should be 1 or more";
+        taskNo--;
         String output = "";
         try {
             Task task = tasks.get(taskNo);
@@ -70,9 +73,11 @@ public class TaskList {
      * @param isDone whether the task is done
      * @param taskId id of the task
      */
+
     public String markCommand(boolean isDone, String taskId) throws DukeException {
         try {
             int taskNo = Integer.parseInt(taskId) - 1;
+            assert taskNo >= 0 : "Task number should be 1 or more";
             Task taskToMark = tasks.get(taskNo);
             taskToMark.setIsDone(isDone);
             return ui.showMark(isDone, taskToMark);

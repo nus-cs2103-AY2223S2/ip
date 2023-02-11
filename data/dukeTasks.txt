@@ -1,6 +1,0 @@
-[D][ ] return book (by: 2023-01-24 14:00)
-[E][ ] project meeting (from: 2023-01-25 14:00 to: 2023-01-25 14:00)
-[T][X] borrow book
-[T][ ] k
-[T][ ] cs2103t
-[T][ ] cs2103t ip
