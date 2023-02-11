@@ -130,10 +130,10 @@ public class Storage {
     /**
      * Delete entry in persistent storage.
      *
-     * @param taskId id that identifies the task in the file.
+     * @param taskIds id that identifies the task in the file.
      * @throws DukeException when file I/O is unsuccessful.
      */
-    public void deleteEntry(int taskId) throws DukeException {
+    public void deleteEntries(ArrayList<Integer> taskIds) throws DukeException {
         try {
             File dukeFile = new File(this.filePath);
             Scanner scan = new Scanner(dukeFile);
@@ -144,7 +144,7 @@ public class Storage {
             int counter = 0;
             while (scan.hasNext()) {
                 String taskEntry = scan.nextLine();
-                if (counter != taskId) {
+                if (!taskIds.contains(counter)) {
                     tempWriter.write(taskEntry + "\n");
                 }
                 counter++;
@@ -163,11 +163,11 @@ public class Storage {
     /**
      * Updates entry in persistent storage.
      *
-     * @param taskId id that identifies the task in the file.
+     * @param taskIds id that identifies the task in the file.
      * @param isMark determines whether to mark entry as complete or incomplete.
      * @throws DukeException when file I/O is unsuccessful.
      */
-    public void markEntry(int taskId, boolean isMark) throws DukeException {
+    public void markEntries(ArrayList<Integer> taskIds, boolean isMark) throws DukeException {
         try {
             File dukeFile = new File(this.filePath);
             Scanner scan = new Scanner(dukeFile);
@@ -180,7 +180,7 @@ public class Storage {
 
             while (scan.hasNext()) {
                 String taskEntry = scan.nextLine();
-                if (counter == taskId) {
+                if (taskIds.contains(counter)) {
                     String target = isMark ? "| 0 |" : "| 1 |";
                     String replacement = isMark ? "| 1 |" : "| 0 |";
                     taskEntry = taskEntry.replace(target, replacement);

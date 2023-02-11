@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
@@ -9,6 +11,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+
 
 /**
  * Contains Logic of Duke Application.
@@ -114,18 +117,6 @@ public class Duke {
         return generateAddTaskMessage(tempEvent);
     }
 
-    private String generateAddTaskMessage(Task task) {
-        String message = "Got it. I've added this task:\n " + task.toString();
-        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
-        return message;
-    }
-
-    private String generateDeleteTaskMessage(Task task) {
-        String message = "Noted. I've removed this task:\n " + task.toString();
-        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
-        return message;
-    }
-
     private String listTask() {
         String message = "Here are the tasks in your list:";
         message += tasks.getTaskList();
@@ -140,48 +131,81 @@ public class Duke {
     }
 
     private String markTask(String[] input) throws DukeException {
-
-        int taskNum = Parser.parseMarkTask(input);
-        if (taskNum > tasks.numTasks() || taskNum <= 0) {
+        ArrayList<Integer> taskIds = Parser.parseMarkTask(input);
+        if (!validateIdsRange(taskIds)) {
             throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
         }
-        assert taskNum <= tasks.numTasks() : "Referenced task number should be <= number existing task";
-        storage.markEntry(taskNum - 1, true);
 
-        Task oneTask = tasks.getTask(taskNum - 1);
-        tasks.markTask(taskNum - 1);
-
-        String message = "Nice! I've marked this task as done:\n " + oneTask.toString();
-        return message;
+        storage.markEntries(taskIds, true);
+        ArrayList<Task> selectedTasks = tasks.getMultipleTasks(taskIds);
+        return generateMarkMessage(selectedTasks, true);
     }
 
     private String unmarkTask(String[] input) throws DukeException {
-        int taskNum = Parser.parseUnmarkTask(input);
-
-        if (taskNum > tasks.numTasks() || taskNum <= 0) {
+        ArrayList<Integer> taskIds = Parser.parseUnmarkTask(input);
+        if (!validateIdsRange(taskIds)) {
             throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
         }
-        assert taskNum <= tasks.numTasks() : "Referenced task number should be <= number existing task";
-        storage.markEntry(taskNum - 1, false);
 
-        Task oneTask = tasks.getTask(taskNum - 1);
-        tasks.unmarkTask(taskNum - 1);
-        String message = "OK! I've marked this task as not done yet:\n " + oneTask.toString();
+        storage.markEntries(taskIds, false);
+        ArrayList<Task> selectedTasks = tasks.getMultipleTasks(taskIds);
+        return generateMarkMessage(selectedTasks, false);
+    }
+
+
+    private String deleteTask(String[] input) throws DukeException {
+        ArrayList<Integer> taskIds = Parser.parseDeleteTask(input);
+        if (!validateIdsRange(taskIds)) {
+            throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+        }
+
+        storage.deleteEntries(taskIds);
+        ArrayList<Task> selectedTasks = tasks.getMultipleTasks(taskIds);
+        tasks.deleteTasks(taskIds);
+        return generateDeleteTaskMessage(selectedTasks);
+    }
+
+    private String generateAddTaskMessage(Task task) {
+        String message = "Got it. I've added this task:\n " + task.toString();
+        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
         return message;
     }
 
-    private String deleteTask(String[] input) throws DukeException {
-        int taskNum = Parser.parseDeleteTask(input);
-        if (taskNum > tasks.numTasks() || taskNum <= 0) {
-            throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+    private String generateDeleteTaskMessage(ArrayList<Task> selectedTasks) {
+        String message = "Noted. I've removed these tasks:\n ";
+        for (int i = 0; i < selectedTasks.size(); i++) {
+            Task oneTask = selectedTasks.get(i);
+            message += oneTask.toString() + "\n";
         }
-        assert taskNum <= tasks.numTasks() : "Referenced task number should be <= number existing task";
-        storage.deleteEntry(taskNum - 1);
-
-        Task delTask = tasks.getTask(taskNum - 1);
-        tasks.deleteTask(taskNum - 1);
-        return generateDeleteTaskMessage(delTask);
+        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
+        return message;
     }
 
+    private String generateMarkMessage(ArrayList<Task> selectedTasks, boolean isMark) {
+        String unmarkMsg = "OK! I've marked these tasks as not done yet:\n ";
+        String markMsg = "Nice! I've marked this task as done:\n ";
+        String message = isMark ? markMsg : unmarkMsg;
+        for (int i = 0; i < selectedTasks.size(); i++) {
+            Task oneTask = selectedTasks.get(i);
+            if (isMark) {
+                oneTask.markTask();
+            } else {
+                oneTask.unmarkTask();
+            }
+            message += oneTask.toString() + "\n";
+        }
+        return message;
+    }
+
+    private boolean validateIdsRange(ArrayList<Integer> taskIds) {
+        for (int i = 0; i < taskIds.size(); i++) {
+            int taskNum = taskIds.get(i);
+            if (taskNum > tasks.numTasks() - 1 || taskNum <= -1) {
+                return false;
+            }
+            assert taskNum <= tasks.numTasks() : "Referenced task number should be <= number existing task";
+        }
+        return true;
+    }
 
 }
