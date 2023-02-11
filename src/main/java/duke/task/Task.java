@@ -50,4 +50,7 @@ public class Task {
     public String getDetailsToSave() { // dummy
         return String.format("task %s", desc);
     }
+    public void edit(String newDesc) {
+        desc = newDesc;
+    }
 }

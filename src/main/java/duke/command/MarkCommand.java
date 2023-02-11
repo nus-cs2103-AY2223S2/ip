@@ -34,7 +34,7 @@ public class MarkCommand extends Command {
         } else if (num > tasks.size()) {
             throw new DukeInvalidArgumentException("Huh? You don't even have that many items on your list!");
         } else {
-            Task t = tasks.mark(num - 1);
+            Task t = tasks.mark(num);
             ui.showBunny();
             response = ui.mark(t);
         }

@@ -51,7 +51,7 @@ public class TaskList {
      * @throws DukeException
      */
     public Task mark(int num) throws DukeException {
-        Task t = tasks.get(num);
+        Task t = tasks.get(num - 1);
         if (t.isDone()) {
             throw new DukeInvalidArgumentException("Huh? You've already done this task!");
         } else {
@@ -67,7 +67,7 @@ public class TaskList {
      * @throws DukeException
      */
     public Task unmark(int num) throws DukeException {
-        Task t = tasks.get(num);
+        Task t = tasks.get(num - 1);
         if (!t.isDone()) {
             throw new DukeInvalidArgumentException("Huh? You haven't even done this task!");
         } else {
@@ -93,5 +93,17 @@ public class TaskList {
 
     public boolean isEmpty() {
         return tasks.isEmpty();
+    }
+
+    /**
+     * Edits a task description.
+     * @param num The task number.
+     * @param newDesc The new description.
+     * @return The task whose description has been edited.
+     */
+    public Task edit(int num, String newDesc) {
+        Task t = tasks.get(num - 1);
+        t.edit(newDesc);
+        return t;
     }
 }

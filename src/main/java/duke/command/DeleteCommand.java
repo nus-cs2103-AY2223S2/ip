@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
         } else if (num > tasks.size()) {
             throw new DukeInvalidArgumentException("Huh? You don't even have that many items on your list!");
         } else {
-            Task t = tasks.delete(num - 1);
+            Task t = tasks.delete(num);
             ui.showBunny();
             response = ui.delete(t, tasks);
         }

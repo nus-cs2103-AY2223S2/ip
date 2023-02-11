@@ -10,14 +10,16 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * A command that unmarks a task as completed,
- * i.e. it is marked as uncompleted.
+ * A command that edits a task's description.
  */
-public class UnmarkCommand extends Command {
+public class EditCommand extends Command {
 
     private final int num;
-    UnmarkCommand(int num) {
+    private final String newDesc;
+
+    EditCommand(int num, String newDesc) {
         this.num = num;
+        this.newDesc = newDesc;
     }
 
     /**
@@ -30,17 +32,17 @@ public class UnmarkCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         String response;
+        System.out.println(num);
         if (num <= 0) {
             throw new DukeInvalidArgumentException("Huh? Your task number needs to be greater than zero!");
         } else if (num > tasks.size()) {
             throw new DukeInvalidArgumentException("Huh? You don't even have that many items on your list!");
         } else {
-            Task t = tasks.unmark(num);
+            Task t = tasks.edit(num, newDesc);
             ui.showBunny();
-            response = ui.unmark(t);
+            response = ui.edit(t);
         }
         storage.saveTasks(tasks);
         return response;
     }
-
 }

@@ -20,5 +20,4 @@ public class ToDo extends Task {
     public String getDetailsToSave() {
         return String.format("todo %s\n%s", isDone, desc);
     }
-
 }

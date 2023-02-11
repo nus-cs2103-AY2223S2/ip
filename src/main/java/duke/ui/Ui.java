@@ -85,7 +85,9 @@ public class Ui {
      * @param t The task that has been marked done.
      */
     public String mark(Task t) {
-        return "Okie! I've marked this task as done:\n" + t;
+        String response = "Okie! I've marked this task as done:\n" + t;
+        System.out.println(response);
+        return response;
     }
 
     /**
@@ -93,7 +95,9 @@ public class Ui {
      * @param t The task that has been marked done.
      */
     public String unmark(Task t) {
-        return "Okie! I've marked this task as not done yet:\n" + t;
+        String response = "Okie! I've marked this task as not done yet:\n" + t;
+        System.out.println(response);
+        return response;
     }
 
     /**
@@ -120,6 +124,17 @@ public class Ui {
         String response = "Okie! I've removed this task:\n"
                 + t
                 + "\n" + showTaskListStatus(tasks);
+        System.out.println(response);
+        return response;
+    }
+
+    /**
+     * Tells the user that a task has been edited.
+     * @param t The task that has been edited.
+     */
+    public String edit(Task t) {
+        String response = "Okie! I've updated your task description:\n"
+                + t;
         System.out.println(response);
         return response;
     }

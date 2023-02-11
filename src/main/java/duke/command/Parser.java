@@ -36,10 +36,10 @@ public class Parser {
             return handleToDo(line);
         } else if (command.equals("deadline")) {
             return handleDeadline(line);
-
         } else if (command.equals("event")) {
             return handleEvent(line);
-
+        } else if (command.equals("edit")) {
+            return handleEdit(chunked);
         } else {
             throw new DukeInvalidCommandException("Huh? Sorry I don't know what this means :(");
         }
@@ -126,5 +126,20 @@ public class Parser {
         String timeTo = fromTo[5];
 
         return new AddEventCommand(desc, dateFrom, timeFrom, dateTo, timeTo);
+    }
+
+    static Command handleEdit(String[] chunked) throws DukeException {
+        if (chunked.length < 3) {
+            throw new DukeInvalidCommandException();
+        } else {
+            String newDesc = "";
+            for (int i = 2; i < chunked.length; i++) {
+                newDesc += chunked[i];
+                if (i != chunked.length - 1) {
+                    newDesc += " ";
+                }
+            }
+            return new EditCommand(Integer.parseInt(chunked[1]), newDesc);
+        }
     }
 }
