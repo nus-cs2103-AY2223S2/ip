@@ -1,5 +1,6 @@
 package duke;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import duke.tasks.Task;
 
@@ -75,19 +76,18 @@ public class TaskList {
      */
     public String printList() {
         StringBuilder tasksList = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            tasksList.append(i + 1).append(". ").append(tasks.get(i).toString());
-            if (i < tasks.size() - 1) {
-                tasksList.append("\n");
-            }
-        }
+        AtomicInteger count = new AtomicInteger(1);
+        tasks.forEach(
+                task -> tasksList.append(count.getAndIncrement())
+                        .append(". ")
+                        .append(task)
+                        .append("\n"));
         return tasksList.toString();
     }
 
     /**
      * Filters tasks with the given keyword.
      *
-//     * @param keyword Keyword for searching tasks
      * @return String of matching task(s).
      */
     public String findMatchingTasks(String... keywords) {
@@ -96,7 +96,7 @@ public class TaskList {
         for (Task task : tasks) {
             for (String kw : keywords) {
                 if (task.toString().contains(kw)) {
-                    tasksList.append(count++).append(". ").append(task.toString()).append("\n");
+                    tasksList.append(count++).append(". ").append(task).append("\n");
                     break;
                 }
             }
