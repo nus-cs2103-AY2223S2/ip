@@ -146,6 +146,7 @@ public class Storage {
                     t = new Events(s[2], s[3], s[4]);
                     break;
                 }
+                assert t != null : "Attempt to create empty task when load data from storage.";
                 t.setDone(isDone);
                 taskList.add(t);
             }

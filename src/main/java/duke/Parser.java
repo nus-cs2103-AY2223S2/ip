@@ -46,7 +46,7 @@ public class Parser {
         default:
             throw new DukeUnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }
-
+        assert c != null : "Attempt to create empty command.";
         return c;
     }
 }
