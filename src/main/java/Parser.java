@@ -1,4 +1,5 @@
 public class Parser {
+
     public Command parseCommand(String command) throws DukeException {
         String[] tokens = command.split(" ", 2);
         if (tokens.length == 1) {
