@@ -12,7 +12,6 @@ import java.util.stream.Stream;
  * @see Task
  */
 public class TaskList {
-    //private static final int GAPS = 3;
     public static final String GAP = "   ";
 
     private final ArrayList<Task> tasks;

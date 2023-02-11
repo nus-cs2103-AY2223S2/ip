@@ -39,7 +39,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Replace the current task description with a new description.
+     * Replaces the current task description with a new description.
      *
      * @param newDesc The new task description.
      */
