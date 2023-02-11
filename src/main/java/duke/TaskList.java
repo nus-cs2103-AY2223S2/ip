@@ -1,13 +1,12 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
     static ArrayList<Task> list;
 
     public TaskList() {
-        this.list = list = new ArrayList<Task>();
+        list = new ArrayList<>();
     }
 
     public void add(Task task) {

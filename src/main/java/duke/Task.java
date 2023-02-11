@@ -12,7 +12,6 @@ public abstract class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = isDone;
     }
 
     public Task(boolean isDone, String description) {
