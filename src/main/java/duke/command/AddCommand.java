@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+
 import duke.task.Task;
 
 import duke.tasklist.TaskList;
@@ -26,7 +28,7 @@ public class AddCommand extends Command {
      * @return The String response of the chatbot.
      */
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList) throws DukeException {
         return taskList.addTask(this.task, this.taskType);
     }
 

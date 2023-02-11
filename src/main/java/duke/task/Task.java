@@ -38,7 +38,7 @@ public abstract class Task {
         } else if (taskType.equals("D")) {
             answer = new Deadline(description, LocalDateTime.parse(taskParts[3]));
 
-        } else if (taskType.equals("E")) {
+        } else {
             answer = new Event(description,
                     LocalDateTime.parse(taskParts[3]),
                     LocalDateTime.parse(taskParts[4]));

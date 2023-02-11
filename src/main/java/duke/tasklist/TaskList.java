@@ -45,13 +45,13 @@ public class TaskList {
 
     }
 
-    private String markUnmark(int taskNumber, boolean toMark) throws DukeException {
+    private String markUnmark(int taskNumber, boolean isMarkCommand) throws DukeException {
         boolean isValidTaskNumber = (taskNumber > 0
                 && taskNumber <= this.tasks.size());
 
         if (isValidTaskNumber) {
             StringBuilder response = new StringBuilder();
-            if (toMark) {
+            if (isMarkCommand) {
                 this.tasks.get(taskNumber - 1).mark();
                 response.append("I have marked Task ")
                         .append(taskNumber)
