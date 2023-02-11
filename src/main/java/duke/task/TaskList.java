@@ -33,6 +33,8 @@ public class TaskList implements Serializable {
      * @return The Task at the index of the list of tasks.
      */
     public Task get(int index) {
+        assert index >= 0;
+        assert index <= this.getSize();
         return this.tasks.get(index);
     }
 
@@ -51,6 +53,8 @@ public class TaskList implements Serializable {
      * @param index The index of the task in the list of tasks to be deleted.
      */
     public void delete(int index) {
+        assert index >= 0;
+        assert index <= this.getSize();
         this.tasks.remove(index);
     }
 
