@@ -1,7 +1,8 @@
 package duke.exceptions;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeInvalidArgumentExceptionTest {
     @Test
@@ -17,7 +18,7 @@ public class DukeInvalidArgumentExceptionTest {
         DukeInvalidArgumentException exception = new DukeInvalidArgumentException(message);
         assertEquals(exception.getMessage(), message);
         assertEquals(
-                exception.getDukeMessage(), 
+                exception.getDukeMessage(),
                 DukeException.DUKE_MESSAGE_PREFIX + message);
     }
 }

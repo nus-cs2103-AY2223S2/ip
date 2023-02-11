@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public abstract class DukeException extends Exception {
     /** The error-message-prefix for Duke to display. */
-    protected final static String DUKE_MESSAGE_PREFIX = ":( OOPS!!! ";
+    protected static final String DUKE_MESSAGE_PREFIX = ":( OOPS!!! ";
 
     public DukeException() {
         super();
@@ -18,6 +18,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * Gets the formatted error message to be displayed in Duke.
+     *
      * @return Formatted error message.
      */
     public String getDukeMessage() {

@@ -2,7 +2,7 @@ package duke.exceptions;
 
 /**
  * The exception that's thrown when an invalid base command is entered into Duke.
- * An example of a base command is the "unknowncommand" in 
+ * An example of a base command is the "unknowncommand" in
  * "unknowncommand DESCRIPTION /param PARAM VALUE".
  */
 public class DukeInvalidCommandException extends DukeException {

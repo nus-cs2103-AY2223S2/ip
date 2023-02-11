@@ -9,9 +9,9 @@ public class TaskTodo extends Task {
     }
 
     /**
-     * Parses a todo task that has been encoded into a string, into a 
+     * Parses a todo task that has been encoded into a string, into a
      * 'TaskTodo' instance.
-     * 
+     *
      * @param input The encoded todo task.
      * @return The todo task that was encoded.
      * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
@@ -30,17 +30,17 @@ public class TaskTodo extends Task {
 
     @Override
     public String encodeAsString() {
-        return Task.encodeValues(new String[]{ 
-                "T", 
-                this.isDone ? "1" : "0", 
-                this.description });
+        return Task.encodeValues(new String[]{
+            "T",
+            this.isDone ? "1" : "0",
+            this.description });
     }
 
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (!super.equals(obj)) {
