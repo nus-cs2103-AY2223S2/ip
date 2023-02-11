@@ -5,7 +5,7 @@ import duke.utility.parser.Parser;
 import duke.utility.storage.Storage;
 
 /**
- * <h1>Duke Chatbot</h1> The Duke chatbot is a bot that is capable to keep track of tasks from the
+ * The Pepe chatbot is a bot that is capable to keep track of tasks from the
  * users.
  * 
  * @author Brian Quek

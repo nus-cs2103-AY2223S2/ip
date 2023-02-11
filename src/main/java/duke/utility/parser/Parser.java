@@ -25,7 +25,7 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the TaskList to be displayed.
-     * @return UiMessage object containing what type of command to be printed out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid.
      */
     private static String printTasks(String[] command, TaskList list) throws DukeException {
@@ -42,7 +42,7 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or invalid index
      *                       value.
      */
@@ -64,7 +64,7 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or invalid index
      *                       value.
      */
@@ -86,7 +86,7 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or invalid index
      *                       value.
      */
@@ -105,7 +105,7 @@ public class Parser {
     /**
      * Terminates the bot program.
      * 
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      */
     private static String closeProgram(String[] command) throws DukeException {
         if (command.length > 1) {
@@ -119,7 +119,7 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or does not have any
      *                       parameter.
      */
@@ -141,7 +141,7 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or missing any special
      *                       parameter (/by
      *                       e.g)
@@ -201,7 +201,7 @@ public class Parser {
      * 
      * @param input user input
      * @param list  list of tasks
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if invalid command keyword is typed.
      */
     public static String readCommand(String input, TaskList list) throws DukeException {
