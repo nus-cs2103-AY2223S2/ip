@@ -87,7 +87,7 @@ public abstract class UserTask implements Reloadable {
     @Override
     public String toString() {
         return String.format("%s %s",
-                (isComplete()) ? "[X]" : "[ ]",
+                isComplete() ? "[X]" : "[ ]",
                 name);
     }
 }
