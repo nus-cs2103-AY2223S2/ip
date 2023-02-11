@@ -33,6 +33,7 @@ public class AddDeadlineCommand extends AddCommand {
      * @param taskList the TaskList storing all Task.
      * @param ui the Ui for handling inputs/outputs.
      * @param storage the Storage responsible for reading/writing data.
+     * @return the message shown to the user after execution.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

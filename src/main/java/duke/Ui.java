@@ -63,6 +63,10 @@ public class Ui {
         return result;
     }
 
+    public static String showTaskAlreadyExist() {
+        return "This task has already exist";
+    }
+
     public static String showInvalidCommand() {
         return "The command entered is invalid.";
     }
