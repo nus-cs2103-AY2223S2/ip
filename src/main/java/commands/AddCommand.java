@@ -1,16 +1,16 @@
 package commands;
 
 import exception.TreeBotException;
+import interfaces.IUndoable;
 import tasks.Task;
 import tasks.TaskList;
 import utils.Storage;
 
 import java.io.IOException;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command implements IUndoable {
 
     private Task task;
-    private TaskList taskList;
 
     /**
      * Returns a Command that when executed adds a task to the list of tasks.
@@ -21,8 +21,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
-        this.taskList = taskList;
+    public String execute() {
         taskList.addTask(task);
         try {
             storage.saveTasks(taskList.getArrayListCopy());
@@ -33,6 +32,11 @@ public class AddCommand extends Command{
         }
 
     }
+
+    public void undo() {
+        this.taskList.deleteTask(task);
+    }
+
 
     @Override
     String toResultString() {

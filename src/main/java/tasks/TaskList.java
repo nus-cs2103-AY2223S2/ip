@@ -24,6 +24,10 @@ public class TaskList {
         this.tasks = taskList;
     }
 
+    public void addTask(Task task, int index) {
+        this.tasks.add(index - 1, task);
+    }
+
     /**
      * Adds the given task to the task list.
      * @param task
@@ -40,6 +44,11 @@ public class TaskList {
         Task deletedTask = this.tasks.get(index - 1);
         this.tasks.remove(index - 1);
         return deletedTask;
+    }
+
+    public Task deleteTask(Task task) {
+        this.tasks.remove(task);
+        return task;
     }
 
     /**

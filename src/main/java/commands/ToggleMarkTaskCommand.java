@@ -1,13 +1,11 @@
 package commands;
 
-import exception.TreeBotException;
+import interfaces.IUndoable;
 import tasks.Task;
-import tasks.TaskList;
-import utils.Storage;
 
 import java.io.IOException;
 
-public class ToggleMarkTaskCommand extends Command {
+public class ToggleMarkTaskCommand extends Command implements IUndoable {
     private int index;
     private boolean isMarkAsDone;
     private Task markedTask;
@@ -25,7 +23,7 @@ public class ToggleMarkTaskCommand extends Command {
         this.isMarkAsDone = isMarkAsDone;
     }
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute() {
         this.markedTask = !isMarkAsDone ? taskList.unmarkTask(index) : taskList.markTask(index);
         try {
             storage.saveTasks(taskList.getArrayListCopy());
@@ -33,6 +31,10 @@ public class ToggleMarkTaskCommand extends Command {
         } catch (IOException e) {
             return e.getMessage();
         }
+    }
+
+    public void undo() {
+        this.markedTask = !isMarkAsDone ? taskList.markTask(index) : taskList.unmarkTask(index);
     }
 
     @Override
