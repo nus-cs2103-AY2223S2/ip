@@ -8,13 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import duke.Main.Flag;
-import duke.task.Todo;
+import duke.task.DummyTask;
 
 /**
- * Contains test for Duke class.
+ * Contains tests for Duke class.
  * WARNING: UI.getRecentMessages() is assumed to work, in order for the tests to work.
  *          Ensure that UI.getRecentMessages() also pass their own tests first!
- * WARNING: Todo class constructor is assumed to be working. Functionality of Todo class can be not working.
  */
 public class DukeTest {
 
@@ -32,7 +31,7 @@ public class DukeTest {
     @Test
     void addNewTask_oneTask() {
         assertEquals(0, d.taskList.size());
-        d.addNewTask(new Todo(""));
+        d.addNewTask(new DummyTask());
         assertEquals(1, d.taskList.size());
     }
 
@@ -40,7 +39,7 @@ public class DukeTest {
     void addNewTask_manyTasks() {
         assertEquals(0, d.taskList.size());
         for (int i = 0; i < 1000; i++) {
-            d.addNewTask(new Todo(""));
+            d.addNewTask(new DummyTask());
         }
         assertEquals(1000, d.taskList.size());
     }
@@ -53,9 +52,9 @@ public class DukeTest {
 
     @Test
     void displayTaskCount_aFewTasks() {
-        d.addNewTask(new Todo(""));
-        d.addNewTask(new Todo(""));
-        d.addNewTask(new Todo(""));
+        d.addNewTask(new DummyTask());
+        d.addNewTask(new DummyTask());
+        d.addNewTask(new DummyTask());
         d.ui.getRecentMessages(); // Output unwanted, just need to clear the internal cache.
 
         d.displayTaskCount();
@@ -65,7 +64,7 @@ public class DukeTest {
     @Test
     void displayTaskCount_manyTasks() {
         for (int i = 0; i < 1000; i++) {
-            d.addNewTask(new Todo(""));
+            d.addNewTask(new DummyTask());
         }
         d.ui.getRecentMessages(); // Output unwanted, just need to clear the internal cache.
 
