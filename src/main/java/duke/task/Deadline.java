@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline task that has description of task and a deadline
  */
-public class Deadline extends Task {
+public class Deadline extends TaskWithDate {
     private LocalDateTime deadline;
 
     /**
@@ -15,7 +15,7 @@ public class Deadline extends Task {
      * @param deadline
      */
     public Deadline(String desc, LocalDateTime deadline) {
-        super(desc, "D");
+        super(desc, "D",deadline);
         this.deadline = deadline;
     }
 

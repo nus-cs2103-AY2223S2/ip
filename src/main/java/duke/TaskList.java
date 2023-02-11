@@ -1,8 +1,11 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import duke.task.Task;
+import duke.task.TaskWithDate;
 
 /**
  * TaskList contains the task list and handles operations related to the list.
@@ -122,6 +125,10 @@ public class TaskList {
             output += "\nThere are no matches!!";
         }
         return output;
+    }
+
+    public void sortTaskList() {
+        Collections.sort(this.tasks,new TaskComparator());
     }
 
 }

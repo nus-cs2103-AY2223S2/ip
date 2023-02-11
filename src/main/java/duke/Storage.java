@@ -57,7 +57,7 @@ public class Storage {
         char marker = arrOfDetails[2].charAt(0);
         boolean isMarked = (marker == 'X') ? true : false;
         String desc = arrOfDetails[1];
-        assert desc.length() == 0 : "Description of task cannot be empty!";
+        assert desc.length() != 0 : "Description of task cannot be empty!";
         switch (type) {
         case "T": // T|desc|X
             taskList.add(new Todo(desc));
@@ -76,8 +76,6 @@ public class Storage {
             throw new DukeException("Loading Error!!");
         }
         if (isMarked) {
-            assert numElem >= storeTasks.size() :
-                        "Index of current task should not be greater than the size of the task list!";
             taskList.get(taskList.size() - 1).markAsDone();
         }
     }
@@ -93,6 +91,7 @@ public class Storage {
             fw.close();
             fw = new FileWriter(filePath, true);
             for (Task t: storeTasks) {
+                String content = getContent(t);
                 fw.write(content + "\n");
             }
             fw.close();
@@ -128,7 +127,7 @@ public class Storage {
             assert false;
             throw new DukeException("Saving Error");
         }
-        assert content.length() == 0 : "Content to be saved should not be an empty string!";
+        assert content.length() != 0 : "Content to be saved should not be an empty string!";
         return content;
     }
 }

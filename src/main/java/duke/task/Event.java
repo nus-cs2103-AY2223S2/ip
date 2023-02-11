@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Event task that has description of task, start date and end date
  */
-public class Event extends Task {
+public class Event extends TaskWithDate {
     private LocalDateTime from;
     private LocalDateTime to;
 
@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param to
      */
     public Event(String desc, LocalDateTime from, LocalDateTime to) {
-        super(desc, "E");
+        super(desc, "E", from);
         this.from = from;
         this.to = to;
     }
