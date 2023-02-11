@@ -59,7 +59,7 @@ public class Task{
     }
 
     /**
-     * Mark a task done
+     * Prints String when a task is mark done
      */
     public void mark() {
         this.isDone = true;
@@ -67,8 +67,12 @@ public class Task{
 
     }
 
+    public void handleMark() {
+        this.isDone= true;
+    }
+
     /**
-     * Mark task undone
+     * Prints String when a Task is mark not done
      */
     public void unmark() {
         this.isDone = false;

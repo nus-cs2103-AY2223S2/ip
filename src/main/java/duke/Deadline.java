@@ -1,11 +1,13 @@
 package duke;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 /**
  * This is the class for Deadline action
  * @author yanlinglim
  */
 public class Deadline extends Task {
     protected String by;
+    protected LocalDateTime start;
 
     /**
      * This is the constructor for Deadline
@@ -14,9 +16,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        by = by.replaceAll("by","");
+        by = by.replaceAll("by ","");
         by = by.replaceAll("/","");
         this.by = by;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.start = LocalDateTime.parse(this.by, formatter);
         this.description = description;
         Task.actions += 1;
     }
@@ -36,6 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveString() {
-        return String.format(" deadline ||%s || %s || %s", super.toSaveString(), this.description, this.by);
+        String timeStr = this.start.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy"));
+        return String.format("deadline || %s || %s || %s", super.toSaveString(), this.description, timeStr);
     }
 }

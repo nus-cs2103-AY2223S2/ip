@@ -61,23 +61,16 @@ public class Duke {
         }
     }
 
-    /**
-     * This is the main method to run our file
-     * @param args
-     * @throws DukeException
-     * @throws IOException
-     */
-
 
     /**
      * Checks for any input, and will either add the action into a list or print out an error.
      * @throws IOException
      * @return
      */
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         new Duke("text-ui-test/saved-tasks.txt").run();
-    }
-    public void run() throws IOException {
+    }*/
+    /*public void run() throws IOException {
         System.out.println("Hello I'm Duke");
         System.out.println("What can I do for you?");
         Scanner myObj = new Scanner(System.in);
@@ -113,17 +106,15 @@ public class Duke {
                 Task.tasks.add(toDo);
 
             } else if (reply.startsWith("event")) {
-                reply = reply.replaceAll("event", "");
+                reply = reply.replaceAll("event ", "");
                 String[] replies = Parser.splitForEvent(reply);
-                for (int i = 0; i< replies.length; i++){
-                    System.out.println(replies[i]);
-                }
                 String[] dateCheck =  replies[1].split("/");
                 dateCheck[0] = dateCheck[0].replaceAll("from ", "");
                 dateCheck[1] = dateCheck[1].replaceAll("to ","");
                 replies[1] =   dateCheck[0] + "/" + dateCheck[1];
                 handleInvalidArgs checked = new handleInvalidArgs(replies);
                 checked.checkForEvent(checked.replies);
+
                 Event event = new Event(replies[0],replies[1]);
                 taskList.add(event);
                 count += 1;
@@ -134,18 +125,18 @@ public class Duke {
             }
             else if (reply.startsWith("unmark")) {
                 int value = Integer.parseInt(reply.replaceAll("[^0-9]", "")) - 1;
-                taskList.get(value).unmark();
+                Task.tasks.get(value).unmark();
             } else if (reply.startsWith("mark")) {
                 int value = Integer.parseInt(reply.replaceAll("[^0-9]", "")) - 1;
-                taskList.get(value).mark();
+                Task.tasks.get(value).mark();
             }
             else if (reply.startsWith("list")) {
                 ui.showList();
             } else if (reply.startsWith("delete")) {
                 int value = Integer.parseInt(reply.replaceAll("[^0-9]", "")) - 1;
-                Task deleted = taskList.get(value);
+                Task deleted = Task.tasks.get(value);
                 Task.actions -= 1;
-                taskList.remove(deleted);
+                Task.tasks.remove(deleted);
                 System.out.println("Noted. I've removed this task: \n" + deleted);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
             } else if (reply.startsWith("find")){
@@ -154,7 +145,6 @@ public class Duke {
                 System.out.println(desc);
                 TaskList.find(desc);
                 TaskList.printFind();
-
 
             } else {
                 handleInvalidArgs checked = new handleInvalidArgs(reply);
@@ -165,24 +155,30 @@ public class Duke {
         }
         System.out.println("Bye, Hope to see you again soon!");
 
-    }
+    }*/
 
 
-    private Label getDialogLabel(String text) {
+    /*private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
         return textToAdd;
-    }
+    }*/
 
+    /**
+     *
+     * @param input String input from users
+     * @return String representation based on the action
+     * @throws IOException
+     */
     String getResponse(String input) throws IOException {
         int count = 0;
 
             if (input.startsWith("deadline")) {
-                input = input.replaceAll("deadline", "");
+                input = input.replaceAll("deadline ", "");
                 String[] replies = Parser.splitForDeadline(input);
-                handleInvalidArgs checked = new handleInvalidArgs(replies);
+                InvalidArgsHandler checked = new InvalidArgsHandler(replies);
                 checked.checkForDeadline(checked.replies);
                 Deadline deadline = new Deadline(replies[0],replies[1]);
                 taskList.add(deadline);
@@ -191,10 +187,12 @@ public class Duke {
                 System.out.println(deadline);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
                 Task.tasks.add(deadline);
+                storage.saveTasks();
+                return ui.addTask(deadline);
 
             }else if (input.startsWith("todo")) {
                 input = input.replaceAll("todo", "");
-                handleInvalidArgs checked = new handleInvalidArgs(input);
+                InvalidArgsHandler checked = new InvalidArgsHandler(input);
                 checked.checkForToDo(checked.reply);
                 ToDo toDo = new ToDo(input);
                 taskList.add(toDo);
@@ -203,18 +201,17 @@ public class Duke {
                 System.out.println(toDo);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
                 Task.tasks.add(toDo);
+                storage.saveTasks();
+                return ui.addTask(toDo);
 
             } else if (input.startsWith("event")) {
                 input = input.replaceAll("event", "");
                 String[] replies = Parser.splitForEvent(input);
-                for (int i = 0; i< replies.length; i++){
-                    System.out.println(replies[i]);
-                }
                 String[] dateCheck =  replies[1].split("/");
                 dateCheck[0] = dateCheck[0].replaceAll("from ", "");
                 dateCheck[1] = dateCheck[1].replaceAll("to ","");
                 replies[1] =   dateCheck[0] + "/" + dateCheck[1];
-                handleInvalidArgs checked = new handleInvalidArgs(replies);
+                InvalidArgsHandler checked = new InvalidArgsHandler(replies);
                 checked.checkForEvent(checked.replies);
                 Event event = new Event(replies[0],replies[1]);
                 taskList.add(event);
@@ -223,36 +220,45 @@ public class Duke {
                 System.out.println(event);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
                 Task.tasks.add(event);
+                storage.saveTasks();
+                return ui.addTask(event);
             }
             else if (input.startsWith("unmark")) {
                 int value = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
-                taskList.get(value).unmark();
+                Task.tasks.get(value).unmark();
+                storage.saveTasks();
+                return ui.stringMark(Task.tasks.get(value));
             } else if (input.startsWith("mark")) {
                 int value = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
-                taskList.get(value).mark();
+                Task.tasks.get(value).mark();
+                storage.saveTasks();
+                return ui.stringMark(Task.tasks.get(value));
             }
             else if (input.startsWith("list")) {
-                ui.showList();
+                return ui.showList();
             } else if (input.startsWith("delete")) {
                 int value = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
-                Task deleted = taskList.get(value);
+                Task deleted = Task.tasks.get(value);
                 Task.actions -= 1;
-                taskList.remove(deleted);
+                Task.tasks.remove(deleted);
+                storage.saveTasks();
                 System.out.println("Noted. I've removed this task: \n" + deleted);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
+                return ui.stringDelete(deleted);
             } else if (input.startsWith("find")) {
                 int counter = 0;
                 String desc = input.replaceAll("find ", "");
                 System.out.println(desc);
                 TaskList.find(desc);
-                TaskList.printFind();
-
+                return TaskList.printFind();
             } else if (input.startsWith("bye")){
+                System.out.println("Bye, Hope to see you again soon!");
                 return "Bye, Hope to see you again soon!";
 
             } else {
-                handleInvalidArgs checked = new handleInvalidArgs(input);
+                InvalidArgsHandler checked = new InvalidArgsHandler(input);
                 checked.checkForRandomWords(checked.reply);
+
             }
             storage.saveTasks();
         return "Duke heard: " + input;

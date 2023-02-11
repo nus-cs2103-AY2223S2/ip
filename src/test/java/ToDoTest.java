@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.ToDo;
 
-public class todoTest {
+public class ToDoTest {
 
     @Test
     public void testStringConversion() {

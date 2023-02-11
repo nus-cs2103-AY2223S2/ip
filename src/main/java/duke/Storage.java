@@ -51,7 +51,7 @@ public class Storage {
             }
 
             if (keywords[1].equals("1")) {
-                current.mark();
+                current.handleMark();
             }
             Task.tasks.add(current);
             words = taskLoader.readLine();
@@ -60,7 +60,7 @@ public class Storage {
     }
 
     /**
-     * Save every action into the list
+     * Saves actions into the text file
      * @throws IOException
      */
     public void saveTasks() throws IOException {

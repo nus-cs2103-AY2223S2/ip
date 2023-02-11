@@ -4,23 +4,23 @@ package duke;
 /**
  * This is a class to handle the invalid number of arguments for each of the class
  */
-public class handleInvalidArgs {
+public class InvalidArgsHandler {
     String[] replies;
     String reply;
 
     /**
-     * This is a constructor to handle invalid arguments for ToDo
-     * @param replies
+     * This is a constructor to handle invalid arguments for Event and Deadline
+     * @param replies An array containing the description and dates
      */
-    public handleInvalidArgs(String[] replies){
+    public InvalidArgsHandler(String[] replies){
         this.replies = replies;
     }
 
     /**
-     * This is a constructor to handle invalid arguments for Event and Deadline
-     * @param reply
+     * This is a constructor to handle invalid arguments for Todo
+     * @param reply A string representing the description of Todo
      */
-    public handleInvalidArgs(String reply) {
+    public InvalidArgsHandler(String reply) {
         this.reply = reply;
     }
 
@@ -30,7 +30,7 @@ public class handleInvalidArgs {
      * @throws DukeException
      */
     public void checkForEvent(String[] replies) throws DukeException {
-        if (replies.length != 3) {
+        if (replies.length != 2) {
             throw new DukeException(" OOPS!!! The description of a event cannot be empty.");
         }
     }
@@ -53,12 +53,12 @@ public class handleInvalidArgs {
      */
     public void checkForDeadline(String[] replies) throws DukeException {
         if (replies.length != 2) {
-            throw new DukeException(" OOPS!!! The description of a deadli8ne cannot be empty.");
+            throw new DukeException(" OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 
     /**
-     * Handles  words that are not deadline,todo,list,event,mark,unmark
+     * Handles Strings that do not contain deadline, todo, list, event, mark, unmark
      * @throws DukeException
      */
     public void checkForRandomWords(String replies) throws DukeException {

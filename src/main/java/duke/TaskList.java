@@ -26,15 +26,19 @@ public class TaskList {
         }
     }
 
-    public static void printFind() {
+    public static String printFind() {
         int count = 1;
         if (searchLists.size() == 0) {
             System.out.println("Nothing found");
+            return "Nothing found";
         }
+        String list = "";
         for (int i = 0; i < searchLists.size();i++) {
             System.out.println(""+ count + "." + searchLists.get(i));
+            list += ""+ count + "." + searchLists.get(i);
             count += 1;
         }
+        return list;
     }
     /**
      * Adds task into tasklists

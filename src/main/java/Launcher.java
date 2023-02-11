@@ -5,6 +5,9 @@ import javafx.application.Application;
 
 import java.io.IOException;
 
+/**
+ * A constructor to run the GUI
+ */
 public class Launcher{
     public static void main(String[] args) throws DukeException, IOException {
         Application.launch(Main.class,args);
