@@ -22,6 +22,4 @@ public class Task {
     public String toRecord() {
         return (isDone ? "1|" : "0|") + description;
     }
-
-    //...
 }
