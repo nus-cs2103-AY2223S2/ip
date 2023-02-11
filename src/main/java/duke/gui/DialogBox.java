@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -29,6 +30,11 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Rectangle clippingMask = new Rectangle(
+            displayPicture.getFitWidth(), displayPicture.getFitHeight());
+        clippingMask.setArcWidth(100.0);
+        clippingMask.setArcHeight(100.0);
+        displayPicture.setClip(clippingMask);
         dialog.setText(text);
         displayPicture.setImage(img);
     }

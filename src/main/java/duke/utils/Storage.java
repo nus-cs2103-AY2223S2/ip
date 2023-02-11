@@ -1,5 +1,6 @@
 package duke.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import duke.tasks.Task;
  */
 public class Storage {
     private static DukeIo dukeIo = new DukeIo();
-    private ArrayList<Task> storedTasks;
+    private ArrayList<Task> storedTasks = new ArrayList<>();
     private FileInputStream fis;
     private ObjectInputStream ois;
     private FileOutputStream fos;
@@ -30,13 +31,23 @@ public class Storage {
      * @throws ClassNotFoundException Occurs when Task class is not read.
      */
     @SuppressWarnings("unchecked")
-    public ArrayList<Task> load() throws IOException, ClassNotFoundException {
-        fis = new FileInputStream("./data/duke.txt");
-        ois = new ObjectInputStream(fis);
-        this.storedTasks = (ArrayList<Task>) ois.readObject();
-        fis.close();
-        ois.close();
-        dukeIo.notifyLoad();
+    public ArrayList<Task> load() {
+        File file = new File("./data/duke.txt");
+        if (!file.exists()) {
+            return storedTasks;
+        } 
+        try {
+            fis = new FileInputStream("./data/duke.txt");
+            ois = new ObjectInputStream(fis);
+            this.storedTasks = (ArrayList<Task>) ois.readObject();
+            fis.close();
+            ois.close();
+            dukeIo.notifyLoad();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return storedTasks;
     }
 

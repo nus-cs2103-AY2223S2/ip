@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exception.InvalidCommandException;
+import duke.commands.Command;
 import duke.tasks.TaskList;
-import duke.utils.MyDuke;
+import duke.utils.DukeIo;
 import duke.utils.Parser;
 import duke.utils.Storage;
 
@@ -10,23 +10,26 @@ import duke.utils.Storage;
  * The class to run the Duke To-do application.
  */
 public class Duke {
-    /** Initialises the runner MyDuke */
-    private static MyDuke duke = new MyDuke();
     /** Initialises Storage class to fetch tasks or save tasks */
     private static Storage storage = new Storage();
     /** Initialises an EMPTY TaskList to maintain a List of Tasks */
     private static TaskList taskList = TaskList.ofNull();
     /** Initialises Parse class to tokenise user inputs */
     private static Parser parser = new Parser();
-    private static boolean isExit;
+    private static DukeIo dukeIo = new DukeIo();
+    private static boolean isBye;
+    
     /**
      * The Main method that starts Duke.
      * Upon boot, TaskList is loaded form save file.
      */
     public Duke() {
-        duke.init();
         taskList.loadFrom(storage.load());
-        Duke.isExit = false;
+        Duke.isBye = false;
+    }
+
+    public String showHello() {
+        return dukeIo.printHello();
     }
     
     /**
@@ -34,19 +37,28 @@ public class Duke {
      * @param tokens tokens entered into the Command Line Interface
      * @param taskList List of tasks which commands are operated on.
      * @return String reply from the Duke
-     * @throws InvalidCommandException
      */
-    private static String handle(String[] tokens, TaskList taskList) throws InvalidCommandException {
-        String cmd = parser.getCommand(tokens);
-        if (cmd.equals("bye")) {
-            isExit = true;
-            return duke.quit();
-        }
-        return duke.exec(tokens, taskList);
+    private static String handle(String tokens, TaskList taskList) {
+        parser.tokenise(tokens);
+        Command command = parser.getCommand();
+        Duke.isBye = command.isExitCommand();
+        return command.exec(dukeIo, taskList);
     }
 
-    public String getResponse(String input) throws InvalidCommandException {
-        String[] tokens = parser.tokenise(input); 
-        return handle(tokens, taskList);
+    /**
+     * Tokenises the input from user with parser. Then, handles the command
+     * @param input Input entered by user
+     * @return The UI response from Duke
+     */
+    public String getResponse(String input) {
+        return handle(input, taskList);
+    }
+
+    /**
+     * Checks if user has entered a command to quit.
+     * @return True if user has entered a command to quit. False otherwise.
+     */
+    public boolean isBye() {
+        return Duke.isBye;
     }
 }
