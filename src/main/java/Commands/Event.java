@@ -1,12 +1,9 @@
-package Week2.src.main;
+package Commands;
 
+import Week2.src.main.Duke;
+import Week2.src.main.TaskList;
 
-/**
- * A subclass of Task
- * Contains the occuring time information of an event
- */
-
-
+import java.io.IOException;
 
 /**
  * A subclass that extends Task.
@@ -18,30 +15,31 @@ public class Event extends Task {
 
     /**
      * Event constructor
-
      * @param content content of the task
      * @param from starting time of the task
      * @param to end time of the task
-
-     * @param content Task content
-     * @param from Start time of the event
-     * @param to End time of the event
-
      */
-    Event(String content, String from, String to) {
+    public Event(String content, String from, String to) {
         super(content);
         this.from = from;
         this.to = to;
     }
 
+    public static String execute(String doit, TaskList tasklist) throws IOException {
+        String[] froms = doit.split("/from");
+        String[] fromses = froms[1].split("/to");
+        String[] tos = doit.split("/to");
+        Task current = new Event(froms[0], fromses[0], tos[1]);
+        tasklist.add(current);
+        String str1 = "Got it. I've added this task:";
+        String str2 = current.toString();
+        Duke.writeOn(current);
+        return str1 + "\n" + str2;
+    }
+
     /**
-
-     * Overrides toString() method to change the task information to a string format.
-     * @return A string format of given task data
-
      * It overrides toString() method to change information to a string format
      * @return String format of the event task data
-
      */
     @Override
     public String toString() {

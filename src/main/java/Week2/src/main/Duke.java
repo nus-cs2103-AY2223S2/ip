@@ -2,6 +2,8 @@ package Week2.src.main;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import Commands.Task;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -74,8 +76,8 @@ public class Duke extends Application {
             } else {
                 return ui.bye();
             }
-        } catch (IndexOutOfBoundsException e) {
-            return ui.showEmptyError();
+        //} catch (IndexOutOfBoundsException e) {
+        //    return ui.showEmptyError();
         } catch (FileNotFoundException e) {
             return ui.showFileError();
         } //catch (Exception e) {

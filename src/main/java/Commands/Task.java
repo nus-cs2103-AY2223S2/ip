@@ -1,4 +1,6 @@
-package Week2.src.main;
+package Commands;
+
+import Week2.src.main.TaskList;
 
 /**
  * Superclass of all tasks.
@@ -23,12 +25,14 @@ public class Task {
 
     /**
      * Set the task to be done, which is true in this class.
-     * It marks the task as done (which is true in this class)
      */
     public void setDone() {
         this.isDone = true;
     }
 
+    /**
+     * Set task as not done, which is false in this class.
+     */
     public void setNotDone() {
         this.isDone = false;
     }
@@ -50,7 +54,6 @@ public class Task {
     public String getContent() {
         return this.content;
     }
-
 
     /**
      * Overriden toString() method which will be overriden again in subclasses.

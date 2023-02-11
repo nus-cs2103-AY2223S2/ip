@@ -1,4 +1,10 @@
-package Week2.src.main;
+package Commands;
+
+import Commands.Task;
+import Week2.src.main.Duke;
+import Week2.src.main.TaskList;
+
+import java.io.IOException;
 
 /**
 <<<<<<< HEAD
@@ -21,9 +27,20 @@ public class Deadline extends Task {
      * @param content Task content
      * @param date Deadline date (e.g. Monday)
      */
-    Deadline(String content, String date) {
+    public Deadline(String content, String date) {
         super(content);
         this.date = date;
+    }
+
+    public static String execute(String doit, TaskList tasklist) throws IOException {
+        String[] parts = doit.split("/by");
+        Task current = new Deadline(parts[0], parts[1]);
+        tasklist.add(current);
+        String str1 = "Got it. I've added this task:";
+        String str2 = current.toString();
+        String str3 = "Now you have " + tasklist.length() + " tasks in the list";
+        Duke.writeOn(current);
+        return str1 + "\n" + str2 + "\n" + str3;
     }
 
     /**

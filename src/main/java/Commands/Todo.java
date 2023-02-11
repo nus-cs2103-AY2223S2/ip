@@ -1,4 +1,9 @@
-package Week2.src.main;
+package Commands;
+
+import Week2.src.main.TaskList;
+import Week2.src.main.Duke;
+
+import java.io.IOException;
 
 /**
  * A subclass of Task
@@ -14,8 +19,26 @@ public class Todo extends Task {
      * It only contains task context
      * @param content
      */
-    Todo(String content) {
+    public Todo(String content) {
         super(content);
+    }
+
+    /**
+     * Add the user input todo task to the task list
+     * and shows it to the user.
+     * @param doit the current task to do
+     * @param tasklist current task list
+     * @return Output line to show to user
+     * @throws IOException to write on
+     */
+    public static String execute(String doit, TaskList tasklist) throws IOException {
+        Task current = new Todo(doit);
+        tasklist.add(current);
+        String str1 = "Got it. I've added this task:";
+        String str2 = current.toString();
+        String str3 = "Now you have " + tasklist.length() + " tasks in the list";
+        Duke.writeOn(current);
+        return str1 + "\n" + str2 + "\n" + str3;
     }
 
     /**
