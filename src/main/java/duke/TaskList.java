@@ -50,7 +50,10 @@ public class TaskList {
             if (indexToUse >= listOfTasks.size() || indexToUse < 0) {
                 throw new DukeExceptions("Wrong size for mark/unmark");
             }
+            int sizeBeforeDelete = listOfTasks.size();
             Task gettingTask = listOfTasks.remove(indexToUse);
+            assert sizeBeforeDelete - 1 == listOfTasks.size() : "It appears the"
+                    + "task has not been successfully deleted.";
             String toOutput = "Noted. I've removed this task:\n  " + gettingTask.toString()
                     + "\nNow you have " + listOfTasks.size() + " tasks in the list";
             return toOutput;
@@ -84,7 +87,10 @@ public class TaskList {
      * @return String representation of the list of tasks after adding specified task.
      */
     public String addTask(Task toAdd) {
+        int sizeBeforeAdd = listOfTasks.size();
         listOfTasks.add(toAdd);
+        assert sizeBeforeAdd + 1 == listOfTasks.size() : "It appears that"
+                + "the task has not been added successfully.";
         String toPrint = "";
         if (listOfTasks.size() == 1) {
             toPrint = "Got it. I've added this task:\n  " + toAdd.toString()
@@ -110,6 +116,8 @@ public class TaskList {
             }
             Task currTask = listOfTasks.get(indexToUse);
             currTask.setDone();
+            assert currTask.isDone() : "It appears that the task was not"
+                    + "successfully marked as done.";
             String toOutput = "Nice! I've marked this task as done:\n  " + currTask.toString();
             return toOutput;
         } catch (DukeExceptions DE) {
@@ -131,6 +139,8 @@ public class TaskList {
             }
             Task currTask = listOfTasks.get(indexToUse);
             currTask.setUndone();
+            assert !currTask.isDone() : "It appears that the task was not"
+                    + "successfully marked as not done.";
             String toOutput = "Ok, I've marked this task as not done yet:\n  " + currTask.toString();
             return toOutput;
         } catch (DukeExceptions DE) {
