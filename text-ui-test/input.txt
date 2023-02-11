@@ -1,0 +1,8 @@
+todo math
+deadline englist /by 9pm Today
+event volunteer /from 8am /to 10pm on Sat
+list
+mark 2
+list
+unmark 2
+bye

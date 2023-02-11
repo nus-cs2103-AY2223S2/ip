@@ -1,7 +1,44 @@
-Hello from
+Hello! I'm
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+> 
+YAY! Task Added:
+  [T][ ] math
+Now you have 1 tasks in the list.
+
+> 
+YAY! Task Added:
+  [D][ ] englist (by: 9pm Today)
+Now you have 2 tasks in the list.
+
+> 
+YAY! Task Added:
+  [E][ ] volunteer (from: 8am to: 10pm on Sat)
+Now you have 3 tasks in the list.
+
+> 
+Here are the tasks in your list:
+1. [T][ ] math
+2. [D][ ] englist (by: 9pm Today)
+3. [E][ ] volunteer (from: 8am to: 10pm on Sat)
+
+> 
+Nice! I've marked this task as done:
+  [D][X] englist (by: 9pm Today)
+
+> 
+Here are the tasks in your list:
+1. [T][ ] math
+2. [D][X] englist (by: 9pm Today)
+3. [E][ ] volunteer (from: 8am to: 10pm on Sat)
+
+> 
+OK, I've marked this task as not done yet:
+  [D][ ] englist (by: 9pm Today)
+
+> Good Riddance!

@@ -22,3 +22,10 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Task List
+- [ ] Implement all possible todo exceptions
+- [ ] Implement all possible deadline exceptions
+- [ ] Implement all possible event exceptions
+- [ ] Update automated test
+- [ ] Finish JavaDocs
