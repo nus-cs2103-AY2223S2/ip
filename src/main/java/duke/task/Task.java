@@ -81,21 +81,25 @@ public class Task implements Serializable, Comparable<Task> {
      * 3. Unfinished Earlier End Dates are More Important than Unfinished Later End Dates.
      * </pre>
      *
-     * @param t The task to compare to.
+     * @param other The task to compare to.
      */
     @Override
-    public int compareTo(Task t) {
-        if (t.isMarkedDone() && this.isMarkedDone()) {
+    public int compareTo(Task other) {
+        // done tasks are equally unimportant
+        if (other.isMarkedDone() && this.isMarkedDone()) {
             return 0;
-        } else if (!t.isMarkedDone() && !this.isMarkedDone()) {
-            if (t.hasDate()) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else {
-            return this.isMarkedDone() ? 1 : -1;
         }
+
+        if (!other.isMarkedDone() && !this.isMarkedDone()) {
+            if (other.hasDate()) {
+                return 1;
+            }
+
+            // we are equally unimportant
+            return 0;
+        }
+
+        return this.isMarkedDone() ? 1 : -1;
     }
 
     /**
