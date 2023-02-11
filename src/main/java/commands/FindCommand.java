@@ -6,14 +6,26 @@ import utils.Storage;
 import utils.Ui;
 
 public class FindCommand extends Command{
-    String keyword;
+    private String keyword;
+    private TaskList taskList;
+
     public FindCommand(String keyword) {
         super();
         this.keyword = keyword;
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws TreeBotException {
-        taskList.find(keyword).listTasks();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        this.taskList = taskList;
+        return toResultString();
+
+    }
+
+    @Override
+    String toResultString() {
+        String opening = "Here are the tasks that I have found with the keyword" + this.keyword + "\n";
+        String subject = taskList.find(keyword).getPrintableTasks();
+
+        return opening  + subject;
     }
 }

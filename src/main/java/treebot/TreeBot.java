@@ -39,7 +39,7 @@ public class TreeBot {
                 if (c.equals(EXIT_TOKEN)) {
                     break;
                 }
-                c.execute(taskList, ui, storage);
+                System.out.println(c.execute(taskList, ui, storage));
             } catch (TreeBotException e) {
                 System.out.println(e.getMessage());
             }

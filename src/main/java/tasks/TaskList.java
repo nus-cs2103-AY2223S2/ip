@@ -36,24 +36,29 @@ public class TaskList {
      * Deletes a task at the specified index.
      * @param index
      */
-    public void deleteTask(int index) {
+    public Task deleteTask(int index) {
+        Task deletedTask = this.tasks.get(index - 1);
         this.tasks.remove(index - 1);
+        return deletedTask;
     }
 
     /**
      * Marks the task at the specified index as done.
      * @param index
      */
-    public void markTask(int index) {
+    public Task markTask(int index) {
+
         this.tasks.get(index - 1).markAsDone();
+        return this.tasks.get(index - 1);
     }
 
     /**
      * Marks the task at the specified index as undone.
      * @param index
      */
-    public void unmarkTask(int index) {
+    public Task unmarkTask(int index) {
         this.tasks.get(index - 1).markAsUndone();
+        return this.tasks.get(index - 1);
     }
 
 
@@ -77,6 +82,17 @@ public class TaskList {
         }
     }
 
+    public String getPrintableTasks() {
+        String printableTasks = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            printableTasks += (i + 1 + "." + tasks.get(i)) + "\n";
+        }
+
+        return printableTasks;
+
+
+    }
+
     /**
      * Returns a copy of the ArrayList of Task.
      * @return a copy of the ArrayList of Task.
@@ -84,4 +100,10 @@ public class TaskList {
     public ArrayList<Task> getArrayListCopy() {
         return new ArrayList<>(this.tasks);
     }
+
+    public int getSize() {
+        return this.tasks.size();
+    }
+
+
 }

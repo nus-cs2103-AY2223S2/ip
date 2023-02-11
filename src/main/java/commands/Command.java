@@ -16,5 +16,7 @@ public abstract class Command {
      * @param storage
      * @throws TreeBotException
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage) throws TreeBotException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) ;
+
+    abstract String toResultString();
 }

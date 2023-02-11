@@ -11,6 +11,7 @@ import java.io.IOException;
 public class AddCommand extends Command{
 
     private Task task;
+    private TaskList taskList;
 
     /**
      * Returns a Command that when executed adds a task to the list of tasks.
@@ -21,13 +22,27 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws TreeBotException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        this.taskList = taskList;
         taskList.addTask(task);
         try {
             storage.saveTasks(taskList.getArrayListCopy());
+            return toResultString();
+
         } catch (IOException e) {
-            throw new TreeBotException(e.getMessage());
+            return e.getMessage();
         }
 
     }
+
+    @Override
+    String toResultString() {
+        String opening = "I have added the following task:\n";
+        String subject = task.toString();
+        String closing = "Now you have " + taskList.getSize() + " tasks in the list";
+
+        return opening + subject + closing;
+    }
+
+
 }
