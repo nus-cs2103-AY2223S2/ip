@@ -10,16 +10,30 @@ public class Duke {
     private final Storage storage;
     private static final String filePath = "data/duke.txt";
 
+    /**
+     * Creates new Duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = storage.loadFile();
     }
 
+    /**
+     * Shows Duke greeting message.
+     *
+     * @return Duke greeting message.
+     */
     public String greeting() {
         return ui.dukeGreeting();
     }
 
+    /**
+     * Gets response from user input.
+     *
+     * @param input User input.
+     * @return Response to user input.
+     */
     public String getResponse(String input) {
         String output = "";
         Parser parser = new Parser(taskList, ui, storage);

@@ -7,6 +7,11 @@ public class Task {
     protected final String description;
     protected boolean isDone;
 
+    /**
+     * Creates new Task object.
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -14,6 +19,7 @@ public class Task {
 
     /**
      * Retrieves the status of the task.
+     *
      * @return X if the task is done or a whitespace if it is not done.
      */
     public String getStatusIcon() {
@@ -36,6 +42,7 @@ public class Task {
 
     /**
      * Overrides the default Object::toString.
+     *
      * @return String representation of a task.
      */
     @Override

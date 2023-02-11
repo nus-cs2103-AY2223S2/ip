@@ -17,6 +17,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline task.
+     *
      * @param description Description of the task.
      * @return Deadline task.
      * @throws DateTimeParseException If the date is in the wrong format.
@@ -29,6 +30,7 @@ public class Deadline extends Task {
 
     /**
      * Overrides the default Object::toString
+     *
      * @return String representation of a Deadline object.
      */
     @Override

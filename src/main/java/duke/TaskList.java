@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Task> taskArray;
 
+    /**
+     * Creates new TaskList object.
+     */
     public TaskList() {
         taskArray = new ArrayList<>();
     }
@@ -40,10 +43,20 @@ public class TaskList {
         taskArray.add(task);
     }
 
+    /**
+     * Removes a task from the list.
+     *
+     * @param task Task to be removed from the list.
+     */
     public void deleteTask(Task task) {
         taskArray.remove(task);
     }
 
+    /**
+     * Retrieves the tasklist.
+     *
+     * @return String representation of the tasklist.
+     */
     public String getTaskList() {
         String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskArray.size(); i++) {

@@ -12,6 +12,11 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates new Storage object.
+     *
+     * @param filePath Path to file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }

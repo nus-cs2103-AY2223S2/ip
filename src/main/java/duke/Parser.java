@@ -24,6 +24,9 @@ public class Parser {
      * Parses user inputs.
      *
      * @param input User input.
+     * @throws WrongTask        If the keyword is not the input.
+     * @throws EmptyDescription If the description of task is empty.
+     * @throws OutOfBounds      If the number is out of bound.
      */
     public String parse(String input) throws WrongTask, EmptyDescription, OutOfBounds {
         String[] arrNext = input.split(" ", 2);
@@ -87,6 +90,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates new Todo task and appends it to file.
+     *
+     * @param storage     File to append new Todo task.
+     * @param taskList    The list to add the task.
+     * @param description The description of the Todo task.
+     * @return The new Todo task.
+     */
     private static Task newTodo(Storage storage, TaskList taskList, String description) {
         Task newTodo = new Todo(description);
         taskList.addTask(newTodo);
@@ -94,6 +105,14 @@ public class Parser {
         return newTodo;
     }
 
+    /**
+     * Creates new Deadline task and appends it to file.
+     *
+     * @param storage     File to append new Deadline task.
+     * @param taskList    The list to add the task.
+     * @param description The description of the Deadline task.
+     * @return The new Deadline task.
+     */
     private static Task newDeadline(Storage storage, TaskList taskList, String description) {
         String[] split = description.split("/by ");
         LocalDate d1 = LocalDate.parse(split[1]);
@@ -103,6 +122,14 @@ public class Parser {
         return newDeadline;
     }
 
+    /**
+     * Creates new Event task and appends it to file.
+     *
+     * @param storage     File to append new Event task.
+     * @param taskList    The list to add the task.
+     * @param description The description of the Event task.
+     * @return The new Event task.
+     */
     private static Task newEvent(Storage storage, TaskList taskList, String description) {
         String[] split = description.split("/");
         Task newEvent = new Event(split[0], split[1].substring(5), split[2].substring(3));
@@ -111,6 +138,13 @@ public class Parser {
         return newEvent;
     }
 
+    /**
+     * Find specific tasks.
+     *
+     * @param taskList    The list to retrieve the task.
+     * @param description The keyword to match the tasks in the list.
+     * @return The tasklist containing matching tasks.
+     */
     private static TaskList findTasks(TaskList taskList, String description) {
         TaskList matchingTasks = new TaskList();
         for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
@@ -126,6 +160,14 @@ public class Parser {
         return matchingTasks;
     }
 
+    /**
+     * Marks task as done.
+     *
+     * @param storage  File to update after marking task.
+     * @param taskList The list to retrieve the task.
+     * @param taskID   The position of the task.
+     * @return The marked task.
+     */
     private static Task markTask(Storage storage, TaskList taskList, String taskID) {
         int number = Integer.parseInt(taskID) - 1;
         Task toMarkDone = taskList.getTask(number);
@@ -135,6 +177,14 @@ public class Parser {
         return toMarkDone;
     }
 
+    /**
+     * Unmarks task as done.
+     *
+     * @param storage  File to update after unmarking task.
+     * @param taskList The list to retrieve the task.
+     * @param taskID   The position of the task.
+     * @return The unmarked task.
+     */
     private static Task unmarkTask(Storage storage, TaskList taskList, String taskID) {
         int number = Integer.parseInt(taskID) - 1;
         Task toUnmarkDone = taskList.getTask(number);
@@ -144,6 +194,14 @@ public class Parser {
         return toUnmarkDone;
     }
 
+    /**
+     * Deletes a task.
+     *
+     * @param storage  File to update after deletion of task.
+     * @param taskList The list to retrieve the task.
+     * @param taskID   The position of the task.
+     * @return The deleted task.
+     */
     private static Task deleteTask(Storage storage, TaskList taskList, String taskID) {
         int number = Integer.parseInt(taskID) - 1;
         Task taskToDelete = taskList.getTask(number);
@@ -152,6 +210,15 @@ public class Parser {
         return taskToDelete;
     }
 
+    /**
+     * Update details of the task.
+     *
+     * @param storage  File to store the updated input.
+     * @param taskList The list to retrieve the task.
+     * @param taskID   The position of the task.
+     * @param newDesc  The new description of the task.
+     * @return The updated task.
+     */
     private static Task updateTask(Storage storage, TaskList taskList, String taskID, String newDesc) {
         int number = Integer.parseInt(taskID) - 1;
         Task taskToUpdate = taskList.getTask(number);
@@ -163,7 +230,6 @@ public class Parser {
         storage.updateFile(taskList);
         return taskToUpdate;
     }
-
 
     /**
      * Checks if a task has an empty description.
@@ -179,6 +245,13 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Checks if number is out of bounds.
+     *
+     * @param checkString User input to be checked.
+     * @param taskList    The list to be checked.
+     * @throws OutOfBounds If the number is out of bound.
+     */
     public static void checkOutOfBounds(String[] checkString, TaskList taskList) throws OutOfBounds {
         int number = Integer.parseInt(checkString[1]);
         if (number < 1 || number > taskList.getNumberOfTasks()) {
@@ -186,6 +259,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if wrong task is inputted.
+     *
+     * @param keyword User input to be checked.
+     * @throws WrongTask If the keyword is not the input.
+     */
     public static void checkWrongTask(String keyword) throws WrongTask {
         List<String> keywords = Arrays.asList("bye", "todo", "deadline", "event", "mark", "unmark", "list", "delete", "find", "update");
         boolean isKeyword = keywords.contains(keyword);
