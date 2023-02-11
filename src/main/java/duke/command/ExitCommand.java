@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command that ends the session with the chatbot.
@@ -18,7 +19,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList) {
-        System.out.println("Bye. Have a nice day!");
+        Ui.showWithNewLine("Bye. Have a nice day!");
     }
 
 }

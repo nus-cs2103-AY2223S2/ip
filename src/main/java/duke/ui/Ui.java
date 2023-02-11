@@ -18,7 +18,7 @@ public class Ui {
     /**
      * Greets the user upon starting the session with the chatbot.
      */
-    public void greet() {
+    public static void greet() {
         System.out.println("\nHello from\n" + Ui.LOGO);
 
         System.out.println("How can I help you?\n");
@@ -33,7 +33,7 @@ public class Ui {
      * @param commandScanner The Scanner object used to obtain user's text input.
      * @return User's text input
      */
-    public String getUserCommand(Scanner commandScanner) {
+    public static String getUserCommand(Scanner commandScanner) {
 
         System.out.print("You:\n");
         String command = commandScanner.nextLine();
@@ -44,11 +44,19 @@ public class Ui {
 
     }
 
+    public static void showWithoutNewLine(String message) {
+        System.out.println(message);
+    }
+
+    public static void showWithNewLine(String message) {
+        System.out.println(message + "\n");
+    }
+
     /**
      * Sets up the interface to obtain the user's next input.
      */
-    public void endCommand() {
-        System.out.println("\n" + Ui.LINE + "\n");
+    public static void endCommand() {
+        System.out.println(Ui.LINE + "\n");
     }
 
 

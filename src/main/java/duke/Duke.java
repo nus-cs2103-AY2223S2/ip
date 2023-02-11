@@ -16,20 +16,18 @@ import java.util.Scanner;
  * Represents the chatbot that helps a user maintain a list of Tasks.
  */
 public class Duke {
-
-    private final Ui ui = new Ui();
     private final TaskList taskList = new TaskList();
 
     private void start() {
 
-        ui.greet();
+        Ui.greet();
 
         Scanner commandScanner = new Scanner(System.in);
         boolean toExit = false;
 
         while (true) {
 
-            String userCommand = ui.getUserCommand(commandScanner);
+            String userCommand = Ui.getUserCommand(commandScanner);
 
             try {
                 Command command = Parser.parse(userCommand);
@@ -37,10 +35,10 @@ public class Duke {
                 toExit = command.isExitCommand();
 
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                Ui.showWithNewLine(e.getMessage());
 
             } finally {
-                ui.endCommand();
+                Ui.endCommand();
 
             }
 
