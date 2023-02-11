@@ -1,10 +1,10 @@
 package duke;
 
 import java.util.Scanner;
-import duke.task.Todo;
+
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.TaskList;
+import duke.task.Todo;
 
 public class Ui {
     public void showLine() {
@@ -106,5 +106,4 @@ public class Ui {
         System.out.println("Adding new event failed");
         System.out.println("Please enter the task with the format [name /ddMMyyyy HHmm /ddMMyyyy HMmm]");
     }
-
 }

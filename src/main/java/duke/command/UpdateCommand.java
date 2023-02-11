@@ -17,21 +17,24 @@ public class UpdateCommand extends Command {
             ui.showIdExceedsList(this.index);
         } else {
             switch (this.commandName) {
-                case "mark": {
-                    tasks.get(this.index - 1).setDone();
-                    ui.markTask(tasks, this.index - 1);
-                    break;
-                }
-                case "unmark": {
-                    tasks.get(this.index - 1).setNotDone();
-                    ui.unmarkTask(tasks, this.index - 1);
-                    break;
-                }
-                case "delete": {
-                    ui.deleteTask(tasks, this.index - 1);
-                    tasks.remove(this.index - 1);
-                    break;
-                }
+            case "mark": {
+                tasks.get(this.index - 1).setDone();
+                ui.markTask(tasks, this.index - 1);
+                break;
+            }
+            case "unmark": {
+                tasks.get(this.index - 1).setNotDone();
+                ui.unmarkTask(tasks, this.index - 1);
+                break;
+            }
+            case "delete": {
+                ui.deleteTask(tasks, this.index - 1);
+                tasks.remove(this.index - 1);
+                break;
+            }
+            default: {
+                break;
+            }
             }
         }
     }

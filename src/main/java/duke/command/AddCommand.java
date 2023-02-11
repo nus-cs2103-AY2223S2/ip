@@ -1,13 +1,14 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Todo;
 public class AddCommand extends Command {
-    protected  String name;
+    protected String name;
     protected LocalDateTime by;
     protected LocalDateTime from;
     protected LocalDateTime to;
@@ -16,15 +17,18 @@ public class AddCommand extends Command {
         super(commandName);
         this.name = name;
         switch (this.commandName) {
-            case "deadline": {
-                this.by = by;
-                break;
-            }
-            case "event": {
-                this.from = from;
-                this.to = to;
-                break;
-            }
+        case "deadline": {
+            this.by = by;
+            break;
+        }
+        case "event": {
+            this.from = from;
+            this.to = to;
+            break;
+        }
+        default: {
+            break;
+        }
         }
     }
 
