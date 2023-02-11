@@ -31,9 +31,9 @@ public class Processor {
         try {
             tasks = storage.readTaskList();
         } catch (IOException ioe) {
-            this.ui.writeErr("Save file could not be read from, reinitializing");
+            this.ui.writeError("Save file could not be read from, reinitializing");
         } catch (ClassNotFoundException cnfe) {
-            this.ui.writeErr("Save file corrupted or tampered with, reinitializing");
+            this.ui.writeError("Save file corrupted or tampered with, reinitializing");
         }
         if (tasks == null) {
             tasks = new TaskList();
@@ -147,11 +147,11 @@ public class Processor {
                 try {
                     cmd.run(context);
                 } catch (DukeException de) {
-                    ui.writeErr(de.getMessage());
+                    ui.writeError(de.getMessage());
                 } catch (Exception e) {
-                    ui.writeErr("An unhandled exception occurred while running the command: " + e);
+                    ui.writeError("An unhandled exception occurred while running the command: " + e);
                 }
-            }, () -> ui.writeErr("No such command!"));
+            }, () -> ui.writeError("No such command!"));
         }
     }
 
@@ -162,7 +162,7 @@ public class Processor {
         try {
             storage.writeTaskList(tasks);
         } catch (IOException ioe) {
-            this.ui.writeErr("Save file could not be written to!");
+            this.ui.writeError("Save file could not be written to!");
             throw new RuntimeException(ioe);
         }
     }

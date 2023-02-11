@@ -61,14 +61,14 @@ public class Ui {
     /**
      * Writes a line of text as error
      */
-    public void writeErr(String line) {
-        writeErr(line, 1);
+    public void writeError(String line) {
+        writeError(line, 1);
     }
 
     /**
      * Writes a line of text as error as indentation
      */
-    public void writeErr(String line, int indent) {
+    public void writeError(String line, int indent) {
         out.printf("!%s%s%n", "\t".repeat(indent), line);
     }
 }
