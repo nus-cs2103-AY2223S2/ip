@@ -28,7 +28,7 @@ public class Deadline extends Task {
      *         that is stored in a file
      */
     public String toFile() {
-        return "deadline," + super.isMark() + "," + super.getValue() + "," + this.by;
+        return "deadline;" + super.isMark() + ";" + super.getValue() + ";" + this.by;
     }
 
     @Override

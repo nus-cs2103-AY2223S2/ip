@@ -28,7 +28,7 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.mark(index);
         storage.empty();
-        storage.writeFromList(tasks);
+        storage.writeFromList(tasks,storage.getFilePath());
         return ui.showMarkSucess(tasks.get(index));
     }
 }

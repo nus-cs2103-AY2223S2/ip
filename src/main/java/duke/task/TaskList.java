@@ -51,7 +51,7 @@ public class TaskList {
         return this.list.indexOf(value);
     }
 
-
-
-
+    public void clear() {
+        this.list.clear();
+    }
 }

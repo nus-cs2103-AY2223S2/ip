@@ -34,7 +34,7 @@ public class Event extends Task {
      *         that is stored in a file
      */
     public String toFile() {
-        return "event," + super.isMark() + "," + super.getValue() + "," + this.from + "," + this.to;
+        return "event;" + super.isMark() + ";" + super.getValue() + ";" + this.from + ";" + this.to;
     }
     @Override
     public String toString() {

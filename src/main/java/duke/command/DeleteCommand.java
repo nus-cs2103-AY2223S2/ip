@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
 
         tasks.remove(index);
         storage.empty();
-        storage.writeFromList(tasks);
+        storage.writeFromList(tasks,storage.getFilePath());
         return message;
     }
 }

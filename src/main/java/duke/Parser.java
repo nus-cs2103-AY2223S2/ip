@@ -1,14 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ErrorCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
 import duke.gui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -157,6 +149,10 @@ public class Parser {
             } else if (isFrom == false) {
                 c = new ErrorCommand(ErrorCommand.types.missingFrom,"event");
             }
+            break;
+        }
+        case "archive": {
+            c = new ArchiveCommand();
             break;
         }
         default:

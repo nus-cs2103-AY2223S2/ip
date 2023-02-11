@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.*;
 
+import javax.print.DocFlavor;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -43,7 +44,7 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String st;
             while ((st = br.readLine()) != null) {
-                String[] tokens = st.split(",");
+                String[] tokens = st.split(";");
                 Task t = null;
                 if( tokens[0].equals("todo"))
                     t = new Todo( tokens[2] , Boolean.parseBoolean(tokens[1]));
@@ -89,7 +90,7 @@ public class Storage {
     /**
      * Write from TaskList to the file
      */
-    public void writeFromList(TaskList tasks) {
+    public void writeFromList(TaskList tasks, String filepath) {
         try {
             FileWriter fw = new FileWriter(filepath);
             for (int i = 0; i < tasks.size(); i++) {
@@ -99,5 +100,24 @@ public class Storage {
         } catch (IOException e) {
             throw new RuntimeException();
         }
+    }
+
+    /**
+     * Create a file based on the filepath
+     */
+    public void createNewFile(String filepath) {
+        File file = new File(filepath);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Getter method for filepath
+     */
+    public String getFilePath() {
+        return this.filepath;
     }
 }

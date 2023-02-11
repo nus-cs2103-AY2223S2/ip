@@ -22,7 +22,7 @@ public class Todo extends Task {
      *         that is stored in a file
      */
     public String toFile() {
-        return "todo," + super.isMark() + "," + super.getValue();
+        return "todo;" + super.isMark() + ";" + super.getValue();
     }
     @Override
     public String toString() {
