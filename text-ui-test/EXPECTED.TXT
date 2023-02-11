@@ -1,7 +1,53 @@
-Hello from
+Hello I'm
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+How may I help you today?
+
+> Duke's response:
+I've added the following task to your list:
+[ ] buy
+Current tasks count: 1
+--------------------------------
+
+> Duke's response:
+I've added the following task to your list:
+[ ] sell
+Current tasks count: 2
+--------------------------------
+
+> Duke's response:
+I've added the following task to your list:
+[T][ ] borrow book
+Current tasks count: 3
+--------------------------------
+
+> Duke's response:
+I've added the following task to your list:
+[D][ ] return book (by: Sunday)
+Current tasks count: 4
+--------------------------------
+
+> Duke's response:
+I've added the following task to your list:
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
+Current tasks count: 5
+--------------------------------
+
+Here are the tasks in your list:
+1. [ ] buy
+2. [ ] sell
+3. [T][ ] borrow book
+4. [D][ ] return book (by: Sunday)
+5. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+End of list!
+
+Nice! I've marked this task as completed:
+ [T][X] borrow book
+
+OK, I've marked this task as incomplete:
+ [T][ ] borrow book
 
