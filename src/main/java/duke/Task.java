@@ -46,27 +46,5 @@ public abstract class Task {
         return description;
     }
 
-<<<<<<< HEAD
-=======
-    public static void unmarkTask(ArrayList<Task> array, String[] splitInput) {
-        array.get((Integer.parseInt(splitInput[1])-1)).markAsUnDone();
-        Ui.unmarkTask(array, splitInput);
-    }
-
-
-
-    public static void markTask(ArrayList<Task> array, String[] splitInput) {
-        array.get((Integer.parseInt(splitInput[1])-1)).markAsDone();
-        Ui.markTask(array, splitInput);
-    }
-
-  
-
-    public static void deleteTask(ArrayList<Task> array, String[] splitInput) {
-        array.remove((Integer.parseInt(splitInput[1])-1));
-        Ui.removeTask(array, splitInput);
-    }
-
->>>>>>> parent of 4763bad (A-JavaDoc)
 
 }
