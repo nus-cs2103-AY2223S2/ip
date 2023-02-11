@@ -2,6 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javafx.application.Platform;
 import task.TaskList;
 import task.Task;
 import task.Command;
@@ -171,6 +173,66 @@ public class Duke {
             } catch (DukeException exc) {
                 String tmp = ui.separate(exc.toString());
             }
+        }
+    }
+
+    public String getResponse(String userInput) {
+        commandList.add(userInput);
+        try {
+            String[] expressions = userInput.split(" ");
+            String command = expressions[0];
+            String response = null;
+            if (userInput.equals(parser.convertEnum(Command.LIST))) {
+                response = taskList.printCurrentTasks();
+            } else if (command.equals(parser.convertEnum(Command.MARK))) {
+                parser.checkEmpty(userInput, command);
+                String[] words = userInput.split(" ");
+                int index = Integer.parseInt(words[1]) - 1;
+                response = markAsDone(index);
+            } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
+                parser.checkEmpty(userInput, command);
+                String[] words = userInput.split(" ");
+                int index = Integer.parseInt(words[1]) - 1;
+                response = markAsDone(index);
+            } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
+                String stringCommands = "";
+                for (String i: commandList) {
+                    stringCommands += (i + "\n");
+                }
+                storage.saveToDisk(stringCommands + "\n");
+                Platform.exit();
+            } else if (command.equals(parser.convertEnum(Command.TODO))) {
+                parser.checkEmpty(userInput, command);
+                Todo todo_task = new Todo(userInput);
+                addTask(todo_task);
+                response = messageOfAdd(todo_task);
+            } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
+                parser.checkEmpty(userInput, command);
+                Deadline ddl_task = new Deadline(userInput);
+                addTask(ddl_task);
+                response = messageOfAdd(ddl_task);
+            } else if (command.equals(parser.convertEnum(Command.EVENT))) {
+                parser.checkEmpty(userInput, command);
+                Event event_task = new Event(userInput);
+                addTask(event_task);
+                response = messageOfAdd(event_task);
+            } else if (command.equals(parser.convertEnum(Command.DELETE))) {
+                parser.checkEmpty(userInput, command);
+                String[] words = userInput.split(" ");
+                int index = Integer.parseInt(words[1]) - 1;
+                response = deleteMessage(index);
+            } else if (command.equals(parser.convertEnum(Command.FIND))) {
+                parser.checkEmpty(userInput, command);
+                String keyword = userInput.substring(5);
+                response = findMessage(keyword);
+            } else {
+                throw new WeirdInputException();
+            }
+            return response;
+        } catch (WeirdInputException exc) {
+            return exc.toString();
+        } catch (DukeException exc) {
+            return exc.toString();
         }
     }
 
