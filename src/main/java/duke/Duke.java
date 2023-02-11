@@ -92,39 +92,38 @@ public class Duke {
      */
     private String addTodo(String[] input) throws DukeException {
         Todo tempTodo = Parser.parseTodo(input);
-        String saveString = "T | 0 | " + tempTodo.getDescription();
-
-        this.storage.saveEntry(saveString);
+        this.storage.saveEntry(tempTodo);
         this.tasks.addTask(tempTodo);
-
-        String message = "Got it. I've added this task:\n " + tempTodo.toString();
-        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
-        return message;
+        return generateAddTaskMessage(tempTodo);
     }
 
 
     private String addDeadline(String[] input) throws DukeException {
         Deadline tempDeadline = Parser.parseDeadline(input);
-        String saveString = "D | 0 | " + tempDeadline.getDescription() + " | " + tempDeadline.getByDate();
-        storage.saveEntry(saveString);
+
+        storage.saveEntry(tempDeadline);
         tasks.addTask(tempDeadline);
-        String message = "Got it. I've added this task:\n " + tempDeadline.toString();
-        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
-        return message;
+        return generateAddTaskMessage(tempDeadline);
 
     }
 
     private String addEvent(String[] input) throws DukeException {
         Event tempEvent = Parser.parseEvent(input);
-        String saveString = "E | 0 | " + tempEvent.getDescription() + " | "
-                + tempEvent.getStartDate() + ">" + tempEvent.getEndDate();
-
-        storage.saveEntry(saveString);
+        storage.saveEntry(tempEvent);
         tasks.addTask(tempEvent);
-        String message = "Got it. I've added this task:\n " + tempEvent.toString();
+        return generateAddTaskMessage(tempEvent);
+    }
+
+    private String generateAddTaskMessage(Task task) {
+        String message = "Got it. I've added this task:\n " + task.toString();
         message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
         return message;
+    }
 
+    private String generateDeleteTaskMessage(Task task) {
+        String message = "Noted. I've removed this task:\n " + task.toString();
+        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
+        return message;
     }
 
     private String listTask() {
@@ -181,9 +180,7 @@ public class Duke {
 
         Task delTask = tasks.getTask(taskNum - 1);
         tasks.deleteTask(taskNum - 1);
-        String message = "Noted. I've removed this task:\n " + delTask.toString();
-        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
-        return message;
+        return generateDeleteTaskMessage(delTask);
     }
 
 

@@ -41,7 +41,8 @@ public class Parser {
      * @throws DukeException when user input is invalid.
      */
     public static Todo parseTodo(String[] input) throws DukeException { //return task
-        if (input.length == 1 || input[1].isEmpty()) {
+        boolean descriptionMissing = input.length == 1 || input[1].isEmpty();
+        if (descriptionMissing) {
             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
         }
         Todo tempTodo = new Todo(input[1]);
@@ -56,11 +57,13 @@ public class Parser {
      * @throws DukeException when user input is invalid.
      */
     public static Deadline parseDeadline(String[] input) throws DukeException {
-        if (input.length == 1 || input[1].isEmpty()) {
+        boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
+        if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The description and due date of a deadline cannot be empty.");
         }
         String[] dlString = input[1].split(" /by ");
-        if (dlString.length == 1 || dlString[1].isEmpty()) {
+        boolean dateIsMissing = dlString.length == 1 || dlString[1].isEmpty();
+        if (dateIsMissing) {
             throw new DukeException(" ☹ OOPS!!! The description and due date of a deadline cannot be empty.");
         }
 
@@ -87,16 +90,19 @@ public class Parser {
      * @throws DukeException when user input is invalid.
      */
     public static Event parseEvent(String[] input) throws DukeException {
-        if (input.length == 1 || input[1].isEmpty()) {
+        boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
+        if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
         }
         String emptyDateMsg = " ☹ OOPS!!! The start & end time of an event cannot be empty.";
-        String[] eventString = input[1].split(" /from ");
-        if (eventString.length == 1 || eventString[1].isEmpty()) {
+        String[] eventDetails = input[1].split(" /from ");
+        boolean bothDateMissing = eventDetails.length == 1 || eventDetails[1].isEmpty();
+        if (bothDateMissing) {
             throw new DukeException(emptyDateMsg);
         }
-        String[] timeSplit = eventString[1].split(" /to ");
-        if (timeSplit.length == 1 || timeSplit[1].isEmpty()) {
+        String[] timeSplit = eventDetails[1].split(" /to ");
+        boolean endDateMissing = timeSplit.length == 1 || timeSplit[1].isEmpty();
+        if (endDateMissing) {
             throw new DukeException(emptyDateMsg);
         }
         try {
@@ -110,7 +116,7 @@ public class Parser {
             String endTimeString = timeSplit[1].substring(0, 2) + ":" + timeSplit[1].substring(2);
             LocalDateTime endDate = LocalDateTime.parse(dateTimeString[0] + "T" + endTimeString);
 
-            Event tempEvent = new Event(eventString[0], startDate, endDate);
+            Event tempEvent = new Event(eventDetails[0], startDate, endDate);
             return tempEvent;
 
         } catch (DateTimeParseException dateTimeParseException) {
@@ -126,7 +132,8 @@ public class Parser {
      * @throws DukeException when user input is invalid
      */
     public static int parseMarkTask(String[] input) throws DukeException { // returns task id
-        if (input.length == 1 || input[1].isEmpty()) {
+        boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
+        if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to mark.");
         }
         assert input[1].matches("[0-9]+") : "Should be all numbers";
@@ -142,7 +149,8 @@ public class Parser {
      * @throws DukeException when user input is invalid.
      */
     public static int parseUnmarkTask(String[] input) throws DukeException { // returns task id
-        if (input.length == 1 || input[1].isEmpty()) {
+        boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
+        if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to unmark.");
         }
         assert input[1].matches("[0-9]+") : "Should be all numbers";
@@ -158,7 +166,8 @@ public class Parser {
      * @throws DukeException when user input is invalid.
      */
     public static int parseDeleteTask(String[] input) throws DukeException { // returns task id
-        if (input.length == 1 || input[1].isEmpty()) {
+        boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
+        if (inputIsTooShort) {
             throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");
         }
         assert input[1].matches("[0-9]+") : "Should be all numbers";
@@ -173,7 +182,8 @@ public class Parser {
      * @throws DukeException when user input is invalid.
      */
     public static String parseSearch(String[] input) throws DukeException {
-        if (input.length == 1 || input[1].isEmpty()) {
+        boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
+        if (inputIsTooShort) {
             throw new DukeException("You didn't say what you're looking for.");
         }
 

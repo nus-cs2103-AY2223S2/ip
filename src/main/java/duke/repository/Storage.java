@@ -94,14 +94,35 @@ public class Storage {
      * @param entry an entry to be added to file in file path.
      * @throws DukeException when file I/O is unsuccessful.
      */
-    public void saveEntry(String entry) throws DukeException {
+    public void saveEntry(Task entry) throws DukeException {
 
         try {
+            String entryString = generateSaveString(entry);
             File dukeFile = new File(this.filePath);
             FileWriter dukeWriter = new FileWriter(dukeFile, true);
-            dukeWriter.write(entry + "\n");
+            dukeWriter.write(entryString + "\n");
             dukeWriter.close();
         } catch (IOException io) {
+            throw new DukeException(ERROR_MSG);
+        }
+    }
+
+    /**
+     *  Generate string formatted for saving.
+     *
+     * @param taskEntry task to be saved.
+     * @return string representing task formatted for saving.
+     */
+    private String generateSaveString(Task taskEntry) throws DukeException {
+        if (taskEntry instanceof Todo) {
+            return "T | 0 | " + taskEntry.getDescription();
+        } else if (taskEntry instanceof Deadline) {
+            Deadline deadline = (Deadline) taskEntry;
+            return "D | 0 | " + deadline.getDescription() + " | " + deadline.getByDate();
+        } else if (taskEntry instanceof Event) {
+            Event event = (Event) taskEntry;
+            return "E | 0 | " + event.getDescription() + " | " + event.getStartDate() + ">" + event.getEndDate();
+        } else {
             throw new DukeException(ERROR_MSG);
         }
     }
@@ -179,4 +200,5 @@ public class Storage {
             throw new DukeException(ERROR_MSG);
         }
     }
+
 }
