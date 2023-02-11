@@ -10,7 +10,9 @@ import duke.exception.DukeInvalidCommandException;
 public class Parser {
 
     public static Command parse(String line) throws DukeException {
+        assert line != null;
         String[] chunked = line.split(" ");
+        assert chunked.length > 0;
         String command = chunked[0];
         if (command.equals("bye")) {
             return new ByeCommand();

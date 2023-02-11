@@ -21,6 +21,7 @@ public class Duke {
      * @param dirPath Directory path.
      */
     public Duke(String dirPath) {
+        assert dirPath != null;
         this.ui = new Ui();
         this.storage = new Storage(dirPath);
         try {
