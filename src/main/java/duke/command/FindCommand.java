@@ -19,7 +19,7 @@ public class FindCommand extends Command {
      * @param userInput String containing the whole input provided by the user.
      */
     public FindCommand(String userInput) {
-        searchWords = userInput.replaceFirst(CMD_KEYWORD, "").trim();
+        searchWords = userInput.replaceFirst(CMD_KEYWORD, "").trim().toLowerCase();
     }
 
     /**
@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         // Find for task containing search words
         for (int i = 0; i < duke.taskList.size(); i++) {
             Task task = duke.taskList.get(i);
-            if (task.getDescription().contains(searchWords)) {
+            if (task.getDescription().toLowerCase().contains(searchWords)) {
                 sb.append("\t").append(i + 1).append(". ").append(task).append("\n");
             }
         }
