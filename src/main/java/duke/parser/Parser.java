@@ -12,7 +12,7 @@ import duke.task.Todo;
 public class Parser {
 
     /**
-     * Parse a command expecting a task number input.
+     * Parses a command expecting a task number input.
      *
      * @param command Command given by user.
      * @return Task number specified by the user command.
@@ -26,7 +26,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to generate a task.
+     * Parses a command to generate a task.
      *
      * @param command Command given by user.
      * @return Task object specified by the user command.
@@ -63,7 +63,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to expect a keyword.
+     * Parses a command to expect a keyword.
      *
      * @param command Command given by user.
      * @return keyword specified by the user command.

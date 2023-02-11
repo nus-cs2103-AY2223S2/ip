@@ -63,7 +63,7 @@ public class Duke {
     }
 
     /**
-     * Get response from Duke according to commands from user.
+     * Gets response from Duke according to commands from user.
      *
      * @param input Command from the user
      * @return Response from Duke
