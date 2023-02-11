@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates a Task with a deadline.
  */
 public class Deadline extends Task {
-    private String time;
+    protected String time;
 
     /**
      * Ddl constructor.
@@ -22,9 +22,28 @@ public class Deadline extends Task {
         LocalDate output = LocalDate.parse(time, dateFormatter);
         DateTimeFormatter newPattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
         this.time = output.format(newPattern);
-
     }
 
+    public boolean checkInput(Deadline taskOne, Deadline taskTwo) {
+        return taskOne.input.equals(taskTwo.input);
+    }
+
+    public boolean checkTime(Deadline taskOne, Deadline taskTwo) {
+        return taskOne.time.equals(taskTwo.time);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Deadline) {
+            Deadline task = (Deadline) o;
+            if (checkInput(task, this) || checkTime(task, this)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns the string representation of the Ddl object with

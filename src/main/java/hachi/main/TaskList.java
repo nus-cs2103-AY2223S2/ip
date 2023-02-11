@@ -1,7 +1,6 @@
 package hachi.main;
 
 import hachi.tasks.Task;
-
 import java.util.ArrayList;
 
 /**
@@ -9,13 +8,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> toDoList;
+    private ArrayList<Task> tasks;
 
     /**
      * TaskList constructor.
      */
     public TaskList() {
-        this.toDoList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
@@ -25,7 +24,7 @@ public class TaskList {
      * @return Task of specified index.
      */
     public Task get(int i) {
-        return this.toDoList.get(i);
+        return this.tasks.get(i);
     }
 
     /**
@@ -33,9 +32,18 @@ public class TaskList {
      *
      * @param task New Task object to be added to the TaskList.
      */
-    public void add(Task task) {
+    public void add(Task task) throws HachiExceptions {
         assert task != null;
-        this.toDoList.add(task);
+        checkDuplicate(task);
+        this.tasks.add(task);
+    }
+
+    public void checkDuplicate(Task task) throws HachiExceptions {
+        for (int i = 0; i < size(); i++) {
+            if (tasks.get(i).equals(task)) {
+                throw new HachiExceptions("You have already added this task to your list!");
+            }
+        }
     }
 
     /**
@@ -44,7 +52,7 @@ public class TaskList {
      * @param i Index of the Task to be removed.
      */
     public void remove(int i) {
-        this.toDoList.remove(i);
+        this.tasks.remove(i);
     }
 
     /**
@@ -53,7 +61,7 @@ public class TaskList {
      * @return Size of the TaskList.
      */
     public int size() {
-        return this.toDoList.size();
+        return this.tasks.size();
     }
 
 
@@ -63,6 +71,6 @@ public class TaskList {
      * @return string representation of the TaskList.
      */
     public String toString() {
-        return "" + this.toDoList;
+        return "" + this.tasks;
     }
 }

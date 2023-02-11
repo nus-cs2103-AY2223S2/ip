@@ -11,6 +11,7 @@ import hachi.tasks.Event;
  */
 public class EventCommand extends Command {
     private String input;
+    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * EventCommand constructor.
@@ -21,7 +22,7 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             int index_e1 = input.indexOf("/");
             int index_e2 = input.lastIndexOf("/");
@@ -37,9 +38,10 @@ public class EventCommand extends Command {
             Event eventTask = new Event(input.substring(6, index_e1 - 1),
                     input.substring(index_e1 + 6, index_e2 - 1),
                     input.substring(index_e2 + 4, input.length()));
-            tasks.add(eventTask);
-            storage.saveTaskList(tasks);
-            return ui.showAdded(tasks, eventTask);
+            toDoList.add(eventTask);
+            storage.saveTaskList(toDoList);
+            return separator + "\n" + "\n" + "   okie dokie. I've added this task:" + "\n" + eventTask +
+                    "   Now you have " + toDoList.size() + " tasks in the list.";
         } catch (HachiExceptions e) {
             return e.getMessage();
         }

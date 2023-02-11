@@ -4,8 +4,8 @@ package hachi.tasks;
  * Encapsulates a job to be done.
  */
 public class Task {
-    private String input;
-    private boolean status;
+    protected String input;
+    private boolean isDone;
 
     /**
      * Task constructor.
@@ -14,21 +14,21 @@ public class Task {
      */
     public Task(String input) {
         this.input = input;
-        this.status = false;
+        this.isDone = false;
     }
 
     /**
      * Marks a task as done.
      */
     public void mark() {
-        this.status = true;
+        this.isDone = true;
     }
 
     /**
      * Marks a task as not done.
      */
     public void unmark() {
-        this.status = false;
+        this.isDone = false;
     }
 
     /**
@@ -38,7 +38,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.status) {
+        if (this.isDone) {
             return String.format("[X] " + this.input);
         } else {
             return String.format("[ ] " + this.input);
