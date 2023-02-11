@@ -7,7 +7,6 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
 
 public class Set extends Command {
     protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("set", "s"));
