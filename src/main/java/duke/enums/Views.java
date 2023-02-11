@@ -20,6 +20,8 @@ public enum Views {
     LIST_STRING("Here are the tasks in your list:\n      "),
     FOUND_LIST_STRING("Here are the matching tasks in your list:\n      "),
     CANNOT_FIND_STRING("Hey, I can't find what you're searching for"),
+    MARKED_ERR_STRING("Hey, the task you tried to mark is already marked"),
+    UNMARKED_ERR_STRING("Hey, the task you tried to unmark is already unmarked"),
     NO_INT_ERR_STRING("Hey, you did not enter any numbers"),
     OUT_RANGE_ERR_STRING("Hey, the number you've entered is not valid"),
     UNKNOWN_ERR_STRING("Hey, an unknown error happened, oh no"),

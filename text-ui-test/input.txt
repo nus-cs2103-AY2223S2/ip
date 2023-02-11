@@ -45,6 +45,10 @@ list
 find test
 find test one
 find one
+mark 1
+mark 1
+unmark 1
+unmark 1
 clear
 asdf
 bye

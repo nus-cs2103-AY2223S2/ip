@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DukeException;
 import duke.enums.Views;
 
 /**
@@ -32,15 +33,25 @@ public abstract class Task {
 
     /**
      * Mark the task as done
+     *
+     * @throws DukeException
      */
-    public void markAsDone() {
+    public void markAsDone() throws DukeException {
+        if (this.isDone) {
+            throw new DukeException(Views.MARKED_ERR_STRING.eng());
+        }
         this.isDone = true;
     }
 
     /**
      * Mark the task as not done
+     *
+     * @throws DukeException
      */
-    public void markAsUndone() {
+    public void markAsUndone() throws DukeException {
+        if (!this.isDone) {
+            throw new DukeException(Views.UNMARKED_ERR_STRING.eng());
+        }
         this.isDone = false;
     }
 
