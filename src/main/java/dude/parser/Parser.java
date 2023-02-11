@@ -1,6 +1,8 @@
 package dude.parser;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import dude.command.AddCommand;
@@ -131,7 +133,7 @@ public class Parser {
 
             format = cmd[1].split(" /by ");
             try {
-                LocalDate.parse(format[1]);
+                LocalDateTime.parse(format[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             } catch (DateTimeParseException e) {
                 throw new DudeException("Uhh... You using wrong format of date leh (YYYY-MM-DD HHmm)");
             }
@@ -150,7 +152,10 @@ public class Parser {
             String[] details = format[1].split(" /to ");
 
             try {
-                if (LocalDate.parse(details[0]).isBefore(LocalDate.parse(details[1]))) {
+                LocalDateTime startDate = LocalDateTime.parse(details[0], DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                LocalDateTime endDate = LocalDateTime.parse(details[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+                if (endDate.isBefore(startDate) || startDate.isEqual(endDate)) {
                     throw new DudeException("Uhh... Your start date must be earlier than your end date");
                 }
             } catch (DateTimeParseException e) {
