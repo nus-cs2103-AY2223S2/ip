@@ -105,8 +105,8 @@ public class Storage {
     public void write(TaskList tl) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
         for (int i = 0; i < tl.len(); i++){
-            System.out.println(tl.taskList.get(i).toString());
-            writer.write(tl.taskList.get(i).toString()+"\n");
+            System.out.println(tl.getTaskList().get(i).toString());
+            writer.write(tl.getTaskList().get(i).toString()+"\n");
             writer.flush();
         }
     }

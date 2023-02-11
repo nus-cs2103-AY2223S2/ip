@@ -16,7 +16,11 @@ public class TaskList {
      */
     private static String LINEBREAK = "_________________________________________________________________\n";
 
-    List<Task> taskList = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
+
+    public static List<Task> getTaskList() {
+        return taskList;
+    }
 
     public TaskList(List<Task> taskList){
         /**
