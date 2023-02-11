@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 import runner.TaskList;
 import task.Task;
 

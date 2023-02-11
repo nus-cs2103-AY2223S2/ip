@@ -1,12 +1,16 @@
 package runner;
 
+import task.Task;
+
 /**
  * Class for Duke.
  */
 public class Duke {
-    protected final Storage storage;
-    protected final TaskList taskList;
+    public final Storage storage;
+    public final TaskList taskList;
     private final Parser parser;
+    private String recentInput = "";
+    private Task deletedTask;
 
     /**
      * Constructor for a Duke object.
@@ -16,6 +20,22 @@ public class Duke {
         this.storage = new Storage(taskList);
         this.parser = new Parser(this);
         storage.loadList();
+    }
+
+    public void updateInput(String s) {
+        recentInput = s;
+    }
+
+    public void updateDeleted(Task tk) {
+        deletedTask = tk;
+    }
+
+    public Task getDeletedTask() {
+        return deletedTask;
+    }
+
+    public String getRecentInput() {
+        return recentInput;
     }
 
     public String getResponse(String input) {

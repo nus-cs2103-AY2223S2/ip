@@ -1,4 +1,4 @@
-import GUI.Main;
+import gui.Main;
 import javafx.application.Application;
 
 public class Launcher {
