@@ -1,11 +1,14 @@
 package duke.command;
 
-import duke.Deadline;
-import duke.DukeResponse;
-import duke.MessageGenerator;
+
 import duke.TaskList;
+import duke.DateTimeParser;
+import duke.MessageGenerator;
+import duke.DukeResponse;
+import duke.Deadline;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command{
     String taskDesc;
@@ -18,6 +21,18 @@ public class DeadlineCommand extends Command{
         this.by = by;
         this.hasTime = hasTime;
         this.taskList = taskList;
+    }
+
+    public static Command create(String taskDesc, String byString, TaskList taskList) {
+        try {
+            LocalDateTime by = DateTimeParser.parse(byString);
+            String[] parts = byString.split(" ");
+            boolean hasTime = parts.length == 2;
+            return new DeadlineCommand(taskDesc, by, hasTime, taskList);
+
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand(MessageGenerator.genDateTimeParseErrorMsg());
+        }
     }
 
 

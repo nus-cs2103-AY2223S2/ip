@@ -59,12 +59,16 @@ public class Deadline extends Task {
     public static Deadline parseDeadlineStringArray(String[] parts) throws DateTimeParseException {
         String taskDesc = parts[2];
         String byString = parts[3];
+
         String[] byParts = byString.split(" ");
         boolean hasTime = byParts.length == 2;
+
         Deadline task = new Deadline(taskDesc, DateTimeParser.parse(byString), hasTime);
+
         if (Integer.parseInt(parts[1]) == 1) {
             task.mark();
         }
+
         return task;
     }
 }

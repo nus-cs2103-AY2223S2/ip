@@ -25,11 +25,10 @@ public class MarkOrUnmarkCommand extends Command {
 
         if (isMark) {
             task.mark();
-            return new DukeResponse(MessageGenerator.genMarkorUnmarkTaskMsg(task.toString(), true));
         } else {
             task.unmark();
-            return new DukeResponse(MessageGenerator.genMarkorUnmarkTaskMsg(task.toString(), false));
         }
-    }
 
+        return new DukeResponse(MessageGenerator.genMarkorUnmarkTaskMsg(task.toString(), isMark));
+    }
 }

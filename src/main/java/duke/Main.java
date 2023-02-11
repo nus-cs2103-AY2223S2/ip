@@ -10,18 +10,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    private Duke duke = new Duke();
+    private MainWindow mainWindowController;
 
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+
+            mainWindowController = (MainWindow)fxmlLoader.<MainWindow>getController();
+            assert mainWindowController != null : "mainWindowController should not be null in start";
+
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            duke.loadTaskList("data.txt");
-            fxmlLoader.<MainWindow>getController().renderDukeStartUpMsg();
+            stage.setTitle("Duke");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,6 +32,8 @@ public class Main extends Application {
 
     @Override
     public void stop() {
-        duke.saveTaskList();
+        assert mainWindowController != null : "mainWindowController should not be null in stop";
+        assert mainWindowController.getDuke() != null : "Duke should not be null in stop";
+        mainWindowController.saveDukeData();
     }
 }
