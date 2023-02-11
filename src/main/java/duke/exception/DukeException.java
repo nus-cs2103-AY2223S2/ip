@@ -55,7 +55,7 @@ public class DukeException extends Exception {
                 this.errorMsg = "The command shouldn't be followed by other details!";
                 break;
             case "input type":
-                this.errorMsg = "Find keyword cannot be empty!";
+                this.errorMsg = "Input is the wrong type!!";
                 break;
             default:
                 this.errorMsg = "I'm sorry but I don't know what that means :(";

@@ -51,16 +51,17 @@ public class Storage {
      * Stores data in given list of tasks into the file path of Storage.
      * @param taskList contains list of tasks from an instance of Duke.
      */
-    public void saveToFile(TaskList taskList) {
+    public void saveToFile(TaskList taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(this.filePath);
+            assert writer != null : "Error saving to file";
             for (int i = 0; i < taskList.getSize(); i++) {
                 String taskText = taskList.getTask(i).toFile();
                 writer.write(taskText);
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println(String.format("I wasn't able to write the data into %s", filePath));
+            throw new DukeException("saving changes to file");
         }
     }
 
@@ -74,6 +75,7 @@ public class Storage {
             Scanner fileData = new Scanner(this.file);
             while (fileData.hasNextLine()) {
                 String taskString = fileData.nextLine();
+                assert !taskString.isEmpty() : "File contains invalid inputs";
                 taskList.addTaskFromString(taskString);
             }
             fileData.close();

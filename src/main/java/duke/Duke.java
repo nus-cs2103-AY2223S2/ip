@@ -31,7 +31,7 @@ public class Duke {
     }
 
     public String getResponse(String userInput) {
-        String response;
+        String response = "";
         try {
             Command command = parser.parse(userInput);
             response = command.execute(this.taskList, this.ui);
@@ -46,8 +46,8 @@ public class Duke {
                     System.exit(0);
                 });
                 wait.play();
-                return response;
             }
+            assert !response.isEmpty() : "Error returning Luffy's response";
             return response;
         } catch (DukeException e) {
             response = ui.showError(e.toString());
