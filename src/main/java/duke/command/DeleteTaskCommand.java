@@ -1,11 +1,13 @@
 package duke.command;
-
 import duke.command.exceptions.CommandExecutionError;
 import duke.interfaces.Command;
 import duke.model.Task;
 import duke.model.TaskModel;
 import duke.view.TaskView;
 
+/**
+ * Command that deletes tasks.
+ */
 public class DeleteTaskCommand implements Command {
     private final TaskModel taskModel;
     private final TaskView taskView;
@@ -26,6 +28,6 @@ public class DeleteTaskCommand implements Command {
         Task taskToDelete = taskView.getDisplayedTask(indexToDelete);
         taskModel.deleteTask(taskToDelete);
         taskView.showMessage("Noted, I've removed this task:\n  " + taskToDelete.toString()
-        + String.format("\n Now you have %d tasks in the list.", taskModel.getNumberOfTasks()));
+            + String.format("\n Now you have %d tasks in the list.", taskModel.getNumberOfTasks()));
     }
 }

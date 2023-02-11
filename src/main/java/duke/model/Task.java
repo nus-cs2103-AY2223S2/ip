@@ -3,6 +3,12 @@ package duke.model;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+/**
+ * The `Task` class is a representation of a single task that can be either a `Deadline`, `Event` or `Todo`.
+ * It includes information such as task description, and whether it is completed or not.
+ *
+ * @author jayanth
+ */
 public abstract class Task implements Serializable {
     private final String taskDescription;
     private boolean taskDone;

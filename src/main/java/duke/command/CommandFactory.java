@@ -5,6 +5,9 @@ import duke.interfaces.Command;
 import duke.model.TaskModel;
 import duke.view.TaskView;
 
+/**
+ * A factory to create commands.
+ */
 public class CommandFactory {
     private final TaskModel taskModel;
     private final TaskView taskView;
@@ -12,11 +15,24 @@ public class CommandFactory {
         GREET, BYE, LIST, MARK_DONE, MARK_UNDONE, CREATE_TODO,
         CREATE_DEADLINE, CREATE_EVENT, DELETE_TASK, FIND,
     }
+
+    /**
+     * Instantiate a command factory with the provided model and view.
+     * @param taskModel Model that stores the task list.
+     * @param taskView The current view.
+     */
     public CommandFactory(TaskModel taskModel, TaskView taskView) {
         this.taskModel = taskModel;
         this.taskView = taskView;
     }
 
+    /**
+     * Creates a command of the provided type with the supplied arguments.
+     * @param type The type of command to create.
+     * @param args The arguments to the command.
+     * @return A new command of the required type instantiated with the supplied arguments.
+     * @throws InvalidParameterError If the arguments are improperly formatted.
+     */
     public Command createCommand(CommandType type, String... args) throws InvalidParameterError {
         switch (type) {
             case GREET:

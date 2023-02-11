@@ -1,7 +1,9 @@
 package duke.exceptions;
 
 import duke.view.TaskView;
-
+/**
+ * A general exception handler to handle DukeExceptions caught in Duke's event loop.
+ */
 public class GlobalExceptionHandler {
     private final TaskView taskView;
     public GlobalExceptionHandler(duke.view.TaskView taskView){

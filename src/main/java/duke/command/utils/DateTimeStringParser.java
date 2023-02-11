@@ -8,8 +8,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A utility to parse datetime strings.
+ */
 public class DateTimeStringParser {
     public static final DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
+
+    /**
+     * Return a LocalDateTime instance with the date and time from the parsed dateTimeString.
+     * Uses the defaultTime parameter for the instance if no time is supplied.
+     * @param dateTimeString The string to parse.
+     * @param defaultTime Default time, if string does not contain time.
+     * @return A LocalDateTime instance with the parsed date and time.
+     * @throws InvalidParameterError if the string is not in the expected d/MM/yyyy HHmm or d/MM/yyyy pattern.
+     */
     public static LocalDateTime parseDateTimeString(String dateTimeString, LocalTime defaultTime)
             throws InvalidParameterError {
         DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

@@ -7,6 +7,9 @@ import duke.model.TaskModel;
 import duke.presenter.TaskPresenter;
 import duke.view.TaskView;
 
+/**
+ * The main class containing Duke's event loop.
+ */
 public class Duke {
     private boolean exit;
     private Duke() {

@@ -12,6 +12,10 @@ import duke.presenter.exceptions.UnsupportedCommandError;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A class that provides functionality to parse user input.
+ * @author jayanth
+ */
 public class InputParser {
     private final CommandEventListener exitEventListener;
     private final CommandFactory commandFactory;
