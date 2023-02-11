@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.2">
 <file name="/Users/niuboqian/ip/src/main/java/duke/DialogBox.java">
-<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
 </file>
 <file name="/Users/niuboqian/ip/src/main/java/duke/Duke.java">
 </file>
 <file name="/Users/niuboqian/ip/src/main/java/duke/Launcher.java">
-<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
-<error line="3" column="1" severity="error" message="Redundant import from the same package - duke.Duke." source="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"/>
-<error line="3" column="8" severity="error" message="Unused import - duke.Duke." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
 </file>
 <file name="/Users/niuboqian/ip/src/main/java/duke/Main.java">
-<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
 </file>
 <file name="/Users/niuboqian/ip/src/main/java/duke/MainWindow.java">
-<error line="30" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
-<error line="35" column="13" severity="error" message="&apos;method call rparen&apos; has incorrect indentation level 12, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
 </file>
 <file name="/Users/niuboqian/ip/src/main/java/duke/command/AddCommand.java">
 </file>
