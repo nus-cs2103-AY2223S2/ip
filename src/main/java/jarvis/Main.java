@@ -25,6 +25,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(400.0);
             primaryStage.setMinHeight(630.0);
+            primaryStage.setTitle("Jarvis");
             fxmlLoader.<MainWindow>getController().setJarvis(jarvis);
             primaryStage.show();
         } catch (IOException e) {

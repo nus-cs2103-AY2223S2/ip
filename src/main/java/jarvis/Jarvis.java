@@ -47,6 +47,10 @@ public class Jarvis {
         scanner.close();
     }
 
+    public boolean isExit() {
+        return isExit;
+    }
+
     public String getResponse(String input) {
         this.handleUserInput(input);
         return this.ui.dumpResponses();
