@@ -1,16 +1,21 @@
+package Duke.task;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     LocalDateTime deadlineDay;
 
-    Deadline(String desc, boolean done, LocalDateTime deadlineDay) {
+    public Deadline(String desc, boolean done, LocalDateTime deadlineDay) {
         super(desc, done);
         this.deadlineDay = deadlineDay;
     }
 
-    String getDeadlineDay(){
-        return this.deadlineDay.toString();
+    /**
+     * getter for deadline day
+     * @return this.deadlineDay
+     */
+    public String getDeadlineDay(){
+        return format24HrDate(this.deadlineDay);
     }
 
     @Override
