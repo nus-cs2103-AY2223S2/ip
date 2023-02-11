@@ -29,6 +29,10 @@ public class MessageGenerator {
         return "You're missing a " + field + " field";
     }
 
+    public static String genInvalidFieldMsg(String field) {
+        return field + " is not a valid field.";
+    }
+
     public static String genDateTimeParseErrorMsg() {
         return "Couldn't understand the given date and time";
     }
@@ -67,6 +71,10 @@ public class MessageGenerator {
         }
 
         return "Unmarked this task: " + task;
+    }
+
+    public static String genEditTaskMsg(String task) {
+        return "Edited this task: " + task;
     }
 
     public static String genUnknownCommandMsg() {

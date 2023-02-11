@@ -44,6 +44,16 @@ public class Event extends Task {
         }
     }
 
+    public void setFrom(LocalDateTime from, boolean fromHasTime) {
+        this.from = from;
+        this.fromHasTime = fromHasTime;
+    }
+
+    public void setTo(LocalDateTime to, boolean toHasTime) {
+        this.to = to;
+        this.toHasTime = toHasTime;
+    }
+
     /**
      * Returns the Event's ending date and time in a format suitable for storage.
      * If the ending date does not include a time, it returns a LocalDate. If it includes a time, it returns
