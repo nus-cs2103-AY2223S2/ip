@@ -29,6 +29,6 @@ public class Todo extends Task {
     @Override
     public String toStorageData() {
         String completionStatus = getStatusIcon();
-        return TASK_TYPE + "//" + completionStatus + "//" + description;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description;
     }
 }

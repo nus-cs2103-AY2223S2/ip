@@ -27,131 +27,149 @@ public class TaskList {
     }
 
     /**
-     * adds a new task into arraylist
-     * 
-     * @param taskDescription string description of the new task to be added
-     * @param type            type of the new task to be added ie ToDo, Event or
-     *                        Deadline
+     * adds a new Todo into arraylist
+     *
+     * @param command input by the user
+     *
      */
-
-    public String addTask(String taskDescription, String type) {
-        String message = "";
-        if (type.equals("todo")) {
-            try {
-                Todo todo = new Todo(taskDescription);
-                tasks.add(todo);
-                message = "Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
-                        + tasks.size() + " tasks in the list.";
-            } catch (MissingDescriptionException e) {
-                message = e.toString();
-            }
-        } else if (type.equals("deadline")) {
-            try {
-                String[] descriptionDate = taskDescription.split("/by ");
-                String description = descriptionDate[0];
-                String date = descriptionDate[1];
-                LocalDate dateString = LocalDate.parse(date);
-                Deadline deadline = new Deadline(description, dateString);
-                tasks.add(deadline);
-                message = "Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
-                        + tasks.size() + " tasks in the list.";
-            } catch (MissingDescriptionException e) {
-                message = e.toString();
-            } catch (DateTimeParseException e) {
-                message = "Please input date in YYYY-MM-DD format!";
-            } catch (ArrayIndexOutOfBoundsException e) {
-                message = "Please fill in all details (task description and date)!";
-            }
-
-        } else if (type.equals("event")) {
-            try {
-                String[] input = taskDescription.split("/from");
-                String description = input[0];
-                String[] remainder = input[1].split("/to");
-                String from = remainder[0];
-                String to = remainder[1];
-                Event event = new Event(description, from, to);
-                tasks.add(event);
-                message = "Got it. I've added this task:\n" + event.toString() + "\nNow you have "
-                        + tasks.size() + " tasks in the list.";
-
-            } catch (MissingDescriptionException e) {
-                message = e.toString();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                message = "Please fill in all details (task description, start and end time)!";
-            }
+    public String addTodo(String command) {
+        try {
+            String description = command.replace("todo", "");
+            Todo todo = new Todo(description);
+            tasks.add(todo);
+            return "Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
+                    + tasks.size() + " tasks in the list.";
+        } catch (MissingDescriptionException e) {
+            return e.toString();
         }
-        return message;
     }
 
     /**
+     * adds a new Deadline into arraylist
+     *
+     * @param command input by the user
+     *
+     */
+    public String addDeadline(String command) {
+        try {
+            String fullDescription = command.replace("deadline", "");
+            String[] descriptionAndDate = fullDescription.split("/by ");
+            String deadlineDescription = descriptionAndDate[0];
+            String date = descriptionAndDate[1];
+            LocalDate dateString = LocalDate.parse(date);
+            Deadline deadline = new Deadline(deadlineDescription, dateString);
+            tasks.add(deadline);
+            return "Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
+                    + tasks.size() + " tasks in the list.";
+        } catch (MissingDescriptionException e) {
+            return e.toString();
+        } catch (DateTimeParseException e) {
+            return "Please input date in YYYY-MM-DD format!";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please fill in all details (task description and date)!";
+        }
+    }
+
+    /**
+     * adds a new Event into arraylist
+     *
+     * @param command input by the user
+     *
+     */
+    public String addEvent(String command) {
+        try {
+            String description = command.replace("event", "");
+            String[] input = description.split("/from");
+            String eventDescription = input[0];
+            String[] remainder = input[1].split("/to");
+            String from = remainder[0];
+            String to = remainder[1];
+            Event event = new Event(eventDescription, from, to);
+            tasks.add(event);
+            return "Got it. I've added this task:\n" + event.toString() + "\nNow you have "
+                    + tasks.size() + " tasks in the list.";
+
+        } catch (MissingDescriptionException e) {
+            return e.toString();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please fill in all details (task description, start and end time)!";
+        }
+    }
+    /**
      * marks a task in the arraylist as completed
      * 
-     * @param index index of the task to mark as completed
+     * @param command user input
      * @throws IndexOutOfBoundsException
      */
-    public String markTask(int index) throws IndexOutOfBoundsException {
-        String message = "";
+    public String markTask(String command) throws IndexOutOfBoundsException {
         try {
+            String str = command.split(" ", 2)[1];
+            int index = Integer.parseInt(str);
             tasks.get(index - 1).mark();
-            message = "Nice! I've marked this task as done:\n" + tasks.get(index - 1).toString();
+            return "Nice! I've marked this task as done:\n" + tasks.get(index - 1).toString();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please give the index of the task you wish to mark!";
         } catch (IndexOutOfBoundsException e) {
-            message = "There is no such task in the list!";
+            return "There are only " + tasks.size() + " tasks in the list!";
         }
-        return message;
     }
 
     /**
      * unmarks a task in arraylist to not done
      * 
-     * @param index index of the task to unmark
+     * @param command user input
      * @throws IndexOutOfBoundsException
      */
-    public String unmarkTask(int index) throws IndexOutOfBoundsException {
-        String message = "";
+    public String unmarkTask(String command) throws IndexOutOfBoundsException {
         try {
+            String str = command.split(" ", 2)[1];
+            int index = Integer.parseInt(str);
             tasks.get(index - 1).unmark();
-            message = "OK, I've marked this task as not done yet:\n" + tasks.get(index - 1).toString();
+            return "OK, I've marked this task as not done yet:\n" + tasks.get(index - 1).toString();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please give the index of the task you wish to unmark!";
         } catch (IndexOutOfBoundsException e) {
-            message = "There is no such task in the list!";
+            return "There are only " + tasks.size() + " tasks in the list!";
         }
-        return message;
     }
 
     /**
      * removes a task from the arraylist
      * 
-     * @param index index of the task to be removed from the arraylist
+     * @param command input by user
      * @throws IndexOutOfBoundsException
      */
-    public String deleteTask(int index) throws IndexOutOfBoundsException {
-        String message = "";
+    public String deleteTask(String command) throws IndexOutOfBoundsException {
         try {
-            Task task = tasks.get(index - 1);
-            tasks.remove(index - 1);
-            message = "Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
+            String str = command.split(" ", 2)[1];
+            int index = Integer.parseInt(str);
+            Task task = tasks.remove(index - 1);
+            return "Noted. I've removed this task:\n" + task.toString() + "\nNow you have "
                     + tasks.size() + " tasks in the list.";
-
-        } catch (IndexOutOfBoundsException e) {
-            message = "There is no such task in the list!";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please give the index of the task you wish to delete!";
         }
-        return message;
     }
 
     /**
      * finds tasks from the tasklist that contain description matching given keyword
      * 
-     * @param keyword the keyword the user is looking for in the tasks
+     * @param command input by user
      */
-    public String findTask(String keyword) {
-        ArrayList<Task> matchingTasks = new ArrayList<Task>();
-        for (Task task : tasks) {
-            if (task.toString().contains(keyword)) {
-                matchingTasks.add(task);
+    public String findTask(String command) throws DukeException {
+        try {
+            String keyword = command.split(" ", 2)[1];
+            ArrayList<Task> matchingTasks = new ArrayList<Task>();
+            for (Task task : tasks) {
+                if (task.toString().contains(keyword)) {
+                    matchingTasks.add(task);
+                }
             }
+            TaskList matches = new TaskList(matchingTasks);
+            return "Here are the matching tasks in your list:\n" + matches.toString();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please input the keyword!";
         }
-        TaskList matches = new TaskList(matchingTasks);
-        return "Here are the matching tasks in your list:\n" + matches.toString();
     }
 
     /**

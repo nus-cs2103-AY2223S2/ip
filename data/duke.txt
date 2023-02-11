@@ -1,6 +1,2 @@
 [T]// // read book
-[T]//X// write essay
-[D]//X// watch movie //2 Dec 2019
-[T]//X// rate movie
-[T]// // test2
-[D]// // todo //12 Feb 2019
+[E]//X// movie screening // Mon 4pm // 6pm
