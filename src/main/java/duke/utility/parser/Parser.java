@@ -197,6 +197,15 @@ public class Parser {
         return list.filter(keyword);
     }
 
+    private static String sortTasks(String[] command, TaskList list) throws DukeException {
+        if (command.length > 1) {
+            throw wrongCommandFormat;
+        }
+
+
+        return "";
+    }
+
     /**
      * Reads the input of the user and parse the input accordingly.
      * 
@@ -226,6 +235,8 @@ public class Parser {
                     return createEvent(command, list);
                 case find:
                     return findTasks(command, list);
+                case sort:
+                    return sortTasks(command, list);
                 default:
                     return createToDo(command, list);
             }
