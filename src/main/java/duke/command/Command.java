@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
 /**
  * Abstract class that encompasses all types of user commands.
@@ -14,8 +14,9 @@ public abstract class Command {
      * @param tasks TaskList containing all the currently stored Tasks.
      * @param ui Ui that deals with interactions with the user.
      * @param storage Storage that loads and saves tasks to the file containing currently stored Tasks.
+     * @return the response from Duke.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Checks if the Command terminates the Duke Program.

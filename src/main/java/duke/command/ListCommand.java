@@ -14,18 +14,21 @@ public class ListCommand extends Command {
      * @param tasks TaskList containing all the currently stored Tasks.
      * @param ui Ui that deals with interactions with the user.
      * @param storage Storage that loads and saves tasks to the file containing currently stored Tasks.
+     * @return the response from Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder dukeResponseSB = new StringBuilder();
         int taskCount = tasks.size();
         if (taskCount == 0) {
-            ui.show("You don't have any tasks now!");
-        }
-        else {
+            dukeResponseSB = new StringBuilder("You don't have any tasks now!");
+        } else {
             for (int i = 0; i < taskCount; i++) {
-                ui.show((i + 1) + ". " + tasks.get(i));
+                String newTask = (i + 1) + ". " + tasks.get(i) + "\n";
+                dukeResponseSB.append(newTask);
             }
         }
+        return dukeResponseSB.toString();
     }
 
     /**
