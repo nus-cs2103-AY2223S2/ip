@@ -3,6 +3,8 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -14,7 +16,6 @@ import duke.tasks.Todo;
  */
 public class Parser {
     private static final String INDENTATION = " ";
-    private static final String HORIZONTAL = "____________________________________________________________";
     private Ui ui;
 
     /**
@@ -52,10 +53,49 @@ public class Parser {
                 return eventCommand(cmd, tasks);
             case "delete":
                 return deleteCommand(cmd, tasks);
+            case "sort":
+                return sortCommand(cmd, tasks);
             case "bye":
                 return Ui.exit();
             default:
                 return "Sorry, I do not understand your instruction. Plz try again later";
+        }
+    }
+
+    /**
+     * Sorts the command in 3 different groups: todo,deadline, event
+     * @param cmd command
+     * @param  tasks task
+     * @return sort result
+     */
+    public static String sortCommand(String cmd, TaskList tasks) {
+        StringBuilder str = new StringBuilder();
+        String[] words = cmd.trim().split(" ");
+
+        try {
+            ArrayList<Task> sortTask = new ArrayList<>();
+            for (int i = 0; i < tasks.size(); i++) {
+                Task items = tasks.get(i);
+                if (words[1].equals("todo") && items instanceof Todo) {
+                    sortTask.add(items);
+                } else if (words[1].equals("deadline") && items instanceof Deadline) {
+                    sortTask.add(items);
+                } else if (words[1].equals("event") && items instanceof Event) {
+                    sortTask.add(items);
+                }
+            }
+
+            if (sortTask.size() != 0) {
+                str.append("Here are the sorted result:\n");
+                for (Task task: sortTask) {
+                    str.append("\u2764 " + task + "\n");
+                }
+                return str.toString();
+            } else {
+                return "Sorry, there is no record of the specified type!";
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "  ☹ OOPS!!! The sort command is missing the task type!\n";
         }
     }
 
