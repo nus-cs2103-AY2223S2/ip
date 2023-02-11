@@ -37,6 +37,7 @@ public class DeleteCommand extends Command {
         try {
             int parseInt = Integer.parseInt(details);
             Task removedTask = tasks.remove(parseInt - 1);
+            assert removedTask != null : "removedTask cannot be null.";
             storage.update(tasks);;
             dukeResponse = "Noted. I've removed this task:\n" + removedTask + "\n";
             dukeResponse += "Now you have " + tasks.size() + " tasks in the list.";

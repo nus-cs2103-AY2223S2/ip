@@ -34,7 +34,7 @@ public class Storage {
             this.file = new File(filePath);
             this.file.createNewFile();
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeException("Unable to create file \"data/duke.txt\"");
         }
     }
 

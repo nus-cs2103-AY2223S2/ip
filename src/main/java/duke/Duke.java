@@ -65,6 +65,7 @@ public class Duke {
         } else {
             try {
                 Command command = Parser.parse(input);
+                assert command != null : "There was an error in parsing user input into a command.";
                 String dukeResponse = command.execute(tasks, ui, storage);
                 this.isExit = command.isExit();
                 return dukeResponse;
