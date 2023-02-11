@@ -29,6 +29,7 @@ public class Event extends DatedTask {
         try {
             this.start = LocalDate.parse(start);
             this.end = LocalDate.parse(end);
+            assert this.start.isBefore(this.end) : "Start Date should be before end date!";
         } catch (DateTimeParseException e) {
             throw new DukeException("The event command should be used like this:\n"
                     + "\tevent {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}");

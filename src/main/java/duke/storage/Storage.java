@@ -42,6 +42,8 @@ public class Storage {
 
         } catch (SecurityException e) {
             throw new DukeException("File at src/main/resources/duke.txt cannot be read/written!");
+        } finally {
+            assert store != null : "store should never be null";
         }
 
     }
