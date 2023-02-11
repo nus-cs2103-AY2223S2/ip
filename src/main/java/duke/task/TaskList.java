@@ -70,6 +70,7 @@ public class TaskList {
         String res = "";
         int counter = 1;
         for (Task tmp : this.tasklst) {
+            assert tmp.toString() != "" : "Empty Task should not exist in the tasklst";
             res += counter++ + ". " + tmp.toString() + "\n";
         }
         return res;

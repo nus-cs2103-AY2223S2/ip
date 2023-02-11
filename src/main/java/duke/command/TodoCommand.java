@@ -4,7 +4,6 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 
 /**
@@ -27,12 +26,11 @@ public class TodoCommand extends Command {
     /**
      * Override execute method from the abstract class of Command
      *
-     * @param tl       - list of tasks.
-     * @param ui       - interface.
-     * @param storage  - harddisk store using textfile.
-     * @return String  - returns the result of the command execution.
+     * @param tl       list of tasks.
+     * @param storage  harddisk store using textfile.
+     * @return String  returns the result of the command execution.
      */
-    public String execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Storage storage) {
         Task task = new Todo(this.activity);
         tl.addTask(task);
         return "Got it. I've added this duke.task:\n" + task

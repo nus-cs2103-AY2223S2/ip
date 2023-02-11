@@ -4,7 +4,6 @@ import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 
 /**
@@ -32,14 +31,13 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Override execute method from the abstract class of Command.
+     * Overrides execute method from the abstract class of Command.
      *
-     * @param tl       - list of tasks.
-     * @param ui       - interface.
-     * @param storage  - harddisk store using textfile.
-     * @return String  - returns the result of the command execution.
+     * @param tl       list of tasks.
+     * @param storage  harddisk store using textfile.
+     * @return String  returns the result of the command execution.
      */
-    public String execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Storage storage) {
         Task task = new Event(activity, from, to);
         tl.addTask(task);
         return "Got it. I've added this duke.task:\n" + task
