@@ -63,7 +63,10 @@ public class Duke {
     }
 
     /**
-     * The start of the program.
+     * Returns the string message to be displayed.
+     *
+     * @param input The input of the user.
+     * @return The string message to be displayed by the bot.
      */
     public String run(String input) {
         // Description of the task.

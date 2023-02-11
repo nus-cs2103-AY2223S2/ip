@@ -78,13 +78,13 @@ public class Parser {
      * @throws DukeException If command is unknown.
      */
     public Duke.Commands checkCommand(String command) throws DukeException {
-        boolean flag = true;
+        boolean isFlag = true;
         for (Duke.Commands c : Duke.Commands.values()) {
             if (command.equals(c.name())) {
-                flag = false;
+                isFlag = false;
             }
         }
-        if (flag) {
+        if (isFlag) {
             String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw new DukeException(message);
         }
@@ -105,7 +105,7 @@ public class Parser {
     }
 
     /**
-     * Check if the Index is valid.
+     * Returns a valid index if there is no invalid index issues.
      *
      * @param userIndex The user index input for the command.
      * @return The valid index input

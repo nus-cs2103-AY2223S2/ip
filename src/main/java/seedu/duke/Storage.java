@@ -66,7 +66,7 @@ public class Storage {
     }
 
     /**
-     * Writes to text file.
+     * Writes to the storage text file.
      * If file not found, throw IOException.
      *
      * @param storage
@@ -120,13 +120,13 @@ public class Storage {
         Scanner fileScanner = new Scanner(f);
         while (fileScanner.hasNext()) {
             String[] currArray = fileScanner.nextLine().split("\\|");
-            boolean mark = false;
+            boolean isMark = false;
             if (currArray[1].trim().equals("1")) {
-                mark = true;
+                isMark = true;
             }
             if (currArray[0].trim().equals("T")) {
                 Todo t = new Todo(currArray[2].trim());
-                if (mark) {
+                if (isMark) {
                     t.mark();
                 }
                 if (currArray.length > 3) {
@@ -137,7 +137,7 @@ public class Storage {
                 storage.add(t);
             } else if (currArray[0].trim().equals("D")) {
                 Deadline d = new Deadline(currArray[2], currArray[3]);
-                if (mark) {
+                if (isMark) {
                     d.mark();
                 }
                 if (currArray.length > 4) {
@@ -148,7 +148,7 @@ public class Storage {
                 storage.add(d);
             } else {
                 Event e = new Event(currArray[2], currArray[3], currArray[4]);
-                if (mark) {
+                if (isMark) {
                     e.mark();
                 }
                 if (currArray.length > 5) {
