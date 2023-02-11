@@ -5,7 +5,7 @@ package domain.entities.core;
  */
 public interface Commandable {
     /**
-     * Execute the executable.
+     * Executes the executable.
      *
      * @param tokens the tokens, i.e. the arguments, for the executable. They
      *               should include the first word.
