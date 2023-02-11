@@ -33,7 +33,7 @@ public class AddCommand extends Command {
         tasks.add(task);
         result = ui.changeToFormat("Task successfully added:\n    " + task);
         try {
-            storage.update(tasks);
+            storage.updateLocal(tasks);
         } catch (IOException e) {
             result += ("\nfailed to update tasks locally: " + e.getMessage());
         }

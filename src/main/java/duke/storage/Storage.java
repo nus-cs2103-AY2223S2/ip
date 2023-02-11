@@ -21,7 +21,6 @@ import duke.tasklist.TaskList;
 public class Storage {
     private File allTasks;
     private File taskFolder;
-    private String loadStatus;
 
     /**
      * Constructor
@@ -31,7 +30,6 @@ public class Storage {
     public Storage(String filePath, String folderPath) {
         this.allTasks = new File(filePath);
         this.taskFolder = new File(folderPath);
-        this.loadStatus = "";
     }
 
     /**
@@ -43,22 +41,17 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> defaultTasks = new ArrayList<>();
         if (!taskFolder.exists()) {
-            System.out.println("---The default duke.task.Task Folder is not found, creating data folder...");
             taskFolder.mkdir();
-            System.out.println("---Task Folder created successfully");
             File f = new File(taskFolder, "task.txt");
             try {
                 f.createNewFile();
-                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
             } catch (IOException e) {
                 throw new DukeException("Error creating file: " + e.getMessage());
             }
         } else if (!allTasks.exists()) {
-            System.out.println("The default tasks do not exist, creating default task file...");
             File f = new File(taskFolder, "task.txt");
             try {
                 f.createNewFile();
-                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
             } catch (IOException e) {
                 throw new DukeException("Error creating file: " + e.getMessage());
             }
@@ -68,13 +61,8 @@ public class Storage {
             } catch (FileNotFoundException e) {
                 throw new DukeException("Could not load the default tasks: " + e.getMessage());
             }
-            loadStatus += "\n\n---Default duke.task.Task List successfully loaded\n\n";
         }
         return defaultTasks;
-    }
-
-    public String getLoadStatus() {
-        return loadStatus;
     }
     /**
      * method that loads all local tasks to an ArrayList of Tasks to be passed to TaskList
@@ -108,10 +96,10 @@ public class Storage {
 
     /**
      * method used to update the locally saved tasks according to the TaskList
-     * @param tasks
-     * @throws IOException
+     * @param tasks A TaskList represeting all temporary tasks
+     * @throws IOException if there is error when updating the local task
      */
-    public void update(TaskList tasks) throws IOException {
+    public void updateLocal(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.allTasks);
         fw.write(tasks.getWriteString());
         fw.close();

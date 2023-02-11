@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     /**
-     * the welcome message to be displayed when the programm starts running
+     * the welcome message to be displayed when the program starts running
      */
     private static String welcomeMessage = "Hello from ClashPlanner\n";
 

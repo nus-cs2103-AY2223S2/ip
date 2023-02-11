@@ -36,7 +36,7 @@ public class MarkCommand extends Command {
             return e.getMessage();
         }
         try {
-            storage.update(tasks);
+            storage.updateLocal(tasks);
         } catch (IOException e) {
             result += "failed to update tasks locally: " + e.getMessage();
         }

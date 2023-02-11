@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
             result += e.getMessage();
         }
         try {
-            storage.update(tasks);
+            storage.updateLocal(tasks);
         } catch (IOException e) {
             result += ("\nfailed to update tasks locally: " + e.getMessage());
         }
