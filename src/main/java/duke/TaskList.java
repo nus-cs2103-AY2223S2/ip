@@ -165,17 +165,15 @@ public class TaskList {
                     matchingTasks.add(task);
                 }
             }
+            if (matchingTasks.size() == 0) {
+                return "There are no tasks with the given keyword";
+            }
             TaskList matches = new TaskList(matchingTasks);
+            assert matches.getSize() != 0 : "Matching tasklist should not be empty";
             return "Here are the matching tasks in your list:\n" + matches.toString();
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Please input the keyword!";
         }
-        if (matchingTasks.size() == 0) {
-            return "There are no tasks with the given keyword";
-        }
-        TaskList matches = new TaskList(matchingTasks);
-        assert matches.getSize() != 0 : "Matching tasklist should not be empty";
-        return "Here are the matching tasks in your list:\n" + matches.toString();
     }
 
     /**
