@@ -15,19 +15,16 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (!FormatChecker.isCorrectDeadlineCmd(this.content)) {
-            throw new DukeException(
-                    "Please use the correct format to add a deadline.");
-        }
+        assert FormatChecker.isCorrectDeadlineCmd(content) == true
+                : "Please use the correct format to add a deadline.";
         String res = "";
         String[] dlTask = content.split("/by");
-        dlTask[0] = dlTask[0].trim();
-        dlTask[1] = dlTask[1].trim();
-        if (!FormatChecker.isCorrectDateInput(dlTask[1])) {
-            throw new DukeException("Please use the correct format for date (dd/MM/yyyy HH:mm)");
-        }
+        String title = dlTask[0].trim();
+        String deadline = dlTask[1].trim();
+        assert FormatChecker.isCorrectDateInput(dlTask[1]) == true
+                : "Please use the correct format for date (dd/MM/yyyy HH:mm)";
         try {
-            res = tasks.add(dlTask[0], dlTask[1]);
+            res = tasks.add(title, deadline);
         } catch (DukeException e) {
             throw e;
         }
