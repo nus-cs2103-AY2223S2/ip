@@ -1,6 +1,9 @@
+package task;
+
 public class Task {
     private boolean isMarked;
     private String name;
+
 
     public Task(String name) {
         this.isMarked = false;
@@ -17,6 +20,11 @@ public class Task {
 
     public String getStatusICon() {
         return (isMarked ? "X" : " ");
+    }
+
+    public String getSaveFormat() {
+        String markToInt = this.isMarked? "1" : "0";
+        return " | " + markToInt + " | " + name ;
     }
 
 
