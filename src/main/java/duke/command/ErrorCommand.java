@@ -12,6 +12,7 @@ public class ErrorCommand extends Command {
 
     @Override
     public DukeResponse execute() {
+        assert error != null;
         return new DukeResponse(error);
     }
 }

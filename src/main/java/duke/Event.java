@@ -85,6 +85,8 @@ public class Event extends Task {
      * @throws DateTimeParseException
      */
     public static Event parseEventStringArray(String[] parts) throws DateTimeParseException {
+        assert parts.length == 5;
+
         String taskDesc = parts[2];
         String fromString = parts[3];
         String toString = parts[4];
@@ -104,6 +106,7 @@ public class Event extends Task {
         if (Integer.parseInt(parts[1]) == 1) {
             task.mark();
         }
+        assert task != null;
         return task;
     }
 }

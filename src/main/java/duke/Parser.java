@@ -2,10 +2,6 @@ package duke;
 
 import duke.command.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -53,8 +49,10 @@ public class Parser {
 
 
     private static Command handleList(TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         return new ListCommand(taskList);
     }
+
 
     private static Command handleTaskIdxCommands(Scanner commandStream, TaskList taskList, CommandTypes type) {
         if (!commandStream.hasNext()) {
@@ -77,7 +75,6 @@ public class Parser {
                 return new MarkOrUnmarkCommand(taskIdx, taskList, true);
             }
 
-
         } catch (NumberFormatException e) {
             return new ErrorCommand(MessageGenerator.genNotANumberMsg());
         }
@@ -88,6 +85,7 @@ public class Parser {
 
 
     private static Command handleDeadline(Scanner commandStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         String taskDesc = "";
         String byString = "";
 
@@ -120,7 +118,9 @@ public class Parser {
         return DeadlineCommand.create(taskDesc, byString, taskList);
     }
 
+
     private static Command handleEvent(Scanner commandStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         String taskDesc = "";
         String fromString = "";
         String toString = "";
@@ -164,6 +164,8 @@ public class Parser {
     }
 
     private static Command handleToDo(Scanner commandStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
+
         String taskDesc = "";
 
         while (commandStream.hasNext()) {
@@ -175,11 +177,14 @@ public class Parser {
         }
 
         taskDesc = taskDesc.trim();
-
+        assert taskDesc != null : "taskDesc should not be null";
         return new ToDoCommand(taskDesc, taskList);
     }
 
+
+
     private static Command handleFind(Scanner commandStream, TaskList taskList) {
+        assert taskList != null : "Task list should not be null";
         if (!commandStream.hasNext()) {
             return new ErrorCommand(MessageGenerator.genMissingFieldMsg("keyword"));
         }

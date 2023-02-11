@@ -50,10 +50,13 @@ public class ToDo extends Task {
      * @return a ToDo object built from the parts array
      */
     public static ToDo parseToDoStringArray(String[] parts) {
+        assert parts.length == 3;
+
         ToDo task = new ToDo(parts[2]);
         if (Integer.parseInt(parts[1]) == 1) {
             task.mark();
         }
+        assert task != null;
         return task;
     }
 }

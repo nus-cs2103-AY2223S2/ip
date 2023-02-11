@@ -34,6 +34,10 @@ public class EventCommand extends Command {
             String[] toParts = toString.split(" ");
             boolean toHasTime = toParts.length == 2;
 
+            assert taskDesc != null : "taskDesc should not be null";
+            assert from != null : "/from field should not be null.";
+            assert to != null : "/to field should not be null.";
+
             return new EventCommand(taskDesc, from, fromHasTime, to, toHasTime, taskList);
 
         } catch (DateTimeParseException e) {
@@ -43,6 +47,10 @@ public class EventCommand extends Command {
 
     @Override
     public DukeResponse execute() {
+        assert taskDesc != null;
+        assert from != null;
+        assert fromHasTime != null;
+        assert toHasTime != null;
         Event event = new Event(taskDesc, from, fromHasTime, to, toHasTime);
         taskList.add(event);
         return new DukeResponse(MessageGenerator.genAddedTaskMsg("event"));

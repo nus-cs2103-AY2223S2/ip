@@ -21,6 +21,10 @@ public class MarkOrUnmarkCommand extends Command {
 
     @Override
     public DukeResponse execute() {
+        assert taskList != null;
+        assert taskIdx != null;
+        assert isMark != null;
+
         Task task = taskList.get(taskIdx);
 
         if (isMark) {

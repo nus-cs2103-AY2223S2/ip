@@ -15,6 +15,7 @@ public class ListCommand extends Command{
 
     @Override
     public DukeResponse execute() {
+        assert taskList != null;
         return new DukeResponse(MessageGenerator.genShowTasksMsg(taskList.toString()));
     }
 }

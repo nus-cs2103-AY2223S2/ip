@@ -18,6 +18,9 @@ public class FindCommand extends Command {
 
     @Override
     public DukeResponse execute() {
+        assert taskList != null;
+        assert keyword != null;
+
         TaskList tasksOfInterest = new TaskList();
 
         for (Task t : taskList) {
