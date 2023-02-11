@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import duke.command.*;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -152,7 +153,9 @@ public class Parser {
             throw new DukeException("timing");
         }
         try {
-            LocalDate end = LocalDate.parse(deadlineDetails[1]);
+            deadlineDetails[0] = deadlineDetails[0].trim();
+            LocalDate end = LocalDate.parse(deadlineDetails[1].trim());
+            deadlineDetails[1] = deadlineDetails[1].trim();
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }
@@ -177,8 +180,11 @@ public class Parser {
             throw new DukeException("wrong order");
         }
         try {
-            LocalDate start = LocalDate.parse(eventDetails[1]);
-            LocalDate end = LocalDate.parse(eventDetails[2]);
+            eventDetails[0] = eventDetails[0].trim();
+            LocalDate start = LocalDate.parse(eventDetails[1].trim());
+            LocalDate end = LocalDate.parse(eventDetails[2].trim());
+            eventDetails[1] = eventDetails[1].trim();
+            eventDetails[2] = eventDetails[2].trim();
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }

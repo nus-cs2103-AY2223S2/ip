@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
@@ -18,8 +18,8 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList lst, Ui ui) throws DukeException {
+    public String execute(TaskList lst, Ui ui) throws DukeException {
         lst.addTask(this.deadline);
-        ui.showDeadline(this.deadline, lst.getSize());
+        return ui.showDeadline(this.deadline, lst.getSize());
     }
 }

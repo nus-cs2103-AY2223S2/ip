@@ -33,17 +33,15 @@ public class Ui {
     /**
      * Prints a line.
      */
-    public void showLine() {
-        System.out.println(LINE);
+    public String showLine() {
+        return LINE + "\n";
     }
 
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        showLine();
-        System.out.println("Hello! I'm Kirby!\n" + "What can I do for you? :)");
-        showLine();
+    public String showWelcome() {
+        return showLine() + "Hello! I'm Luffy!\n" + "What can I do for you? :)" + "\n" + showLine();
     }
 
     public void showLoadingError() {
@@ -56,49 +54,48 @@ public class Ui {
      * Prints error message from an exception.
      * @param errorMsg String containing error message of exception.
      */
-    public void showError(String errorMsg) {
-        System.out.println(errorMsg);
+    public String showError(String errorMsg) {
+        return errorMsg + "\n";
     }
 
     /**
      * Prints exit message.
      */
-    public void showExit() {
-        showLine();
-        System.out.println("Bye bye! Hope to see you again soon!! :>");
-        showLine();
+    public String showExit() {
+        return showLine() + "Bye bye! Luffy will go to sleep now!\nHope to see you again soon!! :>\n" + showLine();
     }
 
     /**
      * Prints TaskList of Duke.
      * @param lst TaskList to be printed.
      */
-    public void showList(TaskList lst) {
-        showLine();
-        lst.printList();
-        showLine();
+    public String showList(TaskList lst) {
+        return showLine() + lst.printList() + showLine();
     }
 
     /**
      * Prints command message after mark command is executed successfully.
      * @param task task marked as done.
      */
-    public void showMarkedTask(Task task) {
-        showLine();
-        System.out.println("Okay! I've marked this task as done:");
-        System.out.println(task);
-        showLine();
+    public String showMarkedTask(Task task) {
+        return showLine() + "Okay! I've marked this task as done:\n" + task.toString() + "\n" + showLine();
+//        showLine();
+//        System.out.println("Okay! I've marked this task as done:");
+//        System.out.println(task);
+//        showLine();
     }
 
     /**
      * Prints command message after unmark command is executed successfully.
      * @param task task marked as unDone.
      */
-    public void showUnmarkedTask(Task task) {
-        showLine();
-        System.out.println("Okay! I've marked this task as not done yet:");
-        System.out.println(task);
-        showLine();
+    public String showUnmarkedTask(Task task) {
+        return showLine() + "Okay! I've marked this task as not done yet:\n"
+                + task.toString() + "\n" + showLine();
+//        showLine();
+//        System.out.println("Okay! I've marked this task as not done yet:");
+//        System.out.println(task);
+//        showLine();
     }
 
     /**
@@ -106,12 +103,14 @@ public class Ui {
      * @param task task deleted.
      * @param size current size of the list.
      */
-    public void showDeletedTask(Task task, int size) {
-        showLine();
-        System.out.println("Okay! I've removed this task from the list:");
-        System.out.println(task);
-        System.out.println(String.format("Now you have %d tasks in the list!", size));
-        showLine();
+    public String showDeletedTask(Task task, int size) {
+        return showLine() + "Okay! I've removed this task from the list:\n" + task.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+//        showLine();
+//        System.out.println("Okay! I've removed this task from the list:");
+//        System.out.println(task);
+//        System.out.println(String.format("Now you have %d tasks in the list!", size));
+//        showLine();
     }
 
     /**
@@ -119,12 +118,14 @@ public class Ui {
      * @param todo Todo task created.
      * @param size current size of the list.
      */
-    public void showTodo(Todo todo, int size) {
-        showLine();
-        System.out.println("Got it! I've added: ");
-        System.out.println(" " + todo);
-        System.out.println(String.format("Now you have %d tasks in the list!", size));
-        showLine();
+    public String showTodo(Todo todo, int size) {
+        return showLine() + "Got it! I've added: \n" + " " + todo.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+//        showLine();
+//        System.out.println("Got it! I've added: ");
+//        System.out.println(" " + todo);
+//        System.out.println(String.format("Now you have %d tasks in the list!", size));
+//        showLine();
     }
 
     /**
@@ -132,12 +133,14 @@ public class Ui {
      * @param deadline Deadline task created.
      * @param size current size of the list.
      */
-    public void showDeadline(Deadline deadline, int size) {
-        showLine();
-        System.out.println("Got it! I've added: ");
-        System.out.println(" " + deadline);
-        System.out.println(String.format("Now you have %d tasks in the list!", size));
-        showLine();
+    public String showDeadline(Deadline deadline, int size) {
+        return showLine() + "Got it! I've added: \n" + " " + deadline.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+//        showLine();
+//        System.out.println("Got it! I've added: ");
+//        System.out.println(" " + deadline);
+//        System.out.println(String.format("Now you have %d tasks in the list!", size));
+//        showLine();
     }
 
     /**
@@ -145,11 +148,13 @@ public class Ui {
      * @param event Event task created.
      * @param size current size of the list.
      */
-    public void showEvent(Event event, int size) {
-        showLine();
-        System.out.println("Got it! I've added: ");
-        System.out.println(" " + event);
-        System.out.println(String.format("Now you have %d tasks in the list!", size));
-        showLine();
+    public String showEvent(Event event, int size) {
+        return showLine() + "Got it! I've added: \n" + " " + event.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+//        showLine();
+//        System.out.println("Got it! I've added: ");
+//        System.out.println(" " + event);
+//        System.out.println(String.format("Now you have %d tasks in the list!", size));
+//        showLine();
     }
 }

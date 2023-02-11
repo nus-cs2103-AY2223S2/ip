@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Todo;
@@ -18,8 +18,8 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList lst, Ui ui) throws DukeException {
+    public String execute(TaskList lst, Ui ui) throws DukeException {
         lst.addTask(this.todo);
-        ui.showTodo(this.todo, lst.getSize());
+        return ui.showTodo(this.todo, lst.getSize());
     }
 }

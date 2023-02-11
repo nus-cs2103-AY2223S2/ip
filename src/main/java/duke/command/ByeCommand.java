@@ -11,7 +11,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList lst, Ui ui) {
-        ui.showExit();
+    public String execute(TaskList lst, Ui ui) {
+        return ui.showExit();
     }
 }
