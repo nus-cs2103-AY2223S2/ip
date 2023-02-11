@@ -31,10 +31,12 @@ public class Parser {
             break;
         case "mark":
             int markTaskNum = Integer.parseInt(userInput.substring(5));
+            assert markTaskNum < taskList.size() && markTaskNum > 0: "index of task to mark is out of range";
             result += taskList.getTask(markTaskNum - 1).setCompleted(true);
             break;
         case "unmark":
             int unmarkTaskNum = Integer.parseInt(userInput.substring(7));
+            assert unmarkTaskNum < taskList.size() && unmarkTaskNum > 0: "index of task to unmark is out of range";
             result += taskList.getTask(unmarkTaskNum - 1).setCompleted(false);
             break;
         case "deadline":
@@ -73,6 +75,7 @@ public class Parser {
         case "delete":
             try {
                 int num = Integer.parseInt(userInput.substring(7));
+                assert num < taskList.size() && num > 0: "index of task to delete is out of range";
                 result += Duke.removeFromList(num);
             } catch (NumberFormatException ex) { // To handle non-int input
                 ex.printStackTrace();
