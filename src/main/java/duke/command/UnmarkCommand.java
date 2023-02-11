@@ -25,6 +25,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tl, Storage storage) {
         Task task = tl.getTask(this.id - 1);
         task.setUnmark();
-        return "OK, I've marked this duke.task as not done yet:\n" + task;
+        String res = "OK, I've marked this duke.task as not done yet:\n" + task;
+        return res;
     }
 }

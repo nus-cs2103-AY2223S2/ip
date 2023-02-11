@@ -13,7 +13,6 @@ public class ListCommand extends Command {
      * Overrides execute method from the abstract class of Command.
      *
      * @param tl      list of tasks.
-     * @param ui      interface.
      * @param storage harddisk store using textfile.
      * @return String returns the result of the command execution.
      */

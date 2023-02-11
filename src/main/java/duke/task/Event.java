@@ -23,6 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        String res = "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return res;
     }
 }
