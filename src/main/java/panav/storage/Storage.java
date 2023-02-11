@@ -75,8 +75,11 @@ public class Storage {
             Task task = tasks.getTask(i);
             String str = task.toString();
             int indexBy = str.indexOf("by:");
+            assert (indexBy >= 0);
             int indexFrom = str.indexOf("from:");
+            assert (indexFrom >= 0);
             int indexTo = str.indexOf("to:");
+            assert (indexTo >= 0);
             int check = task.isDone() ? 1 : 0;
             int length = str.length();
 
