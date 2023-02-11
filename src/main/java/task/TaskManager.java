@@ -1,6 +1,10 @@
 package task;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import util.DukeException;
 import util.DukeUI;
@@ -98,7 +102,7 @@ public class TaskManager {
             sb.append(System.lineSeparator());
         }
 
-        if(sb.length() == 0) {
+        if (sb.length() == 0) {
             throw new DukeException(DukeUI.missingTaskErrorMessage());
         }
         return sb.toString();
@@ -110,6 +114,22 @@ public class TaskManager {
 
     public ArrayList<Task> getTaskArr() {
         return taskArr;
+    }
+
+    public void sortTasks() {
+        Collections.sort(taskArr, (thisTask, comparedTask) -> {
+            String comparedTaskDate = comparedTask.getDate();
+            String thisTaskDate = thisTask.getDate();
+            try {
+                LocalDateTime comparedDate = LocalDateTime.parse(comparedTaskDate,
+                        DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+                LocalDateTime thisDate = LocalDateTime.parse(thisTaskDate,
+                        DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+                return thisDate.compareTo(comparedDate);
+            } catch (DateTimeException e) {
+                return 0;
+            }
+        });
     }
 
 }

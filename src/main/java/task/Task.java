@@ -25,6 +25,10 @@ public class Task {
         this.isDone = status;
     }
 
+    public String getDate() {
+        return "";
+    };
+
     public String getStatusIcon() {
         //mark done task with X
         return (isDone ? "X" : " ");
@@ -92,6 +96,27 @@ public class Task {
 
         return new Task(desc, isDone);
     }
+
+//    @Override
+//    public int compareTo(Task comparedTask) {
+//        String comparedTaskDate = comparedTask.getDate();
+//        String thisTaskDate = this.getDate();
+//
+//        //  For Ascending order
+//        //return thisTaskDate - comparedTaskDate;
+//
+//        // For Descending order do like this
+//        // return compareage-this.studentage;
+//        try {
+//            LocalDateTime comparedDate = LocalDateTime.parse(comparedTaskDate,
+//                    DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+//            LocalDateTime thisDate = LocalDateTime.parse(thisTaskDate,
+//                    DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+//            return thisDate.compareTo(comparedDate);
+//        } catch (DateTimeException e) {
+//            return 0;
+//        }
+//    }
 
     /**
      * String representation of a Task object.

@@ -18,6 +18,11 @@ public class ToDo extends Task {
         super(description, status);
     }
 
+    @Override
+    public String getDate() {
+        return "";
+    }
+
     /**
      * {@inheritDoc}
      * @return Encoded task

@@ -25,6 +25,10 @@ public class Deadline extends Task {
         this.byFormatted = super.dateFormatter(this.by);
     }
 
+    @Override
+    public String getDate() {
+        return this.by;
+    }
     /**
      * {@inheritDoc}
      * @return Encoded task

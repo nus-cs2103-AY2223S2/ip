@@ -31,6 +31,11 @@ public class Event extends Task {
         this.endFormatted = super.dateFormatter(end);
     }
 
+    @Override
+    public String getDate() {
+        return this.start;
+    }
+
     /**
      * {@inheritDoc}
      * @return Encoded task
