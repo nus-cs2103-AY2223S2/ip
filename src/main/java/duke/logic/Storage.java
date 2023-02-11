@@ -29,6 +29,52 @@ public class Storage {
     }
 
     /**
+     * Creates the appropriate task given a line of String from data file.
+     * @param line line of String from data file.
+     * @return Task object created.
+     * @throws DukeException If error creating task.
+     */
+    public Task initialiseTask(String line) throws DukeException {
+        String[] entry = line.split(" ");
+        String c = entry[0];
+        boolean isDone = entry[1].equals("true");
+        StringBuilder desc = new StringBuilder(" ");
+        for (int i = 2; i < entry.length - 1; i++) {
+            desc.append(entry[i]);
+            desc.append(" ");
+        }
+
+        desc.append(entry[entry.length - 1]);
+
+        Task task = null;
+        if (c.equals("todo")) {
+            task = Todo.create(desc.toString(), isDone);
+        } else if (c.equals("deadline")) {
+            task = Deadline.create(desc.toString(), isDone);
+        } else if (c.equals("event")) {
+            task = Event.create(desc.toString(), isDone);
+        }
+
+        return task;
+    }
+
+    /**
+     * Converts a task into data String form to be saved in data file.
+     * @param task Task to be converted and saved.
+     * @return String data form of task.
+     */
+    public String extractTask(Task task) {
+        String entry = task.getType() + " " + task.getIsDone() + " " + task.getDescription();
+        if (task instanceof Deadline) {
+            entry += " /by " + ((Deadline) task).getDueDate();
+        } else if (task instanceof Event) {
+            entry += " /from " + ((Event) task).getStartTime() + " /to " + ((Event) task).getEndTime();
+        }
+
+        return entry;
+    }
+
+    /**
      * Creates Tasks based on data text file at filePath and adds into TaskList.
      *
      * @param taskList TaskList which tasks should be loaded into.
@@ -40,30 +86,7 @@ public class Storage {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = bufferedReader.readLine();
             while (line != null) {
-                String[] entry = line.split(" ");
-                String c = entry[0];
-                boolean isDone;
-                if (entry[1].equals("true")) {
-                    isDone = true;
-                } else {
-                    isDone = false;
-                }
-                StringBuilder desc = new StringBuilder();
-                desc.append(" ");
-                for (int i = 2; i < entry.length - 1; i++) {
-                    desc.append(entry[i]);
-                    desc.append(" ");
-                }
-
-                desc.append(entry[entry.length - 1]);
-                if (c.equals("todo")) {
-                    taskList.addTask(Todo.create(desc.toString(), isDone));
-                } else if (c.equals("deadline")) {
-                    taskList.addTask(Deadline.create(desc.toString(), isDone));
-                } else if (c.equals("event")) {
-                    taskList.addTask(Event.create(desc.toString(), isDone));
-                }
-
+                taskList.addTask(this.initialiseTask(line));
                 line = bufferedReader.readLine();
             }
 
@@ -86,13 +109,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < taskList.getSize(); i++) {
-                Task t = taskList.getTask(i);
-                String entry = t.getType() + " " + t.getIsDone() + " " + t.getDescription();
-                if (t instanceof Deadline) {
-                    entry += " /by " + ((Deadline) t).getDueDate();
-                } else if (t instanceof Event) {
-                    entry += " /from " + ((Event) t).getStartTime() + " /to " + ((Event) t).getEndTime();
-                }
+                String entry = this.extractTask(taskList.getTask(i));
                 bufferedWriter.write(entry);
                 bufferedWriter.newLine();
             }
