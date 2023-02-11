@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 import command.Command;
+import gui.Message;
 import storage.Storage;
 import task.TaskList;
 import ui.Parser;
@@ -66,11 +67,11 @@ public class Duke {
      * @param inMsg the user-input command
      * @return the response message to print out
      */
-    public String handleCommandWithException(String inMsg) {
-        String response = "";
+    public Message handleCommandWithException(String inMsg) {
+        Message responseMessage;
 
         try {
-            response = handleCommandReturnResponse(inMsg);
+            String responseString = handleCommandReturnResponse(inMsg);
             boolean isRunning = !inMsg.equalsIgnoreCase("bye"); // hardcode, not ideal
 
             if (isRunning) {
@@ -79,13 +80,15 @@ public class Duke {
                 hasExited = true;
                 storage.saveToFile(getCommandListString());
             }
+
+            responseMessage = new Message(responseString, false);
         } catch (DukeException e) {
-            response = e.toString();
+            responseMessage = new Message(e.toString(), true);
         } catch (NumberFormatException e) {
-            response = "Please specify the index.";
+            responseMessage = new Message("Please specify the index.", true);
         }
 
-        return response;
+        return responseMessage;
     }
 
     /**

@@ -29,6 +29,7 @@ public class DialogBox extends HBox {
      */
     private static Color userBoxColor = Color.ALICEBLUE;
     private static Color dukeBoxColor = Color.LIGHTSKYBLUE;
+    private static Color errorColor = Color.PINK;
 
     /**
      * Constructor
@@ -97,14 +98,18 @@ public class DialogBox extends HBox {
      * @param iv an image view object to present text
      * @return a dialog object for duk e
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+    public static DialogBox getDukeDialog(Label l, ImageView iv, boolean isError) {
         DialogBox dialogBox = new DialogBox(l, iv);
         dialogBox.flip();
         // https://www.tabnine.com/code/java/methods/javafx.scene.layout.BackgroundFill/%3Cinit%3E
         dialogBox.setBackground(
                 new Background(
                         new BackgroundFill(
-                                dukeBoxColor, new CornerRadii(cornerRadius), Insets.EMPTY)));
+                                getDukeBoxColor(isError), new CornerRadii(cornerRadius), Insets.EMPTY)));
         return dialogBox;
+    }
+
+    public static Color getDukeBoxColor(boolean isError) {
+        return isError ? errorColor : dukeBoxColor;
     }
 }

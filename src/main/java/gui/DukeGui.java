@@ -129,10 +129,12 @@ public class DukeGui extends Application {
             Platform.exit();
         }
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+
+        Message dukeResponse = getResponse(userInput.getText());
+        Label dukeText = new Label(dukeResponse.toString());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage), dukeResponse.getIsError())
         );
         userInput.clear();
     }
@@ -141,7 +143,7 @@ public class DukeGui extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    private Message getResponse(String input) {
         return duke.handleCommandWithException(input);
     }
 
@@ -149,10 +151,10 @@ public class DukeGui extends Application {
      * Prints to GUI interface
      * @param string the string to be printed out
      */
-    public void guiPrint(String string) {
+    public void dukePrintNormalMessage(String string) {
         Label dukeText = new Label(string);
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage), false)
         );
         userInput.clear();
     }
@@ -161,6 +163,6 @@ public class DukeGui extends Application {
      * Prints welcome message
      */
     public void showWelcome() {
-        guiPrint(duke.getWelcomeMessage());
+        dukePrintNormalMessage(duke.getWelcomeMessage());
     }
 }
