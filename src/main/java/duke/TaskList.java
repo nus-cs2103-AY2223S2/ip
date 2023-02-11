@@ -53,6 +53,7 @@ public class TaskList {
 
     public String mark(String taskID) {
         int number = Integer.parseInt(taskID) - 1;
+        assert number > 0;
         Task toMarkDone = taskArray.get(number);
 
         toMarkDone.markAsDone();
@@ -61,6 +62,7 @@ public class TaskList {
 
     public String unMark(String taskID) {
         int number = Integer.parseInt(taskID) - 1;
+        assert number > 0;
         Task toUnmarkDone = taskArray.get(number);
 
         toUnmarkDone.unMarkAsDone();
@@ -69,6 +71,7 @@ public class TaskList {
 
     public String deleteTask(String taskID) {
         int number = Integer.parseInt(taskID) - 1;
+        assert number > 0;
         String result = "";
         try {
             Task taskToDelete = taskArray.get(number);
@@ -76,11 +79,7 @@ public class TaskList {
             result = ui.showDelete(taskToDelete, taskArray.size());
             return result;
         } catch (IndexOutOfBoundsException e1) {
-            if (number < 1) {
-                return "There is no such task.";
-            } else {
-                return "There are only " + taskArray.size() + " tasks in the list.";
-            }
+            return "There are only " + taskArray.size() + " tasks in the list.";
         }
     }
 }

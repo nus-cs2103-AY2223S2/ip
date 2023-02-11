@@ -61,6 +61,8 @@ public class Parser {
             System.out.println("I will show your saved tasks.");
         }
 
+        assert next.equals("list") || after != null;
+
         Task inputTask;
         switch (next) {
         case "todo": {
