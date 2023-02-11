@@ -66,6 +66,9 @@ public class Parser {
             case BYE:
                 response = parseBye();
                 break;
+            case SORT:
+                response = parseSort();
+                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
@@ -159,10 +162,14 @@ public class Parser {
         return tasks.findMatchingTasks(keywords);
     }
 
+    private String parseSort() {
+        return tasks.sortTasks();
+    }
+
     private String parseBye() {
         return "Bye bye!";
     }
 
-    enum Actions { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE }
+    enum Actions { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE, SORT }
 
 }

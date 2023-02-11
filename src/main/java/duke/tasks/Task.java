@@ -77,6 +77,16 @@ public class Task {
         return isDone;
     }
 
+
+    /**
+     * Returns description of current task
+     *
+     * @return Description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Returns string representation of the Task object.
      *
