@@ -84,7 +84,6 @@ public class TaskList {
     }
 
     public String find(String keyword) {
-        String findMessage = "According to " + keyword + ", these are what I've found:";
         ArrayList<Task> searchResult = new ArrayList<Task>();
         for (int i = 0; i < this.taskList.size(); i++) {
             if (taskList.get(i).getDescription().contains(keyword) == true) {
@@ -92,12 +91,17 @@ public class TaskList {
             }
         }
 
-        String listOfResult = "";
-        for (int j = 0; j < searchResult.size(); j++) {
-            int numbering = j + 1;
-            listOfResult += Integer.toString(numbering) + "." + searchResult.get(j).toString() + "\n";
+        if (!searchResult.isEmpty()) {
+            String findMessage = "According to " + keyword + ", these are what I've found:";
+            String listOfResult = "";
+            for (int j = 0; j < searchResult.size(); j++) {
+                int numbering = j + 1;
+                listOfResult += Integer.toString(numbering) + "." + searchResult.get(j).toString() + "\n";
+            }
+            return findMessage + "\n" + listOfResult;
+        } else {
+            return "None of the task(s) matched your keyword :o";
         }
-        return findMessage + "\n" + listOfResult;
     }
 
     /**
