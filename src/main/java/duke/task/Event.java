@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Event task which stores the task description and the start and end of the task.
+ */
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
@@ -29,6 +32,13 @@ public class Event extends Task {
     private static final DateTimeFormatter DISPLAY_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private static final DateTimeFormatter DISPLAY_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy h a");
 
+    /**
+     * Constructor to create an Event task.
+     *
+     * @param description The description of the task.
+     * @param from The start point of the task.
+     * @param to The end point of the task.
+     */
     public Event(String description, String from, String to) throws DukeException {
         super(description);
         stringFrom = from;
@@ -40,6 +50,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Parses the start inputted by the user into a LocalDateTime format.
+     *
+     * @param from The start point inputted by the user.
+     */
     private void parseFrom(String from) {
         for (String format : DATE_FORMATS) {
             try {
@@ -66,6 +81,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Parses the end inputted by the user into a LocalDateTime format.
+     *
+     * @param to The end point inputted by the user.
+     */
     private void parseTo(String to) {
         for (String format : DATE_FORMATS) {
             try {
@@ -92,14 +112,29 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the String start point inputted by the user.
+     *
+     * @return The String start point inputted by the user.
+     */
     public String getFrom() {
         return stringFrom;
     }
 
+    /**
+     * Returns the String end point inputted by the user.
+     *
+     * @return The String end point inputted by the user.
+     */
     public String getTo() {
         return stringTo;
     }
 
+    /**
+     * Returns the string representation of the task.
+     *
+     * @return The string representation of the task.
+     */
     @Override
     public String toString() {
         String fromPrint;

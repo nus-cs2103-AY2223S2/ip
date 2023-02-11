@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * The Deadline task which stores the task description and when the task is due.
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
     protected String stringBy;
@@ -27,6 +29,13 @@ public class Deadline extends Task {
     private static final DateTimeFormatter DISPLAY_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private static final DateTimeFormatter DISPLAY_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy h a");
 
+
+    /**
+     * Constructor to create a Deadline task.
+     *
+     * @param description The description of the task.
+     * @param by The deadline of the task.
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         stringBy = by;
@@ -57,10 +66,20 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the deadline of the task.
+     *
+     * @return The deadline of the task.
+     */
     public String getBy() {
         return stringBy;
     }
 
+    /**
+     * Returns the string representation of the task.
+     *
+     * @return The string representation of the task.
+     */
     @Override
     public String toString() {
         if (hasTime) {
