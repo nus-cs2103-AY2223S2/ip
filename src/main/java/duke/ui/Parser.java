@@ -35,7 +35,7 @@ public class Parser {
 
         try {
 
-            /** Split string into 2 parts, 1st part is the operation, 2nd part is the description */
+            /* Split string into 2 parts, 1st part is the operation, 2nd part is the description */
             String[] command = input.split(" ", 2);
             Operation op = Operation.valueOf(command[0].trim().toUpperCase()); // Throws exception if invalid operation.
 
@@ -67,8 +67,8 @@ public class Parser {
             case FIND:
                 return findTaskParser(description);
             default:
-                // cannot reach here, as Operation.valueOf already throws IllegalArgumentException
-                throw new DukeException("Cannot reach here");
+                assert false : "cannot reach here as Operation::valueOf already throws IllegalArgumentException";
+                return null;
             }
         } catch (NumberFormatException e) {
             throw new DukeException("Task must be referenced by its index.");
@@ -89,7 +89,7 @@ public class Parser {
      */
     public static Command markTaskParser(Operation op, String index) throws NumberFormatException {
         boolean isDone = op.equals(Operation.MARK);
-        int taskIndex = Integer.parseInt(index); // Throws exception if index is not a valid integer.
+        int taskIndex = Integer.parseInt(index); // Throws NumberFormatException if index is not a valid integer.
         return new CommandMark(taskIndex, isDone);
     }
 
@@ -100,10 +100,8 @@ public class Parser {
      * @param description String representing the task description.
      * @return A Command instance representing the type of task to add.
      * @throws DateTimeParseException If the date format is invalid.
-     * @throws DukeException If the command is invalid.
      */
-    public static Command addTaskParser(Operation op, String description) throws
-            DateTimeParseException, DukeException {
+    public static Command addTaskParser(Operation op, String description) throws DateTimeParseException {
         switch (op) {
         case TODO:
             return new CommandAddTodo(description);
@@ -124,7 +122,8 @@ public class Parser {
 
             return new CommandAddEvent(eventDescription, from, to);
         default:
-            throw new DukeException("Cannot reach here");
+            assert false : "Cannot reach here";
+            return null;
         }
     }
 
@@ -136,7 +135,7 @@ public class Parser {
      * @throws NumberFormatException If the date format is invalid.
      */
     public static Command deleteTaskParser(String index) throws NumberFormatException {
-        int taskIndex = Integer.parseInt(index); // Throws exception if index is not a valid integer.
+        int taskIndex = Integer.parseInt(index); // Throws NumberFormatException if index is not a valid integer.
         return new CommandDeleteTask(taskIndex);
     }
 

@@ -21,9 +21,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
+
         AnchorPane ap = new MainWindow(duke, stage);
         Scene scene = new Scene(ap);
-
         stage.setScene(scene);
 
         /* Custom stage settings */
@@ -31,7 +31,7 @@ public class Main extends Application {
         stage.setTitle(duke.getName());
         stage.setOnCloseRequest(event -> {
             event.consume();
-            confirmClose(stage);
+            confirmClose();
         });
 
         stage.show();
@@ -39,9 +39,8 @@ public class Main extends Application {
 
     /**
      * Creates a confirmation popup to ask whether user wants to exit.
-     * @param stage The stage operating.
      */
-    private void confirmClose(Stage stage) {
+    private void confirmClose() {
         /* Create a confirmation alert*/
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
