@@ -1,2 +1,0 @@
-T | 1 | read book
-D | 0 | project | 20/03/2000 1800

@@ -18,7 +18,7 @@ import james.task.ToDo;
 public class Storage {
 
     protected File file;
-    String filePath = "data/james.txt";
+    String filePath = "storage/data/james.txt";
 
     /**
      * Constructor for Storage object.
