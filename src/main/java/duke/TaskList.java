@@ -55,9 +55,9 @@ public class TaskList {
     public void deleteTask(int taskNum) throws DukeException {
         if (taskNum < 0 || taskNum > lst.size() - 1) {
             throw new DukeException("bounds");
+        } else {
+            Task t = this.lst.remove(taskNum);
         }
-        Task t = this.lst.remove(taskNum);
-
     }
 
     /**
@@ -102,8 +102,12 @@ public class TaskList {
      * @param index index of task to be retrieved.
      * @return Task at given index of the list.
      */
-    public Task getTask(int index) {
-        return this.lst.get(index);
+    public Task getTask(int index) throws DukeException {
+        if (index < 0 || index > this.getSize() - 1) {
+            throw new DukeException("bounds");
+        } else {
+            return this.lst.get(index);
+        }
     }
 
     /**
