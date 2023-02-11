@@ -12,16 +12,16 @@ import duke.task.TaskList;
 public class Ui {
 
     private final Scanner sc = new Scanner(System.in);
-    private boolean firstTime = false;
+    private boolean isFirstTime = false;
 
     public void setFirstTime(boolean b) {
-        firstTime = b;
+        isFirstTime = b;
     }
     public void showWelcome() {
         System.out.println("૮₍ ˃ ᵕ ˂ ₎ა");
         System.out.println("Hello! I'm Duke, your favourite pink bunny.");
         System.out.println("What can I do for you today?");
-        if (firstTime) {
+        if (isFirstTime) {
             System.out.println("I don't seem to know anything about you! First time meeting? :D");
         } else {
             System.out.println("I'm so happy we're meeting again!");
