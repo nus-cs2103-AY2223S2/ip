@@ -170,6 +170,12 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Please input the keyword!";
         }
+        if (matchingTasks.size() == 0) {
+            return "There are no tasks with the given keyword";
+        }
+        TaskList matches = new TaskList(matchingTasks);
+        assert matches.getSize() != 0 : "Matching tasklist should not be empty";
+        return "Here are the matching tasks in your list:\n" + matches.toString();
     }
 
     /**
@@ -194,7 +200,6 @@ public class TaskList {
             data += task.toStorageData();
             data += "\n";
         }
-
         return data.trim();
     }
 
@@ -208,14 +213,17 @@ public class TaskList {
     @Override
     public String toString() {
         String taskToText = "";
+        if (tasks.size() == 0) {
+            return "There are no tasks as of now!";
+        }
         for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i - 1);
             String line = Integer.toString(i) + ". " + task.toString();
             taskToText += line;
             taskToText += "\n";
         }
+        assert !taskToText.isEmpty() : "Tasklist should not be empty";
         return taskToText.trim();
-
     }
 
 }
