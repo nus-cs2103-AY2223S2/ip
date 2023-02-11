@@ -16,6 +16,7 @@ public class ListCommand extends Command{
     @Override
     String toResultString() {
         String opening = "Here are the tasks you have at hand: \n";
+        assert taskList != null : "TaskList should not be null when listing tasks";
         String subject = taskList.getPrintableTasks();
 
         return opening + subject;

@@ -39,8 +39,8 @@ public class ToggleMarkTaskCommand extends Command {
     @Override
     String toResultString() {
         String opening = "I have marked the following task as " +
-                (isMarkAsDone ? "done" : "not Done yet") +
-                ": \n";
+                (isMarkAsDone ? "done" : "not Done yet") + ": \n";
+        assert markedTask != null : "Marked task should have been assigned";
         String subject = this.markedTask.toString();
 
         return opening + subject;

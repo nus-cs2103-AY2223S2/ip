@@ -25,7 +25,6 @@ public class TreeBot {
         } catch (FileNotFoundException e) {
             taskList = new TaskList();
         }
-
     }
 
     public void run() {

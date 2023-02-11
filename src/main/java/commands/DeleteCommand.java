@@ -38,6 +38,8 @@ public class DeleteCommand extends Command{
 
     @Override
     String toResultString() {
+        assert deletedTask != null : "Deleted task should have been assigned";
+        assert taskList != null : "taskList should have been assigned";
         String opening = "Tree has removed the following task: \n";
         String subject = deletedTask.toString();
         String closing = "\nNow you have " + this.taskList.getSize() + " tasks remaining.";
