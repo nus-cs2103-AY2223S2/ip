@@ -62,7 +62,7 @@ public class MainWindow extends AnchorPane {
         if (duke.isBye()) {
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> Platform.exit());
-            pause.play(); 
+            pause.play();
         }
-    } 
+    }
 }

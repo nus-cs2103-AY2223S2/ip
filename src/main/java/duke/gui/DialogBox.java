@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 public class DialogBox extends HBox {
     @FXML
     private Text dialog;
-    @FXML    
+    @FXML
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
     }
-    
+
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -46,10 +46,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for the user which is shown on the GUI.
+     * @param l Literal string of message passed to be shown on the GUI.
+     * @param img Image associated with the user shown on GUI.
+     * @return Dialog box containing the message and the image.
+     */
     public static DialogBox getUserDialog(String l, Image img) {
         return new DialogBox(l, img);
     }
 
+    /**
+     * Creates a dialog box for the Duke which is shown on the GUI.
+     * @param l Literal string of message passed to be shown on the GUI.
+     * @param img Image associated with the Duke shown on GUI.
+     * @return Dialog box containing the message and the image.
+     */
     public static DialogBox getDukeDialog(String l, Image img) {
         var db = new DialogBox(l, img);
         db.flip();

@@ -1,17 +1,17 @@
 package duke.commands;
 
-import duke.utils.DukeIo;
-import duke.tasks.TaskList;
 import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.utils.DukeIo;
 
 /**
  * EventCommand adds Event object into TaskList.
  */
 public class EventCommand extends Command {
-    private final String[] TOKENS;
+    private final String[] tokens;
 
     public EventCommand(String[] tokens) {
-        this.TOKENS = tokens;
+        this.tokens = tokens;
     }
 
     /**
@@ -25,12 +25,12 @@ public class EventCommand extends Command {
         Event e = createEvent();
         tasks.addTask(e);
         return dukeIo.notifySuccessAdd(e) + dukeIo.showCount();
-    } 
+    }
 
     private Event createEvent() {
-        String desc = TOKENS[0];
-        String from = TOKENS[1];
-        String to = TOKENS[2];
+        String desc = tokens[0];
+        String from = tokens[1];
+        String to = tokens[2];
         return new Event(desc, from, to);
     }
 }

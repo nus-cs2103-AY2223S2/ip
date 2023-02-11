@@ -18,7 +18,7 @@ public class Duke {
     private static Parser parser = new Parser();
     private static DukeIo dukeIo = new DukeIo();
     private static boolean isBye;
-    
+
     /**
      * The Main method that starts Duke.
      * Upon boot, TaskList is loaded form save file.
@@ -31,7 +31,7 @@ public class Duke {
     public String showHello() {
         return dukeIo.printHello();
     }
-    
+
     /**
      * Returns true if "bye" command is entered.
      * @param tokens tokens entered into the Command Line Interface

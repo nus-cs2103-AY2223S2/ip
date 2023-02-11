@@ -1,21 +1,21 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
-import duke.utils.DukeIo;
 import duke.tasks.ToDo;
+import duke.utils.DukeIo;
 
 /**
  * TodoCommand adds a To-Do task to TaskList.
  */
 public class TodoCommand extends Command {
-    private final String TOKENS;
-    
+    private final String tokens;
+
     /**
      * Public constructor for Todo Command.
      * @param desc Tokenised user inputs from user.
      */
     public TodoCommand(String desc) {
-        this.TOKENS = desc;
+        this.tokens = desc;
     }
 
     /**
@@ -33,6 +33,6 @@ public class TodoCommand extends Command {
     }
 
     private ToDo createToDo() {
-        return new ToDo(TOKENS);
+        return new ToDo(tokens);
     }
 }

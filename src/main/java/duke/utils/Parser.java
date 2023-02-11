@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import duke.tasks.TaskList;
 import duke.commands.Command;
-import duke.commands.TodoCommand;
-import duke.exception.InvalidCommandException;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.EventCommand;
@@ -18,23 +15,26 @@ import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.QuitCommand;
+import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
+import duke.exception.InvalidCommandException;
+import duke.tasks.TaskList;
 
 /**
  * Interpreter class to format user input into tokens
  */
 public class Parser {
+    private static Map<String, Function<String[], Command>> cmdMap = new HashMap<>();
     private String originalCmd;
     private String[] tokens;
-    private static Map<String, Function<String[], Command>> cmdMap = new HashMap<>();
 
     public Parser() {
         populateCommands();
-    }    
-    
+    }
+
     /**
      * Formats user input from standard input to String array
-     * @return String array of tokens
+     * @param input Literal string received from user.
      */
     public void tokenise(String input) {
         this.originalCmd = input;
@@ -162,7 +162,7 @@ public class Parser {
         int taskIndex = 0;
         if (tokens.length == 1 || tokens.length > 2) {
             return new InvalidCommand(
-                    new InvalidCommandException(InvalidCommandException.MARK_FORMAT_EXCEPTION));   
+                    new InvalidCommandException(InvalidCommandException.MARK_FORMAT_EXCEPTION));
         }
         try {
             taskIndex = Integer.parseInt(tokens[1]);
@@ -181,7 +181,7 @@ public class Parser {
         int taskIndex = 0;
         if (tokens.length == 1 || tokens.length > 2) {
             return new InvalidCommand(
-                    new InvalidCommandException(InvalidCommandException.MARK_FORMAT_EXCEPTION));   
+                    new InvalidCommandException(InvalidCommandException.MARK_FORMAT_EXCEPTION));
         }
         try {
             taskIndex = Integer.parseInt(tokens[1]);

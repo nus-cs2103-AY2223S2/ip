@@ -27,15 +27,13 @@ public class Storage {
     /**
      * Reads byte stream from pre-existing .txt file.
      * @return storedTasks ArrayList that is loaded from existing storage.
-     * @throws IOException Occurs due to errors in standard input and standard output.
-     * @throws ClassNotFoundException Occurs when Task class is not read.
      */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> load() {
         File file = new File("./data/duke.txt");
         if (!file.exists()) {
             return storedTasks;
-        } 
+        }
         try {
             fis = new FileInputStream("./data/duke.txt");
             ois = new ObjectInputStream(fis);
