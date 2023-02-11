@@ -34,9 +34,9 @@ public class Singletons {
      */
     public static <T> void registerSingleton(Class<T> cls,
                                              T object) {
-        if (singletons.containsKey(cls) || lazySingletons.containsKey(cls)) {
-            return;
-        }
+        assert (!singletons.containsKey(cls)) || (!lazySingletons
+                .containsKey(cls)) : "The class is already registered as a "
+                + "singleton";
         singletons.put(cls, object);
     }
 
@@ -50,9 +50,9 @@ public class Singletons {
      */
     public static <T> void registerLazySingleton(Class<T> cls,
                                                  Supplier<T> supplier) {
-        if (singletons.containsKey(cls) || lazySingletons.containsKey(cls)) {
-            return;
-        }
+        assert (!singletons.containsKey(cls)) || (!lazySingletons
+                .containsKey(cls)) : "The class is already registered as a "
+                + "singleton";
         lazySingletons.put(cls, supplier);
     }
 
@@ -87,6 +87,8 @@ public class Singletons {
      * @return the object that has been registered for this class.
      */
     public static <T> T get(Class<T> cls) {
+        assert (singletons.containsKey(cls) || lazySingletons.containsKey(cls))
+                : "The class " + cls.getName() + " has not been registered.";
         if (singletons.containsKey(cls)) {
             return cls.cast(singletons.get(cls));
         } else if (lazySingletons.containsKey(cls)) {
@@ -95,7 +97,5 @@ public class Singletons {
             lazySingletons.remove(cls);
             return object;
         }
-        throw new RuntimeException("Dependency for " + cls.getName() + " has "
-                + "not been injected.");
     }
 }

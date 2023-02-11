@@ -15,7 +15,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
- * A {@link TaskManagerUsecase} is a usecase that manages a list of
+ * A {@link TaskManagerUsecase} is an usecase that manages a list of
  * {@link Task}s. It provides many anonymous classes that can be registered
  * to a {@link NestedCommandableObject}. These anonymous classes will be
  * used to execute the commands.
