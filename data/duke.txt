@@ -3,3 +3,4 @@
 3. [T][ ] borrow book
 4. [D][ ] return book (by: Dec 2 2023 01:50 PM)
 5. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+6. [T][ ] borrow book

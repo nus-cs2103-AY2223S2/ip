@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Abstract class to allow different commands to be inherited from.
@@ -14,14 +13,13 @@ public abstract class Command {
      * Abstract method to be used by the other commands from inherited class.
      *
      * @param tl       - list of tasks.
-     * @param ui       - interface.
      * @param storage  - harddisk store using textfile.
      * @return String  - returns the result of the command.
      */
-    public abstract String execute(TaskList tl, Ui ui, Storage storage);
+    public abstract String execute(TaskList tl, Storage storage);
 
     /**
-     * Check if program needs to be exited from command bye.
+     * Checks if program needs to be exited from command bye.
      *
      * @return boolean - true or false depending on the command.
      */
@@ -30,7 +28,7 @@ public abstract class Command {
     }
 
     /**
-     * Check that the format of the commands are correct.
+     * Checks that the format of the commands are correct.
      *
      * @param cmd - The given command description entered by the user.
      * @return boolean - true or false according to the formatting.

@@ -6,7 +6,6 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 
 /**
@@ -17,7 +16,6 @@ public class Duke {
     private String res;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
 
     /**
@@ -26,7 +24,6 @@ public class Duke {
      * @param filePath the path fo the file.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             res = "";
@@ -42,13 +39,14 @@ public class Duke {
      * Function to get a response from the duke chatbot.
      *
      * @param fullCommand the command given by the user.
-     * @return String the result of the command.
+     * @return the result of the command in String.
      */
     public String getResponse(String fullCommand) {
         try {
             Command.isValidCommand(fullCommand);
             Command c = Parser.parse(fullCommand);
-            this.res = c.execute(tasks, ui, storage);
+            assert tasks != null : "tasks should have already been initiated";
+            this.res = c.execute(tasks, storage);
         } catch (DukeException e) {
             this.res = e.getMessage();
         } catch (IllegalArgumentException e) {
