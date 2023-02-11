@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * Parent class of Todo, Deadline, and Event.
  * Contains attributes and methods that a task should have.
  */
-public class Task implements Comparable<Task>{
+public class Task implements Comparable<Task> {
     /** The description of a task **/
     protected String description;
     /** The status of a task **/

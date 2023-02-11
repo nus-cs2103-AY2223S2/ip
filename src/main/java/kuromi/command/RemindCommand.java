@@ -4,8 +4,11 @@ import kuromi.Storage;
 import kuromi.Ui;
 import kuromi.task.TaskList;
 
+/**
+ * Command to list or remind the user the first n tasks in the task list.
+ */
 public class RemindCommand extends Command {
-    int numberOfTasks;
+    private int numberOfTasks;
 
     public RemindCommand(int numberOfTasks) {
         this.numberOfTasks = numberOfTasks;
