@@ -4,9 +4,15 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class SortCommand extends Command{
+/**
+ * SortCommand that represents command to sort task list.
+ */
+public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
+    /**
+     * Constructor for SortCommand.
+     */
     public SortCommand() {
     }
 

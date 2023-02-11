@@ -15,7 +15,7 @@ public class Deadline extends TaskWithDate {
      * @param deadline
      */
     public Deadline(String desc, LocalDateTime deadline) {
-        super(desc, "D",deadline);
+        super(desc, "D", deadline);
         this.deadline = deadline;
     }
 

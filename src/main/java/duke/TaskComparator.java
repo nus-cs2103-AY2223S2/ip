@@ -5,6 +5,9 @@ import java.util.Comparator;
 import duke.task.Task;
 import duke.task.TaskWithDate;
 
+/**
+ * TaskComparator to sort task list.
+ */
 public class TaskComparator implements Comparator<Task> {
     @Override
     public int compare(Task t1, Task t2) {
