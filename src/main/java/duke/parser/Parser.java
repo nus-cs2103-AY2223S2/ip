@@ -6,6 +6,7 @@ import duke.commands.CreateEvent;
 import duke.commands.CreateTodo;
 import duke.commands.DeleteTask;
 import duke.commands.Exit;
+import duke.commands.Find;
 import duke.commands.ListTasks;
 import duke.commands.MarkTask;
 import duke.commands.UnmarkTask;
@@ -46,6 +47,8 @@ public class Parser {
             return prepareUnmarkTask(args);
         case "delete":
             return prepareDeleteTask(args);
+        case "find":
+            return new Find(args);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

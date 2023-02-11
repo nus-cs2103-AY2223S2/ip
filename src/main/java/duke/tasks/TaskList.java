@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -19,6 +20,11 @@ public class TaskList implements Iterable<Task> {
     public TaskList() {
         tasks = new ArrayList<>();
         nextId = 1;
+    }
+
+    public TaskList(List<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
+        nextId = tasks.size() + 1;
     }
 
     /**
@@ -85,4 +91,6 @@ public class TaskList implements Iterable<Task> {
     public java.util.Iterator<Task> iterator() {
         return tasks.iterator();
     }
+
+
 }
