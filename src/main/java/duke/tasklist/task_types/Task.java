@@ -5,24 +5,24 @@ import java.io.Serializable;
 /**
  * Represents a <code>task</code> object that contains a string holding the
  * <code>name</code> of the
- * task and the <code>status</code> of the task. Represents a <code>task</code>
+ * task and the <code>isMarked</code> of the task. Represents a <code>task</code>
  * object that contains
  * a string holding the <code>name</code> of the task and the
- * <code>status</code> of the task.
+ * <code>isMarked</code> of the task.
  * 
  * @author Brian Quek
  */
 
 public class Task implements Serializable {
     protected String name;
-    protected boolean status;
+    protected boolean isMarked;
 
     /**
      * Constructor for the Task object.
      */
     public Task(String name) {
         this.name = name;
-        this.status = false;
+        this.isMarked = false;
     }
 
     public String getName() {
@@ -34,8 +34,8 @@ public class Task implements Serializable {
      * 
      * @param status a boolean value that is used to change the status
      */
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setMarked(boolean status) {
+        this.isMarked = status;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.status ? "X" : " ", this.name);
+        return String.format("[%s] %s", this.isMarked ? "X" : " ", this.name);
     }
 
 }
