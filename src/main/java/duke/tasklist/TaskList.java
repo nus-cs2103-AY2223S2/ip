@@ -32,8 +32,10 @@ public class TaskList implements Serializable {
      * 
      * @param task the added task
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
+        String message = "Added one task!\n" + task.toString() + "\n" + this.getTotal();
         tasks.add(task);
+        return message;
     }
 
 
@@ -59,9 +61,11 @@ public class TaskList implements Serializable {
      * @param index the index of the ArrayList.
      * @throws DukeException if the index is out of bounds.
      */
-    public void deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws DukeException {
         try {
+            String message = "Deleted one task \n" + this.getTask(index).toString() + "\n" + this.getTotal();
             tasks.remove(index);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
         }
@@ -75,13 +79,14 @@ public class TaskList implements Serializable {
      * @param index the index of the ArrayList.
      * @throws DukeException if the index is out of bounds.
      */
-    public void markedTask(int index) throws DukeException {
+    public String markedTask(int index) throws DukeException {
         try {
+            String message = "Nice! One Task Down!\n" + this.getTask(index).toString() + "\n";
             tasks.get(index).setStatus(true);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
         }
-
     }
 
 
@@ -91,9 +96,11 @@ public class TaskList implements Serializable {
      * @param index the index of the ArrayList.
      * @throws DukeException if the index is out of bounds.
      */
-    public void unmarkedTask(int index) throws DukeException {
+    public String unmarkedTask(int index) throws DukeException {
         try {
+            String message = "One more task to go ):\n" + this.getTask(index).toString() + "\n";
             tasks.get(index).setStatus(false);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
         }
@@ -119,10 +126,13 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
-    public TaskList filter(String name) {
+    public String filter(String name) {
+        String message = "\nHere are the matching tasks in your list:" + "\n";
         Stream<Task> taskStream = this.tasks.stream();
-        return new TaskList(taskStream.filter(task -> task.getName().contains(name))
+        TaskList filteredTasks = new TaskList(taskStream.filter(task -> task.getName().contains(name))
                 .collect(Collectors.toList()));
+        message += filteredTasks.toString();
+        return message;
     }
 
 

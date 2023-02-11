@@ -6,7 +6,6 @@ import duke.tasklist.task_types.Deadline;
 import duke.tasklist.task_types.Event;
 import duke.tasklist.task_types.Task;
 import duke.tasklist.task_types.ToDo;
-import duke.utility.ui.UiMessage;
 
 /**
  * Represents a <code>Parser</code> object that perfroms the necessary
@@ -26,14 +25,16 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the TaskList to be displayed.
-     * @return UiMessage object containing what type of command to be printed out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid.
      */
-    private static UiMessage printTasks(String[] command, TaskList list) throws DukeException {
+    private static String printTasks(String[] command, TaskList list) throws DukeException {
         if (command.length > 1) {
             throw wrongCommandFormat;
         }
-        return new UiMessage(CommandMap.list, null);
+
+        String message = "\n" + list.getTotal() + "\n" + list.toString();
+        return message;
     }
 
     /**
@@ -41,18 +42,17 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or invalid index
      *                       value.
      */
-    private static UiMessage markTask(String[] command, TaskList list) throws DukeException {
+    private static String markTask(String[] command, TaskList list) throws DukeException {
         try {
             if (command.length > 2) {
                 throw wrongCommandFormat;
             }
             int index = Integer.parseInt(command[1]) - 1;
-            list.markedTask(index);
-            return new UiMessage(CommandMap.mark, list.getTask(index));
+            return list.markedTask(index);
         } catch (NumberFormatException e) {
             throw noNumericParam;
         }
@@ -64,18 +64,17 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or invalid index
      *                       value.
      */
-    private static UiMessage unmarkTask(String[] command, TaskList list) throws DukeException {
+    private static String unmarkTask(String[] command, TaskList list) throws DukeException {
         try {
             if (command.length > 2) {
                 throw wrongCommandFormat;
             }
             int index = Integer.parseInt(command[1]) - 1;
-            list.unmarkedTask(index);
-            return new UiMessage(CommandMap.unmark, list.getTask(index));
+            return list.unmarkedTask(index);
         } catch (NumberFormatException e) {
             throw noNumericParam;
         }
@@ -87,19 +86,17 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or invalid index
      *                       value.
      */
-    private static UiMessage deleteTask(String[] command, TaskList list) throws DukeException {
+    private static String deleteTask(String[] command, TaskList list) throws DukeException {
         try {
             if (command.length > 2) {
                 throw wrongCommandFormat;
             }
             int index = Integer.parseInt(command[1]) - 1;
-            Task deletedTask = list.getTask(index);
-            list.deleteTask(index);
-            return new UiMessage(CommandMap.delete, deletedTask);
+            return list.deleteTask(index);
         } catch (NumberFormatException e) {
             throw noNumericParam;
         }
@@ -108,13 +105,13 @@ public class Parser {
     /**
      * Terminates the bot program.
      * 
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      */
-    private static UiMessage closeProgram(String[] command) throws DukeException {
+    private static String closeProgram(String[] command) throws DukeException {
         if (command.length > 1) {
             throw wrongCommandFormat;
         }
-        return new UiMessage(CommandMap.bye, null);
+        return "Bye! See you soon!\n";
     }
 
     /**
@@ -122,11 +119,11 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input.
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or does not have any
      *                       parameter.
      */
-    private static UiMessage createToDo(String[] command, TaskList list) throws DukeException {
+    private static String createToDo(String[] command, TaskList list) throws DukeException {
         if (command.length > 2) {
             throw wrongCommandFormat;
         }
@@ -136,9 +133,7 @@ public class Parser {
         }
 
         Task toDoObj = new ToDo(command[1]);
-        list.addTask(toDoObj);
-
-        return new UiMessage(CommandMap.todo, toDoObj);
+        return list.addTask(toDoObj);
     }
 
     /**
@@ -146,12 +141,12 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or missing any special
      *                       parameter (/by
      *                       e.g)
      */
-    private static UiMessage createDeadline(String[] command, TaskList list) throws DukeException {
+    private static String createDeadline(String[] command, TaskList list) throws DukeException {
         if (command.length != 4) {
             throw wrongCommandFormat;
         }
@@ -161,9 +156,7 @@ public class Parser {
         }
 
         Task deadlineObj = new Deadline(command[1], command[3]);
-        list.addTask(deadlineObj);
-
-        return new UiMessage(CommandMap.deadline, deadlineObj);
+        return list.addTask(deadlineObj);
     }
 
     /**
@@ -176,7 +169,7 @@ public class Parser {
      *                       parameter (/by
      *                       e.g)
      */
-    private static UiMessage createEvent(String[] command, TaskList list) throws DukeException {
+    private static String createEvent(String[] command, TaskList list) throws DukeException {
         if (command.length != 6) {
             throw wrongCommandFormat;
         }
@@ -186,12 +179,10 @@ public class Parser {
         }
 
         Task eventObj = new Event(command[1], command[3], command[5]);
-        list.addTask(eventObj);
-
-        return new UiMessage(CommandMap.event, eventObj);
+        return list.addTask(eventObj);
     }
 
-    private static UiMessage findTasks(String[] command, TaskList list) throws DukeException {
+    private static String findTasks(String[] command, TaskList list) throws DukeException {
         if (command.length > 2) {
             throw wrongCommandFormat;
         }
@@ -202,7 +193,7 @@ public class Parser {
 
         String keyword = command[1];
 
-        return new UiMessage(CommandMap.find, new Task(keyword));
+        return list.filter(keyword);
     }
 
     /**
@@ -210,10 +201,10 @@ public class Parser {
      * 
      * @param input user input
      * @param list  list of tasks
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if invalid command keyword is typed.
      */
-    public static UiMessage readCommand(String input, TaskList list) throws DukeException {
+    public static String readCommand(String input, TaskList list) throws DukeException {
         String[] command = input.trim().split(" ");
 
         try {

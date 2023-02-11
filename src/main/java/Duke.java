@@ -1,15 +1,11 @@
-import java.util.Scanner;
 
 import duke.duke_exception.DukeException;
 import duke.tasklist.TaskList;
-import duke.utility.parser.CommandMap;
 import duke.utility.parser.Parser;
 import duke.utility.storage.Storage;
-import duke.utility.ui.Ui;
-import duke.utility.ui.UiMessage;
 
 /**
- * <h1>Duke Chatbot</h1> The Duke chatbot is a bot that is capable to keep track of tasks from the
+ * The Pepe chatbot is a bot that is capable to keep track of tasks from the
  * users.
  * 
  * @author Brian Quek
@@ -17,29 +13,27 @@ import duke.utility.ui.UiMessage;
 
 public class Duke {
 
+    private TaskList tasks;
+
+    public Duke() {
+        this.tasks = Storage.readData();
+    }
+
     /**
-     * Main function that creates and run the Duke Bot object.
+     * Creates a response message after parsing the input given.
      * 
-     * @param args
+     * @param input the user's input
+     * @return a String that contains a response message corresponding to the user's input.
+     * @throws DukeException if the command format is invalid.
      */
-    public static void main(String[] args) {
-        Scanner inputScanner = new Scanner(System.in);
-        Ui ui = new Ui();
-        Ui.welcomeMessage();
-        TaskList list = Storage.readData();
-        UiMessage response = new UiMessage();
-
-        while (response.TYPE != CommandMap.bye) {
-            try {
-                response = Parser.readCommand(inputScanner.nextLine(), list);
-                ui.load(response, list);
-            } catch (DukeException e) {
-                System.out.println(e);
-            }
-
-            Storage.writeData(list);
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            output += Parser.readCommand(input, tasks);
+            Storage.writeData(tasks);
+        } catch (DukeException e) {
+            output += e.toString();
         }
-
-        inputScanner.close();
+        return output;
     }
 }
