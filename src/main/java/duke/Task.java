@@ -91,38 +91,5 @@ public abstract class Task {
         return description;
     }
 
-    /**
-     * Unmarks a task.
-     *
-     * @param array The array of tasks.
-     * @param splitInput The user's input for unmarking a task.
-     */
-    public static void unmarkTask(ArrayList<Task> array, String[] splitInput) {
-        array.get((Integer.parseInt(splitInput[1])-1)).markAsUnDone();
-        Ui.unmarkTask(array, splitInput);
-    }
-
-    /**
-     * Marks a task.
-     *
-     * @param array The array of tasks.
-     * @param splitInput The user's input for marking a task.
-     */
-    public static void markTask(ArrayList<Task> array, String[] splitInput) {
-        array.get((Integer.parseInt(splitInput[1])-1)).markAsDone();
-        Ui.markTask(array, splitInput);
-    }
-
-    /**
-     * Deletes a task.
-     *
-     * @param array The array of tasks.
-     * @param splitInput The user's input for deleting a task.
-     */
-    public static void deleteTask(ArrayList<Task> array, String[] splitInput) {
-        array.remove((Integer.parseInt(splitInput[1])-1));
-        Ui.removeTask(array, splitInput);
-    }
-
 
 }

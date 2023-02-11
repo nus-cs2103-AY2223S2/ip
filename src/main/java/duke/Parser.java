@@ -13,16 +13,16 @@ public class Parser {
         }
         //Displays the list of items 
         else if (combined.equals("list")){
-            Ui.displayList(array);
+            TaskList.displayList(array);
             
         } 
         //Mark the task as done
         else if(splitInput[0].equals("mark")){
-            Task.markTask(array, splitInput);
+            TaskList.markTask(array, splitInput);
         } 
         //Unmark the task as done
         else if(splitInput[0].equals("unmark")){
-            Task.unmarkTask(array, splitInput);
+            TaskList.unmarkTask(array, splitInput);
         }
         //Creates a Deadline type Task 
         else if(splitInput[0].equals("deadline")){
@@ -38,7 +38,11 @@ public class Parser {
         }
         //Deletes a Task 
         else if(splitInput[0].equals("delete")) {
-            Task.deleteTask(array, splitInput);
+            TaskList.deleteTask(array, splitInput);
+        } 
+        //Finds a Task
+        else if(splitInput[0].equals("find")) {
+            TaskList.searchTask(array, splitInput);
         } else {
             try {
                 throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
