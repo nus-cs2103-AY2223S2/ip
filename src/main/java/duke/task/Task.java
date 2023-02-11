@@ -6,7 +6,7 @@ package duke.task;
 /**
  * Task that has description, type and variable to determine if it is done or not.
  */
-public class Task {
+public abstract class Task {
     private String desc;
     private String type;
     private boolean isDone;

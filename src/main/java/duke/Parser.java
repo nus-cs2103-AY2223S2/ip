@@ -12,6 +12,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.SortCommand;
 import duke.command.TerminateCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnknownCommand;
@@ -30,7 +31,6 @@ public class Parser {
      */
     public static Command parseCommand(String userInput) {
         String commandWord = getCommandWord(userInput);
-        int taskIndex;
         switch (commandWord) {
         case ListCommand.COMMAND_WORD:
             return parseList();
@@ -50,12 +50,13 @@ public class Parser {
             return parseEvent(userInput);
         case FindCommand.COMMAND_WORD:
             return parseFind(userInput);
+        case SortCommand.COMMAND_WORD:
+            return parseSort();
         default:
             return new UnknownCommand();
         }
-        assert false;
     }
-    
+
     /**
      * Gets the command word of the user input
      * @param userInput full user input
@@ -263,7 +264,7 @@ public class Parser {
     private static Command parseTodo(String userInput) {
         try {
             String desc = getDescToDo(userInput);
-            assert desc.length() == 0 : "Todo task description cannot be empty!";
+            assert desc.length() != 0 : "Todo task description cannot be empty!";
             return new ToDoCommand(desc);
         } catch (DukeException e) {
             Ui.showResponse(e.getMessage());
@@ -279,9 +280,9 @@ public class Parser {
     private static Command parseDeadline(String userInput) {
         try {
             String desc = getDescDeadline(userInput);
-            assert desc.length() == 0 : "Deadline task description cannot be empty!";
+            assert desc.length() != 0 : "Deadline task description cannot be empty!";
             LocalDateTime byWhen = getDeadline(userInput);
-            assert byWhen == null : "Deadline should not be null!";
+            assert byWhen != null : "Deadline should not be null!";
             return new DeadlineCommand(desc, byWhen);
         } catch (DukeException e) {
             Ui.showResponse(e.getMessage());
@@ -297,11 +298,11 @@ public class Parser {
     private static Command parseEvent(String userInput) {
         try {
             String desc = getDescEvent(userInput);
-            assert desc.length() == 0 : "Event task description cannot be empty!";
+            assert desc.length() != 0 : "Event task description cannot be empty!";
             LocalDateTime from = getFrom(userInput);
-            assert from == null : "Start date/time should not be null!";
+            assert from != null : "Start date/time should not be null!";
             LocalDateTime to = getTo(userInput);
-            assert to == null : "End date/time should not be null!";
+            assert to != null : "End date/time should not be null!";
             if (from.isAfter(to)) {
                 return new ErrorCommand("Error!! FROM datetime cannot be after TO datetime!!!");
             }
@@ -311,7 +312,7 @@ public class Parser {
             return new ErrorCommand(e.getMessage());
         }
     }
-   
+
     /**
      * Parse find command.
      * @param userInput full user input
@@ -325,5 +326,9 @@ public class Parser {
             Ui.showResponse(e.getMessage());
             return new ErrorCommand(e.getMessage());
         }
+    }
+
+    private static Command parseSort() {
+        return new SortCommand();
     }
 }
