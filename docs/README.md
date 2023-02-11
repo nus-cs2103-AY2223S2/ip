@@ -12,7 +12,7 @@
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar sebastian.jar` command to run the application. A GUI similar to the below should appear in a few seconds. Note the app contains some sample data.
 
-   <img src="/Users/lixintong/Desktop/HumanSufferings/Y2S2/CS2103T/ip/docs/Ui.png" style="zoom:50%;" />
+   <img src="http://Emrysil.github.io/ip/Ui.png" style="zoom:50%;" />
 
 # Features
 
