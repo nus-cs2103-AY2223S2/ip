@@ -15,7 +15,7 @@ public class Ui {
 
     /**
      * Displays the error in the console UI.
-     *
+     * 
      * @param e The error to show.
      */
     public void showError(DukeException e) {
@@ -24,7 +24,7 @@ public class Ui {
 
     /**
      * Formats and display a string into the console UI.
-     *
+     * 
      * @param whatToShow What to show.
      */
     public void show(String whatToShow) {
@@ -39,7 +39,7 @@ public class Ui {
 
     /**
      * Checks whether there's a user command waiting to be parsed.
-     *
+     * 
      * @return Whether there's a user command.
      */
     public boolean hasCommand() {
@@ -48,7 +48,7 @@ public class Ui {
 
     /**
      * Gets the next user command.
-     *
+     * 
      * @return The next user command.
      */
     public String readCommand() {

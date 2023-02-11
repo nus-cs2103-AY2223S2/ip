@@ -11,7 +11,7 @@ public class TaskTodo extends Task {
     /**
      * Parses a todo task that has been encoded into a string, into a 'TaskTodo'
      * instance.
-     *
+     * 
      * @param input The encoded todo task.
      * @return The todo task that was encoded.
      * @throws DukeSaveLoadException If there's a problem in parsing the encoded

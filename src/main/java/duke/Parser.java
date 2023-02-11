@@ -47,7 +47,7 @@ public class Parser {
 
     /**
      * Checks if the command's body is empty (ie. command has no body).
-     *
+     * 
      * @return Whether the command's body is empty.
      */
     public boolean hasEmptyBody() {

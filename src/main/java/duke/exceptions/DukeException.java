@@ -18,7 +18,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * Gets the formatted error message to be displayed in Duke.
-     *
+     * 
      * @return Formatted error message.
      */
     public String getDukeMessage() {

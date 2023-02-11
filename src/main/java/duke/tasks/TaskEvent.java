@@ -13,7 +13,7 @@ public class TaskEvent extends Task {
 
     /**
      * Creates a new event-type task.
-     *
+     * 
      * @param description Event's description.
      * @param fromTime Event's starting time.
      * @param toTime Event's ending time.
@@ -27,7 +27,7 @@ public class TaskEvent extends Task {
     /**
      * Parses a event task that has been encoded into a string, into a 'TaskEvent'
      * instance.
-     *
+     * 
      * @param input The encoded event task.
      * @return The event task that was encoded.
      * @throws DukeSaveLoadException If there's a problem in parsing the encoded

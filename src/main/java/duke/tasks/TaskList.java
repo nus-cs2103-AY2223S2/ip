@@ -23,7 +23,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Gets the summary status message to be displayed in Duke.
-     *
+     * 
      * @return Summary status message.
      */
     public String getStatus() {
@@ -39,7 +39,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Encodes this task list into a string.
-     *
+     * 
      * @return The encoded task list.
      */
     public String encodeAsString() {

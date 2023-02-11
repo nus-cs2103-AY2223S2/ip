@@ -107,7 +107,7 @@ public class Duke {
 
     /**
      * Handles the adding of todo-type tasks by the "todo" command.
-     *
+     * 
      * @throws DukeInvalidArgumentException If no description given.
      */
     private void addTodo() throws DukeInvalidArgumentException {
@@ -125,7 +125,7 @@ public class Duke {
 
     /**
      * Handles the adding of deadline-type tasks by the "deadline" command.
-     *
+     * 
      * @throws DukeInvalidArgumentException If no or invalid description/by-param
      *         are given.
      */
@@ -155,7 +155,7 @@ public class Duke {
 
     /**
      * Handles the adding of event-type tasks by the "event" command.
-     *
+     * 
      * @throws DukeInvalidArgumentException If no or invalid
      *         description/from-param/to-param are given.
      */
@@ -194,7 +194,7 @@ public class Duke {
 
     /**
      * Handles the marking of tasks as done, by the "mark" command.
-     *
+     * 
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
     private void mark() throws DukeInvalidArgumentException {
@@ -220,7 +220,7 @@ public class Duke {
 
     /**
      * Handles the marking of tasks as not done, by the "unmark" command.
-     *
+     * 
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
     private void unmark() throws DukeInvalidArgumentException {
@@ -246,7 +246,7 @@ public class Duke {
 
     /**
      * Handles the deleting of tasks by the "delete" command.
-     *
+     * 
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
     private void delete() throws DukeInvalidArgumentException {
