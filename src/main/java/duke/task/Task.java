@@ -22,7 +22,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the Task as done.
+     * Marks the Task as done.
      * @return Message to user informing about successful execution.
      */
     public String mark() {
@@ -31,7 +31,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the Task as not done.
+     * Marks the Task as not done.
      * @return Message to user informing about successful execution.
      */
     public String unMark() {
