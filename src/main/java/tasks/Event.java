@@ -11,6 +11,14 @@ public class Event extends Task {
     protected LocalDate endDate;
     protected LocalTime startTime;
     protected LocalTime endTime;
+
+    /**
+     * Constructor for Event.
+     *
+     * @param description The description of the event.
+     * @param start The start date and time of the event.
+     * @param end The end date and time of the event.
+     */
     public Event(String description, String start, String end) {
         super(description);
         this.start = start;
@@ -18,6 +26,11 @@ public class Event extends Task {
         handleDateAndTime();
     }
 
+    /**
+     * Returns the start date and time of the event.
+     *
+     * @return The start date and time of the event.
+     */
     public void handleDateAndTime() {
         if (start.contains(" ")) {
             LocalDate newStartDate = LocalDate.parse(start.split(" ")[0]);
@@ -40,6 +53,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the start date and time of the event.
+     *
+     * @return The start date and time of the event.
+     */
     public String printStartDateAndTime() {
         if (!start.contains(" ")) {
             return startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -49,6 +67,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the end date and time of the event.
+     *
+     * @return The end date and time of the event.
+     */
     public String printEndDateAndTime() {
         if (!end.contains(" ")) {
             return endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -58,11 +81,21 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the string representation of the event.
+     *
+     * @return The string representation of the event.
+     */
     @Override
     public String toString() {
         return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + printStartDateAndTime() + " to: " + printEndDateAndTime() + ")";
     }
 
+    /**
+     * Returns the string representation of the event to be written to the file.
+     *
+     * @return The string representation of the event to be written to the file.
+     */
     @Override
     public String writeToFile() {
         return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + start + " to: " + end + ")";

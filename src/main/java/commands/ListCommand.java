@@ -11,6 +11,13 @@ public class ListCommand implements Command {
         this.input = input;
     }
 
+    /**
+     * Prints the list of tasks.
+     *
+     * @param taskList The list of tasks.
+     * @param ui The user interface.
+     * @param storage The storage.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printList(taskList);

@@ -16,10 +16,12 @@ public class TaskList {
         this.taskList = null;
     }
 
+    // returns the size of the task list
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
+    // updates the task list
     public void updateList(ArrayList<Task> newList) {
         this.taskList = newList;
     }

@@ -11,13 +11,23 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description The description of the deadline.
+     * @param deadline The date and time of the deadline.
+     */
     public Deadline(String description, String deadline) {
         super(description);
         this.deadline = deadline;
         handleDateAndTime();
     }
 
+    /**
+     * Returns the date and time of the deadline.
+     *
+     * @return The date and time of the deadline.
+     */
     public void handleDateAndTime() {
         if (deadline.contains(" ")) {
             LocalDate newDate = LocalDate.parse(deadline.split(" ")[0]);
@@ -31,6 +41,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the date and time of the deadline.
+     *
+     * @return The date and time of the deadline.
+     */
     public String printDateAndTime() {
         if (!deadline.contains(" ")) {
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -40,11 +55,21 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the date of the deadline.
+     *
+     * @return The date of the deadline.
+     */
     @Override
     public String toString() {
         return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + printDateAndTime() + ")";
     }
 
+    /**
+     * Returns the date and time of the deadline.
+     *
+     * @return The date and time of the deadline.
+     */
     @Override
     public String writeToFile() {
         return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + deadline + ")";

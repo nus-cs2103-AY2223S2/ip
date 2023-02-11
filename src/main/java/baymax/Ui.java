@@ -7,7 +7,6 @@ import tasks.Event;
 
 
 public class Ui {
-    // deals with interactions with the user
 
     public void showLoadingErrorMessage() {
         System.out.println("Unable to load previous tasks");

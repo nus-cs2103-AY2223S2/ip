@@ -18,6 +18,10 @@ public class Baymax {
 
     private static Ui ui = new Ui();
 
+    /**
+     * Constructor for Baymax.
+     * @param filepath The filepath of the data file.
+     */
     public Baymax(String filepath) {
         Ui ui = new Ui();
         storage = new Storage(filepath);
@@ -29,10 +33,14 @@ public class Baymax {
         }
     }
 
+
     public static void main(String[] args) {
         new Baymax("./data/Baymax.txt").run();
     }
 
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         Command welcomeCommand = new WelcomeCommand();
         welcomeCommand.execute(tasks, ui, storage);

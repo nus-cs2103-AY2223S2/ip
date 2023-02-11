@@ -11,6 +11,13 @@ public class ByeCommand implements Command{
         this.input = input;
     }
 
+    /**
+     * Prints the exit message.
+     *
+     * @param taskList The list of tasks.
+     * @param ui The user interface.
+     * @param storage The storage.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.exitMessage();

@@ -12,15 +12,21 @@ import commands.DeleteCommand;
 import commands.InvalidCommand;
 
 public class Parser {
-    
+    // enum for commands
     private enum commands {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
+    
     private commands getCommand(String input) {
         return commands.valueOf(input.split(" ")[0].toUpperCase());
     }
 
+    /**
+     * Parses the input and returns the appropriate command.
+     * @param input The input from the user.
+     * @return The appropriate command.
+     */
     public Command parse(String input) {
         switch (getCommand(input)) {
         case BYE:

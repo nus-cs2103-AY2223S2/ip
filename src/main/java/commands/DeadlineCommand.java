@@ -12,6 +12,13 @@ public class DeadlineCommand implements Command {
         this.input = input;
     }
 
+    /**
+     * Adds a new deadline to the task list.
+     *
+     * @param taskList The list of tasks.
+     * @param ui The user interface.
+     * @param storage The storage.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Deadline deadline = new Deadline(getDescription(), getDateTime());
@@ -20,10 +27,20 @@ public class DeadlineCommand implements Command {
         ui.newDeadlineMessage(deadline);
     }
 
+    /**
+     * Returns the description of the deadline.
+     *
+     * @return The description of the deadline.
+     */
     public String getDescription() {
         return input.split(" ", 2)[1].split(" /by ", 2)[0];
     }
 
+    /**
+     * Returns the date and time of the deadline.
+     *
+     * @return The date and time of the deadline.
+     */
     public String getDateTime() {
         return input.split(" /by ", 2)[1];
     }

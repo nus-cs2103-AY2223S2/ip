@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    // deals with loading tasks from the file and saving tasks in the file
 
     protected String filepath;
 
@@ -24,6 +23,11 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Stores the task list into the data file.
+     * @param myList The task list to be stored.
+     * @throws BaymaxException If there is an error in storing the task list.
+     */
     public ArrayList<Task> load() throws BaymaxException {
         ArrayList<Task> myList = new ArrayList<>();
         try {
@@ -72,6 +76,11 @@ public class Storage {
         return myList;
     }
 
+    /**
+     * Stores the task list into the data file.
+     * @param myList The task list to be stored.
+     * @throws BaymaxException If there is an error in storing the task list.
+     */
     public void store(ArrayList<Task> myList) {
         try {
             FileWriter writer = new FileWriter(filepath);

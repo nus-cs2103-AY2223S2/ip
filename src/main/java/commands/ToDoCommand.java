@@ -13,6 +13,13 @@ public class ToDoCommand implements Command {
         this.input = input;
     }
 
+    /**
+     * Adds a new todo task to the list of tasks.
+     *
+     * @param taskList The list of tasks.
+     * @param ui The user interface.
+     * @param storage The storage.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Todo todo = new Todo(getDescription());
@@ -21,6 +28,11 @@ public class ToDoCommand implements Command {
         ui.newToDoMessage(todo);
     }
 
+    /**
+     * Returns the description of the todo task.
+     *
+     * @return The description of the todo task.
+     */
     public String getDescription() {
         return input.split(" ", 2)[1];
     }
