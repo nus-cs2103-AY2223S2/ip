@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import aqua.MainApp;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureException;
 import aqua.exception.SyntaxException;
@@ -164,6 +165,7 @@ public class IoManager {
         scene.getStylesheets().add(this.getClass().getResource(PATH_CSS).toString());
         stage.setScene(scene);
         stage.setTitle(stageId);
+        stage.getIcons().add(MainApp.ICON);
         stageMap.put(stageId, stage);
         return stage;
     }
