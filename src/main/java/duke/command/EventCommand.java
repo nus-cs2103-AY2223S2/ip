@@ -4,6 +4,7 @@ import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Todo;
 
 
 /**
@@ -33,15 +34,20 @@ public class EventCommand extends Command {
     /**
      * Overrides execute method from the abstract class of Command.
      *
-     * @param tl       list of tasks.
-     * @param storage  harddisk store using textfile.
+     * @param tl      list of tasks.
+     * @param storage harddisk store using textfile.
      * @return String  returns the result of the command execution.
      */
     public String execute(TaskList tl, Storage storage) {
+        String res = "";
         Task task = new Event(activity, from, to);
-        tl.addTask(task);
-        String res = "Got it. I've added this duke.task:\n" + task
-                + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        if (tl.isTaskDuplicate(task)) {
+            res = "Task has already been added to the task list!";
+        } else {
+            tl.addTask(task);
+            res = "Got it. I've added this duke.task:\n" + task
+                    + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        }
         return res;
     }
 }

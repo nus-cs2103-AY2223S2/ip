@@ -18,7 +18,6 @@ public class TodoCommand extends Command {
      * @param cmd the command given by the user.
      */
     public TodoCommand(String cmd) {
-        System.out.println(cmd);
         String c = cmd.split(" ")[0];
         this.activity = cmd.substring(c.length() + 1);
     }
@@ -31,10 +30,15 @@ public class TodoCommand extends Command {
      * @return String  returns the result of the command execution.
      */
     public String execute(TaskList tl, Storage storage) {
+        String res = "";
         Task task = new Todo(this.activity);
-        tl.addTask(task);
-        String res = "Got it. I've added this duke.task:\n" + task
-                + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        if (tl.isTaskDuplicate(task)) {
+            res = "Task has already been added to the task list!";
+        } else {
+            tl.addTask(task);
+            res = "Got it. I've added this duke.task:\n" + task
+                    + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        }
         return res;
     }
 

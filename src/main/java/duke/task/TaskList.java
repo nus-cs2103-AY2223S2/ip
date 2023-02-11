@@ -22,8 +22,8 @@ public class TaskList {
     /**
      * This method returns the task based on the id.
      *
-     * @param i - index of the id.
-     * @return Task - Returns the task of given id.
+     * @param i index of the id.
+     * @return Task returns the task of given id.
      */
     public Task getTask(int i) {
         return this.tasklst.get(i);
@@ -33,8 +33,8 @@ public class TaskList {
     /**
      * This method removes and returns the task based on the selected id.
      *
-     * @param i - index of the id.
-     * @return Task - Returns the task of the given id being removed.
+     * @param i index of the id.
+     * @return Task returns the task of the given id being removed.
      */
     public Task removeTask(int i) {
         return this.tasklst.remove(i);
@@ -44,17 +44,17 @@ public class TaskList {
     /**
      * This method adds a new task to the current tasklist.
      *
-     * @param t - The given task.
+     * @param task the given task.
      */
-    public void addTask(Task t) {
-        this.tasklst.add(t);
+    public void addTask(Task task) {
+        this.tasklst.add(task);
     }
 
 
     /**
      * This method returns the size of tasks in the list.
      *
-     * @return int - Returns the size of the tasklist.
+     * @return int returns the size of the tasklist.
      */
     public int getSize() {
         return this.tasklst.size();
@@ -64,7 +64,7 @@ public class TaskList {
     /**
      * This method returns the tasklist in a string format.
      *
-     * @return String - Returns the output of the list of tasks.
+     * @return String returns the output of the list of tasks.
      */
     public String getTasksString() {
         String res = "";
@@ -76,11 +76,27 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * This method checks if the task is a duplicate.
+     *
+     * @param task the task that the user wants to add.
+     * @return boolean returns if the task had already been added to the list.
+     */
+    public boolean isTaskDuplicate(Task task) {
+        int indexOfDescription = 7;
+        for (Task t : this.tasklst) {
+            if (t.toString().substring(indexOfDescription).equals(task.toString().substring(indexOfDescription))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * This method returns the ArrayList of tasklist.
      *
-     * @return ArrayList<> - Returns the ArrayList of Tasks.
+     * @return ArrayList<> returns the ArrayList of Tasks.
      */
     public ArrayList<Task> getTasks() {
         return this.tasklst;
