@@ -13,12 +13,21 @@ public class Duke {
     static final HashMap<String, Integer> MINVALIDLENGTH = new HashMap<>(Map.of(
             "todo", 6,
             "deadline", 10,
-            "event", 7
+            "event", 7,
+            "mark", 6,
+            "unmark", 8,
+            "delete", 8
     ));
+    /**
+     * Correct formatting of commands given that the name of the command is correct
+     */
     static final HashMap<String, String> CORRECTFORMAT = new HashMap<>(Map.of(
             "todo", "todo THE TASK",
             "deadline", "deadline THE TASK /by TIME",
-            "event", "event THE TASK /from TIME /to TIME"
+            "event", "event THE TASK /from TIME /to TIME",
+            "mark", "mark NUMBER",
+            "unmark", "unmark NUMBER",
+            "delete", "delete NUMBER"
     ));
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -47,6 +56,9 @@ public class Duke {
                 break;
             case "unmark":
                 print(unmark(words[1], arr));
+                break;
+            case "delete":
+                print(delete(words[1], arr));
                 break;
             default:    // for tasks
                 print(add(cmd, arr));
@@ -112,6 +124,24 @@ public class Duke {
             int index = Integer.parseInt(num) - 1;
             arr.get(index).unmarkAsDone();
             return String.format("Ok, I've marked this task as not done yet: \n\t%s", arr.get(index));
+        } catch (NumberFormatException notANumber) {
+            return errorMsg("Please enter a valid number");
+        } catch (IndexOutOfBoundsException badNumber) {
+            return errorMsg(String.format(
+                    "Please enter a number from 1 to %d",
+                    arr.size()));
+        }
+    }
+    static String delete(String num, ArrayList<Task> arr) {
+        if (arr.size() == 0) {
+            return errorMsg("You do not have any items in your list!");
+        }
+        try {
+            int index = Integer.parseInt(num) - 1;
+            String taskDescription = arr.get(index).toString();
+            arr.remove(index);
+            return String.format("Noted, I've removed this task: \n\t%s\nNow you have %d tasks in this list.",
+                    taskDescription, arr.size());
         } catch (NumberFormatException notANumber) {
             return errorMsg("Please enter a valid number");
         } catch (IndexOutOfBoundsException badNumber) {
