@@ -38,63 +38,16 @@ public class Storage {
             try {
                 Scanner sn = new Scanner(f);
                 while (sn.hasNext()) {
-                    String data = sn.nextLine();
-                    String[] info = data.split("//");
-                    String type = info[0];
-                    String status = info[1];
-                    String description = info[2];
-
-                    if (type.equals("[T]")) {
-                        Task todo = new Todo(description);
-
-                        if (status.equals("X")) {
-                            todo.mark();
-                        }
-
-                        tasks.add(todo);
-
-                    } else if (type.equals("[D]")) {
-                        String dateString = info[3];
-                        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
-                        LocalDate date = LocalDate.parse(dateString, dateFormatter);
-
-                        Task deadline = new Deadline(description, date);
-
-                        if (status.equals("X")) {
-                            deadline.mark();
-                        }
-
-                        tasks.add(deadline);
-
-                    } else if (type.equals("[E]")) {
-                        String from = info[3];
-                        String to = info[4];
-
-                        Task event = new Event(description, from, to);
-
-                        if (status.equals("X")) {
-                            event.mark();
-                        }
-
-                        tasks.add(event);
-
-                    } else {
-                        throw new DukeException("Unknown task type found in storage file");
-                    }
+                   String data = sn.nextLine();
+                   Task taskToAdd = createTask(data);
+                   tasks.add(taskToAdd);
                 }
                 sn.close();
             } catch (FileNotFoundException e) {
                 System.out.println("File could not be found!");
             }
         } else {
-            try {
-                File data = new File("./data");
-                File d = new File(filePath);
-                data.mkdir();
-                d.createNewFile();
-            } catch (IOException d) {
-                System.out.println("Error creating file!");
-            }
+            createFile();
         }
         return tasks;
     }
@@ -114,6 +67,47 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Error writing data into file.");
         }
+    }
 
+    private void createFile() throws DukeException {
+        try {
+            File data = new File("./data");
+            File d = new File(filePath);
+            data.mkdir();
+            d.createNewFile();
+        } catch (IOException d) {
+            throw new DukeException("Error creating file!");
+        }
+    }
+
+    private Task createTask(String data) throws DukeException {
+        String[] info = data.split(Task.DIVIDER);
+        String type = info[0];
+        String status = info[1];
+        String description = info[2];
+        Task task;
+
+        switch (type) {
+        case "[T]":
+            task = new Todo(description);
+            break;
+        case "[D]":
+            String dateString = info[3];
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
+            LocalDate date = LocalDate.parse(dateString, dateFormatter);
+            task = new Deadline(description, date);
+            break;
+        case "[E]":
+            String from = info[3];
+            String to = info[4];
+            task = new Event(description, from, to);
+            break;
+        default:
+            throw new DukeException("Unknown task type found in storage file");
+        }
+        if (status.equals("X")) {
+            task.mark();
+        }
+        return task;
     }
 }

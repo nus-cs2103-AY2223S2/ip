@@ -41,6 +41,6 @@ public class Event extends Task {
     @Override
     public String toStorageData() {
         String completionStatus = getStatusIcon();
-        return TASK_TYPE + "//" + completionStatus + "//" + description + "//" + from + "//" + to;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description + DIVIDER + from + DIVIDER + to;
     }
 }

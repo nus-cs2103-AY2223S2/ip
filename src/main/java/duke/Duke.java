@@ -30,41 +30,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-    public Duke() {}
-
-    /**
-     * starts the Duke program
-     */
-//    public void run() {
-//        ui.greet();
-//        Scanner scn = new Scanner(System.in);
-//
-//        while (scn.hasNext()) {
-//            String userInput = scn.nextLine();
-//
-//            try {
-//                Parser.parse(userInput, tasks);
-//            } catch (DukeException e) {
-//                System.out.println(e.toString());
-//            }
-//
-//            try {
-//                storage.save(tasks);
-//            } catch (DukeException e) {
-//                System.out.println(e.toString());
-//            }
-//
-//            if (userInput.equals("bye")) {
-//                break;
-//            }
-//
-//        }
-//
-//        scn.close();
-//
-//    }
-
     public String getResponse(String input) {
         String response = "";
         if (!input.equals("bye")) {
@@ -83,7 +48,4 @@ public class Duke {
         }
         return response;
     }
-//    public static void main(String[] args) {
-//        new Duke("./data/duke.txt").run();
-//    }
 }

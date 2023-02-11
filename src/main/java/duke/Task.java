@@ -4,8 +4,10 @@ package duke;
  * class for a generic task
  */
 public class Task {
+    protected static final String DIVIDER = "/!@#$%^&*?/";
     protected String description;
     protected Boolean isDone;
+
 
     /**
      * creates a Task instance with the specified description

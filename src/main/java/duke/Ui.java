@@ -35,4 +35,8 @@ public class Ui {
         return msg;
     }
 
+    public String listCommandMessage() {
+        return "Here are the tasks in your list:\n";
+    }
+
 }

@@ -45,6 +45,6 @@ public class Deadline extends Task {
         String completionStatus = this.getStatusIcon();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
         String dateString = date.format(dateFormatter);
-        return TASK_TYPE + "//" + completionStatus + "//" + description + "//" + dateString;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description + DIVIDER + dateString;
     }
 }
