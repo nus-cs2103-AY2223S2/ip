@@ -26,8 +26,8 @@ public class DialogBox extends HBox{
         this.displayPic = displayPic;
 
         text.setWrapText(true);
-        displayPic.setFitWidth(100.0);
-        displayPic.setFitHeight(100.0);
+        displayPic.setFitWidth(80.0);
+        displayPic.setFitHeight(80.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPic);
@@ -37,6 +37,7 @@ public class DialogBox extends HBox{
      * Flips the dialog box horizontally.
      */
     private void flip() {
+        assert this.getAlignment().equals(Pos.TOP_LEFT);
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
