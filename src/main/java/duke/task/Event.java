@@ -5,13 +5,14 @@ import java.time.LocalDateTime;
 import duke.parser.Parser;
 
 /**
- * an Event is a task that has a starting time and an ending time
+ * An Event is a task that has a starting time and an ending time
  */
 public class Event extends Task {
     protected final LocalDateTime from;
     protected final LocalDateTime to;
 
     /**
+     * Constructor
      * @param name a string indicating thename of the duke.task.Event task
      * @param status a String that checks if the duke.task.Event is done or not
      * @param from a string representing the starting time passed in by the user
@@ -24,7 +25,7 @@ public class Event extends Task {
     }
 
     /**
-     * private method that helps with saving the Task status in binary numbers
+     * Helps with saving the Task status in binary numbers
      * @return 0 is the task is not done, 1 if the task is done.
      */
     private int getStatusNo() {
@@ -36,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * overrrides toString method: displayes type, then status, then name, then start time, then
+     * Overrides toString method: displayes type, then status, then name, then start time, then
      * ending time.
      */
     public String toString() {
@@ -45,7 +46,7 @@ public class Event extends Task {
     }
 
     /**
-     * method that helps with updating local tasks
+     * Helps with updating local tasks
      * @return a string to be written to the local hard disk
      */
     public String toStoreFormatString() {

@@ -16,10 +16,7 @@ public abstract class Command {
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
-    /**
-     * method that determines whether the user wants to exit the program.
-     * @return
-     */
+    /** determines whether the user wants to exit the program */
     public boolean isExit() {
         return false;
     }

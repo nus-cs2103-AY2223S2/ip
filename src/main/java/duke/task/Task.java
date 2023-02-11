@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * class that represents tasks created by the user, can be marked as done or undone
+ * Class that represents tasks created by the user, can be marked as done or undone
  */
 public class Task {
     protected String name;
@@ -22,22 +22,22 @@ public class Task {
     }
 
     /**
-     * method to update a task as done.
+     * Updates a task as done.
      */
     public void mark() {
         this.status = "[X]";
     }
 
     /**
-     * method to update a task as undone
+     * Updates a task as undone
      */
     public void unmark() {
         this.status = "[ ]";
     }
 
     /**
-     * a method that helps with updating local hard disk
-     * @return a Strnig to be written to the local hard disk
+     * Formats Task message to facilitate updating local tasks
+     * @return a String to be written to the local hard disk
      */
     public String toStoreFormatString() {
         return "";

@@ -13,11 +13,21 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Duke.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/ByeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/ByeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/DeleteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/FindCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/ListCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/MarkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/MarkCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/UnmarkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/UnmarkCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/commandtype/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/commandtype/CommandType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/dukeexception/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/dukeexception/DukeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/parser/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/storage/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/storage/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/ui/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/ui/Ui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Todo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

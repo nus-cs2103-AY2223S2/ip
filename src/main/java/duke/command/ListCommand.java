@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * on execution, print in style all tasks in the TaskList
+     * Prints in style all tasks in the TaskList
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks

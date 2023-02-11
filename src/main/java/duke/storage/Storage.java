@@ -16,7 +16,7 @@ import duke.tasklist.TaskList;
 
 
 /**
- * class that handles saving and reading tasks saved on the local hard disk
+ * Class that handles saving and reading tasks saved on the local hard disk
  */
 public class Storage {
     private File allTasks;
@@ -33,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * a method that loads the local tasks into the TaskList if they exist. prints customised
+     * Loads the local tasks into the TaskList if they exist. prints customised
      * messages if the file and/or folder does not exist, and create them accordingly
      * @return an empty ArrayList of Tasks if no local tasks are found, or an ArrayList
      *         containing all local tasks if they are found.
@@ -95,7 +95,7 @@ public class Storage {
     }
 
     /**
-     * method used to update the locally saved tasks according to the TaskList
+     * Updates the locally saved tasks according to the TaskList
      * @param tasks A TaskList represeting all temporary tasks
      * @throws IOException if there is error when updating the local task
      */

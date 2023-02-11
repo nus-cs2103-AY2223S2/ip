@@ -19,7 +19,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * on execution, mark the target Task in the TaskList as undone and print out customised message
+     * Marks the target Task in the TaskList as undone and print out customised message
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
