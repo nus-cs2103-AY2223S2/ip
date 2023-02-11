@@ -54,7 +54,6 @@ public class Parser {
 
                     } else {
                         throw new UnknownInputException("Hmm, I'm not sure what you're saying man.");
-
                     }
                 }
                 return new AddCommand(array[0], array[1], dukelist);
