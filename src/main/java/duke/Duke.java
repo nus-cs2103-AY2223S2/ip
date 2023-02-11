@@ -47,10 +47,6 @@ public class Duke {
             output = this.parser.parseInputs(input);
         } catch (DukeException e) {
             System.out.println(e);
-        } catch (NumberFormatException e) {
-            ui.showErrorMsg(input);
-        } catch (IndexOutOfBoundsException e) {
-            ui.showErrorMsg(tasks.getTasks().size());
         } finally {
             db.updateFile(tasks);
         }

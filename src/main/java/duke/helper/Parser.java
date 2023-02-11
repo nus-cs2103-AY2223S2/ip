@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateTimeException;
-import duke.exception.InvalidTaskException;
+import duke.exception.InvalidTaskCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -48,57 +48,25 @@ public class Parser {
         switch (type) {
         case "list":
             return tasks.outputList();
-
         case "mark":
-            return tasks.changeMarkStatus(true, inputs[1]);
-
+            return tasks.markCommand(true, inputs[1]);
         case "unmark":
-            return tasks.changeMarkStatus(false, inputs[1]);
-
+            return tasks.markCommand(false, inputs[1]);
         case "todo":
-            checkTaskDesc(inputs);
-            Task toDoTask = new ToDo(inputs[1], false);
-            tasks.addToTasks(toDoTask);
-            return ui.showTaskOutput(toDoTask, tasks.getTasks().size());
-
+            return toDoCommand(inputs);
         case "deadline":
-            checkTaskDesc(inputs);
-            String[] deadlineDesc = inputs[1].split(" /by ");
-
-            Task deadlineTask = new Deadline(deadlineDesc[0], handleDateTime(deadlineDesc[1]).toString());
-            tasks.addToTasks(deadlineTask);
-            return ui.showTaskOutput(deadlineTask, tasks.getSize());
-
+            return deadlineCommand(inputs);
         case "event":
-            checkTaskDesc(inputs);
-            String[] eventDesc = parseEventDesc(inputs[1]);
-
-            Task eventTask = new Event(eventDesc[0],
-                    handleDateTime(eventDesc[1]).toString(),
-                    handleDateTime(eventDesc[2]).toString());
-            tasks.addToTasks(eventTask);
-            return ui.showTaskOutput(eventTask, tasks.getSize());
-
+            return eventCommand(inputs);
         case "delete":
-            int taskNo = Integer.parseInt(inputs[1]);
-            return tasks.deleteTask(taskNo);
-
+            return deleteCommand(inputs[1]);
         case "find":
-            ArrayList<Task> taskList = tasks.getTasks();
-            ArrayList<Task> output = new ArrayList<>();
-            for (Task task : taskList) {
-                if (task.toString().contains(inputs[1])) {
-                    output.add(task);
-                }
-            }
-            return ui.filter(output);
-
+            return findCommand(inputs[1]);
         case "bye":
             Platform.exit();
             return ui.showExit();
-
         default:
-            throw new InvalidTaskException();
+            throw new InvalidTaskCommandException();
         }
     }
 
@@ -133,17 +101,55 @@ public class Parser {
         }
     }
 
+    public String toDoCommand(String[] inputs) throws DukeException {
+        checkTaskDesc(inputs);
+        Task toDoTask = new ToDo(inputs[1], false);
+        tasks.addToTasks(toDoTask);
+        return ui.showTaskOutput(toDoTask, tasks.getTasks().size());
+    }
+
+    public String deadlineCommand(String[] inputs) throws DukeException {
+        checkTaskDesc(inputs);
+        String[] deadlineDesc = inputs[1].split(" /by ");
+        Task deadlineTask = new Deadline(deadlineDesc[0], handleDateTime(deadlineDesc[1]).toString());
+        tasks.addToTasks(deadlineTask);
+        return ui.showTaskOutput(deadlineTask, tasks.getSize());
+    }
+
+
     /**
      * Split the event desc
      *
-     * @param desc the desc of an event task
+     * @param inputs the desc of an event task
      * @return a string array with all the parts of an event desc
      */
-    public static String[] parseEventDesc(String desc) {
+    public String eventCommand(String[] inputs) throws DukeException {
+        checkTaskDesc(inputs);
         String[] eventDesc = new String[3];
-        eventDesc[0] = desc.split(" /from ")[0];
-        eventDesc[1] = desc.split(" /from ")[1].split(" /to ")[0];
-        eventDesc[2] = desc.split(" /from ")[1].split(" /to ")[1];
-        return eventDesc;
+        eventDesc[0] = inputs[1].split(" /from ")[0];
+        eventDesc[1] = inputs[1].split(" /from ")[1].split(" /to ")[0];
+        eventDesc[2] = inputs[1].split(" /from ")[1].split(" /to ")[1];
+
+        Task eventTask = new Event(eventDesc[0],
+                handleDateTime(eventDesc[1]).toString(),
+                handleDateTime(eventDesc[2]).toString());
+        tasks.addToTasks(eventTask);
+        return ui.showTaskOutput(eventTask, tasks.getSize());
+    }
+
+    public String findCommand(String input) {
+        ArrayList<Task> taskList = tasks.getTasks();
+        ArrayList<Task> output = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.toString().contains(input)) {
+                output.add(task);
+            }
+        }
+        return ui.filter(output);
+    }
+
+    public String deleteCommand(String input) throws DukeException{
+        int taskNo = Integer.parseInt(input);
+        return tasks.deleteTask(taskNo);
     }
 }

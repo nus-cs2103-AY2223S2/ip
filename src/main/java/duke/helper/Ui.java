@@ -15,15 +15,6 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public static String showErrorMsg(String desc) {
-        return String.format("%s commands need to be followed by an integer!\n", desc.split(" ")[0]);
-    }
-
-    public static String showErrorMsg(int size) {
-        assert size >= 0 : "Size of TaskList should be zero or more";
-        return String.format("Sorry but there are only %d tasks stored!\n", size);
-    }
-
     /**
      * Prints the exit message and close the scanner
      */
