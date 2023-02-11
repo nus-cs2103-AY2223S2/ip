@@ -34,7 +34,9 @@ public class Parser {
      */
     public TaskList parse(TaskList tasks) throws DukeException {
         String input = sc.nextLine();
-        if (isBye(input)) {
+        if (isFind(input)) {
+            return find(input, tasks);
+        }else if (isBye(input)) {
             return bye(tasks);
         } else if (isList(input)) {
             Ui.listMessage(tasks);
@@ -65,6 +67,35 @@ public class Parser {
      */
     public boolean notDone() {
         return !parserIsDone;
+    }
+
+    /**
+     * Checks if the user input is a find command.
+     *
+     * @param input The input String.
+     * @return The boolean representing whether the user input is a find command.
+     */
+    public boolean isFind(String input) {
+        return input.length() >= 6 && input.startsWith("find ");
+    }
+
+    /**
+     * Searches for and prints out a list of tasks containing the queried term in a find command.
+     *
+     * @param input The input String.
+     * @param tasks The TaskList to be searched.
+     * @return The original TaskList unmodified.
+     */
+    public TaskList find(String input, TaskList tasks) {
+        String searchFor = input.substring(5);
+        TaskList found = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(searchFor)) {
+                found.add(tasks.get(i));
+            }
+        }
+        Ui.findMessage(searchFor, found);
+        return tasks;
     }
 
     /**

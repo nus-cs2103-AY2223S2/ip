@@ -27,6 +27,20 @@ public class Ui {
     }
 
     /**
+     * Prints the TaskList containing the queried term in a find command.
+     *
+     * @param searchFor The queried term.
+     * @param tasks The TaskList to be printed.
+     */
+    public static void findMessage(String searchFor, TaskList tasks) {
+        System.out.println("Here are the tasks in your list that contain [" + searchFor + "]:");
+        for (int i = 0; i < tasks.size(); i++) {
+            int j = i + 1;
+            System.out.println(j + "." + tasks.get(i).toString());
+        }
+    }
+
+    /**
      * Prints the marked task.
      *
      * @param task The task marked as done.
