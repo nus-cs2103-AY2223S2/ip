@@ -17,9 +17,9 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Instantiates a new Duke app.
+     * Instantiates a new Duke object.
      *
-     * @param filePath The path to the {@code duke.txt} file. The Duke app will save the user's tasks
+     * @param filePath The path to the {@code duke.txt} file. Duke will save the user's tasks
      *                 to {@code duke.txt} after every command, and load from it on startup.
      */
     public Duke(String filePath) {
@@ -36,9 +36,9 @@ public class Duke {
     }
 
     /**
-     * Driver code for the Duke app.
+     * Driver code for Duke.
      *
-     * @param args The command line arguments supplied to the Duke app.
+     * @param args The command line arguments supplied to Duke.
      */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
@@ -47,7 +47,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke app.
+     * Runs Duke.
      */
     public void run() {
         ui.showWelcomeMessage();
