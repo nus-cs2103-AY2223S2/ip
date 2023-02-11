@@ -9,7 +9,7 @@ import duke.task.Deadline;
  * The DeadlineCommand class encapsulates the variables and methods related to Deadline commands.
  */
 public class DeadlineCommand extends Command {
-    public static final String DEADLINE_COMMAND = "deadline";
+    private static final String DEADLINE_COMMAND = "deadline";
     private final Deadline deadline;
 
     /**

@@ -7,14 +7,14 @@ import duke.Ui;
  * The ByeCommand class encapsulates the variables and methods related to bye commands.
  */
 public class ByeCommand extends Command {
-    public static final String BYE_COMMAND = "bye";
+    private static final String BYE_COMMAND = "bye";
 
     public ByeCommand() {
         super(BYE_COMMAND);
     }
 
     @Override
-    public String execute(TaskList lst, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         return ui.showExit();
     }
 }

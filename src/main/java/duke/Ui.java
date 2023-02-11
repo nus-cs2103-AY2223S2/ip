@@ -22,27 +22,11 @@ public class Ui {
     }
 
     /**
-     * Reads user input.
-     * @return user input as a String.
-     */
-    public String readCommand() {
-        return input.nextLine();
-    }
-
-    /**
      * Prints a line.
      * @return LINE.
      */
     public String showLine() {
         return LINE + "\n";
-    }
-
-    /**
-     * Prints welcome message.
-     * @return String containing welcome message.
-     */
-    public String showWelcome() {
-        return showLine() + "Hello! I'm Luffy!\n" + "What can I do for you? :)" + "\n" + showLine();
     }
 
     /**
@@ -53,7 +37,6 @@ public class Ui {
     public String showError(String errorMsg) {
         return errorMsg + "\n";
     }
-
 
     /**
      * Prints exit message.
@@ -90,7 +73,6 @@ public class Ui {
         return showLine() + "Okay! I've marked this task as not done yet:\n"
                 + task.toString() + "\n" + showLine();
     }
-
 
     /**
      * Prints command message after delete command is successfully executed.

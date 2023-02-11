@@ -8,7 +8,7 @@ import duke.exception.DukeException;
  * The UnmarkCommand class encapsulates the variables and methods related to Unmark commands.
  */
 public class UnmarkCommand extends Command {
-    public static final String UNMARK_COMMAND = "unmark";
+    private static final String UNMARK_COMMAND = "unmark";
     private final int index;
 
     /**
@@ -21,8 +21,8 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList lst, Ui ui) throws DukeException {
-        lst.unmark(this.index);
-        return ui.showUnmarkedTask(lst.getTask(this.index));
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
+        taskList.unmark(this.index);
+        return ui.showUnmarkedTask(taskList.getTask(this.index));
     }
 }

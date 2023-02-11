@@ -9,7 +9,7 @@ import duke.exception.DukeException;
  * The MarkCommand class encapsulates the variables and methods related to Mark commands.
  */
 public class MarkCommand extends Command {
-    public static final String MARK_COMMAND = "mark";
+    private static final String MARK_COMMAND = "mark";
     private final int index;
 
     /**
@@ -22,8 +22,8 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList lst, Ui ui) throws DukeException {
-        lst.mark(this.index);
-        return ui.showMarkedTask(lst.getTask(this.index));
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
+        taskList.mark(this.index);
+        return ui.showMarkedTask(taskList.getTask(this.index));
     }
 }

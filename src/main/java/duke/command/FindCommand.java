@@ -9,7 +9,7 @@ import duke.exception.DukeException;
  * The FindCommand class encapsulates the variables and methods related to Find commands.
  */
 public class FindCommand extends Command {
-    public static final String FIND_COMMAND = "find";
+    private static final String FIND_COMMAND = "find";
     private final String keyword;
 
     /**
@@ -22,8 +22,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList lst, Ui ui) throws DukeException {
-        String response = lst.printMatchingList(this.keyword);
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
+        String response = taskList.printMatchingList(this.keyword);
         response += ui.showLine();
         return response;
     }

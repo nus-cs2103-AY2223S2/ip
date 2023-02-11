@@ -34,10 +34,6 @@ public abstract class Task {
         return this.taskName;
     }
 
-    public boolean isCompleted() {
-        return this.isCompleted;
-    }
-
     /**
      * Marks task as done or undone depending on status.
      * @param status
@@ -72,5 +68,4 @@ public abstract class Task {
         }
         return s;
     }
-
 }
