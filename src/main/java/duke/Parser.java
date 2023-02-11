@@ -16,6 +16,7 @@ public class Parser {
 
     protected String answer;
 
+    public Parser() {}
     /**
      * Constructor for Parser object.
      * @param answer Command user inputs.
@@ -68,10 +69,13 @@ public class Parser {
         if (answer.substring(7, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Delete cannot be empty");
         }
+
         int index = Integer.valueOf(answer.substring(7, answer.length()));
+
         if (index <= 0 || index > tasksLength) {
             throw new DukeInvalidIndexException("That index is out of bounds");
         }
+
         return index;
     }
 
@@ -82,10 +86,13 @@ public class Parser {
      * @throws DukeInvalidArgumentException If description input by user is empty.
      */
     public String getTodoDescription() throws DukeInvalidArgumentException {
+
         if (answer.substring(5, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Todo cannot be empty");
         }
-        return answer.substring(5, answer.length());
+
+        String description = answer.substring(5, answer.length());
+        return description;
     }
 
     /**
@@ -109,19 +116,10 @@ public class Parser {
         if (arr[1].isEmpty()) {
             throw new DukeInvalidArgumentException("No empty date allowed!");
         }
-        LocalDateTime by;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            by = LocalDateTime.parse(arr[1], formatter);
-        } catch (DateTimeParseException e) {
-            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
-                    + "please input task again");
-        }
 
         return arr;
 
     }
-
 
 
     /**
@@ -161,15 +159,6 @@ public class Parser {
 
         if (arr[1].isEmpty() || arr[2].isEmpty()) {
             throw new DukeInvalidArgumentException("No empty date allowed!");
-        }
-        LocalDateTime from, to;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            from = LocalDateTime.parse(arr[1], formatter);
-            to = LocalDateTime.parse(arr[2], formatter);
-        } catch (DateTimeParseException e) {
-            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
-                    + "please input task again");
         }
 
         return arr;

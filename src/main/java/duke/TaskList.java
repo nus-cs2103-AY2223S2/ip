@@ -3,11 +3,13 @@ package duke;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeTaskNotFoundException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
 
 
 /**
@@ -17,7 +19,7 @@ import duke.task.Todo;
 public class TaskList {
 
     protected ArrayList<Task> arrayList;
-
+    protected Parser parser = new Parser();
     /**
      * Constructor for TaskList.
      * @param arrayList ArrayList to be wrapped around TaskList.
@@ -96,9 +98,9 @@ public class TaskList {
      * @param by Date when deadline is due.
      * @return Added task.
      */
-    public Task addDeadline(String description, LocalDateTime by) {
-
-        Task t = new Deadline(description, by);
+    public Task addDeadline(String description, String by) throws DukeInvalidArgumentException {
+        LocalDateTime byAsLDT = parser.getAsLocalDate(by);
+        Task t = new Deadline(description, byAsLDT);
         arrayList.add(t);
         return t;
     }
@@ -110,9 +112,10 @@ public class TaskList {
      * @param to Date when event ends.
      * @return Added task.
      */
-    public Task addEvent(String description, LocalDateTime from, LocalDateTime to) {
-
-        Task t = new Event(description, from, to);
+    public Task addEvent(String description, String from, String to) throws DukeInvalidArgumentException {
+        LocalDateTime fromAsLDT = parser.getAsLocalDate(from);
+        LocalDateTime toAsLDT = parser.getAsLocalDate(to);
+        Task t = new Event(description, fromAsLDT, toAsLDT);
         arrayList.add(t);
         return t;
     }

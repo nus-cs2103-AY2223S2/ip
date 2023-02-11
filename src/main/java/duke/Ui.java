@@ -106,4 +106,13 @@ public class Ui {
     public void askTo() {
         System.out.println("To?");
     }
+
+    /**
+     * Returns string when user wants to find tasks with keyword in task list.
+     * @param tasks The task list.
+     * @return String Message to reply to user.
+     */
+    public String showFind(TaskList tasks) {
+        return "Here are the tasks with the keyword: \n" + tasks;
+    }
 }

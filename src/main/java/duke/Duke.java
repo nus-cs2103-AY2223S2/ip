@@ -2,7 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDateTime;
+
 
 import javafx.scene.image.Image;
 
@@ -61,8 +61,9 @@ public class Duke  {
             if (answer.startsWith("find ")) {
                 String keyword = parser.getFindKeyword();
                 assert !keyword.isEmpty() : "find keyword should not be empty";
-                tasks.find(keyword);
-                return tasks.find(keyword).toString();
+                return ui.showFind(tasks.find(keyword));
+
+
             }
             if (answer.startsWith("mark ")) {
                 Integer index = parser.getMarkIndex(length);
@@ -86,19 +87,24 @@ public class Duke  {
             }
             if (answer.startsWith("deadline ")) {
                 String[] descriptionList = parser.getDeadlineDescription();
+
+                return ui.showAddTask(tasks.addDeadline(descriptionList[0], descriptionList[1]));
+            }
+            if (answer.startsWith("event ")) {
+                String[] descriptionList = parser.getEventDescription();
+
                 assert !descriptionList[0].isEmpty() && !descriptionList[1].isEmpty()
                         : "description should not be empty";
-                LocalDateTime by = parser.getAsLocalDate(descriptionList[1]);
+                return ui.showAddTask(tasks.addEvent(descriptionList[0], descriptionList[1], descriptionList[2]));
 
-                return ui.showAddTask(tasks.addDeadline(descriptionList[0], by));
             }
             if (answer.startsWith("event ")) {
                 String[] descriptionList = parser.getEventDescription();
                 assert !descriptionList[0].isEmpty() && !descriptionList[1].isEmpty()
                         : "description should not be empty";
-                LocalDateTime from = parser.getAsLocalDate(descriptionList[1]);
-                LocalDateTime to = parser.getAsLocalDate(descriptionList[2]);
-                return ui.showAddTask(tasks.addEvent(descriptionList[0], from, to));
+
+                return ui.showAddTask(tasks.addEvent(descriptionList[0], descriptionList[1], descriptionList[2]));
+
 
             }
 
