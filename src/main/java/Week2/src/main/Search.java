@@ -19,7 +19,7 @@ public class Search {
      * @return the list of tasks that contain the keyword
      */
     public static String find(String key) {
-        for(int i=0; i<tl.size(); i++) {
+        for(int i = 0; i<tl.length(); i++) {
             Task curr = (Task) tl.get(i);
             if(curr.getContent().contains(key)) {
                 indexlist.add(i);

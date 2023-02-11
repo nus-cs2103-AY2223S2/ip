@@ -24,7 +24,6 @@ import javafx.scene.image.ImageView;
 public class Duke extends Application {
 
     private static Storage storage;
-    private Ui ui;
     static boolean isBye = false;
 
     private ScrollPane scrollPane;
@@ -36,6 +35,7 @@ public class Duke extends Application {
     private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     static TaskList tasklist = new TaskList();
+    //assert tasklist.length() < 100 : "Task list is too long";
     static FileWriter fw;
 
     static {
@@ -67,11 +67,6 @@ public class Duke extends Application {
         storage = new Storage("/saves/data.txt");
         Ui ui = new Ui();
         try {
-
-            //this.tasklist = new TaskList(storage.load());
-
-            //tasklist = new TaskList(storage.load());
-
             ui.hello();
             Parser parser = new Parser(tasklist);
             if (!isBye) {
@@ -86,7 +81,6 @@ public class Duke extends Application {
         } catch (Exception e) {
             return ui.showLoadingError();
         }
-
     }
 
     /**
@@ -99,7 +93,6 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
     /**
