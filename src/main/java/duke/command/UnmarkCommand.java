@@ -26,6 +26,7 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        assert taskList != null;
         return taskList.unmarkTask(this.taskNumber);
     }
 

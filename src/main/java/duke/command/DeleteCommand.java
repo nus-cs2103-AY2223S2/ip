@@ -26,6 +26,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        assert taskList != null;
+
         return taskList.deleteTask(this.taskNumber);
     }
 

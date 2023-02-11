@@ -14,6 +14,8 @@ public abstract class Task {
     protected boolean isDone;
 
     protected Task(String description) {
+        assert description != null;
+
         this.description = description;
         this.isDone = false;
     }
@@ -25,6 +27,8 @@ public abstract class Task {
      * @return The Task object corresponding to the String representation in the text file.
      */
     public static Task getTaskFromString(String task) {
+        assert task.contains("~");
+
         String[] taskParts = task.split("~");
         String taskType = taskParts[0];
         String marked = taskParts[1];
@@ -38,7 +42,7 @@ public abstract class Task {
         } else if (taskType.equals("D")) {
             answer = new Deadline(description, LocalDateTime.parse(taskParts[3]));
 
-        } else if (taskType.equals("E")) {
+        } else {
             answer = new Event(description,
                     LocalDateTime.parse(taskParts[3]),
                     LocalDateTime.parse(taskParts[4]));
@@ -61,6 +65,8 @@ public abstract class Task {
      * @return The formatted String representation of the LocalDateTime object.
      */
     public static String getDateTimeString(LocalDateTime dateTime) {
+        assert dateTime != null;
+
         DateTimeFormatter formatToPrint = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         return dateTime.format(formatToPrint);
 
