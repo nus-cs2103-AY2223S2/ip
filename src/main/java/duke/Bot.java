@@ -1,5 +1,7 @@
 package duke;
 
+import duke.loan.LoanShark;
+import duke.query.loan.LoanQueryHandler;
 import duke.query.task.DeadlineQueryHandler;
 import duke.query.task.DeleteQueryHandler;
 import duke.query.task.EventQueryHandler;
@@ -26,6 +28,7 @@ public class Bot {
     private static final String UNKNOWN_COMMAND_RES = "Your command is not of the known tongue!";
 
     private final TaskTracker tt = new TaskTracker();
+    private final LoanShark ls = new LoanShark();
 
     /**
      * Initializes the bot.
@@ -89,6 +92,8 @@ public class Bot {
             return new UnmarkQueryHandler(tt);
         case DELETE:
             return new DeleteQueryHandler(tt);
+        case LOAN:
+            return new LoanQueryHandler(ls);
         case EXIT:
             return new SimpleResponseQueryHandler(GOODBYE_RES);
         default:

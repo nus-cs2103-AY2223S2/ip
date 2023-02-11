@@ -13,6 +13,7 @@ public class QueryTypeUtil {
     private static final String DEADLINE_QUERY_TYPE = "deadline";
     private static final String EVENT_QUERY_TYPE = "event";
     private static final String FIND_QUERY_TYPE = "find";
+    private static final String LOAN_QUERY_TYPE = "loan";
 
     /**
      * @param queryTypeStr string that represents a query type
@@ -38,6 +39,8 @@ public class QueryTypeUtil {
             return QueryType.FIND;
         case BYE_QUERY_TYPE:
             return QueryType.EXIT;
+        case LOAN_QUERY_TYPE:
+            return QueryType.LOAN;
         default:
             return QueryType.UNKNOWN;
         }
