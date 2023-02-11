@@ -8,11 +8,17 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
-import duke.ui.Ui;
+import duke.ui.UiPrinter;
 
 public class GuiDriver {
     private static TaskList taskList = Storage.readTaskList();
 
+    /**
+     * Processes the input string and return its response.
+     * 
+     * @param inputString
+     * @return
+     */
     public static String getResponse(String inputString) {
         try {
             DukeCommand command = DukeParser.parseCommand(inputString);
@@ -25,17 +31,17 @@ public class GuiDriver {
             case BYE:
                 return "Bye. Hope to see you again soon!";
 
-            // Find command
+            // Process find commands
             case FIND:
                 return processFindCommand(commandArgs);
 
-            // Task Creation commands
+            // Process task-creation commands
             case DEADLINE:
             case EVENT:
             case TODO:
                 return processTaskCreationCommand(command, commandArgs);
 
-            // Index-based commands
+            // Process index-based commands
             case MARK:
             case UNMARK:
             case DELETE:
@@ -51,14 +57,14 @@ public class GuiDriver {
 
 
     private static String processListCommand(TaskList taskList) {
-        String taskStringList = taskList.toString();
+        String taskStringList = UiPrinter.addLineBreak("Here are your tasks:", taskList.toString());
         return taskStringList;
     }
 
     private static String processFindCommand(String[] commandArgs) {
         String keyword = commandArgs[0];
 
-        return Ui.getPrettyString("Here are the matching tasks in your list:",
+        return UiPrinter.addLineBreak("Here are the matching tasks in your list:",
                 taskList.find(keyword).toString());
     }
 
@@ -104,7 +110,7 @@ public class GuiDriver {
         taskList.addTask(task);
         int numTasks = taskList.getNumTasks();
 
-        return Ui.getAddTaskString(task, numTasks);
+        return UiPrinter.getTaskCreationMessage(task, numTasks);
     }
 
     private static String processEventCommand(String[] commandArgs) {
@@ -116,7 +122,7 @@ public class GuiDriver {
         taskList.addTask(event);
         int numTasks = taskList.getNumTasks();
 
-        return Ui.getAddTaskString(event, numTasks);
+        return UiPrinter.getTaskCreationMessage(event, numTasks);
     }
 
     private static String processDeadlineCommand(String[] commandArgs) {
@@ -125,14 +131,14 @@ public class GuiDriver {
         Deadline deadline = new Deadline(description, by);
         taskList.addTask(deadline);
         int numTasks = taskList.getNumTasks();
-        return Ui.getAddTaskString(deadline, numTasks);
+        return UiPrinter.getTaskCreationMessage(deadline, numTasks);
     }
 
     // Index-based helper functions
     private static String processMarkCommand(String[] commandArgs) {
         try {
             int taskIndex = Integer.parseInt(commandArgs[0]);
-            return Ui.getPrettyString("Nice! I've marked this task as done:",
+            return UiPrinter.addLineBreak("Nice! I've marked this task as done:",
                     taskList.markTask(taskIndex));
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return "Please input numerals as your index!";
@@ -142,7 +148,7 @@ public class GuiDriver {
     private static String processUnmarkCommand(String[] commandArgs) {
         try {
             int taskIndex = Integer.parseInt(commandArgs[0]);
-            return Ui.getPrettyString("OK, I've marked this task as not done yet:",
+            return UiPrinter.addLineBreak("OK, I've marked this task as not done yet:",
                     taskList.unmarkTask(taskIndex));
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return "Please input numerals as your index!";
@@ -152,7 +158,7 @@ public class GuiDriver {
     private static String processDeleteCommand(String[] commandArgs) {
         try {
             int taskIndex = Integer.parseInt(commandArgs[0]);
-            return Ui.getPrettyString("Noted. I've removed this task:",
+            return UiPrinter.addLineBreak("Noted. I've removed this task:",
                     taskList.deleteTask(taskIndex));
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return "Please input numerals as your index!";
