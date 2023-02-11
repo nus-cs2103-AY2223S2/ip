@@ -15,7 +15,7 @@ public class Ui {
     /**
      * Prints out the initial duke greeting when the program first runs.
      */
-    public String dukeGreeting() {
+    public static String dukeGreeting() {
         String greeting = "";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
