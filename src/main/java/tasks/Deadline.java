@@ -1,32 +1,31 @@
-package Tasks;
+package tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Event extends Task {
-
-    protected String start;
-    protected String end;
+public class Deadline extends Task {
+    protected String deadline;
 
     protected LocalDate date;
     protected LocalTime time = null;
-    public Event(String description, String start, String end) {
+
+    public Deadline(String description, String deadline) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.deadline = deadline;
+        handleDateAndTime();
     }
 
     public void handleDateAndTime() {
-        if (end.contains(" ")) {
-            LocalDate newDate = LocalDate.parse(end.split(" ")[0]);
-            LocalTime newTime = LocalTime.parse(end.split(" ")[1]);
+        if (deadline.contains(" ")) {
+            LocalDate newDate = LocalDate.parse(deadline.split(" ")[0]);
+            LocalTime newTime = LocalTime.parse(deadline.split(" ")[1]);
             this.date = newDate;
             this.time = newTime;
         }
         else {
-            LocalDate newDate = LocalDate.parse(end);
+            LocalDate newDate = LocalDate.parse(deadline);
             this.date = newDate;
         }
     }
@@ -39,10 +38,8 @@ public class Event extends Task {
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + Integer.toString(time.getHour()) + Integer.toString(time.getMinute());
         }
     }
-
-
     @Override
     public String toString() {
-        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + start + " to: " + end + ") ";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + deadline + ")";
     }
 }

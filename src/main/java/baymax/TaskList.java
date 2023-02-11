@@ -1,6 +1,6 @@
-package Baymax;
+package baymax;
 
-import Tasks.Task;
+import tasks.Task;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,6 @@ public class TaskList {
     }
 
     public void updateList(ArrayList<Task> newList) {
-
         this.taskList = newList;
     }
 
