@@ -4,3 +4,5 @@ T|F| print my books
 T|F| I wanna go home
 D|F| return book (by:Dec 2 2021 0800pm)
 T|F| go toilet
+T|F| go toilet
+T|F| hello
