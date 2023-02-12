@@ -8,7 +8,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -32,6 +31,7 @@ public class Gui extends Application implements Ui {
     private static final double BUTTON_WIDTH = 55.0;
     private static final double USER_INP_WIDTH = WIN_WIDTH - BUTTON_WIDTH;
     private static final double SCROLL_WIDTH = 15.0;
+    private static final double PADDING = 10.0;
     private static final double OFFSET = 1.0;
     private static final String TITLE = "D";
     private static final boolean IS_RESIZABLE = false;
@@ -97,6 +97,7 @@ public class Gui extends Application implements Ui {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         dialogueContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogueContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(OFFSET));
+        dialogueContainer.setSpacing(PADDING);
 
         // User Input Box formatting
         userInput.setPrefHeight(USER_INP_HEIGHT);
@@ -130,17 +131,17 @@ public class Gui extends Application implements Ui {
     }
 
     /**
-     * Creates label with specified text.
-     * 
-     * @param text String containing text to add.
-     * @return Label with specified text (word wrapped)
+     * Tries to save taskList if window is closed without "bye" command.
      */
-    private Label getDialogueLabel(String text) {
-        Label label = new Label(text);
-        label.setWrapText(true);
-        return label;
+    @Override
+    public void stop() {
+        storage.save(taskList);
     }
 
+    /**
+     * Obtains user input, creates appropriate command which is executed.
+     * User input added to the dialogueContainer as a DialogueBox.
+     */
     private void handleUserInput() {
         String userText = userInput.getText();
         if (userText.isEmpty()) {
