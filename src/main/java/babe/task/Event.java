@@ -24,7 +24,7 @@ public class Event extends Task {
      * @param toDate   The end date/time for this <code>Event</code>.
      */
     public Event(String content, String fromDate, String toDate) {
-        super(content);
+        super(content, "E");
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
@@ -36,7 +36,8 @@ public class Event extends Task {
      * @return A String that represents the <code>Event</code> item, including its description and done status.
      */
     public String toString() {
-        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
+        return String.format("[%s] ", this.letterType)
+                + (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
                 + " (from: " + this.fromDate + ", to: " + this.toDate + ")";
     }
 

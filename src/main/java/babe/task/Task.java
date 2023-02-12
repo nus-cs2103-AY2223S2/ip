@@ -26,12 +26,18 @@ public abstract class Task {
     String description = "";
 
     /**
+     * Letter type of this Task.
+     */
+    String letterType = "";
+
+    /**
      * Constructor for <code>Task</code>s
      *
      * @param content A String that is the description of this item.
      */
-    public Task(String content) {
+    public Task(String content, String letterType) {
         this.description = content;
+        this.letterType = letterType;
     }
 
     @Override
@@ -43,14 +49,14 @@ public abstract class Task {
     public abstract String toString();
 
     /**
-     * Mark the <code>Task</code> as Done.
+     * Marks the <code>Task</code> as Done.
      */
     public void mark() {
         isDone = true;
     }
 
     /**
-     * Mark the <code>Task</code> as Undone.
+     * Marks the <code>Task</code> as Undone.
      */
     public void unmark() {
         isDone = false;
