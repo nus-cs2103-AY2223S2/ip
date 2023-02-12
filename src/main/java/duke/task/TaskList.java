@@ -56,6 +56,7 @@ public class TaskList {
      */
     public Task execute(Command command) {
         Task task = null;
+        int index;
         switch (command.getName()) {
         case TODO:
             task = new Todo(
@@ -76,21 +77,29 @@ public class TaskList {
             addTask(task);
             break;
         case MARK:
-            task = tasks.get(Integer.parseInt(command.getArgumentValue(
-                    Command.Argument.MARK)));
+            index = Integer.parseInt(command.getArgumentValue(
+                    Command.Argument.MARK));
+            task = getTask(index);
             task.toggleDone();
             break;
         case DELETE:
-            task = tasks.get(Integer.parseInt(
-                    command.getArgumentValue(Command.Argument.DELETE)));
+            index = Integer.parseInt(
+                    command.getArgumentValue(Command.Argument.DELETE));
+            task = getTask(index);
             tasks.remove(task);
             break;
         default:
             assert false : "Unhandled command: " + command;
         }
+        assert task != null : "task not assigned";
         return task;
     }
 
+    /**
+     * Adds a task that does not already exist in the task list.
+     *
+     * @param task Task to add.
+     */
     private void addTask(Task task) {
         if (tasks.contains(task)) {
             throw new IllegalStateException("Task " + task
@@ -98,6 +107,20 @@ public class TaskList {
         } else {
             tasks.add(task);
         }
+    }
+
+    /**
+     * Retrieves a task based on its index in the task list.
+     *
+     * @param index Index of the task.
+     * @return task at the particular index.
+     */
+    private Task getTask(int index) {
+        if (index < 0 || index >= tasks.size()) {
+            throw new IllegalArgumentException("index " + index
+                    + " does not exist for task list with " + tasks.size() + " items");
+        }
+        return tasks.get(index);
     }
 
     /**
