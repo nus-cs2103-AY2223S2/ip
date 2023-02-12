@@ -25,6 +25,15 @@ public class CommandFind extends Command {
 
     @Override
     public String execute() throws DukeException {
-        return Ui.getAllTaskFoundMessageWithAttitude(this.taskList.findTaskWith(this.phrase));
+        String foundTasks = this.findAllTaskContaining(this.phrase);
+        return this.format(foundTasks);
+    }
+
+    private String findAllTaskContaining(String phrase) {
+        return this.taskList.findTaskWith(phrase);
+    }
+
+    private String format(String foundTasks) {
+        return Ui.getAllTaskFoundMessageWithAttitude(foundTasks);
     }
 }
