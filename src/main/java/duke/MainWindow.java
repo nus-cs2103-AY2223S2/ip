@@ -42,7 +42,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        System.out.println("Running 8");
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -54,7 +53,6 @@ public class MainWindow extends AnchorPane {
 
     //@FXML
     public void greet() {
-        System.out.println("Running 11");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("hello", dukeImage)
         );
