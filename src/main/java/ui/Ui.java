@@ -45,6 +45,7 @@ public class Ui {
      * @return String message about task
      */
     public String addTaskMsg(Task task, int count){
+        assert count > - 1 : "Number of tasks cannot be negative";
         return "Got it, I have added this task:\n" + task.toString() + "\n" +
                 "Now you have " + count + " tasks in the list.";
     }
@@ -58,6 +59,7 @@ public class Ui {
     }
 
     public String deleteTaskMsg(Task task, int count){
+        assert count > -1 : "Number of tasks cannot be negative";
         return "Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have " + count + " tasks in the list";
     }

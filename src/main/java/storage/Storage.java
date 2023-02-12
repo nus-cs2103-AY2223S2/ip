@@ -32,11 +32,9 @@ public class Storage {
             f.mkdir();
         }
 
-        //if file exists
         File f1 = new File(tasksFile);
         if (f1.exists()) {
-            try{
-                //load existing values into stringTaskList
+            try {
                 List<String> fileContent = new ArrayList<>(Files.readAllLines(tfPath, StandardCharsets.UTF_8));
                 for (int i = 0; i < fileContent.size(); i++) {
                     stringTaskList.add(fileContent.get(i));
@@ -59,7 +57,7 @@ public class Storage {
      */
     public void updateFile(TaskList taskList){
         try{
-            //generate string array of all tasks
+            //generate string array of all tasks in TaskList
             ArrayList<String> stringTaskList = new ArrayList<>();
             for (Task task: taskList){
                 stringTaskList.add(task.toFileString());
