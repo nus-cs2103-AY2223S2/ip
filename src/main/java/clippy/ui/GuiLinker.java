@@ -25,6 +25,7 @@ public class GuiLinker extends Application {
             MainWindow gui = fxmlLoader.<MainWindow>getController();
             clippy = new Clippy(gui);
             gui.setClippy(clippy);
+            stage.setTitle("Clippy");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
