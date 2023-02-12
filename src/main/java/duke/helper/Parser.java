@@ -62,9 +62,10 @@ public class Parser {
             return tasks.deleteTask(inputs[1]);
         case "find":
             return findCommand(inputs[1]);
+        case "help":
+            return helpCommand(inputs[1]);
         case "bye":
             Platform.exit();
-            return ui.showExit();
         default:
             throw new InvalidTaskCommandException();
         }
@@ -146,5 +147,9 @@ public class Parser {
             }
         }
         return ui.filter(output);
+    }
+
+    public String helpCommand(String input) throws DukeException {
+        return ui.showHelpMessage(input);
     }
 }
