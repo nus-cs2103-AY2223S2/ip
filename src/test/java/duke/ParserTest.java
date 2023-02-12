@@ -43,7 +43,7 @@ public class ParserTest {
     @Test
     public void testHandleTaskFail() {
         try {
-            Parser.handleTask("ASDF");
+            Parser.handleTaskInput("ASDF");
         } catch (DukeException e) {
             // Check if duke message is expected
             String expected = Views.UNKNOWN_CMD_ERR_STRING.str();
@@ -58,31 +58,31 @@ public class ParserTest {
     @Test
     public void testHandleTask() throws DukeException {
         String[] todoExpected = { " title", null, null };
-        String[] todo = Parser.handleTask("todo title");
+        String[] todo = Parser.handleTaskInput("todo title");
         Assertions.assertArrayEquals(todoExpected, todo);
 
         String[] deadlineExpected = { " title ", "/by tmr", null };
-        String[] deadline = Parser.handleTask("deadline title /by tmr");
+        String[] deadline = Parser.handleTaskInput("deadline title /by tmr");
         Assertions.assertArrayEquals(deadlineExpected, deadline);
 
         String[] eventExpected = { " test ", "/from today ", "/to tmr" };
-        String[] event = Parser.handleTask("event test /from today /to tmr");
+        String[] event = Parser.handleTaskInput("event test /from today /to tmr");
         Assertions.assertArrayEquals(eventExpected, event);
     }
 
     @Test
-    public void testSubtractIntFail() throws DukeException {
+    public void testSubtractIntFail() {
         try {
             Parser.parse("mark 0");
-        } catch (AssertionError e) {
+        } catch (DukeException e) {
             // Check if assert message is expected
             String expected = Views.OUT_RANGE_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
         }
-        // If the code above didn't throw an AssertionError, this line will be reached
-        fail("Expected an AssertionError to be thrown");
+        // If the code above didn't throw an DukeException, this line will be reached
+        fail("Expected an DukeException to be thrown");
     }
 
     @Test

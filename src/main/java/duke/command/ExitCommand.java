@@ -16,7 +16,7 @@ public class ExitCommand extends Command {
      * @param storage object required when command writes to file
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showEnd();
+        Ui.showEnd();
         storage.save(tasks);
     }
 
@@ -30,7 +30,7 @@ public class ExitCommand extends Command {
      */
     public String executeString(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks);
-        return ui.stringEnd();
+        return Ui.stringEnd();
     }
 
     /**

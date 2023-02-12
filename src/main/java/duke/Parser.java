@@ -53,20 +53,14 @@ public class Parser {
                 int[] taskNumbers = subtractInt(getNumbers(input), 1);
                 return new UnmarkCommand(taskNumbers);
             } else if (input.startsWith(Commands.TODO.cmd())) {
-                String[] parsed = handleTask(input);
-                String title = parsed[0];
-                return new TodoCommand(title);
+                String[] parsed = handleTaskInput(input);
+                return new TodoCommand(parsed);
             } else if (input.startsWith(Commands.DEADLINE.cmd())) {
-                String[] parsed = handleTask(input);
-                String title = parsed[0];
-                String deadline = parsed[1];
-                return new DeadlineCommand(title, deadline);
+                String[] parsed = handleTaskInput(input);
+                return new DeadlineCommand(parsed);
             } else if (input.startsWith(Commands.EVENT.cmd())) {
-                String[] parsed = handleTask(input);
-                String title = parsed[0];
-                String from = parsed[1];
-                String to = parsed[2];
-                return new EventCommand(title, from, to);
+                String[] parsed = handleTaskInput(input);
+                return new EventCommand(parsed);
             } else if (input.startsWith(Commands.DEL.cmd())) {
                 int[] taskNumbers = subtractInt(getNumbers(input), 1);
                 return new DeleteCommand(taskNumbers);
@@ -79,7 +73,7 @@ public class Parser {
                 String query = input.substring(Commands.HELP.len());
                 return new HelpCommand(query);
             } else {
-                throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.str());
+                throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING);
             }
         }
     }
@@ -92,31 +86,73 @@ public class Parser {
      * @return String[] to be added todo deadline and event objects/command
      * @throws DukeException
      */
-    public static String[] handleTask(String input) throws DukeException {
+    public static String[] handleTaskInput(String input) throws DukeException {
         String[] returnString = new String[3];
         String title;
         if (input.startsWith(Commands.TODO.cmd())) {
+            if (!isValidTaskInput(input, Commands.TODO)) {
+                throw new DukeException(Views.MISSING_ARGS_ERR_STRING);
+            }
             title = input.substring(Commands.TODO.len());
         } else if (input.startsWith(Commands.DEADLINE.cmd())) {
+            if (!isValidTaskInput(input, Commands.DEADLINE)) {
+                throw new DukeException(Views.MISSING_ARGS_ERR_STRING);
+            }
             int indexOfBy = input.indexOf(Commands.BY.cmd());
             assert indexOfBy != -1 : Views.MISSING_ARGS_ERR_STRING.str();
             title = input.substring(Commands.DEADLINE.len(), indexOfBy);
             String deadline = input.substring(indexOfBy);
             returnString[1] = deadline;
         } else if (input.startsWith(Commands.EVENT.cmd())) {
+            if (!isValidTaskInput(input, Commands.EVENT)) {
+                throw new DukeException(Views.MISSING_ARGS_ERR_STRING);
+            }
             int indexOfFrom = input.indexOf(Commands.FROM.cmd());
             int indexOfTo = input.indexOf(Commands.TO.cmd());
-            assert indexOfFrom != -1 && indexOfFrom != -1 : Views.MISSING_ARGS_ERR_STRING.str();
+            assert indexOfFrom != -1 && indexOfTo != -1 : Views.MISSING_ARGS_ERR_STRING.str();
             title = input.substring(Commands.EVENT.len(), indexOfFrom);
             String from = input.substring(indexOfFrom, indexOfTo);
             String to = input.substring(indexOfTo);
             returnString[1] = from;
             returnString[2] = to;
         } else {
-            throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.str());
+            throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING);
         }
         returnString[0] = title;
         return returnString;
+    }
+
+    /**
+     * Centralised checker to validate input string.
+     *
+     * @param input
+     * @param command to match input requirement
+     * @return boolean if the task input string is valid
+     * @throws DukeException
+     */
+    public static boolean isValidTaskInput(String input, Commands command) throws DukeException {
+        switch (command) {
+        case TODO:
+            return true;
+        case DEADLINE:
+            int indexOfBy = input.indexOf(Commands.BY.cmd());
+            if (indexOfBy == -1) {
+                return false;
+            }
+            assert indexOfBy != -1 : Views.MISSING_ARGS_ERR_STRING.str();
+            return true;
+        case EVENT:
+            int indexOfFrom = input.indexOf(Commands.FROM.cmd());
+            int indexOfTo = input.indexOf(Commands.TO.cmd());
+            if (indexOfFrom == -1 || indexOfTo == -1) {
+                return false;
+            }
+            assert indexOfFrom != -1 && indexOfTo != -1 : Views.MISSING_ARGS_ERR_STRING.str();
+            return true;
+        default:
+            // Should not reach this case
+            throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING);
+        }
     }
 
     /**
@@ -134,7 +170,7 @@ public class Parser {
             int number = Integer.parseInt(numberString);
             return number;
         } else {
-            throw new DukeException(Views.NO_INT_ERR_STRING.str());
+            throw new DukeException(Views.NO_INT_ERR_STRING);
         }
     }
 
@@ -164,14 +200,17 @@ public class Parser {
             Arrays.sort(converted);
             return converted;
         } else {
-            throw new DukeException(Views.NO_INT_ERR_STRING.str());
+            throw new DukeException(Views.NO_INT_ERR_STRING);
         }
     }
 
-    private static int[] subtractInt(int[] input, int subtractAmt) {
+    private static int[] subtractInt(int[] input, int subtractAmt) throws DukeException {
         int[] results = new int[input.length];
         for (int i = 0; i < input.length; i++) {
             int subtracted = input[i] - subtractAmt;
+            if (subtracted < 0) {
+                throw new DukeException(Views.OUT_RANGE_ERR_STRING);
+            }
             assert subtracted >= 0 : Views.OUT_RANGE_ERR_STRING.str();
             results[i] = subtracted;
         }

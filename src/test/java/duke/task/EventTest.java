@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
+import duke.enums.Views;
 
 public class EventTest {
     @Test
@@ -27,15 +28,15 @@ public class EventTest {
     public void testEventTitleFail() throws DukeException {
         try {
             new Event("", "", "");
-        } catch (AssertionError e) {
+        } catch (DukeException e) {
             // Check if assert message is expected
-            String expected = "Hey, ☹ The description of a task cannot be empty.";
+            String expected = Views.EMPTY_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
         }
-        // If the code above didn't throw an AssertionError, this line will be reached
-        fail("Expected an AssertionError to be thrown");
+        // If the code above didn't throw an DukeException, this line will be reached
+        fail("Expected an DukeException to be thrown");
     }
 
     @Test
@@ -58,14 +59,14 @@ public class EventTest {
     public void testEventDateOrderFail() throws DukeException {
         try {
             new Event("TEST", "2023-01-20T19:00", "2023-01-20T18:00");
-        } catch (AssertionError e) {
+        } catch (DukeException e) {
             // Check if assert message is expected
             String expected = "Hey, ☹ you seem to have ordered the /to and /from wrongly";
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
         }
-        // If the code above didn't throw an AssertionError, this line will be reached
-        fail("Expected an AssertionError to be thrown");
+        // If the code above didn't throw an DukeException, this line will be reached
+        fail("Expected an DukeException to be thrown");
     }
 }

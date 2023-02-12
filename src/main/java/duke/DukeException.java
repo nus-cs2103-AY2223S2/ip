@@ -1,5 +1,7 @@
 package duke;
 
+import duke.enums.Views;
+
 /**
  * Exception for Duke methods to throw
  */
@@ -9,6 +11,15 @@ public class DukeException extends Exception {
      */
     public DukeException() {
         super();
+    }
+
+    /**
+     * Exception with custom message
+     *
+     * @param message
+     */
+    public DukeException(Views view) {
+        super(view.str());
     }
 
     /**

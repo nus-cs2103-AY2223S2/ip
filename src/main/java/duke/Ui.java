@@ -149,7 +149,7 @@ public class Ui {
                 return returnString.substring(0, returnString.length() - 7);
             }
         } catch (java.lang.StringIndexOutOfBoundsException e) {
-            throw new DukeException(Views.EMPTY_LIST_STRING.str());
+            throw new DukeException(Views.EMPTY_LIST_STRING);
         }
     }
 

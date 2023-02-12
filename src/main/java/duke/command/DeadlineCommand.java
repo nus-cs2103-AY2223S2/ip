@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.enums.Views;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -19,10 +20,15 @@ public class DeadlineCommand extends Command {
      *
      * @param title    of the Task that that is being created
      * @param deadline String input from the user
+     * @throws DukeException
      */
-    public DeadlineCommand(String title, String deadline) {
-        this.title = title;
-        this.deadline = deadline;
+    public DeadlineCommand(String... input) throws DukeException {
+        try {
+            this.title = input[0];
+            this.deadline = input[1];
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(Views.MISSING_ARGS_ERR_STRING);
+        }
     }
 
     /**

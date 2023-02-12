@@ -21,7 +21,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testTaskListSize() {
+    public void testTaskListSize() throws DukeException {
         int expected = 0;
         TaskList list = new TaskList();
         int actual = list.size();

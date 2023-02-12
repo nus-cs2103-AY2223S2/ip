@@ -14,8 +14,9 @@ public abstract class Task implements Comparable<Task> {
      * Creates a task, throws error if its empty string
      *
      * @param title of the Task that that is being created
+     * @throws DukeException
      */
-    Task(String title) {
+    Task(String title) throws DukeException {
         this(title, false);
     }
 
@@ -24,8 +25,12 @@ public abstract class Task implements Comparable<Task> {
      *
      * @param title  of the Task that that is being created
      * @param isDone status of the Task
+     * @throws DukeException
      */
-    Task(String title, boolean isDone) {
+    Task(String title, boolean isDone) throws DukeException {
+        if (title.trim().length() == 0) {
+            throw new DukeException(Views.EMPTY_ERR_STRING);
+        }
         assert title.trim().length() > 0 : Views.EMPTY_ERR_STRING.str();
         this.title = title.trim();
         this.isDone = isDone;
@@ -38,7 +43,7 @@ public abstract class Task implements Comparable<Task> {
      */
     public void markAsDone() throws DukeException {
         if (this.isDone) {
-            throw new DukeException(Views.MARKED_ERR_STRING.str());
+            throw new DukeException(Views.MARKED_ERR_STRING);
         }
         this.isDone = true;
     }
@@ -50,7 +55,7 @@ public abstract class Task implements Comparable<Task> {
      */
     public void markAsUndone() throws DukeException {
         if (!this.isDone) {
-            throw new DukeException(Views.UNMARKED_ERR_STRING.str());
+            throw new DukeException(Views.UNMARKED_ERR_STRING);
         }
         this.isDone = false;
     }

@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.enums.Views;
 import duke.task.Event;
 import duke.task.Task;
 
@@ -21,11 +22,16 @@ public class EventCommand extends Command {
      * @param title of the Task that that is being created
      * @param to    of the event ending date
      * @param from  of the event starting date
+     * @throws DukeException
      */
-    public EventCommand(String title, String to, String from) {
-        this.title = title;
-        this.to = to;
-        this.from = from;
+    public EventCommand(String... input) throws DukeException {
+        try {
+            this.title = input[0];
+            this.to = input[1];
+            this.from = input[2];
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(Views.MISSING_ARGS_ERR_STRING);
+        }
     }
 
     /**

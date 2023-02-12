@@ -64,8 +64,6 @@ public class Duke {
                 } else {
                     ui.showError(Views.UNKNOWN_ERR_STRING.str());
                 }
-            } catch (AssertionError e) {
-                ui.showError(e);
             }
         }
     }

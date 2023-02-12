@@ -43,7 +43,7 @@ public class TaskList {
         try {
             return tasksList.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Views.OUT_RANGE_ERR_STRING.str());
+            throw new DukeException(Views.OUT_RANGE_ERR_STRING);
         }
     }
 
@@ -60,8 +60,9 @@ public class TaskList {
      * Searches and returns an arraylist for results
      *
      * @return ArrayList of found task
+     * @throws DukeException
      */
-    public ArrayList<Task> search(String... query) {
+    public ArrayList<Task> search(String... query) throws DukeException {
         query = removeEmptyStrings(query);
 
         HashSet<Task> results = new HashSet<Task>();
@@ -73,6 +74,9 @@ public class TaskList {
                 }
             }
         }
+        if (results.size() == 0) {
+            throw new DukeException(Views.CANNOT_FIND_STRING);
+        }
         ArrayList<Task> toSort = new ArrayList<Task>(results);
         Collections.sort(toSort);
         return toSort;
@@ -83,6 +87,13 @@ public class TaskList {
      */
     public int size() {
         return tasksList.size();
+    }
+
+    /**
+     * @return int size of the taskList
+     */
+    public boolean isEmpty() {
+        return tasksList.size() == 0;
     }
 
     /**

@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.enums.Views;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -17,9 +18,14 @@ public class TodoCommand extends Command {
      * Creates a todo task command
      *
      * @param title of the Task that that is being created
+     * @throws DukeException
      */
-    public TodoCommand(String title) {
-        this.title = title;
+    public TodoCommand(String... input) throws DukeException {
+        try {
+            this.title = input[0];
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(Views.MISSING_ARGS_ERR_STRING);
+        }
     }
 
     /**

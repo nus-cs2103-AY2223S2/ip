@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
+import duke.enums.Views;
 
 public class DeadlineTest {
     @Test
@@ -24,18 +25,18 @@ public class DeadlineTest {
     }
 
     @Test
-    public void testDeadlineTitleFail() throws DukeException {
+    public void testDeadlineTitleFail() {
         try {
             new Deadline("", "");
-        } catch (AssertionError e) {
+        } catch (DukeException e) {
             // Check if assert message is expected
-            String expected = "Hey, ☹ The description of a task cannot be empty.";
+            String expected = Views.EMPTY_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
         }
-        // If the code above didn't throw an AssertionError, this line will be reached
-        fail("Expected an AssertionError to be thrown");
+        // If the code above didn't throw an DukeException, this line will be reached
+        fail("Expected an DukeException to be thrown");
     }
 
     @Test

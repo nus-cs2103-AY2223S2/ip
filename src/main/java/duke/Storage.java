@@ -62,7 +62,7 @@ public class Storage {
                 boolean isDone = line.indexOf("[X]") == -1 ? false : true;
                 line = line.replace("[ ]", "");
                 line = line.replace("[X]", "");
-                String[] parsed = Parser.handleTask(line);
+                String[] parsed = Parser.handleTaskInput(line);
                 if (line.startsWith(Commands.TODO.cmd())) {
                     String title = parsed[0];
                     Task newTask = new Todo(title, isDone);
@@ -79,7 +79,7 @@ public class Storage {
                     Task newTask = new Event(title, from, to, isDone);
                     tasksList.add(newTask);
                 } else {
-                    throw new DukeException(Views.LOAD_EXTRA_ERR_STRING.str());
+                    throw new DukeException(Views.LOAD_EXTRA_ERR_STRING);
                 }
             }
             scanner.close();

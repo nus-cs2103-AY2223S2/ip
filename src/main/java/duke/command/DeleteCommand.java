@@ -20,8 +20,12 @@ public class DeleteCommand extends Command {
      * Creates Delete Command
      *
      * @param taskNumbers int[] index of task in the ArrayList
+     * @throws DukeException
      */
-    public DeleteCommand(int... taskNumbers) {
+    public DeleteCommand(int... taskNumbers) throws DukeException {
+        if (taskNumbers.length == 0) {
+            throw new DukeException(Views.NO_INT_ERR_STRING);
+        }
         assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.str();
         this.taskNumbers = taskNumbers;
         Arrays.sort(this.taskNumbers);

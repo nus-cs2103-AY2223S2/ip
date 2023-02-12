@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.enums.Views;
 
 /**
  * Command: to list out the commands
@@ -18,6 +19,9 @@ public class ListCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException(Views.EMPTY_LIST_STRING);
+        }
         ui.showList(tasks);
     }
 

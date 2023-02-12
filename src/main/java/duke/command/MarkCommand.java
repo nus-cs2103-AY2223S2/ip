@@ -19,8 +19,12 @@ public class MarkCommand extends Command {
      * Takes in the task number to mark as complete
      *
      * @param taskNumbers int index of task in the ArrayList
+     * @throws DukeException
      */
-    public MarkCommand(int... taskNumbers) {
+    public MarkCommand(int... taskNumbers) throws DukeException {
+        if (taskNumbers.length == 0) {
+            throw new DukeException(Views.NO_INT_ERR_STRING);
+        }
         assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.str();
         this.taskNumbers = taskNumbers;
     }

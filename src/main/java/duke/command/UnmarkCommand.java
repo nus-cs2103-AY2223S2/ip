@@ -19,8 +19,12 @@ public class UnmarkCommand extends Command {
      * Creates the command to unmark task as done
      *
      * @param taskNumbers int[] index of task in the ArrayList
+     * @throws DukeException
      */
-    public UnmarkCommand(int... taskNumbers) {
+    public UnmarkCommand(int... taskNumbers) throws DukeException {
+        if (taskNumbers.length == 0) {
+            throw new DukeException(Views.NO_INT_ERR_STRING);
+        }
         assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.str();
         this.taskNumbers = taskNumbers;
     }
