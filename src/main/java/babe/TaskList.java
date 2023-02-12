@@ -25,11 +25,11 @@ class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
-     * Adds a ToDo to memory.
+     * Adds a ToDo to this TaskList.
      * Calls the ToDo constructor and inserts created ToDo into this Babe's memory.
      *
      * @param content The description of the ToDo item.
-     * @return
+     * @return A String that represents the ToDo added.
      */
     protected String addToDo(String content, boolean toMark) {
         ToDo item = new ToDo(content);
@@ -41,11 +41,12 @@ class TaskList {
     }
 
     /**
-     * Adds a Deadline to memory.
+     * Adds a Deadline to this TaskList.
      * Calls the Deadline constructor and inserts created Deadline into this Babe's memory.
      *
      * @param content The content of the Deadline item.
      * @param date    The date of the deadline. May include time too.
+     * @return A String that represents the Deadline added.
      */
     protected String addDeadline(String content, String date, boolean toMark) {
         Deadline item = new Deadline(content, date);
@@ -63,6 +64,7 @@ class TaskList {
      * @param content   The content of the Event item.
      * @param startDate The start date of the Event. May include time too.
      * @param endDate   The end date of the Event. May include time too.
+     * @return A String that represents the Event added.
      */
     protected String addEvent(String content, String startDate, String endDate, boolean toMark) {
         Event item = new Event(content, startDate, endDate);
@@ -98,7 +100,7 @@ class TaskList {
      * Marks the item of given index in Babe's list as Done.
      * This function will extract the index to be marked and sets the index to True in doneStatus.
      *
-     * @param index An integer that represents the index of the item to be marked.
+     * @param index A String that represents the index of the item to be marked.
      */
     protected String markTask(int index) {
         assertIndexInRange(index);
@@ -134,13 +136,14 @@ class TaskList {
                 foundTasks.add(task.toString());
             }
         }
-
         return foundTasks;
     }
 
     @Override
     /**
      * Implements toString() method for the TaskList.
+     *
+     * @return A String representation of this TaskList.
      */
     public String toString() {
         String string = "";
@@ -169,10 +172,10 @@ class TaskList {
     }
 
     /**
-     * Returns the item at the specified index from this TaskList.
+     * Returns the save format of the Task at the specified index from this TaskList.
      */
-    protected Task get(int index) {
-        return tasks.get(index);
+    protected String getSaveFormat(int index) {
+        return tasks.get(index).toSaveFormat();
     }
 
     private void assertIndexInRange(int index) throws AssertionError {

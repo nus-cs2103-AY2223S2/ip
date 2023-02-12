@@ -4,18 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import babe.exception.NonsenseInputException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * <h1> Hi Babe! </h1>
@@ -33,12 +21,23 @@ public class Babe {
      */
     private TaskList taskList = new TaskList();
 
-    protected String welcomeUser() {
+    /**
+     * Displays a Welcome message to users of Babe.
+     *
+     * @return A String that is the welcome message displayed.
+     */
+    public String welcomeUser() {
         // Displays Welcome message
         return Ui.welcomeUser();
     }
 
-    protected String initializeStorage() {
+    /**
+     * Checks whether there is an existing save file, and creates it if it does not exist.
+     * This method will notify the user in the event it has to create a save file.
+     *
+     * @return A String that is the notification for creation of save file.
+     */
+    public String initializeStorage() {
         String result = "";
         boolean isFilePresent = Storage.initializeStorage(this.taskList);
         if (!isFilePresent) {
@@ -48,7 +47,13 @@ public class Babe {
 
     }
 
-    protected String getResponse(String input) {
+    /**
+     * Processes user's input and executes commands specified by user's input to produce a response.
+     *
+     * @param input A String that is the user's input.
+     * @return A String that is the message displaying the result of the user's command.
+     */
+    public String getResponse(String input) {
         String output = "";
 
         try {

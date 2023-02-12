@@ -18,8 +18,8 @@ public class Deadline extends Task {
      * @param deadline Date for the deadline of this item.
      */
     public Deadline(String content, String deadline) {
-        super(content);
-        this.deadline = deadline;
+        super(content, "D");
+        this.deadline = deadline.stripTrailing();
     }
 
     @Override
@@ -30,7 +30,9 @@ public class Deadline extends Task {
      *         and deadline.
      */
     public String toString() {
-        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
+        return String.format("[%s] ", this.letterType)
+                + (this.isDone ? this.MARKED : this.UNMARKED) + " "
+                + this.description
                 + " (by: " + this.deadline + ")";
     }
 
