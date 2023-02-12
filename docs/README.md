@@ -4,10 +4,10 @@
 The Task Mechanic is here to help you with managing all your tasks!
 
 ## Contents
-1. [Features](/docs#features)
-2. [Usage](/docs#usage)
-3. [Commands](/docs#commands)
-4. [Command Summary](/docs#command-summary)
+1. [Features](https://ryanqiu1.github.io/ip/#features)
+2. [Usage](https://ryanqiu1.github.io/ip/#usage)
+3. [Commands](https://ryanqiu1.github.io/ip/#commands)
+4. [Command Summary](https://ryanqiu1.github.io/ip/#command-summary)
 
 ## Features 
 
@@ -93,15 +93,15 @@ Diffcult tasks? Tag them!
 ![img_9.png](img_9.png)
 
 ## Command Summary
-| Command                                         | Description                                                           |
-|-------------------------------------------------|-----------------------------------------------------------------------|
-| todo `description`                              | Creates a todo with the given `description`                           |
+| Command                                         | Description                                                            |
+|-------------------------------------------------|------------------------------------------------------------------------|
+| todo `description`                              | Creates a todo with the given `description`                            |
 | deadline `description` /by `YYYY-MM-DD` `HH:MM` | Creates a deadline with the given `description` set by the given time. |
-| event `description` /from `when` /to `when`     | Creates an event with the given `description` set at the given time.  |
-| list                                            | Lists all currently saved tasks.                                      |
-| mark `number`                                   | Marks task `number` from list as complete.                            |
-| unmark `number`                                 | Marks task `number` from list as incomplete.                          |
-| delete `number`                                 | Deletes task `number` from list permanently.                          |
-| find `description`                              | Returns all tasks whose `description` match the exact text.             |
-| tag `number` `phrase`                            | Tag task `number` with a `phrase`.                                        |
-| bye                                             | Saves all tasks to storage and ends program.                          |
+| event `description` /from `when` /to `when`     | Creates an event with the given `description` set at the given time.   |
+| list                                            | Lists all currently saved tasks.                                       |
+| mark `number`                                   | Marks task `number` from list as complete.                             |
+| unmark `number`                                 | Marks task `number` from list as incomplete.                           |
+| delete `number`                                 | Deletes task `number` from list permanently.                           |
+| find `description`                              | Returns all tasks whose `description` match the exact text.            |
+| tag `number` `phrase`                           | Tag task `number` with a `phrase`.                                     |
+| bye                                             | Saves all tasks to storage and ends program.                           |
