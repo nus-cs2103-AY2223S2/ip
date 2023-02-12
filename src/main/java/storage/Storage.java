@@ -1,24 +1,23 @@
 package storage;
 
-import tasklist.TaskList;
-
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.IOException;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
-import task.Task;
-import task.ToDo;
 import task.Deadline;
 import task.Event;
+import task.Task;
+import task.ToDo;
+import tasklist.TaskList;
 
 /**
  * Class which deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    String path;
-    File file;
+    private String path;
+    private File file;
 
     /**
      * Constructor.
@@ -90,7 +89,7 @@ public class Storage {
         String[] words = description.split("] ");
         String newDescription = words[1];
         String firstWord = words[0];
-        String marked = firstWord.charAt(firstWord.length()-1) + "";
+        String marked = firstWord.charAt(firstWord.length() - 1) + "";
         return new String[]{newDescription, marked};
     }
 

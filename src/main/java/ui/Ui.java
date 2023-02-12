@@ -1,26 +1,29 @@
 package ui;
 
-import java.time.format.DateTimeFormatter;
-
 import storage.Storage;
-import tasklist.TaskList;
 import task.Task;
+import tasklist.TaskList;
 
 /**
  * User Interface Class that deals with interactions with the user.
  */
 public class Ui {
-    final static String ENTRY_OUTPUT = "Hello! I'm Duke\nWhat can I do for you?";
-    final static String BYE_OUTPUT = "Bye. Hope to see you again soon!";
-    final static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
-    final static DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-    public boolean isClosed;
+    private static final String ENTRY_OUTPUT = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String BYE_OUTPUT = " Bye. Hope to see you again soon!";
+    private boolean isClosed;
 
     /**
      * Constructor.
      */
     public Ui() {
-       this.isClosed = false;
+        this.isClosed = false;
+    }
+
+    /**
+     * Closes the Ui.
+     */
+    public void close() {
+        this.isClosed = true;
     }
 
     /**
@@ -129,8 +132,8 @@ public class Ui {
      */
     public String printFind(TaskList list, String searchWord) {
         String output = "Here are the matching tasks in your list:\n";
-        for (Task task: list.list) {
-            if (task.description.contains(searchWord)) {
+        for (Task task: list.getList()) {
+            if (task.getDescription().contains(searchWord)) {
                 output += "\n" + task.toString();
             }
         }

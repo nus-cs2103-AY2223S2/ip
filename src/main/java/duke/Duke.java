@@ -1,45 +1,39 @@
 package duke;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
 
-import java.util.Scanner;
-
-import gui.DialogBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import storage.Storage;
 import parser.Parser;
+import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-
+/**
+ * A chatbot that assists the user in keeping track of his tasks.
+ */
 public class Duke {
 
-    Storage storage;
-    public Ui ui;
-    TaskList list;
-    Parser parser;
-    final static String DEFAULT_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator + "duke.txt";
+    private Storage storage;
+    private Ui ui;
+    private TaskList list;
+    private Parser parser;
+    private static final String DEFAULT_PATH = System.getProperty("user.dir")
+            + File.separator + "data" + File.separator + "duke.txt";
 
-    public Duke(String path) throws IOException {
+    /**
+     * Constructor.
+     *
+     * @param path Path to file.
+     */
+    public Duke(String path) {
         this.ui = new Ui();
         this.storage = new Storage(path);
         this.list = this.storage.load();
         this.parser = new Parser();
     }
 
+    /**
+     * Another Constructor.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(DEFAULT_PATH);

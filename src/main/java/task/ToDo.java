@@ -21,7 +21,7 @@ public class ToDo extends Task {
      * @param marked Status to show if the task is done.
      */
     public ToDo(String description, boolean marked) {
-        super(description,marked);
+        super(description, marked);
     }
 
     @Override
