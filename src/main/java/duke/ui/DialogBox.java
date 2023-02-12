@@ -9,10 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  * Controller for DialogBox.
@@ -23,7 +23,7 @@ public class DialogBox extends HBox {
 
     /** Label containing text for dialog */
     @FXML
-    private Label dialog = null;
+    private Text dialog = null;
 
     /** ImageView containing the display picture for the dialog */
     @FXML
