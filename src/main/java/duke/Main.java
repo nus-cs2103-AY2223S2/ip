@@ -21,9 +21,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
+
         AnchorPane ap = new MainWindow(duke, stage);
         Scene scene = new Scene(ap);
-
         stage.setScene(scene);
 
         /* Custom stage settings */

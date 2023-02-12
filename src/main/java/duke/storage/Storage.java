@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.Duke;
+import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -42,33 +44,38 @@ public class Storage {
      * Adds a task from the save file to the task list.
      */
     private void loadTaskFromFile(String task) {
-        /* Parser */
-        String[] command = task.split("\\|");
-        String taskType = command[0].trim();
-        String description = command[2].trim();
+        try {
+            String[] command = task.split("\\|");
+            String taskType = command[0].trim();
+            String description = command[2].trim();
 
-        Task t = new Todo(""); // Placeholder task
+            Task t;
+            switch (taskType) {
+            case "T":
+                t = new Todo(description);
+                break;
+            case "D":
+                LocalDate by = LocalDate.parse(command[3].trim());
+                t = new Deadline(description, by);
+                break;
+            case "E":
+                LocalDate from = LocalDate.parse(command[3].trim());
+                LocalDate to = LocalDate.parse(command[4].trim());
+                t = new Event(description, from, to);
+                break;
+            default:
+                throw new DukeException(String.format("Invalid type of task: %s", task));
+            }
 
-        switch (taskType) {
-        case "T":
-            t = new Todo(description);
-            break;
-        case "D":
-            LocalDate by = LocalDate.parse(command[3].trim());
-            t = new Deadline(description, by);
-            break;
-        case "E":
-            LocalDate from = LocalDate.parse(command[3].trim());
-            LocalDate to = LocalDate.parse(command[4].trim());
-            t = new Event(description, from, to);
-            break;
-        default:
+            boolean isMarked = command[1].trim().equals("1");
+            t.markStatus(isMarked);
+            this.taskList.add(t);
+
+        } catch (DukeException e) {
+            ui.print(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            ui.print(String.format("Task has wrong format: %s", task));
         }
-
-        boolean isMarked = command[1].trim().equals("1");
-        t.markStatus(isMarked);
-
-        this.taskList.add(t);
     }
 
     /**

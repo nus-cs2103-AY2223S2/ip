@@ -67,8 +67,8 @@ public class Parser {
             case FIND:
                 return parseFindTask(description);
             default:
-                // cannot reach here, as Operation.valueOf already throws IllegalArgumentException
-                throw new DukeException("Cannot reach here");
+                assert false : "cannot reach here as Operation::valueOf already throws IllegalArgumentException";
+                return null;
             }
         } catch (NumberFormatException e) {
             throw new DukeException("Task must be referenced by its index.");
@@ -89,7 +89,7 @@ public class Parser {
      */
     public static Command parseMarkTask(Operation op, String index) throws NumberFormatException {
         boolean isDone = op.equals(Operation.MARK);
-        int taskIndex = Integer.parseInt(index); // Throws exception if index is not a valid integer.
+        int taskIndex = Integer.parseInt(index); // Throws NumberFormatException if index is not a valid integer.
         return new CommandMark(taskIndex, isDone);
     }
 
@@ -100,10 +100,10 @@ public class Parser {
      * @param description String representing the task description.
      * @return A Command instance representing the type of task to add.
      * @throws DateTimeParseException If the date format is invalid.
-     * @throws DukeException If the command is invalid.
      */
-    public static Command parseAddTask(Operation op, String description) throws
-            DateTimeParseException, DukeException {
+
+    public static Command parseAddTask(Operation op, String description) throws DateTimeParseException {
+
         switch (op) {
         case TODO:
             return new CommandAddTodo(description);
@@ -124,7 +124,8 @@ public class Parser {
 
             return new CommandAddEvent(eventDescription, from, to);
         default:
-            throw new DukeException("Cannot reach here");
+            assert false : "Cannot reach here";
+            return null;
         }
     }
 
@@ -136,7 +137,7 @@ public class Parser {
      * @throws NumberFormatException If the date format is invalid.
      */
     public static Command parseDeleteTask(String index) throws NumberFormatException {
-        int taskIndex = Integer.parseInt(index); // Throws exception if index is not a valid integer.
+        int taskIndex = Integer.parseInt(index); // Throws NumberFormatException if index is not a valid integer.
         return new CommandDeleteTask(taskIndex);
     }
 
