@@ -51,6 +51,9 @@ public class Ui {
      * @param list The list to print from.
      */
     public String listResponse(TaskList list) {
+        if (list == null || list.isEmpty()) {
+            return formatString("Your list is currently empty");
+        }
         return formatString("Here are the tasks in your list:\n"
                 + list.toString());
     }

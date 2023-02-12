@@ -1,5 +1,0 @@
-[T] | 0 | ride bicycle
-[D] | 0 | complete duke | 2000-11-20
-[E] | 0 | do what | 2000-11-20 | 2023-01-29
-[T] | 0 | wash bicycle
-[T] | 0 | spraypaint bike

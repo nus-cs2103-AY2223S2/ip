@@ -104,6 +104,15 @@ public class TaskList {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns a boolean based on if the task list is empty.
+     *
+     * @return True if task is empty else return false.
+     */
+    public boolean isEmpty() {
+        return taskList.isEmpty();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
