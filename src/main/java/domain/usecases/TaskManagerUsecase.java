@@ -183,7 +183,8 @@ public class TaskManagerUsecase implements CommandRegisterable {
                 }
                 final Task item = tasks.get(index);
                 item.setComplete(isComplete);
-                writable.writeln("Nice, I've marked this item as done:");
+                writable.writeln("Nice, I've marked this item as "
+                        + (isComplete ? "done" : "not done") + ":");
                 writable.writeln("\t" + item);
                 return ExitStatus.finishCurrentIteration;
             }
