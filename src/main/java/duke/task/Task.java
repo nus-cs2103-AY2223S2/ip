@@ -1,11 +1,12 @@
 package duke.task;
-
+import java.util.ArrayList;
 /**
  * Class that represents tasks created by the user, can be marked as done or undone
  */
 public class Task {
     protected String name;
     protected String status;
+    protected ArrayList<String> tags;
 
     /**
      * Constructor
@@ -19,6 +20,23 @@ public class Task {
         } else {
             this.status = "[ ]";
         }
+        this.tags = new ArrayList<String>();
+    }
+
+    /**
+     * Another Constructor to handle Tasks that already have tags
+     * @param name the name of the task
+     * @param status a number that indicates the task is done if it is 1
+     * @param tags An ArrayList of Strings representing the tags
+     */
+    public Task(String name, int status, ArrayList<String> tags) {
+        this.name = name;
+        if (status == 1) {
+            this.status = "[X]";
+        } else {
+            this.status = "[ ]";
+        }
+        this.tags = tags;
     }
 
     /**
@@ -36,10 +54,21 @@ public class Task {
     }
 
     /**
+     * Adds a tag to the Task
+     * @param tag A String representing the tag to be added.
+     */
+    public void addTag(String tag) {
+        this.tags.add(tag);
+    }
+    /**
      * Formats Task message to facilitate updating local tasks
      * @return a String to be written to the local hard disk
      */
     public String toStoreFormatString() {
-        return "";
+        String result = "";
+        for (String tag : tags) {
+            result += "/" + tag;
+        }
+        return result;
     }
 }

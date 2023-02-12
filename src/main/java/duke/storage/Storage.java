@@ -78,13 +78,25 @@ public class Storage {
             String[] lineArr = s.nextLine().split("/");
             switch (lineArr[0]) {
             case "D":
-                tasks.add(new Deadline(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3]));
+                Deadline deadline = new Deadline(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3]);
+                for (int i = 4; i < lineArr.length; i++) {
+                    deadline.addTag(lineArr[i]);
+                }
+                tasks.add(deadline);
                 break;
             case "T":
-                tasks.add(new Todo(lineArr[1], Integer.parseInt(lineArr[2])));
+                Todo todo = new Todo(lineArr[1], Integer.parseInt(lineArr[2]));
+                for (int i = 3; i < lineArr.length; i++) {
+                    todo.addTag(lineArr[i]);
+                }
+                tasks.add(todo);
                 break;
             case "E":
-                tasks.add(new Event(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3], lineArr[4]));
+                Event event = new Event(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3], lineArr[4]);
+                for (int i = 5; i < lineArr.length; i++) {
+                    event.addTag(lineArr[i]);
+                }
+                tasks.add(event);
                 break;
             default:
                 continue;

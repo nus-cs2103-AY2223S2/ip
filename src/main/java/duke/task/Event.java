@@ -51,6 +51,6 @@ public class Event extends Task {
      */
     public String toStoreFormatString() {
         return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(),
-                Parser.reverseFormatDateTime(from), Parser.reverseFormatDateTime(to));
+                Parser.reverseFormatDateTime(from), Parser.reverseFormatDateTime(to)) + super.toStoreFormatString();
     }
 }

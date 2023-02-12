@@ -46,6 +46,6 @@ public class Deadline extends Task {
      */
     public String toStoreFormatString() {
         return String.format("D/%s/%d/%s", super.name, this.getStatusNo(),
-                Parser.reverseFormatDateTime(deadline));
+                Parser.reverseFormatDateTime(deadline)) + super.toStoreFormatString();
     }
 }

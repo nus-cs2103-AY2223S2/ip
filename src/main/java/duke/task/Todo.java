@@ -33,6 +33,6 @@ public class Todo extends Task {
      */
     @Override
     public String toStoreFormatString() {
-        return String.format("T/%s/%d", super.name, this.getStatusNo());
+        return String.format("T/%s/%d", super.name, this.getStatusNo()) + super.toStoreFormatString();
     }
 }
