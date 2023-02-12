@@ -51,7 +51,7 @@ public class Parser {
      * @return Valid LocalDateTime.
      * @throws DukeException If user input does not match any DateTimeFormatter.
      */
-    public static LocalDateTime stringToDateTime(String string) throws DukeException {
+    public static LocalDateTime stringToDateTime(String string, boolean isStart) throws DukeException {
         LocalDate date = null;
         LocalDateTime dateTime = null;
         DateTimeFormatter[] formatters = {
@@ -88,7 +88,12 @@ public class Parser {
 
         // Converts date to include time
         if (date != null) {
-            dateTime = date.atStartOfDay().plusDays(1).minusNanos(1);
+            if (isStart) {
+                dateTime = date.atStartOfDay();
+
+            } else {
+                dateTime = date.atStartOfDay().plusDays(1).minusNanos(1);
+            }
         }
         return dateTime;
     }
@@ -119,7 +124,7 @@ public class Parser {
                 if (d_parts.length < 2 || d_parts[0].trim().isEmpty() || d_parts[1].trim().isEmpty()) {
                     throw new DukeException(deadlineError);
                 }
-                LocalDateTime deadlineDateTime = stringToDateTime(d_parts[1].trim());
+                LocalDateTime deadlineDateTime = stringToDateTime(d_parts[1].trim(),false);
                 Deadline deadline = new Deadline(d_parts[0].trim(), deadlineDateTime);
                 return new Command.AddCommand(deadline);
             case "event":
@@ -131,8 +136,8 @@ public class Parser {
                 if (e_parts.length < 3 || e_parts[0].trim().isEmpty() || e_parts[1].trim().isEmpty() || e_parts[2].trim().isEmpty()) {
                     throw new DukeException(eventError);
                 }
-                LocalDateTime startDateTime = stringToDateTime(e_parts[1].trim());
-                LocalDateTime endDateTime = stringToDateTime(e_parts[2].trim());
+                LocalDateTime startDateTime = stringToDateTime(e_parts[1].trim(),true);
+                LocalDateTime endDateTime = stringToDateTime(e_parts[2].trim(),false);
                 // Checks if start date is before end date
                 if (endDateTime.isBefore(startDateTime)) {
                     throw new DukeException("End date cannot be before start date.");
