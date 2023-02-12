@@ -53,8 +53,8 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Duke"
-    archiveClassifier = "v0.2"
+    archiveBaseName = "BorzAI"
+    archiveClassifier = "v1.0"
 }
 
 run{
