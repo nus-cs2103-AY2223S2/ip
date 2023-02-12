@@ -2,6 +2,8 @@ package duke.task;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.DukeException;
 
@@ -54,22 +56,45 @@ public class TaskList {
      * @throws DukeException If there is no task available.
      */
     public String listTasks() throws DukeException {
-        indexToTask.clear(); // Reset hashmap
-
         if (taskList.size() == 0) {
             throw new DukeException("No tasks available.");
         }
 
-        StringBuilder stringList = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            stringList.append((i + 1) + ". " + task);
-            indexToTask.put(i, task); // update hashmap
-            stringList.append(System.lineSeparator());
+        /* Updates indexToTask hashmap and creates a string representing the task list */
+        String stringList = convertListToString(taskList);
+
+        return stringList;
+    }
+
+    private String convertListToString(List<Task> list) {
+        indexToTask.clear(); // Reset hashmap
+
+        IntStream indices = IntStream.range(0, list.size());
+
+        String stringList = indices.peek(index -> indexToTask.put(index, list.get(index)))
+                .mapToObj(index -> (index + 1) + ". " + list.get(index))
+                .collect(Collectors.joining(System.lineSeparator()));
+
+        String stringListWithoutLastSeparator = stringList.substring(0, stringList.length());
+        return stringListWithoutLastSeparator;
+    }
+
+    /**
+     * Finds all the tasks matching the keywords and updates hashmap.
+     *
+     * @param keywords Keywords to find the tasks.
+     * @return String representation of all the matching tasks.
+     */
+    public String findTasks(String... keywords) throws DukeException {
+        List<Task> filteredTaskList = taskList.stream()
+                .filter(task -> task.isMatched(keywords))
+                .collect(Collectors.toList());
+
+        if (filteredTaskList.size() == 0) {
+            throw new DukeException("No matching task found.");
         }
 
-        stringList.deleteCharAt(stringList.length() - 1); // Deletes the last lineSeparator.
-        return stringList.toString();
+        return convertListToString(filteredTaskList);
     }
 
     private void checkIndexOutOfBounds(int idx) throws DukeException {
@@ -80,17 +105,19 @@ public class TaskList {
     }
 
     /**
-     * Mark the task with the given index as either done or undone.
+     * Mark the task with the given index as either done or undone, then return that task.
      * Task are 0-indexed.
      *
      * @param idx Index of the task to be marked.
      * @param isDone Status of the task to be marked.
+     * @return The task to be marked/unmarked.
      * @throws DukeException If index is out of bounds.
      */
-    public void markTask(int idx, boolean isDone) throws DukeException {
+    public Task markTask(int idx, boolean isDone) throws DukeException {
         checkIndexOutOfBounds(idx); // Does this violate SLAP?
-        Task t = indexToTask.get(idx);
-        t.markStatus(isDone);
+        Task taskToMark = indexToTask.get(idx);
+        taskToMark.markStatus(isDone);
+        return taskToMark;
     }
 
     /**
@@ -109,7 +136,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the task at the given index in the ArrayList task list.
+     * Returns the task at the given index in the actual ArrayList task list.
      *
      * @param index Index of the task.
      * @return The task at that index.
@@ -138,39 +165,5 @@ public class TaskList {
         TaskList task = (TaskList) o;
 
         return task.taskList.equals(this.taskList);
-    }
-
-    /**
-    * Finds all the tasks matching the keywords.
-    *
-    * @param keywords Keywords to find the tasks.
-    * @return String representation of all the matching tasks.
-    */
-    public String findTasks(String... keywords) throws DukeException {
-        indexToTask.clear(); // Reset Hashmap
-
-        /* Forms a string to represent list of matching tasks */
-        int idx = 0;
-        StringBuilder foundTasks = new StringBuilder();
-        for (Task t : this.taskList) {
-            String description = t.getDescription();
-
-            for (String keyword : keywords) {
-                if (description.contains(keyword)) {
-                    foundTasks.append((idx + 1) + ". " + t + System.lineSeparator());
-                    indexToTask.put(idx, t);
-                    idx++;
-                    break; // Break out of inner for loop
-                }
-            }
-
-        }
-
-        if (foundTasks.length() == 0) {
-            throw new DukeException("No matching task found.");
-        }
-
-        foundTasks.deleteCharAt(foundTasks.length() - 1); // Deletes the last lineSeparator.
-        return foundTasks.toString();
     }
 }
