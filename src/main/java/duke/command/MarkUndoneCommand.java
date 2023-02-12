@@ -16,7 +16,7 @@ public class MarkUndoneCommand extends Command {
      * @param index Index of the task in the list
      */
     public MarkUndoneCommand(int index) {
-        assert index > 0;
+        assert index >= 0;
         this.index = index;
     }
 
@@ -31,7 +31,7 @@ public class MarkUndoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage)throws
             IllegalArgumentException{
         Task marked = tasks.unmark(index);
-        assert marked != null: false;
+        assert marked != null: "Task marked should exist";
         storage.write(tasks);
         return ui.unmark(marked);
     }
@@ -41,6 +41,14 @@ public class MarkUndoneCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Gets the index of the marked task
+     * @return The index of the marked task
+     */
+    public int getIndex() {
+        return this.index;
     }
 
 }

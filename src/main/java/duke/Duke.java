@@ -17,6 +17,7 @@ import duke.ui.Ui;
 public class Duke {
 
 
+    private Command preCommand;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -33,7 +34,7 @@ public class Duke {
      *
      */
     public Duke(String filePath) {
-
+        preCommand = null;
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -54,14 +55,14 @@ public class Duke {
      */
     public String getResponse(String input){
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parse(input, preCommand);
             isExit = c.isExit();
             if (isExit) {
                 assert isExit;
                 String dukeText = "bye";
                 return dukeText;
-
             }
+            this.preCommand = c;
             return (c.execute(tasks, ui, storage));
         } catch (IllegalArgumentException e) {
             return ui.showError("wrong");

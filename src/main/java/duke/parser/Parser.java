@@ -11,6 +11,7 @@ import duke.Commands;
 import duke.command.DeleteCommand;
 import duke.command.MarkDoneCommand;
 import duke.command.ShowListCommand;
+import duke.command.UndoCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -30,7 +31,7 @@ public class Parser {
      * @throws DukeException
      * @throws IllegalArgumentException
      */
-    public static Command parse(String input) throws DukeException, IllegalArgumentException {
+    public static Command parse(String input, Command preCommand) throws DukeException, IllegalArgumentException {
         String command = input.split(" ")[0].toUpperCase();
         Commands cur = Enum.valueOf(Commands.class, command);
         switch (cur) {
@@ -73,6 +74,8 @@ public class Parser {
         case FIND:
             detail = input.split(" ", 2)[1].trim();
             return new FindCommand(detail);
+        case UNDO:
+            return new UndoCommand(preCommand);
         default:
             throw new DukeException(
                 "   OOPS!!! I'm sorry, but I don't know what that means :-(\n"

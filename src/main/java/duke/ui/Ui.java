@@ -136,6 +136,22 @@ public class Ui {
 
     }
 
+    /**
+     * Tells the user that no command has been added
+     * @return String meaning no command added yet
+     */
+    public static String NoPreCommand() {
+        return ("Sorry there is no command yet.");
+    }
+
+    /**
+     * Tells the user that previous command is not able to be undone
+     * @return String meaning previous command cannot be undone
+     */
+    public static String InvalidPreCommand() {
+        return ("Sorry the previous command cannot be undone.");
+    }
+
 
     /**
      * Finds tasks in the task list

@@ -9,6 +9,8 @@ public class DeleteCommand extends Command {
 
     protected int index;
 
+    protected Task deleted;
+
     /**
      * Initialises the object
      *
@@ -30,6 +32,7 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList list, Ui ui, Storage storage) {
         Task task = list.delete(index);
+        this.deleted = task;
         storage.write(list);
         return ui.delete(task, list.getLength());
     }
@@ -39,5 +42,13 @@ public class DeleteCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Gets the deleted task
+     * @return The deleted task
+     */
+    public Task getDeleted() {
+        return this.deleted;
     }
 }

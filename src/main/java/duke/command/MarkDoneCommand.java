@@ -17,7 +17,7 @@ public class MarkDoneCommand extends Command {
      * @param index Index of the task in the list
      */
     public MarkDoneCommand(int index) {
-        assert index > 0;
+        assert index >= 0;
         this.index = index;
     }
 
@@ -33,7 +33,8 @@ public class MarkDoneCommand extends Command {
 
             IllegalArgumentException {
         Task marked = tasks.mark(index);
-        assert marked != null : false;
+        assert marked != null: "Task marked should exist";
+        System.out.println(marked.toString());
         storage.write(tasks);
         return ui.mark(marked);
     }
@@ -43,6 +44,14 @@ public class MarkDoneCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Gets the index of the marked task
+     * @return The index of the marked task
+     */
+    public int getIndex() {
+        return this.index;
     }
 
 }
