@@ -22,4 +22,7 @@ public class Ui {
     public void showList(TaskList taskList) {
         taskList.showList();
     }
+    public void print(String word) {
+        System.out.println(word);
+    }
 }

@@ -6,6 +6,7 @@ public enum CommandEnum {
     EVENT("event", "[E]"),
     DELETE("delete", ""),
     MARK("mark", ""),
+    FIND("find", ""),
     SOMETHINGELSE("", ""),
     UNMARK("unmark", "");
     private final String description;

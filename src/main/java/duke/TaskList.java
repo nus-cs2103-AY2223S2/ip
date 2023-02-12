@@ -57,4 +57,14 @@ public class TaskList {
         System.out.print("You have: " + (list.size() - 1) + " task(s)\n");
         list.remove(index);
     }
+    public String find(String word) {
+    StringBuilder display = new StringBuilder();
+    for (int i = 0; i < this.list.size(); i++) {
+        Task curr = this.list.get(i);
+        if (curr.toString().toLowerCase().contains(word.toLowerCase())) {
+            display.append((curr) + ". " + curr.getStatusIcon() + "\n");
+        }
+    }
+    return display.toString();
+    };
 }
