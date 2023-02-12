@@ -19,12 +19,16 @@ public class Event extends Task {
      * @param start Start date of Event
      * @param end End date of Event
      */
-    public Event(String name, String start, String end) {
+    public Event(String name, String start, String end) throws InputException {
         super(name);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
-        start = start.substring(0, start.length() - 1);
-        this.start = LocalDateTime.parse(start, format);
-        this.end = LocalDateTime.parse(end, format);
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+            this.start = LocalDateTime.parse(start, format);
+            this.end = LocalDateTime.parse(end, format);
+        } catch (DateTimeParseException e) {
+            throw new InputException("BLUB! Date format is invalid! It should be dd/mm/yy-hhmm.");
+        }
+        
     }
 
     /**
@@ -34,11 +38,15 @@ public class Event extends Task {
      * @param start Start date of Event
      * @param end End date of Event
      */
-    public Event(String name, String isDone, String start, String end) {
+    public Event(String name, String isDone, String start, String end) throws InputException {
         super(name, isDone);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
-        this.start = LocalDateTime.parse(start, formatter);
-        this.end = LocalDateTime.parse(end, formatter);
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
+            this.start = LocalDateTime.parse(start, format);
+            this.end = LocalDateTime.parse(end, format);
+        } catch (DateTimeParseException e) {
+            throw new InputException("BLUB! Date format is invalid! It should be dd/mm/yy-hhmm.");
+        }
     }
 
     public void setEnd(String end) throws InputException {

@@ -59,16 +59,7 @@ public class Ui {
     public void saveFileProblem() {
         System.out.println("BLUB! Problem with save file!");
     }
-
-    /**
-     * Prints out greeting message upon launch
-     */
-    public static String greeting() {
-        String greeting = "    Hello! I'm TunaBot\n"
-                + "    What can I do for you?\n";
-        return greeting;
-    }
-
+    
     public void line() {
         System.out.println(LINE);
     }

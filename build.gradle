@@ -1,13 +1,8 @@
 plugins {
-    id 'checkstyle'
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-}
-
-checkstyle {
-    toolVersion = '10.2'
 }
 
 repositories {
@@ -17,6 +12,7 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -32,10 +28,7 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
-javafx {
-    version = "11"
-    modules = [ 'javafx.controls' ]
-}
+
 test {
     useJUnitPlatform()
 
@@ -50,13 +43,16 @@ test {
     }
 }
 
-
 application {
     mainClassName = "tunabot.TunaBot"
 }
 
+checkstyle {
+    toolVersion = '10.2'
+}
+
 shadowJar {
-    archiveBaseName = "TunaBot"
+    archiveBaseName = "tunabot"
     archiveClassifier = null
 }
 

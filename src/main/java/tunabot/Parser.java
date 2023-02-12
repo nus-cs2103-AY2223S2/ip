@@ -105,7 +105,7 @@ public class Parser {
             throw new InputException("BLUB! Event needs a name, "
                 + "a start time and end time!");
         } else {
-            String[] details = command[1].split("/from |/to ", 3);
+            String[] details = command[1].split(" /from | /to ", 3);
             if (details.length < 3) {
                 throw new InputException("BLUB! Event is missing info!"
                     + " Please check input. BLUB!");
@@ -177,7 +177,7 @@ public class Parser {
         if (command.length < 2) {
             throw new InputException("BLUB! Deadline needs a name and due date!");
         } else {
-            String[] details = command[1].split("/by ", 2);
+            String[] details = command[1].split(" /by ", 2);
             if (details.length < 2) {
                 throw new InputException("BLUB! Deadline is missing info!"
                     + " PLease check input. BLUB!");
