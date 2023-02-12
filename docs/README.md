@@ -9,17 +9,15 @@
 - [Summary](#command-summary)
 
 ## Installation
-___
 1. Ensure that you have java `11` installed.
-2. Download the [ip.jar](https://github.com/zenithyap/ip/releases/download/Level-9/ip.jar) file.
+2. Download the [ip.jar](https://github.com/zenithyap/ip/releases/download/A-UserGuide/Pix.jar) file.
 3. Open a terminal and navigate to the folder the file is downloaded in.
 4. Run the command `java -jar ip.jar`
 5. You should see the following:
 
-![](initial.png)
+<img src="initial.png" alt="initial" width="60%" height="30%"/>
 
 ## Features
-___
 ### Manages Your Tasks
 - Able to add/delete tasks
 - Supports 3 tasks, todo, deadlines, and events
@@ -27,7 +25,6 @@ ___
 - Find tasks by keyword
 
 ## Commands
-___
 ### `help`
 Shows all the commands.
 
@@ -84,7 +81,6 @@ Exits pix.
 Format: `bye`
 
 ## Command Summary
-___
 
 | Command | Format                                            |
 |---------|---------------------------------------------------|
