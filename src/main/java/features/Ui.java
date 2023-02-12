@@ -25,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Formats trivia messages. 64
+     * Formats trivia messages.
      * @param fact The cool trivia fact.
      * @return The correctly formatted cool trivia fact.
      */
@@ -39,6 +39,10 @@ public class Ui {
      * @return The correctly cut cool trivia fact.
      */
     public String cutFact(String fact) {
+        //@@author Tempura-Person-reused
+        //Reused from https://stackoverflow.com/questions/10530102/
+        // with minor modifications
         return fact.replaceAll("(.{80})", "$1\n");
+        //@@author
     }
 }
