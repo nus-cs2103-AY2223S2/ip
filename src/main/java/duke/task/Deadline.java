@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * @version 0
  */
 public class Deadline extends Task {
-    LocalDateTime deadlineDay;
+    private LocalDateTime deadlineDay;
 
     public Deadline(String desc, boolean isDone, LocalDateTime deadlineDay) {
         super(desc, isDone);

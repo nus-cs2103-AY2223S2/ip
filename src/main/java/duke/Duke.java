@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.Parser.Parser;
+import duke.parser.Parser;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 /**
  * This class creates a Todo type object which inherits from Task
