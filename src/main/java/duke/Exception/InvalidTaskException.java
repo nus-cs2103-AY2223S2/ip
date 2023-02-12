@@ -1,3 +1,5 @@
+package duke.Exception;
+
 public class InvalidTaskException extends DukeException {
 
     public InvalidTaskException(int taskNumber) {

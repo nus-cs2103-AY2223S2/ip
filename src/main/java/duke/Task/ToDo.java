@@ -1,3 +1,7 @@
+package duke.Task;
+
+import duke.Task.Task;
+
 public class ToDo extends Task {
     public ToDo(String name) {
         super(name);

@@ -1,3 +1,5 @@
+package duke.Exception;
+
 public class InvalidArgumentsException extends DukeException {
 
     public InvalidArgumentsException() {

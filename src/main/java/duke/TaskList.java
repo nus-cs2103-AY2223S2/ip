@@ -1,9 +1,12 @@
-import java.io.File;
+package duke;
+
+import duke.Task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    protected List<Task> tasks;
+    private List<Task> tasks;
     protected int items;
 
     public TaskList() {
@@ -13,6 +16,14 @@ public class TaskList {
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
         this.items = tasks.size();
+    }
+
+    public List<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public int getItems() {
+        return this.items;
     }
 
     public String addTask(Task task) {

@@ -1,3 +1,11 @@
+package duke;
+
+import duke.Command.*;
+import duke.Exception.DukeException;
+import duke.Exception.IncorrectArgumentsException;
+import duke.Exception.InvalidArgumentsException;
+import duke.Exception.InvalidInputException;
+
 public class Parser {
 
     public Command parseCommand(String command) throws DukeException {

@@ -1,3 +1,5 @@
+package duke.Exception;
+
 public class NoSuchFileException extends DukeException {
 
     public NoSuchFileException(String input) {

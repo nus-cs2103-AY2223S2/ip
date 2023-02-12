@@ -1,3 +1,5 @@
+package duke.Exception;
+
 public class IncorrectArgumentsException extends DukeException {
 
     public IncorrectArgumentsException(String command, int numberExpected, int numberActual) {

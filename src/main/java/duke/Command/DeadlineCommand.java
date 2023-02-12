@@ -1,3 +1,8 @@
+package duke.Command;
+
+import duke.*;
+import duke.Exception.InvalidArgumentsException;
+import duke.Task.Deadline;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,6 +26,6 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, UI ui, Storage storage) {
         Deadline dl = new Deadline(name, deadline);
         ui.showConfirmation(tasks.addTask(dl));
-        storage.saveToFile(tasks.tasks);
+        storage.saveToFile(tasks.getTasks());
     }
 }

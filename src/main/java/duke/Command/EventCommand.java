@@ -1,3 +1,8 @@
+package duke.Command;
+
+import duke.*;
+import duke.Exception.InvalidArgumentsException;
+import duke.Task.Event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -23,6 +28,6 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, UI ui, Storage storage) {
         Event ev = new Event(name, from, until);
         ui.showConfirmation(tasks.addTask(ev));
-        storage.saveToFile(tasks.tasks);
+        storage.saveToFile(tasks.getTasks());
     }
 }
