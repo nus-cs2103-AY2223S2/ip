@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -77,5 +79,10 @@ class Event extends Task {
     @Override
     public LocalDateTime getEventEndTime() {
         return this.eventEndTime;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return this.eventStartTime.toLocalDate();
     }
 }

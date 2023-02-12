@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -136,6 +137,14 @@ public class Duke {
                     task.printDelete(allTasks);
                     allTasks.remove(taskIndex);
                     save.saveListToFile(command, task, allTasks);
+                } else if (command.startsWith("find deadlines or events on")) {
+                    emptyCommandException(command);
+                    String[] str = command.split("find deadlines or events on ");
+                    String dateTime = str[1];
+                    DateTimeFormatter dateTimeFormatter2 =
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate dateTime1 = LocalDate.parse(dateTime, dateTimeFormatter2);
+                    this.printDeadlineOrEventsOnDay(dateTime1, allTasks);
                 } else if (command.equals("bye")){
                     saidBye = true;
                     this.printByeMessage();
@@ -188,6 +197,36 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    public void printDeadlineOrEventsOnDay(LocalDate dateTime, List<Task> allTasks) {
+        DateTimeFormatter dateTimeFormatter1 =
+                DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\t Here are the tasks in your list at this day:");
+        int numbering = 1;
+        for (int i = 0; i < allTasks.size(); i++) {
+            Task task = allTasks.get(i);
+            String time = "";
+            if (task.getTaskType().equals("[D]") &&
+                    task.getDate().equals(dateTime)) {
+                time = " (by: " +
+                        task.getDeadline().format(dateTimeFormatter1) + ")";
+            } else if (task.getTaskType().equals("[E]") &&
+                    task.getDate().equals(dateTime)) {
+                time = " (from: " +
+                        task.getEventStartTime().format(dateTimeFormatter1)
+                        + " to: "
+                        + task.getEventEndTime().format(dateTimeFormatter1)
+                        + ")";
+            } else {
+                continue;
+            }
+            System.out.println("\t " + numbering + "." +
+                    task.getTaskType() + task.getTaskStatus() + " "
+                    + task.getTask() + time);
+            numbering += 1;
+        }
+    }
+
     public void printByeMessage() {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Bye. Hope to see you again soon!" +
@@ -207,6 +246,10 @@ public class Duke {
             case "event":
                 throw new DukeException("\t____________________________________________________________" +
                         "\n\t ☹ OOPS!!! The description of an event cannot be empty." +
+                        "\n\t____________________________________________________________");
+            case "find deadlines or events on":
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The date of a deadline/ event cannot be empty." +
                         "\n\t____________________________________________________________");
         }
     }

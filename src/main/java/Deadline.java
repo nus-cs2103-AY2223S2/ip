@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -62,5 +64,11 @@ public class Deadline extends Task {
     @Override
     public LocalDateTime getDeadline() {
         return this.taskDeadline;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return this.taskDeadline.toLocalDate();
+
     }
 }

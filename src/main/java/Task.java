@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -65,6 +66,10 @@ public class Task {
     }
 
     public LocalDateTime getEventEndTime() {
+        return null;
+    }
+
+    public LocalDate getDate() {
         return null;
     }
 }
