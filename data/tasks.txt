@@ -1,6 +1,0 @@
-todo true
-read book
-todo false
-sleep
-todo false
-be happy
