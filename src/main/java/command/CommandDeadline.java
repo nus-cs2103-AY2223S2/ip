@@ -30,11 +30,11 @@ public class CommandDeadline extends Command {
         return this.getConfirmationMessageOf(taskAdded);
     }
 
-    private String getConfirmationMessageOf(Task taskAdded) {
-        return Ui.getAddTaskConfirmationWithAttitudeOf(taskAdded);
-    }
-
     private Task addIntoList(String taskDetails) throws DukeException {
         return this.taskList.addDeadlineTask(taskDetails);
+    }
+
+    private String getConfirmationMessageOf(Task taskAdded) {
+        return Ui.getAddTaskConfirmationWithAttitudeOf(taskAdded);
     }
 }

@@ -1,6 +1,7 @@
 package command;
 
 import duke.DukeException;
+import duke.Task;
 import duke.TaskList;
 import duke.Ui;
 
@@ -24,6 +25,16 @@ public class CommandToDo extends Command {
     }
     @Override
     public String execute() throws DukeException {
+        Task taskAdded = this.addIntoList(this.taskDetails);
+        return this.getConfirmationMessageOf(taskAdded);
         return Ui.getAddTaskConfirmationWithAttitude(this.taskList.addToDoTask(this.taskDetails));
+    }
+
+    private Task addIntoList(String taskDetails) throws DukeException {
+        return this.taskList.addToDoTask(taskDetails);
+    }
+
+    private String getConfirmationMessageOf(Task taskAdded) {
+        return Ui.getAddTaskConfirmationWithAttitudeOf(taskAdded);
     }
 }

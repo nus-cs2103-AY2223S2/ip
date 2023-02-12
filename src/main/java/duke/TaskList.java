@@ -265,14 +265,14 @@ public class TaskList {
         }
     }
 
-    public String addToDoTask(String taskDetails) throws DukeException {
+    public Task addToDoTask(String taskDetails) throws DukeException {
         if (taskDetails.isBlank()) {
             throw new DukeException(Ui.emptyDetailsForToDoMessage);
         }
 
         Task newTask = new ToDo(taskDetails.trim());
         storedInputs.add(newTask);
-        return newTask.getTaskDetails();
+        return newTask;
     }
 
     public Task addDeadlineTask(String taskDetails) throws DukeException {
