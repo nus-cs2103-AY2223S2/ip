@@ -35,72 +35,13 @@ public class Duke {
      */
 
     public String getResponse(String input) {
-        Task chosen;
-        String response = null;
-
         try {
-            Parser.parseUserResponse(input);
-            switch (Parser.getCommand()) {
-            case BYE: {
-                storage.saveToFile(tasks);
-                response = ui.showGoodbyeMessage();
-                break;
-            }
-            case FIND: {
-                String keyword = Parser.getArgs()[1];
-                response = tasks.getMatchingTasksString(keyword);
-                break;
-            }
-            case LIST: {
-                response = ui.showTasksMessage(tasks);
-                break;
-            }
-            case MARK: {
-                int id = Parser.parseTask();
-                chosen = tasks.getTask(id);
-                chosen.mark();
-                response = ui.markTaskMessage(chosen);
-                break;
-            }
-            case UNMARK: {
-                int id = Parser.parseTask();
-                chosen = tasks.getTask(id);
-                chosen.unmark();
-                response = ui.unmarkTaskMessage(chosen);
-                break;
-            }
-            case DELETE: {
-                int id = Parser.parseTask();
-                chosen = tasks.getTask(id);
-                tasks.deleteTask(chosen);
-                response = ui.deleteTaskMessage(chosen, tasks);
-                break;
-            }
-            case TODO: {
-                chosen = Parser.parseTodo();
-                tasks.addTask(chosen);
-                response = ui.addedTaskMessage(chosen, tasks);
-                break;
-            }
-            case DEADLINE: {
-                chosen = Parser.parseDeadline();
-                tasks.addTask(chosen);
-                response = ui.addedTaskMessage(chosen, tasks);
-                break;
-            }
-            case EVENT: {
-                chosen = Parser.parseEvent();
-                tasks.addTask(chosen);
-                response = ui.addedTaskMessage(chosen, tasks);
-                break;
-            }
-            default:
-                assert false;
-                break;
-            }
+            Command command = Parser.parseUserResponse(ui, tasks, storage, input);
+            return command.execute();
         } catch (DukeException e) {
-            response = ui.showErrorMessage(e);
+            return ui.showErrorMessage(e);
         }
-        return response;
     }
 }
+
+

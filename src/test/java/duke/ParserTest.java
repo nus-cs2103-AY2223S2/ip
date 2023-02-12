@@ -9,8 +9,8 @@ public class ParserTest {
     @Test
     public void parseTask_wrongType_exceptionThrown() {
         try {
-            Parser.parseUserResponse("delete string");
-            Parser.parseTask();
+            Command command = Parser.parseUserResponse(new Ui(), null, null, "delete string");
+            command.execute();
         } catch (DukeException e) {
             assertEquals("Given task number is invalid!", e.getMessage());
         }
@@ -19,7 +19,7 @@ public class ParserTest {
     @Test
     public void parseUserResponse_unknownCommand_exceptionThrown() {
         try {
-            Parser.parseUserResponse("eat");
+            Parser.parseUserResponse(new Ui(), null, null, "eat");
         } catch (DukeException e) {
             assertEquals("Invalid command entered!", e.getMessage());
         }

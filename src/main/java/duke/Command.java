@@ -1,20 +1,10 @@
 package duke;
 
 /**
- * A collection of enums which represent possible commands given by user.
- *
- * @author Sean Chin Jun Kai
+ * Abstraction of a user command.
  */
-public enum Command {
-    BYE,
-    FIND,
-    LIST,
-    MARK,
-    UNMARK,
-    TODO,
-    DEADLINE,
-    EVENT,
-    DELETE
+public abstract class Command {
+    public abstract String execute();
 }
 
 

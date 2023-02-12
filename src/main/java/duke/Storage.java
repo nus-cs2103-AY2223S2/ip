@@ -76,7 +76,6 @@ public class Storage {
      */
     public static Task readTaskString(String input) throws DukeException {
         String[] parsed = input.split(" \\| ");
-        Task task;
         int len = parsed.length;
 
         switch (len) {
@@ -85,26 +84,22 @@ public class Storage {
             if (parsed[1].equals("1")) {
                 todo.mark();
             }
-            task = todo;
-            break;
+            return todo;
         case 4: // this is a deadline
             LocalDate date = LocalDate.parse(parsed[3]);
             Deadline deadline = new Deadline(parsed[2], date);
             if (parsed[1].equals("1")) {
                 deadline.mark();
             }
-            task = deadline;
-            break;
+            return deadline;
         case 5: // this is an event
             Event event = new Event(parsed[2], parsed[3], parsed[4]);
             if (parsed[1].equals("1")) {
                 event.mark();
             }
-            task = event;
-            break;
+            return event;
         default:
             throw new DukeException("Unable to read file contents!");
         }
-        return task;
     }
 }
