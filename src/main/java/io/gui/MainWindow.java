@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane implements Ui {
             return;
         }
         dialogueContainer.getChildren().addAll(
-                DialogueBox.of(userText, userImg, dialogueContainer));
+                DialogueBox.getUserDialogue(userText, userImg));
         userInput.clear();
 
         Command command = Command.parser().parse(userText).match(
@@ -69,6 +69,6 @@ public class MainWindow extends AnchorPane implements Ui {
      */
     @Override
     public void showReply(String msg) {
-        dialogueContainer.getChildren().addAll(DialogueBox.of(msg, dImg, dialogueContainer));
+        dialogueContainer.getChildren().addAll(DialogueBox.getBotDialogue(msg, dImg));
     }
 }

@@ -1,9 +1,14 @@
 package io.gui;
 
 import java.io.IOException;
+import java.util.Collections;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,7 +30,7 @@ public class DialogueBox extends HBox {
      * @param text display text
      * @param img Image of dialogue source.
      */
-    public DialogueBox(String text, Image img) {
+    private DialogueBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogueBox.fxml"));
             fxmlLoader.setController(this);
@@ -46,9 +51,20 @@ public class DialogueBox extends HBox {
         displayPicture.setClip(circleClip);
     }
 
-    public static DialogueBox of(String text, Image img, VBox container) {
-        DialogueBox db = new DialogueBox(text, img);
-        db.setWidth(container.getWidth());
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_RIGHT);
+    }
+
+    public static DialogueBox getUserDialogue(String text, Image img) {
+        return new DialogueBox(text, img);
+    }
+
+    public static DialogueBox getBotDialogue(String text, Image img) {
+        var db = new DialogueBox(text, img);
+        db.flip();
         return db;
     }
 }
