@@ -2,9 +2,18 @@ package duke;
 
 import duke.exception.DukeDataException;
 import duke.exception.DukeException;
-import duke.tasks.*;
 
-import java.io.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.tasks.TaskList;
+
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -58,6 +67,7 @@ public class Storage {
     public void createFile() {
         File dir = new File("./data");
         File newFile = new File(this.filePath);
+        assert dir != null;
         dir.mkdir();
         try{
             newFile.createNewFile();
@@ -117,7 +127,4 @@ public class Storage {
         buffer.close();
         writer.close();
     }
-
-
-
 }

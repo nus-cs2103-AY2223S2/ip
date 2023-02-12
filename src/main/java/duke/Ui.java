@@ -1,8 +1,9 @@
 package duke;
 
-import duke.tasks.*;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
-import java.util.Scanner;
+
 
 /**
  * Deals with interactions with the user
