@@ -13,7 +13,10 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList list, String command) throws DukeException {
         try {
-            Task task = list.removeTask(Integer.parseInt(command.split(Values.SPACEX)[1]) - 1);
+            int taskNumIndex = 1; // Index of the task number in the command.
+            Task task = list.removeTask(
+                    Integer.parseInt(command.split(Values.SPACEX)[taskNumIndex]) - 1);
+
             return ui.pixlPrint("Removed the task:\n"
                     + "\t" + task.formatTask()
                     + "\nYou now have " + list.getSize() + " task(s) in the list.");

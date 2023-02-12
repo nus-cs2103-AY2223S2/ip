@@ -52,13 +52,7 @@ public class GUi extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-        // Scroll container
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        enterButton = new Button("Enter");
+        initializeGUiFields();
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, enterButton);
@@ -88,13 +82,25 @@ public class GUi extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         stage.show();
-        initialize();
+        initializeBehaviourElems();
+    }
+
+    /**
+     * Initializes the GUi fields
+     */
+    private void initializeGUiFields() {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        enterButton = new Button("Enter");
     }
 
     /**
      * Initializes the Duke behaviour classes.
      */
-    private void initialize() {
+    private void initializeBehaviourElems() {
         assert ui == null && storage == null && parser == null;
         isExit = false;
         ui = new Ui();
@@ -168,8 +174,8 @@ public class GUi extends Application {
         Label dukeText = new Label(getResponse(userInput.getText()));
 
         if (isExit) {
-            dialogContainer.getChildren().add(
-                    DialogBox.getUserDialog(userText, new ImageView(user)));
+            dialogContainer.getChildren()
+                    .add(DialogBox.getUserDialog(userText, new ImageView(user)));
             userInput.clear();
             exitProgram();
             return;
