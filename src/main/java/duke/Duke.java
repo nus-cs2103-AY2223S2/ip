@@ -9,7 +9,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-
     public static void main(String[] args) throws Exception {
 
         Storage database = new Storage("./data", "duke.txt");
