@@ -26,50 +26,48 @@ public class Parser {
         String[] instruction = input.split(" ", 2);
 
         try {
-            if (instruction[0].equals("list")) { // printing list
-                return new ListCommand();
 
-            } else if (instruction[0].equals("mark")) { //marking
+            switch (instruction[0]) {
+                case "list":
+                    return new ListCommand();
 
-                int index = checkMark(instruction, tasklist);
-                return new MarkCommand(index);
+                case "mark":
+                    int markedIndex = checkMark(instruction, tasklist);
+                    return new MarkCommand(markedIndex);
 
-            } else if (instruction[0].equals("unmark")) { //unmarking
+                case "unmark":
+                    int unmarkedIndex = checkUnmark(instruction, tasklist);
+                    return new UnmarkCommand(unmarkedIndex);
 
-                int index = checkUnmark(instruction, tasklist);
-                return new UnmarkCommand(index);
+                case "delete":
+                    int deletedIndex = checkDelete(instruction, tasklist);
+                    return new DeleteCommand(deletedIndex);
 
-            } else if (instruction[0].equals("delete")) {
+                case "find":
+                    checkFind(instruction);
+                    return new FindCommand(instruction[1]);
 
-                int index = checkDelete(instruction, tasklist);
-                return new DeleteCommand(index);
+                case "todo":
+                    checkBasicAddTask(instruction);
+                    String item = instruction[1];
+                    Task task = new Task(item, "T");
+                    return new AddCommand(task);
 
-            } else if (instruction[0].equals("bye")) {
-                return new ExitCommand();
+                case "deadline":
+                    checkBasicAddTask(instruction);
+                    Deadline deadline = checkDeadline(instruction);
+                    return new AddCommand(deadline);
 
-            } else if (instruction[0].equals("find")) {
-                checkFind(instruction);
-                return new FindCommand(instruction[1]);
+                case "event":
+                    checkBasicAddTask(instruction);
+                    Event event = checkEvent(instruction);
+                    return new AddCommand(event);
 
-            } else if (instruction[0].equals("todo")) {
-                checkBasicAddTask(instruction);
-                String item = instruction[1];
-                Task task = new Task(item, "T");
-                return new AddCommand(task);
+                case "bye":
+                    return new ExitCommand();
 
-            } else if(instruction[0].equals("deadline")) {
-                checkBasicAddTask(instruction);
-                Deadline deadline = checkDeadline(instruction);
-                return new AddCommand(deadline);
-
-            } else if (instruction[0].equals("event")) {
-                checkBasicAddTask(instruction);
-                Event event = checkEvent(instruction);
-                return new AddCommand(event);
-            }
-
-            else {
-                throw new ArgumentException("No such commands");
+                default:
+`                   throw new ArgumentException("No such commands");
             }
 
         } catch (ArgumentException ex2) {
