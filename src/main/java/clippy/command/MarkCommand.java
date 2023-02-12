@@ -30,7 +30,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        ui.prettyPrint("Great job! I've marked this task as done: ");
-        ui.prettyPrint(taskList.mark(taskIdToMark).toString());
+        ui.prettyPrint("Great job! I've marked this task as done: "
+                + taskList.mark(taskIdToMark).toString());
     }
 }

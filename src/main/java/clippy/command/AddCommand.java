@@ -18,9 +18,10 @@ public abstract class AddCommand extends Command {
      * @param ui The Ui instance used for the current run
      */
     protected void printCreatedTaskStatus(TaskList taskList, Ui ui) {
-        ui.prettyPrint("Got it! I've added this task:");
-        ui.prettyPrint(taskList.getLastTask().toString());
-        ui.prettyPrint(String.format("Now you have %d task%s in the list.",
-                taskList.getSize(), taskList.getSize() == 1 ? "" : "s"));
+        ui.prettyPrint("Got it! I've added this task:"
+                + "\n" + taskList.getLastTask().toString() + "\n"
+                + String.format("Now you have %d task%s in the list.",
+                taskList.getSize(), taskList.getSize() == 1 ? "" : "s")
+                + "\n");
     }
 }

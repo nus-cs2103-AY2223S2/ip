@@ -19,11 +19,14 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
+        String output = "";
+
         if (taskList.isEmpty()) {
-            ui.prettyPrint("No tasks found!");
+            output = "No tasks found!";
+        } else {
+            output = taskList.describeAllTasks();
         }
-        for (int i = 1; i <= taskList.getSize(); i++) {
-            ui.prettyPrint(String.format("%d. %s", i, taskList.get(i)));
-        }
+
+        ui.prettyPrint(output);
     }
 }

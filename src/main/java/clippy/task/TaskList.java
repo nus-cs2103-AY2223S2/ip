@@ -130,4 +130,22 @@ public class TaskList {
                 .filter(x -> x.hasKeywordInDescription(query))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Describes all the tasks currently in the task list.
+     * @return A string describing all the tasks in the task list.
+     */
+    public String describeAllTasks() {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 1; i <= this.tasks.size(); i++) {
+            result.append(String.format("%d. %s", i, this.tasks.get(i - 1)));
+
+            if (i < this.tasks.size()) {
+                result.append('\n');
+            }
+        }
+
+        return result.toString();
+    }
 }
