@@ -42,7 +42,7 @@ public class TaskList {
      * @return The Task that is removed.
      */
     public Task remove(int taskId) {
-        assert taskId > -1: "taskId should not be negative";
+        assert taskId > -1 : "taskId should not be negative";
 
         return this.tasks.remove(taskId - 1);
     }
@@ -53,7 +53,7 @@ public class TaskList {
      * @return The Task that is retrieved.
      */
     public Task get(int taskId) {
-        assert taskId > -1: "taskId should not be negative";
+        assert taskId > -1 : "taskId should not be negative";
 
         return this.tasks.get(taskId - 1);
     }
@@ -92,7 +92,7 @@ public class TaskList {
      * @return The Task that was marked as complete.
      */
     public Task mark(int taskId) {
-        assert taskId > -1: "taskId should not be negative";
+        assert taskId > -1 : "taskId should not be negative";
 
         Task taskToMark = this.get(taskId);
         taskToMark.complete();
@@ -105,7 +105,7 @@ public class TaskList {
      * @return The Task that was marked as incomplete.
      */
     public Task unmark(int taskId) {
-        assert taskId > -1: "taskId should not be negative";
+        assert taskId > -1 : "taskId should not be negative";
 
         Task taskToUnmark = this.get(taskId);
         taskToUnmark.uncomplete();

@@ -35,6 +35,12 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Prints all the matching tasks passed into the method.
+     *
+     * @param matches A list containing the matching tasks.
+     * @param ui The UI instance of the current program.
+     */
     public void printMatchingTasks(List<Task> matches, Ui ui) {
         for (int i = 0; i < matches.size(); i++) {
             ui.prettyPrint(String.format("%d. %s", i + 1, matches.get(i).toString()));

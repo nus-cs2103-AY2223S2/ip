@@ -75,6 +75,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Attempts to save the program state into the specified save file.
+     *
+     * @param tasks A list of Tasks to be saved.
+     * @param saveFileWriter The FileWriter pointing to the save file to be written to.
+     * @throws IOException Thrown if the saveFileWriter encounters an exception.
+     */
     public void writeData(List<Task> tasks, FileWriter saveFileWriter) throws IOException {
         for (int i = 0; i < tasks.size(); i++) {
             saveFileWriter.write(tasks.get(i).getCsvString());
@@ -82,6 +89,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Handles the case of a missing save directory.
+     *
+     * @param dir The save directory.
+     */
     public void handleMissingSaveDir(File dir) {
         ui.systemPrint("data directory not found! Creating it now...");
         if (dir.mkdirs()) {
@@ -89,6 +101,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new save file at the default save file location.
+     */
     public void createNewSaveFile() {
         try {
             saveFile.createNewFile();
@@ -100,6 +115,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Attempts to load the save file from the default save file location.
+     *
+     * @return A list of tasks read from the save file.
+     */
     public List<Task> loadExistingSaveFile() {
         try {
             Scanner saveFileScanner = new Scanner(saveFile);

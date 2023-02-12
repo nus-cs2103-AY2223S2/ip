@@ -25,7 +25,7 @@ public class Parser {
      * @throws ClippyException
      */
     public static Command parse(String command) throws ClippyException {
-        assert !command.equals(""): "user input should not be empty";
+        assert !command.equals("") : "user input should not be empty";
 
         String[] args = command.split(" ");
         switch (args[0]) {
@@ -101,7 +101,7 @@ public class Parser {
      * @return
      */
     private static Command dispatch(CommandType commandType, String[] args, LocalDate... dates) {
-        assert commandType != null: "commandType should not be null";
+        assert commandType != null : "commandType should not be null";
 
         switch (commandType) {
         case BYE:
