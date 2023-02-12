@@ -31,7 +31,7 @@ public class Deadline extends Tasks {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " 
+        return "[D]" + super.toString() + " (by: "
             + this.by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ")";
     }
 

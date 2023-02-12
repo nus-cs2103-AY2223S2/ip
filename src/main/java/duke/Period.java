@@ -17,7 +17,7 @@ public class Period extends Tasks {
      * Ending date and time of the period task
      */
     protected LocalDateTime and;
-    
+
     /**
      * Creates a period task with a description, start and end date and time
      * @param description describes the period task
@@ -35,8 +35,8 @@ public class Period extends Tasks {
      */
     @Override
     public String toString() {
-        return "[P]" + super.toString() + " (to be done between: " 
-            + this.between.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) 
+        return "[P]" + super.toString() + " (to be done between: "
+            + this.between.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT))
                 + " and: " + this.between.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ")";
     }
 

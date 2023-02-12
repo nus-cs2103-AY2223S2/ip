@@ -1,13 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.Test;
+
 public class DeadlineTest {
-    
+
     @Test
     public void createDeadline() {
         Deadline deadline = new Deadline("Content", LocalDateTime.of(2023, 11, 13, 12, 00));

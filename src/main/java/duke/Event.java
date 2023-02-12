@@ -31,8 +31,8 @@ public class Event extends Tasks {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " 
-            + this.from.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) 
+        return "[E]" + super.toString() + " (from: "
+            + this.from.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT))
                 + " to: " + this.to.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ")";
     }
 

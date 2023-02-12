@@ -10,7 +10,7 @@ public class TasksList {
      * Array list of tasks
      */
     private ArrayList<Tasks> list;
-    
+
     /**
      * Returns a TasksList object of a certain size
      * @param size number of objects that can be inside the TasksList
