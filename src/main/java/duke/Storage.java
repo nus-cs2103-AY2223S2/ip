@@ -14,8 +14,18 @@ import java.util.Scanner;
  * Storage is a class that finds, loads and saves data into the file data/duke.txt
  */
 public class Storage {
+
+    /**
+     * file that the storage gets the data from
+     */
     private File file;
+    /**
+     * checks whether the file exist
+     */
     private boolean hasFileData;
+    /**
+     * list of tasks that is extracted from the file
+     */
     private TasksList list;
 
     /**
