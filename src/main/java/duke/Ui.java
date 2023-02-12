@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
 
 /**
@@ -98,6 +99,25 @@ public class Ui {
      */
     public void showCurrentTaskNo(TaskList tasks) {
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
+    }
+
+    /**
+     * Prints the response message for Find command.
+     */
+    public void showSearchInformation() {
+        System.out.println("Here are the matching tasks in your list: ");
+    }
+
+    public void showZeroSearchResult() {
+        System.out.println("  I cannot find any relevant tasks in the list QvQ");
+    }
+
+    /**
+     * Prints the target task.
+     * @param task Target task.
+     * */
+    public void showTask(Task task, int index) {
+        System.out.println(index + "." + task.toString());
     }
 
     /**

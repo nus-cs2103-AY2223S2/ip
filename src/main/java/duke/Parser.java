@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import duke.command.AddCommand;
 import duke.command.Command;
+import duke.command.FindCommand;
 import duke.command.UpdateCommand;
 
 /**
@@ -15,7 +16,9 @@ import duke.command.UpdateCommand;
  * Checks for format of CLI, throws exceptions to alert any incorrect input format.
  */
 public class Parser {
-    protected static String[] commands = {"bye", "list", "mark", "unmark", "delete", "todo", "deadline", "event"};
+
+    protected static String[] simpleCommands = new String[]{"bye", "list", "find"};
+    protected static String[] moreCommands = new String[]{"todo", "deadline", "event", "mark", "unmark", "delete"};
 
     /**
      * Checks if the input command is one of the acceptable commands.
@@ -23,7 +26,7 @@ public class Parser {
      * @return ture if input command is valid.
      */
     public static boolean isValidCommand(String commandName) {
-        return Arrays.asList(commands).contains(commandName);
+        return Arrays.asList(simpleCommands).contains(commandName) | Arrays.asList(moreCommands).contains(commandName);
     }
 
     /**
@@ -65,6 +68,9 @@ public class Parser {
                 System.out.println("Please enter the task number");
             }
             break;
+        }
+        case "find": {
+            return new FindCommand("find", command.trim());
         }
         case "todo": {
             String name = command.trim();

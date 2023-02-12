@@ -21,7 +21,7 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Execute the command to update target task in task list.
+     * Executes the command to update target task in task list.
      * @param tasks Current task list.
      * @param ui Ui to show task list.
      */
