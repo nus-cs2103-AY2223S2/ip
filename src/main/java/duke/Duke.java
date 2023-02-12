@@ -13,11 +13,15 @@ import duke.tasks.TaskDeadline;
 import duke.tasks.TaskEvent;
 import duke.tasks.TaskList;
 import duke.tasks.TaskTodo;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * A simple task list program.
  */
-public class Duke {
+public class Duke extends Application {
     private Ui ui = new Ui();
     private Storage storage = new Storage("_duke_data.txt");
     private TaskList tasks;
@@ -290,5 +294,14 @@ public class Duke {
 
         String header = "Here are the matching tasks in your list:\n";
         this.ui.show(header + matchingTaskList.toString());
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
