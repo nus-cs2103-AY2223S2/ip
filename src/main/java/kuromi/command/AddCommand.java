@@ -42,6 +42,7 @@ public class AddCommand extends Command {
     private String getReply(Task cur, TaskList tasks) {
         String msg = "Got it. I've added this task:\n";
         msg += cur + "\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
         msg += "Now you have " + tasks.size() + " tasks in the list.";
         return msg;
     }
