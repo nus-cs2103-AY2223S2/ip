@@ -30,6 +30,7 @@ public class EventTask extends Task {
 
     /**
      * Returns true if the days to this event's startTime from now is within the given days, false otherwise.
+     *
      * @param maxDays Number of days to the startTime from now in which this method should return true.
      * @return True if the days to the startTime of this event from now is within the given days, false otherwise.
      */

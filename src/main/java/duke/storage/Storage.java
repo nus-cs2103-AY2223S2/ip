@@ -33,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * Save the given task list.
+     * Saves the given task list.
      *
      * @param taskList The task list to be saved.
      * @throws DukeException If the file cannot be opened or written to.

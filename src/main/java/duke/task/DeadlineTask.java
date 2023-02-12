@@ -27,6 +27,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns true if the days to the deadline endTime from now is within the given days, false otherwise.
+     *
      * @param maxDays Number of days to the endTime from now in which this method should return true.
      * @return True if the days to the endTime of this deadline from now is within the given days, false otherwise.
      */

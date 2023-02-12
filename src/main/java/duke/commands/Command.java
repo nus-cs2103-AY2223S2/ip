@@ -14,7 +14,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute the command.
+     * Executes the command.
      * @param taskList The task list to be used.
      * @param uiText The ui to be used.
      * @param storage The storage to be used.

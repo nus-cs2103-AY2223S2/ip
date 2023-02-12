@@ -45,6 +45,7 @@ public abstract class Task {
 
     /**
      * Returns true if this task's description contains the keyword, false otherwise.
+     *
      * @param keyword A keyword, which can contain spaces.
      * @return True if this task's description contains the keyword, false otherwise.
      */
@@ -54,6 +55,7 @@ public abstract class Task {
 
     /**
      * Returns true if the days to the task from now is within the given days, false otherwise.
+     *
      * @param maxDays Number of days to the task from now in which this method should return true.
      * @return True if the days to the task from now is within the given days, false otherwise.
      */

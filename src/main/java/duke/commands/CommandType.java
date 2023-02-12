@@ -24,6 +24,12 @@ public enum CommandType {
         this.command = command;
     }
 
+    /**
+     * Converts the given string to a command type.
+     * @param command A string that represents the command type.
+     * @return A command type.
+     * @throws DukeException If the given string is cannot be converted to a command type.
+     */
     public static CommandType getCommandType(String command) throws DukeException {
         CommandType[] values = values();
         for (CommandType value : values) {
