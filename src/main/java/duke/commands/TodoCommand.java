@@ -19,9 +19,14 @@ public class TodoCommand extends Command {
     }
     @Override
     public String handleCommand() {
-        String[] inputArgs = input.split(" ", 2);
+        String[] inputArgs = splitArgs(input);
         Task currentTask= new Todo(inputArgs[1]);
-        this.listOfTasks.add(currentTask);
+        listOfTasks.addTask(currentTask);
         return Ui.showAdd(this.listOfTasks, currentTask.toString());
+    }
+
+    private String[] splitArgs(String input) {
+        String[] result = input.split(" ", 2);
+        return result;
     }
 }

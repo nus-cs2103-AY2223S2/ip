@@ -47,27 +47,27 @@ public class Ui {
         return result;
     }
 
-    public static String showDelete(Task deletedTask, TaskList listOfTasks) {
-        String result = "OK. I've removed this task:\n" + 
-                String.format("%s\n", deletedTask) + 
-                String.format("Now you ahve %d tasks in your list", listOfTasks.size());
-        return result;
-    }
     public void showCreateNewFile() {
         System.out.println("Creating new file...");
     }
-
+    
     public String[] readLine() {
         String currentInput = scanner.nextLine();
         String[] currentInputArray = currentInput.split(" ", 2);
         return currentInputArray;
     }
-
-
+    
+    
     public static String showAdd(TaskList listOfTasks, String taskName) {
         String result = "Got it. I've added this task:\n" +
-                taskName +
-                String.format("\nNow you have %d tasks in the list.", listOfTasks.size());
+        taskName +
+        String.format("\nNow you have %d tasks in the list.", listOfTasks.size());
+        return result;
+    }
+    public static String showDelete(Task deletedTask, TaskList listOfTasks) {
+        String result = "OK. I've removed this task:\n" + 
+                String.format("%s\n", deletedTask) + 
+                String.format("Now you ahve %d tasks in your list", listOfTasks.size());
         return result;
     }
 
