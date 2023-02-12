@@ -26,14 +26,18 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        List<Task> tasks = taskList.find(query);
-        if (tasks.isEmpty()) {
+        List<Task> matches = taskList.find(query);
+        if (matches.isEmpty()) {
             ui.prettyPrint("No tasks found!");
         } else {
             ui.prettyPrint("Here are the matching tasks in your list!");
-            for (int i = 0; i < tasks.size(); i++) {
-                ui.prettyPrint(String.format("%d. %s", i + 1, tasks.get(i).toString()));
-            }
+            printMatchingTasks(matches, ui);
+        }
+    }
+
+    public void printMatchingTasks(List<Task> matches, Ui ui) {
+        for (int i = 0; i < matches.size(); i++) {
+            ui.prettyPrint(String.format("%d. %s", i + 1, matches.get(i).toString()));
         }
     }
 
