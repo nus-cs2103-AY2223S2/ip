@@ -15,6 +15,11 @@ public class ToDo extends Task {
         return "[T]" + " " + super.getStatusIcon() + " " + super.toString();
     }
 
+    /**
+     * Returns the string representation of the todo to be saved in the file.
+     *
+     * @return string representation of the todo to be saved in the file.
+     */
     @Override
     public String toSaveString() {
         // D | 0 | return book | June 6th

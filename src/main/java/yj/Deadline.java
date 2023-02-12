@@ -15,10 +15,20 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, dateTimeFormatter);
     }
 
+    /**
+     * Returns the formatted deadline of the deadline.
+     *
+     * @return deadline of the deadline formatted as MMM dd yyyy h:mma.
+     */
     public String getBy() {
         return outputFormatter.format(by);
     }
 
+    /**
+     * Sets the deadline of the deadline and saves as a LocalDateTime.
+     *
+     * @param by deadline of the deadline in the format d/M/yyyy HHmm.
+     */
     public void setBy(String by) {
         this.by = LocalDateTime.parse(by, dateTimeFormatter);
     }
@@ -29,6 +39,11 @@ public class Deadline extends Task {
         return "[D]" + " " + super.getStatusIcon() + " " + super.toString() + " (by: " + getBy() + ")";
     }
 
+    /**
+     * Returns the string representation of the deadline to be saved in the file.
+     *
+     * @return string representation of the deadline to be saved in the file.
+     */
     @Override
     public String toSaveString() {
         // D | 0 | return book | June 6th

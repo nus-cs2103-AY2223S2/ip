@@ -24,6 +24,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks to file.
+     * @param tasks List of tasks
+     */
     public void save(List<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(tasksFile);
@@ -36,6 +40,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from file.
+     * @return List of tasks
+     */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
         // Read tasks from file

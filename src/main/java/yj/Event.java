@@ -15,18 +15,38 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, dateTimeFormatter);
     }
 
+    /**
+     * Returns the formatted start time of the event.
+     *
+     * @return start time of the event formatted as MMM dd yyyy h:mma.
+     */
     public String getFrom() {
         return outputFormatter.format(from);
     }
 
+    /**
+     * Sets the start time of the event and saves as a LocalDateTime.
+     *
+     * @param from start time of the event in the format d/M/yyyy HHmm.
+     */
     public void setFrom(String from) {
         this.from = LocalDateTime.parse(from, dateTimeFormatter);
     }
 
+    /**
+     * Returns the formatted end time of the event.
+     *
+     * @return end time of the event formatted as MMM dd yyyy h:mma.
+     */
     public String getTo() {
         return outputFormatter.format(to);
     }
 
+    /**
+     * Sets the end time of the event and saves as a LocalDateTime.
+     *
+     * @param to end time of the event in the format d/M/yyyy HHmm.
+     */
     public void setTo(String to) {
         this.to = LocalDateTime.parse(to, dateTimeFormatter);
     }
@@ -36,6 +56,11 @@ public class Event extends Task {
         return "[E]" + " " + super.getStatusIcon() + " " + super.toString() + " (from: " + getFrom() + " to: " + getTo() + ")";
     }
 
+    /**
+     * Returns the string representation of the event to be saved in the file.
+     *
+     * @return string representation of the event to be saved in the file.
+     */
     @Override
     public String toSaveString() {
         // E | 0 | project meeting | Aug 6th 2-4pm
