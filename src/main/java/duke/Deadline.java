@@ -9,6 +9,9 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Tasks {
 
+    /**
+     * Date and Time of the deadline with the format dd/MM/yyy HHmm
+     */
     protected LocalDateTime by;
 
     /**

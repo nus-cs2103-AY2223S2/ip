@@ -12,9 +12,14 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    /**
+     * Duke object created
+     */
     private Duke duke = new Duke(new UI(), new Parser());
 
+    /**
+     * starts the Main application
+     */
     @Override
     public void start(Stage stage) {
         assert !stage.equals(null);
