@@ -1,14 +1,25 @@
 # User Guide
 
+`Kuromi クロミ` is a desktop application that acts as a personal assistant chatbot to keep track of your tasks. The character `Kuromi クロミ` (the bot) is taken from a Sanrio Character, and the user will play the role as `Kuromi クロミ`'s rival, `My Melody マイメロディ`.
+
 ## Features 
 
-### Feature-ABC
+### Manage your tasks
 
-Description of the feature.
+Kuromi keeps track of your tasks by allowing you to `add`, `view`, `delete`, `mark`, and `unmark` by typing specific commands through the application.\
+Kuromi is talkative and will give comments to your commands! :D
 
-### Feature-XYZ
+### Get upcoming deadlines
 
-Description of the feature.
+Kuromi can remind you of your upcoming deadlines by sending the command `remind`. You can set the number of upcoming tasks that should be shown.
+
+### Find keyword
+
+To easily search for specific tasks, Kuromi is able to find the tasks which include a specific keyword.
+
+### Get My Melody's Mistakes
+
+From this source, Kuromi has a notebook `Kuromi Note` that lists all the mistakes that My Melody made to Kuromi. You can get ~~My Melody's~~ your mistakes by specifying the command `mistakes`.
 
 ## Usage
 
