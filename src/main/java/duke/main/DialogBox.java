@@ -3,6 +3,7 @@ package duke.main;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.ui.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,10 +25,17 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    private Ui ui;
 
     private DialogBox(String text, Image img) {
+        ui = new Ui();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader;
+            if (text.equals(ui.getUnknownMessage())) {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/ErrorBox.fxml"));
+            } else {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            }
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
