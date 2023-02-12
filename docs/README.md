@@ -46,7 +46,7 @@ Adds a deadline task into your todo list.
 
 ## Usage
 
-### `todo` 
+## `todo` 
 
 
 Adds a todo task into your todo list.
@@ -62,7 +62,7 @@ Expected output:
  You now have 1 task left.
  ```
 
-### `deadline` 
+## `deadline` 
 Adds a deadline task into your todo list.
 
 Example of usage:
@@ -77,7 +77,7 @@ Expected output:
  You now have 2 tasks left.
  ```
 
-### `deadline`
+## `deadline`
 Adds a deadline task into your todo list.
 
 Example of usage:
@@ -92,7 +92,7 @@ Expected output:
  You now have 2 tasks left.
  ```
 
-### `event`
+## `event`
 Adds a event task into your todo list.
 
 Example of usage:
@@ -107,15 +107,15 @@ Expected output:
  You now have 3 tasks left.
  ```
 
-### `help`
+## `help`
 Displays a help page with all commands available. 
 
-### `FAQ`
+## `FAQ`
 **Q**: How can I transfer data from one computer to another?
 
 **A**: The data is stored within the `duke.txt` file under `/data`. 
 Just export it to the other device and you're good to go!
 
-### `Snapshot`
+## `Snapshot`
 All done properly, it should look like this.
 ![Display](Ui.png)
