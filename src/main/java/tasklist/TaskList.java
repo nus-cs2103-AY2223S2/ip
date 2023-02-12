@@ -42,6 +42,7 @@ public class TaskList {
      * @param task Index number of the task in the list.
      */
     public void addTask(Task task) {
+        assert task != null : "task is null";
         this.list.add(task);
     }
 
@@ -51,6 +52,8 @@ public class TaskList {
      * @return Number of tasks in the list
      */
     public int size() {
-        return this.list.size();
+        int listSize = this.list.size();
+        assert listSize >= 0 : "size of list is less than 0";
+        return listSize;
     }
 }
