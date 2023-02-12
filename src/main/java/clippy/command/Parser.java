@@ -9,6 +9,7 @@ import clippy.exception.ClippyInvalidEventException;
 import clippy.exception.ClippyMissingDeadlineException;
 import clippy.exception.ClippyTodoEmptyDescriptionException;
 import clippy.exception.ClippyUnknownCommandException;
+import clippy.task.PriorityLevel;
 
 /**
  * Parser to parse all user commands.
@@ -86,6 +87,21 @@ public class Parser {
         case "delete":
             // todo: check for valid list index
             return dispatch(CommandType.DELETE, new String[]{ args[1] });
+        case "priority":
+            // todo: check if args[1] is a valid task id
+            if (args.length < 3) {
+                throw new ClippyException("Too little arguments provided!\n"
+                        + "Expected format: priority <taskID> <priorityLevel>");
+            }
+            try {
+                PriorityLevel priority = PriorityLevel.valueOf(args[2]);
+            } catch (IllegalArgumentException e) {
+                throw new ClippyException("Invalid priority, "
+                        + "please select one from the following: \n"
+                        + "URGENT, HIGH, MEDIUM, LOW");
+            }
+
+            return dispatch(CommandType.PRIORITY, new String[]{ args[1], args[2] });
         default:
             throw new ClippyUnknownCommandException();
         }
@@ -122,6 +138,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(args[0]));
         case FIND:
             return new FindCommand(args[0]);
+        case PRIORITY:
+            return new SetPriorityCommand(Integer.parseInt(args[0]), PriorityLevel.valueOf(args[1]));
         default:
             return null;
         }
