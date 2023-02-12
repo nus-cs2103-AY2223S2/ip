@@ -6,6 +6,10 @@ import duke.components.Storage;
 import duke.components.TaskList;
 import duke.components.Ui;
 import duke.exceptions.DukeException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -62,10 +66,11 @@ public class Duke {
             }
         }
     }
-
+    /**
     public static void main(String[] args) {
         new Duke(getFilePath()).run();
     }
+     **/
 
     /**
      * Returns a system-specific string denoting the location of DukeMem.
@@ -77,7 +82,7 @@ public class Duke {
      *
      * @return filePath system-specific string indicating the location of DukeMem
      */
-    private static String getFilePath() {
+    public static String getFilePath() {
         Path dirPath = Paths.get(".", "data");
         try {
             //This method creates a directory if it does not exist yet, but will not
@@ -89,4 +94,6 @@ public class Duke {
         Path dataPath = Paths.get(dirPath.toString(), "DukeMem.ser");
         return dataPath.toString();
     }
+
+
 }
