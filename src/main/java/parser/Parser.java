@@ -3,8 +3,8 @@ package parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke_exception.EmptyDescriptionException;
-import duke_exception.InvalidInputException;
+import dukeexceptions.EmptyDescriptionException;
+import dukeexceptions.InvalidInputException;
 import storage.Storage;
 import task.Deadline;
 import task.Event;
