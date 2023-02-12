@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Check whether the given list is empty.
+     * Checks whether the given list is empty.
      *
      * @param list The given list to be checked
      * @return Whether the given list is empty
@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Checks whether the index is valid with respect to the given list
+     * Checks whether the index is valid with respect to the given list.
      *
      * @param list The given list to be checked
      * @return Whether the given index is valid.
@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Remove a particular task with the given index in the TaskList and display
+     * Removes a particular task with the given index in the TaskList and display
      * the relevant information of the task and the remaining TaskList.
      *
      * @param tasks The user TaskList that contains all the task to be manipulated

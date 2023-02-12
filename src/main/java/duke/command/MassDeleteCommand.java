@@ -37,7 +37,7 @@ public class MassDeleteCommand extends Command {
      */
     private void deleteDoneTasks(TaskList tasks) {
         // loop through all tasks
-        for (int i = 0; i < tasks.getNoOfTasks(); i++) {
+        for (int i = tasks.getNoOfTasks() - 1; i >= 0; i--) {
             // check if task at index i is done
             if (tasks.getTask(i).getStatus()) {
                 // if task is done, delete the task from the task list

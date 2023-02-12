@@ -25,7 +25,7 @@ public class AddTaskCommand extends Command {
     }
 
     /**
-     * Execute the command to add a task to the task list, save the task list to storage,
+     * Executes the command to add a task to the task list, save the task list to storage,
      * and display a message to the user.
      *
      * @param tasks the task list to add the task to

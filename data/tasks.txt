@@ -1,4 +1,2 @@
-[D] | [ ] | submit report | Jan 30 2023 11:59
-[F] | [ ] | do Computer Network homework | PT2H
-[T] | [ ] | buy milk
-[D] | [ ] | meeting | Oct 10 2020 15:00
+[D] | [X] | homework | Jan 16 2023 15:00
+[D] | [X] | homework | Jan 16 2023 15:00

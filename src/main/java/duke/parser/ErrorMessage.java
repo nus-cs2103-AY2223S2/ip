@@ -4,7 +4,6 @@ package duke.parser;
  * A class that encapsulates all the error messages.
  */
 public class ErrorMessage {
-
     // Errors related to task description
     public static final String EMPTY_DEADLINE_ERROR = "OOPS!!! The description of a deadline task cannot be empty.";
     public static final String EMPTY_EVENT_ERROR = "OOPS!!! The description of an event task cannot be empty.";
@@ -13,7 +12,7 @@ public class ErrorMessage {
             + "a fixed duration task cannot be empty.";
     public static final String INVALID_DESCRIPTION_ERROR = "OOPS!!! The description cannot be empty.";
     public static final String INVALID_HELP_COMMAND_ERROR = "OOPS!!! Unrecognized help Command.\nPlease try:\n"
-            + "- help\n- help date\n- help time";
+            + "- help\n- help date\n- help time\n- help duration";
 
     // Errors related to task index
     public static final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]. "

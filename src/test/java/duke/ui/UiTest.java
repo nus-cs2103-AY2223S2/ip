@@ -20,7 +20,6 @@ public class UiTest {
         String expected = "    Hello\n    World!\n    How are you?";
         assertEquals(expected, ui.indent(input));
     }
-    
     @Test
     public void getResponse_noAppendCalls_emptyString() {
         String expected = "";

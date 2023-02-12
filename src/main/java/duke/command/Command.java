@@ -9,7 +9,6 @@ import duke.ui.Ui;
  * An abstract instruction class encapsulating a user input instruction in Duke, which can be extended
  * by more specific input instructions like addToDoInstruction, ExitInstructions, etc.
  */
-
 public abstract class Command {
     /**
      * Indicates whether the Command is the Exit Command.
