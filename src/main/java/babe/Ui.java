@@ -121,5 +121,10 @@ class Ui {
         return output;
     }
 
+    protected static String notifyError(AssertionError e2) {
+        String output = e2.getMessage();
+        printOutputMessage(output);
+        return output;
+    }
 
 }
