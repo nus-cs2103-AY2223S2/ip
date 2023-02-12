@@ -21,8 +21,10 @@ public class Parser {
      */
     public String parse(String command, ToDoList todolist, Storage storage) {
         if (command.equals("bye")) {
+            assert command.equals("bye") : "Command != 'bye'";
             return endDuke(storage, todolist);
         } else if (command.equals("list")) {
+            assert command.equals("list") : "Command != 'list'";
             return todolist.list();
         } else if (command.matches("mark(.*)")) {
             return markTask(command, todolist);
@@ -121,6 +123,10 @@ public class Parser {
      * @return Confirmation of creation of Task, or error message
      */
     public String createTask(String command, ToDoList todolist) {
+        int spacer = command.indexOf(" ");
+        if (spacer == -1) {
+            return "Please enter in format 'todo <task>'";
+        }
         try {
             String task = command.substring(5);
             todolist.add(task);
@@ -140,7 +146,7 @@ public class Parser {
     public String createDeadlineTask(String command, ToDoList todolist) {
         // check format
         if (!command.contains("/")) {
-            return ("\tPlease enter in format 'deadline <task> /<deadline>'");
+            return ("Please enter in format 'deadline <task> /<deadline>'");
         } else {
             int firstSlash = command.indexOf("/");
             String task = command.substring(9, firstSlash);
