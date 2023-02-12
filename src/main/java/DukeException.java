@@ -1,4 +1,3 @@
-package duke;
 import java.io.FileNotFoundException;
 public class DukeException extends Exception {
 
