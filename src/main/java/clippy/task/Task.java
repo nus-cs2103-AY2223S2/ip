@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 public abstract class Task {
     private String description;
     private boolean isDone;
+    private PriorityLevel priority;
 
     /**
      * Helps to create a subclass of Task.
@@ -22,6 +23,7 @@ public abstract class Task {
         // assumed to be not complete upon initialisation
         // would not make sense to add a finished task to the list
         this.isDone = false;
+        this.priority = PriorityLevel.NONE;
     }
 
     /**
@@ -44,7 +46,10 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (this.isDone ? "[X] " : "[ ] ") + this.description;
+        return String.format("%s %s (Priority: %s)",
+                this.isDone ? "[X]" : "[ ]",
+                this.description,
+                this.priority.name());
     }
 
     /**
@@ -52,7 +57,7 @@ public abstract class Task {
      * @return A string representation of the Task in CSV form.
      */
     public String getCsvString() {
-        return String.format("%s,%b", this.description, this.isDone);
+        return String.format("%s,%b,%s", this.description, this.isDone, this.priority.name());
     }
 
     /**
@@ -67,7 +72,7 @@ public abstract class Task {
         try {
             switch (arguments[0]) {
             case "D":
-                result = new Deadline(arguments[1], LocalDate.parse(arguments[3]));
+                result = new Deadline(arguments[1], LocalDate.parse(arguments[4]));
                 break;
             case "T":
                 result = new ToDo(arguments[1]);
@@ -75,8 +80,8 @@ public abstract class Task {
             case "E":
                 result = new Event(
                         arguments[1],
-                        LocalDate.parse(arguments[3]),
-                        LocalDate.parse(arguments[4]));
+                        LocalDate.parse(arguments[4]),
+                        LocalDate.parse(arguments[5]));
                 break;
             default:
                 return null;
@@ -86,6 +91,7 @@ public abstract class Task {
             return null;
         }
         result.isDone = Boolean.parseBoolean(arguments[2]);
+        result.setPriority(PriorityLevel.valueOf(arguments[3]));
         return result;
     }
 
@@ -96,5 +102,14 @@ public abstract class Task {
      */
     public boolean hasKeywordInDescription(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    /**
+     * Sets the priority level of the current task.
+     *
+     * @param priority The priority level of the task.
+     */
+    public void setPriority(PriorityLevel priority) {
+        this.priority = priority;
     }
 }

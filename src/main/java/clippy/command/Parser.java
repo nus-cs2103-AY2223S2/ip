@@ -41,7 +41,7 @@ public class Parser {
             if (args.length < 2) {
                 throw new ClippyTodoEmptyDescriptionException();
             }
-            return dispatch(CommandType.TODO, new String[] { args[1] });
+            return dispatch(CommandType.TODO, new String[] { command.substring(5)});
         case "deadline": {
             int byIndex = command.indexOf("/by ");
             if (byIndex == -1 || command.length() < byIndex + 4) {
