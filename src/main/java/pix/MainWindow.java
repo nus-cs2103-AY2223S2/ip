@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
                 DialogBox.getPixDialog("Hello, this is Pix! How can I help you?\n\n "
