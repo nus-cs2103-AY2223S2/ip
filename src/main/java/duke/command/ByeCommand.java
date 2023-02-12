@@ -9,7 +9,8 @@ import duke.task.TaskList;
 public class ByeCommand extends Command {
 
     /**
-     * Execute method for Bye Command to display message.
+     * Method for Bye Command to display message.
+     *
      * @param tasks   - task list of the current tasks.
      * @param storage - database of the history of commands.
      * @return String Display bye message when done.
@@ -19,7 +20,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Check if program is to be exited upon bye command.
+     * Method that check if program is to be exited upon bye command.
      *
      * @return boolean - true or false according to command.
      */

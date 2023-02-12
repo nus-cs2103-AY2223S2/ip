@@ -36,7 +36,7 @@ public class FindCommand extends Command {
             stringOutputOfTask += t + "\n";
         }
 
-        return "Here are the matching tasks in your list: " + stringOutputOfTask;
+        return "Here are the matching tasks in your list: " + "\n" + stringOutputOfTask;
     }
 
 }
