@@ -4,7 +4,7 @@ import duke.command.*;
 import java.io.*;
 import java.util.*;
 public class Duke {
-    private static Ui ui; //deal with user interaction
+    private static Ui ui; //deal with user interactionss
     private static TaskList taskList;
     private static Storage storage;
     private static ArrayList<Task> list;
