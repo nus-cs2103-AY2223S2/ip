@@ -56,17 +56,23 @@ public class MainWindow extends AnchorPane {
 
         try {
             code = Command.parseCommand(input).execute(duke);
+        } catch (NullPointerException e) {
+            // Failed to parse command, null is returned.
+            duke.ui.warn("Sorry, I don't understand your request :(");
+            duke.ui.println("Did you spell something wrongly?");
         } catch (DukeException e) {
             duke.ui.warn(e.getMessage());
         }
-        String response = duke.ui.getRecentMessages();
+        finally {
+            String response = duke.ui.getRecentMessages();
 
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
 
-        userInput.clear();
+            userInput.clear();
+        }
 
         if (code == ReturnCode.EXIT) {
             Platform.exit();
