@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.TaskList;
+import duke.ui.Ui;
 import duke.exception.DukeException;
-
 
 /**
  * The FindCommand class encapsulates the variables and methods related to Find commands.

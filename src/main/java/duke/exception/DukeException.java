@@ -6,7 +6,7 @@ import java.util.Arrays;
 /** Class contains all exceptions thrown by Duke. */
 public class DukeException extends Exception {
     protected ArrayList<String> commandError = new ArrayList<>(
-            Arrays.asList("todo", "deadline", "event", "missing details"));
+            Arrays.asList("todo", "deadline", "event", "view", "missing details"));
     protected ArrayList<String> indexError = new ArrayList<>(
             Arrays.asList("mark", "unmark", "delete"));
     protected ArrayList<String> fileError = new ArrayList<>(
@@ -14,7 +14,7 @@ public class DukeException extends Exception {
                     "updating file", "saving changes to file", "file not found", "empty line in file"));
     protected ArrayList<String> formatError = new ArrayList<>(
             Arrays.asList("date format", "wrong order"));
-    protected ArrayList<String> findError = new ArrayList<>(Arrays.asList("empty keyword"));
+    protected ArrayList<String> findError = new ArrayList<>(Arrays.asList("find", "empty keyword"));
     protected String errorMsg;
 
     /**
@@ -23,7 +23,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String command) {
         if (commandError.contains(command)) {
-            this.errorMsg = "The " + command + " description cannot be empty.";
+            this.errorMsg = "The " + command + " description/date cannot be empty.";
         } else if (indexError.contains(command)) {
             this.errorMsg = "Please remember to enter an index!";
         } else if (fileError.contains(command)) {

@@ -1,5 +1,6 @@
-package duke;
+package duke.storage;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import duke.exception.DukeException;
@@ -154,6 +155,18 @@ public class TaskList {
             throw new DukeException("missing details");
         }
         this.lst.add(task);
+    }
+
+    public String printSchedule(LocalDate date) {
+        int count = 1;
+        String schedule = "";
+        for (int i = 0; i < this.getSize(); i++) {
+            Task task = this.lst.get(i);
+            if (task.isTaskInSchedule(date)) {
+                schedule += String.format("%d. %s\n", count, task);
+            }
+        }
+        return schedule;
     }
 
     /**

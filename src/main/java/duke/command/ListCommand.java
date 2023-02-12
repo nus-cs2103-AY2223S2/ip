@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.TaskList;
+import duke.ui.Ui;
 
 /**
  * The ListCommand class encapsulates the variables and methods related to List commands.

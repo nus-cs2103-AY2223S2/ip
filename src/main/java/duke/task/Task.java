@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Abstract class contains variables and methods related to Tasks.
  */
@@ -33,6 +35,13 @@ public abstract class Task {
     public String getTaskName() {
         return this.taskName;
     }
+
+    /**
+     * Checks whether task falls on the given date.
+     * @param date Date to be checked against.
+     * @return true if task falls on the date and false otherwise.
+     */
+    public abstract boolean isTaskInSchedule(LocalDate date);
 
     /**
      * Marks task as done or undone depending on status.

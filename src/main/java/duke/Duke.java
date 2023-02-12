@@ -1,6 +1,9 @@
 package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;

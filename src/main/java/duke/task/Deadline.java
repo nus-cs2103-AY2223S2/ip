@@ -23,6 +23,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean isTaskInSchedule(LocalDate date) {
+        return this.deadline.equals(date);
+    }
+
+    @Override
     public String toFile() {
         return String.format("D | %s | %s\n", super.toFile(), deadline);
     }
