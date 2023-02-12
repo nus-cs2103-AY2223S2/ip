@@ -1,7 +1,66 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello! I'm Duke
+
+What can I do for you?
+
+Got it. I've added this task:
+[T][ ] todo task1
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[E][ ] 1 (from: 1pm to: 2pm)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+[D][ ] deadline dead1 (by: today)
+Now you have 3 tasks in the list.
+Here are the tasks in your list: 
+1. [T][ ] todo task1
+2. [E][ ] 1 (from: 1pm to: 2pm)
+3. [D][ ] deadline dead1 (by: today)
+End of task list.
+Nice! I've marked this task as done:
+[T][X] todo task1
+Nice! I've marked this task as done:
+[E][X] 1 (from: 1pm to: 2pm)
+Nice! I've marked this task as done:
+[D][X] deadline dead1 (by: today)
+Nice! I've marked this task as done:
+[T][X] todo task1
+Nice! I've marked this task as done:
+[E][X] 1 (from: 1pm to: 2pm)
+Nice! I've marked this task as done:
+[D][X] deadline dead1 (by: today)
+OK, I've marked this task as not done yet:
+[T][ ] todo task1
+OK, I've marked this task as not done yet:
+[E][ ] 1 (from: 1pm to: 2pm)
+OK, I've marked this task as not done yet:
+[D][ ] deadline dead1 (by: today)
+OK, I've marked this task as not done yet:
+[T][ ] todo task1
+OK, I've marked this task as not done yet:
+[E][ ] 1 (from: 1pm to: 2pm)
+OK, I've marked this task as not done yet:
+[D][ ] deadline dead1 (by: today)
+Noted. I've removed this task:
+[T][ ] todo task1
+Now you have 2 tasks in the list.
+index 3 not in range!
+Got it. I've added this task:
+[T][ ] todo task2
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+[E][ ] 2 (from: 2pm to: 3pm)
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+[D][ ] deadline dead2 (by: tomorrow)
+Now you have 5 tasks in the list.
+Here are the tasks in your list: 
+1. [E][ ] 1 (from: 1pm to: 2pm)
+2. [D][ ] deadline dead1 (by: today)
+3. [T][ ] todo task2
+4. [E][ ] 2 (from: 2pm to: 3pm)
+5. [D][ ] deadline dead2 (by: tomorrow)
+End of task list.
+todo cannot have no description!
+I'm sorry, I could not understand that command.
+Bye. Hope to see you again soon!
 
