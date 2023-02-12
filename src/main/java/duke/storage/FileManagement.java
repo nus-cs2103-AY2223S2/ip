@@ -108,6 +108,7 @@ public class FileManagement {
             decoded = new Event(des, components[3], components[4]);
             break;
         default:
+            assert false : "Saved file may be corrupted";
             break;
         }
         if (toMark.equals("true")) {

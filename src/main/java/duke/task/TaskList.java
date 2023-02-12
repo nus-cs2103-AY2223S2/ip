@@ -58,6 +58,8 @@ public class TaskList {
      * @return The deleted task.
      */
     public Task delete(int taskNum) {
+        assert 1 <= taskNum && taskNum <= getSize() :
+                "taskNum should be a positive integer at most the number of tasks";
         return this.tasks.remove(taskNum - 1);
     }
 
@@ -67,6 +69,8 @@ public class TaskList {
      * @return Information of the task in string representation.
      */
     public String toggleMark(int taskNum) {
+        assert 1 <= taskNum && taskNum <= getSize() :
+                "taskNum should be a positive integer at most the number of tasks";
         Task task = tasks.get(taskNum - 1);
         task.markTask();
         return task.getStatusIcon();
@@ -78,6 +82,8 @@ public class TaskList {
      * @return Information of the task in string representation.
      */
     public String toggleUnmark(int taskNum) {
+        assert 1 <= taskNum && taskNum <= getSize() :
+                "taskNum should be a positive integer at most the number of tasks";
         Task task = tasks.get(taskNum - 1);
         task.unmarkTask();
         return task.getStatusIcon();
