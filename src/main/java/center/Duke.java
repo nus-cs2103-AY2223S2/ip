@@ -35,6 +35,7 @@ public class Duke extends Application {
     /**
      * Constructs a new Duke object with the requisite Storage, TaskList, Ui and Parser objects.
      */
+
     public Duke() {
         storage = new Storage();
         try {
@@ -44,17 +45,6 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
         parser = new Parser(tasks);
-    }
-
-    /**
-     * Starts up Duke and accepts user inputs for processing until termination, where the end list is stored in a file.
-     */
-    public void run(String[] args) {
-
-    }
-
-    public static void main(String[] args) {
-        Application.launch(Duke.class, args);
     }
 
     //Todo: Make this more elegant
@@ -122,6 +112,19 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
+
+    /**
+     * Starts up Duke and accepts user inputs for processing until termination, where the end list is stored in a file.
+     */
+    public void run(String[] args) {
+
+    }
+
+    public static void main(String[] args) {
+        Application.launch(Duke.class, args);
+    }
+
+
 
     /**
      * Iteration 2:

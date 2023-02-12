@@ -15,7 +15,6 @@ public class Storage {
 
     /**
      * Constructor for a storage object
-     * @param filePath the user's provided storage path where a file may potentially be
      */
     public Storage() {
         String home = System.getProperty("user.home");
