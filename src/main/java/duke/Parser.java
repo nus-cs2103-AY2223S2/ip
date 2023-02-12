@@ -1,7 +1,5 @@
 package duke;
 
-import javafx.application.Platform;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
@@ -86,24 +84,39 @@ public class Parser {
         return new Events(taskName, taskStart, taskEnd);
     }
 
+    /**
+     * Gets the search word from the given line of command.
+     * @param line line of command containing the search word
+     * @return the search word in a String
+     */
     public static String getSearchWord(String line) {
         return line.substring(TO_REMOVE_LEADING_FOUR_LETTERS);
     }
 
+    /**
+     * Gets the index needed from the given command.
+     * @param command the user command
+     * @return the index in the form of an <code>int</code>
+     */
     public static int getIndexFromCommand(String command) {
         return Integer.parseInt(command.split(" ")[1]) - 1;
     }
 
+    /**
+     * Gets the type of command from the given command.
+     * @param command the user command
+     * @return the type of command in the form of a String
+     */
     public static String getTypeOfCommand(String command) {
         return command.split(" ")[0];
     }
-
+    
     public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException,
             IOException, IndexOutOfBoundsException, DateTimeParseException {
         String typeOfCommand = getTypeOfCommand(command);
         switch (typeOfCommand) {
         case "bye":
-            Platform.exit();
+            return ui.sayBye();
         case "list":
             return ui.showTaskList(tasks);
         case "mark":
