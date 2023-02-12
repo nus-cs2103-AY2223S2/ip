@@ -9,177 +9,150 @@ import java.util.Scanner;
  * This class deals with interactions with the user.
  */
 public class Ui {
-    private boolean isExit = false;
+    /** Stores the message to respond to the user's input */
+    private StringBuilder message = new StringBuilder();
 
     /**
-     * Prints the line separator.
+     * Stores the welcome message in message attribute.
      */
-    public void printLine(){
-        System.out.println("\t____________________________________________________________");
+    public void printWelcome() {
+        message.append("Hello! I'm C-3PO, Human Cyborg Relations.\nWhat can I do for you?");
     }
 
     /**
-     * Prints the welcome message.
+     * Stores the goodbye message in message attribute.
      */
-    public void showWelcome() {
-        printLine();
-        System.out.println("\tHello! I'm C-3PO, Human Cyborg Relations.\n\tWhat can I do for you?");
-        printLine();
+    public void printGoodBye() {
+        message.append("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints the goodbye message.
-     */
-    public void exit() {
-        printLine();
-        System.out.println("\tBye. Hope to see you again soon!");
-        printLine();
-        isExit = true;
-    }
-
-    public boolean getIsExit() {
-        return isExit;
-    }
-
-    /**
-     * Prints the list of tasks.
+     * Stores the list of tasks in message attribute.
      *
      * @param listOfTasks Array list of tasks.
      */
     public void listTasks(ArrayList<Task> listOfTasks) {
         Task task;
-        printLine();
-        System.out.println("\tHere are the tasks in your list:");
+        message.append("Here are the tasks in your list:");
         for (int i = 1; i <= listOfTasks.size(); i++) {
             task = listOfTasks.get(i - 1);
-            System.out.println("\t" + i + "." + task);
+            message.append("\n" + i + "." + task);
         }
-        printLine();
     }
 
     /**
-     * Prints the list of matching tasks.
+     * Stores the list of matching tasks in message attribute.
      *
      * @param listOfTasks Array list of matching tasks.
      */
     public void printMatchingTasks(ArrayList<Task> listOfTasks) {
         Task task;
-        printLine();
-        System.out.println("\tHere are the matching tasks in your list:");
+        message.append("Here are the matching tasks in your list:");
         for (int i = 1; i <= listOfTasks.size(); i++) {
             task = listOfTasks.get(i - 1);
-            System.out.println("\t" + i + "." + task);
+            message.append("\n" + i + "." + task);
         }
-        printLine();
     }
 
     /**
-     * Prints the task that was saved.
+     * Stores the task that was saved in message attribute.
      *
      * @param task Task that was saved.
      * @param listOfTasks Array list of tasks.
      */
     public void printSaveTask(Task task, ArrayList<Task> listOfTasks) {
-        printLine();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
-        printLine();
+        message.append("Got it. I've added this task:");
+        message.append("\n  " + task);
+        message.append("\nNow you have " + listOfTasks.size() + " tasks in the list.");
     }
 
     /**
-     * Prints the task that was marked as done.
+     * Stores the task that was marked as done in message attribute.
      *
      * @param task Task that was marked.
      */
     public void printMarkTask(Task task) {
-        printLine();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  " + task);
-        printLine();
+        message.append("Nice! I've marked this task as done:");
+        message.append("\n  " + task);
     }
 
     /**
-     * Prints the task that was marked as not done.
+     * Stores the task that was marked as not done in message attribute.
      *
      * @param task Task that was unmarked.
      */
     public void printUnmarkTask(Task task) {
-        printLine();
-        System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t  " + task);
-        printLine();
+        message.append("OK, I've marked this task as not done yet:");
+        message.append("\n  " + task);
     }
 
     /**
-     * Prints the task that was deleted.
+     * Stores the task that was deleted in message attribute.
      *
      * @param task Task that was deleted.
      * @param listOfTasks Array list of tasks.
      */
     public void printDeleteTask(Task task, ArrayList<Task> listOfTasks) {
-        printLine();
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the list.");
-        printLine();
+        message.append("Noted. I've removed this task:");
+        message.append("\n  " + task);
+        message.append("\nNow you have " + listOfTasks.size() + " tasks in the list.");
     }
 
     /**
-     * Returns the command input by the user.
-     *
-     * @return Input command.
-     */
-    public String readCommand() {
-        Scanner scan = new Scanner(System.in);
-        String input = scan.nextLine().trim();
-        return input;
-    }
-
-    /**
-     * Prints the error when the data could
-     * not be loaded.
+     * Stores the error when the data could
+     * not be loaded in message attribute.
      */
     public void showLoadingError() {
-        System.out.println("Creating new file to store tasks due to the above mentioned loading error ...");
-        System.out.print("WARNING!!! Adding a new task will reset the contents of ");
-        System.out.println("the original file (if it exists).");
-        System.out.println("Exit the program if you do not wish to continue (enter 'bye')");
+        message.append("Creating new file to store tasks due to a loading error ...");
+        message.append("\nWARNING!!! Continuing with the program will reset the contents of ");
+        message.append("\nthe original file (if it exists).");
+        message.append("\nExit the program if you do not wish to continue (enter 'bye')");
     }
 
     /**
-     * Prints the error when file or folder
-     * could not be created.
+     * Store the error when file or folder
+     * could not be created in message attribute.
      */
     public void showFileError() {
-        System.out.println("Error occurred when creating the folder/file.");
+        message.append("Error occurred when creating the folder/file.");
     }
 
     /**
-     * Prints error message for unknown command.
+     * Stores error message for unknown command in message attribute.
      */
     public void showUnknownError() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        message.append("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
-     * Prints error message for empty task description.
+     * Stores error message for empty task description in message attribute.
      */
     public void showDescriptionError(String task) {
-        System.out.println("☹ OOPS!!! The description of " + task + " task cannot be empty.");
+        message.append("OOPS!!! The description of " + task + " task cannot be empty.");
     }
 
     /**
-     * Prints error message for out of bounds index.
+     * Stores error message for out of bounds index in message attribute.
      */
     public void showIndexError(int index) {
-        System.out.println("☹ OOPS!!! The index " + index + " for the list of tasks is out of bounds.");
+        message.append("OOPS!!! The index " + index + " for the list of tasks is out of bounds.");
     }
 
     /**
-     * Prints error message for incorrect date time format.
+     * Stores error message for incorrect date time format in message attribute.
      */
     public void showDateTimeError() {
-        System.out.println("☹ OOPS!!! Incorrect date time format. Use dd/mm/yyyy HHmm instead.");
+        message.append("OOPS!!! Incorrect date time format. Use dd/mm/yyyy HHmm instead.");
+    }
+
+    public StringBuilder getMessage() {
+        return message;
+    }
+
+    /**
+     * Clears the message attribute.
+     */
+    public void clearMessage() {
+        message.setLength(0);
     }
 }

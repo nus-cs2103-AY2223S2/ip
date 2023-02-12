@@ -63,7 +63,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException(e);
+            throw new DukeException();
         }
     }
 
@@ -105,17 +105,15 @@ public class Storage {
                     task = new Event(description, from, to);
                     break;
                 default:
-                    throw new DukeException(str);
+                    throw new DukeException();
                 }
                 if (str.charAt(4) == '1') {
                     task.markAsDone();
                 }
                 listOfTasks.add(task);
             }
-        } catch (FileNotFoundException e) {
-            throw new DukeException(e);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(e);
+        } catch (FileNotFoundException | DateTimeParseException e) {
+            throw new DukeException();
         }
         return listOfTasks;
     }
