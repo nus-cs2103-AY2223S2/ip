@@ -15,7 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
-# bin/
-# *.class
-# *.jar
-# *.exe
+bin/
+*.class
+*.jar
+*.exe
