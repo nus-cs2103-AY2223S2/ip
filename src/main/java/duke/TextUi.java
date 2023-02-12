@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -11,15 +10,13 @@ import java.util.Scanner;
 class TextUi {
 
     public final Scanner in;
-    private final PrintStream out;
 
     public TextUi() {
-        this(System.in, System.out);
+        this(System.in);
     }
 
-    public TextUi(InputStream in, PrintStream out) {
+    public TextUi(InputStream in) {
         this.in = new Scanner(in);
-        this.out = out;
     }
 
     public String getGoodbyeMessage() {

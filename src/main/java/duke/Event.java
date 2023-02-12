@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class Event extends Task {
 
-    private LocalDate from;
-    private LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     /**
      * Constructs an event with the given description, from and to.

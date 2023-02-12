@@ -1,5 +1,5 @@
 package duke;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 /**
@@ -41,8 +41,8 @@ public abstract class Task {
 
     public String getStringOfTags() {
         String tagsString = "";
-        for (int i = 0; i < tags.size(); i++) {
-            tagsString += tags.get(i) + " ";
+        for (String tag : tags) {
+            tagsString += tag + " ";
         }
         return tagsString;
     }

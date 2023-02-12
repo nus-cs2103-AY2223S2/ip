@@ -1,5 +1,11 @@
 package duke;
 
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.NoDescriptionException;
+import duke.exceptions.TaskNotFoundException;
+import duke.exceptions.WrongDateFormatException;
+
+
 /**
  * This class is a parser that reads user inputs.
  */
@@ -14,8 +20,7 @@ public class Parser {
      * @param storage Storage.
      * @param textUi TextUi.
      */
-    public String parse(String userInput, TaskList taskList, Storage storage, TextUi textUi)
-            throws DukeException {
+    public String parse(String userInput, TaskList taskList, Storage storage, TextUi textUi) {
         String command;
         String body;
         assert userInput != null : "No user input detected";
@@ -28,27 +33,32 @@ public class Parser {
             body = "";
         }
 
-        switch (command) {
-        case "list":
-            return Commands.executeListCommand(taskList);
-        case "mark":
-            return Commands.executeMarkCommand(body, taskList, storage);
-        case "unmark":
-            return Commands.executeUnmarkCommand(body, taskList, storage);
-        case "delete":
-            return Commands.executeDeleteCommand(body, textUi, taskList, storage);
-        case "todo":
-            return Commands.executeToDoCommand(body, textUi, taskList, storage);
-        case "deadline":
-            return Commands.executeDeadlineCommand(body, textUi, taskList, storage);
-        case "event":
-            return Commands.executeEventCommand(body, textUi, taskList, storage);
-        case "find":
-            return Commands.executeFindCommand(body, taskList);
-        case "tag":
-            return Commands.executeTagCommand(body, taskList, storage);
-        default:
-            throw new DukeException("Hmm... you typed an invalid command!");
+        try {
+            switch (command) {
+            case "list":
+                return Commands.executeListCommand(taskList);
+            case "mark":
+                return Commands.executeMarkCommand(body, taskList, storage);
+            case "unmark":
+                return Commands.executeUnmarkCommand(body, taskList, storage);
+            case "delete":
+                return Commands.executeDeleteCommand(body, textUi, taskList, storage);
+            case "todo":
+                return Commands.executeToDoCommand(body, textUi, taskList, storage);
+            case "deadline":
+                return Commands.executeDeadlineCommand(body, textUi, taskList, storage);
+            case "event":
+                return Commands.executeEventCommand(body, textUi, taskList, storage);
+            case "find":
+                return Commands.executeFindCommand(body, taskList);
+            case "tag":
+                return Commands.executeTagCommand(body, taskList, storage);
+            default:
+                throw new InvalidCommandException();
+            }
+        } catch (TaskNotFoundException | InvalidCommandException
+                 | NoDescriptionException | WrongDateFormatException e) {
+            return e.getMessage();
         }
     }
 

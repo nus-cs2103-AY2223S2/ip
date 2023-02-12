@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * This is a DukeException that contains error message
