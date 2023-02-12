@@ -25,10 +25,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns date and time of from and to
-     * 
-     * @return String representation of date and time from and to in this format "DD MMM yyyy hh:mma"
+     * {@inheritDoc}
      */
+    @Override
     public String getDateTime() {
         return dateTimeFrom.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + " - " +
                 dateTimeTo.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma"));

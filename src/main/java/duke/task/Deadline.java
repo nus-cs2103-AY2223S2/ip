@@ -22,10 +22,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns date and time
-     * 
-     * @return String representation of date and time in this format "DD MMM yyyy hh:mma"
+     * {@inheritDoc}
      */
+    @Override
     public String getDateTime() {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma"));
     }

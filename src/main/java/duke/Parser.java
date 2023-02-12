@@ -9,6 +9,8 @@ import duke.task.Task;
 public class Parser {
     private MainWindow mainWindow;
     private static final String BULLET_POINT = "\u2022";
+    private boolean hasTaskChanged = false;
+    private String displayMessage;
     /**
      * Constructs a new Parser instance
      *
@@ -32,8 +34,8 @@ public class Parser {
      */
     public boolean runCommand(TaskList tasks, Storage storage, String[] words) throws IndexOutOfBoundsException,
             NumberFormatException, InvalidCommandException, EmptyDescriptionException {
-
-        boolean hasTaskChanged = false;
+        hasTaskChanged = false;
+        displayMessage = "";
         words[0] = words[0].toUpperCase();
         switch(words[0]) {
         case "BYE":
@@ -43,18 +45,10 @@ public class Parser {
             tasks.printList();
             break;
         case "MARK":
-            Task markTask = tasks.getTask(Integer.parseInt(words[1]));
-            markTask.mark();
-            hasTaskChanged = true;
-            mainWindow.sendDukeResponse("Nice! I've marked this task as done:");
-            mainWindow.sendDukeResponse(markTask.toString());
+            markTask(words[1],tasks);
             break;
         case "UNMARK":
-            Task unmarkTask = tasks.getTask(Integer.parseInt(words[1]));
-            unmarkTask.unmark();
-            hasTaskChanged = true;
-            mainWindow.sendDukeResponse("OK, I've marked this task as not done yet:");
-            mainWindow.sendDukeResponse(unmarkTask.toString());
+            unmarkTask(words[1],tasks);
             break;
         case "TODO":
         case "DEADLINE":
@@ -66,44 +60,16 @@ public class Parser {
             hasTaskChanged = tasks.deleteTask(Integer.parseInt(words[1]));
             break;
         case "FIND":
-            if (words.length <= 1) {
-                throw new EmptyDescriptionException("Search keyword cannot be empty");
-            }
-            String[] findWords = Arrays.copyOfRange(words, 1, words.length);
-            tasks.findTask(String.join(" ", findWords));
+            findTask(words,tasks);
             break;
         case "HELP":
-            String commands = "List of commands:\n"
-                    + BULLET_POINT
-                    + "Todo [Description] \n"
-                    + "    - Adds a todo task with description\n"
-                    + BULLET_POINT
-                    + "Deadline [Description] \\by [Date and time in this format DD/MM/YYYY HHmm]\n"
-                    + "    - Adds a deadline task with description and deadline date\n"
-                    + BULLET_POINT
-                    + "Event [Description] \\from [Date and time in this format DD/MM/YYYY HHmm] "
-                    + "\\to [Date and time]\n" +
-                    "    - Adds an event task with description, start and end date \n"
-                    + BULLET_POINT
-                    + "Delete [Index]\n"
-                    + "    - Deletes a task at that index\n"
-                    + BULLET_POINT
-                    + "Mark [Index]\n"
-                    + "    - Marks a task at that index as completed\n"
-                    + BULLET_POINT
-                    + "Unmark [Index]\n"
-                    + "    - Unmarks a task at that index as not done\n"
-                    + BULLET_POINT
-                    + "Find [Keyword]\n"
-                    + "    - Lists all task that matches the keyword";
-            mainWindow.sendDukeResponse(commands);
+            mainWindow.sendDukeResponse(getHelpMessage());
             break;
         default:
-            throw new InvalidCommandException("Invalid command. Please try again." + "\nType \"help\" to see all commands");
+            throw new InvalidCommandException("Invalid command. Please try again." + "\nType \"help\" to " +
+                    "see all commands");
         }
-        if (hasTaskChanged) {
-            storage.saveFile(tasks.getListOfTask());
-        }
+        commandHelper(storage, tasks);
         return false;
     }
 
@@ -125,4 +91,94 @@ public class Parser {
         }
         return index;
     }
+
+    /**
+     * Marks a task and change display message
+     *
+     * @param taskNum Task index number
+     * @param tasks List of tasks
+     */
+    public void markTask(String taskNum, TaskList tasks) {
+        Task markTask = tasks.getTask(Integer.parseInt(taskNum  ));
+        markTask.mark();
+        hasTaskChanged = true;
+        displayMessage = "Nice! I've marked this task as done:\n" +  markTask;
+    }
+
+    /**
+     * Unmarks a task and change display message
+     *
+     * @param taskNum Task index number
+     * @param tasks List of tasks
+     */
+    public void unmarkTask(String taskNum, TaskList tasks) {
+        Task unmarkTask = tasks.getTask(Integer.parseInt(taskNum));
+        unmarkTask.unmark();
+        hasTaskChanged = true;
+        displayMessage = "Nice! I've marked this task as done:\n" +  unmarkTask;
+    }
+
+    /**
+     * Find task based on keyword
+     *
+     * @param words  Input words by users
+     * @param tasks List of tasks
+     */
+    public void findTask(String[] words, TaskList tasks) throws EmptyDescriptionException {
+        if (words.length <= 1) {
+            throw new EmptyDescriptionException("Search keyword cannot be empty");
+        }
+        String[] findWords = Arrays.copyOfRange(words, 1, words.length);
+        tasks.findTask(String.join(" ", findWords));
+    }
+
+    /**
+     * Saves file and display message on MainWindow
+     *
+     * @param storage Saved data
+     * @param tasks List of tasks
+     */
+    public void commandHelper(Storage storage, TaskList tasks) {
+        if (hasTaskChanged) {
+            storage.saveFile(tasks.getListOfTask());
+        }
+        if(displayMessage != "") {
+            mainWindow.sendDukeResponse(displayMessage);
+        }
+    }
+
+
+    /**
+     * Returns help message
+     *
+     * @return String containing the help message
+     */
+    public static String getHelpMessage() {
+        String helpCommand = "List of commands:\n"
+                + BULLET_POINT
+                + "Todo [Description] \n"
+                + "    - Adds a todo task with description\n"
+                + BULLET_POINT
+                + "Deadline [Description] /by [Date and time in this format DD/MM/YYYY HHmm]\n"
+                + "    - Adds a deadline task with description and deadline date\n"
+                + BULLET_POINT
+                + "Event [Description] /from [Date and time in this format DD/MM/YYYY HHmm] "
+                + "/to [Date and time]\n" +
+                "    - Adds an event task with description, start and end date \n"
+                + BULLET_POINT
+                + "Delete [Index]\n"
+                + "    - Deletes a task at that index\n"
+                + BULLET_POINT
+                + "Mark [Index]\n"
+                + "    - Marks a task at that index as completed\n"
+                + BULLET_POINT
+                + "Unmark [Index]\n"
+                + "    - Unmarks a task at that index as not done\n"
+                + BULLET_POINT
+                + "Find [Keyword]\n"
+                + "    - Lists all task that matches the keyword";
+        return  helpCommand;
+    }
 }
+
+

@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
+
 /*
  * Represents a Todo task
  */
@@ -13,6 +15,14 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description);
         this.type = 'T';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDateTime() {
+        return null;
     }
 
     /**

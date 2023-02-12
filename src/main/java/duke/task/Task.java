@@ -3,10 +3,17 @@ package duke.task;
 /*
  * Represents a task
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected char type = ' ';
+
+    /**
+     * Returns date and time
+     *
+     * @return String representation of date and time but returns null if its a Todo task
+     */
+    public abstract String getDateTime();
 
     /**
      * Constructs a new task instance
@@ -67,4 +74,6 @@ public class Task {
     public void unmark() {
         this.isDone = false;
     }
+
+
 }

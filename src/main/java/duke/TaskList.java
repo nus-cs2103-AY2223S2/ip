@@ -37,56 +37,92 @@ public class TaskList {
      * @throws EmptyDescriptionException when user gives an empty description
      */ 
     public boolean addTask(String[] words, String type) throws EmptyDescriptionException {
-        Task task;
+        boolean isTaskAdded = false;
         if (words.length == 0) {
             throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
         }
         if (type.equals("TODO")) {
-            task = new Todo(String.join(" ", words ));
+            tasks.add(new Todo(String.join(" ", words )));
+            isTaskAdded = true;
         } else {
             String description;
             if (type.equals("DEADLINE")) {
-                int indexForBy = Parser.getIndexOfWord(words, "/by");
-                assert indexForBy < -1 : "Something is wrong with the retrival of the index for the word by";
-                if (indexForBy == 0) {
-                    throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
-                }
-                LocalDateTime dateTimeBy = DateTime.getDateTime(words,indexForBy);
-                if (dateTimeBy == null) {
-                    mainWindow.sendDukeResponse("Please enter in this format {description} /by DD/MM/YYYY HHmm. Try again");
-                    return false;
-                }
-                description = String.join(" ",Arrays.copyOfRange(words, 0, indexForBy));
-                task = new Deadline(description,DateTime.getDateTime(words,indexForBy));
+                isTaskAdded = addDeadline(words);
             } else {
-                LocalDateTime dateTimeFrom;
-                LocalDateTime dateTimeTo;
-
-                int indexForFrom = Parser.getIndexOfWord(words, "/from");
-                assert indexForFrom < -1 : "Something is wrong with the retrival of the index for the word from";
-                if (indexForFrom == 0) {
-                    throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
-                }
-                int indexForTo = Parser.getIndexOfWord(words, "/to");
-                assert indexForTo < -1 : "Something is wrong with the retrival of the index for the word from";
-                dateTimeFrom = DateTime.getDateTime(words,indexForFrom);
-                dateTimeTo = DateTime.getDateTime(words,indexForTo);
-                if (dateTimeTo == null || dateTimeFrom == null) {
-                    mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHmm /to " +
-                            "DD/MM/YYYY HHmm. Try again");
-                    return false;
-                }
-                assert tasks.size() >= 1 : "Something is wrong with add of task";
-                description = String.join(" ",Arrays.copyOfRange(words, 0, indexForFrom));
-                task = new Event(description,dateTimeFrom,dateTimeTo);
+                isTaskAdded = addEvent(words);
             }
         }
-        tasks.add(task);
         assert tasks.size() >= 1 : "Something is wrong with add of task";
+        return isTaskAdded;
+    }
+
+
+    /**
+     * Adds a Deadline Task to the list given the description
+     *
+     * @param words Description given by user input
+     * @return true if task has been added successfully, else false
+     * @throws EmptyDescriptionException when user gives an empty description
+     * @return true if task has been added successfully, else false
+     */
+    public boolean addDeadline(String[] words) throws EmptyDescriptionException {
+        String description;
+        Task task;
+        int indexForBy = Parser.getIndexOfWord(words, "/by");
+        assert indexForBy < -1 : "Something is wrong with the retrieval of the index for the word by";
+        if (indexForBy == 0) {
+            throw new EmptyDescriptionException("The description of Deadline cannot be empty. Please try again");
+        }
+        LocalDateTime dateTimeBy = DateTime.getDateTime(words,indexForBy);
+        if (dateTimeBy == null) {
+            mainWindow.sendDukeResponse("Please enter in this format {description} /by DD/MM/YYYY HHmm. Try again");
+            return false;
+        }
+        description = String.join(" ",Arrays.copyOfRange(words, 0, indexForBy));
+        task = new Deadline(description,DateTime.getDateTime(words,indexForBy));
+        tasks.add(task);
         mainWindow.sendDukeResponse("Got it. I've added this task:\n" + task);
         mainWindow.sendDukeResponse("Now you have " + tasks.size() + " tasks in the list.");
         return true;
     }
+
+    /**
+     * Adds a Event Task to the list given the description
+     *
+     * @param words Description given by user input
+     * @return true if task has been added successfully, else false
+     * @throws EmptyDescriptionException when user gives an empty description
+     * @return true if task has been added successfully, else false
+     */
+    public boolean addEvent(String[] words) throws EmptyDescriptionException {
+        Task task;
+        String description;
+        LocalDateTime dateTimeFrom;
+        LocalDateTime dateTimeTo;
+
+        int indexForFrom = Parser.getIndexOfWord(words, "/from");
+        assert indexForFrom < -1 : "Something is wrong with the retrieval of the index for the word from";
+        if (indexForFrom == 0) {
+            throw new EmptyDescriptionException("The description of Event cannot be empty. Please try again");
+        }
+        int indexForTo = Parser.getIndexOfWord(words, "/to");
+        assert indexForTo < -1 : "Something is wrong with the retrieval of the index for the word from";
+        dateTimeFrom = DateTime.getDateTime(words,indexForFrom);
+        dateTimeTo = DateTime.getDateTime(words,indexForTo);
+        if (dateTimeTo == null || dateTimeFrom == null) {
+            mainWindow.sendDukeResponse("Please enter in this format {description} /from DD/MM/YYYY HHmm /to " +
+                    "DD/MM/YYYY HHmm. Try again");
+            return false;
+        }
+        assert tasks.size() >= 1 : "Something is wrong with add of task";
+        description = String.join(" ",Arrays.copyOfRange(words, 0, indexForFrom));
+        task = new Event(description,dateTimeFrom,dateTimeTo);
+        tasks.add(task);
+        mainWindow.sendDukeResponse("Got it. I've added this task:\n" + task);
+        mainWindow.sendDukeResponse("Now you have " + tasks.size() + " tasks in the list.");
+        return true;
+    }
+
 
     /**
      * Deletes a Task from the list given the index
@@ -142,20 +178,16 @@ public class TaskList {
      */
     public void findTask(String description) {
         String foundTasks = "";
-        boolean hasFound = false;
         int index = 1;
         for (Task task : tasks) {
             if (task.getDescription().contains(description)) {
-                if (!hasFound) {
-                    hasFound = true;
-                    mainWindow.sendDukeResponse("Here are the matching tasks in your list:");
-                }
                 foundTasks += index + ". " + task.toString() + "\n";
                 index++;
             }
         }
-        mainWindow.sendDukeResponse(foundTasks);
-        if (!hasFound) {
+        if (foundTasks != "") {
+            mainWindow.sendDukeResponse("Here are the matching tasks in your list:\n\n" + foundTasks);
+        } else {
             mainWindow.sendDukeResponse("No matching tasks found in your list:");
         }
     }

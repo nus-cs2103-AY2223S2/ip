@@ -18,12 +18,12 @@ public class Ui {
         this.mainWindow = mainWindow;
     }
 
-     /**
+    /**
      * Receives command given by the user and pass to parser to run the command
      * 
      * @param tasks Arraylist containing task objects
      * @param storage Storage class that manages save and loading
-      * @param input Input text from user
+     * @param input Input text from user
      * @return true if command is bye, otherwise return false
      */
     public boolean receiveInput(TaskList tasks, Storage storage, String input) {

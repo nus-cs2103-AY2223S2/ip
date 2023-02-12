@@ -1,10 +1,6 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -35,33 +31,21 @@ public class Storage {
         String fileContent;
         String dateTime;
         fileContent = "  TYPE  | COMPLETED | DETAILS | DATE\n";
+
         for (Task t : tasks) {
-            dateTime = null;
-            if (t.getType() == 'T') {
-                fileContent += "  Todo  |";
-            } else if (t.getType() == 'D') {
-                fileContent += "Deadline|";
-                if (t instanceof Deadline) {
-                    Deadline task = (Deadline) t;
-                    dateTime = task.getDateTime();
-                }
-            } else {
-                fileContent += "  Event |";
-                if (t instanceof Event) {
-                    Event task = (Event) t;
-                    dateTime = task.getDateTime();
-                }
-            }
+            fileContent+= getTaskType(t);
             fileContent += t.isDone() ? "    YES    | " : "    NO     | ";
             fileContent += t.getDescription() + " | " ;
-            fileContent += (dateTime == null ? "---" : dateTime) + "\n";
+            fileContent += (t.getDateTime() == null ? "---" : t.getDateTime()) + "\n";
         }
         File file = new File(FILE_PATH);
+
         try {
             Files.createDirectories(Paths.get(DIR_PATH));
         } catch (IOException e) {
             System.out.println("Error creating folder");
         }
+
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -97,40 +81,68 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {   
             if (file.exists()) {
-                BufferedReader fileReader = new BufferedReader(new FileReader(file));
-                String currLine;
-                Boolean hasSkipped = true;
-                String[] splitInput;
-                Task task;
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
-                LocalDateTime dateTime;
-                while ((currLine = fileReader.readLine()) != null) {
-                    splitInput = currLine.split("\\|");
-                    if(splitInput[0].contains("Deadline")) {
-                        dateTime = LocalDateTime.parse(splitInput[3].trim(), formatter);
-                        task = new Deadline(splitInput[2].trim(),dateTime);
-                    } else if (splitInput[0].contains("Todo")) {
-                        task = new Todo(splitInput[2].trim());
-                    } else if (splitInput[0].contains("Event")) {
-                        String[] splitToAndFrom = (splitInput[3].trim()).split(" - ");
-                        dateTime = LocalDateTime.parse(splitToAndFrom[0], formatter);
-                        LocalDateTime dateTimeTo = LocalDateTime.parse(splitToAndFrom[1], formatter);
-                        task = new Event(splitInput[2].trim(), dateTime, dateTimeTo);
-                    } else {
-                        continue;
-                    }
-                    if (splitInput[1].contains("YES")) {
-                        task.mark();
-                    }
-                    tasks.add(task);
-                }
+                readFile(file, tasks);
                 assert tasks.size() >= 0 : "Something is wrong with the data file";
-                fileReader.close();
-                return tasks;
             }
         } catch (IOException e) {
             System.out.println("Error when loading file, a new file will be created");
         }
-        return new ArrayList<Task>();
+        return tasks;
+    }
+
+    /**
+     * Returns a string representation of the task type
+     *
+     * @param task Task to be saved
+     * @return String of task type
+     */
+    public String getTaskType(Task task) {
+        String fileType = "";
+        if (task.getType() == 'T') {
+            fileType += "  Todo  |";
+        } else if (task.getType() == 'D') {
+            fileType += "Deadline|";
+        } else {
+            fileType += "  Event |";
+        }
+        return  fileType;
+    }
+
+    /**
+     * Read file stored in user computer
+     *
+     * @param file File to read from
+     * @param tasks List of task to populate with using data read
+     * @throws IOException Throws exception when file cannot be read or failed I/O operation
+     */
+    public void readFile(File file, ArrayList<Task> tasks) throws IOException {
+        BufferedReader fileReader = new BufferedReader(new FileReader(file));
+        String currLine;
+        String[] splitInput;
+        Task task;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
+        LocalDateTime dateTime;
+
+        while ((currLine = fileReader.readLine()) != null) {
+            splitInput = currLine.split("\\|");
+            if(splitInput[0].contains("Deadline")) {
+                dateTime = LocalDateTime.parse(splitInput[3].trim(), formatter);
+                task = new Deadline(splitInput[2].trim(),dateTime);
+            } else if (splitInput[0].contains("Todo")) {
+                task = new Todo(splitInput[2].trim());
+            } else if (splitInput[0].contains("Event")) {
+                String[] splitToAndFrom = (splitInput[3].trim()).split(" - ");
+                dateTime = LocalDateTime.parse(splitToAndFrom[0], formatter);
+                LocalDateTime dateTimeTo = LocalDateTime.parse(splitToAndFrom[1], formatter);
+                task = new Event(splitInput[2].trim(), dateTime, dateTimeTo);
+            } else {
+                continue;
+            }
+            if (splitInput[1].contains("YES")) {
+                task.mark();
+            }
+            tasks.add(task);
+        }
+        fileReader.close();
     }
 }
