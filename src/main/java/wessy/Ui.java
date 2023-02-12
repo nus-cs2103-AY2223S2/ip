@@ -25,19 +25,24 @@ public class Ui {
         printMessage("Bye. Hope to see you again soon!");
     }
 
-    // Output for "list"
-    void printListMessage(int totalNumOfTasks, String[] tasks) {
+    // Output for "list" & "find"
+    void printListOrFindMessage(String[] tasks, boolean isList) {
         printOpening();
-        printList(totalNumOfTasks, tasks);
+        printListOrFind(tasks, isList);
         printClosing();
     }
 
     // HELPER
-    void printList(int totalNumOfTasks, String[] tasks) {
-        if (totalNumOfTasks == 0) {
-            println("WOOHOO! You do not have any task on the list.");
+    void printListOrFind(String[] tasks, boolean isList) {
+        String extraWord = isList ? "" : "matching ";
+        if (tasks.length == 0) {
+            if (isList) {
+                println("WOOHOO! You do not have any task on the list.");
+            } else {
+                println("Sorry. We did not find any task that matches the text you entered.");
+            }
         } else {
-            println("Here are the tasks in your list:");
+            println("Here are the " + extraWord + "tasks in your list:");
             printMultiln(tasks);
         }
     }
@@ -76,12 +81,19 @@ public class Ui {
         printMessage("You have cleared your task list. The list is empty now.");
     }
 
+    void printFindMessage(String[] foundResults) {
+        printOpening();
+        println(" Here are the matching tasks in your list:");
+
+        printClosing();
+    }
+
     // When starting up
     void showWelcome(String[] tasks, int totalNumOfTasks) {
         printOpening();
         println("Hi, I am Wessy, your personal assistant chatbot.");
         println("");
-        printList(totalNumOfTasks, tasks);
+        printListOrFind(tasks, true);
         printClosing();
     }
 

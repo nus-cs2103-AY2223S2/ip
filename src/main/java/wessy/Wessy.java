@@ -43,7 +43,7 @@ public class Wessy {
                         ui.printBye();
                         return;
                     case LIST:
-                        ui.printListMessage(tasks.getSize(), tasks.printAsStr());
+                        ui.printListOrFindMessage(tasks.printAsStr(), true);
                         break;
                     case TODO:
                     case DEADLINE:
@@ -73,6 +73,10 @@ public class Wessy {
                         Task deletedTask = tasks.delete(Parser.parseInt(userInput, cmd));
                         save2Storage();
                         ui.printDelete(deletedTask, tasks.getSize());
+                        break;
+                    case FIND:
+                        String target = userInput.substring(cmd.len() + 1);
+                        ui.printListOrFindMessage(tasks.find(target), false);
                         break;
                     case CLEAR:
                         tasks.clear();
