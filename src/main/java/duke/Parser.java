@@ -206,7 +206,18 @@ public class Parser {
         }
         eventInformation.add(tempTaskInfo[0]); // adds "event" command in string into the eventInformation
         String[] startDateTime = tempTaskInfo[1].split(" ");
-        eventInformation.add(startDateTime[1]); // adds event startDate into the eventInformation
+        if (startDateTime[1].equals("/to")) {
+            try {
+                DukeException.validate("", "event"); // throwing an error as "aaa" is blank in /from aaa
+            } catch (IncorrectNoOfArgumentException ex) {
+                System.out.println(ex);
+                eventInformation = new ArrayList<>();
+                eventInformation.add(ex.getMessage());
+                return eventInformation;
+            }
+        } else {
+            eventInformation.add(startDateTime[1]); // adds event startDate into the eventInformation
+        }
         if (startDateTime.length > 2) { // check if given a startTime
             if (startDateTime[2].equals("/to")) {
                 eventInformation.add(""); // adds event startTime into the eventInformation

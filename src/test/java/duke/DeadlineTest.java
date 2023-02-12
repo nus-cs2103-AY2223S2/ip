@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
  * @since 2023-02-12
  */
 public class DeadlineTest {
-    Task tempTask = new Deadline("Assignment Submission", "2023-01-12", "12:30");
-    Task tempTask2 = new Deadline("Assignment Submission", "2023-01-12", "");
+    private Task tempTask = new Deadline("Assignment Submission", "2023-01-12", "12:30");
+    private Task tempTask2 = new Deadline("Assignment Submission", "2023-01-12", "");
 
     /**
      * Tests the method getTaskInfoStatus() in Deadline.java.
