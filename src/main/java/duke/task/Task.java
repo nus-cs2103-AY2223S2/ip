@@ -31,6 +31,10 @@ public abstract class Task {
         this.completed = false;
     }
 
+    public String getDescription() {
+        return this.task;
+    }
+
     @Override
     public String toString() {
         String statusIcon = completed ? "X" : " ";

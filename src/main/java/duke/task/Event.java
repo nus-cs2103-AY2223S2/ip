@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
+    private final String formattedStart;
+    private final String formattedEnd;
 
     /**
      * Constructor to create a new event
@@ -20,13 +22,20 @@ public class Event extends Task {
         super(task);
         this.from = from;
         this.to = to;
+        this.formattedStart = from.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
+        this.formattedEnd = to.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
+    }
+
+    @Override
+    public String getDescription() {
+        return this.task + " (from: " + formattedStart + " to: " + formattedEnd + ")";
     }
 
     @Override
     public String toData() {
         String[] fromDate = this.from.toString().split("T");
         String fromDateData = fromDate[0] + " " + fromDate[1].replace(":", "");
-        String[] toDate = this.from.toString().split("T");
+        String[] toDate = this.to.toString().split("T");
         String toDateData = toDate[0] + " " + toDate[1].replace(":", "");
         String status = this.completed ? "1" : "0";
 
@@ -36,9 +45,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        String formattedStart = from.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
-        String formattedEnd = to.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
 
-        return "[E][" + statusIcon + "] " + this.task + " (from: " + formattedStart + " to: " + formattedEnd + ")";
+        return "[E][" + statusIcon + "] " + this.getDescription();
     }
 }
