@@ -67,7 +67,7 @@ public class Parser {
                     return new ExitCommand();
 
                 default:
-`                   throw new ArgumentException("No such commands");
+                    throw new ArgumentException("No such commands");
             }
 
         } catch (ArgumentException ex2) {
