@@ -1,20 +1,20 @@
-package duke.main;
+package alfred.main;
 
 import java.util.ArrayList;
 
-import duke.command.Command;
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import alfred.command.Command;
+import alfred.exception.AlfredException;
+import alfred.parser.Parser;
+import alfred.storage.Storage;
+import alfred.tasklist.TaskList;
+import alfred.ui.Ui;
 
 /**
- * Duke is a class that reacts to user's input
+ * Alfred is a class that reacts to user's input
  * It uses other classes like Command, Parser, Storage, and TaskList to perform
  * various operations depending on the user's input
  */
-public class Duke {
+public class Alfred {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -25,14 +25,14 @@ public class Duke {
      *
      * @param filePath
      */
-    public Duke(String filePath) {
+    public Alfred(String filePath) {
         ui = new Ui();
         parser = new Parser();
         command = new Command();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadData());
-        } catch (DukeException e) {
+        } catch (AlfredException e) {
             tasks = new TaskList(new ArrayList<>());
         }
     }
@@ -40,7 +40,7 @@ public class Duke {
     /**
      * Get message based on user input
      */
-    public String getResponse(String input) throws DukeException {
+    public String getResponse(String input) throws AlfredException {
         try {
             return this.command.executeCommand(this.parser.getCommand(input), input, tasks, storage);
         } catch (Exception e) {

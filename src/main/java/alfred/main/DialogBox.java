@@ -1,9 +1,9 @@
-package duke.main;
+package alfred.main;
 
 import java.io.IOException;
 import java.util.Collections;
 
-import duke.ui.Ui;
+import alfred.ui.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -61,7 +61,7 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getAlfredDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

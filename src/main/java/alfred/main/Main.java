@@ -1,4 +1,4 @@
-package duke.main;
+package alfred.main;
 
 import java.io.IOException;
 
@@ -9,11 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Alfred using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/file.txt");
+    private Alfred alfred = new Alfred("data/file.txt");
 
     @Override
     public void start(Stage stage) {
@@ -22,7 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setAlfred(alfred);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package duke.task;
+package alfred.task;
 
 /**
  * Child class of task that represents a task with just a description.

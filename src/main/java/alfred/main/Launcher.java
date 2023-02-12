@@ -1,4 +1,4 @@
-package duke.main;
+package alfred.main;
 
 import javafx.application.Application;
 

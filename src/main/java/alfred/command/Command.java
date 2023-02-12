@@ -1,15 +1,15 @@
-package duke.command;
+package alfred.command;
 import java.time.LocalDate;
 
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import alfred.exception.AlfredException;
+import alfred.parser.Parser;
+import alfred.storage.Storage;
+import alfred.task.Deadline;
+import alfred.task.Event;
+import alfred.task.Task;
+import alfred.task.ToDo;
+import alfred.tasklist.TaskList;
+import alfred.ui.Ui;
 
 /**
  * Command class main logic of code
@@ -31,10 +31,10 @@ public class Command {
      * @param action
      * @param userInput
      * @param tasks
-     * @throws DukeException
+     * @throws AlfredException
      */
     public String executeCommand(Parser.Action action, String userInput, TaskList tasks, Storage storage)
-            throws DukeException {
+            throws AlfredException {
         switch(action) {
         case LIST:
             return ui.getTaskListDetailsMessage(tasks);

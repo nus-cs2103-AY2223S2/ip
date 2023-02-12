@@ -1,7 +1,7 @@
-package duke.parser;
+package alfred.parser;
 import java.time.LocalDate;
 
-import duke.exception.DukeException;
+import alfred.exception.AlfredException;
 
 /**
  * Takes in user input and parse it to return useful readable data.
@@ -60,14 +60,14 @@ public class Parser {
      * Obtain to do description from user input
      * @param userInput
      * @return String or throws exception
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public String getTodoDescription(String userInput) throws DukeException {
+    public String getTodoDescription(String userInput) throws AlfredException {
         String todoDescription;
         try {
             todoDescription = userInput.split(" ", 2)[1];
         } catch (Exception e) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new AlfredException("The description of a todo cannot be empty.");
         }
         return todoDescription;
     }
@@ -76,14 +76,14 @@ public class Parser {
      * Obtain deadline description from user input
      * @param userInput
      * @return String or throws exception
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public String getDeadlineDescription(String userInput) throws DukeException {
+    public String getDeadlineDescription(String userInput) throws AlfredException {
         String deadlineDescription;
         try {
             deadlineDescription = userInput.split(" ", 2)[1].split(" /by ", 2)[0];
         } catch (Exception e) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new AlfredException("The description of a deadline cannot be empty.");
         }
         return deadlineDescription;
     }
@@ -92,14 +92,14 @@ public class Parser {
      * Obtain deadline date from user input
      * @param userInput
      * @return LocalDate or throws exception
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public LocalDate getDeadlineDate(String userInput) throws DukeException {
+    public LocalDate getDeadlineDate(String userInput) throws AlfredException {
         LocalDate deadlineDate;
         try {
             deadlineDate = LocalDate.parse(userInput.split(" ", 2)[1].split(" /by ", 2)[1]);
         } catch (Exception e) {
-            throw new DukeException("The date of a deadline cannot be empty. "
+            throw new AlfredException("The date of a deadline cannot be empty. "
                     + "Make sure dates are in this format yyyy-mm-dd");
         }
         return deadlineDate;
@@ -109,14 +109,14 @@ public class Parser {
      * Obtain event description from user input
      * @param userInput
      * @return String or exception
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public String getEventDescription(String userInput) throws DukeException {
+    public String getEventDescription(String userInput) throws AlfredException {
         String eventDescription;
         try {
             eventDescription = userInput.split(" ", 2)[1].split(" /", 3)[0];
         } catch (Exception e) {
-            throw new DukeException("The description of an event cannot be empty.");
+            throw new AlfredException("The description of an event cannot be empty.");
         }
         return eventDescription;
     }
@@ -125,9 +125,9 @@ public class Parser {
      * Obtain event date details (start, end) from user input
      * @param userInput
      * @return Start and end date in type Local Date or exception
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public LocalDate[] getEventDateDetails(String userInput) throws DukeException {
+    public LocalDate[] getEventDateDetails(String userInput) throws AlfredException {
         LocalDate eventStartDate;
         LocalDate eventEndDate;
         String[] input = userInput.split(" ", 2)[1].split(" /", 3);
@@ -135,7 +135,7 @@ public class Parser {
             eventStartDate = LocalDate.parse(input[1].split("from ", 2)[1]);
             eventEndDate = LocalDate.parse(input[2].split("to ", 2)[1]);
         } catch (Exception e) {
-            throw new DukeException("The start date and end date of a event cannot be empty. \" +\n"
+            throw new AlfredException("The start date and end date of a event cannot be empty. \" +\n"
                     + "\"Make sure dates are in this format yyyy-mm-dd.");
         }
         return new LocalDate[]{eventStartDate, eventEndDate};

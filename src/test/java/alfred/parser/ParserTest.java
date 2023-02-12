@@ -1,4 +1,4 @@
-package duke.parser;
+package alfred.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeException;
+import alfred.exception.AlfredException;
 public class ParserTest {
     @Test
     public void getCommandTest() {
@@ -16,7 +16,7 @@ public class ParserTest {
         assertEquals(Parser.Action.MARK, action);
     }
     @Test
-    public void getEventDateDetailsTest() throws DukeException {
+    public void getEventDateDetailsTest() throws AlfredException {
         Parser parser = new Parser();
         LocalDate startDate = LocalDate.of(2021, 10, 10);
         LocalDate endDate = LocalDate.of(2021, 11, 15);

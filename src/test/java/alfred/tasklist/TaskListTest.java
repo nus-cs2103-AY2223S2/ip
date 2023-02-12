@@ -1,4 +1,4 @@
-package duke.tasklist;
+package alfred.tasklist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeException;
-import duke.task.ToDo;
+import alfred.exception.AlfredException;
+import alfred.task.ToDo;
 public class TaskListTest {
     @Test
-    public void getTaskTest() throws DukeException {
+    public void getTaskTest() throws AlfredException {
         TaskList tempTaskList = new TaskList(new ArrayList<>());
         ToDo testTask = new ToDo("Hello");
         tempTaskList.addTask(testTask);
@@ -18,7 +18,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void markTest() throws DukeException {
+    public void markTest() throws AlfredException {
         TaskList tempTaskList = new TaskList(new ArrayList<>());
         ToDo testTask = new ToDo("Hello");
         tempTaskList.addTask(testTask);

@@ -1,4 +1,4 @@
-package duke.task;
+package alfred.task;
 
 /**
  * Contains various methods of a task

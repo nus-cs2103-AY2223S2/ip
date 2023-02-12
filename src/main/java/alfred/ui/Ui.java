@@ -1,8 +1,8 @@
-package duke.ui;
+package alfred.ui;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.tasklist.TaskList;
+import alfred.exception.AlfredException;
+import alfred.task.Task;
+import alfred.tasklist.TaskList;
 
 /**
  * Deals with interactions with the user
@@ -12,7 +12,7 @@ public class Ui {
      * Sends greeting message to user
      */
     public String getGreetingsMessage() {
-        return "Hello I'm duke.main.Duke\n" + "What can I do for you?";
+        return "Hello Batman, I'm Alfred\n" + "What can I do for you?";
     }
 
     /**
@@ -37,16 +37,16 @@ public class Ui {
      *
      * @param tasks
      * @return task details
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public String getTaskListDetailsMessage(TaskList tasks) throws DukeException {
-        String s = "Here are the tasks in your list:\n";
+    public String getTaskListDetailsMessage(TaskList tasks) throws AlfredException {
+        String s = "Master Wayne, here are the tasks in your list:\n";
         try {
             for (int i = 0; i < tasks.getSize(); i++) {
                 s = s + this.sendTaskDetails(i + 1, tasks.getTask(i));
             }
         } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+            throw new AlfredException(e.getMessage());
         }
         return s;
     }
@@ -55,16 +55,16 @@ public class Ui {
      *
      * @param tasks
      * @return task details
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public String getFindTaskListMessage(TaskList tasks) throws DukeException {
-        String s = "Here are the matching tasks in your list: \n";
+    public String getFindTaskListMessage(TaskList tasks) throws AlfredException {
+        String s = "Master Wayne, here are the matching tasks in your list: \n";
         try {
             for (int i = 0; i < tasks.getSize(); i++) {
                 s = s + this.sendTaskDetails(i + 1, tasks.getTask(i));
             }
         } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+            throw new AlfredException(e.getMessage());
         }
         return s;
     }
@@ -138,7 +138,7 @@ public class Ui {
         return "I'm sorry, but I don't know what that means :-(";
     }
 
-    public String getStatsMessage(TaskList tasks) throws DukeException {
+    public String getStatsMessage(TaskList tasks) throws AlfredException {
         String s = "Here are the stats\n";
         s = s + "Total number of tasks: " + tasks.getSize() + "\n";
         s = s + "Total number of marked tasks: " + tasks.getSizeOfMarkedTasks() + "\n";

@@ -1,6 +1,6 @@
-package duke.main;
+package alfred.main;
 
-import duke.exception.DukeException;
+import alfred.exception.AlfredException;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -25,31 +25,31 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Alfred alfred;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaBatman.png"));
+    private Image alfredImage = new Image(this.getClass().getResourceAsStream("/images/DaAlfred.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setAlfred(Alfred d) {
+        alfred = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Alfred's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws DukeException {
+    private void handleUserInput() throws AlfredException {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = alfred.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getAlfredDialog(response, alfredImage)
         );
         //Reused from @jehousoh with modifications
         if (input.equals("bye")) {

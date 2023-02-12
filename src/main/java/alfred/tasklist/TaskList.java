@@ -1,10 +1,10 @@
-package duke.tasklist;
+package alfred.tasklist;
 
 import java.util.ArrayList;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.ui.Ui;
+import alfred.exception.AlfredException;
+import alfred.task.Task;
+import alfred.ui.Ui;
 
 /**
  * TaskList stores all tasks and performs operation to manage the tasks
@@ -31,9 +31,9 @@ public class TaskList {
      * Find out number of mark tasks
      *
      * @return Number of mark tasks
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public int getSizeOfMarkedTasks() throws DukeException {
+    public int getSizeOfMarkedTasks() throws AlfredException {
         int sizeOfMarkTasks = 0;
         for (int i = 0; i < this.getSize(); i++) {
             if (this.getTask(i).getStatusIcon().equals("X")) {
@@ -47,9 +47,9 @@ public class TaskList {
      * Find out number of unmark tasks
      *
      * @return Number of unmark tasks
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public int getSizeOfUnmarkedTasks() throws DukeException {
+    public int getSizeOfUnmarkedTasks() throws AlfredException {
         return this.getSize() - this.getSizeOfMarkedTasks();
     }
 
@@ -70,9 +70,9 @@ public class TaskList {
      * Marks a task based on the task index provided and throws an exception if task does not exist.
      *
      * @param index
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public void markTask(int index) throws DukeException {
+    public void markTask(int index) throws AlfredException {
         // handle errors out of range
         int display = index + 1;
         assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";
@@ -83,9 +83,9 @@ public class TaskList {
      * Unmarks a task based on the task index provided
      *
      * @param index
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public void unmarkTask(int index) throws DukeException {
+    public void unmarkTask(int index) throws AlfredException {
         // handle errors out of range
         int display = index + 1;
         assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";
@@ -105,9 +105,9 @@ public class TaskList {
      * Remove task from taskList
      *
      * @param index
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public void removeTask(int index) throws DukeException {
+    public void removeTask(int index) throws AlfredException {
         // handle errors out of range
         int display = index + 1;
         assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";
@@ -119,9 +119,9 @@ public class TaskList {
      *
      * @param keyword
      * @return List of filtered tasks
-     * @throws DukeException
+     * @throws AlfredException
      */
-    public TaskList findTask(String keyword) throws DukeException {
+    public TaskList findTask(String keyword) throws AlfredException {
         TaskList filteredTaskList = new TaskList(new ArrayList<>());
         for (int i = 0; i < this.getSize(); i++) {
             if (this.getTask(i).getStorageDetails().contains(keyword)) {

@@ -1,4 +1,4 @@
-package duke.storage;
+package alfred.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,17 +6,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.tasklist.TaskList;
+import alfred.exception.AlfredException;
+import alfred.task.Deadline;
+import alfred.task.Event;
+import alfred.task.Task;
+import alfred.task.ToDo;
+import alfred.tasklist.TaskList;
 
 
 
 /**
- *  duke.storage.Storage to handle loading and saving of duke.tasklist.TaskList
+ *  alfred.storage.Storage to handle loading and saving of alfred.tasklist.TaskList
  *  (before interacting with user and after interacting with user)
  */
 public class Storage {
@@ -29,11 +29,11 @@ public class Storage {
     }
 
     /**
-     * Saves data from duke.tasklist.TaskList and store into file specified by this.filePath
+     * Saves data from alfred.tasklist.TaskList and store into file specified by this.filePath
      *
      * @params list to be saved
      */
-    public void saveData(TaskList taskList) throws DukeException {
+    public void saveData(TaskList taskList) throws AlfredException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (int i = 0; i < taskList.getSize(); i++) {
@@ -46,17 +46,17 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new AlfredException(e.getMessage());
         }
     }
 
     /**
-     *  Load data from file path and stores it in an ArrayList for duke.main.Duke
+     *  Load data from file path and stores it in an ArrayList for alfred.main.Alfred
      *
      * @return ArrayList containing tasks from file based on file path
      */
 
-    public ArrayList<Task> loadData() throws DukeException {
+    public ArrayList<Task> loadData() throws AlfredException {
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(this.filePath);
         try {
@@ -88,7 +88,7 @@ public class Storage {
                 taskList.add(task);
             }
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new AlfredException(e.getMessage());
         }
         return taskList;
     }
