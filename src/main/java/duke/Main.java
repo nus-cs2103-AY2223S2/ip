@@ -24,6 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(Main.class.getResource("/styles/styles.css").toExternalForm());
+            stage.setTitle("BorzAI");
             stage.setScene(scene);
             stage.setResizable(true);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

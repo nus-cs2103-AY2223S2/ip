@@ -205,7 +205,7 @@ public class Parser {
             case "bye":
                 return new Command.ExitCommand();
             default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I can't do that for you...");
         }
     }
 }

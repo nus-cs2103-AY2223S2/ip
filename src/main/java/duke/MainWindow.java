@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         // Add the logo and welcome message
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeImage, "When all I do is for you, Kermie \u2665\nWhat can I do for you?\n", false));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeImage, "Let me do it for you~~~", false));
     }
 
     public void setDuke(Duke d) {

@@ -158,13 +158,13 @@ public class Ui {
      * Displays error message if any error occurs.
      */
     public void showError(String errorMessage) {
-        storeOutput("\u2639 OOPS!!! " + errorMessage);
+        storeOutput("WOOF!!! " + errorMessage);
     }
 
     /**
      * Displays exit message.
      */
     public void showExit() {
-        storeOutput("Woof!!");
+        storeOutput("Didn't I do it for you...");
     }
 }
