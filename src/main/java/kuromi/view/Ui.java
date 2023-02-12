@@ -43,6 +43,8 @@ public class Ui {
      */
     public static String showWelcomeMessage() {
         String msg = "Hello! I'm Kuromi\nWhat can I do for you?\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\n";
+        msg += "Type 'help' to see the list of commands available.\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
         msg += "I know you're Melody -_-";
         return msg;

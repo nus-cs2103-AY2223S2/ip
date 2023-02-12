@@ -6,6 +6,7 @@ import kuromi.command.CommandType;
 import kuromi.command.DeleteCommand;
 import kuromi.command.ExitCommand;
 import kuromi.command.FindCommand;
+import kuromi.command.HelpCommand;
 import kuromi.command.ListCommand;
 import kuromi.command.MarkCommand;
 import kuromi.command.MistakesCommand;
@@ -41,6 +42,8 @@ public class Parser {
             switch (c) {
             case bye:
                 return Parser.exitCommand(temp);
+            case help:
+                return Parser.helpCommand(temp);
             case mistakes:
                 return Parser.mistakesCommand(temp);
             case list:
@@ -97,6 +100,13 @@ public class Parser {
             throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'bye'?");
         }
         return new ExitCommand();
+    }
+
+    private static Command helpCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'help'?");
+        }
+        return new HelpCommand();
     }
 
     private static Command mistakesCommand(String[] temp) throws KuromiException {

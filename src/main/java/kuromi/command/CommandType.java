@@ -14,5 +14,6 @@ public enum CommandType {
     deadline,
     event,
     remind,
-    mistakes
+    mistakes,
+    help
 }
