@@ -72,4 +72,5 @@ public class MainWindow extends AnchorPane {
         parameters.setFill(Color.TRANSPARENT);
         return imageView.snapshot(parameters, null);
     }
+    //@@author
 }

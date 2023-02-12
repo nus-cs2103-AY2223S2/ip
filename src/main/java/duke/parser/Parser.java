@@ -77,10 +77,16 @@ public class Parser {
                 task = new ToDo(inputArr[1]);
                 break;
             case "deadline":
+                if (!fullCommand.contains(" /by ")) {
+                    throw new DukeException("Missing deadline for your deadline task!");
+                }
                 newInputArr = inputArr[1].split(" /by ", 2);
                 task = new Deadline(newInputArr[0], newInputArr[1]);
                 break;
             case "event":
+                if (!fullCommand.contains(" /from ") || !fullCommand.contains(" /to ")) {
+                    throw new DukeException("Missing Starting or Ending time for your Event!");
+                }
                 newInputArr = inputArr[1].split(" /from ", 2);
                 String[] newerInputArr = newInputArr[1].split(" /to ", 2);
                 task = new Event(newInputArr[0], newerInputArr[0], newerInputArr[1]);
@@ -133,13 +139,13 @@ public class Parser {
      */
     public static String returnCommand(String input, String[] commands) {
         assert commands.length > 0 : "There are no commands available.";
-        boolean gotMatch;
+        boolean isMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            gotMatch = match.find();
+            isMatch = match.find();
 
-            if (gotMatch && match.start() == 0) {
+            if (isMatch && match.start() == 0) {
                 return s;
             }
         }
@@ -163,12 +169,12 @@ public class Parser {
         }
 
         boolean isCorrect = false;
-        boolean gotMatch;
+        boolean isMatch;
         for (String s : commands) {
             Pattern word = Pattern.compile(s);
             Matcher match = word.matcher(input);
-            gotMatch = match.find() && (match.start() == 0);
-            isCorrect = gotMatch;
+            isMatch = match.find() && (match.start() == 0);
+            isCorrect = isMatch;
             if (isCorrect) {
                 break;
             }

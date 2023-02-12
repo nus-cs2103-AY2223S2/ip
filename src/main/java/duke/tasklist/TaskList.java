@@ -169,8 +169,12 @@ public class TaskList {
         int count = 1;
         String output = "";
         output += "Here are the tasks in your list:\n";
+        //@@author XylusChen-reused
+        //Reused from https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date
+        //with minor modifications.
         List<Task> tasksSorted = taskStorage.stream()
                 .sorted(Comparator.comparing(Task :: getDeadline)).collect(Collectors.toList());
+        //@@author
         for (Task task : tasksSorted) {
             output += String.format("%d.%s", count++, task.toString()) + "\n";
         }
