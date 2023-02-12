@@ -46,7 +46,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute command to add task into the task list.
+     * Executes the command to add task into the task list.
      * @param tasks Current task list.
      * @param ui Ui to show messages.
      */
