@@ -22,6 +22,7 @@ public class MarkDoneCommand extends Command {
      * @param index Index of the task in the list
      */
     public MarkDoneCommand(int index) {
+        assert index > 0;
         this.index = index;
     }
 
@@ -37,6 +38,7 @@ public class MarkDoneCommand extends Command {
 
             IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException {
         Task marked = tasks.mark(index);
+        assert marked != null : false;
         storage.write(tasks);
         return ui.mark(marked);
     }
