@@ -1,10 +1,10 @@
-package duke;
+package duke.duke;
 
 /**
  * ToDo Class
  * subclass of Task
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     private final String taskType = "[T]";
 
     /**

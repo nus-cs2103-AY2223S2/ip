@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.FormatStyle;
 /**
  * Contains Deadlines, a subclass of Task
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final String taskType = "[D]";
     private LocalDate byTime;
 
