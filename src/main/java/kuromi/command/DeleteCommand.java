@@ -40,6 +40,7 @@ public class DeleteCommand extends Command {
     private String getReply(Task cur, TaskList tasks) {
         String msg = "Noted. I've removed this task:\n";
         msg += cur + "\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
         msg += "Now you have " + tasks.size() + " tasks in the list.";
         return msg;
     }

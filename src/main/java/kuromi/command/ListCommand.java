@@ -21,7 +21,9 @@ public class ListCommand extends Command {
 
     private String getReply(TaskList tasks) {
         String msg = "Here are the tasks in your list:\n";
-        msg += tasks.toString();
+        msg += tasks.toString() + "\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
+        msg += "Please finish the tasks soon -_-";
         return msg;
     }
 }

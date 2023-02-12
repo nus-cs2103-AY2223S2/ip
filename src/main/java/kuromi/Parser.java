@@ -8,6 +8,7 @@ import kuromi.command.ExitCommand;
 import kuromi.command.FindCommand;
 import kuromi.command.ListCommand;
 import kuromi.command.MarkCommand;
+import kuromi.command.MistakesCommand;
 import kuromi.command.RemindCommand;
 import kuromi.command.UnmarkCommand;
 import kuromi.task.Deadline;
@@ -38,6 +39,8 @@ public class Parser {
             switch (c) {
             case bye:
                 return Parser.exitCommand();
+            case mistakes:
+                return Parser.mistakesCommand();
             case list:
                 return Parser.listCommand();
             case remind:
@@ -87,6 +90,10 @@ public class Parser {
 
     private static Command exitCommand() {
         return new ExitCommand();
+    }
+
+    private static Command mistakesCommand() {
+        return new MistakesCommand();
     }
 
     private static Command listCommand() {

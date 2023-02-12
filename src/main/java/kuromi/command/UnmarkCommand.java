@@ -37,7 +37,9 @@ public class UnmarkCommand extends Command {
 
     private String getReply(Task cur) {
         String msg = "OK, I've marked this task as not done yet:\n";
-        msg += cur;
+        msg += cur + "\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
+        msg += "Please do the task soon -_-";
         return msg;
     }
 }

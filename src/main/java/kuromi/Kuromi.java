@@ -43,6 +43,9 @@ public class Kuromi {
     }
 
     String getWelcomeMessage() {
-        return "Hello! I'm Kuromi\nWhat can I do for you?";
+        String msg = "Hello! I'm Kuromi\nWhat can I do for you?\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
+        msg += "I know you're Melody -_-";
+        return msg;
     }
 }
