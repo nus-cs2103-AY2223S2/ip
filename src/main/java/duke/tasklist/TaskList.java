@@ -5,6 +5,7 @@ import duke.exception.DukeInvalidArgumentException;
 
 import duke.storage.Storage;
 
+import duke.task.Priority;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -205,6 +206,30 @@ public class TaskList {
         }
 
 
+    }
+
+    public String setTaskPriority(int taskNumber, Priority priority) throws DukeException {
+        boolean isValidTaskNumber = (taskNumber > 0
+                && taskNumber <= this.tasks.size());
+
+        if (isValidTaskNumber) {
+            StringBuilder response = new StringBuilder();
+            this.tasks.get(taskNumber - 1).setPriority(priority);
+            response.append("I have changed the priority of Task ")
+                    .append(taskNumber)
+                    .append(" to ")
+                    .append(priority)
+                    .append(".\n")
+                    .append(this.tasks.get(taskNumber - 1))
+                    .append("\n");
+
+
+            this.taskStorage.writeTasksToFile(this.tasks);
+            return response.toString();
+
+        } else {
+            throw new DukeInvalidArgumentException("Sorry... That is an invalid task number :/");
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.parser.Parser;
+
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
@@ -12,12 +14,23 @@ public abstract class Task {
 
     protected final String description;
     protected boolean isDone;
+    protected Priority priority;
 
     protected Task(String description) {
         assert description != null;
 
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.MEDIUM;
+    }
+
+    protected Task(String description, Priority priority) {
+        assert description != null;
+        assert priority != null;
+
+        this.description = description;
+        this.isDone = false;
+        this.priority = priority;
     }
 
     /**
@@ -31,21 +44,25 @@ public abstract class Task {
 
         String[] taskParts = task.split("~");
         String taskType = taskParts[0];
-        String marked = taskParts[1];
-        String description = taskParts[2];
+        Priority priority = Parser.parsePriority(taskParts[1]);
+        String marked = taskParts[2];
+        String description = taskParts[3];
 
         Task answer = null;
 
         if (taskType.equals("T")) {
-            answer = new ToDo(description);
+            answer = new ToDo(description, priority);
 
         } else if (taskType.equals("D")) {
-            answer = new Deadline(description, LocalDateTime.parse(taskParts[3]));
+            answer = new Deadline(description,
+                    LocalDateTime.parse(taskParts[4]),
+                    priority);
 
         } else {
             answer = new Event(description,
-                    LocalDateTime.parse(taskParts[3]),
-                    LocalDateTime.parse(taskParts[4]));
+                    LocalDateTime.parse(taskParts[4]),
+                    LocalDateTime.parse(taskParts[5]),
+                    priority);
 
         }
 
@@ -84,10 +101,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public void setPriority(Priority p) {
+        this.priority = p;
+    }
+
     @Override
     public String toString() {
         String mark = this.isDone ? "X" : " ";
-        return "[" + mark + "] " + this.description;
+        return "{" + this.priority.toString().toLowerCase()
+                + "}[" + mark + "] "
+                + this.description;
     }
 
     /**

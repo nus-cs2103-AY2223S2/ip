@@ -18,6 +18,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, LocalDateTime by, Priority priority) {
+        super(description, priority);
+
+        assert by != null;
+
+        this.by = by;
+    }
+
     /**
      * Gets the String representation of the deadline to be stored in the text file.
      *
@@ -28,6 +36,7 @@ public class Deadline extends Task {
         String mark = (super.isDone) ? "X" : " ";
 
         return "D" + "~"
+                + this.priority + "~"
                 + mark + "~"
                 + this.description + "~"
                 + this.by;

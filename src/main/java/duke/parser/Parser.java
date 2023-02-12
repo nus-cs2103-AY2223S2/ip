@@ -7,10 +7,7 @@ import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeInvalidCommandException;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -41,6 +38,21 @@ public class Parser {
 
         return dateTime;
 
+    }
+
+    public static Priority parsePriority(String priority) {
+        if (priority.equalsIgnoreCase("high")) {
+            return Priority.HIGH;
+
+        } else if (priority.equalsIgnoreCase("medium")) {
+            return Priority.MEDIUM;
+
+        } else if (priority.equalsIgnoreCase("low")) {
+            return Priority.LOW;
+
+        } else {
+            return null;
+        }
     }
 
     private static Command parseList(String[] commandParts) throws DukeException {
@@ -233,6 +245,32 @@ public class Parser {
 
     }
 
+    private static Command parsePrioritize(String[] commandParts) throws DukeException {
+        if (commandParts.length != 3) {
+            throw new DukeInvalidCommandException("Sorry... That is an invalid command :/");
+        }
+
+        int taskNumber;
+
+        try {
+            taskNumber = Integer.parseInt(commandParts[1]);
+
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException("Sorry... That is an invalid task number :/");
+
+        }
+
+        Priority priority = Parser.parsePriority(commandParts[2]);
+
+        if (priority == null) {
+            throw new DukeInvalidArgumentException("Sorry... priority should be given as high/medium/low :/");
+        }
+
+        return new SetPriorityCommand(taskNumber, priority);
+
+
+    }
+
     /**
      * Parses the user's text input into an executable command.
      *
@@ -274,6 +312,9 @@ public class Parser {
 
         } else if (commandHeader.equals("find")) {
             return parseFind(commandParts);
+
+        } else if (commandHeader.equals("prioritize")) {
+            return parsePrioritize(commandParts);
 
         } else {
             throw new DukeInvalidCommandException("Sorry... I did not understand that :/");

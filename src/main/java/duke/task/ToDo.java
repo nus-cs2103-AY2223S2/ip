@@ -9,6 +9,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String description, Priority priority) {
+
+        super(description, priority);
+    }
+
     /**
      * Gets the String representation of the to-do to be stored in the text file.
      *
@@ -19,6 +24,7 @@ public class ToDo extends Task {
         String mark = (super.isDone) ? "X" : " ";
 
         return "T" + "~"
+                + this.priority + "~"
                 + mark + "~"
                 + this.description;
     }

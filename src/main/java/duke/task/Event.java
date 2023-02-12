@@ -21,6 +21,16 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public Event(String description, LocalDateTime from, LocalDateTime to, Priority priority) {
+        super(description, priority);
+
+        assert from != null;
+        assert to != null;
+
+        this.from = from;
+        this.to = to;
+    }
+
     /**
      * Gets the String representation of the event to be stored in the text file.
      *
@@ -31,6 +41,7 @@ public class Event extends Task {
         String mark = (super.isDone) ? "X" : " ";
 
         return "E" + "~"
+                + this.priority + "~"
                 + mark + "~"
                 + this.description + "~"
                 + this.from + "~"
