@@ -1,8 +1,8 @@
 # User Guide
->Duke will remind at the start you if you have any deadlines that are due on the day.
+>Duke will remind you at the start if you have any deadlines that are due on the day.
 
 ## Commands
-Type your commands into the text box and eithe click send or press the enter button.
+Type your commands into the text box and either click send or press the enter button.
 
 ### todo
 Creates a todo task.
@@ -22,7 +22,7 @@ Creates a event task.
 ```java
 event <description> /from <start date> /to <end date>
 ```
-```<start date>``` and ```<end date>``` has to follow `YYYY-MM-DD` format.
+```<start date>``` and ```<end date>``` have to follow `YYYY-MM-DD` format.
 
 
 ### list
