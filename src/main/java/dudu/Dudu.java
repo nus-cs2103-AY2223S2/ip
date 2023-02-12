@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import dudu.command.Command;
 import dudu.exception.DuduException;
-import dudu.exception.InvalidCommandException;
 import dudu.task.TaskList;
 import dudu.util.Parser;
 import dudu.util.Storage;
@@ -37,7 +36,7 @@ public class Dudu {
     }
 
     /**
-     * Dudu exit
+     * Exits Dudu's CLI appliation
      */
     public static void exit() {
         isExit = true;
@@ -52,7 +51,7 @@ public class Dudu {
     }
 
     /**
-     * Run Dudu
+     * Runs Dudu's CLI application
      */
     public void run() {
         ui.showWelcome();

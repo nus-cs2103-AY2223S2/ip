@@ -52,7 +52,8 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
+     * @throws DuduException If the task has already marked as done.
      */
     public void markAsDone() throws DuduException {
         if (isDone) {
@@ -62,7 +63,8 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as undone.
+     * Marks the task as undone.
+     * @throws DuduException If the task has already marked as undone.
      */
     public void markAsUndone() throws DuduException {
         if (!isDone) {
@@ -90,13 +92,13 @@ public abstract class Task {
     }
 
     /**
-     * Separate task's type, status and description.
-     *
-     * @param task String of task information; separate using ",".
-     * @return Create a specific task using the String of task information.
+     * Separates the task's type, status and description.
+     * @param input String of input containing task information; separate using "|".
+     * @return A specific task containing the task information.
+     * @throws InvalidCommandException If the command is invalid.
      */
-    public static Task decode(String task) throws InvalidCommandException {
-        String[] taskInfo = task.split(" \\| ");
+    public static Task decode(String input) throws InvalidCommandException {
+        String[] taskInfo = input.split(" \\| ");
         String type = taskInfo[0];
         boolean status = taskInfo[1].equals("1");
         String name = taskInfo[2];
