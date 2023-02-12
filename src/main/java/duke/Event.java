@@ -21,7 +21,7 @@ public class Event extends Task {
      * @param userInput specifies the fromDate, toDate and title of an Event object
      */
     public Event(boolean isCompleted, String userInput) {
-        super(isCompleted, userInput.substring(6, userInput.indexOf("/from ") - 1), TaskType.E);
+        super(isCompleted, userInput.substring(0, userInput.indexOf("/from ") - 1), TaskType.E);
         this.fromDate = userInput.substring(userInput.indexOf("/from ") + 6, userInput.indexOf("/to ") - 1);
         this.startDate = LocalDate.parse(fromDate);
         this.toDate = userInput.substring(userInput.indexOf("/to ") + 4);

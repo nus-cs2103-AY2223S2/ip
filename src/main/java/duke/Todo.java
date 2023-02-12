@@ -11,7 +11,7 @@ public class Todo extends Task {
      * @param userInput Specifies the todo task's title
      */
     public Todo(boolean isCompleted, String userInput) {
-        super(isCompleted, userInput.substring(5),TaskType.T);
+        super(isCompleted, userInput,TaskType.T);
     }
 
     @Override

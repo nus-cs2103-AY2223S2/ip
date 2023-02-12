@@ -62,9 +62,9 @@ public class Storage {
         switch (taskType) {
         case 'T':
             if (data.charAt(4) == 'X') {
-                currentTask = new Todo(true, "todo " + data.substring(8));
+                currentTask = new Todo(true, data.substring(8));
             } else {
-                currentTask = new Todo(false, "todo " + data.substring(8));
+                currentTask = new Todo(false,data.substring(8));
             }
             break;
         case 'D':
@@ -72,7 +72,7 @@ public class Storage {
             String taskName = tempString.substring(0, tempString.indexOf(" | "));
             String deadline = tempString.substring(tempString.indexOf(" | ") + 3);
 
-            String reformattedInput = "deadline " + taskName + " /by " + deadline;
+            String reformattedInput = taskName + " /by " + deadline;
 
             if (data.charAt(4) == 'X') {
                 currentTask = new Deadline(true, reformattedInput);
@@ -87,7 +87,7 @@ public class Storage {
             String fromDate = datesString.substring(0, datesString.indexOf(" | "));
             String toDate = datesString.substring(datesString.indexOf(" | ") + 3);
 
-            String newInput = "event " + taskTitle + " /from " + fromDate + " /to " + toDate;
+            String newInput = taskTitle + " /from " + fromDate + " /to " + toDate;
 
             if (data.charAt(4) == 'X') {
                 currentTask = new Event(true, newInput);
