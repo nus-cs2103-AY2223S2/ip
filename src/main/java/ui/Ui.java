@@ -75,7 +75,7 @@ public class Ui {
     public String findMsg(String keyword, TaskList taskList){
         String result = "Here are the matching tasks in your list:\n";
         int count = 0;
-        for (int i = 0; i < taskList.getSize(); i++){
+        for (int i = 0; i < taskList.size(); i++){
             Task currTask = taskList.get(i);
             String desc = currTask.getDescription();
             List wordList = Arrays.asList(desc.split(" "));

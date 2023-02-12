@@ -8,14 +8,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-
-        return (isDone ? "X" : " "); // mark done task with X
+    public void mark() {
+        if (!this.isDone){
+            this.isDone = true;
+        }
     }
 
-    public void updateState() {
-
-        this.isDone = !this.isDone;
+    public void unmark() {
+        if (this.isDone){
+            this.isDone = false;
+        }
     }
 
     /**
