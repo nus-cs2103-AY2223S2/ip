@@ -17,9 +17,13 @@ import sebastian.exceptions.EventFormatMismatchException;
  */
 public class Storage {
     private final File file;
+
+    /**
+     * Constructor
+     */
     public Storage() {
         File dir = new File("data");
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdir();
         }
         this.file = new File("data/SebastianData.txt");
