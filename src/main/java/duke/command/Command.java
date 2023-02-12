@@ -342,6 +342,24 @@ public abstract class Command {
         }
     }
 
+    public static class HelpCommand extends Command {
+
+        /**
+         * Constructs SortDoneCommand class.
+         */
+        public HelpCommand() {
+            Command.isExit =false;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            ui.showHelp();
+        }
+    }
+
     public static class ExitCommand extends Command {
 
         /**
