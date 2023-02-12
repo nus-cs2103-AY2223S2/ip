@@ -5,25 +5,56 @@ import util.*;
 
 import java.util.ArrayList;
 
+
+/**
+ * Class Todo extends the abstract class Task and represents a to-do task.
+ *
+ * @author @tricixg
+ * @version 1.0
+ */
 public class Todo extends Task {
 
-    static String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
 
+    /**
+     * Creates a new Todo task with the given description.
+     *
+     * @param description a string description of the task.
+     */
     public Todo(String description) {
         super(description);
         this.taskType = "T";
     }
 
+
+    /**
+     * Creates a new Todo task with the given description and completion status.
+     *
+     * @param isDone  a boolean indicating whether the task is completed or not.
+     * @param description a string description of the task.
+     */
     public Todo(boolean isDone, String description) {
         super(isDone, description);
         this.taskType = "T";    }
 
+
+    /**
+     * Returns a string representation of the task
+     * in the format "[T][status icon] task description".
+     *
+     * @return a string representation of the task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
-    
-  
+
+
+    /**
+     * Adds a new Todo task to the list of tasks.
+     *
+     * @param array a list of tasks.
+     * @param splitInput an array of strings containing the user input.
+     */
     public static void createTodoTask(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")){
             try {
@@ -47,6 +78,12 @@ public class Todo extends Task {
         
     }
 
+    /**
+     * Returns a string representation of the task
+     * in the format "T | completion status | task description".
+     *
+     * @return a string representation of the task in the save format.
+     */
     @Override
     public String saveFormat() {
         String divider = " | ";
