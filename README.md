@@ -1,3 +1,5 @@
+[![Java CI](https://github.com/Yufannnn/ip/actions/workflows/gradle.yml/badge.svg)](https://github.com/Yufannnn/ip/actions/workflows/gradle.yml)
+
 # Mr. Bear
 > “Your mind is for having ideas, not holding them.”  – David Allen ([source](https://dansilvestre.com/productivity-quotes))
 
@@ -23,4 +25,4 @@ If you are not sure how to use it, check out the [User Guide](https://yufannnn.g
 - [X] Add four type of tasks (todo, deadline, event, fixed duration)
 - [X] Search, Sort, Find tasks
 - [X] Mark, Unmark, Delete, massDelete tasks
-- [X] find the next free day
+- [X] Find the next free day
