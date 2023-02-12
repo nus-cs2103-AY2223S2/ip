@@ -6,8 +6,17 @@ import duke.Exception.IncorrectArgumentsException;
 import duke.Exception.InvalidArgumentsException;
 import duke.Exception.InvalidInputException;
 
+/**
+ * Main class that parses the users inputs.
+ */
 public class Parser {
 
+    /**
+     * Takes in the users input and splits it into single word inputs and multi-word inputs to separately handle.
+     * @param command Users input.
+     * @return If the user input is valid, return the corresponding (executable) command.
+     * @throws DukeException If the user input is invalid, throw the corresponding exception.
+     */
     public Command parseCommand(String command) throws DukeException {
         String[] tokens = command.split(" ", 2);
         if (tokens.length == 1) {
@@ -17,6 +26,15 @@ public class Parser {
         }
     }
 
+    /**
+     * For single word user input, check if user input is a valid single word command.
+     * If valid, execute it or else throw a corresponding error.
+     * @param command The users input.
+     * @return if the user input is a valid command, return the corresponding (executable) command.
+     * @throws InvalidInputException If the user input is not a supported command, throw this exception.
+     * @throws IncorrectArgumentsException If the user input is a supported command, but with the wrong number of
+     * arguments, throw this exception.
+     */
     public Command handleSingleInput(String command) throws InvalidInputException,
             IncorrectArgumentsException {
         switch (command) {
@@ -38,6 +56,18 @@ public class Parser {
         }
     }
 
+    /**
+     * For multi-word user input, check if user input is a valid multi-word command.
+     * If valid, execute it or else throw a corresponding error.
+     * @param command The first word of the users input.
+     * @param details The subsequent words of the user input.
+     * @return if the user input is a valid command, return the corresponding (executable) command.
+     * @throws InvalidInputException If the user input is not a supported command, throw this exception.
+     * @throws IncorrectArgumentsException If the user input is a supported command, but with the wrong number of
+     * arguments, throw this exception.
+     * @throws InvalidArgumentsException If the user input is a supported command, but with the arguments given in
+     * a wrong format, throw this exception.
+     */
     public Command handleMultiInput(String command, String details) throws IncorrectArgumentsException,
             InvalidInputException, InvalidArgumentsException {
         switch (command) {

@@ -3,11 +3,20 @@ package duke.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Event task which is to be stored by Duke. An Event has an event name, start time and end time.
+ */
 public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime until;
 
+    /**
+     * The constructor for an event object.
+     * @param name The event name.
+     * @param from The event start time.
+     * @param until The event end time.
+     */
     public Event(String name, LocalDateTime from, LocalDateTime until) {
         super(name);
         this.from = from;

@@ -7,15 +7,28 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The main class to store and load data from a file.
+ */
 public class Storage {
     private List<Task> tasks;
     private File file;
 
+    /**
+     * The constructor for a storage object, that loads a file from the filepath or creates a new file with the
+     * filepath name input.
+     * @param filepath The file name.
+     */
     public Storage(String filepath) {
         this.tasks = new ArrayList<>();
         this.file = new File(filepath);
     }
 
+    /**
+     * Loads an existing task list from the data file.
+     * @return the list of tasks stored in the file.
+     * @throws NoSuchFileException If there is no space to make the file, throw this exception.
+     */
     public List<Task> loadFromFile() throws NoSuchFileException {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.file));
@@ -31,7 +44,10 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Saves the existing task list with the latest changes to the file.
+     * @param taskList The task list with the latest changes to be saved.
+     */
     public void saveToFile(List<Task> taskList) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
