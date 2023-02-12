@@ -39,27 +39,6 @@ public class Ui {
     }
 
     /**
-     * Displays BorzAI logo.
-     */
-    public void showStartUp() {
-        String logo = "  /\\_/\\\n"
-                + " /\u25DE   \u25DF\\\n"
-                + "( \u25d5   \u25d5 )\n"
-                + " \\     /\n"
-                + "  \\   /\n"
-                + "   \\ /\n"
-                + "    \u25CF\n";
-        System.out.println(logo + "BorzAI\n");
-    }
-
-    /**
-     * Displays welcome message.
-     */
-    public void showWelcome() {
-        storeOutput("When all I do is for you, Kermie \u2665\n\tWhat can I do for you?\n");
-    }
-
-    /**
      * Displays loading error when tasks cannot be loaded.
      */
     public void showLoadingError() {

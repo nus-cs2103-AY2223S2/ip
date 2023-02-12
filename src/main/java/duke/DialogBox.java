@@ -1,6 +1,5 @@
 package duke;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +25,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final Circle clip = new Circle(25, 25, 25);
 
     private DialogBox(String text, Image img) {
         try {
@@ -40,6 +38,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        Circle clip = new Circle(25, 25, 25);
         displayPicture.setClip(clip);
     }
 

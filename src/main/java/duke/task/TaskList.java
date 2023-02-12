@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList extends ArrayList<Task>{
@@ -39,45 +38,50 @@ public class TaskList extends ArrayList<Task>{
     }
 
     /**
-     * Filter tasks by keywords.
+     * Filters tasks by keywords.
      *
      * @param keywords Keywords to filter tasks by.
      * @return TaskList of filtered tasks.
      */
     public TaskList filter(String... keywords) {
-        List<String> keywordList = Arrays.asList(keywords);
         return this.stream()
-                .filter(task -> keywordList.stream().anyMatch(keyword -> task.getDescription().contains(keyword.trim())))
+                .filter(task -> Arrays.stream(keywords)
+                        .anyMatch(keyword -> task.getDescription().contains(keyword.trim())))
                 .distinct()
                 .collect(Collectors.toCollection(TaskList::new));
     }
 
     /**
-     * Filter tasks by their dates.
+     * Checks if task is on date.
+     *
+     * @param task Task to be checked.
+     * @param date Date to be checked.
+     * @return boolean of whether task is on date.
+     */
+    private boolean isTaskOnDate(Task task, LocalDate date) {
+        if (task instanceof Deadline) {
+            return ((Deadline) task).getDeadline().toLocalDate().isEqual(date);
+        } else if (task instanceof Event) {
+            Event event = (Event) task;
+            return event.getStartDateTime().toLocalDate().isEqual(date) ||
+                    event.getEndDateTime().toLocalDate().isEqual(date) ||
+                    (event.getStartDateTime().toLocalDate().isBefore(date) &&
+                            event.getEndDateTime().toLocalDate().isAfter(date));
+        }
+        return false;
+    }
+
+    /**
+     * Filters tasks by dates.
      *
      * @param dates Dates to filter tasks by.
      * @return TaskList of filtered tasks.
      */
     public TaskList filterDate(LocalDate... dates) {
-        TaskList filteredTasks = new TaskList();
-        Arrays.stream(dates)
-                .flatMap(date -> this.stream()
-                        .filter(task -> {
-                            if (task instanceof Deadline) {
-                                Deadline deadline = (Deadline) task;
-                                return deadline.getDeadline().toLocalDate().isEqual(date);
-                            } else if (task instanceof Event) {
-                                Event event = (Event) task;
-                                return event.getStartDateTime().toLocalDate().isEqual(date) ||
-                                        event.getEndDateTime().toLocalDate().isEqual(date) ||
-                                        (event.getStartDateTime().toLocalDate().isBefore(date) &&
-                                                event.getEndDateTime().toLocalDate().isAfter(date));
-                            }
-                            return false;
-                        })
-                        .filter(task -> !filteredTasks.contains(task)))
-                .forEach(filteredTasks::add);
-        return filteredTasks;
+        return Arrays.stream(dates)
+                .flatMap(date -> this.stream().filter(task -> isTaskOnDate(task, date)))
+                .distinct()
+                .collect(Collectors.toCollection(TaskList::new));
     }
 
     /**
