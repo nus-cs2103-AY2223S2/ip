@@ -2,7 +2,6 @@ package io.gui;
 
 import command.Command;
 import command.Error;
-import io.Storage;
 import io.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import task.TaskList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
