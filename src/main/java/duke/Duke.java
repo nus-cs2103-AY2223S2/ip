@@ -1,8 +1,11 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.Parser;
+import duke.parser.Parser;
 import duke.exception.DukeException;
+import duke.taskstorage.Storage;
+import duke.taskstorage.TaskList;
+import duke.ui.Ui;
 
 /**
  * Class for Duke, a Personal Assistant Chatbot
@@ -12,7 +15,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private final String FILE_PATH = ("./data/Duke.txt");
-    private static boolean isExit = false;
 
     /**
      * Constructor for Duke Class. If log file does not exist, create a new log file
@@ -36,12 +38,4 @@ public class Duke {
     public String showWelcomeMessage() {
         return "Hello";
     }
-
-
-/*
-    public static void main(String[] args) {
-        Duke d = new Duke();
-        System.out.println(d.getResponse("list"));
-    }
- */
 }
