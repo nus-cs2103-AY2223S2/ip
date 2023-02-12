@@ -79,12 +79,6 @@ public class TaskList {
         Ui.displayList(array);
     }
 
-    /**
-     * Searches for a task.
-     *
-     * @param array The array of tasks.
-     * @param splitInput The user's input for searching for a task.
-     */
     public static void searchTask(ArrayList<Task> array, String[] splitInput) {
         String searchTerm = splitInput[1].toLowerCase();
         ArrayList<Task> searchResults = new ArrayList<Task>();
