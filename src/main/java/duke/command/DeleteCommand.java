@@ -5,7 +5,17 @@ import duke.exceptions.InvalidIndexException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * A command for deletion of tasks.
+ */
 public class DeleteCommand {
+    /**
+     * Deletes a task from a list of tasks.
+     * @param tasks the list of tasks.
+     * @param input user's input.
+     * @return acknowledgement of the task being successfully deleted.
+     * @throws DukeException if an invalid task number were found.
+     */
     public static String executeDelete(TaskList tasks, String input) throws DukeException {
         if (input.length() < 8 || !input.matches("delete\\s+\\d+")) {
             throw new DukeException("<delete> command should receive a task number!");

@@ -1,11 +1,21 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Event;
 
+/**
+ * A command to create events.
+ */
 public class EventCommand {
+    /**
+     * Creates an event that is added to a list of existing tasks.
+     * @param tasks the list of tasks.
+     * @param input user's input describing the event.
+     * @return acknowledgement of the event being successfully added.
+     * @throws DukeException if invalid description or dates were found.
+     */
     public static String addEvent(TaskList tasks, String input) throws DukeException {
         if (input.length() < 7) {
             throw new DukeException("The description of a <event> cannot be empty!");

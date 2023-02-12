@@ -40,6 +40,11 @@ public class Duke {
         return greeting;
     }
 
+    /**
+     * Gets the appropriate response according to the user's input.
+     * @param input the user's input.
+     * @return information about the actions executed.
+     */
     public String getResponse(String input) {
         String response = "";
         try {

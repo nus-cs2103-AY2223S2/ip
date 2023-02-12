@@ -29,29 +29,29 @@ public class Parser {
      */
     public String execute(Command command, String userInput) throws DukeException {
         switch (command) {
-            case BYE:
-                return ByeCommand.executeBye();
-            case LIST:
-                return ListCommand.executeList(tasks);
-            case MARK:
-                return MarkCommand.executeMark(tasks, userInput);
-            case UNMARK:
-                return UnmarkCommand.executeUnmark(tasks, userInput);
-            case DELETE:
-                return DeleteCommand.executeDelete(tasks, userInput);
-            case TODO:
-                return TodoCommand.addTodo(tasks, userInput);
-            case DEADLINE:
-                return DeadlineCommand.addDeadline(tasks, userInput);
-            case EVENT:
-                return EventCommand.addEvent(tasks, userInput);
-            case GETEVENTSON:
-                return GetEventsOnCommand.retrieveEvents(tasks, userInput);
-            case FIND:
-                return FindCommand.executeFind(tasks, userInput);
-            default:
-                assert false : "Unknown commands should have been resolved and not parsed.";
-                return "";
+        case BYE:
+            return ByeCommand.executeBye();
+        case LIST:
+            return ListCommand.executeList(tasks);
+        case MARK:
+            return MarkCommand.executeMark(tasks, userInput);
+        case UNMARK:
+            return UnmarkCommand.executeUnmark(tasks, userInput);
+        case DELETE:
+            return DeleteCommand.executeDelete(tasks, userInput);
+        case TODO:
+            return TodoCommand.addTodo(tasks, userInput);
+        case DEADLINE:
+            return DeadlineCommand.addDeadline(tasks, userInput);
+        case EVENT:
+            return EventCommand.addEvent(tasks, userInput);
+        case GETEVENTSON:
+            return GetEventsOnCommand.retrieveEvents(tasks, userInput);
+        case FIND:
+            return FindCommand.executeFind(tasks, userInput);
+        default:
+            assert false : "Unknown commands should have been resolved and not parsed.";
+            return "";
         }
     }
 }

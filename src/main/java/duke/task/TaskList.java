@@ -37,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the number of tasks in the TaskList.
+     * Gets the number of tasks in TaskList.
      * @return Integer representing number of tasks.
      */
     public int getSize() {
@@ -45,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a given task to the TaskList object.
+     * Adds a given task to TaskList.
      * @param task The task to be added.
      */
     public void addTask(Task task) {
@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task identified by its order in the TaskList.
+     * Deletes a specified task from TaskList.
      * @param taskNum The number corresponding to the task to be deleted.
      * @return The deleted task.
      */
@@ -64,7 +64,7 @@ public class TaskList {
     }
 
     /**
-     * Toggles the task, identified by its order, as completed.
+     * Toggles a given task as complete.
      * @param taskNum The number corresponding to the task to be marked as completed.
      * @return Information of the task in string representation.
      */
@@ -77,7 +77,7 @@ public class TaskList {
     }
 
     /**
-     * Toggles the task, identified by its order, as incomplete.
+     * Toggles a given task as incomplete.
      * @param taskNum The number corresponding to the task to be marked as incomplete.
      * @return Information of the task in string representation.
      */
@@ -90,7 +90,7 @@ public class TaskList {
     }
 
     /**
-     * Displays information about all the tasks tracked by the TaskList.
+     * Displays information about all the tasks that are currently being tracked.
      * @return String with information across all tasks.
      */
     public String listTasks() {
@@ -106,7 +106,7 @@ public class TaskList {
     }
 
     /**
-     * Displays information of all the tasks that occur on this date.
+     * Displays information of all the tasks that occur on a given date.
      * @param date The date to check against.
      * @return String with information of all tasks on the specified date.
      */
@@ -124,7 +124,7 @@ public class TaskList {
     }
 
     /**
-     * Gets all the tasks which contains or are associated with the given word in string.
+     * Finds all the tasks which contains or are associated with the given word.
      * @param word the specified word.
      * @return formatted string showing details of all tasks associated to the word.
      */
