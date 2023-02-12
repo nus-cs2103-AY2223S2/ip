@@ -6,16 +6,10 @@ import duke.tasks.Task;
 
 public class Ui {
 
-    final static String PARTITION = "*******************************************";
-
     private Scanner scanner;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
-    }
-
-    public static void showPartition() {
-        System.out.println(PARTITION);
     }
 
     public static String showWelcome() {

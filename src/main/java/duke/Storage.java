@@ -22,6 +22,10 @@ public class Storage {
     public Storage() {
         path = Paths.get(System.getProperty("user.home"), "CS2103T", "tasks.txt");
         file = new File(path.toUri());
+
+        assert path != null;
+        assert file != null;
+
         file.getParentFile().mkdirs();
         try {
             file.createNewFile();
@@ -74,6 +78,8 @@ public class Storage {
                         + task.getTimeline();
                 commandsToWrite.add(command);
             }
+            assert path != null;
+
             Files.write(path, commandsToWrite);
         } catch (IOException e) {
             System.out.println("There is an error when writing to the file");
