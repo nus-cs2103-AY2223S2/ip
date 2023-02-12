@@ -2,7 +2,6 @@ package wessy;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Set;
 
 public enum CmdType {
     LIST("list"),
@@ -15,13 +14,7 @@ public enum CmdType {
     DELETE("delete"),
     CLEAR("clear");
 
-    private final String cmd;
     private static final Map<String, CmdType> COMMANDS = new HashMap<>();
-
-    CmdType(String str) {
-        this.cmd = str;
-    }
-
     static {
         COMMANDS.put("bye", CmdType.BYE);
         COMMANDS.put("list", CmdType.LIST);
@@ -34,12 +27,14 @@ public enum CmdType {
         COMMANDS.put("clear", CmdType.CLEAR);
     }
 
-    public static CmdType getCmdType(String str) {
-        return COMMANDS.get(str);
+    private final String cmd;
+
+    CmdType(String str) {
+        this.cmd = str;
     }
 
-    public static Set<String> getKeys() {
-        return COMMANDS.keySet();
+    public static CmdType getCmdType(String str) {
+        return COMMANDS.get(str);
     }
 
     @Override
@@ -47,7 +42,7 @@ public enum CmdType {
         return cmd;
     }
 
-    public int len() {
+    public int getStrLength() {
         return cmd.length();
     }
 }

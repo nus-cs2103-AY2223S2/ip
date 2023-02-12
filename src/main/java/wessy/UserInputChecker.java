@@ -1,24 +1,26 @@
 package wessy;
 
-import wessy.Parser;
 import wessy.exceptions.MissingSpacingException;
 import wessy.exceptions.TimeSpecifierException;
 import wessy.exceptions.UnspecifiedTimeException;
-import wessy.exceptions.int_exceptions.NotAnIntegerException;
-import wessy.exceptions.num_of_input_exceptions.MissingInputException;
-import wessy.exceptions.num_of_input_exceptions.TooManyInputException;
+
+import wessy.exceptions.numofinput.MissingInputException;
+import wessy.exceptions.numofinput.TooManyInputException;
+
+import wessy.exceptions.integer.NotAnIntegerException;
 
 public class UserInputChecker {
     // Check for "Missing space after command"
     public static void checkSpacingAftCmd(String userInput, CmdType cmd) throws MissingSpacingException {
-        if (checkCmdsThatNeedInput(cmd) && (userInput.equals(cmd.toString()) || userInput.charAt(cmd.len()) != ' ')) {
+        if (isCmdThatNeedsInput(cmd) && (userInput.equals(cmd.toString())
+                || userInput.charAt(cmd.getStrLength()) != ' ')) {
             throw new MissingSpacingException(cmd.toString());
         }
     }
 
     // Check simpler missing input case (excluding "/by", "/from", "/to" keywords)
-    public static void checkForMissingInput(String userInput, CmdType cmd) throws MissingInputException {
-        if (checkCmdsThatNeedInput(cmd) && isAllSpaces(userInput.substring(cmd.len()))) {
+    public static void checkMissingInput(String userInput, CmdType cmd) throws MissingInputException {
+        if (isCmdThatNeedsInput(cmd) && isAllSpaces(userInput.substring(cmd.getStrLength()))) {
             throw new MissingInputException(cmd.toString());
         }
     }
@@ -35,17 +37,18 @@ public class UserInputChecker {
                 ex = new TimeSpecifierException("/to");
             }
         }
+
         if (ex != null) {
             throw ex;
         }
     }
 
     // Check deadline's missing input time
-    public static void checkForDeadlineMissingInput(String userInput, CmdType cmd) throws UnspecifiedTimeException {
-        UnspecifiedTimeException ex = null;
+    public static void checkDeadlineMissingInput(String userInput, CmdType cmd) throws UnspecifiedTimeException {
         String keyword = "/by";
+        UnspecifiedTimeException ex = null;
         int pos = userInput.indexOf(keyword);
-        if (isAllSpaces(userInput.substring(cmd.len(), pos))) {
+        if (isAllSpaces(userInput.substring(cmd.getStrLength(), pos))) {
             ex = new UnspecifiedTimeException(keyword, true);
         } else if (isAllSpaces(userInput.substring(pos + keyword.length()))) {
             ex = new UnspecifiedTimeException(keyword, false);
@@ -56,19 +59,21 @@ public class UserInputChecker {
     }
 
     // Check event's missing input time
-    public static void checkForEventMissingInput(String userInput, CmdType cmd) throws UnspecifiedTimeException {
-        UnspecifiedTimeException ex = null;
+    public static void checkEventMissingInput(String userInput, CmdType cmd) throws UnspecifiedTimeException {
         String fKeyword = "/from";
-        int fPos = userInput.indexOf(fKeyword);
         String tKeyword = "/to";
+        int fPos = userInput.indexOf(fKeyword);
         int tPos = userInput.indexOf(tKeyword);
-        if (isAllSpaces(userInput.substring(cmd.len(), fPos))) {
+
+        UnspecifiedTimeException ex = null;
+        if (isAllSpaces(userInput.substring(cmd.getStrLength(), fPos))) {
             ex = new UnspecifiedTimeException(fKeyword, true);
         } else if (isAllSpaces(userInput.substring(fPos + fKeyword.length(), tPos))) {
             ex = new UnspecifiedTimeException(fKeyword, false);
         } else if (isAllSpaces(userInput.substring(tPos + tKeyword.length()))) {
             ex = new UnspecifiedTimeException(tKeyword, false);
         }
+
         if (ex != null) {
             throw ex;
         }
@@ -76,12 +81,12 @@ public class UserInputChecker {
 
     // For "mark", "unmark", "delete", check for non-numerical characters
     public static void checkNotNumerical(String userInput, CmdType cmd) throws NotAnIntegerException {
-        String str = userInput.substring(cmd.len());
+        String str = userInput.substring(cmd.getStrLength());
         int n = str.length();
         for (int i = 0; i < n; i++) {
             char c = str.charAt(i);
-            if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5'
-                    && c != '6' && c != '7' && c != '8' && c != '9' && c != ' ' && c != '-') {
+            if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5' && c != '6' && c != '7'
+                    && c != '8' && c != '9' && c != ' ' && c != '-') {
                 throw new NotAnIntegerException();
             }
         }
@@ -89,7 +94,7 @@ public class UserInputChecker {
 
     // For "mark", "unmark", "delete", check for "Too many inputs" error
     public static void checkTooManyInputs(String userInput, CmdType cmd) throws TooManyInputException {
-        String str = Parser.removeSpacePadding(userInput.substring(cmd.len()));
+        String str = Parser.removeSpacePadding(userInput.substring(cmd.getStrLength()));
         int n = str.length();
         for (int i = 0; i < n; i++) {
             if (str.charAt(i) == ' ') {
@@ -99,9 +104,9 @@ public class UserInputChecker {
     }
 
     // HELPER FUNC
-    private static boolean checkCmdsThatNeedInput(CmdType cmd) {
-        return (cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT ||
-                cmd == CmdType.MARK || cmd ==  CmdType.UNMARK || cmd == CmdType.DELETE);
+    private static boolean isCmdThatNeedsInput(CmdType cmd) {
+        return (cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT || cmd == CmdType.MARK
+                || cmd ==  CmdType.UNMARK || cmd == CmdType.DELETE);
     }
 
     // HELPER FUNC

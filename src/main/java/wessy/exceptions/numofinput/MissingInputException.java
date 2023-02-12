@@ -1,13 +1,15 @@
-package wessy.exceptions.num_of_input_exceptions;
+package wessy.exceptions.numofinput;
 
 import wessy.exceptions.WessyException;
 
 public class MissingInputException extends WessyException {
-    static String ENDING = " is missing.";
+    private static final String ENDING = " is missing.";
     private final String cmd;
 
     public MissingInputException(String cmd) {
-        super((cmd.equals("mark") || cmd.equals("unmark")) ? "The chosen task number of the '" : "The task description of the '");
+        super((cmd.equals("mark") || cmd.equals("unmark"))
+                ? "The chosen task number of the '"
+                : "The task description of the '");
         this.cmd = cmd;
     }
 

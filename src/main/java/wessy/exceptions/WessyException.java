@@ -1,8 +1,8 @@
 package wessy.exceptions;
 
-public class WessyException extends Exception {
+public abstract class WessyException extends Exception {
+    private static final String OPENING = "☹ OOPS!!! ";
     private final String message;
-    static String OPENING = "☹ OOPS!!! ";
 
     protected WessyException(String str) {
         this.message = OPENING + str;

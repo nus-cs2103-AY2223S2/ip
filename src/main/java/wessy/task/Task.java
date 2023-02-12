@@ -1,8 +1,8 @@
 package wessy.task;
 
 public class Task {
-    protected final String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     public Task(String description, boolean isDone) {
         this.description = description;

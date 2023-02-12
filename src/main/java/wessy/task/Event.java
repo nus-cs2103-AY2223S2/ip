@@ -3,8 +3,8 @@ package wessy.task;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     public Event(String description, LocalDateTime from, LocalDateTime to, boolean isDone) {
         super(description, isDone);
@@ -18,10 +18,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + timeToString(from) + " to: " + timeToString(to) + ")";
+        return "[E]" + super.toString() + " (from: " + toString(from) + " to: " + toString(to) + ")";
     }
 
-    public static String timeToString(LocalDateTime dateTime) {
+    public static String toString(LocalDateTime dateTime) {
         String str = dateTime.toString();
         if (str.substring(11).equals("12:34:56")) {
             return str.substring(0, 10);

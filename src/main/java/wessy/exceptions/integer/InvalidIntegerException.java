@@ -1,4 +1,4 @@
-package wessy.exceptions.int_exceptions;
+package wessy.exceptions.integer;
 
 import wessy.exceptions.WessyException;
 
