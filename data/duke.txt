@@ -1,2 +1,4 @@
-T|0|eep
-T|0|eep1
+T|0|sleep
+T|1|groceries
+T|0|groceries
+T|0|laundry
