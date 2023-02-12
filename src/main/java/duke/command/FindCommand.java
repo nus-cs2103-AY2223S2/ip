@@ -5,7 +5,6 @@ import duke.MessageGenerator;
 import duke.Task;
 import duke.TaskList;
 
-import java.util.List;
 
 public class FindCommand extends Command {
     private final String keyword;
