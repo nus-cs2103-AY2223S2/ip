@@ -18,9 +18,9 @@ import tunabot.task.Task;
  * Class to handle Storage of TunaBot
  */
 public class Storage {
-    private final Path filePath;
+    private static Path filePath;
     public Storage(Path filePath) {
-        this.filePath = filePath;
+        Storage.filePath = filePath;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Storage {
      * Saves TaskList to the save file.
      * @param tasks TaskList of current tasks.
      */
-    public void save(TaskList tasks) {
+    public static void save(TaskList tasks) {
         try {
             File saveFile = filePath.toFile();
             FileWriter writer = new FileWriter(saveFile);

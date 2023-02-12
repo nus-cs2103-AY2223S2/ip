@@ -28,7 +28,6 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new InputException("BLUB! Date format is invalid! It should be dd/mm/yy-hhmm.");
         }
-        
     }
 
     /**
@@ -87,6 +86,6 @@ public class Event extends Task {
         } else {
             box = "[ ] ";
         }
-        return "[E]" + box + this.getName() + "(from: " + this.getStart() + " to " + this.getEnd() + ")";
+        return "[E]" + box + this.getName() + " (from: " + this.getStart() + " to " + this.getEnd() + ")";
     }
 }

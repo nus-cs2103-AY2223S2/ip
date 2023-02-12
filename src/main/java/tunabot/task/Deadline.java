@@ -67,6 +67,6 @@ public class Deadline extends Task {
         } else {
             box = "[ ] ";
         }
-        return "[D]" + box + this.getName() + "(by " + this.getDeadline() + ")";
+        return "[D]" + box + this.getName() + " (by " + this.getDeadline() + ")";
     }
 }

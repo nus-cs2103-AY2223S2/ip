@@ -45,6 +45,7 @@ public class TunaBot {
         try {
             String output = Parser.parse(input, tasks);
             if (input.equals("bye")) {
+                Storage.save(tasks);
                 Platform.exit();
             }
             return output;

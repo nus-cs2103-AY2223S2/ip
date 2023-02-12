@@ -12,7 +12,7 @@ import tunabot.exceptions.InputException;
 public class DeadlineTest {
     @Test
     public void instanceTest() throws InputException {
-        Deadline task = new Deadline("Test Task ", "01/01/23-1800");
+        Deadline task = new Deadline("Test Task", "01/01/23-1800");
         assertEquals("[D][ ] Test Task (by 01/01/23-1800)", task.toString());
     }
 

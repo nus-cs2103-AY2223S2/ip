@@ -59,7 +59,7 @@ public class Ui {
     public void saveFileProblem() {
         System.out.println("BLUB! Problem with save file!");
     }
-    
+
     public void line() {
         System.out.println(LINE);
     }
