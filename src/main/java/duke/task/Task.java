@@ -8,11 +8,15 @@ import java.time.LocalDateTime;
  * stored in local storage with ease.
  */
 abstract public class Task implements Serializable {
-
+    protected enum type {
+        T,
+        D,
+        E;
+    }
     protected LocalDateTime time = null;
     private String content;
     private Boolean is_Done;
-    protected char type;
+    protected type type;
 
     /**
      * Constructs an instance of Task with the given content and state of whether it is done.
@@ -45,7 +49,7 @@ abstract public class Task implements Serializable {
         return (this.is_Done ? "X" : " "); // mark done task with X
     }
 
-    public char getTypeIcon() {
+    public type getTypeIcon() {
         return this.type; // mark done task with X
     }
 }

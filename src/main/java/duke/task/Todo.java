@@ -12,7 +12,7 @@ public class Todo extends Task {
      */
     public Todo(String content, boolean isDone) {
         super(content, isDone);
-        this.type = 'T';
+        this.type = type.T;
         this.time = null;
     }
 
