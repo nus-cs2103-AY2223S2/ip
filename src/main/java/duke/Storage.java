@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskException;
+import duke.tag.EmptyTag;
+import duke.tag.Tag;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -53,16 +55,22 @@ public class Storage {
     Task parseLine(String data) throws DukeException {
         String[] taskData = data.split("\\|");
         String taskType = taskData[0].trim();
+        Tag tag;
+        if (taskData[taskData.length - 1].contains("tag:")) {
+            tag = new Tag(taskData[taskData.length - 1].trim().substring(5));
+        } else {
+            tag = new EmptyTag();
+        }
         switch (taskType) {
         case "T":
-            return new ToDo(taskData[2].trim(), taskData[1].trim().equals("X"));
+            return new ToDo(taskData[2].trim(), taskData[1].trim().equals("X"), tag);
         case "D":
             return new Deadline(taskData[2].trim(), taskData[1].trim().equals("X"),
-                    Parser.parseDateTime(taskData[3].trim().substring(4)));
+                    Parser.parseDateTime(taskData[3].trim().substring(4)), tag);
         case "E":
             return new Event(taskData[2].trim(), taskData[1].trim().equals("X"),
                     Parser.parseDateTime(taskData[3].trim().substring(6)),
-                    Parser.parseDateTime(taskData[4].trim().substring(4)));
+                    Parser.parseDateTime(taskData[4].trim().substring(4)), tag);
         default:
             throw new InvalidTaskException();
         }

@@ -2,13 +2,14 @@ package duke.tag;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * A class that stores all the tags that are used in a
  * TaskList.
  */
 public class TagList {
-    private HashSet<Tag> tags;
+    private Set<Tag> tags;
 
     /**
      * Constructor for TagList.

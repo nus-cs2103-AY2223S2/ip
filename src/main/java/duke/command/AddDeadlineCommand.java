@@ -5,6 +5,7 @@ import duke.TaskList;
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskDescriptionException;
 import duke.exception.InvalidDateTimeException;
+import duke.tag.Tag;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -33,18 +34,27 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
+        Task task;
         try {
             int doneByIndex = contents.indexOf("/by");
             String description = contents.substring(9, doneByIndex - 1);
-            String doneByString = contents.substring(doneByIndex + 4);
-            System.out.println("c");
-            LocalDateTime doneBy = Parser.parseDateTime(doneByString);
-            Task task = new Deadline(description, doneBy);
+            if (!contents.contains("/tag")){
+                String doneByString = contents.substring(doneByIndex + 4);
+                LocalDateTime doneBy = Parser.parseDateTime(doneByString);
+                task = new Deadline(description, doneBy);
+            } else {
+                int tagIndex = contents.indexOf("/tag");
+                String doneByString = contents.substring(doneByIndex + 4, tagIndex - 1);
+                LocalDateTime doneBy = Parser.parseDateTime(doneByString);
+                String tagName = contents.substring(tagIndex + 5).trim();
+                Tag tag = new Tag(tagName);
+                task = new Deadline(description, doneBy, tag);
+            }
             tasks.addTask(task);
             return tasks.addTaskText(task);
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyTaskDescriptionException();
-        } catch (DateTimeParseException e ) {
+        } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
         }
     }

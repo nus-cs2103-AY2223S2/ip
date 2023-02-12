@@ -11,6 +11,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ListTaggedCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
@@ -29,7 +30,8 @@ public class Parser {
         String[] commandArr = command.split(" ");
         switch (commandArr[0]) {
         case "list":
-            return new ListCommand(tasks);
+            return (commandArr.length == 1)  ? new ListCommand(tasks) :
+                    new ListTaggedCommand(tasks, commandArr[1]);
         case "mark":
             return new MarkCommand(tasks, Integer.parseInt(commandArr[1]));
         case "unmark":

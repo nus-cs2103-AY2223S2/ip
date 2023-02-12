@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 import duke.exception.InvalidTaskNumberException;
+import duke.tag.Tag;
 import duke.task.Task;
 
 /**
@@ -37,8 +38,7 @@ public class TaskList {
      */
     public Task deleteTask(int taskNum) throws InvalidTaskNumberException {
         checkTaskNumValidity(taskNum);
-        Task task = tasks.remove(taskNum - 1);
-        return task;
+        return tasks.remove(taskNum - 1);
     }
 
     /**
@@ -79,12 +79,19 @@ public class TaskList {
      * Finds list of tasks that contains keyword.
      *
      * @param keyword String to be searched
-     * @return TaskList object containing all tasks that contains keyword
+     * @return TaskList object containing all tasks that contain keyword
      */
     public TaskList findTasks(String keyword) {
         TaskList tasksFound = new TaskList();
         tasks.stream().filter(x -> x.getDescription().contains(keyword))
-                .forEach(y -> tasksFound.addTask(y));
+                .forEach(tasksFound::addTask);
+        return tasksFound;
+    }
+
+    public TaskList listTagged(Tag tag) {
+        TaskList tasksFound = new TaskList();
+        tasks.stream().filter(x -> x.getTag().equals(tag))
+                .forEach(tasksFound::addTask);
         return tasksFound;
     }
 
@@ -110,7 +117,7 @@ public class TaskList {
 
     String getSavedListOfTasks() {
         StringBuilder listString = new StringBuilder();
-        tasks.stream().map(x -> String.format("%s\n", x.getSaveTaskString())).forEach(y -> listString.append(y));
+        tasks.stream().map(x -> String.format("%s\n", x.getSaveTaskString())).forEach(listString::append);
         return listString.toString();
     }
 
@@ -122,7 +129,7 @@ public class TaskList {
     public String getListOfTasks() {
         StringBuilder listOfTasks = new StringBuilder();
         IntStream.range(0, tasks.size()).mapToObj(x -> String.format("%d. %s\n", x + 1, tasks.get(x)))
-                .forEach(y -> listOfTasks.append(y));
+                .forEach(listOfTasks::append);
         return listOfTasks.toString();
     }
 
@@ -136,8 +143,6 @@ public class TaskList {
         if (tasks.isEmpty()) {
             return "There are no tasks in your list";
         }
-        StringBuilder printedList = new StringBuilder("Here are the tasks in your list:\n");
-        printedList.append(getListOfTasks());
-        return printedList.toString();
+        return "Here are the tasks in your list:\n" + getListOfTasks();
     }
 }

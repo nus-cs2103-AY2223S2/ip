@@ -5,15 +5,20 @@ package duke.tag;
  * tag
  */
 public class Tag {
-    private final String description;
+    private final String name;
 
     /**
      * Constructor for Tag.
      *
-     * @param description Name or description of Tag.
+     * @param name Name or name of Tag.
      */
-    public Tag(String description) {
-        this.description = description;
+    public Tag(String name) {
+        this.name = name;
+
+    }
+
+    public String getTagName() {
+        return name;
     }
 
     /**
@@ -25,14 +30,25 @@ public class Tag {
             return true;
         } else if(obj instanceof Tag) {
             Tag t = (Tag) obj;
-            return this.description.equals(t.description);
+            return this.name.equals(t.name);
         } else {
             return false;
         }
     }
 
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
-        return description;
+        return name;
     }
 }

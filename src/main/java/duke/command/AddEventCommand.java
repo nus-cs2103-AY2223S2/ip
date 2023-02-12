@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import duke.exception.EmptyTaskDescriptionException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidTaskDurationException;
+import duke.tag.Tag;
 import duke.task.Event;
 import duke.task.Task;
 
@@ -45,11 +46,22 @@ public class AddEventCommand extends Command {
             int endIndex = contents.indexOf("/to");
             String description = contents.substring(6, startIndex - 1);
             String startString = contents.substring(startIndex + 6, endIndex - 1);
-            String endString = contents.substring(endIndex + 4);
             LocalDateTime start = Parser.parseDateTime(startString);
-            LocalDateTime end = Parser.parseDateTime(endString);
-            checkValidStartEnd(start, end);
-            Task task = new Event(description, start, end);
+            Task task;
+            if (!contents.contains("/tag")) {
+                String endString = contents.substring(endIndex + 4);
+                LocalDateTime end = Parser.parseDateTime(endString);
+                checkValidStartEnd(start, end);
+                task = new Event(description, start, end);
+            } else {
+                int tagIndex = contents.indexOf("/tag");
+                String endString = contents.substring(endIndex + 4, tagIndex - 1);
+                LocalDateTime end = Parser.parseDateTime(endString);
+                checkValidStartEnd(start, end);
+                String tagName = contents.substring(tagIndex + 5).trim();
+                Tag tag = new Tag(tagName);
+                task = new Event(description, start, end, tag);
+            }
             tasks.addTask(task);
             return tasks.addTaskText(task);
         } catch (StringIndexOutOfBoundsException e) {

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.tag.Tag;
+
 /**
  * A ToDo which is a type of Task.
  */
@@ -13,6 +15,10 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String description, Tag tag) {
+        super(description, tag);
+    }
+
     /**
      * Constructor for ToDo.
      *
@@ -21,6 +27,10 @@ public class ToDo extends Task {
      */
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
+    }
+
+    public ToDo(String description, boolean isDone, Tag tag) {
+        super(description, isDone, tag);
     }
 
     /**
@@ -36,6 +46,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("T | %s", super.toString());
+        return String.format("T | %s%s", super.toString(), getTagString());
     }
 }

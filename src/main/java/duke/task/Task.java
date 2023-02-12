@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.Parser;
+import duke.tag.EmptyTag;
+import duke.tag.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,14 +15,24 @@ public abstract class Task {
 
     protected String description;
     protected boolean isDone;
+    protected Tag tag;
 
     Task(String description) {
-        this(description, false);
+        this(description, false, new EmptyTag());
+    }
+
+    Task(String description, Tag tag) {
+        this(description, false, tag);
     }
 
     Task(String description, boolean isDone) {
+        this(description, isDone, new EmptyTag());
+    }
+
+    Task(String description, boolean isDone, Tag tag) {
         this.description = description;
         this.isDone = isDone;
+        this.tag = tag;
     }
 
     /**
@@ -49,6 +61,19 @@ public abstract class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    /**
+     * Returns String representation of tag
+     *
+     * @return
+     */
+    public String getTagString() {
+        return tag.equals(new EmptyTag()) ? "" : String.format(" | tag: %s", tag.getTagName());
     }
 
     /**

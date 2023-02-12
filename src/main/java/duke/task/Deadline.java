@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.tag.Tag;
+
 import java.time.LocalDateTime;
 
 /**
@@ -19,6 +21,11 @@ public class Deadline extends Task {
         this.doneBy = doneBy;
     }
 
+    public Deadline(String description, LocalDateTime doneBy, Tag tag) {
+        super(description, tag);
+        this.doneBy = doneBy;
+    }
+
     /**
      * Constructor for Deadline.
      *
@@ -31,12 +38,18 @@ public class Deadline extends Task {
         this.doneBy = doneBy;
     }
 
+    public Deadline(String description, boolean isDone, LocalDateTime doneBy, Tag tag) {
+        super(description, isDone, tag);
+        this.doneBy = doneBy;
+    }
+
     /**
      * @inheritDoc
      */
     @Override
     public String getSaveTaskString() {
-        return String.format("D | %s | by: %s", super.toString(), formatSavedDateTime(doneBy));
+        return String.format("D | %s | by: %s%s", super.toString(), formatSavedDateTime(doneBy),
+                getTagString());
     }
 
     /**
@@ -44,6 +57,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("D | %s | by: %s", super.toString(), displayDateTime(doneBy));
+        return String.format("D | %s | by: %s%s", super.toString(), displayDateTime(doneBy), getTagString());
     }
 }
