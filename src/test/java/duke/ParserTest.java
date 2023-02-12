@@ -1,27 +1,11 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.IntStream;
-
-import java.io.FileWriter;
-import java.io.File;
-
-import java.io.IOException;
-
-import javafx.animation.Timeline;
 
 public class ParserTest {
     @Test
@@ -212,8 +196,8 @@ public class ParserTest {
         TaskList<Task> unmarkedTasks = Parser.unmark(taskPosition, markedTasks);
         Task task = unmarkedTasks.get(taskPosition);
 
-        String expected = "SUI, I have unmarked this task from the training room: [X] Task1";
-        String actual = Parser.MARK_COMMAND + task;
-        assertNotEquals(expected, actual);
+        String expected = "SUI, I have unmarked this task from the training room: [ ] Task1";
+        String actual = Parser.UNMARK_COMMAND + task;
+        assertEquals(expected, actual);
     }
 }
