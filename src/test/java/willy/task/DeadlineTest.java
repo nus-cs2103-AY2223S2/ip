@@ -1,4 +1,4 @@
-package willy;
+package willy.task;
 
 import willy.task.Deadline;
 import org.junit.jupiter.api.Test;

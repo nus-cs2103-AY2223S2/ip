@@ -1,4 +1,4 @@
-package willy;
+package willy.task;
 
 import willy.task.Todo;
 import org.junit.jupiter.api.Test;

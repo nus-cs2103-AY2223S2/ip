@@ -35,17 +35,21 @@ public class Task {
     /**
      * Marks the status as done and prints a msg
      */
-    public void mark() {
+    public String mark() {
         status = true;
-        System.out.println("Nice! I've marked this task as done:\n" + getStatusIcon() + msg);
+        // System.out.println("Nice! I've marked this task as done:\n" + getStatusIcon() + msg);
+        String str = "Nice! I've marked this task as done:\n" + getStatusIcon() + msg;
+        return str;
     }
 
     /**
      * Unmarks the status as undone and prints a msg
      */
-    public void unmark() {
+    public String unmark() {
         status = false;
-        System.out.println("OK, I've unmarked this task:\n" + getStatusIcon() + msg);
+        // System.out.println("OK, I've unmarked this task:\n" + getStatusIcon() + msg);
+        String str = "OK, I've unmarked this task:\n" + getStatusIcon() + msg;
+        return str;
     }
 
     /**

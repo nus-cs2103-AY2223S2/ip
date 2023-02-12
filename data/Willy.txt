@@ -1,6 +1,4 @@
 [T][ ]todo test
 [T][ ]todo hello
 [T][X]todo test
-[D][ ]deadline return book(Sunday)
-[E][ ]event project meeting(Mon 2pm4pm)
-[T][ ]todo help me
+[T][ ]todo add this

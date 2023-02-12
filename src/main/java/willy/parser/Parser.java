@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import willy.exception.WillyException;
 import willy.task.TaskList;
+import willy.ui.Ui;
 
 /**
  * Represents a parser
@@ -11,10 +12,12 @@ import willy.task.TaskList;
 public class Parser {
 
     private TaskList tList;
+    private Ui ui;
     private boolean isExit;
 
     /**
      * Creates a parser with a specified tasklist
+     * 
      * @param tList
      */
     public Parser(TaskList tList) {
@@ -22,24 +25,37 @@ public class Parser {
         this.isExit = false;
     }
 
-    /** 
+    public Parser(TaskList tList, Ui ui) {
+        this.tList = tList;
+        this.ui = ui;
+        this.isExit = false;
+    }
+
+    /**
      * Displays the number of items in your task list
+     * 
      * @param tList
      */
-    public static void listCommand(TaskList tList) {
+    public static String listCommand(TaskList tList) {
         int taskCount = tList.getTaskCount();
+        String str = "";
         if (taskCount == 0) {
-            System.out.println("You have 0 tasks in your list");
+            // System.out.println("You have 0 tasks in your list");
+            str = "You have 0 tasks in your list";
+            return str;
         } else {
-            System.out.format("You have %d tasks in your list \n", taskCount);
-            System.out.println(tList.toString());
+            // System.out.format("You have %d tasks in your list \n", taskCount);
+            // System.out.println(tList.toString());
+            str = String.format("You have %d tasks in your list \n%s", taskCount, tList.toString());
+            return str;
         }
     }
 
     /**
      * get index based on the string helper function
+     * 
      * @param input
-     * @return the index of the task 
+     * @return the index of the task
      */
     public int getIndex(String input) {
         return Integer.parseInt(input) - 1;
@@ -56,41 +72,44 @@ public class Parser {
     /**
      * Runs the exit command which prints the bye msg and stops the program
      */
-    public void exitCommand() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exitCommand() {
+        // System.out.println("Bye. Hope to see you again soon!");
+        String str = "Bye. Hope to see you again soon!";
         isExit = true;
+        return str;
     }
 
     /**
      * Main parser function that takes in a command and executes the command
+     * 
      * @param command
      * @throws WillyException
      */
-    public void parseCommand(String command) throws WillyException {
+    public String parseCommand(String command) throws WillyException {
         String[] tempBySpace = command.split(" ");
         String[] tempBySlash = command.split("/");
 
         if (tempBySpace[0].equals("mark")) {
             int index = getIndex(tempBySpace[1]);
-            tList.markTask(index);
+            return tList.markTask(index);
         } else if (tempBySpace[0].equals("unmark")) {
             int index = getIndex(tempBySpace[1]);
-            tList.unmarkTask(index);
+            return tList.unmarkTask(index);
         } else if (tempBySpace[0].equals("find")) {
-            tList.findTasks(tempBySpace[1]);
+            return tList.findTasks(tempBySpace[1]);
         } else if (command.contains("delete")) {
             int index = getIndex(tempBySpace[1]);
-            tList.deleteTask(index);
+            return tList.deleteTask(index);
         } else if (command.equals("list")) {
-            listCommand(tList);
+            return listCommand(tList);
         } else if (command.equals("bye")) {
-            exitCommand();
+            return exitCommand();
         } else if (command.equals("blah")) {
             throw new WillyException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else {
             if (command.contains("todo")) {
                 if (command.length() > 4) {
-                    tList.addTodo(command);
+                    return tList.addTodo(command);
                 } else {
                     throw new WillyException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
@@ -101,15 +120,17 @@ public class Parser {
                             Arrays.asList(tempBySlash).subList(1, tempBySlash.length));
                     String dateString = combinedString.substring(3);
                     String[] dateArray = dateString.split(" ");
-                    tList.addDeadlineWithDate(tempBySlash[0], dateArray);
+                    return tList.addDeadlineWithDate(tempBySlash[0], dateArray);
                 } else {
-                    tList.addDeadline(tempBySlash[0], tempBySlash[1]);
+                    return tList.addDeadline(tempBySlash[0], tempBySlash[1]);
                 }
             }
             if (command.contains("event")) {
-                tList.addEvent(tempBySlash[0], tempBySlash[1], tempBySlash[2]);
+                return tList.addEvent(tempBySlash[0], tempBySlash[1], tempBySlash[2]);
             }
         }
+        String str = "I didnt understand that";
+        return str;
     }
 
 }

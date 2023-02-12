@@ -1,11 +1,11 @@
 package willy;
 
-import willy.commands.Command;
+import javafx.application.Application;
+import willy.exception.WillyException;
 import willy.parser.Parser;
 import willy.storage.Storage;
 import willy.task.TaskList;
 import willy.ui.Ui;
-import javafx.application.Application;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
@@ -19,7 +19,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class WillyApp extends Application {
+/**
+ * Represents the WillyApp
+ */
+class WillyApp extends Application {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
@@ -31,11 +34,10 @@ public class WillyApp extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/daBatman.png"));
     private Image willy = new Image(this.getClass().getResourceAsStream("/images/daWilly.png"));
 
-
     @Override
     public void start(Stage stage) {
 
-        //The container for the content of the chat to scroll.
+        // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -53,7 +55,7 @@ public class WillyApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Willy");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -70,8 +72,8 @@ public class WillyApp extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        Label firstLabel = new Label("Hello from Duke!\nWhat can I do for you?");
-        DialogBox firstDialogBox = DialogBox.getDukeDialog(firstLabel, new ImageView(willy));
+        Label firstLabel = new Label("Hello from Willy!\nWhat can I do for you?");
+        DialogBox firstDialogBox = DialogBox.getWillyDialog(firstLabel, new ImageView(willy));
         dialogContainer.getChildren().add(firstDialogBox);
 
         userInput.setPrefWidth(325.0);
@@ -83,7 +85,7 @@ public class WillyApp extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -98,13 +100,23 @@ public class WillyApp extends Application {
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //Part 3. Add functionality to handle user input.
+        // Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (WillyException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (WillyException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         });
 
         this.ui = new Ui();
@@ -115,6 +127,7 @@ public class WillyApp extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     * 
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -128,25 +141,32 @@ public class WillyApp extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * 
+     * @throws WillyException
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws WillyException {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label willyText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(willy))
-        );
+                DialogBox.getWillyDialog(willyText, new ImageView(willy)));
         userInput.clear();
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     * 
+     * @throws WillyException
      */
-    private String getResponse(String input) {
-        // Command command = new Parser().parseCommand(input);
-        // return command.execute(taskList, storage, ui);
+    private String getResponse(String input) throws WillyException {
+        Parser p = new Parser(this.taskList, this.ui);
+        String response = p.parseCommand(input);
+        return response;
+
+        // command.execute(taskList, storage, ui);
     }
 }
