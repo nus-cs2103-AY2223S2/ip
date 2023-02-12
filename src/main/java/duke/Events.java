@@ -1,11 +1,19 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * A task type that the chatting bot can create.
  */
 public class Events extends Task {
-    private String strtime;
-    private String endtime;
+    private LocalDate strDate;
+    private LocalTime strTime;
+    private LocalDate endDate;
+    private LocalTime endTime;
 
     /**
      * The constructor of this class.
@@ -14,10 +22,35 @@ public class Events extends Task {
      * @param strtime
      * @param endtime
      */
-    public Events(String name, String strtime, String endtime) {
+    public Events(String name, String strtime, String endtime) throws DukeException {
         super(name);
-        this.strtime = strtime;
-        this.endtime = endtime;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(strtime, dtf);
+            strDate = dateTime.toLocalDate();
+            strTime = dateTime.toLocalTime();
+        } catch (DateTimeParseException e) {
+            try {
+                LocalDate date = LocalDate.parse(strtime, df);
+                this.strDate = date;
+            } catch (DateTimeParseException e2) {
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        }
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(endtime, dtf);
+            endDate = dateTime.toLocalDate();
+            endTime = dateTime.toLocalTime();
+        } catch (DateTimeParseException e) {
+            try {
+                LocalDate date = LocalDate.parse(endtime, df);
+                this.endDate = date;
+            } catch (DateTimeParseException e2) {
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        }
+
     }
 
     /**
@@ -25,8 +58,8 @@ public class Events extends Task {
      *
      * @return the starting time of the event.
      */
-    public String getStrtime() {
-        return this.strtime;
+    public LocalTime getStrTime() {
+        return this.strTime;
     }
 
     /**
@@ -34,8 +67,8 @@ public class Events extends Task {
      *
      * @return the ending time of the event.
      */
-    public String getEndtime() {
-        return this.endtime;
+    public LocalTime getEndTime() {
+        return this.endTime;
     }
 
     /**
@@ -44,10 +77,20 @@ public class Events extends Task {
      * @return the task name with the specific times of the event and status.
      */
     public String toString() {
+        DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        String result = "";
         if (this.getStatus()) {
-            return "[E][X] " + this.getName() + " (from: " + this.strtime + "to: " + this.endtime + ")";
+            result += "[D][X] " + this.getName() + " (from: ";
         } else {
-            return "[E][ ] " + this.getName() + " (from: " + this.strtime + "to: " + this.endtime + ")";
+            result += "[D][ ] " + this.getName() + " (from: ";
         }
+        result += this.strDate.format(df);
+        result += this.strTime == null ? "" : " " + this.strTime.format(tf);
+        result += " to: ";
+        result += this.endDate.format(df);
+        result += this.endTime == null ? "" : " " + this.endTime.format(tf);
+        result += ")";
+        return result;
     }
 }
