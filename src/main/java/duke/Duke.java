@@ -131,6 +131,9 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label("Duke application is starting!!"), new ImageView(duke))
+        );
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -144,13 +147,10 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-
-
     }
 
 
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -169,8 +169,8 @@ public class Duke extends Application {
 //        imageViewDuke.setClip(dukeClip);
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), user),
-                DialogBox.getDukeDialog(userInput.getText(), duke)
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(userText, new ImageView(duke))
         );
         userInput.clear();
     }
