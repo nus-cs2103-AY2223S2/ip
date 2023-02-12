@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,7 +73,9 @@ public class TaskList {
                 }
             }
         }
-        return new ArrayList<Task>(results);
+        ArrayList<Task> toSort = new ArrayList<Task>(results);
+        Collections.sort(toSort);
+        return toSort;
     }
 
     /**

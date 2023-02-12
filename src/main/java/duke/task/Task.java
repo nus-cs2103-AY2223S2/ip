@@ -6,7 +6,7 @@ import duke.enums.Views;
 /**
  * Abstract class for the Task. Every todo / deadline / event item is here
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     private String title;
     private boolean isDone = false;
 
@@ -71,6 +71,11 @@ public abstract class Task {
      */
     public String toExport() {
         return this.toString();
+    }
+
+    @Override
+    public int compareTo(Task incoming) {
+        return this.title.compareTo(incoming.title);
     }
 
     /**
