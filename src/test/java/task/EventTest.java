@@ -14,7 +14,7 @@ public class EventTest {
                         event.daysToEvent(LocalDate.parse("2023-01-02")),
                         event.daysToEvent(LocalDate.parse("2023-01-03")),
                         event.daysToEvent(LocalDate.parse("2023-01-04")),
-                        event.daysToEvent(LocalDate.parse("2023-01-05")),};
+                        event.daysToEvent(LocalDate.parse("2023-01-05"))};
 
         long[] expected = {2, 1, 0, 0, 0, -1, -2};
 

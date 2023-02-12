@@ -28,9 +28,9 @@ public class EventCommandTest {
 
     @Test
     public void shouldNotAllowEndDateBeforeStartDate() {
-        assertThrows(InvalidArgumentException.class,
-                () -> new EventCommand("Demo", LocalDate.parse("2023-01-02"), LocalDate.parse("2023-01-01")).run(
-                        this.tasks)
+        assertThrows(InvalidArgumentException.class, () ->
+                new EventCommand("Demo", LocalDate.parse("2023-01-02"), LocalDate.parse("2023-01-01"))
+                        .run(this.tasks)
         );
     }
 }
