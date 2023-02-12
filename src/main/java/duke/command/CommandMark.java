@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -25,9 +26,9 @@ public class CommandMark extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.markTask(idx - 1, isDone);
+        Task markedTask = tasks.markTask(idx - 1, isDone);
         storage.save(tasks.getList());
         return ui.formResponse("LeTask marked as " + (isDone ? "done: " : "undone: ")
-                + tasks.getTask(idx - 1));
+                + markedTask);
     }
 }
