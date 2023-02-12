@@ -38,7 +38,9 @@ public class HelpCommand extends Command {
         msg += "remind, n by default is 5\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\n";
         msg += "List my mistakes:\n";
-        msg += "mistakes";
+        msg += "mistakes\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\n";
+        msg += "IMPORTANT: dates must be in yyyy-MM-dd HH:mm format";
         return msg;
     }
 }
