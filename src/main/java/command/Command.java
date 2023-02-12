@@ -1,6 +1,7 @@
 package command;
 
 import duke.DukeException;
+import duke.IncompleteCommandDukeException;
 
 import task.TaskList;
 import ui.TextUi;
@@ -77,7 +78,7 @@ public abstract class Command {
     public String getCommandContent(String string, String commandName) throws DukeException {
         String commandString = commandName.toLowerCase();
         if ((!commandString.equals(STRING_LIST)) && string.length() <= commandString.length() + 1) {
-            throw new DukeException("The command argument is not complete.");
+            throw new IncompleteCommandDukeException();
         }
         return string.substring(string.indexOf(commandString) + commandString.length() + " ".length());
     }
@@ -88,9 +89,7 @@ public abstract class Command {
     protected void checkInputComponents() throws DukeException {
         String[] splits = command.split(STRING_SPACE);
         if (splits.length < numComponents) {
-            throw new DukeException(String.format("Input is not a complete command. "
-                            + "It should contain %d components. \nPlease try again. ",
-                    numComponents));
+            throw new IncompleteCommandDukeException(String.format("It should contain %d components.", numComponents));
         }
     }
 }

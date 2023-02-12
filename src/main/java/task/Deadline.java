@@ -1,6 +1,7 @@
 package task;
 
 import duke.DukeException;
+import duke.IncompleteCommandDukeException;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ import ui.Parser;
  */
 public class Deadline extends Task {
     protected LocalDate time;
+    protected final String DEADLINE_KEYWORD = "/by";
 
     /***
      * Constructor.
@@ -21,12 +23,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description) throws DukeException {
         super();
-        int indexOfBy = description.indexOf("/by");
+        int indexOfBy = description.indexOf(DEADLINE_KEYWORD);
         if (indexOfBy < 0) {
-            throw new DukeException("This is not a complete command, missing dates. \n"
-                    + "Please try again");
+            throw new IncompleteCommandDukeException("The date is missing");
         }
-        this.time = Parser.parseDate(description.substring(indexOfBy + "/by ".length()));
+        this.time = Parser.parseDate(description.substring(indexOfBy + (DEADLINE_KEYWORD + " ").length()));
         this.name = description.substring(0, indexOfBy - " ".length());
         this.type = "D";
     }

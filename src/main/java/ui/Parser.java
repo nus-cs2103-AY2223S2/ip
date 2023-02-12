@@ -2,7 +2,9 @@ package ui;
 
 import static java.util.Map.entry;
 
+import duke.DateFormatDukeException;
 import duke.DukeException;
+import duke.NotRecognizedCommandDukeException;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -41,7 +43,7 @@ public class Parser {
         try {
             return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new DukeException("The date could not be parsed!");
+            throw new DateFormatDukeException();
         }
     }
 
@@ -60,7 +62,7 @@ public class Parser {
             Constructor<?> cons = c.getConstructor(String.class, boolean.class);
             object = cons.newInstance(command, !suppressPrint);
         } catch (ClassNotFoundException e) {
-            throw new DukeException("Command not recognized. Try again. ");
+            throw new NotRecognizedCommandDukeException();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             throw new DukeException(e.toString());
         } catch (InvocationTargetException e) {
