@@ -1,6 +1,6 @@
 package Duke;
 
-import Duke.Parser.Parser;
+import Duke.parser.Parser;
 
 import java.io.IOException;
 
@@ -46,6 +46,9 @@ public class Duke {
                         break;
                     case 7:
                         taskList.addEvent(body);
+                        break;
+                    case 8:
+                        taskList.find(body);
                         break;
                     default:
                         System.out.println(ui.ERROR_UNKNOWN_COMMAND);

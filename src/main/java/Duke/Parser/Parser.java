@@ -1,6 +1,4 @@
-package Duke.Parser;
-
-import java.util.regex.Pattern;
+package Duke.parser;
 
 /**
  * This class deals with user inputs
@@ -31,6 +29,8 @@ public class Parser {
                 return 6;
             case ("event"):
                 return 7;
+            case("find"):
+                return 8;
             default:
                 System.out.println("Unknown command, please try again");
                 return 0;
