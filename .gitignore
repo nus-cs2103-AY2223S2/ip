@@ -3,6 +3,9 @@
 /out/
 /*.iml
 
+#Compiled code
+*.class
+
 # Gradle build files
 /.gradle/
 /build/
@@ -12,6 +15,9 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+#META files
+src/main/java/META-INF
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT

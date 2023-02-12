@@ -1,0 +1,25 @@
+.scroll-pane .viewport {
+    -fx-background-image: url('../img/ocean.jpeg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.sendButton {
+    -fx-background-color: rgba(135, 206, 235, 0.8);
+    -fx-background-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-radius: 20px;
+    -fx-text-fill: white;
+}
+
+.userWindow {
+    -fx-background-color: rgba(135, 206, 235, 0.8);
+    -fx-background-radius: 20px;
+    -fx-border-color: rgb(202, 178, 250);
+    -fx-border-width: 2;
+    -fx-border-radius: 20px;
+    -fx-max-height: Infinity;
+    -fx-text-fill: rgb(113, 60, 250);
+    -fx-padding: 25;
+}
