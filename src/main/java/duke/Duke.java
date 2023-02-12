@@ -35,7 +35,6 @@ public class Duke extends Application {
     }
 
     public void initialize() {
-        System.out.println("starting 9");
         ui.start();
         storage.findData();
         storage.loadData();
@@ -46,9 +45,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        System.out.println("starting 2");
-        //ScrollPane scrollPane = new ScrollPane();
-        //VBox dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
         TextField userInput = new TextField();
@@ -119,7 +115,7 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        System.out.println("Starting 3");
+        assert text.length() > 0 : "Text cannot be empty";
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -132,7 +128,7 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     public void handleUserInput(TextField userInput, VBox dialogContainer) {
-        System.out.println("Starting 4");
+        assert !userInput.equals(null) && !dialogContainer.equals(null);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userInput.getText(), user),
                 DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
@@ -141,7 +137,6 @@ public class Duke extends Application {
     }
 
     public String getResponse(String input) {
-        System.out.println("Starting 5");
         return response(ui, storage, parser, list, input);
     }
 
@@ -155,6 +150,7 @@ public class Duke extends Application {
      */
 
     public String response(UI ui, Storage storage, Parser parser, TasksList list, String command) {
+        assert command.length() > 0 : "command cannot be empty";
         String[] commandArr = command.split(" ");
         try {
             DukeExceptions.checkCommand(commandArr);
@@ -163,7 +159,6 @@ public class Duke extends Application {
                     DukeExceptions.checkEmptyDescription(commandArr);
                     return ui.addTodo(list, parser.getTodoDescription(command));
                 } catch (EmptyDescriptionException e) {
-                    //System.out.println(e.getMessage());
                     return e.getMessage();
                 }
             } else if (commandArr[0].equals("deadline")) {
@@ -224,6 +219,8 @@ public class Duke extends Application {
         }
     }
 
+
+    @Deprecated
     public static void begin(UI ui, Storage storage, Parser parser, TasksList list) {
         Scanner input = new Scanner(System.in);
         String command;

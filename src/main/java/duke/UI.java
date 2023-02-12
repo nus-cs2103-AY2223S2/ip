@@ -22,9 +22,9 @@ public class UI {
      * @param list Task List
      */
     public String showList(TasksList list) {
+        assert !list.equals(null);
         String output = "Here are the task(s) in your list:\n";
         for (int i = 1; i <= list.getSize(); i++) {
-            //System.out.println(i + "." + list.getTask(i - 1).toString());
             output = output + i + "." + list.getTask(i - 1).toString() + "\n";
         }
         return output;
@@ -35,13 +35,13 @@ public class UI {
      * keyword
      */
     public String findTask(TasksList list, String keyword) {
+        assert !list.equals(null) && keyword.length() > 0;
         int counter = 1;
         String output = "";
         for (int i = 0; i < list.getSize(); i++) {
             String[] taskDescription = list.getTask(i).getDescription().split(" ");
             for (String word : taskDescription) {
                 if (keyword.equals(word)) {
-                    //System.out.println(counter + "." + list.getTask(i).toString());
                     output = output + counter + "." + list.getTask(i).toString() + "\n";
                     counter++;
                     break;
@@ -57,6 +57,7 @@ public class UI {
      * @param index index of the task
      */
     public String mark(TasksList list, int index) {
+        assert !list.equals(null) && index > -1;
         list.getTask(index - 1).markAsDone();
         return "Nice! I've marked this task as done:\n  " + list.getTask(index - 1).toString();
     }
@@ -67,6 +68,7 @@ public class UI {
      * @param index index of the task
      */
     public String unmark(TasksList list, int index) {
+        assert !list.equals(null) && index > -1;
         list.getTask(index - 1).markAsUndone();
         return "OK, I've marked this task as not done yet:\n  " + list.getTask(index - 1).toString();
     }
@@ -77,6 +79,7 @@ public class UI {
      * @param name Description of the todo task
      */
     public String addTodo(TasksList list, String name) {
+        assert !list.equals(null) && name.length() > 0;
         list.addTask(new Todo(name));
         return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString() 
             + "\n" + "Now you have " + list.getSize() + " task(s) in the list.";
@@ -89,6 +92,7 @@ public class UI {
      * @param deadline Date and Time of the deadline
      */
     public String addDeadline(TasksList list, String name, String deadline) {
+        assert !list.equals(null) && name.length() > 0 && deadline.length() > 0;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime formattedDeadline = LocalDateTime.parse(deadline, dateTimeFormatter);
         list.addTask(new Deadline(name, formattedDeadline));
@@ -104,6 +108,7 @@ public class UI {
      * @param end Date and time of the end of the event
      */
     public String addEvent(TasksList list, String name, String start, String end) {
+        assert !list.equals(null) && name.length() > 0 && start.length() > 0 && end.length() > 0;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime formattedstartTime = LocalDateTime.parse(start, dateTimeFormatter);
         LocalDateTime formattedendTime = LocalDateTime.parse(end, dateTimeFormatter);
@@ -118,6 +123,7 @@ public class UI {
      * @param index Index of the task
      */
     public String removeTask(TasksList list, int index) {
+        assert !list.equals(null) && index > -1;
         return "Noted. I've removed this task :\n  " + list.removeTask(index - 1).toString()
             + "Now you have " + list.getSize() + " task(s) in the list.";
     }
