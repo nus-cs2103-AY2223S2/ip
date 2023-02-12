@@ -45,7 +45,6 @@ public class Parser {
 
         case TODO:
         case T:
-        case TD:
             return new TodoCommand(input);
 
         case FIND:
