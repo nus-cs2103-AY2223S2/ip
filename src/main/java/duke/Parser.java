@@ -20,6 +20,7 @@ public class Parser {
     private final Stage stage;
 
     public enum CmdType {
+        HELP,
         BYE,
         LIST,
         MARK,
@@ -38,7 +39,9 @@ public class Parser {
     public String parseCommandWithResponse(String userInput) {
         String resultString = "";
         try {
-            if (isByeCommand(userInput)) {
+            if (isHelpCommand(userInput)) {
+                resultString = processHelpCommand();
+            } else if (isByeCommand(userInput)) {
                 resultString = "Bye. Hope to see you again soon!\n";
                 stage.close();
             } else if (isListCommand(userInput)) {
@@ -64,6 +67,11 @@ public class Parser {
             return e.toString();
         }
         return resultString;
+    }
+
+    private boolean isHelpCommand(String userInput) {
+        return userInput.replaceAll("\\s", "").toUpperCase()
+                .equals(CmdType.HELP.name());
     }
 
     private boolean isByeCommand(String userInput) {
@@ -109,6 +117,31 @@ public class Parser {
     private boolean isFindCommand(String userInput) {
         return userInput.split(" ")[0].toUpperCase()
                 .equals(CmdType.FIND.name());
+    }
+
+    private String processHelpCommand() {
+        String header = "Duke Command Formats:\n";
+        String todoCommandFormat = "1) Add a todo task: add <task description> \n";
+        String listCommandFormat = "2) List all tasks: list \n";
+        String markCommandFormat = "3) Mark a task as completed: mark <task number> \n";
+        String unmarkCommandFormat = "4) Unmark a task to incompleted: unmark <task number> \n";
+        String deleteCommandFormat = "5) Delete a task: delete <task number> \n";
+        String deadlineCommandFormat = "6) Add a task with end deadline: deadline <task description> " +
+                "/by <YYYY-MM-DD HH:MM> \n";
+        String eventCommandFormat = "7) Add a task with start and end date: event <task description> " +
+                "/from <YYYY-MM-DD HH:MM> /to <YYYY-MM-DD HH:MM> \n";
+        String findCommandFormat = "8) Find a task: find <task description>\n";
+        StringBuilder builder = new StringBuilder();
+        builder.append(header)
+                .append(todoCommandFormat)
+                .append(listCommandFormat)
+                .append(markCommandFormat)
+                .append(unmarkCommandFormat)
+                .append(deleteCommandFormat)
+                .append(deadlineCommandFormat)
+                .append(eventCommandFormat)
+                .append(findCommandFormat);
+        return builder.toString();
     }
 
     private String processListCommand() {
