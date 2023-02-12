@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
     public void setKuromi(Kuromi d) {
         kuromi = d;
         String welcome = kuromi.getWelcomeMessage();
-        dialogContainer.getChildren().add(DialogBox.getKuromiDialog(welcome, kuromiImage));
+        dialogContainer.getChildren().add(KuromiDialogBox.getKuromiDialog(welcome, kuromiImage));
     }
 
     /**
@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
         String response = kuromi.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getKuromiDialog(response, kuromiImage)
+                KuromiDialogBox.getKuromiDialog(response, kuromiImage)
         );
         userInput.clear();
     }

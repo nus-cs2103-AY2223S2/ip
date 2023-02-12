@@ -43,6 +43,6 @@ public class Kuromi {
     }
 
     String getWelcomeMessage() {
-        return "Hello! I'm Kuromi\nWhat can I do for you?\n";
+        return "Hello! I'm Kuromi\nWhat can I do for you?";
     }
 }
