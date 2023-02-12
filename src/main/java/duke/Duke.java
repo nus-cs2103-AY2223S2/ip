@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.packages.AddCommand;
-import duke.packages.ByeCommand;
-import duke.packages.DeleteCommand;
-import duke.packages.FindCommand;
-import duke.packages.ListCommand;
-import duke.packages.MarkCommand;
-import duke.packages.ReminderCommand;
-import duke.packages.UnmarkCommand;
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.ReminderCommand;
+import duke.commands.UnmarkCommand;
 import javafx.application.Platform;
 
 /**

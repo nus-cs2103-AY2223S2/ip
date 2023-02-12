@@ -175,65 +175,95 @@ public class Parser {
      */
     private static ArrayList<String> eventParser(String cmd, ArrayList<String> partialCmd, String[] tempTaskInfo) {
         String[] tempTaskInfo3 = tempTaskInfo[1].split("/from", 2);
-        try { // checking the element "bbbb" in ".../from bbbb /to aaaa"
-            DukeException.validate(true, cmd, tempTaskInfo3);
-        } catch (IncorrectNoOfArgumentException ex) {
-            System.out.println(ex);
-            partialCmd = new ArrayList<>();
-            partialCmd.add(ex.getMessage());
+        partialCmd = eventStartParser(cmd, partialCmd, tempTaskInfo3);
+        if (partialCmd.size() < 3) {
+            return partialCmd;
+        } else {
+            partialCmd = eventEndParser(cmd, partialCmd, tempTaskInfo3);
             return partialCmd;
         }
-        String startTime = "";
-        String endTime = "";
-        String[] startDateTime = tempTaskInfo3[1].split(" ");
+    }
+
+    /**
+     * Returns ArrayList of String type containing the event name and event start details.
+     * <p></p>
+     * This method acts as a helper method for eventParser() to parse the event startDate and startTime.
+     *
+     * @param cmd String representing the command.
+     * @param eventInformation ArrayList of String type, containing command information, used to store parsed command.
+     * @param tempTaskInfo String array containing the user input via CLI.
+     * @return ArrayList of String type containing the event name and event start details.
+     */
+    private static ArrayList<String> eventStartParser(String cmd, ArrayList<String> eventInformation,
+                                                      String[] tempTaskInfo) {
+        try { // checking the element "bbbb" in ".../from bbbb /to aaaa"
+            DukeException.validate(true, cmd, tempTaskInfo);
+        } catch (IncorrectNoOfArgumentException ex) {
+            System.out.println(ex);
+            eventInformation = new ArrayList<>();
+            eventInformation.add(ex.getMessage());
+            return eventInformation;
+        }
+        eventInformation.add(tempTaskInfo[0]); // adds "event" command in string into the eventInformation
+        String[] startDateTime = tempTaskInfo[1].split(" ");
+        eventInformation.add(startDateTime[1]); // adds event startDate into the eventInformation
         if (startDateTime.length > 2) { // check if given a startTime
             if (startDateTime[2].equals("/to")) {
-                startTime = "";
+                eventInformation.add(""); // adds event startTime into the eventInformation
             } else {
-                startTime = startDateTime[2];
+                eventInformation.add(startDateTime[2]); // adds event startTime into the eventInformation
             }
         } else {
             try {
                 DukeException.validate("", "event");
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
-                partialCmd = new ArrayList<>();
-                partialCmd.add(ex.getMessage());
-                return partialCmd;
+                eventInformation = new ArrayList<>();
+                eventInformation.add(ex.getMessage());
             }
         }
-        String[] testPortion = tempTaskInfo3[1].split("/to", 2);
+        return eventInformation;
+    }
+
+    /**
+     * Returns ArrayList of String type containing FULL details on the event, including its ending date and time.
+     * <p></p>
+     * This method acts as a helper method for eventParser() to parse the event endDate and endTime.
+     *
+     * @param cmd String representing the command.
+     * @param eventInformation ArrayList of String type, containing command information, used to store parsed command.
+     * @param tempTaskInfo String array containing the user input via CLI.
+     * @return ArrayList of String type containing FULL details on the event, including its ending date and time.
+     */
+    private static ArrayList<String> eventEndParser(String cmd, ArrayList<String> eventInformation,
+                                                    String[] tempTaskInfo) {
+        String[] testPortion = tempTaskInfo[1].split("/to", 2);
         try { // checking the element "aaaa" in ".../to aaaa"
             DukeException.validate(true, cmd, testPortion);
         } catch (IncorrectNoOfArgumentException ex) {
             System.out.println(ex);
-            partialCmd = new ArrayList<>();
-            partialCmd.add(ex.getMessage());
-            return partialCmd;
+            eventInformation = new ArrayList<>();
+            eventInformation.add(ex.getMessage());
+            return eventInformation;
         }
         String[] endDateTime = testPortion[1].split(" ");
+        eventInformation.add(endDateTime[1]);
         if (endDateTime.length > 1) { // check if given a endDate
             if (endDateTime.length != 3) {
-                endTime = "";
+                eventInformation.add("");
             } else {
-                endTime = endDateTime[2];
+                eventInformation.add(endDateTime[2]);
             }
         } else {
             try {
                 DukeException.validate("", "event");
             } catch (IncorrectNoOfArgumentException ex) {
                 System.out.println(ex);
-                partialCmd = new ArrayList<>();
-                partialCmd.add(ex.getMessage());
-                return partialCmd;
+                eventInformation = new ArrayList<>();
+                eventInformation.add(ex.getMessage());
             }
         }
-        partialCmd.add(tempTaskInfo3[0]); // taskInfo
-        partialCmd.add(startDateTime[1]); // startDate
-        partialCmd.add(startTime); // startTime
-        partialCmd.add(endDateTime[1]); // endDate
-        partialCmd.add(endTime); // endTime
-        return partialCmd;
+        return eventInformation;
     }
 
     /**

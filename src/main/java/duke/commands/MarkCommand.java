@@ -1,4 +1,4 @@
-package duke.packages;
+package duke.commands;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,15 +9,15 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents the command for unmarking tasks in the Duke's taskList and hard disk.
+ * Represents the command for marking tasks in the Duke's taskList and hard disk.
  *
  * @author MrTwit99
  * @since 2023-02-06
  */
-public class UnmarkCommand implements Command {
+public class MarkCommand implements Command {
 
     /**
-     * Returns a String message signifying whether the unmark command managed to run. Unable to run if task selected is
+     * Returns a String message signifying whether the mark command managed to run. Unable to run if task selected is
      * out of range.
      *
      * @param parsedCmd ArrayList of String type that contains parsed information about the task description and
@@ -25,7 +25,7 @@ public class UnmarkCommand implements Command {
      * @param tasks Duke's TaskList object that stores all Tasks objects.
      * @param storage Duke's Storage object to allow file access.
      * @param ui Duke's Ui object to display and print messages to the user. Acts as a screen.
-     * @return String message of the unmark command run status.
+     * @return String message of the mark command run status.
      */
     @Override
     public String execute(ArrayList<String> parsedCmd, TaskList tasks, Storage storage, Ui ui) {
@@ -34,11 +34,11 @@ public class UnmarkCommand implements Command {
         ArrayList<Task> taskList = tasks.getTaskList();
         int taskNumber = Integer.parseInt(parsedCmd.get(1));
 
-        if ((taskNumber <= taskList.size()) && (taskNumber > 0)) { // checks if the task to unmark is within list
+        if ((taskNumber <= taskList.size()) && (taskNumber > 0)) { // checks if the task to mark is within list
             Task tempTask = taskList.get(taskNumber - 1);
             String oldTaskInfo = tempTask.getTaskInfo();
             sb.append("    ____________________________________________________________________________________\n");
-            sb.append(tempTask.setIncomplete()).append("\n");
+            sb.append(tempTask.setDone()).append("\n");
             sb.append("    ____________________________________________________________________________________\n");
             taskList.set(taskNumber - 1, tempTask);
             message = sb.toString();
@@ -50,7 +50,7 @@ public class UnmarkCommand implements Command {
             }
         } else {
             sb.append("    ____________________________________________________________________________________\n");
-            sb.append("    The task you are trying to unmark is out of range! Try again!\n");
+            sb.append("    The task you are trying to mark is out of range! Try again!\n");
             sb.append("    ____________________________________________________________________________________\n");
             message = sb.toString();
             sb.setLength(0);
