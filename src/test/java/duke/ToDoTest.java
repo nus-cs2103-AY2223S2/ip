@@ -1,13 +1,21 @@
 package duke;
 
-import exceptions.IncorrectNoOfArgumentException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ToDoTest {
-    Task tempTask = new ToDo("borrow book");
+import org.junit.jupiter.api.Test;
 
+/**
+ * Represents the test class for ToDo.java.
+ *
+ * @author MrTwit99
+ * @since 2023-02-12
+ */
+public class ToDoTest {
+    private Task tempTask = new ToDo("borrow book");
+
+    /**
+     * Tests the method getTaskInfoStatus() in ToDo.java.
+     */
     @Test
     public void getTaskInfoStatus() {
         tempTask.setDone();
@@ -18,6 +26,9 @@ public class ToDoTest {
         System.out.println("Passed 1/1 check of unmarking tasks: ToDo.getTaskInfoStatus()");
     }
 
+    /**
+     * Tests the method getTaskInfo() in ToDo.java.
+     */
     @Test
     public void getTaskInfo() {
         tempTask.setDone();
