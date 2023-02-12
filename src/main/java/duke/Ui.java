@@ -12,8 +12,8 @@ public class Ui {
     public static final String supportedDateFormat = "EXCUSE ME!!!, " +
             "please use the correct date format\n dd/mm/yyyy";
 
-    public static String getDeleteMessageWithAttitude(String taskDetails) {
-        return "\nNoted. I've purged this task:\n  " + taskDetails;
+    public static String getDeleteMessageWithAttitudeOf(Task taskRemoved) {
+        return "\nNoted. I've purged this task:\n  " + taskRemoved.getTaskDetails();
     }
 
     public static String getMarkMessageWithAttitude(String taskDetails) {
@@ -38,4 +38,5 @@ public class Ui {
         }
         return "\nHere you go:\n" + allTaskFound;
     }
+
 }

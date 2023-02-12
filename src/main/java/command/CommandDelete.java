@@ -1,6 +1,7 @@
 package command;
 
 import duke.DukeException;
+import duke.Task;
 import duke.TaskList;
 import duke.Ui;
 
@@ -25,6 +26,15 @@ public class CommandDelete extends Command {
 
     @Override
     public String execute() throws DukeException {
-        return Ui.getDeleteMessageWithAttitude(this.taskList.deleteTask(this.index));
+        Task taskRemoved = this.removeTaskAt(this.index);
+        return this.getConfirmationMessageOf(taskRemoved);
+    }
+
+    private Task removeTaskAt(String index) throws DukeException {
+        return this.taskList.deleteTask(index);
+    }
+
+    private String getConfirmationMessageOf(Task taskRemoved) {
+        return Ui.getDeleteMessageWithAttitudeOf(taskRemoved);
     }
 }

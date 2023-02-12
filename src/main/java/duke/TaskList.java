@@ -257,9 +257,9 @@ public class TaskList {
         }
     }
 
-    public String deleteTask(String index) throws DukeException {
+    public Task deleteTask(String index) throws DukeException {
         try {
-            return storedInputs.remove(Integer.parseInt(index)).getTaskDetails();
+            return storedInputs.remove(Integer.parseInt(index));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e.toString());
         }
