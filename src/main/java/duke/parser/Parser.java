@@ -84,6 +84,7 @@ public class Parser {
                 throw new DukeInvalidCommandException("beep...boop... unrecognized command!");
         }
 
+        assert response != null && !response.isEmpty() : "Response can't be empty";
         storage.storeTaskList(tasks.getTaskList());
         return response;
     }
