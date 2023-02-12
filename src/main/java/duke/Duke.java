@@ -16,7 +16,7 @@ import ui.TextUi;
  * to users.
  */
 public class Duke {
-    protected final String NAME = "Duke";
+    public final String NAME = "TaskWizard";
     protected final String RECORD_DIR = "./data";
     protected final String RECORD_NAME = "/duke.txt";
     protected final TextUi ui;

@@ -22,7 +22,6 @@ import java.util.Objects;
  */
 public class DukeGui extends Application {
     private static String SEND_BUTTON_TEXT = "Send";
-    private static String STAGE_TITLE = "Duke";
 
     private final Image userImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/user.jpg")));
@@ -30,7 +29,7 @@ public class DukeGui extends Application {
             this.getClass().getResourceAsStream("/images/duke.jpg")));
     private TextField userInput;
     private VBox dialogContainer;
-    private Duke duke = new Duke();
+    private final Duke duke = new Duke();
 
     /**
      * Starts the GUI.
@@ -41,6 +40,10 @@ public class DukeGui extends Application {
      */
     @Override
     public void start(Stage stage) {
+        // set stage title to Duke name
+        String stageTitle = duke.getName();
+
+        // set up GUI components
         ScrollPane scrollPane = new ScrollPane();
         VBox dialogContainer = new VBox();
         this.dialogContainer = dialogContainer;
@@ -57,7 +60,7 @@ public class DukeGui extends Application {
         Scene scene = new Scene(mainLayout);
 
         // set stage parameters
-        stage.setTitle(STAGE_TITLE);
+        stage.setTitle(stageTitle);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -106,7 +109,6 @@ public class DukeGui extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
@@ -120,7 +122,6 @@ public class DukeGui extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
