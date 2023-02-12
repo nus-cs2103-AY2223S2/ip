@@ -1,6 +1,6 @@
 package duke;
 
-import duke.components.DukeGui;
+import duke.gui.DukeGui;
 import javafx.application.Application;
 
 public class DukeLauncher {
