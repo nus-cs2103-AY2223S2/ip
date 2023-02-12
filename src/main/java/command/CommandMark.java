@@ -16,7 +16,7 @@ public class CommandMark extends Command {
      * Constructor for CommandMark.
      *
      * @param taskList List of all tasks.
-     * @param index Index to mark.
+     * @param index Index of task to mark, starting from 1.
      */
     public CommandMark(TaskList taskList, String index) {
         this.taskList = taskList;

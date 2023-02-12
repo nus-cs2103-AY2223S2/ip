@@ -3,7 +3,7 @@ package command;
 import duke.DukeException;
 
 /**
- * Base class of all commands that the bot recognise.
+ * Base class of all commands that duke recognises.
  */
 public abstract class Command {
 

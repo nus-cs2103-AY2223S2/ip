@@ -3,7 +3,7 @@ package command;
 import duke.Ui;
 
 /**
- * Command to terminate bot.
+ * Command to terminate duke.
  */
 public class CommandBye extends Command {
     @Override

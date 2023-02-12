@@ -11,10 +11,10 @@ public class CommandList extends Command {
     /**
      * Constructor for CommandList.
      *
-     * @param tasklist List of all tasks.
+     * @param taskList List of all tasks.
      */
-    public CommandList(TaskList tasklist) {
-        this.taskList = tasklist;
+    public CommandList(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     @Override
