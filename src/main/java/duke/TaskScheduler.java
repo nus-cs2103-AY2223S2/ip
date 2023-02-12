@@ -23,6 +23,39 @@ public class TaskScheduler extends TaskList<Recur> {
     private VBox dialogContainer;
     private Image dukeImage;
 
+    TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, Image dukeImage, String input) {
+        this.recurResponse = recurResponse;
+        this.dialogContainer = dialogContainer;
+        this.dukeImage = dukeImage;
+        if (input.contains("recur")) {
+            recurDialogContainer(input);
+        }
+    }
+
+    void recurDialogContainer(String input) {
+        if (input.contains("delete")) {
+        } else {
+            String[] splitInput = input.split(" ");
+            int delay = Integer.parseInt(splitInput[splitInput.length - 1]);
+            Timeline timeline =
+                    new Timeline(new KeyFrame(Duration.millis(delay), e -> dialogContainer.getChildren().addAll(
+                            DialogBox.getDukeDialog(input, dukeImage)
+                    )));
+            recurResponse.add(timeline);
+            timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+            timeline.play();
+        }
+    }
+
+    //Threading way unused. Timeline is used.
+
+    /*
+    TaskScheduler () {
+        priorityQueue = new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime));
+        this(20, priorityQueue);
+    }
+    */
+
     /*
     TaskScheduler (int poolSize, PriorityBlockingQueue<Recur> priorityQueue) {
         ExecutorService priorityJobPoolExecutor = Executors.newFixedThreadPool(poolSize);
@@ -41,43 +74,6 @@ public class TaskScheduler extends TaskList<Recur> {
                 }
             }
         });
-    }
-    */
-
-    TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, Image dukeImage, String input) {
-        this.recurResponse = recurResponse;
-        this.dialogContainer = dialogContainer;
-        this.dukeImage = dukeImage;
-        if (input.contains("recur")) {
-            recurDialogContainer(input);
-        }
-    }
-
-    void recurDialogContainer(String input) {
-        if (input.contains("delete")) {
-            /*
-            int recurPos = Integer.parseInt(input.substring(input.length() - 1));
-            Timeline removeRecur = recurResponse.remove(recurPos - 1);
-            removeRecur.stop();
-             */
-        } else {
-            String[] splitInput = input.split(" ");
-            int delay = Integer.parseInt(splitInput[splitInput.length - 1]);
-            Timeline timeline =
-                    new Timeline(new KeyFrame(Duration.millis(delay), e -> dialogContainer.getChildren().addAll(
-                            DialogBox.getDukeDialog(input, dukeImage)
-                    )));
-            recurResponse.add(timeline);
-            timeline.setCycleCount(Animation.INDEFINITE); // loop forever
-            timeline.play();
-        }
-    }
-
-
-    /*
-    TaskScheduler () {
-        priorityQueue = new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime));
-        this(20, priorityQueue);
     }
     */
 }

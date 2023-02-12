@@ -161,17 +161,20 @@ class Parser {
     static TaskList<Task> recur(Scanner sc, TaskList<Task> tasks, List<Timeline> recurResponse) {
 
         boolean delete = sc.next().equals("delete");
+        int deletePos = Integer.parseInt(sc.next());
+        TaskList<Task> newTasks;
         if (delete) {
-            int pos = IntStream.range(0, tasks.numberOfTasks()).filter(x -> tasks.get(x).getDescription()
-                            .contains("recur")).limit(Integer.parseInt(sc.next())).reduce((a, b) -> b)
+            int pos = IntStream.range(0, tasks.numberOfTasks())
+                            .filter(x ->tasks.get(x).getDescription().contains("recur"))
+                            .limit(deletePos).reduce((a, b) -> b)
                             .orElse(-1);
-            tasks.removeTask(pos);
-            Timeline removeRecur = recurResponse.remove(pos);
+            newTasks = tasks.removeTask(pos);
+            Timeline removeRecur = recurResponse.remove(deletePos - 1);
             removeRecur.stop();
         } else {
             return tasks.add(new Task("recur " + sc.nextLine()));
         }
-        return tasks;
+        return newTasks;
     }
 
     /**
