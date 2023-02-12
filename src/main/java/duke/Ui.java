@@ -28,6 +28,11 @@ public class Ui {
                 taskList.getTaskListSize()) + askForNextCommand();
     }
 
+    public String showFailAddingNewTask(TaskList tasks) {
+        return String.format("This task cannot be added as it clashes with another task in the task list: \n%s",
+                showList(tasks)) + askForNextCommand();
+    }
+
     public String showMarkingTaskDone(Task task) {
         return String.format("Nice! I've marked this task as done:\n %s%n",
                 task.getDescription()) + askForNextCommand();

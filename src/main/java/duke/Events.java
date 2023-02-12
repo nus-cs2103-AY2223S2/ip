@@ -4,19 +4,12 @@ import java.time.LocalDateTime;
 
 public class Events extends Task {
 
-    protected LocalDateTime startDate;
-    protected LocalDateTime endDate;
-
     public Events(String name, String startDate, String endDate) {
-        super(name, "E");
-        this.startDate = makeDateTime(startDate);
-        this.endDate = makeDateTime(endDate);
+        super(name, "E", makeDateTime(startDate), makeDateTime(endDate));
     }
 
     public Events(String name, String startDate, String endDate, boolean isDone) {
-        super(name, "E", isDone);
-        this.startDate = makeDateTime(startDate);
-        this.endDate = makeDateTime(endDate);
+        super(name, "E", makeDateTime(startDate), makeDateTime(endDate), isDone);
     }
 
     /**

@@ -1,23 +1,16 @@
 package duke;
 
-import java.time.LocalDateTime;
-
-
 /**
  * Represents a Task that has a due date.
  */
 public class Deadlines extends Task {
 
-    protected LocalDateTime dueDate;
-
     public Deadlines(String name, String dueDate) {
-        super(name, "D");
-        this.dueDate = makeDateTime(dueDate);
+        super(name, "D", makeDateTime(dueDate), null);
     }
 
     public Deadlines(String name, String dueDate, boolean isDone) {
-        super(name, "D", isDone);
-        this.dueDate = makeDateTime(dueDate);
+        super(name, "D", makeDateTime(dueDate), null, isDone);
     }
 
     /**
@@ -28,7 +21,7 @@ public class Deadlines extends Task {
     @Override
     public String getDescription() {
         return String.format("%s (by: %s)", super.getDescription(),
-                formatDateTime(this.dueDate));
+                formatDateTime(this.startDate));
     }
 
     /**
@@ -40,6 +33,6 @@ public class Deadlines extends Task {
     @Override
     public String formatDescription() {
         return super.formatDescription()
-                + String.format(" | %s", formatDateTimeForTaskList(this.dueDate));
+                + String.format(" | %s", formatDateTimeForTaskList(this.startDate));
     }
 }

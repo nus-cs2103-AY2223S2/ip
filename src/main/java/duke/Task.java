@@ -8,16 +8,22 @@ public class Task {
     protected String name;
     protected boolean isDone;
     protected String taskType;
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
 
-    public Task(String name, String taskType) {
+    public Task(String name, String taskType, LocalDateTime startDate, LocalDateTime endDate) {
         this.name = name;
         this.isDone = false;
         this.taskType = taskType;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public Task(String name, String taskType, boolean isDone) {
+    public Task(String name, String taskType, LocalDateTime startDate, LocalDateTime endDate, boolean isDone) {
         this.name = name;
         this.taskType = taskType;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.isDone = isDone;
     }
 
@@ -53,6 +59,22 @@ public class Task {
      */
     public boolean getTaskStatus() {
         return this.isDone;
+    }
+
+    /**
+     * Returns the start date of task
+     * @return start date of task, null if task is not dated
+     */
+    public LocalDateTime getStartDate() {
+        return this.startDate;
+    }
+
+    /**
+     * Returns the end date of the task
+     * @return end date of task, null if task is not dated
+     */
+    public LocalDateTime getEndDate() {
+        return this.endDate;
     }
 
     /**
@@ -99,5 +121,18 @@ public class Task {
 
     public static String formatDateTimeForTaskList(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+
+    public boolean taskClashWithCurrTask(Task currTask) {
+        LocalDateTime currTaskStartDate = currTask.getStartDate();
+        LocalDateTime currTaskEndDate = currTask.getEndDate();
+        boolean currTaskStartBeforeTaskEnd = currTaskStartDate.isBefore(this.getEndDate());
+        boolean currTaskStartAfterTaskStart = currTaskStartDate.isAfter(this.getStartDate());
+        boolean currTaskStartDuringTask = currTaskStartAfterTaskStart && currTaskStartBeforeTaskEnd;
+        boolean currTaskEndBeforeTaskEnd = currTaskEndDate.isBefore(this.getEndDate());
+        boolean currTaskEndAfterTaskStart = currTaskEndDate.isAfter(this.getStartDate());
+        boolean currTaskEndDuringTask = currTaskEndAfterTaskStart && currTaskEndBeforeTaskEnd;
+        boolean currTaskClashWithTask = currTaskStartDuringTask || currTaskEndDuringTask;
+        return currTaskClashWithTask;
     }
 }
