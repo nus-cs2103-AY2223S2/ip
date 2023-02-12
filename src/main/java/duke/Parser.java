@@ -124,9 +124,9 @@ public class Parser {
             return ui.showAddingNewTask(newDeadline, tasks);
         case "event":
             Task newEvent = Parser.makeEventFromCommand(command);
-            tasks.addTask(newEvent, storage);
-            return ui.showAddingNewTask(newEvent, tasks);
-        case "delete": ;
+            boolean canAddEvent = tasks.canAddTask(newEvent, storage);
+            return canAddEvent ? ui.showAddingNewTask(newEvent, tasks) : ui.showFailAddingNewTask(tasks);
+        case "delete":
             Task taskToDelete = tasks.deleteTask(getIndexFromCommand(command), storage);
             return ui.showDeletingTask(taskToDelete, tasks);
         case "find":
@@ -136,18 +136,5 @@ public class Parser {
         default:
             throw new DukeException("Command not recognised.");
         }
-    }
-
-    /**
-     * Test functionality of finding
-     * @param args
-     */
-    public static void main(String[] args) {
-        TaskList tl = new TaskList();
-        Ui ui = new Ui();
-        tl.addTaskToSearchList(new ToDos("shower"));
-        tl.addTaskToSearchList(new ToDos("shower dog"));
-        tl.addTaskToSearchList(new ToDos("poop"));
-        System.out.println("search: " + ui.showFindingTask(tl.makeTaskFinder("shower")));
     }
 }

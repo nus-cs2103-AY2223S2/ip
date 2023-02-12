@@ -35,8 +35,8 @@ public class TaskList {
     /**
      * Adds the given task into the task list.
      * @param task task to be added into the task list
-     * @param storage
-     * @throws IOException
+     * @param storage storage location to store new task added
+     * @throws IOException if something goes wrong while adding task to task list in storage
      */
     public void addTask(Task task, Storage storage) throws IOException {
         this.tasks.add(task);
@@ -44,6 +44,44 @@ public class TaskList {
         storage.updateTaskList(this);
     }
 
+    /**
+     * Checks if the given task can be added into the task list. If there are clashes in timings with a task currently
+     * in the task list, the task is not added. If there are no clashes, the task can be added into the task list.
+     * @param task task to be added into the task list
+     * @param storage storage location to store new task added
+     * @return true if the task can be added as there are no clashes in timing and false if the task cannot be added
+     * due to the presence of a clash in timing
+     * @throws IOException if something goes wrong while adding task to task list in storage
+     */
+    public boolean canAddTask(Task task, Storage storage) throws IOException {
+        if (haveClashWithCurrentTasks(task)) {
+            return false;
+        }
+        this.addTask(task, storage);
+        return true;
+    }
+
+    /**
+     * Checks for the presence of clashes with the tasks currently in the task list and returns true if clashes are
+     * found
+     * @param currTask task to compare if clashes are present between the tasks in the task list and the current task
+     * @return true if there are clashes in timings found and false if no clashes are found
+     */
+    public boolean haveClashWithCurrentTasks(Task currTask) {
+        for (Task task : tasks) {
+            boolean isEventAndClashWithCurrTask = task.getTaskType().equals("E")
+                    && task.taskClashWithCurrTask(currTask);
+            if (isEventAndClashWithCurrTask) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds given task to the task list
+     * @param task task to be added into the task list
+     */
     public void addTaskToSearchList(Task task) {
         this.tasks.add(task);
     }
@@ -51,9 +89,9 @@ public class TaskList {
     /**
      * Deletes and returns the task deleted from the task list.
      * @param indexOfTask index of task to be deleted
-     * @param storage
+     * @param storage storage location to update the task list of the task deleted
      * @return the task deleted
-     * @throws IOException
+     * @throws IOException if something goes wrong when updating the deletion to task list
      */
     public Task deleteTask(int indexOfTask, Storage storage) throws IOException{
         Task taskToDelete = this.tasks.remove(indexOfTask);
@@ -64,9 +102,9 @@ public class TaskList {
     /**
      * Marks the task given by its index as done.
      * @param indexOfTask index of the task to mark as done
-     * @param storage
+     * @param storage storage location to update the task list after task is mark done
      * @return the task after marking it as done
-     * @throws IOException
+     * @throws IOException if something goes wrong when updating the marking of the task to the task list
      */
     public Task markTaskAsDone(int indexOfTask, Storage storage) throws IOException {
         Task toMarkDone = this.tasks.get(indexOfTask);
@@ -78,9 +116,9 @@ public class TaskList {
     /**
      * Marks the task given by its index as undone.
      * @param indexOfTask index of the task to mark as undone
-     * @param storage
+     * @param storage storage location to update the task list after task is mark undone
      * @return the task after marking it as undone
-     * @throws IOException
+     * @throws IOException if something goes wrong when updating the unmarking of the task to the task list
      */
     public Task markTaskAsUndone(int indexOfTask, Storage storage) throws IOException {
         Task toMarkUndone = this.tasks.get(indexOfTask);
@@ -116,7 +154,4 @@ public class TaskList {
         }
         return taskFinder;
     }
-
-    //public static TaskList
-
 }
