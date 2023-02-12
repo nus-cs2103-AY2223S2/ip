@@ -81,6 +81,7 @@ public class Ui {
         while (shouldIgnore(fullInputLine)) {
             fullInputLine = sc.nextLine();
         }
+        assert fullInputLine != null;
         showToUser("[Meowww you've entered " + fullInputLine + "]");
         return fullInputLine.split(" ", 2);
     }
