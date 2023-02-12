@@ -54,8 +54,6 @@ public class Duke {
                 saveCommandAfterRunning(inMsg, isRunning);
             } catch (DukeException | AssertionError e) {
                 ui.printStructuredString(e.toString());
-            } catch (NumberFormatException e) {
-                ui.printStructuredString(NUMBER_FORMAT_ERROR);
             }
         }
     }
@@ -75,8 +73,6 @@ public class Duke {
             responseMessage = new Message(responseString, false);
         } catch (DukeException e) {
             responseMessage = new Message(e.toString(), true);
-        } catch (NumberFormatException e) {
-            responseMessage = new Message(NUMBER_FORMAT_ERROR, true);
         }
 
         return responseMessage;
