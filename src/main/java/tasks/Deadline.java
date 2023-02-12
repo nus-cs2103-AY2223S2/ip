@@ -42,11 +42,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + printDateAndTime() + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + printDateAndTime() + ")";
     }
 
     @Override
     public String writeToFile() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + deadline + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + deadline + ")";
     }
 }

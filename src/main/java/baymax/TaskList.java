@@ -19,9 +19,4 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
-
-    public void updateList(ArrayList<Task> newList) {
-        this.taskList = newList;
-    }
-
 }
