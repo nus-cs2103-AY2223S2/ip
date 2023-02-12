@@ -9,3 +9,5 @@ D |   | buy bananas | 2021-11-12
 E |   | make banana milkshake | 2021-11-12 | 2021-12-12
 D | X | pop balloons | 2024-10-11
 E |   | friendly-test | 2022-10-11 | 2023-10-12
+D |   | make magic | 2019-10-11
+E |   | make magic | 2019-10-11 | 2019-11-11
