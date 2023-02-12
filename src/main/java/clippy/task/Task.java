@@ -67,6 +67,7 @@ public abstract class Task {
      * @return The corresponding Task represented by the CSV line.
      */
     public static Task parseCsvString(String csvString) {
+        System.out.println(csvString);
         String[] arguments = csvString.split(",");
         Task result = null;
         try {

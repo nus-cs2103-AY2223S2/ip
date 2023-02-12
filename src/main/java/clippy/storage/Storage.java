@@ -53,7 +53,7 @@ public class Storage {
             return loadExistingSaveFile();
         }
 
-        return null;
+        return new ArrayList<>();
 
     }
 
