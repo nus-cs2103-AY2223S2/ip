@@ -1,18 +1,17 @@
-package duke.command;
+package duke.commands;
 
 import duke.TaskList;
 import duke.Ui;
-import duke.Task;
+import duke.tasks.Task;
 
 public class FindCommand extends Command {
-    private String[] currentInputArray;
     private TaskList listOfTasks;
     private String keyword;
 
-    public FindCommand(String[] currentInputArray, TaskList listOfTasks) {
-        this.currentInputArray = currentInputArray;
+    public FindCommand(String input, TaskList listOfTasks) {
+        String[] inputArgs = input.split(" ", 2);
         this.listOfTasks = listOfTasks;
-        this.keyword = this.currentInputArray[1];
+        this.keyword = inputArgs[1];
     }
 
     @Override
@@ -21,13 +20,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void handleCommand(Ui ui) {
+    public String handleCommand() {
         TaskList filteredList = new TaskList();
         for (Task task : this.listOfTasks) {
             if (task.getDescription().contains(this.keyword)) {
                 filteredList.add(task);
             }
         }
-        ui.showFind(filteredList);
+        return Ui.showFind(filteredList);
     }
 }

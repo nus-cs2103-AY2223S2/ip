@@ -1,4 +1,4 @@
-package duke.command;
+package duke.commands;
 
 import duke.Ui;
 
@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void handleCommand(Ui ui) {
-        ui.showBye();
+    public String handleCommand() {
+        return Ui.showBye();
     }
 }

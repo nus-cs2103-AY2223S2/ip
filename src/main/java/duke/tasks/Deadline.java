@@ -1,8 +1,8 @@
-package duke;
+package duke.tasks;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Encapsulates the Deadline class which is a sub-class of the Task class.

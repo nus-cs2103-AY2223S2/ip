@@ -1,6 +1,7 @@
 package duke;
 
-import duke.command.*;
+import duke.commands.*;
+import duke.exceptions.InvalidCommandException;
 
 public class Parser {
     final static String EXIT_COMMAND = "bye";
@@ -19,26 +20,29 @@ public class Parser {
         this.listOfTasks = listOfTasks;
     }
 
-    public Command parse(String inputCommand, String[] currentInputArray) throws InvalidCommandException{
+    public Command parse(String input) throws InvalidCommandException{
+        String[] commands = input.split(" ");
+        String inputCommand = commands[0];
+
         switch (inputCommand) {
         case EXIT_COMMAND:
             return new ExitCommand();
         case LIST_COMMAND:
             return new ListCommand(this.listOfTasks);
         case DELETE_COMMAND:
-            return new DeleteCommand(currentInputArray, this.listOfTasks);
+            return new DeleteCommand(input, this.listOfTasks);
         case MARK_COMMAND:
-            return new MarkCommand(currentInputArray, this.listOfTasks);
+            return new MarkCommand(input, this.listOfTasks);
         case UNMARK_COMMAND:
-            return new UnmarkCommand(currentInputArray, this.listOfTasks);
+            return new UnmarkCommand(input, this.listOfTasks);
         case TODO_COMMAND:
-            return new TodoCommand(currentInputArray, this.listOfTasks);
+            return new TodoCommand(input, this.listOfTasks);
         case EVENT_COMMAND:
-            return new EventCommand(currentInputArray, this.listOfTasks);
+            return new EventCommand(input, this.listOfTasks);
         case DEADLINE_COMMAND:
-            return new DeadlineCommand(currentInputArray, this.listOfTasks);
+            return new DeadlineCommand(input, this.listOfTasks);
         case FIND_COMMAND:
-            return new FindCommand(currentInputArray, this.listOfTasks);
+            return new FindCommand(input, this.listOfTasks);
         default:
             throw new InvalidCommandException("");
         }

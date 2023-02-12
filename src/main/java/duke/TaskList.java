@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.exceptions.EmptyDescriptionException;
+import duke.tasks.Task;
+
 public class TaskList extends ArrayList<Task> {
     public TaskList() {
         super();
@@ -16,11 +19,9 @@ public class TaskList extends ArrayList<Task> {
         }
     }
 
-    public void deleteTask(int taskNumber) throws EmptyDescriptionException {
+    public Task deleteTask(int taskNumber) throws EmptyDescriptionException {
         Task currentTask = this.get(taskNumber - 1);
         this.remove(taskNumber - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + currentTask.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", this.size()));
+        return currentTask;
     }
 }

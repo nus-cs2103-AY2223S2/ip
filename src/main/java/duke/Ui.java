@@ -2,6 +2,8 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.tasks.Task;
+
 public class Ui {
 
     final static String PARTITION = "*******************************************";
@@ -12,23 +14,45 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void showPartition() {
+    public static void showPartition() {
         System.out.println(PARTITION);
     }
 
-    public void showWelcome() {
-        this.showPartition();
-        System.out.println("Hello! I'm Anton's Bot");
-        System.out.println("What can I do for you?");
-        this.showPartition();
+    public static String showWelcome() {
+        return "Hello! I'm TheshBot \nWhat can I do for you?";
     }
 
-    public void showBye() {
-        this.showPartition();
-        System.out.println("Bye. Hope to see you again soon!");
-        this.showPartition();
+    public static String showBye() {
+        return "That was fast! Hope to see you again soon!";
     }
 
+    public static String showError(Exception e) {
+        return e.toString();
+    }
+    
+    public static String showList(TaskList listOfTasks) {
+        String result = "Here are the tasks in your list:\n";
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task currentTask = listOfTasks.get(i);
+            result += String.format("%d.%s\n", i + 1, currentTask.toString());
+        }
+        return result;
+    }
+    public static String showFind(TaskList filteredList) {
+        String result = "Here are the tasks in your list:\n";
+        for (int i = 0; i < filteredList.size(); i++) {
+            Task currentTask = filteredList.get(i);
+            result += String.format("%d.%s\n", i + 1, currentTask.toString());
+        }
+        return result;
+    }
+
+    public static String showDelete(Task deletedTask, TaskList listOfTasks) {
+        String result = "OK. I've removed this task:\n" + 
+                String.format("%s\n", deletedTask) + 
+                String.format("Now you ahve %d tasks in your list", listOfTasks.size());
+        return result;
+    }
     public void showCreateNewFile() {
         System.out.println("Creating new file...");
     }
@@ -39,37 +63,19 @@ public class Ui {
         return currentInputArray;
     }
 
-    public void showList(TaskList listOfTasks) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            Task currentTask = listOfTasks.get(i);
-            System.out.println(String.format("%d.%s", i + 1, currentTask.toString()));
-        }
-    }
-    public void showFind(TaskList filteredList) {
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < filteredList.size(); i++) {
-            Task currentTask = filteredList.get(i);
-            System.out.println(String.format("%d.%s", i + 1, currentTask.toString()));
-        }
+
+    public static String showAdd(TaskList listOfTasks, String taskName) {
+        String result = "Got it. I've added this task:\n" +
+                taskName +
+                String.format("\nNow you have %d tasks in the list.", listOfTasks.size());
+        return result;
     }
 
-    public void showAdd(TaskList listOfTasks, String taskName) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + taskName);
-        System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+    public static String showUnmark(String taskName) {
+        return "OK, I've marked this task as not done yet:\n" + taskName;
     }
 
-    public void showUnmark(String taskName) {
-        System.out.println("  OK, I've marked this task as not done yet:");
-        System.out.println(taskName);
+    public static String showMark(String taskName) {
+        return "Nice! I've marked this task as done:\n" + taskName;
     }
-
-    public void showMark(String taskName) {
-        System.out.println("  Nice! I've marked this task as done:");
-        System.out.println(taskName);
-    }
-
-
-
 }

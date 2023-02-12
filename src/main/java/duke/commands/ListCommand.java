@@ -1,4 +1,4 @@
-package duke.command;
+package duke.commands;
 
 import duke.TaskList;
 import duke.Ui;
@@ -15,7 +15,7 @@ public class ListCommand extends Command {
         return false;
     }
     @Override
-    public void handleCommand(Ui ui) {
-        ui.showList(this.listOfTasks);
+    public String handleCommand() {
+        return Ui.showList(this.listOfTasks);
     }    
 }

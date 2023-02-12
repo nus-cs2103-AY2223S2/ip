@@ -1,5 +1,5 @@
 D, ,CS3230,2023-01-03
-T,X,CS2106 LAB,
+T, ,CS2106 LAB,
 E, ,IHG,2023-01-05,2023-02-01
 T, ,read book,
-D, ,return book,2023-06-06
+D,X,return book,2023-06-06
