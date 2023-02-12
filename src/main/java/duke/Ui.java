@@ -1,5 +1,9 @@
 package duke;
 import java.util.List;
+
+/**
+ * handles Ui interactions
+ */
 public class Ui {
     public Ui () {
         //UI does not need to store anything 

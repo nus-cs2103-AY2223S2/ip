@@ -2,6 +2,10 @@ package duke;
 import duke.command.*;
 import java.io.*;
 import java.util.*;
+
+/**
+ * helps parse the user input and return the corresponding object 
+ */
 public class Parser {
     public static Command parseIn(String in) throws DukeException {
             String[] parmArr = in.split("\\s+");

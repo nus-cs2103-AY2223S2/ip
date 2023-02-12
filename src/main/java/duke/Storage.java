@@ -3,6 +3,10 @@ import duke.command.*;
 import duke.task.*;
 import java.io.*;
 import java.util.*;
+
+/**
+ * handles the loading and storing onto external file
+ */
 public class Storage {
     private String filePath;
     private File save;

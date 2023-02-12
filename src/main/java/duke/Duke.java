@@ -3,8 +3,13 @@ import duke.task.*;
 import duke.command.*;
 import java.io.*;
 import java.util.*;
+
+/**
+ * main duke class. helps abstract all the other components
+ */
 public class Duke {
-    private static Ui ui; //deal with user interaction
+    //javadoc
+    private static Ui ui; //deal with user interactionss
     private static TaskList taskList;
     private static Storage storage;
     private static ArrayList<Task> list;

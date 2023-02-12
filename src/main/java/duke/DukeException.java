@@ -1,5 +1,9 @@
 package duke;
 import java.io.FileNotFoundException;
+
+/**
+ * handles abstraction
+ */
 public class DukeException extends Exception {
 
     public DukeException() {
