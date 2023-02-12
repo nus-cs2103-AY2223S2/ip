@@ -10,6 +10,9 @@ import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.UiPrinter;
 
+/**
+ * A class to process user's inputs and create the corresponding responses for such inputs.
+ */
 public class GuiDriver {
     private static TaskList taskList = Storage.readTaskList();
 
@@ -140,8 +143,10 @@ public class GuiDriver {
             int taskIndex = Integer.parseInt(commandArgs[0]);
             return UiPrinter.addLineBreak("Nice! I've marked this task as done:",
                     taskList.markTask(taskIndex));
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             return "Please input numerals as your index!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please input a valid index!";
         }
     }
 
@@ -150,8 +155,10 @@ public class GuiDriver {
             int taskIndex = Integer.parseInt(commandArgs[0]);
             return UiPrinter.addLineBreak("OK, I've marked this task as not done yet:",
                     taskList.unmarkTask(taskIndex));
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             return "Please input numerals as your index!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please input a valid index!";
         }
     }
 
@@ -160,8 +167,10 @@ public class GuiDriver {
             int taskIndex = Integer.parseInt(commandArgs[0]);
             return UiPrinter.addLineBreak("Noted. I've removed this task:",
                     taskList.deleteTask(taskIndex));
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             return "Please input numerals as your index!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please input a valid index!";
         }
     }
 
