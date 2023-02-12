@@ -20,6 +20,10 @@ public class ListCommand extends Command {
     }
 
     private String getReply(TaskList tasks) {
+        if (tasks.size() == 0) {
+            String msg = "You don't have any task :(";
+            return msg;
+        }
         String msg = "Here are the tasks in your list:\n";
         msg += tasks.toString() + "\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";

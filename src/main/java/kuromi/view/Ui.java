@@ -14,6 +14,10 @@ public class Ui {
 
     private Stage stage;
 
+    public Ui() {
+        this.stage = null;
+    }
+
     public Ui(Stage stage) {
         this.stage = stage;
     }
@@ -25,28 +29,6 @@ public class Ui {
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-    }
-
-    /**
-     * Show errors occurred to the user.
-     * @param msg Error message to be shown.
-     */
-    public String showError(String msg) {
-        return (msg);
-    }
-
-    /**
-     * Show the lines for separation.
-     */
-    public String showLine() {
-        return (this.lines);
-    }
-
-    /**
-     * Show new line.
-     */
-    public String showEnter() {
-        return "\n";
     }
 
     /**

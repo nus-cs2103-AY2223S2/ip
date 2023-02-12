@@ -29,4 +29,14 @@ public class TaskListTest {
         tasks.delete(1);
         assertEquals(1, tasks.size());
     }
+
+    @Test
+    public void taskGet() throws KuromiException {
+        Deadline d = new Deadline("return book", "2024-01-30 15:30");
+        ArrayList<Task> inp = new ArrayList<Task>();
+        inp.add(new Todo("borrow book"));
+        inp.add(d);
+        TaskList tasks = new TaskList(inp);
+        assertEquals(inp.get(1), tasks.get(1));
+    }
 }

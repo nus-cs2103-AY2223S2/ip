@@ -106,14 +106,6 @@ public class TaskList {
         return new TaskList(newTaskList);
     }
 
-    private ArrayList<Task> deleteTodo() {
-        ArrayList<Task> newTaskList = this.tasks
-                .stream()
-                .filter((s) -> !s.getSymbol().equals("T"))
-                .collect(toCollection(ArrayList::new));
-        return newTaskList;
-    }
-
     public TaskList getUpcomingTasks(int numberOfTasks) {
         ArrayList<Task> filtered = new ArrayList<Task>(this.tasks);
         Collections.sort(filtered);
