@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.taskstorage.TaskList;
-import duke.exception.DukeException;
 
 /**
  * Abstract class for Command.

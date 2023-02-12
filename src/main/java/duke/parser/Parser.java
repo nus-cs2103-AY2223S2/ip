@@ -8,6 +8,10 @@ import duke.task.Task;
 import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+<<<<<<< HEAD:src/main/java/duke/parser/Parser.java
+=======
+import java.time.format.DateTimeParseException;
+>>>>>>> master:src/main/java/duke/command/Parser.java
 
 /**
  * Class for Parser which translates between different task formats
@@ -20,6 +24,7 @@ public final class Parser {
      * @return Date Time as a LocalDateTime object
      */
     public static LocalDateTime dateFormatter(String dateTime) {
+        assert dateTime.length() == 16: "Incorrect dateTime format";
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
@@ -29,6 +34,7 @@ public final class Parser {
      * @return String representation of keyword
      */
     public static String getFindKeyword(String input) {
+        assert input.length() > 5: "Find keyword cannot be empty";
         return input.substring(5);
     }
 
@@ -38,6 +44,7 @@ public final class Parser {
      * @return Task which was represented by its task log format
      */
     public static Task translateTaskLogToTask(String taskLog) {
+        assert taskLog != null: "Task Log cannot be blank";
         Task taskToReturn = new Task();
         String[] taskLogCommands = taskLog.split(" \\| ");
         String taskType = taskLogCommands[0];
@@ -61,7 +68,6 @@ public final class Parser {
             taskToReturn = new Event(taskName, formattedStartTime, formattedEndTime);
             break;
         default:
-            //throw new DukeException("Invalid task log type");
         }
         if (taskStatus.equals("1")) {
             taskToReturn.markTask();
@@ -70,6 +76,7 @@ public final class Parser {
     }
 
     public static Command getCommandType(String userInput) throws DukeException {
+        assert userInput != null: "User input cannot be blank";
         String command = userInput.split(" ")[0];
         switch (command) {
         case "bye":

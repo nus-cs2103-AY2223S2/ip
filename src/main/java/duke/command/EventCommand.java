@@ -89,7 +89,7 @@ public class EventCommand extends Command{
      * @return Message to inform user that Event task has been added.
      */
     @Override
-    public String execute(TaskList tasks) throws DukeException {
+    public String execute(TaskList tasks) {
         int taskCount = tasks.getSize() + 1;
         String taskWord = (taskCount == 1) ? "task" : "tasks";
         Task newTask = translateInput(userInput);
