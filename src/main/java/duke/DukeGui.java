@@ -33,6 +33,18 @@ public class DukeGui {
     public void start(Stage stage) {
         this.stage = stage;
 
+        createWindow(stage);
+        formatComponents();
+        setAnchors();
+        handleActions();
+
+        showIntro();
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
+    private void createWindow(Stage stage) {
         // Creating window
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -57,9 +69,10 @@ public class DukeGui {
         stage.setResizable(false);
         stage.setMinWidth(450.0);
         stage.setMinHeight(500.0);
-
         mainLayout.setPrefSize(450.0, 500.0);
+    }
 
+    private void formatComponents() {
         scrollPane.setPrefSize(450, 470);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -70,15 +83,17 @@ public class DukeGui {
         dialogContainer.setSpacing(10);
         userInput.setPrefWidth(385.0);
         sendButton.setPrefWidth(55.0);
+    }
 
+    private void setAnchors() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
+    private void handleActions() {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -89,11 +104,6 @@ public class DukeGui {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        showIntro();
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 
     private void showIntro() {
