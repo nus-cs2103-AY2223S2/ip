@@ -105,7 +105,7 @@ public class Parser {
         }
         int index = parseInt(inputAnalyzed[1]);
         // List
-        list.mark(index);
+        list.mark(index - 1);
         // UI.Ui
         return Ui.showMarkSuccess(list.get(index - 1));
     }

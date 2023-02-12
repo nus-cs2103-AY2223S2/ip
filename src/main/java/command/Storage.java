@@ -50,11 +50,6 @@ public class Storage {
      * @throws IOException when neither the user's path nor the default storage path have files
      */
     public List<String> load() throws IOException {
-        try {
-            //Todo: Handle the case where the user's provided file is contained in the incorrect format
-            return Files.readAllLines(loadPath);
-        } catch (IOException e) {
             return Files.readAllLines(storePath);
-        }
     }
 }

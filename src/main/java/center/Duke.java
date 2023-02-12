@@ -1,16 +1,18 @@
 package center;
 
-import UI.DialogBox;
+import UI.Ui;
 import command.Parser;
 import command.Storage;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import UI.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -20,31 +22,43 @@ import task.TaskList;
 import java.io.IOException;
 
 public class Duke extends Application {
+
     private ScrollPane scrollPane;
+
     private VBox dialogContainer;
+
     private TextField userInput;
+
     private Button sendButton;
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image Skylar = new Image(this.getClass().getResourceAsStream("/images/skyler.jpg"));
-    private boolean isOpenForInput;
+    private Parser parser;
+    private Ui uiControl;
     private Storage storage;
     private TaskList tasks;
-    private Parser parser;
 
-    /**
-     * Constructs a new Duke object with the requisite Storage, TaskList, Ui and Parser objects.
-     */
-
+    //Todo: Let the user input the path to an existing list file that they have
     public Duke() {
         storage = new Storage();
+        tasks = new TaskList();
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            //Ui.showLoadingError();
             tasks = new TaskList();
         }
         parser = new Parser(tasks);
+    }
+
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label skylarText = new Label(parser.processInput(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getSkylarDialog(skylarText, new ImageView(Skylar))
+        );
+        userInput.clear();
     }
 
     //Todo: Make this more elegant
@@ -112,34 +126,4 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
-
-    /**
-     * Starts up Duke and accepts user inputs for processing until termination, where the end list is stored in a file.
-     */
-    public void run(String[] args) {
-
-    }
-
-    public static void main(String[] args) {
-        Application.launch(Duke.class, args);
-    }
-
-
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Skylar's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label skylarText = new Label(parser.processInput(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getSkylarDialog(skylarText, new ImageView(Skylar))
-        );
-        userInput.clear();
-    }
-
-
 }
