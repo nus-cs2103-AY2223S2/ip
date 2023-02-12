@@ -1,4 +1,6 @@
-package duke.duke;
+package duke;
+
+
 
 public class Duke {
     private static Storage storage = new Storage();

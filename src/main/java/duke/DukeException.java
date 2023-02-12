@@ -1,4 +1,4 @@
-package duke.duke;
+package duke;
 
 /**
  * Handles Exception by Duke
