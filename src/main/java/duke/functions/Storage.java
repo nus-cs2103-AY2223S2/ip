@@ -39,9 +39,9 @@ public class Storage {
             while (scanner.hasNext()) {
                 String taskDetails = scanner.nextLine();
                 String[] details = taskDetails.split("\\|");
-                for (int i = 0; i < details.length; i++) {
-                    System.out.println(details[i]);
-                }
+//                for (int i = 0; i < details.length; i++) {
+//                    System.out.println(details[i]);
+//                }
 
                 String taskType = details[0];
                 String taskStatus = details[1];
