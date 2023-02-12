@@ -94,6 +94,7 @@ public class Storage {
             throw new DukeDataException();
         }
 
+        assert loadTask != null;
         if(taskStatus.equals("1")){
             loadTask.changeStatus();
         }

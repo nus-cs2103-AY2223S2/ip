@@ -76,7 +76,7 @@ public class Duke extends Application{
         String[] userInput = this.parser.parseUserInput(input);
         String dukeQuery = userInput[0];
 
-        //to check if the command is a valid command
+        assert dukeQuery != null;
         DukeCommand dukeCommand = DukeCommand.FAIL;
         for (DukeCommand c : DukeCommand.values()) {
             if (c.name().equals(dukeQuery.toUpperCase())) {
@@ -128,6 +128,7 @@ public class Duke extends Application{
         } catch (IOException e) {
             response = "Error while storing data..";
         }
+        assert response != null;
         return response;
     }
 
@@ -250,6 +251,7 @@ public class Duke extends Application{
                 }
             }
         }
+        assert response != null;
         return response;
     }
 
