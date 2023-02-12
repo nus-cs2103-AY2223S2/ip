@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import rick.exceptions.RickException;
 import rick.exceptions.TaskListFullException;
 import rick.exceptions.TaskListInvalidAccessException;
+import rick.exceptions.TaskListInvalidIndexException;
 import rick.task.RickTask;
 
 
@@ -203,5 +204,49 @@ public class TaskList {
         return this.storage
                 .toList()
                 .stream().filter(p);
+    }
+
+    /**
+     * Marks tasks in the storage as done/not done, and returns the task
+     * description to output to the UI.
+     *
+     * @param index The storage indices to mark as completed.
+     * @param isDone Boolean indicating to mark the task as completed or not.
+     * @return The output task description.
+     * @throws RickException An exception to indicate that this operation was
+     *                       unsuccessful.
+     */
+    public String basicManipulate(int index, boolean isDone) throws RickException {
+        if (index < 0 || index > this.storage.size()) {
+            throw new TaskListInvalidIndexException(index);
+        }
+        RickTask task = this.storage.setDone(index - 1, isDone);
+        if (task == null) {
+            throw new RickException(
+                    "Oops. An error occurred when trying to mark the task at index `"
+                    + index
+                    + "`");
+        }
+        return task.toString();
+    }
+
+    /**
+     * Deletes a task in the Storage, and returns its String representation.
+     *
+     * @param index The storage index of the task to delete.
+     * @return The task description to output to the UI.
+     * @throws RickException The Exception indicating that this operation was
+     *                       unsuccessful.
+     */
+    public String basicDelete(int index) throws RickException {
+        if (index < 0 || index > this.storage.size()) {
+            throw new TaskListInvalidIndexException(index);
+        }
+        RickTask task = this.storage.delete(index - 1);
+        if (task == null) {
+            throw new RickException(
+                    "Oops. An error occurred when trying to delete a task");
+        }
+        return task.toString();
     }
 }
