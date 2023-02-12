@@ -78,12 +78,16 @@ public class Ui {
         for (int i = 0; i < taskList.size(); i++){
             Task currTask = taskList.get(i);
             String desc = currTask.getDescription();
-            List wordList = Arrays.asList(desc.split(" "));
+            List wordList = Arrays.asList(desc.split(", "));
             if (wordList.contains(keyword)){
                 count++;
                 result += (count) + "." + currTask.toString() + "\n";
             }
         }
         return result;
+    }
+
+    public String updateMsg(Task task){
+        return "Ok task has been updated:\n" + task.toString();
     }
 }

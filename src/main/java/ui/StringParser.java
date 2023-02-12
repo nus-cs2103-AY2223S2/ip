@@ -39,11 +39,23 @@ public class StringParser {
                 from = wordArr[1].split(" /from ")[1].split(" /to ")[0];
                 to = wordArr[1].split(" /to ", 2)[1];
                 return new EventCommand(desc, from, to);
+            case UPDATE:
+                //extract index
+                index = Integer.parseInt(wordArr[1].split(" /f ")[0]);
+                //extract fields
+                String a = wordArr[1].split(" /f ")[1];
+                String fields = a.split(" /v ")[0];
+                String[] fieldList = fields.split(", ");
+                //extract updated values
+                String values = a.split(" /v ")[1];
+                String[] valueList = values.split(", ");
+                //pass info to UpdateCommand
+                return new UpdateCommand(index - 1, fieldList, valueList);
             default:
                 throw new DukeException("Sorry, I don't know that command");
         }
     }
-    
+
     private Commands getCommand(String input) throws DukeException{
         try {
             Commands command = Commands.valueOf(input.toUpperCase());

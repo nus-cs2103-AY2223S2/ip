@@ -51,4 +51,11 @@ public abstract class Task {
      * @return String representation of task
      */
     public abstract String toFileString();
+
+    /**
+     * Updates given fields with corresponding values
+     * @param fields
+     * @param values
+     */
+    public abstract void updateFields(String[] fields, String[] values);
 }

@@ -14,6 +14,15 @@ public class Todo extends Task {
     }
 
     @Override
+    public void updateFields(String[] fields, String[] values) {
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].equals("desc")) {
+                this.description = values[i];
+            }
+        }
+    };
+
+    @Override
     public String toFileString() {
         String mark = this.isDone()? "1": "0";
         return String.format("T | %s | %s", mark, this.getDescription());
