@@ -22,9 +22,11 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
+    private Label name;
+    @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String name) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -33,7 +35,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        this.name.setText(name);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -56,7 +58,7 @@ public class DialogBox extends HBox {
      * @return User dialog box with image and text.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "User");
     }
 
     /**
@@ -67,7 +69,7 @@ public class DialogBox extends HBox {
      * @return Chatbot dialog box with image and text.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "Duke");
         db.flip();
         return db;
     }
