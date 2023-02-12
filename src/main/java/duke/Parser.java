@@ -28,6 +28,7 @@ public class Parser {
             case "unmark":
             case "delete":
             case "todo":
+            case "find":
                 throw new IncorrectArgumentsException(command, 1, 0);
             case "deadline":
                 throw new IncorrectArgumentsException(command, 2, 0);
@@ -76,6 +77,8 @@ public class Parser {
                 String EstartTime = eventTokens1[0];
                 String EendTime = eventTokens1[1];
                 return new EventCommand(EtaskName, EstartTime, EendTime);
+            case "find":
+                return new FindCommand(details);
             default:
                 throw new InvalidInputException(command);
         }

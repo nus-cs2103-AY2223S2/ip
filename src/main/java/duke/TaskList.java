@@ -42,6 +42,24 @@ public class TaskList {
                 removedTask.getTaskType(), removedTask.getStatusIcon() , removedTask, items);
     }
 
+    public String findKeyword(String keyword) {
+        StringBuilder tasksWithKeyword = new StringBuilder();
+        tasksWithKeyword.append("Here are the tasks in your list containing the keyword " + keyword + ":\n");
+        int keywordCounter = 1;
+
+        for (Task taskToCheck : tasks) {
+            if (taskToCheck.toString().contains(keyword)) {
+                String taskWithKeyword = String.format("%s.[%s][%s] %s\n", keywordCounter, taskToCheck.getTaskType(),
+                        taskToCheck.getStatusIcon(),taskToCheck.toString());
+                tasksWithKeyword.append(taskWithKeyword);
+                keywordCounter++;
+            }
+        }
+
+        return tasksWithKeyword.toString();
+
+    }
+
     public String printTaskList() {
         StringBuilder tasklist = new StringBuilder();
         tasklist.append("Here are the tasks in your list:" + "\n");
