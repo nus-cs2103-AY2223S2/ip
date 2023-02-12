@@ -48,6 +48,15 @@ class Ui {
     void readCommand() {
         description = scanner.next();
     }
+
+    Scanner getScanner() {
+        return scanner;
+    }
+
+    String getDescription() {
+        return this.description;
+    }
+
     /**
      * Match the user's input to the relevant type of input that can be
      * processed by Duke, and call the relevant classes in Parser. Due to
@@ -56,6 +65,7 @@ class Ui {
      * @return TaskList
      */
     TaskList<Task> execute(TaskList<Task> tasks, List<Timeline> recurResponse) {
+        assert(tasks != null);
         if (description.equals(Parser.SHOW_TASKS)) {
             this.tasks = tasks.listAllTasks();
         } else if (description.equals(Parser.TERMINATE)) {
