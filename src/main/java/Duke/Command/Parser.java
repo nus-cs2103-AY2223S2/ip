@@ -6,6 +6,7 @@ import Duke.task.*;
 
 import java.io.IOException;
 
+
 /**
  * Class generates responses to user's command
  */
@@ -129,6 +130,28 @@ public class Parser {
         storage.updateList();
         reply = "OK, I've marked this task as not done yet:\n"
             + object.taskString();
+        break;
+      }
+      case FIND: {
+        if (strArr.length < 2) {
+          throw new EmptyFind();
+        }
+        StringBuilder sb = new StringBuilder();
+        String input = info.substring(5).trim();
+        for(Task t: TaskList.tasks) {
+          int numOfSameChar = 0;
+          for(int i = 0; i < Math.min(input.length(),
+              t.string.length()); i++) {
+              if(input.charAt(i) == t.string.charAt(i)) {
+                numOfSameChar++;
+              }
+          }
+          if(numOfSameChar > 2) {
+            sb.append(t.taskString()).append("\n");
+          }
+        }
+        reply = "Here are the matching tasks in your list:\n" +
+            sb;
         break;
       }
       case LIST: {

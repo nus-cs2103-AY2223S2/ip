@@ -14,7 +14,6 @@ public enum Command {
   MARK("mark"),
   UNMARK("unmark"),
   DELETE("delete"),
-  GETEVENTSON("geteventson"),
   FIND("find"),
   BYE("bye");
 
