@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,6 +72,7 @@ public class Storage {
      */
     public void refresh(TaskList tasks) {
         try {
+            Files.createDirectories(filePath.getParent());
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()));
             String res = "";
             for (int i = 0; i < tasks.size(); i++) {
