@@ -107,7 +107,7 @@ Tag a task
 >
 > tag 1 important
 
-### 9.  `bye`
+### 10.  `bye`
 
 Say goodbye to DUKE
 >Command line only:
