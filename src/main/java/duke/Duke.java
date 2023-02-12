@@ -69,9 +69,10 @@ public class Duke {
     }
 
     /**
-     * Main method for running the text Version
-     *
-     * @param args
+     * Main method for running the text Version for Duke.
+     * Suitable for text-ui-test
+     * 
+     * @param args None will be used
      */
     public static void main(String[] args) {
         Duke duke = new Duke();

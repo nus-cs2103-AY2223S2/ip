@@ -7,7 +7,7 @@ import duke.enums.Views;
  */
 public class DukeException extends Exception {
     /**
-     * Default exception thrown
+     * Default exception thrown without any message
      */
     public DukeException() {
         super();

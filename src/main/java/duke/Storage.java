@@ -17,19 +17,13 @@ import duke.task.Todo;
  * Class to manage storage of persistent files
  */
 public class Storage {
-    // private final String filePath;
-
-    // Storage(String filePath) {
-    // this.filePath = filePath;
-    // }
-
     /**
      * Given a list of tasks, it will save it into a txt file
      *
      * @param tasks TaskList object to get and set the list
      */
     public void save(TaskList tasks) {
-        File dukeData = new File("duke_data.txt");
+        File dukeData = new File("duke_data.txt"); // Magic Strings
         try (PrintWriter writer = new PrintWriter(new FileWriter(dukeData));) {
             for (Task item : tasks.getList()) {
                 writer.println(item.toExport()
@@ -63,21 +57,16 @@ public class Storage {
                 line = line.replace("[ ]", "");
                 line = line.replace("[X]", "");
                 String[] parsed = Parser.handleTaskInput(line);
+                String title = parsed[0];
                 if (line.startsWith(Commands.TODO.cmd())) {
-                    String title = parsed[0];
-                    Task newTask = new Todo(title, isDone);
-                    tasksList.add(newTask);
+                    tasksList.add(new Todo(title, isDone));
                 } else if (line.startsWith(Commands.DEADLINE.cmd())) {
-                    String title = parsed[0];
                     String deadline = parsed[1];
-                    Task newTask = new Deadline(title, deadline, isDone);
-                    tasksList.add(newTask);
+                    tasksList.add(new Deadline(title, deadline, isDone));
                 } else if (line.startsWith(Commands.EVENT.cmd())) {
-                    String title = parsed[0];
                     String from = parsed[1];
                     String to = parsed[2];
-                    Task newTask = new Event(title, from, to, isDone);
-                    tasksList.add(newTask);
+                    tasksList.add(new Event(title, from, to, isDone));
                 } else {
                     throw new DukeException(Views.LOAD_EXTRA_ERR_STRING);
                 }
