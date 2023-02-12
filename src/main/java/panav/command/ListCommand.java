@@ -20,9 +20,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String text = "Here are the tasks in your list:\n";
-        text += tasks.printAllTasks();
-        return text;
+        return tasks.printAllTasks();
     }
 
     @Override

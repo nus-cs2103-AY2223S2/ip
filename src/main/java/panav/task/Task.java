@@ -48,6 +48,22 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /**
+     * Method to get command word of task.
+     * @return command word.
+     */
+    public abstract String getCommand();
+
+    /**
+     * Method to get that just returns the String representation of the tasks
+     * containing just that part on which the 'find' command can search.
+     * For eg. a find command should not be able to search "find from" and then
+     * all the events are displayed. It should only be able to search the description and
+     * timeframes.
+     * @return searchable part of the string
+     */
+    public abstract String findablePart();
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

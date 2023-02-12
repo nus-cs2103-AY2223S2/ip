@@ -25,9 +25,15 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String text = "Here are the matching tasks in your list:\n";
-        text += tasks.printTasksContainingKeyword(this.keyword);
-        return text;
+        boolean isToDo = this.keyword.compareTo("todo") == 0;
+        boolean isEvent = this.keyword.compareTo("event") == 0;
+        boolean isDeadline = this.keyword.compareTo("deadline") == 0;
+        if (isToDo || isDeadline || isEvent) {
+            return tasks.findTasks(this.keyword);
+        } else {
+            return tasks.printTasksContainingKeyword(this.keyword);
+        }
+
     }
 
 }

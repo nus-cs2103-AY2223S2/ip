@@ -5,6 +5,7 @@ package panav.task;
  */
 public class Deadline extends Task {
 
+    public static final String COMMAND_WORD = "deadline";
     protected String by;
 
     /**
@@ -15,6 +16,29 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+
+    /**
+     * Returns command word of task.
+     * @return command word.
+     */
+    @Override
+    public String getCommand() {
+        return Deadline.COMMAND_WORD;
+    }
+
+    /**
+     * Method to get that just returns the String representation of the tasks
+     * containing just that part on which the 'find' command can search.
+     * For eg. a find command should not be able to search "find from" and then
+     * all the events are displayed. It should only be able to search the description and
+     * timeframes.
+     * @return searchable part of the string
+     */
+    @Override
+    public String findablePart() {
+        String findablePart = this.description + this.by;
+        return findablePart;
     }
 
     @Override
