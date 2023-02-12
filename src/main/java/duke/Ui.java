@@ -8,6 +8,9 @@ public class Ui {
     public static String intro() {
         return "Hello! I am your anime waifu!\n" +
                 "What can I do for you my husbando?\n" +
+                "Do you want dinner?\n" +
+                "Do you want a shower?\n" +
+                "Or do you want mi <3 hehe \n" +
                 " (*_*)\n" +
                 "|(   )|\n" +
                 "  |-|\n";
@@ -17,14 +20,15 @@ public class Ui {
      * Show invallid Command.
      */
     public static String invalidCommand() {
-        return "please make sure your command is valid!\n";
+        return "please make sure your command is valid! kono bakayaro!!!\n"
+                + "hint: use \"help\" command :D";
     }
 
     /**
      * Show missing args.
      */
     public static String missingArgs() {
-        return "please ensure there are arguments for particular commands!\n";
+        return "please ensure there are arguments for particular commands! b-b-b-BAKAAA!!! \n";
     }
 
     /**

@@ -22,7 +22,8 @@ public class MainWindow {
     private TaskList tasks;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/7623_Chika_Dance.gif"));
+    private final Image shockImage = new Image(this.getClass().getResourceAsStream("/images/ShockedChika.png"));
 
 
 
@@ -59,12 +60,12 @@ public class MainWindow {
         } catch (IllegalArgumentException exception) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeError(Ui.invalidCommand(), dukeImage)
+                    DialogBox.getDukeError(Ui.invalidCommand(), shockImage)
             );
         } catch (IndexOutOfBoundsException exception) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeError(Ui.missingArgs(), dukeImage)
+                    DialogBox.getDukeError(Ui.missingArgs(), shockImage)
             );
         }
 
