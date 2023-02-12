@@ -28,13 +28,12 @@ public class SetCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         Languages lang = execute();
-        ui.showSetLang(lang);
+        Ui.showSetLang(lang);
     }
 
     private Languages execute() throws DukeException {
@@ -51,14 +50,13 @@ public class SetCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @return returns the UI text instead of printing
      * @throws DukeException
      */
-    public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeString(TaskList tasks, Storage storage) throws DukeException {
         Languages lang = execute();
-        return ui.stringSetLang(lang);
+        return Ui.stringSetLang(lang);
     }
 
     /**

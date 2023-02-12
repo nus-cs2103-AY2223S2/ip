@@ -38,14 +38,13 @@ public class EventCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         Task newTask = new Event(this.title, this.to, this.from);
         tasks.add(newTask);
-        ui.showAdd(newTask);
+        Ui.showAdd(newTask);
         storage.save(tasks);
     }
 
@@ -53,16 +52,15 @@ public class EventCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @return returns the UI text instead of printing
      * @throws DukeException
      */
-    public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeString(TaskList tasks, Storage storage) throws DukeException {
         Task newTask = new Event(this.title, this.to, this.from);
         tasks.add(newTask);
         storage.save(tasks);
-        return ui.stringAdd(newTask);
+        return Ui.stringAdd(newTask);
     }
 
     /**

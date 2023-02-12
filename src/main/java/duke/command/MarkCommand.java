@@ -33,22 +33,21 @@ public class MarkCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (taskNumbers.length == 1) {
             int taskNum = taskNumbers[0];
             execute(tasks, storage, taskNum);
-            ui.showMarkDone(tasks, taskNum);
+            Ui.showMarkDone(tasks, taskNum);
         } else {
             ArrayList<Task> printTasks = new ArrayList<Task>();
             for (int taskNum : taskNumbers) {
                 execute(tasks, storage, taskNum);
                 printTasks.add(tasks.get(taskNum));
             }
-            ui.showMarkDone(printTasks);
+            Ui.showMarkDone(printTasks);
         }
     }
 
@@ -69,23 +68,22 @@ public class MarkCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @return returns the UI text instead of printing
      * @throws DukeException
      */
-    public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeString(TaskList tasks, Storage storage) throws DukeException {
         if (taskNumbers.length == 1) {
             int taskNum = taskNumbers[0];
             execute(tasks, storage, taskNum);
-            return ui.stringMarkDone(tasks, taskNum);
+            return Ui.stringMarkDone(tasks, taskNum);
         } else {
             ArrayList<Task> printTasks = new ArrayList<>();
             for (int taskNum : taskNumbers) {
                 execute(tasks, storage, taskNum);
                 printTasks.add(tasks.get(taskNum));
             }
-            return ui.stringMarkDone(printTasks, true);
+            return Ui.stringMarkDone(printTasks, true);
         }
     }
 

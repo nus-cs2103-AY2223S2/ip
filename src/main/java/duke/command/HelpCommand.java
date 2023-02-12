@@ -29,16 +29,15 @@ public class HelpCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         try {
-            ui.showHelp(getCommandFromQuery());
+            Ui.showHelp(getCommandFromQuery());
         } catch (java.lang.NullPointerException e) {
-            ui.showHelp();
+            Ui.showHelp();
         } catch (IllegalArgumentException e) {
-            ui.showHelpError();
+            Ui.showHelpError();
         }
     }
 
@@ -46,17 +45,16 @@ public class HelpCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @return returns the UI text instead of printing
      */
-    public String executeString(TaskList tasks, Ui ui, Storage storage) {
+    public String executeString(TaskList tasks, Storage storage) {
         try {
-            return ui.stringHelp(getCommandFromQuery());
+            return Ui.stringHelp(getCommandFromQuery());
         } catch (java.lang.NullPointerException e) {
-            return ui.stringHelp(true);
+            return Ui.stringHelp(true);
         } catch (IllegalArgumentException e) {
-            return ui.stringHelpError(true);
+            return Ui.stringHelpError(true);
         }
     }
 

@@ -12,13 +12,13 @@ import duke.task.Task;
  * Class to interact with the user via commands and messages
  */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
 
     /**
-     * Constructs the UI
+     * Constructs the UI Scanner
      */
     Ui() {
-
+        this.sc = new Scanner(System.in);
     }
 
     /**
@@ -30,7 +30,7 @@ public class Ui {
         try {
             return sc.nextLine();
         } catch (java.util.NoSuchElementException e) {
-            Ui.showEnd();
+            printer(Views.END_STRING);
             System.exit(0);
             return "";
         }
@@ -39,7 +39,7 @@ public class Ui {
     /**
      * Prints out the welcome message
      */
-    public void showWelcome() {
+    public static void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ / _   _| | _____ \n"
                 + "| | | | | | | |/ / _ /\n"
@@ -50,21 +50,12 @@ public class Ui {
     }
 
     /**
-     * Return Welcome String as String
-     *
-     * @return Welcome String
-     */
-    public String stringWelcome() {
-        return Views.WELCOME_STRING.str();
-    }
-
-    /**
      * Takes in a list of tasks and prints it all out
      *
      * @param tasks TaskList object to print the list
      * @throws DukeException when the task is not found in the list
      */
-    public void showList(TaskList tasks) throws DukeException {
+    public static void showList(TaskList tasks) throws DukeException {
         printer(stringList(tasks));
     }
 
@@ -74,7 +65,7 @@ public class Ui {
      * @param tasks TaskList object to print the list
      * @throws DukeException
      */
-    public void showList(ArrayList<Task> tasks, boolean isQuery) throws DukeException {
+    public static void showList(ArrayList<Task> tasks, boolean isQuery) throws DukeException {
         printer(stringList(tasks, isQuery));
     }
 
@@ -85,7 +76,7 @@ public class Ui {
      * @return String representation of list of tasks
      * @throws DukeException when the task is not found in the list
      */
-    public String stringList(TaskList tasks) throws DukeException {
+    public static String stringList(TaskList tasks) throws DukeException {
         return stringList(tasks.getList(), false);
     }
 
@@ -96,7 +87,7 @@ public class Ui {
      * @return String representation of list of tasks
      * @throws DukeException when the task is not found in the list
      */
-    public String stringList(TaskList tasks, boolean isGui, boolean isQuery) throws DukeException {
+    public static String stringList(TaskList tasks, boolean isGui, boolean isQuery) throws DukeException {
         return stringList(tasks.getList(), isGui, isQuery);
     }
 
@@ -107,7 +98,7 @@ public class Ui {
      * @return String representation of list of tasks
      * @throws DukeException
      */
-    public String stringList(ArrayList<Task> tasks, boolean isQuery) throws DukeException {
+    public static String stringList(ArrayList<Task> tasks, boolean isQuery) throws DukeException {
         return stringList(tasks, false, isQuery);
     }
 
@@ -118,7 +109,7 @@ public class Ui {
      * @return String representation of list of tasks
      * @throws DukeException
      */
-    public String stringList(ArrayList<Task> tasks, boolean isGui, boolean isQuery) throws DukeException {
+    public static String stringList(ArrayList<Task> tasks, boolean isGui, boolean isQuery) throws DukeException {
         // If Size == 0 && isQuery = throw error of cannot find
         // Apply de morgan Size != 0 || !isQuery = !throw error of cannot find
         assert tasks.size() != 0 || !isQuery : Views.CANNOT_FIND_STRING.str();
@@ -133,7 +124,7 @@ public class Ui {
         return returnString + stringListRaw(tasks, isGui);
     }
 
-    private String stringListRaw(ArrayList<Task> tasks, boolean isGui) throws DukeException {
+    private static String stringListRaw(ArrayList<Task> tasks, boolean isGui) throws DukeException {
         assert tasks.size() != 0 : Views.EMPTY_LIST_STRING.str();
         String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -160,7 +151,7 @@ public class Ui {
      * @param taskNum int index of task in the ArrayList
      * @throws DukeException when the task is not found in the list
      */
-    public void showMarkDone(TaskList tasks, int taskNum) throws DukeException {
+    public static void showMarkDone(TaskList tasks, int taskNum) throws DukeException {
         printer(stringMarkDone(tasks, taskNum));
     }
 
@@ -170,7 +161,7 @@ public class Ui {
      * @param tasks TaskList object to get the task
      * @throws DukeException when the task is not found in the list
      */
-    public void showMarkDone(ArrayList<Task> tasks) throws DukeException {
+    public static void showMarkDone(ArrayList<Task> tasks) throws DukeException {
         printer(stringMarkDone(tasks, false));
     }
 
@@ -182,7 +173,7 @@ public class Ui {
      * @return String representation of what the task looks like when its done
      * @throws DukeException when the task is not found in the list
      */
-    public String stringMarkDone(TaskList tasks, int taskNum) throws DukeException {
+    public static String stringMarkDone(TaskList tasks, int taskNum) throws DukeException {
         return Views.MARK_DONE_STRING.str() + tasks.get(taskNum);
     }
 
@@ -193,7 +184,7 @@ public class Ui {
      * @return String representation of what the task looks like when its done
      * @throws DukeException when the task is not found in the list
      */
-    public String stringMarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
+    public static String stringMarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
         if (tasks.size() == 1) {
             return Views.MARK_DONE_STRING.str() + stringListRaw(tasks, isGui);
         } else {
@@ -208,7 +199,7 @@ public class Ui {
      * @param taskNum int index of task in the ArrayList
      * @throws DukeException when the task is not found in the list
      */
-    public void showUnmarkDone(TaskList tasks, int taskNum) throws DukeException {
+    public static void showUnmarkDone(TaskList tasks, int taskNum) throws DukeException {
         printer(stringUnmarkDone(tasks, taskNum));
     }
 
@@ -218,7 +209,7 @@ public class Ui {
      * @param tasks TaskList object to get the task
      * @throws DukeException when the task is not found in the list
      */
-    public void showUnmarkDone(ArrayList<Task> tasks) throws DukeException {
+    public static void showUnmarkDone(ArrayList<Task> tasks) throws DukeException {
         printer(stringUnmarkDone(tasks, false));
     }
 
@@ -230,7 +221,7 @@ public class Ui {
      * @return String representation of when task is undone
      * @throws DukeException when the task is not found in the list
      */
-    public String stringUnmarkDone(TaskList tasks, int taskNum) throws DukeException {
+    public static String stringUnmarkDone(TaskList tasks, int taskNum) throws DukeException {
         return (Views.UNMARK_DONE_STRING.str() + tasks.get(taskNum));
     }
 
@@ -241,7 +232,7 @@ public class Ui {
      * @return String representation of when task is undone
      * @throws DukeException when the task is not found in the list
      */
-    public String stringUnmarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
+    public static String stringUnmarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
         if (tasks.size() == 1) {
             return Views.UNMARK_DONE_STRING.str() + stringListRaw(tasks, isGui);
         } else {
@@ -254,7 +245,7 @@ public class Ui {
      *
      * @param newTask new Task object to be printed
      */
-    public void showAdd(Task newTask) {
+    public static void showAdd(Task newTask) {
         printer(stringAdd(newTask));
     }
 
@@ -264,7 +255,7 @@ public class Ui {
      * @param newTask new Task object to be printed
      * @return String representation of new task added
      */
-    public String stringAdd(Task newTask) {
+    public static String stringAdd(Task newTask) {
         return "added: " + newTask;
     }
 
@@ -276,7 +267,7 @@ public class Ui {
      * @param task     TaskList object to get the count
      * @throws DukeException
      */
-    public void showDel(ArrayList<Task> delTasks, TaskList task) throws DukeException {
+    public static void showDel(ArrayList<Task> delTasks, TaskList task) throws DukeException {
         printer(stringDel(delTasks, task, false));
     }
 
@@ -287,7 +278,7 @@ public class Ui {
      * @param delTask task that is deleted
      * @param task    TaskList object to get the count
      */
-    public void showDel(Task delTask, TaskList task) {
+    public static void showDel(Task delTask, TaskList task) {
         printer(stringDel(delTask, task));
     }
 
@@ -299,7 +290,7 @@ public class Ui {
      * @param task    TaskList object to get the count
      * @return String representation of deleted task
      */
-    public String stringDel(Task delTask, TaskList task) {
+    public static String stringDel(Task delTask, TaskList task) {
         String returnString = Views.DELETE_DONE_STRING.str();
         returnString += delTask.toString();
         returnString += "\n      ";
@@ -318,7 +309,7 @@ public class Ui {
      * @return String representation of deleted task
      * @throws DukeException
      */
-    public String stringDel(ArrayList<Task> delTask, TaskList task, Boolean isGui) throws DukeException {
+    public static String stringDel(ArrayList<Task> delTask, TaskList task, Boolean isGui) throws DukeException {
         String returnString = Views.DELETE_DONE_STRING.str();
         if (delTask.size() > 1) {
             returnString = Views.DELETE_MANY_DONE_STRING.str();
@@ -332,43 +323,11 @@ public class Ui {
     }
 
     /**
-     * Prints out to user to show that the task has been cleared
-     */
-    public void showClear() {
-        printer(stringClear());
-    }
-
-    /**
-     * Prints out to user to show that the task has been cleared
-     *
-     * @return String representation of the task cleared
-     */
-    public String stringClear() {
-        return Views.CLEAR_LIST_STRING.str();
-    }
-
-    /**
-     * Prints out bye message
-     */
-    public static void showEnd() {
-        printer(stringEnd());
-    }
-
-    /**
-     * Returns out bye message
-     *
-     * @return String representation of exit message
-     */
-    public static String stringEnd() {
-        return Views.END_STRING.str();
-    }
-
-    /**
      * Prints the language the user has selected
      *
      * @param lang
      */
-    public void showSetLang(Languages lang) {
+    public static void showSetLang(Languages lang) {
         printer(stringSetLang(lang));
     }
 
@@ -378,14 +337,14 @@ public class Ui {
      * @param lang
      * @return String representation of set language
      */
-    public String stringSetLang(Languages lang) {
+    public static String stringSetLang(Languages lang) {
         return Views.SELECTED_LANG_STRING.str() + lang.toString();
     }
 
     /**
      * Prints the help message
      */
-    public void showHelp() {
+    public static void showHelp() {
         printer(stringHelp(false));
     }
 
@@ -394,7 +353,7 @@ public class Ui {
      *
      * @param command that the user want to know more about
      */
-    public void showHelp(Commands command) {
+    public static void showHelp(Commands command) {
         printer(stringHelp(command));
     }
 
@@ -404,7 +363,7 @@ public class Ui {
      * @param isGui format properly for GUI display vs CLI
      * @return String representation of help messages
      */
-    public String stringHelp(boolean isGui) {
+    public static String stringHelp(boolean isGui) {
         return Commands.helpMessages(isGui);
     }
 
@@ -414,14 +373,14 @@ public class Ui {
      * @param command that the user want to know more about
      * @return String representation of command help message
      */
-    public String stringHelp(Commands command) {
+    public static String stringHelp(Commands command) {
         return command.getExplanation();
     }
 
     /**
      * Prints the help message and inform user they didn't select
      */
-    public void showHelpError() {
+    public static void showHelpError() {
         printer(stringHelpError(false));
     }
 
@@ -431,7 +390,7 @@ public class Ui {
      * @param isGui format properly for GUI display vs CLI
      * @return String representation of set language
      */
-    public String stringHelpError(boolean isGui) {
+    public static String stringHelpError(boolean isGui) {
         return Views.CANNOT_FIND_STRING.str() + " " + Commands.helpMessages(isGui);
     }
 
@@ -440,7 +399,7 @@ public class Ui {
      *
      * @param err
      */
-    public void showError(String err) {
+    public static void showError(String err) {
         printer(err);
     }
 
@@ -449,7 +408,7 @@ public class Ui {
      *
      * @param err
      */
-    public void showError(Exception err) {
+    public static void showError(Exception err) {
         printer(err.getMessage());
     }
 
@@ -458,7 +417,7 @@ public class Ui {
      *
      * @param err
      */
-    public void showError(Error err) {
+    public static void showError(Error err) {
         printer(err.getMessage());
     }
 
@@ -468,7 +427,7 @@ public class Ui {
      * @param err
      * @return String representation of error
      */
-    public String stringError(String err) {
+    public static String stringError(String err) {
         return err;
     }
 
@@ -480,6 +439,15 @@ public class Ui {
      */
     public static String stringError(Exception err) {
         return err.getMessage();
+    }
+
+    /**
+     * Printer method to print with lines and indents
+     *
+     * @param view enum
+     */
+    public static void printer(Views view) {
+        printer(view.str());
     }
 
     /**

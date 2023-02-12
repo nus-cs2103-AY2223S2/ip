@@ -14,28 +14,26 @@ public class ListCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (tasks.isEmpty()) {
             throw new DukeException(Views.EMPTY_LIST_STRING);
         }
-        ui.showList(tasks);
+        Ui.showList(tasks);
     }
 
     /**
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @return returns the UI text instead of printing
      * @throws DukeException
      */
-    public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return ui.stringList(tasks, true, false);
+    public String executeString(TaskList tasks, Storage storage) throws DukeException {
+        return Ui.stringList(tasks, true, false);
     }
 
     /**

@@ -7,6 +7,8 @@ import java.util.Random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import duke.enums.Views;
+
 public class UiTest {
     @Test
     public void testPrintBye() {
@@ -17,8 +19,7 @@ public class UiTest {
         System.setOut(new PrintStream(outContent));
 
         // Test
-        Ui ui = new Ui();
-        ui.showEnd();
+        Ui.printer(Views.END_STRING);
 
         System.out.flush();
 
@@ -47,8 +48,7 @@ public class UiTest {
         System.setOut(new PrintStream(outContent));
 
         // Test
-        Ui ui = new Ui();
-        ui.showError(randomString);
+        Ui.showError(randomString);
 
         System.out.flush();
 

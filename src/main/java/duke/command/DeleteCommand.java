@@ -35,22 +35,21 @@ public class DeleteCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (taskNumbers.length == 1) {
             Task delTask = tasks.get(0);
             execute(tasks, storage, 0);
-            ui.showDel(delTask, tasks);
+            Ui.showDel(delTask, tasks);
         } else {
             ArrayList<Task> printTasks = new ArrayList<Task>();
             for (int taskNum : taskNumbers) {
                 printTasks.add(tasks.get(taskNum));
             }
-            execute(tasks, storage);
-            ui.showDel(printTasks, tasks);
+            executeMultiple(tasks, storage);
+            Ui.showDel(printTasks, tasks);
         }
     }
 
@@ -75,7 +74,7 @@ public class DeleteCommand extends Command {
      * @param taskNum task's number to operate on
      * @throws DukeException
      */
-    private void execute(TaskList tasks, Storage storage) throws DukeException {
+    private void executeMultiple(TaskList tasks, Storage storage) throws DukeException {
         // Assume array is sorted in ascending order, remove delete the items one at the
         // time from the back, so that the correct order of items are being removed
         for (int i = taskNumbers.length - 1; i >= 0; i--) {
@@ -88,23 +87,22 @@ public class DeleteCommand extends Command {
      * Executes the command
      *
      * @param tasks   TaskList object to get and set the list
-     * @param ui      object to reply to user after the command has executed
      * @param storage object required when command writes to file
      * @return returns the UI text instead of print[]ing
      * @throws DukeException
      */
-    public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeString(TaskList tasks, Storage storage) throws DukeException {
         if (taskNumbers.length == 1) {
             Task delTask = tasks.get(0);
             execute(tasks, storage, 0);
-            return ui.stringDel(delTask, tasks);
+            return Ui.stringDel(delTask, tasks);
         } else {
             ArrayList<Task> printTasks = new ArrayList<Task>();
             for (int taskNum : taskNumbers) {
                 printTasks.add(tasks.get(taskNum));
             }
             execute(tasks, storage);
-            return ui.stringDel(printTasks, tasks, true);
+            return Ui.stringDel(printTasks, tasks, true);
         }
     }
 

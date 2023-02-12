@@ -23,7 +23,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e);
+            Ui.showError(e);
             tasks = new TaskList();
         }
     }
@@ -50,19 +50,19 @@ public class Duke {
      * Runs the chatbot
      */
     public void run() {
-        ui.showWelcome();
+        Ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 if (e instanceof DukeException) {
-                    ui.showError(e);
+                    Ui.showError(e);
                 } else {
-                    ui.showError(Views.UNKNOWN_ERR_STRING.str());
+                    Ui.showError(Views.UNKNOWN_ERR_STRING.str());
                 }
             }
         }
@@ -87,6 +87,6 @@ public class Duke {
      */
     public String getResponse(String input) throws DukeException {
         Command c = Parser.parse(input);
-        return c.executeString(tasks, ui, storage);
+        return c.executeString(tasks, storage);
     }
 }
