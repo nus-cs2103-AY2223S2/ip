@@ -43,8 +43,7 @@ public class Event extends Task {
     public String printStartDateAndTime() {
         if (!start.contains(" ")) {
             return startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        }
-        else {
+        } else {
             return startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + startTime.getHour() + startTime.getMinute();
         }
     }
@@ -52,8 +51,7 @@ public class Event extends Task {
     public String printEndDateAndTime() {
         if (!end.contains(" ")) {
             return endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        }
-        else {
+        } else {
             return endDate.format(DateTimeFormatter.ofPattern("MMM dd  yyyy")) + ", " + endTime.getHour() + endTime.getMinute();
         }
     }
