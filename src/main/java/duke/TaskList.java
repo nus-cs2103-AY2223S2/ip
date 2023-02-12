@@ -37,6 +37,7 @@ public class TaskList {
      * @return The specified Task object from the list.
      */
     Task getTask(int taskNumber) {
+        assert taskNumber > 1 && taskNumber < numberOfTasks(): "Invalid task number";
         return tasks.get(taskNumber - 1);
     }
 

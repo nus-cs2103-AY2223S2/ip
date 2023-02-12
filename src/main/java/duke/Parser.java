@@ -29,6 +29,7 @@ public class Parser {
      * @throws DukeException Throws a DukeException if the input is invalid.
      */
     public String parseInput(String input) throws DukeException {
+        assert input != "": "Input cannot be empty";
         if (input.equals("bye")) {
             this.storage.save(taskList);
             return ui.goodbyeMessage();
@@ -85,9 +86,8 @@ public class Parser {
         try {
             deleteInputChecker(input);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
-            Task toDelete = taskList.getTask(taskNum);
             taskList.deleteTaskFromList(taskNum);
-            return ui.deletedTaskMessage(toDelete, taskList.numberOfTasks());
+            return ui.deletedTaskMessage(taskList.getTask(taskNum), taskList.numberOfTasks());
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
         }
