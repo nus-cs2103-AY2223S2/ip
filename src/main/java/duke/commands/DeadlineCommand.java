@@ -19,7 +19,7 @@ public class DeadlineCommand extends Command {
         try {
             this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date format in \"dd/mm/yyyy!\"");
+            throw new DukeException("Please enter a valid date format in \"dd/mm/yyyy hhmm!\"");
         }
     }
 

@@ -24,7 +24,7 @@ public class EventCommand extends Command {
                 throw new DukeException("The starting date of this event is after its ending date!");
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date format in \"dd/mm/yyyy!\"");
+            throw new DukeException("Please enter a valid date format in \"dd/mm/yyyy hhmm!\"");
         }
     }
 

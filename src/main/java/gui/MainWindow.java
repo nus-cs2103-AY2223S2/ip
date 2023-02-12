@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
         Image buttonImage = new Image(this.getClass().getResourceAsStream("/images/DaButton.png"),
                 16, 16, false, true);
         sendButton.setGraphic(new ImageView(buttonImage));
-        sendButton.setStyle("-fx-background-color: #93BFCF");
+        sendButton.setStyle("-fx-background-color: #EDDBC7; -fx-border-color: black");
     }
 
     public void sendGreeting() {

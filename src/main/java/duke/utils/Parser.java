@@ -109,7 +109,7 @@ public class Parser {
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("Sorry, that command is not recognised. \n"
-                    + "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
+                    + "P.S. Maybe you could contact @dsja612 on github to request for more types of commands...");
         }
     }
 }
