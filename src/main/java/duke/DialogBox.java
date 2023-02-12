@@ -38,6 +38,14 @@ public class DialogBox extends HBox {
         initStyle(text, img);
     }
 
+    Label getDialog() {
+        return dialog;
+    }
+
+    ImageView getDisplayPicture() {
+        return displayPicture;
+    }
+
     void initStyle(String text, Image img) {
         dialog.setText(text);
         dialog.getStyleClass().add("round-lbl");
