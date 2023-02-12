@@ -28,38 +28,7 @@ public class InitialWindow {
         stage.setScene(scene);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
         System.out.println("fxmlLoader " + fxmlLoader);
-        //fxmlLoader.<MainWindow>getController().setDuke(duke);
         stage.show();
     }
-
-
-    /*
-    @FXML
-    Button button;
-    */
-
-    /*
-    @FXML
-    private void handleUserInput() {
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene2 = new Scene(ap);
-            Stage stage = (Stage)((Node));
-            scene2.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
-            button.setOnAction(e -> ((Stage) scene2.getWindow()).setScene(scene2));
-
-            //bp.getChildren().
-            //Button button = scene2.lookup("#goButton");
-            //stage.setScene(scene2);
-            //stage.setTitle("Duke");
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            //stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    */
 
 }
