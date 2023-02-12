@@ -30,3 +30,9 @@ public class Main {
     }
 }
 ```
+
+```xml
+<foo>
+  <bar type="name">goo</bar>
+</foo>
+```
