@@ -37,7 +37,6 @@ public class EventTest {
         tempTask4.setDone();
         assertEquals("[E][X] Birthday(from: February 5, 2023 to: February 5, 2023)",
                 tempTask4.getTaskInfoStatus());
-        System.out.println("Passed 4/4 checks of marking tasks: Event.getTaskInfoStatus()");
     }
 
     /**
@@ -57,7 +56,6 @@ public class EventTest {
         tempTask4.setIncomplete();
         assertEquals("[E][ ] Birthday(from: February 5, 2023 to: February 5, 2023)",
                 tempTask4.getTaskInfoStatus());
-        System.out.println("Passed 4/4 checks of unmarking tasks: Event.getTaskInfoStatus()");
     }
 
     /**
@@ -77,7 +75,6 @@ public class EventTest {
         tempTask4.setDone();
         assertEquals("[E][X] Birthday/from 2023-02-05 /to 2023-02-05",
                 tempTask4.getTaskInfo());
-        System.out.println("Passed 4/4 checks of marking tasks: Event.getTaskInfo()");
     }
 
     /**
@@ -97,6 +94,5 @@ public class EventTest {
         tempTask4.setIncomplete();
         assertEquals("[E][ ] Birthday/from 2023-02-05 /to 2023-02-05",
                 tempTask4.getTaskInfo());
-        System.out.println("Passed 4/4 checks of unmarking tasks: Event.getTaskInfo()");
     }
 }

@@ -20,10 +20,8 @@ public class ToDoTest {
     public void getTaskInfoStatus() {
         tempTask.setDone();
         assertEquals("[T][X] borrow book", tempTask.getTaskInfoStatus());
-        System.out.println("Passed 1/1 check of marking tasks: ToDo.getTaskInfoStatus()");
         tempTask.setIncomplete();
         assertEquals("[T][ ] borrow book", tempTask.getTaskInfoStatus());
-        System.out.println("Passed 1/1 check of unmarking tasks: ToDo.getTaskInfoStatus()");
     }
 
     /**
@@ -33,9 +31,7 @@ public class ToDoTest {
     public void getTaskInfo() {
         tempTask.setDone();
         assertEquals("[T][X] borrow book", tempTask.getTaskInfo());
-        System.out.println("Passed 1/1 check of marking tasks: ToDo.getTaskInfo()");
         tempTask.setIncomplete();
         assertEquals("[T][ ] borrow book", tempTask.getTaskInfo());
-        System.out.println("Passed 1/1 check of unmarking tasks: ToDo.getTaskInfo()");
     }
 }
