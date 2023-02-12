@@ -21,13 +21,13 @@ public class Todo extends Task {
 
     @Override
     public String toData() {
-        String status = this.completed ? "1" : "0";
+        String status = this.isCompleted ? "1" : "0";
         return "T | " + status + " | " + this.task;
     }
 
     @Override
     public String toString() {
-        String statusIcon = this.completed ? "X" : " ";
+        String statusIcon = this.isCompleted ? "X" : " ";
         return "[T][" + statusIcon + "] " + this.getDescription();
     }
 }

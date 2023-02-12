@@ -37,14 +37,14 @@ public class Event extends Task {
         String fromDateData = fromDate[0] + " " + fromDate[1].replace(":", "");
         String[] toDate = this.to.toString().split("T");
         String toDateData = toDate[0] + " " + toDate[1].replace(":", "");
-        String status = this.completed ? "1" : "0";
+        String status = this.isCompleted ? "1" : "0";
 
         return "E | " + status + " | " + this.task + " | " + fromDateData + " | " + toDateData;
     }
 
     @Override
     public String toString() {
-        String statusIcon = this.completed ? "X" : " ";
+        String statusIcon = this.isCompleted ? "X" : " ";
 
         return "[E][" + statusIcon + "] " + this.getDescription();
     }

@@ -6,7 +6,7 @@ package duke.task;
 public abstract class Task {
 
     protected String task;
-    protected boolean completed;
+    protected boolean isCompleted;
 
     /**
      * Constructor to create new task
@@ -14,21 +14,21 @@ public abstract class Task {
      */
     public Task(String task) {
         this.task = task;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
      * Mark the task as complete
      */
     public void markComplete() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
      * Unmark the task to be incomplete
      */
     public void unmarkComplete() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public String getDescription() {
@@ -37,7 +37,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String statusIcon = completed ? "X" : " ";
+        String statusIcon = isCompleted ? "X" : " ";
         return "[" + statusIcon + "] " + this.task;
     }
 

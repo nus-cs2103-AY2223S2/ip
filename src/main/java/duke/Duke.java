@@ -27,7 +27,8 @@ public class Duke {
     }
 
     /**
-     * Constructor to instantiate duke.Duke bot.
+     * Constructor to instantiate Duke bot.
+     *
      * @param filePath path of local storage file.
      */
     public Duke(String filePath) {
@@ -39,7 +40,7 @@ public class Duke {
     }
 
     /**
-     * Function to run duke.Duke bot.
+     * Function to run Duke bot.
      */
     public void run() {
 
@@ -69,6 +70,7 @@ public class Duke {
 
     /**
      * Get response function for GUI.
+     *
      * @param request User's request.
      * @return Response after processing user's request.
      */
@@ -83,7 +85,7 @@ public class Duke {
     }
 
     /**
-     * Function to handle the user's request
+     * Function use to handle the user's request and return the response.
      */
     public void handleRequest() {
 
