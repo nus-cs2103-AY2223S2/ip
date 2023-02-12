@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Represents the abstract concept of a task. It implements Serializable such that it can be
  * stored in local storage with ease.
  */
-abstract public class Tasks implements Serializable {
+abstract public class Task implements Serializable {
 
     protected LocalDateTime time = null;
     private String content;
@@ -19,7 +19,7 @@ abstract public class Tasks implements Serializable {
      * @param content the content of the task.
      * @param is_Done whether the task is done.
      */
-    public Tasks(String content, boolean is_Done) {
+    public Task(String content, boolean is_Done) {
         this.content = content;
         this.is_Done = is_Done;
     }
@@ -37,7 +37,7 @@ abstract public class Tasks implements Serializable {
     }
 
     /**
-     * This method returns the string representation of whether a task is done.
+     * Returns the string representation of whether a task is done.
      * @return String representation of the task status.
      */
     //Credits: Copied from https://nus-cs2103-ay2223s2.github.io/website/schedule/week2/project.html

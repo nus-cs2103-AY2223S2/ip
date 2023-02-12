@@ -1,6 +1,6 @@
 package duke.command;
 import duke.task.TaskList;
-import duke.UI;
+import duke.UI.TextOutput;
 
 /**
  * Implements the find task functionality.
@@ -15,15 +15,15 @@ public class Find extends Commands{
      * Implements the find task functionality. If found, then prints out the list of tasks found; alert user otherwise.
      * @param tasks the list of tasks to search.
      */
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         String content = this.getCommandStorage();
         String[] substrings = content.split("find ");
         String item = substrings[1];
         TaskList foundTasks = tasks.findTask(item);
         if (foundTasks.getTaskCount() == 0) {
-            UI.noTaskFoundUI();
+            return TextOutput.makeTaskFoundString();
         } else {
-            UI.taskFoundUI(foundTasks);
+            return TextOutput.makeTaskFoundString(foundTasks);
         }
     }
 }

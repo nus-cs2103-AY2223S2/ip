@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 /**
  * Represents task of the type 'Event'.
  */
-public class Event extends Tasks {
+public class Event extends Task {
     private LocalDateTime from = null;
     private LocalDateTime to = null;
 
     /**
-     * Constructs a new Event instance with the given content, from_date and isDone state.
-     * It also stores the string data as a LocalDateTime object.
+     * Constructs a new Event instance with the given content, from_date and isDone state and
+     * stores the string data as a LocalDateTime object.
      * @param content The content of the event.
      * @param isDone Whether the task is completed.
      * @param from The starting time of the event.

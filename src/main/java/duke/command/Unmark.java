@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.UI;
+import duke.UI.TextOutput;
 
 /**
  * Marks a particular task in the task list as not done.
@@ -17,11 +17,11 @@ public class Unmark extends Commands {
      * @param tasks the task list to execute the command on.
      */
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         String content = this.getCommandStorage();
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
         taskNumber -= 1;
         tasks.markTask(taskNumber, false);
-        UI.markTaskUndone(tasks,taskNumber);
+        return TextOutput.makeMarkUndoneString(tasks,taskNumber);
     }
 }

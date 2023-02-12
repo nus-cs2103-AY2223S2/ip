@@ -1,6 +1,6 @@
 package duke.command;
 import duke.task.TaskList;
-import duke.UI;
+import duke.UI.TextOutput;
 /**
  * Implements echo functionality, which repeat the command that user gave.
  */
@@ -14,7 +14,7 @@ public class Echo extends Commands {
      * @param tasks List of tasks relevant to this command.
      */
     @Override
-    public void execute(TaskList tasks) {
-        UI.echoUI(tasks.toString());
+    public String execute(TaskList tasks) {
+        return TextOutput.makeEchoString(tasks.toString());
     }
 }

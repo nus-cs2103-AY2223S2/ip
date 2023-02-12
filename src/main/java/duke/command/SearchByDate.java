@@ -11,7 +11,7 @@ public class SearchByDate extends Commands {
     }
 
     @Override
-    public void execute(TaskList tasks) {
-        System.out.println(tasks.getTaskByTime(this.time).toString());
+    public String execute(TaskList tasks) {
+        return tasks.getTaskByTime(this.time).toString();
     }
 }

@@ -1,6 +1,6 @@
 package duke.command;
 import duke.task.*;
-import duke.UI;
+import duke.UI.TextOutput;
 
 /**
  * Executes the task creation commands stored in the command queue, by parsing the user input.
@@ -16,9 +16,9 @@ public class TaskCreationCommands extends Commands {
      * @param list the list of tasks to execute the commands on.
      */
     @Override
-    public void execute(TaskList list){
+    public String execute(TaskList list){
         String content = this.getCommandStorage();
-        Tasks task = null;
+        Task task = null;
         if (content.matches("^deadline\\s.*$")) {
             String back = content.substring(9);
             String[] substrings = back.split(" /by ");
@@ -36,6 +36,6 @@ public class TaskCreationCommands extends Commands {
             task = new Todo(desc, false);
         }
         list.addTask(task);
-        UI.addUI(task.toString(), list.getTaskCount());
+        return TextOutput.makeAddString(task.toString(), list.getTaskCount());
     }
 }

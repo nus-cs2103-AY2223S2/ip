@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.UI;
+import duke.UI.TextOutput;
+import duke.task.Task;
 
 /**
  * Implements the delete command.
@@ -17,11 +18,11 @@ public class Delete extends Commands{
      * @param list The list of tasks from which task needs to be deleted.
      */
     @Override
-    public void execute(TaskList list) {
+    public String execute(TaskList list) {
         String content = this.getCommandStorage();
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
-        taskNumber -= 1;
-        String deleted = list.deleteTask(taskNumber);
-        UI.removeUI(deleted);
+        taskNumber -= 1; //to get to the correct index in array
+        Task deletedTask = list.deleteTask(taskNumber);
+        return TextOutput.makeDeleteString(deletedTask, list.getTaskCount());
     }
 }

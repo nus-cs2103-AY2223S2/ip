@@ -7,7 +7,7 @@ import java.util.Locale;
 /**
  * Represents task of the type 'deadline'.
  */
-public class Deadline extends Tasks {
+public class Deadline extends Task {
     private LocalDateTime time = null;
 
     /**
@@ -26,7 +26,7 @@ public class Deadline extends Tasks {
     }
 
     /**
-     * This method returns the string representation of the Deadline object.
+     * Returns the string representation of the Deadline object.
      * @return String
      */
     @Override

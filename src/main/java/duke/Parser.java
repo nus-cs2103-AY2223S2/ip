@@ -15,7 +15,7 @@ import java.util.Locale;
  * arguments into the command queue.
  */
 public class Parser {
-    private static CommandQueue queue = new CommandQueue();
+    private static Commands command;
 
     /**
      * Creates a command according to the user input, parse it,
@@ -28,26 +28,25 @@ public class Parser {
         switch (input){
             default : {
                 if (input.matches("mark+ [0-9]+")) {
-                    queue.add(new Mark(input));
+                    Parser.command = new Mark(input);
                 } else if (input.matches("unmark+ [0-9]+")) {
-                    queue.add(new Unmark(input));
+                    Parser.command = new Unmark(input);
                 } else if (input.matches("delete+ [0-9]+")) {
-                    queue.add(new Delete(input));
+                    Parser.command = new Delete(input);
                 } else if (input.matches("find by date\\s.*$")) {
-                    System.out.println("test1");
                     String[] substrings = input.split(" date ");
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
                     format.withLocale(Locale.ENGLISH);
                     LocalDateTime time = LocalDateTime.parse(substrings[1], format);
-                    queue.add(new SearchByDate(time));
+                    Parser.command = new SearchByDate(time);
                 } else if (input.matches("find\\s.*$")){
-                    queue.add(new Find(input));
+                    Parser.command = new Find(input);
                 } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") || input.matches("^todo\\s.*$")) {
                     if (input.split(" ").length < 2) {
                         throw new InsufficientArguments("OOPS!!! The description of a " +
                                 input.split(" ")[0] + " cannot be empty.");
                     } else {
-                        queue.add(new TaskCreationCommands(input)); //if the command is a valid task creation command
+                        Parser.command = new TaskCreationCommands(input); //if the command is a valid task creation command
                     }
                 } else {
                     throw new UnknownCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -55,11 +54,11 @@ public class Parser {
                 break;
             }
             case "list": {
-                queue.add(new List(input));
+                Parser.command = new List(input);
                 break;
             }
             case "bye" : {
-                queue.add(new Bye());
+                Parser.command = new Bye();
                 break;
             }
         }
@@ -69,7 +68,7 @@ public class Parser {
      * Executes all commands waiting in the queue.
      * @param list the list of commands to execute.
      */
-    public static void executeQueue (TaskList list){
-        queue.executeQueue(list);
+    public static String execute (TaskList list){
+        return Parser.command.execute(list);
     }
 }

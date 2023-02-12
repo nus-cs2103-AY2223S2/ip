@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Duke;
 import duke.task.TaskList;
-import duke.UI;
+import duke.UI.TextOutput;
 
 /**
  * Implements the exit of the bot.
@@ -15,9 +15,8 @@ public class Bye extends Commands {
      * @param list of tasks.
      */
     @Override
-    public void execute(TaskList list) {
-        Duke.offBot = true;
-        UI.byeUI();
-        return;
+    public String execute(TaskList list) {
+        Duke.isBotOff = true;
+        return TextOutput.makeByeString();
     }
 }

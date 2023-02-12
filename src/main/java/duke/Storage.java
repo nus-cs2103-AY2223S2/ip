@@ -1,10 +1,10 @@
 package duke;
 
-import duke.task.Tasks;
+import duke.task.Task;
 import java.io.*;
 import java.util.ArrayList;
-import duke.UI;
-
+import duke.UI.TextOutput;
+import duke.task.TaskList;
 
 /**
  * Represents the local storage of task list.
@@ -22,15 +22,15 @@ public class Storage {
      * @param task The ArrayList of Tasks to store in the local hard disk.
      */
     //Credits: Adapted from CHATGPT
-    public void saveTasks(ArrayList<Tasks> task) {
+    public String saveTasks(ArrayList<Task> task) {
         try {
             FileOutputStream file = new FileOutputStream(this.fileName);
             ObjectOutputStream output = new ObjectOutputStream(file);
             output.writeObject(task);
             output.close();
-            UI.successfulSaveTask();
+            return TextOutput.makeSucessSaveString();
         } catch (IOException e) {
-            UI.unsuccessulSaveTask(e);
+            return TextOutput.makeUnsuccessSaveString(e);
         }
     }
 
@@ -39,17 +39,18 @@ public class Storage {
      * @return ArrayList of Tasks.
      */
     //Credits: Adapted from CHATGPT
-    public ArrayList<Tasks> loadTasks() {
+    public String loadTasks(TaskList list) {
         try {
             FileInputStream file = new FileInputStream(this.fileName);
             ObjectInputStream output = new ObjectInputStream(file);
-            ArrayList<Tasks> task = (ArrayList<Tasks>)output.readObject();
+            ArrayList<Task> task = (ArrayList<Task>)output.readObject();
             output.close();
-            UI.successfulLoadTask();
-            return task;
+            list.loadTasks(task);
+            return TextOutput.makeSuccessLoadString();
         } catch (IOException | ClassNotFoundException e) {
-            UI.unsucessfulLoadTask();
-            return new ArrayList<Tasks>();
+            ArrayList<Task> newTaskList = new ArrayList<Task>();
+            list.loadTasks(newTaskList);
+            return TextOutput.makeUnsuccessLoadString();
         }
     }
 }

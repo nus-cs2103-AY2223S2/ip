@@ -17,6 +17,9 @@ bin/
 *.jar
 *.exe
 
+*.log
+
+
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 

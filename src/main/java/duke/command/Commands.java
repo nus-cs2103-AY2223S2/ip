@@ -13,5 +13,5 @@ public abstract class Commands {
     public String getCommandStorage() {
         return this.commandStorage;
     };
-    public abstract void execute(TaskList list);
+    public abstract String execute(TaskList list);
 }

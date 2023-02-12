@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.UI;
+import duke.UI.TextOutput;
 
 /**
  * Displays the tasks in the current task list.
@@ -11,7 +11,7 @@ public class List extends Commands{
         this.setCommandStorage(str);
     }
     @Override
-    public void execute(TaskList tasks) {
-        UI.listTasks(tasks);
+    public String execute(TaskList tasks) {
+        return TextOutput.makeListTaskString(tasks);
     }
 }
