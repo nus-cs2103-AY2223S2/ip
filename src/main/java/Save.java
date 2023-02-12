@@ -132,13 +132,10 @@ public class Save {
             for (int i = 1; i < taskIndex; i++) {
                 undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
             }
-            System.out.println(undeletedTasks + "print 1");
             bufferedReader.readLine();
             for (int i = taskIndex; i <= taskList.size(); i++) {
                 undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
-                System.out.println(undeletedTasks + " print ex");
             }
-            System.out.println(undeletedTasks + " print 2");
             file.createNewFile();
             file1 = new FileWriter(file);
             buffer = new BufferedWriter(file1);
