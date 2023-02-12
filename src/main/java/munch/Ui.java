@@ -80,4 +80,6 @@ public class Ui {
     public static String erenMessage(String text) {
         return "Eren says: " + text;
     }
+
+    public static String wrongInputMessage() { return "Eren, I do not understand your request."; }
 }
