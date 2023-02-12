@@ -22,8 +22,10 @@ public class CommandAddTodo extends Command {
         Task todo = new Todo(description);
         tasks.addTask(todo);
         storage.save(tasks.getList());
-        return ui.formResponse("New todo added: " + todo
-                + String.format("\nThere are currently %d tasks.", tasks.getSize()));
+
+        String taskString = "New todo added: " + todo;
+        String lengthString = String.format("\nYou now have %s in the list.", tasks.getSize());
+        return ui.formResponse(taskString + lengthString);
     }
 
 }

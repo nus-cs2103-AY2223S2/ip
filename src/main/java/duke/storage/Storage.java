@@ -86,26 +86,26 @@ public class Storage {
      * @return The file
      */
     private File getFileWithAssurance(String directory, String filename) {
-        /** Load parent directories */
+        /* Loads parent directories */
         File dir = new File(directory);
 
-        /** Creates parent directories if necessary */
+        /* Creates parent directories if necessary */
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        /** Load file */
+        /* Loads file */
         File file = new File(directory + "/" + filename);
 
-        /** Creates file if necessary */
+        /* Creates file if necessary */
         try {
             if (file.createNewFile()) {
                 ui.print("No save file found. Creating new save...");
             } else {
-                ui.print("Save file loaded");
+                ui.print("Save file detected.");
             }
         } catch (IOException e) {
-            ui.print("Something went wrong while creating a new save");
+            ui.print("Something went wrong while creating a new save.");
         }
 
         return file;
@@ -118,7 +118,6 @@ public class Storage {
      * @return List of tasks from the save file
      */
     public List<Task> load() {
-        ui.printLoadingFile();
         File file = getFileWithAssurance(this.fileDirectory, this.fileName);
 
         try {
@@ -129,7 +128,7 @@ public class Storage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            ui.print("File not found");
+            ui.printFileNotFoundError();
         }
 
         return this.taskList;
@@ -147,9 +146,9 @@ public class Storage {
             }
 
             fw.close();
-            ui.printSavingFile();
+            ui.printFileSaved();
         } catch (IOException e) {
-            ui.print("Something went wrong while saving file");
+            ui.printFileSaveError();
         }
     }
 }

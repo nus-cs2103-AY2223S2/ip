@@ -28,7 +28,7 @@ public class CommandMark extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task markedTask = tasks.markTask(idx - 1, isDone);
         storage.save(tasks.getList());
-        return ui.formResponse("LeTask marked as " + (isDone ? "done: " : "undone: ")
-                + markedTask);
+        String response = "LeTask marked as " + (isDone ? "done: " : "undone: ") + markedTask;
+        return ui.formResponse(response);
     }
 }
