@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 /**
  * Base class for all tasks consisting of task details and status.

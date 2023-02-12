@@ -1,4 +1,6 @@
-package duke;
+package task;
+
+import duke.*;
 
 import java.time.format.DateTimeParseException;
 import java.util.LinkedList;

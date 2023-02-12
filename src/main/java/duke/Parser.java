@@ -1,6 +1,8 @@
 package duke;
 
 import command.*;
+import task.DukeKeyword;
+import task.TaskList;
 
 /**
  * Decodes the input base on the keyword the user input.

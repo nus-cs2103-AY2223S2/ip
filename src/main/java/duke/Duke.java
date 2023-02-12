@@ -1,5 +1,8 @@
 package duke;
 
+import task.DukeKeyword;
+import task.TaskList;
+
 import java.util.Scanner;
 
 /**

@@ -1,4 +1,6 @@
-package duke;
+package task;
+
+import task.Task;
 
 /**
  * ToDo is a type of task which consist of the task details only.

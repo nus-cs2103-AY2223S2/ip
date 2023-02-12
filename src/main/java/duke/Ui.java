@@ -1,5 +1,7 @@
 package duke;
 
+import task.Task;
+
 public class Ui {
     public static final String noKeywordMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String goodbyeMessage = "Good Riddance!!!";

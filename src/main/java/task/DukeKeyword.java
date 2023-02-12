@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 /**
  * Consists of keywords that the chat-bot recognise.

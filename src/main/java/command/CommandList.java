@@ -1,6 +1,6 @@
 package command;
 
-import duke.TaskList;
+import task.TaskList;
 
 /**
  * Command to see everything in the list.
