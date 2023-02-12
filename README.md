@@ -30,5 +30,3 @@ public class Main {
     }
 }
 ```
-
-The background color should be `#RRGGBB` for light mode and `#0d1117` for dark mode.
