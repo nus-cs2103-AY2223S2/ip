@@ -2,7 +2,6 @@ package duke;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -41,26 +40,40 @@ public class Duke {
     @FXML
     protected String getResponse(String input, List<Timeline> recurResponse) {
 
-        storage = new Storage();
-        storage.readFromFile();
-        this.taskList = storage.getTasks();
-        storage.createDirectory();
+        readFromMemory();
 
-        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(storeString);
+        ByteArrayOutputStream storeString = newPrintStream();
+
         PrintStream oldPrintStream = System.out;
-        System.setOut(printStream);
 
         ui = new Ui(input);
         taskList = ui.execute(taskList, recurResponse);
 
-        System.out.flush();
-        System.setOut(oldPrintStream);
+        resetPrintStream(oldPrintStream);
 
         storage.writeToFile(taskList.toString());
-        System.out.println("Store string " + storeString);
+        //System.out.println("Store string " + storeString);
         return storeString.toString();
 
+    }
+
+    void readFromMemory() {
+        storage = new Storage();
+        storage.readFromFile();
+        this.taskList = storage.getTasks();
+        storage.createDirectory();
+    }
+
+    ByteArrayOutputStream newPrintStream() {
+        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(storeString);
+        System.setOut(printStream);
+        return storeString;
+    }
+
+    void resetPrintStream(PrintStream oldPrintStream) {
+        System.out.flush();
+        System.setOut(oldPrintStream);
     }
 
     public static void main(String[] args) {

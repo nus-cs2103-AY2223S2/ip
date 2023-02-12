@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        //scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
         PrintStream oldPrintStream = System.out;
