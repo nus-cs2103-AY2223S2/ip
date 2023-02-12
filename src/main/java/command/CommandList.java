@@ -19,6 +19,10 @@ public class CommandList extends Command {
 
     @Override
     public String execute() {
+        return this.getAllItemIn(this.taskList);
+    }
+
+    private String getAllItemIn(TaskList taskList) {
         return taskList.toString();
     }
 }
