@@ -1,8 +1,8 @@
 package duke.interfaces;
 
-import duke.model.Task;
-
 import java.util.List;
+
+import duke.model.Task;
 
 /**
  * Model is an interface for the data model in the task management application.

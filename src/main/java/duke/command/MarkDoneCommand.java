@@ -9,10 +9,10 @@ import duke.view.TaskView;
  * Command to mark a task done.
  */
 public class MarkDoneCommand implements Command {
+    private static final String MARKED_DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     private final TaskModel taskModel;
     private final TaskView taskView;
     private final int taskIndex;
-    private static final String markedDoneMessage = "Nice! I've marked this task as done:\n";
 
     /**
      * Instantiates a command that marks the task at the specified index of the displayed tasks as done.
@@ -40,6 +40,6 @@ public class MarkDoneCommand implements Command {
             throw new CommandExecutionError("index cannot be negative");
         }
         this.taskModel.markTaskDone(taskView.getDisplayedTask(taskIndex));
-        taskView.showMessage(markedDoneMessage + taskModel.getTask(taskIndex).toString());
+        taskView.showMessage(MARKED_DONE_MESSAGE + taskModel.getTask(taskIndex).toString());
     }
 }

@@ -7,8 +7,8 @@ import duke.interfaces.View;
  * A command that causes Duke to exit when executed.
  */
 public class ByeCommand implements Command {
+    private static final String EXIT_MESSAGE = "See you on the other side, human. Don't forget to bring a spacesuit!";
     private final View taskView;
-    private static final String exitMessage = "See you on the other side, human. Don't forget to bring a spacesuit!";
 
     /**
      * Instantiates a command that causes Duke to exit when executed.
@@ -23,6 +23,6 @@ public class ByeCommand implements Command {
      */
     @Override
     public void execute() {
-        taskView.showMessage(exitMessage);
+        taskView.showMessage(EXIT_MESSAGE);
     }
 }

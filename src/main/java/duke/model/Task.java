@@ -1,7 +1,7 @@
 package duke.model;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * The `Task` class is a representation of a single task that can be either a `Deadline`, `Event` or `Todo`.
@@ -11,23 +11,23 @@ import java.io.Serializable;
  */
 public abstract class Task implements Serializable {
     private final String taskDescription;
-    private boolean taskDone;
+    private boolean isTaskDone;
     protected Task(String taskDescription) {
         this.taskDescription = taskDescription;
-        this.taskDone = false;
+        this.isTaskDone = false;
     }
 
     protected void markTaskDone() {
-        this.taskDone = true;
+        this.isTaskDone = true;
     }
 
     protected void markTaskUndone() {
-        this.taskDone = false;
+        this.isTaskDone = false;
     }
 
     @Override
     public String toString() {
-        if (this.taskDone) {
+        if (this.isTaskDone) {
             return "[X] " + this.taskDescription;
         } else {
             return "[ ] " + this.taskDescription;

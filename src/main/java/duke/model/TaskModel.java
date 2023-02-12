@@ -1,12 +1,16 @@
 package duke.model;
 
-import duke.interfaces.Model;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import duke.interfaces.Model;
 
 /**
  * The `TaskModel` class is responsible for managing the list of tasks.
@@ -15,6 +19,7 @@ import java.util.List;
  *
  * @author jayanth
  */
+
 public class TaskModel implements Model {
     private static final String taskStorePath = "./data/tasks.ser";
     private final String dataDirPath = "./data";
@@ -50,7 +55,6 @@ public class TaskModel implements Model {
             this.tasks = new ArrayList<>();
         }
     }
-
     /**
      * Write the task list to the tasksFile.
      */
@@ -64,7 +68,6 @@ public class TaskModel implements Model {
             throw new RuntimeException(e);
         }
     }
-
     /**
      * Create a todo (a task with only a description).
      * Also writes the task list to the file.
@@ -124,7 +127,7 @@ public class TaskModel implements Model {
     public List<Task> getTasksOn(LocalDateTime time) {
         // only deadlines and events
         List<Task> res = new ArrayList<>();
-        for (Task task: this.tasks) {
+        for (Task task : this.tasks) {
             if (task.isDueOn(time)) {
                 res.add(task);
             }
@@ -181,7 +184,7 @@ public class TaskModel implements Model {
      */
     public List<Task> findTasks(String subStr) {
         List<Task> res = new ArrayList<>();
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             if (task.descriptionContains(subStr)) {
                 res.add(task);
             }

@@ -1,12 +1,11 @@
 package duke.presenter;
 
-
 import duke.command.CommandFactory;
 import duke.command.exceptions.CommandExecutionError;
 import duke.exceptions.CommandException;
-import duke.interfaces.Presenter;
-import duke.interfaces.CommandEventListener;
 import duke.interfaces.Command;
+import duke.interfaces.CommandEventListener;
+import duke.interfaces.Presenter;
 import duke.model.TaskModel;
 import duke.presenter.exceptions.ParserError;
 import duke.view.TaskView;

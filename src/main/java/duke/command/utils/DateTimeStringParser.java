@@ -1,19 +1,18 @@
 package duke.command.utils;
 
-import duke.command.exceptions.InvalidParameterError;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.command.exceptions.InvalidParameterError;
+
 /**
  * A utility to parse datetime strings.
  */
 public class DateTimeStringParser {
-    public static final DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
-
+    public static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
     /**
      * Return a LocalDateTime instance with the date and time from the parsed dateTimeString.
      * Uses the defaultTime parameter for the instance if no time is supplied.

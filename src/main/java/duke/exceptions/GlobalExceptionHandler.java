@@ -6,7 +6,7 @@ import duke.view.TaskView;
  */
 public class GlobalExceptionHandler {
     private final TaskView taskView;
-    public GlobalExceptionHandler(duke.view.TaskView taskView){
+    public GlobalExceptionHandler(duke.view.TaskView taskView) {
         this.taskView = taskView;
     }
 

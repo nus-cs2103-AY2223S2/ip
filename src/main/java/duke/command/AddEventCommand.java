@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import duke.command.exceptions.InvalidParameterError;
 import duke.command.utils.DateTimeStringParser;
 import duke.interfaces.Command;
@@ -7,19 +10,17 @@ import duke.interfaces.View;
 import duke.model.Task;
 import duke.model.TaskModel;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 /**
  * Command to create event and add it to the task list.
  */
+
 public class AddEventCommand implements Command {
+    private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";
     private final TaskModel taskModel;
     private final View taskView;
     private final String todoDescription;
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
-    private static final String addedTaskMessage = "Got it. I've added this task:\n  ";
 
     /**
      * Instantiates a command that creates the event upon execution.
@@ -46,7 +47,7 @@ public class AddEventCommand implements Command {
     @Override
     public void execute() {
         Task newTask = this.taskModel.createTask(todoDescription, startTime, endTime);
-        taskView.showMessage(addedTaskMessage + newTask.toString()
-        + String.format("\nNow you have %d tasks in the list.", taskModel.getNumberOfTasks()));
+        taskView.showMessage(ADDED_TASK_MESSAGE + newTask.toString()
+            + String.format("\nNow you have %d tasks in the list.", taskModel.getNumberOfTasks()));
     }
 }

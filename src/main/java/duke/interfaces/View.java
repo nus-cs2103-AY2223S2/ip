@@ -1,14 +1,13 @@
 package duke.interfaces;
 
-import duke.model.Task;
-
 import java.util.List;
+
+import duke.model.Task;
 
 /**
  * View is an interface for the view component in the task management application.
  * It displays the tasks data and allows users to interact with the task list stored in the model.
  */
-
 public interface View {
     void showMessage(String string);
     /**

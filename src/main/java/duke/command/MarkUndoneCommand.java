@@ -8,10 +8,10 @@ import duke.view.TaskView;
  * Command to mark a task as undone.
  */
 public class MarkUndoneCommand implements Command {
+    private static final String MARKED_UNDONE_MESSAGE = "OK, I've marked this task as not done yet:\n";
     private final TaskModel taskModel;
     private final TaskView taskView;
     private final int taskIndex;
-    private static final String markedUndoneMessage = "OK, I've marked this task as not done yet:\n";
 
     /**
      * Instantiates a command that marks the task at the specified index of the displayed tasks as undone.
@@ -38,6 +38,6 @@ public class MarkUndoneCommand implements Command {
             throw new CommandExecutionError("index cannot be negative");
         }
         this.taskModel.markTaskUndone(taskView.getDisplayedTask(taskIndex));
-        taskView.showMessage(markedUndoneMessage + taskModel.getTask(taskIndex).toString());
+        taskView.showMessage(MARKED_UNDONE_MESSAGE + taskModel.getTask(taskIndex).toString());
     }
 }

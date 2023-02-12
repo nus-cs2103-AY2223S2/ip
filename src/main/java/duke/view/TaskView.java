@@ -1,9 +1,10 @@
 package duke.view;
-import duke.model.Task;
-import duke.interfaces.View;
 
 import java.util.List;
 import java.util.Scanner;
+
+import duke.interfaces.View;
+import duke.model.Task;
 
 /**
  * Class that handles displaying task model information to the user, and receiving user input.
@@ -23,8 +24,9 @@ public class TaskView implements View {
     public Task getDisplayedTask(int index) {
         return displayedTaskList.get(index);
     }
-
-    public int getNumDisplayedTasks() { return displayedTaskList.size(); };
+    public int getNumDisplayedTasks() {
+        return displayedTaskList.size();
+    }
 
     /**
      * Display a message to the user.
