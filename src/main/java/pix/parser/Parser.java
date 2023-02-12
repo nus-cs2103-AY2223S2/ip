@@ -61,15 +61,16 @@ public class Parser {
      * @throws PixException If no date given or if invalid date given.
      */
     public Command parseListDate(String[] commandArr) throws PixException {
+        String listDateErrorMessage = "Please enter a date.\n\n e.g. listdate 'yyyy-MM-dd'";
         if (commandArr.length <= 1) {
-            throw new PixException("Please enter a date.\n\n e.g. listdate 'yyyy-MM-dd'");
+            throw new PixException(listDateErrorMessage);
         }
         try {
             String dateString = commandArr[1];
             LocalDate date = LocalDate.parse(dateString);
             return new ListDateCommand(date);
         } catch (DateTimeParseException e) {
-            throw new PixException("Please enter a date.\n\n e.g. listdate 'yyyy-MM-dd'");
+            throw new PixException(listDateErrorMessage);
         }
     }
 
@@ -142,19 +143,22 @@ public class Parser {
      * @throws PixException If no description, due date or invalid format of date given.
      */
     public Command parseDeadline(String[] slashed) throws PixException {
+        boolean isNotValidLength = slashed.length != 2;
+        String deadlineErrorMessage = "Invalid format.\n\n"
+                + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'";
+        if (isNotValidLength) {
+            throw new PixException(deadlineErrorMessage);
+        }
         String description = removeCommand(slashed[0]);
         String dueDate = removeCommand(slashed[1]);
-        boolean isNotValidLength = slashed.length != 2;
         boolean isEmptyValue = description.isEmpty() || dueDate.isEmpty();
-        if (isNotValidLength || isEmptyValue) {
-            throw new PixException("Invalid format.\n\n"
-                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'");
+        if (isEmptyValue) {
+            throw new PixException(deadlineErrorMessage);
         }
         try {
             return new DeadlineCommand(description, dueDate);
         } catch (DateTimeParseException e) {
-            throw new PixException("Invalid format.\n\n"
-                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'");
+            throw new PixException(deadlineErrorMessage);
         }
     }
 
@@ -166,23 +170,25 @@ public class Parser {
      * @throws PixException If no description, eventStart date, eventEnd date, or invalid format of date given.
      */
     public Command parseEvent(String[] slashed) throws PixException {
+        boolean isNotValidLength = slashed.length != 3;
+        String eventErrorMessage = "Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
+                + "\n\ne.g. event 'description' / 'From' / 'To'";
+        if (isNotValidLength) {
+            throw new PixException(eventErrorMessage);
+        }
         String description = removeCommand(slashed[0]);
         String eventStart = removeCommand(slashed[1]);
         String eventEnd = removeCommand(slashed[2]);
-        boolean isNotValidLength = slashed.length != 3;
-        boolean isEmptyValue = slashed.length != 3
-                || description.isEmpty()
+        boolean isEmptyValue = description.isEmpty()
                 || eventStart.isEmpty()
                 || eventEnd.isEmpty();
-        if (isNotValidLength || isEmptyValue) {
-            throw new PixException("Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
-                    + "\n\ne.g. event 'description' / 'From' / 'To'");
+        if (isEmptyValue) {
+            throw new PixException(eventErrorMessage);
         }
         try {
             return new EventCommand(description, eventStart, eventEnd);
         } catch (DateTimeParseException e) {
-            throw new PixException("Invalid format.\n\nFrom and To formatted as 'yyyy-MM-dd HH-mm'"
-                    + "\n\ne.g. event 'description' / 'From' / 'To'");
+            throw new PixException(eventErrorMessage);
         }
     }
 
