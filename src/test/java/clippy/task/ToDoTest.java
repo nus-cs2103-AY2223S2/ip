@@ -1,10 +1,8 @@
 package clippy.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
 
@@ -20,6 +18,6 @@ public class ToDoTest {
     @Test
     void getCsvStringTest() {
         ToDo todo = createTestToDo();
-        assertEquals("T,read book,false",todo.getCsvString());
+        assertEquals("T,read book,false", todo.getCsvString());
     }
 }
