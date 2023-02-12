@@ -3,6 +3,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -28,6 +29,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/table.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mark.png"));
+
     /**
      * Bind the scrollPane height to the dialog container's height.
      */
@@ -52,12 +56,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Response response = duke.getResponse(input);
-        dialogContainer.getChildren().clear();
 
-        // Add new tasks to the container.
-        for (Task t: response.getTaskList().getTasks()) {
-            dialogContainer.getChildren().add(new Label(t.toString()));
-        }
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response.toString(), dukeImage)
+        );
 
         userInput.clear();
     }

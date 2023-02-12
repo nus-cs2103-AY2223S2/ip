@@ -22,7 +22,7 @@ public class Response {
 
     @Override
     public String toString() {
-        return message + '\n' + tasks.toString();
+        return message + '\n' + (tasks == null ? "" : tasks.toString());
     }
 
     /**

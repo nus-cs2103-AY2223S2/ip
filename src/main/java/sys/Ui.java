@@ -58,7 +58,7 @@ public class Ui {
             return output;
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            return new Response(e.getMessage(), tasks);
+            return new Response(e.getMessage(), null);
         }
     }
 
