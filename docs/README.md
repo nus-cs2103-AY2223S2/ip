@@ -4,10 +4,10 @@
 The Task Mechanic is here to help you with managing all your tasks!
 
 ## Contents
-1. [Features](https://github.com/RyanQiu1/ip/blob/master/docs/Ui.png)
-2. [Usage](https://github.com/RyanQiu1/ip/blob/master/docs/Ui.png)
-3. [Commands](https://github.com/RyanQiu1/ip/blob/master/docs/Ui.png)
-4. [Command Summary]()
+1. [Features](https://github.com/RyanQiu1/ip/tree/master/docs#features)
+2. [Usage](https://github.com/RyanQiu1/ip/tree/master/docs#usage)
+3. [Commands](https://github.com/RyanQiu1/ip/tree/master/docs#commands)
+4. [Command Summary](https://github.com/RyanQiu1/ip/tree/master/docs#command-summary)
 
 ## Features 
 
@@ -87,7 +87,6 @@ Diffcult tasks? Tag them!
 
 ![img_8.png](img_8.png)
 
-- 
 `bye`
 - To end the program.
 
