@@ -144,7 +144,12 @@ public class Duke extends Application {
      * @return String to inform the user that the specified task has been removed from the taskList
      */
     public static String removeFromList(int pos) {
-        Task curr = taskList.deleteTask(pos - 1);
+        Task curr = null;
+        try {
+            curr = taskList.deleteTask(pos - 1);
+        } catch (IndexOutOfBoundsException ie) {
+            return ie.getMessage();
+        }
         String result = "> Duke's response:\n" + "I've removed the following task from your list:\n";
         result += curr.toString() + "\nCurrent tasks count: " + (taskList.size()) +
                 "\n--------------------------------\n";

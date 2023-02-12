@@ -31,8 +31,8 @@ public class TaskList {
      * @param taskPosition Position of the task to be deleted
      * @return deleted Task
      */
-    public Task deleteTask(int taskPosition) {
-        return this.taskList.remove(taskPosition);
+    public Task deleteTask(int taskPosition) throws IndexOutOfBoundsException {
+            return this.taskList.remove(taskPosition);
     }
 
     /**
