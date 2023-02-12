@@ -58,7 +58,7 @@ public class Parser {
         } else if (isValidTask(str)) {
             tasks.addTask(str, storage);
         } else if (str.length() >= 6 && str.substring(0, 6).equals(DELETE)) {
-            tasks.deleteTask(Character.getNumericValue(str.charAt(7)));
+            tasks.deleteTask(Character.getNumericValue(str.charAt(7)), storage);
         } else if (str.length() >= 6 && str.substring(0, 6).equals(SEARCH)) {
             tasks.searchTask(str.substring(7));
         } else {

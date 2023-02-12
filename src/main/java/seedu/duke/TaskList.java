@@ -55,13 +55,19 @@ public class TaskList {
         }
     }
 
-    public void deleteTask(int taskNumber) {
+    public void deleteTask(int taskNumber, Storage storage) {
         assert taskNumber >= 0 : "taskNumber is non-negative";
         Task task = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
         Ui.indentedPrintln("Noted. I've removed this task:");
         Ui.indentedPrintln("  " + task);
         Ui.indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
+
+        try {
+            storage.writeTasksToFile(this);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void addTask(String command, Storage storage) {
