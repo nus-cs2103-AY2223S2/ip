@@ -8,9 +8,9 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" text="Label" wrapText="true">
+    <Label fx:id="dialog" minHeight="-Infinity" text="Label" textAlignment="JUSTIFY" wrapText="true">
          <font>
-            <Font size="12.0" />
+            <Font size="14.0" />
          </font>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
