@@ -36,10 +36,10 @@ public class Lele {
         }
     }
 
+
     /**
-     * The function that handles the parsing, storage
-     * and ui of Lele. Also handles the exceptions coming
-     * from Command.
+     * Handles running the program with the respective components.
+     * This function will catch checked exceptions thrown by the user.
      */
     public void run() {
         this.ui.welcome();
@@ -63,8 +63,7 @@ public class Lele {
 
 
     /**
-     * The main method. Initialises a Lele instance and
-     * starts up the cogwheel.
+     * The main method, initialises the program instance.
      *
      * @param args Takes in the command line argument.
      */

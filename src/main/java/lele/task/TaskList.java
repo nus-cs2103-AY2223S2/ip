@@ -142,8 +142,6 @@ public class TaskList {
      */
     public void markStatus(int index) {
         assert list.get(index - 1) == null : "Object called should be of type task.";
-        // Use an exception instead of assert to handle the code below
-        // assert list.contains(list.get(index - 1)) : "The task list should contain the task being marked.";
         cacheList();
         list.get(index - 1).markStatus(true);
     }

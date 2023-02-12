@@ -110,7 +110,6 @@ public class Storage {
      * @throws IOException An error when there's an issue with file writing.
      */
     public void updateStorage(TaskList tasklist) throws IOException {
-        // System.out.println("entered update storage");
         Task task;
         StringBuilder sb = new StringBuilder();
         FileWriter fw = new FileWriter(filePath);
@@ -118,7 +117,6 @@ public class Storage {
             task = value;
             assert task != null : "The current task list in storage shouldn't be empty";
             String taskName = task.getName();
-            // System.out.println("taskName: " + taskName);
             sb.append(taskName);
             sb.append("|");
             if (task.getStatusIcon().equals("X")) {
