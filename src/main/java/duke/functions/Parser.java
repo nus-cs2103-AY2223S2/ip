@@ -31,6 +31,9 @@ public class Parser {
             throws Missing, WrongKeyWord {
         String reply;
 
+        Task newTask = null;
+        String type = inputArr[0];
+
         if (inputArr[0].equals("bye")) {
             reply = "bye";
         } else if (inputArr[0].equals("find")) {
@@ -50,54 +53,53 @@ public class Parser {
             Task task = tasks.deleteTask(index);
             reply = task.removeTask();
 
-        } else if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
-            Task newTask = null;
-            String type = inputArr[0];
-
-            switch (type) {
-            case "todo":
-                input = input.replaceFirst("todo", "");
-                if (input.equals("")) {
-                    throw new Missing("");
-                }
-                newTask = new ToDo(input);
-                type = "T";
-                break;
-            case "deadline":
-                input = input.replaceFirst("deadline", "");
-                if (input.equals("")) {
-                    throw new Missing("");
-                }
-                String[] taskDate = input.split("/by ");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-                LocalDateTime dateTime = LocalDateTime.parse(taskDate[1], formatter);
-                String dateTimeString = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
-                input = taskDate[0] + "(by:" + dateTimeString + ")";
-                newTask = new Deadline(input);
-                type = "D";
-                break;
-            case "event":
-                input = input.replaceFirst("event", "");
-                if (input.equals("")) {
-                    throw new Missing("");
-                }
-                String[] taskDate2 = input.split("/from ");
-                String[] fromTo = taskDate2[1].split(" /to ");
-                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-                LocalDateTime fromDateTime = LocalDateTime.parse(fromTo[0], formatter2);
-                LocalDateTime toDateTime = LocalDateTime.parse(fromTo[1], formatter2);
-
-                String fromString = fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
-                String toString = toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
-                input = taskDate2[0] + "(from: " + fromString + " ";
-                input = input + "to: " + toString + ")";
-
-                newTask = new Event(input);
-                type = "E";
-                break;
-            default:
-                break;
+        } else if (inputArr[0].equals("todo")) {
+            input = input.replaceFirst("todo", "");
+            if (input.equals("")) {
+                throw new Missing("");
             }
+            newTask = new ToDo(input);
+            type = "T";
+
+            tasks.addTask(newTask);
+            reply = newTask.toString();
+            storage.writeToFile(input, type);
+
+        } else if (inputArr[0].equals("deadline")) {
+
+            input = input.replaceFirst("deadline", "");
+            if (input.equals("")) {
+                throw new Missing("");
+            }
+            String[] taskDate = input.split("/by ");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(taskDate[1], formatter);
+            String dateTimeString = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
+            input = taskDate[0] + "(by:" + dateTimeString + ")";
+            newTask = new Deadline(input);
+            type = "D";
+
+            tasks.addTask(newTask);
+            reply = newTask.toString();
+            storage.writeToFile(input, type);
+        } else if (inputArr[0].equals("event")) {
+            input = input.replaceFirst("event", "");
+            if (input.equals("")) {
+                throw new Missing("");
+            }
+            String[] taskDate2 = input.split("/from ");
+            String[] fromTo = taskDate2[1].split(" /to ");
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            LocalDateTime fromDateTime = LocalDateTime.parse(fromTo[0], formatter2);
+            LocalDateTime toDateTime = LocalDateTime.parse(fromTo[1], formatter2);
+
+            String fromString = fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
+            String toString = toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmma"));
+            input = taskDate2[0] + "(from: " + fromString + " ";
+            input = input + "to: " + toString + ")";
+
+            newTask = new Event(input);
+            type = "E";
 
             tasks.addTask(newTask);
             reply = newTask.toString();
