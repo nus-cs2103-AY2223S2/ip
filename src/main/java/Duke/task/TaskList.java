@@ -71,15 +71,19 @@ public class TaskList {
       arrayString.append(t.toString()).append(" ");
       arrayString.append(t.string);
       if(t instanceof Deadline) {
-        arrayString.append(" /by").append(" ").append(((Deadline) t).strTime);
+        arrayString.append(" /by").append(" ")
+            .append(((Deadline) t).strTime);
       }
       if(t instanceof Event) {
-        arrayString.append(" /from").append(" ").append(((Event) t).strStartTime)
-            .append(" ").append(" /to").append(" ").append(((Event) t).strEndTime);
+        arrayString.append(" /from").append(" ")
+            .append(((Event) t).strStartTime)
+            .append(" ").append(" /to").append(" ")
+            .append(((Event) t).strEndTime);
       }
       arrayString.append("\n");
-      if (t.mark) {
-        arrayString.append("mark ").append(tasks.indexOf(t) + 1).append("\n");
+      if (t.isMark) {
+        arrayString.append("mark ").
+            append(tasks.indexOf(t) + 1).append("\n");
       }
     }
     return arrayString.toString();

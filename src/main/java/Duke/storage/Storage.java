@@ -52,7 +52,8 @@ public class Storage {
   /**
    * method loads data from the file to return a taskList
    */
-  public TaskList loading() throws IOException, DontKnow, EmptyDescription, EmptyTime, NoSuchTask {
+  public TaskList loading() throws IOException,
+      DontKnow, EmptyDescription, EmptyTime, NoSuchTask {
     File filename = new File(filePath);
     InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
     BufferedReader br = new BufferedReader(reader);
@@ -74,12 +75,15 @@ public class Storage {
         }
         case DEADLINE: {
           if (strArr.length < 2) {
-            throw new EmptyDescription(new Deadline("", "2022-01-01 0000"));
+            throw new EmptyDescription(new Deadline("",
+                "2022-01-01 0000"));
           }
           if (strArrP.length < 2) {
-            throw new EmptyTime(new Deadline("", "2022-01-01 0000"));
+            throw new EmptyTime(new Deadline("",
+                    "2022-01-01 0000"));
           }
-          String[] division = info.substring(9).split(" /by ");
+          String[] division = info.substring(9).
+              split(" /by ");
           String input = division[0].trim();
           String time = division[1].trim();
           curTask = new Deadline(input, time);
