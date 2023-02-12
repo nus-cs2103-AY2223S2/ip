@@ -15,7 +15,7 @@ public class Ui {
      * Prints farewell message when user exits.
      */
     public String farewellMessage() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!!!";
     }
 }
 
