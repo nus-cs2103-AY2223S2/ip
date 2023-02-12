@@ -57,7 +57,7 @@ public class Parser {
      *
      * Marks that task as done with a cross.
      *
-     * @param taskNo The task number on the taskStorage object.
+     * @param input The task number on the taskStorage object.
      * @return The string to let the user know the task numbered at that list
      * is marked done.
      */
@@ -213,7 +213,6 @@ public class Parser {
      */
     public String execute(String inp) {
         String[] input = inp.split(" ");
-        boolean isExit = false;
         String response = "";
         switch(input[0]) {
             case "list":
