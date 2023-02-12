@@ -289,7 +289,7 @@ public class TaskList {
         }
     }
 
-    public String addEventTask(String taskDetails) throws DukeException {
+    public Task addEventTask(String taskDetails) throws DukeException {
 
         if (taskDetails.isBlank()) {
             throw new DukeException(Ui.emptyDetailsForEventMessage);
@@ -305,7 +305,7 @@ public class TaskList {
 
             Task newTask = new Event(taskInfo, taskStartDate, taskEndDate);
             storedInputs.add(newTask);
-            return newTask.getTaskDetails();
+            return newTask;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(Ui.eventTaskFormat);
         } catch (DateTimeParseException e) {
