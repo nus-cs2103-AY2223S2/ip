@@ -18,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 data/storage.txt
 data/storageTest(delete before each test).txt
 artifacts/ip_jar3/ip.jar
+artifacts/ip_jar2/duke.jar
