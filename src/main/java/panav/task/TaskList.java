@@ -33,7 +33,10 @@ public class TaskList {
      * Method to print all the tasks in the list.
      */
     public String printAllTasks() {
-        String text = "";
+        if (tasks.size() == 0) {
+            return "Your list is empty!";
+        }
+        String text = "Here are the tasks in your list:\n";
         for (Task task : this.tasks) {
             text += task + "\n";
         }
@@ -100,28 +103,45 @@ public class TaskList {
 
     /**
      * Method to print all tasks in the list which contain a particular word.
-     * @param keyWord the word to be searched.
+     * @param keyword the word to be searched.
+     * @return matching tasks.
      */
-    public String printTasksContainingKeyword(String keyWord) {
+    public String printTasksContainingKeyword(String keyword) {
         int counter = 0;
+        boolean hasNoMatchingTasks = true;
         String text = "Here are the matching tasks in your list:\n";
         for (Task task : this.tasks) {
-            if (task.toString().matches("(.*)" + keyWord + "(.*)")) {
+            String findablePart = task.findablePart();
+            if (findablePart.matches("(?i).*" + keyword + "(.*)")) {
                 counter++;
                 text += counter + "." + task + "\n";
+                hasNoMatchingTasks = false;
             }
+        }
+        if (hasNoMatchingTasks) {
+            return "There are no matching tasks in your list!";
         }
         return text;
     }
 
+    /**
+     * Method to print all tasks in the list which are of a specific type.
+     * @param keyword the word to be searched.
+     * @return matching tasks.
+     */
     public String findTasks(String keyword) {
         int counter = 0;
+        boolean hasNoMatchingTasks = true;
         String text = "Here are all the " + keyword + " tasks in your lists\n";
         for (Task task : this.tasks) {
             if (task.getCommand().compareTo(keyword) == 0) {
                 counter++;
                 text += counter + "." + task + "\n";
+                hasNoMatchingTasks = false;
             }
+        }
+        if (hasNoMatchingTasks) {
+            return "There are no matching tasks in your list!";
         }
         return text;
     }

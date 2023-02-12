@@ -27,6 +27,20 @@ public class Deadline extends Task {
         return Deadline.COMMAND_WORD;
     }
 
+    /**
+     * Method to get that just returns the String representation of the tasks
+     * containing just that part on which the 'find' command can search.
+     * For eg. a find command should not be able to search "find from" and then
+     * all the events are displayed. It should only be able to search the description and
+     * timeframes.
+     * @return searchable part of the string
+     */
+    @Override
+    public String findablePart() {
+        String findablePart = this.description + this.by;
+        return findablePart;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
