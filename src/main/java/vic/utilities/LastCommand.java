@@ -31,14 +31,14 @@ public class LastCommand {
      */
     public String undo(ArrayList<ITask> tasks) {
         String action = "";
-        if (type == ICommand.Type.Add) {
+        if (type == ICommand.Type.TODO) {
             action = "remove";
             tasks.remove(task);
-        } else if (type == ICommand.Type.Delete) {
+        } else if (type == ICommand.Type.DELETE) {
             action = "add back";
             tasks.add(task);
-        } else if (type == ICommand.Type.Mark || type == ICommand.Type.Unmark) {
-            action = "undo mark";
+        } else if (type == ICommand.Type.MARK || type == ICommand.Type.UNMARK) {
+            action = "undo";
 
             int index = tasks.indexOf(task);
             tasks.set(index, task);

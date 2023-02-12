@@ -56,26 +56,6 @@ public abstract class ITask implements Cloneable {
     }
 
 
-    /**
-     * Converts String command to enum TaskTypes
-     *
-     * @param cmd String command
-     */
-    public static ITask.TaskTypes convertTaskTypeCmdToEnum(String cmd) {
-        switch (cmd) {
-        case "todo":
-            return TaskTypes.ToDos;
-        case "deadline":
-            return TaskTypes.Deadlines;
-        case "event":
-            return TaskTypes.Events;
-        case "find":
-            return TaskTypes.Find;
-        default: return TaskTypes.Unknown;
-        }
-    }
-
-
 
     /**
      * Marks the task as done
@@ -110,7 +90,14 @@ public abstract class ITask implements Cloneable {
 
         return super.clone();
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ITask task = (ITask) obj;
+        return task.getId() == this.getId();
+    }
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

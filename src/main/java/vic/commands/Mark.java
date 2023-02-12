@@ -17,7 +17,7 @@ public class Mark extends ICommand {
     @Override
     public boolean run() throws DukeException {
 
-        ITask t = getParser().getTaskManager().mark(getParser().getIndex(), true);
+        ITask t = getParser().getTaskManager().mark(getParser().getIndex());
         setMsg("Nice! I've marked this task as done:\n" + t);
         return false;
     }

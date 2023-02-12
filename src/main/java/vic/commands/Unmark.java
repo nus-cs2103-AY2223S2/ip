@@ -16,7 +16,7 @@ public class Unmark extends ICommand {
     @Override
     public boolean run() throws DukeException {
 
-        ITask t = getParser().getTaskManager().mark(getParser().getIndex(), false);
+        ITask t = getParser().getTaskManager().unmark(getParser().getIndex());
         setMsg("OK, I've marked this task as not done yet:\n" + t);
         return false;
     }

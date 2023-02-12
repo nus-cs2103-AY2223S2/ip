@@ -72,7 +72,7 @@ public class TaskManager {
     public ITask remove(int index) throws DukeException {
 
         ITask task = tasks.remove(index);
-        updateLastTask(ICommand.Type.Delete, task);
+        updateLastTask(ICommand.Type.DELETE, task);
 
         storage.saveAll(tasks);
         return task;
@@ -101,8 +101,7 @@ public class TaskManager {
      * @param task the task to be added to the task list
      */
     public void add(ITask task) throws DukeException {
-        updateLastTask(ICommand.Type.Add, task);
-
+        updateLastTask(ICommand.Type.TODO, task);
         tasks.add(task);
         storage.saveAll(tasks);
     }
@@ -111,19 +110,27 @@ public class TaskManager {
      * Marks specific task
      *
      * @param index  the index of task
-     * @param isDone status of task
      */
-    public ITask mark(int index, boolean isDone) throws DukeException {
+    public ITask mark(int index) throws DukeException {
         ITask task = tasks.get(index);
 
+        updateLastTask(ICommand.Type.MARK, task);
+        task.markAsDone();
 
-        updateLastTask(ICommand.Type.Mark, task);
+        return task;
+    }
 
-        if (isDone) {
-            task.markAsDone();
-        } else {
-            task.markAsUndone();
-        }
+    /**
+     * Un-marks specific task
+     *
+     * @param index  the index of task
+     */
+    public ITask unmark(int index) throws DukeException {
+        ITask task = tasks.get(index);
+
+        updateLastTask(ICommand.Type.UNMARK, task);
+        task.markAsUndone();
+
         storage.saveAll(tasks);
 
         return task;

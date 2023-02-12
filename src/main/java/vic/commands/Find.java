@@ -19,8 +19,8 @@ public class Find extends ICommand {
         Object[] tasks = getParser().getTaskManager().find(getParser().getDescription());
         StringBuilder result = new StringBuilder();
         for (Object task : tasks) {
-            result.append(getParser().getTaskManager().getObjectIndex(task))
-                    .append(1).append(".").append(task.toString());
+            result.append(getParser().getTaskManager().getObjectIndex(task) + 1)
+                    .append(".").append(task.toString());
             result.append("\n");
         }
         setMsg(result.toString());

@@ -18,14 +18,7 @@ public class Todo extends ITask {
     public String toSaveFormat() {
         return "[T] " + " /content: " + super.toString();
     }
-    @Override
-    public boolean equals(Object obj) {
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        ITask task = (ITask) obj;
-        return task.getId() == this.getId();
-    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
