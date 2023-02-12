@@ -1,6 +1,5 @@
 package wessy;
 
-import wessy.Parser;
 import wessy.exceptions.MissingSpacingException;
 import wessy.exceptions.TimeSpecifierException;
 import wessy.exceptions.UnspecifiedTimeException;
@@ -8,23 +7,62 @@ import wessy.exceptions.int_exceptions.NotAnIntegerException;
 import wessy.exceptions.num_of_input_exceptions.MissingInputException;
 import wessy.exceptions.num_of_input_exceptions.TooManyInputException;
 
+/**
+ * UserInputChecker is a utility class that checks for all the formatting issues
+ * that could be possibly found in user input (except for the date time related
+ * one which will be checked by the Parser class).
+ */
 public class UserInputChecker {
-    // Check for "Missing space after command"
-    public static void checkSpacingAftCmd(String userInput, CmdType cmd) throws MissingSpacingException {
-        if (checkCmdsThatNeedInput(cmd) && (userInput.equals(cmd.toString()) || userInput.charAt(cmd.len()) != ' ')) {
+    /**
+     * Throws MissingSpaceException when there is a missing space after the
+     * first word, which is usually the command word, in the user input line.
+     * This method is only used for the "mark", "unmark", "delete", "todo",
+     * "deadline" and "event" commands.
+     *
+     * @param userInput The line of user input to be checked.
+     * @param cmd The specified command. Only accepts CmdType.TODO,
+     *            CmdType.DEADLINE, CmdType.EVENT, CmdType.MARK, CmdType.UNMARK,
+     *            and CmdType.DELETE.
+     * @throws MissingSpacingException If the space is missing after the command word.
+     */
+    public static void checkSpacingAftCmd(String userInput, CmdType cmd) throws
+            MissingSpacingException {
+        if (checkCmdsThatNeedInput(cmd) && (userInput.equals(cmd.toString()) ||
+                userInput.charAt(cmd.len()) != ' ')) {
             throw new MissingSpacingException(cmd.toString());
         }
     }
 
+    /**
+     * Throws MissingInputException if the commands that require some inputs
+     * (namely "todo", "deadline", "event", "mark", "unmark" and "delete") have
+     * missing input.
+     *
+     * @param userInput The line of user input to be checked.
+     * @param cmd The specified command. Only accepts CmdType.TODO,
+     *            CmdType.DEADLINE, CmdType.EVENT, CmdType.MARK, CmdType.UNMARK,
+     *            and CmdType.DELETE.
+     * @throws MissingInputException If the input after the command word is missing.
+     */
     // Check simpler missing input case (excluding "/by", "/from", "/to" keywords)
-    public static void checkForMissingInput(String userInput, CmdType cmd) throws MissingInputException {
+    public static void checkForMissingInput(String userInput, CmdType cmd) throws
+            MissingInputException {
         if (checkCmdsThatNeedInput(cmd) && isAllSpaces(userInput.substring(cmd.len()))) {
             throw new MissingInputException(cmd.toString());
         }
     }
 
-    // Check for existence of " /by ", " /from " or " /to "
-    public static void checkMissingKeyword(String userInput, CmdType cmd) throws TimeSpecifierException {
+    /**
+     * Throws TimeSpecifierException if the substring " /by" is missing for
+     * deadline command, or if the substring " /from" or " /to" is missing for event command.
+     *
+     * @param userInput The line of user input to be checked.
+     * @param cmd The specified command. Only accepts CmdType.DEADLINE and
+     *            CmdType.EVENT.
+     * @throws TimeSpecifierException If the required time specifier keyword is missing.
+     */
+    public static void checkMissingKeyword(String userInput, CmdType cmd) throws
+            TimeSpecifierException {
         TimeSpecifierException ex = null;
         if (cmd == CmdType.DEADLINE && !userInput.contains(" /by")) {
             ex = new TimeSpecifierException("/by");
@@ -40,12 +78,20 @@ public class UserInputChecker {
         }
     }
 
-    // Check deadline's missing input time
-    public static void checkForDeadlineMissingInput(String userInput, CmdType cmd) throws UnspecifiedTimeException {
+    /**
+     * Throws UnspecifiedTimeException if the "/by" time is not specified for
+     * the deadline command.
+     *
+     * @param userInput The line of user input to be checked.
+     * @throws UnspecifiedTimeException if the "/by" time input is missing for
+     * the deadline command.
+     */
+    public static void checkForDeadlineMissingInput(String userInput) throws
+            UnspecifiedTimeException {
         UnspecifiedTimeException ex = null;
         String keyword = "/by";
         int pos = userInput.indexOf(keyword);
-        if (isAllSpaces(userInput.substring(cmd.len(), pos))) {
+        if (isAllSpaces(userInput.substring("deadline".length(), pos))) {
             ex = new UnspecifiedTimeException(keyword, true);
         } else if (isAllSpaces(userInput.substring(pos + keyword.length()))) {
             ex = new UnspecifiedTimeException(keyword, false);
@@ -55,14 +101,22 @@ public class UserInputChecker {
         }
     }
 
-    // Check event's missing input time
-    public static void checkForEventMissingInput(String userInput, CmdType cmd) throws UnspecifiedTimeException {
+    /**
+     * Throws UnspecifiedTimeException if the "/from" or "/to" time is not
+     * specified for the event command.
+     *
+     * @param userInput The line of user input to be checked.
+     * @throws UnspecifiedTimeException if any of the time input is missing for
+     * the event command.
+     */
+    public static void checkForEventMissingInput(String userInput) throws
+            UnspecifiedTimeException {
         UnspecifiedTimeException ex = null;
         String fKeyword = "/from";
         int fPos = userInput.indexOf(fKeyword);
         String tKeyword = "/to";
         int tPos = userInput.indexOf(tKeyword);
-        if (isAllSpaces(userInput.substring(cmd.len(), fPos))) {
+        if (isAllSpaces(userInput.substring("event".length(), fPos))) {
             ex = new UnspecifiedTimeException(fKeyword, true);
         } else if (isAllSpaces(userInput.substring(fPos + fKeyword.length(), tPos))) {
             ex = new UnspecifiedTimeException(fKeyword, false);
@@ -74,21 +128,43 @@ public class UserInputChecker {
         }
     }
 
-    // For "mark", "unmark", "delete", check for non-numerical characters
-    public static void checkNotNumerical(String userInput, CmdType cmd) throws NotAnIntegerException {
+    /**
+     * Throws NotAnIntegerException when there are character in the String that
+     * is not a digit nor a space (" ").
+     *
+     * @param userInput The line of user input to be checked.
+     * @param cmd The specified command. Only accepts CmdType.MARK,
+     *            CmdType.UNMARK and CmdType.DELETE.
+     * @throws NotAnIntegerException If any invalid character is found in the String.
+     */
+    public static void checkNotNumerical(String userInput, CmdType cmd) throws
+            NotAnIntegerException {
         String str = userInput.substring(cmd.len());
         int n = str.length();
         for (int i = 0; i < n; i++) {
             char c = str.charAt(i);
             if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5'
-                    && c != '6' && c != '7' && c != '8' && c != '9' && c != ' ' && c != '-') {
+                    && c != '6' && c != '7' && c != '8' && c != '9' && c != ' '
+                    && c != '-') {
                 throw new NotAnIntegerException();
             }
         }
     }
 
-    // For "mark", "unmark", "delete", check for "Too many inputs" error
-    public static void checkTooManyInputs(String userInput, CmdType cmd) throws TooManyInputException {
+    /**
+     * Throws TooManyInputException when there are too many inputs after the
+     * first word (the command word). This method does so by checking is there
+     * any spacing in the rest of the user input line. Remember that the "mark",
+     * "unmark" and "delete" commands only accept one input.
+     *
+     * @param userInput The line of user input to be checked.
+     * @param cmd The specified command. Only accepts CmdType.MARK,
+     *            CmdType.UNMARK and CmdType.DELETE.
+     * @throws TooManyInputException If there are too many inputs after the
+     * command word.
+     */
+    public static void checkTooManyInputs(String userInput, CmdType cmd) throws
+            TooManyInputException {
         String str = Parser.removeSpacePadding(userInput.substring(cmd.len()));
         int n = str.length();
         for (int i = 0; i < n; i++) {
@@ -98,13 +174,25 @@ public class UserInputChecker {
         }
     }
 
-    // HELPER FUNC
+    /**
+     * A helper function to check is cmd CmdType.TODO, CmdType.DEADLINE,
+     * CmdType.EVENT, CmdType.MARK, CmdType.UNMARK or CmdType.DELETE.
+     *
+     * @param cmd The specified command.
+     * @return A boolean value indicating is the command todo, deadline, event,
+     * mark, unmark or delete.
+     */
     private static boolean checkCmdsThatNeedInput(CmdType cmd) {
         return (cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT ||
                 cmd == CmdType.MARK || cmd ==  CmdType.UNMARK || cmd == CmdType.DELETE);
     }
 
-    // HELPER FUNC
+    /**
+     * A helper function to check does str only consist of space (" ").
+     *
+     * @param str A String to be checked.
+     * @return A boolean value indicating does str only consist of space (" ").
+     */
     private static boolean isAllSpaces(String str) {
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) != ' ') {

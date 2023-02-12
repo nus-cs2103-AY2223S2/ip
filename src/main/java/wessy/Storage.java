@@ -1,6 +1,5 @@
 package wessy;
 
-import wessy.Parser;
 import wessy.task.Deadline;
 import wessy.task.Event;
 import wessy.task.ToDo;
@@ -15,10 +14,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ *
+ */
 public class Storage {
     private final String folderPath;
     private final String fileName;
 
+    /**
+     * Constructs an instance of Storage.
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         int lastIdx = filePath.lastIndexOf('/');
         if (lastIdx == -1) {
@@ -30,14 +37,29 @@ public class Storage {
         }
     }
 
+    /**
+     * Constructs an instance of Storage.
+     */
     public Storage() {
         this("data/savedTasks.txt");
     }
 
+    /**
+     *
+     *
+     * @return
+     */
     String getFullPath() {
         return folderPath + "/" + fileName;
     }
 
+    /**
+     *
+     *
+     * @return
+     * @throws SecurityException
+     * @throws IOException
+     */
     List<Task> load() throws SecurityException, IOException {
         List<Task> tasks = new ArrayList<Task>();
         File savedFile = new File(folderPath + "/" + fileName);
@@ -62,6 +84,14 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     *
+     *
+     * @param tasksAsStr
+     * @return
+     * @throws IOException
+     * @throws SecurityException
+     */
     void save(String tasksAsStr) throws IOException, SecurityException {
         // CREATE FOLDERS
         Path path = Paths.get(folderPath);

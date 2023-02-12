@@ -4,7 +4,19 @@ import wessy.exceptions.int_exceptions.NotPositiveIntegerException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser is a utility class that mainly processes the user input when "Wessy"
+ * first receives it. While it checks for some formats of the String, it
+ * delegates checking of the other formatting issues to UserInputChecker class.
+ */
 public class Parser {
+    /**
+     * Converts the first word in the line of user input, to the corresponding
+     * CmdType, if it is a valid command type.
+     *
+     * @param userInput The line which the user inputs.
+     * @return The corresponding CmdType, if the first word is a valid command.
+     */
     static CmdType getCmd(String userInput) {
         int idx = userInput.indexOf(' ');
         if (idx == -1) {
@@ -13,7 +25,18 @@ public class Parser {
         return CmdType.getCmdType(userInput.substring(0, idx));
     }
 
-    // Only for Deadline, Event & ToDo commands
+    /**
+     * Parses the line of user input and chunks it into the different components
+     * required to initialise a ToDo, Deadline or Event object. The components
+     * are possibly the task description, and the timings specified for the
+     * deadline task or the event.
+     *
+     * @param userInput The line which the user inputs.
+     * @param cmd The command specified, in the form of CmdType. It only accepts
+     *           CmdType.TODO, CmdType.DEADLINE and CmdType.EVENT.
+     * @return An array of Strings consisting of the components required to
+     * initialise a task.
+     */
     static String[] getTaskComponents(String userInput, CmdType cmd) {
         String byStr = "/by";
         String fromStr = "/from";
@@ -38,7 +61,17 @@ public class Parser {
         return new String[0];
     }
 
-    public static LocalDateTime parseDateTime(String str) throws DateTimeParseException {
+    /**
+     * Parses the input str and converts it into a LocalDateTime object.
+     *
+     * @param str The specified date and time as a String.
+     * @return A LocalDateTime object that is represented by str, in its String
+     * form.
+     * @throws DateTimeParseException If the format of str is wrong and thus
+     * cannot be parsed into a LocalDateTime object.
+     */
+    public static LocalDateTime parseDateTime(String str) throws
+            DateTimeParseException {
         str = removeSpacePadding(str);
         if (count(str, ':') == 2) {
             return LocalDateTime.parse(str);
@@ -62,6 +95,14 @@ public class Parser {
         return LocalDateTime.parse(parseDate(str.substring(0, idx)) + "T" + str.substring(idx + 1, idx + 3) + ":" + str.substring(idx + 3) + ":00");
     }
 
+    /**
+     * Counts the number of occurrence "target" appears in str.
+     *
+     * @param str The String we scan through while counting the number of
+     *            occurrence.
+     * @param target The character we look out for when scanning through str.
+     * @return The number of occurrence "target" appears in str.
+     */
     static int count(String str, char target) {
         int num = 0;
         for (int i = 0; i < str.length(); i++) {
@@ -72,7 +113,15 @@ public class Parser {
         return num;
     }
 
-    // Used in parseDateTime
+    /**
+     * Standardises format of date and time in str, by say making sure that the
+     * separator in the date is "-" instead of "/", making sure the date has 8
+     * digits. This is to prepare for the execution of parseDateTime(...).
+     *
+     * @param str The specified date and time in String form.
+     * @return A standardised String format of the specified date and time.
+     * @throws DateTimeParseException If str does not represent any date and time.
+     */
     static String parseDate(String str) throws DateTimeParseException {
         try {
             String[] components = str.split("-", 3);
@@ -93,15 +142,32 @@ public class Parser {
         }
     }
 
-    public static int parseInt(String userInput, CmdType cmd) throws NotPositiveIntegerException {
-        int num = Integer.parseInt(removeSpacePadding(userInput.substring(cmd.len())));
+    /**
+     * Removes the command word from the user input and then the space paddings
+     * on the 2 sides. Afterwards, converts the processed String into a integer
+     * using Integer.parseInt(...).
+     *
+     * @param userInput The String to be parsed to an integer.
+     * @param cmd The specified command.
+     * @return The integer to which the String is converted.
+     * @throws NotPositiveIntegerException If the output integer is not positive.
+     */
+    public static int parseInt(String userInput, CmdType cmd) throws
+            NotPositiveIntegerException {
+        int num = Integer.parseInt(removeSpacePadding(userInput.substring(
+                cmd.len())));
             if (num <= 0) {
                 throw new NotPositiveIntegerException();
             }
         return num;
     }
 
-    // HELPER FUNC
+    /**
+     * A helper function that removes the space paddings on the two ends of str.
+     *
+     * @param str The String to be processed.
+     * @return The shorter String after removing the space paddings on the two ends.
+     */
     public static String removeSpacePadding(String str) {
         int start = 0;
         while (str.charAt(start) == ' ') {
