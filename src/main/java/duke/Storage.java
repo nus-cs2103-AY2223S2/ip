@@ -13,6 +13,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * The method updates the task list in the filepath according to the latest command by the user.
+     *
+     * @param dukeList the task list being acted on by the user.
+     */
     public void writeToFile(ArrayList<Task> dukeList) {
         try {
             FileWriter writer = new FileWriter(filePath, false);
@@ -35,6 +40,12 @@ public class Storage {
         }
     }
 
+    /**
+     * The method reads the task list from the file stated in the declared filePath.
+     *
+     * @return the task list last saved by the user.
+     * @throws DukeException if there is an error creating the file
+     */
     public ArrayList<Task> readFile() throws DukeException {
         ArrayList<Task> dukeList = new ArrayList<>();
         File f = new File(filePath);

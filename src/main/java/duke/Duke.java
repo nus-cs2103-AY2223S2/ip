@@ -20,6 +20,9 @@ public class Duke {
         }
     }
 
+    /**
+     * This method is called in the main method, and it runs the chatbot.
+     */
     public void run() {
         ui.greetings();
         Scanner sc = new Scanner(System.in);

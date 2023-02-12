@@ -24,6 +24,12 @@ public class TaskList {
                 + " tasks in the list.");
     }
 
+    /**
+     * The method marks or unmarks a task in the task list based on the input given by the user.
+     * @param n the task number that the user wants to mark/unmark.
+     *
+     * @param isDone the boolean that decides whether to mark or unmark.
+     */
     public void mark(int n, boolean isDone) {
         Task t = dukeList.get(n);
         if (isDone) {
@@ -46,6 +52,9 @@ public class TaskList {
                 + " tasks in the list.");
     }
 
+    /**
+     * The method prints out all the tasks in the list.
+     */
     public void recite() {
         if (dukeList.size() == 0) {
             System.out.println("Your list is empty");

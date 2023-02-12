@@ -7,6 +7,12 @@ public class Parser {
         ui = new Ui();
     }
 
+    /**
+     * The method simply returns the case to use for the switch in the parse method.
+     *
+     * @param str the string that the user inputted.
+     * @return the string that defines the case.
+     */
     public static String getSwitch(String str) {
         if (str.equals("list")) {
             return "list";
@@ -37,6 +43,13 @@ public class Parser {
         return "na";
     }
 
+    /**
+     * The method makes sense of the command that the user has inputted and takes the
+     * necessary action.
+     *
+     * @param str is the string that the user inputted
+     * @param taskList is that list that will be acted on by the command.
+     */
     public static void parse(String str, TaskList taskList) {
         switch (getSwitch(str)) {
         case "list":
