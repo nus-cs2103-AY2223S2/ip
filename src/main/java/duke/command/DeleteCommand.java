@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
 
-        assert index > 0;
+        assert index >= 0;
 
         this.index = index;
     }
