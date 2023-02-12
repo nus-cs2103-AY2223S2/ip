@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 /**
  * User interface (Command line).
- * Manages input and output.
  */
 public class Cli implements Ui {
         private static final int MAX_LINE_LENGTH = 69;
@@ -27,9 +26,7 @@ public class Cli implements Ui {
                         + "                                      _|                             ";
 
         /**
-         * Prints string to System.in after formatting.
-         * 
-         * @param msg String to be formatted and printed.
+         * {@inheritDoc}
          */
         @Override
         public void showReply(String msg) {
@@ -45,11 +42,12 @@ public class Cli implements Ui {
         }
 
         /**
-         * Prints main welcome logo.
+         * {@inheritDoc}}
          */
         @Override
-        public void showWelcome() {
+        public Ui launch() {
                 System.out.println('\n' + LOGO);
+                return this;
         }
 
         /**
@@ -65,9 +63,7 @@ public class Cli implements Ui {
         }
 
         /**
-         * Gets input from System.in`
-         * 
-         * @return input line.
+         * {@inheritDoc}
          */
         @Override
         public String getInput() {

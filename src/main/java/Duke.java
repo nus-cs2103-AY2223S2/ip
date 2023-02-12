@@ -1,6 +1,6 @@
 import command.Command;
 import command.Error;
-import io.Cli;
+import io.Gui;
 import io.Storage;
 import io.Ui;
 import task.TaskList;
@@ -19,8 +19,7 @@ public class Duke {
      */
     public Duke(String filename) {
         this.storage = Storage.of(TaskList.class, filename);
-        this.ui = new Cli();
-        this.ui.showWelcome();
+        this.ui = new Gui().launch();
         this.taskList = this.storage.load().match(
                 taskList -> taskList,
                 error -> {
