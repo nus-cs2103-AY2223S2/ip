@@ -80,6 +80,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a string to let the user know the task numbered at that list
+     * is marked undone.
+     *
+     * Marks that task as undone without a cross.
+     *
+     * @param input The task number on the taskStorage object.
+     * @return The string to let the user know the task numbered at that list
+     * is marked undone.
+     */
     public String unMark(String[] input) {
         String response = "";
         int taskNoUnMark = Integer.parseInt(input[1]);
@@ -126,6 +136,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! The description of a deadline must have a date.");
             }
             String deadLineTaskStr = inputDeadline[0];
+            assert(inputDeadline[1].contains("by"));
             String end = inputDeadline[1].substring(3);
             Task deadLineTask = new Deadline(deadLineTaskStr, end);
             response = taskStorage.addTask(deadLineTask);
@@ -138,6 +149,7 @@ public class Parser {
 
     public String event(String inp) {
         String response = "";
+
         try {
             if (inp.length() == 6) {
                 throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
@@ -149,8 +161,10 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! The description of an event must have a start and end time.");
             }
             String eventTaskStr = eventStrsplit[0];
+            assert(eventStrsplit[1].contains("from"));
             String eventBegin = eventStrsplit[1].substring(5);
             eventBegin = eventBegin.substring(0, eventBegin.length() - 1);
+            assert(eventStrsplit[2].contains("to"));
             String eventEnd = eventStrsplit[2].substring(3);
             Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
             response = taskStorage.addTask(eventTask);
