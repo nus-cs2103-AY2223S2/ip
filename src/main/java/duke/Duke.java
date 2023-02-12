@@ -57,7 +57,7 @@ public class Duke  {
         try {
             Parser parser = new Parser(answer);
             int length = tasks.getLength();
-            if (answer.equals("bye")) {
+            if (answer.equals("save")) {
 
                 try {
                     storage.store(tasks);

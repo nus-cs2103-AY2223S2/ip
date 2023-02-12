@@ -26,7 +26,7 @@ public class Ui {
      * Prints out note after user inputs bye.
      */
     public String sayGoodbye() {
-        return "Byebye CATch you later! Content is saved.";
+        return "Content is saved! Enter exit to quit the program, CATch you later!";
     }
 
     /**
