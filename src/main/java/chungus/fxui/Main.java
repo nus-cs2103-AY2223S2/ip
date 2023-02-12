@@ -48,6 +48,7 @@ public class Main extends Application {
 
         primaryStage.setMinHeight(DEFAULT_H);
         primaryStage.setMinWidth(DEFAULT_W);
+        primaryStage.setTitle("Chungus");
         primaryStage.show();
     }
 
