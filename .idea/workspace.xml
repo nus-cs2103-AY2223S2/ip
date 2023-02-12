@@ -10,28 +10,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ddab3ad-c291-470d-becc-83d7dd94d3a1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/ip-shadow.tar" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/ip-shadow.tar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/ip-shadow.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/ip-shadow.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/ip.tar" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/ip.tar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/ip.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/ip.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/duke.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/duke.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Duke.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/ByeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/ByeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/DeleteCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/FindCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/ListCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/MarkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/MarkCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/UnmarkCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/UnmarkCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/tasklist/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/tasklist/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/commandtype/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/commandtype/CommandType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/dukeexception/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/dukeexception/DukeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/storage/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/storage/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Todo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

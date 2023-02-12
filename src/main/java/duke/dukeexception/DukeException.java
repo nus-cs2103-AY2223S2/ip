@@ -1,13 +1,14 @@
 package duke.dukeexception;
 
 /**
- * class that handles exceptions unique to the duke.Duke application
+ * Class that handles exceptions unique to the duke.Duke application
  */
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
     }
     /**
+     * Checks the validity of user input
      * @param inputLine a line of command entered by the user, to be checked if it is valid
      * @throws DukeException throws a customised exception message if the command input is not valid
      */

@@ -30,14 +30,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    public String getLoadStatus() {
-        return storage.getLoadStatus();
-    }
-
-    /**
-     * a function that runs the program by repeatedly accepting user input and respond to them until
-     * the user wants to exit the program.
-     */
+    /** gets the output message from a Command */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

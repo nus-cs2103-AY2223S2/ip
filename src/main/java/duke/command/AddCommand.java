@@ -23,7 +23,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * on execution, add the new Task to the TaskList
+     * Adds the new Task to the TaskList
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
         tasks.add(task);
         result = ui.changeToFormat("Task successfully added:\n    " + task);
         try {
-            storage.update(tasks);
+            storage.updateLocal(tasks);
         } catch (IOException e) {
             result += ("\nfailed to update tasks locally: " + e.getMessage());
         }

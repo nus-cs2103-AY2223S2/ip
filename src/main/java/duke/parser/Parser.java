@@ -20,11 +20,11 @@ import duke.task.Todo;
 
 
 /**
- * class that helps with interpreting user input
+ * Class that helps with interpreting user input
  */
 public class Parser {
     /**
-     * method that determines what command to run
+     * method Determines what command to run
      * @param inputLine a String input by the user
      * @return a Command depending on what the user has input
      * @throws DukeException if the input is not recognised
@@ -72,7 +72,7 @@ public class Parser {
     }
 
     /**
-     * public method to interpret user input time
+     * Interprets user input time
      * @param input a String representing time in the format dd-MM-yyyy HHmm
      * @return a LocalDateTime to be stored in the Task object
      */
@@ -83,7 +83,7 @@ public class Parser {
     }
 
     /**
-     * reverse the process of the previous method for easy storage of the tasks
+     * Reverses the process of the previous method for easy storage of the tasks
      * @param input a LocalDateTime stored by the Task object
      * @return a String representing the original user input time
      */

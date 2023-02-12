@@ -14,6 +14,13 @@ public class FindCommand extends Command {
         this.searchLine = searchLine;
     }
 
+    /**
+     * Finds all tasks containing the search phrase
+     * @param tasks TaskList from which we find the tasks of interest
+     * @param ui Ui for displaying messages in a unique way
+     * @param storage Storage for updating local tasks
+     * @return
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String result = ui.changeToFormat(tasks.find(searchLine));

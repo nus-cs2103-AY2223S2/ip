@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * on execution, delete the target task from the TaskList and print out customised message
+     * Deletes the target task from the TaskList and print out customised message
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
             result += e.getMessage();
         }
         try {
-            storage.update(tasks);
+            storage.updateLocal(tasks);
         } catch (IOException e) {
             result += ("\nfailed to update tasks locally: " + e.getMessage());
         }

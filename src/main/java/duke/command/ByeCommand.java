@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class ByeCommand extends Command {
     /**
-     * determines that user wants to exit the program
+     * Determines that user wants to exit the program
      * @return boolean: true
      */
     @Override
@@ -18,7 +18,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * on execution, prints goodbye message
+     * Prints goodbye message
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks

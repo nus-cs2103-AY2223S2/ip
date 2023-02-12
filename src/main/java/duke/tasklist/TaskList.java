@@ -42,16 +42,7 @@ public class TaskList {
     }
 
     /**
-     * method that returns a Task at a specific index
-     * @param taskNo index of the Task to be returned
-     * @return the Task at the index specified
-     */
-    public Task get(int taskNo) {
-        return tasks.get(taskNo - 1);
-    }
-
-    /**
-     * a method that marks a particular task as "Done"
+     * Marks a particular task as "Done"
      * @param taskNumber the number of the Task to be marked
      * @return the updated Task
      * @throws DukeException if the user wants to mark a Task that does not exist
@@ -83,7 +74,7 @@ public class TaskList {
     }
 
     /**
-     * a method that removes a Task from the list
+     * Removes a Task from the list
      * @param taskNumber the number of the Task to be removed
      * @return the removed Task
      * @throws DukeException if the user wants to remove a task that does not exist
@@ -97,7 +88,7 @@ public class TaskList {
         }
     }
     /**
-     * method used to find all tasks that contains the search phrase
+     * Finds all tasks that contains the search phrase
      * @param searchLine a String that is the phrase user is interested in
      * @return a String that represents all target tasks
      */
@@ -120,7 +111,7 @@ public class TaskList {
     }
 
     /**
-     * method that helps write the Tasks to the local hard drive
+     * Changes the format of the Task String to facilitate local storage
      * @return a String to be written to the local file containing all Tasks.
      */
     public String getWriteString() {

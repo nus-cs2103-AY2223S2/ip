@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * Command that handles marking a specific Task as done
  */
 public class MarkCommand extends Command {
-    private int taskNo;
+    private final int taskNo;
 
     /**
      * Constructor that takes in the number of the Task to be marked
@@ -22,7 +22,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * on execution, mark the target Task in the TaskList as done and print out customised message
+     * Marks the target Task in the TaskList as done and print out customised message
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
@@ -36,7 +36,7 @@ public class MarkCommand extends Command {
             return e.getMessage();
         }
         try {
-            storage.update(tasks);
+            storage.updateLocal(tasks);
         } catch (IOException e) {
             result += "failed to update tasks locally: " + e.getMessage();
         }
