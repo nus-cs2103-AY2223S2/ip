@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Class that deals with making sense of the user command
+ * Class that handles making sense of the user command
  */
 public class Parser {
     /**
