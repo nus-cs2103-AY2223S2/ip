@@ -39,10 +39,10 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            assert c != null : "command cannot be null";
+            assert c != null : "Command cannot be null";
 
             String response = c.execute(tasks, ui, storage);
-            assert response != null : "response cannot be null";
+            assert response != null : "Response cannot be null";
 
             return response;
         } catch (DukeException e) {
