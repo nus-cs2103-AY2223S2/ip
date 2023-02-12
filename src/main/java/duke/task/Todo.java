@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+
+import duke.DukeException;
+
 /**
  * Represents a Todo task.
  */
@@ -31,5 +35,16 @@ public class Todo extends Task {
     public String toSavedString() {
         return "T" + "|" + (super.isDone ? "1" : "0")
                 + "|" + super.description;
+    }
+
+    @Override
+    public void setComponent(TaskComponent component, Object detail) throws DukeException {
+        switch (component) {
+        case DESCRIPTION:
+            this.description = (String) detail;
+            break;
+        default:
+            throw new DukeException("TODO task does not have this component: " + component);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -38,5 +40,19 @@ public class Deadline extends Task {
     public String toSavedString() {
         return "D" + "|" + (super.isDone ? "1" : "0")
                 + "|" + super.description + "|" + this.by;
+    }
+
+    @Override
+    public void setComponent(TaskComponent component, Object detail) throws DukeException {
+        switch (component) {
+        case DESCRIPTION:
+            this.description = (String) detail;
+            break;
+        case BY:
+            this.by = (LocalDate) detail;
+            break;
+        default:
+            throw new DukeException("DEADLINE task does not have this component: " + component);
+        }
     }
 }
