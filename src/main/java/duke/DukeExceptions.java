@@ -14,7 +14,7 @@ public class DukeExceptions {
      */
     static void checkEmptyDescription(String[] command) throws EmptyDescriptionException {
         assert !command.equals(null);
-        if (command.length == 1 || (command[0].equals("deadline") && command[1].equals("/by")) 
+        if (command.length == 1 || (command[0].equals("deadline") && command[1].equals("/by"))
             || (command[0].equals("event") && (command[1].equals("/from") || command[1].equals("/to")))) {
             throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + command[0] + " cannot be empty");
         }
@@ -36,7 +36,7 @@ public class DukeExceptions {
      */
     static void checkCommand(String[] command) throws DontKnowWhatThatMeansException {
         assert !command.equals(null);
-        String[] commandArray = {"mark", "unmark", "todo", "delete", "deadline", 
+        String[] commandArray = {"mark", "unmark", "todo", "delete", "deadline",
             "event", "list", "bye", "find", "greet", "period"};
         boolean isValidCommand = false;
         for (int i = 0; i < commandArray.length; i++) {

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * UI deals with the interactions with the user, including starting the process,
- * adding tasks into the task list, removing the task from the task list, 
+ * adding tasks into the task list, removing the task from the task list,
  * marking and unmarking tasks, and exiting the process
  */
 public class UI {
@@ -81,7 +81,7 @@ public class UI {
     public String addTodo(TasksList list, String name) {
         assert !list.equals(null) && name.length() > 0;
         list.addTask(new Todo(name));
-        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString() 
+        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString()
             + "\n" + "Now you have " + list.getSize() + " task(s) in the list.";
     }
 
@@ -96,7 +96,7 @@ public class UI {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime formattedDeadline = LocalDateTime.parse(deadline, dateTimeFormatter);
         list.addTask(new Deadline(name, formattedDeadline));
-        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString() 
+        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString()
             + "\n" + "Now you have " + list.getSize() + " task(s) in the list.";
     }
 
@@ -113,7 +113,7 @@ public class UI {
         LocalDateTime formattedstartTime = LocalDateTime.parse(start, dateTimeFormatter);
         LocalDateTime formattedendTime = LocalDateTime.parse(end, dateTimeFormatter);
         list.addTask(new Event(name, formattedstartTime, formattedendTime));
-        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString() 
+        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString()
             + "\n" + "Now you have " + list.getSize() + " task(s) in the list.";
     }
 
@@ -149,7 +149,7 @@ public class UI {
         LocalDateTime formattedstartTime = LocalDateTime.parse(start, dateTimeFormatter);
         LocalDateTime formattedendTime = LocalDateTime.parse(end, dateTimeFormatter);
         list.addTask(new Period(description, formattedstartTime, formattedendTime));
-        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString() 
+        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString()
             + "\n" + "Now you have " + list.getSize() + " task(s) in the list.";
     }
 }

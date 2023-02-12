@@ -4,7 +4,7 @@ package duke;
  * Tasks is an object that is to be done or undertaken by the user
  */
 public class Tasks {
-    
+
     /**
      * description of the task
      */
@@ -70,7 +70,7 @@ public class Tasks {
      * Represents the task as a string
      * @return String that represents the task
      */
-    @Override 
+    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

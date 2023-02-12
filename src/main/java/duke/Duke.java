@@ -6,10 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -116,7 +116,6 @@ public class Duke extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-    
         userInput.setOnAction((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -132,7 +131,6 @@ public class Duke extends Application {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput(userInput, dialogContainer);
         });
-    
         userInput.setOnAction((event) -> {
             handleUserInput(userInput, dialogContainer);
         });
@@ -212,7 +210,7 @@ public class Duke extends Application {
      */
 
     public String response(UI ui, Storage storage, Parser parser, TasksList list, String command) {
-        assert !ui.equals(null) && !storage.equals(null) && !parser.equals(null) 
+        assert !ui.equals(null) && !storage.equals(null) && !parser.equals(null)
             && !list.equals(null) && command.length() > 0;
 
         String[] commandArr = command.split(" ");

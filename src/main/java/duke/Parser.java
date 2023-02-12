@@ -3,7 +3,7 @@ package duke;
 /**
  * Parser is a class that deals with making sense of the user command, this includes
  * getting the description of a certain task, getting the index from the mark, unmark and delete
- * commands, getting the deadline of a Deadline object and getting the start DateTime 
+ * commands, getting the deadline of a Deadline object and getting the start DateTime
  * and end DateTime of an Event Object
  */
 public class Parser {
@@ -36,7 +36,7 @@ public class Parser {
     /**
      * Returns a description of a Todo object
      * @param input todo command
-     * @return Description of the todo object 
+     * @return Description of the todo object
      */
     public String getTodoDescription(String input) {
         assert input.length() > 0;
@@ -86,7 +86,7 @@ public class Parser {
             String output = "";
             int fromIndex = input.indexOf("/from");
             assert fromIndex > -1;
-            output = input.substring(7, fromIndex-1);
+            output = input.substring(7, fromIndex - 1);
             return output;
         }
     }
@@ -130,11 +130,11 @@ public class Parser {
             String output = "";
             int fromIndex = input.indexOf("/between");
             assert fromIndex > -1;
-            output = input.substring(7, fromIndex-1);
+            output = input.substring(7, fromIndex - 1);
             return output;
         }
     }
-    
+
     /**
      * Returns the string of the starting date and time of the period task
      * @param input user command
