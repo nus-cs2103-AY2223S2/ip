@@ -7,7 +7,7 @@ import duke.exception.DukeException;
  */
 public class Parser {
     private enum CommandName {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
+        BYE, B, LIST, L, MARK, M, UNMARK, U, DELETE, D, TODO, T, DEADLINE, DL, EVENT, E, FIND, F
     }
 
     /**
@@ -24,30 +24,39 @@ public class Parser {
 
         switch(cn) {
         case BYE:
+        case B:
             return new ByeCommand(input);
 
         case LIST:
+        case L:
             return new ListCommand(input);
 
         case MARK:
+        case M:
             return new MarkCommand(input);
 
         case UNMARK:
+        case U:
             return new UnmarkCommand(input);
 
         case DELETE:
+        case D:
             return new DeleteCommand(input);
 
         case TODO:
+        case T:
             return new TodoCommand(input);
 
         case FIND:
+        case F:
             return new FindCommand(input);
 
         case DEADLINE:
+        case DL:
             return new DeadlineCommand(input);
 
         case EVENT:
+        case E:
             return new EventCommand(input);
 
         default:
