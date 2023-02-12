@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import duke.controllers.MainWindow;
-import duke.exceptions.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +23,7 @@ public class Duke extends Application {
     private TextUi textUi;
 
     /**
-     * A GUI for Duke using FXML.
+     * Starts the GUI for Duke.
      */
     @Override
     public void start(Stage stage) {
@@ -35,6 +34,10 @@ public class Duke extends Application {
         loadMainWindow(stage);
     }
 
+    /**
+     * Loads the Main Window.
+     * @param stage the Stage.
+     */
     private void loadMainWindow(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MAIN_WINDOW_FXML);
@@ -47,8 +50,9 @@ public class Duke extends Application {
             e.printStackTrace();
         }
     }
+
     /**
-     * Generates a response to user input.
+     * Returns a response to user input.
      * @return Response string.
      */
     public String getResponse(String input) {

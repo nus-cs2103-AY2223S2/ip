@@ -12,19 +12,19 @@
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane>
-        <Label fx:id="dialog" maxWidth="300.0" text="Label" textFill="WHITE" wrapText="true" AnchorPane.topAnchor="0.0">
+            <Label fx:id="dialog" maxWidth="300.0" text="Label" textFill="WHITE" wrapText="true" AnchorPane.topAnchor="0.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+            </Label>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
             <padding>
-                <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                <Insets top="15.0" />
             </padding>
-        </Label>
-        <HBox.margin>
-            <Insets />
-        </HBox.margin>
-        <padding>
-            <Insets top="10.0" />
-        </padding>
         </AnchorPane>
-    <ImageView fx:id="displayPicture" fitHeight="66.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="66.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
