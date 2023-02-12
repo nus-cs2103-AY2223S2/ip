@@ -13,11 +13,11 @@ public class Ui {
      * @return a start-up message
      */
     public static String welcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _       \n"
+                + "|  _ \\_   _| |   ___ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|____/ \\_,_|_|\\_\\___|\n";
 
         return ("Hello I'm \n" + logo + "What can I do for you?\n");
     }
@@ -34,6 +34,7 @@ public class Ui {
     /**
      * Displays sentence used in list command
      *
+     * @param input passes in a input of type string
      * @return a list of items
      */
     public String listMessage(String input) {

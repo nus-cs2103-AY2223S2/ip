@@ -27,10 +27,9 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/dan.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/miffy.jpeg"));
-
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/kanye.png"));
+    private Image warningImage = new Image(this.getClass().getResourceAsStream("/images/screaming.png"));
+    private Image passiveImage = new Image(this.getClass().getResourceAsStream("/images/grandma.png"));
 
     /**
      * Initializes the scroll pane and dialog container.
@@ -39,12 +38,13 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage)
+                DialogBox.getDukeDialog(Ui.welcomeMessage(), passiveImage)
         );
     }
 
+
     /**
-     * Set the current main class
+     * Sets the current main class
      *
      * @param d current Duke class
      */
@@ -60,6 +60,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String dukeResponse = duke.initialise(input);
+        Image dukeImage = duke.isNotAnInstruction() ? warningImage : passiveImage;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(dukeResponse, dukeImage)

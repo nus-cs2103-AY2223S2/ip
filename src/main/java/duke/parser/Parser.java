@@ -19,6 +19,8 @@ public class Parser {
     }
 
     /**
+     * Identifies command based on the input given by the user and executes it
+     *
      * @param input user command is passed in as String
      * @return command class of type Command
      * @throws TaskException returns an exception under TaskException class
