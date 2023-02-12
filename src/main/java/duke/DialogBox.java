@@ -55,7 +55,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getHelloMessage(Image img) {
-        return getDukeDialog("Hello, I'm Duke! How can I help you today?", img);
+        return getDukeDialog("SUP, I'm PokeBot! How can I help you today?", img);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
