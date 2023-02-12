@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+// @@author ShanHng-reused
+// Reused from https://se-education.org/guides/tutorials/javaFx.html, a CS2103T resource
 /**
  * A GUI for Duke using FXML.
  */
@@ -34,3 +36,4 @@ public class Main extends Application {
         }
     }
 }
+// @@author
