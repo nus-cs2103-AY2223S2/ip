@@ -1,6 +1,5 @@
 package wessy;
 
-import wessy.Parser;
 import wessy.exceptions.int_exceptions.EmptyListException;
 import wessy.exceptions.int_exceptions.InvalidIntegerException;
 import wessy.task.Deadline;
@@ -62,6 +61,17 @@ public class TaskList {
         tasks.clear();
     }
 
+    public String[] find(String target) {
+        target = Parser.removeSpacePadding(target);
+        List<Task> foundResults = new ArrayList<Task>();
+        for (Task task : tasks) {
+            if (task.toString().contains(target)) {
+                foundResults.add(task);
+            }
+        }
+        return printAsStr(foundResults).toArray(new String[foundResults.size()]);
+    }
+
     // Check for empty list exception
     public void checkEmptyList(CmdType cmd) throws EmptyListException {
         if (tasks.isEmpty()) {
@@ -100,5 +110,15 @@ public class TaskList {
             arr[i] = "" + (i + 1) + "." + tasks.get(i);
         }
         return arr;
+    }
+
+    // HELPER FUNCTION
+    private static List<String> printAsStr(List<Task> foundResults) {
+        int n = foundResults.size();
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < n; i++) {
+            list.add("" + (i + 1) + "." + foundResults.get(i));
+        }
+        return list;
     }
 }
