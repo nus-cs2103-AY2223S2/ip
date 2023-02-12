@@ -239,10 +239,10 @@ public class TaskList {
 
     }
 
-    public String markTask(String index) throws DukeException {
+    public Task markTask(String index) throws DukeException {
         try {
             //TODO: ignore index 0 of storedInputs
-            return storedInputs.get(Integer.parseInt(index)).markDone().getTaskDetails();
+            return storedInputs.get(Integer.parseInt(index)).markDone();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e.toString());
         }

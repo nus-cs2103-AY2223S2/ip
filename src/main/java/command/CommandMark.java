@@ -1,6 +1,7 @@
 package command;
 
 import duke.DukeException;
+import duke.Task;
 import duke.TaskList;
 import duke.Ui;
 
@@ -25,6 +26,15 @@ public class CommandMark extends Command {
 
     @Override
     public String execute() throws DukeException {
-        return Ui.getMarkMessageWithAttitude(this.taskList.markTask(this.index));
+        Task markedTask = this.markTaskAt(this.index);
+        return this.getConfirmationMessageOf(markedTask);
+    }
+
+    private Task markTaskAt(String index) throws DukeException {
+        return this.taskList.markTask(index);
+    }
+
+    private String getConfirmationMessageOf(Task markedTask) {
+        return Ui.getMarkMessageWithAttitude(markedTask);
     }
 }

@@ -16,8 +16,8 @@ public class Ui {
         return "\nNoted. I've purged this task:\n  " + taskRemoved.getTaskDetails();
     }
 
-    public static String getMarkMessageWithAttitude(String taskDetails) {
-        return "\nOK, I've marked this task as done:\n  " + taskDetails + "\n";
+    public static String getMarkMessageWithAttitude(Task markedTask) {
+        return "\nOK, I've marked this task as done:\n  " + markedTask + "\n";
     }
 
     public static String getUnMarkMessageWithAttitude(String taskDetails) {
