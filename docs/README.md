@@ -4,10 +4,10 @@
 The Task Mechanic is here to help you with managing all your tasks!
 
 ## Contents
-1. [Features](https://ryanqiu1.github.io/ip/#features)
-2. [Usage](https://ryanqiu1.github.io/ip/#usage)
-3. [Commands](https://ryanqiu1.github.io/ip/#commands)
-4. [Command Summary](https://ryanqiu1.github.io/ip/#command-summary)
+1. [Features](#features)
+2. [Usage](#usage)
+3. [Commands](#commands)
+4. [Command Summary](#command-summary)
 
 ## Features 
 
