@@ -74,8 +74,7 @@ public class Storage {
         try {
             List<String> commandsToWrite = new ArrayList<>();
             for (Task task : listOfTasks) {
-                String command = task.getTaskType() + "," + task.getStatusIcon() + "," + task.getDescription() + ","
-                        + task.getTimeline();
+                String command = formString(task);
                 commandsToWrite.add(command);
             }
             assert path != null;
@@ -84,5 +83,9 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("There is an error when writing to the file");
         }
+    }
+    private String formString(Task task) {
+        return task.getTaskType() + "," + task.getStatusIcon() + "," + task.getDescription() + ","
+                + task.getTimeline();
     }
 }

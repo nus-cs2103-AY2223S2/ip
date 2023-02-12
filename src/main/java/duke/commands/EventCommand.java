@@ -24,17 +24,23 @@ public class EventCommand extends Command {
     @Override
     public String handleCommand() {
         try {
-            String[] inputArgs = input.split(" ", 2);
-            inputArgs = inputArgs[1].split(" /from ", 2);
-            String description = inputArgs[0];
-            inputArgs = inputArgs[1].split(" /to ", 2);
-            String from = inputArgs[0];
-            String to = inputArgs[1];
-            Task currentTask = new Event(description, from, to);
-            listOfTasks.add(currentTask);
+            String[] inputArgs = splitArgs(input);
+            Task currentTask = new Event(inputArgs[0], inputArgs[1], inputArgs[2]);
+            listOfTasks.addTask(currentTask);
             return Ui.showAdd(this.listOfTasks, currentTask.toString());
         } catch (DateTimeException e) {
             return Ui.showError(e);
         }
+    }
+    
+    private String[] splitArgs(String input) {
+        String[] inputArgs = input.split(" ", 2);
+        inputArgs = inputArgs[1].split(" /from ", 2);
+        String description = inputArgs[0];
+        inputArgs = inputArgs[1].split(" /to ", 2);
+        String from = inputArgs[0];
+        String to = inputArgs[1];
+        String[] result = {description, from, to};
+        return result;
     }
 }
