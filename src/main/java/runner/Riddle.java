@@ -3,9 +3,9 @@ package runner;
 import task.Task;
 
 /**
- * Class for Duke.
+ * Class for Riddle.
  */
-public class Duke {
+public class Riddle {
     public final Storage storage;
     public final TaskList taskList;
     private final Parser parser;
@@ -13,9 +13,9 @@ public class Duke {
     private Task deletedTask;
 
     /**
-     * Constructor for a Duke object.
+     * Constructor for a Riddle object.
      */
-    public Duke() {
+    public Riddle() {
         this.taskList = new TaskList();
         this.storage = new Storage(taskList);
         this.parser = new Parser(this);
@@ -54,7 +54,7 @@ public class Duke {
 
     /**
      * @param input User input.
-     * @return Answer of Duke.
+     * @return Answer of Riddle.
      */
     public String getResponse(String input) {
         return parser.handle(input);

@@ -19,15 +19,15 @@ public class ParserTest {
 
     @Test
     public void readTest () {
-        Parser a = new Parser(new Duke());
-        a.read("dd");
+        Parser a = new Parser(new Riddle());
+        a.handle("dd");
         assertEquals("Not Smart to Understand -_-", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void readTest2 () {
-        Parser a = new Parser(new Duke());
-        a.read("mark 2");
+        Parser a = new Parser(new Riddle());
+        a.handle("mark 2");
         assertEquals("Index Out", outputStreamCaptor.toString().trim());
     }
 

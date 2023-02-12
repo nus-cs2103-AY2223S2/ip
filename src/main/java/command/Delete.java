@@ -1,18 +1,18 @@
 package command;
 
 import gui.Ui;
-import runner.Duke;
+import runner.Riddle;
 import task.Task;
 
 public class Delete {
-    private final Duke duke;
+    private final Riddle riddle;
 
     /**
      * Constructor for Delete.
-     * @param duke
+     * @param riddle
      */
-    public Delete(Duke duke) {
-        this.duke = duke;
+    public Delete(Riddle riddle) {
+        this.riddle = riddle;
     }
 
     /**
@@ -23,13 +23,13 @@ public class Delete {
     public String execute(String arg) {
         try {
             int index = Integer.parseInt(arg) - 1;
-            assert index < duke.taskList.size() : "Index Invalid";
-            Task temp = duke.taskList.getTask(index);
-            duke.taskList.remove(index);
-            duke.storage.saveList();
-            duke.updateDeleted(temp);
-            duke.updateInput("delete " + arg);
-            return Ui.deleteMSG(temp, duke.taskList.size());
+            assert index < riddle.taskList.size() : "Index Invalid";
+            Task temp = riddle.taskList.getTask(index);
+            riddle.taskList.remove(index);
+            riddle.storage.saveList();
+            riddle.updateDeleted(temp);
+            riddle.updateInput("delete " + arg);
+            return Ui.deleteMSG(temp, riddle.taskList.size());
         } catch (IndexOutOfBoundsException a) {
             return "OOPS!!! You can not delete air~";
         } catch (NumberFormatException b) {

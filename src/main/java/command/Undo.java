@@ -1,17 +1,17 @@
 package command;
 
 import gui.Ui;
-import runner.Duke;
+import runner.Riddle;
 
 public class Undo {
-    private final Duke duke;
+    private final Riddle riddle;
 
     /**
      * Constructor for Undo.
-     * @param duke
+     * @param riddle
      */
-    public Undo(Duke duke) {
-        this.duke = duke;
+    public Undo(Riddle riddle) {
+        this.riddle = riddle;
     }
 
     /**
@@ -19,7 +19,7 @@ public class Undo {
      * @return Message shown.
      */
     public String execute() {
-        String input = duke.getRecentInput();
+        String input = riddle.getRecentInput();
         if (input.equals("")) {
             return "Nothing needed to undo";
         }
@@ -29,16 +29,16 @@ public class Undo {
             String arg = segments[1];
             switch (first) {
                 case "mark":
-                    return new Unmark(this.duke).execute(arg);
+                    return new Unmark(this.riddle).execute(arg);
                 case "unmark":
-                    return new Mark(this.duke).execute(arg);
+                    return new Mark(this.riddle).execute(arg);
                 case "delete":
-                    duke.taskList.insert(duke.getDeletedTask(), Integer.parseInt(arg)-1);
-                    return Ui.addMSG(duke.getDeletedTask(), duke.taskList.size());
+                    riddle.taskList.insert(riddle.getDeletedTask(), Integer.parseInt(arg)-1);
+                    return Ui.addMSG(riddle.getDeletedTask(), riddle.taskList.size());
                 case "todo":
                 case "deadline":
                 case "event":
-                    return new Delete(duke).execute(Integer.toString(duke.taskList.size()));
+                    return new Delete(riddle).execute(Integer.toString(riddle.taskList.size()));
                 default:
                     return "OOPS!!! I don't know this command :-(";
             }

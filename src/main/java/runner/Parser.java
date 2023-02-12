@@ -6,14 +6,14 @@ import gui.Ui;
  * Parser to parse the command process the necessary actions.
  */
 public class Parser {
-    private final Duke duke;
+    private final Riddle riddle;
 
     /**
      * Constructor for Parser.
-     * @param duke a Duke chat-bot to work on.
+     * @param riddle a Riddle chat-bot to work on.
      */
-    public Parser(Duke duke) {
-        this.duke = duke;
+    public Parser(Riddle riddle) {
+        this.riddle = riddle;
     }
 
     /**
@@ -31,9 +31,9 @@ public class Parser {
             case"goodbye":
                 return Ui.ending();
             case "list":
-                return Ui.showList(duke.taskList, 1);
+                return Ui.showList(riddle.taskList, 1);
             case "undo":
-                return new Undo(duke).execute();
+                return new Undo(riddle).execute();
             default:
                 return "Not Smart to Understand -_-";
             }
@@ -44,17 +44,17 @@ public class Parser {
             String arg = segments[1];
             switch (first) {
             case "mark":
-                return new Mark(this.duke).execute(arg);
+                return new Mark(this.riddle).execute(arg);
             case "unmark":
-                return new Unmark(this.duke).execute(arg);
+                return new Unmark(this.riddle).execute(arg);
             case "todo":
             case "deadline":
             case "event":
-                return new Add(this.duke).execute(first, arg);
+                return new Add(this.riddle).execute(first, arg);
             case "delete":
-                return new Delete(this.duke).execute(arg);
+                return new Delete(this.riddle).execute(arg);
             case "find":
-                return new Find(this.duke).execute(arg);
+                return new Find(this.riddle).execute(arg);
             default:
                 return "OOPS!!! I'm sorry, but I don't know what that means :-(";
             }

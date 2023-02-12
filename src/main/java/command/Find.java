@@ -1,19 +1,19 @@
 package command;
 
 import gui.Ui;
-import runner.Duke;
+import runner.Riddle;
 import runner.TaskList;
 import task.Task;
 
 public class Find {
-    private final Duke duke;
+    private final Riddle riddle;
 
     /**
      * Constructor for Find.
-     * @param duke
+     * @param riddle
      */
-    public Find(Duke duke) {
-        this.duke = duke;
+    public Find(Riddle riddle) {
+        this.riddle = riddle;
     }
 
     /**
@@ -23,7 +23,7 @@ public class Find {
      */
     public String execute(String key) {
         TaskList ans = new TaskList();
-        for (Task tk : duke.taskList.getList()) {
+        for (Task tk : riddle.taskList.getList()) {
             if (tk.getMSG().contains(key)) {
                 ans.add(tk);
             }

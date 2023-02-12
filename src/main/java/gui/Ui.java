@@ -11,7 +11,7 @@ public class Ui {
      * @returns Greeting.
      */
     public static String start() {
-        return "Hello! I'm Duke\nWhat can I do for you?\n" ;
+        return "Hello! I'm Riddle\nWhat can I do for you?\n" ;
     }
 
     /**

@@ -1,7 +1,7 @@
 package command;
 
 import gui.Ui;
-import runner.Duke;
+import runner.Riddle;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -10,14 +10,14 @@ import task.Todo;
 import java.time.format.DateTimeParseException;
 
 public class Add {
-    private final Duke duke;
+    private final Riddle riddle;
 
     /**
      * Constructor for Add.
-     * @param duke
+     * @param riddle
      */
-    public Add(Duke duke) {
-        this.duke = duke;
+    public Add(Riddle riddle) {
+        this.riddle = riddle;
     }
 
     /**
@@ -45,10 +45,10 @@ public class Add {
      */
     public String addTodo(String action) {
         Task t = new Todo(action);
-        duke.taskList.add(t);
-        duke.storage.saveList();
-        duke.updateInput("todo " + action);
-        return Ui.addMSG(t, duke.taskList.size());
+        riddle.taskList.add(t);
+        riddle.storage.saveList();
+        riddle.updateInput("todo " + action);
+        return Ui.addMSG(t, riddle.taskList.size());
     }
 
 
@@ -62,10 +62,10 @@ public class Add {
             String msg = s.split("/by ", 2)[0];
             String by = s.split("/by ", 2)[1];
             Task d = new Deadline(msg, by);
-            duke.taskList.add(d);
-            duke.storage.saveList();
-            duke.updateInput("deadline " + s);
-            return Ui.addMSG(d, duke.taskList.size());
+            riddle.taskList.add(d);
+            riddle.storage.saveList();
+            riddle.updateInput("deadline " + s);
+            return Ui.addMSG(d, riddle.taskList.size());
         } catch (DateTimeParseException e) {
             return "Date Unacceptable (YYYY-MM-DD PLZ)";
         }
@@ -82,9 +82,9 @@ public class Add {
         String from = time.split("/to")[0];
         String to = time.split("/to")[1];
         Task e = new Event(event, from, to);
-        duke.taskList.add(e);
-        duke.storage.saveList();
-        duke.updateInput("event " + s);
-        return Ui.addMSG(e, duke.taskList.size());
+        riddle.taskList.add(e);
+        riddle.storage.saveList();
+        riddle.updateInput("event " + s);
+        return Ui.addMSG(e, riddle.taskList.size());
     }
 }

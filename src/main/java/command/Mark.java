@@ -1,17 +1,17 @@
 package command;
 
 import gui.Ui;
-import runner.Duke;
+import runner.Riddle;
 
 public class Mark {
-    private final Duke duke;
+    private final Riddle riddle;
 
     /**
      * Constructor for Mark.
-     * @param duke
+     * @param riddle
      */
-    public Mark(Duke duke) {
-        this.duke = duke;
+    public Mark(Riddle riddle) {
+        this.riddle = riddle;
     }
 
     /**
@@ -22,11 +22,11 @@ public class Mark {
     public String execute(String arg) {
         try {
             int index = Integer.parseInt(arg) - 1;
-            assert index < duke.taskList.size() : "Index Invalid";
-            duke.taskList.getTask(index).complete();
-            duke.storage.saveList();
-            duke.updateInput("mark " + arg);
-            return Ui.markMSG(duke.taskList.getTask(index));
+            assert index < riddle.taskList.size() : "Index Invalid";
+            riddle.taskList.getTask(index).complete();
+            riddle.storage.saveList();
+            riddle.updateInput("mark " + arg);
+            return Ui.markMSG(riddle.taskList.getTask(index));
         } catch (IndexOutOfBoundsException e) {
             return "Index Out";
         }
