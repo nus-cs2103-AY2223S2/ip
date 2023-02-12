@@ -22,7 +22,7 @@ public class Main extends Application {
 
             stage.setScene(scene);
             stage.setTitle("Duke");
-            
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

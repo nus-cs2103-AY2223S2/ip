@@ -87,33 +87,6 @@ class Ui {
         return this.tasks;
     }
 
-    /*
-    TaskList<Task> execute(TaskList<Task> tasks, String description) {
-        if (description.equals(Parser.SHOW_TASKS)) {
-            this.tasks = tasks.listAllTasks();
-        } else if (description.equals(Parser.TERMINATE)) {
-            Parser.exit();
-        } else if (description.equals(Parser.MARK)) {
-            this.tasks = Parser.mark(scanner, tasks);
-        } else if (description.equals(Parser.UNMARK)) {
-            this.tasks = Parser.unmark(scanner, tasks);
-        } else if (description.equals(Parser.TODO)) {
-            this.tasks = Parser.toDo(scanner, tasks);
-        } else if (description.equals(Parser.DEADLINE)) {
-            this.tasks = Parser.deadline(scanner, tasks);
-        } else if (description.equals(Parser.EVENT)) {
-            this.tasks = Parser.events(scanner, tasks);
-        } else if (description.equals(Parser.DELETE)) {
-            this.tasks = Parser.delete(scanner, tasks);
-        } else if (description.equals(Parser.FIND)) {
-            this.tasks = Parser.find(scanner, tasks);
-        } else {
-            dukeExceptionWarning(description, tasks);
-        }
-        return this.tasks;
-    }
-     */
-
     /**
      * Checks the user input against a list of invalid commands
      * (blacklist). If the input is blacklisted, a new DukeUnknownException
@@ -138,6 +111,5 @@ class Ui {
         } catch (DukeUnknownException e) {
             System.out.println(Parser.ILLEGAL_COMMAND);
         }
-        //return tasks;
     }
 }
