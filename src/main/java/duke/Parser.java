@@ -5,6 +5,7 @@ import duke.Command.Command;
 import duke.Command.DeadlineCommand;
 import duke.Command.DeleteCommand;
 import duke.Command.EventCommand;
+import duke.Command.FindCommand;
 import duke.Command.ListCommand;
 import duke.Command.MarkCommand;
 import duke.Command.ToDoCommand;
@@ -56,6 +57,7 @@ public class Parser {
             case "unmark":
             case "delete":
             case "todo":
+            case "find":
                 throw new IncorrectArgumentsException(command, 1, 0);
             case "deadline":
                 throw new IncorrectArgumentsException(command, 2, 0);
@@ -123,6 +125,8 @@ public class Parser {
                 String eStartTime = eventTokens1[0];
                 String eEndTime = eventTokens1[1];
                 return new EventCommand(eTaskName, eStartTime, eEndTime);
+            case "find":
+                return new FindCommand(details);
             default:
                 throw new InvalidInputException(command);
         }

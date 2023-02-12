@@ -76,11 +76,28 @@ public class TaskList {
      * Prints out all the items in the current task list in String form.
      * @return The current items in the task list.
      */
+    public String findKeyword(String keyword) {
+        StringBuilder tasksWithKeyword = new StringBuilder();
+        tasksWithKeyword.append("Here are the tasks in your list containing the keyword " + keyword + ":\n");
+        int keywordCounter = 1;
+
+        for (Task taskToCheck : tasks) {
+            if (taskToCheck.toString().contains(keyword)) {
+                String taskWithKeyword = String.format("%s.[%s][%s] %s\n", keywordCounter, taskToCheck.getTaskType(),
+                        taskToCheck.getStatusIcon(), taskToCheck.toString());
+                tasksWithKeyword.append(taskWithKeyword);
+                keywordCounter++;
+            }
+        }
+
+        return tasksWithKeyword.toString();
+    }
+
     public String printTaskList() {
         StringBuilder tasklist = new StringBuilder();
         tasklist.append("Here are the tasks in your list:" + "\n");
 
-        for(int i = 0; i < items; i++) {
+        for (int i = 0; i < items; i++) {
             String taskToAdd = String.format("%s.[%s][%s] %s\n", i + 1, tasks.get(i).getTaskType(),
                     tasks.get(i).getStatusIcon(), tasks.get(i).toString());
             tasklist.append(taskToAdd);
