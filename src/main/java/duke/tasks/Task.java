@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -23,6 +25,19 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    /**
+     * Returns a boolean to see if the Task is urgent.
+     *
+     * @return a Boolean that indicates whether the task is Urgent.
+     */
+    public boolean checkUrgent() {
+        return false;
     }
 
 
@@ -60,6 +75,14 @@ public class Task {
      */
     public void unmark() {
         this.isDone = false;
+    }
+
+    public boolean completedWithinWeek() {
+        return false;
+    }
+
+    public boolean addedWithinWeek() {
+        return false;
     }
 
     public boolean containsKeyWord(String keyWord) {

@@ -3,15 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ErrorCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 
 
 public class Parser {
@@ -52,6 +44,8 @@ public class Parser {
             return new ExitCommand("bye");
         } else if (command.startsWith("find")) {
             return new FindCommand(command);
+        } else if (command.equals("statistics")) {
+            return new StatisticsCommand("statistics");
         } else {
             return new ErrorCommand("error");
         }

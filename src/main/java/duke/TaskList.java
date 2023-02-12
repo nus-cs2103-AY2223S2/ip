@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +101,36 @@ public class TaskList {
         }
 
         return sb.toString();
+    }
+
+    public ArrayList<Integer> checkStatistics() {
+        ArrayList<Integer> statistics = new ArrayList<>();
+        int totalUrgentTasks = 0;
+        int pastWeekCompletedTasks = 0;
+        int addedWithinWeek = 0;
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime pastWeek = currentDateTime.minusDays(7);
+
+        for (Task task : tasks) {
+            if (task.checkUrgent()) {
+                totalUrgentTasks++;
+            }
+
+            if (task.completedWithinWeek()) {
+                pastWeekCompletedTasks++;
+            }
+
+            if (task.addedWithinWeek()) {
+                addedWithinWeek++;
+            }
+        }
+
+        statistics.add(totalUrgentTasks);
+        statistics.add(addedWithinWeek);
+        statistics.add(pastWeekCompletedTasks);
+
+        return statistics;
     }
 
     public ArrayList<Task> getTasksByKeyWord(String keyWord) throws DukeException {

@@ -12,6 +12,9 @@ public class Ui {
     private static String BYE_MSG = "Bye! Hope to See You Again!";
     @SuppressWarnings("checkstyle:VisibilityModifier")
     private static String ADD_MSG = "Got it fam! I've added this task:\n ";
+    private static Integer PRODUCTIVITY_CHECK = 5;
+    private static String PRODUCTIVITY_MSG = "You got to be more Productive!\n";
+
 
     private Scanner sc;
 
@@ -121,5 +124,23 @@ public class Ui {
             index++;
         }
         return sb.toString();
+    }
+
+    public String printStatistics(TaskList taskList) {
+        ArrayList<Integer> statistics = taskList.checkStatistics();
+        int urgentTasks = statistics.get(0);
+        int addedTasks = statistics.get(1);
+        int completedTasks = statistics.get(2);
+
+        StringBuilder message = new StringBuilder(String.format("You have %d Urgent Tasks\n", urgentTasks));
+
+        if (urgentTasks >= PRODUCTIVITY_CHECK) {
+            message.append(PRODUCTIVITY_MSG);
+        }
+        String secondMessage = String.format("You have added %d Tasks within this week!\n"
+                        + "You have completed %d tasks within this week! Good Job!",
+                addedTasks, completedTasks);
+        message.append(secondMessage);
+        return message.toString();
     }
 }

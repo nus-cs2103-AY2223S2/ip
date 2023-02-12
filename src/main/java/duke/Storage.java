@@ -71,13 +71,13 @@ public class Storage {
 
             switch (text[0]) {
             case "T":
-                curr = new ToDos(text[2]);
+                curr = new ToDos(text[2], text[3]);
                 break;
             case "D":
-                curr = new Deadline(text[2], text[3]);
+                curr = new Deadline(text[2], text[3], text[4]);
                 break;
             case "E":
-                curr = new Events(text[2], text[3], text[4]);
+                curr = new Events(text[2], text[3], text[4], text[5]);
                 break;
             default:
                 System.out.println("Error while Loading up the file");
