@@ -7,14 +7,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import sebastian.Sebastian;
+import sebastian.main.Sebastian;
 
 /**
  * Class representing the main window of the GUI
@@ -43,10 +37,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.setPadding(new Insets(30, 10, 0, 10));
         dialogContainer.setSpacing(30.0);
         scrollPane.setFitToWidth(true);
-
-        BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
-                new CornerRadii(20.0), new BorderWidths(1.0));
-        Border roundBorder = new Border(borderStroke);
     }
 
     /**

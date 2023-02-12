@@ -16,19 +16,20 @@ import sebastian.exceptions.EventFormatMismatchException;
  * A class to store task list to hard disk and to retrieve data from the hard disk
  */
 public class Storage {
-    private File file;
-
-    public Storage(String filePath) {
-        this.file = new File(filePath);
+    private final File file;
+    public Storage() {
+        File dir = new File("data");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+        this.file = new File("data/SebastianData.txt");
     }
-
     /**
      * Load data from hard disk and convert the String representation into actual tasks.
      * @return a main.TaskList containing all the tasks.
      */
     public TaskList formTaskListFromData() throws CannotLoadDataException {
         TaskList taskList = new TaskList();
-        File file = new File("src/main/resources/SebastianData.txt");
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String curLine;
@@ -62,9 +63,6 @@ public class Storage {
      * @param taskList a TaskList object
      */
     public void writeToDisk(TaskList taskList) throws CannotWriteDataException {
-        if (file == null) {
-            file = new File("src/main/resources/SebastianData.txt");
-        }
         FileWriter fw = null;
         try {
             fw = new FileWriter(file);

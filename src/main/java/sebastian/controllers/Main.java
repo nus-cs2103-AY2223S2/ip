@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sebastian.Sebastian;
+import sebastian.main.Sebastian;
 
 
 
@@ -15,7 +15,7 @@ import sebastian.Sebastian;
  * Class used to connect the controller and view of MainWindow
  */
 public class Main extends Application {
-    private Sebastian sebastian = new Sebastian("src/main/resources/SebastianData.txt");
+    private final Sebastian sebastian = new Sebastian();
 
     @Override
     public void start(Stage stage) {

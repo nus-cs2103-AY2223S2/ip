@@ -18,6 +18,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        if(taskList.getTotalTasks() == 0) {
+            return ui.getFormattedString("You do not have any task yet");
+        }
         String res = "As you wish. Here are the tasks in your list: " + "\n" + taskList + "\n"
                 + "You have " + taskList.getTotalTasks() + " tasks";
         return ui.getFormattedString(res);

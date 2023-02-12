@@ -1,12 +1,8 @@
-package sebastian;
+package sebastian.main;
 
 import sebastian.command.Command;
 import sebastian.exceptions.CannotLoadDataException;
 import sebastian.exceptions.SebastianException;
-import sebastian.main.Parser;
-import sebastian.main.Storage;
-import sebastian.main.TaskList;
-import sebastian.main.Ui;
 
 /**
  * Class representing the task manager, Sebastian
@@ -20,11 +16,10 @@ public class Sebastian {
 
     /**
      * Constructor
-     * @param filePath path of the file that stores past tasks
      */
-    public Sebastian(String filePath) {
+    public Sebastian() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage();
     }
 
     /**
