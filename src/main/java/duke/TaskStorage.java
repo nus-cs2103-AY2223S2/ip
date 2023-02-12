@@ -48,6 +48,7 @@ public class TaskStorage {
 
     /**
      * Return the number of tasks in the taskStorage object.
+     *
      * @return The number of tasks in the taskStorage object.
      */
     public int noTasks() {
@@ -56,6 +57,7 @@ public class TaskStorage {
 
     /**
      * Returns the task based on the given index in the taskStorage object.
+     *
      * @param i The given index.
      * @return The task at the given index.
      */
