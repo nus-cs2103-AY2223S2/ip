@@ -133,6 +133,7 @@ public class Ui {
     }
 
     private String stringListRaw(ArrayList<Task> tasks, boolean isGui) throws DukeException {
+        assert tasks.size() != 0 : Views.EMPTY_LIST_STRING.str();
         String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
             returnString += ((i + 1) + "." + tasks.get(i)) + "\n";
@@ -140,10 +141,14 @@ public class Ui {
                 returnString += "      ";
             }
         }
+        try {
         if (isGui) {
             return returnString.substring(0, returnString.length() - 1);
         } else {
             return returnString.substring(0, returnString.length() - 7);
+        }
+        } catch (java.lang.StringIndexOutOfBoundsException e) {
+            throw new DukeException(Views.EMPTY_LIST_STRING.str());
         }
     }
 
@@ -344,7 +349,7 @@ public class Ui {
     /**
      * Prints out bye message
      */
-    public void showEnd() {
+    public static void showEnd() {
         printer(stringEnd());
     }
 
@@ -353,7 +358,7 @@ public class Ui {
      *
      * @return String representation of exit message
      */
-    public String stringEnd() {
+    public static String stringEnd() {
         return Views.END_STRING.str();
     }
 
