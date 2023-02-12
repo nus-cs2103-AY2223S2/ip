@@ -49,9 +49,9 @@ public class Parser {
         case "list":
             return tasks.outputList();
         case "mark":
-            return tasks.markCommand(true, inputs[1]);
+            return tasks.markTask(true, inputs[1]);
         case "unmark":
-            return tasks.markCommand(false, inputs[1]);
+            return tasks.markTask(false, inputs[1]);
         case "todo":
             return toDoCommand(inputs);
         case "deadline":
@@ -59,7 +59,7 @@ public class Parser {
         case "event":
             return eventCommand(inputs);
         case "delete":
-            return deleteCommand(inputs[1]);
+            return tasks.deleteTask(inputs[1]);
         case "find":
             return findCommand(inputs[1]);
         case "bye":
@@ -146,10 +146,5 @@ public class Parser {
             }
         }
         return ui.filter(output);
-    }
-
-    public String deleteCommand(String input) throws DukeException{
-        int taskNo = Integer.parseInt(input);
-        return tasks.deleteTask(taskNo);
     }
 }

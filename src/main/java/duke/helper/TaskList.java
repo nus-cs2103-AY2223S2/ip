@@ -51,20 +51,10 @@ public class TaskList {
      * @param taskNo Task number to be deleted
      * @return task that has been deleted
      */
-    public String deleteTask(int taskNo) throws DukeException{
-        assert taskNo > 0 : "Task number should be 1 or more";
-        taskNo--;
-        String output = "";
-        try {
-            Task task = tasks.get(taskNo);
-            tasks.remove(taskNo);
-            output = ui.showDelete(task, tasks.size());
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskNumException();
-        } catch (NumberFormatException e) {
-            throw new NotANumberException("delete");
-        }
-        return output;
+    public String deleteTask(String taskNo) throws DukeException{
+        Task task = getTask(taskNo, "delete");
+        tasks.remove(task);
+        return ui.showDelete(task, tasks.size());
     }
 
     /**
@@ -73,20 +63,24 @@ public class TaskList {
      * @param isDone whether the task is done
      * @param taskId id of the task
      */
-
-    public String markCommand(boolean isDone, String taskId) throws DukeException {
-        try {
-            int taskNo = Integer.parseInt(taskId) - 1;
-            assert taskNo >= 0 : "Task number should be 1 or more";
-            Task taskToMark = tasks.get(taskNo);
+    public String markTask(boolean isDone, String taskId) throws DukeException {
+            Task taskToMark = getTask(taskId, "mark");
             taskToMark.setIsDone(isDone);
             return ui.showMark(isDone, taskToMark);
+    }
+
+    public Task getTask(String taskNum, String type) throws DukeException {
+        try {
+            int taskNo = Integer.parseInt(taskNum) - 1;
+            assert taskNo >= 0 : "Task number should be 1 or more";
+            return tasks.get(taskNo);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumException();
         } catch (NumberFormatException e) {
-            throw new NotANumberException("mark");
+            throw new NotANumberException(type);
         }
     }
+
 
     /**
      * Outputs the tasklist stored

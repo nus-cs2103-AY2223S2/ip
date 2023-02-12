@@ -52,6 +52,7 @@ public class Ui {
         return output + taskToMark;
     }
 
+
     /**
      * Prints the message when a task is added
      *
