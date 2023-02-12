@@ -55,6 +55,20 @@ public class TaskList {
     /**
      * The method prints out all the tasks in the list.
      */
+    public void find(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= dukeList.size(); i++) {
+            Task t = dukeList.get(i - 1);
+            String[] s = t.description.split(" ");
+            for (int j = 0; j < s.length; j++) {
+                if (s[j].equals(keyword)) {
+                    System.out.println("" + i + ". " + t.toString());
+                    break;
+                }
+            }
+        }
+    }
+
     public void recite() {
         if (dukeList.size() == 0) {
             System.out.println("Your list is empty");
@@ -67,4 +81,5 @@ public class TaskList {
             }
         }
     }
+
 }
