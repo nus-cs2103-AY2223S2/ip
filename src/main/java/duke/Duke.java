@@ -53,11 +53,7 @@ public class Duke extends Application {
      */
     public String getResponse(String input) {
         if (!input.equals("bye")) {
-            try {
-                return parser.parse(input, taskList, storage, textUi);
-            } catch (DukeException dukeException) {
-                return dukeException.getMessage();
-            }
+            return parser.parse(input, taskList, storage, textUi);
         } else {
             return textUi.getGoodbyeMessage();
         }
