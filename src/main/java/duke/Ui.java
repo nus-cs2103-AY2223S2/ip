@@ -20,8 +20,8 @@ public class Ui {
         return "\nOK, I've marked this task as done:\n  " + markedTask + "\n";
     }
 
-    public static String getUnMarkMessageWithAttitude(String taskDetails) {
-        return "\nOK, I've marked this task as undone:\n  " + taskDetails + "\n";
+    public static String getUnMarkMessageWithAttitude(Task unmarkedTask) {
+        return "\nOK, I've marked this task as undone:\n  " + unmarkedTask.getDetails() + "\n";
     }
 
     public static String getAddTaskConfirmationWithAttitude(String taskDetails) {
