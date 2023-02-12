@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * A launcher class to workaround classpath issues.
+ * duke.task.A launcher class to workaround classpath issues.
  */
 public class Launcher {
     public static void main(String[] args) {

@@ -219,6 +219,19 @@ public class Parser {
     }
 
     /**
+     * Sort the tasks in the taskStorage list by deadlines, events, and todos.
+     *
+     * Within each category, the tasks are sorted by alphabetical order.
+     *
+     * @return A string to indicate the tasks in the taskStorage list has been sorted.
+     */
+    public String sort() {
+        String response = "";
+        response = this.taskStorage.sortTask();
+        return response;
+    }
+
+    /**
      * The main logic of the program.
      * Execute a command based on the string input given.
      *
@@ -263,6 +276,11 @@ public class Parser {
 
             case "find":
                 response = this.find(inp);
+                break;
+
+            case "sort":
+                response = this.sort();
+                break;
 
             default:
                 response = new DukeException().getMessage();

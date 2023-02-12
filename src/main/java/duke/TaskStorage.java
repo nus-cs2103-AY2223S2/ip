@@ -1,8 +1,10 @@
 package duke;
 
+import duke.task.SortTaskByName;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -94,5 +96,10 @@ public class TaskStorage {
             chunkOfText.append("\n");
         }
         return chunkOfText.toString();
+    }
+
+    public String sortTask() {
+        Collections.sort(this.taskStorage, new SortTaskByName());
+        return "Sorted!";
     }
 }

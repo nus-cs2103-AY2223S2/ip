@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Comparator;
+
 /**
  * The class Task encapsulates a task.
  * All objects of class Task have a description on what the task is about.
@@ -22,7 +24,7 @@ public class Task {
     /**
      * Checks if the task is done or not done.
      *
-     * @return A 'X' if the task is done, " " if the task is not done.
+     * @return duke.task.A 'X' if the task is done, " " if the task is not done.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -71,5 +73,4 @@ public class Task {
         return ("[" + this.getStatusIcon() + "] " + this.description);
     }
 
-    //...
 }
