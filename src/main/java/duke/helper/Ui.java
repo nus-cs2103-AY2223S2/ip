@@ -3,7 +3,11 @@ package duke.helper;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidTaskCommandException;
 import duke.task.Task;
+import javafx.application.Platform;
 
 /**
  * Ui class that handles all the interactions with the users
@@ -77,5 +81,34 @@ public class Ui {
             output += task + "\n";
         }
         return output;
+    }
+
+    public String showHelpMessage(String input) throws DukeException {
+        if (input.equals("")) {
+            throw new EmptyTaskException("help");
+        }
+
+        switch (input) {
+        case "list":
+            return "Enter: list";
+        case "mark":
+            return "Enter: mark <task number>";
+        case "unmark":
+            return "Enter: unmark <task number>";
+        case "todo":
+            return "Enter: todo <task>";
+        case "deadline":
+            return "Enter: deadline <task> /by yyyy-MM-dd HH:MM";
+        case "event":
+            return "Enter: event <task> /from yyyy-MM-dd HH:MM /to yyyy-MM-dd HH:MM";
+        case "delete":
+            return "Enter: delete <task number>";
+        case "find":
+            return "Enter: find <keyword>";
+        case "bye":
+            return "Enter: bye";
+        default:
+            throw new InvalidTaskCommandException();
+        }
     }
 }
