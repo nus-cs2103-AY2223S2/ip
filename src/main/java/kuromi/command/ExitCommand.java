@@ -34,7 +34,7 @@ public class ExitCommand extends Command {
     private String getReply() {
         String msg = "Bye Melody. Hope to see you again soon!\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
-        msg += "You're annoying but I'll definitely miss u :D";
+        msg += "You're annoying but I'll definitely miss you :D";
         return msg;
     }
 }
