@@ -38,11 +38,11 @@ public class Parser {
         try {
             switch (c) {
             case bye:
-                return Parser.exitCommand();
+                return Parser.exitCommand(temp);
             case mistakes:
-                return Parser.mistakesCommand();
+                return Parser.mistakesCommand(temp);
             case list:
-                return Parser.listCommand();
+                return Parser.listCommand(temp);
             case remind:
                 return Parser.remindCommand(temp);
             case find:
@@ -64,6 +64,8 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new KuromiException("OOPS!!! The index cannot be empty.");
+        } catch (NumberFormatException e) {
+            throw new KuromiException("OOPS!!! The index should be an number.");
         }
     }
 
@@ -88,19 +90,31 @@ public class Parser {
         return CommandType.valueOf(temp[0]);
     }
 
-    private static Command exitCommand() {
+    private static Command exitCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'bye'?");
+        }
         return new ExitCommand();
     }
 
-    private static Command mistakesCommand() {
+    private static Command mistakesCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'mistakes'?");
+        }
         return new MistakesCommand();
     }
 
-    private static Command listCommand() {
+    private static Command listCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'list'?");
+        }
         return new ListCommand();
     }
 
     private static Command remindCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'bye'?");
+        }
         if (temp.length == 1) {
             return new RemindCommand(5);
         }
