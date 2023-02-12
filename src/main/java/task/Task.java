@@ -5,8 +5,8 @@ package task;
  * Inherited by ToDo, Deadline and Event Class
  */
 public class Task {
-    public String description;
-    public boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor.
@@ -26,6 +26,15 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    /**
+     * Returns description of task.
+     *
+     * @return description of task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

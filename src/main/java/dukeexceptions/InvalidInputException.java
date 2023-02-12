@@ -1,4 +1,4 @@
-package duke_exception;
+package dukeexceptions;
 
 /**
  * Encapsulates an Exception when the input is invalid.

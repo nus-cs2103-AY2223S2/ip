@@ -8,13 +8,22 @@ import task.Task;
  * Encapsulates the list of tasks inputted by the user.
  */
 public class TaskList {
-    public ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     /**
      * Constructor.
      */
     public TaskList() {
         this.list = new ArrayList<Task>();
+    }
+
+    /**
+     * Returns list of tasks.
+     *
+     * @return list of tasks.
+     */
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
     /**

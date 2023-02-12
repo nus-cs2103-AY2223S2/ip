@@ -1,4 +1,4 @@
-package duke_exception;
+package dukeexceptions;
 
 /**
  * Encapsulates an Exception that may occur from the chatbot.

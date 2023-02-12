@@ -1,35 +1,34 @@
 package parser;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke_exception.InvalidInputException;
-import duke_exception.EmptyDescriptionException;
-import ui.Ui;
-import task.Task;
-import tasklist.TaskList;
-import task.ToDo;
+import dukeexceptions.EmptyDescriptionException;
+import dukeexceptions.InvalidInputException;
+import storage.Storage;
 import task.Deadline;
 import task.Event;
-import storage.Storage;
+import task.Task;
+import task.ToDo;
+import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Parser Class deals with making sense of the user's command.
  */
 
 public class Parser {
-    final static String EXIT_COMMAND = "bye";
-    final static String LIST_COMMAND = "list";
-    final static String DELETE_COMMAND = "delete";
-    final static String MARK_COMMAND = "mark";
-    final static String UNMARK_COMMAND = "unmark";
-    final static String TODO_COMMAND = "todo";
-    final static String DEADLINE_COMMAND = "deadline";
-    final static String EVENT_COMMAND = "event";
-    final static String FIND_COMMAND = "find";
-    final static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
-    final static DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String MARK_COMMAND = "mark";
+    private static final String UNMARK_COMMAND = "unmark";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+    private static final String FIND_COMMAND = "find";
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     /**
      * Handles what to do based on the command input.
@@ -45,7 +44,7 @@ public class Parser {
             String[] inputWords = input.split(" ", 2);
             String command = inputWords[0];
             if (command.equals(EXIT_COMMAND)) {
-                ui.isClosed = true;
+                ui.close();
                 return ui.printBye(list, storage);
             } else if (command.equals(LIST_COMMAND)) {
                 return ui.printGetList(list);
@@ -140,8 +139,8 @@ public class Parser {
      * @param inputWords Description of task.
      * @param ui User interface.
      * @param list List of tasks.
-     * @throws EmptyDescriptionException If there is no description of task.
      * @return Response of added task.
+     * @throws EmptyDescriptionException If there is no description of task.
      */
     public String handleToDo(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
         checkEmptyDescription(inputWords);
@@ -158,16 +157,16 @@ public class Parser {
      * @param inputWords Description of task.
      * @param ui User interface.
      * @param list List of tasks.
+     * @return response of added task.
      * @throws EmptyDescriptionException If there is no description of task.
-     * @return response of adeded task.
      */
     public String handleDeadline(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
         checkEmptyDescription(inputWords);
         String[] splitedString = inputWords[1].split(" /by ");
         String action = splitedString[0];
         String date = splitedString[1]; // in yyyy/mm/d HHMM format
-        LocalDateTime inputDateTime = LocalDateTime.parse(date, inputFormatter);
-        String outputDateTime = inputDateTime.format(outputFormatter);
+        LocalDateTime inputDateTime = LocalDateTime.parse(date, INPUT_FORMATTER);
+        String outputDateTime = inputDateTime.format(OUTPUT_FORMATTER);
         Task newTask = new Deadline(action, outputDateTime);
         list.addTask(newTask);
         return ui.printAddTask(newTask, list);
@@ -180,8 +179,8 @@ public class Parser {
      * @param inputWords Description of task.
      * @param ui User interface.
      * @param list List of tasks.
-     * @throws EmptyDescriptionException If there is no description of task.
      * @return Response of adding task.
+     * @throws EmptyDescriptionException If there is no description of task.
      */
     public String handleEvent(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
         checkEmptyDescription(inputWords);
