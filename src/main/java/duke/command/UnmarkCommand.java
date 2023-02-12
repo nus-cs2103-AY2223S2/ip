@@ -36,6 +36,8 @@ public class UnmarkCommand extends Command {
         } catch (IOException e) {
             result += "failed to update tasks locally: " + e.getMessage();
         }
+        assert result.equals("-->-->-->-->-->-->-->-->-->-->-->\n    " + "Marked as yet to complete:\n    "
+            + tasks.get(taskNo) + "\n<--<--<--<--<--<--<--<--<--<--\n\n") : "wrong unmark message";
         return result;
     }
 }

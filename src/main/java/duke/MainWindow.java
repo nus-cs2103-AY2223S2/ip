@@ -36,6 +36,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage)
         );
+        assert Ui.getWelcomeMessage().equals("Hello from ClashPlanner\n") : "incorrect welcome message";
     }
 
     public void setDuke(Duke d) {

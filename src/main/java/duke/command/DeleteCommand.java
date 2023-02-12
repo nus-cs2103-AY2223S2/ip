@@ -42,6 +42,8 @@ public class DeleteCommand extends Command {
         } catch (IOException e) {
             result += ("\nfailed to update tasks locally: " + e.getMessage());
         }
+        assert result.equals("-->-->-->-->-->-->-->-->-->-->-->\n    " + "The following task is removed:\n    "
+            + tasks.get(taskNo) + "\n<--<--<--<--<--<--<--<--<--<--\n\n") : "wrong delete message";
         return result;
     }
 }

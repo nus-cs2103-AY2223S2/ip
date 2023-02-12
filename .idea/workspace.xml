@@ -126,7 +126,7 @@
       <command value="r" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.ip [shadowJar]">
+  <component name="RunManager" selected="Gradle.ip [build]">
     <configuration name="ip [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -234,8 +234,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ip [shadowJar]" />
         <item itemvalue="Gradle.ip [build]" />
+        <item itemvalue="Gradle.ip [shadowJar]" />
         <item itemvalue="Gradle.ip [checkstyleMain]" />
         <item itemvalue="Gradle.ip [run]" />
         <item itemvalue="Gradle.ip [testClasses]" />
