@@ -6,3 +6,4 @@ T/get A for CS2103T/0
 E/start a business/0/01-01-2023 0000/08-08-2023 2359
 T/reach p3/0
 T/reach diamond/0
+T/Go home/0

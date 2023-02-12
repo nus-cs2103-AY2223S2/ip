@@ -16,6 +16,10 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.changeToFormat(tasks.find(searchLine));
+        String result = ui.changeToFormat(tasks.find(searchLine));
+        assert result.equals("-->-->-->-->-->-->-->-->-->-->-->\n    " + "The following task is removed:\n    "
+            + tasks.find(searchLine) + "\n<--<--<--<--<--<--<--<--<--<--\n\n") : "wrong find message";
+        return result;
+
     }
 }

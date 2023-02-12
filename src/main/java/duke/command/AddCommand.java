@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import duke.storage.Storage;
 import duke.task.Task;
@@ -37,6 +38,9 @@ public class AddCommand extends Command {
         } catch (IOException e) {
             result += ("\nfailed to update tasks locally: " + e.getMessage());
         }
+        assert
+            Objects.equals(result, "-->-->-->-->-->-->-->-->-->-->-->\n    " + "Task successfully added:\n    " + task
+                + "\n<--<--<--<--<--<--<--<--<--<--\n\n") : "wrong add message";
         return result;
     }
 }
