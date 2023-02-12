@@ -101,7 +101,7 @@ public class Parser {
      * @param ui User interface.
      * @param list List of tasks.
      */
-    public  void handleMark(String[] inputWords, Ui ui, TaskList list) {
+    public void handleMark(String[] inputWords, Ui ui, TaskList list) {
         int index = Integer.parseInt(inputWords[1]);
         Task task = list.getTask(index - 1);
         task.mark();
