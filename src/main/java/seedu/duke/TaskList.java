@@ -118,7 +118,7 @@ public class TaskList {
             }
         }
         if (matchingTasks.getSize() == 0) {
-            throw new DukeException("There are no matching tasks!");
+            throw new DukeException("I cannot find any tasks!");
         } else {
             return matchingTasks;
         }

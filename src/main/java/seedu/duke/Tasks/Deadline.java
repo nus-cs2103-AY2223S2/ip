@@ -61,7 +61,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String timePattern = "d MMM yyyy, HHmm";
-        return String.format("%s%s %s (by: %s)", super.getTaskTypeBox(), super.getStatusCheckbox(),
+        return String.format("%s%s %s (By: %s)", super.getTaskTypeBox(), super.getStatusCheckbox(),
                 super.toString(), this.deadline.format(DateTimeFormatter.ofPattern(timePattern)));
     }
 }

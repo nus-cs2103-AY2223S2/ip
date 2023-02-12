@@ -2,6 +2,8 @@ package seedu.duke;
 
 import seedu.duke.tasks.*;
 
+import java.time.LocalDate;
+
 public class Ui {
 
     /**
@@ -76,6 +78,20 @@ public class Ui {
         stringBuilder.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < matchingTasks.getSize(); i++) {
             stringBuilder.append(String.format("%d: %s\n", i + 1, matchingTasks.get(i)));
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Prints out line after successfully finding the scheduled Tasks for user to see
+     *
+     * @param scheduledTasks Tasks that are scheduled on the input date provided by user
+     */
+    public String sayScheduledTasks(TaskList scheduledTasks, String formattedDateStr) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the scheduled tasks for ").append(formattedDateStr).append(" :\n");
+        for (int i = 0; i < scheduledTasks.getSize(); i++) {
+            stringBuilder.append(String.format("%d: %s\n", i + 1, scheduledTasks.get(i)));
         }
         return stringBuilder.toString();
     }

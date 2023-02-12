@@ -65,7 +65,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String timePattern = "d MMM yyyy, HHmm";
-        return String.format("%s%s %s (from: %s to: %s)", super.getTaskTypeBox(), super.getStatusCheckbox(),
+        return String.format("%s%s %s (From: %s To: %s)", super.getTaskTypeBox(), super.getStatusCheckbox(),
                 super.toString(), this.from.format(DateTimeFormatter.ofPattern(timePattern)),
                 this.to.format(DateTimeFormatter.ofPattern(timePattern)));
     }

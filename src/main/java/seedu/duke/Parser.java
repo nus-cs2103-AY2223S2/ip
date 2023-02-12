@@ -6,6 +6,7 @@ import seedu.duke.tasks.Deadline;
 import seedu.duke.tasks.Event;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
@@ -36,9 +37,19 @@ public class Parser {
         inputStrings = Arrays.copyOfRange(inputStrings, 1, inputStrings.length);
         String keywords = String.join(" ", inputStrings).trim();
         if (keywords.length() == 0) {
-            throw new DukeException("No keyword was given!");
+            throw new DukeException("No input was given!");
         }
         return keywords;
+    }
+
+    private String getDate(String[] inputStrings) throws DukeException {
+        // keyword in this case refers to the user input date (in the form DD-MM-YYYY)
+        String inputDate = getKeywords(inputStrings);
+        String[] inputDates = inputDate.split(" ");
+        if (inputDates.length > 1) {
+            throw new DukeException("Please only provide the date in the format of yyyy-MM-dd!");
+        }
+        return inputDate;
     }
 
     /**
@@ -159,6 +170,24 @@ public class Parser {
             throw new DukeException("Time given is not valid!");
         }
     }
+
+    /**
+     *  Converts String date into LocalDate object
+     *
+     *  @param date String of the date given
+     *  @return LocalDate object of date
+     */
+    private LocalDate convertDate(String date) throws DukeException {
+        if (date.equals("")) {
+            throw new DukeException("There was no time period given!");
+        }
+        try {
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException err) {
+            throw new DukeException("Date formatting is wrong! Must be yyyy-MM-dd");
+        }
+    }
+
 
     /**
      * Handles message to be printed for TD tasks
@@ -305,6 +334,23 @@ public class Parser {
     }
 
     /**
+     * Handles message to be printed out for viewing schedule on a specific date
+     *
+     * @param inputStrings String array of each word input by the user
+     * @param taskList Current state of TaskList
+     * @param ui Ui to print lines for user to see and interact with
+     * @return schedule of tasks on the specified date
+     */
+    private String handleSchedule(String[] inputStrings, TaskList taskList, Ui ui) throws DukeException {
+        String timePattern = "d MMM yyyy";
+        String date = getDate(inputStrings);
+        String formattedDateStr = convertDate(date).format(DateTimeFormatter.ofPattern(timePattern));
+        System.out.println(formattedDateStr);
+        TaskList scheduledTasks = taskList.findTask(formattedDateStr);
+        return ui.sayScheduledTasks(scheduledTasks, formattedDateStr);
+    }
+
+    /**
      *  Converts String timestamp into LocalDateTime object
      *
      *  @param inputStrings String array of each word input by the user
@@ -347,6 +393,9 @@ public class Parser {
                 break;
             case find:
                 output = handleFind(inputStrings, taskList, ui);
+                break;
+            case schedule:
+                output = handleSchedule(inputStrings, taskList, ui);
                 break;
             default:
                 output = "";

@@ -1,1 +1,5 @@
 T|true|dadwadcx
+T|false|hi
+E|false|sleep|2023-02-03T16:00|2023-02-03T18:00
+E|false|study|2023-02-03T21:00|2023-02-04T02:00
+E|false|study2|2023-02-02T21:00|2023-02-03T02:00

@@ -7,12 +7,12 @@ public class Duke {
     private TaskList tasks;
 
     private static final String[] LIST_OF_COMMANDS =
-            new String[]{"list", "bye", "todo", "mark", "unmark", "event", "deadline", "delete", "find"};
+            new String[]{"list", "bye", "todo", "mark", "unmark", "event", "deadline", "delete", "find", "schedule"};
 
     private static final String SAVE_FILE_NAME = "duke.txt";
 
     enum Commands {
-        list, bye, todo, mark, unmark, event, deadline, delete, find
+        list, bye, todo, mark, unmark, event, deadline, delete, find, schedule
     }
 
     public Duke() {
