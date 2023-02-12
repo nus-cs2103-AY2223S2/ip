@@ -13,6 +13,11 @@ import java.util.Scanner;
  * @version 0
  */
 public class Duke {
+    /**
+     * Main method
+     * @param args arguments
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Ui ui = new Ui();
         Storage storage = new Storage("data\\save.txt");

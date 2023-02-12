@@ -28,8 +28,12 @@ test {
     }
 }
 
+checkstyle {
+    toolVersion = '10.2'
+}
+
 application {
-    mainClassName = "Duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {

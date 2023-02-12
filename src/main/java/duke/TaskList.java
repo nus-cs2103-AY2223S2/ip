@@ -7,6 +7,7 @@ import duke.task.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,14 +45,16 @@ public class TaskList {
         body = body.substring(1);
         int index = Integer.parseInt(body) - 1;
         tasks.get(index).toggleDone();
-        System.out.println("Marked task as done:\n [" + tasks.get(index).getDoneStatus() + "] " + tasks.get(index).getDesc());
+        System.out.println("Marked task as done:\n [" + tasks.get(index).getDoneStatus() + "] "
+                + tasks.get(index).getDesc());
     }
 
     void markTaskNotDone(String body) {
         body = body.substring(1);
         int index = Integer.parseInt(body) - 1;
         tasks.get(index).toggleNotDone();
-        System.out.println("Marked task as not done:\n [" + tasks.get(index).getDoneStatus() + "] " + tasks.get(index).getDesc());
+        System.out.println("Marked task as not done:\n [" + tasks.get(index).getDoneStatus() + "] "
+                + tasks.get(index).getDesc());
 
     }
 
@@ -67,7 +70,7 @@ public class TaskList {
         }
     }
 
-    void addTodo(String body){
+    void addTodo(String body) {
         try {
             body = body.substring(1);
             ToDo curr = new ToDo(body, false);
@@ -78,7 +81,7 @@ public class TaskList {
         }
     }
 
-    void addDeadline(String body){
+    void addDeadline(String body) {
         body = body.substring(1);
         Matcher dlMatcher = DEADLINE_PATTERN.matcher(body);
         if (dlMatcher.matches()) {

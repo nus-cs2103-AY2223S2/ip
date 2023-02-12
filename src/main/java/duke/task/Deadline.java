@@ -12,6 +12,13 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     private LocalDateTime deadlineDay;
 
+    /**
+     * Deadline object
+     *
+     * @param desc String description
+     * @param isDone boolean done
+     * @param deadlineDay LocalDateTime
+     */
     public Deadline(String desc, boolean isDone, LocalDateTime deadlineDay) {
         super(desc, isDone);
         this.deadlineDay = deadlineDay;
@@ -21,12 +28,12 @@ public class Deadline extends Task {
      * getter for deadline day
      * @return this.deadlineDay
      */
-    public String getDeadlineDay(){
+    public String getDeadlineDay() {
         return format24HrDate(this.deadlineDay);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + "(by: " + formatDate(this.deadlineDay) + ")";
     }
 }

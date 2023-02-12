@@ -14,6 +14,12 @@ public class Task {
     private final String desc;
     private boolean isDone;
 
+    /**
+     * Task object
+     *
+     * @param desc String description
+     * @param isDone boolean isDone
+     */
     public Task(String desc, boolean isDone) {
         this.desc = desc;
         this.isDone = isDone;
@@ -37,7 +43,7 @@ public class Task {
      * Returns String "X" if done, else returns empty string
      * @return string
      */
-    public String getDoneStatus(){
+    public String getDoneStatus() {
         return isDone ? "X" : " ";
     }
 
@@ -77,7 +83,7 @@ public class Task {
      *
      * @return this.desc
      */
-    public String getDesc(){
+    public String getDesc() {
         return this.desc;
     }
 

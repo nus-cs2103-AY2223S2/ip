@@ -44,15 +44,15 @@ public class Ui {
     /**
      * Prints the initial start-up message
      */
-    void printASCII(){
+    void printASCII() {
         String line = " ---------------------------------------------------------";
-        String logo = "\t\t\t\t            | |       \n" +
-                "\t\t\t\t _ __  _   _| | _____ \n" +
-                "\t\t\t\t| '_ \\| | | | |/ / _ \\\n" +
-                "\t\t\t\t| |_) | |_| |   <  __/\n" +
-                "\t\t\t\t| .__/ \\__,_|_|\\_\\___|\n" +
-                "\t\t\t\t| |                   \n" +
-                "\t\t\t\t|_|                  ";
+        String logo = "\t\t\t\t            | |       \n"
+                + "\t\t\t\t _ __  _   _| | _____ \n"
+                + "\t\t\t\t| '_ \\| | | | |/ / _ \\\n"
+                + "\t\t\t\t| |_) | |_| |   <  __/\n"
+                + "\t\t\t\t| .__/ \\__,_|_|\\_\\___|\n"
+                + "\t\t\t\t| |                   \n"
+                + "\t\t\t\t|_|                  ";
         System.out.println(line + "\n" + logo + "\n" + line);
         System.out.println("Welcome to PUKE, the worst program in existence");
         System.out.println("Input a command");
