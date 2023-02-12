@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import duke.TaskList;
@@ -21,7 +20,7 @@ public abstract class Command {
      * @param storage The storage object
      * @return The command result
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage)throws
             IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException;
     /**
      * Checks if this is exit command

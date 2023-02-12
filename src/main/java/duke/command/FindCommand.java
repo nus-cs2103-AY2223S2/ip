@@ -31,6 +31,7 @@ public class FindCommand extends Command {
         ArrayList<Integer> found = new ArrayList<>();
         for (Integer i = 0; i < list.getLength(); i++) {
             String cur = list.getTask(i).toString();
+            //Add the index of each task found to the found list
             if (cur.contains(input)) {
                 found.add(i);
             }

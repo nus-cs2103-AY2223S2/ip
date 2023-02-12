@@ -2,7 +2,6 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -65,8 +64,6 @@ public class TaskList {
             }
         } catch (FileNotFoundException e) {
             Ui.fileExceptionUi();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
     }
 

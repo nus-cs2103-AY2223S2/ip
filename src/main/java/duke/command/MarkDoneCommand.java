@@ -1,12 +1,7 @@
 package duke.command;
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import duke.TaskList;
-import duke.exceptions.DirectoryNotFoundException;
-import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -34,9 +29,9 @@ public class MarkDoneCommand extends Command {
      * @param ui The ui object
      * @param storage The storage object
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
+    public String execute(TaskList tasks, Ui ui, Storage storage)throws
 
-            IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException {
+            IllegalArgumentException {
         Task marked = tasks.mark(index);
         assert marked != null : false;
         storage.write(tasks);
