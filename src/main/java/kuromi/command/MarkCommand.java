@@ -32,6 +32,7 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task cur = tasks.mark(this.idx - 1);
+        storage.refresh(tasks);
         return ui.show(getReply(cur));
     }
 

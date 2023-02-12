@@ -114,9 +114,6 @@ public class Parser {
     }
 
     private static Command remindCommand(String[] temp) throws KuromiException {
-        if (temp.length > 1) {
-            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'bye'?");
-        }
         if (temp.length == 1) {
             return new RemindCommand(5);
         }
