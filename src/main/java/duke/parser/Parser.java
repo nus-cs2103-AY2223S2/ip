@@ -1,6 +1,4 @@
-package Duke.Parser;
-
-import java.util.regex.Pattern;
+package duke.parser;
 
 /**
  * This class deals with user inputs

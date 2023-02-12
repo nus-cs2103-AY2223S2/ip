@@ -1,26 +1,26 @@
-package Duke.task;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
     private final String desc;
-    private boolean done;
+    private boolean isDone;
 
-    public Task(String desc, boolean done) {
+    public Task(String desc, boolean isDone) {
         this.desc = desc;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
      * Changes the status of done, true <-> false
      */
     public void toggleDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void toggleNotDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Task {
      * @return string
      */
     public String getDoneStatus(){
-        return done ? "X" : " ";
+        return isDone ? "X" : " ";
     }
 
     /**
@@ -51,7 +51,7 @@ public class Task {
      * @return this.done
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**

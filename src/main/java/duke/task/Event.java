@@ -1,10 +1,10 @@
-package Duke.task;
+package duke.task;
 
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    LocalDateTime from;
-    LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     public Event(String desc, boolean done, LocalDateTime from, LocalDateTime to) {
         super(desc, done);
