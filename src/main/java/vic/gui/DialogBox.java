@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import vic.gui.model.DialogBoxInput;
 
 /**
  * An example of a custom control using FXML.
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     private static final int LINE_LIMIT = 45;
+    private static final int LINE_HEIGHT = 30;
 
     @FXML
     private Label dialog;
@@ -40,30 +42,38 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(formatInput(text));
+        DialogBoxInput dialogBoxInput = formatInput(text);
+        dialog.setMinHeight(dialogBoxInput.getLineNumber() * LINE_HEIGHT);
+        dialog.setText(formatInput(text).getInput());
         displayPicture.setImage(img);
     }
 
-    private static String formatLine(String input) {
+
+
+    private static DialogBoxInput formatLine(String input) {
         int lineLimit = LINE_LIMIT;
         String output = input;
+        int lines = 0;
         while (lineLimit < output.length()) {
             output = output.substring(0, lineLimit) + "\n   "
                     + output.substring(lineLimit);
             lineLimit += lineLimit + 1;
+            lines++;
         }
-        return output;
+        return new DialogBoxInput(output, lines);
     }
 
-    private static String formatInput(String input) {
+    private static DialogBoxInput formatInput(String input) {
         StringBuilder result = new StringBuilder();
         String[] lines = input.split("\n");
+        int numberOfLines = 0;
         for (String line: lines) {
-            result.append(formatLine(line));
+            DialogBoxInput dialogBoxInput = formatLine(line);
+            result.append(dialogBoxInput.getInput());
             result.append("\n");
+            numberOfLines += dialogBoxInput.getLineNumber() + 1;
         }
-        return result.toString();
+        return new DialogBoxInput(result.toString(), numberOfLines);
 
     }
 
