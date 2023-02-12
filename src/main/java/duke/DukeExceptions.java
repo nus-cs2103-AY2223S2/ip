@@ -36,14 +36,15 @@ public class DukeExceptions {
      */
     static void checkCommand(String[] command) throws DontKnowWhatThatMeansException {
         assert !command.equals(null);
-        String[] commandArray = {"mark", "unmark", "todo", "delete", "deadline", "event", "list", "bye", "find", "greet"};
-        boolean check = false;
+        String[] commandArray = {"mark", "unmark", "todo", "delete", "deadline", 
+            "event", "list", "bye", "find", "greet"};
+        boolean isValidCommand = false;
         for (int i = 0; i < commandArray.length; i++) {
             if (command[0].equals(commandArray[i])) {
-                check = true;
+                isValidCommand = true;
             }
         }
-        if (check == false) {
+        if (isValidCommand == false) {
             throw new DontKnowWhatThatMeansException("☹ OOPS!!! Don't know what that means");
         }
     }

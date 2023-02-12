@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private File file;
-    private boolean fileExists;
+    private boolean hasFileData;
     private TasksList list;
 
     /**
@@ -25,7 +25,7 @@ public class Storage {
     public Storage(TasksList list) {
         this.list = list;
         Path path = Paths.get("data/duke.txt");
-        this.fileExists = java.nio.file.Files.exists(path);
+        this.hasFileData = java.nio.file.Files.exists(path);
         this.file = path.toFile();
     }
 
@@ -36,8 +36,7 @@ public class Storage {
      */
     public void findData() {
         try {
-            DukeExceptions.checkPastData(fileExists);
-            //System.out.println("Successfully retrieved data");
+            DukeExceptions.checkPastData(hasFileData);
         } catch (PastDataDoesNotExistException e) {
             System.out.println(e.getMessage());
         }
@@ -91,14 +90,13 @@ public class Storage {
 
             }
             writer.close();
-            //System.out.println("Data successfully saved!");
         } catch (IOException e) {
             System.out.println("☹ OOPS!!! I cannot write to the file!");
         }
     }
 
     /**
-     * private method that returns a string of date and time of a certain format
+     * Returns a string of date and time of a certain format
      * @param datetime String of date and time
      * @return formatted string of date and time
      */

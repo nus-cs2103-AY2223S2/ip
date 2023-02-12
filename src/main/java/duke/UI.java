@@ -25,7 +25,6 @@ public class UI {
         assert !list.equals(null);
         String output = "Here are the task(s) in your list:\n";
         for (int i = 1; i <= list.getSize(); i++) {
-            //System.out.println(i + "." + list.getTask(i - 1).toString());
             output = output + i + "." + list.getTask(i - 1).toString() + "\n";
         }
         return output;
@@ -43,7 +42,6 @@ public class UI {
             String[] taskDescription = list.getTask(i).getDescription().split(" ");
             for (String word : taskDescription) {
                 if (keyword.equals(word)) {
-                    //System.out.println(counter + "." + list.getTask(i).toString());
                     output = output + counter + "." + list.getTask(i).toString() + "\n";
                     counter++;
                     break;
