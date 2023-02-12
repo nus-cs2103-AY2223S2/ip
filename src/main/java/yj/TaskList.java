@@ -45,17 +45,6 @@ public class TaskList {
         }
     }
 
-    public List<Task> findKeywordInTasks(String keyword) {
-        List<Task> foundTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (task.description.contains(keyword)) {
-                foundTasks.add(task);
-            }
-        }
-        return foundTasks;
-    }
-
     public Task deleteTask(int i) throws IndexOutOfBoundsException{
         if (tasks.get(i - 1) != null) {
             Task task = removeTask(i - 1);
