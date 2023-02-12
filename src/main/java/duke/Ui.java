@@ -27,10 +27,11 @@ public class Ui {
     }
 
     /**
-     * Prints a line to separate user commands and output.
+     * Returns a line to separate user commands and output.
+     * @return String Line
      */
-    public void displayLine() {
-        System.out.println("_________________________________________\n");
+    public String displayLine() {
+        return "_________________________________________\n";
     }
 
     /**

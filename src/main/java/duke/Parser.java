@@ -47,9 +47,10 @@ public class Parser {
     }
 
     /**
-     * Method to handle the mark command.
+     * Marks a specific task as done and returns a String to notify user.
      * @param input User's input
      * @param taskList User's TaskList
+     * @return String Message to update user upon success
      * @throws DukeException If user enters invalid number or task that has not been created.
      */
     public String mark(String[] input, TaskList taskList) throws DukeException {
@@ -62,7 +63,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number.");
         }
-        if (index > taskList.size() || index <= 0) {
+        boolean isNotWithinTaskListSize = index > taskList.size();
+        boolean isSmallerThan1 = index <= 0;
+        if (isNotWithinTaskListSize || isSmallerThan1) {
             throw new DukeException("Invalid task.");
         }
         assert index > 0 : "Number less than equal 0.";
@@ -70,9 +73,10 @@ public class Parser {
     }
 
     /**
-     * Method to handle the unmark command.
+     * Marks a specific task as not done and returns a String to notify user.
      * @param input User's input
      * @param taskList User's TaskList
+     * @return String Message to update user upon success
      * @throws DukeException If user enters invalid number or task that has not been created.
      */
     public String unmark(String[] input, TaskList taskList) throws DukeException {
@@ -85,7 +89,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number.");
         }
-        if (index > taskList.size() || index <= 0) {
+        boolean isNotWithinTaskListSize = index > taskList.size();
+        boolean isSmallerThan1 = index <= 0;
+        if (isNotWithinTaskListSize || isSmallerThan1) {
             throw new DukeException("Invalid task.");
         }
         assert index > 0 : "Number less than equal 0.";
@@ -93,9 +99,10 @@ public class Parser {
     }
 
     /**
-     * Method to handle the todo command.
+     * Adds a Todo task into the users TaskList.
      * @param input User's input
      * @param taskList User's TaskList
+     * @return String Message to update user upon success
      * @throws DukeException If user did not provide name of Todo.
      */
     public String todo(String[] input, TaskList taskList) throws DukeException {
@@ -108,9 +115,10 @@ public class Parser {
     }
 
     /**
-     * Method to handle the deadline command.
+     * Adds a Deadline task into the users TaskList.
      * @param input User's input
      * @param taskList User's TaskList
+     * @return String Message to update user upon success
      * @throws DukeException If user did not enter /by date or invalid date format.
      */
     public String deadline(String[] input, TaskList taskList) throws DukeException {
@@ -131,13 +139,17 @@ public class Parser {
     }
 
     /**
-     * Method to handle the event command.
+     * Adds an Event task into the users TaskList.
      * @param input User's input
      * @param taskList User's TaskList
+     * @return String Message to update user upon success
      * @throws DukeException If user did not enter /from or /to or invalid date format.
      */
     public String event(String[] input, TaskList taskList) throws DukeException {
-        if (input.length == 1 || !input[1].contains("/from") || !input[1].contains("/to") ) {
+        boolean isWithoutInput = input.length == 1;
+        boolean isWithoutFrom = !input[1].contains("/from");
+        boolean isWithoutTo = !input[1].contains("/to");
+        if (isWithoutInput || isWithoutFrom || isWithoutTo ) {
             throw new DukeException("Event needs a /from and /to.");
         }
         String[] tempInput = input[1].split("/");
@@ -156,9 +168,10 @@ public class Parser {
     }
 
     /**
-     * Method to handle the delete command.
+     * Deletes a task from the user's TaskList.
      * @param input User's input
      * @param taskList User's TaskList
+     * @return String Message to update user upon success
      * @throws DukeException If user enters invalid number.
      */
     public String delete(String[] input, TaskList taskList) throws DukeException {
@@ -171,7 +184,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number.");
         }
-        if (index > taskList.size() || index <= 0) {
+        boolean isNotWithinTaskListSize = index > taskList.size();
+        boolean isSmallerThan1 = index <= 0;
+        if (isNotWithinTaskListSize || isSmallerThan1) {
             throw new DukeException("Invalid task.");
         }
         assert index > 0 : "Number less than equal 0.";
@@ -179,9 +194,10 @@ public class Parser {
     }
 
     /**
-     * Method to handle the find command.
+     * Returns a String containing the user's task that matches the given keyword.
      * @param input User's input
      * @param taskList User's TaskList
+     * @return String User's task that match given keyword
      * @throws DukeException If user did not enter a keyword.
      */
     public String find(String[] input, TaskList taskList) throws DukeException {
