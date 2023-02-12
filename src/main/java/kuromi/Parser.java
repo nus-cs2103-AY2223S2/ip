@@ -38,11 +38,11 @@ public class Parser {
         try {
             switch (c) {
             case bye:
-                return Parser.exitCommand();
+                return Parser.exitCommand(temp);
             case mistakes:
-                return Parser.mistakesCommand();
+                return Parser.mistakesCommand(temp);
             case list:
-                return Parser.listCommand();
+                return Parser.listCommand(temp);
             case remind:
                 return Parser.remindCommand(temp);
             case find:
@@ -64,6 +64,8 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new KuromiException("OOPS!!! The index cannot be empty.");
+        } catch (NumberFormatException e) {
+            throw new KuromiException("OOPS!!! The index should be an number.");
         }
     }
 
@@ -88,23 +90,38 @@ public class Parser {
         return CommandType.valueOf(temp[0]);
     }
 
-    private static Command exitCommand() {
+    private static Command exitCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'bye'?");
+        }
         return new ExitCommand();
     }
 
-    private static Command mistakesCommand() {
+    private static Command mistakesCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'mistakes'?");
+        }
         return new MistakesCommand();
     }
 
-    private static Command listCommand() {
+    private static Command listCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'list'?");
+        }
         return new ListCommand();
     }
 
-    private static Command remindCommand(String[] temp) {
+    private static Command remindCommand(String[] temp) throws KuromiException {
+        if (temp.length > 1) {
+            throw new KuromiException("OOPS!!! I don't understand what you mean :(\nDo you mean 'bye'?");
+        }
         if (temp.length == 1) {
             return new RemindCommand(5);
         }
         int idx = Integer.parseInt(temp[1]);
+        if (idx == 0) {
+            throw new KuromiException("OOPS!!! I'm not reminding you anything!\n(Your command: 0 task)");
+        }
         return new RemindCommand(idx);
     }
     private static Command findCommand(String[] temp) throws KuromiException {
@@ -175,7 +192,7 @@ public class Parser {
                 desc2 += " ";
             }
         }
-        if (desc2.equals("") || desc2.contains("/by")) {
+        if (desc2.equals("") || desc2.startsWith("/by")) {
             throw new KuromiException("OOPS!!! The description of a deadline cannot be empty.");
         }
         String by = "";
@@ -186,7 +203,7 @@ public class Parser {
                 by += " ";
             }
         }
-        if (by.equals("")) {
+        if (by.equals("") || desc2.contains("/by")) {
             throw new KuromiException("OOPS!!! The deadline of a deadline cannot be empty.");
         }
         return new AddCommand(new Deadline(desc2, by));
@@ -205,7 +222,7 @@ public class Parser {
                 desc3 += " ";
             }
         }
-        if (desc3.equals("")) {
+        if (desc3.equals("") || desc3.startsWith("/from")) {
             throw new KuromiException("OOPS!!! The description of an event cannot be empty.");
         }
         String from = "";
@@ -220,8 +237,8 @@ public class Parser {
                 from += " ";
             }
         }
-        if (from.equals("")) {
-            throw new KuromiException("OOPS!!! The start date of a deadline cannot be empty.");
+        if (from.equals("") || desc3.contains("/from") || from.startsWith("/to")) {
+            throw new KuromiException("OOPS!!! The start date of an event cannot be empty.");
         }
         String by2 = "";
         for (int i = counter3; i < temp.length; i++) {
@@ -230,8 +247,8 @@ public class Parser {
                 by2 += " ";
             }
         }
-        if (by2.equals("")) {
-            throw new KuromiException("OOPS!!! The end date of a deadline cannot be empty.");
+        if (by2.equals("") || from.contains("/to")) {
+            throw new KuromiException("OOPS!!! The end date of an event cannot be empty.");
         }
         return new AddCommand(new Event(desc3, by2, from));
     }
