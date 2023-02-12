@@ -165,7 +165,7 @@ Toto will list out all the tasks that have been archived,
     1. [D][ ] homework (by: Mar 3 2022 09:00)
     2. [E][ ] ballroom dancing (from: Mar 3 2022 09:30 to: Mar 3 2022 10:30)
     3. [T][ ] clean litter box
-
+```
 ### `save` - Save current tasks. 
 
 Saves the tasks and archives into the computer. 
