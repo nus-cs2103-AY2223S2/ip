@@ -1,3 +1,0 @@
-event || 1 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
-deadline || 0 || meeting  || 18:00, Feb 02 2019
-todo || 0 ||  read book
