@@ -38,6 +38,7 @@ public class Storage {
             if (file.createNewFile()){
                 return taskList;
             }
+            assert file.exists(): "File was not successfully created.";
         } catch (IOException e) {
             throw new DukeException("Something went wrong when accessing file");
         }
@@ -83,7 +84,8 @@ public class Storage {
         try {
             if (file.createNewFile()) {
                 System.out.println("Created new file taskList.txt");
-            } 
+            }
+            assert file.exists(): "File was not successfully created.";
             FileWriter fw = new FileWriter(file);
             String taskString = "";
             for (int i = 0; i < t.size(); i++){
