@@ -10,7 +10,7 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         switch(this.command) {
             case TODO:
-                if (arg.size() == 1) {
+                if (arg.size() == 0) {
                     throw new DukeException("TASK MUST HAS DESCRIPSHUN MEOW");
                 }
                 String description = String.join(" ", arg);
@@ -38,13 +38,9 @@ public class AddCommand extends Command {
                 throw new DukeException();
         }
     }
-
     private void deadline(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int byIndex = arg.indexOf("/by");
         List<String> commandTempArg = arg.subList(1, byIndex);
-        if (byIndex == 1) {
-            throw new DukeException("TASK MUST HAS DESCRIPSHUN MEOW");
-        }
         String description = String.join(" ", commandTempArg);
         commandTempArg = arg.subList(byIndex + 1, arg.size());
         String deadline = String.join(" ", commandTempArg);

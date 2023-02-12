@@ -46,9 +46,8 @@ public class Storage {
                     }
                     reader.close();
                 } catch (Exception e) {
-                    throw new DukeException();
+                    throw new DukeException("save file is blank");
                 }
-
                 return this.list;
 
         } else {
@@ -57,7 +56,8 @@ public class Storage {
         }
     }
 
-    public void save() throws DukeException, IOException {
+    public void save(TaskList taskList) throws DukeException, IOException {
+        this.list = taskList.getList();
         save.delete();
         File saver = new File("./duke.txt");
         FileWriter mySaveWriter = new FileWriter(saver, false);

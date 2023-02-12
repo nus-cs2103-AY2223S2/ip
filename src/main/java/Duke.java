@@ -26,7 +26,6 @@ public class Duke {
                     + "|____/ \\__,_|_|\\_\\___|\n";
     //CHECKSTYLE.ON: checkStyleTest
         System.out.println("Hello from\n" + logo);
-        System.out.println("I will remember things now");
         while (true) {
             System.out.print('\n');
             Scanner sc = new Scanner(System.in);
@@ -39,9 +38,9 @@ public class Duke {
             try {
                 Command c = Parser.parseIn(in);
                 c.execute(taskList, ui, storage);
-                duke.storage.save();
+                duke.storage.save(taskList);
             } catch (DukeException e) {
-                return;
+                //empty catch, error should have been handled by parser or command
             }
             ui.line(in.length());
         }

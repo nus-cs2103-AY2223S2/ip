@@ -2,22 +2,14 @@ import java.io.*;
 import java.util.*;
 public class TaskList {
     private static ArrayList<Task> list;
-    private static Storage storage;
     public TaskList() {
         this.list = new ArrayList<>();
-        File save = new File("./duke.txt");
-        try { 
-        save.createNewFile();
-        } catch (IOException e) {
-        //we will never call this if we did not need to create a new file (check main)
-        }
-        this.storage = new Storage("./duke.txt");
     }
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
-    private Storage getStorage() {
-        return this.storage; 
+    public ArrayList<Task> getList() {
+        return this.list; 
     } 
     public void showList() {
         int j = 0;
