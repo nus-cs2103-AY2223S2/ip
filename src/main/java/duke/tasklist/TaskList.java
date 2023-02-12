@@ -41,6 +41,10 @@ public class TaskList {
         return sb.toString();
     }
 
+    public Task get(int taskNo) {
+        return tasks.get(taskNo - 1);
+    }
+
     /**
      * Marks a particular task as "Done"
      * @param taskNumber the number of the Task to be marked
