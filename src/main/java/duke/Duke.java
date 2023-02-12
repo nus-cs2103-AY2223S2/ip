@@ -8,7 +8,6 @@ import java.util.*;
  * main duke class. helps abstract all the other components
  */
 public class Duke {
-    //javadoc
     private static Ui ui; //deal with user interactionss
     private static TaskList taskList;
     private static Storage storage;
