@@ -28,9 +28,6 @@ public class Duke  {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/black-cat.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/black-cat.png"));
 
-    public Duke() {
-
-    }
     /**
      * Constructor for Duke object.
      * @param filePath Filepath of where txt file is write into.

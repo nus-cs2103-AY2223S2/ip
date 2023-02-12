@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.tasklist.ArchivedTaskList;
 import duke.tasklist.TaskList;
@@ -71,36 +69,6 @@ public class Ui {
     }
 
     /**
-     * Returns an empty next line.
-     * @return Next line string.
-     */
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    /**
-     * Asks the user when deadline task is due.
-     */
-    public void askBy() {
-        System.out.println("By?");
-    }
-
-    /**
-     * Asks the user when event task starts.
-     */
-    public void askFrom() {
-        System.out.println("From?");
-    }
-
-    /**
-     * Asks the user when event task ends.
-     */
-    public void askTo() {
-        System.out.println("To?");
-    }
-
-    /**
      * Returns string when user wants to find tasks with keyword in task list.
      * @param tasks The task list.
      * @return String Message to reply to user.
@@ -109,10 +77,19 @@ public class Ui {
         return "Here are the tasks with the keyword: \n" + tasks;
     }
 
+    /**
+     * Returns the string representation when the user archives all the tasks.
+     * @return String after user archives all tasks.
+     */
     public String showArchivedAll() {
         return "All your tasks are now archived, your task list is now empty!";
     }
 
+    /**
+     * Returns string representation of task list.
+     * @param tasks
+     * @return String of tasks.
+     */
     public String showList(TaskList tasks) {
         String beginning = "Task list ";
         if (tasks instanceof ArchivedTaskList) {

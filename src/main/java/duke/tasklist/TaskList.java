@@ -148,6 +148,10 @@ public class TaskList {
         return arrayList.get(i);
     }
 
+    /**
+     * Moves task in the list to an archive list.
+     * @param archives Archive list.
+     */
     public void archiveAll(ArchivedTaskList archives) {
 
         while (arrayList.size() > 0) {
