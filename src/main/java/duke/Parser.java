@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Arrays;
-
 /**
  * Parser is a class that deals with making sense of the user command, this includes
  * getting the description of a certain task, getting the index from the mark, unmark and delete
@@ -85,12 +83,11 @@ public class Parser {
         if (arr.length == 1) {
             return "";
         } else {
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i] == "/from") {
-                    return String.join(" ", Arrays.copyOfRange(arr, 1, i + 1));
-                }
-            }
-            return "";
+            String output = "";
+            int fromIndex = input.indexOf("/from");
+            assert fromIndex > -1;
+            output = input.substring(7, fromIndex-1);
+            return output;
         }
     }
 
@@ -117,5 +114,49 @@ public class Parser {
     public String getEventEnd(String input) {
         assert input.length() > 0;
         return input.substring(input.indexOf("/to") + 4);
+    }
+
+    /**
+     * Returns the string of the period task description
+     * @param input user command
+     * @return description String
+     */
+    public String getPeriodDescription(String input) {
+        assert input.length() > 0;
+        String[] arr = input.split(" ");
+        if (arr.length == 1) {
+            return "";
+        } else {
+            String output = "";
+            int fromIndex = input.indexOf("/between");
+            assert fromIndex > -1;
+            output = input.substring(7, fromIndex-1);
+            return output;
+        }
+    }
+    
+    /**
+     * Returns the string of the starting date and time of the period task
+     * @param input user command
+     * @return starting date and time of the string
+     */
+    public String getPeriodBetween(String input) {
+        assert input.length() > 0;
+        int start = input.indexOf("/between");
+        int end = input.indexOf("/and");
+        if (start == -1 || end == -1) {
+            return "";
+        }
+        return input.substring(start + 9, end - 1);
+    }
+
+    /**
+     * Returns the string of the ending date and time of the period task
+     * @param input user command
+     * @return ending date and time of the string
+     */
+    public String getPeriodEnd(String input) {
+        assert input.length() > 0;
+        return input.substring(input.indexOf("/and") + 5);
     }
 }

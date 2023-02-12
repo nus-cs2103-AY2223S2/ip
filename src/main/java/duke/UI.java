@@ -134,4 +134,22 @@ public class UI {
     public String showExit() {
         return "Bye. Hope to see you again soon!";
     }
+
+    /**
+     * Adds a period task into the data file
+     * @param list list of tasks
+     * @param description describes the period task
+     * @param start starting date and time
+     * @param end ending date and time
+     * @return String representation after adding the task into the data file
+     */
+    public String addPeriod(TasksList list, String description, String start, String end) {
+        assert !list.equals(null) && description.length() > 0 && start.length() > 0 && end.length() > 0;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        LocalDateTime formattedstartTime = LocalDateTime.parse(start, dateTimeFormatter);
+        LocalDateTime formattedendTime = LocalDateTime.parse(end, dateTimeFormatter);
+        list.addTask(new Period(description, formattedstartTime, formattedendTime));
+        return "Got it. I've added this task:\n  " + list.getTask(list.getSize() - 1).toString() 
+            + "\n" + "Now you have " + list.getSize() + " task(s) in the list.";
+    }
 }

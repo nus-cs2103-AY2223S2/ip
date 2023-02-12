@@ -238,6 +238,8 @@ public class Duke extends Application {
                 return byeResponse();
             } else if (command.equals("greet")) {
                 return ui.start();
+            } else if (commandArr[0].equals("period")) {
+                return periodResponse(commandArr, command);
             } else {
                 return "Should not reach this condition";
             }
@@ -369,5 +371,21 @@ public class Duke extends Application {
     private String byeResponse() {
         storage.saveData();
         return ui.showExit();
+    }
+
+    /**
+     * Gets the response from a period command
+     * @param commandArr array of strings from the command
+     * @param command user input
+     * @return response from the command
+     */
+    private String periodResponse(String[] commandArr, String command) {
+        try {
+            DukeExceptions.checkEmptyDescription(commandArr);
+            return ui.addPeriod(list, parser.getPeriodDescription(command),
+                parser.getPeriodBetween(command), parser.getPeriodEnd(command));
+        } catch (EmptyDescriptionException e) {
+            return e.getMessage();
+        }
     }
 }
