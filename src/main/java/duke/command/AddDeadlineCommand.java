@@ -41,8 +41,14 @@ public class AddDeadlineCommand extends Command {
         String deadline = normalisedRequest[1];
 
         LocalDateTime dueDate = DateTimeParser.parse(deadline);
-        Deadline newDeadline = tasks.addDeadline(description, dueDate);
+        Deadline duplicateChecker = new Deadline(description, dueDate);
 
+        if (InputValidator.checkDuplicates(tasks, duplicateChecker)) {
+            return String.format("You have already added this into your task list.\n Duplicated Task: %s",
+                    duplicateChecker.toString());
+        }
+
+        Deadline newDeadline = tasks.addDeadline(description, dueDate);
         String response = String.format("Great! I've added this task for you\n %s \n"
                 + "You have %d tasks in the list.", newDeadline, tasks.numOfTask());
 

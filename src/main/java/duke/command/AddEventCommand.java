@@ -43,13 +43,19 @@ public class AddEventCommand extends Command {
 
         LocalDateTime startDate = DateTimeParser.parse(from);
         LocalDateTime endDate = DateTimeParser.parse(to);
-        Event newEvent = tasks.addEvent(description, startDate, endDate);
 
         // checks valid `duration`
         if (startDate.isAfter(endDate)) {
             throw new InvalidArgumentException("Your start date should be before your end date!");
         }
 
+        Event duplicateChecker = new Event(description, startDate, endDate);
+        if (InputValidator.checkDuplicates(tasks, duplicateChecker)) {
+            return String.format("You have already added this into your task list.\n Duplicated Task: %s",
+                    duplicateChecker.toString());
+        }
+
+        Event newEvent = tasks.addEvent(description, startDate, endDate);
         String response = String.format("Great! I've added this task for you\n %s \n"
                 + "You have %d tasks in the list.", newEvent, tasks.numOfTask());
 

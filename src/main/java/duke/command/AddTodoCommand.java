@@ -31,6 +31,14 @@ public class AddTodoCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws MissingArgumentException {
         String description = InputValidator.normaliseTodoRequest(request);
+
+        Todo duplicateChecker = new Todo(description);
+
+        if (InputValidator.checkDuplicates(tasks, duplicateChecker)) {
+            return String.format("You have already added this into your task list.\n Duplicated Task: %s",
+                    duplicateChecker.toString());
+        }
+
         Todo newTodo = tasks.addTodo(description);
         String response = String.format("Great! I've added this task for you\n %s \n"
                 + "You have %d tasks in the list.", newTodo, tasks.numOfTask());

@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private final LocalDateTime dueDate;
+    private String formattedDueDate;
 
     /**
      * Constructor method for Deadline
@@ -17,6 +18,12 @@ public class Deadline extends Task {
     public Deadline(String task, LocalDateTime dueDate) {
         super(task);
         this.dueDate = dueDate;
+        this.formattedDueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
+    }
+
+    @Override
+    public String getDescription() {
+        return this.task + " (by: " + formattedDueDate + ")";
     }
 
     @Override
@@ -31,8 +38,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        String formattedDueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma"));
 
-        return "[D][" + statusIcon + "] " + this.task + " (by: " + formattedDueDate + ")";
+        return "[D][" + statusIcon + "] " + this.getDescription();
     }
 }

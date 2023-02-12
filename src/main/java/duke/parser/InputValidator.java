@@ -2,9 +2,12 @@ package duke.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import duke.exception.InvalidArgumentException;
 import duke.exception.MissingArgumentException;
+import duke.storage.TaskList;
+import duke.task.Task;
 
 /**
  * Input validator class to process and clean the user's request.
@@ -174,6 +177,20 @@ public class InputValidator {
         String idx = req[1].strip();
 
         return idx;
+    }
+
+    /**
+     * Static method to check if user tried to add a duplicated task into the task list.
+     * @param tasks Task list of the user.
+     * @param task Task wish to be added by the user.
+     * @return True if the there is duplicate, else false.
+     */
+    public static Boolean checkDuplicates(TaskList tasks, Task task) {
+        ArrayList<Task> filteredTasks = tasks.getTasks()
+                .stream()
+                .filter(t -> t.getDescription().equals(task.getDescription()))
+                .collect(Collectors.toCollection(ArrayList::new));
+        return !filteredTasks.isEmpty();
     }
 
 }
