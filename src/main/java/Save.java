@@ -31,21 +31,21 @@ public class Save {
                 } else if (task1[1].equals("[X]")){
                     taskStatus = true;
                 }
-                DateTimeFormatter dateTimeFormatter =
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                DateTimeFormatter dateTimeFormatter1 =
+                        DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
                 if (task.startsWith("T")) {
                     Todo todo = new Todo(i + 1, taskStatus, task1[2],
                             taskList.size());
                     allTasks.add(todo);
                 } else if (task.startsWith("D")) {
                     Deadline deadline = new Deadline(i + 1, taskStatus, task1[2],
-                            LocalDateTime.parse(task1[3], dateTimeFormatter), taskList.size());
+                            LocalDateTime.parse(task1[3], dateTimeFormatter1), taskList.size());
                     allTasks.add(deadline);
                 } else if (task.startsWith("E")) {
                     String[] taskTiming = task1[3].split("-");
                     Event event = new Event(i + 1, taskStatus, task1[2],
-                            LocalDateTime.parse(taskTiming[0], dateTimeFormatter),
-                            LocalDateTime.parse(taskTiming[1], dateTimeFormatter), taskList.size());
+                            LocalDateTime.parse(taskTiming[0], dateTimeFormatter1),
+                            LocalDateTime.parse(taskTiming[1], dateTimeFormatter1), taskList.size());
                     allTasks.add(event);
                 }
             }
@@ -62,17 +62,22 @@ public class Save {
         FileWriter file1 = new FileWriter(file, true);
         BufferedWriter buffer = new BufferedWriter(file1);
 
+        DateTimeFormatter dateTimeFormatter1 =
+                DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
+
         if (command.startsWith("todo")) {
             String content = "T / " + task.getTaskStatus() + " / " + task.getTask() + "\n";
             buffer.write(content);
         } else if (command.startsWith("deadline")) {
             String content = "D / " + task.getTaskStatus() + " / " +
-                    task.getTask() + " / " + task.getDeadline() + "\n";
+                    task.getTask() + " / " +
+                    task.getDeadline().format(dateTimeFormatter1) + "\n";
             buffer.write(content);
         } else if (command.startsWith("event")) {
             String content = "E / " + task.getTaskStatus() + " / " +
-                    task.getTask() + " / " + task.getEventStartTime() + "-" +
-                    task.getEventEndTime() + "\n";
+                    task.getTask() + " / " +
+                    task.getEventStartTime().format(dateTimeFormatter1) + "-" +
+                    task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             buffer.write(content);
         } else if (command.startsWith("mark")) {
             FileReader file2 = new FileReader(file);
@@ -87,11 +92,13 @@ public class Save {
                 unchangedTasks = unchangedTasks + "T / [X] / " + task.getTask() + "\n";
             } else if (task.getTaskType().equals("[D]")) {
                 unchangedTasks = unchangedTasks + "D / [X] / " +
-                        task.getTask() + " / " + task.getDeadline() + "\n";
+                        task.getTask() + " / " +
+                        task.getDeadline().format(dateTimeFormatter1) + "\n";
             } else if (task.getTaskType().equals("[E]")) {
                 unchangedTasks = unchangedTasks + "E / [X] / " +
-                        task.getTask() + " / " + task.getEventStartTime() + "-" +
-                        task.getEventEndTime() + "\n";
+                        task.getTask() + " / " +
+                        task.getEventStartTime().format(dateTimeFormatter1) + "-" +
+                        task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             }
             bufferedReader.readLine();
             for (int i = taskIndex + 1; i <= taskList.size(); i++) {
@@ -114,11 +121,13 @@ public class Save {
                 unchangedTasks = unchangedTasks + "T / [ ] / " + task.getTask() + "\n";
             } else if (task.getTaskType().equals("[D]")) {
                 unchangedTasks = unchangedTasks + "D / [ ] / " +
-                        task.getTask() + " / " + task.getDeadline() + "\n";
+                        task.getTask() + " / " +
+                        task.getDeadline().format(dateTimeFormatter1) + "\n";
             } else if (task.getTaskType().equals("[E]")) {
                 unchangedTasks = unchangedTasks + "E / [ ] / " +
-                        task.getTask() + " / " + task.getEventStartTime() + "-" +
-                        task.getEventEndTime() + "\n";
+                        task.getTask() + " / " +
+                        task.getEventStartTime().format(dateTimeFormatter1) + "-" +
+                        task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             }
             bufferedReader.readLine();
             for (int i = taskIndex + 1; i <= taskList.size(); i++) {
