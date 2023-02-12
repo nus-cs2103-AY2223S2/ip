@@ -1,3 +1,4 @@
 D | 1 | deadline fwef | 12/12/2000 1400
 D | 0 | deadline wefwef wefwefwe | 1/1/2000 1200
-E | 0 | event wefwe | 12/12/2000 1200 | 13/10/2002 1300
+E | 1 | event wefwe | 12/12/2000 1200 | 13/10/2002 1300
+T | 0 | he

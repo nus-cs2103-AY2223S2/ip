@@ -34,21 +34,15 @@ public class YJ {
             Command command = Parser.parseCommand(input);
             switch (command) {
                 case LIST:
-                    List<Task> tasksList = tasks.getTasks();
-                    for (int i = 0; i < tasksList.size(); i++) {
-                        Task task = tasksList.get(i);
-                        ui.print((i + 1) + "." + task.toString());
-                    }
+                    tasks.forEachTask((task, i) -> ui.print((i + 1) + "." + task.toString()));
                     break;
                 case DELETE:
                     try {
                         Integer taskNumber = Parser.parseDeleteCommand(input);
-                        if (taskNumber != null && tasks.getTask(taskNumber - 1) != null) {
-                            Task task = tasks.removeTask(taskNumber - 1);
-                            ui.print("I've removed this task as u lazily requested:");
-                            ui.print(task.toString());
-                            ui.print("Now you have like this many tasks left: " + tasks.getNumberofTasks());
-                        }
+                        Task task = tasks.deleteTask(taskNumber);
+                        ui.print("I've removed this task as u lazily requested:");
+                        ui.print(task.toString());
+                        ui.print("Now you have like this many tasks left: " + tasks.getNumberofTasks());
                     } catch (IndexOutOfBoundsException e) {
                         ui.print("Crapadoodle! You need to specify a task number or a valid task to delete.");
                     }
