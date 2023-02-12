@@ -12,7 +12,7 @@ public class ToDo extends Task {
      * @param content A String representing the content of this item.
      */
     public ToDo(String content) {
-        super(content);
+        super(content, "T");
     }
 
     @Override
@@ -22,7 +22,9 @@ public class ToDo extends Task {
      * @return A String that represents the <code>ToDo</code> item, including its description and done status.
      */
     public String toString() {
-        return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description;
+        return String.format("[%s] ", this.letterType)
+                + (this.isDone ? this.MARKED : this.UNMARKED) + " "
+                + this.description;
     }
 
     /**

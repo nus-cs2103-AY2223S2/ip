@@ -1,7 +1,5 @@
 package babe;
 
-import babe.task.Task;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -78,19 +76,6 @@ class Storage {
     }
 
     /**
-     * Deletes the save file.
-     */
-    public static void deleteSaveFile() {
-
-        try {
-            Files.deleteIfExists(Paths.get(FILE_PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
      * Saves Tasks stored in Babe's memory to a file specified by fileAddress.
      */
     protected static void save(TaskList taskList) {
@@ -99,7 +84,7 @@ class Storage {
             String data = "";
 
             for (int i = 0; i < taskList.length(); i++) {
-                data = taskList.get(i).toSaveFormat();
+                data = taskList.getSaveFormat(i);
                 bufferedWriter.write(data);
                 bufferedWriter.newLine();
             }

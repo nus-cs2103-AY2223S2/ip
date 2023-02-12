@@ -1,4 +1,4 @@
-package babe;
+package babe.controllers;
 
 import java.io.IOException;
 import java.util.Collections;

@@ -1,7 +1,5 @@
 package babe;
 
-import babe.task.Task;
-
 import java.util.ArrayList;
 
 /**
@@ -24,8 +22,9 @@ class Ui {
     }
 
     /**
-     * Welcome users of Babe.
-     * Greets user and prompts for help. This method does not expect a response.
+     * Prints a welcome message for users of Babe.
+     *
+     * @return A String that is the welcome message.
      */
     protected static String welcomeUser() {
         String output = "HELLO! Greetings from Babe <3 How may I help you?";
@@ -63,16 +62,11 @@ class Ui {
         System.out.println(output);
     }
 
-    /**
-     * Bids farewell to the user.
-     * Prints a line of farewell before ending the program.
-     */
     protected static String sayBye() {
         String output = "Bye, babyboo. Can't wait to meet you again!";
         printOutputMessage(output);
         return output;
     }
-
 
     protected static String notifyDelete(ArrayList<String> taskStrings, int count) {
         String output = "";

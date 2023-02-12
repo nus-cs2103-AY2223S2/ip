@@ -4,7 +4,9 @@ import babe.exception.NoArgumentException;
 import babe.exception.NonsenseInputException;
 import babe.exception.WrongDateFormatException;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,8 +24,12 @@ class Parser {
 
     /**
      * Rebuilds a string from ArrayList from the starting index to the ending index (not inclusive).
-     * A helper function to recover the original user input from userInput starting from the startingIndex
-     * to the ending index (not inclusive).
+     * A helper function to recover the original user input from array storing the split user input  starting from
+     * the startingIndex to the ending index (not inclusive).
+     *
+     * @param endingIndex An integer that is the starting index to start rebuilding the user input.
+     * @param startingIndex An integer that is the ending index (not inclusive) to start rebuilding the user's input
+     * @return A String that is the result of rebuilding user input.
      */
     private static String rebuildUserInput(int startingIndex, int endingIndex) {
         String result = "";
@@ -37,8 +43,8 @@ class Parser {
     /**
      * Finds and returns index of command arguments in userInput demarcated by given String pattern
      *
+     * @param pattern A String pattern that precedes the input of command argument
      * @return An integer that is the index of command argument.
-     * @args pattern A String pattern that precedes the input of command argument
      */
     private static int findArgument(String pattern) {
 
@@ -77,6 +83,8 @@ class Parser {
     /**
      * Returns true if the description is available for an instruction.
      * Throws NoDescriptionException if description is not available.
+     *
+     * @param argType The type of the argument to be checked, either "index" or "description".
      */
     private static void checkIfArgumentAvail(String argType)
             throws NoArgumentException {
@@ -106,6 +114,16 @@ class Parser {
     }
 
 
+    /**
+     * Parses input by the user into a readable format by Babe.
+     * The format that is readable is as such [{instruction}, {arg1}, {arg2}, {arg3}, ...]
+     *
+     * @param input A String that is the raw input from user.
+     * @return An ArrayList that contains the results of parsing with specfied format.
+     * @throws NoArgumentException
+     * @throws NonsenseInputException
+     * @throws WrongDateFormatException
+     */
     public static ArrayList<String> parse(String input)
             throws NoArgumentException, NonsenseInputException, WrongDateFormatException {
 
@@ -113,8 +131,6 @@ class Parser {
         int inputLength = userInput.size();
 
         String instruction = userInput.get(0).toLowerCase();
-
-
         ArrayList<String> outputs = new ArrayList<>();
         outputs.add(instruction);
 
@@ -133,7 +149,6 @@ class Parser {
             String index = userInput.get(1);
             assertIndexIsNumber(index);
             outputs.add(index);
-
 
         } else if (instruction.equals("todo")) {
             checkIfArgumentAvail("description");
