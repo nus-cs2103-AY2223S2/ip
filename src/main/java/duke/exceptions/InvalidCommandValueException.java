@@ -7,7 +7,7 @@ package duke.exceptions;
 public class InvalidCommandValueException extends Exception {
 
     /**
-     * Create a InvalidCommandValueException
+     * Creates a InvalidCommandValueException
      */
     public InvalidCommandValueException() {
         super("Please input a correct value");

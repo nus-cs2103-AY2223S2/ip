@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class InvalidUndoException extends Exception {
     /**
-     * Create a InvalidUndoException
+     * Creates a InvalidUndoException
      */
     public InvalidUndoException() {
         super("OOPS!!! I'm sorry, but there is nothing to undo.");

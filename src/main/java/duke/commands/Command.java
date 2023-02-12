@@ -25,7 +25,7 @@ public abstract class Command {
     }
 
     /**
-     * Return a boolean based on whether the list of past commands
+     * Returns a boolean based on whether the list of past commands
      * are empty
      *
      * @return boolean based on past commands list

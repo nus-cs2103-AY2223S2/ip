@@ -7,7 +7,7 @@ package duke.exceptions;
 public class EmptyCommandException extends Exception {
 
     /**
-     * Create a EmptyCommandException
+     * Creates a EmptyCommandException
      */
     public EmptyCommandException(String taskType) {
         super("OOPS!!! The description of a " + taskType + " cannot be empty.");

@@ -112,7 +112,7 @@ public class Ui {
         sb.append("Here are the matching tasks in your list:\n");
         int i = 1;
         for (Task task : taskList) {
-            sb.append(String.format("%d.%s\n", i, task.toString()));
+            sb.append(String.format("%d. %s\n", i, task.toString()));
             ++i;
         }
         return HORIZONTAL_LINE + "\n" + sb + HORIZONTAL_LINE + "\n";

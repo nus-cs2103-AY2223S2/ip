@@ -4,12 +4,12 @@ import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidTaskTypeException;
 
 /**
- * Task is an abstract class of ToDo, Event and deadline
+ * Task is an abstract class of ToDo, Event and Deadline
  * with a description and a completion status.
  */
 public abstract class Task {
     private final String task;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for Task.
@@ -18,7 +18,7 @@ public abstract class Task {
      */
     public Task(String command) {
         this.task = command;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -63,14 +63,14 @@ public abstract class Task {
      * Mark the Task as done.
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Unmark the Task as done.
      */
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -79,7 +79,7 @@ public abstract class Task {
      * @return  True if task is done else return false.
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
@@ -98,7 +98,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String checkbox = "[" + (done ? "X" : " ") + "]";
+        String checkbox = "[" + (isDone ? "X" : " ") + "]";
         return checkbox + " " + this.task;
     }
 

@@ -7,7 +7,7 @@ package duke.exceptions;
 public class InvalidDateException extends Exception {
 
     /**
-     * Create a InvalidDateException
+     * Creates a InvalidDateException
      */
     public InvalidDateException() {
         super("OOPS!!! Please key the date in the format: yyyy-mm-dd");

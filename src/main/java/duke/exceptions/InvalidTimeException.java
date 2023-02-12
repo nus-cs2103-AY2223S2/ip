@@ -7,7 +7,7 @@ package duke.exceptions;
 public class InvalidTimeException extends Exception {
 
     /**
-     * Create a InvalidTimeException
+     * Creates a InvalidTimeException
      */
     public InvalidTimeException() {
         super("OOPS!!! Please specify a time.");

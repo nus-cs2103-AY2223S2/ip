@@ -7,7 +7,7 @@ package duke.exceptions;
 public class InvalidTaskTypeException extends Exception {
 
     /**
-     * Create a InvalidTaskTypeException
+     * Creates a InvalidTaskTypeException
      */
     public InvalidTaskTypeException() {
         super("OOPS!!! I'm sorry, but I don't know what that task type means :-("
