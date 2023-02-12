@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -43,5 +45,22 @@ public class Event extends Task {
     public String toSavedString() {
         return "E" + "|" + (super.isDone ? "1" : "0")
                 + "|" + super.description + "|" + this.from + "|" + this.to;
+    }
+
+    @Override
+    public void setComponent(TaskComponent component, Object detail) throws DukeException {
+        switch (component) {
+        case DESCRIPTION:
+            this.description = (String) detail;
+            break;
+        case FROM:
+            this.from = (LocalDate) detail;
+            break;
+        case TO:
+            this.to = (LocalDate) detail;
+            break;
+        default:
+            throw new DukeException("EVENT task does not have this component: " + component);
+        }
     }
 }

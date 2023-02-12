@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.DukeException;
+
+import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
@@ -63,4 +66,12 @@ public abstract class Task {
     public boolean isMatched(String... keywords) {
         return Arrays.stream(keywords).anyMatch(keyword -> this.description.contains(keyword));
     }
+
+    /**
+     * Sets the component of this task to a new component description.
+     *
+     * @param component Component of the task to be updated.
+     * @param detail The new detail of the component.
+     */
+    public abstract void setComponent(TaskComponent component, Object detail) throws DukeException;
 }

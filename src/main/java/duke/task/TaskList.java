@@ -1,9 +1,12 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import javafx.util.Pair;
 
 import duke.DukeException;
 
@@ -165,5 +168,26 @@ public class TaskList {
         TaskList task = (TaskList) o;
 
         return task.taskList.equals(this.taskList);
+    }
+
+    /**
+     * Updates the component of the given task and returns the updated task.
+     *
+     * @param index Index of the task.
+     * @param updateComponents List of pairs of components and the detail to update.
+     * @return The task updated.
+     */
+    public Task update(int index, List<Pair<TaskComponent, ?>> updateComponents) throws DukeException {
+        checkIndexOutOfBounds(index);
+
+        Task task = indexToTask.get(index);
+
+        for (Pair<TaskComponent, ?> componentPair : updateComponents) {
+            TaskComponent component = componentPair.getKey();
+            Object detail = componentPair.getValue();
+            task.setComponent(component, detail);
+        }
+
+        return task;
     }
 }
