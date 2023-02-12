@@ -62,10 +62,10 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number.");
         }
-        if (index > taskList.size()) {
+        if (index > taskList.size() || index < 0) {
             throw new DukeException("Invalid task.");
         }
-        return taskList.markTask(Integer.parseInt(input[1]) - 1);
+        return taskList.markTask(index - 1);
     }
 
     /**
@@ -84,10 +84,10 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number.");
         }
-        if (index > taskList.size()) {
+        if (index > taskList.size() || index < 0) {
             throw new DukeException("Invalid task.");
         }
-        return taskList.unmarkTask(Integer.parseInt(input[1]) - 1);
+        return taskList.unmarkTask(index - 1);
     }
 
     /**
