@@ -7,7 +7,7 @@ import duke.exception.DukeException;
  */
 public class Parser {
     private enum CommandName {
-        BYE, B, LIST, L, MARK, M, UNMARK, U, DELETE, D, TODO, T, TD, DEADLINE, DL, EVENT, E, FIND, F
+        BYE, B, LIST, L, MARK, M, UNMARK, U, DELETE, D, TODO, T, DEADLINE, DL, EVENT, E, FIND, F
     }
 
     /**
