@@ -78,8 +78,10 @@ class TaskList {
      *
      * @param indices Integers that represents the indices of the Tasks to be removed from memory.
      */
+
     protected ArrayList<String> deleteTasks(ArrayList<String> indices) {
         ArrayList<String> deletedTasks = new ArrayList<>();
+        indices.stream().forEach(index -> assertIndexInRange(Integer.parseInt(index)));
         indices.sort(Comparator.comparingInt(e -> Integer.parseInt(e)));
         Collections.reverse(indices);
         for (int i = 0; i < indices.size(); i++) {
@@ -99,6 +101,7 @@ class TaskList {
      * @param index An integer that represents the index of the item to be marked.
      */
     protected String markTask(int index) {
+        assertIndexInRange(index);
         Task itemAtIndex = tasks.get(index - 1);
         itemAtIndex.mark();
         return itemAtIndex.toString();
@@ -111,6 +114,7 @@ class TaskList {
      * @param index An integer that represents the index of the item to be marked.
      */
     protected String unmarkTask(int index) {
+        assertIndexInRange(index);
         Task itemAtIndex = tasks.get(index - 1);
         itemAtIndex.unmark();
         return itemAtIndex.toString();
@@ -171,6 +175,9 @@ class TaskList {
         return tasks.get(index);
     }
 
+    private void assertIndexInRange(int index) throws AssertionError {
+        assert index <= tasks.size() : "Please pick an index from the list, darling.";
+    }
 
 
 }
