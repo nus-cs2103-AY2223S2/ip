@@ -41,39 +41,20 @@ public class Storage {
         this.ui.systemPrint("Loading saved data...");
 
         File dir = new File(SAVE_FILE_PATH);
+
         if (!dir.exists()) {
-            ui.systemPrint("data directory not found! Creating it now...");
-            if (dir.mkdirs()) {
-                ui.systemPrint("Successfully created data directory!");
-            }
+            handleMissingSaveDir(dir);
         }
 
         if (!saveFile.exists()) {
             ui.systemPrint("Save file not found! Creating it now...");
-            try {
-                saveFile.createNewFile();
-                ui.systemPrint("Successfully created save file!");
-            } catch (IOException e) {
-                ui.systemPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
-            } catch (SecurityException e) {
-                ui.systemPrint("Write access denied by security manager. Data will not be saved!");
-            }
+            createNewSaveFile();
         } else {
-            try {
-                Scanner saveFileScanner = new Scanner(saveFile);
-                List<Task> result = new ArrayList<>();
-                while (saveFileScanner.hasNext()) {
-                    result.add(Task.parseCsvString(saveFileScanner.nextLine()));
-                }
-                ui.systemPrint("Save file loaded successfully!");
-                return result;
-            } catch (FileNotFoundException e) {
-                // should not happen since we checked for file existence beforehand
-                System.out.println("Unexpected error occurred - save file not found. Data will not be saved!");
-            }
+            return loadExistingSaveFile();
         }
 
         return null;
+
     }
 
     /**
@@ -86,17 +67,54 @@ public class Storage {
         // in later iterations
         try {
             FileWriter saveFileWriter = new FileWriter(saveFile, false);
-            for (int i = 0; i < tasks.size(); i++) {
-                saveFileWriter.write(tasks.get(i).getCsvString());
-                // add line separator if not last clippy.task.Task in `tasks`
-                if (i < tasks.size() - 1) {
-                    saveFileWriter.write(System.lineSeparator());
-                }
-            }
+            writeData(tasks, saveFileWriter);
             saveFileWriter.close();
         } catch (IOException e) {
             ui.prettyPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
             return;
         }
+    }
+
+    public void writeData(List<Task> tasks, FileWriter saveFileWriter) throws IOException {
+        for (int i = 0; i < tasks.size(); i++) {
+            saveFileWriter.write(tasks.get(i).getCsvString());
+            saveFileWriter.write(System.lineSeparator());
+        }
+    }
+
+    public void handleMissingSaveDir(File dir) {
+        ui.systemPrint("data directory not found! Creating it now...");
+        if (dir.mkdirs()) {
+            ui.systemPrint("Successfully created data directory!");
+        }
+    }
+
+    public void createNewSaveFile() {
+        try {
+            saveFile.createNewFile();
+            ui.systemPrint("Successfully created save file!");
+        } catch (IOException e) {
+            ui.systemPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
+        } catch (SecurityException e) {
+            ui.systemPrint("Write access denied by security manager. Data will not be saved!");
+        }
+    }
+
+    public List<Task> loadExistingSaveFile() {
+        try {
+            Scanner saveFileScanner = new Scanner(saveFile);
+            List<Task> result = new ArrayList<>();
+
+            while (saveFileScanner.hasNext()) {
+                result.add(Task.parseCsvString(saveFileScanner.nextLine()));
+            }
+
+            ui.systemPrint("Save file loaded successfully!");
+            return result;
+        } catch (FileNotFoundException e) {
+            // should not happen since we checked for file existence beforehand
+            System.out.println("Unexpected error occurred - save file not found. Data will not be saved!");
+        }
+        return null;
     }
 }

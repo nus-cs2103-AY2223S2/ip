@@ -39,7 +39,7 @@ public class Clippy {
     }
 
     /**
-     * The main driver of the code.
+     * Drives the rest of the code.
      *
      * @param args Command line arguments.
      */
