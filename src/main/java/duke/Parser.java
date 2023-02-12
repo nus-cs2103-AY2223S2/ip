@@ -17,7 +17,6 @@ public class Parser {
      * @return int index of the command
      */
     public int getMarkNum(String input, boolean isMark) {
-        assert input.length() > 4;
         if (isMark) {
             return Integer.valueOf(input.substring(5));
         } else {
@@ -31,7 +30,6 @@ public class Parser {
      * @return keyword
      */
     public String getKeyword(String input) {
-        assert input.length() > 5;
         return input.substring(5);
     }
 
@@ -41,7 +39,6 @@ public class Parser {
      * @return Description of the todo object 
      */
     public String getTodoDescription(String input) {
-        assert input.length() > 4;
         if (input.substring(4).equals("")) {
             return "";
         }
@@ -54,7 +51,6 @@ public class Parser {
      * @return deadline of the Deadline object
      */
     public String getDeadlineby(String input) {
-        assert input.length() > 0;
         if (input.indexOf("/by") == -1) {
             return "";
         }
@@ -67,7 +63,6 @@ public class Parser {
      * @return description of the deadline object
      */
     public String getDeadlineDescription(String input) {
-        assert input.length() > 0;
         if (input.indexOf("/by") == 9) {
             return "";
         }
@@ -80,9 +75,7 @@ public class Parser {
      * @return description of the event object
      */
     public String getEventDescription(String input) {
-        assert input.length() > 0;
         String[] arr = input.split(" ");
-        assert arr.length > 0;
         if (arr.length == 1) {
             return "";
         } else {
@@ -101,7 +94,6 @@ public class Parser {
      * @return Start date and time of an event
      */
     public String getEventFrom(String input) {
-        assert input.length() > 0;
         int start = input.indexOf("/from");
         int end = input.indexOf("/to");
         if (start == -1 || end == -1) {
@@ -116,7 +108,6 @@ public class Parser {
      * @return End date and time of an event
      */
     public String getEventEnd(String input) {
-        assert input.length() > 0;
         return input.substring(input.indexOf("/to") + 4);
     }
 }

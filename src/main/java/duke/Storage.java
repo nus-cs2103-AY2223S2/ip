@@ -55,8 +55,8 @@ public class Storage {
                 if (input[0].equals("T")) {
                     task = new Todo(input[2]);
                 } else if (input[0].equals("D")) {
-                    String dateTime = input[3];
-                    String newDateTime = dateTimeFormat(dateTime);
+                    String datetime = input[3];
+                    String newDateTime = dateTimeFormat(input[3]);
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                     LocalDateTime formattedDeadline = LocalDateTime.parse(newDateTime, dateTimeFormatter);
                     task = new Deadline(input[2], formattedDeadline);
@@ -65,9 +65,9 @@ public class Storage {
                     String[] split = input[3].split(" - ");
                     String from = dateTimeFormat(split[0]);
                     String by = dateTimeFormat(split[1]);
-                    LocalDateTime formattedStartTime = LocalDateTime.parse(from, dateTimeFormatter);
-                    LocalDateTime formattedEndTime = LocalDateTime.parse(by, dateTimeFormatter);
-                    task = new Event(input[2], formattedStartTime, formattedEndTime);
+                    LocalDateTime formattedstartTime = LocalDateTime.parse(from, dateTimeFormatter);
+                    LocalDateTime formattedendTime = LocalDateTime.parse(by, dateTimeFormatter);
+                    task = new Event(input[2], formattedstartTime, formattedendTime);
                 }
                 if (input[1].equals("1")) {
                     task.markAsDone();
@@ -103,7 +103,6 @@ public class Storage {
      * @return formatted string of date and time
      */
     private String dateTimeFormat(String datetime) {
-        assert datetime.length() > 0;
         String year = datetime.substring(0, 4);
         String month = datetime.substring(5, 7);
         String day = datetime.substring(8, 10);

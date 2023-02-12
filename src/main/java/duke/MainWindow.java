@@ -42,10 +42,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        System.out.println("Running 8");
         String input = userInput.getText();
-        assert input.length() > 0 : "input cannot be empty";
         String response = duke.getResponse(input);
-        assert response.length() > 0 : "response cannot be empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -55,6 +54,7 @@ public class MainWindow extends AnchorPane {
 
     //@FXML
     public void greet() {
+        System.out.println("Running 11");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("hello", dukeImage)
         );
