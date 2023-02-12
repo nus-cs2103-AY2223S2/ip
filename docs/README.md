@@ -35,3 +35,10 @@
 - `sortdate` Sort tasks by date.
 - `sorttask` Sort tasks by task type.
 - `sortdone` Sort tasks by status.
+
+## Export and import 
+
+1. Run BorzAI at least once and exit it.
+2. Copy the `tasks.ser` file from the location that you want to export from.
+3. Paste it into the `data` folder that should have been auto-created.
+4. Run BorzAI and enter `list` command to show updated tasks.
