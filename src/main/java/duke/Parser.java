@@ -11,7 +11,6 @@ public class Parser {
         if (str.equals("list")) {
             return "list";
         }
-
         if (str.startsWith("mark ")) {
             return "mark";
         }
