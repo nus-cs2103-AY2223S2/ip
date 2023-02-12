@@ -53,7 +53,7 @@ application {
 
 shadowJar {
     archiveBaseName.set("ip")
-    archiveClassifier.set("0.2")
+    archiveClassifier.set("0.3")
 }
 
 
