@@ -1,7 +1,6 @@
 package task;
 
 import duke.DukeException;
-import duke.IncompleteCommandDukeException;
 
 import java.time.LocalDate;
 
@@ -23,13 +22,30 @@ public class Deadline extends Task {
      */
     public Deadline(String description) throws DukeException {
         super();
-        int indexOfBy = description.indexOf(DEADLINE_KEYWORD);
-        if (indexOfBy < 0) {
-            throw new IncompleteCommandDukeException("The date is missing");
-        }
-        this.time = Parser.parseDate(description.substring(indexOfBy + (DEADLINE_KEYWORD + " ").length()));
+        int indexOfBy = getIndexOfBye(description);
+        this.time = parseDeadline(description);
         this.name = description.substring(0, indexOfBy - " ".length());
         this.type = "D";
+    }
+
+    /**
+     * Parses the index of bye
+     * @param description the user-input description
+     * @return the index of the bye keyword
+     * @throws DukeException when the keyword cannot be found
+     */
+    private int getIndexOfBye(String description) throws DukeException {
+        return getKeywordIndex(description, DEADLINE_KEYWORD);
+    }
+
+    /**
+     * Parses the deadline from description
+     * @param description user-input description
+     * @throws DukeException when the deadline is unrecognizable or incomplete
+     */
+    private LocalDate parseDeadline(String description) throws DukeException {
+        int indexOfBy = getIndexOfBye(description);
+        return Parser.parseDate(description.substring(indexOfBy + (DEADLINE_KEYWORD + " ").length()));
     }
 
     /**

@@ -1,5 +1,8 @@
 package task;
 
+import duke.DukeException;
+import duke.IncompleteCommandDukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -99,6 +102,21 @@ public class Task {
     public boolean containString(String string) {
         assert string.length() > 0 : "input string length should not be zero";
         return toString().contains(string);
+    }
+
+    /**
+     * Returns the index of the given keyword
+     * @param description the user-input description
+     * @param keyword the keyword to search for
+     * @return the index of the keyword
+     * @throws DukeException when the keyword cannot be found
+     */
+    protected int getKeywordIndex(String description, String keyword) throws DukeException {
+        int keywordIndex = description.indexOf(keyword);
+        if (keywordIndex < 0) {
+            throw new IncompleteCommandDukeException(String.format("Keyword %s is missing.", keyword));
+        }
+        return keywordIndex;
     }
 
     /**

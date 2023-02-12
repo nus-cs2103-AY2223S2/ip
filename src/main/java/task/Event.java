@@ -1,7 +1,6 @@
 package task;
 
 import duke.DukeException;
-import duke.IncompleteCommandDukeException;
 
 import java.time.LocalDate;
 
@@ -48,11 +47,7 @@ public class Event extends Task {
      * @throws DukeException when the keyword is missing
      */
     private int getIndexOfFrom(String description) throws DukeException {
-        int indexOfFrom = description.indexOf(START_DATE_KEYWORD);
-        if (indexOfFrom < 0) {
-            throw new IncompleteCommandDukeException("The date is missing");
-        }
-        return indexOfFrom;
+        return getKeywordIndex(description, START_DATE_KEYWORD);
     }
 
     /**
@@ -62,11 +57,7 @@ public class Event extends Task {
      * @throws DukeException when the keyword is missing
      */
     private int getIndexOfTo(String description) throws DukeException {
-        int indexOfTo = description.indexOf(END_DATE_KEYWORD);
-        if (indexOfTo < 0) {
-            throw new IncompleteCommandDukeException("The date is missing");
-        }
-        return indexOfTo;
+        return getKeywordIndex(description, END_DATE_KEYWORD);
     }
 
     /**
