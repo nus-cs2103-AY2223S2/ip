@@ -44,6 +44,8 @@ public class Request {
             return new OnParser().parse(this.requestContent);
         case "FIND":
             return new FindParser().parse(this.requestContent);
+        case "REMINDER":
+            return new ReminderParser().parse(this.requestContent);
         default:
             throw new UnknownCommandException();
         }
