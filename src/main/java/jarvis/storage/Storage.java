@@ -15,8 +15,23 @@ import jarvis.task.Task;
  * Storage class to handle local storage of tasks.
  */
 public class Storage {
-    public static final String DATA_PATH = "data";
-    public static final String TASKS_PATH = DATA_PATH + "/tasks.txt";
+    public static final String FRIENDLY_ERROR_MESSAGE = "There's something wrong with my head.";
+
+    private final String fileName;
+    private final String[] folderNames;
+
+    /**
+     * Constructor for Storage.
+     *
+     * @param fileName Name of the file (e.g. "tasks.txt").
+     * @param folderNames Names of the individual folders in the path
+     *                    that leads up to fileName, without leading slashes
+     *                    (e.g. "data", "tasks").
+     */
+    public Storage(String fileName, String ...folderNames) {
+        this.fileName = fileName;
+        this.folderNames = folderNames;
+    }
 
     /**
      * Reads tasks from local storage.
@@ -70,19 +85,31 @@ public class Storage {
      * @throws TaskIoException If the folder or file cannot be created or accessed.
      */
     private File getFile() throws TaskIoException {
-        File folder = new File(DATA_PATH);
-        File file = new File(TASKS_PATH);
-        try {
-            folder.mkdir();
-            file.createNewFile();
-        } catch (IOException | SecurityException e) {
-            e.printStackTrace();
-            throw new TaskIoException(
-                    "Unable to create tasks file",
-                    "There's something wrong in my head."
-            );
+        String path = "";
+        for (String folderName : folderNames) {
+            if (path.length() > 0) {
+                path += "/";
+            }
+            path += folderName;
+            try {
+                new File(path).mkdir();
+            } catch (SecurityException e) {
+                throw new TaskIoException(
+                        String.format("Unable to create folder '%s'", path),
+                        FRIENDLY_ERROR_MESSAGE
+                );
+            }
         }
 
+        File file = new File(String.join("/", path, fileName));
+        try {
+            file.createNewFile();
+        } catch (IOException | SecurityException e) {
+            throw new TaskIoException(
+                    String.format("Unable to create file '%s'", path),
+                    FRIENDLY_ERROR_MESSAGE
+            );
+        }
         return file;
     }
 }

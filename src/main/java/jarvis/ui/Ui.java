@@ -57,9 +57,9 @@ public class Ui {
      * @return The previous value.
      */
     public boolean setErrorFlag(boolean flag) {
-        boolean result = isErrorPrinted;
+        boolean isPrinted = isErrorPrinted;
         isErrorPrinted = flag;
-        return result;
+        return isPrinted;
     }
 
     /**

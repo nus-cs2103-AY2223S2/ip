@@ -25,7 +25,7 @@ public class Jarvis {
      * Constructor for Jarvis.
      */
     public Jarvis() {
-        this.storage = new Storage();
+        this.storage = new Storage("tasks.txt", "data");
         this.ui = new Ui(BOT_NAME);
         this.taskList = new TaskList(storage.readTasks());
 
