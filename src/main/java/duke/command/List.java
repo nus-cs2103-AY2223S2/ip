@@ -6,7 +6,7 @@ import duke.UI.TextOutput;
 /**
  * Displays the tasks in the current task list.
  */
-public class List extends Commands{
+public class List extends Command {
     public List(String str) {
         this.setCommandStorage(str);
     }

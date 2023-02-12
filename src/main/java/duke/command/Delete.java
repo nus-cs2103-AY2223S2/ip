@@ -7,7 +7,7 @@ import duke.task.Task;
 /**
  * Implements the delete command.
  */
-public class Delete extends Commands{
+public class Delete extends Command {
     public Delete(String str) {
         this.setCommandStorage(str);
     }

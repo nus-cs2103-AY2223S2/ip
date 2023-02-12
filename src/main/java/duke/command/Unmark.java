@@ -6,7 +6,7 @@ import duke.UI.TextOutput;
 /**
  * Marks a particular task in the task list as not done.
  */
-public class Unmark extends Commands {
+public class Unmark extends Command {
     public Unmark(String str) {
         this.setCommandStorage(str);
     }

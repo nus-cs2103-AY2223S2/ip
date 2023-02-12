@@ -15,7 +15,7 @@ import java.util.Locale;
  * arguments into the command queue.
  */
 public class Parser {
-    private static Commands command;
+    private static Command command;
 
     /**
      * Creates a command according to the user input, parse it,
@@ -25,7 +25,7 @@ public class Parser {
      * @throws DukeException
      */
     public static void createCommand (String input) throws DukeException {
-        switch (input){
+        switch (input) {
             default : {
                 if (input.matches("mark+ [0-9]+")) {
                     Parser.command = new Mark(input);
@@ -39,14 +39,15 @@ public class Parser {
                     format.withLocale(Locale.ENGLISH);
                     LocalDateTime time = LocalDateTime.parse(substrings[1], format);
                     Parser.command = new SearchByDate(time);
-                } else if (input.matches("find\\s.*$")){
+                } else if (input.matches("find\\s.*$")) {
                     Parser.command = new Find(input);
-                } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") || input.matches("^todo\\s.*$")) {
+                } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") ||
+                        input.matches("^todo\\s.*$")) {
                     if (input.split(" ").length < 2) {
                         throw new InsufficientArguments("OOPS!!! The description of a " +
                                 input.split(" ")[0] + " cannot be empty.");
                     } else {
-                        Parser.command = new TaskCreationCommands(input); //if the command is a valid task creation command
+                        Parser.command = new TaskCreationCommands(input);
                     }
                 } else {
                     throw new UnknownCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");

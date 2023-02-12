@@ -7,7 +7,7 @@ import duke.UI.TextOutput;
 /**
  * Implements the exit of the bot.
  */
-public class Bye extends Commands {
+public class Bye extends Command {
 
 
     /**

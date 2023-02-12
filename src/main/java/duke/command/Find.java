@@ -5,7 +5,7 @@ import duke.UI.TextOutput;
 /**
  * Implements the find task functionality.
  */
-public class Find extends Commands{
+public class Find extends Command {
 
     public Find(String str) {
         this.setCommandStorage(str);

@@ -4,7 +4,7 @@ import duke.UI.TextOutput;
 /**
  * Implements echo functionality, which repeat the command that user gave.
  */
-public class Echo extends Commands {
+public class Echo extends Command {
     public Echo(String str) {
         this.setCommandStorage(str);
     }

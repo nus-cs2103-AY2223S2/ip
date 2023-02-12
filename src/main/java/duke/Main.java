@@ -2,18 +2,17 @@ package duke;
 
 import java.awt.*;
 import java.io.IOException;
-import duke.UI.DialogBox;
 import duke.UI.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
  */
+//Copied from the JavaFX tutorial.
 public class Main extends Application {
 
     private Duke duke = new Duke();

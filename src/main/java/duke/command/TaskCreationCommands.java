@@ -5,7 +5,7 @@ import duke.UI.TextOutput;
 /**
  * Executes the task creation commands stored in the command queue, by parsing the user input.
  */
-public class TaskCreationCommands extends Commands {
+public class TaskCreationCommands extends Command {
 
     public TaskCreationCommands(String str) {
         this.setCommandStorage(str);

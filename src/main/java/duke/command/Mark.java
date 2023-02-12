@@ -6,7 +6,7 @@ import duke.UI.TextOutput;
 /**
  * Marks a particular task in the task list as done.
  */
-public class Mark extends Commands {
+public class Mark extends Command {
     public Mark(String str) {
         this.setCommandStorage(str);
     }
