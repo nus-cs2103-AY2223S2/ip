@@ -6,6 +6,6 @@ package babe.exception;
 public class NoArgumentException extends Exception {
 
     public NoArgumentException(String argType) {
-        super(String.format("I need to know what is the %s of your task, bestie!", argType));
+        super(String.format("I need to know what is the %s of the task, bestie!", argType));
     }
 }

@@ -6,6 +6,8 @@ import babe.task.Task;
 import babe.task.ToDo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * The <code>TaskList</code> class represents the list of Tasks in Babe.
@@ -74,13 +76,22 @@ class TaskList {
     /**
      * Deletes Task in memory specified by given index.
      *
-     * @param index An integer that represents the index of the Task to be removed from memory.
+     * @param indices Integers that represents the indices of the Tasks to be removed from memory.
      */
-    protected String deleteTask(int index) {
-        assertIndexInRange(index);
-        Task removedTask = this.tasks.remove(index - 1);
-        taskCount--;
-        return removedTask.toString();
+
+    protected ArrayList<String> deleteTasks(ArrayList<String> indices) {
+        ArrayList<String> deletedTasks = new ArrayList<>();
+        indices.stream().forEach(index -> assertIndexInRange(Integer.parseInt(index)));
+        indices.sort(Comparator.comparingInt(e -> Integer.parseInt(e)));
+        Collections.reverse(indices);
+        for (int i = 0; i < indices.size(); i++) {
+            int index = Integer.parseInt(indices.get(i));
+            Task removedTask = this.tasks.remove(index - 1);
+            deletedTasks.add(removedTask.toString());
+            taskCount--;
+        }
+        Collections.reverse(deletedTasks);
+        return deletedTasks;
     }
 
     /**

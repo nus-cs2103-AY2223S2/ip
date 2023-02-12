@@ -85,11 +85,22 @@ class Parser {
         }
     }
 
+    private static ArrayList<String> processIndices() {
+        String argument = Parser.rebuildUserInput(1, userInput.size());
+        argument = argument.replace(" ", "");
+        ArrayList<String> indices = new ArrayList<>(Arrays.asList(argument.split(",")));
+        for (int i = 0; i < indices.size(); i++) {
+            String curIndex = indices.get(i);
+            assertIndexIsNumber(curIndex);
+        }
+        return indices;
+    }
+
     /**
      * Asserts user input to contain an index behind an instruction.
      * Throws AssertionError if description is not available.
      */
-    private static void assertIndexIsNumber() {
+    private static void assertIndexIsNumber(String index) {
         boolean isNumber = userInput.get(1).matches("[0-9]+");
         assert isNumber : "The index must be a number!";
     }
@@ -113,13 +124,16 @@ class Parser {
 
         } else if (instruction.equals("mark")) {
             checkIfArgumentAvail("index");
-            assertIndexIsNumber();
-            outputs.add(userInput.get(1));
+            String index = userInput.get(1);
+            assertIndexIsNumber(index);
+            outputs.add(index);
 
         } else if (instruction.equals("unmark")) {
             checkIfArgumentAvail("index");
-            assertIndexIsNumber();
-            outputs.add(userInput.get(1));
+            String index = userInput.get(1);
+            assertIndexIsNumber(index);
+            outputs.add(index);
+
 
         } else if (instruction.equals("todo")) {
             checkIfArgumentAvail("description");
@@ -160,12 +174,10 @@ class Parser {
 
         } else if (instruction.equals("delete")) {
             checkIfArgumentAvail("index");
-            assertIndexIsNumber();
-            outputs.add(userInput.get(1));
+            outputs.addAll(Parser.processIndices());
 
         } else if (instruction.equals("find")) {
-            checkIfArgumentAvail("description");
-            assertIndexIsNumber();
+            checkIfArgumentAvail("keyword");
             outputs.add(rebuildUserInput(1, inputLength));
 
         } else {
