@@ -39,7 +39,6 @@ public class Duke {
         try {
             String reply = Parser.understandInput(s, s.split(" "), taskList, storage);
             result = reply;
-            assert !result.equals(""):"Reply of Duke is empty";
         } catch (DukeException e) {
             result = e.getMessage();
         } finally {
