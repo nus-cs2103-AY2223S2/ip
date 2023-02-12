@@ -10,14 +10,14 @@
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true">
          <font>
-            <Font name="Constantia" size="12.0" />
+            <Font name="Constantia" size="11.0" />
          </font>
          <padding>
-            <Insets right="5.0" />
+            <Insets right="5.0" left="5.0" />
          </padding></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
     </padding>
 </fx:root>
