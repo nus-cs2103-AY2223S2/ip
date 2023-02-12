@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +7,7 @@ public class Duke {
 
     Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException, IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,16 +19,16 @@ public class Duke {
         duke.chatDuke();
     }
 
-    public void chatDuke() {
+    public void chatDuke() throws IOException {
 
-        List<Task> allTasks = new ArrayList<>();
+        Save save = new Save();
+        List<Task> allTasks = save.loadTxtFile();
 
         this.printGreetingMessage();
 
         boolean saidBye = false;
         while (!saidBye) {
             String command = sc.nextLine();
-
             try {
                 if (command.equals("list")) {
                     this.printCommandList(allTasks);
@@ -43,12 +44,14 @@ public class Duke {
                                 allTasks.size());
                         allTasks.set(taskIndex, todo);
                         todo.markAsDone();
+                        save.saveListToFile(command, todo, allTasks);
                     } else if (oldTask.getTaskType().equals("[D]")) {
                         Deadline deadline = new Deadline(oldTask.getTaskNumber(),
                                 true, oldTask.getTask(),
                                 oldTask.getDeadline(), allTasks.size());
                         allTasks.set(taskIndex, deadline);
                         deadline.markAsDone();
+                        save.saveListToFile(command, deadline, allTasks);
                     } else if (oldTask.getTaskType().equals("[E]")) {
                         Event event = new Event(oldTask.getTaskNumber(),
                                 true, oldTask.getTask(),
@@ -56,8 +59,9 @@ public class Duke {
                                 oldTask.getEventEndTime(), allTasks.size());
                         allTasks.set(taskIndex, event);
                         event.markAsDone();
+                        save.saveListToFile(command, event, allTasks);
                     }
-                } else if (command.startsWith("unmark")) {
+                }else if (command.startsWith("unmark")) {
                     missingIndexException(command);
                     invalidIndexException(command, allTasks.size());
                     String[] str = command.split(" ");
@@ -69,12 +73,14 @@ public class Duke {
                                 allTasks.size());
                         allTasks.set(taskIndex, todo);
                         todo.unmarkAsUndone();
+                        save.saveListToFile(command, todo, allTasks);
                     } else if (oldTask.getTaskType().equals("[D]")) {
                         Deadline deadline = new Deadline(oldTask.getTaskNumber(),
                                 false, oldTask.getTask(),
                                 oldTask.getDeadline(), allTasks.size());
                         allTasks.set(taskIndex, deadline);
                         deadline.unmarkAsUndone();
+                        save.saveListToFile(command, deadline, allTasks);
                     } else if (oldTask.getTaskType().equals("[E]")) {
                         Event event = new Event(oldTask.getTaskNumber(),
                                 false, oldTask.getTask(),
@@ -82,6 +88,7 @@ public class Duke {
                                 oldTask.getEventEndTime(), allTasks.size());
                         allTasks.set(taskIndex, event);
                         event.unmarkAsUndone();
+                        save.saveListToFile(command, event, allTasks);
                     }
                 } else if (command.startsWith("todo")) {
                     emptyCommandException(command);
@@ -91,6 +98,7 @@ public class Duke {
                             taskName, allTasks.size() + 1);
                     allTasks.add(todo);
                     todo.printToDoTask();
+                    save.saveListToFile(command, todo, allTasks);
                 } else if (command.startsWith("deadline")) {
                     emptyCommandException(command);
                     missingTimingException(command);
@@ -101,6 +109,7 @@ public class Duke {
                             taskName, taskDeadline, allTasks.size() + 1);
                     allTasks.add(deadline);
                     deadline.printDeadlineTask();
+                    save.saveListToFile(command, deadline, allTasks);
                 } else if (command.startsWith("event")) {
                     emptyCommandException(command);
                     missingTimingException(command);
@@ -113,14 +122,16 @@ public class Duke {
                             taskName, eventStartTime, eventEndTime, allTasks.size() + 1);
                     allTasks.add(event);
                     event.printEventTask();
+                    save.saveListToFile(command, event, allTasks);
                 } else if (command.startsWith("delete")) {
                     missingIndexException(command);
                     invalidIndexException(command, allTasks.size());
                     String[] str = command.split(" ");
                     int taskIndex = Integer.parseInt(str[1]) - 1;
                     Task task = allTasks.get(taskIndex);
-                    task.printDelete();
+                    task.printDelete(allTasks);
                     allTasks.remove(taskIndex);
+                    save.saveListToFile(command, task, allTasks);
                 } else if (command.equals("bye")){
                     saidBye = true;
                     this.printByeMessage();
@@ -133,6 +144,8 @@ public class Duke {
                 System.out.println("\t____________________________________________________________" +
                         "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be a non-integer." +
                         "\n\t____________________________________________________________");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -205,18 +218,19 @@ public class Duke {
     }
 
     public void missingIndexException(String command) throws DukeException {
-        if (command.equals("mark")) {
-            throw new DukeException("\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be empty." +
-                    "\n\t____________________________________________________________");
-        } else if (command.equals("unmark")) {
-            throw new DukeException("\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! The task index to unmark a task as not done cannot be empty." +
-                    "\n\t____________________________________________________________");
-        } else if (command.equals("delete")) {
-            throw new DukeException("\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! The task index to delete a task as not done cannot be empty." +
-                    "\n\t____________________________________________________________");
+        switch (command) {
+            case "mark":
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be empty." +
+                        "\n\t____________________________________________________________");
+            case "unmark":
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The task index to unmark a task as not done cannot be empty." +
+                        "\n\t____________________________________________________________");
+            case "delete":
+                throw new DukeException("\t____________________________________________________________" +
+                        "\n\t ☹ OOPS!!! The task index to delete a task as not done cannot be empty." +
+                        "\n\t____________________________________________________________");
         }
     }
 

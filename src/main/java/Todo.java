@@ -1,3 +1,5 @@
+import java.util.List;
+
 class Todo extends Task {
     private final String taskType;
 
@@ -31,8 +33,8 @@ class Todo extends Task {
     }
 
     @Override
-    public void printDelete() {
-        int newTotalNumOfTasks = super.totalNumOfTasks - 1;
+    public void printDelete(List<Task> allTasks) {
+        int newTotalNumOfTasks = allTasks.size() - 1;
         System.out.println("\t____________________________________________________________" +
                 "\n\t Noted. I've removed this task:" + "\n\t   " + this.taskType +
                 super.getTaskStatus() + " " + super.task +
