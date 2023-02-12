@@ -55,7 +55,10 @@ public class Clippy {
     public void handleCommand(String input) {
         try {
             Command command = Parser.parse(input);
+            assert command != null: "returned command should not be null";
+
             command.execute(ui, taskList, storage);
+
             if (command.shouldContinue() == false) {
                 Platform.exit();
             }
