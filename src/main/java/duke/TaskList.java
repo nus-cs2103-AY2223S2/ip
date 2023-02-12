@@ -79,10 +79,13 @@ public class TaskList {
     public String printTaskList() {
         StringBuilder tasklist = new StringBuilder();
         tasklist.append("Here are the tasks in your list:" + "\n");
+
         for(int i = 0; i < items; i++) {
-            tasklist.append(i + 1).append(".").append("[").append(tasks.get(i).getTaskType()).append("][")
-                    .append(tasks.get(i).getStatusIcon()).append("] ").append(tasks.get(i).toString()).append("\n");
+            String taskToAdd = String.format("%s.[%s][%s] %s\n", i + 1, tasks.get(i).getTaskType(),
+                    tasks.get(i).getStatusIcon(), tasks.get(i).toString());
+            tasklist.append(taskToAdd);
         }
+
         return tasklist.toString();
     }
 }

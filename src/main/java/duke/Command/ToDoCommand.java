@@ -1,8 +1,9 @@
 package duke.Command;
 
+import duke.Task.ToDo;
+
 import duke.Storage;
 import duke.TaskList;
-import duke.Task.ToDo;
 import duke.UI;
 
 /**
@@ -10,7 +11,7 @@ import duke.UI;
  */
 public class ToDoCommand extends Command {
 
-    private String name;
+    private final String name;
 
     /**
      * The constructor for an (executable) ToDo command.

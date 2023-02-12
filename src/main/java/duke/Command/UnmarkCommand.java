@@ -1,6 +1,7 @@
 package duke.Command;
 
 import duke.Exception.InvalidTaskException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.UI;
@@ -9,7 +10,8 @@ import duke.UI;
  * The unmark command which is executed by Duke.
  */
 public class UnmarkCommand extends Command {
-    protected int index;
+
+    private final int index;
 
     /**
      * The constructor for an (executable) unmark command.
