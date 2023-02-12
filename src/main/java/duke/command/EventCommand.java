@@ -8,6 +8,8 @@ import duke.Values;
 import duke.task.Event;
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 /**
  * A Command subclass for the event command.
  */
@@ -17,18 +19,20 @@ public class EventCommand extends Command {
         String[] parts = command.split(Values.SPACEX);
         int fromIndex = Parser.getIndexOf(parts, "/from");
         int toIndex = Parser.getIndexOf(parts, "/to");
+        int tagsIndex = Parser.getIndexOf(parts, "/tags");
 
         // Get task name, start date, end date from the command.
         String taskName = getName(parts, fromIndex);
         String startDate = getStartDate(parts, fromIndex, toIndex);
         String endDate = getEndDate(parts, toIndex);
+        ArrayList<String> tags = extractTags(parts, tagsIndex);
 
         if (taskName.length() == 0 || startDate.length() == 0 || endDate.length() == 0) {
             throw new DukeException("Please provide a description, start date, and end date.\n"
                     + "\tFormat: event <description> /from <start_date> /to <end_date>");
         }
 
-        Task task = new Event(taskName, startDate, endDate);
+        Task task = new Event(taskName, startDate, endDate, tags);
         list.addTask(task);
 
         return ui.pixlPrint("Added new event!\n"

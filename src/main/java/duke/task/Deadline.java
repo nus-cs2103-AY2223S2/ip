@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * A task subclass to represent a Deadline (due date).
@@ -18,6 +19,16 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
+    }
+
+    /**
+     * Constructor for Task class.
+     * @param description The task details.
+     * @param dueDate The LocalDate for the deadline in "yyyy-mm-dd" format.
+     * @param tags Tags for the task.
+     */
+    public Deadline(String description, LocalDate dueDate, ArrayList<String> tags) {
+        super(description, tags);
     }
 
     @Override

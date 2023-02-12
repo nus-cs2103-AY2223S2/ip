@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 /**
  * A task subclass to represent an Event (start and end dates).
  */
@@ -18,6 +20,17 @@ public class Event extends Task {
         super(description);
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    /**
+     * Constructor for Task class.
+     * @param description The task details.
+     * @param startDate The event start date/time.
+     * @param endDate The event end date/time.
+     * @param tags Tags for the task.
+     */
+    public Event(String description, String startDate, String endDate, ArrayList<String> tags) {
+        super(description, tags);
     }
 
     @Override

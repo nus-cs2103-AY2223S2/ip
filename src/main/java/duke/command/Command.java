@@ -14,12 +14,15 @@ public abstract class Command {
 
     /**
      * Extracts the tags of the task.
-     * @param parts
-     * @param hashIndex
-     * @return
+     * @param parts Array of command's words (separated by spaces).
+     * @param tagIndex Index of "/tags" in the command.
+     * @return An ArrayList of the tags.
      */
-    protected ArrayList<String> extractTags(String[] parts, int hashIndex) {
-        return new ArrayList<String>(Arrays.asList(parts).subList(hashIndex + 1, parts.length));
+    protected ArrayList<String> extractTags(String[] parts, int tagIndex) {
+        if (tagIndex == -1) {
+            return null;
+        }
+        return new ArrayList<String>(Arrays.asList(parts).subList(tagIndex + 1, parts.length));
     }
 
     /**

@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 /**
  * A task subclass to represent a ToDo (no date).
  */
@@ -11,6 +13,15 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+    }
+
+    /**
+     * Constructor for Task class.
+     * @param description The task details.
+     * @param tags Tags for the task.
+     */
+    public ToDo(String description, ArrayList<String> tags) {
+        super(description, tags);
     }
 
     @Override
