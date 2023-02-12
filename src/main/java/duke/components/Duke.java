@@ -1,17 +1,16 @@
-package duke;
+package duke.components;
 
 import duke.commands.Command;
 import duke.components.Parser;
 import duke.components.Storage;
 import duke.components.TaskList;
-import duke.components.Ui;
 import duke.exceptions.DukeException;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeParseException;
 
 /**
  * This is the driver class for Duke, the CLI task manager.
@@ -25,59 +24,35 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Returns a new Duke object.
      * @param filePath the filepath of the serialized TaskList object stored in memory
      */
     public Duke(String filePath) {
-        ui = new Ui();
+
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Runs the Duke object.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException |DateTimeParseException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String userInput) {
+        String response = "";
+        try {
+            Command c = Parser.parse(userInput);
+            response = c.execute(tasks, storage);
+        }
+        catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
         }
     }
 
-    public static void main(String[] args) {
-        new Duke(getFilePath()).run();
-    }
-
-    /**
-     * Returns a system-specific string denoting the location of DukeMem.
-     *
-     * First, if it doesn't exist yet, the data directory containing DukeMem
-     * will be created. Then, the path to the DukeMem.ser file in the
-     * new directory will be generated and returned, regardless of whether
-     * it exists yet.
-     *
-     * @return filePath system-specific string indicating the location of DukeMem
-     */
-    private static String getFilePath() {
+    public static String getFilePath() {
         Path dirPath = Paths.get(".", "data");
         try {
             //This method creates a directory if it does not exist yet, but will not
@@ -89,4 +64,6 @@ public class Duke {
         Path dataPath = Paths.get(dirPath.toString(), "DukeMem.ser");
         return dataPath.toString();
     }
+
+
 }

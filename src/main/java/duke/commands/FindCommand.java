@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.components.Storage;
 import duke.components.TaskList;
-import duke.components.Ui;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
@@ -23,14 +22,22 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         ArrayList<Task> out = new ArrayList<>();
         for (int i = 1; i<=tasks.size(); i++) {
             if (tasks.getTask(i).containsString(keyword)) {
                 out.add(tasks.getTask(i));
             }
         }
-        ui.showFindResults(out);
+        if (out.size() == 0) {
+            return "No tasks found!";
+        } else {
+            String res = "These are the " + out.size() + " tasks I found:";
+            for (int i = 0; i< out.size(); i++) {
+                res += "\n" + i + 1 + ". " + out.get(i);
+            }
+            return res;
+        }
     }
 
     @Override

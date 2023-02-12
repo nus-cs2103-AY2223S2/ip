@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.components.Storage;
 import duke.components.TaskList;
-import duke.components.Ui;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
@@ -12,7 +11,7 @@ public class DeleteCommand extends Command {
     static final int commandLength = 2;
     static final int indexOfIndex = 1;
 
-    private Task taskToDeleted;
+    private Task taskToBeDeleted;
     private int indexOfTask;
     public DeleteCommand(ArrayList<String> tokens) throws DukeException {
         super(tokens);
@@ -25,14 +24,18 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (indexOfTask < 1 || indexOfTask > tasks.size()){
             throw new DukeException(
                     "index " + indexOfTask +" not in range of tasklist!");
         }
-        this.taskToDeleted = tasks.getTask(indexOfTask);
+        this.taskToBeDeleted = tasks.getTask(indexOfTask);
         tasks.deleteTask(indexOfTask);
-        ui.displayDeleteMsg(this, tasks);
+        return "Noted. I've removed this task:\n"
+                + this.taskToBeDeleted
+                + "\nNow you have "
+                + tasks.size()
+                + " tasks in the list.";
     }
 
     @Override
@@ -40,6 +43,6 @@ public class DeleteCommand extends Command {
         return false;
     }
     public Task getTaskToDelete() {
-        return this.taskToDeleted;
+        return this.taskToBeDeleted;
     }
 }

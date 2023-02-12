@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.components.Storage;
 import duke.components.TaskList;
-import duke.components.Ui;
 import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
@@ -22,12 +21,12 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (markIndex < 1 || markIndex > tasks.size()){
             throw new DukeException("index " + markIndex +" not in range!");
         }
         tasks.mark(markIndex);
-        ui.showMarkCompletion(this, tasks.getTask(markIndex));
+        return "Nice! I've marked this task as done:\n" + tasks.getTask(markIndex);
     }
 
     @Override

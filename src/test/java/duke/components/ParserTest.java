@@ -1,9 +1,7 @@
 package duke.components;
-import duke.Duke;
 import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
     @Test

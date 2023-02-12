@@ -39,10 +39,16 @@ public class Parser {
      */
     public static Command parse(String userIn) throws DateTimeException, DukeException {
         ArrayList<String> tokens = tokenize(userIn);
-        String key = tokens.get(0);
+        String key;
+        try {
+            key = tokens.get(0);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Looks like you entered an empty command, try again!");
+        }
         Command ret = null;
 
         switch (key) {
+
         case "bye":
             ret = new ExitCommand(tokens);
             break;
