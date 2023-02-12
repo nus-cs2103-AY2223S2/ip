@@ -123,12 +123,13 @@ public class Parser {
      * @return Confirmation of creation of Task, or error message
      */
     public String createTask(String command, ToDoList todolist) {
+        int lengthOfStringTodo = 4;
         int spacer = command.indexOf(" ");
         if (spacer == -1) {
             return "Please enter in format 'todo <task>'";
         }
         try {
-            String task = command.substring(5);
+            String task = command.substring(lengthOfStringTodo + 1);
             todolist.add(task);
         } catch (StringIndexOutOfBoundsException e) {
             return ("Please enter in format 'todo <task>'");
@@ -144,13 +145,12 @@ public class Parser {
      * @return Confirmation of creation of Deadline, or error message
      */
     public String createDeadlineTask(String command, ToDoList todolist) {
-        // check format
-        if (!command.contains("/")) {
-            return ("Please enter in format 'deadline <task> /<deadline>'");
-        } else {
-            int firstSlash = command.indexOf("/");
-            String task = command.substring(9, firstSlash);
-            String time = command.substring(firstSlash + 1);
+        boolean isValidCommand = command.contains("/");
+        int lengthOfStringDeadline = 8;
+        if (isValidCommand) {
+            int firstSlashIndex = command.indexOf("/");
+            String task = command.substring(lengthOfStringDeadline + 1, firstSlashIndex);
+            String time = command.substring(firstSlashIndex + 1);
 
             try {
                 LocalDate startTimeParsed = LocalDate.parse(time);
@@ -158,6 +158,8 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 return ("Wrong date format\nInput date format 'event <task> /<YYYY-MM-DD>'");
             }
+        } else {
+            return ("Please enter in format 'deadline <task> /<deadline>'");
         }
         return todolist.list();
     }
@@ -170,15 +172,15 @@ public class Parser {
      * @return Confirmation of creation of Event, or error message
      */
     public String createEventTask(String command, ToDoList todolist) {
-        int firstSlash = command.indexOf("/");
-        // check format
-        if (firstSlash == -1 || !command.substring(firstSlash + 1).contains("/")) {
-            return ("\tPlease enter in format 'event <task> /<start>/<end>'");
-        } else {
-            int secondSlash = command.substring(firstSlash + 1).indexOf("/") + firstSlash + 1;
-            String startTime = command.substring(firstSlash + 1, secondSlash);
-            String endTime = command.substring(secondSlash + 1);
-            String task = command.substring(6, firstSlash);
+        int lengthOfStringEvent = 5;
+        int firstSlashIndex = command.indexOf("/");
+        String timeString = command.substring(firstSlashIndex + 1);
+        boolean isValidCommand = firstSlashIndex == -1 || !timeString.contains("/");
+        if (isValidCommand) {
+            int secondSlashIndex = timeString.indexOf("/") + firstSlashIndex + 1;
+            String startTime = command.substring(firstSlashIndex + 1, secondSlashIndex);
+            String endTime = command.substring(secondSlashIndex + 1);
+            String task = command.substring(lengthOfStringEvent + 1, firstSlashIndex);
 
             try {
                 LocalDate startTimeParsed = LocalDate.parse(startTime);
@@ -187,6 +189,8 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 return ("Wrong date format\nInput date format 'event <task> /<YYYY-MM-DD>/<YYYY-MM-DD>'");
             }
+        } else {
+            return ("\tPlease enter in format 'event <task> /<start>/<end>'");
         }
         return todolist.list();
     }
