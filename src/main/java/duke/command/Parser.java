@@ -50,6 +50,7 @@ public class Parser {
             case FIND:
                 return FindCommand.executeFind(tasks, userInput);
             default:
+                assert false : "Unknown commands should have been resolved and not parsed.";
                 return "";
         }
     }
