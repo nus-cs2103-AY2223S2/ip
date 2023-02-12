@@ -41,10 +41,12 @@ public class Storage {
      */
     public FileWriter getFileWriter() throws IOException {
         File file = new File(filePath);
-        if (file.getParentFile().mkdirs()) {
-            return new FileWriter(file);
-        } else {
-            throw new IOException("Failed to create required directories");
+        File parentDirectory = file.getParentFile();
+        if (!parentDirectory.exists()) {
+            if (!parentDirectory.mkdirs()) {
+                throw new IOException("Failed to create required directories");
+            }
         }
+        return new FileWriter(file);
     }
 }
