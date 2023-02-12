@@ -1,4 +1,4 @@
-package Willy.task;
+package willy.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

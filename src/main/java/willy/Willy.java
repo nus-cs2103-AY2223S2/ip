@@ -1,12 +1,12 @@
-package Willy;
+package willy;
 
 import java.io.IOException;
 
-import Willy.exception.WillyException;
-import Willy.parser.Parser;
-import Willy.storage.Storage;
-import Willy.task.TaskList;
-import Willy.ui.Ui;
+import willy.exception.WillyException;
+import willy.parser.Parser;
+import willy.storage.Storage;
+import willy.task.TaskList;
+import willy.ui.Ui;
 
 /**
  * Represents the Willy class

@@ -1,9 +1,9 @@
-package Willy.parser;
+package willy.parser;
 
 import java.util.Arrays;
 
-import Willy.exception.WillyException;
-import Willy.task.TaskList;
+import willy.exception.WillyException;
+import willy.task.TaskList;
 
 /**
  * Represents a parser

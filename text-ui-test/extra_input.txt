@@ -1,6 +1,6 @@
 deadline return book /by 2/12/2019 1800
 
-Hello! I'm Willy
+Hello! I'm willy
 What can I do for you?
 [T][ ]todo borrow book
 Now you have 1 things in your list

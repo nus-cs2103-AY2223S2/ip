@@ -1,6 +1,6 @@
-package Willy;
+package willy;
 
-import Willy.task.Event;
+import willy.task.Event;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

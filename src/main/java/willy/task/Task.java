@@ -1,4 +1,4 @@
-package Willy.task;
+package willy.task;
 
 /**
  * Represents a Task
@@ -15,8 +15,9 @@ public class Task {
         this.msg = msg;
         this.status = false;
     }
-    
-    /** 
+
+    /**
+     * Get status icon.
      * @return String
      */
     public String getStatusIcon() {

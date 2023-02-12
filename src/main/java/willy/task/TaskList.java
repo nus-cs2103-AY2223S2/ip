@@ -1,9 +1,9 @@
-package Willy.task;
+package willy.task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Willy.storage.Storage;
+import willy.storage.Storage;
 
 /**
  * Represents a tasklist
@@ -139,7 +139,9 @@ public class TaskList {
      */
     public void findTasks(String keyword) {
         System.out.println("Here are the matching tasks in your list");
-        String str = "", msg = "";
+
+        String str = "";
+        String msg = "";
         int counter = 1;
         for (int i = 0; i < getTaskCount(); i++) {
             if (this.getTask(i).toString().contains(keyword)) {

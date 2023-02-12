@@ -1,4 +1,4 @@
-package Willy.exception;
+package willy.exception;
 
 /**
  * This represents the WillyException

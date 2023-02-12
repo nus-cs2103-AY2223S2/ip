@@ -1,6 +1,6 @@
-# Willy Bot - How to use?
+# willy Bot - How to use?
 
-For the Willy Bot, we can take and save 3 different types of task
+For the willy Bot, we can take and save 3 different types of task
 
 Please enter commands into the terminal in the following format.
 

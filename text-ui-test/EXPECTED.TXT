@@ -1,4 +1,4 @@
-Hello! I'm Willy
+Hello! I'm willy
 What can I do for you?
 [T][ ]todo borrow book
 [D][ ]deadline return book (by Sunday)

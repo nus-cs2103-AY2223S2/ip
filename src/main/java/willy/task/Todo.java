@@ -1,4 +1,4 @@
-package Willy.task;
+package willy.task;
 
 /**
  * Represents a Todo

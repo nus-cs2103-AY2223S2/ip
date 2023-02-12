@@ -1,4 +1,4 @@
-package Willy.storage;
+package willy.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,11 +9,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import Willy.task.Deadline;
-import Willy.task.Event;
-import Willy.task.Task;
-import Willy.task.TaskList;
-import Willy.task.Todo;
+import willy.task.Deadline;
+import willy.task.Event;
+import willy.task.Task;
+import willy.task.TaskList;
+import willy.task.Todo;
 
 /**
  * Represents the storage 
