@@ -60,6 +60,7 @@ public class TaskList {
                     }
                     break;
                 default:
+                    assert false: line[0].trim();
                 }
             }
         } catch (FileNotFoundException e) {

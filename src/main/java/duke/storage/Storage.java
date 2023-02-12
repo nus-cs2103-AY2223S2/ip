@@ -33,14 +33,16 @@ public class Storage {
     public File load() throws DirectoryNotFoundException, FileNotFoundException {
         Path directory = Paths.get("data");
         Path file = Paths.get(path);
-        boolean FileExists = java.nio.file.Files.exists(file);
+        boolean fileExists = java.nio.file.Files.exists(file);
         boolean directoryExists = java.nio.file.Files.exists(directory);
         if (!directoryExists) {
             throw new DirectoryNotFoundException();
         }
-        if (!FileExists) {
+        if (!fileExists) {
             throw new FileNotFoundException();
         }
+        assert  directoryExists;
+        assert fileExists;
         File f = new File(path); // create a File for the given file path
         return f;
 

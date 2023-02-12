@@ -192,6 +192,7 @@ public class Duke {
             Command c = Parser.parse(input);
             isExit = c.isExit();
             if (isExit) {
+                assert isExit;
                 String dukeText = "bye";
                 return dukeText;
 

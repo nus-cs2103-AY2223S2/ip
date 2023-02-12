@@ -15,6 +15,9 @@ public class FindCommand extends Command {
      * @param input The task user wants to find
      */
     public FindCommand(String input) {
+
+        assert !input.equals("");
+
         this.input = input;
     }
 
