@@ -1,14 +1,12 @@
 package duke.task;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import javafx.util.Pair;
-
 import duke.DukeException;
+import javafx.util.Pair;
 
 /**
  * Represents a list of tasks.

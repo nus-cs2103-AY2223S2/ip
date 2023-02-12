@@ -1,17 +1,18 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.task.TaskComponent;
-import javafx.util.Pair;
-
 import java.util.List;
 
 import duke.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskComponent;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.util.Pair;
 
-
+/**
+ * Represents an Update command.
+ */
 public class CommandUpdate extends Command {
 
     private int idx;

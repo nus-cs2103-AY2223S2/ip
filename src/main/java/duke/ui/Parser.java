@@ -3,11 +3,7 @@ package duke.ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import duke.Duke;
-import javafx.util.Pair;
 
 import duke.DukeException;
 import duke.command.Command;
@@ -22,6 +18,7 @@ import duke.command.CommandMark;
 import duke.command.CommandUpdate;
 import duke.command.Operation;
 import duke.task.TaskComponent;
+import javafx.util.Pair;
 
 /**
  * Represents a parser to process user inputs.
@@ -162,11 +159,11 @@ public class Parser {
     }
 
     // exception to handle:
-    // wrong index format - CHECK
-    // index out of bounds - CHECK
-    // invalid component - CHECK
-    // task has no such component - CHECK
-    // input does not have enough components -CHECK?
+    // 1. wrong index format - CHECK
+    // 2. index out of bounds - CHECK
+    // 3. invalid component - CHECK
+    // 4. task has no such component - CHECK
+    // 5. input does not have enough components - CHECK?
 
     /**
      * Parses the command to update a task.
@@ -196,7 +193,7 @@ public class Parser {
         String regex = "((?=/description|/by|/from|/to)|(?<=/description|/by|/from|/to))";
         String[] updateComponents = update.split(regex);
 
-        System.out.println(Arrays.toString(updateComponents));
+        // System.out.println(Arrays.toString(updateComponents));
 
         /* Creates a list of pairs of task component and its detail */
         List<Pair<TaskComponent, ?>> updateComponentsList = new ArrayList<>();

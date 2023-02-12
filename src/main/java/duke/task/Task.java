@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.DukeException;
-
-import java.time.LocalDate;
 import java.util.Arrays;
+
+import duke.DukeException;
 
 /**
  * Represents a task.
@@ -59,7 +58,7 @@ public abstract class Task {
 
     /**
      * Checks if this task's description matches any keywords.
-     * 
+     *
      * @param keywords List of keywords to check.
      * @return True if task's description matches any keywords.
      */
