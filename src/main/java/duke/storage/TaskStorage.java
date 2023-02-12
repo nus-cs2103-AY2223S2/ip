@@ -25,7 +25,6 @@ public class TaskStorage implements Storage{
 
     private String filepath;
     private Path path;
-    private Scanner scanner;
     private final String DELIMITER = "\\|";
 
     public TaskStorage(String filepath) {
@@ -40,11 +39,6 @@ public class TaskStorage implements Storage{
         }
         assert Files.exists(path);
         this.path = path;
-        try {
-            this.scanner = new Scanner(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         this.filepath = filepath;
     }
 
@@ -61,28 +55,33 @@ public class TaskStorage implements Storage{
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] task = line.split(DELIMITER);
-            String type = task[0];
-            Task t;
-            switch (type) {
-            case "T":
-                t = new Todo(task[2]);
-                break;
-            case "D":
-                t = new Deadline(task[2], LocalDate.parse(task[3]));
-                break;
-            case "E":
-                t = new Event(task[2], LocalDate.parse(task[3]), LocalDate.parse(task[4]));
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + type);
+        try {
+            Scanner scanner = new Scanner(this.path);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] task = line.split(DELIMITER);
+                String type = task[0];
+                Task t;
+                switch (type) {
+                case "T":
+                    t = new Todo(task[2]);
+                    break;
+                case "D":
+                    t = new Deadline(task[2], LocalDate.parse(task[3]));
+                    break;
+                case "E":
+                    t = new Event(task[2], LocalDate.parse(task[3]), LocalDate.parse(task[4]));
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + type);
+                }
+                if (task[1].equals("1")) {
+                    t.markAsDone();
+                }
+                tasks.add(t);
             }
-            if (task[1].equals("1")) {
-                t.markAsDone();
-            }
-            tasks.add(t);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return tasks;
     }
@@ -127,12 +126,17 @@ public class TaskStorage implements Storage{
     public void deleteTask(int index) {
         String newContent = "";
         int count = 0;
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (count != index) {
-                newContent = newContent + line + System.lineSeparator();
+        try {
+            Scanner scanner = new Scanner(this.path);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (count != index) {
+                    newContent = newContent + line + System.lineSeparator();
+                }
+                count++;
             }
-            count++;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         try {
             Files.write(this.path, newContent.getBytes());
@@ -171,13 +175,18 @@ public class TaskStorage implements Storage{
             throws IOException {
         String newContent = "";
         int count = 0;
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (count == index) {
-                line = line.replaceFirst(target, replacement);
+        try {
+            Scanner scanner = new Scanner(this.path);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (count == index) {
+                    line = line.replaceFirst(target, replacement);
+                }
+                newContent = newContent + line + System.lineSeparator();
+                count++;
             }
-            newContent = newContent + line + System.lineSeparator();
-            count++;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         Files.write(this.path, newContent.getBytes());
     }
