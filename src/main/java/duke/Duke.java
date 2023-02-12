@@ -110,11 +110,11 @@ public class Duke {
     /**
      * Prints the matching tasks in the taskList.
      *
-     * @param keyword Keyword used for searching.
+     * @param keywordList Keywords used for searching.
      * @return Tasks that contains the keyword.
      */
-    public String findMessage(String keyword) {
-        return "Here are the matching tasks in your list:\n" + taskList.getTasksWanted(keyword);
+    public String findMessage(String... keywordList) {
+        return "Here are the matching tasks in your list:\n" + taskList.getTasksWanted(keywordList);
     }
 
     /**
@@ -163,8 +163,9 @@ public class Duke {
                     String tmp = deleteMessage(index);
                 } else if (command.equals(parser.convertEnum(Command.FIND))) {
                     parser.checkEmpty(userInput, command);
-                    String keyword = userInput.substring(5);
-                    String tmp = findMessage(keyword);
+                    String keywords = userInput.substring(5);
+                    String[] keywordList = keywords.split(" ");
+                    String tmp = findMessage(keywordList);
                 } else {
                     throw new WeirdInputException();
                 }
@@ -224,8 +225,9 @@ public class Duke {
                 response = deleteMessage(index);
             } else if (command.equals(parser.convertEnum(Command.FIND))) {
                 parser.checkEmpty(userInput, command);
-                String keyword = userInput.substring(5);
-                response = findMessage(keyword);
+                String keywords = userInput.substring(5);
+                String[] keywordList = keywords.split(" ");
+                response = findMessage(keywordList);
             } else {
                 throw new WeirdInputException();
             }
