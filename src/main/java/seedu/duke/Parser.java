@@ -21,8 +21,10 @@ public class Parser {
      */
     public String parse(String command, ToDoList todolist, Storage storage) {
         if (command.equals("bye")) {
+            assert command.equals("bye") : "Command != 'bye'";
             return endDuke(storage, todolist);
         } else if (command.equals("list")) {
+            assert command.equals("list") : "Command != 'list'";
             return todolist.list();
         } else if (command.matches("mark(.*)")) {
             return markTask(command, todolist);
@@ -122,6 +124,10 @@ public class Parser {
      */
     public String createTask(String command, ToDoList todolist) {
         int lengthOfStringTodo = 4;
+        int spacer = command.indexOf(" ");
+        if (spacer == -1) {
+            return "Please enter in format 'todo <task>'";
+        }
         try {
             String task = command.substring(lengthOfStringTodo + 1);
             todolist.add(task);
