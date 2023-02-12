@@ -22,18 +22,78 @@ From this [source](https://hellokitty.fandom.com/wiki/Kuromi#With_Friends_and_Fa
 
 ## Usage
 
-### `todo` - add a ToDo task
+## Section A: Add a task
 
-Adds a ToDo
+### 1. `todo`
 
-Example of usage: 
+#### Function
+Adds a ToDo &mdash; a task that does not have a deadline.
 
-`keyword (optional arguments)`
+#### Format
+`todo <description>`
+
+#### Example of usage
+
+- `todo borrow book`
+- `todo learn hiragana`
+- `todo week 6 iP tasks`
 
 Expected outcome:
 
-Description of the outcome.
+```
+Got it. I've added this task:
+[T][] borrow book
+-----
+Note:
+Now you have 4 tasks in the list.
+```
+
+### 2. `deadline`
+
+#### Function
+Adds a Deadline &mdash; a task that has a deadline date.
+
+#### Format
+- `deadline <description> /by <deadline>`
+- `<deadline>` format: `yyyy-MM-dd HH:mm`
+
+#### Example of usage
+
+- `deadline return book /by 2030-01-01 10:30`
+- `deadline submit iP /by 2023-02-17 23:59`
+- `deadline katakana practice /by 2023-03-01 14:00`
+
+Expected outcome:
 
 ```
-expected output
+Got it. I've added this task:
+[D][] return book (by: 2030-01-01 10:30)
+-----
+Note:
+Now you have 5 tasks in the list.
+```
+
+### 3. `event`
+
+#### Function
+Adds an Event &mdash; a task that has a start date and end date.
+
+#### Format
+- `event <description> /from <start_date> /to <end_date>`
+- `<start_date>` & `<end_date>` format: `yyyy-MM-dd HH:mm`
+
+#### Example of usage
+
+- `event project meeting /from 2030-01-01 10:30 /to 2030-01-01 12:30`
+- `event tP meeting /from 2023-01-13 16:00 /to 2023-01-13 18:00`
+- `event cmang's birthday party /from 2023-03-12 17:00 /to 2023-03-12 19:00`
+
+Expected outcome:
+
+```
+Got it. I've added this task:
+[E][] project meeting (from: 2030-01-01 10:30 to 2030-01-01 12:30)
+-----
+Note:
+Now you have 6 tasks in the list.
 ```
