@@ -37,9 +37,10 @@ public class MainWindow extends AnchorPane {
     }
 
     public void sendGreeting() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.ui.getInitMessage(), dukeImage),
-                DialogBox.getDukeDialog(duke.ui.getAvailableCommands(), dukeImage)
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(duke.ui.getInitMessage()
+                        + "\n \n"
+                        + duke.ui.getAvailableCommands(), dukeImage)
         );
     }
 
@@ -48,7 +49,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one is user input and the other is duke.Duke's reply and then appends them to
+     * Creates two dialog boxes, one is user input and the other is duke. Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

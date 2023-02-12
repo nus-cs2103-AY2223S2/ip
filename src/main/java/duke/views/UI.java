@@ -23,7 +23,6 @@ public class UI {
      */
     public String getAvailableCommands() {
         return "Here is the list of available commands I can do:"
-                        + newlineAndIndentString("bye")
                         + newlineAndIndentString("todo [name]")
                         + newlineAndIndentString("deadline [name] /by [" + DATE_FORMAT + "]")
                         + newlineAndIndentString("event [name] /from [" + DATE_FORMAT + "] /to [" + DATE_FORMAT + "]")

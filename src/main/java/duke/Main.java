@@ -6,7 +6,10 @@ import gui.DialogBox;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import gui.MainWindow;
 
@@ -17,6 +20,8 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    private Image icon = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
     public Main() throws IOException {}
 
     @Override
@@ -26,6 +31,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke");
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setStage(stage);
             fxmlLoader.<MainWindow>getController().sendGreeting();
