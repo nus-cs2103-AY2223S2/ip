@@ -38,8 +38,8 @@ public class Duke {
                 if (command.equals("list")) {
                     this.printCommandList(allTasks);
                 } else if (command.startsWith("mark")) {
-                    missingIndexException(command);
-                    invalidIndexException(command, allTasks.size());
+                    DukeException.missingIndexException(command);
+                    DukeException.invalidIndexException(command, allTasks.size());
                     String[] str = command.split(" ");
                     int taskIndex = Integer.parseInt(str[1]) - 1;
                     Task oldTask = allTasks.get(taskIndex);
@@ -67,8 +67,8 @@ public class Duke {
                         save.saveListToFile(command, event, allTasks);
                     }
                 }else if (command.startsWith("unmark")) {
-                    missingIndexException(command);
-                    invalidIndexException(command, allTasks.size());
+                    DukeException.missingIndexException(command);
+                    DukeException.invalidIndexException(command, allTasks.size());
                     String[] str = command.split(" ");
                     int taskIndex = Integer.parseInt(str[1]) - 1;
                     Task oldTask = allTasks.get(taskIndex);
@@ -96,7 +96,7 @@ public class Duke {
                         save.saveListToFile(command, event, allTasks);
                     }
                 } else if (command.startsWith("todo")) {
-                    emptyCommandException(command);
+                    DukeException.emptyCommandException(command);
                     String[] str = command.split("todo");
                     String taskName = str[1];
                     Todo todo = new Todo(allTasks.size(), false,
@@ -105,8 +105,8 @@ public class Duke {
                     todo.printToDoTask();
                     save.saveListToFile(command, todo, allTasks);
                 } else if (command.startsWith("deadline")) {
-                    emptyCommandException(command);
-                    missingTimingException(command);
+                    DukeException.emptyCommandException(command);
+                    DukeException.missingTimingException(command);
                     String[] str = command.split("/by ");
                     String taskName = str[0].split("deadline")[1];
                     LocalDateTime taskDeadline = LocalDateTime.parse(str[1], dateTimeFormatter);
@@ -116,8 +116,8 @@ public class Duke {
                     deadline.printDeadlineTask();
                     save.saveListToFile(command, deadline, allTasks);
                 } else if (command.startsWith("event")) {
-                    emptyCommandException(command);
-                    missingTimingException(command);
+                    DukeException.emptyCommandException(command);
+                    DukeException.missingTimingException(command);
                     String[] str = command.split("/from ");
                     String taskName = str[0].split("event")[1];
                     String[] eventStartEndTime = str[1].split(" /to ");
@@ -129,8 +129,8 @@ public class Duke {
                     event.printEventTask();
                     save.saveListToFile(command, event, allTasks);
                 } else if (command.startsWith("delete")) {
-                    missingIndexException(command);
-                    invalidIndexException(command, allTasks.size());
+                    DukeException.missingIndexException(command);
+                    DukeException.invalidIndexException(command, allTasks.size());
                     String[] str = command.split(" ");
                     int taskIndex = Integer.parseInt(str[1]) - 1;
                     Task task = allTasks.get(taskIndex);
@@ -138,7 +138,7 @@ public class Duke {
                     allTasks.remove(taskIndex);
                     save.saveListToFile(command, task, allTasks);
                 } else if (command.startsWith("find deadlines or events on")) {
-                    emptyCommandException(command);
+                    DukeException.emptyCommandException(command);
                     String[] str = command.split("find deadlines or events on ");
                     String dateTime = str[1];
                     DateTimeFormatter dateTimeFormatter2 =
@@ -149,7 +149,7 @@ public class Duke {
                     saidBye = true;
                     this.printByeMessage();
                 } else {
-                    invalidCommandException(command);
+                    DukeException.invalidCommandException(command);
                 }
             } catch (DukeException d) {
                 System.out.println(d.getMessage());
@@ -233,89 +233,4 @@ public class Duke {
                 "\n\t____________________________________________________________");
     }
 
-    public void emptyCommandException(String command) throws DukeException {
-        switch (command) {
-            case "todo":
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The description of a todo cannot be empty." +
-                        "\n\t____________________________________________________________");
-            case "deadline":
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The description of a deadline cannot be empty." +
-                        "\n\t____________________________________________________________");
-            case "event":
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The description of an event cannot be empty." +
-                        "\n\t____________________________________________________________");
-            case "find deadlines or events on":
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The date of a deadline/ event cannot be empty." +
-                        "\n\t____________________________________________________________");
-        }
-    }
-
-    public void missingTimingException(String command) throws DukeException {
-        if (command.startsWith("deadline") && !command.contains("/by")) {
-            throw new DukeException("\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! The timing of a deadline cannot be empty." +
-                    "\n\t____________________________________________________________");
-        } else if (command.startsWith("event") && !command.contains("/from")) {
-            throw new DukeException("\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! The start time of an event cannot be empty." +
-                    "\n\t____________________________________________________________");
-        } else if (command.startsWith("event") && !command.contains("/to")) {
-            throw new DukeException("\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! The end time of an event cannot be empty." +
-                    "\n\t____________________________________________________________");
-        }
-    }
-
-    public void missingIndexException(String command) throws DukeException {
-        switch (command) {
-            case "mark":
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to mark a task as done cannot be empty." +
-                        "\n\t____________________________________________________________");
-            case "unmark":
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to unmark a task as not done cannot be empty." +
-                        "\n\t____________________________________________________________");
-            case "delete":
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to delete a task as not done cannot be empty." +
-                        "\n\t____________________________________________________________");
-        }
-    }
-
-    public void invalidIndexException(String command, int taskSize) throws DukeException {
-        if (command.startsWith("mark") || command.startsWith("unmark")
-                ||command.startsWith("delete")) {
-            String index = command.split(" ")[1];
-            int index1 = Integer.parseInt(index);
-            if (index1 <= 0) {
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be zero or less." +
-                        "\n\t____________________________________________________________");
-            } else if (index.equals("")) {
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be empty." +
-                        "\n\t____________________________________________________________");
-            } else if (index1 > taskSize) {
-                throw new DukeException("\t____________________________________________________________" +
-                        "\n\t ☹ OOPS!!! The task index to delete or un/mark a task cannot be more than" +
-                        " number of tasks." +
-                        "\n\t____________________________________________________________");
-            }
-        }
-    }
-
-    public void invalidCommandException(String command) throws DukeException {
-        if (!command.startsWith("event") || !(command.startsWith("deadline")) ||
-                !command.startsWith("todo") || command.startsWith("mark") ||
-                !command.startsWith("unmark")) {
-            throw new DukeException("\t____________________________________________________________" +
-                    "\n\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" +
-                    "\n\t____________________________________________________________");
-        }
-    }
 }
