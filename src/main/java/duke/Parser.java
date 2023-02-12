@@ -1,6 +1,7 @@
 package duke;
 
 import command.*;
+import exception.DukeException;
 import task.Deadline;
 import task.Event;
 import task.Todo;
@@ -8,7 +9,6 @@ import task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 public class Parser {
     private String input;
@@ -68,14 +68,13 @@ public class Parser {
             String taskFullDetails = input.substring(detailIndex);
             String[] splitDescriptionAndDuration = taskFullDetails.split("/from");
             String[] splitStartAndEnd = splitDescriptionAndDuration[1].split("/to");
-            System.out.println(Arrays.toString(splitDescriptionAndDuration) );
             if(splitDescriptionAndDuration.length < 2) {
                 throw new DukeException("Oh no!! Please specify the start and end.");
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate startTime = LocalDate.parse(splitStartAndEnd[0].trim(), formatter);
-            LocalDate endTime = LocalDate.parse(splitStartAndEnd[1].trim(), formatter);
-            Event task = new Event(splitDescriptionAndDuration[0], startTime, endTime);
+            LocalDate startDate = LocalDate.parse(splitStartAndEnd[0].trim(), formatter);
+            LocalDate endDate = LocalDate.parse(splitStartAndEnd[1].trim(), formatter);
+            Event task = new Event(splitDescriptionAndDuration[0], startDate, endDate);
             return new AddCommand(task);
         } else {
             throw new DukeException("Oh no!!! What is this? Please try again later!");

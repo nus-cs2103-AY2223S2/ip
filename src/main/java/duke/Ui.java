@@ -9,7 +9,7 @@ public class Ui {
     }
 
     public void showWelcome(){
-        System.out.println("Hello! I'm duke.Duke What can I do for you?");
+        System.out.println("What's up! I'm duuk.What do you want?");
     }
 
     public String readCommand() {
@@ -17,11 +17,8 @@ public class Ui {
         return input;
     }
 
-//    public void displayLoadingErrorMessage(){
-//        System.out.println("oh no Loading Error!");
-//    }
     public void showLine() {
-        System.out.println("_______");
+        System.out.println("________________________________________");
     }
 
     public void closeDuke() {

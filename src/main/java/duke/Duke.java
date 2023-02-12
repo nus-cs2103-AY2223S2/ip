@@ -1,6 +1,7 @@
 package duke;
 
 import command.Command;
+import exception.DukeException;
 import task.Tasklist;
 
 public class Duke {
