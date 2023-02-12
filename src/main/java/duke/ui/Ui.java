@@ -1,7 +1,10 @@
-package duke;
+package duke.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import duke.storage.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -48,11 +51,11 @@ public class Ui {
 
     /**
      * Prints TaskList of Duke.
-     * @param lst TaskList to be printed.
+     * @param taskList TaskList to be printed.
      * @return Response after printing lst.
      */
-    public String showList(TaskList lst) {
-        return showLine() + "Here are the tasks in your list:\n" + lst.printList() + showLine();
+    public String showList(TaskList taskList) {
+        return showLine() + "Here are the tasks in your list:\n" + taskList.printList() + showLine();
     }
 
     /**
@@ -116,5 +119,11 @@ public class Ui {
     public String showEvent(Event event, int size) {
         return showLine() + "Got it! I've added: \n" + " " + event.toString() + "\n"
                 + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+    }
+
+    public String showSchedule(TaskList taskList, LocalDate date) {
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return showLine() + "Here is your schedule for " + formattedDate + ":)\n"
+                + taskList.printSchedule(date) + showLine();
     }
 }

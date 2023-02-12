@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+import java.time.LocalDate;
+
 /**
  * Class contains variables and methods related to Todo task.
  */
@@ -13,6 +15,11 @@ public class Todo extends Task {
     @Override
     public String toFile() {
         return String.format("T | %s\n", super.toFile());
+    }
+
+    @Override
+    public boolean isTaskInSchedule(LocalDate date) {
+        return false;
     }
 
     /**

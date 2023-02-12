@@ -30,6 +30,13 @@ public class Event extends Task {
         return String.format("E | %s | %s | %s\n", super.toFile(), this.start, this.end);
     }
 
+    @Override
+    public boolean isTaskInSchedule(LocalDate date) {
+        boolean checkStart = this.start.compareTo(date) <= 0;
+        boolean checkEnd = this.end.compareTo(date) >= 0;
+        return checkStart && checkEnd;
+    }
+
     /**
      * Creates Event task from string from file.
      * @param taskNameData String containing taskName from file.

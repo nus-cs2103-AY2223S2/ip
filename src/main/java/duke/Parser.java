@@ -13,6 +13,7 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
+import duke.command.ViewCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -34,6 +35,7 @@ public class Parser {
         String[] commandDetails = userInput.trim().split(" ", 2);
         String commandType = commandDetails[0];
 
+        trimArgs(commandDetails);
         checkSufficientArgs(commandType, commandDetails);
         String arguments = commandDetails.length < 2 ? "" : commandDetails[1];
 
@@ -50,6 +52,8 @@ public class Parser {
              return new DeleteCommand(parseIntArg(arguments));
         case "find":
             return new FindCommand(arguments);
+        case "view":
+            return new ViewCommand(parseDate(arguments));
         case "todo":
             Todo todo = new Todo(parseTodo(arguments));
             return new ToDoCommand(todo);
@@ -90,6 +94,11 @@ public class Parser {
     public void trimArgs(String[] arguments) {
         for (int i = 0; i < arguments.length; i++) {
             arguments[i] = arguments[i].trim();
+            if (arguments[i].isEmpty()) {
+                arguments[i] = null;
+            } else {
+                continue;
+            }
         }
     }
 
@@ -106,6 +115,15 @@ public class Parser {
             return intArgument - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("input type");
+        }
+    }
+
+    public LocalDate parseDate(String argument) throws DukeException {
+        try {
+            LocalDate date = LocalDate.parse(argument);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("date format");
         }
     }
 
