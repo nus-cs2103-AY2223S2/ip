@@ -1,6 +1,6 @@
-package duke;
+package duke.taskstorage;
 
-import duke.command.Parser;
+import duke.parser.Parser;
 import duke.task.Task;
 
 import java.io.File;

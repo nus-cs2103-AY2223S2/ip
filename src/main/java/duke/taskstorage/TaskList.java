@@ -1,6 +1,7 @@
-package duke;
+package duke.taskstorage;
 
 import duke.task.Task;
+import duke.taskstorage.Storage;
 
 import java.util.ArrayList;
 

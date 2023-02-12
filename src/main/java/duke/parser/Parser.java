@@ -1,5 +1,6 @@
-package duke.command;
+package duke.parser;
 
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,7 +8,10 @@ import duke.task.Task;
 import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+<<<<<<< HEAD:src/main/java/duke/parser/Parser.java
+=======
 import java.time.format.DateTimeParseException;
+>>>>>>> master:src/main/java/duke/command/Parser.java
 
 /**
  * Class for Parser which translates between different task formats
@@ -71,62 +75,6 @@ public final class Parser {
         return taskToReturn;
     }
 
-    /**
-     * Translates user input to a Task object
-     * @param commandLine User input
-     * @return Task according to user input
-     */
-    public static Task translateUserInputToTask(String commandLine) throws DukeException {
-        boolean isAbleToReturn = true;
-        Task taskToReturn = new Task();
-        String taskType = commandLine.split(" ")[0];
-        switch (taskType) {
-        case "todo":
-            try {
-                String toDoName = commandLine.substring(5);
-                taskToReturn = new ToDo(toDoName);
-            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! Please enter a valid todo task format.\n");
-                isAbleToReturn = false;
-            }
-            break;
-        case "deadline":
-            try {
-                String deadlineName = commandLine.split(" /by ")[0].substring(9);
-                String deadlineTime = commandLine.split(" /by ")[1];
-                taskToReturn = new Deadline(deadlineName, dateFormatter(deadlineTime));
-            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! Please enter a valid deadline task format.\n");
-                isAbleToReturn = false;
-            } catch (DateTimeParseException e) {
-                System.out.println("Oops! Please enter deadline according to a valid 'DD/MM/YYYY HH:mm' format.\n");
-                isAbleToReturn = false;
-            }
-            break;
-        case "event":
-            try {
-                String eventName = commandLine.split(" /from ")[0].substring(6);
-                String startTime = commandLine.split(" /from ")[1].split(" /to ")[0];
-                String endTime = commandLine.split(" /to ")[1];
-                taskToReturn = new Event(eventName, dateFormatter(startTime), dateFormatter(endTime));
-            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! Please enter a valid deadline task format.\n");
-                isAbleToReturn = false;
-            } catch (DateTimeParseException e) {
-                System.out.println("Oops! Please enter deadline according to a valid 'DD/MM/YYYY HH:mm' format.\n");
-                isAbleToReturn = false;
-            }
-            break;
-        default:
-            throw new DukeException("Invalid task type");
-        }
-        if (isAbleToReturn) {
-            return taskToReturn;
-        } else {
-            return null;
-        }
-    }
-
     public static Command getCommandType(String userInput) throws DukeException {
         assert userInput != null: "User input cannot be blank";
         String command = userInput.split(" ")[0];
@@ -144,9 +92,11 @@ public final class Parser {
         case "find":
             return new FindCommand(userInput);
         case "todo":
+            return new TodoCommand(userInput);
         case "deadline":
+            return new DeadlineCommand(userInput);
         case "event":
-            return new AddTaskCommand(userInput);
+            return new EventCommand(userInput);
         default:
             throw new DukeException("Invalid command type");
         }

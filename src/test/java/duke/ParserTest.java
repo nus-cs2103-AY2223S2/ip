@@ -1,6 +1,6 @@
 package duke;
 
-import duke.command.Parser;
+import duke.parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

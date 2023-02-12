@@ -1,20 +1,24 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.exception.DukeException;
+import duke.taskstorage.TaskList;
 
+/**
+ * Abstract class for Command.
+ */
 public abstract class Command {
     protected String userInput;
-    protected boolean isExit;
 
+    /**
+     * Constructor for Command class.
+     * @param userInput
+     */
     public Command(String userInput) {
         this.userInput = userInput;
-        this.isExit = false;
     }
 
-    public abstract String execute(TaskList tasks) throws DukeException;
-
-    public boolean getExitStatus() {
-        return isExit;
-    }
+    /**
+     * Executes user command.
+     * @param tasks Current TaskList.
+     */
+    public abstract String execute(TaskList tasks);
 }
