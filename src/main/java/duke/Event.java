@@ -16,24 +16,19 @@ public class Event extends Task {
         }
     }
 
-    //this makes sure that from and to do not have to be dates.
     public void isDate() {
-        boolean c = true;
-        boolean d = true;
         LocalDate d1, d2;
         try {
             d1 = LocalDate.parse((String) from);
             this.from = d1;
             from = ((LocalDate) from).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (Exception e) {
-            c = false;
         }
         try {
             d2 = LocalDate.parse((String) to);
             this.to = d2;
             to = ((LocalDate) to).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (Exception e) {
-            d = false;
         }
     }
 
