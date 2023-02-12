@@ -27,7 +27,6 @@ public class CommandToDo extends Command {
     public String execute() throws DukeException {
         Task taskAdded = this.addIntoList(this.taskDetails);
         return this.getConfirmationMessageOf(taskAdded);
-        return Ui.getAddTaskConfirmationWithAttitude(this.taskList.addToDoTask(this.taskDetails));
     }
 
     private Task addIntoList(String taskDetails) throws DukeException {
