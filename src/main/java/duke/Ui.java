@@ -3,6 +3,8 @@ package duke;
 import java.util.Scanner;
 
 import duke.task.Task;
+import duke.tasklist.ArchivedTaskList;
+import duke.tasklist.TaskList;
 
 /**
  * Ui class.
@@ -16,24 +18,15 @@ public class Ui {
     /**
      * Prints out the greeting when the program first runs.
      */
-    public String greet() {
-        /**
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo); **/
-
-        return "Meow I'm Toto! What can I for you?";
+    public String showGreeting() {
+        return "Meow I'm Toto! What can I do for you?";
     }
-
 
     /**
      * Prints out note after user inputs bye.
      */
     public String sayGoodbye() {
-        return "Byebye CATch you later!";
+        return "Byebye CATch you later! Content is saved.";
     }
 
     /**
@@ -118,5 +111,17 @@ public class Ui {
 
     public String showArchivedAll() {
         return "All your tasks are now archived, your task list is now empty!";
+    }
+
+    public String showList(TaskList tasks) {
+        String beginning = "Task list ";
+        if (tasks instanceof ArchivedTaskList) {
+            beginning = "Archive ";
+        }
+        if (tasks.isEmpty()) {
+            return "Oh rats! " + beginning + "is empty!";
+        }
+
+        return tasks.toString();
     }
 }

@@ -1,0 +1,27 @@
+/* default style */
+.my-button {
+    -fx-background-color: #ffa07a;
+    -fx-border-color: peru;
+}
+
+/* style when mouse is inside the region */
+.my-button:hover {
+    -fx-background-color: #FFE4B5;
+
+}
+
+.my-background {
+
+    -fx-background-color: #ffdab9;
+
+}
+
+.my-textfield {
+    -fx-background-color: #faebd7;
+    -fx-border-color: peru;
+}
+
+.my-scroll {
+    -fx-background-color: peru;
+
+}

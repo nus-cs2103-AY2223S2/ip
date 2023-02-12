@@ -5,6 +5,8 @@ import java.io.IOException;
 
 
 import duke.task.Task;
+import duke.tasklist.ArchivedTaskList;
+import duke.tasklist.TaskList;
 import javafx.scene.image.Image;
 
 import duke.exception.DukeException;
@@ -26,6 +28,9 @@ public class Duke  {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/black-cat.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/black-cat.png"));
 
+    public Duke() {
+
+    }
     /**
      * Constructor for Duke object.
      * @param filePath Filepath of where txt file is write into.
@@ -63,10 +68,10 @@ public class Duke  {
                 return ui.sayGoodbye();
             }
             if (answer.equals("list")) {
-                return tasks.toString();
+                return ui.showList(tasks);
             }
             if (answer.equals("list archive")) {
-                return archives.toString();
+                return ui.showList(archives);
             }
             if (answer.equals("archive all")) {
                 tasks.archiveAll(archives);

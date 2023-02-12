@@ -1,9 +1,9 @@
-package duke;
+package duke.tasklist;
 import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class ArchivedTaskList extends TaskList{
+public class ArchivedTaskList extends TaskList {
 
     public ArchivedTaskList(ArrayList<Task> arrayList) {
         super(arrayList);

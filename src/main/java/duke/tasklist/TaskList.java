@@ -1,15 +1,15 @@
-package duke;
+package duke.tasklist;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import duke.Parser;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeTaskNotFoundException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
 
 
 /**
@@ -155,6 +155,10 @@ public class TaskList {
             archives.addDeletedTask(deleted);
         }
     }
+
+    public boolean isEmpty() {
+        return arrayList.isEmpty();
+    }
     /**
      * Returns a string of the tasks in order of when they are added.
      * @return String of the task list.
@@ -166,5 +170,7 @@ public class TaskList {
         }
         return str;
     }
+
+
 
 }
