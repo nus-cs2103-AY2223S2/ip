@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.util.Pair;
 
 /**
  * The Duke class represents an instance of a Duke.
@@ -46,14 +47,14 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
+    Pair getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
-            return ui.displayOutput();
+            return new Pair<>(ui.displayOutput(), false);
         } catch (DukeException e) {
             ui.showError(e.getMessage());
-            return ui.displayOutput();
+            return new Pair<>(ui.displayOutput(), true);
         }
     }
 }

@@ -6,11 +6,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    @FXML
+    private Pane background;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -30,7 +35,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         // Add the logo and welcome message
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("When all I do is for you, Kermie \u2665\nWhat can I do for you?\n", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeImage, "When all I do is for you, Kermie \u2665\nWhat can I do for you?\n", false));
     }
 
     public void setDuke(Duke d) {
@@ -44,10 +49,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        Pair response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(userImage, input),
+                DialogBox.getDukeDialog(dukeImage, (String) response.getKey(), (boolean) response.getValue())
         );
         userInput.clear();
     }

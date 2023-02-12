@@ -1,0 +1,18 @@
+#background {
+    -fx-background-image: url("../images/background.jpg");
+    -fx-background-size: 1440 860;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
+
+#dialog {
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+}
+#scrollPane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, white, 5, 0.5, 0, 0);
+
+}
+
