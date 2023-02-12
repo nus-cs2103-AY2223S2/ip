@@ -122,7 +122,9 @@ public class Parser {
      * @throws DukeException If user did not enter /by date or invalid date format.
      */
     public String deadline(String[] input, TaskList taskList) throws DukeException {
-        if (input.length == 1 || !input[1].contains("/by")) {
+        boolean isWithoutInput = input.length == 1;
+        boolean isWithoutBy = !input[1].contains("/by");
+        if (isWithoutInput || isWithoutBy) {
             throw new DukeException("Deadline needs a /by.");
         }
         String[] tempInput = input[1].strip().split("/by ");
