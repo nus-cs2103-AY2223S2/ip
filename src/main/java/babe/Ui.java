@@ -74,10 +74,12 @@ class Ui {
     }
 
 
-    protected static String notifyDelete(String taskString, int count) {
+    protected static String notifyDelete(ArrayList<String> taskStrings, int count) {
         String output = "";
-        output += "One task down! I removed this from your list of tasks:\n";
-        output += taskString;
+        output += "Love that work ethics of yours! Here's what I removed from the list:\n";
+        for (int i = 0; i < taskStrings.size(); i++) {
+            output += taskStrings.get(i) + "\n";
+        }
         output += String.format("\nNow you have %d task(s) left!\n", count);
         printOutputMessage(output);
         return output;
@@ -121,5 +123,10 @@ class Ui {
         return output;
     }
 
+    protected static String notifyError(AssertionError e2) {
+        String output = e2.getMessage();
+        printOutputMessage(output);
+        return output;
+    }
 
 }

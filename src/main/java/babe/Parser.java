@@ -1,6 +1,6 @@
 package babe;
 
-import babe.exception.NoDescriptionException;
+import babe.exception.NoArgumentException;
 import babe.exception.NonsenseInputException;
 import babe.exception.WrongDateFormatException;
 
@@ -19,11 +19,6 @@ class Parser {
      * A string input from user.
      */
     private static ArrayList<String> userInput = new ArrayList<>();
-
-    /**
-     * Length of user input.
-     */
-    private static int userInputLen = 0;
 
     /**
      * Rebuilds a string from ArrayList from the starting index to the ending index (not inclusive).
@@ -82,18 +77,37 @@ class Parser {
     /**
      * Returns true if the description is available for an instruction.
      * Throws NoDescriptionException if description is not available.
-     * @return A boolean value;
      */
-    private static void checkIfDescriptionAvail(int len)
-            throws NoDescriptionException {
-        if (len == 1) {
-            throw new NoDescriptionException();
+    private static void checkIfArgumentAvail(String argType)
+            throws NoArgumentException {
+        if (userInput.size() == 1) {
+            throw new NoArgumentException(argType);
         }
+    }
+
+    private static ArrayList<String> processIndices() {
+        String argument = Parser.rebuildUserInput(1, userInput.size());
+        argument = argument.replace(" ", "");
+        ArrayList<String> indices = new ArrayList<>(Arrays.asList(argument.split(",")));
+        for (int i = 0; i < indices.size(); i++) {
+            String curIndex = indices.get(i);
+            assertIndexIsNumber(curIndex);
+        }
+        return indices;
+    }
+
+    /**
+     * Asserts user input to contain an index behind an instruction.
+     * Throws AssertionError if description is not available.
+     */
+    private static void assertIndexIsNumber(String index) {
+        boolean isNumber = userInput.get(1).matches("[0-9]+");
+        assert isNumber : "The index must be a number!";
     }
 
 
     public static ArrayList<String> parse(String input)
-            throws NoDescriptionException, NonsenseInputException, WrongDateFormatException {
+            throws NoArgumentException, NonsenseInputException, WrongDateFormatException {
 
         userInput = new ArrayList<>(Arrays.asList(input.split(" ")));
         int inputLength = userInput.size();
@@ -109,18 +123,25 @@ class Parser {
         } else if (instruction.equals("list") && inputLength == 1) {
 
         } else if (instruction.equals("mark")) {
-            outputs.add(userInput.get(1));
+            checkIfArgumentAvail("index");
+            String index = userInput.get(1);
+            assertIndexIsNumber(index);
+            outputs.add(index);
 
         } else if (instruction.equals("unmark")) {
-            outputs.add(userInput.get(1));
+            checkIfArgumentAvail("index");
+            String index = userInput.get(1);
+            assertIndexIsNumber(index);
+            outputs.add(index);
+
 
         } else if (instruction.equals("todo")) {
-            checkIfDescriptionAvail(inputLength);
+            checkIfArgumentAvail("description");
             String description = Parser.rebuildUserInput(1, inputLength);
             outputs.add(description);
 
         } else if (instruction.equals("deadline")) {
-            checkIfDescriptionAvail(inputLength);
+            checkIfArgumentAvail("description");
 
             int deadlineIndex = Parser.findArgument("/by");
             String description = Parser.rebuildUserInput(1, deadlineIndex - 1);
@@ -134,7 +155,7 @@ class Parser {
             }
 
         } else if (instruction.equals("event")) {
-            checkIfDescriptionAvail(inputLength);
+            checkIfArgumentAvail("description");
 
             int startDateIndex = Parser.findArgument("/from");
             int endDateIndex = Parser.findArgument("/to");
@@ -152,11 +173,11 @@ class Parser {
             }
 
         } else if (instruction.equals("delete")) {
-            checkIfDescriptionAvail(inputLength);
-            outputs.add(userInput.get(1));
+            checkIfArgumentAvail("index");
+            outputs.addAll(Parser.processIndices());
 
         } else if (instruction.equals("find")) {
-            checkIfDescriptionAvail(inputLength);
+            checkIfArgumentAvail("keyword");
             outputs.add(rebuildUserInput(1, inputLength));
 
         } else {

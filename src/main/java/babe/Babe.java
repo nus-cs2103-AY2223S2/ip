@@ -93,10 +93,10 @@ public class Babe {
                 output = Ui.notifyAddTask(taskString, this.taskList.length());
 
             } else if (instruction.equals("delete")) {
-                int index = Integer.parseInt(parseOutputs.get(1));
-                String removedTaskString = this.taskList.deleteTask(index);
+                ArrayList<String> indices = new ArrayList<>(parseOutputs.subList(1, parseOutputs.size()));
+                ArrayList<String> removedTasks = this.taskList.deleteTasks(indices);
                 Storage.save(this.taskList);
-                output = Ui.notifyDelete(removedTaskString, this.taskList.length());
+                output = Ui.notifyDelete(removedTasks, this.taskList.length());
 
             } else if (instruction.equals("find")) {
                 String searchKey = parseOutputs.get(1);
@@ -106,8 +106,10 @@ public class Babe {
             } else {
                 throw new NonsenseInputException();
             }
-        } catch (Exception e) {
-            output = Ui.notifyException(e);
+        } catch (Exception e1) {
+            output = Ui.notifyException(e1);
+        } catch (AssertionError e2) {
+            output = Ui.notifyError(e2);
         }
 
         return output;
