@@ -42,9 +42,9 @@ public class Event extends Task {
             this.from = LocalDateTime.parse(from.replace("/from", "").trim());
             this.to = LocalDateTime.parse(to.replace("/to", "").trim());
         } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException(Views.DATE_PARSE_ERR_STRING.eng());
+            throw new DukeException(Views.DATE_PARSE_ERR_STRING.str());
         }
-        assert this.to.isAfter(this.from) : Views.DATE_WRONG_ORDER_STRING.eng();
+        assert this.to.isAfter(this.from) : Views.DATE_WRONG_ORDER_STRING.str();
     }
 
     /**

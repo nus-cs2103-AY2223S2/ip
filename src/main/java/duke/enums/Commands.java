@@ -14,7 +14,8 @@ public enum Commands {
     UNMARK("unmark"),
     DELETE("delete"),
     DEL("del"),
-    FIND("find");
+    FIND("find"),
+    SET("set");
 
     private final String cmd;
 

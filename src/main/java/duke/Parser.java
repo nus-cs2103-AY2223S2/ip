@@ -14,6 +14,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.SetCommand;
 import duke.command.TodoCommand;
 import duke.command.UnmarkCommand;
 import duke.enums.Commands;
@@ -69,8 +70,10 @@ public class Parser {
             } else if (input.startsWith(Commands.FIND.cmd())) {
                 String query = input.substring(Commands.FIND.len());
                 return new FindCommand(query);
+            } else if (input.startsWith(Commands.SET.cmd())) {
+                return new SetCommand(input);
             } else {
-                throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.eng());
+                throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.str());
             }
         }
     }
@@ -90,21 +93,21 @@ public class Parser {
             title = input.substring(Commands.TODO.len());
         } else if (input.startsWith(Commands.DEADLINE.cmd())) {
             int indexOfBy = input.indexOf(Commands.BY.cmd());
-            assert indexOfBy != -1 : Views.MISSING_ARGS_ERR_STRING.eng();
+            assert indexOfBy != -1 : Views.MISSING_ARGS_ERR_STRING.str();
             title = input.substring(Commands.DEADLINE.len(), indexOfBy);
             String deadline = input.substring(indexOfBy);
             returnString[1] = deadline;
         } else if (input.startsWith(Commands.EVENT.cmd())) {
             int indexOfFrom = input.indexOf(Commands.FROM.cmd());
             int indexOfTo = input.indexOf(Commands.TO.cmd());
-            assert indexOfFrom != -1 && indexOfFrom != -1 : Views.MISSING_ARGS_ERR_STRING.eng();
+            assert indexOfFrom != -1 && indexOfFrom != -1 : Views.MISSING_ARGS_ERR_STRING.str();
             title = input.substring(Commands.EVENT.len(), indexOfFrom);
             String from = input.substring(indexOfFrom, indexOfTo);
             String to = input.substring(indexOfTo);
             returnString[1] = from;
             returnString[2] = to;
         } else {
-            throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.eng());
+            throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.str());
         }
         returnString[0] = title;
         return returnString;
@@ -125,7 +128,7 @@ public class Parser {
             int number = Integer.parseInt(numberString);
             return number;
         } else {
-            throw new DukeException(Views.NO_INT_ERR_STRING.eng());
+            throw new DukeException(Views.NO_INT_ERR_STRING.str());
         }
     }
 
@@ -155,7 +158,7 @@ public class Parser {
             Arrays.sort(converted);
             return converted;
         } else {
-            throw new DukeException(Views.NO_INT_ERR_STRING.eng());
+            throw new DukeException(Views.NO_INT_ERR_STRING.str());
         }
     }
 
@@ -163,7 +166,7 @@ public class Parser {
         int[] results = new int[input.length];
         for (int i = 0; i < input.length; i++) {
             int subtracted = input[i] - subtractAmt;
-            assert subtracted >= 0 : Views.OUT_RANGE_ERR_STRING.eng();
+            assert subtracted >= 0 : Views.OUT_RANGE_ERR_STRING.str();
             results[i] = subtracted;
         }
         return results;

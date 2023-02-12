@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.enums.Languages;
 import duke.enums.Views;
 
 /**
@@ -8,6 +9,7 @@ import duke.enums.Views;
  */
 public class Duke {
 
+    private static Languages language = Languages.ENG;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -27,6 +29,24 @@ public class Duke {
     }
 
     /**
+     * Static variable to get the language of Duke
+     *
+     * @return
+     */
+    public static Languages getLang() {
+        return language;
+    }
+
+    /**
+     * Static variable to set the language of Duke
+     *
+     * @return
+     */
+    public static void setLang(Languages input) {
+        language = input;
+    }
+
+    /**
      * Runs the chatbot
      */
     public void run() {
@@ -42,7 +62,7 @@ public class Duke {
                 if (e instanceof DukeException) {
                     ui.showError(e);
                 } else {
-                    ui.showError(Views.UNKNOWN_ERR_STRING.eng());
+                    ui.showError(Views.UNKNOWN_ERR_STRING.str());
                 }
             } catch (AssertionError e) {
                 ui.showError(e);

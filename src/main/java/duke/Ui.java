@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.enums.Languages;
 import duke.enums.Views;
 import duke.task.Task;
 
@@ -38,7 +39,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ /__,_|_|/_/___|\n";
         System.out.println("Hello from\n" + logo);
-        printer(Views.WELCOME_STRING.eng());
+        printer(Views.WELCOME_STRING.str());
     }
 
     /**
@@ -47,7 +48,7 @@ public class Ui {
      * @return Welcome String
      */
     public String stringWelcome() {
-        return Views.WELCOME_STRING.eng();
+        return Views.WELCOME_STRING.str();
     }
 
     /**
@@ -113,11 +114,11 @@ public class Ui {
     public String stringList(ArrayList<Task> tasks, boolean isGui, boolean isQuery) throws DukeException {
         // If Size == 0 && isQuery = throw error of cannot find
         // Apply de morgan Size != 0 || !isQuery = !throw error of cannot find
-        assert tasks.size() != 0 || !isQuery : Views.CANNOT_FIND_STRING.eng();
-        assert tasks.size() != 0 : Views.EMPTY_LIST_STRING.eng();
-        String returnString = Views.LIST_STRING.eng();
+        assert tasks.size() != 0 || !isQuery : Views.CANNOT_FIND_STRING.str();
+        assert tasks.size() != 0 : Views.EMPTY_LIST_STRING.str();
+        String returnString = Views.LIST_STRING.str();
         if (isQuery) {
-            returnString = Views.FOUND_LIST_STRING.eng();
+            returnString = Views.FOUND_LIST_STRING.str();
         }
         if (isGui) {
             returnString = returnString.substring(0, returnString.length() - 6);
@@ -170,7 +171,7 @@ public class Ui {
      * @throws DukeException when the task is not found in the list
      */
     public String stringMarkDone(TaskList tasks, int taskNum) throws DukeException {
-        return Views.MARK_DONE_STRING.eng() + tasks.get(taskNum);
+        return Views.MARK_DONE_STRING.str() + tasks.get(taskNum);
     }
 
     /**
@@ -182,9 +183,9 @@ public class Ui {
      */
     public String stringMarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
         if (tasks.size() == 1) {
-            return Views.MARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+            return Views.MARK_DONE_STRING.str() + stringListRaw(tasks, isGui);
         } else {
-            return Views.MARK_MANY_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+            return Views.MARK_MANY_DONE_STRING.str() + stringListRaw(tasks, isGui);
         }
     }
 
@@ -218,7 +219,7 @@ public class Ui {
      * @throws DukeException when the task is not found in the list
      */
     public String stringUnmarkDone(TaskList tasks, int taskNum) throws DukeException {
-        return (Views.UNMARK_DONE_STRING.eng() + tasks.get(taskNum));
+        return (Views.UNMARK_DONE_STRING.str() + tasks.get(taskNum));
     }
 
     /**
@@ -230,9 +231,9 @@ public class Ui {
      */
     public String stringUnmarkDone(ArrayList<Task> tasks, boolean isGui) throws DukeException {
         if (tasks.size() == 1) {
-            return Views.UNMARK_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+            return Views.UNMARK_DONE_STRING.str() + stringListRaw(tasks, isGui);
         } else {
-            return Views.UNMARK_MANY_DONE_STRING.eng() + stringListRaw(tasks, isGui);
+            return Views.UNMARK_MANY_DONE_STRING.str() + stringListRaw(tasks, isGui);
         }
     }
 
@@ -287,12 +288,12 @@ public class Ui {
      * @return String representation of deleted task
      */
     public String stringDel(Task delTask, TaskList task) {
-        String returnString = Views.DELETE_DONE_STRING.eng();
+        String returnString = Views.DELETE_DONE_STRING.str();
         returnString += delTask.toString();
         returnString += "\n      ";
-        returnString += Views.TASK_COUNT_1_STRING.eng();
+        returnString += Views.TASK_COUNT_1_STRING.str();
         returnString += task.size();
-        returnString += Views.TASK_COUNT_2_STRING.eng();
+        returnString += Views.TASK_COUNT_2_STRING.str();
         return returnString;
     }
 
@@ -306,15 +307,15 @@ public class Ui {
      * @throws DukeException
      */
     public String stringDel(ArrayList<Task> delTask, TaskList task, Boolean isGui) throws DukeException {
-        String returnString = Views.DELETE_DONE_STRING.eng();
+        String returnString = Views.DELETE_DONE_STRING.str();
         if (delTask.size() > 1) {
-            returnString = Views.DELETE_MANY_DONE_STRING.eng();
+            returnString = Views.DELETE_MANY_DONE_STRING.str();
         }
         returnString += stringListRaw(delTask, isGui);
         returnString += "\n      ";
-        returnString += Views.TASK_COUNT_1_STRING.eng();
+        returnString += Views.TASK_COUNT_1_STRING.str();
         returnString += task.size();
-        returnString += Views.TASK_COUNT_2_STRING.eng();
+        returnString += Views.TASK_COUNT_2_STRING.str();
         return returnString;
     }
 
@@ -331,7 +332,7 @@ public class Ui {
      * @return String representation of the task cleared
      */
     public String stringClear() {
-        return Views.CLEAR_LIST_STRING.eng();
+        return Views.CLEAR_LIST_STRING.str();
     }
 
     /**
@@ -342,12 +343,31 @@ public class Ui {
     }
 
     /**
-     * Prints out bye message
+     * Returns out bye message
      *
      * @return String representation of exit message
      */
     public String stringEnd() {
-        return Views.END_STRING.eng();
+        return Views.END_STRING.str();
+    }
+
+    /**
+     * Prints the language the user has selected
+     *
+     * @param lang
+     */
+    public void showSetLang(Languages lang) {
+        printer(stringSetLang(lang));
+    }
+
+    /**
+     * Returns the language the user has selected
+     *
+     * @param lang
+     * @return String representation of set language
+     */
+    public String stringSetLang(Languages lang) {
+        return Views.SELECTED_LANG_STRING.str() + lang.toString();
     }
 
     /**
@@ -403,9 +423,9 @@ public class Ui {
      * @param to of the event ending datePrint
      */
     private static void printer(String toPrint) {
-        System.out.println("    " + Views.LINE_STRING.eng());
+        System.out.println("    " + Views.LINE_STRING.str());
         System.out.println("      " + toPrint);
-        System.out.println("    " + Views.LINE_STRING.eng());
+        System.out.println("    " + Views.LINE_STRING.str());
         System.out.println();
     }
 }

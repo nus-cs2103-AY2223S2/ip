@@ -79,7 +79,7 @@ public class Storage {
                     Task newTask = new Event(title, from, to, isDone);
                     tasksList.add(newTask);
                 } else {
-                    throw new DukeException(Views.LOAD_EXTRA_ERR_STRING.eng());
+                    throw new DukeException(Views.LOAD_EXTRA_ERR_STRING.str());
                 }
             }
             scanner.close();

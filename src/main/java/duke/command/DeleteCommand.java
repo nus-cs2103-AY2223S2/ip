@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param taskNumbers int[] index of task in the ArrayList
      */
     public DeleteCommand(int... taskNumbers) {
-        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.eng();
+        assert taskNumbers.length != 0 : Views.NO_INT_ERR_STRING.str();
         this.taskNumbers = taskNumbers;
         Arrays.sort(this.taskNumbers);
     }

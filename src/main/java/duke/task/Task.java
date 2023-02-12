@@ -26,7 +26,7 @@ public abstract class Task {
      * @param isDone status of the Task
      */
     Task(String title, boolean isDone) {
-        assert title.trim().length() > 0 : Views.EMPTY_ERR_STRING.eng();
+        assert title.trim().length() > 0 : Views.EMPTY_ERR_STRING.str();
         this.title = title.trim();
         this.isDone = isDone;
     }
@@ -38,7 +38,7 @@ public abstract class Task {
      */
     public void markAsDone() throws DukeException {
         if (this.isDone) {
-            throw new DukeException(Views.MARKED_ERR_STRING.eng());
+            throw new DukeException(Views.MARKED_ERR_STRING.str());
         }
         this.isDone = true;
     }
@@ -50,7 +50,7 @@ public abstract class Task {
      */
     public void markAsUndone() throws DukeException {
         if (!this.isDone) {
-            throw new DukeException(Views.UNMARKED_ERR_STRING.eng());
+            throw new DukeException(Views.UNMARKED_ERR_STRING.str());
         }
         this.isDone = false;
     }

@@ -38,7 +38,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDateTime.parse(by.replace("/by", "").trim());
         } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException(Views.DATE_PARSE_ERR_STRING.eng());
+            throw new DukeException(Views.DATE_PARSE_ERR_STRING.str());
         }
     }
 

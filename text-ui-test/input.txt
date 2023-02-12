@@ -51,4 +51,11 @@ unmark 1
 unmark 1
 clear
 asdf
+set abc
+set pirate
+list
+set shakespeare
+list
+set lolcat
+list
 bye

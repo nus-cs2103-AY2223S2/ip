@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
 
         // Exit gracefully
         // Inspiration from https://github.com/nus-cs2103-AY2223S2/forum/issues/99
-        if (response.equals(Views.END_STRING.eng())) {
+        if (response.equals(Views.END_STRING.str())) {
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
 
             pause.setOnFinished(event -> {
