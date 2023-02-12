@@ -32,8 +32,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/TonyStark.png"));
+    private Image jarvis = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
 
     /**
      * Duke Constructor.
@@ -135,6 +135,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -156,7 +157,7 @@ public class Duke extends Application {
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(jarvis))
         );
         userInput.clear();
     }
@@ -171,7 +172,7 @@ public class Duke extends Application {
 
     /**
      * main.
-     * @param args
+     * @param args main args
      */
     public static void main(String[] args) {
         Application.launch(Duke.class, args);

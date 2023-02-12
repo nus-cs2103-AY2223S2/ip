@@ -22,8 +22,6 @@ public class ToDoList {
     public String list() {
         String res = "\tTasks for Tony Stark:\n";
         res += "\t--------------------------\n";
-        //System.out.println("\tTasks for Tony Stark:");
-        //System.out.println("\t--------------------------");
         for (int i = 0; i < count; i++) {
             /*
             System.out.println("\t" + (i + 1) + "."
@@ -33,7 +31,6 @@ public class ToDoList {
             res += temp;
         }
         res += "\t--------------------------\n";
-        //System.out.println("\t--------------------------");
         return res;
     }
 
@@ -142,28 +139,25 @@ public class ToDoList {
      * @return boolean result
      */
     public boolean hasTask(String task) {
-
-        boolean res = false;
-
         for (int i = 0; i < count; i++) {
             if (todolist.get(i).hasTask(task)) {
-                res = true;
+                return true;
             }
         }
-
-        return res;
+        return false;
     }
 
     /**
-     * Prints the specified tasks.
+     * Prints the specified task.
      *
      * @param task task description
      */
-    public void printTasks(String task) {
+    public String printTaskIfExist(String task) {
         for (int i = 0; i < count; i++) {
             if (todolist.get(i).hasTask(task)) {
-                System.out.println(todolist.get(i).printTask());
+                return todolist.get(i).printTask();
             }
         }
+        return ("Task does not exist");
     }
 }

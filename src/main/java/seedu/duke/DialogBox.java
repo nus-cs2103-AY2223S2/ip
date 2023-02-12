@@ -17,9 +17,10 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * sdfsdf
-     * @param l sdfsdf
-     * @param iv sdfsdf
+     * Displays the dialog box.
+     *
+     * @param l label of the dialog box
+     * @param iv image of the dialog box
      */
     public DialogBox(Label l, ImageView iv) {
         text = l;

@@ -7,7 +7,7 @@ public class Task {
 
     private int id;
     private String task;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for Task.
@@ -18,7 +18,7 @@ public class Task {
     public Task(int id, String task) {
         this.id = id;
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Task {
      * @return This task
      */
     public String printTask() {
-        return done ? "[x] " + task : "[ ] " + task;
+        return isDone ? "[x] " + task : "[ ] " + task;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Task {
      * @param index the task number to mark
      */
     public void markDone(int index) {
-        this.done = true;
+        this.isDone = true;
         System.out.println("\tCongratulations, Mr Stark. You have completed task " + index);
         System.out.println("\t" + printTask());
     }
@@ -47,7 +47,7 @@ public class Task {
      * @param index the task number to unmark
      */
     public void unmark(int index) {
-        this.done = false;
+        this.isDone = false;
         System.out.println("\tjarvis.Task " + index + " has been unmarked.");
         System.out.println("\t" + printTask());
     }
@@ -67,7 +67,7 @@ public class Task {
      * @return boolean of done-ness
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**

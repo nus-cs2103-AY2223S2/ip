@@ -20,119 +20,190 @@ public class Parser {
      * @return isBye boolean indicated the ending 'bye' command
      */
     public String parse(String command, ToDoList todolist, Storage storage) {
-
         if (command.equals("bye")) {
-            try {
-                storage.saveTasks(todolist);
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-            System.out.println("\tHave a nice day sir.");
-            return "bye!";
-
+            return endDuke(storage, todolist);
         } else if (command.equals("list")) {
             return todolist.list();
         } else if (command.matches("mark(.*)")) {
-            try {
-                int spacer = command.indexOf(" ");
-                int taskNum = Integer.parseInt(command.substring(spacer + 1));
-                validateTask(todolist, taskNum);
-                todolist.markDone(taskNum);
-            } catch (NumberFormatException e) {
-                System.out.println("Which task have you completed, sir?");
-            } catch (NoTaskFoundException e) {
-                System.out.println("Sir, that task does not exist.");
-            }
-            return todolist.list();
+            return markTask(command, todolist);
         } else if (command.matches("unmark(.*)")) {
-            try {
-                int spacer = command.indexOf(" ");
-                int taskNum = Integer.parseInt(command.substring(spacer + 1));
-                validateTask(todolist, taskNum);
-                todolist.unmark(taskNum);
-            } catch (NumberFormatException e) {
-                System.out.println("Which task would you like to unmark sir?");
-            } catch (NoTaskFoundException e) {
-                System.out.println("Sir, that task does not exist.");
-            }
-            return todolist.list();
+            return unmarkTask(command, todolist);
         } else if (command.matches("find(.*)")) {
-            int spacer = command.indexOf(" ");
-            String task = command.substring(spacer + 1);
-
-            if (todolist.hasTask(task)) {
-                todolist.printTasks(task);
-            } else {
-                System.out.println("Sir, that task does not exist.");
-            }
-
+            return findTask(command, todolist);
         } else if (command.matches("todo(.*)")) {
-            try {
-                addToDo(todolist, command);
-            } catch (JarvisException e) {
-                System.out.println("\tPlease enter in format 'todo <task>'");
-            }
-            return todolist.list();
+            return createTask(command, todolist);
         } else if (command.matches("deadline(.*)")) {
-
-            // check format
-            if (!command.contains("/")) {
-                System.out.println("\tPlease enter in format 'deadline <task> /<deadline>'");
-            } else {
-                int firstSlash = command.indexOf("/");
-                String task = command.substring(9, firstSlash);
-                String time = command.substring(firstSlash + 1);
-
-                try {
-                    LocalDate startTimeParsed = LocalDate.parse(time);
-                    todolist.add(task, startTimeParsed);
-                } catch (DateTimeParseException e) {
-                    System.out.println("Wrong date format\n");
-                    System.out.println("Input date format 'event <task> /<YYYY-MM-DD>'");
-                }
-            }
-            return todolist.list();
+            return createDeadlineTask(command, todolist);
         } else if (command.matches("event(.*)")) {
-            int firstSlash = command.indexOf("/");
-
-            // check format
-            if (firstSlash == -1 || !command.substring(firstSlash + 1).contains("/")) {
-                System.out.println("\tPlease enter in format 'event <task> /<start>/<end>'");
-            } else {
-                int secondSlash = command.substring(firstSlash + 1).indexOf("/") + firstSlash + 1;
-                String startTime = command.substring(firstSlash + 1, secondSlash);
-                String endTime = command.substring(secondSlash + 1);
-                String task = command.substring(6, firstSlash);
-
-                try {
-                    LocalDate startTimeParsed = LocalDate.parse(startTime);
-                    LocalDate endTimeParsed = LocalDate.parse(endTime);
-                    todolist.add(task, startTimeParsed, endTimeParsed);
-                } catch (DateTimeParseException e) {
-                    System.out.println("Wrong date format\n");
-                    System.out.println("Input date format 'event <task> /<YYYY-MM-DD>/<YYYY-MM-DD>'");
-                }
-            }
-            return todolist.list();
+            return createEventTask(command, todolist);
         } else if (command.matches("delete(.*)")) {
-            try {
-                int spacer = command.indexOf(" ");
-                int taskNum = Integer.parseInt(command.substring(spacer + 1));
-                validateTask(todolist, taskNum);
-                todolist.delete(taskNum);
-            } catch (NumberFormatException e) {
-                return "Which task would you like to delete, sir?";
-                //System.out.println("Which task would you like to delete, sir?");
-            } catch (NoTaskFoundException e) {
-                return "Sir, you may not delete nonexistent tasks.";
-                //System.out.println("Sir, you may not delete nonexistent tasks.");
-            }
-            return todolist.list();
-        } else {
-            return ("I do not know that command, sir.");
-            //System.out.println("Perhaps you can add that functionality for J.A.R.V.I.S(v2.0).");
+            return createDeleteTask(command, todolist);
         }
         return ("I do not know that command, sir.");
+    }
+
+    /**
+     * Ends the current Duke program.
+     *
+     * @param storage the current storage
+     * @param todolist the current todolist
+     * @return Confirmation of ending process, or error message
+     */
+    public String endDuke(Storage storage, ToDoList todolist) {
+        try {
+            storage.saveTasks(todolist);
+        } catch (IOException e) {
+            return ("Unable to store properly.");
+        }
+        return ("Have a nice day sir.\nBye!");
+    }
+
+    /**
+     * Marks the task indicated.
+     *
+     * @param command the user input
+     * @param todolist the current todolist
+     * @return Confirmation of marking, or error message
+     */
+    public String markTask(String command, ToDoList todolist) {
+        try {
+            int spacer = command.indexOf(" ");
+            int taskNum = Integer.parseInt(command.substring(spacer + 1));
+            validateTask(todolist, taskNum);
+            todolist.markDone(taskNum);
+        } catch (NumberFormatException e) {
+            return ("Which task have you completed, sir?");
+        } catch (NoTaskFoundException e) {
+            return ("Sir, that task does not exist.");
+        }
+        return todolist.list();
+    }
+
+    /**
+     * Unmarks the task indicated.
+     *
+     * @param command the user input
+     * @param todolist the current todolist
+     * @return Confirmation of unmarking, or error message
+     */
+    public String unmarkTask(String command, ToDoList todolist) {
+        try {
+            int spacer = command.indexOf(" ");
+            int taskNum = Integer.parseInt(command.substring(spacer + 1));
+            validateTask(todolist, taskNum);
+            todolist.unmark(taskNum);
+        } catch (NumberFormatException e) {
+            return ("Which task would you like to unmark sir?");
+        } catch (NoTaskFoundException e) {
+            return ("Sir, that task does not exist.");
+        }
+        return todolist.list();
+    }
+
+    /**
+     * Finds the task indicated by the user.
+     *
+     * @param command the task to find
+     * @param todolist the current todolist
+     * @return Confirmation of found Task, or Task not found
+     */
+    public String findTask(String command, ToDoList todolist) {
+        int spacer = command.indexOf(" ");
+        String task = command.substring(spacer + 1);
+        return todolist.printTaskIfExist(task);
+    }
+
+    /**
+     * Creates a new Task.
+     *
+     * @param command the user input
+     * @param todolist the todolist to save the created Task
+     * @return Confirmation of creation of Task, or error message
+     */
+    public String createTask(String command, ToDoList todolist) {
+        try {
+            String task = command.substring(5);
+            todolist.add(task);
+        } catch (StringIndexOutOfBoundsException e) {
+            return ("Please enter in format 'todo <task>'");
+        }
+        return todolist.list();
+    }
+
+    /**
+     * Creates a new Deadline task.
+     *
+     * @param command the user input
+     * @param todolist the todolist to save the created Task
+     * @return Confirmation of creation of Deadline, or error message
+     */
+    public String createDeadlineTask(String command, ToDoList todolist) {
+        // check format
+        if (!command.contains("/")) {
+            return ("\tPlease enter in format 'deadline <task> /<deadline>'");
+        } else {
+            int firstSlash = command.indexOf("/");
+            String task = command.substring(9, firstSlash);
+            String time = command.substring(firstSlash + 1);
+
+            try {
+                LocalDate startTimeParsed = LocalDate.parse(time);
+                todolist.add(task, startTimeParsed);
+            } catch (DateTimeParseException e) {
+                return ("Wrong date format\nInput date format 'event <task> /<YYYY-MM-DD>'");
+            }
+        }
+        return todolist.list();
+    }
+
+    /**
+     * Creates a new Event task.
+     *
+     * @param command the user input
+     * @param todolist the todolist to save the created Task
+     * @return Confirmation of creation of Event, or error message
+     */
+    public String createEventTask(String command, ToDoList todolist) {
+        int firstSlash = command.indexOf("/");
+        // check format
+        if (firstSlash == -1 || !command.substring(firstSlash + 1).contains("/")) {
+            return ("\tPlease enter in format 'event <task> /<start>/<end>'");
+        } else {
+            int secondSlash = command.substring(firstSlash + 1).indexOf("/") + firstSlash + 1;
+            String startTime = command.substring(firstSlash + 1, secondSlash);
+            String endTime = command.substring(secondSlash + 1);
+            String task = command.substring(6, firstSlash);
+
+            try {
+                LocalDate startTimeParsed = LocalDate.parse(startTime);
+                LocalDate endTimeParsed = LocalDate.parse(endTime);
+                todolist.add(task, startTimeParsed, endTimeParsed);
+            } catch (DateTimeParseException e) {
+                return ("Wrong date format\nInput date format 'event <task> /<YYYY-MM-DD>/<YYYY-MM-DD>'");
+            }
+        }
+        return todolist.list();
+    }
+
+    /**
+     * Creates a new Delete task.
+     *
+     * @param command the user input
+     * @param todolist the todolist to save the created Task
+     * @return Confirmation of creation of Delete, or error message
+     */
+    public String createDeleteTask(String command, ToDoList todolist) {
+        try {
+            int spacer = command.indexOf(" ");
+            int taskNum = Integer.parseInt(command.substring(spacer + 1));
+            validateTask(todolist, taskNum);
+            todolist.delete(taskNum);
+        } catch (NumberFormatException e) {
+            return "Which task would you like to delete, sir?";
+        } catch (NoTaskFoundException e) {
+            return "Sir, you may not delete nonexistent tasks.";
+        }
+        return todolist.list();
     }
 
     /**
@@ -145,22 +216,6 @@ public class Parser {
     public static void validateTask(ToDoList toDo, int num) throws NoTaskFoundException {
         if (num > toDo.getCount()) {
             throw new NoTaskFoundException("");
-        }
-    }
-
-    /**
-     * Instantiates a new Todo Task.
-     *
-     * @param toDo the current ToDoList
-     * @param line user command containing task to be instantiate Todo with
-     * @throws JarvisException If task not in proper format
-     */
-    public static void addToDo(ToDoList toDo, String line) throws JarvisException {
-        try {
-            String task = line.substring(5);
-            toDo.add(task);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new JarvisException("");
         }
     }
 }
