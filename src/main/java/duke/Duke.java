@@ -38,58 +38,6 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
-
-    /*
-    void moreOop() {
-        ByteArrayOutputStream storeSavedString = new ByteArrayOutputStream();
-        PrintStream printStreamSaved = new PrintStream(storeSavedString);
-        PrintStream oldPrintStreamSaved = System.out;
-        System.setOut(printStreamSaved);
-
-        storage = new Storage();
-        storage.readFromFile();
-
-        System.out.flush();
-        System.setOut(oldPrintStreamSaved
-        );
-
-        //Store byte array
-        ByteArrayOutputStream storeString = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(storeString);
-        PrintStream oldPrintStream = System.out;
-        System.setOut(printStream);
-        //Instantiate taskList and storage
-        this.taskList = storage.getTasks();
-        storage.createDirectory();
-        //Instantiate new UI
-        ui = new Ui();
-        ui.showWelcome();
-        //Reset previous System
-        System.out.flush();
-        System.setOut(oldPrintStream);
-        System.out.println(storeString.toString());
-        //Set while loop flag
-        boolean isExit = false;
-        //Initalise while loop
-        while (!isExit) {
-            ui.readCommand();
-            //Reset byte array
-            storeString = new ByteArrayOutputStream();
-            printStream = new PrintStream(storeString);
-            System.setOut(printStream);
-            //Custom duke commands
-            taskList = ui.execute(taskList);
-            //Reset System
-            System.out.flush();
-            System.setOut(oldPrintStream);
-            System.out.println(storeString.toString());
-            //Store file
-            storage.writeToFile(taskList.toString());
-        }
-    }
-    */
-
-
     @FXML
     protected String getResponse(String input, List<Timeline> recurResponse) {
 
@@ -97,13 +45,6 @@ public class Duke {
         storage.readFromFile();
         this.taskList = storage.getTasks();
         storage.createDirectory();
-
-        /*
-        TaskScheduler taskScheduler = new TaskScheduler(1, new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime)));
-        taskScheduler.addRecurringEvent(new Recur("First zoom meeting","Monday","Monday",1000));
-        taskScheduler.addRecurringEvent(new Recur("First zoom meeting","Monday","Monday",2000));
-        taskScheduler.addRecurringEvent(new Recur("First zoom meeting","Monday","Monday",3000));
-        */
 
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
@@ -123,8 +64,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        //Duke duke = new Duke();
-        //duke.moreOop();
+  
     }
 
 }
