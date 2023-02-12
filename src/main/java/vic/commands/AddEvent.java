@@ -20,7 +20,7 @@ public class AddEvent extends ICommand {
                 getParser().getFrom(), getParser().getTo());
         getParser().getTaskManager().add(task);
         setMsg(task + "\nAdded" + "\nNow you have " + getParser()
-                .getTaskManager().size() + " duke.tasks in the list.");
+                .getTaskManager().size() + " tasks in the list.");
 
         return false;
 

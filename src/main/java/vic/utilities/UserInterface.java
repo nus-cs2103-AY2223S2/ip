@@ -12,6 +12,7 @@ import vic.exceptions.InvalidCommandException;
  */
 public class UserInterface {
 
+
     /**
      * Prints the content onto the display
      * in pre-define format

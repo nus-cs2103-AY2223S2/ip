@@ -27,13 +27,20 @@ public class MainWindow extends AnchorPane {
     private Vic vic;
 
     private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/DaUser.png")));
+            .getResourceAsStream("/images/user.png")));
     private final Image vicImage = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/DaDuke.png")));
+            .getResourceAsStream("/images/vicbot.png")));
 
+    /**
+     * Initializes the MainWindow stage and print the greeting to user
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greeting = "\"Hello I am Vic!\\nHow can I help you\"";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getVicDialog(greeting, vicImage)
+        );
     }
 
     public void setVic(Vic vic) {
@@ -51,7 +58,7 @@ public class MainWindow extends AnchorPane {
         String response = vic.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, vicImage)
+                DialogBox.getVicDialog(response, vicImage)
         );
         userInput.clear();
     }

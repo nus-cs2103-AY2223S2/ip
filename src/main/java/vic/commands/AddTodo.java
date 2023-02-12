@@ -20,7 +20,7 @@ public class AddTodo extends ICommand {
         ITask task = new Todo(getParser().getDescription());
         getParser().getTaskManager().add(task);
         setMsg(task + "\nAdded" + "\nNow you have " + getParser()
-                .getTaskManager().size() + " duke.tasks in the list.");
+                .getTaskManager().size() + " tasks in the list.");
 
         return false;
 

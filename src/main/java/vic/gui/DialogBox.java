@@ -22,6 +22,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final int LINE_LIMIT = 45;
+
     @FXML
     private Label dialog;
     @FXML
@@ -39,8 +41,30 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        dialog.setText(formatInput(text));
         displayPicture.setImage(img);
+    }
+
+    private static String formatLine(String input) {
+        int lineLimit = LINE_LIMIT;
+        String output = input;
+        while (lineLimit < output.length()) {
+            output = output.substring(0, lineLimit) + "\n   "
+                    + output.substring(lineLimit);
+            lineLimit += lineLimit + 1;
+        }
+        return output;
+    }
+
+    private static String formatInput(String input) {
+        StringBuilder result = new StringBuilder();
+        String[] lines = input.split("\n");
+        for (String line: lines) {
+            result.append(formatLine(line));
+            result.append("\n");
+        }
+        return result.toString();
+
     }
 
     /**
@@ -59,7 +83,7 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getVicDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
