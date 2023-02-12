@@ -81,4 +81,26 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + startAt.format(formatter)
                 + " to: " + endAt.format(formatter) + ")";
     }
+
+    @Override
+    public int compareTo(Task o) {
+        final int res = super.compareTo(o);
+        if (res != 0) {
+            return res;
+        }
+        // Events should be placed first in the list
+        if (!(o instanceof Event)) {
+            return -1;
+        }
+        final Event event = (Event) o;
+        // We sort primarily by their time. If their time is the same, then
+        // we consider the name.
+        if (this.startAt.isBefore(event.startAt)) {
+            return -1;
+        } else if (this.startAt.isEqual(event.startAt)) {
+            return this.name.compareTo(event.name);
+        } else {
+            return 1;
+        }
+    }
 }

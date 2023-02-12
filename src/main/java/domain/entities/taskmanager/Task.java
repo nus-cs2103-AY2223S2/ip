@@ -14,22 +14,24 @@ import domain.entities.core.Serializable;
  * This shall resemble a Task. The reason that no modifiers was added was
  * because this class shall be package private.
  */
-public abstract class Task implements Serializable {
+public abstract class Task implements Serializable, Comparable<Task> {
     /**
      * The key for identifying if the object is marked as complete or not.
      */
     protected static final String COMPLETE_KEY = "/complete";
+    protected static final String completeKey = "/complete";
+
     /**
      * The name of the list item.
      * <p>
      * It is set to final now as we do not allow the change of names for now.
      */
-    private final String name;
+    protected final String name;
 
     /**
      * If the object is complete or not.
      */
-    private boolean isComplete;
+    protected boolean isComplete;
 
     /**
      * Creates a new task with the given tokens.
@@ -110,5 +112,25 @@ public abstract class Task implements Serializable {
             prefix = "[ ] ";
         }
         return prefix + name;
+    }
+
+    /**
+     * Note: this class has a natural ordering that's different from the equals.
+     *
+     * @param o the object to be compared.
+     * @return 1 if this thing is completed and other is not; -1 if this
+     *         thing is not completed but other is; 0 if both are completed or not
+     *         completed.
+     */
+    @Override
+    public int compareTo(Task o) {
+        // If this thing has been completed but the other has not, then we
+        // put this after than the other.
+        if (o.isComplete && !this.isComplete) {
+            return 1;
+        } else if (this.isComplete && !o.isComplete) {
+            return -1;
+        }
+        return 0;
     }
 }

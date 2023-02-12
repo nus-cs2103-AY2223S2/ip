@@ -29,4 +29,18 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public int compareTo(Task o) {
+        final int res = super.compareTo(o);
+        if (res != 0) {
+            return res;
+        }
+        // Todos should be placed last
+        if (!(o instanceof ToDo)) {
+            return 1;
+        }
+        // for todos, we sort them by their name.
+        return this.name.compareTo(o.name);
+    }
 }

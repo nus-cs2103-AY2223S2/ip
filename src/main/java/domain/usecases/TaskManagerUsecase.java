@@ -3,6 +3,7 @@ package domain.usecases;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import core.exceptions.InvalidArgumentException;
 import core.exceptions.WriteException;
@@ -78,6 +79,7 @@ public class TaskManagerUsecase implements CommandRegisterable {
      */
     private void addTask(Task task) {
         tasks.add(task);
+        Collections.sort(tasks);
     }
 
     /**
@@ -126,6 +128,7 @@ public class TaskManagerUsecase implements CommandRegisterable {
 
             @Override
             public ExitStatus execute(String[] tokens) {
+                Collections.sort(tasks);
                 for (int i = 0; i < tasks.size(); i++) {
                     writable.writeln((i + 1) + ". " + tasks.get(i));
                 }

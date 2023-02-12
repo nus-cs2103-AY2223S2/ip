@@ -73,4 +73,25 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + deadline.format(formatter)
                 + ")";
     }
+
+    @Override
+    public int compareTo(Task o) {
+        final int res = super.compareTo(o);
+        if (res != 0) {
+            return res;
+        }
+        if (o instanceof Event) {
+            return 1;
+        } else if (o instanceof ToDo) {
+            return -1;
+        }
+        final Deadline ddl = (Deadline) o;
+        if (this.deadline.isBefore(ddl.deadline)) {
+            return -1;
+        } else if (this.deadline.isEqual(ddl.deadline)) {
+            return this.name.compareTo(ddl.name);
+        } else {
+            return 1;
+        }
+    }
 }
