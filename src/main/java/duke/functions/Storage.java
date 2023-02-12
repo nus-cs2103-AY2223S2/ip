@@ -39,7 +39,7 @@ public class Storage {
             while (scanner.hasNext()) {
                 String taskDetails = scanner.nextLine();
                 String[] details = taskDetails.split("\\|");
-                for (int i = 0; i < details.length ; i++) {
+                for (int i = 0; i < details.length; i++) {
                     System.out.println(details[i]);
                 }
 
@@ -64,6 +64,8 @@ public class Storage {
                 case "D":
                     actions.add(new Deadline(taskName, isDone));
                     break;
+                default:
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -78,9 +80,9 @@ public class Storage {
      * @param input string containing the information of the task.
      * @param type string containing the type of the task.
      */
-    public void writeToFile(String input , String type) {
+    public void writeToFile(String input, String type) {
         try {
-            FileWriter filewriter =  new FileWriter(this.path, true);
+            FileWriter filewriter = new FileWriter(this.path, true);
             String text = type + "|" + "F" + "|" + input;
             filewriter.write(System.lineSeparator());
             filewriter.write(text);

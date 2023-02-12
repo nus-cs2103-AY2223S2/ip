@@ -37,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns an update upon removal
+     * Returns an update upon removal.
      *
      * @return a string upon removal of an Event.
      */
@@ -54,7 +54,8 @@ public class Event extends Task {
      * @return string regarding addition of an Event.
      */
     @Override
-    public String toString(){
-        return "Got it. I've added this task:\n " + this.status() + "\n" + "Now you have " + super.total + " tasks in the list";
+    public String toString() {
+        return "Got it. I've added this task:\n " + this.status() + "\n"
+                + "Now you have " + super.total + " tasks in the list";
     }
 }

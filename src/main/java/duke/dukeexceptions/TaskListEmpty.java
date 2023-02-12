@@ -3,7 +3,7 @@ package duke.dukeexceptions;
 /**
  *  An exception that throws when TaskList is empty.
  */
-public class TaskListEmpty extends DukeException{
+public class TaskListEmpty extends DukeException {
 
     /**
      * Constructor for the Exception.

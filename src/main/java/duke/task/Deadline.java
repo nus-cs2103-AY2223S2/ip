@@ -54,7 +54,8 @@ public class Deadline extends Task {
      * @return string regarding addition of a Deadline.
      */
     @Override
-    public String toString(){
-        return "Got it. I've added this task:\n " + this.status() + "\n" + "Now you have " + super.total + " tasks in the list";
+    public String toString() {
+        return "Got it. I've added this task:\n " + this.status() + "\n"
+                + "Now you have " + super.total + " tasks in the list";
     }
 }

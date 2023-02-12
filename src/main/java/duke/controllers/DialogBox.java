@@ -14,6 +14,9 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * DialogBox class.
+ */
 public class DialogBox extends HBox {
 
     @FXML
@@ -21,6 +24,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * A constructor for DialogBox.
+     *
+     * @param text message to be shown.
+     * @param img image icon to be displayed.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -45,10 +54,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * A command to produce a DialogBox containing input command.
+     *
+     * @param text  message to be shown.
+     * @param img image icon to be displayed.
+     * @return a new DialogBox to be displayed.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * A command to produce a DialogBox containing Duke's reply.
+     *
+     * @param text  message to be shown.
+     * @param img image icon to be displayed.
+     * @return a new DialogBox to be displayed.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

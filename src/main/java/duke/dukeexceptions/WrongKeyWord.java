@@ -3,7 +3,7 @@ package duke.dukeexceptions;
 /**
  *  An exception that throws a wrong command is given.
  */
-public class WrongKeyWord extends DukeException{
+public class WrongKeyWord extends DukeException {
 
     /**
      * Constructor for the Exception.

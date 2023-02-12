@@ -17,13 +17,12 @@ public class Duke {
     }
 
     /**
-     * Constructor of a Duke application
+     * Constructor of a Duke application.
      *
      * @param filePath path of the file which stores Tasks.
      */
     public Duke(String filePath) {
         storage =  new Storage(filePath);
-
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -33,7 +32,7 @@ public class Duke {
 
 
     /**
-     * Runs the application based on the given input read
+     * Runs the application based on the given input read.
      */
     public String run(String s) {
         String result = null;

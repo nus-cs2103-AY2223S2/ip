@@ -12,7 +12,7 @@ public class Task {
     /**
      * Constructor of Task.
      *
-     * @param name name of the task
+     * @param name name of the task.
      */
     public Task(String name) {
         this.name = name;
@@ -20,10 +20,10 @@ public class Task {
     }
 
     /**
-     * Constructor of Task
+     * Constructor of Task.
      *
-     * @param name name of the task
-     * @param isDone indicates whether the task is done
+     * @param name name of the task.
+     * @param isDone indicates whether the task is done.
      */
     public Task(String name, boolean isDone) {
         this.name = name;
@@ -54,7 +54,7 @@ public class Task {
     /**
      * Returns the status and name of the Task.
      *
-     * @return a string regarding the status of the Task
+     * @return a string regarding the status of the Task.
      */
     public String status() {
         if (!isDone) {
@@ -65,9 +65,9 @@ public class Task {
     }
 
     /**
-     * Returns a string after a removal of a task
+     * Returns a string after a removal of a task.
      *
-     * @return a string after removal of a task
+     * @return a string after removal of a task.
      */
     public String removeTask() {
         return "duke.task.Task has been removed";

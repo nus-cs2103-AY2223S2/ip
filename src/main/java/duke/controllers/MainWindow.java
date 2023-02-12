@@ -27,11 +27,18 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * @param d initializing the duke app in the MainWindow.
+     *
+     */
     public void setDuke(Duke d) {
         duke = d;
         greetUser();
@@ -61,11 +68,13 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Greets the user upon launch of application.
+     */
     @FXML
     public void greetUser() {
         String result = "Hello from! I'm a Cookie Monster\n" + "What can I do for you?\n";
-        dialogContainer.getChildren().addAll (
-                DialogBox.getDukeDialog(result, dukeImage)
-        );
+        dialogContainer.getChildren().addAll
+                (DialogBox.getDukeDialog(result, dukeImage));
     }
 }

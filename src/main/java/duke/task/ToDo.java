@@ -19,7 +19,7 @@ public class ToDo extends Task {
     /**
      * A constructor for ToDo.
      *
-     * @param name name of the task
+     * @param name name of the task.
      */
     public ToDo(String name) {
         super(name);
@@ -28,7 +28,7 @@ public class ToDo extends Task {
     /**
      * {@inheritDoc}
      *
-     * prepends type of ToDo
+     * prepends type of ToDo.
      */
     @Override
     public String status() {
@@ -36,9 +36,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the updates on removal
+     * Returns the updates on removal.
      *
-     * @return string regarding removal of a ToDo
+     * @return string regarding removal of a ToDo.
      */
     public String removeTask() {
         total--;
@@ -50,10 +50,11 @@ public class ToDo extends Task {
     /**
      * {@inheritDoc}
      *
-     * @return string regarding addition of a ToDo
+     * @return string regarding addition of a ToDo.
      */
     @Override
-    public String toString(){
-        return "Got it. I've added this task:\n " + this.status() + "\n" + "Now you have " + super.total + " tasks in the list";
+    public String toString() {
+        return "Got it. I've added this task:\n " + this.status() + "\n"
+                + "Now you have " + super.total + " tasks in the list";
     }
 }
