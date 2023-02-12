@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import duke.exceptions.TaskException;
-import duke.ui.Ui;
 
 /**
  * Represents task types

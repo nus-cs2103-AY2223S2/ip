@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.command.DefaultCommand;
-import duke.command.DeleteCommand;
 import duke.exceptions.TaskException;
 import duke.parser.Parser;
 import duke.storage.Storage;

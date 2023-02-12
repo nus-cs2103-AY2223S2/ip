@@ -1,8 +1,7 @@
 package duke.tasks;
 
-import duke.ui.Ui;
 import duke.exceptions.TaskException;
-
+import duke.ui.Ui;
 /**
  * Represents a task to be done
  */

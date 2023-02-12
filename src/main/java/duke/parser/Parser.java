@@ -2,7 +2,16 @@ package duke.parser;
 
 import java.util.Arrays;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DefaultCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.UpdateCommand;
 import duke.exceptions.TaskException;
 
 
@@ -30,8 +39,8 @@ public class Parser {
         int index = 0;
         String first_word = part[0].toUpperCase();
 
-        if (part[0].equals("mark") || part[0].equals("unmark") ||
-                part[0].equals("delete") || part[0].equals("update")) {
+        if (part[0].equals("mark") || part[0].equals("unmark")
+                || part[0].equals("delete") || part[0].equals("update")) {
             index = Integer.parseInt(part[1]) - 1;
         }
 

@@ -118,7 +118,7 @@ public class Storage {
         String itemNumber = "";
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).toString().contains(input)) {
-                itemNumber += ((i + 1) + ". " + list.get(i));
+                itemNumber += ((i + 1) + ". " + list.get(i)) + "\n";
             }
         }
         return "Following are the results found from searching " + input + ": \n" + itemNumber;

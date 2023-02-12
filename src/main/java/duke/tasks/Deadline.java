@@ -1,9 +1,9 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
 import duke.exceptions.TaskException;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
 
 /**
  * Represents a Deadline Task to be done with a deadline
