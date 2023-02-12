@@ -10,7 +10,7 @@
 
 ## Installation
 1. Ensure that you have java `11` installed.
-2. Download the [ip.jar](https://github.com/zenithyap/ip/releases/download/A-UserGuide/Pix.jar) file.
+2. Download the [Pix.jar](https://github.com/zenithyap/ip/releases/download/A-UserGuide/Pix.jar) file.
 3. Open a terminal and navigate to the folder the file is downloaded in.
 4. Run the command `java -jar ip.jar`
 5. You should see the following:
