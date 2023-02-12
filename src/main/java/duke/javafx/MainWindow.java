@@ -1,5 +1,7 @@
 package duke.javafx;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -49,5 +51,30 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getBotDialog(response, botImage)
         );
         userInput.clear();
+        checkExit(response);
+    }
+
+    private void checkExit(String response) {
+        if (response.equals("Bye. Hope to see you again soon!\n")) {
+            Task<Void> task = new Task<Void>(){
+                @Override
+                public Void call() throws InterruptedException {
+                    exit();
+                    return null;
+                }
+            };
+            Thread th = new Thread(task);
+            th.setDaemon(true);
+            th.start();
+        }
+    }
+
+    private void exit(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        Platform.exit();        
     }
 }
