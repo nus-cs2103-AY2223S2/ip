@@ -1,4 +1,6 @@
-package duke;
+package command;
+
+import duke.Ui;
 
 /**
  * Command to terminate bot.

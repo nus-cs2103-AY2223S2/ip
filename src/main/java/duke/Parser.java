@@ -1,5 +1,7 @@
 package duke;
 
+import command.*;
+
 /**
  * Decodes the input base on the keyword the user input.
  */

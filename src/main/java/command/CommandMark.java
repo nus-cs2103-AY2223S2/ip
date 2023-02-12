@@ -1,4 +1,8 @@
-package duke;
+package command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Command to mark a task as done.

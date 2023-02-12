@@ -1,4 +1,8 @@
-package duke;
+package command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
 
 public class CommandUnMark extends Command {
 
