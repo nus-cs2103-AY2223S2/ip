@@ -104,9 +104,21 @@ public class TaskList {
      */
     public String printTasksContainingKeyword(String keyWord) {
         int counter = 0;
-        String text = "";
+        String text = "Here are the matching tasks in your list:\n";
         for (Task task : this.tasks) {
             if (task.toString().matches("(.*)" + keyWord + "(.*)")) {
+                counter++;
+                text += counter + "." + task + "\n";
+            }
+        }
+        return text;
+    }
+
+    public String findTasks(String keyword) {
+        int counter = 0;
+        String text = "Here are all the " + keyword + " tasks in your lists\n";
+        for (Task task : this.tasks) {
+            if (task.getCommand().compareTo(keyword) == 0) {
                 counter++;
                 text += counter + "." + task + "\n";
             }

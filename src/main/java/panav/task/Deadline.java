@@ -5,6 +5,7 @@ package panav.task;
  */
 public class Deadline extends Task {
 
+    public static final String COMMAND_WORD = "deadline";
     protected String by;
 
     /**
@@ -15,6 +16,15 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+
+    /**
+     * Returns command word of task.
+     * @return command word.
+     */
+    @Override
+    public String getCommand() {
+        return Deadline.COMMAND_WORD;
     }
 
     @Override

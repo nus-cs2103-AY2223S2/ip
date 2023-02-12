@@ -7,6 +7,8 @@ public class Event extends Task {
     protected String from;
     protected String to;
 
+    public static final String COMMAND_WORD = "event";
+
     /**
      * Constructor to initialise attributes.
      * @param description event description.
@@ -17,6 +19,15 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+    }
+
+    /**
+     * Returns command word of task.
+     * @return command word.
+     */
+    @Override
+    public String getCommand() {
+        return Event.COMMAND_WORD;
     }
 
     @Override

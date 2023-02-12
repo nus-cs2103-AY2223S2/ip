@@ -48,6 +48,12 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /**
+     * Method to get command word of task.
+     * @return command word.
+     */
+    public abstract String getCommand();
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
