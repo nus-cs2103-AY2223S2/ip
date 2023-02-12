@@ -1,4 +1,6 @@
 import java.util.List;
+import java.time.LocalDateTime;
+
 public class Task {
     protected final int taskNumber;
     protected final boolean taskStatus;
@@ -54,15 +56,15 @@ public class Task {
         return this.task;
     }
 
-    public String getDeadline() {
-        return "";
+    public LocalDateTime getDeadline() {
+        return null;
     }
 
-    public String getEventStartTime() {
-        return "";
+    public LocalDateTime getEventStartTime() {
+        return null;
     }
 
-    public String getEventEndTime() {
-        return "";
+    public LocalDateTime getEventEndTime() {
+        return null;
     }
 }

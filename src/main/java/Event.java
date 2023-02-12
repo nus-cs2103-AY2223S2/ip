@@ -1,12 +1,16 @@
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 class Event extends Task {
     private final String taskType;
-    private final String eventStartTime;
-    private final String eventEndTime;
+    private final LocalDateTime eventStartTime;
+    private final LocalDateTime eventEndTime;
+    DateTimeFormatter dateTimeFormatter1 =
+            DateTimeFormatter.ofPattern("MMM dd yyyy HHmm a");
 
     Event(int taskNumber, boolean taskStatus, String task,
-         String eventStartTime, String eventEndTime, int totalNumOfTasks) {
+         LocalDateTime eventStartTime, LocalDateTime eventEndTime, int totalNumOfTasks) {
         super(taskNumber, taskStatus, task, totalNumOfTasks);
         this.taskType = "[E]";
         this.eventStartTime = eventStartTime;
@@ -18,8 +22,9 @@ class Event extends Task {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Nice! I've marked this task as done:\n" +
                 "\t  " + this.taskType + "[X]" + " " + super.task +
-                " (from: " + this.eventStartTime + " to: "
-                + this.eventEndTime + ")" +
+                " (from: " + this.eventStartTime.format(dateTimeFormatter1)
+                + " to: "
+                + this.eventEndTime.format(dateTimeFormatter1) +
                 "\n\t____________________________________________________________");
     }
 
@@ -28,8 +33,9 @@ class Event extends Task {
         System.out.println("\t____________________________________________________________" +
                 "\n\t OK, I've marked this task as not done yet:\n" +
                 "\t  " + this.taskType + "[ ]" + " " + super.task +
-                " (from: " + this.eventStartTime + " to: "
-                + this.eventEndTime +
+                " (from: " + this.eventStartTime.format(dateTimeFormatter1)
+                + " to: "
+                + this.eventEndTime.format(dateTimeFormatter1) +
                 "\n\t____________________________________________________________");
     }
 
@@ -37,7 +43,8 @@ class Event extends Task {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Got it. I've added this task:" +
                 "\n\t   [E]" + super.getTaskStatus() + " " + super.task +
-                "(from: " + this.eventStartTime + " to: " + this.eventEndTime + ")" +
+                "(from: " + this.eventStartTime.format(dateTimeFormatter1) +
+                " to: " + this.eventEndTime.format(dateTimeFormatter1) + ")" +
                 "\n\t Now you have " + super.totalNumOfTasks + " tasks in the list." +
                 "\n\t____________________________________________________________");
     }
@@ -48,8 +55,11 @@ class Event extends Task {
         System.out.println("\t____________________________________________________________" +
                 "\n\t Noted. I've removed this task:" +
                 "\n\t   " + this.taskType +
-                super.getTaskStatus() + " " + super.task + " (from: " + this.eventStartTime +
-                " to: " + this.eventEndTime + ")" + "\n\t Now you have " +
+                super.getTaskStatus() + " " + super.task + " (from: " +
+                this.eventStartTime.format(dateTimeFormatter1) +
+                " to: " +
+                this.eventEndTime.format(dateTimeFormatter1) +
+                ")" + "\n\t Now you have " +
                 newTotalNumOfTasks + " tasks in the list." +
                 "\n\t____________________________________________________________");
     }
@@ -60,12 +70,12 @@ class Event extends Task {
     }
 
     @Override
-    public String getEventStartTime() {
+    public LocalDateTime getEventStartTime() {
         return this.eventStartTime;
     }
 
     @Override
-    public String getEventEndTime() {
+    public LocalDateTime getEventEndTime() {
         return this.eventEndTime;
     }
 }

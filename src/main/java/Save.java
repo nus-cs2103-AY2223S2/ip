@@ -1,6 +1,8 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 public class Save {
 
@@ -29,18 +31,21 @@ public class Save {
                 } else if (task1[1].equals("[X]")){
                     taskStatus = true;
                 }
+                DateTimeFormatter dateTimeFormatter =
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 if (task.startsWith("T")) {
                     Todo todo = new Todo(i + 1, taskStatus, task1[2],
                             taskList.size());
                     allTasks.add(todo);
                 } else if (task.startsWith("D")) {
                     Deadline deadline = new Deadline(i + 1, taskStatus, task1[2],
-                            task1[3], taskList.size());
+                            LocalDateTime.parse(task1[3], dateTimeFormatter), taskList.size());
                     allTasks.add(deadline);
                 } else if (task.startsWith("E")) {
                     String[] taskTiming = task1[3].split("-");
                     Event event = new Event(i + 1, taskStatus, task1[2],
-                            taskTiming[0], taskTiming[1], taskList.size());
+                            LocalDateTime.parse(taskTiming[0], dateTimeFormatter),
+                            LocalDateTime.parse(taskTiming[1], dateTimeFormatter), taskList.size());
                     allTasks.add(event);
                 }
             }
