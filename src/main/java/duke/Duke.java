@@ -16,13 +16,37 @@ import javafx.stage.Stage;
  * Duke is a program that helps you keep track of tasks
  */
 public class Duke extends Application {
+    /**
+     * User image from the image folder
+     */
     private Image user = new Image(this.getClass().getResourceAsStream("../images/DaUser.png"));
+    /**
+     * Duke image from the image folder
+     */
     private Image duke = new Image(this.getClass().getResourceAsStream("../images/DaDuke.png"));
+    /**
+     * list of tasks that are initated to a size of 100
+     */
     private TasksList list = new TasksList(100);
+    /**
+     * UI that handles user interactions
+     */
     private UI ui;
+    /**
+     * storage that extracts the list of tasks from tasklist object
+     */
     private Storage storage = new Storage(list);
+    /**
+     * parser that makes sense of user commands
+     */
     private Parser parser;
+    /**
+     * ScrollPane from the main application
+     */
     private ScrollPane scrollPane;
+    /**
+     * VBox from the main application
+     */
     private VBox dialogContainer;
 
     /**
