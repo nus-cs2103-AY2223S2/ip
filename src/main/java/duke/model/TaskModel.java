@@ -1,12 +1,16 @@
 package duke.model;
 
-import duke.interfaces.Model;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import duke.interfaces.Model;
 
 public class TaskModel implements Model {
     private static final String taskStorePath = "./data/tasks.ser";
@@ -43,6 +47,7 @@ public class TaskModel implements Model {
             this.tasks = new ArrayList<>();
         }
     }
+
     private void writeToFile() {
         try {
             FileOutputStream fileOut = new FileOutputStream(this.tasksFile);
@@ -53,6 +58,7 @@ public class TaskModel implements Model {
             throw new RuntimeException(e);
         }
     }
+
     public Task createTask(String description) {
         Task newTask = new ToDo(description);
         this.tasks.add(newTask);
@@ -82,13 +88,14 @@ public class TaskModel implements Model {
     public List<Task> getTasksOn(LocalDateTime time) {
         // only deadlines and events
         List<Task> res = new ArrayList<>();
-        for (Task task: this.tasks) {
+        for (Task task : this.tasks) {
             if (task.isDueOn(time)) {
                 res.add(task);
             }
         }
         return res;
     }
+
     public Task getTask(int index) {
         return this.tasks.get(index); // out of bounds exception
     }
@@ -117,7 +124,7 @@ public class TaskModel implements Model {
 
     public List<Task> findTasks(String subStr) {
         List<Task> res = new ArrayList<>();
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             if (task.descriptionContains(subStr)) {
                 res.add(task);
             }

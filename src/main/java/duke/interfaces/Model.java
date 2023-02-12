@@ -1,8 +1,8 @@
 package duke.interfaces;
 
-import duke.model.Task;
-
 import java.util.List;
+
+import duke.model.Task;
 
 public interface Model {
     List<Task> getTasks();

@@ -1,7 +1,8 @@
 package duke.model;
 import java.time.LocalDateTime;
+
 import duke.command.utils.DateTimeStringParser;
-public class Event extends Task{
+public class Event extends Task {
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
 
@@ -14,9 +15,9 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " +
-                startTime.format(DateTimeStringParser.displayFormat) + " to: " +
-                endTime.format(DateTimeStringParser.displayFormat) + ")";
+        return "[E]" + super.toString() + " (from: "
+                + startTime.format(DateTimeStringParser.DISPLAY_FORMAT) + " to: "
+                + endTime.format(DateTimeStringParser.DISPLAY_FORMAT) + ")";
     }
 
     @Override

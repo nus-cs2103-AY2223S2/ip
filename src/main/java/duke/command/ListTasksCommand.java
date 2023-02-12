@@ -1,15 +1,13 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import duke.command.exceptions.InvalidParameterError;
 import duke.command.utils.DateTimeStringParser;
 import duke.interfaces.Command;
-import duke.interfaces.Model;
-import duke.interfaces.View;
 import duke.model.TaskModel;
 import duke.view.TaskView;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class ListTasksCommand implements Command {
     private final TaskModel taskModel;

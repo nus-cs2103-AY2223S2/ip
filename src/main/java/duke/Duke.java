@@ -2,18 +2,18 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.GlobalExceptionHandler;
-import duke.interfaces.*;
+import duke.interfaces.CommandEventListener;
+import duke.interfaces.Presenter;
 import duke.model.TaskModel;
 import duke.presenter.TaskPresenter;
 import duke.view.TaskView;
-
 public class Duke {
-    private boolean exit;
+    private boolean isTerminated;
     private Duke() {
-        this.exit = false;
+        this.isTerminated = false;
     }
     private void exit() {
-        this.exit = true;
+        this.isTerminated = true;
     }
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke();
@@ -28,7 +28,7 @@ public class Duke {
         };
 
         Presenter presenter = new TaskPresenter(taskModel, taskView, exitEventListener);
-        while(!duke.exit) {
+        while (!duke.isTerminated) {
             try {
                 presenter.handleInput(taskView.getUserInput());
             } catch (DukeException e) {

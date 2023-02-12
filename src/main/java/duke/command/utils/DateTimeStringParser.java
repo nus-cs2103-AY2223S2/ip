@@ -1,15 +1,15 @@
 package duke.command.utils;
 
-import duke.command.exceptions.InvalidParameterError;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.command.exceptions.InvalidParameterError;
+
 public class DateTimeStringParser {
-    public static final DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
+    public static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
     public static LocalDateTime parseDateTimeString(String dateTimeString, LocalTime defaultTime)
             throws InvalidParameterError {
         DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

@@ -1,16 +1,12 @@
 package duke.command;
 
-import duke.command.exceptions.CommandExecutionError;
+import java.util.List;
+
 import duke.command.exceptions.InvalidParameterError;
-import duke.command.utils.DateTimeStringParser;
 import duke.interfaces.Command;
-import duke.interfaces.Model;
 import duke.model.Task;
 import duke.model.TaskModel;
 import duke.view.TaskView;
-
-import java.time.LocalTime;
-import java.util.List;
 
 public class FindTaskCommand implements Command {
     private final TaskModel taskModel;

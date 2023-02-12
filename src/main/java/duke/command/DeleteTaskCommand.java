@@ -26,6 +26,6 @@ public class DeleteTaskCommand implements Command {
         Task taskToDelete = taskView.getDisplayedTask(indexToDelete);
         taskModel.deleteTask(taskToDelete);
         taskView.showMessage("Noted, I've removed this task:\n  " + taskToDelete.toString()
-        + String.format("\n Now you have %d tasks in the list.", taskModel.getNumberOfTasks()));
+            + String.format("\n Now you have %d tasks in the list.", taskModel.getNumberOfTasks()));
     }
 }

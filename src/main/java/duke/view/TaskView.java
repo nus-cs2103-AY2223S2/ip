@@ -1,9 +1,11 @@
 package duke.view;
-import duke.model.Task;
-import duke.interfaces.View;
+
 
 import java.util.List;
 import java.util.Scanner;
+
+import duke.interfaces.View;
+import duke.model.Task;
 
 public class TaskView implements View {
     private final Scanner sc;
@@ -16,7 +18,9 @@ public class TaskView implements View {
         return displayedTaskList.get(index);
     }
 
-    public int getNumDisplayedTasks() { return displayedTaskList.size(); };
+    public int getNumDisplayedTasks() {
+        return displayedTaskList.size();
+    }
     @Override
     public void showMessage(String string) {
         System.out.println("____________________________________________________________");
