@@ -7,7 +7,6 @@ public class Event extends Task {
 
     protected String time;
 
-    protected String timeDescription;
 
     /**
      * Initialises the object
@@ -34,7 +33,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get the type of task
+     * Gets the type of task
      *
      * @return a string "event"
      */

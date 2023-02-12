@@ -45,6 +45,7 @@ public class Parser {
 
         case DEADLINE:
             String detail = input.split("/")[0].split(" ", 2)[1];
+            //parse the input to extract the deadline time
             String timeDescription =
                 input.split("/")[1].split(" ")[0] + ": "
                     + input.split("/")[1].split(" ", 2)[1];
@@ -52,6 +53,7 @@ public class Parser {
             return new AddTaskCommand(new Deadline(detail, time));
         case EVENT:
             detail = input.split("/")[0].split(" ", 2)[1];
+            //parse the input to extract the duration of the event
             timeDescription = input.split("/")[1].split(" ")[0] + " "
                 + input.split("/")[1].split(" ", 2)[1]
                 + input.split("/")[2].split(" ")[0] + " "
