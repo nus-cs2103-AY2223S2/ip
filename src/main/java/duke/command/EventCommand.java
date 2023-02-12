@@ -28,7 +28,7 @@ public class EventCommand extends Command {
                     + "\tFormat: event <description> /from <start_date> /to <end_date>");
         }
 
-        Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
+        Task task = new Event(taskName, startDate, endDate);
         list.addTask(task);
 
         return ui.pixlPrint("Added new event!\n"

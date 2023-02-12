@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 /**
  * A class to represent a task.
  * @author mmaimer33
@@ -10,6 +12,8 @@ public abstract class Task implements java.io.Serializable {
     protected String description;
     // Tracks whether the task is done.
     private boolean isDone;
+    // Tags
+    private ArrayList<String> tags;
 
     /**
      * Constructor for Task class.
@@ -17,6 +21,12 @@ public abstract class Task implements java.io.Serializable {
      */
     public Task(String description) {
         this.description = description;
+        this.isDone = false;
+    }
+
+    public Task(String description, ArrayList<String> tags) {
+        this.description = description;
+        this.tags = tags;
         this.isDone = false;
     }
 

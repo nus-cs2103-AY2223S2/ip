@@ -32,12 +32,12 @@ public class DeadlineCommand extends Command {
         // Convert date string to LocalDate
         LocalDate localDate;
         try {
-            localDate = LocalDate.parse(dueDate.toString());
+            localDate = LocalDate.parse(dueDate);
         } catch (RuntimeException re) {
             throw new DukeException("Could not parse date. Please use format 'yyyy-mm-dd'.");
         }
 
-        Task task = new Deadline(taskName.toString(), localDate);
+        Task task = new Deadline(taskName, localDate);
         list.addTask(task);
         return ui.pixlPrint("Added new deadline!\n"
                 + "\t" + task.formatTask()
