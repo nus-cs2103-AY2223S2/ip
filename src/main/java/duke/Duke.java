@@ -19,6 +19,8 @@ public class Duke {
     public final String NAME = "TaskWizard";
     protected final String RECORD_DIR = "./data";
     protected final String RECORD_NAME = "/duke.txt";
+    protected final String BYE_STRING = "bye";
+    protected final String NUMBER_FORMAT_ERROR = "Please specify the index.";
     protected final TextUi ui;
     protected final TaskList taskList;
     protected final ArrayList<String> commandList;
@@ -49,17 +51,13 @@ public class Duke {
             String inMsg = ui.getUserInput();
             try {
                 isRunning = handleCommandReturnStatus(inMsg, false);
-                if (isRunning) {
-                    commandList.add(inMsg);
-                }
+                saveCommandAfterRunning(inMsg, isRunning);
             } catch (DukeException | AssertionError e) {
                 ui.printStructuredString(e.toString());
             } catch (NumberFormatException e) {
-                ui.printStructuredString("Please specify the index.");
+                ui.printStructuredString(NUMBER_FORMAT_ERROR);
             }
         }
-
-        storage.saveToFile(getCommandListString());
     }
 
     /**
@@ -71,24 +69,41 @@ public class Duke {
         Message responseMessage;
 
         try {
-            String responseString = handleCommandReturnResponse(inMsg);
-            boolean isRunning = !inMsg.equalsIgnoreCase("bye"); // hardcode, not ideal
-
-            if (isRunning) {
-                commandList.add(inMsg);
-            } else {
-                hasExited = true;
-                storage.saveToFile(getCommandListString());
-            }
-
+            String responseString = runCommandReturnResponse(inMsg);
+            boolean isRunning = !isByeString(inMsg);
+            saveCommandAfterRunning(inMsg, isRunning);
             responseMessage = new Message(responseString, false);
         } catch (DukeException e) {
             responseMessage = new Message(e.toString(), true);
         } catch (NumberFormatException e) {
-            responseMessage = new Message("Please specify the index.", true);
+            responseMessage = new Message(NUMBER_FORMAT_ERROR, true);
         }
 
         return responseMessage;
+    }
+
+    /**
+     * Saves the command to the list and saves the command list to file
+     * after running a command
+     * @param command the command to run
+     * @param isRunning whether the program should be stopped or is still running
+     */
+    protected void saveCommandAfterRunning(String command, boolean isRunning) {
+        if (isRunning) {
+            commandList.add(command);
+        } else {
+            hasExited = true;
+            storage.saveToFile(getCommandListString());
+        }
+    }
+
+    /**
+     * Checks if the given string indicates end of program
+     * @param string user-input string
+     * @return a boolean value
+     */
+    public boolean isByeString(String string) {
+        return string.equalsIgnoreCase(BYE_STRING); // hardcode, not ideal
     }
 
     /**
@@ -146,7 +161,7 @@ public class Duke {
      * @return the response from Duke
      * @throws DukeException when the command is unknown or incomplete
      */
-    public String handleCommandReturnResponse(String inMsg) throws DukeException {
+    public String runCommandReturnResponse(String inMsg) throws DukeException {
         Command command = Parser.parseCommand(inMsg, true);
         return command.execute(taskList);
     }
