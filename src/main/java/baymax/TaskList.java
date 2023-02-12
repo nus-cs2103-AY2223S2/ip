@@ -20,10 +20,4 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
-
-    // updates the task list
-    public void updateList(ArrayList<Task> newList) {
-        this.taskList = newList;
-    }
-
 }

@@ -86,7 +86,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + printStartDateAndTime() + " to: " + printEndDateAndTime() + ")";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + " (from: " + printStartDateAndTime() + " to: " + printEndDateAndTime() + ")";
     }
 
     /**
@@ -96,6 +96,6 @@ public class Event extends Task {
      */
     @Override
     public String writeToFile() {
-        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + start + " to: " + end + ")";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + " (from: " + start + " to: " + end + ")";
     }
 }

@@ -10,11 +10,12 @@ import commands.DeadlineCommand;
 import commands.EventCommand;
 import commands.DeleteCommand;
 import commands.InvalidCommand;
+import commands.FindCommand;
 
 public class Parser {
     // enum for commands
     private enum commands {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
     
@@ -45,6 +46,8 @@ public class Parser {
             return new EventCommand(input);
         case DELETE:
             return new DeleteCommand(input);
+        case FIND:
+            return new FindCommand(input);
         default:
             return new InvalidCommand(input);
         }

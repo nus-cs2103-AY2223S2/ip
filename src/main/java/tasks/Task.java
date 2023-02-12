@@ -1,14 +1,14 @@
 package tasks;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    
     /**
      * Constructor for Task.
-     * 
+     *
      * @param description The description of the task.
      */
+    private String description;
+    private boolean isDone;
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -48,5 +48,9 @@ public class Task {
      */
     public String writeToFile() {
         return description;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }
