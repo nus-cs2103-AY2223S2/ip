@@ -1,10 +1,14 @@
 package duke.task;
 
-import duke.command.DeadlineCommand;
-import duke.exception.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.command.DeadlineCommand;
+import duke.exception.DukeException;
+
+
+
 
 public class DeadlineCommandTest {
     @Test
