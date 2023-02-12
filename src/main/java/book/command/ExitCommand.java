@@ -10,7 +10,7 @@ import book.exception.SaveException;
  */
 public class ExitCommand extends Command {
     /**
-     * Updates the {@code Storage}, prints the relevant output to the {@code Ui}.
+     * Updates the {@code Storage}, returns the {@code String} to be displayed on the {@code Gui}.
      *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.

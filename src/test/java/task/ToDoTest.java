@@ -12,7 +12,7 @@ public class ToDoTest {
     @Test
     public void instanceTest() {
         ToDo toDo = new ToDo("test");
-        assertEquals("[T][ ] test\n", toDo.toString());
+        assertEquals("[T][ ] test", toDo.toString());
     }
     @Test
     public void saveStringTest() {
@@ -23,13 +23,13 @@ public class ToDoTest {
     public void markTest() {
         ToDo toDo = new ToDo("test");
         toDo.mark();
-        assertEquals("[T][X] test\n", toDo.toString());
+        assertEquals("[T][X] test", toDo.toString());
     }
     @Test
     public void unmarkTest() {
         ToDo toDo = new ToDo("test");
         toDo.mark();
         toDo.unmark();
-        assertEquals("[T][ ] test\n", toDo.toString());
+        assertEquals("[T][ ] test", toDo.toString());
     }
 }

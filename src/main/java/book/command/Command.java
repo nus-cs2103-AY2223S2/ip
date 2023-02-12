@@ -10,8 +10,7 @@ import book.exception.BookException;
  */
 public abstract class Command {
     /**
-     * Abstract method to be implemented by {@code Command} representing the execution of the
-     * {@code Command}.
+     * Executes the {@code Command}, returns the {@code String} to be displayed on the {@code Gui}.
      *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.

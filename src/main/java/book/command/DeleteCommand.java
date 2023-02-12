@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the {@code Task} at the associated {@code int} index in the {@code TaskList} and
-     * updates the {@code Storage}, prints the relevant output to the {@code Ui}.
+     * updates the {@code Storage}, returns the {@code String} to be displayed on the {@code Gui}.
      *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.

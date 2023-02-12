@@ -11,7 +11,7 @@ import book.exception.SaveException;
 public class SortCommand extends Command {
     /**
      * Sorts the {@code Task}s in the {@code TaskList} and updates the {@code Storage},
-     * prints the relevant output to the {@code Ui}.
+     * returns the {@code String} to be displayed on the {@code Gui}.
      *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.

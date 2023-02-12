@@ -24,7 +24,7 @@ public class FindCommand extends Command {
 
     /**
      * Lists the {@code Task} objects matching a given {@code String} keyword in the associated
-     * {@code TaskList}, prints the relevant output to the {@code Ui}.
+     * {@code TaskList}, returns the {@code String} to be displayed on the {@code Gui}.
      *
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.

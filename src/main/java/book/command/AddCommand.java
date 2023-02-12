@@ -24,7 +24,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds the associated {@code Task} to the {@code TaskList} and updates the {@code Storage},
-     * prints the relevant output to the {@code Ui}.
+     * returns the {@code String} to be displayed on the {@code Gui}.
      *
      * @param storage {@code Storage} associated with the {@code AddCommand}.
      * @param list {@code TaskList} associated with the {@code AddCommand}.
