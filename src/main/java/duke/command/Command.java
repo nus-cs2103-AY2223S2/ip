@@ -377,13 +377,4 @@ public abstract class Command {
             ui.showExit();
         }
     }
-
-    /**
-     * Checks whether to exit Duke.
-     *
-     * @return Status of whether to exit Duke.
-     */
-    public boolean isExit() {
-        return isExit;
-    }
 }

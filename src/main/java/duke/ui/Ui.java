@@ -153,6 +153,6 @@ public class Ui {
      * Displays exit message.
      */
     public void showExit() {
-        storeOutput("Didn't I do it for you...");
+        storeOutput("Didn't I do it for you...\nI want to stay...");
     }
 }
