@@ -23,6 +23,7 @@ public class TaskStorage {
 
     /**
      * Adds a task to the TaskStorage object with printing effects.
+     *
      * @param t The task.
      */
     public String addTask(Task t) {
