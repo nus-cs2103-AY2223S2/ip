@@ -133,7 +133,9 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             msg += (i + 1) + ". ";
             msg += this.tasks.get(i);
-            msg += "\n";
+            if (i != this.tasks.size() - 1) {
+                msg += "\n";
+            }
         }
         return msg;
     }

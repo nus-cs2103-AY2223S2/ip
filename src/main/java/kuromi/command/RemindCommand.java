@@ -19,7 +19,7 @@ public class RemindCommand extends Command {
 
     private String getReply(TaskList tasks, int numberOfTasks) {
         String msg = "Here are the upcoming " + numberOfTasks + " tasks:\n";
-        msg += tasks.getUpcomingTasks(numberOfTasks).toString() + "\n";
+        msg += tasks.getUpcomingTasks(numberOfTasks).toString();
         return msg;
     }
 }
