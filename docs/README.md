@@ -105,19 +105,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks with the word "date" in its description is listed.
-
-### `find` - Find a task
-
-A simple keyword search which finds all tasks with descriptions containing the exact phrase provided.
-
-Example of usage:
-
-`find date`
-
-Expected outcome:
-
-All tasks with the word "date" in its description is listed.
+All tasks with the word "date" in its description are listed.
 
 ### `tag` - Tag a task
 
