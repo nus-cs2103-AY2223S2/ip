@@ -1,8 +1,8 @@
 package kuromi.command;
 
 import kuromi.storage.Storage;
-import kuromi.view.Ui;
 import kuromi.task.TaskList;
+import kuromi.view.Ui;
 
 /**
  * Command to find the tasks that contains the keyword from the user's input.
@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor
+     * Main constructor
      * @param keyword The keyword to be searched.
      */
     public FindCommand(String keyword) {

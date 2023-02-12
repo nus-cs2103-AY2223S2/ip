@@ -1,8 +1,8 @@
 package kuromi.command;
 
 import kuromi.storage.Storage;
-import kuromi.view.Ui;
 import kuromi.task.TaskList;
+import kuromi.view.Ui;
 
 /**
  * List My Melody's mistakes.

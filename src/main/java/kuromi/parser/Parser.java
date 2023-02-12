@@ -1,6 +1,5 @@
 package kuromi.parser;
 
-import kuromi.exception.KuromiException;
 import kuromi.command.AddCommand;
 import kuromi.command.Command;
 import kuromi.command.CommandType;
@@ -12,6 +11,7 @@ import kuromi.command.MarkCommand;
 import kuromi.command.MistakesCommand;
 import kuromi.command.RemindCommand;
 import kuromi.command.UnmarkCommand;
+import kuromi.exception.KuromiException;
 import kuromi.task.Deadline;
 import kuromi.task.Event;
 import kuromi.task.TaskList;

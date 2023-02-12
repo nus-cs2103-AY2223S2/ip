@@ -16,7 +16,7 @@ public class Deadline extends Task {
     protected LocalDateTime date;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by most classes)
+     * Main constructor (for invocation by most classes)
      *
      * @param description Description of a deadline.
      * @param by Deadline date of a deadline.

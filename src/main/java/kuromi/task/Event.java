@@ -20,7 +20,7 @@ public class Event extends Task {
     protected LocalDateTime dateBy;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by most classes)
+     * Main constructor (for invocation by most classes)
      * @param description The description of an event.
      * @param by The end date of an event.
      * @param from The start date of an event.

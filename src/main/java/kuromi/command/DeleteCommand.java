@@ -1,9 +1,9 @@
 package kuromi.command;
 
 import kuromi.storage.Storage;
-import kuromi.view.Ui;
 import kuromi.task.Task;
 import kuromi.task.TaskList;
+import kuromi.view.Ui;
 
 /**
  * Command to delete a task from the task list.
@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     private int idx;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor
+     * Main constructor
      *
      * @param idx Index of the task to be deleted.
      */

@@ -13,7 +13,7 @@ public class Task implements Comparable<Task> {
     protected boolean isDone;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by most classes)
+     * Main constructor (for invocation by most classes)
      *
      * @param description Description of the task
      */

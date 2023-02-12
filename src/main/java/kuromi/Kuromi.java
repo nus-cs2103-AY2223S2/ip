@@ -21,7 +21,8 @@ public class Kuromi {
     private Ui ui;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by main method).
+     * Main constructor
+     * (for invocation by main method).
      * Get stored data from previous session.
      *
      * @param filePath The file path to the file stored with data from previous Kuromi session.

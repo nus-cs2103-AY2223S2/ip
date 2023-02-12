@@ -1,9 +1,9 @@
 package kuromi.command;
 
 import kuromi.storage.Storage;
-import kuromi.view.Ui;
 import kuromi.task.Task;
 import kuromi.task.TaskList;
+import kuromi.view.Ui;
 
 /**
  * Command to add a task to the TaskList.
