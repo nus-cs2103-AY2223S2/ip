@@ -33,6 +33,7 @@ public class MainWindow {
                 DialogBox.getDukeDialog(Ui.intro(), dukeImage)
         );
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.setSpacing(5);
     }
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -58,12 +59,12 @@ public class MainWindow {
         } catch (IllegalArgumentException exception) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(Ui.invalidCommand(), dukeImage)
+                    DialogBox.getDukeError(Ui.invalidCommand(), dukeImage)
             );
         } catch (IndexOutOfBoundsException exception) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(Ui.missingArgs(), dukeImage)
+                    DialogBox.getDukeError(Ui.missingArgs(), dukeImage)
             );
         }
 
