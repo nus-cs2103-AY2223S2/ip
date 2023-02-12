@@ -104,6 +104,7 @@ public class Storage {
             PrintWriter output = new PrintWriter(file);
             for (int i = 0; i < list.size(); i++) {
                 Task task = list.getTask(i);
+                assert task != null : "Task is null";
                 output.println(i + 1 + "." + task.toString());
             }
             output.close();
