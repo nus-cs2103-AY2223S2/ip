@@ -25,7 +25,6 @@ public class UiTest {
     public void testShowWelcome() {
         Ui ui = new Ui();
         ui.showWelcome();
-        // No assertion, just checking if there's any exception thrown
     }
 
     @Test
@@ -39,7 +38,6 @@ public class UiTest {
     @Test
     public void testExecuteTerminate() {
         Ui ui = new Ui();
-        // No assertion, just checking if there's any exception thrown
         try {
             ui.execute(null, null);
         } catch (AssertionError e) {

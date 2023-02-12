@@ -53,13 +53,4 @@ public class TaskSchedulerTest {
         taskScheduler = new TaskScheduler(recurResponse, dialogContainer, input);
         assertEquals(2, recurResponse.size());
     }
-
-    /*
-    @Test
-    public void testConstructorWithInputNotContainingRecur() {
-        input = "not recur input 1";
-        taskScheduler = new TaskScheduler(recurResponse, dialogContainer, dukeImage, input);
-        assertEquals(0, recurResponse.size());
-    }
-     */
 }

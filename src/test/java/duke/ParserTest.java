@@ -22,14 +22,6 @@ public class ParserTest {
         assertEquals(expected, actual);
     }
 
-    //Symbols to display the state of the task to the user beside the type of Task
-    static String MARK_SYMBOL = "X";
-    static String TODO_SYMBOL = "T";
-    static String DEADLINE_SYMBOL = "D";
-    static String EVENT_SYMBOL = "E";
-    //Blacklist
-    static List<String> INVALID_COMMANDS = Arrays.asList("blah", "todo", "deadline", "event");
-
     @Test
     public void testMarkCommand() {
         String expected = "SUI, I have marked this task from the training room: ";
