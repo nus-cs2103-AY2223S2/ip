@@ -47,7 +47,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -56,5 +56,7 @@ shadowJar {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
+
 }

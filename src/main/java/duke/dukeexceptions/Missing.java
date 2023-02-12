@@ -21,6 +21,6 @@ public class Missing extends DukeException {
      */
     @Override
     public String getMessage() {
-        return "☹ NOM NOM NOM!! Where is your date/time??";
+        return "☹ NOM NOM NOM!! Where is your task/date/time??";
     }
 }
