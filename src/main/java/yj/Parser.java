@@ -26,7 +26,7 @@ public class Parser {
 
     static public Map<String, String> parseDeadlineCommand(String input) {
         String by = input.split("/by")[1].trim();
-        String description = input.split("/by")[0].trim();
+        String description = input.split("/by")[0].replaceAll("deadline", "").trim();
         Map<String, String> result = new HashMap<String, String>();
         result.put("description", description);
         result.put("by", by);
@@ -36,13 +36,18 @@ public class Parser {
     static public Map<String, String> parseEventCommand(String input) {
         String from = input.split("/from")[1].split("/to")[0].trim();
         String to = input.split("/to")[1].trim();
-        String description = input.split("/from")[0].trim();
+        String description = input.split("/from")[0].replaceAll("event", "").trim();
 
         Map<String, String> result = new HashMap<String, String>();
         result.put("description", description);
         result.put("from", from);
         result.put("to", to);
         return result;
+    }
+
+    static public String parseFindCommand(String input) {
+        String keyword = input.split(" ")[1].trim();
+        return keyword;
     }
 
 
@@ -63,6 +68,8 @@ public class Parser {
             return Command.DEADLINE;
         } else if (command.startsWith("event")) {
             return Command.EVENT;
+        } else if (command.startsWith("find")) {
+            return Command.FIND;
         } else {
             return Command.UNKNOWN;
         }

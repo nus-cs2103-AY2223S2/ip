@@ -100,6 +100,17 @@ public class YJ {
                         ui.print("Crapadoodle! You need to specify an event in the correct format!");
                     }
                     break;
+                case FIND:
+                    // Search for task descriptions for the keyword
+                    String keyword = Parser.parseFindCommand(input);
+                    List<Task> foundTasks = tasks.findKeywordInTasks(keyword);
+                    if (foundTasks.size() == 0) {
+                        ui.print("Crapadoodle! I couldn't find any tasks with that keyword!");
+                    } else {
+                        ui.print("Here are the matching tasks in your list:");
+                        foundTasks.forEach(task -> ui.print(task.toString()));
+                    }
+                    break;
                 case BYE:
                     // Write tasks to file
                     storage.save(tasks.getTasks());
