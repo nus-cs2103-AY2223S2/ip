@@ -3,9 +3,11 @@ package wessy;
 import wessy.exceptions.MissingSpacingException;
 import wessy.exceptions.TimeSpecifierException;
 import wessy.exceptions.UnspecifiedTimeException;
-import wessy.exceptions.int_exceptions.NotAnIntegerException;
-import wessy.exceptions.num_of_input_exceptions.MissingInputException;
-import wessy.exceptions.num_of_input_exceptions.TooManyInputException;
+
+import wessy.exceptions.numofinput.MissingInputException;
+import wessy.exceptions.numofinput.TooManyInputException;
+
+import wessy.exceptions.integer.NotAnIntegerException;
 
 /**
  * UserInputChecker is a utility class that checks for all the formatting issues
@@ -25,10 +27,9 @@ public class UserInputChecker {
      *            and CmdType.DELETE.
      * @throws MissingSpacingException If the space is missing after the command word.
      */
-    public static void checkSpacingAftCmd(String userInput, CmdType cmd) throws
-            MissingSpacingException {
-        if (checkCmdsThatNeedInput(cmd) && (userInput.equals(cmd.toString()) ||
-                userInput.charAt(cmd.len()) != ' ')) {
+    public static void checkSpacingAftCmd(String userInput, CmdType cmd) throws MissingSpacingException {
+        if (isCmdThatNeedsInput(cmd) && (userInput.equals(cmd.toString())
+                || userInput.charAt(cmd.getStrLength()) != ' ')) {
             throw new MissingSpacingException(cmd.toString());
         }
     }
@@ -44,10 +45,8 @@ public class UserInputChecker {
      *            and CmdType.DELETE.
      * @throws MissingInputException If the input after the command word is missing.
      */
-    // Check simpler missing input case (excluding "/by", "/from", "/to" keywords)
-    public static void checkForMissingInput(String userInput, CmdType cmd) throws
-            MissingInputException {
-        if (checkCmdsThatNeedInput(cmd) && isAllSpaces(userInput.substring(cmd.len()))) {
+    public static void checkMissingInput(String userInput, CmdType cmd) throws MissingInputException {
+        if (isCmdThatNeedsInput(cmd) && isAllSpaces(userInput.substring(cmd.getStrLength()))) {
             throw new MissingInputException(cmd.toString());
         }
     }
@@ -73,6 +72,7 @@ public class UserInputChecker {
                 ex = new TimeSpecifierException("/to");
             }
         }
+
         if (ex != null) {
             throw ex;
         }
@@ -86,11 +86,11 @@ public class UserInputChecker {
      * @throws UnspecifiedTimeException if the "/by" time input is missing for
      * the deadline command.
      */
-    public static void checkForDeadlineMissingInput(String userInput) throws
-            UnspecifiedTimeException {
-        UnspecifiedTimeException ex = null;
+    public static void checkDeadlineMissingInput(String userInput) throws UnspecifiedTimeException {
         String keyword = "/by";
         int pos = userInput.indexOf(keyword);
+
+        UnspecifiedTimeException ex = null;
         if (isAllSpaces(userInput.substring("deadline".length(), pos))) {
             ex = new UnspecifiedTimeException(keyword, true);
         } else if (isAllSpaces(userInput.substring(pos + keyword.length()))) {
@@ -109,13 +109,13 @@ public class UserInputChecker {
      * @throws UnspecifiedTimeException if any of the time input is missing for
      * the event command.
      */
-    public static void checkForEventMissingInput(String userInput) throws
-            UnspecifiedTimeException {
-        UnspecifiedTimeException ex = null;
+    public static void checkEventMissingInput(String userInput) throws UnspecifiedTimeException {
         String fKeyword = "/from";
-        int fPos = userInput.indexOf(fKeyword);
         String tKeyword = "/to";
+        int fPos = userInput.indexOf(fKeyword);
         int tPos = userInput.indexOf(tKeyword);
+
+        UnspecifiedTimeException ex = null;
         if (isAllSpaces(userInput.substring("event".length(), fPos))) {
             ex = new UnspecifiedTimeException(fKeyword, true);
         } else if (isAllSpaces(userInput.substring(fPos + fKeyword.length(), tPos))) {
@@ -123,6 +123,7 @@ public class UserInputChecker {
         } else if (isAllSpaces(userInput.substring(tPos + tKeyword.length()))) {
             ex = new UnspecifiedTimeException(tKeyword, false);
         }
+
         if (ex != null) {
             throw ex;
         }
@@ -137,15 +138,13 @@ public class UserInputChecker {
      *            CmdType.UNMARK and CmdType.DELETE.
      * @throws NotAnIntegerException If any invalid character is found in the String.
      */
-    public static void checkNotNumerical(String userInput, CmdType cmd) throws
-            NotAnIntegerException {
-        String str = userInput.substring(cmd.len());
+    public static void checkNotNumerical(String userInput, CmdType cmd) throws NotAnIntegerException {
+        String str = userInput.substring(cmd.getStrLength());
         int n = str.length();
         for (int i = 0; i < n; i++) {
             char c = str.charAt(i);
-            if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5'
-                    && c != '6' && c != '7' && c != '8' && c != '9' && c != ' '
-                    && c != '-') {
+            if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5' && c != '6' && c != '7'
+                    && c != '8' && c != '9' && c != ' ' && c != '-') {
                 throw new NotAnIntegerException();
             }
         }
@@ -163,9 +162,8 @@ public class UserInputChecker {
      * @throws TooManyInputException If there are too many inputs after the
      * command word.
      */
-    public static void checkTooManyInputs(String userInput, CmdType cmd) throws
-            TooManyInputException {
-        String str = Parser.removeSpacePadding(userInput.substring(cmd.len()));
+    public static void checkTooManyInputs(String userInput, CmdType cmd) throws TooManyInputException {
+        String str = Parser.removeSpacePadding(userInput.substring(cmd.getStrLength()));
         int n = str.length();
         for (int i = 0; i < n; i++) {
             if (str.charAt(i) == ' ') {
@@ -182,9 +180,9 @@ public class UserInputChecker {
      * @return A boolean value indicating is the command todo, deadline, event,
      * mark, unmark or delete.
      */
-    private static boolean checkCmdsThatNeedInput(CmdType cmd) {
-        return (cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT ||
-                cmd == CmdType.MARK || cmd ==  CmdType.UNMARK || cmd == CmdType.DELETE);
+    private static boolean isCmdThatNeedsInput(CmdType cmd) {
+        return (cmd == CmdType.TODO || cmd == CmdType.DEADLINE || cmd == CmdType.EVENT || cmd == CmdType.MARK
+                || cmd ==  CmdType.UNMARK || cmd == CmdType.DELETE);
     }
 
     /**

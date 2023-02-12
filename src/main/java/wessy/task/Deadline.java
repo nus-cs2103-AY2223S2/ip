@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * the information and operations required while handling a "deadline" task.
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    private final LocalDateTime by;
 
     /**
      * Constructs an instance of Deadline by specifying the task description,
@@ -46,7 +46,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + timeToString(by) + ")";
+        return "[D]" + super.toString() + " (by: " + toString(by) + ")";
     }
 
     /**
@@ -57,7 +57,7 @@ public class Deadline extends Task {
      * @return A useful String representation of the inputted LocalDateTime
      * object.
      */
-    private static String timeToString(LocalDateTime dateTime) {
+    public static String toString(LocalDateTime dateTime) {
         String str = dateTime.toString();
         if (str.substring(11).equals("12:34:56")) {
             return str.substring(0, 10);

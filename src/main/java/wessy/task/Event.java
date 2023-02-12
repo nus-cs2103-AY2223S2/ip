@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
  * the information and operations required while handling an event.
  */
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Constructs an instance of Event by specifying the task description, the
@@ -52,7 +52,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + timeToString(from) + " to: " + timeToString(to) + ")";
+        return "[E]" + super.toString() + " (from: " + toString(from) + " to: " + toString(to) + ")";
     }
 
     /**
@@ -63,7 +63,7 @@ public class Event extends Task {
      * @return A useful String representation of the inputted LocalDateTime
      * object.
      */
-    private static String timeToString(LocalDateTime dateTime) {
+    public static String toString(LocalDateTime dateTime) {
         String str = dateTime.toString();
         if (str.substring(11).equals("12:34:56")) {
             return str.substring(0, 10);

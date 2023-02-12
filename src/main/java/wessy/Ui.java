@@ -1,6 +1,7 @@
 package wessy;
 
 import java.util.Scanner;
+
 import wessy.task.Task;
 
 /**
@@ -37,8 +38,7 @@ public class Ui {
     /**
      * Prints output message for "bye" command.
      */
-    // MAIN OUTPUT FUNCTIONS
-    void printBye() {
+    void printByeMessage() {
         printMessage("Bye. Hope to see you again soon!");
     }
 
@@ -60,7 +60,6 @@ public class Ui {
      * @param tasks
      * @param isList
      */
-    // HELPER
     void printListOrFind(String[] tasks, boolean isList) {
         String extraWord = isList ? "" : "matching ";
         if (tasks.length == 0) {
@@ -81,13 +80,13 @@ public class Ui {
      * @param task
      * @param size
      */
-    void printAdded(Task task, int size) {
+    void printAddedMessage(Task task, int size) {
         String numOfTasks = " " + size + " task";
         if (size > 1) {
             numOfTasks += "s";
         }
-        printMessage("Got it. I've added this task:",
-                "  " + task, "Now you have" + numOfTasks + " in the list.");
+        printMessage("Got it. I've added this task:", "  " + task, "Now you have" + numOfTasks
+                + " in the list.");
     }
 
     /**
@@ -96,14 +95,13 @@ public class Ui {
      * @param chosenTask
      * @param isMark
      */
-    void printMarkUnmark(Task chosenTask, boolean isMark) {
+    void printMarkUnmarkMessage(Task chosenTask, boolean isMark) {
         String start = isMark ? "Nice! I've" : "OK, I've";
         if (isMark == chosenTask.checkIsDone()) {
             start = "You have already";
         }
         String end = isMark ? "done:" : "not done yet:";
-        printMessage(start + " marked this task as " + end, "  " +
-                chosenTask);
+        printMessage(start + " marked this task as " + end, "  " + chosenTask);
     }
 
     /**
@@ -112,17 +110,15 @@ public class Ui {
      * @param chosenTask
      * @param totalNumOfTasks
      */
-    void printDelete(Task chosenTask, int totalNumOfTasks) {
-        printMessage("Noted. I've removed this task:", "  " +
-            chosenTask, String.format(
-            "Now you have %d task%s in the list.", totalNumOfTasks,
-            totalNumOfTasks == 1 ? "" : "s"));
+    void printDeleteMessage(Task chosenTask, int totalNumOfTasks) {
+        printMessage("Noted. I've removed this task:", "  " + chosenTask, String.format(
+                "Now you have %d task%s in the list.", totalNumOfTasks, totalNumOfTasks == 1 ? "" : "s"));
     }
 
     /**
      * Prints output message for "clear" command.
      */
-    void printClear() {
+    void printClearMessage() {
         printMessage("You have cleared your task list. The list is empty now.");
     }
 
@@ -132,25 +128,12 @@ public class Ui {
      * @param tasks
      * @param totalNumOfTasks
      */
-    void showWelcome(String[] tasks, int totalNumOfTasks) {
+    void printWelcomeMessage(String[] tasks, int totalNumOfTasks) {
         printOpening();
         println("Hi, I am Wessy, your personal assistant chatbot.");
         println("");
         printListOrFind(tasks, true);
         printClosing();
-    }
-
-    /**
-     *
-     *
-     * @param message
-     */
-    void handleException(String message) {
-        System.err.println("    -Wessy------------------------------" +
-                "---------------------------------- ");
-        printErr(message);
-        System.err.println("    -----------------------------------" +
-                "----------------------------------- ");
     }
 
     /**
@@ -178,17 +161,20 @@ public class Ui {
         int length = str.length();
         if (length <= 64) {
             String message = "   |   " + str;
-            message += " ".repeat(67 - length);
-            message += "|";
+            message += " ".repeat(67 - length) + "|";
             System.out.println(message);
         } else {
+
             System.out.println("   |   " + str.substring(0, 64) + "   |");
+
             int remainingLength = length - 64;
             int leftover = remainingLength % 62;
             int n = (int) Math.floor(remainingLength/62);
+
             for (int i = 0; i < n; i++) {
                 System.out.println("   |     " + str.substring(62 * i, 62 * (i + 1)) + "   |");
             }
+
             String message = "   |     " + str.substring(length - leftover);
             message += " ".repeat(65 - leftover) + "|";
             System.out.println(message);
@@ -204,17 +190,20 @@ public class Ui {
         int length = str.length();
         if (length <= 64) {
             String message = "   |   " + str;
-            message += " ".repeat(68 - length);
-            message += "|";
+            message += " ".repeat(68 - length) + "|";
             System.err.println(message);
         } else {
+
             System.err.println("   |   " + str.substring(0, 64) + "    |");
+
             int remainingLength = length - 64;
             int leftover = remainingLength % 62;
             int n = (int) Math.floor(remainingLength/62);
+
             for (int i = 0; i < n; i++) {
                 System.err.println("   |     " + str.substring(62 * i, 62 * (i + 1)) + "    |");
             }
+
             String message = "   |     " + str.substring(length - leftover);
             message += " ".repeat(65 - leftover) + "|";
             System.err.println(message);
@@ -241,5 +230,16 @@ public class Ui {
         printOpening();
         printMultiln(linesOfString);
         printClosing();
+    }
+
+    /**
+     *
+     *
+     * @param message
+     */
+    public void handleException(String message) {
+        System.err.println("    -Wessy---------------------------------------------------------------- ");
+        printErr(message);
+        System.err.println("    ---------------------------------------------------------------------- ");
     }
 }

@@ -19,7 +19,6 @@ public enum CmdType {
     FIND("find"),
     CLEAR("clear");
 
-    private final String cmd;
     private static final Map<String, CmdType> COMMANDS = new HashMap<>();
     static {
         COMMANDS.put("bye", CmdType.BYE);
@@ -33,6 +32,7 @@ public enum CmdType {
         COMMANDS.put("find", CmdType.FIND);
         COMMANDS.put("clear", CmdType.CLEAR);
     }
+    private final String cmd;
 
     /** Constructs an instance of CmdType that corresponds to the different
      * types of commands, along with the command in its text form.
@@ -67,7 +67,7 @@ public enum CmdType {
      *
      * @return The length of string when the command is in its text form.
      */
-    public int len() {
+    public int getStrLength() {
         return cmd.length();
     }
 }

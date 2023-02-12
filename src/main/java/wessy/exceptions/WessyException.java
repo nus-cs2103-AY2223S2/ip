@@ -5,8 +5,8 @@ package wessy.exceptions;
  * exceptions that might occur when the programme, "Wessy" is running.
  */
 public abstract class WessyException extends Exception {
+    private static final String OPENING = "☹ OOPS!!! ";
     private final String message;
-    static String OPENING = "☹ OOPS!!! ";
 
     /**
      * Serves as a constructor for all the child classes to initialise. The
