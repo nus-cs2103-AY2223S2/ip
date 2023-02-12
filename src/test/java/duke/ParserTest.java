@@ -83,7 +83,7 @@ public class ParserTest {
     @Test
     public void eventParserTest5() {
         testErrorMessage = "\n    ____________________________________________________________________________________"
-                + "\n     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'event'"
+                + "\n     OOPS!!! You have provided incorrect number of arguments for the command 'event'"
                 + ".\n     Please try again after checking!\n"
                 + "    ____________________________________________________________________________________\n";
         e = new IncorrectNoOfArgumentException(testErrorMessage);
@@ -133,7 +133,7 @@ public class ParserTest {
     @Test
     public void deadlineTest3() {
         testErrorMessage = "\n    ____________________________________________________________________________________"
-                + "\n     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'deadline'"
+                + "\n     OOPS!!! You have provided incorrect number of arguments for the command 'deadline'"
                 + ".\n     Please try again after checking!\n"
                 + "    ____________________________________________________________________________________\n";
         e = new IncorrectNoOfArgumentException(testErrorMessage);
@@ -162,7 +162,7 @@ public class ParserTest {
     @Test
     public void toDoTest2() {
         testErrorMessage = "\n    ____________________________________________________________________________________"
-                + "\n     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'todo'"
+                + "\n     OOPS!!! You have provided incorrect number of arguments for the command 'todo'"
                 + ".\n     Please try again after checking!\n"
                 + "    ____________________________________________________________________________________\n";
         e = new IncorrectNoOfArgumentException(testErrorMessage);
@@ -179,7 +179,7 @@ public class ParserTest {
         testCmd.add("list");
         assertEquals(testCmd, Parser.parse("list"));
         testErrorMessage = "\n    ____________________________________________________________________________________"
-                + "\n     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'list'"
+                + "\n     OOPS!!! You have provided incorrect number of arguments for the command 'list'"
                 + ".\n     Please try again after checking!\n"
                 + "    ____________________________________________________________________________________\n";
         e = new IncorrectNoOfArgumentException(testErrorMessage);
@@ -196,7 +196,7 @@ public class ParserTest {
         testCmd.add("reminder");
         assertEquals(testCmd, Parser.parse("reminder"));
         testErrorMessage = "\n    ____________________________________________________________________________________"
-                + "\n     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'reminder'"
+                + "\n     OOPS!!! You have provided incorrect number of arguments for the command 'reminder'"
                 + ".\n     Please try again after checking!\n"
                 + "    ____________________________________________________________________________________\n";
         e = new IncorrectNoOfArgumentException(testErrorMessage);
@@ -213,7 +213,7 @@ public class ParserTest {
         testCmd.add("bye");
         assertEquals(testCmd, Parser.parse("bye"));
         testErrorMessage = "\n    ____________________________________________________________________________________"
-                + "\n     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'bye'"
+                + "\n     OOPS!!! You have provided incorrect number of arguments for the command 'bye'"
                 + ".\n     Please try again after checking!\n"
                 + "    ____________________________________________________________________________________\n";
         e = new IncorrectNoOfArgumentException(testErrorMessage);
@@ -231,7 +231,7 @@ public class ParserTest {
         testCmd.add("sleep");
         assertEquals(testCmd, Parser.parse("find sleep"));
         testErrorMessage = "\n    ____________________________________________________________________________________"
-                + "\n     ☹ OOPS!!! You have provided incorrect number of arguments for the command 'find'"
+                + "\n     OOPS!!! You have provided incorrect number of arguments for the command 'find'"
                 + ".\n     Please try again after checking!\n"
                 + "    ____________________________________________________________________________________\n";
         e = new IncorrectNoOfArgumentException(testErrorMessage);
