@@ -76,25 +76,25 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] dataArr = line.split(" \\| ");
-                boolean marked = dataArr[1] == "1" ? true : false;
+                boolean isMarked = dataArr[1] == "1" ? true : false;
                 String descrip = dataArr[2];
                 switch (dataArr[0]) {
                 case "T":
                     Task t = new Task(descrip);
-                    t.setDone(marked);
+                    t.setDone(isMarked);
                     taskArr.add(t);
                     break;
                 case "D":
                     String by = dataArr[3];
                     Deadline d = new Deadline(descrip, by);
-                    d.setDone(marked);
+                    d.setDone(isMarked);
                     taskArr.add(d);
                     break;
                 case "E":
                     String from = dataArr[3];
                     String to = dataArr[4];
                     Event e = new Event(descrip, from, to);
-                    e.setDone(marked);
+                    e.setDone(isMarked);
                     taskArr.add(e);
                     break;
                 }
