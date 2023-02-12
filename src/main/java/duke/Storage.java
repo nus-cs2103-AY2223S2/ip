@@ -73,7 +73,7 @@ public class Storage {
 
     public static void saveToFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/duke.txt");
-        ArrayList<Task> tasks = list.getList();
+        ArrayList<Task> tasks = TaskList.getList();
         for (Task t: tasks) {
             fw.write(t.saveFormat() +  "\n");
         }

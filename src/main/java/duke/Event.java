@@ -9,12 +9,25 @@ import java.util.ArrayList;
 
 import util.*;
 
+/**
+ * The Event class extends the Task class and represents a task with a duration.
+ *
+ * @author @tricixg
+ * @version 1.0
+ */
 public class Event extends Task {
 
     protected String from;
     protected String to;
     static String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
 
+    /**
+     * Constructs a new Event object with the given task and due date.
+     *
+     * @param description a string description of the task.
+     * @param from The task's start date/time.
+     * @param to The task's end date/time.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = from;
@@ -22,12 +35,27 @@ public class Event extends Task {
         this.taskType = "E";
     }
 
+    /**
+     * Constructs a new Event object with the given task and due date.
+     *
+     * @param description The task description.
+     * @param from The task's start date/time as a LocalDate type
+     * @param to The task's end date/time as a LocalDate type
+     */
     public Event(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from.format(DateTimeFormatter.ofPattern("MMM d yyyy")).toString();
         this.to = to.format(DateTimeFormatter.ofPattern("MMM d yyyy")).toString();
     }
 
+    /**
+     * Constructs a new Event object with the given task and due date.
+     *
+     * @param isDone a boolean indicating whether the task is completed or not.
+     * @param description a string description of the task.
+     * @param from The task's start date/time.
+     * @param to The task's end date/time.
+     */
     public Event(Boolean isDone, String description, String from, String to) {
         super(isDone, description);
         this.from = from;
@@ -35,12 +63,24 @@ public class Event extends Task {
         this.taskType = "E";
     }
 
+    /**
+     * Returns a string representation of the task
+     * in the format "[E][status icon] task description (from: start to: end)".
+     *
+     * @return A string representation of the task.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from:" + from + " to:" + to + ")";
     }
 
 
+    /**
+     * Creates a new Event task from a user's input
+     *
+     * @param array  a list of tasks.
+     * @param splitInput an array of strings containing the user input.
+     */
     public static void createEventTask(ArrayList<Task> array, String[] splitInput) {
         String combinedString = String.join(" ", splitInput);
         if (splitInput.length == 1 || splitInput[1].equals("")){
@@ -52,25 +92,6 @@ public class Event extends Task {
                 System.out.println(divider);
             }
         } else {
-            // for(int j=1; j< splitInput.length; j++){
-            //     if(splitInput[j].equals("/from")){
-            //         for (int k=1; k< j-1; k++){
-            //             splitInput[1] = splitInput[1] + " " + splitInput[k+1];
-            //         }
-            //         for(int i = j + 1; i < splitInput.length; i++) {
-            //             splitInput[i] = splitInput[i].replace("/to", "to:");
-            //         }
-            //         for (int l=splitInput.length-1; l > j +1; l--){
-            //             splitInput[splitInput.length-1] = splitInput[l-1]+" "+splitInput[splitInput.length-1];
-            //         }
-            //     } else {
-            //         splitInput[j] = splitInput[j];
-            //     }
-            // }
-               
-            // String duration = splitInput[splitInput.length-1];
-            // String desc = splitInput[1];
-           
            
             String event = combinedString.split(" ", 2)[1];
             String[] event_Arr = event.split(" /from", 2);
@@ -82,7 +103,7 @@ public class Event extends Task {
 
                         String from = period_Arr[0].strip();
                         String to = period_Arr[1].strip();
-;
+
 
                         if(isDate(from) && isDate(to)){
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -103,6 +124,14 @@ public class Event extends Task {
         }
         
     }
+
+    /**
+     * Checks whether a string is an instance of LocalDate
+     * in the format "yyyy-MM-dd"
+     *
+     * @param date String to be checked
+     * @return True if "yyyy-MM-dd"
+     */
     public static boolean isDate(String date) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -118,7 +147,15 @@ public class Event extends Task {
         return true;
     }
 
-
+    /**
+     * Joins elements of an array into a string, using a separator and a specified range.
+     *
+     * @param array The array of elements to join.
+     * @param separator The separator to use between elements.
+     * @param startIndex The start index of the range.
+     * @param endIndex The end index of the range.
+     * @return A string that consists of the elements of the array joined with the separator, or null if the array is null.
+     */
     public static String join(Object[] array, String separator, int startIndex, int endIndex) {
         if (array == null) {
             return null;
@@ -126,9 +163,6 @@ public class Event extends Task {
         if (separator == null) {
             separator = "";
         }
-  
-        // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
-        //           (Assuming that all Strings are roughly equally long)
         int bufSize = (endIndex - startIndex);
         if (bufSize <= 0) {
             return "";
@@ -151,7 +185,12 @@ public class Event extends Task {
     }
 
 
-
+    /**
+     * Returns a string representation of the task
+     * in the format "E | completion status | task description | from | to".
+     *
+     * @return String of deadline task in save format
+     */
     @Override
     public String saveFormat() {
         String d = " | ";

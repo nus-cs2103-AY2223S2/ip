@@ -9,27 +9,57 @@ import java.util.ArrayList;
 
 import util.DukeException;
 
+/**
+ * The Deadline class extends the Task class and represents a task with a due date.
+ *
+ * @author @tricixg
+ * @version 1.0
+ */
 public class Deadline extends Task {
 
     protected String by;
 
+    /**
+     * Constructs a new Deadline object with the given task and due date.
+     *
+     * @param description a string description of the task.
+     * @param by The task's due date.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
         this.taskType = "D";
     }
 
-
+    /**
+     * Constructs a new Deadline object with the given task and due date.
+     *
+     * @param description a string description of the task.
+     * @param by The task's due date as a LocalDate type
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by.format(DateTimeFormatter.ofPattern("MMM d yyyy")).toString();
     }
 
+    /**
+     * Constructs a new Deadline object with the given task and due date.
+     *
+     * @param isDone a boolean indicating whether the task is completed or not.
+     * @param description a string description of the task.
+     * @param by The task's due date.
+     */
     public Deadline(Boolean isDone, String description, String by) {
         super(isDone, description);
         this.by = by;
     }
 
+    /**
+     * Returns a string representation of the task.
+     * in the format "[D][status icon] task description (by: due date)".
+     *
+     * @return A string representation of the task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
@@ -39,6 +69,13 @@ public class Deadline extends Task {
     public String getDate() {
         return by;
     }
+
+    /**
+     * Creates a new Deadline task from a user's input
+     *
+     * @param array a list of tasks.
+     * @param splitInput an array of strings containing the user input.
+     */
     public static void createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")){
             try {
@@ -83,7 +120,13 @@ public class Deadline extends Task {
 
 
 
-    
+    /**
+     * Checks whether a string is an instance of LocalDate
+     * in the format "yyyy-MM-dd"
+     *
+     * @param date String to be checked
+     * @return True if "yyyy-MM-dd"
+     */
     public static boolean isDate(String date) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -98,7 +141,12 @@ public class Deadline extends Task {
         return true;
     }
 
-
+    /**
+     * Returns a string representation of the task
+     * in the format "D | completion status | task description | due date".
+     *
+     * @return String of deadline task in save format
+     */
     @Override
     public String saveFormat() {
         String d = " | ";

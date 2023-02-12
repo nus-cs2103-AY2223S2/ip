@@ -13,8 +13,7 @@ public class Parser {
         }
         //Displays the list of items 
         else if (combined.equals("list")){
-            TaskList.displayList(array);
-            
+            TaskList.displayList(array);     
         } 
         //Mark the task as done
         else if(splitInput[0].equals("mark")){
