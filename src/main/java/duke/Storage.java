@@ -55,8 +55,8 @@ public class Storage {
                 if (input[0].equals("T")) {
                     task = new Todo(input[2]);
                 } else if (input[0].equals("D")) {
-                    String datetime = input[3];
-                    String newDateTime = dateTimeFormat(input[3]);
+                    String dateTime = input[3];
+                    String newDateTime = dateTimeFormat(dateTime);
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                     LocalDateTime formattedDeadline = LocalDateTime.parse(newDateTime, dateTimeFormatter);
                     task = new Deadline(input[2], formattedDeadline);

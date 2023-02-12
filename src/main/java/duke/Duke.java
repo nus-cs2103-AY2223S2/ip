@@ -35,7 +35,7 @@ public class Duke extends Application {
     }
 
     public void initialize() {
-        System.out.println("starting 9");
+        assert !ui.equals(null) && !storage.equals(null);
         ui.start();
         storage.findData();
         storage.loadData();
@@ -46,9 +46,8 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        System.out.println("starting 2");
-        //ScrollPane scrollPane = new ScrollPane();
-        //VBox dialogContainer = new VBox();
+        assert !stage.equals(null);
+
         scrollPane.setContent(dialogContainer);
 
         TextField userInput = new TextField();
@@ -119,7 +118,7 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        System.out.println("Starting 3");
+        assert text.length() > 0;
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -132,7 +131,7 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     public void handleUserInput(TextField userInput, VBox dialogContainer) {
-        System.out.println("Starting 4");
+        assert !userInput.equals(null) && !dialogContainer.equals(null);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userInput.getText(), user),
                 DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
@@ -141,7 +140,7 @@ public class Duke extends Application {
     }
 
     public String getResponse(String input) {
-        System.out.println("Starting 5");
+        assert !input.equals(null);
         return response(ui, storage, parser, list, input);
     }
 
@@ -155,6 +154,9 @@ public class Duke extends Application {
      */
 
     public String response(UI ui, Storage storage, Parser parser, TasksList list, String command) {
+        assert !ui.equals(null) && !storage.equals(null) && !parser.equals(null) 
+            && !list.equals(null) && command.length() > 0;
+
         String[] commandArr = command.split(" ");
         try {
             DukeExceptions.checkCommand(commandArr);
@@ -224,6 +226,7 @@ public class Duke extends Application {
         }
     }
 
+    @Deprecated
     public static void begin(UI ui, Storage storage, Parser parser, TasksList list) {
         Scanner input = new Scanner(System.in);
         String command;
