@@ -6,7 +6,7 @@ import tasks.Task;
  */
 public class Todo extends Task {
     /**
-     * Construcutor for Todo object
+     * Constructor for Todo object
      * @param desc Description of task
      */
     public Todo(String desc) {

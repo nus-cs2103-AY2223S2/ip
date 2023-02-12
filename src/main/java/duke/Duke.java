@@ -31,29 +31,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Begins duke.Duke's interaction with user
-     */
-    public void run(){
-        boolean isBye = false;
-        Scanner sc = new Scanner(System.in);
-        ui.welcomeMsg();
-        while (!isBye) {
-            try {
-                String answer = sc.nextLine();
-                ui.showLine();
-                //StringParser generates command
-                //Command is executed
-                Command c = sp.parse(answer);
-                c.execute(taskList, storage, ui);
-                isBye = c.isExit();
-            } catch(DukeException e){
-                System.out.println(e.getMessage());
-            }
-            ui.showLine();
-        }
-    }
-
     public String getResponse(String input){
         try{
             Command c = sp.parse(input);
@@ -62,13 +39,4 @@ public class Duke {
             return e.getMessage();
         }
     }
-
-    /**
-     * Runs the whole program
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
 }

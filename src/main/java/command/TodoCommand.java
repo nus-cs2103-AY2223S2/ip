@@ -15,6 +15,6 @@ public class TodoCommand extends Command{
         Todo todo = new Todo(desc);
         taskList.addTask(todo);
         storage.updateFile(taskList);
-        return ui.addTaskMsg(todo, taskList.getSize());
+        return ui.addTaskMsg(todo, taskList.size());
     }
 }
