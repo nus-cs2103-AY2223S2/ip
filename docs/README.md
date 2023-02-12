@@ -4,10 +4,10 @@
 The Task Mechanic is here to help you with managing all your tasks!
 
 ## Contents
-1. [Features](/#features)
-2. [Usage](/#usage)
-3. [Commands](/#commands)
-4. [Command Summary](/#command-summary)
+1. [Features](/docs#features)
+2. [Usage](/docs#usage)
+3. [Commands](/docs#commands)
+4. [Command Summary](/docs#command-summary)
 
 ## Features 
 
