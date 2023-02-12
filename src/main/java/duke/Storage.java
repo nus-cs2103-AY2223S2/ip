@@ -16,7 +16,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     private static final String FILE_PATH = "./data/eren.txt";
@@ -57,9 +57,9 @@ public class Storage {
     }
 
     /**
-     * Writes to file
+     * Writes to file.
      * 
-     * @param description File content to be written to the file
+     * @param description File content to be written to the file.
      */ 
     public void writeToFile(String description) {
         try {
@@ -74,7 +74,7 @@ public class Storage {
 
 
     /**
-     * Loads the list of task from txt file
+     * Loads the list of task from txt file.
      */ 
     public ArrayList<Task> loadFile() {
         File file = new File(FILE_PATH);
@@ -91,10 +91,10 @@ public class Storage {
     }
 
     /**
-     * Returns a string representation of the task type
+     * Returns a string representation of the task type.
      *
-     * @param task Task to be saved
-     * @return String of task type
+     * @param task Task to be saved.
+     * @return String of task type.
      */
     public String getTaskType(Task task) {
         String fileType = "";
@@ -109,11 +109,11 @@ public class Storage {
     }
 
     /**
-     * Read file stored in user computer
+     * Reads file stored in user computer.
      *
-     * @param file File to read from
-     * @param tasks List of task to populate with using data read
-     * @throws IOException Throws exception when file cannot be read or failed I/O operation
+     * @param file File to read from.
+     * @param tasks List of task to populate with using data read.
+     * @throws IOException Throws exception when file cannot be read or failed I/O operation.
      */
     public void readFile(File file, ArrayList<Task> tasks) throws IOException {
         BufferedReader fileReader = new BufferedReader(new FileReader(file));

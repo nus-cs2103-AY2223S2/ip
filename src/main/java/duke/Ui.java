@@ -1,17 +1,17 @@
 package duke;
 
 /**
- * Deals with interactions with the user
+ * Deals with interactions with the user.
  */
 public class Ui {
     private Parser parser;
     private MainWindow mainWindow;
 
     /**
-     * Constructs a new Ui instance
+     * Constructs a new Ui instance.
      * 
-     * @param parser Parser instance
-     * @param mainWindow Controller for MainWindow
+     * @param parser Parser instance.
+     * @param mainWindow Controller for MainWindow.
      */
     public Ui(Parser parser, MainWindow mainWindow) {
         this.parser = parser;
@@ -19,12 +19,12 @@ public class Ui {
     }
 
     /**
-     * Receives command given by the user and pass to parser to run the command
+     * Receives command given by the user and pass to parser to run the command.
      * 
-     * @param tasks Arraylist containing task objects
-     * @param storage Storage class that manages save and loading
-     * @param input Input text from user
-     * @return true if command is bye, otherwise return false
+     * @param tasks Arraylist containing task objects.
+     * @param storage Storage class that manages save and loading.
+     * @param input Input text from user.
+     * @return true if command is bye, otherwise return false.
      */
     public boolean receiveInput(TaskList tasks, Storage storage, String input) {
         String[] words;

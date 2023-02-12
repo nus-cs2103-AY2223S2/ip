@@ -3,8 +3,8 @@ package duke;
 import java.util.Arrays;
 import duke.task.Task;
 
-/*
- * Deals with making sense of the user command
+/**
+ * Deals with making sense of the user command.
  */
 public class Parser {
     private MainWindow mainWindow;
@@ -12,25 +12,25 @@ public class Parser {
     private boolean hasTaskChanged = false;
     private String displayMessage;
     /**
-     * Constructs a new Parser instance
+     * Constructs a new Parser instance.
      *
-     * @param mainWindow Controller for MainWindow
+     * @param mainWindow Controller for MainWindow.
      */
     public Parser(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 
     /**
-     * Runs the input command given by the user and write into file if list has changed
+     * Runs the input command given by the user and write into file if list has changed.
      * 
-     * @param tasks Arraylist containing task objects
-     * @param storage Storage class that manages save and loading
-     * @param words User input
-     * @return true if command is bye, otherwise return false
-     * @throws IndexOutOfBoundsException When index given is larger than the taskList
-     * @throws NumberFormatException When a string is given instead of a number for some commmands
-     * @throws InvalidCommandException When user inputs an invalid command
-     * @throws EmptyDescriptionException When user inputs an empty description
+     * @param tasks Arraylist containing task objects.
+     * @param storage Storage class that manages save and loading.
+     * @param words User input.
+     * @return true if command is bye, otherwise return false.
+     * @throws IndexOutOfBoundsException When index given is larger than the taskList.
+     * @throws NumberFormatException When a string is given instead of a number for some commmands.
+     * @throws InvalidCommandException When user inputs an invalid command.
+     * @throws EmptyDescriptionException When user inputs an empty description.
      */
     public boolean runCommand(TaskList tasks, Storage storage, String[] words) throws IndexOutOfBoundsException,
             NumberFormatException, InvalidCommandException, EmptyDescriptionException {
@@ -75,11 +75,11 @@ public class Parser {
 
 
     /**
-     * Returns the index of given word
+     * Returns the index of given word.
      * 
-     * @param words Array of words to look from
-     * @param word Word to look for
-     * @return The index of the given word, if it doesnt exist, return -1
+     * @param words Array of words to look from.
+     * @param word Word to look for.
+     * @return The index of the given word, if it doesnt exist, return -1.
      */
     public static int getIndexOfWord(String[] words, String word) {
         int index = -1;
@@ -93,10 +93,10 @@ public class Parser {
     }
 
     /**
-     * Marks a task and change display message
+     * Marks a task and change display message.
      *
-     * @param taskNum Task index number
-     * @param tasks List of tasks
+     * @param taskNum Task index number.
+     * @param tasks List of tasks.
      */
     public void markTask(String taskNum, TaskList tasks) {
         Task markTask = tasks.getTask(Integer.parseInt(taskNum  ));
@@ -106,10 +106,10 @@ public class Parser {
     }
 
     /**
-     * Unmarks a task and change display message
+     * Unmarks a task and change display message.
      *
-     * @param taskNum Task index number
-     * @param tasks List of tasks
+     * @param taskNum Task index number.
+     * @param tasks List of tasks.
      */
     public void unmarkTask(String taskNum, TaskList tasks) {
         Task unmarkTask = tasks.getTask(Integer.parseInt(taskNum));
@@ -119,10 +119,10 @@ public class Parser {
     }
 
     /**
-     * Find task based on keyword
+     * Finds all task based on keyword.
      *
-     * @param words  Input words by users
-     * @param tasks List of tasks
+     * @param words  Input words by users.
+     * @param tasks List of tasks.
      */
     public void findTask(String[] words, TaskList tasks) throws EmptyDescriptionException {
         if (words.length <= 1) {
@@ -133,10 +133,10 @@ public class Parser {
     }
 
     /**
-     * Saves file and display message on MainWindow
+     * Saves file and display message on MainWindow.
      *
-     * @param storage Saved data
-     * @param tasks List of tasks
+     * @param storage Saved data.
+     * @param tasks List of tasks.
      */
     public void commandHelper(Storage storage, TaskList tasks) {
         if (hasTaskChanged) {
@@ -149,9 +149,9 @@ public class Parser {
 
 
     /**
-     * Returns help message
+     * Returns help message.
      *
-     * @return String containing the help message
+     * @return String containing the help message.
      */
     public static String getHelpMessage() {
         String helpCommand = "List of commands:\n"

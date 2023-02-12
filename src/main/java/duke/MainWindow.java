@@ -34,10 +34,10 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Set the current instance of duke and main for this class
+     * Sets the current instance of duke and main for this class.
      *
-     * @param duke current instance of duke
-     * @param main current instance of main
+     * @param duke current instance of duke.
+     * @param main current instance of main.
      */
     public void setMain(Duke duke, Main main) {
         this.main = main;
@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
      * Creates a dialog box containing Duke's reply and then appends them to
      * the dialog container.
      *
-     * @param reply string that contains duke reply
+     * @param reply String that contains duke reply.
      */
     public void sendDukeResponse(String reply) {
         if (reply != "") {

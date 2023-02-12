@@ -7,12 +7,12 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 /**
- * This class is for the starting screen and the loop the commands in Ui class
+ * This class is for the starting screen and the loop the commands in Ui class.
  * 
  * CS2103T
  * AY22/23 Semester 2.
  *
- * @author Lyndon Lim Liang Hng 
+ * @author Lyndon Lim Liang Hng
  */
 public class Duke {
     private Storage storage;
@@ -24,9 +24,9 @@ public class Duke {
     private Stage stage;
 
     /**
-     * Constructs a new Duke instance
+     * Constructs a new Duke instance.
      *
-     * @param mainWindow Controller for MainWindow
+     * @param mainWindow Controller for MainWindow.
      */
     public Duke(MainWindow mainWindow, Stage stage) {
         assert mainWindow != null : "Something is wrong with the creaiton of mainWindow";
@@ -41,9 +41,9 @@ public class Duke {
     }
 
     /**
-     * Receives input from user and sends to Ui class to handle it
+     * Receives input from user and sends to Ui class to handle it.
      *
-     * @param input User input command
+     * @param input User input command.
      */
     public void processInput(String input) {
         if(ui.receiveInput(tasks, storage,input)) {

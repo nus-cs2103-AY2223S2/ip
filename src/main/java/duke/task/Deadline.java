@@ -3,17 +3,17 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/*
- * Represents a Deadline task
+/**
+ * Represents a Deadline task.
  */
 public class Deadline extends Task {
     public LocalDateTime date;
 
     /**
-     * Constructs a new Deadline instance
+     * Constructs a new Deadline instance.
      * 
-     * @param description Description of the task
-     * @param date Date and time of the due date
+     * @param description Description of the task.
+     * @param date Date and time of the due date.
      */
     public Deadline(String description, LocalDateTime date) {
         super(description);

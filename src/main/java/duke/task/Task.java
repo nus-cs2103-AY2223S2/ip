@@ -9,16 +9,16 @@ public abstract class Task {
     protected char type = ' ';
 
     /**
-     * Returns date and time
+     * Returns date and time.
      *
-     * @return String representation of date and time but returns null if its a Todo task
+     * @return String representation of date and time but returns null if its a Todo task.
      */
     public abstract String getDateTime();
 
     /**
-     * Constructs a new task instance
+     * Constructs a new task instance.
      * 
-     * @param description Description of the task
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -26,7 +26,7 @@ public abstract class Task {
     }
 
     /**
-     * Retrieves mark status of task
+     * Retrieves mark status of task.
      * 
      * @return Return a string "X" if the task is mark as completed, otherwise return blank
      */
@@ -35,41 +35,41 @@ public abstract class Task {
     }
 
     /**
-     * Returns the status of the current task
+     * Returns the status of the current task.
      * 
-     * @return false if task is unmark and True if task is mark
+     * @return false if task is unmark and True if task is mark.
      */
     public boolean isDone() {
         return this.isDone;
     }
 
     /**
-     * Returns the type of the current task
+     * Returns the type of the current task.
      * 
-     * @return Type of current task
+     * @return Type of current task.
      */
     public char getType() {
         return this.type;
     }
 
     /**
-     * Returns the description of the current task
+     * Returns the description of the current task.
      * 
-     * @return Description of current task
+     * @return Description of current task.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Mark the task as done
+     * Marks the task as done.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Unmark the task as not done
+     * Unmarks the task as not done.
      */
     public void unmark() {
         this.isDone = false;

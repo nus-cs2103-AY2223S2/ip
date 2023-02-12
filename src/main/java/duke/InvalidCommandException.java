@@ -6,9 +6,9 @@ package duke;
 public class InvalidCommandException extends Exception {
     
     /**
-     * Constructs a new InvalidCommandException instance
+     * Constructs a new InvalidCommandException instance.
      * 
-     * @param errorMessage Error message to display when exception thrown
+     * @param errorMessage Error message to display when exception thrown.
      */
     public InvalidCommandException(String errorMessage) {
         super(errorMessage);

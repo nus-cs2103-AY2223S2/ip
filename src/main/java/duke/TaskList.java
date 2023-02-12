@@ -11,17 +11,17 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Contains the task list and it has operations to add/delete tasks in the list
+ * Contains the task list and it has operations to add/delete tasks in the list.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
     private MainWindow mainWindow;
     
     /**
-     * Constructs a new TaskList instance
+     * Constructs a new TaskList instance.
      *
-     * @param mainWindow Controller for MainWindow
-     * @param list List of the tasks
+     * @param mainWindow Controller for MainWindow.
+     * @param list List of the tasks.
      */
     public TaskList(ArrayList<Task> list, MainWindow mainWindow) {
         tasks = list;
@@ -29,12 +29,12 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task to the list given the description
+     * Adds a Task to the list given the description.
      * 
-     * @param words Description given by user input
-     * @param type The type of task
-     * @return true if task has been added successfully, else false
-     * @throws EmptyDescriptionException when user gives an empty description
+     * @param words Description given by user input.
+     * @param type The type of task.
+     * @return true if task has been added successfully, else false.
+     * @throws EmptyDescriptionException when user gives an empty description.
      */ 
     public boolean addTask(String[] words, String type) throws EmptyDescriptionException {
         boolean isTaskAdded = false;
@@ -52,7 +52,12 @@ public class TaskList {
         return isTaskAdded;
     }
 
-
+    /**
+     * Adds a Todo Task to the list given the description.
+     *
+     * @param words Description given by user input.
+     * @return true if task has been added successfully, else false.
+     */
     public boolean addTodo(String[] words) {
         Task task = new Todo(String.join(" ", words ));
         tasks.add(task);
@@ -62,12 +67,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a Deadline Task to the list given the description
+     * Adds a Deadline Task to the list given the description.
      *
-     * @param words Description given by user input
-     * @return true if task has been added successfully, else false
-     * @throws EmptyDescriptionException when user gives an empty description
-     * @return true if task has been added successfully, else false
+     * @param words Description given by user input.
+     * @return true if task has been added successfully, else false.
+     * @throws EmptyDescriptionException when user gives an empty description.
      */
     public boolean addDeadline(String[] words) throws EmptyDescriptionException {
         String description;
@@ -91,12 +95,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a Event Task to the list given the description
+     * Adds a Event Task to the list given the description.
      *
-     * @param words Description given by user input
-     * @return true if task has been added successfully, else false
-     * @throws EmptyDescriptionException when user gives an empty description
-     * @return true if task has been added successfully, else false
+     * @param words Description given by user input.
+     * @return true if task has been added successfully, else false.
+     * @throws EmptyDescriptionException when user gives an empty description.
      */
     public boolean addEvent(String[] words) throws EmptyDescriptionException {
         Task task;
@@ -129,11 +132,11 @@ public class TaskList {
 
 
     /**
-     * Deletes a Task from the list given the index
+     * Deletes a Task from the list given the index.
      * 
-     * @param num Index of the task to be deleted
-     * @return true if task has been deleted, else false
-     * @throws IndexOutOfBoundsException If num > listOfTask.size()
+     * @param num Index of the task to be deleted.
+     * @return true if task has been deleted, else false.
+     * @throws IndexOutOfBoundsException If num > listOfTask.size().
      */ 
     public boolean deleteTask(int num) throws IndexOutOfBoundsException {
         Task selectedTask = getTask(num);
@@ -145,7 +148,7 @@ public class TaskList {
     }
 
     /**
-     * Prints the list
+     * Prints the list.
      */ 
     public void printList() {
         String listOfTask = "";
@@ -156,29 +159,29 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the Task object from the list given an index
-     * 
-     * @param num Index of the task to retrieve
-     * @return returns a Task object
-     * @throws IndexOutOfBoundsException When accessed index is not within the list length
+     * Retrieves the Task object from the list given an index.
+     *
+     * @param num Index of the task to retrieve.
+     * @return returns a Task object.
+     * @throws IndexOutOfBoundsException When accessed index is not within the list length.
      */ 
     public Task getTask(int num) throws IndexOutOfBoundsException {
         return tasks.get(num-1);
     }
 
     /**
-     * Returns a list of task
+     * Returns a list of task.
      * 
-     * @return return a list of task
+     * @return return a list of task.
      */
     public ArrayList<Task> getListOfTask() {
         return tasks;
     }
 
     /**
-     * Prints out all matching task in the list based on user's keyword
+     * Prints out all matching task in the list based on user's keyword.
      *
-     * @param description user input keyword
+     * @param description user input keyword.
      */
     public void findTask(String description) {
         String foundTasks = "";

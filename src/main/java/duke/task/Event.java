@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/*
+/**
  * Represents an Event task
  */
 public class Event extends Task {
@@ -11,11 +11,11 @@ public class Event extends Task {
     public LocalDateTime dateTimeTo;
 
     /**
-     * Constructs a new Todo instance
+     * Constructs a new Todo instance.
      * 
-     * @param description Description of the task
-     * @param dateTimeFrom Starting date and time
-     * @param dateTimeTo Ending date and time
+     * @param description Description of the task.
+     * @param dateTimeFrom Starting date and time.
+     * @param dateTimeTo Ending date and time.
      */
     public Event(String description, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo) {
         super(description);

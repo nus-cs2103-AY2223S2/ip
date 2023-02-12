@@ -5,16 +5,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Handles the conversion of time from user input
+ * Handles the conversion of time from user input.
  */
 public class DateTime {
     
     /**
-     * Returns dateTime from user given input
+     * Returns dateTime from user given input.
      * 
-     * @param words user input that has been put into an array of strings
-     * @param index the index before the date
-     * @return return LocalDateTime derived from user input
+     * @param words user input that has been put into an array of strings.
+     * @param index the index before the date.
+     * @return return LocalDateTime derived from user input.
      */
     public static LocalDateTime getDateTime(String[] words, int index) {
         LocalDateTime dateTime;
