@@ -1,6 +1,7 @@
 package yj;
 
 public enum Command {
+    UNKNOWN,
     BYE,
     LIST,
     DELETE,

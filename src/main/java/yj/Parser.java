@@ -64,7 +64,7 @@ public class Parser {
         } else if (command.startsWith("event")) {
             return Command.EVENT;
         } else {
-            return null;
+            return Command.UNKNOWN;
         }
     }
 
