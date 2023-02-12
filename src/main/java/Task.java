@@ -1,38 +1,30 @@
-public class Task {
-    protected String description;
-    protected boolean isDone;
 
-    public Task(String description) {
+public abstract class Task {
+
+    private final String description;
+
+    private boolean isDone;
+
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+    public boolean isDone() {
+        return isDone;
+    }
+    public String getMarkedString() {
+        return isDone ? "1" : "0";
     }
 
-    public void mark() {
-        this.isDone = true;
-        System.out.println("\t Nice! I've marked this task as done:\n"
-                + "\t\t [X] " + this.description + "\n");
+    public String getDescription() {
+        return description;
     }
 
-    public void unmark() {
-        this.isDone = false;
-        System.out.println("\t OK, I've marked this task as not done yet:\n"
-                + "\t\t [ ] " + this.description + "\n");
+    public void setDone(boolean done) {
+        this.isDone = done;
     }
 
-    @Override
-    public String toString() {
-        return " [" + getStatusIcon() + "] " + this.description;
-    }
+    public abstract String storeTaskString();
+    public abstract String getTaskType();
 }

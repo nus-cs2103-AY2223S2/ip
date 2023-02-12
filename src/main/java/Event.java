@@ -1,84 +1,61 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-public class Event extends Task{
-    protected LocalDateTime from;
-    protected LocalDateTime to;
-
-    public Event(String description, String from, String to) {
-        super(description);
-        this.from = getStartDateTime(from);
-        this.to = getEndDateTime(to);
+public class Event extends Task {
+    private final String start;
+    private final String end;
+    private Event(String description, boolean isDone, String start, String end) {
+        super(description, isDone);
+        this.start = start;
+        this.end = end;
     }
-
-    public LocalDateTime getStartDateTime(String from) {
-        LocalDateTime startDateTime = null;
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        try {
-            startDateTime = LocalDateTime.parse(from, dateTimeFormatter);
-            return startDateTime;
-        } catch (DateTimeParseException | NullPointerException e) {
-            System.out.println("\t Wrong Wrong Date Format!\n");
+    public static Event generate(String input) throws DukeException {
+        if (input.trim().equals("event")) {
+            throw new DukeException("\t ☹ OOPS!!! The description of a event cannot be empty.\n");
         }
-        return startDateTime;
-    }
-
-    public LocalDateTime getEndDateTime(String from) {
-        LocalDateTime endDateTime = null;
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        try {
-            endDateTime = LocalDateTime.parse(from, dateTimeFormatter);
-            return endDateTime;
-        } catch (DateTimeParseException | NullPointerException e) {
-            System.out.println("\t Wrong Wrong Date Format!\n");
+        String[] inputLine = input.split(" ", 2);
+        if (inputLine.length < 2) {
+            throw new DukeException("\t ☹ OOPS!!! The description of a event cannot be empty.\n");
         }
-        return endDateTime;
-    }
-
-    public String startDateTime() {
-        String startDateTime = null;
-        String startDayOfWeek = null;
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        try {
-            startDateTime = this.from.format(format);
-            startDayOfWeek = this.from.getDayOfWeek().toString();
-            return startDayOfWeek + ", " + startDateTime;
-        } catch (DateTimeParseException | NullPointerException e) {
-            System.out.println("\t Wrong Wrong Date Format!\n");
+        String[] startEndTime = inputLine[1].split(" /from ");
+        if (startEndTime.length < 2) {
+            throw new DukeException("\t ☹ OOPS!!! The start time of a event cannot be empty.\n");
         }
-
-        String endDateTime = this.to.format(format);
-        String endDayOfWeek = this.to.getDayOfWeek().toString();
-        return startDayOfWeek + ", " + startDateTime;
-    }
-
-    public String endDateTime() {
-        String endDateTime = null;
-        String endDayOfWeek = null;
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        try {
-            endDateTime = this.to.format(format);
-            endDayOfWeek = this.to.getDayOfWeek().toString();
-            return endDayOfWeek + ", " + endDateTime;
-        } catch (DateTimeParseException | NullPointerException e) {
-            System.out.println("\t Wrong Wrong Date Format!\n");
+        String[] dateTime = startEndTime[1].split(" /to ");
+        if (dateTime.length < 2) {
+            throw new DukeException("\t ☹ OOPS!!! The end time of a event cannot be empty.\n");
         }
-        return endDayOfWeek + ", " + endDateTime;
+        return new Event(startEndTime[0], false, DateTime.dateFormatter(dateTime[0]), DateTime.dateFormatter(dateTime[1]));
     }
 
-    public String getFrom() {
-        return startDateTime();
+    public static Event generateTask(String[] taskLine) {
+        boolean isDone = taskLine[1].equals("1");
+        return new Event(taskLine[2], isDone, taskLine[3], taskLine[4]);
     }
-
-    public String getTo() {
-        return endDateTime();
+    public String getStart() {
+        return start;
+    }
+    public String getEnd() {
+        return end;
+    }
+    @Override
+    public String getTaskType() {
+        return "E";
+    }
+    @Override
+    public String storeTaskString() {
+        return this.getTaskType() + " | " + this.getMarkedString() + " | " + this.getDescription() + " | " + this.getStart() + " | " + this.getEnd();
     }
 
     @Override
     public String toString() {
-
-        return "[E]" + super.toString() + " (from: " + startDateTime()
-                + " to: " +  endDateTime() + ")";
+        String str = this.getDescription();
+        boolean checked = this.isDone();
+        String startTime = this.getStart();
+        String endTime = this.getEnd();
+        if (checked) {
+            return "[E][X] " + str + " (from: " + startTime +
+                    " to: " + endTime + ")";
+        } else {
+            return "[E][ ] " + str + " (from: " + startTime +
+                    " to: " + endTime + ")";
+        }
     }
 }

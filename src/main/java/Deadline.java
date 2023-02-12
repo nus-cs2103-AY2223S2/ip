@@ -1,47 +1,47 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class Deadline extends Task {
-    protected LocalDateTime by;
-
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = transferTOLocalDateTime(by);
+    private String dateTime;
+    private Deadline(String description, boolean isDone, String dateTime) {
+        super(description, isDone);
+        this.dateTime = dateTime;
     }
-
-    public LocalDateTime transferTOLocalDateTime(String by) {
-        LocalDateTime dateTime = null;
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        try {
-            dateTime = LocalDateTime.parse(by, dateTimeFormatter);
-            return dateTime;
-        } catch (DateTimeParseException | NullPointerException e) {
-            System.out.println("\t Wrong Wrong Date Format!\n");
+    public static Deadline generate(String input) throws DukeException {
+        if (input.trim().equals("deadline")) {
+            throw new DukeException("\t ☹ OOPS!!! The description of a deadline cannot be empty.\n");
         }
+        String[] inputLine = input.split(" ", 2);
+        if (inputLine.length < 2) {
+            throw new DukeException("\t ☹ OOPS!!! The description of a deadline cannot be empty.\n");
+        }
+        String[] descriptions = inputLine[1].split(" /by ", 2);
+        if (descriptions.length < 2) {
+            throw new DukeException("\t ☹ OOPS!!! The date time of a deadline cannot be empty.\n");
+        }
+        return new Deadline(descriptions[0], false, DateTime.dateFormatter(descriptions[1]));
+    }
+    public static Deadline generateTask(String[] taskLine) {
+        boolean check = taskLine[1].equals("1");
+        return new Deadline(taskLine[2], check, taskLine[3]);
+    }
+    public String getDateTime() {
         return dateTime;
     }
-
-    public String deadlineDateTime() {
-        String deadline = "";
-        String dayOfWeek = "";
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        try {
-            deadline = this.by.format(format);
-            dayOfWeek = this.by.getDayOfWeek().toString();
-            return dayOfWeek + ", " + deadline;
-        } catch (DateTimeParseException | NullPointerException e) {
-            System.out.println("\t Wrong Wrong Date Format!\n");
-        }
-        return dayOfWeek + ", " + deadline;
+    @Override
+    public String getTaskType() {
+        return "D";
     }
-
-    public String getBy() {
-        String deadline = deadlineDateTime();
-        return deadline;
+    @Override
+    public String storeTaskString() {
+        return this.getTaskType() + " | " + this.getMarkedString() + " | " + this.getDescription() + " | " + this.getDateTime();
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadlineDateTime() + ")";
+        String str = this.getDescription();
+        boolean checked = this.isDone();
+        String dateTime = this.getDateTime();
+        if (checked) {
+            return "[D][X] " + str + " (by: " + dateTime + ")";
+        } else {
+            return "[D][ ] " + str + " (by: " + dateTime + ")";
+        }
     }
 }
