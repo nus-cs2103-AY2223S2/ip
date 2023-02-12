@@ -136,25 +136,19 @@ public class TaskList {
         }
         Events taskName = new Events(taskDescription, startTime, endTime);
         String result = "Got it. I've added this task:\n";
-        //System.out.println("Got it. I've added this task:");
-        result += taskName.toString() + "\n";
-        //System.out.println(taskName.toString());
+        result += taskName + "\n";
         listDataBase.add(taskName);
         result += "Now you have " + listDataBase.size() + " tasks in the list.";
-        //System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
         return result;
     }
 
-    public String delete(int taskNumberDelete) throws DukeException {
+    public String delete(int taskNumberDelete) {
         assert(taskNumberDelete > 0);
         Task currentTask = listDataBase.get(taskNumberDelete - 1);
         String result = "Noted. I've removed this task:\n";
-        //System.out.println("Noted. I've removed this task:");
         result += currentTask.toString() + "\n";
-        //System.out.println(currentTask.toString());
         listDataBase.remove(taskNumberDelete - 1);
         result += "Now you have " + listDataBase.size() + " tasks in the list";
-        //System.out.println("Now you have " + listDataBase.size() + " tasks in the list");
         return result;
     }
 

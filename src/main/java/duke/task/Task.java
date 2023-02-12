@@ -20,7 +20,7 @@ public class Task {
     /**
      * The status icon X or no icon if the task is done or not done
      *
-     * @return a string of "X" or " "
+     * @return a string of X or nothing
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X

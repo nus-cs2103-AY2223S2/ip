@@ -37,6 +37,10 @@ public class Duke {
 
     /**
      * Main Program that reads the commands and processes them onto DUKE
+     *
+     * @param input A input of String which is the command given by the user
+     *
+     * @return A string type of response of command
      */
     public String run(String input) {
         assert(input.length() > 0);
@@ -47,14 +51,16 @@ public class Duke {
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
-        } finally {
-            //ui.showLine();
         }
 
     }
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     *
+     * @param input A string input to get response from the command
+     *
+     * @return a String denoting the response of command
      */
     public String getResponse(String input) {
         return this.run(input);
