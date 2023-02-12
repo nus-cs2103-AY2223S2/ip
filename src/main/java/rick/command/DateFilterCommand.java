@@ -12,7 +12,7 @@ import rick.exceptions.RickInvalidDateException;
 
 
 /**
- * The command to filter the task list by date.
+ * Represents the Command that lists all tasks that occur on the given date.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -21,7 +21,7 @@ public class DateFilterCommand extends Command {
     private final String date;
 
     /**
-     * Formats the command with the given date, in this format:
+     * Constructs the command instance with the given date, in this format:
      * "/on d/m/yy"
      *
      * @param date The provided date
@@ -31,7 +31,8 @@ public class DateFilterCommand extends Command {
     }
 
     /**
-     * Executes this command.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI output

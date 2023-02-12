@@ -13,7 +13,7 @@ import rick.task.RickTask;
 
 
 /**
- * Main template to test Commands.
+ * Represents the main template to test Commands.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -25,7 +25,7 @@ public abstract class CommandTest {
     private static final ArrayList<RickTask> currentTasks = new ArrayList<>();
 
     /**
-     * Temporarily stores existing tasks in the Storage to isolate them from
+     * Stores existing tasks in the Storage temporarily to isolate them from
      * the test environment.
      */
     @BeforeAll

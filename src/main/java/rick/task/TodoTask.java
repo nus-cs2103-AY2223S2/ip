@@ -3,14 +3,14 @@ package rick.task;
 import java.time.LocalDate;
 
 /**
- * The class representing a {@code TodoTask} task.
+ * Represents a Todo task.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class TodoTask extends RickTask {
     /**
-     * The default constructor that initialises a TodoTask with the given description.
+     * Constructs and initialises a TodoTask with the given description.
      * @param s The task description.
      */
     public TodoTask(String s) {
@@ -18,7 +18,7 @@ public class TodoTask extends RickTask {
     }
 
     /**
-     * Human friendly interpretation of this task.
+     * Generates and returns a human friendly interpretation of this task.
      *
      * @return The task interpretation.
      */
@@ -28,7 +28,8 @@ public class TodoTask extends RickTask {
     }
 
     /**
-     * Formats this task into a format for storage in the Storage class.
+     * Formats this task into a format for storage in the Storage class, and
+     * returns the formatted schema.
      *
      * @return The formatted task.
      */
@@ -42,7 +43,8 @@ public class TodoTask extends RickTask {
     }
 
     /**
-     * Indicate if this task falls on the given date.
+     * Returns a boolean indicating if this task falls on the given date.
+     *
      * @return False. It has no relation to any date.
      */
     @Override

@@ -1,7 +1,8 @@
 package rick;
 
 /**
- * Main Formatter class to format the UI for the rick.Rick chatbot in the terminal.
+ * Represents a class that formats the User Interface(UI) for the Rick text
+ * UI.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -33,7 +34,7 @@ public class Ui {
             + "⠀⠀⠀⠀⠀⠈⠿⣶⣶⣶⣶⣶⣾⣶⣾⣷⣶⣶⣶⣶⣷⣾⣷⣶⣶⣾⡿      \n";
 
     /**
-     * Generates the configurable greeting message for the rick.Rick app.
+     * Generates and returns the configurable greeting message for the rick.Rick app.
      *
      * @return The greeting message.
      */
@@ -46,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Prints the exit message to the UI.
+     * Generates and returns the exit message.
      *
      * @return The exit message.
      */
@@ -57,8 +58,8 @@ public class Ui {
     }
 
     /**
-     * Main Formatting function to format any UI returned to the user after a
-     * command. Prints out the UI to the console for viewing by the user.
+     * Generates and returns a UI section that displays output to the Graphic
+     * UI(GUI), given a sequence of String lines.
      *
      * @param inputs The UI to be formatted
      * @return The UI formatted for the GUI.
@@ -72,8 +73,8 @@ public class Ui {
     }
 
     /**
-     * Given an exception that occurred, formats the UI to indicate the error
-     * to the user.
+     * Formats and returns a UI section indicating to the user that the
+     * provided error has occurred.
      *
      * @param error The error that occurred.
      * @return The UI to be displayed by the GUI.
@@ -83,7 +84,7 @@ public class Ui {
     }
 
     /**
-     * Format a user command guide for the user.
+     * Formats and returns a user command guide to be displayed.
      *
      * @param message The command guide to be formatted.
      * @return The output guide.

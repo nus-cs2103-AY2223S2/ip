@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Tests all commands that affect the App's operation:
+ * Represents a test suite that tests all commands that affect the App's
+ * operation:
  * <ul>
  *     <li>{@code ExitCommand}</li>
  *     <li>{@code ErrorCommand}</li>

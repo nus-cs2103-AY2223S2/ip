@@ -3,19 +3,21 @@ package rick;
 import rick.command.Command;
 
 /**
- * The main class to interface with the Rick server.
+ * Represents the main class to receive commands, interact with the Storage,
+ * and generate and return a UI string to output to the user.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class Rick {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
     private boolean isTimeToExit = false;
 
     /**
-     * Default constructor to set up the app.
+     * Constructs the Rick instance and populates it with the necessary
+     * classes.
      */
     public Rick() {
         this.storage = Storage.create();
@@ -24,7 +26,7 @@ public class Rick {
     }
 
     /**
-     * Generates the server UI welcome message.
+     * Generates and returns the server UI welcome message.
      *
      * @return The message.
      */
@@ -46,7 +48,8 @@ public class Rick {
     }
 
     /**
-     * Indicates to the GUI if it should exit.
+     * Generates and returns a boolean which indicates to the GUI if it
+     * should exit.
      *
      * @return The indicative boolean.
      */

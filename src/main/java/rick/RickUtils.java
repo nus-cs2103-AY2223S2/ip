@@ -6,15 +6,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The main utility class for providing Dates, DateTimes, and other common formatting.
+ * Represents the main utility class that provides Dates, DateTimes, and other
+ * common formatting functions.
  *
  * @author SeeuSim
  *         AY22/23-S2 CS2103T
  */
 public class RickUtils {
     /**
-     * A Utility method to parse datetime strings passed to the Rick.task.RickTask
-     * subclass constructors.
+     * Parses datetime strings passed to the Rick.task.RickTask
+     * subclass constructors, and returns formatted LocalDateTime instances.
      *
      * @param s The datetime string to be parsed.
      * @return The formatted datetime object.
@@ -27,7 +28,8 @@ public class RickUtils {
     }
 
     /**
-     * A Utility method to parse date strings passed to the rick.Rick command console.
+     * Parses date strings passed to the rick.Rick command console, and returns
+     * DateTime instances.
      *
      * @param dte The date string to be parsed.
      * @return The formatted date object.

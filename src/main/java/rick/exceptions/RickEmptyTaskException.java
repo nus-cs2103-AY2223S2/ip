@@ -1,14 +1,14 @@
 package rick.exceptions;
 
 /**
- * The exception that arises from an empty task description.
+ * Represents the exception that arises from an empty task description.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class RickEmptyTaskException extends RickException {
     /**
-     * The types of tasks that can cause this Exception.
+     * Represents the types of tasks that can cause this Exception.
      */
     public static enum TaskType {
         TYPE_Todo,
@@ -17,7 +17,7 @@ public class RickEmptyTaskException extends RickException {
     }
 
     /**
-     * The default constructor for this exception
+     * Constructs the exception with the given task type.
      *
      * @param type The type of task that was created.
      */

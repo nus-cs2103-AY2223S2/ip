@@ -1,14 +1,14 @@
 package rick.exceptions;
 
 /**
- * The exception that arises when an invalid date format was entered.
+ * Represents the exception that arises when an invalid date format was entered.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class RickInvalidDateException extends RickException {
     /**
-     * The default constructor for this exception.
+     * Constructs the exception instance.
      */
     public RickInvalidDateException() {
         super(

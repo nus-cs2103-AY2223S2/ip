@@ -16,7 +16,7 @@ import rick.Rick;
 
 
 /**
- * The main window for the app.
+ * Represents the main window for the app.
  * This serves as the main UI layout for the GUI.
  *
  * @author SeeuSim
@@ -41,7 +41,6 @@ public class MainWindow extends AnchorPane {
     private final Image rickImage = new Image(this.getClass().getResourceAsStream("/images/Rick.jpeg"));
 
     /**
-     * Default class method to initialize the window.
      * Sets the default properties for this window.
      */
     @FXML
@@ -50,7 +49,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Populate this app with the Rick server.
+     * Populates this app with the Rick server.
      *
      * @param r The Rick server instance.
      */
@@ -62,7 +61,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Handle the user input and pass it to the system.
+     * Handles the user input and passes it to the system.
      * Displays the system's response and behaves accordingly.
      */
     @FXML

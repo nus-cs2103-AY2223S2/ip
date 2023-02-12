@@ -1,15 +1,14 @@
 package rick.exceptions;
 
 /**
- * The exception that arises when an invalid store index was entered.
+ * Represents the exception that arises when an invalid store index was entered.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class RickTaskIndexMissingException extends RickException {
-
     /**
-     * Given a command type which accesses the store, formats the exception accordingly.
+     * Constructs the exception instance with the given command type.
      *
      * @param type The command type.
      */

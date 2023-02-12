@@ -17,9 +17,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 /**
- * The dialog session class representing either a user's input or the system's
- * response. Displays the text output and the respective user's image, using
- * a FXML layout.
+ * Represents a dialog session that represents either a user's input or the
+ * system's response. Displays the text output and the respective user's image,
+ * using a FXML layout.
  *
  * @author SeeuSim
  *         AY22/23-S2 CS2103T
@@ -67,7 +67,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return the User's input as a DialogBox.
+     * Generates and returns the User's input as a DialogBox.
      *
      * @param text The text to display
      * @param img The user's image
@@ -82,7 +82,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return the System's output as a DialogBox.
+     * Generates and returns the System's output as a DialogBox.
      *
      * @param text The text to display
      * @param img The user's image

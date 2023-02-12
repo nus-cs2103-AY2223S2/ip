@@ -12,7 +12,7 @@ import rick.task.DeadlineTask;
 
 
 /**
- * The command to create a Deadline task.
+ * Represents the command that creates a Deadline task.
  *
  * @author SeeuSim
  *     AY2223-S2 CS2103T
@@ -21,7 +21,7 @@ public class DeadlineCommand extends Command {
     private final String slug;
 
     /**
-     * Formats the given slug as a Deadline task. Slugs should be provided in
+     * Constructs this Command with a slug. Slugs should be provided in
      * this format: "{task} /by d/M/yy HHmm"
      *
      * @param slug The provided slug.
@@ -31,14 +31,15 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Formats an empty command.
+     * Constructs this Command with an empty slug..
      */
     public DeadlineCommand() {
         this.slug = "";
     }
 
     /**
-     * Executes this command.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI output.

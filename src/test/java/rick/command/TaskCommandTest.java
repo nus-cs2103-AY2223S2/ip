@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests all commands that insert tasks in the App's storage:
+ * Represents a test suite that tests all commands that insert tasks in the
+ * App's storage:
  * <ul>
  *     <li>{@code DeadlineCommand}</li>
  *     <li>{@code EventCommand}</li>

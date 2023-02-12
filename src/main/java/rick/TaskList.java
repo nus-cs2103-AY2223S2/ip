@@ -14,7 +14,7 @@ import rick.task.RickTask;
 
 
 /**
- * The main store class to store user input into the rick.Rick system.
+ * Represents the main store instance to store user input into the Storage.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -31,8 +31,8 @@ public class TaskList {
     private int id;
 
     /**
-     * Restricted constructor to provide the interface between the Storage and
-     * the rest of the app.
+     * Constructs and returns the TaskList instance with the provided Storage
+     * and Ui instances.
      *
      * @param s The storage instance.
      * @param ui The UI of the app.
@@ -45,7 +45,8 @@ public class TaskList {
     }
 
     /**
-     * Factory method to create TaskList instances.
+     * Generates and returns TaskList instances with the given Storage and Ui
+     * instances.
      *
      * @param s The rick.Storage instance to pass to the Store.
      * @param ui The rick.Ui instance to format output.
@@ -56,7 +57,8 @@ public class TaskList {
     }
 
     /**
-     * Given a Rick.task.RickTask, attempts to add it to the store.
+     * Adds a RickTask instance to the store, and returns the UI to output to
+     * the user.
      *
      * @param input The task to be input.
      * @return The system-generated UI to output to the user.
@@ -82,7 +84,7 @@ public class TaskList {
     }
 
     /**
-     * Given the index of a task in the Store, attempts to mark it as done.
+     * Marks a task as done, and returns the UI to output to the user.
      *
      * @param i The index of the task within the Store.
      * @return The system-generated UI to output to the user.
@@ -102,7 +104,7 @@ public class TaskList {
     }
 
     /**
-     * Given the index of a task in the Store, attempts to mark it as not done.
+     * Marks a task as not done, and returns the UI to output to the user.
      *
      * @param i The index of the task within the Store.
      * @return The system-generated UI to output to the user.
@@ -122,7 +124,7 @@ public class TaskList {
     }
 
     /**
-     * Given the index of a task in the Store, attempts to delete it.
+     * Deletes a task, and returns the UI to output to the user.
      *
      * @param i The index of the task in the Store
      * @return The system-generated UI to output to the user.
@@ -144,8 +146,8 @@ public class TaskList {
     }
 
     /**
-     * Given a date, returns a section that displays all tasks that occur
-     * on that date.
+     * Generates and returns a UI segment that displays all tasks that occur
+     * on the provided date.
      *
      * @param dt The date provided.
      * @return The list of tasks that occur on that date, if any.
@@ -164,7 +166,8 @@ public class TaskList {
     }
 
     /**
-     * Given a search term, retrieves all tasks in the list that contain it.
+     * Generates a UI response that list all tasks in the list that contain the
+     * given search term.
      *
      * @param searchTerm The search term.
      * @return The list of tasks.
@@ -185,7 +188,9 @@ public class TaskList {
     }
 
     /**
-     * Human friendly interpretation of the tasks in the storage.
+     * Generates and returns a human friendly interpretation of the tasks in
+     * the storage.
+     *
      * @return The string interpretation.
      */
     @Override
@@ -194,8 +199,8 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of all tasks in the Storage that fulfil the given
-     * predicate.
+     * Generates and returns a list of all tasks in the Storage that fulfil
+     * the given Predicate.
      *
      * @param p The predicate to filter the Storage by
      * @return The list of tasks.

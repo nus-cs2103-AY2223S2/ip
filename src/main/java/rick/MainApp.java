@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import rick.gui.MainWindow;
 
 /**
- * A GUI for Rick using FXML.
+ * Represents a class that generates a GUI for Rick using FXML.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -21,7 +21,7 @@ public class MainApp extends Application {
     private final Rick rick = new Rick();
 
     /**
-     * The default method to initialize this App's GUI.
+     * Initializes this App's GUI.
      *
      * @param stage The primary stage for this application, onto which
      *              the application scene can be set. Applications may

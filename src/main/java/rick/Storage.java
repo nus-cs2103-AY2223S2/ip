@@ -17,17 +17,16 @@ import java.util.stream.Stream;
 import rick.task.RickTask;
 
 /**
- * A utility class that either accesses existing storage,
- * or creates a new .txt file in storage to store the
- * task data.
+ * Represents a utility that either accesses existing storage, or creates a
+ * new .txt file in storage to store the task data.
  */
 public class Storage {
     private static final String FOLDER_PATH = "data";
-    private static final String FILE_PATH = "data/RICKSBRAIN.TXT";
+    private static final String FILE_PATH = "data/RICKS_BRAIN.TXT";
     private final File store;
 
     /**
-     * Private constructor that initialises the file and folder structure.
+     * Constructs this instance, and initialises the file and folder structure.
      */
     private Storage() {
         //Create directory if it does not yet exist
@@ -54,16 +53,17 @@ public class Storage {
     }
 
     /**
-     * Factory method that creates a RickFileWriter instance.
+     * Generates and returns a Storage instance.
      *
-     * @return The created RickFileWriter.
+     * @return The created Storage instance.
      */
     public static Storage create() {
         return new Storage();
     }
 
     /**
-     * Appends a new record to the end of the file.
+     * Appends a new record to the end of the file, and returns the number of
+     * records contained in the file.
      *
      * @param s The record to be appended.
      * @return The count of records in the store.
@@ -85,7 +85,8 @@ public class Storage {
     }
 
     /**
-     * Modifies a task in the store.
+     * Modifies a task in the store, and returns the current representation of
+     * the Task.
      *
      * @param index The index of the task in the store.
      * @param done The status of the task in the store.
@@ -114,7 +115,7 @@ public class Storage {
     }
 
     /**
-     * Deletes a task in the store.
+     * Deletes a task in the store, and returns the deleted task instance.
      *
      * @param index The index of the task in the store.
      * @return The deleted task.
@@ -136,7 +137,8 @@ public class Storage {
     }
 
     /**
-     * Prints the store's contents as a list, line by line.
+     * Returns the store's contents as a list of newline separated task String
+     * representations.
      *
      * @return The store's contents as a String list.
      */
@@ -167,7 +169,7 @@ public class Storage {
     }
 
     /**
-     * Creates a list of all tasks currently in the storage.
+     * Creates and returns a List of all tasks currently in the storage.
      *
      * @return The list of tasks.
      */
@@ -184,7 +186,8 @@ public class Storage {
     }
 
     /**
-     * Calculates the number of records currently stored in the store.
+     * Calculates and returns the number of records currently stored in the
+     * store.
      *
      * @return The number of records stored.
      */

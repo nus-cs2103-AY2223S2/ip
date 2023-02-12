@@ -1,6 +1,7 @@
 package rick;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,16 +25,15 @@ import rick.exceptions.RickInvalidCommandException;
 import rick.exceptions.RickTaskIndexMissingException;
 import rick.task.RickTask;
 
-
 /**
- * The main class for parsing commands given to the rick.Rick app via the
- * command line.
+ * Represents a utility that parses commands given to the rick.Rick app.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class Parser {
     private static TaskList ts;
+
     /**
      * Sets the TaskList instance for this class.
      * @param ts The TaskList instance.
@@ -43,7 +43,8 @@ public class Parser {
     }
 
     /**
-     * The main access function for creating commands given user input.
+     * Parses commands from the given user input, and returns the Command
+     * instances that can be executed.
      *
      * @param line The user input.
      * @return The parsed command.
@@ -58,7 +59,8 @@ public class Parser {
     }
 
     /**
-     * The main function for parsing commands with one word.
+     * Parses commands with one word, and returns the Command instance to
+     * execute, given the command slug.
      *
      * @param cmd The command given.
      * @return The analysed command.
@@ -89,7 +91,8 @@ public class Parser {
     }
 
     /**
-     * The main function for parsing commands of the following format: `"{command} {param}"`
+     * Parses commands with the format "{command} {param}", and returns the
+     * Command instance to execute, given the command and the parameter.
      *
      * @param cmd The command given.
      * @param param The parameter provided to the command.
@@ -116,12 +119,12 @@ public class Parser {
     }
 
     /**
-     * The main access point for commands that manipulate
-     * tasks in the store.
+     * Parses commands that manipulate tasks in the Storage, and returns the
+     * Command instance to execute, given a command and an access index string.
      *
      * @param cmd The manipulation command.
      * @param param The access index.
-     * @return The analysed command.
+     * @return The generated Command Instance.
      */
     private static Command manipulateCommand(String cmd, String param) {
         String singleIndex = "\\d+";
@@ -149,7 +152,7 @@ public class Parser {
             return manipulateAll(cmd);
         }
         return new ErrorCommand(String.format(
-                "An invalid option was used for the %s command, or invalid"
+                "An invalid option was used for the %s command, or invalid "
                 + "indexes were provided.\n"
                 + "Please try again.",
                 cmd
@@ -157,39 +160,35 @@ public class Parser {
     }
 
     /**
-     * Returns a single command that manipulates individual tasks in the database.
+     * Generates and returns a single command that manipulates individual
+     * tasks in the database, given a command type and a task index.
      *
      * @param cmd The command type to return.
      * @param param The index of the task in the database.
-     * @return The specific Command instance.
+     * @return The executable Command instance.
      */
     private static Command simpleManipulateCommand(String cmd, String param) {
-        try {
-            int idx = Integer.parseInt(param);
-            switch (cmd) {
-            case "mark":
-                return new MarkCommand(idx);
-            case "unmark":
-                return new UnmarkCommand(idx);
-            case "delete":
-                return new DeleteCommand(idx);
-            default:
-                break;
-            }
-        } catch (NumberFormatException e) {
-            return new ErrorCommand(new RickException(
-                    String.format("An invalid index was provided for the %s command."
-                            + " Ensure it is a number!", cmd)
-            ));
+        int idx = Integer.parseInt(param);
+        switch (cmd) {
+        case "mark":
+            return new MarkCommand(idx);
+        case "unmark":
+            return new UnmarkCommand(idx);
+        case "delete":
+            return new DeleteCommand(idx);
+        default:
+            break;
         }
-        assert false; //Execution should not reach this point - this is only
+        //Execution should not reach this point - this is only
         //called for "mark", "unmark", and "delete"
+        assert false;
         return new ErrorCommand("An internal server error occurred");
     }
 
     /**
-     * Returns a Command that manipulates all tasks in the Storage with the
-     * provided indexes.
+     * Generates and returns a Command that manipulates all tasks in the
+     * Storage with the provided indexes, given a command type and a sequence
+     * of indexes.
      *
      * @param cmd The command type.
      * @param indexes The indexes to manipulate. Guaranteed to all be valid
@@ -214,7 +213,8 @@ public class Parser {
     }
 
     /**
-     * Returns a Command that manipulates tasks across a range of task indexes.
+     * Generates and returns a Command that manipulates tasks across a range
+     * of task indexes, given a command type and a range of indexes.
      *
      * @param cmd The command type.
      * @param param The index range.
@@ -255,46 +255,55 @@ public class Parser {
     }
 
     /**
-     * Returns a Command that manipulates all Commands on the given date.
+     * Generates and returns a Command that manipulates all Commands on the
+     * given date, with the given command type.
+     *
      * @param cmd The command type.
      * @param param The date to filter for.
      * @return The list of commands filtered by date, to execute.
      */
     private static Command manipulateDate(String cmd, String param) {
-        String date = param.replaceFirst("(-on|-o|--o)(\\s+)*", "");
-        LocalDate dateTime = RickUtils.parseDate(date);
-        List<RickTask> tasks = Parser.ts
-                .filter(rickTask -> true)
-                .collect(Collectors.toList());
-        ArrayList<Integer> finalIndices = new ArrayList<>();
+        String date = param.replaceFirst("(/on|-o|--o)(\\s+)*", "");
+        try {
+            LocalDate dateTime = RickUtils.parseDate(date);
+            List<RickTask> tasks = Parser.ts
+                    .filter(rickTask -> true)
+                    .collect(Collectors.toList());
+            ArrayList<Integer> finalIndices = new ArrayList<>();
 
-        int counter = 0;
-        for (int i = 0; i < tasks.size(); i++) { //1-indexed
-            if (tasks.get(i).isOnDate(dateTime)) {
-                finalIndices.add(
-                        i + 1 - (cmd.equals("delete") ? counter : 0)
-                );
-                counter++;
+            int counter = 0;
+            for (int i = 0; i < tasks.size(); i++) { //1-indexed
+                if (tasks.get(i).isOnDate(dateTime)) {
+                    finalIndices.add(
+                            i + 1 - (cmd.equals("delete") ? counter : 0)
+                    );
+                    counter++;
+                }
             }
-        }
-        if (finalIndices.size() == 0) {
-            return new ErrorCommand(
-                    "Hooray! No tasks occur on that date."
+            if (finalIndices.size() == 0) {
+                return new ErrorCommand(
+                        "Hooray! No tasks occur on that date."
+                );
+            }
+            return new MultiManipulateCommand(finalIndices, cmd);
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand("An invalid date was supplied.\n"
+                + "Ensure it is of the format d/m/yy.\n"
+                + "Example: 2/2/23 OR 02/02/23"
             );
         }
-        return new MultiManipulateCommand(finalIndices, cmd);
     }
 
     /**
-     * Returns an aggregated Command that manipulates all tasks that contain
-     * the specified String.
+     * Generates and returns an aggregated Command that manipulates all tasks
+     * that contain the specified String, given a command type.
      *
      * @param cmd The command type.
      * @param param The description to filter for.
      * @return The aggregated Command.
      */
     private static Command manipulateContainsString(String cmd, String param) {
-        String searchParam = param.replaceFirst("(-c|--contains|--c)?(\\s+)", "");
+        String searchParam = param.replaceFirst("(/contains|-c|--c)?(\\s+)", "");
         List<RickTask> tasks = Parser.ts
                 .filter(rickTask -> true)
                 .collect(Collectors.toList());
@@ -317,8 +326,8 @@ public class Parser {
     }
 
     /**
-     * Returns a Command that manipulates all tasks in the Storage with the
-     * given command.
+     * Generates and returns a Command that manipulates all tasks in the
+     * Storage with the given command.
      *
      * @param cmd The command type.
      * @return The Command to execute.
@@ -341,5 +350,4 @@ public class Parser {
         }
         return new MultiManipulateCommand(finalIndices, cmd);
     }
-
 }

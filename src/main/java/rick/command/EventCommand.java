@@ -11,7 +11,7 @@ import rick.exceptions.TaskListFullException;
 import rick.task.EventTask;
 
 /**
- * The command that creates an Event task.
+ * Represents the command that creates an Event task.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -20,7 +20,7 @@ public class EventCommand extends Command {
     private final String slug;
 
     /**
-     * Given a valid slug, creates an Event task when executed.
+     * Constructs an Event task when executed, with the provided slug.
      * Slugs are of this format:
      * "{task} /from d/M/yy HHmm /to d/M/yy HHmm"
      *
@@ -31,14 +31,15 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Formats an empty command that raises an Empty Task Exception
+     * Constructs an empty command that raises an Empty Task Exception
      */
     public EventCommand() {
         this.slug = "";
     }
 
     /**
-     * Executes this command.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI output.

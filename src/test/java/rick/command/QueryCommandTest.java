@@ -14,7 +14,8 @@ import rick.task.TodoTask;
 
 
 /**
- * Tests all commands that query tasks in the App's storage:
+ * Represents a test suite that tests all commands that query tasks in the
+ * App's storage:
  * <ul>
  *     <li>{@code DateFilterCommand}</li>
  *     <li>{@code FindCommand}</li>

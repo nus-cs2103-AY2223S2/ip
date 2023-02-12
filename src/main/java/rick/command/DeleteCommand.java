@@ -5,7 +5,7 @@ import rick.Ui;
 import rick.exceptions.TaskListInvalidAccessException;
 
 /**
- * The command to delete a task in the list.
+ * Represents the command that deletes a task in the list.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     private final int idx;
 
     /**
-     * Formats the command with the given storage index.
+     * Constructs the Command with the given storage index.
      *
      * @param idx The provided storage task index.
      */
@@ -23,7 +23,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes this command.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI output.

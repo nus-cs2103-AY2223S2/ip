@@ -4,7 +4,7 @@ import rick.TaskList;
 import rick.Ui;
 
 /**
- * The command to find a task in the list by a given term.
+ * Represents the command that searches for a task in the list by a given term.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     private final String searchTerm;
 
     /**
-     * Initialise this command with the search term.
+     * Constructs this command with the search term.
      *
      * @param s The provided search term.
      */
@@ -22,7 +22,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Execute this task.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The Ui instance.

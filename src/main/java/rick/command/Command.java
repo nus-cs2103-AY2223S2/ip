@@ -4,14 +4,15 @@ import rick.TaskList;
 import rick.Ui;
 
 /**
- * The main abstraction that represents user commands issued to the rick.Rick app.
+ * Represents a user command issued to the rick.Rick app.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public abstract class Command {
     /**
-     * Execute this command with the given TaskList and UI output.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI output.
@@ -20,7 +21,7 @@ public abstract class Command {
     public abstract String execute(TaskList ts, Ui ui);
 
     /**
-     * Indicate if this is the Exit command.
+     * Returns a boolean indicating if this is the Exit command.
      *
      * @return True if it is an Exit command.
      */

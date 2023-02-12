@@ -5,7 +5,7 @@ import rick.Ui;
 import rick.exceptions.TaskListInvalidAccessException;
 
 /**
- * The command that marks a task in the list as completed.
+ * Represents the command that marks a task in the list as completed.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -14,7 +14,7 @@ public class MarkCommand extends Command {
     private final int idx;
 
     /**
-     * Formats this command with the task index.
+     * Constructs this command with the task index.
      *
      * @param idx The index of the task in storage.
      */
@@ -23,7 +23,8 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Executes this task.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI output.

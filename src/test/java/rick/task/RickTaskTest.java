@@ -12,26 +12,28 @@ import rick.RickUtils;
 
 
 /**
- * Tests the static methods of the {@code RickTask} class.
+ * Represents a test suite that tests the static methods of the
+ * {@code RickTask} class.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class RickTaskTest {
     /**
-     * Stub to test the {@code RickTask} abstract class concrete fields and
-     * methods.
+     * Represents a Stub to test the {@code RickTask} abstract class concrete
+     * fields and methods.
      */
     static class TaskStub extends RickTask {
         /**
-         * Instantiates the test stub.
+         * Constructs the test stub instance.
          */
         public TaskStub() {
             super("val");
         }
 
         /**
-         * Indicates if this task falls on the given date.
+         * Generates and returns a boolean indicating if this task falls on
+         * the given date.
          *
          * @param dt The given date.
          * @return The default value for a RickTask without a date.

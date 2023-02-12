@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The class representing a Deadline task.
+ * Represents a Deadline task.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -14,7 +14,7 @@ public class DeadlineTask extends RickTask {
     private final LocalDateTime deadline;
 
     /**
-     * Given a task and a deadline, constructs a Deadline task.
+     * Constructs a Deadline task, when given a task and a deadline.
      *
      * @param task The task to be completed.
      * @param deadline The task's deadline.
@@ -25,7 +25,7 @@ public class DeadlineTask extends RickTask {
     }
 
     /**
-     * Human friendly interpretation of this task.
+     * Generates and returns a human friendly interpretation of this task.
      *
      * @return The task interpretation.
      */
@@ -37,7 +37,7 @@ public class DeadlineTask extends RickTask {
     }
 
     /**
-     * Indicate if this task falls on the given date.
+     * Returns a boolean indicating if this task falls on the given date.
      *
      * @param dtParsed The given date.
      * @return The indicative boolean.
@@ -48,7 +48,8 @@ public class DeadlineTask extends RickTask {
     }
 
     /**
-     * Formats this task into a format for storage in the Storage class.
+     * Formats this task into a format for storage in the Storage class, and
+     * returns the schema format.
      *
      * @return The formatted task.
      */

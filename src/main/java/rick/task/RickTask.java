@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import rick.RickUtils;
 
 /**
- * The abstraction behind the tasks stored by the rick.Rick chat-bot.
+ * Represents a template for the Tasks stored by the Rick class.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -15,8 +15,7 @@ public abstract class RickTask {
     private final String value;
 
     /**
-     * Provides a base constructor common to all task implementations that
-     * stores a task and if it is done.
+     * Constructs a Task instance.
      *
      * @param val The task to be completed.
      */
@@ -25,21 +24,21 @@ public abstract class RickTask {
     }
 
     /**
-     * Indicate that this task is done.
+     * Modifies this task instance to indicate that it is done.
      */
     public void setDone() {
         this.isDone = true;
     }
 
     /**
-     * Indicate that this task is not done.
+     * Modifies this task instance to indicate that it is not done.
      */
     public void markUndone() {
         this.isDone = false;
     }
 
     /**
-     * Human friendly interpretation of this task.
+     * Generates and returns a human friendly interpretation of this task.
      *
      * @return The task interpretation.
      */
@@ -52,7 +51,7 @@ public abstract class RickTask {
 
     /**
      * Formats this task as a "|" separated string to be stored
-     * in a file storage.
+     * in a file storage, and returns the formatted schema.
      *
      * @return The formatted string.
      */
@@ -65,8 +64,8 @@ public abstract class RickTask {
     }
 
     /**
-     * Given an object read from the file storage, parses it
-     * and returns the appropriate task.
+     * Parses an object read from the file storage,
+     * and returns the task it represents.
      *
      * @param o The object read from file storage.
      * @return The corresponding task record.
@@ -103,7 +102,9 @@ public abstract class RickTask {
     }
 
     /**
-     * Indicate if this task's description contains the given term.
+     * Return a boolean indicating if this task's description contains the
+     * given term.
+     *
      * @param term The provided term.
      * @return The indicative boolean.
      */
@@ -112,7 +113,7 @@ public abstract class RickTask {
     }
 
     /**
-     * Indicate if this task falls on the given date.
+     * Returns a boolean indicating if this task falls on the given date.
      *
      * @param dt The given date.
      * @return The indicative boolean.

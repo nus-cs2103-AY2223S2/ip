@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The class representing an Event task.
+ * Represents an Event task.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -15,7 +15,9 @@ public class EventTask extends RickTask {
     private final LocalDateTime to;
 
     /**
-     * The default constructor for this Task.
+     * Constructs this Task, given a description and the dates between which
+     * this task occurs.
+     *
      * @param task The task description.
      * @param from The event start dateTime
      * @param to The event end dateTime
@@ -27,7 +29,7 @@ public class EventTask extends RickTask {
     }
 
     /**
-     * Human friendly interpretation of this task.
+     * Generates and returns a human friendly interpretation of this task.
      *
      * @return The task interpretation.
      */
@@ -40,7 +42,7 @@ public class EventTask extends RickTask {
     }
 
     /**
-     * Indicate if this task falls on the given date.
+     * Returns a boolean indicating if this task falls on the given date.
      *
      * @param dtParsed The given date.
      * @return The indicative boolean.
@@ -53,7 +55,8 @@ public class EventTask extends RickTask {
     }
 
     /**
-     * Formats this task into a format for storage in the Storage class.
+     * Formats this task into a format for storage in the Storage class, and
+     * returns the formatted schema.
      *
      * @return The formatted task.
      */

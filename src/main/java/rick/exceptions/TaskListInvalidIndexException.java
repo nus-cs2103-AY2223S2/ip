@@ -1,8 +1,8 @@
 package rick.exceptions;
 
 /**
- * The Exception indicating that an invalid index was provided to access the
- * database.
+ * Represents the exception indicating that an invalid index was provided to
+ * access the database.
  *
  * @author SeeuSim
  *         AY22/23-S2 CS2103T

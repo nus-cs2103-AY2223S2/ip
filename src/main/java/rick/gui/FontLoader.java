@@ -7,7 +7,8 @@ import javafx.scene.text.Font;
 import rick.MainApp;
 
 /**
- * Interface that loads font resources from the `resources` folder.
+ * Represents the interface that loads font resources from the `resources`
+ * folder.
  *
  * @author SeeuSim
  *         AY22/23S2-CS2103T
@@ -17,7 +18,7 @@ public class FontLoader {
     private static final String FONT_FOLDER = "/fonts/Open_Sans/static";
 
     /**
-     * The style of font to return.
+     * Represents the style of font to return.
      */
     enum FontStyle {
         BOLD("/OpenSans/OpenSans-Bold.ttf"),
@@ -29,7 +30,7 @@ public class FontLoader {
         private final String path;
 
         /**
-         * Initialise the Enum value with the path.
+         * Initialises the Enum value with the given path.
          * @param path The file path to the font file.
          */
         FontStyle(String path) {
@@ -37,7 +38,7 @@ public class FontLoader {
         }
 
         /**
-         * Generates the font file path value.
+         * Generates and returns the font file path value.
          * @return The font file path.
          */
         public String getPath() {

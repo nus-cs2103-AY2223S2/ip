@@ -7,7 +7,7 @@ import rick.exceptions.TaskListFullException;
 import rick.task.TodoTask;
 
 /**
- * The command that creates a Todo task.
+ * Represents the command that creates a Todo task.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
@@ -16,7 +16,7 @@ public class TodoCommand extends Command {
     private final String task;
 
     /**
-     * Given a task description, creates a Todo Task when executed.
+     * Constructs a Command instance when given the task description.
      *
      * @param task The task description to store.
      */
@@ -25,14 +25,15 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Formats this as a task with an empty description.
+     * Constructs a Command with an empty description.
      */
     public TodoCommand() {
         this.task = "";
     }
 
     /**
-     * Executes this task.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI instance.

@@ -4,8 +4,8 @@ import rick.TaskList;
 import rick.exceptions.RickException;
 
 /**
- * Given a parameter of type T, attempts an operation on a TaskList instance
- * and returns a value of type R.
+ * Represents a Function that, when given a parameter of type T, attempts an
+ * operation on a TaskList instance and returns a value of type R.
  *
  * @author SeeuSim
  *         AY22/23-S2 CS2103T

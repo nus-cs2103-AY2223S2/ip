@@ -1,7 +1,7 @@
 package rick.exceptions;
 
 /**
- * The main exception class for this app.
+ * Represents the main exception class for this app.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T

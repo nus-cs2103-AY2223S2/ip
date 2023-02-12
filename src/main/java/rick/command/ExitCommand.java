@@ -4,14 +4,15 @@ import rick.TaskList;
 import rick.Ui;
 
 /**
- * The command that exits the rick.Rick app.
+ * Represents the command that exits the rick.Rick app.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
  */
 public class ExitCommand extends Command {
     /**
-     * Executes this command.
+     * Executes this command with the given TaskList and UI output, and
+     * returns the UI to output to the user.
      *
      * @param ts The TaskList instance.
      * @param ui The UI output.
@@ -22,7 +23,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Indicate that this is an Exit command.
+     * Returns a boolean indicating that this is an Exit command.
      * @return True.
      */
     @Override

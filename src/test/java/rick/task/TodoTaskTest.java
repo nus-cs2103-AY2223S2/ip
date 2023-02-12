@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import rick.RickUtils;
 
 /**
- * Tests the {@code TodoTask} class.
+ * Represents a test suite that tests the {@code TodoTask} class.
  *
  * @author SeeuSim
  *         AY2223-S2 CS2103T
