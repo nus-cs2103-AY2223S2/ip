@@ -38,7 +38,7 @@ Adds a ToDo &mdash; a task that does not have a deadline.
 - `todo learn hiragana`
 - `todo week 6 iP tasks`
 
-Expected outcome:
+#### Expected outcome
 
 ```
 Got it. I've added this task:
@@ -63,7 +63,7 @@ Adds a Deadline &mdash; a task that has a deadline date.
 - `deadline submit iP /by 2023-02-17 23:59`
 - `deadline katakana practice /by 2023-03-01 14:00`
 
-Expected outcome:
+#### Expected outcome
 
 ```
 Got it. I've added this task:
@@ -88,7 +88,7 @@ Adds an Event &mdash; a task that has a start date and end date.
 - `event tP meeting /from 2023-01-13 16:00 /to 2023-01-13 18:00`
 - `event cmang's birthday party /from 2023-03-12 17:00 /to 2023-03-12 19:00`
 
-Expected outcome:
+#### Expected outcome
 
 ```
 Got it. I've added this task:
@@ -97,3 +97,180 @@ Got it. I've added this task:
 Note:
 Now you have 6 tasks in the list.
 ```
+
+## Section B: View tasks
+
+### `list`
+
+#### Function
+Lists all the tasks stored by Kuromi.
+
+#### Format
+- `list`
+
+#### Expected outcome
+
+```
+Here are the tasks in your list:
+1. [T][] borrow book
+2. [D][] return book (by: 2030-01-01 10:30)
+3. [E][] project meeting (from: 2030-01-01 10:30 to: 2030-01-01 12:30)
+-----
+Note:
+Please finish the tasks soon -_-
+```
+
+## Section C: Edit task
+
+### 1. `mark`
+
+#### Function
+Mark the task with the index specified as done.
+
+#### Format
+- `mark <index>`
+
+#### Example of usage
+
+- `mark 1`
+
+#### Expected outcome
+
+```
+Nice! I've marked this task as done:
+[T][X] borrow book
+-----
+Note:
+You finally finished the task! :D
+```
+
+### 2. `unmark`
+
+#### Function
+Mark the task with the index specified as undone.
+
+#### Format
+- `unmark <index>`
+
+#### Example of usage
+- `unmark 1`
+
+#### Expected outcome
+
+```
+OK, I've marked this task as not done yet:
+[T][] borrow book
+-----
+Note:
+Please do the task soon -_-
+```
+
+## Section D: Delete task
+
+### `delete`
+
+#### Function
+Delete the task with the index specified.
+
+#### Format
+`delete <index>`
+
+#### Example of usage
+`delete 1`
+
+#### Expected outcome
+
+```
+Noted. I've removed this task:
+[T][X] borrow book
+-----
+Note:
+Now you have 5 tasks in the list.
+```
+
+## Section E: Find keyword
+
+### `find`
+
+#### Function
+Find tasks with descriptions that contain the keyword. Keyword may be a partial word or a full word.
+
+#### Format
+- `find <keyword>`
+- `<keyword>` format: 1 word
+
+#### Example of usage
+- `find bo`
+- `find book`
+
+#### Expected outcome
+
+```
+Here are the matching tasks in your list:
+1. [D][] return book (by: 2030-01-01 10:30)
+```
+
+## Section F: Reminder
+
+### `remind`
+
+#### Function
+Get a reminder of the upcoming tasks. ToDo tasks will be least prioritised because they don't have an end date.
+
+#### Format
+- `remind` &mdash; lists upcoming 5 tasks
+- `remind <number_of_tasks>` &mdash; lists upcoming <number_of_tasks> tasks
+
+#### Example of usage
+- `remind`
+- `remind 3`
+
+#### Expected outcome
+
+```
+Here are your upcoming 3 tasks:
+1. [E][] project meeting (from: 2023-02-13 16:00 to: 2023-02-13 18:00)
+2. [D][] iP (by: 2023-02-17 23:59)
+3. [D][] return book (by: 2030-01-01 10:30)
+-----
+Note:
+I know you won't finish the tasks on time :D
+```
+
+## Section G: List available commands
+
+### `help`
+
+#### Function
+Get a list of available commands that Kuromi understands.
+
+#### Format
+- `help`
+
+## Section 7: Exit the application
+
+### `bye`
+
+#### Function
+Ends the conversation with Kuromi and closes the application windw.
+
+#### Format
+- `bye`
+
+#### Expected outcome
+```
+Bye Melody. Hope to see you again soon!
+-----
+Note:
+You're annoying but I'll definitely miss you :D
+```
+
+## Section 8: Miscellanous
+
+### 1. List My Melody's mistakes
+
+#### Function
+Shows Kuromi's notebook `Kuromi Note` that contains a list of My Melody's mistakes.
+
+#### Format
+- `mistakes`
