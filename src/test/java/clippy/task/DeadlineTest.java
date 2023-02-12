@@ -14,12 +14,12 @@ public class DeadlineTest {
     @Test
     void toStringFormatTest() {
         Deadline deadline = createTestDeadline();
-        assertEquals("[D][ ] return books (by: Thu 12 Jan)", deadline.toString());
+        assertEquals("[D][ ] return books (Priority: NONE) (by: Thu 12 Jan)", deadline.toString());
     }
 
     @Test
     void getCsvStringTest() {
         Deadline deadline = createTestDeadline();
-        assertEquals("D,return books,false,2023-01-12", deadline.getCsvString());
+        assertEquals("D,return books,false,NONE,2023-01-12", deadline.getCsvString());
     }
 }

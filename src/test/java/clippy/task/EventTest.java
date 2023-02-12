@@ -15,12 +15,13 @@ public class EventTest {
     @Test
     void toStringFormatTest() {
         Event event = createTestEvent();
-        assertEquals("[E][ ] Lunar New Year (from: Sun 22 Jan to: Mon 06 Feb)", event.toString());
+        assertEquals("[E][ ] Lunar New Year (Priority: NONE) "
+                + "(from: Sun 22 Jan to: Mon 06 Feb)", event.toString());
     }
 
     @Test
     void getCsvStringTest() {
         Event event = createTestEvent();
-        assertEquals("E,Lunar New Year,false,2023-01-22,2023-02-06", event.getCsvString());
+        assertEquals("E,Lunar New Year,false,NONE,2023-01-22,2023-02-06", event.getCsvString());
     }
 }

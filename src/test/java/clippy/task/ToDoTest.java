@@ -12,12 +12,12 @@ public class ToDoTest {
     @Test
     void toStringFormatTest() {
         ToDo todo = createTestToDo();
-        assertEquals("[T][ ] read book", todo.toString());
+        assertEquals("[T][ ] read book (Priority: NONE)", todo.toString());
     }
 
     @Test
     void getCsvStringTest() {
         ToDo todo = createTestToDo();
-        assertEquals("T,read book,false", todo.getCsvString());
+        assertEquals("T,read book,false,NONE", todo.getCsvString());
     }
 }
