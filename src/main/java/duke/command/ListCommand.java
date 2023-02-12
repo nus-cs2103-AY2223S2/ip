@@ -29,6 +29,9 @@ public class ListCommand extends Command {
      * @return List of tasks.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (tasks.size() == 0) {
+            return ui.noTask();
+        }
         return ui.showList(tasks);
     }
 }

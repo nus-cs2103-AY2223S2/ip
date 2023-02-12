@@ -72,6 +72,15 @@ public class Ui {
     }
 
     /**
+     * Method to let the user know that
+     * there are currently no task in the list.
+     * @return No task message.
+     */
+    public String noTask() {
+        return "There are currently no tasks in your list!";
+    }
+
+    /**
      * Method that prints to console the tasks
      * with descriptions that contains the
      * targeted word.
@@ -236,6 +245,7 @@ public class Ui {
     public String updateTag(TaskList tasks, int index) {
         return "Ok, I've added 1 new tag to the task:\n"
                 + tasks.get(index).toString()
+                + " "
                 + tasks.get(index).listTag()
                 + "\n";
     }
