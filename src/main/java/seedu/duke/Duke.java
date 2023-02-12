@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The Duke chatbot
+ * The Duke chatbot.
  */
 public class Duke extends Application {
 
@@ -167,6 +167,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
+        assert input != null : "No input given";
         return parser.parse(input, todolist, storage);
     }
 

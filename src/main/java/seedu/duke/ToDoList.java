@@ -23,10 +23,6 @@ public class ToDoList {
         String res = "\tTasks for Tony Stark:\n";
         res += "\t--------------------------\n";
         for (int i = 0; i < count; i++) {
-            /*
-            System.out.println("\t" + (i + 1) + "."
-                    + todolist.get(i).printTask());
-            */
             String temp = "\t" + (i + 1) + todolist.get(i).printTask() + "\n";
             res += temp;
         }
