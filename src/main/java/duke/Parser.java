@@ -96,14 +96,6 @@ class Parser {
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
     }
 
-    /*
-    static TaskList<Task> mark(String command, TaskList<Task> tasks, boolean isUi) {
-        int taskPosition = Integer.parseInt(command.substring(Math.max(command.length() - 1, 0))) - DECREMENT;
-        System.out.println(MARK_COMMAND + tasks.get(taskPosition));
-        return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
-    }
-    */
-
     /**
      * Process the saved tasks that were marked as undone. It will display
      * the command Alex Furguson (Duke) says and mark the corresponding task as undone
