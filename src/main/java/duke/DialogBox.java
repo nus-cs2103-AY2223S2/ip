@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final Circle clip = new Circle(50, 50, 50);
+    private final Circle clip = new Circle(25, 25, 25);
 
     private DialogBox(String text, Image img) {
         try {
@@ -52,12 +53,19 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(Image img, String text) {
+        var db = new DialogBox(text, img);
+        db.dialog.styleProperty().set("-fx-background-color: #0088CC;");
+        return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(Image img, String text, boolean isError) {
         var db = new DialogBox(text, img);
+        if (isError) {
+            db.dialog.styleProperty().set("-fx-background-color: #ef5b5b;");
+        } else {
+            db.dialog.styleProperty().set("-fx-background-color: #333333;");
+        }
         db.flip();
         return db;
     }
