@@ -1,5 +1,7 @@
 package duke.command;
 
+import static duke.command.CommandValidations.validateNotEmptyArgs;
+
 import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -21,6 +23,19 @@ public class FindCommand extends Command {
     public FindCommand(TaskList taskList, String... keywords) {
         this.taskList = taskList;
         this.keywords = keywords;
+    }
+
+    /**
+     * Factory method to create find command from user input string
+     * @param inputString The mentioned input string from user.
+     * @param taskList TaskList of Duke's tasks.
+     * @return An instance of FindCommand.
+     */
+    public static FindCommand createFindCommand(String inputString, TaskList taskList) throws DukeException {
+        validateNotEmptyArgs(inputString);
+        String keywords = inputString.substring(5);
+
+        return new FindCommand(taskList, keywords.split(" "));
     }
 
     @Override

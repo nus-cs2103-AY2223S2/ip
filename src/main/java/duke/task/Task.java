@@ -56,7 +56,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Serialise task to be saved in local storage.
+     * Returns a string representation suitable to be saved in local storage.
      * @return Serialised string of this task.
      */
     public String serialise() {
@@ -77,11 +77,17 @@ public class Task implements Comparable<Task> {
         return new Task(taskDesc, taskDone);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(Task task) {
         return 0;

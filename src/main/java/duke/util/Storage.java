@@ -59,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * Loads the task data from local storage.
+     * Returns an array of tasks loaded from local storage.
      * @return Array of Task.
      */
     public Task[] load() throws DukeException {

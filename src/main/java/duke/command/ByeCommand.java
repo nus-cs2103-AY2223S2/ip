@@ -8,6 +8,16 @@ import duke.DukeException;
  */
 public class ByeCommand extends Command {
 
+    private ByeCommand() {}
+
+    /**
+     * Factory method to create bye command
+     * @return An instance of ByeCommand.
+     */
+    public static ByeCommand createByeCommand() {
+        return new ByeCommand();
+    }
+
     @Override
     public String execute() throws DukeException {
         return "Till next time...";

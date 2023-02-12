@@ -16,8 +16,17 @@ public class ListCommand extends Command {
      * Displays the tasks in the current task list.
      * @param taskList TaskList of Duke's tasks.
      */
-    public ListCommand(TaskList taskList) {
+    private ListCommand(TaskList taskList) {
         this.taskList = taskList;
+    }
+
+    /**
+     * Factory method to create list command from user input string
+     * @param taskList TaskList of Duke's tasks.
+     * @return An instance of ListCommand.
+     */
+    public static ListCommand createListCommand(TaskList taskList) {
+        return new ListCommand(taskList);
     }
 
     @Override

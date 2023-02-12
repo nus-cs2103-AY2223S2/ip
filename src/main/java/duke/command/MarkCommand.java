@@ -1,5 +1,8 @@
 package duke.command;
 
+import static duke.command.CommandValidations.validateNotEmptyArgs;
+import static duke.command.CommandValidations.validateTaskIndex;
+
 import duke.DukeException;
 import duke.task.TaskList;
 
@@ -20,10 +23,26 @@ public class MarkCommand extends Command {
      * @param taskIndex Index of the task in the task list.
      * @param isDone Completion status of the task.
      */
-    public MarkCommand(TaskList taskList, int taskIndex, boolean isDone) {
+    private MarkCommand(TaskList taskList, int taskIndex, boolean isDone) {
         this.taskList = taskList;
         this.taskIndex = taskIndex;
         this.isDone = isDone;
+    }
+
+    /**
+     * Factory method to create mark command from user input string
+     * @param inputString The mentioned input string from user.
+     * @param taskList TaskList of Duke's tasks.
+     * @param isDone Completion status of the task.
+     * @return An instance of MarkCommand.
+     */
+    public static MarkCommand createMarkCommand(String inputString, TaskList taskList, boolean isDone)
+            throws DukeException {
+        validateNotEmptyArgs(inputString);
+        int taskIndex = Integer.parseInt(inputString.split(" ")[1]) - 1;
+        validateTaskIndex(taskIndex, taskList);
+
+        return new MarkCommand(taskList, taskIndex, isDone);
     }
 
     @Override

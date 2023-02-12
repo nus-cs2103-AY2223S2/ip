@@ -15,6 +15,9 @@ public class DukeException extends Exception {
         this.message = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return String.format("%s", message);

@@ -8,22 +8,38 @@ import duke.task.Task;
  */
 public class Ui {
 
+    private static Ui instance;
+
+    private Ui() {}
+
     /**
-     * Displays an error message that data loading failed.
+     * Get the Ui instance.
+     * @return An instance of Ui.
+     */
+    public static Ui getUi() {
+        if (Ui.instance == null) {
+            Ui.instance = new Ui();
+        }
+
+        return instance;
+    }
+
+    /**
+     * Returns the error message that data loading failed.
      */
     public String showLoadingError() {
         return "Failed to load data file!";
     }
 
     /**
-     * Displays a message that the task data has been stored successfully.
+     * Returns the message that the task data has been stored successfully.
      */
     public String showSavedDataMessage() {
         return "Your tasks is now safely stored.";
     }
 
     /**
-     * Displays a welcome message.
+     * Returns the welcome message.
      */
     public String showWelcomeMessage() {
         String logo = "______     ______     __     __    \n"
@@ -37,7 +53,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message and the task created.
+     * Returns the message and the task created.
      *
      * @param task The created Task.
      */
@@ -48,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message that a task has been deleted.
+     * Returns the message that a task has been deleted.
      */
     public String showTaskDeletedMessage() {
         return "Task deleted. Are you skipping on work again?";

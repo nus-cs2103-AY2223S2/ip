@@ -51,8 +51,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Serialise task to be saved in local storage.
-     * @return Serialised string of this task.
+     * {@inheritDoc}
      */
     @Override
     public String serialise() {
@@ -101,6 +100,9 @@ public class EventTask extends Task {
         return new EventTask(taskDesc, taskDone, taskFrom, taskTo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String fromString = from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));

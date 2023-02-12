@@ -1,11 +1,12 @@
 package duke.command;
 
+import static duke.util.Ui.getUi;
+
 import java.io.IOException;
 
 import duke.DukeException;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * A command to save all current tasks to the disk.
@@ -15,26 +16,35 @@ public class SaveCommand extends Command {
 
     private final TaskList taskList;
     private final Storage storage;
-    private final Ui ui;
 
     /**
      * Constructor for SaveCommand.
      * Saves the tasks to local storage.
      * @param taskList TaskList of Duke's tasks.
      * @param storage Storage instance of Duke.
-     * @param ui Ui instance of Duke.
      */
-    public SaveCommand(TaskList taskList, Storage storage, Ui ui) {
+    public SaveCommand(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
-        this.ui = ui;
+    }
+
+    /**
+     * Factory method to create save command from user input string
+     * @param inputString The mentioned input string from user.
+     * @param taskList TaskList of Duke's tasks.
+     * @param storage Storage of Duke.
+     * @return An instance of SaveCommand.
+     */
+    public static SaveCommand createSaveCommand(String inputString, TaskList taskList, Storage storage)
+            throws DukeException {
+        return new SaveCommand(taskList, storage);
     }
 
     @Override
     public String execute() throws DukeException {
         try {
             storage.save(taskList);
-            return ui.showSavedDataMessage();
+            return getUi().showSavedDataMessage();
         } catch (IOException e) {
             return "Arii can't access your files... Fix your system first.";
         }

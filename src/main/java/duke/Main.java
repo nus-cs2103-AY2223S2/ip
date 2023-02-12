@@ -13,8 +13,29 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke("./data/data.txt");
+    private static final String DEFAULT_SAVE_PATH = "./data/data.txt";
 
+    private final Duke duke;
+
+    /**
+     * Constructor for Main, given a save data location.
+     * @param savePath File path for saved data.
+     */
+    public Main(String savePath) {
+        duke = new Duke(savePath);
+    }
+
+    /**
+     * Constructor for Main, given no save data location.
+     * Uses default save path.
+     */
+    public Main() {
+        this(DEFAULT_SAVE_PATH);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(Stage stage) {
         try {

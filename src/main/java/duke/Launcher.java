@@ -9,8 +9,8 @@ import javafx.application.Application;
 public class Launcher {
 
     /**
-     * Entry point for Duke GUI.
-     * @param args Arguments passed into Main class.
+     * Entry point for Arii chatbot.
+     * @param args Not used currently.
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);

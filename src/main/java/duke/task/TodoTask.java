@@ -27,8 +27,7 @@ public class TodoTask extends Task {
     }
 
     /**
-     * Serialise task to be saved in local storage.
-     * @return Serialised string of this task.
+     * {@inheritDoc}
      */
     @Override
     public String serialise() {
@@ -53,6 +52,9 @@ public class TodoTask extends Task {
         return new TodoTask(taskDesc, taskDone);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

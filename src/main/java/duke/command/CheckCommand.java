@@ -1,5 +1,7 @@
 package duke.command;
 
+import static duke.command.CommandValidations.validateNotEmptyArgs;
+
 import java.time.LocalDate;
 
 import duke.DukeException;
@@ -26,6 +28,20 @@ public class CheckCommand extends Command {
     public CheckCommand(TaskList taskList, LocalDate targetDate) {
         this.taskList = taskList;
         this.targetDate = targetDate;
+    }
+
+    /**
+     * Factory method to create check command from user input string
+     * @param inputString The mentioned input string from user.
+     * @param taskList TaskList of Duke's tasks.
+     * @return An instance of CheckCommand.
+     */
+    public static CheckCommand createCheckCommand(String inputString, TaskList taskList) throws DukeException {
+        validateNotEmptyArgs(inputString);
+        String dueArgs = inputString.substring(6);
+        LocalDate targetDate = LocalDate.parse(dueArgs);
+
+        return new CheckCommand(taskList, targetDate);
     }
 
     @Override

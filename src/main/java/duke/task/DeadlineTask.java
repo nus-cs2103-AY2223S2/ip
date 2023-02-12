@@ -65,8 +65,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Serialise task to be saved in local storage.
-     * @return Serialised string of this task.
+     * {@inheritDoc}
      */
     @Override
     public String serialise() {
@@ -93,6 +92,9 @@ public class DeadlineTask extends Task {
         return new DeadlineTask(taskDesc, taskDone, taskBy);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String byString = by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
