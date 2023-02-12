@@ -2,12 +2,19 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Represents a Duke object, Main Class of this application.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Class constructor.
+     * @param filePath Location of saved task list.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.tasks = new TaskList();
@@ -19,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start the programme
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -38,6 +48,9 @@ public class Duke {
         storage.write(this.tasks);
     }
 
+    /**
+     * Execute the programme
+     */
     public static void main(String[] args) {
         new Duke("saved_tasks_list.txt").run();
     }

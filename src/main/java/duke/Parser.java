@@ -10,14 +10,30 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.UpdateCommand;
 
-
+/**
+ * Represents a parser which converts CLI into a Command object.
+ * Checks for format of CLI, throws exceptions to alert any incorrect input format.
+ */
 public class Parser {
     protected static String[] commands = {"bye", "list", "mark", "unmark", "delete", "todo", "deadline", "event"};
 
+    /**
+     * Checks if the input command is one of the acceptable commands.
+     * @param commandName Input command name.
+     * @return ture if input command is valid.
+     */
     public static boolean isValidCommand(String commandName) {
         return Arrays.asList(commands).contains(commandName);
     }
 
+    /**
+     * Parses user's input into a Command object.
+     * Throws exceptions if the input has incorrect format.
+     * @param fullcommand User's input.
+     * @param ui Ui to show messages.
+     * @return A Command object which contains information corresponds to the user's input.
+     * @throws DukeException
+     */
     public static Command parse(String fullcommand, Ui ui) throws DukeException {
         int firstWord = fullcommand.length() - 1;
         String commandName;

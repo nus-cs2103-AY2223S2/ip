@@ -15,14 +15,27 @@ import duke.task.Task;
 import duke.task.Todo;
 
 
-// Storage: provides the place to store the file
+/**
+ * Represents a storage of task list.
+ * The main programme reads and writes the task list in disk through the storage.
+ */
 public class Storage {
 
     protected File savedTasks;
+
+    /**
+     * Class constructor.
+     * @param filePath Location of the saved task list in disk.
+     */
     public Storage(String filePath) {
         this.savedTasks = new File(filePath);
     }
 
+    /**
+     * Loads the saved task list.
+     * @return An arraylist of saved tasks.
+     * @throws DukeException when target file is not found at the given location / tasks saved are of incorrect format.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -62,6 +75,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the current task list into the file at given location
+     * @param tasks Current task list.
+     */
     public void write(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter("saved_tasks_list.txt");
