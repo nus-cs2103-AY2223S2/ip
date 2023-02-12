@@ -6,6 +6,9 @@ import java.util.ArrayList;
  * A list of tasks
  */
 public class TasksList {
+    /**
+     * Array list of tasks
+     */
     private ArrayList<Tasks> list;
     
     /**

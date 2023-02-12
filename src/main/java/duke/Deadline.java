@@ -9,6 +9,9 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Tasks {
 
+    /**
+     * Date and Time of the deadline with the format dd/MM/yyy HHmm
+     */
     protected LocalDateTime by;
 
     /**
@@ -29,7 +32,7 @@ public class Deadline extends Tasks {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " 
-        + this.by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ")";
+            + this.by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)) + ")";
     }
 
     /**

@@ -4,7 +4,14 @@ package duke;
  * Tasks is an object that is to be done or undertaken by the user
  */
 public class Tasks {
+    
+    /**
+     * description of the task
+     */
     protected String description;
+    /**
+     * boolean that indicates whether a task has been completed
+     */
     protected boolean isDone;
 
     /**

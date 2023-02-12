@@ -4,7 +4,7 @@ package duke;
  * Todo is a task that inherits Tasks, it represents a task that
  * you are supposed to complete
  */
-public class Todo extends Tasks{
+public class Todo extends Tasks {
 
     /**
      * Returns a Todo object that inherits the Tasks Class it is a certain

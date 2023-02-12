@@ -50,12 +50,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-
-    //@FXML
-    public void greet() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("hello", dukeImage)
-        );
-        userInput.clear();
-    }
 }
