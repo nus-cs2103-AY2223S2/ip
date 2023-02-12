@@ -20,6 +20,12 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Dialog box constructor.
+     *
+     * @param l the dialog text
+     * @param iv the avatar image
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -46,10 +52,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Retrieves ui for user's dialog.
+     *
+     * @param l dialog text
+     * @param iv avatar image
+     * @return The ui component for user's dialog.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Retrieves ui for duke's dialog.
+     *
+     * @param l dialog text
+     * @param iv avatar image
+     * @return The ui component for duke's dialog.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

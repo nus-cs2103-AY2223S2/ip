@@ -30,10 +30,20 @@ public class Gui {
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Gui constructor.
+     *
+     * @param parseAndRespond the handler for user request
+     */
     public Gui(Function<String, String> parseAndRespond) {
         this.parseAndRespond = parseAndRespond;
     }
 
+    /**
+     * Sets up the JavaFX stage.
+     *
+     * @param stage the stage to be updated
+     */
     public void start(Stage stage) {
         //Step 1. Setting up required components
 
@@ -97,9 +107,7 @@ public class Gui {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input in the program.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());

@@ -2,6 +2,9 @@ package command;
 
 import storage.TaskList;
 
+/**
+ * Command abstract class to handle interactions with database.
+ */
 public abstract class Command {
     /**
      * Processes the command and return a reply.

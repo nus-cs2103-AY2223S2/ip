@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-
 import storage.TaskList;
 import task.Deadline;
 import task.Event;
@@ -27,9 +26,9 @@ public class OnCommand extends Command {
 
     @Override
     public String run(TaskList taskList) {
-        ArrayList<Task> taskOnQueryDate = new ArrayList<>(taskList.indexTask().stream().filter(task ->
-                        (task instanceof Deadline && ((Deadline) task).daysToDeadline(this.queryDate) == 0) ||
-                                (task instanceof Event && ((Event) task).daysToEvent(this.queryDate) == 0))
+        ArrayList<Task> taskOnQueryDate = new ArrayList<>(taskList.indexTask().stream().filter(task -> (
+                        task instanceof Deadline && ((Deadline) task).daysToDeadline(this.queryDate) == 0)
+                        || (task instanceof Event && ((Event) task).daysToEvent(this.queryDate) == 0))
                 .collect(Collectors.toList()));
 
         if (taskOnQueryDate.size() == 0) {

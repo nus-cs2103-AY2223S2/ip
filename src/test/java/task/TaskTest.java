@@ -13,8 +13,8 @@ public class TaskTest {
         truthyTask.markCompleted();
 
         boolean[] actual = {
-            falsyTask.isCompleted,
-            truthyTask.isCompleted
+            falsyTask.getIsCompleted(),
+            truthyTask.getIsCompleted()
         };
 
         boolean[] expected = {
@@ -34,8 +34,8 @@ public class TaskTest {
         truthyTask.unmarkCompleted();
 
         boolean[] actual = {
-            falsyTask.isCompleted,
-            truthyTask.isCompleted
+            falsyTask.getIsCompleted(),
+            truthyTask.getIsCompleted()
         };
 
         boolean[] expected = {

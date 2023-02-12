@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 import storage.TaskList;
 import task.Task;
 
+/**
+ * Command component that executes a find command.
+ */
 public class FindCommand extends Command {
     private String query;
 

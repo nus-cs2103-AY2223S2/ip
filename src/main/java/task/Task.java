@@ -3,10 +3,19 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task component abstract class.
+ */
 public abstract class Task {
-    String task;
-    boolean isCompleted;
+    private String task;
+    private boolean isCompleted;
 
+    /**
+     * Task constructor.
+     *
+     * @param task a task string
+     * @param isCompleted the completion status
+     */
     public Task(String task, boolean isCompleted) {
         this.task = task;
         this.isCompleted = isCompleted;
@@ -19,6 +28,15 @@ public abstract class Task {
      */
     public String getTask() {
         return this.task;
+    }
+
+    /**
+     * Retrieves the completion status.
+     *
+     * @return Whether the task is completed.
+     */
+    public boolean getIsCompleted() {
+        return this.isCompleted;
     }
 
     /**

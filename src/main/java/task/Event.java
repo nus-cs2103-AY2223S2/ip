@@ -10,12 +10,27 @@ public class Event extends Task {
     private LocalDate startTime;
     private LocalDate endTime;
 
+    /**
+     * Event constructor.
+     *
+     * @param task a task string
+     * @param startTime the starting time for event
+     * @param endTime the ending time for event
+     */
     public Event(String task, LocalDate startTime, LocalDate endTime) {
         super(task, false);
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    /**
+     * Event constructor.
+     *
+     * @param task a task string
+     * @param startTime the starting time for event
+     * @param endTime the ending time for event
+     * @param isCompleted completion status
+     */
     public Event(String task, LocalDate startTime, LocalDate endTime, boolean isCompleted) {
         super(task, isCompleted);
         this.startTime = startTime;
@@ -40,13 +55,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s %s (from: %s to: %s)", super.getFormattedStatus(), super.task,
+        return String.format("[E]%s %s (from: %s to: %s)", super.getFormattedStatus(), super.getTask(),
                 super.getFormattedDate(this.startTime), super.getFormattedDate(this.endTime));
     }
 
     @Override
     public String toDataString() {
-        return "E | " + (this.isCompleted ? "1" : "0") + " | " + super.task + " | " + this.startTime + " | "
+        return "E | " + (super.getIsCompleted() ? "1" : "0") + " | " + super.getTask() + " | " + this.startTime + " | "
                 + this.endTime;
     }
 

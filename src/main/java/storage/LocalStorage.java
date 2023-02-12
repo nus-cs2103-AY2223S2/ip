@@ -25,8 +25,13 @@ import task.Task;
  * Local storage class that abstracts the communications between local storage and the program task list.
  */
 public class LocalStorage {
-    File dataFile;
+    private File dataFile;
 
+    /**
+     * Local storage constructor.
+     *
+     * @param filepath filepath string to data file
+     */
     public LocalStorage(String filepath) {
         if ("".equals(filepath.trim())) {
             throw new InvalidArgumentException("Filepath cannot be empty.");

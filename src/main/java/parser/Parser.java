@@ -2,6 +2,9 @@ package parser;
 
 import command.Command;
 
+/**
+ * Parser that handles requests to generate commands.
+ */
 public interface Parser {
     /**
      * Parses a request to generate command.
