@@ -3,5 +3,5 @@ D | 0 | return book | 2023-06-06
 D | 1 | project meeting | 2023-08-25
 T | 1 | join sports club
 D | 0 | submit assignment | 2023-01-26
-D | 0 | sleep | 2022-05-06 | 2023-05-30
 D | 1 | do work | 2023-01-27
+D | 0 | clear todo list | 2023-02-01 | 2023-02-05
