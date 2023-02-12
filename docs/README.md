@@ -7,7 +7,7 @@ _Chungus_ is a demo application built for a university software engineering clas
 ## Features
 
 - **Persistence**: Chungus will save your tasks to disk
-- **Text-based**: Not much of a GUI available, and all interactions are through text commands
+- **Text-based**: All interactions are through text commands
 - **Cross-platform**: Thanks to groundbreaking Java 'write once, run anywhere' technology
 - **Tags**: Chungus supports tagging tasks as an alternative way of categorization
 
@@ -21,7 +21,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks previously created and not deleted is listed in order of creation.
+All tasks previously created and not deleted are listed in order of creation.
 
 ### `todo` - Create a todo
 
@@ -37,7 +37,7 @@ A new task with the description "find atlantis" is created.
 
 ### `deadline` - Create a task with deadline
 
-A deadline can be associated to a task. The date and time must be in `dd/MM/yyyy hhmm` format.
+A deadline can be associated to a task. The date and time must be in `dd/MM/yyyy HHmm` format.
 
 Example of usage:
 
@@ -157,7 +157,7 @@ All tasks which were previously tagged with `work` or `urgent` are listed.
 
 ### `tagsee` - Inspect tags
 
-For a given task, see what tags it has.
+For a given task, see what tags it has. The task is selected by its index from running the `list` command.
 
 Example of usage:
 
