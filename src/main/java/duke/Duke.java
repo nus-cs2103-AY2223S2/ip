@@ -24,10 +24,23 @@ public class Duke {
     private Parser parser;
     private final Tasklist tasklist;
     private boolean isActive;
+    private final String HAS_DUPLICATE_RESPONSE =
+            "You already have a similar task in you list. "
+                    + "Would you like me to add it in anyway?";
+    private final String NO_RESPONSE = "Got it. I will not add it to your list.";
+    private Task bufferedTask;
 
     public Duke() {
         this.parser = new Parser();
         this.tasklist = new Tasklist(new TaskStorage(FILE_PATH));
+    }
+
+    /**
+     * Prints a greeting message to the user on the standard output.
+     */
+    public String getGreeting() {
+        return "Hello I'm Duke. \n"
+                + "What can I do for you?";
     }
 
     /**
@@ -53,12 +66,32 @@ public class Duke {
                 case UNMARK:
                     return this.unmark(parser.getIndex());
                 case TODO:
+                    if (hasDuplicate(parser.getName(), TaskTypes.TODO)) {
+                        parser.setAwaitingConfirmation(true);
+                        bufferedTask = new Todo(parser.getName());
+                        return HAS_DUPLICATE_RESPONSE;
+                    }
                     return this.addTask(parser.getName());
                 case DEADLINE:
+                    if (hasDuplicate(parser.getName(), TaskTypes.DEADLINE)) {
+                        parser.setAwaitingConfirmation(true);
+                        bufferedTask =
+                                new Deadline(parser.getName(),
+                                        parser.getDeadline());
+                        return HAS_DUPLICATE_RESPONSE;
+                    }
                     return this.addTask(
                             parser.getName(),
                             parser.getDeadline());
                 case EVENT:
+                    if (hasDuplicate(parser.getName(), TaskTypes.EVENT)) {
+                        parser.setAwaitingConfirmation(true);
+                        bufferedTask =
+                                new Event(parser.getName(),
+                                        parser.getStartDate(),
+                                        parser.getEndDate());
+                        return HAS_DUPLICATE_RESPONSE;
+                    }
                     return this.addTask(
                             parser.getName(),
                             parser.getStartDate(),
@@ -67,6 +100,15 @@ public class Duke {
                     return this.deleteTask(parser.getIndex());
                 case FIND:
                     return this.findTask(parser.getName());
+                case YES:
+                    parser.setAwaitingConfirmation(false);
+                    String response = addTask(bufferedTask);
+                    bufferedTask = null;
+                    return response;
+                case NO:
+                    parser.setAwaitingConfirmation(false);
+                    bufferedTask = null;
+                    return NO_RESPONSE;
                 case DEFAULT:
                     return "I don't quite get what that means.";
                 }
@@ -118,6 +160,21 @@ public class Duke {
         }
     }
 
+    private String addTask(Task task) {
+        if (task instanceof Todo) {
+            this.tasklist.addTask(task, TaskTypes.TODO);
+        } else if (task instanceof Deadline) {
+            this.tasklist.addTask(task, TaskTypes.DEADLINE);
+        } else if (task instanceof Event) {
+            this.tasklist.addTask(task, TaskTypes.EVENT);
+        }
+        return "I've added the following to your list of tasks:\n"
+                + task
+                + "\n You now have "
+                + this.tasklist.size()
+                + " task(s) in the list.";
+    }
+
     private String addTask(String name) {
         Task t = new Todo(name);
         this.tasklist.addTask(t, TaskTypes.TODO);
@@ -166,5 +223,36 @@ public class Duke {
             return "Here are the matching tasks in your list:\n"
                     + matchingTasks;
         }
+    }
+
+    private boolean hasDuplicate(String word, TaskTypes type) {
+        ArrayList<Task> tasks = this.tasklist.find(word);
+        if (tasks.size() == 0) {
+            return false;
+        }
+        switch (type) {
+        case TODO:
+            for (Task t : tasks) {
+                if (t instanceof Todo) {
+                    return true;
+                }
+            }
+            break;
+        case DEADLINE:
+            for (Task t : tasks) {
+                if (t instanceof Deadline) {
+                    return true;
+                }
+            }
+            break;
+        case EVENT:
+            for (Task t : tasks) {
+                if (t instanceof Event) {
+                    return true;
+                }
+            }
+            break;
+        }
+        return false;
     }
 }

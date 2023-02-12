@@ -68,6 +68,9 @@ public class Gui extends Application {
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        Label greeting = new Label(duke.getGreeting());
+        dialogContainer.getChildren()
+                .add(DialogBox.getDukeDialog(greeting, new ImageView(dukeImg)));
 
         userInput.setPrefWidth(325.0);
 
