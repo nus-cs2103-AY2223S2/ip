@@ -75,6 +75,8 @@ public class DeadlineCommand extends Command {
         int compareTime = currentTime.compareTo(unformattedTargetTime);
         if (compareDate > 0 && compareTime > 0) {
             return true;
+        } else if (compareDate > 0) {
+            return true;
         } else {
             return false;
         }
