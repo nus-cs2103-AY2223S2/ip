@@ -3,6 +3,7 @@ This is the user guide for Duke Bunny.
 It contains the following section:
 * Features
 * Usage
+
 Do use the user guide if you have any difficulties using Duke Bunny.
 
 ## Features 
