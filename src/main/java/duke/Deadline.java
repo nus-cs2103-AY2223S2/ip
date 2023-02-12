@@ -119,7 +119,6 @@ public class Deadline extends Task {
     }
 
 
-
     /**
      * Checks whether a string is an instance of LocalDate
      * in the format "yyyy-MM-dd"
