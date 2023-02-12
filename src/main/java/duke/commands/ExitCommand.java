@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.components.Storage;
 import duke.components.TaskList;
-import duke.components.Ui;
 import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
@@ -14,9 +13,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showExitMsg();
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         storage.updateStorage(tasks);
+        return "Bye! See you soon!";
     }
 
     @Override

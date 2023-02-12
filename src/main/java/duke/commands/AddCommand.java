@@ -3,7 +3,6 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.components.TaskList;
-import duke.components.Ui;
 import duke.components.Storage;
 
 import java.util.ArrayList;
@@ -45,13 +44,16 @@ public abstract class AddCommand extends Command {
     /**
      * {@inheritDoc}
      * @param tasks TaskList object to handle task management.
-     * @param ui Ui object to handle user interface.
      * @param storage Storage object to handle reading/writing to/from storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         tasks.addTask(taskToAdd);
-        ui.showAddCompletion(this, tasks);
+        return "Got it. I've added this task:\n"
+                + taskToAdd
+                +"\nNow you have "
+                + tasks.size()
+                + " tasks in the list.";
     }
 
     /**

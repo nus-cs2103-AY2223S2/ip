@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.components.Storage;
 import duke.components.TaskList;
-import duke.components.Ui;
 import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
@@ -23,12 +22,12 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks,Storage storage) throws DukeException {
         if (unmarkIndex < 1 || unmarkIndex > tasks.size()){
             throw new DukeException("index " + unmarkIndex +" not in range!");
         }
         tasks.unmark(unmarkIndex);
-        ui.showUnmarkCompletion(this, tasks.getTask(unmarkIndex));
+        return "OK, I've marked this task as not done yet:\n" + tasks.getTask(unmarkIndex);
     }
 
     @Override
