@@ -16,10 +16,10 @@
 .userWindow {
     -fx-background-color: rgba(135, 206, 235, 0.8);
     -fx-background-radius: 20px;
-    -fx-border-color: rgb(202, 178, 255);
+    -fx-border-color: rgb(202, 178, 250);
     -fx-border-width: 2;
     -fx-border-radius: 20px;
-    -fx-padding: 20;
     -fx-max-height: Infinity;
-    -fx-text-fill: rgb(113, 60, 255);
+    -fx-text-fill: rgb(113, 60, 250);
+    -fx-padding: 25;
 }
