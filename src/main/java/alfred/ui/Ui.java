@@ -12,14 +12,14 @@ public class Ui {
      * Sends greeting message to user
      */
     public String getGreetingsMessage() {
-        return "Hello Batman, I'm Alfred\n" + "What can I do for you?";
+        return "Hello Master Wayne, I'm Alfred\n" + "What can I do for you?";
     }
 
     /**
      * Sends goodbye message to user
      */
     public String getGoodByeMessage() {
-        return "Bye. Hope to see you again soon!";
+        return "Goodnight Master Wayne. Do rest well...";
     }
 
     /**
@@ -112,7 +112,7 @@ public class Ui {
      * @return
      */
     public String getMarkTaskMessage(Task task) {
-        String s = "Nice! I've marked this task as done: \n";
+        String s = "Good job Master Wayne, I've marked this task as done: \n";
         s = s + task.toString();
         return s;
     }
@@ -124,7 +124,7 @@ public class Ui {
      * @return
      */
     public String getUnmarkTaskMessage(Task task) {
-        String s = "OK, I've marked this task as not done yet: \n";
+        String s = "OK Master Wayne, I've marked this task as not done yet: \n";
         s = s + task.toString();
         return s;
     }
@@ -135,7 +135,8 @@ public class Ui {
      * @return
      */
     public String getUnknownMessage() {
-        return "I'm sorry, but I don't know what that means :-(";
+        String s = "I'm sorry Master Wayne, but I don't know what that means. \n";
+        return s;
     }
 
     public String getStatsMessage(TaskList tasks) throws AlfredException {

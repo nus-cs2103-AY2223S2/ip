@@ -40,7 +40,7 @@ public class Alfred {
     /**
      * Get message based on user input
      */
-    public String getResponse(String input) throws AlfredException {
+    public String getResponse(String input) {
         try {
             return this.command.executeCommand(this.parser.getCommand(input), input, tasks, storage);
         } catch (Exception e) {
