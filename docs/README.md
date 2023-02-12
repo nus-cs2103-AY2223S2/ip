@@ -4,6 +4,7 @@ It contains the following section:
 * Features
 * Usage
 Do use the user guide if you have any difficulties using Duke Bunny.
+
 ## Features 
 ### Manage Tasks
 Duke Bunny allows the users to manage their tasks via the following functions:
