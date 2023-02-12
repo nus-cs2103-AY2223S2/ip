@@ -66,14 +66,14 @@ public abstract class Task implements Cloneable {
     }
 
     /**
-     * Get current task count.
+     * Gets current task count.
      */
     public static int getTaskCount() {
         return count;
     }
 
     /**
-     * Set current task count.
+     * Sets current task count.
      *
      * @param count Desired task count to set.
      */
@@ -82,7 +82,7 @@ public abstract class Task implements Cloneable {
     }
 
     /**
-     * Check if Task description contains a particular keyword.
+     * Checks if Task description contains a particular keyword.
      *
      * @return Boolean if Task contains keyword.
      */

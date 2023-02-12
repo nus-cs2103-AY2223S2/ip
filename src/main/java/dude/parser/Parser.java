@@ -19,7 +19,7 @@ import dude.task.Event;
 import dude.task.Todo;
 
 /**
- * Parse user inputs into actual commands.
+ * Parses user inputs into actual commands.
  */
 public class Parser {
     /**
