@@ -34,7 +34,9 @@ public class CommandAddEvent extends Command {
         Task event = new Event(description, from, to);
         tasks.addTask(event);
         storage.save(tasks.getList());
-        return ui.formResponse("New event added: " + event
-                + String.format("\nThere are currently %d tasks.", tasks.getSize()));
+
+        String taskString = "New todo added: " + event;
+        String lengthString = String.format("\nYou now have %s in the list.", tasks.getSize());
+        return ui.formResponse(taskString + lengthString);
     }
 }

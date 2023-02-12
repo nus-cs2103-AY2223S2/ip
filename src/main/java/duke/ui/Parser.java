@@ -35,7 +35,7 @@ public class Parser {
 
         try {
 
-            /** Split string into 2 parts, 1st part is the operation, 2nd part is the description */
+            /* Split string into 2 parts, 1st part is the operation, 2nd part is the description */
             String[] command = input.split(" ", 2);
             Operation op = Operation.valueOf(command[0].trim().toUpperCase()); // Throws exception if invalid operation.
 
@@ -47,8 +47,8 @@ public class Parser {
                 return new CommandList();
             }
 
-            /* The operation is valid but no description was given. */
-            if (command.length < 2) {
+            boolean isNoDescription = command.length < 2;
+            if (isNoDescription) {
                 throw new DukeException("No command description given.");
             }
 
@@ -57,15 +57,15 @@ public class Parser {
             switch (op) {
             case MARK:
             case UNMARK:
-                return markTaskParser(op, description);
+                return parseMarkTask(op, description);
             case TODO:
             case DEADLINE:
             case EVENT:
-                return addTaskParser(op, description);
+                return parseAddTask(op, description);
             case DELETE:
-                return deleteTaskParser(description);
+                return parseDeleteTask(description);
             case FIND:
-                return findTaskParser(description);
+                return parseFindTask(description);
             default:
                 // cannot reach here, as Operation.valueOf already throws IllegalArgumentException
                 throw new DukeException("Cannot reach here");
@@ -87,7 +87,7 @@ public class Parser {
      * @return CommandMark instance.
      * @throws NumberFormatException If format of task index is invalid.
      */
-    public static Command markTaskParser(Operation op, String index) throws NumberFormatException {
+    public static Command parseMarkTask(Operation op, String index) throws NumberFormatException {
         boolean isDone = op.equals(Operation.MARK);
         int taskIndex = Integer.parseInt(index); // Throws exception if index is not a valid integer.
         return new CommandMark(taskIndex, isDone);
@@ -102,7 +102,7 @@ public class Parser {
      * @throws DateTimeParseException If the date format is invalid.
      * @throws DukeException If the command is invalid.
      */
-    public static Command addTaskParser(Operation op, String description) throws
+    public static Command parseAddTask(Operation op, String description) throws
             DateTimeParseException, DukeException {
         switch (op) {
         case TODO:
@@ -135,7 +135,7 @@ public class Parser {
      * @return A Command instance to delete a task.
      * @throws NumberFormatException If the date format is invalid.
      */
-    public static Command deleteTaskParser(String index) throws NumberFormatException {
+    public static Command parseDeleteTask(String index) throws NumberFormatException {
         int taskIndex = Integer.parseInt(index); // Throws exception if index is not a valid integer.
         return new CommandDeleteTask(taskIndex);
     }
@@ -146,7 +146,7 @@ public class Parser {
      * @param keywords String representing the keywords to search the tasks for.
      * @return A Command instance to find tasks.
      */
-    public static Command findTaskParser(String keywords) {
+    public static Command parseFindTask(String keywords) {
         return new CommandFind(keywords.split(" "));
     }
 }
