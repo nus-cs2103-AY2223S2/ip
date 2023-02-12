@@ -39,10 +39,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DirectoryNotFoundException e) {
-            ui.showError(e.getMessage());
-            tasks = new TaskList();
-        } catch (FileNotFoundException e) {
+        }  catch (DukeException e) {
             ui.showError(e.getMessage());
             tasks = new TaskList();
         }

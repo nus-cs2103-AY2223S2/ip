@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.Duke;
 import duke.TaskList;
 import duke.exceptions.DirectoryNotFoundException;
+import duke.exceptions.DukeException;
 import duke.ui.Ui;
 
 
@@ -30,19 +32,32 @@ public class Storage {
      * @throws DirectoryNotFoundException
      * @throws FileNotFoundException
      */
-    public File load() throws DirectoryNotFoundException, FileNotFoundException {
+    public File load() throws DukeException {
         Path directory = Paths.get("data");
         Path file = Paths.get(path);
         boolean fileExists = java.nio.file.Files.exists(file);
         boolean directoryExists = java.nio.file.Files.exists(directory);
         if (!directoryExists) {
-            throw new DirectoryNotFoundException();
+            File folder = new File("data");
+            folder.mkdir();
+            File newFile = new File(folder, "duke.txt");
+            try {
+                newFile.createNewFile();
+            }
+            catch (IOException e) {
+                throw new DukeException("File creation failed");
+            }
         }
         if (!fileExists) {
-            throw new FileNotFoundException();
+            File folder = new File("data");
+            File newFile = new File(folder, "duke.txt");
+            try {
+                newFile.createNewFile();
+            }
+            catch (IOException e) {
+                throw new DukeException("File creation failed");
+            }
         }
-        assert  directoryExists;
-        assert fileExists;
         File f = new File(path); // create a File for the given file path
         return f;
 
