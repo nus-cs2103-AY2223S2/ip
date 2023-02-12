@@ -15,7 +15,7 @@
 4. Run the command `java -jar ip.jar`
 5. You should see the following:
 
-<img src="initial.png" alt="initial" width="60%" height="30%"/>
+<img src="initial.png" alt="initial" width="40%"/>
 
 ## Features
 ### Manages Your Tasks
