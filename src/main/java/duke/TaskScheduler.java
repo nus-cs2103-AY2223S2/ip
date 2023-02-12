@@ -1,11 +1,8 @@
 package duke;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 import java.util.concurrent.PriorityBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -19,8 +16,8 @@ import javafx.util.Duration;
 public class TaskScheduler extends TaskList<Recur> {
 
     private PriorityBlockingQueue<Recur> priorityQueue;
-    private List<Timeline> recurResponse;
-    private VBox dialogContainer;
+    private final List<Timeline> recurResponse;
+    private final VBox dialogContainer;
     private Image dukeImage;
 
     TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, Image dukeImage, String input) {
@@ -29,6 +26,14 @@ public class TaskScheduler extends TaskList<Recur> {
         this.dukeImage = dukeImage;
         if (input.contains("recur")) {
             recurDialogContainer(input);
+        }
+    }
+
+    TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, String input) {
+        this.recurResponse = recurResponse;
+        this.dialogContainer = dialogContainer;
+        if (input.contains("recur")) {
+            recurDialogContainerTest(input);
         }
     }
 
@@ -47,8 +52,24 @@ public class TaskScheduler extends TaskList<Recur> {
         }
     }
 
-    //Threading way unused. Timeline is used.
+    //Tests without timeline play
+    void recurDialogContainerTest(String input) {
+        if (input.contains("delete")) {
+        } else {
+            String[] splitInput = input.split(" ");
+            int delay = Integer.parseInt(splitInput[splitInput.length - 1]);
+            Timeline timeline =
+                    new Timeline(new KeyFrame(Duration.millis(delay), e -> dialogContainer.getChildren().addAll(
+                            DialogBox.getDukeDialog(input, dukeImage)
+                    )));
+            recurResponse.add(timeline);
+            timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+        }
+    }
 
+
+
+    //Threading way unused. Timeline is used.
     /*
     TaskScheduler () {
         priorityQueue = new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime));
