@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.taskstorage.Storage;
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.Storage;
+import duke.storage.TaskList;
 import duke.task.Task;
 
 /**
@@ -20,10 +21,11 @@ public class UnmarkCommand extends Command {
     /**
      * Executes user input and unmarks task specified by user.
      * @param tasks Current TaskList.
+     * @param notes Current Note.
      * @return Message to inform user that task has been unmarked.
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Note notes) {
         int toUnMark = Integer.parseInt(userInput.substring(7));
         Task toUnMarkTask = tasks.getTask(toUnMark - 1);
         toUnMarkTask.unmarkTask();

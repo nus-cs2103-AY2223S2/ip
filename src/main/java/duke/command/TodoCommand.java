@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.TaskList;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.ui.Ui;
@@ -45,10 +46,11 @@ public class TodoCommand extends Command {
     /**
      * Executes user input and adds ToDo task in current TaskList.
      * @param tasks Current TaskList.
+     * @param notes Current Note.
      * @return Message to inform user that ToDo task has been added.
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Note notes) {
         int taskCount = tasks.getSize() + 1;
         String taskWord = (taskCount == 1) ? "task" : "tasks";
         Task newTask = translateInput(userInput);

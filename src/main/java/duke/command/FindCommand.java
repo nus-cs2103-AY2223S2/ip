@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.TaskList;
 import duke.parser.Parser;
 import duke.task.Task;
 
@@ -38,10 +39,11 @@ public class FindCommand extends Command {
     /**
      * Executes user input and finds a list of task matching specified keyword.
      * @param tasks Current TaskList.
+     * @param notes Current Note.
      * @return List of tasks which match keyword in String format.
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Note notes) {
         String keyword = Parser.getFindKeyword(userInput);
         ArrayList<Task> foundTasks = tasks.filterTasks(keyword);
         if (foundTasks.size() == 0) {

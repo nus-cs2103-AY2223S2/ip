@@ -8,10 +8,6 @@ import duke.task.Task;
 import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-<<<<<<< HEAD:src/main/java/duke/parser/Parser.java
-=======
-import java.time.format.DateTimeParseException;
->>>>>>> master:src/main/java/duke/command/Parser.java
 
 /**
  * Class for Parser which translates between different task formats
@@ -97,6 +93,10 @@ public final class Parser {
             return new DeadlineCommand(userInput);
         case "event":
             return new EventCommand(userInput);
+        case "note":
+            return new NoteCommand(userInput);
+        case "opennotes":
+            return new OpenNoteCommand(userInput);
         default:
             throw new DukeException("Invalid command type");
         }

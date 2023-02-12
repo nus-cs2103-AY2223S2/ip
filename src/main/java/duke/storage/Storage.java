@@ -1,4 +1,4 @@
-package duke.taskstorage;
+package duke.storage;
 
 import duke.parser.Parser;
 import duke.task.Task;
@@ -62,6 +62,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if log file exists. If it does not, create a new log file.
+     * @param filePath File path to log file.
+     */
     public static void logFileExists(String filePath) {
         File logFile = new File(filePath);
         try {
@@ -71,6 +75,57 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println("Log file cannot be created");
+        }
+    }
+
+    /**
+     * Loads tasks from task log file
+     * @return An ArrayList of Tasks from task log
+     */
+    public String loadNotesFromFile() {
+        File notes = new File(filePath);
+        Scanner noteScanner = null;
+        try {
+            noteScanner = new Scanner(notes);
+        } catch (FileNotFoundException e) {
+            System.out.println("Notes file not found");
+        }
+        String note = "";
+        while (noteScanner.hasNextLine()) {
+            String noteLine = noteScanner.nextLine();
+            note += (noteLine + "\n");
+        }
+        return note;
+    }
+
+    /**
+     * Save current notes to note file.
+     * @param notes Current notes.
+     */
+    public static void saveNotesToFile(Note notes) {
+        try {
+            FileWriter noteFile = new FileWriter(filePath);
+            noteFile.write(notes.getNotes());
+            noteFile.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Checks if note file exists. If it does not, create a new note file.
+     * @param filePath File path to note file.
+     */
+    public static void notesFileExists(String filePath) {
+        File notesFile = new File(filePath);
+        try {
+            if (!notesFile.exists()) {
+                notesFile.getParentFile().mkdir();
+                notesFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Notes file cannot be created");
         }
     }
 }

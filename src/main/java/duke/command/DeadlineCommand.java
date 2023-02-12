@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.TaskList;
 import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -64,10 +65,11 @@ public class DeadlineCommand extends Command {
     /**
      * Executes user input and adds Deadline task to current TaskList.
      * @param tasks Current TaskList.
+     * @param notes Current Note.
      * @return Message to inform user that Deadline task has been added.
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Note notes) {
         int taskCount = tasks.getSize() + 1;
         String taskWord = (taskCount == 1) ? "task" : "tasks";
         Task newTask = translateInput(userInput);

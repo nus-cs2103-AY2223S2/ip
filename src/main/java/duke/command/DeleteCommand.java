@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.taskstorage.Storage;
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.Storage;
+import duke.storage.TaskList;
 import duke.task.Task;
 
 /**
@@ -20,10 +21,11 @@ public class DeleteCommand extends Command {
     /**
      * Executes user input and deletes specified task from current TaskList.
      * @param tasks Current TaskList.
+     * @param notes Current Note.
      * @return Message to inform user that task has been deleted.
      */
-    @Override
-    public String execute(TaskList tasks) {
+    //@Override
+    public String execute(TaskList tasks, Note notes) {
         int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
         Task toDelete = tasks.getTask(taskIndex);
         tasks.deleteTask(taskIndex);

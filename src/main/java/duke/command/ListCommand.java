@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.TaskList;
 
 /**
  * Class for ListCommand.
@@ -34,10 +35,11 @@ public class ListCommand extends Command {
     /**
      * Executes user input and lists all tasks in current TaskList.
      * @param tasks Current TaskList.
+     * @param notes Current Note.
      * @return List of all tasks in String format.
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Note notes) {
         if (tasks.getSize() == 0) {
             return "You currently do not have any active tasks.";
         } else {

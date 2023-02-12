@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.TaskList;
 
 /**
  * Class for ExitCommand.
@@ -17,10 +18,11 @@ public class ExitCommand extends Command {
     /**
      * Executes delete command
      * @param tasks Current TaskList
+     * @param notes Current Note.
      * @return Farewell message in String format.
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Note notes) {
         return "Bye. Hope to see you again soon!";
     }
 }

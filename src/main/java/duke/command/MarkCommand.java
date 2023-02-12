@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.taskstorage.Storage;
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.Storage;
+import duke.storage.TaskList;
 import duke.task.Task;
 
 /**
@@ -20,10 +21,11 @@ public class MarkCommand extends Command {
     /**
      * Executes user input and marks task specified by user.
      * @param tasks current TaskList
+     * @param notes Current Note.
      * @return Message to inform user that task has been marked.
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Note notes) {
         int toMark = Integer.parseInt(userInput.substring(5));
         Task toMarkTask = tasks.getTask(toMark - 1);
         toMarkTask.markTask();

@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.taskstorage.TaskList;
+import duke.storage.Note;
+import duke.storage.TaskList;
 
 /**
  * Abstract class for Command.
@@ -19,6 +20,8 @@ public abstract class Command {
     /**
      * Executes user command.
      * @param tasks Current TaskList.
+     * @param notes Current Note.
      */
-    public abstract String execute(TaskList tasks);
+    public abstract String execute(TaskList tasks, Note notes);
+
 }

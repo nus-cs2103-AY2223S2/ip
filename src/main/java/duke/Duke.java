@@ -3,33 +3,39 @@ package duke;
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.exception.DukeException;
-import duke.taskstorage.Storage;
-import duke.taskstorage.TaskList;
-import duke.ui.Ui;
+import duke.storage.Note;
+import duke.storage.Storage;
+import duke.storage.TaskList;
 
 /**
  * Class for Duke, a Personal Assistant Chatbot
  */
 public class Duke {
-    private Storage storage;
+    private Storage taskStorage;
     private TaskList tasks;
-    private Ui ui;
-    private final String FILE_PATH = ("./data/Duke.txt");
+    private final String TASK_LOG_PATH = ("./data/Duke.txt");
+
+    private Storage noteStorage;
+    private Note notes;
+    private final String NOTES_PATH = ("./data/Notes.txt");
 
     /**
      * Constructor for Duke Class. If log file does not exist, create a new log file
      */
     public Duke() {
-        Storage.logFileExists(FILE_PATH);
-        ui = new Ui();
-        storage = new Storage(FILE_PATH);
-        tasks = new TaskList(storage.loadTasksFromTaskLog());
+        Storage.logFileExists(TASK_LOG_PATH);
+        taskStorage = new Storage(TASK_LOG_PATH);
+        tasks = new TaskList(taskStorage.loadTasksFromTaskLog());
+
+        Storage.notesFileExists(NOTES_PATH);
+        noteStorage = new Storage(NOTES_PATH);
+        notes = new Note(noteStorage.loadNotesFromFile());
     }
 
     public String getResponse(String input) {
         try {
             Command c = Parser.getCommandType(input);
-            return c.execute(tasks);
+            return c.execute(tasks, notes);
         } catch (DukeException e) {
             return ("Invalid input");
         }
