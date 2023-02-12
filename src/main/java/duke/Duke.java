@@ -19,24 +19,32 @@ public class Duke {
     /** Deals with interactions with the user */
     private final Ui ui;
 
+    /** Stores the path of the folder which contains the task file storage */
+    private final Path foldPath;
+
+    /** Stores the path of the task file storage */
+    private final Path filePath;
+
     /**
      * Initializes the Ui, Storage and TaskList classes.
+     * The filePath and foldPath are initialized here as well.
      * TaskList is initialized by loading the tasks
      * from the task file using the Storage.
      * If the task file does not exist, it will print
      * the error and create the task file.
-     *
-     * @param foldPath Path of the folder.
-     * @param filePath Path of the file.
      */
-    public Duke(Path foldPath, Path filePath) {
+    public Duke() {
+        String fileSep = System.getProperty("file.separator");
+        String userDir = System.getProperty("user.dir");
+        foldPath = Paths.get( userDir + fileSep + "data");
+        filePath = Paths.get(foldPath + fileSep + "duke.txt");
         ui = new Ui();
         storage = new Storage(filePath.toString());
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            createFile(foldPath, filePath);
+            createFile();
             tasks = new TaskList();
         }
     }
@@ -44,11 +52,8 @@ public class Duke {
     /**
      * Creates the folder and file to save and
      * load tasks if they do not already exist.
-     *
-     * @param foldPath Path of the folder.
-     * @param filePath Path of the file.
      */
-    public void createFile(Path foldPath, Path filePath) {
+    public void createFile() {
         try {
             if (!Files.isDirectory(foldPath)) {
                 Files.createDirectory(foldPath);
@@ -62,32 +67,18 @@ public class Duke {
     }
 
     /**
-     * Runs the chatbot by first printing the
-     * welcome message and then reading the
-     * commands input by the user. The commands
-     * read will then be parsed and executed.
-     */
-    public void run() throws DukeException {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Parser.parse(fullCommand, ui, tasks, storage);
-            isExit = ui.getIsExit();
-        }
-    }
-
-    /**
-     * Initializes the Duke class and calls
-     * the run function.
+     * Generates a response to user input.
      *
-     * @param args Command line arguments.
+     * @param input Input command from the user.
+     * @throws DukeException If the tasks cannot be saved to the file.
      */
-    public static void main(String[] args) throws DukeException {
-        String fileSep = System.getProperty("file.separator");
-        String userDir = System.getProperty("user.dir");
-        Path foldPath = Paths.get( userDir + fileSep + "data");
-        Path filePath = Paths.get(foldPath + fileSep + "duke.txt");
-        new Duke(foldPath, filePath).run();
+    public String getResponse(String input) throws DukeException {
+        String response = ui.getMessage().toString();
+        if (response.isEmpty()) {
+            Parser.parse(input, ui, tasks, storage);
+            response = ui.getMessage().toString();
+        }
+        ui.clearMessage();
+        return response;
     }
 }

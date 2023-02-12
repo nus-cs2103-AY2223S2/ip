@@ -15,7 +15,7 @@ public class Parser {
      * @param ui User interface to interact with the user.
      * @param tasks Task operations.
      * @param storage Storage to save tasks.
-     * @throws DukeException  If the tasks cannot be saved to the file.
+     * @throws DukeException If the tasks cannot be saved to the file.
      */
     public static void parse(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException {
         String firstWord = command.split(" ")[0].toLowerCase();
@@ -25,7 +25,7 @@ public class Parser {
 
         switch (firstWord) {
         case "bye":
-            ui.exit();
+            ui.printGoodBye();
             break;
         case "list":
             ui.listTasks(tasks.getListOfTasks());
