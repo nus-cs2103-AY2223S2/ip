@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(new Font("Cambria", 14));
+        dialog.setFont(new Font("Helvetica", 12));
         dialog.setTextFill(Color.web(textColor));
         displayPicture.setImage(img);
     }

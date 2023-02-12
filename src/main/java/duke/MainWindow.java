@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.concurrent.TimeUnit;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -40,7 +43,6 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, duckImage));
-
     }
 
     public void setDuke(Duke d) {
@@ -55,11 +57,18 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        boolean isExit = false;
+        if (response.contains("END_COMMAND")) {
+            response = response.substring(11);
+            isExit = true;
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, dogImage),
-                DialogBox.getDukeDialog(response, duckImage)
-        );
+                DialogBox.getDukeDialog(response, duckImage));
         userInput.clear();
+        if (isExit) {
+            Platform.exit();
+        }
     }
 
     //@@author XylusChen-reused
