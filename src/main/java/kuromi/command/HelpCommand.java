@@ -4,6 +4,9 @@ import kuromi.storage.Storage;
 import kuromi.task.TaskList;
 import kuromi.view.Ui;
 
+/**
+ * List the commands available.
+ */
 public class HelpCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
