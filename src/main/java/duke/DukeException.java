@@ -7,6 +7,7 @@ import java.io.StringWriter;
  * Exception class, thrown by duke.Duke
  */
 public class DukeException extends Exception {
+    protected static final String ENCOURAGING_WORDS = "Can you try again? :D";
     protected String errorMessage;
 
     /**
@@ -26,8 +27,17 @@ public class DukeException extends Exception {
     public DukeException(Exception exception) {
         StringWriter sw = new StringWriter();
         exception.printStackTrace(new PrintWriter(sw));
-        String exceptionAsString = sw.toString();
-        this.errorMessage = exceptionAsString;
+        this.errorMessage = sw.toString();
+    }
+
+    /**
+     * Wrap an error message with encouraging words
+     * so that it feels better
+     * @param errorMessage the original error message
+     * @return the modified error message
+     */
+    protected static String wrapWithEncouragingWords(String errorMessage) {
+        return errorMessage + "\n" + ENCOURAGING_WORDS;
     }
 
     /**
