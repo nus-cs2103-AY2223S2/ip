@@ -1,18 +1,17 @@
 package kuromi.command;
 
-import javafx.stage.Stage;
-import kuromi.exception.KuromiException;
-import kuromi.storage.Storage;
-import kuromi.task.Deadline;
-import kuromi.task.Task;
-import kuromi.task.TaskList;
-import kuromi.view.Ui;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import kuromi.exception.KuromiException;
+import kuromi.storage.Storage;
+import kuromi.task.Task;
+import kuromi.task.TaskList;
+import kuromi.view.Ui;
 
 public class ListCommandTest {
     @Test

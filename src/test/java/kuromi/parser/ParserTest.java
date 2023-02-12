@@ -1,16 +1,16 @@
 package kuromi.parser;
 
-import kuromi.Kuromi;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import kuromi.command.Command;
 import kuromi.exception.KuromiException;
 import kuromi.task.Task;
 import kuromi.task.TaskList;
 import kuromi.view.Ui;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test

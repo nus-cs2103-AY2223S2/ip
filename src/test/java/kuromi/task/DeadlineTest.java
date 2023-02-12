@@ -1,10 +1,12 @@
 package kuromi.task;
 
-import kuromi.exception.KuromiException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import kuromi.exception.KuromiException;
 
 public class DeadlineTest {
     @Test
