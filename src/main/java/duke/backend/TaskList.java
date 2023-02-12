@@ -12,7 +12,8 @@ public class TaskList {
 
     public TaskList() throws IOException {
 //        load from file
-        File prevTasks = new File("./data/tasks.txt");
+        File prevTasks = new File("./tasks.txt");
+        prevTasks.createNewFile();
         this.saveManager = new Storage(prevTasks);
         this.tasks = new ArrayList<>(saveManager.extractTasks());
     }
