@@ -72,9 +72,9 @@ public class Parser {
                 throw new DukeException("Oh no!! Please specify the start and end.");
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate startTime = LocalDate.parse(splitStartAndEnd[0].trim(), formatter);
-            LocalDate endTime = LocalDate.parse(splitStartAndEnd[1].trim(), formatter);
-            Event task = new Event(splitDescriptionAndDuration[0], startTime, endTime);
+            LocalDate startDate = LocalDate.parse(splitStartAndEnd[0].trim(), formatter);
+            LocalDate endDate = LocalDate.parse(splitStartAndEnd[1].trim(), formatter);
+            Event task = new Event(splitDescriptionAndDuration[0], startDate, endDate);
             return new AddCommand(task);
         } else {
             throw new DukeException("Oh no!!! What is this? Please try again later!");

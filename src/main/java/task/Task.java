@@ -3,6 +3,7 @@ package task;
 public class Task {
     private boolean isMarked;
     private String name;
+    static final String divider = " | ";
 
 
     public Task(String name) {
@@ -22,11 +23,10 @@ public class Task {
         return (isMarked ? "X" : " ");
     }
 
-    public String getSaveFormat() {
+    public String toSaveFormat() {
         String markToInt = this.isMarked? "1" : "0";
-        return " | " + markToInt + " | " + name ;
+        return divider + markToInt + divider + name ;
     }
-
 
     @Override
     public String toString() {

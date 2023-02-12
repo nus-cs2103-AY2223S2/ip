@@ -23,7 +23,7 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(file);
             for (int i = 1; i <= tasklist.size(); i++) {
-                fileWriter.write(tasklist.getTask(i).getSaveFormat());
+                fileWriter.write(tasklist.getTask(i).toSaveFormat());
                 if (i < tasklist.size()) {
                     fileWriter.write('\n');
                 }
