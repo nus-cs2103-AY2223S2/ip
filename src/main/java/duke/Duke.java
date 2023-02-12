@@ -87,9 +87,7 @@ public class Duke extends Application{
         try {
             switch (dukeCommand) {
                 case BYE :
-                    this.storage.storeData(this.list);
                     response = this.ui.exitDisplay();
-                    this.ui.closeInput();
                     break;
                 case LIST :
                     response = this.ui.displayList(this.list);
@@ -124,6 +122,7 @@ public class Duke extends Application{
                     throw new DukeInvalidCommandException();
 
             }
+            this.storage.storeData(this.list);
         } catch (DukeException e) {
             response = String.format("%s\n", e);
         } catch (IOException e) {

@@ -8,24 +8,6 @@ import java.util.Scanner;
  * Deals with interactions with the user
  */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
-
-    /**
-     * Reads the user input
-     *
-     * @return the string input
-     */
-    public String getUserInput() {
-        return this.sc.nextLine();
-    }
-
-    /**
-     * Closes the scanner object
-     */
-    public void closeInput() {
-        this.sc.close();
-    }
-
 
     /**
      * Displays the initial message
