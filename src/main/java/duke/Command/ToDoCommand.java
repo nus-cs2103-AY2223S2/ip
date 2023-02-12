@@ -1,13 +1,14 @@
 package duke.Command;
 
+import duke.Task.ToDo;
+
 import duke.Storage;
 import duke.TaskList;
-import duke.Task.ToDo;
 import duke.UI;
 
 public class ToDoCommand extends Command {
 
-    private String name;
+    private final String name;
 
     public ToDoCommand(String name) {
         this.name = name;

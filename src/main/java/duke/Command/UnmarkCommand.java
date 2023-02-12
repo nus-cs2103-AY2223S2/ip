@@ -1,12 +1,14 @@
 package duke.Command;
 
 import duke.Exception.InvalidTaskException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 
 public class UnmarkCommand extends Command {
-    protected int index;
+
+    private final int index;
 
     public UnmarkCommand(int index) {
         this.index = index;
