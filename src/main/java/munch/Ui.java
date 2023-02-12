@@ -74,7 +74,7 @@ public class Ui {
     }
 
     public static String findMessage(String text) {
-        return "Task(s) that starts with " + "\"" + text + "\"" + ":";
+        return "Task(s) that contains " + "\"" + text + "\"" + ":";
     }
 
     public static String erenMessage(String text) {
@@ -82,4 +82,6 @@ public class Ui {
     }
 
     public static String wrongInputMessage() { return "Eren, I do not understand your request."; }
+
+    public static String duplicateTaskMessage() { return "Eren, you already added the following task in your list!"; }
 }

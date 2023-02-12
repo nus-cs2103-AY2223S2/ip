@@ -67,12 +67,12 @@ public class TaskList {
         String separator = "todo";
         int sepPos = word.indexOf(separator);
         String str = word.substring(sepPos + separator.length() + 1);
-        if (str.length() != 0) {
-            Todo todos = new Todo(str);
+        Todo todos = new Todo(str);
+        if (isDuplicate(tasks, str)) {
+            return Ui.duplicateTaskMessage();
+        } else {
             tasks.add(todos);
             return Ui.addTaskMessage() + "\n" + todos + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
-        } else {
-            return Ui.wrongInputMessage();
         }
     }
 
@@ -85,8 +85,12 @@ public class TaskList {
         String date = word.substring(sepPos2 + 1 + separator2.length());
         LocalDate convertDate = Parser.convertToDate(date);
         Deadlines deadline = new Deadlines(str, convertDate);
-        tasks.add(deadline);
-        return Ui.addTaskMessage() + "\n" + deadline + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+        if (isDuplicate(tasks, str)) {
+            return Ui.duplicateTaskMessage();
+        } else {
+            tasks.add(deadline);
+            return Ui.addTaskMessage() + "\n" + deadline + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+        }
     }
 
     public static String addEventTask(ArrayList<Task> tasks, String word) {
@@ -102,8 +106,12 @@ public class TaskList {
         LocalDate convertFrom = Parser.convertToDate(from);
         LocalDate convertTo = Parser.convertToDate(to);
         Events event = new Events(str, convertFrom, convertTo);
-        tasks.add(event);
-        return Ui.addTaskMessage() + "\n" + event + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+        if (isDuplicate(tasks, str)) {
+            return Ui.duplicateTaskMessage();
+        } else {
+            tasks.add(event);
+            return Ui.addTaskMessage() + "\n" + event + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+        }
     }
 
     public static ArrayList<String> findMatchingTasks(ArrayList<Task> tasks, String word) {
@@ -112,12 +120,13 @@ public class TaskList {
         String separator = "find";
         int sepPos = word.indexOf(separator);
         String keyword = word.substring(sepPos + separator.length() + 1);
+        assert keyword.length() > 0 : "Invalid input";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).description.contains(keyword)) {
                 keywords.add(tasks.get(i));
             }
         }
-        keywordList.add(Ui.findMessage(word));
+        keywordList.add(Ui.findMessage(keyword));
         for (int i = 0; i < keywords.size(); i++) {
             int label = i + 1;
             keywordList.add(label + "." + keywords.get(i).toString());
@@ -133,5 +142,15 @@ public class TaskList {
             list.add(label + "." + tasks.get(i).toString());
         }
         return list;
+    }
+
+    public static Boolean isDuplicate(ArrayList<Task> tasks, String word) {
+        boolean isDuplicate = false;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).description.contains(word)) {
+                isDuplicate = true;
+            }
+        }
+        return isDuplicate;
     }
 }
