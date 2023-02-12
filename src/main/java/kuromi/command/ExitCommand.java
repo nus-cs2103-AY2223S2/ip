@@ -32,7 +32,7 @@ public class ExitCommand extends Command {
     }
 
     private String getReply() {
-        String msg = "Bye. Hope to see you again soon!\n";
+        String msg = "Bye. Hope to see you again soon!";
         return msg;
     }
 }

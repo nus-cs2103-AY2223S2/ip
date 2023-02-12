@@ -60,7 +60,7 @@ public class Parser {
                 throw new KuromiException("");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new KuromiException("☹ OOPS!!! The index cannot be empty.");
+            throw new KuromiException("OOPS!!! The index cannot be empty.");
         }
     }
 
@@ -77,7 +77,7 @@ public class Parser {
             }
         }
         if (!isExist) {
-            throw new KuromiException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new KuromiException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -109,10 +109,10 @@ public class Parser {
             }
         }
         if (keyword.equals("")) {
-            throw new KuromiException("☹ OOPS!!! The keyword cannot be empty.");
+            throw new KuromiException("OOPS!!! The keyword cannot be empty.");
         }
         if (keyword.contains(" ")) {
-            throw new KuromiException("☹ OOPS!!! The keyword can only contain 1 word.");
+            throw new KuromiException("OOPS!!! The keyword can only contain 1 word.");
         }
         return new FindCommand(keyword);
     }
@@ -120,7 +120,7 @@ public class Parser {
     private static Command markCommand(String[] temp, TaskList tasks) throws KuromiException {
         int idx = Integer.parseInt(temp[1]);
         if (idx > tasks.size()) {
-            throw new KuromiException("☹ OOPS!!! The index does not exist.");
+            throw new KuromiException("OOPS!!! The index does not exist.");
         }
         return new MarkCommand(idx);
     }
@@ -128,7 +128,7 @@ public class Parser {
     private static Command unmarkCommand(String[] temp, TaskList tasks) throws KuromiException {
         int idx2 = Integer.parseInt(temp[1]);
         if (idx2 > tasks.size()) {
-            throw new KuromiException("☹ OOPS!!! The index does not exist.");
+            throw new KuromiException("OOPS!!! The index does not exist.");
         }
         return new UnmarkCommand(idx2);
     }
@@ -136,7 +136,7 @@ public class Parser {
     private static Command deleteCommand(String[] temp, TaskList tasks) throws KuromiException {
         int idx3 = Integer.parseInt(temp[1]);
         if (idx3 > tasks.size()) {
-            throw new KuromiException("☹ OOPS!!! The index does not exist.");
+            throw new KuromiException("OOPS!!! The index does not exist.");
         }
         return new DeleteCommand(idx3);
     }
@@ -150,7 +150,7 @@ public class Parser {
             }
         }
         if (desc.equals("")) {
-            throw new KuromiException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new KuromiException("OOPS!!! The description of a todo cannot be empty.");
         }
         return new AddCommand(new Todo(desc));
     }
@@ -169,7 +169,7 @@ public class Parser {
             }
         }
         if (desc2.equals("") || desc2.contains("/by")) {
-            throw new KuromiException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new KuromiException("OOPS!!! The description of a deadline cannot be empty.");
         }
         String by = "";
         for (int i = counter; i < temp.length; i++) {
@@ -180,7 +180,7 @@ public class Parser {
             }
         }
         if (by.equals("")) {
-            throw new KuromiException("☹ OOPS!!! The deadline of a deadline cannot be empty.");
+            throw new KuromiException("OOPS!!! The deadline of a deadline cannot be empty.");
         }
         return new AddCommand(new Deadline(desc2, by));
     }
@@ -199,7 +199,7 @@ public class Parser {
             }
         }
         if (desc3.equals("")) {
-            throw new KuromiException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new KuromiException("OOPS!!! The description of an event cannot be empty.");
         }
         String from = "";
         int counter3 = temp.length;
@@ -214,7 +214,7 @@ public class Parser {
             }
         }
         if (from.equals("")) {
-            throw new KuromiException("☹ OOPS!!! The start date of a deadline cannot be empty.");
+            throw new KuromiException("OOPS!!! The start date of a deadline cannot be empty.");
         }
         String by2 = "";
         for (int i = counter3; i < temp.length; i++) {
@@ -224,7 +224,7 @@ public class Parser {
             }
         }
         if (by2.equals("")) {
-            throw new KuromiException("☹ OOPS!!! The end date of a deadline cannot be empty.");
+            throw new KuromiException("OOPS!!! The end date of a deadline cannot be empty.");
         }
         return new AddCommand(new Event(desc3, by2, from));
     }
