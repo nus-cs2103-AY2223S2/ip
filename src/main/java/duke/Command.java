@@ -27,57 +27,101 @@ public class Command {
     public void execute(TaskList taskList, Response response) {
         switch(type) {
             case "bye":
-                isExit = true;
-                response.showBye();
+                doBye(response);
                 break;
             case "list":
-                response.showList(taskList);
+                doList(taskList, response);
                 break;
             case "mark":
-                int markIndex = Integer.parseInt(data[0]) - 1;
-                taskList.getTask(markIndex).setDone(true);
-                response.showMark(markIndex);
-                taskList.saveList();
+                doMark(taskList, response);
                 break;
             case "unmark":
-                int unmarkIndex = Integer.parseInt(data[0]) - 1;
-                taskList.getTask(unmarkIndex).setDone(false);
-                response.showUnmark(unmarkIndex);
-                taskList.saveList();
+                doUnmark(taskList, response);
                 break;
             case "addTodo":
-                String todoDescrip = data[0];
-                Task newTodo = taskList.addTodo(todoDescrip);
-                response.showAddTask(newTodo);
-                taskList.saveList();
+                doTodo(taskList, response);
                 break;
             case "addDeadline":
-                String deadlineDescrip = data[0];
-                String by = data[1];
-                Deadline newDeadline = taskList.addDeadline(deadlineDescrip, by);
-                response.showAddTask(newDeadline);
-                taskList.saveList();
+                doDeadline(taskList, response);
                 break;
             case "addEvent":
-                String eventDescrip = data[0];
-                String from = data[1];
-                String to = data[2];
-                Event newEvent = taskList.addEvent(eventDescrip, from, to);
-                response.showAddTask(newEvent);
-                taskList.saveList();
+                doEvent(taskList, response);
                 break;
             case "deleteTask":
-                int index = Integer.parseInt(data[0]) - 1;
-                taskList.removeTask(index);
-                response.showDeleteTask(index);
-                taskList.saveList();
+                doDelete(taskList, response);
                 break;
             case "find":
-                String keyword = data[0];
-                ArrayList<Task> matchingTasks = taskList.findTasks(keyword);
-                response.showFindList(matchingTasks);
+                doFind(taskList, response);
                 break;
         }
+    }
+
+    private void doBye(Response response) {
+        isExit = true;
+        response.showBye();
+    }
+
+    private void doList(TaskList taskList, Response response) {
+        response.showList(taskList);
+    }
+
+    private void doMark(TaskList taskList, Response response) {
+        assert data.length == 1;
+        int markIndex = Integer.parseInt(data[0]) - 1;
+        taskList.getTask(markIndex).setDone(true);
+        response.showMark(markIndex);
+        taskList.saveList();
+    }
+
+    private void doUnmark(TaskList taskList, Response response) {
+        assert data.length == 1;
+        int unmarkIndex = Integer.parseInt(data[0]) - 1;
+        taskList.getTask(unmarkIndex).setDone(false);
+        response.showUnmark(unmarkIndex);
+        taskList.saveList();
+    }
+
+    private void doTodo(TaskList taskList, Response response) {
+        assert data.length == 1;
+        String todoDescrip = data[0];
+        Task newTodo = taskList.addTodo(todoDescrip);
+        response.showAddTask(newTodo);
+        taskList.saveList();
+    }
+
+    private void doDeadline(TaskList taskList, Response response) {
+        assert data.length == 2;
+        String deadlineDescrip = data[0];
+        String by = data[1];
+        Deadline newDeadline = taskList.addDeadline(deadlineDescrip, by);
+        response.showAddTask(newDeadline);
+        taskList.saveList();
+    }
+
+    private void doEvent(TaskList taskList, Response response) {
+        assert data.length == 3;
+        String eventDescrip = data[0];
+        String from = data[1];
+        String to = data[2];
+        Event newEvent = taskList.addEvent(eventDescrip, from, to);
+        response.showAddTask(newEvent);
+        taskList.saveList();
+    }
+
+    private void doDelete(TaskList taskList, Response response) {
+        assert data.length == 1;
+        int index = Integer.parseInt(data[0]) - 1;
+        assert index <= taskList.getCount();
+        response.showDeleteTask(index);
+        taskList.removeTask(index);
+        taskList.saveList();
+    }
+
+    private void doFind(TaskList taskList, Response response) {
+        assert data.length == 1;
+        String keyword = data[0];
+        ArrayList<Task> matchingTasks = taskList.findTasks(keyword);
+        response.showFindList(matchingTasks);
     }
 
     public String getType() {
