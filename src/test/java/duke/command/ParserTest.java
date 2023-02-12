@@ -6,7 +6,9 @@ import duke.task.Event;
 import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +44,7 @@ public class ParserTest {
 
     @Test
     public void parse_validEventCommand_returnsAddCommand() throws DukeException {
-        Command command = Parser.parse("event go to party /from 01012023 /to 02012023 1800");
+        Command command = Parser.parse("event go to party /from 01012023 0000 /to 02012023 1800");
         assertTrue(command instanceof Command.AddCommand);
         Event task = (Event) ((Command.AddCommand) command).getTask();
         assertEquals("go to party", task.getDescription());
@@ -108,7 +110,51 @@ public class ParserTest {
 
     @Test
     public void parse_invalidFilterCommand_throwsDukeException() {
+        assertThrows(DukeException.class, () -> Parser.parse("filter   "));
+    }
+
+    @Test
+    public void parse_validFilterDateCommand_returnsFilterDateCommand() throws DukeException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+        Command command = Parser.parse("filterdate 01022023, 01022024");
+        assertTrue(command instanceof Command.FilterDateCommand);
+        LocalDate[] keywords = new LocalDate[] {LocalDate.parse("01022023", formatter), LocalDate.parse("01022024", formatter)};
+        assertEquals(Arrays.asList(keywords), Arrays.asList(((Command.FilterDateCommand) command).getDates()));
+    }
+
+    @Test
+    public void parse_invalidFilterDateCommand_throwsDukeException() {
         assertThrows(DukeException.class, () -> Parser.parse("filterdate abc"));
+    }
+
+    @Test
+    public void parse_validSortCommand_returnsSortCommand() throws DukeException {
+        Command command = Parser.parse("sort");
+        assertTrue(command instanceof Command.SortCommand);
+    }
+
+    @Test
+    public void parse_validSortDateCommand_returnsSortDateCommand() throws DukeException {
+        Command command = Parser.parse("sortdate");
+        assertTrue(command instanceof Command.SortDateCommand);
+    }
+
+    @Test
+    public void parse_validSortDoneCommand_returnsSortDoneCommand() throws DukeException {
+        Command command = Parser.parse("sortdone");
+        assertTrue(command instanceof Command.SortDoneCommand);
+    }
+
+    @Test
+    public void parse_validSortTaskCommand_returnsSortTaskCommand() throws DukeException {
+        Command command = Parser.parse("sorttask");
+        assertTrue(command instanceof Command.SortTaskCommand);
+    }
+
+    @Test
+    public void parse_validHelpCommand_returnsHelpCommand() throws DukeException {
+        Command command = Parser.parse("help");
+        assertTrue(command instanceof Command.HelpCommand);
     }
 
     @Test
@@ -121,5 +167,4 @@ public class ParserTest {
     public void parse_invalidCommand_throwsDukeException() {
         assertThrows(DukeException.class, () -> Parser.parse("do something"));
     }
-
 }
