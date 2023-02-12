@@ -2,7 +2,7 @@
 
 `Kuromi クロミ` is a desktop application that acts as a *personal assistant chatbot* to **keep track of your tasks**. The character `Kuromi クロミ` (the bot) is taken from a [Sanrio Character](https://www.sanrio.com/collections/kuromi), and the user will play the role as `Kuromi クロミ`'s **rival**, `My Melody マイメロディ`.
 
-## Features 
+## Main Features 
 
 ### Manage your tasks
 
@@ -22,9 +22,9 @@ From this [source](https://hellokitty.fandom.com/wiki/Kuromi#With_Friends_and_Fa
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - add a ToDo task
 
-Describe the action and its outcome.
+Adds a ToDo
 
 Example of usage: 
 
