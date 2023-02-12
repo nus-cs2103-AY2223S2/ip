@@ -53,6 +53,9 @@ public class Duke {
                     case 7:
                         taskList.addEvent(body);
                         break;
+                    case 8:
+                        taskList.find(body);
+                        break;
                     default:
                         System.out.println(ui.ERROR_UNKNOWN_COMMAND);
                         break;

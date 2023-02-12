@@ -110,6 +110,28 @@ public class TaskList {
     }
 
     /**
+     *
+     * @param body string to find
+     */
+    void find(String body) {
+        boolean found = false;
+
+        System.out.println("-------------------------------------------------");
+        System.out.println("Matching tasks I've found in your list: ");
+        for (Task temp : tasks) {
+            if (temp.getDesc().contains(body)) {
+                found = true;
+                System.out.println(temp);
+            }
+        }
+
+        if(!found){
+            System.out.println("No tasks matches your search :(");
+        }
+        System.out.println("-------------------------------------------------");
+    }
+
+    /**
      * getter for task list
      * @return task list
      */
