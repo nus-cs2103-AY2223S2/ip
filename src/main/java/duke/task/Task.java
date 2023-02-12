@@ -55,7 +55,7 @@ public abstract class Task {
     public abstract String toSavedString();
 
     /**
-     * Returns true if this task's description matches any keywords.
+     * Checks if this task's description matches any keywords.
      * 
      * @param keywords List of keywords to check.
      * @return True if task's description matches any keywords.
