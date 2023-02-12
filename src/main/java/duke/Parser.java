@@ -1,10 +1,8 @@
 package duke;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.PriorityBlockingQueue;
 import java.util.stream.IntStream;
 
 import javafx.animation.Timeline;
@@ -134,13 +132,6 @@ class Parser {
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
     }
 
-    /*
-    static TaskList<Task> unmark(String command, TaskList<Task> tasks, boolean isUi) {
-        int taskPosition = Integer.parseInt(command.substring(Math.max(command.length() - 1, 0))) - DECREMENT;
-        System.out.println(UNMARK_COMMAND + tasks.get(taskPosition));
-        return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
-    }
-    */
     /**
      * Process the saved deletion of a task. It will display the command that the
      * task has been deleted, and show the current list of tasks
@@ -183,13 +174,6 @@ class Parser {
         return tasks;
     }
 
-    /*
-    static TaskList<Task> delete(String command, TaskList<Task> tasks, boolean isUi) {
-        int taskPosition = Integer.parseInt(command.substring(Math.max(command.length() - 1, 0))) - DECREMENT;
-        System.out.println(DELETE_COMMAND + tasks.get(taskPosition));
-        return tasks.removeTask(taskPosition);
-    }
-    */
     /**
      * Add a new Todo task into the list of tasks from the saved data.
      * @param description Title of the task
@@ -305,35 +289,4 @@ class Parser {
          tasks.listFindTasks(sc.nextLine(), tasks);
          return tasks;
     }
-
-    /*
-    static TaskList<Task> addRecur(Scanner sc, TaskScheduler recurList, TaskList<Task> tasks) {
-        String description = sc.nextLine();
-        if (description.trim().length() == 0) {
-            throw new DukeException("Event must not be empty");
-        }
-        assert(description.contains("/from"));
-        String[] dateRange = description.split("/from");
-        String actualDescription = dateRange[0];
-        assert(dateRange[1].contains("/to"));
-        String startTime = dateRange[1].split("/to")[0];
-        assert(dateRange[1].split("/to")[1].contains("/repeat"));
-        String endTime = dateRange[1].split("/to")[1].split("/repeat")[0];
-        String repeatString = dateRange[1].split("/to")[1].split("/repeat")[1];
-        assert(repeatString.length() > 1);
-        repeatString = repeatString.substring(1,repeatString.length() -1);
-        Integer repeat = Integer.parseInt(repeatString);
-        Recur newTask = new Recur(actualDescription, startTime, endTime, repeat);
-        //System.out.println("recur task " + newTask.toString());
-        recurList.addRecurringEvent(newTask);
-        return tasks.add(new Events(actualDescription, startTime, endTime));
-        //return recurList;
-    }
-    */
-
-    /*
-    static TaskList<Task> recurringTask(Scanner sc, TaskList<Task> tasks) {
-    }
-    */
-
 }
