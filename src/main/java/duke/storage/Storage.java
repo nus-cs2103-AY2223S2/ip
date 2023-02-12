@@ -51,7 +51,7 @@ public class Storage {
     }
 
     /**
-     *  Load data from file path and stores it in an ArrayList for duke.Duke
+     *  Load data from file path and stores it in an ArrayList for duke.main.Duke
      *
      * @return ArrayList containing tasks from file based on file path
      */

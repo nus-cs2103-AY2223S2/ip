@@ -58,9 +58,8 @@ public class TaskList {
      *
      * @param index
      * @return Task
-     * @throws DukeException
      */
-    public Task getTask(int index) throws DukeException {
+    public Task getTask(int index) {
         // handle errors out of range
         int display = index + 1;
         assert index >= 0 && index < this.getSize() : "Task" + display + " does not exist.";

@@ -1,4 +1,4 @@
-package duke;
+package duke.main;
 
 import duke.exception.DukeException;
 import javafx.animation.PauseTransition;
