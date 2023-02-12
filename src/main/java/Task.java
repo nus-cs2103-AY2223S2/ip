@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private boolean isDone;
     private final String str;
 
@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * This marks the task as done
+     * 
      * @return String form of task
      */
     public String mark() {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * This marks the task as undone
+     * 
      * @return String form of task
      */
     public String unmark() {
@@ -25,8 +27,19 @@ public class Task {
         return this.toString();
     }
 
+    public String getMarkX() {
+        return (isDone ? "X" : " ");
+    }
+
+    public String getStr() {
+        return this.str;
+    }
+
+    public abstract String getType();
+
     /**
      * Custom toString includes checkbox showing whether task is done
+     * 
      * @return custom toString
      */
     @Override

@@ -17,6 +17,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getType() {
+        return "D";
+    }
+
+    public String getBy() {
+        return this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.by.format(OUTPUT_FORMAT)
                 + ")";
