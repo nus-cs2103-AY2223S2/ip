@@ -31,6 +31,9 @@ public class Main {
 }
 ```
 
+Consider the XML code `<bar type="name">goo</bar>`{.xml},<br>
+or the java code `public static void main(String[] args)`{.java}.
+
 ```xml
 <foo>
   <bar type="name">goo</bar>
