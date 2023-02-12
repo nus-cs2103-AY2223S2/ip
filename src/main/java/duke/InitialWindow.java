@@ -27,7 +27,7 @@ public class InitialWindow {
         scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-        System.out.println("fxmlLoader " + fxmlLoader);
+        //System.out.println("fxmlLoader " + fxmlLoader);
         stage.show();
     }
 

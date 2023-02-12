@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -36,14 +37,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Khabib.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ronaldo.png"));
+    private final Image userImage =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Khabib.png")));
+    private final Image dukeImage =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Ronaldo.png")));
 
     List<Timeline> recurResponse = new ArrayList<>();
 
-    Image image = new Image(this.getClass().getResourceAsStream("/images/Wallpaper.png"));
+    Image image = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Wallpaper.png")));
     BackgroundSize backgroundSize = new BackgroundSize(1, 1, false, false, false, false);
-    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+    BackgroundImage backgroundImage =
+            new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                    BackgroundPosition.CENTER, backgroundSize);
     Background background = new Background(backgroundImage);
 
     /**
@@ -52,18 +57,39 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        setScroll();
+        displayWelcome();
+        duke = new Duke();
+    }
+
+    void setScroll() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    void displayWelcome() {
+        ByteArrayOutputStream newPrintStream = setNewPrintStream();
+        PrintStream oldPrintStream = System.out;
+        initUiGreet();
+        resetPrintStream(oldPrintStream);
+        String greeting = newPrintStream.toString();
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
+    }
+
+    ByteArrayOutputStream setNewPrintStream() {
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
-        PrintStream oldPrintStream = System.out;
         System.setOut(printStream);
-        Ui ui = new Ui("Greetings");
-        ui.showWelcome();
+        return storeString;
+    }
+
+    void resetPrintStream(PrintStream oldPrintStream) {
         System.out.flush();
         System.setOut(oldPrintStream);
-        String greeting = storeString.toString();
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
-        duke = new Duke();
+    }
+
+    void initUiGreet() {
+        Ui ui = new Ui("Greetings");
+        ui.showWelcome();
     }
 
     public void setDuke(Duke d) {

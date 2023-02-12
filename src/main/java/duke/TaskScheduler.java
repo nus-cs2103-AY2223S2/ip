@@ -80,18 +80,4 @@ public class TaskScheduler extends TaskList<Recur> {
         this(20, priorityQueue);
     }
     */
-
-    //Change to accept Recur event later
-    /*
-    void addRecurringEvent(Recur recurEvent) {
-        for (int i=0; i<10;i++) {
-            priorityQueue.add(recurEvent);
-        }
-     */
-        /*
-        priorityQueue.add(new Recur("First zoom meeting","Monday","Monday",1000));
-        priorityQueue.add(new Recur("Second zoom meeting","Tuesday","Tuesday",2000));
-        priorityQueue.add(new Recur("Third zoom meeting","Wednesday","Wednesday",3000));
-        priorityQueue.add(new Recur("Fourth zoom meeting","Thursday","Thursday",4000));
-        */
 }
