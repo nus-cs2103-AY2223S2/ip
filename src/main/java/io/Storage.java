@@ -1,5 +1,6 @@
 package io;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import util.Either;
 
@@ -31,6 +34,13 @@ public class Storage<T extends Serializable> {
     private Storage(Class<T> type, String filepath) {
         this.type = type;
         this.filepath = filepath;
+
+        // Checks if directory exists and if not, creates it.
+        File directory = new File(DIR);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        
     }
 
     /**
