@@ -1,4 +1,0 @@
-[T][X] borrow book
-[D][X] return book (by: Sunday)
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
-[T][ ] job

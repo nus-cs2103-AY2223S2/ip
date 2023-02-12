@@ -1,5 +1,8 @@
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import java.util.Scanner;
  */
 public class Duke {
     private static final String DIVIDER_LINE = "____________________________________________________\n";
-    private static ArrayList<Task> TASKS = new ArrayList<Task>();
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static final Path tasksFilePath = Paths.get(".", ".", ".", "data", "duke.txt");
     private static final Path tempTasksFilePath = Paths.get(".", ".", ".", "data", "temp_duke.txt");
 
@@ -68,7 +71,7 @@ public class Duke {
                     newTask = new Deadline(description, by);
                 }
 
-                TASKS.add(newTask);
+                tasks.add(newTask);
                 //checks whether this tasks is marked as done or not
                 if (pointer.substring(3).startsWith("[X]")) {
                     newTask.mark();
@@ -84,8 +87,8 @@ public class Duke {
         try {
             Files.deleteIfExists(tempTasksFilePath);
             Files.createFile(tempTasksFilePath);
-            for (int i = 0; i < TASKS.size(); i++) {
-                text += TASKS.get(i) + "\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                text += tasks.get(i) + "\n";
             }
             Files.writeString(tempTasksFilePath, text);
             Files.deleteIfExists(tasksFilePath);
@@ -100,17 +103,17 @@ public class Duke {
     }
 
     private static void addTask(Task newTask) {
-        TASKS.add(newTask);
+        tasks.add(newTask);
         writeFile();
         System.out.println(reply("Got it. I've added this task:\n  "
                     + newTask
-                    + "\nNow you have " + TASKS.size() + " tasks in the list\n"));
+                    + "\nNow you have " + tasks.size() + " tasks in the list\n"));
 
     }
 
     private static void mark(String command) {
         int index = Integer.valueOf(command.substring(5)) - 1;
-        Task target = TASKS.get(index);
+        Task target = tasks.get(index);
         target.mark();
         writeFile();
         System.out.println(reply("Nice! I've marked this task as above:\n  " + target + "\n"));
@@ -118,28 +121,28 @@ public class Duke {
 
     private static void unmark(String command) {
         int index = Integer.valueOf(command.substring(7)) - 1;
-        Task target = TASKS.get(index);
+        Task target = tasks.get(index);
         target.unmark();
         writeFile();
         System.out.println(reply("OK, I've marked this task as not done yet:\n  " + target + "\n"));
     }
 
     private static void displayTasks() {
-        String list_of_tasks = "";
+        String tasksList = "";
         Task currentTask;
-        for (int i = 0; i < TASKS.size(); i++) {
-            currentTask = TASKS.get(i);
-            list_of_tasks += i + 1 + "." + currentTask.toString() + "\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            currentTask = tasks.get(i);
+            tasksList += i + 1 + "." + currentTask.toString() + "\n";
         }
-        System.out.println(reply("Here are the tasks in your list:\n" + list_of_tasks));
+        System.out.println(reply("Here are the tasks in your list:\n" + tasksList));
     }
 
     private static void delete(String command) {
         int index = Integer.valueOf(command.substring(7)) - 1;
-        Task target = TASKS.get(index);
+        Task target = tasks.get(index);
         System.out.println(reply("Noted. I've removed this task:\n"
-                + target + "\nNow you have " + TASKS.size() + "in the list\n"));
-        TASKS.remove(index);
+                + target + "\nNow you have " + tasks.size() + "in the list\n"));
+        tasks.remove(index);
         writeFile();
     }
 
@@ -197,7 +200,7 @@ public class Duke {
                 } else {
                     throw new DukeException(reply("I'm sorry, but I don't know what that means :-(\n"));
                 }
-                if (!TASKS.contains(newTask)) {
+                if (!tasks.contains(newTask)) {
                     addTask(newTask);
                 }
             } catch (DukeException e) {
