@@ -28,6 +28,10 @@ public class Ui {
         return "\nOkay... I've added this task:\n  " + taskDetails;
     }
 
+    public static String getAddTaskConfirmationWithAttitudeOf(Task taskAdded) {
+        return "\nOkay... I've added this task:\n  " + taskAdded.getTaskDetails();
+    }
+
     public static String getAllTaskFoundMessageWithAttitude(String allTaskFound) {
         if (allTaskFound.isBlank()) {
             return "DOES NOT EXIST";

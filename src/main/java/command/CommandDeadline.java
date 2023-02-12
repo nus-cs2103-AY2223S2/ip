@@ -1,6 +1,7 @@
 package command;
 
 import duke.DukeException;
+import duke.Task;
 import duke.TaskList;
 import duke.Ui;
 
@@ -25,6 +26,15 @@ public class CommandDeadline extends Command {
 
     @Override
     public String execute() throws DukeException {
-        return Ui.getAddTaskConfirmationWithAttitude(this.taskList.addDeadlineTask(this.taskDetails));
+        Task taskAdded = this.addIntoList(this.taskDetails);
+        return this.getConfirmationMessageOf(taskAdded);
+    }
+
+    private String getConfirmationMessageOf(Task taskAdded) {
+        return Ui.getAddTaskConfirmationWithAttitudeOf(taskAdded);
+    }
+
+    private Task addIntoList(String taskDetails) throws DukeException {
+        return this.taskList.addDeadlineTask(taskDetails);
     }
 }

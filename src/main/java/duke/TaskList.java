@@ -275,7 +275,7 @@ public class TaskList {
         return newTask.getTaskDetails();
     }
 
-    public String addDeadlineTask(String taskDetails) throws DukeException {
+    public Task addDeadlineTask(String taskDetails) throws DukeException {
         try {
             String[] s = taskDetails.split("/by");
             String taskInfo = s[0].trim();
@@ -283,7 +283,7 @@ public class TaskList {
 
             Task newTask = new Deadline(taskInfo, taskDateLine);
             storedInputs.add(newTask);
-            return newTask.getTaskDetails();
+            return newTask;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(Ui.emptyDetailsForDeadlineMessage);
         }
