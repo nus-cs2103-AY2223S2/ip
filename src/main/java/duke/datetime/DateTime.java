@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Instance of a date and time.
+ * Date and time representing a particular instant.
  */
 public class DateTime {
 

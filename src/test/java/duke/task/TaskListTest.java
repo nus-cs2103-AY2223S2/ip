@@ -13,7 +13,32 @@ import duke.command.Command;
 public class TaskListTest {
 
     @Test
-    public void taskList_findAll() {
+    public void taskList_indexOutOfBounds_raisesException() {
+        TaskList tasks = new TaskList();
+        LinkedHashMap<Command.Argument, String> args1 = new LinkedHashMap<>();
+        args1.put(Command.Argument.TODO, "task with kword");
+        Command command1 = new Command(args1);
+        LinkedHashMap<Command.Argument, String> args2 = new LinkedHashMap<>();
+        args2.put(Command.Argument.DEADLINE, "another task");
+        args2.put(Command.Argument.BY, "2000-01-01 1000");
+        Command command2 = new Command(args2);
+
+        LinkedHashMap<Command.Argument, String> args3 = new LinkedHashMap<>();
+        args3.put(Command.Argument.MARK, "2");
+        Command markCommand = new Command(args3);
+        LinkedHashMap<Command.Argument, String> args4 = new LinkedHashMap<>();
+        args4.put(Command.Argument.DELETE, "2");
+        Command deleteCommand = new Command(args4);
+
+        tasks.execute(command1);
+        tasks.execute(command2);
+        assertThrows(IllegalArgumentException.class, (() -> tasks.execute(markCommand)));
+        assertThrows(IllegalArgumentException.class, (() -> tasks.execute(deleteCommand)));
+
+    }
+
+    @Test
+    public void findAll() {
         TaskList tasks = new TaskList();
         LinkedHashMap<Command.Argument, String> args1 = new LinkedHashMap<>();
         args1.put(Command.Argument.TODO, "task with kword");
@@ -38,7 +63,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void taskList_givenDuplicate_rejectsCommand() {
+    public void addTask_givenDuplicate_rejectsCommand() {
         TaskList tasks = new TaskList();
         LinkedHashMap<Command.Argument, String> args1 = new LinkedHashMap<>();
         args1.put(Command.Argument.TODO, "todo task");
