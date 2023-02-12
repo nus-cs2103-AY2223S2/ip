@@ -52,7 +52,7 @@ public class GUi extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-        // Scroll container
+        initializeGUiFields();
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, enterButton);
