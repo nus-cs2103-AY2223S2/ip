@@ -1,7 +1,7 @@
 package duke;
 
 import command.*;
-import task.DukeKeyword;
+import task.Features;
 import task.TaskList;
 
 /**
@@ -19,38 +19,38 @@ public class Parser {
      * Returns the event type associated to the user input
      *
      * @param input User input.
-     * @return DukeKeyword
+     * @return Features
      * @throws DukeException If keyword is not recognised.
      */
-    protected static DukeKeyword parse(String input) throws DukeException {
+    protected static Features parse(String input) throws DukeException {
         String[] arr = input.split(" ");
 
         if (arr[0].equals("bye")) {
-            return DukeKeyword.BYE;
+            return Features.BYE;
         }
         if (arr[0].equals("list")) {
-            return DukeKeyword.LIST;
+            return Features.LIST;
         }
         if (arr[0].equals("mark")) {
-            return DukeKeyword.MARK;
+            return Features.MARK;
         }
         if (arr[0].equals("unmark")) {
-            return DukeKeyword.UNMARK;
+            return Features.UNMARK;
         }
         if (arr[0].equals("delete")) {
-            return DukeKeyword.DELETE;
+            return Features.DELETE;
         }
         if (arr[0].equals("todo")) {
-            return DukeKeyword.TODO;
+            return Features.TODO;
         }
         if (arr[0].equals("deadline")) {
-            return DukeKeyword.DEADLINE;
+            return Features.DEADLINE;
         }
         if (arr[0].equals("event")) {
-            return DukeKeyword.EVENT;
+            return Features.EVENT;
         }
         if (arr[0].equals("find")) {
-            return DukeKeyword.FIND;
+            return Features.FIND;
         }
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

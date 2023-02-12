@@ -1,8 +1,8 @@
 package task;
 
 /**
- * Consists of keywords that the chat-bot recognise.
+ * Consists of features that Duke supports.
  */
-public enum DukeKeyword {
+public enum Features {
     BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
 }

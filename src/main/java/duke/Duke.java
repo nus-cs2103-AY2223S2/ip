@@ -1,6 +1,6 @@
 package duke;
 
-import task.DukeKeyword;
+import task.Features;
 import task.TaskList;
 
 import java.util.Scanner;
@@ -42,7 +42,7 @@ public class Duke {
     private void run() {
         // Execute inputs
         String userInput;
-        DukeKeyword curEvent;
+        Features curEvent;
         loop: while (true) {
 
             // Get inputs
