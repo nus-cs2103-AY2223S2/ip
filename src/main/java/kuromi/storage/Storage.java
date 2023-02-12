@@ -1,4 +1,4 @@
-package kuromi;
+package kuromi.storage;
 
 import static java.lang.Boolean.parseBoolean;
 
@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import kuromi.exception.KuromiException;
 import kuromi.task.Deadline;
 import kuromi.task.Event;
 import kuromi.task.Task;
@@ -24,7 +25,7 @@ public class Storage {
     private java.nio.file.Path filePath;
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor
      * (for invocation by classes that require updating data to the storage and taking data
      * from the storage.
      *

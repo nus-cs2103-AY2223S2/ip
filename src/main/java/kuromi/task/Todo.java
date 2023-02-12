@@ -5,7 +5,7 @@ package kuromi.task;
  */
 public class Todo extends Task {
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by most classes)
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by most classes)
      *
      * @param description Description of a Todo.
      */

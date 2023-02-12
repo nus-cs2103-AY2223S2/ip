@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import kuromi.KuromiException;
+import kuromi.exception.KuromiException;
 
 public class TaskListTest {
     @Test

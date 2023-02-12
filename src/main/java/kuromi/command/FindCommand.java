@@ -1,7 +1,7 @@
 package kuromi.command;
 
-import kuromi.Storage;
-import kuromi.Ui;
+import kuromi.storage.Storage;
+import kuromi.view.Ui;
 import kuromi.task.TaskList;
 
 /**
@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor
      * @param keyword The keyword to be searched.
      */
     public FindCommand(String keyword) {

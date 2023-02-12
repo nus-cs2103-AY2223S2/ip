@@ -2,7 +2,11 @@ package kuromi;
 
 import javafx.stage.Stage;
 import kuromi.command.Command;
+import kuromi.exception.KuromiException;
+import kuromi.parser.Parser;
+import kuromi.storage.Storage;
 import kuromi.task.TaskList;
+import kuromi.view.Ui;
 
 /**
  * The main class of Kuromi where the application is instantiated through this class. A <code>Kuromi</code> object
@@ -17,7 +21,7 @@ public class Kuromi {
     private Ui ui;
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by main method).
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by main method).
      * Get stored data from previous session.
      *
      * @param filePath The file path to the file stored with data from previous Kuromi session.
@@ -33,19 +37,12 @@ public class Kuromi {
         }
     }
 
-    String getResponse(String inp) {
+    public String getResponse(String inp) {
         try {
             Command c = Parser.parse(inp, ui, tasks);
             return c.execute(tasks, ui, storage);
         } catch (KuromiException e) {
             return e.getMessage();
         }
-    }
-
-    String getWelcomeMessage() {
-        String msg = "Hello! I'm Kuromi\nWhat can I do for you?\n";
-        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
-        msg += "I know you're Melody -_-";
-        return msg;
     }
 }

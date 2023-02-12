@@ -1,4 +1,4 @@
-package kuromi;
+package kuromi.gui.component;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import kuromi.Kuromi;
+import kuromi.view.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -30,7 +33,7 @@ public class MainWindow extends AnchorPane {
 
     public void setKuromi(Kuromi d) {
         kuromi = d;
-        String welcome = kuromi.getWelcomeMessage();
+        String welcome = Ui.showWelcomeMessage();
         dialogContainer.getChildren().add(KuromiDialogBox.getKuromiDialog(welcome, kuromiImage));
     }
 

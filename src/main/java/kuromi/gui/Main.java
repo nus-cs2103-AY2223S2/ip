@@ -1,12 +1,14 @@
-package kuromi;
+package kuromi.gui;
 
 import java.io.IOException;
 
+import kuromi.gui.component.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import kuromi.Kuromi;
 
 /**
  * A GUI for Duke using FXML.

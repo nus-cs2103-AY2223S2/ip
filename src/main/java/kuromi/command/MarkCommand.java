@@ -1,7 +1,7 @@
 package kuromi.command;
 
-import kuromi.Storage;
-import kuromi.Ui;
+import kuromi.storage.Storage;
+import kuromi.view.Ui;
 import kuromi.task.Task;
 import kuromi.task.TaskList;
 
@@ -13,7 +13,7 @@ public class MarkCommand extends Command {
     private int idx;
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor.
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor.
      *
      * @param idx Index of the task to be marked.
      */

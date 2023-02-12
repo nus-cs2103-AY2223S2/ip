@@ -1,5 +1,6 @@
-package kuromi;
+package kuromi.parser;
 
+import kuromi.exception.KuromiException;
 import kuromi.command.AddCommand;
 import kuromi.command.Command;
 import kuromi.command.CommandType;
@@ -15,6 +16,7 @@ import kuromi.task.Deadline;
 import kuromi.task.Event;
 import kuromi.task.TaskList;
 import kuromi.task.Todo;
+import kuromi.view.Ui;
 
 /**
  * Parser class parses the full user's input to understand what command the user has typed.

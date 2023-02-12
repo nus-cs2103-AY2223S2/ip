@@ -1,4 +1,4 @@
-package kuromi;
+package kuromi.view;
 
 import java.util.Scanner;
 
@@ -59,8 +59,11 @@ public class Ui {
     /**
      * Show welcome message.
      */
-    public String showWelcome() {
-        return ("Hello! I'm Kuromi\nWhat can I do for you?\n");
+    public static String showWelcomeMessage() {
+        String msg = "Hello! I'm Kuromi\nWhat can I do for you?\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
+        msg += "I know you're Melody -_-";
+        return msg;
     }
 
     /**

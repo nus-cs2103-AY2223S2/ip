@@ -1,4 +1,4 @@
-package kuromi;
+package kuromi.gui;
 
 import javafx.application.Application;
 

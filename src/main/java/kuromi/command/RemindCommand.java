@@ -1,7 +1,7 @@
 package kuromi.command;
 
-import kuromi.Storage;
-import kuromi.Ui;
+import kuromi.storage.Storage;
+import kuromi.view.Ui;
 import kuromi.task.TaskList;
 
 /**

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import kuromi.KuromiException;
+import kuromi.exception.KuromiException;
 
 /**
  * Deadline task represented by description and deadline. Extends from Task class.
@@ -16,7 +16,7 @@ public class Deadline extends Task {
     protected LocalDateTime date;
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by most classes)
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by most classes)
      *
      * @param description Description of a deadline.
      * @param by Deadline date of a deadline.

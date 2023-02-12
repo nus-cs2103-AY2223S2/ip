@@ -48,7 +48,7 @@ test {
 }
 
 application {
-    mainClassName = "kuromi.Launcher"
+    mainClassName = "kuromi.gui.Launcher"
 }
 
 shadowJar {

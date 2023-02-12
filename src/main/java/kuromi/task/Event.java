@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import kuromi.KuromiException;
+import kuromi.exception.KuromiException;
 
 /**
  * Event task represented by description, start date, and end date. Extends from Task class.
@@ -20,7 +20,7 @@ public class Event extends Task {
     protected LocalDateTime dateBy;
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation by most classes)
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation by most classes)
      * @param description The description of an event.
      * @param by The end date of an event.
      * @param from The start date of an event.

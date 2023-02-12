@@ -1,4 +1,4 @@
-package kuromi;
+package kuromi.gui.component;
 
 import java.io.IOException;
 import java.util.Collections;

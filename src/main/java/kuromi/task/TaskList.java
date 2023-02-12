@@ -13,14 +13,14 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation if file in hard disk is not present)
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation if file in hard disk is not present)
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * kuromi.MainWindow.kuromi.KuromiException.Main constructor (for invocation if TaskList is not empty)
+     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor (for invocation if TaskList is not empty)
      *
      * @param tasks Tasks as ArrayList
      */
