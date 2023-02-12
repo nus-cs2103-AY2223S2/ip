@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+[E][ ] meeting  (Start: Jan 25 2023 | End: Jan 27 2023)
+[T][ ] bake cake
+[T][ ] bake cookies
+>>>>>>> d8eec874abd3c99e8ce589cd9440c78a624df538
 [T][ ] sing
 [T][ ] run
 [D][ ] eat (Due: Jan 01 2023)
