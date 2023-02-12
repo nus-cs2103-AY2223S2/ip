@@ -139,7 +139,7 @@ public class Duke {
     public boolean handleCommandReturnStatus(String inMsg, boolean suppressPrint) throws DukeException {
         Command command = Parser.parseCommand(inMsg, suppressPrint);
         command.execute(taskList, ui);
-        return !command.isExit();
+        return !command.getIsExit();
     }
 
     /**

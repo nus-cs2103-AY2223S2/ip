@@ -65,7 +65,7 @@ public abstract class Command {
      * Returns whether this is an exit command
      * @return a boolean value indicating status
      */
-    public boolean isExit() {
+    public boolean getIsExit() {
         return isExit;
     }
 
