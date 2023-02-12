@@ -42,24 +42,20 @@ public class TaskList {
             throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
         }
         if (type.equals("TODO")) {
-            isTaskAdded = addTodo(words);
-        } else if(type.equals("DEADLINE")) {
-            isTaskAdded = addDeadline(words);
+            tasks.add(new Todo(String.join(" ", words )));
+            isTaskAdded = true;
         } else {
-            isTaskAdded = addEvent(words);
+            String description;
+            if (type.equals("DEADLINE")) {
+                isTaskAdded = addDeadline(words);
+            } else {
+                isTaskAdded = addEvent(words);
+            }
         }
         assert tasks.size() >= 1 : "Something is wrong with add of task";
         return isTaskAdded;
     }
 
-
-    public boolean addTodo(String[] words) {
-        Task task = new Todo(String.join(" ", words ));
-        tasks.add(task);
-        mainWindow.sendDukeResponse("Got it. I've added this task:\n" + task);
-        mainWindow.sendDukeResponse("Now you have " + tasks.size() + " tasks in the list.");
-        return true;
-    }
 
     /**
      * Adds a Deadline Task to the list given the description
@@ -184,8 +180,7 @@ public class TaskList {
         String foundTasks = "";
         int index = 1;
         for (Task task : tasks) {
-            String taskDescription = task.getDescription().toUpperCase();
-            if (taskDescription.contains(description.toUpperCase())) {
+            if (task.getDescription().contains(description)) {
                 foundTasks += index + ". " + task.toString() + "\n";
                 index++;
             }

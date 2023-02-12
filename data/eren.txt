@@ -10,6 +10,3 @@ Deadline|    NO     | hoho | 27 Jan 1999 03:00pm
   Event |    NO     | remedial | 03 Jun 2023 04:00am - 04 May 2024 07:00pm
 Deadline|    YES    | Finish | 12 Feb 2023 11:59pm
 Deadline|    NO     | Finishsss | 12 Feb 2023 11:59pm
-  Todo  |    NO     | hi | ---
-Deadline|    YES    | Finish 2103T iP | 12 Feb 2023 11:59pm
-  Event |    NO     | Finish 2103T iP | 12 Feb 2023 11:59pm - 13 Feb 2023 11:59pm
