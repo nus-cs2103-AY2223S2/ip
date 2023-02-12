@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  */
 public abstract class Task {
     private String description;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Helps to create a subclass of Task.
@@ -21,21 +21,21 @@ public abstract class Task {
         this.description = description;
         // assumed to be not complete upon initialisation
         // would not make sense to add a finished task to the list
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Marks the task as complete.
      */
     public void complete() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Marks the task as incomplete.
      */
     public void uncomplete() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (this.done ? "[X] " : "[ ] ") + this.description;
+        return (this.isDone ? "[X] " : "[ ] ") + this.description;
     }
 
     /**
@@ -52,7 +52,7 @@ public abstract class Task {
      * @return A string representation of the Task in CSV form.
      */
     public String getCsvString() {
-        return String.format("%s,%b", this.description, this.done);
+        return String.format("%s,%b", this.description, this.isDone);
     }
 
     /**
@@ -85,7 +85,7 @@ public abstract class Task {
             System.out.println(">>> Unable to parse date: " + e.toString());
             return null;
         }
-        result.done = Boolean.parseBoolean(arguments[2]);
+        result.isDone = Boolean.parseBoolean(arguments[2]);
         return result;
     }
 
