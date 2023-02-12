@@ -1,11 +1,21 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Deadline;
 
+/**
+ * A command to create activities with deadlines.
+ */
 public class DeadlineCommand {
+    /**
+     * Creates a deadline object that is added to list of existing tasks.
+     * @param tasks a list of tasks.
+     * @param input user's description of the activity.
+     * @return acknowledgement of the deadline object being added.
+     * @throws DukeException if an invalid date or description were found.
+     */
     public static String addDeadline(TaskList tasks, String input) throws DukeException {
         if (input.length() < 10) {
             throw new DukeException("The description of a <deadline> cannot be empty!");
