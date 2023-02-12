@@ -21,10 +21,6 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String getBy() {
-        return this.by;
-    }
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.by.format(OUTPUT_FORMAT)
