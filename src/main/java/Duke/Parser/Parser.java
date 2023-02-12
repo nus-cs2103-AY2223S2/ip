@@ -4,10 +4,13 @@ import java.util.regex.Pattern;
 
 /**
  * This class deals with user inputs
+ *
+ * @author He Shuimei
+ * @version 0
  */
 public class Parser {
     /**
-     *
+     * Returns an integer for different commands
      * @param command string input from user
      * @return int representing the command
      */

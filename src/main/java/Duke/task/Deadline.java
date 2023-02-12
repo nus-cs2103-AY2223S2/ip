@@ -2,11 +2,18 @@ package Duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class creates a Deadline object which inherits from Task
+ * Deadline (String description, boolean isDone, LocalDateTime deadlineDay)
+ *
+ * @author He Shuimei
+ * @version 0
+ */
 public class Deadline extends Task {
     LocalDateTime deadlineDay;
 
-    public Deadline(String desc, boolean done, LocalDateTime deadlineDay) {
-        super(desc, done);
+    public Deadline(String desc, boolean isDone, LocalDateTime deadlineDay) {
+        super(desc, isDone);
         this.deadlineDay = deadlineDay;
     }
 

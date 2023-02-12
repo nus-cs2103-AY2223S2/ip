@@ -2,6 +2,13 @@ package Duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class creates an Event type object which inherits from Task
+ * Event(String description , boolean isDone, LocalDateTime from date, LocalDateTime to date)
+ *
+ * @author He Shuimei
+ * @version 0
+ */
 public class Event extends Task {
     LocalDateTime from;
     LocalDateTime to;

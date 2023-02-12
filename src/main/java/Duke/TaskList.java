@@ -13,6 +13,9 @@ import java.util.regex.Pattern;
 
 /**
  * This class deals with any interaction with the task list (insert, update, delete)
+ *
+ * @author He Shuimei
+ * @version 0
  */
 public class TaskList {
     static final Pattern DEADLINE_PATTERN = Pattern.compile("(.+)/by (.+)");

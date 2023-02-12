@@ -4,13 +4,18 @@ import Duke.task.Task;
 
 /**
  * This class deals with any response printing for the UI
+ *
+ * @author He Shuimei
+ * @version 0
  */
 public class Ui {
     public final String ERROR_DELETE_TASK = "Error: Item does not exist";
     public final String ERROR_EMPTY_TODO = "Please input something TO DO????!!";
     public final String ERROR_UNKNOWN_COMMAND = "Error: Unknown command, please try again";
+
     /*
-     * for deletion of task
+     * Deletes task
+     *
      * @param task, task to be deleted
      * @param size, size of list
      */
@@ -23,7 +28,8 @@ public class Ui {
     }
 
     /**
-     * for printing of adding tasks
+     * Prints successful add task
+     *
      * @param curr single Task object
      * @param size int size of list
      */
@@ -36,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * Printing the initial message
+     * Prints the initial start-up message
      */
     void printASCII(){
         String line = " ---------------------------------------------------------";
@@ -52,6 +58,11 @@ public class Ui {
         System.out.println("Input a command");
     }
 
+    /**
+     * Prints exception message
+     *
+     * @param e exception encountered
+     */
     void printException(Exception e) {
         System.out.println("Encountered exception: " + e + "\nExiting program");
     }

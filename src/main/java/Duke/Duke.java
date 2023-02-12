@@ -6,6 +6,12 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+/**
+ * Main Duke class
+ *
+ * @author He Shuimei
+ * @version 0
+ */
 public class Duke {
     public static void main(String[] args) throws IOException {
         Ui ui = new Ui();

@@ -20,6 +20,9 @@ import java.util.ArrayList;
 
 /**
  * This class deals with data saving and loading
+ *
+ * @author He Shuimei
+ * @version 0
  */
 public class Storage {
     static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
@@ -29,6 +32,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Checks for the data folder and save.txt
+     * Create folder/file if not exist
+     * @throws IOException not able to create file/folder
+     */
     void createFile() throws IOException {
         File f = new File(this.filePath);
         File d = new File("data");
@@ -48,6 +56,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks from save file and loads it into memory
+     * @return ArrayList<Task> tasks of tasks read from save file
+     * @throws IOException
+     */
     ArrayList<Task> readFile() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -90,6 +103,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes current data to save file
+     * @param tasks task list
+     */
     void writeFile(ArrayList<Task> tasks) {
         System.out.println("Saving your task list...");
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.filePath))) {

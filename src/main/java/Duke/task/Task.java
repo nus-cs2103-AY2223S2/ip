@@ -3,36 +3,47 @@ package Duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class defines a basic task object
+ * Task (String description, boolean isDone)
+ *
+ * @author He Shuimei
+ * @version 0
+ */
 public class Task {
     private final String desc;
-    private boolean done;
+    private boolean isDone;
 
-    public Task(String desc, boolean done) {
+    public Task(String desc, boolean isDone) {
         this.desc = desc;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
-     * Changes the status of done, true <-> false
+     * Changes the status of done to true
      */
     public void toggleDone() {
-        this.done = true;
-    }
-
-    public void toggleNotDone() {
-        this.done = false;
+        this.isDone = true;
     }
 
     /**
-     * if done, returns String "X" else returns empty string
+     * Changes the status of done to false
+     */
+    public void toggleNotDone() {
+        this.isDone = false;
+    }
+
+    /**
+     * Returns String "X" if done, else returns empty string
      * @return string
      */
     public String getDoneStatus(){
-        return done ? "X" : " ";
+        return isDone ? "X" : " ";
     }
 
     /**
-     * formats input date to "yyyy/MM/dd hh:mm am/pm"
+     * Formats input date to "yyyy/MM/dd hh:mm am/pm"
+     *
      * @param dateTime LocalDateTime object
      * @return formatted dateTime string
      */
@@ -41,21 +52,29 @@ public class Task {
         return dateTime.format(dtf);
     }
 
+    /**
+     * Formats input date to "yyyy/MM/dd HHmm"
+     *
+     * @param dateTime LocalDateTime object
+     * @return formatted dateTime string
+     */
     public String format24HrDate(LocalDateTime dateTime) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
         return dateTime.format(dtf);
     }
 
     /**
-     * getter for done
+     * Getter for done
+     *
      * @return this.done
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
      * getter for description
+     *
      * @return this.desc
      */
     public String getDesc(){
