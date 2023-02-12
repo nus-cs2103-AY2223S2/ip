@@ -15,6 +15,7 @@ public class UnmarkCommand extends Command {
         try {
             Task task = list.getTask(Integer.parseInt(command.split(Values.SPACEX)[1]) - 1);
             task.uncomplete();
+
             return ui.pixlPrint("Un-doing the task...\n"
                     + "\t" + task.formatTask());
         } catch (Exception e) {

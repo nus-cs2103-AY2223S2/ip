@@ -35,7 +35,9 @@ public class Storage {
             file.getParentFile().mkdirs();
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
+
             oos.writeObject(list);
+
             oos.close();
             fos.close();
         } catch (IOException fe) {
@@ -52,7 +54,9 @@ public class Storage {
         try {
             FileInputStream fis = new FileInputStream(filePath);
             ObjectInputStream ois = new ObjectInputStream(fis);
+
             ArrayList<Task> list = (ArrayList<Task>) ois.readObject();
+
             fis.close();
             ois.close();
             return list;

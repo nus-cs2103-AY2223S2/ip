@@ -2,8 +2,6 @@ package duke.gui;
 
 import duke.Values;
 
-import java.util.Scanner;
-
 /**
  * A class to handle all User Interactions: getting command input and printing output.
  */

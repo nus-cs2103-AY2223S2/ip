@@ -18,24 +18,10 @@ public class EventCommand extends Command {
         int fromIndex = Parser.getIndexOf(parts, "/from");
         int toIndex = Parser.getIndexOf(parts, "/to");
 
-        // Get task name.
-        StringBuilder taskName = new StringBuilder();
-        for (int i = 1; i < fromIndex; i++) {
-            taskName.append(i == 1 ? "" : Values.SPACE);
-            taskName.append(parts[i]);
-        }
-        // Get start date.
-        StringBuilder startDate = new StringBuilder();
-        for (int i = fromIndex + 1; i < toIndex; i++) {
-            startDate.append(i == fromIndex + 1 ? "" : Values.SPACE);
-            startDate.append(parts[i]);
-        }
-        // Get end date.
-        StringBuilder endDate = new StringBuilder();
-        for (int i = toIndex + 1; i < parts.length; i++) {
-            endDate.append(i == toIndex + 1 ? "" : Values.SPACE);
-            endDate.append(parts[i]);
-        }
+        // Get task name, start date, end date from the command.
+        String taskName = getName(parts, fromIndex);
+        String startDate = getStartDate(parts, fromIndex, toIndex);
+        String endDate = getEndDate(parts, toIndex);
 
         if (taskName.length() == 0 || startDate.length() == 0 || endDate.length() == 0) {
             throw new DukeException("Please provide a description, start date, and end date.\n"
@@ -44,8 +30,55 @@ public class EventCommand extends Command {
 
         Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
         list.addTask(task);
+
         return ui.pixlPrint("Added new event!\n"
                 + "\t" + task.formatTask()
                 + "\nYou now have " + list.getSize() + " task(s) in the list.");
+    }
+
+    /**
+     * Extracts the name of the event task from the command.
+     * @param parts Array of command's words (separated by spaces).
+     * @param fromIndex Index of "/from" in the command.
+     * @return The name of the event.
+     */
+    private String getName(String[] parts, int fromIndex) {
+        StringBuilder taskName = new StringBuilder();
+        for (int i = 1; i < fromIndex; i++) {
+            taskName.append(i == 1 ? "" : Values.SPACE);
+            taskName.append(parts[i]);
+        }
+        return taskName.toString();
+    }
+
+    /**
+     * Extracts the start date of the event from the command.
+     * @param parts Array of command's words (separated by spaces).
+     * @param fromIndex Index of "/from" in the command.
+     * @param toIndex Index of "/to" in the command.
+     * @return The start date of the event, as a String.
+     */
+    private String getStartDate(String[] parts, int fromIndex, int toIndex) {
+        StringBuilder startDate = new StringBuilder();
+        for (int i = fromIndex + 1; i < toIndex; i++) {
+            startDate.append(i == fromIndex + 1 ? "" : Values.SPACE);
+            startDate.append(parts[i]);
+        }
+        return startDate.toString();
+    }
+
+    /**
+     * Extracts the end date of the event from the command.
+     * @param parts Array of command's words (separated by spaces).
+     * @param toIndex Index of "/to" in the command.
+     * @return The end date of the event, as a String.
+     */
+    private String getEndDate(String[] parts, int toIndex) {
+        StringBuilder endDate = new StringBuilder();
+        for (int i = toIndex + 1; i < parts.length; i++) {
+            endDate.append(i == toIndex + 1 ? "" : Values.SPACE);
+            endDate.append(parts[i]);
+        }
+        return endDate.toString();
     }
 }
