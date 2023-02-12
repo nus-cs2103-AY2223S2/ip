@@ -19,7 +19,9 @@ public class MistakesCommand extends Command {
         msg += "My Melody's mistakes:\n";
         msg += "1. Ate the last pickled onion from my lunch tray -_-\n";
         msg += "2. Ripped my lovely notebook :(\n";
-        msg += "3. Cuter than me! :((((";
+        msg += "3. Cuter than me! :((((\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\n";
+        msg += "Source: https://hellokitty.fandom.com/wiki/Kuromi#With_Friends_and_Family";
         return msg;
     }
 }
