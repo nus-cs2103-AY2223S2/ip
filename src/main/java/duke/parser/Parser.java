@@ -11,6 +11,7 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.TagCommand;
 import duke.command.UnmarkCommand;
 import duke.commandtype.CommandType;
 import duke.dukeexception.DukeException;
@@ -30,44 +31,42 @@ public class Parser {
      * @throws DukeException if the input is not recognised
      */
     public static Command parse(String inputLine) throws DukeException {
-        try {
-            DukeException.checkInput(inputLine);
+        DukeException.checkInput(inputLine);
 
-            String[] words = inputLine.split(" ");
+        String[] words = inputLine.split(" ");
 
-            CommandType commandtype = CommandType.valueOf(words[0].toUpperCase());
+        CommandType commandtype = CommandType.valueOf(words[0].toUpperCase());
 
-            switch (commandtype) {
-            case BYE:
-                return new ByeCommand();
-            case LIST:
-                return new ListCommand();
-            case MARK:
-                int taskNoMark = Integer.parseInt(words[1]);
-                return new MarkCommand(taskNoMark);
-            case UNMARK:
-                int taskNoUnmark = Integer.parseInt(words[1]);
-                return new UnmarkCommand(taskNoUnmark);
-            case DEADLINE:
-                String[] parts = inputLine.split("/");
-                Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
-                return new AddCommand(task);
-            case EVENT:
-                String[] parts1 = inputLine.split(" /");
-                Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
-                return new AddCommand(event);
-            case TODO:
-                Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
-                return new AddCommand(todo);
-            case DELETE:
-                return new DeleteCommand(Integer.parseInt(words[1]));
-            case FIND:
-                return new FindCommand(inputLine.split(" ", 2)[1]);
-            default:
-                throw new DukeException("Not a valid command: " + inputLine);
-            }
-        } catch (DukeException e) {
-            throw e;
+        switch (commandtype) {
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case MARK:
+            int taskNoMark = Integer.parseInt(words[1]);
+            return new MarkCommand(taskNoMark);
+        case UNMARK:
+            int taskNoUnmark = Integer.parseInt(words[1]);
+            return new UnmarkCommand(taskNoUnmark);
+        case DEADLINE:
+            String[] parts = inputLine.split("/");
+            Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
+            return new AddCommand(task);
+        case EVENT:
+            String[] parts1 = inputLine.split(" /");
+            Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
+            return new AddCommand(event);
+        case TODO:
+            Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
+            return new AddCommand(todo);
+        case DELETE:
+            return new DeleteCommand(Integer.parseInt(words[1]));
+        case FIND:
+            return new FindCommand(inputLine.split(" ", 2)[1]);
+        case TAG:
+            return new TagCommand(Integer.parseInt(words[1]), words[2]);
+        default:
+            throw new DukeException("Not a valid command: " + inputLine);
         }
     }
 

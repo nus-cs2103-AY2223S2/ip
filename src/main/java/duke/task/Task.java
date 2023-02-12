@@ -65,10 +65,22 @@ public class Task {
      * @return a String to be written to the local hard disk
      */
     public String toStoreFormatString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (String tag : tags) {
-            result += "/" + tag;
+            result.append("/").append(tag);
         }
-        return result;
+        return result.toString();
+    }
+
+    /**
+     * Displays all tags associated with the Task
+     * @return a String representing all tags
+     */
+    public String showTags() {
+        StringBuilder result = new StringBuilder(" Tags: ");
+        for (String tag : tags) {
+            result.append(tag);
+        }
+        return result.toString();
     }
 }

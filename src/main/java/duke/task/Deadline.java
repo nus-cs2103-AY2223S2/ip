@@ -37,7 +37,7 @@ public class Deadline extends Task {
      * Overrides the toString method: displays the type, then status, then name, then deadline
      */
     public String toString() {
-        return "[D]" + status + " " + name + "(by " + Parser.transformDateTime(deadline) + ")";
+        return "[D]" + status + " " + name + "(by " + Parser.transformDateTime(deadline) + ")" + super.showTags();
     }
 
     /**

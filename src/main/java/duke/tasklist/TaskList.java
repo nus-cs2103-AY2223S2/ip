@@ -115,6 +115,22 @@ public class TaskList {
     }
 
     /**
+     * Adds tag to a Task
+     * @param taskNo An int specifying which Task the tag should go to
+     * @param tag A String representing the tag to be added
+     * @return The updated Task
+     */
+    public Task addTag(int taskNo, String tag) throws DukeException {
+        try {
+            tasks.get(taskNo - 1).addTag(tag);
+            return tasks.get(taskNo - 1);
+        } catch (Exception e) {
+            throw new DukeException(
+                "duke.task.Task does not exist, current number of tasks: " + tasks.size());
+        }
+    }
+
+    /**
      * Changes the format of the Task String to facilitate local storage
      * @return a String to be written to the local file containing all Tasks.
      */

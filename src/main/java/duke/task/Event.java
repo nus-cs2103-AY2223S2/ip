@@ -42,7 +42,7 @@ public class Event extends Task {
      */
     public String toString() {
         return String.format("[E]%s %s (from %s to %s)", status, name,
-                Parser.transformDateTime(from), Parser.transformDateTime(to));
+                Parser.transformDateTime(from), Parser.transformDateTime(to)) + super.showTags();
     }
 
     /**
