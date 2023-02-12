@@ -18,8 +18,10 @@ public class RemindCommand extends Command {
     }
 
     private String getReply(TaskList tasks, int numberOfTasks) {
-        String msg = "Here are the upcoming " + numberOfTasks + " tasks:\n";
-        msg += tasks.getUpcomingTasks(numberOfTasks).toString();
+        String msg = "Here are your upcoming " + numberOfTasks + " tasks:\n";
+        msg += tasks.getUpcomingTasks(numberOfTasks).toString() + "\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
+        msg += "I know you won't finish the tasks on time :D";
         return msg;
     }
 }

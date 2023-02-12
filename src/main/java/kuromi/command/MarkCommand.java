@@ -37,7 +37,9 @@ public class MarkCommand extends Command {
 
     private String getReply(Task cur) {
         String msg = "Nice! I've marked this task as done:\n";
-        msg += cur;
+        msg += cur + "\n";
+        msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
+        msg += "You finally finished the task! :D";
         return msg;
     }
 }

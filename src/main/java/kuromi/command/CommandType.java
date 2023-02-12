@@ -13,5 +13,6 @@ public enum CommandType {
     todo,
     deadline,
     event,
-    remind
+    remind,
+    mistakes
 }
