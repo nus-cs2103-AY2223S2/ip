@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * ToDo Class

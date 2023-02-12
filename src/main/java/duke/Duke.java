@@ -1,6 +1,9 @@
 package duke;
 
-
+import duke.gui.Ui;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 public class Duke {
     private static Storage storage = new Storage();

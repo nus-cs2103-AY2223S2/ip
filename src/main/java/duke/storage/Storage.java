@@ -1,4 +1,6 @@
-package duke;
+package duke.storage;
+
+import duke.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;
