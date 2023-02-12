@@ -21,13 +21,14 @@ public class TaskTest {
     public void testGet() {
         String description = "example to test get methods";
         Task task = new Task(description);
+
         task.markDone();
         assertTrue(task.getIsDone());
-        assertEquals(task.getName(), description);
-        assertEquals(task.getStatusIcon(), "X");
+        assertEquals(description, task.getName());
+        assertEquals("X", task.getStatusIcon());
 
         task.unmarkDone();
         assertFalse(task.getIsDone());
-        assertEquals(task.getStatusIcon(), " ");
+        assertEquals(" ", task.getStatusIcon());
     }
 }

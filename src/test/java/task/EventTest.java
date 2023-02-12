@@ -13,6 +13,6 @@ public class EventTest {
         assertEquals("[E][ ] Love Iko (from: Aug 19 2022 to: Dec 31 +999999999)", event.toString());
 
         event = new Event("Study at NUS /from 2019-08-03 /to 2023-05-01");
-        assertEquals("[E][ ] Study at NUS (from: Aug 3 2022 to: May 1 2023", event.toString());
+        assertEquals("[E][ ] Study at NUS (from: Aug 3 2019 to: May 1 2023)", event.toString());
     }
 }

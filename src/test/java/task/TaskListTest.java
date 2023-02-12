@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Duke;
 import duke.DukeException;
 
 public class TaskListTest {
@@ -16,14 +15,18 @@ public class TaskListTest {
         Task task3 = new Event("attend parties /from 2022-10-22 /to 2022-10-23");
 
         taskList.add(task1);
-        assertEquals(taskList.toString(), "1. [T][ ] finish homework");
+        assertEquals("1. [T][ ] finish homework", taskList.getTaskListString(true));
+
         taskList.add(task2);
-        assertEquals(taskList.toString(), "1. [T][ ] finish homework\n"
-                + "2. [D][ ] finish assignment (by: Oct 22 2022)");
+        assertEquals("1. [T][ ] finish homework\n"
+                        + "2. [D][ ] finish assignment (by: Oct 22 2022)",
+                taskList.getTaskListString(true));
 
         taskList.add(task3);
-        assertEquals(taskList.toString(), "1. [T][ ] finish homework\n"
-                + "2. [D][ ] finish assignment\n3. [E][ ] attend parties (from: Oct 22 2022 to: Oct 23 2022)");
+        assertEquals("1. [T][ ] finish homework\n"
+                        + "2. [D][ ] finish assignment (by: Oct 22 2022)\n"
+                        + "3. [E][ ] attend parties (from: Oct 22 2022 to: Oct 23 2022)",
+                taskList.getTaskListString(true));
     }
 
     @Test
@@ -34,17 +37,17 @@ public class TaskListTest {
         Task task3 = new Event("attend parties /from 2022-10-22 /to 2022-10-23");
 
         taskList.add(task1);
-        assertEquals(taskList.getOnlyPartiallyMatchedTaskNames("  ").size(), 0);
-        assertEquals(taskList.getOnlyPartiallyMatchedTaskNames("finish", " ", "home").size(), 0);
-        assertEquals(taskList.getOnlyPartiallyMatchedTaskNames("finish", "not exist").size(), 1);
+        assertEquals(0, taskList.getOnlyPartiallyMatchedTaskNames("  ").size());
+        assertEquals(0, taskList.getOnlyPartiallyMatchedTaskNames("finish", " ", "home").size());
+        assertEquals(1, taskList.getOnlyPartiallyMatchedTaskNames("finish", "not exist").size());
 
         taskList.add(task2);
         taskList.add(task3);
-        assertEquals(taskList.getOnlyPartiallyMatchedTaskNames("finish", "parti").size(), 3);
-        assertEquals(taskList.getOnlyPartiallyMatchedTaskNames(" ").size(), 0);
-        assertEquals(taskList.getOnlyPartiallyMatchedTaskNames("2022").size(), 0);
-        assertEquals(taskList.getOnlyPartiallyMatchedTaskNames("2022", "2023").size(), 2);
-        assertEquals(taskList.getFullyMatchedTaskNames("T", "E").size(), 2);
+        assertEquals(3, taskList.getOnlyPartiallyMatchedTaskNames("finish", "parti").size());
+        assertEquals(0, taskList.getOnlyPartiallyMatchedTaskNames(" ").size());
+        assertEquals(0, taskList.getOnlyPartiallyMatchedTaskNames("2022").size());
+        assertEquals(2, taskList.getOnlyPartiallyMatchedTaskNames("2022", "2023").size());
+        assertEquals(2, taskList.getOnlyPartiallyMatchedTaskNames("T", "E").size());
     }
 
     @Test
@@ -58,9 +61,9 @@ public class TaskListTest {
         taskList.add(task2);
         taskList.add(task3);
 
-        assertEquals(taskList.getFullyMatchedTaskNames(" ").size(), 3);
-        assertEquals(taskList.getFullyMatchedTaskNames("finish", "attend", " ").size(), 0);
-        assertEquals(taskList.getFullyMatchedTaskNames("2022").size(), 2);
-        assertEquals(taskList.getFullyMatchedTaskNames("T").size(), 1);
+        assertEquals(3, taskList.getFullyMatchedTaskNames(" ").size());
+        assertEquals(0, taskList.getFullyMatchedTaskNames("finish", "attend", " ").size());
+        assertEquals(2, taskList.getFullyMatchedTaskNames("2022").size());
+        assertEquals(1, taskList.getFullyMatchedTaskNames("T").size());
     }
 }
