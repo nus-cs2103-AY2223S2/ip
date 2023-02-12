@@ -34,8 +34,7 @@ public class Deadline extends Task {
             LocalTime newTime = LocalTime.parse(deadline.split(" ")[1]);
             this.date = newDate;
             this.time = newTime;
-        }
-        else {
+        } else {
             LocalDate newDate = LocalDate.parse(deadline);
             this.date = newDate;
         }
@@ -49,8 +48,7 @@ public class Deadline extends Task {
     public String printDateAndTime() {
         if (!deadline.contains(" ")) {
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        }
-        else {
+        } else {
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time.getHour() + time.getMinute();
         }
     }

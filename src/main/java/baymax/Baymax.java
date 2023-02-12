@@ -2,6 +2,7 @@ package baymax;
 
 import commands.ByeCommand;
 import commands.WelcomeCommand;
+
 import exceptions.BaymaxException;
 
 import java.util.Scanner;
@@ -12,10 +13,8 @@ public class Baymax {
 
     private final Storage storage;
     private TaskList tasks;
-
     private Scanner input = new Scanner(System.in);
     private Parser parser = new Parser();
-
     private static Ui ui = new Ui();
 
     /**
