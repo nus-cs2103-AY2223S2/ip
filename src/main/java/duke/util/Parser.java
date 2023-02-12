@@ -59,8 +59,9 @@ public class Parser {
     }
 
     /**
-     * Parses the user input into a command.
-     * @param userCommand User input.
+     * Returns the command after parsing the user input.
+     *
+     * @param userCommand The user input.
      * @return Command to be executed.
      * @throws DukeException If there is an error in parsing the user input.
      */

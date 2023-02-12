@@ -13,7 +13,8 @@ public class Event extends Task {
     protected LocalDateTime toTime;
 
     /**
-     * Constructor to make a new Event object.
+     * Represents a constructor to make a new Event object.
+     *
      * @param taskName Name of the task.
      * @param fromTime Starting time of the event.
      * @param toTime Ending time of the event.
@@ -25,7 +26,8 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for a new Event object used for loading from save file.
+     * Represents a constructor for a new Event object used for loading from save file.
+     *
      * @param taskName Name of the task.
      * @param fromTime Starting time of the event.
      * @param toTime Ending time of the event.

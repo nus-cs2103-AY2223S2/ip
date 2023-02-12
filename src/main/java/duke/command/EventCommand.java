@@ -17,7 +17,8 @@ public class EventCommand extends Command {
     private final Event task;
 
     /**
-     * Constructor for an EventCommand object.
+     * Represents the constructor for an EventCommand object.
+     *
      * @param description Description of the event.
      * @param fromTime Start time of the event.
      * @param toTime End time of the event.
@@ -27,7 +28,9 @@ public class EventCommand extends Command {
     }
 
     /**
+     * Returns the command as a String which is used to show to the user in the GUI.
      * Executes the command and adds an event to the task list.
+     *
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

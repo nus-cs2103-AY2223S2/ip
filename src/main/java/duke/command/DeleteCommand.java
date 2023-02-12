@@ -15,7 +15,8 @@ public class DeleteCommand extends Command {
     private final int taskNumberToDelete;
 
     /**
-     * Constructor for the DeleteCommand object.
+     * Represents a constructor for the DeleteCommand object.
+     *
      * @param taskNumberToDelete The task number to be deleted.
      */
     public DeleteCommand(int taskNumberToDelete) {
@@ -23,7 +24,9 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Returns the command as a String which is used to show to the user in the GUI.
      * Executes the command and deletes a task from the task list.
+     *
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

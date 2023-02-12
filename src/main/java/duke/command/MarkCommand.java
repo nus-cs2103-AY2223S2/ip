@@ -15,7 +15,8 @@ public class MarkCommand extends Command {
     private final boolean isMark;
 
     /**
-     * Constructor for the MarkCommand object.
+     * Represents a constructor for the MarkCommand object.
+     *
      * @param markNumber Number of the task to be marked or unmarked.
      * @param isMark True if the task is to be marked, false if the task is to be unmarked.
      */
@@ -25,7 +26,9 @@ public class MarkCommand extends Command {
     }
 
     /**
+     * Returns the command as a String which is used to show to the user in the GUI.
      * Executes the command and marks or unmarks a task in the task list.
+     *
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

@@ -18,7 +18,9 @@ public class TodoCommand extends Command {
     }
 
     /**
+     * Returns the command as a String which is used to show to the user in the GUI.
      * Executes the command and adds a todo to the task list.
+     *
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

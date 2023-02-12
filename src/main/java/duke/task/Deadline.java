@@ -12,7 +12,8 @@ public class Deadline extends Task {
     protected LocalDateTime byTime;
 
     /**
-     * Constructor to make a new Deadline object.
+     * Represents a constructor to make a new Deadline object.
+     *
      * @param taskName Name of the task.
      * @param byTime Deadline of the task.
      */
@@ -22,7 +23,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for a new Deadline object used for loading from save file.
+     * Represents a onstructor for a new Deadline object used for loading from save file.
+     *
      * @param taskName Name of the task.
      * @param byTime Deadline of the task.
      * @param isDone Status of the task.

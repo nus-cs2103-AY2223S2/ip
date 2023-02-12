@@ -23,7 +23,8 @@ public class Storage {
     private final String filePath;
 
     /**
-     * Constructor for a Storage object.
+     * Represents a constructor for a Storage object.
+     *
      * @param filePath Path of the save file.
      */
     public Storage(String filePath) {
@@ -43,7 +44,8 @@ public class Storage {
     }
 
     /**
-     * Loads the save file into a TaskList object.
+     * Returns a TaskList after loading the save file into a TaskList object.
+     *
      * @return TaskList object containing the tasks in the save file.
      * @throws DukeException If there is an error in loading the save file.
      */
@@ -107,6 +109,7 @@ public class Storage {
 
     /**
      * Updates the save file with the current TaskList.
+     *
      * @param tl TaskList object containing the current tasks.
      * @throws IOException If there is an error in writing to the save file.
      */

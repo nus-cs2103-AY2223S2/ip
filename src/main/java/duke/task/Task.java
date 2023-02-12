@@ -9,8 +9,9 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor to make a task object with a given task name.
-     * @param taskName
+     * Represents a constructor to make a task object with a given task name.
+     *
+     * @param taskName The name of the Task.
      */
     public Task(String taskName) {
         this.taskName = taskName;
@@ -19,6 +20,8 @@ public abstract class Task {
 
     /**
      * Returns the status icon of the task.
+     * If the task is done, "X" is returned, otherwise " " is returned.
+     *
      * @return String representing the status icon of the task "X" or " ".
      */
     public String getStatusIcon() {
@@ -27,6 +30,7 @@ public abstract class Task {
 
     /**
      * Marks the task as done.
+     *
      * @return String to be shown to the user.
      */
     public String mark() {
@@ -42,7 +46,8 @@ public abstract class Task {
     }
 
     /**
-     * Gets the task name which is a string
+     * Returns the task name as a string
+     *
      * @return String task name
      */
     public String getTaskName() {
@@ -50,7 +55,8 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as undone.
+     * Returns the string of the marked task.
+     *
      * @return String to be shown to the user.
      */
     public String unmark() {
@@ -66,8 +72,10 @@ public abstract class Task {
     }
 
     /**
-     * Encodes the Deadline object into a String array for saving into the save file.
-     * @return String[] of the encoded Deadline object.
+     * Returns the String array of the encoded the Task object into
+     * a String array for saving into the save file.
+     *
+     * @return String array of the encoded Deadline object.
      */
     public abstract String[] encode();
 

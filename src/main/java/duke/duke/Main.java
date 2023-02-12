@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Tohtoro using FXML.
+ * Represents the GUI for Tohtoro using FXML.
  */
 public class Main extends Application {
 

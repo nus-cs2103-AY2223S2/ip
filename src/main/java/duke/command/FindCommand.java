@@ -14,7 +14,8 @@ public class FindCommand extends Command {
     private final String keyword;
 
     /**
-     * Constructor for a FindCommand object that exits the program.
+     * Represents a constructor for a FindCommand object that exits the program.
+     *
      * @param keyword The keyword the FindCommand is searching for.
      */
     public FindCommand(String keyword) {
@@ -22,8 +23,10 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Returns the command as a String which is used to show to the user in the GUI.
      * Executes the find command by iterating through the task list.
      * Finds matching tasks based on the keyword given.
+     *
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

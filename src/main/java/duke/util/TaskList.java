@@ -12,7 +12,8 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     /**
-     * Constructor for the TaskList object.
+     * Represents a constructor for the TaskList object.
+     *
      * @param taskList ArrayList of tasks.
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -20,7 +21,8 @@ public class TaskList {
     }
 
     /**
-     * Constructor for the TaskList object if there is no initial task list to load.
+     * Represents a constructor for the TaskList object if there
+     * is no initial task list to load.
      */
     public TaskList() {
         this.taskList = new ArrayList<Task>(100);
@@ -28,6 +30,7 @@ public class TaskList {
 
     /**
      * Returns the task at the specified index.
+     *
      * @param index Index of the task to be returned.
      * @return Task at the specified index.
      */
@@ -36,7 +39,8 @@ public class TaskList {
     }
 
     /**
-     * Method to check if the task list is empty.
+     * Returns true if the task is empty else false.
+     *
      * @return true if the task list is empty.
      */
     public boolean isEmpty() {
@@ -44,7 +48,8 @@ public class TaskList {
     }
 
     /**
-     * Method to see the size of the task list.
+     * Returns the size of the task list as an integer.
+     *
      * @return Size of the task list as an integer.
      */
     public int size() {
@@ -53,6 +58,7 @@ public class TaskList {
 
     /**
      * Method to add a task to the task list.
+     *
      * @param task Task to be added to the task list.
      */
     public void add(Task task) {
@@ -61,6 +67,7 @@ public class TaskList {
 
     /**
      * Method to delete a task from the task list.
+     *
      * @param index Index of the task to be deleted.
      */
     public void deleteTask(int index) {
@@ -68,7 +75,8 @@ public class TaskList {
     }
 
     /**
-     * Method to mark a task as done.
+     * Returns the String of the marked task.
+     *
      * @param index Index of the task to be marked as done.
      * @return String representation of the task that was marked as done.
      */
@@ -77,7 +85,8 @@ public class TaskList {
     }
 
     /**
-     * Method to mark a task as undone.
+     * Returns the String of the unmarked task.
+     *
      * @param index Index of the task to be marked as undone.
      * @return String representation of the task that was marked as undone.
      */
