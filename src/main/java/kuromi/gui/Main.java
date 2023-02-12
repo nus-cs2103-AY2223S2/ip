@@ -1,7 +1,6 @@
 package kuromi.gui;
 
 import java.io.IOException;
-import java.nio.file.Files;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
