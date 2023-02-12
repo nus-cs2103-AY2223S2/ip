@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import duke.Duke;
+import ui.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -45,7 +46,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        System.out.println(input);
         String response = duke.getResponse(input);
+        System.out.println(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

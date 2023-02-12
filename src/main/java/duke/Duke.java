@@ -28,7 +28,7 @@ import javafx.scene.control.Label;
 public class Duke {
 
     Storage storage;
-    Ui ui;
+    public Ui ui;
     TaskList list;
     Parser parser;
     final static String DEFAULT_PATH = System.getProperty("user.dir") + File.separator + "data" + File.separator + "duke.txt";
@@ -41,7 +41,10 @@ public class Duke {
     }
 
     public Duke() {
-        super();
+        this.ui = new Ui();
+        this.storage = new Storage(DEFAULT_PATH);
+        this.list = this.storage.load();
+        this.parser = new Parser();
     }
 
     /**
@@ -49,7 +52,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return this.parser.parse(input, this.ui, this.list, this.storage);
     }
 
 

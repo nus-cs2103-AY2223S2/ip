@@ -2,6 +2,7 @@ package storage;
 
 import tasklist.TaskList;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.File;
@@ -18,21 +19,15 @@ import task.Event;
 public class Storage {
     String path;
     File file;
-    PrintWriter output;
-    Scanner sc;
 
     /**
      * Constructor.
      *
      * @param path File Path.
-     * @throws IOException if PrintWriter is unable to find a file from the given path.
      */
-    public Storage(String path) throws IOException {
+    public Storage(String path) {
         this.path = path;
         this.file = new File(path);
-        this.sc = new Scanner(file);
-        boolean test = this.sc.hasNextLine(); // for some reason this
-        this.output = new PrintWriter(path);
     }
 
     /**
@@ -42,33 +37,42 @@ public class Storage {
      * If a file cannot be found from the file path, create a new file. A new, empty list of tasks will be created.
      *
      * @return the list of tasks from the data file.
-     * @throws IOException If a I/O error occurs
      */
-    public TaskList load() throws IOException {
+    public TaskList load() {
         if (!file.exists()) {
             System.out.println("cannot find file");
-            file.createNewFile();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("error occurred");
+            }
         }
         TaskList list = new TaskList();
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            String[] descriptionAndMarkedStatus = this.getDescriptionAndMarkedStatus(line);
-            String description = descriptionAndMarkedStatus[0];
-            String markedStatus = descriptionAndMarkedStatus[1];
-            boolean marked = markedStatus.equals("X") ? true : false;
-            char letter = line.charAt(3);
-            Task task;
-            if (letter == 'T') {
-                task = new ToDo(description, marked);
-            } else if (letter == 'D') {
-                String[] words = description.split("\\|by: ");
-                task = new Deadline(words[0], words[1], marked);
-            } else {
-                String[] words = description.split("\\|from: ");
-                String[] fromTo = words[1].split(" to: ");
-                task = new Event(words[0], fromTo[0], fromTo[1], marked);
+        try {
+            Scanner sc = new Scanner(file);
+            boolean test = sc.hasNextLine(); // for some reason this
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] descriptionAndMarkedStatus = this.getDescriptionAndMarkedStatus(line);
+                String description = descriptionAndMarkedStatus[0];
+                String markedStatus = descriptionAndMarkedStatus[1];
+                boolean marked = markedStatus.equals("X") ? true : false;
+                char letter = line.charAt(3);
+                Task task;
+                if (letter == 'T') {
+                    task = new ToDo(description, marked);
+                } else if (letter == 'D') {
+                    String[] words = description.split("\\|by: ");
+                    task = new Deadline(words[0], words[1], marked);
+                } else {
+                    String[] words = description.split("\\|from: ");
+                    String[] fromTo = words[1].split(" to: ");
+                    task = new Event(words[0], fromTo[0], fromTo[1], marked);
+                }
+                list.addTask(task);
             }
-            list.addTask(task);
+        } catch (IOException e) {
+            System.out.println("error");
         }
         return list;
     }
@@ -97,10 +101,15 @@ public class Storage {
      * @param list List of tasks.
      */
     public void save(TaskList list) {
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.getTask(i);
-            this.output.println(i+1 + "." + task.toString());
+        try {
+            PrintWriter output = new PrintWriter(file);
+            for (int i = 0; i < list.size(); i++) {
+                Task task = list.getTask(i);
+                output.println(i + 1 + "." + task.toString());
+            }
+            output.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("error occurred");
         }
-        this.output.close();
     }
 }

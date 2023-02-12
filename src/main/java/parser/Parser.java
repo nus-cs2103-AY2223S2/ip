@@ -12,6 +12,7 @@ import tasklist.TaskList;
 import task.ToDo;
 import task.Deadline;
 import task.Event;
+import storage.Storage;
 
 /**
  * Parser Class deals with making sense of the user's command.
@@ -32,121 +33,135 @@ public class Parser {
 
     /**
      * Handles what to do based on the command input.
+     * Returns Response output of the command input.
      *
      * @param input Command input.
-     * @param ui User Interface .
+     * @param ui User Interface.
      * @param list List of tasks.
+     * @return Response output of the command input.
      */
-    public void parse(String input, Ui ui, TaskList list) {
+    public String parse(String input, Ui ui, TaskList list, Storage storage) {
         try {
             String[] inputWords = input.split(" ", 2);
             String command = inputWords[0];
             if (command.equals(EXIT_COMMAND)) {
-                ui.printBye();
                 ui.isClosed = true;
+                return ui.printBye(list, storage);
             } else if (command.equals(LIST_COMMAND)) {
-                ui.printGetList(list);
+                return ui.printGetList(list);
             } else if (command.equals(FIND_COMMAND)) {
-                this.handleFind(inputWords, ui, list);
+                return this.handleFind(inputWords, ui, list);
             } else if (isMark(command)) {
-                this.handleMark(inputWords, ui, list);
+                return this.handleMark(inputWords, ui, list);
             } else if (isUnmark(command)) {
-                this.handleUnmark(inputWords, ui, list);
+                return this.handleUnmark(inputWords, ui, list);
             } else if (isToDo(command)) {
-                this.handleToDo(inputWords, ui, list);
+                return this.handleToDo(inputWords, ui, list);
             } else if (isDeadline(command)) {
-                this.handleDeadline(inputWords, ui, list);
+                return this.handleDeadline(inputWords, ui, list);
             } else if (isEvent(command)) {
-                this.handleEvent(inputWords, ui, list);
+                return this.handleEvent(inputWords, ui, list);
             } else if (command.equals(DELETE_COMMAND)) {
-                this.handleDelete(inputWords, ui, list);
+                return this.handleDelete(inputWords, ui, list);
             } else {
                 throw new InvalidInputException();
             }
         } catch (Exception e) {
-            ui.printException(e);
+            return ui.printException(e);
         }
     }
 
     /**
-     * Handles finding tasks based on a search word.
+     * Handles finding tasks based on a search word
+     * Returns found tasks
      *
      * @param inputWords Command input.
      * @param ui User interface.
      * @param list List of tasks.
+     * @return Found tasks
      */
-    public void handleFind(String[] inputWords, Ui ui, TaskList list) {
+    public String handleFind(String[] inputWords, Ui ui, TaskList list) {
         String searchWord = inputWords[1];
-        ui.printFind(list, searchWord);
+        return ui.printFind(list, searchWord);
     }
 
     /**
-     * Handles deleting of task
+     * Handles deleting of task.
+     * Returns response of deleting task.
      *
      * @param inputWords Command input.
      * @param ui User interface.
      * @param list List of tasks.
+     * @return Response of deleting task.
      */
-    public void handleDelete(String[] inputWords, Ui ui, TaskList list) {
+    public String handleDelete(String[] inputWords, Ui ui, TaskList list) {
         int index = Integer.parseInt(inputWords[1]);
         Task task = list.getTask(index - 1);
-        list.removeTask(index-1);
-        ui.printHandleDelete(task, list);
+        list.removeTask(index - 1);
+        return ui.printHandleDelete(task, list);
     }
 
     /**
-     * Handles marking of task
+     * Handles marking of task.
+     * Returns task marked.
      *
      * @param inputWords Command input.
      * @param ui User interface.
      * @param list List of tasks.
+     * @return Task marked response.
      */
-    public void handleMark(String[] inputWords, Ui ui, TaskList list) {
+    public String handleMark(String[] inputWords, Ui ui, TaskList list) {
         int index = Integer.parseInt(inputWords[1]);
         Task task = list.getTask(index - 1);
         task.mark();
-        ui.printHandleMark(task);
+        return ui.printHandleMark(task);
     }
 
     /**
-     * Handles unmarking of task
+     * Handles unmarking of task.
+     * Returns unmarked task response.
      *
      * @param inputWords Command input.
      * @param ui User interface.
      * @param list List of tasks.
+     * @return Unmarked task response.
      */
-    public void handleUnmark(String[] inputWords, Ui ui, TaskList list) {
+    public String handleUnmark(String[] inputWords, Ui ui, TaskList list) {
         int index = Integer.parseInt(inputWords[1]);
         Task task = list.getTask(index - 1);
         task.unmark();
-        ui.printHandleUnmark(task);
+        return ui.printHandleUnmark(task);
     }
 
     /**
      * Handles ToDo task.
-     *
-     * @param inputWords Description of task.
-     * @param ui User interface.
-     * @param list List of tasks.
-     * @throws EmptyDescriptionException If there is no description of taks.
-     */
-    public void handleToDo(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
-        checkEmptyDescription(inputWords);
-        String description = inputWords[1];
-        Task newTask = new ToDo(description);
-        list.addTask(newTask);
-        ui.printAddTask(newTask, list);
-    }
-
-    /**
-     * Handles Deadline task.
+     * Returns response of added task.
      *
      * @param inputWords Description of task.
      * @param ui User interface.
      * @param list List of tasks.
      * @throws EmptyDescriptionException If there is no description of task.
+     * @return Response of added task.
      */
-    public void handleDeadline(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
+    public String handleToDo(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
+        checkEmptyDescription(inputWords);
+        String description = inputWords[1];
+        Task newTask = new ToDo(description);
+        list.addTask(newTask);
+        return ui.printAddTask(newTask, list);
+    }
+
+    /**
+     * Handles Deadline task.
+     * Returns response of added task.
+     *
+     * @param inputWords Description of task.
+     * @param ui User interface.
+     * @param list List of tasks.
+     * @throws EmptyDescriptionException If there is no description of task.
+     * @return response of adeded task.
+     */
+    public String handleDeadline(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
         checkEmptyDescription(inputWords);
         String[] splitedString = inputWords[1].split(" /by ");
         String action = splitedString[0];
@@ -155,18 +170,20 @@ public class Parser {
         String outputDateTime = inputDateTime.format(outputFormatter);
         Task newTask = new Deadline(action, outputDateTime);
         list.addTask(newTask);
-        ui.printAddTask(newTask, list);
+        return ui.printAddTask(newTask, list);
     }
 
     /**
      * Handles Event task.
+     * Returns response of adding task.
      *
      * @param inputWords Description of task.
      * @param ui User interface.
      * @param list List of tasks.
      * @throws EmptyDescriptionException If there is no description of task.
+     * @return Response of adding task.
      */
-    public void handleEvent(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
+    public String handleEvent(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
         checkEmptyDescription(inputWords);
         String[] splitedString = inputWords[1].split(" /from ");
         String action = splitedString[0];
@@ -176,7 +193,7 @@ public class Parser {
         String to = fromTo[1];
         Task newTask = new Event(action, from, to);
         list.addTask(newTask);
-        ui.printAddTask(newTask, list);
+        return ui.printAddTask(newTask, list);
     }
 
     /**

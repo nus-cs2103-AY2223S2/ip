@@ -2,6 +2,7 @@ package ui;
 
 import java.time.format.DateTimeFormatter;
 
+import storage.Storage;
 import tasklist.TaskList;
 import task.Task;
 
@@ -23,104 +24,117 @@ public class Ui {
     }
 
     /**
-     * Prints the Exception given.
+     * Returns the Exception given.
      * @param e Exception.
+     * @return Exception in a String type
      */
-    public void printException(Exception e) {
-        System.out.println(e);
+    public String printException(Exception e) {
+        return e.toString();
     }
 
     /**
-     * Prints the exit output.
+     * Returns the exit output.
+     * @param list List of tasks.
+     * @param storage Storage.
+     * @return response
      */
-    public void printBye() {
-        System.out.println(BYE_OUTPUT);
+    public String printBye(TaskList list, Storage storage) {
+        storage.save(list);
+        return BYE_OUTPUT;
     }
 
     /**
-     * Prints the entry welcome.
+     * Returns the entry welcome.
+     * @return response
      */
-    public void printEntry() {
-        System.out.println(ENTRY_OUTPUT);
+    public String printEntry() {
+        return ENTRY_OUTPUT;
     }
 
     /**
-     * Prints the response of deleting the task from the list.
+     * Returns the response of deleting the task from the list.
      *
      * @param task Task that is deleted.
      * @param list List of tasks.
+     * @return Response
      */
-    public void printHandleDelete(Task task, TaskList list) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+    public String printHandleDelete(Task task, TaskList list) {
+        String output = "Noted. I've removed this task:\n";
+        output += "  " + task.toString();
+        output += String.format("\nNow you have %d tasks in the list.", list.size());
+        return output;
     }
 
     /**
-     * Prints the response of marking the task.
+     * Returns the response of marking the task.
      *
      * @param task Task that is marked.
+     * @return Response
      */
-    public void printHandleMark(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task.toString());
+    public String printHandleMark(Task task) {
+        return "Nice! I've marked this task as done:\n" + "  " + task.toString();
     }
 
     /**
-     * Prints the response of unmarking the task.
+     * Returns the response of unmarking the task.
      *
      * @param task Task that is unmarked.
+     * @return Response
      */
-    public void printHandleUnmark(Task task) {
-        System.out.println("OK,, I've marked this task as not done yet:");
-        System.out.println("  " + task.toString());
+    public String printHandleUnmark(Task task) {
+        return "OK,, I've marked this task as not done yet:\n" + "  " + task.toString();
     }
 
     /**
-     * Prints the response of adding the task to the list.
+     * Returns the response of adding the task to the list.
      *
      * @param newTask Task is added to the list
      * @param list List of tasks
+     * @return Response of adding task to list
      */
-    public void printAddTask(Task newTask, TaskList list) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + newTask.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+    public String printAddTask(Task newTask, TaskList list) {
+        return "Got it. I've added this task:\n" + "  " + newTask.toString()
+                + String.format("\nNow you have %d tasks in the list.", list.size());
     }
 
     /**
-     * Prints the tasks in the list.
+     * Returns the tasks in the list.
      *
      * @param list List of tasks.
+     * @return Tasks in the list
      */
-    public void printGetList(TaskList list) {
-        System.out.println("Here are the tasks in your list:");
+    public String printGetList(TaskList list) {
+        String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
             Task task = list.getTask(i);
-            System.out.println(i+1 + "." + task.toString());
+            output += "\n" + i + 1 + "." + task.toString();
         }
+        return output;
     }
 
     /**
-     * Prints the error if unable to load list from the hard disk.
+     * Returns the error if unable to load list from the hard disk.
+     * @return response of error
      */
-    public void showLoadingError() {
-        System.out.println("Could not load list. Using a new, empty list instead");
+    public String showLoadingError() {
+        return "Could not load list. Using a new, empty list instead";
     }
 
     /**
-     * Prints the search output.
+     * Returns the search output.
      *
      * @param list List of tasks.
      * @param searchWord Search word.
+     * @return Search output
      */
-    public void printFind(TaskList list, String searchWord) {
-        System.out.println("Here are the matching tasks in your list: ");
+    public String printFind(TaskList list, String searchWord) {
+        String output = "Here are the matching tasks in your list:\n";
         for (Task task: list.list) {
             if (task.description.contains(searchWord)) {
-                System.out.println(task.toString());
+                output += "\n" + task.toString();
             }
         }
+        return output;
     }
 
 }
