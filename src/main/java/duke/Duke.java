@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 import command.Command;
+import command.ExitCommand;
 import gui.Message;
 import storage.Storage;
 import task.TaskList;
@@ -19,7 +20,6 @@ public class Duke {
     public final String NAME = "TaskWizard";
     protected final String RECORD_DIR = "./data";
     protected final String RECORD_NAME = "/duke.txt";
-    protected final String BYE_STRING = "bye";
     protected final String NUMBER_FORMAT_ERROR = "Please specify the index.";
     protected final TextUi ui;
     protected final TaskList taskList;
@@ -70,7 +70,7 @@ public class Duke {
 
         try {
             String responseString = runCommandReturnResponse(inMsg);
-            boolean isRunning = !isByeString(inMsg);
+            boolean isRunning = !ExitCommand.isByeString(inMsg);
             saveCommandAfterRunning(inMsg, isRunning);
             responseMessage = new Message(responseString, false);
         } catch (DukeException e) {
@@ -95,15 +95,6 @@ public class Duke {
             hasExited = true;
             storage.saveToFile(getCommandListString());
         }
-    }
-
-    /**
-     * Checks if the given string indicates end of program
-     * @param string user-input string
-     * @return a boolean value
-     */
-    public boolean isByeString(String string) {
-        return string.equalsIgnoreCase(BYE_STRING); // hardcode, not ideal
     }
 
     /**
