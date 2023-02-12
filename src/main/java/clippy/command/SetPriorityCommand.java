@@ -1,6 +1,5 @@
 package clippy.command;
 
-import clippy.exception.ClippyException;
 import clippy.storage.Storage;
 import clippy.task.PriorityLevel;
 import clippy.task.TaskList;
