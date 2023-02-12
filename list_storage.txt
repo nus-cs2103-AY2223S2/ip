@@ -1,9 +1,4 @@
-D | 0 | return book | 10/02/2001 12:30
-T | 0 | homework
 T | 0 | homework2 
 D | 0 | homework3 | 2/10/2023 6:30
-E | 0 | birthday event | 2/04/2023 5:00 | 2/04/2023 6:00
-D | 0 | return calculator | 10/08/2023 12:00
-T | 0 | homework5
-T | 0 | homework6
-T | 0 | homework7
+T | 0 | homework 4
+D | 0 | homework 5 | 26/07/2023 6:00
