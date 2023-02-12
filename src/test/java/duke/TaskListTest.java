@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import duke.enums.Views;
 import duke.task.Todo;
 
 public class TaskListTest {
@@ -37,7 +38,7 @@ public class TaskListTest {
             new TaskList().get(0);
         } catch (DukeException e) {
             // Check if duke message is expected
-            String expected = "Hey, the number you've entered is not valid";
+            String expected = Views.OUT_RANGE_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;

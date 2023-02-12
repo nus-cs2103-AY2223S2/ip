@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.enums.Commands;
 import duke.enums.Languages;
 import duke.enums.Views;
 import duke.task.Task;
@@ -27,7 +28,7 @@ public class Ui {
      */
     public String readCommand() {
         try {
-        return sc.nextLine();
+            return sc.nextLine();
         } catch (java.util.NoSuchElementException e) {
             Ui.showEnd();
             System.exit(0);
@@ -142,11 +143,11 @@ public class Ui {
             }
         }
         try {
-        if (isGui) {
-            return returnString.substring(0, returnString.length() - 1);
-        } else {
-            return returnString.substring(0, returnString.length() - 7);
-        }
+            if (isGui) {
+                return returnString.substring(0, returnString.length() - 1);
+            } else {
+                return returnString.substring(0, returnString.length() - 7);
+            }
         } catch (java.lang.StringIndexOutOfBoundsException e) {
             throw new DukeException(Views.EMPTY_LIST_STRING.str());
         }
@@ -379,6 +380,59 @@ public class Ui {
      */
     public String stringSetLang(Languages lang) {
         return Views.SELECTED_LANG_STRING.str() + lang.toString();
+    }
+
+    /**
+     * Prints the help message
+     */
+    public void showHelp() {
+        printer(stringHelp(false));
+    }
+
+    /**
+     * Prints the help message that the user has selected
+     *
+     * @param command that the user want to know more about
+     */
+    public void showHelp(Commands command) {
+        printer(stringHelp(command));
+    }
+
+    /**
+     * Returns the help message
+     *
+     * @param isGui format properly for GUI display vs CLI
+     * @return String representation of help messages
+     */
+    public String stringHelp(boolean isGui) {
+        return Commands.helpMessages(isGui);
+    }
+
+    /**
+     * Returns the help message the user has selected
+     *
+     * @param command that the user want to know more about
+     * @return String representation of command help message
+     */
+    public String stringHelp(Commands command) {
+        return command.getExplanation();
+    }
+
+    /**
+     * Prints the help message and inform user they didn't select
+     */
+    public void showHelpError() {
+        printer(stringHelpError(false));
+    }
+
+    /**
+     * Returns the help message and inform user they didn't select
+     *
+     * @param isGui format properly for GUI display vs CLI
+     * @return String representation of set language
+     */
+    public String stringHelpError(boolean isGui) {
+        return Views.CANNOT_FIND_STRING.str() + " " + Commands.helpMessages(isGui);
     }
 
     /**

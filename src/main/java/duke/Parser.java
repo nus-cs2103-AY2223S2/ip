@@ -12,6 +12,7 @@ import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.SetCommand;
@@ -38,6 +39,8 @@ public class Parser {
             return new ListCommand();
         case "clear":
             return new ClearCommand();
+        case "help":
+            return new HelpCommand();
         case "bye":
         case "exit":
             return new ExitCommand();
@@ -72,6 +75,9 @@ public class Parser {
                 return new FindCommand(query);
             } else if (input.startsWith(Commands.SET.cmd())) {
                 return new SetCommand(input);
+            } else if (input.startsWith(Commands.HELP.cmd())) {
+                String query = input.substring(Commands.HELP.len());
+                return new HelpCommand(query);
             } else {
                 throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.str());
             }

@@ -61,6 +61,11 @@ public enum Views {
             "Avast. I've removed the following tasks:\n      ",
             "It shall be done. I have removed the following tasks:\n      ",
             "Noted it down. Ahve removed da following tasks:\n      "),
+    ALL_COMMAND_STRING(
+            "Here are all the commands:",
+            "Here be all the commands:",
+            "Thou commands be here:",
+            "Here yu commands:"),
     TASK_COUNT_1_STRING(
             "Now you have ",
             "Now ye have ",
@@ -121,10 +126,10 @@ public enum Views {
             "Alack, ☹ The description of a task cannot be empty.",
             "Ey, ☹ Da description of a task cannot be emp-teh."),
     UNKNOWN_CMD_ERR_STRING(
-            "Hey, ☹ I'm sorry, but I don't know what that means :-(",
-            "Arrr, ☹ I'm sorry, but I don't know what you be means :-(",
-            "Alack, ☹ I apologize, but I am not familiar with that command :-(",
-            "Ey, ☹ Ahm sorry, but Ah dont know wut dat means :-("),
+            "Hey, ☹ I'm sorry, but I don't know what that means :-( type 'help'",
+            "Arrr, ☹ I'm sorry, but I don't know what you be means :-( type 'help'",
+            "Alack, ☹ I apologize, but I am not familiar with that command :-( type 'help'",
+            "Ey, ☹ Ahm sorry, but Ah dont know wut dat means :-( type 'help'"),
     MISSING_ARGS_ERR_STRING(
             "Hey, ☹ I'm sorry, but you are missing some arguments",
             "Arrr, ☹ I'm sorry, but ye be missin' some arguments",

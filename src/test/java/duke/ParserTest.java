@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
+import duke.enums.Views;
 
 public class ParserTest {
     @Test
@@ -16,7 +17,7 @@ public class ParserTest {
             Parser.parse("ASDF");
         } catch (DukeException e) {
             // Check if duke message is expected
-            String expected = "Hey, ☹ I'm sorry, but I don't know what that means :-(";
+            String expected = Views.UNKNOWN_CMD_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
@@ -45,7 +46,7 @@ public class ParserTest {
             Parser.handleTask("ASDF");
         } catch (DukeException e) {
             // Check if duke message is expected
-            String expected = "Hey, ☹ I'm sorry, but I don't know what that means :-(";
+            String expected = Views.UNKNOWN_CMD_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
@@ -75,7 +76,7 @@ public class ParserTest {
             Parser.parse("mark 0");
         } catch (AssertionError e) {
             // Check if assert message is expected
-            String expected = "Hey, the number you've entered is not valid";
+            String expected = Views.OUT_RANGE_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
@@ -90,7 +91,7 @@ public class ParserTest {
             Parser.parse("mark");
         } catch (DukeException e) {
             // Check if assert message is expected
-            String expected = "Hey, you did not enter any numbers";
+            String expected = Views.NO_INT_ERR_STRING.str();
             Assertions.assertEquals(expected, e.getMessage());
             // Assertion failed, as expected
             return;
