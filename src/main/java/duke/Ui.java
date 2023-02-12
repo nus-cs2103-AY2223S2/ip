@@ -26,7 +26,13 @@ public class Ui {
      * @return String input from the user
      */
     public String readCommand() {
+        try {
         return sc.nextLine();
+        } catch (java.util.NoSuchElementException e) {
+            Ui.showEnd();
+            System.exit(0);
+            return "";
+        }
     }
 
     /**
