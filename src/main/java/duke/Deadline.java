@@ -17,7 +17,7 @@ public class Deadline extends Task {
      * @param userInput specifies the byDate and title of a Deadline object
      */
     public Deadline(boolean isCompleted, String userInput) {
-        super(isCompleted, userInput.substring(9, userInput.indexOf("/by ") - 1), TaskType.D);
+        super(isCompleted, userInput.substring(0, userInput.indexOf("/by ") - 1), TaskType.D);
         this.byDate = userInput.substring(userInput.indexOf("/by ") + 4);
         this.endDate = LocalDate.parse(byDate);
     }
