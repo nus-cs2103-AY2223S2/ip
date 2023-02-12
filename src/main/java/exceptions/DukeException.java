@@ -32,7 +32,7 @@ public class DukeException {
         }
         if (testPortion.length != expectedArgs) {
             sb.append("\n    ____________________________________________________________________________________\n")
-                    .append("     ☹ OOPS!!! You have provided incorrect number of arguments for the command '")
+                    .append("     OOPS!!! You have provided incorrect number of arguments for the command '")
                     .append(command).append("'.\n     Please try again after checking!\n");
             sb.append("    ____________________________________________________________________________________\n");
             throw new IncorrectNoOfArgumentException(sb.toString());
@@ -54,7 +54,7 @@ public class DukeException {
         StringBuilder sb = new StringBuilder();
         if ((testText.equals("")) || (testText.isBlank())) {
             sb.append("\n    ____________________________________________________________________________________\n")
-                    .append("     ☹ OOPS!!! You have provided incorrect number of arguments for the command '")
+                    .append("     OOPS!!! You have provided incorrect number of arguments for the command '")
                     .append(command).append("'.\n     Please try again after checking!\n");
             sb.append("    ____________________________________________________________________________________\n");
             throw new IncorrectNoOfArgumentException(sb.toString());
@@ -70,7 +70,7 @@ public class DukeException {
     public static void validate2() throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
         sb.append("\n    ____________________________________________________________________________________\n")
-                .append("     ☹ OOPS!!! This is an incorrect command!\n")
+                .append("     OOPS!!! This is an incorrect command!\n")
                 .append("     Please try again with a valid command!\n");
         sb.append("    ____________________________________________________________________________________\n");
         throw new InvalidCommandException(sb.toString());

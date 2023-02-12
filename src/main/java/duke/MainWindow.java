@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Shiro.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/CrayonShinChan.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/nabita2.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/doraemon.jpg"));
 
     /**
      * Initializes the dialogContainer with its given dimensions.
@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
         this.duke = d;
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("    ____________________________________________________________\n"
-                        + "    Hello! I'm Duke.\n" + "    What can I do for you?\n"
+                        + "    Hello! I'm Doraemon.\n" + "    Do you need my help, Nabita?\n"
                         + "    ____________________________________________________________\n", dukeImage)
         );
     }

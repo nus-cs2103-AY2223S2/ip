@@ -7,12 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -41,8 +43,20 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // @@author Jai2501-reused
+        // Reused from https://github.com/Jai2501/ip/blob/master/src/main/java/retriever/DialogBox.java
+        // with minor modifications and mainly the portion where the author did padding.
         dialog.setText(text);
+        dialog.setPadding(new Insets(10, 10, 10 , 10));
+        dialog.setStyle("-fx-background-color: #ffffa2; -fx-background-insets: 5; -fx-background-radius: 15;");
+
+        // @@author czhi-bin-reused
+        // Reused from https://github.com/czhi-bin/ip/blob/master/src/main/java/angrybot/DialogBox.java
+        // with minor modifications and mainly the portion where the author did the clipping of image to a circle.
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(45, 45, 40));
+        displayPicture.setStyle("-fx-border-image-insets: 10;");
+        // @@author MrTwit99
     }
 
     /**

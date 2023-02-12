@@ -29,7 +29,13 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            // @@author Jai2501-reused
+            // Reused from https://github.com/Jai2501/ip/blob/master/src/main/java/retriever/Main.java
+            // with minor modifications and mainly the portion where the author edit the text font style.
+            scene.getRoot().setStyle("-fx-font-family: 'Arial'");
+            // @@author MrTwit99
             stage.setScene(scene);
+            stage.setTitle("The Best Helper in Town: Doraemon");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
