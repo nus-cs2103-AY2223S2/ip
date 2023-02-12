@@ -1,6 +1,5 @@
 package wessy;
 
-import wessy.Parser;
 import wessy.exceptions.WessyException;
 import wessy.exceptions.CommandNotFoundException;
 import wessy.exceptions.int_exceptions.NotAnIntegerException;
@@ -11,11 +10,19 @@ import wessy.task.Task;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ *
+ */
 public class Wessy {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructs an instance of Wessy.
+     *
+     * @param filePath
+     */
     public Wessy(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +35,9 @@ public class Wessy {
         }
     }
 
+    /**
+     *
+     */
     public void run() {
         startsUp();
         while (ui.hasNextLine()) {
@@ -51,9 +61,9 @@ public class Wessy {
                         UserInputChecker.checkForMissingInput(userInput, cmd);
                         UserInputChecker.checkMissingKeyword(userInput, cmd);
                         if (cmd == CmdType.DEADLINE) {
-                            UserInputChecker.checkForDeadlineMissingInput(userInput, cmd);
+                            UserInputChecker.checkForDeadlineMissingInput(userInput);
                         } else if (cmd == CmdType.EVENT) {
-                            UserInputChecker.checkForEventMissingInput(userInput, cmd);
+                            UserInputChecker.checkForEventMissingInput(userInput);
                         }
                         String[] taskComponents = Parser.getTaskComponents(userInput, cmd);
                         Task newTask = tasks.add(taskComponents);
@@ -99,19 +109,40 @@ public class Wessy {
         }
     }
 
+    /**
+     *
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Wessy("data/savedTasks.txt").run();
     }
 
-    // HELPER FUNCTIONS
+    /**
+     * A helper function
+     */
     private void startsUp() {
         ui.showWelcome(tasks.printAsStr(), tasks.getSize());
     }
 
+    /**
+     * A helper function
+     *
+     * @throws IOException
+     */
     void save2Storage() throws IOException {
         storage.save(tasks.saveAsStr());
     }
 
+    /**
+     * A helper function
+     *
+     * @param userInput
+     * @param cmd
+     * @throws MissingInputException
+     * @throws NotAnIntegerException
+     * @throws TooManyInputException
+     */
     void checkB4Parse(String userInput, CmdType cmd) throws MissingInputException, NotAnIntegerException, TooManyInputException {
         UserInputChecker.checkForMissingInput(userInput, cmd);
         UserInputChecker.checkNotNumerical(userInput, cmd);

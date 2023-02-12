@@ -11,18 +11,35 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class TaskList {
     private List<Task> tasks = new ArrayList<Task>();
     static String SEPARATOR = "~%~";
 
+    /**
+     * Constructs an instance of TaskList.
+     */
     public TaskList() {}
 
+    /**
+     * Constructs an instance of TaskList.
+     *
+     * @param taskList
+     */
     public TaskList(List<Task> taskList) {
         this.tasks = taskList;
     }
 
-    // MAIN METHODS TO UPDATE THE LIST
-    // For "todo", "deadline" & "event"
+    /**
+     * Add a new task (either todo, deadline or event) into the current list of
+     * tasks.
+     *
+     * @param strings
+     * @return
+     * @throws DateTimeParseException
+     */
     Task add(String[] strings) throws DateTimeParseException {
         int len = strings.length;
         if (len == 1) {
@@ -35,6 +52,15 @@ public class TaskList {
         return tasks.get(getSize() - 1);
     }
 
+    /**
+     * Marks or unmarks a task on the list, based on the specified task number.
+     *
+     * @param taskNum
+     * @param isMark
+     * @return
+     * @throws EmptyListException
+     * @throws InvalidIntegerException
+     */
     // For "mark" & "unmark"
     Task markOrUnmark(int taskNum, boolean isMark) throws EmptyListException, InvalidIntegerException {
         CmdType cmd = isMark ? CmdType.MARK : CmdType.UNMARK;
@@ -49,14 +75,23 @@ public class TaskList {
         return tasks.get(idx);
     }
 
-    // For "delete"
+    /**
+     * Delete a task on the list, based on the specified task number.
+     *
+     * @param taskNum
+     * @return
+     * @throws EmptyListException
+     * @throws InvalidIntegerException
+     */
     Task delete(int taskNum) throws EmptyListException, InvalidIntegerException {
         checkEmptyList(CmdType.DELETE);
         checkOutOfUppBound(taskNum, CmdType.DELETE);
         return tasks.remove(taskNum - 1);
     }
 
-    // For "clear"
+    /**
+     * Delete all the tasks on the list.
+     */
     public void clear() {
         tasks.clear();
     }
@@ -72,14 +107,28 @@ public class TaskList {
         return printAsStr(foundResults).toArray(new String[foundResults.size()]);
     }
 
-    // Check for empty list exception
+    /**
+     * Checks is the current task list empty.
+     *
+     * @param cmd
+     * @return
+     * @throws EmptyListException
+     */
     public void checkEmptyList(CmdType cmd) throws EmptyListException {
         if (tasks.isEmpty()) {
             throw new EmptyListException(cmd.toString());
         }
     }
 
-    // Check for array index out of upper bound
+    /**
+     * Checks is the specified task number more than the total number of tasks
+     * on the list.
+     *
+     * @param taskNum
+     * @param cmd
+     * @return
+     * @throws InvalidIntegerException
+     */
     public void checkOutOfUppBound(int taskNum, CmdType cmd) throws InvalidIntegerException {
         int n = getSize();
         if (taskNum - 1 >= n) {
@@ -87,11 +136,21 @@ public class TaskList {
         }
     }
 
-    // Used when adding or deleting ta
+    /**
+     * Gets the total number of tasks on the list.
+     *
+     * @return Total number of tasks on the list.
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Saves all the tasks on the list to Wessy's storage, by passing a suitable
+     * String format of the task list.
+     *
+     * @return
+     */
     // For interaction with Storage
     public String saveAsStr() {
         StringBuilder sb = new StringBuilder();
@@ -102,6 +161,12 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Passes all the tasks on the list to Wessy's ui to print them out in
+     * "list" message.
+     *
+     * @return
+     */
     // For interaction with UI
     public String[] printAsStr() {
         int n = getSize();

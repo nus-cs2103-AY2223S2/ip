@@ -3,35 +3,63 @@ package wessy;
 import java.util.Scanner;
 import wessy.task.Task;
 
+/**
+ *
+ */
 public class Ui {
     private final Scanner sc;
 
+    /**
+     * Constructs an instance of Ui.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
-    // HANDLE INPUTS
+    /**
+     * Handles inputs.
+     *
+     * @return A boolean value
+     */
     boolean hasNextLine() {
         return sc.hasNextLine();
     }
 
+    /**
+     * Handles inputs.
+     *
+     * @return
+     */
     String readNextLine() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints output message for "bye" command.
+     */
     // MAIN OUTPUT FUNCTIONS
-    // Output for "bye"
     void printBye() {
         printMessage("Bye. Hope to see you again soon!");
     }
 
-    // Output for "list" & "find"
+    /**
+     * Prints output message for "list" command.
+     *
+     * @param tasks
+     * @param isList
+     */
     void printListOrFindMessage(String[] tasks, boolean isList) {
         printOpening();
         printListOrFind(tasks, isList);
         printClosing();
     }
 
+    /**
+     * A helper function used in pritnListMessage(...).
+     *
+     * @param tasks
+     * @param isList
+     */
     // HELPER
     void printListOrFind(String[] tasks, boolean isList) {
         String extraWord = isList ? "" : "matching ";
@@ -47,7 +75,12 @@ public class Ui {
         }
     }
 
-    // Output for "todo", "deadline" & "event
+    /**
+     * Prints output message for "todo", "deadline" and "event" commands.
+     *
+     * @param task
+     * @param size
+     */
     void printAdded(Task task, int size) {
         String numOfTasks = " " + size + " task";
         if (size > 1) {
@@ -57,7 +90,12 @@ public class Ui {
                 "  " + task, "Now you have" + numOfTasks + " in the list.");
     }
 
-    // Output for "mark" & "unmark"
+    /**
+     * Prints output message for "mark" and "unmark" commands.
+     *
+     * @param chosenTask
+     * @param isMark
+     */
     void printMarkUnmark(Task chosenTask, boolean isMark) {
         String start = isMark ? "Nice! I've" : "OK, I've";
         if (isMark == chosenTask.checkIsDone()) {
@@ -68,7 +106,12 @@ public class Ui {
                 chosenTask);
     }
 
-    // Output for "delete"
+    /**
+     * Prints output message for "delete" command.
+     *
+     * @param chosenTask
+     * @param totalNumOfTasks
+     */
     void printDelete(Task chosenTask, int totalNumOfTasks) {
         printMessage("Noted. I've removed this task:", "  " +
             chosenTask, String.format(
@@ -76,19 +119,19 @@ public class Ui {
             totalNumOfTasks == 1 ? "" : "s"));
     }
 
-    // Output for "clear"
+    /**
+     * Prints output message for "clear" command.
+     */
     void printClear() {
         printMessage("You have cleared your task list. The list is empty now.");
     }
 
-    void printFindMessage(String[] foundResults) {
-        printOpening();
-        println(" Here are the matching tasks in your list:");
-
-        printClosing();
-    }
-
-    // When starting up
+    /**
+     * Prints output message when starting up Wessy.
+     *
+     * @param tasks
+     * @param totalNumOfTasks
+     */
     void showWelcome(String[] tasks, int totalNumOfTasks) {
         printOpening();
         println("Hi, I am Wessy, your personal assistant chatbot.");
@@ -97,18 +140,41 @@ public class Ui {
         printClosing();
     }
 
-    // HELPER FUNCTIONS
-    static void printOpening() {
+    /**
+     *
+     *
+     * @param message
+     */
+    void handleException(String message) {
+        System.err.println("    -Wessy------------------------------" +
+                "---------------------------------- ");
+        printErr(message);
+        System.err.println("    -----------------------------------" +
+                "----------------------------------- ");
+    }
+
+    /**
+     * A helper function
+     */
+    private static void printOpening() {
         System.out.println("    -Wessy------------------------------" +
                 "---------------------------------- ");
     }
 
-    static void printClosing() {
+    /**
+     * A helper function
+     */
+    private static void printClosing() {
         System.out.println("    -----------------------------------" +
                 "----------------------------------- ");
     }
 
-    void println(String str) {
+    /**
+     * A helper function
+     *
+     * @param str
+     */
+    private void println(String str) {
         int length = str.length();
         if (length <= 64) {
             String message = "   |   " + str;
@@ -129,7 +195,12 @@ public class Ui {
         }
     }
 
-    void printErr(String str) {
+    /**
+     * A helper function
+     *
+     * @param str
+     */
+    private void printErr(String str) {
         int length = str.length();
         if (length <= 64) {
             String message = "   |   " + str;
@@ -150,23 +221,25 @@ public class Ui {
         }
     }
 
-    void printMultiln(String... linesOfString) {
+    /**
+     * A helper function
+     *
+     * @param linesOfString
+     */
+    private void printMultiln(String... linesOfString) {
         for (String line : linesOfString) {
             println(line);
         }
     }
 
-    void printMessage(String... linesOfString) {
+    /**
+     * A helper function
+     *
+     * @param linesOfString
+     */
+    private void printMessage(String... linesOfString) {
         printOpening();
         printMultiln(linesOfString);
         printClosing();
-    }
-
-    void handleException(String message) {
-        System.err.println("    -Wessy------------------------------" +
-                "---------------------------------- ");
-        printErr(message);
-        System.err.println("    -----------------------------------" +
-                "----------------------------------- ");
     }
 }
