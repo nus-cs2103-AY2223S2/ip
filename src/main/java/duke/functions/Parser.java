@@ -7,7 +7,6 @@ import duke.exceptions.DateTimeFormatException;
 import duke.exceptions.InvalidArgumentsException;
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.MultipleArgumentsException;
-
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -70,7 +69,6 @@ public class Parser {
      *
      * @param fileReader
      * @param dl TaskList from
-     * @throws InvalidCommandException Error from an invalid command.
      */
     public void parseDatabase(Scanner fileReader, TaskList dl) {
         int index = -1;

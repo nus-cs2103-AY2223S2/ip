@@ -9,17 +9,15 @@ import duke.exceptions.EmptyInputException;
 import duke.exceptions.InvalidCommandException;
 import duke.tasks.TaskList;
 
-
 /**
  * Main UI class that controls the formatting and display of output to CLI.
  *
  * @author JamesLiuZX
  *     AY2223-S2 CS2103T
-
  */
 public class Ui {
-    public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
-            ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete", "find", "help"));
+    public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList(
+            "todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete", "find", "help"));
 
     /**
      * Main method to start interaction between user and interface.
@@ -70,12 +68,21 @@ public class Ui {
                 + "\n For more information on the commands available, type help.");
         System.out.println(greeting);
     }
-
+    /**
+     * Method to display help string to the command line.
+     *
+     * @return Help string.
+     */
     public static String help() {
         String help = "The available commands are todo, deadline, event, mark, unmark, list, bye, delete, find, help.\n"
                 + "For more information on the usage of the commands, please type usage.";
         return help;
     }
+    /**
+     * Method to display a detailed help string to the command line.
+     *
+     * @return Detailed help string.
+     */
     public static String helpDetailed() {
         String help = format("Hi."
                     + "The commands available are: \n"
