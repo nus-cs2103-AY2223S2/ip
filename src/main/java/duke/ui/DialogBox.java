@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+//@@author SE-EDU
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+// with some minor modifications.
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
@@ -57,4 +60,5 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+//@@author
 }

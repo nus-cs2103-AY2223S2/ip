@@ -16,6 +16,8 @@ public class Main extends Application {
 
     private Duke duke = new Duke("duke");
 
+    //@@author SE-EDU
+    //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
     @Override
     public void start(Stage stage) {
         try {
@@ -29,4 +31,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    //@@author
 }
