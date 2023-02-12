@@ -48,10 +48,15 @@ public class Ui {
         System.out.println("> " + s);
     }
 
-    public void printLoadingFile() {
-        this.print("Loading file...");
+    public void printFileSaved() {
+        this.print("File saved.");
     }
-    public void printSavingFile() {
-        this.print("Saving file...");
+
+    public void printFileSaveError() {
+        this.print("Something went wrong while saving file.");
+    }
+
+    public void printFileNotFoundError() {
+        this.print("File not found.");
     }
 }
