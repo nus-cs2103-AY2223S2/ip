@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Arrays;
+
 /**
  * Represents a task.
  */
@@ -51,4 +53,14 @@ public abstract class Task {
      * @return Representation of the task in the save file.
      */
     public abstract String toSavedString();
+
+    /**
+     * Returns true if this task's description matches any keywords.
+     * 
+     * @param keywords List of keywords to check.
+     * @return True if task's description matches any keywords.
+     */
+    public boolean isMatched(String... keywords) {
+        return Arrays.stream(keywords).anyMatch(keyword -> this.description.contains(keyword));
+    }
 }
