@@ -1,8 +1,6 @@
 package gui;
 
 import duke.Duke;
-import duke.TextBorder;
-import duke.Ui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -29,7 +27,7 @@ public class Gui extends Application {
     private Image duncan = new Image(this.getClass().getResourceAsStream("/images/Basketball.jpg"));
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Football.jpg"));
 
-    private Duke duke = new Duke("./data/duke.DukeList.ser", this);
+    private Duke duke = new Duke("./data/duke.DukeList.ser", "./data/duke.DukeArchive.ser", this);
 
 
     @Override

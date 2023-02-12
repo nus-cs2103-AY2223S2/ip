@@ -1,8 +1,6 @@
 package command;
 
 import duke.DukeList;
-import duke.TextBorder;
-import task.Task;
 
 public class FindCommand extends Command{
     private String task;

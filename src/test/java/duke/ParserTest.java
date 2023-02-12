@@ -11,7 +11,7 @@ public class ParserTest {
     public void isExitTest() {
         try {
             Ui ui = new Ui();
-            Parser parser = new Parser(new DukeList(ui), new Storage("", ui), ui);
+            Parser parser = new Parser(new DukeList(ui), new DukeList(ui), new Storage("", "", ui), ui);
             Command c = parser.parse("todo false");
 
             assertFalse(c.isExit());

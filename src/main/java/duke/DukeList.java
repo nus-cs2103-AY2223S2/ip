@@ -79,15 +79,30 @@ public class DukeList implements Serializable {
         ui.addStatement("Sorry, can't find the task!");
     }
 
-    public void delete (int i) throws TaskOutOfRangeException {
-        if (i > this.list.size() || i < 0) {
-            throw new TaskOutOfRangeException("Yo, I can't find the task at " + i);
-        } else {
+    private boolean isOutOfRange(int i) {
+        return (i > this.list.size() || i < 0);
+    }
+
+    public Task delete (int i) throws TaskOutOfRangeException {
+        if (!isOutOfRange(i)) {
             Task removedTask = this.list.remove(i - 1);
-            ui.addStatement("Got it, this task is gonez: \n" +
+            ui.addStatement("Got it, this task is gone: \n" +
                     removedTask + "\n" +
                     "Now you've got " + list.size() + pluralTask(list.size()));
+            return removedTask;
         }
+        throw new TaskOutOfRangeException("Yo, I can't find the task at " + i);
+    }
+
+    public void transferTaskTo(DukeList dukeList, int taskNumber) {
+        try {
+            Task transferringTask = this.delete(taskNumber);
+            dukeList.add(transferringTask);
+            ui.addStatement("Ok, transferred " + transferringTask +".");
+        } catch (Exception e) {
+            ui.addStatement(e.getMessage());
+        }
+
     }
 
     @Override

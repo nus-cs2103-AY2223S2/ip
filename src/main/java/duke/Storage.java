@@ -1,17 +1,34 @@
 package duke;
 
+import exception.UnknownFileTypeException;
+
 import java.io.*;
 
 public class Storage {
-    private String path;
+    private String listPath;
+    private String archivePath;
     private Ui ui;
-    public Storage(String path, Ui ui) {
-        this.path = path;
+    public Storage(String listPath, String archivePath, Ui ui) {
+        this.listPath = listPath;
+        this.archivePath = archivePath;
         this.ui = ui;
     }
 
-    public void saveList (DukeList dukeList, Ui ui) {
+    public String getFilePath (String fileType) throws UnknownFileTypeException {
+        switch (fileType) {
+            case "list" :
+                return listPath;
+            case "archive" :
+                return archivePath;
+            default:
+                throw new UnknownFileTypeException("Not sure what file you want");
+        }
+    }
+
+    public void save(DukeList dukeList, String fileType) {
         try {
+            String path = getFilePath(fileType);
+
             FileOutputStream fos = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(dukeList);
@@ -22,12 +39,17 @@ public class Storage {
             assert ui.getStatements().size() > 0 : "Number of statements in Ui should be more than 0";
         } catch (IOException e) {
             ui.addStatement("Hold on, something's wrong with your input");
+        } catch (UnknownFileTypeException e) {
+            ui.addStatement(e.getMessage());
         }
 
     }
 
-    public DukeList retrieveList (Ui ui) {
+    public DukeList retrieve(String fileType) {
+
         try {
+            String path = getFilePath(fileType);
+
             if ((new File(path)).exists()) {
                 FileInputStream fis = new FileInputStream(path);
                 ObjectInputStream ois = new ObjectInputStream(fis);
@@ -51,6 +73,8 @@ public class Storage {
         } catch (ClassNotFoundException e) {
             ui.addStatement("Hey I can't find your object class.");
             ui.addStatement(e.toString());
+        } catch (UnknownFileTypeException e) {
+            ui.addStatement(e.getMessage());
         }
         return new DukeList(ui);
     }

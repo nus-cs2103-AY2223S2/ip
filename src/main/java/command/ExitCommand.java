@@ -6,18 +6,19 @@ import duke.Ui;
 
 public class ExitCommand extends Command {
     private DukeList dukeList;
+    private DukeList archive;
     private Storage storage;
-    private Ui ui;
 
-    public ExitCommand(DukeList dukeList, Storage storage, Ui ui) {
+    public ExitCommand(DukeList dukeList, DukeList archive, Storage storage) {
         this.dukeList = dukeList;
+        this.archive = archive;
         this.storage = storage;
-        this.ui = ui;
     }
 
     @Override
     public void execute() {
-        storage.saveList(this.dukeList, this.ui);
+        storage.save(this.dukeList, "list");
+        storage.save(this.archive, "archive");
     }
 
     @Override
