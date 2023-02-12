@@ -41,7 +41,7 @@ public class Ui {
     }
 
     /**
-     * Print the string on the output screen.
+     * Prints the string on the output screen.
      * @param s String to print.
      */
     public void print(String s) {

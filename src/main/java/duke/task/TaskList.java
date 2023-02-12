@@ -105,7 +105,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task with the given index as either done or undone, then return that task.
+     * Marks the task with the given index as either done or undone, then return that task.
      * Task are 0-indexed.
      *
      * @param idx Index of the task to be marked.
