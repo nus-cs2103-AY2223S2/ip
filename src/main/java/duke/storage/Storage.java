@@ -52,7 +52,7 @@ public class Storage {
         } catch (IOException e) {
             ui.showError(e);
         }
-        assert dukeFile.exists() : "XyDuke data file not created.";
+        assert dukeFile.exists() : "XyDuck data file not created.";
         tasks = new TaskList(this.ui);
     }
 

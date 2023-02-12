@@ -1,7 +1,7 @@
-# ![sun](https://user-images.githubusercontent.com/97398371/218306096-d9eff358-7a50-4a34-a442-747fbd423ad7.png) **XyDuke's User Guide** ![sun](https://user-images.githubusercontent.com/97398371/218306096-d9eff358-7a50-4a34-a442-747fbd423ad7.png)
+# ![sun](https://user-images.githubusercontent.com/97398371/218306096-d9eff358-7a50-4a34-a442-747fbd423ad7.png) **XyDuck's User Guide** ![sun](https://user-images.githubusercontent.com/97398371/218306096-d9eff358-7a50-4a34-a442-747fbd423ad7.png)
 
 ## Features 
-XyDuke is equipped with 4 main features to enhance your task-tracking experience! :notebook_with_decorative_cover:
+XyDuck is equipped with 4 main features to enhance your task-tracking experience! :notebook_with_decorative_cover:
 
 **TRY NOW** to become a **MASTER** at tracking commitments!
 
@@ -13,18 +13,18 @@ The most basic but also the most useful feature. Add and delete tasks as you wis
 
 ### 2. Marking Tasks :pencil2:
 
-Too many commitments and can't remember which you have completed? Fret not as XyDuke is equipped with a marking feature that allows you to mark tasks as *complete* or *incomplete*. Don't worry if you marked wrongly, you can change it just as easily!
+Too many commitments and can't remember which you have completed? Fret not as XyDuck is equipped with a marking feature that allows you to mark tasks as *complete* or *incomplete*. Don't worry if you marked wrongly, you can change it just as easily!
 
 ### 3. Listing Tasks :pen:
 
-This is probably the best feature of XyDuke! List your tasks in the order in which you they were added, or sort them by order of their deadlines! You'll never have to worry about missing an assignment deadline again!
+This is probably the best feature of XyDuck! List your tasks in the order in which you they were added, or sort them by order of their deadlines! You'll never have to worry about missing an assignment deadline again!
 
 ### 4. Saving Tasks 	:fountain_pen:
 
-XyDuke's final feature is the ability to save your tasks. XyDuke automatically saves all changes you've made in a particular session when you bid it farewell, and reflects these changes the next time you boot it up!
+XyDuck's final feature is the ability to save your tasks. XyDuck automatically saves all changes you've made in a particular session when you bid it farewell, and reflects these changes the next time you boot it up!
 
 ## Usage
-Here are XyDuke's commands. These commands will enable you to use and explore all of XyDuke's features!
+Here are XyDuck's commands. These commands will enable you to use and explore all of XyDuck's features!
 
 ### `todo` - Adds a ToDo task.
 
@@ -36,7 +36,7 @@ Example of usage:
 
 Expected outcome:
 
-XyDuke will notify you when your ToDo task has been added successfully!
+XyDuck will notify you when your ToDo task has been added successfully!
 
 ![image](https://user-images.githubusercontent.com/97398371/218305082-c044d146-6877-4afb-81a5-b3b630454fd4.png)
 
@@ -51,7 +51,7 @@ Example of usage:
 
 Expected outcome:
 
-XyDuke will notify you when your Deadline task has been added successfully!
+XyDuck will notify you when your Deadline task has been added successfully!
 
 ![image](https://user-images.githubusercontent.com/97398371/218305122-36493a24-0c65-4fcf-8a01-ca0c235240bb.png)
 
@@ -66,7 +66,7 @@ Example of usage:
 
 Expected outcome:
 
-XyDuke will notify you when your Event has been added successfully!
+XyDuck will notify you when your Event has been added successfully!
 
 ![image](https://user-images.githubusercontent.com/97398371/218305276-95277820-650a-4ac3-8080-23c4ef059ae5.png)
 
@@ -81,7 +81,7 @@ Example of usage:
 
 Expected outcome:
 
-XyDuke will notify you when Task #2 has been marked as complete!
+XyDuck will notify you when Task #2 has been marked as complete!
 
 ![image](https://user-images.githubusercontent.com/97398371/218305436-dadd5472-b60a-46ea-b2ce-a0a84164bdf6.png)
 
@@ -98,7 +98,7 @@ Example of usage:
 
 Expected outcome:
 
-XyDuke will list out your tasks in order of *deadline*.
+XyDuck will list out your tasks in order of *deadline*.
 
 ![image](https://user-images.githubusercontent.com/97398371/218305580-79b09ad2-0c92-49b9-9a08-ec3f91e5e2dd.png)
 
@@ -113,14 +113,14 @@ Example of usage:
 
 Expected outcome:
 
-XyDuke will notify you when Task #2 has been deleted!
+XyDuck will notify you when Task #2 has been deleted!
 
 ![image](https://user-images.githubusercontent.com/97398371/218305729-745ae69a-33db-4ccd-a7b7-6435d1f10fb4.png)
 
 
-### `bye` - Bid farewell to XyDuke. :cry:
+### `bye` - Bid farewell to XyDuck. :cry:
 
-Say goodbye to XyDuke! This command will also save all changes you've made to your tasks in this session. Remember to use command `bye` or your changes will not be saved! Yes, XyDuke values manners very much! :grin:
+Say goodbye to XyDuck! This command will also save all changes you've made to your tasks in this session. Remember to use command `bye` or your changes will not be saved! Yes, XyDuck values manners very much! :grin:
 
 Example of usage: 
 
@@ -128,13 +128,13 @@ Example of usage:
 
 Expected outcome:
 
-XyDuke will notify you when your tasks have been successfully saved! The GUI Window will close. 
+XyDuck will notify you when your tasks have been successfully saved! The GUI Window will close. 
 
 
 ## Enjoy!
 
-Thank you for using XyDuke's user guide! We wish you all the best in your task-tracking journey with XyDuke! 
+Thank you for using XyDuck's user guide! We wish you all the best in your task-tracking journey with XyDuck! 
 
-If you have any feedback for XyDuke, or come across any bugs :lady_beetle: when using it, please let me know via my Telegram handle: @XylusChen.
+If you have any feedback for XyDuck, or come across any bugs :lady_beetle: when using it, please let me know via my Telegram handle: @XylusChen.
 
 Thank you so much for your support! Have a great day!

@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
         duckImage = getRoundedImage(duckImage, 111);
         dogImage = getRoundedImage(dogImage, 270);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String greeting = "What's up! XyDuke here!\nHow can I be of assistance?";
+        String greeting = "What's up! XyDuck here!\nHow can I be of assistance?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, duckImage));
     }
 

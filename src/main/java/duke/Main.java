@@ -24,7 +24,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.setTitle("XyDuke");
+            stage.setTitle("XyDuck");
             stage.getIcons().add(new Image("/images/sun.png"));
             stage.show();
         } catch (IOException e) {
