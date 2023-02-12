@@ -79,16 +79,19 @@ public class TaskList {
         case MARK:
             index = Integer.parseInt(command.getArgumentValue(
                     Command.Argument.MARK));
-            getTask(index).toggleDone();
+            task = getTask(index);
+            task.toggleDone();
             break;
         case DELETE:
             index = Integer.parseInt(
                     command.getArgumentValue(Command.Argument.DELETE));
-            tasks.remove(getTask(index));
+            task = getTask(index);
+            tasks.remove(task);
             break;
         default:
             assert false : "Unhandled command: " + command;
         }
+        assert task != null : "task not assigned";
         return task;
     }
 
