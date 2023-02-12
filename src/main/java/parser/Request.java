@@ -19,7 +19,7 @@ public class Request {
     }
 
     /**
-     * Parse the request string to return an executable command.
+     * Parses the request string to return an executable command.
      *
      * @return A corresponding command.
      */
