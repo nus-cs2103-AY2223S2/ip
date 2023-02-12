@@ -17,6 +17,7 @@ public class Task implements Comparable<Task> {
      * @param isDone True if task is completed.
      */
     protected Task(String description, boolean isDone) {
+        assert description != null;
         this.isDone = isDone;
         this.description = description;
     }

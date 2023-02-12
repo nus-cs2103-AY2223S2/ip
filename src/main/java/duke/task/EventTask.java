@@ -24,6 +24,9 @@ public class EventTask extends Task {
      */
     private EventTask(String description, boolean isDone, LocalDate from, LocalDate to) {
         super(description, isDone);
+        assert from != null && to != null;
+        assert from.isBefore(to) || from.isEqual(to);
+
         this.from = from;
         this.to = to;
     }
