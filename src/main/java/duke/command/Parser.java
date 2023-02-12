@@ -103,7 +103,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ", 2);
         int indexInput;
-        switch(parts[0].trim()) {
+        switch(parts[0].trim().toLowerCase()) {
             case "todo":
                 if (parts.length != 2 || parts[1].trim().isEmpty()) {
                     throw new DukeException("Command todo has to be followed by a description.");
@@ -204,8 +204,10 @@ public class Parser {
                 return new Command.SortDoneCommand();
             case "bye":
                 return new Command.ExitCommand();
+            case "help":
+                return new Command.HelpCommand();
             default:
-                throw new DukeException("I can't do that for you...");
+                throw new DukeException("I can't do that for you...\n(Enter 'help' to show guide.)");
         }
     }
 }

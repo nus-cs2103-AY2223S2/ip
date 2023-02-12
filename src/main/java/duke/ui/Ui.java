@@ -153,12 +153,21 @@ public class Ui {
         storeOutput("Number of tasks on " + datesMessage + ": " + count + "\n" + filteredTasks);
     }
 
-
     /**
      * Displays error message if any error occurs.
      */
     public void showError(String errorMessage) {
         storeOutput("WOOF!!! " + errorMessage);
+    }
+
+    /**
+     * Displays help guide.
+     */
+    public void showHelp() {
+        String helpGuide = "Here's what I can do for you...\n\ntodo <description>\ndeadline <description> /by <date/time>\nevent " +
+                "<description> /from <date/time> /to <date/time>\nlist\nmark <number>\nunmark <number>\ndelete <number>\n" +
+                "filter <keyword>\nfilterdate <date>\nsort\nsortdate\nsorttask\nsortdone";
+        storeOutput(helpGuide);
     }
 
     /**
