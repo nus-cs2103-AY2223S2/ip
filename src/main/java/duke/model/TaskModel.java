@@ -116,7 +116,7 @@ public class TaskModel implements Model {
      */
     @Override
     public List<Task> getTasks() {
-        return this.tasks;
+        return new ArrayList<>(this.tasks);
     }
 
     /**
