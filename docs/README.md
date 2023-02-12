@@ -247,7 +247,7 @@ Get a list of available commands that Kuromi understands.
 #### Format
 - `help`
 
-## Section 7: Exit the application
+## Section H: Exit the application
 
 ### `bye`
 
@@ -265,7 +265,7 @@ Note:
 You're annoying but I'll definitely miss you :D
 ```
 
-## Section 8: Miscellanous
+## Section I: Miscellanous
 
 ### 1. List My Melody's mistakes
 
