@@ -59,12 +59,21 @@ public class Parser {
         } else if (action.equalsIgnoreCase("list")) {
             return new ListCommand(ui, commandList);
         } else if (action.equalsIgnoreCase("mark")) {
+            if (strArray.length < 2 || strArray[1].trim().equals("")) {
+                throw new EmptyCommandException(action);
+            }
             return new MarkCommand(ui, commandList,
                     Integer.parseInt(strArray[1]) - 1, storage, file);
         } else if (action.equalsIgnoreCase("unmark")) {
+            if (strArray.length < 2 || strArray[1].trim().equals("")) {
+                throw new EmptyCommandException(action);
+            }
             return new UnmarkCommand(ui, commandList,
                     Integer.parseInt(strArray[1]) - 1, storage, file);
         } else if (action.equalsIgnoreCase("delete")) {
+            if (strArray.length < 2 || strArray[1].trim().equals("")) {
+                throw new EmptyCommandException(action);
+            }
             return new DeleteCommand(ui, commandList,
                     Integer.parseInt(strArray[1]) - 1, storage, file);
         } else if (action.equalsIgnoreCase("find")) {
