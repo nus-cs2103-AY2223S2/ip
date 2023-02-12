@@ -42,6 +42,7 @@ public class Storage {
                 String[] taskData = fileData.split("\\|");
                 list.add(readData(taskData));
             }
+            fileSc.close();
         } catch(FileNotFoundException e) {
             this.createFile();
         } catch (DukeException e) {

@@ -26,26 +26,15 @@ public class Ui {
         this.sc.close();
     }
 
-    /**
-     * Prints a line
-     */
-    public void printLine() {
-        System.out.println("------------------------------------------------------------------");
-    }
 
     /**
      * Displays the initial message
      */
-    public void initialDisplay() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Welcome! I'm Duke.");
-        System.out.println("What can I do for you?");
-        printLine();
+    public String initialDisplay() {
+        String displayResult = "";
+        displayResult += "Welcome! I'm Duke.\n";
+        displayResult += "What can I do for you?\n";
+        return displayResult;
     }
 
     /**
@@ -54,10 +43,12 @@ public class Ui {
      * @param task the task object
      * @param listLength the length of the TaskList
      */
-    public void taskAddDisplay(Task task, int listLength) {
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t" + task.toString());
-        displayTasks(listLength);
+    public String taskAddDisplay(Task task, int listLength) {
+        String displayResult = "";
+        displayResult += "Got it. I've added this task:\n";
+        displayResult += "\t" + task.toString() +'\n';
+        displayResult += displayTasks(listLength);
+        return displayResult;
     }
 
     /**
@@ -66,9 +57,11 @@ public class Ui {
      * @param list the TaskList storing all the tasks
      * @param taskIndex the index of task to be deleted
      */
-    public void taskDeleteDisplay(TaskList list, int taskIndex) {
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t\t" + list.getTask(taskIndex).toString());
+    public String taskDeleteDisplay(TaskList list, int taskIndex) {
+        String displayResult = "";
+        displayResult += "Noted. I've removed this task:\n";
+        displayResult += "\t" + list.getTask(taskIndex).toString();
+        return displayResult;
     }
 
     /**
@@ -76,11 +69,16 @@ public class Ui {
      *
      * @param list the TaskList storing the Task objects
      */
-    public void displayList(TaskList list) {
+    public String displayList(TaskList list) {
+        String displayResult = "";
         int listSize = list.getListLength();
-        for(int i = 1; i <= listSize; i++) {
-            System.out.println("\t" + i + ". " + list.getTask(i).toString());
+        if(listSize == 0) {
+            return "You have no tasks...";
         }
+        for(int i = 1; i <= listSize; i++) {
+            displayResult += i + ". " + list.getTask(i).toString() + '\n';
+        }
+        return displayResult;
     }
 
     /**
@@ -88,8 +86,8 @@ public class Ui {
      *
      * @param listLength the length of the TaskList
      */
-    public void displayTasks(int listLength) {
-        System.out.println(String.format("\tNow you have %d tasks in the list.", listLength));
+    public String displayTasks(int listLength) {
+        return String.format("Now you have %d tasks in the list.", listLength);
     }
 
     /**
@@ -97,9 +95,11 @@ public class Ui {
      *
      * @param task the Task object
      */
-    public void unmarkTaskDisplay(Task task) {
-        System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t\t" + task.toString());
+    public String unmarkTaskDisplay(Task task) {
+        String displayResult = "";
+        displayResult += "OK, I've marked this task as not done yet:\n";
+        displayResult += "\t" + task.toString();
+        return displayResult;
     }
 
     /**
@@ -107,32 +107,34 @@ public class Ui {
      *
      * @param task the Task object
      */
-    public void markTaskDisplay(Task task) {
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + task.toString());
+    public String markTaskDisplay(Task task) {
+        String displayResult = "";
+        displayResult += "Nice! I've marked this task as done:\n";
+        displayResult += "\t" + task.toString();
+        return displayResult;
     }
 
     /**
      * Displays text after exit message
      */
-    public void exitDisplay() {
-        System.out.println("\tBye. Hope to see you again soon!");
-        printLine();
+    public String exitDisplay() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Prints text if no matches found in the list
      */
-    public void noMatchFoundDisplay() {
-        System.out.println("\tNo matches found...");
+    public String noMatchFoundDisplay() {
+        return "No matches found...\n";
     }
 
     /**
      * Prints list if match is found
      * @param list the TaskList storing the Task objects
      */
-    public void matchFoundDisplay(TaskList list) {
-        System.out.println("\tHere are the matching tasks in your list:");
-        displayList(list);
+    public String matchFoundDisplay(TaskList list) {
+        String displayResult = "Here are the matching tasks in your list:\n";
+        displayResult += displayList(list);
+        return displayResult;
     }
 }
