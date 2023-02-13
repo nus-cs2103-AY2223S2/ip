@@ -20,13 +20,15 @@ public class DialogBox extends HBox {
     private static final Color USERCOLOR = Color.ANTIQUEWHITE;
     private static final Color DUKECOLOR = Color.BEIGE;
 
+    private static final double displayPicDimensions = 80.0;
+
     public DialogBox(Label l, ImageView iv, Color color) {
         text = l;
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(80.0);
-        displayPicture.setFitHeight(80.0);
+        displayPicture.setFitWidth(displayPicDimensions);
+        displayPicture.setFitHeight(displayPicDimensions);
         cropToCircle(displayPicture);
 
         this.setAlignment(Pos.TOP_RIGHT);
@@ -36,7 +38,7 @@ public class DialogBox extends HBox {
     }
 
     private void cropToCircle(ImageView picture) {
-        Circle circle = new Circle(40,40,40);
+        Circle circle = new Circle(displayPicDimensions/2,displayPicDimensions/2,displayPicDimensions/2);
         circle.setFill(Color.WHITE);
         picture.setClip(circle);
     }
