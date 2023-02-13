@@ -63,7 +63,6 @@ public class Ui {
         }
     }
 
-
     public void setMainWindow(MainWindow mainWindow) {
         assert mainWindow != null: "MainWindow not found in Ui";
         this.mainWindow = mainWindow;

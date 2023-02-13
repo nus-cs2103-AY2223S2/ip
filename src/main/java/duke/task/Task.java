@@ -4,6 +4,8 @@ public class Task {
     protected String item;
     protected boolean isComplete;
 
+    protected String note;
+
     protected String types; // todo, deadline, events
 
     /**
@@ -16,6 +18,7 @@ public class Task {
     public Task(String item, String types) {
         this.item = item;
         this.types = types;
+        this.note = "blank";
         isComplete = false;
     }
 
@@ -81,5 +84,27 @@ public class Task {
      */
     public void unmark(){
         isComplete = false;
+    }
+
+    /**
+     * Add notes to the task
+     * @param message to be added as notes
+     */
+    public void addNote(String message) {
+
+        if (note.equals("blank")) {
+            this.note = message;
+        } else  {
+            this.note = this.note + "\n" + message;
+        }
+
+    }
+
+    /**
+     * Returns the notes of the task
+     * @return string of the notes in the task
+     */
+    public String getNote() {
+        return note;
     }
 }

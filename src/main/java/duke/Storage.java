@@ -34,21 +34,28 @@ public class Storage {
                 Task task = entireList.get(i);
 
                 boolean isMark = task.getComplete();
+
                 String type = task.getTypes();
                 String name = task.getItem();
 
+                String note[] = task.getNote().split("[\\r\\n]+");
+                String concatedNote = note[0];
+
+                for (int j = 1; j < note.length; j++) {
+                    concatedNote = concatedNote + "/&" + note[j];
+                }
 
                 if (type.equals("D")){
                     String time = task.getTime();
 
-                    pw.println(type + "-" + isMark + "-" + name + "-" + time);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + time + "-" + concatedNote);
                 } else if (type.equals("E")) {
                     String time = task.getTime();
                     String startEnd [] = time.split("-", 2);
 
-                    pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1]);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1] + "-" + concatedNote);
                 } else {
-                    pw.println(type + "-" + isMark + "-" + name);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + concatedNote);
                 }
 
             }
@@ -75,21 +82,35 @@ public class Storage {
                 Task task;
 
                 if(lines[0].equals("T")) {
-                    task = new Task(lines[2], lines[0]);
+                    String nameNote [] = lines[2].split("-");
+                    task = new Task(nameNote[0], lines[0]);
+
+                    if(checkToAddNote(nameNote[1])) {
+                        task.addNote(setNoteFormat(nameNote[1]));
+                    }
 
                 } else if (lines[0].equals("D")) {
-                    String nameTime[] = lines[2].split("-", 2);
+                    String nameTimeNote[] = lines[2].split("-", 3);
 
                     SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    Date date = converterDate.parse(nameTime[1]);
-                    task = new Deadline(nameTime[0], lines[0], date, nameTime[1]);
+                    Date date = converterDate.parse(nameTimeNote[1]);
+                    task = new Deadline(nameTimeNote[0], lines[0], date, nameTimeNote[1]);
+
+                    if(checkToAddNote(nameTimeNote[2])) {
+                        task.addNote(setNoteFormat(nameTimeNote[2]));
+                    }
 
                 } else {
-                    String nameStartEnd[] = lines[2].split("-", 3);
+                    String nameStartEndNote[] = lines[2].split("-", 4);
                     SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    Date date1 = converterDate.parse(nameStartEnd[1]);
-                    Date date2 = converterDate.parse(nameStartEnd[2]);
-                    task = new Event(nameStartEnd[0], lines[0], date1, date2, nameStartEnd[1], nameStartEnd[2]);
+                    Date date1 = converterDate.parse(nameStartEndNote[1]);
+                    Date date2 = converterDate.parse(nameStartEndNote[2]);
+                    task = new Event(nameStartEndNote[0], lines[0], date1, date2, nameStartEndNote[1],
+                            nameStartEndNote[2]);
+
+                    if (checkToAddNote(nameStartEndNote[3])) {
+                        task.addNote(setNoteFormat(nameStartEndNote[3]));
+                    }
 
                 }
 
@@ -113,4 +134,33 @@ public class Storage {
 
         return entireList;
     }
+
+    /**
+     * Check if the note is blank
+     * @param note is to be checked
+     * @return true if note is blank
+     */
+    public boolean checkToAddNote(String note) {
+        if (note.equals("blank")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Format the note store in the file by seperating /& and replacing them with new line
+     * @param notes to be formatted
+     * @return formatted notes
+     */
+    public String setNoteFormat(String notes) {
+        String concatedNote[] = notes.split("/&");
+        String note = concatedNote[0];
+        for(int i = 1; i < concatedNote.length; i ++){
+            note = note + "\n" + concatedNote[i];
+        }
+        return note;
+    }
+
 }
+

@@ -104,4 +104,18 @@ public class TaskList {
 
         return tasksWithWord;
     }
+
+
+    /**
+     * Adds note to the task
+     * @param index of the task to add the note
+     * @param note is the message to be added
+     * @return the task string
+     */
+    public String addNoteToTask(int index, String note) {
+        Task selectedTask = allTasks.get(index);
+        selectedTask.addNote(note);
+
+        return selectedTask.toString();
+    }
 }
