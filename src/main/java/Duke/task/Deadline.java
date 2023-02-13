@@ -37,7 +37,7 @@ public class Deadline extends Task {
   @Override
   public String taskString() {
     String mark;
-    if(this.mark) {
+    if(this.isMark) {
       mark = "[X]";
     } else {
       mark = "[ ]";

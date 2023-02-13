@@ -7,6 +7,7 @@ public class Todo extends Task {
   public Todo(String string) {
     super(string);
   }
+
   @Override
   public void printType() {
     System.out.print("[T]");
@@ -24,7 +25,7 @@ public class Todo extends Task {
   @Override
   public String taskString() {
     String mark;
-    if(this.mark) {
+    if(this.isMark) {
       mark = "[X]";
     } else {
       mark = "[ ]";

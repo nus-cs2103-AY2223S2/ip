@@ -8,17 +8,17 @@ package Duke.task;
  */
 public class Task {
   public String string;
-  public Boolean mark;
+  public Boolean isMark;
 
   public Task(String string) {
     this.string = string;
-    this.mark = false;
+    this.isMark = false;
   }
   public void mark() {
-    this.mark = true;
+    this.isMark = true;
   }
   public void unmark() {
-    this.mark = false;
+    this.isMark = false;
   }
   public void printType() {
   }

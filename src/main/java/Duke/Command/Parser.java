@@ -60,10 +60,12 @@ public class Parser {
       }
       case DEADLINE: {
         if (strArr.length < 2) {
-          throw new EmptyDescription(new Deadline("", "2022-01-01 0000"));
+          throw new EmptyDescription(new Deadline("",
+              "2022-01-01 0000"));
         }
         if (strArrP.length < 2) {
-          throw new EmptyTime(new Deadline("", "2022-01-01 0000"));
+          throw new EmptyTime(new Deadline("",
+              "2022-01-01 0000"));
         }
         String[] division = info.substring(9).split(" /by ");
         String input = division[0].trim();
