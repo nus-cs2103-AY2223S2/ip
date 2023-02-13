@@ -76,9 +76,12 @@ public class Parser {
                         return new ListNoteCommand();
                     }
 
-                    int listNoteIndex = checkListNote(instruction[1], tasklist) - 1;
+                    int listNoteIndex = checkIndex(instruction[1], tasklist) - 1;
                     return new ListNoteCommand(listNoteIndex);
 
+                case "deleteNote":
+                    int deleteNoteIndex = checkIndex(instruction[1], tasklist) - 1;
+                    return new DeleteNoteCommand(deleteNoteIndex);
 
 
                 default:
@@ -296,17 +299,8 @@ public class Parser {
                     "index and message is the note to be added");
         }
 
-        //check if index enter is a number
-        if (!indexAndNote[0].matches("[0-9]+")) {
-            throw new ArgumentException("Index does not exist");
-        }
+        checkIndex(indexAndNote[0], tasklist);
 
-        int index = Integer.parseInt(indexAndNote[0]);
-
-        //check if index can be found in the task list
-        if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
-            throw new ArgumentException("Can't find the index");
-        }
         //check if note is an empty space
         if(indexAndNote[1].trim().isEmpty()) {
             throw new ArgumentException("Note cannot be filled with only empty spaces");
@@ -314,7 +308,23 @@ public class Parser {
         return indexAndNote;
     }
 
-    public int checkListNote (String indexString, TaskList tasklist) throws ArgumentException {
+//    public int checkListNote (String indexString, TaskList tasklist) throws ArgumentException {
+//        //check if index enter is a number
+//        if (!indexString.matches("[0-9]+")) {
+//            throw new ArgumentException("Index does not exist");
+//        }
+//
+//        int index = Integer.parseInt(indexString);
+//
+//        //check if index can be found in the task list
+//        if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
+//            throw new ArgumentException("Can't find the index");
+//        }
+//
+//        return index;
+//    }
+
+    public int checkIndex(String indexString, TaskList tasklist) throws ArgumentException {
         //check if index enter is a number
         if (!indexString.matches("[0-9]+")) {
             throw new ArgumentException("Index does not exist");

@@ -140,4 +140,14 @@ public class TaskList {
             return task + "\n\nNotes:\n" + task.getNote();
         }
     }
+
+    public String deleteNoteInTask (int index) {
+        Task task = allTasks.get(index);
+        if (task.getIsNoteBlank()) {
+            return "Task does not contain a note";
+        } else {
+            task.deleteNote();
+            return "Noted. The note in " + task + "has been deleted";
+        }
+    }
 }

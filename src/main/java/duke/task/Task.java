@@ -122,4 +122,9 @@ public class Task {
     public String getNote() {
         return note;
     }
+
+    public void deleteNote() {
+        isNoteBlank = true;
+        note = "blank";
+    }
 }
