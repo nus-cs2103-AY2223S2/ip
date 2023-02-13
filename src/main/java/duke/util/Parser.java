@@ -45,68 +45,83 @@ public class Parser {
      */
     public static String operationHandler(String task) throws DukeException{
         String[] inpArr = task.split(" ");
-        int deadlineLength = 9;
-        int eventLength = 6;
-        int snoozeLength = 7;
-        if (inpArr[0].equals("list")) {
+        String command = inpArr[0];
+        if (command.equals("list")) {
             return list();
-        } else if (inpArr[0].equals("mark")) {
+        } else if (command.equals("mark")) {
             taskList.markDone(Integer.parseInt(inpArr[1]) - 1);
             return "Marked for you!";
-        } else if (inpArr[0].equals("unmark")) {
+        } else if (command.equals("unmark")) {
             taskList.markUndone(Integer.parseInt(inpArr[1]) - 1);
             return "Unmarked for you!";
+        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                return addTask(command, task, inpArr);
+        } else if (command.equals("delete")){ // need to handle exception
+            assert inpArr.length > 1: "input array elements are wrong";
+            taskList.remove(Integer.parseInt(inpArr[1])-1);
+            return "Deleted for you";
+        } else if (command.equals("find")) {
+            return taskList.find(inpArr[1]);
+        } else if (command.equals("snooze")){
+            return snooze(task, inpArr);
         } else {
-            // add tasks
-            if (inpArr[0].equals("todo")) {
-                if (task.length() == 4) {
-                    throw new DukeException("Description cannot be empty!");
-                }
-                assert inpArr.length > 1: "input array elements are wrong";
-                int todoLength = 5;
-                ToDo newToDo = new ToDo(task.substring(todoLength), task);
-                taskList.add(newToDo);
-                return "Added :)";
-            } else if (inpArr[0].equals("deadline")) { // need to handle exception
-                assert inpArr.length > 1: "input array elements are wrong";
-                String[] processedString = stringProcessorForDatedTasks(true, task.substring(deadlineLength));
-                Deadline newDeadline = new Deadline(processedString[0], task,
-                        LocalDate.parse(processedString[1]));
-                taskList.add(newDeadline);
-                return "Added :)";
-            } else if (inpArr[0].equals("event")){ // need to handle exception
-                assert inpArr.length > 1: "input array elements are wrong";
-                String[] processedString = stringProcessorForDatedTasks(false, task.substring(eventLength));
-                Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
-                        LocalDate.parse(processedString[2]));
-                taskList.add(newEvent);
-                return "Added :)";
-            } else if (inpArr[0].equals("delete")){ // need to handle exception
-                assert inpArr.length > 1: "input array elements are wrong";
-                taskList.remove(Integer.parseInt(inpArr[1])-1);
-                return "Deleted for you";
-            } else if (inpArr[0].equals("find")) {
-                System.out.println("here ya go :)");
-                return taskList.find(inpArr[1]);
-            } else if (inpArr[0].equals("snooze")){
-                String[] datedTask = task.split("/");
-                if (datedTask.length == 2) {
-                    String[] processedString = stringProcessorForDatedTasks(true, task.substring(snoozeLength));
-                    Deadline deadlineToBeUpdated = (Deadline) taskList.get(Integer.parseInt(inpArr[1])-1);
-                    deadlineToBeUpdated.updateDate(LocalDate.parse(processedString[1]));
-                    return "Snoozed zzz.";
-                } else if (datedTask.length == 3) {
-                    String[] processedString = stringProcessorForDatedTasks(false, task.substring(snoozeLength));
-                    Event eventToBeUpdated = (Event) taskList.get(Integer.parseInt(inpArr[1])-1);
-                    eventToBeUpdated.updateDate(LocalDate.parse(processedString[1]), LocalDate.parse(processedString[2]));
-                    return "Snoozed zzz.";
-                } else {
-                    return "Your input is wrong.";
-                }
-            } else {
-                //throw new DukeException("Invalid Input!");
-                return "I am sorry, I don't understand.";
+            //throw new DukeException("Invalid Input!");
+            return "I am sorry, I don't understand.";
+        }
+    }
+
+    public static String addTask(String command, String task, String[] inpArr) throws DukeException{
+        int deadlineLength = 9;
+        int eventLength = 6;
+        if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            if (task.length() == 4) {
+                throw new DukeException("Description cannot be empty!");
             }
+            assert inpArr.length > 1: "input array elements are wrong";
+            int todoLength = 5;
+            ToDo newToDo = new ToDo(task.substring(todoLength), task);
+            taskList.add(newToDo);
+        } else if (inpArr[0].equals("deadline")) { // need to handle exception
+            assert inpArr.length > 1: "input array elements are wrong";
+            String[] processedString = stringProcessorForDatedTasks(true, task.substring(deadlineLength));
+            Deadline newDeadline = new Deadline(processedString[0], task,
+                    LocalDate.parse(processedString[1]));
+            taskList.add(newDeadline);
+        } else if (inpArr[0].equals("event")) { // need to handle exception
+            assert inpArr.length > 1 : "input array elements are wrong";
+            String[] processedString = stringProcessorForDatedTasks(false, task.substring(eventLength));
+            Event newEvent = new Event(processedString[0], task, LocalDate.parse(processedString[1]),
+                    LocalDate.parse(processedString[2]));
+            taskList.add(newEvent);
+        } else {
+            return "Something went wrong, check your input again!";
+        }
+        return "Added for you :0";
+    }
+
+    /**
+     * Snooze/change date of tasks that are deadline or events.
+     * Returns message to be printed for user indicating successfulness of changing date.
+     *
+     * @param task string in the raw form for processing.
+     * @param inpArr string array with strings separated by whitespace.
+     * @return message replying to user.
+     */
+    public static String snooze(String task, String[] inpArr) {
+        int snoozeLength = 7;
+        String[] datedTask = task.split("/");
+        if (datedTask.length == 2) {
+            String[] processedString = stringProcessorForDatedTasks(true, task.substring(snoozeLength));
+            Deadline deadlineToBeUpdated = (Deadline) taskList.get(Integer.parseInt(inpArr[1])-1);
+            deadlineToBeUpdated.updateDate(LocalDate.parse(processedString[1]));
+            return "Snoozed zzz.";
+        } else if (datedTask.length == 3) {
+            String[] processedString = stringProcessorForDatedTasks(false, task.substring(snoozeLength));
+            Event eventToBeUpdated = (Event) taskList.get(Integer.parseInt(inpArr[1])-1);
+            eventToBeUpdated.updateDate(LocalDate.parse(processedString[1]), LocalDate.parse(processedString[2]));
+            return "Snoozed zzz.";
+        } else {
+            return "Your input is wrong.";
         }
     }
 
@@ -149,7 +164,7 @@ public class Parser {
     }
 
     /**
-     * Output the TaskList..
+     * Output the TaskList.
      */
     public static String list(){
         return taskList.toString();

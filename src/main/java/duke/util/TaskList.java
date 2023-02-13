@@ -63,7 +63,6 @@ public class TaskList {
         }
     }
 
-
     /**
      * Returns the size of the list.
      *
@@ -73,6 +72,12 @@ public class TaskList {
         return toDoList.size();
     }
 
+    /**
+     * Find tasks with name that contain subS.
+     *
+     * @param subS the substring to be found.
+     * @return String all tasks that contain subS.
+     */
     public String find(String subS){
         TaskList foundList = new TaskList();
         for (int i = 0; i < toDoList.size(); i++){
@@ -80,7 +85,7 @@ public class TaskList {
                 foundList.add(toDoList.get(i));
             }
         }
-        return foundList.toString();
+        return "Here ya go :)\n" + foundList.toString();
     }
 
     @Override

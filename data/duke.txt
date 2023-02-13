@@ -1,5 +1,5 @@
 deadline listen to vivaldi /by 2023-12-10@0
-todo borrow books@1
+todo borrow books@0
 event meeting /from 2023-02-10 /to 2023-02-03@0
-todo bro@1
 deadline walk dog /by 2023-02-13@0
+todo close your eyes@0
