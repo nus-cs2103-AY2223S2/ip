@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Mark the task by the 1-based specified id.
+     * Marks the task by the 1-based specified id.
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance
