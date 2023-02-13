@@ -16,7 +16,7 @@ public abstract class Command {
     protected String[] contents;
 
     protected Parser parser;
-    protected boolean exitStatus;
+    protected boolean isExit;
 
     /**
      * Default constructor
@@ -26,7 +26,7 @@ public abstract class Command {
     public Command(String[] contents, boolean exitStatus) {
         this.contents = contents;
         this.parser = new Parser();
-        this.exitStatus = exitStatus;
+        this.isExit = exitStatus;
     }
 
     /**
@@ -42,7 +42,7 @@ public abstract class Command {
      * @return exit status
      */
     public boolean isExit() {
-        return this.exitStatus;
+        return this.isExit;
     }
 
     /**

@@ -47,7 +47,6 @@ public class FindCommand extends Command {
         } else {
             String result = ui.getResult(TypeOfTask.find, null, taskList);
             for (Task tempTask: temporaryTaskList) {
-                //System.out.println(tempTask.toString());
                 result += "\n" + tempTask.toString();
             }
             return result;
