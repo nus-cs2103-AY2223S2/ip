@@ -2,7 +2,7 @@ package henz.command;
 
 import java.util.Arrays;
 
-import henz.dukeexception.CommandException;
+import henz.henzexception.CommandException;
 import henz.storage.Storage;
 import henz.tasklist.TaskList;
 import henz.ui.Ui;
@@ -16,7 +16,7 @@ public abstract class Command {
     private boolean isExit = false;
 
     /**
-     * The Command types supported by Duke.
+     * The Command types supported by Henz.
      */
     public enum Commands {
         LIST, FIND, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE, EXIT, EDIT, DOES_NOT_EXIST

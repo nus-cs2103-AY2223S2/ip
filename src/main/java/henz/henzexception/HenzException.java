@@ -1,15 +1,15 @@
-package henz.dukeexception;
+package henz.henzexception;
 
 /**
  * DukeException class extends Exception class.
  */
-public class DukeException extends Exception {
+public class HenzException extends Exception {
 
     /**
      * Constructor.
      * @param message the error message
      */
-    public DukeException(String message) {
+    public HenzException(String message) {
         super(message);
     }
 }

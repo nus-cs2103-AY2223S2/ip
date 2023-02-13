@@ -115,8 +115,8 @@ public class Storage {
             }
 
             // 2. reads the file from the given data path.
-            File dukeFile = new File(this.dataPathString);
-            Scanner scanner = new Scanner(dukeFile);
+            File henzFile = new File(this.dataPathString);
+            Scanner scanner = new Scanner(henzFile);
 
             // 3. Loops through the lines in the file.
             while (scanner.hasNextLine()) {

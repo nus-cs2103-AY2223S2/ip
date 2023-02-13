@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import henz.dukeexception.CommandException;
+import henz.henzexception.CommandException;
 import henz.storage.Storage;
 import henz.tasklist.TaskList;
 import henz.tasks.Task;

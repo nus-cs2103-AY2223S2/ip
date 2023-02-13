@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import henz.dukeexception.DukeException;
+import henz.henzexception.HenzException;
 import henz.tasks.Task;
 
 /**
@@ -30,7 +30,7 @@ public class Ui {
      * Displays error message on the console.
      * @param error the error caught
      */
-    public void showError(DukeException error) {
+    public void showError(HenzException error) {
         System.out.println(error.getMessage());
     }
 
@@ -45,7 +45,7 @@ public class Ui {
      * Displays welcome message on the console.
      */
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
+        System.out.println("Hello! I'm Henz\nWhat can I do for you?\n");
 
     }
 

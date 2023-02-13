@@ -1,9 +1,9 @@
-package henz.dukeexception;
+package henz.henzexception;
 
 /**
  * EmptyTaskArgumentException class extends DukeException class.
  */
-public class EmptyTaskArgumentException extends DukeException {
+public class EmptyTaskArgumentException extends HenzException {
 
     /**
      * Constructor.

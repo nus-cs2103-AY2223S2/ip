@@ -7,8 +7,8 @@ import henz.tasklist.TaskList;
 import henz.ui.Ui;
 
 /**
- * <h1>Duke Task Manager</h1>
- * The Duke program a that the creation of tasks such as Todo, Event and
+ * <h1>Henz Task Manager</h1>
+ * The Henz program a that the creation of tasks such as Todo, Event and
  * Deadline. The program allows to listing of those added tasks and mark them as
  * done and not done, it also allows deletion of wrongly added task.
  *
@@ -33,14 +33,14 @@ public class Henz {
      * Another constructor for JavaFX
      */
     public Henz() {
-        Henz duke = new Henz("data/duke.txt");
-        this.ui = duke.ui;
-        this.storage = duke.storage;
-        this.tasks = duke.tasks;
+        Henz henz = new Henz("data/henz.txt");
+        this.ui = henz.ui;
+        this.storage = henz.storage;
+        this.tasks = henz.tasks;
     }
 
     /**
-    * Runs Duke.
+    * Runs Henz.
     */
     public void run() {
         this.ui.showWelcome();
@@ -97,6 +97,6 @@ public class Henz {
     * @param args Unused.
     */
     public static void main(String[] args) {
-        new Henz("data/duke.txt").run();
+        new Henz("data/henz.txt").run();
     }
 }

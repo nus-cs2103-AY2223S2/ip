@@ -1,6 +1,6 @@
 package henz.command;
 
-import henz.dukeexception.CommandException;
+import henz.henzexception.CommandException;
 import henz.storage.Storage;
 import henz.tasklist.TaskList;
 import henz.tasks.Task;

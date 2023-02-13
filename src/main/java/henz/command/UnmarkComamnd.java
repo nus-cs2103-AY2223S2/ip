@@ -1,7 +1,7 @@
 package henz.command;
 
-import henz.dukeexception.CommandException;
-import henz.dukeexception.UnmarkIndexDoesNotExistException;
+import henz.henzexception.CommandException;
+import henz.henzexception.UnmarkIndexDoesNotExistException;
 import henz.storage.Storage;
 import henz.tasklist.TaskList;
 import henz.tasks.Task;

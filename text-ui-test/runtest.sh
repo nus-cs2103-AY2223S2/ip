@@ -13,14 +13,14 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ./src/main/java/duke -Xlint:none -d ./bin ./src/main/java/duke/*.java
+if ! javac -cp ./src/main/java/henz -Xlint:none -d ./bin ./src/main/java/henz/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ./bin Duke < ./text-ui-test/input.txt > ./text-ui-test/ACTUAL.TXT
+java -classpath ./bin Henz < ./text-ui-test/input.txt > ./text-ui-test/ACTUAL.TXT
 
 # convert to UNIX format
 cp ./text-ui-test/EXPECTED.TXT ./text-ui-test/EXPECTED-UNIX.TXT

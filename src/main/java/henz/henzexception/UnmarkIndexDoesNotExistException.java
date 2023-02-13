@@ -1,9 +1,9 @@
-package henz.dukeexception;
+package henz.henzexception;
 
 /**
  * UnmarkIndexDoesNotExistException class extends from DukeException class.
  */
-public class UnmarkIndexDoesNotExistException extends DukeException {
+public class UnmarkIndexDoesNotExistException extends HenzException {
 
     /**
      * Constructor.

@@ -1,9 +1,9 @@
-package henz.dukeexception;
+package henz.henzexception;
 
 /**
  * StorageException class exends from DukeException class.
  */
-public class StorageException extends DukeException {
+public class StorageException extends HenzException {
 
     /**
      * Constructor.

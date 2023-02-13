@@ -6,7 +6,7 @@ import henz.ui.Ui;
 
 /**
  * DoesNotExistCommand class extends Command class.
- * This class represenst commands that are not recognised by Duke.
+ * This class represenst commands that are not recognised by Henz.
  */
 public class DoesNotExistCommand extends Command {
 

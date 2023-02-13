@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import henz.dukeexception.StorageException;
+import henz.henzexception.StorageException;
 import henz.tasks.Task;
 
 /**

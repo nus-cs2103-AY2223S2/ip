@@ -1,9 +1,9 @@
-package henz.dukeexception;
+package henz.henzexception;
 
 /**
  * CommandException class extends DukeException class.
  */
-public class CommandException extends DukeException {
+public class CommandException extends HenzException {
 
     /**
      * Constructor.

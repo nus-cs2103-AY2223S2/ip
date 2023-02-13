@@ -3,7 +3,7 @@ package henz.command;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import henz.dukeexception.CommandException;
+import henz.henzexception.CommandException;
 import henz.parser.DateTimeParser;
 import henz.storage.Storage;
 import henz.tasklist.TaskList;
