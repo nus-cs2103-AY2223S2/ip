@@ -1,7 +1,6 @@
 # User Guide
 
-![colette](https://raw.githubusercontent.com/zrei/ip/master/src/main/resources/images/Colette_Happy.gif)
-
+<img align="center" src="https://github.com/zrei/ip/blob/master/src/main/resources/images/Colette_Happy.gif?raw=true">
 Ever felt like you couldn't get a handle on *all* the things that you have to do? Not to worry, for Colette is here to help you! (And talk to you about dogs.)
 
 * [Get Started](#get-started)
