@@ -21,7 +21,7 @@ Ever felt like you couldn't get a handle on *all* the things that you have to do
 7. You should see the window below.
 
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true" height="1000" width="600"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true" height="800" width="480"><br>
 </p>
 
 ---
@@ -50,7 +50,7 @@ Format: ```help```
 Expected result:
 <p align="center">
   <img src="https://github.com/zrei/ip/blob/master/docs/helpCommand.png?raw=true" width="400" height="180"><br>
-  <img src="https://github.com/zrei/ip/blob/master/docs/helpWindow.png?raw=true"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/helpWindow.png?raw=true" height="800" width="480"><br>
 </p>
 
 ### **Listing all tasks**
