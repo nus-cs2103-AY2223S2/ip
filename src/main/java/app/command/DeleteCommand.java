@@ -2,7 +2,6 @@ package app.command;
 
 import app.chatbot.Response;
 import app.chatbot.Storage;
-import app.chatbot.Ui;
 import app.task.InvalidInputException;
 import app.task.Task;
 import app.task.TaskList;
@@ -26,12 +25,11 @@ public class DeleteCommand extends Command {
     /**
      * Deletes a Task from the TaskList, and informs the user of the Task deleted.
      * @param tl
-     * @param ui
      * @param storage
      * @throws Exception
      */
     @Override
-    public Response execute(TaskList tl, Ui ui, Storage storage)  {
+    public Response execute(TaskList tl, Storage storage)  {
         Response response;
         try {
             response = new Response(true);

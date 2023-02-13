@@ -2,7 +2,6 @@ package app.command;
 
 import app.chatbot.Response;
 import app.chatbot.Storage;
-import app.chatbot.Ui;
 import app.task.TaskList;
 
 /**
@@ -19,11 +18,10 @@ public class ExitCommand extends Command {
     /**
      * Prints the exit message. Duke.run() recognises the exit status and closes the app.
      * @param tasks
-     * @param ui
      * @param storage
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) {
+    public Response execute(TaskList tasks, Storage storage) {
         return new Response("Alright, goodbye to you too!", true);
     }
 }

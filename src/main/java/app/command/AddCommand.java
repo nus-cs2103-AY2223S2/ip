@@ -4,7 +4,6 @@ import java.util.Map;
 
 import app.chatbot.Storage;
 import app.chatbot.Response;
-import app.chatbot.Ui;
 import app.task.InvalidDateTimeException;
 import app.task.InvalidInputException;
 import app.task.Task;
@@ -38,13 +37,12 @@ public class AddCommand extends Command {
     /**
      * Adds a Task into the TaskList and informs the user of the Task added.
      * @param tl
-     * @param ui
      * @param storage
      * @return String response
      * @throws Exception
      */
     @Override
-    public Response execute(TaskList tl, Ui ui, Storage storage) {
+    public Response execute(TaskList tl, Storage storage) {
         Task newTask;
         try {
             newTask = tl.addTask(this.taskType, this.args);

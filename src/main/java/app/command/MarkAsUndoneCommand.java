@@ -2,7 +2,6 @@ package app.command;
 
 import app.chatbot.Response;
 import app.chatbot.Storage;
-import app.chatbot.Ui;
 import app.task.TaskList;
 
 public class MarkAsUndoneCommand extends Command {
@@ -21,11 +20,10 @@ public class MarkAsUndoneCommand extends Command {
      * already undone. Throws a message for formatting issues, or if the
      * corresponding Task to markAtIndex does not exist in the list.
      * @param tl
-     * @param ui
      * @param storage
      */
     @Override
-    public Response execute(TaskList tl, Ui ui, Storage storage) {
+    public Response execute(TaskList tl, Storage storage) {
         boolean alreadyMarked;
         try {
             alreadyMarked = tl.unmarkDone(unmarkAtIndex);

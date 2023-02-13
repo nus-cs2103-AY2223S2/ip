@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import app.command.Command;
 import app.command.LoadCommand;
 import app.command.SaveCommand;
+import app.command.SummaryCommand;
 import app.task.TaskList;
 
 /**
@@ -17,13 +18,11 @@ public class Duke {
 
     private Storage storage;
     private TaskList taskList;
-    private final Ui ui;
 
     /**
      * Constructor for Duke.
      */
     public Duke() {
-        this.ui = new Ui();
         try {
             this.storage = new Storage(STORAGE_LOCATION);
             this.taskList = new TaskList();
@@ -31,42 +30,6 @@ public class Duke {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Starts the chatbot session. Upon startup, attempts to load in stored data
-     * for tasks at the location <i>"./data/storage"</i>. Ends session when user types in
-     * <i>"bye"</i>.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show divider
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-
-                if (c.isSave()) {
-                    Command save = new SaveCommand();
-                    save.execute(taskList, ui, storage);
-                }
-
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
 
     /**
      * Gets the chatbot to process a String input into a Command and
@@ -79,11 +42,11 @@ public class Duke {
         StringBuilder response = new StringBuilder();
         try {
             Command c = Parser.parse(fullCommand);
-            Response cmdResponse = c.execute(taskList, ui, storage);
+            Response cmdResponse = c.execute(taskList, storage);
             response.append(cmdResponse.toString());
             if (c.isSave() && cmdResponse.isSuccess()) {
                 Command save = new SaveCommand();
-                response.append(save.execute(taskList, ui, storage));
+                response.append(save.execute(taskList, storage));
             }
             return response.toString();
         } catch (Exception e) {
@@ -97,11 +60,12 @@ public class Duke {
      */
     public String loadStorageData() {
         Command loadCommand = new LoadCommand();
-        try {
-            System.out.println("Loading storage data...");
-            return loadCommand.execute(taskList, ui, storage).toString();
-        } catch (Exception e) {
-            return (e.getMessage());
-        }
+        System.out.println("Loading storage data...");
+        return loadCommand.execute(taskList, storage).toString();
+    }
+
+    public String showSummary() {
+        Command summaryCommand = new SummaryCommand();
+        return summaryCommand.execute(taskList, storage).toString();
     }
 }

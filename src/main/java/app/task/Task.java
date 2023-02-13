@@ -23,7 +23,7 @@ import app.chatbot.Storage;
  * Attributes of a Task cannot be accessed and modified directly from other packages
  * (use the TaskList to modify a Task).
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected static final String DESC_MISSING_ERROR = "Plz provide d description.";
     protected static final String INVALID_DATETIME_FORMAT_ERROR =
             "Try reformatting your date/time to the supported formats:\n"
@@ -34,6 +34,7 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String symbol;
+    protected TaskTypes.Type taskType;
     protected final Map<String, String> fieldToValueMap = new HashMap<>();
     static {
         SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
@@ -157,4 +158,7 @@ public abstract class Task {
     public String toString() {
         return "[" + this.symbol + "][" + this.getStatusIcon() + "] " + this.description;
     }
+
+    @Override
+    public abstract int compareTo(Task other);
 }

@@ -19,6 +19,7 @@ public class Deadline extends Task {
             throws InvalidInputException, InvalidDateTimeException {
         super(description);
         this.symbol = "D";
+        this.taskType = TaskTypes.Type.DEADLINE;
 
         if (isArgEmpty(deadline)) {
             throw new InvalidInputException(MISSING_BY_ERROR);
@@ -39,5 +40,19 @@ public class Deadline extends Task {
     @Override
     public String asDataFormat() {
         return super.asDataFormat("by:" + this.deadline);
+    }
+
+    private LocalDateTime getDeadline() {
+        return this.deadline;
+    }
+    @Override
+    public int compareTo(Task other) {
+        int result = this.getType().compareTo(other.getType());
+        if (result == 0) {
+            Deadline otherDeadline = (Deadline) other;
+            return (this.deadline.compareTo(otherDeadline.getDeadline()));
+        } else {
+            return result;
+        }
     }
 }

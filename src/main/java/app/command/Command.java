@@ -2,7 +2,6 @@ package app.command;
 
 import app.chatbot.Response;
 import app.chatbot.Storage;
-import app.chatbot.Ui;
 import app.task.TaskList;
 
 /**
@@ -28,12 +27,11 @@ public abstract class Command {
      * and actions are communicated to user via the Ui. Storage is called to save the
      * changes executed by the command.
      * @param tl
-     * @param ui
      * @param storage
      * @return String response
      * @throws Exception
      */
-    public abstract Response execute(TaskList tl, Ui ui, Storage storage);
+    public abstract Response execute(TaskList tl, Storage storage);
 
     public boolean isExit() {
         return this.isExit;

@@ -4,11 +4,9 @@ import java.util.Map;
 
 import app.chatbot.Response;
 import app.chatbot.Storage;
-import app.chatbot.Ui;
 import app.task.InvalidDateTimeException;
 import app.task.InvalidInputException;
 import app.task.Task;
-import app.task.TaskFieldNotFoundException;
 import app.task.TaskList;
 
 
@@ -28,7 +26,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public Response execute(TaskList tl, Ui ui, Storage storage) {
+    public Response execute(TaskList tl, Storage storage) {
         if (this.args.isEmpty()) {
             return new Response(NO_FIELDS_INDICATED_ERROR, false);
         }

@@ -2,7 +2,6 @@ package app.command;
 
 import app.chatbot.Response;
 import app.chatbot.Storage;
-import app.chatbot.Ui;
 import app.task.Task;
 import app.task.TaskList;
 
@@ -16,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public Response execute(TaskList tl, Ui ui, Storage storage) {
+    public Response execute(TaskList tl, Storage storage) {
         Response response = new Response(true);
         StringBuilder searchHitsDisplay = new StringBuilder();
         boolean isSearchSuccessful = false;

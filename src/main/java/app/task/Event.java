@@ -22,6 +22,7 @@ public class Event extends Task {
             throws InvalidDateTimeException, InvalidInputException {
         super(description);
         this.symbol = "E";
+        this.taskType = TaskTypes.Type.EVENT;
 
         if (isArgEmpty(from) || isArgEmpty(to)) {
             throw new InvalidInputException(MISSING_FROM_OR_TO_ERROR);
@@ -48,4 +49,24 @@ public class Event extends Task {
                 + ", to: " + this.to.format(OUTPUT_FORMAT) + ")";
     }
 
+    @Override
+    public int compareTo(Task other) {
+        int result = this.getType().compareTo(other.getType());
+        if (result == 0) {
+            return this.eventCompare(other);
+        } else {
+            return result;
+        }
+    }
+
+    private int eventCompare(Task other) {
+        Event otherEvent = (Event) other;
+        int fromDiff = this.from.compareTo(otherEvent.from);
+        if (fromDiff == 0) {
+            int toDiff = this.to.compareTo(otherEvent.to);
+            return toDiff;
+        } else {
+            return fromDiff;
+        }
+    }
 }

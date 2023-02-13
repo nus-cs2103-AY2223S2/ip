@@ -2,7 +2,6 @@ package app.command;
 
 import app.chatbot.Response;
 import app.chatbot.Storage;
-import app.chatbot.Ui;
 import app.task.TaskList;
 
 import java.io.IOException;
@@ -25,12 +24,11 @@ public class SaveCommand extends Command {
      * This Command is not presented as an option to the user and is exclusively
      * used for back-end only.
      * @param tl
-     * @param ui
      * @param storage
      * @throws Exception
      */
     @Override
-    public Response execute(TaskList tl, Ui ui, Storage storage) {
+    public Response execute(TaskList tl, Storage storage) {
         try {
             storage.saveToStorage(tl);
         } catch (IOException e) {

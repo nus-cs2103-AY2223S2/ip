@@ -1,10 +1,12 @@
 package app.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * Represents the List of Tasks, and the primary class that the
@@ -57,8 +59,12 @@ public class TaskList implements Iterable<Task> {
         return Integer.parseInt(listIndex) - 1;
     }
 
+    /**
+     * Returns a view-only List of the Tasks in the TaskList.
+     * @return
+     */
     public List<Task> getAllTasks() {
-        return this.tasks;
+        return Collections.unmodifiableList(this.tasks);
     }
 
     public int size() {
@@ -243,5 +249,16 @@ public class TaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return this.tasks.iterator();
+    }
+
+    public List<Task> getSortedTasksByType(TaskTypes.Type type) {
+        List<Task> result = new ArrayList<>();
+        for (Task t : this.getAllTasks()) {
+            if (t.getType().equals(type)) {
+                result.add(t);
+            }
+        }
+        result.sort(null);
+        return Collections.unmodifiableList(result);
     }
 }

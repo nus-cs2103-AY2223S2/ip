@@ -15,6 +15,7 @@ import app.command.FindCommand;
 import app.command.ListCommand;
 import app.command.MarkAsDoneCommand;
 import app.command.MarkAsUndoneCommand;
+import app.command.SummaryCommand;
 import app.task.TaskTypes;
 
 
@@ -98,6 +99,8 @@ public class Parser {
             return new ExitCommand();
         case "edit":
             return new EditCommand(argValues.get(command),argValues);
+        case "summary":
+            return new SummaryCommand();
         default:
             if (TaskTypes.inputToTask.getValue().containsKey(command)) { // check if command is to add a task
                 String desc = argValues.get(command);
