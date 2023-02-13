@@ -4,6 +4,12 @@
 ## Alfred
 Alfred is Bruce Wayne (Batman)'s loyal butler. He is a wise and intelligent man who acts as a mentor and father figure to Bruce Wayne (Batman) and provides support and assistance to him in his crime-fighting activities. 
 
+- [Quick Start](https://github.com/ruiyigan/ip/tree/master/docs#quick-start)
+- [Summary of Commands](https://github.com/ruiyigan/ip/tree/master/docs#summary-of-commands)
+- [Features](https://github.com/ruiyigan/ip/tree/master/docs#features)
+- [Usage](https://github.com/ruiyigan/ip/tree/master/docs#usage)
+- [Acknowledgements](https://github.com/ruiyigan/ip/tree/master/docs#acknowledgements)
+
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed on your Computer.
@@ -33,15 +39,15 @@ Function | Command
 
 ### Manages todos 
 
-Add, delete, mark, and unmark todos.
+Add, delete, mark, and unmark todos
 
 ### Manages deadlines
 
-Add, delete, mark, and unmark deadlines.
+Add, delete, mark, and unmark deadlines
 
 ### Manages event
 
-Add, delete, mark, and unmark event.
+Add, delete, mark, and unmark event
 
 ### Views all tasks
 
@@ -54,6 +60,10 @@ Find tasks based on keywords
 ### View stats
 
 View stats of tasks
+
+### Persistant storage
+
+Data will be saved automatically after each command
 
 ## Usage
 
