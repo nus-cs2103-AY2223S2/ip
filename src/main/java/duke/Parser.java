@@ -1,8 +1,17 @@
 package duke;
 
+/**
+ * Parser class
+ */
 public class Parser {
     private static Ui ui = new Ui();
 
+    /**
+     * Parses the user's input and executes the corresponding actions
+     * @param userInput user's input
+     * @param lst user's task list
+     * @throws DukeException
+     */
     public static void parse(String userInput, TaskList lst) throws DukeException {
 
         String[] inputArr = userInput.split(" ", 2);
