@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import duke.action.Task;
+import duke.exception.DukeException;
 
 /**
  * Task List class stores the list of tasks that the user has specified.
@@ -46,7 +47,14 @@ public class TaskList implements Serializable {
      *
      * @param task Task object
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DukeException {
+        // check if the task alr exists
+        for (Task storedTask : this.list ) {
+            boolean isEqual = storedTask.getDescription().equals(storedTask.getDescription());
+            if (isEqual) {
+                throw new DukeException(TypeOfTask.storage, 2);
+            }
+        }
         list.add(task);
     }
 

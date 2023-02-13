@@ -28,6 +28,8 @@ public class StorageCustomError extends CustomError {
             return "Unable to retrieve data from file given. Please check if the file path is correct";
         case 1:
             return "Unable to save data to disk. Something went wrong";
+        case 2:
+            return "Cannot add duplicate task. Please enter a different task!";
         default:
             return "Something went wrong here";
         }
