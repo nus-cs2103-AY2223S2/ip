@@ -3,7 +3,7 @@ package duke.Task;
 import java.time.LocalDateTime;
 
 /**
- * The abstraction behind each task stored by the duke.Duke task list.
+ * The abstraction behind each task stored by the duke.Utilities.Duke task list.
  */
 public abstract class Task {
     protected String name;

@@ -2,12 +2,12 @@ package duke.Command;
 
 import duke.Exception.InvalidTaskException;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.UI;
+import duke.Utilities.Storage;
+import duke.Utilities.TaskList;
+import duke.Utilities.UI;
 
 /**
- * The Mark command which is executed by duke.Duke.
+ * The Mark command which is executed by duke.Utilities.Duke.
  */
 public class MarkCommand extends Command {
 

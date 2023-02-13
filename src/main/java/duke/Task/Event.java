@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Event task which is to be stored by duke.Duke. An Event has an event name, start time and end time.
+ * The Event task which is to be stored by duke.Utilities.Duke. An Event has an event name, start time and end time.
  */
 public class Event extends Task {
 

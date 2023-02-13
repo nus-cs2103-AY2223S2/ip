@@ -1,8 +1,8 @@
 package duke.Command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.UI;
+import duke.Utilities.Storage;
+import duke.Utilities.TaskList;
+import duke.Utilities.UI;
 
 public class FindCommand extends Command {
 

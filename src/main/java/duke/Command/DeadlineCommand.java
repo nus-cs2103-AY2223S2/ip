@@ -1,8 +1,8 @@
 package duke.Command;
 
-import duke.TaskList;
-import duke.UI;
-import duke.Storage;
+import duke.Utilities.TaskList;
+import duke.Utilities.UI;
+import duke.Utilities.Storage;
 
 import duke.Exception.InvalidArgumentsException;
 
@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Deadline command which is executed by duke.Duke.
+ * The Deadline command which is executed by duke.Utilities.Duke.
  */
 public class DeadlineCommand extends Command {
 
