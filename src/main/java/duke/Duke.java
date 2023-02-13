@@ -208,6 +208,15 @@ public class Duke extends Application {
                     storage.save(tasks);
                     return resE;
 
+                case "period":
+                    if (parsedCommand.length == 1) {
+                        throw new DukeException("The description of an event cannot be empty");
+                    }
+                    Task newP = PeriodTask.parseCommand(parsedCommand[1]);
+                    String resP = tasks.addTask(newP);
+                    storage.save(tasks);
+                    return resP;
+
                 default:
                     throw new DukeException("Unknown Command");
             }

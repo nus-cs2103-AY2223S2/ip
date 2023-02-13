@@ -42,6 +42,12 @@ public class TaskList {
                 this.addTask(new Event(array[2], fromDate, toDate, Boolean.parseBoolean(array[1])));
                 break;
             }
+            case "P": {
+                LocalDateTime fromDate = LocalDateTime.parse(array[3], storageFormatter);
+                LocalDateTime toDate = LocalDateTime.parse(array[4], storageFormatter);
+                this.addTask(new PeriodTask(array[2], fromDate, toDate, Boolean.parseBoolean(array[1])));
+                break;
+            }
             default:
                 throw new DukeException("Error Task Type!!");
             }
