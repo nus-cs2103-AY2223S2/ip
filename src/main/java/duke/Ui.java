@@ -120,6 +120,15 @@ public class Ui {
     }
 
     /**
+     * Show wrong date range error.
+     * @param task
+     * @return
+     */
+    public static String wrongDateRange() {
+        return "Please ensure to date is after from date! \n";
+    }
+
+    /**
      * Print out help.
      * @return help string
      */

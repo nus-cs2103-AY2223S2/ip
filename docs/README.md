@@ -1,29 +1,51 @@
-# User Guide
-
+# Chika Duke User Guide
+![Image of ChikaDuke](Ui.png)
 ## Features 
 
-### Feature-ABC
+### Feature- add delete and view tasks
 
-Description of the feature.
+Allows you to change and view your task list
 
-### Feature-XYZ
+## Basic Tutorial Usage
 
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
+### `todo myproject` - Add todo with name myproject
 
 ```
-expected output
+Got it I've added a todo
+[T][] myproject
 ```
+
+### `list` - List all tasks
+
+```
+Here are the tasks in your list
+1.[T][] myproject
+```
+
+
+### `mark 1` - mark 1st task
+
+```
+Nice! I've marked this task as done:
+[T][X] myproject
+```
+
+### `unmark 1` - unmark 1st task
+
+```
+OK, I've marked this task as not done yet:
+[T][] myproject
+```
+### `delete 1` - delete 1st task
+
+```
+I have removed this task
+[T][] myproject
+```
+
+Thats it! feel free to use the help function in the app
+whenever you are lost or to check out more advanced task like
+ - event
+ - deadline
+
+Also, use the find function to search through your list more thoroughly

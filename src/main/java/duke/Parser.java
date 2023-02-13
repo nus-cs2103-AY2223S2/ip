@@ -127,6 +127,11 @@ public class Parser {
             String[] options = tmpToken.split(" /to ");
             String from = options[0];
             String to = options[1];
+            LocalDate fromDate = parseDate(from);
+            LocalDate toDate = parseDate(to);
+            if (fromDate.isAfter(toDate)) {
+                return Ui.wrongDateRange();
+            }
             Event task = new Event(name, parseDate(from), parseDate(to));
             tasks.add(task);
             return Ui.addTask("event", task);
