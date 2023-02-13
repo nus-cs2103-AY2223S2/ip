@@ -3,7 +3,27 @@
 `Kuromi クロミ` is a desktop application that acts as a *personal assistant chatbot* to **keep track of your tasks**, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The character `Kuromi クロミ` (the bot) is taken from a [Sanrio Character](https://www.sanrio.com/collections/kuromi), and the user will play the role as `Kuromi クロミ`'s **rival**, `My Melody マイメロディ`.
 
 ## Table of Contents
-
+- [Quick Start](#quick-start)
+- [Main Features](#main-features)
+- [Usage](#usage)
+  - [Viewing help: `help`](#viewing-help-help)
+  - [Adding a task](#adding-a-task)
+    - [`todo`](#1-todo)
+    - [`deadline`](#2-deadline)
+    - [`event`](#3-event)
+  - [Listing all tasks: `list`](#listing-all-tasks-list)
+  - [Editing a task](#editing-a-task)
+    - [`mark`](#1-mark)
+    - [`unmark`](#2-unmark)
+  - [Deleting a task: `delete`](#deleting-a-task-delete)
+  - [Finding a keyword: `find`](#finding-a-keyword-find)
+  - [Getting a reminder: `remind`](#getting-a-reminder-remind)
+  - [Exiting the application: `bye`](#exiting-the-application-bye)
+  - [Getting My Melody's mistakes](#getting-my-melodys-mistakes-mistakes)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+    
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
@@ -50,7 +70,39 @@ From this [source](https://hellokitty.fandom.com/wiki/Kuromi#With_Friends_and_Fa
   e.g. `deadline return book /by 2030-01-01 10:00`
 </div>
 
-## Section A: Adding a task
+## Viewing help: `help`
+
+### `help`
+
+#### Function
+Get a list of available commands that Kuromi understands.
+
+#### Format
+- `help`
+
+## Listing all tasks: `list`
+
+### `list`
+
+#### Function
+Lists all the tasks stored by Kuromi.
+
+#### Format
+- `list`
+
+#### Expected outcome
+
+```
+Here are the tasks in your list:
+1. [T][] borrow book
+2. [D][] return book (by: 2030-01-01 10:30)
+3. [E][] project meeting (from: 2030-01-01 10:30 to: 2030-01-01 12:30)
+-----
+Note:
+Please finish the tasks soon -_-
+```
+
+## Adding a task
 
 ### 1. `todo`
 
@@ -126,29 +178,7 @@ Note:
 Now you have 6 tasks in the list.
 ```
 
-## Section B: Listing all tasks
-
-### `list`
-
-#### Function
-Lists all the tasks stored by Kuromi.
-
-#### Format
-- `list`
-
-#### Expected outcome
-
-```
-Here are the tasks in your list:
-1. [T][] borrow book
-2. [D][] return book (by: 2030-01-01 10:30)
-3. [E][] project meeting (from: 2030-01-01 10:30 to: 2030-01-01 12:30)
------
-Note:
-Please finish the tasks soon -_-
-```
-
-## Section C: Edit task
+## Editing a task
 
 ### 1. `mark`
 
@@ -193,7 +223,7 @@ Note:
 Please do the task soon -_-
 ```
 
-## Section D: Delete task
+## Deleting a task: `delete`
 
 ### `delete`
 
@@ -216,7 +246,7 @@ Note:
 Now you have 5 tasks in the list.
 ```
 
-## Section E: Find keyword
+## Finding a keyword: `find`
 
 ### `find`
 
@@ -238,7 +268,7 @@ Here are the matching tasks in your list:
 1. [D][] return book (by: 2030-01-01 10:30)
 ```
 
-## Section F: Reminder
+## Getting a reminder: `remind`
 
 ### `remind`
 
@@ -265,17 +295,7 @@ Note:
 I know you won't finish the tasks on time :D
 ```
 
-## Section G: List available commands
-
-### `help`
-
-#### Function
-Get a list of available commands that Kuromi understands.
-
-#### Format
-- `help`
-
-## Section H: Exit the application
+## Exiting the application: `bye`
 
 ### `bye`
 
@@ -293,7 +313,7 @@ Note:
 You're annoying but I'll definitely miss you :D
 ```
 
-## Section I: Miscellanous
+## Getting My Melody's mistakes: `mistakes`
 
 ### mistakes
 
@@ -304,3 +324,5 @@ Shows Kuromi's notebook `Kuromi Note` that contains a list of My Melody's mistak
 - `mistakes`
 
 ## FAQ
+
+## Command Summary
