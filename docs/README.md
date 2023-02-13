@@ -30,6 +30,6 @@ Expected outcome:
 
 Description of the outcome.
 
-```
+
 ![image](https://user-images.githubusercontent.com/77615600/218532872-50c35055-a925-4bc5-bf4f-7545c5cf88dc.png)
-```
+
