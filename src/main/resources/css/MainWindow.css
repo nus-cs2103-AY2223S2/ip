@@ -1,0 +1,12 @@
+.dialogContainer {
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-background-color: black;
+}
+.userInput {
+    -fx-text-fill: white;
+}
+
+.sendButton {
+    -fx-text-fill:white;
+}

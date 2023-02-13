@@ -1,0 +1,7 @@
+E<>DONE<>project meeting<>2023-01-27 1600<>2023-01-27 1800
+T<>DONE<>read Harry Potter and Half-blood Prince
+D<>DONE<>cs2012<>2023-01-29 1400
+E<>DONE<>visit relative<>2023-01-22 1400<>2023-01-22 2200
+E<>DONE<>gaming<>2023-01-22 1400<>2023-01-22 2200
+D<>DONE<>cs2105 tutorial<>2023-01-25 1100
+T<>DONE<>fix bugs

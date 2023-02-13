@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" styleClass="dialogBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" type="javafx.scene.layout.HBox" >
+    <Label fx:id="dialog" alignment="TOP_RIGHT" maxHeight="Infinity" styleClass="dialogText" text="Label" textAlignment="RIGHT" wrapText="true" />
+    <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" />
+    <stylesheets>
+        <URL value="@../css/DialogBox.css" />
+    </stylesheets>
+</fx:root>
