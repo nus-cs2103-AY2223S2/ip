@@ -1,10 +1,10 @@
 package command;
 
 import duke.DukeException;
+import duke.Ui;
 import task.Deadline;
 import task.Task;
 import task.TaskList;
-import duke.Ui;
 
 /**
  * Command to add deadline task.

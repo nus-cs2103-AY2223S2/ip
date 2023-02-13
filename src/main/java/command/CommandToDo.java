@@ -1,9 +1,9 @@
 package command;
 
 import duke.DukeException;
+import duke.Ui;
 import task.Task;
 import task.TaskList;
-import duke.Ui;
 import task.ToDo;
 
 /**

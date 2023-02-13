@@ -29,10 +29,6 @@ public class Ui {
         return "\nOK, I've marked this task as undone:\n  " + unmarkedTask.getName() + "\n";
     }
 
-    public static String getAddTaskConfirmationWithAttitude(String taskDetails) {
-        return "\nOkay... I've added this task:\n  " + taskDetails;
-    }
-
     public static String getAddTaskConfirmationWithAttitudeOf(Task taskAdded) {
         return "\nOkay... I've added this task:\n  " + taskAdded.getTaskDetails();
     }
