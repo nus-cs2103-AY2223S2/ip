@@ -7,9 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import saturday.exceptions.SaturdayException;
 import saturday.models.Deadline;
 import saturday.models.Event;
 import saturday.models.Task;
+import saturday.models.ToDo;
 
 import java.io.IOException;
 
@@ -59,10 +61,12 @@ public class TaskView extends BorderPane {
             taskType.setText("Deadline");
             taskType.setStyle("-fx-background-color: #DB4437; -fx-background-radius: 1em");
             timeFrame.setText(task.toString());
-        } else {
+        } else if (task instanceof ToDo) {
             taskType.setText("To Do");
             taskType.setStyle("-fx-background-color: #F4B400; -fx-background-radius: 1em");
             timeFrame.setText(" - ");
+        } else {
+            throw new SaturdayException("Unknown task type");
         }
 
         // set task
