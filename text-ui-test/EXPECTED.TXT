@@ -3,9 +3,10 @@
     What can I do for you?
     ____________________________________________________________
     ____________________________________________________________
-     Got it. I've added this duke.duke:
-         [D][ ] do homework (by: no idea :-p)
+     Got it. I've added this task:
+         [D]  do homework (by: no idea :-p)
      Now you have 1 taskList in the list
+Unable to save information into the file
     ____________________________________________________________
     ____________________________________________________________
     Bye. Hope to see you again soon!
