@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Storage {
     private File file;
-    private boolean isAvailable;
+    private boolean hasData;
     private TaskList list;
 
     /**
@@ -25,7 +25,7 @@ public class Storage {
     public Storage(TaskList list) {
         this.list = list;
         Path path = Paths.get("src/main/data/duke.txt");
-        this.isAvailable = java.nio.file.Files.exists(path);
+        this.hasData = java.nio.file.Files.exists(path);
         this.file = path.toFile();
     }
 
@@ -36,7 +36,7 @@ public class Storage {
     public void findData() throws DukeException {
         try {
             System.out.println("ʕっ￫ᴥ￩ʔっ :: Checking past storage...");
-            if (!isAvailable) {
+            if (!hasData) {
                 throw new DukeException("ʕ•̀ω•́ʔ!! :: Past data does not exist!");
             }
             System.out.println("ʕっ￫ᴥ￩ʔっ :: Successfully retrieved past data!");

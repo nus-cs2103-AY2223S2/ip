@@ -31,61 +31,22 @@ public class Duke {
     public static void start(UI ui, TaskList list, Storage storage, Parser parser) throws DukeException {
         Scanner input = new Scanner(System.in);
         String cmd;
-        Integer num;
         while (true) {
             System.out.println("•──────────────────♛─────────────────•");
             try {
                 cmd = input.nextLine();
                 System.out.println("•──────────────────♛─────────────────•");
                 if (cmd.equals("bye")) {
-                    storage.save();
-                    ui.showExit();
+                    doBye(storage, ui);
                     return;
                 } else if (cmd.equals("list")) {
-                    ui.showList(list);
+                    doList(list, ui);
                 } else if (cmd.startsWith("mark") || cmd.startsWith("unmark")) {
-                    num = parser.getMarkNum(cmd, cmd.startsWith("mark"));
-                    if (list.getSize() < num) {
-                        throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The task does not exist!");
-                    }
-                    if (cmd.startsWith("mark")) {
-                        ui.mark(list, num);
-                    } else {
-                        ui.unmark(list, num);
-                    }
+                    doMark(cmd, list, parser, ui);
                 } else if (cmd.startsWith("todo") || cmd.startsWith("deadline") || cmd.startsWith("event")) {
-                    if (cmd.startsWith("todo")) {
-                        if (parser.getTodoName(cmd).equals("")) {
-                            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The description of a todo cannot be empty!");
-                        } else {
-                            ui.addTodo(list, parser.getTodoName(cmd));
-                        }
-                    } else if (cmd.startsWith("deadline")) {
-                        if (parser.getDeadlineDl(cmd).equals("")) {
-                            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The deadline is missing!");
-                        }
-                        if (parser.getDeadlineName(cmd).equals("")) {
-                            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The description of a deadline cannot be empty!");
-                        }
-                        ui.addDeadline(list, parser.getDeadlineName(cmd), parser.getDeadlineDl(cmd));
-                    } else {
-                        if (parser.getEventStart(cmd).equals("")) {
-                            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The event duration is missing!");
-                        }
-                        if (parser.getEventName(cmd).equals("")) {
-                            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The description of an event cannot be empty!");
-                        }
-                        ui.addEvent(list, parser.getEventName(cmd), parser.getEventStart(cmd), parser.getEventEnd(cmd));
-                    }
+                    addTask(cmd, list, parser, ui);
                 } else if (cmd.startsWith("delete")) {
-                    if (list.getSize() == 0) {
-                        throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The list is empty!");
-                    }
-                    num = parser.getDeleteNum(cmd);
-                    if (list.getSize() < num) {
-                        throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The task does not exist!");
-                    }
-                    ui.removeTask(list, num);
+                    deleteTask(cmd, list, parser, ui);
                 } else {
                     throw new DukeException("╮ʕ˚ᴥ˚ʔ╭ :: ☹ OOPS!!! I'm sorry, but I don't know what that means!");
                 }
@@ -93,5 +54,63 @@ public class Duke {
                 System.out.println(e);
             }
         }
+    }
+
+    private static void doBye(Storage storage, UI ui) {
+        storage.save();
+        ui.showExit();
+    }
+
+    private static void doList(TaskList list, UI ui) {
+        ui.showList(list);
+    }
+
+    private static void doMark(String cmd, TaskList list, Parser parser, UI ui) throws DukeException {
+        int num = parser.getMarkNum(cmd, cmd.startsWith("mark"));
+        if (list.getSize() < num) {
+            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The task does not exist!");
+        }
+        if (cmd.startsWith("mark")) {
+            ui.mark(list, num);
+        } else {
+            ui.unmark(list, num);
+        }
+    }
+
+    private static void addTask(String cmd, TaskList list, Parser parser, UI ui) throws DukeException {
+        if (cmd.startsWith("todo")) {
+            if (parser.getTodoName(cmd).equals("")) {
+                throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The description of a todo cannot be empty!");
+            } else {
+                ui.addTodo(list, parser.getTodoName(cmd));
+            }
+        } else if (cmd.startsWith("deadline")) {
+            if (parser.getDeadlineDl(cmd).equals("")) {
+                throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The deadline is missing!");
+            }
+            if (parser.getDeadlineName(cmd).equals("")) {
+                throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The description of a deadline cannot be empty!");
+            }
+            ui.addDeadline(list, parser.getDeadlineName(cmd), parser.getDeadlineDl(cmd));
+        } else {
+            if (parser.getEventStart(cmd).equals("")) {
+                throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The event duration is missing!");
+            }
+            if (parser.getEventName(cmd).equals("")) {
+                throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The description of an event cannot be empty!");
+            }
+            ui.addEvent(list, parser.getEventName(cmd), parser.getEventStart(cmd), parser.getEventEnd(cmd));
+        }
+    }
+
+    private static void deleteTask(String cmd, TaskList list, Parser parser, UI ui) throws DukeException {
+        if (list.getSize() == 0) {
+            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The list is empty!");
+        }
+        int num = parser.getDeleteNum(cmd);
+        if (list.getSize() < num) {
+            throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The task does not exist!");
+        }
+        ui.removeTask(list, num);
     }
 }
