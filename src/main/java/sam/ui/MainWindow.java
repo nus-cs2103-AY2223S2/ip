@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,7 +31,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    public MainWindow(Stage stage) {
+    private Ui ui;
+
+    public MainWindow(Stage stage, Ui ui) {
+        this.ui = ui;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML));
             loader.setController(this);
@@ -44,14 +48,14 @@ public class MainWindow extends AnchorPane {
     }
 
     public void addUserDialog(VBox dialog) {
-        Label userChar = new Label(Ui.USER);
-        DialogBox dialogBox = DialogBox.getUserDialog(dialog, userChar);
+        ImageView avatar = new ImageView(ui.userImage);
+        DialogBox dialogBox = DialogBox.getLeftDialog(dialog, avatar);
         dialogContainer.getChildren().add(dialogBox);
     }
 
     public void addSamDialog(VBox dialog) {
-        Label samChar = new Label(Ui.SAM);
-        DialogBox dialogBox = DialogBox.getSamDialog(dialog, samChar);
+        ImageView avatar = new ImageView(ui.samImage);
+        DialogBox dialogBox = DialogBox.getRightDialog(dialog, avatar);
         dialogContainer.getChildren().add(dialogBox);
     }
 

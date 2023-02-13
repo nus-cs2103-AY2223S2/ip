@@ -1,41 +1,17 @@
 package sam.ui;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sam.Sam;
 import sam.command.Result;
 
 /**
  * Handles user interaction.
  */
 public class Ui {
-    public static final String LOGO =
-              " ██████╗ █████╗ ███╗   ███╗\n"
-            + "██╔════╝██╔══██╗████╗ ████║\n"
-            + "╚█████╗ ███████║██╔████╔██║\n"
-            + " ╚═══██╗██╔══██║██║╚██╔╝██║\n"
-            + "██████╔╝██║  ██║██║ ╚═╝ ██║\n"
-            + "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
-    public static final String USER =
-              " ███████\n"
-            + "████▀██▀█\n"
-            + "████▄██▄█\n"
-            + " ▀▀▀▀▀▀▀";
-    public static final String SAM =
-              "        ▄\n"
-            + " ▒▒██▒▒▓▓▀\n"
-            + "▒▒▀██▀▒▒▓▓\n"
-            + " █▄██▄███▓▓\n"
-            + "  ▀▀▀▀▀▀ ▓";
+
+    protected Image userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
+    protected Image samImage = new Image(getClass().getResourceAsStream("/images/sam.png"));
 
     private MainWindow mainWindow;
 
@@ -46,7 +22,7 @@ public class Ui {
      * @param stage The stage to set up.
      */
     public void setStage(Stage stage) {
-        mainWindow = new MainWindow(stage);
+        mainWindow = new MainWindow(stage, this);
         respond(Dialog.GREETING.getDialog());
     }
 
