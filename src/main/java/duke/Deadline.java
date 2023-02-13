@@ -38,7 +38,7 @@ public class Deadline extends Task {
     public static Task parseCommand(String str) throws DukeException {
         String[] detailD = str.split(" /by ", 2);
         if (detailD.length == 1) {
-            throw new DukeException("When is the deadline?");
+            throw new DukeException("When is the deadline? Deadline should be in the format dd-MM-yyyy HH:mm");
         }
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime byTime = LocalDateTime.parse(detailD[1], formatter1);

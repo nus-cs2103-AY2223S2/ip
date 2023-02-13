@@ -145,14 +145,11 @@ public class Duke extends Application {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(userText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
 
-//    public String getResponse(String input) {
-//        return "Duke heard: " + input;
-//    }
 
     public String getResponse(String input) {
         try {
