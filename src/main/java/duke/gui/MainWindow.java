@@ -53,6 +53,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws InvalidCommandException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        // adding new dialogs
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

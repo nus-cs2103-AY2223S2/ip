@@ -15,6 +15,7 @@ import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.QuitCommand;
+import duke.commands.SortCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
 import duke.exception.InvalidCommandException;
@@ -58,6 +59,7 @@ public class Parser {
         cmdMap.put("find", (String[] tokens) -> parseFind(tokens));
         cmdMap.put("mark", (String[] tokens) -> parseMark(tokens));
         cmdMap.put("unmark", (String[] tokens) -> parseUnmark(tokens));
+        cmdMap.put("sort", (String[] tokens) -> parseSort(tokens));
         cmdMap.put("bye", (String[] tokens) -> parseBye());
     }
 
@@ -197,6 +199,14 @@ public class Parser {
                     new InvalidCommandException(InvalidCommandException.TASK_NOT_FOUND_EXCEPTION));
         }
         return new UnmarkCommand(taskIndex - 1);
+    }
+
+    private Command parseSort(String[] tokens) {
+        if (tokens.length != 2) {
+            return new InvalidCommand(
+                    new InvalidCommandException(InvalidCommandException.SORT_FORMAT_EXCEPTION));
+        }
+        return new SortCommand(tokens[1]);
     }
 
     private Command parseBye() {

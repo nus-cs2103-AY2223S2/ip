@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,5 +104,12 @@ public class TaskList {
         } else {
             return dukeIo.showFiltered(searchResults);
         }
+    }
+
+    public String sort(Comparator<Task> c) {
+        allTasks = allTasks.stream()
+                            .sorted(c)
+                            .collect(Collectors.toList());
+        return dukeIo.showAll();
     }
 }

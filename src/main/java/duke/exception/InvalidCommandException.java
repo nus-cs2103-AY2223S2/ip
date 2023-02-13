@@ -15,6 +15,7 @@ public class InvalidCommandException extends Exception {
     public static final String DELETE_FORMAT_EXCEPTION = "[ERROR] Delete task with task number."
                                                     + HELP;
     public static final String FIND_FORMAT_EXCEPTION = "[ERROR] No search term(s) specified.";
+    public static final String SORT_FORMAT_EXCEPTION = "[ERROR] Please specify a sort key.";
     private String errorMessage;
 
     /**
