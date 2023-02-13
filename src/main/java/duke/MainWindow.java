@@ -42,6 +42,10 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Main main, Duke d) {
+
+        assert main != null: "Main does not exists in MainWindow";
+        assert d != null: "Duke does not exists in MainWindow";
+
         this.main = main;
         this.duke = d;
         this.duke.setMainWindow(this);

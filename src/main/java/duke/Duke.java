@@ -47,11 +47,16 @@ public class Duke {
     }
 
     public void runInput(String input) throws FileNotFoundException {
+
+        assert listOfTasks != null : "TaskList does not exist in Duke";
         Command c = parser.parse(input, listOfTasks, ui);
         c.executeCommand(listOfTasks, storage, ui);
     }
 
     public void setMainWindow(MainWindow mainWindow) {
+
+        assert mainWindow != null: "MainWindow not found in Duke";
+
         this.mainWindow = mainWindow;
         ui.setMainWindow(mainWindow);
 
