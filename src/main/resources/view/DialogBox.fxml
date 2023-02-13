@@ -5,31 +5,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
-         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <HBox fx:id="speechBubble" fillHeight="false">
-            <children>
-                <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true"/>
-            </children>
-            <HBox.margin>
-                <Insets left="15.0" right="15.0"/>
-            </HBox.margin>
-            <padding>
-                <Insets left="15.0" right="15.0"/>
-            </padding>
-        </HBox>
+        <HBox minHeight="15.0" minWidth="15.0" prefHeight="60.0" prefWidth="15.0" />
+        <Label fx:id="dialog" minHeight="-Infinity" minWidth="50" text="Label" wrapText="true">
+         <font>
+            <Font name="Roboto" size="12.0" />
+         </font></Label>
+        <HBox prefHeight="60.0" prefWidth="15.0" />
         <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-            <HBox.margin>
-                <Insets/>
-            </HBox.margin>
         </ImageView>
+      <HBox prefHeight="60.0" prefWidth="15.0" />
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
     <stylesheets>
-        <URL value="@../css/style.css"/>
+        <URL value="@../css/style.css" />
     </stylesheets>
 </fx:root>

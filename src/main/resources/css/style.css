@@ -1,20 +1,44 @@
-#dialogContainer{
-    -fx-background-color: "#dce1ec";
+#root {
+    -fx-background-color: "#FFD787";
+}
+
+.root {
+  -fx-font: 12px Roboto;
+}
+
+#dialogContainer {
+    -fx-background-color: "#FFD787";
 }
 
 #dialog {
     -fx-text-alignment: left;
-}
-
-#speechBubble {
     -fx-background-color: "white";
     -fx-border-radius: 10 , 10;
     -fx-background-radius: 10, 10;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
-    -fx-padding: 10 50 10 10;
-    -fx-fill-height: false;
+    -fx-padding: 10 10 10 10;
+    -fx-fill-height: true;
+}
+
+#scrollPane {
+    -fx-background-color:white;
 }
 
 #sendButton {
-    -fx-background-color: "5496f5";
+    -fx-background-color: "d82129";
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+#startButton {
+    -fx-background-color: "d82129";
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+    -fx-border-radius: 10 , 10;
+    -fx-background-radius: 10, 10;
+    -fx-font-family: 'Delicious';
+}
+
+#landingPage {
+     -fx-background-color: "#FFD787";
 }
