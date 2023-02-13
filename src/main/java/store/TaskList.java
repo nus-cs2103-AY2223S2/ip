@@ -40,6 +40,7 @@ public class TaskList {
         if (inputLine.length > 1) {
             throw new DukeException("Invalid format");
         }
+        assert inputLine.length == 1;
         int number = 1;
         StringBuilder output = new StringBuilder();
         for (Task stored : tasks) {
@@ -69,6 +70,7 @@ public class TaskList {
         if (inputArr.length < 2) {
             throw new DukeException("Invalid format, please give numbers");
         }
+        assert inputArr.length == 2;
         int index = Integer.parseInt(inputArr[1]) - 1;
         int size = this.getSize();
         if (index >= size | index < 0) {
@@ -77,7 +79,7 @@ public class TaskList {
         Task task = tasks.get(index);
         tasks.remove(index);
         storage.writeData(this);
-        return ui.deleteTaskMsg(task, size - 1);
+        return ui.getDeleteTaskMsg(task, size - 1);
     }
 
     /**
@@ -92,6 +94,7 @@ public class TaskList {
         if (input.length < 2) {
             throw new DukeException("Invalid format, please give numbers");
         }
+        assert input.length == 2;
         int index = Integer.parseInt(input[1]) - 1;
         int size = tasks.size();
         if (index >= size | index < 0) {
@@ -100,7 +103,7 @@ public class TaskList {
         Task task = tasks.get(index);
         task.setChecked(isMarked);
         storage.writeData(this);
-        return ui.markTaskMsg(isMarked, task);
+        return ui.getMarkTaskMsg(isMarked, task);
     }
 
     /**
@@ -113,6 +116,7 @@ public class TaskList {
         if (inputArr.length < 2) {
             throw new DukeException("Invalid format, please give search hint");
         }
+        assert inputArr.length == 2;
         int number = 1;
         StringBuilder output = new StringBuilder();
         for (Task stored : tasks) {

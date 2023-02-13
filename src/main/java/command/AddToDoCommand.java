@@ -33,6 +33,6 @@ public class AddToDoCommand extends AddTaskCommand {
         ToDo toDo = ToDo.generate(this.getInputArr());
         tasks.addTask(toDo);
         storage.writeData(tasks);
-        return ui.addTaskMsg(tasks, toDo);
+        return ui.getAddTaskMsg(tasks, toDo);
     }
 }
