@@ -37,12 +37,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
 <fx:root minHeight="600" minWidth="400" title="Sam" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <icons>
+    <Image url="@/images/icon.png" />
+  </icons>
    <scene>
       <Scene>
          <AnchorPane>
@@ -59,12 +63,12 @@
                      </ScrollPane>
                      <HBox alignment="CENTER" prefHeight="50.0">
                         <children>
-                           <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="30.0" promptText="Type a command..." HBox.hgrow="ALWAYS">
+                           <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="30.0" promptText="Type a command..." style="-fx-background-color: #eaeaea;" HBox.hgrow="ALWAYS">
                               <HBox.margin>
                                  <Insets right="10.0" />
                               </HBox.margin>
                            </TextField>
-                           <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="30.0" prefWidth="60.0" text="Send">
+                           <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #4d91ff; -fx-font-weight: bold;" text="Send" textFill="WHITE">
                               <HBox.margin>
                                  <Insets />
                               </HBox.margin>
