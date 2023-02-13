@@ -5,12 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 import james.exception.JamesException;
 
 import james.task.Deadline;
 import james.task.Event;
 import james.task.TaskList;
 import james.task.ToDo;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Represents the file used to store task list data.
@@ -29,6 +33,7 @@ public class Storage {
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
+                assert Files.exists(Paths.get(this.filePath)) : "The file, " + this.filePath + ", does not exist.";
             }
         } catch (IOException e) {
             e.printStackTrace();

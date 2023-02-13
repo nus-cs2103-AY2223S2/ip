@@ -64,7 +64,10 @@ public class AddMarkCommand extends Command {
             storage.save(tasks.taskListToStoreString());
             response = ui.unmarkTask(unmarkedTask);
             break;
+        default:
+            assert false: "Should not reach here for MarkCommand"; // Will not reach here
         }
+
 
         return response;
     }

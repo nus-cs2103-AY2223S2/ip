@@ -123,6 +123,9 @@ public class AddCommand extends Command {
             storage.save(tasks.taskListToStoreString());
             response = ui.addTask(taskEvent, tasks.size());
             break;
+        default:
+            assert false: "Should not reach here for AddCommand"; // Will not reach here
+
         }
         return response;
     }

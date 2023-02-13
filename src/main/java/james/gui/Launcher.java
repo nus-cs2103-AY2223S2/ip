@@ -7,7 +7,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * The main method of the James program.
+     * The main method of the Launcher program.
      */
     public static void main(String[] args) {
         Application.launch(James.class, args);
