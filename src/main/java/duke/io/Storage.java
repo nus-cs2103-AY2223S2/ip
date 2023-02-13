@@ -30,7 +30,7 @@ public interface Storage {
     String read() throws DukeException;
 
     /**
-     * Write data to the storage.
+     * Writes data to the storage.
      *
      * @param data The data to be written to the storage.
      * @throws DukeException Indicates failure to write to storage.
