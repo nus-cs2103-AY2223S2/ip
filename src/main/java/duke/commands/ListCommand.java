@@ -4,6 +4,7 @@ import java.util.List;
 
 import duke.Duke;
 import duke.Utils;
+import duke.parser.Arguments;
 import duke.task.Task;
 
 /**
@@ -15,7 +16,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    protected void executeInternal(String[] tokens, Duke instance) {
+    protected void executeInternal(Arguments args, Duke instance) {
         List<Task> tasks = instance.getTaskList();
 
         if (tasks.size() == 0) {

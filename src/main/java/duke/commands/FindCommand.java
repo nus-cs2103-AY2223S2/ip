@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import duke.Duke;
 import duke.Utils;
+import duke.parser.Arguments;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -14,11 +15,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    protected void executeInternal(String[] tokens, Duke instance) throws ValidationException {
-        validate(tokens.length > 1, "Need a string to search for!");
+    protected void executeInternal(Arguments args, Duke instance) throws ValidationException {
+        validate(args.getNumOfArgs() > 1, "Need a string to search for!");
 
         TaskList tasks = instance.getTaskList();
-        String searchStr = Utils.stringJoiner(tokens, 1);
+        String searchStr = Utils.stringJoiner(args.getOriginalArgs(), 1);
 
         List<Task> filteredTasks = tasks.stream().filter(t -> {
             String desc = t.getDescription();

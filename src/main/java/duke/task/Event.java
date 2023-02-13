@@ -18,10 +18,23 @@ public class Event extends Task {
      */
     private final LocalDateTime end;
 
-    public Event(String task, LocalDateTime start, LocalDateTime end) {
-        super(task);
+    public Event(
+        String task,
+        int priority,
+        LocalDateTime start,
+        LocalDateTime end
+    ) {
+        super(task, priority);
         this.start = start;
         this.end = end;
+    }
+
+    public Event(
+        String task,
+        LocalDateTime start,
+        LocalDateTime end
+    ) {
+        this(task, DEFAULT_PRIORITY, start, end);
     }
 
     @Override

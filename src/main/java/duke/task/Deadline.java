@@ -13,9 +13,13 @@ public class Deadline extends Task {
      */
     private final LocalDateTime deadline;
 
-    public Deadline(String task, LocalDateTime time) {
-        super(task);
+    public Deadline(String task, int priority, LocalDateTime time) {
+        super(task, priority);
         this.deadline = time;
+    }
+
+    public Deadline(String task, LocalDateTime time) {
+        this(task, DEFAULT_PRIORITY, time);
     }
 
     @Override

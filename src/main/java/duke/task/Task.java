@@ -6,6 +6,8 @@ import java.io.Serializable;
  * Abstract class from which all other tasks are derived
  */
 public abstract class Task implements Serializable {
+    public static int DEFAULT_PRIORITY = 0;
+
     /**
      * String label for the task
      */
@@ -18,10 +20,17 @@ public abstract class Task implements Serializable {
      */
     private boolean isDone;
 
-    public Task(String task) {
+    private final int priority;
+
+    public Task(String task, int priority) {
         this.description = task;
+        this.priority = priority;
         TaskInfo anno = getClass().getAnnotation(TaskInfo.class);
         this.typeString = anno.type();
+    }
+
+    public Task(String task) {
+        this(task, DEFAULT_PRIORITY);
     }
 
     /**
@@ -46,6 +55,11 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getType(), this.isDone ? "X" : " ", this.description);
+        return String.format("[%s][%s][%d] %s", 
+            getType(), 
+            this.isDone ? "X" : " ", 
+            this.priority,
+            this.description
+        );
     }
 }

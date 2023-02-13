@@ -4,6 +4,7 @@ import java.util.List;
 
 import duke.Duke;
 import duke.commands.Command;
+import duke.parser.Arguments;
 import duke.task.Task;
 
 /**
@@ -17,8 +18,9 @@ public abstract class IndexedCommand extends Command {
     }
     
     @Override
-    protected final void executeInternal(String[] args, final Duke instance) throws ValidationException {
+    protected final void executeInternal(Arguments argObj, final Duke instance) throws ValidationException {
         List<Task> tasks = instance.getTaskList();
+        String[] args = argObj.getOriginalArgs();
         try {
             validate(args.length > 1, String.format("Needed an index for %s", getLabel()));
 

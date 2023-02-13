@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.Duke;
 import duke.Utils;
+import duke.parser.Arguments;
 import duke.task.Deadline;
 
 public class DeadlineCommand extends TaskCommand<Deadline> {
@@ -13,28 +14,28 @@ public class DeadlineCommand extends TaskCommand<Deadline> {
     }
 
     @Override
-    protected Deadline getTask(String[] args, Duke instance) throws ValidationException {
-        int index = -1;
-        for (int i = 1; i < args.length; i++) {
-            if (args[i].equalsIgnoreCase("/by")) {
-                index = i;
-                break;
-            }
-        }
+    protected Deadline getTask(Arguments args, Duke instance) throws ValidationException {
+        int priority = getPriorityFromArgs(args);
 
-        validate(index != -1, "Expected a /by directive!");
-        validate(index != 1, "Expected a task!");
-        validate(index != args.length - 1, "Expected a time after /by!");
+        validate(args.hasLabelledArgument("by"), "Expected a /by directive!");
+        String[] byArgs = args.getLabelledArgument("by");
+
+        validate(byArgs.length > 0, "Expected a time after /by!");
+        
+        String[] taskArgs = args.getExcessArguments();
+        if (taskArgs == null) {
+            throw new ValidationException("Expected a task!");
+        }
 
         try {
             LocalDateTime deadline = Utils.parseDateTime(
-                args[index + 1],
-                index + 2 >= args.length ? null : args[index + 2]
+                byArgs[0],
+                byArgs.length > 1 ? byArgs[1] : null
             );
             validate(deadline.isAfter(LocalDateTime.now()), "I can't create something's that's due in the past!");
 
-            String taskStr = Utils.stringJoiner(args, 1, index);
-            return new Deadline(taskStr, deadline);
+            String taskStr = Utils.stringJoiner(taskArgs, 0);
+            return new Deadline(taskStr, priority, deadline);
         } catch (DateTimeParseException e) {
             throw new ValidationException(String.format("Error parsing deadline: %s\n", e.getMessage()));
         }

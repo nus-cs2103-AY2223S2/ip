@@ -3,6 +3,7 @@ package duke.commands;
 import org.junit.jupiter.api.Test;
 
 import duke.Duke;
+import duke.parser.Arguments;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,7 +12,7 @@ public class CommandTest {
     public void checkValidation() {
         Command test = new Command("") {
             @Override
-            public void executeInternal(String[] tokens, Duke instance) throws ValidationException {
+            public void executeInternal(Arguments tokens, final Duke instance) throws ValidationException {
                 validate(false, "Error Message");
             } 
         };

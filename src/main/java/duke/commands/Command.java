@@ -1,15 +1,16 @@
 package duke.commands;
 
+import java.io.PrintStream;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import duke.Duke;
+import duke.parser.Arguments;
 
 /**
  * Class representing a command that Duke can execute. Override
  * the execute method to provide the functionality of the command
  */
-public abstract class Command implements BiConsumer<String[], Duke> {
+public abstract class Command implements BiConsumer<Arguments, Duke> {
     /**
      * Represents errors in the user's input. Throw this exception within {@link #execute() execute}
      * with the given message to indicate that the user has entered invalid arguments for 
@@ -42,20 +43,20 @@ public abstract class Command implements BiConsumer<String[], Duke> {
      */
     private final String label;
 
-    private Consumer<String> outputFunc;
+    private PrintStream outputFunc;
 
-    public Command setOutputFunc(Consumer<String> outputFunc) {
+    public Command setOutputStream(PrintStream outputFunc) {
         this.outputFunc = outputFunc;
         return this;
     }
 
-    public Command(String label, Consumer<String> outputFunc) {
+    public Command(String label, PrintStream outputFunc) {
         this.label = label;
         this.outputFunc = outputFunc;
     }
 
     public Command(String label) {
-        this(label, System.out::println);
+        this(label, System.out);
     }
 
     /**
@@ -63,7 +64,7 @@ public abstract class Command implements BiConsumer<String[], Duke> {
      * @param str String to output
      */
     protected void output(String str) {
-        outputFunc.accept(str);
+        outputFunc.println(str);
     }
 
     /**
@@ -89,23 +90,23 @@ public abstract class Command implements BiConsumer<String[], Duke> {
      * @param instance Instance of Duke to run the command with
      * @throws ValidationException
      */
-    protected abstract void executeInternal(String[] tokens, final Duke instance) throws ValidationException;
+    protected abstract void executeInternal(Arguments args, final Duke instance) throws ValidationException;
 
     /**
      * Execute the command using the given arguments and Duke instance
-     * @param tokens String array of arguments
+     * @param args Parsed arguments object
      * @param instance Duke instance to use
      */
-    public void execute(String[] tokens, final Duke instance) {
+    public void execute(Arguments args, final Duke instance) {
         try {
-            executeInternal(tokens, instance);
+            executeInternal(args, instance);
         } catch (ValidationException e) {
             output(e.getMessage());
         }
     }
 
     @Override
-    public final void accept(String[] tokens, final Duke instance) {
-        execute(tokens, instance);
+    public final void accept(Arguments args, final Duke instance) {
+        execute(args, instance);
     }
 }

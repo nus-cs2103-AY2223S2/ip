@@ -3,6 +3,7 @@ package duke.commands.taskCommand;
 import org.junit.jupiter.api.Test;
 
 import duke.Duke;
+import duke.parser.Arguments;
 import duke.task.Task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +15,7 @@ public class TaskCommandTest {
         Duke instance = new Duke();
         TaskCommand<Task> test = new TaskCommand<Task>("") {
             @Override
-            public Task getTask(String[] tokens, Duke instance) {
+            public Task getTask(Arguments tokens, Duke instance) {
                 return new Task("") {
                     public String getType() { 
                         return "X";
@@ -37,7 +38,7 @@ public class TaskCommandTest {
     public void testFailGetTask() {
         TaskCommand<Task> test = new TaskCommand<Task>("") {
             @Override
-            public Task getTask(String[] tokens, Duke instance) throws ValidationException {
+            public Task getTask(Arguments tokens, Duke instance) throws ValidationException {
                 validate(false, "test message");
                 return new Task("") {
                     public String getType() { 
