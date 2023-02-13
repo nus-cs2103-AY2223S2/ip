@@ -1,2 +1,3 @@
-[T]// // read book
-[E]//X// movie screening // Mon 4pm // 6pm
+[T]/!@#&/ /!@#&/ read book /!@#&/ name: harry potter
+[D]/!@#&/ /!@#&/ watch movie /!@#&/ incredibles@vivocity/!@#&/2 Dec 2019
+[E]/!@#&/ /!@#&/ rate movie /!@#&/ give a high rating/!@#&/ mon 4pm /!@#&/ tues 6pm

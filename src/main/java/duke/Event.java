@@ -7,6 +7,7 @@ public class Event extends Task {
     private static final String TASK_TYPE = "[E]";
     private String from;
     private String to;
+    private String note;
 
     /**
      * constructor for new Event instance
@@ -16,10 +17,15 @@ public class Event extends Task {
      * @param to          end time of event as a String
      * @throws MissingDescriptionException missing description
      */
-    public Event(String description, String from, String to) throws MissingDescriptionException {
+    public Event(String description, String from, String to, String note) throws MissingDescriptionException {
         super(description);
         this.from = from;
         this.to = to;
+        if (note.equals("")) {
+            this.note = "There are no notes!";
+        } else {
+            this.note = note;
+        }
     }
 
     /**
@@ -30,7 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return TASK_TYPE + super.toString() + " (from: " + from + " to:" + to + ")";
+        return TASK_TYPE + super.toString() + "(from: " + from + " to:" + to + ")" + "\nNote: " + note;
     }
 
     /**
@@ -41,6 +47,7 @@ public class Event extends Task {
     @Override
     public String toStorageData() {
         String completionStatus = getStatusIcon();
-        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description + DIVIDER + from + DIVIDER + to;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description + DIVIDER + note + DIVIDER + from
+                + DIVIDER + to;
     }
 }

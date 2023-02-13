@@ -5,6 +5,7 @@ package duke;
  */
 public class Todo extends Task {
     private static final String TASK_TYPE = "[T]";
+    private String note;
 
     /**
      * constructor for a new Todo instance
@@ -12,8 +13,13 @@ public class Todo extends Task {
      * @param description description of task
      * @throws MissingDescriptionException missing description
      */
-    public Todo(String description) throws MissingDescriptionException {
+    public Todo(String description, String note) throws MissingDescriptionException {
         super(description);
+        if (note.equals("")) {
+            this.note = "There are no notes!";
+        } else {
+            this.note = note;
+        }
     }
 
     /**
@@ -23,12 +29,12 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return TASK_TYPE + super.toString();
+        return TASK_TYPE + super.toString() + "\nNote: " + note;
     }
 
     @Override
     public String toStorageData() {
         String completionStatus = getStatusIcon();
-        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description + DIVIDER + note;
     }
 }

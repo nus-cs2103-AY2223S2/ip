@@ -85,22 +85,23 @@ public class Storage {
         String type = info[0];
         String status = info[1];
         String description = info[2];
+        String note = info[3];
         Task task;
 
         switch (type) {
         case "[T]":
-            task = new Todo(description);
+            task = new Todo(description, note);
             break;
         case "[D]":
-            String dateString = info[3];
+            String dateString = info[4];
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
             LocalDate date = LocalDate.parse(dateString, dateFormatter);
-            task = new Deadline(description, date);
+            task = new Deadline(description, date, note);
             break;
         case "[E]":
-            String from = info[3];
-            String to = info[4];
-            task = new Event(description, from, to);
+            String from = info[4];
+            String to = info[5];
+            task = new Event(description, from, to, note);
             break;
         default:
             throw new DukeException("Unknown task type found in storage file");

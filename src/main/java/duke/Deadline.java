@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private static final String TASK_TYPE = "[D]";
     private LocalDate date;
+    private String note;
 
     /**
      * constructor for new Deadline instance
@@ -17,9 +18,14 @@ public class Deadline extends Task {
      * @param date        date of the deadline
      * @throws MissingDescriptionException missing description
      */
-    public Deadline(String description, LocalDate date) throws MissingDescriptionException {
+    public Deadline(String description, LocalDate date, String note) throws MissingDescriptionException {
         super(description);
         this.date = date;
+        if (note.equals("")) {
+            this.note = "There are no notes!";
+        } else {
+            this.note = note;
+        }
     }
 
     /**
@@ -32,7 +38,7 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
         String dateString = date.format(dateFormatter);
-        return TASK_TYPE + super.toString() + " (by: " + dateString + ")";
+        return TASK_TYPE + super.toString() + "(by: " + dateString + ")" + "\nNote: " + note;
     }
 
     /**
@@ -45,6 +51,6 @@ public class Deadline extends Task {
         String completionStatus = this.getStatusIcon();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
         String dateString = date.format(dateFormatter);
-        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description + DIVIDER + dateString;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + description + DIVIDER + note + DIVIDER + dateString;
     }
 }

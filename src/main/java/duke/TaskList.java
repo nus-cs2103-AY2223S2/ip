@@ -34,8 +34,15 @@ public class TaskList {
      */
     public String addTodo(String command) {
         try {
-            String description = command.replace("todo", "");
-            Todo todo = new Todo(description);
+            String note;
+            String[] descriptionAndNote = command.replace("todo", "").split("/note");
+            String description = descriptionAndNote[0];
+            if (descriptionAndNote.length == 1) {
+                note = "";
+            } else {
+                note = descriptionAndNote[1].trim();
+            }
+            Todo todo = new Todo(description, note);
             tasks.add(todo);
             return "Got it. I've added this task:\n" + todo.toString() + "\nNow you have "
                     + tasks.size() + " tasks in the list.";
@@ -52,12 +59,19 @@ public class TaskList {
      */
     public String addDeadline(String command) {
         try {
+            String note;
             String fullDescription = command.replace("deadline", "");
-            String[] descriptionAndDate = fullDescription.split("/by ");
-            String deadlineDescription = descriptionAndDate[0];
-            String date = descriptionAndDate[1];
+            String[] descriptionAndDateAndNote = fullDescription.split("/by ");
+            String deadlineDescription = descriptionAndDateAndNote[0];
+            String[] dateAndNote = descriptionAndDateAndNote[1].split(" /note");
+            String date = dateAndNote[0];
+            if (dateAndNote.length == 1) {
+                note = "";
+            } else {
+                note = dateAndNote[1].trim();
+            }
             LocalDate dateString = LocalDate.parse(date);
-            Deadline deadline = new Deadline(deadlineDescription, dateString);
+            Deadline deadline = new Deadline(deadlineDescription, dateString, note);
             tasks.add(deadline);
             return "Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
                     + tasks.size() + " tasks in the list.";
@@ -66,7 +80,7 @@ public class TaskList {
         } catch (DateTimeParseException e) {
             return "Please input date in YYYY-MM-DD format!";
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "Please fill in all details (task description and date)!";
+            return "Please fill in all details (task description, date and notes! if no notes, put a -)";
         }
     }
 
@@ -78,13 +92,20 @@ public class TaskList {
      */
     public String addEvent(String command) {
         try {
+            String note;
             String description = command.replace("event", "");
             String[] input = description.split("/from");
             String eventDescription = input[0];
             String[] remainder = input[1].split("/to");
             String from = remainder[0];
-            String to = remainder[1];
-            Event event = new Event(eventDescription, from, to);
+            String[] toAndNote = remainder[1].split(" /note");
+            String to = toAndNote[0];
+            if (toAndNote.length == 1) {
+                note = "";
+            } else {
+                note = toAndNote[1].trim();
+            }
+            Event event = new Event(eventDescription, from, to, note);
             tasks.add(event);
             return "Got it. I've added this task:\n" + event.toString() + "\nNow you have "
                     + tasks.size() + " tasks in the list.";
