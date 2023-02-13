@@ -7,8 +7,7 @@ public class Ui {
     private MainWindow mainWindow;
 
     /**
-     * constructor of the Ui class
-     * initialise scanners sc
+     * constructor of the Ui class and initialise scanners sc
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -35,20 +34,6 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
-    /**
-     * prints a line
-     */
-    public void showLine() {
-        System.out.println("======================================================================");
-    }
-
-    /**
-     * gets user input
-     * @return user input
-     */
-    public String getInput() {
-        return sc.nextLine();
-    }
 
     /**
      * prints out text
@@ -63,7 +48,10 @@ public class Ui {
         }
     }
 
-
+    /**
+     * Set the Mainwindow so that Ui can interact with the GUI
+     * @param mainWindow for setting the MainWindow
+     */
     public void setMainWindow(MainWindow mainWindow) {
         assert mainWindow != null: "MainWindow not found in Ui";
         this.mainWindow = mainWindow;

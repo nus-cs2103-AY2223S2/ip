@@ -6,8 +6,6 @@ import duke.Ui;
 
 import java.io.FileNotFoundException;
 
-//import static javafx.application.Platform.exit;
-
 /**
  * ExitCommand helps call the function to update the file once the command is executed
  */

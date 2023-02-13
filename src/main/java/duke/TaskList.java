@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     /**
-     * gets the number of tasks
+     * accessor to get the number of tasks
      * @return the number of task in the allTasks
      */
 
@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * get the task of in the list and concat them into a string
+     * converts the task in the list and concat them into a string
      * @return the entire task in string form
      */
     public String printList() {
@@ -71,7 +71,6 @@ public class TaskList {
      * @param index of the task to be deleted
      */
     public void deleteTask(int index, Ui ui) {
-//        ui.printText(" " + allTasks.get(index-1).toString());
         allTasks.remove(index-1);
     }
 
