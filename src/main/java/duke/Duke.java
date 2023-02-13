@@ -166,6 +166,7 @@ public class Duke extends Application {
                 case "mark":
                     //Marks tasks as done
                     int index = Integer.parseInt(parsedCommand[1]) - 1;
+                    assert index > 0 : "index should be positive";
                     String resMark = tasks.setDone(index);
                     storage.save(tasks);
                     return resMark;
@@ -173,6 +174,7 @@ public class Duke extends Application {
                 case "unmark":
                     //Marks tasks as done
                     int indexU = Integer.parseInt(parsedCommand[1]) - 1;
+                    assert indexU > 0 : "index should be positive";
                     String resUnmark = tasks.setUndone(indexU);
                     storage.save(tasks);
                     return resUnmark;
@@ -180,6 +182,7 @@ public class Duke extends Application {
                 case "delete":
                     //Deletes tasks
                     int indexD = Integer.valueOf(parsedCommand[1]) - 1;
+                    assert indexD > 0 : "index should be positive";
                     String resDel = tasks.deleteTask(indexD);
                     storage.save(tasks);
                     return resDel;
