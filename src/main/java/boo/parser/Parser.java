@@ -432,7 +432,10 @@ public class Parser {
      */
     private CommandType validateOn(String rawCommand) {
         try {
-            String dateString = rawCommand.substring(2);
+            if (rawCommand.length() == 2) {
+                throw new BooException("The date cannot be left blank. Enter a date.");
+            }
+            String dateString = rawCommand.substring(3);
             if (dateString.isBlank()) {
                 throw new BooException("The date cannot be left blank. Enter a date.");
             }
@@ -461,7 +464,10 @@ public class Parser {
      */
     private CommandType validateFind(String rawCommand) {
         try {
-            String keyphrase = rawCommand.substring(4);
+            if (rawCommand.length() == 4) {
+                throw new BooException("The key phrase cannot be left blank. Enter something to search.");
+            }
+            String keyphrase = rawCommand.substring(5);
             if (keyphrase.isBlank()) {
                 throw new BooException("The key phrase cannot be left blank. Enter something to search.");
             }
