@@ -13,6 +13,7 @@ public class TodoCommand extends Command {
 
     /**
      * Executes command to add a todo task to the list.
+     * <p>
      * @param description
      */
     public TodoCommand(String description) {
@@ -21,6 +22,7 @@ public class TodoCommand extends Command {
 
     /**
      * Adds a todo type task to the list.
+     * <p>
      * @param taskManager
      * @return Successful add todo message
      * @throws DukeException

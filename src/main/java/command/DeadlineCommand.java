@@ -13,6 +13,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes command to add a deadline task to the list.
+     * <p>
      * @param description
      */
     public DeadlineCommand(String description) {
@@ -24,6 +25,7 @@ public class DeadlineCommand extends Command {
      * <p>
      * String input is parsed to extract date and
      * time the task is due by.
+     * <p>
      * @param taskManager
      * @return Successful add deadline message
      * @throws DukeException

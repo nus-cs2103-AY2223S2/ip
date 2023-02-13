@@ -24,7 +24,8 @@ public abstract class Command {
     }
 
     /**
-     * Abstract method to execute the command.
+     * Abstract method to execute a given command.
+     * <p>
      * @param taskManager
      * @return Successful execution of command message
      * @throws DukeException

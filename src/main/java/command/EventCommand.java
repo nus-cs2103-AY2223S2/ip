@@ -13,6 +13,7 @@ public class EventCommand extends Command {
 
     /**
      * Executes command to add an event task to the list.
+     * <p>
      * @param description
      */
     public EventCommand(String description) {
@@ -24,6 +25,7 @@ public class EventCommand extends Command {
      * <p>
      * String input is parsed to extract start and end
      * dates and timings of the event.
+     * <p>
      * @param taskManager
      * @return Successful add event message
      * @throws DukeException

@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * Initialise an event task.
+     * <p>
      * @param description
      * @param status
      * @param start
@@ -65,6 +66,4 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (Start: " + startFormatted + " | End: " + endFormatted + ")";
     }
-
-    //event party /from 12/2/23 0600 /to 12/2/23 1000
 }

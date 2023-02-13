@@ -26,6 +26,7 @@ public class Duke {
     /**
      * Parses scanner input and executes the corresponding command to
      * generate a response from the chatbot.
+     * <p>
      * @param input
      * @return String representation of the chatbot's response
      */

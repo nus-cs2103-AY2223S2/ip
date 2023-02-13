@@ -1,8 +1,5 @@
 package command;
 
-import java.util.ArrayList;
-
-import task.Task;
 import task.TaskManager;
 import util.DukeException;
 import util.DukeUI;
@@ -16,7 +13,8 @@ public class FindCommand extends Command {
     /**
      * Executes command to find a task in the list
      * given an input keyword.
-     * @param input
+     * <p>
+     * @param word
      */
     public FindCommand(String word) {
         this.word = word;
@@ -24,6 +22,7 @@ public class FindCommand extends Command {
 
     /**
      * Finds task in list using keyword provided by user.
+     * <p>
      * @param taskManager
      * @return Successful tasks found message
      * @throws DukeException

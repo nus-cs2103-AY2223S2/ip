@@ -11,13 +11,13 @@ public class ToDo extends Task {
 
     /**
      * Initialise a todo task.
+     * <p>
      * @param description
      * @param status
      */
     public ToDo(String description, boolean status) {
         super(description, status);
     }
-
     /**
      * {@inheritDoc}
      * @return Encoded task

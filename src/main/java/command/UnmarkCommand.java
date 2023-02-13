@@ -12,6 +12,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Extracts and initialises list index from String input.
+     * <p>
      * @param input
      */
     public UnmarkCommand(String input) {
@@ -20,6 +21,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Unmarks task at index given by user as completed.
+     * <p>
      * @param taskManager
      * @return Success message that task is uncompleted.
      * @throws DukeException

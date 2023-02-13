@@ -12,6 +12,7 @@ public class MarkCommand extends Command {
 
     /**
      * Extracts and initialises list index from String input.
+     * <p>
      * @param input
      */
     public MarkCommand(String input) {
@@ -20,6 +21,7 @@ public class MarkCommand extends Command {
 
     /**
      * Marks task at index given by user as completed.
+     * <p>
      * @param taskManager
      * @return Success message that task has been completed
      * @throws DukeException

@@ -22,6 +22,7 @@ public class TaskManager {
 
     /**
      * Marks the task as completed.
+     * <p>
      * @param index
      */
     public void markTask(int index) {
@@ -31,6 +32,7 @@ public class TaskManager {
 
     /**
      * Marks the task as not completed.
+     * <p>
      * @param index
      */
     public void unmarkTask(int index) {
@@ -40,6 +42,7 @@ public class TaskManager {
 
     /**
      * Removes the task from the list.
+     * <p>
      * @param index
      */
     public void deleteTask(int index) {
@@ -48,6 +51,7 @@ public class TaskManager {
 
     /**
      * Adds a task to the list.
+     * <p>
      * @param task
      */
     public void addTaskToList(Task task) {
@@ -56,6 +60,7 @@ public class TaskManager {
 
     /**
      * Prints task from list at a given index.
+     * <p>
      * @param index
      * @return String representation of a task at a given index
      */
@@ -66,6 +71,7 @@ public class TaskManager {
 
     /**
      * Iterates through task list to display its elements.
+     * <p>
      * @return String of tasks in the list
      */
     public String displayList() throws DukeException {
@@ -84,6 +90,7 @@ public class TaskManager {
 
     /**
      * Finds tasks in the list which match a given keyword.
+     * <p>
      * @param word
      * @return all matching tasks
      */
@@ -98,7 +105,7 @@ public class TaskManager {
             sb.append(System.lineSeparator());
         }
 
-        if(sb.length() == 0) {
+        if (sb.length() == 0) {
             throw new DukeException(DukeUI.missingTaskErrorMessage());
         }
         return sb.toString();
@@ -111,5 +118,4 @@ public class TaskManager {
     public ArrayList<Task> getTaskArr() {
         return taskArr;
     }
-
 }
