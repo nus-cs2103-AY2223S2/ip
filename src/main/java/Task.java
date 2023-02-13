@@ -52,8 +52,12 @@ public class Task {
         Task.printHorizontalLine();
     }
 
-    public void printTask() {
-        System.out.println(this.id + ".[" + this.getStatusIcon() + "] " + this.description);
+    public void printUpdatedTask() {
+        printHorizontalLine();
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + this);
+        System.out.println("     Now you have " + Task.getTotalNumberOfTask() + " tasks in the list.");
+        printHorizontalLine();
     }
 
     public String getStatusIcon() {
