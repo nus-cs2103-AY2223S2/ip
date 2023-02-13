@@ -19,6 +19,13 @@ public class UI {
         }
     }
 
+    public void showFoundTasks(TaskList list) {
+        System.out.println("ʕ•ᴥ•ʔっ :: Here are the matching task(s) in your list:");
+        for (int i = 1; i <= list.getSize(); i++) {
+            System.out.println(i + "." + list.getTask(i-1).toString());
+        }
+    }
+
     public void mark(TaskList list, int index) {
         list.getTask(index - 1).setDone();
         System.out.println("ʕ•̀ω•́ʔ✧ :: Nice! I've marked this task as done:\n  " + list.getTask(index - 1).toString());
