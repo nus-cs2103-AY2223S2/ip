@@ -8,10 +8,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.Duke;
+
 import duke.TaskList;
 import duke.exceptions.DirectoryNotFoundException;
 import duke.exceptions.DukeException;
+import duke.tasks.Task;
 import duke.ui.Ui;
 
 
@@ -84,14 +85,8 @@ public class Storage {
             FileWriter writer = new FileWriter("./data/duke.txt");
             String output = "";
             for (int j = 0; j < tasks.getLength(); j++) {
-                String status = tasks.getTask(j).getStatusIcon().equals("X") ? "1" : "0";
-                if (!tasks.getTask(j).getType().equals("T")) {
-                    output = output + (tasks.getTask(j).getType() + " | " + status + " | "
-                        + tasks.getTask(j).getDetail() + "| " + tasks.getTask(j).getTime() + "\n");
-                } else {
-                    output = output + (tasks.getTask(j).getType() + " | " + status + " | "
-                        + tasks.getTask(j).getDetail() + "\n");
-                }
+                Task cur = tasks.getTask(j);
+                output += extractTask(cur);
             }
             writer.write(output);
             writer.close();
@@ -101,6 +96,24 @@ public class Storage {
             Ui.fileExceptionUi();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+
+    }
+
+    /**
+     * Converts each task in the task list to the format to be used in the text file
+     * @param task
+     * @return A string description of the task to be written into the text file
+     */
+    public String extractTask(Task task) {
+
+        String status = task.getStatusIcon().equals("X") ? "1" : "0";
+        if (!task.getType().equals("T")) {
+            return (task.getType() + " | " + status + " | "
+                + task.getDetail() + "| " + task.getTime() + "\n");
+        } else {
+           return (task.getType() + " | " + status + " | "
+                + task.getDetail() + "\n");
         }
 
     }

@@ -1,0 +1,3 @@
+T | 0 | hi
+E | 0 | say hi| from 1 to 2
+D | 0 | homework| 2020-02-02
