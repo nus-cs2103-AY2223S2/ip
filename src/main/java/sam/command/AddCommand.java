@@ -47,6 +47,19 @@ public class AddCommand extends Command {
             throw new SamMissingTaskTitleException();
         }
 
+        Task task = createTask(input);
+        tasks.addTask(task);
+
+        ui.respond(Dialog.ADD.getDialog(),
+                task.toString(),
+                String.format(Dialog.ADD_COUNT.getDialog(), tasks.count()));
+
+        storage.save(tasks);
+
+    }
+
+    private Task createTask(String input) throws SamMissingTaskValueException,
+            SamMissingTaskArgException, SamInvalidDateException, SamUnknownCommandException {
         String[] titleArgs = input.split(" +/", 2);
         String title = titleArgs[0];
 
@@ -80,12 +93,6 @@ public class AddCommand extends Command {
         }
 
         assert task != null : "task shouldn't be null";
-        tasks.addTask(task);
-
-        ui.respond(Dialog.ADD.getDialog(),
-                task.toString(),
-                String.format(Dialog.ADD_COUNT.getDialog(), tasks.count()));
-
-        storage.save(tasks);
+        return task;
     }
 }
