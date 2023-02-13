@@ -134,6 +134,7 @@ public class Parser {
             + object.taskString();
         break;
       }
+      //level 9 dealing with "find" command"
       case FIND: {
         if (strArr.length < 2) {
           throw new EmptyFind();
