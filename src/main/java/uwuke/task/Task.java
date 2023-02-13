@@ -1,7 +1,7 @@
 package uwuke.task;
 
 public abstract class Task {
-    private boolean markedDone = false;
+    private boolean isMarkedDone = false;
     private final String taskName; // Do not allow task name to change for now
 
     public Task(String taskName) {
@@ -14,19 +14,19 @@ public abstract class Task {
     }
 
     public String markDone() {
-        this.markedDone = true;
+        this.isMarkedDone = true;
         String msg = String.format("Nice! I've marked this task as done:\n  %s", this.toString());
         return msg;
     }
 
     public String unmarkDone() {
-        this.markedDone = false;
+        this.isMarkedDone = false;
         String msg = String.format("Ok, I've marked this task as not done yet:\n  %s", this.toString());
         return msg;
     }
 
     private String getStatusIcon() {
-        char c = markedDone ? 'X' : ' ';
+        char c = isMarkedDone ? 'X' : ' ';
         return String.format("[%c]", c);
     }
 }
