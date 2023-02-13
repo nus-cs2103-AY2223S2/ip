@@ -6,14 +6,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * Storage object to keep track of the final TaskList
+ * and store into the file
+ */
 
 public class Storage {
     private File file;
     private boolean isAvailable;
     private TaskList list;
 
+    /**
+     * Constructor of the Storage class
+     * @param list Current TaskList
+     */
     public Storage(TaskList list) {
         this.list = list;
         Path path = Paths.get("src/main/data/duke.txt");
@@ -21,6 +29,10 @@ public class Storage {
         this.file = path.toFile();
     }
 
+    /**
+     * Checks whether there is data available
+     * @throws DukeException
+     */
     public void findData() throws DukeException {
         try {
             System.out.println("ʕっ￫ᴥ￩ʔっ :: Checking past storage...");
@@ -33,6 +45,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Connects the file to the application and restores the past data
+     * @throws DukeException
+     */
     public void connect() throws DukeException {
         try {
             Scanner sc = new Scanner(this.file);
@@ -60,6 +76,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the final state of the TaskList into the file
+     */
     public void save() {
         try {
             FileWriter writer = new FileWriter("src/main/data/duke.txt");

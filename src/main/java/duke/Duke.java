@@ -2,6 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Duke is a task tracker
+ * @author Branda Ang
+ * @version CS2103T AY22/23 SEM 2
+ */
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
@@ -15,6 +20,14 @@ public class Duke {
         start(ui, list, storage, parser);
     }
 
+    /**
+     * Starts the execution of Duke
+     * @param ui UI for the application
+     * @param list TaskList to keep track of the tasks
+     * @param storage Storage to store final state of the task list
+     * @param parser Parser to parse commands
+     * @throws DukeException
+     */
     public static void start(UI ui, TaskList list, Storage storage, Parser parser) throws DukeException {
         Scanner input = new Scanner(System.in);
         String cmd;
