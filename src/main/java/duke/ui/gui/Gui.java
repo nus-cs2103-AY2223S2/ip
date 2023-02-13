@@ -30,6 +30,7 @@ public class Gui implements Ui {
         this.stage = stage;
         mainWindow = new MainWindow(inputHandler);
 
+        setupStage();
         setupStageScene();
         setupStageSize();
     }
@@ -42,6 +43,10 @@ public class Gui implements Ui {
     @Override
     public void print(String message) {
         mainWindow.printDukeMessage(message);
+    }
+
+    private void setupStage() {
+        stage.setTitle("Duke");
     }
 
     private void setupStageScene() {
