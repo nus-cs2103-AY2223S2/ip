@@ -16,6 +16,7 @@ public class DeleteCommand extends Command {
 
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task cur = taskList.deleteTask(index);
+        assert !taskList.getTasks().contains(cur) : "Task should be deleted from tasklist";
         String taskString = "[" + cur.getStatusIcon() + "] " + cur.getDescription();
         if (!(cur instanceof Todo)) {
             taskString +=  " (" + cur.getDuedateString() + ")";

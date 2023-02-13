@@ -77,4 +77,8 @@ public class Storage {
             throw new DukeException("Error, your tasks cannot be saved.");
         }
     }
+
+    public Boolean isFileLoaded() {
+        return this.file != null;
+    }
 }
