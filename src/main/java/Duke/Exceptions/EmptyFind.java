@@ -1,7 +1,9 @@
 package Duke.Exceptions;
 
-import Duke.task.Task;
-
+/**
+ * Exceptions when user inputs find command without
+ * specific content.
+ */
 public class EmptyFind extends DukeException {
   public String emptyFind;
 
