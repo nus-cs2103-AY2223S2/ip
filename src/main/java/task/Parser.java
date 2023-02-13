@@ -1,6 +1,11 @@
 package task;
 
-import duke.*;
+
+import duke.DukeException;
+import duke.EmptyDeadlineException;
+import duke.EmptyEventException;
+import duke.EmptyListException;
+import duke.EmptyTodoException;
 
 /**
  * Parser class that handles user input.
