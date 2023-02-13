@@ -2,6 +2,7 @@ package duke.Command;
 
 import duke.Exception.InvalidArgumentsException;
 
+import duke.Exception.InvalidEventException;
 import duke.Task.Event;
 
 import duke.Utilities.NoteList;
@@ -28,13 +29,20 @@ public class EventCommand extends Command {
      * @param from The start date/time of the event.
      * @param until The end date/time of the event.
      * @throws InvalidArgumentsException Exception thrown when the date/time input is given in an invalid format.
+     * @throws InvalidEventException Exception thrown when the 'until' date/time input occurs before the 'from'
+     * date/time input
      */
-    public EventCommand(String name, String from, String until) throws InvalidArgumentsException {
+    public EventCommand(String name, String from, String until) throws InvalidArgumentsException,
+            InvalidEventException {
         this.name = name;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             this.from = LocalDateTime.parse(from.trim(), formatter);
             this.until = LocalDateTime.parse(until.trim(), formatter);
+
+            if (this.until.isBefore(this.from)) {
+                throw new InvalidEventException(name);
+            }
         } catch (DateTimeParseException e) {
             throw new InvalidArgumentsException();
         }

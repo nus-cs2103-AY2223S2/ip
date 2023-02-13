@@ -2,10 +2,7 @@ package duke.Utilities;
 
 import duke.Command.*;
 
-import duke.Exception.DukeException;
-import duke.Exception.IncorrectArgumentsException;
-import duke.Exception.InvalidArgumentsException;
-import duke.Exception.InvalidInputException;
+import duke.Exception.*;
 
 /**
  * Main class that parses the users inputs.
@@ -76,24 +73,20 @@ public class Parser {
      * a wrong format, throw this exception.
      */
     public Command handleMultiInput(String command, String details) throws IncorrectArgumentsException,
-            InvalidInputException, InvalidArgumentsException {
+            InvalidInputException, InvalidArgumentsException, InvalidEventException {
         switch (command) {
             case "bye":
             case "list":
             case "listnotes":
                 throw new IncorrectArgumentsException(command, 0, 1);
             case "mark":
-                int numToMark = Integer.parseInt(details);
-                return new MarkCommand(numToMark);
+                return new MarkCommand(details);
             case "unmark":
-                int numToUnmark = Integer.parseInt(details);
-                return new UnmarkCommand(numToUnmark);
+                return new UnmarkCommand(details);
             case "delete":
-                int numToDelete = Integer.parseInt(details);
-                return new DeleteCommand(numToDelete);
+                return new DeleteCommand(details);
             case "deletenote":
-                int noteToDelete = Integer.parseInt(details);
-                return new DeleteNoteCommand(noteToDelete);
+                return new DeleteNoteCommand(details);
             case "todo":
                 return new ToDoCommand(details);
             case "deadline":

@@ -1,5 +1,6 @@
 package duke.Command;
 
+import duke.Exception.InvalidArgumentsException;
 import duke.Exception.InvalidTaskException;
 
 import duke.Utilities.NoteList;
@@ -15,11 +16,17 @@ public class DeleteCommand extends Command {
     private final int index;
 
     /**
-     * The constructor for an (executable) Delete Command.
-     * @param index Index of the task to be deleted.
+     * The constructor for a delete command object.
+     * @param index User input after the delete command. If it is not in proper format, throw exception.
+     * @throws InvalidArgumentsException Thrown if the arguments are not in the proper format.
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String index) throws InvalidArgumentsException {
+        try {
+            int numToDelete = Integer.parseInt(index);
+            this.index = numToDelete;
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentsException();
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke.Command;
 
+import duke.Exception.InvalidArgumentsException;
 import duke.Exception.InvalidTaskException;
 
 import duke.Utilities.NoteList;
@@ -15,11 +16,17 @@ public class UnmarkCommand extends Command {
     private final int index;
 
     /**
-     * The constructor for an (executable) unmark command.
-     * @param index The index of the task to be unmarked.
+     * The constructor for a unmark command object.
+     * @param index User input after the unmark command. If it is not in proper format, throw exception.
+     * @throws InvalidArgumentsException Thrown if the arguments are not in the proper format.
      */
-    public UnmarkCommand(int index) {
-        this.index = index;
+    public UnmarkCommand(String index) throws InvalidArgumentsException {
+        try {
+            int numToUnmark = Integer.parseInt(index);
+            this.index = numToUnmark;
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentsException();
+        }
     }
 
     /**

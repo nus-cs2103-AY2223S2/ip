@@ -44,7 +44,7 @@ public class Storage {
             tasks.clear();
             String line = reader.readLine();
 
-            if (line.equals("Tasks:")) {
+            if (line != null && line.equals("Tasks:")) {
                 line = reader.readLine();
                 while (line != null && !line.equals("Notes:")) {
                     tasks.add(Task.dataToTask(line));

@@ -1,5 +1,6 @@
 package duke.Command;
 
+import duke.Exception.InvalidArgumentsException;
 import duke.Exception.InvalidNoteException;
 import duke.Utilities.NoteList;
 import duke.Utilities.Storage;
@@ -14,11 +15,17 @@ public class DeleteNoteCommand extends Command {
     private int index;
 
     /**
-     * The constructor for a new delete note command.
-     * @param index Index of the note to be deleted.
+     * The constructor for a deletenote command object.
+     * @param index User input after the deletenote command. If it is not in proper format, throw exception.
+     * @throws InvalidArgumentsException Thrown if the arguments are not in the proper format.
      */
-    public DeleteNoteCommand(int index) {
-        this.index = index;
+    public DeleteNoteCommand(String index) throws InvalidArgumentsException {
+        try {
+            int numToDelete = Integer.parseInt(index);
+            this.index = numToDelete;
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentsException();
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package duke.Command;
 
+import duke.Exception.InvalidArgumentsException;
 import duke.Exception.InvalidTaskException;
 
 import duke.Utilities.NoteList;
@@ -15,11 +16,17 @@ public class MarkCommand extends Command {
     private final int index;
 
     /**
-     * The constructor for an (executable) mark command.
-     * @param index Index of the task to be marked.
+     * The constructor for a mark command object.
+     * @param index User input after the mark command. If it is not in proper format, throw exception.
+     * @throws InvalidArgumentsException Thrown if the arguments are not in the proper format.
      */
-    public MarkCommand(int index) {
-        this.index = index;
+    public MarkCommand(String index) throws InvalidArgumentsException {
+        try {
+            int numToMark = Integer.parseInt(index);
+            this.index = numToMark;
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentsException();
+        }
     }
 
     /**
