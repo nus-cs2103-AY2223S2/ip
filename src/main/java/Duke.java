@@ -170,7 +170,7 @@ public class Duke extends Application {
      * @return the bot's response as a String
      */
     private String getResponse(String userInput) {
-        String response = "I heard you: " + userInput + "\n\n";
+        String response = "You said: " + userInput + "\n\n";
 
         if (!parser.checkEnd(userInput)) {
             if (parser.checkListRequest(userInput)) {
@@ -198,8 +198,9 @@ public class Duke extends Application {
                 response += tasks.decreasePriorityOfTask(itemNo);
             } else if (parser.checkSort(userInput)) {
                 response += tasks.sortTasks();
-            }
-            else {
+            } else if (parser.checkHelpRequest(userInput)) {
+                response += ui.instruct();
+            } else {
                 String[] terms = userInput.split(" ");
                 response += addTask(userInput, terms);
             }

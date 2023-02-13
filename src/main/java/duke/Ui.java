@@ -38,7 +38,8 @@ public class Ui {
         instructString += ("D. To sort the tasks according to priority, type 'sort'\n");
         instructString += ("E. To find tasks with a certain keyword, type 'find Y' ");
         instructString += ("where Y is the keyword\n");
-        instructString += ("F. To save and exit, type 'bye'\n");
+        instructString += ("F. To show these instructions again, type 'help'\n");
+        instructString += ("G. To save and exit, type 'bye'\n");
         return instructString;
     }
 

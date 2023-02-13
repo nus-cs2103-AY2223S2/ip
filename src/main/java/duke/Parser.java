@@ -60,6 +60,16 @@ public class Parser {
     }
 
     /**
+     * Checks if the user needs the tutorial.
+     *
+     * @param userInput the input keyed in by the user.
+     * @return true if the user types "help" and false otherwise.
+     */
+    public boolean checkHelpRequest(String userInput) {
+        return userInput.equals("help");
+    }
+
+    /**
      * Checks if the user wishes to delete a task.
      *
      * @param userInput the input keyed in by the user.
