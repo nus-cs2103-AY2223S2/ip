@@ -138,7 +138,7 @@ public abstract class Task {
      * @return <code>true</code> if task has reminder today,<code>false</code>otherwise.
      */
     public boolean hasReminderToday() {
-        boolean ret = this.reminder.isToday() && !isDone;
+        boolean ret = this.reminder.shouldRemindToday() && !isDone;
         return ret;
     }
 }

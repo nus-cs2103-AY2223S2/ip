@@ -27,19 +27,19 @@ public class Ui {
     private static final String GREETING_MESSAGE = "\tHello! I'm Duke\n"
             + "\tWhat can I do for you?";
     private final Scanner scanner;
-    private final String init_message = "Hello from\n" + Ui.LOGO;
-    private final String marked_task_message = "\tNice! I've marked this task as done:\n\t  ";
-    private final String unmarked_task_message = "\tOK, I've marked this task as not done yet:"
+    private final String initMessage = "Hello from\n" + Ui.LOGO;
+    private final String markedTaskMessage = "\tNice! I've marked this task as done:\n\t  ";
+    private final String unmarkedTaskMessage = "\tOK, I've marked this task as not done yet:"
             + "\n\t  ";
-    private final String added_task_message = "\tGot it. I've added this task:\n\t  ";
-    private final String deleted_task_message = "\tNoted. I've removed this task:\n\t  ";
-    private final String clear_task_message = "\tI have cleared the task list.";
-    private final String bye_message = "\tBye. Hope to see you again soon!";
-    private final String line_seperation = "\t___________________________________"
+    private final String addedTaskMessage = "\tGot it. I've added this task:\n\t  ";
+    private final String deletedTaskMessage = "\tNoted. I've removed this task:\n\t  ";
+    private final String clearTaskMessage = "\tI have cleared the task list.";
+    private final String byeMessage = "\tBye. Hope to see you again soon!";
+    private final String lineSeperation = "\t___________________________________"
             + "_________________________";
-    private final String loading_error_message = "Error loading file from storage.";
-    private final String remind_message = "\tReminder about tasks:\n\t";
-    private final String empty_list_message = "\tNothing found!";
+    private final String loadingErrorMessage = "Error loading file from storage.";
+    private final String remindMessage = "\tReminder about tasks:\n\t";
+    private final String emptyListMessage = "\tNothing found!";
     /**
      * Constructor for <code>Duke</code>'s <code>Ui</code>.
      */
@@ -65,8 +65,8 @@ public class Ui {
      * @return <code>Duke</code>'s init message
      */
     public String showInitMessage() {
-        System.out.println(init_message);
-        return init_message;
+        System.out.println(initMessage);
+        return initMessage;
     }
     /**
      * Returns and prints the greeting message and a line separation.
@@ -81,7 +81,7 @@ public class Ui {
      * @return <code>Duke</code>'s marked-task message
      */
     public String showMarkedTask(String taskDescription) {
-        String message = marked_task_message + taskDescription;
+        String message = markedTaskMessage + taskDescription;
         System.out.println(message);
         return message;
     }
@@ -90,7 +90,7 @@ public class Ui {
      * @return <code>Duke</code>'s unmarked-task message
      */
     public String showUnmarkedTask(String taskDescription) {
-        String message = unmarked_task_message + taskDescription;
+        String message = unmarkedTaskMessage + taskDescription;
         System.out.println(message);
         return message;
     }
@@ -99,7 +99,7 @@ public class Ui {
      * @return <code>Duke</code>'s added-task message
      */
     public String showAddedTask(Task t, TaskList tl) {
-        String message = added_task_message + t + getTaskListLengthString(tl);
+        String message = addedTaskMessage + t + getTaskListLengthString(tl);
         System.out.println(message);
         return message;
     }
@@ -108,7 +108,7 @@ public class Ui {
      * @return <code>Duke</code>'s deleted-task message
      */
     public String showDeletedTask(Task t, TaskList tl) {
-        String message = deleted_task_message + t + getTaskListLengthString(tl);
+        String message = deletedTaskMessage + t + getTaskListLengthString(tl);
         System.out.println(message);
         return message;
     }
@@ -117,24 +117,24 @@ public class Ui {
      * @return <code>Duke</code>'s cleared-tasks message
      */
     public String showClearTasksMessage() {
-        System.out.println(clear_task_message);
-        return clear_task_message;
+        System.out.println(clearTaskMessage);
+        return clearTaskMessage;
     }
     /**
      * Returns and prints <code>Duke</code>'s goodbye message.
      * @return <code>Duke</code>'s goodbye message
      */
     public String showByeMessage() {
-        System.out.println(bye_message);
-        return bye_message;
+        System.out.println(byeMessage);
+        return byeMessage;
     }
     /**
      * Returns and prints <code>Duke</code>'s remind message.
      * @return <code>Duke</code>'s remind message
      */
     public String showRemindMessage() {
-        System.out.println(remind_message);
-        return remind_message;
+        System.out.println(remindMessage);
+        return remindMessage;
     }
     /**
      * Returns and prints a numbered list <code>String</code>.
@@ -149,8 +149,8 @@ public class Ui {
             i++;
         }
         if (toPrint.equals("")) {
-            System.out.println(empty_list_message);
-            return empty_list_message;
+            System.out.println(emptyListMessage);
+            return emptyListMessage;
         }
         System.out.println((toPrint));
         return toPrint;
@@ -166,13 +166,13 @@ public class Ui {
      * Prints out a line separation.
      */
     public void makeSeperation() {
-        System.out.println(line_seperation);
+        System.out.println(lineSeperation);
     }
     /**
      * Prints <code>Duke</code>'s loading-error-from-tasks.txt message.
      */
     public void showLoadingError() {
-        System.out.println(loading_error_message);
+        System.out.println(loadingErrorMessage);
         makeSeperation();
     }
     /**

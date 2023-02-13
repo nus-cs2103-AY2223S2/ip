@@ -49,9 +49,9 @@ public class EventCommand extends Command {
             }
         }
         //Handle invalid from or to start index
-        boolean invalidFromOrTo = fromStartIndex == -1 || toStartIndex == -1
+        boolean isInvalidFromOrTo = fromStartIndex == -1 || toStartIndex == -1
                 || fromStartIndex > toStartIndex;
-        if (invalidFromOrTo) {
+        if (isInvalidFromOrTo) {
             throw new DukeBadInstructionFormatException("Usage of duke.task.Event: "
                     + "event [description] /from[date] /to[date]");
         }

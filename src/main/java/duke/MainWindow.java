@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Initialize <code>Duke</code> GUI
+     * Initializes <code>Duke</code> GUI's relevant welcome messages.
      */
     public void broadcastInitMessages() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

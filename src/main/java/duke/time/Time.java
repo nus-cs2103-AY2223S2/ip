@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates useful time operations for Duke methods.
+ */
 public class Time {
     /**
      * Format of the stored date and time.

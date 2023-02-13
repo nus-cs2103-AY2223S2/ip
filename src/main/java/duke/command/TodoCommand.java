@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.util.Arrays;
-
 import duke.exception.DukeBadInstructionFormatException;
 import duke.parser.Parser;
 import duke.storage.Storage;
