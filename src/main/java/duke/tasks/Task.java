@@ -3,11 +3,13 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.DukeException;
+
 /**
  * Task object that has the name and completion status.
  */
 public class Task {
-    private final String name;
+    private String name;
     private boolean isCompleted;
 
     /**
@@ -83,6 +85,15 @@ public class Task {
             }
         }
         return false;
+    }
+
+    /**
+     * Updates the task with the provided details
+     *
+     * @param input The details to update the task with
+     */
+    public void update(String input) throws DukeException {
+        this.name = input;
     }
 
     /**
