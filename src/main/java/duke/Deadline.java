@@ -51,11 +51,14 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (time != null) {
-            return icon + super.toString() + "(by: " + date + " " + time + ")";
+            String iconWithTime = icon + super.toString() + "(by: " + date + " " + time + ")";
+            return iconWithTime;
         } else if (date != null) {
-            return icon + super.toString() + "(by: " + date + ")";
+            String iconWithDate = icon + super.toString() + "(by: " + date + " " + time + ")";
+            return iconWithDate;
         } else {
-            return icon + super.toString();
+            String iconWithoutTimeDate = icon + super.toString();
+            return iconWithoutTimeDate;
         }
     }
 }

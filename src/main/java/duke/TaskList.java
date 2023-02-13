@@ -39,11 +39,10 @@ class TaskList {
      * @param index         the task index
      * @throws TaskNotExist throws an error if the index overflow or when the task does not exists
      */
-    public String mark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
+    public String mark(ArrayList<Task> taskArrayList, int index) {
         index -= 1;
-        if (index >= taskArrayList.size() || index <= -1) {
-            throw new TaskNotExist();
-        }
+        assert index >= 0 : "Invalid Index";
+        assert index < taskArrayList.size() : "invalid Index";
         taskArrayList.get(index).mark();
         return userInterface.setMarkAsDone() + taskArrayList.get(index).toString();
     }
@@ -55,11 +54,10 @@ class TaskList {
      * @param index         the task index
      * @throws TaskNotExist throws an error if the index overflow or when the task does not exists
      */
-    public String unMark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
+    public String unMark(ArrayList<Task> taskArrayList, int index) {
         index -= 1;
-        if (index >= taskArrayList.size()) {
-            throw new TaskNotExist();
-        }
+        assert index >= 0 : "Invalid Index";
+        assert index < taskArrayList.size() : "invalid Index";
         taskArrayList.get(index).unmark();
         return userInterface.setUnMarkTask() + taskArrayList.get(index).toString();
     }
@@ -147,11 +145,9 @@ class TaskList {
                 return "Noted: I've removed all tasks";
             } else {
                 int deleteIndex = Integer.parseInt(index[1]);
-                if (deleteIndex > taskArrayList.size() || deleteIndex <= -1) {
-                    throw new DukeException("OOPS!! The index requested to be deleted does not exist!");
-                } else {
-                    return "Noted: I've remove this task\n" + taskArrayList.remove(deleteIndex - 1);
-                }
+                assert deleteIndex >= 0 : "Invalid Index";
+                assert deleteIndex < taskArrayList.size() : "invalid Index";
+                return "Noted: I've remove this task\n" + taskArrayList.remove(deleteIndex - 1);
             }
         } catch (IOException e) {
             return e.getMessage();

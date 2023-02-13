@@ -48,9 +48,11 @@ public class Task {
     @Override
     public String toString() {
         if (status && (details.contains("[ ]") || details.contains("[X]"))) {
-            return details.replace("[ ]", "[X]");
+            details.replace("[ ]", "[X]");
+            return details;
         } else if (!status && (details.contains("[ ]") || details.contains("[X]"))) {
-            return details.replace("[X]", "[ ]");
+            details.replace("[X]", "[ ]");
+            return details;
         } else if (!details.contains("[ ]") || !details.contains("[X]")) {
             return isDone() + " " + this.details;
         } else {

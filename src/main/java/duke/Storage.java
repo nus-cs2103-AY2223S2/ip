@@ -74,18 +74,26 @@ public class Storage {
             BufferedReader dukeRead = new BufferedReader(fw);
             String line = dukeRead.readLine();
             while (line != null) {
-                if (line.contains("[D]")) {
-                    tasks.add(new Deadline(line.replace("[D]", "")));
-                } else if (line.contains("[T]")) {
-                    tasks.add(new ToDo(line.replace("[T]", "")));
-                } else if (line.contains("[E]")) {
-                    tasks.add(new Event(line.replace("[E]", "")));
-                } else {
-                    tasks.add(new Task(line));
-                }
+                existingIconChecker(line, tasks);
                 line = dukeRead.readLine();
             }
             dukeRead.close();
+        }
+    }
+
+    /**
+     * @param line a string that containing the task descripition
+     * @param tasks an arraylist containing all type of tasks
+     */
+    private void existingIconChecker(String line, ArrayList<Task> tasks) {
+        if (line.contains("[D]")) {
+            tasks.add(new Deadline(line.replace("[D]", "")));
+        } else if (line.contains("[T]")) {
+            tasks.add(new ToDo(line.replace("[T]", "")));
+        } else if (line.contains("[E]")) {
+            tasks.add(new Event(line.replace("[E]", "")));
+        } else {
+            tasks.add(new Task(line));
         }
     }
 
