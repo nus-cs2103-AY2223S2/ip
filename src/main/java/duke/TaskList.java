@@ -103,4 +103,50 @@ public class TaskList {
 
         return tasksWithWord;
     }
+
+
+    /**
+     * Adds note to the task
+     * @param index of the task to add the note
+     * @param note is the message to be added
+     * @return the task string
+     */
+    public String addNoteToTask(int index, String note) {
+        Task selectedTask = allTasks.get(index);
+        selectedTask.addNote(note);
+
+        return selectedTask.toString();
+    }
+
+    public String viewAllTasksWithNotes() {
+        String output = "";
+        for (int i = 0; i < allTasks.size(); i++) {
+            Task task = allTasks.get(i);
+
+            if (!task.getIsNoteBlank()) {
+                int index = i + 1;
+                output = output + index + ". " + task + "\nNotes:\n" + task.getNote() + "\n\n";
+            }
+        }
+        return output;
+    }
+
+    public String viewSingleTaskWithNote(int index) {
+        Task task = allTasks.get(index);
+        if (task.getIsNoteBlank()) {
+            return "Task does not contain a note yet!";
+        } else {
+            return task + "\n\nNotes:\n" + task.getNote();
+        }
+    }
+
+    public String deleteNoteInTask (int index) {
+        Task task = allTasks.get(index);
+        if (task.getIsNoteBlank()) {
+            return "Task does not contain a note";
+        } else {
+            task.deleteNote();
+            return "Noted. The note in " + task + "has been deleted";
+        }
+    }
 }

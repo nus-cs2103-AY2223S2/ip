@@ -66,6 +66,24 @@ public class Parser {
                 case "bye":
                     return new ExitCommand();
 
+                case "addNote" :
+                    String indexAndNote[] = checkAddNote(instruction, tasklist);
+                    int indexAddNote = Integer.parseInt(indexAndNote[0]) - 1;
+                    return new AddNoteCommand(indexAddNote, indexAndNote[1]);
+
+                case "listNote":
+                    if (instruction.length == 1) {
+                        return new ListNoteCommand();
+                    }
+
+                    int listNoteIndex = checkIndex(instruction[1], tasklist) - 1;
+                    return new ListNoteCommand(listNoteIndex);
+
+                case "deleteNote":
+                    int deleteNoteIndex = checkIndex(instruction[1], tasklist) - 1;
+                    return new DeleteNoteCommand(deleteNoteIndex);
+
+
                 default:
                     throw new ArgumentException("No such commands");
             }
@@ -258,5 +276,69 @@ public class Parser {
         return event;
 
     }
+
+    /**
+     * Check if user enter the command right when adding notes to the task
+     * @param instruction given by the user
+     * @param tasklist to check if the index of the task exist
+     * @return the string of the index and the note
+     * @throws ArgumentException
+     */
+    public String[] checkAddNote(String instruction[], TaskList tasklist) throws ArgumentException {
+
+        if (instruction.length == 1) {
+            throw new ArgumentException("Invalid command. Use the format addNote x: message where x is the" +
+                    " index and message is the note to be added");
+        }
+
+        String indexAndNote[] = instruction[1].split(": ", 2);
+
+        //check if the number of parameters is correct
+        if (indexAndNote.length <=1 ){
+            throw new ArgumentException("Invalid command. Use the format addNote x: message where x is the" +
+                    "index and message is the note to be added");
+        }
+
+        checkIndex(indexAndNote[0], tasklist);
+
+        //check if note is an empty space
+        if(indexAndNote[1].trim().isEmpty()) {
+            throw new ArgumentException("Note cannot be filled with only empty spaces");
+        }
+        return indexAndNote;
+    }
+
+//    public int checkListNote (String indexString, TaskList tasklist) throws ArgumentException {
+//        //check if index enter is a number
+//        if (!indexString.matches("[0-9]+")) {
+//            throw new ArgumentException("Index does not exist");
+//        }
+//
+//        int index = Integer.parseInt(indexString);
+//
+//        //check if index can be found in the task list
+//        if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
+//            throw new ArgumentException("Can't find the index");
+//        }
+//
+//        return index;
+//    }
+
+    public int checkIndex(String indexString, TaskList tasklist) throws ArgumentException {
+        //check if index enter is a number
+        if (!indexString.matches("[0-9]+")) {
+            throw new ArgumentException("Index does not exist");
+        }
+
+        int index = Integer.parseInt(indexString);
+
+        //check if index can be found in the task list
+        if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
+            throw new ArgumentException("Can't find the index");
+        }
+
+        return index;
+    }
+
 
 }

@@ -34,20 +34,23 @@ public class Storage {
                 Task task = entireList.get(i);
 
                 boolean isMark = task.getComplete();
+
                 String type = task.getTypes();
                 String name = task.getItem();
+                String note = task.getNote();
+
 
                 if (type.equals("D")){
                     String time = task.getTime();
 
-                    pw.println(type + "-" + isMark + "-" + name + "-" + time);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + time + "-" + note);
                 } else if (type.equals("E")) {
                     String time = task.getTime();
                     String startEnd [] = time.split("-", 2);
 
-                    pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1]);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1] + "-" + note);
                 } else {
-                    pw.println(type + "-" + isMark + "-" + name);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + note);
                 }
 
             }
@@ -73,11 +76,30 @@ public class Storage {
                 Task task;
 
                 if(lines[0].equals("T")) {
-                    task = new Task(lines[2], lines[0]);
+
+                    String nameNote [] = lines[2].split("-");
+                    task = new Task(nameNote[0], lines[0]);
+
+                    if(checkToAddNote(nameNote[1])) {
+                        task.addNote(nameNote[1]);
+                    }
+
                 } else if (lines[0].equals("D")) {
+                    String nameTimeNote[] = lines[2].split("-", 3);
                     task = convertStringToDeadline(lines);
+
+                    if(checkToAddNote(nameTimeNote[2])) {
+                        task.addNote(nameTimeNote[2]);
+                    }
+
                 } else {
+                    String nameStartEndNote[] = lines[2].split("-", 4);
                     task = convertStringToEvent(lines);
+
+                    if (checkToAddNote(nameStartEndNote[3])) {
+                        task.addNote(nameStartEndNote[3]);
+                    }
+
                 }
 
                 if(lines[1].equals("true")) {
@@ -100,6 +122,7 @@ public class Storage {
 
         return entireList;
     }
+
 
 
     /**
@@ -132,4 +155,20 @@ public class Storage {
 
         return new Event(nameStartEnd[0], lines[0], date1, date2, nameStartEnd[1], nameStartEnd[2]);
     }
+
+    /**
+     * Check if the note is blank
+     * @param note is to be checked
+     * @return true if note is blank
+     */
+    public boolean checkToAddNote(String note) {
+        if (note.equals("blank")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 }
+

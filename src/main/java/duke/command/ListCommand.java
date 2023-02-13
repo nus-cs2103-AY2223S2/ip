@@ -18,7 +18,8 @@ public class ListCommand extends Command{
     @Override
     public void executeCommand(TaskList taskList, Storage storage, Ui ui) {
 
-        String printedList = "Here are the tasks in your list:\n" + taskList.printList();
+        String printedList = "Here are the tasks in your list:\n" + taskList.printList()
+                + "\n** means that there the task has a note ";
         ui.printText(printedList);
     }
 
