@@ -1,4 +1,5 @@
 # Duke User Guide
+
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes/))
 
 Duke frees your mind by remembering things you need to do
