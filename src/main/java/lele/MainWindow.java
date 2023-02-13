@@ -20,8 +20,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     private Lele lele;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImage.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ShibaInu.png"));
 
     @FXML
     public void initialize() {
