@@ -21,8 +21,8 @@ public class Ui {
      * @return New string with separating lines.
      */
     public String separate(String str) {
-        String seperateLine = "---------------------------------------------------------------";
-        return seperateLine + "\n" + str + "\n" + seperateLine;
+        String seperatingLine = "---------------------------------------------------------------";
+        return seperatingLine + "\n" + str + "\n" + seperatingLine;
     }
 
     /**
@@ -31,8 +31,7 @@ public class Ui {
      * @return Message of goodbye.
      */
     public String ending() {
-        String str = "Bye~ Hope to see you again soon:)";
-        return separate(str);
+        return "Bye~ Hope to see you again soon:)";
     }
 
 }

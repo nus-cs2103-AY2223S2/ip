@@ -52,20 +52,18 @@ public class Storage {
      *
      * @param commandList The ArrayList we use to store the output data.
      */
-    public void loadData(ArrayList<String> commandList) {
+    public String loadData(ArrayList<String> commandList) {
         try {
             File file = new File(filePath);
-            if (file.exists() == false) {
-                return;
-            }
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String command = sc.nextLine();
                 commandList.add(command);
             }
             sc.close();
+            return "No exception happened.";
         } catch (FileNotFoundException exception) {
-            System.out.println("No data storage file exists.");
+            return "No data storage file exists.";
         }
     }
 }
