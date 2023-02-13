@@ -2,7 +2,7 @@
 <h2 align="center"> Your Personal Chatbot Assistant </h2>
 
 <p align="center">
-<img width="500" src="./images/start.png" alt="main view of application">
+<img width="513" src="./images/start.png" alt="main view of application">
 </p>
 
 - [Introduction](#introduction)
@@ -55,8 +55,8 @@ I am here to make task management simple and efficient. Let's get started!
 |   6   |   List all tasks    |        `list <event/deadline/todo>?`        |                         `list`                          |
 |  10   |     Mark a task     |                `mark <task>`                |                        `mark 1`                         |
 |  11   |    Unmark a task    |               `unmark <task>`               |                       `unmark 1`                        |
-|  12   |     Undo action     |                   `undo`                    |                       `unmark 1`                        |
-|  13   |  Checkout version   |            `checkout <version>?`            |                       `unmark 1`                        |
+|  12   |     Undo action     |                   `undo`                    |                         `undo`                          |
+|  13   |  Checkout version   |            `checkout <version>?`            |                      `checkout 1`                       |
 |  14   |  Terminate session  |                    `bye`                    |                          `bye`                          |
 
 
@@ -70,9 +70,9 @@ I am here to make task management simple and efficient. Let's get started!
 - Extra parameters for commands that do not take in parameters will be ignored.
 
 In Duke, there are 3 types of tasks:
-- **Deadline `D`**: Used when there are deadlines to meet, and you need to keep track of what to do
-- **Event `E`**: Used when there is an event that you need to attend, and you need to keep track of it
-- **ToDo `T`**: The most fundamental type of tasks that denote an item that you intend to accomplish
+- **Deadline**: Used when there are deadlines to meet, and you need to keep track of what to do
+- **Event**: Used when there is an event that you need to attend, and you need to keep track of it
+- **Todo**: The most fundamental type of tasks that denote an item that you intend to accomplish
 
 All tasks come with the ability to be described, and support marking or unmarking tasks as completed.
 
