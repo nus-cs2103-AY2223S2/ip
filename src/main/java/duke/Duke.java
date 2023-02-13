@@ -117,6 +117,8 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
 
@@ -154,9 +156,9 @@ public class Duke extends Application {
             switch (parsedCommand[0]) {
                 case "mark":
                     //Marks tasks as done
-                    int index = Integer.parseInt(parsedCommand[1]) - 1;
-                    assert index > 0 : "index should be positive";
-                    String resMark = tasks.setDone(index);
+                    int indexM = Integer.parseInt(parsedCommand[1]) - 1;
+                    assert indexM > 0 : "index should be positive";
+                    String resMark = tasks.setDone(indexM);
                     storage.save(tasks);
                     return resMark;
 
@@ -238,10 +240,5 @@ public class Duke extends Application {
             System.out.println(e.getMessage());
             tasks = new TaskList();
         }
-    }
-
-    public Duke() {
-        ui = new Ui();
-        tasks = new TaskList();
     }
 }
