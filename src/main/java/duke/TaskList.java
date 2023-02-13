@@ -78,6 +78,7 @@ public class TaskList {
     public String tasksToStringFormat() {
         String res = "";
         for (int i = 0; i < tasks.size(); i ++) {
+            res += Integer.toString(i + 1) + ". ";
             res += tasks.get(i).toString();
             res += '\n';
         }
