@@ -11,10 +11,10 @@ import duke.tasks.Task;
  */
 public class Ui {
     /**
-     * Message displayed when program exits.
+     * Message to greet the user.
      */
-    public String exit() {
-        return "Bye. Hope to see you again soon!\n";
+    public String greet() {
+        return "Hello! I'm Duke\n" + "What can I do for you?\n";
     }
 
     /**
