@@ -16,9 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.awt.*;
-import java.util.concurrent.TimeUnit;
-
 public class Gui extends Application {
 
     private ScrollPane scrollPane;

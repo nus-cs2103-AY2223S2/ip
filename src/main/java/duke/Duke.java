@@ -59,7 +59,7 @@ public class Duke { // a guy who receives user input, and gives duke reply
             // deal with bye
         } catch (EmptyCommandException e) {
             throw e;
-        } catch (Exception e) { // CATCH ALL EXCEPTION BAD
+        } catch (Exception e) {
             return ui.showError(e); // or e.getMessage()
         }
     }

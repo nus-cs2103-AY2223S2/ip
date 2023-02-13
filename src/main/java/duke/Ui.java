@@ -64,6 +64,12 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Returns list of Tasks to be displayed on Gui.
+     *
+     * @param l TaskList to be displayed
+     * @return list of Tasks in String format
+     */
     public String showList(TaskList l) {
         StringBuilder s = new StringBuilder();
         s.append("Here are the tasks in your list:\n");
@@ -73,6 +79,12 @@ public class Ui {
         return s.toString();
     }
 
+    /**
+     * Returns list of Tasks that matches keyword to be displayed on Gui.
+     *
+     * @param l TaskList with Tasks that matches keyword to be displayed
+     * @return list of Tasks in String format
+     */
     public String showMatchingList(TaskList l) {
         StringBuilder s = new StringBuilder();
         s.append("Here are the matching tasks in your list:\n");
@@ -82,12 +94,26 @@ public class Ui {
         return s.toString();
     }
 
+    /**
+     * Returns message to show Task that has been marked or unmarked.
+     *
+     * @param mark 1 shows message that Task is marked, 0 shows message that Task is unmarked
+     * @param t Task to be marked or unmarked
+     * @return mark or unmark message
+     */
     public String showMark(int mark, Task t) {
         return mark == 1 ?
                 "Nice! I've marked this task as done:\n" + t :
                 "OK, I've marked this task as not done yet:\n" + t;
     }
 
+    /**
+     * Returns full message to be displayed on Gui which includes reply message and exception message (if any).
+     *
+     * @param exceptionMsg exception message (if any)
+     * @param msg reply message
+     * @return full message which includes reply message and exception message (if any)
+     */
     public String showFullReplyMsg(String exceptionMsg, String msg) {
         if (exceptionMsg.equals("")) {
             return msg;

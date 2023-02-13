@@ -9,10 +9,6 @@ import java.io.IOException;
 
 public abstract class Command {
 
-    public boolean isExit() {
-        return false;
-    }
-
     public abstract String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) throws Exception;
 
     protected String saveToFile(Storage s, TaskList l, Ui ui, Command prevCommand) { //NEED UI???

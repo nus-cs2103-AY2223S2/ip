@@ -18,7 +18,7 @@ public class MarkCommand extends Command {
 
     public String execute(TaskList l, Ui ui, Storage s, Command prevCommand, Duke duke) throws InvalidArgumentException {
         String errorMsg = saveToFile(s, l, ui, prevCommand);
-        String markMsg = "";
+        String markMsg;
         if (mark == 1) {
             l.get(index).markAsDone();
             markMsg = ui.showMark(1, l.get(index));
