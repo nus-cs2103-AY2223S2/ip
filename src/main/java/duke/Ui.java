@@ -19,14 +19,6 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public boolean hasUserInput() {
-        return sc.hasNextLine();
-    }
-
-    public String userInput() {
-        return sc.nextLine();
-    }
-
     public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -44,8 +36,4 @@ public class Ui {
     public String showError(DukeException err) {
         return "\t" + err;
     }
-
-//    public static void separator() {
-//        System.out.println("---------------------------------------------------------------");
-//    }
 }

@@ -36,15 +36,6 @@ public class Duke extends Application {
         parser = new Parser(tasklist, ui, storage);
     }
 
-    /**
-     * Parses the user's inputs into the command line and runs operations based on input
-     */
-    public void run() {
-        Parser parser = new Parser(tasklist, ui, storage);
-        while (ui.hasUserInput()) {
-            parser.parse(ui.userInput());
-        }
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -67,6 +58,5 @@ public class Duke extends Application {
      */
     public static void main(String[] args) {
         Duke dukeList = new Duke();
-        dukeList.run();
     }
 }
