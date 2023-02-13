@@ -35,7 +35,7 @@ public class Duke {
     }
 
     private Command interpretInput(String userInput) {
-        Parser parser = new Parser(this.taskList);
+        Parser parser = new Parser(this.taskList, this.storage);
         return parser.decode(userInput);
     }
 

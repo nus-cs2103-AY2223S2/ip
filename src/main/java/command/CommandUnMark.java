@@ -2,6 +2,7 @@ package command;
 
 import duke.DukeException;
 import duke.Ui;
+import storage.Storage;
 import task.Task;
 import task.TaskList;
 
@@ -12,6 +13,7 @@ public class CommandUnMark extends Command {
 
     private final TaskList taskList;
     private final String index;
+    private final Storage storage;
 
     /**
      * Constructor for CommandUnMark
@@ -19,15 +21,21 @@ public class CommandUnMark extends Command {
      * @param taskList List of all tasks.
      * @param index Index of task to be unmark, starting from 1.
      */
-    public CommandUnMark(TaskList taskList, String index) {
+    public CommandUnMark(TaskList taskList, String index, Storage storage) {
         this.taskList = taskList;
         this.index = index;
+        this.storage = storage;
     }
 
     @Override
     public String execute() throws DukeException {
         Task unmarkedTask = this.unmarkTaskAt(this.index);
+        this.updateFile();
         return this.getConfirmationMessageOf(unmarkedTask);
+    }
+
+    private void updateFile() throws DukeException {
+        this.storage.overwriteFile(this.taskList);
     }
 
     private Task unmarkTaskAt(String index) throws DukeException {

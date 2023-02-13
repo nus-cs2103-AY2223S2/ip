@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 import duke.Ui;
+import storage.Storage;
 import task.Event;
 import task.Task;
 import task.TaskList;
@@ -15,6 +16,7 @@ public class CommandEvent extends Command {
 
     private final TaskList taskList;
     private final String taskDetails;
+    private final Storage storage;
 
     /**
      * Constructor for CommandEvent.
@@ -22,15 +24,21 @@ public class CommandEvent extends Command {
      * @param taskList List of all tasks.
      * @param taskDetails Details of event type task to be added.
      */
-    public CommandEvent(TaskList taskList, String taskDetails) {
+    public CommandEvent(TaskList taskList, String taskDetails, Storage storage) {
         this.taskList = taskList;
         this.taskDetails = taskDetails;
+        this.storage = storage;
     }
 
     @Override
     public String execute() throws DukeException {
         Task taskAdded = this.addIntoList(this.taskDetails);
+        this.updateFile();
         return this.getConfirmationMessageOf(taskAdded);
+    }
+
+    private void updateFile() throws DukeException {
+        this.storage.overwriteFile(this.taskList);
     }
 
     private Task addIntoList(String taskDetails) throws DukeException {

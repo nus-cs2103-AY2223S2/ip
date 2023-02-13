@@ -2,6 +2,7 @@ package command;
 
 import duke.DukeException;
 import duke.Ui;
+import storage.Storage;
 import task.Task;
 import task.TaskList;
 
@@ -12,6 +13,7 @@ public class CommandDelete extends Command {
 
     private final TaskList taskList;
     private final String index;
+    private final Storage storage;
 
     /**
      * Constructor for CommandDelete.
@@ -19,15 +21,21 @@ public class CommandDelete extends Command {
      * @param taskList List of all tasks.
      * @param index Index of task, starting from 1.
      */
-    public CommandDelete(TaskList taskList, String index) {
+    public CommandDelete(TaskList taskList, String index, Storage storage) {
         this.taskList = taskList;
         this.index = index;
+        this.storage = storage;
     }
 
     @Override
     public String execute() throws DukeException {
         Task taskRemoved = this.removeTaskAt(this.index);
+        this.updateFile();
         return this.getConfirmationMessageOf(taskRemoved);
+    }
+
+    private void updateFile() throws DukeException {
+        this.storage.overwriteFile(this.taskList);
     }
 
     private Task removeTaskAt(String index) throws DukeException {
