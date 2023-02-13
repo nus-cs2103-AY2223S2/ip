@@ -1,6 +1,7 @@
 package nemo.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import nemo.exception.NemoException;
 
@@ -137,17 +138,21 @@ public class TaskList {
     /**
      * Finds all Tasks that have names containing the given String.
      *
-     * @param str String to search task names.
+     * @param strings String array to search task names.
      * @return String representation of all Tasks containing given String
      */
-    public String findTasks(String str) {
+    public String findTasks(String... strings) {
+        assert strings.length > 0 : "unable to search as empty string array given";
         String result = "";
         result += "Here are the matching tasks in your list:\n";
         int counter = 0;
         for (int i = 0; i < this.taskCount; i++) {
-            if (this.taskList.get(i).getTaskName().contains(str)) {
-                counter++;
-                result += String.format("%d. %s \n", counter, this.taskList.get(i));
+            for (String str : strings) {
+                if (this.taskList.get(i).getTaskName().contains(str)) {
+                    counter++;
+                    result += String.format("%d. %s \n", counter, this.taskList.get(i));
+                    break;
+                }
             }
         }
         return result;

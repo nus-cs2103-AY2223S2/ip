@@ -11,7 +11,7 @@ import nemo.ui.Ui;
  * @author Lian Kok Hai
  */
 public class FindCommand extends Command {
-    private String str;
+    private String[] strings;
 
     /**
      * Constructs new FindCommand.
@@ -19,11 +19,11 @@ public class FindCommand extends Command {
      * @param str String to search for task name.
      */
     public FindCommand(String str) {
-        this.str = str;
+        this.strings = str.split(" ");
     }
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws NemoException {
-        return taskList.findTasks(this.str);
+        return taskList.findTasks(this.strings);
     }
 }
