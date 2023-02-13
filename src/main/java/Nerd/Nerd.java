@@ -32,7 +32,6 @@ public class Nerd {
         storage = new Storage(filePath);
         try {
             storage.connect();
-            ui.print("Successfully connected to the database!");
             list = new TaskList(storage);
         } catch (Exception e) {
             ui.printError(e.getMessage());

@@ -74,6 +74,5 @@ public class Storage {
             myWriter.write(line);
         }
         myWriter.close();
-
     }
 }

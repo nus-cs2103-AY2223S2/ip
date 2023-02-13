@@ -9,13 +9,11 @@ import java.util.Scanner;
  * Represents the user interface of the Chat bot.
  */
 public class Ui {
-    Scanner sc;
-
     /**
      * Prints the welcome message.
      */
     public String showWelcome() {
-        return("Hello! I'm NerdBot\nWhat can I do for you?");
+        return("Hello! I'm NerdBot\nI am very smart and can do many things!");
     }
 
     public String showCommandList() {
@@ -46,12 +44,12 @@ public class Ui {
     }
 
     public String printDeadlineResponse(String deadline, int size) {
-        return String.format("Received, I've added the following deadlines:\n %s\nNow you have %d tasks in the list."
-                , deadline, size);
+        return String.format("Received, I've added the following deadlines:\n %s\nNow you have %d tasks in the list.\n" +
+                        "Be sure to finish these tasks before the deadline!", deadline, size);
     }
 
     public String printDeleteResponse(String task, int size) {
-        return String.format("ok, this task has been removed:\n %s\nNow you have %d tasks in the list",
+        return String.format("Finally done?!, Sure, this task has been removed:\n %s\nNow you have %d tasks in the list",
                 task, size);
     }
 
@@ -61,7 +59,7 @@ public class Ui {
     }
 
     public String printSearchResponse(String result, String description) {
-        String output = "Here are tasks that associate with " + description + ":\n";
+        String output = "Easy command for me! Here are the tasks that are associated with" + description + ":\n";
         output += result;
         return output;
     }
@@ -87,6 +85,9 @@ public class Ui {
         return String.format("Sure!, I've added the following todo task:\n %s\nNow you have %d tasks in the list.",
                 todo, size);
     }
+    public String printSuccessfulConnection() {
+        return "Successfully connected to the database!";
+    }
 
     public String printSearchDate(String date, TaskList list) {
         String output = "Tasks occurring on " + date + ":\n";
@@ -104,5 +105,4 @@ public class Ui {
         }
         return output;
     }
-
 }
