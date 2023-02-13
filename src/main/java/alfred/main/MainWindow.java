@@ -1,6 +1,5 @@
 package alfred.main;
 
-import alfred.exception.AlfredException;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
