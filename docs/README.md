@@ -22,7 +22,7 @@ The best part is, all of your data will be saved, so you can refer to it any tim
   - [Deleting a note: `deletenote`](#deleting-a-note-deletenote)
   - [Exiting the program: `bye`](#exiting-the-program-bye)
 
-##Quick Start
+## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest `duke.jar` from [here](https://github.com/ZHTang29/ip).
 3. Copy the file to the folder you want to use as the _home folder_ for your Duke.
@@ -45,6 +45,8 @@ The best part is, all of your data will be saved, so you can refer to it any tim
 >      before the `to` and the dates and times should follow the specified format.
 >
 > 
+> 
+> 
 
 ### Adding a ToDo task: `todo`
 
@@ -53,6 +55,8 @@ Adds a ToDo task to the 'tasks' list.
 Format: `todo TASKNAME`
 
 i.e. `todo eat food` will add the task 'eat food' to the 'tasks' list.
+
+
 
 
 ### Adding a task with a Deadline: `deadline`
@@ -65,7 +69,9 @@ i.e. `deadline eat chicken /by 2023-05-04 1500`
 will add the task 'eat chicken (by 04/05/2023 15:00)' to the 'tasks' list.
 
 > Backslashes and spaces before and after `/by` are extremely important!
-> 
+
+
+
 ### Adding an Event with start and end times: `event`
 
 Adds an event task to the 'tasks' list.
@@ -76,6 +82,8 @@ i.e. `event play soccer /from 2023-02-02 1500 /to 2023-02-02 1530`
 will add the task 'play soccer (from: 02/02/2023 15:00 to: 02/02/2023 15:30)' to the 'tasks' list.
 
 > Backslashes and spaces before and after `/from` and `/to` are extremely important!
+
+
 
 
 ### Adding a note: `addnote`
@@ -89,6 +97,8 @@ i.e. `addnote watch Avatar because it is very good`
 will add the note 'watch Avatar because it is very good' to the 'notes' list.
 
 
+
+
 ### Listing all tasks: `list`
 
 Shows a list of all tasks in the 'tasks' list.
@@ -96,11 +106,15 @@ Shows a list of all tasks in the 'tasks' list.
 Format: `list`
 
 
+
+
 ### Listing all notes: `listnotes`
 
 Shows a list of all the notes in the 'notes' list.
 
 Format: `listnotes`
+
+
 
 
 ### Marking a task as completed: `mark`
@@ -113,6 +127,8 @@ Format: `mark INDEX_TO_MARK`
 - The index **must be a positive integer** 1, 2, 3...
 
 
+
+
 ### Marking a task as incomplete: `unmark`
 
 Marks a specific task in the 'tasks' list as undone.
@@ -121,6 +137,8 @@ Format: `unmark INDEX_TO_UNMARK`
 - Unmarks the task at the specified `INDEX_TO_UNMARK`
 - The index refers to the index number shown in the displayed 'tasks' list
 - The index **must be a positive integer** 1, 2, 3...
+
+
 
 
 ### Locating tasks by keyword: `find`
@@ -135,6 +153,8 @@ Format: `find KEYWORD`
 `sweep the floor`
 
 
+
+
 ### Deleting a task: `delete`
 
 Deletes a specified task from the 'tasks' list
@@ -143,6 +163,8 @@ Format: `delete INDEX_TO_DELETE`
 - Deletes the task at the specified `INDEX_TO_DELETE`
 - The index refers to the index number shown in the displayed 'tasks' list
 - The index **must be a positive integer** 1, 2, 3...
+
+
 
 
 ### Deleting a note: `deletenote`
@@ -155,11 +177,15 @@ Format: `deletenote INDEX_TO_DELETE`
 - The index **must be a positive integer** 1, 2, 3...
 
 
+
+
 ### Exiting the program: `bye`
 
 Exits Duke.
 
 Format: `bye`
+
+
 
 
 ### Saving the data
@@ -169,11 +195,15 @@ Duke data is saved in the hard disk automatically after any command that changes
 There is no need to save manually.
 
 
+
+
 ### Editing the data file
 
 Duke data is saved as a .txt file.
 
 Advanced users are welcome to update data directly by editing that data file.
+
+
 
 > Caution!
 > 
