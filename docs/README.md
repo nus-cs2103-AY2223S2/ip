@@ -9,8 +9,7 @@ the benefits of a Graphical User Interface (GUI).
    (https://www.oracle.com/java/technologies/downloads/#java11).
 2. Download the latest duke.Duke.jar from [here](duke.Duke.jar).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
-4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.
-   jar` command to run the application. A GUI similar to the below should appear in a few seconds.
+4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
 <figure>
     <img src="/docs/images/starting_display.png"
          alt="Starting GUI">
@@ -24,28 +23,32 @@ the benefits of a Graphical User Interface (GUI).
 - `bye`: Exits the app.
 6. Refer to the [Features](##features) below for details of each command.
 
+
 ***
 ## Features
 ### Listing all tasks: list
-Shows a list of all tasks in the task list.
-
+Shows a list of all tasks in the task list.  
+Format: `list`
+<br />
+<br />
 
 ### Adding a todo: `todo`
-Adds a todo task to the task list.  
-Format: `todo [task]`
+Adds a todo task to the task list.<br />
+Format: `todo [task]`<br />
 Examples:
 - `todo homework`
 - `todo laundry`
-
+<br />
+<br />
 
 ### Adding a deadline: `deadline`
-Adds a deadline to the task list.  
-Format: `deadline [task] /by [YYYY-MM-DD]`  
+Adds a deadline to the task list.<br />
+Format: `deadline [task] /by [YYYY-MM-DD]`<br />
 Examples:
 - `deadline return book /by 2019-10-15`
 - `deadline homework /by 2019-10-30`
-
-
+<br />
+<br />
 ### Adding an event: `event`
 Adds an event to the task list.  
 Format: `event [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD]`  
