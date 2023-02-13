@@ -117,7 +117,6 @@ public class TaskList implements Iterable<Task> {
             LocalDateTime secondStart = endTask.getSecondStart();
 
             if (firstEnd.isAfter(secondStart)) {
-                System.out.println("hi");
                 result = endTask.getSecondEnd();
                 break;
             }
