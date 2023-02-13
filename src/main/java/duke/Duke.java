@@ -4,12 +4,20 @@ import command.Command;
 import exception.DukeException;
 import task.Tasklist;
 
+/**
+ * The main class for the Duke task management application.
+ *
+ * */
 public class Duke {
     private Ui userInterface;
     private Storage backend;
     private Tasklist tasklist;
 
-
+    /**
+     * Constructor for the Duke class, which takes in a file path as a parameter.
+     *
+     * @param filePath The file path to the backend storage file.
+     */
     public Duke(String filePath) {
         this.userInterface = new Ui();
         this.backend = new Storage(filePath);
@@ -20,6 +28,12 @@ public class Duke {
             this.tasklist = new Tasklist();
         }
     }
+
+    /**
+     * The main method to start the Duke application.
+     *
+     * @throws DukeException If there's an error during the execution of the Duke application.
+     */
     public void start() throws DukeException {
             userInterface.showWelcome();
         boolean isExit = false;
@@ -40,6 +54,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method for the Duke application.
+     *
+     * @param args The command line arguments passed to the Duke application.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("./data/duke.txt");
         try {

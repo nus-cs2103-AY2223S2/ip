@@ -10,13 +10,28 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Parser class is responsible for parsing the user's input and returning the appropriate command.
+ *
+ */
 public class Parser {
     private String input;
 
+    /**
+     * Constructor for the Parser class.
+     *
+     * @param input The user's input to be parsed.
+     */
     public Parser(String input) {
         this.input = input;
     }
 
+    /**
+     * This method parses the user's input and returns the appropriate command.
+     *
+     * @return A Command object that represents the user's input.
+     * @throws DukeException If the input cannot be parsed.
+     */
     public Command parseCommand() throws DukeException {
         input = input.trim();
         String[] splitString = input.split(" ");
@@ -80,6 +95,15 @@ public class Parser {
             throw new DukeException("Oh no!!! What is this? Please try again later!");
         }
     }
+
+    /**
+     * This method parses a date from a string.
+     *
+     * @param date The string to be parsed.
+     * @return A LocalDate object representing the parsed date.
+     * @throws DukeException If the string cannot be parsed as a date.
+     */
+
     public static LocalDate parseFile(String date) throws DukeException{
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

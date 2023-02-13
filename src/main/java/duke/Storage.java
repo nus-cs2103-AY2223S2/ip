@@ -9,16 +9,28 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
+/**
+ * The `Storage` class is responsible for loading and saving tasks to/from a file.
+ *
+ */
 public class Storage {
     private File file;
     private String filePath;
 
-
+    /**
+     * Creates a `Storage` object with the specified file path.
+     *
+     * @param filePath the file path to be used for storage
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the specified `Tasklist` to the file.
+     *
+     * @param tasklist the tasklist to be saved
+     */
     public void save(Tasklist tasklist) {
         createOrOpenFile();
         try {
@@ -35,6 +47,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates or opens the file specified in the `filePath` field.
+     */
     public void createOrOpenFile() {
         this.file = new File("./data/duke.txt");
         if (!file.exists()) {
@@ -47,7 +62,12 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Loads tasks from the file and returns them in a list.
+     *
+     * @return a list of tasks loaded from the file
+     * @throws DukeException if there is an error reading the file
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
