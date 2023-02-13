@@ -18,47 +18,27 @@ import sam.command.Result;
  * Handles user interaction.
  */
 public class Ui {
-    private static final double WINDOW_HEIGHT = 600.0;
-    private static final double WINDOW_WIDTH = 400.0;
-    private static final double INPUT_HEIGHT = 60.0;
-    private static final double INPUT_WIDTH = 340.0;
-    private static final double PADDING = 16.0;
-
-    private static final String LOGO =
+    public static final String LOGO =
               " ██████╗ █████╗ ███╗   ███╗\n"
             + "██╔════╝██╔══██╗████╗ ████║\n"
             + "╚█████╗ ███████║██╔████╔██║\n"
             + " ╚═══██╗██╔══██║██║╚██╔╝██║\n"
             + "██████╔╝██║  ██║██║ ╚═╝ ██║\n"
             + "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝";
-    private static final String USER =
+    public static final String USER =
               " ███████\n"
             + "████▀██▀█\n"
             + "████▄██▄█\n"
             + " ▀▀▀▀▀▀▀";
-    private static final String SAM =
+    public static final String SAM =
               "        ▄\n"
             + " ▒▒██▒▒▓▓▀\n"
             + "▒▒▀██▀▒▒▓▓\n"
             + " █▄██▄███▓▓\n"
             + "  ▀▀▀▀▀▀ ▓";
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+    private MainWindow mainWindow;
 
-    /**
-     * Constructs a Ui instance.
-     */
-    public Ui() {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-        userInput = new TextField();
-        sendButton = new Button("Send");
-    }
 
     /**
      * Sets up the application's stage.
@@ -66,32 +46,8 @@ public class Ui {
      * @param stage The stage to set up.
      */
     public void setStage(Stage stage) {
-        setScene(stage);
-        setLayout();
-        setupInteraction();
-        startUi();
-    }
-
-    /**
-     * Reads the user input and issues a command to Sam.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label userChar = new Label(USER);
-        VBox userDialog = new VBox(userText);
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userDialog, userChar));
-
-        Sam.getSamInstance().issueCommand(userInput.getText());
-        userInput.clear();
-    }
-
-    /**
-     * Displays the logo of the app.
-     */
-    public void showLogo() {
-        Label logo = new Label(LOGO);
-        logo.setStyle("-fx-font-family: 'monospaced';");
-        dialogContainer.getChildren().add(logo);
+        mainWindow = new MainWindow(stage);
+        respond(Dialog.GREETING.getDialog());
     }
 
     /**
@@ -108,64 +64,14 @@ public class Ui {
     }
 
     public void respond(Result result) {
-        Label samChar = new Label(SAM);
         VBox samDialog = result.getResult();
-        dialogContainer.getChildren().add(DialogBox.getSamDialog(samDialog, samChar));
+        mainWindow.addSamDialog(samDialog);
     }
 
     /**
      * Disables the input field and send button
      */
     public void disable() {
-        userInput.setDisable(true);
-        sendButton.setDisable(true);
-    }
-
-    private void setScene(Stage stage) {
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        mainLayout.setPrefSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.setTitle("Sam");
-        stage.setResizable(false);
-        stage.setMinHeight(WINDOW_HEIGHT);
-        stage.setMinWidth(WINDOW_WIDTH);
-    }
-
-    private void setLayout() {
-        scrollPane.setPrefSize(WINDOW_WIDTH, WINDOW_HEIGHT - INPUT_HEIGHT);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.setPadding(new Insets(PADDING));
-
-        userInput.setPrefWidth(INPUT_WIDTH);
-        userInput.setPrefHeight(INPUT_HEIGHT);
-        sendButton.setPrefWidth(WINDOW_WIDTH - INPUT_WIDTH);
-        sendButton.setPrefHeight(INPUT_HEIGHT);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-    }
-
-    private void setupInteraction() {
-        sendButton.setOnMouseClicked(event -> handleUserInput());
-        userInput.setOnAction(event -> handleUserInput());
-
-        dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
-    }
-
-    private void startUi() {
-        showLogo();
-        respond(Dialog.GREETING.getDialog());
+        mainWindow.disable();
     }
 }

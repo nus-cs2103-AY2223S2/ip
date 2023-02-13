@@ -1,26 +1,78 @@
 package sam.ui;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import sam.Sam;
 
 public class MainWindow extends AnchorPane {
-  @FXML
-  private ScrollPane scrollPane;
-  
-  @FXML
-  private VBox dialogContainer;
-  
-  @FXML
-  private TextField userInput;
-  
-  @FXML
-  private Button sendButton;
-  
-  // private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-  // private Image ariiImage = new Image(this.getClass().getResourceAsStream("/images/Arii.png"));
 
+    private static final String FXML = "/view/MainWindow.fxml";
+
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private VBox dialogContainer;
+
+    @FXML
+    private TextField userInput;
+
+    @FXML
+    private Button sendButton;
+
+    public MainWindow(Stage stage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML));
+            loader.setController(this);
+            loader.setRoot(stage);
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dialogContainer.heightProperty()
+                .addListener(observable -> scrollPane.setVvalue(1.0));
+    }
+
+    public void addUserDialog(VBox dialog) {
+        Label userChar = new Label(Ui.USER);
+        DialogBox dialogBox = DialogBox.getUserDialog(dialog, userChar);
+        dialogContainer.getChildren().add(dialogBox);
+    }
+
+    public void addSamDialog(VBox dialog) {
+        Label samChar = new Label(Ui.SAM);
+        DialogBox dialogBox = DialogBox.getSamDialog(dialog, samChar);
+        dialogContainer.getChildren().add(dialogBox);
+    }
+
+    /**
+     * Reads the user input and issues a command to Sam.
+     */
+    @FXML
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        VBox userDialog = new VBox(userText);
+        addUserDialog(userDialog);
+
+        Sam.getSamInstance().issueCommand(userInput.getText());
+        userInput.clear();
+    }
+
+    /**
+     * Disables the input field and send button
+     */
+    public void disable() {
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
+    }
 }
