@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.2">
+<file name="/Users/niuboqian/ip/src/main/java/duke/DialogBox.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/Duke.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/Launcher.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/Main.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/MainWindow.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/AddCommand.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/ByeCommand.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/Command.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/DeleteCommand.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/FindCommand.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/ListCommand.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/MarkCommand.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/UnmarkCommand.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/commandtype/CommandType.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/dukeexception/DukeException.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/parser/Parser.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/storage/Storage.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Deadline.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Event.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Task.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Todo.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/tasklist/TaskList.java">
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/ui/Ui.java">
+</file>
+</checkstyle>
