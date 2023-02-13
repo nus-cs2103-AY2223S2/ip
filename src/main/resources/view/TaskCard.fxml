@@ -2,24 +2,35 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+<fx:root alignment="CENTER_LEFT" prefWidth="200.0" style="-fx-border-color: #ddd;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <padding>
-    <Insets topRightBottomLeft="5" />
+    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
   </padding>
-  <Label fx:id="id">
-    <padding>
-      <Insets right="5" />
-    </padding>
-  </Label> 
-  <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0">
-    <Label fx:id="title" text="\$title" />
-    <Label fx:id="description" text="\$description" />
-  </VBox>
+  <Label fx:id="id" alignment="CENTER" prefWidth="24.0" style="-fx-font-size: 16; -fx-font-weight: bold;" textOverrun="CLIP">
+      <HBox.margin>
+         <Insets right="5.0" />
+      </HBox.margin>
+  </Label>
+   <HBox alignment="CENTER_LEFT" prefWidth="200.0">
+      <padding>
+         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+      </padding>
+      <children> 
+        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+          <Label fx:id="title" style="-fx-font-size: 14; -fx-font-weight: bold;" text="title" wrapText="true" />
+          <Label fx:id="description" text="description" textFill="#666666" wrapText="true" />
+        </VBox>
+         <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="18.0">
+            <children>
+               <Label fx:id="done" alignment="CENTER" prefHeight="18.0" prefWidth="18.0" style="-fx-border-color: #ddd;" text="✔" />
+               <Region VBox.vgrow="ALWAYS" />
+               <Label fx:id="type" alignment="CENTER" prefHeight="18.0" prefWidth="18.0" text="T" />
+            </children>
+         </VBox>
+      </children>
+   </HBox>
 </fx:root>

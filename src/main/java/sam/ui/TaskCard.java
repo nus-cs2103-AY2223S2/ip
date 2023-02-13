@@ -22,6 +22,10 @@ public class TaskCard extends HBox {
     private Label title;
     @FXML
     private Label description;
+    @FXML
+    private Label done;
+    @FXML
+    private Label type;
 
     /**
      * Constructs a new TaskCard.
@@ -37,9 +41,11 @@ public class TaskCard extends HBox {
         }
 
         if (index > 0) {
-            id.setText(index + ".");
+            id.setText(Integer.toString(index));
         }
         title.setText(task.getTitle());
         description.setText(task.getDescription());
+        done.setText(task.getStatusIcon());
+        type.setText(task.getTypeIcon());
     }
 }

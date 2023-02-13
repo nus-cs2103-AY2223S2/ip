@@ -9,7 +9,6 @@ import sam.task.SamMissingTaskException;
 import sam.task.Task;
 import sam.task.TaskList;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to mark or unmark a task as done.

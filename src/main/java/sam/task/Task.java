@@ -15,10 +15,7 @@ public abstract class Task implements Cloneable {
 
     private String title;
     private boolean isDone;
-
-    public Task(String title) {
-        this(title, false);
-    }
+    private String typeIcon;
 
     /**
      * Constructs a new Task.
@@ -26,9 +23,10 @@ public abstract class Task implements Cloneable {
      * @param title The title of the task.
      * @param isDone Indicates whether the task is done.
      */
-    public Task(String title, boolean isDone) {
+    public Task(String title, boolean isDone, String typeIcon) {
         this.title = title;
         this.isDone = isDone;
+        this.typeIcon = typeIcon;
     }
 
     public void setDone(boolean isDone) {
@@ -60,12 +58,21 @@ public abstract class Task implements Cloneable {
     }
 
     /**
-     * Returns a char representing the status of the task.
+     * Returns a string character representing the type of the task.
      *
-     * @return An X if the task is done, or a blank space otherwise.
+     * @return A character representing the type of the task.
      */
-    protected char getStatusIcon() {
-        return isDone ? 'X' : ' ';
+    public String getTypeIcon() {
+        return typeIcon;
+    };
+
+    /**
+     * Returns a string character representing the status of the task.
+     *
+     * @return A character if the task is done, or a blank space otherwise.
+     */
+    public String getStatusIcon() {
+        return isDone ? "✔" : " ";
     }
 
     /**
@@ -104,7 +111,16 @@ public abstract class Task implements Cloneable {
      *
      * @return A string representation of the task.
      */
-    public abstract String toSaveFormat();
+    public String toSaveFormat() {
+        return String.format("%s | %d | %s",
+                getTypeIcon(), getStatusNo(), getTitle());
+    };
+
+    @Override
+    public String toString() {
+        return String.format("[%s][%s] %s",
+                getTypeIcon(), getStatusIcon(), getTitle());
+    }
 
     @Override
     public Object clone() throws CloneNotSupportedException {

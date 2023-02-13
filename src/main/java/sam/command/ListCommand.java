@@ -6,7 +6,6 @@ import sam.storage.Storage;
 import sam.task.Task;
 import sam.task.TaskList;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to list all tasks.

@@ -15,20 +15,6 @@ public class ToDo extends Task {
      * @param isDone Indicates whether the task is done.
      */
     public ToDo(String title, boolean isDone) {
-        super(title, isDone);
-    }
-
-    @Override
-    public String toSaveFormat() {
-        return String.format(
-                "T | %d | %s",
-                getStatusNo(), getTitle());
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "[T][%c] %s",
-                getStatusIcon(), getTitle());
+        super(title, isDone, "T");
     }
 }

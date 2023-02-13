@@ -26,14 +26,14 @@ public class Event extends Task {
      * @param isDone Indicates whether the task is done.
      */
     public Event(String title, LocalDate from, LocalDate to, boolean isDone) {
-        super(title, isDone);
+        super(title, isDone, "E");
         this.from = from;
         this.to = to;
     }
 
     @Override
     public String getDescription() {
-        return String.format("from: %s to: %s", formatDateDisplay(from), formatDateDisplay(to));
+        return String.format("from: %s\nto: %s", formatDateDisplay(from), formatDateDisplay(to));
     }
 
     @Override
@@ -52,14 +52,14 @@ public class Event extends Task {
     @Override
     public String toSaveFormat() {
         return String.format(
-                "E | %d | %s | %s | %s",
-                getStatusNo(), getTitle(), formatDateSave(from), formatDateSave(to));
+                "%s | %s | %s",
+                super.toSaveFormat(), formatDateSave(from), formatDateSave(to));
     }
 
     @Override
     public String toString() {
         return String.format(
-                "[E][%c] %s (from: %s to: %s)",
-                getStatusIcon(), getTitle(), formatDateDisplay(from), formatDateDisplay(to));
+                "%s (from: %s to: %s)",
+                super.toString(), formatDateDisplay(from), formatDateDisplay(to));
     }
 }

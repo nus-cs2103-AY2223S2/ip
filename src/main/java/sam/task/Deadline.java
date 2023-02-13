@@ -24,7 +24,7 @@ public class Deadline extends Task {
      * @param isDone Indicates whether the task is done.
      */
     public Deadline(String title, LocalDate by, boolean isDone) {
-        super(title, isDone);
+        super(title, isDone, "D");
         this.by = by;
     }
 
@@ -45,14 +45,14 @@ public class Deadline extends Task {
     @Override
     public String toSaveFormat() {
         return String.format(
-                "D | %d | %s | %s",
-                getStatusNo(), getTitle(), formatDateSave(by));
+                "%s | %s",
+                super.toSaveFormat(), formatDateSave(by));
     }
 
     @Override
     public String toString() {
         return String.format(
-                "[D][%c] %s (by: %s)",
-                getStatusIcon(), getTitle(), formatDateDisplay(by));
+                "%s (by: %s)",
+                super.toString(), formatDateDisplay(by));
     }
 }
