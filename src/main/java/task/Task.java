@@ -15,21 +15,21 @@ import util.Util;
  */
 public abstract class Task implements Serializable {
     protected final String desc;
-    protected final boolean done;
+    protected final boolean isDone;
 
     /**
      * @param desc Task description
      * @param done Task completed info
      */
-    protected Task(String desc, boolean done) {
+    protected Task(String desc, boolean isDone) {
         this.desc = desc;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     @Override
     public String toString() {
         char mark = ' ';
-        if (done) {
+        if (isDone) {
             mark = 'X';
         }
 
