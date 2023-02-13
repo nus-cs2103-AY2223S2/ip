@@ -28,6 +28,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = this.formatFilePath(filePath);
+        assert filePath.contains(".txt");
 
         try {
             this.createDirectoriesIfNeeded(this.filePath);
