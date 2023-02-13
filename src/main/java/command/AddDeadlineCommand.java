@@ -13,10 +13,12 @@ public class AddDeadlineCommand extends AddTaskCommand{
     /**
      * Class constructor.
      *
-     * @param inputArr String from a user input.
+     * @param input String from a user input.
      */
-    public AddDeadlineCommand(String inputArr) {
-        super(inputArr);
+
+    public AddDeadlineCommand(String input) {
+        super(input);
+
     }
 
     /**
@@ -29,7 +31,7 @@ public class AddDeadlineCommand extends AddTaskCommand{
      */
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Deadline deadline = Deadline.generate(this.getInputArr());
+        Deadline deadline = Deadline.generate(this.getInput());
         taskList.addTask(deadline);
         storage.saveData(taskList);
         ui.printAddTaskMsg(taskList, deadline);

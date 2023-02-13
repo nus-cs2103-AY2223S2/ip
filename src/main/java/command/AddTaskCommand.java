@@ -12,10 +12,10 @@ abstract class AddTaskCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param inputArr String from a user input.
+     * @param input String from a user input.
      */
-    public AddTaskCommand(String inputArr) {
-        super(inputArr);
+    public AddTaskCommand(String input) {
+        super(input);
     }
 
     /**

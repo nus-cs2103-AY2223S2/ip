@@ -10,13 +10,14 @@ import userinteraction.Ui;
  * Command class for adding todo tasks.
  */
 public class AddTodoCommand extends AddTaskCommand {
+
     /**
      * Class constructor.
      *
-     * @param inputArr String from a user input.
+     * @param input String from a user input.
      */
-    public AddTodoCommand(String inputArr) {
-        super(inputArr);
+    public AddTodoCommand(String input) {
+        super(input);
     }
 
     /**
@@ -29,7 +30,7 @@ public class AddTodoCommand extends AddTaskCommand {
      */
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Todo todo = Todo.generate(this.getInputArr());
+        Todo todo = Todo.generate(this.getInput());
         taskList.addTask(todo);
         storage.saveData(taskList);
         ui.printAddTaskMsg(taskList, todo);

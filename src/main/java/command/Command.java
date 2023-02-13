@@ -9,19 +9,18 @@ import userinteraction.Ui;
  * Abstract class about users' commands.
  */
 abstract public class Command {
-    private final String inputArr;
-
+    private final String input;
     /**
      * Class constructor.
      *
-     * @param inputArr String from a user input.
+     * @param input String from a user input.
      */
-    public Command(String inputArr) {
-        this.inputArr = inputArr;
+    public Command(String input) {
+        this.input = input;
     }
 
-    public String getInputArr() {
-        return inputArr;
+    public String getInput() {
+        return input;
     }
 
     /**

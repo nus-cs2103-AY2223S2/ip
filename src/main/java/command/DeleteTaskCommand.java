@@ -12,10 +12,10 @@ public class DeleteTaskCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param inputArr String from a user input.
+     * @param input String from a user input.
      */
-    public DeleteTaskCommand(String inputArr) {
-        super(inputArr);
+    public DeleteTaskCommand(String input) {
+        super(input);
     }
 
     /**
@@ -28,7 +28,7 @@ public class DeleteTaskCommand extends Command {
      */
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.deleteTask(this.getInputArr(), ui, storage);
+        taskList.deleteTask(this.getInput(), ui, storage);
     }
 
     /**

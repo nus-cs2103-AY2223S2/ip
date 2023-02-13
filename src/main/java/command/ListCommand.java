@@ -9,13 +9,14 @@ import userinteraction.Ui;
  * Command class for listing tasks.
  */
 public class ListCommand extends Command {
+
     /**
      * Class constructor.
      *
-     * @param inputArr String from a user input.
+     * @param input String from a user input.
      */
-    public ListCommand(String inputArr) {
-        super(inputArr);
+    public ListCommand(String input) {
+        super(input);
     }
 
     /**
@@ -28,7 +29,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.listTask(this.getInputArr());
+        taskList.listTask(this.getInput());
     }
 
     @Override

@@ -52,7 +52,7 @@ public class Storage {
      *
      * @return Tasklist which is stored in the file.
      */
-    public TaskList readData() {
+    public TaskList loadData() {
         ArrayList<Task> arrayList = new ArrayList<>();
         Path file = Paths.get(".", filePath);
         try {
@@ -60,17 +60,17 @@ public class Storage {
             for (int i = 0; i < taskLine.size(); i++) {
                 String[] content = taskLine.get(i).split(" \\| ");
                 switch (content[0]) {
-                    case "T":
-                        arrayList.add(Todo.generateTask(content));
-                        break;
-                    case "E":
-                        arrayList.add(Event.generateTask(content));
-                        break;
-                    case "D":
-                        arrayList.add(Deadline.generateTask(content));
-                        break;
-                    default:
-                        throw new DukeException("\t Invalid data!\n");
+                case "T":
+                    arrayList.add(Todo.generateTask(content));
+                    break;
+                case "E":
+                    arrayList.add(Event.generateTask(content));
+                    break;
+                case "D":
+                    arrayList.add(Deadline.generateTask(content));
+                    break;
+                default:
+                    throw new DukeException("\t Invalid data!\n");
                 }
             }
         } catch (FileNotFoundException e) {

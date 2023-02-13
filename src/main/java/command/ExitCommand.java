@@ -13,8 +13,8 @@ public class ExitCommand extends Command {
      *
      * @param inputArr String from a user input.
      */
-    public ExitCommand(String inputArr) {
-        super(inputArr);
+    public ExitCommand(String input) {
+        super(input);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
-        taskList = storage.readData();
+        taskList = storage.loadData();
     }
 
     /**
@@ -32,14 +32,14 @@ public class Duke {
     public void run() {
         ui.printWelcomeMsg();
         ui.printLine();
-        boolean isBye = false;
-        while (!isBye) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String input = ui.readCommand();
                 Command command = Parser.parse(input);
                 if (command != null) {
                     command.process(taskList, ui, storage);
-                    isBye = command.isExit();
+                    isExit = command.isExit();
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

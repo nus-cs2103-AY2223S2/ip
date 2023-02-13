@@ -22,7 +22,8 @@ public class Ui {
         return scanner.nextLine();
     }
     public void printWelcomeMsg() {
-        String str = LOGO + "\t Hello! I am duke.Duke.\n"  + "\t What can I do for you?\n";
+        String str = LOGO + "\t Hello! I am duke.Duke.\n"  +
+                "\t What can I do for you?\n";
         System.out.println(str);
     }
     public void printLine() {
@@ -30,21 +31,25 @@ public class Ui {
     }
     public void printAddTaskMsg(TaskList taskList, Task task) {
         String str = "\t Got it. I've added this task:\n  " + "\t\t " +
-                task.toString() + "\n\t Now you have " + taskList.getSize() + " tasks in the list\n";
+                task.toString() + "\n\t Now you have " +
+                taskList.getSize() + " tasks in the list\n";
         System.out.println(str);
     }
     public void printMarkTaskMsg(boolean isMarked, Task task) {
         String str = "";
         if (isMarked) {
-            str =  "\t Nice! I've marked this task as done: \n" + "\t\t " + task.toString() + "\n";
+            str = "\t Nice! I've marked this task as done: \n" +
+                    "\t\t " + task.toString() + "\n";
         } else {
-            str =  "\t OK, I've marked this task as not done yet: \n" + "\t\t " + task.toString() + "\n";
+            str = "\t OK, I've marked this task as not done yet: \n" +
+                    "\t\t " + task.toString() + "\n";
         }
         System.out.println(str);
     }
     public void printDeleteTaskMsg(Task task, int size) {
         String str = "\t Noted. I've removed this task:\n" + "\t\t " +
-                task.toString() + "\n\t Now you have " + size + " tasks in the list.\n";
+                task.toString() + "\n\t Now you have " +
+                size + " tasks in the list.\n";
         System.out.println(str);
     }
 

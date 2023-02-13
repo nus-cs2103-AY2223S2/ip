@@ -15,11 +15,11 @@ public class MarkTaskCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param inputArr String from a user input.
+     * @param input String from a user input.
      * @param isMarked Boolean to mark or unmark the task.
      */
-    public MarkTaskCommand(String inputArr, boolean isMarked) {
-        super(inputArr);
+    public MarkTaskCommand(String input, boolean isMarked) {
+        super(input);
         this.isMarked = isMarked;
     }
 
@@ -33,7 +33,7 @@ public class MarkTaskCommand extends Command {
      */
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markTask(isMarked, this.getInputArr(), ui, storage);
+        taskList.markTask(isMarked, this.getInput(), ui, storage);
     }
 
     /**

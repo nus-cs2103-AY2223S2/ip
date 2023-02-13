@@ -13,7 +13,7 @@ public class FindTaskCommand extends Command{
 
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.findTask(this.getInputArr(), ui);
+        taskList.findTask(this.getInput(), ui);
     }
 
     @Override
