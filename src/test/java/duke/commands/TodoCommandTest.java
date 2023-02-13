@@ -12,18 +12,15 @@ import duke.TaskList;
 
 public class TodoCommandTest {
     @Test
-    public void executeTest() {
+    public void executeTest() throws DukeException {
         TaskList tl = new TaskList();
         Storage storage = new Storage("taskListTest.txt");
         TodoCommand tdc = new TodoCommand("todo test");
 
-        try {
-            assertEquals(tdc.execute(tl, storage),
-                    "Got it. I've added this task:\n"
-                            + "  [T] [   ]  test\n\n"
-                            + "Now you have 1 tasks in the list.");
-        } catch (DukeException e) {
-            e.getMessage();
-        }
+        assertEquals(tdc.execute(tl, storage),
+                "Got it. I've added this task:\n"
+                        + "  [T] [   ]  test\n\n"
+                        + "Now you have 1 tasks in the list.");
+
     }
 }

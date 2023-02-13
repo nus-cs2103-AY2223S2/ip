@@ -26,16 +26,18 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             if (input.length() <= 7) {
-                throw new DukeException("OOPS!!! Delete must be followed by an int.");
+                throw new DukeException(Ui.missingIndex());
             }
             int index = Integer.parseInt(input.substring(7));
-            assert index <= tasks.size() : Ui.insufficientTasksMessage();
+            if (index > tasks.size() || index <= 0) {
+                throw new DukeException(Ui.insufficientTasksMessage());
+            }
             Task task = tasks.get(index - 1);
             tasks.remove(index - 1);
             storage.saveTaskList(tasks);
             return Ui.confirmationMessage("deleted", tasks, task);
-        } catch (AssertionError ae) {
-            return ae.getMessage();
+        } catch (NumberFormatException e) {
+            throw new DukeException(Ui.missingIndex());
         }
     }
 }
