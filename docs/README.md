@@ -60,16 +60,11 @@ From this [source](https://hellokitty.fandom.com/wiki/Kuromi#With_Friends_and_Fa
 
 ## Usage
 
-<div markdown="block" class="alert alert-info">
-  
-**:information_source: Notes about the command format:**<br>
-  
-* Words in `angle brackets <>` are the parameters to be filled by the user.<br>
-  e.g. in `todo <description>`, `<description>` should be changed into the description of the todo : `todo borrow book`
-
-* Dates should be in the format of `yyyy-MM-dd HH:mm`.<br>
-  e.g. `deadline return book /by 2030-01-01 10:00`
-</div>
+> **Notes about the command format:**\
+> - Words in `angle brackets <>` are the parameters to be filled by the user.\
+    - e.g. in `todo <description>`, `<description>` should be changed into the description of the todo : `todo borrow book`
+> - Dates should be in the format of `yyyy-MM-dd HH:mm`.\
+    - e.g. `deadline return book /by 2030-01-01 10:00`
 
 ## Viewing help: `help`
 
