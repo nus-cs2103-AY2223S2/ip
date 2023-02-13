@@ -1,4 +1,12 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeEmptyArgumentException;
+import duke.exception.DukeEventOverlapException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeIoException;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.ui.Ui;
 
 /**
  * Class for creating a add command, more specific for todo, deadline, and event command.

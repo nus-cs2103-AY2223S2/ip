@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class TaskList {
      * @param index index of the task in task list.
      * @return task at that given index.
      */
-    protected Task getTaskAt(int index) {
+    public Task getTaskAt(int index) {
         return taskList.get(index);
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
      *
      * @param task task to be inserted.
      */
-    protected void add(Task task) {
+    public void add(Task task) {
         taskList.add(task);
     }
 
@@ -51,7 +51,7 @@ public class TaskList {
      *
      * @param index index of task to be removed.
      */
-    protected void removeTaskAt(int index) {
+    public void removeTaskAt(int index) {
         taskList.remove(index);
     }
 
@@ -60,7 +60,7 @@ public class TaskList {
      *
      * @return number of task has been keep tracked.
      */
-    protected int size() {
+    public int size() {
         return taskList.size();
     }
 }

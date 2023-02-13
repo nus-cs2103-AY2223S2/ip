@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Throw when user enter invalid argument for the command.

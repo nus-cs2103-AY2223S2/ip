@@ -1,4 +1,11 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeEventOverlapException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeIoException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represent an executable command.
@@ -21,6 +28,6 @@ public abstract class Command {
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
-    protected abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException,
+    public abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException,
             DukeIoException, DukeEventOverlapException;
 }

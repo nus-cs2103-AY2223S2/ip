@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Task that given by the user and was recorded in the database.

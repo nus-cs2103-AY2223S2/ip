@@ -1,4 +1,11 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeEmptyArgumentException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeIoException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Delete a task from task lisk given a specific line in the database.
@@ -31,8 +38,8 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIoException {
         if (deletedLineNumber >= task.size()) {
-            throw new DukeInvalidArgumentException("There are only" + task.size()
-                    + "tasks in list, but want to delete " + deletedLineNumber + "th task.");
+            throw new DukeInvalidArgumentException("There are only " + task.size()
+                    + " tasks in list, but want to delete " + (deletedLineNumber + 1)+ "th task.");
         }
         String responseMsg = ui.responseToDeleteTaskCommand(task, deletedLineNumber);
         task.removeTaskAt(deletedLineNumber);

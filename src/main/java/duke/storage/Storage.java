@@ -1,11 +1,16 @@
-package duke;
+package duke.storage;
+
+import duke.exception.DukeEventOverlapException;
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeIoException;
+import duke.task.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +39,7 @@ public class Storage {
     /**
      * Set a default storage if the file or folder is not found.
      */
-    protected static void setDefaultStorage() {
+    public static void setDefaultStorage() {
         File folder = new File("data/");
         if (!folder.exists()) {
             folder.mkdir();
@@ -56,10 +61,10 @@ public class Storage {
      * @param t task to be inserted.
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
-    protected void updateData(Task t) throws DukeIoException {
+    public void updateData(Task t) throws DukeIoException {
         try {
             List<String> allLines = Files.readAllLines(path);
-            String s = t.toString().charAt(1) + " | " + t.getStatusIcon() + " | " + t.description;
+            String s = t.toString().charAt(1) + " | " + t.getStatusIcon() + " | " + t.getDescription();
             if (t instanceof Deadlines) {
                 // create string description for deadline task to store in data file
                 Deadlines d = (Deadlines) t;
@@ -83,7 +88,7 @@ public class Storage {
      * @param status status of file that indicate whether the task is done or not.
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
-    protected void updateData(int lineNumber, int status) throws DukeIoException {
+    public void updateData(int lineNumber, int status) throws DukeIoException {
         try {
             List<String> allLines = Files.readAllLines(path);
 
@@ -104,7 +109,7 @@ public class Storage {
      * @param lineNumber line number in the file to be deleted.
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
-    protected void removeData(int lineNumber) throws DukeIoException {
+    public void removeData(int lineNumber) throws DukeIoException {
         try {
             List<String> allLine = Files.readAllLines(path);
 
@@ -123,7 +128,7 @@ public class Storage {
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    protected ArrayList<Task> load() throws DukeIoException, DukeInvalidArgumentException, DukeEventOverlapException {
+    public ArrayList<Task> load() throws DukeIoException, DukeInvalidArgumentException, DukeEventOverlapException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             List<String> allLine = Files.readAllLines(path);
@@ -143,7 +148,7 @@ public class Storage {
         }
     }
 
-    protected TaskList findDataFromFile(String keyword) throws DukeIoException, DukeInvalidArgumentException,
+    public TaskList findDataFromFile(String keyword) throws DukeIoException, DukeInvalidArgumentException,
             DukeEventOverlapException {
         TaskList result = new TaskList();
         try {

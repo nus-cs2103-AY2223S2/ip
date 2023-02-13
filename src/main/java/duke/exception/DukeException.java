@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exception class for all exception that occur in the duke application.

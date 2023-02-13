@@ -1,5 +1,12 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * Entry point of the application.
  * Initialize the program and interact with the user.
@@ -40,6 +47,9 @@ public class Duke {
         greetingMsg = ui.showWelcomeMessage();
     }
 
+    public String getGreetingMsg() {
+        return greetingMsg;
+    }
     /**
      * Return response given a user input.
      *

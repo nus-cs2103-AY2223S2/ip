@@ -1,4 +1,7 @@
-package duke;
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * User interface of the application.

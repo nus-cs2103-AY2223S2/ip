@@ -1,4 +1,12 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeEmptyArgumentException;
+import duke.exception.DukeEventOverlapException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeIoException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Find a task by searching for a keyword entered by the user.

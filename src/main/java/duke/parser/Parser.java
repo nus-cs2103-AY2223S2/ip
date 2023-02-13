@@ -1,4 +1,10 @@
-package duke;
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeEmptyArgumentException;
+import duke.exception.DukeEventOverlapException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeUnknownCommandException;
 
 /**
  * Parser to parse user input.

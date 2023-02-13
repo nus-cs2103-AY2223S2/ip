@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Throws when IOException happen in the duke.

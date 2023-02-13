@@ -1,5 +1,7 @@
-package duke;
+package duke.task;
 
+import duke.exception.DukeEventOverlapException;
+import duke.exception.DukeInvalidArgumentException;
 import javafx.util.Pair;
 
 import java.time.LocalDateTime;

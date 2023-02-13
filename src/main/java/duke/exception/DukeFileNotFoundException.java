@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Throw when FileNotFoundException occur in Duke.

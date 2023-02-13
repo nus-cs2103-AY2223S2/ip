@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exception will be thrown when unknown command is given by the user.
