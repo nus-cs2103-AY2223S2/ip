@@ -39,6 +39,7 @@ public interface Command {
                 .or(FindByDate.parser())
                 .or(Delete.parser())
                 .or(Exit.parser())
-                .or(Find.parser());
+                .or(Find.parser())
+                .or(Sort.parser());
     }
 }

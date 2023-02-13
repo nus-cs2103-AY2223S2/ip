@@ -145,7 +145,7 @@ public class TaskList implements Serializable {
                 .sorted((a, b) -> a.getDate().get().compareTo(b.getDate().get()))
                 .collect(Collectors.toList());
         
-        IntStream.range(0, this.size())
+        IntStream.range(0, indexesToSort.size())
                 .mapToObj(i -> new Pair<>(indexesToSort.get(i), sortedFilteredTasks.get(i)))
                 .forEach(pr -> this.lst.set(pr.first(), pr.second()));
     }
