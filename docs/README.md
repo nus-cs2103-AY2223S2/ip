@@ -12,6 +12,12 @@ Show a list of all tasks.
 Format: `list`  
 <br>
 
+### `bye` - Closes the application
+
+Format: `bye` 
+
+<br>
+
 ### `todo` - Add a todo
 
 Adds a todo task to your list of tasks.
@@ -72,7 +78,27 @@ Filters your list of tasks and returns those that contain the word: `KEYWORD`.
 
 Format: `find KEYWORD`  
 
-Example of usage:
-![Example for find](/docs/findExample.png)
+Example of usage: 
 
+![Example for find](/docs/findExample.png)
+<br>
+
+### `mark` - Marks a task as done
+
+Marks a task as done.
+
+Format: `mark TASK_NUMBER`
+
+Example of usage:
+- `mark 1`
+<br>
+
+### `unmark` - Unmarks a task
+
+Unmarks a marked task.
+
+Format: `unmark TASK_NUMBER`
+
+Example of usage:
+- `unmark 1`
 <br>
