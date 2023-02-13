@@ -159,7 +159,9 @@ public class TaskList {
         assert taskNo < size() && taskNo >= 0;
 
         Task deleted = tasks.remove(taskNo);
-        return String.format("OK, I've deleted: %s\n", deleted);
+        String newList = this.showList();
+        return String.format("OK, I've deleted: %s\n\n%s",
+                deleted, newList);
     }
 
     /**
@@ -193,15 +195,17 @@ public class TaskList {
      * @return matching tasks from list or failure message
      */
     public String find(String search) {
-        String filteredTasks = tasks.stream().filter(x -> x.toString().trim().contains(search))
-                .map(x -> x.toString() + "\n")
-                .reduce("", (a, b) -> a + b);
-        if (filteredTasks.isEmpty()) {
-            String failedSearchMessage = "Sorry I found no matching tasks.";
-            return failedSearchMessage;
+        String finalTasksString = "";
+        for (int i = 0; i < tasks.size(); i ++) {
+            Task currentTask = tasks.get(i);
+            if(currentTask.toString().trim().contains(search)) {
+                finalTasksString += (i + 1) + "." + tasks.get(i) + "\n";
+            }
         }
-        String searchResultHeader = "Here are the matching tasks in your list:\n";
-        return searchResultHeader + filteredTasks;
+        if (finalTasksString.isEmpty()) {
+            return "Sorry, I could not find anything matching. :(";
+        }
+        return String.format("Here's what I found:\n%s", finalTasksString);
     }
 
     /**
@@ -213,7 +217,7 @@ public class TaskList {
     public String numberOfTasks(boolean isMarked) {
         String markSymbol = isMarked ? "[X]" : "[ ]";
         long numOfMarkedTasks = tasks.stream()
-                .filter(x -> x.getStatusIcon() == markSymbol)
+                .filter(x -> x.getStatusIcon().equals(markSymbol))
                 .count();
         return String.format("You have %s %d tasks at the moment.\n", isMarked ? "completed" : "not done",
                 numOfMarkedTasks);

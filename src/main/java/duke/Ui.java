@@ -1,5 +1,8 @@
 package duke;
 
+import duke.task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -56,9 +59,9 @@ public class Ui {
      * @param newTaskString    the new task
      * @param numOfTasks the num of tasks
      */
-    public static String showTask(String newTaskString, int numOfTasks) {
-        return String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list.",
-                newTaskString, numOfTasks);
+    public static String showTask(String newTaskString, int numOfTasks, String newList) {
+        return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list.\n\n%s",
+                newTaskString, numOfTasks, newList);
     }
 
     /**
