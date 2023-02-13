@@ -39,7 +39,7 @@ Here are the tasks in your list:
 
 ### `sort` - List sorted tasks
 
-List out all tasks with earliest dates first.
+List out all tasks with earliest dates first. This will not change the original ordering saved.
 
 Example of usage:
 
