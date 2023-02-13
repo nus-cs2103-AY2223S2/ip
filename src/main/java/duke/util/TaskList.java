@@ -54,16 +54,6 @@ public class TaskList {
     }
 
     /**
-     * Output all the Tasks for user to see.
-     */
-    public void print(){
-        for (int i = 0; i < toDoList.size(); i++){
-            System.out.print(Integer.toString(i+1) + ". ");
-            toDoList.get(i).printTask();
-        }
-    }
-
-    /**
      * Returns the size of the list.
      *
      * @return int size of list.

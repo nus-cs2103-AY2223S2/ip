@@ -18,17 +18,6 @@ public class Event extends Task {
         this.endDate = newEndDate;
     }
 
-    /**
-     * Output the event task (with dates) for user to see.
-     */
-    @Override
-    public void printTask(){
-        System.out.print("[E]");
-        super.printTask();
-        System.out.println("(from: " + startDate + " to: " + endDate + ")");
-
-    }
-
     @Override
     public String toString() {
         return super.toString() + " (from: " + startDate + " to: " + endDate + ")";

@@ -24,7 +24,6 @@ public class Storage {
             System.out.println("Starting a fresh list :)");
             File dir = new File("data");
             boolean dirCreated = dir.mkdir();
-            //dir.createNewFile();
             File file = new File("data/duke.txt");
             try {
                 if (dir.createNewFile()) {

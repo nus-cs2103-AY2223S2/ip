@@ -16,28 +16,6 @@ public class Parser {
     private static TaskList taskList = new TaskList();
 
     /**
-     * Returns a boolean to signify the termination of the chatbot.
-     * It handles the user input.
-     *
-     * @return Whether chatbot is still running.
-     * @throws DukeException If input is empty.
-     */
-    public static boolean talk() throws DukeException{
-        Scanner myObj = new Scanner(System.in);
-        String inp = myObj.nextLine();
-        if (inp.equals("")) {
-            throw new DukeException("Empty Input!");
-        }
-        while (!inp.equals("bye")) {
-            operationHandler(inp);
-            System.out.println("done >.<");
-            inp = myObj.nextLine();
-        }
-        System.out.println("Bye. Hope to see you again soon!");
-        return false;
-    }
-
-    /**
      * Process the user input and react/output according.
      *
      * @param task String user inputted string for processing.
@@ -65,7 +43,6 @@ public class Parser {
         } else if (command.equals("snooze")){
             return snooze(task, inpArr);
         } else {
-            //throw new DukeException("Invalid Input!");
             return "I am sorry, I don't understand.";
         }
     }
@@ -73,7 +50,7 @@ public class Parser {
     public static String addTask(String command, String task, String[] inpArr) throws DukeException{
         int deadlineLength = 9;
         int eventLength = 6;
-        if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+        if (command.equals("todo")) {
             if (task.length() == 4) {
                 throw new DukeException("Description cannot be empty!");
             }
