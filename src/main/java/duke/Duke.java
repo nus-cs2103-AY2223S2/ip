@@ -49,7 +49,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -60,7 +59,6 @@ public class Duke extends Application {
         scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();
-
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -71,7 +69,6 @@ public class Duke extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
@@ -80,24 +77,14 @@ public class Duke extends Application {
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-//        //Step 3. Add functionality to handle user input.
-//        sendButton.setOnMouseClicked((event) -> {
-//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-//            userInput.clear();
-//        });
-
         userInput.setOnAction((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-        //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
-
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
@@ -139,10 +126,6 @@ public class Duke extends Application {
     public String getResponse(String input) {
         try {
             String response =  this.parser.parseInput(input);
-            if (response.equals(ui.goodbyeMessage())) {
-                Platform.exit();
-                return response;
-            }
             return response;
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
