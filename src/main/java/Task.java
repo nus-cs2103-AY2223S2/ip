@@ -36,9 +36,15 @@ public class Task {
     public static void printTaskList(Task[] taskList) {
         Task.printHorizontalLine();
         System.out.println("     Here are the tasks in your list:");
+        //
+//        for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
+//            System.out.println("     " + taskList[i].id + ". " + taskList[i].description);
+//        }
+        //
         for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
-            System.out.println("     " + taskList[i].id + ". " + taskList[i].description);
+            System.out.println("     " + taskList[i].id + ". " + taskList[i]);
         }
+        //
         Task.printHorizontalLine();
     }
 

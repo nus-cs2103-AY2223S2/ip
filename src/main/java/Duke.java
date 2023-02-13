@@ -26,12 +26,13 @@ public class Duke {
             String[] splitMessage = msgDescription.split(" ");
 //            switch (splitMessage[0]) {
             if (Objects.equals(msgDescription, "list")) {
-                Task.printHorizontalLine();
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
-                    taskList[i].printTaskList(taskList);
-                }
-                Task.printHorizontalLine();
+//                Task.printHorizontalLine();
+//                System.out.println("Here are the tasks in your list:");
+//                for (int i = 0; i < Task.getTotalNumberOfTask(); i++) {
+//                    taskList[i].printTaskList(taskList);
+//                }
+//                Task.printHorizontalLine();
+                Task.printTaskList(taskList);
             } else if (Objects.equals(msgDescription, "blah")) {
                 printBlahMessage();
             } else if (Objects.equals(msgDescription, "bye")) {
