@@ -1,0 +1,32 @@
+list
+todo abc
+todo abc
+deadline def /by 123
+event ghi /from 456 /to 789
+mark 1
+mark 2
+unmark 1
+delete 1
+list
+hello
+todo
+deadline def
+deadline
+event ghi /from
+event ghi /to
+event ghi
+event
+mark 0
+mark 4
+mark abc
+mark
+unmark 0
+unmark 4
+unmark abc
+unmark
+delete 0
+delete 4
+delete abc
+delete
+list
+bye

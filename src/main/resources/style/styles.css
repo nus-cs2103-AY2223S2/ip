@@ -1,0 +1,25 @@
+.button {
+    -fx-background-color: "#B1E1E5"
+}
+
+.message-box {
+}
+
+.message-chat-base {
+    -fx-background-radius: 10;
+    -fx-background-insets: 5;
+    -fx-border-insets: 5;
+    -fx-padding: 10;
+}
+
+.message-chat-jarvis {
+    -fx-background-color: "#B1E1E5";
+}
+
+.message-chat-ultron {
+    -fx-background-color: "#F4CCCC";
+}
+
+.message-chat-error {
+    -fx-background-color: "#FCE5CD";
+}

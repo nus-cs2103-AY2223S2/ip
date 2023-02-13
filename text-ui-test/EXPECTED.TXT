@@ -1,7 +1,87 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+     _   _    ______     _____ ____  
+    | | / \  |  _ \ \   / /_ _/ ___| 
+ _  | |/ _ \ | |_) \ \ / / | |\___ \ 
+| |_| / ___ \|  _ < \ V /  | | ___) |
+ \___/_/   \_\_| \_\ \_/  |___|____/
 
+| Jarvis:
+| 	Hello, I'm Jarvis, how may I help you?
+> | Jarvis:
+| 	No tasks, you're good for the day!
+> | Jarvis:
+| 	Got it! I've added task 1 to the list.
+| 		[T][ ] abc
+> | Jarvis:
+| 	Got it! I've added task 2 to the list.
+| 		[T][ ] abc
+> | Jarvis:
+| 	Got it! I've added task 3 to the list.
+| 		[D][ ] def (by: 123)
+> | Jarvis:
+| 	Got it! I've added task 4 to the list.
+| 		[E][ ] ghi (from: 456, to: 789)
+> | Jarvis:
+| 	Got it! I've marked task 1 as done.
+| 		[T][X] abc
+> | Jarvis:
+| 	Got it! I've marked task 2 as done.
+| 		[T][X] abc
+> | Jarvis:
+| 	Got it! I've marked task 1 as undone.
+| 		[T][ ] abc
+> | Jarvis:
+| 	Got it, I've removed task 1.
+| 		[T][ ] abc
+> | Jarvis:
+| 	Here are the tasks in your list:
+| 	1. [T][X] abc
+| 	2. [D][ ] def (by: 123)
+| 	3. [E][ ] ghi (from: 456, to: 789)
+> | Jarvis:
+| 	I don't quite understand, please try again.
+> | Jarvis:
+| 	I've a problem! A task description is needed.
+> | Jarvis:
+| 	I've a problem! A deadline ('/by ...') is needed.
+> | Jarvis:
+| 	I've a problem! A task description is needed.
+> | Jarvis:
+| 	I've a problem! Start ('/from ...') and end ('/to ...') markers are needed.
+> | Jarvis:
+| 	I've a problem! Start ('/from ...') and end ('/to ...') markers are needed.
+> | Jarvis:
+| 	I've a problem! Start ('/from ...') and end ('/to ...') markers are needed.
+> | Jarvis:
+| 	I've a problem! A task description is needed.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	I've a problem! Please provide an index from 1 to 3.
+> | Jarvis:
+| 	Here are the tasks in your list:
+| 	1. [T][X] abc
+| 	2. [D][ ] def (by: 123)
+| 	3. [E][ ] ghi (from: 456, to: 789)
+> | Jarvis:
+| 	Goodbye, and see you again!
+> 
