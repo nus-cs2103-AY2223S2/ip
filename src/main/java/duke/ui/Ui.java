@@ -5,7 +5,8 @@ public class Ui {
     public Ui() {
     }
 
-    public void greet() {
-        System.out.println("Hello! I'm Happie \nWhat can I do for you?");
+    public String greet() {
+        return "Hello! I'm Pingu \nWhat can I do for you?";
     }
+
 }

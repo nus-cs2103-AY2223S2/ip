@@ -26,33 +26,34 @@ public class TaskList {
     /**
      * Prints the list of tasks
      */
-    public void printList() {
-        System.out.println("Here are some tasks in your list:");
+    public String printList() {
+        String list = "Here are some tasks in your list:";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
-            System.out.println(i + "." + (taskList.get(i - 1)).toString());
+            list = list + "\n" + i + "." + (taskList.get(i - 1)).toString();
         }
+        return list;
     }
 
     /**
      * Mark the task stored in the list as completed
      * @param taskStr Task number of task in the list to mark as completed
      */
-    public void markTask(String taskStr) {
+    public String markTask(String taskStr) {
         int taskNum = Integer.parseInt(taskStr) - 1;
         Task originalTask =  taskList.get(taskNum);
         originalTask.markTask();
-        System.out.println("Nice! I've marked this task as done: \n  " + originalTask);
+        return "Nice! I've marked this task as done: \n  " + originalTask;
     }
 
     /**
      * Mark the task stored in the list as not completed
      * @param taskStr Task number of task in the list to mark as completed
      */
-    public void unmarkTask(String taskStr) {
+    public String unmarkTask(String taskStr) {
         int taskNum = Integer.parseInt(taskStr) - 1;
         Task originalTask =  taskList.get(taskNum);
         originalTask.unmarkTask();
-        System.out.println("Ok, I've marked this task as not done yet: \n  " + originalTask);
+        return "Ok, I've marked this task as not done yet: \n  " + originalTask;
     }
 
     /**
@@ -67,25 +68,25 @@ public class TaskList {
      * Inform user that the task has been successfully added
      * @param task Task that has been added
      */
-    public void printAddComment(Task task) {
-        System.out.println("Got it. I've added this task: \n  " + task +
-                "\nNow you have " + taskList.size() + " tasks in the list.");
+    public String printAddComment(Task task) {
+        return "Got it. I've added this task: \n  " + task +
+                "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
      * Delete the task from the list
      * @param taskStr Task number of task in the list to be deleted
      */
-    public void deleteTask(String taskStr) {
+    public String deleteTask(String taskStr) {
         int taskNum = Integer.parseInt(taskStr) - 1;
         Task taskToRemove = taskList.get(taskNum);
         String removedTaskStr = taskToRemove.toString();
         taskList.remove(taskNum);
-        System.out.println("Noted. I've removed this task: \n  " + removedTaskStr
-                + "\nNow you have " + taskList.size() + " tasks in the list.");
+        return "Noted. I've removed this task: \n  " + removedTaskStr
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
-    public void find(String targetString) {
+    public String find(String targetString) {
         List<Task> targetList = new ArrayList<>();
         for (Task t : taskList) {
             if (t.getTask().contains(targetString)) {
@@ -94,12 +95,13 @@ public class TaskList {
         }
 
         if (targetList.isEmpty()) {
-            System.out.println("Oops! :( There are no matching tasks found.");
+            return "Oops! :( There are no matching tasks found.";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String listFound = "Here are the matching tasks in your list:";
             for (int i = 1; i < targetList.size() + 1; i++) {
-                System.out.println(i + "." + (targetList.get(i - 1)).toString());
+                listFound = listFound + "\n" + i + "." + (targetList.get(i - 1)).toString();
             }
+            return listFound;
         }
     }
 

@@ -28,39 +28,38 @@ public class Parser {
      * @throws EmptyDescriptionException If no description of task after the command word
      * @throws WrongCommandException If wrong command word is being entered
      */
-    public void performCommand() {
-        String input = this.sc.nextLine();
+    public String performCommand(String input) {
+        //String input = this.sc.nextLine();
         while (!input.equals("bye")) {
-
             try {
                 if (input.equals("list")) {
-                    taskList.printList();
+                    return taskList.printList();
                 } else {
                     taskList.emptyDes(input);
                     String command = input.substring(0, input.indexOf(" "));
                     taskList.wrongCommand(command);
                     switch (command) {
                         case "mark":
-                            taskList.markTask(input.substring(5));
-                            break;
+                            return taskList.markTask(input.substring(5));
+                            //break;
 
                         case "unmark":
-                            taskList.unmarkTask(input.substring(7));
-                            break;
+                            return taskList.unmarkTask(input.substring(7));
+                            //break;
 
                         case "todo":
                             Task taskToDo = new ToDo(input);
                             taskList.addTask(taskToDo);
-                            taskList.printAddComment(taskToDo);
-                            break;
+                            return taskList.printAddComment(taskToDo);
+                            //break;
 
                         case "deadline":
                             LocalDate deadline = LocalDate.parse(
                                     input.substring(input.indexOf("/") + 4));
                             Task taskDeadline = new Deadline(input, deadline);
                             taskList.addTask(taskDeadline);
-                            taskList.printAddComment(taskDeadline);
-                            break;
+                            return taskList.printAddComment(taskDeadline);
+                            //break;
 
                         case "event":
                             LocalDate startDate = LocalDate.parse(
@@ -70,25 +69,29 @@ public class Parser {
                                     input.substring(input.lastIndexOf("/") + 4));
                             Task taskEvent = new Event(input, startDate, endDate);
                             taskList.addTask(taskEvent);
-                            taskList.printAddComment(taskEvent);
-                            break;
+                            return taskList.printAddComment(taskEvent);
+                            //break;
 
                         case "delete":
-                            taskList.deleteTask(input.substring(7));
-                            break;
+                            return taskList.deleteTask(input.substring(7));
+                            //break;
 
                         case "find":
-                            taskList.find(input.substring(5));
+                            return taskList.find(input.substring(5));
                     }
                 }
             } catch (EmptyDescriptionException | WrongCommandException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
 
         input = sc.nextLine();
     }
-        System.out.println("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
+
+
 }
+
+
 
 
 }

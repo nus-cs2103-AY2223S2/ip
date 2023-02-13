@@ -5,6 +5,8 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+
+
 /**
  * Duke helps user to keep track of tasks
  */
@@ -24,18 +26,24 @@ public class Duke {
         parser = new Parser(tasks);
     }
 
+
     /**
      * Greet user and perform command for the tasks they entered and save tasks in file
      */
-    public void run() {
-        ui.greet();
-        parser.performCommand();
+    public String greet() {
+        return ui.greet();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String response = "";
+        response =  parser.performCommand(input);
         storage.save(this.tasks);
+        return response;
     }
+    
 
-
-    public static void main(String[] args) {
-        new Duke().run();
-
-    }
 }
