@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Class for Event object, which encapsulates its description, start and end times.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Event extends Task {
 
     protected String from;

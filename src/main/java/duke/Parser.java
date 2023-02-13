@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Class for Parser object, which is used to parse data and understand user intentions.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Parser {
     /**
      * Checks if the user wants to terminate the chatbot.

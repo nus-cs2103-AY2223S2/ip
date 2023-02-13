@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Class for DukeException, which is thrown when there is a Duke specific error.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class DukeException extends Exception{
 
     /**

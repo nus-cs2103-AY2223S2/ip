@@ -7,6 +7,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
+/**
+ * Class for TaskList object, which encapsulates the list of tasks input by the user.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class TaskList {
 
     private ArrayList<Task> lstOfTasks;

@@ -8,6 +8,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Class for Storage object, which stores the filePath which contains the file storing past info.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Storage {
 
     protected String filePath;

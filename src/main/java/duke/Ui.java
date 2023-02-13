@@ -2,6 +2,11 @@ package duke;
 
 import javafx.scene.control.Label;
 
+/**
+ * Class for Ui object, which displays text and features to the user.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Ui {
 
     /**

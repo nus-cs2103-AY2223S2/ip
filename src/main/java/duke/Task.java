@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Class for Task object, which stores priority level, name, and completed status.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Task implements Comparable<Task> {
 
     enum PriorityLevel {

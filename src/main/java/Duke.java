@@ -23,7 +23,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-
+/**
+ * Class for Duke object, which is the Chatbot that interacts with the user.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Duke extends Application {
 
     private Storage storage;

@@ -3,6 +3,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class for Deadline object which encapsulates information and due date of this Task.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;

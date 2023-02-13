@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Class for To-do object, which encapsulates the description of the task.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class Todo extends Task {
 
     /**

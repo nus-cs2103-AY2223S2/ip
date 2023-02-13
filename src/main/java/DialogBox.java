@@ -6,6 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Class for DialogBox object, which displays text to the user.
+ *
+ * @author Eric Leow Yu Quan
+ */
 public class DialogBox extends HBox {
 
     private Label text;
