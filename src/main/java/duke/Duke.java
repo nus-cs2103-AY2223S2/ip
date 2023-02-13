@@ -85,6 +85,7 @@ public class Duke {
         case DEADLINE:
             try {
                 String newDescription = parser.getPreDescription(description, BY_SUBSTRING);
+
                 LocalDate byDate = parser.getDateTime(parser.getPostDescription(description, BY_SUBSTRING));
                 Deadline deadlineTask = new Deadline(newDescription, byDate);
                 taskList.add(deadlineTask);
@@ -149,8 +150,7 @@ public class Duke {
                     + taskList.size() + "!");
         }
         assert taskList.size() > itemNo;
-        ui.displayText("Noted. I've removed this task: "
-                + taskList.get(itemNo).toString());
+        ui.displayText("Noted. I've removed this task: " + taskList.get(itemNo).toString());
         taskList.remove(itemNo);
         storage.saveToFile();
         ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
@@ -165,14 +165,11 @@ public class Duke {
     public void find(String searchInput) {
         int count = 1;
         boolean hasResult = false;
+        StringBuilder foundString = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).toString().contains(searchInput)) {
-                if (!hasResult) {
-                    hasResult = true;
-                    ui.displayText("Here are the matching tasks in your list:");
-                }
-                ui.displayText(String.format("%d. %s", count,
-                        taskList.get(i).toString()));
+                hasResult = true;
+                foundString.append(String.format("%d. %s", count, taskList.get(i).toString())).append("\n");
                 count++;
             }
         }
@@ -180,26 +177,29 @@ public class Duke {
         if (!hasResult) {
             assert count == 1;
             ui.displayText("There are no matching tasks in your list!");
+        } else {
+            ui.displayText("Here are the matching tasks in your list:\n" + foundString);
         }
     }
 
     /**
-     * List out all tasks.
+     * Displays the list of task.
      */
     public void getList() {
         if (taskList.size() == 0) {
             ui.displayText("Congrats! You have 0 tasks left!!");
         } else {
             assert taskList.size() > 0;
-            ui.displayText("Here are the tasks in your list:");
+            StringBuilder listString = new StringBuilder();
             for (int i = 0; i < taskList.size(); i++) {
-                ui.displayText(String.format("%d. %s", i + 1, taskList.get(i).toString()));
+                listString.append(String.format("%d. %s", i + 1, taskList.get(i).toString())).append("\n");
             }
+            ui.displayText("Here are the tasks in your list:\n" + listString);
         }
     }
 
     /**
-     * Provide details of given command.
+     * Provides details of given command.
      * If given command is invalid, brief details of all commands will be provided.
      *
      * @param cmd User's given command.
@@ -240,10 +240,22 @@ public class Duke {
     }
 
     /**
-     * Start Duke.
+     * Starts Duke.
      */
     public void start() {
         ui.displayIntro();
+    }
+
+    /**
+     * Handles error of blank space.
+     *
+     * @param userInput User's input to check for error.
+     * @param errorMsg Error message to display if error occurs.
+     */
+    public void handleBlankError(String userInput, String errorMsg) throws DukeException {
+        if (parser.getDescription(userInput).equals(BLANK_ERROR_MSG)) {
+            throw new DukeException(errorMsg);
+        }
     }
 
     /**
@@ -262,37 +274,38 @@ public class Duke {
                 getList();
                 break;
             case "mark":
-                if (parser.getDescription(userInput).equals(BLANK_ERROR_MSG)) {
-                    throw new DukeException("Please provide a task number to mark!");
-                }
+                handleBlankError(userInput, "Please provide a task number to mark!");
                 mark(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "unmark":
-                if (parser.getDescription(userInput).equals(BLANK_ERROR_MSG)) {
-                    throw new DukeException("Please provide a task number to unmark!");
-                }
+                handleBlankError(userInput, "Please provide a task number to unmark!");
                 unmark(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "todo":
+                handleBlankError(userInput, "Invalid format, please try again, type '"
+                        + TODO_FORMAT + "'");
                 addTask(parser.getDescription(userInput, TODO_LENGTH), TaskType.TODO);
                 break;
             case "event":
+                handleBlankError(userInput, "Invalid format, please try again, type '"
+                        + EVENT_FORMAT + "'");
                 addTask(parser.getDescription(userInput, EVENT_LENGTH), TaskType.EVENT);
                 break;
             case "deadline":
+                handleBlankError(userInput, "Invalid format, please try again, type '"
+                        + DEADLINE_FORMAT + "'");
                 addTask(parser.getDescription(userInput, DEADLINE_LENGTH), TaskType.DEADLINE);
                 break;
             case "delete":
-                if (parser.getDescription(userInput).equals(BLANK_ERROR_MSG)) {
-                    throw new DukeException("Please provide a task number to delete!");
-                }
+                handleBlankError(userInput, "Please provide a task number to delete!");
                 delete(Integer.parseInt(parser.getDescription(userInput)) - 1);
                 break;
             case "find":
+                handleBlankError(userInput, "Please provide a sub string to find!");
                 find(parser.getDescription(userInput, FIND_LENGTH));
                 break;
             default:
-                ui.displayText("I'm sorry, but I don't know what that means");
+                ui.displayText("I do not understand you!\nType 'help' to get help");
             }
         } catch (DukeException exception) {
             ui.displayText(exception.getMessage());
