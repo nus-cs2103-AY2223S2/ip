@@ -8,6 +8,6 @@ public class InvalidDateException extends DukeException {
      * Constructor for InvalidDateException.
      */
     public InvalidDateException() {
-        super("The date wrong format. FAILURE!", null);
+        super("Haiya this not date. FAILURE!", null);
     }
 }
