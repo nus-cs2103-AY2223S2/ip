@@ -126,5 +126,13 @@ public class TaskList {
             delete(0);
         }
     }
-
+    public ArrayList<Task> getTasksToRemind() {
+        ArrayList<Task> ret = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.hasReminderToday()) {
+                ret.add(t);
+            }
+        }
+        return ret;
+    }
 }

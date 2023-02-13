@@ -38,6 +38,8 @@ public class Ui {
     private final String line_seperation = "\t___________________________________"
             + "_________________________";
     private final String loading_error_message = "Error loading file from storage.";
+    private final String remind_message = "\tReminder about tasks:\n\t";
+    private final String empty_list_message = "\tNothing found!";
     /**
      * Constructor for <code>Duke</code>'s <code>Ui</code>.
      */
@@ -126,7 +128,14 @@ public class Ui {
         System.out.println(bye_message);
         return bye_message;
     }
-
+    /**
+     * Returns and prints <code>Duke</code>'s remind message.
+     * @return <code>Duke</code>'s remind message
+     */
+    public String showRemindMessage() {
+        System.out.println(remind_message);
+        return remind_message;
+    }
     /**
      * Returns and prints a numbered list <code>String</code>.
      * @param tasks <code>ArrayList</code> of <code>Task</code>s
@@ -139,10 +148,13 @@ public class Ui {
             toPrint += "\t" + (i) + ". " + t.toString() + "\n";
             i++;
         }
+        if (toPrint.equals("")) {
+            System.out.println(empty_list_message);
+            return empty_list_message;
+        }
         System.out.println((toPrint));
         return toPrint;
     }
-
     /**
      * Prints <code>Duke</code>'s error response message.
      */
@@ -150,7 +162,6 @@ public class Ui {
         System.out.println(e);
         return e;
     }
-
     /**
      * Prints out a line separation.
      */
@@ -164,7 +175,6 @@ public class Ui {
         System.out.println(loading_error_message);
         makeSeperation();
     }
-
     /**
      * Returns a formatted string of the number of items in a <code>TaskList</code>.
      * @param tl <code>TaskList</code> whose length to be measured

@@ -30,12 +30,15 @@ public class MainWindow extends AnchorPane {
     /**
      * Initialize <code>Duke</code> GUI
      */
-    @FXML
-    public void initialize() {
+    public void broadcastInitMessages() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greeting = Ui.showGreeting();
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(greeting, dukeImage)
+        );
+        String reminders = duke.getInitReminders();
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(reminders, dukeImage)
         );
     }
 
