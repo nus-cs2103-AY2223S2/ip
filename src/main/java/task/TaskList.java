@@ -29,6 +29,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     public String getTasksWanted(String... keywords) {
+        assert keywords.length >= 1 : "The number of input keywords should not be 0";
         String result = "";
         int count = 1;
         for (int i = 0; i < this.size(); i++) {
