@@ -114,16 +114,17 @@ public class Storage {
                 Task task = tasks.getTask(i);
 
                 StringBuilder text = new StringBuilder();
-                text.append(task.getType() + "|" + task.getStatusIcon() + "|");
+                text.append(task.getType()).append("|").append(task.getStatusIcon()).append("|");
 
                 if (task instanceof ToDo) {
-                    text.append(task.getDescription() + "\n");
+                    text.append(task.getDescription()).append("\n");
                 } else {
-                    text.append(task.getDescription() + "|");
+                    text.append(task.getDescription()).append("|");
                     if (task instanceof Deadline) {
-                        text.append(((Deadline) task).getBy() + "\n");
+                        text.append(((Deadline) task).getBy()).append("\n");
                     } else if (task instanceof Event) {
-                        text.append(((Event) task).getFrom() + "|" + ((Event) task).getTo() + "\n");
+                        text.append(((Event) task).getFrom()).append("|")
+                                .append(((Event) task).getTo()).append("\n");
                     }
                 }
                 fw.write(text.toString());

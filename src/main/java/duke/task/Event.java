@@ -63,6 +63,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString()
-                + " (from: " + from.format(OUTPUT_FORMATTER) + " to: " + to.format(OUTPUT_FORMATTER) + ")";
+                + " (from: " + from.format(OUTPUT_FORMATTER) + " to: "
+                + to.format(OUTPUT_FORMATTER) + ")";
     }
 }
