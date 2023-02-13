@@ -37,6 +37,12 @@ public class MainWindow extends AnchorPane implements Ui {
      */
     @FXML
     public void initialize() {
+        // Check that child nodes were initialized
+        assert (scrollPane != null);
+        assert (dialogueContainer != null);
+        assert (userInput != null);
+        assert (sendButton != null);
+
         scrollPane.vvalueProperty().bind(dialogueContainer.heightProperty());
         showReply(WELCOME);
     }
@@ -47,11 +53,10 @@ public class MainWindow extends AnchorPane implements Ui {
      */
     @FXML
     private void handleUserInput() {
-
         // Checks that gui properties have been successfully initialized.
-        assert(gui != null);
-        assert(gui.taskList != null);
-        assert(gui.storage != null);
+        assert (gui != null);
+        assert (gui.taskList != null);
+        assert (gui.storage != null);
 
         String userText = userInput.getText();
         if (userText.isEmpty()) {
