@@ -28,7 +28,6 @@ public class Storage {
 
     /**
      * Save the data from the arraylist into the txt file created/stored
-     *
      * @param tasks an arraylist of all the tasks
      */
     public void saveData(ArrayList<Task> tasks) throws IOException {
@@ -58,7 +57,6 @@ public class Storage {
 
     /**
      * A method to laod the data from the txt file to the arraylist
-     *
      * @param tasks an arraylist of all the tasks
      */
     public void loadData(ArrayList<Task> tasks) throws IOException {
@@ -99,7 +97,6 @@ public class Storage {
 
     /**
      * A method to delete all the contents in the arraylist and the txt file
-     *
      * @param tasks an arraylist of all the tasks
      * @throws IOException when the file cannot be found or created
      */
