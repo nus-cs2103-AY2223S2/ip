@@ -1,12 +1,9 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Parser;
 import duke.ui.Ui;
 
 /**
@@ -37,28 +34,25 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke functionality.
+     * Get Duke's response.
+     * @param input String input by user.
+     * @return Duke's response.
      */
-    public void run() {
-        Scanner s = new Scanner(System.in);
-        String text;
-        boolean isExit = false;
-
-        ui.printWelcome();
-
-        while (!isExit) {
-            text = s.nextLine();
-            try {
-                Command c = parser.parse(text);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.print(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    /**
+     * Get welcome message.
+     *
+     * @return Welcome message
+     */
+    public String getWelcomeMessage() {
+        return ui.getWelcomeMessage();
     }
 }

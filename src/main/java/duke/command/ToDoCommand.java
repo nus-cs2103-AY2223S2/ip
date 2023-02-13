@@ -23,10 +23,10 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new ToDo(taskName);
         taskList.addTask(newTask);
-        ui.printAddTaskMessage(newTask, taskList.getCount());
         storage.saveTaskList(taskList);
+        return ui.getAddTaskMessage(newTask, taskList.getCount());
     }
 }
