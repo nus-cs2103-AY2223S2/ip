@@ -32,14 +32,13 @@ public class Controller {
     }
 
     public void setSaturday(Saturday saturday) {
+        assert saturday != null : "Saturday instance should not be null";
         this.saturday = saturday;
         updateTaskList();
     }
 
     private void updateTaskList() {
         TaskList taskList = saturday.getTaskList();
-        int size = taskList.size();
-        System.out.println(size);
 
         try {
             taskListContainer.getChildren().clear();
@@ -56,6 +55,7 @@ public class Controller {
     @FXML
     private void handleCommand() {
         String input = commandField.getText();
+        assert input != null : "Input should not be null";
         String response = saturday.getResponse(input);
         updateTaskList();
         responseField.setText(response);
@@ -65,6 +65,7 @@ public class Controller {
     @FXML
     private void handleExitButtonAction() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
+        assert stage != null : "Stage should not be null";
         stage.close();
     }
 }
