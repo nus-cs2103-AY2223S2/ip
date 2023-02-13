@@ -76,7 +76,7 @@ public class AddCommand extends Command {
             newList = tasks.showList();
             return ui.showTask(newTodoString, tasks.size(), newList);
         default:
-            throw new DukeException("could not add task");
+            throw new DukeException("could not add task ^.~");
         }
     }
 }

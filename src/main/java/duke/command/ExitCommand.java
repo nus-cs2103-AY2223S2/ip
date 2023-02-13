@@ -23,7 +23,7 @@ public class ExitCommand extends Command {
             //load tasks into storage file
             storage.save(tasks.getTasksToSave());
         } catch (IOException e) {
-            throw new DukeException("unable to save tasks");
+            throw new DukeException("unable to save tasks ^.~)");
         }
         //print exit message
         return ui.sayGoodbye();

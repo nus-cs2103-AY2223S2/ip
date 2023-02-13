@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         //removes task with task number of indexOfTaskToDelete from tasks and returns its string
         if (indexOfTaskToDelete >= tasks.size() || indexOfTaskToDelete < 0) {
-            throw new DukeException("invalid task number provided");
+            throw new DukeException("invalid task number provided (ㆆ_ㆆ)");
         }
         return tasks.delete(indexOfTaskToDelete);
     }

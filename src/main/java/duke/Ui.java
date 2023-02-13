@@ -32,7 +32,7 @@ public class Ui {
      * @param errorMessage the error message
      */
     public static String showError(String errorMessage) {
-        return "☹ OOPS!!! " + errorMessage;
+        return "ahhhhh!!! " + errorMessage;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Ui {
      * Shows loading error.
      */
     public static void showLoadingError() {
-        showError("an error occurred while loading file from given filepath");
+        showError("an error occurred while loading file from given filepath (⊙.⊙(☉̃ₒ☉)⊙.⊙)");
     }
 
     /**
@@ -68,7 +68,7 @@ public class Ui {
      * Says goodbye.
      */
     public static String sayGoodbye() {
-        return "Bye. Hope to see you again soon!";
+        return "byeeee. hope to see you again soon! (ɔ◔‿◔)ɔ ♥";
     }
 
     /**

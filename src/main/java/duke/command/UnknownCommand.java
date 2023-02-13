@@ -12,7 +12,7 @@ public class UnknownCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("i'm sorry, but I don't know what that means :(((");
     }
 
 }

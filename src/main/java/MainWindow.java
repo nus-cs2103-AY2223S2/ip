@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.setStyle("-fx-background-image: url(\"/images/wallpaper.jpg\"); ");
 
         //show welcome message
-        String welcome = "Hello! I'm EggDuke. What can I do for you??";
+        String welcome = "Hello! I'm EggDuke. What can I do for you?? (- _ - ) zzZ";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, dukeImage)
         );
