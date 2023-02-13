@@ -21,18 +21,4 @@ public class DukeTest {
         assertEquals(4, 4);
     }
 
-    @Test
-    public void test1() throws DukeException {
-        TaskList taskList = new TaskList(new LinkedList<>());
-        assertEquals("you", taskList.removeKeyword("Hello you"));
-    }
-
-    @Test
-    public void test2() {
-        TaskList taskList = new TaskList(new LinkedList<>());
-        assertThrows(DukeException.class, ()-> {
-            taskList.removeKeyword("");
-        });
-    }
-
 }

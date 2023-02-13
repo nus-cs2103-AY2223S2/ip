@@ -3,17 +3,6 @@ package duke;
 import task.Task;
 
 public class Ui {
-
-    public static final String byeKeyword = "bye";
-    public static final String deadlineTaskKeyword = "deadline";
-    public static final String deleteKeyword = "delete";
-    public static final String eventTaskKeyword = "event";
-    public static final String findKeyword = "find";
-    public static final String listKeyword = "list";
-    public static final String markKeyword = "mark";
-    public static final String toDoTaskKeyword = "todo";
-    public static final String unMarkKeyword = "unmark";
-
     public static final String noKeywordMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String goodbyeMessage = "Good Riddance!!!";
     public static final String emptyDetailsForToDoMessage = "EXCUSE ME!!!, 'ToDo' details cannot be empty";

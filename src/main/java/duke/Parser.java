@@ -39,37 +39,37 @@ public class Parser {
 
         String[] arr = userInput.split(" ", 2);
 
-        if (arr[0].equals(Ui.byeKeyword)) {
+        if (arr[0].equals(DukeKeyword.EXIT)) {
             return new CommandBye();
         }
-        if (arr[0].equals(Ui.listKeyword)) {
+        if (arr[0].equals(DukeKeyword.VIEW_LIST)) {
             return new CommandList(taskList);
         }
-        if (arr[0].equals(Ui.markKeyword)) {
+        if (arr[0].equals(DukeKeyword.MARK_TASK)) {
             String index = arr[1];
             return new CommandMark(taskList, index);
         }
-        if (arr[0].equals(Ui.unMarkKeyword)) {
+        if (arr[0].equals(DukeKeyword.UNMARK_TASK)) {
             String index = arr[1];
             return new CommandUnMark(taskList, index);
         }
-        if (arr[0].equals(Ui.deleteKeyword)) {
+        if (arr[0].equals(DukeKeyword.DELETE_TASK)) {
             String index = arr[1];
             return new CommandDelete(taskList, index);
         }
-        if (arr[0].equals(Ui.toDoTaskKeyword)) {
+        if (arr[0].equals(DukeKeyword.ADD_TODO_TASK)) {
             String taskDetails = arr[1];
             return new CommandToDo(taskList, taskDetails);
         }
-        if (arr[0].equals(Ui.deadlineTaskKeyword)) {
+        if (arr[0].equals(DukeKeyword.ADD_DEADLINE_TASK)) {
             String taskDetails = arr[1];
             return new CommandDeadline(taskList, taskDetails);
         }
-        if (arr[0].equals(Ui.eventTaskKeyword)) {
+        if (arr[0].equals(DukeKeyword.ADD_EVENT_TASK)) {
             String taskDetails = arr[1];
             return new CommandEvent(taskList, taskDetails);
         }
-        if (arr[0].equals(Ui.findKeyword)) {
+        if (arr[0].equals(DukeKeyword.FIND)) {
             String phrase = arr[1];
             return new CommandFind(taskList, phrase);
         }
