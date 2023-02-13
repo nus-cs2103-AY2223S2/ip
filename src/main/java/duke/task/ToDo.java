@@ -2,7 +2,7 @@ package duke.task;
 
 /**
  * ToDo: subclass of Task
- *
+ * <p>
  * author Guo-KeCheng
  */
 public class ToDo extends Task {
@@ -20,7 +20,7 @@ public class ToDo extends Task {
     /**
      * ToDo class constructor
      *
-     * @param task Task description as String
+     * @param task        Task description as String
      * @param isCompleted Completion status. True -> Completed. False -> Not Completed
      */
     public ToDo(String task, boolean isCompleted) {
@@ -65,6 +65,19 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public int compareTo(Task anotherTask) {
+        if (anotherTask instanceof ToDo) {
+            return -1;
+        } else if (anotherTask instanceof Deadline) {
+            return -1;
+        } else if (anotherTask instanceof Event) {
+            return -1;
+        } else {
+            return 0; // never reach here
+        }
     }
 
 }

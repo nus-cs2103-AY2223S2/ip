@@ -1,18 +1,21 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * Task that tracks general info and completion status
- *
+ * <p>
  * author Guo-KeCheng
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     private boolean isCompleted; //by default the task should not be completed
     private final String task;
 
     /**
      * Task constructor
      *
-     * @param task Description of task
+     * @param task        Description of task
      * @param isCompleted Completion status
      */
     public Task(String task, boolean isCompleted) {
@@ -85,6 +88,51 @@ public abstract class Task {
 
     public boolean containsKeyword(String keyword) {
         return this.task.contains(keyword);
+    }
+
+    public LocalDateTime getFirstEnd() {
+        LocalDateTime startTime;
+
+        if (this instanceof Deadline) {
+            startTime = ((Deadline) this).getEndDate();
+        } else if (this instanceof Event) {
+            startTime = ((Event) this).getStartDate();
+        } else {
+            // Won't reach here
+            startTime = null;
+        }
+
+        return startTime;
+    }
+
+    public LocalDateTime getSecondStart() {
+        LocalDateTime startTime;
+
+        if (this instanceof Deadline) {
+            startTime = ((Deadline) this).getEndDate();
+        } else if (this instanceof Event) {
+            startTime = ((Event) this).getStartDate();
+        } else {
+            // Won't reach here
+            startTime = null;
+        }
+
+        return startTime;
+    }
+
+    public LocalDateTime getSecondEnd() {
+        LocalDateTime startTime;
+
+        if (this instanceof Deadline) {
+            startTime = ((Deadline) this).getEndDate();
+        } else if (this instanceof Event) {
+            startTime = ((Event) this).getEndDate();
+        } else {
+            // Won't reach here
+            startTime = null;
+        }
+
+        return startTime;
     }
 
     /**

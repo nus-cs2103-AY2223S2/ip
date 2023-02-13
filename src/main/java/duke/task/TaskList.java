@@ -1,6 +1,13 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
@@ -75,12 +82,71 @@ public class TaskList implements Iterable<Task> {
      *
      * @return String representation of list of tasks
      */
-    public String listify() {
+    public String toList() {
         return taskList.stream()
                 .map(Task::toString)
                 .collect(Collectors.joining("\n"));
     }
 
+    public TaskList sortList() {
+        ArrayList<Task> arrayList = new ArrayList<>(taskList.stream().sorted().collect(Collectors.toList()));
+
+        return new TaskList(arrayList);
+    }
+
+
+    public LocalDateTime seekAvailability(int quantifier, String unitOfTime) throws DukeException {
+        TaskList sortedList = sortList();
+
+        LocalDateTime result = null;
+
+        for (int i = 0; i < sortedList.size() - 1; i++) {
+            Task startTask = sortedList.get(i);
+            Task endTask = sortedList.get(i + 1);
+
+            if (startTask instanceof ToDo) {
+                break;
+            }
+
+            if (endTask instanceof ToDo) {
+                result = startTask.getSecondEnd();
+                break;
+            }
+
+            LocalDateTime firstEnd = startTask.getFirstEnd();
+            LocalDateTime secondStart = endTask.getSecondStart();
+
+            if (firstEnd.isAfter(secondStart)) {
+                result = endTask.getSecondEnd();
+                break;
+            }
+
+            long duration;
+            switch (unitOfTime) {
+            case "days":
+                duration = firstEnd.until(secondStart, ChronoUnit.DAYS);
+                break;
+            case "hours":
+                duration = firstEnd.until(secondStart, ChronoUnit.HOURS);
+                break;
+            case "minutes":
+                duration = firstEnd.until(secondStart, ChronoUnit.MINUTES);
+            default:
+                duration = -1;
+            }
+
+            if (duration >= quantifier) {
+                result = secondStart;
+            }
+
+        }
+
+        if (result == null) {
+            throw new DukeException("You can get started right away.");
+        } else {
+            return result;
+        }
+    }
 
     @Override
     public Iterator<Task> iterator() {
