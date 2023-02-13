@@ -1,6 +1,7 @@
 package nemo.task;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import nemo.exception.NemoException;
 
@@ -14,13 +15,17 @@ import nemo.exception.NemoException;
 public class TaskList {
     protected ArrayList<Task> taskList;
     protected int taskCount;
+    protected Stack<String> undoStates;
+    protected Stack<String> redoStates;
 
     /**
      * Constructs new TaskList.
      */
     public TaskList() {
-        this.taskCount = 0;
-        this.taskList = new ArrayList<>();
+        taskCount = 0;
+        taskList = new ArrayList<>();
+        undoStates = new Stack<>();
+        redoStates = new Stack<>();
     }
 
     /**
@@ -38,10 +43,11 @@ public class TaskList {
      * @param task New task to be added.
      */
     public void addTask(Task task) {
-        this.taskList.add(task);
+        undoStates.push(this.encode());
+        redoStates.clear();
+        taskList.add(task);
         taskCount++;
     }
-
 
     /**
      * Deletes a task.
@@ -53,8 +59,10 @@ public class TaskList {
     public Task deleteTask(int taskNumber) throws NemoException {
         assert taskNumber > 0 && taskNumber <= taskCount : "index should be positive and within range";
         try {
-            Task deletedTask = this.taskList.get(taskNumber - 1);
-            this.taskList.remove(taskNumber - 1);
+            undoStates.push(this.encode());
+            redoStates.clear();
+            Task deletedTask = taskList.get(taskNumber - 1);
+            taskList.remove(taskNumber - 1);
             taskCount--;
             return deletedTask;
         } catch (IndexOutOfBoundsException e) {
@@ -72,7 +80,9 @@ public class TaskList {
     public Task markTask(int taskNumber) throws NemoException {
         assert taskNumber > 0 && taskNumber <= taskCount : "index should be positive and within range";
         try {
-            Task task = this.taskList.get(taskNumber - 1);
+            undoStates.push(this.encode());
+            redoStates.clear();
+            Task task = taskList.get(taskNumber - 1);
             task.markDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
@@ -90,7 +100,9 @@ public class TaskList {
     public Task unmarkTask(int taskNumber) throws NemoException {
         assert taskNumber > 0 && taskNumber <= taskCount : "index should be positive and within range";
         try {
-            Task task = this.taskList.get(taskNumber - 1);
+            undoStates.push(this.encode());
+            redoStates.clear();
+            Task task = taskList.get(taskNumber - 1);
             task.unmarkDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
@@ -106,8 +118,8 @@ public class TaskList {
     public String listTasks() {
         String result = "";
         result += "Here are the tasks in your list:\n";
-        for (int i = 0; i < this.taskCount; i++) {
-            result += String.format("%d. %s \n", i + 1, this.taskList.get(i));
+        for (int i = 0; i < taskCount; i++) {
+            result += String.format("%d. %s \n", i + 1, taskList.get(i));
         }
         return result;
     }
@@ -120,10 +132,26 @@ public class TaskList {
      */
     public String encode() {
         String result = "";
-        for (int i = 0; i < this.taskCount; i++) {
-            result += String.format("%s\n", this.taskList.get(i).encode());
+        for (int i = 0; i < taskCount; i++) {
+            result += String.format("%s\n", taskList.get(i).encode());
         }
         return result;
+    }
+
+    /**
+     * Decodes an encoded String representation of TaskList.
+     *
+     * @param encodedString Encoded String representation of TaskList.
+     * @return An ArrayList of Tasks decoded from String.
+     * @throws NemoException when an invalid String is encountered.
+     */
+    public ArrayList<Task> decode(String encodedString) throws NemoException {
+        ArrayList<Task> output = new ArrayList<>();
+        String[] splitStrings = encodedString.split("\n");
+        for (String str : splitStrings) {
+            output.add(Task.decode(str));
+        }
+        return output;
     }
 
     /**
@@ -134,7 +162,7 @@ public class TaskList {
      */
     public void loadTasks(ArrayList<Task> taskList) {
         this.taskList = taskList;
-        this.taskCount = taskList.size();
+        taskCount = taskList.size();
     }
 
     /**
@@ -148,15 +176,47 @@ public class TaskList {
         String result = "";
         result += "Here are the matching tasks in your list:\n";
         int counter = 0;
-        for (int i = 0; i < this.taskCount; i++) {
+        for (int i = 0; i < taskCount; i++) {
             for (String str : strings) {
-                if (this.taskList.get(i).getTaskName().contains(str)) {
+                if (taskList.get(i).getTaskName().contains(str)) {
                     counter++;
-                    result += String.format("%d. %s \n", counter, this.taskList.get(i));
+                    result += String.format("%d. %s \n", counter, taskList.get(i));
                     break;
                 }
             }
         }
         return result;
+    }
+
+    /**
+     * Undoes the previous change made to TaskList.
+     *
+     * @return True if successfully undone.
+     * @throws NemoException when error encountered during encoding.
+     */
+    public boolean undo() throws NemoException {
+        if (!undoStates.isEmpty()) {
+            redoStates.push(this.encode());
+            String prevState = undoStates.pop();
+            this.loadTasks(this.decode(prevState));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Redoes previously undone change.
+     *
+     * @return True if successfully redone.
+     * @throws NemoException when error encountered during encoding.
+     */
+    public boolean redo() throws NemoException {
+        if (!redoStates.isEmpty()) {
+            undoStates.push(this.encode());
+            String redoState = redoStates.pop();
+            this.loadTasks(this.decode(redoState));
+            return true;
+        }
+        return false;
     }
 }

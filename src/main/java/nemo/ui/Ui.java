@@ -126,4 +126,24 @@ public class Ui {
         return "OK, I've marked this task as not done yet: \n" + task;
     }
 
+    /**
+     * Get undo message.
+     *
+     * @param didUndo Boolean representing successful undo.
+     * @return Undo message.
+     */
+    public String getUndoMessage(boolean didUndo) {
+        return didUndo ? "Okay, I have undone your previous change" : "There is nothing to be undone";
+    }
+
+    /**
+     * Get redo message.
+     *
+     * @param didRedo Boolean representing successful redo.
+     * @return Redo message.
+     */
+    public String getRedoMessage(boolean didRedo) {
+        return didRedo ? "Sure, I have redone your previous change" : "There is nothing to redo";
+    }
+
 }

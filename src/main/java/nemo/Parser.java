@@ -9,7 +9,9 @@ import nemo.command.ExitCommand;
 import nemo.command.FindCommand;
 import nemo.command.ListCommand;
 import nemo.command.MarkCommand;
+import nemo.command.RedoCommand;
 import nemo.command.ToDoCommand;
+import nemo.command.UndoCommand;
 import nemo.command.UnmarkCommand;
 import nemo.exception.NemoException;
 
@@ -38,6 +40,12 @@ public class Parser {
             break;
         case LIST:
             c = new ListCommand();
+            break;
+        case REDO:
+            c = new RedoCommand();
+            break;
+        case UNDO:
+            c = new UndoCommand();
             break;
         case MARK:
             int index = Parser.parseMarkOrDeleteCommands(userInput);

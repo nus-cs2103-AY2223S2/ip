@@ -6,5 +6,5 @@ package nemo.command;
  * @author Lian Kok Hai
  */
 public enum Commands {
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
+    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, UNDO, REDO
 }

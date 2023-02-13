@@ -2,7 +2,6 @@ package nemo.ui;
 
 import java.io.IOException;
 
-import nemo.Nemo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import nemo.Nemo;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

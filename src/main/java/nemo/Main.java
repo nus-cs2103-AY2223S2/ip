@@ -1,11 +1,11 @@
 package nemo;
 
-import nemo.ui.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import nemo.ui.MainWindow;
 
 /**
  * A GUI for Nemo using FXML.
