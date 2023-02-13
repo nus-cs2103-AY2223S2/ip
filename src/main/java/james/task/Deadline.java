@@ -8,7 +8,7 @@ public class Deadline extends Task {
     /** Time in d/MM/yyyy HHmm format */
     protected LocalDateTime by;
     /**
-     * Constructor for Deadline.
+     * Constructs a Deadline Object.
      * @param description     The task description.
      * @param by The deadline of the task.
      * @throws DateTimeParseException If the deadline is not in the correct format.

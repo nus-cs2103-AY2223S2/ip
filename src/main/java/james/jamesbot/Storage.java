@@ -25,7 +25,7 @@ public class Storage {
     String filePath = "storage/data/james.txt";
 
     /**
-     * Constructor for Storage object.
+     * Constructs a Storage object.
      */
     public Storage() throws JamesException {
         try {
@@ -86,9 +86,6 @@ public class Storage {
                     event.setIsDone(task[1].equals("1"));
                     taskList.add(event);
                     break;
-                }
-                if (task[1].equals("1")) {
-                    taskList.markTask(taskList.getTaskList().size() - 1);
                 }
             }
             scan.close();

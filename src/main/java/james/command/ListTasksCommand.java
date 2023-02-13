@@ -1,6 +1,6 @@
 package james.command;
 
-import james.exception.JamesException;
+
 import james.jamesbot.Storage;
 import james.task.TaskList;
 import james.jamesbot.Ui;
@@ -10,6 +10,10 @@ import james.jamesbot.Ui;
  * Lists all the tasks in the task list.
  */
 public class ListTasksCommand extends Command {
+    public static final String COMMAND_WORD = "list";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": prints out all of your tasks.";
+
     /**
      * Executes the ListCommand which is to list all tasks stored in user's hard disk.
      *
@@ -17,8 +21,8 @@ public class ListTasksCommand extends Command {
      * @param ui The ui to print out JamesBot's response.
      * @param storage The task list that is stored in the user's hard disk.
      */
-    public String execute (TaskList tasks, Ui ui, Storage storage) {
-        return ui.listTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.displayTasks(tasks);
     }
 
     /**

@@ -8,18 +8,12 @@ public class TaskList {
     public ArrayList<Task> taskList;
 
     /**
-     * Constructor for TaskList object.
+     * Constructs a TaskList object.
      */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
-    public Task getTask(int index) {
-        return taskList.get(index);
-    }
 
-    public void markTask(int index) {
-        taskList.get(index).markDone();
-    }
 
     public ArrayList<Task> getTaskList() {
         return taskList;
@@ -96,11 +90,6 @@ public class TaskList {
 
         return taskString;
     }
-    public int getSize() {
-        return taskList.size();
-    }
-
-
 
 
     /**
