@@ -81,11 +81,4 @@ public abstract class Command {
      */
     public abstract String execute() throws DukeException;
 
-    /**
-     * Returns if this command should exit Duke
-     * @return True if this command should shut down Duke
-     */
-    public boolean shouldTerminate() {
-        return false;
-    }
 }

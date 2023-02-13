@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.DukeException;
 
 /**
@@ -20,15 +23,14 @@ public class ByeCommand extends Command {
 
     @Override
     public String execute() throws DukeException {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 500L);
+
         return "Till next time...";
     }
 
-    /**
-     * Returns true here as this command should close Duke after
-     * @return True to terminate Duke
-     */
-    @Override
-    public boolean shouldTerminate() {
-        return true;
-    }
 }
