@@ -1,13 +1,13 @@
 package duke.task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.Parser;
 import duke.Ui;
 
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.time.format.DateTimeParseException;
+
 
 /**
  * Encapsulates an arraylist of Task with the various methods
@@ -129,8 +129,8 @@ public class TaskList {
                 }
                 if (t instanceof Event) {
                     Event temp = (Event) t;
-                    if (temp.begin.toLocalDate().equals(date) ||
-                            temp.end.toLocalDate().equals(date)) {
+                    if (temp.begin.toLocalDate().equals(date)
+                            || temp.end.toLocalDate().equals(date)) {
                         res += temp + "\n";
                     }
                 }
@@ -138,7 +138,6 @@ public class TaskList {
             return res;
         } catch (Exception e) {
             return e.getMessage();
-                    //"OOPS!!! Unrecognizable formet\n Please write it in this format: view yyyy-MM-dd";
         }
     }
 
@@ -158,7 +157,7 @@ public class TaskList {
         } catch (DateTimeParseException e) {
             return Ui.wrongDateFormat();
         } catch (Exception e) {
-          return "OOPS!!! Insufficient information or wrong format.";
+            return "OOPS!!! Insufficient information or wrong format.";
         }
     }
 

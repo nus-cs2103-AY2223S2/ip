@@ -10,6 +10,13 @@ public class Event extends Task {
     protected LocalDateTime begin;
     protected LocalDateTime end;
 
+    /**
+     * Initializes a new Event
+     * @param description description of event
+     * @param begin date and time when the event starts
+     * @param end date and time when the event ends
+     * @param isDone whether the event is completed
+     */
     public Event(String description, String begin, String end, Boolean isDone) {
         super(description, isDone);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

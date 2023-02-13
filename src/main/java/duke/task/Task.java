@@ -1,5 +1,4 @@
 package duke.task;
-
 import java.io.Serializable;
 
 /**
@@ -9,6 +8,11 @@ public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initializes a task
+     * @param description description of task
+     * @param isDone boolean whether task is completed
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -29,7 +33,6 @@ public class Task implements Serializable {
      * Mark a task as not done
      */
     public void unmark() {
-
         this.isDone = false;
     }
 

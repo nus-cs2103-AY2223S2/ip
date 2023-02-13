@@ -1,5 +1,7 @@
 package duke;
+import duke.task.TaskList;
 import java.util.ArrayList;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,11 +11,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
-import duke.task.TaskList;
 
 /**
  * A Duke class
@@ -29,7 +31,11 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/scottie.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/scottie.jpg"));
+    private Boolean isExit = false;
 
+    /**
+     * Initializes a duke task
+     */
     public Duke() {
         ui = new Ui();
         try {
@@ -39,7 +45,7 @@ public class Duke extends Application {
         }
     }
 
-    private void handleUserInput() {
+    private void handleUserInput(Stage stage) {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -47,6 +53,11 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+        if (this.isExit) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished(event -> stage.close());
+            delay.play();
+        }
     }
 
     private String getResponse(String input) {
@@ -75,7 +86,6 @@ public class Duke extends Application {
                 new DialogBox(userText, new ImageView(user))
         );
 
-        //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -90,7 +100,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -105,19 +114,12 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
-
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
     }
 
     /**
@@ -128,6 +130,7 @@ public class Duke extends Application {
         switch (firstWord) {
         case "bye":
             Storage.saveToFile(tasks.getList());
+            this.isExit = true;
             return ui.showBye();
 
         case "list":

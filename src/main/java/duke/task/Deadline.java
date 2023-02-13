@@ -9,7 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDateTime deadline;
 
-
+    /**
+     * Initializes a deadline task
+     * @param description Description of a deadline task
+     * @param deadline deadline of task
+     * @param isDone whether task is completed
+     */
     public Deadline(String description, String deadline, boolean isDone) {
         super(description, isDone);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

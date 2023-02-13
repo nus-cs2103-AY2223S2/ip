@@ -37,7 +37,7 @@ public class Ui {
      * Prints a goodbye message
      */
     public String showBye() {
-        return "Bye. Hope to see you again soon!";
+        return "Exiting...\n Bye. Hope to see you again soon!";
     }
 
     /**

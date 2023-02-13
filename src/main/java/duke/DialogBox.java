@@ -1,5 +1,4 @@
 package duke;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -16,6 +15,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Initializes a dialogue box
+     * @param l label
+     * @param iv ImageView
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -28,6 +32,9 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 
+    /**
+     * Flips dialogue box from left to right
+     */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -44,5 +51,4 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-
 }
