@@ -30,6 +30,7 @@ public class Parser {
      */
     public Command parse(String userInput) throws NemoException {
         Commands command = Parser.getCommand(userInput);
+        assert command != null : "parsed command cannot be null";
         Command c = null;
         switch (command) {
         case BYE:
