@@ -1,5 +1,6 @@
 public class Task {
     public static final String HORIZONTAL_LINE = "    ____________________________________________________________";
+    public static int BRACKET_LENGTH = 3;
 
     public String description;
     public int id;

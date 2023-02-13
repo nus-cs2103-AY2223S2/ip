@@ -8,6 +8,6 @@ public class Todo extends Task {
     public String toString() {
 //        return "[T]" + super.toString().replaceFirst("[]", "");
 //        should use regular expression to avoid magic number, but haven't figured out how to do
-        return "[T]" + super.toString().substring(3);
+        return "[T]" + super.toString().substring(BRACKET_LENGTH);
     }
 }
