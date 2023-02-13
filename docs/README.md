@@ -328,6 +328,7 @@ Shows Kuromi's notebook `Kuromi Note` that contains a list of My Melody's mistak
 **A**: Install the application in the other computer and replace the empty data file it creates with the file that contains the data you want to transfer.
 
 ## Command Summary
+
 | Action | Format | Examples |
 | ----- | ------ | ----- |
 | Add ToDo | `todo <description>` | `todo borrow book` |
