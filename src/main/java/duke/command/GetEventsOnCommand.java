@@ -2,8 +2,10 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidDateException;
 import duke.task.TaskList;
 
 /**
@@ -21,7 +23,12 @@ public class GetEventsOnCommand {
         if (input.length() < 12) {
             throw new DukeException("Date input in the format of YYYY-MM-DD required!");
         }
-        LocalDate date = LocalDate.parse(input.substring(11).trim());
+        LocalDate date = null;
+        try {
+            date = LocalDate.parse(input.substring(11).trim());
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
         return "Here are the deadlines/events on "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ":\n" + tasks.listAllOnDate(date);
