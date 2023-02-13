@@ -1,13 +1,21 @@
 package skittles;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.HashMap;
 
 public class ListOfStuff {
 
     private static ArrayList<Task> skittlesList;
+    private static Data data;
 
-    public ListOfStuff(ArrayList<Task> skittlesList) {
+    private static HashMap<String, Boolean> taskHashMap;
+
+
+    public ListOfStuff(ArrayList<Task> skittlesList, Data data) {
+
         this.skittlesList = skittlesList;
+        this.data = data;
+        this.taskHashMap = new HashMap<>();
     }
 
     public static void add(Task task) {
@@ -19,17 +27,17 @@ public class ListOfStuff {
      * Tasks are ordered from least recent to most recent. If no tasks have been given to Skittles,
      * the appropriate message is shown.
      */
-    public static void displayLst() {
+    public static String displayLst() {
 
         String textToDisplayLst = "Here are the tasks in your list:";
         String textForEmptyLst = "Hey looks like your list is empty man!";
         if (skittlesList == null) {
-            System.out.println(textForEmptyLst);
+            return textForEmptyLst;
         } else {
             for (int i = 0; i < skittlesList.size(); i++) {
                 textToDisplayLst += "\n" + (i + 1) + "." + skittlesList.get(i).toString();
             }
-            System.out.println(textToDisplayLst);
+            return textToDisplayLst;
         }
     }
 
@@ -110,12 +118,16 @@ public class ListOfStuff {
                 + " tasks in the list");
     }
 
+    /**
+     * Updates the skittlesList.
+     * @throws SkittlesException if cannot be updated.
+     */
     public static void refresh() throws SkittlesException {
         Data.updateTaskInTxt(skittlesList);
     }
 
     /**
-     * Searches the entire dukeList for Tasks that contain the keyword.
+     * Searches the entire skittlesList for Tasks that contain the keyword.
      * @param wordUserIsSearching User input that they wish to search for.
      * @return An ArrayList of Tasks that contain the keyword.
      */
@@ -131,6 +143,47 @@ public class ListOfStuff {
 
     public static ArrayList<Task> getSkittlesList() {
         return ListOfStuff.skittlesList;
+    }
+
+    public int getSize() {
+        return skittlesList.size();
+    }
+
+    public Task removeTask(int i) {
+        return skittlesList.remove(i);
+    }
+
+    /**
+     * Check if skittlesList is empty.
+     *
+     * @return Boolean relating to if skittlesList is empty or not.
+     */
+    public boolean isEmpty() {
+        return skittlesList.isEmpty();
+    }
+
+    /**
+     * Checks if task is in the list that skittles has.
+     * @param task Task that is to be checked with.
+     * @return A boolean that will equal true should the task be found.
+     */
+    public static boolean contains(Task task) {
+        for (Task t : skittlesList) {
+            if (t.toString().equals(task.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Return Task at index i of skittlesList
+     *
+     * @param i index of task in skittlesList.
+     * @return Task
+     */
+    public Task getTask(int i) {
+        return skittlesList.get(i);
     }
 
     public static int numOfThings() {

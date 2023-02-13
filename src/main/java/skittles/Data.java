@@ -7,7 +7,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
-    public static final File info = new File("./data/data.txt");
+    //public static final File info = new File("./data/data.txt");
+
+    private static File info;
+    private final String filePath;
+
+    /**
+     * Constructor for Data.
+     * @param filePath takes in a String specifying file path.
+     */
+    public Data(String filePath) {
+        info = new File(filePath);
+        this.filePath = filePath;
+    }
 
     /**
      * Loads the Tasks stored in the form of an ArrayList<Task>.
@@ -16,11 +28,11 @@ public class Data {
     public static ArrayList<Task> loadUpInfo() {
 
         try {
-            Scanner userTyped = new Scanner(info);
+            Scanner scanner = new Scanner(info);
             ArrayList<Task> addedTasks = new ArrayList<>();
-            while (userTyped.hasNext()) {
+            while (scanner.hasNext()) {
                 try {
-                    addedTasks.add(convertTextToTasks(userTyped.nextLine()));
+                    addedTasks.add(convertTextToTasks(scanner.nextLine()));
                 } catch (IllegalStateException e) {
                     System.err.println(e);
                 }

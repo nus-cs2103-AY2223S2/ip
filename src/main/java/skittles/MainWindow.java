@@ -32,9 +32,6 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(d.getGreetingsFromSkittles(),dukeImage)
-        );
     }
 
     /**
@@ -50,5 +47,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * Creates one dialog that echoes user input and one for Duke's output then appends them to
+     * dialog container.
+     */
+    @FXML
+    public void printMessage(String message) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(message, dukeImage)
+        );
     }
 }

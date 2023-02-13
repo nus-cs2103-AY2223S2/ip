@@ -1,8 +1,9 @@
 package skittles;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
+import skittles.instruction.Instruction;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -23,8 +24,17 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 public class Duke extends Application {
-    public Duke() {}
+
+    private Parser parser;
+    private ListOfStuff list;
+    private final Scanner sc = new Scanner(System.in);
+    public Duke(String filePath) {
+        Data data = new Data(filePath);
+        list = new ListOfStuff(data.loadUpInfo(),data);
+        parser = new Parser(list,data);
+    }
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -44,7 +54,7 @@ public class Duke extends Application {
     //keeping track of number of things in list
     //static int numOfThings = 0;
 
-    private static final ListOfStuff lstOfTasks = new ListOfStuff(Data.loadUpInfo());
+    //private static final ListOfStuff lstOfTasks = new ListOfStuff(Data.loadUpInfo());
 
     //method to greet
     public void hello() {
@@ -64,11 +74,14 @@ public class Duke extends Application {
      * @param userTyped User's input
      * @return The correct command that is interpreted from the user input.
      */
+    /*
     public static Instruction inputToInstruction(String userTyped) {
         String[] typed = userTyped.split(" ", 2);
         return Instruction.scanUserTyped(typed[0]);
     }
+    */
     /*
+
             public static void addStufftoLst(String xx) {
                 lstOfTasks.add(new Task(xx));
                 numOfThings += 1;
@@ -126,6 +139,7 @@ public class Duke extends Application {
      * @param userTyped The entire String that the user has input i.e. "todo xxx".
      * @throws SkittlesException If an incorrect input is entered.
      */
+    /*
     public void addAToDo(String userTyped) throws SkittlesException {
         //firstly we check if the user only inputted one word "todo"
         if (userTyped.split(" ",2).length == 1) {
@@ -139,12 +153,15 @@ public class Duke extends Application {
         System.out.println("Got it. I've added this task:\n" + mustDo.toString() +
                 "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list.");
     }
+/*
 
+     */
     /**
      * Adds a Deadline to all Tasks that Skittles has stored.
      * @param userTyped The entire String that the user has input i.e. "deadline xxx /by yyy".
      * @throws SkittlesException If an incorrect input is entered.
      */
+    /*
     public void addTimeSensitive(String userTyped) throws SkittlesException {
         // First check if the user has only input the one word "deadline".
         if (userTyped.split(" ", 2).length == 1) {
@@ -162,12 +179,13 @@ public class Duke extends Application {
         Data.addInsideFile(newDeadline);
         System.out.println("Got it. I've added this task:\n" + newDeadline.toString() + "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list");
     }
-
+*/
     /**
      * Adds an Event to all Tasks that Skittles has stored.
      * @param userTyped The entire String that the user has input i.e. "event xxx /from yyy /to zzz".
      * @throws SkittlesException If an incorrect input is entered.
      */
+    /*
     public void addAnEvent(String userTyped) throws SkittlesException {
         //Start by checking if user only inputted one word "event"
         if (userTyped.split(" ",2).length == 1) {
@@ -192,12 +210,13 @@ public class Duke extends Application {
         System.out.println("Got it. I've added this task:\n" + suitAndTie.toString() +
                 "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list");
     }
-
+*/
     /**
      * Lists out all the Tasks that contains the input given by the user.
      * @param userTyped Given by the user
      * @throws SkittlesException No matches found error.
      */
+    /*
     public void find(String userTyped) throws SkittlesException {
         if (userTyped.split(" ", 2).length == 1) {
             throw new SkittlesException("Hey man you're missing the keyword you wish to search!");
@@ -219,8 +238,10 @@ public class Duke extends Application {
         }
     }
 
+    /*
     /* Method that saves Tasks in the hard disk whenever called
      */
+    /*
     public void save() {
         try {
             FileWriter info = new FileWriter("./data/data.txt");
@@ -233,7 +254,7 @@ public class Duke extends Application {
             System.out.println("Hey an error occurred when saving the data!");
         }
     }
-
+*/
     /*
     public static void delete (String userTyped) {
         try {
@@ -252,6 +273,16 @@ public class Duke extends Application {
         }
     }
     */
+
+
+    /**
+     * Displays a long line for visual effects.
+     */
+    public static String showLine() {
+        String line = "-------------------------------";
+        return line;
+    }
+    /*
     public void begin() {
 
         boolean repeatStatus = true;
@@ -326,12 +357,13 @@ public class Duke extends Application {
             }
         }
     }
-
+*/
+    /*
     public static void main(String[] args) {
         Duke skittles = new Duke();
         skittles.begin();
     }
-
+*/
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -404,7 +436,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Instruction instruction = parser.inputToCommand(input);
+        return instruction.getResponse(input);
     }
 
 }
