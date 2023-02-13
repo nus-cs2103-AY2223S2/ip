@@ -28,7 +28,7 @@ public class Trivia {
      * @throws DukeException Thrown if the facts/facts.txt file is not found.
      */
     public void loadFacts() throws DukeException {
-        InputStream dukeFactStream = new Trivia().getFileFromResourceAsStream();
+        InputStream dukeFactStream = getFileFromResourceAsStream();
         transferFactsFromStream(dukeFactStream);
     }
 
@@ -41,10 +41,9 @@ public class Trivia {
         return this.facts.get(randomInt.nextInt(this.facts.size()));
     }
 
-    private InputStream getFileFromResourceAsStream() throws DukeException {
+    private static InputStream getFileFromResourceAsStream() throws DukeException {
         Ui ui = new Ui();
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("/facts/facts.txt");
+        InputStream inputStream = Trivia.class.getResourceAsStream("/facts/facts.txt");
         if (inputStream == null) {
             throw new DukeException(ui.formatLogicError("I can't find facts.txt!"));
         } else {
@@ -58,7 +57,7 @@ public class Trivia {
             InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
             BufferedReader factReader = new BufferedReader(streamReader);
             String factLine = factReader.readLine();
-            while (!factLine.equals("")) {
+            while (factLine != null) {
                 this.facts.add(factLine);
                 factLine = factReader.readLine();
             }
