@@ -30,8 +30,6 @@ public class Duke {
      * Runs entire program
      */
     public void run() {
-        ui.welcomeMsg();
-        ui.lineString();
         boolean isBye = false;
         while (!isBye) {
             try {
@@ -45,7 +43,6 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
-        ui.byeMsg();
     }
 
     public String getResponse(String input) {

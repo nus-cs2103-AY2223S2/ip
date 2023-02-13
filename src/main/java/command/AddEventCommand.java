@@ -33,6 +33,8 @@ public class AddEventCommand extends AddTaskCommand {
         Event event = Event.generate(this.getInputArr());
         tasks.addTask(event);
         storage.writeData(tasks);
-        return ui.addTaskMsg(tasks, event);
+        String output = ui.addTaskMsg(tasks, event);
+        System.out.println(output);
+        return output;
     }
 }
