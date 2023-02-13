@@ -10,7 +10,7 @@ via text-commands.
   - [List All Tasks: `list`](#list---list-all-tasks)
   - [Create ToDo Task: `todo`](#todo---create-todo-task)
   - [Create Deadline Task: `deadline`](#deadline---create-deadline-task)
-  - [Create Event Task: `task`](#event---create-event-task)
+  - [Create Event Task: `event`](#event---create-event-task)
   - [Mark Task as Done: `mark`](#mark---mark-task)
   - [Mark Task as Undone: `unmark`](#mark---unmark-task)
   - [Delete Task: `delete`](#delete---delete-task)
