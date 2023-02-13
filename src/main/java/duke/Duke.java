@@ -41,7 +41,7 @@ public class Duke {
     }
 
     /**
-     * User input to be passed in.
+     * Gets the response from the input string.
      *
      * @param input Input string to be parsed.
      * @return The response string.
@@ -54,6 +54,7 @@ public class Duke {
         } catch (DukeException e) {
             response = this.ui.showError(e);
         }
+        System.out.println(response);
         return response;
     }
 
@@ -87,7 +88,7 @@ public class Duke {
 
 
     /**
-     * Function that returns the formatter for date time.
+     * Returns the formatter for date time.
      *
      * @return The date time formatter used in duke.
      */
