@@ -42,7 +42,7 @@ public class Main {
      * Runs the Duke program.
      */
     public void run() {
-        ui.showWelcome();
+        System.out.print(ui.getWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {

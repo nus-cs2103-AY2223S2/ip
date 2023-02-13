@@ -77,4 +77,14 @@ public class MainWindow extends AnchorPane {
         }
         Platform.exit();        
     }
+
+    /**
+     * Create a dialog box showing the welcome message.
+     */
+    protected void showWelcome() {
+        String welcome = duke.getWelcome();
+        dialogContainer.getChildren().add(
+                DialogBox.getBotDialog(welcome, botImage)
+        );
+    }
 }

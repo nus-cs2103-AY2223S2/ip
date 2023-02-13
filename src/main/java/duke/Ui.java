@@ -21,13 +21,8 @@ public class Ui {
     /**
      * Display welcome message.
      */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public String getWelcome() {
+        return "Hey, why did you wake me up?\nI am the great Watt Toodu.\nDon't mess with me!\n";
     }
 
     /**
@@ -41,7 +36,7 @@ public class Ui {
      * Display goodbye message.
      */
     public String showBye() {
-        return "Bye. Hope to see you again soon!\n";
+        return "Good riddance...\n";
     }
 
     /**
@@ -52,7 +47,7 @@ public class Ui {
     public String showList(TaskList list) {
         String ret = list.stream()
             .map(task -> (list.indexOf(task) + 1) + ". " + task + "\n")
-            .reduce("Here are the tasks in your list:\n", (a, b) -> a + b);
+            .reduce("Here! Now leave me alone...\n", (a, b) -> a + b);
         return ret;
     }
 
@@ -62,7 +57,7 @@ public class Ui {
      * @param task the task that was marked.
      */
     public String showMark(Task task) {
-        return "Nice! I've marked this task as done:\n" + task + "\n";
+        return "Wow, reaaal impressive work.\n" + task + "\n";
     }
 
     /**
@@ -71,7 +66,7 @@ public class Ui {
      * @param task the task that was unmarked.
      */
     public String showUnmark(Task task) {
-        return "OK, I've marked this task as not done yet:\n" + task + "\n";
+        return "So did you complete it or not?!?\n" + task + "\n";
     }
 
     /**
@@ -81,7 +76,7 @@ public class Ui {
      * @param size the size of the list after the addition.
      */
     public String showAdd(Task task, int size) {
-        return "Got it. I've added this task:\n" + task + "\nNow you have " + size + " tasks in the list.\n";
+        return "Clearly, having good memory isn't one of your strengths...\n" + task + "\nNow you have " + size + " tasks in the list.\n";
     }
 
     /**
@@ -91,13 +86,13 @@ public class Ui {
      * @param size the size of the list after the deletion.
      */
     public String showRemove(Task task, int size) {
-        return "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.\n";
+        return "Please clean up after yourself.\n" + task + "\nNow you have " + size + " tasks in the list.\n";
     }
 
     public String showFind(TaskList list) {
         String ret = list.stream()
             .map(task -> (list.indexOf(task) + 1) + ". " + task + "\n")
-            .reduce("Here are the matching tasks in your list:\n", (a, b) -> a + b);
+            .reduce("Now you are making me mad...\n", (a, b) -> a + b);
         return ret;
     }
 
@@ -108,7 +103,7 @@ public class Ui {
      * @param alias the alias of the command.
      */
     public String showSet(String existing, String alias) {
-        return "Got it. I've added the alias \"" + alias + "\" for the command \"" + existing + "\".\n";
+        return "Po-tay-toes, po-ta-toes, \"" + alias + "\" is now the same as \"" + existing + "\".\n";
     }
 
     /**
