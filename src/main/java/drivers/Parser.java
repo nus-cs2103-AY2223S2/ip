@@ -19,7 +19,6 @@ public class Parser {
 
     // default constructor
 
-
     /**
      * Returns a boolean value to indicate if program should continue expecting inputs.
      * Executes command given.
@@ -35,36 +34,25 @@ public class Parser {
 
             switch (command) {
             case bye:
-                return "Roger. Agent Bond signing off ~";
+                return goodbyeMessage();
 
             case missions:
-                return l.print();
+                return printMissions(l);
 
             case unmark:
-                return l.unmark(Integer.parseInt(parts[1]));
+                return unmarkTask(l, Integer.parseInt(parts[1]));
 
             case mark:
-                return l.mark(Integer.parseInt(parts[1]));
+                return markTask(l, Integer.parseInt(parts[1]));
 
             case todo:
-                assert userinput.length() > 4 : "Wrong instruction passed in";
-                return l.add(new Todo(userinput));
+                return addTodo(l, userinput);
 
             case deadline:
-                assert userinput.length() > 8 : "Wrong instruction passed in";
-                parts = userinput.split("/");
-                if (parts.length != 2) {
-                    throw new DukeException("Please enter valid end date.");
-                }
-                return l.add(new Deadline(parts[0], parts[1]));
+                return addDeadline(l, userinput);
 
             case event:
-                assert userinput.length() > 5 : "Wrong instruction passed in";
-                parts = userinput.split("/");
-                if (parts.length != 3) {
-                    throw new DukeException("Please enter valid start and end dates.");
-                }
-                return l.add(new Event(parts[0], parts[1], parts[2]));
+                return addEvent(l, userinput);
 
             case delete:
                 return l.delete(Integer.parseInt(parts[1]));
@@ -73,11 +61,10 @@ public class Parser {
                 return l.find(parts[1]);
 
             case help:
-                return "B: " + Instructions.generate();
+                return Instructions.generate();
 
             default:
-                assert false;
-                return "Something has gone wrong!";
+                return impossibleFunction();
             }
         } catch (DukeException e) {
             return "B: " + e.getMessage();
@@ -91,4 +78,49 @@ public class Parser {
             return "B: Command not recognised. Please re-try";
         }
     }
+
+    private String goodbyeMessage() {
+        return "Roger. Agent Bond signing off ~";
+    }
+
+    private String printMissions(TaskList t) {
+        return t.print();
+    }
+
+    private String unmarkTask(TaskList t, int idx) {
+        return t.unmark(idx);
+    }
+
+    private String markTask(TaskList t, int idx) {
+        return t.mark(idx);
+    }
+
+    private String addTodo(TaskList t, String label) {
+        assert label.length() > 4 : "Wrong instruction passed in";
+        return t.add(new Todo(label));
+    }
+
+    private String addDeadline(TaskList t, String label) throws DukeException {
+        assert label.length() > 8 : "Wrong instruction passed in";
+        String[] parts = label.split("/");
+        if (parts.length != 2) {
+            throw new DukeException("Please enter valid end date.");
+        }
+        return t.add(new Deadline(parts[0], parts[1]));
+    }
+
+    private String addEvent(TaskList t, String label) throws DukeException {
+        assert label.length() > 5 : "Wrong instruction passed in";
+        String[] parts = label.split("/");
+        if (parts.length != 3) {
+            throw new DukeException("Please enter valid start and end dates.");
+        }
+        return t.add(new Event(parts[0], parts[1], parts[2]));
+    }
+
+    private String impossibleFunction() {
+        assert false;
+        return "Something has gone wrong!";
+    }
 }
+ 

@@ -61,13 +61,14 @@ public class Storage {
         try {
             Scanner reader = new Scanner(this.file);
             while (reader.hasNextLine()) {
-                String str = reader.nextLine();
-                l.addFromFile(str);
+                readTask(l, reader.nextLine());
             }
         } catch (FileNotFoundException e) {
             System.out.println("Something horribly wrong has occurred.");
         }
+    }
 
-
+    private void readTask(TaskList t, String task) {
+        t.addFromFile(task);
     }
 }
