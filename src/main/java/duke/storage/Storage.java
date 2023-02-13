@@ -87,9 +87,9 @@ public class Storage {
 
     /**
      * Parse input from file into tasks.
-     * @param input Line from local file
-     * @param tasks TaskList to store tasks
-     * @throws DukeException If fail to create task from invalid input
+     * @param input Line from local file.
+     * @param tasks TaskList to store tasks.
+     * @throws DukeException If fail to create task from invalid input.
      */
     public static void parseLine(String input, TaskList tasks) throws DukeException {
         String[] inputList = input.split(",");
@@ -100,27 +100,23 @@ public class Storage {
         Task newTask;
 
         switch (taskType) {
-        case "T": {
+        case "T":
             newTask = new ToDo(taskName);
             break;
-        }
-        case "D": {
+        case "D":
             String by = inputList[3];
             LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
             newTask = new Deadline(taskName, deadline);
             break;
-        }
-        case "E": {
+        case "E":
             String from = inputList[3];
             String to = inputList[4];
             LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
             LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
             newTask = new Event(taskName, startDate, endDate);
             break;
-        }
-        default: {
+        default:
             throw new DukeException("Unable to parse this line: " + input);
-        }
         }
         if (isDone.equals("X")) {
             newTask.markAsDone();

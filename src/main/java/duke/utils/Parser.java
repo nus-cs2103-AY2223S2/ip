@@ -22,9 +22,9 @@ public class Parser {
 
     /**
      * Parses user input into a command.
-     * @param input User input
-     * @return Command corresponding to user input
-     * @throws DukeException If input is invalid for any command
+     * @param input User input into a text field.
+     * @return Command corresponding to user input.
+     * @throws DukeException If input is invalid for any command.
      */
     public static Command parse(String input) throws DukeException {
         try {
@@ -33,9 +33,8 @@ public class Parser {
 
             boolean tooFewArgs = inputList.length <= 1;
             switch (commandType) {
-            case LIST: {
+            case LIST:
                 return new ListCommand();
-            }
             case DEADLINE: {
                 boolean missingByDate = !input.contains(" /by ");
 
@@ -100,22 +99,18 @@ public class Parser {
                 int index = Integer.parseInt(inputList[1]);
                 return new DeleteCommand(index);
             }
-            case FIND: {
+            case FIND:
                 if (tooFewArgs) {
                     throw new DukeException("Please specify a search term!");
                 }
                 String searchTerm = input.replaceFirst("find ", "");
                 return new FindCommand(searchTerm);
-            }
-            case BYE: {
+            case BYE:
                 return new ByeCommand();
-            }
-            case FREE: {
+            case FREE:
                 return new FreeCommand();
-            }
-            default: {
+            default:
                 throw new AssertionError(commandType); // commandType enums should cover all possible commands
-            }
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("Sorry, that command is not recognised. \n"
