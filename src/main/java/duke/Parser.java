@@ -91,6 +91,7 @@ public class Parser {
             return new FindCommand(details[1]);
 
         default:
+            assert false : w;
             throw new DukeException("Unrecognised command. Try again.");
         }
     }
