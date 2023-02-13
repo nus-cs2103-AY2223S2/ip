@@ -12,8 +12,7 @@ Are you a fast typist looking for a way to organise your mind? Then Duke has you
 1. Open up a terminal
 2. Navigate to the directory containing the `duke.jar` file
 3. Run the command `java -jar duke.jar` to launch the application in GUI chatbot mode
-4. Type the command to execute in the command box of the application
-5. Refer to the [Usage](https://hingen.github.io/ip/#usage) section below
+4. Type the command to execute in the command box of the application (refer to [Usage](https://hingen.github.io/ip/#usage))
 
 ## Launch Options
 To launch the application in chatbot GUI mode, run the command:
@@ -83,7 +82,7 @@ Marks a task in the task list as completed.
 Format: `mark {INDEX}`
 * `INDEX` cannot be empty
 * `INDEX` must be an integer
-* `INDEX` must be associated with a task in the task list (refer to [list](https://hingen.github.io/ip/#list-all-tasks--list))
+* `INDEX` must be associated with a task in the task list (refer to [List all tasks](https://hingen.github.io/ip/#list-all-tasks--list))
 
 Examples:
 * `mark 1` : Marks the first task in the task list as completed.
@@ -95,7 +94,7 @@ Marks a task in the task list as not completed.
 Format: `unmark {INDEX}`
 * `INDEX` cannot be empty
 * `INDEX` must be an integer
-* `INDEX` must be associated with a task in the task list (refer to [list](https://hingen.github.io/ip/#list-all-tasks--list))
+* `INDEX` must be associated with a task in the task list (refer to [List all tasks](https://hingen.github.io/ip/#list-all-tasks--list))
 
 Examples:
 * `unmark 1` : Marks the first task in the task list as not completed.
@@ -107,7 +106,7 @@ Deletes a task from the task list.
 Format: `delete {INDEX}`
 * `INDEX` cannot be empty
 * `INDEX` must be an integer
-* `INDEX` must be associated with a task in the task list (refer to [list](https://hingen.github.io/ip/#list-all-tasks--list))
+* `INDEX` must be associated with a task in the task list (refer to [List all tasks](https://hingen.github.io/ip/#list-all-tasks--list))
 
 Examples:
 * `delete 1` : Deletes the first task in the task list.
