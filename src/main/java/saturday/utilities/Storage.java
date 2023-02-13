@@ -52,7 +52,7 @@ public class Storage {
     }
 
     /**
-     * This method saves the taskList to the file specified in the filePath attribute.
+     * This method saves the taskList to the file specified in the filePath attribute. Use streams to extract byte data.
      *
      * @param taskList TaskList to write to file
      */
