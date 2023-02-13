@@ -29,6 +29,15 @@ public class MainWindow extends AnchorPane {
     private Consumer<String> onInputHandler;
 
     /**
+     * Properties to set for when initializing javaFX.
+     */
+    @FXML
+    private void initialize() {
+        // Enables auto scroll
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    /**
      * Handles user input and displays the dialog box for the user.
      */
     @FXML
