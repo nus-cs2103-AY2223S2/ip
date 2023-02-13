@@ -47,14 +47,14 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Sets isDone to true.
+     * Sets isDone to be true.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Set isDone to false.
+     * Sets isDone to be false.
      */
     public void unmark() {
         this.isDone = false;

@@ -7,14 +7,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 
-import connor.gui.Gui;
+import connor.gui.Main;
 import connor.parser.Parser;
 import connor.storage.Storage;
 import connor.task.Task;
 import connor.task.TaskList;
 import connor.ui.Ui;
 import javafx.application.Application;
-
 
 /**
  * Connor object that is the backbone of the program.
@@ -88,6 +87,7 @@ public class Connor {
     }
 
     public static void main(String[] args) {
-        Application.launch(Gui.class, args);
+        Application.launch(Main.class, args);
     }
+
 }

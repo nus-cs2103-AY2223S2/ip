@@ -207,12 +207,12 @@ public class Parser {
             case SORT:
                 return tasks.sort(ui);
             default:
-                return ("INVALID COMMAND");
+                return "INVALID COMMAND";
             }
         } catch (IllegalArgumentException e) {
-            return ("INVALID COMMAND");
+            return "INVALID COMMAND";
         } catch (InvalidTaskException e) {
-            return (e.getMessage());
+            return e.getMessage();
         }
     }
 }
