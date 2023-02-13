@@ -39,6 +39,9 @@ public class Alfred {
 
     /**
      * Get message based on user input
+     *
+     * @param input
+     * @return
      */
     public String getResponse(String input) {
         try {
