@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Controller for DialogBox.
@@ -48,6 +49,7 @@ public class DialogBox extends HBox {
         assert dialog != null : "dialog Label not set up properly in fxml file";
         assert displayPicture != null : "displayPicture ImageView not set up properly in fxml file";
         dialog.setText(text);
+        dialog.setTextAlignment(TextAlignment.RIGHT);
         displayPicture.setImage(img);
     }
 
@@ -59,6 +61,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
     /**
