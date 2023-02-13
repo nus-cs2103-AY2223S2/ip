@@ -73,7 +73,7 @@ class Storage {
                 break;
             case "Event":
                 encoding = encoding + ("E | " + (t.isDone() ? "1" : "0" + " | "));
-                encoding = encoding + (t.getDescription() + " | " + ((Event) t).start + " | " + ((Event) t).end);
+                encoding = encoding + (t.getDescription() + " | " + ((Event) t).getStart() + " | " + ((Event) t).getEnd());
                 break;
             }
             encoding = encoding + "\n";
