@@ -1,5 +1,6 @@
 package duke.buttons;
 
+import duke.dukeexceptions.DukeException;
 import duke.functions.DeleteTask;
 import duke.functions.Functions;
 import javafx.scene.control.Button;
@@ -39,9 +40,10 @@ public class DeleteButton extends DukeButton {
 
         delTaskButton.setOnMouseClicked((event) -> {
             String delIndex = (String) deleteMenu.getValue();
-            DeleteTask.delete(super.fn, delIndex);
+            try {
+                DeleteTask.delete(super.fn, delIndex);
+            } catch (DukeException e) {}
         });
-
         return vbox;
     }
 }

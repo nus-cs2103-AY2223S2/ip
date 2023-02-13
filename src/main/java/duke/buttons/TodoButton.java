@@ -1,5 +1,6 @@
 package duke.buttons;
 
+import duke.dukeexceptions.DukeException;
 import duke.functions.CreateTodo;
 import duke.functions.Functions;
 import javafx.scene.control.Button;
@@ -38,9 +39,10 @@ public class TodoButton extends DukeButton {
 
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();
-            CreateTodo.todo(super.fn, des);
+            try {
+                CreateTodo.todo(super.fn, des);
+            } catch (DukeException e) {}
         });
-
         return vbox;
     }
 }

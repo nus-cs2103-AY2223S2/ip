@@ -35,31 +35,24 @@ public class Storage {
      *
      * @return TaskList object for Function to manipulate
      */
-    public TaskList load() {
+    public TaskList load() throws FileNotFoundException{
         TaskList tl = new TaskList();
-        try {
-            Scanner sc = new Scanner(f);
-            while (sc.hasNextLine()) {
-                String l = sc.nextLine();
-                if (l.length() == 0) {
-                    continue;
-                }
-                String[] line = l.split(" \\| ");
+        Scanner sc = new Scanner(f);
+        while (sc.hasNextLine()) {
+            String l = sc.nextLine();
+            if (l.length() == 0) {
+                continue;
+            }
+            String[] line = l.split(" \\| ");
+            try {
                 Task t = TaskMap.get(line[1]);
                 t.setTaskNumber(Integer.parseInt(line[0]));
                 t.setMark(line[2].equals("X") ? true : false);
                 t.configure(Arrays.copyOfRange(line, 3, line.length));
                 tl.loadTask(t);
-            }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-        } catch (DateTimeParseException e) {
-            System.out.println("Task file corrupted");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {}
         }
+        sc.close();
         return tl;
     }
 

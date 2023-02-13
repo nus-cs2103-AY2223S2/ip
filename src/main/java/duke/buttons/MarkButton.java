@@ -1,5 +1,6 @@
 package duke.buttons;
 
+import duke.dukeexceptions.DukeException;
 import duke.functions.Functions;
 import duke.functions.MarkTask;
 import javafx.scene.control.Button;
@@ -38,9 +39,10 @@ public class MarkButton extends DukeButton {
 
         markTaskButton.setOnMouseClicked((event) -> {
             String markIndex = (String) markMenu.getValue();
-            MarkTask.mark(super.fn, markIndex, true);
+            try {
+                MarkTask.mark(super.fn, markIndex, true);
+            } catch (DukeException e) {}
         });
-
         return vbox;
     }
 }

@@ -15,6 +15,7 @@ public class CreateDeadline{
     static public void deadline(Functions fn, String des, LocalDateTime end) {
         Deadline dl = new Deadline(false, des, end);
         String s = fn.getTl().addTask(dl);
+        fn.getOutputLayout().getChildren().clear();
         fn.getOutputLayout().getChildren().add(fn.getDialogLabel(s));
         fn.getSt().save(fn.getTl());
     }

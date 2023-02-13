@@ -16,6 +16,7 @@ public class CreateEvent {
     static public void events(Functions fn, String des, LocalDateTime start, LocalDateTime end) {
         Event ev = new Event(false, des, start, end);
         String s = fn.getTl().addTask(ev);
+        fn.getOutputLayout().getChildren().clear();
         fn.getOutputLayout().getChildren().add(fn.getDialogLabel(s));
         fn.getSt().save(fn.getTl());
     }

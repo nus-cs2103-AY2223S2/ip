@@ -1,5 +1,6 @@
 package duke.buttons;
 
+import duke.dukeexceptions.DukeException;
 import duke.functions.CreateEvent;
 import duke.functions.Functions;
 import javafx.scene.control.*;
@@ -10,6 +11,7 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 public class EventButton extends DukeButton {
     /**
@@ -62,13 +64,21 @@ public class EventButton extends DukeButton {
             LocalDate startDate = startDateMenu.getValue();
             String startHour = (String) startHourMenu.getValue();
             String startMin = (String) startMinMenu.getValue();
-            LocalDateTime start = LocalDateTime.of(startDate, LocalTime.parse(startHour + ":" + startMin));
+
 
             LocalDate endDate = endDateMenu.getValue();
             String endHour = (String) endHourMenu.getValue();
             String endMin = (String) endMinMenu.getValue();
-            LocalDateTime end = LocalDateTime.of(endDate, LocalTime.parse(endHour + ":" + endMin));
-            CreateEvent.events(super.fn, des, start, end);
+
+            try {
+                LocalDateTime start = LocalDateTime.of(startDate, LocalTime.parse(startHour + ":" + startMin));
+                LocalDateTime end = LocalDateTime.of(endDate, LocalTime.parse(endHour + ":" + endMin));
+                CreateEvent.events(super.fn, des, start, end);
+            } catch (DateTimeParseException e) {
+                try {
+                    throw new DukeException(outputLayout, "Inputs cannot be empty");
+                } catch (DukeException ex) {}
+            }
         });
 
         return vbox;

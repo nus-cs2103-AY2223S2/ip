@@ -1,5 +1,6 @@
 package duke.functions;
 
+import duke.dukeexceptions.DukeException;
 import duke.task.ToDo;
 
 public class CreateTodo  {
@@ -9,7 +10,10 @@ public class CreateTodo  {
      *
      * @param inp Description of todo task
      */
-    static public void todo(Functions fn, String inp) {
+    static public void todo(Functions fn, String inp) throws DukeException {
+        if (inp.length() == 0) {
+            throw new DukeException(fn.getOutputLayout(), "Inputs cannot be empty");
+        }
         ToDo td = new ToDo(false, inp);
         String s = fn.getTl().addTask(td);
         fn.getOutputLayout().getChildren().add(fn.getDialogLabel(s));

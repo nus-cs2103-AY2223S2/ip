@@ -1,5 +1,7 @@
 package duke.buttons;
 
+import duke.Duke;
+import duke.dukeexceptions.DukeException;
 import duke.functions.CreateDeadline;
 import duke.functions.Functions;
 import javafx.beans.InvalidationListener;
@@ -14,6 +16,7 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -62,12 +65,16 @@ public class DeadlineButton extends DukeButton {
             LocalDate endDate = deadlineMenu.getValue();
             String endHour = (String) hourMenu.getValue();
             String endMin = (String) minMenu.getValue();
-            LocalDateTime end = LocalDateTime.of(endDate, LocalTime.parse(endHour + ":" + endMin));
-            CreateDeadline.deadline(super.fn, des, end);
+            try {
+                LocalDateTime end = LocalDateTime.of(endDate, LocalTime.parse(endHour + ":" + endMin));
+                CreateDeadline.deadline(super.fn, des, end);
+            } catch (DateTimeParseException e) {
+                try {
+                    throw new DukeException(outputLayout, "Inputs cannot be empty");
+                } catch (DukeException ex) {
+                }
+            }
         });
         return vbox;
     }
-
-
-
 }
