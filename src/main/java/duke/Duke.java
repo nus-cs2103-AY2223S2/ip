@@ -42,6 +42,8 @@ public class Duke {
             return "Unrecognised command. Try again.";
         } catch (DateTimeParseException e) {
             return "Key in date and time in this format. yyyy-mm-ddThh:mm";
+        } catch (DukeException e) {
+            return e.toString();
         } catch (Exception e) {
             return e.getMessage();
         }

@@ -11,6 +11,7 @@ import duke.commands.MarkCommand;
 import duke.commands.ThroughCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
+import duke.commands.UpdateCommand;
 
 /**
  * A parser that will parse the input String from the user into
@@ -20,7 +21,7 @@ import duke.commands.UnmarkCommand;
  */
 public class Parser {
     private enum Word {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, THROUGH, FIND
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, THROUGH, FIND, UPDATE
     }
 
     /**
@@ -89,6 +90,12 @@ public class Parser {
                 throw new DukeException("Please input the necessary details.");
             }
             return new FindCommand(details[1]);
+
+        case UPDATE:
+            if (details.length < 2) {
+                throw new DukeException("Please input the necessary details.");
+            }
+            return new UpdateCommand(details[1]);
 
         default:
             assert false : w;
