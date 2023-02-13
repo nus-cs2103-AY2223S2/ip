@@ -1,9 +1,0 @@
-todo party
-mark 1
-deadline ip /by 2023-02-09 0000
-event meeting /from 2023-02-09 0000  /to 2023-02-09 0010
-mark 3
-todo happy
-mark 4
-todo party
-

@@ -38,9 +38,6 @@ public class Duke {
         File data = new File("data");
         data.mkdirs();
         File duke = new File("data/duke.txt");
-        if(duke.exists()){
-          System.out.println("read file successful!");
-        }
       }
       ui = new UI(new Parser(tasks, storage));
     }
@@ -69,7 +66,7 @@ public class Duke {
         File data = new File("data");
         data.mkdirs();
         File duke = new File("data/duke.txt");
-        new Duke(duke.getPath());
+        new Duke(duke.getPath()).run();
       }
     }
 
