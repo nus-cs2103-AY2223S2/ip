@@ -80,6 +80,13 @@ public class DialogueBox extends HBox {
     public static DialogueBox getBotDialogue(String text, Image img) {
         var db = new DialogueBox(text, img);
         db.flip();
+        db.dialogue.getStyleClass().add("label-bot");
+        return db;
+    }
+
+    public static DialogueBox getErrorDialogue(String text, Image img) {
+        var db = getBotDialogue(text, img);
+        db.dialogue.getStyleClass().add("label-error");
         return db;
     }
 }

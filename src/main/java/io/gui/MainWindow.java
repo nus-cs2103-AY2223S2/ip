@@ -73,6 +73,7 @@ public class MainWindow extends AnchorPane implements Ui {
         if (command.isExit()) {
             Platform.exit();
         }
+
     }
 
     /**
@@ -81,6 +82,11 @@ public class MainWindow extends AnchorPane implements Ui {
     @Override
     public void showReply(String msg) {
         dialogueContainer.getChildren().addAll(DialogueBox.getBotDialogue(msg, dImg));
+    }
+
+    @Override
+    public void showError(String errorMsg) {
+        dialogueContainer.getChildren().addAll(DialogueBox.getErrorDialogue(errorMsg, dImg));
     }
 
     /**

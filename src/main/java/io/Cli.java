@@ -75,6 +75,14 @@ public class Cli implements Ui {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showError(String errorMsg) {
+        showReply(errorMsg);
+    }
+
+    /**
      * Entry point into app
      */
     public static void launch(String... args) {

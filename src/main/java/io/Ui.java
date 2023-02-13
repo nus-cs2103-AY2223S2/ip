@@ -9,4 +9,10 @@ public interface Ui {
      * @param reply Message to reply with
      */
     public void showReply(String reply);
+
+    /**
+     * Manages formatting and output of error messages to the ui
+     * @param errorMsg Error message
+     */
+    public void showError(String errorMsg);
 }

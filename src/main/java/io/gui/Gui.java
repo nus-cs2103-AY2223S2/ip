@@ -14,6 +14,9 @@ import task.TaskList;
  * Graphical User Interface
  */
 public class Gui extends Application {
+    private static final double MIN_HEIGHT = 300.0;
+    private static final double MIN_WIDTH = 300.0;
+
     private TaskList taskList;
     private Storage<TaskList> storage;
     private FXMLLoader fxmlLoader;
@@ -31,7 +34,8 @@ public class Gui extends Application {
             fxmlLoader.<MainWindow>getController().setGui(this);
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
-            stage.setMinWidth(300);
+            stage.setMinWidth(MIN_WIDTH);
+            stage.setMinHeight(MIN_HEIGHT);
             stage.setTitle("D");
             stage.show();
 
