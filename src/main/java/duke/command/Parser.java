@@ -118,9 +118,9 @@ public class Parser {
     private static String processTodo(String input) throws DukeException {
         String[] parsedInput = input.split(" ", 2);
         if (parsedInput.length != 2) {
-            throw new DukeException("description of todo is missing");
+            throw new DukeException("description of todo is missing ^.~");
         } else if (parsedInput[1].isEmpty()) {
-            throw new DukeException("description of todo is missing");
+            throw new DukeException("description of todo is missing ^.~");
         }
             return parsedInput[1];
     }
@@ -145,7 +145,7 @@ public class Parser {
     public static int processMarkUnmarkDel(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         if (parsedInput.length != 2) {
-            throw new DukeException("index of task to delete is missing");
+            throw new DukeException("index of task to delete is missing ^.~");
         }
         try {
             int index = Integer.parseInt(parsedInput[1]);
@@ -166,19 +166,19 @@ public class Parser {
         //get deadline details from input
         String deadlineDetails = input.split(" ", 2)[1];
         if (deadlineDetails.isEmpty() || deadlineDetails.equals(" ")) {
-            throw new DukeException("the description of a deadline cannot be empty.");
+            throw new DukeException("the description of a deadline cannot be empty. ^.~");
         }
 
         //get the date of the deadline from the deadline details
         String[] parsedDeadline = deadlineDetails.split("/by ", 2);
         if (parsedDeadline.length < 2) {
-            throw new DukeException("when the deadline should be completed by should be specified using /by.");
+            throw new DukeException("when the deadline should be completed by should be specified using /by. ^.~");
         }
 
         /*ensure the date of deadline matches the format of a Local Date object so
             that it can be made into a deadline object*/
         if (!parsedDeadline[1].matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new DukeException("please specify deadline in the format '{description} /by {yyyy-mm-dd}");
+            throw new DukeException("please specify deadline in the format '{description} /by {yyyy-mm-dd} ^.~");
         }
 
         return parsedDeadline;
@@ -195,20 +195,20 @@ public class Parser {
         //get event details from input
         String eventDetails = input.split(" ", 2)[1];
         if (eventDetails.isEmpty() || eventDetails.equals(" ")) {
-            throw new DukeException("the description of a event cannot be empty.");
+            throw new DukeException("the description of a event cannot be empty. ^.~");
         }
 
         //get the time from which the event starts
         String[] parsed1 = eventDetails.split("/from ", 2);
         if (parsed1.length < 2) {
-            throw new DukeException("the event's timeline should be specified using /from and /to.");
+            throw new DukeException("the event's timeline should be specified using /from and /to. ^.~");
         }
         String description = parsed1[0];
 
         //get the time when the event ends
         String[] parsed2 = parsed1[1].split("/to ", 2);
         if (parsed2.length < 2) {
-            throw new DukeException("the event's timeline should be specified using /from and /to.");
+            throw new DukeException("the event's timeline should be specified using /from and /to. ^.~");
         }
         String from = parsed2[0];
         String to = parsed2[1];

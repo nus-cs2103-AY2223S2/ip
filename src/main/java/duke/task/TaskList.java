@@ -203,7 +203,7 @@ public class TaskList {
             }
         }
         if (finalTasksString.isEmpty()) {
-            return "Sorry, I could not find anything matching. :(";
+            return "sorry, I could not find anything matching. (- _ - ) zzZ";
         }
         return String.format("Here's what I found:\n%s", finalTasksString);
     }
@@ -219,7 +219,7 @@ public class TaskList {
         long numOfMarkedTasks = tasks.stream()
                 .filter(x -> x.getStatusIcon().equals(markSymbol))
                 .count();
-        return String.format("You have %s %d tasks at the moment.\n", isMarked ? "completed" : "not done",
+        return String.format("(- _ - ) zzZ You have %s %d tasks at the moment.\n", isMarked ? "completed" : "not done",
                 numOfMarkedTasks);
     }
 
