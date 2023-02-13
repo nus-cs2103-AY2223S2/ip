@@ -7,18 +7,28 @@ import storage.TaskList;
 import userinteraction.Parser;
 import userinteraction.Ui;
 
+/**
+ * The main class of the program.
+ */
 public class Duke {
     private final static String FILE_PATH = ".\\src\\data\\duke.txt";
 
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
+
+    /**
+     * Class constructor.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
         taskList = storage.readData();
     }
 
+    /**
+     * Runs the whole program.
+     */
     public void run() {
         ui.printWelcomeMsg();
         ui.printLine();
@@ -35,10 +45,6 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    public Ui getUi() {
-        return ui;
     }
 
     public static void main(String[] args) {

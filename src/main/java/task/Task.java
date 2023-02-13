@@ -1,11 +1,20 @@
 package task;
 
+/**
+ * Abstract class for task.
+ */
 public abstract class Task {
 
     private final String description;
 
     private boolean isDone;
 
+    /**
+     * Class constructor.
+     *
+     * @param description The description of the task.
+     * @param isDone      Marks or unmarks the task.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
