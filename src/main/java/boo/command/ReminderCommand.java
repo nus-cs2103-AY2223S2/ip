@@ -45,32 +45,11 @@ public class ReminderCommand extends Command {
      */
     @Override
     public String runCommand() {
-        assert reminderDuration != null : "Invalid reminder duration. Cannot be null.";
         LocalDateTime currentDateTime = LocalDateTime.now();
-        LocalDateTime cutOff = null;
-
-        switch (reminderDuration) {
-        case "day":
-            cutOff = currentDateTime.plusDays(1);
-            break;
-        case "week":
-            cutOff = currentDateTime.plusWeeks(1);
-            break;
-        case "month":
-            cutOff = currentDateTime.plusMonths(1);
-            break;
-        default:
-            //Command can only be day, month or year. Should not reach here.
-            assert false;
-        }
-        assert cutOff != null : "Invalid reminder duration input.";
+        LocalDateTime cutOff = getCutOff(currentDateTime);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Tasks from ");
-        sb.append(DateTime.formatDate(currentDateTime));
-        sb.append(" to ");
-        sb.append(DateTime.formatDate(cutOff));
-        sb.append(": \n\n");
+        sb.append(prepareReminderMessageIntro(currentDateTime, cutOff));
 
         int count = 1;
 
@@ -111,6 +90,54 @@ public class ReminderCommand extends Command {
             sb.append("\nNo upcoming tasks. Yay! Let's relax!");
         }
 
+        return sb.toString();
+    }
+
+
+    /**
+     * Gets the cut-off date and time for which tasks happening after it will not be included in
+     * the reminder command.
+     *
+     * @param currentDateTime The date and time at which the reminder command is called.
+     * @return a LocalDateTime object representing the cut-off date and time
+     */
+    public LocalDateTime getCutOff(LocalDateTime currentDateTime) {
+        assert reminderDuration != null : "Invalid reminder duration. Cannot be null.";
+        LocalDateTime cutOff = null;
+
+        switch (reminderDuration) {
+        case "day":
+            cutOff = currentDateTime.plusDays(1);
+            break;
+        case "week":
+            cutOff = currentDateTime.plusWeeks(1);
+            break;
+        case "month":
+            cutOff = currentDateTime.plusMonths(1);
+            break;
+        default:
+            //Command can only be day, month or year. Should not reach here.
+            assert false;
+        }
+        return cutOff;
+    }
+
+
+    /**
+     * Prepares the introductory string message that is printed at the start of the reminder command.
+     *
+     * @param currentDateTime The date and time at which the reminder command is called.
+     * @param cutOff The date and time for which tasks happening after it will not be included in the reminder
+     *               command.
+     * @return
+     */
+    public String prepareReminderMessageIntro(LocalDateTime currentDateTime, LocalDateTime cutOff) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tasks from ");
+        sb.append(DateTime.formatDate(currentDateTime));
+        sb.append(" to ");
+        sb.append(DateTime.formatDate(cutOff));
+        sb.append(": \n\n");
         return sb.toString();
     }
 }
