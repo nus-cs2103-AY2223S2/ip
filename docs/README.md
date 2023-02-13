@@ -1,6 +1,14 @@
 # User Guide
 
-## Features 
+## Feature summary
+1. Add
+2. Delete
+3. Mark 
+4. Unmark 
+5. Find 
+6. List
+
+## Usage: 
 
 ### Add task
 Add to Duke any tasks that you wish to track
@@ -16,24 +24,19 @@ Add to Duke any tasks that you wish to track
 **Expected outcomes:**
 
 ```
-> Duke's response:
 I've added the following task to your list:
 [T] [ ] {task name}
 Current tasks count: {#tasks}
---------------------------------
 
-> Duke's response:
 I've added the following task to your list:
 [D] [ ] {task name} (by: {end date})
 Current tasks count: {#tasks}
---------------------------------
 
-> Duke's response:
 I've added the following task to your list:
 [E] [ ] {task name} (from: {start date} to: {end date})
 Current tasks count: {#tasks}
---------------------------------
 ```
+![screenshot of Duke](Ui.png "add commands in use")
 <br>
 
 ### Delete task
@@ -46,12 +49,11 @@ Delete from Duke any tasks that you no longer wish to track
 **Expected outcome:**
 
 ```
-> Duke's response:
 I've removed the following task from your list:
 [T] [ ] {task name}
 Current tasks count: {#tasks}
---------------------------------
 ```
+![screenshot of Duke](Delete.png "delete command in use")
 <br>
 
 ### Mark task as complete
@@ -67,6 +69,7 @@ Once a task is marked as complete, it will be shown with a ['X']
 Nice! I've marked this task as completed:
  [T] [X] {task name}
 ```
+![screenshot of Duke](Mark.png "mark command in use")
 <br>
 
 ### Mark task as incomplete
@@ -82,6 +85,7 @@ Once a task is marked as incomplete, it will be shown with a [' ']
 OK, I've marked this task as incomplete:
  [T] [ ] {task name}
 ```
+![screenshot of Duke](Unmark.png "unmark command in use")
 <br>
 
 ### Find task
@@ -99,6 +103,7 @@ Here are the matching tasks in your list:
 2. [E] [ ] {task name} (from: {start date} to: {end date})
 End of list!
 ```
+![screenshot of Duke](Find.png "find command in use")
 <br>
 
 ### List task
@@ -116,6 +121,7 @@ Here are the tasks in your list:
 2. [E] [ ] {task name} (from: {start date} to: {end date})
 End of list!
 ```
+<div align="center">refer to screenshot above</div>
 <br>
 <br>
 
