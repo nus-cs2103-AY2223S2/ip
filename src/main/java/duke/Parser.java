@@ -178,6 +178,6 @@ public class Parser {
      * @throws DukeException
      */
     public static void handleUnknownCommand() throws DukeException {
-        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("You don't even know how to use me? Try again!");
     }
 }

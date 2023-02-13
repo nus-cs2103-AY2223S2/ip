@@ -46,4 +46,11 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    /**
+     * Gets the welcome message from Duke.
+     */
+    public String getWelcome() {
+        return ui.getWelcome();
+    }
 }

@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D] [" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
