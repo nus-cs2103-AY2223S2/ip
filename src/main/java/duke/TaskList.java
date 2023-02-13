@@ -39,11 +39,11 @@ class TaskList {
      * @param index         the task index
      * @throws TaskNotExist throws an error if the index overflow or when the task does not exists
      */
-    public String mark(ArrayList<Task> taskArrayList, int index) {
+    public String mark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
         index -= 1;
-        assert index >= 0 : "Invalid index";
-        assert index < taskArrayList.size() : "Invalid index";
-
+        if (index >= taskArrayList.size() || index <= -1) {
+            throw new TaskNotExist();
+        }
         taskArrayList.get(index).mark();
         return userInterface.setMarkAsDone() + taskArrayList.get(index).toString();
     }
@@ -57,8 +57,9 @@ class TaskList {
      */
     public String unMark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
         index -= 1;
-        assert index >= 0 : "Invalid index";
-        assert index < taskArrayList.size() : "Invalid index";
+        if (index >= taskArrayList.size()) {
+            throw new TaskNotExist();
+        }
         taskArrayList.get(index).unmark();
         return userInterface.setUnMarkTask() + taskArrayList.get(index).toString();
     }
@@ -129,9 +130,9 @@ class TaskList {
 
     /**
      * @param taskArrayList an arraylist containing tasks type element
-     * @param description description of the tas
-     * @return A description indicating that the task is deleted
-     * @throws DukeException an execption to handle if there is MissingDescription of the task, TaskNotExists and etc.
+     * @param description   description of the tas
+     * @return A String containing the message that the task is deleted
+     * @throws DukeException
      */
     public String delete(ArrayList<Task> taskArrayList, String description) throws DukeException {
         try {
@@ -146,9 +147,11 @@ class TaskList {
                 return "Noted: I've removed all tasks";
             } else {
                 int deleteIndex = Integer.parseInt(index[1]);
-                assert deleteIndex >= 0 : "Invalid index";
-                assert deleteIndex < taskArrayList.size() : "Invalid index";
-                return "Noted: I've remove this task\n" + taskArrayList.remove(deleteIndex - 1);
+                if (deleteIndex > taskArrayList.size() || deleteIndex <= -1) {
+                    throw new DukeException("OOPS!! The index requested to be deleted does not exist!");
+                } else {
+                    return "Noted: I've remove this task\n" + taskArrayList.remove(deleteIndex - 1);
+                }
             }
         } catch (IOException e) {
             return e.getMessage();
@@ -160,7 +163,7 @@ class TaskList {
      *
      * @param taskArrayList an arraylist containing tasks type element
      * @param description   description of the tas
-     * @return A description indicating that all tasks are deleted
+     * @return A String containing the message that the following tasks are before the given deadline
      */
     public String deadlineChecker(ArrayList<Task> taskArrayList, String description) {
         try {

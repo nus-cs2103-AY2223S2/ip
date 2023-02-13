@@ -8,8 +8,8 @@ import java.time.LocalTime;
  * The class to convert date given in string to Date class
  */
 public class DateStringConverter {
-    private final String[] dayOfWeek = new String[]{"FRIDAY", "MONDAY", "SATURDAY", "SUNDAY",
-        "THURSDAY", "TUESDAY", "WEDNESDAY"};
+    private final String[] dayOfWeek = new String[]{"FRIDAY", "MONDAY", "SATURDAY",
+        "SUNDAY", "THURSDAY", "TUESDAY", "WEDNESDAY"};
 
     /**
      * A method to convert the String type to date type
