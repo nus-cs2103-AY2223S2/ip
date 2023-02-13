@@ -23,8 +23,9 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
 
+    @FXML
     private Label dialog;
-
+    @FXML
     private ImageView displayPicture;
 
     public DialogBox(Label dialog, ImageView displayPicture) {
@@ -37,6 +38,9 @@ public class DialogBox extends HBox {
         dialog.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+        dialog.setPadding(new Insets(5, 10, 0, 10));
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.setPadding(new Insets(10));
         this.getChildren().addAll(dialog, displayPicture);
     }
 
@@ -44,10 +48,10 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        this.setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(Label text, ImageView img) {

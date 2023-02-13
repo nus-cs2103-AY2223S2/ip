@@ -177,4 +177,63 @@ public class Duke extends Application {
     public String getResponse(String input) {
         return "Duke heard: " + input;
     }
+
+//    public String getResponse(String input) {
+//        try {
+//            if (input.equals("bye")) {
+//                storage.saveTask(tasks);
+//                return ui.showBye();
+//            }
+//            if (input.equals("list")) {
+//                return tasks.printList();
+//            }
+//            String[] parsedCommand = Parser.parseCommand(input);
+//
+//            switch (parsedCommand[0]) {
+//                case "done":
+//                    //Marks tasks as done
+//                    int index = Integer.parseInt(parsedCommand[1]) - 1;
+//                    assert index > 0 : "index should be positive";
+//                    return tasks.setDone(index);
+//
+//                case "delete":
+//                    //Deletes tasks
+//                    int indexD = Integer.valueOf(parsedCommand[1]) - 1;
+//                    assert indexD > 0 : "index should be positive";
+//                    return tasks.deleteTask(indexD);
+//
+//                case "find":
+//                    String keyword = parsedCommand[1];
+//                    return tasks.find(keyword);
+//
+//                case "todo":
+//                    //Adds a new Todo to the list
+//                    if (parsedCommand.length == 1) {
+//                        throw new TaskException("The description of a todo cannot be empty");
+//                    }
+//                    Todo newT = new Todo(parsedCommand[1], false);
+//                    return tasks.addTask(newT);
+//
+//                case "deadline":
+//                    if (parsedCommand.length == 1) {
+//                        throw new TaskException("The description of a deadline cannot be empty");
+//                    }
+//                    Task newD = Deadline.parseCommand(parsedCommand[1]);
+//                    return tasks.addTask(newD);
+//
+//                case "event":
+//                    if (parsedCommand.length == 1) {
+//                        throw new TaskException("The description of an event cannot be empty");
+//                    }
+//                    Task newE = Event.parseCommand(parsedCommand[1]);
+//                    return tasks.addTask(newE);
+//
+//                default:
+//                    throw new DukeException("Unknown Command");
+//            }
+//        } catch (DukeException | IOException e) {
+//            return (e.getMessage());
+//        }
+////        return("Now you have " + tasks.getNumTask() + " task" + (tasks.getNumTask() > 1 ? "s " : " ") + "in the list");
+//    }
 }
