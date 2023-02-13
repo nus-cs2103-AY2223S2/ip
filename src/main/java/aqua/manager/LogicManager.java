@@ -55,7 +55,7 @@ public class LogicManager implements Loadable {
                 parser.parse(line).getService(this).process();
             }
         } catch (SyntaxException | ProcedureException ex) {
-            throw new LoadException(ex);
+            throw new LoadException(ex.getMessage(), ex);
         } catch (FileNotFoundException fnfEx) {
             // no save data just return
             return;

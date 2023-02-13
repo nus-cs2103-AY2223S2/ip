@@ -82,7 +82,7 @@ public class DeleteCommand extends CommandController {
         protected void display(TaskChangeReport report, IoManager manager) {
             manager.reply(String.format(String.join("\n",
                             "I have deleted the task:",
-                            "  %s"),
+                            "%s"),
                     report.task.toString()));
             if (report.numTask > 0) {
                 manager.reply(String.format(

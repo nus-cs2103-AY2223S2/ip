@@ -83,7 +83,7 @@ public abstract class AddTaskCommand extends CommandController {
             manager.reply(String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
                             Kaomoji.WAVE_UP,
-                            "  %s",
+                            "%s",
                             Kaomoji.WAVE_DOWN),
                     report.task.toString()));
             manager.reply(String.format(
