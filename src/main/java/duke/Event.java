@@ -83,7 +83,7 @@ public class Event extends Task {
      */
     public static void createEventTask(ArrayList<Task> array, String[] splitInput) {
         String combinedString = String.join(" ", splitInput);
-        if (splitInput.length == 1 || splitInput[1].equals("")){
+        if (splitInput.length == 1 || splitInput[1].equals("")) {
             try {
                 throw new DukeException("event");
             } catch (Exception e) {
@@ -92,37 +92,29 @@ public class Event extends Task {
                 System.out.println(divider);
             }
         } else {
-           
             String event = combinedString.split(" ", 2)[1];
-            String[] event_Arr = event.split(" /from", 2);
-
-                if (event_Arr.length == 2) {
-                    String desc = event_Arr[0];
-                    String[] period_Arr = event_Arr[1].split(" /to");
-                    if (period_Arr.length == 2) {
-
-                        String from = period_Arr[0].strip();
-                        String to = period_Arr[1].strip();
-
-
-                        if(isDate(from) && isDate(to)){
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                            LocalDate ldFrom = LocalDate.parse(from, formatter);
-                            LocalDate ldTo = LocalDate.parse(to, formatter);
-                            Event e = new Event(desc, ldFrom, ldTo);
-                            array.add(e);
-                            Ui.addTask(array, e);
-                        } else {
-                            Event e = new Event(desc, from, to);
-                            array.add(e);
-                            Ui.addTask(array, e);
-                        }
-
-                       
+            String[] eventArr = event.split(" /from", 2);
+            if (eventArr.length == 2) {
+                String desc = eventArr[0];
+                String[] periodArr = eventArr[1].split(" /to");
+                if (periodArr.length == 2) {
+                    String from = periodArr[0].strip();
+                    String to = periodArr[1].strip();
+                    if (isDate(from) && isDate(to)) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        LocalDate ldFrom = LocalDate.parse(from, formatter);
+                        LocalDate ldTo = LocalDate.parse(to, formatter);
+                        Event e = new Event(desc, ldFrom, ldTo);
+                        array.add(e);
+                        Ui.addTask(array, e);
+                    } else {
+                        Event e = new Event(desc, from, to);
+                        array.add(e);
+                        Ui.addTask(array, e);
                     }
                 }
+            }
         }
-        
     }
 
     /**
@@ -142,7 +134,6 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             System.out.println("Date " + date + " is not a date.");
             return false;
-    
         }
         return true;
     }
@@ -167,12 +158,9 @@ public class Event extends Task {
         if (bufSize <= 0) {
             return "";
         }
-  
         bufSize *= ((array[startIndex] == null ? 16 : array[startIndex].toString().length())
                         + separator.length());
-  
         StringBuffer buf = new StringBuffer(bufSize);
-  
         for (int i = startIndex; i < endIndex; i++) {
             if (i > startIndex) {
                 buf.append(separator);
@@ -198,8 +186,5 @@ public class Event extends Task {
         String timePeriod = from + d + to;
         return "E" + d + marked + d + description + d + timePeriod;
     }
-
-    
-  
   }
 

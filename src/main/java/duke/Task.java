@@ -10,8 +10,6 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String taskType = "T";
-    static String divider = "    ────────────── ⋆⋅☆⋅⋆ ───────────────";
-
     /**
      * Constructs a Task with a description.
      *
@@ -88,6 +86,4 @@ public abstract class Task {
     public String getDescription() {
         return description;
     }
-
-
 }
