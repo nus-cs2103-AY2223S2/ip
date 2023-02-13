@@ -24,25 +24,10 @@ public class UI {
     }
 
     /**
-     * Prints the welcome message to the UI.
-     */
-    public String getWelcomeMessage() {
-        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
-    }
-
-    /**
      * Prints the farewell message to the UI.
      */
     public String getFarewellMessage() {
         return "Bye. Hope to see you again soon!";
-    }
-
-    /**
-     * Takes in an error, and prints the error message to the UI.
-     * @param error The error.
-     */
-    public void showError(String error) {
-        System.out.println(error);
     }
 
     /**

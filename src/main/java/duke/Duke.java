@@ -49,6 +49,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Check if it is time to close the app (based on whether the user has inputted the 'bye' command).
+     * @return True if 'bye' command has been entered, false otherwise.
+     */
     public boolean isShutdownTime() {
         return isExit;
     }

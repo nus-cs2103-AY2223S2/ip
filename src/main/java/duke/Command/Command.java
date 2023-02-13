@@ -22,7 +22,7 @@ public abstract class Command {
 
     /**
      * Checks whether the current command from user is to exit the system.
-     * @return Whether or not the current command is a bye command.
+     * @return Whether the current command is a bye command.
      */
     public abstract boolean isByeCommand();
 
