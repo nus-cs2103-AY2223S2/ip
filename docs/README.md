@@ -1,8 +1,21 @@
 # User Guide
 
-`Kuromi クロミ` is a desktop application that acts as a *personal assistant chatbot* to **keep track of your tasks**. The character `Kuromi クロミ` (the bot) is taken from a [Sanrio Character](https://www.sanrio.com/collections/kuromi), and the user will play the role as `Kuromi クロミ`'s **rival**, `My Melody マイメロディ`.
+`Kuromi クロミ` is a desktop application that acts as a *personal assistant chatbot* to **keep track of your tasks**, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The character `Kuromi クロミ` (the bot) is taken from a [Sanrio Character](https://www.sanrio.com/collections/kuromi), and the user will play the role as `Kuromi クロミ`'s **rival**, `My Melody マイメロディ`.
 
-## Main Features 
+## Table of Contents
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick Start
+
+1. Ensure you have Java `11` or above installed in your Computer.
+2. Download the latest `kuromi.jar` from [here]().
+3. Copy the file to the folder you want to use as the *home folder* for your Kuromi.
+4. Double click the file to run the application. A GUI similar to the below should appear in a few seconds.
+5. Type the command in the chat box and press Enter (or click the Send button) to execute it.
+6. Refer to the [Usage](#usage) below for details of each command.
+
+## Main Features
 
 ### Manage your tasks
 
@@ -16,13 +29,28 @@ Kuromi can **remind** you of your upcoming deadlines by sending the command `rem
 
 To easily search for specific tasks, Kuromi is able to find the tasks which include a specific keyword.
 
+### Autosave
+
+Data loss? Fret not! The tasks are autosaved everytime you send a command.
+
 ### Get My Melody's Mistakes
 
 From this [source](https://hellokitty.fandom.com/wiki/Kuromi#With_Friends_and_Family), Kuromi has a notebook `Kuromi Note` that **lists all the mistakes** that My Melody made to Kuromi. You can get ~~My Melody's~~ your mistakes by specifying the command `mistakes`.
 
 ## Usage
 
-## Section A: Add a task
+<div markdown="block" class="alert alert-info">
+  
+**:information_source: Notes about the command format:**<br>
+  
+* Words in `angle brackets <>` are the parameters to be filled by the user.<br>
+  e.g. in `todo <description>`, `<description>` should be changed into the description of the todo : `todo borrow book`
+
+* Dates should be in the format of `yyyy-MM-dd HH:mm`.<br>
+  e.g. `deadline return book /by 2030-01-01 10:00`
+</div>
+
+## Section A: Adding a task
 
 ### 1. `todo`
 
@@ -98,7 +126,7 @@ Note:
 Now you have 6 tasks in the list.
 ```
 
-## Section B: View tasks
+## Section B: Listing all tasks
 
 ### `list`
 
@@ -267,10 +295,12 @@ You're annoying but I'll definitely miss you :D
 
 ## Section I: Miscellanous
 
-### 1. List My Melody's mistakes
+### mistakes
 
 #### Function
 Shows Kuromi's notebook `Kuromi Note` that contains a list of My Melody's mistakes.
 
 #### Format
 - `mistakes`
+
+## FAQ
