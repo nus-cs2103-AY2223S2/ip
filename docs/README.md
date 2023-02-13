@@ -16,6 +16,9 @@ Ever felt like you couldn't get a handle on *all* the things that you have to do
 4. Open a command line window, e.g. Terminal for MacOS or Command Prompt for Windows.
 5. `cd` into the folder you placed the jar file in, e.g. `cd ~/Desktop`.
 6. Start the application with the command `java -jar colette.jar`.
+7. You should see the window below.
+
+![startupWindow](https://raw.githubusercontent.com/zrei/ip/master/docs/Startup.png)
 
 ---
 
@@ -40,10 +43,17 @@ Brings up a list of all the commands that Colette knows.
 
 Format: ```help```
 
+Expected result:
+![helpCommand](https://raw.githubusercontent.com/zrei/ip/master/docs/helpCommand.png)
+![helpWindow](https://raw.githubusercontent.com/zrei/ip/master/docs/helpWindow.png)
+
 ### **Listing all tasks**
 Lists all tasks that are currently in the task list.
 
 Format: ```list```
+
+Expected result:
+![list](https://raw.githubusercontent.com/zrei/ip/master/docs/list.png)
 
 ### **Adding a task**
 You can add three types of tasks: [todos](#adding-a-todo), [deadlines](#adding-a-deadline), and [events](#adding-an-event).
