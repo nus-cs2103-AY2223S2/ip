@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import membot.model.Deadline;
@@ -140,9 +141,9 @@ public class TaskTest {
         assertEquals("X", t1.printStatus());
     }
 
-    @AfterEach
-    public void tearDown() {
-        for (int i = 0; i < MAX_TASKS; ++i) {
+    @BeforeEach
+    public void setUp() {
+        while (true) {
             try {
                 Task.deleteLast();
             } catch (NoSuchElementException e) {
