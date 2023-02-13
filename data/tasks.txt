@@ -1,3 +1,4 @@
-T | 1 | brush teeth
-E | 0 |  sleep  | now  | tomorrow
-T | 0 | go to school
+E | 1 |  sleep  | now  | tomorrow
+T | 0 | wake up
+T | 1 | hw
+T | 0 | debug
