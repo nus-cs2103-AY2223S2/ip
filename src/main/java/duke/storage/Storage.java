@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class Storage {
         this.filePath = "src" + File.separator + "main" + File.separator
                 + "java" + File.separator + "duke" + File.separator
                 + "data" + File.separator + "duke.txt";
+        assert Files.exists(Path.of(filePath)) : "File does not exists";
     }
 
     /**
@@ -63,8 +66,6 @@ public class Storage {
         try (ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(this.filePath))) {
             save.writeObject(taskList);
         } catch (Exception e) {
-            System.out.println(e);
-            //e.printStackTrace();
             throw new DukeException(TypeOfTask.storage, 1);
         }
     }
