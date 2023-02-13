@@ -1,10 +1,8 @@
-package duke.exception;
+package duke.common.exception;
 
 public class DukeIndexOutOfBoundsException extends DukeRuntimeException {
 
-    public DukeIndexOutOfBoundsException() {
-        super();
-    }
+    public DukeIndexOutOfBoundsException() {}
 
     public DukeIndexOutOfBoundsException(String message) {
         super(message);

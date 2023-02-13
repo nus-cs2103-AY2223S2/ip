@@ -1,6 +1,6 @@
-package duke.command;
+package duke.model.command;
 
-import duke.util.container.TaskList;
+import duke.model.task.TaskList;
 
 /**
  * Abstract implementation of a {@code Command} in the application.

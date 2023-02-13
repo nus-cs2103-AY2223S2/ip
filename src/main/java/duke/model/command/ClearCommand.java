@@ -1,6 +1,6 @@
-package duke.command;
+package duke.model.command;
 
-import duke.util.container.TaskList;
+import duke.model.task.TaskList;
 
 public class ClearCommand extends Command {
 
@@ -14,5 +14,4 @@ public class ClearCommand extends Command {
     public boolean equals(Object obj) {
         return obj instanceof ClearCommand;
     }
-
 }

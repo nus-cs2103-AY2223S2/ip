@@ -7,8 +7,9 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Task;
-import duke.task.TodoTask;
+import duke.model.task.Task;
+import duke.model.task.TaskList;
+import duke.model.task.TodoTask;
 
 public class TaskListTest {
 

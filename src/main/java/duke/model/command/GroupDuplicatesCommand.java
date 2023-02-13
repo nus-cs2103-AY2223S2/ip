@@ -1,6 +1,6 @@
-package duke.command;
+package duke.model.command;
 
-import duke.util.container.TaskList;
+import duke.model.task.TaskList;
 
 public class GroupDuplicatesCommand extends Command {
 

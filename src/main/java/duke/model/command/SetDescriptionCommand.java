@@ -1,9 +1,9 @@
-package duke.command;
+package duke.model.command;
 
 import java.util.Objects;
 
-import duke.task.Task;
-import duke.util.container.TaskList;
+import duke.model.task.Task;
+import duke.model.task.TaskList;
 
 public class SetDescriptionCommand extends Command {
 

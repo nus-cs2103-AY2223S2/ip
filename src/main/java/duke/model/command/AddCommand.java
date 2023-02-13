@@ -1,9 +1,9 @@
-package duke.command;
+package duke.model.command;
 
 import java.util.Objects;
 
-import duke.task.Task;
-import duke.util.container.TaskList;
+import duke.model.task.Task;
+import duke.model.task.TaskList;
 
 public class AddCommand extends Command {
 
@@ -30,5 +30,4 @@ public class AddCommand extends Command {
         AddCommand cmd = (AddCommand) obj;
         return Objects.equals(task, cmd.task);
     }
-
 }

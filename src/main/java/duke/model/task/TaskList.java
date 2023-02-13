@@ -1,4 +1,4 @@
-package duke.util.container;
+package duke.model.task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,9 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import duke.exception.DukeIndexOutOfBoundsException;
-import duke.task.DeadlineTask;
-import duke.task.Task;
+import duke.common.exception.DukeIndexOutOfBoundsException;
 
 /**
  * A wrapper around {@code List<Task>}.

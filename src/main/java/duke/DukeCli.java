@@ -1,5 +1,6 @@
 package duke;
 
+import duke.common.Storage;
 import duke.controller.CliController;
 import duke.model.Model;
 

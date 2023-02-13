@@ -1,5 +1,6 @@
 package duke;
 
+import duke.common.Storage;
 import duke.controller.MainWindow;
 import duke.model.Model;
 import javafx.application.Application;

@@ -1,4 +1,4 @@
-package duke.task;
+package duke.model.task;
 
 public class TodoTask extends Task {
 
@@ -20,5 +20,4 @@ public class TodoTask extends Task {
         }
         return super.equals(obj);
     }
-
 }

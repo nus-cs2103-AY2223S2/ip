@@ -1,10 +1,10 @@
-package duke.task;
+package duke.model.task;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import duke.exception.DukeIllegalArgumentException;
-import duke.exception.DukeIllegalStateException;
+import duke.common.exception.DukeIllegalArgumentException;
+import duke.common.exception.DukeIllegalStateException;
 
 /**
  * Abstract implementation of a {@code Task}.
@@ -15,8 +15,6 @@ public abstract class Task implements Serializable {
 
     protected String description;
     protected boolean isDone;
-
-    protected String tag = null;
 
     /**
      * Creates a {@code Task} with the given description. The created task will be marked as not
@@ -63,6 +61,10 @@ public abstract class Task implements Serializable {
         isDone = false;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public boolean contains(String keyword) {
         return description.contains(keyword);
     }
@@ -85,8 +87,6 @@ public abstract class Task implements Serializable {
             return false;
         }
         Task task = (Task) obj;
-        return isDone == task.isDone
-                && Objects.equals(description, task.description)
-                && Objects.equals(tag, task.tag);
+        return isDone == task.isDone && Objects.equals(description, task.description);
     }
 }

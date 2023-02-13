@@ -1,8 +1,8 @@
-package duke.command;
+package duke.model.command;
 
 import java.util.Objects;
 
-import duke.util.container.TaskList;
+import duke.model.task.TaskList;
 
 public class FindCommand extends Command {
 

@@ -5,19 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.DukeUtils;
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.RemoveCommand;
-import duke.command.UnmarkCommand;
-import duke.exception.DukeRuntimeException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.TodoTask;
+import duke.common.exception.DukeRuntimeException;
+import duke.model.command.AddCommand;
+import duke.model.command.Command;
+import duke.model.command.ExitCommand;
+import duke.model.command.FindCommand;
+import duke.model.command.ListCommand;
+import duke.model.command.MarkCommand;
+import duke.model.command.RemoveCommand;
+import duke.model.command.UnmarkCommand;
+import duke.model.task.DeadlineTask;
+import duke.model.task.EventTask;
+import duke.model.task.TodoTask;
+import duke.util.DukeUtils;
 
 public class CommandParserTest {
     private static final Class<DukeRuntimeException> EXPECTED_EXCEPTION_CLASS =

@@ -1,10 +1,10 @@
-package duke.task;
+package duke.model.task;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-import duke.DukeUtils;
-import duke.exception.DukeIllegalArgumentException;
+import duke.common.exception.DukeIllegalArgumentException;
+import duke.util.DukeUtils;
 
 public class EventTask extends Task {
 

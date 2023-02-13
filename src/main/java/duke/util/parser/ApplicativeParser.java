@@ -6,7 +6,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import duke.exception.ParserException;
 import duke.util.container.Pair;
 
 /**

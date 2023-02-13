@@ -1,7 +1,7 @@
-package duke.command;
+package duke.model.command;
 
-import duke.task.Task;
-import duke.util.container.TaskList;
+import duke.model.task.Task;
+import duke.model.task.TaskList;
 
 public class RemoveCommand extends Command {
 
@@ -28,5 +28,4 @@ public class RemoveCommand extends Command {
         RemoveCommand cmd = (RemoveCommand) obj;
         return index == cmd.index;
     }
-
 }

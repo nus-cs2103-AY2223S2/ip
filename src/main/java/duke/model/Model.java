@@ -1,9 +1,9 @@
 package duke.model;
 
-import duke.command.Command;
-import duke.exception.DukeRuntimeException;
+import duke.common.exception.DukeRuntimeException;
+import duke.model.command.Command;
+import duke.model.task.TaskList;
 import duke.util.container.ExecutionResult;
-import duke.util.container.TaskList;
 import duke.util.parser.CommandParser;
 
 /**
