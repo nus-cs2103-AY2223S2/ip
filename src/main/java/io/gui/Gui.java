@@ -19,6 +19,10 @@ public class Gui extends Application {
     private FXMLLoader fxmlLoader;
     private AnchorPane mainWindow;
 
+    /**
+     * Actions to perform when Application is launched.
+     * Loads children, formats scene and sets the MainWindow gui property.
+     */
     @Override
     public void start(Stage stage) {
         try {
