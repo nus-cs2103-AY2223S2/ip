@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import alfred.exceptions.AlfredException;
 
@@ -47,10 +49,10 @@ public class TaskList {
     public String getList() {
         int itemIndex = 1;
         StringBuilder listOfItems = new StringBuilder();
-        for (Task item : tasks) {
-            listOfItems.append(String.format("    %d. %s\n", itemIndex, item));
-            itemIndex++;
-        }
+
+        IntStream.range(0, tasks.size())
+                .forEach(index -> listOfItems.append(String.format("    %d. %s\n", index + 1, tasks.get(index))));
+
         String numTasks = tasks.size() == 1 ? "task" : "tasks";
         listOfItems.append(String.format("    You have %d %s in the list\n", tasks.size(), numTasks));
         return listOfItems.toString();
