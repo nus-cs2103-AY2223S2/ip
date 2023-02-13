@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -47,15 +47,13 @@ public class MainWindow extends AnchorPane {
                 .addListener(observable -> scrollPane.setVvalue(1.0));
     }
 
-    public void addUserDialog(VBox dialog) {
-        ImageView avatar = new ImageView(ui.userImage);
-        DialogBox dialogBox = DialogBox.getLeftDialog(dialog, avatar);
+    public void addUserDialog(Node... nodes) {
+        DialogBox dialogBox = DialogBox.getLeftDialog(ui.userImage, nodes);
         dialogContainer.getChildren().add(dialogBox);
     }
 
-    public void addSamDialog(VBox dialog) {
-        ImageView avatar = new ImageView(ui.samImage);
-        DialogBox dialogBox = DialogBox.getRightDialog(dialog, avatar);
+    public void addSamDialog(Node... nodes) {
+        DialogBox dialogBox = DialogBox.getRightDialog(ui.samImage, nodes);
         dialogContainer.getChildren().add(dialogBox);
     }
 
@@ -65,8 +63,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        VBox userDialog = new VBox(userText);
-        addUserDialog(userDialog);
+        addUserDialog(userText);
 
         Sam.getSamInstance().issueCommand(userInput.getText());
         userInput.clear();

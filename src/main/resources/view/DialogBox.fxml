@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root prefWidth="200.0" style="-fx-border-color: #ddd; -fx-border-width: 1 0 0 0;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> 
+  <VBox fx:id="dialogContainer" spacing="5.0" HBox.hgrow="ALWAYS" />
+  <ImageView fx:id="avatar" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
+   <padding>
+      <Insets bottom="16.0" top="16.0" />
+   </padding>
+</fx:root>

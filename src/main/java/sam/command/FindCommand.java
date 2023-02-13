@@ -22,7 +22,7 @@ public class FindCommand extends Command {
             result.addMessage(Dialog.FIND_EMPTY.getDialog());
         } else {
             result.addMessage(String.format(Dialog.FIND.getDialog(), list.size()));
-            result.addTaskList(list);
+            result.addTasks(list);
         }
         return result;
     }

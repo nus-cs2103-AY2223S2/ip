@@ -23,7 +23,7 @@ public class ListCommand extends Command {
             List<Task> list = tasks.getTasks();
             assert !list.isEmpty() : "list shouldn't be empty";
             result.addMessage(Dialog.LIST.getDialog());
-            result.addTaskList(list);
+            result.addTasks(list);
         }
         return result;
     }

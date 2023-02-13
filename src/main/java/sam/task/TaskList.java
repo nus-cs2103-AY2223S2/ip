@@ -139,11 +139,12 @@ public class TaskList {
      * @return A list of tasks that match the given substring.
      */
     public List<Task> findTasks(String subString) {
-        List<Task> list = new ArrayList<>(count());
-        for (int i = 0; i < count(); i++) {
-            Task task = tasks.get(i);
+        List<Task> list = new ArrayList<>();
+        for (Task task : tasks) {
             if (task.matchTitle(subString)) {
-                list.add(i, task);
+                list.add(task);
+            } else {
+                list.add(null);
             }
         }
         return list;

@@ -62,7 +62,7 @@ public class Sam extends Application {
         try {
             Command c = Parser.parseCommand(input);
             Result r = c.execute(tasks, storage);
-            ui.respond(r);
+            ui.respond(r.getResult());
             if (c instanceof ExitCommand) {
                 exitApp();
             }

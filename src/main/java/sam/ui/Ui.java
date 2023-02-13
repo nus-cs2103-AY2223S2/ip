@@ -1,9 +1,9 @@
 package sam.ui;
 
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sam.command.Result;
 
 /**
  * Handles user interaction.
@@ -32,16 +32,20 @@ public class Ui {
      * @param messages A list of strings representing lines of dialogue.
      */
     public void respond(String... messages) {
-        Result result = new Result();
-        for (String message : messages) {
-            result.addMessage(message);
+        Label[] labels = new Label[messages.length];
+        for (int i = 0; i < labels.length; i++) {
+            labels[i] = new Label(messages[i]);
         }
-        respond(result);
+        respond(labels);
     }
 
-    public void respond(Result result) {
-        VBox samDialog = result.getResult();
-        mainWindow.addSamDialog(samDialog);
+    /**
+     * Adds a dialogue from Sam formed by the given nodes.
+     *
+     * @param nodes A list of nodes.
+     */
+    public void respond(Node... nodes) {
+        mainWindow.addSamDialog(nodes);
     }
 
     /**

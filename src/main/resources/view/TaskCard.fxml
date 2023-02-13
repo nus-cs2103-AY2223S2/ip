@@ -15,7 +15,7 @@
          <Insets right="5.0" />
       </HBox.margin>
   </Label>
-   <HBox alignment="CENTER_LEFT" prefWidth="200.0">
+   <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
       <padding>
          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
       </padding>
@@ -23,6 +23,9 @@
         <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
           <Label fx:id="title" style="-fx-font-size: 14; -fx-font-weight: bold;" text="title" wrapText="true" />
           <Label fx:id="description" text="description" textFill="#666666" wrapText="true" />
+            <HBox.margin>
+               <Insets right="10.0" />
+            </HBox.margin>
         </VBox>
          <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="18.0">
             <children>
