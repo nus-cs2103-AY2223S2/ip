@@ -1,7 +1,5 @@
 package duke.views;
 
-import duke.commands.Command;
-
 /**
  * Handles display of program output to user.
  */
@@ -33,10 +31,6 @@ public class UI {
                         + newlineAndIndentString("find [search term]")
                         + newlineAndIndentString("free")
                         + newlineAndIndentString("bye");
-    }
-
-    public void printCommandOutput(Command c) {
-        System.out.println(c.getCommandStatus());
     }
 
 }

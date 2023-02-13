@@ -19,6 +19,5 @@ public class ToDoCommand extends Command {
         tasks.addTask(todo);
         this.commandStatus = "Added To-do: " + todo + "\n"
                 + "You now have " + tasks.size() + " task(s) in your list";
-        ui.printCommandOutput(this);
     }
 }

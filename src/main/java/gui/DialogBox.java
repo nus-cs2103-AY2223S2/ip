@@ -21,22 +21,21 @@ import javafx.scene.layout.Region;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String dukeStyle = "-fx-background-insets: 0 10 0 10;"
+            + "-fx-background-color: #EDDBC7;"
+            + "-fx-padding: 5 20 5 20;"
+            + "-fx-font-size: 11pt;"
+            + "-fx-background-radius: 10;";
+    private static final String userStyle = "-fx-background-insets: 0 10 0 10;"
+            + "-fx-background-color: #E5E3C9;"
+            + "-fx-padding: 10 20 10 20;"
+            + "-fx-font-size: 11pt;"
+            + "-fx-background-radius: 10;";
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private static final String userStyle = "-fx-background-insets: 0 10 0 10;" +
-            "-fx-background-color: #E5E3C9;" +
-            "-fx-padding: 10 20 10 20;" +
-            "-fx-font-size: 11pt;" +
-            "-fx-background-radius: 10;";
-
-    private static final String dukeStyle = "-fx-background-insets: 0 10 0 10;" +
-            "-fx-background-color: #EDDBC7;" +
-            "-fx-padding: 5 20 5 20;" +
-            "-fx-font-size: 11pt;" +
-            "-fx-background-radius: 10;";
 
     private DialogBox(String text, Image img, String style) {
         try {

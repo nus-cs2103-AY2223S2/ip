@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * A wrapper class for a list of tasks.
@@ -80,15 +78,26 @@ public class TaskList {
         return (this.size() == 0);
     }
 
+    /**
+     * Finds a task that contains the searchTerm in its name.
+     * @param searchTerm A keyword used to find a task.
+     * @return A list of tasks that contains the searchTerm in its name.
+     */
     public TaskList find(String searchTerm) {
         List<Task> taskList = this.taskList
                 .stream()
-                .filter(task -> task.getName().contains(searchTerm))
+                .filter(task -> task.getName().toLowerCase().contains(searchTerm.toLowerCase()))
                 .collect(Collectors.toList());
 
         return new TaskList(new ArrayList<>(taskList));
     }
 
+    /**
+     * Finds the closest free day in this TaskList. A free day is defined as a day
+     * which has no events occurring.
+     * @return A String that tells us the closest free day and the number
+     *     of days from today until that day.
+     */
     public String findFreeDay() {
         LocalDateTime startingDate = LocalDateTime.now();
         while (true) {
@@ -106,7 +115,8 @@ public class TaskList {
                 }
                 return "Your closest free day is in "
                         + startingDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                        + ", " + ChronoUnit.DAYS.between(LocalDate.now(), currentDate.toLocalDate()) + " day(s) from now!";
+                        + ", " + ChronoUnit.DAYS.between(LocalDate.now(), currentDate.toLocalDate())
+                        + " day(s) from now!";
             }
             startingDate = startingDate.plusDays(1);
         }

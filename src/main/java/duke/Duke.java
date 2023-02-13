@@ -13,11 +13,14 @@ import duke.views.UI;
  * duke.Main driver class for duke.Duke.
  */
 public class Duke {
+    private UI ui;
     private final TaskList tasks;
-    public UI ui;
     private final Storage storage;
 
-
+    /**
+     * A constructor class for a Duke object.
+     * @throws IOException When an error occurs while loading local file storage.
+     */
     public Duke() throws IOException {
         this.tasks = new TaskList();
         this.ui = new UI();
@@ -37,6 +40,16 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Gets what Duke should initially output to the user on program start up.
+     * @return A string consisting of initialization messages.
+     */
+    public String getDukeInitMessage() {
+        return this.ui.getInitMessage()
+                + "\n \n"
+                + this.ui.getAvailableCommands();
     }
 
 }

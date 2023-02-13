@@ -17,6 +17,16 @@ import javafx.util.Duration;
  * Controller for gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String buttonDefaultStyle = "-fx-padding: 5 20 5 20;"
+            + "-fx-background-color: transparent;"
+            + "-fx-border-color: black;"
+            + "-fx-border-radius: 10";
+
+    private static final String buttonHoverStyle = "-fx-padding: 5 20 5 20;"
+            + "-fx-background-color: #7B8FA1;"
+            + "-fx-background-radius: 10;"
+            + "-fx-border-color: black;"
+            + "-fx-border-radius: 10";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -33,17 +43,9 @@ public class MainWindow extends AnchorPane {
 
     private Stage stage;
 
-    private static final String buttonDefaultStyle = "-fx-padding: 5 20 5 20;"
-            + "-fx-background-color: transparent;"
-            + "-fx-border-color: black;"
-            + "-fx-border-radius: 10";
-
-    private static final String buttonHoverStyle = "-fx-padding: 5 20 5 20;"
-            + "-fx-background-color: #7B8FA1;"
-            + "-fx-background-radius: 10;"
-            + "-fx-border-color: black;"
-            + "-fx-border-radius: 10";
-
+    /**
+     * Initializes the MainWindow of the GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -60,11 +62,12 @@ public class MainWindow extends AnchorPane {
         sendButton.setStyle(buttonDefaultStyle);
     }
 
-    public void sendGreeting() {
+    /**
+     * Displays a greeting message to the user on startup.
+     */
+    public void displayInitGreeting() {
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(duke.ui.getInitMessage()
-                        + "\n \n"
-                        + duke.ui.getAvailableCommands(), dukeImage)
+                DialogBox.getDukeDialog(duke.getDukeInitMessage(), dukeImage)
         );
     }
 
@@ -88,7 +91,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished( event -> stage.close() );
+            delay.setOnFinished(event -> stage.close());
             delay.play();
         }
     }

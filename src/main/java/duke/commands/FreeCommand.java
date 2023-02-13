@@ -10,6 +10,5 @@ public class FreeCommand extends Command {
     @Override
     public void execute(UI ui, TaskList tasks, Storage storage) throws DukeException {
         this.commandStatus = tasks.findFreeDay();
-        ui.printCommandOutput(this);
     }
 }

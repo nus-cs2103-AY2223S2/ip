@@ -26,6 +26,5 @@ public class FindCommand extends Command {
             }
 
         }
-        ui.printCommandOutput(this);
     }
 }

@@ -26,6 +26,11 @@ public class Storage {
     private final TaskList tasks;
     private final String fileName;
 
+    /**
+     * Create a Storage class that interfaces between a TaskList and a File.
+     * @param tasks a TaskList.
+     * @param fileName Name of the local file that is used as storage in the user's system.
+     */
     public Storage(TaskList tasks, String fileName) {
         this.tasks = tasks;
         this.fileName = fileName;

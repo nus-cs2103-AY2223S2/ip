@@ -20,6 +20,5 @@ public class ByeCommand extends Command {
         } catch (IOException e) {
             throw new DukeException("Failed to save tasks to local storage...");
         }
-        ui.printCommandOutput(this);
     }
 }

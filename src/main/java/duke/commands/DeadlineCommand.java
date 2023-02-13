@@ -29,6 +29,5 @@ public class DeadlineCommand extends Command {
         tasks.addTask(deadline);
         this.commandStatus = "Added deadline: " + deadline + "\n"
                 + "You now have " + tasks.size() + " task(s) in your list";
-        ui.printCommandOutput(this);
     }
 }

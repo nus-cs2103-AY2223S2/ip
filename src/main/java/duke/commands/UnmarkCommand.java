@@ -16,9 +16,8 @@ public class UnmarkCommand extends Command {
     public void execute(UI ui, TaskList tasks, Storage storage) throws DukeException {
         try {
             tasks.markUndone(index);
-            this.commandStatus = "Oof! I have marked this task as undone for you! \n" +
-                    "\t" + tasks.get(index - 1);
-            ui.printCommandOutput(this);
+            this.commandStatus = "Oof! I have marked this task as undone for you! \n"
+                    + "\t" + tasks.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please provide a valid index!");
         }

@@ -34,6 +34,5 @@ public class EventCommand extends Command {
         tasks.addTask(event);
         this.commandStatus = "Added event: " + event + "\n"
                 + "You now have " + tasks.size() + " task(s) in your list";
-        ui.printCommandOutput(this);
     }
 }

@@ -2,16 +2,13 @@ package duke;
 
 import java.io.IOException;
 
-import gui.DialogBox;
+import gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import gui.MainWindow;
 
 /**
  * A GUI for duke.Duke using FXML.
@@ -35,7 +32,7 @@ public class Main extends Application {
             stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setStage(stage);
-            fxmlLoader.<MainWindow>getController().sendGreeting();
+            fxmlLoader.<MainWindow>getController().displayInitGreeting();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

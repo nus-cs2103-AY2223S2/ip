@@ -14,6 +14,5 @@ public class ListCommand extends Command {
         } else {
             this.commandStatus = tasks.toString();
         }
-        ui.printCommandOutput(this);
     }
 }

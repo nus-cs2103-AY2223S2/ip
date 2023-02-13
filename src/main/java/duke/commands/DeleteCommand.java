@@ -19,7 +19,6 @@ public class DeleteCommand extends Command {
             Task deletedTask = tasks.delete(index);
             this.commandStatus = "Removed task: " + deletedTask + "\n"
                     + "You now have " + tasks.size() + " task(s) in your list.";
-            ui.printCommandOutput(this);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please provide a valid index!");
         }
