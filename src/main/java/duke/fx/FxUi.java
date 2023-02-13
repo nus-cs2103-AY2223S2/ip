@@ -28,6 +28,6 @@ public class FxUi {
      * Displays startup text on the GUI.
      */
     public void displayIntro() {
-        mainWindow.displayReply("Welcome to MEL!!! Type 'help' to get help");
+        mainWindow.displayReply("Welcome to MEL! Type 'help' to get help");
     }
 }

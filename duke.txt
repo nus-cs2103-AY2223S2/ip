@@ -1,3 +1,3 @@
 [D][X] return book (by: Feb 2 2019)
-[E][ ] get best book (from: Jan 12 2020 to: Jan 13 2020)
-[T][X] work
+[E][X] get best book (from: Jan 12 2020 to: Jan 13 2020)
+[T][ ] work
