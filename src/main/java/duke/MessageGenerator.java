@@ -49,6 +49,13 @@ public class MessageGenerator {
         return "We needed a number here";
     }
 
+    /**
+     * Generates a message containing a list of tasks If tasks were found.
+     * Else, generate a did not find anything message.
+     *
+     * @param tasks a list of tasks
+     * @return a message containing the tasks found
+     */
     public static String genFindTasksMsg(String tasks) {
         if (tasks.isEmpty()) {
             return "Didn't find anything";
@@ -57,6 +64,13 @@ public class MessageGenerator {
         return "Here's what I found:\n" + tasks;
     }
 
+    /**
+     * Generates a message containing a list of tasks. If there are no tasks in the list, generate an empty task list
+     * message.
+     *
+     * @param tasks a list of tasks
+     * @return a message containing the tasks found
+     */
     public static String genShowTasksMsg(String tasks) {
         if (tasks.isEmpty()) {
             return "You don't have any tasks... Try adding some.";
@@ -65,6 +79,13 @@ public class MessageGenerator {
         return "Here's your tasks:\n" + tasks;
     }
 
+    /**
+     * Generates a message indicating the task has been marked or unmarked.
+     *
+     * @param task
+     * @param isMark
+     * @return
+     */
     public static String genMarkorUnmarkTaskMsg(String task, boolean isMark) {
         if (isMark) {
             return "Marked this task: " + task;

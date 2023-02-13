@@ -1,13 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
 
 public class DateTimeParserTest {
     @Test
@@ -59,7 +60,7 @@ public class DateTimeParserTest {
     @Test
     public void dateTimeToStorageString_testDateTime_success() {
         try {
-            LocalDateTime testDateTime = DateTimeParser.parse("13-01-2012 : 0230")
+            LocalDateTime testDateTime = DateTimeParser.parse("13-01-2012 02:30");
             assertEquals(DateTimeParser.dateTimeToStorageString(testDateTime), "13-01-2012 02:30");
         } catch (DateTimeParseException e) {
             fail();

@@ -6,7 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,6 +27,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/daruma.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/arisaka.png"));
 
+    /**
+     * Called when MainWindow is initialized.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -43,13 +47,13 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         DukeResponse response = duke.genResponse(input);
 
-        if (response.shouldExit) {
+        if (response.shouldExit()) {
             Platform.exit();
         }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.message, dukeImage)
+                DialogBox.getDukeDialog(response.getMessage(), dukeImage)
         );
 
         userInput.clear();

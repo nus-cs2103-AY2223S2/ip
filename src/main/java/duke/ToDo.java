@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a to do task. Inherits from the Task class;

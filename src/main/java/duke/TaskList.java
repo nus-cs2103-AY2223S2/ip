@@ -48,6 +48,11 @@ public class TaskList implements Iterable<Task> {
         return output;
     }
 
+    /**
+     * Generates a string of the current task list in a format used for file storage.
+     *
+     * @return a string representing the task list
+     */
     public String toStorageString() {
         String output = "";
         for (Task t : this.taskList) {

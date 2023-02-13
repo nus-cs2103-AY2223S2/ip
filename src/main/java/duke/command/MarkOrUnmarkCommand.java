@@ -4,14 +4,23 @@ import duke.DukeResponse;
 import duke.MessageGenerator;
 import duke.Task;
 import duke.TaskList;
-import duke.exception.DukeException;
 
 
+/**
+ * Represents a command that when executed marks or unmarks an existing task.
+ */
 public class MarkOrUnmarkCommand extends Command {
     private final Boolean isMark;
     private final TaskList taskList;
     private final Integer taskIdx;
 
+    /**
+     * Constructs a MarkOrUnmarkCommand with the given arguments.
+     *
+     * @param taskIdx
+     * @param taskList
+     * @param isMark
+     */
     public MarkOrUnmarkCommand(int taskIdx, TaskList taskList, boolean isMark) {
         this.taskIdx = taskIdx;
         this.taskList = taskList;

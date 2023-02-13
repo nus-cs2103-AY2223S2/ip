@@ -11,6 +11,13 @@ public class Deadline extends Task {
     protected LocalDateTime by;
     protected boolean hasTime;
 
+    /**
+     * Creates a deadline object with the given arguments.
+     *
+     * @param description description for the task
+     * @param by deadline's due date and time
+     * @param hasTime indicates if the given deadline includes a time
+     */
     public Deadline(String description, LocalDateTime by, boolean hasTime) {
         super(description);
         this.by = by;

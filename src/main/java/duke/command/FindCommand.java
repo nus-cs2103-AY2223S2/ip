@@ -5,11 +5,19 @@ import duke.MessageGenerator;
 import duke.Task;
 import duke.TaskList;
 
-
+/**
+ * Represents a command that when executed returns tasks found.
+ */
 public class FindCommand extends Command {
     private final String keyword;
     private final TaskList taskList;
 
+    /**
+     * Constructs a FindCommand with the given arguments.
+     *
+     * @param keyword
+     * @param taskList
+     */
     public FindCommand(String keyword, TaskList taskList) {
         this.keyword = keyword;
         this.taskList = taskList;

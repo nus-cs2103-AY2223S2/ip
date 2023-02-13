@@ -1,10 +1,7 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Represents a task that occurs within a period of time. Inherits from the Task class.
@@ -15,6 +12,15 @@ public class Event extends Task {
     protected boolean fromHasTime;
     protected boolean toHasTime;
 
+    /**
+     * Constructs an Event task with the given arguments
+     *
+     * @param description task description
+     * @param from start date of event
+     * @param fromHasTime indicates if start date contains a time
+     * @param to end date of event
+     * @param toHasTime indicates if end date contains a time
+     */
     public Event(String description, LocalDateTime from, boolean fromHasTime, LocalDateTime to, boolean toHasTime) {
         super(description);
         this.from = from;

@@ -1,17 +1,34 @@
 package duke.command;
 
-import duke.*;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import duke.DateTimeParser;
+import duke.Deadline;
+import duke.DukeResponse;
+import duke.Event;
+import duke.MessageGenerator;
+import duke.Task;
+import duke.TaskList;
+
+/**
+ * Represents a command that when executed, edits a single field of an existing task.
+ */
 public class EditCommand extends Command {
     private TaskList taskList;
     private String field;
     private Integer taskIdx;
     private String newValue;
 
+    /**
+     * Constructs an edit command with the given arguments.
+     *
+     * @param taskIdx
+     * @param field
+     * @param newValue
+     * @param taskList
+     */
     public EditCommand(Integer taskIdx, String field, String newValue, TaskList taskList) {
         this.field = field;
         this.taskIdx = taskIdx;
@@ -40,7 +57,7 @@ public class EditCommand extends Command {
         return new DukeResponse("Error");
     }
 
-    public DukeResponse handleBy() {
+    private DukeResponse handleBy() {
         Task task = taskList.get(taskIdx);
 
         if (!(task instanceof Deadline)) {
@@ -64,7 +81,7 @@ public class EditCommand extends Command {
 
     }
 
-    public DukeResponse handleFromOrTo() {
+    private DukeResponse handleFromOrTo() {
         Task task = taskList.get(taskIdx);
 
         if (!(task instanceof Event)) {
@@ -96,7 +113,7 @@ public class EditCommand extends Command {
     }
 
 
-    public DukeResponse handleDesc() {
+    private DukeResponse handleDesc() {
         Task task = taskList.get(taskIdx);
         assert task != null;
         task.setDescription(newValue);

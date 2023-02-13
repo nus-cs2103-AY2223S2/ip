@@ -1,11 +1,22 @@
 package duke;
 
-import duke.command.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandTypes;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EditCommand;
+import duke.command.ErrorCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkOrUnmarkCommand;
+import duke.command.ToDoCommand;
 
 
 /**
@@ -81,6 +92,8 @@ public class Parser {
                 return new MarkOrUnmarkCommand(taskIdx, taskList, true);
             case EDIT:
                 return handleEdit(taskIdx, commandStream, taskList);
+            default:
+                assert false;
             }
 
         } catch (NumberFormatException e) {

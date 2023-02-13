@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,9 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
-import java.io.IOException;
-
+/**
+ * Main application class responsible for start and stop actions.
+ */
 public class Main extends Application {
     private MainWindow mainWindowController;
     private Image iconImage = new Image(this.getClass().getResourceAsStream("/images/icon.png"));
@@ -23,7 +25,7 @@ public class Main extends Application {
             stage.getIcons().add(iconImage);
             stage.setResizable(false);
 
-            mainWindowController = (MainWindow)fxmlLoader.<MainWindow>getController();
+            mainWindowController = (MainWindow) fxmlLoader.<MainWindow>getController();
             assert mainWindowController != null : "mainWindowController should not be null in start";
 
             Scene scene = new Scene(ap);
