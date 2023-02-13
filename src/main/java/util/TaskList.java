@@ -54,7 +54,7 @@ public class TaskList {
      */
     public String listTasks() {
         StringBuilder sb = new StringBuilder();
-        sb.append("    Here are the tasks in your list:");
+        sb.append("Here are the tasks in your list:\n");
         int counter = 1;
         for (Task t : taskList) {
             sb.append(counter + ". " + t.toString() + "\n");
@@ -181,8 +181,8 @@ public class TaskList {
         int minutesIndex = input.indexOf("/minutes");
 
         if (dayIndex == -1 || hourIndex == -1 || minutesIndex == -1) {
-            throw new DukeException("Invalid Input!\n" + "Usage should be:\n" +
-                    "snooze {taskNumber} /day {days} /hour {hour} /minutes {minutes}");
+            throw new DukeException("Invalid Input!\n" + "Usage should be:\n" + "snooze {taskNumber} " +
+                    "/day {days} /hour {hour} /minutes {minutes}");
         }
         int taskNumber = Integer.parseInt(input.get(1)) - 1;
         int days = Integer.parseInt(input.get(dayIndex + 1));

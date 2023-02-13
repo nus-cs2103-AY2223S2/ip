@@ -57,9 +57,10 @@
         -->
         <module name="CustomImportOrder">
             <property name="customImportOrderRules"
-                      value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
+                      value="STATIC###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE"/>
             <property name="specialImportsRegExp" value="^org\."/>
             <property name="thirdPartyPackageRegExp" value="^com\."/>
+            <property name="standardPackageRegExp" value="^(duke|java)\."/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
         </module>
 

@@ -19,8 +19,7 @@ import util.Ui;
 
 
 /**
- * Duke class to run and execute the program
- *
+ * Duke class to run and execute the program.
  * @author Merrick
  */
 public class Duke extends Application {
@@ -129,10 +128,11 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from Duke from running the command.
+     * @param command Input command from user.
+     * @return Response to the action specified by user.
      */
-    public String getResponse(String input) {
-        return parser.handleGeneralCommand(input, tasks, storage, ui);
+    public String getResponse(String command) {
+        return parser.handleGeneralCommand(command, tasks, storage, ui);
     }
 }

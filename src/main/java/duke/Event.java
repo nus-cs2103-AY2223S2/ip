@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 
 
 /**
- * Subclass of Task which has a start and deadline datetime.
- *
+ * Event task which has a start and end datetime.
  * @author Merrick
  */
 public class Event extends Task {
@@ -50,6 +49,7 @@ public class Event extends Task {
      * Creates an Event Task from user input.
      * @param command User input to be used to create the Event Task.
      * @param t TaskList object to add the newly created Task into the list of tasks.
+     * @return Message to be shown to the user.
      * @throws DukeException If command is invalid.
      */
     public static String createEvent(String command, TaskList t) throws DukeException {

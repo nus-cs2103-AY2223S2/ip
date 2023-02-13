@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 /**
  * Subclass of Task which includes a deadline.
- *
  * @author Merrick
  */
 public class DeadlineTask extends Task {
@@ -52,6 +51,7 @@ public class DeadlineTask extends Task {
      * Creates a DeadlineTask from user input.
      * @param command Input provided by user.
      * @param t TaskList to store the newly created DeadlineTask
+     * @return Message to be shown to the user.
      * @throws DukeException If command is invalid.
      */
     public static String createDeadlineTask(String command, TaskList t) throws DukeException {

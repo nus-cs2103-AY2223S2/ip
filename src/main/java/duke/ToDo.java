@@ -4,10 +4,10 @@ import util.DukeException;
 import util.TaskList;
 
 /**
- * Subclass of Task which stores the taskName
- *
+ * Todo task which stores the taskName.
  * @author Merrick
  */
+
 public class ToDo extends Task {
     /**
      * Constructor for ToDo
@@ -18,7 +18,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructor for ToDo
+     * Constructor for ToDo.
      * @param taskName Description of ToDo task.
      * @param isCompleted Completion status of ToDo task.
      */
@@ -31,6 +31,7 @@ public class ToDo extends Task {
      * Creates a ToDo Task from user input.
      * @param command User input to be used to create the ToDo Task.
      * @param t TaskList object to add the newly created Task into the list of tasks.
+     * @return Message to be shown to the user.
      * @throws DukeException If command is invalid.
      */
     public static String createToDo(String command, TaskList t) throws DukeException {

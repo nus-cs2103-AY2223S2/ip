@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * DukeException class to handle the different errors that can be
- * encountered by the Duke Program.
- *
+ * DukeException class to handle the different errors that can be encountered by the Duke Program.
  * @author Merrick
  */
 public class DukeException extends Exception {
@@ -14,6 +12,13 @@ public class DukeException extends Exception {
             Arrays.asList("todo", "list", "deadline", "event"));
     private static final ArrayList<String> markInput = new ArrayList<>(Arrays.asList("mark", "unmark", "delete"));
     private String errorMessage = "I'm sorry, but I don't know what that means :-(";
+
+
+    /**
+     * Empty constructor for DukeException
+     */
+    public DukeException() {}
+
     /**
      * Constructor of DukeException.
      * @param inputType Description of error.
@@ -29,11 +34,6 @@ public class DukeException extends Exception {
             this.errorMessage = inputType;
         }
     }
-
-    /**
-     * Empty constructor for DukeException
-     */
-    public DukeException() {}
 
     @Override
     public String toString() {
