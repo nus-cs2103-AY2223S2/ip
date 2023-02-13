@@ -1,7 +1,35 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Running duke.Utilities.Duke for the first time - Creating required data files
+Hello! I'm duke.Utilities.Duke
+What can I do for you?
+Got it. I've added this task:
+ [T][ ] borrow book
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+ [D][ ] sleep  (by: 10pm)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+ [E][ ] play floorball  (from: 6pm  to: 9.30pm)
+Now you have 3 tasks in the list.
+Nice! I've marked this task as done:
+[T][X] borrow book
+Invalid task number detected! Sorry, the task number 4 has not been added/cannot be added! Please try again
+Nice! I've marked this task as done:
+[E][X] play floorball  (from: 6pm  to: 9.30pm)
+Got it. I've added this task:
+ [T][ ] meet coach
+Now you have 4 tasks in the list.
+Invalid Input(s) detected! Sorry, the input remove 2 is not a supported command!
+Noted. I've removed this task:
+ [D][ ] sleep  (by: 10pm)
+Now you have 3 tasks in the list.
+OK, I've marked this task as not done yet:
+[T][ ] borrow book
+Here are the tasks in your list:
+1.[T][ ] borrow book
+2.[E][X] play floorball  (from: 6pm  to: 9.30pm)
+3.[T][ ] meet coach
+
+Incorrect Argument(s) detected! Sorry, command: deadline sleep expected 2 arguments, detected 1 arguments!
+Incorrect Argument(s) detected! Sorry, command: event wash clothes /from 6pm expected 3 arguments, detected 2 arguments!
+Bye. Hope to see you again soon!
 

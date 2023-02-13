@@ -1,0 +1,14 @@
+todo borrow book
+deadline sleep /by 10pm
+event play floorball /from 6pm /to 9.30pm
+mark 1
+mark 4
+mark 3
+todo meet coach
+remove 2
+delete 2
+unmark 1
+list
+deadline sleep
+event wash clothes /from 6pm
+bye
