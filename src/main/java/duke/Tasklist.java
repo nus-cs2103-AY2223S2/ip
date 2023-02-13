@@ -8,18 +8,15 @@ import java.util.ArrayList;
  */
 
 public class Tasklist {
-	ArrayList<Task> listOfThings = new ArrayList<Task>();
+	ArrayList<Task> listOfTasks = new ArrayList<Task>();
 
 	/**
 	 * Add a task to the tasklist
 	 *
 	 * @param task Task to be added to the Tasklist
 	 */
-	public String add(Task task) {
-		listOfThings.add(task);
-		return "Got it. I've added this task:\n"
-				+ task + "\n"
-				+ "Now you have " + listOfThings.size() + " tasks in the list.";
+	public void add(Task task) {
+		listOfTasks.add(task);
 	}
 
 	/**
@@ -27,13 +24,10 @@ public class Tasklist {
 	 *
 	 * @param i The i-th task to be marked
 	 */
-	public String mark(int i) {
-		Task thisTask = listOfThings.get(i - 1);
+	public void mark(int i) {
+		Task thisTask = listOfTasks.get(i - 1);
 		thisTask.setDone();
-		listOfThings.set(i - 1, thisTask);
-		Ui.showToUser("Nice! I've marked this task as done:");
-		Ui.showToUser(thisTask.toString());
-		return "Nice, I've marked this task as done: " + thisTask.toString();
+		listOfTasks.set(i - 1, thisTask);
 	}
 
 	/**
@@ -41,13 +35,10 @@ public class Tasklist {
 	 *
 	 * @param i The i-th task to be marked
 	 */
-	public String unmark(int i) {
-		Task thisTask = listOfThings.get(i - 1);
+	public void unmark(int i) {
+		Task thisTask = listOfTasks.get(i - 1);
 		thisTask.setUndone();
-		listOfThings.set(i - 1, thisTask);
-		Ui.showToUser("Nice! I've marked this task as undone:");
-		Ui.showToUser(thisTask.toString());
-		return "Nice, I've marked this task as undone: " + thisTask.toString();
+		listOfTasks.set(i - 1, thisTask);
 	}
 
 	/**
@@ -55,32 +46,66 @@ public class Tasklist {
 	 *
 	 * @param i The i-th task to be deleted
 	 */
-	public String delete(int i) {
-
-		System.out.println("Noted. I've removed this task!");
-		Task removedTask = listOfThings.get(i - 1);
-		listOfThings.remove(i - 1);
-		System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
-		return "Noted. I've removed this task!\n"
-				+ removedTask + "\n"
-				+ "Now you have " + listOfThings.size() + " tasks in the list.";
+	public void delete(int i) {
+		listOfTasks.remove(i - 1);
 	}
 
+	/**
+	 * Show the size of the tasklist
+	 *
+	 * @return The number of tasks
+	 */
 	public int size() {
-		return listOfThings.size();
+		return listOfTasks.size();
 	}
 
+	/**
+	 * Get a task from the tasklist
+	 *
+	 * @param i
+	 * @return The i-th task
+	 */
 	public Task get(int i) {
-		return listOfThings.get(i);
+		return listOfTasks.get(i);
 	}
 
+	/**
+	 * Set index i of the tasklist to a
+	 * certain task
+	 *
+	 * @param i The i-th index
+	 * @param task The task to be set
+	 */
 	public void set(int i, Task task) {
-		listOfThings.set(i, task);
+		listOfTasks.set(i, task);
 	}
 
-	public void printList() {
-		for (int i = 0; i < listOfThings.size(); i++) {
-			System.out.println(i + 1 + ". " + listOfThings.get(i));
+	public String findTasks(String searchWord) {
+		String returnedString = "";
+		for (int i = 0; i < listOfTasks.size(); i++) {
+			Task task = listOfTasks.get(i);
+			if (task.matchesTask(searchWord)) {
+				returnedString += i + ". " + task + "\n";
+			}
 		}
+		if (returnedString.isEmpty()) {
+			return "No tasks found!";
+		} else {
+			return returnedString;
+		}
+	}
+
+	/**
+	 * Returns the String representation of the TaskList.
+	 *
+	 * @return String representation of the TaskList.
+	 */
+	@Override
+	public String toString() {
+		String returnedString = "";
+		for (int i = 0; i < listOfTasks.size(); i++) {
+			returnedString += i + 1 + ". " + listOfTasks.get(i) + "\n";
+		}
+		return returnedString;
 	}
 } 

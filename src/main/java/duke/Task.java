@@ -25,6 +25,10 @@ public class Task {
 		this.isDone = false;
 	}
 
+	public boolean matchesTask(String searchWord) {
+		return this.description.contains(searchWord);
+	}
+
 	@Override
 	public String toString() {
 		return ("[" + this.getStatusIcon() + "] " + this.description);

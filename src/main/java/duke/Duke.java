@@ -4,9 +4,10 @@ import static duke.Storage.SAVE_LOCATION;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
+import duke.command.Command;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -36,6 +37,8 @@ public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    public Tasklist tasklist = new Tasklist();
 
     public static void main(String[] args) { }
 
@@ -141,7 +144,6 @@ public class Duke extends Application {
      */
     @FXML
     public String getResponse(String input) {
-        Tasklist tasklist = new Tasklist();
         try {
             File saveFile = new File(SAVE_LOCATION);
             if (saveFile.createNewFile()) {
@@ -149,11 +151,19 @@ public class Duke extends Application {
             } else {
                 tasklist = Storage.load();
             }
+            Command command = Parser.parseInput(input);
+            String output = command.execute(tasklist);
+            if (command.isExit()) {
+                Platform.exit();
+            }
+            return output;
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return Parser.isReceivedCommand(tasklist, input);
+        return "An error occured";
     }
 //	/**
 //	 * The main method of our program

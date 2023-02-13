@@ -1,9 +1,7 @@
 package duke;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import duke.command.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -19,173 +17,48 @@ public class Parser {
 		LIST,
 		DELETE,
 		BYE,
-		ERR
 	}
 
-	public static String isReceivedCommand(Tasklist tasklist, String msg) {
-		String returnedString = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-		String firstWord = "";
-		if (msg.contains(" ")) {
-			firstWord = msg.substring(0, msg.indexOf(" "));
-		} else {
-			firstWord = msg;
-		}
-
-		Type cmdType = Type.ERR;
-
+	public static Command parseInput(String msg) throws Exception {
 		try {
-			cmdType = Type.valueOf(firstWord.toUpperCase());
+			String [] inputs = msg.split(" ", 2);
+			Type cmdType = Type.valueOf(inputs[0].toUpperCase());
+			switch (cmdType) {
+			case BYE:
+				return new ExitCommand();
+			case LIST:
+				return new ListCommand();
+			case MARK:
+				return new MarkCommand(Integer.parseInt(inputs[1]), true);
+			case UNMARK:
+				return new MarkCommand(Integer.parseInt(inputs[1]), false);
+			case DELETE:
+				return new DeleteCommand(Integer.parseInt(inputs[1]));
+			case FIND:
+				return new FindCommand(inputs[1]);
+			case TODO:
+				Task newTodo = new Task.Todo(inputs[1]);
+				return new AddCommand(newTodo);
+			case DEADLINE:
+				String[] splitted = inputs[1].split("/by ", 2);
+				String[] byWhen = splitted[1].split(" ", 2);
+				System.out.println(byWhen[0]);
+				System.out.println(byWhen[1]);
+				LocalDate d1 = LocalDate.parse(byWhen[0]);
+				LocalTime t1 = LocalTime.parse(byWhen[1]);
+				Task newDeadline = new Task.Deadline(splitted[0], d1, t1);
+				return new AddCommand(newDeadline);
+			case EVENT:
+				String[] fromWhenToWhen = inputs[1].split(" ", 5);
+				String fromWhen = fromWhenToWhen[2];
+				String toWhen = fromWhenToWhen[4];
+				Task newEvent = new Task.Event(inputs[1], fromWhen, toWhen);
+				return new AddCommand(newEvent);
+			default:
+				throw new Exception("OOPS!!! I'm sorry, but I don't know what that means :-(");
+			}
 		} catch (Exception ex) {
-			System.err.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+			throw new Exception("OOPS!!! I'm sorry, but I don't know what that means :-(");
 		}
-		Integer secondInt = 0;
-		String byDate = "";
-		String byTime = "";
-		String fromWhen = "";
-		String toWhen = "";
-
-		switch (cmdType) {
-		case MARK:
-			try {
-				firstWord = msg.substring(0, msg.indexOf(" "));
-				secondInt = Integer
-						.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
-				returnedString = tasklist.mark(secondInt);
-				try {
-					Storage.save(tasklist);
-				} catch (Exception ex) {
-					System.err.println("Error! There is no save file!");
-				}
-			} catch (Exception ex) {
-				System.err.println("Please indicate a valid task!");
-			}
-			break;
-		case UNMARK:
-			try {
-				firstWord = msg.substring(0, msg.indexOf(" "));
-				secondInt = Integer
-						.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
-				returnedString = tasklist.unmark(secondInt);
-				try {
-					Storage.save(tasklist);
-				} catch (Exception ex) {
-					System.err.println("Error! There is no save file!");
-				}
-			} catch (Exception ex) {
-				System.err.println("Please indicate a valid task!");
-			}
-			break;
-		case DELETE:
-			try {
-				secondInt = Integer.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
-				returnedString = tasklist.delete(secondInt);
-				try {
-					Storage.save(tasklist);
-				} catch (Exception ex) {
-					System.err.println("Error! There is no save file!");
-				}
-			} catch (Exception ex) {
-				System.err.println("Please indicate a valid task to delete!");
-			}
-			break;
-
-		case FIND:
-			// Todo: fix the list to string implementation
-			try {
-				String searchWord = msg.substring(msg.indexOf(" ") + 1, msg.length());
-				Predicate<Task> byMatch = task -> task.description.contains(searchWord);
-				List<Task> filteredList = tasklist.listOfThings.stream()
-						.filter(byMatch).collect(Collectors.toList());
-				if (filteredList.isEmpty()) {
-					System.out.println("There were no matching occurences of this task!");
-					returnedString = "There were no matching occurences of this task!";
-				} else {
-					System.out.println("Here are some matching tasks in your list!");
-					for (int i = 0; i < filteredList.size(); i++) {
-						System.out.println(i + 1 + ". " + filteredList.get(i));
-					}
-					returnedString = "Here are some matching tasks in your list!\n"
-							+ filteredList;
-				}
-
-			} catch (Exception ex) {
-				System.err.println("There were no matching occurences of this task!");
-			}
-
-			break;
-		case TODO:
-			try {
-				firstWord = msg.substring(msg.indexOf(" ") + 1, msg.length());
-				Task.Todo newTodo = new Task.Todo(firstWord);
-				returnedString = tasklist.add(newTodo);
-				System.out.println("Got it. I've added this task:");
-				System.out.println(newTodo);
-				System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
-				try {
-					Storage.save(tasklist);
-				} catch (Exception ex) {
-					System.err.println("Error! There is no save file!");
-				}
-			} catch (Exception ex) {
-				System.err.println("Whoops! The description of a todo cannot be empty!");
-			}
-
-			break;
-		case DEADLINE:
-			try {
-				String[] splitted = msg.split("\\s+");
-				firstWord = splitted[1];
-				byDate = splitted[3];
-				byTime = splitted[4];
-				System.out.println(byDate);
-				System.out.println(byTime);
-				LocalDate d1 = LocalDate.parse(byDate);
-				LocalTime t1 = LocalTime.parse(byTime);
-				Task.Deadline newDeadline = new Task.Deadline(firstWord, d1, t1);
-				returnedString = tasklist.add(newDeadline);
-				System.out.println("Got it. I've added this task:");
-				System.out.println(newDeadline);
-				System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
-				try {
-					Storage.save(tasklist);
-				} catch (Exception ex) {
-					System.err.println("Error! There is no save file!");
-				}
-			} catch (Exception ex) {
-				System.err.println("Whoops! Please enter the deadline followed by its due date preceeded by a '/by'." +
-						"The date time format should be yyyy-mm-dd hh:mm");
-			}
-			break;
-		case EVENT:
-			try {
-				firstWord = msg.substring(msg.indexOf(" ") + 1, msg.indexOf("/from") - 1);
-				fromWhen = msg.substring(msg.indexOf("/from") + 6, msg.indexOf("/to") - 1);
-				toWhen = msg.substring(msg.indexOf("/to") + 4, msg.length());
-				Task.Event newEvent = new Task.Event(firstWord, fromWhen, toWhen);
-				returnedString = tasklist.add(newEvent);
-				System.out.println("Got it. I've added this task:");
-				System.out.println(newEvent);
-				System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
-				try {
-					Storage.save(tasklist);
-				} catch (Exception ex) {
-					System.err.println("Error! There is no save file!");
-				}
-			} catch (Exception ex) {
-				System.err.println("Whoops! Please enter the event followed by its /from and /to timings.");
-			}
-			break;
-		case BYE:
-			Ui.showGoodbyeMessage();
-			returnedString = "Bye. Hope to see you again soon!";
-//			echoScanner.close();
-//			loop = false;
-			break;
-		case LIST:
-			tasklist.printList();
-			returnedString = tasklist.listOfThings.toString();
-			break;
-		}
-		return returnedString;
 	}
 }
