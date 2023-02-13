@@ -1,0 +1,14 @@
+todo read book
+deadline return book /by Sunday
+mark 1
+mark 3
+list
+event cs2103 project meeting /from Mon 3pm /to 4pm
+wrong input check
+deadline
+unmark 33333
+unmark abc
+list
+delete 1
+list
+bye
