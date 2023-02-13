@@ -17,16 +17,16 @@ It's
 
 | No. | Feature | Command |
 | ------- | ------- | ------ |
-| 1. | Create todo items | todo <description> |
-| 2. | Create deadlines | deadline <description> /by <yyyy-MM-dd\n HHmm(optional)> |
-| 3. | Create events | event <description> /from <yyyy-MM-dd\n HHmm(optional)> /to <yyyy-MM-dd\n HHmm(optional)> |
-| 4. | Filter by keyword | find <keyword(s)> |
-| 5. | Filter by date | finddate <date> |
-| 6. | Mark items as completed | mark <task number> |
-| 7. | Unmark items | unmark <task number> |
-| 8. | Delete items | delete <task number> |
-| 9. | Update description of existing tasks |  update <index> /description <new changes> |
-| 10. | Update deadlines of existing deadlines |  update <index> /deadline <new changes> |
+| 1. | Create todo items | `todo <description>` |
+| 2. | Create deadlines | `deadline <description> /by <yyyy-MM-dd\n HHmm(optional)>` |
+| 3. | Create events | `event <description> /from <yyyy-MM-dd\n HHmm(optional)> /to <yyyy-MM-dd\n HHmm(optional)>` |
+| 4. | Filter by keyword | `find <keyword(s)>` |
+| 5. | Filter by date | `finddate <date>` |
+| 6. | Mark items as completed | `mark <task number>` |
+| 7. | Unmark items | `unmark <task number>` |
+| 8. | Delete items | `delete <task number>` |
+| 9. | Update description of existing tasks | `update <index> /description <new changes>` |
+| 10. | Update deadlines of existing deadlines | `update <index> /deadline <new changes>` |
 
 ## Screenshots
 This is a screenshot of the application on start:
