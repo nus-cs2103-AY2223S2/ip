@@ -2,6 +2,8 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Representation of the Event task
@@ -33,6 +35,32 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from:" + from.format(timeFormat) + " to:" + to.format(timeFormat) + ")";
+    }
+
+    public static Task parseCommand(String str) throws DukeException {
+        String[] detailE = str.split("/from ", 2);
+        Pattern pattern = Pattern.compile("(\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})");
+        Matcher matcher = pattern.matcher(str);
+        String startDateTime = null;
+        String endDateTime = null;
+        if (matcher.find()) {
+            startDateTime = matcher.group();
+            if (matcher.find()) {
+                endDateTime = matcher.group();
+            } else {
+                System.out.println("End date and time not found");
+            }
+        } else {
+            System.out.println("Start date and time not found");
+        }
+        if (detailE.length == 1) {
+            throw new DukeException("When is the event?");
+        }
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime fromTime = LocalDateTime.parse(startDateTime, formatter1);
+        LocalDateTime toTime = LocalDateTime.parse(endDateTime, formatter1);
+        Event newE = new Event(detailE[0], fromTime, toTime, false);
+        return newE;
     }
 
     /**

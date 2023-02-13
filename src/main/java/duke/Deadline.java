@@ -35,6 +35,18 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by:" + by.format(timeFormat) + ")";
     }
 
+    public static Task parseCommand(String str) throws DukeException {
+        String[] detailD = str.split(" /by ", 2);
+        if (detailD.length == 1) {
+            throw new DukeException("When is the deadline? Deadline should be in the format dd-MM-yyyy HH:mm");
+        }
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime byTime = LocalDateTime.parse(detailD[1], formatter1);
+        Deadline newD = new Deadline(detailD[0], byTime, false);
+        return newD;
+
+    }
+
 
     /**
      * Returns a string representation of what is saved in the database

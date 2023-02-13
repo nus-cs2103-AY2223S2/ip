@@ -22,12 +22,13 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(Label dialog, ImageView displayPicture) {
+    public DialogBox(Label dialog, ImageView displayPicture) {
         this.dialog = dialog;
         this.displayPicture = displayPicture;
 
@@ -37,6 +38,9 @@ public class DialogBox extends HBox {
         dialog.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+        dialog.setPadding(new Insets(5, 10, 0, 10));
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.setPadding(new Insets(10));
         this.getChildren().addAll(dialog, displayPicture);
     }
 
@@ -47,7 +51,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        this.setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(Label text, ImageView img) {
