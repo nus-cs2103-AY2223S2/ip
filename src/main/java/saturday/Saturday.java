@@ -37,47 +37,18 @@ public class Saturday {
      * @param filePath The file path for the storage of task list
      */
     public Saturday(String filePath) {
+        assert filePath != null : "filePath cannot be null";
         isActive = true;
         storage = new Storage(filePath);
         taskList = storage.loadTaskList();
     }
 
-    /**
-     * The main loop for the Saturday application.
-     * This method handles user input, command execution, and storage of the task list.
-     */
-    public void run() {
-        Ui.greet();
-
-        Scanner scanner = new Scanner(System.in);
-        while (isActive) {
-            String input = scanner.nextLine();
-            Ui.divider();
-            try {
-                Command command = Command.getCommand(input);
-                if (command.equals(Command.BYE)) {
-                    isActive = false;
-                    Ui.output("Bye. Hope to see you again soon!");
-                }
-                command.execute(taskList, input);
-                storage.saveTaskList(taskList);
-            } catch (SaturdayException e) {
-                Ui.output(e.getMessage());
-            }
-            Ui.divider();
-            Ui.newline();
-        }
-    }
-
-//    public static void main(String[] args) {
-//        String filePath = Storage.getFilePath();
-//        new Saturday(filePath).run();
-//    }
-
     public String getResponse(String input) {
         String output = "What";
+        assert input != null : "Input cannot be null";
         try {
             Command command = Command.getCommand(input);
+            assert command != null : "Command cannot be null";
             if (command.equals(Command.BYE)) {
                 isActive = false;
                 return "Bye. Hope to see you again soon!";

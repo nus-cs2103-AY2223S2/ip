@@ -40,7 +40,9 @@ public class Dashboard extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        fxmlLoader.<Controller>getController().setSaturday(saturday);
+        Controller controller = fxmlLoader.<Controller>getController();
+        assert controller != null;
+        controller.setSaturday(saturday);
 
         // Grab your root here
         root.setOnMousePressed((MouseEvent event) -> {
@@ -54,6 +56,8 @@ public class Dashboard extends Application {
             primaryStage.setY(event.getScreenY() - yOffset);
         });
 
+        assert primaryStage.isShowing() == false;
         primaryStage.show();
+        assert primaryStage.isShowing() == true;
     }
 }
