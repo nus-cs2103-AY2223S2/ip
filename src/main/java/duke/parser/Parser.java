@@ -95,23 +95,19 @@ public class Parser {
                 throw new DukeException("Description of Todo task cannot be empty");
             }
         case "deadline":
-            String[] splitDescription = splitCommand[1].split(" /by ");
-            if (isValidAddCommand(splitCommand) && splitDescription.length == 2) {
+            if (isValidAddCommand(splitCommand)) {
+                String[] splitDescription = splitCommand[1].split(" /by ");
                 return new AddDeadlineCommand(splitDescription[0], splitDescription[1]);
             } else {
                 throw new DukeException("Description and date of Deadline task cannot be empty and "
                         + "must be separated with \"/by\" . ");
             }
         case "event":
-            if (isValidAddCommand(splitCommand)) {
+            if (isValidAddEventCommand(splitCommand)) {
                 String[] furtherSplitCommand = splitCommand[1].split(" /from "); //checked index 1 exists
                 String description = furtherSplitCommand[0];
-                try {
-                    String[] fromToArray = furtherSplitCommand[1].split(" /to ");
-                    return new AddEventCommand(description, fromToArray[0], fromToArray[1]);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Event task must have /from and /to");
-                }
+                String[] fromToArray = furtherSplitCommand[1].split(" /to ");
+                return new AddEventCommand(description, fromToArray[0], fromToArray[1]);
             } else {
                 throw new DukeException("Description and from/to of Event task cannot be empty.");
             }
@@ -155,6 +151,16 @@ public class Parser {
         }
     }
 
+    private static boolean isValidAddEventCommand(String[] splitCommand) {
+        try {
+            String[] furtherSplitCommand = splitCommand[1].split(" /from ");
+            String[] fromToArray = furtherSplitCommand[1].split(" /to ");
+            return fromToArray.length == 2;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
     /**
      * Determines if Mark/Unmark/Delete command is valid.
      * Attempts to parse the string after the keyword as integer.
@@ -173,6 +179,8 @@ public class Parser {
             return false;
         }
     }
+
+
 
     /**
      * Determines if command is a valid command which takes in a String after the keyword
