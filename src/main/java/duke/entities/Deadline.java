@@ -16,7 +16,7 @@ public class Deadline extends Task {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
-     * Initialize the Deadline task.
+     * Initializes the Deadline task.
      *
      * @param description The description of the task.
      * @param by The deadline for the task.
@@ -40,7 +40,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Serialize the task.
+     * Serializes the task.
      *
      * @return Returns serialized representation.
      */

@@ -12,7 +12,7 @@ import duke.utils.IExecutable;
  * Command represents an abstraction over the inputs to the duke chatbot.
  */
 public abstract class Command implements IExecutable<CacheManager> {
-    protected static final String INVALID_FORMAT_ERROR = "Invalid format.";
+    protected static final String INVALID_FORMAT_ERROR = "Invalid format!";
     protected static final Pattern VALID_NUMBER = Pattern.compile("[-+]?\\d+");
 
     /** The associated type of command **/

@@ -17,7 +17,7 @@ import duke.exceptions.DukeException;
 public class ListCommand extends Command {
     /** Valid list command regex **/
     private static final Pattern VALID_LIST_CMD =
-            Pattern.compile("^(list\\s*)((?<filter>todo|deadline|event)\\s*$)?");
+            Pattern.compile("^(?<cmd>list)( (?<filter>todo|deadline|event))?$");
     private final String arguments;
 
     /**
@@ -38,13 +38,16 @@ public class ListCommand extends Command {
         Matcher matcher = VALID_LIST_CMD.matcher(arguments);
         if (matcher.find()) {
             String filter = matcher.group("filter");
+            String cmd = matcher.group("cmd");
+            System.out.println(cmd);
             TaskType type = Optional.ofNullable(filter)
                     .map(enumTask -> TaskType.valueOf(enumTask.trim().toUpperCase()))
                     .orElse(TaskType.ALL);
 
             return cacheManager.listTasks(task -> type.isAll() || task.getTaskType() == type, type.isAll());
         } else {
-            throw new DukeException(INVALID_FORMAT_ERROR);
+            throw new DukeException(INVALID_FORMAT_ERROR + "\n"
+                    + "Please ensure you follow: list (todo|event|deadline)?");
         }
     }
 }

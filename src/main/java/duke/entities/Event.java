@@ -45,7 +45,7 @@ public class Event extends Task {
     }
 
     /**
-     * Serialize the task.
+     * Serializes the task.
      *
      * @return Returns serialized representation.
      */

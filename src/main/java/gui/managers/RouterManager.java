@@ -18,6 +18,7 @@ import javafx.stage.Stage;
  */
 public class RouterManager {
     private static RouterManager router;
+    private static final Logger logger = Logger.getLogger(RouterManager.class.getName());
     private final Duke duke = new Duke("duke.txt");
     private final Stage stage;
 
@@ -49,7 +50,7 @@ public class RouterManager {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
         } catch (IOException ex) {
-            Logger.getLogger(RouterManager.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
 
