@@ -51,7 +51,7 @@ public abstract class TimedTask extends Task {
         setDes(s[0]);
         String endTime = dateTimeFileInParse(s[1]).format(isoFormat);
         assert endTime instanceof String : "Line from save file has not been transformed";
-        setEnd(endTime);
+        setEndFromFile(endTime);
     }
 
     /**
@@ -69,8 +69,15 @@ public abstract class TimedTask extends Task {
      *
      * @param s String representation of end date time
      */
-    public void setEnd(String s) {
+    public void setEndFromFile(String s) {
         LocalDateTime endTime = dateTimeConsoleInParse(s);
+        assert endTime instanceof LocalDateTime : "End time has not be set properly";
+        this.end = endTime;
+        this.consoleEndString = end.format(consoleFormat);
+        this.fileEndString = end.format(fileFormat);
+    }
+
+    public void setEndFromApp(LocalDateTime endTime) {
         assert endTime instanceof LocalDateTime : "End time has not be set properly";
         this.end = endTime;
         this.consoleEndString = end.format(consoleFormat);
@@ -98,4 +105,6 @@ public abstract class TimedTask extends Task {
     public String toStringFileEnd() {
         return this.fileEndString;
     }
+
+
 }

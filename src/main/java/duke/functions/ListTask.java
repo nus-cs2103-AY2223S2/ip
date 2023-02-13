@@ -14,14 +14,17 @@ public class ListTask {
             String s = i + 1 + "." + fn.tl.getTask(i).printStatus();
             l += s;
         }
+        fn.getOutputLayout().getChildren().clear();
         fn.getOutputLayout().getChildren().add(fn.getDialogLabel(h + l));
     }
 
     static public void deadlineSort(Functions fn) {
+        fn.getOutputLayout().getChildren().clear();
         Collections.sort(fn.tl.iterable(), new TaskListSort.SortByDeadline());
     }
 
     static public void defaultSort(Functions fn) {
+        fn.getOutputLayout().getChildren().clear();
         Collections.sort(fn.tl.iterable(), new TaskListSort.SortByDefault());
     }
 }

@@ -1,8 +1,10 @@
 package duke.buttons;
 
+import duke.dukeexceptions.DukeException;
 import duke.functions.DeleteTask;
 import duke.functions.Functions;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -32,15 +34,16 @@ public class DeleteButton extends DukeButton {
     public VBox inputForm() {
         VBox vbox = new VBox();
         Label desLabel = new Label("Which Task to delete?:");
-        TextField delTextField = new TextField();
+        ComboBox deleteMenu = indexPicker();
         Button delTaskButton = new Button("Delete Task");
-        vbox.getChildren().addAll(desLabel, delTextField, delTaskButton);
+        vbox.getChildren().addAll(desLabel, deleteMenu, delTaskButton);
 
         delTaskButton.setOnMouseClicked((event) -> {
-            String delIndex = delTextField.getText();
-            DeleteTask.delete(super.fn, delIndex);
+            String delIndex = (String) deleteMenu.getValue();
+            try {
+                DeleteTask.delete(super.fn, delIndex);
+            } catch (DukeException e) {}
         });
-
         return vbox;
     }
 }

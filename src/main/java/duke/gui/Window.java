@@ -2,6 +2,7 @@ package duke.gui;
 
 import duke.Duke;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -29,7 +30,13 @@ public class Window {
         ScrollPane scrollPane = makeScrollPane(outputLayout);
         outputLayout.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //pane to hold 3 buttons for each task
+        if (duke.hasError()) {
+            Label textToAdd = new Label(duke.error);
+            textToAdd.setWrapText(true);
+            outputLayout.getChildren().add(textToAdd);
+        }
+
+        //pane to hold all buttons
         UI ui = new UI(duke.getFn());
         HBox buttonLayout = ui.createButtons(inputLayout, outputLayout);
 

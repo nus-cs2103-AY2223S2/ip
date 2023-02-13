@@ -1,10 +1,11 @@
 package duke.buttons;
 
+import duke.dukeexceptions.DukeException;
 import duke.functions.Functions;
 import duke.functions.MarkTask;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -32,13 +33,15 @@ public class UnmarkButton extends DukeButton {
     public VBox inputForm() {
         VBox vbox = new VBox();
         Label desLabel = new Label("Which task to unmark?:");
-        TextField unmarkTextField = new TextField();
+        ComboBox unmarkMenu = indexPicker();
         Button unmarkTaskButton = new Button("UnMark Task");
-        vbox.getChildren().addAll(desLabel, unmarkTextField, unmarkTaskButton);
+        vbox.getChildren().addAll(desLabel, unmarkMenu, unmarkTaskButton);
 
         unmarkTaskButton.setOnMouseClicked((event) -> {
-            String markIndex = unmarkTextField.getText();
-            MarkTask.mark(super.fn, markIndex, false);
+            String markIndex = (String) unmarkMenu.getValue();
+            try {
+                MarkTask.mark(super.fn, markIndex, false);
+            } catch (DukeException e) {}
         });
 
         return vbox;

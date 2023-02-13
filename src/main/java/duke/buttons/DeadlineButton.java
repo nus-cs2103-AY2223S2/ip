@@ -1,13 +1,26 @@
 package duke.buttons;
 
+import duke.Duke;
+import duke.dukeexceptions.DukeException;
 import duke.functions.CreateDeadline;
 import duke.functions.Functions;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class DeadlineButton extends DukeButton {
     /**
@@ -34,15 +47,33 @@ public class DeadlineButton extends DukeButton {
         VBox vbox = new VBox();
         Label desLabel = new Label("Task Description:");
         TextField desTextField = new TextField();
-        Label endLabel = new Label("Deadline (yyyy-mm-dd hh:mm):");
-        TextField endTextField = new TextField();
+
+        Label endLabel = new Label("Deadline:");
+        DatePicker deadlineMenu = new DatePicker();
+        deadlineMenu.getEditor().setDisable(true);
+        ComboBox hourMenu = hourPicker();
+        ComboBox minMenu = minPicker();
+
+        HBox inputPanes = new HBox();
+        inputPanes.getChildren().addAll(deadlineMenu, hourMenu, minMenu);
+
         Button addTaskButton = new Button("Add Task");
-        vbox.getChildren().addAll(desLabel, desTextField, endLabel, endTextField, addTaskButton);
+        vbox.getChildren().addAll(desLabel, desTextField, endLabel, inputPanes, addTaskButton);
 
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();
-            String end = endTextField.getText();
-            CreateDeadline.deadline(super.fn, des, end);
+            LocalDate endDate = deadlineMenu.getValue();
+            String endHour = (String) hourMenu.getValue();
+            String endMin = (String) minMenu.getValue();
+            try {
+                LocalDateTime end = LocalDateTime.of(endDate, LocalTime.parse(endHour + ":" + endMin));
+                CreateDeadline.deadline(super.fn, des, end);
+            } catch (DateTimeParseException e) {
+                try {
+                    throw new DukeException(outputLayout, "Inputs cannot be empty");
+                } catch (DukeException ex) {
+                }
+            }
         });
         return vbox;
     }

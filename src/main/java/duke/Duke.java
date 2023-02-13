@@ -9,6 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * <h1>Duke task checklist</h1>
  * The Duke program helps keep track of your ongoin task.
@@ -23,9 +27,18 @@ public class Duke extends Application {
      * Represents a Duke program.
      */
     private Functions fn;
+    public boolean hasError = false;
+    public String error;
 
     public Duke() {
 
+    }
+    public Duke(String fp, boolean hasError) {
+        if (hasError) {
+            try {
+                this.fn = new Functions(new TaskList(), new Storage(fp));
+            } catch (IOException e) {}
+        }
     }
 
     /**
@@ -38,9 +51,14 @@ public class Duke extends Application {
             Storage st = new Storage(fp);
             TaskList tl = st.load();
             this.fn = new Functions(tl, st);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            this.hasError = true;
+            this.error = "task.txt was not found";
         }
+    }
+
+    public boolean hasError() {
+        return this.hasError;
     }
 
     public Functions getFn() {

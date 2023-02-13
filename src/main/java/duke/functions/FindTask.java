@@ -28,9 +28,11 @@ public class FindTask {
             }
         }
         if (!isFound) {
+            fn.getOutputLayout().getChildren().clear();
             String s = "No matching tasks are found in your list\n";
             fn.getOutputLayout().getChildren().add(fn.getDialogLabel(s));
         } else {
+            fn.getOutputLayout().getChildren().clear();
             String t = "Search done!\n";
             fn.getOutputLayout().getChildren().add(fn.getDialogLabel(h + task + t));
         }
