@@ -9,6 +9,7 @@ public class Tasklist {
     private Storage backend;
     public Tasklist() {
         this.list = new ArrayList<>();
+        this.backend = new Storage("./data/duke.txt");
     }
 
     public Tasklist(ArrayList<Task> list, Storage backend) {
