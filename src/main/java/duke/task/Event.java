@@ -23,7 +23,7 @@ public class Event extends Task {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.from = LocalDateTime.parse(from, format);
         this.to = LocalDateTime.parse(to, format);
-        this.type = type.E;
+        this.taskType = taskType.E;
         this.time = this.to;
     }
 

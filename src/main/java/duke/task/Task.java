@@ -9,23 +9,23 @@ import java.time.LocalDateTime;
  */
 abstract public class Task implements Serializable {
     protected enum type {
-        T,
-        D,
-        E;
+        T, //Todo
+        D, //Deadline
+        E; //Event
     }
     protected LocalDateTime time = null;
-    private String content;
-    private Boolean is_Done;
-    protected type type;
+    private String taskContent;
+    private Boolean isDone;
+    protected type taskType;
 
     /**
      * Constructs an instance of Task with the given content and state of whether it is done.
      * @param content the content of the task.
-     * @param is_Done whether the task is done.
+     * @param whetherDone whether the task is done.
      */
-    public Task(String content, boolean is_Done) {
-        this.content = content;
-        this.is_Done = is_Done;
+    public Task(String content, boolean whetherDone) {
+        this.taskContent = content;
+        this.isDone = whetherDone;
     }
 
     public LocalDateTime getTime() {
@@ -33,11 +33,11 @@ abstract public class Task implements Serializable {
     }
 
     public String getTaskContent() {
-        return content;
+        return taskContent;
     }
 
     public void markTask(boolean Done) {
-        this.is_Done = Done;
+        this.isDone = Done;
     }
 
     /**
@@ -46,10 +46,10 @@ abstract public class Task implements Serializable {
      */
     //Credits: Copied from https://nus-cs2103-ay2223s2.github.io/website/schedule/week2/project.html
     public String getStatusIcon() {
-        return (this.is_Done ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     public type getTypeIcon() {
-        return this.type; // mark done task with X
+        return this.taskType; // mark done task with X
     }
 }

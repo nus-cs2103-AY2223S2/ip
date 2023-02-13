@@ -22,7 +22,7 @@ public class Deadline extends Task {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         format.withLocale(Locale.ENGLISH);
         this.time = LocalDateTime.parse(date, format);
-        this.type = this.type.D;
+        this.taskType = this.taskType.D;
     }
 
     /**
