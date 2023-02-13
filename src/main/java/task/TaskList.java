@@ -33,14 +33,12 @@ public class TaskList extends ArrayList<Task> {
         int count = 1;
         for (int i = 0; i < this.size(); i++) {
             for (String keyword: keywords) {
-                if (this.get(i).toString().contains(keyword)) {
-                    if (i == this.size() - 1) {
-                        result += count + ". " + this.get(i);
-                    } else {
-                        result += count + ". " + this.get(i) + "\n";
-                    }
-                    count += 1;
+                if (this.get(i).toString().contains(keyword) && i == this.size() - 1) {
+                    result += count + ". " + this.get(i);
+                } else if (this.get(i).toString().contains(keyword) && i != this.size() - 1) {
+                    result += count + ". " + this.get(i) + "\n";
                 }
+                count += 1;
             }
         }
         return result;

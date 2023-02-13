@@ -23,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString().substring(0, "[ ] ".length()) + this.name +
-                " (from: " + this.start + " to: " + this.end + ")";
+        return "[E]" + super.toString().substring(0, "[ ] ".length()) + this.name
+                + " (from: " + this.start + " to: " + this.end + ")";
     }
 }

@@ -1,4 +1,5 @@
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,8 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.JPG"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.JPG"));
 
+    /**
+     * Initializes the MainWindow layout and loads the data stored.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -35,7 +37,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
 
         duke = new Duke();
-        duke.loadDataFromDisk();
+        String output = duke.loadDataFromDisk();
+        if (output == "No data storage file exists.") {
+            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(output, dukeImage));
+        }
     }
 
 
@@ -52,6 +57,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (response == "Bye~ Hope to see you again soon:)") {
+            Platform.exit();
+        }
         userInput.clear();
     }
 }

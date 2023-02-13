@@ -10,8 +10,8 @@ public class Ui {
      * @return Greeting sentences.
      */
     public String greeting() {
-        String str = "Hi~ I'm duke.Duke>_<\nWhat can I do for you?";
-        return str;
+        return "Hi~ I'm duke.Duke>_<\nWhat can I do for you?";
+
     }
 
     /**
@@ -21,8 +21,8 @@ public class Ui {
      * @return New string with separating lines.
      */
     public String separate(String str) {
-        String sep_line = "---------------------------------------------------------------";
-        return sep_line + "\n" + str + "\n" + sep_line;
+        String seperatingLine = "---------------------------------------------------------------";
+        return seperatingLine + "\n" + str + "\n" + seperatingLine;
     }
 
     /**
@@ -31,8 +31,7 @@ public class Ui {
      * @return Message of goodbye.
      */
     public String ending() {
-        String str = "Bye~ Hope to see you again soon:)";
-        return separate(str);
+        return "Bye~ Hope to see you again soon:)";
     }
 
 }

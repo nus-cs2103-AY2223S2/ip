@@ -12,6 +12,7 @@ public class Deadline extends Task {
     protected String name;
 
     /**
+     * Constructor
      *
      * @param name The content of the deadline command.
      */
@@ -23,8 +24,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString().substring(0, "[ ] ".length()) +
-                this.name + " (by: " + ddl.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString().substring(0, "[ ] ".length())
+                + this.name + " (by: " + ddl.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
 

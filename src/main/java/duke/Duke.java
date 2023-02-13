@@ -3,15 +3,14 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javafx.application.Platform;
-import task.TaskList;
-import task.Task;
-import task.Command;
-import task.Parser;
-import task.Event;
-import task.Deadline;
-import task.Todo;
 import storage.Storage;
+import task.Command;
+import task.Deadline;
+import task.Event;
+import task.Parser;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 import ui.Ui;
 
 /**
@@ -26,6 +25,9 @@ public class Duke {
     protected String directoryPath;
     protected String dataFilePath;
 
+    /**
+     * Constructor
+     */
     public Duke() {
         this.dataFilePath = "./data/duke.txt";
         this.directoryPath = "./data";
@@ -39,10 +41,10 @@ public class Duke {
     /**
      * Adds the task to the taskList.
      *
-     * @param task_given The task we want to add to the list.
+     * @param taskGiven The task we want to add to the list.
      */
-    public void addTask(Task task_given) {
-        this.taskList.add(task_given);
+    public void addTask(Task taskGiven) {
+        this.taskList.add(taskGiven);
     }
 
     /**
@@ -52,8 +54,8 @@ public class Duke {
      * @return Message of successful adding.
      */
     public String messageOfAdd(Task task) {
-        return "Got it. I've added this task:\n " + task.toString() + "\nNow you have " +
-                taskList.size() + " tasks in the list:D";
+        return "Got it. I've added this task:\n " + task.toString() + "\nNow you have "
+                + taskList.size() + " tasks in the list:D";
     }
 
 
@@ -102,8 +104,8 @@ public class Duke {
         }
         Task task = taskList.get(index);
         taskList.remove(index);
-        return "Noted. I've removed this task:\n " + task.toString() +
-                "\nNow you have " + taskList.size() + " tasks in the list.";
+        return "Noted. I've removed this task:\n " + task.toString()
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
 
     }
 
@@ -117,64 +119,74 @@ public class Duke {
         return "Here are the matching tasks in your list:\n" + taskList.getTasksWanted(keywordList);
     }
 
+    public String handleUserInput(String userInput, boolean suppressPrint) throws DukeException {
+        String output = "";
+        String[] expressions = userInput.split(" ");
+        String command = expressions[0];
+
+        if (userInput.equals(parser.convertEnum(Command.LIST))) {
+            output = taskList.printCurrentTasks();
+        } else if (command.equals(parser.convertEnum(Command.MARK))) {
+            parser.checkEmpty(userInput, command);
+            String[] words = userInput.split(" ");
+            int index = Integer.parseInt(words[1]) - 1;
+            output = markAsDone(index);
+        } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
+            parser.checkEmpty(userInput, command);
+            String[] words = userInput.split(" ");
+            int index = Integer.parseInt(words[1]) - 1;
+            output = markAsUndone(index);
+        } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
+            output = ui.ending();
+        } else if (command.equals(parser.convertEnum(Command.TODO))) {
+            parser.checkEmpty(userInput, command);
+            Todo todoTask = new Todo(userInput);
+            addTask(todoTask);
+            output = messageOfAdd(todoTask);
+        } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
+            parser.checkEmpty(userInput, command);
+            Deadline ddlTask = new Deadline(userInput);
+            addTask(ddlTask);
+            output = messageOfAdd(ddlTask);
+        } else if (command.equals(parser.convertEnum(Command.EVENT))) {
+            parser.checkEmpty(userInput, command);
+            Event eventTask = new Event(userInput);
+            addTask(eventTask);
+            output = messageOfAdd(eventTask);
+        } else if (command.equals(parser.convertEnum(Command.DELETE))) {
+            parser.checkEmpty(userInput, command);
+            String[] words = userInput.split(" ");
+            int index = Integer.parseInt(words[1]) - 1;
+            output = deleteMessage(index);
+        } else if (command.equals(parser.convertEnum(Command.FIND))) {
+            parser.checkEmpty(userInput, command);
+            String keywords = userInput.substring(5);
+            String[] keywordList = keywords.split(" ");
+            output = findMessage(keywordList);
+        } else {
+            throw new WeirdInputException();
+        }
+
+        if (!suppressPrint) {
+            return output;
+        } else {
+            return "";
+        }
+    }
+
     /**
      * Loads the data stored in the disk.
      */
-    public void loadDataFromDisk() {
-        storage.loadData(commandList);
+    public String loadDataFromDisk() {
+        String errorMessage = storage.loadData(commandList);
         for (String userInput: commandList) {
-            String[] expressions = userInput.split(" ");
-            String command = expressions[0];
-
             try {
-                if (userInput.equals(parser.convertEnum(Command.LIST))) {
-                    continue;
-                } else if (command.equals(parser.convertEnum(Command.MARK))) {
-                    parser.checkEmpty(userInput, command);
-                    String[] words = userInput.split(" ");
-                    int index = Integer.parseInt(words[1]) - 1;
-                    String tmp = markAsDone(index);
-                } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
-                    parser.checkEmpty(userInput, command);
-                    String[] words = userInput.split(" ");
-                    int index = Integer.parseInt(words[1]) - 1;
-                    String tmp = markAsUndone(index);
-                } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
-                    continue;
-                } else if (command.equals(parser.convertEnum(Command.TODO))) {
-                    parser.checkEmpty(userInput, command);
-                    Todo todo_task = new Todo(userInput);
-                    addTask(todo_task);
-                    String tmp = messageOfAdd(todo_task);
-                } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
-                    parser.checkEmpty(userInput, command);
-                    Deadline ddl_task = new Deadline(userInput);
-                    addTask(ddl_task);
-                    String tmp = messageOfAdd(ddl_task);
-                } else if (command.equals(parser.convertEnum(Command.EVENT))) {
-                    parser.checkEmpty(userInput, command);
-                    Event event_task = new Event(userInput);
-                    addTask(event_task);
-                    String tmp = messageOfAdd(event_task);
-                } else if (command.equals(parser.convertEnum(Command.DELETE))) {
-                    parser.checkEmpty(userInput, command);
-                    String[] words = userInput.split(" ");
-                    int index = Integer.parseInt(words[1]) - 1;
-                    String tmp = deleteMessage(index);
-                } else if (command.equals(parser.convertEnum(Command.FIND))) {
-                    parser.checkEmpty(userInput, command);
-                    String keywords = userInput.substring(5);
-                    String[] keywordList = keywords.split(" ");
-                    String tmp = findMessage(keywordList);
-                } else {
-                    throw new WeirdInputException();
-                }
-            } catch (WeirdInputException exc)  {
-                String tmp = ui.separate(exc.toString());
+                handleUserInput(userInput, true);
             } catch (DukeException exc) {
-                String tmp = ui.separate(exc.toString());
+                String output = exc.toString();
             }
         }
+        return errorMessage;
     }
 
     /**
@@ -183,57 +195,9 @@ public class Duke {
      * @return Corresponding output.
      */
     public String getResponse(String userInput) {
-        commandList.add(userInput);
         storage.saveToDisk(userInput + "\n");
         try {
-            String[] expressions = userInput.split(" ");
-            String command = expressions[0];
-            String response = null;
-            if (userInput.equals(parser.convertEnum(Command.LIST))) {
-                response = taskList.printCurrentTasks();
-            } else if (command.equals(parser.convertEnum(Command.MARK))) {
-                parser.checkEmpty(userInput, command);
-                String[] words = userInput.split(" ");
-                int index = Integer.parseInt(words[1]) - 1;
-                response = markAsDone(index);
-            } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
-                parser.checkEmpty(userInput, command);
-                String[] words = userInput.split(" ");
-                int index = Integer.parseInt(words[1]) - 1;
-                response = markAsDone(index);
-            } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
-                Platform.exit();
-            } else if (command.equals(parser.convertEnum(Command.TODO))) {
-                parser.checkEmpty(userInput, command);
-                Todo todo_task = new Todo(userInput);
-                addTask(todo_task);
-                response = messageOfAdd(todo_task);
-            } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
-                parser.checkEmpty(userInput, command);
-                Deadline ddl_task = new Deadline(userInput);
-                addTask(ddl_task);
-                response = messageOfAdd(ddl_task);
-            } else if (command.equals(parser.convertEnum(Command.EVENT))) {
-                parser.checkEmpty(userInput, command);
-                Event event_task = new Event(userInput);
-                addTask(event_task);
-                response = messageOfAdd(event_task);
-            } else if (command.equals(parser.convertEnum(Command.DELETE))) {
-                parser.checkEmpty(userInput, command);
-                String[] words = userInput.split(" ");
-                int index = Integer.parseInt(words[1]) - 1;
-                response = deleteMessage(index);
-            } else if (command.equals(parser.convertEnum(Command.FIND))) {
-                parser.checkEmpty(userInput, command);
-                String keywords = userInput.substring(5);
-                String[] keywordList = keywords.split(" ");
-                response = findMessage(keywordList);
-            } else {
-                throw new WeirdInputException();
-            }
-            return response;
-        } catch (WeirdInputException exc) {
-            return exc.toString();
+            return handleUserInput(userInput, false);
         } catch (DukeException exc) {
             return exc.toString();
         }
@@ -279,19 +243,19 @@ public class Duke {
                     break;
                 } else if (command.equals(parser.convertEnum(Command.TODO))) {
                     parser.checkEmpty(userInput, command);
-                    Todo todo_task = new Todo(userInput);
-                    addTask(todo_task);
-                    System.out.println(ui.separate(messageOfAdd(todo_task)));
+                    Todo todoTask = new Todo(userInput);
+                    addTask(todoTask);
+                    System.out.println(ui.separate(messageOfAdd(todoTask)));
                 } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
                     parser.checkEmpty(userInput, command);
-                    Deadline ddl_task = new Deadline(userInput);
-                    addTask(ddl_task);
-                    System.out.println(ui.separate(messageOfAdd(ddl_task)));
+                    Deadline ddlTask = new Deadline(userInput);
+                    addTask(ddlTask);
+                    System.out.println(ui.separate(messageOfAdd(ddlTask)));
                 } else if (command.equals(parser.convertEnum(Command.EVENT))) {
                     parser.checkEmpty(userInput, command);
-                    Event event_task = new Event(userInput);
-                    addTask(event_task);
-                    System.out.println(ui.separate(messageOfAdd(event_task)));
+                    Event eventTask = new Event(userInput);
+                    addTask(eventTask);
+                    System.out.println(ui.separate(messageOfAdd(eventTask)));
                 } else if (command.equals(parser.convertEnum(Command.DELETE))) {
                     parser.checkEmpty(userInput, command);
                     String[] words = userInput.split(" ");
@@ -304,8 +268,6 @@ public class Duke {
                 } else {
                     throw new WeirdInputException();
                 }
-            } catch (WeirdInputException exc) {
-                System.out.println(ui.separate(exc.toString()));
             } catch (DukeException exc) {
                 System.out.println(ui.separate(exc.toString()));
             }
