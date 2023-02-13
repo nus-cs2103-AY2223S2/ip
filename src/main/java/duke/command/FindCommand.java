@@ -1,9 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeResponse;
 import duke.MessageGenerator;
 import duke.Task;
 import duke.TaskList;
+
 
 /**
  * Represents a command that when executed returns tasks found.
@@ -29,14 +32,21 @@ public class FindCommand extends Command {
         assert keyword != null;
 
         TaskList tasksOfInterest = new TaskList();
-
-        for (Task t : taskList) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i != taskList.size(); ++i) {
+            Task t = taskList.get(i);
             String desc = t.getDescription();
             if (desc.contains(keyword)) {
                 tasksOfInterest.add(t);
+                indexes.add(i);
             }
         }
 
-        return new DukeResponse(MessageGenerator.genFindTasksMsg(tasksOfInterest.toString()));
+        String responseMessage = "";
+        for (int i = 0; i != tasksOfInterest.size(); ++i) {
+            responseMessage += (indexes.get(i) + 1) + ". " + tasksOfInterest.get(i).toString() + "\n";
+        }
+
+        return new DukeResponse(MessageGenerator.genFindTasksMsg(responseMessage));
     }
 }
