@@ -28,7 +28,7 @@ The best part is, all of your data will be saved, so you can refer to it any tim
 3. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 4. Double-click on the `duke.jar` file
    A GUI similar to the one below should appear within a few seconds. 
-   ![img.png](img.png)
+   ![Ui.png](Ui.png)
 
 
 
