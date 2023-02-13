@@ -19,16 +19,6 @@ public class Main extends Application {
         System.out.println("test");
         AnchorPane ap = new MainWindow(nemo);
         Scene scene = new Scene(ap);
-        /*
-        ap.sceneProperty().addListener(new ChangeListener<Scene>() {
-            @Override
-            public void changed(ObservableValue<? extends Scene> observable,
-                                Scene oldValue, Scene newValue) {
-                ap.prefWidthProperty().bind(newValue.widthProperty());
-                ap.prefHeightProperty().bind(newValue.heightProperty());
-            }
-        });
-        */
         stage.setScene(scene);
         stage.setTitle("Nemo - the task tracker");
         stage.getIcons().add(new Image(MainWindow.class.getResourceAsStream("/images/icon.png")));
