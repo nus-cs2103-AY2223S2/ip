@@ -16,6 +16,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Duke duke;
+    private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/logo.jpg"));
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -24,7 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/logo.jpg")));
+            stage.getIcons().add(logoImage);
             stage.setTitle("MEL");
             MainWindow mainWindow = fxmlLoader.<MainWindow>getController();
             FxUi ui = new FxUi(mainWindow);

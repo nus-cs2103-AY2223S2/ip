@@ -12,6 +12,7 @@ import duke.task.Todo;
  * Handles duke.Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
 public class Duke {
+    static final String EASTER_EGG = "Eri?";
     static final int TODO_LENGTH = "todo ".length();
     static final int EVENT_LENGTH = "event ".length();
     static final int DEADLINE_LENGTH = "deadline ".length();
@@ -110,10 +111,7 @@ public class Duke {
      * @param itemNo Item number in list to be marked.
      */
     public void mark(int itemNo) throws DukeException {
-        if (taskList.size() <= itemNo || itemNo < 0) {
-            throw new DukeException("Task number is invalid, please enter a valid task number from 1 to "
-                    + taskList.size() + "!");
-        }
+        handleInvalidTaskNo(itemNo);
         assert taskList.size() > itemNo;
         taskList.get(itemNo).setDone(true);
         ui.displayText("Great job! I've marked this task as done: " + taskList.get(itemNo).toString());
@@ -127,10 +125,7 @@ public class Duke {
      * @param itemNo Item number in list to be unmarked.
      */
     public void unmark(int itemNo) throws DukeException {
-        if (taskList.size() <= itemNo || itemNo < 0) {
-            throw new DukeException("Task number is invalid, please enter a valid task number from 1 to "
-                    + taskList.size() + "!");
-        }
+        handleInvalidTaskNo(itemNo);
         assert taskList.size() > itemNo;
         taskList.get(itemNo).setDone(false);
         ui.displayText("OK, I've marked this task as not done yet: " + taskList.get(itemNo).toString());
@@ -145,18 +140,30 @@ public class Duke {
      */
     public void delete(int itemNo) throws DukeException {
         int initialSize = taskList.size();
-        if (taskList.size() <= itemNo || itemNo < 0) {
-            throw new DukeException("Task number is invalid, please enter a valid task number from 1 to "
-                    + taskList.size() + "!");
-        }
+        handleInvalidTaskNo(itemNo);
         assert taskList.size() > itemNo;
+
         StringBuilder displayString = new StringBuilder();
-        displayString.append("Noted. I've removed this task: " + taskList.get(itemNo).toString());
+        displayString.append("Noted. I've removed this task: ").append(taskList.get(itemNo).toString());
         taskList.remove(itemNo);
         storage.saveToFile();
-        displayString.append("\nNow you have " + taskList.size() + " tasks in the list.");
+        displayString.append("\nNow you have ").append(taskList.size()).append(" tasks in the list.");
         ui.displayText(displayString.toString());
         assert taskList.size() == initialSize - 1;
+    }
+
+    /**
+     * Handles error of invalid task number.
+     *
+     * @param itemNo User's input to check for error.
+     */
+    public void handleInvalidTaskNo(int itemNo) throws DukeException {
+        if (taskList.size() == 0) {
+            throw new DukeException("You have no remaining tasks!");
+        }
+        if (taskList.size() <= itemNo || itemNo < 0) {
+            throw new DukeException("Invalid task number, please enter a valid task number!");
+        }
     }
 
     /**
@@ -305,6 +312,9 @@ public class Duke {
             case "find":
                 handleBlankError(userInput, "Please provide a sub string to find!");
                 find(parser.getDescription(userInput, FIND_LENGTH));
+                break;
+            case EASTER_EGG:
+                ui.displayText("If you run, gain one. Move forward, gain two");
                 break;
             default:
                 ui.displayText("I do not understand you!\nType 'help' to get help");

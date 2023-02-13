@@ -1,0 +1,3 @@
+[D][ ] finish reading book (by: Jan 1 2024)
+[E][ ] read 5 chapters (from: Jan 1 2023 to: May 1 2023)
+[T][ ] book

@@ -1,3 +1,0 @@
-[D][ ] return book (by: Mar 1 2023)
-[E][ ] read chapter 1 (from: Feb 13 2023 to: Feb 14 2023)
-[T][ ] read book

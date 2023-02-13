@@ -18,7 +18,7 @@ import duke.task.Todo;
  * Handles loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    static final String FILE_NAME = "duke.txt";
+    static final String FILE_NAME = "MEL.txt";
     static final int TASK_TYPE_INDEX = 1;
     static final int IS_MARKED_INDEX = 4;
     static final int DESCRIPTION_INDEX = 7;

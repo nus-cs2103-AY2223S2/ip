@@ -5,8 +5,8 @@
 ## Quick Start
 1. Ensure you have `Java 11` or above installed in your computer.
 2. Download the latest `MEL.jar`.
-3. Copy the file to the folder you want to use as the *home folder* for MEL.
-4. Open a command terminal in the current folder directory 
+3. Copy `MEL.jar` to the folder you want to use as the *home folder* for MEL.
+4. Open a command terminal in the current *home folder* directory.
 5. Run `java -jar MEL.jar` command to run the application!
 
 ## Features 
