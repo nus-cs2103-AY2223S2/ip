@@ -19,14 +19,23 @@ import ui.Ui;
 
 public class Parser {
     private static final String EXIT_COMMAND = "bye";
+    private static final String B_COMMAND = "b";
     private static final String LIST_COMMAND = "list";
+    private static final String L_COMMAND = "l";
     private static final String DELETE_COMMAND = "delete";
+    private static final String CAP_D_COMMAND = "D";
     private static final String MARK_COMMAND = "mark";
+    private static final String M_COMMAND = "m";
     private static final String UNMARK_COMMAND = "unmark";
+    private static final String U_COMMAND = "u";
     private static final String TODO_COMMAND = "todo";
+    private static final String T_COMMAND = "t";
+    private static final String D_COMMAND = "d";
+    private static final String E_COMMAND = "e";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
     private static final String FIND_COMMAND = "find";
+    private static final String F_COMMAND = "f";
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
@@ -43,12 +52,12 @@ public class Parser {
         try {
             String[] inputWords = input.split(" ", 2);
             String command = inputWords[0];
-            if (command.equals(EXIT_COMMAND)) {
+            if (isExit(command)) {
                 ui.close();
                 return ui.printBye(list, storage);
-            } else if (command.equals(LIST_COMMAND)) {
+            } else if (isList(command)) {
                 return ui.printGetList(list);
-            } else if (command.equals(FIND_COMMAND)) {
+            } else if (isFind(command)) {
                 return this.handleFind(inputWords, ui, list);
             } else if (isMark(command)) {
                 return this.handleMark(inputWords, ui, list);
@@ -60,7 +69,7 @@ public class Parser {
                 return this.handleDeadline(inputWords, ui, list);
             } else if (isEvent(command)) {
                 return this.handleEvent(inputWords, ui, list);
-            } else if (command.equals(DELETE_COMMAND)) {
+            } else if (isDelete(command)) {
                 return this.handleDelete(inputWords, ui, list);
             } else {
                 throw new InvalidInputException();
@@ -214,7 +223,7 @@ public class Parser {
      * @return Yes or no in the form of a boolean, where true is yes and false is no.
      */
     public boolean isMark(String word) {
-        return word.equals(MARK_COMMAND);
+        return word.equals(MARK_COMMAND) || word.equals(M_COMMAND);
     }
 
     /**
@@ -224,7 +233,7 @@ public class Parser {
      * @return Yes or no in the form of a boolean, where true is yes and false is no.
      */
     public boolean isUnmark(String word) {
-        return word.equals(UNMARK_COMMAND);
+        return word.equals(UNMARK_COMMAND) || word.equals(U_COMMAND);
     }
 
     /**
@@ -234,7 +243,7 @@ public class Parser {
      * @return Yes or no in the form of a boolean, where true is yes and false is no.
      */
     public boolean isToDo(String word) {
-        return word.equals(TODO_COMMAND);
+        return word.equals(TODO_COMMAND) || word.equals(T_COMMAND);
     }
 
     /**
@@ -244,7 +253,7 @@ public class Parser {
      * @return Yes or no in the form of a boolean, where true is yes and false is no.
      */
     public boolean isDeadline(String word) {
-        return word.equals(DEADLINE_COMMAND);
+        return word.equals(DEADLINE_COMMAND) || word.equals(D_COMMAND);
     }
 
     /**
@@ -254,7 +263,44 @@ public class Parser {
      * @return Yes or no in the form of a boolean, where true is yes and false is no.
      */
     public boolean isEvent(String word) {
-        return word.equals(EVENT_COMMAND);
+        return word.equals(EVENT_COMMAND) || word.equals(E_COMMAND);
+    }
+
+    /**
+     * Checks if command is a Delete command.
+     *
+     * @param word First word of the user command.
+     * @return Yes or no in the form of a boolean, where true is yes and false is no.
+     */
+    public boolean isDelete(String word) {
+        return word.equals(DELETE_COMMAND) || word.equals(CAP_D_COMMAND);
+    }
+    /**
+     * Checks if command is a Exit command.
+     *
+     * @param word First word of the user command.
+     * @return Yes or no in the form of a boolean, where true is yes and false is no.
+     */
+    public boolean isExit(String word) {
+        return word.equals(EXIT_COMMAND) || word.equals(B_COMMAND);
+    }
+    /**
+     * Checks if command is a Find command.
+     *
+     * @param word First word of the user command.
+     * @return Yes or no in the form of a boolean, where true is yes and false is no.
+     */
+    public boolean isFind(String word) {
+        return word.equals(FIND_COMMAND) || word.equals(F_COMMAND);
+    }
+    /**
+     * Checks if command is a List command.
+     *
+     * @param word First word of the user command.
+     * @return Yes or no in the form of a boolean, where true is yes and false is no.
+     */
+    public boolean isList(String word) {
+        return word.equals(LIST_COMMAND) || word.equals(L_COMMAND);
     }
 
 }
