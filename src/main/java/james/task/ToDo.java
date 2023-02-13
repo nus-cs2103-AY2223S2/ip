@@ -1,7 +1,5 @@
 package james.task;
 
-import james.exception.JamesException;
-
 /**
  * The todo class.
  * A todo is a task that is listed on the taskList without a deadline.

@@ -1,13 +1,11 @@
 package james.command;
 
 import james.exception.JamesException;
-
 import james.jamesbot.Storage;
-
+import james.jamesbot.Ui;
 import james.task.Task;
 import james.task.TaskList;
 
-import james.jamesbot.Ui;
 
 /**
  * Deletes a task from the task list.

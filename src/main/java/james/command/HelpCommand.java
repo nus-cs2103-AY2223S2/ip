@@ -1,10 +1,12 @@
 package james.command;
 
-
-import james.task.TaskList;
 import james.jamesbot.Storage;
 import james.jamesbot.Ui;
+import james.task.TaskList;
 
+/**
+ * HelpCommand class that list down all commands when user types "help"
+ */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 

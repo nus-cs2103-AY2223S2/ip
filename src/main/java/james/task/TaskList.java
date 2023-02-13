@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /** This class encapsulates a TaskList object. */
 public class TaskList {
     /** The list of user's tasks. */
-    public ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     /**
      * Constructs a TaskList object.

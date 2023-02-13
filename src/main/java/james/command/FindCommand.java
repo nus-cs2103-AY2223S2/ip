@@ -1,9 +1,9 @@
 package james.command;
 
 import james.exception.JamesException;
-import james.task.TaskList;
 import james.jamesbot.Storage;
 import james.jamesbot.Ui;
+import james.task.TaskList;
 
 /**
  * Finds tasks based on keyword.

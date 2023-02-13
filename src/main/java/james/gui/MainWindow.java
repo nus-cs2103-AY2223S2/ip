@@ -1,8 +1,6 @@
 package james.gui;
 
-
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
+import james.jamesbot.JamesBot;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,8 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
-import james.jamesbot.JamesBot;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,7 +31,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getJamesDialog("Hello, I am James.\nHow may I be of service to you?", jamesImage));
+        dialogContainer.getChildren().add(
+                DialogBox.getJamesDialog("Hello, I am James.\nHow may I be of service to you?", jamesImage));
         assert this.scrollPane != null : "[scrollPane] FXML was improperly configured.";
         assert this.dialogContainer != null : "[dialogContainer] FXML was improperly configured.";
         assert this.userInput != null : "[userInput] FXML was improperly configured.";

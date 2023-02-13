@@ -1,10 +1,11 @@
 package james.command;
 
 import james.exception.JamesException;
-import james.task.Event;
-import james.task.TaskList;
 import james.jamesbot.Storage;
 import james.jamesbot.Ui;
+import james.task.Event;
+import james.task.TaskList;
+
 
 /**
  * Adds a task of type Event to the task list.
@@ -52,17 +53,17 @@ public class AddEventCommand extends Command {
 
         int commandLength = COMMAND_WORD.length();
         String taskInformation = userCommand.substring(commandLength).trim();
-        String descriptor_1 = "/from";
-        String descriptor_2 = "/to";
-        boolean hasNoDescriptor_1 = !taskInformation.contains(descriptor_1);
-        boolean hasNoDescriptor_2 = !taskInformation.contains(descriptor_2);
-        boolean hasNoDate_from = taskInformation.trim().endsWith(descriptor_1);
-        boolean hasNoDate_to = taskInformation.trim().endsWith(descriptor_2);
+        String descriptor1 = "/from";
+        String descriptor2 = "/to";
+        boolean hasNoDescriptor1 = !taskInformation.contains(descriptor1);
+        boolean hasNoDescriptor2 = !taskInformation.contains(descriptor2);
+        boolean hasNoDate_from = taskInformation.trim().endsWith(descriptor1);
+        boolean hasNoDate_to = taskInformation.trim().endsWith(descriptor2);
 
-        if (hasNoDescriptor_1 || hasNoDescriptor_2) {
+        if (hasNoDescriptor1 || hasNoDescriptor2) {
             throw new JamesException("Task description missing descriptor: "
-                    + descriptor_1 + " "
-                    + descriptor_2 + " \n"
+                    + descriptor1 + " "
+                    + descriptor2 + " \n"
                     + MESSAGE_DETAILED_USAGE);
         }
 
@@ -71,8 +72,8 @@ public class AddEventCommand extends Command {
                     + MESSAGE_DETAILED_USAGE);
         }
 
-        int startIndexEvent = userCommand.indexOf(descriptor_1 + " ");
-        int endIndexEvent = userCommand.indexOf(descriptor_2 + " ");
+        int startIndexEvent = userCommand.indexOf(descriptor1 + " ");
+        int endIndexEvent = userCommand.indexOf(descriptor2 + " ");
         int userCmdLenEvent = userCommand.length();
         String description = userCommand.substring(commandLength, startIndexEvent).trim();
 

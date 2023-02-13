@@ -2,12 +2,10 @@ package james.command;
 
 import james.exception.JamesException;
 import james.jamesbot.Storage;
-import james.task.TaskList;
 import james.jamesbot.Ui;
+import james.task.TaskList;
 
-/**
- * The command to be executed. All specific commands are subclasses of this class.
- */
+
 /**
  * The Command class is an abstract class that represents an executable command.
  */
@@ -20,7 +18,7 @@ public abstract class Command {
      * @param storage The task list that is stored in the user's hard disk.
      * @throws JamesException If user command is used wrongly.
      */
-    public abstract String execute (TaskList tasks, Ui ui, Storage storage) throws JamesException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException;
 
     /**
      * Returns whether the user command exits the program.

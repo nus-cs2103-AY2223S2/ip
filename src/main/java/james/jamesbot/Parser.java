@@ -9,10 +9,8 @@ import james.command.Command;
 import james.command.DeleteCommand;
 import james.command.ExitCommand;
 import james.command.FindCommand;
-import james.command.ListTasksCommand;
 import james.command.HelpCommand;
-
-
+import james.command.ListTasksCommand;
 import james.exception.JamesException;
 
 /**

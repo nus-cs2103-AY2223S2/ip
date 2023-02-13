@@ -3,6 +3,10 @@ package james.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The event class.
+ * An event is a task that is listed on the taskList with a time range of /from /to.
+ */
 public class Event extends Task {
     /** Starting time in d/MM/yyyy HHmm format */
     protected LocalDateTime start;
@@ -20,14 +24,13 @@ public class Event extends Task {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.start = LocalDateTime.parse(start, format);
         this.end = LocalDateTime.parse(end, format);
-
     }
 
     @Override
     public String toString() {
         String startFormat =  this.start.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         String endFormat = this.end.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        return "[E]" + super.toString() + " (from:" + startFormat + " to:" + endFormat + ")";
+        return "[E]" + super.toString() +  " (from:" + startFormat + " to:" + endFormat + ")";
     }
 
     @Override

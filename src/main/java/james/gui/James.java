@@ -1,12 +1,16 @@
 package james.gui;
+
 import james.exception.JamesException;
-import javafx.application.Application;
+import james.jamesbot.JamesBot;
 import java.io.IOException;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import james.jamesbot.JamesBot;
+
+
+
 
 /**
  * Main file to run the program.

@@ -3,18 +3,17 @@ package james.jamesbot;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
-
 import james.exception.JamesException;
-
 import james.task.Deadline;
 import james.task.Event;
 import james.task.TaskList;
 import james.task.ToDo;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 
 /**
  * Represents the file used to store task list data.
@@ -22,7 +21,7 @@ import java.nio.file.Paths;
 public class Storage {
 
     protected File file;
-    String filePath = "storage/data/james.txt";
+    private String filePath = "storage/data/james.txt";
 
     /**
      * Constructs a Storage object.
@@ -77,7 +76,7 @@ public class Storage {
                     taskList.add(todo);
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(task[2],task[3]);
+                    Deadline deadline = new Deadline(task[2], task[3]);
                     deadline.setIsDone(task[1].equals("1"));
                     taskList.add(deadline);
                     break;
@@ -86,6 +85,8 @@ public class Storage {
                     event.setIsDone(task[1].equals("1"));
                     taskList.add(event);
                     break;
+                default:
+                    throw new JamesException("No task types");
                 }
             }
             scan.close();

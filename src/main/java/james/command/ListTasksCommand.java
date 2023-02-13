@@ -1,10 +1,8 @@
 package james.command;
 
-
 import james.jamesbot.Storage;
-import james.task.TaskList;
 import james.jamesbot.Ui;
-
+import james.task.TaskList;
 
 /**
  * Lists all the tasks in the task list.

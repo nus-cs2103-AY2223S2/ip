@@ -1,7 +1,5 @@
 package james.jamesbot;
 
-import java.util.Scanner;
-
 import james.command.AddDeadlineCommand;
 import james.command.AddEventCommand;
 import james.command.AddMarkCommand;
