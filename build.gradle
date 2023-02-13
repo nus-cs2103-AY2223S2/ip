@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "sam.Sam"
+    mainClassName = "sam.Launcher"
 }
 
 shadowJar {
