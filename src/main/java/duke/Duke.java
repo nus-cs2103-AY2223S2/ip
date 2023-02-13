@@ -4,9 +4,6 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
 import duke.commands.Command;
-
-
-
 /**
  * Main class of the program.
  * Contains the Storage, TaskList, Ui that will be used
