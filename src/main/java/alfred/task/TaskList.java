@@ -88,7 +88,7 @@ public class TaskList {
         try {
             FileWriter fw = new FileWriter(dataFile);
             for (Task task : tasks) {
-                fw.write(task.addToFile());
+                fw.write(task.getFileFormat());
             }
             fw.close();
         } catch (IOException e) {

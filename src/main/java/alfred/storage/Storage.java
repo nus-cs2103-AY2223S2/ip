@@ -36,6 +36,30 @@ public class Storage {
      * @throws AlfredException The error that is thrown out when the file cannot be read.
      */
     public ArrayList<Task> load() throws AlfredException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        dataFile.getParentFile().mkdir();
+        try {
+            if (dataFile.createNewFile()) {
+                return tasks;
+            }
+            Scanner sc = new Scanner(dataFile);
+            return getTasksFromFile(tasks, sc);
+        } catch (IOException e) {
+            throw new AlfredException("Error, invalid file path");
+        }
+    }
+
+    private ArrayList<Task> getTasksFromFile(ArrayList<Task> tasks, Scanner sc) throws AlfredException {
+        while (sc.hasNext()) {
+            String[] taskInfoArr = sc.nextLine().split(" \\| ");
+            Task task;
+            // What happens if the data in the file is not as the format given?
+            tasks.add(getTask(taskInfoArr));
+        }
+        return tasks;
+    }
+
+    private Task getTask(String[] taskInfoArr) throws AlfredException {
         class CheckMark {
             public void isMark(int value, Task task) {
                 if (value == 1) {
@@ -45,48 +69,31 @@ public class Storage {
         }
         CheckMark checkMark = new CheckMark();
 
-        ArrayList<Task> tasks = new ArrayList<>();
-        dataFile.getParentFile().mkdir();
+        String taskType = taskInfoArr[0];
+        Task task;
         try {
-            if (!dataFile.createNewFile()) {
-                Scanner sc = new Scanner(dataFile);
-                while (sc.hasNext()) {
-                    String[] lineArr = sc.nextLine().split(" \\| ");
-                    String taskType = lineArr[0];
-                    Task task;
-                    // What happens if the data in the file is not as the format given?
-                    try {
-                        switch (taskType) {
-                        case "T":
-                            task = new ToDo(lineArr[2]);
-                            checkMark.isMark(Integer.parseInt(lineArr[1]), task);
-                            break;
-                        case "D":
-                            task = new Deadline(lineArr[2], lineArr[3]);
-                            checkMark.isMark(Integer.parseInt(lineArr[1]), task);
-                            break;
-                        case "E":
-                            String[] duration = lineArr[3].split("-");
-                            task = new Event(lineArr[2], duration[0], duration[1]);
-                            checkMark.isMark(Integer.parseInt(lineArr[1]), task);
-                            break;
-                        default:
-                            throw new AlfredException("I'm sorry but there is an"
-                                    + " invalid task in the data file");
-                        }
-                        tasks.add(task);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new AlfredException("There is probably a missing separator in your file");
-                    }
-                }
+            switch (taskType) {
+            case "T":
+                task = new ToDo(taskInfoArr[2]);
+                checkMark.isMark(Integer.parseInt(taskInfoArr[1]), task);
+                break;
+            case "D":
+                task = new Deadline(taskInfoArr[2], taskInfoArr[3]);
+                checkMark.isMark(Integer.parseInt(taskInfoArr[1]), task);
+                break;
+            case "E":
+                String[] duration = taskInfoArr[3].split("-");
+                task = new Event(taskInfoArr[2], duration[0], duration[1]);
+                checkMark.isMark(Integer.parseInt(taskInfoArr[1]), task);
+                break;
+            default:
+                throw new AlfredException("I'm sorry but there is an invalid task in the data file");
             }
-        } catch (IOException e) {
-            throw new AlfredException("Error, invalid file path");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new AlfredException("There is probably a missing separator in your file");
         }
-        return tasks;
-
+        return task;
     }
-
     /**
      * Writes all the tasks in the task list into the data file.
      * @param tasks All the tasks in the task list.
