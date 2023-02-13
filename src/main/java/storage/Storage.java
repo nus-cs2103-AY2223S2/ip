@@ -107,7 +107,7 @@ public class Storage {
                         this.getIsTaskDone(task)));
                 break;
             default:
-                throw new DukeException(Ui.fileCorruptedMessage);
+                throw new DukeException(Ui.getFileCorruptedMessage());
             }
         }
         return new TaskList(list);

@@ -41,7 +41,7 @@ public class CommandDeadline extends Command {
             this.taskList.addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Ui.emptyDetailsForDeadlineMessage);
+            throw new DukeException(Ui.getEmptyDetailsForDeadlineMessage());
         }
     }
 

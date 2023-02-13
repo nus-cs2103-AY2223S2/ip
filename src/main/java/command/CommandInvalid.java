@@ -10,6 +10,6 @@ public class CommandInvalid extends Command {
 
     @Override
     public String execute() throws DukeException {
-        return Ui.noKeywordMessage;
+        return Ui.getNoKeywordMessage();
     }
 }

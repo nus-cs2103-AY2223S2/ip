@@ -33,7 +33,7 @@ public class TaskList {
         try {
             return this.storedTasks.get(this.offSetIndex(index));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Ui.integerOutOfBoundsMessage);
+            throw new DukeException(Ui.getIntegerOutOfBoundsMessage());
         }
     }
 
@@ -48,7 +48,7 @@ public class TaskList {
         try {
             return this.storedTasks.remove(this.offSetIndex(index));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Ui.integerOutOfBoundsMessage);
+            throw new DukeException(Ui.getIntegerOutOfBoundsMessage());
         }
     }
 

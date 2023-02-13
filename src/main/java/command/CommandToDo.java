@@ -40,7 +40,7 @@ public class CommandToDo extends Command {
 
     private void checkIfBlank(String taskDetails) throws DukeException {
         if (taskDetails.isBlank()) {
-            throw new DukeException(Ui.emptyDetailsForToDoMessage);
+            throw new DukeException(Ui.getEmptyDetailsForToDoMessage());
         }
     }
 

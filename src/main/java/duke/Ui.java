@@ -2,20 +2,44 @@ package duke;
 
 import task.Task;
 
+/**
+ * Class that consist of all Duke user interaction with the user.
+ */
 public class Ui {
-    public static final String noKeywordMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    public static final String goodbyeMessage = "Good Riddance!!!";
-    public static final String emptyDetailsForToDoMessage = "EXCUSE ME!!!, 'ToDo' details cannot be empty";
-    public static final String emptyDetailsForDeadlineMessage = "EXCUSE ME!!!, " +
-            "'Deadline' details cannot be empty";
-    public static final String emptyDetailsForEventMessage = "EXCUSE ME!!!, 'Event' details cannot be empty";
-    public static final String eventTaskFormat = "EXCUSE ME!!!, please follow the format" +
-            "\nevent <details> /from dd/mm/yyyy /to dd/mm/yyyy";
-    public static final String supportedDateFormat = "EXCUSE ME!!!, " +
-            "please use the correct date format\n dd/mm/yyyy";
 
-    public static final String integerOutOfBoundsMessage= "Are you blind? That's not an option!!";
-    public static final String fileCorruptedMessage = "Too bad for you, file was corrupted";
+    public static String getNoKeywordMessage() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    }
+
+    public static String getGoodbyeMessage() {
+        return "Good Riddance!!!";
+    }
+
+    public static String getEmptyDetailsForToDoMessage() {
+        return "EXCUSE ME!!!, 'ToDo' details cannot be empty";
+    }
+
+    public static String getEmptyDetailsForDeadlineMessage() {
+        return "EXCUSE ME!!!, 'Deadline' details cannot be empty";
+    }
+
+    public static String getEventTaskFormat() {
+        return "EXCUSE ME!!!, please follow the format"
+                + "\nevent <details> /from dd/mm/yyyy /to dd/mm/yyyy";
+    }
+
+    public static String getSupportedDateFormat() {
+        return "EXCUSE ME!!!, "
+                + "please use the correct date format\n dd/mm/yyyy";
+    }
+
+    public static String getIntegerOutOfBoundsMessage() {
+        return "Are you blind? That's not an option!!";
+    }
+
+    public static String getFileCorruptedMessage() {
+        return "Too bad, file was corrupted";
+    }
 
     public static String getDeleteMessageWithAttitudeOf(Task taskRemoved) {
         return "\nNoted. I've purged this task:\n  " + taskRemoved.getTaskDetails();
@@ -40,4 +64,7 @@ public class Ui {
         return "\nHere you go:\n" + allTaskFound;
     }
 
+    public static String getEmptyDetailsForEventMessage() {
+        return "EXCUSE ME!!!, 'Deadline' details cannot be empty";
+    }
 }

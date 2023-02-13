@@ -8,6 +8,6 @@ import duke.Ui;
 public class CommandBye extends Command {
     @Override
     public String execute() {
-        return Ui.goodbyeMessage;
+        return Ui.getGoodbyeMessage();
     }
 }

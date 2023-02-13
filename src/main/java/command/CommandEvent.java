@@ -48,15 +48,15 @@ public class CommandEvent extends Command {
             this.taskList.addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Ui.eventTaskFormat);
+            throw new DukeException(Ui.getEventTaskFormat());
         } catch (DateTimeParseException e) {
-            throw new DukeException(Ui.supportedDateFormat);
+            throw new DukeException(Ui.getSupportedDateFormat());
         }
     }
 
     private void checkIfBlank(String taskDetails) throws DukeException {
         if (taskDetails.isBlank()) {
-            throw new DukeException(Ui.emptyDetailsForEventMessage);
+            throw new DukeException(Ui.getEmptyDetailsForEventMessage());
         }
     }
 
