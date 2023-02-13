@@ -168,7 +168,7 @@ public enum CommandType {
     }
 
     /**
-     * Set the reminder duration that is used check for upcoming or ongoing tasks.
+     * Sets the reminder duration that is used to check for upcoming or ongoing tasks.
      *
      */
     public void setReminderDuration(String reminderDuration) {
