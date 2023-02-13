@@ -88,13 +88,12 @@ public class Parser {
         if (splitStr.length < 2) {
             throw new NemoException("Mark / Unmark / Delete commands require an "
                     + "integer argument referring to task number");
-        } else {
-            try {
-                int taskNumber = Integer.parseInt(splitStr[1]);
-                return taskNumber;
-            } catch (NumberFormatException e) {
-                throw new NemoException("Format of argument cannot be parsed as an integer");
-            }
+        }
+        try {
+            int taskNumber = Integer.parseInt(splitStr[1]);
+            return taskNumber;
+        } catch (NumberFormatException e) {
+            throw new NemoException("Format of argument cannot be parsed as an integer");
         }
     }
 
@@ -102,23 +101,20 @@ public class Parser {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
             throw new NemoException("Todo command requires a task description");
-        } else {
-            return splitStr[1];
         }
+        return splitStr[1];
     }
 
     private static String[] parseDeadlineCommand(String userInput) throws NemoException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
             throw new NemoException("Deadline command requires task description and /by argument");
-        } else {
-            String[] output = splitStr[1].split(" /by ", 2);
-            if (output.length < 2) {
-                throw new NemoException("Deadline command requires task description and /by argument");
-            } else {
-                return output;
-            }
         }
+        String[] output = splitStr[1].split(" /by ", 2);
+        if (output.length < 2) {
+            throw new NemoException("Deadline command requires task description and /by argument");
+        }
+        return output;
     }
 
     private static String[] parseEventCommand(String userInput) throws NemoException {
@@ -126,30 +122,26 @@ public class Parser {
         if (splitStr.length < 2) {
             throw new NemoException("Event command requires task description, "
                     + "/from argument and /to argument");
-        } else {
-            String[] splitFrom = splitStr[1].split(" /from ", 2);
-            if (splitFrom.length < 2) {
-                throw new NemoException("Event command requires task description, "
-                        + "/from argument and /to argument");
-            } else {
-                String[] splitTo = splitFrom[1].split(" /to ", 2);
-                if (splitTo.length < 2) {
-                    throw new NemoException("Event command requires task description, "
-                            + "/from argument and /to argument");
-                } else {
-                    // [0] is description of task; [1] is from; [2] is to
-                    return new String[] {splitFrom[0], splitTo[0], splitTo[1]};
-                }
-            }
         }
+        String[] splitFrom = splitStr[1].split(" /from ", 2);
+        if (splitFrom.length < 2) {
+            throw new NemoException("Event command requires task description, "
+                    + "/from argument and /to argument");
+        }
+        String[] splitTo = splitFrom[1].split(" /to ", 2);
+        if (splitTo.length < 2) {
+            throw new NemoException("Event command requires task description, "
+                    + "/from argument and /to argument");
+        }
+        // [0] is description of task; [1] is from; [2] is to
+        return new String[] {splitFrom[0], splitTo[0], splitTo[1]};
     }
 
     private static String parseFindCommand(String userInput) throws NemoException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
             throw new NemoException("Find command requires String to base search on");
-        } else {
-            return splitStr[1];
         }
+        return splitStr[1];
     }
 }
