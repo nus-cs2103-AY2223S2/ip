@@ -19,6 +19,7 @@ public class Event extends Task {
                                         + "/to {dd/mm/yyyy HHmm}";
     private LocalDateTime to;
     private LocalDateTime from;
+    private final boolean hasDate = true;
 
     /**
      * The constructor that initialises an Event task.
@@ -62,6 +63,10 @@ public class Event extends Task {
      */
     public static String showFomat() {
         return "Create an `Event` with: " + FORMAT;
+    }
+
+    public LocalDateTime getDate() {
+        return from;
     }
 
     /**

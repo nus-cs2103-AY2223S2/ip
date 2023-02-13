@@ -16,6 +16,7 @@ public class Deadline extends Task {
                                                         .ofPattern("dd LLL, h:mma");
     private static final String FORMAT = "deadline {task name} /by {dd/mm/yyyy HHmm}";
     private LocalDateTime deadline;
+    private final boolean hasDate = true;
 
     /**
      * The constructor that initalises a Deadline task with the given description and date.
@@ -47,6 +48,10 @@ public class Deadline extends Task {
      */
     public static String showFormat() {
         return "Create a `deadline` with: " + FORMAT;
+    }
+
+    public LocalDateTime getDate() {
+        return deadline;
     }
 
     /**

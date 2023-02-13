@@ -3,6 +3,8 @@ package duke.commands;
 import java.util.Comparator;
 
 import duke.tasks.Task;
+import duke.tasks.taskcomparator.DateComparator;
+import duke.tasks.taskcomparator.DescriptionComparator;
 import duke.tasks.TaskList;
 import duke.utils.DukeIo;
 
@@ -29,14 +31,18 @@ public class SortCommand extends Command {
     @Override
     public String exec(DukeIo dukeIo, TaskList tasks) {
         Comparator<Task> c = getComparator(this.key);
-        tasks.sort(c);
-        return dukeIo.showAll();
+        return tasks.sort(c);
     }
 
     private Comparator<Task> getComparator(String key) {
-        if (key == "name") {
-            return (o1, o2) -> o1.getDescription().compareTo(o2.getDescription());
+        if (key.equals("name")) {
+            return new DescriptionComparator();
+        } else if (key.equals("date")) {
+            return new DateComparator();
+        } else {
+            // should not reach here
+            assert false;
+            return new DescriptionComparator();
         }
-        return (o1, o2) -> o1.getDescription().compareTo(o2.getDescription());
     }
 }

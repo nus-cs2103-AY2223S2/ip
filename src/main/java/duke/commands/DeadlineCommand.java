@@ -33,8 +33,8 @@ public class DeadlineCommand extends Command {
 
     private Deadline createDeadline() {
         assert tokens.length == 2;
-        String desc = tokens[0];
-        String byDeadline = tokens[1];
+        String desc = tokens[0].trim();
+        String byDeadline = tokens[1].trim();
         return new Deadline(desc, byDeadline);
     }
 }

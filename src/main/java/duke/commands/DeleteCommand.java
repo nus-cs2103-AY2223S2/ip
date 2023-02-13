@@ -25,7 +25,8 @@ public class DeleteCommand extends Command {
      * @return Success toast upon deleing task and number of remaining tasks.
      */
     public String exec(DukeIo dukeIo, TaskList tasks) {
+        String showDeleted = dukeIo.showDeleted(index);
         tasks.deleteTask(index);
-        return dukeIo.showDeleted(index) + dukeIo.showCount();
+        return showDeleted + dukeIo.showCount();
     }
 }

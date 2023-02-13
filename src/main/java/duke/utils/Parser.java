@@ -206,6 +206,11 @@ public class Parser {
             return new InvalidCommand(
                     new InvalidCommandException(InvalidCommandException.SORT_FORMAT_EXCEPTION));
         }
+
+        if (!tokens[1].equals("name") || !tokens[1].equals("date")) {
+            return new InvalidCommand(
+                    new InvalidCommandException(InvalidCommandException.SORT_FORMAT_EXCEPTION));
+        }
         return new SortCommand(tokens[1]);
     }
 

@@ -5,6 +5,7 @@ package duke.tasks;
  */
 public class ToDo extends Task {
     private static final String FORMAT = "todo {task name}";
+    private final boolean hasDate = false;
 
     /**
      * The constructor to initialise a ToDo task object with the given description.

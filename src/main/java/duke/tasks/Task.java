@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * Parent Task class which implements Serializable.
@@ -8,6 +9,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
     protected String desc;
     protected boolean isDone;
+    protected boolean hasDate;
 
     /**
      * Public constructor that takes in String to create a Task object.
@@ -54,6 +56,14 @@ public class Task implements Serializable {
         } else {
             setDone(true);
         }
+    }
+
+    public boolean hasDate() {
+        return hasDate;
+    }
+
+    public LocalDateTime getDate() {
+        return null;
     }
 
     /**
