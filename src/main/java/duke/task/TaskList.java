@@ -74,6 +74,11 @@ public class TaskList {
         return matchingTasks;
     }
 
+    /**
+     * Returns a task list that contains the tasks in this task list which are upcoming within the given days.
+     * @param days Number of days from now within which a task is upcoming.
+     * @return Returns a task list that contains the tasks in this task list which are upcoming within the given days.
+     */
     public TaskList getUpcomingTasks(long days) {
         TaskList upcomingTasks = new TaskList();
         for (Task task : list) {
@@ -83,6 +88,14 @@ public class TaskList {
         }
         assert upcomingTasks != null : "upcomingTasks should not be null";
         return upcomingTasks;
+    }
+
+    /**
+     * Gets the number of tasks in the task list.
+     * @return The number of tasks in the task list.
+     */
+    public int getSize() {
+        return list.size();
     }
 
     private int getIndexFromNumber(int number) {

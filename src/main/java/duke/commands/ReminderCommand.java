@@ -13,7 +13,11 @@ public class ReminderCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, UiText uiText, Storage storage) {
+        assert DAYS_TO_TASK_FOR_REMINDER >= 0 : "Number of days cannot be negative";
         TaskList upcomingTasks = taskList.getUpcomingTasks(DAYS_TO_TASK_FOR_REMINDER);
+        if (upcomingTasks.getSize() == 0) {
+            return "Wonderful. You have no tasks for " + DAYS_TO_TASK_FOR_REMINDER + " days.";
+        }
         return "REMINDER! These tasks are coming up:\n"
                 + upcomingTasks;
     }
