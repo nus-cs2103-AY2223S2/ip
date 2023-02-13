@@ -31,6 +31,7 @@ public class TaskList {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = tasks.get(i);
+            assert task != null : "Task is null";
             if (task.provideDetails().contains(searchWord)) {
                 matchingTasks.add(task);
             }
