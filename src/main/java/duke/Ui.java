@@ -29,10 +29,13 @@ public class Ui {
         instructString += (" to add a task that is to be done by a certain date.\n");
         instructString += ("\t3. Type 'event (name of task) /from (date and time) /to ");
         instructString += ("(date and time) to add in a time-limited event.\n");
-        instructString += ("C. To delete a task, type 'delete X' where X is the task number\n");
-        instructString += ("D. To mark a task as completed, type 'mark X'\n");
-        instructString += ("E. To sort the tasks according to priority, type 'sort'\n");
-        instructString += ("F. To save and exit, type 'bye'\n");
+        instructString += ("C. For the following, let X be the task number.\n");
+        instructString += ("    To increase priority of a task, type 'increase X'\n");
+        instructString += ("    To decrease priority of a task, type 'decrease X'\n");
+        instructString += ("    To delete a task, type 'delete X'\n");
+        instructString += ("    To mark a task as completed, type 'mark X'\n");
+        instructString += ("D. To sort the tasks according to priority, type 'sort'\n");
+        instructString += ("E. To save and exit, type 'bye'\n");
         return instructString;
     }
 

@@ -49,52 +49,13 @@ public class Duke extends Application {
         storage = new Storage("src/data/duke.txt");
         tasks = new TaskList(storage.load());
         parser = new Parser();
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        setLayout(stage);
 
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -112,7 +73,6 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(ui.introduce(), new ImageView(duke))
         );
 
-        //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -120,11 +80,55 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+    }
 
+    public void setLayout(Stage stage) {
+        setStage(stage);
+        setScrollPane();
+        setUiElements();
+        setAnchorPlane();
+    }
+
+    public void setScrollPane() {
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+    }
+
+    public void setStage(Stage stage) {
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+    }
+
+    public void setUiElements() {
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        userInput.setPrefWidth(325.0);
+        sendButton.setPrefWidth(55.0);
+    }
+
+    public void setAnchorPlane() {
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      *
      * @param text String containing text to add
@@ -138,9 +142,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply.
+     * Appends the boxes to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -161,8 +164,10 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates the bot's response to the user's input
+     *
+     * @param userInput the input keyed in by the user
+     * @return the bot's response as a String
      */
     private String getResponse(String userInput) {
         String response = "I heard you: " + userInput + "\n";
@@ -181,13 +186,13 @@ public class Duke extends Application {
             } else if (parser.checkFindRequest(userInput)) {
                 String toBeFound = userInput.substring(5);
                 response += tasks.find(toBeFound);
-            } else if (userInput.startsWith("increase")) {
+            } else if (parser.checkIncreaseRequest(userInput)) {
                 int itemNo = Integer.parseInt(userInput.substring(9));
                 response += tasks.increasePriorityOfTask(itemNo);
-            } else if (userInput.startsWith("decrease")) {
+            } else if (parser.checkDecreaseRequest(userInput)) {
                 int itemNo = Integer.parseInt(userInput.substring(9));
                 response += tasks.decreasePriorityOfTask(itemNo);
-            } else if (userInput.startsWith("sort")) {
+            } else if (parser.checkSort(userInput)) {
                 response += tasks.sortTasks();
             }
             else {
