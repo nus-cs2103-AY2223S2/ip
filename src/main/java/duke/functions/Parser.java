@@ -44,12 +44,12 @@ public class Parser {
                 reply = tasks.printTasks();
             } else if (inputArr[0].equals("mark")) {
                 int index = Integer.valueOf(inputArr[1]) - 1;
-                Task task = tasks.getTask(index);
-                reply =  task.setDone();
+                reply = tasks.setTaskDone(index);
+
             } else if (inputArr[0].equals("unmark")) {
                 int index = Integer.valueOf(inputArr[1]) - 1;
-                Task task = tasks.getTask(index);
-                reply = task.setNotDone();
+                reply = tasks.setTaskNotDone(index);
+
             } else if (inputArr[0].equals("delete")) {
                 int index = Integer.valueOf(inputArr[1]) - 1;
                 Task task = tasks.deleteTask(index);

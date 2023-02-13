@@ -23,11 +23,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage =  new Storage(filePath);
-        try {
-            taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
-            taskList = new TaskList();
-        }
+        taskList = new TaskList(storage);
     }
 
 

@@ -1,6 +1,3 @@
-D|T|return book (by:Dec 2 2019 0600pm)
-T|F|brush teeth
-T|F| print my books
-T|F| go toilet
-D|F| return book (by:Apr 2 2023 1159pm)
-T|F| hello
+D|F| go back to hall (by:Feb 1 2022 0300pm)
+T|T| return books
+T|F| go to botacs

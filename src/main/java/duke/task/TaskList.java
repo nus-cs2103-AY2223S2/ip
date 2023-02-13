@@ -1,4 +1,7 @@
 package duke.task;
+import duke.dukeexceptions.DukeException;
+import duke.functions.Storage;
+
 import java.util.ArrayList;
 
 /**
@@ -6,14 +9,20 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private static ArrayList<Task> tasks;
+    private Storage storage;
 
     /**
      * Constructor of TaskList.
      *
-     * @param actions an ArrayList of Tasks.
+     * @param storage which contains the path of the data to store.
      */
-    public TaskList(ArrayList<Task> actions) {
-        this.tasks = actions;
+    public TaskList(Storage storage) {
+        this.storage = storage;
+        try {
+            this.tasks = storage.load();
+        } catch (DukeException e) {
+            this.tasks = new ArrayList<Task>();
+        }
     }
 
     /**
@@ -30,6 +39,7 @@ public class TaskList {
      * @return the deleted Task.
      */
     public Task deleteTask(int index) {
+        this.storage.deleteInFile(index);
         return tasks.remove(index);
     }
 
@@ -52,6 +62,18 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public String setTaskDone(int index) {
+        Task task = this.getTask(index);
+        this.storage.changeStatusInFile(index, true);
+        return task.setDone();
+    }
+
+    public String setTaskNotDone(int index) {
+        Task task = this.getTask(index);
+        this.storage.changeStatusInFile(index, false);
+        return task.setNotDone();
+    }
+
     /**
      * Returns the current Tasks in the checklist.
      *
@@ -61,7 +83,7 @@ public class TaskList {
         int len = tasks.size();
         String reply = "";
         for (int i = 0; i < len; i++) {
-            reply = reply + (i + 1) + ". " + tasks.get(i).status() + "\n";
+            reply = reply + (i + 1) + ". " + tasks.get(i).status();
         }
         return reply;
     }
