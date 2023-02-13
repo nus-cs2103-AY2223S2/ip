@@ -1,5 +1,6 @@
 package duke.Command;
 
+import duke.Utilities.NoteList;
 import duke.Utilities.Storage;
 import duke.Utilities.TaskList;
 import duke.Utilities.UI;
@@ -16,7 +17,7 @@ public class ListCommand extends Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      */
     @Override
-    public String execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, NoteList notes, UI ui, Storage storage) {
         return tasks.printTaskList();
     }
 

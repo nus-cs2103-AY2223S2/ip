@@ -1,5 +1,6 @@
 package duke.Command;
 
+import duke.Utilities.NoteList;
 import duke.Utilities.TaskList;
 import duke.Utilities.UI;
 import duke.Utilities.Storage;
@@ -44,10 +45,10 @@ public class DeadlineCommand extends Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      */
     @Override
-    public String execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, NoteList notes, UI ui, Storage storage) {
         Deadline dl = new Deadline(name, deadline);
         String confirmationMessage = tasks.addTask(dl);
-        storage.saveToFile(tasks.getTasks());
+        storage.saveToFile(tasks.getTasks(), notes.getNotes());
         return confirmationMessage;
     }
 

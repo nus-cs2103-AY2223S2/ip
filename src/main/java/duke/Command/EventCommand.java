@@ -4,6 +4,7 @@ import duke.Exception.InvalidArgumentsException;
 
 import duke.Task.Event;
 
+import duke.Utilities.NoteList;
 import duke.Utilities.TaskList;
 import duke.Utilities.UI;
 import duke.Utilities.Storage;
@@ -47,10 +48,10 @@ public class EventCommand extends Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      */
     @Override
-    public String execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, NoteList notes, UI ui, Storage storage) {
         Event ev = new Event(name, from, until);
         String confirmationMessage = tasks.addTask(ev);
-        storage.saveToFile(tasks.getTasks());
+        storage.saveToFile(tasks.getTasks(), notes.getNotes());
         return confirmationMessage;
     }
     @Override

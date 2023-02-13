@@ -67,7 +67,7 @@ public class TaskList {
         Task removedTask = tasks.get(taskNumber);
         tasks.remove(taskNumber);
         items--;
-        return "Noted. I've removed this task:\n"
+        return "Got it. I've removed this task:\n"
                 + String.format(" [%s][%s] %s\n Now you have %s tasks in the list.",
                 removedTask.getTaskType(), removedTask.getStatusIcon() , removedTask, items);
     }

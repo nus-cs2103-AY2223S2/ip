@@ -2,6 +2,7 @@ package duke.Command;
 
 import duke.Exception.InvalidTaskException;
 
+import duke.Utilities.NoteList;
 import duke.Utilities.Storage;
 import duke.Utilities.TaskList;
 import duke.Utilities.UI;
@@ -33,12 +34,12 @@ public class UnmarkCommand extends Command {
      * or cannot exist in the task list (negative numbers)).
      */
     @Override
-    public String execute(TaskList tasks, UI ui, Storage storage) throws InvalidTaskException {
+    public String execute(TaskList tasks, NoteList notes, UI ui, Storage storage) throws InvalidTaskException {
         if (index < 1 || index > tasks.getItems()) {
             throw new InvalidTaskException(index);
         }
         String confirmationMessage = tasks.getTasks().get(index - 1).markAsUndone();
-        storage.saveToFile(tasks.getTasks());
+        storage.saveToFile(tasks.getTasks(), notes.getNotes());
         return confirmationMessage;
     }
 

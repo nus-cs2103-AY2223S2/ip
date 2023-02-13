@@ -10,25 +10,28 @@ import duke.Exception.DukeException;
 
 public class Duke {
     private TaskList tl;
+    private NoteList nl;
     private Storage storage;
     private UI ui;
-    private final String FILEPATH = "tasks.txt";
+    private final String FILEPATH = "data.txt";
     private boolean isExit = false;
 
     /**
-     * Constructor to set up duke.Utilities.Duke, tries to load an existing list from the file.
-     * If successful, the current task list will be loaded with the contents of the file.
-     * If unsuccessful, create a new file with the file name, and new empty task list to add to.
+     * Constructor to set up Duke, tries to load existing lists from the file.
+     * If successful, the current task & note list will be loaded with the contents of the file.
+     * If unsuccessful, create a new file with the file name, and new empty task & note list to add to.
      */
     public Duke() {
         ui = new UI();
         storage = new Storage(FILEPATH);
 
         try {
-            tl = new TaskList(storage.loadFromFile());
+            tl = new TaskList(storage.loadTasksFromFile());
+            nl = new NoteList(storage.loadNotesFromFile());
         } catch (DukeException exception) {
             ui.showLoadingError();
             tl = new TaskList();
+            nl = new NoteList();
         }
     }
 
@@ -43,7 +46,7 @@ public class Duke {
         try {
             Command c = new Parser().parseCommand(input);
             isExit = c.isByeCommand();
-            return c.execute(tl, ui, storage);
+            return c.execute(tl, nl, ui, storage);
         } catch (DukeException exception) {
             return exception.toString();
         }
@@ -55,9 +58,5 @@ public class Duke {
      */
     public boolean isShutdownTime() {
         return isExit;
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
     }
 }

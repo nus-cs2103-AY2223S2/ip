@@ -1,15 +1,6 @@
 package duke.Utilities;
 
-import duke.Command.ByeCommand;
-import duke.Command.Command;
-import duke.Command.DeadlineCommand;
-import duke.Command.DeleteCommand;
-import duke.Command.EventCommand;
-import duke.Command.FindCommand;
-import duke.Command.ListCommand;
-import duke.Command.MarkCommand;
-import duke.Command.ToDoCommand;
-import duke.Command.UnmarkCommand;
+import duke.Command.*;
 
 import duke.Exception.DukeException;
 import duke.Exception.IncorrectArgumentsException;
@@ -53,11 +44,15 @@ public class Parser {
                 return new ByeCommand();
             case "list":
                 return new ListCommand();
+            case "listnotes":
+                return new ListNotesCommand();
             case "mark":
             case "unmark":
             case "delete":
             case "todo":
             case "find":
+            case "addnote":
+            case "deletenote":
                 throw new IncorrectArgumentsException(command, 1, 0);
             case "deadline":
                 throw new IncorrectArgumentsException(command, 2, 0);
@@ -85,6 +80,7 @@ public class Parser {
         switch (command) {
             case "bye":
             case "list":
+            case "listnotes":
                 throw new IncorrectArgumentsException(command, 0, 1);
             case "mark":
                 int numToMark = Integer.parseInt(details);
@@ -95,6 +91,9 @@ public class Parser {
             case "delete":
                 int numToDelete = Integer.parseInt(details);
                 return new DeleteCommand(numToDelete);
+            case "deletenote":
+                int noteToDelete = Integer.parseInt(details);
+                return new DeleteNoteCommand(noteToDelete);
             case "todo":
                 return new ToDoCommand(details);
             case "deadline":
@@ -127,6 +126,8 @@ public class Parser {
                 return new EventCommand(eTaskName, eStartTime, eEndTime);
             case "find":
                 return new FindCommand(details);
+            case "addnote":
+                return new AddNoteCommand(details);
             default:
                 throw new InvalidInputException(command);
         }

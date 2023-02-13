@@ -1,6 +1,7 @@
 package duke.Utilities;
 
 import duke.Exception.NoSuchFileException;
+import duke.Note.Note;
 import duke.Task.Task;
 
 
@@ -18,6 +19,7 @@ import java.util.List;
  */
 public class Storage {
     private List<Task> tasks;
+    private List<Note> notes;
     private File file;
 
     /**
@@ -27,6 +29,7 @@ public class Storage {
      */
     public Storage(String filepath) {
         this.tasks = new ArrayList<>();
+        this.notes = new ArrayList<>();
         this.file = new File(filepath);
     }
 
@@ -35,15 +38,20 @@ public class Storage {
      * @return the list of tasks stored in the file.
      * @throws NoSuchFileException If there is no space to make the file, throw this exception.
      */
-    public List<Task> loadFromFile() throws NoSuchFileException {
+    public List<Task> loadTasksFromFile() throws NoSuchFileException {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.file));
             tasks.clear();
             String line = reader.readLine();
-            while (line != null) {
-                tasks.add(Task.dataToTask(line));
+
+            if (line.equals("Tasks:")) {
                 line = reader.readLine();
+                while (line != null && !line.equals("Notes:")) {
+                    tasks.add(Task.dataToTask(line));
+                    line = reader.readLine();
+                }
             }
+
             return tasks;
         } catch (IOException exception) {
             throw new NoSuchFileException(file.getName());
@@ -51,14 +59,52 @@ public class Storage {
     }
 
     /**
-     * Saves the existing task list with the latest changes to the file.
+     * Loads an existing notes list from the data file.
+     * @return the list of notes stored in the file.
+     * @throws NoSuchFileException If there is no space to make the file, throw this exception.
+     */
+    public List<Note> loadNotesFromFile() throws NoSuchFileException {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(this.file));
+            notes.clear();
+            String line = reader.readLine();
+
+            while (line != null) {
+                if (line.equals("Notes:")) {
+                    line = reader.readLine();
+                    while (line != null) {
+                        notes.add(Note.dataToNote(line));
+                        line = reader.readLine();
+                    }
+                }
+                line = reader.readLine();
+            }
+            return notes;
+        } catch (IOException exception) {
+            throw new NoSuchFileException(file.getName());
+        }
+    }
+
+    /**
+     * Saves the existing task list and notes list with the latest changes to the file.
      * @param taskList The task list with the latest changes to be saved.
      */
-    public void saveToFile(List<Task> taskList) {
+    public void saveToFile(List<Task> taskList, List<Note> noteList) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            if (!taskList.isEmpty()) {
+                writer.write("Tasks:\n");
+            }
+
             for (Task task : taskList) {
                 writer.write(task.taskToData() + '\n');
+            }
+
+            if (!noteList.isEmpty()) {
+                writer.write("Notes:\n");
+            }
+            for (Note note : noteList) {
+                writer.write(note.toString() + '\n');
             }
             writer.close();
         } catch (IOException e) {

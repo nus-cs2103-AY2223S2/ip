@@ -5,17 +5,14 @@ import duke.Utilities.Storage;
 import duke.Utilities.TaskList;
 import duke.Utilities.UI;
 
-public class FindCommand extends Command {
-
-    private final String keyword;
-
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
-    }
+/**
+ * The list notes command which is executed by Duke.
+ */
+public class ListNotesCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, NoteList notes, UI ui, Storage storage) {
-        return tasks.findKeyword(keyword);
+        return notes.printNoteList();
     }
 
     @Override
