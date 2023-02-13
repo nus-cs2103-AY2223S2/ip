@@ -30,7 +30,6 @@ public class MainWindow extends AnchorPane {
     private Nerd nerd;
     private Stage stage;
     private Ui ui;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/amoonguss.png"));
     private Image nerdImage = new Image(this.getClass().getResourceAsStream("/images/nerd.png"));
 
@@ -44,14 +43,9 @@ public class MainWindow extends AnchorPane {
         this.ui = ui;
     }
 
-    public void getConnectionMessage() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.printSuccessfulConnection(), nerdImage)
-        );
-    }
-
     public void setDefaultMessage() {
         dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.printSuccessfulConnection(), nerdImage),
                 DialogBox.getDukeDialog(ui.showWelcome(), nerdImage),
                 DialogBox.getDukeDialog(ui.showCommandList(), nerdImage)
         );
