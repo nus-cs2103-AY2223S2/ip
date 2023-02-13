@@ -52,6 +52,7 @@ public class AddMarkCommand extends Command {
         boolean isInvalidTask = index >= tasks.size() || index < 0;
         boolean hasBeenMarked = tasks.get(index).getIsDone();
 
+
         if (isInvalidTask) {
             throw new JamesException("Task" + String.valueOf(index + 1) + " does not exist"
                     + "\nPlease check that you have keyed in the right index");
