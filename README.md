@@ -28,10 +28,12 @@ It's
 | 9. | Update description of existing tasks |  update <index> /description <new changes> |
 | 10. | Update deadlines of existing deadlines |  update <index> /deadline <new changes> |
 
+## Screenshots
 This is a screenshot of the application on start:
-![image](https://user-images.githubusercontent.com/65301406/218518527-19dfc310-9304-4625-a7ec-072b36cd9072.png)
-  <img src="https://user-images.githubusercontent.com/65301406/218518527-19dfc310-9304-4625-a7ec-072b36cd9072.png" width="100" height="100">
+  
+  <img src="https://user-images.githubusercontent.com/65301406/218518527-19dfc310-9304-4625-a7ec-072b36cd9072.png" width="50%" height="60%">
 
 This is a screenshot of the chat:
-![image](https://user-images.githubusercontent.com/65301406/218518232-d2dfd186-1b83-433b-ae53-83002b008f7c.png)
+  
+  <img src="https://user-images.githubusercontent.com/65301406/218518232-d2dfd186-1b83-433b-ae53-83002b008f7c.png" width="50%" height="70%">
 
