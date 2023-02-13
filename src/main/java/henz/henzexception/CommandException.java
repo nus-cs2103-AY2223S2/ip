@@ -1,7 +1,7 @@
 package henz.henzexception;
 
 /**
- * CommandException class extends DukeException class.
+ * CommandException class extends HenzException class.
  */
 public class CommandException extends HenzException {
 

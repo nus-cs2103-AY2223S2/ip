@@ -1,7 +1,7 @@
 package henz.henzexception;
 
 /**
- * StorageException class exends from DukeException class.
+ * StorageException class exends from HenzException class.
  */
 public class StorageException extends HenzException {
 

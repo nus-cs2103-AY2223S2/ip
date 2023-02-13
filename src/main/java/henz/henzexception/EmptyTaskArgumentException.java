@@ -1,7 +1,7 @@
 package henz.henzexception;
 
 /**
- * EmptyTaskArgumentException class extends DukeException class.
+ * EmptyTaskArgumentException class extends HenzException class.
  */
 public class EmptyTaskArgumentException extends HenzException {
 

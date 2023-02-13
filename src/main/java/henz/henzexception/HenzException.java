@@ -1,7 +1,7 @@
 package henz.henzexception;
 
 /**
- * DukeException class extends Exception class.
+ * HenzException class extends Exception class.
  */
 public class HenzException extends Exception {
 
