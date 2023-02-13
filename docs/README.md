@@ -5,11 +5,16 @@ Duke helps you manage your task in a convenient and simple way!
 
 ## Features 
 
-### Feature-L
-
-Description of the feature.
-
-### Feature-XYZ
+### Feature-list tasks `list`
+### Feature-mark task as completed `mark`
+### Feature-mark task as uncompleted `unmark`
+### Feature-delete task `delete`
+### Feature-add Todo `todo`
+### Feature-add Deadline `deadline`
+### Feature-add Event `event`
+### Feature-find tasks by searching for a keyword `find`
+### Feature-view tasks matches date `view`
+### Feature-Exit application `bye`
 
 Description of the feature.
 
@@ -87,45 +92,39 @@ The [E] represents that it is of type event. <br>
 The [ ] represents that the task has not beenn completed.<br>
 ![image](https://user-images.githubusercontent.com/78403168/218348118-4daaa298-eb46-417a-924c-14d34a08046d.png)
 
-### `todo [todo name]` - 
+### `todo [todo name]`
 
 Add a task that is of type todo
 
 Example of usage: `todo sweep floor` <br>
 Add a todo sweep floor
 
-Prints out todo that you have just added<br>
+Expected Outcome: Prints out todo that you have just added<br>
 The [T] represents that it is of type todo. <br>
 The [ ] represents that the task has not beenn completed.<br>
 ![image](https://user-images.githubusercontent.com/78403168/218348218-6f72f513-c574-4171-8551-8ac846834981.png)
 
-### `find [task name]` - 
+### `find [task name]` 
 
-Find all tasks whose name contains the inputted task name
+Find tasks by searching for a keyword
 
-Example of usage: 
+Example of usage: `find sweep` <br>
+Find all tasks that has sweep in their name.
 
-`find sweep`
-Find all tasks that has sweep in their name
-
-Expeted outcome:
-
+Expeted outcome: Prints out tasks that matches keyword <br>
 ![image](https://user-images.githubusercontent.com/78403168/218348353-9ffd81dc-828d-4569-970f-3d2571039158.png)
 
-### `view [yyyy-mm-dd HH:MM]` - 
+### `view [yyyy-mm-dd HH:MM]` 
 
 View deadline and event tasks whose begining or ending date falls on that day
 
-Example of usage: 
-
-`view 2022-12-12 18:00`<br>
+Example of usage: `view 2022-12-12 18:00`<br>
 Find<br>
 i) Deadline whose deadline falls on 12 December 2022 6pm<br>
-ii) Event tasks who begins or ends on 12 December 2022 6pm
+ii) Event tasks who begins or ends on 12 December 2022 6pm<br>
 
 
-Expeted outcome:
-
+Expeted outcome: <br>
 ![image](https://user-images.githubusercontent.com/78403168/218348897-b1eba580-fded-45b3-b09e-851ee5344ba2.png)
 
 
