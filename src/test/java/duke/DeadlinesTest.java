@@ -11,7 +11,7 @@ public class DeadlinesTest {
     @Test
     public void getBy_ValidDateTime_DeadlineCreated() throws DukeInvalidArgumentException {
         Deadlines task = new Deadlines("Do Homework", "2023-01-28T23:59:59");
-        assertEquals("2023-01-28T23:59:59", task.getBy());
+        assertEquals("2023-01-28T23:59:59", task.getDeadline());
     }
 
     @Test

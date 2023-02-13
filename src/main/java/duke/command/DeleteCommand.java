@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIoException {
         if (deletedLineNumber >= task.size()) {
             throw new DukeInvalidArgumentException("There are only " + task.size()
-                    + " tasks in list, but want to delete " + (deletedLineNumber + 1)+ "th task.");
+                    + " tasks in list, but want to delete " + getOrdinalFor(deletedLineNumber + 1)+ " task.");
         }
         String responseMsg = ui.responseToDeleteTaskCommand(task, deletedLineNumber);
         task.removeTaskAt(deletedLineNumber);

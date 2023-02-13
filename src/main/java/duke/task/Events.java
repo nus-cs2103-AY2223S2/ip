@@ -16,13 +16,13 @@ public class Events extends Task {
     /**
      * Starting time of events in "YYYY-MM-DDTHH:MM:SS" format
      */
-    protected LocalDateTime start;
+    private LocalDateTime formattedStartTime;
     /**
      * End time of events in "YYYY-MM-DDTHH:MM:SS" format
      */
-    protected LocalDateTime end;
-    protected String startTime;
-    protected String endTime;
+    private LocalDateTime formattedEndTime;
+    private String startTime;
+    private String endTime;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     /** Store starting time and ending time of each event. */
     private static ArrayList<Pair<LocalDateTime,LocalDateTime>> eventTimeList = new ArrayList<>();
@@ -31,33 +31,33 @@ public class Events extends Task {
      * Constructor to create an event instance.
      *
      * @param description description of the task.
-     * @param start starting time of events.
+     * @param formattedStartTime starting time of events.
      * @param end end time of events.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    public Events(String description, String start, String end) throws DukeInvalidArgumentException,
+    public Events(String description, String startTime, String endTime) throws DukeInvalidArgumentException,
             DukeEventOverlapException {
         super(description);
         try {
-            this.start = LocalDateTime.parse(start);
-            this.end = LocalDateTime.parse(end);
-            this.startTime = start;
-            this.endTime = end;
+            this.formattedStartTime = LocalDateTime.parse(startTime);
+            this.formattedEndTime = LocalDateTime.parse(endTime);
+            this.startTime = startTime;
+            this.endTime = endTime;
             if (isOverlapping()) {
                 throw new DukeEventOverlapException("Event overlap with previous event.");
             } else {
-                eventTimeList.add(new Pair<>(this.start, this.end));
+                eventTimeList.add(new Pair<>(this.formattedStartTime, this.formattedEndTime));
             }
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException("The format of date-time is invalid.");
         }
     }
 
-    public String getStart() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public String getEnd() {
+    public String getEndTime() {
         return endTime;
     }
 
@@ -68,7 +68,7 @@ public class Events extends Task {
      */
     private boolean isOverlapping() {
         for (Pair<LocalDateTime,LocalDateTime> otherEvent: eventTimeList) {
-            if (!(start.isAfter(otherEvent.getValue()) || end.isBefore(otherEvent.getKey()))) {
+            if (!(formattedStartTime.isAfter(otherEvent.getValue()) || formattedEndTime.isBefore(otherEvent.getKey()))) {
                 return true;
             }
         }
@@ -81,6 +81,7 @@ public class Events extends Task {
      * @return string representation of event task.
      */
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + start.format(format) + " to: " + end.format(format) + ")";
+        return String.format("[E] %s (from %s to: %s)",
+                super.toString(), formattedStartTime.format(format), formattedEndTime.format(format));
     }
 }

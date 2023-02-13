@@ -21,7 +21,8 @@ public class UnmarkCommand extends Command {
      * @throws DukeEmptyArgumentException indicate that a command has been passed an empty argument.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    public UnmarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
+    public UnmarkCommand(String[] fullCommand) throws DukeEmptyArgumentException,
+            DukeInvalidArgumentException {
         try {
             TOGGLE_LINE_NUMBER = Integer.parseInt(fullCommand[1]) - 1;
         } catch (IndexOutOfBoundsException e) {
@@ -37,10 +38,12 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIoException, DukeInvalidArgumentException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIoException,
+            DukeInvalidArgumentException {
         if (TOGGLE_LINE_NUMBER >= task.size()) {
             throw new DukeInvalidArgumentException("There are only " + task.size()
-                    + " tasks in list, but want to unmark " + (TOGGLE_LINE_NUMBER + 1) + "th task.");
+                    + " tasks in list, but want to unmark "
+                    + getOrdinalFor(TOGGLE_LINE_NUMBER + 1) + " task.");
         }
         Task t = task.getTaskAt(TOGGLE_LINE_NUMBER);
         assert t != null: "Attempt to unmark an empty task";

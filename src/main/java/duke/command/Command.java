@@ -17,7 +17,7 @@ public abstract class Command {
      *
      * @return true if it is exit command.
      */
-    protected abstract boolean isExit();
+    public abstract boolean isExit();
 
     /**
      * Execute the program given a specific command.
@@ -30,4 +30,23 @@ public abstract class Command {
      */
     public abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException,
             DukeIoException, DukeEventOverlapException;
+
+    //@@author Jiayan-Lim-reused
+    //Reused from
+    //https://stackoverflow.com/questions/6810336/is-there-a-way-in-java-to-convert-an-integer-to-its-ordinal-name
+    //with minor modifications
+    public static String getOrdinalFor(int value) {
+        int tenRemainder = value % 10;
+        switch (tenRemainder) {
+        case 1:
+            return value + "st";
+        case 2:
+            return value + "nd";
+        case 3:
+            return value + "rd";
+        default:
+            return value + "th";
+        }
+    }
+    //@@author
 }

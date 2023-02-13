@@ -64,21 +64,25 @@ public class Storage {
     public void updateData(Task t) throws DukeIoException {
         try {
             List<String> allLines = Files.readAllLines(path);
-            String s = t.toString().charAt(1) + " | " + t.getStatusIcon() + " | " + t.getDescription();
-            if (t instanceof Deadlines) {
-                // create string description for deadline task to store in data file
-                Deadlines d = (Deadlines) t;
-                s += " | " + d.getBy();
-            } else if (t instanceof Events) {
-                // create string description for event task to store in data file
-                Events e = (Events) t;
-                s += " | " + e.getStart() + " | " + e.getEnd();
-            }
-            allLines.add(s);
+            createTaskDescriptionInAllLine(t, allLines);
             Files.write(path, allLines);
         } catch (IOException e) {
             throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
+    }
+
+    private static void createTaskDescriptionInAllLine(Task t, List<String> allLines) {
+        String s = String.format("%s | %s | %s", t.toString().charAt(1), t.getStatusIcon(), t.getDescription());
+        if (t instanceof Deadlines) {
+            // create string description for deadline task to store in data file
+            Deadlines d = (Deadlines) t;
+            s += String.format(" | %s", d.getDeadline());
+        } else if (t instanceof Events) {
+            // create string description for event task to store in data file
+            Events e = (Events) t;
+            s += String.format(" | %s | %s", e.getStartTime(), e.getEndTime());
+        }
+        allLines.add(s);
     }
 
     /**
@@ -91,16 +95,18 @@ public class Storage {
     public void updateData(int lineNumber, int status) throws DukeIoException {
         try {
             List<String> allLines = Files.readAllLines(path);
-
             // overwrite the duke.txt file by updating the task's new status
-            String line = allLines.get(lineNumber);
-            String s = line.substring(0, 4) + status + line.substring(5);
-            allLines.set(lineNumber, s);
-
+            updateTaskStatusInAllLine(lineNumber, status, allLines);
             Files.write(path, allLines);
         } catch (IOException e) {
             throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
+    }
+
+    private static void updateTaskStatusInAllLine(int lineNumber, int status, List<String> allLines) {
+        String line = allLines.get(lineNumber);
+        String s = line.substring(0, 4) + status + line.substring(5);
+        allLines.set(lineNumber, s);
     }
 
     /**
@@ -111,11 +117,10 @@ public class Storage {
      */
     public void removeData(int lineNumber) throws DukeIoException {
         try {
-            List<String> allLine = Files.readAllLines(path);
-
+            List<String> allLines = Files.readAllLines(path);
             // remove the line from duke.txt
-            allLine.remove(lineNumber);
-            Files.write(path, allLine);
+            allLines.remove(lineNumber);
+            Files.write(path, allLines);
         } catch (IOException e) {
             throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
@@ -128,16 +133,17 @@ public class Storage {
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    public ArrayList<Task> load() throws DukeIoException, DukeInvalidArgumentException, DukeEventOverlapException {
+    public ArrayList<Task> load() throws DukeIoException,
+            DukeInvalidArgumentException, DukeEventOverlapException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            List<String> allLine = Files.readAllLines(path);
+            List<String> allLines = Files.readAllLines(path);
 
-            if (allLine.isEmpty()) {
+            if (allLines.isEmpty()) {
                 return taskList;
             }
 
-            for (String taskDescription : allLine) {
+            for (String taskDescription : allLines) {
                 Task t = createTaskFromStorage(taskDescription);
                 taskList.add(t);
             }
@@ -148,28 +154,18 @@ public class Storage {
         }
     }
 
-    public TaskList findDataFromFile(String keyword) throws DukeIoException, DukeInvalidArgumentException,
-            DukeEventOverlapException {
+    public TaskList findDataFromFile(String keyword) throws DukeInvalidArgumentException,
+            DukeIoException, DukeEventOverlapException {
         TaskList result = new TaskList();
-        try {
-            List<String> allLine = Files.readAllLines(path);
-
-            if (allLine.isEmpty()) {
-                return result;
+        for (Task task: load()) {
+            if (task.getDescription().contains(keyword)) {
+                result.add(task);
             }
-
-            for (String taskDescription: allLine) {
-                if (taskDescription.contains(keyword)) {
-                    Task task = createTaskFromStorage(taskDescription);
-                    result.add(task);
-                }
-            }
-
-            return result;
-        } catch (IOException e) {
-            throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
+        return result;
     }
+
+
 
     private Task createTaskFromStorage(String description) throws DukeInvalidArgumentException,
             DukeEventOverlapException {

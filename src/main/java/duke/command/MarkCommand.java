@@ -38,10 +38,12 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIoException, DukeInvalidArgumentException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIoException,
+            DukeInvalidArgumentException {
         if (LINE_NUMBER >= task.size()) {
             throw new DukeInvalidArgumentException("There are only " + task.size()
-                    + " tasks in list, but want to mark " + (LINE_NUMBER + 1) + "th task.");
+                    + " tasks in list, but want to mark "
+                    + getOrdinalFor(LINE_NUMBER + 1) + " task.");
         }
         Task t = task.getTaskAt(LINE_NUMBER);
         assert t != null : "Attempt to mark empty task";

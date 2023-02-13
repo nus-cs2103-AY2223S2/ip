@@ -7,11 +7,11 @@ public class Task {
     /**
      * Description of the task.
      */
-    protected String description;
+    private String description;
     /**
      * Status of the task, whether is has been done by the user or not.
      */
-    protected boolean isDone;
+    private boolean isDone;
 
     /**
      * Constructor to create a task.
@@ -48,6 +48,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }

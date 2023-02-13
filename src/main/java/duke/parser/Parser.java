@@ -21,15 +21,15 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeUnknownCommandException,
             DukeEmptyArgumentException, DukeInvalidArgumentException, DukeEventOverlapException {
-        String[] split = input.split(" ", 2);
-        String cmd = split[0];
-        return getCommand(split, cmd);
+        String[] fullCommand = input.split(" ", 2);
+        String command = fullCommand[0];
+        return getCommand(fullCommand, command);
     }
 
     private static Command getCommand(String[] split, String cmd) throws DukeEmptyArgumentException,
             DukeInvalidArgumentException, DukeUnknownCommandException, DukeEventOverlapException {
         Command c;
-        switch (cmd) {
+        switch (cmd.toLowerCase()) {
         case "exit":
             c = new ExitCommand();
             break;
