@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDate timeParsed;
+    private LocalDate deadline;
 
     /**
      * Constructor for Deadline.
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(int id, String task, LocalDate timeParsed) {
         super(id, task);
-        this.timeParsed = timeParsed;
+        this.deadline = timeParsed;
     }
 
     /**
@@ -33,9 +33,18 @@ public class Deadline extends Task {
         return this.isDone()
                 ? "[D][x] " + this.getTask()
                         + " (Due: "
-                        + this.timeParsed.format(formatter) + ")"
+                        + this.deadline.format(formatter) + ")"
                 : "[D][ ] " + this.getTask()
                         + " (Due: "
-                        + this.timeParsed.format(formatter) + ")";
+                        + this.deadline.format(formatter) + ")";
+    }
+
+    /**
+     * Returns deadline.
+     *
+     * @return LocalDate of the deadline
+     */
+    public LocalDate getDeadline() {
+        return this.deadline;
     }
 }

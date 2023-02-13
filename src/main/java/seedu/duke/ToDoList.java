@@ -144,16 +144,54 @@ public class ToDoList {
     }
 
     /**
-     * Prints the specified task.
+     * Finds the specified task.
      *
      * @param task task description
      */
-    public String printTaskIfExist(String task) {
+    public String findTaskIfExist(String task) {
         for (int i = 0; i < count; i++) {
             if (todolist.get(i).hasTask(task)) {
                 return todolist.get(i).printTask();
             }
         }
         return ("Task does not exist");
+    }
+
+    /**
+     * Finds available timeslots
+     *
+     * @param timeLength task description
+     */
+    public String findTimeslot(String timeLength) {
+        return "";
+    }
+
+    /**
+     * Finds time (in days) until next deadline.
+     *
+     * @return Confirmation of found time length, or error message
+     */
+    public String findDaysUntilNextDeadline() {
+        LocalDate currEarliestDate = null;
+
+        for (int i = 0; i < count; i++) {
+            Task currTask = todolist.get(i);
+            if (currTask instanceof Deadline) {
+                boolean isFutureDate = ((Deadline) currTask).getDeadline()
+                        .isAfter(Duke.getCurrDate());
+                if (!isFutureDate) {
+                    continue;
+                } else if (currEarliestDate == null) {
+                    currEarliestDate = ((Deadline) currTask).getDeadline();
+                } else if (currEarliestDate.isAfter(((Deadline) currTask).getDeadline())) {
+                    currEarliestDate = ((Deadline) currTask).getDeadline();
+                }
+            }
+        }
+        if (currEarliestDate == null) {
+            return "No deadlines in todolist.";
+        }
+        long daysDiff = Duke.getCurrDate().datesUntil(currEarliestDate).count();
+        return (daysDiff + " days until next deadline.");
     }
 }

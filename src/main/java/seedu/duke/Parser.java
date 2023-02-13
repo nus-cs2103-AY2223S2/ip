@@ -30,8 +30,6 @@ public class Parser {
             return markTask(command, todolist);
         } else if (command.matches("unmark(.*)")) {
             return unmarkTask(command, todolist);
-        } else if (command.matches("find(.*)")) {
-            return findTask(command, todolist);
         } else if (command.matches("todo(.*)")) {
             return createTask(command, todolist);
         } else if (command.matches("deadline(.*)")) {
@@ -40,6 +38,16 @@ public class Parser {
             return createEventTask(command, todolist);
         } else if (command.matches("delete(.*)")) {
             return createDeleteTask(command, todolist);
+        } else if (command.matches("findtask(.*)")) {
+            return findTask(command, todolist);
+        } else if (command.matches("findtime(.*)")) {
+            return findTime(command, todolist);
+        } else if (command.matches("how many days until my next deadline")) {
+            return findDaysUntilNextDeadline(todolist);
+        } else if (command.matches("find free times")) {
+            return findDaysUntilNextDeadline(todolist);
+        } else if (command.matches("find(.*)")) {
+            return askUserWhichFind();
         }
         return ("I do not know that command, sir.");
     }
@@ -103,6 +111,14 @@ public class Parser {
     }
 
     /**
+     * Asks user for specific find command.
+     *
+     * @return String of question to ask
+     */
+    public String askUserWhichFind() {
+        return ("Which find command are you looking for?\nfindtask or findtime?");
+    }
+    /**
      * Finds the task indicated by the user.
      *
      * @param command the task to find
@@ -112,7 +128,20 @@ public class Parser {
     public String findTask(String command, ToDoList todolist) {
         int spacer = command.indexOf(" ");
         String task = command.substring(spacer + 1);
-        return todolist.printTaskIfExist(task);
+        return todolist.findTaskIfExist(task);
+    }
+
+    /**
+     * Finds the timeslot indicated by the user.
+     *
+     * @param command the timeslot to find
+     * @param todolist the current todolist
+     * @return Confirmation of found timeslots, or timeslot not found
+     */
+    public String findTime(String command, ToDoList todolist) {
+        int spacer = command.indexOf(" ");
+        String timeLength = command.substring(spacer + 1);
+        return todolist.findTimeslot(timeLength);
     }
 
     /**
@@ -218,6 +247,16 @@ public class Parser {
             return "Sir, you may not delete nonexistent tasks.";
         }
         return todolist.list();
+    }
+
+    /**
+     * Finds time (in days) until next deadline.
+     *
+     * @param todolist the current todolist
+     * @return Confirmation of found time length, or error message
+     */
+    public String findDaysUntilNextDeadline(ToDoList todolist) {
+        return todolist.findDaysUntilNextDeadline();
     }
 
     /**

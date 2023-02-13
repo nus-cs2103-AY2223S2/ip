@@ -22,7 +22,6 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-    private static LocalDate currDate = LocalDate.now();
     private static String dataPath = "./data/jarvis.txt";
     private final Storage storage;
     private ToDoList todolist;
@@ -172,7 +171,7 @@ public class Duke extends Application {
      * @return the current date
      */
     public static LocalDate getCurrDate() {
-        return currDate;
+        return LocalDate.now();
     }
 
     /**
