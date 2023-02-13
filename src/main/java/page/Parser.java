@@ -1,119 +1,155 @@
 package page;
 
-import page.quest.Deadline;
-import page.quest.Event;
-import page.quest.Todo;
+import page.command.*;
+
 
 /**
- * Represents a parser that interprets inputs given to Page, then executes them.
+ * Represents a parser that converts text inputs to Page into commands that can be executed.
  */
 public class Parser {
 
     /**
-     * Parses and executes the input given to Page.
-     * Returns <code>true</code> if the input is <code>bye</code> and <code>false</code> otherwise.
+     * Parses the input given to Page into a command to be executed.
      *
      * @param input Input given to Page.
-     * @param ui The UI that the input may interact with.
-     * @param storage The Storage that the input may modify.
-     * @param questLog The Quest Log that the input may modify.
-     * @return <code>true</code> if the input is <code>bye</code>, <code>false</code> otherwise.
+     * @return The command described by the input.
      * @throws PageException If input is invalid.
      */
-    public boolean parseExecute(String input, Ui ui, Storage storage, QuestLog questLog) throws PageException {
+    public Command parse(String input) throws PageException {
         switch (input) {
         case "bye":
-            storage.saveData(questLog);
-            ui.printBye();
-            return true;
+            return new CommandBye();
         case "log":
-            ui.printQuestLog(questLog);
-            break;
+            return new CommandLog();
         case "help":
-            ui.printHelpMessage();
-            break;
+            return new CommandHelp();
         default:
             String[] splitInput = input.split(" ", 2);
-            switch (splitInput[0]) {
+            String firstWord = splitInput[0];
+            switch (firstWord) {
             case "todo":
-                if (splitInput.length == 1) {
-                    throw new PageException("Sorry, please include a task description!");
-                } else {
-                    Todo newTodo = questLog.addTodo(splitInput[1]);
-                    ui.printQuestAdded(newTodo);
-                }
-                break;
+                return parseTodo(input);
             case "deadline":
-                if (splitInput.length == 1) {
-                    throw new PageException("Sorry, please include a task description!");
-                } else {
-                    String[] splitBy = splitInput[1].split(" /by ");
-                    if (splitBy.length == 1) {
-                        throw new PageException("Sorry, please include a /by time after the task description!");
-                    } else {
-                        Deadline newDeadline = questLog.addDeadline(splitBy[0], splitBy[1]);
-                        ui.printQuestAdded(newDeadline);
-                    }
-                }
-                break;
+                return parseDeadline(input);
             case "event":
-                if (splitInput.length == 1) {
-                    throw new PageException("Sorry, please include a task description!");
-                } else {
-                    String[] splitFrom = splitInput[1].split(" /from ");
-                    if (splitFrom.length == 1) {
-                        throw new PageException("Sorry, please include a /from time!");
-                    } else {
-                        String[] splitTo = splitFrom[1].split(" /to ");
-                        if (splitTo.length == 1) {
-                            throw new PageException("Sorry, please include a /to time!");
-                        } else {
-                            Event newEvent = questLog.addEvent(splitFrom[0], splitTo[0], splitTo[1]);
-                            ui.printQuestAdded(newEvent);
-                        }
-                    }
-                }
-                break;
+                return parseEvent(input);
             case "complete":
+                return parseComplete(input);
             case "incomplete":
+                return parseIncomplete(input);
             case "delete":
-                if (splitInput.length == 1) {
-                    throw new PageException("Sorry, please include the number of the quest to be marked "
-                            + splitInput[0] + "!");
-                } else {
-                    try {
-                        int questNum = Integer.parseInt(splitInput[1]);
-                        if (questNum > questLog.size() || questNum <= 0) {
-                            throw new PageException("Sorry, that's not a valid quest number!");
-                        } else if (splitInput[0].equals("complete")) {
-                            questLog.completeQuest(questNum);
-                            ui.printQuestCompleted(questLog.getQuest(questNum));
-
-                        } else if (splitInput[0].equals("incomplete")) {
-                            questLog.incompleteQuest(questNum);
-                            ui.printQuestIncompleted(questLog.getQuest(questNum));
-                        } else {
-                            ui.printQuestDeleted(questLog.getQuest(questNum));
-                            questLog.deleteQuest(questNum);
-                        }
-                    } catch (NumberFormatException nfe) {
-                        throw new PageException("Sorry, that's not a number!");
-                    }
-                }
-                break;
+                return parseDelete(input);
             case "find":
-                if (splitInput.length == 1) {
-                    throw new PageException("Sorry, please include a keyword to search for.");
-                } else {
-                    ui.printFilteredQuestLog(questLog.filterByKeyword(splitInput[1]));
-                }
-                break;
+                return parseFind(input);
             default:
-                ui.printInvalidInput();
-                break;
+                throw new PageException("Sorry, that is not a valid input. Type 'help' to learn the valid commands.");
             }
-            break;
         }
-        return false;
+    }
+
+    private CommandTodo parseTodo(String input) throws PageException {
+        String[] splitInput = input.split(" ", 2);
+        if (hasNoSplit(splitInput)) {
+            throw new PageException("Sorry, please include a task description!");
+        } else {
+            String restOfInput = splitInput[1];
+            return new CommandTodo(restOfInput);
+        }
+    }
+
+    private CommandDeadline parseDeadline(String input) throws PageException {
+        String[] splitInput = input.split(" ", 2);
+        if (hasNoSplit(splitInput)) {
+            throw new PageException("Sorry, please include a task description!");
+        }
+
+        String[] splitWithBy = splitInput[1].split(" /by ", 2);
+        if (hasNoSplit(splitWithBy)) {
+            throw new PageException("Sorry, please include a /by time after the quest description!");
+        } else {
+            String description = splitWithBy[0];
+            String byDateTime = splitWithBy[1];
+            return new CommandDeadline(description, byDateTime);
+        }
+    }
+
+    private CommandEvent parseEvent(String input) throws PageException {
+        String[] splitInput = input.split(" ", 2);
+        if (hasNoSplit(splitInput)) {
+            throw new PageException("Sorry, please include a task description!");
+        }
+
+        String[] splitWithFrom = splitInput[1].split(" /from ", 2);
+        if (hasNoSplit(splitWithFrom)) {
+            throw new PageException("Sorry, please include a /from time after the quest description!");
+        }
+
+        String[] splitWithTo = splitWithFrom[1].split(" /to ", 2);
+        if (hasNoSplit(splitWithTo)) {
+            throw new PageException("Sorry, please include a /to time after the /from time!");
+        }
+        else {
+            String description = splitWithFrom[0];
+            String fromDateTime = splitWithTo[0];
+            String toDateTime = splitWithTo[1];
+            return new CommandEvent(description, fromDateTime, toDateTime);
+        }
+    }
+
+    private CommandComplete parseComplete(String input) throws PageException {
+        String[] splitInput = input.split(" ", 2);
+        if (hasNoSplit(splitInput)) {
+            throw new PageException("Sorry, please include the index of the quest to be marked complete!");
+        }
+
+        try {
+            int index = Integer.parseInt(splitInput[1]);
+            return new CommandComplete(index);
+        } catch (NumberFormatException e) {
+            throw new PageException("Sorry, that's not a number!");
+        }
+    }
+
+    private CommandIncomplete parseIncomplete(String input) throws PageException {
+        String[] splitInput = input.split(" ", 2);
+        if (hasNoSplit(splitInput)) {
+            throw new PageException("Sorry, please include the index of the quest to be marked incomplete!");
+        }
+
+        try {
+            int index = Integer.parseInt(splitInput[1]);
+            return new CommandIncomplete(index);
+        } catch (NumberFormatException e) {
+            throw new PageException("Sorry, that's not a number!");
+        }
+    }
+
+    private CommandDelete parseDelete(String input) throws PageException {
+        String[] splitInput = input.split(" ", 2);
+        if (hasNoSplit(splitInput)) {
+            throw new PageException("Sorry, please include the index of the quest to be deleted!");
+        }
+
+        try {
+            int index = Integer.parseInt(splitInput[1]);
+            return new CommandDelete(index);
+        } catch (NumberFormatException e) {
+            throw new PageException("Sorry, that's not a number!");
+        }
+    }
+
+    private CommandFind parseFind(String input) throws PageException {
+        String[] splitInput = input.split(" ", 2);
+        if (hasNoSplit(splitInput)) {
+            throw new PageException("Sorry, please include a keyword to search for!");
+        } else {
+            String keyword = splitInput[1];
+            return new CommandFind(keyword);
+        }
+    }
+
+    private boolean hasNoSplit(String[] arr) {
+        return arr.length == 1;
     }
 }
+

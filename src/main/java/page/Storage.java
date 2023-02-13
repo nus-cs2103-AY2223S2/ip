@@ -76,7 +76,7 @@ public class Storage {
      *
      * @param questLog The Quest Log to be saved.
      */
-    public void saveData(QuestLog questLog) {
+    public void saveData(QuestLog questLog) throws PageException {
         try {
             if (storageFile.getParentFile() != null) {
                 storageFile.getParentFile().mkdirs();
@@ -86,7 +86,7 @@ public class Storage {
             fw.write(questLog.toString());
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error: failed to save Quest Log :(" + e.getMessage());
+            throw new PageException("Sorry, the Quest Log could not be saved!");
         }
     }
 }

@@ -20,12 +20,14 @@ public class Ui {
     }
 
     /**
-     * Prints out a greeting message upon start-up.
+     * Returns a greeting message upon start-up.
+     *
+     * @return Preset greeting message.
      */
-    public void printGreeting() {
+    public String showGreeting() {
         String welcome = "Greetings! 'Tis I, Page, thy medieval assistant.\n"
                 + "Type 'help' for the list of available commands.";
-        System.out.println(welcome);
+        return welcome;
     }
 
     /**
@@ -38,84 +40,100 @@ public class Ui {
     }
 
     /**
-     * Prints the current Quest Log.
+     * Returns the current Quest Log.
      *
      * @param questLog Quest Log to be printed.
+     * @return The current Quest Log.
      */
-    public void printQuestLog(QuestLog questLog) {
-        System.out.println("Quest Log:\n" + questLog.toString());
+    public String showQuestLog(QuestLog questLog) {
+        return "Quest Log:\n" + questLog.toString();
     }
 
     /**
-     * Prints out the error message of the given PageException.
+     * Returns the error message of the given PageException.
      *
      * @param e The given PageException.
+     * @return The error message of the given PageException.
      */
-    public void printErrorMessage(PageException e) {
-        System.out.println(e.getMessage());
+    public String showErrorMessage(PageException e) {
+        return e.getMessage();
     }
 
     /**
-     * Prints an acknowledgement that the given quest has been added to the Quest Log.
+     * Returns an acknowledgement that the given quest has been added to the Quest Log.
      *
      * @param q The added quest.
+     * @return The acknowledgement message.
      */
-    public void printQuestAdded(Quest q) {
-        System.out.println("Added to Quest Log:\n" + q.toString());
+    public String showQuestAdded(Quest q) {
+        return "Added to Quest Log:\n" + q.toString();
     }
 
     /**
-     * Prints an acknowledgement that the given quest has been completed.
+     * Returns an acknowledgement that the given quest has been completed.
      *
      * @param q The given quest.
+     * @return The acknowledgement message.
      */
-    public void printQuestCompleted(Quest q) {
-        System.out.println("Quest Complete! The bards shall sing of your victory!\n" + q.toString());
+    public String showQuestCompleted(Quest q) {
+        return "Quest Complete! The bards shall sing of your victory!\n" + q.toString();
     }
 
     /**
-     * Prints an acknowledgement that the given quest has been marked incomplete.
+     * Returns an acknowledgement that the given quest has been marked incomplete.
      *
      * @param q The given quest.
+     * @return The acknowledgement message.
      */
-    public void printQuestIncompleted(Quest q) {
-        System.out.println("Quest Incomplete?? Oh no!\n" + q.toString());
+    public String showQuestIncompleted(Quest q) {
+        return "Quest Incomplete?? Oh no!\n" + q.toString();
     }
 
     /**
-     * Prints an acknowledgement that the given quest has been deleted from the Quest Log.
+     * Returns an acknowledgement that the given quest has been deleted from the Quest Log.
      *
      * @param q The quest to be deleted.
+     * @return The acknowledgement message.
      */
-    public void printQuestDeleted(Quest q) {
-        System.out.println("Quest Deleted... lost to the ages...\n" + q.toString());
+    public String showQuestDeleted(Quest q) {
+        return "Quest Deleted... lost to the ages...\n" + q.toString();
     }
 
     /**
-     * Prints the list of quests in the Quest Log matching a keyword.
+     * Returns the list of quests in the Quest Log matching a keyword.
      *
      * @param arr The list of quests.
+     * @return The list of quests matching the keyword.
      */
-    public void printFilteredQuestLog(ArrayList<Quest> arr) {
-        System.out.println("Greetings sire, here are the matching quests in the Quest Log:");
-        for (Quest q : arr) {
-            System.out.println(q.toString());
+    public String showFilteredQuestLog(ArrayList<Quest> arr) {
+        StringBuilder output = new StringBuilder("Greetings sire, here are the matching quests in the Quest Log:");
+        if (arr.isEmpty()) {
+            output.append("No matching quests found!");
+        } else {
+            for (Quest q : arr) {
+                output.append("\n").append(q.toString());
+            }
         }
+        return output.toString();
     }
 
     /**
-     * Informs the user that their input is invalid.
+     * Returns a warning to the user that their input is invalid.
+     *
+     * @return Invalid Input warning.
      */
-    public void printInvalidInput() {
+    public String showInvalidInputWarning() {
         String text = "My apologies, I cannot decipher your arcane incantations. "
                 + "Type 'help' for the list of commands I can understand.";
-        System.out.println(text);
+        return text;
     }
 
     /**
-     * Prints a message listing all the commands available to Page.
+     * Returns a message listing all the commands available to Page.
+     *
+     * @return List of commands.
      */
-    public void printHelpMessage() {
+    public String showHelpMessage() {
         String helpText = "type 'help' to show this help text!\n"
                 + "type 'todo someTask' to add the task to the Quest Log.\n"
                 + "type 'deadline someDeadline /by someTime' to add a task with deadline someTime.\n"
@@ -126,13 +144,15 @@ public class Ui {
                 + "type 'incomplete 2' to mark the 2nd quest as incomplete.\n"
                 + "type 'delete 3' to delete the 3rd quest.\n"
                 + "type 'bye' to exit.";
-        System.out.println(helpText);
+        return helpText;
     }
 
     /**
-     * Prints an exit message.
+     * Returns an exit message.
+     *
+     * @return Exit message.
      */
-    public void printBye() {
-        System.out.println("Farewell, my liege.");
+    public String showByeMessage() {
+        return "Farewell, my liege.";
     }
 }

@@ -1,14 +1,16 @@
 package page;
 
+import page.command.Command;
+
 /**
  * Represents a Page chatbot that can manage a list of tasks.
  */
 public class Page {
 
+    private Parser parser;
     private Ui ui;
     private Storage storage;
     private QuestLog questLog;
-    private Parser parser;
 
     /**
      * Constructs a Page object that saves/loads data from the given file path.
@@ -16,31 +18,32 @@ public class Page {
      * @param filePath File path where the Page object saves/loads data.
      */
     public Page(String filePath) {
+        this.parser = new Parser();
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.questLog = new QuestLog(storage.loadData());
         } catch (PageException e) {
-            ui.printErrorMessage(e);
+            System.out.println(ui.showErrorMessage(e));
             this.questLog = new QuestLog();
         }
-
-        this.parser = new Parser();
     }
 
     /**
      * Runs the Page chatbot.
      */
     public void run() {
-        boolean isBye = false;
+        boolean isExit = false;
 
-        ui.printGreeting();
-        while (!isBye) {
+        System.out.println(ui.showGreeting());
+        while (!isExit) {
             try {
                 String input = ui.readInput();
-                isBye = parser.parseExecute(input, ui, storage, questLog);
+                Command c = parser.parse(input);
+                System.out.println(c.execute(ui, storage, questLog));
+                isExit = c.isExit();
             } catch (PageException e) {
-                ui.printErrorMessage(e);
+                System.out.println(ui.showErrorMessage(e));
             }
 
         }
