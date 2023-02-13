@@ -1,9 +1,5 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package duke;
 import java.util.*;
-import java.time.format.DateTimeParseException;
-
-
 
 public class Duke {
 
@@ -42,7 +38,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
 
         new Duke("./data/duke.txt").run();
 
