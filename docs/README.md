@@ -1,29 +1,58 @@
 # User Guide
 
+**MEL** is your friendly personal assistant chatbot that can help you keep track of your daily tasks.
+
+## Quick Start
+1. Ensure you have `Java 11` or above installed in your computer.
+2. Download the latest `MEL.jar`.
+3. Copy the file to the folder you want to use as the *home folder* for MEL.
+4. Open a command terminal in the current folder directory 
+5. Run `java -jar MEL.jar` command to run the application!
+
 ## Features 
 
-### Feature-ABC
+### Add Task
 
-Description of the feature.
+There are 3 different type of tasks available.
 
-### Feature-XYZ
+#### **To do**: `todo [task]`
 
-Description of the feature.
+![todo](todo.png)
 
-## Usage
+#### **Deadline**: `deadline [task] /by [YYYY-MM-DD]`
 
-### `Keyword` - Describe action
+![deadline](deadline.png)
 
-Describe the action and its outcome.
+#### **Event**: `event [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD]`
 
-Example of usage: 
+![event](event.png)
 
-`keyword (optional arguments)`
+### List: `list`
 
-Expected outcome:
+List out all tasks saved.
 
-Description of the outcome.
+![list](list.png)
 
-```
-expected output
-```
+### Mark/Unmark Task: `mark [task #]` or `unmark [task #]`
+
+Mark/unmark a task as done/not done.
+
+![mark_unmark](mark_unmark.png)
+
+### Delete Task: `delete [task #]`
+
+Delete task from list.
+
+![delete](delete.png)
+
+### Find Task: `find [keyword]`
+
+Find task(s) by searching for a keyword.
+
+![find](find.png)
+
+### Help: `help` or `help [command]`
+
+Provide in-App guidance to users.
+
+![help](help.png)

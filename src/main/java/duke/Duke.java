@@ -62,8 +62,8 @@ public class Duke {
         case TODO:
             Todo todoTask = new Todo(description);
             taskList.add(todoTask);
-            ui.displayText("Got it. I've added this task: " + todoTask);
-            ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
+            ui.displayText("Got it. I've added this task: " + todoTask
+                    + "\nNow you have " + taskList.size() + " tasks in the list.");
             break;
         case EVENT:
             try {
@@ -75,8 +75,8 @@ public class Duke {
                 Event eventTask = new Event(newDescription, fromDate, toDate);
                 taskList.add(eventTask);
 
-                ui.displayText("Got it. I've added this task: " + eventTask);
-                ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
+                ui.displayText("Got it. I've added this task: " + eventTask
+                        + "\nNow you have " + taskList.size() + " tasks in the list.");
                 break;
             } catch (Exception e) {
                 ui.displayText("Invalid format, please try again, type '" + EVENT_FORMAT + "'");
@@ -90,8 +90,8 @@ public class Duke {
                 Deadline deadlineTask = new Deadline(newDescription, byDate);
                 taskList.add(deadlineTask);
 
-                ui.displayText("Got it. I've added this task: " + deadlineTask);
-                ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
+                ui.displayText("Got it. I've added this task: " + deadlineTask
+                        + "\nNow you have " + taskList.size() + " tasks in the list.");
                 break;
             } catch (Exception e) {
                 ui.displayText("Invalid format, please try again, type '" + DEADLINE_FORMAT + "'");
@@ -116,7 +116,7 @@ public class Duke {
         }
         assert taskList.size() > itemNo;
         taskList.get(itemNo).setDone(true);
-        ui.displayText("Nice! I've marked this task as done: " + taskList.get(itemNo).toString());
+        ui.displayText("Great job! I've marked this task as done: " + taskList.get(itemNo).toString());
         storage.saveToFile();
         assert taskList.get(itemNo).isDone();
     }
@@ -150,10 +150,12 @@ public class Duke {
                     + taskList.size() + "!");
         }
         assert taskList.size() > itemNo;
-        ui.displayText("Noted. I've removed this task: " + taskList.get(itemNo).toString());
+        StringBuilder displayString = new StringBuilder();
+        displayString.append("Noted. I've removed this task: " + taskList.get(itemNo).toString());
         taskList.remove(itemNo);
         storage.saveToFile();
-        ui.displayText("Now you have " + taskList.size() + " tasks in the list.");
+        displayString.append("\nNow you have " + taskList.size() + " tasks in the list.");
+        ui.displayText(displayString.toString());
         assert taskList.size() == initialSize - 1;
     }
 
