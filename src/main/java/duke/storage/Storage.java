@@ -70,6 +70,7 @@ public class Storage {
                     break;
 
                 default:
+                    assert false: "Unable to load task!";
                     break;
                 }
                 if (isCompleted.equals("[X]")) {
