@@ -42,8 +42,8 @@ public class FindCommand extends Command {
         int count = 1;
         for (int i = 0; i < tasks.getSizeOfTaskList(); i = i + 1) {
             Task currentTask = tasks.getTask(i);
-            String taskName = currentTask.getNameOfTask();
-            if (taskName.contains(keyPhrase)) {
+            String taskName = currentTask.getNameOfTask().toLowerCase();
+            if (taskName.contains(keyPhrase.toLowerCase())) {
                 sb.append(count + ". " + currentTask.getStatusOfTaskInString() + "\n");
                 count += 1;
             }

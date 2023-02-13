@@ -432,8 +432,8 @@ public class Parser {
      */
     private CommandType validateOn(String rawCommand) {
         try {
-            String dateString = rawCommand.substring(3);
-            if (dateString.equals("")) {
+            String dateString = rawCommand.substring(2);
+            if (dateString.isBlank()) {
                 throw new BooException("The date cannot be left blank.");
             }
             DateTime.getDateTimeObject(dateString);
@@ -460,9 +460,19 @@ public class Parser {
      * @return a find command type.
      */
     private CommandType validateFind(String rawCommand) {
-        CommandType ctFind = CommandType.FIND;
-        ctFind.setKeyPhrase(rawCommand.substring(5));
-        return ctFind;
+        try {
+            String keyphrase = rawCommand.substring(4);
+            if (keyphrase.isBlank()) {
+                throw new BooException("The key phrase cannot be left blank. Enter something to search.");
+            }
+            CommandType ctFind = CommandType.FIND;
+            ctFind.setKeyPhrase(rawCommand.substring(5));
+            return ctFind;
+        } catch (BooException booException) {
+            CommandType ctException = CommandType.EXCEPTION;
+            ctException.setExceptionMessage(booException.getMessage());
+            return ctException;
+        }
     }
 
 
