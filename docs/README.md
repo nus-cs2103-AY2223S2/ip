@@ -1,6 +1,6 @@
 # User Guide
 
-<img align="center" src="https://github.com/zrei/ip/blob/master/src/main/resources/images/Colette_Happy.gif?raw=true">
+<img align="middle" src="https://github.com/zrei/ip/blob/master/src/main/resources/images/Colette_Happy.gif?raw=true"><br>
 Ever felt like you couldn't get a handle on *all* the things that you have to do? Not to worry, for Colette is here to help you! (And talk to you about dogs.)
 
 * [Get Started](#get-started)
@@ -19,7 +19,7 @@ Ever felt like you couldn't get a handle on *all* the things that you have to do
 6. Start the application with the command `java -jar colette.jar`.
 7. You should see the window below.
 
-![startupWindow](https://raw.githubusercontent.com/zrei/ip/master/docs/Startup.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true" width="200" height="400"><br>
 
 ---
 
@@ -45,8 +45,9 @@ Brings up a list of all the commands that Colette knows.
 Format: ```help```
 
 Expected result:
-![helpCommand](https://raw.githubusercontent.com/zrei/ip/master/docs/helpCommand.png)
-![helpWindow](https://raw.githubusercontent.com/zrei/ip/master/docs/helpWindow.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/helpCommand.png?raw=true" width="200" height="400"><br>
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/helpWindow.png?raw=true" width="200" height="400"><br>
+<br>
 
 ### **Listing all tasks**
 Lists all tasks that are currently in the task list.
@@ -54,7 +55,8 @@ Lists all tasks that are currently in the task list.
 Format: ```list```
 
 Expected result:
-![list](https://raw.githubusercontent.com/zrei/ip/master/docs/list.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/list.png?raw=true" width="200" height="400"><br>
+<br>
 
 ### **Adding a task**
 You can add three types of tasks: [todos](#adding-a-todo), [deadlines](#adding-a-deadline), and [events](#adding-an-event).
@@ -65,7 +67,8 @@ Todos are tasks with a name/description.
 Format: ```todo [name/description]```
 
 Expected result:
-![todo](https://raw.githubusercontent.com/zrei/ip/master/docs/todo.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/todo.png?raw=true" width="200" height="400"><br>
+<br>
 
 #### Adding a deadline
 Deadlines are tasks with a name/description and a date to do the task by.
@@ -73,7 +76,8 @@ Deadlines are tasks with a name/description and a date to do the task by.
 Format: ```deadline [description] [date to do the task by]```
 
 Expected result:
-![deadline](https://raw.githubusercontent.com/zrei/ip/master/docs/deadline.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/deadline.png?raw=true" width="200" height="400"><br>
+<br>
 
 #### Adding an event
 Events are tasks with a name/description, a start date, and an end date.
@@ -81,7 +85,8 @@ Events are tasks with a name/description, a start date, and an end date.
 Format: ```event [description] [start date] [end date]```
 
 Expected result:
-![event](https://raw.githubusercontent.com/zrei/ip/master/docs/event.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/event.png?raw=true" width="200" height="400"><br>
+<br>
 
 ### **Marking a task as done or not done**
 Tasks can be marked as done to indicate they are completed, or not done to indicate that they have not been completed. This information will show up in the list. 
@@ -90,19 +95,22 @@ Tasks can be marked as done to indicate they are completed, or not done to indic
 Format: ```mark [index]``` where index is the index of the task in the list.
 
 Expected result:
-![mark](https://raw.githubusercontent.com/zrei/ip/master/docs/mark.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/mark.png?raw=true" width="200" height="400"><br>
+<br>
 
 #### Marking a task as not done
 Format: ```unmark [index]``` where index is the index of the task in the list. 
 
 Expected result:
-![unmark](https://raw.githubusercontent.com/zrei/ip/master/docs/unmark.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/unmark.png?raw=true" width="200" height="400"><br>
+<br>
 
 ### **Deleting a task**
 Format: ```delete [index]``` where index is the index of the task in the list.
 
 Expected result:
-![delete](https://raw.githubusercontent.com/zrei/ip/master/docs/delete.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="200" height="400"><br>
+<br>
 
 ### **Finding tasks**
 You can find a task using any number of keywords. Colette will search for any task in the list whose name/description matches any of the keywords provided.
@@ -112,13 +120,15 @@ Format: ```find [keyword1] [keyword2]``` where you can provide any number of key
 Example: ```find pet dogs``` will find all tasks with either `pet` or `dogs` in the name/description.
 
 Expected result:
-![find](https://raw.githubusercontent.com/zrei/ip/master/docs/find.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="200" height="400"><br>
+<br>
 
 ### **Exiting the app**
 Format: ```bye```
 
 Expected result:
-![bye](https://raw.githubusercontent.com/zrei/ip/master/docs/bye.png)
+<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/bye.png?raw=true" width="200" height="400"><br>
+<br>
 
 ### **Remembering your tasks between sessions**
 Colette can remember the state of your task list between sessions!
