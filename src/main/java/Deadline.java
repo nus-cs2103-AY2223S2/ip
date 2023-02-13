@@ -1,19 +1,33 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
+    private String deadlineTime;
+    private Date dueDate;
 
-    protected String by;
-
-    public Deadline(String description, String by) {
+    Deadline(String description, String deadlineTime) {
         super(description);
-        this.by = by;
+        this.deadlineTime = deadlineTime;
+    }
+
+    Deadline(String description, Date dueDate) {
+        super(description);
+        this.dueDate = dueDate;
     }
 
     @Override
     public String getOutputFormat() {
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
+        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, deadlineTime);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        if (dueDate != null) {
+            DateFormat dateDueFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            return String.format("[D]%s (by: %s)", super.toString(), dateDueFormat.format(dueDate));
+        } else {
+            return String.format("[D]%s (by: %s)", super.toString(), deadlineTime);
+        }
     }
 }

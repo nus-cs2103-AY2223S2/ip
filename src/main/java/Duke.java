@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 
 public class Duke {
     private Scanner scanner = new Scanner(System.in);
@@ -33,10 +36,20 @@ public class Duke {
                     addTodo(todo);
                 } else if (userInput.startsWith("event")) {
                     String[] event = ErrorEventOrDeadline(userInput, "event", "/from");
-                    addEvent(event[0], event[1]);
+                    if (isDate(event[1])) {
+                        Date eventDate = parseDate(event[1]);
+                        addEvent(event[0], eventDate);
+                    } else {
+                        addEvent(event[0], event[1]);
+                    }
                 } else if (userInput.startsWith("deadline")) {
                     String[] deadline = ErrorEventOrDeadline(userInput, "deadline", "/by");
-                    addDeadline(deadline[0], deadline[1]);
+                    if (isDate(deadline[1])) {
+                        Date deadlineDate = parseDate(deadline[1]);
+                        addDeadline(deadline[0], deadlineDate);
+                    } else {
+                        addDeadline(deadline[0], deadline[1]);
+                    }
                 } else if (userInput.startsWith("delete")) {
                     deleteTask(Integer.parseInt(userInput.substring(7)));
                 } else {
@@ -91,6 +104,33 @@ public class Duke {
         }
     }
 
+    private Date parseDate(String date) throws DukeException {
+        try {
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            return dateFormatter.parse(date);
+        } catch (ParseException e) {
+            throw new DukeException("An error occurred while parsing date: " + e);
+        }
+    }
+
+    private boolean isDate(String input) {
+        String[] splitInput = input.split("/");
+        if (splitInput.length != 3 || !isNumeric(splitInput[0]) || !isNumeric(splitInput[1])) {
+            return false;
+        }
+
+        String[] yearAndTime = splitInput[2].split(" ");
+        if (yearAndTime.length != 2 || !isNumeric(yearAndTime[0]) || !isNumeric(yearAndTime[1])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isNumeric(String input) {
+        return input.matches("-?\\d+(\\.\\d+)?");
+    }
+
     private void saveTodoList() throws DukeException {
         try {
             File file = new File("./data/duke.txt");
@@ -131,35 +171,51 @@ public class Duke {
         list.add(newTodo);
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + newTodo);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + list.size() + " tasks in the list." + "\n");
     }
 
-    private void addDeadline(String description, String by) {
-        Deadline newDeadline = new Deadline(description, by);
+    private void addDeadline(String description, String deadlineTime) {
+        Deadline newDeadline = new Deadline(description, deadlineTime);
         list.add(newDeadline);
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + newDeadline);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + list.size() + " tasks in the list." + "\n");
     }
 
-    private void addEvent(String description, String from) {
-        Event newEvent = new Event(description, from);
+    private void addDeadline(String description, Date dueDate) {
+        Deadline newDeadline = new Deadline(description, dueDate);
+        list.add(newDeadline);
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t\t" + newDeadline);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list." + "\n");
+    }
+
+    private void addEvent(String description, String eventTime) {
+        Event newEvent = new Event(description, eventTime);
         list.add(newEvent);
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + newEvent);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + list.size() + " tasks in the list." + "\n");
+    }
+
+    private void addEvent(String description, Date eventDate) {
+        Event newEvent = new Event(description, eventDate);
+        list.add(newEvent);
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t\t" + newEvent);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list." + "\n");
     }
 
     private void markTask(int taskNum) {
         this.list.get(taskNum - 1).markAsDone();
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t" + this.list.get(taskNum - 1) + "\n");
+        System.out.println("\t\t" + this.list.get(taskNum - 1)+ "\n");
     }
 
     private void unmarkTask(int taskNum) {
         this.list.get(taskNum - 1).markAsUndone();
         System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t" + this.list.get(taskNum - 1) + "\n");
+        System.out.println("\t\t" + this.list.get(taskNum - 1) + "\n");
     }
 
     private void deleteTask(int taskNum) {
@@ -167,7 +223,7 @@ public class Duke {
         list.remove(taskNum - 1);
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t\t" + deletedTask);
-        System.out.printf("\tNow you have " + list.size() + " tasks in the list." + "\n");
+        System.out.println("\tNow you have " + list.size() + " tasks in the list." + "\n");
     }
 
     private void showList() {
