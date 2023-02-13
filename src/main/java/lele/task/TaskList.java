@@ -37,7 +37,7 @@ public class TaskList {
      */
     public void restorePreviousList(int index) throws NoPreviousCommandException {
         // Don't do anything if number of versions to undo is 0
-        if (index == 0) {
+        if (index <= 0) {
             return;
         }
         // Need to add 1 to account for the original list at index 0

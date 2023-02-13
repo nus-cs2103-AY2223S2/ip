@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -20,8 +22,9 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final float WRAPPING_WIDTH = 250;
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -36,7 +39,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        // Credits to @zrei
+        dialog.setWrappingWidth(DialogBox.WRAPPING_WIDTH);
         displayPicture.setImage(img);
+        // Credits to @gremmyz
+        Circle circle = new Circle(45, 45, 45);
+        this.displayPicture.setClip(circle);
     }
 
     /**
@@ -53,7 +61,7 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getLeLeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
         String response = lele.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getLeLeDialog(response, dukeImage)
         );
         userInput.clear();
     }

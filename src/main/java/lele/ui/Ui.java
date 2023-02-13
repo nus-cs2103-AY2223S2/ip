@@ -192,7 +192,9 @@ public class Ui {
     }
 
     public String printUndo(TaskList taskList, int index) {
-        if (index <= 1) {
+        if (index <= 0) {
+            return "Please give a number more than 0!";
+        } else if (index == 1) {
             return "Your list has been undone by 1 version :)";
         }
         return "Your list has been undone by " + index + " versions :)";

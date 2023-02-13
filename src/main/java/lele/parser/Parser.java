@@ -122,6 +122,9 @@ public class Parser {
                 }
                 return new FindCommand(inputArr[1]);
             case UNDO:
+                if (inputArr.length == 1) {
+                    throw new EmptyDescException("OOPS!!! You need to specify how many CRUD versions you want to undo!");
+                }
                 int index = Integer.parseInt(inputArr[1]);
                 return new UndoCommand(index);
             default:
