@@ -47,8 +47,10 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
+        // tmp.get(1) returns triangle polygon
         tmp.get(1).setScaleX(-1);
         ((Polygon) tmp.get(1)).setFill(getNemoColor());
+        //tmp.get(2) returns label
         tmp.get(2).setStyle("-fx-background-color: #f88d64; -fx-padding: 8; -fx-border-radius: 5px; "
                 + "-fx-background-radius: 5px; -fx-font-size: 14;");
         getChildren().setAll(tmp);
