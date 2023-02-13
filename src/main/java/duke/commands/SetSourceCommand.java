@@ -41,7 +41,7 @@ public class SetSourceCommand extends Command {
                     "You are now writing to: ", this.filePath);
         } catch (DukeException e) {
             tasks.setList(new ArrayList<>());
-            return "Failed to load task file.";
+            return "LOADING... ERROR! Failed to load task file.";
         }
     }
 }

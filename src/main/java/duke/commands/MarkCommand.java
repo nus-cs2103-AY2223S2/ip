@@ -36,7 +36,7 @@ public class MarkCommand extends Command {
             storage.writeToFile(tasks);
             return Formatter.formatMarkTask(currentTask);
         } catch (IndexOutOfBoundsException e) {
-            return "Task does not exist at specified index.";
+            return "SEARCHING... ERROR! Task does not exist at specified index.";
         } catch (IOException e) {
             return "Unable to write to file. Please run Duke again.";
         }

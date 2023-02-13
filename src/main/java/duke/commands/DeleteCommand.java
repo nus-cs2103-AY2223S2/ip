@@ -37,9 +37,9 @@ public class DeleteCommand extends Command {
             storage.writeToFile(tasks);
             return Formatter.formatDeleteTask(deletedTask, tasks.getSize());
         } catch (IndexOutOfBoundsException e) {
-            return "Task does not exist at specified index.";
+            return "SEARCHING... ERROR! Task does not exist at specified index.";
         } catch (IOException e) {
-            return "Unable to write to file. Please run Duke again.";
+            return "WRITING... ERROR! Unable to write to file. Please run Duke again.";
         }
     }
 }

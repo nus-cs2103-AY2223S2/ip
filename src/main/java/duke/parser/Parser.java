@@ -48,7 +48,7 @@ public class Parser {
             markAsDone = splitTaskString[1].equals("1");
             return markIfDone(scannedTask, markAsDone);
         default:
-            throw new DukeException("duke.task.Task list file is unreadable/corrupted.");
+            throw new DukeException("Task list file is unreadable/corrupted.");
         }
     }
 

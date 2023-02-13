@@ -10,6 +10,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return "OOPS!!! " + this.getMessage();
+        return "ERROR! " + this.getMessage();
     }
 }

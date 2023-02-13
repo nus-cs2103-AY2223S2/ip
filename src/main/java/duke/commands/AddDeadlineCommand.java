@@ -42,9 +42,9 @@ public class AddDeadlineCommand extends Command {
             storage.appendToFile(newTask);
             return Formatter.formatAddTask(newTask, tasks.getSize());
         } catch (IOException e) {
-            return "Unable to write to file. Please run Duke again.";
+            return "WRITING... ERROR! Unable to write to file. Please run Duke again.";
         } catch (DateTimeParseException e) {
-            return "Date must be in yyyy-mm-dd format.";
+            return "ERROR! Date must be in yyyy-mm-dd format.";
         }
     }
 }

@@ -33,13 +33,12 @@ public class UnmarkCommand extends Command {
         assert tasks != null;
         try {
             Task currentTask = tasks.unmark(this.index);
-            int taskNum = index + 1;
             storage.writeToFile(tasks);
             return Formatter.formatUnmarkTask(currentTask);
         } catch (IndexOutOfBoundsException e) {
-            return "Task does not exist at specified index.";
+            return "SEARCHING... ERROR! Task does not exist at specified index.";
         } catch (IOException e) {
-            return "Unable to write to file. Please run Duke again.";
+            return "WRITING... ERROR! Unable to write to file. Please run Duke again.";
         }
     }
 }

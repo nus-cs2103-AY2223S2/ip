@@ -8,8 +8,6 @@ import duke.task.Task;
  * Formatter for Duke to prepare Strings to output
  */
 public class Formatter {
-    /** Simple greeting message */
-    private static final String GREETING = "Welcome to Duke. How may I help you?";
 
     public static String formatAddTask(Task newTask, int listSize) {
         return String.format("You have added: %s\n You have %d tasks in the list", newTask.toString(), listSize);
@@ -20,11 +18,11 @@ public class Formatter {
     }
 
     public static String formatMarkTask(Task markedTask) {
-        return String.format("You have marked: %s as done. Keep it up!", markedTask.toString());
+        return String.format("You have marked: %s as done. WELL DONE.", markedTask.toString());
     }
 
     public static String formatUnmarkTask(Task unmarkedTask) {
-        return String.format("You have marked: %s as undone. Don't give up!", unmarkedTask.toString());
+        return String.format("You have marked: %s as undone. STAY ON TARGET.", unmarkedTask.toString());
     }
 
     /**

@@ -21,9 +21,9 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         assert tasks != null;
         if (tasks.getSize() == 0) {
-            return "Task List is currently empty.\n";
+            return "LOADING... Task List is currently empty.\n";
         } else {
-            return Formatter.formatMultipleMessages("Here are your tasks: ",
+            return Formatter.formatMultipleMessages("LOADING... Here are your tasks: ",
                     Formatter.formatIndexedList(tasks.getList()));
         }
 

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Gui extends Application {
     /** Simple greeting message */
-    private static final String GREETING = "Welcome to Duke. How may I help you?";
+    private static final String GREETING = "BOOTING UP... How may I help you?";
 
     private Duke duke = new Duke();
     private MainWindow mainWindow;
@@ -40,7 +40,7 @@ public class Gui extends Application {
             duke.loadTasks();
             mainWindow.showDukeMessage(GREETING);
         } catch (DukeException e) {
-            mainWindow.showDukeMessage(GREETING + "\nFailed to load tasks. Empty task list has been created.");
+            mainWindow.showDukeMessage(GREETING + "\nLOADING... Failed to load tasks. Empty task list has been created.");
         }
     }
 

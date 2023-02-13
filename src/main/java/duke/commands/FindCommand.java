@@ -33,10 +33,10 @@ public class FindCommand extends Command {
         assert tasks != null;
         ArrayList<Task> matchingTasks = tasks.find(this.keyword);
         if (matchingTasks.size() > 0) {
-            return Formatter.formatMultipleMessages("Here are the matching tasks: ",
+            return Formatter.formatMultipleMessages("SEARCHING... Here are the matching tasks: ",
                     Formatter.formatIndexedList(matchingTasks));
         } else {
-            return "No matching tasks were found. \n";
+            return "SEARCHING... ERROR! No matching tasks were found. \n";
         }
     }
 }

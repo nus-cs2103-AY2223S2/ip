@@ -20,6 +20,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return "Please click the X button on the top right to close Duke. Thank you for using Duke!";
+        return "CLICK X TO SHUT DOWN. THANK YOU.";
     }
 }
