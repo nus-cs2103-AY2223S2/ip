@@ -16,7 +16,12 @@ public abstract class Command {
      */
     public static Command create(String[] commandWordContent) {
         assert commandWordContent != null : "Command should not be null.";
-        CommandType commandType = CommandType.valueOf(commandWordContent[0].toUpperCase());
+        CommandType commandType;
+        try {
+            commandType = CommandType.valueOf(commandWordContent[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new UnknownCommandException();
+        }
         String commandContent = commandWordContent[1];
         switch (commandType) {
         case BYE:
