@@ -77,13 +77,13 @@ public class TaskList {
             addTask(task);
             break;
         case MARK:
-            index = Integer.parseInt(command.getArgumentValue(
+            index = parseInt(command.getArgumentValue(
                     Command.Argument.MARK));
             task = getTask(index);
             task.toggleDone();
             break;
         case DELETE:
-            index = Integer.parseInt(
+            index = parseInt(
                     command.getArgumentValue(Command.Argument.DELETE));
             task = getTask(index);
             tasks.remove(task);
@@ -93,6 +93,14 @@ public class TaskList {
         }
         assert task != null : "task not assigned";
         return task;
+    }
+
+    private int parseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid index '" + input + "'. Please enter an integer." );
+        }
     }
 
     /**
