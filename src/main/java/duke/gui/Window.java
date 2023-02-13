@@ -29,7 +29,7 @@ public class Window {
         ScrollPane scrollPane = makeScrollPane(outputLayout);
         outputLayout.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //pane to hold 3 buttons for each task
+        //pane to hold all buttons
         UI ui = new UI(duke.getFn());
         HBox buttonLayout = ui.createButtons(inputLayout, outputLayout);
 

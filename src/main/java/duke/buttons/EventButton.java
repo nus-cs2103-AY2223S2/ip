@@ -2,11 +2,14 @@ package duke.buttons;
 
 import duke.functions.CreateEvent;
 import duke.functions.Functions;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class EventButton extends DukeButton {
     /**
@@ -33,18 +36,38 @@ public class EventButton extends DukeButton {
         VBox vbox = new VBox();
         Label desLabel = new Label("Task Description:");
         TextField desTextField = new TextField();
-        Label startLabel = new Label("Start (yyyy-mm-dd hh:mm):");
-        TextField startTextField = new TextField();
-        Label endLabel = new Label("End (yyyy-mm-dd hh:mm):");
-        TextField endTextField = new TextField();
+
+        Label startLabel = new Label("Start:");
+        DatePicker startDateMenu = new DatePicker();
+        startDateMenu.getEditor().setDisable(true);
+        ComboBox startHourMenu = hourPicker();
+        ComboBox startMinMenu = minPicker();
+        HBox startPane = new HBox();
+        startPane.getChildren().addAll(startDateMenu, startHourMenu, startMinMenu);
+
+        Label endLabel = new Label("End:");
+        DatePicker endDateMenu = new DatePicker();
+        endDateMenu.getEditor().setDisable(true);
+        ComboBox endHourMenu = hourPicker();
+        ComboBox endMinMenu = minPicker();
+        HBox endPane = new HBox();
+        endPane.getChildren().addAll(endDateMenu, endHourMenu, endMinMenu);
+
         Button addTaskButton = new Button("Add Task");
-        vbox.getChildren().addAll(desLabel, desTextField, startLabel, startTextField, endLabel, endTextField
-                , addTaskButton);
+        vbox.getChildren().addAll(desLabel, desTextField, startLabel, startPane, endLabel, endPane, addTaskButton);
 
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();
-            String start = startTextField.getText();
-            String end = endTextField.getText();
+
+            LocalDate startDate = startDateMenu.getValue();
+            String startHour = (String) startHourMenu.getValue();
+            String startMin = (String) startMinMenu.getValue();
+            LocalDateTime start = LocalDateTime.of(startDate, LocalTime.parse(startHour + ":" + startMin));
+
+            LocalDate endDate = endDateMenu.getValue();
+            String endHour = (String) endHourMenu.getValue();
+            String endMin = (String) endMinMenu.getValue();
+            LocalDateTime end = LocalDateTime.of(endDate, LocalTime.parse(endHour + ":" + endMin));
             CreateEvent.events(super.fn, des, start, end);
         });
 

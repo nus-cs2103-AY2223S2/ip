@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 public class Deadline extends TimedTask {
     /**
      * Represents Deadline Task for the Duke program
@@ -18,11 +20,11 @@ public class Deadline extends TimedTask {
      * @param status Indicate if task is done or not
      * @param des    Description of task. Includes deadline of task
      */
-    public Deadline(boolean status, String des, String end) {
+    public Deadline(boolean status, String des, LocalDateTime end) {
         super();
         setMark(status);
         setDes(des);
-        setEnd(end);
+        setEndFromApp(end);
     }
 
     /**

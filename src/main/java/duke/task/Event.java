@@ -25,12 +25,12 @@ public class Event extends TimedTask {
      * @param start  Specifies the start time of the event
      * @param end    Specifies the end time of the event
      */
-    public Event(boolean status, String des, String start, String end) {
+    public Event(boolean status, String des, LocalDateTime start, LocalDateTime end) {
         super();
         setMark(status);
         setDes(des);
-        setStart(start);
-        setEnd(end);
+        setStartFromApp(start);
+        setEndFromApp(end);
     }
 
     /**
@@ -46,8 +46,8 @@ public class Event extends TimedTask {
         assert startTime instanceof String : "Line from save file has not been transformed";
         String endTime = dateTimeFileInParse(d[1]).format(isoFormat);
         assert endTime instanceof String : "Line from save file has not been transformed";
-        setStart(startTime);
-        setEnd(endTime);
+        setStartFromFile(startTime);
+        setEndFromFile(endTime);
     }
 
     /**
@@ -55,8 +55,15 @@ public class Event extends TimedTask {
      *
      * @param s String representation of start date time
      */
-    public void setStart(String s) {
+    public void setStartFromFile(String s) {
         LocalDateTime startTime = dateTimeConsoleInParse(s);
+        assert startTime instanceof LocalDateTime : "Start time has not be set properly";
+        this.start = startTime;
+        this.consoleStartString = start.format(super.consoleFormat);
+        this.fileStartString = start.format(super.fileFormat);
+    }
+
+    public void setStartFromApp(LocalDateTime startTime) {
         assert startTime instanceof LocalDateTime : "Start time has not be set properly";
         this.start = startTime;
         this.consoleStartString = start.format(super.consoleFormat);
