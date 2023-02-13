@@ -1,7 +1,7 @@
 # User Guide
 
 ## Features
-### 3 Types of Tasks
+### 3 types of Tasks
 1. To-Do
 2. Deadline
 3. Event
@@ -12,6 +12,7 @@
 - `delete 1` : Deletes your first Task
 - `list` : Lists out all your Tasks
 - `undo` : Undos the last change
+- `bye` : Saves Tasks into a file and closes Duke
 
 
 ## Usage
@@ -70,4 +71,9 @@ Here are the tasks in your list:
 1. [T][ ] run
 2. [D][ ]homework (by: Jan 1 2024)
 3. [E][ ] camp (from: Sunday to: Monday)
+```
+
+- `bye` : Saves Tasks into file and closes Duke after a delay
+```
+"Bye. Hope to see you again soon!"
 ```
