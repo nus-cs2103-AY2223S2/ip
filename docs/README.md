@@ -331,14 +331,14 @@ Shows Kuromi's notebook `Kuromi Note` that contains a list of My Melody's mistak
 
 | Action | Format | Examples |
 | ----- | ------ | ----- |
-| Add ToDo | `todo <description>` | `todo borrow book` |
-| Add Deadline | `deadline <description> /by <deadline>` | `deadline return book /by 2030-01-01 10:30` |
-| Add Event | `event <description> /from <start_date> /to <end_date>` | `event project meeting /from 2030-01-01 10:30 /to 2030-01-01 12:00` |
-| List | `list` | `list` |
-| Mark | `mark <index>` | `mark 1` |
-| Unmark | `unmark <index>` | `unmark 2` |
-| Delete | `delete <index>` | `delete 3` |
-| Find | `find <keyword>` | `find book` |
-| Remind | `remind <number_of_tasks>` | `remind 3` |
-| Exit | `bye` | `bye` |
-| Show Kuromi Note | `mistakes` | `mistakes` |
+| **Add ToDo** | `todo <description>` | `todo borrow book` |
+| **Add Deadline** | `deadline <description> /by <deadline>` | `deadline return book /by 2030-01-01 10:30` |
+| **Add Event** | `event <description> /from <start_date> /to <end_date>` | `event project meeting /from 2030-01-01 10:30 /to 2030-01-01 12:00` |
+| **List** | `list` | `list` |
+| **Mark** | `mark <index>` | `mark 1` |
+| **Unmark** | `unmark <index>` | `unmark 2` |
+| **Delete** | `delete <index>` | `delete 3` |
+| **Find** | `find <keyword>` | `find book` |
+| **Remind** | `remind <number_of_tasks>` | `remind 3` |
+| **Exit** | `bye` | `bye` |
+| **Show Kuromi Note** | `mistakes` | `mistakes` |
