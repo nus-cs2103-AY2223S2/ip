@@ -9,8 +9,8 @@ import java.util.ArrayList;
  * The class to convert date given in string to Date class
  */
 public class DateStringConverter {
-    private final String[] dayOfWeek = new String[]{"FRIDAY", "MONDAY", "SATURDAY", "SUNDAY",
-        "THURSDAY", "TUESDAY", "WEDNESDAY"};
+    private final String[] DAY_OF_WEEK = new String[]{"FRIDAY", "MONDAY", "SATURDAY",
+            "SUNDAY", "THURSDAY", "TUESDAY", "WEDNESDAY"};
 
     /**
      * A method to convert the String type to date type
@@ -19,8 +19,8 @@ public class DateStringConverter {
      */
     public LocalDate convertDateInput(String input) {
         input.replace("/", "-");
-        for (int i = 0; i < dayOfWeek.length; i++) {
-            if (input.equalsIgnoreCase(dayOfWeek[i])) {
+        for (int i = 0; i < DAY_OF_WEEK.length; i++) {
+            if (input.equalsIgnoreCase(DAY_OF_WEEK[i])) {
                 DayOfWeek dayOfWeek = DayOfWeek.valueOf(input.toUpperCase());
                 LocalDate today = LocalDate.now();
                 LocalDate nextDate = today.with(dayOfWeek);
