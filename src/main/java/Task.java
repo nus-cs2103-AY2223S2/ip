@@ -19,6 +19,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getOutputFormat() {
+        return String.format("X | %d | %s", isDone ? 1 : 0, description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

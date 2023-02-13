@@ -1,56 +1,108 @@
+import java.io.*;
 import java.util.Scanner;
-
 import java.util.ArrayList;
 
 public class Duke {
     private Scanner scanner = new Scanner(System.in);
     private ArrayList<Task> list = new ArrayList<>();
+
     private void Input() {
-        while (true) {
+        try {
+            loadTodoList();
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
+        }
+        boolean isDone = false;
+        while (!isDone) {
             String userInput = this.scanner.nextLine();
             try{
                 if (userInput.equals("bye")) {
                     this.exit();
                     break;
-                }
-                if (userInput.equals("list")) {
+                } else if (userInput.equals("list")) {
                     this.showList();
-                    continue;
-                }
-                if (userInput.startsWith("mark")) {
+                } else if (userInput.startsWith("mark")) {
                     int taskNum = Integer.parseInt(userInput.substring(5));
                     this.markTask(taskNum);
-                    continue;
-                }
-                if (userInput.startsWith("unmark")) {
+                } else if (userInput.startsWith("unmark")) {
                     int taskNum = Integer.parseInt(userInput.substring(7));
                     this.unmarkTask(taskNum);
-                    continue;
-                }
-                if (userInput.startsWith("todo")) {
+                } else if (userInput.startsWith("todo")) {
                     String todo = userInput.replace("todo", "");
                     emptyTodo(todo);
                     addTodo(todo);
-                    continue;
-                }
-                if (userInput.startsWith("event")) {
-                    String[] event = ErrorEventOrDeadline(userInput, "event", "/at");
+                } else if (userInput.startsWith("event")) {
+                    String[] event = ErrorEventOrDeadline(userInput, "event", "/from");
                     addEvent(event[0], event[1]);
-                    continue;
-                }
-                if (userInput.startsWith("deadline")) {
+                } else if (userInput.startsWith("deadline")) {
                     String[] deadline = ErrorEventOrDeadline(userInput, "deadline", "/by");
                     addDeadline(deadline[0], deadline[1]);
-                    continue;
-                }
-                if (userInput.startsWith("delete")) {
+                } else if (userInput.startsWith("delete")) {
                     deleteTask(Integer.parseInt(userInput.substring(7)));
-                    continue;
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                saveTodoList();
             } catch (DukeException exception) {
                 printMessage(exception.getMessage());
             }
+        }
+    }
+
+    private void loadTodoList() throws DukeException {
+        try {
+            File file = new File("./data/duke.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String input;
+            while ((input = br.readLine()) != null) {
+                String[] splitInput = input.split(" \\| ");
+
+                switch (splitInput[0]) {
+                    case "T":
+                        Todo todo = new Todo(splitInput[2]);
+                        if (Integer.parseInt(splitInput[1]) == 1) {
+                            todo.markAsDone();
+                        }
+                        list.add(todo);
+                        break;
+                    case "D":
+                        Deadline deadline = new Deadline(splitInput[2], splitInput[3]);
+                        if (Integer.parseInt(splitInput[1]) == 1) {
+                            deadline.markAsDone();
+                        }
+                        list.add(deadline);
+                        break;
+                    case "E":
+                        Event event = new Event(splitInput[2], splitInput[3]);
+                        if (Integer.parseInt(splitInput[1]) == 1) {
+                            event.markAsDone();
+                        }
+                        list.add(event);
+                        break;
+                    default:
+                        throw new DukeException("An error occurred during file parsing, unexpected task type was encountered.");
+                }
+            }
+        } catch (IOException e) {
+            throw new DukeException("An IOException occurred.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("An error occurred during file parsing, unexpected done value encountered.");
+        }
+    }
+
+    private void saveTodoList() throws DukeException {
+        try {
+            File file = new File("./data/duke.txt");
+            file.getParentFile().mkdirs();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            for (Task l : list) {
+                writer.append(l.getOutputFormat());
+                writer.append("\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("An IOException occurred.");
         }
     }
 
