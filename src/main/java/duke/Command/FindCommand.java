@@ -13,7 +13,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.showConfirmation(tasks.findKeyword(keyword));
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        return tasks.findKeyword(keyword);
+    }
+
+    @Override
+    public boolean isByeCommand() {
+        return false;
     }
 }

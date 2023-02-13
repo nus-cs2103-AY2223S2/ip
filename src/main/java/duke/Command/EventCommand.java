@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Event command which is executed by Duke.
+ * The Event command which is executed by duke.Duke.
  */
 public class EventCommand extends Command {
 
@@ -47,9 +47,14 @@ public class EventCommand extends Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         Event ev = new Event(name, from, until);
-        ui.showConfirmation(tasks.addTask(ev));
+        String confirmationMessage = tasks.addTask(ev);
         storage.saveToFile(tasks.getTasks());
+        return confirmationMessage;
+    }
+    @Override
+    public boolean isByeCommand() {
+        return false;
     }
 }

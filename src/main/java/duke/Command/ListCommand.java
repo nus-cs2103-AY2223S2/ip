@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.UI;
 
 /**
- * The List command which is executed by Duke.
+ * The List command which is executed by duke.Duke.
  */
 public class ListCommand extends Command {
 
@@ -16,7 +16,12 @@ public class ListCommand extends Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.showConfirmation(tasks.printTaskList());
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        return tasks.printTaskList();
+    }
+
+    @Override
+    public boolean isByeCommand() {
+        return false;
     }
 }

@@ -7,7 +7,7 @@ import duke.TaskList;
 import duke.UI;
 
 /**
- * The ToDo command which is executed by Duke.
+ * The ToDo command which is executed by duke.Duke.
  */
 public class ToDoCommand extends Command {
 
@@ -29,9 +29,15 @@ public class ToDoCommand extends Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         ToDo td = new ToDo(name);
-        ui.showConfirmation(tasks.addTask(td));
+        String confirmationMessage = tasks.addTask(td);
         storage.saveToFile(tasks.getTasks());
+        return confirmationMessage;
+    }
+
+    @Override
+    public boolean isByeCommand() {
+        return false;
     }
 }

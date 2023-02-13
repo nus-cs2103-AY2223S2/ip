@@ -1,7 +1,7 @@
 package duke.Task;
 
 /**
- * The ToDo task which is to be stored by Duke.
+ * The ToDo task which is to be stored by duke.Duke.
  */
 public class ToDo extends Task {
 

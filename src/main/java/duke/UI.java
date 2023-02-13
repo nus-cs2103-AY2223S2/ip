@@ -26,15 +26,15 @@ public class UI {
     /**
      * Prints the welcome message to the UI.
      */
-    public void getWelcomeMessage() {
-        System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
+    public String getWelcomeMessage() {
+        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
     /**
      * Prints the farewell message to the UI.
      */
-    public void getFarewellMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String getFarewellMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -46,18 +46,10 @@ public class UI {
     }
 
     /**
-     * Takes in a confirmation message from a task, and prints the message to the UI.
-     * @param message The confirmation message.
-     */
-    public void showConfirmation(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Prints to the UI an error message, if Duke is being run for the first time and the required data files to
+     * Prints to the UI an error message, if duke.Duke is being run for the first time and the required data files to
      * read from do not exist.
      */
     public void showLoadingError() {
-        System.out.println("Running Duke for the first time - Creating required data files");
+        System.out.println("Running duke.Duke for the first time - Creating required data files");
     }
 }

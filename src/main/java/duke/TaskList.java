@@ -73,8 +73,9 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the items in the current task list in String form.
-     * @return The current items in the task list.
+     * Finds all task in the current task list containing a certain keyword, and returns them in a String.
+     * @param keyword Keyword to query.
+     * @return List of tasks in list containing the keyword.
      */
     public String findKeyword(String keyword) {
         StringBuilder tasksWithKeyword = new StringBuilder();
@@ -93,6 +94,10 @@ public class TaskList {
         return tasksWithKeyword.toString();
     }
 
+    /**
+     * Prints out all the items in the current task list in String form.
+     * @return The current items in the task list.
+     */
     public String printTaskList() {
         StringBuilder tasklist = new StringBuilder();
         tasklist.append("Here are the tasks in your list:" + "\n");

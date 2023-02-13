@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Deadline command which is executed by Duke.
+ * The Deadline command which is executed by duke.Duke.
  */
 public class DeadlineCommand extends Command {
 
@@ -44,9 +44,15 @@ public class DeadlineCommand extends Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         Deadline dl = new Deadline(name, deadline);
-        ui.showConfirmation(tasks.addTask(dl));
+        String confirmationMessage = tasks.addTask(dl);
         storage.saveToFile(tasks.getTasks());
+        return confirmationMessage;
+    }
+
+    @Override
+    public boolean isByeCommand() {
+        return false;
     }
 }

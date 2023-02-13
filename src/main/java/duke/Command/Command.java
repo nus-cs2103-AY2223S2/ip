@@ -7,7 +7,7 @@ import duke.TaskList;
 import duke.UI;
 
 /**
- * The abstraction behind each command executed by Duke.
+ * The abstraction behind each command executed by duke.Duke.
  */
 public abstract class Command {
 
@@ -18,6 +18,12 @@ public abstract class Command {
      * @param storage The storage which to store to when a task is added/deleted or its status is changed.
      * @throws DukeException The exception thrown when there is an error in executing a command.
      */
-    public abstract void execute(TaskList tasks, UI ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, UI ui, Storage storage) throws DukeException;
+
+    /**
+     * Checks whether the current command from user is to exit the system.
+     * @return Whether or not the current command is a bye command.
+     */
+    public abstract boolean isByeCommand();
 
 }

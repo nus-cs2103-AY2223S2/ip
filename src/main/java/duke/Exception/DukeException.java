@@ -1,12 +1,12 @@
 package duke.Exception;
 
 /**
- * The abstraction behind each exception thrown by Duke.
+ * The abstraction behind each exception thrown by duke.Duke.
  */
 public abstract class DukeException extends Exception {
 
     /**
-     * The constructor for a Duke exception.
+     * The constructor for a duke.Duke exception.
      * @param message The error message.
      */
     public DukeException(String message) {

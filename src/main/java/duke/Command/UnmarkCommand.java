@@ -7,7 +7,7 @@ import duke.TaskList;
 import duke.UI;
 
 /**
- * The unmark command which is executed by Duke.
+ * The unmark command which is executed by duke.Duke.
  */
 public class UnmarkCommand extends Command {
 
@@ -33,11 +33,17 @@ public class UnmarkCommand extends Command {
      * or cannot exist in the task list (negative numbers)).
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws InvalidTaskException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws InvalidTaskException {
         if (index < 1 || index > tasks.getItems()) {
             throw new InvalidTaskException(index);
         }
-        ui.showConfirmation(tasks.getTasks().get(index - 1).markAsUndone());
+        String confirmationMessage = tasks.getTasks().get(index - 1).markAsUndone();
         storage.saveToFile(tasks.getTasks());
+        return confirmationMessage;
+    }
+
+    @Override
+    public boolean isByeCommand() {
+        return false;
     }
 }
