@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import DukeException.DukeException;
 import DukeException.TaskNotExistException;
+import DukeException.DuplicationException;
 import duke.Storage;
 import duke.Ui;
 
@@ -74,6 +75,10 @@ public class TaskList {
      * @param t
      */
     public String add(Task t) {
+        if (checkDuplication(t)) {
+            DukeException e = new DuplicationException();
+            return e.toString();
+        }
         list.add(t);
         s.write(t);
         return ui.showAddTask(list);
@@ -113,4 +118,23 @@ public class TaskList {
         assert it.hasNext() == false;
         return ui.showFind(matches);
     }
+
+    /**
+     * Check if added task t has duplication within task list
+     * If duplication happens but the task in task list is done already, return false
+     * @param t -> added task
+     * @return true if duplicate found
+     */
+    public boolean checkDuplication(Task t) {
+        for (Task temp: list) {
+            if (temp.isDone) {
+                return false;
+            }
+            if (temp.equals(t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -46,4 +46,11 @@ public class Task {
     public String getType() {
         return type;
     }
+
+    public boolean equals(Task t) {
+        if (t.getType().equals(this.getType()) && t.getDescriptionAndTime().equals(this.getDescriptionAndTime())) {
+            return true;
+        }
+        return false;
+    }
 }
