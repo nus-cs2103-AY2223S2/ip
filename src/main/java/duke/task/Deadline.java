@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class Deadline extends Task {
      */
     public Deadline(String task, String deadline) throws DateTimeParseException {
         super(task);
-        this.type = Types.DEADLINE;
+        this.setType(Types.DEADLINE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
@@ -38,7 +37,7 @@ public class Deadline extends Task {
      */
     public Deadline(String[] data) {
         super(data[2]);
-        this.isCompleted = Objects.equals(data[1], "X");
+        this.setCompleted(Objects.equals(data[1], "X"));
         this.deadline = LocalDateTime.parse(data[3]);
     }
 
@@ -48,10 +47,10 @@ public class Deadline extends Task {
     @Override
     public String status() {
 
-        String status = this.isCompleted ? "[X] " : "[ ] ";
-        return "[" + TYPE_TO_STRING + "]" + status + this.details + " (by: " +
-                this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
-                this.deadline.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")";
+        String status = this.isCompleted() ? "[X] " : "[ ] ";
+        return "[" + TYPE_TO_STRING + "]" + status + this.getDetails() + " (by: "
+                + this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " ["
+                + this.deadline.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")";
     }
 
     /**
@@ -61,8 +60,8 @@ public class Deadline extends Task {
     public ArrayList<String> data() {
         ArrayList<String> data = new ArrayList<>();
         data.add(TYPE_TO_STRING);
-        data.add(this.isCompleted ? "X" : " ");
-        data.add(this.details);
+        data.add(this.isCompleted() ? "X" : " ");
+        data.add(this.getDetails());
         data.add(this.deadline.toString());
         return data;
     }

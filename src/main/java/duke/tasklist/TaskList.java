@@ -1,17 +1,17 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
 
 import duke.exception.TaskNumberNotFoundException;
 import duke.task.Task;
 
-import java.util.ArrayList;
 
 /**
  * Represents the task list in Duke.
  */
 public class TaskList {
 
-    ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Represents the task list in Duke.

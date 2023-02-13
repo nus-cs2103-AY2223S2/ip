@@ -16,7 +16,7 @@ public class ToDo extends Task {
      */
     public ToDo(String task) {
         super(task);
-        this.type = Types.TODO;
+        this.setType(Types.TODO);
     }
 
     /**
@@ -26,8 +26,8 @@ public class ToDo extends Task {
      */
     public ToDo(String[] data) {
         super(data[2]);
-        this.isCompleted = Objects.equals(data[1], "X");
-        this.details = data[2];
+        this.setCompleted(Objects.equals(data[1], "X"));
+        this.setDetails(data[2]);
     }
 
     /**
@@ -35,8 +35,8 @@ public class ToDo extends Task {
      */
     @Override
     public String status() {
-        String status = this.isCompleted ? "[X] " : "[ ] ";
-        return "[" + TYPE_TO_STRING + "]" + status + " " + this.details;
+        String status = this.getCompleted() ? "[X] " : "[ ] ";
+        return "[" + TYPE_TO_STRING + "]" + status + " " + this.getDetails();
     }
 
     /**
@@ -46,8 +46,8 @@ public class ToDo extends Task {
     public ArrayList<String> data() {
         ArrayList<String> data = new ArrayList<>();
         data.add(TYPE_TO_STRING);
-        data.add(this.isCompleted ? "X" : " ");
-        data.add(this.details);
+        data.add(this.getCompleted() ? "X" : " ");
+        data.add(this.getDetails());
         return data;
     }
 }

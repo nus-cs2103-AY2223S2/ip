@@ -27,7 +27,7 @@ public class Event extends Task {
      */
     public Event(String task, String startDateTime, String endDateTime) throws DateTimeParseException {
         super(task);
-        this.type = Types.EVENT;
+        this.setType(Types.EVENT);
 
         this.startDateTime = LocalDateTime.parse(startDateTime, FORMATTER);
         this.endDateTime = LocalDateTime.parse(endDateTime, FORMATTER);
@@ -40,7 +40,7 @@ public class Event extends Task {
      */
     public Event(String[] data) {
         super(data[2]);
-        this.isCompleted = Objects.equals(data[1], "X");
+        this.setCompleted(Objects.equals(data[1], "X"));
         this.startDateTime = LocalDateTime.parse(data[3]);
         this.endDateTime = LocalDateTime.parse(data[4]);
     }
@@ -51,8 +51,8 @@ public class Event extends Task {
     @Override
     public String status() {
 
-        String status = this.isCompleted ? "[X] " : "[ ] ";
-        return "[" + TYPE_TO_STRING + "]" + status + this.details
+        String status = this.getCompleted() ? "[X] " : "[ ] ";
+        return "[" + TYPE_TO_STRING + "]" + status + this.getDetails()
                 + " (from: " + this.startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " ["
                 + this.startDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + " to: "
                 + this.endDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " ["
@@ -66,8 +66,8 @@ public class Event extends Task {
     public ArrayList<String> data() {
         ArrayList<String> data = new ArrayList<>();
         data.add(TYPE_TO_STRING);
-        data.add(this.isCompleted ? "X" : " ");
-        data.add(this.details);
+        data.add(this.getCompleted() ? "X" : " ");
+        data.add(this.getDetails());
         data.add(this.startDateTime.toString());
         data.add(this.endDateTime.toString());
         return data;

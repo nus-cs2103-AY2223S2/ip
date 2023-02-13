@@ -8,12 +8,15 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import javafx.application.Platform;
 
+/**
+ * DukeBot that contains all the logic and calls the relevant methods based on the commands given.
+ */
 public class Duke {
 
+    private static final String FRAME = ""; //"    ____________________________________________________________\n";
     private final Database database;
     private TaskList tasks;
     private Ui ui;
-    private static final String FRAME = ""; //"    ____________________________________________________________\n";
     private boolean isActive;
     private final Parser parser;
 
@@ -43,7 +46,7 @@ public class Duke {
         try {
             Command nextCommand = this.parser.parse(command, this.tasks.length());
             nextCommand.execute(this.tasks, this.ui, this.database);
-            this.isActive = nextCommand.isActive;
+            this.isActive = nextCommand.isActive();
         } catch (DukeException e) {
             ui.response(e.getLocalizedMessage());
         } finally {

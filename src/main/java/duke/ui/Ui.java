@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.Objects;
+
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Objects;
 
 /**
  * Represents the user interface of Duke. Currently, just terminal text.
@@ -43,6 +44,9 @@ public class Ui extends AnchorPane {
         duke.setUi(this);
     }
 
+    /**
+     * Initializes the UI.
+     */
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
         this.dialogContainer.setStyle("-fx-background-color: #242f1f");

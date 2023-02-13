@@ -26,7 +26,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws DatabaseNotUpdatingException {
-        this.isActive = false;
+        this.setIsActive(false);
         database.update(taskList.getTasks());
         ui.response(FRAME
                 + "     Bye. Hope to see you again soon!\n"

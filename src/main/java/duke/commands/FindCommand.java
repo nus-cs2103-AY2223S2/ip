@@ -39,7 +39,7 @@ public class FindCommand extends Command {
         StringBuilder queriedTasks = new StringBuilder(FRAME);
         int numOfQueriedTasks = 0;
         for (Task task : tasks) {
-            if (task.details.contains(this.query)) {
+            if (task.isContains(this.query)) {
                 queriedTasks.append("     ").append(numOfQueriedTasks + 1).append(". ")
                         .append(task.status()).append("\n");
                 numOfQueriedTasks++;

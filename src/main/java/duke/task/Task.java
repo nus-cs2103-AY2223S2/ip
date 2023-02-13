@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public abstract class Task {
 
     /** true when the task is completed, false if not. */
-    public boolean isCompleted;
+    private boolean isCompleted;
 
     /** Details of the task. */
-    public String details;
+    private String details;
 
     /** Type of task. */
-    public Types type;
+    private Types type;
 
     /** Generic constructor, defaults as false for isCompleted and takes in the task details. */
     public Task(String task) {
@@ -23,6 +23,10 @@ public abstract class Task {
     }
 
     public abstract String status();
+
+    public boolean isCompleted() {
+        return this.isCompleted;
+    }
 
     /** Marks the task as complete. */
     public void complete() {
@@ -38,4 +42,23 @@ public abstract class Task {
      * @return all relevant information of the task in an ArrayList of Strings to be saved into the Database.
      */
     public abstract ArrayList<String> data();
+
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+    public boolean getCompleted() {
+        return this.isCompleted;
+    }
+    public String getDetails() {
+        return details;
+    }
+    public boolean isContains(String str) {
+        return this.details.contains(str);
+    }
+    public void setDetails(String details) {
+        this.details = details;
+    }
+    public void setType(Types type) {
+        this.type = type;
+    }
 }

@@ -13,7 +13,7 @@ public abstract class Command {
     public static final String FRAME = ""; //"    ____________________________________________________________\n";
 
     /** Changed to false only in the case of a bye command. */
-    public boolean isActive;
+    private boolean isActive;
 
     public Command() {
         this.isActive = true;
@@ -30,4 +30,10 @@ public abstract class Command {
      */
     public abstract void execute(TaskList taskList, Ui ui, Database database) throws DukeException;
 
+    public boolean isActive() {
+        return isActive;
+    }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 }

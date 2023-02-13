@@ -1,11 +1,10 @@
-import duke.commands.AddToDoCommand;
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.task.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+
 
 
 public class DeadlineTest {

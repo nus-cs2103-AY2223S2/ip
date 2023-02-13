@@ -1,11 +1,14 @@
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.commands.AddToDoCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class ParserTest {
 
@@ -17,9 +20,9 @@ public class ParserTest {
             fail(); //Should not reach here
         } catch (DukeException e) {
             assertEquals(e.getLocalizedMessage(),
-                    "\n" + "    ____________________________________________________________\n" +
-                    "Sorry I don't think there's a command like that!" + "\n" +
-                    "    ____________________________________________________________\n");
+                    "\n" + "    ____________________________________________________________\n"
+                    + "Sorry I don't think there's a command like that!" + "\n"
+                    + "    ____________________________________________________________\n");
         }
     }
 

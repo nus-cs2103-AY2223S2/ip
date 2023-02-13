@@ -1,4 +1,6 @@
 package duke.ui;
+import java.io.IOException;
+import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,10 +13,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
-import java.util.Collections;
 
-
+/**
+ * FXML messagebox object that represents the text message sent into the UI.
+ */
 public class MessageBox extends HBox {
 
     @FXML

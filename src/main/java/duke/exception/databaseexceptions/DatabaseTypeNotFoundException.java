@@ -2,6 +2,9 @@ package duke.exception.databaseexceptions;
 
 import duke.exception.DukeException;
 
+/**
+ * Thrown when one of the tasks stored in the database has the wrong type.
+ */
 public class DatabaseTypeNotFoundException extends DukeException {
 
     public DatabaseTypeNotFoundException() {

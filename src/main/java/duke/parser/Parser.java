@@ -1,15 +1,24 @@
 package duke.parser;
 
-import duke.commands.*;
+import java.util.Objects;
 
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
+import duke.exception.TaskNumberNotFoundException;
 import duke.exception.blankfieldexceptions.BlankFieldDeadlineException;
 import duke.exception.blankfieldexceptions.BlankFieldEventException;
 import duke.exception.blankfieldexceptions.BlankFieldTodoException;
-import duke.exception.TaskNumberNotFoundException;
 import duke.exception.parserexceptions.NoCommandBodyException;
 import duke.exception.parserexceptions.UnknownCommandError;
 
-import java.util.Objects;
 
 /**
  * Represents the wrapper for the parsing logic for commands for Duke.
@@ -24,8 +33,8 @@ public class Parser {
      * @param lengthOfList the length of taskList currently
      * @return Command object associated with the command text.
      * @throws NoCommandBodyException thrown when there is no command body
-     * @throws TaskNumberNotFoundException thrown when there is no task identifier found for mark,
-     * unmark, delete commands.
+     * @throws TaskNumberNotFoundException thrown when there is no task identifier found for mark, unmark, delete
+     *      commands.
      * @throws BlankFieldTodoException thrown when there is a blank field for the addToDoCommand.
      * @throws BlankFieldDeadlineException thrown when there is a blank field for the addDeadlineCommand.
      * @throws BlankFieldEventException thrown when there is a blank field for the addEventCommand.
@@ -107,9 +116,10 @@ public class Parser {
             }
         case "find":
             return new FindCommand(commandBody);
-        }
+        default:
+            throw new UnknownCommandError();
 
-        throw new UnknownCommandError();
+        }
     }
 
 }

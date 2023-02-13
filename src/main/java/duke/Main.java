@@ -10,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Main wrapper class to couple Duke and the UI together.
+ */
 public class Main extends Application {
 
     private final Duke duke = new Duke("data/tasks.txt");
