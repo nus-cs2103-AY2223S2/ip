@@ -13,14 +13,14 @@
 [33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{12}: checkout: moving from branch-Level-7 to master
 [33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{13}: checkout: moving from master to branch-Level-7
 [33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{14}: commit: A-TextUiTesting: Added new test cases for latest functions
-[33m6574ed3[m[33m ([m[1;33mtag: Level-6[m[33m)[m HEAD@{15}: commit: Level-06: Minor update on duke.exception
+[33m6574ed3[m[33m ([m[1;33mtag: Level-6[m[33m)[m HEAD@{15}: commit: Level-06: Minor update on chad.exception
 [33m933de31[m HEAD@{16}: commit: Level-06: Added IndexOutofBoundException
 [33m40179b3[m HEAD@{17}: commit: Level-06: Added delete command
 [33mf669ce6[m[33m ([m[1;33mtag: Level-5[m[33m, [m[1;33mtag: A-Packages[m[33m, [m[1;33mtag: A-MoreOOP[m[33m)[m HEAD@{18}: commit: Level-05: Handled Exception, edited code to incorporate OOP
 [33m6428278[m HEAD@{19}: commit: A-TextUiTesting: Added input text and expected result
 [33md4dde8e[m[33m ([m[1;33mtag: Level-4[m[33m)[m HEAD@{20}: commit: Level-04: Added ToDo, Event and Deadline
 [33m3eba56c[m[33m ([m[1;33mtag: Level-3[m[33m)[m HEAD@{21}: commit: Level-03: Added javadocs
-[33m2842556[m HEAD@{22}: commit: Level-03: Added duke.parser.Parser Class to handle the user's duke.parser
+[33m2842556[m HEAD@{22}: commit: Level-03: Added chad.parser.Parser Class to handle the user's chad.parser
 [33mb8584a6[m HEAD@{23}: commit: Level-03: Added mark and unmark function
 [33mad39336[m[33m ([m[1;33mtag: Level-2[m[33m)[m HEAD@{24}: commit: Level-02: Added Add and List method
 [33m0f7476b[m[33m ([m[1;33mtag: Level-1[m[33m)[m HEAD@{25}: commit: Level-01: Added javadocs

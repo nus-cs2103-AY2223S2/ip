@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import duke.command.AddDeadlineCommand;
-import duke.command.Command;
-import duke.storage.TaskList;
+import chad.command.AddDeadlineCommand;
+import chad.command.Command;
+import chad.storage.TaskList;
 
 public class AddDeadlineCommandTest {
 

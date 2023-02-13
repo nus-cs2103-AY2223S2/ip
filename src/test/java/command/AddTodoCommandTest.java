@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import duke.command.AddTodoCommand;
-import duke.command.Command;
-import duke.storage.TaskList;
+import chad.command.AddTodoCommand;
+import chad.command.Command;
+import chad.storage.TaskList;
 
 public class AddTodoCommandTest {
 

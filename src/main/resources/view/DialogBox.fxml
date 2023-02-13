@@ -2,21 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 
-<?import javafx.scene.paint.ImagePattern?>
-<?import javafx.scene.image.Image?>
-<fx:root alignment="TOP_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0"
+<fx:root alignment="TOP_RIGHT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" maxHeight="150.0"
          prefWidth="480.0" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
     </padding>
-    <Label fx:id="text" text="Label" wrapText="true">
-    <padding>
-        <Insets left="5.0" right="5.0"/>
-    </padding>
+    <Label fx:id="text" text="Label" minHeight="90" maxHeight="140" wrapText="true">
+        <padding>
+            <Insets left="15.0" right="5.0"/>
+        </padding>
     </Label>
-    <Circle fx:id="icon" radius="25.0"/>
+    <Circle fx:id="icon" radius="30.0"/>
 </fx:root>

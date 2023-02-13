@@ -9,13 +9,13 @@ What can I do for you?
 ________________________________________________________________
 
 ================================================================
-Great! I've added this duke.task for you
+Great! I've added this chad.task for you
 [T][ ] CS2103T ip
 You have 1 tasks in the list
 ================================================================
 
 ================================================================
-Great! I've added this duke.task for you
+Great! I've added this chad.task for you
 [D][ ] CS2109S Problem set (by: 28 Jan)
 You have 2 tasks in the list
 ================================================================
@@ -26,7 +26,7 @@ You have 2 tasks in the list
 ================================================================
 
 ================================================================
-Great! I've added this duke.task for you
+Great! I've added this chad.task for you
 [E][ ] CS2103T Lecture (from: Friday 2pm to: Friday 4pm)
 You have 3 tasks in the list
 ================================================================
@@ -38,17 +38,17 @@ You have 3 tasks in the list
 ================================================================
 
 ================================================================
-Nice! I have marked this duke.task as done
+Nice! I have marked this chad.task as done
 [T][X] CS2103T ip
 ================================================================
 
 ================================================================
-Nice! I have marked this duke.task as done
+Nice! I have marked this chad.task as done
 [D][X] CS2109S Problem set (by: 28 Jan)
 ================================================================
 
 ================================================================
-Nice! I have marked this duke.task as done
+Nice! I have marked this chad.task as done
 [E][X] CS2103T Lecture (from: Friday 2pm to: Friday 4pm)
 ================================================================
 
@@ -57,18 +57,18 @@ Nice! I have marked this duke.task as done
 ================================================================
 
 ================================================================
-Aww! One more duke.task on the list
+Aww! One more chad.task on the list
 [E][ ] CS2103T Lecture (from: Friday 2pm to: Friday 4pm)
 ================================================================
 
 ================================================================
-Noted. I've removed this duke.task:
+Noted. I've removed this chad.task:
 [T][X] CS2103T ip
 Now you have 2 in the list.
 ================================================================
 
 ================================================================
-Noted. I've removed this duke.task:
+Noted. I've removed this chad.task:
 [E][ ] CS2103T Lecture (from: Friday 2pm to: Friday 4pm)
 Now you have 1 in the list.
 ================================================================
