@@ -24,17 +24,16 @@ public class Ui {
             "8) help\n" +
             "9) find ______ \n";
 
-    public String listTasks(TaskList tasks) {
-        System.out.println("These are the current tasks: ");
+    public String listTasks(TaskList tasks)  {
         String taskString = "";
         for (int i = 1; i < tasks.getTaskCount() + 1; i++) {
             Task task = tasks.getTask(i);
-            taskString += task.provideDetails() + "\n";
+            taskString += i + "): " + task.provideDetails() + "\n";
         }
         return DUKE_RESPONSE + "These are the current tasks: \n" + taskString;
     }
 
-    public String findTasks(ArrayList<Task> matchingTasks) {
+    public String listMatchingTasks(ArrayList<Task> matchingTasks) {
         String taskString = "";
         for (int i = 0; i < matchingTasks.size(); i++) {
             Task task = matchingTasks.get(i);
@@ -59,21 +58,6 @@ public class Ui {
         return DUKE_RESPONSE + message;
     }
 
-    /**
-     * Displays a loading error message to the user.
-     */
-    public String showLoadingError() {
-        return "The data from the existing file could not be loaded. A new file has been created.";
-    }
-
-    /**
-     * Displays a command error message to the user.
-     */
-    public String showCommandError() {
-        return "I'm sorry! Either the command you used was not valid, or it was incorrectly formatted. "
-                + "To see what constitutes a valid command or format,"
-                + " please type 'help'.";
-    }
 
     /**
      * Displays a help message to the user.
