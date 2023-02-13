@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,12 @@ public abstract class Task implements Serializable {
                 .map(word -> descKeywords.contains(word))
                 .reduce(true, (a, b) -> a && b);
     }
+
+    /**
+     * Get date of task. If task has no date,
+     * optional.empty returned.
+     */
+    public abstract Optional<LocalDate> getDate();
 
     /**
      * @return new task that is marked as done.

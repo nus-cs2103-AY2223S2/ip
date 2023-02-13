@@ -2,6 +2,7 @@ package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  * Deadline task
@@ -58,5 +59,13 @@ public class Deadline extends Task {
     @Override
     public Deadline markNotDone() {
         return new Deadline(this.desc, false, this.end);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.of(this.end);
     }
 }

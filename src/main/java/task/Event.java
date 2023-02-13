@@ -2,6 +2,7 @@ package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  * Event task
@@ -49,4 +50,11 @@ public class Event extends Task {
         return new Event(this.desc, false, this.start, this.end);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.of(this.start);
+    }
 }

@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import util.Pair;
 
 /**
  * List of tasks with formatting methods
@@ -125,6 +128,26 @@ public class TaskList implements Serializable {
         }
         return res;
 
+    }
+
+    /**
+     * Sorts all tasks with dates, leaving other tasks in the same position
+     */
+    public void sort() {
+        List<Integer> indexesToSort = IntStream.range(0, this.size())
+                .mapToObj(i -> new Pair<>(i, this.lst.get(i)))
+                .filter(pr -> pr.second().getDate().isPresent())
+                .map(pr -> pr.first())
+                .collect(Collectors.toList());
+
+        List<Task> sortedFilteredTasks = this.lst.stream()
+                .filter(task -> task.getDate().isPresent())
+                .sorted((a, b) -> a.getDate().get().compareTo(b.getDate().get()))
+                .collect(Collectors.toList());
+        
+        IntStream.range(0, this.size())
+                .mapToObj(i -> new Pair<>(indexesToSort.get(i), sortedFilteredTasks.get(i)))
+                .forEach(pr -> this.lst.set(pr.first(), pr.second()));
     }
 
     @Override

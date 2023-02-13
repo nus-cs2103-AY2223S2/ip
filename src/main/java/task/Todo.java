@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Todo task
@@ -44,5 +45,13 @@ public class Todo extends Task {
     @Override
     public Todo markNotDone() {
         return new Todo(this.desc, false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.empty();
     }
 }
