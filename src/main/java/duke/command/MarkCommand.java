@@ -30,7 +30,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Mark the tasks indicated in taskIndexes.
+     * Marks the tasks indicated in taskIndexes.
      *
      * @param tasks List of all tasks.
      * @return String of tasks that have been marked.

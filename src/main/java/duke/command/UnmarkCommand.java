@@ -30,7 +30,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Unmark the tasks indicated in taskIndexes.
+     * Unmarks the tasks indicated in taskIndexes.
      *
      * @param tasks List of all tasks.
      * @return String of tasks that have been unmarked.
