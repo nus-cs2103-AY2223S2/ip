@@ -10,6 +10,7 @@ import james.command.DeleteCommand;
 import james.command.ExitCommand;
 import james.command.FindCommand;
 import james.command.ListTasksCommand;
+import james.command.HelpCommand;
 
 
 import james.exception.JamesException;
@@ -46,6 +47,8 @@ public class Parser {
             return new DeleteCommand(userCommand);
         } else if (lowerCaseUserCmd.startsWith("find")) {
             return new FindCommand(userCommand);
+        } else if (lowerCaseUserCmd.startsWith("help")) {
+            return new HelpCommand();
         } else {
             throw new JamesException("sorry \nI do not understand what does that mean.");
         }

@@ -2,6 +2,16 @@ package james.jamesbot;
 
 import java.util.Scanner;
 
+import james.command.AddDeadlineCommand;
+import james.command.AddEventCommand;
+import james.command.AddMarkCommand;
+import james.command.AddToDoCommand;
+import james.command.AddUnmarkCommand;
+import james.command.DeleteCommand;
+import james.command.ExitCommand;
+import james.command.FindCommand;
+import james.command.HelpCommand;
+import james.command.ListTasksCommand;
 import james.task.Task;
 import james.task.TaskList;
 
@@ -102,6 +112,25 @@ public class Ui {
      */
     public String showError(String e) {
         return e;
+    }
+
+    /**
+     * Displays UwuBot program usage instructions.
+     *
+     * @return The instructions to use UwuBot.
+     */
+    public String displayCommands() {
+        AddEventCommand MarkCommand;
+        return "\u2022 " + AddToDoCommand.MESSAGE_USAGE
+                + "\n\u2022 " + AddEventCommand.MESSAGE_USAGE
+                + "\n\u2022 " + AddDeadlineCommand.MESSAGE_USAGE
+                + "\n\u2022 " + DeleteCommand.MESSAGE_USAGE
+                + "\n\u2022 " + AddMarkCommand.MESSAGE_USAGE
+                + "\n\u2022 " + AddUnmarkCommand.MESSAGE_USAGE
+                + "\n\u2022 " + FindCommand.MESSAGE_USAGE
+                + "\n\u2022 " + ListTasksCommand.MESSAGE_USAGE
+                + "\n\u2022 " + HelpCommand.MESSAGE_USAGE
+                + "\n\u2022 " + ExitCommand.MESSAGE_USAGE;
     }
 
 }
