@@ -36,6 +36,7 @@ public class Parser implements Serializable {
 
     /**
      * Converts the user input into descriptions to store in the Task instance.
+     *
      * @param input Input from user as an array of Strings
      * @param action Type of task
      * @param limiter Delimitter specified. Example: " ", "/by", "/from", "/to"
@@ -45,99 +46,19 @@ public class Parser implements Serializable {
     public String convertToUserInput(String[] input, TypeOfTask action, String limiter) throws DukeException {
         switch(action) {
         case find: {
-            String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
-            if (userInput.equals("") || userInput == null) {
-                throw new DukeException(TypeOfTask.find, 0);
-            } else {
-                return userInput;
-            }
+            return convertFindInput(input, limiter);
         }
         case todo: {
-            // changed the way the string is outputted from the array
-            String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
-            if (userInput.equals("") || userInput == null) {
-                throw new DukeException(TypeOfTask.todo, 0);
-            } else {
-                return userInput;
-            }
+            return convertTodoInput(input, limiter);
         }
-        case deadline: { // added braces to scope the variables below locally to each case
-            // algo to detect deadline's input content
-            String userInput = "";
-            if (!limiter.equals("/by")) {
-                for (int i = 0; i < input.length; i++) {
-                    if (input[i].equals("/by")) {
-                        break;
-                    } else {
-                        userInput += input[i] + " ";
-                    }
-                }
-            } else {
-                // to get the date and time after "/by"
-                for (int i = 0; i < input.length; i++) {
-                    if (input[i].equals("/by")) {
-                        for (int j = i + 1; j < input.length; j++) {
-                            userInput += input[j] + " ";
-                        }
-                        break;
-                    }
-                }
-            }
-            if (userInput.equals("") || userInput == null) {
-                throw new DukeException(TypeOfTask.deadline, 0);
-            } else {
-                return userInput;
-            }
-
+        case deadline: {
+            return convertDeadlineInput(input, limiter);
         }
         case event: {
-            String userInput = "";
-            if (limiter.equals("/from")) {
-                for (int i = 0; i < input.length; i++) {
-                    if (input[i].equals("/from")) {
-                        for (int j = i + 1; j < input.length; j++) {
-                            if (input[j].equals("/to")) {
-                                break;
-                            } else {
-                                userInput += input[j] + " ";
-                            }
-                        }
-                        break;
-                    }
-                }
-            } else if (limiter.equals("/to")) {
-                for (int i = 0; i < input.length; i++) {
-                    if (input[i].equals("/to")) {
-                        for (int j = i + 1; j < input.length; j++) {
-                            userInput += input[j] + " ";
-                        }
-                        break;
-                    }
-                }
-            } else {
-                // to get the user's input before the "/from" limiter
-                for (int i = 0; i < input.length; i++) {
-                    if (input[i].equals("/from")) {
-                        break;
-                    } else {
-                        userInput += input[i] + " ";
-                    }
-                }
-            }
-            if (userInput.equals("") || userInput == null) {
-                throw new DukeException(TypeOfTask.event, 0);
-            } else {
-                return userInput;
-            }
+            return convertEventInput(input, limiter);
         }
         case delete: {
-            if (input.length == 0) {
-                throw new DukeException(TypeOfTask.delete, 0);
-            } else if (input.length > 1) {
-                throw new DukeException(TypeOfTask.delete, 1);
-            } else {
-                return input[0];
-            }
+            return convertDeleteInput(input, limiter);
         }
         default:
             throw new DukeException();
@@ -145,7 +66,149 @@ public class Parser implements Serializable {
     }
 
     /**
+     * Converts user inputs when user uses the Find command
+     *
+     * @param input Input from user as an array of Strings
+     * @param limiter Delimitter specified. Example: " ", "/by", "/from", "/to"
+     * @return the contents of the user inputs
+     * @throws DukeException when an error occurs during execution depending on the type of task
+     */
+    public String convertFindInput(String[] input, String limiter) throws DukeException {
+        String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
+        boolean isUserInputNull = userInput.equals("") || userInput == null;
+        if (isUserInputNull) {
+            throw new DukeException(TypeOfTask.find, 0);
+        } else {
+            return userInput;
+        }
+    }
+
+    /**
+     * Converts user inputs when user uses the Todo command
+     *
+     * @param input Input from user as an array of Strings
+     * @param limiter Delimitter specified. Example: " ", "/by", "/from", "/to"
+     * @return the contents of the user inputs
+     * @throws DukeException when an error occurs during execution depending on the type of task
+     */
+    public String convertTodoInput(String[] input, String limiter) throws DukeException {
+        String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
+        boolean isUserInputNull = userInput.equals("") || userInput == null;
+        if (isUserInputNull) {
+            throw new DukeException(TypeOfTask.todo, 0);
+        } else {
+            return userInput;
+        }
+    }
+
+    /**
+     * Converts user inputs when user uses the Deadline command
+     *
+     * @param input Input from user as an array of Strings
+     * @param limiter Delimitter specified. Example: " ", "/by", "/from", "/to"
+     * @return the contents of the user inputs
+     * @throws DukeException when an error occurs during execution depending on the type of task
+     */
+    public String convertDeadlineInput(String[] input, String limiter) throws DukeException {
+        String userInput = "";
+        if (!limiter.equals("/by")) {
+            for (int i = 0; i < input.length; i++) {
+                if (input[i].equals("/by")) {
+                    break;
+                } else {
+                    userInput += input[i] + " ";
+                }
+            }
+        } else {
+            // to get the date and time after "/by"
+            for (int i = 0; i < input.length; i++) {
+                if (input[i].equals("/by")) {
+                    for (int j = i + 1; j < input.length; j++) {
+                        userInput += input[j] + " ";
+                    }
+                    break;
+                }
+            }
+        }
+        boolean isUserInputNull = userInput.equals("") || userInput == null;
+        if (isUserInputNull) {
+            throw new DukeException(TypeOfTask.deadline, 0);
+        } else {
+            return userInput;
+        }
+    }
+
+    /**
+     * Converts user inputs when user uses the Event command
+     *
+     * @param input Input from user as an array of Strings
+     * @param limiter Delimitter specified. Example: " ", "/by", "/from", "/to"
+     * @return the contents of the user inputs
+     * @throws DukeException when an error occurs during execution depending on the type of task
+     */
+    public String convertEventInput(String[] input, String limiter) throws DukeException {
+        String userInput = "";
+        if (limiter.equals("/from")) {
+            for (int i = 0; i < input.length; i++) {
+                if (input[i].equals("/from")) {
+                    for (int j = i + 1; j < input.length; j++) {
+                        if (input[j].equals("/to")) {
+                            break;
+                        } else {
+                            userInput += input[j] + " ";
+                        }
+                    }
+                    break;
+                }
+            }
+        } else if (limiter.equals("/to")) {
+            for (int i = 0; i < input.length; i++) {
+                if (input[i].equals("/to")) {
+                    for (int j = i + 1; j < input.length; j++) {
+                        userInput += input[j] + " ";
+                    }
+                    break;
+                }
+            }
+        } else {
+            // to get the user's input before the "/from" limiter
+            for (int i = 0; i < input.length; i++) {
+                if (input[i].equals("/from")) {
+                    break;
+                } else {
+                    userInput += input[i] + " ";
+                }
+            }
+        }
+        boolean isUserInputNull = userInput.equals("") || userInput == null;
+        if (isUserInputNull) {
+            throw new DukeException(TypeOfTask.event, 0);
+        } else {
+            return userInput;
+        }
+    }
+
+    /**
+     * Converts user inputs when user uses the Delete command
+     *
+     * @param input Input from user as an array of Strings
+     * @param limiter Delimitter specified. Example: " ", "/by", "/from", "/to"
+     * @return the contents of the user inputs
+     * @throws DukeException when an error occurs during execution depending on the type of task
+     */
+    public String convertDeleteInput(String[] input, String limiter) throws DukeException {
+        if (input.length == 0) {
+            throw new DukeException(TypeOfTask.delete, 0);
+        } else if (input.length > 1) {
+            throw new DukeException(TypeOfTask.delete, 1);
+        } else {
+            return input[0];
+        }
+    }
+
+    /**
      * Returns the local date in another format
+     *
      * @param date Date
      * @return Date
      * @throws DukeException when error occurs during conversion
@@ -168,6 +231,7 @@ public class Parser implements Serializable {
 
     /**
      * Returns the local time
+     *
      * @param time Time
      * @return local time
      * @throws DukeException when error occurs during execution
@@ -189,7 +253,8 @@ public class Parser implements Serializable {
     }
 
     /**
-     * converts the beginning of the user's input into a TypeOfTask enum type
+     * Converts the beginning of the user's input into a TypeOfTask enum type
+     *
      * @param command Command given by the user
      * @return Command instance
      * @throws DukeException when error occurs when creating the Command instance

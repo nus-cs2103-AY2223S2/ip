@@ -7,6 +7,7 @@ import duke.parser.Parser;
 /**
  * Task class that tracks the description, completion status and type of task.
  * This tasks has multiple subclasses: Deadline, Event and Todo
+ *
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class Task implements Serializable {
@@ -18,6 +19,7 @@ public class Task implements Serializable {
 
     /**
      * Default constructor that takes in the description and type of task
+     *
      * @param description Description of the task
      * @param type Type of task
      */
@@ -30,6 +32,7 @@ public class Task implements Serializable {
 
     /**
      * Returns the status of task with either X or " ".
+     *
      * @return status of task
      */
     public String getStatusIcon() {
@@ -38,6 +41,7 @@ public class Task implements Serializable {
 
     /**
      * Returns the description of the task
+     *
      * @return description of task
      */
     public String getDescription() {
@@ -46,6 +50,7 @@ public class Task implements Serializable {
 
     /**
      * Returns the type of task in character format
+     *
      * @return character format of task
      */
     public String getTypeOfTask() {
@@ -63,6 +68,7 @@ public class Task implements Serializable {
 
     /**
      * Returns the parser stored
+     *
      * @return parser
      */
     public Parser getParser() {
@@ -70,14 +76,14 @@ public class Task implements Serializable {
     }
 
     /**
-     * marks the task as done
+     * Marks the task as done
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * unmarks the task as done
+     * Unmarks the task as done
      */
     public void unmarkAsDone() {
         this.isDone = false;

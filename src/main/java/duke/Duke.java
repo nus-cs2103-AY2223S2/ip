@@ -8,7 +8,9 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * duke.Main program for iP
+ * Creates main class and program for iP
+ *
+ * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class Duke {
     private Storage storage;
@@ -18,6 +20,7 @@ public class Duke {
 
     /**
      * Default constructor
+     *
      * @throws Exception
      */
     public Duke() throws Exception {
@@ -40,6 +43,7 @@ public class Duke {
 
     /**
      * Runs the program in a loop while waiting for the user's inputs.
+     *
      * @throws Exception when user inputs are not legal
      */
     public void run() throws Exception {
@@ -61,7 +65,8 @@ public class Duke {
     }
 
     /**
-     * duke.Main method for Duke class
+     * Creates main method for Duke class
+     *
      * @param args
      * @throws Exception when unforseen error occurs.
      */
@@ -69,12 +74,12 @@ public class Duke {
         new Duke().run();
     }
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from the user
+     *
+     * @param input Inputs from the user
      */
     public String getResponse(String input) {
         try {
-            //return "Duke heard: " + input;
             String fullCommand = input;
             Command command = this.parser.parse(fullCommand);
             String result = command.execute(this.taskList, this.ui, this.storage);

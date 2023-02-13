@@ -10,6 +10,7 @@ public class Todo extends Task {
 
     /**
      * Default constructor that takes in the description of the task
+     *
      * @param description
      */
     public Todo(String description) {
@@ -18,6 +19,7 @@ public class Todo extends Task {
 
     /**
      * Returns the description of the task
+     *
      * @return description of task
      */
     @Override

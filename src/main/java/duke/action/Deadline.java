@@ -8,7 +8,7 @@ import duke.exception.DukeException;
 
 
 /**
- * Deadline class that tracks the start and end time for a defined task
+ * Represents deadlines that tracks the start and end time for a defined task
  *
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
@@ -17,7 +17,7 @@ public class Deadline extends Task {
     private LocalDate date;
     private LocalTime time;
     /**
-     * Constructor that takes in the description of the task, date of the task and the time
+     * Represents default constructor that takes in the description of the task, date of the task and the time
      *
      * @param description Description of the task
      * @param date Date of task
@@ -32,6 +32,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the cut-off date for the task to be completed
+     *
      * @return cut-off date
      */
     public LocalDate getDate() {
@@ -40,6 +41,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the cut-off local time of the task
+     *
      * @return cut-off time
      */
     public LocalTime getTime() {
@@ -48,11 +50,11 @@ public class Deadline extends Task {
 
     /**
      * Prints the details of the task
+     *
      * @return details of tasks
      */
     @Override
     public String toString() {
-        //return "[D]" + super.getDescription() + " (by: " + this.day + ")";
         String day = this.getDate().format(DateTimeFormatter.ofPattern(desiredDateFormat));
         return String.format("[D][%s] %s (by: %s %s)", super.getStatusIcon(),
                 super.getDescription(), day, this.getTime().toString());

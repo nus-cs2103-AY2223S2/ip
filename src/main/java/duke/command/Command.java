@@ -17,21 +17,23 @@ public abstract class Command {
     protected String[] contents;
 
     protected Parser parser;
-    protected boolean exitStatus;
+    protected boolean isExit;
 
     /**
      * Default constructor
+     *
      * @param contents Input from the user
      * @param exitStatus 1 for exiting programming, 0 for staying
      */
     public Command(String[] contents, boolean exitStatus) {
         this.contents = contents;
         this.parser = new Parser();
-        this.exitStatus = exitStatus;
+        this.isExit = exitStatus;
     }
 
     /**
      * Returns the contents of the command
+     *
      * @return contents of command
      */
     public String[] getContents() {
@@ -40,14 +42,16 @@ public abstract class Command {
 
     /**
      * Returns the exit status
+     *
      * @return exit status
      */
     public boolean isExit() {
-        return this.exitStatus;
+        return this.isExit;
     }
 
     /**
-     * Abstract method that allows commands to process the inputs from the user
+     * Processes the inputs from the user
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

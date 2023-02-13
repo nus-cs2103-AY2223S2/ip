@@ -14,6 +14,7 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
     /**
      * Default constructor
+     *
      * @param contents
      */
     public DeleteCommand(String[] contents) {
@@ -22,6 +23,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object
@@ -30,8 +32,6 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws NumberFormatException, DukeException {
         int taskIndexDelete = Integer.parseInt(super.parser.convertToUserInput(contents, TypeOfTask.delete, "")) - 1;
         Task taskToBeDeleted = taskList.getTaskByIndex(taskIndexDelete);
-        //System.out.println("Noted! I've removed this task:");
-        //System.out.println(String.format("%d. %s", taskIndexDelete + 1, taskToBeDeleted.toString()));
         taskList.removeTask(taskIndexDelete);
         String result = "Noted! I've removed this task: \n"
                 + String.format("%d. %s", taskIndexDelete + 1, taskToBeDeleted.toString())

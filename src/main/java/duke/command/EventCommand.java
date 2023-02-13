@@ -15,6 +15,7 @@ import duke.ui.Ui;
 public class EventCommand extends Command {
     /**
      * Default constructor
+     *
      * @param contents Inputs from user
      */
     public EventCommand(String[] contents) {
@@ -23,6 +24,7 @@ public class EventCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object
@@ -30,7 +32,6 @@ public class EventCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String description = super.parser.convertToUserInput(super.contents, TypeOfTask.event, "");
-        // added additional variable to store the start and end time of event
         String startTime = super.parser.convertToUserInput(super.contents, TypeOfTask.event, "/from");
         String endTime = super.parser.convertToUserInput(super.contents, TypeOfTask.event, "/to");
         Task newTask = new Event(description, startTime, endTime);
