@@ -58,6 +58,7 @@ public class Parser {
      *
      * @param input the input
      * @return the command
+     * @throws DukeException the duke exception
      */
     public static Command parse(String input) throws DukeException {
         String[] parsedInput = input.split(" ", 2);
@@ -102,6 +103,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate if input is a valid input
+     *
+     * @param command
+     * @return boolean that indicates if input is a valid keyword
+     */
     private static boolean checkIfValidKeyword(String command) {
         boolean isKeyword = false;
         for (Keyword k : Keyword.values()) {
@@ -115,6 +122,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Extract description from input for todos
+     * @param input
+     * @return description of todo
+     * @throws DukeException
+     */
     private static String processTodo(String input) throws DukeException {
         String[] parsedInput = input.split(" ", 2);
         if (parsedInput.length != 2) {
