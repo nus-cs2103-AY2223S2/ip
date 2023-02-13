@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import duke.ui.MainWindow;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -18,16 +20,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        try {
-            System.out.println("test");
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("test");
+        AnchorPane ap = new MainWindow(duke);
+        Scene scene = new Scene(ap);
+        ap.sceneProperty().addListener(new ChangeListener<Scene>() {
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable,
+                                Scene oldValue, Scene newValue) {
+                ap.prefWidthProperty().bind(newValue.widthProperty());
+                ap.prefHeightProperty().bind(newValue.heightProperty());
+            }
+        });
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

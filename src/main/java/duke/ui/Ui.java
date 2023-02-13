@@ -62,12 +62,22 @@ public class Ui {
         System.out.println(horizontal);
     }
 
+
+    /**
+     * Get welcome message.
+     *
+     * @return Welcome message
+     */
+    public String getWelcomeMessage() {
+        String welcomeMessage = "Hello! I'm duke.Duke \nWhat can I do for you";
+        return welcomeMessage;
+    }
     /**
      * Get exit message.
      *
      * @return Exit message
      */
-    public String getExit() {
+    public String getExitMessage() {
         String exitMessage = "Bye! Hope to see you again soon!";
         return exitMessage;
     }

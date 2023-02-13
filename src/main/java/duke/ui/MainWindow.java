@@ -1,14 +1,16 @@
 package duke.ui;
 
+import java.io.IOException;
+
 import duke.Duke;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,13 +30,29 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaDonkey.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Constructs a MainWindow instance.
+     *
+     * @param duke Duke instance.
+     */
+    public MainWindow(Duke duke) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.duke = duke;
+        getWelcomeDialog();
+    }
+
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
     }
 
     /**
@@ -50,5 +68,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    private void getWelcomeDialog() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage)
+        );
     }
 }
