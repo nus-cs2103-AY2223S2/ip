@@ -51,23 +51,8 @@ public class Duke extends Application {
         Parser.saveFile("data/duke.txt");
     }
 
-    /**
-     * Run the loop of the chat bot.
-     */
-    public void run() {
-        boolean isRunning = true;
-        //listReader();
-        while (isRunning) {
-            try {
-                isRunning = Parser.talk();
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-            }
-        }
-    }
-
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        //new Duke("data/duke.txt").run();
     }
 
 
