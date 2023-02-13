@@ -6,23 +6,23 @@ package duke;
  */
 public class Task {
     private final String description;
-    private Boolean done;
+    private Boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getStatusIcon() {
-        return (done ? "[X]" : "[ ]");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public String getDescription() {
         return this.description;
     }
 
-    public void setDone(Boolean done) {
-        this.done = done;
+    public void setDone(Boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Task {
     }
 
     public String toFileString() {
-        return (done ? "1 | " : "0 | ") + this.getDescription();
+        return (isDone ? "1 | " : "0 | ") + this.getDescription();
     }
 }
