@@ -1,5 +1,7 @@
 package alfred;
 
+import java.util.concurrent.TimeUnit;
+
 import alfred.command.Command;
 import alfred.exceptions.AlfredException;
 import alfred.parser.Parser;
@@ -7,8 +9,6 @@ import alfred.storage.Storage;
 import alfred.task.TaskList;
 import alfred.ui.Ui;
 import javafx.application.Platform;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a Personal Assistant Chat-bot that helps a person to keep track of various things.
@@ -43,6 +43,11 @@ public class Alfred {
         }
     }
 
+    /**
+     * Tells Alfred to craft an Introductory message when the application is open to let the users know the application
+     * has started.
+     * @return The Introductory message
+     */
     public String runIntro() {
         return ui.getOpening();
         /*
@@ -78,14 +83,21 @@ public class Alfred {
         }
     }
 
+    /**
+     * Checks if Alfred is ready is to close the program.
+     * @return True if the program is about to close, else false.
+     */
     public boolean isExit() {
         return isExit;
     }
 
 
+    /**
+     * Alfred handling the exit when it is time for the program to close.
+     */
     public void handleExit() {
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
             System.out.println(e.getMessage()); // how to show an error?
         } finally {

@@ -1,8 +1,8 @@
-
 package alfred;
 
 import java.io.IOException;
 
+import alfred.components.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,8 +21,9 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            System.out.println("tet");
             Scene scene = new Scene(ap);
-            stage.setTitle("Duke");
+            stage.setTitle("Alfred");
             stage.setResizable(false);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setAlfred(alfred);
