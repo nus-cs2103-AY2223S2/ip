@@ -19,9 +19,7 @@ public class Main extends Application{
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            MainWindow controller = fxmlLoader.<MainWindow>getController();
-            controller.setDuke(duke);
-            controller.showWelcome();
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

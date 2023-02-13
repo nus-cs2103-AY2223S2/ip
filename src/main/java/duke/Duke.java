@@ -1,6 +1,8 @@
 package duke;
 
 import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.StorageException;
 
 /**
  * Duke is a personal assistant chatbot that helps a person to keep track of various things.
@@ -27,8 +29,9 @@ public class Duke {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
             ui = new Ui();
-        } catch (DukeException e) {
-            tasks = new TaskList();
+        } catch (StorageException e) {
+            e.printStackTrace();
+            System.exit(0);
         }
     }
 

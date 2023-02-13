@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.StorageException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -25,14 +26,14 @@ public class Storage {
      * @param filePath the path of the file to save and load tasks from.
      * @throws DukeException
      */
-    public Storage(String filePath) throws DukeException {
+    public Storage(String filePath) throws StorageException {
         this.file = new File(filePath);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                throw new DukeException(e.getMessage());
+                throw new StorageException();
             }
         }
     }
@@ -43,7 +44,7 @@ public class Storage {
      * @return the ArrayList of tasks.
      * @throws DukeException
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws StorageException {
         ArrayList<Task> list = new ArrayList<Task>();
         try {
             Scanner s = new Scanner(file);
@@ -74,8 +75,8 @@ public class Storage {
                 }
             }
             s.close();
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+        } catch (IOException e) {
+            throw new StorageException();
         }
         return list;
     }
@@ -86,15 +87,15 @@ public class Storage {
      * @param list the ArrayList of tasks to save.
      * @throws DukeException
      */
-    public void save(TaskList list) throws DukeException {
+    public void save(TaskList list) {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : list) {
                 fw.write(task.toFile() + System.lineSeparator());
             }
             fw.close();
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+        } catch (IOException e) {
+
         }
     }
 }

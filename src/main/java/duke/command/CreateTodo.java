@@ -3,10 +3,10 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exceptions.DukeException;
 import duke.task.Todo;
 
 public class CreateTodo extends Command {

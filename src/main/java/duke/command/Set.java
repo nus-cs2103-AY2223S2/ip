@@ -3,10 +3,11 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidArgumentException;
 
 public class Set extends Command {
     protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("set", "s"));
@@ -52,7 +53,7 @@ public class Set extends Command {
             Set.aliases.add(newCommand);
             break;
         default:
-            throw new DukeException("Command not found!");
+            throw new InvalidArgumentException(command, "a valid command");
         }
         return ui.showSet(command, newCommand);
     }

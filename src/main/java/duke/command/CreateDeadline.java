@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exceptions.DukeException;
 import duke.task.Deadline;
 
 public class CreateDeadline extends Command {
-    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("deadline", "dl"));
+    protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("deadline", "d"));
     private String desc;
     private LocalDate by;
 

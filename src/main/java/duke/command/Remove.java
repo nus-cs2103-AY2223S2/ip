@@ -3,10 +3,11 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidArgumentException;
 import duke.task.Task;
 
 public class Remove extends Command {
@@ -20,7 +21,7 @@ public class Remove extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index > tasks.size() || index < 1) {
-            throw new DukeException("Please specify a valid task number.");
+            throw new InvalidArgumentException(Integer.toString(index), "in the range of 1 to " + tasks.size());
         }
         Task t = tasks.get(index-1);
         Integer size = tasks.size();

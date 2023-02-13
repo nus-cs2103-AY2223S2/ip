@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exceptions.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

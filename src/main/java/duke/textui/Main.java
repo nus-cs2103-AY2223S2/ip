@@ -1,7 +1,8 @@
 package duke.textui;
 
 import duke.command.Command;
-import duke.DukeException;
+import duke.exceptions.DukeException;
+
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -32,8 +33,8 @@ public class Main {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
+        } catch (Exception e) {
+            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }

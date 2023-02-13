@@ -3,10 +3,10 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exceptions.DukeException;
 
 public class Exit extends Command {
     protected static ArrayList<String> aliases = new ArrayList<>(Arrays.asList("bye", "b"));
