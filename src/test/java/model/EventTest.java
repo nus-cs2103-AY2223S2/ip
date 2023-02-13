@@ -2,9 +2,13 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.NoSuchElementException;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import membot.model.Event;
+import membot.model.Task;
 import membot.model.TaskType;
 
 public class EventTest {
@@ -55,5 +59,16 @@ public class EventTest {
                 e1.getEndDateTime()),
                 e1.toString()
         );
+    }
+
+    @AfterEach
+    public void tearDown() {
+        while (true) {
+            try {
+                Task.deleteLast();
+            } catch (NoSuchElementException e) {
+                break;
+            }
+        }
     }
 }
