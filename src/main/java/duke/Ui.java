@@ -68,7 +68,7 @@ public class Ui {
      * @return String The message.
      */
     public static String emptyDescriptionError() {
-        return "OOPS!!! The description of a task cannot be empty.";
+        return "The description of a task cannot be empty.";
     }
 
     /**
@@ -76,7 +76,7 @@ public class Ui {
      * @return String The message.
      */
     public static String wrongDeadlineCommandFormat() {
-        return "OOPS!!! Deadline must be in the format\n"
+        return "Deadline must be in the format\n"
                 + "deadline <description> /by <date>";
     }
 
@@ -105,8 +105,16 @@ public class Ui {
      * @return String The message.
      */
     public static String wrongEventCommandFormat() {
-        return "OOPS!!! Event must be in the format\n"
+        return "Event must be in the format\n"
                 + "event <description> /from <date> /to <date>";
+    }
+
+    public static String wrongFindCommandFormat() {
+        return "The find command is in the wrong format.";
+    }
+
+    public static String wrongFindDateCommand() {
+        return "The finddate command is in the wrong format.";
     }
 
     /**
@@ -164,6 +172,14 @@ public class Ui {
      * @return The String message.
      */
     public static String startDatelaterThanEnd() {
-        return "End date is earlier than start date";
+        return "End date is earlier than start date.";
+    }
+
+    public static String unrecognisedCommand() {
+        return "Unrecognised command. Try again.";
+    }
+
+    public static String missingIndex() {
+        return "Command must be followed by an integer.";
     }
 }

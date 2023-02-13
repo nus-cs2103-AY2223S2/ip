@@ -46,7 +46,7 @@ public class Duke {
             Command c = Parser.parse(input.trim());
             return new Pair<>(c.execute(this.tasks, this.storage), false);
         } catch (IllegalArgumentException e) {
-            return new Pair<>("Unrecognised command. Try again.", true);
+            return new Pair<>(Ui.unrecognisedCommand(), true);
         } catch (Exception e) {
             return new Pair<>(e.getMessage(), true);
         }

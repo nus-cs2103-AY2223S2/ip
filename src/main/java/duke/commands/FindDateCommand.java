@@ -1,6 +1,7 @@
 package duke.commands;
 import java.util.ArrayList;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -24,15 +25,18 @@ public class FindDateCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) {
-        try {
-            String keyword = this.input.substring(9, input.length());
-            ArrayList<Task> filtered = tasks.filterDate(keyword);
-            assert filtered.size() > 0 : Ui.noTasksMessage();
-
-            return Ui.printTasks(filtered);
-        } catch (AssertionError ae) {
-            return ae.getMessage();
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String[] words = this.input.trim().split(" ");
+        if (words.length <= 1) {
+            throw new DukeException(Ui.wrongFindDateCommand());
         }
+        String keyword = this.input.trim().substring(9, input.length());
+        ArrayList<Task> filtered = tasks.filterDate(keyword);
+        System.out.println(filtered.size());
+        if (filtered.size() == 0) {
+            return Ui.noTasksMessage();
+        }
+
+        return Ui.printTasks(filtered);
     }
 }

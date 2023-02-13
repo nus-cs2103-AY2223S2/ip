@@ -22,20 +22,18 @@ public class ListCommand extends Command {
      * @inheritDoc
      */
     public String execute(TaskList tasks, Storage storage) {
-        try {
-            assert tasks.size() > 0 : Ui.noTasksMessage();
-            String result = "Here are the tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                int num = i + 1;
-                result += "    "
-                        + num
-                        + ". "
-                        + tasks.get(i)
-                        + "\n";
-            }
-            return result;
-        } catch (AssertionError ae) {
-            return ae.getMessage();
+        if (tasks.size() <= 0) {
+            return Ui.noTasksMessage();
         }
+        String result = "Here are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            int num = i + 1;
+            result += "    "
+                    + num
+                    + ". "
+                    + tasks.get(i)
+                    + "\n";
+        }
+        return result;
     }
 }

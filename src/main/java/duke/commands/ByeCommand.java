@@ -1,4 +1,5 @@
 package duke.commands;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -21,9 +22,14 @@ public class ByeCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) {
-        storage.saveTaskList(tasks);
-        return Ui.showByeMessage();
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        if (this.input.trim().equalsIgnoreCase("bye")) {
+            storage.saveTaskList(tasks);
+            return Ui.showByeMessage();
+        } else {
+            throw new DukeException(Ui.unrecognisedCommand());
+        }
+
     }
 
     /**
