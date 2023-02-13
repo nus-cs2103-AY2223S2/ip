@@ -2,6 +2,7 @@ package duke;
 import java.util.Scanner;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
 import duke.ui.Ui;
 import duke.ui.DialogBox;
 import duke.parser.Parser;
@@ -20,50 +21,39 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
-
-/** Encapsulates the Duke chat-bot.
- * @author Hee Jia Yuan
+/**
+ * A chat bot program.
  */
 public class Duke {
-    /** Handles storing of Tasks in the hard drive.*/
-    private Storage storage;
+    /** Parses user input. */
+    private Parser parser;
 
-    /** Handles the tasks within a session.  */
-    private TaskList tasks;
-
-    /** Handles interactions with the User. */
-    private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    /** The path to the file that stores the Tasks on the hard drive. */
+    private String FILE_PATH = "duke.txt";
 
     /**
      * Constructs a new Duke session.
-     * @param filePath Directory to file storing Tasks in hard drive.
      */
-    public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
-        try {
-            this.tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+    public Duke() {
+           Ui ui = new Ui();
+           Storage storage = new Storage(FILE_PATH);
+            //Attempts to load Tasks from hard drive into the list of Tasks.
+            TaskList tasks = new TaskList(storage.load());
+            this.parser = new Parser(ui, storage, tasks);
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets an appropriate response to the user input.
+     * @param input the user's input
+     * @return the response to the user
      */
     public String getResponse(String input) {
-        return Parser.parse(ui, tasks, storage, input);
+        try {
+             String parsedOutput =  parser.parse(input);
+             return parsedOutput;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
 
