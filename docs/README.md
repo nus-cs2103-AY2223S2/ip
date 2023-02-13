@@ -26,7 +26,8 @@ Format: `todo DESCRIPTION`
 
 Example of usage:
 - `todo Read Chainsaw Man`
-- `todo Wash the dishes`
+- `todo Wash the dishes` 
+
 <br>
 
 ### `deadline` - Add a deadline
@@ -38,7 +39,8 @@ DEADLINE_DATE_AND_TIME should be in the form DD-MM-YYYY HH:mm. Time is optional.
 
 Example of usage:
 - `deadline Finish homework /by 13-08-2000`
-- `deadline Submit assignment /by 01-05-2000 23:59`
+- `deadline Submit assignment /by 01-05-2000 23:59` 
+
 <br>
 
 ### `event` - Add an event
@@ -50,7 +52,8 @@ Date and time should be in the form DD-MM-YYYY HH:mm. Time is optional.
 
 Example of usage:
 - `event Birthday Celeberation /from 01-05-2020 /to 02-05-2020`
-- `event BTS Concert /from 13-08-2023 16:00 /to 13-08-2023 18:00`
+- `event BTS Concert /from 13-08-2023 16:00 /to 13-08-2023 18:00` 
+
 <br>
 
 ### `edit` - Edits a task
@@ -69,7 +72,8 @@ Only tasks that contain the relevant fields can have those fields edited.
 
 Example of usage:
 - `edit 1 /by 13-08-2000` - Task 1 is a deadline task whose deadline date is set to 13 Aug 2000.
-- `edit 2 /desc New Task Description` - Task 2 is any task whose description is set to "New Task Description".
+- `edit 2 /desc New Task Description` - Task 2 is any task whose description is set to "New Task Description". 
+
 <br>
 
 ### `find` - Finds a subset of tasks.
@@ -80,7 +84,8 @@ Format: `find KEYWORD`
 
 Example of usage: 
 
-![Example for find](/findExample.png)
+![Example for find](/findExample.png) 
+
 <br>
 
 ### `mark` - Marks a task as done
@@ -90,7 +95,8 @@ Marks a task as done.
 Format: `mark TASK_NUMBER`
 
 Example of usage:
-- `mark 1`
+- `mark 1` 
+
 <br>
 
 ### `unmark` - Unmarks a task
@@ -100,5 +106,6 @@ Unmarks a marked task.
 Format: `unmark TASK_NUMBER`
 
 Example of usage:
-- `unmark 1`
+- `unmark 1` 
+
 <br>
