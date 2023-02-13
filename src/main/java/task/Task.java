@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
  * Task object encapsulating Todo, Deadline, and Event tasks.
  */
 public abstract class Task {
-    private boolean marked;
+    private boolean isMarked;
     private final String content;
     private boolean isHigh;
     private final ArrayList<String> tags;
@@ -17,7 +17,7 @@ public abstract class Task {
      * @param content Content to be placed in the task.
      */
     public Task(String content) {
-        this.marked = false;
+        this.isMarked = false;
         this.isHigh = false;
         this.tags = new ArrayList<>();
         this.content = content;
@@ -52,11 +52,11 @@ public abstract class Task {
     }
 
     /**
-     * Either marks or unmarks the task.
+     * Marks or unmarks the task.
      * @param isToMark Whether to mark or unmark the task.
      */
     public void mark(boolean isToMark) {
-        this.marked = isToMark;
+        this.isMarked = isToMark;
     }
 
     /**
@@ -64,7 +64,7 @@ public abstract class Task {
      * @return Whether the task is marked.
      */
     public boolean isMarked() {
-        return this.marked;
+        return this.isMarked;
     }
 
     /**
