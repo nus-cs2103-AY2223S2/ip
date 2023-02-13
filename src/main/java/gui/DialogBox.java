@@ -10,9 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -36,7 +39,14 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        Rectangle clip = new Rectangle(
+                displayPicture.getFitWidth(), displayPicture.getFitHeight()
+        );
+        clip.setArcWidth(90);
+        clip.setArcHeight(90);
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
+        displayPicture.setEffect(new DropShadow(20, Color.BLACK));
     }
 
     /**
