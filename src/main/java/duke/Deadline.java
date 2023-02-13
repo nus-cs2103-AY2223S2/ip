@@ -3,9 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
-
 
 import util.DukeException;
 
@@ -77,7 +75,7 @@ public class Deadline extends Task {
      * @param splitInput an array of strings containing the user input.
      */
     public static void createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
-        if (splitInput.length == 1 || splitInput[1].equals("")){
+        if (splitInput.length == 1 || splitInput[1].equals("")) {
             try {
                 throw new DukeException("deadline");
             } catch (Exception e) {
@@ -86,12 +84,12 @@ public class Deadline extends Task {
                 System.out.println(divider);
             }
         } else {
-            for(int j=1; j< splitInput.length; j++){
-                if(splitInput[j].equals("/by")){
-                    for (int k=1; k< j-1; k++){
+            for (int j=1; j< splitInput.length; j++) {
+                if (splitInput[j].equals("/by")) {
+                    for (int k=1; k< j-1; k++) {
                         splitInput[1] = splitInput[1] + " " + splitInput[k+1];
                     }
-                    for (int l=splitInput.length-1; l > j +1; l--){
+                    for (int l=splitInput.length-1; l > j +1; l--) {
                         splitInput[splitInput.length-1] = splitInput[l-1]+" "+splitInput[splitInput.length-1];
                     }
                 } else {
@@ -103,7 +101,7 @@ public class Deadline extends Task {
             String desc = splitInput[1];
 
 
-            if(isDate(date)){
+            if (isDate(date)) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate ld = LocalDate.parse(date, formatter);
                 Deadline d = new Deadline(desc, ld);
@@ -115,10 +113,7 @@ public class Deadline extends Task {
                 Ui.addTask(array, d);
             }
         }
-        
     }
-
-
     /**
      * Checks whether a string is an instance of LocalDate
      * in the format "yyyy-MM-dd"
@@ -135,7 +130,6 @@ public class Deadline extends Task {
             System.out.println(ld);
         } catch (DateTimeParseException e) {
             return false;
-    
         }
         return true;
     }

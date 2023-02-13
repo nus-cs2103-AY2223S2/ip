@@ -2,6 +2,12 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * The TaskList class provides functionality for managing a list of tasks.
+ * It includes methods for adding, deleting, and searching for tasks, as well as marking tasks as done or undone.
+ * @author @tricixg
+ * @version 1.0
+ */
 public class TaskList {
     static ArrayList<Task> list;
 
