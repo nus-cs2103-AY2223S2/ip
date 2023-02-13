@@ -13,47 +13,45 @@ public class Command {
         this.LIST = list;
     }
 
-    public void listCommand(TaskList list) {
-    this.UI.showTaskList(list);
+    public String listCommand(TaskList list) {
+    return this.UI.showTaskList(list);
     }
 
-    public void markCommand() {
+    public String markCommand() {
         String str = INPUT.replace("mark ", "");
         int index = Integer.parseInt(str);
         index--;
         Task task = LIST.get(index);
         task.markAsDone();
-        UI.showMarked(task);
+        return UI.showMarked(task);
     }
 
-    public void unmarkCommand() {
+    public String unmarkCommand() {
         String str = INPUT.replace("unmark ", "");
         int index = Integer.parseInt(str);
         index--;
         Task task = LIST.get(index);
         task.unmark();
-        UI.showUnmarked(task);
+        return UI.showUnmarked(task);
     }
 
-    public void toDoCommand() throws EmptyDescriptionException {
+    public String toDoCommand() throws EmptyDescriptionException {
         String str = INPUT.replace("todo", "");
         ToDo toDo = new ToDo(str);
         LIST.add(toDo);
-        UI.showAdd(toDo);
-        UI.showTaskSize(LIST.size());
+        return UI.showAdd(toDo) + UI.showTaskSize(LIST.size());
     }
 
-    public void deadlineCommand() throws EmptyDescriptionException {
+    public String deadlineCommand() throws EmptyDescriptionException {
         String str = INPUT.replace("deadline", "");
         String description = str.split("/by")[0];
         String dateAndTime = str.split("/by ")[1];
         Deadline deadline = new Deadline(description, dateAndTime);
         LIST.add(deadline);
-        UI.showAdd(deadline);
-        UI.showTaskSize(LIST.size());
+        return UI.showAdd(deadline) + UI.showTaskSize(LIST.size());
     }
 
-    public void eventCommand() throws EmptyDescriptionException {
+    public String eventCommand() throws EmptyDescriptionException {
         String str = INPUT.replace("event", "");
         String description = str.split("/from")[0];
         String temp = str.split("/from")[1];
@@ -61,20 +59,19 @@ public class Command {
         String to = temp.split("/to")[1];
         Event event = new Event(description, from, to);
         LIST.add(event);
-        UI.showAdd(event);
-        UI.showTaskSize(LIST.size());
+        return UI.showAdd(event) + UI.showTaskSize(LIST.size());
     }
 
-    public void deleteCommand() {
+    public String deleteCommand() {
         String str = INPUT.replace("delete", "");
         int index = Integer.parseInt(str);
         index--;
         Task removedTask = LIST.get(index);
         LIST.remove(index);
-        UI.showDelete(removedTask);
+        return UI.showDelete(removedTask);
     }
 
-    public void findCommand() {
+    public String findCommand() {
         String keyword = INPUT.split(" ", 2)[1];
         ArrayList<Task> matchingTaskList = new ArrayList<>();
         for (Task task : LIST) {
@@ -83,6 +80,11 @@ public class Command {
             }
         }
         TaskList matches = new TaskList(matchingTaskList);
-        System.out.println("Here are the matching tasks in your list:\n" + matches);
+        String result = "Here are the matching tasks in your list:\n" + matches;
+        return result;
+    }
+
+    public String byeCommand() {
+        return UI.showBye();
     }
 }

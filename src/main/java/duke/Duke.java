@@ -1,4 +1,8 @@
 package duke;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -14,8 +18,7 @@ public class Duke {
      * @param filePath relative path to data directory for storing tasks.
      * @throws DukeException
      */
-    public Duke(String filePath) throws DukeException {
-        UI = new Ui();
+    /*public Duke(String filePath) throws DukeException {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -25,12 +28,12 @@ public class Duke {
         } catch (FileNotFoundException e) {
             throw new DukeException(e.toString());
         }
-    }
+    }*/
 
     /**
      * starts up the Duke chatbot.
      */
-    public void run() throws DukeException, IOException {
+    /*public void run() throws DukeException, IOException {
         UI.showWelcome();
         String cmd = UI.readCommand();
         boolean isTerminated = false;
@@ -49,9 +52,42 @@ public class Duke {
                 UI.showBye();
             }
         }
-    }
+    }*/
 
-    public static void main(String[] args) throws DukeException, IOException {
+    /*public static void main(String[] args) throws DukeException, IOException {
         new Duke("data/duke.txt").run();
+    }*/
+
+    public String getResponse(String input) {
+        String response = "";
+        if (input.equals("bye")) {
+            try {
+                response = Parser.parse(input, tasks);
+                storage.write("data/duke.txt", tasks);
+            } catch (DukeException e) {
+                response = e.toString();
+            } catch (IOException e) {
+                e.toString();
+            }
+        } else {
+            try {
+                response = Parser.parse(input, tasks);
+            } catch (DukeException e) {
+                return e.toString();
+            }
+        }
+        return response;
+    }
+    public Duke() throws DukeException {
+        storage = new Storage("data/duke.txt");
+        UI = new Ui();
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            UI.showError();
+            tasks = new TaskList();
+        } catch (FileNotFoundException e) {
+            throw new DukeException(e.toString());
+        }
     }
 }

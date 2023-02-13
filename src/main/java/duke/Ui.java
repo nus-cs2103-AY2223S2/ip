@@ -15,46 +15,48 @@ public class Ui {
         return SCANNER.nextLine();
     }
 
-    public void showWelcome() {
-        System.out.println(WELCOME_MESSAGE + LINE);
+    public String showWelcome() {
+        return (WELCOME_MESSAGE + LINE);
     }
 
-    public void showAdd(Task task) {
-        System.out.println("Got it. I've added this task:\n" + task.toString());
+    public String showAdd(Task task) {
+        return "Got it. I've added this task:\n" + task.toString() + "\n";
     }
 
-    public void showDelete(Task task) {
-        System.out.println("Noted. I've removed this task:\n" + task.toString());
+    public String showDelete(Task task) {
+        return "Noted. I've removed this task:\n" + task.toString() + "\n";
     }
 
-    public void showTaskSize(int size) {
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String showTaskSize(int size) {
+        return "Now you have " + size + " tasks in the list. + \n";
     }
 
-    public void showMarked(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task.toString() + "\n");
+    public String showMarked(Task task) {
+        return "Nice! I've marked this task as done:\n" + task.toString() + "\n";
     }
 
-    public void showUnmarked(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:\n"
-        + task.toString() + "\n");
+    public String showUnmarked(Task task) {
+        return "OK, I've marked this task as not done yet:\n"
+        + task.toString() + "\n";
     }
 
-    public void showTaskList(TaskList list) {
+    public String showTaskList(TaskList list) {
+        String result = "";
         if (list.isEmpty()) {
-            System.out.println("No tasks added.\n");
+            result = "No tasks added.\n";
         } else {
             for (int i = 0; i < list.size(); i++) {
-                System.out.println(i + 1 + ":" + list.get(i) + "\n");
+                result += (i + 1) + ":" + list.get(i) + "\n";
             }
         }
+        return result;
     }
 
-    public void showError() {
-        System.out.println("Error has occurred.");
+    public String showError() {
+        return "Error has occurred.";
     }
 
-    public void showBye() {
-        System.out.println("Bye! Have a good day!");
+    public String showBye() {
+        return "Bye! Have a good day!";
     }
 }

@@ -14,12 +14,12 @@ public class Storage {
      * @param filePath file path leading to data directory.
      * @throws DukeException if file not found.
      */
-    public Storage(String filePath) throws DukeException{
+    public Storage(String filePath) {
         f = new File(filePath);
         try {
             f.createNewFile();
         } catch (IOException e) {
-            throw new DukeException(e.toString());
+            e.getMessage();
         }
     }
 

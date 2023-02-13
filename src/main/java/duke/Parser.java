@@ -2,30 +2,32 @@ package duke;
 
 public class Parser {
     private static final Ui ui = new Ui();
-    public static void parse(String cmd, TaskList list) throws DukeException {
+    public static String parse(String cmd, TaskList list) throws DukeException {
         Command command = new Command(cmd, list, ui);
         try {
             if (cmd.equals("list")) {
-                command.listCommand(list);
+                return command.listCommand(list);
             } else if (cmd.startsWith("mark")) {
-                command.markCommand();
+                return command.markCommand();
             } else if (cmd.startsWith("unmark")) {
-                command.unmarkCommand();
+                return command.unmarkCommand();
             } else if (cmd.startsWith("todo")) {
-                command.toDoCommand();
+                return command.toDoCommand();
             } else if (cmd.startsWith("deadline")) {
-                command.deadlineCommand();
+                return command.deadlineCommand();
             } else if (cmd.startsWith("event")) {
-                command.eventCommand();
+                return command.eventCommand();
             } else if (cmd.startsWith("delete")) {
-                command.deleteCommand();
+                return command.deleteCommand();
             } else if (cmd.startsWith("find")) {
-                command.findCommand();
+                return command.findCommand();
+            } else if (cmd.equals("bye")) {
+                return command.byeCommand();
             } else {
                 throw new UnknownCommandException();
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
     }
 }
