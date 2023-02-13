@@ -1,7 +1,7 @@
 package sam.task;
 
+import sam.Dialog;
 import sam.SamException;
-import sam.Ui;
 
 /**
  * A SamException thrown when a an argument from the user input
@@ -9,6 +9,6 @@ import sam.Ui;
  */
 public class SamMissingTaskValueException extends SamException {
     public SamMissingTaskValueException() {
-        super(Ui.Dialog.MISSING_TASK_VALUE.getDialog());
+        super(Dialog.MISSING_TASK_VALUE.getDialog());
     }
 }

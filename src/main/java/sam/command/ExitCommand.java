@@ -1,5 +1,6 @@
 package sam.command;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
@@ -14,6 +15,6 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respond(Ui.Dialog.BYE.getDialog());
+        ui.respond(Dialog.BYE.getDialog());
     }
 }

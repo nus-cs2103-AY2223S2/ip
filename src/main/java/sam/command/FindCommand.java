@@ -2,6 +2,7 @@ package sam.command;
 
 import java.util.List;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
@@ -18,9 +19,9 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<String> list = tasks.findTasks(args);
         if (list.isEmpty()) {
-            ui.respond(Ui.Dialog.FIND_EMPTY.getDialog());
+            ui.respond(Dialog.FIND_EMPTY.getDialog());
         } else {
-            list.add(0, String.format(Ui.Dialog.FIND.getDialog(), list.size()));
+            list.add(0, String.format(Dialog.FIND.getDialog(), list.size()));
             ui.respond(list.toArray(new String[0]));
         }
     }

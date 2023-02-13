@@ -2,6 +2,7 @@ package sam.command;
 
 import java.util.List;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
@@ -17,11 +18,11 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.count() == 0) {
-            ui.respond(Ui.Dialog.LIST_EMPTY.getDialog());
+            ui.respond(Dialog.LIST_EMPTY.getDialog());
         } else {
             List<String> list = tasks.getTasks();
             assert !list.isEmpty() : "list shouldn't be empty";
-            list.add(0, Ui.Dialog.LIST.getDialog());
+            list.add(0, Dialog.LIST.getDialog());
             ui.respond(list.toArray(new String[0]));
         }
     }

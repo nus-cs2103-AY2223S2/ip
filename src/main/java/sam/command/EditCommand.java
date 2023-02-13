@@ -3,6 +3,7 @@ package sam.command;
 import java.util.HashMap;
 import java.util.Map;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidDateException;
@@ -50,7 +51,7 @@ public class EditCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.respond(Ui.Dialog.EDIT.getDialog(),
+        ui.respond(Dialog.EDIT.getDialog(),
             task.toString());
         storage.save(tasks);
     }

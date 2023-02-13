@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidDateException;
@@ -81,9 +82,9 @@ public class AddCommand extends Command {
         assert task != null : "task shouldn't be null";
         tasks.addTask(task);
 
-        ui.respond(Ui.Dialog.ADD.getDialog(),
+        ui.respond(Dialog.ADD.getDialog(),
                 task.toString(),
-                String.format(Ui.Dialog.ADD_COUNT.getDialog(), tasks.count()));
+                String.format(Dialog.ADD_COUNT.getDialog(), tasks.count()));
 
         storage.save(tasks);
     }

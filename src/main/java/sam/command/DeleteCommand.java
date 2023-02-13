@@ -1,5 +1,6 @@
 package sam.command;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidIntException;
@@ -30,7 +31,7 @@ public class DeleteCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.respond(Ui.Dialog.DELETE.getDialog(),
+        ui.respond(Dialog.DELETE.getDialog(),
                 task.toString());
         storage.save(tasks);
     }

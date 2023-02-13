@@ -1,5 +1,6 @@
 package sam.command;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidIntException;
@@ -40,8 +41,8 @@ public class MarkCommand extends Command {
             throw new SamInvalidTaskException();
         }
         String message = isDone
-                ? Ui.Dialog.MARK.getDialog()
-                : Ui.Dialog.UNMARK.getDialog();
+                ? Dialog.MARK.getDialog()
+                : Dialog.UNMARK.getDialog();
         ui.respond(message,
                 task.toString());
         storage.save(tasks);

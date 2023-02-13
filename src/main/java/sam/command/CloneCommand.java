@@ -3,6 +3,7 @@ package sam.command;
 import java.util.HashMap;
 import java.util.Map;
 
+import sam.Dialog;
 import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidDateException;
@@ -49,7 +50,7 @@ public class CloneCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.respond(Ui.Dialog.CLONE.getDialog(),
+        ui.respond(Dialog.CLONE.getDialog(),
             task.toString());
         storage.save(tasks);
     }
