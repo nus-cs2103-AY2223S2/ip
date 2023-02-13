@@ -57,12 +57,12 @@ public class DukeApp extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
+        stage.setMinHeight(800.0);
         stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(500.0, 600.0);
+        mainLayout.setPrefSize(500.0, 800.0);
 
-        scrollPane.setPrefSize(495, 535);
+        scrollPane.setPrefSize(495, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -114,8 +114,8 @@ public class DukeApp extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -127,7 +127,6 @@ public class DukeApp extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -143,8 +142,10 @@ public class DukeApp extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response to user input.
+     *
+     * @param input User input
+     * @return String response of Duke
      */
     private String getResponse(String input) {
         assert input.length() != 0 : "input should not be empty";

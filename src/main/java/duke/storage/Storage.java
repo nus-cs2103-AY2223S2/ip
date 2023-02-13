@@ -43,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data stored in duke.txt file and returns a list of tasks.
+     *
+     * @return a list of task
+     */
     public List<Task> loadData() {
         List<Task> list = new ArrayList<>();
         try {
@@ -64,6 +69,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Sets the tags of the tasks loaded.
+     *
+     * @param task The task loaded
+     * @param line The string saved in duke.txt
+     * @param hashtagIndex The first index of the '#' character
+     */
     public void setTags(Task task, String line, int hashtagIndex) {
         if (hashtagIndex != -1) {
             String[] tags = line.substring(hashtagIndex).split(" ");
@@ -75,12 +87,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Marks the task.
+     *
+     * @param task The task to be marked
+     * @param line The string saved in duke.txt
+     */
     public void markTask(Task task, String line) {
         if (line.charAt(MARK_INDEX) == 'X') {
             task.mark();
         }
     }
 
+    /**
+     * Sets the priority of the task according to the number of asterisks in string.
+     *
+     * @param task The task to set priority
+     * @param numAsterisks The number of asterisks
+     */
     public void setPriority(Task task, int numAsterisks) {
         if (numAsterisks == 3) {
             task.setPriority("high");
@@ -93,6 +117,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates and returns a Task object.
+     *
+     * @param line The string saved in duke.txt
+     * @param type The type of task
+     * @param hashtagIndex The first index of the '#' character
+     * @return
+     */
     public Task createTask(String line, char type, int hashtagIndex) {
         if (type == 'T') {
             String desc;
@@ -109,6 +141,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates and returns a deadline object to be loaded.
+     *
+     * @param line The string savd in duke.txt
+     * @return The deadline object to be loaded
+     */
     public Task getDeadlineToLoad(String line) {
         int hashtagIndex = line.indexOf('#');
         String sub;
@@ -125,6 +163,12 @@ public class Storage {
         return new Deadline(ld, desc);
     }
 
+    /**
+     * Creates and returns an event object to be loaded.
+     *
+     * @param line The string savd in duke.txt
+     * @return The event object to be loaded
+     */
     public Task getEventToLoad(String line) {
         int hashtagIndex = line.indexOf('#');
         String sub;
@@ -143,6 +187,11 @@ public class Storage {
         return new Event(sld, eld, desc);
     }
 
+    /**
+     * Saves the current TaskList data to the duke.txt file.
+     *
+     * @param taskList The TaskList to be saved
+     */
     public void save(TaskList taskList) {
         String txt = "";
         for (int i = 0; i < taskList.getNumTasks(); i++) {

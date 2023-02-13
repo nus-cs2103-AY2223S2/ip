@@ -8,20 +8,12 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Parses user input.
- */
+
 public class Parser {
 
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    /**
-     * Parses a user input and returns a command to be executed.
-     *
-     * @param userInput The user input to be parsed.
-     * @return A command to be executed.
-     */
     public static Command parseCommand(String userInput) {
         assert userInput.length() != 0 : "string should not be empty";
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -189,6 +181,7 @@ public class Parser {
             throw new DukeException(e.getMessage());
         }
     }
+
     private static String parseTodo(String args) throws DukeException {
         try {
             String desc = parseDescription(args, "todo");
@@ -245,7 +238,6 @@ public class Parser {
                 desc = args.substring(1);
             }
             return desc;
-
         } catch (StringIndexOutOfBoundsException e) {
             if (task == "keyword") {
                 throw new DukeException("You need to provide a keyword.");
