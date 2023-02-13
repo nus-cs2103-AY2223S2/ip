@@ -10,7 +10,7 @@ public class Ui {
     }
 
     // prints out welcome greeting to user when Duke is run
-    public String showWelcome() {
+    public String greet() {
         return "    Hi! I'm Duke\n    How can I help?";
     }
 
@@ -35,7 +35,7 @@ public class Ui {
         System.out.println("    Bye. Hope to see you soon!");
     }*/
 
-    public static String handleCommand(String s, TaskList t) {
+    public static String evaluateCommand(String s, TaskList t) {
         assert t.getTasks().size() >= 0: "Number of tasks should be not be a  negative number";
         assert s.length() >= 0: "number of letters in command should not be a negative number";
         ArrayList<Task> tasks = t.getTasks();

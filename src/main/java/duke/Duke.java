@@ -83,7 +83,7 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Label(ui.showWelcome()), new ImageView(duke))
+                DialogBox.getDukeDialog(new Label(ui.greet()), new ImageView(duke))
         );
 
         //Part 3. Add functionality to handle user input.
@@ -115,7 +115,7 @@ public class Duke extends Application{
      */
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = Ui.handleCommand(input, tasks);
+        String response = Ui.evaluateCommand(input, tasks);
         Label userText = new Label(input + "  ");
         Label dukeText = new Label(response);
         dialogContainer.getChildren().addAll(
