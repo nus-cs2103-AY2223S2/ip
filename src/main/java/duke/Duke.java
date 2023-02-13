@@ -45,33 +45,25 @@ public class Duke extends Application {
         storage = new Storage(filePath);
     }
 
+    /**
+     * Duke initialisation method.
+     */
     public Duke() {}
 
+    /**
+     * Save list to data file at data/duke.txt
+     */
     public void saveFile() {
         Parser.saveFile("data/duke.txt");
     }
 
+    /**
+     * Returns the message that user first see when Duke starts up.
+     *
+     * @return String start up message.
+     */
     public String dukeStartup() {
         return ui.startUpMsg();
-    }
-
-    /**
-     * Run the loop of the chat bot.
-     */
-    public void run() {
-        boolean isRunning = true;
-        //listReader();
-        while (isRunning) {
-            try {
-                isRunning = Parser.talk();
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        //new Duke("data/duke.txt").run();
     }
 
 
@@ -175,6 +167,6 @@ public class Duke extends Application {
     public String getResponse(String input) {
         return input;
     }
-    
+
 
 }
