@@ -27,7 +27,7 @@ public class ToDo extends Task {
      */
     @Override
     public String printStatus() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return "[T][" + s + "] " + this.des + "\n";
     }
 
@@ -38,7 +38,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return this.taskNumber + " | T | " + s + " | " + getDes();
     }
 }

@@ -47,7 +47,7 @@ public class Storage {
                 String[] line = l.split(" \\| ");
                 Task t = TaskMap.get(line[1]);
                 t.setTaskNumber(Integer.parseInt(line[0]));
-                t.setStatus(line[2].equals("X") ? true : false);
+                t.setMark(line[2].equals("X") ? true : false);
                 t.configure(Arrays.copyOfRange(line, 3, line.length));
                 tl.loadTask(t);
             }

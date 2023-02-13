@@ -4,7 +4,7 @@ public class Task {
     /**
      * Represent a general Task.
      */
-    boolean status;
+    boolean isMark;
     String des;
     int taskNumber;
 
@@ -15,7 +15,7 @@ public class Task {
      * @param des
      */
     public Task(boolean status, String des) {
-        this.status = status;
+        this.isMark = status;
         this.des = des;
     }
 
@@ -66,21 +66,21 @@ public class Task {
      *
      * @return Boolean to represent status of task. True for done, false for not done.
      */
-    public boolean getStatus() {
-        return status;
+    public boolean getMark() {
+        return isMark;
     }
 
     /**
      * Method to define the status of the Task
      *
-     * @param status boolean. True for done, false for not done
+     * @param mark boolean. True for done, false for not done
      */
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setMark(boolean mark) {
+        this.isMark = mark;
     }
 
     public String printStatus() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return "[" + s + "] " + this.des + "\n";
     }
 
@@ -90,7 +90,7 @@ public class Task {
      * @return String representation of task
      */
     public String toString() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return this.taskNumber + " |   | " + s + this.des;
     }
 }

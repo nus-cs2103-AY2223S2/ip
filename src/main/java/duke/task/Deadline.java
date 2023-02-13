@@ -20,7 +20,7 @@ public class Deadline extends TimedTask {
      */
     public Deadline(boolean status, String des, String end) {
         super();
-        setStatus(status);
+        setMark(status);
         setDes(des);
         setEnd(end);
     }
@@ -30,7 +30,7 @@ public class Deadline extends TimedTask {
      */
     @Override
     public String printStatus() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return "[D][" + s + "] " + getDes() + " (by: " + toStringConsoleEnd() + ")\n";
     }
 
@@ -41,7 +41,7 @@ public class Deadline extends TimedTask {
      */
     @Override
     public String toString() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return this.taskNumber + " | D | " + s + " | " + getDes() + " | " + super.toStringFileEnd();
     }
 }

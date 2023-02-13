@@ -10,6 +10,13 @@ import javafx.scene.layout.VBox;
 
 
 public class DeadlineButton extends DukeButton {
+    /**
+     * Constructor to create an instance of a DeadLine button
+     * @param s Text label of the button
+     * @param i Pane that button belongs to
+     * @param o Pane that will output results of this button
+     * @param f Functions defined for a DeadLine button
+     */
     public DeadlineButton(String s, Pane i, Pane o, Functions f) {
         super(s, i, o, f);
         this.button.setOnMouseClicked((event) -> {
@@ -18,6 +25,10 @@ public class DeadlineButton extends DukeButton {
         });
     }
 
+    /**
+     * Returns a pane holding the form that appears after the deadline button is pressed
+     * @return a VBox
+     */
     @Override
     public VBox inputForm() {
         VBox vbox = new VBox();

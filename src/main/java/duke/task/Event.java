@@ -27,7 +27,7 @@ public class Event extends TimedTask {
      */
     public Event(boolean status, String des, String start, String end) {
         super();
-        setStatus(status);
+        setMark(status);
         setDes(des);
         setStart(start);
         setEnd(end);
@@ -86,7 +86,7 @@ public class Event extends TimedTask {
      */
     @Override
     public String printStatus() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return "[E][" + s + "] " + getDes() + " (from: " + toStringConsoleStart() + " to: " + toStringConsoleEnd() + ")\n";
     }
 
@@ -97,7 +97,7 @@ public class Event extends TimedTask {
      */
     @Override
     public String toString() {
-        String s = (status) ? "X" : " ";
+        String s = (isMark) ? "X" : " ";
         return this.taskNumber + " | E | " + s + " | " + getDes() + " | " + toStringFileStart() + " to " + toStringFileEnd();
     }
 }

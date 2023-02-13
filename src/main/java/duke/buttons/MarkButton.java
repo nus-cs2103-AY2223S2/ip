@@ -9,6 +9,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class MarkButton extends DukeButton {
+    /**
+     * Constructor to create an instance of a Mark button
+     * @param s Text label of the button
+     * @param i Pane that button belongs to
+     * @param o Pane that will output results of this button
+     * @param f Functions defined for a Mark button
+     */
     public MarkButton(String s, Pane i, Pane o, Functions f) {
         super(s, i, o, f);
         this.button.setOnMouseClicked((event) -> {
@@ -17,6 +24,10 @@ public class MarkButton extends DukeButton {
         });
     }
 
+    /**
+     * Returns a pane holding the form that appears after the mark button is pressed
+     * @return a VBox
+     */
     @Override
     public VBox inputForm() {
         VBox vbox = new VBox();

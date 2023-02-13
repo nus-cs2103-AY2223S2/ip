@@ -15,7 +15,7 @@ public class MarkTask {
             return;
         }
         Task t = fn.getTl().getTask(index);
-        t.setStatus(flag);
+        t.setMark(flag);
         String h = flag ? "Nice! I've marked this task as done:\n" : "OK, I've marked this task as not done yet:\n";
         fn.getOutputLayout().getChildren().add(fn.getDialogLabel(h + t.printStatus()));
         fn.getSt().save(fn.getTl());

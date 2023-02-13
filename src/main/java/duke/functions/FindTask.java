@@ -9,25 +9,25 @@ public class FindTask {
      * @param query Keyword to search
      */
     static public void find(Functions fn, String query) {
-        boolean flag = false;
-        boolean printed = false;
+        boolean isFound = false;
+        boolean isPrinted = false;
         int i = 1;
         String h = "";
         String task = "";
 
         for (Task t : fn.getTl().iterable()) {
             if (t.getDes().contains(query)) {
-                flag = true;
-                if (flag && !printed) {
+                isFound = true;
+                if (isFound && !isPrinted) {
                     h = "Here are the matching tasks in your list:\n";
-                    printed = true;
+                    isPrinted = true;
                 }
                 task += i + ".";
                 task += t.printStatus();
                 i++;
             }
         }
-        if (!flag) {
+        if (!isFound) {
             String s = "No matching tasks are found in your list\n";
             fn.getOutputLayout().getChildren().add(fn.getDialogLabel(s));
         } else {

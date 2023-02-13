@@ -8,7 +8,7 @@ public class TaskTest {
     @Test
     public void getStatusTest() {
         Task ts = new Task(true, "test");
-        assertEquals(false, ts.getStatus());
+        assertEquals(false, ts.getMark());
     }
 
 

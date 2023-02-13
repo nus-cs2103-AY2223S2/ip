@@ -9,6 +9,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class FindButton extends DukeButton {
+    /**
+     * Constructor to create an instance of a Find button
+     * @param s Text label of the button
+     * @param i Pane that button belongs to
+     * @param o Pane that will output results of this button
+     * @param f Functions defined for a Find button
+     */
     public FindButton(String s, Pane i, Pane o, Functions f) {
         super(s, i, o, f);
         this.button.setOnMouseClicked((event) -> {
@@ -17,6 +24,10 @@ public class FindButton extends DukeButton {
         });
     }
 
+    /**
+     * Returns a pane holding the form that appears after the find button is pressed
+     * @return a VBox
+     */
     @Override
     public VBox inputForm() {
         VBox vbox = new VBox();
