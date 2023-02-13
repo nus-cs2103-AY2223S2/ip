@@ -41,6 +41,15 @@ public class Storage {
     }
 
     /**
+     * splits string in format regrex " / '
+     * @param string the string to split
+     * @return String[] the string array after split
+     */
+    public String[] splitStorage(String string) {
+        return string.split(" / ");
+    }
+
+    /**
      * The method readnWriteData for reading data from input file path and writing it/ storing it into ArraylistOfTasks
      * @return ArrayList<Task>
      */
@@ -52,32 +61,29 @@ public class Storage {
             Scanner sc = new Scanner(data);
             while (sc.hasNextLine()) {
                 String txt = sc.nextLine();
-                String[] segments = txt.split(" / ");
-                String task = segments[0];
-                String indicator = segments[1];
-                String description = segments[2];
+                String[] segments = splitStorage(txt);
                 Task addedtask;
-                if (task.equals("T")) {
-                    addedtask = new ToDo(description);
+                if (segments[0].equals("T")) {
+                    addedtask = new ToDo(segments[2]);
                     listOfTasks.add(addedtask);
-                    if (indicator.equals("1")) {
+                    if (segments[1].equals("1")) {
                         addedtask.markDone();
                     }
                 }
-                else if (task.equals("D")){
-                    LocalDateTime Doneby = LocalDateTime.parse(segments[3],timeFormat);
-                    addedtask = new Deadline(description, Doneby);
+                else if (segments[0].equals("D")){
+                    LocalDateTime doneBy = LocalDateTime.parse(segments[3],timeFormat);
+                    addedtask = new Deadline(segments[2], doneBy);
                     listOfTasks.add(addedtask);
-                    if (indicator.equals("1")) {
+                    if (segments[1].equals("1")) {
                         addedtask.markDone();
                     }
                 }
-                else if (task.equals("E")){
+                else if (segments[0].equals("E")){
                     LocalDateTime from = LocalDateTime.parse(segments[3],timeFormat);
                     LocalTime to = LocalTime.parse(segments[4],HrFormat);
-                    addedtask = new Events(description, from, to);
+                    addedtask = new Events(segments[2], from, to);
                     listOfTasks.add(addedtask);
-                    if (indicator.equals("1")) {
+                    if (segments[1].equals("1")) {
                         addedtask.markDone();
                     }
                 }

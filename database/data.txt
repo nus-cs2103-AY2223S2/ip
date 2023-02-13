@@ -1,4 +1,4 @@
 T / 0 / eat
 D / 1 / return book / 2010-01-01 1800
 T / 0 / 1
-T / 0 / bye
+T / 0 / 2

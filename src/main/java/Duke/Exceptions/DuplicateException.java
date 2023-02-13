@@ -5,14 +5,14 @@ import Duke.Ui;
  * Contains a duke exception object when duplicate task is added
  */
 
-public class duplicateException extends DukeException {
+public class DuplicateException extends DukeException {
 
     /**
      * Constructor for the emptyDescription Exception
      *
      */
 
-    public duplicateException() {
+    public DuplicateException() {
     }
     /**
      * Obtain the string representation of the exception.

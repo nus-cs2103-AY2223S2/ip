@@ -87,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * The method of DukeExeptionMsg
+     * The method of DukeExceptionMsg
      * @param e the exception catched
      */
 

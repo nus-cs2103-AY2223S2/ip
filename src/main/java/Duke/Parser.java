@@ -1,9 +1,9 @@
 package Duke;
 import Duke.Exceptions.DukeException;
-import Duke.Exceptions.emptyDescriptionException;
-import Duke.Exceptions.duplicateException;
+import Duke.Exceptions.EmptyDescriptionException;
+import Duke.Exceptions.DuplicateException;
 import Duke.Tasks.*;
-import Duke.Exceptions.unknownCommandException;
+import Duke.Exceptions.UnknownCommandException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.lang.String;
@@ -19,7 +19,7 @@ public class Parser {
     private final static DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private final static DateTimeFormatter  HrFormat = DateTimeFormatter.ofPattern("HHmm");
 
-    private static boolean flag = true;
+    private static boolean isRunning = true;
 
     /**
      * The method for listOut
@@ -39,7 +39,7 @@ public class Parser {
      * @param description the description of task to do
      * @param listOfTasks the TasklistOfTasks where tasks are stored in
      */
-    private static String addTodo(String description, TaskList listOfTasks) throws duplicateException {
+    private static String addTodo(String description, TaskList listOfTasks) throws DuplicateException {
         int lenBefore = listOfTasks.size();
         ToDo tdItem = new ToDo(description);
         listOfTasks.addTask(tdItem);
@@ -56,7 +56,7 @@ public class Parser {
      * @param start the starting time of the event
      * @param end the ending time of the event
      */
-    private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) throws duplicateException {
+    private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) throws DuplicateException {
         Events evItem = new Events(description, start, end);
         int lenBefore = listOfTasks.size();
         listOfTasks.addTask(evItem);
@@ -74,7 +74,7 @@ public class Parser {
      * @param doneBy the time of deadline task
      */
 
-    private static String addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) throws duplicateException {
+    private static String addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) throws DuplicateException {
         int lenBefore = listOfTasks.size();
         Deadline dlItem = new Deadline(description, doneBy);
         listOfTasks.addTask(dlItem);
@@ -123,7 +123,7 @@ public class Parser {
 
     }
     public static boolean getFlag() {
-        return flag;
+        return isRunning;
     }
 
 
@@ -143,12 +143,11 @@ public class Parser {
 
                  } else if (instct.split(" ")[0].equals("bye")) {
                      System.out.println(Ui.Underline());
-                     flag = false;
+                     isRunning = false;
                      return Ui.sayBye();
                  }
-                 throw new unknownCommandException();
-             }
-            else if ((instct.split(" ").length) > 1 ) {
+                 throw new UnknownCommandException();
+             } else if ((instct.split(" ").length) > 1 ) {
                 if (instct.split(" ")[0].equals("mark")) {
                     System.out.println(Ui.Underline());
                     int numbering = Integer.parseInt(instct.split(" ")[1]) ;
@@ -176,7 +175,6 @@ public class Parser {
                     String temp = instct.split(" /by ")[1];
                     String temp2 = instct.split(" /by ")[0];
                     String description = temp2.split(" ", 2)[1];
-
                     LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
                     return addDeadline(description, listOfTasks, doneBy);
 
@@ -204,14 +202,12 @@ public class Parser {
 
 
                 } else {
-                    throw new unknownCommandException();
+                    throw new UnknownCommandException();
                 }
+            } else {
+                throw new EmptyDescriptionException(instct.split(" ")[0]);
             }
-            else {
-                throw new emptyDescriptionException(instct.split(" ")[0]);
-            }
-        }
-        catch (DukeException | DateTimeParseException ex) {
+        } catch (DukeException | DateTimeParseException ex) {
             return String.format("%s\n", ex);
         }
 

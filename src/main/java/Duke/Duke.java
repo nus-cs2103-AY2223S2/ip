@@ -31,7 +31,8 @@ public class Duke  {
     }
 
     /**
-     * The method of run
+     * Executes the program by greeting user and response appropriately depending
+     * on the users input
      */
     public void run() {
         this.ui.greet();
@@ -45,15 +46,14 @@ public class Duke  {
         try {
             response = Parser.parse(input, this.list);
             storage.saveData(list);
-       }
-       catch (IOException e){
+       } catch (IOException e) {
            e.printStackTrace();
        }
        return response;
     }
 
     /**
-     * The main method
+     * Creates duke object and invokes run() method on it
      * @param args
      */
     public static void main(String[] args){

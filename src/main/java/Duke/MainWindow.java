@@ -74,6 +74,10 @@ public class MainWindow extends AnchorPane {
         );
 
         userInput.clear();
+        // @@author: nate_weldon-reused
+        // This code is adapted from:
+        // https://stackoverflow.com/questions/15747277/how-to-make-java-program-exit-after-a-couple-of-seconds
+        // with minor modification
         if (input.equals("bye")) {
             TimerTask task = new TimerTask() {
                 public void run() {

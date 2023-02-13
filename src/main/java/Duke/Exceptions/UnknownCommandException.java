@@ -5,7 +5,7 @@ import Duke.Ui;
 /**
  * Contains a duke exception object when unknown command is imput by user
  */
-public class unknownCommandException extends DukeException {
+public class UnknownCommandException extends DukeException {
 
     /**
      * Obtain the string representation of the exception.
