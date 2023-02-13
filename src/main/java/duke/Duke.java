@@ -46,6 +46,7 @@ public class Duke extends Application {
     }
 
     public String getResponse(String input) {
+        assert input.length() != 0 : "input should not be empty";
         String output = parser.parse(input);
         return output;
     }
