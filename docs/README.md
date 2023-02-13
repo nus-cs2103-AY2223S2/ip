@@ -1,29 +1,78 @@
 # User Guide
+Duke is a **desktop app for managing user tasks, optimized for use via a Command Line Interface** while still having the benefits of a Graphical User Interface.
+
+![Sample Gui Image](/docs/Ui.png)
 
 ## Features 
 
-### Feature-ABC
+### `list` - Lists all tasks
 
-Description of the feature.
+Show a list of all tasks.
 
-### Feature-XYZ
+Format: `list`  
+<br>
 
-Description of the feature.
+### `todo` - Add a todo
 
-## Usage
+Adds a todo task to your list of tasks.
 
-### `Keyword` - Describe action
+Format: `todo DESCRIPTION`
 
-Describe the action and its outcome.
+Example of usage:
+- `todo Read Chainsaw Man`
+- `todo Wash the dishes`
+<br>
 
-Example of usage: 
+### `deadline` - Add a deadline
 
-`keyword (optional arguments)`
+Adds a deadline task to your list of tasks. A deadline is a task with a deadline date.
 
-Expected outcome:
+Format: `deadline DESCRIPTION /by DEADLINE_DATE_AND_TIME`  
+DEADLINE_DATE_AND_TIME should be in the form DD-MM-YYYY HH:mm. Time is optional.
 
-Description of the outcome.
+Example of usage:
+- `deadline Finish homework /by 13-08-2000`
+- `deadline Submit assignment /by 01-05-2000 23:59`
+<br>
 
-```
-expected output
-```
+### `event` - Add an event
+
+Adds an event task to your list of tasks. An event is a task with a start and end date.
+
+Format: `event DESCRIPTION /from START_DATE_AND_TIME /to END_DATE_DATE_AND_TIME`  
+Date and time should be in the form DD-MM-YYYY HH:mm. Time is optional.
+
+Example of usage:
+- `event Birthday Celeberation /from 01-05-2020 /to 02-05-2020`
+- `event BTS Concert /from 13-08-2023 16:00 /to 13-08-2023 18:00`
+<br>
+
+### `edit` - Edits a task
+
+Edits a single field of a currently existing task
+
+Format: `event TASK_NUMBER FIELD_TO_EDIT NEW_VALUE`  
+
+FIELD_TO_EDIT can take on these values:
+- `/desc` corresponds to `DESCRIPTION` found in all tasks. 
+- `/by` corresponds to `DEADLINE_DATE_AND_TIME` found in deadline tasks. 
+- `/from` corresponds to `START_DATE_AND_TIME` found in event tasks. 
+- `/to/` corresponds to `END_DATE_AND_TIME` found in event tasks. 
+
+Only tasks that contain the relevant fields can have those fields edited.
+
+Example of usage:
+- `edit 1 /by 13-08-2000` - Task 1 is a deadline task whose deadline date is set to 13 Aug 2000.
+- `edit 2 /desc New Task Description` - Task 2 is any task whose description is set to "New Task Description".
+<br>
+
+### `find` - Finds a subset of tasks.
+
+Filters your list of tasks and returns those that contain the word: `KEYWORD`. 
+
+Format: `find KEYWORD`  
+
+Example of usage:
+![Example for find](/docs/findExample.png)
+
+<br>
