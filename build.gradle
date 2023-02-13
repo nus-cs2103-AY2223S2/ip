@@ -56,7 +56,7 @@ test {
 }
 
 application {
-    mainClassName = "Saturday"
+    mainClassName = "saturday.Launcher"
 }
 
 shadowJar {
@@ -64,6 +64,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }
