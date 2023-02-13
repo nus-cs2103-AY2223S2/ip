@@ -36,8 +36,9 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "E" + " | " + super.toString() + " (from: " + this.from
+        String eventString = "E" + " | " + super.toString() + " (from: " + this.from
                 + "to: " + this.to + ")";
+        return eventString;
     }
 
     /**
@@ -49,6 +50,12 @@ public class Events extends Task {
     private LocalDateTime parseDateTime(String period) {
         String[] dateAndTime = period.split(" ");
         String[] dayMonthYear = dateAndTime[0].split("/");
+
+        //Checks if 2 strings: date and time were given
+        assert dateAndTime.length == 2;
+        //Checks if 3 strings: day, month and year were given
+        assert dayMonthYear.length == 3;
+
         int hour = Integer.parseInt(dateAndTime[1]) / 100;
         int minute = Integer.parseInt(dateAndTime[1]) % 100;
         int[] dateNumbers = new int[3];
