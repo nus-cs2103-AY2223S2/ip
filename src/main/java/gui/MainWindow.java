@@ -9,8 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -35,13 +33,31 @@ public class MainWindow extends AnchorPane {
 
     private Stage stage;
 
+    private static final String buttonDefaultStyle = "-fx-padding: 5 20 5 20;"
+            + "-fx-background-color: transparent;"
+            + "-fx-border-color: black;"
+            + "-fx-border-radius: 10";
+
+    private static final String buttonHoverStyle = "-fx-padding: 5 20 5 20;"
+            + "-fx-background-color: #7B8FA1;"
+            + "-fx-background-radius: 10;"
+            + "-fx-border-color: black;"
+            + "-fx-border-radius: 10";
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        initializeButton();
+    }
+
+    /**
+     * Set an image as the background for the send button. Also add borders and background colors.
+     */
+    public void initializeButton() {
         Image buttonImage = new Image(this.getClass().getResourceAsStream("/images/DaButton.png"),
                 16, 16, false, true);
         sendButton.setGraphic(new ImageView(buttonImage));
-        sendButton.setStyle("-fx-background-color: #EDDBC7; -fx-border-color: black");
+        sendButton.setStyle(buttonDefaultStyle);
     }
 
     public void sendGreeting() {
@@ -75,6 +91,16 @@ public class MainWindow extends AnchorPane {
             delay.setOnFinished( event -> stage.close() );
             delay.play();
         }
+    }
+
+    @FXML
+    private void darkenButton() {
+        sendButton.setStyle(buttonHoverStyle);
+    }
+
+    @FXML
+    private void lightenButton() {
+        sendButton.setStyle(buttonDefaultStyle);
     }
 
     public void setStage(Stage stage) {
