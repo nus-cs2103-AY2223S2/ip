@@ -22,6 +22,15 @@ public class CommandTask extends Command {
     }
 
     /**
+     * Alternate constructor for undo commands.
+     * @param task task to be added.
+     */
+    public CommandTask(Task task) {
+        super("");
+        this.task = task;
+    }
+
+    /**
      * Adds task to task list.
      * @param taskList contains the task list.
      * @param ui deals with interactions with the user.
@@ -35,5 +44,16 @@ public class CommandTask extends Command {
 
         storage.writeArray(taskList);
         return addedString + lengthString;
+    }
+
+    /**
+     * Returns a delete command to delete a command.
+     * @param taskList contains the task list.
+     * @return task command with the deleted task.
+     */
+    @Override
+    public Command inverseCommand(TaskList taskList) {
+        int index = taskList.getLength() - 1;
+        return new CommandDelete(index);
     }
 }

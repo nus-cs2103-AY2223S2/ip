@@ -40,8 +40,10 @@ public class Duke {
 
     public String getResponse(String fullCommand) {
         try {
-            Command c = Parser.parse(fullCommand);
-            return c.execute(tasks, ui, storage);
+            Command command = Parser.parse(fullCommand);
+            String output = command.execute(tasks, ui, storage);
+            tasks.setLastCommand(command.inverseCommand(tasks));
+            return output;
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }

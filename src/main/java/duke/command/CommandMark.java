@@ -39,4 +39,14 @@ public class CommandMark extends Command {
         storage.writeArray(taskList);
         return markedString + taskString;
     }
+
+    /**
+     * Returns an inverse command to mark/unmark a task.
+     * @param taskList contains the task list.
+     * @return inverse task command.
+     */
+    @Override
+    public Command inverseCommand(TaskList taskList) {
+        return new CommandMark(this.getFullCommand(), index, !mark);
+    }
 }
