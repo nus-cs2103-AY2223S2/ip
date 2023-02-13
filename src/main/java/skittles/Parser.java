@@ -39,6 +39,8 @@ public class Parser {
                 return new UndoneInstruction(skittlesList);
             case "find":
                 return new FindInstruction(skittlesList);
+            case "sort":
+                return new SortInstruction(skittlesList);
             case "deadline":
             case "event":
             case "todo":

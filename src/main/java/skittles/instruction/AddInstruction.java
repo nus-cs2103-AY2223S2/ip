@@ -6,6 +6,7 @@ import skittles.Event;
 import skittles.ListOfStuff;
 import skittles.ToDo;
 import skittles.Duke;
+import skittles.Task;
 
 public class AddInstruction extends Instruction {
     private final ListOfStuff skittlesList;

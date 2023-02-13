@@ -2,6 +2,10 @@ package skittles;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import skittles.Task;
 
 public class ListOfStuff {
 
@@ -17,6 +21,7 @@ public class ListOfStuff {
         this.data = data;
         this.taskHashMap = new HashMap<>();
     }
+
 
     public static void add(Task task) {
         skittlesList.add(task);
