@@ -106,7 +106,7 @@ public class TaskListTest {
         tasks.addTask(new Event("assist with work", LocalDateTime.parse("2020-05-05T18:00:00"),
                 LocalDateTime.parse("2020-05-05T20:00:00")));
         String output = tasks.find("work");
-        String expected = "HERE ARE THE MATCHING RESULTS:\n"
+        String expected = "Here are the matching results:\n"
                 + "  1.[T][ ] work\n"
                 + "  2.[E][ ] assist with work (from: MAY 5 2020 1800 to: MAY 5 2020 2000)\n";
         assertEquals(output, expected);
