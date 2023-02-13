@@ -31,6 +31,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I am Duke! How can I help you today?", dukeImage));
+        assert this.scrollPane != null : "[scrollPane] FXML was improperly configured.";
+        assert this.dialogContainer != null : "[dialogContainer] FXML was improperly configured.";
+        assert this.userInput != null : "[userInput] FXML was improperly configured.";
+        assert this.sendButton != null : "[sendButton] FXML was improperly configured.";
     }
 
     public void setDuke(Duke d) {
