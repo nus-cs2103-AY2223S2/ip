@@ -166,13 +166,13 @@ public class Duke {
     }
 
     private String generateAddTaskMessage(Task task) {
-        String message = "Got it. I've added this task:\n " + task.toString();
+        String message = "Got it. I've added this task:\n" + task.toString();
         message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
         return message;
     }
 
     private String generateDeleteTaskMessage(ArrayList<Task> selectedTasks) {
-        String message = "Noted. I've removed these tasks:\n ";
+        String message = "Noted. I've removed these tasks:\n";
         for (int i = 0; i < selectedTasks.size(); i++) {
             Task oneTask = selectedTasks.get(i);
             message += oneTask.toString() + "\n";
@@ -182,8 +182,8 @@ public class Duke {
     }
 
     private String generateMarkMessage(ArrayList<Task> selectedTasks, boolean isMark) {
-        String unmarkMsg = "OK! I've marked these tasks as not done yet:\n ";
-        String markMsg = "Nice! I've marked this task as done:\n ";
+        String unmarkMsg = "OK! I've marked these tasks as not done yet:\n";
+        String markMsg = "Nice! I've marked these tasks as done:\n";
         String message = isMark ? markMsg : unmarkMsg;
         for (int i = 0; i < selectedTasks.size(); i++) {
             Task oneTask = selectedTasks.get(i);
