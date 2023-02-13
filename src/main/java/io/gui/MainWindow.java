@@ -55,8 +55,8 @@ public class MainWindow extends AnchorPane implements Ui {
     private void handleUserInput() {
         // Checks that gui properties have been successfully initialized.
         assert (gui != null);
-        assert (gui.taskList != null);
-        assert (gui.storage != null);
+        assert (gui.getTaskList() != null);
+        assert (gui.getStorage() != null);
 
         String userText = userInput.getText();
         if (userText.isEmpty()) {
