@@ -1,7 +1,4 @@
 package duke.task;
-
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,9 +6,9 @@ import java.time.format.DateTimeFormatter;
  * Class for tasks with specific timeline, from a date to another date
  */
 public class Event extends Task {
-    String taskDescription;
-    LocalDate startDate;
-    LocalDate endDate;
+    private String taskDescription;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     /**
      * Constructor for Event task

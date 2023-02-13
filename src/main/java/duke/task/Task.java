@@ -4,8 +4,8 @@ package duke.task;
  * Parent Task class which contains details of a task
  */
 public class Task {
-    public String taskString;
-    public boolean isCompleted;
+    private String taskString;
+    private boolean isCompleted;
 
     /**
      * Constructor of Task
@@ -21,7 +21,7 @@ public class Task {
      * @return X means completed and space means not completed
      */
     public String currentTaskStatus() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             return "[X]";
         } else {
             return "[ ]";

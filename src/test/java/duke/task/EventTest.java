@@ -1,14 +1,15 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 public class EventTest {
-    Event eventTask;
+    private Event eventTask;
 
     @BeforeEach
     public void setUp() {
@@ -23,6 +24,6 @@ public class EventTest {
 
     @Test
     public void getTimelineTest() {
-        assertEquals( "Oct 10 2020 to Oct 10 2021", eventTask.getTimeline());
+        assertEquals("Oct 10 2020 to Oct 10 2021", eventTask.getTimeline());
     }
 }

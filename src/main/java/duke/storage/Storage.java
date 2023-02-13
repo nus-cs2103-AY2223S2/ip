@@ -1,11 +1,20 @@
 package duke.storage;
 
-import duke.task.*;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Storage class that manage loading of tasks from file and saving of tasks in file
@@ -47,17 +56,20 @@ public class Storage {
                 Task task = null;
 
                 switch (taskType) {
-                    case "T":
-                        task = new ToDo(taskDes);
-                        break;
+                case "T":
+                    task = new ToDo(taskDes);
+                    break;
 
-                    case "D":
-                        task = new Deadline(taskDes, LocalDate.parse(str[3]));
-                        break;
+                case "D":
+                    task = new Deadline(taskDes, LocalDate.parse(str[3]));
+                    break;
 
-                    case "E":
-                        task = new Event(taskDes, LocalDate.parse(str[3]), LocalDate.parse(str[4]));
-                        break;
+                case "E":
+                    task = new Event(taskDes, LocalDate.parse(str[3]), LocalDate.parse(str[4]));
+                    break;
+
+                default:
+                    break;
                 }
                 if (isCompleted.equals("[X]")) {
                     task.markTask();

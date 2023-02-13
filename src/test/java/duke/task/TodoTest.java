@@ -1,13 +1,13 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
 
-    ToDo toDoTask;
+    private ToDo toDoTask;
 
     @BeforeEach
     public void setUp() {
@@ -22,14 +22,14 @@ public class TodoTest {
     @Test
     public void markTaskTest() {
         toDoTask.markTask();
-        assertEquals("[T][X] return book",toDoTask.toString());
+        assertEquals("[T][X] return book", toDoTask.toString());
     }
 
     @Test
     public void unmarkTaskTest() {
         toDoTask.markTask();
         toDoTask.unmarkTask();
-        assertEquals("[T][ ] return book",toDoTask.toString());
+        assertEquals("[T][ ] return book", toDoTask.toString());
     }
 
 }

@@ -1,16 +1,15 @@
 package duke.task;
+import java.util.ArrayList;
+import java.util.List;
 
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongCommandException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TaskList to contain all the tasks in a list
  */
 public class TaskList {
-    public List<Task> taskList;
+    private List<Task> taskList;
 
     /**
      * Constructor for TaskList
@@ -40,7 +39,7 @@ public class TaskList {
      */
     public String markTask(String taskStr) {
         int taskNum = Integer.parseInt(taskStr) - 1;
-        Task originalTask =  taskList.get(taskNum);
+        Task originalTask = taskList.get(taskNum);
         originalTask.markTask();
         return "Nice! I've marked this task as done: \n  " + originalTask;
     }
@@ -51,7 +50,7 @@ public class TaskList {
      */
     public String unmarkTask(String taskStr) {
         int taskNum = Integer.parseInt(taskStr) - 1;
-        Task originalTask =  taskList.get(taskNum);
+        Task originalTask = taskList.get(taskNum);
         originalTask.unmarkTask();
         return "Ok, I've marked this task as not done yet: \n  " + originalTask;
     }
@@ -69,8 +68,8 @@ public class TaskList {
      * @param task Task that has been added
      */
     public String printAddComment(Task task) {
-        return "Got it. I've added this task: \n  " + task +
-                "\nNow you have " + taskList.size() + " tasks in the list.";
+        return "Got it. I've added this task: \n  " + task
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
@@ -86,6 +85,11 @@ public class TaskList {
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
+    /**
+     * Find the list of tasks containing the targetString
+     * @param targetString String to be found
+     * @return List of tasks containing the targetString
+     */
     public String find(String targetString) {
         List<Task> targetList = new ArrayList<>();
         for (Task t : taskList) {

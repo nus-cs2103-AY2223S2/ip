@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    String taskDescription;
-    LocalDate deadLine;
+    private String taskDescription;
+    private LocalDate deadLine;
 
     /**
      * Constructor of Deadline task
@@ -18,7 +18,7 @@ public class Deadline extends Task {
      */
 
     public Deadline(String taskString, LocalDate deadline) {
-        super (taskString.substring(9, taskString.indexOf("/") - 1));
+        super(taskString.substring(9, taskString.indexOf("/") - 1));
 
         taskDescription = taskString.substring(9, taskString.indexOf("/") - 1);
         deadLine = deadline;
@@ -39,6 +39,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " ( by: " + this.getDeadline() + " )" ;
+        return "[D]" + super.toString() + " ( by: " + this.getDeadline() + " )";
     }
 }

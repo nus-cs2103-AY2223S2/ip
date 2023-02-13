@@ -1,14 +1,15 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 public class DeadlineTest {
-    Deadline deadlineTask;
+    private Deadline deadlineTask;
 
     @BeforeEach
     public void setUp() {
@@ -23,19 +24,19 @@ public class DeadlineTest {
 
     @Test
     public void getDeadlineTest() {
-        assertEquals( "Oct 10 2020", deadlineTask.getDeadline());
+        assertEquals("Oct 10 2020", deadlineTask.getDeadline());
     }
 
     @Test
     public void markTaskTest() {
         deadlineTask.markTask();
-        assertEquals("[D][X] return book ( by: Oct 10 2020 )",deadlineTask.toString());
+        assertEquals("[D][X] return book ( by: Oct 10 2020 )", deadlineTask.toString());
     }
 
     @Test
     public void unmarkTaskTest() {
         deadlineTask.markTask();
         deadlineTask.unmarkTask();
-        assertEquals("[D][ ] return book ( by: Oct 10 2020 )",deadlineTask.toString());
+        assertEquals("[D][ ] return book ( by: Oct 10 2020 )", deadlineTask.toString());
     }
 }

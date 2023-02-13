@@ -1,13 +1,11 @@
 package duke.task;
 
-import duke.task.Task;
-
 /**
  * Class for task to be done
  */
 public class ToDo extends Task {
 
-    String taskDescription;
+    private String taskDescription;
 
     /**
      * Constructor for To-Do Task
