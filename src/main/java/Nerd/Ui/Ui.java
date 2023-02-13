@@ -87,6 +87,9 @@ public class Ui {
         return String.format("Sure!, I've added the following todo task:\n %s\nNow you have %d tasks in the list.",
                 todo, size);
     }
+    public String printSuccessfulConnection() {
+        return "Successfully connected to the database!";
+    }
 
     public String printSearchDate(String date, TaskList list) {
         String output = "Tasks occurring on " + date + ":\n";

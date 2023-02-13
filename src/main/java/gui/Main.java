@@ -20,15 +20,13 @@ public class Main extends Application{
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(nerd, ui);
+            fxmlLoader.<MainWindow>getController().setNerd(nerd, ui);
             fxmlLoader.<MainWindow>getController().setStage(stage);
+            fxmlLoader.<MainWindow>getController().getConnectionMessage();
             fxmlLoader.<MainWindow>getController().setDefaultMessage();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public String getResponse(String input) {
-        return "Nerd heard: " + input;
     }
 }

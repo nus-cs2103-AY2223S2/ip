@@ -32,22 +32,28 @@ public class MainWindow extends AnchorPane {
     private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/amoonguss.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/nerd.png"));
+    private Image nerdImage = new Image(this.getClass().getResourceAsStream("/images/nerd.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Nerd d, Ui ui) {
+    public void setNerd(Nerd d, Ui ui) {
         nerd = d;
         this.ui = ui;
     }
 
+    public void getConnectionMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.printSuccessfulConnection(), nerdImage)
+        );
+    }
+
     public void setDefaultMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.showWelcome(), dukeImage),
-                DialogBox.getDukeDialog(ui.showCommandList(), dukeImage)
+                DialogBox.getDukeDialog(ui.showWelcome(), nerdImage),
+                DialogBox.getDukeDialog(ui.showCommandList(), nerdImage)
         );
     }
 
@@ -61,7 +67,7 @@ public class MainWindow extends AnchorPane {
         String response = nerd.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, nerdImage)
         );
         userInput.clear();
 
