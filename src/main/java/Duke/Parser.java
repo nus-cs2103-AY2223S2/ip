@@ -40,6 +40,7 @@ public class Parser {
      * @param listOfTasks the TasklistOfTasks where tasks are stored in
      */
     private static String addTodo(String description, TaskList listOfTasks) throws DuplicateException {
+        System.out.println(Ui.Underline());
         int lenBefore = listOfTasks.size();
         ToDo tdItem = new ToDo(description);
         listOfTasks.addTask(tdItem);
@@ -57,6 +58,7 @@ public class Parser {
      * @param end the ending time of the event
      */
     private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) throws DuplicateException {
+        System.out.println(Ui.Underline());
         Events evItem = new Events(description, start, end);
         int lenBefore = listOfTasks.size();
         listOfTasks.addTask(evItem);
@@ -64,7 +66,6 @@ public class Parser {
         return String.format("\tGot it. I have added this task:\n "
                              + "\t%s\n"
                              + "\tNow you have %d tasks in the listOfTasks.\n" + Ui.Underline(), evItem.toString(), listOfTasks.size());
-
     }
 
     /**
@@ -75,6 +76,7 @@ public class Parser {
      */
 
     private static String addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) throws DuplicateException {
+        System.out.println(Ui.Underline());
         int lenBefore = listOfTasks.size();
         Deadline dlItem = new Deadline(description, doneBy);
         listOfTasks.addTask(dlItem);
@@ -103,6 +105,7 @@ public class Parser {
 
     }
     public static String findTask(TaskList listOfTasks, String wantedTask) {
+        System.out.println(Ui.Underline());
         ArrayList<Task> containingList = new ArrayList<>();
         String filteredTasks = "";
         for (int i = 1; i <= listOfTasks.size(); i++) {
@@ -113,9 +116,7 @@ public class Parser {
         }
         if (containingList.size() == 0) {
             return String.format("\tSorry you have no matching tasks.\n");
-
         }
-
         for (int i = 1; i <= containingList.size(); i++) {
             filteredTasks += String.format("\t" + i + ".%s" ,containingList.get(i - 1));
         }
@@ -134,7 +135,6 @@ public class Parser {
      * @return int of -1 if bye instruct is parsed else 1 is return to signal program to continue running
      */
     public static String parse(String instct, TaskList listOfTasks) throws IOException  {
-
         try {
              if((instct.split(" ").length) == 1) {
                  if (instct.split(" ")[0].equals("list")) {
@@ -142,64 +142,44 @@ public class Parser {
                      return response;
 
                  } else if (instct.split(" ")[0].equals("bye")) {
-                     System.out.println(Ui.Underline());
                      isRunning = false;
                      return Ui.sayBye();
                  }
                  throw new UnknownCommandException();
              } else if ((instct.split(" ").length) > 1 ) {
                 if (instct.split(" ")[0].equals("mark")) {
-                    System.out.println(Ui.Underline());
                     int numbering = Integer.parseInt(instct.split(" ")[1]) ;
                     return listOfTasks.markDone(numbering);
 
-
-
                 } else if (instct.split(" ")[0].equals("unmark")) {
-                    System.out.println(Ui.Underline());
                     int numbering = Integer.parseInt(instct.split(" ")[1]);
                     return listOfTasks.markNotDone(numbering);
 
 
-
-
                 } else if (instct.split(" ")[0].equals("todo")) {
-                    System.out.println(Ui.Underline());
                     String description = instct.split(" ", 2)[1];
                     return addTodo(description, listOfTasks);
 
-
-
                 } else if (instct.split(" ")[0].equals("deadline")) {
-                    System.out.println(Ui.Underline());
                     String temp = instct.split(" /by ")[1];
                     String temp2 = instct.split(" /by ")[0];
                     String description = temp2.split(" ", 2)[1];
                     LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
                     return addDeadline(description, listOfTasks, doneBy);
 
-
-
                 } else if (instct.split(" ")[0].equals("event")) {
-                    System.out.println(Ui.Underline());
                     String[] temp = instct.split("/from | /to ");
                     String description = temp[0].split(" ", 2)[1];
                     LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
                     LocalTime to = LocalTime.parse(temp[2], HrFormat);
                     return addEvents(description, listOfTasks, from, to);
 
-
-
                 } else if (instct.split(" ")[0].equals("delete")) {
                     return delete(instct, listOfTasks);
 
-
-
                 } else if (instct.split(" ")[0].equals("find")) {
-                    System.out.println(Ui.Underline());
                     String wantedTask = instct.split(" ")[1];
                     return findTask(listOfTasks, wantedTask);
-
 
                 } else {
                     throw new UnknownCommandException();
@@ -210,7 +190,6 @@ public class Parser {
         } catch (DukeException | DateTimeParseException ex) {
             return String.format("%s\n", ex);
         }
-
     }
 
 }

@@ -46,6 +46,7 @@ public class Ui {
      * The method of sayBye when exiting program
      */
     public static String sayBye() {
+        System.out.println(Ui.Underline());
         return "Bye. Hope to see you again soon!";
     }
 
@@ -71,12 +72,7 @@ public class Ui {
         return "\tNoted. I've removed this task:";
     }
 
-    /**
-     * The method of addTaskMsg()
-     */
-    public static void addTaskMsg(TaskList list, int num) {
-        System.out.println("\tGot it. I've added this task:");
-    }
+
 
     /**
      * The method of listMsg()
@@ -86,13 +82,5 @@ public class Ui {
 
     }
 
-    /**
-     * The method of DukeExceptionMsg
-     * @param e the exception catched
-     */
-
-    public void DukeExceptionMsg(DukeException e) {
-        System.out.printf("\t%s\n", e);
-    }
 }
 
