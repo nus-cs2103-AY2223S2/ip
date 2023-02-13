@@ -26,10 +26,15 @@ public class Storage {
      *
      * @param filePath Path of file starting from the home directory in Unix.
      */
-    public Storage(String filePath) throws DukeException {
+    public Storage(String filePath) {
         this.filePath = this.formatFilePath(filePath);
-        this.createDirectoriesIfNeeded(this.filePath);
-        this.createFileIfNeeded(this.filePath);
+
+        try {
+            this.createDirectoriesIfNeeded(this.filePath);
+            this.createFileIfNeeded(this.filePath);
+        } catch (DukeException ignore) {
+            // TODO: find better alternative to ignoring
+        }
     }
 
     private Path formatFilePath(String filePath) {
@@ -66,11 +71,14 @@ public class Storage {
      * Load all task saved in files into current session.
      *
      * @return TaskList containing all saved tasks.
-     * @throws DukeException If file could not be read.
      */
-    public TaskList loadFile() throws DukeException {
-        String[] allTasks = this.readAllTaskFromFile(this.filePath);
-        return this.loadIntoTaskList(allTasks);
+    public TaskList loadFile() {
+        try {
+            String[] allTasks = this.readAllTaskFromFile(this.filePath);
+            return this.loadIntoTaskList(allTasks);
+        } catch (DukeException e) {
+            return new TaskList(new LinkedList<>());
+        }
     }
 
     private String[] readAllTaskFromFile(Path filePath) throws DukeException {

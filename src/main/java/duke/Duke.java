@@ -1,8 +1,8 @@
 package duke;
 
 import command.Command;
-import task.TaskList;
 import storage.Storage;
+import task.TaskList;
 
 /**
  * A class containing Duke logical sequence.
@@ -20,7 +20,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
-        taskList = new TaskList(storage.loadFile());
+        this.taskList = this.storage.loadFile();
     }
 
     /**
