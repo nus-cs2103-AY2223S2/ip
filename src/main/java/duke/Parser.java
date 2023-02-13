@@ -30,8 +30,7 @@ public class Parser {
      */
     public String parseInput(String input) throws DukeException {
         if (input.equals("bye")) {
-            this.storage.save(taskList);
-            return ui.goodbyeMessage();
+            return goodbyeParser(input);
         }
         if (input.equals("list")) {
             return ui.printList(taskList.getList());
@@ -58,6 +57,14 @@ public class Parser {
         }
     }
 
+    public String goodbyeParser(String input) {
+        try {
+            this.storage.save(taskList);
+            return ui.goodbyeMessage();
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
+    }
 
     public String markParser(String input) {
         try {
@@ -140,10 +147,9 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-        } else {
-            if (inputArray[1].trim().length() == 0) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
+        }
+        if (inputArray[1].trim().length() == 0) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
@@ -156,10 +162,9 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-        } else {
-            if (inputArray[1].trim().length() == 0) {
-                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-            }
+        }
+        if (inputArray[1].trim().length() == 0) {
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
     }
 
@@ -172,10 +177,9 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-        } else {
-            if (inputArray[1].trim().length() == 0) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            }
+        }
+        if (inputArray[1].trim().length() == 0) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 
@@ -188,10 +192,9 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
             throw new DukeException("OOPS!!! You have to choose a task to delete.");
-        } else {
-            if (inputArray[1].trim().length() == 0) {
-                throw new DukeException("OOPS!!! You have to choose a task to delete.");
-            }
+        }
+        if (inputArray[1].trim().length() == 0) {
+            throw new DukeException("OOPS!!! You have to choose a task to delete.");
         }
     }
 
@@ -204,10 +207,9 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
             throw new DukeException("OOPS!!! You have to choose a task to mark.");
-        } else {
-            if (inputArray[1].trim().length() == 0) {
-                throw new DukeException("OOPS!!! You have to choose a task to mark.");
-            }
+        }
+        if (inputArray[1].trim().length() == 0) {
+            throw new DukeException("OOPS!!! You have to choose a task to mark.");
         }
     }
 
@@ -220,10 +222,9 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
             throw new DukeException("OOPS!!! You have to choose a task to unmark.");
-        } else {
-            if (inputArray[1].trim().length() == 0) {
-                throw new DukeException("OOPS!!! You have to choose a task to delete.");
-            }
+        }
+        if (inputArray[1].trim().length() == 0) {
+            throw new DukeException("OOPS!!! You have to choose a task to delete.");
         }
     }
 
@@ -236,10 +237,9 @@ public class Parser {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
             throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
-        } else {
-            if (inputArray[1].trim().length() == 0) {
-                throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
-            }
+        }
+        if (inputArray[1].trim().length() == 0) {
+            throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
         }
     }
 
@@ -253,8 +253,7 @@ public class Parser {
         ArrayList<Integer> taskNumbers = new ArrayList<>();
         try {
             for (int i = 1; i <= this.taskList.numberOfTasks(); i++) {
-                if (this.taskList.getTask(i).description.toLowerCase()
-                        .contains(input.replace("find ", "").toLowerCase())) {
+                if (isFoundTask(input, i)) {
                     taskNumbers.add(i);
                 }
             }
@@ -267,6 +266,11 @@ public class Parser {
             return ui.printMessage(e.getMessage());
         }
         return sb.toString();
+    }
+
+    public boolean isFoundTask(String input, int i) {
+        return this.taskList.getTask(i).description.toLowerCase()
+                .contains(input.replace("find ", "").toLowerCase());
     }
 
     /**
