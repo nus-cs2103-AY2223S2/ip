@@ -9,11 +9,11 @@ import duke.ui.Ui;
  */
 public abstract class Command {
 
-    /** Changed to false only in the case of a bye command. */
-    public boolean isActive;
-
     /** Frame to be used in response. */
     public static final String FRAME = ""; //"    ____________________________________________________________\n";
+
+    /** Changed to false only in the case of a bye command. */
+    public boolean isActive;
 
     public Command() {
         this.isActive = true;

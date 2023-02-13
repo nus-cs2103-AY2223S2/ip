@@ -1,19 +1,18 @@
 package duke.commands;
 
+import java.time.format.DateTimeParseException;
+import java.util.Objects;
+
 import duke.database.Database;
-import duke.task.Event;
+import duke.exception.InvalidDateException;
 import duke.exception.blankfieldexceptions.BlankFieldEventException;
 import duke.exception.includeexceptions.IncludeToAndFromException;
-import duke.exception.InvalidDateException;
+import duke.task.Event;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.time.format.DateTimeParseException;
-import java.util.Objects;
 /** Represents a command to add an event task to the TaskList. */
- public class AddEventCommand extends Command {
-
-
+public class AddEventCommand extends Command {
     private final String commandBody;
 
     /**
@@ -50,43 +49,44 @@ import java.util.Objects;
         StringBuilder task = new StringBuilder();
         StringBuilder startDate = new StringBuilder();
         StringBuilder endDate = new StringBuilder();
-
         for (String line : lines) {
             if (Objects.equals(line, "/from") && state == 0) {
                 state = 1;
             } else if (Objects.equals(line, "/to") && state == 1) {
                 state = 2;
-            } else switch (state) {
-            case 0:
-                task.append(" ").append(line);
-                break;
-            case 1:
-                startDate.append(" ").append(line);
-                break;
-            case 2:
-                endDate.append(" ").append(line);
-                break;
+            } else {
+                switch (state) {
+                case 0:
+                    task.append(" ").append(line);
+                    break;
+                case 1:
+                    startDate.append(" ").append(line);
+                    break;
+                case 2:
+                    endDate.append(" ").append(line);
+                    break;
+                default:
+                    //will never reach here.
+                }
             }
         }
-
         if (state != 2) {
             throw new IncludeToAndFromException();
         }
-
-        if (task.toString().trim().isEmpty() ||
-                startDate.toString().trim().isEmpty() ||
-                endDate.toString().trim().isEmpty()) {
+        if (task.toString().trim().isEmpty()
+                || startDate.toString().trim().isEmpty()
+                || endDate.toString().trim().isEmpty()) {
             throw new BlankFieldEventException();
         }
-
         try {
-            Event newEvent = new Event(task.toString(), startDate.toString().stripLeading(), endDate.toString().stripLeading());
+            Event newEvent = new Event(task.toString(), startDate.toString().stripLeading(),
+                    endDate.toString().stripLeading());
             taskList.addTask(newEvent);
-            ui.response(FRAME + "\n" +
-                    "     Got it. I've added this task:" + "\n" +
-                    "     " + newEvent.status() + "\n" +
-                    "     Now you have " + taskList.length() + " tasks in the list" + "\n" +
-                    FRAME);
+            ui.response(FRAME + "\n"
+                    + "     Got it. I've added this task:" + "\n"
+                    + "     " + newEvent.status() + "\n"
+                    + "     Now you have " + taskList.length() + " tasks in the list" + "\n"
+                    + FRAME);
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
         }

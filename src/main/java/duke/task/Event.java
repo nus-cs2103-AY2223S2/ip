@@ -13,10 +13,9 @@ import java.util.Objects;
  */
 public class Event extends Task {
     private static final String TYPE_TO_STRING = "E";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     private final LocalDateTime startDateTime;
     private final LocalDateTime endDateTime;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
 
     /**
      * Represents a Event task in Duke.
@@ -53,11 +52,11 @@ public class Event extends Task {
     public String status() {
 
         String status = this.isCompleted ? "[X] " : "[ ] ";
-        return "[" + TYPE_TO_STRING + "]" + status + this.details +
-                " (from: " + this.startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
-                this.startDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + " to: " +
-                this.endDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
-                this.endDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + ")";
+        return "[" + TYPE_TO_STRING + "]" + status + this.details
+                + " (from: " + this.startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " ["
+                + this.startDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + " to: "
+                + this.endDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " ["
+                + this.endDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + ")";
     }
 
     /**

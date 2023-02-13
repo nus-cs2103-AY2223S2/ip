@@ -7,7 +7,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /** Represents a command for marking an existing task in the taskList of Duke. */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
 
     private final int taskNumber;
 
@@ -34,10 +34,10 @@ public class MarkCommand extends Command{
     public void execute(TaskList taskList, Ui ui, Database database) throws TaskNumberNotFoundException {
         Task task = taskList.getTask(this.taskNumber);
         task.complete();
-        ui.response(FRAME +
-                "     Nice! I've marked this task as done:\n" +
-                "       [X] " + task.details + "\n" +
-                FRAME);
+        ui.response(FRAME
+                + "     Nice! I've marked this task as done:\n"
+                + "       [X] " + task.details + "\n"
+                + FRAME);
     }
 
 }

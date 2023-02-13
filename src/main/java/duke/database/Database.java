@@ -1,17 +1,18 @@
 package duke.database;
 
-import duke.exception.databaseexceptions.DatabaseNotUpdatingException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.exception.databaseexceptions.DatabaseNotLoadingException;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.databaseexceptions.DatabaseNotLoadingException;
+import duke.exception.databaseexceptions.DatabaseNotUpdatingException;
+import duke.exception.databaseexceptions.DatabaseTypeNotFoundException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /** Represents the database storage for Duke using a basic text file. */
 public class Database {
@@ -37,7 +38,7 @@ public class Database {
      * @return an ArrayList of Task objects that was saved in the database
      * @throws DatabaseNotLoadingException thrown when there is an error with loading the database file.
      */
-    public ArrayList<Task> load() throws DatabaseNotLoadingException {
+    public ArrayList<Task> load() throws DatabaseNotLoadingException, DatabaseTypeNotFoundException {
         try {
 
             File dataFolder = new File("data");
@@ -58,6 +59,9 @@ public class Database {
                     break;
                 case "D":
                     tasks.add(new Deadline(taskData));
+                    break;
+                default:
+                    throw new DatabaseTypeNotFoundException();
                 }
 
             }
