@@ -1,17 +1,23 @@
 package james;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import james.exception.JamesException;
+import james.task.Deadline;
+import james.task.ToDo;
 
 public class ToDoTest {
     @Test
-    public void dummyTest(){
-        assertEquals(2, 2);
+    public void toString_nonNullTask_success() {
+        ToDo task = new ToDo("read book");
+        assertEquals("[T][ ] read book", task.toString());
     }
 
     @Test
-    public void anotherDummyTest(){
-        assertEquals(4, 4);
+    public void toStoreString_nonNullTask_success() {
+        Deadline task = new Deadline("homework", "25/03/2000 1800");
+        assertEquals("D | 0 | homework | 25/03/2000 1800", task.toStoreString());
     }
 }

@@ -24,6 +24,15 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
+    /**
+     * Sets the userToDoList to tasks.
+     *
+     * @param tasks The updated task list.
+     */
+    public void setTaskList(ArrayList<Task> tasks) {
+        this.taskList = tasks;
+    }
+
 
 
     /**
@@ -74,7 +83,7 @@ public class TaskList {
         int count = taskList.size();
 
         if (count == 0) {
-            return "\nThere are currently no tasks, please input tasks";
+            return "There are currently no tasks, please input tasks";
         }
 
         String taskString = "";
