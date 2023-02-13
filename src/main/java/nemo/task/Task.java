@@ -68,10 +68,7 @@ public abstract class Task {
         case "E":
             result = new Event(splitStr[2], splitStr[3], splitStr[4]);
             break;
-        default: {
-        }
-        }
-        if (result == null) {
+        default:
             throw new NemoException("Invalid encoded String encountered");
         }
         if (splitStr[1].equals("true")) {

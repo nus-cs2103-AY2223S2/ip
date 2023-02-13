@@ -27,9 +27,9 @@ public class Storage {
      */
     public void loadFromSave(TaskList taskList) throws NemoException {
         File file = new File(SAVE_DIR + SAVE_NAME);
-        ArrayList<Task> taskArray = new ArrayList<>();
         if (file.exists()) {
             try {
+                ArrayList<Task> taskArray = new ArrayList<>();
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
                     String nextLine = scanner.nextLine();
