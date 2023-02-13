@@ -11,7 +11,7 @@ public class DeadlineTest {
     public void deadlineTest() {
         try {
             Deadline d = new Deadline("homework", "2024-01-20 1400");
-            assertEquals("[D] [ ] homework\n (by: Jan 20 2024 02:00 PM)", d.toString());
+            assertEquals("[D] [   ]  homework\n (by: Jan 20 2024 02:00 PM)\n", d.toString());
         } catch (DukeException e) {
             e.getMessage();
         }

@@ -27,8 +27,8 @@ public class MarkCommandTest {
         try {
             assertEquals(mc.execute(tl, storage),
                     "Nice! I've marked this task as done:\n"
-                            + "  [D] [x] homework\n"
-                            + " (by: Oct 20 2024 11:59 PM)");
+                            + "  [D] [ X ]  homework\n"
+                            + " (by: Oct 20 2024 11:59 PM)\n");
         } catch (DukeException e) {
             e.getMessage();
         }

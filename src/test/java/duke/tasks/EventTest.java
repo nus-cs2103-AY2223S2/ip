@@ -11,7 +11,7 @@ public class EventTest {
     public void eventTest() {
         try {
             Event e = new Event("meeting", "2024-01-20 1400", "2024-01-21 1400");
-            assertEquals("[E] [ ] meeting\n (from: Jan 20 2024 02:00 PM to: Jan 21 2024 02:00 PM)", e.toString());
+            assertEquals("[E] [   ]  meeting\n (from: Jan 20 2024 02:00 PM to: Jan 21 2024 02:00 PM)\n", e.toString());
         } catch (DukeException e) {
             e.getMessage();
         }

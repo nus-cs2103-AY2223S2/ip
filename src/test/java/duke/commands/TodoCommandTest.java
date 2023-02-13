@@ -20,7 +20,7 @@ public class TodoCommandTest {
         try {
             assertEquals(tdc.execute(tl, storage),
                     "Got it. I've added this task:\n"
-                            + "  [T] [ ] test\n"
+                            + "  [T] [   ]  test\n\n"
                             + "Now you have 1 tasks in the list.");
         } catch (DukeException e) {
             e.getMessage();
