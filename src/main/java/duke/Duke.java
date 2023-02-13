@@ -1,6 +1,7 @@
 package duke;
 
 import duke.commands.Command;
+import javafx.util.Pair;
 
 /**
  * The main class.
@@ -40,14 +41,14 @@ public class Duke {
      * @param input The user input.
      * @return String of the response.
      */
-    public String getResponse(String input) {
+    public Pair<String, Boolean> getResponse(String input) {
         try {
             Command c = Parser.parse(input.trim());
-            return c.execute(this.tasks, this.storage);
+            return new Pair<>(c.execute(this.tasks, this.storage), false);
         } catch (IllegalArgumentException e) {
-            return "Unrecognised command. Try again.";
+            return new Pair<>("Unrecognised command. Try again.", true);
         } catch (Exception e) {
-            return e.getMessage();
+            return new Pair<>(e.getMessage(), true);
         }
     }
 }

@@ -21,8 +21,10 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(Main.class.getResource("/style/stylesheet.css").toExternalForm());
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.setResizable(true);
+            stage.setTitle("Chopper Helpdesk");
             fxmlLoader.<MainWindow>getController().setDuke(this.duke);
             stage.show();
         } catch (IOException e) {

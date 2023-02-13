@@ -42,7 +42,7 @@ public class EventCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException{
         try {
             int indexFrom = input.indexOf("/");
             int indexTo = input.lastIndexOf("/");
@@ -60,10 +60,8 @@ public class EventCommand extends Command {
             tasks.add(e);
             storage.saveTaskList(tasks);
             return Ui.confirmationMessage("added", tasks, e);
-        } catch (DukeException e) {
-            return e.getMessage();
         } catch (DateTimeParseException e) {
-            return Ui.wrongEventDateFormat();
+            throw new DukeException(Ui.wrongEventDateFormat());
         }
     }
 }

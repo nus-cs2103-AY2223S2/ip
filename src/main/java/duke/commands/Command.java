@@ -1,4 +1,5 @@
 package duke.commands;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
@@ -15,7 +16,7 @@ public abstract class Command {
      * @param storage The Storage object used to save the edited TaskList.
      * @return True if the execution is successful, false if it's not.
      */
-    public abstract String execute(TaskList tasks, Storage storage);
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Overridden by ByeCommand only.

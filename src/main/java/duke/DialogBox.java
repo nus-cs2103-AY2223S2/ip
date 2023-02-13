@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     @FXML
-    private Circle circle = new Circle(50, 40, 39);
+    private Circle circle = new Circle(50, 35, 30);
 
     private DialogBox(String text, Image img) {
         try {
@@ -56,12 +56,20 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+
+        db.dialog.styleProperty().set("-fx-background-color: #708090");
+        return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean isWrong) {
         var db = new DialogBox(text, img);
         db.flip();
+        if (isWrong) {
+            db.dialog.styleProperty().set("-fx-background-color: #a91b0d");
+        } else {
+            db.dialog.styleProperty().set("-fx-background-color: #3b444b");
+        }
         return db;
     }
 }

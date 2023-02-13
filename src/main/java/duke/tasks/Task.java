@@ -60,9 +60,9 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         if (this.isDone) {
-            return String.format(" [x] " + this.description);
+            return String.format(" [ X ]  " + this.description);
         } else {
-            return String.format(" [ ] " + this.description);
+            return String.format(" [   ]  " + this.description);
         }
     }
 }

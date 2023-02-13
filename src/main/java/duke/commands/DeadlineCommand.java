@@ -38,7 +38,7 @@ public class DeadlineCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException{
         try {
             int indexBy = input.indexOf("/");
             String[] words = this.input.split(" ");
@@ -54,10 +54,8 @@ public class DeadlineCommand extends Command {
             tasks.add(d);
             storage.saveTaskList(tasks);
             return Ui.confirmationMessage("added", tasks, d);
-        } catch (DukeException e) {
-            return e.getMessage();
         } catch (DateTimeParseException e) {
-            return Ui.wrongDeadlineDateFormat();
+            throw new DukeException(Ui.wrongDeadlineDateFormat());
         }
     }
 }

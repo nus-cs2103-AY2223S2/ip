@@ -1,8 +1,5 @@
 package duke.commands;
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 import duke.tasks.Task;
 
 /**
@@ -23,7 +20,7 @@ public class UnmarkCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             if (input.length() <= 7) {
                 throw new DukeException("OOPS!!! You are missing the number of the task to be unmarked.");
@@ -36,10 +33,9 @@ public class UnmarkCommand extends Command {
             task.unmark();
             storage.saveTaskList(tasks);
             return "OK, I've marked this task as not done yet:\n  " + task;
-        } catch (DukeException e) {
-            return e.getMessage();
+
         } catch (NumberFormatException e) {
-            return "OOPS!!! Unmark has to be followed by an int.";
+            throw new DukeException("OOPS!!! Unmark has to be followed by an int.");
         }
     }
 }

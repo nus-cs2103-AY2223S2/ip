@@ -25,7 +25,7 @@ public class UpdateCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             String[] words = this.input.split(" ");
             int index = Integer.parseInt(words[1]);
@@ -44,10 +44,9 @@ public class UpdateCommand extends Command {
             }
             storage.saveTaskList(tasks);
             return Ui.confirmationMessage("updated", tasks, t);
-        } catch (DukeException e) {
-            return e.getMessage();
+
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            return Ui.updateWrongFormat();
+            throw new DukeException(Ui.updateWrongFormat());
         }
     }
 }

@@ -23,7 +23,7 @@ public class MarkCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             if (input.length() <= 5) {
                 throw new DukeException("OOPS!!! You are missing the number of the task to be marked.");
@@ -37,10 +37,8 @@ public class MarkCommand extends Command {
             task.mark();
             storage.saveTaskList(tasks);
             return "Nice! I've marked this task as done:\n  " + task;
-        } catch (DukeException de) {
-            return de.getMessage();
         } catch (NumberFormatException nfe) {
-            return "OOPS!!! Mark has to be followed by an int.";
+            throw new DukeException("OOPS!!! Mark has to be followed by an int.");
         }
     }
 }
