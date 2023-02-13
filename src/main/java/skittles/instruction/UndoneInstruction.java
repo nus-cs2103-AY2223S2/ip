@@ -30,7 +30,7 @@ public class UndoneInstruction extends Instruction {
         } else if (itemNumber <= skittlesList.getSize()) {
             Task targetItem = skittlesList.getTask(itemNumber - 1);
             targetItem.unstrike();
-            message = "Nice! I've marked this task as not done:\n" + " " + targetItem.toString();
+            message = "Nice! I've marked this task as undone:\n" + " " + targetItem.toString();
         }
         try {
             skittlesList.refresh();
