@@ -110,7 +110,7 @@ public class Ui {
         String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
             Task task = list.getTask(i);
-            output += "\n" + i + 1 + "." + task.toString();
+            output += "\n" + (i + 1) + "." + task.toString();
         }
         return output;
     }
