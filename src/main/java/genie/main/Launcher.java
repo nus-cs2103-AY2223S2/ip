@@ -1,4 +1,4 @@
-package genie;
+package genie.main;
 
 import javafx.application.Application;
 
