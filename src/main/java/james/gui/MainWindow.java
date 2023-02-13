@@ -35,6 +35,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getJamesDialog("Hello, I am James.\nHow may I be of service to you?", jamesImage));
+        assert this.scrollPane != null : "[scrollPane] FXML was improperly configured.";
+        assert this.dialogContainer != null : "[dialogContainer] FXML was improperly configured.";
+        assert this.userInput != null : "[userInput] FXML was improperly configured.";
+        assert this.sendButton != null : "[sendButton] FXML was improperly configured.";
     }
 
     public void setJames(JamesBot james) {
