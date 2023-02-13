@@ -1,17 +1,12 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -136,12 +131,6 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
-        Circle userClip = new Circle(user.getWidth() / 2, user.getHeight() / 2, user.getWidth() / 2);
-        Circle dukeClip = new Circle(duke.getWidth() / 2, duke.getHeight() / 2, duke.getWidth() / 2 );
-        ImageView imageViewUser = new ImageView(user);
-        ImageView imageViewDuke = new ImageView(duke);
-//        imageViewUser.setClip(userClip);
-//        imageViewDuke.setClip(dukeClip);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
@@ -225,7 +214,6 @@ public class Duke extends Application {
         } catch (DukeException | IOException e) {
             return (e.getMessage());
         }
-//        return("Now you have " + tasks.getNumTask() + " task" + (tasks.getNumTask() > 1 ? "s " : " ") + "in the list");
     }
 
     public Duke(String filePath, String filename) {

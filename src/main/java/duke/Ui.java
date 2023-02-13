@@ -11,7 +11,7 @@ public class Ui {
     /**
      * Prints Logo of Duke
      */
-    public void showLogo() {
+    public String showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,6 +19,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         System.out.println("\nHello! I'm Duke\nWhat can I do for you?\n");
+        return (logo + "\nHello! I'm Duke\nWhat can I do for you?\n");
     }
 
     public void showLine() {
