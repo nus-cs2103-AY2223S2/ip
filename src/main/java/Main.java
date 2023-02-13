@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke dukeApp = new Duke();
+    private Duke dukeApp = new Duke("./data", "duke.txt");
 
     @Override
     public void start(Stage stage) {

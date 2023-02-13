@@ -58,7 +58,7 @@ public class TaskList {
      * return size of the array
      */
     public int getNumTask() {
-        return length;
+        return list.size();
     }
 
 
@@ -69,8 +69,9 @@ public class TaskList {
     public String addTask(Task t) {
         list.add(t);
         length += 1;
-        return ("Got it. I've added this task: \n" + t + "\nNow you have " + length + " tasks in the list.");
+        return ("Got it. I've added this task: \n" + t + "\nNow you have " + getNumTask() + " tasks in the list.");
     }
+
 
 
     /**
@@ -91,7 +92,7 @@ public class TaskList {
         Task t = list.get(index);
         list.remove(index);
         length -= 1;
-        return ("Noted. I've removed this task: \n" + t + "\nNow you have " + length + " tasks in the list.");
+        return ("Noted. I've removed this task: \n" + t + "\nNow you have " + getNumTask() + " tasks in the list.");
     }
 
 
@@ -247,6 +248,16 @@ public class TaskList {
     public String setDone(int i) {
         this.list.get(i).setDone();
         return ("I've marked this task as done: \n" + list.get(i));
+    }
+
+    /**
+     * Set a specific task at an index to be done
+     * @param i the index of the task
+     * @return String indicating that the task has been set to done
+     */
+    public String setUndone(int i) {
+        this.list.get(i).setUndone();
+        return ("I've unmarked this task for you: \n" + list.get(i));
     }
 
 }
