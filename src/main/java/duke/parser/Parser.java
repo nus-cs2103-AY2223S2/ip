@@ -12,6 +12,8 @@ import duke.command.MarkCommand;
 import duke.command.TodoCommand;
 import duke.command.UnknownCommand;
 import duke.command.UnmarkCommand;
+import duke.exception.DukeBadInstructionFormatException;
+import duke.storage.Storage;
 
 /**
  * Encapsulates the System.in parser of <code>Duke</code>.
@@ -64,8 +66,13 @@ public class Parser {
      * Parsers the user's input to return the respective <code>Command</code>.
      * @param fullCommand A <code>String</code> of the user's full input.
      * @return The <code>Command</code> corresponding to what the user gave.
+     * @throws DukeBadInstructionFormatException if input contains '@'
      */
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand)
+            throws DukeBadInstructionFormatException {
+        if (fullCommand.contains(Storage.SPLITTER)) {
+            throw new DukeBadInstructionFormatException("Input cannot contain @");
+        }
         String[] splitted = fullCommand.split(" ");
         switch (splitted[0]) {
 

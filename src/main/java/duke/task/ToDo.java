@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.storage.Storage;
+
 /**
  * Subclass of <code>Task</code> class used by <code>Duke</code>.
  *
@@ -32,6 +34,7 @@ public class ToDo extends Task {
     @Override
     public String getFileFormatString() {
         //to be split using "@"
-        return "T" + "@" + this.isDone + "@" + this.description;
+        String s = Storage.SPLITTER;
+        return Task.TODO_FILE_FORMAT + s + this.isDone + s + this.description;
     }
 }

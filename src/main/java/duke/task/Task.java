@@ -1,10 +1,8 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import duke.exception.DukeBadInstructionFormatException;
+import duke.reminder.Reminder;
+import duke.storage.Storage;
 
 
 /**
@@ -14,14 +12,13 @@ import duke.exception.DukeBadInstructionFormatException;
  * @version CS2103T AY22/23 Semester 2
  */
 public abstract class Task {
+    public static final String TODO_FILE_FORMAT = "T";
+    public static final String DEADLINE_FILE_FORMAT = "D";
+    public static final String EVENT_FILE_FORMAT = "E";
     /**
-     * Format of the stored date and time.
+     * Longest total fields in a task, the <code>Event</code> is 6.
      */
-    public static final String STORE_DATE_TIME_FORMAT = "dd/MM/yyyy HHmm";
-    /**
-     * Format of the displayed date and time.
-     */
-    public static final String DISPLAY_DATE_TIME_FORMAT = "dd LLL yyyy HHmm";
+    private static final int max_fields = 6;
     /**
      * Boolean representing if user set <code>Task</code> to 'done' state. True if done. False
      * otherwise.
@@ -31,6 +28,10 @@ public abstract class Task {
      * String describing <code>Task</code>.
      */
     protected String description;
+    /**
+     * <code>LocalDateTime</code> of the day to remind
+     */
+    protected Reminder reminder;
 
     /**
      * Constructor for a <code>Task</code>.
@@ -40,6 +41,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.reminder = null;
     }
     /**
      * Returns string representation of <code>Task</code> status.
@@ -66,32 +68,6 @@ public abstract class Task {
     }
 
     /**
-     * Parses a string date time format in <code>STORE_DATE_TIME_FORMAT</code>
-     * and returns it of type <code>LocalDateTime</code>.
-     * @param dateTime <code>String</code> format of a date time.
-     * @return <code>LocalDateTime</code> format of a date time.
-     * @throws DateTimeParseException If users enters the date time in the wrong format.
-     */
-    public static LocalDateTime getLocalDateTime(String dateTime)
-            throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(STORE_DATE_TIME_FORMAT);
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime,
-                formatter);
-        return localDateTime;
-    }
-    /**
-     * Converts a <code>LocalDateTime</code> in <code>DISPLAY_DATE_TIME_FORMAT</code>
-     * to a <code>String</code>
-     * and returns it of type <code>LocalDateTime</code>.
-     * @param dateTime <code>String</code> format of a date time.
-     * @return <code>LocalDateTime</code> format of a date time.
-     * @throws DateTimeParseException If users enters the date time in the wrong format.
-     */
-    public static String getDateTimeString(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DISPLAY_DATE_TIME_FORMAT);
-        return dateTime.format(formatter);
-    }
-    /**
      * Returns the string representation of a <code>Task</code>.
      *
      * @return The string representation of a <code>Task</code>.
@@ -117,27 +93,35 @@ public abstract class Task {
      */
     public static Task getTaskFromFileFormat(String fileFormat)
             throws DukeBadInstructionFormatException {
-        String[] splitted = fileFormat.split("@", 5);
+        String s = Storage.SPLITTER;
+        String[] splitted = fileFormat.split(s, max_fields);
+        assert splitted.length >= 3 : "Insufficient fields in task";
+        String command = splitted[0];
+        String markStatus = splitted[1];
+        String description = splitted[2];
+        switch (command) {
 
-        switch (splitted[0]) {
-
-        case "T":
-            ToDo toDoTask = new ToDo(splitted[2]);
-            if (splitted[1].equals("true")) {
+        case TODO_FILE_FORMAT:
+            ToDo toDoTask = new ToDo(description);
+            if (markStatus.equals("true")) {
                 toDoTask.markAsDone();
             }
             return toDoTask;
 
-        case "D":
-            Deadline deadlineTask = new Deadline(splitted[2], splitted[3]);
-            if (splitted[1].equals("true")) {
+        case DEADLINE_FILE_FORMAT:
+            String by = splitted[3];
+            System.out.println("debug" + by);
+            Deadline deadlineTask = new Deadline(description, by);
+            if (markStatus.equals("true")) {
                 deadlineTask.markAsDone();
             }
             return deadlineTask;
 
-        case "E":
-            Event eventTask = new Event(splitted[2], splitted[3], splitted[4]);
-            if (splitted[1].equals("true")) {
+        case EVENT_FILE_FORMAT:
+            String from = splitted[3];
+            String to = splitted[4];
+            Event eventTask = new Event(description, from, to);
+            if (markStatus.equals("true")) {
                 eventTask.markAsDone();
             }
             return eventTask;
@@ -147,5 +131,14 @@ public abstract class Task {
             return null;
         }
 
+    }
+
+    /**
+     * Returns true if this task has a reminder today, False otherwise.
+     * @return <code>true</code> if task has reminder today,<code>false</code>otherwise.
+     */
+    public boolean hasReminderToday() {
+        boolean ret = this.reminder.isToday() && !isDone;
+        return ret;
     }
 }
