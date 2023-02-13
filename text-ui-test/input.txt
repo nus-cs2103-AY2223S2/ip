@@ -1,2 +1,7 @@
 list
+mark 5
+todo get my stuff together
+list
+delete 6
+list
 bye
