@@ -60,7 +60,7 @@ From this [source](https://hellokitty.fandom.com/wiki/Kuromi#With_Friends_and_Fa
 
 ## Usage
 
-> **Notes about the command format:**\
+> **Notes about the command format:**
 > - Words in `angle brackets <>` are the parameters to be filled by the user.\
     - e.g. in `todo <description>`, `<description>` should be changed into the description of the todo : `todo borrow book`
 > - Dates should be in the format of `yyyy-MM-dd HH:mm`.\
