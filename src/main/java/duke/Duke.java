@@ -22,7 +22,7 @@ import javafx.scene.image.ImageView;
 
 
 
-/** Encapsulates the Duke chat bot.
+/** Encapsulates the Duke chat-bot.
  * @author Hee Jia Yuan
  */
 public class Duke {
@@ -43,8 +43,6 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
-
     /**
      * Constructs a new Duke session.
      * @param filePath Directory to file storing Tasks in hard drive.
@@ -59,19 +57,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-    /**
-     * Runs the Duke bot.
-     */
-    public void run() {
-        ui.greet();
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            String userInput = scanner.nextLine();
-            Parser.parse(ui, tasks, storage, userInput);
-        }
-    }
-
 
     /**
      * You should have your own function to generate a response to user input.

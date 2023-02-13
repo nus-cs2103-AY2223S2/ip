@@ -7,14 +7,8 @@ import duke.tasks.Task;
  * Handles interactions with the user.
  */
 public class Ui {
-    /**
-     * The top part of Duke's reply message.
-     */
-    static String TOP_DIVIDER = "~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~\n" + "Duke's Response: \n";
-    /**
-     * The bottom part of Duke's reply message.
-     */
-    static String BOTTOM_DIVIDER = "\n~~~~~~~~~~~~~~~~o~~~~~~~~~~~~~~~~";
+
+    private String DUKE_RESPONSE = "Duke's response: \n";
 
     /**
      * Duke's help message
@@ -37,7 +31,7 @@ public class Ui {
             Task task = tasks.getTask(i);
             taskString += task.provideDetails() + "\n";
         }
-        return TOP_DIVIDER + "These are the current tasks: \n" + taskString + BOTTOM_DIVIDER;
+        return DUKE_RESPONSE + "These are the current tasks: \n" + taskString;
     }
 
     public String findTasks(ArrayList<Task> matchingTasks) {
@@ -46,7 +40,7 @@ public class Ui {
             Task task = matchingTasks.get(i);
             taskString += task.provideDetails() + "\n";
         }
-        return TOP_DIVIDER + "These are the matching tasks: \n" + taskString + BOTTOM_DIVIDER;
+        return DUKE_RESPONSE + "These are the matching tasks: \n" + taskString;
     }
 
     /**
@@ -62,7 +56,7 @@ public class Ui {
      * @param message The response message to be delivered to the user.
      */
     public String respond(String message) {
-        return TOP_DIVIDER + message + BOTTOM_DIVIDER;
+        return DUKE_RESPONSE + message;
     }
 
     /**
