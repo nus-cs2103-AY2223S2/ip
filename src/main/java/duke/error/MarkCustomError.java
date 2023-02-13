@@ -18,6 +18,7 @@ public class MarkCustomError extends CustomError {
     /**
      * Gets the corresponding error given by the error code.
      * This method is implemented from Error class
+     *
      * @param errorCode Code of the error
      * @return Error message
      */

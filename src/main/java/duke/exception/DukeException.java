@@ -25,6 +25,7 @@ public class DukeException extends Exception {
 
     /**
      * Default constructor that will determine which messages will the exception print when error occurs.
+     *
      * @param task Type of task
      * @param errorCode Error code
      */
@@ -84,7 +85,8 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Returns the error code for the specific error based on the type of task
+     * Returns the error code for the specific error based on the type of task.
+     *
      * @return error code
      */
     public int getErrorCode() {
@@ -92,7 +94,8 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Get the type of task that the command belongs to when error occurs
+     * Gets the type of task that the command belongs to when error occurs.
+     *
      * @return type of task
      */
     public TypeOfTask getErrorTask() {
@@ -100,7 +103,8 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Returns the specific error message
+     * Returns the specific error message.
+     *
      * @return error message
      */
     @Override

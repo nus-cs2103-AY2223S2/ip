@@ -13,7 +13,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
 
     /**
-     * default constructor
+     * Default constructor
      */
     public ByeCommand() {
         super(null, true);
@@ -21,6 +21,7 @@ public class ByeCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

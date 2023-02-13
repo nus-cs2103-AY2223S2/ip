@@ -9,6 +9,8 @@ import duke.ui.Ui;
 
 /**
  * Creates main class and program for iP
+ *
+ * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class Duke {
     private Storage storage;

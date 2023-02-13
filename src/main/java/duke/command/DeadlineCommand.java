@@ -15,6 +15,7 @@ import duke.ui.Ui;
 public class DeadlineCommand extends Command {
     /**
      * Default constructor
+     *
      * @param contents Input from the user
      */
     public DeadlineCommand(String[] contents) {
@@ -23,6 +24,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

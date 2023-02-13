@@ -8,11 +8,13 @@ import duke.ui.Ui;
 
 /**
  * Mark command when user specifies "Mark" at the beginning of the task. This command marks the task.
+ *
  * @author Haiqel Bin Hanaffi
  */
 public class MarkCommand extends Command {
     /**
      * Default constructor
+     *
      * @param contents Inputs from user
      */
     public MarkCommand(String[] contents) {
@@ -21,6 +23,7 @@ public class MarkCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

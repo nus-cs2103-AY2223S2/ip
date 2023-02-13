@@ -15,6 +15,7 @@ public class ListCommand extends Command {
 
     /**
      * Default constructor
+     *
      * @param contents Inputs of user
      */
     public ListCommand(String[] contents) {
@@ -23,6 +24,7 @@ public class ListCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

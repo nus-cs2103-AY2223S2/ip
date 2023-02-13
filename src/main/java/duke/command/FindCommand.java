@@ -20,6 +20,7 @@ public class FindCommand extends Command {
 
     /**
      * Default constructor
+     *
      * @param contents Contents of user input
      */
     public FindCommand(String[] contents) {
@@ -28,6 +29,7 @@ public class FindCommand extends Command {
 
     /**
      * Finds all similar tasks that matches the description given by the user
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

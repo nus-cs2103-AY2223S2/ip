@@ -20,6 +20,7 @@ public abstract class Command {
 
     /**
      * Default constructor
+     *
      * @param contents Input from the user
      * @param exitStatus 1 for exiting programming, 0 for staying
      */
@@ -31,6 +32,7 @@ public abstract class Command {
 
     /**
      * Returns the contents of the command
+     *
      * @return contents of command
      */
     public String[] getContents() {
@@ -39,6 +41,7 @@ public abstract class Command {
 
     /**
      * Returns the exit status
+     *
      * @return exit status
      */
     public boolean isExit() {
@@ -46,7 +49,8 @@ public abstract class Command {
     }
 
     /**
-     * Abstract method that allows commands to process the inputs from the user
+     * Processes the inputs from the user
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

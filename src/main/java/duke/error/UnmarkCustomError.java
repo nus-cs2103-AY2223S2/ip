@@ -4,6 +4,8 @@ import duke.data.TypeOfTask;
 
 /**
  * Tracks and returns the error from Unmark commands
+ *
+ * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class UnmarkCustomError extends CustomError {
     /**
@@ -15,6 +17,7 @@ public class UnmarkCustomError extends CustomError {
     /**
      * Gets the corresponding error given by the error code.
      * This method is implemented from Error class
+     *
      * @param errorCode Code of the error
      * @return Error message
      */

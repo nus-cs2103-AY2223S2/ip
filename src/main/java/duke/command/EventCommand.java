@@ -15,6 +15,7 @@ import duke.ui.Ui;
 public class EventCommand extends Command {
     /**
      * Default constructor
+     *
      * @param contents Inputs from user
      */
     public EventCommand(String[] contents) {
@@ -23,6 +24,7 @@ public class EventCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

@@ -14,6 +14,7 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
     /**
      * Default constructor
+     *
      * @param contents
      */
     public DeleteCommand(String[] contents) {
@@ -22,6 +23,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

@@ -15,6 +15,13 @@ public class DeleteCustomError extends CustomError {
         super();
     }
 
+    /**
+     * Gets the corresponding error given by the error code.
+     * This method is implemented from Error class
+     *
+     * @param errorCode Code of the error
+     * @return Error message
+     */
     public String getErrorMessage(TypeOfTask task, int errorCode) {
         switch(errorCode) {
         case 0:
