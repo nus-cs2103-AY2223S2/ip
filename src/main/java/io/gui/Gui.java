@@ -37,6 +37,13 @@ public class Gui extends Application {
 
             loadTasks();
             fxmlLoader.<MainWindow>getController().showReply(String.format("Current tasks: %s", taskList.toString()));
+
+            // Check if properties were initialized.
+            assert (storage != null);
+            assert (taskList != null);
+            assert (fxmlLoader != null);
+            assert (mainWindow != null);
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
