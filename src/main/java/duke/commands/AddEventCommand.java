@@ -40,6 +40,7 @@ public class AddEventCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws IncludeToAndFromException,
             BlankFieldEventException, InvalidDateException {
+        assert this.isActive();
         // Extract event's start date and end date
         String[] lines = this.commandBody.split(" ");
         // State = 0 if extracting duke.task item

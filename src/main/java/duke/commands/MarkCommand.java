@@ -32,6 +32,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws TaskNumberNotFoundException {
+        assert this.isActive();
         Task task = taskList.getTask(this.taskNumber);
         task.complete();
         ui.response(FRAME

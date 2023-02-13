@@ -32,6 +32,7 @@ public class AddToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) {
+        assert this.isActive();
         ToDo newToDo = new ToDo(this.task);
         taskList.addTask(newToDo);
         ui.response(FRAME + "\n"
