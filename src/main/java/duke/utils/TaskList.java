@@ -107,7 +107,6 @@ public class TaskList {
     public ArrayList<Task> findMatching(String keyword) {
         ArrayList<Task> matchingWords = new ArrayList<>();
         String betterKeyword = keyword.trim().toLowerCase();
-        assert betterKeyword.chars().allMatch(Character::isLowerCase);
         for (Task listOfThing : this.listOfThings) {
             if (listOfThing.getDescription().contains(betterKeyword)) {
                 matchingWords.add(listOfThing);

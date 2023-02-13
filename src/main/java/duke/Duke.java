@@ -50,12 +50,22 @@ public class Duke {
         String response = "";
         try {
             Command c = Parser.parse(input);
+            if (c.isExit()) {
+                exitProgram();
+            }
             response = c.execute(this.tasks, this.ui, this.storage);
         } catch (DukeException e) {
             response = this.ui.showError(e);
         }
-        System.out.println(response);
+        assert !response.equals("");
         return response;
+    }
+
+    /**
+     * Exits the program.
+     */
+    public void exitProgram() {
+        System.exit(0);
     }
 
     /**
