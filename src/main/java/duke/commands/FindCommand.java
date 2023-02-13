@@ -1,8 +1,13 @@
 package duke.commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.DukeException;
 import duke.Storage;
+import duke.Task;
 import duke.TaskList;
+
 
 /**
  * A command type that the chatting bot can read.
@@ -33,17 +38,16 @@ public class FindCommand extends Command {
             response += "OOPS!!! Your list is empty.";
             return response;
         }
+        List<Task> filterList = list.stream().filter(x -> x.getName().indexOf(targetName) >= 0)
+                .collect(Collectors.toList());
         int count = 0;
-        for (int i = 0; i < list.size(); i++) {
-            int result = list.get(i).getName().indexOf(targetName);
-            if (result >= 0) {
-                response += Integer.toString(count + 1);
-                response += ".";
-                count++;
-                response += list.get(i).toString();
-                if (i != list.size() - 1) {
-                    response += "\n";
-                }
+        for (int i = 0; i < filterList.size(); i++) {
+            response += Integer.toString(count + 1);
+            response += ".";
+            count++;
+            response += list.get(i).toString();
+            if (i != list.size() - 1) {
+                response += "\n";
             }
         }
         if (count == 0) {
