@@ -23,12 +23,12 @@ public class AppManager {
     /**
      * Constructs an {@code AppManager} from the given parameter.
      *
-     * @param logicManager - the LogicManager to use.
-     * @param uiManager - the UiManager to use.
+     * @param logicManager - the {@code LogicManager} to use.
+     * @param ioManager - the {@code IoManager} to use.
      */
-    public AppManager(LogicManager logicManager, IoManager uiManager) {
+    public AppManager(LogicManager logicManager, IoManager ioManager) {
         this.logicManager = logicManager;
-        this.ioManager = uiManager;
+        this.ioManager = ioManager;
     }
 
 
@@ -77,7 +77,7 @@ public class AppManager {
 
 
     private void handleExecutionSuccess(ExecutionService service) {
-        service.followUpDispatcher().ifPresentOrElse(
+        service.getNextService().ifPresentOrElse(
                 this::startExecution,
                 this::completeService);
     }

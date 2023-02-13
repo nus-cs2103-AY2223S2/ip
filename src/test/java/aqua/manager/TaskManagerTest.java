@@ -47,7 +47,7 @@ public class TaskManagerTest {
     public void deleteTest() {
         TaskManager manager = new TaskManager();
         manager.add(new MarkedTask());
-        UserTask task = manager.delete(0);
+        UserTask task = manager.delete(0).task;
         assertEquals("+", task.toString());
         assertEquals(
             "",

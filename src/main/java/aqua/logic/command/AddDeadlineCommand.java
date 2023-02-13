@@ -11,7 +11,7 @@ import aqua.util.DateUtils;
 /** An {@code AddTaskCommand} to add {@code UserDeadline}. */
 public class AddDeadlineCommand extends AddTaskCommand {
     @Override
-    public UserDeadline createTask(ArgumentMap args) throws SyntaxException {
+    protected UserDeadline createTask(ArgumentMap args) throws SyntaxException {
         // get name
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
@@ -28,17 +28,5 @@ public class AddDeadlineCommand extends AddTaskCommand {
                 .orElse(false);
 
         return new UserDeadline(name, isCompleted, dueTime);
-    }
-
-
-    @Override
-    public String getSyntax() {
-        return "<literal:name> /by <date:by>";
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "Adds a DEADLINE";
     }
 }

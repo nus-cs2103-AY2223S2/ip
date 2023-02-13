@@ -19,6 +19,10 @@ public class WeekSchedule extends VBox {
     private static final double LABEL_WIDTH = 100;
     private static final double ROW_WIDTH = 1000;
 
+    private static final String STYLECLASS_SCHEDULE_BOX = "schedule-date-box";
+    private static final PseudoClass PSEUDO_CLASS_ODD = PseudoClass.getPseudoClass("odd");
+    private static final PseudoClass PSEUDO_CLASS_EVEN = PseudoClass.getPseudoClass("even");
+
     private static final int DAYS_IN_WEEK = 7;
 
 
@@ -91,11 +95,11 @@ public class WeekSchedule extends VBox {
         HBox box = new HBox();
         box.setAlignment(Pos.CENTER_LEFT);
         box.setMaxWidth(ROW_WIDTH);
-        box.getStyleClass().add("schedule-date-box");
+        box.getStyleClass().add(STYLECLASS_SCHEDULE_BOX);
         if (index % 2 == 0) {
-            box.pseudoClassStateChanged(PseudoClass.getPseudoClass("even"), true);
+            box.pseudoClassStateChanged(PSEUDO_CLASS_EVEN, true);
         } else {
-            box.pseudoClassStateChanged(PseudoClass.getPseudoClass("odd"), true);
+            box.pseudoClassStateChanged(PSEUDO_CLASS_ODD, true);
         }
         return box;
     }

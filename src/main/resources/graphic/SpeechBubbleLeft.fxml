@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<HBox alignment="BOTTOM_LEFT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="BOTTOM_LEFT" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="iconView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
          <image>

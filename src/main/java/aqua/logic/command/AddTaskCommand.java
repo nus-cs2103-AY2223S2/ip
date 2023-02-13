@@ -1,5 +1,6 @@
 package aqua.logic.command;
 
+import aqua.exception.ProcedureException;
 import aqua.exception.SyntaxException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionDisplayerTask;
@@ -7,6 +8,7 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import aqua.manager.TaskChangeReport;
 import aqua.usertask.UserTask;
 import aqua.util.Kaomoji;
 
@@ -20,7 +22,7 @@ public abstract class AddTaskCommand extends CommandController {
      * @return the task created from the given arguments.
      * @throws SyntaxException if the arguments are of invalid syntax.
      */
-    protected abstract UserTask createTask(ArgumentMap args) throws SyntaxException;
+    protected abstract UserTask createTask(ArgumentMap args) throws SyntaxException, ProcedureException;
 
 
     @Override
@@ -36,24 +38,25 @@ public abstract class AddTaskCommand extends CommandController {
     }
 
 
-    private UserTask addProcess(ArgumentMap args, LogicManager manager) throws SyntaxException {
+    private TaskChangeReport addProcess(ArgumentMap args, LogicManager manager)
+                throws SyntaxException, ProcedureException {
         UserTask task = createTask(args);
-        manager.getTaskManager().add(task);
-        return task;
+        return manager.getTaskManager().add(task);
     }
 
 
 
 
 
-    private class AddTask extends ExecutionTask<UserTask> {
+    private class AddTask extends ExecutionTask<TaskChangeReport> {
         AddTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
+        protected TaskChangeReport process(ArgumentMap args, LogicManager manager)
+                    throws SyntaxException, ProcedureException {
             return addProcess(args, manager);
         }
     }
@@ -62,26 +65,30 @@ public abstract class AddTaskCommand extends CommandController {
 
 
 
-    private class AddDisplayerTask extends ExecutionDisplayerTask<UserTask> {
+    private class AddDisplayerTask extends ExecutionDisplayerTask<TaskChangeReport> {
         AddDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
             super(args, logicManager, ioManager);
         }
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager) throws SyntaxException {
+        protected TaskChangeReport process(ArgumentMap args, LogicManager manager)
+                    throws SyntaxException, ProcedureException {
             return addProcess(args, manager);
         }
 
 
         @Override
-        protected void display(UserTask task, IoManager manager) {
+        protected void display(TaskChangeReport report, IoManager manager) {
             manager.reply(String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
                             Kaomoji.WAVE_UP,
-                            "  %s",
+                            "%s",
                             Kaomoji.WAVE_DOWN),
-                    task.toString()));
+                    report.task.toString()));
+            manager.reply(String.format(
+                "You now have %d tasks.",
+                report.numTask));
         }
     }
 }

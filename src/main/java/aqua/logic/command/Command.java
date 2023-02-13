@@ -51,24 +51,4 @@ public enum Command {
     public ExecutionService getService(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
         return controller.getService(args, logicManager, ioManager);
     }
-
-
-    /**
-     * Return the syntax of the command.
-     *
-     * @returnt he syntax of the command.
-     */
-    public String getSyntax() {
-        return controller.getSyntax();
-    }
-
-
-    /**
-     * Returns the description of the command.
-     *
-     * @return the description of the command.
-     */
-    public String getDescription() {
-        return controller.getDescription();
-    }
 }

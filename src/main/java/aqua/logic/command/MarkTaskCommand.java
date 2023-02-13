@@ -41,21 +41,6 @@ public class MarkTaskCommand extends CommandController {
     }
 
 
-    @Override
-    public String getSyntax() {
-        return "<integer:taskNum>";
-    }
-
-
-    @Override
-    public String getDescription() {
-        if (isCompletedMarker) {
-            return "Mark a task";
-        }
-        return "Unmark a task";
-    }
-
-
     private UserTask markTask(ArgumentMap args, LogicManager manager)
                 throws SyntaxException, ProcedureException {
         try {
@@ -84,7 +69,7 @@ public class MarkTaskCommand extends CommandController {
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager)
+        protected UserTask process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return markTask(args, manager);
         }

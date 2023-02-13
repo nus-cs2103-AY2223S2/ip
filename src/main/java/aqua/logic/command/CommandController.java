@@ -26,24 +26,4 @@ public abstract class CommandController {
      */
     public abstract ExecutionService getService(
             ArgumentMap args, LogicManager logicManager, IoManager ioManager);
-
-
-    /**
-     * Return the syntax of the command.
-     *
-     * @returnt he syntax of the command.
-     */
-    public String getSyntax() {
-        return "";
-    }
-
-
-    /**
-     * Returns the description of the command.
-     *
-     * @return the description of the command.
-     */
-    public String getDescription() {
-        return "";
-    }
 }

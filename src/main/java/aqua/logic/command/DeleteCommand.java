@@ -8,7 +8,8 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
-import aqua.usertask.UserTask;
+import aqua.manager.TaskChangeReport;
+import aqua.util.Kaomoji;
 
 
 /** A {@code CommandController} to delete {@code UserTask}. */
@@ -26,19 +27,7 @@ public class DeleteCommand extends CommandController {
     }
 
 
-    @Override
-    public String getSyntax() {
-        return "<integer:taskNum>";
-    }
-
-
-    @Override
-    public String getDescription() {
-        return "Deletes a task";
-    }
-
-
-    private UserTask deleteTask(ArgumentMap args, LogicManager manager)
+    private TaskChangeReport deleteTask(ArgumentMap args, LogicManager manager)
                 throws SyntaxException, ProcedureException {
         try {
             // get task index
@@ -59,14 +48,14 @@ public class DeleteCommand extends CommandController {
 
 
 
-    private class DeleteTask extends ExecutionTask<UserTask> {
+    private class DeleteTask extends ExecutionTask<TaskChangeReport> {
         DeleteTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public UserTask process(ArgumentMap args, LogicManager manager)
+        protected TaskChangeReport process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return deleteTask(args, manager);
         }
@@ -76,31 +65,34 @@ public class DeleteCommand extends CommandController {
 
 
 
-    private class DeleteDisplayerTask extends ExecutionDisplayerTask<UserTask> {
+    private class DeleteDisplayerTask extends ExecutionDisplayerTask<TaskChangeReport> {
         DeleteDisplayerTask(ArgumentMap args, LogicManager logicManager, IoManager ioManager) {
             super(args, logicManager, ioManager);
         }
 
 
         @Override
-        protected UserTask process(ArgumentMap args, LogicManager manager)
+        protected TaskChangeReport process(ArgumentMap args, LogicManager manager)
                     throws SyntaxException, ProcedureException {
             return deleteTask(args, manager);
         }
 
 
         @Override
-        protected void display(UserTask task, IoManager manager) {
+        protected void display(TaskChangeReport report, IoManager manager) {
             manager.reply(String.format(String.join("\n",
                             "I have deleted the task:",
-                            "  %s"),
-                    task.toString()));
+                            "%s"),
+                    report.task.toString()));
+            if (report.numTask > 0) {
+                manager.reply(String.format(
+                        "You have %d task(s) left, all the best " + Kaomoji.CHEER_ENCOURAGE,
+                        report.numTask));
+            } else {
+                manager.reply(String.format(
+                        Kaomoji.CHEER_EXCITED + " You have no task left~ " + Kaomoji.STAR_WHITE,
+                        report.numTask));
+            }
         }
     }
-
-
-
-
-    // "You have %d task(s) left, all the best " + Kaomoji.CHEER_ENCOURAGE
-    // Kaomoji.CHEER_RELIEF + " You have no task left~ " + Kaomoji.STAR_WHITE;
 }

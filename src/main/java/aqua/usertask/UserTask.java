@@ -74,19 +74,6 @@ public abstract class UserTask implements Reloadable {
 
 
     /**
-     * Returns if the task has started.
-     *
-     * @return {@code true} if the task has started and {@code false}
-     *      otherwise.
-     */
-    public boolean isStarted() {
-        return getStart()
-                .map(time -> LocalDateTime.now().isAfter(time))
-                .orElse(true);
-    }
-
-
-    /**
      * Returns the ending time of the task wrapped in an {@code Optional}. If
      * the task has no ending time, {@code Optional.empty} is returned.
      *
@@ -97,54 +84,10 @@ public abstract class UserTask implements Reloadable {
     }
 
 
-    /**
-     * Returns if the task has ended.
-     *
-     * @return {@code true} if the task has ended and {@code false} otherwise.
-     */
-    public boolean isEnded() {
-        return getEnd()
-                .map(time -> LocalDateTime.now().isAfter(time))
-                .orElse(false);
-    }
-
-
-    /**
-     * Returns the String representation of the task.
-     *
-     * @return the String representation of the task.
-     */
     @Override
     public String toString() {
-        return String.format("%s%s %s",
-                getStatusString(),
-                getMarkString(),
-                getName());
-    }
-
-
-    /**
-     * Returns the String representation of the completion status of the task.
-     *
-     * @return the String representation of the completion status of the task.
-     */
-    private String getMarkString() {
-        return (isComplete()) ? "[X]" : "[ ]";
-    }
-
-
-    /**
-     * Returns the status of the task. If the task has ended, is ongoing or is
-     * upcoming.
-     *
-     * @return the String representation of the status of the task.
-     */
-    private String getStatusString() {
-        if (isEnded()) {
-            return "[E]";
-        } else if (isStarted()) {
-            return "[O]";
-        }
-        return "[B]";
+        return String.format("%s %s",
+                isComplete() ? "[X]" : "[ ]",
+                name);
     }
 }

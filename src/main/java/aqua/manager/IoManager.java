@@ -1,9 +1,11 @@
 package aqua.manager;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import aqua.MainApp;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureException;
 import aqua.exception.SyntaxException;
@@ -30,28 +32,30 @@ public class IoManager {
     private static final String EXCEPTION_FORMAT_SYNTAX = String.join("\n",
             "Hanya??",
             "I do not understand because:",
-            "  %s",
+            "%s",
             "Gomennasai!! " + Kaomoji.CRY);
     /** Execution exception message format. */
     private static final String EXCEPTION_FORMAT_EXECUTION = String.join("\n",
             "Hanya??",
             "I was doing what you told me to do half way but messed up because:",
-            "  %s",
+            "%s",
             "Gomennasai!! " + Kaomoji.CRY);
     /** Load exception message format. */
     private static final String EXCEPTION_FORMAT_LOAD = String.join("\n",
             "Hanya??",
             "I was looking through my notes and could not remember your previous tasks because:",
-            "  %s",
+            "%s",
             "Gomennasai!! But you did not touch it right? " + Kaomoji.THINKING);
     /** All other exception message format. */
     private static final String EXCEPTION_FORMAT_DEATH = String.join("\n",
             "UWAWAWA!!",
             "I messed up big time...",
-            "  %s");
+            "%s");
 
     private final Supplier<String> inputSupplier;
     private final Consumer<String> outputConsumer;
+
+    private final HashMap<String, Stage> stageMap = new HashMap<>();
 
 
     /**
@@ -83,7 +87,10 @@ public class IoManager {
      * @param ex - the exception to display.
      */
     public void replyException(Throwable ex) {
-        reply(getExceptionReply(ex));
+        String[] messages = getExceptionReply(ex).split("\n");
+        for (String message : messages) {
+            reply(message);
+        }
     }
 
 
@@ -103,7 +110,7 @@ public class IoManager {
             return String.format(EXCEPTION_FORMAT_LOAD, ex.getMessage());
         } catch (Throwable deathEx) {
             deathEx.printStackTrace();
-            return String.format(EXCEPTION_FORMAT_DEATH, ex.toString());
+            return String.format(EXCEPTION_FORMAT_DEATH, ex.getMessage());
         }
     }
 
@@ -137,16 +144,33 @@ public class IoManager {
      *
      * @param root - the root node to show.
      */
-    public void popup(Parent root) {
-        Platform.runLater(() -> showPopup(root));
+    public void popup(Parent root, String stageId) {
+        Platform.runLater(() -> showPopup(root, stageId));
     }
 
 
-    private void showPopup(Parent root) {
+    private void showPopup(Parent root, String stageId) {
+        closeStage(stageId);
+        createStage(root, stageId).show();
+    }
+
+
+    private void closeStage(String stageId) {
+        if (stageMap.containsKey(stageId)) {
+            stageMap.remove(stageId).close();
+        }
+    }
+
+
+    private Stage createStage(Parent root, String stageId) {
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(this.getClass().getResource(PATH_CSS).toString());
         stage.setScene(scene);
-        stage.show();
+        stage.setTitle(stageId);
+        stage.getIcons().add(MainApp.ICON);
+        stage.setResizable(false);
+        stageMap.put(stageId, stage);
+        return stage;
     }
 }

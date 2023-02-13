@@ -24,13 +24,12 @@ public abstract class ExecutionService extends Service<Void> {
      * Creates a {@code ExecutionService}.
      *
      * @param task - the task to execute.
-     * @return a dispatcher that will dispatch the specifed task without follow
-     *      up dispatchers.
+     * @return a service to execute the given task.
      */
     public static ExecutionService of(ExecutionTask<?> task) {
         return new ExecutionService(task) {
             @Override
-            public Optional<ExecutionService> followUpDispatcher() {
+            public Optional<ExecutionService> getNextService() {
                 return Optional.empty();
             }
         };
@@ -45,7 +44,7 @@ public abstract class ExecutionService extends Service<Void> {
      *
      * @return the follow up service wrapped in an {@code Optional}.
      */
-    public abstract Optional<ExecutionService> followUpDispatcher();
+    public abstract Optional<ExecutionService> getNextService();
 
 
     /**
@@ -75,7 +74,7 @@ public abstract class ExecutionService extends Service<Void> {
     public ExecutionService setFollowUp(ExecutionService service) {
         return new ExecutionService(this.task) {
             @Override
-            public Optional<ExecutionService> followUpDispatcher() {
+            public Optional<ExecutionService> getNextService() {
                 return Optional.ofNullable(service);
             }
         };

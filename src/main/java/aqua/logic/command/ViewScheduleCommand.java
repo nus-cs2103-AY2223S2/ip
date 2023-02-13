@@ -12,10 +12,12 @@ import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 import aqua.manager.TaskFilterReport;
 import aqua.util.DateUtils;
+import javafx.scene.Parent;
 
 
 /** A {@code CommandController} to view schedule. */
 public class ViewScheduleCommand extends CommandController {
+    private static final String POPUP_TITLE = "Task Schedule";
     private static final int DAYS_IN_WEEK = 7;
 
 
@@ -40,17 +42,18 @@ public class ViewScheduleCommand extends CommandController {
 
             @Override
             protected void display(DisplayData data, IoManager manager) {
-                manager.popup(new TaskView(data.startTime, data.report).getRoot());
+                Parent root = new TaskView(data.startTime, data.report).getRoot();
+                manager.popup(root, POPUP_TITLE);
             }
         });
     }
 
 
     private DisplayData filterTasks(ArgumentMap args, LogicManager manager) throws SyntaxException {
-        LocalDateTime start = DateUtils.getStartOfWeek(LocalDateTime.now());
+        LocalDateTime start = DateUtils.toStartOfWeek(LocalDateTime.now());
         if (args.getMainInput().isPresent()) {
             LocalDateTime time = DateUtils.parse(args.getMainInput().get());
-            start = DateUtils.getStartOfWeek(time);
+            start = DateUtils.toStartOfWeek(time);
         }
         LocalDateTime end = start.plusDays(DAYS_IN_WEEK);
         TaskFilterReport report = manager.getTaskManager().filterWithin(start, end);
@@ -66,7 +69,7 @@ public class ViewScheduleCommand extends CommandController {
         final LocalDateTime startTime;
 
 
-        public DisplayData(TaskFilterReport report, LocalDateTime startTime) {
+        DisplayData(TaskFilterReport report, LocalDateTime startTime) {
             this.report = report;
             this.startTime = startTime;
         }
