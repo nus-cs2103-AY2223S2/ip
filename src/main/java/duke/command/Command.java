@@ -18,7 +18,8 @@ public enum Command {
     EVENT("event"),
     DELETE("delete"),
     GETEVENTSON("geteventson"),
-    FIND("find");
+    FIND("find"),
+    GETREMINDERS("getreminders");
 
     private String name;
 

@@ -36,6 +36,12 @@ public abstract class Task {
     }
 
     /**
+     * Checks if a task is marked as done.
+     * @return boolean value.
+     */
+    public boolean isComplete() { return this.isDone; }
+
+    /**
      * Displays formatted information about the task.
      * @return String containing common information about a task.
      */
@@ -65,6 +71,15 @@ public abstract class Task {
      * @return boolean value that checks if the task falls on the specified date.
      */
     public boolean fallsOnDate(LocalDate date) {
+        return false;
+    }
+
+    /**
+     * Checks if a task is marked as complete before a specified date.
+     * @param date the date to check against.
+     * @return a boolean value.
+     */
+    public boolean isIncompleteBeforeDate(LocalDate date) {
         return false;
     }
 }
