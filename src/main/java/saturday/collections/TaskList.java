@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
+import javafx.scene.layout.Pane;
 import saturday.models.Deadline;
 import saturday.models.Event;
 import saturday.models.Task;
@@ -44,6 +47,55 @@ public class TaskList extends ArrayList<Task> {
      */
     public void unMark(int i) {
         super.get(i - 1).unMark();
+    }
+
+    /**
+     * Sorts the tasks in this list based on the index field.
+     */
+    public void sortByIndex() {
+        Collections.sort(this, new Comparator<Task>() {
+            @Override
+            public int compare(Task task1, Task task2) {
+                return Integer.compare(task1.getIndex(), task2.getIndex());
+            }
+        });
+    }
+
+    /**
+     * Sorts the tasks in this list based on the temporal accessor fields, if present.
+     * Tasks with an event temporal accessor are sorted by the "from" field.
+     * Tasks with a deadline temporal accessor are sorted by the "deadline" field.
+     * Tasks with neither an event nor a deadline temporal accessor are not sorted.
+     */
+    public void sortByTime() {
+        Collections.sort(this, new Comparator<Task>() {
+            @Override
+            public int compare(Task task1, Task task2) {
+                if (task1 instanceof Event && task2 instanceof Event) {
+                    TemporalAccessor from1 = ((Event) task1).getFrom();
+                    TemporalAccessor from2 = ((Event) task2).getFrom();
+                    LocalDateTime ldt1 = LocalDateTime.from(from1);
+                    LocalDateTime ldt2 = LocalDateTime.from(from2);
+                    return ldt1.compareTo(ldt2);
+                } else if (task1 instanceof Deadline && task2 instanceof Deadline) {
+                    TemporalAccessor deadline1 = ((Deadline) task1).getDeadline();
+                    TemporalAccessor deadline2 = ((Deadline) task2).getDeadline();
+                    LocalDate ld1 = LocalDate.from(deadline1);
+                    LocalDate ld2 = LocalDate.from(deadline2);
+                    return ld1.compareTo(ld2);
+                } else if (task1 instanceof Event) {
+                    return -1;
+                } else if (task2 instanceof Event) {
+                    return 1;
+                } else if (task1 instanceof Deadline) {
+                    return -1;
+                } else if (task2 instanceof Deadline) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
     }
 
     /**

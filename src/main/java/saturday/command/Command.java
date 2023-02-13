@@ -1,5 +1,6 @@
 package saturday.command;
 
+import saturday.Saturday;
 import saturday.collections.TaskList;
 import saturday.exceptions.SaturdayException;
 import saturday.models.Deadline;
@@ -165,6 +166,26 @@ public enum Command {
             String query = args.substring(args.indexOf(" ") + 1);
             TaskList queriedTaskList = taskList.find(query);
             return "Here are the tasks in your list:\n\t" + queriedTaskList.toString();
+        }
+    },
+    /**
+     * Command for sorting task list by time.
+     */
+    SORT("sort") {
+        @Override
+        public String execute(TaskList taskList, String args) {
+            taskList.sortByTime();
+            return "Here are your tasks sorted!";
+        }
+    },
+    /**
+     * Command for sorting task list by index.
+     */
+    UNSORT("unsort") {
+        @Override
+        public String execute(TaskList taskList, String args) {
+            taskList.sortByIndex();
+            return "Here are your tasks by index!";
         }
     },
     /**

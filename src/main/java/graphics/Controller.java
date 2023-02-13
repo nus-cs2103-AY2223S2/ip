@@ -1,18 +1,15 @@
-package saturday;
+package graphics;
 
-import javafx.collections.FXCollections;
+import graphics.TaskView;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import saturday.Saturday;
 import saturday.collections.TaskList;
 import saturday.models.Task;
-
-import java.util.Collection;
 
 public class Controller {
     @FXML

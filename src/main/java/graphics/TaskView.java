@@ -1,12 +1,10 @@
-package saturday;
+package graphics;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import saturday.exceptions.SaturdayException;
 import saturday.models.Deadline;
 import saturday.models.Event;
