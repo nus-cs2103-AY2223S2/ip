@@ -8,18 +8,18 @@ import java.util.Scanner;
 public class Parser {
     private TaskList tasksList = new TaskList();
     private Storage storage = new Storage();
-    Scanner scanner = new Scanner(System.in);
+    // Scanner scanner = new Scanner(System.in);
 
-    String input = "";
+    // String input = "";
 
-    public void getInput() {
+    public String getInput(String input) {
         while (!input.equals("bye")) {
             try {
-                input = scanner.nextLine();
                 String command = input.split(" ")[0];
 
                 if (command.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+                    // System.out.println("Bye. Hope to see you again soon!");
+                    return "Bye. Hope to see you again soon!";
                     break;
                 } else if (command.equals("list")) {
                     tasksList.listTaskList();
