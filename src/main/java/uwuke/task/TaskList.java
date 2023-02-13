@@ -62,7 +62,7 @@ public class TaskList {
             return;
         }
 
-        Todo td = new Todo(Parser.parseTodo(input));
+        Todo td = new Todo(Parser.parseToDo(input));
         tasks.add(td);
         Printer.printAddedConfirmation(td, tasks.size());
     }

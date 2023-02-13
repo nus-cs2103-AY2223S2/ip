@@ -66,7 +66,7 @@ public abstract class Parser {
      * @return string that can be used directly to create a new deadline object
      * @throws DukeException if input cannot be parsed
      */
-    public static String parseTodo(String input) throws DukeException {
+    public static String parseToDo(String input) throws DukeException {
         try {
             return input.substring(5, input.length()).strip();
         } catch (IndexOutOfBoundsException e) {
