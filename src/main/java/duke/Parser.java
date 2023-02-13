@@ -45,6 +45,21 @@ public class Parser {
     }
 
     /**
+     * Checks if the user wants to unmark his/her task.
+     *
+     * @param userInput the input keyed in by the user.
+     * @return true if the user keyed in "unmark X" where X is an integer, or false otherwise.
+     */
+    public boolean checkUnmarkRequest(String userInput) {
+        String[] terms = userInput.split(" ");
+        if (terms[0].equals("unmark") && terms.length == 2) {
+            return checkNumber(terms[1]);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Checks if the user wishes to delete a task.
      *
      * @param userInput the input keyed in by the user.

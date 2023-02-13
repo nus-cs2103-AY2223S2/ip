@@ -34,12 +34,20 @@ public class Task implements Comparable<Task> {
             return 0;
         }
     }
+
     /**
      * Marks the task as completed.
      * It does not matter whether the task has previously been marked as completed.
      */
     public void makeCompleted() {
         this.isCompleted = true;
+    }
+
+    /**
+     * Unmarks the task as incomplete.
+     */
+    public void makeIncomplete() {
+        this.isCompleted = false;
     }
 
     public String increasePriority() {
@@ -92,7 +100,7 @@ public class Task implements Comparable<Task> {
         if (this.isCompleted) {
             completedString += "[X] ";
         } else {
-            completedString += "[ ] ";
+            completedString += "[  ] ";
         }
         completedString += "[Priority Level: " + priority + "] ";
         completedString += this.name;
@@ -110,10 +118,10 @@ public class Task implements Comparable<Task> {
         if (this.isCompleted) {
             completedString += "[X] ";
         } else {
-            completedString += "[ ] ";
+            completedString += "[  ] ";
         }
 
-        completedString += this.name + " ";
+        completedString += this.name;
         return completedString;
     }
 

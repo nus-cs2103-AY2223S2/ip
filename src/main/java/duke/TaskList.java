@@ -154,6 +154,16 @@ public class TaskList {
     }
 
     /**
+     * Creates a dummy Task and adds to the list.
+     * This is a method stub to test the TaskList class.
+     * A stub Task with a simple "Dummy test" description is added into the list of tasks.
+     */
+    public void addDummyTask() {
+        assert lstOfTasks != null : "No List created!";
+        lstOfTasks.add(new Task("Dummy test"));
+    }
+
+    /**
      * Marks a task as completed.
      *
      * @param number the task number to be marked as completed.
@@ -168,6 +178,29 @@ public class TaskList {
                 assert lstOfTasks.size() >= number : "List too small!";
                 lstOfTasks.get(number - 1).makeCompleted();
                 response += ("Ok, I've marked this Task as completed: \n");
+                response += (lstOfTasks.get(number - 1) + "\n");
+            }
+        } catch (DukeException err) {
+            response += (err + "\n");
+        }
+        return response;
+    }
+
+    /**
+     * Unmarks a task as incomplete.
+     *
+     * @param number the task number to be marked as incomplete.
+     */
+    public String unmarkTask(int number) {
+        assert lstOfTasks != null : "No List present!";
+        String response = "Unmarking task in progress...\n";
+        try {
+            if (number > lstOfTasks.size()) {
+                throw new DukeException("No such item!");
+            } else {
+                assert lstOfTasks.size() >= number : "List too small!";
+                lstOfTasks.get(number - 1).makeIncomplete();
+                response += ("Ok, I've unmarked this Task as incomplete: \n");
                 response += (lstOfTasks.get(number - 1) + "\n");
             }
         } catch (DukeException err) {
@@ -257,7 +290,7 @@ public class TaskList {
 
     public String find(String keyword) {
         assert lstOfTasks != null : "No List created!";
-        String response = "Finding " + keyword + " in progress...\n";
+        String response = "Finding in progress...\n";
         int found = 0;
         ArrayList<Task> foundTasks = new ArrayList<>();
 

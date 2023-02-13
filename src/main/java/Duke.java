@@ -170,7 +170,7 @@ public class Duke extends Application {
      * @return the bot's response as a String
      */
     private String getResponse(String userInput) {
-        String response = "I heard you: " + userInput + "\n";
+        String response = "I heard you: " + userInput + "\n\n";
 
         if (!parser.checkEnd(userInput)) {
             if (parser.checkListRequest(userInput)) {
@@ -179,6 +179,10 @@ public class Duke extends Application {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]);
                 response += tasks.markTask(itemNo);
+            } else if (parser.checkUnmarkRequest(userInput)) {
+                String[] terms = userInput.split(" ");
+                int itemNo = Integer.parseInt(terms[1]);
+                response += tasks.unmarkTask(itemNo);
             } else if (parser.checkDeleteRequest(userInput)) {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]);
@@ -197,58 +201,63 @@ public class Duke extends Application {
             }
             else {
                 String[] terms = userInput.split(" ");
-                if (terms[0].equals("todo")) {
-                    try {
-                        if (terms.length == 1) {
-                            String error = "The description of a todo cannot be empty";
-                            throw new DukeException(error);
-                        } else {
-                            Task newTask = new Todo(userInput.substring(5));
-                            response += tasks.addTask(newTask);
-                        }
-                    } catch (DukeException err) {
-                        response += (err + "\n");
-                    }
-                } else if (terms[0].equals("deadline")) {
-                    String[] splitBySlash = userInput.split("/");
-                    try {
-                        if (splitBySlash.length != 2) {
-                            throw new DukeException("Wrong format for deadline Task");
-                        }
-                        String description = splitBySlash[0].substring(9);
-                        String by = splitBySlash[1].substring(3);
-                        Task newTask = new Deadline(description, by);
-                        response += tasks.addTask(newTask);
-                    } catch (DukeException err) {
-                        response += (err + "\n");
-                    }
-
-                } else if (terms[0].equals("event")) {
-                    String[] splitBySlash = userInput.split("/");
-                    try {
-                        if (splitBySlash.length != 3) {
-                            throw new DukeException("Wrong format for event Task");
-                        }
-                        String description = splitBySlash[0].substring(6);
-                        String from = splitBySlash[1].substring(5);
-                        String to = splitBySlash[2].substring(3);
-                        Task newTask = new Event(description, from, to);
-                        response += tasks.addTask(newTask);
-                    } catch (DukeException err) {
-                        response += (err + "\n");
-                    }
-                } else {
-                    try {
-                        throw new DukeException("I don't know what that means.");
-                    } catch (DukeException err) {
-                        response += (err + "\n");
-                    }
-                }
-
+                response += addTask(userInput, terms);
             }
         } else {
             storage.addToFile(tasks);
             response += ui.terminate();
+        }
+        return response;
+    }
+
+    public String addTask(String userInput, String[] terms) {
+        String response = "";
+        if (terms[0].equals("todo")) {
+            try {
+                if (terms.length == 1) {
+                    String error = "The description of a todo cannot be empty";
+                    throw new DukeException(error);
+                } else {
+                    Task newTask = new Todo(userInput.substring(5));
+                    response += tasks.addTask(newTask);
+                }
+            } catch (DukeException err) {
+                response += (err + "\n");
+            }
+        } else if (terms[0].equals("deadline")) {
+            String[] splitBySlash = userInput.split("/");
+            try {
+                if (splitBySlash.length != 2) {
+                    throw new DukeException("Wrong format for deadline Task");
+                }
+                String description = splitBySlash[0].substring(9);
+                String by = splitBySlash[1].substring(3);
+                Task newTask = new Deadline(description, by);
+                response += tasks.addTask(newTask);
+            } catch (DukeException err) {
+                response += (err + "\n");
+            }
+
+        } else if (terms[0].equals("event")) {
+            String[] splitBySlash = userInput.split("/");
+            try {
+                if (splitBySlash.length != 3) {
+                    throw new DukeException("Wrong format for event Task");
+                }
+                String description = splitBySlash[0].substring(6);
+                String from = splitBySlash[1].substring(5);
+                String to = splitBySlash[2].substring(3);
+                Task newTask = new Event(description, from, to);
+                response += tasks.addTask(newTask);
+            } catch (DukeException err) {
+                response += (err + "\n");
+            }
+        } else {
+            try {
+                throw new DukeException("I don't know what that means.");
+            } catch (DukeException err) {
+                response += (err + "\n");
+            }
         }
         return response;
     }

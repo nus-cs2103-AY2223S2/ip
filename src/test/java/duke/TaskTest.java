@@ -8,8 +8,8 @@ public class TaskTest {
     @Test
     public void notMarkTest() {
         Task checkTask = new Task("Eat");
-        assertEquals(checkTask.toString(), "[ ] Eat");
-        assertEquals(checkTask.parse(), "[ ] Eat");
+        assertEquals(checkTask.toString(), "[  ] [Priority Level: LOW] Eat");
+        assertEquals(checkTask.parse(), "[  ] Eat");
     }
 
     @Test
@@ -17,8 +17,18 @@ public class TaskTest {
         Task checkTask = new Task("Eat");
         checkTask.makeCompleted();
 
-        assertEquals(checkTask.toString(), "[X] Eat");
+        assertEquals(checkTask.toString(), "[X] [Priority Level: LOW] Eat");
         assertEquals(checkTask.parse(), "[X] Eat");
+    }
+
+    @Test
+    public void unmarkTest() {
+        Task checkTask = new Task("Eat");
+        checkTask.makeCompleted();
+        checkTask.makeIncomplete();
+
+        assertEquals(checkTask.toString(), "[  ] [Priority Level: LOW] Eat");
+        assertEquals(checkTask.parse(), "[  ] Eat");
     }
 }
 
