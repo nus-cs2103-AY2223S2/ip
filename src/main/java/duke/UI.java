@@ -2,7 +2,8 @@ package duke;
 
 import java.util.Scanner;
 
-/** UI is a program that helps read user input and print some outputs
+/**
+ * UI is a program that helps read user input and print some outputs
  * @author CShuwen
  * @version 1.0
  * @since 0.0
@@ -10,12 +11,12 @@ import java.util.Scanner;
 public class UI {
     private final Scanner scanner;
 
-    public UI(){
+    public UI() {
         this.scanner = new Scanner(System.in);
     }
 
-    public void showWelcome(){
-        String start_message = "Hello! I'm Duke.Duke\n" +  "What can I do for you?";
+    public String showWelcome() {
+        return "Hello! I'm Duke.Duke\n" + "What can I do for you?";
     }
 
 
@@ -27,7 +28,7 @@ public class UI {
         System.out.println(e);
     }
 
-    public String readCommand(){
+    public String readCommand() {
         return scanner.nextLine();
     }
 

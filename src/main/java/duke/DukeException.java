@@ -1,12 +1,13 @@
 package duke;
 
-/** DukeException is used to define exceptions that can be encountered when running Duke
+/**
+ * DukeException is used to define exceptions that can be encountered when running Duke
  * @author CShuwen
  * @version 1.0
  * @since 0.0
  */
-public class DukeException extends Exception{
-    public DukeException(String msg){
+public class DukeException extends Exception {
+    public DukeException(String msg) {
         super(msg);
     }
 
@@ -16,7 +17,7 @@ public class DukeException extends Exception{
      * @return String description of a duke exception.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.getMessage();
     }
 }

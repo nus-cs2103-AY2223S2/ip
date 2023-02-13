@@ -1,23 +1,23 @@
 package duke;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.scene.control.Label;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 
 public class Duke extends Application {
-    final private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    final private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -26,7 +26,7 @@ public class Duke extends Application {
     private final Storage storage;
     private final UI ui;
 
-    public Duke () {
+    public Duke() {
         this.storage = new Storage("duke.txt");
         this.ui = new UI();
         ui.showWelcome();
@@ -145,150 +145,156 @@ public class Duke extends Application {
         int i;
         Parser parser = new Parser();
         String command = parser.parse(input);
-        ArrayList<Task> task_list = storage.load();
+        ArrayList<Task> taskList = storage.load();
         String res = "";
         try {
-            switch (command){
-                case "BYE" :
-                    return "Bye. Hope to see you again soon!";
-                case "LIST":
-                    if (task_list.size() == 0){
-                        String err_msg = "You have not upload any task yet";
-                        throw new DukeException(err_msg);
+            switch (command) {
+            case "BYE":
+                return "Bye. Hope to see you again soon!";
+            case "LIST":
+                if (taskList.size() == 0) {
+                    String errMsg = "You have not upload any task yet";
+                    throw new DukeException(errMsg);
+                }
+                res = "Here are the tasks in your list: \n";
+                i = 1;
+                for (Task task : taskList) {
+                    res += i + ". " + task.toString() + "\n";
+                    i++;
+                }
+                return res;
+            case "DELETE":
+                try {
+                    int num = Integer.parseInt(input.substring(7));
+                    Task currTask = taskList.get(num - 1);
+                    taskList.remove(currTask);
+                    storage.update_data(taskList);
+                    return "Noted. I've removed this task: \n  " + currTask.toString() + "\n"
+                            + "Now you have " + (taskList.size()) + " tasks in the list";
+                } catch (IndexOutOfBoundsException err1) {
+                    String errMsg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
+                    return errMsg;
+                } catch (NumberFormatException err2) {
+                    String errMsg = "☹ OOPS!!! Please key in a valid Number.";
+                    return errMsg;
+                }
+            case "MARK":
+                try {
+                    int num = Integer.parseInt(input.substring(5));
+                    Task currTask = taskList.get(num - 1);
+                    currTask.markAsDone();
+                    taskList.set(num - 1, currTask);
+                    storage.update_data(taskList);
+                    return "Nice! I've marked this task as done\n" + currTask.getStatusIcon() + " " + currTask.getDes();
+                } catch (IndexOutOfBoundsException err1) {
+                    String errMsg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
+                    return errMsg;
+                } catch (NumberFormatException err2) {
+                    String errMsg = "☹ OOPS!!! Please key in a valid Number.";
+                    return errMsg;
+                }
+            case "UNMARK":
+                try {
+                    int num = Integer.parseInt(input.substring(7));
+                    Task currTask = taskList.get(num - 1);
+                    currTask.unMark();
+                    taskList.set(num - 1, currTask);
+                    storage.update_data(taskList);
+                    return "OK, I've marked this task as not done yet\n"
+                            + currTask.getStatusIcon() + " " + currTask.getDes();
+                } catch (IndexOutOfBoundsException err1) {
+                    String errMsg = "☹ OOPS!!! Please the Duke.Task "
+                            + "number that you have keyed in is invalid.";
+                    return errMsg;
+                } catch (NumberFormatException err2) {
+                    String errMsg = "☹ OOPS!!! Please key in a valid Number.";
+                    return errMsg;
+                }
+            case "TODO":
+                if (len <= 5) {
+                    return "☹ OOPS!!! The description of a todo cannot be empty";
+                }
+                System.out.println("Got it. I've added this task:");
+                ToDos todo = new ToDos(input.substring(5), 0);
+                taskList.add(todo);
+                storage.update_data(taskList);
+                return "added: " + todo + "\n"
+                        + "Now you have " + taskList.size() + " tasks in the list";
+            case "DEADLINE":
+                String[] ddlStringArr = input.split(" /");
+                if (len <= 9 || ddlStringArr.length <= 1 || ddlStringArr[0].length() < 10) {
+                    String errMsg = "☹ OOPS!!! The description or date of a deadline cannot be empty";
+                    throw new DukeException(errMsg);
+                }
+                try {
+                    LocalDate deadlineTime = LocalDate.parse(ddlStringArr[1]);
+                    Deadline deadline = new Deadline(ddlStringArr[0].substring(9), deadlineTime, 0);
+                    taskList.add(deadline);
+                    storage.update_data(taskList);
+                    return "added: " + deadline + "\n"
+                            + "Now you have " + taskList.size() + " tasks in the list";
+                } catch (DateTimeParseException e) {
+                    String errMsg = "☹ OOPS!!! The description or date of a "
+                            + "deadline is wrong, plase key in the"
+                            + "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
+                            + "You may key in: deadline hw1 /2001-02-10, "
+                            + "Duke.Duke will record your deadline for hw1 as"
+                            + "2001-02-10";
+                    throw new DukeException(errMsg);
+                }
+            case "EVENT":
+                String[] eventStringArr = input.split(" /");
+                if (len <= 9 || eventStringArr.length <= 2 || eventStringArr[0].length() < 7) {
+                    String errMsg = "☹ OOPS!!! The description or date of a event cannot be empty";
+                    throw new DukeException(errMsg);
+                }
+                try {
+                    LocalDate from = LocalDate.parse(eventStringArr[1]);
+                    LocalDate to = LocalDate.parse(eventStringArr[2]);
+                    if (from.isAfter(to)) {
+                        String errMsg = "☹ OOPS!!! Your time range is from a date to another date that is earlier"
+                                + "than the former. Please key in a valid time range";
+                        throw new DukeException(errMsg);
                     }
-                    res = "Here are the tasks in your list: \n";
-                    i = 1;
-                    for (Task task : task_list) {
-                        res += i + ". " + task.toString() + "\n";
+                    Event event = new Event(eventStringArr[0].substring(6), from, to, 0);
+                    taskList.add(event);
+                    storage.update_data(taskList);
+                    return "Got it. I've added this task \n" + "added: " + event + "\n"
+                            + "Now you have " + taskList.size() + " tasks in the list";
+                } catch (DateTimeParseException e) {
+                    String errMsg = "☹ OOPS!!! The description or date for the "
+                            + "event is wrong, plase key in the"
+                            + "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
+                            + "You may key in: event hw1 /2001-02-10 /2001-02-12,"
+                            + " Duke.Duke will record your event hw1 as"
+                            + "from 2001-02-10 to 2001-02-12";
+                    throw new DukeException(errMsg);
+                }
+            case "FIND":
+                String[] fileInputArr = input.split(" ");
+                if (taskList.size() == 0) {
+                    String errMsg = "You have not upload any task yet";
+                    throw new DukeException(errMsg);
+                }
+                res = "Here are the matching tasks in your list:\n";
+                i = 1;
+                for (Task task : taskList) {
+                    if (task.description.contains(fileInputArr[1])) {
+                        res += i + ". " + task + "\n";
                         i++;
                     }
-                    return res;
-                case "DELETE":
-                    try{
-                        int num = Integer.parseInt(input.substring(7));
-                        Task curr_task = task_list.get(num - 1);
-                        task_list.remove(curr_task);
-                        storage.update_data(task_list);
-                        return "Noted. I've removed this task: \n  " + curr_task.toString() + "\n" +
-                                "Now you have " + (task_list.size()) + " tasks in the list";
-                    } catch (IndexOutOfBoundsException err1){
-                        String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
-                        return err_msg;
-                    } catch (NumberFormatException err2) {
-                        String err_msg = "☹ OOPS!!! Please key in a valid Number.";
-                        return err_msg;
-                    }
-                case "MARK":
-                    try {
-                        int num = Integer.parseInt(input.substring(5));
-                        Task curr_task = task_list.get(num - 1);
-                        curr_task.markAsDone();
-                        task_list.set(num - 1, curr_task);
-                        storage.update_data(task_list);
-                        return "Nice! I've marked this task as done\n" + curr_task.getStatusIcon() + " " + curr_task.getDes();
-                    } catch (IndexOutOfBoundsException err1) {
-                        String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
-                        return err_msg;
-                    } catch (NumberFormatException err2) {
-                        String err_msg = "☹ OOPS!!! Please key in a valid Number.";
-                        return err_msg;
-                    }
-                case "UNMARK":
-                    try{
-                        int num = Integer.parseInt(input.substring(7));
-                        Task curr_task = task_list.get(num - 1);
-                        curr_task.unMark();
-                        task_list.set(num - 1, curr_task);
-                        storage.update_data(task_list);
-                        return "OK, I've marked this task as not done yet\n" +
-                                curr_task.getStatusIcon() + " " + curr_task.getDes();
-                    } catch (IndexOutOfBoundsException err1){
-                        String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
-                        return err_msg;
-                    } catch (NumberFormatException err2) {
-                        String err_msg = "☹ OOPS!!! Please key in a valid Number.";
-                        return err_msg;
-                    }
-                case "TODO":
-                    if (len <= 5) {
-                        return "☹ OOPS!!! The description of a todo cannot be empty";
-                    }
-                    System.out.println("Got it. I've added this task:");
-                    ToDos todo = new ToDos(input.substring(5), 0);
-                    task_list.add(todo);
-                    storage.update_data(task_list);
-                    return "added: " + todo + "\n" +
-                            "Now you have " + task_list.size() + " tasks in the list";
-                case "DEADLINE":
-                    String[] ddl_str_arr = input.split(" /");
-                    if (len <= 9 || ddl_str_arr.length <= 1 || ddl_str_arr[0].length() < 10) {
-                        String err_msg = "☹ OOPS!!! The description or date of a deadline cannot be empty";
-                        throw new DukeException(err_msg);
-                    }
-                    try {
-                        LocalDate deadline_time = LocalDate.parse(ddl_str_arr[1]);
-                        Deadline deadline = new Deadline(ddl_str_arr[0].substring(9), deadline_time, 0);
-                        task_list.add(deadline);
-                        storage.update_data(task_list);
-                        return "added: " + deadline + "\n" +
-                                "Now you have " + task_list.size() + " tasks in the list";
-                    } catch (DateTimeParseException e) {
-                        String err_msg = "☹ OOPS!!! The description or date of a deadline is wrong, plase key in the" +
-                                "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
-                                + "You may key in: deadline hw1 /2001-02-10, Duke.Duke will record your deadline for hw1 as" +
-                                "2001-02-10";
-                        throw new DukeException(err_msg);
-                    }
-                case "EVENT":
-                    String[] event_str_arr = input.split(" /");
-                    if (len <= 9 || event_str_arr.length <= 2 || event_str_arr[0].length() < 7) {
-                        String err_msg = "☹ OOPS!!! The description or date of a event cannot be empty";
-                        throw new DukeException(err_msg);
-                    }
-                    try {
-//                        System.out.println(Arrays.toString(event_str_arr));
-                        LocalDate from = LocalDate.parse(event_str_arr[1]);
-                        LocalDate to = LocalDate.parse(event_str_arr[2]);
-                        if (from.isAfter(to)){
-                            String err_msg = "☹ OOPS!!! Your time range is from a date to another date that is earlier" +
-                                    "than the former. Please key in a valid time range";
-                            throw new DukeException(err_msg);
-                        }
-                        Event event = new Event(event_str_arr[0].substring(6), from, to, 0);
-                        task_list.add(event);
-                        storage.update_data(task_list);
-                        return "Got it. I've added this task \n" + "added: " + event + "\n" +
-                                "Now you have " + task_list.size() + " tasks in the list";
-                    } catch (DateTimeParseException e) {
-                        String err_msg = "☹ OOPS!!! The description or date for the event is wrong, plase key in the" +
-                                "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
-                                + "You may key in: event hw1 /2001-02-10 /2001-02-12, Duke.Duke will record your event hw1 as" +
-                                "from 2001-02-10 to 2001-02-12";
-                        throw new DukeException(err_msg);
-                    }
-                case "FIND":
-                    String[] find_input_arr = input.split(" ");
-                    if (task_list.size() == 0){
-                        String err_msg = "You have not upload any task yet";
-                        throw new DukeException(err_msg);
-                    }
-                    res = "Here are the matching tasks in your list:\n";
-                    i = 1;
-                    for (Task task : task_list) {
-                        if (task.description.contains(find_input_arr[1])){
-                            res += i + ". " + task + "\n";
-                            i++;
-                        }
-                    }
-                    if(i == 1) {
-                        return res + "There are no matching task";
-                    }
-                    return res;
-                case "ERROR":
-                    String err_msg = "☹ OOPS!!! I'm sorry, but I don't know what that means";
-                    throw new DukeException(err_msg);
+                }
+                if ( i == 1 ) {
+                    return res + "There are no matching task";
+                }
+                return res;
+            case "ERROR":
+                String errMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means";
+                throw new DukeException(errMsg);
+            default:
+                break;
             }
-        }catch (DukeException e){
+        } catch (DukeException e) {
             return e.toString();
         }
         return "I don't know what that means";

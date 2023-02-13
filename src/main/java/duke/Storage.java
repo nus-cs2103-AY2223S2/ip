@@ -9,25 +9,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** Storage is a class that help store data in the local file and also read data from local file,
+/**
+ * Storage is a class that help store data in the local file and also read data from local file,
  * @author CShuwen
  * @version 1.0
  * @since 0.0
  */
 public class Storage {
-    private final String data_address;
-    public Storage(String file_name) {
+    private final String dataAddress;
+
+    public Storage(String fileName) {
         Path currentRelativePath = Paths.get("");
-        String currentRelativePath_name = currentRelativePath.toAbsolutePath().toString();
-        this.data_address = currentRelativePath_name + "\\data\\" + file_name;
+        String currentRelativePathName = currentRelativePath.toAbsolutePath().toString();
+        this.dataAddress = currentRelativePathName + "\\data\\" + fileName;
         try {
-            File file_parent = new File(currentRelativePath_name + "\\data");
-            if (!file_parent.exists()) {
-                file_parent.mkdir();
+            File fileParent = new File(currentRelativePathName + "\\data");
+            if (!fileParent.exists()) {
+                fileParent.mkdir();
             }
-            File data_file = new File(data_address);
-            if (!data_file.exists()){
-                data_file.createNewFile();
+            File dataFile = new File(dataAddress);
+            if (!dataFile.exists()) {
+                dataFile.createNewFile();
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -41,29 +43,33 @@ public class Storage {
      * @return An arrayList of all tasks stored in duke.txt.
      * @throws IOException if the file duke.txt is not found.
      */
-    public ArrayList<Task> load(){
+    public ArrayList<Task> load() {
         ArrayList<Task> arrayList = new ArrayList<>();
-        try{
-            File file = new File(data_address);
+        try {
+            File file = new File(dataAddress);
             Scanner reader = new Scanner(file);
-            while (reader.hasNextLine()){
+            while (reader.hasNextLine()) {
                 String data = reader.nextLine();
-                String[] data_parts = data.split("/");
-                String type = data_parts[0];
-                switch (type){
-                    case "T":
-                        arrayList.add(new ToDos(data_parts[2], Integer.valueOf(data_parts[1])));
-                        break;
-                    case "D":
-                        arrayList.add(new Deadline(data_parts[2], LocalDate.parse(data_parts[3]), Integer.valueOf(data_parts[1])));
-                        break;
-                    case "E":
-                        arrayList.add(new Event(data_parts[2], LocalDate.parse(data_parts[3]),LocalDate.parse(data_parts[4]), Integer.valueOf(data_parts[1])));
-                        break;
+                String[] dataParts = data.split("/");
+                String type = dataParts[0];
+                switch (type) {
+                case "T":
+                    arrayList.add(new ToDos(dataParts[2], Integer.valueOf(dataParts[1])));
+                    break;
+                case "D":
+                    arrayList.add(new Deadline(dataParts[2], LocalDate.parse(dataParts[3]),
+                            Integer.valueOf(dataParts[1])));
+                    break;
+                case "E":
+                    arrayList.add(new Event(dataParts[2], LocalDate.parse(dataParts[3]) ,
+                            LocalDate.parse(dataParts[4]), Integer.valueOf(dataParts[1])));
+                    break;
+                default:
+                    break;
                 }
             }
             reader.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
         return arrayList;
@@ -75,16 +81,16 @@ public class Storage {
      * @param arrayList an arraylist of tasks that need to be stored in duke.txt
      * @throws IOException if the file duke.txt is not found.
      */
-    public void update_data(ArrayList<Task> arrayList){
+    public void update_data(ArrayList<Task> arrayList) {
         String data = "";
         try {
-            FileWriter fw = new FileWriter(this.data_address);
-            for (Task t: arrayList){
+            FileWriter fw = new FileWriter(this.dataAddress);
+            for (Task t: arrayList) {
                 data += t.dataFormat() + "\n";
             }
             fw.write(data);
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e);
         }
     }

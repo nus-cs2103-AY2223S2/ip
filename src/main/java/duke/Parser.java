@@ -1,12 +1,13 @@
 package duke;
 
-/** Parser is a program that help identify the command type of user inputs
+/**
+ * Parser is a program that help identify the command type of user inputs
  * @author CShuwen
  * @version 1.0
  * @since 0.0
  */
 public class Parser {
-    public Parser(){
+    public Parser() {
     }
 
     /**
@@ -18,7 +19,7 @@ public class Parser {
      */
     public String parse(String input) {
         int len = input.length();
-        if (input.equals("bye")){
+        if (input.equals("bye")) {
             return "BYE";
         } else if (input.equals("list")) {
             return "LIST";
@@ -34,7 +35,7 @@ public class Parser {
             return "DEADLINE";
         } else if (len >= 7 && input.substring(0, 5).equals("event")) {
             return "EVENT";
-        } else if (len >= 6 && input.substring(0, 4).equals("find")){
+        } else if (len >= 6 && input.substring(0, 4).equals("find")) {
             return "FIND";
         } else {
             return "ERROR";
