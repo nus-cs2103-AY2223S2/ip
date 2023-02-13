@@ -11,7 +11,7 @@ import membot.view.Printable;
  * in its title.
  */
 public class FindCommand extends Command {
-    public FindCommand(String input, Printable ui) {
+    protected FindCommand(String input, Printable ui) {
         super(input, ui);
     }
 

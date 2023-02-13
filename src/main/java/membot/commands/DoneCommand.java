@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
      * @param input User input into the application.
      * @param ui A Printable object used for UI display.
      */
-    public DoneCommand(String input, Printable ui) {
+    protected DoneCommand(String input, Printable ui) {
         super(input, ui);
     }
 

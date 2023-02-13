@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      *
      * @param ui A Printable object used for UI display.
      */
-    public ListCommand(Printable ui) {
+    protected ListCommand(Printable ui) {
         super(ui);
     }
 
