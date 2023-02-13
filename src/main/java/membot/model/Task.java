@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import membot.storage.Outputable;
@@ -71,7 +72,7 @@ public abstract class Task {
      * @return The deleted <code>Task</code> object.
      * @throws IndexOutOfBoundsException If the list of tasks is empty.
      */
-    public static Task deleteLast() throws IndexOutOfBoundsException {
+    public static Task deleteLast() throws NoSuchElementException {
         return Task.tasks.removeLast();
     }
 
