@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -26,6 +28,7 @@ public class Storage {
      */
     public void handleLoad() throws IOException {
         BufferedReader taskLoader = new BufferedReader(new FileReader(this.file));
+        assert Files.exists(Paths.get(this.path)) : "The file, " + this.path + ", does not exist.";
         String words = taskLoader.readLine();
         while (words != null) {
             String[] keywords = words.split(" \\|\\| ");
