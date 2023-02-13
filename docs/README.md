@@ -2,6 +2,8 @@
 
 Are you a fast typist looking for a way to organise your mind? Then Duke has you covered. Duke is a desktop task tracking application designed for fast typists, offering both a terminal CLI and chatbot GUI. With Duke, you can spend less time remembering and more time doing.
 
+![Screenshot](https://hingen.github.io/ip/Ui.png)
+
 ## Prerequisites
 
 * Install Java 11
