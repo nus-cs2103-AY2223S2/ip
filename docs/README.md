@@ -21,7 +21,7 @@ Ever felt like you couldn't get a handle on *all* the things that you have to do
 7. You should see the window below.
 
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true" height="1000" width="600"><br>
 </p>
 
 ---
@@ -31,11 +31,11 @@ Ever felt like you couldn't get a handle on *all* the things that you have to do
 A broad overview of what Colette can do for you:
 * [Viewing help](#viewing-help)
 * [Listing all tasks](#listing-all-tasks)
-* [Adding a task](#adding-a-task)<br>
+* [Adding a task](#adding-a-task)
   * [Adding a todo](#adding-a-todo)
   * [Adding a deadline](#adding-a-deadline)
   * [Adding an event](#adding-an-event)
-* [Marking a task as done or not done](#marking-a-task-as-done-or-not-done)<br>
+* [Marking a task as done or not done](#marking-a-task-as-done-or-not-done)
   * [Marking a task as done](#marking-a-task-as-done)
   * [Marking a task as not done](#marking-a-task-as-not-done)
 * [Deleting a task](#deleting-a-task)
@@ -73,7 +73,7 @@ Format: ```todo [name/description]```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/todo.png?raw=true" width="400" height="250"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/todo.png?raw=true" width="400" height="220"><br>
 </p>
 
 #### Adding a deadline
@@ -83,7 +83,7 @@ Format: ```deadline [description] [date to do the task by]```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/deadline.png?raw=true" width="400" height="250"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/deadline.png?raw=true" width="400" height="220"><br>
 </p>
 
 #### Adding an event
@@ -93,7 +93,7 @@ Format: ```event [description] [start date] [end date]```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/event.png?raw=true" width="400" height="250"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/event.png?raw=true" width="400" height="230"><br>
 </p>
 
 ### **Marking a task as done or not done**
@@ -104,7 +104,7 @@ Format: ```mark [index]``` where index is the index of the task in the list.
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/mark.png?raw=true" width="450" height="600"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/mark.png?raw=true" width="450" height="570"><br>
 </p>
 
 #### Marking a task as not done
@@ -112,7 +112,7 @@ Format: ```unmark [index]``` where index is the index of the task in the list.
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/unmark.png?raw=true" width="450" height="600"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/unmark.png?raw=true" width="450" height="570"><br>
 </p>
 
 ### **Deleting a task**
@@ -132,7 +132,7 @@ Example: ```find pet dogs``` will find all tasks with either `pet` or `dogs` in 
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/find.png?raw=true" width="400" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/find.png?raw=true" width="400" height="260"><br>
 </p>
 
 ### **Exiting the app**
@@ -140,7 +140,7 @@ Format: ```bye```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/bye.png?raw=true" width="400" height="250"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/bye.png?raw=true" width="400" height="210"><br>
 </p>
 
 ### **Remembering your tasks between sessions**
