@@ -18,13 +18,6 @@ public class Ui {
     }
 
     /**
-     * Message displayed when program exits.
-     */
-    public String exit() {
-        return "Bye. Hope to see you again soon!\n";
-    }
-
-    /**
      * Lists out the shows the user the tasks in the TaskList.
      *
      * @param taskList The TaskList containing the tasks to be displayed.
