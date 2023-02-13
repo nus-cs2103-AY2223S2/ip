@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import duke.tasks.*;
 
-public class TaskList {
+class TaskList {
     private final ArrayList<Task> tasks;
     private final Storage saveManager;
 

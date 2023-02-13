@@ -6,9 +6,7 @@ import duke.tasks.*;
 import java.time.format.DateTimeParseException;
 import java.util.StringTokenizer;
 
-public class Parser {
-
-    //TODO: make static import from duke.backend.UI.
+class Parser {
     public static final String DIVIDER = "____________________________________________________________\n";
     private final UI ui;
     private final TaskList taskManager;

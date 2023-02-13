@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import duke.tasks.*;
 
-public class UI {
+class UI {
     public static final String DIVIDER = "____________________________________________________________\n";
 
     private Scanner sc;

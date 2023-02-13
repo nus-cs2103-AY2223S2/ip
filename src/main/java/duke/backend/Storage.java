@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import duke.tasks.*;
 
-public class Storage {
+class Storage {
     File prevTasks;
 
     public Storage(File prevTasks) {
@@ -24,7 +24,7 @@ public class Storage {
             while (fileSc.hasNextLine()) {
                 String[] savedData = fileSc.nextLine()
                         .split(" \\| ");
-                Task t = new Task("");
+                Task t = new Todo("");
                 switch (savedData[0]) {
                 case "T":
                     t = new Todo(savedData[2]);
@@ -57,16 +57,16 @@ public class Storage {
             Task t = tasks.get(i);
             switch (t.getClass().getSimpleName()) { //encoding: "E | NAME | FROM | TO"
             case "Todo":
-                encoding = encoding + ("T | " + (t.isDone ? "1" : "0") + " | ");
-                encoding = encoding + t.description;
+                encoding = encoding + ("T | " + (t.isDone() ? "1" : "0") + " | ");
+                encoding = encoding + t.getDescription();
                 break;
             case "Deadline":
-                encoding = encoding + ("D | " + (t.isDone ? "1" : "0") + " | ");
-                encoding = encoding + t.description + " | " + ((Deadline) t).by;
+                encoding = encoding + ("D | " + (t.isDone() ? "1" : "0") + " | ");
+                encoding = encoding + t.getDescription() + " | " + ((Deadline) t).getDeadline();
                 break;
             case "Event":
-                encoding = encoding + ("E | " + (t.isDone ? "1" : "0" + " | "));
-                encoding = encoding + (t.description + " | " + ((Event) t).start + " | " + ((Event) t).end);
+                encoding = encoding + ("E | " + (t.isDone() ? "1" : "0" + " | "));
+                encoding = encoding + (t.getDescription() + " | " + ((Event) t).start + " | " + ((Event) t).end);
                 break;
             }
             encoding = encoding + "\n";

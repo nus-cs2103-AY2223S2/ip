@@ -2,7 +2,7 @@ package duke.backend;
 
 import java.io.IOException;
 
-public class Duke {
+class Duke {
   public static void main(String[] args) throws IOException {
     TaskList taskManager = new TaskList();
     UI ui = new UI(taskManager);
