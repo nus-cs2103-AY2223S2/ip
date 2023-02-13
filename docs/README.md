@@ -132,7 +132,7 @@ Format: `unmark TASK_NUMBER`
 
 Remarks:
 - `TASK_NUMBER` is compulsory.
-- `TASK_NUMBER` entered must be a valid task number as shown in `list`.
+- `TASK_NUMBER` must be a valid task number as shown in `list`.
 
 Examples:
 
@@ -149,7 +149,7 @@ Format: `delete TASK_NUMBER`
 
 Remarks:
 - `TASK_NUMBER` is compulsory.
-- `TASK_NUMBER` entered must be a valid task number as shown in `list`.
+- `TASK_NUMBER` must be a valid task number as shown in `list`.
 
 Examples:
 
