@@ -17,9 +17,6 @@ public class Ui {
         System.out.println("------------------------------------");
     }
 
-<<<<<<< HEAD
-
-=======
     public String startUpMsg() {
         String name = "todo bot";
         String helloMsg = "";
@@ -45,5 +42,4 @@ public class Ui {
         helloMsg += "------------------------------------\n";
         return helloMsg;
     }
->>>>>>> branch-A-JavaDoc
 }
