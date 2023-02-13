@@ -58,4 +58,15 @@ public class Deadline extends Task {
     public boolean fallsOnDate(LocalDate date) {
         return this.deadline.equals(date);
     }
+
+    /**
+     * Checks if the task is complete and if its deadline is before or on a specified date.
+     * @param date the date to check against.
+     * @return a boolean value.
+     */
+    @Override
+    public boolean isIncompleteBeforeDate(LocalDate date) {
+        return !isComplete()
+                && this.deadline.compareTo(date) <= 0;
+    }
 }

@@ -144,4 +144,22 @@ public class TaskList {
         }
         return display.toString();
     };
+
+    /**
+     * Gets all tasks before or on a specified date.
+     * @param date the date to check against.
+     * @return a string of tasks.
+     */
+    public String getTasksBy(LocalDate date) {
+        StringBuilder display = new StringBuilder();
+        int count = 1;
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task curr = this.tasks.get(i);
+            if (curr.isIncompleteBeforeDate(date)) {
+                display.append((count) + ". " + curr.getStatusIcon() + "\n");
+                count++;
+            }
+        }
+        return display.toString();
+    }
 }

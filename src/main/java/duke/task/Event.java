@@ -71,4 +71,15 @@ public class Event extends Task {
         return this.startDate.compareTo(date)
                 * date.compareTo(this.endDate) >= 0;
     }
+
+    /**
+     * Checks if the event is incomplete and its start date is on or before a specified date.
+     * @param date the date to check against.
+     * @return a boolean value.
+     */
+    @Override
+    public boolean isIncompleteBeforeDate(LocalDate date) {
+        return !isComplete() &&
+                this.startDate.compareTo(date) <= 0;
+    }
 }

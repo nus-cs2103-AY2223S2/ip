@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import duke.exceptions.DukeException;
 import duke.storage.FileManagement;
 import duke.task.TaskList;
@@ -33,10 +36,13 @@ public class Duke {
      * @return the greeting message in string.
      */
     public String getGreeting() {
+        LocalDate today = LocalDate.now();
         String logo = "DUKE";
         String greeting = "Hello i'm\n"
                 + logo
-                + "\nWhat can I do for you?";
+                + ". Today is "
+                + today.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ".\nWhat can I do for you?";
         return greeting;
     }
 

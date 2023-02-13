@@ -49,6 +49,8 @@ public class Parser {
             return GetEventsOnCommand.retrieveEvents(tasks, userInput);
         case FIND:
             return FindCommand.executeFind(tasks, userInput);
+        case GETREMINDERS:
+            return GetRemindersCommand.getReminders(tasks, userInput);
         default:
             assert false : "Unknown commands should have been resolved and not parsed.";
             return "";
