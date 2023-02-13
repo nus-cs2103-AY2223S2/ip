@@ -41,6 +41,7 @@ public class Duke {
      * Starts Duke application.
      * Sets up persistent storage and user interface. Begins to receive and process input form user.
      * Terminates based on user input.
+     * @return reply message after processing user input.
      */
     public String getResponse(String userInput) {
         if (userInput.equals("bye")) {
@@ -118,7 +119,7 @@ public class Duke {
     }
 
     private String listTask() {
-        String message = "Here are the tasks in your list:";
+        String message = "Here are your tasks:";
         message += tasks.getTaskList();
         return message;
     }
@@ -133,7 +134,7 @@ public class Duke {
     private String markTask(String[] input) throws DukeException {
         ArrayList<Integer> taskIds = Parser.parseMarkTask(input);
         if (!validateIdsRange(taskIds)) {
-            throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+            throw new DukeException("Hey!!! The item number is out of range.");
         }
 
         storage.markEntries(taskIds, true);
@@ -144,7 +145,7 @@ public class Duke {
     private String unmarkTask(String[] input) throws DukeException {
         ArrayList<Integer> taskIds = Parser.parseUnmarkTask(input);
         if (!validateIdsRange(taskIds)) {
-            throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+            throw new DukeException("Hey!!! The item number is out of range.");
         }
 
         storage.markEntries(taskIds, false);
@@ -156,7 +157,7 @@ public class Duke {
     private String deleteTask(String[] input) throws DukeException {
         ArrayList<Integer> taskIds = Parser.parseDeleteTask(input);
         if (!validateIdsRange(taskIds)) {
-            throw new DukeException(" ☹ OOPS!!! The item number is out of range.");
+            throw new DukeException("Hey!!! The item number is out of range.");
         }
 
         storage.deleteEntries(taskIds);
@@ -166,24 +167,24 @@ public class Duke {
     }
 
     private String generateAddTaskMessage(Task task) {
-        String message = "Got it. I've added this task:\n" + task.toString();
-        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
+        String message = "Got it! I've added this task:\n" + task.toString();
+        message += "\nNow there's " + tasks.numTasks() + " tasks in the list.";
         return message;
     }
 
     private String generateDeleteTaskMessage(ArrayList<Task> selectedTasks) {
-        String message = "Noted. I've removed these tasks:\n";
+        String message = "Got it!. I've removed these tasks:\n";
         for (int i = 0; i < selectedTasks.size(); i++) {
             Task oneTask = selectedTasks.get(i);
             message += oneTask.toString() + "\n";
         }
-        message += "\nNow you have " + tasks.numTasks() + " tasks in the list.";
+        message += "\nNow there's " + tasks.numTasks() + " tasks in the list.";
         return message;
     }
 
     private String generateMarkMessage(ArrayList<Task> selectedTasks, boolean isMark) {
-        String unmarkMsg = "OK! I've marked these tasks as not done yet:\n";
-        String markMsg = "Nice! I've marked these tasks as done:\n";
+        String unmarkMsg = "Done! I've marked these tasks as not done yet:\n";
+        String markMsg = "YAY! I've marked these tasks as done:\n";
         String message = isMark ? markMsg : unmarkMsg;
         for (int i = 0; i < selectedTasks.size(); i++) {
             Task oneTask = selectedTasks.get(i);

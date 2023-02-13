@@ -16,7 +16,7 @@ import duke.tasks.Todo;
 public class Parser {
 
     /**
-     * Determines whether command is valid and return appropriate <code>Command</code>.
+     * Validates user input and returns the appropriate <code>Command</code>.
      *
      * @param inputCommand string that to be checked.
      * @return the appropriate Command enum.
@@ -35,7 +35,7 @@ public class Parser {
     }
 
     /**
-     * Construct a Todo based on user input.
+     * Returns a todo based on user input.
      *
      * @param input user input to be parsed.
      * @return a todo constructed from user input.
@@ -44,14 +44,14 @@ public class Parser {
     public static Todo parseTodo(String[] input) throws DukeException { //return task
         boolean descriptionMissing = input.length == 1 || input[1].isEmpty();
         if (descriptionMissing) {
-            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("Hey!!! The description of a todo cannot be empty.");
         }
         Todo tempTodo = new Todo(input[1]);
         return tempTodo;
     }
 
     /**
-     * Construct a Deadline based on user input.
+     * Returns a Deadline based on user input.
      *
      * @param input user input to be parsed.
      * @return a deadline constructed from user input.
@@ -60,12 +60,12 @@ public class Parser {
     public static Deadline parseDeadline(String[] input) throws DukeException {
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
-            throw new DukeException(" ☹ OOPS!!! The description and due date of a deadline cannot be empty.");
+            throw new DukeException("Hey!!! The description and due date of a deadline cannot be empty.");
         }
         String[] dlString = input[1].split(" /by ");
         boolean dateIsMissing = dlString.length == 1 || dlString[1].isEmpty();
         if (dateIsMissing) {
-            throw new DukeException(" ☹ OOPS!!! The description and due date of a deadline cannot be empty.");
+            throw new DukeException("Hey!!! The description and due date of a deadline cannot be empty.");
         }
 
         try {
@@ -84,7 +84,7 @@ public class Parser {
     }
 
     /**
-     * Construct an Event based on user input.
+     * Returns an Event based on user input.
      *
      * @param input user input to be parsed.
      * @return an event constructed from user input.
@@ -93,9 +93,9 @@ public class Parser {
     public static Event parseEvent(String[] input) throws DukeException {
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
-            throw new DukeException(" ☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("Hey!!! The description of an event cannot be empty.");
         }
-        String emptyDateMsg = " ☹ OOPS!!! The start & end time of an event cannot be empty.";
+        String emptyDateMsg = "Hey!!! The start & end time of an event cannot be empty.";
         String[] eventDetails = input[1].split(" /from ");
         boolean bothDateMissing = eventDetails.length == 1 || eventDetails[1].isEmpty();
         if (bothDateMissing) {
@@ -135,7 +135,7 @@ public class Parser {
     public static ArrayList<Integer> parseMarkTask(String[] input) throws DukeException { // returns task id
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
-            throw new DukeException(" ☹ OOPS!!! The item number is required to mark.");
+            throw new DukeException("Hey!!! The item number is required to mark.");
         }
 
         String[] inputIds = input[1].split(" ");
@@ -162,7 +162,7 @@ public class Parser {
     public static ArrayList<Integer> parseUnmarkTask(String[] input) throws DukeException { // returns task id
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
-            throw new DukeException(" ☹ OOPS!!! The item number is required to unmark.");
+            throw new DukeException("Hey!!! The item number is required to unmark.");
         }
 
 
@@ -192,7 +192,7 @@ public class Parser {
     public static ArrayList<Integer> parseDeleteTask(String[] input) throws DukeException { // returns task id
         boolean inputIsTooShort = input.length == 1 || input[1].isEmpty();
         if (inputIsTooShort) {
-            throw new DukeException(" ☹ OOPS!!! The item number is required to delete.");
+            throw new DukeException("Hey!!! The item number is required to delete.");
         }
 
 

@@ -1,14 +1,16 @@
 package command;
 
-import duke.command.Command;
-import duke.exception.DukeException;
-import duke.tasks.Todo;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import duke.command.Command;
 import duke.command.Parser;
+import duke.exception.DukeException;
+import duke.tasks.Todo;
+
+
 public class ParserTest {
 
     @Test
@@ -16,7 +18,7 @@ public class ParserTest {
         String[] testInput = {"todo", "Test Todo"};
         try {
             Todo testTodo = Parser.parseTodo(testInput);
-            assertEquals("Test Todo", testTodo.getDescription() );
+            assertEquals("Test Todo", testTodo.getDescription());
             assertEquals("[T][ ] Test Todo", testTodo.toString());
         } catch (DukeException dukeException) {
             fail();
@@ -30,7 +32,7 @@ public class ParserTest {
             Todo testTodo = Parser.parseTodo(testInput);
             fail();
         } catch (DukeException dukeException) {
-            assertEquals(" ☹ OOPS!!! The description of a todo cannot be empty.", dukeException.getMessage());
+            assertEquals("Hey!!! The description of a todo cannot be empty.", dukeException.getMessage());
         }
     }
 
