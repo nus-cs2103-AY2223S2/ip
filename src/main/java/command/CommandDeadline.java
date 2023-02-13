@@ -1,6 +1,7 @@
 package command;
 
 import duke.DukeException;
+import task.Deadline;
 import task.Task;
 import task.TaskList;
 import duke.Ui;
@@ -31,7 +32,17 @@ public class CommandDeadline extends Command {
     }
 
     private Task addIntoList(String taskDetails) throws DukeException {
-        return this.taskList.addDeadlineTask(taskDetails);
+        try {
+            String[] s = taskDetails.split("/by");
+            String taskInfo = s[0].trim();
+            String taskDateLine = s[1].trim();
+
+            Task newTask = new Deadline(taskInfo, taskDateLine);
+            this.taskList.addTask(newTask);
+            return newTask;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(Ui.emptyDetailsForDeadlineMessage);
+        }
     }
 
     private String getConfirmationMessageOf(Task taskAdded) {

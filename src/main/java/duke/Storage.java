@@ -129,7 +129,7 @@ public class Storage {
      */
     public void overwriteFile(TaskList taskList) {
         StringBuilder s = new StringBuilder();
-        for (Task storedInput : taskList.getList()) {
+        for (Task storedInput : taskList.writeToFile()) {
             s.append(storedInput.writeToFile());
             s.append("\n");
         }

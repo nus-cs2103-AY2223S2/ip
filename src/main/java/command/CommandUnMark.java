@@ -31,7 +31,16 @@ public class CommandUnMark extends Command {
     }
 
     private Task unmarkTaskAt(String index) throws DukeException {
-        return this.taskList.unMarkTask(index);
+        int i = this.getIndex(index);
+        return this.taskList.getTaskAt(i).markNotDone();
+    }
+
+    private int getIndex(String index) throws DukeException {
+        try {
+            return Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     private String getConfirmationMessageOf(Task unmarkedTask) {

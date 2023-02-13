@@ -4,6 +4,7 @@ import duke.DukeException;
 import task.Task;
 import task.TaskList;
 import duke.Ui;
+import task.ToDo;
 
 /**
  * Command to add todo task.
@@ -30,7 +31,17 @@ public class CommandToDo extends Command {
     }
 
     private Task addIntoList(String taskDetails) throws DukeException {
-        return this.taskList.addToDoTask(taskDetails);
+        this.checkIfBlank(taskDetails);
+
+        Task newTask = new ToDo(taskDetails.trim());
+        this.taskList.addTask(newTask);
+        return newTask;
+    }
+
+    private void checkIfBlank(String taskDetails) throws DukeException {
+        if (taskDetails.isBlank()) {
+            throw new DukeException(Ui.emptyDetailsForToDoMessage);
+        }
     }
 
     private String getConfirmationMessageOf(Task taskAdded) {

@@ -1,9 +1,12 @@
 package command;
 
+import java.time.format.DateTimeParseException;
+
 import duke.DukeException;
+import duke.Ui;
+import task.Event;
 import task.Task;
 import task.TaskList;
-import duke.Ui;
 
 /**
  * Command to add event task.
@@ -31,7 +34,30 @@ public class CommandEvent extends Command {
     }
 
     private Task addIntoList(String taskDetails) throws DukeException {
-        return this.taskList.addEventTask(taskDetails);
+        this.checkIfBlank(taskDetails);
+
+        try {
+            String[] s = taskDetails.split("/from");
+            String[] ss = s[1].split("/to");
+
+            String taskName = s[0].trim();
+            String taskStartDate = ss[0].trim();
+            String taskEndDate = ss[1].trim();
+
+            Task newTask = new Event(taskName, taskStartDate, taskEndDate);
+            this.taskList.addTask(newTask);
+            return newTask;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(Ui.eventTaskFormat);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(Ui.supportedDateFormat);
+        }
+    }
+
+    private void checkIfBlank(String taskDetails) throws DukeException {
+        if (taskDetails.isBlank()) {
+            throw new DukeException(Ui.emptyDetailsForEventMessage);
+        }
     }
 
     private String getConfirmationMessageOf(Task taskAdded) {

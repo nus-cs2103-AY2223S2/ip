@@ -1,8 +1,7 @@
 package command;
 
-import duke.DukeException;
-import task.TaskList;
 import duke.Ui;
+import task.TaskList;
 
 /**
  * Command to find all tasks that matches a phrase.
@@ -24,7 +23,7 @@ public class CommandFind extends Command {
     }
 
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         String foundTasks = this.findAllTaskContaining(this.phrase);
         return this.format(foundTasks);
     }

@@ -14,6 +14,8 @@ public class Ui {
     public static final String supportedDateFormat = "EXCUSE ME!!!, " +
             "please use the correct date format\n dd/mm/yyyy";
 
+    public static final String integerOutOfBoundsMessage= "Are you blind? That's not an option!!";
+
     public static String getDeleteMessageWithAttitudeOf(Task taskRemoved) {
         return "\nNoted. I've purged this task:\n  " + taskRemoved.getTaskDetails();
     }
@@ -23,7 +25,7 @@ public class Ui {
     }
 
     public static String getUnMarkMessageWithAttitude(Task unmarkedTask) {
-        return "\nOK, I've marked this task as undone:\n  " + unmarkedTask.getDetails() + "\n";
+        return "\nOK, I've marked this task as undone:\n  " + unmarkedTask.getName() + "\n";
     }
 
     public static String getAddTaskConfirmationWithAttitude(String taskDetails) {

@@ -1,47 +1,66 @@
 package task;
 
-import task.Task;
-
 /**
- * ToDo is a type of task which consist of the task details only.
+ * ToDo is a task which includes the name.
  */
 public class ToDo extends Task {
 
     /**
-     * Create a undone ToDo task which consist task details only.
+     * Constructor for ToDo with default isTaskDone.
      *
-     * @param s Task details.
+     * @param taskName Name of task.
      */
-    public ToDo(String s) {
-        super(s);
+    public ToDo(String taskName) {
+        super(taskName);
     }
 
     /**
-     * Creates an instance of ToDo that takes in task status.
+     * Constructor for Todo.
      *
-     * @param isTaskDone
-     * @param taskDetails
+     * @param taskName Name of task.
+     * @param isTaskDone Status of task.
      */
-    public ToDo(Boolean isTaskDone, String taskDetails) {
-        super(taskDetails);
-        if (isTaskDone) {
-            this.markDone();
-        }
+    public ToDo(String taskName, Boolean isTaskDone) {
+        super(taskName, isTaskDone);
     }
+
     @Override
     public String writeToFile() {
-        if (!isTaskDone) {
-            return "T| |" + this.taskName;
+        return this.formatForWriteToFile(this.isDone(), this.getName());
+    }
+
+    private String formatForWriteToFile(Boolean isDone, String taskName) {
+        StringBuilder s = new StringBuilder("T|");
+
+        if (isDone) {
+            s.append("X");
+        } else {
+            s.append(" ");
         }
-        return "T|X|" + this.taskName;
+
+        s.append("|");
+        s.append(taskName);
+
+        return s.toString();
     }
 
     @Override
     public String toString() {
-        if (!isTaskDone) {
-            return "[T][ ] " + this.taskName;
+        return this.formatForUserToSee(this.isDone(), this.getName());
+    }
+
+    private String formatForUserToSee(Boolean isDone, String taskName) {
+        StringBuilder s = new StringBuilder("[T][");
+
+        if (isDone) {
+            s.append("X");
+        } else {
+            s.append(" ");
         }
-        return "[T][X] " + this.taskName;
+        s.append("] ");
+        s.append(taskName);
+
+        return s.toString();
     }
 
 }

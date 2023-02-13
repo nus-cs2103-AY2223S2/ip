@@ -1,65 +1,98 @@
 package task;
 
 /**
- * Base class for all tasks consisting of task details and status.
+ * Base class for all types of tasks.
  */
-public class Task {
-    /** Count total Tasks created */
-    //public static Integer count = 0;
+public abstract class Task {
 
-    /** Name of task */
-    protected String taskName;
+    private final String taskName;
 
-    /** Task status */
-    protected Boolean isTaskDone;
+    private Boolean isTaskDone;
+
+    private final Boolean isTaskDoneDefault = false;
+
+    private final String dateFormatA = "dd/MM/yyyy";
+
+    private final String dateFormatB = "dd-MM-yyyy";
 
     /**
-     * Creates an instance of Task.
+     * Constructor for Task.
+     *
+     * @param taskName Name of task.
+     * @param isTaskDone Status of task.
+     */
+    protected Task(String taskName, Boolean isTaskDone) {
+        this.taskName = taskName;
+        this.isTaskDone = isTaskDone;
+    }
+
+    /**
+     * Constructor for Task with default value for isTaskDone
      *
      * @param taskName Name of task.
      */
     protected Task(String taskName) {
         this.taskName = taskName;
-        this.isTaskDone = false;
-        //Task.count++;
+        this.isTaskDone = this.isTaskDoneDefault;
     }
 
     /**
-     * Mark this task as done.
+     * Method to write all task into file
+     *
+     * @return String denoting the new task.
      */
-    public Task markDone() {
+    public abstract String writeToFile();
+
+    /**
+     * Mark task as done.
+     *
+     * @return Task that was marked done.
+     */
+    public Task markIsDone() {
         this.isTaskDone = true;
         return this;
     }
 
     /**
-     * Mark this task as not done.
+     * Mark task as not done.
+     *
+     * @return Task that was marked not done.
      */
-    public Task markUnDone() {
+    public Task markNotDone() {
         this.isTaskDone = false;
         return this;
     }
 
     /**
-     * Use for overriding for child classes.
+     * Return task status.
+     *
+     * @return True if task is done.
      */
-    public String writeToFile() {
-        return "";
+    public Boolean isDone() {
+        return this.isTaskDone;
     }
 
     @Override
     public String toString() {
-        if (!isTaskDone) {
-            return "[ ] " + this.taskName;
+        if (isTaskDone) {
+            return "[X] " + this.taskName;
         }
-        return "[X] " + this.taskName;
+        return "[ ] " + this.taskName;
     }
 
-    public String getDetails() {
+    public String getName() {
         return this.taskName;
     }
 
     public String getTaskDetails() {
         return this.toString();
+    }
+
+    public String getDateFormatA() {
+        return this.dateFormatA;
+    }
+
+    public String getDateFormatB() {
+        return this.dateFormatB;
     }
 }

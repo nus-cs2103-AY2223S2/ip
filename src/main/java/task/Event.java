@@ -1,82 +1,91 @@
 package task;
 
-import task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event is a type of task which includes the details, start date and end date.
+ * Event is a type of task which includes the name, start date and end date.
  */
 public class Event extends Task {
 
-    /** Start date of this task */
-    private LocalDate startTime;
+    private final LocalDate startDate;
 
-    /** End date of this task */
-    private LocalDate endTime;
+    private final LocalDate endDate;
 
     /**
-     * Creates an Event object.
+     * Constructor for event type of task with default isTaskDone.
      *
-     * @param s Details of event.
-     * @param startTime Start date of event.
-     * @param endTime End date of event.
+     * @param taskName Name of task.
+     * @param startDate Start date of task.
+     * @param endDate End date of task.
      */
-    public Event(String s, String startTime, String endTime) {
-        super(s);
-        this.startTime = LocalDate.parse(startTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    public Event(String taskName, String startDate, String endDate) {
+        super(taskName);
+        this.startDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern(this.getDateFormatA()));
+        this.endDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern(this.getDateFormatA()));
     }
 
     /**
-     * Creates an Event object.
-     * Use when reading from file.
+     * Constructor for event type of task.
      *
-     * @param isTaskDone Status of event.
-     * @param taskDetails Details of event.
-     * @param taskDate Start and end date of event.
+     * @param taskName Name of task.
+     * @param startDate Start date of task.
+     * @param endDate End date of task.
+     * @param isTaskDone Status of task.
      */
-    public Event(Boolean isTaskDone, String taskDetails, String taskDate) {
-        super(taskDetails);
-        if (isTaskDone) {
-            this.markDone();
-        }
-        String from = taskDate.substring(0, taskDate.indexOf("|"));
-        String to = taskDate.substring(taskDate.indexOf("|") + 1);
-
-        this.startTime = LocalDate.parse(from, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.endTime = LocalDate.parse(to, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    public Event(String taskName, String startDate, String endDate, Boolean isTaskDone) {
+        super(taskName, isTaskDone);
+        this.startDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern(this.getDateFormatA()));
+        this.endDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern(this.getDateFormatA()));
     }
 
     @Override
     public String writeToFile() {
-        if (!isTaskDone) {
-            return "E| |"
-                    + this.taskName
-                    + "|"
-                    + this.startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                    + "|"
-                    + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return this.formatForWriteToFile(this.isDone(), this.getName(), this.startDate, this.endDate);
+    }
+
+    private String formatForWriteToFile(Boolean isDone, String taskName,
+                                        LocalDate startDate, LocalDate endDate) {
+        StringBuilder s = new StringBuilder("E|");
+
+        if (isDone) {
+            s.append("X");
+        } else {
+            s.append(" ");
         }
-        return "E|X|"
-                + this.taskName
-                + "|"
-                + this.startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                + "|"
-                + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        s.append("|");
+        s.append(taskName);
+        s.append("|");
+        s.append(startDate.format(DateTimeFormatter.ofPattern(this.getDateFormatA())));
+        s.append("|");
+        s.append(endDate.format(DateTimeFormatter.ofPattern(this.getDateFormatA())));
+
+        return s.toString();
     }
 
     @Override
     public String toString() {
-        if (!isTaskDone) {
-            return "[E][ ] " + this.taskName
-                + " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
-        }
-        return "[E][X] " + this.taskName
-                + " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
+        return this.formatForUserToSee(this.isDone(), this.getName(), this.startDate, this.endDate);
     }
 
+    private String formatForUserToSee(Boolean isDone, String taskName,
+                                      LocalDate startDate, LocalDate endDate) {
+        StringBuilder s = new StringBuilder("[E][");
+
+        if (isDone) {
+            s.append("X");
+        } else {
+            s.append(" ");
+        }
+        s.append("] ");
+        s.append(taskName);
+        s.append(" (from: ");
+        s.append(startDate.format(DateTimeFormatter.ofPattern(this.getDateFormatB())));
+        s.append(" to: ");
+        s.append(endDate.format(DateTimeFormatter.ofPattern(this.getDateFormatB())));
+        s.append(")");
+
+        return s.toString();
+    }
 }

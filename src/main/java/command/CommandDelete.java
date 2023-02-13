@@ -31,7 +31,16 @@ public class CommandDelete extends Command {
     }
 
     private Task removeTaskAt(String index) throws DukeException {
-        return this.taskList.deleteTask(index);
+        int i = this.getIndex(index);
+        return this.taskList.removeTaskAt(i);
+    }
+
+    private int getIndex(String index) throws DukeException {
+        try {
+            return Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     private String getConfirmationMessageOf(Task taskRemoved) {

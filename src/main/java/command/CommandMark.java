@@ -31,7 +31,16 @@ public class CommandMark extends Command {
     }
 
     private Task markTaskAt(String index) throws DukeException {
-        return this.taskList.markTask(index);
+        int i = this.getIndex(index);
+        return this.taskList.getTaskAt(i).markIsDone();
+    }
+
+    private int getIndex(String index) throws DukeException {
+        try {
+            return Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     private String getConfirmationMessageOf(Task markedTask) {

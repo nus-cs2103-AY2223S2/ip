@@ -1,66 +1,79 @@
 package task;
 
-import task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline is a task which consist of the details and due date.
+ * Deadline is a task which includes the name and end date.
  */
 public class Deadline extends Task {
 
-    /** Due date for this task */
-    private LocalDate endTime;
+    private final LocalDate endDate;
 
     /**
-     * Returns an instance of Deadline object mark undone.
+     * Constructor for Deadline with default isTaskDone.
      *
-     * @param taskDetails Task details.
-     * @param endTime Task due date.
+     * @param taskName Name of task.
+     * @param endDate End date of task.
      */
-    public Deadline(String taskDetails, String endTime) {
-        super(taskDetails);
-        this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    public Deadline(String taskName, String endDate) {
+        super(taskName);
+        this.endDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern(this.getDateFormatA()));
     }
 
     /**
-     * Returns an instance of Deadline object.
+     * Constructor for Deadline.
      *
-     * @param isTaskDone Task done status.
-     * @param taskDetails Task details.
-     * @param taskDate Task due date.
+     * @param taskName Name of task.
+     * @param endDate End date of task.
+     * @param isTaskDone Status of task.
      */
-    public Deadline(Boolean isTaskDone, String taskDetails, String taskDate) {
-        super(taskDetails);
-        if (isTaskDone) {
-            this.markDone();
-        }
-        this.endTime = LocalDate.parse(taskDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    public Deadline(String taskName, String endDate, Boolean isTaskDone) {
+        super(taskName, isTaskDone);
+        this.endDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern(this.getDateFormatA()));
     }
 
     @Override
     public String writeToFile() {
-        if (!isTaskDone) {
-            return "D| |"
-                    + this.taskName
-                    + "|"
-                    + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return this.formatForWriteToFile(this.isDone(), this.getName(), this.endDate);
+    }
+
+    private String formatForWriteToFile(Boolean isDone, String taskName, LocalDate endDate) {
+        StringBuilder s = new StringBuilder("D|");
+
+        if (isDone) {
+            s.append("X");
+        } else {
+            s.append(" ");
         }
-        return "D|X|"
-                + this.taskName
-                + "|"
-                + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        s.append("|");
+        s.append(taskName);
+        s.append("|");
+        s.append(endDate.format(DateTimeFormatter.ofPattern(this.getDateFormatA())));
+
+        return s.toString();
     }
 
     @Override
     public String toString() {
-        if (!isTaskDone) {
-            return "[D][ ] " + this.taskName
-                    + " (by: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
-        }
-        return "[D][X] " + this.taskName
-                + " (by: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
+        return this.formatForUserToSee(this.isDone(), this.getName(), this.endDate);
     }
 
+    private String formatForUserToSee(Boolean isDone, String taskName, LocalDate endDate) {
+        StringBuilder s = new StringBuilder("[E][");
+
+        if (isDone) {
+            s.append("X");
+        } else {
+            s.append(" ");
+        }
+        s.append("] ");
+        s.append(taskName);
+        s.append(" (by: ");
+        s.append(endDate.format(DateTimeFormatter.ofPattern(this.getDateFormatB())));
+        s.append(")");
+
+        return s.toString();
+    }
 }
