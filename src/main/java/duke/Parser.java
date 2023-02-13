@@ -68,8 +68,18 @@ public class Parser {
 
                 case "addNote" :
                     String indexAndNote[] = checkAddNote(instruction, tasklist);
-                    int index = Integer.parseInt(indexAndNote[0]) - 1;
-                    return new AddNoteCommand(index, indexAndNote[1]);
+                    int indexAddNote = Integer.parseInt(indexAndNote[0]) - 1;
+                    return new AddNoteCommand(indexAddNote, indexAndNote[1]);
+
+                case "listNote":
+                    if (instruction.length == 1) {
+                        return new ListNoteCommand();
+                    }
+
+                    int listNoteIndex = checkListNote(instruction[1], tasklist) - 1;
+                    return new ListNoteCommand(listNoteIndex);
+
+
 
                 default:
                     throw new ArgumentException("No such commands");
@@ -303,5 +313,22 @@ public class Parser {
         }
         return indexAndNote;
     }
+
+    public int checkListNote (String indexString, TaskList tasklist) throws ArgumentException {
+        //check if index enter is a number
+        if (!indexString.matches("[0-9]+")) {
+            throw new ArgumentException("Index does not exist");
+        }
+
+        int index = Integer.parseInt(indexString);
+
+        //check if index can be found in the task list
+        if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
+            throw new ArgumentException("Can't find the index");
+        }
+
+        return index;
+    }
+
 
 }

@@ -30,7 +30,8 @@ public class Event extends Task{
     @Override
     public String toString() {
         SimpleDateFormat convertToString = new SimpleDateFormat("dd MMM yyyy HH:mm a", Locale.ENGLISH);
-        return "[E]" + super.toString() + " (From: " + convertToString.format(eventStart) + " To: " + convertToString.format(eventEnd) + ")";
+        return "[E]" + super.toString() + " (From: " + convertToString.format(eventStart) + " To: "
+                + convertToString.format(eventEnd) + ") " + containNotes();
     }
 
     /**

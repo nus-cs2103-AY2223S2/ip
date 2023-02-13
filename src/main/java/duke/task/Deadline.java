@@ -26,7 +26,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         SimpleDateFormat convertToString = new SimpleDateFormat("dd MMM yyyy HH:mm a", Locale.ENGLISH);
-        return "[D]" + super.toString() + "(by: " + convertToString.format(deadLineTime) + ")";
+        return "[D]" + super.toString() + "(by: " + convertToString.format(deadLineTime) + ")" + containNotes();
     }
 
     /**

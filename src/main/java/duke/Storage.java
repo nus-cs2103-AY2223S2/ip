@@ -38,24 +38,19 @@ public class Storage {
                 String type = task.getTypes();
                 String name = task.getItem();
 
-                String note[] = task.getNote().split("[\\r\\n]+");
-                String concatedNote = note[0];
-
-                for (int j = 1; j < note.length; j++) {
-                    concatedNote = concatedNote + "/&" + note[j];
-                }
+                String note = task.getNote();
 
                 if (type.equals("D")){
                     String time = task.getTime();
 
-                    pw.println(type + "-" + isMark + "-" + name + "-" + time + "-" + concatedNote);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + time + "-" + note);
                 } else if (type.equals("E")) {
                     String time = task.getTime();
                     String startEnd [] = time.split("-", 2);
 
-                    pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1] + "-" + concatedNote);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1] + "-" + note);
                 } else {
-                    pw.println(type + "-" + isMark + "-" + name + "-" + concatedNote);
+                    pw.println(type + "-" + isMark + "-" + name + "-" + note);
                 }
 
             }
@@ -86,7 +81,7 @@ public class Storage {
                     task = new Task(nameNote[0], lines[0]);
 
                     if(checkToAddNote(nameNote[1])) {
-                        task.addNote(setNoteFormat(nameNote[1]));
+                        task.addNote(nameNote[1]);
                     }
 
                 } else if (lines[0].equals("D")) {
@@ -97,7 +92,7 @@ public class Storage {
                     task = new Deadline(nameTimeNote[0], lines[0], date, nameTimeNote[1]);
 
                     if(checkToAddNote(nameTimeNote[2])) {
-                        task.addNote(setNoteFormat(nameTimeNote[2]));
+                        task.addNote(nameTimeNote[2]);
                     }
 
                 } else {
@@ -109,7 +104,7 @@ public class Storage {
                             nameStartEndNote[2]);
 
                     if (checkToAddNote(nameStartEndNote[3])) {
-                        task.addNote(setNoteFormat(nameStartEndNote[3]));
+                        task.addNote(nameStartEndNote[3]);
                     }
 
                 }

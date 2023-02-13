@@ -118,4 +118,26 @@ public class TaskList {
 
         return selectedTask.toString();
     }
+
+    public String viewAllTasksWithNotes() {
+        String output = "";
+        for (int i = 0; i < allTasks.size(); i++) {
+            Task task = allTasks.get(i);
+
+            if (!task.getIsNoteBlank()) {
+                int index = i + 1;
+                output = output + index + ". " + task + "\nNotes:\n" + task.getNote() + "\n\n";
+            }
+        }
+        return output;
+    }
+
+    public String viewSingleTaskWithNote(int index) {
+        Task task = allTasks.get(index);
+        if (task.getIsNoteBlank()) {
+            return "Task does not contain a note yet!";
+        } else {
+            return task + "\n\nNotes:\n" + task.getNote();
+        }
+    }
 }
