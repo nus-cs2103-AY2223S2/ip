@@ -50,6 +50,10 @@ public class DialogueBox extends HBox {
         displayPicture.setClip(circleClip);
     }
 
+    /**
+     * Reverses all children of dialogue box so that it is
+     * aligned to the right.
+     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -57,10 +61,22 @@ public class DialogueBox extends HBox {
         setAlignment(Pos.TOP_RIGHT);
     }
 
+    /**
+     * Get dialogue box with formatting specialized for user input.
+     * 
+     * @param text Text content of dialogue
+     * @param img User profile image
+     */
     public static DialogueBox getUserDialogue(String text, Image img) {
         return new DialogueBox(text, img);
     }
 
+    /**
+     * Get dialogue box with formatting specialized for chatbot reply.
+     * 
+     * @param text Text content of dialogue
+     * @param img Chatbot profile image
+     */
     public static DialogueBox getBotDialogue(String text, Image img) {
         var db = new DialogueBox(text, img);
         db.flip();

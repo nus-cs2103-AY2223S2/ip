@@ -14,17 +14,21 @@ import task.TaskList;
  * Graphical User Interface
  */
 public class Gui extends Application {
-    TaskList taskList;
-    Storage<TaskList> storage;
+    private TaskList taskList;
+    private Storage<TaskList> storage;
     private FXMLLoader fxmlLoader;
     private AnchorPane mainWindow;
 
+    /**
+     * Actions to perform when Application is launched.
+     * Loads children, formats scene and sets the MainWindow gui property.
+     */
     @Override
     public void start(Stage stage) {
         try {
             fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainWindow.fxml"));
             mainWindow = fxmlLoader.load();
-            fxmlLoader.<MainWindow>getController().gui = this;
+            fxmlLoader.<MainWindow>getController().setGui(this);
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
             stage.setMinWidth(300);
@@ -82,4 +86,17 @@ public class Gui extends Application {
                 });
     }
 
+    /**
+     * @return Task list of app
+     */
+    TaskList getTaskList() {
+        return this.taskList;
+    }
+
+    /**
+     * @return Storage class of app
+     */
+    Storage<TaskList> getStorage() {
+        return this.storage;
+    }
 }
