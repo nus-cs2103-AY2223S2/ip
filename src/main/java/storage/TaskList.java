@@ -79,4 +79,22 @@ public class TaskList {
         storage.saveData(this);
         ui.printMarkTaskMsg(isDone, task);
     }
+
+    public void findTask(String input, Ui ui) throws DukeException {
+        if (input.trim().equals("find")) {
+            throw new DukeException("\t ☹ OOPS!!! The description of a find cannot be empty.\n");
+        }
+        String[] inputLine = input.split(" ", 2);
+        if (inputLine.length < 2) {
+            throw new DukeException("\t ☹ OOPS!!! The format is invalid, please give a search information.\n");
+        }
+        ui.printFindTaskMsg();
+        String str = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(inputLine[1])) {
+                str = "\t " + (i + 1) + ". " + tasks.get(i).toString();
+                System.out.println(str);
+            }
+        }
+    }
 }
