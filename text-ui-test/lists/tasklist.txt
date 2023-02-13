@@ -1,0 +1,8 @@
+D | 0 | read book | 2023-01-21
+E | 0 | be stonk | 2023-01-21
+T | 0 | read book
+D | 0 | read book | 2023-01-21
+E | 0 | be stonk | 2023-01-21
+T | 0 | read book
+D | 0 | read book | 2023-01-21
+E | 0 | be stonk | 2023-01-21
