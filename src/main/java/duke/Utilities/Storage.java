@@ -1,4 +1,4 @@
-package duke;
+package duke.Utilities;
 
 import duke.Exception.NoSuchFileException;
 import duke.Task.Task;

@@ -1,10 +1,10 @@
-package duke;
+package duke.Utilities;
 
 import duke.Command.Command;
 import duke.Exception.DukeException;
 
 /**
- * The main class to run duke.Duke
+ * The main class to run duke.Utilities.Duke
  * @author Zong Hao (ZHTang29)
  */
 
@@ -16,7 +16,7 @@ public class Duke {
     private boolean isExit = false;
 
     /**
-     * Constructor to set up duke.Duke, tries to load an existing list from the file.
+     * Constructor to set up duke.Utilities.Duke, tries to load an existing list from the file.
      * If successful, the current task list will be loaded with the contents of the file.
      * If unsuccessful, create a new file with the file name, and new empty task list to add to.
      */

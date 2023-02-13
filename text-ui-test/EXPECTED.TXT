@@ -1,5 +1,5 @@
-Running duke.Duke for the first time - Creating required data files
-Hello! I'm duke.Duke
+Running duke.Utilities.Duke for the first time - Creating required data files
+Hello! I'm duke.Utilities.Duke
 What can I do for you?
 Got it. I've added this task:
  [T][ ] borrow book

@@ -1,11 +1,11 @@
 package duke.Command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.UI;
+import duke.Utilities.Storage;
+import duke.Utilities.TaskList;
+import duke.Utilities.UI;
 
 /**
- * The List command which is executed by duke.Duke.
+ * The List command which is executed by duke.Utilities.Duke.
  */
 public class ListCommand extends Command {
 

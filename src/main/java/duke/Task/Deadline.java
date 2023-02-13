@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Deadline task which is to be stored by duke.Duke. A Deadline has a task name, as well as a due time.
+ * The Deadline task which is to be stored by duke.Utilities.Duke. A Deadline has a task name, as well as a due time.
  */
 public class Deadline extends Task {
 

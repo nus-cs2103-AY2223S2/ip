@@ -2,12 +2,12 @@ package duke.Command;
 
 import duke.Exception.DukeException;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.UI;
+import duke.Utilities.Storage;
+import duke.Utilities.TaskList;
+import duke.Utilities.UI;
 
 /**
- * The abstraction behind each command executed by duke.Duke.
+ * The abstraction behind each command executed by duke.Utilities.Duke.
  */
 public abstract class Command {
 

@@ -4,16 +4,16 @@ import duke.Exception.InvalidArgumentsException;
 
 import duke.Task.Event;
 
-import duke.TaskList;
-import duke.UI;
-import duke.Storage;
+import duke.Utilities.TaskList;
+import duke.Utilities.UI;
+import duke.Utilities.Storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Event command which is executed by duke.Duke.
+ * The Event command which is executed by duke.Utilities.Duke.
  */
 public class EventCommand extends Command {
 

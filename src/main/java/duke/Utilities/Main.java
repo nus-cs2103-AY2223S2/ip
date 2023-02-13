@@ -1,4 +1,4 @@
-package duke;
+package duke.Utilities;
 
 import java.io.IOException;
 
