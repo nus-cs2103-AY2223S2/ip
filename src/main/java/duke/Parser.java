@@ -31,9 +31,12 @@ public class Parser {
                 str = ui.exit();
                 break;
             case "list":
+            case "ls":
+            case "l":
                 str = tasklist.list();
                 break;
             case "mark":
+            case "m":
                 if (!hasDetails) {
                     throw new DukeException("Please include the task index to mark");
                 } else {
@@ -41,24 +44,28 @@ public class Parser {
                     break;
                 }
             case "unmark":
+            case "um":
                 if (!hasDetails) {
                     throw new DukeException("Please include the task index to unmark.");
                 }
                 str = tasklist.setTaskStatus(Integer.parseInt(arr[1]), false);
                 break;
             case "delete":
+            case "rm":
                 if (!hasDetails) {
                     throw new DukeException("Please include the task index to delete.");
                 }
                 str = tasklist.delete(Integer.parseInt(arr[1]));
                 break;
             case "todo":
+            case "t":
                 if (!hasDetails) {
                     throw new DukeException("Please include the todo details.");
                 }
                 str = tasklist.addToDo(arr[1]);
                 break;
             case "deadline":
+            case "d":
                 if (!hasDetails) {
                     throw new DukeException("Please include the deadline details.");
                 }
@@ -70,6 +77,7 @@ public class Parser {
                 str = tasklist.addDeadline(descriptionBy[0], descriptionBy[1]);
                 break;
             case "event":
+            case "e":
                 if (!hasDetails) {
                     throw new DukeException("Please include the event details.");
                 }
@@ -84,6 +92,7 @@ public class Parser {
                 str = tasklist.addEvent(descriptionOthers[0], fromTo[0], fromTo[1]);
                 break;
             case "find":
+            case "f":
                 if (!hasDetails) {
                     throw new DukeException("Please include the task you would like to find.");
                 }
