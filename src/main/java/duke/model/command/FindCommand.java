@@ -3,7 +3,6 @@ package duke.model.command;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import duke.model.task.Task;
 import duke.model.task.TaskList;
 
 public class FindCommand extends Command {
@@ -18,7 +17,7 @@ public class FindCommand extends Command {
     public String execute(TaskList list) {
         String content = list.stream()
                 .filter(task -> task.getDescription().contains(keyword))
-                .map(Task::toString)
+                .map(Objects::toString)
                 .collect(Collectors.joining("\n"));
         return "Here are the matching tasks in your list:\n" + content;
     }
