@@ -51,6 +51,7 @@ public class TaskList {
         try {
             Task task = tasks.get(index - 1);
             task.markUndone();
+            assert task.getStatusIcon().equals(" "): "Task should be unmarked";
             return task;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
@@ -64,9 +65,10 @@ public class TaskList {
      */
     public Task markTask(int index) throws DukeException {
         try {
-            Task cur = tasks.get(index - 1);
-            cur.markDone();
-            return cur;
+            Task task = tasks.get(index - 1);
+            task.markDone();
+            assert task.getStatusIcon().equals("X"): "Task should be marked";
+            return task;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
         }
