@@ -3,7 +3,7 @@ package duke.command;
 import duke.command.exceptions.CommandExecutionError;
 import duke.interfaces.Command;
 import duke.model.TaskModel;
-import duke.view.TaskView;
+import duke.view.cli.TaskView;
 
 /**
  * Command to mark a task done.

@@ -2,7 +2,7 @@ package duke;
 
 import duke.model.Task;
 import duke.model.ToDo;
-import duke.view.TaskView;
+import duke.view.cli.TaskView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

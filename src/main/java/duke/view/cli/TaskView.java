@@ -1,4 +1,4 @@
-package duke.view;
+package duke.view.cli;
 
 import java.util.List;
 import java.util.Scanner;

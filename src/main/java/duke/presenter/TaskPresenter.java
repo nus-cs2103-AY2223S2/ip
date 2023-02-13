@@ -8,7 +8,7 @@ import duke.interfaces.CommandEventListener;
 import duke.interfaces.Presenter;
 import duke.model.TaskModel;
 import duke.presenter.exceptions.ParserError;
-import duke.view.TaskView;
+import duke.view.cli.TaskView;
 
 /**
  * The presenter in Duke's architecture, mediates between the view and model.

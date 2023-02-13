@@ -7,7 +7,7 @@ import duke.command.exceptions.InvalidParameterError;
 import duke.command.utils.DateTimeStringParser;
 import duke.interfaces.Command;
 import duke.model.TaskModel;
-import duke.view.TaskView;
+import duke.view.cli.TaskView;
 
 /**
  * A command that lists all tasks. Optionally, this command can list all tasks due before a time.

@@ -6,7 +6,7 @@ import duke.interfaces.CommandEventListener;
 import duke.interfaces.Presenter;
 import duke.model.TaskModel;
 import duke.presenter.TaskPresenter;
-import duke.view.TaskView;
+import duke.view.cli.TaskView;
 
 /**
  * The main class containing Duke's event loop.

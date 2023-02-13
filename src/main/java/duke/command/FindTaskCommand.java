@@ -5,7 +5,7 @@ import java.util.List;
 import duke.interfaces.Command;
 import duke.model.Task;
 import duke.model.TaskModel;
-import duke.view.TaskView;
+import duke.view.cli.TaskView;
 
 /**
  * A command to find all tasks in the task list whose description contains a substring.

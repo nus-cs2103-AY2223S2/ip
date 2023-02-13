@@ -3,7 +3,7 @@ package duke.command;
 import duke.command.exceptions.InvalidParameterError;
 import duke.interfaces.Command;
 import duke.model.TaskModel;
-import duke.view.TaskView;
+import duke.view.cli.TaskView;
 
 /**
  * A factory to create commands.
