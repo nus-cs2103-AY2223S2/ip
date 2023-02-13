@@ -6,7 +6,7 @@ import duke.tasks.Task;
 /**
  * Handles interactions with the user.
  */
-public class Ui {
+public class Sender {
 
     private String DUKE_RESPONSE = "Duke's response: \n";
 

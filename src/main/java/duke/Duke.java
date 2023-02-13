@@ -1,25 +1,9 @@
 package duke;
-import java.util.Scanner;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.tasks.Task;
-import duke.ui.Ui;
-import duke.ui.DialogBox;
+import duke.ui.Sender;
 import duke.parser.Parser;
 import duke.exceptions.DukeException;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * A chat bot program.
@@ -35,11 +19,11 @@ public class Duke {
      * Constructs a new Duke session.
      */
     public Duke() {
-           Ui ui = new Ui();
+           Sender sender = new Sender();
            Storage storage = new Storage(FILE_PATH);
             //Attempts to load Tasks from hard drive into the list of Tasks.
             TaskList tasks = new TaskList(storage.load());
-            this.parser = new Parser(ui, storage, tasks);
+            this.parser = new Parser(sender, storage, tasks);
     }
 
     /**

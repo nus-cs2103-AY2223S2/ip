@@ -13,7 +13,7 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT
+/text-sender-test/ACTUAL.TXT
+text-sender-test/EXPECTED-UNIX.TXT
 *.class
 duke.txt

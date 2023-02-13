@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import duke.Duke;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.tasks.DeadLine;
