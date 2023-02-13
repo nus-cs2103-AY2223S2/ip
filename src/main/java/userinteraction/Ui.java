@@ -51,14 +51,14 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public String welcomeMsg() {
+    public String getWelcomeMsg() {
         return "Hello from\n" + LOGO + "\nWhat can I do for you?";
     }
 
     /**
      * Prints divider line.
      */
-    public String lineString() {
+    public String getLineString() {
         return DIVIDER_LINE;
     }
 
@@ -68,7 +68,7 @@ public class Ui {
      * @param taskList Stores all tasks.
      * @param task Task user just added.
      */
-    public String addTaskMsg(TaskList taskList, Task task) {
+    public String getAddTaskMsg(TaskList taskList, Task task) {
         return "Got it. I've added this task:\n  "
                 + task.toString() + "\n Now you have " + taskList.getSize() + " tasks in the list";
     }
@@ -79,7 +79,7 @@ public class Ui {
      * @param isMarked Boolean for whether task is marked or unamrked.
      * @param task Task specified by user.
      */
-    public String markTaskMsg(boolean isMarked, Task task) {
+    public String getMarkTaskMsg(boolean isMarked, Task task) {
         if (isMarked) {
             return "Nice! I've marked this task as done: \n" + "[x] " + task.getStr();
         } else {
@@ -93,8 +93,8 @@ public class Ui {
      * @param task Task specified by user.
      * @param size Number of tasks left in the taskList.
      */
-    public String deleteTaskMsg(Task task, int size) {
-       return "Noted. I've removed this task:\n  "
+    public String getDeleteTaskMsg(Task task, int size) {
+        return "Noted. I've removed this task:\n  "
                 + task.toString()
                 + "\nNow you have " + size + " tasks in the list.";
     }
@@ -102,7 +102,7 @@ public class Ui {
     /**
      * Prints bye message.
      */
-    public String byeMsg() {
+    public String getByeMsg() {
         return BYE_MSG;
     }
 
