@@ -1,12 +1,5 @@
 # User Guide
 
-
-| Action              |                        Format                        |                                        Examples |
-|:--------------------|:----------------------------------------------------:|------------------------------------------------:|
-| List tasks          |                         list                         |                                            list |
-| Add a todo task     |                   todo [task name]                   |                                       todo task |
-| Add a deadline task |       deadline [task name] /by [deadline date]       |                     deadline task /by 2023-2-14 |
-
 ## Features 
 
 ### list all tasks: `list`
