@@ -42,7 +42,7 @@ public class Result {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task != null) {
-                addTask(task, i);
+                addTask(task, i + 1);
             }
         }
     }

@@ -36,7 +36,9 @@ public class TaskCard extends HBox {
             e.printStackTrace();
         }
 
-        id.setText(index + ".");
+        if (index > 0) {
+            id.setText(index + ".");
+        }
         title.setText(task.getTitle());
         description.setText(task.getDescription());
     }
