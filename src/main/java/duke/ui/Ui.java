@@ -97,6 +97,10 @@ public class Ui {
      * @return message for find task command.
      */
     public String responseToFindTaskCommand(TaskList taskList) {
+        if (taskList.isEmpty()) {
+            return "Could not find task matched!";
+        }
+
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
