@@ -104,7 +104,7 @@ public class Ui {
      * @param list the list of tasks
      */
     public static String showDeleteSuccess(Task task, TaskList list) {
-        return "Gotcha. Just marked this task as not done:\n" + task + "\n" + showListLength(list);
+        return "Uh huh. Just removed this task:\n" + task + "\n" + showListLength(list);
     }
 
     /**
@@ -114,7 +114,10 @@ public class Ui {
     public static String showListState(TaskList list) {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= list.size(); i++){
-            sb.append(i).append(". ").append(list.get(i - 1)).append(System.lineSeparator());
+            sb.append(i).append(". ").append(list.get(i - 1));
+            if (i != list.size()) {
+                sb.append(System.lineSeparator());
+            }
         }
         return sb.toString();
     }
@@ -127,7 +130,10 @@ public class Ui {
         StringBuilder sb = new StringBuilder("Righto, here are the tasks that contain the word \""
                 + keyword + "\":");
         for (int i = 1; i <= list.size(); i++){
-            sb.append(i).append(". ").append(list.get(i - 1)).append(System.lineSeparator());
+            sb.append(i).append(". ").append(list.get(i - 1));
+            if (i != list.size()) {
+                sb.append(System.lineSeparator());
+            }
         }
         return sb.toString();
     }
