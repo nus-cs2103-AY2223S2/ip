@@ -16,6 +16,8 @@ public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
+    protected String tag = null;
+
     /**
      * Creates a {@code Task} with the given description. The created task will be marked as not
      * done.
@@ -65,6 +67,13 @@ public abstract class Task implements Serializable {
         return description.contains(keyword);
     }
 
+    public boolean isSameTask(Task that) {
+        assert that != null;
+        Class<?> thisClazz = this.getClass();
+        Class<?> thatClazz = that.getClass();
+        return thisClazz.equals(thatClazz) && Objects.equals(description, that.description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", description);
@@ -76,6 +85,8 @@ public abstract class Task implements Serializable {
             return false;
         }
         Task task = (Task) obj;
-        return Objects.equals(description, task.description) && isDone == task.isDone;
+        return isDone == task.isDone
+                && Objects.equals(description, task.description)
+                && Objects.equals(tag, task.tag);
     }
 }

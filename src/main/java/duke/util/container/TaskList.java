@@ -92,6 +92,22 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Clears this {@code TaskList}.
+     */
+    public void clear() {
+        tasks.clear();
+    }
+
+    /**
+     * Returns a {@code Stream} of tasks in this {@code TaskList}.
+     *
+     * @return a {@code Stream} of tasks in this {@code TaskList}
+     */
+    public Stream<Task> stream() {
+        return tasks.stream();
+    }
+
+    /**
      * Counts the number of stored tasks.
      *
      * @return a string representing the number of stored tasks

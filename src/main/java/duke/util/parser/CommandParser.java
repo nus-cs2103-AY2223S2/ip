@@ -5,8 +5,9 @@ import java.util.Arrays;
 
 import duke.DukeUtils;
 import duke.command.AddCommand;
+import duke.command.ClearCommand;
 import duke.command.Command;
-import duke.command.EditCommand;
+import duke.command.SetDescriptionCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
@@ -14,6 +15,7 @@ import duke.command.SortDeadlinesCommand;
 import duke.command.MarkCommand;
 import duke.command.RemoveCommand;
 import duke.command.GroupDuplicatesCommand;
+import duke.command.HelpCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeRuntimeException;
 import duke.exception.ParserException;
@@ -30,7 +32,8 @@ public class CommandParser {
         // @formatter:off
         BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), MARK("mark"),
         UNMARK("unmark"), DELETE("delete"), FIND("find"), GROUP_DUPLICATES("group-duplicates"),
-        SORT_DEADLINES("sort-deadlines"), EDIT("edit"), UNKNOWN("");
+        SORT_DEADLINES("sort-deadlines"), SET_DESCRIPTION("set-description"), CLEAR("clear"), HELP("help"),
+        UNKNOWN("");
         // @formatter:on
 
         final String value;
@@ -170,10 +173,16 @@ public class CommandParser {
             case SORT_DEADLINES:
                 cmd = new SortDeadlinesCommand();
                 break;
-            case EDIT:
-                cmd = new EditCommand(
+            case SET_DESCRIPTION:
+                cmd = new SetDescriptionCommand(
                         runParser(INT_PARSER),
                         runParser(DESCRIPTION_UNTIL_EOF_PARSER));
+                break;
+            case CLEAR:
+                cmd = new ClearCommand();
+                break;
+            case HELP:
+                cmd = new HelpCommand();
                 break;
             default:
                 throw new DukeRuntimeException("unknown command");
