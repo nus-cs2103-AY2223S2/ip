@@ -36,10 +36,8 @@ public class Ui {
     public void printMarkTaskMsg(boolean isMarked, Task task) {
         String str = "";
         if (isMarked) {
-            //str =  "\t Nice! I've marked this task as done: \n" + "\t\t [" + task.getTaskType() + "] [x] " + task.getDescription() + "\n";
             str =  "\t Nice! I've marked this task as done: \n" + "\t\t " + task.toString() + "\n";
         } else {
-            //str =  "\t OK, I've marked this task as not done yet: \n" + "\t\t [" + task.getTaskType() + "] [ ] " + task.getDescription() + "\n";
             str =  "\t OK, I've marked this task as not done yet: \n" + "\t\t " + task.toString() + "\n";
         }
         System.out.println(str);
@@ -47,6 +45,11 @@ public class Ui {
     public void printDeleteTaskMsg(Task task, int size) {
         String str = "\t Noted. I've removed this task:\n" + "\t\t " +
                 task.toString() + "\n\t Now you have " + size + " tasks in the list.\n";
+        System.out.println(str);
+    }
+
+    public void printFindTaskMsg() {
+        String str = "\t Here are the matching tasks in your list:";
         System.out.println(str);
     }
     public void printByeMsg() {
