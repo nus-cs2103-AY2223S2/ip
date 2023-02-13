@@ -125,7 +125,7 @@ public class TaskList {
      */
     public String find(String keyword) {
         StringBuilder str = new StringBuilder();
-        str.append("HERE ARE THE MATCHING RESULTS:\n");
+        str.append("Here are the matching results:\n");
         int counter = 1;
         for (Task task : this.tasks) {
             if (task.getTaskName().contains(keyword)) {

@@ -166,7 +166,7 @@ public class Parser {
      * @param input Full user input String.
      * @param tasks current collection of Tasks.
      * @param ui UI to print messages.
-     * @return String response with regards to user input.
+     * @return String response in regard to user input.
      */
     public String parse(String input, TaskList tasks, Ui ui) {
         String command = getCommand(input).trim();
@@ -207,10 +207,10 @@ public class Parser {
             case SORT:
                 return tasks.sort(ui);
             default:
-                return "INVALID COMMAND";
+                return "Invalid command";
             }
         } catch (IllegalArgumentException e) {
-            return "INVALID COMMAND";
+            return "Invalid command";
         } catch (InvalidTaskException e) {
             return e.getMessage();
         }

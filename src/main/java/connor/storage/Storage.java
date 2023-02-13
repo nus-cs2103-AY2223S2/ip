@@ -92,7 +92,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("        ALERT! Unable to overwrite data, input is not saved!");
+            System.out.println("ALERT! Unable to overwrite data, input is not saved!");
         }
     }
 }

@@ -1,6 +1,8 @@
 package connor.gui;
 
 import connor.Connor;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -50,5 +53,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, connorImage)
         );
         userInput.clear();
+        if (response.equals("It was a good session Hank, Bye.")) {
+            exit();
+        }
+    }
+
+    private void exit() {
+        PauseTransition exitDelay = new PauseTransition(Duration.seconds(1));
+        exitDelay.setOnFinished((event) -> Platform.exit());
+        exitDelay.play();
     }
 }

@@ -85,8 +85,6 @@ public abstract class Task implements Comparable<Task> {
         return month + " " + day + " " + year + " " + hour + minute;
     }
 
-
-
     /**
      * Returns a String in a format that is meant to be stored in the memory.
      *
