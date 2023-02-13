@@ -10,6 +10,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import rick.Rick;
@@ -46,6 +51,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.hvalueProperty().bind(dialogContainer.widthProperty());
+        dialogContainer.setBackground(new Background(
+                new BackgroundImage(
+                        new Image(this.getClass().getResourceAsStream("/images/Background.jpeg")),
+                        BackgroundRepeat.NO_REPEAT,
+                        BackgroundRepeat.ROUND,
+                        BackgroundPosition.DEFAULT,
+                        new BackgroundSize(100, 100, true, true, true, true)
+                )
+        ));
     }
 
     /**
@@ -91,6 +106,7 @@ public class MainWindow extends AnchorPane {
             PauseTransition exitDelay = new PauseTransition(Duration.seconds(1.0));
             exitDelay.setOnFinished(e -> Platform.exit());
             exitDelay.play();
+            System.out.println("Exiting!");
         }
     }
 }

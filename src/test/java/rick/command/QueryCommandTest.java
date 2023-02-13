@@ -147,7 +147,8 @@ public class QueryCommandTest extends CommandTest {
         Parser.setTaskList(TASK_LIST);
         Command emptySearch = Parser.parse("find");
         String actualEmptyUi = emptySearch.execute(TASK_LIST, UI);
-        String expectedEmptyUi = "An empty search was attempted. Valid Usage: find {search term}";
+        String expectedEmptyUi = "An empty search was attempted.\n"
+                + "Valid Usage: find {search term}";
         assertEquals(expectedEmptyUi, actualEmptyUi);
     }
 }

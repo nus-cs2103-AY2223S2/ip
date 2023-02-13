@@ -31,9 +31,12 @@ public class Storage {
     private Storage() {
         //Create directory if it does not yet exist
         Path parentDir = Paths.get(FOLDER_PATH);
+        System.out.printf("Checking if folder `%s` exists\n", FOLDER_PATH);
         try {
             Files.createDirectory(parentDir);
+            System.out.printf("Folder `%s` created.\n", FOLDER_PATH);
         } catch (FileAlreadyExistsException fe) {
+            System.out.printf("Folder `%s` exists.\n", FOLDER_PATH);
             //Already exists, no action required
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -42,12 +45,17 @@ public class Storage {
 
         //Create file if it does not yet exist.
         File store = new File(FILE_PATH);
+        System.out.printf("Checking if file `%s` exists\n", FILE_PATH);
         if (!store.exists()) {
             try {
                 store.createNewFile();
+                System.out.printf("File `%s` created.", FILE_PATH);
             } catch (IOException e) {
+                System.err.printf("Error creating file `%s`.", FILE_PATH);
                 System.exit(1);
             }
+        } else {
+            System.out.printf("File `%s` exists.\n", FILE_PATH);
         }
         this.store = store;
     }

@@ -9,32 +9,36 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.effect.DropShadow?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" spacing="8">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
-        <Circle fx:id="userFrame" layoutX="100" layoutY="100" radius="38.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-        <effect>
-            <DropShadow blurType="GAUSSIAN"/>
-        </effect>
+        <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true">
+            <effect>
+                <DropShadow blurType="ONE_PASS_BOX"/>
+            </effect>
+        </Label>
+        <Circle fx:id="userFrame" layoutX="60" layoutY="60" radius="30.0">
+             <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                   <stops>
+                      <Stop>
+                         <color>
+                            <Color red="1.0" green="1.0" blue="1.0" />
+                         </color>
+                      </Stop>
+                      <Stop offset="1.0">
+                         <color>
+                            <Color />
+                         </color>
+                      </Stop>
+                   </stops>
+                </LinearGradient>
+             </fill>
+            <effect>
+                <DropShadow blurType="ONE_PASS_BOX"/>
+            </effect>
         </Circle>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
     </padding>
 </fx:root>

@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -25,6 +26,9 @@ import javafx.scene.text.Font;
  *         AY22/23-S2 CS2103T
  */
 public class DialogBox extends HBox {
+    @FXML
+    private VBox textContainer;
+
     @FXML
     private Label dialog;
 
@@ -42,18 +46,21 @@ public class DialogBox extends HBox {
     private DialogBox(String text, Image img, boolean isFlipped) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            this.getStylesheets().add("/view/DialogBox.css");
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(text);
-        dialog.setTranslateX(isFlipped ? 15 : -15);
-        dialog.setTranslateY(20);
-
+        //Set Content
         userFrame.setFill(new ImagePattern(img));
+        dialog.setText(text);
+        /*
+        dialog.setTextAlignment(isFlipped ? TextAlignment.LEFT : TextAlignment.RIGHT);
+        if (Arrays.stream(text.split("\n")).max(Comparator.comparingInt(String::length)).get().length() > 50) {
+            dialog.setWrappingWidth(280);
+        }*/
     }
 
     /**
@@ -75,9 +82,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getMortyDialog(String text, Image img) {
         var db = new DialogBox(text, img, false);
-        Font displayFont = FontLoader.getFont(FontLoader.FontStyle.REGULAR);
-        assert displayFont != null;
-        db.dialog.setFont(displayFont);
+        Font f = FontLoader.getFont(FontLoader.FontStyle.ITALIC);
+        assert f != null;
+        db.dialog.setFont(f);
         return db;
     }
 

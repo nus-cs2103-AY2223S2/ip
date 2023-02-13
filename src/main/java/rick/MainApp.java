@@ -35,6 +35,8 @@ public class MainApp extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setMinWidth(400);
+            stage.setMinHeight(300);
             stage.setTitle("Rick and Duke");
             fxmlLoader.<MainWindow>getController().setRick(rick);
             stage.show();

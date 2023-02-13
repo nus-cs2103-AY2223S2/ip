@@ -1,0 +1,10 @@
+Label {
+    -fx-fill-width: true;
+    -fx-padding: 10;
+    -fx-background-color: "aquamarine";
+    -fx-background-radius: 8;
+}
+
+#textContainer {
+    -fx-fill: aquamarine
+}

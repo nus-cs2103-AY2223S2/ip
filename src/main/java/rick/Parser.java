@@ -79,7 +79,8 @@ public class Parser {
             return new EventCommand();
         case "find":
             return new ErrorCommand(
-                    "An empty search was attempted. Valid Usage: find {search term}"
+                    "An empty search was attempted.\n"
+                    + "Valid Usage: find {search term}"
             );
         default:
             if (cmd.matches("(mark|unmark|delete)")) {
