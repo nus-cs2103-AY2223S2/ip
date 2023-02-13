@@ -82,7 +82,7 @@ public class TaskList {
      */
     public String deleteTask(int index) {
         this.isInList(index);
-        String finalString = "Haiya delete task:\n" + this.tasks.get(index);
+        String finalString = "Haiya so weak delete task:\n" + this.tasks.get(index);
         this.tasks.remove(index);
         return finalString;
     }
