@@ -3,8 +3,6 @@ package sam.command;
 import java.util.HashMap;
 import java.util.Map;
 
-import sam.Dialog;
-import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidDateException;
 import sam.parser.SamInvalidIntException;
@@ -16,6 +14,8 @@ import sam.task.SamMissingTaskException;
 import sam.task.SamMissingTaskValueException;
 import sam.task.Task;
 import sam.task.TaskList;
+import sam.ui.Dialog;
+import sam.ui.Ui;
 
 /**
  * Represents a user command to edit a task.

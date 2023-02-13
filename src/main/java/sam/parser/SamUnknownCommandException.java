@@ -1,7 +1,7 @@
 package sam.parser;
 
-import sam.Dialog;
 import sam.SamException;
+import sam.ui.Dialog;
 
 /**
  * A SamException thrown when the user gives an unknown command.

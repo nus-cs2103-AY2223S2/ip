@@ -1,4 +1,4 @@
-package sam;
+package sam.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

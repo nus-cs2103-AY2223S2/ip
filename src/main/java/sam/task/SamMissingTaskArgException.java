@@ -1,7 +1,7 @@
 package sam.task;
 
-import sam.Dialog;
 import sam.SamException;
+import sam.ui.Dialog;
 
 /**
  * A SamException thrown when a required task argument

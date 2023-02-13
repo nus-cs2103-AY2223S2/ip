@@ -1,4 +1,4 @@
-package sam;
+package sam.ui;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sam.Sam;
 
 /**
  * Handles user interaction.

@@ -1,4 +1,4 @@
-package sam;
+package sam.ui;
 
 /**
  * The list of Sam's dialogs.

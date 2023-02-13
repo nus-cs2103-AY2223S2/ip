@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import sam.Dialog;
-import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidDateException;
 import sam.parser.SamUnknownCommandException;
@@ -19,6 +17,8 @@ import sam.task.SamMissingTaskValueException;
 import sam.task.Task;
 import sam.task.TaskList;
 import sam.task.ToDo;
+import sam.ui.Dialog;
+import sam.ui.Ui;
 
 /**
  * Represents a user command to add a new task.

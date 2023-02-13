@@ -1,9 +1,9 @@
 package sam.command;
 
 import sam.SamException;
-import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
+import sam.ui.Ui;
 
 
 /**

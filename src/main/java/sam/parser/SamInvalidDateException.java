@@ -1,7 +1,7 @@
 package sam.parser;
 
-import sam.Dialog;
 import sam.SamException;
+import sam.ui.Dialog;
 
 /**
  * A SamException thrown when an error occurs during parsing a date.

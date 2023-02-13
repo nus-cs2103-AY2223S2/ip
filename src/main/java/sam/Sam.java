@@ -13,6 +13,7 @@ import sam.parser.Parser;
 import sam.storage.SamLoadFailedException;
 import sam.storage.Storage;
 import sam.task.TaskList;
+import sam.ui.Ui;
 
 /**
  * Represents the main Sam program.
