@@ -33,6 +33,7 @@ public class ListDateCommand extends Command {
         if (tasks.isEmpty()) {
             return ui.getCommandMessage("Woohoo! You have no pending tasks\n");
         }
+        assert tasks.getSize() > 0 : "tasks should not be empty";
         String itemDateList = tasks.getList(date);
         return ui.getCommandMessage(output.append(itemDateList).toString());
     }

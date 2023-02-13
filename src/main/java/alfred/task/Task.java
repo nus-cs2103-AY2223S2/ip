@@ -72,10 +72,12 @@ public class Task {
         if (wordDict.isEmpty()) {
             wordDict.addAll(Arrays.asList(description.split(" ")));
         }
+        assert wordDict.size() > 0 : "dictionary shouldn't be empty";
         for (String keyWord : keyWordsArr) {
             if (!wordDict.contains(keyWord)) {
                 return false;
             }
+            assert wordDict.contains(keyWord) : "Should contain key word";
         }
         return true;
     }
