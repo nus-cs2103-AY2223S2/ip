@@ -1,0 +1,27 @@
+.first-color {
+	-fx-background-color: #dbd8e3;
+}
+
+.second-color {
+	-fx-background-color: #5c5470;
+}
+
+.third-color {
+	-fx-background-color: #352f44;
+}
+
+.fourth-color {
+	-fx-background-color: #2a2438;
+}
+
+.transparent {
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.radius {
+    -fx-background-radius: 25px
+}
+
+.rcorners1 {
+    -fx-background-radius: 25px 25px 25px 5px;
+}
