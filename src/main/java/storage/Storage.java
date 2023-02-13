@@ -39,6 +39,7 @@ public class Storage {
             }
             File file = new File(filePath);
 
+            assert new File(filePath).exists() : "The file for storage should exists.";
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(commandMsg);
             fw.close();
