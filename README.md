@@ -15,6 +15,7 @@ It's
 3. Start adding your tasks
 4. Let it manage your tasks for you 👍
 
+## How to use
 | No. | Feature | Command |
 | ------- | ------- | ------ |
 | 1. | Create todo items | `todo <description>` |
