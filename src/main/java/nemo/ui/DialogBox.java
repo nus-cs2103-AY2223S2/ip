@@ -51,7 +51,6 @@ public class DialogBox extends HBox {
         ((Polygon) tmp.get(1)).setFill(getNemoColor());
         tmp.get(2).setStyle("-fx-background-color: #f88d64; -fx-padding: 8; -fx-border-radius: 5px; "
                 + "-fx-background-radius: 5px; -fx-font-size: 14;");
-        System.out.println(tmp.get(2));
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
