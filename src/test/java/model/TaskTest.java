@@ -18,7 +18,6 @@ import membot.model.Task;
 import membot.model.ToDo;
 
 public class TaskTest {
-    private static final int MAX_TASKS = 10;
     @Test
     public void isIdValidTest() {
         assertFalse(Task.isIdValid(0));
