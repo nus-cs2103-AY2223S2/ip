@@ -4,18 +4,34 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Task List class
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructor for instantiating a task list
+     * @param tasks array of tasks to be added to the task list
+     */
     public TaskList (ArrayList<Task> tasks) {
         for (Task t : tasks) {
             this.tasks.add(t);
         }
     }
 
+    /**
+     * Constructor for instantiating an empty task list
+     */
     public TaskList () {
 
     }
+
+    /**
+     * Adds a task to the task list
+     * @param details details of the task
+     * @param taskType type of task to be added (todo, deadline, event)
+     */
     public void addTask(String details, String taskType) {
         if (taskType.equals("todo")) {
             try {
@@ -50,6 +66,10 @@ public class TaskList {
             System.out.println("Got it. I've added this task:" + '\n' + newEvent + '\n' + "Now you have " + tasks.size() + " tasks in the list");
         }
     }
+
+    /**
+     * Console logs the task list
+     */
     public void printTaskList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
@@ -57,24 +77,40 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a specific task as done
+     * @param index index of task to be marked as done
+     */
     public void markTask (int index) {
         Task currTask = tasks.get(index - 1);
         currTask.mark();
         System.out.println("Nice! I've marked this task as done" + '\n' + currTask);
     }
 
+    /**
+     * Marks a specific task as not done
+     * @param index index of task to be marked as not done
+     */
     public void unmarkTask (int index) {
         Task currTask = tasks.get(index - 1);
         currTask.unMark();
         System.out.println("Nice! I've marked this task as not done yet" + '\n' + currTask);
     }
 
+    /**
+     * Deletes a task from the task list
+     * @param index index of task to be deleted
+     */
     public void deleteTask (int index) {
         Task currTask = tasks.get(index - 1);
         tasks.remove(index - 1);
         System.out.println("Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + tasks.size() + " tasks in the list");
     }
 
+    /**
+     * Returns a string representation of the task list
+     * @return String string representation of the task list
+     */
     public String tasksToStringFormat() {
         String res = "";
         for (int i = 0; i < tasks.size(); i ++) {

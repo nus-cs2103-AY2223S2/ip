@@ -1,12 +1,19 @@
 package duke;
 import java.util.*;
 
+/**
+ * Duke class
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for duke
+     * @param filePath file path of existing txt file with tasks stored inside
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +26,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the duke programme
+     */
     public void run() {
         ui.greet();
         Scanner sc = new Scanner(System.in);
