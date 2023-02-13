@@ -27,7 +27,8 @@ public class Event extends Task {
         if (dateTime.length < 2) {
             throw new DukeException("\t ☹ OOPS!!! The end time of a event cannot be empty.\n");
         }
-        return new Event(startEndTime[0], false, DateTime.dateFormatter(dateTime[0]), DateTime.dateFormatter(dateTime[1]));
+        return new Event(startEndTime[0], false,
+                DateTime.dateFormatter(dateTime[0]), DateTime.dateFormatter(dateTime[1]));
     }
 
     public static Event generateTask(String[] taskLine) {
@@ -46,7 +47,10 @@ public class Event extends Task {
     }
     @Override
     public String storeTaskString() {
-        return this.getTaskType() + " | " + this.getMarkedString() + " | " + this.getDescription() + " | " + this.getStart() + " | " + this.getEnd();
+        return this.getTaskType() + " | " +
+                this.getMarkedString() + " | " +
+                this.getDescription() + " | " +
+                this.getStart() + " | " + this.getEnd();
     }
 
     @Override

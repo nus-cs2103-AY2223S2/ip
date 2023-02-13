@@ -21,7 +21,8 @@ public class Deadline extends Task {
         if (descriptions.length < 2) {
             throw new DukeException("\t ☹ OOPS!!! The date time of a deadline cannot be empty.\n");
         }
-        return new Deadline(descriptions[0], false, DateTime.dateFormatter(descriptions[1]));
+        return new Deadline(descriptions[0], false,
+                DateTime.dateFormatter(descriptions[1]));
     }
     public static Deadline generateTask(String[] taskLine) {
         boolean check = taskLine[1].equals("1");
@@ -36,7 +37,8 @@ public class Deadline extends Task {
     }
     @Override
     public String storeTaskString() {
-        return this.getTaskType() + " | " + this.getMarkedString() + " | " + this.getDescription() + " | " + this.getDateTime();
+        return this.getTaskType() + " | " + this.getMarkedString()
+                + " | " + this.getDescription() + " | " + this.getDateTime();
     }
     @Override
     public String toString() {

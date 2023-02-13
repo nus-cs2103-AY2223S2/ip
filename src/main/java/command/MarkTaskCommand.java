@@ -9,14 +9,14 @@ public class MarkTaskCommand extends Command {
 
     private final boolean isMarked;
 
-    public MarkTaskCommand(String inputArr, boolean isMarked) {
-        super(inputArr);
+    public MarkTaskCommand(String input, boolean isMarked) {
+        super(input);
         this.isMarked = isMarked;
     }
 
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markTask(isMarked, this.getInputArr(), ui, storage);
+        taskList.markTask(isMarked, this.getInput(), ui, storage);
     }
 
     @Override

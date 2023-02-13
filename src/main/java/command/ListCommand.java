@@ -6,13 +6,13 @@ import storage.TaskList;
 import userinteraction.Ui;
 
 public class ListCommand extends Command {
-    public ListCommand(String inputArr) {
-        super(inputArr);
+    public ListCommand(String input) {
+        super(input);
     }
 
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.listTask(this.getInputArr());
+        taskList.listTask(this.getInput());
     }
 
     @Override

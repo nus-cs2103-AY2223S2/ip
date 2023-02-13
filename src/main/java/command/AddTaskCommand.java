@@ -7,8 +7,8 @@ import userinteraction.Ui;
 
 abstract class AddTaskCommand extends Command {
 
-    public AddTaskCommand(String inputArr) {
-        super(inputArr);
+    public AddTaskCommand(String input) {
+        super(input);
     }
 
     @Override

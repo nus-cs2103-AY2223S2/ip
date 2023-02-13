@@ -6,13 +6,13 @@ import storage.TaskList;
 import userinteraction.Ui;
 
 abstract public class Command {
-    private final String inputArr;
-    public Command(String inputArr) {
-        this.inputArr = inputArr;
+    private final String input;
+    public Command(String input) {
+        this.input = input;
     }
 
-    public String getInputArr() {
-        return inputArr;
+    public String getInput() {
+        return input;
     }
     public abstract void process(TaskList taskList, Ui ui, Storage storage) throws DukeException;
     public abstract boolean isExit();

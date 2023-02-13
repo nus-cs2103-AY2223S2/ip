@@ -5,8 +5,8 @@ import storage.TaskList;
 import userinteraction.Ui;
 
 public class ExitCommand extends Command {
-    public ExitCommand(String inputArr) {
-        super(inputArr);
+    public ExitCommand(String input) {
+        super(input);
     }
 
     @Override

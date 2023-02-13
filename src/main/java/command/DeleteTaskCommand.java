@@ -7,13 +7,13 @@ import userinteraction.Ui;
 
 public class DeleteTaskCommand extends Command {
 
-    public DeleteTaskCommand(String inputArr) {
-        super(inputArr);
+    public DeleteTaskCommand(String input) {
+        super(input);
     }
 
     @Override
     public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.deleteTask(this.getInputArr(), ui, storage);
+        taskList.deleteTask(this.getInput(), ui, storage);
     }
 
     @Override
