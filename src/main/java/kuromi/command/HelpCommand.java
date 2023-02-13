@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
         msg += "Add a task:\n";
         msg += "todo <description>\n";
         msg += "deadline <description> /by <deadline>\n";
-        msg += "event <description> /from <start date> /to <end date>\n";
+        msg += "event <description> /from <start_date> /to <end_date>\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\n";
         msg += "Delete a task:\n";
         msg += "delete <index>\n";
@@ -37,8 +37,8 @@ public class HelpCommand extends Command {
         msg += "find <keyword>\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\n";
         msg += "Remind upcoming tasks:\n";
-        msg += "remind <n>, n = number of tasks\n";
-        msg += "remind, n by default is 5\n";
+        msg += "remind <number_of_tasks>\n";
+        msg += "remind\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\n";
         msg += "List my mistakes:\n";
         msg += "mistakes\n";

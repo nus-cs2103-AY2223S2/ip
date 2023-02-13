@@ -34,6 +34,8 @@ public class MainWindow extends AnchorPane {
         kuromi = d;
         String welcome = Ui.showWelcomeMessage();
         dialogContainer.getChildren().add(KuromiDialogBox.getKuromiDialog(welcome, kuromiImage));
+        String help = kuromi.getResponse("remind");
+        dialogContainer.getChildren().add(KuromiDialogBox.getKuromiDialog(help, kuromiImage));
     }
 
     /**

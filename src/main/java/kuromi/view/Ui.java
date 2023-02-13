@@ -44,7 +44,7 @@ public class Ui {
     public static String showWelcomeMessage() {
         String msg = "Hello! I'm Kuromi\nWhat can I do for you?\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\n";
-        msg += "Type 'help' to see the list of commands available.\n";
+        msg += "Send 'help' to see the list of commands available.\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";
         msg += "I know you're Melody -_-";
         return msg;
@@ -64,7 +64,7 @@ public class Ui {
      * @return Message
      */
     public String showBye(String msg) {
-        PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(event -> stage.close());
         delay.play();
         return (msg);
