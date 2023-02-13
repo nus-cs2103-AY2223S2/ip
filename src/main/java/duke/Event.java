@@ -59,6 +59,7 @@ public class Event extends Task {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime fromTime = LocalDateTime.parse(startDateTime, formatter1);
         LocalDateTime toTime = LocalDateTime.parse(endDateTime, formatter1);
+        assert fromTime.isBefore(toTime) : "End date cannot be earlier than start date";
         Event newE = new Event(detailE[0], fromTime, toTime, false);
         return newE;
     }
