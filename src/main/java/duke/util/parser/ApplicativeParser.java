@@ -9,6 +9,12 @@ import java.util.function.Predicate;
 import duke.exception.ParserException;
 import duke.util.container.Pair;
 
+/**
+ * Basic implementation of a generic {@code ApplicativeParser}, based on functional applicative
+ * parser from the <b>Haskell programming language</b>.
+ * <p>
+ * Uses static methods to create instances of this class.
+ */
 public class ApplicativeParser<T> {
 
     ///////////////////////////////////
@@ -64,14 +70,47 @@ public class ApplicativeParser<T> {
         return new ApplicativeParser<>(runner);
     }
 
+    /**
+     * Creates a parser that parses nothing and returns exactly the given value. This method is
+     * equivalent to {@code return} function in <b>Haskell</b>.
+     *
+     * @param <T> the type of the given value
+     * @param value the given value
+     * @return a parser that parses nothing, and returns exactly the given value
+     */
     public static <T> ApplicativeParser<T> of(T value) {
         return fromRunner(input -> Optional.of(Pair.of(input, value)));
     }
 
+    /**
+     * Returns a parser that always fails.
+     *
+     * @param <T> the type of the parser result (which does not exist, in this case)
+     * @return a parser that always fails
+     */
     public static <T> ApplicativeParser<T> fail() {
         return ALWAYS_FAILED_PARSER.cast();
     }
 
+    /**
+     * Lifts a normal binary function to work on parsers. The first parser is run on the input, and
+     * may consume some characters. Then, the second parser is run on the remaining input. Finally,
+     * the result of the two parsers is combined using the binary function.
+     * <p>
+     * This method is equivalent to {@code liftA2} function is <b>Haskell</b>.
+     * <p>
+     * This method proves that an {@code ApplicativeParser} is an {@code Applicative}. However,
+     * there is no way to encode the behavior of an {@code Applicative} using an instance method.
+     *
+     * @param <T> the type of the first parser result
+     * @param <U> the type of the second parser result
+     * @param <V> the type of the resultant parser result
+     * @param combiner the given binary function
+     * @param left the first parser
+     * @param right the second parser
+     * @return a new parser, that first runs the first parser, then the second parser, and finally
+     *         combines the result of these parsers using the binary function
+     */
     public static <T, U, V> ApplicativeParser<V> lift(
             BiFunction<? super T, ? super U, ? extends V> combiner, ApplicativeParser<T> left,
             ApplicativeParser<U> right) {
@@ -80,28 +119,64 @@ public class ApplicativeParser<T> {
                         .of(combiner.apply(leftValue, rightValue))));
     }
 
+    /**
+     * Returns a parser that succeeds when reaches eof, and fails otherwise. The result of this
+     * parser should be discarded.
+     *
+     * @return the eof parser
+     */
     public static ApplicativeParser<Void> eof() {
         return EOF_PARSER;
     }
 
+    /**
+     * Returns a parser that skips all leading whitespaces.
+     *
+     * @return a parser that skips all leading whitespaces
+     */
     public static ApplicativeParser<Void> skipWhitespaces() {
         return SKIP_WHITESPACES_PARSER;
     }
 
+    /**
+     * Returns a parser that consumes input until it reaches a whitespace character.
+     *
+     * @return a parser that parses until a whitespace character
+     */
     public static ApplicativeParser<String> parseNonWhitespaces() {
         return NON_WHITESPACES_PARSER;
     }
 
+    /**
+     * Returns a parser that consumes all remaining input.
+     *
+     * @return a parser that parses until eof
+     */
     public static ApplicativeParser<String> parseUntilEof() {
         return UNTIL_EOF_PARSER;
     }
 
+    /**
+     * Returns a parser that succeeds when the input starts with the given prefix, fails otherwise.
+     * If the parser succeeds, the result of the parser will be the given prefix.
+     *
+     * @param prefix the given prefix
+     * @return a parser that succeeds when the input starts with the given prefix, fails otherwise
+     */
     public static ApplicativeParser<String> parseString(String prefix) {
         return fromRunner(input -> input.startsWith(prefix)
                 ? Optional.of(Pair.of(input.subview(prefix.length()), prefix))
                 : Optional.empty());
     }
 
+    /**
+     * Returns a parser that parses until the given substring is encountered. The substring will
+     * also be consumed from the input. This parser will returns the substring between the start of
+     * the input, and the last character before the given substring.
+     *
+     * @param end the substring to find
+     * @return a parser that parses until the given substring is encountered
+     */
     public static ApplicativeParser<String> parseUntil(String end) {
         return fromRunner(input -> {
             int offset = input.indexOf(end);
@@ -113,6 +188,13 @@ public class ApplicativeParser<T> {
         });
     }
 
+    /**
+     * Returns a parser that tries multiple parsers, until one succeeds.
+     *
+     * @param <T> the type of the parser results
+     * @param parsers an array of parsers
+     * @return a parser that tries the given parsers, until one succeeds
+     */
     @SafeVarargs
     public static <T> ApplicativeParser<T> choice(ApplicativeParser<T>... parsers) {
         return Arrays.stream(parsers)
@@ -137,14 +219,41 @@ public class ApplicativeParser<T> {
         return (ApplicativeParser<U>) this;
     }
 
+    /**
+     * Returns a parser that runs this parser and another parser, but drops the result of that
+     * parser. This method is equivalent to {@code <*} operator in <b>Haskell</b>.
+     *
+     * @param <U> the type of the other parser result
+     * @param that the other parser
+     * @return a new parser that runs both parsers, but keeps the result of only one parser
+     */
     public <U> ApplicativeParser<T> dropNext(ApplicativeParser<U> that) {
         return lift((left, right) -> left, this, that);
     }
 
+    /**
+     * Returns a parser that runs this parser and another parser, but takes the result of that
+     * parser. This method is equivalent to {@code *>} operator in <b>Haskell</b>.
+     *
+     * @param <U> the type of the other parser result
+     * @param that the other parser
+     * @return a new parser that runs both parsers, but keeps the result of only one parser
+     */
     public <U> ApplicativeParser<U> takeNext(ApplicativeParser<U> that) {
         return lift((left, right) -> right, this, that);
     }
 
+    /**
+     * Maps a function over the result of this parser.
+     * <p>
+     * This method is equivalent to {@code fmap} function in <b>Haskell</b>.
+     * <p>
+     * This method proves that an {@code ApplicativeParser} is a {@code Functor}.
+     *
+     * @param <U> the type of the new result
+     * @param mapper the function to map the result of this parser
+     * @return a new parser that applies the mapper function, after running this parser
+     */
     public <U> ApplicativeParser<U> map(Function<? super T, ? extends U> mapper) {
         return fromRunner(runner.andThen(opt -> opt.map(pair -> {
             StringView input = pair.getFirst();
@@ -153,6 +262,19 @@ public class ApplicativeParser<T> {
         })));
     }
 
+    /**
+     * Runs this parser, then uses the given function to create another parser from the result of
+     * this parser and run that parser.
+     * <p>
+     * This method is equivalent to {@code >>=} operator in <b>Haskell</b>.
+     * <p>
+     * This method proves that an {@code ApplicativeParser} is a {@code Monad}.
+     *
+     * @param <U> the type of the generated parser result
+     * @param flatMapper the function to create another parser from the result of this parser
+     * @return a parser that runs this parser, and then uses the mapper function to create and run
+     *         another parser
+     */
     public <U> ApplicativeParser<U> flatMap(
             Function<? super T, ? extends ApplicativeParser<? extends U>> flatMapper) {
         return fromRunner(input -> run(input).flatMap(pair -> {
@@ -163,6 +285,14 @@ public class ApplicativeParser<T> {
         }));
     }
 
+    /**
+     * Maps a function that produces an {@code Optional} over the result of this parser, and unwraps
+     * that {@code Optional}. If the {@code Optional} is empty, the parser fails.
+     *
+     * @param <U> the type of the new result
+     * @param optionalMapper the function to map the result of this parser
+     * @return a new parser that applies the mapper function, after running this parser
+     */
     public <U> ApplicativeParser<U> optionalMap(
             Function<? super T, ? extends Optional<? extends U>> optionalMapper) {
         return flatMap(optionalMapper.andThen(opt -> opt
@@ -170,19 +300,46 @@ public class ApplicativeParser<T> {
                 .orElseGet(ApplicativeParser::fail))).cast();
     }
 
+    /**
+     * Uses a predicate to filter the result of this parser. If the test fails, the parser also
+     * fails.
+     *
+     * @param predicate the predicate to test the result of this parser
+     * @return a new parser that runs this parser and uses the predicate to test the result
+     */
     public ApplicativeParser<T> filter(Predicate<? super T> predicate) {
         return fromRunner(input -> run(input).filter(pair -> predicate.test(pair.getSecond())));
     }
 
+    /**
+     * Chooses between this parser, or another parser.
+     *
+     * @param that the other parser
+     * @return a parser that chooses the result of the first succeeds parser
+     */
     public ApplicativeParser<T> or(ApplicativeParser<T> that) {
         return fromRunner(input -> run(input).or(() -> that.run(input)));
     }
 
+    /**
+     * Prepares to throw an exception (immediately) if this parser fails. The thrown exception will
+     * immediately stop a parsing pipeline.
+     *
+     * @param errorMessage the error message of the exception
+     * @return this parser
+     */
     public ApplicativeParser<T> throwIfFail(String errorMessage) {
         this.errorMessage = errorMessage;
         return this;
     }
 
+    /**
+     * Runs this parser on the given input.
+     *
+     * @param input the given input, to be parsed
+     * @return a pair consists of the remaining input, and the parser result
+     * @throws ParserException if this parser fails
+     */
     public Pair<String, T> parse(String input) {
         return run(StringView.of(input))
                 .map(pair -> Pair.of(pair.getFirst().toString(), pair.getSecond()))
