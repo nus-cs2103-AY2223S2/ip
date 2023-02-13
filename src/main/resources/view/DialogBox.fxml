@@ -7,9 +7,9 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" maxWidth="1.7976931348623157E308" contentDisplay="TOP" style="-fx-background-color: #6b99d6; -fx-padding: 8; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-size: 14;" text="Label" textFill="WHITE" wrapText="true" >
+        <Label fx:id="dialog" alignment="TOP_LEFT" contentDisplay="TOP" style="-fx-background-color: #6b99d6; -fx-padding: 8; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-size: 14;" text="Label" textFill="WHITE" wrapText="true" >
          <font>
             <Font name="Malgun Gothic Semilight" size="12.0" />
          </font>
