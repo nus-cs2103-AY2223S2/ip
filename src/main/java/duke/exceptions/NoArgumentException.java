@@ -5,7 +5,6 @@ package duke.exceptions;
  * following a Duke command.
  */
 public class NoArgumentException extends DukeException {
-
     /**
      * Constructor for a Duke NoArgumentException.
       */
