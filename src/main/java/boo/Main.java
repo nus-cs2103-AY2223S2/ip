@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -14,7 +15,10 @@ public class Main extends Application {
     private float stageMinHeight = 600.0f;
     private float stageMinWidth = 800.0f;
 
-    private String stageTitle = "Boo";
+    private String stageTitle = "BooBot";
+
+    private Image windowImage = new Image(this.getClass().getResourceAsStream("/images/ghost.png"));
+
 
     private Boo boo = new Boo();
 
@@ -31,6 +35,7 @@ public class Main extends Application {
             stage.show();
 
             stage.setTitle(stageTitle);
+            stage.getIcons().add(windowImage);
             stage.setResizable(false);
             stage.setMinHeight(stageMinHeight);
             stage.setMinWidth(stageMinWidth);
