@@ -11,32 +11,32 @@ public abstract class Task {
     /**
      * Boolean for whether current task is marked.
      */
-    private boolean checked;
+    private boolean isChecked;
 
     /**
      * Public constructor.
      *
      * @param str Task name.
-     * @param checked Boolean for whether current task is marked.
+     * @param isChecked Boolean for whether current task is marked.
      */
-    public Task(String str, boolean checked) {
+    public Task(String str, boolean isChecked) {
         this.str = str;
-        this.checked = checked;
+        this.isChecked = isChecked;
     }
 
     public boolean isChecked() {
-        return checked;
+        return isChecked;
     }
     public String getCheckedString() {
-        return checked ? "1" : "0";
+        return isChecked ? "1" : "0";
     }
 
     public String getStr() {
         return str;
     }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
+    public void setChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 
     public abstract String getStoreTaskString();

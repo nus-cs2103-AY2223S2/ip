@@ -33,6 +33,8 @@ public class AddDeadLineCommand extends AddTaskCommand {
         DeadLine deadLine = DeadLine.generate(this.getInputArr());
         tasks.addTask(deadLine);
         storage.writeData(tasks);
-        return ui.getAddTaskMsg(tasks, deadLine);
+        String output = ui.addTaskMsg(tasks, deadLine);
+        System.out.println(output);
+        return output;
     }
 }

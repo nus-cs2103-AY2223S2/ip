@@ -19,7 +19,9 @@ public class ExitDukeCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.getByeMsg();
+        String output = ui.byeMsg();
+        System.out.println(output);
+        return output;
     }
 
     /**

@@ -29,7 +29,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.listTask(this.getInputArr());
+        String output = tasks.listTask(this.getInputArr());
+        System.out.println(output);
+        return output;
     }
 
     /**

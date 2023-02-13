@@ -29,7 +29,9 @@ public class FindTaskCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return tasks.findTask(this.getInputArr());
+        String output = tasks.findTask(this.getInputArr());
+        System.out.println(output);
+        return output;
     }
 
     @Override
