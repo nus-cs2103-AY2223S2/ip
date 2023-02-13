@@ -52,6 +52,7 @@ public class UiController {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setUiController(this);
+            stage.setTitle("Duke chatbot: your personal task manager");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
