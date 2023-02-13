@@ -1,10 +1,12 @@
 package features;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Generates random facts when prompted.
@@ -22,21 +24,12 @@ public class Trivia {
     }
 
     /**
-     * Loads facts from the data/facts.txt file into the facts ArrayList.
-     * @throws DukeException Thrown if the data/facts.txt file is not found.
+     * Loads facts from the facts/facts.txt file into the facts ArrayList.
+     * @throws DukeException Thrown if the facts/facts.txt file is not found.
      */
     public void loadFacts() throws DukeException {
-        Ui ui = new Ui();
-        File dukeFactsPath = new File("data/facts.txt");
-        try {
-            Scanner fileScan = new Scanner(dukeFactsPath);
-            while (fileScan.hasNextLine()) {
-                String fileLine = fileScan.nextLine();
-                this.facts.add(fileLine);
-            }
-        } catch (FileNotFoundException err) {
-            throw new DukeException(ui.formatLogicError("I can't find facts.txt!"));
-        }
+        InputStream dukeFactStream = new Trivia().getFileFromResourceAsStream();
+        transferFactsFromStream(dukeFactStream);
     }
 
     /**
@@ -46,5 +39,31 @@ public class Trivia {
     public String getFact() {
         Random randomInt = new Random();
         return this.facts.get(randomInt.nextInt(this.facts.size()));
+    }
+
+    private InputStream getFileFromResourceAsStream() throws DukeException {
+        Ui ui = new Ui();
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("/facts/facts.txt");
+        if (inputStream == null) {
+            throw new DukeException(ui.formatLogicError("I can't find facts.txt!"));
+        } else {
+            return inputStream;
+        }
+    }
+
+    private void transferFactsFromStream(InputStream is) throws DukeException {
+        Ui ui = new Ui();
+        try {
+            InputStreamReader streamReader = new InputStreamReader(is, StandardCharsets.UTF_8);
+            BufferedReader factReader = new BufferedReader(streamReader);
+            String factLine = factReader.readLine();
+            while (!factLine.equals("")) {
+                this.facts.add(factLine);
+                factLine = factReader.readLine();
+            }
+        } catch (IOException ex) {
+            throw new DukeException(ui.formatLogicError("error getting facts from facts.txt!"));
+        }
     }
 }
