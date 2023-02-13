@@ -32,7 +32,6 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui) {
-
         return taskList.deleteTask(index);
     }
 }
