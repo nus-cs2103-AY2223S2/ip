@@ -42,7 +42,7 @@ public class EventCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             int indexFrom = input.indexOf("/");
             int indexTo = input.lastIndexOf("/");

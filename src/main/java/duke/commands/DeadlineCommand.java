@@ -38,7 +38,7 @@ public class DeadlineCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             int indexBy = input.indexOf("/");
             String[] words = this.input.split(" ");

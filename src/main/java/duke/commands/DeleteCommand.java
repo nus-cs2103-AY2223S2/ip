@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
     /**
      * @inheritDoc
      */
-    public String execute(TaskList tasks, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             if (input.length() <= 7) {
                 throw new DukeException("OOPS!!! Delete must be followed by an int.");
