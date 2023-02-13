@@ -3,7 +3,7 @@
 
 Duke frees your mind by remembering things you need to do
 
-It's 
+It is 
 - Chat-based
 - Has a user-friendly interface
 - easy to learn
