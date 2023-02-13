@@ -12,7 +12,7 @@ public class Deadline extends Task {
     private final LocalDate end;
 
     /**
-     * @param desc Task desciption
+     * @param desc Task description
      * @param done Task completed info
      * @param end  Task due date
      * @see LocalDate

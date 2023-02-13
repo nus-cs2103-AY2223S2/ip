@@ -47,6 +47,12 @@ public class MainWindow extends AnchorPane implements Ui {
      */
     @FXML
     private void handleUserInput() {
+
+        // Checks that gui properties have been successfully initialized.
+        assert(gui != null);
+        assert(gui.taskList != null);
+        assert(gui.storage != null);
+
         String userText = userInput.getText();
         if (userText.isEmpty()) {
             return;
