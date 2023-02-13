@@ -121,6 +121,9 @@ public class Duke extends Application {
 
     /**
      * Returns string response for GUI (same rules as run()).
+     *
+     * @param input Command entered by user.
+     * @return String response to display in GUI.
      */
     public String getResponse(String input) {
         StringBuilder response = new StringBuilder();

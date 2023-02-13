@@ -6,6 +6,13 @@ package duke.parser;
  * by spaces (String[]) and the command keyword (String).
  */
 public class Parser {
+    private static final int TODO_DESCRIPTION_INDEX = 5;
+    private static final int DEADLINE_DESCRIPTION_INDEX = 9;
+    private static final int DEADLINE_DATE_OFFSET = 4;
+    private static final int EVENT_DESCRIPTION_INDEX = 6;
+    private static final int EVENT_FROM_OFFSET = 6;
+    private static final int EVENT_TO_OFFSET = 4;
+    private static final int FIND_KEYWORD_INDEX = 5;
 
     private String input;
     private String[] splitInput;
@@ -60,7 +67,7 @@ public class Parser {
      * @return True if input has a description and false otherwise.
      */
     public boolean hasDescription() {
-        return input.length() > 5;
+        return input.length() > TODO_DESCRIPTION_INDEX;
     }
 
     /**
@@ -69,7 +76,7 @@ public class Parser {
      * @return Description of ToDo.
      */
     public String parseToDoDescription() {
-        return input.substring(5);
+        return input.substring(TODO_DESCRIPTION_INDEX);
     }
 
     /**
@@ -79,7 +86,7 @@ public class Parser {
      */
     public String parseDeadlineDescription() {
         int byIndex = input.indexOf("/by");
-        return input.substring(9, byIndex - 1);
+        return input.substring(DEADLINE_DESCRIPTION_INDEX, byIndex - 1);
     }
 
     /**
@@ -89,7 +96,7 @@ public class Parser {
      */
     public String parseDeadlineDate() {
         int byIndex = input.indexOf("/by");
-        return input.substring(byIndex + 4);
+        return input.substring(byIndex + DEADLINE_DATE_OFFSET);
     }
 
     /**
@@ -99,7 +106,7 @@ public class Parser {
      */
     public String parseEventDescription() {
         int fromIndex = input.indexOf("/from");
-        return input.substring(6, fromIndex - 1);
+        return input.substring(EVENT_DESCRIPTION_INDEX, fromIndex - 1);
     }
 
     /**
@@ -110,7 +117,7 @@ public class Parser {
     public String parseEventFrom() {
         int fromIndex = input.indexOf("/from");
         int toIndex = input.indexOf("/to");
-        return input.substring(fromIndex + 6, toIndex - 1);
+        return input.substring(fromIndex + EVENT_FROM_OFFSET, toIndex - 1);
     }
 
     /**
@@ -120,10 +127,10 @@ public class Parser {
      */
     public String parseEventTo() {
         int toIndex = input.indexOf("/to");
-        return input.substring(toIndex + 4);
+        return input.substring(toIndex + EVENT_TO_OFFSET);
     }
 
     public String parseFindKeyword() {
-        return input.substring(5);
+        return input.substring(FIND_KEYWORD_INDEX);
     }
 }

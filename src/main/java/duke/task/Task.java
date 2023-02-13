@@ -47,7 +47,7 @@ public abstract class Task {
      * @return String indicating status.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done duke.task with X
+        return (isDone ? "X" : " ");
     }
 
     /**
