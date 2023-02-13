@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private static final String MISSING_FROM_OR_TO_ERROR =
-            "Plz provide BOTH the 'from' and 'to' in "
-            + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format.";
+            "Could provide BOTH the 'from' and 'to' in "
+            + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format please.";
     private final LocalDateTime from;
     private final LocalDateTime to;
 

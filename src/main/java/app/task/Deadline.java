@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private static final String MISSING_BY_ERROR = "Plz provide the deadline in "
-            + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format.";
+    private static final String MISSING_BY_ERROR = "Could you provide the deadline in "
+            + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm format please.";
     private final LocalDateTime deadline;
 
     /**

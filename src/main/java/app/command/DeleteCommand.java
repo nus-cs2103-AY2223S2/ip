@@ -35,8 +35,8 @@ public class DeleteCommand extends Command {
             response = new Response(true);
             int i = Integer.parseInt(deleteAtIndex) - 1;
             Task deletedTask = tl.deleteTask(i);
-            response.addLine("Removed " + deletedTask.getDesc()
-                    + " from the list. You now have " + tl.size() + " tasks left.");
+            response.addLine("Removed '" + deletedTask.getDesc()
+                    + "' from the list. You now have " + tl.size() + " tasks left.");
         } catch (NumberFormatException e) {
             response = new Response(false);
             response.addLine(INVALID_ARG_ERROR);

@@ -24,13 +24,14 @@ public class MarkAsDoneCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Storage storage)  {
-        boolean alreadyMarked;
+        boolean isAlreadyMarked;
         try {
-            alreadyMarked = tl.markAsDone(markAtIndex);
-            if (alreadyMarked) {
-                return new Response(tl.getTask(markAtIndex).getDesc() + " already marked as done!", true);
+            isAlreadyMarked = tl.markAsDone(markAtIndex);
+            if (isAlreadyMarked) {
+                return new Response("'" + tl.getTask(markAtIndex).getDesc()
+                        + "' already marked as done!", false);
             } else {
-                return new Response("Marked " + tl.getTask(markAtIndex).getDesc() + " as done!", true);
+                return new Response("Marked '" + tl.getTask(markAtIndex).getDesc() + "' as done!", true);
             }
         } catch (NumberFormatException e) {
             return new Response(NUM_FORMAT_ERROR, false);

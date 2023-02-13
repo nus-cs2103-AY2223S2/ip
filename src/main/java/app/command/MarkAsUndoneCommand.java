@@ -24,16 +24,15 @@ public class MarkAsUndoneCommand extends Command {
      */
     @Override
     public Response execute(TaskList tl, Storage storage) {
-        boolean alreadyMarked;
+        boolean isAlreadyMarked;
         try {
-            alreadyMarked = tl.unmarkDone(unmarkAtIndex);
-            String responseString;
-            if (alreadyMarked) {
-                responseString = tl.getTask(unmarkAtIndex).getDesc() + " is already undone!";
+            isAlreadyMarked = tl.unmarkDone(unmarkAtIndex);
+            if (isAlreadyMarked) {
+                return new Response("'" + tl.getTask(unmarkAtIndex).getDesc()
+                        + "' is already undone!", false);
             } else {
-                responseString = "Unmarked " + tl.getTask(unmarkAtIndex).getDesc() + ".";
+                return new Response("Unmarked '" + tl.getTask(unmarkAtIndex).getDesc() + "'.", true);
             }
-            return new Response(responseString, true);
         } catch (NumberFormatException e) {
             return new Response(NUM_FORMAT_ERROR, false);
         } catch (IndexOutOfBoundsException e) {

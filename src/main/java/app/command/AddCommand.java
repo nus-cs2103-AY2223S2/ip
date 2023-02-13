@@ -16,8 +16,7 @@ import app.task.TaskTypes;
  * into a Task, and add into the TaskList.
  */
 public class AddCommand extends Command {
-    private static final String INPUT_ERROR_RESPONSE = "";
-    private static final String DATETIME_ERROR_RESPONSE = "";
+    private static final String ERROR_PREFIX = "I wasn't able to add this task - ";
     private final Map<String, String> args;
     private final TaskTypes.Type taskType;
 
@@ -46,10 +45,9 @@ public class AddCommand extends Command {
         Task newTask;
         try {
             newTask = tl.addTask(this.taskType, this.args);
-        } catch (InvalidInputException e) {
-            return new Response(INPUT_ERROR_RESPONSE, false);
-        } catch (InvalidDateTimeException e) {
-            return new Response(DATETIME_ERROR_RESPONSE, false);
+        } catch (InvalidInputException | InvalidDateTimeException e) {
+            return new Response(ERROR_PREFIX, false)
+                    .addLine(e.getMessage());
         }
         Response response = new Response(true);
         int numTasks = tl.getAllTasks().size();

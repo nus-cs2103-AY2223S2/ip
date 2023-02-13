@@ -24,7 +24,7 @@ import app.chatbot.Storage;
  * (use the TaskList to modify a Task).
  */
 public abstract class Task implements Comparable<Task> {
-    protected static final String DESC_MISSING_ERROR = "Plz provide d description.";
+    protected static final String DESC_MISSING_ERROR = "Provide me with a description.";
     protected static final String INVALID_DATETIME_FORMAT_ERROR =
             "Try reformatting your date/time to the supported formats:\n"
             + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm\n"
