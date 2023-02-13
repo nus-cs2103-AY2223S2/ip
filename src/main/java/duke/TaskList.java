@@ -129,7 +129,7 @@ class TaskList {
 
     /**
      * @param taskArrayList an arraylist containing tasks type element
-     * @param description   description of the tas
+     * @param description description of the tas
      * @return A description indicating that the task is deleted
      * @throws DukeException an execption to handle if there is MissingDescription of the task, TaskNotExists and etc.
      */
