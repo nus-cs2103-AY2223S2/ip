@@ -7,7 +7,6 @@ import duke.command.CommandFind;
 import duke.command.CommandList;
 import duke.command.CommandMark;
 import duke.command.CommandTask;
-import duke.command.CommandUndo;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -22,7 +21,6 @@ public class Parser {
      * @param fullCommand full unparsed command.
      * @return command
      */
-    @SuppressWarnings("checkstyle:FallThrough")
     public static Command parse(String fullCommand) {
         String[] parts = fullCommand.split(" ");
 
@@ -31,8 +29,6 @@ public class Parser {
             return new CommandBye(fullCommand);
         case "list":
             return new CommandList(fullCommand);
-        case "undo":
-            return new CommandUndo(fullCommand);
         case "mark":
         case "unmark":
             if (parts.length != 2) {
@@ -45,9 +41,8 @@ public class Parser {
                 return new CommandMark(fullCommand, index, true);
             } else if (parts[0].equalsIgnoreCase("unmark")) {
                 return new CommandMark(fullCommand, index, false);
-            } else {
-                return null;
             }
+            break;
         case "delete":
             if (parts.length != 2) {
                 System.out.println("invalid\n");

@@ -4,11 +4,8 @@ package duke.task;
  * Represents a task.
  */
 public class Task {
-    private static int count = 0;
-
     protected String desc;
     protected boolean isDone;
-    protected final int id;
 
     /**
      * Returns a task.
@@ -17,8 +14,6 @@ public class Task {
     public Task(String description) {
         this.desc = description;
         this.isDone = false;
-        Task.count += 1;
-        this.id = Task.count;
     }
 
     /**
@@ -44,15 +39,6 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone) ? "X" : " "; // mark done task with X
-    }
-
-    /**
-     * Returns unique id for task.
-     *
-     * @return task id
-     */
-    public int getId() {
-        return this.id;
     }
 
     /**

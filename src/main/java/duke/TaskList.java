@@ -1,6 +1,5 @@
 package duke;
 
-import duke.command.Command;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> array;
-    private Command lastCommand = null;
 
     /**
      * Returns an empty task list.
@@ -64,20 +62,5 @@ public class TaskList {
      */
     public int getLength() {
         return array.size();
-    }
-
-    /**
-     * Returns the last command.
-     * @return last command.
-     */
-    public Command getLastCommand() {
-        return this.lastCommand;
-    }
-
-    /**
-     * Stores the last command.
-     */
-    public void setLastCommand(Command command) {
-        this.lastCommand = command;
     }
 }
