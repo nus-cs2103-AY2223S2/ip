@@ -112,7 +112,8 @@ public class ApplicativeParser<T> {
      *         combines the result of these parsers using the binary function
      */
     public static <T, U, V> ApplicativeParser<V> lift(
-            BiFunction<? super T, ? super U, ? extends V> combiner, ApplicativeParser<T> left,
+            BiFunction<? super T, ? super U, ? extends V> combiner,
+            ApplicativeParser<T> left,
             ApplicativeParser<U> right) {
         return left.flatMap(leftValue -> right
                 .flatMap(rightValue -> ApplicativeParser

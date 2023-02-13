@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.container.TaskList;
 
-public class UniqueCommand extends Command {
+public class GroupDuplicatesCommand extends Command {
 
     @Override
     public String execute(TaskList list) {
@@ -12,6 +12,6 @@ public class UniqueCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof UniqueCommand;
+        return obj instanceof GroupDuplicatesCommand;
     }
 }

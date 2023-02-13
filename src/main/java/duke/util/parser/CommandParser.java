@@ -10,10 +10,10 @@ import duke.command.EditCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.ListDeadlinesCommand;
+import duke.command.SortDeadlinesCommand;
 import duke.command.MarkCommand;
 import duke.command.RemoveCommand;
-import duke.command.UniqueCommand;
+import duke.command.GroupDuplicatesCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeRuntimeException;
 import duke.exception.ParserException;
@@ -29,8 +29,8 @@ public class CommandParser {
 
         // @formatter:off
         BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), MARK("mark"),
-        UNMARK("unmark"), DELETE("delete"), FIND("find"), UNIQUE("unique"), LIST_DEADLINES("list-deadlines"),
-        EDIT("edit"), UNKNOWN("");
+        UNMARK("unmark"), DELETE("delete"), FIND("find"), GROUP_DUPLICATES("group-duplicates"),
+        SORT_DEADLINES("sort-deadlines"), EDIT("edit"), UNKNOWN("");
         // @formatter:on
 
         final String value;
@@ -164,11 +164,11 @@ public class CommandParser {
             case FIND:
                 cmd = new FindCommand(runParser(WORD_PARSER));
                 break;
-            case UNIQUE:
-                cmd = new UniqueCommand();
+            case GROUP_DUPLICATES:
+                cmd = new GroupDuplicatesCommand();
                 break;
-            case LIST_DEADLINES:
-                cmd = new ListDeadlinesCommand();
+            case SORT_DEADLINES:
+                cmd = new SortDeadlinesCommand();
                 break;
             case EDIT:
                 cmd = new EditCommand(
