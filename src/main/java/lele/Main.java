@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -20,6 +21,8 @@ import javafx.stage.Stage;
  * to handle the GUI.
  */
 public class Main extends Application {
+
+    private Image icon = new Image("images/ShibaIcon.png");
     private final Lele lele = new Lele("./data/lele.txt");
     public Main() {}
 
@@ -30,6 +33,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setLele(lele);
             stage.show();
         } catch (IOException e) {

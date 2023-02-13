@@ -44,7 +44,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getLeLeDialog(response, dukeImage)
         );
-        Main.closeApp();
         userInput.clear();
     }
 

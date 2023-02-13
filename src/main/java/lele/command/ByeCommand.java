@@ -1,5 +1,6 @@
 package lele.command;
 
+import lele.Main;
 import lele.storage.Storage;
 import lele.task.TaskList;
 import lele.ui.Ui;
@@ -21,6 +22,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        Main.closeApp();
         return ui.printBye();
     }
 
