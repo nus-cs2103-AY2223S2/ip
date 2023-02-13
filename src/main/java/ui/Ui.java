@@ -32,7 +32,7 @@ public class Ui {
      * @return Exception in a String type
      */
     public String printException(Exception e) {
-        return e.toString();
+        return e.getMessage();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Ui {
      * Returns the entry welcome.
      * @return response
      */
-    public String printEntry() {
+    public static String printEntry() {
         return ENTRY_OUTPUT;
     }
 

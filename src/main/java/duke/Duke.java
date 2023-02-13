@@ -11,14 +11,12 @@ import ui.Ui;
  * A chatbot that assists the user in keeping track of his tasks.
  */
 public class Duke {
-
+    private static final String DEFAULT_PATH = System.getProperty("user.dir")
+            + File.separator + "data" + File.separator + "duke.txt";
     private Storage storage;
     private Ui ui;
     private TaskList list;
     private Parser parser;
-    private static final String DEFAULT_PATH = System.getProperty("user.dir")
-            + File.separator + "data" + File.separator + "duke.txt";
-
     /**
      * Constructor.
      *
