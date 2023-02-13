@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import sam.SamException;
@@ -42,24 +45,22 @@ public class ParserTest {
     @Test
     public void parseTaskArgs_validInputs_success() {
         try {
-            assertEquals("task", Parser.parseTaskArgs("task /by 1/1/2023").get("title"));
-            assertEquals("1/1/2023", Parser.parseTaskArgs("task /by 1/1/2023").get("by"));
-            assertEquals("2/1/2023", Parser.parseTaskArgs("task /from 1/1/2023 /to 2/1/2023").get("to"));
+            Map<String, String> argsMap = new HashMap<>();
+            Parser.parseTaskArgs(argsMap, "by 1/1/2023");
+            assertEquals("1/1/2023", argsMap.get("by"));
+            argsMap.clear();
+            Parser.parseTaskArgs(argsMap, "from 1/1/2023 /to 2/1/2023");
+            assertEquals("1/1/2023", argsMap.get("from"));
+            assertEquals("2/1/2023", argsMap.get("to"));
         } catch (SamException e) {
             fail();
         }
     }
 
     @Test
-    public void parseTaskArgs_missingTitle_exceptionThrown() {
-        assertThrows(SamMissingTaskTitleException.class, () -> Parser.parseTaskArgs("/from 1/1/2023"));
-        assertThrows(SamMissingTaskTitleException.class, () -> Parser.parseTaskArgs(""));
-        assertThrows(SamMissingTaskTitleException.class, () -> Parser.parseTaskArgs(" "));
-    }
-
-    @Test
     public void parseTaskArgs_missingValue_exceptionThrown() {
-        assertThrows(SamMissingTaskValueException.class, () -> Parser.parseTaskArgs("task /to"));
-        assertThrows(SamMissingTaskValueException.class, () -> Parser.parseTaskArgs("task /from /to 1/1/2023"));
+        Map<String, String> argsMap = new HashMap<>();
+        assertThrows(SamMissingTaskValueException.class, () -> Parser.parseTaskArgs(argsMap, "to"));
+        assertThrows(SamMissingTaskValueException.class, () -> Parser.parseTaskArgs(argsMap, "from /to 1/1/2023"));
     }
 }
