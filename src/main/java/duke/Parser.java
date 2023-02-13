@@ -98,4 +98,8 @@ public class Parser {
     public Integer getDeleteNum(String input) {
         return Integer.valueOf(input.substring(7));
     }
+
+    public String getKeyword(String input) {
+        return input.substring(5);
+    }
 }

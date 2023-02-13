@@ -15,6 +15,9 @@ public class TaskList {
     public TaskList(int size) {
         list = new ArrayList<Task>(size);
     }
+    public TaskList() {
+        list = new ArrayList<Task>();
+    }
 
     /**
      * Adds the task to the end of the list
@@ -48,5 +51,15 @@ public class TaskList {
      */
     public Task removeTask(int index) {
         return list.remove(index);
+    }
+
+    public TaskList findTask(String str) {
+        TaskList result = new TaskList();
+        for (int i = 0; i < this.getSize(); i++) {
+            if (this.getTask(i).getName().contains(str)) {
+                result.addTask(this.getTask(i));
+            }
+        }
+        return result;
     }
 }

@@ -47,6 +47,8 @@ public class Duke {
                     addTask(cmd, list, parser, ui);
                 } else if (cmd.startsWith("delete")) {
                     deleteTask(cmd, list, parser, ui);
+                } else if (cmd.startsWith("find")) {
+                    findTask(cmd, list, parser, ui);
                 } else {
                     throw new DukeException("╮ʕ˚ᴥ˚ʔ╭ :: ☹ OOPS!!! I'm sorry, but I don't know what that means!");
                 }
@@ -112,5 +114,10 @@ public class Duke {
             throw new DukeException("ʕ ﾟ ● ﾟʔ :: ☹ OOPS!!! The task does not exist!");
         }
         ui.removeTask(list, num);
+    }
+
+    private static void findTask(String cmd, TaskList list, Parser parser, UI ui) {
+        String str = parser.getKeyword(cmd);
+        ui.showFoundTasks(list.findTask(str));
     }
 }

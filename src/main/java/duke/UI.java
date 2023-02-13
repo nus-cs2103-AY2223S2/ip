@@ -30,6 +30,17 @@ public class UI {
     }
 
     /**
+     * Displays the tasks that match the keyword
+     * @param list List of tasks that match the keyword
+     */
+    public void showFoundTasks(TaskList list) {
+        System.out.println("ʕ•ᴥ•ʔっ :: Here are the matching task(s) in your list:");
+        for (int i = 1; i <= list.getSize(); i++) {
+            System.out.println(i + "." + list.getTask(i-1).toString());
+        }
+    }
+
+    /**
      * Marks a task
      * @param list Current TaskList
      * @param index Index of the task to be marked
