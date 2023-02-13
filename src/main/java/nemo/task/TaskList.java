@@ -1,7 +1,6 @@
 package nemo.task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import nemo.exception.NemoException;
 
@@ -52,6 +51,7 @@ public class TaskList {
      * @throws NemoException Thrown when index given is out of bounds.
      */
     public Task deleteTask(int taskNumber) throws NemoException {
+        assert taskNumber > 0 && taskNumber <= taskCount : "index should be positive and within range";
         try {
             Task deletedTask = this.taskList.get(taskNumber - 1);
             this.taskList.remove(taskNumber - 1);
@@ -70,6 +70,7 @@ public class TaskList {
      * @throws NemoException Thrown when index given is out of bounds.
      */
     public Task markTask(int taskNumber) throws NemoException {
+        assert taskNumber > 0 && taskNumber <= taskCount : "index should be positive and within range";
         try {
             Task task = this.taskList.get(taskNumber - 1);
             task.markDone();
@@ -87,6 +88,7 @@ public class TaskList {
      * @throws NemoException Thrown when index given is out of bounds.
      */
     public Task unmarkTask(int taskNumber) throws NemoException {
+        assert taskNumber > 0 && taskNumber <= taskCount : "index should be positive and within range";
         try {
             Task task = this.taskList.get(taskNumber - 1);
             task.unmarkDone();
@@ -142,7 +144,7 @@ public class TaskList {
      * @return String representation of all Tasks containing given String
      */
     public String findTasks(String... strings) {
-        assert strings.length > 0 : "unable to search as empty string array given";
+        assert strings.length > 0 : "unable to search for empty string array";
         String result = "";
         result += "Here are the matching tasks in your list:\n";
         int counter = 0;
