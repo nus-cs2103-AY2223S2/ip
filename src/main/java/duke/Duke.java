@@ -51,12 +51,12 @@ public class Duke extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(700.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 700.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(490, 630);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -66,17 +66,19 @@ public class Duke extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(420.0);
+        userInput.setPrefHeight(30.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(60.0);
+        sendButton.setPrefHeight(30.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 5.0);
+        AnchorPane.setRightAnchor(sendButton, 5.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput , 5.0);
+        AnchorPane.setBottomAnchor(userInput, 5.0);
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -86,18 +88,6 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-    }
-
-    /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
@@ -131,9 +121,8 @@ public class Duke extends Application {
      */
     public static String addToList(Task listItem) {
         taskList.addTask(listItem);
-        String result = "> Duke's response:\n" + "I've added the following task to your list:\n";
-        result += listItem.toString() + "\nCurrent tasks count: " + (taskList.size()) +
-                "\n--------------------------------\n";
+        String result = "I've added the following task to your list:\n";
+        result += listItem.toString() + "\nCurrent tasks count: " + (taskList.size());
         return result;
     }
 
@@ -150,9 +139,8 @@ public class Duke extends Application {
         } catch (IndexOutOfBoundsException ie) {
             return ie.getMessage();
         }
-        String result = "> Duke's response:\n" + "I've removed the following task from your list:\n";
-        result += curr.toString() + "\nCurrent tasks count: " + (taskList.size()) +
-                "\n--------------------------------\n";
+        String result = "I've removed the following task from your list:\n";
+        result += curr.toString() + "\nCurrent tasks count: " + (taskList.size());
         return result;
     }
 
@@ -162,6 +150,9 @@ public class Duke extends Application {
      * @return String listing the tasks in taskList
      */
     public static String displayList() {
+        if (taskList.size() == 0) {
+            return "Your list is currently empty, you can add tasks using the commands specified in the user guide.";
+        }
         return "Here are the tasks in your list:\n" + taskList.printList();
     }
 
