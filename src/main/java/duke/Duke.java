@@ -6,6 +6,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -31,9 +32,13 @@ public class Duke extends Application {
 //        parser.getInput();
 //    }
 
+    @FXML
     private ScrollPane scrollPane;
+    @FXML
     private VBox dialogContainer;
+    @FXML
     private TextField userInput;
+    @FXML
     private Button sendButton;
     private Scene scene;
 
@@ -120,12 +125,13 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/madoka.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/homura.png"));
 
+    @FXML
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText.getText(), new ImageView(user).getImage()),
+                DialogBox.getDukeDialog(dukeText.getText(), new ImageView(duke).getImage())
         );
         userInput.clear();
     }
@@ -134,7 +140,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return parser.getInput(input);
     }
 }
