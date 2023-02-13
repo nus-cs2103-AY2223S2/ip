@@ -126,6 +126,9 @@ public class Duke extends Application {
      * @return String response to display in GUI.
      */
     public String getResponse(String input) {
+        assert storage != null : "Storage assertion error in Duke";
+        assert tasks != null : "Tasklist assertion error in Duke";
+        assert ui != null : "Ui assertion error in Duke";
         StringBuilder response = new StringBuilder();
         try {
             Parser parser = new Parser(input);

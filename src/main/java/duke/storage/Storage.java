@@ -57,6 +57,8 @@ public class Storage {
      * @throws DukeException
      */
     public ArrayList<Task> load() throws DukeException {
+        assert filePath != null : "File path assertion error";
+        assert foldPath != null : "Folder path assertion error";
         ArrayList<Task> list = new ArrayList<>();
         try {
             File f = new File(String.valueOf(filePath));
@@ -103,6 +105,8 @@ public class Storage {
      * @throws DukeException
      */
     public void store(TaskList tasks) throws DukeException {
+        assert filePath != null : "File path assertion error";
+        assert foldPath != null : "Folder path assertion error";
         try {
             FileWriter fw = new FileWriter(filePath.toString());
 
