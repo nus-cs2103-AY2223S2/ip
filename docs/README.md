@@ -124,7 +124,7 @@ Examples:
 <br/>
 <br/>
 
-### `mark` - Unmark Task
+### `unmark` - Unmark Task
 
 Marks the status of a task as undone.
 
@@ -289,4 +289,5 @@ your original data being overwritten by BooBot.
 <br/>
 
 ## Acknowledgements
-BooBot is created using Java 11, and the libraries used are JavaFX and JUnit.
+BooBot is created using Java 11, and the libraries used are [JavaFX](https://openjfx.io/) and
+[JUnit](https://github.com/junit-team/junit5).
