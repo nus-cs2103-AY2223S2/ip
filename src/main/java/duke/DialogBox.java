@@ -22,12 +22,12 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    @FXML
+
     private Label dialog;
-    @FXML
+
     private ImageView displayPicture;
 
-    private DialogBox(Label dialog, ImageView displayPicture) {
+    public DialogBox(Label dialog, ImageView displayPicture) {
         this.dialog = dialog;
         this.displayPicture = displayPicture;
 
@@ -44,10 +44,10 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
+        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(Label text, ImageView img) {

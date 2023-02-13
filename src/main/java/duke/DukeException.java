@@ -5,6 +5,6 @@ package duke;
  */
 public class DukeException extends Exception {
     public DukeException(String errorMessage) {
-        super(errorMessage);
+        super("Sorry, Duke has run into an Error: " + errorMessage);
     }
 }

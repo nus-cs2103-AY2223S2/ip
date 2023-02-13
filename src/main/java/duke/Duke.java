@@ -57,7 +57,6 @@ public class Duke extends Application {
         Scanner myObj = new Scanner(System.in);
         String userInput = myObj.nextLine();
         while (!userInput.equals("bye")) {
-            tasks.parser(userInput);
             ui.showLine();
             storage.save(tasks);
             userInput = myObj.nextLine();

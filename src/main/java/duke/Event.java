@@ -35,6 +35,18 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from:" + from.format(timeFormat) + " to:" + to.format(timeFormat) + ")";
     }
 
+    public static Task parseCommand(String str) throws DukeException {
+        String[] detailE = str.split(" /at ", 2);
+        if (detailE.length == 1) {
+            throw new DukeException("When is the event?");
+        }
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime fromTime = LocalDateTime.parse(detailE[1], formatter1);
+        LocalDateTime toTime = LocalDateTime.parse(detailE[2], formatter1);
+        Event newE = new Event(detailE[0], fromTime, toTime, false);
+        return newE;
+    }
+
     /**
      * Returns a string representation of what is saved in the database
      * @return String
