@@ -29,6 +29,7 @@ public class Parser {
             return new ListCommand();
 
         case "mark":
+            assert arr2.length <= 2;
             if (arr2.length < 2) {
                 throw new DukeException("OOPS!!! The description of mark cannot be empty.");
             }
@@ -36,6 +37,7 @@ public class Parser {
             return new MarkCommand(index);
 
         case "unmark":
+            assert arr2.length <= 2;
             if (arr2.length < 2) {
                 throw new DukeException("OOPS!!! The description of unmark cannot be empty.");
             }
