@@ -1,7 +1,33 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I am Munchmunch hehe :)
+How may I help you?
+__________________________
+Aites, I've added this task for you :)
+ [D][ ] read book (by: sunday)
+Now you have 1 task(s) in the list ~~
+__________________________
+Aites, I've added this task for you :)
+ [T][ ] CS2103 lecture
+Now you have 2 task(s) in the list ~~
+__________________________
+Aites, I've added this task for you :)
+ [E][ ] DJ @ Prism (from: Wed 11pm to: Wed 12am)
+Now you have 3 task(s) in the list ~~
+__________________________
+Here are the tasks in your list mah dude:
+1. [D][ ] read book (by: sunday)
+2. [T][ ] CS2103 lecture
+3. [E][ ] DJ @ Prism (from: Wed 11pm to: Wed 12am)
+__________________________
+Dubzzzz! I've marked this task as done:
+  [X]  CS2103 lecture
+__________________________
+Aites cool, I've marked this task as not done yet:
+  [ ]  CS2103 lecture
+__________________________
+Here are the tasks in your list mah dude:
+1. [D][ ] read book (by: sunday)
+2. [T][ ] CS2103 lecture
+3. [E][ ] DJ @ Prism (from: Wed 11pm to: Wed 12am)
+__________________________
+See ya champ! Enjoy your day!
+__________________________
