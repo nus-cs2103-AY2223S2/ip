@@ -7,12 +7,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * Represents a dialog with an avatar.
  */
 public class DialogBox extends HBox {
-    private Label text;
+    private VBox dialog;
     private Label avatar;
 
     /**
@@ -21,17 +22,15 @@ public class DialogBox extends HBox {
      * @param t The dialog label.
      * @param a The avatar label.
      */
-    public DialogBox(Label t, Label a) {
-        text = t;
+    public DialogBox(VBox d, Label a) {
+        dialog = d;
         avatar = a;
 
-        text.setWrapText(true);
         avatar.setStyle("-fx-font-family: 'monospaced';");
-
         avatar.setPadding(new Insets(10));
 
         this.setAlignment(Pos.BOTTOM_RIGHT);
-        this.getChildren().addAll(t, a);
+        this.getChildren().addAll(dialog, avatar);
     }
 
     private void flip() {
@@ -41,13 +40,13 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, Label iv) {
-        DialogBox db = new DialogBox(l, iv);
+    public static DialogBox getUserDialog(VBox d, Label a) {
+        DialogBox db = new DialogBox(d, a);
         db.flip();
         return db;
     }
 
-    public static DialogBox getSamDialog(Label l, Label iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getSamDialog(VBox d, Label a) {
+        return new DialogBox(d, a);
     }
 }

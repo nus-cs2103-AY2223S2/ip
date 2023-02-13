@@ -32,6 +32,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getDescription() {
+        return String.format("from: %s to: %s", formatDateDisplay(from), formatDateDisplay(to));
+    }
+
+    @Override
     public void update(Map<String, String> argsMap) throws SamInvalidDateException {
         super.update(argsMap);
 

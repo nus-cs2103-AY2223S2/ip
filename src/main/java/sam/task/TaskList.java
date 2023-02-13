@@ -1,6 +1,7 @@
 package sam.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -122,30 +123,27 @@ public class TaskList {
     }
 
     /**
-     * Generates a numbered string array of all tasks in the list.
+     * Returns a read-only view of tasks.
      *
-     * @return A string array of the tasks.
+     * @return A read-only view of tasks.
      */
-    public List<String> getTasks() {
-        List<String> list = new ArrayList<>(count());
-        for (int i = 0; i < count(); i++) {
-            Task task = tasks.get(i);
-            list.add(String.format("%d: %s", i + 1, task));
-        }
-        return list;
+    public List<Task> getTasks() {
+        return Collections.unmodifiableList(tasks);
     }
 
     /**
-     * Generates a numbered string array of the tasks containing the specified substring.
+     * Returns a list of tasks that match the given substring.
+     * Tasks that do not match are replaces with null.
      *
-     * @return A string array of the tasks.
+     * @param subString The string to find.
+     * @return A list of tasks that match the given substring.
      */
-    public List<String> findTasks(String subString) {
-        List<String> list = new ArrayList<>();
+    public List<Task> findTasks(String subString) {
+        List<Task> list = new ArrayList<>(count());
         for (int i = 0; i < count(); i++) {
             Task task = tasks.get(i);
             if (task.matchTitle(subString)) {
-                list.add(String.format("%d: %s", i + 1, task));
+                list.add(i, task);
             }
         }
         return list;

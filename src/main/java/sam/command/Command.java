@@ -3,7 +3,6 @@ package sam.command;
 import sam.SamException;
 import sam.storage.Storage;
 import sam.task.TaskList;
-import sam.ui.Ui;
 
 
 /**
@@ -11,6 +10,7 @@ import sam.ui.Ui;
  */
 public abstract class Command {
     protected String args;
+    protected Result result;
 
     /**
      * Constructs a new Command.
@@ -19,6 +19,7 @@ public abstract class Command {
      */
     public Command(String args) {
         this.args = args;
+        result = new Result();
     }
 
     /**
@@ -29,6 +30,6 @@ public abstract class Command {
      * @param storage The Storage object.
      * @throws SamException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage)
+    public abstract Result execute(TaskList tasks, Storage storage)
             throws SamException;
 }

@@ -39,6 +39,10 @@ public abstract class Task implements Cloneable {
         return title;
     }
 
+    public String getDescription() {
+        return "";
+    }
+
     public boolean matchTitle(String subString) {
         return title.contains(subString);
     }

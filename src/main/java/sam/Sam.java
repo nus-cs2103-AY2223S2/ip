@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import sam.command.Command;
 import sam.command.ExitCommand;
+import sam.command.Result;
 import sam.parser.Parser;
 import sam.storage.SamLoadFailedException;
 import sam.storage.Storage;
@@ -60,7 +61,8 @@ public class Sam extends Application {
     public void issueCommand(String input) {
         try {
             Command c = Parser.parseCommand(input);
-            c.execute(tasks, ui, storage);
+            Result r = c.execute(tasks, storage);
+            ui.respond(r);
             if (c instanceof ExitCommand) {
                 exitApp();
             }

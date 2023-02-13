@@ -15,7 +15,6 @@ import sam.task.SamMissingTaskValueException;
 import sam.task.Task;
 import sam.task.TaskList;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to edit a task.
@@ -31,7 +30,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public Result execute(TaskList tasks, Storage storage)
             throws SamMissingTaskException, SamInvalidIntException,
             SamMissingTaskArgException, SamMissingTaskValueException,
             SamInvalidDateException, SamInvalidTaskException, SamSaveFailedException {
@@ -51,8 +50,11 @@ public class EditCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.respond(Dialog.EDIT.getDialog(),
-            task.toString());
+
         storage.save(tasks);
+
+        result.addMessage(Dialog.EDIT.getDialog());
+        result.addTask(task);
+        return result;
     }
 }

@@ -29,7 +29,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public Result execute(TaskList tasks, Storage storage)
             throws SamMissingTaskException, SamInvalidIntException,
             SamInvalidTaskException, SamSaveFailedException {
         if (args.isEmpty()) {
@@ -43,8 +43,11 @@ public class MarkCommand extends Command {
         String message = isDone
                 ? Dialog.MARK.getDialog()
                 : Dialog.UNMARK.getDialog();
-        ui.respond(message,
-                task.toString());
+
         storage.save(tasks);
+
+        result.addMessage(message);
+        result.addTask(task);
+        return result;
     }
 }

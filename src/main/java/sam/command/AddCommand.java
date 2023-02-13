@@ -18,7 +18,6 @@ import sam.task.Task;
 import sam.task.TaskList;
 import sam.task.ToDo;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to add a new task.
@@ -38,7 +37,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public Result execute(TaskList tasks, Storage storage)
             throws SamMissingTaskTitleException, SamMissingTaskValueException,
             SamMissingTaskArgException, SamInvalidDateException, SamSaveFailedException,
             SamUnknownCommandException {
@@ -50,12 +49,12 @@ public class AddCommand extends Command {
         Task task = createTask(input);
         tasks.addTask(task);
 
-        ui.respond(Dialog.ADD.getDialog(),
-                task.toString(),
-                String.format(Dialog.ADD_COUNT.getDialog(), tasks.count()));
-
         storage.save(tasks);
 
+        result.addMessage(Dialog.ADD.getDialog());
+        result.addTask(task);
+        result.addMessage(String.format(Dialog.ADD_COUNT.getDialog(), tasks.count()));
+        return result;
     }
 
     private Task createTask(String input) throws SamMissingTaskValueException,

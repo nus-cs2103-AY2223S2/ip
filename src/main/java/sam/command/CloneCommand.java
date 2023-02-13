@@ -15,7 +15,6 @@ import sam.task.SamMissingTaskValueException;
 import sam.task.Task;
 import sam.task.TaskList;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to clone a task.
@@ -31,7 +30,7 @@ public class CloneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public Result execute(TaskList tasks, Storage storage)
             throws SamMissingTaskException, SamInvalidIntException,
             SamMissingTaskArgException, SamMissingTaskValueException,
             SamInvalidDateException, SamInvalidTaskException, SamSaveFailedException {
@@ -50,8 +49,11 @@ public class CloneCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.respond(Dialog.CLONE.getDialog(),
-            task.toString());
+
         storage.save(tasks);
+
+        result.addMessage(Dialog.CLONE.getDialog());
+        result.addTask(task);
+        return result;
     }
 }

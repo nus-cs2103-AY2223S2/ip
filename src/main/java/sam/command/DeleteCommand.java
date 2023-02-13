@@ -9,7 +9,6 @@ import sam.task.SamMissingTaskException;
 import sam.task.Task;
 import sam.task.TaskList;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to delete a task.
@@ -20,7 +19,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public Result execute(TaskList tasks, Storage storage)
             throws SamMissingTaskException, SamInvalidIntException,
             SamInvalidTaskException, SamSaveFailedException {
         if (args.isEmpty()) {
@@ -31,8 +30,11 @@ public class DeleteCommand extends Command {
         if (task == null) {
             throw new SamInvalidTaskException();
         }
-        ui.respond(Dialog.DELETE.getDialog(),
-                task.toString());
+
         storage.save(tasks);
+
+        result.addMessage(Dialog.DELETE.getDialog());
+        result.addTask(task);
+        return result;
     }
 }

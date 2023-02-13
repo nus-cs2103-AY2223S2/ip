@@ -3,9 +3,9 @@ package sam.command;
 import java.util.List;
 
 import sam.storage.Storage;
+import sam.task.Task;
 import sam.task.TaskList;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to find a task.
@@ -16,13 +16,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        List<String> list = tasks.findTasks(args);
+    public Result execute(TaskList tasks, Storage storage) {
+        List<Task> list = tasks.findTasks(args);
         if (list.isEmpty()) {
-            ui.respond(Dialog.FIND_EMPTY.getDialog());
+            result.addMessage(Dialog.FIND_EMPTY.getDialog());
         } else {
-            list.add(0, String.format(Dialog.FIND.getDialog(), list.size()));
-            ui.respond(list.toArray(new String[0]));
+            result.addMessage(String.format(Dialog.FIND.getDialog(), list.size()));
+            result.addTaskList(list);
         }
+        return result;
     }
 }

@@ -3,7 +3,6 @@ package sam.command;
 import sam.storage.Storage;
 import sam.task.TaskList;
 import sam.ui.Dialog;
-import sam.ui.Ui;
 
 /**
  * Represents a user command to exit from Sam.
@@ -14,7 +13,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respond(Dialog.BYE.getDialog());
+    public Result execute(TaskList tasks, Storage storage) {
+        result.addMessage(Dialog.BYE.getDialog());
+        return result;
     }
 }

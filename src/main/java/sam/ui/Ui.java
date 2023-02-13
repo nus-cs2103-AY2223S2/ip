@@ -1,6 +1,7 @@
 package sam.ui;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sam.Sam;
+import sam.command.Result;
 
 /**
  * Handles user interaction.
@@ -76,7 +78,8 @@ public class Ui {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label userChar = new Label(USER);
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userChar));
+        VBox userDialog = new VBox(userText);
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userDialog, userChar));
 
         Sam.getSamInstance().issueCommand(userInput.getText());
         userInput.clear();
@@ -97,13 +100,17 @@ public class Ui {
      * @param messages A list of strings representing lines of dialogue.
      */
     public void respond(String... messages) {
-        StringBuilder str = new StringBuilder();
+        Result result = new Result();
         for (String message : messages) {
-            str.append(message + "\n");
+            result.addMessage(message);
         }
+        respond(result);
+    }
+
+    public void respond(Result result) {
         Label samChar = new Label(SAM);
-        Label samText = new Label(str.toString());
-        dialogContainer.getChildren().add(DialogBox.getSamDialog(samText, samChar));
+        VBox samDialog = result.getResult();
+        dialogContainer.getChildren().add(DialogBox.getSamDialog(samDialog, samChar));
     }
 
     /**

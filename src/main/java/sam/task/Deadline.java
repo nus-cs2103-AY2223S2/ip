@@ -29,6 +29,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getDescription() {
+        return String.format("by: %s", formatDateDisplay(by));
+    }
+
+    @Override
     public void update(Map<String, String> argsMap) throws SamInvalidDateException {
         super.update(argsMap);
 
