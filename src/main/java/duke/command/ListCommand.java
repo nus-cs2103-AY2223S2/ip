@@ -15,6 +15,7 @@ public class ListCommand extends Command {
 
     /**
      * Default constructor
+     *
      * @param contents Inputs of user
      */
     public ListCommand(String[] contents) {
@@ -23,6 +24,7 @@ public class ListCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object
@@ -32,7 +34,6 @@ public class ListCommand extends Command {
         String result = ui.getResult(TypeOfTask.list, null, taskList);
         for (int i = 0; i < taskList.getSize(); i++) {
             Task currentTask = taskList.getTaskByIndex(i);
-            //System.out.println(String.format("%d. %s", i + 1, currentTask.toString()));
             result += "\n" + String.format("%d. %s", i + 1, currentTask.toString());
         }
         return result;

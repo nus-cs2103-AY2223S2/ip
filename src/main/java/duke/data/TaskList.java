@@ -7,6 +7,7 @@ import duke.action.Task;
 /**
  * Task List class stores the list of tasks that the user has specified.
  * The class is also serializable for storing into memory.
+ *
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
 public class TaskList implements Serializable {
@@ -14,6 +15,7 @@ public class TaskList implements Serializable {
 
     /**
      * Default constructor
+     *
      * @param list List of tasks
      */
     public TaskList(List<Task> list) {
@@ -22,6 +24,7 @@ public class TaskList implements Serializable {
 
     /**
      * Returns the list of tasks
+     *
      * @return list of tasks
      */
     public List<Task> getTasks() {
@@ -30,6 +33,7 @@ public class TaskList implements Serializable {
 
     /**
      * Returns task by index specified by the user
+     *
      * @param index Index of task
      * @return index of task
      */
@@ -39,6 +43,7 @@ public class TaskList implements Serializable {
 
     /**
      * Adds task to the list of tasks
+     *
      * @param task Task object
      */
     public void addTask(Task task) {
@@ -47,6 +52,7 @@ public class TaskList implements Serializable {
 
     /**
      * Removes task from the list of tasks
+     *
      * @param taskIndex Index of the task specified by the user
      */
     public void removeTask(int taskIndex) {
@@ -55,6 +61,7 @@ public class TaskList implements Serializable {
 
     /**
      * Marks the task
+     *
      * @param taskIndex Index of task
      */
     public void markTask(int taskIndex) {
@@ -64,6 +71,7 @@ public class TaskList implements Serializable {
 
     /**
      * Unmarks the task
+     *
      * @param taskIndex Index of task
      */
     public void unmarkTask(int taskIndex) {
@@ -73,6 +81,7 @@ public class TaskList implements Serializable {
 
     /**
      * Returns the size of the list of tasks
+     *
      * @return size of list
      */
     public int getSize() {

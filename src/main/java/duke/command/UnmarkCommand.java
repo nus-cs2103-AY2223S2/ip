@@ -8,11 +8,13 @@ import duke.ui.Ui;
 
 /**
  * Unmark command when the user specifies "unmark" at the beginning of the task. Unmarks the task.
+ *
  * @author Haiqel Bin Hanaffi
  */
 public class UnmarkCommand extends Command {
     /**
      * Default constructor
+     *
      * @param contents
      */
     public UnmarkCommand(String[] contents) {
@@ -21,6 +23,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Saves the task to the memory and displays the result
+     *
      * @param taskList List of tasks
      * @param ui Ui object
      * @param storage Storage object

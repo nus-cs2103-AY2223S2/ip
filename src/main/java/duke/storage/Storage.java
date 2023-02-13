@@ -15,7 +15,7 @@ import duke.exception.DukeException;
 
 
 /**
- * Storage class that manages the loading and saving of the data before and after the program's execution.
+ * Represents storage class that manages the loading and saving of the data before and after the program's execution.
  *
  * @author Haiqel Bin Hanaffi (Acerizm)
  */
@@ -23,7 +23,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Default constructor. Constructor specifies hard codded file using relative path.
+     * Creates default constructor. Constructor specifies hard codded file using relative path.
      */
     public Storage() {
         this.filePath = "src" + File.separator + "main" + File.separator
@@ -33,7 +33,8 @@ public class Storage {
     }
 
     /**
-     * constructor that accepts a custom and different filepath
+     * Creates another constructor that accepts a custom and different filepath
+     *
      * @param filePath File path of the data
      */
     public Storage(String filePath) {
@@ -41,7 +42,8 @@ public class Storage {
     }
 
     /**
-     * Returns deserialized list of tasks after loading stored data from the disk .
+     * Returns deserialized list of tasks after loading stored data from the disk.
+     *
      * @return List of tasks
      * @throws DukeException when file is not found or data is corrupted
      */
@@ -59,6 +61,7 @@ public class Storage {
 
     /**
      * saves data to disk from program as serialized objects
+     *
      * @param taskList List of tasks
      * @throws DukeException when error occurs during saving
      */
