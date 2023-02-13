@@ -61,7 +61,11 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage store) throws DukeException {
-        list.add(new Events(taskName, sTime, eTime));
+        Events newEvent = new Events(taskName, sTime, eTime);
+        if (list.isExist(newEvent)) {
+            return "OOPS!!! The task is already in the list.";
+        }
+        list.add(newEvent);
         store.save(list);
         String response = "Got it. I've added this task:\n";
         response += list.get(list.size() - 1).toString();

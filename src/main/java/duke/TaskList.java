@@ -74,6 +74,17 @@ public class TaskList implements Serializable {
         return list.indexOf(task);
     }
 
+    public boolean isExist(Task task) {
+        for (Task a: this.list) {
+            String s = a.toString();
+            s = s.substring(0,4) + " " + s.substring(5);
+            if (task.toString().equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * The toString method.
      *

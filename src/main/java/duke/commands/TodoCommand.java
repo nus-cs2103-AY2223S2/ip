@@ -38,7 +38,11 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage store) throws DukeException {
-        list.add(new Todos((taskName)));
+        Todos newTodo = new Todos((taskName));
+        if (list.isExist(newTodo)) {
+            return "OOPS!!! The task is already in the list.";
+        }
+        list.add(newTodo);
         store.save(list);
         String response = "Got it. I've added this task:\n";
         response += list.get(list.size() - 1).toString();

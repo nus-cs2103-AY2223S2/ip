@@ -1,9 +1,6 @@
 package duke.commands;
 
-import duke.Deadlines;
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
+import duke.*;
 
 /**
  * A command type that the chatting bot can read.
@@ -50,7 +47,11 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage store) throws DukeException {
-        list.add(new Deadlines(taskName, time));
+        Deadlines newDeadline = new Deadlines(taskName, time);
+        if (list.isExist(newDeadline)) {
+            return "OOPS!!! The task is already in the list.";
+        }
+        list.add(newDeadline);
         store.save(list);
         String response = "Got it. I've added this task:\n";
         response += list.get(list.size() - 1).toString();
