@@ -23,14 +23,14 @@ public class Main extends Application {
         System.out.println("test");
         AnchorPane ap = new MainWindow(duke);
         Scene scene = new Scene(ap);
-        ap.sceneProperty().addListener(new ChangeListener<Scene>() {
-            @Override
-            public void changed(ObservableValue<? extends Scene> observable,
-                                Scene oldValue, Scene newValue) {
-                ap.prefWidthProperty().bind(newValue.widthProperty());
-                ap.prefHeightProperty().bind(newValue.heightProperty());
-            }
-        });
+//        ap.sceneProperty().addListener(new ChangeListener<Scene>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Scene> observable,
+//                                Scene oldValue, Scene newValue) {
+//                ap.prefWidthProperty().bind(newValue.widthProperty());
+//                ap.prefHeightProperty().bind(newValue.heightProperty());
+//            }
+//        });
 
         stage.setScene(scene);
         stage.show();
