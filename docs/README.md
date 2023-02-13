@@ -38,6 +38,10 @@ Example of usage:
 
 `deadline (description) /by (deadline)`
 
+Typing the datetime in the following format `yyyy/MM/dd HH:mm` will change its representation.
+
+e.g. typing `2023/02/13 21:13` into the deadline section will show as `Feb 13 2023, 2113 hrs`
+
 Expected outcome:
 
 Confirmation of the task being added.
@@ -73,6 +77,10 @@ the given 'to' datetime, and stores it in the task list.
 Example of usage:
 
 `event (description) /from (from) /to (to)`
+
+Typing the datetime in the following format `yyyy/MM/dd HH:mm` will change its representation.
+
+e.g. typing `2023/02/13 21:13` into the from / to section will show as `Feb 13 2023, 2113 hrs`
 
 Expected outcome:
 
