@@ -40,7 +40,7 @@ public class UnmarkCommand extends Command {
         if (unmarkNumber < 1 || unmarkNumber > list.size()) {
             throw new DukeException("Sorry, this task number is invalid.");
         }
-        list.get(this.unmarkNumber - 1).setStatus(false);
+        list.stream().filter(x -> list.indexOf(x) == unmarkNumber - 1).forEach(y -> y.setStatus(false));
         store.save(list);
         String response = "Nice! I've marked this task as not done yet:\n";
         response += list.get(unmarkNumber - 1).toString();

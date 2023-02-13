@@ -31,7 +31,7 @@ public class MarkCommand extends Command {
         if (markNumber < 1 || markNumber > list.size()) {
             throw new DukeException("Sorry, this task number is invalid.");
         }
-        list.get(this.markNumber - 1).setStatus(true);
+        list.stream().filter(x -> list.indexOf(x) == markNumber - 1).forEach(y -> y.setStatus(true));
         store.save(list);
         String response = "Nice! I've marked this task as done:\n";
         response += list.get(markNumber - 1).toString();

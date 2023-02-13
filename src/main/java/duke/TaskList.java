@@ -2,6 +2,7 @@ package duke;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  * The class that abstract the arrayList.
@@ -52,6 +53,25 @@ public class TaskList implements Serializable {
      */
     public Task get(int index) {
         return list.get(index);
+    }
+
+    /**
+     * The method that get a stream from the list.
+     *
+     * @return the stream of task
+     */
+    public Stream<Task> stream() {
+        return list.stream();
+    }
+
+    /**
+     * The method that get the index based on the given task.
+     *
+     * @param task
+     * @return the index of the task
+     */
+    public int indexOf(Task task) {
+        return list.indexOf(task);
     }
 
     /**
