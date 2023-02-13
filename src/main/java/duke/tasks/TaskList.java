@@ -1,8 +1,10 @@
 package duke.tasks;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -104,7 +106,7 @@ public class TaskList {
                 }
                 return "Your closest free day is in "
                         + startingDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                        + ", " + Duration.between(LocalDateTime.now(), currentDate).toDays() + " days from now!";
+                        + ", " + ChronoUnit.DAYS.between(LocalDate.now(), currentDate.toLocalDate()) + " day(s) from now!";
             }
             startingDate = startingDate.plusDays(1);
         }
