@@ -13,37 +13,36 @@ public class Parser {
     // String input = "";
 
     public String getInput(String input) {
-        while (!input.equals("bye")) {
-            try {
-                String command = input.split(" ")[0];
+        try {
+            String command = input.split(" ")[0];
 
-                if (command.equals("bye")) {
-                    // System.out.println("Bye. Hope to see you again soon!");
-                    return "Bye. Hope to see you again soon!";
-                    break;
-                } else if (command.equals("list")) {
-                    tasksList.listTaskList();
-                } else if (command.equals("mark")) {
-                    tasksList.markTask(input);
-                } else if (command.equals("unmark")) {
-                    tasksList.unmarkTask(input);
-                } else if (command.equals("todo")) {
-                    tasksList.addToDo(input);
-                } else if (command.equals("deadline")) {
-                    tasksList.addDeadline(input);
-                } else if (command.equals("event")) {
-                    tasksList.addEvent(input);
-                } else if (command.equals("delete")) {
-                    tasksList.deleteTask(input);
-                } else if (command.equals("find")) {
-                    tasksList.findEvent(input);
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (DukeException e) {
-                // if you try and catch the exception, you can still continue to run the program! WOW!
-                e.printStackTrace();
+            switch (command) {
+            case "bye":
+                // TODO: HOW DO I CLOSE THE PROGRAM AT THIS STAGE???
+                return "Bye. Hope to see you again soon!";
+            case "list":
+                return tasksList.listTaskList();
+            case "mark":
+                return tasksList.markTask(input);
+            case "unmark":
+                return tasksList.unmarkTask(input);
+            case "todo":
+                return tasksList.addToDo(input);
+            case "deadline":
+                return tasksList.addDeadline(input);
+            case "event":
+                return tasksList.addEvent(input);
+            case "delete":
+                return tasksList.deleteTask(input);
+            case "find":
+                return tasksList.findEvent(input);
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+        } catch (DukeException e) {
+            // if you try and catch the exception, you can still continue to run the program! WOW!
+            e.printStackTrace();
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
 }

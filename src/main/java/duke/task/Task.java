@@ -37,18 +37,30 @@ public class Task {
     /**
      * Changes protected boolean isDone to true
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(this);
+//        System.out.println("Nice! I've marked this task as done:");
+//        System.out.println(this);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Nice! I've marked this task as done:\n");
+        stringBuilder.append(this);
+        stringBuilder.append("\n");
+
+        return stringBuilder.toString();
     }
 
     /**
      * Changes protected boolean isDone to false
      */
-    public void markAsNotDone() {
+    public String markAsNotDone() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(this);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("OK, I've marked this task as not done yet:\n");
+        stringBuilder.append(this);
+        stringBuilder.append("\n");
+
+        return stringBuilder.toString();
     }
 }
