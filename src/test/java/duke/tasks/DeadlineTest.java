@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import henz.tasks.Deadline;
+import henz.tasks.Task;
+
 public class DeadlineTest {
     @Test
     public void testInitialisation() {

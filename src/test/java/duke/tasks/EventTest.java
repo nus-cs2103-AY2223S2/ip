@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import henz.tasks.Event;
+import henz.tasks.Task;
+
 public class EventTest {
     @Test
     public void testInitialisation() {

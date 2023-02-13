@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import henz.tasks.Task;
+import henz.tasks.Todo;
+
 public class TodoTest {
     @Test
     public void testInitialisation() {
