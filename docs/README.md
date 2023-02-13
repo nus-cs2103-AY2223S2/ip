@@ -1,6 +1,7 @@
 # User Guide
-
-<img align="middle" src="https://github.com/zrei/ip/blob/master/src/main/resources/images/Colette_Happy.gif?raw=true"><br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/src/main/resources/images/Colette_Happy.gif?raw=true">
+</p>
 Ever felt like you couldn't get a handle on *all* the things that you have to do? Not to worry, for Colette is here to help you! (And talk to you about dogs.)
 
 * [Get Started](#get-started)
@@ -19,7 +20,9 @@ Ever felt like you couldn't get a handle on *all* the things that you have to do
 6. Start the application with the command `java -jar colette.jar`.
 7. You should see the window below.
 
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true" width="200" height="400"><br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true" width="200" height="300"><br>
+</p>
 
 ---
 
@@ -45,9 +48,10 @@ Brings up a list of all the commands that Colette knows.
 Format: ```help```
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/helpCommand.png?raw=true" width="200" height="400"><br>
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/helpWindow.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/helpCommand.png?raw=true" width="150" height="200s"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/helpWindow.png?raw=true" width="200" height="300"><br>
+</p>
 
 ### **Listing all tasks**
 Lists all tasks that are currently in the task list.
@@ -55,8 +59,9 @@ Lists all tasks that are currently in the task list.
 Format: ```list```
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/list.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/list.png?raw=true" width="200" height="300"><br>
+</p>
 
 ### **Adding a task**
 You can add three types of tasks: [todos](#adding-a-todo), [deadlines](#adding-a-deadline), and [events](#adding-an-event).
@@ -67,8 +72,9 @@ Todos are tasks with a name/description.
 Format: ```todo [name/description]```
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/todo.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/todo.png?raw=true" width="200" height="300"><br>
+</p>
 
 #### Adding a deadline
 Deadlines are tasks with a name/description and a date to do the task by.
@@ -76,8 +82,9 @@ Deadlines are tasks with a name/description and a date to do the task by.
 Format: ```deadline [description] [date to do the task by]```
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/deadline.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/deadline.png?raw=true" width="200" height="300"><br>
+</p>
 
 #### Adding an event
 Events are tasks with a name/description, a start date, and an end date.
@@ -85,8 +92,9 @@ Events are tasks with a name/description, a start date, and an end date.
 Format: ```event [description] [start date] [end date]```
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/event.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/event.png?raw=true" width="200" height="300"><br>
+</p>
 
 ### **Marking a task as done or not done**
 Tasks can be marked as done to indicate they are completed, or not done to indicate that they have not been completed. This information will show up in the list. 
@@ -95,22 +103,25 @@ Tasks can be marked as done to indicate they are completed, or not done to indic
 Format: ```mark [index]``` where index is the index of the task in the list.
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/mark.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/mark.png?raw=true" width="200" height="300"><br>
+</p>
 
 #### Marking a task as not done
 Format: ```unmark [index]``` where index is the index of the task in the list. 
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/unmark.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/unmark.png?raw=true" width="200" height="300"><br>
+</p>
 
 ### **Deleting a task**
 Format: ```delete [index]``` where index is the index of the task in the list.
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="200" height="300"><br>
+</p>
 
 ### **Finding tasks**
 You can find a task using any number of keywords. Colette will search for any task in the list whose name/description matches any of the keywords provided.
@@ -120,15 +131,17 @@ Format: ```find [keyword1] [keyword2]``` where you can provide any number of key
 Example: ```find pet dogs``` will find all tasks with either `pet` or `dogs` in the name/description.
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="200" height="300"><br>
+</p>
 
 ### **Exiting the app**
 Format: ```bye```
 
 Expected result:
-<img align="middle" src="https://github.com/zrei/ip/blob/master/docs/bye.png?raw=true" width="200" height="400"><br>
-<br>
+<p align="center">
+  <img src="https://github.com/zrei/ip/blob/master/docs/bye.png?raw=true" width="200" height="300"><br>
+</p>
 
 ### **Remembering your tasks between sessions**
 Colette can remember the state of your task list between sessions!
