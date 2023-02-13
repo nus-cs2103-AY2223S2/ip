@@ -47,12 +47,12 @@ public class DialogBox extends HBox {
 
         dialogContainer.getChildren().addAll(nodes);
 
-        Circle CLIP = new Circle(SIZE / 2, SIZE / 2, SIZE / 2);
+        Circle clip = new Circle(SIZE / 2, SIZE / 2, SIZE / 2);
         avatar.setImage(a);
         avatar.setFitHeight(SIZE);
         avatar.setFitWidth(SIZE);
-        avatar.setClip(CLIP);
-        
+        avatar.setClip(clip);
+
         HBox.setMargin(avatar, new Insets(0, 0, 0, 16));
         this.setAlignment(Pos.TOP_RIGHT);
     }

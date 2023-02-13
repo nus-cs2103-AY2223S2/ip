@@ -26,7 +26,6 @@ public abstract class Command {
      * Executes the command.
      *
      * @param tasks The affected TaskList.
-     * @param ui The Ui object.
      * @param storage The Storage object.
      * @throws SamException
      */

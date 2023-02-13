@@ -9,13 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import sam.Sam;
 
-public class MainWindow extends AnchorPane {
+/**
+ * Represents the main window of the app.
+ */
+public class MainWindow extends Stage {
 
     private static final String FXML = "/view/MainWindow.fxml";
 
@@ -33,6 +34,9 @@ public class MainWindow extends AnchorPane {
 
     private Ui ui;
 
+    /**
+     * Constructs a MainWindow with the given Stage and Ui instance.
+     */
     public MainWindow(Stage stage, Ui ui) {
         this.ui = ui;
         try {
@@ -47,11 +51,22 @@ public class MainWindow extends AnchorPane {
                 .addListener(observable -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Adds a dialog box for the user.
+     *
+     * @param nodes The nodes representing the dialog.
+     */
     public void addUserDialog(Node... nodes) {
         DialogBox dialogBox = DialogBox.getLeftDialog(ui.userImage, nodes);
         dialogContainer.getChildren().add(dialogBox);
     }
 
+
+    /**
+     * Adds a dialog box for Sam.
+     *
+     * @param nodes The nodes representing the dialog.
+     */
     public void addSamDialog(Node... nodes) {
         DialogBox dialogBox = DialogBox.getRightDialog(ui.samImage, nodes);
         dialogContainer.getChildren().add(dialogBox);
