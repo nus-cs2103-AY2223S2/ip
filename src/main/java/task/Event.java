@@ -3,14 +3,34 @@ package task;
 import dukeexception.DukeException;
 import utils.DateTime;
 
+/**
+ * Event class to deal with event tasks.
+ */
 public class Event extends Task {
     private final String start;
     private final String end;
+
+    /**
+     * Class constructor.
+     *
+     * @param description The description of the task.
+     * @param isDone      Marks or unmarks the task.
+     * @param start       Event start date time.
+     * @param start       Event end date time.
+     */
     private Event(String description, boolean isDone, String start, String end) {
         super(description, isDone);
         this.start = start;
         this.end = end;
     }
+
+    /**
+     * Returns event task based on the user input.
+     *
+     * @param input User Input.
+     * @return Event task.
+     * @throws DukeException Checks the validation of input.
+     */
     public static Event generate(String input) throws DukeException {
         if (input.trim().equals("event")) {
             throw new DukeException("\t ☹ OOPS!!! The description of a event cannot be empty.\n");
@@ -30,6 +50,12 @@ public class Event extends Task {
         return new Event(startEndTime[0], false, DateTime.dateFormatter(dateTime[0]), DateTime.dateFormatter(dateTime[1]));
     }
 
+    /**
+     * Returns a event task from the file.
+     *
+     * @param taskLine Each line from the input file.
+     * @return Event task.
+     */
     public static Event generateTask(String[] taskLine) {
         boolean isDone = taskLine[1].equals("1");
         return new Event(taskLine[2], isDone, taskLine[3], taskLine[4]);

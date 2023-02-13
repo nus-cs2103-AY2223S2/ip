@@ -14,15 +14,26 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class to deal with the file.
+ */
 public class Storage {
 
     private final String filePath;
 
+    /**
+     * Class constructor.
+     *
+     * @param filePath The path of a file to be stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         checkFileExit();
     }
 
+    /**
+     * Checks whether the file exits.
+     */
     public void checkFileExit() {
         try {
             Path file = Paths.get(".", filePath);
@@ -36,7 +47,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Reads the tasks from the file.
+     *
+     * @return Tasklist which is stored in the file.
+     */
     public TaskList readData() {
         ArrayList<Task> arrayList = new ArrayList<>();
         Path file = Paths.get(".", filePath);
@@ -69,6 +84,11 @@ public class Storage {
     }
 
 
+    /**
+     * Saves tasks into the file.
+     *
+     * @param tasks Tasks are stored in the file.
+     */
     public void saveData(TaskList tasks) {
         Path file = Paths.get(".", filePath);
         ArrayList<Task> arrayList = tasks.getTasks();
