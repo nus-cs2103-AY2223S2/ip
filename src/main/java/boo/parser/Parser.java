@@ -248,38 +248,13 @@ public class Parser {
      */
     private CommandType validateDeadline(String rawCommand) {
         try {
-            int indexOfType = rawCommand.indexOf("deadline");
-            if (indexOfType + 8 > rawCommand.length() - 1) {
-                throw new BooException("The deadline command cannot be left blank.");
-            }
-            int indexOfBy = rawCommand.indexOf("/by");
-            if (indexOfBy == -1) {
-                throw new BooException("The deadline cannot be left blank.");
-            }
-            //deadline/by
-            if (indexOfType + 8 == indexOfBy) {
-                throw new BooException("There seems to be a missing task name.");
-            }
-            if (indexOfBy + 4 > rawCommand.length() - 1) {
-                throw new BooException("The deadline cannot be left blank.");
-            }
-            if (indexOfType + 9 > indexOfBy - 1) {
-                throw new BooException("There seems to be a missing task name.");
-            }
-            String taskName = rawCommand.substring(indexOfType + 9, indexOfBy - 1);
-            String deadlineOfTask;
-            if (rawCommand.charAt(indexOfBy + 3) == ' ') {
-                deadlineOfTask = rawCommand.substring(indexOfBy + 4);
-            } else {
-                deadlineOfTask = rawCommand.substring(indexOfBy + 3);
-            }
-            if (taskName.isBlank()) {
-                throw new BooException("The task name cannot be left blank.");
-            }
-            if (deadlineOfTask.isBlank()) {
-                throw new BooException("The deadline cannot be left blank.");
-            }
+            //Check if task name and deadline are given in the command
+            String[] output = checkDeadlineInformation(rawCommand);
+            String taskName = output[0];
+            String deadlineOfTask = output[1];
             DateTime.getDateTimeObject(deadlineOfTask);
+
+            //Create the command type object from the given input
             CommandType ctDeadline = CommandType.DEADLINE;
             ctDeadline.setTaskName(taskName);
             ctDeadline.setDeadline(deadlineOfTask);
@@ -296,6 +271,77 @@ public class Parser {
             return ctException;
         }
     }
+
+    /**
+     * Checks if the raw deadline input has the necessary fields, which include
+     * task name and deadline date.
+     *
+     * @param rawCommand The raw deadline input entered by the user.
+     * @return a string array of size 2, containing the task name and deadline respectively
+     * @throws BooException if the task name or the deadline date is empty.
+     */
+    private String[] checkDeadlineInformation(String rawCommand) throws BooException {
+        int indexOfType = rawCommand.indexOf("deadline");
+        if (indexOfType + 8 > rawCommand.length() - 1) {
+            throw new BooException("The deadline command cannot be left blank.");
+        }
+        int indexOfBy = rawCommand.indexOf("/by");
+        if (indexOfBy == -1) {
+            throw new BooException("The deadline cannot be left blank.");
+        }
+        //deadline/by
+        if (indexOfType + 8 == indexOfBy) {
+            throw new BooException("There seems to be a missing task name.");
+        }
+        if (indexOfBy + 4 > rawCommand.length() - 1) {
+            throw new BooException("The deadline cannot be left blank.");
+        }
+        if (indexOfType + 9 > indexOfBy - 1) {
+            throw new BooException("There seems to be a missing task name.");
+        }
+        String taskName = rawCommand.substring(indexOfType + 9, indexOfBy - 1);
+        String deadlineOfTask;
+        if (rawCommand.charAt(indexOfBy + 3) == ' ') {
+            deadlineOfTask = rawCommand.substring(indexOfBy + 4);
+        } else {
+            deadlineOfTask = rawCommand.substring(indexOfBy + 3);
+        }
+        if (taskName.isBlank()) {
+            throw new BooException("The task name cannot be left blank.");
+        }
+        if (deadlineOfTask.isBlank()) {
+            throw new BooException("The deadline cannot be left blank.");
+        }
+        String[] output = new String[2];
+        output[0] = taskName;
+        output[1] = deadlineOfTask;
+        return output;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
