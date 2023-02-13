@@ -1,8 +1,8 @@
 # User Guide
 Duke is a desktop application for managing your tasks via a Command Lind Interface (CLI) while still having 
 the benefits of a Graphical User Interface (GUI).
-========================
 
+***
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your computer. Else, you can install it from [here]
    (https://www.oracle.com/java/technologies/downloads/#java11).
@@ -10,7 +10,11 @@ the benefits of a Graphical User Interface (GUI).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open a command terminal. cd into the folder you put the jar file in, and use the java -jar duke.Duke.
    jar command to run the application. A GUI similar to the below should appear in a few seconds.
-![This is a screenshot of the starting GUI](/docs/images/starting_display.png)
+<figure>
+    <img src="/docs/images/starting_display.png"
+         alt="Starting GUI">
+</figure>
+
 5. Type the command in the input box and press `Send` to execute it. Some example commands you can try:
 - `list`: List all tasks.
 - `todo grcoeries`: Adds a todo task with `groceries` as its description to the task list.
@@ -18,8 +22,8 @@ the benefits of a Graphical User Interface (GUI).
 - `delete 1`: Deletes the 1st contact as done.
 - `bye`: Exits the app.
 6. Refer to the [Features](##features) below for details of each command.
-========================
 
+***
 ## Features
 ### Listing all tasks: list
 Shows a list of all tasks in the task list.
@@ -123,9 +127,8 @@ Format: `bye`
 ### Saving the data
 Duke data are saved in the hard disk automatically after any command that changes the data. There is no 
 need to save manually.
-========================
 
-
+***
 ## Commands Summary
 | Action     | Format, Examples                                                                                             |
 |------------|--------------------------------------------------------------------------------------------------------------|
