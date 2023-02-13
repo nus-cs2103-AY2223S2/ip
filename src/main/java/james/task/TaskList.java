@@ -8,21 +8,10 @@ public class TaskList {
     public ArrayList<Task> taskList;
 
     /**
-     * Constructor for TaskList object.
+     * Constructs a TaskList object.
      */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
-    }
-    public Task getTask(int index) {
-        return taskList.get(index);
-    }
-
-    public void markTask(int index) {
-        taskList.get(index).markDone();
-    }
-
-    public ArrayList<Task> getTaskList() {
-        return taskList;
     }
 
 
@@ -74,7 +63,7 @@ public class TaskList {
         int count = taskList.size();
 
         if (count == 0) {
-            return "\nyou currently have no tasks, feed me <:";
+            return "\nyou currently have no tasks";
         }
 
         String userToDoStr = "";
@@ -87,11 +76,6 @@ public class TaskList {
 
         return userToDoStr;
     }
-    public int getSize() {
-        return taskList.size();
-    }
-
-
 
 
     /**

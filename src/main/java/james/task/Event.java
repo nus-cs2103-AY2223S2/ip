@@ -9,7 +9,7 @@ public class Event extends Task {
     /** Ending time in d/MM/yyyy HHmm format */
     protected LocalDateTime end;
     /**
-     * Constructor for Event.
+     * Constructs an Event object.
      *
      * @param description The task description.
      * @param start The start time of the event.
@@ -35,16 +35,6 @@ public class Event extends Task {
         String startFormat =  this.start.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
         String endFormat = this.end.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
         return "E | " + super.toStoreString() + " | " + startFormat + " | " + endFormat;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Event) {
-            return super.equals(obj)
-                    && start.equals(((Event) obj).start)
-                    && end.equals(((Event) obj).end);
-        }
-        return super.equals(obj);
     }
 }
 

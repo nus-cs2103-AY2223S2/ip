@@ -9,20 +9,13 @@ import james.task.TaskList;
  * Text UI of the application.
  */
 public class Ui {
-    /**
-     * Prints greetings to users.
-     */
-    public String greetUsers() {
-        String greetings = "Hello, I am James, how may I help you?";
-        return greetings;
-    }
 
     /**
      * Prints farewell words to users.
      */
-    public String leaveChat() {
-        String farewellWords = "good work today!\nhope to see you again soon";
-        return farewellWords;
+    public String displayLeaveChat() {
+        String goodbyeWords = "good work today!\nhope to see you again soon";
+        return goodbyeWords;
     }
 
     /**
@@ -31,34 +24,37 @@ public class Ui {
      * @param task The task to be added.
      * @param tasksLength The length of the task list.
      */
-    public String addTask(Task task, int tasksLength) {
+    public String displayAddTask(Task task, int tasksLength) {
         String addToDoString = "You have added new tasks"
                 + "\n added: " + task.toString()
                 + "\nyou have " + String.valueOf(tasksLength) + " task(s)";
         return addToDoString;
     }
 
+
     /**
      * Displays the tasks in the task list.
      *
      * @param tasks The stored TaskList.
      */
-    public String listTasks(TaskList tasks) {
-        if (tasks.size() == 0) {
-            return "looks like there are no tasks on your list ";
+    public String displayTasks(TaskList tasks) {
+        boolean hasNoTasks = tasks.size() == 0;
+
+        if (hasNoTasks) {
+            return "There are no tasks in your list!";
         } else {
-            return "here are your tasks~ you've got this!" + tasks.taskListToString();
+            return "Here are your tasks!" + tasks.taskListToString();
         }
     }
+
 
     /**
      * Tells user that their task has been marked.
      *
      * @param task The marked task.
      */
-    public String markTask(Task task) {
-        String markedAsDone = "Task has been marked";
-        return markedAsDone + "\n\t" + task.toString();
+    public String displayMarkedTask(Task task) {
+        return "Task has been marked!\n" + task.toString();
     }
 
     /**
@@ -66,9 +62,8 @@ public class Ui {
      *
      * @param task The unmarked task.
      */
-    public String unmarkTask(Task task) {
-        String unmarked = "Task has been unmarked";
-        return unmarked + "\n\t" + task.toString();
+    public String displayUnmarkedTask(Task task) {
+        return "Task has been unmarked!\n" + task.toString();
     }
 
     /**
@@ -77,11 +72,29 @@ public class Ui {
      * @param task The deleted task.
      * @param tasksLength The length of the task list.
      */
-    public String deleteTask(Task task, int tasksLength) {
+    public String displayDeletedTask(Task task, int tasksLength) {
         return "removing this task from your list...\n\t"
                 + task.toString()
-                + "\ntask removed~! now you have " + String.valueOf(tasksLength) + " task(s)";
+                + "\ntask removed! now you have " + String.valueOf(tasksLength) + " task(s)";
     }
+
+
+    /**
+     * Displays the tasks found containing the keyword.
+     *
+     * @param tasks The tasks containing the keyword.
+     * @return The list of tasks containing the keyword.
+     */
+    public String displayFoundTask(TaskList tasks) {
+        boolean hasFoundNoTasks = tasks.size() == 0;
+
+        if (hasFoundNoTasks) {
+            return "No tasks matching this keyword";
+        } else {
+            return "here are the tasks i found that match your keyword" + tasks.taskListToString();
+        }
+    }
+
 
     /**
      * Displays the error encountered during execution.
@@ -91,11 +104,4 @@ public class Ui {
         return e;
     }
 
-    public String findTask(TaskList tasks) {
-        if (tasks.size() == 0) {
-            return "No tasks matched";
-        } else {
-            return "Tasks found:" + tasks.taskListToString();
-        }
-    }
 }

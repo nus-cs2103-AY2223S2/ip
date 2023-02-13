@@ -7,6 +7,11 @@ import james.exception.JamesException;
  * A todo is a task that is listed on the taskList without a deadline.
  */
 public class ToDo extends Task {
+    /**
+     * Constructs a ToDo object.
+     *
+     * @param description The description of the ToDos task.
+     */
     public ToDo(String description) {
         super(description);
     }
@@ -19,11 +24,6 @@ public class ToDo extends Task {
     @Override
     public String toStoreString() {
         return "T | " + super.toStoreString();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
     }
 
 }

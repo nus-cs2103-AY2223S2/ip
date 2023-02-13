@@ -1,15 +1,17 @@
 package james.command;
-
-import james.exception.JamesException;
 import james.jamesbot.Storage;
-
+import james.jamesbot.Ui;
 import james.task.TaskList;
 
-import james.jamesbot.Ui;
+
+
 /**
  * Exits the program.
  */
 public class ExitCommand extends Command {
+    public static final String COMMAND_WORD = "bye";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": exits the program.\n";
     /**
      * Executes the ExitCommand which is to exit the program.
      *
@@ -17,8 +19,8 @@ public class ExitCommand extends Command {
      * @param ui The ui to print out JamesBot's response.
      * @param storage The task list that is stored in the user's hard disk.
      */
-    public String execute (TaskList tasks, Ui ui, Storage storage) {
-        return ui.leaveChat();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.displayLeaveChat();
     }
 
     /**
