@@ -99,7 +99,7 @@ public class Ui {
         for (int j = 0; j < taskNumbers.size(); j++) {
             int tempTaskNumber = taskNumbers.get(j);
             Task tempTask = taskList.getTask(tempTaskNumber);
-            sb.append(String.format("\t%d. %s", tempTaskNumber, tempTask));
+            sb.append(String.format("\n\t%d. %s", tempTaskNumber, tempTask));
         }
         return sb.toString();
     }
