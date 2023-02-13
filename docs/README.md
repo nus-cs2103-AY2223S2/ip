@@ -101,7 +101,7 @@ Usage format:  `undo`
 
 Examples:
 - `undo`
--
+
 ### `bye` - Exit the program
 
 Exits the program
