@@ -63,8 +63,8 @@ Remarks:
 Examples:
 - `todo read book` Adds a new todo task with name _read book_ to the list of existing tasks.
 - `todo` Displays an error message because the task name is missing.
-  <br/>
-  <br/>
+<br/>
+<br/>
 
 ### `deadline` - Create Deadline Task
 
@@ -84,8 +84,8 @@ Examples:
 - `deadline return book /by 3rd February 2023` Displays an error message because the date is of incorrect
   format.
 - `deadline return book` Displays an error message because the deadline is missing.
-  <br/>
-  <br/>
+<br/>
+<br/>
 
 ### `event` - Create Event Task
 
@@ -107,7 +107,6 @@ Examples:
   date is after the end date.
 - `event project meeting /from 2023-02-03` Displays an error message because the end date is missing.
 <br/>
-<br/>
 
 ### `mark` - Mark Task
 
@@ -125,7 +124,6 @@ Examples:
 - `mark 2` Marks the status of task number 2 as done (assuming you have 2 or more tasks in your list).
 -  `mark 0` Displays an error message because task numbers start from 1.
 <br/>
-<br/>
 
 ### `mark` - Unmark Task
 
@@ -142,7 +140,6 @@ Examples:
 - `unmark 2` Marks the status of task number 2 as undone (assuming you have 2 or more tasks in your list).
 -  `mark 0` Displays an error message because task numbers start from 1.
 <br/>
-<br/>
 
 ### `delete` - Delete Task
 
@@ -158,7 +155,6 @@ Examples:
 
 - `delete 2` Deletes task number 2 from the list of existing tasks (assuming you have 2 or more tasks in your list).
 -  `delete 0` Displays an error message because task numbers start from 1.
-<br/>
 <br/>
 
 ### `on` - Get Tasks on a Specific Day
@@ -177,7 +173,6 @@ Examples:
 - `on 2023-02-03` Displays all tasks that fall on _2023-02-03_.
 -  `on 3rd February 2023` Displays an error message because the date is of incorrect format.
 <br/>
-<br/>
 
 ### `find` - Find Tasks
 
@@ -195,7 +190,6 @@ Examples:
 - `find book` Displays all tasks whose names contain _"book"_.
 - `find return book` Displays all tasks whose names contain _"return book"_.
 -  `find` Displays an error message because there is a missing search term.
-<br/>
 <br/>
 
 ### `reminder` - Get Reminder for Tasks 
@@ -218,7 +212,6 @@ Examples:
 - `reminder month` Displays all deadline tasks that are due within the month, and all event tasks that are
   either upcoming within the month or whose duration span over the month.
 - `reminder` Displays an error message because there is a missing duration.
-<br/>
 <br/>
 
 ### `help` - Get Help
