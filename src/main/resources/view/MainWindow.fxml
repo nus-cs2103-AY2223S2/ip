@@ -8,15 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #dbf8ff;" type="AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: #dbf8ff;" vvalue="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="530.0" prefWidth="400.0" style="-fx-background-color: #dbf8ff;" vvalue="1.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer" minHeight="552.0" minWidth="388.0" style="-fx-background-color: #dbf8ff;" />
+                <VBox fx:id="dialogContainer" minHeight="550.0" minWidth="388.0" prefWidth="400.0" style="-fx-background-color: #dbf8ff;" />
             </content>
-         <padding>
-            <Insets bottom="42.0" />
-         </padding>
         </ScrollPane>
         <TextField fx:id="userInput" layoutX="76.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" style="-fx-background-color: #f2fdff; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: transparent;" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="84.0">
          <opaqueInsets>
@@ -24,11 +21,13 @@
          </opaqueInsets>
          <padding>
             <Insets left="15.0" />
-         </padding></TextField>
-        <Button fx:id="sendButton" defaultButton="true" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-border-radius: 20px;" text="Send" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="4.0">
+         </padding>
+      </TextField>
+        <Button fx:id="sendButton" defaultButton="true" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: #81e7ff;" text="Send" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font name="Malgun Gothic Semilight" size="12.0" />
-         </font></Button>
+         </font>
+      </Button>
     </children>
    <opaqueInsets>
       <Insets />

@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 
 /**
  * An example of a custom control using FXML.
@@ -46,8 +48,16 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         tmp.get(1).setScaleX(-1);
+        ((Polygon) tmp.get(1)).setFill(getDukeColor());
+        tmp.get(2).setStyle("-fx-background-color: #f88d64; -fx-padding: 8; -fx-border-radius: 5px; "
+                + "-fx-background-radius: 5px; -fx-font-size: 14;");
+        System.out.println(tmp.get(2));
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    private static Color getDukeColor() {
+        return Color.valueOf("f88d64");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
