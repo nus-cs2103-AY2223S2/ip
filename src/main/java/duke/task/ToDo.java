@@ -19,7 +19,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        String toDoString = "T" + " | " + super.toString();
-        return toDoString;
+        return "T" + " | " + super.toString();
     }
 }

@@ -28,8 +28,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString(){
-        String deadlineString = "D" + " | " + super.toString() + " (by: " + this.deadline.toString() + ")";
-        return deadlineString;
+        return "D" + " | " + super.toString() + " (by: " + this.deadline.toString() + ")";
     }
 
     /**
@@ -41,12 +40,6 @@ public class Deadline extends Task {
     private LocalDateTime parseDateTime(String deadline) {
         String[] dateAndTime = deadline.split(" ");
         String[] dayMonthYear = dateAndTime[0].split("/");
-
-        //Checks if 2 strings: date and time were given
-        assert dateAndTime.length == 2;
-        //Checks if 3 strings: day, month and year were given
-        assert dayMonthYear.length == 3;
-
         int hour = Integer.parseInt(dateAndTime[1]) / 100;
         int minute = Integer.parseInt(dateAndTime[1]) % 100;
         int[] dateNumbers = new int[3];

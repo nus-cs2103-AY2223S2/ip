@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * {@code GUI} class that manages the graphic user interface
  * of Duke program
  */
-public class GUI{
+public class GUI extends UI {
 
     /**
      * Application's window
@@ -42,6 +42,11 @@ public class GUI{
     private Button sendButton;
 
     /**
+     * Scene used to perform on stage
+     */
+    private Scene scene;
+
+    /**
      * User's icon
      */
     private Image user = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
@@ -55,16 +60,6 @@ public class GUI{
      * dukeProgram to access and modify taskList and storage
      */
     private Duke dukeProgram = new Duke(System.getProperty("user.dir"));
-
-    /**
-     * Borderlines for every message sent by Duke
-     */
-    static final String BORDERLINE =  "_____________________________________\n";
-
-    /**
-     * VValue for scroll and anchor panes
-     */
-    private final double VVALUE = 1.0;
 
     /**
      * Sets up the required components for Duke program
@@ -81,7 +76,7 @@ public class GUI{
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        Scene scene = new Scene(mainLayout);
+        scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -97,124 +92,97 @@ public class GUI{
      * @param pane Application's main window
      */
     private void formatWindow(Stage stage, Pane pane) {
-        double userInput_PrefWidth = 325.0;
-        double sendButton_PrefWidth = 55.0;
-
-        // Set up primary stage and main layout pane
-        setUpStagePane(stage, pane);
-
-        setUpScrollPane();
-        setUpAnchorPane();
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        userInput.setPrefWidth(userInput_PrefWidth);
-        sendButton.setPrefWidth(sendButton_PrefWidth);
-    }
-
-    /**
-     * Sets up primary stage and main layout pane
-     * @param stage primary stage used in application
-     * @param pane main layout pane for application
-     */
-    private void setUpStagePane(Stage stage, Pane pane){
-        double stage_MinHeight = 600.0;
-        double stage_MinWidth = 400.0;
-
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(stage_MinHeight);
-        stage.setMinWidth(stage_MinWidth);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
 
-        pane.setPrefSize(stage_MinWidth, stage_MinHeight);
-    }
+        pane.setPrefSize(400.0, 600.0);
 
-    /**
-     * Sets up Scroll Pane of application
-     */
-    private void setUpScrollPane(){
-        double scroll_PrefWidth = 385.0;
-        double scroll_PrefHeight = 535.0;
-
-        scrollPane.setPrefSize(scroll_PrefWidth, scroll_PrefHeight);
+        scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        scrollPane.setVvalue(VVALUE);
+        scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
     /**
-     * Sets up Anchor Pane of application
+     * performs necessary actions when user presses the send button
+     * @param taskList keeps tracks of a list of tasks
+     * @param storage stores data of tasks in a file
      */
-    private void setUpAnchorPane(){
-        AnchorPane.setTopAnchor(scrollPane, VVALUE);
+    public void runEvent(TaskList taskList, Storage storage) {
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput(taskList, storage);
+        });
 
-        AnchorPane.setBottomAnchor(sendButton, VVALUE);
-        AnchorPane.setRightAnchor(sendButton, VVALUE);
+        userInput.setOnAction((event) -> {
+            handleUserInput(taskList, storage);
+        });
 
-        AnchorPane.setLeftAnchor(userInput , VVALUE);
-        AnchorPane.setBottomAnchor(userInput, VVALUE);
     }
 
     /**
-     * Performs necessary actions when user presses the send button
-     */
-    public void runEvent() {
-        sendButton.setOnMouseClicked((event) -> handleUserInput());
-
-        userInput.setOnAction((event) -> handleUserInput());
-    }
-
-    /**
-     * Handles inputs from user and performs the necessary
+     * handles inputs from user and performs the necessary
      * actions
+     * @param taskList keeps tracks of a list of tasks
+     * @param storage stores data of tasks in a file
      */
-    public void handleUserInput() {
+    public void handleUserInput(TaskList taskList, Storage storage) {
         String text = userInput.getText();
         Label userText = new Label(text);
-        String dukeReply = dukeProgram.getResponse(text);
+        String dukeReply = getResponse(text, taskList, storage);
+        Label dukeText = new Label(dukeReply);
 
-        if (dukeReply.equals("bye")){
-            String byeMessage = BORDERLINE
-                    + "See ya later!\n"
-                    + BORDERLINE;
-            Label dukeBye = new Label(byeMessage);
-            setDialogContainer(userText, dukeBye);
-
-            Platform.exit();
-            System.exit(0);
-        } else {
-            Label dukeText = new Label(dukeReply);
-            setDialogContainer(userText, dukeText);
-        }
-        userInput.clear();
-    }
-
-    /**
-     * Adds user's dialog box and duke's dialog box into dialog container
-     * @param userText user's dialog box
-     * @param dukeText duke's dialog box
-     */
-    private void setDialogContainer(Label userText, Label dukeText){
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+
+        userInput.clear();
     }
 
     /**
-     * Prints out error message when program fails to start up
+     * Returns response to user's input
+     * @param input user's input
+     * @param taskList keeps tracks of a list of tasks
+     * @param storage stores data of tasks in a file
+     * @return output for duke
      */
-    public void showLoadingError() {
-        System.out.println("Unable to start up program.");
-        System.exit(-1);
-    }
+    private String getResponse(String input, TaskList taskList, Storage storage) {
+        try {
+            Parser parser = new Parser(input);
+            Command cmdHandler = parser.parseArgs();
+            String output = cmdHandler.execArgs(taskList);
 
-    /**
-     * Prints out error message stored in {@code DukeException} object
-     * @param dukeError error message in DukeException object
-     */
-    public void displayError(DukeException dukeError){
-        System.out.println(dukeError.errorMessage);
+            if (output.equals("bye")) {
+                Platform.exit();
+                System.exit(0);
+            }
+
+            storage.editFile(taskList.loadTaskList());
+            return output;
+        } catch (DukeException err) {
+            String errMsg = UI.BORDERLINE
+                    + err.errorMessage.trim() + "\n"
+                    + UI.BORDERLINE;
+            return errMsg;
+        }
     }
 }

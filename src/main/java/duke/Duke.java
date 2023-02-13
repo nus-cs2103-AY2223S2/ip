@@ -1,7 +1,6 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -58,31 +57,9 @@ public class Duke extends Application {
             gui.showLoadingError();
         } catch (IOException errIO) {
             System.out.println("Unable to create File!");
-            Platform.exit();
             System.exit(-1);
         } catch (DukeException dukeErr) {
             gui.displayError(dukeErr);
-        }
-    }
-
-    /**
-     * Returns response to user's input
-     * @param input user's input
-     * @return output for duke
-     */
-    public String getResponse(String input) {
-        try {
-            Parser parser = new Parser(input);
-            Command cmdHandler = parser.parseArgs();
-            String output = cmdHandler.execArgs(taskList);
-
-            storage.editFile(taskList.loadTaskList());
-            return output;
-        } catch (DukeException err) {
-            String errMsg = GUI.BORDERLINE
-                    + err.errorMessage.trim() + "\n"
-                    + GUI.BORDERLINE;
-            return errMsg;
         }
     }
 
@@ -93,6 +70,6 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         gui.startUpProgram(stage);
-        gui.runEvent();
+        gui.runEvent(taskList, storage);
     }
 }
