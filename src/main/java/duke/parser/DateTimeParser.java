@@ -17,6 +17,7 @@ public abstract class DateTimeParser {
      * e.g. 2019-02-06 1400 will be formatted to Aug 06 2019, 2:00PM
      * @param datetimeString the datetime string from the user.
      * @return the string of the formatted datetime
+     * @throws DateTimeParseException
      */
     public static String parse(String datetimeString) throws DateTimeParseException {
         LocalDateTime date = LocalDateTime.parse(datetimeString, formatFrom);
