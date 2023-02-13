@@ -27,6 +27,7 @@ public class Parser {
 
     /**
      * Process userInput and returns relevant action
+     *
      * @param userInput
      * @return
      */
@@ -58,6 +59,7 @@ public class Parser {
 
     /**
      * Obtain to do description from user input
+     *
      * @param userInput
      * @return String or throws exception
      * @throws AlfredException
@@ -74,6 +76,7 @@ public class Parser {
 
     /**
      * Obtain deadline description from user input
+     *
      * @param userInput
      * @return String or throws exception
      * @throws AlfredException
@@ -90,6 +93,7 @@ public class Parser {
 
     /**
      * Obtain deadline date from user input
+     *
      * @param userInput
      * @return LocalDate or throws exception
      * @throws AlfredException
@@ -107,6 +111,7 @@ public class Parser {
 
     /**
      * Obtain event description from user input
+     *
      * @param userInput
      * @return String or exception
      * @throws AlfredException
@@ -123,6 +128,7 @@ public class Parser {
 
     /**
      * Obtain event date details (start, end) from user input
+     *
      * @param userInput
      * @return Start and end date in type Local Date or exception
      * @throws AlfredException
@@ -143,6 +149,7 @@ public class Parser {
 
     /**
      * Obtain task index from user input
+     *
      * @param userInput
      * @return
      */
