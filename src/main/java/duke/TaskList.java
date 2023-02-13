@@ -108,11 +108,11 @@ public class TaskList {
      */
     public String generate() {
         StringBuilder sb = new StringBuilder();
-        sb.append("_____________________________________\n");
+        sb.append(GUI.BORDERLINE);
         for (Task task : storage) {
             sb.append(storage.indexOf(task) + " | " + task + "\n");
         }
-        sb.append("_____________________________________\n");
+        sb.append(GUI.BORDERLINE);
         return sb.toString().trim();
     }
 
@@ -146,10 +146,11 @@ public class TaskList {
     public String markTask(int index) throws DukeException {
         try {
             storage.get(index).markAsDone();
-            return "_____________________________________\n"
+            String markTaskMsg = "_____________________________________\n"
                     + "Nice! I've marked this task as done:\n"
                     + storage.get(index) + "\n"
                     + "_____________________________________\n";
+            return markTaskMsg;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }
@@ -163,10 +164,11 @@ public class TaskList {
     public String unMarkTask(int index) throws DukeException {
         try {
             storage.get(index).unMark();
-            return "_____________________________________\n"
+            String unMarkMsg = "_____________________________________\n"
                     + "Ok. I've marked this task as not done yet:\n"
                     + storage.get(index)+ "\n"
                     + "_____________________________________\n";
+            return unMarkMsg;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }
@@ -204,7 +206,7 @@ public class TaskList {
             if (task.toString().contains(argument)) {
                 descriptions.add(this.storage.indexOf(task) + " | "
                         + task);
-            }
+            } else continue;
         }
 
         return descriptions;

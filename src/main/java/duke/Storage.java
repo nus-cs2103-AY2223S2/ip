@@ -54,30 +54,46 @@ public class Storage {
      * @throws DukeException when file fails to be written to
      */
     public void editFile(ArrayList<Task> taskList) throws DukeException {
-        if (taskList.size() > lines.size()) {
-            try {
-                for (int i = lines.size(); i < taskList.size(); i++) {
-                    Files.write(this.filePath,
-                            (i + " | " + taskList.get(i).toString() + "\n").getBytes(),
-                            StandardOpenOption.APPEND);
-                }
-            } catch (IOException err) {
-                throw new DukeException("Unable to write to File!");
+        try {
+            appendToFile(taskList);
+
+            updateFile(taskList);
+        } catch (IOException err) {
+            throw new DukeException("Unable to edit File!");
+        }
+    }
+
+    /**
+     * appends data of new tasks into file
+     * @param taskArrayList task list that keeps track of tasks
+     * @throws IOException when writing to file is unsuccessful
+     */
+    private void appendToFile(ArrayList<Task> taskArrayList) throws IOException {
+        if (taskArrayList.size() > lines.size()) {
+            for (int i = lines.size(); i < taskArrayList.size(); i++) {
+                Files.write(this.filePath,
+                        (i + " | " + taskArrayList.get(i).toString() + "\n").getBytes(),
+                        StandardOpenOption.APPEND);
             }
-        } else {
-            try {
-                for (int i = 0; i < Math.min(taskList.size(), lines.size()); i++) {
-                    String lineInQuestion = i + " | " + taskList.get(i).toString() + "\n";
-                    if (!lines.get(i).contains(lineInQuestion)) {
-                        lines.remove(i);
-                    } else if (!lines.get(i).equalsIgnoreCase(lineInQuestion)) {
-                        lines.add(i, lineInQuestion);
-                    }
+        }
+    }
+
+    /**
+     * updates existing data of tasks into file
+     * @param taskArrayList task list that keeps track of tasks
+     * @throws IOException when writing to file is unsuccessful
+     */
+    private void updateFile(ArrayList<Task> taskArrayList) throws IOException {
+        if (taskArrayList.size() <= lines.size()) {
+            for (int i = 0; i < Math.min(taskArrayList.size(), lines.size()); i++) {
+                String lineInQuestion = i + " | " + taskArrayList.get(i).toString() + "\n";
+                if (!lines.get(i).contains(lineInQuestion)) {
+                    lines.remove(i);
+                } else if (!lines.get(i).equalsIgnoreCase(lineInQuestion)) {
+                    lines.add(i, lineInQuestion);
                 }
-                Files.write(this.filePath, lines);
-            } catch (IOException err) {
-                throw new DukeException("Unable to write to File!");
             }
+            Files.write(this.filePath, lines);
         }
     }
 }

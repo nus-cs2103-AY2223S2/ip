@@ -76,14 +76,8 @@ public class Command {
 
             Task taskToAdd = new ToDo(this.args.trim());
             taskList.addTask(taskToAdd);
-            System.out.println();
-            String taskAddedMsg = UI.BORDERLINE
-                    + "Got it. I've added this task:\n"
-                    + taskToAdd + "\n"
-                    + "Now you have " + taskList.taskCount()
-                    + "in the list.\n" + UI.BORDERLINE;
 
-            return taskAddedMsg;
+            return taskAddedMessage(taskToAdd, taskList);
         }
     }
 
@@ -94,33 +88,30 @@ public class Command {
      * or format of deadline is incorrect
      */
     private String addDeadlineTask(TaskList taskList) throws DukeException {
+        Pattern deadlinePattern = Pattern.compile(".+/by \\d{2}/\\d{2}/\\d{4} \\d{4}");
+        Matcher matchDeadline = deadlinePattern.matcher(this.args);
+
         if (args.length() == 0) {
             throw new DukeException("What is the Deadline task???");
-        } else {
+        } else if (matchDeadline.find()) {
             // Check if number of arguments returns non-negative value
             assert this.args.length() > 0;
-            Pattern deadlinePattern = Pattern.compile(".+/by \\d{2}/\\d{2}/\\d{4} \\d{4}");
-            Matcher matchDeadline = deadlinePattern.matcher(this.args);
-            if (matchDeadline.find()) {
-                String desc = this.args.substring(0,
-                        this.args.indexOf("/by")
-                ).trim();
 
-                String by = args.substring(
-                        args.indexOf("/by") + "/by ".length()
-                );
-                Task taskToAdd = new Deadline(desc, by);
-                taskList.addTask(taskToAdd);
-                String taskAddedMsg = UI.BORDERLINE
-                        + "Got it. I've added this task:\n"
-                        + taskToAdd + "\n" 
-                        + "Now you have " + taskList.taskCount() 
-                        + "in the list.\n" + UI.BORDERLINE;
-                return taskAddedMsg;
-            } else {
-                throw new DukeException("Incorrect format!\n" 
-                        + "Format should be: <desc> /by <dd/MM/yy> <HHmm>");
-            }
+            String desc = this.args.substring(0,
+                    this.args.indexOf("/by")
+            ).trim();
+
+            String by = args.substring(
+                    args.indexOf("/by") + "/by ".length()
+            );
+
+            Task taskToAdd = new Deadline(desc, by);
+            taskList.addTask(taskToAdd);
+
+            return taskAddedMessage(taskToAdd, taskList);
+        } else {
+            throw new DukeException("Incorrect format!\n"
+                    + "Format should be: <desc> /by <dd/MM/yy> <HHmm>");
         }
     }
 
@@ -131,42 +122,37 @@ public class Command {
      * incorrect format is given for start or end of event
      */
     private String addEventTask(TaskList taskList) throws DukeException {
+        Pattern eventPattern = Pattern
+                .compile(".+/from \\d{2}/\\d{2}/\\d{4} \\d{4} /to \\d{2}/\\d{2}/\\d{4} \\d{4}");
+        Matcher matchEvent = eventPattern.matcher(this.args);
+
         if (args.length() == 0) {
             throw new DukeException("What is the Event task???");
-        } else {
+        } else if (matchEvent.find()) {
             // Check if number of arguments returns non-negative value
             assert this.args.length() > 0;
-            Pattern eventPattern = Pattern
-                    .compile(".+/from \\d{2}/\\d{2}/\\d{4} \\d{4} /to \\d{2}/\\d{2}/\\d{4} \\d{4}");
-            Matcher matchEvent = eventPattern.matcher(this.args);
-            if (matchEvent.find()) {
-                String desc = args.substring(0,
-                        args.indexOf("/from")
-                );
+            String desc = args.substring(0,
+                    args.indexOf("/from")
+            );
 
-                String from = args.substring(
-                        args.indexOf("/from") + "/from ".length(),
-                        args.indexOf("/to")
-                );
+            String from = args.substring(
+                    args.indexOf("/from") + "/from ".length(),
+                    args.indexOf("/to")
+            );
 
-                String to = args.substring(
-                        args.indexOf("/to") + "/to ".length()
-                );
+            String to = args.substring(
+                    args.indexOf("/to") + "/to ".length()
+            );
 
-                Task taskToAdd = new Events(desc, from, to);
-                taskList.addTask(taskToAdd);
-                String taskAddedMsg = UI.BORDERLINE
-                        + "Got it. I've added this task:\n"
-                        + taskToAdd + "\n" 
-                        + "Now you have " + taskList.taskCount() 
-                        + "in the list.\n" + UI.BORDERLINE;
-                return taskAddedMsg;
-            } else {
-                String errMessage = "Incorrect format!\n"
-                        + "Format should be: <desc> /from <dd/MM/yy> <HHmm>"
-                        + " /to <dd/MM/yy> <HHmm>";
-                throw new DukeException(errMessage);
-            }
+            Task taskToAdd = new Events(desc, from, to);
+            taskList.addTask(taskToAdd);
+
+            return taskAddedMessage(taskToAdd, taskList);
+        } else {
+            String errMessage = "Incorrect format!\n"
+                    + "Format should be: <desc> /from <dd/MM/yy> <HHmm>"
+                    + " /to <dd/MM/yy> <HHmm>";
+            throw new DukeException(errMessage);
         }
     }
 
@@ -204,7 +190,8 @@ public class Command {
         assert Pattern.compile("\\d+").matcher(this.args).find();
 
         taskList.removeTask(Integer.parseInt(this.args));
-        return "Deleted Task no. " + this.args ;
+        String deleteTaskMsg = "Deleted Task no. " + this.args;
+        return deleteTaskMsg;
     }
 
     /**
@@ -213,7 +200,8 @@ public class Command {
      */
     @Override
     public String toString(){
-        return this.command + " " + this.args;
+        String str = this.command + " " + this.args;
+        return str;
     }
 
     /**
@@ -228,17 +216,42 @@ public class Command {
                     + "Sorry! No matches found!\n"
                     + "_____________________________________\n";
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append(
-                    "_____________________________________\n"
-                            + "Here are the matching tasks in your list:\n"
-            );
-            for (String desc : descOfTasksFound) {
-                sb.append(desc);
-            }
-            sb.append("_____________________________________\n");
-
-            return sb.toString().trim();
+            return generateMatchingTasks(descOfTasksFound);
         }
+    }
+
+    /**
+     * Generates descriptions of all matching tasks found
+     * @param tasksFound List of matching tasks found
+     * @return String with descriptions of all matching tasks
+     */
+    private String generateMatchingTasks(List<String> tasksFound) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(
+                "_____________________________________\n"
+                        + "Here are the matching tasks in your list:\n"
+        );
+        for (String desc : tasksFound) {
+            sb.append(desc);
+        }
+        sb.append("_____________________________________\n");
+
+        return sb.toString().trim();
+    }
+
+    /**
+     * Gives a message when task is added into tasklist
+     * @param taskAdded last task added into tasklist
+     * @param taskList keeps track of tasks
+     * @return message that task has been added to tasklist
+     */
+    private String taskAddedMessage(Task taskAdded, TaskList taskList) {
+        String taskAddedMsg = GUI.BORDERLINE
+                + "Got it. I've added this task:\n"
+                + taskAdded + "\n"
+                + "Now you have " + taskList.taskCount()
+                + "in the list.\n" + GUI.BORDERLINE;
+
+        return taskAddedMsg;
     }
 }
