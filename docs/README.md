@@ -1,7 +1,7 @@
 # User Guide
 Duke is a **desktop app for managing user tasks, optimized for use via a Command Line Interface** while still having the benefits of a Graphical User Interface.
 
-![Sample Gui Image](./Ui.png)
+![Sample Gui Image](/Ui.png)
 
 ## Features 
 
@@ -80,7 +80,7 @@ Format: `find KEYWORD`
 
 Example of usage: 
 
-![Example for find](./findExample.png)
+![Example for find](/findExample.png)
 <br>
 
 ### `mark` - Marks a task as done
