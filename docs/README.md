@@ -1,5 +1,7 @@
 # User Guide
 
+![colette](https://raw.githubusercontent.com/zrei/ip/master/src/main/resources/images/Colette_Happy.gif)
+
 Ever felt like you couldn't get a handle on *all* the things that you have to do? Not to worry, for Colette is here to help you! (And talk to you about dogs.)
 
 * [Get Started](#get-started)
@@ -63,15 +65,24 @@ Todos are tasks with a name/description.
 
 Format: ```todo [name/description]```
 
+Expected result:
+![todo](https://raw.githubusercontent.com/zrei/ip/master/docs/todo.png)
+
 #### Adding a deadline
 Deadlines are tasks with a name/description and a date to do the task by.
 
 Format: ```deadline [description] [date to do the task by]```
 
+Expected result:
+![deadline](https://raw.githubusercontent.com/zrei/ip/master/docs/deadline.png)
+
 #### Adding an event
 Events are tasks with a name/description, a start date, and an end date.
 
 Format: ```event [description] [start date] [end date]```
+
+Expected result:
+![event](https://raw.githubusercontent.com/zrei/ip/master/docs/event.png)
 
 ### **Marking a task as done or not done**
 Tasks can be marked as done to indicate they are completed, or not done to indicate that they have not been completed. This information will show up in the list. 
@@ -79,11 +90,20 @@ Tasks can be marked as done to indicate they are completed, or not done to indic
 #### Marking a task as done
 Format: ```mark [index]``` where index is the index of the task in the list.
 
+Expected result:
+![mark](https://raw.githubusercontent.com/zrei/ip/master/docs/mark.png)
+
 #### Marking a task as not done
 Format: ```unmark [index]``` where index is the index of the task in the list. 
 
+Expected result:
+![unmark](https://raw.githubusercontent.com/zrei/ip/master/docs/unmark.png)
+
 ### **Deleting a task**
 Format: ```delete [index]``` where index is the index of the task in the list.
+
+Expected result:
+![delete](https://raw.githubusercontent.com/zrei/ip/master/docs/delete.png)
 
 ### **Finding tasks**
 You can find a task using any number of keywords. Colette will search for any task in the list whose name/description matches any of the keywords provided.
@@ -92,8 +112,14 @@ Format: ```find [keyword1] [keyword2]``` where you can provide any number of key
 
 Example: ```find pet dogs``` will find all tasks with either `pet` or `dogs` in the name/description.
 
+Expected result:
+![find](https://raw.githubusercontent.com/zrei/ip/master/docs/find.png)
+
 ### **Exiting the app**
 Format: ```bye```
+
+Expected result:
+![bye](https://raw.githubusercontent.com/zrei/ip/master/docs/bye.png)
 
 ### **Remembering your tasks between sessions**
 Colette can remember the state of your task list between sessions!
