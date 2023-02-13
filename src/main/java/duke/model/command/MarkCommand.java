@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
     public String execute(TaskList list) {
         Task task = list.get(index);
         task.markAsDone();
-        return "Nice! I've marked this task as done:\n  " + task;
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     @Override

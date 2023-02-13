@@ -21,7 +21,7 @@ public abstract class Command {
      * @return {@code true} if this {@code Command} is {@code ExitCommand}
      */
     public boolean isExit() {
-        return this instanceof ExitCommand;
+        return false;
     }
 
     @Override

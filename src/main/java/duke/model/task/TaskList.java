@@ -2,11 +2,8 @@ package duke.model.task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import duke.common.exception.DukeIndexOutOfBoundsException;
@@ -37,6 +34,10 @@ public class TaskList implements Serializable {
      */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
+    }
+
+    public static TaskList of(Task... tasks) {
+        return new TaskList(Arrays.asList(tasks));
     }
 
     private void raiseIfInvalidIndex(int index) {
@@ -110,74 +111,13 @@ public class TaskList implements Serializable {
      *
      * @return a string representing the number of stored tasks
      */
-    public String countTaskAsString() {
+    public String countTasks() {
         int n = tasks.size();
         return String.format("%d task%s", n, n < 2 ? "" : "s");
     }
 
-    private <T> String listFromStreamWithIndicies(Stream<T> stream) {
-        return stream.map(new Function<T, String>() {
-            private int index = 1;
-
-            @Override
-            public String apply(T element) {
-                String out = String.format("%d.%s", index, element);
-                index++;
-                return out;
-            }
-        }).collect(Collectors.joining("\n"));
-    }
-
-    /**
-     * Lists all stored tasks, with indicies. Indicies start from {@code 1}.
-     *
-     * @return a string showing the contents of all tasks, with indicies.
-     */
-    public String listAllTasks() {
-        return listFromStreamWithIndicies(tasks.stream());
-    }
-
-    /**
-     * Lists all stored tasks that contain the given keyword, with indicies. Indicies start from
-     * {@code 1}.
-     *
-     * @param keyword the given keyword to search for
-     * @return a string showing the contents of all tasks that contain the keyword, with indicies
-     */
-    public String listTasksContainKeyword(String keyword) {
-        return listFromStreamWithIndicies(tasks.stream().filter(task -> task.contains(keyword)));
-    }
-
-    /**
-     * Lists all unique descriptions, with counts and indicies.
-     *
-     * @return a string showing the descriptions and their counts
-     */
-    public String listUniqueTaskDescriptionsWithCounts() {
-        return listFromStreamWithIndicies(tasks.stream()
-                .collect(Collectors.groupingBy(
-                        Task::getDescription,
-                        LinkedHashMap::new,
-                        Collectors.counting()))
-                .entrySet()
-                .stream()
-                .map(entry -> {
-                    String description = entry.getKey();
-                    long count = entry.getValue();
-                    return String.format("%s (appeared %d time%s)", description, count,
-                            count < 2 ? "" : "s");
-                }));
-    }
-
-    public String listSortedDeadlineTasks() {
-        return listFromStreamWithIndicies(tasks.stream()
-                .filter(DeadlineTask.class::isInstance)
-                .map(DeadlineTask.class::cast)
-                .sorted(Comparator.comparing(DeadlineTask::getDeadline)));
-    }
-
     @Override
     public String toString() {
-        return "TaskList:\n" + listAllTasks();
+        return "TaskList:" + tasks;
     }
 }

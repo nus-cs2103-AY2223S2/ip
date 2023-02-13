@@ -7,7 +7,7 @@ public class ClearCommand extends Command {
     @Override
     public String execute(TaskList list) {
         list.clear();
-        return "I've cleared your task list! Now your list is empty";
+        return "I've cleared your list. Now it is empty!";
     }
 
     @Override

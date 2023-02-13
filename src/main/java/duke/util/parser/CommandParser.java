@@ -9,7 +9,6 @@ import duke.model.command.ClearCommand;
 import duke.model.command.Command;
 import duke.model.command.ExitCommand;
 import duke.model.command.FindCommand;
-import duke.model.command.GroupDuplicatesCommand;
 import duke.model.command.HelpCommand;
 import duke.model.command.ListCommand;
 import duke.model.command.MarkCommand;
@@ -30,9 +29,8 @@ public class CommandParser {
 
         // @formatter:off
         BYE("bye"), LIST("list"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), MARK("mark"),
-        UNMARK("unmark"), DELETE("delete"), FIND("find"), GROUP_DUPLICATES("group-duplicates"),
-        SORT_DEADLINES("sort-deadlines"), SET_DESCRIPTION("set-description"), CLEAR("clear"), HELP("help"),
-        UNKNOWN("");
+        UNMARK("unmark"), DELETE("delete"), FIND("find"), SORT_DEADLINES("sort-deadlines"), CLEAR("clear"),
+        SET_DESCRIPTION("set-description"), HELP("help"), UNKNOWN("");
         // @formatter:on
 
         final String value;
@@ -165,9 +163,6 @@ public class CommandParser {
                 break;
             case FIND:
                 cmd = new FindCommand(runParser(WORD_PARSER));
-                break;
-            case GROUP_DUPLICATES:
-                cmd = new GroupDuplicatesCommand();
                 break;
             case SORT_DEADLINES:
                 cmd = new SortDeadlinesCommand();

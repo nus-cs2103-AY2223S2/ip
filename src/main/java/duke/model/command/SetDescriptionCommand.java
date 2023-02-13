@@ -21,7 +21,7 @@ public class SetDescriptionCommand extends Command {
         String oldDescription = task.getDescription();
         task.setDescription(newDescription);
         return String.format(
-                "OK, I have edited your task's description: %s -> %s",
+                "I've edited your task's description: %s -> %s",
                 oldDescription,
                 newDescription);
     }

@@ -17,9 +17,9 @@ public class AddCommand extends Command {
     public String execute(TaskList list) {
         list.add(task);
         return String.format(
-                "I've added this task:\n" + "  %s\n" + "Now you have %s in the list.",
+                "I've added this task:\n%s\nNow you have %s in the list.",
                 task,
-                list.countTaskAsString());
+                list.countTasks());
     }
 
     @Override

@@ -65,10 +65,6 @@ public abstract class Task implements Serializable {
         return isDone;
     }
 
-    public boolean contains(String keyword) {
-        return description.contains(keyword);
-    }
-
     public boolean isSameTask(Task that) {
         assert that != null;
         Class<?> thisClazz = this.getClass();
