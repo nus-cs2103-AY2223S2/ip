@@ -37,7 +37,6 @@ public class Duke {
       } catch (IOException e) {
         File data = new File("data");
         data.mkdirs();
-        File duke = new File("data/duke.txt");
       }
       ui = new UI(new Parser(tasks, storage));
     }
