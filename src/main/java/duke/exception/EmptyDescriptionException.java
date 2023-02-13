@@ -5,7 +5,8 @@ package duke.exception;
  */
 public class EmptyDescriptionException extends Exception {
     public EmptyDescriptionException() {
-        super("OOPS!!! The description of a task cannot be empty.");
+        super("OOPS!!! The description of a task cannot be empty while adding a task! " +
+                "\n If you want to mark/ unmark/ delete task, please enter task number after command!");
     }
 
 }

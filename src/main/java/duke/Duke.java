@@ -40,7 +40,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         String response = "";
-        response = parser.checkCommand(input);
+        response = parser.performCommand(input);
         storage.save(this.tasks);
         return response;
     }

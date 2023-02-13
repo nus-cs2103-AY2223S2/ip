@@ -26,6 +26,9 @@ public class TaskList {
      * Prints the list of tasks
      */
     public String printList() {
+        if (taskList.size() == 0) {
+            return "There is no task in your task list!";
+        }
         String list = "Here are some tasks in your list:";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
             list = list + "\n" + i + "." + (taskList.get(i - 1)).toString();
@@ -38,10 +41,16 @@ public class TaskList {
      * @param taskStr Task number of task in the list to mark as completed
      */
     public String markTask(String taskStr) {
-        int taskNum = Integer.parseInt(taskStr) - 1;
-        Task originalTask = taskList.get(taskNum);
-        originalTask.markTask();
-        return "Nice! I've marked this task as done: \n  " + originalTask;
+        try {
+            int taskNum = Integer.parseInt(taskStr) - 1;
+            Task originalTask = taskList.get(taskNum);
+            originalTask.markTask();
+            return "Nice! I've marked this task as done: \n  " + originalTask;
+        } catch (NumberFormatException e) {
+            return "Please enter a task number!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please enter a valid task number!";
+        }
     }
 
     /**
@@ -49,10 +58,16 @@ public class TaskList {
      * @param taskStr Task number of task in the list to mark as completed
      */
     public String unmarkTask(String taskStr) {
-        int taskNum = Integer.parseInt(taskStr) - 1;
-        Task originalTask = taskList.get(taskNum);
-        originalTask.unmarkTask();
-        return "Ok, I've marked this task as not done yet: \n  " + originalTask;
+        try {
+            int taskNum = Integer.parseInt(taskStr) - 1;
+            Task originalTask = taskList.get(taskNum);
+            originalTask.unmarkTask();
+            return "Ok, I've marked this task as not done yet: \n  " + originalTask;
+        } catch (NumberFormatException e) {
+            return "Please enter a task number!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please enter a valid task number!";
+        }
     }
 
     /**
@@ -77,12 +92,18 @@ public class TaskList {
      * @param taskStr Task number of task in the list to be deleted
      */
     public String deleteTask(String taskStr) {
-        int taskNum = Integer.parseInt(taskStr) - 1;
-        Task taskToRemove = taskList.get(taskNum);
-        String removedTaskStr = taskToRemove.toString();
-        taskList.remove(taskNum);
-        return "Noted. I've removed this task: \n  " + removedTaskStr
-                + "\nNow you have " + taskList.size() + " tasks in the list.";
+        try {
+            int taskNum = Integer.parseInt(taskStr) - 1;
+            Task taskToRemove = taskList.get(taskNum);
+            String removedTaskStr = taskToRemove.toString();
+            taskList.remove(taskNum);
+            return "Noted. I've removed this task: \n  " + removedTaskStr
+                    + "\nNow you have " + taskList.size() + " tasks in the list.";
+        } catch (NumberFormatException e) {
+            return "Please enter a task number!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please enter a valid task number!";
+        }
     }
 
     /**
@@ -109,31 +130,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Check if the task description is empty or not
-     * @param input user input
-     * @throws EmptyDescriptionException If there is only command without task
-     */
-
-    public void emptyDes(String input) throws EmptyDescriptionException {
-        if ((input.equals("todo")) || (input.equals("deadline")) || (input.equals("event"))) {
-            throw new EmptyDescriptionException();
-        }
-    }
-
-    /**
-     * Check if the command exist or not
-     * @param command First word of user input
-     * @throws WrongCommandException If command does not exist
-     */
-    public void wrongCommand(String command) throws WrongCommandException {
-        if (!(command.equals("mark") || command.equals("unmark")
-                || command.equals("todo") || command.equals("deadline")
-                || command.equals("event") || command.equals("delete")
-                || command.equals("find"))) {
-            throw new WrongCommandException();
-        }
-    }
 
 
 

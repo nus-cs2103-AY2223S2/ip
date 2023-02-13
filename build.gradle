@@ -9,6 +9,14 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.mypackage.MyClass'
+        )
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -49,7 +57,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {

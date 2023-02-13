@@ -1,9 +1,12 @@
 package duke.parser;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongCommandException;
+import duke.exception.WrongFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -18,6 +21,7 @@ import duke.task.ToDo;
 public class Parser {
     private TaskList taskList;
     private Scanner sc;
+    private ArrayList<String> listOfCommands;
 
     /**
      * Constructor for Parser
@@ -26,6 +30,18 @@ public class Parser {
     public Parser(TaskList taskList) {
         this.taskList = taskList;
         //this.sc = new Scanner(System.in);
+        this.listOfCommands = new ArrayList<>() {
+            {
+                //add("list");
+                add("mark");
+                add("unmark");
+                add("todo");
+                add("deadline");
+                add("event");
+                add("delete");
+                add("find");
+            }
+        };
     }
 
     /**
@@ -34,9 +50,12 @@ public class Parser {
      * @throws WrongCommandException If wrong command word is being entered
      */
     public String performCommand(String input) {
-        //String input = this.sc.nextLine();
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
+        try {
+            this.checkCommand(input);
+
+            if (input.equals("bye")) {
+                return "Bye. Hope to see you again soon!";
+            } else if (input.equals("list")) {
                 return taskList.printList();
             } else {
                 String[] arrOfString = input.split(" ");
@@ -77,12 +96,15 @@ public class Parser {
                     return taskList.find(input.substring(5));
 
                 default:
-                    return "Cannot understand bruh";
+                    return "Please enter a valid command and/or task!";
                 }
             }
+        } catch (EmptyDescriptionException | WrongCommandException | WrongFormatException e){
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10";
         }
 
-        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -90,22 +112,16 @@ public class Parser {
      * @param input Input String by user
      * @return Perform command to return string by Duke
      */
-    public String checkCommand(String input) {
+    public void checkCommand(String input) throws EmptyDescriptionException, WrongCommandException, WrongFormatException {
         String[] arrOfString = input.trim().split(" ");
         String command = arrOfString[0];
-        try {
-            if ((input.equals("todo")) || (input.equals("deadline")) || (input.equals("event"))) {
-                throw new EmptyDescriptionException();
-            } else if (!(command.equals("mark") || command.equals("unmark")
-                    || command.equals("todo") || command.equals("deadline")
-                    || command.equals("event") || command.equals("delete")
-                    || command.equals("find") || !command.equals("list"))) {
-                throw new WrongCommandException();
-            }
-        } catch (EmptyDescriptionException | WrongCommandException e) {
-            return e.getMessage();
+        if (listOfCommands.contains(input)) {
+            throw new EmptyDescriptionException();
+        } else if (arrOfString.length > 1 && (command.equals("bye") || command.equals("list"))) {
+            throw new WrongFormatException();
+        } else if (!listOfCommands.contains(command)) {
+            throw new WrongCommandException();
         }
-        return this.performCommand(input);
     }
 
 }
