@@ -36,7 +36,8 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        String eventString = "E" + " | " + super.toString() + " (from: " + this.from
+        String eventString = "E" + " | " + super.toString()
+                + " (from: " + this.from
                 + "to: " + this.to + ")";
         return eventString;
     }
