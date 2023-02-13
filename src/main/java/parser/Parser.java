@@ -48,7 +48,7 @@ public class Parser {
         String[] splitted = content.split(delimiter, 2);
         if (splitted.length <= 1) {
             throw new InputFormatException(source,
-                    String.format("Haiya where your %s? FAILURE.", fieldName), null);
+                    String.format("where your %s? FAILURE.", fieldName), null);
         }
         return splitted;
     }

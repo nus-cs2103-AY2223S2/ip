@@ -39,4 +39,16 @@ public class ParserTest {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void handleMissingField_singleWord_throwException() {
+        Exception exception = assertThrows(InputFormatException.class, () -> {
+            Parser.handleMissingField("eat", "/by", "by", "Event Creation");
+        });
+
+        String expectedMessage = "Haiya wrong format.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
