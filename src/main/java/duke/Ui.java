@@ -36,6 +36,8 @@ public class Ui {
     }*/
 
     public static String handleCommand(String s, TaskList t) {
+        assert t.getTasks().size() >= 0: "Number of tasks should be not be a  negative number";
+        assert s.length() >= 0: "number of letters in command should not be a negative number";
         ArrayList<Task> tasks = t.getTasks();
         // user enters list command
         if (s.contains("list")) {

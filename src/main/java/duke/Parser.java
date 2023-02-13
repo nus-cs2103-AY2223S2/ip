@@ -81,6 +81,7 @@ public class Parser {
      * @return true if input is todo task , else false
      */
     public static boolean is_toDo(String input) {
+        assert input.length() > 0 && input != null : "string input should not be empty";
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
             if (firstword_Arr[0].equalsIgnoreCase("todo")) {

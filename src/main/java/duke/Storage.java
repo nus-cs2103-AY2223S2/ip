@@ -23,7 +23,7 @@ class Storage {
     }
 
     public ArrayList<Task> load() {
-        System.out.println("    . . . Loading . . . ");
+        assert this.filePath.length() > 0 : "this file path should not be empty";
         File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<Task>();
         File dir = new File(System.getProperty("user.dir") + "/data");
@@ -78,6 +78,7 @@ class Storage {
 
     public void saveData(TaskList t) {
         ArrayList<Task> tasks = t.getTasks();
+        assert tasks.size() >= 0 : "Number of tasks should not be negative";
         try {
             FileWriter fWriter = new FileWriter(this.filePath);
             for (int i = 0; i < tasks.size(); i++) {
