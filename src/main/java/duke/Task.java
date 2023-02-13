@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Task implements Serializable {
     private String name;
-    private boolean status;
+    private boolean isDone;
 
     /**
      * The constructor of this class.
@@ -15,7 +15,7 @@ public class Task implements Serializable {
      * @param name
      */
     public Task(String name) {
-        this.status = false;
+        this.isDone = false;
         this.name = name;
     }
 
@@ -25,7 +25,7 @@ public class Task implements Serializable {
      * @param status
      */
     public void setStatus(boolean status) {
-        this.status = status;
+        this.isDone = status;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Task implements Serializable {
      * @return the status of the task.
      */
     public boolean getStatus() {
-        return this.status;
+        return this.isDone;
     }
 
     /**
