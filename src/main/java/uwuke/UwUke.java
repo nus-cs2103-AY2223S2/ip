@@ -27,7 +27,7 @@ import uwuke.task.TaskList;
 
 public class UwUke extends Application {
 
-    private final static int CAPACITY = 100;
+    private static final int CAPACITY = 100;
     private static TaskList tasks;
 
     private ScrollPane scrollPane;
@@ -137,7 +137,8 @@ public class UwUke extends Application {
     }
 
     /**
-     * Main handler to perform all commands other than the bye command
+     * Performs the command based on the input
+     * Will identify command based on it's type, raw input string can be passed in directly.
      * @param input command string
      */
     private static void performCommand(String input) throws DukeException {
@@ -170,7 +171,7 @@ public class UwUke extends Application {
             saveTask();
             break;
         default:
-            Printer.printWithDecorations(Advisor.advise(input));
+            Printer.printWithDecorations(Advisor.adviseUser(input));
         }
     }
 

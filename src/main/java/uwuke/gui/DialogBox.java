@@ -43,8 +43,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * User on the right
-     * 
+     * Returns a new DialogBox of the User
+     * User Image is kept to the right
      * @param text
      * @param picView
      * @return
@@ -54,7 +54,8 @@ public class DialogBox extends HBox {
     }
     
     /**
-     * Duke on the left, reverse all elements then return a dialog box
+     * Returns a new DialogBox of UwUke
+     * Uwuke will be on the left
      * 
      * @param text
      * @param picView

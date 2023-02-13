@@ -12,7 +12,7 @@ public class Advisor {
      * @param input faulty input string given by user
      * @return advise based on faulty input
      */
-    public static String advise(String input) {
+    public static String adviseUser(String input) {
         if (input.contains("deadline") && !input.contains("/by")) {
             return "Please add a description for deadline using the \"/by\" keyword. :c\nExample: deadline a /by b";
         } else if (input.contains("event") && !(input.contains("/from") && input.contains("/to"))) {
