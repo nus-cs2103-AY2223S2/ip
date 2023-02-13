@@ -7,8 +7,6 @@ import java.time.format.DateTimeParseException;
  * Represents a Deadline task, encapsulating a deadline <code>localDate</code>.
  */
 public class Deadline extends Task {
-
-
     private final LocalDate by;
 
     /**

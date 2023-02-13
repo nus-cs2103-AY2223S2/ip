@@ -4,7 +4,6 @@ package duke.tasks;
  * Represents a Todo task, encapsulating only the description of the Todo.
  */
 public class Todo extends Task {
-
     /**
      * Constructor for a Todo task.
      * @param description The name of the Todo.

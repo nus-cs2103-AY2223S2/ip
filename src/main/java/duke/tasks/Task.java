@@ -40,14 +40,14 @@ abstract public class Task {
      * Marks this Task as done.
      */
     public void mark() {
-      this.isDone = true;
+        this.isDone = true;
     }
 
     /**
      * (Un)Marks this task as done.
      */
     public void unmark() {
-      this.isDone = false;
+        this.isDone = false;
     }
 
     /**
@@ -56,7 +56,7 @@ abstract public class Task {
      */
     @Override
     public String toString() {
-      return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
 
