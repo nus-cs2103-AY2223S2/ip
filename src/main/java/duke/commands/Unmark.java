@@ -22,13 +22,7 @@ public class Unmark extends Command{
             throw new DukeException("invalid index");
         }
     }
-
-<<<<<<< HEAD
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(this.index > tasks.size() - 1 || this.index < 0) {
-            throw new DukeException("Sorry, you used an invalid index");
-        }
-=======
+    
     /**
      * This function is used to mark a task as not done
      * 
@@ -36,8 +30,10 @@ public class Unmark extends Command{
      * @param ui the user interface
      * @param storage Storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
->>>>>>> branch-A-JavaDoc
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if(this.index > tasks.size() - 1 || this.index < 0) {
+            throw new DukeException("Sorry, you used an invalid index");
+        }
         this.t = tasks.getTask(this.index);
         this.t.markAsNotDone();
         storage.saveTaskList(tasks);
