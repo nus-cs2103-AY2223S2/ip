@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The class responsible of the user interface for the program
+ * The class responsible for the user interface for the program
  */
 public class Ui {
     /**
