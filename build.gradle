@@ -56,9 +56,9 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "boo"
+    archiveBaseName = "boobot"
     archiveClassifier = null
-    archiveVersion = "v0.2";
+//    archiveVersion = "v0.2";
 }
 
 checkstyle {

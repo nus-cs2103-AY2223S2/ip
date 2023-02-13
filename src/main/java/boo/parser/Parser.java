@@ -226,7 +226,7 @@ public class Parser {
     private CommandType validateTodo(String rawCommand, String[] inputArray) {
         try {
             if (inputArray.length == 1) {
-                throw new BooException("The todo command cannot be left blank.");
+                throw new BooException("The todo command cannot be left blank. Please enter a task.");
             }
             int indexOfType = rawCommand.indexOf("todo");
             String taskName = rawCommand.substring(indexOfType + 5);
@@ -251,7 +251,7 @@ public class Parser {
     private String[] checkDeadlineInformation(String rawCommand) throws BooException {
         int indexOfType = rawCommand.indexOf("deadline");
         if (indexOfType + 8 > rawCommand.length() - 1) {
-            throw new BooException("The deadline command cannot be left blank.");
+            throw new BooException("The deadline command cannot be left blank. Please enter a task.");
         }
         int indexOfBy = rawCommand.indexOf("/by");
         if (indexOfBy == -1) {
@@ -331,7 +331,7 @@ public class Parser {
     private String[] checkEventInformation(String rawCommand) throws BooException {
         int indexOfType = rawCommand.indexOf("event");
         if (indexOfType + 5 > rawCommand.length() - 1) {
-            throw new BooException("The event command cannot be left blank.");
+            throw new BooException("The event command cannot be left blank. Please enter a task.");
         }
 
         int indexOfFrom = rawCommand.indexOf("/from");
@@ -434,7 +434,7 @@ public class Parser {
         try {
             String dateString = rawCommand.substring(2);
             if (dateString.isBlank()) {
-                throw new BooException("The date cannot be left blank.");
+                throw new BooException("The date cannot be left blank. Enter a date.");
             }
             DateTime.getDateTimeObject(dateString);
             CommandType ctOn = CommandType.ON;

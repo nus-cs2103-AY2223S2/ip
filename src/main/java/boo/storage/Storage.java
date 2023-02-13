@@ -133,9 +133,9 @@ public class Storage {
                         return false;
                     }
                 default:
-                    //Should never reach here because data file should only be to-do, deadline or event. Hence,
-                    //each line should start with 'T', 'D' or 'E'.
-                    assert false;
+                    //Should never reach here because data file should only be to-do, deadline or event. Hence, if
+                    //reach here, means data file was tempered
+                    return false;
                 }
             }
             s.close();
