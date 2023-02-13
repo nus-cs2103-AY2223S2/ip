@@ -4,7 +4,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * Algebric sum data type.
+ * Algebraic sum data type.
  * Can be either a valid left result
  * or an invalid right error.
  * 

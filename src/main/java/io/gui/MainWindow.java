@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane implements Ui {
     @FXML
     private Button sendButton;
 
-    Gui gui;
+    private Gui gui;
 
     private final Image userImg = new Image(this.getClass().getResourceAsStream("/images/default_user_pic.png"));
     private final Image dImg = new Image(this.getClass().getResourceAsStream("/images/cyborg_girl.png"));
@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane implements Ui {
         Command command = Command.parser().parse(userText).match(
                 pr -> pr.first(),
                 msg -> Error.of(msg));
-        command.execute(gui.taskList, this, gui.storage);
+        command.execute(gui.getTaskList(), this, gui.getStorage());
         if (command.isExit()) {
             Platform.exit();
         }
@@ -70,5 +70,14 @@ public class MainWindow extends AnchorPane implements Ui {
     @Override
     public void showReply(String msg) {
         dialogueContainer.getChildren().addAll(DialogueBox.getBotDialogue(msg, dImg));
+    }
+
+    /**
+     * Sets gui property which allows MainWindow to modify gui properties.
+     * 
+     * @param gui Gui object
+     */
+    void setGui(Gui gui) {
+        this.gui = gui;
     }
 }
