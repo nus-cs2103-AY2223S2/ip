@@ -19,7 +19,7 @@
   - [Finding a keyword: `find`](#finding-a-keyword-find)
   - [Getting a reminder: `remind`](#getting-a-reminder-remind)
   - [Exiting the application: `bye`](#exiting-the-application-bye)
-  - [Getting My Melody's mistakes](#getting-my-melodys-mistakes-mistakes)
+  - [Getting My Melody's mistakes: `mistakes`](#getting-my-melodys-mistakes-mistakes)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
     
@@ -31,7 +31,8 @@
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `kuromi.jar` from [here]().
 3. Copy the file to the folder you want to use as the *home folder* for your Kuromi.
-4. Double click the file to run the application. A GUI similar to the below should appear in a few seconds.
+4. Double click the jar file to run the application.\
+A GUI similar to the below should appear in a few seconds.
 5. Type the command in the chat box and press Enter (or click the Send button) to execute it.
 6. Refer to the [Usage](#usage) below for details of each command.
 
@@ -324,5 +325,13 @@ Shows Kuromi's notebook `Kuromi Note` that contains a list of My Melody's mistak
 - `mistakes`
 
 ## FAQ
+  
+**Q**: Where is my data saved?\
+**A**: Your data is saved in `kuromi.txt`, in a `data` folder created when you first add a task in the application.
+  
+**Q**: How do I transfer my data to another computer?\
+**A**: Install the application in the other computer and replace the empty data file it creates with the file that contains the data you want to transfer.
 
 ## Command Summary
+  
+
