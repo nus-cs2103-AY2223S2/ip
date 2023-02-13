@@ -19,12 +19,26 @@ public class DeleteCommandTest {
                 "2024-10-20 2359");
         tl.add(d);
 
-        DeleteCommand mc = new DeleteCommand("delete 1");
-        assertEquals(mc.execute(tl, storage),
+        DeleteCommand deleteCommand1 = new DeleteCommand("delete 1");
+        DeleteCommand deleteCommand2 = new DeleteCommand("delete ");
+        DeleteCommand deleteCommand3 = new DeleteCommand("delete -1");
+
+        assertEquals(deleteCommand1.execute(tl, storage),
                 "Got it. I've deleted this task:\n"
                         + "  [D] [   ]  homework\n"
                         + " (by: Oct 20 2024 11:59 PM)\n\n"
                         + "Now you have 0 tasks in the list.");
-
+        try {
+            deleteCommand2.execute(tl, storage);
+        } catch (DukeException e) {
+            assertEquals(e.getMessage(),
+                    "Command must be followed by an integer.");
+        }
+        try {
+            deleteCommand3.execute(tl, storage);
+        } catch (DukeException e) {
+            assertEquals(e.getMessage(),
+                    "There are insufficient tasks.");
+        }
     }
 }

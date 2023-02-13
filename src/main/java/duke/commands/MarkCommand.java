@@ -36,7 +36,7 @@ public class MarkCommand extends Command {
             Task task = tasks.get(index - 1);
             task.mark();
             storage.saveTaskList(tasks);
-            return "Nice! I've marked this task as done:\n  " + task;
+            return Ui.markTaskConfirmation(task);
         } catch (NumberFormatException nfe) {
             throw new DukeException(Ui.missingIndex());
         }

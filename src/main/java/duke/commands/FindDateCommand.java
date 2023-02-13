@@ -31,7 +31,7 @@ public class FindDateCommand extends Command {
             throw new DukeException(Ui.wrongFindDateCommand());
         }
         String keyword = this.input.trim().substring(9, input.length());
-        ArrayList<Task> filtered = tasks.filterDate(keyword);
+        ArrayList<Task> filtered = tasks.filterDate(keyword.toLowerCase());
         System.out.println(filtered.size());
         if (filtered.size() == 0) {
             return Ui.noTasksMessage();

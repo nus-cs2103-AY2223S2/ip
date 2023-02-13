@@ -40,13 +40,13 @@ public class UpdateCommand extends Command {
                 Deadline d = (Deadline) t;
                 d.updateDeadline(this.input.split("/deadline")[1].trim());
             } else {
-                throw new DukeException(Ui.updateWrongFormat());
+                throw new DukeException(Ui.wrongUpdateFormat());
             }
             storage.saveTaskList(tasks);
             return Ui.confirmationMessage("updated", tasks, t);
 
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Ui.updateWrongFormat());
+            throw new DukeException(Ui.wrongUpdateFormat());
         }
     }
 }

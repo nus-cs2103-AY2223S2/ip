@@ -26,7 +26,7 @@ public class Task implements Serializable {
      */
     public boolean contains(String keyword) {
         if (description.length() >= keyword.length()) {
-            return description.contains(keyword);
+            return description.toLowerCase().contains(keyword);
         } else {
             return false;
         }

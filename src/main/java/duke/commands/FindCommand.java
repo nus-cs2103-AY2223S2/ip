@@ -32,7 +32,7 @@ public class FindCommand extends Command {
             throw new DukeException(Ui.wrongFindCommandFormat());
         }
         String keyword = this.input.trim().substring(5, input.length());
-        ArrayList<Task> filtered = tasks.filter(keyword);
+        ArrayList<Task> filtered = tasks.filter(keyword.toLowerCase());
         if (filtered.size() == 0) {
             return Ui.noTasksMessage();
         }

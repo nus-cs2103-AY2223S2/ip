@@ -20,10 +20,26 @@ public class MarkCommandTest {
                 "2024-10-20 2359");
         tl.add(d);
 
-        MarkCommand mc = new MarkCommand("mark 1");
-        assertEquals(mc.execute(tl, storage),
+        MarkCommand markCommand1 = new MarkCommand("mark 1");
+        MarkCommand markCommand2 = new MarkCommand("mark ");
+        MarkCommand markCommand3 = new MarkCommand("mark -1");
+
+        assertEquals(markCommand1.execute(tl, storage),
                 "Nice! I've marked this task as done:\n"
                         + "  [D] [ X ]  homework\n"
                         + " (by: Oct 20 2024 11:59 PM)\n");
+        try {
+            markCommand2.execute(tl, storage);
+        } catch (DukeException e) {
+            assertEquals(e.getMessage(),
+                    "Command must be followed by an integer.");
+        }
+        try {
+            markCommand3.execute(tl, storage);
+        } catch (DukeException e) {
+            assertEquals(e.getMessage(),
+                    "There are insufficient tasks.");
+        }
+
     }
 }
