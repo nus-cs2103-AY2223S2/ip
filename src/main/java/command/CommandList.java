@@ -1,4 +1,6 @@
-package duke;
+package command;
+
+import task.TaskList;
 
 /**
  * Command to see everything in the list.
@@ -9,14 +11,18 @@ public class CommandList extends Command {
     /**
      * Constructor for CommandList.
      *
-     * @param tasklist List of all tasks.
+     * @param taskList List of all tasks.
      */
-    public CommandList(TaskList tasklist) {
-        this.taskList = tasklist;
+    public CommandList(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     @Override
     public String execute() {
+        return this.getAllItemIn(this.taskList);
+    }
+
+    private String getAllItemIn(TaskList taskList) {
         return taskList.toString();
     }
 }
