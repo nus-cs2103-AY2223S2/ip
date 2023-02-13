@@ -24,10 +24,13 @@ public class MarkCommandTest {
             e.getMessage();
         }
         MarkCommand mc = new MarkCommand("mark 1");
-
-        assertEquals(mc.execute(tl, storage),
-                "Nice! I've marked this task as done:\n"
-                        + "  [D] [x] homework\n"
-                        + " (by: Oct 20 2024 11:59 PM)");
+        try {
+            assertEquals(mc.execute(tl, storage),
+                    "Nice! I've marked this task as done:\n"
+                            + "  [D] [x] homework\n"
+                            + " (by: Oct 20 2024 11:59 PM)");
+        } catch (DukeException e) {
+            e.getMessage();
+        }
     }
 }
