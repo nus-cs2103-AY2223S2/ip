@@ -70,7 +70,7 @@ public class Ui {
         if (taskArray.size() == 0) {
             return "No tasks found.";
         } else {
-            String str = "These are the tasks I have found:";
+            String str = "These are the tasks I have found:\n";
             for (int i = 0; i < taskArray.size(); i++) {
                 str += (i + 1) + ". " + taskArray.get(i).toString() + "\n";
             }
