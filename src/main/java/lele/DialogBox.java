@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 public class DialogBox extends HBox {
     private static final float WRAPPING_WIDTH = 250;
     @FXML
-    private Text dialog;
+    private Label dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -40,7 +40,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         // Credits to @zrei
-        dialog.setWrappingWidth(DialogBox.WRAPPING_WIDTH);
+//        dialog.setWrappingWidth(DialogBox.WRAPPING_WIDTH);
         displayPicture.setImage(img);
         // Credits to @gremmyz
         Circle circle = new Circle(45, 45, 45);
