@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Extracts and initialises list index from String input.
+     * <p>
      * @param input
      */
     public DeleteCommand(String input) {
@@ -20,6 +21,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes deletion of task at index given by user.
+     * <p>
      * @param taskManager
      * @return Successful task deletion message.
      * @throws DukeException

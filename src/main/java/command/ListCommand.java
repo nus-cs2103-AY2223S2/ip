@@ -12,6 +12,7 @@ public class ListCommand extends Command {
 
     /**
      * Displays the task list when prompted by user.
+     * <p>
      * @param taskManager
      * @return String of tasks in list
      * @throws DukeException

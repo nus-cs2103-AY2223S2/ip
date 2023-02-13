@@ -87,7 +87,6 @@ public class FileManager implements Serializable {
                 }
                 assert taskManager != null;
                 taskManager.addTaskToList(task);
-                taskManager.sortTasks();
             }
         } catch (FileNotFoundException e) {
             System.out.println(e);

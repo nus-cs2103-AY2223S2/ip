@@ -10,6 +10,7 @@ import task.ToDo;
 public class DukeUI {
     /**
      * UI for welcoming user.
+     * <p>
      * @return message
      */
     public static String welcomeMessage() {
@@ -24,6 +25,7 @@ public class DukeUI {
 
     /**
      * UI for tasks that match keyword provided by user.
+     * <p>
      * @return message
      */
     public static String foundTaskMessage() {
@@ -33,6 +35,7 @@ public class DukeUI {
 
     /**
      * UI for completed tasks.
+     * <p>
      * @return message
      */
     public static String markTaskMessage() {
@@ -42,6 +45,7 @@ public class DukeUI {
 
     /**
      * UI for incomplete tasks.
+     * <p>
      * @return message
      */
     public static String unmarkTaskMessage() {
@@ -51,6 +55,7 @@ public class DukeUI {
 
     /**
      * UI for number of tasks in the list.
+     * <p>
      * @param numOfTasks
      * @return number of tasks message
      */
@@ -61,6 +66,7 @@ public class DukeUI {
 
     /**
      * UI for deleting task in the list.
+     * <p>
      * @param numOfTasks
      * @return message
      */
@@ -71,6 +77,7 @@ public class DukeUI {
 
     /**
      * UI for adding event task to the list.
+     * <p>
      * @param numOfTasks
      * @return message
      */
@@ -81,6 +88,7 @@ public class DukeUI {
 
     /**
      * UI for adding deadline task to the list.
+     * <p>
      * @param numOfTasks
      * @return message
      */
@@ -91,6 +99,7 @@ public class DukeUI {
 
     /**
      * UI for todo task to the list.
+     * <p>
      * @param numOfTasks
      * @return message
      */
@@ -119,6 +128,7 @@ public class DukeUI {
      * For when user does not include index of task for mark
      * and unmark commands or does not include description for
      * task commands.
+     * <p>
      * @return error message
      */
     public static String incompleteInputErrorMessage() {
@@ -127,6 +137,7 @@ public class DukeUI {
 
     /**
      * For when user inputs a command that does not exist.
+     * <p>
      * @return error message
      */
     public static String invalidInputErrorMessage() {

@@ -6,6 +6,7 @@ import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.EventCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.TodoCommand;
@@ -37,6 +38,8 @@ public class Parser {
 
         try {
             switch (userCommand) {
+            case "help":
+                return new HelpCommand();
             case "list":
                 return new ListCommand();
             case "bye":

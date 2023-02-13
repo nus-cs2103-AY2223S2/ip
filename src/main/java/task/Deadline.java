@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Initialise a deadline task.
+     * <p>
      * @param description
      * @param status
      * @param by
@@ -23,11 +24,6 @@ public class Deadline extends Task {
         this.by = by;
         assert super.dateFormatter(this.by) != null;
         this.byFormatted = super.dateFormatter(this.by);
-    }
-
-    @Override
-    public String getDate() {
-        return this.by;
     }
     /**
      * {@inheritDoc}
@@ -62,6 +58,4 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.byFormatted + ")";
     }
-
-    //deadline test program /by 25/12/23 1150
 }
