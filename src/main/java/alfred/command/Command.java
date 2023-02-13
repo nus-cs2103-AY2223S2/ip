@@ -80,6 +80,8 @@ public class Command {
             return ui.getGoodByeMessage();
         case STATS:
             return ui.getStatsMessage(tasks);
+        case EVENING:
+            return ui.getGreetingsMessage();
         default:
             return ui.getUnknownMessage();
         }

@@ -22,6 +22,7 @@ public class Parser {
         FIND,
         BYE,
         STATS,
+        EVENING,
         UNKNOWN
     };
 
@@ -53,6 +54,8 @@ public class Parser {
             return Action.BYE;
         } else if (s.equals("stats")) {
             return Action.STATS;
+        } else if (s.equals("evening")) {
+            return Action.EVENING;
         }
         return Action.UNKNOWN;
     }

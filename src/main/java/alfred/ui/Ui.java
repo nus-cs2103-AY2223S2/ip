@@ -12,7 +12,7 @@ public class Ui {
      * Sends greeting message to user
      */
     public String getGreetingsMessage() {
-        return "Hello Master Wayne, I'm Alfred\n" + "What can I do for you?";
+        return "Evening Master Wayne, I'm Alfred\n" + "What can I do for Gotham?";
     }
 
     /**
