@@ -13,6 +13,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getStatusIcon() { return (isDone ? "X" : " "); }
+
+    public String toString() { return "[ ]" + "[" + getStatusIcon() + "] " + description; }
+
     public void setDone() {
         this.isDone = true;
     }
@@ -58,10 +62,6 @@ public class Task {
         System.out.println("       " + this);
         System.out.println("     Now you have " + Task.getTotalNumberOfTask() + " tasks in the list.");
         printHorizontalLine();
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
     }
 
     public String getDescription() {

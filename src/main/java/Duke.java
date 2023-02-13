@@ -104,7 +104,12 @@ public class Duke {
         System.out.println("     blah");
         Task.printHorizontalLine();
     }
-    
+
+    public static void printWriteAgainMessage() {
+        Task.printHorizontalLine();
+        System.out.println("     this is an unknown command, please write again --Notice Duke is case sensitive");
+        Task.printHorizontalLine();
+    }
     public static void printMessage(String msgDescription){
         Task.printHorizontalLine();
         System.out.println("     added: " + msgDescription);
