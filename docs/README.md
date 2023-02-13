@@ -36,6 +36,13 @@ Saves all current tasks in a txt file and exits the program.
 
 ## Usage
 
+### start
+
+Upon starting Duke successfully, you should be greeted with this.
+
+![image](https://user-images.githubusercontent.com/77615600/218537989-ae63938b-41d6-4fa9-b342-a74346aea5c2.png)
+
+
 ### todo - Adds a ToDo task to the list
 
 Example of usage: 
