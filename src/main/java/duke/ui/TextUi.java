@@ -15,7 +15,7 @@ public class TextUi {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static String NEXT_RESPONSE = "\nWhat else can I do for you?";
+    private static String NEXT_RESPONSE = "\n\nWhat else can I do for you?";
     private Duke duke;
     private final Scanner in;
 

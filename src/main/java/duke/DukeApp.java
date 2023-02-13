@@ -90,6 +90,7 @@ public class DukeApp extends Application {
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren()
                     .add(getDialogLabel(userInput.getText()));
+
             userInput.clear();
         });
 
