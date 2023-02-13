@@ -71,7 +71,7 @@ public class Parser {
         try {
             int spacer = command.indexOf(" ");
             int taskNum = Integer.parseInt(command.substring(spacer + 1));
-            validateTask(todolist, taskNum);
+            taskExistChecker(todolist, taskNum);
             todolist.markDone(taskNum);
         } catch (NumberFormatException e) {
             return ("Which task have you completed, sir?");
@@ -92,7 +92,7 @@ public class Parser {
         try {
             int spacer = command.indexOf(" ");
             int taskNum = Integer.parseInt(command.substring(spacer + 1));
-            validateTask(todolist, taskNum);
+            taskExistChecker(todolist, taskNum);
             todolist.unmark(taskNum);
         } catch (NumberFormatException e) {
             return ("Which task would you like to unmark sir?");
@@ -153,8 +153,12 @@ public class Parser {
             String time = command.substring(firstSlashIndex + 1);
 
             try {
-                LocalDate startTimeParsed = LocalDate.parse(time);
-                todolist.add(task, startTimeParsed);
+                LocalDate deadlineParsed = LocalDate.parse(time);
+                validDateChecker(deadlineParsed);
+                todolist.add(task, deadlineParsed);
+            } catch (NotValidDateException e) {
+                System.out.println(e);
+                return "Please enter date that is current.";
             } catch (DateTimeParseException e) {
                 return ("Wrong date format\nInput date format 'event <task> /<YYYY-MM-DD>'");
             }
@@ -206,7 +210,7 @@ public class Parser {
         try {
             int spacer = command.indexOf(" ");
             int taskNum = Integer.parseInt(command.substring(spacer + 1));
-            validateTask(todolist, taskNum);
+            taskExistChecker(todolist, taskNum);
             todolist.delete(taskNum);
         } catch (NumberFormatException e) {
             return "Which task would you like to delete, sir?";
@@ -223,9 +227,21 @@ public class Parser {
      * @param num the task number
      * @throws NoTaskFoundException If no task at specified number exists
      */
-    public static void validateTask(ToDoList toDo, int num) throws NoTaskFoundException {
+    public void taskExistChecker(ToDoList toDo, int num) throws NoTaskFoundException {
         if (num > toDo.getCount()) {
             throw new NoTaskFoundException("");
+        }
+    }
+
+    /**
+     * Checks if date provided is not in the past.
+     *
+     * @param date date provided
+     * @throws NotValidDateException If date not valid
+     */
+    public void validDateChecker(LocalDate date) throws NotValidDateException {
+        if (date.isBefore(Duke.getCurrDate())) {
+            throw new NotValidDateException("Ensure date is not in the past.");
         }
     }
 }

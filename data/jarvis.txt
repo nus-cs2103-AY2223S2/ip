@@ -6,3 +6,4 @@
 [D][ ] eat (Due: Jan 01 2023)
 [E][ ] meeting  (Start: Feb 02 2023 | End: Feb 03 2023)
 [T][ ] oooo
+[D][ ] singsong  (Due: Jan 01 2024)

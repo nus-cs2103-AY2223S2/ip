@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
+    private static LocalDate currDate = LocalDate.now();
     private static String dataPath = "./data/jarvis.txt";
     private final Storage storage;
     private ToDoList todolist;
@@ -34,7 +36,6 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/TonyStark.png"));
     private Image jarvis = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
-
     /**
      * Duke Constructor.
      */
@@ -61,12 +62,6 @@ public class Duke extends Application {
         asciiArt.printArt();
 
         System.out.println("\nPlease enter a command Mr Stark.");
-        /*
-        while (!isBye) {
-            String line = ui.getNextCommand();
-            isBye = parser.parse(line, todolist, storage);
-        }
-        */
     }
 
     @Override
@@ -169,6 +164,15 @@ public class Duke extends Application {
     private String getResponse(String input) {
         assert input != null : "No input given";
         return parser.parse(input, todolist, storage);
+    }
+
+    /**
+     * Returns the current date.
+     *
+     * @return the current date
+     */
+    public static LocalDate getCurrDate() {
+        return currDate;
     }
 
     /**
