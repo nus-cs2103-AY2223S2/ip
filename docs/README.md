@@ -21,7 +21,7 @@ Ever felt like you couldn't get a handle on *all* the things that you have to do
 7. You should see the window below.
 
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true" width="200" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/Startup.png?raw=true"><br>
 </p>
 
 ---
@@ -49,8 +49,8 @@ Format: ```help```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/helpCommand.png?raw=true" width="400" height="200"><br>
-  <img src="https://github.com/zrei/ip/blob/master/docs/helpWindow.png?raw=true" width="200" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/helpCommand.png?raw=true" width="400" height="180"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/helpWindow.png?raw=true"><br>
 </p>
 
 ### **Listing all tasks**
@@ -60,7 +60,7 @@ Format: ```list```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/list.png?raw=true" width="400" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/list.png?raw=true" width="400" height="250"><br>
 </p>
 
 ### **Adding a task**
@@ -73,7 +73,7 @@ Format: ```todo [name/description]```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/todo.png?raw=true" width="400" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/todo.png?raw=true" width="400" height="250"><br>
 </p>
 
 #### Adding a deadline
@@ -83,7 +83,7 @@ Format: ```deadline [description] [date to do the task by]```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/deadline.png?raw=true" width="400" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/deadline.png?raw=true" width="400" height="250"><br>
 </p>
 
 #### Adding an event
@@ -93,7 +93,7 @@ Format: ```event [description] [start date] [end date]```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/event.png?raw=true" width="400" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/event.png?raw=true" width="400" height="250"><br>
 </p>
 
 ### **Marking a task as done or not done**
@@ -104,7 +104,7 @@ Format: ```mark [index]``` where index is the index of the task in the list.
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/mark.png?raw=true" width="400" height="600"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/mark.png?raw=true" width="450" height="600"><br>
 </p>
 
 #### Marking a task as not done
@@ -112,7 +112,7 @@ Format: ```unmark [index]``` where index is the index of the task in the list.
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/unmark.png?raw=true" width="400" height="600"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/unmark.png?raw=true" width="450" height="600"><br>
 </p>
 
 ### **Deleting a task**
@@ -120,7 +120,7 @@ Format: ```delete [index]``` where index is the index of the task in the list.
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="400" height="600"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="450" height="600"><br>
 </p>
 
 ### **Finding tasks**
@@ -132,7 +132,7 @@ Example: ```find pet dogs``` will find all tasks with either `pet` or `dogs` in 
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/delete.png?raw=true" width="400" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/find.png?raw=true" width="400" height="300"><br>
 </p>
 
 ### **Exiting the app**
@@ -140,7 +140,7 @@ Format: ```bye```
 
 Expected result:
 <p align="center">
-  <img src="https://github.com/zrei/ip/blob/master/docs/bye.png?raw=true" width="400" height="300"><br>
+  <img src="https://github.com/zrei/ip/blob/master/docs/bye.png?raw=true" width="400" height="250"><br>
 </p>
 
 ### **Remembering your tasks between sessions**
