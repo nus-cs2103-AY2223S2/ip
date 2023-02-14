@@ -6,6 +6,11 @@ public class Deadline extends Task {
         super(description);
         this.deadlineTimeString = Parser.formatDateString(deadlineTime);
     }
+
+    public String getDeadlineTimeString() {
+        return deadlineTimeString;
+    }
+
     @Override
     public String toString() {
 

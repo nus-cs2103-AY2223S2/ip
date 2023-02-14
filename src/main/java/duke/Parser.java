@@ -26,6 +26,10 @@ public class Parser {
         String displayDate = date.format(dateFormat);
         return displayDate;
     }
+    public static LocalDateTime getTime(String str) {
+        LocalDateTime date = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
+        return date;
+    }
 
     public static String[] extractArgsFromInput(String input) {
         String[] splitCommand = input.split(" ", 2);
@@ -47,6 +51,7 @@ public class Parser {
     public static String execute(String input, TaskHandler handler, UIText ui, Storage storage)
             throws UnknownInputException, EmptyContentException, InvalidTaskAccessException {
         if (input.equals("bye")) {
+            storage.saveTasks();
             return ui.exit();
         } else if (input.equals("list")) {
             return handler.display();
@@ -71,6 +76,9 @@ public class Parser {
         } else if (input.startsWith("find")) {
             storage.saveTasks();
             return handler.findHandler(input);
+        } else if (input.startsWith("remind")) {
+            storage.saveTasks();
+            return handler.remindHandler();
         } else {
             throw new UnknownInputException();
         }
