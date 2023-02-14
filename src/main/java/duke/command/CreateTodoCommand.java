@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -64,5 +65,19 @@ public class CreateTodoCommand extends Command {
         assert commandMessageArr.length == 2 : "todo command should split into 2";
 
         return new Todo(commandMessageArr[1], false);
+    }
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    @Override
+    public void checkArguments() throws DukeException {
+        String args = commandMessage.substring(4).trim();
+        if (args.length() == 0) {
+            String emptyArgumentsMessage = "todo arguments cannot be empty";
+            throw new DukeException(emptyArgumentsMessage);
+        }
     }
 }

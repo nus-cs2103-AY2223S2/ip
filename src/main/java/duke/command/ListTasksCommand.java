@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -56,5 +57,19 @@ public class ListTasksCommand extends Command {
         }
 
         return reply.toString();
+    }
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    @Override
+    public void checkArguments() throws DukeException {
+        String args = commandMessage.substring(4).trim();
+        if (args.length() != 0) {
+            String invalidArgumentsMessage = "Invalid input";
+            throw new DukeException(invalidArgumentsMessage);
+        }
     }
 }

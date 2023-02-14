@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.DukeException;
+
 /**
  * Represents a command that the user can input.
  *
@@ -24,4 +26,11 @@ public abstract class Command {
      * @return Taskbot reply to the command.
      */
     public abstract String execute();
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    public abstract void checkArguments() throws DukeException;
 }

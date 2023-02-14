@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -38,7 +39,7 @@ public class FindTaskWithTextCommand extends Command {
         if (listSize == 0) {
             return noTaskMessage;
         } else {
-            return listMatchingTasks(searchString, listSize);
+            return listMatchingTasks(searchString.trim(), listSize);
         }
     }
 
@@ -66,5 +67,19 @@ public class FindTaskWithTextCommand extends Command {
         }
 
         return count == 0 ? noMatchMessage : reply.toString();
+    }
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    @Override
+    public void checkArguments() throws DukeException {
+        String args = commandMessage.substring(4).trim();
+        if (args.length() == 0) {
+            String emptyArgumentsMessage = "find arguments cannot be empty";
+            throw new DukeException(emptyArgumentsMessage);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.DukeException;
+
 /**
  * Represents a command that ends the conversation with the chatbot.
  *
@@ -26,5 +28,19 @@ public class EndChatCommand extends Command {
     @Override
     public String execute() {
         return endChatMessage;
+    }
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    @Override
+    public void checkArguments() throws DukeException {
+        String args = commandMessage.substring(3).trim();
+        if (args.length() != 0) {
+            String invalidArgumentsMessage = "Invalid input";
+            throw new DukeException(invalidArgumentsMessage);
+        }
     }
 }

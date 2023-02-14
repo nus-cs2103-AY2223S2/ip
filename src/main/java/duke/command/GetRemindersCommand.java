@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.enums.TaskType;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -74,5 +75,16 @@ public class GetRemindersCommand extends Command {
         }
 
         return count == 0 ? noDeadlineTodayMessage : reply.toString();
+    }
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    @Override
+    public void checkArguments() throws DukeException {
+        String illegalAccessMessage = "This method should not be called";
+        throw new DukeException(illegalAccessMessage);
     }
 }

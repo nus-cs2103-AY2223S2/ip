@@ -1,7 +1,11 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.task.Event;
 import duke.task.Task;
@@ -64,7 +68,61 @@ public class CreateEventCommand extends Command {
         assert commandMessageArr.length == 3 : "event command should split into 3";
 
         return new Event(commandMessageArr[0].substring(6), false,
-                commandMessageArr[1].substring(5).trim(),
-                commandMessageArr[2].substring(3));
+                commandMessageArr[1].substring(4).trim(),
+                commandMessageArr[2].substring(2).trim());
+    }
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    @Override
+    public void checkArguments() throws DukeException {
+        String args = commandMessage.substring(5).trim();
+        System.out.println(args);
+        if (args.length() == 0) {
+            String emptyArgumentsMessage = "event arguments cannot be empty";
+            throw new DukeException(emptyArgumentsMessage);
+        }
+
+        String[] argsArr = checkFromToFormat(args);
+
+        if (argsArr[0].trim().length() == 0) {
+            String emptyDescriptionMessage = "event description cannot be empty";
+            throw new DukeException(emptyDescriptionMessage);
+        }
+
+        try {
+            LocalDate.parse(argsArr[1].substring(5).trim());
+            LocalDate.parse(argsArr[2].substring(3).trim());
+        } catch (DateTimeParseException dtpe) {
+            String wrongDateFormatMessage = "event dates should be of the format YYYY-MM-DD";
+            throw new DukeException(wrongDateFormatMessage);
+        }
+    }
+
+    /**
+     * Checks if the message is of the correct event format.
+     *
+     * @param args Input arguments.
+     * @return Tokenized arguments.
+     * @throws DukeException If format is incorrect.
+     */
+    private String[] checkFromToFormat(String args) throws DukeException {
+        String invalidFormatMessage = "event format is incorrect";
+        String[] argsArrFront = args.split("/from", 2);
+        if (argsArrFront.length != 2 || argsArrFront[0].length() == 0
+                || argsArrFront[1].length() == 0) {
+            throw new DukeException(invalidFormatMessage);
+        }
+
+        String[] argsArrBack = argsArrFront[1].split("/to", 2);
+        if (argsArrBack.length != 2 || argsArrBack[0].length() == 0
+                || argsArrBack[1].length() == 0) {
+            throw new DukeException(invalidFormatMessage);
+        }
+
+        return args.split("/", 3);
     }
 }

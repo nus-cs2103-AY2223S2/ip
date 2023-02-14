@@ -38,6 +38,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = Parser.parseCommand(input, taskList, storage);
+            command.checkArguments();
             return command.execute();
         } catch (DukeException exception) {
             String startOfErrorMessage = "An error has occurred!\n";

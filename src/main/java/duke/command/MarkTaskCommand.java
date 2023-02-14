@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -60,7 +61,33 @@ public class MarkTaskCommand extends Command {
         String[] commandMessageArr = commandMessage.split(" ", 2);
         assert commandMessageArr.length == 2 : "mark command should split into 2";
 
-        int taskNumber = Integer.parseInt(commandMessageArr[1]);
+        int taskNumber = Integer.parseInt(commandMessageArr[1].trim());
         return taskList.markTask(taskNumber);
+    }
+
+    /**
+     * Checks if the input arguments are valid.
+     *
+     * @throws DukeException If arguments are not valid.
+     */
+    @Override
+    public void checkArguments() throws DukeException {
+        String args = commandMessage.substring(4).trim();
+        if (args.length() == 0) {
+            String emptyArgumentsMessage = "mark arguments cannot be empty";
+            throw new DukeException(emptyArgumentsMessage);
+        }
+
+        try {
+            int idx = Integer.parseInt(args);
+
+            if (idx < 1 || idx > taskList.getSize()) {
+                String invalidIndexMessage = "task number is invalid";
+                throw new DukeException(invalidIndexMessage);
+            }
+        } catch (NumberFormatException nfe) {
+            String notIntegerMessage = "pls input a valid task number";
+            throw new DukeException(notIntegerMessage);
+        }
     }
 }
