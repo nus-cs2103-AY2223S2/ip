@@ -44,19 +44,24 @@ public class AddCommand extends Command {
                 task = new ToDos(description);
                 break;
             case "deadline":
-                String[] splitString = description.toLowerCase().split("/by", 2);
-                task = new Deadlines(splitString[0].trim(), splitString[1].trim());
+                String[] result = splitString("by", description);
+                task = new Deadlines(result[0].trim(), result[1].trim());
                 break;
             case "event":
-                String[] splitDescription = description.toLowerCase().split("/from", 2);
-                String[] splitTime = splitDescription[1].split("/to", 2);
-                task = new Events(splitDescription[0].trim(), splitTime[0].trim(), splitTime[1].trim());
+                String[] tmp = splitString("from", description);
+                String[] str = splitString("to", tmp[1]);
+                task = new Events(tmp[0].trim(), str[0].trim(), str[1].trim());
             }
             assert task != null : "Empty task has been created";
             return task;
         } catch (IndexOutOfBoundsException e) {
             throw new SpongebobInvalidArgumentException("The description of " + cmd + " is invalid.");
         }
+    }
+
+    private String[] splitString(String str, String description) {
+        String[] splitString = description.toLowerCase().split("/" + str, 2);
+        return new String[] {description.substring(0, splitString[0].length()), splitString[1]};
     }
 
     @Override
