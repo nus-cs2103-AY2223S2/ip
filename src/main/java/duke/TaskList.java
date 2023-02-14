@@ -80,11 +80,15 @@ public class TaskList {
      */
     public String getTaskList() {
         String res = "";
+        if (tasks.isEmpty()) {
+            return "You have no tasks as of now. Try adding some!";
+        }
         for (int i = 0; i < tasks.size(); i ++) {
             res += Integer.toString(i + 1) + ". ";
             res += tasks.get(i).toString();
             res += '\n';
         }
+        assert !res.isEmpty() : "Tasklist should not be empty!";
         return res;
     }
 
@@ -128,6 +132,10 @@ public class TaskList {
         return "Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + tasks.size() + " tasks in the list";
     }
 
+    public int getSize() {
+        return this.tasks.size();
+    }
+
     public String findTask(String keyword) {
         ArrayList<Task> res = new ArrayList<>();
         for (Task task : tasks) {
@@ -135,7 +143,11 @@ public class TaskList {
                 res.add(task);
             }
         }
+        if (res.isEmpty()) {
+            return "There are no matching tasks with the keyword: " + keyword;
+        }
         TaskList result = new TaskList(res);
+        assert !(result.getSize() == 0);
         return "Here are the matching tasks in your list:\n" + result.getTaskList();
     }
 }
