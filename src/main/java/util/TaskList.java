@@ -70,9 +70,9 @@ public class TaskList {
      * @param command Keyword to check with the tasks in the TaskList.
      */
     public String findTasks(String command) {
-        System.out.println("  Here are the matching tasks in your list:");
         String[] keyword = command.split(" ");
         StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
         int counter = 1;
         for (Task t: taskList) {
             // Iterate through the ArrayList to find if a Task matches
