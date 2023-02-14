@@ -59,6 +59,7 @@ To help you manage your everyday tasks, here's what the Duke can do for you.
 - [x] Note down an event.
 - [x] Find a task with keywords.
 - [x] Sort tasks by name or date
+
 ---
 # 📖 Documentation
 
@@ -148,7 +149,7 @@ Duke
 ```
 1. Create the logic for the new command by creating a new `java` file under `/commnands`.
     - The file should inherit `Command` and override the following method signature:
-    ``` java
+``` java
     /**
      * Execute the command from given tokens produced by Parser.
      * The command is operated on the given TaskList.
@@ -158,7 +159,7 @@ Duke
      * @return Response output to GUI.
      */
     public abstract String exec(DukeIo dukeIo, TaskList tasks);
-    ```
+```
 2. Open `parser.java`
 3. Under `populateCommnads()`, add your `command` and pass `tokens` to your custom parsing method that creates your custom command.
 4. Build and run via `Launcher.java`
