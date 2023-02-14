@@ -17,8 +17,8 @@ public class MarkCommand extends Command {
     /**
      * Creates MarkCommand object to execute the task marking logic.
      *
-     * @param index Index of the task in task list.
-     * @param taskIsDone true if mark as done, false if mark as undone.
+     * @param index The index of the task in task list.
+     * @param taskIsDone The parameter is true if mark as done, false if mark as undone.
      */
     public MarkCommand(int index, boolean taskIsDone) {
         taskIndex = index;
@@ -31,10 +31,10 @@ public class MarkCommand extends Command {
      * Executes task status marking and returns UI message respectively to user.
      * Updates data in storage file.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @param storage Storage file to store current state items of task list.
-     * @return Bot's reply to user's task mark or unmark done command.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @param storage The storage file to store current state items of task list.
+     * @return The bot's reply to user's task mark or unmark done command.
      */
     public String execute(Ui ui, TaskList taskList, Storage storage) {
         Task target = taskList.getTask(taskIndex);

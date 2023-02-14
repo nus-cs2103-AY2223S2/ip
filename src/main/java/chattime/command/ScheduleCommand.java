@@ -12,7 +12,7 @@ import chattime.task.Task;
 import chattime.ui.Ui;
 
 /**
- * Represents ScheduleCommand object that handles main logic of matching date with current tasks and return
+ * Represents ScheduleCommand object that handles main logic of matching date with current tasks and returns
  * sorted one-day-tasks.
  */
 public class ScheduleCommand extends Command {
@@ -20,9 +20,9 @@ public class ScheduleCommand extends Command {
     private LocalDate date;
 
     /**
-     * Creates ScheduleCommand object to filter and sort task list according to the date.
+     * Creates ScheduleCommand object to filter and sorts task list according to the date.
      *
-     * @param input Specific date to sort relevant tasks.
+     * @param input The specific date to sort relevant tasks.
      */
     public ScheduleCommand(LocalDate input) {
         date = input;
@@ -31,12 +31,12 @@ public class ScheduleCommand extends Command {
     /**
      * Executes logic of displaying sorted task list by filtering task objects on given date.
      * Only event and deadline tasks are scheduled.
-     * Event is scheduled to time span, deadline is scheduled before its end.
+     * Schedules event by time span, schedules deadline on time before end time.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @param storage Storage file to store current state items of task list.
-     * @return Bot's reply to user's view schedules command.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @param storage The storage file to store current state items of task list.
+     * @return The bot's reply to user's view schedules command.
      */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) {

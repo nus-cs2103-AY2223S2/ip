@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 /**
  * Represents task objects created by user's command.
- * Extended by Todo, Deadline and Event classes.
+ * Class is extended by Todo, Deadline and Event classes.
  */
 public class Task {
 
@@ -35,7 +35,7 @@ public class Task {
     /**
      * Creates Task object with corresponding description.
      *
-     * @param content Describes the task.
+     * @param content The task description.
      */
     public Task(String content) {
         description = content;
@@ -45,7 +45,8 @@ public class Task {
 
     /**
      * Getter for task description.
-     * @return Task description.
+     *
+     * @return The task description.
      */
     public String getDescription() {
         return description;
@@ -54,7 +55,7 @@ public class Task {
     /**
      * Returns the symbol relevant to current task's done status.
      *
-     * @return Symbol depends on done status of task.
+     * @return The symbol depends on done status of task.
      */
     public String getStatusIcon() {
         return isDone ? "X" : " ";
@@ -63,7 +64,7 @@ public class Task {
     /**
      * Returns current task's done status.
      *
-     * @return Done status of task.
+     * @return The done status of task.
      */
     public boolean getTaskStatus() {
         return isDone;
@@ -72,7 +73,7 @@ public class Task {
     /**
      * Compares current task's description with the given keyword.
      *
-     * @return Result of comparison, true if matched, false otherwise.
+     * @return The result of comparison, true if matched, false otherwise.
      */
     public boolean isMatchDescription(String keyword) {
         return description.contains(keyword);
@@ -95,7 +96,7 @@ public class Task {
     /**
      * Gets total available tasks number.
      *
-     * @return Total number of undeleted task.
+     * @return The total number of undeleted task.
      */
     public static int getCount() {
         return tasksCount;
@@ -111,7 +112,7 @@ public class Task {
     /**
      * Returns conclusion message of current total number of tasks.
      *
-     * @return Conclusion message indicates total number of tasks.
+     * @return The conclusion message indicates total number of tasks.
      */
     public static String printTotalTask() {
         return "Now you have " + tasksCount + " tasks in the list.";
@@ -120,7 +121,7 @@ public class Task {
     /**
      * Generates a data string of task to be stored in storage file.
      *
-     * @return Data string of task.
+     * @return The data string of task.
      */
     public String toDataString() {
         return String.format(" @ %d @ %s", isDone ? 1 : 0, description);
@@ -129,7 +130,7 @@ public class Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param date User's input date.
+     * @param date The user's input date.
      * @return false as default.
      */
     public boolean isOnDate(LocalDate date) {
@@ -139,8 +140,8 @@ public class Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param time User's input time.
-     * @return true if the input time and task deadline are the same, otherwise false.
+     * @param time The user's input time.
+     * @return The check result of whether the input time and task deadline are the same.
      */
     public boolean isOnTime(LocalDate date, LocalTime time) {
         return false;
@@ -150,7 +151,7 @@ public class Task {
     /**
      * Returns code and task name in a string.
      *
-     * @return A string of code and task name for schedule use.
+     * @return The string of code and task name for schedule use.
      */
     public String taskWithCode() {
         return toString();
@@ -159,7 +160,7 @@ public class Task {
     /**
      * Checks whether the new task is already existed.
      *
-     * @return Is duplicate exist.
+     * @return The check result of whether duplicates exist.
      */
     public boolean isDuplicate(Task task) {
         return task.getDescription().equals(getDescription());
@@ -175,7 +176,7 @@ public class Task {
     /**
      * Returns current data of task.
      *
-     * @return Current situation of task.
+     * @return The current situation of task.
      */
     @Override
     public String toString() {

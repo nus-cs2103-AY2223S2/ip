@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     /**
      * Creates ListCommand object to execute display list logic, with date search or without.
      *
-     * @param date Specific date when relevant tasks take place, null if not specified.
+     * @param date The specific date when relevant tasks take place, null if not specified.
      */
     public ListCommand(LocalDate date) {
         requestedDate = date;
@@ -26,12 +26,12 @@ public class ListCommand extends Command {
 
     /**
      * Implements and executes main logic of ListCommand object.
-     * Assign cases into displayList and listTime according to the availability of requestedDate.
+     * Assigns case into displayList and listTime according to the availability of requestedDate.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @param storage Storage file to store current state items of task list.
-     * @return Bot's reply to user's request list command.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @param storage The storage file to store current state items of task list.
+     * @return The bot's reply to user's request list command.
      */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) {
@@ -45,9 +45,9 @@ public class ListCommand extends Command {
     /**
      * Executes logic of displaying basic task list, without time search.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @return List of tasks.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @return The list of tasks.
      */
     private String displayList(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
@@ -73,9 +73,9 @@ public class ListCommand extends Command {
     /**
      * Executes logic of displaying task list, filters task objects with time search.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @return List of tasks in queried time.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @return The list of tasks in queried time.
      */
     private String listTime(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {

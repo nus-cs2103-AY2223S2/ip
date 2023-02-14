@@ -33,9 +33,9 @@ public class Storage {
     /**
      * Creates a Storage object with UI object to handle UI requirements and path of storage.
      *
-     * @param passedUi UI object from bot to handle UI command.
-     * @param path Storage path specified.
-     * @throws IOException When memory initialization error.
+     * @param passedUi The UI object from bot to handle UI command.
+     * @param path The storage path specified.
+     * @throws IOException If memory initialization has error.
      */
     public Storage(Ui passedUi, String path) throws IOException {
         ui = passedUi;
@@ -45,10 +45,10 @@ public class Storage {
     }
 
     /**
-     * Opens file at storage path, creates one at the given path if the file is not found.
+     * Opens file at storage path and creates one at the given path if the file is not found.
      *
-     * @param filePath Specified storage path.
-     * @throws IOException When file cannot be opened.
+     * @param filePath The specified storage path.
+     * @throws IOException If file cannot be opened.
      */
     public void openFile(String filePath) throws IOException {
         file = new File(filePath);
@@ -62,8 +62,8 @@ public class Storage {
     /**
      * Checks whether directory in path exists, creates one if not.
      *
-     * @param file File instance of the specified file path.
-     * @throws IOException When directory cannot be created.
+     * @param file The file instance of the specified file path.
+     * @throws IOException If directory cannot be created.
      */
     private void checkAndCreateDirectory(File file) throws IOException {
         if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
@@ -74,8 +74,8 @@ public class Storage {
     /**
      * Checks whether file in path exists, creates one if not.
      *
-     * @param file File instance of the specified file path.
-     * @throws IOException When file cannot be created.
+     * @param file The file instance of the specified file path.
+     * @throws IOException If file cannot be created.
      */
     private void checkAndCreateFile(File file) throws IOException {
         if (!file.createNewFile()) {
@@ -86,8 +86,8 @@ public class Storage {
     /**
      * Prepares loading data into current task list.
      *
-     * @return An arraylist of stored data to be imported into current TaskList object.
-     * @throws ChattimeException Returns error message.
+     * @return The arraylist of stored data to be imported into current TaskList object.
+     * @throws ChattimeException If storage to tasklist initialization has error.
      */
     public ArrayList<Task> loadData() throws IOException, ChattimeException {
         BufferedReader loader = new BufferedReader(new FileReader(file));
@@ -112,12 +112,12 @@ public class Storage {
     }
 
     /**
-     * Create task of different types from data storage.
+     * Creates task of different types from data storage.
      *
-     * @param taskCode Code of task types.
-     * @param taskSplit Processed storage data by splitting separation.
-     * @return An arraylist of stored data to be imported into current TaskList object.
-     * @throws ChattimeException Returns error message.
+     * @param taskCode The code of task types.
+     * @param taskSplit The processed storage data by splitting separation.
+     * @return The arraylist of stored data to be imported into current TaskList object.
+     * @throws ChattimeException If tasklist creation has error.
      */
     private Task createTaskFromStorage(String taskCode, String[] taskSplit) throws ChattimeException {
         switch (taskCode) {
@@ -138,9 +138,9 @@ public class Storage {
     /**
      * Creates deadline object from storage string.
      *
-     * @param taskSplit Processed storage string.
-     * @return New deadline object respective to the storage string.
-     * @throws ChattimeException Handle datetime format mismatch error.
+     * @param taskSplit The processed storage string.
+     * @return The new deadline object respective to the storage string.
+     * @throws ChattimeException If the datetime format is mismatched.
      */
     private Deadline createDeadlineObject(String[] taskSplit) throws ChattimeException {
         try {
@@ -154,11 +154,11 @@ public class Storage {
     }
 
     /**
-     * Created event object from storage string.
+     * Creates event object from storage string.
      *
-     * @param taskSplit Processed storage string.
-     * @return New event object respective to the storage string.
-     * @throws ChattimeException Handle datetime format mismatch error.
+     * @param taskSplit The processed storage string.
+     * @return The new event object respective to the storage string.
+     * @throws ChattimeException If the datetime format is mismatched.
      */
     private Event createEventObject(String[] taskSplit) throws ChattimeException {
         try {
@@ -177,7 +177,7 @@ public class Storage {
     /**
      * Saves recently added task into storage file.
      *
-     * @param task Task recently added.
+     * @param task The task that is recently added.
      */
     public void saveToFile(Task task) throws IOException {
         String writeString = task.toDataString();
@@ -186,11 +186,11 @@ public class Storage {
     }
 
     /**
-     * Updates storage file by delete or update task of specified index.
+     * Updates storage file by deleting or updating task of specified index.
      *
-     * @param index Index of the removed or updated task.
-     * @param task Updated task, takes no parameter in delete condition.
-     * @throws IOException When error taking input or saving file.
+     * @param index The index of the removed or updated task.
+     * @param task The updated task, takes no parameter in delete condition.
+     * @throws IOException If error taking input or saving file.
      */
     public void rewriteFile(int index, Task... task) throws IOException {
         StringBuilder updateString = checkWriteContent(index, task);
@@ -204,14 +204,12 @@ public class Storage {
         StringBuilder updateString = new StringBuilder();
 
         while (content != null) {
-            if (lineCount == index) {
-                try {
-                    content = task[0].toDataString();
-                } catch (IndexOutOfBoundsException e) {
-                    lineCount++;
-                    content = lineSearch.readLine();
-                    continue;
-                }
+            if (lineCount == index && task.length == 0) {
+                lineCount++;
+                content = lineSearch.readLine();
+                continue;
+            } else if (lineCount == index) {
+                content = task[0].toDataString();
             }
             updateString.append(content).append(System.lineSeparator());
             lineCount++;
@@ -230,11 +228,11 @@ public class Storage {
 
 
     /**
-     * Common method to write in the storage file.
+     * Writes in the storage file.
      *
-     * @param content Data to be written in.
-     * @param append Flag that determines whether the content should append or replace the entire storage file.
-     * @throws IOException When error taking input or saving file.
+     * @param content The data to be written in.
+     * @param append The flag that determines whether the content should append or replace the entire storage file.
+     * @throws IOException If error taking input or saving file.
      */
     private void writeToFile(String content, boolean append) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));

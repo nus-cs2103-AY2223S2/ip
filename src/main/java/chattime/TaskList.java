@@ -16,7 +16,7 @@ public class TaskList {
     /**
      * Constructs a taskList object with ArrayList as data structure.
      *
-     * @param initialTasks Stored data loaded from storage.
+     * @param initialTasks The stored data loaded from storage.
      */
     public TaskList(ArrayList<Task> initialTasks) {
         tasks = initialTasks;
@@ -24,7 +24,8 @@ public class TaskList {
 
     /**
      * Adds a new task to current task list.
-     * @param task New task to be added.
+     *
+     * @param task The new task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -33,7 +34,7 @@ public class TaskList {
     /**
      * Removes index-th task object from current task list.
      *
-     * @param index Input index from user, index-th task in task list to be removed.
+     * @param index The input index from user, index-th task in task list to be removed.
      */
     public void removeTask(int index) {
         tasks.remove(index - 1);
@@ -42,7 +43,7 @@ public class TaskList {
     /**
      * Gets the index-th task from the task list.
      *
-     * @param index Input index from user.
+     * @param index The input index from user.
      * @return The index-th task in task list.
      */
     public Task getTask(int index) {
@@ -52,7 +53,7 @@ public class TaskList {
     /**
      * Gets the current entire task list.
      *
-     * @return Current task list.
+     * @return The current task list.
      */
     public ArrayList<Task> getList() {
         return tasks;
@@ -61,8 +62,8 @@ public class TaskList {
     /**
      * Gets the current entire task list.
      *
-     * @param taskType Task type code.
-     * @return Current task list.
+     * @param taskType The task type code.
+     * @return The current task list.
      */
     public boolean isDuplicates(Task testTask, Class<?> taskType) {
         List<Task> filteredList = tasks.stream()

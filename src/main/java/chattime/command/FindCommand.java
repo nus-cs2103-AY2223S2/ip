@@ -9,7 +9,7 @@ import chattime.task.Task;
 import chattime.ui.Ui;
 
 /**
- * Represents FindCommand object that handles main logic of matching keyword with current tasks and return result list.
+ * Represents FindCommand object that handles main logic of matching keyword with current tasks and returns result list.
  */
 public class FindCommand extends Command {
 
@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     /**
      * Creates FindCommand object to filter and display task list according to the keyword.
      *
-     * @param input Specific keyword to find relevant tasks.
+     * @param input The specific keyword to find relevant tasks.
      */
     public FindCommand(String input) {
         keyword = input;
@@ -27,10 +27,10 @@ public class FindCommand extends Command {
     /**
      * Executes logic of displaying task list by filtering task objects on given keyword.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @param storage Storage file to store current state items of task list.
-     * @return Bot's reply to user's find task command.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @param storage The storage file to store current state items of task list.
+     * @return The bot's reply to user's find task command.
      */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) {
@@ -42,9 +42,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Find tasks in tasklist relevant to the given keyword.
+     * Finds tasks in tasklist relevant to the given keyword.
      *
-     * @param taskList Current task list storing tasks.
+     * @param taskList The current task list storing tasks.
      * @return The find result of given keyword.
      */
     private String findIn(TaskList taskList) {

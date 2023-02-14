@@ -6,16 +6,17 @@ import chattime.ui.Ui;
 
 /**
  * Represents Command object to handle user input's command.
- * To be implemented by AddCommand, ByeCommand, DeleteCommand, ListCommand and MarkCommand classes.
+ * Abstract method `execute` is to be implemented by AddCommand, ByeCommand, DeleteCommand, ListCommand and
+ * MarkCommand classes.
  */
 public abstract class Command {
     /**
      * Implements and executes main logic of Command object.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @param storage Storage file to store current state items of task list.
-     * @return Bot's reply to user's command.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @param storage The storage file to store current state items of task list.
+     * @return The bot's reply to user's command.
      */
     public abstract String execute(Ui ui, TaskList taskList, Storage storage);
 

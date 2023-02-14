@@ -37,8 +37,8 @@ public class DialogBox extends HBox {
     /**
      * Creates dialog box object to show box or user's reply messages.
      *
-     * @param text Text output.
-     * @param img Profile picture of the content owner.
+     * @param text The text output.
+     * @param img The profile picture of the content owner.
      */
     public DialogBox(String text, Image img, String name) {
         try {
@@ -69,11 +69,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Create dialog box for user message.
+     * Creates dialog box for user message.
      *
-     * @param text User's input.
-     * @param img User's profile.
-     * @return A dialog box with user's message and user's profile.
+     * @param text The user's input.
+     * @param img The user's profile.
+     * @return The dialog box with user's message and user's profile.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialogBox = new DialogBox(text, img, "User");
@@ -83,11 +83,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Create dialog box for bot message.
+     * Creates dialog box for bot message.
      *
-     * @param text Bot input.
-     * @param img Bot profile.
-     * @return A dialog box with bot message and bot profile.
+     * @param text The bot input.
+     * @param img The bot profile.
+     * @return The dialog box with bot message and bot profile.
      */
     public static DialogBox getBotDialog(String text, Image img) {
         var db = new DialogBox(text, img, "Chattime");

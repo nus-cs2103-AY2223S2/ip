@@ -44,12 +44,13 @@ public class Parser {
     private static String[] splitCommand;
     private static String command;
     private static String description;
+
     /**
      * Returns suitable Command object for further execution.
      *
-     * @param input Command and description entered by user.
-     * @return Command object to execute user request.
-     * @throws ChattimeException Exception thrown when command is not recognisable.
+     * @param input The command and description entered by user.
+     * @return The command object to execute user request.
+     * @throws ChattimeException If command is not recognisable.
      */
     public static Command parse(String input) throws ChattimeException {
         parseInput(input);
@@ -81,9 +82,9 @@ public class Parser {
     }
 
     /**
-     * Process user input into command and description.
+     * Processes user input into command and description.
      *
-     * @param input Command and description entered by user.
+     * @param input The command and description entered by user.
      */
     private static void parseInput(String input) {
         userInput = input.trim();
@@ -100,7 +101,7 @@ public class Parser {
     /**
      * Checks user's command clashes with data storage format.
      *
-     * @throws ChattimeException Returns error message to require new input with problem statement.
+     * @throws ChattimeException If input contains `@`.
      */
     private static void checkCleanCommand() throws ChattimeException {
         if (userInput.contains("@")) {
@@ -111,7 +112,7 @@ public class Parser {
     /**
      * Checks required task description input by user.
      *
-     * @throws ChattimeException Returns error message to require new input with description provided.
+     * @throws ChattimeException If no description provided in the input.
      */
     private static void checkAddCommand() throws ChattimeException {
         if (description == null) {
@@ -120,10 +121,10 @@ public class Parser {
     }
 
     /**
-     * Process user command for type 'add task' e.g. todo, deadline and event.
+     * Processes user command for type 'add task' e.g. todo, deadline and event.
      *
-     * @return Add type command due to user input.
-     * @throws ChattimeException Returns error message.
+     * @return The Add type command due to user input.
+     * @throws ChattimeException If command format is not found.
      */
     private static Command parseAddCommand() throws ChattimeException {
         checkAddCommand();
@@ -140,10 +141,10 @@ public class Parser {
     }
 
     /**
-     * Process user command relating to index input e.g. mark, unmark and delete.
+     * Processes user command relating to index input e.g. mark, unmark and delete.
      *
-     * @return Index type commands due to user input.
-     * @throws ChattimeException Returns error message.
+     * @return The index type commands due to user input.
+     * @throws ChattimeException If command format is not found.
      */
     private static Command parseIndexCommand() throws ChattimeException {
         int index = checkIndexCommand();
@@ -162,8 +163,8 @@ public class Parser {
     /**
      * Parses string description into int and checks true int type of inputted description.
      *
-     * @return Index parsed if the type check passed.
-     * @throws ChattimeException Returns error message to request an integer input for the description.
+     * @return The index parsed if the type check passed.
+     * @throws ChattimeException If description is not integer.
      */
     private static int checkIndexCommand() throws ChattimeException {
         if (description == null) {
@@ -183,10 +184,10 @@ public class Parser {
     }
 
     /**
-     * Processes list command and generate a ListCommand object.
+     * Processes list command and generates a ListCommand object.
      *
-     * @return ListCommand object.
-     * @throws ChattimeException If description detected, returns error message to user.
+     * @return The ListCommand object.
+     * @throws ChattimeException If description is detected.
      */
     private static ListCommand parseList() throws ChattimeException {
         if (description != null) {
@@ -200,17 +201,17 @@ public class Parser {
      * Processes help command and generate a HelpCommand object.
      * Do not throw any exception as long as the command is 'help'.
      *
-     * @return HelpCommand object.
+     * @return The HelpCommand object.
      */
     private static HelpCommand parseHelp() {
         return new HelpCommand();
     }
 
     /**
-     * Processes bye command and generate a ByeCommand object.
+     * Processes bye command and generates a ByeCommand object.
      *
-     * @return ByeCommand object.
-     * @throws ChattimeException If ambiguous command detected, returns error message to user.
+     * @return The ByeCommand object.
+     * @throws ChattimeException If ambiguous command is detected.
      */
     private static ByeCommand parseBye() throws ChattimeException {
         if (description != null) {
@@ -221,9 +222,9 @@ public class Parser {
     }
 
     /**
-     * Processes todo command and generate a TodoCommand object.
+     * Processes todo command and generates a TodoCommand object.
      *
-     * @return TodoCommand object.
+     * @return The TodoCommand object.
      */
     private static AddCommand parseTodo() {
         Todo todo = new Todo(description);
@@ -231,10 +232,10 @@ public class Parser {
     }
 
     /**
-     * Processes deadline command and generate a DeadlineCommand object.
+     * Processes deadline command and generates a DeadlineCommand object.
      *
-     * @return DeadlineCommand object.
-     * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
+     * @return The DeadlineCommand object.
+     * @throws ChattimeException If wrong-formatted input is detected.
      */
     private static AddCommand parseDeadline() throws ChattimeException {
         String[] splitBy = description.split(" /by ", 2);
@@ -266,10 +267,10 @@ public class Parser {
     }
 
     /**
-     * Processes event command and generate an EventCommand object.
+     * Processes event command and generates an EventCommand object.
      *
-     * @return EventCommand object.
-     * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
+     * @return The EventCommand object.
+     * @throws ChattimeException If wrong-formatted input is detected.
      */
     private static AddCommand parseEvent() throws ChattimeException {
         String[] splitTask = description.split(" /from ", 2);
@@ -327,8 +328,8 @@ public class Parser {
     /**
      * Checks parsed command is of the right format.
      *
-     * @param split Processed command.
-     * @throws ChattimeException Alert user to input the right command format.
+     * @param split The processed command.
+     * @throws ChattimeException If wrong-formatted input is detected.
      */
     private static void checkDescriptionFormat(String[] split, String format) throws ChattimeException {
         if (split.length < 2 || split[1].equals("")) {
@@ -337,11 +338,11 @@ public class Parser {
     }
 
     /**
-     * Processes listTime command, parses description to LocalDate type and generate a ListCommand object
+     * Processes listTime command, parses description to LocalDate type and generates a ListCommand object
      * or a View Schedules object.
      *
-     * @return ListCommand object or ViewSchedules object.
-     * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
+     * @return The ListCommand object or ViewSchedules object.
+     * @throws ChattimeException If wrong-formatted input is detected.
      */
     private static Command parseTime(boolean isScheduleRequired) throws ChattimeException {
         if (description == null) {
@@ -359,10 +360,10 @@ public class Parser {
     }
 
     /**
-     * Processes find command, ensure keyword is inputted and generate a FindCommand object.
+     * Processes find command, ensures keyword is inputted and generates a FindCommand object.
      *
-     * @return FindCommand object.
-     * @throws ChattimeException If no description detected, returns error message to user.
+     * @return The FindCommand object.
+     * @throws ChattimeException If wrong-formatted input is detected.
      */
     public static FindCommand parseFind() throws ChattimeException {
         if (description == null) {

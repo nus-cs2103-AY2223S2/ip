@@ -54,7 +54,7 @@ public class Ui {
     /**
      * Returns initial UI message to user.
      *
-     * @return Greeting message, if storage error, return error alert.
+     * @return The greeting message, if storage error, return error alert.
      */
     public String initUi() {
         if (isNormalInit) {
@@ -75,7 +75,7 @@ public class Ui {
     /**
      * Getter for isNormalInit.
      *
-     * @return Initiation status of storage.
+     * @return The initiation status of storage.
      */
     public boolean getInitStatus() {
         return isNormalInit;
@@ -84,7 +84,7 @@ public class Ui {
     /**
      * Alerts user storage error.
      *
-     * @return Storage error message.
+     * @return The storage error message.
      */
     public String reportStorageError() {
         return STORAGE_ERR_MSG;
@@ -93,9 +93,9 @@ public class Ui {
     /**
      * Returns task added recently.
      *
-     * @param task Task added recently.
-     * @param totalTask Message about total number of available tasks.
-     * @return Add task message.
+     * @param task The task added recently.
+     * @param totalTask The message about total number of available tasks.
+     * @return The Add task message.
      */
     public String printAddTask(Task task, String totalTask) {
         return String.format("Got it! I've added this task:\n   %s\n%s", task, totalTask);
@@ -104,8 +104,8 @@ public class Ui {
     /**
      * Returns unmarked task message.
      *
-     * @param task Task unmarked recently.
-     * @return Confirmation of cancelling done state.
+     * @param task The task unmarked recently.
+     * @return The confirmation of cancelling done state.
      */
     public String replyNotDoneMessage(Task task) {
         return String.format("Arghh! This job is not done yet:\n       %s", task);
@@ -114,8 +114,8 @@ public class Ui {
     /**
      * Returns marked task message.
      *
-     * @param task Task marked recently.
-     * @return Confirmation on done tasks.
+     * @param task The task marked recently.
+     * @return The confirmation on done tasks.
      */
     public String replyDoneMessage(Task task) {
         return String.format("Congrats! You've done this job:\n       %s", task);
@@ -124,9 +124,9 @@ public class Ui {
     /**
      * Returns remove task message.
      *
-     * @param task Task removed recently.
-     * @param totalTask Message about total number of available tasks.
-     * @return Confirmation of task removal.
+     * @param task The task removed recently.
+     * @param totalTask The message about total number of available tasks.
+     * @return The confirmation of task removal.
      */
     public String replyRemoveTaskMsg(Task task, String totalTask) {
         return String.format("Okay!!! I've removed this task for you:\n       %s\n     %s", task, totalTask);
@@ -135,7 +135,7 @@ public class Ui {
     /**
      * Returns error message to user when operation on empty task list is requested.
      *
-     * @return Alert of empty task list.
+     * @return The alert of empty task list.
      */
     public String warnEmptyList() {
         return "Can't find anything in the list @~@";
@@ -144,7 +144,7 @@ public class Ui {
     /**
      * Alerts duplicate input.
      *
-     * @return Reminder of duplicated tasks.
+     * @return The reminder of duplicated tasks.
      */
     public String alertDuplicate() {
         return "AHH?! Seems that this job is added before ><";
@@ -153,7 +153,7 @@ public class Ui {
     /**
      * Gets the running status of bot.
      *
-     * @return true if bot still running, false if bye command encountered.
+     * @return The check result of whether the bot is still running.
      */
     public boolean getExecuteStatus() {
         return isRunning;
@@ -169,8 +169,8 @@ public class Ui {
     /**
      * Returns bot detected error message to user with specific format.
      *
-     * @param errMsg Bot error message.
-     * @return Error message to user.
+     * @param errMsg The bot error message.
+     * @return The error message to user.
      */
     public String printError(String errMsg) {
         return errMsg;
@@ -179,7 +179,7 @@ public class Ui {
     /**
      * Returns exit message to user.
      *
-     * @return Goodbye message to user.
+     * @return The goodbye message to user.
      */
     public String exit() {
         return BYE;
@@ -188,7 +188,7 @@ public class Ui {
     /**
      * Returns user guide.
      *
-     * @return Help guide to use this bot.
+     * @return The help guide to use this bot.
      */
     public String printGuide() {
         return GUIDE;

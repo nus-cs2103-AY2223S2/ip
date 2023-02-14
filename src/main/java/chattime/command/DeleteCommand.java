@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     /**
      * Creates DeleteCommand object to execute the task deleting logic.
      *
-     * @param index Index of task to be deleted.
+     * @param index The index of task to be deleted.
      */
     public DeleteCommand(int index) {
         taskIndex = index;
@@ -29,10 +29,10 @@ public class DeleteCommand extends Command {
      * Deletes the task from storage file record.
      * Returns successful delete message to user.
      *
-     * @param ui UI instance of bot.
-     * @param taskList Current task list storing tasks.
-     * @param storage Storage file to store current state items of task list.
-     * @return Bot's reply to user's delete task command.
+     * @param ui The UI instance of bot.
+     * @param taskList The current task list storing tasks.
+     * @param storage The storage file to store current state items of task list.
+     * @return The bot's reply to user's delete task command.
      */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) {

@@ -16,9 +16,9 @@ public class Deadline extends Task {
     /**
      * Creates Deadline object with parent constructor and parsed description.
      *
-     * @param description Deadline task name.
-     * @param bDate Deadline date description of task.
-     * @param bTime Deadline time description of task.
+     * @param description The Deadline task name.
+     * @param bDate The Deadline date description of task.
+     * @param bTime The Deadline time description of task.
      */
     public Deadline(String description, LocalDate bDate, LocalTime... bTime) {
         super(description);
@@ -34,7 +34,7 @@ public class Deadline extends Task {
     /**
      * Getter for byDate.
      *
-     * @return Field byDate.
+     * @return The field byDate.
      */
     public LocalDate getByDate() {
         return byDate;
@@ -43,7 +43,7 @@ public class Deadline extends Task {
     /**
      * Getter for byTime.
      *
-     * @return Field byTime.
+     * @return The field byTime.
      */
     public LocalTime getByTime() {
         return byTime;
@@ -52,7 +52,7 @@ public class Deadline extends Task {
     /**
      * Checks whether the new task is already existed.
      *
-     * @return Is duplicate exist.
+     * @return The check result of whether duplicates exist.
      */
     @Override
     public boolean isDuplicate(Task task) {
@@ -74,8 +74,8 @@ public class Deadline extends Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param time User's input time.
-     * @return true if the input time and task deadline are the same, otherwise false.
+     * @param time The user's input time.
+     * @return The check result of whether the input time and task deadline are the same.
      */
     @Override
     public boolean isOnTime(LocalDate date, LocalTime time) {
@@ -92,7 +92,7 @@ public class Deadline extends Task {
     /**
      * Generates a data string of deadline task to be stored in storage file.
      *
-     * @return Data string of deadline task.
+     * @return The data string of deadline task.
      */
     @Override
     public String toDataString() {
@@ -102,8 +102,8 @@ public class Deadline extends Task {
     /**
      * Returns comparison result of input date with task relevant date.
      *
-     * @param date User's input date.
-     * @return true if the input date and task deadline are the same, otherwise false.
+     * @param date The user's input date.
+     * @return The check result of whether the input date and task deadline are the same.
      */
     @Override
     public boolean isOnDate(LocalDate date) {
@@ -113,7 +113,7 @@ public class Deadline extends Task {
     /**
      * Returns code and task name in a string.
      *
-     * @return A string of code and task name for schedule use.
+     * @return The string of code and task name for schedule use.
      */
     @Override
     public String taskWithCode() {
@@ -123,7 +123,7 @@ public class Deadline extends Task {
     /**
      * Returns current data of deadline task.
      *
-     * @return Current situation of deadline task.
+     * @return The current situation of deadline task.
      */
     @Override
     public String toString() {

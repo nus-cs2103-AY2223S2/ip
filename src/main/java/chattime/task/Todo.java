@@ -8,7 +8,7 @@ public class Todo extends Task {
     /**
      * Creates Todo object with description given and parent constructor.
      *
-     * @param description Todo task name.
+     * @param description The todo task name.
      */
     public Todo(String description) {
         super(description);
@@ -17,7 +17,7 @@ public class Todo extends Task {
     /**
      * Generates a data string of todo task to be stored in storage file.
      *
-     * @return Data string of todo task.
+     * @return The data string of todo task.
      */
     @Override
     public String toDataString() {
@@ -27,7 +27,7 @@ public class Todo extends Task {
     /**
      * Returns code and task name in a string.
      *
-     * @return A string of code and task name for schedule use.
+     * @return The string of code and task name for schedule use.
      */
     @Override
     public String taskWithCode() {
@@ -37,7 +37,7 @@ public class Todo extends Task {
     /**
      * Returns current data of todo task.
      *
-     * @return Current situation of todo task.
+     * @return The current situation of todo task.
      */
     @Override
     public String toString() {

@@ -8,9 +8,9 @@ public class ChattimeException extends Exception {
     private String errMsg;
 
     /**
-     * Creates ChattimeException object with specified error message.
+     * Creates ChattimeException object with specific error message.
      *
-     * @param message Error message to be displayed to user.
+     * @param message The error message to be displayed to user.
      */
     public ChattimeException(String message) {
         super(message);
@@ -20,7 +20,7 @@ public class ChattimeException extends Exception {
     /**
      * Returns the customized error message to be displayed.
      *
-     * @return Error message.
+     * @return The error message.
      */
     public String getMessage() {
         return toString();
@@ -29,7 +29,7 @@ public class ChattimeException extends Exception {
     /**
      * Returns the customized error message to be displayed.
      *
-     * @return Error message.
+     * @return The error message.
      */
     @Override
     public String toString() {

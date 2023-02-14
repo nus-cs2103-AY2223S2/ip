@@ -19,7 +19,7 @@ public class Chattime {
     /**
      * Initializes a bot with ui objects a nd a storage space with provided path to store list.
      *
-     * @param filePath Path to storage.
+     * @param filePath The path to storage.
      */
     public Chattime(String filePath) {
         ui = new Ui();
@@ -34,7 +34,7 @@ public class Chattime {
     /**
      * Runs the bot and handles user's input.
      *
-     * @return Respond message to user based on the input.
+     * @return The response message to user based on the input.
      */
     String getResponse(String input) {
         if (!ui.getInitStatus()) {
@@ -50,9 +50,9 @@ public class Chattime {
     }
 
     /**
-     * Replies gretting message to user.
+     * Replies greeting message to user.
      *
-     * @return Greeting words.
+     * @return The greeting words.
      */
     String greet() {
         return ui.initUi();

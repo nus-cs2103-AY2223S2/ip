@@ -1,11 +1,12 @@
 # Chattime User Guide
 ---
-> It's Chattime! Welcome to the chat world :smiley:
+> It's Chattime! Welcome to the chat world! @^@
 
 ## Introduction
 Have a nice organized day start with an easy chat with our bot! Chattime is a command-line interface (CLI) bot that aims
-to keep track of user's to-do list. Chattime provides various functions that help user to manage daily tasks. 
-:star2: New update : Chattime is now available with Graphic User Interface(GUI).
+to keep track of user's to-do list. Chattime provides various functions that help user to manage daily tasks.
+> **Note**
+> New update : Chattime is now available with Graphic User Interface(GUI).
 
 ## Features Menu
 - [Quick start](#quick-start)
@@ -56,7 +57,7 @@ Displays help message with available commands and their respective input formats
 
 Format : `help`
 
-Example of usage: 
+Example of usage:
 
 `help`
 
@@ -302,27 +303,18 @@ Program window shuts immediately.
 
 
 ## Command Summary
-`help` : help
-
-`todo` : todo <taskname>
-  
-`deadline` : deadline <taskname> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>
-  
-`event` : event <task> /from <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> /to <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>
-  
-`list` : list
-  
-`schedule` : schedule <date in yyyy-mm-dd>
-  
-`mark` : mark <index>
-  
-`unmark` : unmark <index>
-  
-`delete` : delete <index>
-  
-`find` : find <keyword>
-  
-`listTime` : listTime <date in yyyy-mm-dd>
-  
-`bye` : bye
- 
+---
+| Command   |                                                 Format                                                 |
+|-----------|:------------------------------------------------------------------------------------------------------:|
+| `help`    |                                                  help                                                  |
+| `bye`     |                                                  bye                                                   |
+| `deadline`|                    deadline <taskname> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>                    |
+| `delete`  |                                             delete <index>                                             |
+| `event`   |event <task> /from <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> /to <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>|
+| `find`    |                                             find <keyword>                                             |
+| `list`    |                                                  list                                                  |
+| `listTime`|                                     listTime <date in yyyy-mm-dd>                                      |
+| `mark`    |                                              mark <index>                                              |
+| `schedule`|                                     schedule <date in yyyy-mm-dd>                                      |
+| `todo`    |                                            todo <taskname>                                             |
+| `unmark`  |                                             unmark <index>                                             |

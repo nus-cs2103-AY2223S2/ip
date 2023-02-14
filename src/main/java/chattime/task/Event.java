@@ -18,11 +18,11 @@ public class Event extends Task {
     /**
      * Creates Event object with parent constructor and parsed description.
      *
-     * @param description Event task name.
-     * @param frDate Start date description of task.
-     * @param frTime Start time description of task.
-     * @param tDate Deadline date description of task.
-     * @param tTime Deadline time description of task.
+     * @param description The event task name.
+     * @param frDate The start date description of task.
+     * @param frTime The start time description of task.
+     * @param tDate The deadline date description of task.
+     * @param tTime The deadline time description of task.
      */
     public Event(String description, LocalDate frDate, LocalTime frTime, LocalDate tDate, LocalTime tTime) {
         super(description);
@@ -36,7 +36,7 @@ public class Event extends Task {
     /**
      * Getter for fromDate.
      *
-     * @return Field fromDate.
+     * @return The field fromDate.
      */
     public LocalDate getFromDate() {
         return fromDate;
@@ -45,7 +45,7 @@ public class Event extends Task {
     /**
      * Getter for fromTime.
      *
-     * @return Field fromTime.
+     * @return The field fromTime.
      */
     public LocalTime getFromTime() {
         return fromTime;
@@ -54,7 +54,7 @@ public class Event extends Task {
     /**
      * Getter for toDate.
      *
-     * @return Field toDate.
+     * @return The field toDate.
      */
     public LocalDate getToDate() {
         return toDate;
@@ -63,7 +63,7 @@ public class Event extends Task {
     /**
      * Getter for toTime.
      *
-     * @return Field toTime.
+     * @return The field toTime.
      */
     public LocalTime getToTime() {
         return toTime;
@@ -72,7 +72,7 @@ public class Event extends Task {
     /**
      * Checks whether the new task is already existed.
      *
-     * @return Is duplicate exist.
+     * @return The check result of whether duplicates exist.
      */
     @Override
     public boolean isDuplicate(Task task) {
@@ -88,8 +88,8 @@ public class Event extends Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param time User's input time.
-     * @return true if the input time and task deadline are the same, otherwise false.
+     * @param time The user's input time.
+     * @return The check result of whether the input time and task deadline are the same.
      */
     @Override
     public boolean isOnTime(LocalDate date, LocalTime time) {
@@ -106,7 +106,7 @@ public class Event extends Task {
     /**
      * Generates a data string of event task to be stored in storage file.
      *
-     * @return Data string of event task.
+     * @return The data string of event task.
      */
     @Override
     public String toDataString() {
@@ -117,8 +117,8 @@ public class Event extends Task {
     /**
      * Returns comparison result of input date with task relevant date.
      *
-     * @param date User's input date.
-     * @return true if the input date is in task time, otherwise false.
+     * @param date The user's input date.
+     * @return The check result of whether the input date is in task time.
      */
     @Override
     public boolean isOnDate(LocalDate date) {
@@ -131,7 +131,7 @@ public class Event extends Task {
     /**
      * Returns code and task name in a string.
      *
-     * @return A string of code and task name for schedule use.
+     * @return The string of code and task name for schedule use.
      */
     @Override
     public String taskWithCode() {
@@ -141,7 +141,7 @@ public class Event extends Task {
     /**
      * Returns current data of event task.
      *
-     * @return Current situation of event task.
+     * @return The current situation of event task.
      */
     @Override
     public String toString() {
