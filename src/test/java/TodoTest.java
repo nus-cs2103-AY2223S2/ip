@@ -2,9 +2,11 @@ import task.Todo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 public class TodoTest {
-    Todo todoBuyBooks = new Todo("buy books");
+
     @Test
-    public void testTodoString(){
+    public void testTodoString() {
+        Todo todoBuyBooks = new Todo("buy books");
         Assertions.assertEquals("[T][ ] buy books" ,todoBuyBooks.toString());
     }
+
 }
