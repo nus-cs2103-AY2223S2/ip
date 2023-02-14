@@ -1,10 +1,11 @@
 package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.time.LocalDate;
@@ -19,9 +20,9 @@ public class Storage {
 
     /**
      * Constructor for instantiating a Storage object
-     * @param filePath
+     * @param filePath path of file to save the storage in
      */
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -37,31 +38,32 @@ public class Storage {
                 Scanner scannerTxtFile = new Scanner(f);
                 while (scannerTxtFile.hasNext()) {
                     String txt = scannerTxtFile.nextLine();
-                    if (txt.substring(1, 2).equals("T")) {
+                    if (txt.charAt(1) == 'T') {
                         String details = txt.substring(7);
                         Task t = new Todo(details);
-                        if (txt.substring(4, 5).equals("X")) {
+                        if (txt.charAt(4) == 'X') {
                             t.mark();
                         }
                         loadedTasks.add(t);
-                    } else if (txt.substring(1, 2).equals("D")) {
+                    } else if (txt.charAt(1) == 'D') {
                         String[] detailsAndDueDate = txt.substring(7).split(" \\(");
                         String details = detailsAndDueDate[0];
                         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate dueDate = LocalDate.parse(detailsAndDueDate[1].substring(0, detailsAndDueDate[1].length() - 1), dateFormatter);
+                        LocalDate dueDate = LocalDate.parse(detailsAndDueDate[1]
+                                .substring(0, detailsAndDueDate[1].length() - 1), dateFormatter);
                         Task t = new Deadline(details, dueDate);
-                        if (txt.substring(4, 5).equals("X")) {
+                        if (txt.charAt(4) == 'X') {
                             t.mark();
                         }
                         loadedTasks.add(t);
-                    } else if (txt.substring(1, 2).equals("E")) {
+                    } else if (txt.charAt(1) == 'E') {
                         String[] detailsAndDate = txt.substring(7).split(" \\(");
                         String details = detailsAndDate[0];
                         String[] tmp = detailsAndDate[1].split(" to: ");
                         String to = tmp[1].substring(0, tmp[1].length() - 1);
                         String from = tmp[0].split("from: ")[1];
                         Task t = new Event(details, from, to);
-                        if (txt.substring(4, 5).equals("X")) {
+                        if (txt.charAt(4) == 'X') {
                             t.mark();
                         }
                         loadedTasks.add(t);

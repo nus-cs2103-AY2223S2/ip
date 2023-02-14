@@ -8,13 +8,14 @@ import java.time.format.DateTimeParseException;
  * Task List class
  */
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for instantiating a task list
      * @param tasks array of tasks to be added to the task list
      */
-    public TaskList (ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = new ArrayList<>();
         for (Task t : tasks) {
             this.tasks.add(t);
         }
@@ -23,8 +24,8 @@ public class TaskList {
     /**
      * Constructor for instantiating an empty task list
      */
-    public TaskList () {
-
+    public TaskList() {
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -40,7 +41,8 @@ public class TaskList {
                 }
                 Todo newTodo = new Todo(details);
                 tasks.add(newTodo);
-                System.out.println("Got it. I've added this task:" + '\n' + newTodo + '\n' + "Now you have " + tasks.size() + " tasks in the list");
+                System.out.println("Got it. I've added this task:" + '\n' + newTodo + '\n' + "Now you have "
+                        + tasks.size() + " tasks in the list");
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -51,7 +53,8 @@ public class TaskList {
                 LocalDate date = LocalDate.parse(detailsAndDate[1]);
                 Deadline newDeadline = new Deadline(description, date);
                 tasks.add(newDeadline);
-                System.out.println("Got it. I've added this task:" + '\n' + newDeadline + '\n' + "Now you have " + tasks.size() + " tasks in the list");
+                System.out.println("Got it. I've added this task:" + '\n' + newDeadline + '\n' + "Now you have "
+                        + tasks.size() + " tasks in the list");
             } catch (DateTimeParseException e) {
                 System.out.println("Please input date in YYYY-MM-DD format!");
             }
@@ -63,7 +66,8 @@ public class TaskList {
             String From = Time[1];
             Event newEvent = new Event(description, To, From);
             tasks.add(newEvent);
-            System.out.println("Got it. I've added this task:" + '\n' + newEvent + '\n' + "Now you have " + tasks.size() + " tasks in the list");
+            System.out.println("Got it. I've added this task:" + '\n' + newEvent + '\n' + "Now you have "
+                    + tasks.size() + " tasks in the list");
         }
     }
 
@@ -81,7 +85,7 @@ public class TaskList {
      * Marks a specific task as done
      * @param index index of task to be marked as done
      */
-    public void markTask (int index) {
+    public void markTask(int index) {
         Task currTask = tasks.get(index - 1);
         currTask.mark();
         System.out.println("Nice! I've marked this task as done" + '\n' + currTask);
@@ -91,7 +95,7 @@ public class TaskList {
      * Marks a specific task as not done
      * @param index index of task to be marked as not done
      */
-    public void unmarkTask (int index) {
+    public void unmarkTask(int index) {
         Task currTask = tasks.get(index - 1);
         currTask.unMark();
         System.out.println("Nice! I've marked this task as not done yet" + '\n' + currTask);
@@ -101,7 +105,7 @@ public class TaskList {
      * Deletes a task from the task list
      * @param index index of task to be deleted
      */
-    public void deleteTask (int index) {
+    public void deleteTask(int index) {
         Task currTask = tasks.get(index - 1);
         tasks.remove(index - 1);
         System.out.println("Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + tasks.size() + " tasks in the list");

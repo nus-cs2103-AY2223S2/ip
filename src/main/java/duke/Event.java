@@ -5,19 +5,19 @@ package duke;
  */
 public class Event extends Task {
 
-    String From;
-    String To;
+    String from;
+    String to;
 
     /**
      * constructor for an instantiating an event object
      * @param description description of the event
-     * @param From start time of the event
-     * @param To end time of the event
+     * @param from start time of the event
+     * @param to end time of the event
      */
-    public Event(String description, String From, String To) {
+    public Event(String description, String from, String to) {
         super(description);
-        this.From = From;
-        this.To = To;
+        this.from = from;
+        this.to = to;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.From + " to: " + this.To + ")";
+        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
 
     }
 }

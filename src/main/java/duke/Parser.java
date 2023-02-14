@@ -17,7 +17,9 @@ public class Parser {
         String[] inputArr = userInput.split(" ", 2);
 
         if (userInput.equals("bye")) {
+
             ui.exit();
+
         } else if (userInput.equals("list")) {
 
             lst.printTaskList();
