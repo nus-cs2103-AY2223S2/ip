@@ -36,39 +36,68 @@ public class Bob extends Application {
         tasks = new TaskList();
     }
 
+    private String handleList(String input) {
+        return ui.printTasks(tasks.getList());
+    }
+
+    private String handleTodo(String input) throws BobException {
+        Task t = Parser.parseTodo(input);
+        tasks.add(t);
+        return ui.printTaskAdded(t);
+    }
+
+    private String handleEvent(String input) throws BobException {
+        Task t = Parser.parseEvent(input);
+        tasks.add(t);
+        return ui.printTaskAdded(t);
+    }
+
+    private String handleDeadline(String input) throws BobException {
+        Task t = Parser.parseEvent(input);
+        tasks.add(t);
+        return ui.printTaskAdded(t);
+    }
+
+    private String handleMark(String input) throws BobException {
+        int index = Parser.parseIndex(input);
+        return ui.printMarkTask(tasks.get(index));
+    }
+
+    private String handleUnmark(String input) throws BobException {
+        int index = Parser.parseIndex(input);
+        return ui.printUnmarkTask(tasks.get(index));
+    }
+
+    private String handleDelete(String input) throws BobException {
+        int index = Parser.parseIndex(input);
+        return ui.printDeleteTask(tasks.get(index));
+    }
+
+    private String handleFind(String input) throws BobException {
+        String keyword = Parser.parseFind(input);
+        return ui.printFilteredTasks(tasks.find(keyword));
+    }
+
+
     private String getResponse(String input) {
         String response;
         try {
-            int index;
-            Task t;
-
             if (input.equals("list")) {
-                response = ui.printTasks(tasks.getList());
+                response = handleList(input);
             } else if (input.startsWith("todo")) {
-                t = Parser.parseTodo(input);
-                tasks.add(t);
-                response = ui.printTaskAdded(t);
+                response = handleTodo(input);
             } else if (input.startsWith("event")) {
-                t = Parser.parseEvent(input);
-                tasks.add(t);
-                response = ui.printTaskAdded(t);
+                response = handleEvent(input);
             } else if (input.startsWith("deadline")) {
-                t = Parser.parseDeadline(input);
-                tasks.add(t);
-                response = ui.printTaskAdded(t);
+                response = handleDeadline(input);
             } else if (input.startsWith("mark")) {
-                index = Parser.parseIndex(input);
-                response = ui.printMarkTask(tasks.get(index));
+                response = handleMark(input);
             } else if (input.startsWith("unmark")) {
-                index = Parser.parseIndex(input);
-                tasks.unmark(index);
-                response = ui.printUnmarkTask(tasks.get(index));
+                response = handleUnmark(input);
             } else if (input.startsWith("delete")) {
-                index = Parser.parseIndex(input);
-                response = ui.printDeleteTask(tasks.delete(index));
+                response = handleDelete(input);
             } else if (input.startsWith("find")) {
-                String keyword = Parser.parseFind(input);
-                response = ui.printFilteredTasks(tasks.find(keyword));
+                response = handleFind(input);
             } else { // Invalid command
                 throw new BobException("No valid command was entered!");
             }
@@ -157,21 +186,16 @@ public class Bob extends Application {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }

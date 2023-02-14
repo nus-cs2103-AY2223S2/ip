@@ -46,7 +46,7 @@ public class Parser {
     // Command: event <description> /from <start> /to <4pm>
     private static boolean isEvent(String s) {
         // A valid event would have only 1 /to and /from command
-        Boolean validMatches = StringUtils.countMatches(s, " /from ") == 1
+        boolean validMatches = StringUtils.countMatches(s, " /from ") == 1
                 && StringUtils.countMatches(s, " /to ") == 1;
 
         // A valid command would have 3 different sections with this split
@@ -54,6 +54,7 @@ public class Parser {
 
         // Check if a description exists
         String[] commandAndDescription = splitCommand[0].split(" ");
+
 
         return validMatches
                 && splitCommand.length == 3
