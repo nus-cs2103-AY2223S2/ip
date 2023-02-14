@@ -9,7 +9,7 @@ import duke.util.Ui;
 import javafx.scene.control.Label;
 
 /**
- * Represents the Tohtoro program
+ * Represents the Tohtoro program, a chatbot that helps with keeping track of your tasks.
  */
 public class Duke {
     private Ui ui;
@@ -19,7 +19,8 @@ public class Duke {
 
     /**
      * The constructor for the Duke Chatbot.
-     * @param filePath
+     *
+     * @param filePath the file path to save the tasks to
      */
     public Duke(String filePath) {
         this.isExit = false;
@@ -37,8 +38,9 @@ public class Duke {
     }
 
     /**
-     * Main method to run the Duke program.
-     * @param args Command line arguments.
+     * Represents the main method to run the Duke program.
+     *
+     * @param args Command line arguments input by the user.
      */
     public static void main(String[] args) {
         String txtDir = "./save.txt";

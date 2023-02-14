@@ -16,7 +16,8 @@ public class DeadlineCommand extends Command {
     private final Deadline task;
 
     /**
-     * Constructor for a DeadlineCommand object.
+     * Represents a constructor for a DeadlineCommand object.
+     *
      * @param taskName Name of the task.
      * @param byTime Deadline of the task.
      */
@@ -25,7 +26,9 @@ public class DeadlineCommand extends Command {
     }
 
     /**
+     * Returns the command as a String which is used to show to the user in the GUI.
      * Executes the command and adds a deadline to the task list.
+     *
      * @param tl TaskList which the Duke will modify.
      * @param ui Ui to be used to facilitate interactions between user and the CLI.
      * @param storage Storage to be used to handle interactions with the save file.

@@ -59,45 +59,29 @@ public class Parser {
     }
 
     /**
-     * Parses the user input into a command.
-     * @param userCommand User input.
+     * Returns the command after parsing the user input.
+     *
+     * @param userCommand The user input.
      * @return Command to be executed.
      * @throws DukeException If there is an error in parsing the user input.
      */
     public Command parse(String[] userCommand) throws DukeException {
         String name;
+        checkCommandValidity(userCommand);
         switch(this.readCommand(userCommand)) {
         case "todo":
-            if (userCommand.length == 1) {
-                throw new DukeException("error no arguments");
-            }
             return new TodoCommand(userCommand[1]);
 
         case "deadline":
-            if (userCommand.length == 1) {
-                throw new DukeException("error no arguments");
-            }
             String[] splitBy = userCommand[1].split(" /by ", 2);
-            if (splitBy.length != 2) {
-                throw new DukeException("error Invalid formatting for commands");
-            }
             name = splitBy[0];
             String by = splitBy[1];
             LocalDateTime byTime = LocalDateTime.parse(by, DATETIME_FORMAT);
             return new DeadlineCommand(name, byTime);
 
         case "event":
-            if (userCommand.length == 1) {
-                throw new DukeException("error no arguments");
-            }
             String[] splitFrom = userCommand[1].split(" /from ", 2);
-            if (splitFrom.length != 2) {
-                throw new DukeException("error Invalid formatting for commands");
-            }
             String[] splitTo = splitFrom[1].split(" /to ", 2);
-            if (splitTo.length != 2) {
-                throw new DukeException("error Invalid formatting for commands");
-            }
             name = splitFrom[0];
             String from = splitTo[0];
             String to = splitTo[1];
@@ -112,15 +96,9 @@ public class Parser {
             return new MarkCommand(this.queryInteger(userCommand), false);
 
         case "list":
-            if (userCommand.length > 1) {
-                throw new DukeException("error Invalid formatting for commands");
-            }
             return new ListCommand();
 
         case "bye":
-            if (userCommand.length > 1) {
-                throw new DukeException("error Invalid formatting for commands");
-            }
             return new ExitCommand();
 
         case "delete":
@@ -135,6 +113,51 @@ public class Parser {
 
         default:
             throw new DukeException("Cannot recognise command!");
+        }
+    }
+
+    private void checkCommandValidity(String[] userCommand) throws DukeException {
+        switch(this.readCommand(userCommand)) {
+        case "todo":
+
+        case "find":
+            if (userCommand.length == 1) {
+                throw new DukeException("error no arguments");
+            }
+            break;
+
+        case "deadline":
+            if (userCommand.length == 1) {
+                throw new DukeException("error no arguments");
+            }
+            String[] splitBy = userCommand[1].split(" /by ", 2);
+            if (splitBy.length != 2) {
+                throw new DukeException("error Invalid formatting for commands");
+            }
+            break;
+
+        case "event":
+            if (userCommand.length == 1) {
+                throw new DukeException("error no arguments");
+            }
+            String[] splitFrom = userCommand[1].split(" /from ", 2);
+            if (splitFrom.length != 2) {
+                throw new DukeException("error Invalid formatting for commands");
+            }
+            String[] splitTo = splitFrom[1].split(" /to ", 2);
+            if (splitTo.length != 2) {
+                throw new DukeException("error Invalid formatting for commands");
+            }
+            break;
+
+        case "list":
+
+        case "bye":
+            if (userCommand.length > 1) {
+                throw new DukeException("error Invalid formatting for commands");
+            }
+            break;
+        default:
         }
     }
 }

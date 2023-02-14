@@ -7,7 +7,7 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Constructor for a new Todo object.
+     * Represents a constructor for a new Todo object.
      * @param taskName Name of the task.
      */
     public Todo(String taskName) {
@@ -15,7 +15,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Constructor for a new Todo object used for loading from save file.
+     * Represents a constructor for a new Todo object used for loading from save file.
+     *
      * @param taskName Name of the task.
      * @param isDone Status of the task.
      */

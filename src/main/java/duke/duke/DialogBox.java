@@ -25,9 +25,10 @@ public class DialogBox extends HBox {
     private Label text;
 
     /**
-     * hello
-     * @param l
-     * @param iv
+     * The constructor that takes in a Label and an ImageView to form the dialog box of the user.
+     *
+     * @param l the label of which is text that the dialog box is taking in
+     * @param iv the display picture of the person that is the input user
      */
     public DialogBox(Label l, ImageView iv) {
 

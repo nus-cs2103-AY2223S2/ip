@@ -60,7 +60,7 @@ public class Ui {
     private final Scanner sc;
 
     /**
-     * Constructor to create a new Ui object.
+     * Represents the constructor to create a new Ui object.
      * Scanner is used to read user input and is initialised here.
      */
     public Ui() {
@@ -72,7 +72,8 @@ public class Ui {
     }
 
     /**
-     * Reads the user input and returns the words as a string array split by spaces.
+     * Returns the user input as a string array split by spaces.
+     *
      * @return String array of user input.
      */
     public String[] getUserCommand() {
@@ -87,7 +88,7 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message.
+     * Method that prints the welcome message.
      */
     public void showWelcomeMessage() {
         showToUser(DASHED_LINE,
@@ -97,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * Prints the goodbye message.
+     * Method that prints the goodbye message.
      */
     public String showGoodbyeMessage() {
         showToUser(DASHED_LINE,
@@ -109,8 +110,9 @@ public class Ui {
     }
 
     /**
-     * Prints the message to the user with the given prefix.
+     * Method that prints the message to the user with the given prefix.
      * Each windows separator is replaced with a line separator.
+     *
      * @param message Message to be printed.
      */
     public void showToUser(String... message) {
@@ -120,8 +122,10 @@ public class Ui {
     }
 
     /**
+     * Returns the String of a message after formatting it.
      * Formats the message to be printed to the user with the given prefix.
      * Each windows separator is replaced with a line separator.
+     *
      * @param message of Messages to be printed.
      * @return Formatted message as a string.
      */
@@ -134,7 +138,9 @@ public class Ui {
     }
 
     /**
+     * Returns the String of the task left in a Task List.
      * Prints the list of tasks to the user.
+     *
      * @param tl TaskList object containing the list of tasks.
      */
     public String showToUserList(TaskList tl) {
@@ -157,7 +163,9 @@ public class Ui {
     }
 
     /**
+     * Returns the formatted String of task left.
      * Prints the string of remaining tasks the user has in the list.
+     *
      * @param tl TaskList object containing the list of tasks.
      * @return Formatted message as a string.
      */
