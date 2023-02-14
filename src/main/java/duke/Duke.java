@@ -183,7 +183,7 @@ public class Duke {
     }
 
     private String generateMarkMessage(ArrayList<Task> selectedTasks, boolean isMark) {
-        String unmarkMsg = "Done! I've marked these tasks as not done yet:\n";
+        String unmarkMsg = "Oh... Alright... I've marked these tasks as undone:\n";
         String markMsg = "YAY! I've marked these tasks as done:\n";
         String message = isMark ? markMsg : unmarkMsg;
         for (int i = 0; i < selectedTasks.size(); i++) {

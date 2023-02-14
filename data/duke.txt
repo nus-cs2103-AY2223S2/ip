@@ -1,6 +1,4 @@
 E | 1 | project meeting | 2023-08-06T14:00>2023-08-06T16:00
 T | 1 | read book
-D | 0 | return book | 2023-02-08T12:00
+D | 1 | return book | 2023-02-08T12:00
 D | 1 | valentines day | 2023-02-14T12:00
-T | 1 | one
-T | 0 | two
