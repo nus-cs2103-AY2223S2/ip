@@ -22,8 +22,6 @@ public class Event extends Task {
         this.end = end;
     }
 
-<<<<<<< HEAD
-=======
     public String getStart() {
         return start;
     }
@@ -32,7 +30,6 @@ public class Event extends Task {
         return end;
     }
 
->>>>>>> branch-A-codingStandard
     /**
      * String representation of an Event, in the format <code>[E] description (from: start to end)</code>.
      * @return String representation of Event object.

@@ -62,7 +62,7 @@ class Parser {
                 break;
             case "unmark":
                 try {
-                    Task changedTask = taskManager.unmark(Integer.parseInt(keyword.toString()) - 1);
+                    Task changedTask = taskManager.unmarkIdx(Integer.parseInt(keyword.toString()) - 1);
                     System.out.println(DIVIDER + "OK! I've marked this task as not done yet:\n"
                                                + changedTask + "\n" + DIVIDER);
 //                    return null;

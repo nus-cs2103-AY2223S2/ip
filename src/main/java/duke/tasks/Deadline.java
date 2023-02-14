@@ -9,12 +9,6 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private final LocalDate by;
 
-<<<<<<< HEAD
-
-    private final LocalDate by;
-
-=======
->>>>>>> branch-A-codingStandard
     /**
      * Constructor for a Deadline task object.
      * @param description The name of the deadline object.
