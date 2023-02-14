@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //scrollPane.hvalueProperty().bind(this.widthProperty());
         dialogContainer.getChildren().add(new Label("Hello, duke here."));
     }
 
