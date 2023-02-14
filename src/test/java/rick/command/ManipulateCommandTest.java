@@ -90,9 +90,13 @@ public class ManipulateCommandTest extends CommandTest {
 
         Command delete = new DeleteCommand(size + 1);
         String actualUi = delete.execute(TASK_LIST, UI);
-        String expectedUi = "Noted. I've removed this task:\n"
+        String expectedUi = "Got it. I've deleted this task:\n"
                 + "  [T][ ] task one\n"
-                + String.format("Now you have %s task%s in the list.", size, size == 1 ? "" : "s");
+                + String.format(
+                        "Now you have %s task%s in the list.",
+                        size == 0 ? "no" : size,
+                        size > 1 ? "" : "s"
+                );
 
         assertAll(() -> assertEquals(expectedUi, actualUi
             ), () -> assertEquals(expectedUiEmpty, actualUiEmpty)

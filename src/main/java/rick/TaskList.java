@@ -139,9 +139,12 @@ public class TaskList {
         RickTask task = this.storage.delete(i);
         assert task != null; //If storage error occurs
         return ui.section(
-                "Noted. I've removed this task:",
+                "Got it. I've deleted this task:",
                 "  " + task,
-                String.format("Now you have %s task%s in the list.", size - 1, size - 1 == 1L ? "" : "s")
+                String.format(
+                        "Now you have %s task%s in the list.",
+                        size - 1 == 0L ? "no" : size - 1,
+                        size - 1 > 1L ? "" : "s")
         );
     }
 
