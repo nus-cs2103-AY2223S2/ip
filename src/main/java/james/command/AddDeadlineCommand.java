@@ -12,12 +12,12 @@ import james.task.Deadline;
  * Adds a task of type Deadline to the task list.
  */
 public class AddDeadlineCommand extends Command {
-    public static final String COMMAND_WORD = "deadline";
+    public static final String COMMAND = "deadline";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a task of type deadline.\n"
+    public static final String MESSAGE = COMMAND + ": adds a task of type deadline.\n"
             + "(e.g deadline lab assignment /by 25/03/2000 1800)";
 
-    public static final String MESSAGE_DETAILED_USAGE = "add a deadline task using the following format:\n"
+    public static final String MESSAGE_FORMAT = "add a deadline task using the following format:\n"
             + "'deadline [task description] /by [date and time]'\n"
             + "make sure that your [date and time] is of the format: d/MM/yyyy HHmm\n"
             + "here is an example, 'deadline project /by 25/03/2000 1800";
@@ -44,13 +44,13 @@ public class AddDeadlineCommand extends Command {
      *                      If date is empty for deadline task.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND_WORD, "").isBlank();
+        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
         if (isTaskDescriptionEmpty) {
             throw new JamesException("Task description is empty!\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
-        int commandLength = COMMAND_WORD.length();
+        int commandLength = COMMAND.length();
         String taskInformation = userCommand.substring(commandLength).trim();
         String descriptor = "/by";
         boolean hasNoDescriptor = !taskInformation.contains(descriptor);
@@ -59,12 +59,12 @@ public class AddDeadlineCommand extends Command {
         if (hasNoDescriptor) {
             throw new JamesException("Task description missing descriptor: "
                     + descriptor + "\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
         if (hasNoDate) {
             throw new JamesException("Task description missing date!\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
         int deadlineIndex = userCommand.indexOf(descriptor + " ");
@@ -73,7 +73,7 @@ public class AddDeadlineCommand extends Command {
 
         if (hasNoDescription) {
             throw new JamesException("Task description is missing! \n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
         String deadline = userCommand.substring(deadlineIndex + 3).trim();

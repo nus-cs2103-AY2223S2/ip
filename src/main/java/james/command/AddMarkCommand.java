@@ -11,12 +11,12 @@ import james.task.TaskList;
  * Marks a task in the task list.
  */
 public class AddMarkCommand extends Command {
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks a task at the specified index as complete.\n"
+    public static final String MESSAGE = COMMAND + ": marks a task at the specified index as complete.\n"
             + "(e.g mark 1)";
 
-    public static final String MESSAGE_DETAILED_USAGE = "to mark a task as complete, use the following format:\n"
+    public static final String MESSAGE_FORMAT = "to mark a task as complete, use the following format:\n"
             + "mark [index of task]";
 
     private String userCommand;
@@ -42,13 +42,13 @@ public class AddMarkCommand extends Command {
      *                        If command does not have index.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean hasNoIndex = userCommand.toLowerCase().trim().endsWith(COMMAND_WORD);
+        boolean hasNoIndex = userCommand.toLowerCase().trim().endsWith(COMMAND);
         if (hasNoIndex) {
             throw new JamesException("Index is missing\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
-        String indexStr = userCommand.substring(COMMAND_WORD.length()).trim();
+        String indexStr = userCommand.substring(COMMAND.length()).trim();
         int index = Integer.parseInt(indexStr) - 1;
         boolean isInvalidTask = index >= tasks.size() || index < 0;
         boolean hasBeenMarked = tasks.get(index).getIsDone();

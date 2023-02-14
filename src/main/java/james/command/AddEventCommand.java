@@ -11,13 +11,13 @@ import james.task.TaskList;
  * Adds a task of type Event to the task list.
  */
 public class AddEventCommand extends Command {
-    public static final String COMMAND_WORD = "event";
+    public static final String COMMAND = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a task of type event.\n"
+    public static final String MESSAGE = COMMAND + ": adds a task of type event.\n"
             + "(e.g event project meeting \n"
             + "/from 25/03/2000 1800 /to 25/03/2000 1900)";
 
-    public static final String MESSAGE_DETAILED_USAGE = "add an event task using the following format:"
+    public static final String MESSAGE_FORMAT = "add an event task using the following format:"
             + "\n'event [task description] /from [date and time] /to [date and time]'\n"
             + "make sure that your [date and time] is of the format: d/MM/yyyy HHmm\n"
             + "here is an example, 'event christmas party \n"
@@ -45,13 +45,13 @@ public class AddEventCommand extends Command {
      *                      If date is empty for event task.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND_WORD, "").isBlank();
+        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
         if (isTaskDescriptionEmpty) {
             throw new JamesException("Task description is empty! \n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
-        int commandLength = COMMAND_WORD.length();
+        int commandLength = COMMAND.length();
         String taskInformation = userCommand.substring(commandLength).trim();
         String descriptor1 = "/from";
         String descriptor2 = "/to";
@@ -64,12 +64,12 @@ public class AddEventCommand extends Command {
             throw new JamesException("Task description missing descriptor: "
                     + descriptor1 + " "
                     + descriptor2 + " \n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
         if (hasNoDate_from || hasNoDate_to) {
             throw new JamesException("Task description missing date\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
         int startIndexEvent = userCommand.indexOf(descriptor1 + " ");
@@ -82,7 +82,7 @@ public class AddEventCommand extends Command {
 
         if (hasNoDescription) {
             throw new JamesException("your task description is empty\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
         String startEvent = userCommand.substring(startIndexEvent + 5, endIndexEvent).trim();
         String endEvent = userCommand.substring(endIndexEvent + 3, userCmdLenEvent).trim();

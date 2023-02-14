@@ -11,12 +11,12 @@ import james.task.ToDo;
  * Adds a task of type ToDo to the task list.
  */
 public class AddToDoCommand extends Command {
-    public static final String COMMAND_WORD = "todo";
+    public static final String COMMAND = "todo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a task of type todo.\n"
+    public static final String MESSAGE = COMMAND + ": adds a task of type todo.\n"
             + "(e.g todo return book)";
 
-    public static final String MESSAGE_DETAILED_USAGE = "add a todo task using the following format:\n"
+    public static final String MESSAGE_FORMAT = "add a todo task using the following format:\n"
             + "'todo [task description]'\n"
             + "here is an example, 'todo return book'";
 
@@ -40,13 +40,13 @@ public class AddToDoCommand extends Command {
      * @throws JamesException If task description is empty.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND_WORD, "").isBlank();
+        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
         if (isTaskDescriptionEmpty) {
             throw new JamesException("Task description is empty \n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
-        String description = userCommand.substring(COMMAND_WORD.length()).trim();
+        String description = userCommand.substring(COMMAND.length()).trim();
         ToDo todo = new ToDo(description);
         tasks.add(todo);
         storage.save(tasks.taskListToStoreString());

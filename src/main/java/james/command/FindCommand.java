@@ -9,12 +9,12 @@ import james.task.TaskList;
  * Finds tasks based on keyword.
  */
 public class FindCommand extends Command {
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": finds tasks containing the keywords.\n"
-            + "(e.g find CS2103T work)";
+    public static final String MESSAGE = COMMAND + ": finds tasks containing the keywords.\n"
+            + "(e.g find book)";
 
-    public static final String MESSAGE_DETAILED_USAGE = "to find a task containing keywords, "
+    public static final String MESSAGE_FORMAT = "to find a task containing keywords, "
             + "use the following format:\n'find [keywords]'\nhere is an example, 'find book'";
 
     private String userCommand;
@@ -39,13 +39,13 @@ public class FindCommand extends Command {
      * @throws JamesException If keyword is blank.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean hasNoKeyword = userCommand.toLowerCase().replaceFirst(COMMAND_WORD, "").isBlank();
+        boolean hasNoKeyword = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
         if (hasNoKeyword) {
             throw new JamesException("Keyword is missing!\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
-        String keyword = userCommand.substring(COMMAND_WORD.length()).trim();
+        String keyword = userCommand.substring(COMMAND.length()).trim();
         int tasksLength = tasks.size();
 
         for (int i = 0; i < tasksLength; i++) {

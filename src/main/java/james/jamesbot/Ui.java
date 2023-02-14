@@ -119,16 +119,16 @@ public class Ui {
      */
     public String displayCommands() {
         AddEventCommand MarkCommand;
-        return "\u2022 " + AddToDoCommand.MESSAGE_USAGE
-                + "\n\u2022 " + AddEventCommand.MESSAGE_USAGE
-                + "\n\u2022 " + AddDeadlineCommand.MESSAGE_USAGE
-                + "\n\u2022 " + DeleteCommand.MESSAGE_USAGE
-                + "\n\u2022 " + AddMarkCommand.MESSAGE_USAGE
-                + "\n\u2022 " + AddUnmarkCommand.MESSAGE_USAGE
-                + "\n\u2022 " + FindCommand.MESSAGE_USAGE
-                + "\n\u2022 " + ListTasksCommand.MESSAGE_USAGE
-                + "\n\u2022 " + HelpCommand.MESSAGE_USAGE
-                + "\n\u2022 " + ExitCommand.MESSAGE_USAGE;
+        return "\u2022 " + AddToDoCommand.MESSAGE
+                + "\n\u2022 " + AddEventCommand.MESSAGE
+                + "\n\u2022 " + AddDeadlineCommand.MESSAGE
+                + "\n\u2022 " + DeleteCommand.MESSAGE
+                + "\n\u2022 " + AddMarkCommand.MESSAGE
+                + "\n\u2022 " + AddUnmarkCommand.MESSAGE
+                + "\n\u2022 " + FindCommand.MESSAGE
+                + "\n\u2022 " + ListTasksCommand.MESSAGE
+                + "\n\u2022 " + HelpCommand.MESSAGE
+                + "\n\u2022 " + ExitCommand.MESSAGE;
     }
 
 }

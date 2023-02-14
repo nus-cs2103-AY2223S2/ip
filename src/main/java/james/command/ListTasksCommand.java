@@ -8,9 +8,9 @@ import james.task.TaskList;
  * Lists all the tasks in the task list.
  */
 public class ListTasksCommand extends Command {
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": prints out all of your tasks.";
+    public static final String MESSAGE = COMMAND + ": prints out all of your tasks.";
 
     /**
      * Executes the ListCommand which is to list all tasks stored in user's hard disk.

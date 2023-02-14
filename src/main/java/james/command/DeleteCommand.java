@@ -11,12 +11,12 @@ import james.task.TaskList;
  * Deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a task at the specified index.\n"
+    public static final String MESSAGE = COMMAND + ": deletes a task at the specified index.\n"
             + "(e.g delete 1)";
 
-    public static final String MESSAGE_DETAILED_USAGE = "to delete a task, use the following format:\n"
+    public static final String MESSAGE_FORMAT = "to delete a task, use the following format:\n"
             + "delete [index of task]";
 
     private String userCommand;
@@ -40,13 +40,13 @@ public class DeleteCommand extends Command {
      *                        If command does not have index.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean hasNoIndex = userCommand.toLowerCase().trim().endsWith(COMMAND_WORD);
+        boolean hasNoIndex = userCommand.toLowerCase().trim().endsWith(COMMAND);
         if (hasNoIndex) {
             throw new JamesException("Index is missing!\n"
-                    + MESSAGE_DETAILED_USAGE);
+                    + MESSAGE_FORMAT);
         }
 
-        String indexStr = userCommand.substring(COMMAND_WORD.length()).trim();
+        String indexStr = userCommand.substring(COMMAND.length()).trim();
         int index = Integer.parseInt(indexStr) - 1;
         boolean isInvalidTask = index >= tasks.size() || index < 0;
         if (isInvalidTask) {

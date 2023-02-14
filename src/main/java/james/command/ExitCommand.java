@@ -9,9 +9,9 @@ import james.task.TaskList;
  * Exits the program.
  */
 public class ExitCommand extends Command {
-    public static final String COMMAND_WORD = "bye";
+    public static final String COMMAND = "bye";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": exits the program.\n";
+    public static final String MESSAGE = COMMAND + ": exits the program.\n";
     /**
      * Executes the ExitCommand which is to exit the program.
      *

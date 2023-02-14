@@ -8,12 +8,12 @@ import james.task.TaskList;
  * HelpCommand class that list down all commands when user types "help"
  */
 public class HelpCommand extends Command {
-    public static final String COMMAND_WORD = "help";
+    public static final String COMMAND = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": displays all commands available.";
+    public static final String MESSAGE = COMMAND + ": displays all commands available.";
 
     /**
-     * Executes the ListCommand which is to list all tasks stored in user's hard disk.
+     * Executes the HelpCommand which is to list all tasks stored in user's hard disk.
      *
      * @param tasks The list where tasks are added to.
      * @param ui The ui to print out JamesBot's response.
@@ -24,9 +24,9 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Returns whether ListCommand exits the program.
+     * Returns whether HelpCommand exits the program.
      *
-     * @return false as ListCommand does not exit the program.
+     * @return false as HelpCommand does not exit the program.
      */
     public boolean isExit() {
         return false;
