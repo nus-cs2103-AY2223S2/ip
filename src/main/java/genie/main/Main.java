@@ -22,6 +22,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add("/styles/genie.css"); // not working
 
+            stage.setTitle("Genie");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(genie);
             stage.show();

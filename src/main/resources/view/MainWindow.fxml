@@ -12,7 +12,7 @@
         <TextField fx:id="userInput" layoutX="5.0" layoutY="556.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="307.0" style="-fx-background-radius: 20;" />
         <Button fx:id="sendButton" layoutX="317.0" layoutY="556.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-radius: 20; -fx-background-color: #818d92;" text="Send" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="553.0" prefWidth="400.0" vvalue="1.0">
