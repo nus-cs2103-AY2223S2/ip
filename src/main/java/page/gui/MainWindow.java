@@ -1,5 +1,6 @@
 package page.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Page page;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("images/userImage.jpg"));
-    private Image pageImage = new Image(this.getClass().getResourceAsStream("images/pageImage.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userImage.jpg"));
+    private Image pageImage = new Image(this.getClass().getResourceAsStream("/images/pageImage.jpg"));
 
     @FXML
     public void initialize() {
@@ -36,11 +37,10 @@ public class MainWindow extends AnchorPane {
         this.page = page;
     }
 
-    ///**
-    // * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-    //* the dialog container. Clears the user input after processing.
-    //*/
-    /*
+    /**
+    * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+    * the dialog container. Clears the user input after processing.
+    */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -50,6 +50,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getPageDialog(response, pageImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
     }
-    */
 }
