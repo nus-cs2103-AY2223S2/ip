@@ -105,4 +105,8 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
+    public Task get(int i) {
+        return this.tasks.get(i);
+    }
 }
