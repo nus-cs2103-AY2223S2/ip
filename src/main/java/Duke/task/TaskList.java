@@ -62,7 +62,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> getTaskList() {
-        return this.getTaskList();
+        return this.tasks;
     }
 
     /**

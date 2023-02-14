@@ -46,7 +46,7 @@ public class Deadline extends Task {
         }
         String type = "[D]";
         String time = "(by: " + this.time + ")";
-        return type + mark + " " + this.toString().trim()
+        return type + mark + " " + this.getString().trim()
                          + " " + time;
     }
 }

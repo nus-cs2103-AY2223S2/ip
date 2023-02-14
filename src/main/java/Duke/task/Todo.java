@@ -27,6 +27,6 @@ public class Todo extends Task {
         }
         String type = "[T]";
         return type + mark + " "
-            + this.toString().trim();
+            + this.getString().trim();
     }
 }

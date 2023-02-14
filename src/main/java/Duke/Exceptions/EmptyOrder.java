@@ -14,8 +14,9 @@ public class EmptyOrder extends DukeException {
    */
     public EmptyOrder(String input) {
         this.emptyOrder = new StringBuilder()
-            .append("OOPS!!! The order of a ")
-            .append(input).append(" cannot be empty.")
+            .append("Sorry. The order of a ")
+            .append(input).append(" cannot be empty ")
+            .append("OR things other than integers.")
             .toString();
     }
 

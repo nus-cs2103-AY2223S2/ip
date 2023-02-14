@@ -1,8 +1,5 @@
 package Duke.Command;
 
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-
 import Duke.Exceptions.DukeException;
 import Duke.Exceptions.EmptyDescription;
 import Duke.Exceptions.EmptyFind;
@@ -15,6 +12,9 @@ import Duke.task.Event;
 import Duke.task.Task;
 import Duke.task.TaskList;
 import Duke.task.Todo;
+
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class generates responses to user's command
@@ -77,6 +77,10 @@ public class Parser {
               "2022-01-01 0000"));
             }
             String[] division = info.substring(9).split(" /by ");
+            if (division.length < 2) {
+                throw new EmptyTime(new Deadline("",
+                    "2022-01-01 0000"));
+            }
             String input = division[0].trim();
             String time = division[1].trim();
             try {
@@ -103,6 +107,10 @@ public class Parser {
               "2022-01-01 0000", "2022-01-01 0000"));
             }
             String[] division = info.substring(6).split(" /from ");
+            if (division.length < 2) {
+                throw new EmptyTime(new Event("",
+                    "2022-01-01 0000", "2022-01-01 0000"));
+            }
             String input = division[0].trim();
             String[] timeDivision = division[1].split(" /to ");
             String startTime = timeDivision[0].trim();
@@ -125,7 +133,12 @@ public class Parser {
             if (strArr.length < 2) {
                 throw new EmptyOrder("mark");
             }
-            int curIndex = Integer.parseInt(strArr[1]) - 1;
+            int curIndex;
+            try {
+                curIndex = Integer.parseInt(strArr[1]) - 1;
+            } catch (NumberFormatException e) {
+                throw new EmptyOrder("mark");
+            }
             if (curIndex > tasks.size() - 1) {
                 throw new NoSuchTask(curIndex);
             }
@@ -140,7 +153,15 @@ public class Parser {
             if (strArr.length < 2) {
                 throw new EmptyOrder("unmark");
             }
-            int curIndex = Integer.parseInt(strArr[1]) - 1;
+            int curIndex;
+            try {
+                curIndex = Integer.parseInt(strArr[1]) - 1;
+            } catch (NumberFormatException e) {
+                throw new EmptyOrder("mark");
+            }
+            if (curIndex > tasks.size() - 1) {
+                throw new NoSuchTask(curIndex);
+            }
             if (curIndex > tasks.size() - 1) {
                 throw new NoSuchTask(curIndex);
             }
@@ -183,7 +204,15 @@ public class Parser {
             if (strArr.length < 2) {
                 throw new EmptyOrder("delete");
             }
-            int curIndex = Integer.parseInt(strArr[1]) - 1;
+            int curIndex;
+            try {
+                curIndex = Integer.parseInt(strArr[1]) - 1;
+            } catch (NumberFormatException e) {
+                throw new EmptyOrder("mark");
+            }
+            if (curIndex > tasks.size() - 1) {
+                throw new NoSuchTask(curIndex);
+            }
             if (curIndex > tasks.size() - 1) {
                 throw new NoSuchTask(curIndex);
             }

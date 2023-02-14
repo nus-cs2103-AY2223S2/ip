@@ -15,7 +15,7 @@ public class EmptyDescription extends DukeException {
    */
     public EmptyDescription(Task task) {
         this.emptyDescription = new StringBuilder()
-            .append("OOPS!!! The description of a ")
+            .append("My apology. The description of a ")
             .append(task.toString())
             .append(" cannot be empty.").toString();
     }

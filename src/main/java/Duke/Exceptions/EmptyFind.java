@@ -11,7 +11,7 @@ public class EmptyFind extends DukeException {
    * Constructor for Exception when cannot find matching task.
    */
     public EmptyFind() {
-        this.emptyFind = "OOPS!!! The description of a find"
+        this.emptyFind = "I'm sorry. The description of a find"
             + " cannot be empty.";
     }
 }

@@ -11,8 +11,8 @@ public class DontKnow extends DukeException {
    * Constructor for Exception when receive unknown command.
    */
     public DontKnow() {
-        this.dontKnow = "OOPS!!! I'm sorry, "
-            + "but I don't know what that means :-(";
+        this.dontKnow = "My apologies. "
+            + "I don't know what that means.";
     }
 
     @Override

@@ -16,10 +16,12 @@ public class EmptyTime extends DukeException {
    */
     public EmptyTime(Task task) {
         this.emptyTime = new StringBuilder()
-            .append("OOPS!!! The time of a ")
+            .append("Sorry, The time of a ")
             .append(task.toString()).append(" cannot be empty.")
-            .append("\n missing due date(for deadline) OR \n")
-            .append("missing start time or end time(for event)").toString();
+            .append("\n missing '/by'")
+            .append("\n OR missing description")
+            .append("\n OR due date(for deadline)")
+            .append("\n OR missing start time or end time(for event)").toString();
     }
 
     @Override
