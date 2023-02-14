@@ -42,6 +42,7 @@ public class DialogBox extends HBox {
 
         if (profile == Profile.USER) {
             displayPicture.setImage(userImage);
+            dialogBoxstyle += "-fx-background-color: #FD7F00;";
         } else {
             displayPicture.setImage(dukeImage);
             dialog.setStyle("-fx-text-fill: white;");
