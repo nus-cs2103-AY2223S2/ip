@@ -1,5 +1,6 @@
 package uwuke.task;
 
+import java.security.DrbgParameters.Capability;
 import java.util.ArrayList;
 
 import uwuke.input.Parser;
@@ -43,6 +44,7 @@ public class TaskList {
         Deadline dl = new Deadline(dt[0], dt[1]);
         tasks.add(dl);
         Printer.printAddedConfirmation(dl, tasks.size());
+        assert tasks.size() <= CAPACITY : "Number of tasks should not exceed specified maximum!";
     }
 
     public void addEvent(String input) throws DukeException {
@@ -54,6 +56,7 @@ public class TaskList {
         Event e = new Event(et[0], et[1], et[2]);
         tasks.add(e);
         Printer.printAddedConfirmation(e, tasks.size());
+        assert tasks.size() <= CAPACITY : "Number of tasks should not exceed specified maximum!";
     }
 
     public void addTodo(String input) throws DukeException {
@@ -65,6 +68,7 @@ public class TaskList {
         Todo td = new Todo(Parser.parseToDo(input));
         tasks.add(td);
         Printer.printAddedConfirmation(td, tasks.size());
+        assert tasks.size() <= CAPACITY : "Number of tasks should not exceed specified maximum!";
     }
 
     public void markTask(String input) throws DukeException {
@@ -86,10 +90,12 @@ public class TaskList {
             tasks.remove(deleteIndex);
             Printer.printDeleteConfirmation(removedTask, tasks.size());
         }
+        assert tasks.size() <= CAPACITY : "Number of tasks should not exceed specified maximum!";
     }
 
     public void addTask(Task task) {
         tasks.add(task);
+        assert tasks.size() <= CAPACITY : "Number of tasks should not exceed specified maximum!";
     }
 
     public ArrayList<Task> getList() {
