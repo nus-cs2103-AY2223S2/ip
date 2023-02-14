@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private static Stage stage;
 
     @Override
     public void start(Stage stage) {
@@ -21,14 +22,22 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            Main.stage = stage;
             scene.getStylesheets().add(Main.class.getResource("/style/stylesheet.css").toExternalForm());
-            stage.setScene(scene);
-            stage.setResizable(true);
-            stage.setTitle("Chopper Helpdesk");
+            Main.stage.setScene(scene);
+            Main.stage.setResizable(true);
+            Main.stage.setTitle("Chopper Helpdesk");
             fxmlLoader.<MainWindow>getController().setDuke(this.duke);
-            stage.show();
+            Main.stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Close application.
+     */
+    public static void closeStage() {
+        Main.stage.close();
     }
 }

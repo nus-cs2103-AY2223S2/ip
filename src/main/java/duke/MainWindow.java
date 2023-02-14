@@ -53,12 +53,15 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String text = userInput.getText();
+        String text = userInput.getText().trim();
         Pair<String, Boolean> response = duke.getResponse(text);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(text, userImage),
                 DialogBox.getDukeDialog(response.getKey(), dukeImage, response.getValue())
         );
         userInput.clear();
+        if (text.equalsIgnoreCase("bye")) {
+            Main.closeStage();
+        }
     }
 }
