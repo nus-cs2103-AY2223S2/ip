@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -251,6 +252,21 @@ public class Duke {
     }
 
     /**
+     * Handles the sorting of tasks by the "sort" command, and returns the Duke's
+     * response. Currently only sorts the alphabetically by description.
+     * 
+     * @return Duke's response.
+     */
+    private String sort() {
+        Comparator<Task> compareByDescription = (task1, task2) -> task1.description.compareTo(task2.description);
+        tasks.sort(compareByDescription);
+
+        String header = "Tasks sorted alphabetically by description.\n"
+                + "Here are the sorted tasks in your list:\n";
+        return header + tasks.toString();
+    }
+
+    /**
      * Gets the Duke's initialisation response.
      * 
      * @return Initialisation response.
@@ -302,6 +318,9 @@ public class Duke {
                 break;
             case "find":
                 response = find();
+                break;
+            case "sort":
+                response = sort();
                 break;
             case "q":
             case "quit":
