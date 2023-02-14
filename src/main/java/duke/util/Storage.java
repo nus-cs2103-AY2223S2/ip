@@ -60,6 +60,7 @@ public class Storage {
                 ArrayList<String> encodeSplit = new ArrayList<>(Arrays.asList(split));
                 String type = encodeSplit.get(1);
                 boolean isDone = encodeSplit.get(2).equals("X");
+                assert type != null : "Loading the files, the type should not be null";
                 String description;
                 switch (type) {
                 case "T":
