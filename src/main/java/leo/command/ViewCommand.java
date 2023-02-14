@@ -1,6 +1,7 @@
 package leo.command;
 
 import leo.leoexception.LeoException;
+import leo.leoexception.NoDateFoundException;
 import leo.leoexception.NoTaskFoundException;
 import leo.storage.*;
 
@@ -17,11 +18,15 @@ public class ViewCommand extends Command {
 
     @Override
     public String execute() throws LeoException {
-        String date = command.substring(5);
-        LocalDate day = convertString(date);
-        TaskList view = viewTask(storage, day);
-        String response = "Here is what you have on " + convertToString(day) + ":\n";
-        return response + view.display();
+        try {
+            String date = command.substring(5);
+            LocalDate day = convertString(date);
+            TaskList view = viewTask(storage, day);
+            String response = "Here is what you have on " + convertToString(day) + ":\n";
+            return response + view.display();
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoDateFoundException();
+        }
     }
 
     private LocalDate convertString(String str) {
