@@ -23,6 +23,10 @@ public class Task {
         return (isMarked ? "X" : " ");
     }
 
+    public boolean contains(String keyword) {
+        return this.name.contains(keyword);
+    }
+
     public String toSaveFormat() {
         String markToInt = this.isMarked? "1" : "0";
         return divider + markToInt + divider + name ;
