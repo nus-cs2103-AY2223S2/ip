@@ -37,16 +37,17 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        String style = "-fx-background-radius: 22;";
         dialog.setText(text);
         if (profile == Profile.USER) {
             displayPicture.setImage(userImage);
         } else {
             displayPicture.setImage(dukeImage);
             dialog.setStyle("-fx-text-fill: white;");
-            this.setStyle("-fx-background-color: #191970;");
+            style += "-fx-background-color: #191970;";
             this.flip();
         }
+        this.setStyle(style);
     }
 
     /**

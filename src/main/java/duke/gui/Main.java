@@ -25,6 +25,8 @@ public class Main extends Application {
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
 
+            stage.setTitle("Owlly");
+            stage.setIconified(false);
             stage.setOnShowing(event -> {
                 mainWindow.greetUser();
             });
