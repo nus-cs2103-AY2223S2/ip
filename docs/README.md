@@ -11,7 +11,7 @@ You can skip this step if you have Java 11 or above on your computer.
 
 3. Create a new folder to store the T-Rex.jar and the task list file.
 
-4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
+4. Open a command terminal such as `cmd` or `powershell` by press Win+R and type `cmd` or `powershell`. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
 
 ![This is an example use of T-Rex task manager](https://raw.githubusercontent.com/Mr-Teal/ip/master/docs/Ui.png)
 
