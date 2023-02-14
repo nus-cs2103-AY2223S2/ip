@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Abstract class from which all other tasks are derived
  */
-public abstract class Task implements Serializable {
+public abstract class Task implements Serializable, Comparable<Task> {
     public static int DEFAULT_PRIORITY = 0;
 
     /**
@@ -61,5 +61,10 @@ public abstract class Task implements Serializable {
             this.priority,
             this.description
         );
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        return this.priority - t.priority;
     }
 }

@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.io.PrintStream;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 import duke.App;
@@ -22,6 +23,9 @@ public class MainWindow implements Initializable {
         this.instance.setOutputStream(outputStream);
     }
 
+    private LinkedList<String> prevCommands = new LinkedList<>();
+    private int prevCommandIndex = -1;
+
     @FXML
     private TextArea outputTextBox;
 
@@ -41,10 +45,12 @@ public class MainWindow implements Initializable {
             return;
         }
 
-        outputStream.println(inputValue);
-        System.out.println(inputValue);
+        outputStream.format("> %s\n", inputValue);
         inputTextBox.clear();
         this.instance.executeCommand(inputValue);
+
+        prevCommands.push(inputValue);
+        prevCommandIndex = -1;
     }
 
     @Override
@@ -57,6 +63,33 @@ public class MainWindow implements Initializable {
             }
             case ESCAPE: {
                 inputTextBox.clear();
+                prevCommandIndex = -1;
+                break;
+            }
+            case UP: {
+                if (prevCommands.size() == 0) {
+                    break;
+                }
+
+                prevCommandIndex++;
+                if (prevCommandIndex == prevCommands.size()) {
+                    prevCommandIndex = 0;
+                }
+
+                inputTextBox.setText(prevCommands.get(prevCommandIndex));
+                break;
+            } case DOWN: {
+                if (prevCommands.size() == 0) {
+                    break;
+                }
+
+                prevCommandIndex--;
+
+                if (prevCommandIndex < 0) {
+                    prevCommandIndex = prevCommands.size() - 1;
+                }
+
+                inputTextBox.setText(prevCommands.get(prevCommandIndex));
                 break;
             }
             default: {

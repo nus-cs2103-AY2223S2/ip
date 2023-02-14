@@ -1,4 +1,4 @@
-package duke.commands.indexedCommand;
+package duke.commands.indexedcommand;
 
 import java.util.List;
 

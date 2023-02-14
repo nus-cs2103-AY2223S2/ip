@@ -15,7 +15,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Duke">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#closeDuke" text="Close" />
             </items>
           </Menu>
         </menus>

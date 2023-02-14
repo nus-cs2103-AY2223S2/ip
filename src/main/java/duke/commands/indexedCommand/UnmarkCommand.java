@@ -1,4 +1,4 @@
-package duke.commands.indexedCommand;
+package duke.commands.indexedcommand;
 
 import duke.Duke;
 import duke.task.Task;

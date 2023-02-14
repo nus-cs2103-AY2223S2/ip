@@ -13,12 +13,12 @@ import duke.commands.Command;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.SaveCommand;
-import duke.commands.indexedCommand.DeleteCommand;
-import duke.commands.indexedCommand.MarkCommand;
-import duke.commands.indexedCommand.UnmarkCommand;
-import duke.commands.taskCommand.DeadlineCommand;
-import duke.commands.taskCommand.EventCommand;
-import duke.commands.taskCommand.TodoCommand;
+import duke.commands.indexedcommand.DeleteCommand;
+import duke.commands.indexedcommand.MarkCommand;
+import duke.commands.indexedcommand.UnmarkCommand;
+import duke.commands.taskcommand.DeadlineCommand;
+import duke.commands.taskcommand.EventCommand;
+import duke.commands.taskcommand.TodoCommand;
 import duke.parser.Arguments;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -89,7 +89,7 @@ public class Duke {
     }
 
     public void output(String string) {
-        outputStream.println(string);
+        outputStream.format("Duke: %s\n", string);
     }
 
     public void output(String string, Object ...args) {

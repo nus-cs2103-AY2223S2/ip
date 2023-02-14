@@ -60,11 +60,15 @@ public class App extends Application {
                 while (true) {
                     try {
                         Storage.saveToDisk("data.dat", instance.getTaskList());
-                        ButtonType res = UI.showRetryDialog(AlertType.ERROR, "Failed to save your tasks! Try again?");
+                        return;
+                    } catch (IOException ex) {
+                        ButtonType res = UI.showRetryDialog(
+                            AlertType.ERROR, 
+                            String.format("Failed to save your tasks: %s Try again?", ex.getMessage()
+                        ));
                         if (res == ButtonType.NO) {
                             break;
                         }
-                    } catch (IOException ex) {
                     }
                 }
             });

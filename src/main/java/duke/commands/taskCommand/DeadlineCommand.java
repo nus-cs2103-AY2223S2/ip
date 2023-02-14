@@ -1,4 +1,4 @@
-package duke.commands.taskCommand;
+package duke.commands.taskcommand;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
