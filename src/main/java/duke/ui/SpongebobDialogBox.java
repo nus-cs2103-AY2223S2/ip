@@ -19,13 +19,13 @@ import java.util.Collections;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class SpongebobDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private SpongebobDialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -39,23 +39,12 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+    public static SpongebobDialogBox getDukeDialog(String text, Image img) {
+        var db = new SpongebobDialogBox(text, img);
+        ObservableList<Node> tmp = FXCollections.observableArrayList(db.getChildren());
         Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
+        db.getChildren().setAll(tmp);
+        db.setAlignment(Pos.TOP_LEFT);
         return db;
     }
 }

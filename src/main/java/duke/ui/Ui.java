@@ -13,7 +13,7 @@ public class Ui {
      * @return welcome message
      */
     public String showWelcomeMessage() {
-        return  "Hello! I'm Duke\n" + "What can I do for you?";
+        return  "Hello! I'm Spongebob\n" + "What can I do for you?";
     }
 
     /**

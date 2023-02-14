@@ -4,6 +4,7 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,6 +23,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Spongebob Chatbox");
+            Image icon = new Image(this.getClass().getResourceAsStream("/images/Icon.png"));
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(DUKE);
             stage.show();
         } catch (IOException e) {

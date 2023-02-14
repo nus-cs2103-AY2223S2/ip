@@ -25,19 +25,22 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image USER_IMAGE = new Image(
+            this.getClass().getResourceAsStream("/images/patrick.png"));
+    private final Image DUKE_IMAGE = new Image(
+            this.getClass().getResourceAsStream("/images/SpongeBob.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //scrollPane.setFitToHeight(true);
     }
 
     public void setDuke(Duke d) {
         assert d != null : "Duke hasn't been created.";
         duke = d;
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(d.getGreetingMsg(), DUKE_IMAGE));
+                SpongebobDialogBox.getDukeDialog(d.getGreetingMsg(), DUKE_IMAGE));
     }
 
     /**
@@ -49,8 +52,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, USER_IMAGE),
-                DialogBox.getDukeDialog(response, DUKE_IMAGE)
+                UserDialogBox.getUserDialogBox(input, USER_IMAGE),
+                SpongebobDialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
 
@@ -69,7 +72,6 @@ public class MainWindow extends AnchorPane {
         };
         Timer timer = new Timer();
         timer.schedule(timerTask, 1000L);
-
     }
 }
 
