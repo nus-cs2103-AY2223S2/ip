@@ -110,7 +110,7 @@ public class TaskList {
      * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available.
      */
     public String deleteTask(int taskNumber) throws TaskNotFoundException {
-        if (taskNumber > this.counter) {
+        if (taskNumber > this.counter || taskNumber <= 0) {
             throw new TaskNotFoundException("Task " + taskNumber +" does not exist");
         }
         Task removedTask = tasks.remove(taskNumber - 1);
@@ -126,7 +126,7 @@ public class TaskList {
      * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available.
      */
     public String markTask(int taskNumber) throws TaskNotFoundException {
-        if (taskNumber > this.counter) {
+        if (taskNumber > this.counter || taskNumber <= 0) {
             throw new TaskNotFoundException("Task " + taskNumber +" does not exist");
         }
         Task task = tasks.get(taskNumber - 1);
@@ -142,7 +142,7 @@ public class TaskList {
      * @throws TaskNotFoundException when taskNumber exceeds the total number of tasks available.
      */
     public String unmarkTask(int taskNumber) throws TaskNotFoundException {
-        if (taskNumber > this.counter) {
+        if (taskNumber > this.counter || taskNumber <= 0) {
             throw new TaskNotFoundException("Task " + taskNumber +" does not exist");
         }
         Task task = tasks.get(taskNumber - 1);
