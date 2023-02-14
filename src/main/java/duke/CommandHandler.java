@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
 
 public class CommandHandler {
@@ -132,6 +133,8 @@ public class CommandHandler {
             newTask = new Deadline(description, by);
         } catch (DateTimeParseException e) {
             return "Sorry, I didn't understand. Please enter a valid date or time.\n";
+        } catch (DateTimeException e) {
+            return "Sorry, that date is not valid. Please enter a date that exists.\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
@@ -144,6 +147,8 @@ public class CommandHandler {
             newTask = new Event(description, from, to);
         } catch (DateTimeParseException e) {
             return "Sorry, I didn't understand. Please enter a valid date or time.\n";
+        } catch (DateTimeException e) {
+            return "Sorry, that date is not valid. Please enter a date that exists.\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());

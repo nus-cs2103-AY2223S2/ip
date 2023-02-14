@@ -1,10 +1,8 @@
 package duke;
 
-import java.time.LocalDateTime;
-
 public class Event extends Task {
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private DateTimeHandler startTime;
+    private DateTimeHandler endTime;
 
     /**
      * Constructs an event task with the given description, completion status, start time and end time.
@@ -19,8 +17,8 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, String startTime, String endTime) {
         super(description, isDone);
-        this.startTime = DateTimeParser.parseInput(startTime);
-        this.endTime = DateTimeParser.parseInput(endTime);
+        this.startTime = new DateTimeHandler(startTime);
+        this.endTime = new DateTimeHandler(endTime);
     }
 
     /**
@@ -36,8 +34,8 @@ public class Event extends Task {
      */
     public Event(String description, String startTime, String endTime) {
         super(description);
-        this.startTime = DateTimeParser.parseInput(startTime);
-        this.endTime = DateTimeParser.parseInput(endTime);
+        this.startTime = new DateTimeHandler(startTime);
+        this.endTime = new DateTimeHandler(endTime);
     }
 
     /**
@@ -47,10 +45,10 @@ public class Event extends Task {
     @Override
     public String printTask() {
         return String.format("[E][%s] %s (%s - %s)",
-                (super.isDone() ? "X" : " "),
-                super.getDescription(),
-                DateTimeParser.formatOutput(this.startTime),
-                DateTimeParser.formatOutput(this.endTime));
+                (isDone() ? "X" : " "),
+                getDescription(),
+                startTime.formatPrint(),
+                endTime.formatPrint());
     }
     
     /**
@@ -60,9 +58,9 @@ public class Event extends Task {
     @Override
     public String formatTask() {
         return String.format("event~-~-~%s~-~-~%s~-~-~%s~-~-~%s",
-                this.getDescription(),
-                DateTimeParser.formatSave(this.startTime),
-                DateTimeParser.formatSave(this.endTime),
-                this.isDone() ? "X" : "O");
+                getDescription(),
+                startTime.formatSave(),
+                endTime.formatSave(),
+                isDone() ? "X" : "O");
     }
 }
