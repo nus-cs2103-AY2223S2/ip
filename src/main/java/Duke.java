@@ -8,7 +8,7 @@ import DukeHelpfulCode.Commands.*;
 
 /**
  * The Duke program is adapted DUKE from NUS SoC CS2103
- * Duke is a glotified to-do list.
+ * Duke is a glorified to-do list.
  *
  * @author  Yuan Hao
  * @version who knows
