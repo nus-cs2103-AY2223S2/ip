@@ -41,15 +41,16 @@ public class TwoFive {
      * @param fullCommand String representing the command entered by the user.
      * @return String containing command execution result.
      */
-    public String handleUserInput(String fullCommand) {
-        String commandResult = "";
+    public String[] handleUserInput(String fullCommand) {
+        String[] commandResult;
         try {
             Command c = Parser.parse(fullCommand);
-            commandResult = c.execute(tasks, storage);
+            commandResult = new String[]{c.execute(tasks, storage), "-fx-text-fill: #000000"};
         } catch (TwoFiveException e) {
-            commandResult = e.getMessage();
+            commandResult = new String[]{e.getMessage(), "-fx-text-fill: #FF0000"};
         } catch (NumberFormatException e) {
-            commandResult = ":( OOPS!!! The task number provided must be a number.";
+            commandResult = new String[]{":( OOPS!!! The task number provided must be a number.", "-fx-text-fill: "
+                    + "#FF0000"};
         }
         return commandResult;
     }

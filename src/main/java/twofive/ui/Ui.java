@@ -27,6 +27,8 @@ public class Ui extends Application {
             fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setRoot(stage);
             stage = fxmlLoader.load();
+            stage.setMinWidth(415.25);
+            stage.setMinHeight(750.0);
             fxmlLoader.<MainWindow>getController().setTwoFive(twoFive);
             stage.show();
         } catch (IOException | TwoFiveException e) {
