@@ -28,6 +28,7 @@ public class Parser {
         if (input.contains("#")) {
             return Ui.showInvalidInputError("Illegal character '#'.");
         }
+        assert !input.contains("#"): "Input should not have #";
         try {
             switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
             case "bye":
