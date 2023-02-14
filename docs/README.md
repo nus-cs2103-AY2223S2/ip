@@ -4,13 +4,15 @@ C.R.Y.S.T.A.L is a desktop app for managing tasks. It has been optimized for use
 by a Command Line Interface (CLI) or a Graphical User Interface (GUI). If you need a personalise
 tasklist, C.R.Y.S.T.A.L is here for you.
 
+![Crystal](https://github.com/thennant/ip/blob/master/docs/Ui.png)
 
-- [Quick Start](#Quick Start)
+- [Quick Start](#Quick-Start)
 - [Features](#Features)
 - [Usage](#Usage)
-- [Command Summary](#Command Summary)
+- [Command Summary](#Command-Summary)
 
 ## Quick Start
+
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Crystal` from [here](https://github.com/thennant/ip/releases) 
 
