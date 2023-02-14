@@ -1,0 +1,10 @@
+D | 1 | Submit iP | by:2023-02-17T23:59
+E | 0 | Dinner with pals | from:2023-02-20T18:00 | to:2023-02-20T20:00
+T | 0 | Buy some food for my pet chicken
+E | 0 | My presidential inauguration speech | from:2023-03-01T15:00 | to:2023-03-01T17:00
+T | 1 | Feed my pet chicken
+T | 1 | Throw out the garbage
+E | 0 | Midterm exams | from:2023-02-20T12:00 | to:2023-02-20T14:00
+D | 1 | Pay the bills | by:2023-02-18T18:00
+D | 0 | Send out invitations | by:2023-02-18T20:00
+D | 0 | Make friends with Tom | by:2023-02-19T21:00

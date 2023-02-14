@@ -22,4 +22,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.jar
 
 # Pre-loaded storage data
-data/storage.txt
+src/main/data/storage.txt

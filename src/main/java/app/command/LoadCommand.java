@@ -15,7 +15,7 @@ public class LoadCommand extends Command {
     }
 
     /**
-     * Loads the Tasks specified in the storage text file into the TaskList by appending.
+     * Loads the Tasks specified in the storage text file into the TaskList.
      * Informs the user of the number of tasks that have been successfully loaded.
      * @param tl
      * @param storage
@@ -25,9 +25,15 @@ public class LoadCommand extends Command {
     public Response execute(TaskList tl, Storage storage) {
         Map<String, Integer> successRates;
         try {
-            successRates = storage.loadIntoTaskList(tl);
+            if (storage.isFirstLoad()) {
+                successRates = storage.loadDefaultStorageToTaskList(tl);
+            } else {
+                successRates = storage.loadIntoTaskList(tl);
+            }
         } catch (IOException e) {
             return new Response(IO_ERROR, false);
+        } catch (Storage.InvalidStorageException e) {
+            return new Response(e.getMessage(), false);
         }
         int numSuccess = successRates.get("Successes");
         int numTotalRows = successRates.get("Total");

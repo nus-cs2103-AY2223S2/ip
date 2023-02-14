@@ -6,8 +6,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +38,11 @@ public class Storage {
     private static final int ISDONE_INDEX = 1;
     private static final int DESC_INDEX = 2;
     private static final int MIN_STORAGE_ARG_SIZE = 3;
+    private static final Path DEFAULT_STORAGE_RESOURCE = Paths.get("storage","default-storage.txt");
+    private static final String DEFAULT_STORAGE_MISSING = "Default storage not found, loading an empty TaskList";
 
     private final File file;
+    private final boolean isFirstLoad;
 
     /**
      * Creates a new Storage object. A file is created at the stated path to store
@@ -44,15 +52,64 @@ public class Storage {
      * @param path the relative path for which the text data file will be stored.
      * @throws IOException, propagated from FileWriter.
      */
-    Storage(Path path) throws IOException {
+    Storage(Path path) throws IOException, InvalidStorageException {
+        boolean storageExists = Files.exists(path);
+        System.out.println("storageExists: " + storageExists);
+        this.isFirstLoad = !storageExists;
+        System.out.println("isFirstLoad: " + isFirstLoad);
         this.file = new File(path.toString());
-
         // creates storage directory or data if they don't exist
         this.file.getParentFile().mkdirs();
-        if (!Files.exists(path)) {
+        if (isFirstLoad) {
             this.file.createNewFile();
         }
         assert this.file.exists();
+    }
+
+    public boolean isFirstLoad() {
+        return this.isFirstLoad;
+    }
+
+    private InputStream getDefaultStorageFromResource() throws InvalidStorageException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(DEFAULT_STORAGE_RESOURCE.toString());
+        if (inputStream == null) {
+            throw new InvalidStorageException(DEFAULT_STORAGE_MISSING);
+        }
+        return inputStream;
+    }
+
+    public Map<String, Integer> loadDefaultStorageToTaskList(TaskList tl)
+            throws InvalidStorageException {
+        InputStream is = getDefaultStorageFromResource();
+
+        Map<String, Integer> successRates = new HashMap<>();
+        int totalSuccess = 0;
+        int totalRowsRead = 0;
+        try (InputStreamReader streamReader =
+                     new InputStreamReader(is, StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(streamReader)) {
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                try {
+                    boolean isSuccess = loadLineToTaskList(tl, line);
+                    if (isSuccess) {
+                        totalSuccess++;
+                    }
+                } catch (InvalidStorageException e) {
+                    System.out.println(e.getMessage());
+                }
+                totalRowsRead++;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        successRates.put("Successes", totalSuccess);
+        successRates.put("Total", totalRowsRead);
+
+        return successRates;
     }
 
     /**
@@ -83,13 +140,7 @@ public class Storage {
             System.out.println("Loading task #" + totalRowsRead);
 
             try {
-                List<String> args = splitStorageFormatArgs(line);
-
-                TaskTypes.Type taskType = getTaskTypeFromStorageFormat(args);
-                Map<String, String> argValues = getArgMapFromStorageFormat(args);
-                boolean isDone = getIsDoneFromStorageFormat(args);
-
-                boolean isSuccess = addStorageTaskToTaskList(tl, taskType, argValues, isDone);
+                boolean isSuccess = loadLineToTaskList(tl, line);
                 if (isSuccess) {
                     totalSuccess++;
                 }
@@ -106,6 +157,17 @@ public class Storage {
         return successRates;
     }
 
+    private static boolean loadLineToTaskList(TaskList tl, String line) throws InvalidStorageException {
+        List<String> args = splitStorageFormatArgs(line);
+
+        TaskTypes.Type taskType = getTaskTypeFromStorageFormat(args);
+        Map<String, String> argValues = getArgMapFromStorageFormat(args);
+        boolean isDone = getIsDoneFromStorageFormat(args);
+
+        boolean isSuccess = addStorageTaskToTaskList(tl, taskType, argValues, isDone);
+        return isSuccess;
+    }
+
     /**
      * Adds a storage format Task to a TaskList, given the processed arguments.
      * @param tl
@@ -114,7 +176,7 @@ public class Storage {
      * @param isDone
      * @return a boolean indicating if the addition was successful.
      */
-    private boolean addStorageTaskToTaskList(TaskList tl,
+    private static boolean addStorageTaskToTaskList(TaskList tl,
                                              TaskTypes.Type taskType,
                                              Map<String, String> argValues,
                                              boolean isDone) {
@@ -131,7 +193,7 @@ public class Storage {
         }
     }
 
-    private TaskTypes.Type getTaskTypeFromStorageFormat(List<String> args)
+    private static TaskTypes.Type getTaskTypeFromStorageFormat(List<String> args)
             throws InvalidStorageException {
 
         String symbol = args.get(SYMBOL_INDEX);
@@ -150,7 +212,7 @@ public class Storage {
      * @return
      * @throws InvalidStorageException - if Description is missing
      */
-    private Map<String, String> getArgMapFromStorageFormat(List<String> args)
+    private static Map<String, String> getArgMapFromStorageFormat(List<String> args)
             throws InvalidStorageException {
 
         Map<String, String> argValues = new HashMap<>();
@@ -177,7 +239,7 @@ public class Storage {
      * @return
      * @throws InvalidStorageException
      */
-    private boolean getIsDoneFromStorageFormat(List<String> args) throws InvalidStorageException {
+    private static boolean getIsDoneFromStorageFormat(List<String> args) throws InvalidStorageException {
         String arg = args.get(ISDONE_INDEX);
         boolean isDoneTrue = arg.equals("1");
         boolean isUnDoneTrue = arg.equals("0");
@@ -197,7 +259,7 @@ public class Storage {
      * @throws InvalidStorageException if the line contains less than min
      * number of args in storage
      */
-    private List<String> splitStorageFormatArgs(String line) throws InvalidStorageException {
+    private static List<String> splitStorageFormatArgs(String line) throws InvalidStorageException {
         List<String> args = Arrays.asList(line.split(SEPARATOR_REGEX));
         if (args.size() < MIN_STORAGE_ARG_SIZE) {
             throw new InvalidStorageException("Missing inputs for task in this line");
@@ -221,6 +283,7 @@ public class Storage {
         }
         br.close();
     }
+
 
     /**
      * Indicates invalid storage data

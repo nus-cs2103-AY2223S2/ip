@@ -26,7 +26,7 @@ public class Duke {
         try {
             this.storage = new Storage(STORAGE_LOCATION);
             this.taskList = new TaskList();
-        } catch (IOException e) {
+        } catch (IOException | Storage.InvalidStorageException e) {
             e.printStackTrace();
         }
     }
