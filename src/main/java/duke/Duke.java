@@ -30,4 +30,9 @@ public class Duke {
             return "Couldn't execute command :/ \n" + e.toString();
         }
     }
+
+    public boolean isSuccessfulExecution(String response) {
+        return response.startsWith("Couldn't execute command :/");
+    }
 }
+

@@ -50,25 +50,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String commandInput = userInput.getText();
-        displayMessage(Profile.USER, commandInput);
         String response = duke.getResponse(commandInput);
+        displayMessage(Profile.USER, commandInput, duke.isSuccessfulExecution(response));
         userInput.clear();
-
-        displayMessage(Profile.DUKE, response);
+        displayMessage(Profile.DUKE, response, duke.isSuccessfulExecution(response));
     }
 
     @FXML
-    public void displayMessage(Profile profile, String message) {
+    public void displayMessage(Profile profile, String message, boolean highlightError) {
         DialogBox dialogBox;
         switch(profile) {
         case USER:
-            dialogBox = DialogBox.getUserDialog(message);
+            dialogBox = DialogBox.getUserDialog(message, highlightError);
             break;
         case DUKE:
-            dialogBox = DialogBox.getDukeDialog(message);
+            dialogBox = DialogBox.getDukeDialog(message, highlightError);
             break;
         default:
-            dialogBox = DialogBox.getDukeDialog(message);
+            dialogBox = DialogBox.getDukeDialog(message, highlightError);
         }
 
         dialogContainer.getChildren().add(dialogBox);
@@ -76,6 +75,6 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void greetUser() {
-        displayMessage(Profile.DUKE, "Hoot! How can I help you today?");
+        displayMessage(Profile.DUKE, "Hoot! How can I help you today?", false);
     }
 }

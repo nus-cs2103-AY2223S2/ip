@@ -28,7 +28,7 @@ public class DialogBox extends HBox {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tiger.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/owl.jpg"));
 
-    private DialogBox(String text, Profile profile) {
+    private DialogBox(String text, Profile profile, boolean highlightError) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,17 +37,22 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String style = "-fx-background-radius: 22;";
+        String dialogBoxstyle = "-fx-background-radius: 22;";
         dialog.setText(text);
+
         if (profile == Profile.USER) {
             displayPicture.setImage(userImage);
         } else {
             displayPicture.setImage(dukeImage);
             dialog.setStyle("-fx-text-fill: white;");
-            style += "-fx-background-color: #191970;";
+            dialogBoxstyle += "-fx-background-color: #191970;";
             this.flip();
         }
-        this.setStyle(style);
+
+        if (highlightError) {
+            dialog.setStyle("-fx-text-fill: red;");
+        }
+        this.setStyle(dialogBoxstyle);
     }
 
     /**
@@ -60,12 +65,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, Profile.USER);
+    public static DialogBox getUserDialog(String text, boolean highlightError) {
+        return new DialogBox(text, Profile.USER, highlightError);
     }
 
-    public static DialogBox getDukeDialog(String text) {
-        DialogBox db = new DialogBox(text, Profile.DUKE);
+    public static DialogBox getDukeDialog(String text, boolean highlightError) {
+        DialogBox db = new DialogBox(text, Profile.DUKE, highlightError);
         return db;
     }
 }
