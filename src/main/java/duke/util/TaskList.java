@@ -220,7 +220,7 @@ public class TaskList {
         if (matchIndexes.size() < 1) {
             return new LinkedList<>(Collections.singletonList("No matches found."));
         } else {
-            String countStr = String.format("match%s found:", matchIndexes.size() > 1 ? "es" : "");
+            String countStr = String.format("%d match%s found:", matchIndexes.size(), matchIndexes.size() > 1 ? "es" : "");
             Queue<String> header = new LinkedList<>(Collections.singletonList(countStr));
             Queue<String> outputs = matchIndexes.stream().map(i -> "\t" + addOrdinal(i, this.tasks.get(i))).collect(Collectors.toCollection(LinkedList::new));
             header.addAll(outputs);
