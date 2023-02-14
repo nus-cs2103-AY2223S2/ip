@@ -234,5 +234,12 @@ It was a good session Hank. Bye.
 
 ## **Acknowledgements:**
 
-The gui package contains code that is adapted from: https://se-education.org/guides/tutorials/javaFxPart4.html.
+The gui package contains code that is adapted from: 
+https://se-education.org/guides/tutorials/javaFxPart4.html.
+
+Connor.png courtesy from the following link: 
+https://www.pinterest.com/pin/841750986588333659/
+
+Hank.png courtesy from the following link: 
+https://www.reddit.com/r/TF2fashionadvice/comments/xf5mvg/lieutenant_hank_anderson_from_detroit_become_human/
 
