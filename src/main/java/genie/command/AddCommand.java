@@ -1,8 +1,8 @@
 package genie.command;
 
-import genie.Storage;
-import genie.TaskList;
-import genie.Ui;
+import genie.main.Storage;
+import genie.main.TaskList;
+import genie.main.Ui;
 import genie.task.Task;
 
 public class AddCommand extends Command {
@@ -21,6 +21,7 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         switch (taskType) {
         case TODO:
+        case "todo": // todo change to constant
             task = taskList.addToDoFromUser(fullCommand);
             break;
         case DEADLINE:

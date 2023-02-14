@@ -1,4 +1,4 @@
-package genie;
+package genie.main;
 import java.io.IOException;
 import java.util.Collections;
 

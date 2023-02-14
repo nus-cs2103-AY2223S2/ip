@@ -1,4 +1,4 @@
-package genie;
+package genie.main;
 
 import genie.task.Task;
 
@@ -21,7 +21,7 @@ public class Ui {
      * Prints greet message.
      */
     public void greet() {
-        response.append("Hello! This is Genie, your personal task tracker!");
+        response.append(GENIE_LOGO + "Hello! This is Genie, your personal task tracker!");
     }
 
     /**

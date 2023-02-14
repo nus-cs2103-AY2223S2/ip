@@ -1,4 +1,4 @@
-package genie;
+package genie.main;
 
 import genie.task.Deadline;
 import genie.task.Event;
@@ -28,6 +28,7 @@ public class TaskList {
      * @param t task
      */
     public void storeTask(Task t) {
+        assert t != null: "Invalid";
         this.tasks.add(t);
     }
 
@@ -38,6 +39,12 @@ public class TaskList {
      */
     public Task addToDoFromUser(String i) {
         String descOnly = removeCommandFromInput(i, TODO);
+        ToDo t = new ToDo(descOnly);
+
+        String[] commDescWords = commandDescriptionWords(i);
+        assert commDescWords.length > 1: "Invalid";
+
+        assert !descOnly.equals("");
         ToDo t = new ToDo(descOnly);
         storeTask(t);
         return t;
@@ -51,6 +58,8 @@ public class TaskList {
     public Task addToDoFromFile(String sf) {
         char status = statusFromTaskInfo(sf);
         String desc = removeTypeAndStatus(sf);
+        assert !desc.isEmpty(): "Invalid";
+
         ToDo t = new ToDo(desc);
         storeTask(t);
         if (isMarked(status)) {
@@ -65,6 +74,9 @@ public class TaskList {
      * @return task
      */
     public Task addDeadlineFromUser(String i) {
+        String[] deadlineDescWords = commandDescriptionWords(i);
+        assert deadlineDescWords.length > 1: "Invalid";
+
         String[] contents = i.split(" /by ");
         String deadlineTime = contents[1];
         String commandAndDesc = contents[0];
@@ -81,8 +93,11 @@ public class TaskList {
     public Task addDeadlineFromFile(String sf) {
         char status = statusFromTaskInfo(sf);
         String desc = removeTypeAndStatus(sf);
+
         String[] contents = splitContents(desc);
         String descOnly = contents[0];
+        assert !descOnly.isEmpty(): "Invalid";
+
         String deadlineBy = contents[1];
         Deadline d = new Deadline(descOnly, deadlineBy);
         storeTask(d);
@@ -97,6 +112,9 @@ public class TaskList {
      * @return task
      */
     public Task addEventFromUser(String i) {
+        String[] eventDescWords = commandDescriptionWords(i);
+        assert eventDescWords.length > 1: "Invalid";
+
         String[] contents = i.split(" /from ");
         String[] timings_fromTo = contents[1].split(" /to ");
         String from = timings_fromTo[0];
@@ -115,8 +133,11 @@ public class TaskList {
     public Task addEventFromFile(String sf) { // todo load up saved tasks when app starts
         char status = statusFromTaskInfo(sf);
         String desc = removeTypeAndStatus(sf);
+
         String[] contents = splitContents(desc);
         String descOnly = contents[0];
+        assert !descOnly.isEmpty(): "Invalid";
+
         String timing = contents[1];
         String[] splitTimings_from_to = timing.split(" - ");
         String eventFrom = splitTimings_from_to[0];
@@ -135,6 +156,7 @@ public class TaskList {
      * @param index of task list to be deleted
      */
     public void deleteTask(int index) {
+        assert index > 0 && index <= numOfTasks(): "Invalid";
         tasks.remove(index);
     }
 
@@ -145,10 +167,12 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
     //@@author mandykqh-reused
     //Reused from https://stackoverflow.com/questions/17134773/to-check-if-string-contains-particular-word
     //with minor modifications
     public ArrayList<Task> searchMatchingTasks(String keyword) {
+        assert !keyword.isEmpty(): "Invalid";
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -177,5 +201,12 @@ public class TaskList {
     }
     public String[] splitContents(String content) {
         return content.split(" \\| ");
+    }
+    public String[] commandDescriptionWords(String fullCommand) {
+        return fullCommand.split(" ");
+    }
+    public int numOfTasks() {
+        int len = tasks.size();
+        return len;
     }
 }
