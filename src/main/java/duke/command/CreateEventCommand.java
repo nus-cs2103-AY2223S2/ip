@@ -3,7 +3,6 @@ package duke.command;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 import duke.DukeException;
 import duke.Storage;
@@ -80,7 +79,6 @@ public class CreateEventCommand extends Command {
     @Override
     public void checkArguments() throws DukeException {
         String args = commandMessage.substring(5).trim();
-        System.out.println(args);
         if (args.length() == 0) {
             String emptyArgumentsMessage = "event arguments cannot be empty";
             throw new DukeException(emptyArgumentsMessage);

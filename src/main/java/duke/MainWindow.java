@@ -39,8 +39,7 @@ public class MainWindow extends AnchorPane {
             String reminders = duke.getReminders();
             String welcomeMessage = "Welcome!\n";
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(welcomeMessage + reminders, dukeImage)
-            );
+                    DialogBox.getDukeDialog(welcomeMessage + reminders, dukeImage));
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
@@ -66,8 +65,7 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+                DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
     }
 }
