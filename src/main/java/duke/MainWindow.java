@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initialize the GUI.
@@ -38,10 +38,10 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the Duke instance to be used.
      * 
-     * @param d Duke instance.
+     * @param duke Duke instance.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
         String response = duke.getInitialResponse();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
     }
@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
-        if (response == null) {
+        if (response == Duke.EXIT_RESPONSE) {
             Platform.exit();
             return;
         }

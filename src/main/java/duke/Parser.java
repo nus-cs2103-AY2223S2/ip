@@ -28,9 +28,9 @@ public class Parser {
     public Parser(String command) {
         assert command != null : "Command should not be 'null'";
 
-        this.fullCommand = command;
+        fullCommand = command;
         String[] splittedCommand = command.split(" +", 2);
-        this.baseCommand = splittedCommand[0];
+        baseCommand = splittedCommand[0];
         String rawBody = splittedCommand.length > 1 ? splittedCommand[1].trim() : "";
         String body = "";
 
@@ -48,7 +48,7 @@ public class Parser {
 
         assert fullCommand != null : "Full command should not be 'null'";
         assert baseCommand != null : "Base command should not be 'null'";
-        assert body != null : "Body should not be 'null'";
+        assert this.body != null : "Body should not be 'null'";
     }
 
     /**
@@ -57,7 +57,7 @@ public class Parser {
      * @return Whether the command's body is empty.
      */
     public boolean hasEmptyBody() {
-        return this.body.isEmpty();
+        return body.isEmpty();
     }
 
     @Override

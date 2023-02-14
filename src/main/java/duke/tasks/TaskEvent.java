@@ -57,10 +57,10 @@ public class TaskEvent extends Task {
     public String encodeAsString() {
         return Task.encodeValues(new String[] {
             "E",
-            this.isDone ? "1" : "0",
-            this.description,
-            this.fromTime.toString(),
-            this.toTime.toString() });
+            isDone ? "1" : "0",
+            description,
+            fromTime.toString(),
+            toTime.toString() });
     }
 
     @Override
@@ -68,8 +68,8 @@ public class TaskEvent extends Task {
         return String.format(
                 "[E]%s (from: %s to: %s)",
                 super.toString(),
-                Task.formatDate(this.fromTime),
-                Task.formatDate(this.toTime));
+                Task.formatDate(fromTime),
+                Task.formatDate(toTime));
     }
 
     @Override
@@ -81,10 +81,10 @@ public class TaskEvent extends Task {
             return false;
         }
         TaskEvent other = (TaskEvent) obj;
-        if (!other.fromTime.equals(this.fromTime)) {
+        if (!other.fromTime.equals(fromTime)) {
             return false;
         }
-        if (!other.toTime.equals(this.toTime)) {
+        if (!other.toTime.equals(toTime)) {
             return false;
         }
         return true;

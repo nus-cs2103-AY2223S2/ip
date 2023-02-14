@@ -33,8 +33,8 @@ public class TaskTodo extends Task {
     public String encodeAsString() {
         return Task.encodeValues(new String[] {
             "T",
-            this.isDone ? "1" : "0",
-            this.description });
+            isDone ? "1" : "0",
+            description });
     }
 
     @Override

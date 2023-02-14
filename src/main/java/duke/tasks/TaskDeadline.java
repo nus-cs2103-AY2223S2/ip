@@ -50,9 +50,9 @@ public class TaskDeadline extends Task {
     public String encodeAsString() {
         return Task.encodeValues(new String[] {
             "D",
-            this.isDone ? "1" : "0",
-            this.description.toString(),
-            this.endTime.toString() });
+            isDone ? "1" : "0",
+            description.toString(),
+            endTime.toString() });
     }
 
     @Override
@@ -60,7 +60,7 @@ public class TaskDeadline extends Task {
         return String.format(
                 "[D]%s (by: %s)",
                 super.toString(),
-                Task.formatDate(this.endTime));
+                Task.formatDate(endTime));
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Initialise a 'Storage' instance.
+     * Creates a new 'Storage' instance.
      * 
      * @param filePath The data's save file's path.
      */
@@ -63,7 +63,7 @@ public class Storage {
      * @throws DukeSaveLoadException If there's an error parsing the save file.
      */
     public TaskList load() throws DukeSaveLoadException {
-        String saveFileContents = Storage.readFile(this.filePath);
+        String saveFileContents = Storage.readFile(filePath);
         TaskList output = new TaskList();
         if (saveFileContents == null || saveFileContents.isBlank()) {
             return output;
@@ -87,6 +87,6 @@ public class Storage {
      *         file.
      */
     public void save(TaskList tasks) throws DukeSaveLoadException {
-        Storage.writeStringToFile(this.filePath, tasks.encodeAsString());
+        Storage.writeStringToFile(filePath, tasks.encodeAsString());
     }
 }
