@@ -1,4 +1,5 @@
 # User Guide
+Duke is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Duke allows the tracking of various types of tasks including todo list, events and deadlines.
 
 ## Features 
 
