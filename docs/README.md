@@ -22,7 +22,7 @@ A simple chatbot that manages things you need to do. With all the productivity a
 
 ****[IMPORTANT]****: Ensure you have Java installed on your device.
 
-1. Download `Duke.jar` [here](https://github.com/arkarsg/ip/releases/download/A-Jar/Duke.jar)
+1. Download `Duke.jar` [here](https://github.com/arkarsg/ip/releases/download/A-Release/Duke.jar)
 
 #### For Mac users
 1. Launch your Terminal and navigate to `Duke.jar` file using the `cd` command.
