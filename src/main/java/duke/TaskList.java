@@ -76,6 +76,17 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
+     * replace the tasks with another at the given index
+     * @param index index of the element to replace
+     * @param task element to be stored at the specified position
+     * @return the new task replaced
+     */
+    public Task set(int index, Task task) {
+        taskList.set(index, task);
+        return task;
+    }
+
+    /**
      * Prints out all tasks in the list
      * @return String representation of all tasks in the list
      */
