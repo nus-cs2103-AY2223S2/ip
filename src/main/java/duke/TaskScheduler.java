@@ -2,8 +2,6 @@ package duke;
 
 import java.util.List;
 
-import java.util.concurrent.PriorityBlockingQueue;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,11 +11,18 @@ import javafx.util.Duration;
 
 public class TaskScheduler extends TaskList<Recur> {
 
-    private PriorityBlockingQueue<Recur> priorityQueue;
     private final List<Timeline> recurResponse;
     private final VBox dialogContainer;
     private Image dukeImage;
 
+    /**
+     * Constructor to initialize the TaskScheduler with the input string, list of Timelines, VBox, and Duke's Image.
+     * It calls the recurDialogContainer method if the input string contains the word "recur".
+     * @param recurResponse  list of Timelines for the recurring tasks
+     * @param dialogContainer VBox container to store the dialog boxes for the recurring tasks
+     * @param dukeImage       Image of Duke to display in the dialog box
+     * @param input           input string
+     */
     TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, Image dukeImage, String input) {
         this.recurResponse = recurResponse;
         this.dialogContainer = dialogContainer;
@@ -27,6 +32,13 @@ public class TaskScheduler extends TaskList<Recur> {
         }
     }
 
+    /**
+     * Constructor to initialize the TaskScheduler with the input string, list of Timelines, and VBox.
+     * It calls the recurDialogContainerTest method if the input string contains the word "recur".
+     * @param recurResponse  list of Timelines for the recurring tasks
+     * @param dialogContainer VBox container to store the dialog boxes for the recurring tasks
+     * @param input           input string
+     */
     TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, String input) {
         this.recurResponse = recurResponse;
         this.dialogContainer = dialogContainer;
@@ -35,6 +47,10 @@ public class TaskScheduler extends TaskList<Recur> {
         }
     }
 
+    /**
+     * Creates and schedules the dialog box for a recurring task.
+     * @param input input string
+     */
     void recurDialogContainer(String input) {
         if (input.contains("delete")) {
         } else {
@@ -45,12 +61,15 @@ public class TaskScheduler extends TaskList<Recur> {
                             DialogBox.getDukeDialog(input, dukeImage)
                     )));
             recurResponse.add(timeline);
-            timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+            timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
         }
     }
 
-    //Tests without timeline play
+    /**
+     * Creates and schedules the dialog box for a recurring task without timeline play for junit test
+     * @param input input string
+     */
     void recurDialogContainerTest(String input) {
         if (input.contains("delete")) {
         } else {
@@ -61,7 +80,7 @@ public class TaskScheduler extends TaskList<Recur> {
                             DialogBox.getDukeDialog(input, dukeImage)
                     )));
             recurResponse.add(timeline);
-            timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+            timeline.setCycleCount(Animation.INDEFINITE);
         }
     }
 }
