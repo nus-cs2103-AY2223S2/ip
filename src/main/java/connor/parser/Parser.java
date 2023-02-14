@@ -2,6 +2,7 @@ package connor.parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import connor.task.Deadline;
 import connor.task.Event;
@@ -109,23 +110,27 @@ public class Parser {
      * @throws InvalidTaskException if taskName is blank spaces.
      */
     public Task parseCommand(String command, String information) throws InvalidTaskException {
-        switch (Commands.valueOf(command).toString()) {
-        case "TODO":
-            validateName(information);
-            return new Todo(information);
+        try {
+            switch (Commands.valueOf(command).toString()) {
+            case "TODO":
+                validateName(information);
+                return new Todo(information);
 
-        case "DEADLINE":
-            String[] pair = getNameDeadlinePair(information);
-            LocalDateTime deadline = parseDateTime(pair[1]);
-            return new Deadline(pair[0], deadline);
+            case "DEADLINE":
+                String[] pair = getNameDeadlinePair(information);
+                LocalDateTime deadline = parseDateTime(pair[1]);
+                return new Deadline(pair[0], deadline);
 
-        case "EVENT":
-            String[] tuple = getNameStartEndTuple(information);
-            LocalDateTime start = parseDateTime(tuple[1]);
-            LocalDateTime end = parseDateTime(tuple[2]);
-            return new Event(tuple[0], start, end);
+            case "EVENT":
+                String[] tuple = getNameStartEndTuple(information);
+                LocalDateTime start = parseDateTime(tuple[1]);
+                LocalDateTime end = parseDateTime(tuple[2]);
+                return new Event(tuple[0], start, end);
 
-        default:
+            default:
+                throw new InvalidTaskException();
+            }
+        } catch (DateTimeException e) {
             throw new InvalidTaskException();
         }
     }

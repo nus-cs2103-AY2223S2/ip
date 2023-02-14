@@ -1,8 +1,8 @@
 # User Guide
 
-Connor is your personal task manager to keep track of your tasks. Tasks are defined to be a todo (no date), a deadline (one date) or an Event (two dates). 
+Connor is your personal task manager to keep track of your tasks.
 
-Connor is completely capable of sorting your tasks by the date, read on further to learn the format that Connor utilizes to show a sorted list.
+Connor is capable of sorting your tasks by the date, learn how Connor formats a sorted list below.
 
 ## Definitions 
 
@@ -12,11 +12,11 @@ Connor is completely capable of sorting your tasks by the date, read on further 
 - Tasks that requires a date (deadline and event) requires a valid date.
 
 #### **Date**
-- YYYY-MM-DD TTTT ```2023-02-17 1800```
+- In the format of YYYY-MM-DD TTTT:```2023-02-17 1800```.
 - Date must be valid (31st Feb 2023 will not be accepted).
 
 #### **Commands**
-- Commands are case in-sensitive
+- Commands are case in-sensitive.
 
 
 ## Features 
@@ -28,6 +28,7 @@ Adds a task that has no time constraint. This task will be stored in the memory 
 #### Usage format: 
 
 ```todo {TASK}```
+```todo tidy room```
 
 #### Connor's reply:
 
@@ -50,6 +51,7 @@ Adds a task that has a deadline. This task will be stored in the memory in a for
 #### Usage format: 
 
 ```deadline {TASK} /by {DATE}```
+```deadline Project submission /by 2023-02-17 1800```
 
 #### Connor's reply:
 
@@ -72,6 +74,7 @@ Adds a task that has a start and end date. This task will be stored in the memor
 #### Usage format: 
 
 ```Event {TASK} /from {STARTDATE} /to {ENDDATE}```
+```Event Dinner /from 2023-02-14 1800 /to 2023-02-14 2000```
 
 #### Connor's reply:
 
@@ -104,13 +107,14 @@ Gets all tasks in the list.
 I have 3 tasks in my memory
 ```
 
-### **```mark {INDEX}```**
+### **```mark```**
 
 Marks a certain task on the list (according to its index) as done. 
 
 #### Usage format: 
 
 ```mark {INDEX}```
+```mark 1```
 
 #### Connor's reply:
 
@@ -119,12 +123,13 @@ Understood, I have marked the task as done:
   [T][X] {TASK}
 ```
 
-### **```unmark {INDEX}```**
+### **```unmark```**
 
 Marks a certain task on the list (according to its index) as undone. 
 
 #### Usage format: 
 
+```unmark {INDEX}```
 ```unmark 1```
 
 #### Connor's reply:
@@ -134,12 +139,13 @@ Understood, I have marked the task as undone:
   [T][ ] {TASK}
 ```
 
-### **```delete {INDEX}```**
+### **```delete```**
 
 Deletes a certain task on the list (according to its index).
 
 #### Usage format: 
 
+```delete {INDEX}```
 ```delete 1```
 
 #### Connor's reply:
@@ -164,12 +170,13 @@ Deletes all tasks on the list.
 All tasks on the list have been cleared. 
 ```
 
-### **```find {KEYWORD}```**
+### **```find```**
 
 Deletes a certain task on the list (according to its index).
 
 #### Usage format: 
 
+```find {KEYWORD}```
 ```find work```
 
 #### Connor's reply:
