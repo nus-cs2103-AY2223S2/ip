@@ -208,7 +208,7 @@ Format : `unmark <index>`
 
 Example of usage:
 
-`unmark 171`
+`unmark 17`
 
 Expected outcome:
 
