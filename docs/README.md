@@ -309,15 +309,19 @@ Expected working days before issue is answered: 2 - 3 working days.
 
 
 ## Command Summary
-| Command      | Format                                                                                                                                                                                                                                                             | Expected Outcome                                                                    |
-|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| **ToDo**     | `todo tutorial 1`                                                                                                                                                                                                                                                  | Adds a `ToDo` Task to the task list                                                 |
-| **Deadline** | `deadline Assignment 1 /by 2023-05-05 15:00`<br/><br/>`deadline Assignment 1 /by 2023-05-05`                                                                                                                                                                       | Adds a `Deadline` Task to the task list                                             |
-| **Event**    | `event Celebration /from 2023-04-04 /to 2023-05-05`<br/><br/>`event Celebration /from 2023-04-04 10:00 /to 2023-05-05`<br/><br/>`event Celebration /from 2023-04-04 10:00 /to 2023-05-05 15:00`<br/><br/>`event Celebration /from 2023-04-04 /to 2023-05-05 15:00` | Adds a `Event` Task to the task list                                                |
-| **Mark** | `mark 2` | Marks `Task` with task number `2`                                                   |
-| **Unmark** | `unmark 2` | Unmarks `Task` with task number `2`                                                 |
-| **List** | `list` | Displays all `Tasks` in the task list                                               |
-| **Delete** | `delete 2` | Deletes `Task` with task number `2`                                                 |
-| **Find** | `find assignment test` | Finds all `Tasks` that have either `assignment` or `test` in their task description |
-| **Reminder** | `reminder` | Displays all `Tasks` that are due                                                   |
-| **Help** | `help` | Display a help message that redirects you to this page                              |
+| Command      | Format                                                          | Expected Outcome                   |
+|--------------|-----------------------------------------------------------------|------------------------------------|
+| **ToDo**     | `todo tutorial 1`                                               | Adds a `ToDo` Task                 |
+| **Deadline** | `deadline Assignment 1 /by 2023-05-05 15:00`                    | Adds a `Deadline` Task             |
+| **Deadline** | `deadline Assignment 1 /by 2023-05-05`                          | Adds a `Deadline` Task             |
+| **Event**    | `event Celebration /from 2023-04-04 /to 2023-05-05`             | Adds a `Event` Task                |
+| **Event**    | `event Celebration /from 2023-04-04 10:00 /to 2023-05-05`       | Adds a `Event` Task                |
+| **Event**    | `event Celebration /from 2023-04-04 /to 2023-05-05 15:00`       | Adds a `Event` Task                |
+| **Event**    | `event Celebration /from 2023-04-04 10:00 /to 2023-05-05 15:00` | Adds a `Event` Task                |
+| **Mark**     | `mark 2`                                                        | Marks `Task` with task no `2`      |
+| **Unmark**   | `unmark 2`                                                      | Unmarks `Task` with task no `2`    |
+| **List**     | `list`                                                          | Displays all `Tasks` in task list  |
+| **Delete**   | `delete 2`                                                      | Deletes `Task` with task no `2`    |
+| **Find**     | `find assignment test`                                          | Find all `Tasks` with either words |
+| **Reminder** | `reminder`                                                      | Displays all `Tasks` that are due  |
+| **Help**     | `help`                                                          | Display a help message             |
