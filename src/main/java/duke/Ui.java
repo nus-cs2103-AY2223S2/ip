@@ -10,11 +10,6 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner scanner;
-    public final static String LOGO = " ____        _        \n"
-            + "|  _ \\ _  _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
@@ -32,7 +27,11 @@ public class Ui {
      * @return returns welcome string
      */
     public static String showWelcome() {
-        String output = String.format("Hello from\n%s\nWhat can I do for you", LOGO);
+//        String output = String.format("Hello from\n%s\nWhat can I do for you", LOGO);
+        String welcome = "Hello im duke what can I do for you?\n";
+        String requestFilepath = "By default I store data in ./text.txt, do you want me to save it elsewhere?\n";
+        String hint = "do 'save <filepath>' to specify the filepath, or else just carry on";
+        String output = welcome + requestFilepath + hint;
         System.out.println(output);
         return output;
     }
@@ -87,8 +86,8 @@ public class Ui {
      * @param tasks the list of all the tasks
      * @return formatted string of stored file
      */
-    public String showStored(TaskList tasks) {
-        String output = String.format("File has been stored!\n%s",tasks.toFormattedString());
+    public String showStored(Storage storage, TaskList tasks) {
+        String output = String.format("%s has been updated\nThese are your tasks\n%s",storage.filepath, tasks.toFormattedString());
         System.out.println(output);
         return output;
     }

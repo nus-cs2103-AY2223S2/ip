@@ -13,7 +13,7 @@ public class ExitCommand extends Command{
         String output;
         try {
             storage.store(tasks);
-            output = ui.showStored(tasks);
+            output = ui.showStored(storage, tasks);
         } catch (FileException ignored) {
             output = ui.showLoadingError();
         }

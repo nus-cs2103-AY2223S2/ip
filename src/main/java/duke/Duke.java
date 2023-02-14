@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.StoreCommand;
 import duke.exception.CommandException;
 import duke.exception.DukeException;
 import duke.task.TaskList;
@@ -50,6 +51,11 @@ public class Duke {
             ui.showLine();
             try {
                 Command command = Parser.parse(input);
+                if (command instanceof StoreCommand) {
+                    StoreCommand storeCommand = (StoreCommand) command;
+                    this.tasks = storeCommand.getTasks();
+                    this.storage = storeCommand.getStorage();
+                }
                 command.execute(this.tasks, this.storage, this.ui);
                 isExit = command.isExit();
             } catch (CommandException commandException) {
@@ -72,6 +78,11 @@ public class Duke {
         }
         try {
             Command command = Parser.parse(input);
+            if (command instanceof StoreCommand) {
+                StoreCommand storeCommand = (StoreCommand) command;
+                this.tasks = storeCommand.getTasks();
+                this.storage = storeCommand.getStorage();
+            }
             return command.execute(tasks, storage, ui);
         } catch (DukeException exception) {
             return exception.toString();
