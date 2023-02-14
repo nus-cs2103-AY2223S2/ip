@@ -32,25 +32,35 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "mark": {
-            int number = Integer.parseInt(split[1]);
-            return new MarkDoneCommand(true, number);
+            try {
+                int number = Integer.parseInt(split[1]);
+                return new MarkDoneCommand(true, number);
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                throw new TaskCreationException("Number not given");
+            }
         }
         case "unmark": {
-            int number = Integer.parseInt(split[1]);
-            return new MarkDoneCommand(false, number);
+            try {
+                int number = Integer.parseInt(split[1]);
+                return new MarkDoneCommand(false, number);
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                throw new TaskCreationException("Number not given");
+            }
         }
         case "todo": {
-            if (split.length < 2) {
+            try {
+                return new AddToDoCommand(line.substring(5));
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new TaskCreationException("Description cannot be empty");
             }
-            return new AddToDoCommand(line.substring(5));
         }
         case "deadline": {
-            split = line.substring(9).split("/by");
-            if (split.length < 2) {
+            try {
+                split = line.substring(9).split("/by");
+                return new AddDeadlineCommand(split[0].trim(), split[1].trim());
+            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                 throw new TaskCreationException("Invalid format");
             }
-            return new AddDeadlineCommand(split[0].trim(), split[1].trim());
         }
         case "event": {
             try {
@@ -60,7 +70,7 @@ public class Parser {
                 String from = split[0].trim();
                 String to = split[1].trim();
                 return new AddEventCommand(desc, from, to);
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new TaskCreationException("Invalid format");
             }
         }
