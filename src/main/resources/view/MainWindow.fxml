@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="651.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="duke.ui.MainWindow">
-    <ScrollPane fitToWidth="true" fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" vvalue="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <VBox  fx:id="dialogContainer" />
+    <ScrollPane style="-fx-background-color: rgb(52,53,65);"  fitToWidth="true" fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" vvalue="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <VBox fx:id="dialogContainer" />
     </ScrollPane>
     <HBox fillHeight="false" minHeight="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
           AnchorPane.rightAnchor="0.0">

@@ -43,21 +43,26 @@ public class Parser {
             if (split.length < 2) {
                 throw new TaskCreationException("Description cannot be empty");
             }
-            return new AddToDoCommand(split[1]);
+            return new AddToDoCommand(line.substring(5));
         }
         case "deadline": {
-            split = line.split(" ");
-            if (split.length < 4) {
+            split = line.substring(9).split("/by");
+            if (split.length < 2) {
                 throw new TaskCreationException("Invalid format");
             }
-            return new AddDeadlineCommand(split[1], split[3]);
+            return new AddDeadlineCommand(split[0].trim(), split[1].trim());
         }
         case "event": {
-            split = line.split(" ");
-            if (split.length < 6) {
+            try {
+                split = line.substring(6).split("/from");
+                String desc = split[0].trim();
+                split = split[1].split("/to");
+                String from = split[0].trim();
+                String to = split[1].trim();
+                return new AddEventCommand(desc, from, to);
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new TaskCreationException("Invalid format");
             }
-            return new AddEventCommand(split[1], split[3], split[5]);
         }
         case "find": {
             if (split.length < 2) {
