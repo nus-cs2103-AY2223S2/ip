@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * An example of a custom control using FXML.
@@ -20,38 +21,41 @@ import java.io.IOException;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Label dialogLabel;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private static final String RESOURCE_PATH = "/view/DialogBox.fxml";
+
+    private DialogBox(String text, Image image) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            URL dialogBoxResource = MainWindow.class.getResource(RESOURCE_PATH);
+            FXMLLoader fxmlLoader = new FXMLLoader(dialogBoxResource);
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        dialogLabel.setText(text);
+        displayPicture.setImage(image);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        ObservableList<Node> childrenList = FXCollections.observableArrayList(this.getChildren());
+        FXCollections.reverse(childrenList);
+        this.getChildren().setAll(childrenList);
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getDialog(String text, Image img, boolean isFlipped) {
-        DialogBox db = new DialogBox(text, img);
+    public static DialogBox getDialog(String text, Image image, boolean isFlipped) {
+        DialogBox dialog = new DialogBox(text, image);
         if (isFlipped) {
-            db.flip();
+            dialog.flip();
         }
-        return db;
+        return dialog;
     }
 }
