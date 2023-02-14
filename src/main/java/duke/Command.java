@@ -189,14 +189,8 @@ public class Command {
             return "There is not no task in the list.";
         }
 
-        ArrayList<Task> filteredTasks= new ArrayList<>();
+        ArrayList<Task> filteredTasks= this.list.getFilteredTasks(keyword);
         TaskList foundTasks = new TaskList(filteredTasks);
-        for(int i = 1; i <= this.list.getListLength(); i++) {
-            Task task = this.list.getTask(i);
-            if(task.toString().contains(keyword)) {
-                foundTasks.addTask(task);
-            }
-        }
 
         if(foundTasks.isEmpty()) {
             return this.ui.noMatchFoundDisplay();

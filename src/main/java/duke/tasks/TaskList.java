@@ -5,6 +5,8 @@ import duke.exception.DukeMissingArgumentException;
 import duke.exception.DukeTaskArgumentException;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import duke.Ui;
 
 /**
@@ -132,5 +134,16 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentsException();
         }
+    }
+
+    /**
+     * Filter the task list based on a word
+     *
+     * @param keyword
+     * @return the filtered list
+     */
+    public ArrayList<Task> getFilteredTasks(String keyword) {
+        return this.tasks.stream().filter(x -> x.toString().
+                contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
     }
 }
