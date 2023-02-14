@@ -24,7 +24,7 @@ Download the latest `Duke-Gerty.jar` from [here](https://github.com/kyueran/ip/r
 
 Copy the file to the folder you want to use as the home folder for the jar application.
 
-Open a command terminal, cd into the folder you put the jar file in, and use the java -jar `Duke-Gerty.jar` command to run the application.
+Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Duke-Gerty.jar` command to run the application.
 A GUI similar to the below should appear.
 <div align="center">
 <img src="./Welcome.png" width="100" height="150">
