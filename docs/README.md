@@ -1,5 +1,6 @@
 # User Guide
 >Duke will remind you at the start if you have any deadlines that are due on the day.
+
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest duke.jar from [here](https://github.com/wz2k/ip/releases).
