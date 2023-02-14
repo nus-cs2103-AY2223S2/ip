@@ -27,4 +27,9 @@ public class Deadline extends Task {
             return "D | " + 0 + " | " + description + " | " + formattedByDate + "\n";
         }
     }
+
+    @Override
+    public Type getType() {
+        return Type.DEADLINE;
+    }
 }

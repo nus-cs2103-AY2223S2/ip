@@ -29,4 +29,9 @@ public class Event extends Task {
             return "E | " + 0 + " | " + description + " | " + formattedStartDate + " | " + formattedEndDate + "\n";
         }
     }
+
+    @Override
+    public Type getType() {
+        return Type.EVENT;
+    }
 }

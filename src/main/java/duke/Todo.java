@@ -30,4 +30,9 @@ public class Todo extends Task {
             return "T | " + 0 + " | " + this.description + "\n";
         }
     }
+
+    @Override
+    public Type getType() {
+        return Type.TODO;
+    }
 }

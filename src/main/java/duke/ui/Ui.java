@@ -83,4 +83,11 @@ public class Ui {
     public String displayMsg(String output) {
         return output;
     }
+
+    public String displayUpdateMessage(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Task has been updated\n");
+        sb.append(task.toString());
+        return sb.toString();
+    }
 }

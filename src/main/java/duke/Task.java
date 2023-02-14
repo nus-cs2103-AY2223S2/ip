@@ -51,4 +51,6 @@ public abstract class Task {
      * @return formatted string
      */
     public abstract String formatForFile();
+
+    public abstract Type getType();
 }

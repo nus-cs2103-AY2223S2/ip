@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.Duke;
 import duke.TaskList;
+import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -16,5 +18,5 @@ public abstract class Command {
      * @param storage Storage to handle saving/loading of data to/from the list of task.
      * @return duke's response message.
      */
-    public abstract String initCommand(TaskList tasks, Ui ui, Storage storage);
+    public abstract String initCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }
