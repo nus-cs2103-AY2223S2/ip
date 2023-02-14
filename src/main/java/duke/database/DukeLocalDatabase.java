@@ -136,7 +136,7 @@ class DukeLocalDatabase {
      * Loads task from local csv file.
      * @param dataFilePath directory of the data file
      */
-    void open(String dataFilePath) throws DatabaseNotFoundException{
+    void open(String dataFilePath) throws DatabaseNotFoundException {
         try {
             isClosed = false;
 
