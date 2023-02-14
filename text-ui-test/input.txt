@@ -1,0 +1,12 @@
+list
+todo read book
+deadline return book /by 2024-02-01
+event return book /from 2024-01-01 /to 2024-02-01
+list
+mark 0
+mark 1
+list
+delete 1
+delete 1
+delete 1
+bye

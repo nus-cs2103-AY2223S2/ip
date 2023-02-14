@@ -1,0 +1,3 @@
+T |   | Read book
+D |   | Return book | 2024-01-01
+E |   | Book fair | 2024-01-01 - 2024-02-01
