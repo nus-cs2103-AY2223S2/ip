@@ -116,7 +116,10 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             Task curr = this.tasks.get(i);
             if (curr.fallsOnDate(date)) {
-                display.append((count) + ". " + curr.getStatusIcon() + "\n");
+                if (count > 1) {
+                    display.append("\n");
+                }
+                display.append((count) + ". " + curr.getStatusIcon());
                 count++;
             }
         }
@@ -138,7 +141,10 @@ public class TaskList {
             Task curr = this.tasks.get(i);
             // checks for word ignoring case sensitivity
             if (curr.getDescription().toLowerCase().contains(word.toLowerCase())) {
-                display.append((count) + ". " + curr.getStatusIcon() + "\n");
+                if (count > 1) {
+                    display.append("\n");
+                }
+                display.append((count) + ". " + curr.getStatusIcon());
                 count++;
             }
         }
@@ -156,7 +162,10 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             Task curr = this.tasks.get(i);
             if (curr.isIncompleteBeforeDate(date)) {
-                display.append((count) + ". " + curr.getStatusIcon() + "\n");
+                if (count > 1) {
+                    display.append("\n");
+                }
+                display.append((count) + ". " + curr.getStatusIcon());
                 count++;
             }
         }
