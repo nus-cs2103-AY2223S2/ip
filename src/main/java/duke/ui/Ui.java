@@ -49,7 +49,7 @@ public class Ui extends AnchorPane {
      */
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
-        this.dialogContainer.setStyle("-fx-background-color: #242f1f");
+        this.dialogContainer.setStyle("-fx-background-color: #060102");
     }
 
     @FXML
