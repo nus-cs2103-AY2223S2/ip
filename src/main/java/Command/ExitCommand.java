@@ -33,7 +33,6 @@ public class ExitCommand extends Command {
         try {
             storage.saveData(tasks);
             isSaved = true;
-
         } catch (IOException e) {
             isSaved = false;
         }
