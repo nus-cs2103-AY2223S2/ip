@@ -63,4 +63,7 @@ public class Duke {
         }
     }
 
+    public String getGreetMessage() {
+        return ui.showGreetMessage();
+    }
 }
