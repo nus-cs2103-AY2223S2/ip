@@ -24,7 +24,7 @@ public class FileStorage implements Storage {
     private final String fileName;
 
     /**
-     * Initialize storage using file.
+     * Initializes storage using file.
      *
      * @param directoryPath The directory of where the file is stored.
      * @param fileName The name of the file.

@@ -20,7 +20,7 @@ public class Duke {
     private CommandParser commandParser;
 
     /**
-     * Initialize Duke chat bot.
+     * Initializes Duke chat bot.
      *
      * @param saveDataDirPath The directory where the save data file should be located.
      * @param saveDataFilePath The save data file name.
@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Start the chatbot.
+     * Starts the chatbot.
      */
     public void start() {
         ui.showStartup();
