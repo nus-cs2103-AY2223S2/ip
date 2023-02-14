@@ -1,10 +1,13 @@
 package seedu.duke;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
+
 import util.DateTimeParser;
 import util.DukeException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class DateTimeParserTest {
     @Test

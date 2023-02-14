@@ -1,12 +1,14 @@
 package seedu.duke;
 
-import duke.ToDo;
-import org.junit.jupiter.api.Test;
-import util.DukeException;
-import util.TaskList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.ToDo;
+
+import util.DukeException;
+import util.TaskList;
 
 
 
