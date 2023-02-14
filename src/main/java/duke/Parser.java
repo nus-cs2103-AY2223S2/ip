@@ -64,12 +64,12 @@ public class Parser {
             case reminders:
                 return new ReminderCommand();
             default:
-                throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("\tI'm sorry, but I don't know what that means :-(");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("\tI'm sorry, but I don't know what that means :-(");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!");
+            throw new DukeException("\tThe name of task u want to find cannot be empty!");
         }
     }
 
