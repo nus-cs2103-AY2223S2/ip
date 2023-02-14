@@ -10,11 +10,11 @@ import java.util.List;
 public class AddTagHandler extends OperationHandler {
 
     @Override
-    public void handle(String userCommand) {
-
+    public String handle(String userCommand) {
+        return "";
     }
 
-    public static String handleAddTag(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
+    public String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
         // valid format: tag #index #tag
         Pair<Integer, String> info = parser.getTagIndex(parts);
         int num = info.getKey();

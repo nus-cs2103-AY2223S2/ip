@@ -10,11 +10,11 @@ import java.util.List;
 public class DeleteOperationHandler extends OperationHandler {
 
     @Override
-    public void handle(String userCommand) {
-
+    public String handle(String userCommand) {
+        return "";
     }
 
-    public static String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
+    public String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
         Pair<Integer, String> info = parser.getDeleteIndex(parts);
         int num = info.getKey();
         String message = info.getValue();

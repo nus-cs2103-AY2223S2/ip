@@ -7,11 +7,11 @@ import windycall.exception.WindyCallException;
 public class AddTodoHandler extends AddTaskHandler {
 
     @Override
-    public void handle(String userCommand) {
-
+    public String handle(String userCommand) {
+        return "";
     }
 
-    public static Task handleAddTodo(String message) throws WindyCallException {
+    public Task handleAddTodo(String message) throws WindyCallException {
         if (message.length() == 4 || message.substring(4).trim().isEmpty()) {
             throw new WindyCallException("OOPS!!! The description of a todo cannot be empty!");
         }

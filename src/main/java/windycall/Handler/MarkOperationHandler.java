@@ -9,11 +9,11 @@ import windycall.task.Task;
 public class MarkOperationHandler extends OperationHandler {
 
     @Override
-    public void handle(String userCommand) {
-
+    public String handle(String userCommand) {
+        return "";
     }
 
-    public static String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
+    public String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
 //        int num = parser.getMarkIndex(parts);
         Pair<Integer, String> info = parser.getMarkIndex(parts);
         int num = info.getKey();

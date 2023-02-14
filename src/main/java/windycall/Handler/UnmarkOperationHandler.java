@@ -9,11 +9,11 @@ import java.util.List;
 
 public class UnmarkOperationHandler extends OperationHandler {
     @Override
-    public void handle(String userCommand) {
-
+    public String handle(String userCommand) {
+        return "";
     }
 
-    public static String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
+    public String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
 //        int idx = parser.getUnmarkIndex(parts);
         Pair<Integer, String> info = parser.getUnmarkIndex(parts);
         int num = info.getKey();

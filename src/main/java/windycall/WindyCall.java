@@ -39,27 +39,34 @@ public class WindyCall {
             String[] parts = userCommand.split(" ");
             switch (type) {
             case LIST:
-                return ListOperationHandler.handle(tasks, ui);
+                ListOperationHandler listOperationHandler = new ListOperationHandler();
+                return listOperationHandler.handle(tasks, ui);
 //                break;
             case MARK:
-                return MarkOperationHandler.handle(parser, tasks, parts, storage);
+                MarkOperationHandler markOperationHandler = new MarkOperationHandler();
+                return markOperationHandler.handle(parser, tasks, parts, storage);
 //                break;
             case UNMARK:
-                return UnmarkOperationHandler.handle(parser, tasks, parts, storage);
+                UnmarkOperationHandler unmarkOperationHandler = new UnmarkOperationHandler();
+                return unmarkOperationHandler.handle(parser, tasks, parts, storage);
 //                break;
             case DELETE:
-                return DeleteOperationHandler.handle(parser, tasks, parts, storage);
+                DeleteOperationHandler deleteOperationHandler = new DeleteOperationHandler();
+                return deleteOperationHandler.handle(parser, tasks, parts, storage);
 //                break;
             case FIND:
-                return FindOperationHandler.handle(parts, ui, tasks, userCommand);
+                FindOperationHandler findOperationHandler = new FindOperationHandler();
+                return findOperationHandler.handle(parts, ui, tasks, userCommand);
 //                break;
             case TAG:
-                return AddTagHandler.handleAddTag(parser, tasks, parts, storage);
+                AddTagHandler addTagHandler = new AddTagHandler();
+                return addTagHandler.handle(parser, tasks, parts, storage);
 //                break;
             default:
                 String returnedMessage;
                 try {
-                    returnedMessage = AddTaskHandler.addTask(userCommand, tasks, storage, parser);
+                    AddTaskHandler addTaskHandler = new AddTaskHandler();
+                    returnedMessage = addTaskHandler.addTask(userCommand, tasks, storage, parser);
                 } catch (WindyCallException e) {
                     returnedMessage = e.getMessage();
                 }

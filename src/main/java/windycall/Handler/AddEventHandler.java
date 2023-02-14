@@ -10,11 +10,11 @@ import java.time.LocalDate;
 public class AddEventHandler extends AddTaskHandler {
 
     @Override
-    public void handle(String userCommand) {
-
+    public String handle(String userCommand) {
+        return "";
     }
 
-    public static Task handleAddEvent(String message) throws WindyCallException {
+    public Task handleAddEvent(String message) throws WindyCallException {
         int idxFrom = message.indexOf("/from");
         int idxTo = message.indexOf("/to");
         if (message.length() == 5 || message.substring(5).trim().isEmpty()
@@ -39,6 +39,9 @@ public class AddEventHandler extends AddTaskHandler {
         String toStr = message.substring(idxTo + 4);
         LocalDate from = Parser.processDate(fromStr);
         LocalDate to = Parser.processDate(toStr);
+        if (to.isBefore(from)) {
+            throw new WindyCallException("To date should not be before From date");
+        }
         return new Event(description, false, from, to);
     }
 }

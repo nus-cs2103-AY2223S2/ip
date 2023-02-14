@@ -10,11 +10,11 @@ import java.time.LocalDate;
 public class AddDeadlineHandler extends AddTaskHandler {
 
     @Override
-    public void handle(String userCommand) {
-
+    public String handle(String userCommand) {
+        return "";
     }
 
-    public static Task handleAddDeadline(String message) throws WindyCallException {
+    public Task handleAddDeadline(String message) throws WindyCallException {
         int idx = message.indexOf("/by");
         if (message.length() == 8 || message.substring(8).trim().isEmpty()
                 || (idx != -1 && message.substring(8, idx).trim().isEmpty())) {

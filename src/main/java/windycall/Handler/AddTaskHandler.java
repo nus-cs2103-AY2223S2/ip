@@ -8,7 +8,12 @@ import windycall.parser.Parser;
 
 import java.util.List;
 
-public abstract class AddTaskHandler extends OperationHandler {
+public class AddTaskHandler extends OperationHandler {
+
+    @Override
+    public String handle(String userCommand) {
+        return "";
+    }
 
     /**
      * Adds a new type of task to tasks ArrayList while possibly throwing
@@ -17,20 +22,23 @@ public abstract class AddTaskHandler extends OperationHandler {
      * @param message message input by users
      * @throws WindyCallException If user input command is invalid
      */
-    public static String addTask(String message, List<Task> tasks, Storage storage, Parser parser) throws WindyCallException {
+    public String addTask(String message, List<Task> tasks, Storage storage, Parser parser) throws WindyCallException {
         String[] parts = message.split(" ");
 
         Task newTask;
         OperationType addTaskType = parser.getAddTaskType(message);
         switch (addTaskType) {
         case TODO:
-            newTask = AddTodoHandler.handleAddTodo(message);
+            AddTodoHandler addTodoHandler = new AddTodoHandler();
+            newTask = addTodoHandler.handleAddTodo(message);
             break;
         case DEADLINE:
-            newTask = AddDeadlineHandler.handleAddDeadline(message);
+            AddDeadlineHandler addDeadlineHandler = new AddDeadlineHandler();
+            newTask = addDeadlineHandler.handleAddDeadline(message);
             break;
         case EVENT:
-            newTask = AddEventHandler.handleAddEvent(message);
+            AddEventHandler addEventHandler = new AddEventHandler();
+            newTask = addEventHandler.handleAddEvent(message);
             break;
         default:
             throw new WindyCallException("OOPS!!! I'm sorry, but I don't know what that means :-(");
