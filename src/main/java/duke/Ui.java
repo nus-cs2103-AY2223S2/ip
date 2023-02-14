@@ -6,10 +6,9 @@ import java.util.Scanner;
 import javafx.animation.Timeline;
 
 /**
- * Ui is a class to handle the intial greetings, final greetings, and all
+ * Handles the intial greetings, final greetings, and all
  * the deciphering of the user's input. Ui invokes the appropriate classes
  * when required
- *
  * @author Muhammad Reyaaz
  * @version %I% %G%
  * @since 11
@@ -18,7 +17,7 @@ class Ui {
     private Scanner scanner;
     private String description;
     private TaskList<Task> tasks;
-    //private final TaskScheduler recurList = new TaskScheduler(1, new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime)));;
+
     /**
      * Default constructor instantiates the scanner to read from the user
      * machine's keyboard
@@ -37,13 +36,13 @@ class Ui {
     }
 
     /**
-     * Display the custom football Alex Furguson character message
+     * Displays the custom football Alex Furguson character message
      */
     void showWelcome() {
         Parser.greet();
     }
     /**
-     * Handle the user input from the user's machine keyboard
+     * Handles the user input from the user's machine keyboard
      */
     void readCommand() {
         description = scanner.next();
@@ -58,7 +57,7 @@ class Ui {
     }
 
     /**
-     * Match the user's input to the relevant type of input that can be
+     * Matches the user's input to the relevant type of input that can be
      * processed by Duke, and call the relevant classes in Parser. Due to
      * immutability, set the list of task to the new list of tasks returned
      * by Parser
@@ -111,7 +110,6 @@ class Ui {
             } else {
                 Task newTask = new Task(description + scanner.nextLine());
                 this.tasks = tasks.add(newTask);
-                //return this.tasks;
             }
         } catch (DukeUnknownException e) {
             System.out.println(Parser.ILLEGAL_COMMAND);
