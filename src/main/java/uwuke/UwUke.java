@@ -29,13 +29,14 @@ public class UwUke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Stage stage;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
-        initialiseGuiElements();
+        initialiseGuiElements(stage);
         configureGuiElements(stage);
         initialiseHelperClasses();
         stage.setScene(scene);
@@ -49,7 +50,7 @@ public class UwUke extends Application {
         inititialiseModels();
     }
 
-    private void initialiseGuiElements() {
+    private void initialiseGuiElements(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -59,6 +60,7 @@ public class UwUke extends Application {
         scene = new Scene(mainLayout);
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         mainLayout.setPrefSize(400.0, 600.0);
+        this.stage = stage;
     }
 
     private void configureGuiElements(Stage stage) {
@@ -129,7 +131,10 @@ public class UwUke extends Application {
     }
 
     private static void inititialiseModels() {
-        Printer.uwu();
+        loadTaskFromStorage();
+    }
+
+    private static void loadTaskFromStorage() {
         tasks = new TaskList(CAPACITY);
         try {
             tasks = Storage.readSavedTasks();
@@ -144,7 +149,7 @@ public class UwUke extends Application {
      * Will identify command based on it's type, raw input string can be passed in directly.
      * @param input command string
      */
-    private static void performCommand(String input) throws DukeException {
+    private void performCommand(String input) throws DukeException {
         switch (Command.matchCommand(input)) {
         case LIST:
             Printer.printTasks(tasks.getList());
@@ -172,6 +177,7 @@ public class UwUke extends Application {
             break;
         case BYE:
             saveTask();
+            stage.close();
             break;
         default:
             Printer.printWithDecorations(Advisor.adviseUser(input));
@@ -199,7 +205,7 @@ public class UwUke extends Application {
         }
     }
 
-    private static void run(String input) {
+    private void run(String input) {
         try {
             handleIllegalCharacter(input);
             performCommand(input);
