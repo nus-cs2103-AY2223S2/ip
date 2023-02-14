@@ -27,11 +27,10 @@ can be done in mass by referencing the task id in shown in the list.
 
 
 ### Searching for Tasks
-To quicky find tasks, Duke has a `find` feature that allows you to quickly bring up tasks. 
+To quickly find tasks, Duke has a `find` feature that allows you to quickly bring up tasks. 
 Just give Duke any part of the description of your tasks. 
 
 ## Usage
-____
 
 ### `todo` - Add Todos
 *  `todo [description]`
@@ -44,6 +43,7 @@ ____
 * Usage: `deadline [description] /by [yyyy-MM-dd HHmm]`
 
 This adds a task of type "deadline" together with the date-time provided. 
+
 ___
 
 ### `event ` - Add Events
