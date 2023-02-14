@@ -38,8 +38,9 @@ public class Ui {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
-        String greeting = "Hey there buddy! I'm Duke. Your Personal Task Assistant!\n"
-                + "What can I do for you today?\n";
+
+        String greeting = "Hey there, DUKE MK-II here!\n"
+                + "Use 'help' to get started.\n";
         Label greetingLabel = new Label(greeting);
 
         AnchorPane mainLayout = new AnchorPane();
@@ -86,6 +87,8 @@ public class Ui {
 
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         scene = new Scene(mainLayout);
+        String css = this.getClass().getResource("/stylesheet/application.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }

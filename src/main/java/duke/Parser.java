@@ -42,7 +42,7 @@ public class Parser {
             if (isHelpCommand(userInput)) {
                 resultString = processHelpCommand();
             } else if (isByeCommand(userInput)) {
-                resultString = "Bye. Hope to see you again soon!\n";
+                resultString = "Thanks for using DUKE MK-II. See you soon!\n";
                 stage.close();
             } else if (isListCommand(userInput)) {
                 resultString = processListCommand();
@@ -61,7 +61,7 @@ public class Parser {
             } else if (isFindCommand(userInput)) {
                 resultString = processFindCommand(userInput);
             } else {
-                throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                throw new DukeException("Beep boop. Invalid Command!\n");
             }
         } catch (DukeException e) {
             return e.toString();
@@ -121,7 +121,7 @@ public class Parser {
 
     private String processHelpCommand() {
         String header = "Duke Command Formats:\n";
-        String todoCommandFormat = "1) Add a todo task: add <task description> \n";
+        String todoCommandFormat = "1) Add a todo task: todo <task description> \n";
         String listCommandFormat = "2) List all tasks: list \n";
         String markCommandFormat = "3) Mark a task as completed: mark <task number> \n";
         String unmarkCommandFormat = "4) Unmark a task to incompleted: unmark <task number> \n";
@@ -159,18 +159,18 @@ public class Parser {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
-            throw new DukeException(" OOPS!!! Please supply a task number you wish to mark as completed.\n");
+            throw new DukeException(" Beep boop. Please supply a task number you wish to mark as completed.\n");
         }
         try {
             int numToMark = Integer.parseInt(userInput.split(" ")[1]);
             if (numToMark == 0 || (numToMark > TaskList.getUserTasks().size())) {
-                throw new DukeException(" OOPS!!! Invalid mark selection.\n");
+                throw new DukeException(" Beep boop. Invalid mark selection.\n");
             }
             TaskList.getUserTasks().get(numToMark - 1).setIsDone(true);
             resultString = "Nice! I've marked this task as done:\n"
                     + TaskList.getUserTasks().get(numToMark - 1) + "\n";
         } catch (NumberFormatException nfe) {
-            throw new DukeException(" OOPS!!! Please supply a valid task number you wish to mark as completed.\n");
+            throw new DukeException(" Beep boop. Please supply a valid task number you wish to mark as completed.\n");
         }
         Storage.saveTasksToFile(TaskList.getUserTasks());
         return resultString;
@@ -180,18 +180,18 @@ public class Parser {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
-            throw new DukeException(" OOPS!!! Please supply a task number you wish to mark as incomplete.\n");
+            throw new DukeException(" Beep boop. Please supply a task number you wish to mark as incomplete.\n");
         }
         try {
             int numToUnmark = Integer.parseInt(userInput.split(" ")[1]);
             if (numToUnmark == 0 || (numToUnmark > TaskList.getUserTasks().size())) {
-                throw new DukeException(" OOPS!!! Invalid unmark selection.\n");
+                throw new DukeException(" Beep boop. Invalid unmark selection.\n");
             }
             TaskList.getUserTasks().get(numToUnmark - 1).setIsDone(false);
             resultString = "OK, I've marked this task as not done yet:\n"
                     + TaskList.getUserTasks().get(numToUnmark - 1) + "\n";
         } catch (NumberFormatException nfe) {
-            throw new DukeException(" OOPS!!! Please supply a valid task number you wish to mark as incomplete.\n");
+            throw new DukeException(" Beep boop. Please supply a valid task number you wish to mark as incomplete.\n");
         }
         Storage.saveTasksToFile(TaskList.getUserTasks());
         return resultString;
@@ -201,12 +201,12 @@ public class Parser {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
-            throw new DukeException(" OOPS!!! Please supply a task number you wish to delete.\n");
+            throw new DukeException(" Beep boop. Please supply a task number you wish to delete.\n");
         }
         try {
             int numToDelete = Integer.parseInt(userInput.split(" ")[1]);
             if (numToDelete == 0 || (numToDelete > TaskList.getUserTasks().size())) {
-                throw new DukeException(" OOPS!!! Invalid delete selection.\n");
+                throw new DukeException(" Beep boop. Invalid delete selection.\n");
             }
             resultString = "Noted, I've removed this task: \n"
                     + TaskList.getUserTasks().get(numToDelete - 1) + "\n";
@@ -214,7 +214,7 @@ public class Parser {
             resultString += "Now you have " + TaskList.getUserTasks().size() + " tasks in the list.\n";
         } catch (NumberFormatException nfe) {
 
-            throw new DukeException( " OOPS!!! Please supply a valid task number you wish to delete.\n");
+            throw new DukeException( " Beep boop. Please supply a valid task number you wish to delete.\n");
         }
         Storage.saveTasksToFile(TaskList.getUserTasks());
         return resultString;
@@ -225,7 +225,7 @@ public class Parser {
         int indexOfFirstSpace = userInput.indexOf(" ");
         String taskDescription = userInput.substring(indexOfFirstSpace + 1);
         if (indexOfFirstSpace == -1 || taskDescription.isBlank()) {
-            throw new DukeException(" OOPS!!! The description of a todo cannot be empty.\n");
+            throw new DukeException(" Beep boop. The description of a todo cannot be empty.\n");
         }
         Todo newTodo = new Todo(taskDescription);
         TaskList.getUserTasks().add(newTodo);
@@ -241,26 +241,26 @@ public class Parser {
         int indexOfBy = userInput.indexOf("/by");
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || indexOfBy == -1) {
-            throw new DukeException(" OOPS!!! Please include /by followed by the actual deadline.\n");
+            throw new DukeException(" Beep boop. Please include /by followed by the actual deadline.\n");
         }
         if (indexOfBy + 4 >= userInput.length()) {
-            throw new DukeException(" OOPS!!! The deadline specified after /by cannot be empty.\n");
+            throw new DukeException(" Beep boop. The deadline specified after /by cannot be empty.\n");
         }
         String[] s = userInput.substring(indexOfBy + 4).split(" ");
         if (s.length != 2) {
-            throw new DukeException(" OOPS!!! The task deadline must be defined as '/by YYYY-MM-DD HH:MM' .\n");
+            throw new DukeException(" Beep boop. The task deadline must be defined as '/by YYYY-MM-DD HH:MM' .\n");
         }
         String deadlineDate = s[0];
         String deadlineTime = s[1];
         if (indexOfFirstSpace + 1 > indexOfBy - 1) {
-            throw new DukeException(" OOPS!!! The task description for a deadline cannot be empty.\n");
+            throw new DukeException(" Beep boop. The task description for a deadline cannot be empty.\n");
         }
         try {
             LocalDate parsedDate = LocalDate.parse(deadlineDate);
             Date parsedTime = new SimpleDateFormat("hh:mm").parse(deadlineTime);
             String taskDescription = userInput.substring(indexOfFirstSpace + 1, indexOfBy - 1);
             if (taskDescription.isBlank()) {
-                throw new DukeException(" OOPS!!! The task description for a deadline cannot be empty.\n");
+                throw new DukeException(" Beep boop. The task description for a deadline cannot be empty.\n");
             }
             Deadline newDeadline = new Deadline(taskDescription, parsedDate, parsedTime, false);
             TaskList.getUserTasks().add(newDeadline);
@@ -269,7 +269,7 @@ public class Parser {
                     + "Now you have " + TaskList.getUserTasks().size() + " tasks in the list.\n";
             Storage.saveTasksToFile(TaskList.getUserTasks());
         } catch (DateTimeParseException | ParseException e) {
-            throw new DukeException(" OOPS!!! The task deadline must be defined as '/by YYYY-MM-DD HH:MM' .\n");
+            throw new DukeException(" Beep boop. The task deadline must be defined as '/by YYYY-MM-DD HH:MM' .\n");
         }
         return resultString;
     }
@@ -280,10 +280,10 @@ public class Parser {
         int indexOfTo = userInput.indexOf("/to");
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || indexOfFrom == -1 || indexOfTo == -1) {
-            throw new DukeException(" OOPS!!! The event command must contain both /from and /to\n");
+            throw new DukeException(" Beep boop. The event command must contain both /from and /to\n");
         }
         if (indexOfFrom > indexOfTo) {
-            throw new DukeException(" OOPS!!! /from cannot be after /to\n");
+            throw new DukeException(" Beep boop. /from cannot be after /to\n");
         }
         String eventStart = userInput.substring(indexOfFrom + 6, indexOfTo - 1);
         String eventEnd = userInput.substring(indexOfTo + 4);
@@ -291,7 +291,7 @@ public class Parser {
         String[] eventEndSplitStr = eventEnd.split(" ");
 
         if (eventStartSplitStr.length != 2 || eventEndSplitStr.length != 2) {
-            throw new DukeException(" OOPS!!! The event start and the event end must defined " +
+            throw new DukeException(" Beep boop. The event start and the event end must defined " +
                     "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n");
         }
         String eventStartDate = eventStartSplitStr[0];
@@ -300,7 +300,7 @@ public class Parser {
         String eventEndTime = eventEndSplitStr[1];
 
         if (indexOfFirstSpace + 1 > indexOfFrom - 1) {
-            throw new DukeException(" OOPS!!! The event description cannot be empty!\n");
+            throw new DukeException(" Beep boop. The event description cannot be empty!\n");
         }
         try {
             LocalDate parsedStartDate = LocalDate.parse(eventStartDate);
@@ -309,7 +309,7 @@ public class Parser {
             Date parsedEndTime = new SimpleDateFormat("hh:mm").parse(eventEndTime);
             String taskDescription = userInput.substring(indexOfFirstSpace + 1, indexOfFrom - 1);
             if (taskDescription.isBlank()) {
-                throw new DukeException(" OOPS!!! The Event description cannot be empty!\n");
+                throw new DukeException(" Beep boop. The Event description cannot be empty!\n");
             }
             Event newEvent = new Event(taskDescription, parsedStartDate, parsedStartTime,
                     parsedEndDate, parsedEndTime, false);
@@ -319,7 +319,7 @@ public class Parser {
                     + "Now you have " + TaskList.getUserTasks().size() + " tasks in the list.\n";
             Storage.saveTasksToFile(TaskList.getUserTasks());
         } catch (DateTimeParseException | ParseException e) {
-            throw new DukeException(" OOPS!!! The event start and the event end must defined " +
+            throw new DukeException(" Beep boop. The event start and the event end must defined " +
                     "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n");
         }
         return resultString;
@@ -330,7 +330,7 @@ public class Parser {
         int indexOfFirstSpace = userInput.indexOf(" ");
         String toFind = userInput.substring(indexOfFirstSpace + 1);
         if (indexOfFirstSpace == -1 || toFind.isBlank()) {
-            throw new DukeException(" OOPS!!! Invalid find, please supply a sequence of characters to find.\n");
+            throw new DukeException(" Beep boop. Invalid find, please supply a sequence of characters to find.\n");
         }
         ArrayList<Task> matches = new ArrayList<>();
         for (int i = 0; i < TaskList.getUserTasks().size(); i++) {
