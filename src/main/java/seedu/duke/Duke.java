@@ -373,7 +373,11 @@ public class Duke {
 
         if (!isDisplayList) {
             isDisplayList = true;
-            ui.noListError(tasks);
+            if (!isFind) {
+                ui.noListError(tasks);
+            } else {
+                ui.noListError(tempTasks);
+            }
         }
         if (isFind) {
             message += deleteInFindMessage(userParse, ui);
@@ -381,6 +385,7 @@ public class Duke {
             message += ui.deleteMessage(tasks, tasks.delete(userParse));
         }
         storage.write(tasks);
+        isDisplayList = false;
         return message;
     }
 
