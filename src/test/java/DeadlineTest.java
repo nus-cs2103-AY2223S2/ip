@@ -12,6 +12,6 @@ public class DeadlineTest {
     public void deadline_creationCompareWithStatus_isEqual() throws DukeException {
 
         String[] data = new String[]{"D", " ", "Dumb Dumb", "2000-10-10T10:10"};
-        assertEquals("[D][ ] Dumb Dumb (by: Tuesday, 10 October 2000 [10:10 AM])", new Deadline(data).status());
+        assertEquals("[D][ ] Dumb Dumb (by: Tuesday, 10 October 2000 [10:10 AM])", new Deadline(data).getStatus());
     }
 }

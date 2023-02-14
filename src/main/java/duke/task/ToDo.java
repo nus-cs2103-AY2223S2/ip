@@ -34,7 +34,7 @@ public class ToDo extends Task {
      * Returns the status of the ToDo task.
      */
     @Override
-    public String status() {
+    public String getStatus() {
         String status = this.getCompleted() ? "[X] " : "[ ] ";
         return "[" + TYPE_TO_STRING + "]" + status + " " + this.getDetails();
     }
@@ -43,7 +43,7 @@ public class ToDo extends Task {
      * @return Returns all relevant information of the task in an ArrayList of Strings to be saved into the Database.
      */
     @Override
-    public ArrayList<String> data() {
+    public ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>();
         data.add(TYPE_TO_STRING);
         data.add(this.getCompleted() ? "X" : " ");

@@ -45,7 +45,7 @@ public class Deadline extends Task {
      * @return the status of the Deadline task with its time formatted.
      */
     @Override
-    public String status() {
+    public String getStatus() {
 
         String status = this.isCompleted() ? "[X] " : "[ ] ";
         return "[" + TYPE_TO_STRING + "]" + status + this.getDetails() + " (by: "
@@ -57,7 +57,7 @@ public class Deadline extends Task {
      * @return all relevant information of the Deadline task in an ArrayList of Strings to be saved into the Database.
      */
     @Override
-    public ArrayList<String> data() {
+    public ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>();
         data.add(TYPE_TO_STRING);
         data.add(this.isCompleted() ? "X" : " ");

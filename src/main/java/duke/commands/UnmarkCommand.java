@@ -33,10 +33,10 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws TaskNumberNotFoundException {
         Task task = taskList.getTask(this.taskNumber);
-        task.incomplete();
+        task.setIncomplete();
         ui.response(FRAME
-                + "     OK, I've marked this task as not done yet:\n"
-                + "       [ ] " + task.getDetails() + "\n"
+                + "OK, I've marked this task as not done yet:\n"
+                + "[ ] " + task.getDetails() + "\n"
                 + FRAME);
     }
 }
