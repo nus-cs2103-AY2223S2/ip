@@ -105,7 +105,7 @@ Examples:
 - `unmark 1` marks the 1st task in the list as uncompleted.
 - `unmark 3` marks the 3rd task in the list as uncompleted.
 
-### Listing all tasks: `list`
+### Listing all added tasks: `list`
 
 Shows a list of all tasks added.
 
