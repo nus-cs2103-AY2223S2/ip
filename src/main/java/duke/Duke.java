@@ -256,10 +256,10 @@ public class Duke {
     }
 
     /**
-     * Gets Duke's response to a user input.
+     * Gets Duke's response to a user input. Returns 'null' if app is to be closed.
      * 
      * @param input User input.
-     * @return Duke's response.
+     * @return Duke's response, or 'null' if the app is to be closed.
      */
     public String getResponse(String input) {
         if (input.isEmpty()) {
@@ -299,8 +299,7 @@ public class Duke {
             case "quit":
             case "exit":
             case "bye":
-                response = "Bye. Hope to see you again soon!";
-                break;
+                return null;
             default:
                 throw new DukeInvalidCommandException();
             }
