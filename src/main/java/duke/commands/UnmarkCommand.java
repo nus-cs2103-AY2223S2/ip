@@ -8,7 +8,7 @@ import duke.TaskList;
  * Command to unmark a task
  */
 public class UnmarkCommand extends Command {
-    public static final String COMMAND_FORMAT = "unmark";
+    public static final String COMMAND_WORD = "unmark";
 
     /**
      * {@inheritDoc}

@@ -22,7 +22,7 @@ public class Duke {
 
     public String executeCommand(String input) throws DukeException {
         Command command = parser.parse(input);
-        if (command == null) {
+        if (command == Parser.EXIT_COMMAND) {
             return TERMINATION_INDICATION;
         }
         String result = command.execute(tasks);
