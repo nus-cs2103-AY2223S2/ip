@@ -10,59 +10,61 @@ public class Parser {
      * Parses the user's input and executes the corresponding actions
      * @param userInput user's input
      * @param lst user's task list
+     * @return String response from parse
      * @throws DukeException
      */
-    public static void parse(String userInput, TaskList lst) throws DukeException {
+    public static String parse(String userInput, TaskList lst) throws DukeException {
+
 
         String[] inputArr = userInput.split(" ", 2);
 
         if (userInput.equals("bye")) {
 
-            ui.exit();
+            return "bye";
 
         } else if (userInput.equals("list")) {
 
-            lst.printTaskList();
+            return lst.getTaskList();
 
         } else if (userInput.startsWith("mark")) {
 
             String details = inputArr[1];
             int taskNum = Integer.parseInt(details);
-            lst.markTask(taskNum);
+            return lst.markTask(taskNum);
 
         } else if (userInput.startsWith("unmark")) {
 
             String details = inputArr[1];
             int taskNum = Integer.parseInt(details);
-            lst.unmarkTask(taskNum);
+            return lst.unmarkTask(taskNum);
 
         } else if (userInput.startsWith("todo")) {
 
             String details = inputArr[1];
-            lst.addTask(details, "todo");
+            return lst.addTask(details, "todo");
 
         } else if (userInput.startsWith("deadline")) {
 
             String details = inputArr[1];
-            lst.addTask(details, "deadline");
+            return lst.addTask(details, "deadline");
 
         } else if (userInput.startsWith("event")) {
 
             String details = inputArr[1];
-            lst.addTask(details, "event");
+            return lst.addTask(details, "event");
 
         } else if (userInput.startsWith("delete")) {
 
             String details = inputArr[1];
             int taskNum = Integer.parseInt(details);
-            lst.deleteTask(taskNum);
+            return lst.deleteTask(taskNum);
 
         } else if (userInput.startsWith("find")) {
             try {
                 String keyword = inputArr[1];
-                lst.findTask(keyword);
+                return lst.findTask(keyword);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please enter the correct keyword");
+                return "Please enter the correct keyword";
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

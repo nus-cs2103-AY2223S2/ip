@@ -33,7 +33,8 @@ public class TaskList {
      * @param details details of the task
      * @param taskType type of task to be added (todo, deadline, event)
      */
-    public void addTask(String details, String taskType) {
+    public String addTask(String details, String taskType) {
+        String response = "";
         if (taskType.equals("todo")) {
             try {
                 if (details.equals("")) {
@@ -41,10 +42,10 @@ public class TaskList {
                 }
                 Todo newTodo = new Todo(details);
                 tasks.add(newTodo);
-                System.out.println("Got it. I've added this task:" + '\n' + newTodo + '\n' + "Now you have "
-                        + tasks.size() + " tasks in the list");
+                response = "Got it. I've added this task:" + '\n' + newTodo + '\n' + "Now you have "
+                        + tasks.size() + " tasks in the list";
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                response = e.getMessage();
             }
         } else if (taskType.equals("deadline")) {
             try {
@@ -53,10 +54,10 @@ public class TaskList {
                 LocalDate date = LocalDate.parse(detailsAndDate[1]);
                 Deadline newDeadline = new Deadline(description, date);
                 tasks.add(newDeadline);
-                System.out.println("Got it. I've added this task:" + '\n' + newDeadline + '\n' + "Now you have "
-                        + tasks.size() + " tasks in the list");
+                response = "Got it. I've added this task:" + '\n' + newDeadline + '\n' + "Now you have "
+                        + tasks.size() + " tasks in the list";
             } catch (DateTimeParseException e) {
-                System.out.println("Please input date in YYYY-MM-DD format!");
+                response = "Please input date in YYYY-MM-DD format!";
             }
         } else if (taskType.equals("event")) {
             String[] detailsAndTime = details.split(" /from ");
@@ -66,9 +67,25 @@ public class TaskList {
             String From = Time[1];
             Event newEvent = new Event(description, To, From);
             tasks.add(newEvent);
-            System.out.println("Got it. I've added this task:" + '\n' + newEvent + '\n' + "Now you have "
-                    + tasks.size() + " tasks in the list");
+            response = "Got it. I've added this task:" + '\n' + newEvent + '\n' + "Now you have "
+                    + tasks.size() + " tasks in the list";
         }
+        return response;
+    }
+
+
+    /**
+     * Returns a string representation of the task list
+     * @return String string representation of the task list
+     */
+    public String getTaskList() {
+        String res = "";
+        for (int i = 0; i < tasks.size(); i ++) {
+            res += Integer.toString(i + 1) + ". ";
+            res += tasks.get(i).toString();
+            res += '\n';
+        }
+        return res;
     }
 
     /**
@@ -85,33 +102,33 @@ public class TaskList {
      * Marks a specific task as done
      * @param index index of task to be marked as done
      */
-    public void markTask(int index) {
+    public String markTask(int index) {
         Task currTask = tasks.get(index - 1);
         currTask.mark();
-        System.out.println("Nice! I've marked this task as done" + '\n' + currTask);
+        return "Nice! I've marked this task as done" + '\n' + currTask;
     }
 
     /**
      * Marks a specific task as not done
      * @param index index of task to be marked as not done
      */
-    public void unmarkTask(int index) {
+    public String unmarkTask(int index) {
         Task currTask = tasks.get(index - 1);
         currTask.unMark();
-        System.out.println("Nice! I've marked this task as not done yet" + '\n' + currTask);
+        return "Nice! I've marked this task as not done yet" + '\n' + currTask;
     }
 
     /**
      * Deletes a task from the task list
      * @param index index of task to be deleted
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task currTask = tasks.get(index - 1);
         tasks.remove(index - 1);
-        System.out.println("Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + tasks.size() + " tasks in the list");
+        return "Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + tasks.size() + " tasks in the list";
     }
 
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         ArrayList<Task> res = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
@@ -119,20 +136,6 @@ public class TaskList {
             }
         }
         TaskList result = new TaskList(res);
-        System.out.println("Here are the matching tasks in your list:\n" + result.tasksToStringFormat());
-    }
-
-    /**
-     * Returns a string representation of the task list
-     * @return String string representation of the task list
-     */
-    public String tasksToStringFormat() {
-        String res = "";
-        for (int i = 0; i < tasks.size(); i ++) {
-            res += Integer.toString(i + 1) + ". ";
-            res += tasks.get(i).toString();
-            res += '\n';
-        }
-        return res;
+        return "Here are the matching tasks in your list:\n" + result.getTaskList();
     }
 }

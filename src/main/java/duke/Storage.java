@@ -96,7 +96,7 @@ public class Storage {
             File f = new File(filePath);
             f.createNewFile();
             FileWriter fw = new FileWriter(filePath, false);
-            fw.write(tasks.tasksToStringFormat());
+            fw.write(tasks.getTaskList());
             fw.close();
         } catch (IOException e) {
             System.out.println("error writing into file");
