@@ -2,7 +2,7 @@
 BooBot is a **desktop application** that helps you to keep track of your tasks, saving time and
 ensuring that you are on track. Problems would be scared away with good task management provided by
 BooBot. While there is a Graphical User Interface (GUI), users would mostly interact with BooBot
-via text-commands.
+via text commands.
 
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -172,6 +172,7 @@ Remarks:
 Examples:
 
 - `on 2023-02-03` Displays all tasks that fall on _2023-02-03_.
+- `on 2023-02-03 14:00` Displays all tasks that fall on _2023-02-03_ (time stamp is ignored).
 -  `on 3rd February 2023` Displays an error message because the date is of incorrect format.
 <br/>
 <br/>
@@ -209,11 +210,11 @@ Remarks:
 Examples:
 
 - `reminder day` Displays all deadline tasks that are due a day later, and all event tasks that are
-  either upcoming in one day or whose duration span over the next day.
+  either upcoming in one day or whose durations span over the next day.
 - `reminder week` Displays all deadline tasks that are due within a week, and all event tasks that are
-  either upcoming within the week or whose duration span over the week.
+  either upcoming within the week or whose durations span over the week.
 - `reminder month` Displays all deadline tasks that are due within the month, and all event tasks that are
-  either upcoming within the month or whose duration span over the month.
+  either upcoming within the month or whose durations span over the month.
 - `reminder` Displays an error message because there is a missing duration.
 <br/>
 <br/>

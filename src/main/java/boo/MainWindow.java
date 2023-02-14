@@ -70,6 +70,8 @@ public class MainWindow extends AnchorPane {
         String response = boo.getResponse(input);
         //Exit the application
         if (input.equals("bye")) {
+            //Solution below adapted from
+            // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
             PauseTransition delayBeforeClosing = new PauseTransition(Duration.seconds(5));
             //Closes the stage after the specified duration
             delayBeforeClosing.setOnFinished(event -> stage.close());

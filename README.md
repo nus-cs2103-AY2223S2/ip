@@ -4,7 +4,7 @@
 BooBot helps you to keep track of your tasks, saving time and ensuring that you are on track. Problems would be scared away with good task management provided by BooBot.
 
 Main features of BooBot:
-- Text-based UI
+- Text-based GUI
 - Three types of tasks: _Todo_, _Deadline_ and _Event_
 - Add and delete tasks from task list.
 

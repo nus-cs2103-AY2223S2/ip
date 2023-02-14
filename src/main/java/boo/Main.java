@@ -35,6 +35,7 @@ public class Main extends Application {
             stage.show();
 
             stage.setTitle(stageTitle);
+            //Solution below adapted from https://stackoverflow.com/questions/10121991/javafx-application-icon
             stage.getIcons().add(windowImage);
             stage.setResizable(false);
             stage.setMinHeight(stageMinHeight);
