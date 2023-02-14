@@ -134,7 +134,7 @@ public class ListCommand extends Command {
      */
     private List<Task> filter(DukeRepo db, String filterString) throws DatabaseCloseException {
         return db.getAllTask().stream()
-            .filter(task -> task.toString().contains(filterString))
+            .filter(task -> task.toString().toLowerCase().contains(filterString.toLowerCase()))
             .collect(Collectors.toList());
     }
 
