@@ -3,10 +3,18 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
 
+    /**
+     * @param description the description of the task.
+     * @param from the start time of the event.
+     * @param to the end time of the event.
+     */
     public Event(String description, String from, String to) {
         super(description);
         String[] fromDateTime = from.split(" ");

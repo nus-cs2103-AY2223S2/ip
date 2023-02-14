@@ -5,6 +5,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Represents a duke.DukeCommand object that represents a command.
+ */
 public enum DukeCommand {
     BYE("bye"),
     LIST("list"),
