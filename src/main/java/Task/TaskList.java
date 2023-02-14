@@ -2,6 +2,8 @@ package duke;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -48,9 +50,16 @@ public class TaskList {
      * @param taskNum The number of the selected Task in the List.
      * @param isDone A boolean representing whether task has been completed.
      * @return Task The edited Task.
+     * @throws DukeException
      */
-    public Task markTask(int taskNum, boolean isDone) throws ArrayIndexOutOfBoundsException {
-        Task taskToMark = tasks.get(taskNum - 1);
+    public Task markTask(int taskNum, boolean isDone) throws DukeException {
+        Task taskToMark = null;
+        try {
+            taskToMark = tasks.get(taskNum - 1);
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException(Ui.outOfBoundSelectionResponse(this.getSize()));
+        }
+
         if (isDone) {
             taskToMark.mark();
         } else {
@@ -64,9 +73,17 @@ public class TaskList {
      *
      * @param taskNum The number of the selected Task in the List.
      * @return Task The deleted Task.
+     * @throws DukeException
      */
-    public Task deleteTask(int taskNum) {
-        Task deleteTask = tasks.remove(taskNum);
+    public Task deleteTask(int taskNum) throws DukeException {
+        Task deleteTask = null;
+
+        try {
+            deleteTask = tasks.remove(taskNum);
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException(Ui.outOfBoundSelectionResponse(this.getSize()));
+        }
+
         return deleteTask;
     }
 
@@ -116,14 +133,9 @@ public class TaskList {
      * @return TaskList The List containing all the related Tasks.
      */
     public TaskList findRelated(String word) {
-        TaskList lst = new TaskList(new ArrayList<>());
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task t = this.tasks.get(i);
-            if (t.isRelated(word)) {
-                lst.tasks.add(t);
-            }
-        }
-        return lst;
+        Stream<Task> filterTasks = this.tasks.stream().filter(s -> s.isRelated(word));
+        ArrayList<Task> lst = filterTasks.collect(Collectors.toCollection(ArrayList::new));
+        return new TaskList(lst);
     }
 
     /**
