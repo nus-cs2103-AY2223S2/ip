@@ -41,7 +41,21 @@ public class UwUke extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Initialise GUI elements
+        initialiseGuiElements();
+        configureGuiElements(stage);
+        initialiseHelperClasses();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void initialiseHelperClasses() {
+        Printer.setDialogContainer(dialogContainer);
+        DialogBox.setDukeImage(duke);
+        DialogBox.setUserImage(user);
+        inititialiseModels();
+    }
+
+    private void initialiseGuiElements() {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -51,23 +65,15 @@ public class UwUke extends Application {
         scene = new Scene(mainLayout);
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         mainLayout.setPrefSize(400.0, 600.0);
-        
-        // Configure GUI elements
+    }
+
+    private void configureGuiElements(Stage stage) {
         configureStage(stage);
         configureScrollPane();
         configureAnchorPane();
         configureDialogContainer();
         configureUserInputTextField();
         configureSendButton();
-        
-        // Initialise Helper classes
-        Printer.setDialogContainer(dialogContainer);
-        DialogBox.setDukeImage(duke);
-        DialogBox.setUserImage(user);
-        inititialiseModels();
-
-        stage.setScene(scene);
-        stage.show();
     }
 
     private void handleUserInput() {
