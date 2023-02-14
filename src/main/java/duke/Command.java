@@ -143,13 +143,16 @@ public class Command {
         }
     }
 
-    private String deleteTask(String[] userInput) throws DukeTaskArgumentException, DukeMissingArgumentException, DukeInvalidArgumentsException {
-        try{
+    private String deleteTask(String[] userInput) throws DukeTaskArgumentException,
+            DukeMissingArgumentException, DukeInvalidArgumentsException {
+        try {
             int taskIndex = Integer.parseInt(userInput[1]);
             if(taskIndex > this.list.getListLength()) {
                 throw new DukeTaskArgumentException();
             }
-            String deleteResponse = this.ui.taskDeleteDisplay(this.list, taskIndex) + '\n' + this.ui.displayTasks(this.list.getListLength() - 1);
+
+            String deleteResponse = this.ui.taskDeleteDisplay(this.list, taskIndex) + '\n'
+                    + this.ui.displayTasks(this.list.getListLength() - 1);
             this.list.deleteTask(taskIndex);
             return deleteResponse;
         } catch(IndexOutOfBoundsException e) {
@@ -165,12 +168,14 @@ public class Command {
         LocalDate date = LocalDate.parse(userInput[1], formatter);
         int counter = 1;
         String response = "";
+
         for(int i = 0; i < this.list.getListLength(); i++) {
             String taskType = this.list.getTask(i).getTaskType();
             LocalDate taskDate = this.list.getTask(i).getDate().toLocalDate();
-            if(taskType.equals("D") || taskType.equals(("E"))){
+            if(taskType.equals("D") || taskType.equals(("E"))) {
                 if(date.equals(taskDate)) {
-                    response += String.format("\t%d. %s", counter, this.list.getTask(i).toString()) + '\n';
+                    response += String.format("\t%d. %s", counter,
+                            this.list.getTask(i).toString()) + '\n';
                 }
             }
         }
@@ -188,7 +193,7 @@ public class Command {
         TaskList foundTasks = new TaskList(filteredTasks);
         for(int i = 1; i <= this.list.getListLength(); i++) {
             Task task = this.list.getTask(i);
-            if(task.toString().contains(keyword)){
+            if(task.toString().contains(keyword)) {
                 foundTasks.addTask(task);
             }
         }

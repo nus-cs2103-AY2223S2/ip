@@ -41,7 +41,7 @@ public class Storage {
      *
      * @return the ArrayList<Task> storing the stored tasks
      */
-    public ArrayList<Task> loadData()  {
+    public ArrayList<Task> loadData() {
         ArrayList<Task> list = new ArrayList<>();
         File data = new File(this.filePath);
         try {
@@ -57,7 +57,6 @@ public class Storage {
         } catch (DukeException e) {
             System.out.println(e);
         }
-
         return list;
     }
 
@@ -69,7 +68,7 @@ public class Storage {
         File newFile = new File(this.filePath);
         assert dir != null;
         dir.mkdir();
-        try{
+        try {
             newFile.createNewFile();
         } catch (IOException e) {
             System.out.println(e);
@@ -91,12 +90,12 @@ public class Storage {
 
         Task loadTask = null;
 
-        if(taskType.equals("T")) {
+        if (taskType.equals("T")) {
             loadTask = new Todo(taskInfo);
         } else if (taskType.equals("D")) {
             LocalDateTime taskTime = LocalDateTime.parse(taskData[3].trim(), formatter);
             loadTask = new Deadline(taskInfo, taskTime);
-        } else if (taskType.equals("E")){
+        } else if (taskType.equals("E")) {
             LocalDateTime taskFrom = LocalDateTime.parse(taskData[3].trim(), formatter);
             LocalDateTime taskTo = LocalDateTime.parse(taskData[4].trim(), formatter);
             loadTask = new Event(taskInfo, taskFrom, taskTo);
@@ -105,7 +104,7 @@ public class Storage {
         }
 
         assert loadTask != null;
-        if(taskStatus.equals("1")){
+        if (taskStatus.equals("1")) {
             loadTask.changeStatus();
         }
         return loadTask;
@@ -117,10 +116,10 @@ public class Storage {
      * @param list the list generated in current session
      * @throws IOException
      */
-    public void storeData(TaskList list) throws IOException{
+    public void storeData(TaskList list) throws IOException {
         FileWriter writer = new FileWriter(this.filePath, false);
         BufferedWriter buffer = new BufferedWriter(writer);
-        for(int i = 1; i <= list.getListLength(); i++) {
+        for (int i = 1; i <= list.getListLength(); i++) {
             buffer.write(list.getTask(i).writeFile());
             buffer.newLine();
         }

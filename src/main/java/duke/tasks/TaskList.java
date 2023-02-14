@@ -81,10 +81,11 @@ public class TaskList {
      * @throws DukeMissingArgumentException
      * @throws DukeTaskArgumentException
      */
-    public String markComplete(String[] userInput, TaskList tasks) throws DukeInvalidArgumentsException, DukeMissingArgumentException, DukeTaskArgumentException {
+    public String markComplete(String[] userInput, TaskList tasks) throws DukeInvalidArgumentsException,
+            DukeMissingArgumentException, DukeTaskArgumentException {
         try {
             int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > tasks.getListLength()) {
+            if (taskIndex > tasks.getListLength()) {
                 throw new DukeTaskArgumentException();
             }
             if (tasks.getTask(taskIndex).getStatus()) {
@@ -94,7 +95,7 @@ public class TaskList {
             Task taskToBeMarked = tasks.getTask(taskIndex);
             taskToBeMarked.changeStatus();
             return this.ui.markTaskDisplay(taskToBeMarked);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentsException();
         } catch (IndexOutOfBoundsException e) {
             String task = "mark";
@@ -112,7 +113,8 @@ public class TaskList {
      * @throws DukeInvalidArgumentsException
      * @throws DukeTaskArgumentException
      */
-    public String markIncomplete(String[] userInput, TaskList tasks) throws DukeMissingArgumentException, DukeInvalidArgumentsException, DukeTaskArgumentException{
+    public String markIncomplete(String[] userInput, TaskList tasks) throws DukeMissingArgumentException,
+            DukeInvalidArgumentsException, DukeTaskArgumentException {
         try {
             int taskIndex = Integer.parseInt(userInput[1]);
             if(taskIndex > tasks.getListLength()) {
@@ -124,14 +126,11 @@ public class TaskList {
             Task taskToBeUnmarked = tasks.getTask(taskIndex);
             taskToBeUnmarked.changeStatus();
             return this.ui.unmarkTaskDisplay(taskToBeUnmarked);
-        }  catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             String task = "unmark";
             throw new DukeMissingArgumentException(task);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentsException();
         }
     }
-
-
-
 }
