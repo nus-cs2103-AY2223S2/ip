@@ -61,25 +61,19 @@ public class Parser {
      */
     public Pair<Integer, String> getMarkIndex(String[] parts) {
         if (parts.length == 1) {
-//            System.out.println("     You should input a number to mark/unmark a task");
-//            return -1;
             return new Pair<>(-1, "You should input a number to mark/unmark a task");
-
         }
         int num = -1;
         try {
             num = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
-//            System.out.println("☹ OOPS!!! You should input a number");
-            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
+            return new Pair<>(-1, "OOPS!!! You should input a number");
         }
-        return new Pair<>(num, "Success");
+        return new Pair<>(num, num != -1 ? "Success" : "Sorry, your index is out of range");
     }
 
     public Pair<Integer, String> getUnmarkIndex(String[] parts) {
         if (parts.length == 1) {
-//            System.out.println("     You should input a number to mark/unmark a task");
-//            return -1;
             return new Pair<>(-1, "You should input a number to mark/unmark a task");
 
         }
@@ -87,16 +81,13 @@ public class Parser {
         try {
             num = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
-//            System.out.println("☹ OOPS!!! You should input a number");
-            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
+            return new Pair<>(-1, "OOPS!!! You should input a number");
         }
-        return new Pair<>(num, "Success");
+        return new Pair<>(num, num != -1 ? "Success" : "Sorry, your index is out of range");
     }
 
     public Pair<Integer, String> getDeleteIndex(String[] parts) {
         if (parts.length == 1) {
-//            System.out.println("     You should input a number to mark/unmark a task");
-//            return -1;
             return new Pair<>(-1, "You should input a number to delete a task");
 
         }
@@ -104,10 +95,9 @@ public class Parser {
         try {
             num = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
-//            System.out.println("☹ OOPS!!! You should input a number");
-            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
+            return new Pair<>(-1, "OOPS!!! You should input a number");
         }
-        return new Pair<>(num, "Success");
+        return new Pair<>(num, num != -1 ? "Success" : "Sorry, your index is out of range");
     }
 
     public Pair<Integer, String> getTagIndex(String[] parts) {
@@ -118,10 +108,10 @@ public class Parser {
         try {
             num = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
-            return new Pair<>(-1, "☹ OOPS!!! You should input a number");
+            return new Pair<>(-1, "OOPS!!! You should input a number");
         }
         if (parts.length > 2) {
-            return new Pair<>(num, parts[2]);
+            return new Pair<>(num, num != -1 ? parts[2] : "Sorry, your index is out of range");
         } else {
             return new Pair<>(-1, "Please input a string you want to tag this task");
         }
@@ -140,7 +130,7 @@ public class Parser {
             return OperationType.EVENT;
 //            break;
         default:
-            throw new WindyCallException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new WindyCallException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 //          break;
         }
     }

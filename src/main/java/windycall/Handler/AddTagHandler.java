@@ -26,7 +26,7 @@ public class AddTagHandler extends OperationHandler {
             returnedMessage += tasks.get(num - 1);
             storage.handleTaskChange(tasks);
             return returnedMessage;
-        } else if (num > tasks.size()) {
+        } else if (num > tasks.size() || (num < 1 && num != -1)) {
             return "Sorry, your index is out of range";
         } else {
             return tag;

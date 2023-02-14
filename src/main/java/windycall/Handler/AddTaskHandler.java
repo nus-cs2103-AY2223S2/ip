@@ -33,7 +33,7 @@ public abstract class AddTaskHandler extends OperationHandler {
             newTask = AddEventHandler.handleAddEvent(message);
             break;
         default:
-            throw new WindyCallException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new WindyCallException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 //            break;
         }
         String returnedMessage = "Got it. I've added this task:\n";
