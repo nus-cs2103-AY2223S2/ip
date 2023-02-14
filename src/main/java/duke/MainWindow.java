@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
     Background background = new Background(backgroundImage);
 
     /**
-     * Initialize is ran at the start of the javafx lifecycle.
+     * Runs at the start of the javafx lifecycle.
      * The greetings message is done at initialize so that once the user launches the chatbot, it will always be shown.
      */
     @FXML
@@ -62,10 +62,16 @@ public class MainWindow extends AnchorPane {
         duke = new Duke();
     }
 
+    /**
+     * Sets the vertical value of the scroll pane to the height of the dialog container.
+     */
     void setScroll() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initializes and displays the welcome message of Duke in the dialog container.
+     */
     void displayWelcome() {
         ByteArrayOutputStream newPrintStream = setNewPrintStream();
         PrintStream oldPrintStream = System.out;
@@ -75,6 +81,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
     }
 
+    /**
+     * Redirects the standard output stream to a ByteArrayOutputStream for storing the message.
+     * @return The ByteArrayOutputStream instance.
+     */
     ByteArrayOutputStream setNewPrintStream() {
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
@@ -82,23 +92,33 @@ public class MainWindow extends AnchorPane {
         return storeString;
     }
 
+    /**
+     * Resets the standard output stream back to its original value.
+     * @param oldPrintStream The original PrintStream instance.
+     */
     void resetPrintStream(PrintStream oldPrintStream) {
         System.out.flush();
         System.setOut(oldPrintStream);
     }
 
+    /**
+     * Initializes the user interface instance and shows the welcome message.
+     */
     void initUiGreet() {
         Ui ui = new Ui("Greetings");
         ui.showWelcome();
     }
 
+    /**
+     * Sets the Duke instance to be used for generating responses
+     *  @param d The Duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input by creating two dialog boxes, one for the user input and one for Duke's response.
      */
     @FXML
     private void handleUserInput() {

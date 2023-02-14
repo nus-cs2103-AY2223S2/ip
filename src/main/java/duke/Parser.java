@@ -8,10 +8,9 @@ import java.util.stream.IntStream;
 import javafx.animation.Timeline;
 
 /**
- * The Parser class stores all responses that Duke will display on the
+ * Stores all responses that Duke will display on the
  * user's machine. The Parser class also processes user commands such as
  * mark done, mark undone, add and delete tasks from the list of tasks.
- *
  * @author Muhammad Reyaaz
  * @version %I% %G%
  * @since 11
@@ -46,9 +45,9 @@ class Parser {
     static String EVENT_SYMBOL = "E";
     //Blacklist
     static List<String> INVALID_COMMANDS = Arrays.asList("blah", "todo", "deadline", "event");
+
     /**
-    * Sole constructor. (For invocation by subclass
-    * constructors, typically implicit)
+    * Makes the default constructor explicit
     */
     protected Parser() {
 
@@ -69,11 +68,10 @@ class Parser {
         System.exit(0);
     }
     /**
-     * Process the saved user tasks that were mark as done. It will display
+     * Processes the saved user tasks that were mark as done. It will display
      * the command Duke says and mark the corresponding task as done
      * @param taskPosition The index of the task in the list of tasks, starting from 1.
      * @param tasks The list of tasks to be processed
-     * @param Type of element stored in the TaskList
      * @return TaskList The new TaskList with the corresponding task marked as done
      * @see TaskList
      */
@@ -81,12 +79,12 @@ class Parser {
         System.out.println(MARK_COMMAND + tasks.get(taskPosition));
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsDone());
     }
+
     /**
-     * Process the user's input tasks that is marked as done. It will display
+     * Processes the user's input tasks that is marked as done. It will display
      * the command Alex Furguson (Duke) says and mark the corresponding task as done
      * @param sc The Scanner object to register the user's input, starting from 1.
      * @param tasks The list of tasks to be processed
-     * @param Type of element stored in the TaskList
      * @return TaskList The new TaskList with the corresponding task marked as done
      * @see TaskList
      */
@@ -97,11 +95,10 @@ class Parser {
     }
 
     /**
-     * Process the saved tasks that were marked as undone. It will display
+     * Processes the saved tasks that were marked as undone. It will display
      * the command Alex Furguson (Duke) says and mark the corresponding task as undone
      * @param taskPosition The index of the task in the list of tasks, starting from 1.
      * @param tasks The list of tasks to be processed
-     * @param Task Type of element stored in the TaskList
      * @return TaskList The new TaskList with the corresponding task marked as undone
      * @see TaskList
      */
@@ -109,12 +106,12 @@ class Parser {
         System.out.println(UNMARK_COMMAND + tasks.get(taskPosition));
         return tasks.set(taskPosition, tasks.get(taskPosition).markAsUndone());
     }
+
     /**
-     * Process the user's input tasks that is marked as undone. It will display
+     * Processes the user's input tasks that is marked as undone. It will display
      * the command Alex Furguson (Duke) says and mark the corresponding task as done
      * @param sc The Scanner object to register the user's input,
      * @param tasks The list of tasks to be processed
-     * @param Type of element stored in the TaskList
      * @return TaskList The new TaskList with the corresponding task marked as done
      * @see TaskList
      */
@@ -125,23 +122,22 @@ class Parser {
     }
 
     /**
-     * Process the saved deletion of a task. It will display the command that the
+     * Processes the saved deletion of a task. It will display the command that the
      * task has been deleted, and show the current list of tasks
      * @param taskPosition The index of the task to delete, starting from 1
      * @param tasks The list of tasks
-     * @param Type of element stored in the TaskList
      * @return TaskList New list of tasks with the corresponding task deleted
      */
     static TaskList<Task> delete(int taskPosition, TaskList<Task> tasks) {
         System.out.println(DELETE_COMMAND + tasks.get(taskPosition));
         return tasks.removeTask(taskPosition);
     }
+
     /**
-     * Process the user's input deletion of a task. It will display the command that the
+     * Processes the user's input deletion of a task. It will display the command that the
      * task has been deleted, and show the current list of tasks
-     * @param taskPosition The index of the task to delete, starting from 1
      * @param tasks The list of tasks
-     * @param Type of element stored in the TaskList
+     * @param sc The Scanner object to register the user's input, starting from 1.
      * @return TaskList New list of tasks with the corresponding task deleted
      */
     static TaskList<Task> delete(Scanner sc, TaskList<Task> tasks) {
@@ -150,6 +146,13 @@ class Parser {
         return tasks.removeTask(taskPosition);
     }
 
+    /**
+     * Adds recur task into timeline list and deletes recur task from timeline list
+     * @param sc The Scanner object to register the user's input, starting from 1.
+     * @param tasks The list of tasks
+     * @param recurResponse list of Timeline tasks
+     * @return
+     */
     static TaskList<Task> recur(Scanner sc, TaskList<Task> tasks, List<Timeline> recurResponse) {
 
         boolean delete = sc.next().equals("delete");
@@ -170,10 +173,9 @@ class Parser {
     }
 
     /**
-     * Add a new Todo task into the list of tasks from the saved data.
+     * Adds a new Todo task into the list of tasks from the saved data.
      * @param description Title of the task
      * @param tasks List of tasks
-     * @param Type of element stored in the TaskList
      * @return TaskList New list of tasks with the latest being the todo task added
      * @exception DukeException
      */
@@ -185,10 +187,9 @@ class Parser {
         return tasks.add(newTask);
     }
     /**
-     * Add a new Todo task into the list of tasks from the user's input.
+     * Adds a new Todo task into the list of tasks from the user's input.
      * @param sc Scanner object to register user's input
      * @param tasks List of tasks
-     * @param Type of element stored in the TaskList
      * @return TaskList New list of tasks with the latest being the todo task added
      * @exception DukeException
      */
@@ -202,11 +203,10 @@ class Parser {
     }
 
     /**
-     * Add a new Deadline task into the list of tasks from the saved data.
+     * Adds a new Deadline task into the list of tasks from the saved data.
      * @param description Title of the task
      * @param date End date of deadline task
      * @param tasks List of tasks
-     * @param Type of element stored in the TaskList
      * @return TaskList New list of tasks with the latest being the todo task added
      * @exception DukeException
      */
@@ -222,11 +222,11 @@ class Parser {
         }
         return tasks;
     }
+
     /**
-     * Add a new Deadline task into the list of tasks from the user's input.
+     * Adds a new Deadline task into the list of tasks from the user's input.
      * @param sc Scanner object to register user's input
      * @param tasks List of tasks
-     * @param Type of element stored in the TaskList
      * @return TaskList New list of tasks with the latest being the todo task added
      * @exception DukeException
      */
@@ -244,13 +244,12 @@ class Parser {
         }
         return tasks;
     }
+
     /**
-     * Add a new Event task into the list of tasks from the saved data.
+     * Adds a new Event task into the list of tasks from the saved data.
      * @param description Title of the task
      * @param from Start date of the event task
-     * @param end Stipulated last date of the event task
      * @param tasks List of tasks
-     * @param Type of element stored in the TaskList
      * @return TaskList New list of tasks with the latest being the todo task added
      * @exception DukeException
      */
@@ -261,11 +260,11 @@ class Parser {
         Task newTask = new Events(description, from, to);
         return tasks.add(newTask);
     }
+
     /**
-     * Add a new Event task into the list of tasks from the user's input.
+     * Adds a new Event task into the list of tasks from the user's input.
      * @param sc Scanner object to register user's input
      * @param tasks List of tasks
-     * @param Type of element stored in the TaskList
      * @return TaskList New list of tasks with the latest being the todo task added
      * @exception DukeException
      */

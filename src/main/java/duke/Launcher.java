@@ -3,7 +3,7 @@ package duke;
 import javafx.application.Application;
 
 /**
- *  Abstract the javafx launch method
+ *  Abstracts the javafx launch method
  *  @author Muhammad Reyaaz
  *  @version %I% %G%
  *  @see Task
