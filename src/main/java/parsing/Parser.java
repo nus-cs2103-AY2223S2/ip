@@ -345,6 +345,7 @@ public class Parser<T> {
      */
     public static Parser<Integer> positiveDecimal() {
         return takeWhile(c -> c >= 48 && c < 58)
+                .satisfyOrElse(s -> !s.isEmpty(), "No parsable integers.")
                 .map(s -> Integer.parseInt(s))
                 .overrideMsg("Failed to parse unsigned integer.");
     }
