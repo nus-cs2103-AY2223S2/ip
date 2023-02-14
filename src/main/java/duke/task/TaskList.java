@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.Storage;
 import duke.exception.CommandException;
 import duke.exception.DescriptionException;
 import duke.exception.FileException;
@@ -67,13 +68,20 @@ public class TaskList extends ArrayList<Task> {
         return result.toString();
     }
 
-    public void addTask(Task task) throws DescriptionException {
+    public void addTask(Task task, Storage storage) throws DescriptionException, FileException {
         assert !task.isEmpty();
         if (task.isEmpty()) {
             throw new DescriptionException();
         } else {
             this.add(task);
         }
+        storage.store(this);
+    }
+
+    public Task remove(int index, Storage storage) throws FileException{
+        Task output = super.remove(index);
+        storage.store(this);
+        return output;
     }
 
     public Task markTask(int index) throws IndexOutOfBoundsException {

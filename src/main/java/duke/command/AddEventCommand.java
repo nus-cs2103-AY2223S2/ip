@@ -20,7 +20,7 @@ public class AddEventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         Event newEvent = new Event(this.description, this.by, this.to);
-        tasks.addTask(newEvent);
+        tasks.addTask(newEvent, storage);
         return ui.showTaskAdded(newEvent, tasks);
     }
 }
