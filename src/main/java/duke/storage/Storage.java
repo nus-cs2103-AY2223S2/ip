@@ -26,11 +26,6 @@ public class Storage {
         try {
             File newFile = new File(path.toUri());
             newFile.createNewFile();
-//            if (newFile.createNewFile()) {
-//                // System.out.println("File created: " + newFile.getName());
-//            } else {
-//                // System.out.println("duke.txt already exists.");
-//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
