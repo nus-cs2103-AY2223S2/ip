@@ -111,6 +111,17 @@ public class TaskList {
         System.out.println("Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + tasks.size() + " tasks in the list");
     }
 
+    public void findTask(String keyword) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                res.add(task);
+            }
+        }
+        TaskList result = new TaskList(res);
+        System.out.println("Here are the matching tasks in your list:\n" + result.tasksToStringFormat());
+    }
+
     /**
      * Returns a string representation of the task list
      * @return String string representation of the task list

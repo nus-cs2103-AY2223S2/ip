@@ -57,6 +57,13 @@ public class Parser {
             int taskNum = Integer.parseInt(details);
             lst.deleteTask(taskNum);
 
+        } else if (userInput.startsWith("find")) {
+            try {
+                String keyword = inputArr[1];
+                lst.findTask(keyword);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter the correct keyword");
+            }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
