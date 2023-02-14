@@ -22,6 +22,7 @@ public class Message {
     public static final String EXCEPTION_INVALID_DATE_FORMAT = "Invalid date argument format.";
 
     public static final String EXCEPTION_DB_CLOSED = "Database closed.";
+    public static final String EXCEPTION_DB_FILE_MISSING = "Data file not found at %s";
 
     /* Normal messages */
     public static final String WELCOME = "Hello from Agent™\n"

@@ -12,6 +12,7 @@ import java.util.Scanner;
 import duke.command.AddCommand;
 import duke.constant.Message;
 import duke.exception.DatabaseCloseException;
+import duke.exception.DatabaseNotFoundException;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -23,6 +24,7 @@ class DukeLocalDatabase {
 
     private static final String DATA_FILE_DIR = "data";
     private static final String DATA_FILE_PATH = "duke.txt";
+    private static final String DUKE_DB_PATH = DATA_FILE_DIR + "/" + DATA_FILE_PATH;
     private List<Task> tasks;
     private boolean isClosed;
 
@@ -40,7 +42,11 @@ class DukeLocalDatabase {
         tasks = new ArrayList<Task>();
         isClosed = true;
         if (!isTestMode) {
-            open();
+            try {
+                open(DUKE_DB_PATH);
+            } catch (DatabaseNotFoundException e) {
+                System.err.println(e.getMessage());
+            }
         } else {
             isClosed = false;
         }
@@ -128,12 +134,13 @@ class DukeLocalDatabase {
 
     /**
      * Loads task from local csv file.
+     * @param dataFilePath directory of the data file
      */
-    void open() {
+    void open(String dataFilePath) throws DatabaseNotFoundException{
         try {
             isClosed = false;
 
-            File dataFile = new File(DATA_FILE_DIR + "/" + DATA_FILE_PATH);
+            File dataFile = new File(dataFilePath);
             Scanner sc = new Scanner(dataFile);
             while (sc.hasNextLine()) {
                 try {
@@ -145,8 +152,7 @@ class DukeLocalDatabase {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            // file no found, start with empty list.
-            return;
+            throw new DatabaseNotFoundException(String.format(Message.EXCEPTION_DB_FILE_MISSING, dataFilePath));
         }
     }
 

@@ -7,16 +7,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DatabaseCloseException;
+import duke.exception.DatabaseNotFoundException;
 import duke.task.Task;
 
-public class DukeRepoImplTest {
+public class DukeLocalDatabaseTest {
 
-    private DukeRepo db;
+    private DukeLocalDatabase db;
     private Task task;
 
     @BeforeEach
     void setUp() {
-        db = new DukeRepoImpl(true);
+        db = new DukeLocalDatabase(true);
         task = new Task("test");
     }
 
@@ -28,6 +29,14 @@ public class DukeRepoImplTest {
         } catch (DatabaseCloseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void testClose() {
+        db.close();
+        assertThrowsExactly(DatabaseCloseException.class, () -> {
+            db.addTask(task);
+        });
     }
 
     @Test
@@ -62,6 +71,13 @@ public class DukeRepoImplTest {
     }
 
     @Test
+    void testOpen() {
+        assertThrowsExactly(DatabaseNotFoundException.class, () -> {
+            db.open("/data/invalid.txt");
+        });
+    }
+
+    @Test
     void testRemoveTask() {
         try {
             db.addTask(task);
@@ -75,14 +91,6 @@ public class DukeRepoImplTest {
         } catch (DatabaseCloseException e) {
             e.printStackTrace();
         }
-    }
-
-    @Test
-    void testClose() {
-        db.close();
-        assertThrowsExactly(DatabaseCloseException.class, () -> {
-            db.addTask(task);
-        });
     }
 
     @Test
