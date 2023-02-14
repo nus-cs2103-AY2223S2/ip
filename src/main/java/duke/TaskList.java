@@ -32,6 +32,7 @@ public class TaskList extends ArrayList<Task> {
      * @return task retrieved
      */
     public Task getTask(int taskID) {
+        assert taskID < taskList.size() : "taskID given should be less than taskList size";
         return taskList.get(--taskID);
     }
 
@@ -40,6 +41,7 @@ public class TaskList extends ArrayList<Task> {
      * @param task task to be added.
      */
     public void addTask(Task task) {
+        assert task != null : "Task cannot be null";
         this.taskList.add(task);
     }
 
@@ -49,6 +51,7 @@ public class TaskList extends ArrayList<Task> {
      * @return task removed from the list.
      */
     public Task deleteTask(int taskID) {
+        assert taskID < taskList.size() : "taskID to be deleted must be within tasklist";
         Task task = taskList.remove(--taskID);
         return task;
     }
@@ -72,6 +75,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     public List<Task> find(String keyword) {
+        assert keyword != null : "Keyword should not be empty";
         return this.taskList.stream().filter(x -> x.description.contains(keyword)).collect(Collectors.toList());
     }
 
@@ -82,6 +86,7 @@ public class TaskList extends ArrayList<Task> {
      * @return the new task replaced
      */
     public Task set(int index, Task task) {
+        assert index < taskList.size() : "index provided should be less than taskList size";
         taskList.set(index, task);
         return task;
     }
