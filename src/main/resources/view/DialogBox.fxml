@@ -15,7 +15,12 @@
   xmlns:fx="http://javafx.com/fxml/1"
 >
   <children>
-    <Label fx:id="dialog" text="Label" wrapText="true" />
+    <Label 
+      fx:id="dialog"
+      text="Label"
+      wrapText="true"
+      style="-fx-font-family: 'Consolas';"
+    />
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
   </children>
   <padding>
