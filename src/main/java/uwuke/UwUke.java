@@ -65,8 +65,9 @@ public class UwUke extends Application {
         scene = new Scene(mainLayout);
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         mainLayout.setPrefSize(400.0, 600.0);
-        
-        // Configure GUI elements
+    }
+
+    private void configureGuiElements(Stage stage) {
         configureStage(stage);
         configureScrollPane();
         configureAnchorPane();
