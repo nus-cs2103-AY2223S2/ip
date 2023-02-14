@@ -13,6 +13,7 @@ import iris.exception.DateTimeException;
  * filters deadlines and events that fall in a certain period or on a certain date
  */
 public class FilterCommand extends Command {
+    private TaskList filteredTasks;
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -44,13 +45,20 @@ public class FilterCommand extends Command {
             throw new DateTimeException(e.getMessage());
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(TaskList tasks, TaskStore taskStore) {
+        filteredTasks = tasks.dateFilter(start, end);
+        assert filteredTasks.size() < tasks.size() : "filtered tasks should be less than total tasks";
+    }
     /**
      * {@inheritDoc}
      */
     @Override
     public String getResponse(TaskList tasks, TaskStore taskStore) {
-        return "In this period: " + tasks.dateFilter(start, end).toString();
+        return "In this period: " + filteredTasks;
     }
 
     /**

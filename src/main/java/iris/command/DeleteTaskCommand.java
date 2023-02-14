@@ -20,12 +20,14 @@ public class DeleteTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, TaskStore taskStore) throws IrisException {
+        int temp = tasks.size();
         try {
             task = tasks.get(i);
             tasks.remove(i);
         } catch (IndexOutOfBoundsException e) {
             throw new UnknownTaskException();
         }
+        assert tasks.size() == temp - 1 : "The size of task list should decrease by one";
         taskStore.updateTasks(tasks);
     }
 

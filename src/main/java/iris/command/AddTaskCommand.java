@@ -20,8 +20,10 @@ public class AddTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, TaskStore taskStore) throws IrisException {
+        int temp = tasks.size();
         tasks.add(this.task);
         taskStore.addTask(this.task);
+        assert tasks.size() == temp + 1 : "Task list size should increase by 1 after adding task.";
     }
 
     /**

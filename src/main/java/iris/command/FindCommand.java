@@ -8,7 +8,7 @@ import iris.exception.IrisException;
  * finds tasks corresponding to given keyword
  */
 public class FindCommand extends Command {
-    private TaskList filtered;
+    private TaskList filteredTasks;
     private final String keyword;
 
     public FindCommand(String keyword) {
@@ -20,7 +20,8 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, TaskStore taskStore) throws IrisException {
-        this.filtered = tasks.findTask(this.keyword);
+        this.filteredTasks = tasks.findTask(this.keyword);
+        assert filteredTasks.size() < tasks.size() : "filtered tasks should be less than total tasks";
     }
 
     /**
@@ -28,11 +29,11 @@ public class FindCommand extends Command {
      */
     @Override
     public String getResponse(TaskList tasks, TaskStore taskStore) {
-        if (filtered.size() == 0) {
+        if (filteredTasks.size() == 0) {
             return "There are no matching tasks in you task list.";
         } else {
             return "Here are the matching tasks in your list:\n"
-                    + filtered + filtered.size() + " tasks "
+                    + filteredTasks + filteredTasks.size() + " tasks "
                     + "match the keyword.";
         }
     }

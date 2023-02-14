@@ -15,6 +15,7 @@ public class ResetCommand extends Command {
     public void execute(TaskList tasks, TaskStore taskStore) throws IrisException {
         tasks.clear();
         taskStore.reset();
+        assert tasks.size() == 0 : "Size of tasks should be 0 after resetting";
     }
 
     /**
