@@ -19,7 +19,7 @@ public abstract class Task {
 
     /**
      * Creates a new task.
-     *
+     * 
      * @param description Task's description.
      */
     public Task(String description) {
@@ -42,11 +42,10 @@ public abstract class Task {
     }
 
     /**
-     * Encodes an array of arbitrary values into a single-line string for
-     * saving into a file.
-     * Since the delimiter " | " is used in the encoding, any vertical bar "|"
-     * in the values is escaped.
-     *
+     * Encodes an array of arbitrary values into a single-line string for saving
+     * into a file. Since the delimiter " | " is used in the encoding, any vertical
+     * bar "|" in the values is escaped.
+     * 
      * @param values The array of values to encode.
      * @return The encoded values.
      */
@@ -59,10 +58,9 @@ public abstract class Task {
 
     /**
      * Decodes an encoded string of values (encoded by 'encodeValues') into an
-     * array.
-     * Since the delimiter " | " is used in the encoding, any escaped vertical
-     * bar "|" in encoded string is unescaped before returning.
-     *
+     * array. Since the delimiter " | " is used in the encoding, any escaped
+     * vertical bar "|" in encoded string is unescaped before returning.
+     * 
      * @param encodedValues The encoded values.
      * @return The deencoded array of values.
      */
@@ -75,10 +73,11 @@ public abstract class Task {
 
     /**
      * Parses a task that has been encoded into a string, into a 'Task' instance.
-     *
+     * 
      * @param input The encoded task.
      * @return The task that was encoded.
-     * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
+     * @throws DukeSaveLoadException If there's a problem in parsing the encoded
+     *         task.
      */
     public static Task loadFromString(String input) throws DukeSaveLoadException {
         String[] values = Task.decodeValues(input);
@@ -98,7 +97,7 @@ public abstract class Task {
 
     /**
      * Encodes this task into a string.
-     *
+     * 
      * @return The encoded task.
      */
     public abstract String encodeAsString();
@@ -111,7 +110,7 @@ public abstract class Task {
 
     /**
      * Formats a date for displaying in Duke.
-     *
+     * 
      * @param date The date to format.
      * @return The formatted date string.
      */

@@ -11,7 +11,7 @@ public class TaskDeadline extends Task {
 
     /**
      * Creates a new deadline-type task.
-     *
+     * 
      * @param description Deadline's description.
      * @param endTime Deadline's deadline time.
      */
@@ -23,10 +23,11 @@ public class TaskDeadline extends Task {
     /**
      * Parses a deadline task that has been encoded into a string, into a
      * 'TaskDeadline' instance.
-     *
+     * 
      * @param input The encoded deadline task.
      * @return The deadline task that was encoded.
-     * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
+     * @throws DukeSaveLoadException If there's a problem in parsing the encoded
+     *         task.
      */
     public static TaskDeadline loadFromString(String input) {
         String[] values = Task.decodeValues(input);
@@ -43,7 +44,7 @@ public class TaskDeadline extends Task {
 
     @Override
     public String encodeAsString() {
-        return Task.encodeValues(new String[]{
+        return Task.encodeValues(new String[] {
             "D",
             this.isDone ? "1" : "0",
             this.description.toString(),

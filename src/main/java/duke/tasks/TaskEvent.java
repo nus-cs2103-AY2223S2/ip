@@ -13,7 +13,7 @@ public class TaskEvent extends Task {
 
     /**
      * Creates a new event-type task.
-     *
+     * 
      * @param description Event's description.
      * @param fromTime Event's starting time.
      * @param toTime Event's ending time.
@@ -25,12 +25,13 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * Parses a event task that has been encoded into a string, into a
-     * 'TaskEvent' instance.
-     *
+     * Parses a event task that has been encoded into a string, into a 'TaskEvent'
+     * instance.
+     * 
      * @param input The encoded event task.
      * @return The event task that was encoded.
-     * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
+     * @throws DukeSaveLoadException If there's a problem in parsing the encoded
+     *         task.
      */
     public static TaskEvent loadFromString(String input) {
         String[] values = Task.decodeValues(input);
@@ -48,7 +49,7 @@ public class TaskEvent extends Task {
 
     @Override
     public String encodeAsString() {
-        return Task.encodeValues(new String[]{
+        return Task.encodeValues(new String[] {
             "E",
             this.isDone ? "1" : "0",
             this.description,
