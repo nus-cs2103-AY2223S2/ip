@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 /**
  * Handles the marking task as done
+ * Changes completion status of task to done
+ * Save changes made to list in the hard disk
+ * Returns response for changing the status of specified task to done.
  */
 public class MarkCommand extends Command {
     private final int index;
@@ -31,24 +34,19 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Changes completion status of task to done
-     * Save changes made to list in the hard disk
-     * Returns response for changing the status of specified task to done.
+     * Executes command input by user.
      *
      * @param tasks List of tasks.
      * @param ui Handles user interaction.
      * @param storage Handles saving and loading tasks.
-     * @return Response for adding specified task.
-     * @throws DukeException If encountering an I/O interrupt while saving data
-     * @throws DukeException If given index is not in the list of tasks
+     * @throws DukeException if encountering an exception specific to Duke.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.mark(index);
         storage.save(tasks);
 
-        return ui.getMarkMessage()
-                + "\n  "
-                + task;
+        setResponse(ui.getMarkMessage()
+                + "\n  " + task);
     }
 }

@@ -55,16 +55,21 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
+
                 assert fullCommand != null : "User's command is null";
+
                 Command c = Parser.parse(fullCommand);
-                String response = c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage);
+                String response = c.getResponse();
+
                 assert response != null : "Response is null";
+
                 ui.echo(response);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (Exception e) {
-                ui.showError(e.getMessage());
+                ui.showError("There was an unknown error");
             } finally {
                 ui.showLine();
             }
@@ -85,11 +90,16 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String response = c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage);
+            String response = c.getResponse();
+
             assert response != null : "Response is null";
+
             return response;
         } catch (DukeException e) {
             return e.getMessage();
+        } catch (Exception e) {
+            return "There was an unknown error";
         }
     }
 }

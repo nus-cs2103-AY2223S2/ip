@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -10,6 +8,8 @@ import duke.ui.Ui;
 
 /**
  * Handles the finding tasks that contains the keyword from the list of tasks
+ * Get list of tasks that contains the specified keyword.
+ * Return list of tasks.
  */
 public class FindCommand extends Command {
     protected final String keyword;
@@ -24,26 +24,25 @@ public class FindCommand extends Command {
         try {
             this.keyword = fullCommand.trim()
                     .substring(5)
-                    .trim()
-                    .toUpperCase();
+                    .trim();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("A keyword was not given");
         }
     }
 
     /**
-     * Get list of tasks that contains the specified keyword.
-     * Return list of tasks.
+     * Executes command input by user.
      *
      * @param tasks List of tasks.
      * @param ui Handles user interaction.
      * @param storage Handles saving and loading tasks.
-     * @return List of tasks.
+     * @throws DukeException if encountering an exception specific to Duke.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int count = 0;
         StringBuilder response = new StringBuilder(ui.getFindMessage());
+
         for (Task task: tasks.find(keyword)) {
             response.append("\n")
                     .append(count + 1)
@@ -51,9 +50,9 @@ public class FindCommand extends Command {
                     .append(task);
             count++;
         }
-        if (count == 0) {
-            return "There is no such task in your list";
-        }
-        return response.toString();
+
+        setResponse(count == 0
+                ? "There is no such task in your list"
+                : response.toString());
     }
 }

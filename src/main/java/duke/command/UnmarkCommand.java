@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 /**
  * Handles the changing the status of task to not done
+ * Changes completion status of task to not done
+ * Save changes made to list in the hard disk
+ * Returns response for changing the status of specified task to not done.
  */
 public class UnmarkCommand extends Command {
     private final int index;
@@ -31,23 +34,19 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Changes completion status of task to not done
-     * Save changes made to list in the hard disk
-     * Returns response for changing the status of specified task to not done.
+     * Executes command input by user.
      *
-     * @param tasks List of tasks
-     * @param ui Handles user interaction
-     * @param storage Handles saving and loading tasks
-     * @throws DukeException If encountering an I/O interrupt while saving data
-     * @throws DukeException If given index is not in the list of tasks
+     * @param tasks List of tasks.
+     * @param ui Handles user interaction.
+     * @param storage Handles saving and loading tasks.
+     * @throws DukeException if encountering an exception specific to Duke.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.unmark(index);
         storage.save(tasks);
 
-        return ui.getUnmarkMessage()
-                + "\n  "
-                + task;
+        setResponse(ui.getUnmarkMessage()
+                + "\n  " + task);
     }
 }

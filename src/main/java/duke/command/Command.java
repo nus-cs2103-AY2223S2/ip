@@ -10,20 +10,34 @@ import duke.ui.Ui;
  */
 public abstract class Command {
 
+    private String response = "Command has not yet been executed";
+    private boolean isExit = false;
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
     /**
-     * Executes command.
-     * Returns response after executing command.
+     * Executes command input by user.
      *
      * @param tasks List of tasks.
      * @param ui Handles user interaction.
      * @param storage Handles saving and loading tasks.
-     * @return Response from executing the command.
      * @throws DukeException if encountering an exception specific to Duke.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /** Checks if Duke should exit */
     public boolean isExit() {
-        return false;
+        return isExit;
+    }
+
+    /** Sets program to exit */
+    public void exit() {
+        isExit = true;
     }
 }
