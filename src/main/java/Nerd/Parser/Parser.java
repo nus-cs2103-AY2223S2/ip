@@ -1,7 +1,6 @@
 package Nerd.Parser;
 
 import Nerd.Commands.*;
-import Nerd.Nerd;
 import Nerd.entities.Deadline;
 import Nerd.entities.Event;
 import Nerd.entities.Todo;
@@ -9,9 +8,6 @@ import Nerd.enums.CommandEnums;
 import Nerd.exceptions.NerdException;
 import Nerd.entities.TaskList;
 import Nerd.entities.Task;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the Parser of the Chat bot that parses the commands.
@@ -36,10 +32,11 @@ public class Parser {
             throw new IllegalArgumentException("Sorry! I have no idea what that means ??? >:c");
         }
 
-        if (isEmptyCommand(split)) {
+        if (isEmptyCommand(split) && !type.getCommand().equals("list")) {
             throw new NerdException("According to my calculations, there are empty inputs!\n" +
                     "Please follow the valid command list above :D");
         }
+
         switch (type) {
         case LIST:
             return new ListCommand();
@@ -117,21 +114,16 @@ public class Parser {
      *
      * @param input The full line of the command and arguments.
      * @return the string representation of the description.
-     * @throws NerdException if the input is empty.
      */
-    public String parseDescription(String input) throws NerdException {
+    public String parseDescription(String input) {
         String[] split = input.split(" ");
-        if (!isEmptyCommand(split)) {
-            return split[1];
-        } else {
-            throw new NerdException("Sorry! you can't have empty descriptions!");
-        }
+        return split[1];
     }
 
     /**
      * Searches the given tasklist for any matching descriptions.
      *
-     * @param list The current Tasklist of the nerdbot.
+     * @param list        The current Tasklist of the nerdbot.
      * @param description The description of the task to search for.
      * @return The string representation of the task.
      */
@@ -142,12 +134,12 @@ public class Parser {
             Task currentTask = list.getTask(i);
             String[] split = currentTask.getDescription().split(" ");
             for (int j = 0; j < split.length; j++) {
-                if(split[j].equals(description)) {
+                if (split[j].equals(description)) {
                     toPrint = true;
                 }
             }
-            if(toPrint) {
-                output += String.format("%s\n",currentTask.toString());
+            if (toPrint) {
+                output += String.format("%s\n", currentTask.toString());
             }
         }
         return output;
@@ -159,7 +151,7 @@ public class Parser {
      * @param input The full line of the command and arguments.
      * @return The index.
      */
-    public int parseIndex(String input){
+    public int parseIndex(String input) {
         String[] split = input.split(" ");
         return Integer.parseInt(split[1]) - 1;
     }
@@ -172,7 +164,7 @@ public class Parser {
      */
     public String[] parseDeadline(String input) {
         String[] split = input.split("/by");
-        String description = split[0].replaceFirst("deadline ","");
+        String description = split[0].replaceFirst("deadline ", "");
         String[] result = {description, split[1]};
         return result;
     }
@@ -192,7 +184,7 @@ public class Parser {
     }
 
     public boolean isEmptyCommand(String[] input) {
-        if(input.length < 2) {
+        if (input.length < 2) {
             return true;
         } else {
             return false;

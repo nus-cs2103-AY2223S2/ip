@@ -23,8 +23,8 @@ public class MarkCommand extends Command {
      * Overridden processCommand method from the abstract class Command.
      * Processes the command for a MarkCommand.
      *
-     * @param list  The TaskList object that stores Tasks.
-     * @param ui    User interface of the Chat bot.
+     * @param list The TaskList object that stores Tasks.
+     * @param ui   User interface of the Chat bot.
      * @return The task being marked.
      */
     @Override

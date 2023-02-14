@@ -17,7 +17,7 @@ public class Todo extends Task {
     /**
      * Process the current Todo object to be saved into a text file.
      *
-     * @return a String representing the Todo task to be saved.
+     * @return A String representing the Todo task to be saved.
      */
     @Override
     public String toSave() {
@@ -30,7 +30,7 @@ public class Todo extends Task {
     /**
      * Process the current Todo object to be displayed.
      *
-     * @return a String representing the Todo task to be displayed by the User Interface.
+     * @return A String representing the Todo task to be displayed by the User Interface.
      */
     @Override
     public String toString() {

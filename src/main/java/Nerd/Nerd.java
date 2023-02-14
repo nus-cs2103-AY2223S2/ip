@@ -3,10 +3,9 @@ package Nerd;
 import Nerd.Parser.Parser;
 import Nerd.Ui.Ui;
 import Nerd.entities.TaskList;
-import Nerd.exceptions.NerdException;
 import Nerd.storage.Storage;
 import Nerd.Commands.*;
-import java.io.IOException;
+
 
 /**
  * Represents the Duke.Duke Chat bot.
@@ -18,7 +17,6 @@ public class Nerd {
     private Storage storage;
     private Ui ui;
     private Parser parser;
-    private final String filePath;
 
     /**
      * Duke.Duke Constructor for initializing the Duke object.
@@ -26,7 +24,6 @@ public class Nerd {
      * @param filePath of the storage
      */
     public Nerd(String filePath) {
-        this.filePath = filePath;
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -48,7 +45,7 @@ public class Nerd {
     }
 
     /**
-     * Method that gets the user response as the input from the GUI.
+     * Method that gets the user response as the input from the GUI and returns the response.
      *
      * @param input User input from the gui.
      * @return A string to displayed on the gui.

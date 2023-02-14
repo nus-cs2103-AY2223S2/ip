@@ -15,7 +15,7 @@ public abstract class Command {
      * Duke.Commands abstract method that processes the command.
      *
      * @param list The tasklist of the Nerdbot.
-     * @param ui The user interface of the Nerdbot.
+     * @param ui   The user interface of the Nerdbot.
      */
     public abstract String processCommand(TaskList list, Ui ui);
 }

@@ -1,6 +1,5 @@
 package Nerd.Commands;
 
-import Nerd.entities.Task;
 import Nerd.entities.TaskList;
 import Nerd.Ui.Ui;
 

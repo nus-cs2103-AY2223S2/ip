@@ -9,6 +9,7 @@ import Nerd.Ui.Ui;
  */
 public class DeleteCommand extends Command {
     private final int index;
+
     /**
      * Constructor of delete commands.
      *
@@ -23,8 +24,8 @@ public class DeleteCommand extends Command {
      * Overridden processCommand method from the abstract class Command.
      * Processes the command for a DeleteCommand Task.
      *
-     * @param list  The TaskList object that stores Tasks.
-     * @param ui    User interface of the Chat bot.
+     * @param list The TaskList object that stores Tasks.
+     * @param ui   User interface of the Chat bot.
      * @return The string output of processing a delete command.
      */
     @Override

@@ -1,12 +1,9 @@
 package Nerd.Commands;
 
-import java.time.LocalDate;
-
-import Nerd.entities.Deadline;
-import Nerd.entities.Event;
-import Nerd.entities.Task;
 import Nerd.entities.TaskList;
 import Nerd.Ui.Ui;
+
+import java.time.LocalDate;
 
 /**
  * Represents the Duke.Commands.SearchCommand of the Chat bot.

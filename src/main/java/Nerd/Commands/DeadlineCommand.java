@@ -4,8 +4,6 @@ import Nerd.entities.Deadline;
 import Nerd.entities.TaskList;
 import Nerd.Ui.Ui;
 
-import java.time.LocalDate;
-
 /**
  * Represents the Duke.Commands.DeadlineCommand of the Chat bot.
  */
@@ -17,7 +15,7 @@ public class DeadlineCommand extends Command {
      * Constructor for a deadline command.
      *
      * @param description The description of the task.
-     * @param by The date of the deadline.
+     * @param by          The date of the deadline.
      */
     public DeadlineCommand(String description, String by) {
         this.description = description;

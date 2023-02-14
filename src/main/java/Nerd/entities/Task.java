@@ -37,7 +37,7 @@ public abstract class Task {
     /**
      * Process the current Task object to be saved into a text file.
      *
-     * @return a String representing the Task to be saved.
+     * @return A String representing the Task to be saved.
      */
     public abstract String toSave();
 
@@ -49,7 +49,7 @@ public abstract class Task {
     /**
      * Process the current Task object to be displayed.
      *
-     * @return a String representing the Task to be displayed by the User Interface.
+     * @return A String representing the Task to be displayed by the User Interface.
      */
     @Override
     public String toString() {

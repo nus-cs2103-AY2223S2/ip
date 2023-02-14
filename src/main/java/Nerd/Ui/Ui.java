@@ -1,4 +1,5 @@
 package Nerd.Ui;
+
 import Nerd.entities.Deadline;
 import Nerd.entities.Event;
 import Nerd.entities.Task;
@@ -10,11 +11,18 @@ import Nerd.entities.TaskList;
 public class Ui {
     /**
      * Prints the welcome message.
+     *
+     * @return The welcome message to be displayed in the GUI.
      */
     public String showWelcome() {
-        return("Hello! I'm NerdBot\nI am very smart and can do many things!");
+        return ("Hello! I'm NerdBot\nI am very smart and can do many things!");
     }
 
+    /**
+     * Prints the default command list.
+     *
+     * @return The available command list as a string to be displayed in the GUI.
+     */
     public String showCommandList() {
         String availableCommands = "Available commands:\n"
                 + "todo [description]\n"
@@ -30,22 +38,23 @@ public class Ui {
         return availableCommands;
     }
 
-
-    public String printError(String err) {
-        return err;
+    /**
+     * Wrapper method for printing errors through this UI class.
+     *
+     * @param error The string representation of the error.
+     * @return The welcome message to be displayed in the GUI.
+     */
+    public String printError(String error) {
+        return error;
     }
 
     public String printBye() {
         return "Bye. Hope to see you again soon!";
     }
 
-    public void print(String input) {
-        System.out.println(input);
-    }
-
     public String printDeadlineResponse(String deadline, int size) {
         return String.format("Received, I've added the following deadlines:\n %s\nNow you have %d tasks in the list.\n" +
-                        "Be sure to finish these tasks before the deadline!", deadline, size);
+                "Be sure to finish these tasks before the deadline!", deadline, size);
     }
 
     public String printDeleteResponse(String task, int size) {
@@ -64,6 +73,12 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Formats the tasks of the tasklist of be printed by the GUI.
+     *
+     * @param list The tasklist of the current nerd bot state.
+     * @return The list of tasks currently in the tasklist.
+     */
     public String printListResponse(TaskList list) {
         String output = "Here is the current list:\n";
         for (int i = 0; i < list.getSize(); i++) {
@@ -85,10 +100,18 @@ public class Ui {
         return String.format("Sure!, I've added the following todo task:\n %s\nNow you have %d tasks in the list.",
                 todo, size);
     }
+
     public String printSuccessfulConnection() {
         return "Successfully connected to the database!";
     }
 
+    /**
+     * Searches the current tasklist for a specific input date.
+     *
+     * @param date The string representation of the date to be searched.
+     * @param list The tasklist of the current nerd bot state.
+     * @return The list of tasks that associate with the date given in the tasklist.
+     */
     public String printSearchDate(String date, TaskList list) {
         String output = "Tasks occurring on " + date + ":\n";
         for (int i = 0; i < list.getSize(); i++) {

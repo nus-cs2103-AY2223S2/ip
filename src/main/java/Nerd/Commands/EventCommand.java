@@ -16,8 +16,8 @@ public class EventCommand extends Command {
      * Constructor of Event commands
      *
      * @param description The description of the task.
-     * @param from The date the event starts.
-     * @param to The date the event ends.
+     * @param from        The date the event starts.
+     * @param to          The date the event ends.
      */
     public EventCommand(String description, String from, String to) {
         this.description = description;

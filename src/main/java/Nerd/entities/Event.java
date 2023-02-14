@@ -47,7 +47,7 @@ public class Event extends Task {
     /**
      * Process the current Event object to be displayed.
      *
-     * @return a String representing the Event to be displayed by the User Interface.
+     * @return A String representing the Event to be displayed by the User Interface.
      */
     @Override
     public String toString() {

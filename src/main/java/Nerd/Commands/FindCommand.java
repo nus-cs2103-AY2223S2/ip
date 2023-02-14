@@ -1,13 +1,13 @@
 package Nerd.Commands;
 
-import Nerd.entities.Task;
 import Nerd.entities.TaskList;
 import Nerd.Parser.Parser;
 import Nerd.Ui.Ui;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private final String description;
     private Parser parser;
+
     /**
      * Constructor of Find commands
      *
@@ -23,7 +23,7 @@ public class FindCommand extends Command{
      * Processes the command for an FindCommand.
      *
      * @param list Tasklist of the Chat bot.
-     * @param ui User interface of the Chat bot.
+     * @param ui   User interface of the Chat bot.
      * @return The tasks searched by the command.
      */
     @Override
