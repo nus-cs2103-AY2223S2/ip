@@ -1,5 +1,0 @@
-todo read book
-deadline book /by sunday
-event meeting /from sunday /to monday
-bye
-

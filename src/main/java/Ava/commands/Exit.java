@@ -15,6 +15,7 @@ public class Exit implements AvaCommand {
      * @param s a Storage object
      * @return False to indicate program has stopped runnign
      */
+    private final static String MESSAGE = "Have a nice day !!";;
     @Override
     public boolean run(TaskList t, Storage s){
         return false;
@@ -23,6 +24,6 @@ public class Exit implements AvaCommand {
 
     @Override
     public String output(String formatSpace){
-        return "Will Never reach here";
+        return MESSAGE;
     }
 }

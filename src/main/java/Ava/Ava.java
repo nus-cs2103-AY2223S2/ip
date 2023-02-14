@@ -1,10 +1,6 @@
 package Ava;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -15,14 +11,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
 import Ava.commands.AvaCommand;
 import Ava.exceptions.AvaException;
 
-import java.util.Scanner;
+
 
 
 
@@ -31,51 +26,21 @@ public class Ava extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/UserImage.png"));
     private boolean running = true;
 
+    private String formatSpace = "  ";
+
     public static enum TASK_TYPE {
         TODO,
         DEADLINE,
         EVENT
     };
+
     private static TaskList tasks = new TaskList();
     private static Storage store = new Storage();
     private static Parser parser = new Parser();
-
-    public Ava() {
-
-//        Ui.displayIntro();
-//        Scanner myObj = new Scanner(System.in);
-//        boolean running = true;
-//
-//        try {
-//            this.tasks.retreiveStorage(store);
-//        } catch (AvaException e){
-//            // Trouble Retrieving the storage
-//            Ui.displayOutput(e.getMessage());
-//            running = false;
-//        }
-//
-//        while (running) {
-//            try {
-//                Ui.ask();
-//                String input = myObj.nextLine();
-//                AvaCommand c = Ava.parser.parse(input);
-//                running = c.run(Ava.tasks,Ava.store);
-//                if (running) {
-//                    String output = c.output(Ui.getFormatSpace());
-//                    Ui.displayOutput(output);
-//                }
-//            } catch (AvaException e) {
-//                Ui.displayOutput(e.getMessage());
-//            }
-//        }
-//        Ui.displayExit();
-    }
+    private Button sendButton;
 
     @Override
     public void start(Stage stage) {
-        /**Abstract Out into Classes
-         */
-        //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
         ScrollPane scrollPane = new ScrollPane();
@@ -83,12 +48,13 @@ public class Ava extends Application {
         scrollPane.setContent(dialogContainer);
 
         TextField userInput = new TextField();
-        Label introText = new Label(Ui.getIntro());
+        Label introText = new Label(getResponse("enter"));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(introText, new ImageView(duke))
                 );
-        Button sendButton = new Button("Send");
-
+        sendButton = new Button("Send");
+        sendButton.setStyle("-fx-background-color: " + "lightgreen");
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
@@ -167,17 +133,15 @@ public class Ava extends Application {
         try {
             AvaCommand c = Ava.parser.parse(input);
             this.running = c.run(Ava.tasks,Ava.store);
-            output = c.output(Ui.getFormatSpace());
+            if (!running) {
+                sendButton.setStyle("-fx-background-color: lightpink;");
+                sendButton.setText("Close");
+            }
+            output = c.output(formatSpace);
         } catch (AvaException e) {
             output = e.getMessage();
         }
         return output;
     }
 
-
-
-
-    public static void main(String[] args) {
-        Ava a = new Ava();
-    }
 }

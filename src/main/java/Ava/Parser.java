@@ -14,6 +14,9 @@ public class Parser {
         try {
             String indentifier = inputArray[0];
             switch (indentifier) {
+                case "enter":
+                    command = new Enter();
+                    break;
                 case "todo":
                     command = new AddTask(parseTodo(inputArray[1]), Ava.TASK_TYPE.TODO);
                     break;
@@ -37,6 +40,9 @@ public class Parser {
                     break;
                 case "bye" :
                     command = new Exit();
+                    break;
+                case "find":
+                    command = new FindTask(parseFindTask(inputArray[1]));
                     break;
                 default:
                     throw new CommandNotFoundException(input);
@@ -66,6 +72,9 @@ public class Parser {
         output[1] = fromTo[0];
         output[2] = fromTo[1];
         return output;
+    }
+    private String[] parseFindTask(String mes) {
+        return new String[]{mes.trim()};
     }
 
     private String[] parseMarkUnmark(String mes){
