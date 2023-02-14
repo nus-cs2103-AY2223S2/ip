@@ -71,4 +71,10 @@ public class DukeTest {
             assertEquals(testLines.get(i), inputLines.get(i));
         }
     }
+
+    @Test
+    public void sampleTest(){
+        String testString = "";
+        assertEquals(true, testString.isEmpty());
+    }
 }

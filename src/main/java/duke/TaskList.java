@@ -12,9 +12,14 @@ import java.util.List;
 public class TaskList {
 
     /**
-     * a list that keeps track of current and new tasks
+     * A list that keeps track of current and new tasks
      */
     private ArrayList<Task> storage;
+
+    /**
+     * A list that keeps track of all tags assigned to different tasks
+     */
+    protected static TagLibrary tagLibrary = new TagLibrary();
 
 
     /**
@@ -35,10 +40,10 @@ public class TaskList {
      */
     private void fillStorage(List<String> lines) {
         for (String line: lines) {
-            String[] arguments = line.split (" | ");
+            String[] arguments = line.split (" \\| ");
 
             //Checks if line has been segmented into exactly 4 sections
-            assert arguments.length == 4;
+            assert arguments.length >= 4 && arguments.length <= 5;
 
             switch(arguments[1]) {
                 case "T":
@@ -64,6 +69,12 @@ public class TaskList {
             taskToAdd.markAsDone();
         }
 
+        if (!args[4].trim().isEmpty()) {
+            Tag tagToAdd = new Tag(args[4].trim());
+            taskToAdd.addTag(tagToAdd);
+            tagLibrary.appendTag(tagToAdd);
+        }
+
         storage.add(taskToAdd);
     }
 
@@ -79,6 +90,12 @@ public class TaskList {
         Task taskToAdd = new Deadline(desc, deadline);
         if (args[2].contains("X")){
             taskToAdd.markAsDone();
+        }
+
+        if (!args[4].trim().isEmpty()) {
+            Tag tagToAdd = new Tag(args[4].trim());
+            taskToAdd.addTag(tagToAdd);
+            tagLibrary.appendTag(tagToAdd);
         }
 
         storage.add(taskToAdd);
@@ -98,6 +115,12 @@ public class TaskList {
         Task taskToAdd = new Events(desc, from, to);
         if (args[2].contains("X")) {
             taskToAdd.markAsDone();
+        }
+
+        if (!args[4].trim().isEmpty()) {
+            Tag tagToAdd = new Tag(args[4].trim());
+            taskToAdd.addTag(tagToAdd);
+            tagLibrary.appendTag(tagToAdd);
         }
 
         storage.add(taskToAdd);
@@ -132,10 +155,16 @@ public class TaskList {
      */
     public void removeTask(int index) throws DukeException {
         try {
+            Task taskToRemove = storage.get(index);
+            taskToRemove.removeTag();
             storage.remove(index);
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }
+    }
+
+    public static void updateTagLibrary(Tag tag){
+        tagLibrary.decrementCount(tag);
     }
 
     /**
@@ -146,10 +175,10 @@ public class TaskList {
     public String markTask(int index) throws DukeException {
         try {
             storage.get(index).markAsDone();
-            String markTaskMsg = "_____________________________________\n"
+            String markTaskMsg = GUI.BORDERLINE
                     + "Nice! I've marked this task as done:\n"
                     + storage.get(index) + "\n"
-                    + "_____________________________________\n";
+                    + GUI.BORDERLINE;
             return markTaskMsg;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
@@ -164,12 +193,26 @@ public class TaskList {
     public String unMarkTask(int index) throws DukeException {
         try {
             storage.get(index).unMark();
-            String unMarkMsg = "_____________________________________\n"
+            String unMarkMsg = GUI.BORDERLINE
                     + "Ok. I've marked this task as not done yet:\n"
                     + storage.get(index)+ "\n"
-                    + "_____________________________________\n";
+                    + GUI.BORDERLINE;
             return unMarkMsg;
         } catch (IndexOutOfBoundsException err) {
+            throw new DukeException("Invalid Index given!");
+        }
+    }
+
+    public String addTagToTask(Tag tag, int index) throws DukeException{
+        try {
+            Task taskToTag = storage.get(index);
+            taskToTag.addTag(tag);
+            String addedTagMsg = GUI.BORDERLINE
+                    + "Aight! I've tagged the following task with " + tag.toString() + ":\n"
+                    + taskToTag.toString() + "\n"
+                    + GUI.BORDERLINE;
+            return addedTagMsg;
+        } catch (IndexOutOfBoundsException err){
             throw new DukeException("Invalid Index given!");
         }
     }

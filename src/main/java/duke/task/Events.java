@@ -39,6 +39,9 @@ public class Events extends Task {
         String eventString = "E" + " | " + super.toString()
                 + " (from: " + this.from
                 + "to: " + this.to + ")";
+        if (super.tag.toString().isEmpty()) {
+            eventString += " | Tag: " + super.tag.toString();
+        }
         return eventString;
     }
 
