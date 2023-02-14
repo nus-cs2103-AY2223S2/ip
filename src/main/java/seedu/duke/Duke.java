@@ -310,6 +310,7 @@ public class Duke {
         tasks.addTodo(description, userParse);
         message += ui.addTodoMessage(tasks);
         storage.write(tasks);
+        isDisplayList = false;
         return message;
     }
 
@@ -333,6 +334,7 @@ public class Duke {
         tasks.addDeadline(description, userParse);
         message += ui.addDeadlineMessage(tasks);
         storage.write(tasks);
+        isDisplayList = false;
         return message;
     }
 
@@ -356,6 +358,7 @@ public class Duke {
         tasks.addEvent(description, userParse);
         message += ui.addEventMessage(tasks);
         storage.write(tasks);
+        isDisplayList = false;
         return message;
     }
 
