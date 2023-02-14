@@ -1,7 +1,59 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello, I am 
+______     ______     __     __    
+/\  __ \   /\  == \   /\ \   /\ \   
+\ \  __ \  \ \  __<   \ \ \  \ \ \  
+ \ \_\ \_\  \ \_\ \_\  \ \_\  \ \_\ 
+  \/_/\/_/   \/_/ /_/   \/_/   \/_/ 
 
+How shall I assist you today?
+
+:> [Error Encountered] Arii does not recognise this command...
+
+:> [Error Encountered] You did not specify any details...
+
+:> Hey new task added!
+[T][ ] eat chocolate
+
+:> [Error Encountered] Insufficient details given...
+
+:> Hey new task added!
+[D][ ] do homework (by: tmr)
+
+:> Hey new task added!
+[E][ ] wedding (from: now to: next year)
+
+:> [Error Encountered] Insufficient details given...
+
+:> Arii has retrieved your current tasks...
+1. [T][ ] eat chocolate
+2. [D][ ] do homework (by: tmr)
+3. [E][ ] wedding (from: now to: next year)
+
+:> [Error Encountered] No such task!
+
+:> This task is now done, what's next?
+[D][X] do homework (by: tmr)
+
+:> This task is now done, what's next?
+[T][X] eat chocolate
+
+:> Arii has retrieved your current tasks...
+1. [T][X] eat chocolate
+2. [D][X] do homework (by: tmr)
+3. [E][ ] wedding (from: now to: next year)
+
+:> This task is now not done, how disappointing...
+[D][ ] do homework (by: tmr)
+
+:> [Error Encountered] No such task!
+
+:> Arii has retrieved your current tasks...
+1. [T][X] eat chocolate
+2. [D][ ] do homework (by: tmr)
+3. [E][ ] wedding (from: now to: next year)
+
+:> [Error Encountered] No such task!
+
+:> Task deleted. Are you skipping on work again?
+
+:> Till next time...
