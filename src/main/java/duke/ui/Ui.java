@@ -27,9 +27,9 @@ public class Ui {
     public String showWelcome() {
         String intro = "Hello! I'm Gerty, a cool Task Manager." + LS + "What can I do for you?";
         String usages = "HERE ARE THE TASKS YOU CAN RECORD:" + LS + DIVIDER + LS
-                + "todo <task>" + LS + LS
-                + "deadline <task> /by <" + DATE_TIME_FORMAT + ">" + LS + LS
-                + "event <task> /from <" + DATE_TIME_FORMAT + "> /to <" + DATE_TIME_FORMAT + ">";
+                + "todo <description>" + LS + LS
+                + "deadline <description> /by <" + DATE_TIME_FORMAT + ">" + LS + LS
+                + "event <description> /from <" + DATE_TIME_FORMAT + "> /to <" + DATE_TIME_FORMAT + ">";
 
         return this.formatString(intro + LS + LS + usages, DIVIDER);
     }

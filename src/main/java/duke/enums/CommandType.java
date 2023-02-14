@@ -15,11 +15,11 @@ public enum CommandType {
     UNMARK("unmark", new DukeException("Invalid format for unmark." + LS + "Usage: unmark <number>")),
     DELETE("delete", new DukeException("Invalid format for delete." + LS + "Usage: delete <number>")),
     FIND("find", new DukeException("Invalid format for find." + LS + "Usage: find <string>")),
-    TODO("todo", new DukeException("Invalid format for todo." + LS + "Usage: todo <task>")),
+    TODO("todo", new DukeException("Invalid format for todo." + LS + "Usage: todo <description>")),
     DEADLINE("deadline", new DukeException("Invalid format for Deadline." + LS
-            + "Usage: deadline <task> /by <" + DATE_TIME_FORMAT + ">")),
+            + "Usage: deadline <description> /by <" + DATE_TIME_FORMAT + ">")),
     EVENT("event", new DukeException("Invalid format for Event." + LS
-            + "Usage: event <task> /from <" + DATE_TIME_FORMAT + "> /to <" + DATE_TIME_FORMAT + ">")),
+            + "Usage: event <description> /from <" + DATE_TIME_FORMAT + "> /to <" + DATE_TIME_FORMAT + ">")),
     INCORRECT("incorrect", new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-("));
     private String word;
     private DukeException e;
