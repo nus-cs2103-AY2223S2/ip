@@ -1,9 +1,7 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -56,7 +54,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -146,8 +143,6 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws DukeException, IOException {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
         String userText = userInput.getText();
         assert userText.length() >= 0;
         String dukeText = getResponse(userInput.getText());
@@ -162,7 +157,7 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    String getResponse(String input) throws DukeException, IOException {
+    String getResponse(String input) {
         // The response to an input command
         try {
             String output = parser.readInput(input);

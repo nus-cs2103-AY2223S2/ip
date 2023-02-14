@@ -8,9 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,8 +21,6 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    @FXML
-    private javafx.scene.control.Button closeButton;
 
     private Duke duke;
 
@@ -47,13 +42,12 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws DukeException, IOException {
+    private void handleUserInput() {
         String input = userInput.getText();
         assert input.length() <= 0 : "User input should not be empty";
         String reply = duke.getResponse(input);
         String response;
         if (reply == null) {
-            // exit app
             Platform.exit();
             response = "Bye bye";
         } else {
@@ -72,13 +66,5 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Yo! Duke here! How might I be of service?", dukeImage)
         );
-    }
-
-    @FXML
-    private void closeButtonAction(){
-        // get a handle to the stage
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        // do what you have to do
-        stage.close();
     }
 }
