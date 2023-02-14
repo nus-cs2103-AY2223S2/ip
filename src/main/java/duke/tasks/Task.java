@@ -18,6 +18,8 @@ public abstract class Task implements Serializable{
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        assert this.description != null : "description not initialized";
+
     }
 
 
@@ -40,7 +42,7 @@ public abstract class Task implements Serializable{
      * @return {@inheritDoc}
      */
     @Override
-    public String toString(){
+    public String toString() {
         return getStatusIcon() + " " + this.description;
     }
 

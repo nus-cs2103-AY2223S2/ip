@@ -16,7 +16,7 @@ import java.io.ObjectOutputStream;
  */
 
 public class Storage {
-    String filePath;
+    private String filePath;
 
     /**
      * Creates a Storage object.
@@ -37,7 +37,7 @@ public class Storage {
      */
 
     public TaskList load() throws DukeException {
-        try{
+        try {
             FileInputStream readData = new FileInputStream(filePath);
             ObjectInputStream readStream = new ObjectInputStream(readData);
             return (TaskList) readStream.readObject();
@@ -58,7 +58,7 @@ public class Storage {
             FileOutputStream writeData = new FileOutputStream(filePath);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             writeStream.writeObject(tasks);
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
     }

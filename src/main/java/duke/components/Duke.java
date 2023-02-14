@@ -37,6 +37,8 @@ public class Duke {
         } catch (DukeException e) {
             tasks = new TaskList();
         }
+        assert storage != null : "storage doesn't exist";
+        assert tasks != null : "task-list doesn't exist";
     }
 
     public String getResponse(String userInput) {
@@ -44,12 +46,10 @@ public class Duke {
         try {
             Command c = Parser.parse(userInput);
             response = c.execute(tasks, storage);
+        } catch (DukeException error) {
+            return error.getMessage();
         }
-        catch (DukeException e) {
-            response = e.getMessage();
-        } finally {
-            return response;
-        }
+        return response;
     }
 
     public static String getFilePath() {
@@ -58,7 +58,7 @@ public class Duke {
             //This method creates a directory if it does not exist yet, but will not
             //throw an error even if it exists, and so is safe to call.
             Files.createDirectories(dirPath);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         Path dataPath = Paths.get(dirPath.toString(), "DukeMem.ser");

@@ -25,9 +25,9 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (indexOfTask < 1 || indexOfTask > tasks.size()){
+        if (indexOfTask < 1 || indexOfTask > tasks.size()) {
             throw new DukeException(
-                    "index " + indexOfTask +" not in range of tasklist!");
+                    "index " + indexOfTask + " not in range of tasklist!");
         }
         this.taskToBeDeleted = tasks.getTask(indexOfTask);
         tasks.deleteTask(indexOfTask);
@@ -41,8 +41,5 @@ public class DeleteCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
-    }
-    public Task getTaskToDelete() {
-        return this.taskToBeDeleted;
     }
 }

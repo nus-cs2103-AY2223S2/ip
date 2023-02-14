@@ -20,6 +20,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
+        assert this.by != null : "LocalDate object not given";
     }
 
     /**
@@ -36,7 +37,7 @@ public class Deadline extends Task {
      * @return {@inheritDoc}
      */
     @Override
-    public String getTypeIcon(){
+    public String getTypeIcon() {
         return "[D]";
     }
 }

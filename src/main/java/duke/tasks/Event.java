@@ -22,6 +22,10 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+        assert this.from != null : "LocalDate object not given to var 'from'";
+        assert this.to != null : "LocalDate object not given to var 'to'";
+
+
     }
 
     /**
