@@ -28,10 +28,12 @@ public class DialogBox extends HBox {
     }
 
     public static void setUserImage(Image userImage) {
+        assert userImage != null : "User Image should not be null!";
         DialogBox.userImage = userImage;
     }
 
     public static void setDukeImage(Image dukeImage) {
+        assert dukeImage != null : "Duke Image should not be null!";
         DialogBox.dukeImage = dukeImage;
     }
     
