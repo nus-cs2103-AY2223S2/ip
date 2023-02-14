@@ -36,7 +36,7 @@ class Ui {
         String output = "";
         output += "Got it, babe. Added this for you:\n";
         output += taskString;
-        output += String.format("\nNow you have %d task in the list.\n", count);
+        output += String.format("\nNow you have %d task(s) in the list.\n", count);
         printOutputMessage(output);
         return output;
     }
