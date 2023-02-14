@@ -3,6 +3,7 @@ package parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import dukeexceptions.DatetimeException;
 import dukeexceptions.EmptyDescriptionException;
 import dukeexceptions.InvalidInputException;
 import storage.Storage;
@@ -169,16 +170,20 @@ public class Parser {
      * @return response of added task.
      * @throws EmptyDescriptionException If there is no description of task.
      */
-    public String handleDeadline(String[] inputWords, Ui ui, TaskList list) throws EmptyDescriptionException {
+    public String handleDeadline(String[] inputWords, Ui ui, TaskList list) throws Exception {
         checkEmptyDescription(inputWords);
         String[] splitedString = inputWords[1].split(" /by ");
         String action = splitedString[0];
-        String date = splitedString[1]; // in yyyy/mm/d HHMM format
-        LocalDateTime inputDateTime = LocalDateTime.parse(date, INPUT_FORMATTER);
-        String outputDateTime = inputDateTime.format(OUTPUT_FORMATTER);
-        Task newTask = new Deadline(action, outputDateTime);
-        list.addTask(newTask);
-        return ui.printAddTask(newTask, list);
+        String date = splitedString[1];
+        if (validDatetimeFormat(date)) {
+            LocalDateTime inputDateTime = LocalDateTime.parse(date, INPUT_FORMATTER);
+            String outputDateTime = inputDateTime.format(OUTPUT_FORMATTER);
+            Task newTask = new Deadline(action, outputDateTime);
+            list.addTask(newTask);
+            return ui.printAddTask(newTask, list);
+        } else {
+            throw new DatetimeException();
+        }
     }
 
     /**
@@ -213,6 +218,21 @@ public class Parser {
     public void checkEmptyDescription(String[] inputWords) throws EmptyDescriptionException {
         if (inputWords.length < 2) {
             throw new EmptyDescriptionException();
+        }
+    }
+
+    /**
+     * Checks if datetime given is in the correct format.
+     *
+     * @param datetime Datetime of deadline task.
+     * @return Validity of datetime format.
+     */
+    public boolean validDatetimeFormat(String datetime) {
+        try {
+            LocalDateTime.parse(datetime, INPUT_FORMATTER);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 

@@ -47,7 +47,14 @@ public class Duke {
         return this.parser.parse(input, this.ui, this.list, this.storage);
     }
 
-
+    /**
+     * Returns whether the chatbot is to be Exited.
+     *
+     * @return whether the chatbot is to be Exited.
+     */
+    public boolean hasExited() {
+        return this.ui.isClosed();
+    }
 }
 
 

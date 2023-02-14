@@ -27,6 +27,15 @@ public class Ui {
     }
 
     /**
+     * Returns whether the Ui is closed.
+     *
+     * @return status of Ui.
+     */
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    /**
      * Returns the Exception given.
      * @param e Exception.
      * @return Exception in a String type
