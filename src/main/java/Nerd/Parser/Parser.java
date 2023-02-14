@@ -1,6 +1,7 @@
 package Nerd.Parser;
 
 import Nerd.Commands.*;
+import Nerd.Nerd;
 import Nerd.entities.Deadline;
 import Nerd.entities.Event;
 import Nerd.entities.Todo;
@@ -9,13 +10,16 @@ import Nerd.exceptions.NerdException;
 import Nerd.entities.TaskList;
 import Nerd.entities.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents the Parser of the Chat bot that parses the commands.
  */
 public class Parser {
 
     /**
-     * Parses the input string into commands.
+     * Parses the input string into commands to be processed subsequently.
      *
      * @param input The full line of the command and arguments.
      * @return The command of the input.
@@ -25,70 +29,40 @@ public class Parser {
     public Command parseCommand(String input) throws NerdException, IllegalArgumentException {
         String[] split = input.split(" ");
         CommandEnums type;
+
         try {
             type = CommandEnums.valueOf(split[0].toUpperCase().strip());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Sorry! I have no idea what that means ??? >:c");
         }
+
+        if (isEmptyCommand(split)) {
+            throw new NerdException("According to my calculations, there are empty inputs!\n" +
+                    "Please follow the valid command list above :D");
+        }
         switch (type) {
         case LIST:
             return new ListCommand();
         case MARK:
-            if (!isEmptyCommand(split)) {
-                return new MarkCommand(parseIndex(input));
-            } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
-            }
+            return new MarkCommand(parseIndex(input));
         case UNMARK:
-            if (!isEmptyCommand(split)) {
-                return new UnmarkCommand(parseIndex(input));
-            } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
-            }
+            return new UnmarkCommand(parseIndex(input));
         case TODO:
-            if (!isEmptyCommand(split)) {
-                return new TodoCommand(parseDescription(input));
-            } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
-            }
+            return new TodoCommand(parseDescription(input));
         case DEADLINE:
-            if (!isEmptyCommand(split)) {
-                String[] parsedDeadline = parseDeadline(input);
-                return new DeadlineCommand(parsedDeadline[0], parsedDeadline[1]);
-            } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
-            }
+            String[] parsedDeadline = parseDeadline(input);
+            return new DeadlineCommand(parsedDeadline[0], parsedDeadline[1]);
         case EVENT:
-            if (!isEmptyCommand(split)) {
-                String[] eventList = parseEvent(input);
-                return new EventCommand(eventList[0], eventList[1], eventList[2]);
-            } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
-            }
+            String[] eventList = parseEvent(input);
+            return new EventCommand(eventList[0], eventList[1], eventList[2]);
         case DELETE:
-            if (!isEmptyCommand(split)) {
-                return new DeleteCommand(parseIndex(input));
-            } else {
-                throw new NerdException("Sorry! you can't have empty indexes!");
-            }
+            return new DeleteCommand(parseIndex(input));
         case DATE:
-            if (!isEmptyCommand(split)) {
-                return new SearchDateCommand(parseDescription(input));
-            } else {
-                throw new NerdException("Sorry! you can't have empty dates!");
-            }
+            return new SearchDateCommand(parseDescription(input));
         case FIND:
-            if (!isEmptyCommand(split)) {
-                return new FindCommand(parseDescription(input), this);
-            } else {
-                throw new NerdException("Sorry! you can't have empty descriptions!");
-            }
+            return new FindCommand(parseDescription(input), this);
         case REMINDER:
-            if (!isEmptyCommand(split)) {
-                return new ReminderCommand(parseIndex(input));
-            } else {
-                throw new NerdException("Sorry! you can't have an empty date range!");
-            }
+            return new ReminderCommand(parseIndex(input));
         case BYE:
             return new ExitCommand();
         default:
@@ -154,6 +128,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Searches the given tasklist for any matching descriptions.
+     *
+     * @param list The current Tasklist of the nerdbot.
+     * @param description The description of the task to search for.
+     * @return The string representation of the task.
+     */
     public String searchDescription(TaskList list, String description) {
         String output = "";
         for (int i = 0; i < list.getSize(); i++) {
@@ -217,6 +198,4 @@ public class Parser {
             return false;
         }
     }
-
-
 }

@@ -59,9 +59,7 @@ public class Nerd {
             Command command = parser.parseCommand(input);
             output = command.processCommand(this.list, this.ui);
             storage.save(this.list);
-        } catch (NerdException e) {
-            return e.getMessage();
-        } catch (IOException e) {
+        } catch (Exception e) {
             return e.getMessage();
         }
         return output;

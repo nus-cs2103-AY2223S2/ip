@@ -3,7 +3,6 @@ import Nerd.entities.Deadline;
 import Nerd.entities.Event;
 import Nerd.entities.Task;
 import Nerd.entities.TaskList;
-import java.util.Scanner;
 
 /**
  * Represents the user interface of the Chat bot.
@@ -26,6 +25,7 @@ public class Ui {
                 + "list\n"
                 + "delete [index]\n"
                 + "date [date]\n"
+                + "reminder [days from today]\n"
                 + "date formats are in yyyy-mm-dd";
         return availableCommands;
     }

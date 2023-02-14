@@ -1,8 +1,6 @@
-T | 1 | read book
+T | 0 | read book
 D | 0 | return book | 2019-10-15
 D | 0 | project meeting | 2019-10-15
 T | 1 | join sports club
-T | 0 | buy book
 E | 0 | book event | 2019-10-15 | 2019-10-15
-D | 0 | burn  | 2023-02-10
-E | 0 | Event burnbook  | 2023-02-10 | 2023-02-15
+D | 1 | this  | 2019-12-12

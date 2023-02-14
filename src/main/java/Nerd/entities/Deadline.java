@@ -1,7 +1,10 @@
 package Nerd.entities;
 
+import Nerd.exceptions.NerdException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the Deadline Task of the Chat bot.
