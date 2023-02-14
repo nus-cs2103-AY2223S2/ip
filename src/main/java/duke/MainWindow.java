@@ -6,6 +6,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 
 /**
@@ -24,11 +29,19 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/shenganning.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/trex.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/trex.png"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/bridge.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        /*
+        BackgroundSize bkgSize = new BackgroundSize(552, 388, true, true, false, true);
+        BackgroundImage bkgImg = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, null,
+                BackgroundPosition.CENTER, bkgSize);
+        Background bkg = new Background(bkgImg);
+        dialogContainer.setBackground(bkg);*/
     }
 
     public void setDuke(Duke d) {
