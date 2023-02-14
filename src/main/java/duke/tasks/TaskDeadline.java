@@ -17,6 +17,10 @@ public class TaskDeadline extends Task {
      */
     public TaskDeadline(String description, String endTime) {
         super(description);
+
+        assert endTime != null : "End time string should not be 'null'";
+        assert endTime.isBlank() : "End time string should not be blank";
+
         this.endTime = LocalDate.parse(endTime);
     }
 

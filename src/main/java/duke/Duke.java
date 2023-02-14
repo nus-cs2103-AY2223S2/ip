@@ -39,6 +39,7 @@ public class Duke {
         // Attempt to load task list from save file.
         try {
             tasks = storage.load();
+            assert tasks != null : "Task list should not be 'null'";
         } catch (DukeSaveLoadException e) {
             initialMsg += "\n" + e.getDukeMessage();
             tasks = new TaskList();
@@ -255,6 +256,8 @@ public class Duke {
      * @return Initialisation response.
      */
     public String getInitialResponse() {
+        assert initialMsg != null : "Initial msg should not be 'null'";
+
         return initialMsg;
     }
 
@@ -265,6 +268,8 @@ public class Duke {
      * @return Duke's response, or 'null' if the app is to be closed.
      */
     public String getResponse(String input) {
+        assert input != null : "Input should not be 'null'";
+
         if (input.isEmpty()) {
             return "";
         }
@@ -308,6 +313,9 @@ public class Duke {
             }
 
             storage.save(tasks);
+
+            assert input != null : "Response should not be 'null'";
+
             return response;
         } catch (DukeException e) {
             return e.getDukeMessage();

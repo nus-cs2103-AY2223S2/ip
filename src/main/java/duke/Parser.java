@@ -26,6 +26,8 @@ public class Parser {
      * Parses a command and break it down into its base command, body and params.
      */
     public Parser(String command) {
+        assert command != null : "Command should not be 'null'";
+
         fullCommand = command;
         String[] splittedCommand = command.split(" +", 2);
         baseCommand = splittedCommand[0];
@@ -43,6 +45,10 @@ public class Parser {
             namedParameters.put(splittedParam[0], splittedParam.length > 1 ? splittedParam[1] : "");
         }
         this.body = body;
+
+        assert fullCommand != null : "Full command should not be 'null'";
+        assert baseCommand != null : "Base command should not be 'null'";
+        assert this.body != null : "Body should not be 'null'";
     }
 
     /**

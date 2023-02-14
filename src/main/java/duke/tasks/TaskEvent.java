@@ -20,6 +20,12 @@ public class TaskEvent extends Task {
      */
     public TaskEvent(String description, String fromTime, String toTime) {
         super(description);
+
+        assert fromTime != null : "From time string should not be 'null'";
+        assert fromTime.isBlank() : "From time string should not be blank";
+        assert toTime != null : "To time string should not be 'null'";
+        assert toTime.isBlank() : "To time string should not be blank";
+
         this.fromTime = LocalDate.parse(fromTime);
         this.toTime = LocalDate.parse(toTime);
     }
