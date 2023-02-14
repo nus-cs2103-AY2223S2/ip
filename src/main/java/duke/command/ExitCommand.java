@@ -2,13 +2,11 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles tasks with exiting Duke
- * Exits Duke.
- * Returns farewell message.
+ * Deals with exiting Duke.
  */
 public class ExitCommand extends Command {
 

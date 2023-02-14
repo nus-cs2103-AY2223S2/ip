@@ -2,14 +2,12 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles showing tasks in list of tasks
- * Gets list of tasks.
- * Return list of tasks.
+ * Deals with showing all tasks.
  */
 public class ListCommand extends Command {
 
@@ -35,7 +33,7 @@ public class ListCommand extends Command {
         }
 
         setResponse(count == 0
-                ? "There is no task in your list"
+                ? "There is no task in your list."
                 : response.toString());
     }
 }

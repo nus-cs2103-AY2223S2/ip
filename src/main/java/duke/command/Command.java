@@ -2,11 +2,11 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the commands available in Duke
+ * Deals with executing command input by user.
  */
 public abstract class Command {
 
@@ -31,12 +31,12 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    /** Checks if Duke should exit */
+    /** Checks if Duke should exit. */
     public boolean isExit() {
         return isExit;
     }
 
-    /** Sets program to exit */
+    /** Sets program to exit. */
     public void exit() {
         isExit = true;
     }

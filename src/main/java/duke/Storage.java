@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.

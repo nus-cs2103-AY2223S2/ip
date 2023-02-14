@@ -2,20 +2,18 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the finding tasks that contains the keyword from the list of tasks
- * Get list of tasks that contains the specified keyword.
- * Return list of tasks.
+ * Deals with finding tasks that contains the keyword.
  */
 public class FindCommand extends Command {
-    protected final String keyword;
+    private final String keyword;
 
     /**
-     * Stores the specified keyword.
+     * Finds tasks that contains the keyword.
      *
      * @param fullCommand User's input command.
      * @throws DukeException If a keyword is not specified.
@@ -52,7 +50,7 @@ public class FindCommand extends Command {
         }
 
         setResponse(count == 0
-                ? "There is no such task in your list"
+                ? "There is no such task in your list."
                 : response.toString());
     }
 }

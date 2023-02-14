@@ -2,21 +2,19 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the changing the status of task to not done
- * Changes completion status of task to not done
- * Save changes made to list in the hard disk
- * Returns response for changing the status of specified task to not done.
+ * Deals with changing task status to not done.
+ * Save changes made to list in the hard disk.
  */
 public class UnmarkCommand extends Command {
     private final int index;
 
     /**
-     * Stores the index of the task to be marked as not done
+     * Changes task status to not done.
      *
      * @param fullCommand The user's input command
      * @throws DukeException If input from user does not contain a valid index

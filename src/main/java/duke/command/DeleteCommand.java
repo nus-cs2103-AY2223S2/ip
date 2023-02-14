@@ -2,24 +2,22 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the deletion of task from list of tasks
- * Removes specified task from list
- * Save changes made to list in the hard disk
- * Returns response for removing specified task.
+ * Deals with removing tasks.
+ * Save changes made to list in the hard disk.
  */
 public class DeleteCommand extends Command {
     private final int index;
 
     /**
-     * Stores the index of the task to be deleted
+     * Removes specified task to TaskList.
      *
-     * @param fullCommand The user's input command
-     * @throws DukeException If input from user does not contain a valid index
+     * @param fullCommand The user's input command.
+     * @throws DukeException If input from user does not contain a valid index.
      */
     public DeleteCommand(String fullCommand) throws DukeException {
         try {

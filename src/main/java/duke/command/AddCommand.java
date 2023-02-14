@@ -2,23 +2,21 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the adding task to list of tasks
- * Adds specified task to list.
+ * Deals with adding tasks.
  * Save changes made to list in the hard disk.
- * Returns response for adding specified task.
  */
 public class AddCommand extends Command {
     private final Task task;
 
     /**
-     * Stores the task to add to list of tasks
+     * Adds specified task to TaskList.
      *
-     * @param task Task to be added to list of tasks
+     * @param task Task to be added to TaskList.
      */
     public AddCommand(Task task) {
         this.task = task;

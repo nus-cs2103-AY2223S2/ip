@@ -2,24 +2,22 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the marking task as done
- * Changes completion status of task to done
- * Save changes made to list in the hard disk
- * Returns response for changing the status of specified task to done.
+ * Deals with changing task status to done.
+ * Save changes made to list in the hard disk.
  */
 public class MarkCommand extends Command {
     private final int index;
 
     /**
-     * Stores the index of the task to be marked as completed
+     * Changes task status to done.
      *
-     * @param fullCommand The user's input command
-     * @throws DukeException If input from user does not contain a valid index
+     * @param fullCommand The user's input command.
+     * @throws DukeException If input from user does not contain a valid index.
      */
     public MarkCommand(String fullCommand) throws DukeException {
         try {
