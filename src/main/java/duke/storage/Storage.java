@@ -60,15 +60,12 @@ public class Storage {
                 case "T":
                     task = new ToDo(taskDes);
                     break;
-
                 case "D":
                     task = new Deadline(taskDes, LocalDate.parse(str[3]));
                     break;
-
                 case "E":
                     task = new Event(taskDes, LocalDate.parse(str[3]), LocalDate.parse(str[4]));
                     break;
-
                 default:
                     assert false: "Unable to load task!";
                     break;

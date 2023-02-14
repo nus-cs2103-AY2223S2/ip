@@ -18,9 +18,19 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+
     public List<Task> getTaskList() {
         return this.taskList;
     }
+
+    public Task getTask(int index) {
+        return taskList.get(index);
+    }
+
+    public int getSize() {
+        return taskList.size();
+    }
+
 
     /**
      * Prints the list of tasks
@@ -38,36 +48,20 @@ public class TaskList {
 
     /**
      * Mark the task stored in the list as completed
-     * @param taskStr Task number of task in the list to mark as completed
+     * @param taskNum Task number of task in the list to mark as completed
      */
-    public String markTask(String taskStr) {
-        try {
-            int taskNum = Integer.parseInt(taskStr) - 1;
-            Task originalTask = taskList.get(taskNum);
-            originalTask.markTask();
-            return "Nice! I've marked this task as done: \n  " + originalTask;
-        } catch (NumberFormatException e) {
-            return "Please enter a task number!";
-        } catch (IndexOutOfBoundsException e) {
-            return "Please enter a valid task number!";
-        }
+    public void markTask(int taskNum) throws IndexOutOfBoundsException {
+        Task originalTask = taskList.get(taskNum);
+        originalTask.markTask();
     }
 
     /**
      * Mark the task stored in the list as not completed
-     * @param taskStr Task number of task in the list to mark as completed
+     * @param taskNum Task number of task in the list to mark as completed
      */
-    public String unmarkTask(String taskStr) {
-        try {
-            int taskNum = Integer.parseInt(taskStr) - 1;
-            Task originalTask = taskList.get(taskNum);
-            originalTask.unmarkTask();
-            return "Ok, I've marked this task as not done yet: \n  " + originalTask;
-        } catch (NumberFormatException e) {
-            return "Please enter a task number!";
-        } catch (IndexOutOfBoundsException e) {
-            return "Please enter a valid task number!";
-        }
+    public void unmarkTask(int taskNum) throws IndexOutOfBoundsException {
+        Task originalTask = taskList.get(taskNum);
+        originalTask.unmarkTask();
     }
 
     /**
@@ -89,21 +83,10 @@ public class TaskList {
 
     /**
      * Delete the task from the list
-     * @param taskStr Task number of task in the list to be deleted
+     * @param taskNum Task number of task in the list to be deleted
      */
-    public String deleteTask(String taskStr) {
-        try {
-            int taskNum = Integer.parseInt(taskStr) - 1;
-            Task taskToRemove = taskList.get(taskNum);
-            String removedTaskStr = taskToRemove.toString();
-            taskList.remove(taskNum);
-            return "Noted. I've removed this task: \n  " + removedTaskStr
-                    + "\nNow you have " + taskList.size() + " tasks in the list.";
-        } catch (NumberFormatException e) {
-            return "Please enter a task number!";
-        } catch (IndexOutOfBoundsException e) {
-            return "Please enter a valid task number!";
-        }
+    public void deleteTask(int taskNum) throws IndexOutOfBoundsException{
+        taskList.remove(taskNum);
     }
 
     /**
@@ -111,24 +94,6 @@ public class TaskList {
      * @param targetString String to be found
      * @return List of tasks containing the targetString
      */
-    public String find(String targetString) {
-        List<Task> targetList = new ArrayList<>();
-        for (Task t : taskList) {
-            if (t.getTask().contains(targetString)) {
-                targetList.add(t);
-            }
-        }
-
-        if (targetList.isEmpty()) {
-            return "Oops! :( There are no matching tasks found.";
-        } else {
-            String listFound = "Here are the matching tasks in your list:";
-            for (int i = 1; i < targetList.size() + 1; i++) {
-                listFound = listFound + "\n" + i + "." + (targetList.get(i - 1)).toString();
-            }
-            return listFound;
-        }
-    }
 
 
 

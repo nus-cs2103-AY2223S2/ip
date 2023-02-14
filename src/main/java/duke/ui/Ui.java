@@ -1,11 +1,15 @@
 package duke.ui;
 
+import duke.parser.Parser;
+
 /**
  * Ui class to handle interactions with user
  */
 public class Ui {
+    private Parser parser;
 
-    public Ui() {
+    public Ui(Parser parser) {
+        this.parser = parser;
     }
 
     /**
@@ -14,6 +18,11 @@ public class Ui {
      */
     public String greet() {
         return "Hello! I'm Pingu \nWhat can I do for you?";
+    }
+
+
+    public String generateReply(String input) {
+        return this.parser.performCommand(input);
     }
 
 }

@@ -1,17 +1,12 @@
 package duke.parser;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+
+import duke.exception.WrongFormatException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongCommandException;
-import duke.exception.WrongFormatException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.ToDo;
 
 
 
@@ -20,7 +15,6 @@ import duke.task.ToDo;
  */
 public class Parser {
     private TaskList taskList;
-    private Scanner sc;
     private ArrayList<String> listOfCommands;
 
     /**
@@ -29,10 +23,8 @@ public class Parser {
      */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
-        //this.sc = new Scanner(System.in);
         this.listOfCommands = new ArrayList<>() {
             {
-                //add("list");
                 add("mark");
                 add("unmark");
                 add("todo");
@@ -50,56 +42,41 @@ public class Parser {
      * @throws WrongCommandException If wrong command word is being entered
      */
     public String performCommand(String input) {
+        String[] arrOfString = input.trim().split(" ");
+        String command = arrOfString[0];
         try {
+            this.checkCommand(input, command);
+            switch (command) {
+            case "bye":
+                return HandleBye.performBye(input);
 
-            if (input.equals("bye")) {
-                return "Bye. Hope to see you again soon!";
-            } else if (input.equals("list")) {
-                return taskList.printList();
-            } else {
-                this.checkCommand(input);
-                String[] arrOfString = input.split(" ");
-                assert arrOfString.length >= 1 : "Input format wrong!";
-                String command = arrOfString[0];
-                switch (command) {
-                case "mark":
-                    return taskList.markTask(input.substring(5));
+            case "list":
+                return HandleList.performList(input, taskList);
 
-                case "unmark":
-                    return taskList.unmarkTask(input.substring(7));
+            case "mark":
+                return HandleMark.performMark(input, taskList);
 
-                case "todo":
-                    Task taskToDo = new ToDo(input);
-                    taskList.addTask(taskToDo);
-                    return taskList.printAddComment(taskToDo);
+            case "unmark":
+                return HandleUnmark.performUnmark(input, taskList);
 
-                case "deadline":
-                    LocalDate deadline = LocalDate.parse(
-                            input.substring(input.indexOf("/") + 4));
-                    Task taskDeadline = new Deadline(input, deadline);
-                    taskList.addTask(taskDeadline);
-                    return taskList.printAddComment(taskDeadline);
+            case "todo":
+                return HandleToDo.performToDo(input, taskList);
 
-                case "event":
-                    LocalDate startDate = LocalDate.parse(
-                            input.substring(input.indexOf("/") + 6,
-                                    input.lastIndexOf("/") - 1));
-                    LocalDate endDate = LocalDate.parse(
-                            input.substring(input.lastIndexOf("/") + 4));
-                    Task taskEvent = new Event(input, startDate, endDate);
-                    taskList.addTask(taskEvent);
-                    return taskList.printAddComment(taskEvent);
+            case "deadline":
+                return HandleDeadline.performDeadline(input, taskList);
 
-                case "delete":
-                    return taskList.deleteTask(input.substring(7));
+            case "event":
+                return HandleEvent.performEvent(input, taskList);
 
-                case "find":
-                    return taskList.find(input.substring(5));
+            case "delete":
+                return HandleDelete.performDelete(input, taskList);
 
-                default:
-                    assert false: "Unable to process command";
-                    return "Please enter a valid command and/or task!";
-                }
+            case "find":
+                return HandleFind.performFind(input, taskList);
+
+            default:
+                assert false: "Unable to process command";
+                return "Please enter a valid command and/or task!";
             }
         } catch (EmptyDescriptionException | WrongCommandException | WrongFormatException e){
             return e.getMessage();
@@ -114,15 +91,10 @@ public class Parser {
      * @param input Input String by user
      * @return Perform command to return string by Duke
      */
-    public void checkCommand(String input) throws EmptyDescriptionException, WrongCommandException,
-            WrongFormatException {
-        String[] arrOfString = input.trim().split(" ");
-        String command = arrOfString[0];
+    public void checkCommand(String input, String command) throws EmptyDescriptionException, WrongCommandException {
         if (listOfCommands.contains(input)) {
             throw new EmptyDescriptionException();
-        } else if (arrOfString.length > 1 && (command.equals("bye") || command.equals("list"))) {
-            throw new WrongFormatException();
-        } else if (!listOfCommands.contains(command)) {
+        } else if (!listOfCommands.contains(command) && !command.equals("list") && !command.equals("bye")) {
             throw new WrongCommandException();
         }
     }
