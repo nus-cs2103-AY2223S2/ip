@@ -37,22 +37,28 @@ ____
 *  `todo [description]`
 
 This adds a task of type "todo" into your list of tasks.
+
 ____
+
 ### `deadline` - Add Deadlines
 * Usage: `deadline [description] /by [yyyy-MM-dd HHmm]`
 
 This adds a task of type "deadline" together with the date-time provided. 
 ___
+
 ### `event ` - Add Events
 * Usage: `event [description] /from [yyyy-MM-dd HHmm] /to [HHmm]`
 
 This adds a task of type "event" which contains start datetime and end time. 
+
 ___
+
 ### `list` - List all existing tasks
 * Usage: `list`
 
 This command shows all tasks you have added. 
 Tasks are numbered which is used to reference during mark, unmark, delete.
+
 ___
 
 ### `delete [id]` - Delete Tasks
@@ -68,6 +74,7 @@ ___
 
 Mark tasks as complete with referenced id (see [list task](#list---list-all-existing-tasks)).<br>
 You can mark multiple tasks at once by referencing their id.
+
 ___
 
 ### `unmark [id]` - Mark Task as incomplete
@@ -77,10 +84,12 @@ Unmark task's complete status with referenced id (see [list task](#list---list-a
 You can unmark multiple tasks at once by referencing their id.
 
 ___
+
 ### `find [description]` - Search for tasks
 * Usage: `find part of description]`
 
 To quickly find tasks use `find` command and enter the search term.<br>
 Duke will return all tasks whose description contains the search term. 
+
 ___
 
