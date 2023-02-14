@@ -10,6 +10,11 @@ import duke.textui.TextUi;
  * the chatbot can be carried out when called.
  */
 public class ExitCommand extends Command {
+
+    public static final String EXIT_MSG = "Thank you for coming!\n"
+            + "Hope to see you again soon!\n"
+            + "~~Bye";
+
     /**
      * Constructor for a command to exit the chatbot.
      */
@@ -27,10 +32,7 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskList tasklist, TextUi ui, Storage storage)
             throws DukeException {
-        String exitMsg = "Thank you for coming!\n"
-                + "Hope to see you again soon!\n"
-                + "~~Bye";
-        String output = ui.showMsg(exitMsg);
+        String output = ui.showMsg(EXIT_MSG);
 
         storage.updateData(tasklist);
         ui.close();

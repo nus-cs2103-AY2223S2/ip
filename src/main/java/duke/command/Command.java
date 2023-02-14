@@ -52,7 +52,7 @@ public class Command {
      * @param indexStr String representation of the index being checked
      * @param tasks    List of tasks being referenced upon
      * @return The integer representation of the index that was in string
-     * representation
+     *     representation
      * @throws DukeException If the string representation of index is not an
      *                       integer or out of bounds of task list
      */

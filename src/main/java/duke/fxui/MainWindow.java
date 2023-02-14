@@ -1,12 +1,16 @@
 package duke.fxui;
 
 import duke.Duke;
+import duke.command.ExitCommand;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * The main GUI window where the user input and chatbot responses are shown. The
@@ -51,6 +55,10 @@ public class MainWindow extends VBox {
      * The chatbot instance.
      */
     private Duke duke;
+    /**
+     * Delay of 2 second when the program is exiting.
+     */
+    private final PauseTransition delay = new PauseTransition(Duration.seconds(2));
 
     /**
      * Initialises the scrollPane to have a container that contains all the dialog
@@ -72,6 +80,7 @@ public class MainWindow extends VBox {
 
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
+        delay.setOnFinished(event -> Platform.exit());
     }
 
     /**
@@ -89,5 +98,9 @@ public class MainWindow extends VBox {
         userInput.clear();
 
         assert userInput.getText().equals("");
+
+        if (response.equals(ExitCommand.EXIT_MSG)) {
+            delay.play();
+        }
     }
 }
