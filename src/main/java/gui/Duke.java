@@ -91,7 +91,7 @@ public class Duke extends Application {
 
         // greetings
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("I'm WindyCall, how can I help you?", duke)
+                DialogBox.getDukeDialog("Hi, I'm WindyCall, what can I do for you?", duke)
         );
 
         // for step 3
@@ -134,9 +134,6 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userInput.getText(), user),
                 DialogBox.getDukeDialog(getResponse(userInput.getText()), user)
         );
-        if (userInput.getText().equals("bye")) {
-            stage.close();
-        }
         userInput.clear();
     }
 
