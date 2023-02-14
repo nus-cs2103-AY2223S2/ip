@@ -31,7 +31,7 @@ public class DialogBox extends HBox {
     private Circle myCircle;
 
     /**
-     * Constructor for DialogBox.
+     * A Constructor for DialogBox.
      *
      * @param text The text to be set in the dialog box.
      * @param img The image to be set in the dialog box.

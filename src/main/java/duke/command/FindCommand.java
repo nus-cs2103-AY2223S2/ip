@@ -11,7 +11,7 @@ import duke.Ui;
 public class FindCommand extends Command {
     private String[] taskName;
     /**
-     * Constructor for FindCommand.
+     * A Constructor for FindCommand.
      *
      * @param taskName Keyword used to filter tasks in the task list.
      */

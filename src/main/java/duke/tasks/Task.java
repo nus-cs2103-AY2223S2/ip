@@ -11,7 +11,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for task.
+     * A Constructor for task.
      *
      * @param description Description of task.
      * @param isDone Completion status of task.

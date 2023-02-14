@@ -15,7 +15,7 @@ public class Event extends Task {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
-     * Constructor for Event.
+     * A Constructor for Event.
      *
      * @param description Description of Event.
      * @param from Event start date.

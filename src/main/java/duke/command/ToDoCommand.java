@@ -13,7 +13,7 @@ public class ToDoCommand extends Command {
     private String description;
 
     /**
-     * Constructor for ToDoCommand.
+     * A Constructor for ToDoCommand.
      *
      * @param description Description of ToDo task.
      */

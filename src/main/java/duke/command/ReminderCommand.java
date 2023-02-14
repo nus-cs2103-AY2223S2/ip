@@ -9,7 +9,7 @@ import duke.Ui;
  */
 public class ReminderCommand extends Command {
     /**
-     * Constructor for ReminderCommand.
+     * A Constructor for ReminderCommand.
      */
     public ReminderCommand() {
         super(false);

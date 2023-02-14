@@ -48,57 +48,19 @@ public class Parser {
                 isFine = false;
                 return new ListCommand();
             case mark:
-                if (splitString.length == 1) {
-                    throw new DukeException("\tPlease enter the task number to mark!");
-                } else {
-                    return new MarkCommand(Integer.parseInt(splitString[1].trim()) - 1);
-                }
+                return getMarkCommand(splitString);
             case unmark:
-                if (splitString.length == 1) {
-                    throw new DukeException("\tPlease enter the task number to unmark!");
-                } else {
-                    return new UnmarkCommand(Integer.parseInt(splitString[1].trim()) - 1);
-                }
+                return getUnmarkCommand(splitString);
             case deadline:
-                if (splitString.length == 1) {
-                    throw new DukeException("\tOOPS!!! The description of a deadline cannot be empty.");
-                } else {
-                    String[] splitDescription = splitString[1].split(" /by ");
-                    if (splitDescription.length == 1) {
-                        throw new DukeException("\tOOPS!!! The date of a deadline cannot be empty.");
-                    }
-                    return new DeadlineCommand(splitDescription[0], splitDescription[1]);
-                }
+                return getDeadlineCommand(splitString);
             case event:
-                if (splitString.length == 1) {
-                    throw new DukeException("\tOOPS!!! The description of an event cannot be empty.");
-                } else {
-                    String[] splitDescriptionArray = splitString[1].split(" /from ");
-                    String[] timeSplitArray = splitDescriptionArray[1].split("/to");
-                    if (timeSplitArray.length == 1) {
-                        throw new DukeException("\tOOPS!!! The date of an event cannot be empty.");
-                    }
-                    return new EventCommand(splitDescriptionArray[0], timeSplitArray[0], timeSplitArray[1]);
-                }
+                return getEventCommand(splitString);
             case todo:
-                if (splitString.length == 1) {
-                    throw new DukeException("\tOOPS!!! The description of a todo cannot be empty.");
-                } else {
-                    return new ToDoCommand(splitString[1]);
-                }
+                return getToDoCommand(splitString);
             case delete:
-                if (splitString.length == 1) {
-                    throw new DukeException("\tPlease enter the task number to delete!");
-                } else {
-                    return new DeleteCommand(Integer.parseInt(splitString[1].trim()) - 1, isFine);
-                }
+                return getDeleteCommand(splitString);
             case find:
-                if (splitString[1].trim().equals("")) {
-                    throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
-                } else {
-                    isFine = true;
-                    return new FindCommand(splitString[1].split(" "));
-                }
+                return getFindCommand(splitString);
             case reminders:
                 return new ReminderCommand();
             default:
@@ -110,4 +72,71 @@ public class Parser {
             throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!");
         }
     }
+
+    private static FindCommand getFindCommand(String[] splitString) throws DukeException {
+        if (splitString[1].trim().equals("")) {
+            throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
+        } else {
+            isFine = true;
+            return new FindCommand(splitString[1].split(" "));
+        }
+    }
+
+    private static DeleteCommand getDeleteCommand(String[] splitString) throws DukeException {
+        if (splitString.length == 1) {
+            throw new DukeException("\tPlease enter the task number to delete!");
+        } else {
+            return new DeleteCommand(Integer.parseInt(splitString[1].trim()) - 1, isFine);
+        }
+    }
+
+    private static ToDoCommand getToDoCommand(String[] splitString) throws DukeException {
+        if (splitString.length == 1) {
+            throw new DukeException("\tOOPS!!! The description of a todo cannot be empty.");
+        } else {
+            return new ToDoCommand(splitString[1]);
+        }
+    }
+
+    private static EventCommand getEventCommand(String[] splitString) throws DukeException {
+        if (splitString.length == 1) {
+            throw new DukeException("\tOOPS!!! The description of an event cannot be empty.");
+        } else {
+            String[] splitDescriptionArray = splitString[1].split(" /from ");
+            String[] timeSplitArray = splitDescriptionArray[1].split("/to");
+            if (timeSplitArray.length == 1) {
+                throw new DukeException("\tOOPS!!! The date of an event cannot be empty.");
+            }
+            return new EventCommand(splitDescriptionArray[0], timeSplitArray[0], timeSplitArray[1]);
+        }
+    }
+
+    private static DeadlineCommand getDeadlineCommand(String[] splitString) throws DukeException {
+        if (splitString.length == 1) {
+            throw new DukeException("\tOOPS!!! The description of a deadline cannot be empty.");
+        } else {
+            String[] splitDescription = splitString[1].split(" /by ");
+            if (splitDescription.length == 1) {
+                throw new DukeException("\tOOPS!!! The date of a deadline cannot be empty.");
+            }
+            return new DeadlineCommand(splitDescription[0], splitDescription[1]);
+        }
+    }
+
+    private static UnmarkCommand getUnmarkCommand(String[] splitString) throws DukeException {
+        if (splitString.length == 1) {
+            throw new DukeException("\tPlease enter the task number to unmark!");
+        } else {
+            return new UnmarkCommand(Integer.parseInt(splitString[1].trim()) - 1);
+        }
+    }
+
+    private static MarkCommand getMarkCommand(String[] splitString) throws DukeException {
+        if (splitString.length == 1) {
+            throw new DukeException("\tPlease enter the task number to mark!");
+        } else {
+            return new MarkCommand(Integer.parseInt(splitString[1].trim()) - 1);
+        }
+    }
 }
+

@@ -12,7 +12,7 @@ public class MarkCommand extends Command {
     private int index;
 
     /**
-     * Constructor for MarkCommand.
+     * A Constructor for MarkCommand.
      *
      * @param index Index of task to be marked as done.
      */

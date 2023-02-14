@@ -16,7 +16,7 @@ public class TaskList {
     private ArrayList<Task> listOfFindTasks;
 
     /**
-     * Constructor for TaskList without any saved data.
+     * A Constructor for TaskList without any saved data.
      */
     public TaskList() {
         this.listOfTasks = new ArrayList<>();
@@ -89,7 +89,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark the task.
+     * Unmark the task as not done.
      *
      * @param index Index of task to be marked unDone.
      */

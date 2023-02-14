@@ -14,7 +14,7 @@ public class DeadlineCommand extends Command {
     private String by;
 
     /**
-     * Contructor for DeadlineCommand
+     * A Constructor for DeadlineCommand
      *
      * @param description Description of deadline.
      * @param by Due date of deadline.

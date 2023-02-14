@@ -10,7 +10,7 @@ import duke.Ui;
  */
 public class ByeCommand extends Command {
     /**
-     * Constructor for ByeCommand.
+     * A Constructor for ByeCommand.
      */
     public ByeCommand() {
         super(true);

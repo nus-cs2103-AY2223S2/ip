@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     private boolean isFind;
 
     /**
-     * Constructor for DeleteCommand.
+     * A Constructor for DeleteCommand.
      *
      * @param index Index of task to be deleted from task list.
      */

@@ -19,7 +19,7 @@ public class Ui {
     private final Stage stage;
 
     /**
-     * Constructor for the Ui class.
+     * A Constructor for the Ui class.
      *
      * @param stage The Stage of the application.
      */

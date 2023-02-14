@@ -15,7 +15,7 @@ public class EventCommand extends Command {
     private String by;
 
     /**
-     * Constructor for EventCommand.
+     * A Constructor for EventCommand.
      *
      * @param description Description of Event.
      * @param from Start date of Event.

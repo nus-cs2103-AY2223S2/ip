@@ -12,7 +12,7 @@ public abstract class Command {
     private boolean isExit;
 
     /**
-     * Constructor for Command.
+     * A Constructor for Command.
      *
      * @param isExit Exit status of programme.
      */
@@ -21,7 +21,7 @@ public abstract class Command {
     }
 
     /**
-     * Exit status of programme.
+     * Returns the exit status of the programme.
      *
      * @return Has the user ended his/her session with duke.
      */
