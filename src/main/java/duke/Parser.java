@@ -27,7 +27,7 @@ public class Parser {
      */
     protected static ArrayList<String> parse(String taskInfo) {
         ArrayList<String> parseInfoList = new ArrayList<>(); // stores in the format "command" followed by "args"
-        boolean hasMoreArgs; // indicates whether user is calling a supported function that needs multiple arguments
+        boolean hasArgs; // indicates whether user is calling a supported function that needs multiple arguments
         String tempCmd; // stores function call by user (eg todos, mark, etc)
         String[] tempTaskInfo = taskInfo.split("] ");
 
@@ -62,8 +62,8 @@ public class Parser {
             tempTaskInfo = taskInfo.split(" ", 2);
             tempCmd = tempTaskInfo[0].toLowerCase();
         }
-        hasMoreArgs = isAvailable(tempCmd);
-        parseInfoList = parse2(hasMoreArgs, tempCmd, parseInfoList, tempTaskInfo);
+        hasArgs = hasMoreArgs(tempCmd);
+        parseInfoList = parse2(hasArgs, tempCmd, parseInfoList, tempTaskInfo);
         return parseInfoList;
     }
 
@@ -82,12 +82,22 @@ public class Parser {
      */
     private static ArrayList<String> parse2(boolean hasMoreArgs, String cmd, ArrayList<String> partialCmd,
                                             String[] tempTaskInfo) {
-        try { // determine function called by the user has required arguments and does not have blank spaces
+        try {
+            // determine if function called by the user is available, has required arguments and
+            // does not have blank spaces
+            if (!isAvailable(cmd)) {
+                DukeException.validate2();
+            }
             DukeException.validate(hasMoreArgs, cmd, tempTaskInfo);
             partialCmd.add(cmd); // save function call (command) into parseInfo
         } catch (IncorrectNoOfArgumentException ex) {
             System.out.println(ex);
             partialCmd = new ArrayList<>();
+            partialCmd.add(ex.getMessage());
+            return partialCmd;
+        } catch (InvalidCommandException ex) {
+            System.out.println(ex);
+            partialCmd.add(0, "error");
             partialCmd.add(ex.getMessage());
             return partialCmd;
         }
@@ -121,14 +131,7 @@ public class Parser {
             partialCmd = eventParser(cmd, partialCmd, tempTaskInfo);
             break;
         default: // throw an error as the user is trying to call a function that does not exist
-            try {
-                DukeException.validate2();
-            } catch (InvalidCommandException ex) {
-                System.out.println(ex);
-                partialCmd.set(0, "error");
-                partialCmd.add(ex.getMessage());
-                break;
-            }
+            break;
         }
         assert partialCmd.size() > 0;
         return partialCmd;
@@ -283,7 +286,7 @@ public class Parser {
      * @param cmd String indicating the command name.
      * @return Boolean value indicating whether the command requires more arguments.
      */
-    private static boolean isAvailable(String cmd) {
+    private static boolean hasMoreArgs(String cmd) {
         if (cmd.equals("mark")) {
             return true;
         } else if (cmd.equals("unmark")) {
@@ -297,6 +300,38 @@ public class Parser {
         } else if (cmd.equals("event")) {
             return true;
         } else if (cmd.equals("find")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns a boolean value which indicates whether the command is available.
+     *
+     * @param cmd String indicating the command name.
+     * @return Boolean value indicating whether the command is available.
+     */
+    private static boolean isAvailable(String cmd) {
+        if (cmd.equals("mark")) {
+            return true;
+        } else if (cmd.equals("unmark")) {
+            return true;
+        } else if (cmd.equals("delete")) {
+            return true;
+        } else if (cmd.equals("todo")) {
+            return true;
+        } else if (cmd.equals("event")) {
+            return true;
+        } else if (cmd.equals("deadline")) {
+            return true;
+        } else if (cmd.equals("find")) {
+            return true;
+        } else if (cmd.equals("reminder")) {
+            return true;
+        } else if (cmd.equals("bye")) {
+            return true;
+        } else if (cmd.equals("list")) {
             return true;
         } else {
             return false;

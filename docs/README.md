@@ -1,4 +1,7 @@
 # User Guide
+Duke is a desktop application used for managing tasks, optimized for users who
+prefer the use of Command Line Interface (CLI) while still having the perks of 
+Graphical User Interface (GUI). If you are able to type fast, 
 
 ## Features 
 
