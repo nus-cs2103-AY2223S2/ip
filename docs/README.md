@@ -4,18 +4,16 @@
 
 1. Ensure you have Java `11` or above installed in your computer.
 2. Download the latest duke.jar from [here](https://github.com/bojie3/ip/releases/tag/BCD-Extension).
-3. Copy the file to the folder you want to use as the home folder for your Duke.
-4. Run the jar file to start the app. 
-5. Type the command in the command box and press Enter to execute it. 
+3. Cd to the duke.jar file.
+4. Run the jar file using `java -jar duke.jar`.
+5. Type the commands into the GUI. 
 6. Some example commands you can try:
 - `list`: lists all tasks.
 - `todo borrow book`: adds a todo task called `borrow book` to Duke.
 
 ## Features 
-
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.
-e.g. in `todo TASK`, `TASK` is a parameter which can be used as `todo read`.
-
+Note that commands are case sensitive and should all be lower case
+Datetime should follow format YYYY-MM-DD HH:MM. EG `2021-12-12 12:00`
 
 ### Adding to-do: `todo`
 
@@ -24,27 +22,27 @@ Adds a todo task to Duke.
 Format: `todo TASK`
 
 Example: 
-- `todo read`
+- `todo eat`
 
 
 ### Adding deadline: `deadline`
 
 Adds a deadline task to Duke.
 
-Format: `deadline TASK /by YYYY-MM-DD`
+Format: `deadline TASK /by YYYY-MM-DD HH:MM`
 
 Example:
-- `deadline 2103T iP /by 2022-09-13`
+- `deadline excersice /by 2021-12-12 12:00`
 
 
 ### Adding event: `event`
 
 Adds an event task to Duke.
 
-Format: `event TASK /at TIME`
+Format: `event TASK /from TIME /to TIME`
 
 Example:
-- `event dinner with friends /at this evening 6pm`
+- `event lunch with friends /at 2021-12-12 12:00 /to 2021-12-12 13:00`
 
 
 ### Listing all tasks: `list`
@@ -98,24 +96,23 @@ Example:
 Find tasks which names contain given keyword.
 
 Format: `find KEYWORD`
-- The search is case-sensitive. e.g 2103t will not match 2103T
-- Partial words will be matched. e.g 2103 will match 2103t and 2103T
+- The search is case-sensitive. e.g book will not match Book
+- Partial words will be matched. e.g book will match books
 
 Example:
-- `find 2103`
+- `find book`
 
 
-### Archiving the data: `archive`
+### Sorting the tasks: `sort`
 
-Archive data into a Txt file named in the format `yyyyMMddHHmmss`
+Sort the tasks according to the time the tasks needs to be completed
 
-Format: `archive`
+Format: `sort`
 
 
 ### Saying bye to Duke: `bye`
 
-Says bye to Duke out of courtesy, does not exit the program. Click the 'X' 
-    in the top right corner to exit.
+Close Duke and stop running
 
 Format: 'bye'
 
