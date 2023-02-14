@@ -5,3 +5,41 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Eren
+What can I do for you?
+Type your input below: 
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+Type your input below: 
+Got it. I've added this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 tasks in the list.
+Type your input below: 
+Got it. I've added this task:
+[E][ ] project meeting (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list.
+Type your input below: 
+Nice! I've marked this task as done:
+[D][X] return book (by: Sunday)
+Type your input below: 
+Nice! I've marked this task as done:
+[E][X] project meeting (from: Mon 2pm to: 4pm)
+Type your input below: 
+1. [T][ ] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][X] project meeting (from: Mon 2pm to: 4pm)
+Type your input below: 
+OK, I've marked this task as not done yet:
+[D][ ] return book (by: Sunday)
+Type your input below: 
+added: read book
+====================
+Type your input below: 
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][X] project meeting (from: Mon 2pm to: 4pm)
+4. [ ][ ] read book
+Type your input below: 
+====================
+Bye. Hope to see you again soon!

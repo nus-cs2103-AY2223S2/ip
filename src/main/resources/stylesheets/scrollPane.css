@@ -1,0 +1,17 @@
+.scroll-bar .thumb {
+    -fx-background-color : deepskyblue;
+}
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color : darkblue;
+    -fx-border-color: darkblue;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color : transparent;
+    -fx-shape : " ";
+    -fx-padding : 0.0;
+}
