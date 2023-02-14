@@ -29,20 +29,10 @@ public class Duke {
         this.parser = new Parser(taskList);
     }
 
-    /**
-     * Runs the user interface for abstraction
-     */
-//    public void run() {
-//        ui.greet();
-//        parser.getTaskType();
-//        storage.save(taskList);
+//    public static void main(String[] args) {
+//        Duke duke = new Duke();
+//
 //    }
-
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-
-    }
 
     public String getResponse(String input) {
         if (input.equals("bye")) {
