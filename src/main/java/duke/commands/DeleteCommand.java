@@ -35,8 +35,8 @@ public class DeleteCommand extends Command {
         taskList.deleteTask(taskNumber);
         ui.response(FRAME
                 + " Noted. I've removed this task:\n"
-                + "       " + taskDescription
-                + "     Now you have " + taskList.length() + " tasks in the list." + "\n"
+                + taskDescription
+                + "Now you have " + taskList.length() + " tasks in the list." + "\n"
                 + FRAME);
     }
 }

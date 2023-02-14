@@ -29,7 +29,7 @@ public class ByeCommand extends Command {
         this.setIsActive(false);
         database.update(taskList.getTasks());
         ui.response(FRAME
-                + "     Bye. Hope to see you again soon!\n"
+                + "Bye. Hope to see you again soon!\n"
                 + FRAME);
     }
 }

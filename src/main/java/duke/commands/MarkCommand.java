@@ -35,8 +35,8 @@ public class MarkCommand extends Command {
         Task task = taskList.getTask(this.taskNumber);
         task.setComplete();
         ui.response(FRAME
-                + "     Nice! I've marked this task as done:\n"
-                + "       [X] " + task.getDetails() + "\n"
+                + "Nice! I've marked this task as done:\n"
+                + "[X] " + task.getDetails() + "\n"
                 + FRAME);
     }
 

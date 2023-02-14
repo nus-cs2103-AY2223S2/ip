@@ -69,9 +69,9 @@ public class AddDeadlineCommand extends Command {
             Deadline newDeadline = new Deadline(task.toString(), deadline.toString().stripLeading());
             taskList.addTask(newDeadline);
             ui.response(FRAME + "\n"
-                    + "     Got it. I've added this task:" + "\n"
-                    + "     " + newDeadline.getStatus() + "\n"
-                    + "     Now you have " + taskList.length() + " tasks in the list" + "\n"
+                    + "Got it. I've added this task:" + "\n"
+                    + newDeadline.getStatus() + "\n"
+                    + "Now you have " + taskList.length() + " tasks in the list" + "\n"
                     + FRAME);
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();

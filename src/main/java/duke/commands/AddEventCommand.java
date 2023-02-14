@@ -3,6 +3,7 @@ package duke.commands;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
+import duke.commands.enums.AddEventParserLogic;
 import duke.database.Database;
 import duke.exception.InvalidDateException;
 import duke.exception.blankfieldexceptions.BlankFieldEventException;
