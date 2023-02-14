@@ -12,12 +12,8 @@ public class Ui {
      * Greets the user.
      */
     public String greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo + "What can I do for you?\n";
+        String name = "Duke";
+        return "Hello from " + name + ", what can I do for you?\n";
     }
 
     /**
