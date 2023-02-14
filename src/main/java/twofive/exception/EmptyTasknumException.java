@@ -7,6 +7,6 @@ package twofive.exception;
 public class EmptyTasknumException extends TwoFiveException {
     @Override
     public String getMessage() {
-        return ":( OOPS!!! The task number cannot be empty.";
+        return "Oops! TwoFive would like to remind you that the task number cannot be empty.";
     }
 }

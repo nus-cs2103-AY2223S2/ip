@@ -17,6 +17,6 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         TaskContainer.setTasks(tasks.getTasks());
-        return "Here are the tasks in your list";
+        return "Here is your list of tasks added";
     }
 }

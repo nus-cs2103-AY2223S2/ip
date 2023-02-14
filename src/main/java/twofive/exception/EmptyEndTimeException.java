@@ -7,6 +7,6 @@ package twofive.exception;
 public class EmptyEndTimeException extends TwoFiveException {
     @Override
     public String getMessage() {
-        return ":( OOPS!!! The end time of a event cannot be empty.";
+        return "Oops! TwoFive would like to remind you that the end time of an event task cannot be empty.";
     }
 }

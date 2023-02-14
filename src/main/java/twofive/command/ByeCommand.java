@@ -22,7 +22,7 @@ public class ByeCommand extends Command {
         String commandResult;
         try {
             storage.save(tasks);
-            commandResult = "Tasks saved successfully.\nBye. Hope to see you again soon!";
+            commandResult = "Tasks saved successfully.\nTwoFive hopes to see you again soon, bye!";
             System.exit(0);
         } catch (IOException e) {
             commandResult = e.getMessage();

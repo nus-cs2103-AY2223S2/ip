@@ -54,7 +54,7 @@ public class EventCommand extends Command {
             tasks.addTask(newEvent);
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "Got it. I've added this task:\n " + newEvent + "\n"
+            commandResult = "TwoFive has added this task for you:\n " + newEvent + "\n"
                     + "Now you have " + tasks.getTasksNum() + " tasks in the list";
         } catch (DateTimeParseException e) {
             commandResult = "Start time and end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31";

@@ -24,7 +24,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         assert !keyword.isEmpty() : "Keyword should not be empty";
         TaskContainer.setTasks(tasks.getTasksByKeyword(keyword));
-        return "Here are the tasks in your list with keyword ["
+        return "Here is a list of tasks with the keyword ["
                 + keyword
                 + "] in "
                 + "their description";

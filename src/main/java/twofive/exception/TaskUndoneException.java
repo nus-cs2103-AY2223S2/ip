@@ -7,6 +7,6 @@ package twofive.exception;
 public class TaskUndoneException extends TwoFiveException {
     @Override
     public String getMessage() {
-        return ":( OOPS!!! This task has not been done yet.";
+        return "Oops! TwoFive would like to remind you that this task has not been done yet.";
     }
 }

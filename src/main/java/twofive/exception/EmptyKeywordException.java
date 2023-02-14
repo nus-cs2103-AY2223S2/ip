@@ -6,6 +6,6 @@ package twofive.exception;
 public class EmptyKeywordException extends TwoFiveException {
     @Override
     public String getMessage() {
-        return ":( OOPS!!! The keyword cannot be empty.";
+        return "Oops! TwoFive would like to remind you that the keyword cannot be empty.";
     }
 }

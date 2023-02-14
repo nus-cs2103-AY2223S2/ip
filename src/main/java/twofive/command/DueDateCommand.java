@@ -33,7 +33,7 @@ public class DueDateCommand extends Command {
         try {
             LocalDate dueDate = LocalDate.parse(dueDateString, dueDateFormatter);
             TaskContainer.setTasks(tasks.getTasksOnDate(dueDate));
-            commandResult = "Here are the tasks in your list due on "
+            commandResult = "Here is a list of tasks due on "
                     + dueDate.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy"));
         } catch (DateTimeParseException e) {
             commandResult = "Due date must be in the format yyyy-MM-dd, e.g. 2023-01-23";
