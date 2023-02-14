@@ -3,12 +3,17 @@ package duke.ui;
 import java.util.function.Consumer;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,8 +33,13 @@ public class MainWindow extends AnchorPane {
 
     private Consumer<String> onInputHandler;
 
+    /**
+     * Initializes the main window's nodes.
+     */
     @FXML
     public void initialize() {
+        dialogContainer.setBackground(new Background(
+                new BackgroundFill(Color.CRIMSON, CornerRadii.EMPTY, Insets.EMPTY)));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

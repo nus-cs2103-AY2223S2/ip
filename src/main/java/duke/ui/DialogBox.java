@@ -7,11 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 
 /**
@@ -30,10 +36,18 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            dialog.setBackground(new Background(new BackgroundImage(
+                    new Image(MainWindow.class.getResourceAsStream("/images/dialogbox.png")),
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.CENTER,
+                    new BackgroundSize(1.0, 1.0, true, true, false, false)
+            )));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        dialog.setPadding(new Insets(20, 20, 20, 20));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
