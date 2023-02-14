@@ -12,6 +12,7 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
+    private int exceptionCount;
 
     /**
      * Creates a new Parser object.
@@ -21,24 +22,29 @@ public class Parser {
         this.taskList = taskList;
         this.ui = new Ui();
         this.storage = storage;
+        this.exceptionCount = 0;
     }
 
     /**
-     * Parses the input string and modifies the list accordingly
+     * Parses the input string and modifies the list accordingly.
      * @param input The string input to be parsed.
+     * @return The string message that Duke will reply with.
+     *         If the exception count reaches 2, a general help message will be returned.
      * @throws DukeException Throws a DukeException if the input is invalid.
      */
     public String parseInput(String input) throws DukeException {
         assert input != "": "Input cannot be empty";
-        if (input.equals("bye")) {
-            return goodbyeParser(input);
-        }
-        if (input.equals("list")) {
-            return ui.printList(taskList.getList());
+        if (exceptionCount == 2) {
+            exceptionCount = 0;
+            return ui.helpMessage();
         }
         String[] parsedCommand = input.split(" ");
         String cmd = parsedCommand[0];
         switch (cmd) {
+        case "bye":
+            return goodbyeParser(input);
+        case "list":
+            return ui.printList(taskList.getList());
         case "mark":
             return markParser(input);
         case "unmark":
@@ -53,11 +59,19 @@ public class Parser {
             return todoParser(input);
         case "find":
             return findParser(input);
+        case "cmd":
+            return commandParser(input);
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            exceptionCount++;
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that \n\tmeans :-(");
         }
     }
 
+    /**
+     * Parses the input to invoke the correct methods to close application.
+     * @param input The input string by the user.
+     * @return The string that is shown before app closes.
+     */
     public String goodbyeParser(String input) {
         try {
             this.storage.save(taskList);
@@ -67,6 +81,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input to invoke the correct methods to mark task as done.
+     * @param input The input string by the user.
+     * @return The string that is shown after a task is marked.
+     */
     public String markParser(String input) {
         try {
             markInputChecker(input);
@@ -78,6 +97,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input to invoke the correct methods to mark task as not done.
+     * @param input The input string by the user.
+     * @return The string that is shown after a task is unmarked.
+     */
     public String unmarkParser(String input) {
         try {
             unmarkInputChecker(input);
@@ -89,6 +113,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input to invoke the correct methods to delete a task.
+     * @param input The input string by the user.
+     * @return The string that is shown after a task is deleted.
+     */
     public String deleteParser(String input) {
         try {
             deleteInputChecker(input);
@@ -100,6 +129,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input to invoke the correct methods to add an event task.
+     * @param input The input string by the user.
+     * @return The string that is shown after an event task is added to list.
+     */
     public String eventParser(String input) {
         try {
             eventInputChecker(input);
@@ -111,6 +145,11 @@ public class Parser {
         return inputEvent(eventConstructor[0], timeModified);
     }
 
+    /**
+     * Parses the input to invoke the correct methods to add a deadline task.
+     * @param input The input string by the user.
+     * @return The string that is shown after a deadline task is added to list.
+     */
     public String deadlineParser(String input) {
         try {
             deadlineInputChecker(input);
@@ -120,6 +159,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input to invoke the correct methods to add a todo task.
+     * @param input The input string by the user.
+     * @return The string that is shown after a todo task is added to list.
+     */
     public String todoParser(String input) {
         try {
             todoInputChecker(input);
@@ -129,6 +173,11 @@ public class Parser {
         return inputTodo(input.replace("todo ", ""));
     }
 
+    /**
+     * Parses the input to invoke the correct methods to find a task in the list.
+     * @param input The input string by the user.
+     * @return The list of tasks found matching the keyword, in string format.
+     */
     public String findParser(String input) {
         try {
             findTaskInputChecker(input);
@@ -136,6 +185,21 @@ public class Parser {
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
         }
+    }
+
+    /**
+     * Parses the input to invoke the correct methods to show the list of commands.
+     * @param input The input string by the user.
+     * @return The command list.
+     */
+    public String commandParser(String input) {
+        try {
+            cmdInputChecker(input);
+            return ui.commandsList();
+        } catch (DukeException e) {
+            return ui.printMessage(e.getMessage());
+        }
+
     }
 
     /**
@@ -240,6 +304,13 @@ public class Parser {
         }
         if (inputArray[1].trim().length() == 0) {
             throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
+        }
+    }
+
+    public void cmdInputChecker(String input) throws DukeException {
+        String[] inputArray = input.split(" ", 2);
+        if (inputArray.length >= 2) {
+            throw new DukeException("Invalid command used. Enter 'cmd' for a list of commands");
         }
     }
 

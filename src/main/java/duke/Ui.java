@@ -81,6 +81,37 @@ public class Ui {
     }
 
     /**
+     * Prints a formatted message to aid users who are not sure how to use the bot.
+     * @return the help message to the user.
+     */
+    public String helpMessage() {
+        String intro = "\tI am here to help you manage your tasks!";
+        String body = "\n\tIf you have any events, deadlines or tasks to do, \n\tadd them here!";
+        String conclusion = "\n\tTo see the list of commands, type in: cmd";
+        return intro + body + conclusion;
+    }
+
+    /**
+     * Shows a list of commands for the user to use.
+     * @return The formatted list of commands
+     */
+    public String commandsList() {
+        String intro = "\tBelow is a list of commands for you to use!";
+        String list = "\n\t1. To see your LIST, use command: 'list'";
+        String task1 = "\n\n\t2. To add a general TODO task, use command:\n\t'todo <description>'";
+        String task2 = "\n\n\t3. To add an EVENT, use command:\n\t'event <description> /at <place and description>'";
+        String task3 = "\n\n\t4. To add a DEADLINE, use command:\n\t'deadline <description> /by <due date>'";
+        String deadline = "\n\tNOTE: Your due date should be in the format: \n\tDD/MM/YYYY";
+        String delete = "\n\n\t5. To DELETE a task, use command:\n\t'delete <Task number in the list>'";
+        String mark = "\n\n\t6. To MARK a task as done, use command:\n\t'mark <Task number in the list>'";
+        String unmark = "\n\n\t7. To UNMARK a task as not done, use command:\n\t'unmark <Task number in the list>'";
+        String find = "\n\n\t8. To SEARCH for certain tasks in the list, use \n\tcommand:\n\t'find <keyword>'";
+        String bye = "\n\n\t9. To CLOSE the application, use command: 'bye'";
+        String totalList = intro + list + task1 + task2 + task3 + deadline + delete + mark + unmark + find + bye;
+        return totalList;
+    }
+
+    /**
      * Prints a message that is displayed if there are any matching tasks to the query.
      * @return the message that is seen before printing found tasks.
      */
