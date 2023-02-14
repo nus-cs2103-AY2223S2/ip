@@ -17,6 +17,8 @@ import util.Storage;
 import util.TaskList;
 import util.Ui;
 
+import java.io.File;
+
 
 /**
  * Duke class to run and execute the program.
@@ -28,6 +30,8 @@ public class Duke extends Application {
     private final Ui ui;
     private final Storage storage;
     private Parser parser;
+    private static final String FILE_DIR = "data";
+    private static final String FILE_PATH = FILE_DIR + File.separator + "duke.txt";
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -43,7 +47,7 @@ public class Duke extends Application {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage();
+        this.storage = new Storage(FILE_DIR, FILE_PATH);
         this.parser = new Parser();
         try {
             tasks = new TaskList(storage.loadData());

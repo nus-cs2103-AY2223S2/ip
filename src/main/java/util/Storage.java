@@ -11,13 +11,18 @@ import java.io.IOException;
  * @author Merrick
  */
 public class Storage {
-    private final String filePath = "src/main/data/duke.txt";
-    private final String fileDir = "src/main/data/";
+    private final String filePath;
+    private final String fileDir;
 
     /**
      * Constructor of Storage class
      */
-    public Storage() {}
+    public Storage(String fileDir, String filePath) {
+        assert !fileDir.isEmpty() : "File Directory should not be empty!";
+        assert !filePath.isEmpty() : "File Path should not be empty!";
+        this.fileDir = fileDir;
+        this.filePath = filePath;
+    }
 
     /**
      * Loads the tasks stored in the duke.txt file.
