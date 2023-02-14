@@ -92,17 +92,24 @@ public class TaskList {
     public String markComplete(String[] userInput, TaskList tasks) throws DukeInvalidArgumentsException,
             DukeMissingArgumentException, DukeTaskArgumentException {
         try {
-            int taskIndex = Integer.parseInt(userInput[1]);
-            if (taskIndex > tasks.getListLength()) {
-                throw new DukeTaskArgumentException();
-            }
-            if (tasks.getTask(taskIndex).getStatus()) {
-                throw new DukeTaskArgumentException();
+            String indexString = userInput[1];
+            String[] listIndices = indexString.split(",");
+            ArrayList<Task> taskList = new ArrayList<>();
+            for (int i = 0; i < listIndices.length; i++) {
+                int taskIndex = Integer.parseInt(listIndices[i].trim());
+                taskList.add(tasks.getTask(taskIndex));
+                if (taskIndex > tasks.getListLength()) {
+                    throw new DukeTaskArgumentException();
+                }
+                if (tasks.getTask(taskIndex).getStatus()) {
+                    throw new DukeTaskArgumentException();
+                }
+
+                Task taskToBeMarked = tasks.getTask(taskIndex);
+                taskToBeMarked.changeStatus();
             }
 
-            Task taskToBeMarked = tasks.getTask(taskIndex);
-            taskToBeMarked.changeStatus();
-            return this.ui.markTaskDisplay(taskToBeMarked);
+            return this.ui.markTaskDisplay(taskList);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentsException();
         } catch (IndexOutOfBoundsException e) {
@@ -124,16 +131,22 @@ public class TaskList {
     public String markIncomplete(String[] userInput, TaskList tasks) throws DukeMissingArgumentException,
             DukeInvalidArgumentsException, DukeTaskArgumentException {
         try {
-            int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > tasks.getListLength()) {
-                throw new DukeTaskArgumentException();
+            String indexString = userInput[1];
+            String[] listIndices = indexString.split(",");
+            ArrayList<Task> taskList = new ArrayList<>();
+            for (int i = 0; i < listIndices.length; i++) {
+                int taskIndex = Integer.parseInt(listIndices[i].trim());
+                taskList.add(tasks.getTask(taskIndex));
+                if (taskIndex > tasks.getListLength()) {
+                    throw new DukeTaskArgumentException();
+                }
+                if (tasks.getTask(taskIndex).getStatus() == false) {
+                    throw new DukeTaskArgumentException();
+                }
+                Task taskToBeUnmarked = tasks.getTask(taskIndex);
+                taskToBeUnmarked.changeStatus();
             }
-            if (tasks.getTask(taskIndex).getStatus() == false) {
-                throw new DukeTaskArgumentException();
-            }
-            Task taskToBeUnmarked = tasks.getTask(taskIndex);
-            taskToBeUnmarked.changeStatus();
-            return this.ui.unmarkTaskDisplay(taskToBeUnmarked);
+            return this.ui.unmarkTaskDisplay(taskList);
         } catch (IndexOutOfBoundsException e) {
             String task = "unmark";
             throw new DukeMissingArgumentException(task);

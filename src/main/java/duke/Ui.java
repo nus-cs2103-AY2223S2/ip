@@ -3,6 +3,7 @@ package duke;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+import java.util.ArrayList;
 
 
 /**
@@ -80,24 +81,28 @@ public class Ui {
     /**
      * Marks the task as incomplete
      *
-     * @param task the Task object
+     * @param tasks the Task object
      */
-    public String unmarkTaskDisplay(Task task) {
+    public String unmarkTaskDisplay(ArrayList<Task> tasks) {
         String displayResult = "";
         displayResult += "OK, I've marked this task as not done yet:\n";
-        displayResult += "\t" + task.toString();
+        for (int i = 0; i < tasks.size(); i++) {
+            displayResult += '\t' + tasks.get(i).toString() + '\n';
+        }
         return displayResult;
     }
 
     /**
      * Marks the task as complete
      *
-     * @param task the Task object
+     * @param tasks the Task object
      */
-    public String markTaskDisplay(Task task) {
+    public String markTaskDisplay(ArrayList<Task> tasks) {
         String displayResult = "";
-        displayResult += "Nice! I've marked this task as done:\n";
-        displayResult += "\t" + task.toString();
+        displayResult += "Nice! I've marked the tasks as done:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            displayResult += '\t' + tasks.get(i).toString() + '\n';
+        }
         return displayResult;
     }
 
