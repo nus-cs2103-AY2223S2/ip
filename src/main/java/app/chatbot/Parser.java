@@ -98,7 +98,7 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "edit":
-            return new EditCommand(argValues.get(command),argValues);
+            return new EditCommand(argValues.get(command), argValues);
         case "summary":
             return new SummaryCommand();
         default:

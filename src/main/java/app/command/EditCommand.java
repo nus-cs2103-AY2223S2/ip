@@ -39,7 +39,7 @@ public class EditCommand extends Command {
             Task editedTask = tl.editTask(editAtIndex, this.args);
             r.addLine(editedTask.toString());
             return r;
-        } catch (InvalidInputException | InvalidDateTimeException e){
+        } catch (InvalidInputException | InvalidDateTimeException e) {
             return new Response(e.getMessage(), false);
         }
     }

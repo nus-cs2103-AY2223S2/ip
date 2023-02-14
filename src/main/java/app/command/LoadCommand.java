@@ -39,6 +39,6 @@ public class LoadCommand extends Command {
         int numTotalRows = successRates.get("Total");
         return new Response("Successfully loaded "
                 + numSuccess + " of " + numTotalRows
-                +" task(s) from storage.", true);
+                + " task(s) from storage.", true);
     }
 }

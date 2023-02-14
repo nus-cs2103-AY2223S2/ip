@@ -23,7 +23,7 @@ public class MarkAsDoneCommand extends Command {
      * @param storage
      */
     @Override
-    public Response execute(TaskList tl, Storage storage)  {
+    public Response execute(TaskList tl, Storage storage) {
         boolean isAlreadyMarked;
         try {
             isAlreadyMarked = tl.markAsDone(markAtIndex);

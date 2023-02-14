@@ -70,7 +70,7 @@ public abstract class Task implements Comparable<Task> {
      * by trying across supported formats.
      * @param input
      * @return
-     * @throws InvalidDateTimeException if datetime fails to parse against available formats
+     * @throws InvalidDateTimeException if datetime fails to parse against available formats.
      */
     protected LocalDateTime parseDate(String input) throws InvalidDateTimeException {
         LocalDateTime date = null;
@@ -79,6 +79,7 @@ public abstract class Task implements Comparable<Task> {
                 date = LocalDateTime.parse(input, f);
                 break;
             } catch (DateTimeParseException ignored) {
+
             }
         }
         if (Objects.isNull(date)) {

@@ -251,6 +251,12 @@ public class TaskList implements Iterable<Task> {
         return this.tasks.iterator();
     }
 
+    /**
+     * Retrieves a read-only list of tasks corresponding to a certain TaskType,
+     * sorted by their natural order.
+     * @param type
+     * @return
+     */
     public List<Task> getSortedTasksByType(TaskTypes.Type type) {
         List<Task> result = new ArrayList<>();
         for (Task t : this.getAllTasks()) {

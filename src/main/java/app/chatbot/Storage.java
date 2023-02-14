@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,7 +37,7 @@ public class Storage {
     private static final int ISDONE_INDEX = 1;
     private static final int DESC_INDEX = 2;
     private static final int MIN_STORAGE_ARG_SIZE = 3;
-    private static final Path DEFAULT_STORAGE_RESOURCE = Paths.get("storage","default-storage.txt");
+    private static final Path DEFAULT_STORAGE_RESOURCE = Paths.get("storage", "default-storage.txt");
     private static final String DEFAULT_STORAGE_MISSING = "Default storage not found, loading an empty TaskList";
 
     private final File file;
@@ -48,16 +47,15 @@ public class Storage {
      * Creates a new Storage object. A file is created at the stated path to store
      * data. If the path location does not exist, the necessary files and directories
      * are created.
-     *
      * @param path the relative path for which the text data file will be stored.
      * @throws IOException, propagated from FileWriter.
      */
     Storage(Path path) throws IOException, InvalidStorageException {
         boolean storageExists = Files.exists(path);
-        System.out.println("storageExists: " + storageExists);
+
         this.isFirstLoad = !storageExists;
-        System.out.println("isFirstLoad: " + isFirstLoad);
         this.file = new File(path.toString());
+
         // creates storage directory or data if they don't exist
         this.file.getParentFile().mkdirs();
         if (isFirstLoad) {
@@ -70,6 +68,11 @@ public class Storage {
         return this.isFirstLoad;
     }
 
+    /**
+     * Retrieves the default storage content from /src/main/resources/default-storage.txt.
+     * @return InputStream of the text default storage text format.
+     * @throws InvalidStorageException for missing default-storage.txt file
+     */
     private InputStream getDefaultStorageFromResource() throws InvalidStorageException {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(DEFAULT_STORAGE_RESOURCE.toString());
@@ -79,15 +82,21 @@ public class Storage {
         return inputStream;
     }
 
+    /**
+     * Loads tasks into a given TaskList from default-storage.txt.
+     * @param tl a TaskList
+     * @return map (keys: "Successes", "Total") for successful and total lines of storage read.
+     * @throws InvalidStorageException if getDefaultStorageFromResource finds no storage.txt.
+     */
     public Map<String, Integer> loadDefaultStorageToTaskList(TaskList tl)
             throws InvalidStorageException {
-        InputStream is = getDefaultStorageFromResource();
+        InputStream storageIs = getDefaultStorageFromResource();
 
         Map<String, Integer> successRates = new HashMap<>();
         int totalSuccess = 0;
         int totalRowsRead = 0;
         try (InputStreamReader streamReader =
-                     new InputStreamReader(is, StandardCharsets.UTF_8);
+                     new InputStreamReader(storageIs, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(streamReader)) {
 
             String line;
@@ -113,18 +122,10 @@ public class Storage {
     }
 
     /**
-     * Loads a single line in storage into a given task.TaskList.
-     * Method is under review to return totalSuccesses and totalFailures.
-     *
-     * It is assumed that a line in storage follows the format specified here:
-     * taskSymbol | isDone | desc | addtl-arg1:value | addtl-arg2:value ...
-     *
-     * For example, a project meeting task.Event from 1pm to 3pm marked done:
-     * E | 1 | project meeting | from:1pm | to:3pm
-     *
+     * Loads tasks into given TaskList from storage.
      * @param tl empty TaskList, assuming this is executed upon startup of app.
      * @return totalSuccess, the number of lines that have been successfully loaded into the tl.
-     * @throws
+     * @throws IOException IOException
      */
     public Map<String, Integer> loadIntoTaskList(TaskList tl)
             throws IOException {
@@ -157,6 +158,18 @@ public class Storage {
         return successRates;
     }
 
+    /**
+     * Loads a single line of storage format into a TaskList.
+     * It is assumed that a line in storage follows the format specified here:
+     * taskSymbol | isDone | desc | addtl-arg1:value | addtl-arg2:value ...
+     * <br>
+     * For example, a project meeting task.Event from 1pm to 3pm marked done:
+     * E | 1 | project meeting | from:1pm | to:3pm
+     * @param tl
+     * @param line
+     * @return
+     * @throws InvalidStorageException
+     */
     private static boolean loadLineToTaskList(TaskList tl, String line) throws InvalidStorageException {
         List<String> args = splitStorageFormatArgs(line);
 

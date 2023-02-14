@@ -1,10 +1,10 @@
 package app.command;
 
+import java.io.IOException;
+
 import app.chatbot.Response;
 import app.chatbot.Storage;
 import app.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Command to save the current TaskList state to storage.

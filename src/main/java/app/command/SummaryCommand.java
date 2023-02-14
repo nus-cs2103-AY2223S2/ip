@@ -13,7 +13,7 @@ import app.task.TaskTypes;
  * Summary - serves as a Command to gather all Tasks and provide
  * a concise summary of each Task types to the user.
  */
-public class SummaryCommand extends Command{
+public class SummaryCommand extends Command {
     private static final String SUMMARY_INTRO =
             "Good day sir, here's a summary of what's on your plate.";
     private static final String SUMMARY_INTRO_EMPTY =

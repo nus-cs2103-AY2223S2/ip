@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @throws Exception
      */
     @Override
-    public Response execute(TaskList tl, Storage storage)  {
+    public Response execute(TaskList tl, Storage storage) {
         Response response;
         try {
             response = new Response(true);
