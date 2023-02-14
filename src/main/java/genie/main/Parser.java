@@ -1,4 +1,4 @@
-package genie;
+package genie.main;
 
 import genie.command.*;
 import genie.exception.DukeException;
@@ -31,13 +31,13 @@ public class Parser {
             int index = -1;
             switch (command) {
             case "mark":
-                index = Integer.parseInt(i.split(" ")[1]);
+                index = Integer.parseInt(i.split(" ")[1]); // todo handle exception when marked alr && marking a non existent index
                 return new MarkCommand(index);
             case "unmark":
-                index = Integer.parseInt(i.split(" ")[1]);
+                index = Integer.parseInt(i.split(" ")[1]); // todo same as mark
                 return new UnmarkCommand(index);
             case "delete":
-                index = Integer.parseInt(i.split(" ")[1]);
+                index = Integer.parseInt(i.split(" ")[1]); // todo handle when deleting non existent index
                 return new DeleteCommand(index);
             case "todo":
             case "deadline":
@@ -54,13 +54,5 @@ public class Parser {
                 throw new InvalidInputException();
             }
         }
-    }
-    public boolean isACommand(String i) {
-        return i.startsWith("unmark") ||
-                i.startsWith("mark") ||
-                i.startsWith("todo") ||
-                i.startsWith("event") ||
-                i.startsWith("deadline") ||
-                i.startsWith("delete");
     }
 }
