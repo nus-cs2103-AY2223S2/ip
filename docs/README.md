@@ -54,6 +54,43 @@ the end date refers to the ending date in YYYY-MM-DD format
 Examples:
 event eat burger /from 2018-01-01 /to 2019-01-01
 
+### Feature-list
+
+shows the tasks in the list
+Format: list
+Examples:
+list
+
+### Feature-delete
+
+Deletes the specified item from the address book
+Format: delete INDEX
+Deletes the item at the specified INDEX.
+The index refers to the index number shown in the displayed list.
+The index must be a positive integer 1, 2, 3, …
+Examples:
+list followed by delete 2 deletes the 2nd task.
+
+### Feature-mark
+
+marks a list as done
+Format: mark INDEX
+marks the item at the specified INDEX.
+The index refers to the index number shown in the displayed list.
+The index must be a positive integer 1, 2, 3, …
+Examples:
+list followed by mark 2 marks the 2nd task as done.
+
+### Feature-unmark
+
+unmarks a list as done
+Format: unmark INDEX
+unmarks the item at the specified INDEX.
+The index refers to the index number shown in the displayed list.
+The index must be a positive integer 1, 2, 3, …
+Examples:
+list followed by unmark 2 marks the 2nd task as done.
+
 <!-- ## Usage
 
 ### `Keyword` - Describe action
