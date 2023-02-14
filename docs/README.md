@@ -31,7 +31,7 @@ Allows the user to create a deadline
 ### 3. Create events
 
 Allows the user to create an event
-`[E] [ ] My event item (from: Oct 14 2023 04:30 PM to : Oct 19 2023 05:00 PM)`
+`[E] [ ] My event item (from: Oct 14 2023 04:30 PM to: Oct 19 2023 05:00 PM)`
 
 ### 4. Filter by Keyword
 
