@@ -11,14 +11,14 @@ public class Deadline extends Task {
     private LocalDate deadline;
 
 
-    public Deadline(String description, boolean status, String deadline) {
+    public Deadline(String description, boolean status, LocalDate deadline) {
         super(description, status);
-        this.deadline = Parser.processDate(deadline);
+        this.deadline = deadline;
     }
 
-    public Deadline(String description, boolean status, String deadline, String tag) {
+    public Deadline(String description, boolean status, LocalDate deadline, String tag) {
         super(description, status, tag);
-        this.deadline = Parser.processDate(deadline);
+        this.deadline = deadline;
     }
 
     @Override

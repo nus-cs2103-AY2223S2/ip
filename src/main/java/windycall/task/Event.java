@@ -12,16 +12,16 @@ public class Event extends Task {
     private LocalDate to;
 
 
-    public Event(String description, boolean status, String from, String to) {
+    public Event(String description, boolean status, LocalDate from, LocalDate to) {
         super(description, status);
-        this.from = Parser.processDate(from);
-        this.to = Parser.processDate(to);
+        this.from = from;
+        this.to = to;
     }
 
-    public Event(String description, boolean status, String from, String to, String tag) {
+    public Event(String description, boolean status, LocalDate from, LocalDate to, String tag) {
         super(description, status, tag);
-        this.from = Parser.processDate(from);
-        this.to = Parser.processDate(to);
+        this.from = from;
+        this.to = to;
     }
 
     @Override

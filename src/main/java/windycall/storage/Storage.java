@@ -1,5 +1,7 @@
 package windycall.storage;
 
+import windycall.exception.WindyCallException;
+import windycall.parser.Parser;
 import windycall.ui.Ui;
 import windycall.task.Deadline;
 import windycall.task.Event;
@@ -10,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -68,14 +71,26 @@ public class Storage {
                     if (data.charAt(9) == '|') {
                         int idx = data.indexOf("|", 10);
                         String description = data.substring(11, idx - 1);
-                        String deadline = data.substring(idx + 2);
+                        String deadlineStr = data.substring(idx + 2);
+                        LocalDate deadline = null;
+                        try {
+                            deadline = Parser.processDate(deadlineStr);
+                        } catch (WindyCallException e) {
+
+                        }
                         Task task = new Deadline(description, data.charAt(4) == 'X', deadline);
                         tasks.add(task);
                     } else {
                         int idx1 = data.indexOf("|", 7);
                         int idx2 = data.indexOf("|", idx1 + 1);
                         String description = data.substring(idx1 + 2, idx2 - 1);
-                        String deadline = data.substring(idx2 + 2);
+                        String deadlineStr = data.substring(idx2 + 2);
+                        LocalDate deadline = null;
+                        try {
+                            deadline = Parser.processDate(deadlineStr);
+                        } catch (WindyCallException e) {
+
+                        }
                         String tag = data.substring(8, idx1 - 1);
                         Task task = new Deadline(description, data.charAt(4) == 'X', deadline, tag);
                         tasks.add(task);
@@ -85,8 +100,16 @@ public class Storage {
                         int idx1 = data.indexOf("|", 10);
                         int idx2 = data.indexOf("|", idx1 + 1);
                         String description = data.substring(11, idx1 - 1);
-                        String from = data.substring(idx1 + 2, idx2 - 1);
-                        String to = data.substring(idx2 + 2);
+                        String fromStr = data.substring(idx1 + 2, idx2 - 1);
+                        String toStr = data.substring(idx2 + 2);
+                        LocalDate from = null;
+                        LocalDate to = null;
+                        try {
+                            from = Parser.processDate(fromStr);
+                            to = Parser.processDate(toStr);
+                        } catch (WindyCallException e) {
+
+                        }
                         Task task = new Event(description, data.charAt(4) == 'X', from, to);
                         tasks.add(task);
                     } else {
@@ -94,8 +117,16 @@ public class Storage {
                         int idx2 = data.indexOf("|", idx1 + 1);
                         int idx3 = data.indexOf("|", idx2 + 1);
                         String description = data.substring(idx1 + 2, idx2 - 1);
-                        String from = data.substring(idx2 + 2, idx3 - 1);
-                        String to = data.substring(idx3 + 2);
+                        String fromStr = data.substring(idx2 + 2, idx3 - 1);
+                        String toStr = data.substring(idx3 + 2);
+                        LocalDate from = null;
+                        LocalDate to = null;
+                        try {
+                            from = Parser.processDate(fromStr);
+                            to = Parser.processDate(toStr);
+                        } catch (WindyCallException e) {
+
+                        }
                         String tag = data.substring(8, idx1 - 1);
                         Task task = new Event(description, data.charAt(4) == 'X', from, to, tag);
                         tasks.add(task);

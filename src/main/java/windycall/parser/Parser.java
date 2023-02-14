@@ -141,18 +141,23 @@ public class Parser {
      * @param deadline String representation of date input by user
      * @return formatted LocalDate
      */
-    public static LocalDate processDate(String deadline) {
-
+    public static LocalDate processDate(String deadline) throws WindyCallException {
+        // allowed date format:
+        // YYYY-MM-DD or DD/MM/YYYY
         deadline = deadline.trim();
         LocalDate dateTime;
         try {
             dateTime = LocalDate.parse(deadline);
         } catch (DateTimeParseException e) {
-            String[] parts = deadline.split("/");
-            int day = Integer.parseInt(parts[0]);
-            int month = Integer.parseInt(parts[1]);
-            int year = Integer.parseInt(parts[2]);
-            dateTime = LocalDate.of(year, month, day);
+            try {
+                String[] parts = deadline.split("/");
+                int day = Integer.parseInt(parts[0]);
+                int month = Integer.parseInt(parts[1]);
+                int year = Integer.parseInt(parts[2]);
+                dateTime = LocalDate.of(year, month, day);
+            } catch (Exception e1) {
+                throw new WindyCallException("Invalid date format. Only YYYY-MM-DD or DD/MM/YYYY are allowed");
+            }
         }
         return dateTime;
     }

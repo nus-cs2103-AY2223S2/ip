@@ -1,8 +1,11 @@
 package windycall.Handler;
 
+import windycall.parser.Parser;
 import windycall.task.Event;
 import windycall.task.Task;
 import windycall.exception.WindyCallException;
+
+import java.time.LocalDate;
 
 public class AddEventHandler extends AddTaskHandler {
 
@@ -32,9 +35,10 @@ public class AddEventHandler extends AddTaskHandler {
             throw new WindyCallException("OOPS!!! You haven't specify end time of the event!");
         }
         String description = message.substring(6, idxFrom - 1);
-        String from = message.substring(idxFrom + 6, idxTo - 1);
-        String to = message.substring(idxTo + 4);
-//        System.out.println("Got it. I've added this Event task:");
+        String fromStr = message.substring(idxFrom + 6, idxTo - 1);
+        String toStr = message.substring(idxTo + 4);
+        LocalDate from = Parser.processDate(fromStr);
+        LocalDate to = Parser.processDate(toStr);
         return new Event(description, false, from, to);
     }
 }
