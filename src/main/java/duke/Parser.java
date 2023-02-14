@@ -97,33 +97,33 @@ public class Parser {
      * @return The user command represented as a Command object.
      * @throws DukeException If an invalid or unsupported command is provided by the user.
      */
-    public static Command parse(String userCommand) throws DukeException {
+    public static Command parseUserCommand(String userCommand) throws DukeException {
         if (CommandPattern.ADD_TODO.match(userCommand)) {
             /* add todo task */
-            String taskDesc = userCommand.substring(4).trim();
-            if (taskDesc.length() == 0) {
+            String description = userCommand.substring(4).trim();
+            if (description.length() == 0) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
-            Task todoTask = new ToDo(taskDesc);
+            Task todoTask = new ToDo(description);
             return new AddCommand(todoTask);
         } else if (CommandPattern.ADD_DEADLINE.match(userCommand)) {
             /* add deadline task */
             String[] parsedCommand = userCommand.substring(8).split("/by", -1);
-            String taskDesc = parsedCommand[0].trim();
+            String description = parsedCommand[0].trim();
             String by = parsedCommand[1].trim();
-            if (taskDesc.length() == 0) {
+            if (description.length() == 0) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             if (by.length() == 0) {
                 throw new DukeException("OOPS!!! You need to indicate a deadline for this task...");
             }
-            Task deadlineTask = new Deadline(taskDesc, Parser.parseDateTime(by));
+            Task deadlineTask = new Deadline(description, Parser.parseDateTime(by));
             return new AddCommand(deadlineTask);
         } else if (CommandPattern.ADD_EVENT.match(userCommand)) {
             /* add event task */
             String[] parsedCommand = userCommand.substring(5).split("/from|/to", -1);
-            String taskDesc = parsedCommand[0].trim();
-            if (taskDesc.length() == 0) {
+            String description = parsedCommand[0].trim();
+            if (description.length() == 0) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             String from = parsedCommand[1].trim();
@@ -131,7 +131,7 @@ public class Parser {
             if (from.length() == 0 || to.length() == 0) {
                 throw new DukeException("OOPS!!! You need to indicate a start and end date/time for this task...");
             }
-            Task eventTask = new Event(taskDesc, Parser.parseDateTime(from), Parser.parseDateTime(to));
+            Task eventTask = new Event(description, Parser.parseDateTime(from), Parser.parseDateTime(to));
             return new AddCommand(eventTask);
         } else if (CommandPattern.DELETE_TASK.match(userCommand)) {
             /* delete task */
@@ -161,5 +161,45 @@ public class Parser {
         } else {
             throw new DukeException("Huh? I don't understand you...");
         }
+    }
+
+    /**
+     * Parses the stored task (string format) into a Task object.
+     * @param storedTask The stored task in string format.
+     * @return The corresponding Task object of the stored task.
+     * @throws DukeException If the stored task is not of valid/supported string format.
+     */
+    public static Task parseStoredTask(String storedTask) throws DukeException {
+        String[] parsedTaskData = storedTask.split(" \\| ");
+        String taskSymbol = parsedTaskData[0];
+        boolean isTaskDone = parsedTaskData[1].equals("1");
+        String taskDescription = parsedTaskData[2];
+
+        Task task = null;
+        switch (taskSymbol) {
+        case "T":
+            task = new ToDo(taskDescription);
+            break;
+        case "D":
+            String by = parsedTaskData[3];
+            task = new Deadline(taskDescription, Parser.parseDateTime(by));
+            break;
+        case "E":
+            String from = parsedTaskData[3];
+            String to = parsedTaskData[4];
+            task = new Event(taskDescription, Parser.parseDateTime(from), Parser.parseDateTime(to));
+            break;
+        default:
+            throw new DukeException("Task is not recorded in a valid format...");
+        }
+
+        assert task != null : "task should not be null";
+
+        if (isTaskDone) {
+            task.markDone();
+            assert task.getStatusIcon().equals("X") : "task should be marked done";
+        }
+
+        return task;
     }
 }

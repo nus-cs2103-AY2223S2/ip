@@ -45,7 +45,7 @@ public class Duke {
 
         try {
             this.ui.showUserInput(input);
-            Command c = Parser.parse(input);
+            Command c = Parser.parseUserCommand(input);
             String response = c.execute(this.taskList);
             this.ui.showSuccess(response);
             isExit = c.isExit();

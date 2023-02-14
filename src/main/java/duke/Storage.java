@@ -7,11 +7,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
 import task.Task;
 import task.TaskList;
-import task.ToDo;
 
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
@@ -44,37 +41,10 @@ public class Storage {
             Scanner fileReader = new Scanner(tasksData);
             while (fileReader.hasNextLine()) {
                 try {
-                    String taskData = fileReader.nextLine();
-                    String[] parsedTaskData = taskData.split(" \\| ");
-                    String taskSymbol = parsedTaskData[0];
-                    boolean isTaskDone = parsedTaskData[1].equals("1");
-                    String taskDescription = parsedTaskData[2];
+                    String storedTask = fileReader.nextLine();
+                    Task task = Parser.parseStoredTask(storedTask);
 
                     /* Add the task to taskList */
-                    Task task = null;
-                    switch (taskSymbol) {
-                    case "T":
-                        task = new ToDo(taskDescription);
-                        break;
-                    case "D":
-                        String by = parsedTaskData[3];
-                        task = new Deadline(taskDescription, Parser.parseDateTime(by));
-                        break;
-                    case "E":
-                        String from = parsedTaskData[3];
-                        String to = parsedTaskData[4];
-                        task = new Event(taskDescription, Parser.parseDateTime(from), Parser.parseDateTime(to));
-                        break;
-                    default:
-                        throw new DukeException("Task is not recorded in a valid format...");
-                    }
-
-                    assert task != null : "task should not be null";
-
-                    if (isTaskDone) {
-                        task.markDone();
-                        assert task.getStatusIcon().equals("X") : "task should be marked done";
-                    }
                     tasks.add(task);
                 } catch (DukeException e) {
                     System.err.println(e.getMessage());
