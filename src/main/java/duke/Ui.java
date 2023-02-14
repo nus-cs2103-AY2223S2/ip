@@ -46,14 +46,7 @@ public class Ui {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.setPrefSize(400.0, 600.0);
 
-
-        //The container for the content of the chat to scroll
-        scrollPane = new ScrollPane();
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+        scrollPane = setupScrollPane();
 
         dialogContainer = new VBox();
 
@@ -114,5 +107,16 @@ public class Ui {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+    }
+
+    private ScrollPane setupScrollPane() {
+        //The container for the content of the chat to scroll
+        scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+        return scrollPane;
     }
 }
