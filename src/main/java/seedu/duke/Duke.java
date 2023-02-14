@@ -198,7 +198,11 @@ public class Duke extends Application{
     private String getResponse(String input) throws DukeException, IOException {
         String reply = "";
         reply = ui.getInput(tasks, input);
-        storage.updateFile(tasks);
+        try {
+            storage.updateFile(tasks);
+        } catch (RuntimeException e) {
+
+        }
         return reply;
     }
 

@@ -22,15 +22,16 @@ public class Parser {
         if (echo.equals("list")) {
             return tasks.showList();
         } else if (echoSplit.length < 2 && !echo.equals("")) {
-            throw new DukeException();
+//            throw new DukeException();
+            return "I don't know what you are talking about";
         } else if (echoSplit[0].equals("mark")) {
             int index = Integer.valueOf(echoSplit[1]) - 1;
-            assert index > 0 : "index should not be less than 0";
+            assert index + 1 > 0 : "index should not be less than 0";
             tasks.mark(index);
             return "Marked " + (index + 1);
         } else if (echoSplit[0].equals("unmark")) {
             int index = Integer.valueOf(echoSplit[1]) - 1;
-            assert index > 0 : "index should not be less than 0";
+            assert index + 1 > 0 : "index should not be less than 0";
             tasks.unmark(index);
             return "Unmarked " + (index+1);
         } else {
@@ -49,10 +50,10 @@ public class Parser {
                 return "added event task";
             } else if (echoSplit[0].equals("delete")) {
                 int index = Integer.valueOf(echoSplit[1]) - 1;
-                assert index > 0 : "index should not be less than 0";
+                assert index + 1 > 0 : "index should not be less than 0";
                 tasks.delete(index);
                 COUNTER--;
-                return "delete task " + index;
+                return "delete task " + (index+1);
             } else if (echoSplit[0].equals("find")) {
                 return tasks.find(echoSplit);
 
