@@ -1,5 +1,10 @@
 # User Guide
 
+If this is your first time booting up the app, it should come with default tasks pre-loaded.
+If not, a sample storage is given here: https://github.com/ajjajjajjajj/ip/blob/A-Release/src/main/resources/storage/default-storage.txt  
+Download it, rename it to storage.txt and place it in the data folder (the data folder 
+should be in the same directory level as duke.jar
+
 ## Features
 
 ---
