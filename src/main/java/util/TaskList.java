@@ -180,6 +180,7 @@ public class TaskList {
      * @return New deadline of the task specified.
      * @throws DukeException Index of task is invalid
      */
+    @SuppressWarnings("checkstyle:OperatorWrap")
     public String snoozeTask(String command) throws DukeException {
         // "snooze 1 /day 10 /hour 10 /minutes 20"
         ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
@@ -188,7 +189,8 @@ public class TaskList {
         int minutesIndex = input.indexOf("/minutes");
 
         if (dayIndex == -1 || hourIndex == -1 || minutesIndex == -1) {
-            throw new DukeException("Invalid Input!\n" + "Usage should be:\n" + "/day {days} /hour {hour} /minutes {minutes}" + "snooze {taskNumber} ");
+            String output = "Usage should be:\n snooze {taskNumber} /day {days} /hour {hour} /minutes {minutes}\n";
+            throw new DukeException(output);
         }
         int taskNumber = Integer.parseInt(input.get(1)) - 1;
         int days = Integer.parseInt(input.get(dayIndex + 1));

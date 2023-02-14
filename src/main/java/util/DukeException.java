@@ -27,7 +27,7 @@ public class DukeException extends Exception {
         if (taskInput.contains(inputType)) {
             this.errorMessage = String.format("The description of a %s cannot be empty", inputType);
         } else if (markInput.contains(inputType)) {
-            this.errorMessage = String.format("    Usage: '%s taskNumber'", inputType);
+            this.errorMessage = String.format("Usage: '%s taskNumber'", inputType);
         } else if (inputType.equals("bounds")) {
             this.errorMessage = "I'm sorry, but please specify a valid task index.";
         } else {
@@ -37,6 +37,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return "    :( OOPS!!! " + errorMessage;
+        return ":( OOPS!!! " + errorMessage;
     }
 }
