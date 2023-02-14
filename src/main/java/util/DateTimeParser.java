@@ -16,7 +16,6 @@ public class DateTimeParser {
      * @throws DukeException If the input is not in the write format to be converted.
      */
     public static LocalDateTime dateTimeParser(String input) throws DukeException {
-        assert input.isEmpty() : "Input Time cannot be empty";
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {
             return LocalDateTime.parse(input, format);

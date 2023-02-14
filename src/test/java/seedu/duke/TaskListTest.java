@@ -19,7 +19,7 @@ public class TaskListTest {
     public void checkAddTask() {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("return book"));
-        assertEquals(taskList.numTasks(), "     Now you have 1 tasks in the list");
+        assertEquals(taskList.numTasks(), "Now you have 1 tasks in the list");
     }
 
     @Test
