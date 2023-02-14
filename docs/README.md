@@ -5,8 +5,7 @@ the benefits of a Graphical User Interface (GUI).
 
 ***
 ## Quick Start
-1. Ensure you have Java 11 or above installed in your computer. Else, you can install it from [here]
-   (https://www.oracle.com/java/technologies/downloads/#java11).
+1. Ensure you have Java 11 or above installed in your computer. Else, you can install it from [here](https://www.oracle.com/java/technologies/downloads/#java11).
 2. Download the latest duke.Duke.jar from [here](duke.Duke.jar).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
@@ -18,8 +17,8 @@ the benefits of a Graphical User Interface (GUI).
 5. Type the command in the input box and press `Send` to execute it. Some example commands you can try:
 - `list`: List all tasks.
 - `todo grcoeries`: Adds a todo task with `groceries` as its description to the task list.
-- `mark 1`: Marks the 1st contact as done.
-- `delete 1`: Deletes the 1st contact as done.
+- `mark 1`: Marks the 1st task as done.
+- `delete 1`: Deletes the 1st task.
 - `bye`: Exits the app.
 6. Refer to the [Features](##features) below for details of each command.
 <br />
@@ -91,7 +90,7 @@ Examples:
 Prioritize an existing task with the priority level.<br />
 Format: `prioritize [task number] [priority level]`<br />
 - Prioritizes the task at the specified `task number` with the specified level.
-- There are 3 priority levels: high, medium and low
+- There are 3 priority levels: `high`, `medium` and `low`.
 - The `task number` refers to the index number shown in the displayed task list.
 - The index must be a positive integer starting from 1.<br /><br />
 Examples:
@@ -118,7 +117,7 @@ Examples:
 ### Locating a task: `find`
 Find tasks whose description or date contain the given keyword.<br />
 Format: `find [keyword]`<br />
-- The search is case-sensitive<br /><br />
+- The search is case-sensitive.<br /><br />
 Examples:
 - `find groceries` returns `[T][X] groceries`
 - `find 10 Mar` returns `[D][ ] return toy (by: 10 Mar 2019)`
