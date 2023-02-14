@@ -22,15 +22,15 @@ Duke is a desktop app for managing tasks, optimized for use via a Command Line I
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `duke.jar` file from [here](https://github.com/bofeng1999/ip/releases/tag/A-Release).
+2. Download the latest `duke.jar` file from [here](https://github.com/bofeng1999/ip/releases/tag/A-Release).
 
-1. Locate the file and launch the application using the command `java -jar duke.jar`.
+3. Locate the file and launch the application using the command `java -jar duke.jar`.
 
 ![Ui.png](Ui.png)
 
-1. Type a command in the command box and press Enter to execute it.
+4. Type a command in the command box and press Enter to execute it.
 
-1. Refer to the [Features](#features) below for details of each command.
+5. Refer to the [Features](#features) below for details of each command.
 
 ## Features 
 
@@ -44,7 +44,7 @@ Mark or unmark task to track completed and incomplete tasks.
 
 ### View tasks
 
-Display all tasks in a list or filter tasks using a keyword.
+Display all tasks in a list or find tasks using a keyword.
 
 ### Detect duplicates
 
@@ -52,21 +52,18 @@ Throw an error by indicating task already exists.
 
 ## Usage
 ### Adding a task
-You can add todo, event (occurs and ends on a specific date) or deadline(due by a specified date) as tasks.
+You can add todo, event (occurs and ends on a specific date/time) or deadline (due by a specified date/time) as tasks.
 
 #### Adding a todo: `todo`
 Adds a todo.
 
-#Format: `todo TASK_DESCRIPTION`
+Format: `todo TASK_DESCRIPTION`
 
-Examples: 
-- `todo assignment 1`
+Example: `todo assignment 1`
 
 Expected outcome:
 
 Todo added to task list when valid description given.
-
-Description of the outcome.
 
 ```
 Got it. I've added this task:
@@ -79,9 +76,7 @@ Adds a deadline.
 
 Format: `deadline TASK_DESCRIPTION /by YYYY-MM-DD HH:mm`
 
-Examples:
-
-- `deadline return book /by 2022-12-20 16:00`
+Example: `deadline return book /by 2022-12-20 16:00`
 
 Expected outcome:
 
@@ -98,9 +93,7 @@ Adds an event.
 
 Format: `event TASK_DESCRIPTION /from YYYY-MM-DD HH:mm /to YYYY-MM-DD HH:mm`
 
-Examples:
-
-- `event NUS Open House /from 2022-12-22 16:00 /to 2022-12-29 16:00`
+Example: `event NUS Open House /from 2022-12-22 16:00 /to 2022-12-29 16:00`
 
 Expected outcome:
 
@@ -132,9 +125,8 @@ Format: `delete INDEX`
 - Deletes the task at the specified `INDEX`.
 - `INDEX` refers to the index number shown after using `list`.
 
-Examples:
-
-- `delete 1` deletes the 1st task in `list` if it exists.
+Example: `delete 1` 
+- Deletes the 1st task in `list` if it exists.
 
 Expected outcome:
 
@@ -142,7 +134,7 @@ Deletes a task when valid index is given.
 
 ```
 Noted, I've removed this task:
-[X][ ] TASK_DESCRIPTION
+[T][ ] TASK_DESCRIPTION
 Now you have X task(s) in the list.
 ```
 
@@ -153,8 +145,8 @@ Format: `find KEYWORD`
 - Search is case-sensitive. e.g. `homework` will not match with `Homework`
 - Partial keywords can be used.
 
-Examples:
-- `find a` returns a list of all tasks with description containing at least the keyword `a`
+Example: `find a` 
+- Returns a list of all tasks with description containing at least the keyword `a`
 
 Expected outcome:
 
@@ -171,8 +163,7 @@ Format: `mark INDEX`
 - Marks the task at the specified `INDEX` as completed.
 - `INDEX` refers to the index number shown after using `list`.
 
-Examples:
-- `mark 1` marks the first task in `list` if it exists.
+Example: `mark 1` marks the first task in `list` if it exists.
 
 Expected outcome:
 
@@ -180,7 +171,7 @@ Marks a task as completed when valid index is given.
 
 ```
 Nice! I've marked this task as done:
-[X][X] TASK_DESCRIPTION
+[T][X] TASK_DESCRIPTION
 ```
 
 ### Unmarking a task: `unmark`
@@ -190,8 +181,7 @@ Format: `unmark INDEX`
 - Marks the task at the specified `INDEX` as incomplete.
 - `INDEX` refers to the index number shown after using `list`.
 
-Examples:
-- `unmark 1` marks the first task in `list` as incomplete if it exists.
+Example: `unmark 1` marks the first task in `list` as incomplete if it exists.
 
 Expected outcome:
 
@@ -199,7 +189,7 @@ Marks a task as incomplete when valid index is given.
 
 ```
 OK, I've marked this task as not done yet:
-[X][ ] TASK_DESCRIPTION
+[T][ ] TASK_DESCRIPTION
 ```
 
 ### Exiting the program: `bye`
