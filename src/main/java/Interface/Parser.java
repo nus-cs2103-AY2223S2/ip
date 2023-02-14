@@ -67,7 +67,6 @@ public class Parser {
      * @throws DukeException
      */
     private static void checkValidCommand(String instruction, String[] inputs) throws DukeException {
-        System.out.println(instruction);
         switch(instruction) {
 
         case "bye":
