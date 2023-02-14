@@ -34,59 +34,32 @@ public class Ui {
      */
     public Ui(Stage stage) {
         parser = new Parser(stage);
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        String greeting = "Hey there, DUKE MK-II here!\n"
-                + "Use 'help' to get started.\n";
-        Label greetingLabel = new Label(greeting);
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane = setupScrollPane();
-
-        dialogContainer = new VBox();
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.heightProperty().addListener((observable)-> scrollPane.setVvalue(1.0));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greetingLabel, new ImageView(duke))
-        );
-
-        scrollPane.setContent(dialogContainer);
-        userInput = new TextField();
-        userInput.setPrefWidth(320.0);
-
-
-        sendButton = new Button("Send");
-        sendButton.setPrefWidth(60.0);
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        AnchorPane.setTopAnchor(scrollPane, 10.0);
-        AnchorPane.setRightAnchor(scrollPane, 10.0);
-        AnchorPane.setBottomAnchor(sendButton, 10.0);
-        AnchorPane.setRightAnchor(sendButton, 10.0);
-        AnchorPane.setLeftAnchor(userInput, 10.0);
-        AnchorPane.setBottomAnchor(userInput, 10.0);
-
-
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        scene = new Scene(mainLayout);
-        String css = this.getClass().getResource("/stylesheet/application.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        setupStage(stage);
+        dialogContainer = setupDialogContainer();
+        scrollPane = setupScrollPane(dialogContainer);
+        sendButton = setupSendButton();
+        userInput = setupUserInput();
+        AnchorPane mainLayout = setupAnchorPane(scrollPane, userInput, sendButton);
+        scene = setupScene(mainLayout);
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
 
+    private void setupStage(Stage stage) {
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+    }
+
+    private TextField setupUserInput(){
+        TextField userInput = new TextField();
+        userInput.setPrefWidth(320.0);
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+        return userInput;
+    }
 
     private void handleUserInput() {
         String userCmd = userInput.getText();
@@ -109,14 +82,57 @@ public class Ui {
         userInput.clear();
     }
 
-    private ScrollPane setupScrollPane() {
+    private Button setupSendButton() {
+        Button sendButton = new Button("Send");
+        sendButton.setPrefWidth(60.0);
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+        return sendButton;
+    }
+
+    private VBox setupDialogContainer() {
+        String greeting = "Hey there, DUKE MK-II here!\n"
+                + "Use 'help' to get started.\n";
+        Label greetingLabel = new Label(greeting);
+        VBox dialogContainer = new VBox();
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable)-> scrollPane.setVvalue(1.0));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greetingLabel, new ImageView(duke))
+        );
+        return dialogContainer;
+    }
+
+    private AnchorPane setupAnchorPane(ScrollPane scrollPane, TextField userInput, Button sendButton) {
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        AnchorPane.setTopAnchor(scrollPane, 10.0);
+        AnchorPane.setRightAnchor(scrollPane, 10.0);
+        AnchorPane.setBottomAnchor(sendButton, 10.0);
+        AnchorPane.setRightAnchor(sendButton, 10.0);
+        AnchorPane.setLeftAnchor(userInput, 10.0);
+        AnchorPane.setBottomAnchor(userInput, 10.0);
+        return mainLayout;
+    }
+
+    private ScrollPane setupScrollPane(VBox dialogContainer) {
         //The container for the content of the chat to scroll
         scrollPane = new ScrollPane();
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
+        scrollPane.setContent(dialogContainer);
         scrollPane.setFitToWidth(true);
         return scrollPane;
+    }
+
+    private Scene setupScene(AnchorPane mainLayout) {
+        scene = new Scene(mainLayout);
+        String css = this.getClass().getResource("/stylesheet/application.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        return scene;
     }
 }
