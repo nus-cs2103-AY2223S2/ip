@@ -303,15 +303,26 @@ Program window shuts immediately.
 
 
 ## Command Summary
-`help` : help                                                  
-`bye` : bye                                                   
-`deadline` : deadline <taskname> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>                    
-`delete` : delete <index>                                             
-`event` : event <task> /from <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> /to <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>
-`find` : find <keyword>                                             
-`list` : list                                                  
-`listTime` : listTime <date in yyyy-mm-dd>                                      
-`mark` : mark <index>                                              
-`schedule` : schedule <date in yyyy-mm-dd>                                      
-`todo` : todo <taskname>                                             
-`unmark` : unmark <index>                                             
+`help` : help
+
+`bye` : bye
+
+`deadline` : deadline \<taskname\> /by \<date in yyyy-mm-dd or yyyy-mm-dd hh:mm\>
+
+`delete` : delete \<index\>
+
+`event` : event \<task\> /from \<date in yyyy-mm-dd or yyyy-mm-dd hh:mm\> /to \<date in yyyy-mm-dd or yyyy-mm-dd hh:mm\> 
+
+`find` : find \<keyword\>
+
+`list` : list 
+
+`listTime` : listTime \<date in yyyy-mm-dd\> 
+
+`mark` : mark \<index\>         
+
+`schedule` : schedule \<date in yyyy-mm-dd\>     
+
+`todo` : todo \<taskname\>           
+
+`unmark` : unmark \<index\>                                             
