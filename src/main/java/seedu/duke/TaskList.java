@@ -310,7 +310,11 @@ public class TaskList {
                 for (int i = 2; i < userParse.inputArr.length; i++) {
                     tagMessage += userParse.inputArr[i] + " ";
                 }
-                tasksList.get(userIndex).addTag(userParse.checkDescription(tagMessage.trim()));
+                if (tagMessage.equals("")) {
+                    String emptyMessage = "Tag message cannot be empty!";
+                    throw new DukeException(emptyMessage);
+                }
+                tasksList.get(userIndex).addTag(tagMessage);
                 return this;
             }
         } catch (DukeException e) {

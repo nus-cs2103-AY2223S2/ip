@@ -134,8 +134,8 @@ public class Ui {
      */
     public String deleteMessage(TaskList tasks, Task deleted) {
         String uiText = "Noted. I've removed this task:\n";
-        uiText = deleted.toString() + "\n";
-        uiText = "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
+        uiText += deleted.toString() + "\n";
+        uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
     }
 
