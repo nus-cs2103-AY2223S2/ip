@@ -164,6 +164,7 @@ public class Duke extends Application {
 //        Label userText = new Label(userInput.getText());
 //        Label dukeText = new Label(getResponse(userInput.getText()));
         String userText = userInput.getText();
+        assert userText.length() >= 0;
         String dukeText = getResponse(userInput.getText());
         System.out.println(dukeText);
         if (dukeText == null) {
@@ -195,6 +196,7 @@ public class Duke extends Application {
         while (isContinueRunning) {
             try {
                 String input = ui.requestUserInput();
+                assert input.length() <= 0 : "User input should not be empty";
                 String output = parser.readInput(input);
                 if (output.isEmpty()) {
                     isContinueRunning = false;

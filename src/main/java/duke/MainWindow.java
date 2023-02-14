@@ -49,6 +49,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws DukeException, IOException {
         String input = userInput.getText();
+        assert input.length() <= 0 : "User input should not be empty";
         String reply = duke.getResponse(input);
         String response;
         if (reply == null) {
