@@ -57,6 +57,10 @@ Allows the user to update the description of existing tasks in the list without 
 
 Allows the user to update the deadline of existing deadline tasks in the list without having to create a new deadline
 
+### 10. Quits the application on command
+
+Allows the user to close the application without having to click on the cross button of the window
+
 
 ## Usage
 
@@ -72,17 +76,22 @@ Example of usage:
 
 Create deadline items with the given description and deadline
 
+HHmm (hour minute in 24 hour time format) is optional to include in the deadline
+
 Example of usage: 
 
-`deadline <description> /by <yyyy-MM-dd\n HHmm(optional)>`
+`deadline <description> /by <yyyy-MM-dd HHmm(optional)>`
 
 ### `event`
 
 Create events with the given description and start and end dates
 
+HHmm (hour minute in 24 hour time format) is optional to include in the deadline
+
+
 Example of usage: 
 
-`event <description> /from <yyyy-MM-dd\n HHmm(optional)> /to <yyyy-MM-dd\n HHmm(optional)>`
+`event <description> /from <yyyy-MM-dd HHmm(optional)> /to <yyyy-MM-dd HHmm(optional)>`
 
 ### `find`
 
@@ -131,4 +140,22 @@ Updates description or deadline of items in the list
 Example of usage: 
 
 `update <index> /description <new changes>`
+
 `update <index> /deadline <new changes>`
+
+### `bye`
+
+Quits the application on command
+
+Example of usage:
+
+`bye`
+
+## Screenshots
+This is a screenshot of the application on start:
+
+  <img src="https://user-images.githubusercontent.com/65301406/218518527-19dfc310-9304-4625-a7ec-072b36cd9072.png" width="50%" height="60%">
+
+This is a screenshot of the chat:
+
+  <img src="https://user-images.githubusercontent.com/65301406/218518232-d2dfd186-1b83-433b-ae53-83002b008f7c.png" width="50%" height="70%">
