@@ -42,20 +42,11 @@ public class AddEventCommand extends Command {
      * Prints a message indicating to user that Event task was successfully added.
      *
      * @param tasks A TaskList containing the set of task the user has.
-     * @param ui An Ui which allows for interaction between Duke and user.
      * @param storage A Storage enabling Duke to store memory.
      * @return String The String message indicating status of action.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            return ui.addTaskResponse(tasks.addEvent(name, from, to), tasks);
-        } catch (DateTimeParseException e1) {
-            return ui.invalidTiming();
-        } catch (IllegalArgumentException e2) {
-            return ui.incompleteCommandErrorMessage();
-        } catch (ArrayIndexOutOfBoundsException e3) {
-            return ui.incompleteCommandErrorMessage();
-        }
+    public String execute(TaskList tasks, Storage storage) {
+        return Ui.addTaskResponse(tasks.addEvent(name, from, to), tasks);
     }
 
 }

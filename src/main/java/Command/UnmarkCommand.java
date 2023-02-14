@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Represents a command from the user to unmark a task as undone.
@@ -34,15 +35,11 @@ public class UnmarkCommand extends Command {
      * unmarked.
      *
      * @param tasks A TaskList containing the set of task the user has.
-     * @param ui An Ui which allows for interaction between Duke and user.
      * @param storage A Storage enabling Duke to store memory.
      * @return String The String message indicating status of action.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            return ui.unmarkTaskResponse(tasks.markTask(num, false));
-        } catch (IndexOutOfBoundsException e1) {
-            return ui.taskNotChosenErrorMessage();
-        }
+    public String execute(TaskList tasks, Storage storage) {
+        Task task = tasks.markTask(num, false);
+        return Ui.unmarkTaskResponse(task);
     }
 }

@@ -33,16 +33,11 @@ public class DeleteCommand extends Command {
      * Deletes the selected task from the list. Prints message indicating to user that task was successfully deleted.
      *
      * @param tasks A TaskList containing the set of task the user has.
-     * @param ui An Ui which allows for interaction between Duke and user.
      * @param storage A Storage enabling Duke to store memory.
      * @return String The String message indicating status of action.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            return ui.deleteTaskResponse(tasks.deleteTask(num - 1) , tasks);
-        } catch (IndexOutOfBoundsException e1) {
-            return ui.taskNotChosenErrorMessage();
-        }
+    public String execute(TaskList tasks, Storage storage) {
+        return Ui.deleteTaskResponse(tasks.deleteTask(num - 1) , tasks);
     }
 
 }

@@ -12,7 +12,6 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
     private boolean isEnd;
 
     /**
@@ -21,23 +20,24 @@ public class Duke {
      * @param filePath The file path in String of the file where memory is stored.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.isEnd = false;
     }
 
     public String getPreviousTaskResponse() {
-        String startingMessage = ui.welcomeResponse();
-        String askForTask = ui.askForTaskResponse();
+        String startingMessage = Ui.welcomeResponse;
+        String askForTask = Ui.askForTaskResponse;
+        String loadMessage = "";
         try {
             this.tasks = new TaskList(storage.loadData());
-            return startingMessage + "\n" + ui.successfulLoadResponse() + "\n" + ui.listTaskResponse(this.tasks)
-                    + "\n" + askForTask;
+            loadMessage = Ui.successfulLoadResponse;
         } catch (FileNotFoundException e) {
             this.tasks = new TaskList();
-            return startingMessage + "\n" + ui.loadingErrorMessage() + "\n" + ui.listTaskResponse(this.tasks) + "\n"
-                    + askForTask;
+            loadMessage = Ui.unsuccessfulLoadResponse;
         }
+        String response = Ui.addDoubleLineBreak(startingMessage, Ui.instructionResponse, loadMessage,
+                Ui.listTaskResponse(this.tasks), askForTask);
+        return response;
     }
 
     public boolean getIsEnd() {
@@ -48,20 +48,16 @@ public class Duke {
      * Returns appropriate response to user input.
      *
      * @param input The String input of user.
-     * @return String The String reponse of Duke.
+     * @return String The String response of Duke.
      */
     public String getResponse(String input) {
         try {
             String fullCommand = input;
             Command c = Parser.parse(fullCommand);
             isEnd = c.isExit();
-            return c.execute(tasks, ui, storage);
-        } catch (DateTimeParseException e2) {
-            return ui.unreadableCommandErrorMessage();
-        } catch (IllegalArgumentException e3) {
-            return ui.incompleteCommandErrorMessage();
-        } catch (ArrayIndexOutOfBoundsException e3) {
-            return ui.incompleteCommandErrorMessage();
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.toString();
         }
     }
 }
