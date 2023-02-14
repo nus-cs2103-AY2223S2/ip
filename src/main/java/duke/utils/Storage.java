@@ -23,6 +23,7 @@ public class Storage {
     private ObjectInputStream ois;
     private FileOutputStream fos;
     private ObjectOutputStream o;
+    private boolean loadSuccess = false;
 
     /**
      * Reads byte stream from pre-existing .txt file.
@@ -40,7 +41,7 @@ public class Storage {
             this.storedTasks = (ArrayList<Task>) ois.readObject();
             fis.close();
             ois.close();
-            dukeIo.notifyLoad();
+            this.loadSuccess = true;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -76,5 +77,13 @@ public class Storage {
             fos.close();
             dukeIo.notifySave();
         }
+    }
+
+    /**
+     * Checks if save file is loaded.
+     * @return True if save file is loaded successfully
+     */
+    public boolean isLoadSuccess() {
+        return this.loadSuccess;
     }
 }
