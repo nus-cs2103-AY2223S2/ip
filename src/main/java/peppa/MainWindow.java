@@ -6,6 +6,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -16,6 +18,10 @@ public class MainWindow extends AnchorPane {
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
+
+    @FXML
+    private GridPane userInputContainer;
+
     @FXML
     private TextField userInput;
     @FXML
@@ -40,7 +46,6 @@ public class MainWindow extends AnchorPane {
         } else {
             setPeppaDialog(response + "Oink! I'm Peppa. Nice to meet you! How can I assist you today?");
         }
-        // set sendWelcomeMsg --> False
     }
 
     public void setPeppaDialog(String msg) {
