@@ -2,6 +2,9 @@
 
 Nyako is a task tracker to help you keep track of your tasks!
 
+![Ui](https://user-images.githubusercontent.com/59087730/218805747-f485af1e-4b17-4c61-88b7-1e54635f74a9.png)
+
+
 ## Features 
 
 delete
