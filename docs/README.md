@@ -32,7 +32,7 @@
 2. Download the latest `kuromi.jar` from [here]().
 3. Copy the file to the folder you want to use as the *home folder* for your Kuromi.
 4. Double click the jar file to run the application.\
-A GUI similar to the below should appear in a few seconds. 
+A GUI similar to the below should appear in a few seconds.\
 <img width="453" alt="image" src="https://user-images.githubusercontent.com/63656207/218633752-7ac9e300-7754-4a0f-9fa7-f3d5c99f4bf2.png">
 5. Type the command in the chat box and press Enter (or click the Send button) to execute it.
 6. Refer to the [Usage](#usage) below for details of each command.
