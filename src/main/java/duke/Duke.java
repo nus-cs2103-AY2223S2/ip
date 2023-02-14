@@ -2,6 +2,7 @@ package duke;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import task.TaskList;
 
 /**
  * Duke class is the main class and the beginning point of execution for the Duke chatbot.

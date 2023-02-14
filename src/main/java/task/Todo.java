@@ -1,4 +1,6 @@
-package duke;
+package task;
+
+import task.Task;
 
 /**
  * Todo class inherits from the Task class and is used for representing all

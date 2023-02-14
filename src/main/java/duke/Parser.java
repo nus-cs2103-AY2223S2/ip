@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.stage.Stage;
+import task.*;
 
 /**
  * Parser class is used for making sense of all possible user commands.
@@ -159,18 +160,18 @@ public class Parser {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
-            throw new DukeException(" Beep boop. Please supply a task number you wish to mark as completed.\n");
+            throw new DukeException("Beep boop. Please supply a task number you wish to mark as completed.\n");
         }
         try {
             int numToMark = Integer.parseInt(userInput.split(" ")[1]);
             if (numToMark == 0 || (numToMark > TaskList.getUserTasks().size())) {
-                throw new DukeException(" Beep boop. Invalid mark selection.\n");
+                throw new DukeException("Beep boop. Invalid mark selection.\n");
             }
             TaskList.getUserTasks().get(numToMark - 1).setIsDone(true);
             resultString = "Nice! I've marked this task as done:\n"
                     + TaskList.getUserTasks().get(numToMark - 1) + "\n";
         } catch (NumberFormatException nfe) {
-            throw new DukeException(" Beep boop. Please supply a valid task number you wish to mark as completed.\n");
+            throw new DukeException("Beep boop. Please supply a valid task number you wish to mark as completed.\n");
         }
         Storage.saveTasksToFile(TaskList.getUserTasks());
         return resultString;
@@ -180,7 +181,7 @@ public class Parser {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
-            throw new DukeException(" Beep boop. Please supply a task number you wish to mark as incomplete.\n");
+            throw new DukeException("Beep boop. Please supply a task number you wish to mark as incomplete.\n");
         }
         try {
             int numToUnmark = Integer.parseInt(userInput.split(" ")[1]);

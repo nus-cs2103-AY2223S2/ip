@@ -1,4 +1,9 @@
 package duke;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.text.ParseException;
@@ -112,18 +117,18 @@ public class Storage {
             for(int i = 0; i< taskList.size(); i++) {
                 String taskType = taskList.get(i).getClass().getTypeName();
                 switch (taskType) {
-                    case "duke.Todo":
+                    case "task.Todo":
                         Todo todo = (Todo)taskList.get(i);
                         toWrite = "todo|" + (todo.getIsDone() ? 1 : 0) + "|" + todo.getDescription() + "\n";
                         fileWriter.write(toWrite);
                         break;
-                    case "duke.Deadline":
+                    case "task.Deadline":
                         Deadline deadline = (Deadline) taskList.get(i);
                         toWrite = "deadline|" +(deadline.getIsDone() ? 1 : 0) + "|" +
                                 deadline.getDescription() + "|" + deadline.getDeadline() + "\n";
                         fileWriter.write(toWrite);
                         break;
-                    case "duke.Event":
+                    case "task.Event":
                         Event event = (Event)taskList.get(i);
                         toWrite = "event|" + (event.getIsDone() ? 1 : 0) + "|" +event.getDescription() + "|" +
                                 event.getEventStart() + "|" + event.getEventEnd() + "\n";
