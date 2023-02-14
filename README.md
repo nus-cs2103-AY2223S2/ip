@@ -1,15 +1,15 @@
-## DukePro
->“Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes))
+## Nyako
+![Ui](https://user-images.githubusercontent.com/59087730/218797973-b1eb3b69-d258-4f08-bc2a-bce4f19c6672.png)
 
-DukePro frees your mind of having to remember things you need to do. It's,
+Nyako frees your mind of having to remember things you need to do. It's,
 
-- text-based
+- ~~text-based~~ cat-based
 - easy to learn
 - ~~FAST~~ SUPER FAST to use
 
 All you need to do is,
 
-1. download it from [here](https://nus-cs2103-ay2223s2.github.io/website/schedule/week4/project.html).
+1. download the jar file.
 2. double-click it.
 3. add your tasks.
 4. let it manage your tasks for you 😉
@@ -19,8 +19,7 @@ And it is **FREE**!
 Features:
 
 - [x] Managing tasks
-- [ ]  Managing deadlines (coming soon)
-- [ ]  Reminders (coming soon)
+- [x] Managing deadlines
 
 If you are a Java programmer, you can use it to practice Java too. Here's the main method: 
 ```
