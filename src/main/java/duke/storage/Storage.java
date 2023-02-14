@@ -46,22 +46,22 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String[] nextLine = scanner.nextLine().split(" ", 3);
                 //first Word should be a number indicating if task has been completed or not. Initialise boolean value.
-                Boolean isCompleted = nextLine[0].equals("1") ? true : false;
+                Boolean isComplete = nextLine[0].equals("1") ? true : false;
                 //second word should be either deadline, event, or ToDo.
                 String secondWord = nextLine[1];
                 //Rest of the message contains details about the task.
                 String bodyMessage = nextLine[2];
                 switch (secondWord) {
                     case "deadline":
-                        DeadLine taskDeadline = new DeadLine("deadline", bodyMessage, isCompleted);
+                        DeadLine taskDeadline = new DeadLine("deadline", bodyMessage, isComplete);
                         tasks.add(taskDeadline);
                         break;
                     case "event":
-                        Event taskEvent = new Event("event", bodyMessage, isCompleted);
+                        Event taskEvent = new Event("event", bodyMessage, isComplete);
                         tasks.add(taskEvent);
                         break;
                     case "todo":
-                        ToDo taskToDo = new ToDo("todo", bodyMessage, isCompleted);
+                        ToDo taskToDo = new ToDo("todo", bodyMessage, isComplete);
                         tasks.add(taskToDo);
                     default:
                         //do nothing, task is not valid

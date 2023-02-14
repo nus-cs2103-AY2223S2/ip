@@ -1,9 +1,6 @@
 package duke.parser;
 
-import duke.tasks.Task;
-import duke.tasks.DeadLine;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
+import duke.tasks.*;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
@@ -95,6 +92,15 @@ public class Parser {
                     storage.deleteTask(taskToDelete.getStorageLine());
                     return sender.respond("We have removed this task: " + taskToDelete.provideDetails() + "\nYou now have "
                             + tasks.getTaskCount() + " tasks remaining");
+                case "doafter":
+                    //Rest of message describes the Task.
+                    String bodyDoAfter = userInput.split(" ", 2)[1];
+                    DoAfter doAfter = new DoAfter("doafter", bodyDoAfter, false);
+                    tasks.addTask(doAfter);
+                    storage.addTask(doAfter.getStorageLine());
+                    return sender.respond("I have added this new task:\n" + doAfter.provideDetails()
+                            + "\nYou now currently have "
+                            + tasks.getTaskCount() + " tasks.");
                 default:
                     return sender.respond("Oops! I don't know what this means. For a list of valid commands to use, " +
                             "type in 'help'.");
