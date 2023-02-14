@@ -8,6 +8,16 @@ public class Ui {
     public Ui () {
         //UI does not need to store anything 
     } 
+    public void printLogo() {
+        //CHECKSTYLE.OFF: checkStyleTest 
+        String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+        //CHECKSTYLE.ON: checkStyleTest
+        System.out.println("Hello from\n" + logo);
+    }
     public void showLoadingError() {
         System.out.println("error loading file");
     }
