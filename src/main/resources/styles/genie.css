@@ -1,0 +1,5 @@
+.background {
+    /* -fx-background-image: url("/images/background1.jpeg"); A8DCD9*/
+    -fx-background-color: "A2D9FF";
+    -fx-background-size: contain;
+}
