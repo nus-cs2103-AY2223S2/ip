@@ -15,7 +15,7 @@ public class Parser {
      * @throws DukeException When the input is empty.
      */
     public void checkEmpty(String input, String command) throws DukeException {
-        if (input.length() < command.length() + 1) {
+        if (input.length() < command.length() + 2) {
             switch (command) {
             case "todo":
                 throw new EmptyTodoException();
@@ -24,13 +24,29 @@ public class Parser {
             case "event":
                 throw new EmptyEventException();
             case "mark": case "unmark": case "delete": case "find":
-                throw new EmptyListException();
+                throw new EmptyActionException();
             }
         }
     }
 
-    public void checkFormat(String input) throws WrongTimeInputException {
-
+    /**
+     * Check whether the user input is valid or not.
+     *
+     * @param input The user input
+     * @param command The corresponding command we check the input against.
+     * @throws DukeException When the input does not follow the standard format.
+     */
+    public void checkInvalidInput(String input, String command) throws DukeException {
+        switch (command) {
+        case "todo":
+            throw new InvalidTodoException();
+        case "deadline":
+            throw new InvalidDeadlineException();
+        case "event":
+            throw new InvalidEventException();
+        case "mark": case "unmark": case "delete": case "find":
+            throw new InvalidActionInput();
+        }
     }
 
     /**

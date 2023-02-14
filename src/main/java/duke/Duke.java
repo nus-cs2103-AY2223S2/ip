@@ -1,7 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import storage.Storage;
 import task.Command;
@@ -184,6 +184,8 @@ public class Duke {
                 handleUserInput(userInput, true);
             } catch (DukeException exc) {
                 String output = exc.toString();
+            } catch (DateTimeParseException exc) {
+                String output = exc.toString();
             }
         }
         return errorMessage;
@@ -200,6 +202,8 @@ public class Duke {
             return handleUserInput(userInput, false);
         } catch (DukeException exc) {
             return exc.toString();
+        } catch (DateTimeParseException exc) {
+            return "Sorry your input date format for the deadline task is wrong :(";
         }
     }
 }
