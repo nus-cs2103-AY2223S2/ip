@@ -4,9 +4,8 @@ import babe.exception.NoArgumentException;
 import babe.exception.NonsenseInputException;
 import babe.exception.WrongDateFormatException;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -160,9 +159,10 @@ class Parser {
 
             int deadlineIndex = Parser.findArgument("/by");
             String description = Parser.rebuildUserInput(1, deadlineIndex - 1);
-            String deadline = Parser.formatDate(Parser.rebuildUserInput(deadlineIndex, inputLength));
 
             try {
+                String deadline = Parser.formatDate(Parser.rebuildUserInput(deadlineIndex, inputLength));
+
                 outputs.add(description);
                 outputs.add(deadline);
             } catch (Exception e) {
