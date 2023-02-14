@@ -50,6 +50,7 @@ public class Duke {
     public String getGreetingMsg() {
         return greetingMsg;
     }
+
     /**
      * Return response given a user input.
      *

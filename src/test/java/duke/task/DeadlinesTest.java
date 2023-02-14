@@ -1,7 +1,6 @@
-package duke;
+package duke.task;
 
 import duke.exception.DukeInvalidArgumentException;
-import duke.task.Deadlines;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

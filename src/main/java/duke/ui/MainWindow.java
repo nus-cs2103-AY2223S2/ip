@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainWindow extends AnchorPane {
@@ -49,6 +53,18 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
+
+        // adapted from
+        // https://stackoverflow.com/questions/2258066/run-a-java-function-after-a-specific-number-of-seconds
+        if (input.equals("exit")) {
+            TimerTask timerTask = new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(timerTask, 1000L);
+        }
     }
 }
 
