@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.Tag;
+import duke.TaskList;
+
 /**
  * super class {@code Task} that encapsulates common attributes of a task:
  * description and isDone
@@ -15,12 +18,18 @@ public class Task {
     protected boolean isDone;
 
     /**
+     * Tag assigned to task
+     */
+    protected Tag tag;
+
+    /**
      * Constructor method for {@code Task} class
      * @param description description of task
      */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = new Tag("");
     }
 
     /**
@@ -53,5 +62,14 @@ public class Task {
     public String toString() {
         String output = "[" + getStatusIcon() + "]" + " | "  +this.description;
         return output;
+    }
+
+    public void addTag(Tag tag){
+        this.tag = tag;
+    }
+
+    public void removeTag(){
+        TaskList.updateTagLibrary(this.tag);
+        this.tag = new Tag("");
     }
 }
