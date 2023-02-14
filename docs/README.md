@@ -220,7 +220,7 @@ Hi, I hope that you are having a nice day
 
 ### **```bye```**
 
-Prompts Connor to say goodbye. Program will exit after a 1 second delay. 
+Prompts Connor to say goodbye. Program will exit after a 1-second delay. 
 
 #### Usage format: 
 
@@ -231,4 +231,8 @@ Prompts Connor to say goodbye. Program will exit after a 1 second delay.
 ```
 It was a good session Hank. Bye.
 ```
+
+## **Acknowledgements:**
+
+The gui package contains code that is adapted from: https://se-education.org/guides/tutorials/javaFxPart4.html.
 

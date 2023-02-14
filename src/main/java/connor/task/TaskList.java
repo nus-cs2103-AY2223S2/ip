@@ -1,7 +1,6 @@
 package connor.task;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 import connor.ui.Ui;
@@ -142,16 +141,11 @@ public class TaskList {
     /**
      * Sorts the list according to the priority of each task.
      *
-     * @param ui
-     * @return
+     * @param ui the ui to facilitate printing success message.
+     * @return String that indicates a successful sorting.
      */
     public String sort(Ui ui) {
-        Collections.sort(this.tasks, new Comparator<Task>() {
-            @Override
-            public int compare(Task task1, Task task2) {
-                return task1.compareTo(task2);
-            }
-        });
+        Collections.sort(this.tasks, Task::compareTo);
         return ui.sortMessage();
     }
 

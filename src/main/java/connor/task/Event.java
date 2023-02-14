@@ -68,15 +68,15 @@ public class Event extends Task {
             return 1;
         }
         Event newTask = (Event) task;
-        if (this.startDateTime.equals(newTask.startDateTime)) {
-            if (this.endDateTime.equals(newTask.endDateTime)) {
-                return this.taskName.compareTo(newTask.taskName);
-            } else {
-                return this.endDateTime.compareTo(newTask.endDateTime);
-            }
-        } else {
-            return this.startDateTime.compareTo(newTask.startDateTime);
+        boolean isStartDateTimeEqual = this.startDateTime.equals(newTask.startDateTime);
+        boolean isEndDateTimeEqual = this.endDateTime.equals(newTask.endDateTime);
+        if (isStartDateTimeEqual && isEndDateTimeEqual) {
+            return this.taskName.compareTo(newTask.taskName);
         }
+        if (isStartDateTimeEqual) {
+            return this.endDateTime.compareTo(newTask.endDateTime);
+        }
+        return this.startDateTime.compareTo(newTask.startDateTime);
     }
 
     /**

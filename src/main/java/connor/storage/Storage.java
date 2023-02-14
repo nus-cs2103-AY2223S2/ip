@@ -88,7 +88,7 @@ public class Storage {
             FileWriter writer = new FileWriter(String.valueOf(this.dataFile));
             writer.write("");
             for (int i = 0; i < tasks.size(); i++) {
-                writer.append(tasks.get(i).dataFormat() + "\n");
+                writer.append(tasks.get(i).dataFormat()).append("\n");
             }
             writer.close();
         } catch (IOException e) {

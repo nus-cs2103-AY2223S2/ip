@@ -76,6 +76,12 @@ public class Connor {
         return new File("data/connor.Connor.txt");
     }
 
+    /**
+     * Gets the corresponding response from Connor based on the input user command.
+     *
+     * @param input the input command.
+     * @return String representing Connor's response.
+     */
     public String getResponse(String input) {
         String response = this.parser.parse(input, this.tasks, this.ui);
         this.storage.updateFile(tasks.getList());

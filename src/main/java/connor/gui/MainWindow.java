@@ -58,6 +58,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Exits the application upon being called.
+     */
     private void exit() {
         PauseTransition exitDelay = new PauseTransition(Duration.seconds(1));
         exitDelay.setOnFinished((event) -> Platform.exit());
