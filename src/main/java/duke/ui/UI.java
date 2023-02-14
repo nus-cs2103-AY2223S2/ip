@@ -10,6 +10,9 @@ import duke.task.Task;
 public class UI {
     /**
      * Returns a formatted success message.
+     * @param message message to be printed.
+     * @param task task to be included.
+     * @return formatted message to be printed.
      */
     public String formatSuccessMessage(String message, Task task) {
         return message + "\n" + task.toString();
@@ -17,6 +20,10 @@ public class UI {
 
     /**
      * Returns a formatted task message.
+     * @param message message to be printed.
+     * @param task task to be included.
+     * @param numOfTasks number of task to be included
+     * @return formatted task message to be printed.
      */
     public String formatTaskMessage(String message, Task task, int numOfTasks) {
         return message + "\n"
@@ -25,7 +32,9 @@ public class UI {
     }
 
     /**
-     * Prints the result of a find command.
+     * Returns the result of a find command.
+     * @param tasks task to be included.
+     * @return formatted find result to be printed.
      */
     public String formatFindResult(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
