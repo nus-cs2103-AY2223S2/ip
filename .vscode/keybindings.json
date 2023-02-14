@@ -1,0 +1,10 @@
+// Place your key bindings in this file to override the defaults
+//https://stackoverflow.com/a/57189220
+//https://stackoverflow.com/a/64990776 //https://github.com/microsoft/vscode/issues/109789
+[
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "runTest"
+    }
+]

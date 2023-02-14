@@ -1,0 +1,61 @@
+clear
+mark1
+todo one
+todotwo
+list
+mark 1
+mark2
+list
+unmark 1
+unmark2
+list
+deadline ip project /by 2023-01-19T18:00
+deadlineip project2 /by2023-01-20T18:00
+deadlineip project2 /by tmr
+list
+delete 1
+delete1
+list
+event hack and roll /from 2023-01-14T12:30 /to 2023-01-15T12:30
+eventhack and roll2 /from2023-01-24T12:30 /to2023-01-25T12:30
+eventerror3 /from2023-01-30T12:30 /to2023-01-25T12:30
+mark1
+list
+todo
+deadline
+event
+deadline /by
+event /from /to
+deadline test
+event test
+del 1
+del1
+list
+mark 1 2
+unmark 1 2
+del 1 2
+list
+del0
+del0 -2
+del-2
+todo test one
+todo one
+todo test two
+list
+find test
+find test one
+find one
+mark 1
+mark 1
+unmark 1
+unmark 1
+clear
+asdf
+set abc
+set pirate
+list
+set shakespeare
+list
+set lolcat
+list
+bye

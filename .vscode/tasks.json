@@ -1,0 +1,25 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "runTest",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/text-ui-test && ./runtest.sh",
+            "args": [],
+            "problemMatcher": []
+        }
+    ],
+    // "inputs": [
+    //     {
+    //         "id": "testName",
+    //         "type": "command",
+    //         "command": "shellCommand.execute",
+    //         "args": {
+    //             "command": "ls -1 *.in",
+    //             "cwd": "${fileDirName}",
+    //         },
+    //     }
+    // ]
+}
