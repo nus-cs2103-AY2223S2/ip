@@ -13,8 +13,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final String filePath = "C:\\Users\\panav\\OneDrive\\Desktop\\CS2103T\\ip\\src\\main\\java\\data\\panav.txt";
-    private final Panav panav = new Panav(filePath);
+    //private final String filePath = "C:\\Users\\panav\\OneDrive\\Desktop\\CS2103T\\ip\\src\\main\\java\\data\\panav.txt";
+    private Panav panav;
 
     /**
      * Method to set the scene using the given stage.
@@ -26,6 +26,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            panav = new Panav();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

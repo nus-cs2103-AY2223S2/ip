@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,10 +24,21 @@ import panav.task.ToDo;
  */
 public class Storage {
 
-    private final String filePath;
+    protected File file;
+    private final String filePath = "storage/data/panav.txt";
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() throws IOException {
+        try {
+            file = new File(filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                assert Files.exists(Paths.get(this.filePath)) : "The file, " + this.filePath + ", does not exist.";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
 
     /**
@@ -37,28 +50,37 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException, ToDoDescriptionException {
         ArrayList<Task> list = new ArrayList<>();
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String command = s.nextLine();
-            String[] arr = command.split(" ~ ");
-            Task curr;
-            if (arr[0].compareTo("T") == 0) {
-                curr = new ToDo(arr[2]);
 
-            } else if (arr[0].compareTo("D") == 0) {
-                curr = new Deadline(arr[2], arr[3]);
+        try {
 
-            } else {
-                curr = new Event(arr[2], arr[3], arr[4]);
+            //File f = new File(filePath);
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                String command = s.nextLine();
+                String[] arr = command.split(" ~ ");
+                Task curr;
+                if (arr[0].compareTo("T") == 0) {
+                    curr = new ToDo(arr[2]);
+
+                } else if (arr[0].compareTo("D") == 0) {
+                    curr = new Deadline(arr[2], arr[3]);
+
+                } else {
+                    curr = new Event(arr[2], arr[3], arr[4]);
+
+                }
+                if (arr[1].compareTo("1") == 0) {
+                    curr.markAsDone();
+                }
+                list.add(curr);
 
             }
-            if (arr[1].compareTo("1") == 0) {
-                curr.markAsDone();
-            }
-            list.add(curr);
+
+        } catch (IOException e) {
+            e.printStackTrace();
 
         }
+
         return list;
     }
 

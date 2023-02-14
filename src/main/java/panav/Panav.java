@@ -30,9 +30,9 @@ public class Panav {
      * Constructor to initialise the various classes in program.
      * @param filePath the path of the file to be read from.
      */
-    public Panav(String filePath) {
+    public Panav() throws IOException {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException | FileNotFoundException e) {
