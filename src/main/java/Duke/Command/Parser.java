@@ -1,0 +1,203 @@
+package Duke.Command;
+
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
+import Duke.Exceptions.DukeException;
+import Duke.Exceptions.EmptyDescription;
+import Duke.Exceptions.EmptyFind;
+import Duke.Exceptions.EmptyOrder;
+import Duke.Exceptions.EmptyTime;
+import Duke.Exceptions.NoSuchTask;
+import Duke.storage.Storage;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.TaskList;
+import Duke.task.Todo;
+
+/**
+ * Class generates responses to user's command
+ */
+
+public class Parser {
+    private TaskList tasks;
+    private Storage storage;
+
+    /**
+   * Constructor for Parser
+   *
+   * @param tasks object receives taskList that manages editing current tasks.
+   * @param storage object manages the update of the current data file.
+   */
+    public Parser(TaskList tasks, Storage storage) {
+        this.tasks = tasks;
+        this.storage = storage;
+    }
+
+    /**
+   * execute Parser with user's String info and the command type it's converted to.
+   *
+   * @param info receives String input from the user
+   * @param command provides the command type based the user's input.
+   */
+    public String execute(String info, Command command) throws DukeException, IOException {
+        String reply = "";
+        String[] strArr = info.split(" ");
+        String[] strArrP = info.split("/");
+        Task curTask;
+
+        switch (command) {
+        case BYE: {
+            reply = "Bye. Hope to see you again soon!";
+            break;
+        }
+        case TODO: {
+            if (strArr.length < 2) {
+                throw new EmptyDescription(new Todo(""));
+            }
+            String input = info.substring(5).trim();
+            curTask = new Todo(input);
+            tasks.addTask(curTask);
+            storage.updateList();
+            reply = "Got it. I've added this task:\n\t"
+                + curTask.taskString()
+                + "\n" + "Now you have "
+                + tasks.size()
+                + " task(s) in the list.";
+            break;
+        }
+        case DEADLINE: {
+            if (strArr.length < 2) {
+                throw new EmptyDescription(new Deadline("",
+              "2022-01-01 0000"));
+            }
+            if (strArrP.length < 2) {
+                throw new EmptyTime(new Deadline("",
+              "2022-01-01 0000"));
+            }
+            String[] division = info.substring(9).split(" /by ");
+            String input = division[0].trim();
+            String time = division[1].trim();
+            try {
+                curTask = new Deadline(input, time);
+            } catch (DateTimeParseException e) {
+                throw e;
+            }
+            tasks.addTask(curTask);
+            storage.updateList();
+            reply = "Got it. I've added this task:\n\t"
+                + curTask.taskString()
+                + "\n" + "Now you have "
+                + tasks.size()
+                + " task(s) in the list.";
+            break;
+        }
+        case EVENT: {
+            if (strArr.length < 2) {
+                throw new EmptyDescription(new Event("",
+              "2022-01-01 0000", "2022-01-01 0000"));
+            }
+            if (strArrP.length < 3) {
+                throw new EmptyTime(new Event("",
+              "2022-01-01 0000", "2022-01-01 0000"));
+            }
+            String[] division = info.substring(6).split(" /from ");
+            String input = division[0].trim();
+            String[] timeDivision = division[1].split(" /to ");
+            String startTime = timeDivision[0].trim();
+            String endTime = timeDivision[1].trim();
+            try {
+                curTask = new Event(input, startTime, endTime);
+            } catch (DateTimeParseException e) {
+                throw e;
+            }
+            tasks.addTask(curTask);
+            storage.updateList();
+            reply = "Got it. I've added this task:\n\t"
+                + curTask.taskString()
+                + "\n" + "Now you have "
+                + tasks.size()
+                + " task(s) in the list.";
+            break;
+        }
+        case MARK: {
+            if (strArr.length < 2) {
+                throw new EmptyOrder("mark");
+            }
+            int curIndex = Integer.parseInt(strArr[1]) - 1;
+            if (curIndex > tasks.size() - 1) {
+                throw new NoSuchTask(curIndex);
+            }
+            Task object = tasks.get(curIndex);
+            object.mark();
+            storage.updateList();
+            reply = "Nice! I've marked this task as done: \n"
+                + object.taskString();
+            break;
+        }
+        case UNMARK: {
+            if (strArr.length < 2) {
+                throw new EmptyOrder("unmark");
+            }
+            int curIndex = Integer.parseInt(strArr[1]) - 1;
+            if (curIndex > tasks.size() - 1) {
+                throw new NoSuchTask(curIndex);
+            }
+            Task object = tasks.get(curIndex);
+            object.unmark();
+            storage.updateList();
+            reply = "OK, I've marked this task as not done yet:\n"
+                + object.taskString();
+            break;
+        }
+        //level 9 dealing with "find" command"
+        case FIND: {
+            if (strArr.length < 2) {
+                throw new EmptyFind();
+            }
+            StringBuilder sb = new StringBuilder();
+            String input = info.substring(5).trim();
+            for (Task t: this.tasks.getTaskList()) {
+                int numOfSameChar = 0;
+                for (int i = 0; i < Math.min(input.length(),
+                    t.getString().length()); i++) {
+                    if (input.charAt(i) == t.getString().charAt(i)) {
+                        numOfSameChar++;
+                    }
+                }
+                if (numOfSameChar > 2) {
+                    sb.append(t.taskString()).append("\n");
+                }
+            }
+            reply = "Here are the matching tasks in your list:\n"
+                + sb;
+            break;
+        }
+        case LIST: {
+            reply = "Here are the tasks in your list:\n"
+                + tasks.listTask();
+            break;
+        }
+        case DELETE: {
+            if (strArr.length < 2) {
+                throw new EmptyOrder("delete");
+            }
+            int curIndex = Integer.parseInt(strArr[1]) - 1;
+            if (curIndex > tasks.size() - 1) {
+                throw new NoSuchTask(curIndex);
+            }
+            Task object = tasks.get(curIndex);
+            tasks.delete(curIndex);
+            storage.updateList();
+            reply = "Noted. I've removed this task:\n"
+                      + object.taskString();
+            break;
+        }
+        default: {
+            throw new DukeException();
+        }
+        }
+        return reply;
+    }
+}
