@@ -2,7 +2,6 @@ package connor.parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import connor.task.Deadline;
 import connor.task.Event;
