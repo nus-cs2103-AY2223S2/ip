@@ -1,6 +1,9 @@
 package duke.task;
 
+import duke.SortAlphabetical;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -92,7 +95,7 @@ public class TaskList {
         }
 
         if (!searchResult.isEmpty()) {
-            String findMessage = "According to " + keyword + ", these are what I've found:";
+            String findMessage = "According to [" + keyword + "], these are what I've found:";
             String listOfResult = "";
             for (int j = 0; j < searchResult.size(); j++) {
                 int numbering = j + 1;
@@ -102,6 +105,11 @@ public class TaskList {
         } else {
             return "None of the task(s) matched your keyword :o";
         }
+    }
+
+    public String sort() {
+        Collections.sort(this.taskList, new SortAlphabetical());
+        return list();
     }
 
     /**

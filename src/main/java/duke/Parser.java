@@ -7,7 +7,6 @@ import duke.task.Todo;
 
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class Parser {
     private FileManager fileManager;
@@ -62,6 +61,10 @@ public class Parser {
             return event(userMessage);
         } else if (parts[COMMAND_INDEX].equals("find")) {
             return find(userMessage);
+        } else if (parts[COMMAND_INDEX].equals("help")) {
+            return help();
+        } else if (parts[COMMAND_INDEX].equals("sort")) {
+            return sort();
         } else {
             return "I have no idea what are you talking about dude..";
         }
@@ -74,6 +77,10 @@ public class Parser {
 
     private String list() {
         return this.taskList.list();
+    }
+
+    private String sort() {
+        return this.taskList.sort();
     }
 
     private String mark(String userMessage) {
@@ -105,7 +112,7 @@ public class Parser {
             assert taskNumber <= this.taskList.getList().size() : "Invalid Selection";
             return this.taskList.remove(taskNumber);
         } catch (IndexOutOfBoundsException e) {
-            return "Please specify which task to delete~  >:(";
+            return "Hello?! Which task to delete?~  >:(";
         }
     }
 
@@ -158,7 +165,21 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             return "Bruhh.. The description of event cannot be empty.";
         } catch (DateTimeParseException e) {
-            return "Incorrect date format dude.. try again~";
+            return "Incorrect date format dude.. try again~\nAsk for 'help' if you have to~";
         }
+    }
+
+    private String help() {
+        String header = "These are the functions and format: \n";
+        String toDoFormat = "1) todo [Description]\n";
+        String deadlineFormat = "2) deadline [Description] /by [YYYY-MM-DD]\n";
+        String eventFormat = "3) event [Description] /from [YYYY-MM-DD] /to [YYYY-MM-DD]\n";
+        String markFormat = "4) mark [Task number]\n";
+        String unmarkFormat = "5) unmark [Task number]\n";
+        String deleteFormat = "6) delete [Task number]\n";
+        String findFormat = "7) find [Keyword]\n";
+
+        return header + toDoFormat + deadlineFormat + eventFormat
+                + markFormat + unmarkFormat + deleteFormat + findFormat;
     }
 }
