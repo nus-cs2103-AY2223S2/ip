@@ -16,6 +16,7 @@ public class MarkCmd extends Command {
 
     /**
      * Constructor method.
+     * 
      * @param taskList Task list of the task to mark
      * @param lineInput Command line input that the user entered
      */
@@ -23,7 +24,7 @@ public class MarkCmd extends Command {
         super(taskList, lineInput);
     }
 
-    // Marks the specified task as completed.
+    /** Marks the specified task as completed. */
     public String execute() throws ListIndexMissing {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         Task taskToMark = taskList.get(index).markDone();

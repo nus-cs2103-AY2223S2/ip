@@ -4,6 +4,7 @@ package duke.exceptions;
 public class MissingCommandArguments extends CommandExecutionError {
     /**
      * Constructor method.
+     * 
      * @param errorMessage Error message to display to user
      */
     public MissingCommandArguments(String errorMessage) {

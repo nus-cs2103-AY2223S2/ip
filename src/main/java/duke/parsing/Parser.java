@@ -20,7 +20,8 @@ import duke.tasks.ToDo;
 public class Parser {
 
     /**
-     * Used by 'CommandInput' class to get CommandInput type from command input.
+     * Uses 'CommandInput' class to get CommandInput type from command input.
+     * 
      * @param lineInput Command line input that user entered
      * @return CommandInput type
      */
@@ -30,6 +31,7 @@ public class Parser {
 
     /**
      * Used by 'Deadline' & 'Event' class to get string dates as LocalDate objects.
+     * 
      * @param timeInput Command line input that user entered
      * @return CommandInput type
      */
@@ -44,6 +46,7 @@ public class Parser {
 
     /**
      * Used by 'MarkCmd', 'UnmarkCmd' & 'DeleteCmd' class to get the index of the task to execute on.
+     * 
      * @param lineInput Command line input that the user entered
      * @return Integer index of the target task
      */
@@ -58,6 +61,7 @@ public class Parser {
     /**
      * Used by 'ToDo' class to initialise a ToDo task.
      * Parses command line input into relevant information needed to initilize a ToDo task.
+     * 
      * @param commandInput Command line input that the user entered
      * @return Task name, wrapped in an array.
      */
@@ -69,6 +73,7 @@ public class Parser {
     /**
      * Used by 'Deadline' class to initialise a Deadline task.
      * Parses command line input into relevant information needed to initilize a Deadline task.
+     * 
      * @param commandInput Command line input that the user entered
      * @return Task name & due date, wrapped in an array.
      */
@@ -102,6 +107,7 @@ public class Parser {
     /**
      * Used by 'Event' class to initialise an Event task.
      * Parses command line input into relevant information needed to initilize a Event task.
+     * 
      * @param commandInput Command line input that the user entered
      * @return Task name, start date & end date, wrapped in an array.
      */
@@ -177,5 +183,4 @@ public class Parser {
             return null;
         }
     }
-
 }

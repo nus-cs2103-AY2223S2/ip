@@ -13,6 +13,7 @@ public abstract class Command {
 
     /**
      * Constructor method.
+     * 
      * @param taskList Task list to execute the command on
      * @param lineInput Command line that the user has enters
      * @throws CommandExecutionError Unable to execute command

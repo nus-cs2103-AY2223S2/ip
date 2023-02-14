@@ -18,7 +18,8 @@ public class EventCmd extends Command {
     private Task event;
 
     /**
-     * Constructor method
+     * Constructor method.
+     * 
      * @param taskList Task list to add the Event task to
      * @param lineInput Command line input that the user entered
      */
@@ -26,7 +27,7 @@ public class EventCmd extends Command {
         super(taskList, lineInput);
     }
 
-    // Adds the Event task to the list
+    /** Adds the Event task to the list. */
     public String execute() throws CommandExecutionError {
         this.event = Event.create(this.lineInput);
         taskList.add(this.event);

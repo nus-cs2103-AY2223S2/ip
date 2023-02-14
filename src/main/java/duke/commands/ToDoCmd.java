@@ -17,6 +17,7 @@ public class ToDoCmd extends Command {
 
     /**
      * Constructor method.
+     * 
      * @param taskList Task list to add the ToDo task to
      * @param lineInput Command line input that the user entered
      */
@@ -24,7 +25,7 @@ public class ToDoCmd extends Command {
         super(taskList, lineInput);
     }
 
-    // Adds the ToDo task to the task list.
+    /** Adds the ToDo task to the task list. */
     public String execute() throws CommandExecutionError {
         this.toDo = ToDo.create(this.lineInput);
         taskList.add(this.toDo);

@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Saves a task list to a file.
+     * 
      * @param tasks Task list to save.
      * @throws IOException Specified file not found.
      */
@@ -39,6 +40,7 @@ public class Storage {
 
     /**
      * Loads a task list from a file.
+     * 
      * @param tasks Task list to load into.
      * @throws IOException Specified file not found.
      */

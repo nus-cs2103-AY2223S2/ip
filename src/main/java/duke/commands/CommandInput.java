@@ -30,6 +30,7 @@ public enum CommandInput {
 
     /**
      * Gets the type of command that the user entered.
+     * 
      * @param commandLine Command line input from user
      * @return CommandInput type of corresponding command
      */

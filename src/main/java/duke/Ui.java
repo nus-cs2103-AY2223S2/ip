@@ -22,7 +22,7 @@ public class Ui {
     }
 
     /**
-     * Craft string output for showing number of tasks in a list.
+     * Crafts string output for showing number of tasks in a list.
      * @param numTask Number of tasks in the list
      * @return Crafted message
      */
@@ -57,6 +57,7 @@ public class Ui {
 
     /**
      * Outputs to console a message.
+     * 
      * @param msg Message to display
      */
     public static void displayMsg(String msg) {
@@ -65,6 +66,7 @@ public class Ui {
 
     /**
      * Wraps a message with top & bottom line borders.
+     * 
      * @param msg Message to enclose in borders
      * @return Bordered message
      */
@@ -75,6 +77,7 @@ public class Ui {
 
     /**
      * Indents a message by a specified indentation level.
+     * 
      * @param msg Message to indent
      * @param indendationLevel Number of indents
      * @return Indented message.

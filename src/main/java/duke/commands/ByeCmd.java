@@ -18,7 +18,7 @@ public class ByeCmd extends Command {
             Storage.saveToFile(taskList);
 
         } catch (IOException e) {
-            // Ui.showSavingError()
+            e.printStackTrace();
         }
         return "Bye. Hope to see you again soon!";
     }

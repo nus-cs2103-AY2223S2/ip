@@ -16,6 +16,7 @@ public class UnmarkCmd extends Command {
 
     /**
      * Constructor method.
+     * 
      * @param taskList Task list of the task to unmark
      * @param lineInput Command line input that the user entered
      */
@@ -24,7 +25,7 @@ public class UnmarkCmd extends Command {
 
     }
 
-    // Changes the status of the specified task to incomplete.
+    /** Changes the status of the specified task to incomplete. */
     public String execute() throws ListIndexMissing {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         Task taskToUnmark = taskList.get(index).markDone();

@@ -4,6 +4,7 @@ package duke.exceptions;
 public class CommandExecutionError extends Exception {
     /**
      * Constructor method.
+     * 
      * @param errorMessage Error message to display to user
      */
     public CommandExecutionError(String errorMessage) {
@@ -12,6 +13,7 @@ public class CommandExecutionError extends Exception {
 
     /**
      * Craft string representation of the exception.
+     * 
      * @return String representation of exception, without its class name
      */
     @Override
