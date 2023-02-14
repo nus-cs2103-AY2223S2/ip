@@ -4,18 +4,18 @@ TwoFive is a chatbot for **managing your daily tasks**, which can be a **todo, d
 
 - [Get started](#get-started)
 - [Features](#features)
-  - [Adding a todo task: `todo`](#adding-a-todo-task--todo)
-  - [Adding a deadline task: `deadline`](#adding-a-deadline-task--deadline)
-  - [Adding a event task: `event`](#adding-an-event-task--event)
-  - [Marking a task as done: `mark`](#marking-a-task-as-done--mark)
-  - [Marking a task as undone: `unmark`](#marking-a-task-as-undone--unmark)
-  - [Listing all added tasks: `list`](#listing-all-tasks--list)
-  - [Locating tasks by keyword: `find`](#locating-tasks-by-keyword--find)
-  - [Listing tasks with a specific due date: `due`](#listing-tasks-with-a-specific-due-date--due)
-  - [Listing tasks with a specific tag: `listtag`](#listing-tasks-with-a-specific-tag--listtag)
-  - [Deleting a task: `delete`](#deleting-a-task--delete)
-  - [Adding a tag: `addtag`](#adding-a-tag--addtag)
-  - [Exiting the chatbot: `bye`](#exiting-the-chatbot--bye)
+  - [Adding a todo task: `todo`](#adding-a-todo-task-todo)
+  - [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)
+  - [Adding a event task: `event`](#adding-an-event-task-event)
+  - [Marking a task as done: `mark`](#marking-a-task-as-done-mark)
+  - [Marking a task as undone: `unmark`](#marking-a-task-as-undone-unmark)
+  - [Listing all added tasks: `list`](#listing-all-tasks-list)
+  - [Locating tasks by keyword: `find`](#locating-tasks-by-keyword-find)
+  - [Listing tasks with a specific due date: `due`](#listing-tasks-with-a-specific-due-date-due)
+  - [Listing tasks with a specific tag: `listtag`](#listing-tasks-with-a-specific-tag-listtag)
+  - [Deleting a task: `delete`](#deleting-a-task-delete)
+  - [Adding a tag: `addtag`](#adding-a-tag-addtag)
+  - [Exiting the chatbot: `bye`](#exiting-the-chatbot-bye)
 - [Command summary](#command-summary)
 
 ---
@@ -80,7 +80,7 @@ Examples:
   `Project meeting`, starting time `2023-02-14 17:00` and ending time `2023-02-14 19:00`.
 - `event CS2103T Tutorial /from 2023-02-15 15:00 /to 2023-02-15 16:00` adds an event task with the description
   `CS2103T Tutorial`, starting time `2023-02-15 15:00` and ending time `2023-02-15 16:00`.
-- 
+
 ### Marking a task as done: `mark`
 
 Marks an uncompleted task with the given index as completed.
