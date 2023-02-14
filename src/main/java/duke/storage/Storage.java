@@ -63,9 +63,9 @@ public class Storage {
     }
 
     /**
-     * Mark the saved task.
+     * Mark the task.
      *
-     * @param index the index of the task to mark
+     * @param index the index of the task
      */
     public void mark(int index) {
         int markIndex = 4;
@@ -75,9 +75,9 @@ public class Storage {
     }
 
     /**
-     * Unmark the saved task.
+     * Unmark the task.
      *
-     * @param index the index of the task to unmark
+     * @param index the index of the task
      */
     public void unmark(int index) {
         int markIndex = 4;
@@ -87,9 +87,9 @@ public class Storage {
     }
 
     /**
-     * Delete the saved task.
+     * Delete the task.
      *
-     * @param index the index of the task to delete
+     * @param index the index of the task
      */
     public void delete(int index) {
         replaceLineInFile(index, "");

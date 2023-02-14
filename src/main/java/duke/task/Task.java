@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public abstract class Task implements Comparable<Task> {
 
     protected String description;
-    protected boolean isDone;
+    protected boolean isMark;
 
     /**
      * Class constructor of a task.
@@ -19,30 +19,21 @@ public abstract class Task implements Comparable<Task> {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.isMark = false;
     }
 
     /**
      * Marks task as done.
      */
     public void markDone() {
-        this.isDone = true;
+        this.isMark = true;
     }
 
     /**
      * Unmark task as done.
      */
     public void unmarkDone() {
-        this.isDone = false;
-    }
-
-    /**
-     * Returns the task status icon.
-     *
-     * @return the 'X' icon if a task is done. Otherwise, it is empty
-     */
-    public String getStatusIcon() {
-        return (this.isDone ? "X" : " "); // mark done task with X
+        this.isMark = false;
     }
 
     /**
@@ -52,6 +43,15 @@ public abstract class Task implements Comparable<Task> {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Returns true if task is mark done; otherwise, false.
+     *
+     * @return true if task is mark done; otherwise, false
+     */
+    public Boolean isMark() {
+        return isMark;
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class Task implements Comparable<Task> {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return this.description;
     }
 
     /**

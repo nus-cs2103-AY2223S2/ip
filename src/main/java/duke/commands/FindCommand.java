@@ -37,7 +37,8 @@ public class FindCommand extends Command {
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         List<Task> filteredTasks = filter(tasks);
-        setUiResponse(filteredTasks, ui);
+        ui.setResponse("Here are the matching tasks in your list (on the right >>>)");
+        ui.setTasksToDisplay(filteredTasks);
     }
 
     private List<Task> filter(TaskList tasks) {
@@ -45,17 +46,5 @@ public class FindCommand extends Command {
                 .stream()
                 .filter(task -> task.toString().contains(this.keyword))
                 .collect(Collectors.toList());
-    }
-
-    private void setUiResponse(List<Task> tasks, Ui ui) {
-        int index = 0;
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
-        for (Task t : tasks) {
-            String s = (index + 1) + ". " + t + "\n";
-            sb.append(s);
-            index++;
-        }
-        ui.setResponse(sb.toString());
     }
 }

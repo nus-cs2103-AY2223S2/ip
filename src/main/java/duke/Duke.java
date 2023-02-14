@@ -1,8 +1,11 @@
 package duke;
 
+import java.util.List;
+
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -55,6 +58,10 @@ public class Duke {
         Command command = new Parser().parseCommand(input);
         command.execute(this.storage, this.tasks, this.ui);
         return ui.getResponse();
+    }
+
+    public List<Task> getTasksToDisplay() {
+        return ui.getTasksToDisplay();
     }
 
     private Boolean pathNotEmpty(String path) {

@@ -1,6 +1,9 @@
 package duke.ui;
 
+import java.util.List;
+
 import duke.Duke;
+import duke.task.Task;
 
 /**
  * The Ui class implements the user interactions of the user.
@@ -10,6 +13,7 @@ import duke.Duke;
 public class Ui {
 
     private String message;
+    private List<Task> tasks;
 
     /**
      * Returns the response.
@@ -30,6 +34,24 @@ public class Ui {
     }
 
     /**
+     * Returns the tasks.
+     *
+     * @return the tasks
+     */
+    public List<Task> getTasksToDisplay() {
+        return this.tasks;
+    }
+
+    /**
+     * Sets the tasks to display.
+     *
+     * @param tasks the tasks to display
+     */
+    public void setTasksToDisplay(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    /**
      * Duke greets the user when it boots up.
      *
      * @return the greeting message
@@ -45,14 +67,15 @@ public class Ui {
      */
     public String showCommands() {
         return "MY COMMANDS ARE:\n"
-                + "ADD TODO TASK:     todo [description]\n"
-                + "ADD DEADLINE TASK: deadline [description] /by [YYYY-MM-DD HH:MM]\n"
-                + "ADD EVENT TASK:    event [description] /from [YYYY-MM-DD HH:MM] /to [YYYY-MM-DD HH:MM]\n"
-                + "MARK A TASK:       mark [index]\n"
-                + "UNMARK A TASK:     unmark [index]\n"
-                + "DELETE A TASK:     delete [index]\n"
-                + "LIST ALL TASKS:    list\n"
-                + "DISPLAY COMMANDS:  help\n"
-                + "EXIT PROGRAM:      bye";
+                + "01. ADD TODO TASK:       todo [descr]\n"
+                + "02. ADD DEADLINE TASK:   deadline [descr] /by [YYYY-MM-DD HH:MM]\n"
+                + "03. ADD EVENT TASK:      event [descr] /from [YYYY-MM-DD HH:MM] /to [YYYY-MM-DD HH:MM]\n"
+                + "04. MARK A TASK:         mark [index]\n"
+                + "05. UNMARK A TASK:       unmark [index]\n"
+                + "06. DELETE A TASK:       delete [index]\n"
+                + "07. DISPLAY COMMANDS:    help\n"
+                + "08. LIST ALL TASKS:      list\n"
+                + "09. DISPLAY COMMANDS:    help\n"
+                + "10. EXIT PROGRAM:        bye";
     }
 }
