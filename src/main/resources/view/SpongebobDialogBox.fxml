@@ -10,7 +10,7 @@
   <children>
     <Label fx:id="dialog" minHeight="-Infinity" style="-fx-background-color: FFFF66; -fx-background-radius: 20; -fx-border-color: fff31d; -fx-border-width: 5; -fx-border-radius: 20;" wrapText="true">
          <font>
-            <Font name="Georgia" size="15.0" />
+            <Font name="Georgia" size="12.0" />
          </font>
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
