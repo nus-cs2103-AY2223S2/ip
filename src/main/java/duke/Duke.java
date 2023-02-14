@@ -33,8 +33,8 @@ public class Duke {
      * @return User-friendly interpretation of welcome message.
      */
     public String showHello() {
-        return storage.isLoadSuccess() ? 
-            dukeIo.printHello() + dukeIo.notifyLoad() : dukeIo.printHello();
+        return storage.isLoadSuccess()
+                ? dukeIo.printHello() + dukeIo.notifyLoad() : dukeIo.printHello();
     }
 
     /**
