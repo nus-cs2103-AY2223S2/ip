@@ -9,10 +9,10 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <TextField fx:id="userInput" layoutX="8.0" layoutY="556.0" onAction="#handleUserInput" prefHeight="30.0" prefWidth="326.0" AnchorPane.bottomAnchor="10.0" />
-        <Button fx:id="sendButton" layoutX="340.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="30.0" prefWidth="57.0" text="Send">
+        <TextField fx:id="userInput" layoutX="8.0" layoutY="556.0" onAction="#handleUserInput" prefHeight="26.0" prefWidth="318.0" AnchorPane.bottomAnchor="7.0" />
+        <Button fx:id="sendButton" layoutX="334.0" layoutY="566.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="26.0" prefWidth="58.0" text="Send">
          <font>
-            <Font name="Calibri Bold" size="12.0" />
+            <Font name="Ebrima" size="12.0" />
          </font>
       </Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
