@@ -1,11 +1,11 @@
 package duke.util;
 
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.util.ArrayList;
 
 /**
  * Responsible for interpreting user inputs.
@@ -98,7 +98,7 @@ public class Parser {
                     throw new DukeException("Enter a valid event period!");
                 }
 
-                String[] splitEventPeriod = eventPeriod.split( " /to ");
+                String[] splitEventPeriod = eventPeriod.split(" /to ");
 
                 if (splitEventPeriod.length < 2) {
                     throw new DukeException("Enter a valid event period!");
