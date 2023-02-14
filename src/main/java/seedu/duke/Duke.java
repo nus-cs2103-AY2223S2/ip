@@ -141,7 +141,8 @@ public class Duke {
      * @return The response of Duke.
      */
     protected String getResponse(String input) {
-        Duke currDuke = new Duke("data/duke.txt");
+        String filepath = System.getProperty("user.home") + "/dukeapp/data/dukefile.txt";
+        Duke currDuke = new Duke(filepath);
         return "Duke: \n" + currDuke.run(input);
     }
 

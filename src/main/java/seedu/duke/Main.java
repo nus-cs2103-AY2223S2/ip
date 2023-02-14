@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private String filepath = System.getProperty("user.home") + "/data/data.txt";
+    private String filepath = System.getProperty("user.home") + "/dukeapp/data/dukefile.txt";
     private Duke duke = new Duke(filepath);
 
     @Override

@@ -1,6 +1,10 @@
-# User Guide
+># User Guide
 
-## Features 
+>**_WARNING_**: Do not delete dukeapp directory or all data will be lost.
+
+---
+
+>## Features 
 
 ### Adding todo task
 
@@ -29,6 +33,8 @@ On it, my MaStEr. I've successfully added this task:
 [T] [] Gorcery Shopping
 Now you have 1 tasks(s) in the list.
 ```
+
+---
 
 ### Adding deadline task
 
@@ -61,6 +67,8 @@ Deadline time!!! I've successfully added this task:
 Now you have 1 tasks(s) in the list.
 ```
 
+---
+
 ### Adding event task
 
 Adds an event task to the list of tasks.
@@ -90,6 +98,8 @@ Oohhh look what we have here. I've added this task:
 Now you have 1 tasks(s) in the list.
 ```
 
+---
+
 ### Marking a task as done
 
 Marks a task in the list.
@@ -115,6 +125,8 @@ Duke:
 Beep Boop! I've marked this task as done:
 [T] [X] Read Books
 ```
+
+---
 
 ### Marking a task as not done
 
@@ -142,6 +154,8 @@ Duke:
 Beep Boop! I've marked this task as not done yet:
 [T] [] Read Books
 ```
+
+---
 
 ### Deleting a task
 
@@ -173,6 +187,8 @@ Time to eliminate this task:
 Now you have 0 task(s) in the list.
 ```
 
+---
+
 ### Tagging a task
 
 Tags a task in the list.
@@ -200,6 +216,8 @@ HashTag Time!!! I've tagged this task:
 #fun
 ```
 
+---
+
 ### Listing a task
 
 Lists the tasks in a list.
@@ -224,6 +242,8 @@ Here are the list of tasks:
 1. [T] [] Read Books
 #fun
 ```
+
+---
 
 ### Finding a task
 
@@ -252,6 +272,8 @@ Here are the matching tasks in your list:
 #fun
 ```
 
+---
+
 ### Going back to original list after using find command
 
 Displays the original list after using find command.
@@ -277,6 +299,8 @@ Here are the list of tasks:
 1. [T] [] Read Books
 #fun
 ```
+
+---
 
 ### Bye
 
