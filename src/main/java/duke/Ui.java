@@ -44,7 +44,7 @@ public class Ui {
         String displayResult = "";
         displayResult += "Noted. I've removed the tasks:\n";
         for (int i = 0; i < taskIndices.length; i++) {
-            int index = Integer.parseInt(taskIndices[i]);
+            int index = Integer.parseInt(taskIndices[i].trim());
             displayResult += "\t" + list.getTask(index).toString() + '\n';
         }
 

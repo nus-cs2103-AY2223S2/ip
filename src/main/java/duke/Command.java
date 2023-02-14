@@ -148,9 +148,8 @@ public class Command {
         try {
             String indexString = userInput[1];
             String[] listIndices = indexString.split(",");
-            System.out.println(listIndices[0]);
             for (int i = 0; i < listIndices.length; i++) {
-                int taskIndex = Integer.parseInt(listIndices[i]);
+                int taskIndex = Integer.parseInt(listIndices[i].trim());
                 if (taskIndex > this.list.getListLength()) {
                     throw new DukeTaskArgumentException();
                 }

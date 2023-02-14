@@ -55,7 +55,7 @@ public class TaskList {
     public void deleteTask(String[] taskIndices) {
         Arrays.sort(taskIndices, Collections.reverseOrder());
         for (int i = 0; i < taskIndices.length; i++) {
-            int index = Integer.parseInt(taskIndices[i]);
+            int index = Integer.parseInt(taskIndices[i].trim());
             this.tasks.remove(index - 1);
         }
     }
