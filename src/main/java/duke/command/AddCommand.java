@@ -41,13 +41,13 @@ public class AddCommand extends Command {
                 task = new ToDos(description);
                 break;
             case "deadline":
-                String[] splitString = description.split("/by", 2);
+                String[] splitString = description.toLowerCase().split("/by", 2);
                 task = new Deadlines(splitString[0].trim(), splitString[1].trim());
                 System.out.println("a: "+splitString[0].trim());
                 System.out.println("b: "+splitString[1].trim());
                 break;
             case "event":
-                String[] splitDescription = description.split("/from", 2);
+                String[] splitDescription = description.toLowerCase().split("/from", 2);
                 String[] splitTime = splitDescription[1].split("/to", 2);
                 task = new Events(splitDescription[0].trim(), splitTime[0].trim(), splitTime[1].trim());
             }
