@@ -28,6 +28,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -83,19 +85,28 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
         stage.show();
         //Step 3. Add functionality to handle user input.
-           sendButton.setOnMouseClicked((event) -> {
-        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-        userInput.clear();
-    });
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
 
-    userInput.setOnAction((event) -> {
-        dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-        userInput.clear();
-    }); 
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+            DialogBox.getUserDialog(userText, new ImageView(user)),
+            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+    userInput.clear();
     }
 
     private String getResponse(String input) {
-        return "Duke heard: " + "nothing";
+        return "Duke heard: " + input;
     }
 
     private Label getDialogLabel(String text) {
@@ -106,7 +117,7 @@ public class Duke extends Application {
     }  
 
     public static void main(String[] args) throws DukeException, IOException {
-        Duke duke = new Duke("./duke.txt");
+        Duke duke = new Duke("/duke.txt");
         duke.ui.printLogo();
         while (true) {
             System.out.print('\n');
