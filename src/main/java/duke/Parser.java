@@ -1,13 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.CommandBye;
-import duke.command.CommandDelete;
-import duke.command.CommandFind;
-import duke.command.CommandList;
-import duke.command.CommandMark;
-import duke.command.CommandTask;
-import duke.command.CommandUndo;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -22,7 +15,6 @@ public class Parser {
      * @param fullCommand full unparsed command.
      * @return command
      */
-    @SuppressWarnings("checkstyle:FallThrough")
     public static Command parse(String fullCommand) {
         String[] parts = fullCommand.split(" ");
 
@@ -67,7 +59,7 @@ public class Parser {
             try {
                 if (parts[0].equalsIgnoreCase("todo")) {
                     if (fullCommand.length() == 5) {
-                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                        return new CommandError(fullCommand, "OOPS!!! The description of a todo cannot be empty.");
                     }
                     t = new Todo(fullCommand.substring(5));
                 } else if (parts[0].equalsIgnoreCase("deadline")) {
@@ -75,7 +67,7 @@ public class Parser {
                     if (index != -1) {
                         t = new Deadline(fullCommand.substring(9, index), fullCommand.substring(index + 4));
                     } else {
-                        throw new DukeException("OOPS!!! Can't find a /by time for a deadline.");
+                        return new CommandError(fullCommand, "OOPS!!! Can't find a /by time for a deadline.");
                     }
                 } else if ((parts[0].equalsIgnoreCase("event"))) {
                     int indexFrom = fullCommand.indexOf("/from");
@@ -85,10 +77,10 @@ public class Parser {
                                 fullCommand.substring(indexFrom + 6, indexTo - 1),
                                 fullCommand.substring(indexTo + 4));
                     } else {
-                        throw new DukeException("OOPS!!! Can't find a /from or /to time for an event.");
+                        return new CommandError(fullCommand, "OOPS!!! Can't find a /from or /to time for an event.");
                     }
                 } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    return new CommandError(fullCommand, "OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
                 return new CommandTask(fullCommand, t);

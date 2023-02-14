@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents a bye command.
+ * Represents an undo command.
  */
 public class CommandUndo extends Command {
     /**
@@ -29,5 +29,15 @@ public class CommandUndo extends Command {
         }
         storage.writeArray(taskList);
         return "";
+    }
+
+    /**
+     * Returns an Error command.
+     * @param taskList contains the task list.
+     * @return error command.
+     */
+    @Override
+    public Command inverseCommand(TaskList taskList) {
+        return new CommandError("", "You cannot undo an undo command.");
     }
 }
