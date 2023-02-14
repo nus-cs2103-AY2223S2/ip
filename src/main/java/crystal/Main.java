@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+//@@author Jeffry Lum-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+
 /**
  * A GUI for Crystal using FXML.
  */

@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+//@@author Jeffry Lum-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+
 /**
  * DialogBox class
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label

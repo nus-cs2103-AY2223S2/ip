@@ -31,7 +31,9 @@ public class Crystal {
     }
 
 
-
+    //@@author francisyzy-reused
+    //Reused from https://github.com/francisyzy/ip/blob/master/src/main/java/duke/Duke.java
+    // with minor modifications
     /**
      * Runs the program.
      * Shows the welcome message.
@@ -56,6 +58,8 @@ public class Crystal {
         }
     }
 
+    //@@author laihuiqi-reused
+    //Reused from https://github.com/laihuiqi/ip/blob/master/src/main/java/chattime/Chattime.java
     /**
      * Returns the welcome message
      *

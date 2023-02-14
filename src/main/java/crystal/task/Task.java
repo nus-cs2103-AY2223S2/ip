@@ -27,14 +27,6 @@ public abstract class Task {
         this.num = 0;
     }
 
-    public boolean getIsDone() {
-        return this.isDone;
-    }
-
-    public boolean getIsPriority() {
-        return this.isPriority;
-    }
-
     public void setIsPriority(boolean isPriority) {
         this.isPriority = isPriority;
     }
@@ -43,9 +35,6 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    public int getLvlNum() {
-        return this.num;
-    }
     public void setPriorityNum(int num) {
         this.num = num;
     }
@@ -64,6 +53,9 @@ public abstract class Task {
         return (isPriority ? "priority level" : " ");
     }
 
+    //@@author amoonguss1-reused
+    //Reused from https://github.com/amoonguss1/ip/blob/master/src/main/java/Nerd/entities/TaskList.java
+    // with minor modifications
     /**
      *  Returns the description of the task
      *

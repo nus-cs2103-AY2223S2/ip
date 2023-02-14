@@ -41,6 +41,10 @@ public class TaskList {
         return arr.size();
     }
 
+
+    //@@author amoonguss1-reused
+    //Reused from https://github.com/amoonguss1/ip/blob/master/src/main/java/Nerd/entities/TaskList.java
+    // with minor modifications
     /**
      * Gets the respective task at the index i.
      * @param i Index in the arraylist.
@@ -58,6 +62,9 @@ public class TaskList {
         this.arr.add(t);
     }
 
+    //@@author amoonguss1-reused
+    //Reused from https://github.com/amoonguss1/ip/blob/master/src/main/java/Nerd/entities/TaskList.java
+    // with minor modifications
     /**
      * Removes the task from the arraylist.
      *
@@ -70,4 +77,8 @@ public class TaskList {
     public String toString() {
         return arr.toString();
     }
+
+
+
+
 }

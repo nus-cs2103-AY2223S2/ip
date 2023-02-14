@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+//@@author Jeffry Lum-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -23,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Crystal crystal;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
-    private Image crystalImage = new Image(this.getClass().getResourceAsStream("/images/dog.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/human.png"));
+    private Image crystalImage = new Image(this.getClass().getResourceAsStream("/images/crystal.png"));
 
     @FXML
     public void initialize() {

@@ -227,6 +227,8 @@ public class Ui {
      * @param lvlNum priority level.
      * @return the priority message.
      */
+
+
     public String printPriority(TaskList task, int itemNum, int lvlNum) {
         Task markTask = task.get(itemNum - 1);
         markTask.setIsPriority(true);
@@ -238,5 +240,6 @@ public class Ui {
         temp.append(line + "\n");
         return temp.toString();
     }
+
 
 }
