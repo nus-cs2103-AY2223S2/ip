@@ -29,9 +29,10 @@ public class ViewSchedCmd extends Command {
         try {
             LocalDate date = Parser.parseViewScheduleDate(lineInput);
             TaskList schedResult = this.taskList.viewSched(date);
-            return String.format("Here are the tasks that are still ongoing before %s\n%s:", date.toString(), schedResult.toString());
+            return String.format("Here are the tasks that are still ongoing before %s\n%s:",
+                    date.toString(), schedResult.toString());
         } catch (DateTimeParseException e) {
             throw new CommandExecutionError(e.toString());
-        } 
+        }
     };
 }

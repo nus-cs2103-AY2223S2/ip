@@ -2,16 +2,15 @@ package duke;
 
 import java.io.IOException;
 
-import duke.gui.Profile;
-import duke.gui.StageHandler;
+import duke.commands.Command;
+import duke.commands.CommandInput;
+import duke.exceptions.CommandExecutionError;
 import duke.tasks.TaskList;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 /**
  * Main class where duke is initialized and runs.
  */
-public class Duke extends Application {
+public class Duke {
     private TaskList tasks;
 
     public Duke() {
@@ -23,11 +22,12 @@ public class Duke extends Application {
         }
     }
 
-    @Override
-    public void start(Stage stage) {
-        StageHandler stageHandler = new StageHandler(stage, tasks);
-        stageHandler.displayMessage(Profile.DUKE, "Hello I'm Duke! \nWhat can I do for you?");
+    public String getResponse(String commandInput) {
+        Command command = CommandInput.getCommandFromInput(commandInput, this.tasks);
+        try {
+            return command.execute();
+        } catch (CommandExecutionError e) {
+            return "Couldn't execute command :/ \n" + e.toString();
+        }
     }
-
-
 }
