@@ -5,15 +5,18 @@ package Duke.Exceptions;
  */
 
 public class DontKnow extends DukeException {
-  public String dontKnow;
+    private String dontKnow;
 
-  public DontKnow() {
-    this.dontKnow = "OOPS!!! I'm sorry, " +
-        "but I don't know what that means :-(";
-  }
+    /**
+   * Constructor for Exception when receive unknown command.
+   */
+    public DontKnow() {
+        this.dontKnow = "OOPS!!! I'm sorry, "
+            + "but I don't know what that means :-(";
+    }
 
-  @Override
-  public String toString() {
-    return dontKnow;
-  }
+    @Override
+    public String toString() {
+        return dontKnow;
+    }
 }

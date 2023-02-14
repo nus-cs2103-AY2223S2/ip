@@ -8,17 +8,22 @@ import Duke.task.Task;
  */
 
 public class EmptyTime extends DukeException {
-  public String emptyTime;
+    private String emptyTime;
 
-  public EmptyTime(Task task) {
-    this.emptyTime = "OOPS!!! The time of a "
-        + task.toString() +  " cannot be empty." +
-        "\n missing due date(for deadline) OR \n" +
-        "missing start time or end time(for event)";
-  }
+    /**
+   * Constructor for Exception when time of
+   * a deadline or event is empty.
+   */
+    public EmptyTime(Task task) {
+        this.emptyTime = new StringBuilder()
+            .append("OOPS!!! The time of a ")
+            .append(task.toString()).append(" cannot be empty.")
+            .append("\n missing due date(for deadline) OR \n")
+            .append("missing start time or end time(for event)").toString();
+    }
 
-  @Override
-  public String toString() {
-    return emptyTime;
-  }
+    @Override
+    public String toString() {
+        return emptyTime;
+    }
 }

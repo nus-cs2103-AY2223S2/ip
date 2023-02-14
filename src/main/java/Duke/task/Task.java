@@ -7,23 +7,34 @@ package Duke.task;
  * is done.
  */
 public class Task {
-  public String string;
-  public Boolean isMark;
+    private String string;
+    private Boolean isMark;
 
-  public Task(String string) {
-    this.string = string;
-    this.isMark = false;
-  }
-  public void mark() {
-    this.isMark = true;
-  }
-  public void unmark() {
-    this.isMark = false;
-  }
-  public void printType() {
-  }
-  public void printTime() {
-    System.out.println();
-  }
-  public String taskString(){ return ""; }
+    /**
+    * Constructor for Event task.
+    */
+    public Task(String string) {
+        this.string = string;
+        this.isMark = false;
+    }
+
+    public boolean isMark() {
+        return isMark;
+    }
+
+    public void mark() {
+        this.isMark = true;
+    }
+
+    public void unmark() {
+        this.isMark = false;
+    }
+
+    public String taskString() {
+        return "";
+    }
+
+    public String getString() {
+        return string;
+    }
 }

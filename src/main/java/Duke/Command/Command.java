@@ -17,29 +17,29 @@ public enum Command {
   FIND("find"),
   BYE("bye");
 
-  private final String input;
+    private final String input;
 
-  /**
+    /**
    * Constructor for Command
    *
    * @param input receives String input from the user.
    */
-  Command(String input) {
-    this.input = input;
-  }
+    Command(String input) {
+        this.input = input;
+    }
 
-  /**
+    /**
    * match user's string input with command type.
    * if command does not exist, throw a "don't know" error.
    *
    * @param input receives String input from the user
    */
-  public static Command searchCommand (String input) throws DontKnow {
-    for (Command c : values()) {
-      if (c.input.equals(input)) {
-        return c;
-      }
+    public static Command searchCommand(String input) throws DontKnow {
+        for (Command c : values()) {
+            if (c.input.equals(input)) {
+                return c;
+            }
+        }
+        throw new DontKnow();
     }
-    throw new DontKnow();
-  }
 }

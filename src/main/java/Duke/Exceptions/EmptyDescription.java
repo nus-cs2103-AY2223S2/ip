@@ -7,15 +7,21 @@ import Duke.task.Task;
  */
 
 public class EmptyDescription extends DukeException {
-  public String emptyDescription;
+    private final String emptyDescription;
 
-  public EmptyDescription(Task task) {
-    this.emptyDescription = "OOPS!!! The description of a "
-        + task.toString() +  " cannot be empty.";
-  }
+    /**
+   * Constructor for Exception when description of
+     * the command is empty.
+   */
+    public EmptyDescription(Task task) {
+        this.emptyDescription = new StringBuilder()
+            .append("OOPS!!! The description of a ")
+            .append(task.toString())
+            .append(" cannot be empty.").toString();
+    }
 
-  @Override
-  public String toString() {
-    return emptyDescription;
-  }
+    @Override
+    public String toString() {
+        return emptyDescription;
+    }
 }

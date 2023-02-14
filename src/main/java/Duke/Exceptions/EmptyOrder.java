@@ -6,15 +6,21 @@ package Duke.Exceptions;
  */
 
 public class EmptyOrder extends DukeException {
-  public String emptyOrder;
+    private String emptyOrder;
 
-  public EmptyOrder(String input) {
-    this.emptyOrder = "OOPS!!! The order of a "
-        + input +  " cannot be empty.";
-  }
+    /**
+   * Constructor for Exception when order of
+     * mark/unmark/delete is empty.
+   */
+    public EmptyOrder(String input) {
+        this.emptyOrder = new StringBuilder()
+            .append("OOPS!!! The order of a ")
+            .append(input).append(" cannot be empty.")
+            .toString();
+    }
 
-  @Override
-  public String toString() {
-    return emptyOrder;
-  }
+    @Override
+    public String toString() {
+        return emptyOrder;
+    }
 }

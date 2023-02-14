@@ -5,10 +5,13 @@ package Duke.Exceptions;
  * specific content.
  */
 public class EmptyFind extends DukeException {
-  public String emptyFind;
+    private String emptyFind;
 
-  public EmptyFind() {
-    this.emptyFind = "OOPS!!! The description of a find" +
-        " cannot be empty.";
-  }
+    /**
+   * Constructor for Exception when cannot find matching task.
+   */
+    public EmptyFind() {
+        this.emptyFind = "OOPS!!! The description of a find"
+            + " cannot be empty.";
+    }
 }

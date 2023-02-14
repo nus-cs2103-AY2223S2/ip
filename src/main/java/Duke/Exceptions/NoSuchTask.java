@@ -6,16 +6,21 @@ package Duke.Exceptions;
  */
 
 public class NoSuchTask extends DukeException {
-  public int index;
-  public String noSuchTask;
+    private int index;
+    private String noSuchTask;
 
-  public NoSuchTask(int i) {
-    this.index = i + 1;
-    this.noSuchTask = "There is no task " + index + " in the list";
-  }
+    /**
+   * Constructor for Exception when user
+   * try to mark,unmark or delete a task
+   * that is not in the list.
+   */
+    public NoSuchTask(int i) {
+        this.index = i + 1;
+        this.noSuchTask = "There is no task " + index + " in the list";
+    }
 
-  @Override
-  public String toString() {
-    return noSuchTask;
-  }
+    @Override
+    public String toString() {
+        return noSuchTask;
+    }
 }
