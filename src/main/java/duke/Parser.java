@@ -41,7 +41,7 @@ public class Parser {
                 body = str.trim();
                 continue;
             }
-            String[] splittedParam = str.split(" +", 2);
+            String[] splittedParam = str.trim().split(" +", 2);
             namedParameters.put(splittedParam[0], splittedParam.length > 1 ? splittedParam[1] : "");
         }
         this.body = body;
