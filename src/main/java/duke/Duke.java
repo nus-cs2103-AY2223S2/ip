@@ -70,7 +70,9 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (Exception e) {
-                ui.showError("There was an unknown error");
+                ui.showError(DukeException
+                        .getError()
+                        .getMessage());
             } finally {
                 ui.showLine();
             }
@@ -100,7 +102,9 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         } catch (Exception e) {
-            return "There was an unknown error";
+            return DukeException
+                    .getError()
+                    .getMessage();
         }
     }
 }

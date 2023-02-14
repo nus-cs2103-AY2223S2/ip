@@ -52,10 +52,10 @@ public class Parser {
             case FIND:
                 return new FindCommand(fullCommand);
             default:
-                throw new DukeException("I'm sorry, but I don't know what that means");
+                throw DukeException.getErrorParse();
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("I'm sorry, but I don't know what that means");
+            throw DukeException.getErrorParse();
         }
     }
 }

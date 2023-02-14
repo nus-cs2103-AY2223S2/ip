@@ -70,7 +70,7 @@ public class Task {
 
             return new Task(description, status);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Saved data is missing some fields");
+            throw DukeException.getErrorTaskLoadMissingField();
         }
     }
 

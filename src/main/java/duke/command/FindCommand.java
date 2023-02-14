@@ -24,7 +24,7 @@ public class FindCommand extends Command {
                     .substring(5)
                     .trim();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("A keyword was not given");
+            throw DukeException.getErrorTaskMissingKeyword();
         }
     }
 

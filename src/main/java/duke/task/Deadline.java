@@ -23,7 +23,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by.trim());
         } catch (DateTimeParseException e) {
-            throw new DukeException("The deadline of a deadline task must be in the format <YYYY-MM-DD>.");
+            throw DukeException.getErrorTaskTimeFormat("a deadline", "deadline");
         }
     }
 
@@ -69,7 +69,7 @@ public class Deadline extends Task {
 
             return new Deadline(description, by, status);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Saved data is missing some fields");
+            throw DukeException.getErrorTaskLoadMissingField();
         }
     }
 
@@ -93,7 +93,7 @@ public class Deadline extends Task {
 
             return new Deadline(description, by);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline task is missing some fields.");
+            throw DukeException.getErrorTaskMissingField("Deadline");
         }
     }
 

@@ -60,7 +60,7 @@ public class Storage {
                 Files.createFile(filePath);
             }
         } catch (IOException e) {
-            throw new DukeException("Failed to check storage due to I/O interrupt");
+            throw DukeException.getErrorStorage("check");
         }
     }
 
@@ -74,12 +74,12 @@ public class Storage {
         try {
             checkStorage();
             String[] saveData = tasks.toSaveData();
-            String output = String.join("\n", saveData);
 
-            Files.write(filePath,
-                    output.getBytes());
+            Files.write(filePath, String
+                    .join("\n", saveData)
+                    .getBytes());
         } catch (IOException e) {
-            throw new DukeException("Failed to save data due to I/O interrupt");
+            throw DukeException.getErrorStorage("save");
         }
     }
 
@@ -95,7 +95,7 @@ public class Storage {
             return Files.readAllLines(filePath)
                     .toArray(new String[0]);
         } catch (IOException e) {
-            throw new DukeException("Loading failed due to I/O interrupt");
+            throw DukeException.getErrorStorage("load");
         }
     }
 }
