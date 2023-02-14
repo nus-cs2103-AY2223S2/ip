@@ -40,6 +40,7 @@ public class Main extends Application {
             });
 
             primaryStage.show();
+            primaryStage.setTitle("Persona Duke");
 
             duke.start();
         } catch (IOException e) {
