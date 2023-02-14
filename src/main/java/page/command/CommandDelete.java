@@ -5,6 +5,9 @@ import page.QuestLog;
 import page.Storage;
 import page.Ui;
 
+/**
+ * A command to delete a quest from the Quest Log.
+ */
 public class CommandDelete extends Command {
     /** index of the quest to be deleted (starts from 1) */
     private int index;

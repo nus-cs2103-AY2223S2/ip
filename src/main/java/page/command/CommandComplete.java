@@ -6,7 +6,7 @@ import page.Storage;
 import page.Ui;
 
 /**
- * Represents a command to mark a quest as complete.
+ * A command to mark a quest as complete.
  */
 public class CommandComplete extends Command {
     /** index of the quest to be marked complete (starts from 1) */

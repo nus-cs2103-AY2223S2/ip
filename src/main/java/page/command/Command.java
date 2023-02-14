@@ -5,6 +5,9 @@ import page.QuestLog;
 import page.Storage;
 import page.Ui;
 
+/**
+ * Represents a command that can be executed by Page.
+ */
 public abstract class Command {
 
     /**

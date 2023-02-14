@@ -5,6 +5,10 @@ import page.QuestLog;
 import page.Storage;
 import page.Ui;
 
+
+/**
+ * A Command to mark a quest as incomplete.
+ */
 public class CommandIncomplete extends Command {
     /** index of the quest to be marked incomplete (starts from 1) */
     private int index;

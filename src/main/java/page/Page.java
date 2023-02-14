@@ -29,51 +29,13 @@ public class Page {
         }
     }
 
-    /**
-     * Runs the Page chatbot.
-     */
-    public void run() {
-        boolean isExit = false;
-
-        System.out.println(ui.showGreeting());
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                Command c = parser.parse(input);
-                System.out.println(c.execute(ui, storage, questLog));
-                isExit = c.isExit();
-            } catch (PageException e) {
-                System.out.println(ui.showErrorMessage(e));
-            }
-
-        }
-    }
-
-    /*
     public String getResponse(String input) {
-        boolean isBye = false;
-
-        // ui.printGreeting();
-        while (!isBye) {
-            try {
-                // String input = ui.readInput();
-                isBye = parser.parseExecute(input, ui, storage, questLog);
-            } catch (PageException e) {
-                ui.printErrorMessage(e);
-            }
-
+        try {
+            Command c = parser.parse(input);
+            return c.execute(ui, storage, questLog);
+        } catch (PageException e) {
+            return ui.showErrorMessage(e);
         }
-    }
-    */
-
-    /**
-     * Starts the Page chatbot.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Page page = new Page("data/questlog.txt");
-        page.run();
     }
 }
 

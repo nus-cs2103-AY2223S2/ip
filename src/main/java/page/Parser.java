@@ -1,6 +1,16 @@
 package page;
 
-import page.command.*;
+import page.command.Command;
+import page.command.CommandBye;
+import page.command.CommandComplete;
+import page.command.CommandDeadline;
+import page.command.CommandDelete;
+import page.command.CommandEvent;
+import page.command.CommandFind;
+import page.command.CommandHelp;
+import page.command.CommandIncomplete;
+import page.command.CommandLog;
+import page.command.CommandTodo;
 
 
 /**

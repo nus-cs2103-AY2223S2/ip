@@ -5,6 +5,9 @@ import page.QuestLog;
 import page.Storage;
 import page.Ui;
 
+/**
+ * A command to shut down Page.
+ */
 public class CommandBye extends Command {
 
     @Override
