@@ -28,8 +28,7 @@ Adds a task that has no time constraint. This task will be stored in the memory 
 #### Usage format: 
 
 ```todo {TASK}```
-
-Example: ```todo tidy room```
+```todo tidy room```
 
 #### Connor's reply:
 
@@ -52,8 +51,7 @@ Adds a task that has a deadline. This task will be stored in the memory in a for
 #### Usage format: 
 
 ```deadline {TASK} /by {DATE}```
-
-Example:  ```deadline Project submission /by 2023-02-17 1800```
+```deadline Project submission /by 2023-02-17 1800```
 
 #### Connor's reply:
 
@@ -76,8 +74,7 @@ Adds a task that has a start and end date. This task will be stored in the memor
 #### Usage format: 
 
 ```Event {TASK} /from {STARTDATE} /to {ENDDATE}```
-
-Example: ```Event Dinner /from 2023-02-14 1800 /to 2023-02-14 2000```
+```Event Dinner /from 2023-02-14 1800 /to 2023-02-14 2000```
 
 #### Connor's reply:
 
@@ -101,8 +98,6 @@ Gets all tasks in the list.
 
 ```list```
 
-Example: ```list```
-
 #### Connor's reply:
 
 ```
@@ -119,8 +114,7 @@ Marks a certain task on the list (according to its index) as done.
 #### Usage format: 
 
 ```mark {INDEX}```
-
-Example: ```mark 1```
+```mark 1```
 
 #### Connor's reply:
 
@@ -136,8 +130,7 @@ Marks a certain task on the list (according to its index) as undone.
 #### Usage format: 
 
 ```unmark {INDEX}```
-
-Example: ```unmark 1```
+```unmark 1```
 
 #### Connor's reply:
 
@@ -153,8 +146,7 @@ Deletes a certain task on the list (according to its index).
 #### Usage format: 
 
 ```delete {INDEX}```
-
-Example: ```delete 1```
+```delete 1```
 
 #### Connor's reply:
 
@@ -172,8 +164,6 @@ Deletes all tasks on the list.
 
 ```deleteall```
 
-Example: ```deleteall```
-
 #### Connor's reply:
 
 ```
@@ -187,8 +177,7 @@ Deletes a certain task on the list (according to its index).
 #### Usage format: 
 
 ```find {KEYWORD}```
-
-Example: ```find work```
+```find work```
 
 #### Connor's reply:
 *Assuming that are 3 todo tasks on the list named : school work, project work and exercise* 
@@ -215,7 +204,6 @@ Sorts the list according to the following rules:
 #### Usage format: 
 
 ```sort```
-Example: ```sort```
 
 #### Connor's reply:
 
@@ -231,8 +219,6 @@ Prompts Connor to greet you.
 
 ```hi```
 
-Example: ```hi```
-
 #### Connor's reply:
 
 ```
@@ -246,8 +232,6 @@ Prompts Connor to say goodbye. Program will exit after a 1-second delay.
 #### Usage format: 
 
 ```bye```
-
-Example: ```bye```
 
 #### Connor's reply:
 
