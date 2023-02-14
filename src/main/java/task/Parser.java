@@ -1,11 +1,7 @@
 package task;
 
 
-import duke.DukeException;
-import duke.EmptyDeadlineException;
-import duke.EmptyEventException;
-import duke.EmptyListException;
-import duke.EmptyTodoException;
+import duke.*;
 
 /**
  * Parser class that handles user input.
@@ -31,6 +27,10 @@ public class Parser {
                 throw new EmptyListException();
             }
         }
+    }
+
+    public void checkFormat(String input) throws WrongTimeInputException {
+
     }
 
     /**
