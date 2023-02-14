@@ -34,7 +34,7 @@ public class Ui {
      */
     public static String welcomeMessage() {
         return "\tHello! I'm Duke\n"
-                + "\tWhat can I do for you?\n";
+                + "\tHow can I help you?\n";
     }
 
     /**
@@ -46,7 +46,7 @@ public class Ui {
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(event -> stage.close());
         delay.play();
-        return "\t Bye. Hope to see you again soon!\n";
+        return "\t Bye! Hope to see you soon!\n";
     }
 
     /**
@@ -56,7 +56,7 @@ public class Ui {
      * @return mark message.
      */
     public String showMark(Task task) {
-        return "\tNice! I've marked this task as done:\n\t  " + task.toString();
+        return "\tHooray! I've marked this task as completed!:\n\t  " + task.toString();
     }
 
     /**
@@ -66,7 +66,7 @@ public class Ui {
      * @return unmark message.
      */
     public String showUnmark(Task task) {
-        return "\tOK, I've marked this task as not done yet:\n\t  " + task.toString();
+        return "\tAlright, I've marked this task as not completed yet:\n\t  " + task.toString();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Ui {
      * @return Add task message
      */
     public String showAdd(Task task, int size) {
-        return "\tGot it. I've added this task:\n\t  "
+        return "\tHeard! I've added this task:\n\t  "
                 + task.toString() + "\n\tNow you have "
                 + size + " task(s) in the list.";
     }
@@ -90,7 +90,7 @@ public class Ui {
      * @return Deletion message.
      */
     public String showDelete(Task task, int size) {
-        return "\tNoted. I've removed this task:\n\t  "
+        return "\tUnderstood! I've removed this task:\n\t  "
                 + task.toString() + "\n\tNow you have "
                 + size + " task(s) in the list.";
     }
@@ -101,7 +101,7 @@ public class Ui {
      * @return Deletion message.
      */
     public String showFindDelete(Task task) {
-        return "\tNoted. I've removed this task:\n\t  "
+        return "\tUnderstood! I've removed this task:\n\t  "
                 + task.toString();
     }
     /**

@@ -73,6 +73,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a FindCommand which finds the matching input.
+     * @param splitString Array string of commands.
+     * @return FindCommand object.
+     * @throws DukeException if splitString parameter is empty.
+     */
     private static FindCommand getFindCommand(String[] splitString) throws DukeException {
         if (splitString[1].trim().equals("")) {
             throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
@@ -82,6 +88,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a DeleteCommand object.
+     * @param splitString Array string containing the task number to be deleted.
+     * @return DeleteCommand object.
+     * @throws DukeException if the splitString is empty.
+     */
     private static DeleteCommand getDeleteCommand(String[] splitString) throws DukeException {
         if (splitString.length == 1) {
             throw new DukeException("\tPlease enter the task number to delete!");
@@ -90,6 +102,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a ToDoCommand object.
+     * @param splitString Array string containing the task.
+     * @return ToDoCommand object.
+     * @throws DukeException if the splitString is empty.
+     */
     private static ToDoCommand getToDoCommand(String[] splitString) throws DukeException {
         if (splitString.length == 1) {
             throw new DukeException("\tOOPS!!! The description of a todo cannot be empty.");
@@ -98,6 +116,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a EventCommand object.
+     * @param splitString Array string containing the description.
+     * @return EventCommand object.
+     * @throws DukeException if the splitString is empty.
+     */
     private static EventCommand getEventCommand(String[] splitString) throws DukeException {
         if (splitString.length == 1) {
             throw new DukeException("\tOOPS!!! The description of an event cannot be empty.");
@@ -111,6 +135,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a DeadlineCommand object.
+     * @param splitString Array string containing the task.
+     * @return DeadlineCommand object.
+     * @throws DukeException if the splitString is empty.
+     */
     private static DeadlineCommand getDeadlineCommand(String[] splitString) throws DukeException {
         if (splitString.length == 1) {
             throw new DukeException("\tOOPS!!! The description of a deadline cannot be empty.");
@@ -123,6 +153,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a UnmarkCommand object.
+     * @param splitString Array string containing the task.
+     * @return UnmarkCommand object.
+     * @throws DukeException if the splitString is empty.
+     */
     private static UnmarkCommand getUnmarkCommand(String[] splitString) throws DukeException {
         if (splitString.length == 1) {
             throw new DukeException("\tPlease enter the task number to unmark!");
@@ -131,6 +167,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a MarkCommand object.
+     * @param splitString Array string containing the task.
+     * @return MarkCommand object.
+     * @throws DukeException if the splitString is empty.
+     */
     private static MarkCommand getMarkCommand(String[] splitString) throws DukeException {
         if (splitString.length == 1) {
             throw new DukeException("\tPlease enter the task number to mark!");

@@ -5,10 +5,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="9.9999999E7" minHeight="-Infinity" prefWidth="668.0" style="-fx-background-color: FFFF00;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="9.9999999E7" minHeight="-Infinity" minWidth="-Infinity" prefWidth="668.0" style="-fx-background-color: FFFF00;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Label" wrapText="true" />
-      <Circle fx:id="myCircle" fill="DODGERBLUE" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fx:id="myCircle" fill="DODGERBLUE" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Circle>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
