@@ -1,11 +1,14 @@
 package duke.util;
 
-import java.util.ArrayList;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
 
 /**
  * Responsible for interpreting user inputs.
@@ -27,105 +30,80 @@ public class Parser {
         this.ui = ui;
     }
 
+    public String getCommand(String[] userInput) {
+        return userInput[0];
+    }
+
+    public String getCommandDetails(String[] userInput) throws DukeException {
+        try {
+            return userInput[1];
+        } catch (Exception e) {
+            throw new DukeException("You have entered a command with no details! Please try again.");
+        }
+    }
+
+    public int getTaskNumber(String commandDetails) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(commandDetails);
+            return taskNumber;
+        } catch (Exception e) {
+            throw new DukeException("You entered an invalid task number!");
+        }
+    }
+
     /**
      * Takes in an input from the user and executes the command.
      * @param userInput Input from user stored in a String array.
+     * @return A Command corresponding to user input.
      * @throws DukeException If the user input is invalid.
      */
-    public void parse(String[] userInput) throws DukeException {
-        String command = userInput[0];
-        switch (command) {
+    public Command parse(String[] userInput) throws DukeException {
+        switch (getCommand(userInput)) {
         case "bye":
-            ui.displayExitMessage();
-            storage.saveData(this.tasks.retrieveList());
-            ui.exit();
-            break;
+            return new ByeCommand();
         case "list":
-            ui.displayTasks(this.tasks);
-            break;
+            return new ListCommand();
         case "mark":
-            try {
-                int taskNumber = Integer.parseInt(userInput[1]);
-                tasks.markTask(taskNumber - 1);
-                ui.displayMarkedTask(tasks, taskNumber - 1);
-            } catch (Exception e) {
-                ui.displayMessage(e.getMessage());
-            }
-            break;
+            int taskNumberToMark = getTaskNumber(userInput[1]);
+            return new MarkCommand(taskNumberToMark, true);
         case "unmark":
-            try {
-                int taskNumber = Integer.parseInt(userInput[1]);
-                tasks.unmarkTask(taskNumber - 1);
-                ui.displayMarkedTask(tasks, taskNumber - 1);
-            } catch (Exception e) {
-                ui.displayMessage(e.getMessage());
-            }
-            break;
+            int taskNumberToUnmark = getTaskNumber(getCommandDetails(userInput));
+            return new MarkCommand(taskNumberToUnmark, false);
         case "todo":
-            try {
-                String description = userInput[1];
-                Task newTask = new Todo(description);
-                tasks.addTask(newTask);
-                ui.displayAddedTask(newTask, tasks);
-            } catch (Exception e) {
+            String todoDescription = getCommandDetails(userInput);
+            if (todoDescription == null) {
                 throw new DukeException("Enter a valid Todo!");
+            } else {
+                return new TodoCommand(todoDescription);
             }
-            break;
         case "deadline":
-            try {
-                String[] deadlineDetails = userInput[1].split(" /by ", 2);
-                String deadlineDescription = deadlineDetails[0];
-                String deadline = deadlineDetails.length > 0 ? deadlineDetails[1] : null;
-
-                if (deadline == null) {
-                    throw new DukeException("Enter a valid deadline!");
-                }
-
-                Task newTask = new Deadline(deadlineDescription, deadline);
-                tasks.addTask(newTask);
-                ui.displayAddedTask(newTask, tasks);
-            } catch (Exception e) {
-                throw new DukeException("Enter a description with a deadline!");
+            String[] deadlineDetails = getCommandDetails(userInput).split(" /by ", 2);
+            String deadlineDescription = deadlineDetails[0];
+            String deadline = deadlineDetails.length > 0 ? deadlineDetails[1] : null;
+            if (deadline == null) {
+                throw new DukeException("Enter a valid deadline!");
             }
-            break;
+            return new DeadlineCommand(deadlineDescription, deadline);
         case "event":
-            try {
-                String[] eventDetails = userInput[1].split(" /from ", 2);
-                String eventDescription = eventDetails[0];
-                String eventPeriod = eventDetails.length > 0 ? eventDetails[1] : null;
+            String[] eventDetails = getCommandDetails(userInput).split(" /from ", 2);
+            String eventDescription = eventDetails[0];
+            String eventPeriod = eventDetails.length > 0 ? eventDetails[1] : null;
 
-                if (eventPeriod == null) {
-                    throw new DukeException("Enter a valid event period!");
-                }
-
-                String[] splitEventPeriod = eventPeriod.split(" /to ");
-
-                if (splitEventPeriod.length < 2) {
-                    throw new DukeException("Enter a valid event period!");
-                }
-
-                Task newTask = new Event(eventDescription, splitEventPeriod);
-                tasks.addTask(newTask);
-                ui.displayAddedTask(newTask, tasks);
-            } catch (Exception e) {
-                throw new DukeException("Enter a description and an event period!");
+            if (eventPeriod == null) {
+                throw new DukeException("Enter a valid event period!");
             }
-            break;
+
+            String[] splitEventPeriod = eventPeriod.split(" /to ");
+
+            if (splitEventPeriod.length < 2) {
+                throw new DukeException("Enter a valid event period!");
+            }
+            return new EventCommand(eventDescription, splitEventPeriod);
         case "delete":
-            try {
-                int taskNumber = Integer.parseInt(userInput[1]);
-                Task taskToDelete = tasks.getTask(taskNumber - 1);
-                tasks.deleteTask(taskNumber - 1);
-                ui.displayDeletedTask(taskToDelete, tasks);
-            } catch (Exception e) {
-                throw new DukeException("Enter a valid task number!");
-            }
-            break;
+            int taskNumber = getTaskNumber(getCommandDetails(userInput));
+            return new DeleteCommand(taskNumber);
         case "find":
-            String keyword = userInput[1];
-            ArrayList<Task> matchedTasks = tasks.findMatchingTasks(keyword);
-            ui.displayMatchedTasks(matchedTasks);
-            break;
+            return new FindCommand(getCommandDetails(userInput));
         default:
             throw new DukeException("Enter a valid task!");
         }

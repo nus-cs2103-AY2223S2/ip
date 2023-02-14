@@ -11,6 +11,7 @@ import duke.task.Task;
  */
 public class Ui {
     private static final String WELCOME_MESSAGE = "Welcome to Duke!\nHow can I help you?";
+    private static final String GOODBYE_MESSAGE = "Exiting Duke now...\n" + "Bye, see you again!";
 
     private boolean isRunning = true;
     private Scanner sc;
@@ -39,8 +40,9 @@ public class Ui {
     /**
      * Prints the exit message for the user.
      */
-    public void displayExitMessage() {
-        displayMessage("Exiting Duke now...\n" + "Bye, see you again!");
+    public String displayExitMessage() {
+        displayMessage(GOODBYE_MESSAGE);
+        return GOODBYE_MESSAGE;
     }
 
     /**
@@ -54,32 +56,36 @@ public class Ui {
      * Lets the user know the current number of tasks.
      * @param taskList Contains the list of current tasks.
      */
-    public void displayTasks(TaskList taskList) {
+    public String displayTasks(TaskList taskList) {
+        String toDisplay;
         if (taskList.getSize() == 0) {
-            displayMessage("You currently have no tasks!");
+            toDisplay = "You currently have no tasks!";
         } else {
-            String toDisplay = "Here are the tasks in your list:";
+            toDisplay = "Here are the tasks in your list:";
             for (int i = 0; i < taskList.getSize(); i++) {
                 toDisplay += String.format("\n%s. %s", i + 1, taskList.getTask(i));
             }
-            displayMessage(toDisplay);
         }
+        displayMessage(toDisplay);
+        return toDisplay;
     }
 
     /**
      * Lets the user know what are the tasks that match.
      * @param matchedTasks An ArrayList containing matched tasks.
      */
-    public void displayMatchedTasks(ArrayList<Task> matchedTasks) {
+    public String displayMatchedTasks(ArrayList<Task> matchedTasks) {
+        String toDisplay;
         if (matchedTasks.size() == 0) {
-            displayMessage("No tasks found!");
+            toDisplay = "No tasks found!";
         } else {
-            String toDisplay = "Here are the matching tasks in your list:";
+            toDisplay = "Here are the matching tasks in your list:";
             for (int i = 0; i < matchedTasks.size(); i++) {
                 toDisplay += String.format("\n%s. %s", i + 1, matchedTasks.get(i));
             }
-            displayMessage(toDisplay);
         }
+        displayMessage(toDisplay);
+        return toDisplay;
     }
 
     /**
