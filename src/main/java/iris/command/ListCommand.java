@@ -15,12 +15,10 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             return "You have no tasks.";
         }
-
-        String str = tasks.size() < 10
+        String startingStr = tasks.size() < 10
                 ? "(So few~ good going!)\n"
                 : "(So many >:O)\n";
-        str = String.join(" ", "You have the following tasks:", str);
-
+        String str = "You have the following tasks: " + startingStr;
         return str + tasks + "You have " + tasks.size() + " tasks.";
     }
 

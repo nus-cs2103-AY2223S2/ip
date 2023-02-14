@@ -29,7 +29,6 @@ public class Iris {
             this.taskStore = new TaskStore();
             this.tasks = this.taskStore.parse();
         } catch (IrisException e) {
-            System.out.println("here");
             this.initializingException = e;
         }
     }
