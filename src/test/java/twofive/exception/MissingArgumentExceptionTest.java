@@ -8,6 +8,6 @@ public class MissingArgumentExceptionTest {
     @Test
     public void missingArgumentExceptionTest() {
         MissingArgumentException exception = new MissingArgumentException("/by");
-        assertEquals(":( OOPS!!! You are missing the argument /by.", exception.getMessage());
+        assertEquals("Oops! TwoFive believes that you are missing the argument /by.", exception.getMessage());
     }
 }

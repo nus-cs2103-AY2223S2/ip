@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         try {
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "Noted. I've removed this task:\n " + currentTask + "\n"
+            commandResult = "TwoFive has removed this task for you:\n " + currentTask + "\n"
                     + "Now you have " + tasks.getTasksNum() + " tasks in the list";
         } catch (IOException e) {
             commandResult = e.getMessage();

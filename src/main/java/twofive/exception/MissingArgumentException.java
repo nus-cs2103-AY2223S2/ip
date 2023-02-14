@@ -13,6 +13,6 @@ public class MissingArgumentException extends TwoFiveException {
 
     @Override
     public String getMessage() {
-        return ":( OOPS!!! You are missing the argument " + argumentType + ".";
+        return "Oops! TwoFive believes that you are missing the argument " + argumentType + ".";
     }
 }

@@ -33,7 +33,7 @@ public class ToDoCommand extends Command {
         try {
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "Got it. I've added this task:\n " + newToDo + "\n"
+            commandResult = "TwoFive has added this task for you:\n " + newToDo + "\n"
                     + "Now you have " + tasks.getTasksNum() + " tasks in the list";
         } catch (IOException e) {
             commandResult = e.getMessage();

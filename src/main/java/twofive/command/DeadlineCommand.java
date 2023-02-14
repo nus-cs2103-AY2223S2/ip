@@ -49,8 +49,8 @@ public class DeadlineCommand extends Command {
             tasks.addTask(newDeadline);
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "Got it. I've added this task:\n " + newDeadline + "\n" + "Now you have "
-                    + tasks.getTasksNum() + "this is a test test tasks in the list";
+            commandResult = "TwoFive has added this task for you:\n " + newDeadline + "\n" + "Now you have "
+                    + tasks.getTasksNum() + " tasks in the list";
         } catch (DateTimeParseException e) {
             commandResult = "Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31";
         } catch (IOException e) {

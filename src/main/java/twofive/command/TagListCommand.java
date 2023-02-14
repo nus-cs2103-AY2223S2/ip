@@ -25,7 +25,7 @@ public class TagListCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         assert !tag.isEmpty() : "Tag should not be empty";
         TaskContainer.setTasks(tasks.getTasksByTag(tag));
-        return "Here are the tasks in your list with the tag ["
+        return "Here is a list of tasks with the tag ["
                 + tag
                 + "]";
     }

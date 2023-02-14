@@ -44,7 +44,7 @@ public class TagAddCommand extends Command {
         try {
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "Nice! I have added the tag " + tag + " to this task:\n " + currentTask;
+            commandResult = "TwoFive has added the tag " + tag + " to this task:\n " + currentTask;
         } catch (IOException e) {
             commandResult = e.getMessage();
         }

@@ -39,7 +39,7 @@ public class UnmarkCommand extends Command {
         try {
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "OK, I've marked this task as not done yet:\n " + currentTask;
+            commandResult = "TwoFive has marked this task as undone for you:\n " + currentTask;
         } catch (IOException e) {
             commandResult = e.getMessage();
         }

@@ -7,6 +7,6 @@ package twofive.exception;
 public class EmptyDeadlineException extends TwoFiveException {
     @Override
     public String getMessage() {
-        return ":( OOPS!!! The deadline of a deadline cannot be empty.";
+        return "Oops! TwoFive would like to remind you that the deadline of a deadline task cannot be empty.";
     }
 }

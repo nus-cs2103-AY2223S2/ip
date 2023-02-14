@@ -39,7 +39,7 @@ public class MarkCommand extends Command {
         try {
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "Nice! Congrats for completing this task:\n " + currentTask;
+            commandResult = "Bravo! Congratulations for completing this task:\n " + currentTask;
         } catch (IOException e) {
             commandResult = e.getMessage();
         }
