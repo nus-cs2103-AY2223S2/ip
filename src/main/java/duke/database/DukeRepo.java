@@ -12,36 +12,36 @@ import duke.task.Task;
 public abstract class DukeRepo {
 
     /**
-     * Retrives all entries from database
+     * Retrives all entries from database.
      *
-     * @return {@link Task} List
-     * @throws DatabaseCloseException
+     * @return {@link List} List of tasks
+     * @throws DatabaseCloseException if database was closed
      */
     public abstract List<Task> getAllTask() throws DatabaseCloseException;
 
     /**
-     * Retrives an entry from database by id
+     * Retrives an entry from database by id.
      *
-     * @param taskId int
-     * @return {@link Task} object
-     * @throws DatabaseCloseException
+     * @param taskId int task id in the list
+     * @return {@link Task} object a specific task
+     * @throws DatabaseCloseException if database was closed
      */
     public abstract Task getTask(int taskId) throws DatabaseCloseException;
 
     /**
-     * Add an entry to database
+     * Add an entry to database.
      *
-     * @param task {@link Task} object
-     * @return {@link Task} object
-     * @throws DatabaseCloseException
+     * @param task {@link Task} object a specific task
+     * @return {@link Task} object a specific task
+     * @throws DatabaseCloseException if database was closed
      */
     public abstract Task addTask(Task task) throws DatabaseCloseException;
 
     /**
      * Update an entry from database by id
      *
-     * @param taskId int
-     * @return {@link Task} object
+     * @param taskId int task id in the list
+     * @return {@link Task} object a specific task
      * @throws DatabaseCloseException
      */
     public abstract Task updateTask(int taskId, Task task) throws DatabaseCloseException;
@@ -50,16 +50,16 @@ public abstract class DukeRepo {
      * Remove an entry from database by id
      *
      * @param taskId
-     * @return {@link Task} object
-     * @throws DatabaseCloseException
-     * @throws IndexOutOfBoundsException
+     * @return {@link Task} object a specific task
+     * @throws DatabaseCloseException    if database was closed
+     * @throws IndexOutOfBoundsException if task id is invalid
      */
     public abstract List<Task> removeTask(int... taskId) throws IndexOutOfBoundsException, DatabaseCloseException;
 
     /**
      * The number of entries in database.
      *
-     * @return int
+     * @return int number of task in the list
      */
     public abstract int count();
 

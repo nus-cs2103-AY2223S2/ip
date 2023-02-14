@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Task
+ * Task.
  */
 public class Task {
     private String title;
@@ -10,8 +10,8 @@ public class Task {
     /**
      * Defualt constructor with default done status.
      *
-     * @param title
-     * @param isDone
+     * @param title task title
+     * @param isDone boolean marked indicator
      */
     public Task(String title) {
         this.title = title;
@@ -21,8 +21,8 @@ public class Task {
     /**
      * Defualt constructor with self define done status.
      *
-     * @param title
-     * @param isDone
+     * @param title task title
+     * @param isDone boolean marked indicator
      */
     public Task(String title, boolean isDone) {
         this.title = title;
@@ -32,7 +32,7 @@ public class Task {
     /**
      * Converts mark status in to an string indicator.
      *
-     * @return {@link String} object
+     * @return indicator for marked state
      */
     private String getStatusIcon() {
         return (isDone ? "✓" : "   "); // mark done task with X
@@ -55,7 +55,7 @@ public class Task {
     /**
      * Converts task into csv string.
      *
-     * @return {@link String} object
+     * @return in csv string
      */
     public String toCsv() {
         return String.format("%s,%s", (isDone ? 1 : 0), title);
@@ -64,7 +64,7 @@ public class Task {
     /**
      * Converts task into a specific string format.
      *
-     * @return {@link String} object
+     * @return for output
      */
     @Override
     public String toString() {

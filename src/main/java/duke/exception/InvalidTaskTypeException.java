@@ -2,12 +2,13 @@ package duke.exception;
 
 /**
  * InvalidTaskTypeException
+ *
+ * @see DukeException
  */
 public class InvalidTaskTypeException extends DukeException {
 
     /**
-     * Default constructor.
-     * @param errorMessage
+     * {@inheritDoc}
      */
     public InvalidTaskTypeException(String errorMessage) {
         super(errorMessage);

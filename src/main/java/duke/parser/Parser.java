@@ -22,11 +22,14 @@ import duke.utils.DateUtil;
 public class Parser {
 
     /**
-     * Parses csv string "T,1,..." into an AddCommand object
+     * Parses csv string "T,1,..." into an AddCommand object.
      *
-     * @param input {@link String} object
-     * @return {@link AddCommand} object
-     * @throws DukeException
+     * @param input raw csv row input
+     * @return {@link AddCommand} object respective command object
+     * @throws DukeException          if error occurs when converting to command
+     *                                object
+     * @throws DateTimeParseException if error occurs when parsing input to date
+     *                                object
      */
     public static AddCommand parseCsv(String input) throws DukeException, DateTimeParseException {
         String[] ops = input.split(",");
@@ -45,19 +48,19 @@ public class Parser {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TODO_CMD);
             }
 
-            return new AddCommand(DukeCommand.TODO, title, isDone);
+            return new AddCommand(title, isDone);
         case "D":
             if (ops.length != 4) {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
             }
 
-            return new AddCommand(DukeCommand.DEADLINE, title, isDone, DateUtil.toLocalDateTime(ops[3]));
+            return new AddCommand(title, isDone, DateUtil.toLocalDateTime(ops[3]));
         case "E":
             if (ops.length != 5) {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
             }
 
-            return new AddCommand(DukeCommand.EVENT, title, isDone, DateUtil.toLocalDateTime(ops[3]),
+            return new AddCommand(title, isDone, DateUtil.toLocalDateTime(ops[3]),
                     DateUtil.toLocalDateTime(ops[4]));
         default:
             throw new NoSuchCommandException(Message.EXCEPTION_NOSUCH_COMMAND);
@@ -68,9 +71,10 @@ public class Parser {
     /**
      * Parses the raw command and trigger the respective duke actions.
      *
-     * @param fullCommand {@link String} object
-     * @return {@link Command} object
-     * @throws DukeException
+     * @param fullCommand raw text input
+     * @return {@link Command} object respective command object
+     * @throws DukeException if error occurs when converting to command
+     *                       object
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] ops = fullCommand.split(" ", 2);
@@ -112,12 +116,12 @@ public class Parser {
     /**
      * Handles simple command parsing.
      *
-     * @param command
-     * @return
+     * @param type {@link DukeCommand} enum command type to create
+     * @return an optional command object
      */
-    private static Optional<Command> handleSimpleCommand(DukeCommand command) {
+    private static Optional<Command> handleSimpleCommand(DukeCommand type) {
         // handle simple commands
-        switch (command) {
+        switch (type) {
         case LIST:
             return Optional.of(new ListCommand());
         case BYE:
@@ -130,14 +134,15 @@ public class Parser {
     /**
      * Handles single arg command parsing.
      *
-     * @param command
-     * @return
+     * @param type {@link DukeCommand} enum command type to create
+     * @param ops  String[] a list of command arguments
+     * @return an optional command object
      */
-    private static Optional<Command> handleSingleArgCommand(DukeCommand command, String[] ops)
+    private static Optional<Command> handleSingleArgCommand(DukeCommand type, String[] ops)
             throws NumberFormatException, InvalidCommandArgsException {
         // ensure option args matches the format
         if (ops.length != 2) {
-            switch (command) {
+            switch (type) {
             case MARK:
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_MARK_CMD);
             case UNMARK:
@@ -154,7 +159,7 @@ public class Parser {
         }
 
         // handle commands with single args
-        switch (command) {
+        switch (type) {
         case MARK:
             assert ops.length == 2 : Message.EXCEPTION_INVALID_MARK_CMD;
 
@@ -189,8 +194,9 @@ public class Parser {
     /**
      * Handles multiple arg command parsing.
      *
-     * @param command
-     * @return
+     * @param type {@link DukeCommand} enum command type to create
+     * @param ops  String[] a list of command arguments
+     * @return an optional command object
      */
     private static Optional<Command> handleComplexArgCommand(DukeCommand command, String[] ops)
             throws DateTimeParseException, InvalidCommandArgsException {
@@ -214,7 +220,7 @@ public class Parser {
         case TODO:
             assert ops.length == 2 : Message.EXCEPTION_INVALID_TODO_CMD;
 
-            return Optional.of(new AddCommand(DukeCommand.TODO, ops[1], false));
+            return Optional.of(new AddCommand(ops[1], false));
         case DEADLINE:
             assert ops.length == 2 : Message.EXCEPTION_INVALID_DATE_CMD;
 
@@ -223,7 +229,7 @@ public class Parser {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DEADLINE_CMD);
             }
 
-            return Optional.of(new AddCommand(DukeCommand.DEADLINE, args[0], false, DateUtil.toLocalDateTime(args[1])));
+            return Optional.of(new AddCommand(args[0], false, DateUtil.toLocalDateTime(args[1])));
         case EVENT:
             assert ops.length == 2 : Message.EXCEPTION_INVALID_EVENT_CMD;
 
@@ -232,7 +238,7 @@ public class Parser {
                 throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_EVENT_CMD);
             }
 
-            return Optional.of(new AddCommand(DukeCommand.EVENT, args[0], false, DateUtil.toLocalDateTime(args[1]),
+            return Optional.of(new AddCommand(args[0], false, DateUtil.toLocalDateTime(args[1]),
                     DateUtil.toLocalDateTime(args[2])));
         default:
             return Optional.empty();

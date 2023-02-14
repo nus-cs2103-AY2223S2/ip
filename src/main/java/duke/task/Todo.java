@@ -1,19 +1,21 @@
 package duke.task;
 
 /**
- * Todo
+ * Todo.
+ *
+ * @see Task
  */
 public class Todo extends Task {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public Todo(String title) {
         this(title, false);
     }
 
     /**
-     * Constructor with predefined done state
+     * Constructor with predefined done state.
      */
     public Todo(String title, boolean isDone) {
         super(title, isDone);

@@ -1,13 +1,14 @@
 package duke.exception;
 
 /**
- * DatabaseCloseException
+ * DatabaseCloseException.
+ *
+ * @see DukeException
  */
 public class DatabaseCloseException extends DukeException {
 
     /**
-     * Default constructor.
-     * @param errorMessage
+     * {@inheritDoc}
      */
     public DatabaseCloseException(String errorMessage) {
         super(errorMessage);

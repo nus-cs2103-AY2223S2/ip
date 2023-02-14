@@ -1,7 +1,7 @@
 package duke.constant;
 
 /**
- * Message strings of duke
+ * Message strings of duke,
  */
 public class Message {
     /* Exception messages */

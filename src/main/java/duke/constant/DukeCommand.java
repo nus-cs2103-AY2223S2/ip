@@ -1,7 +1,7 @@
 package duke.constant;
 
 /**
- * DukeCommand
+ * DukeCommand.
  */
 public enum DukeCommand {
     BYE,

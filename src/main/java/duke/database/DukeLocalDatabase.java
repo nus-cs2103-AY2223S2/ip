@@ -17,7 +17,7 @@ import duke.parser.Parser;
 import duke.task.Task;
 
 /**
- * A DAO layer for file storage
+ * A DAO layer for file storage.
  */
 class DukeLocalDatabase {
 
@@ -27,14 +27,14 @@ class DukeLocalDatabase {
     private boolean isClosed;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public DukeLocalDatabase() {
         this(false);
     }
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public DukeLocalDatabase(boolean isTestMode) {
         tasks = new ArrayList<Task>();
@@ -47,9 +47,9 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Retrives all entries from list
+     * Retrives all entries from list.
      *
-     * @return {@link Task} List
+     * @return {@link List} List of tasks
      */
     public List<Task> getAllTask() throws DatabaseCloseException {
         if (isClosed) {
@@ -60,10 +60,10 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Retrives an entry from list by id
+     * Retrives an entry from list by id.
      *
-     * @param taskId int
-     * @return {@link Task} object
+     * @param taskId int a task id in the list
+     * @return {@link Task} object a specific task
      */
     public Task getTask(int taskId) throws DatabaseCloseException {
         if (isClosed) {
@@ -75,10 +75,10 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Add an entry to list
+     * Adds an entry to list.
      *
-     * @param task {@link Task} object
-     * @return {@link Task} object
+     * @param task {@link Task} object task to be added
+     * @return {@link Task} object task after being added
      */
     public Task addTask(Task task) throws DatabaseCloseException {
         if (isClosed) {
@@ -90,10 +90,10 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Update an entry from list by id
+     * Updates an entry from list by id.
      *
-     * @param taskId int
-     * @return {@link Task} object
+     * @param taskId int a task id in the list
+     * @return {@link Task} object a specific task
      */
     public Task updateTask(int taskId, Task task) throws DatabaseCloseException {
         if (isClosed) {
@@ -105,10 +105,10 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Remove an entry from list by id
+     * Removes an entry from list by id.
      *
-     * @param taskId
-     * @return {@link Task} object
+     * @param taskId int a task id in the list
+     * @return {@link Task} object a specific task
      */
     public List<Task> removeTask(int... taskIds) throws IndexOutOfBoundsException, DatabaseCloseException {
         if (isClosed) {
@@ -127,7 +127,7 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Load tasks from local csv file.
+     * Loads task from local csv file.
      */
     void open() {
         try {
@@ -151,12 +151,11 @@ class DukeLocalDatabase {
     }
 
     /**
-     * Save the on memory task list to local csv file.
+     * Saves the on memory task list to local csv file.
      */
     public void close() {
         try {
             isClosed = true;
-            
             File dataDir = new File(DATA_FILE_DIR);
             if (!dataDir.exists()) {
                 dataDir.mkdirs();
@@ -178,9 +177,9 @@ class DukeLocalDatabase {
     }
 
     /**
-     * The number of entries in list.
+     * Counts the number of task in memory.
      *
-     * @return int
+     * @return int number of task
      */
     public int count() {
         return tasks.size();

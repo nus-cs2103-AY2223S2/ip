@@ -6,6 +6,8 @@ import duke.utils.DateUtil;
 
 /**
  * Event
+ *
+ * @see Task
  */
 public class Event extends Task {
 
@@ -13,14 +15,14 @@ public class Event extends Task {
     private LocalDateTime endDate;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public Event(String title, LocalDateTime from, LocalDateTime to) {
         this(title, false, from, to);
     }
 
     /**
-     * Constructor with predefined done state
+     * Constructor with predefined done state.
      */
     public Event(String title, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(title, isDone);
@@ -29,15 +31,17 @@ public class Event extends Task {
     }
 
     /**
-     * returns from date.
-     * @return {@link LocalDateTime} object
+     * Returns from date.
+     * @return start date
+     * @see LocalDateTime
      */
     public LocalDateTime getFrom() {
         return startDate;
     }
     /**
-     * returns to date.
-     * @return {@link LocalDateTime} object
+     * Returns to date.
+     * @return end date
+     * @see LocalDateTime
      */
     public LocalDateTime getTo() {
         return endDate;

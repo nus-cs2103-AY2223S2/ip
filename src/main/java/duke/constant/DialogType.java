@@ -1,7 +1,7 @@
 package duke.constant;
 
 /**
- * DialogType
+ * DialogType.
  */
 public enum DialogType {
     NORMAL,

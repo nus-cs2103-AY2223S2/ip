@@ -2,12 +2,13 @@ package duke.exception;
 
 /**
  * InvalidCommandArgsException
+ *
+ * @see DukeException
  */
 public class InvalidCommandArgsException extends DukeException {
 
     /**
-     * Default constructor.
-     * @param errorMessage
+     * {@inheritDoc}
      */
     public InvalidCommandArgsException(String errorMessage) {
         super(errorMessage);

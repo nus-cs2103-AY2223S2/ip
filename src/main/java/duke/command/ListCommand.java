@@ -15,7 +15,9 @@ import duke.task.Event;
 import duke.task.Task;
 
 /**
- * ListCommand
+ * ListCommand.
+ *
+ * @see Command
  */
 public class ListCommand extends Command {
 
@@ -23,7 +25,7 @@ public class ListCommand extends Command {
     private Optional<String> filterString;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public ListCommand() {
         this.filterDate = Optional.empty();
@@ -31,23 +33,31 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Default for filtering by date
+     * Default constructor for filtering by date.
+     *
+     * @param filterDate date for filtering
+     * @see LocalDateTime
      */
     public ListCommand(LocalDateTime filterDate) {
         this(Optional.of(filterDate), Optional.empty());
     }
 
     /**
-     * Default for filtering by keyword
+     * Default constructor for filtering by keyword.
+     *
+     * @param filterString keyword for filtering
      */
     public ListCommand(String filterString) {
         this(Optional.empty(), Optional.of(filterString));
     }
 
     /**
-     * Base Constructor
+     * Base constructor, internal use only to control the filtering option.
+     * @param filterDate date for filtering
+     * @param filterString keyword for filtering
+     * @see LocalDateTime
      */
-    public ListCommand(Optional<LocalDateTime> filterDate, Optional<String> filterString) {
+    private ListCommand(Optional<LocalDateTime> filterDate, Optional<String> filterString) {
         this.filterDate = filterDate;
         this.filterString = filterString;
     }
@@ -68,9 +78,8 @@ public class ListCommand extends Command {
                 sb.append(Message.FIND_TASKS + "\n");
                 filtered = filter(db, filterString.get());
             } else {
-                
                 filtered = db.getAllTask();
-    
+
                 if (filtered.isEmpty()) {
                     sb.append(Message.LIST_EMPTY + "\n");
                     con.accept(DialogType.WARNING, sb.toString());
@@ -95,20 +104,21 @@ public class ListCommand extends Command {
     /**
      * Filters task list by date.
      *
-     * @param db
-     * @param date
-     * @return
-     * @throws DatabaseCloseException
+     * @param db {@link DukeRepo} a data layer interface object
+     * @param filterDate date for filtering
+     * @return a list of task
+     * @throws DatabaseCloseException if data layer was closed
+     * @see LocalDateTime
      */
-    private List<Task> filter(DukeRepo db, LocalDateTime date) throws DatabaseCloseException {
+    private List<Task> filter(DukeRepo db, LocalDateTime filterDate) throws DatabaseCloseException {
         return db.getAllTask().stream().filter(task -> {
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
-                return d.getBy().toLocalDate().equals(date.toLocalDate());
+                return d.getBy().toLocalDate().equals(filterDate.toLocalDate());
             }
             if (task instanceof Event) {
                 Event e = (Event) task;
-                return e.getFrom().toLocalDate().equals(date.toLocalDate());
+                return e.getFrom().toLocalDate().equals(filterDate.toLocalDate());
             }
             return false;
         }).collect(Collectors.toList());
@@ -117,14 +127,14 @@ public class ListCommand extends Command {
     /**
      * Filters task list by keyword.
      *
-     * @param db
-     * @param keyword
-     * @return
-     * @throws DatabaseCloseException
+     * @param db {@link DukeRepo} a data layer interface object
+     * @param filterString keyword for filtering
+     * @return a list of task
+     * @throws DatabaseCloseException if data layer was closed
      */
-    private List<Task> filter(DukeRepo db, String keyword) throws DatabaseCloseException {
+    private List<Task> filter(DukeRepo db, String filterString) throws DatabaseCloseException {
         return db.getAllTask().stream()
-            .filter(task -> task.toString().contains(keyword))
+            .filter(task -> task.toString().contains(filterString))
             .collect(Collectors.toList());
     }
 

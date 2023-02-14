@@ -15,7 +15,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * AddCommand
+ * AddCommand.
+ *
+ * @see Command
  */
 public class AddCommand extends Command {
 
@@ -28,34 +30,47 @@ public class AddCommand extends Command {
     /**
      * Constructor for adding a todo.
      *
-     * @param tType  {@link DukeCommand} enum
-     * @param title  {@link String} object
-     * @param isDone boolean
+     * @param title  task title
+     * @param isDone boolean marked indicator
      */
-    public AddCommand(DukeCommand tType, String title, boolean isDone) {
-        this(tType, title, isDone, null, null);
+    public AddCommand(String title, boolean isDone) {
+        this(DukeCommand.TODO, title, isDone, null, null);
     }
 
     /**
      * Constructor for adding a deadline.
      *
-     * @param tType  {@link DukeCommand} enum
-     * @param title  {@link String} object
-     * @param isDone boolean
-     * @param startDate  {@link LocalDateTime} object
+     * @param title     task title
+     * @param isDone    boolean marked indicator
+     * @param startDate deadline start date (by)
+     * @see LocalDateTime
      */
-    public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime startDate) {
-        this(tType, title, isDone, startDate, null);
+    public AddCommand(String title, boolean isDone, LocalDateTime startDate) {
+        this(DukeCommand.DEADLINE, title, isDone, startDate, null);
     }
 
     /**
-     * Constructor for adding a eveny.
+     * Constructor for adding an event.
      *
-     * @param tType  {@link DukeCommand} enum
-     * @param title  {@link String} object
-     * @param isDone boolean
-     * @param startDate  {@link LocalDateTime} object
-     * @param endDate  {@link LocalDateTime} object
+     * @param title     task title
+     * @param isDone    boolean marked indicator
+     * @param startDate event start date (from)
+     * @param endDate   event end date (to)
+     * @see LocalDateTime
+     */
+    public AddCommand(String title, boolean isDone, LocalDateTime startDate, LocalDateTime endDate) {
+        this(DukeCommand.EVENT, title, isDone, startDate, endDate);
+    }
+
+    /**
+     * Base constructor for creating different types of tasks.
+     *
+     * @param tType     {@link DukeCommand} enum task type
+     * @param title     task title
+     * @param isDone    boolean marked indicator
+     * @param startDate event start date (from/by)
+     * @param endDate   event end date (to)
+     * @see LocalDateTime
      */
     public AddCommand(DukeCommand tType, String title, boolean isDone, LocalDateTime startDate, LocalDateTime endDate) {
         this.tType = tType;
@@ -80,8 +95,9 @@ public class AddCommand extends Command {
     /**
      * Produces the corresponding task object for add command variants.
      *
-     * @return {@link Task} object
-     * @throws InvalidTaskTypeException
+     * @return {@link Task} object task created based on supplied type
+     * @throws InvalidTaskTypeException if invalid task type were configured in the
+     *                                  constructor.
      */
     public Task getTask() throws InvalidTaskTypeException {
         switch (tType) {

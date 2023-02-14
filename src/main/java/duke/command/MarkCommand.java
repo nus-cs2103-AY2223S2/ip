@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.util.function.BiConsumer;
+
 import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
@@ -8,22 +9,24 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
- * MarkCommand
+ * MarkCommand.
+ *
+ * @see Command
  */
 public class MarkCommand extends Command {
 
     private int taskId;
-    private boolean markDone;
+    private boolean isDone;
 
     /**
-     * Default constructor
+     * Default constructor.
      *
      * @param taskId   int
-     * @param markDone boolean
+     * @param isDone boolean
      */
-    public MarkCommand(int taskId, boolean markDone) {
+    public MarkCommand(int taskId, boolean isDone) {
         this.taskId = taskId;
-        this.markDone = markDone;
+        this.isDone = isDone;
     }
 
     /**
@@ -35,7 +38,7 @@ public class MarkCommand extends Command {
         try {
             Task tk = db.getTask(taskId);
 
-            if (markDone) {
+            if (isDone) {
                 tk.markAsDone();
                 sb.append(Message.MARK_TASK + "\n");
             } else {

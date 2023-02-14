@@ -14,16 +14,17 @@ public abstract class Command {
     /**
      * Executes the command action with the data and return the result to ui layer.
      *
-     * @param db {@link DukeRepo} object
-     * @param con {@link BiConsumer} object
-     * @throws DukeException
+     * @param db {@link DukeRepo} a data layer interface object
+     * @param con a handler function for execution result
+     * @throws DukeException general duke exception.
+     * @see BiConsumer
      */
     public abstract void execute(DukeRepo db, BiConsumer<DialogType, String> con) throws DukeException;
 
     /**
-     * indicator for for exit indicator.
+     * Represents an indicator for exit event.
      *
-     * @return boolean
+     * @return an exit indicator
      */
     public abstract boolean isExit();
 }

@@ -14,13 +14,13 @@ public class Main extends Application {
     private Duke duke = new Duke();
 
     /**
-     * Handles start event
+     * Handles start event.
      */
     @Override
     public void start(Stage stage) {
         Scene scene = new Scene(new MainWindow(duke));
         stage.setScene(scene);
-        
+
         stage.setTitle(Message.UI_TITLE);
         stage.setMinWidth(300);
 
@@ -32,7 +32,7 @@ public class Main extends Application {
     }
 
     /**
-     * Handles exit event
+     * Handles exit event.
      */
     @Override
     public void stop() throws Exception {

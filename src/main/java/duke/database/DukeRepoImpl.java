@@ -6,7 +6,7 @@ import duke.exception.DatabaseCloseException;
 import duke.task.Task;
 
 /**
- * A implementation class of DukeRepo
+ * A implementation class of DukeRepo.
  *
  * @see DukeRepo
  */
@@ -15,14 +15,14 @@ public class DukeRepoImpl extends DukeRepo {
     private DukeLocalDatabase local;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public DukeRepoImpl() {
         this(false);
     }
 
     /**
-     * Constructor for testing
+     * Constructor for testing.
      */
     public DukeRepoImpl(boolean isTestMode) {
         local = new DukeLocalDatabase(isTestMode);
@@ -30,7 +30,6 @@ public class DukeRepoImpl extends DukeRepo {
 
     /**
      * {@inheritDoc}
-     * @throws DatabaseCloseException
      */
     @Override
     public List<Task> getAllTask() throws DatabaseCloseException {
@@ -39,7 +38,6 @@ public class DukeRepoImpl extends DukeRepo {
 
     /**
      * {@inheritDoc}
-     * @throws DatabaseCloseException
      */
     @Override
     public Task getTask(int taskId) throws DatabaseCloseException {
@@ -49,7 +47,6 @@ public class DukeRepoImpl extends DukeRepo {
 
     /**
      * {@inheritDoc}
-     * @throws DatabaseCloseException
      */
     @Override
     public Task addTask(Task task) throws DatabaseCloseException {
@@ -58,7 +55,6 @@ public class DukeRepoImpl extends DukeRepo {
 
     /**
      * {@inheritDoc}
-     * @throws DatabaseCloseException
      */
     @Override
     public Task updateTask(int taskId, Task task) throws DatabaseCloseException {
@@ -67,8 +63,6 @@ public class DukeRepoImpl extends DukeRepo {
 
     /**
      * {@inheritDoc}
-     * @throws DatabaseCloseException
-     * @throws IndexOutOfBoundsException
      */
     @Override
     public List<Task> removeTask(int... taskIds) throws IndexOutOfBoundsException, DatabaseCloseException {

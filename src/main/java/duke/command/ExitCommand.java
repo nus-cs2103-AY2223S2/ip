@@ -1,12 +1,15 @@
 package duke.command;
 
 import java.util.function.BiConsumer;
+
 import duke.constant.DialogType;
 import duke.constant.Message;
 import duke.database.DukeRepo;
 
 /**
- * ExitCommand
+ * ExitCommand.
+ *
+ * @see Command
  */
 public class ExitCommand extends Command {
 

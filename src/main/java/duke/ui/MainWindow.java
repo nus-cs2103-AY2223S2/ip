@@ -37,11 +37,11 @@ public class MainWindow extends AnchorPane {
     private String originalText = "";
 
     /**
-     * Default constructor
+     * Default constructor.
      *
-     * @param d
+     * @param duke {@link Duke} duke agent
      */
-    public MainWindow(Duke d) {
+    public MainWindow(Duke duke) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
@@ -57,7 +57,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setPannable(true);
 
-        duke = d;
+        this.duke = duke;
         keyLog = new Stack<>();
     }
 
@@ -85,31 +85,40 @@ public class MainWindow extends AnchorPane {
                 dialogContainer.getChildren().add(DialogBox.getDukeDialog(reply, dukeImage));
                 break;
             }
-            
         });
         originalText = "";
         userInput.clear();
     }
 
+    /**
+     * Handles key press events.
+     *
+     * @param e key event
+     */
     @FXML
     private void onKeyPressed(KeyEvent e) {
         switch (e.getCode()) {
-            case UP:
-                getLog(log -> {
-                    originalText = userInput.getText();
-                    userInput.setText(log);
-                });
-                break;
-            case DOWN:
-                if (!originalText.isEmpty()) {
-                    userInput.setText(originalText);
-                }
-                break;
-            default:
-                break;
+        case UP:
+            getLog(log -> {
+                originalText = userInput.getText();
+                userInput.setText(log);
+            });
+            break;
+        case DOWN:
+            if (!originalText.isEmpty()) {
+                userInput.setText(originalText);
+            }
+            break;
+        default:
+            break;
         }
     }
 
+    /**
+     * Retrives the last entered command into the textbox.
+     *
+     * @param log handler for result
+     */
     private void getLog(Consumer<String> log) {
         if (!keyLog.empty()) {
             log.accept(keyLog.pop());

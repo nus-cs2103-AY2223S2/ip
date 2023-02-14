@@ -10,16 +10,18 @@ import duke.exception.DatabaseCloseException;
 import duke.task.Task;
 
 /**
- * DeleteCommand
+ * DeleteCommand.
+ *
+ * @see Command
  */
 public class DeleteCommand extends Command {
 
     private int[] taskIds;
 
     /**
-     * Default constructor
+     * Default constructor.
      *
-     * @param taskIds int[]
+     * @param taskIds int[] ids to be deleted
      */
     public DeleteCommand(int... taskIds) {
         this.taskIds = taskIds;

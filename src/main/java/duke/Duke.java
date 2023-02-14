@@ -8,11 +8,10 @@ import duke.database.DukeRepo;
 import duke.database.DukeRepoImpl;
 import duke.exception.DukeException;
 import duke.parser.Parser;
-
 import javafx.application.Platform;
 
 /**
- * Duke agent that knows how to manage a todo list.
+ * A Duke agent that knows how to manage a todo list.
  */
 public class Duke {
 
@@ -27,6 +26,10 @@ public class Duke {
 
     /**
      * Generates a response to user input.
+     *
+     * @param input string command
+     * @param con handler for outputs
+     * @see BiConsumer
      */
     public void getResponse(String input, BiConsumer<DialogType, String> con) {
         try {

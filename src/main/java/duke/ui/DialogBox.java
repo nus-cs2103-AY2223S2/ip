@@ -53,22 +53,24 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns the dialog for user
+     * Returns the dialog for user.
      *
-     * @param text
-     * @param img
-     * @return
+     * @param text dialog text
+     * @param img dialog user profile picture
+     * @return a DialogBox
+     * @see Image
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
     /**
-     * Returns the dialog for duke
+     * Returns the dialog for duke.
      *
-     * @param text
-     * @param img
-     * @return
+     * @param text dialog text
+     * @param img dialog user profile picture
+     * @return a DialogBox
+     * @see Image
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
@@ -77,12 +79,28 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Returns a warning dialog for duke.
+     *
+     * @param text dialog text
+     * @param img dialog user profile picture
+     * @return a DialogBox
+     * @see Image
+     */
     public static Node getDukeWarningDialog(String text, Image img) {
         var db = getDukeDialog(text, img);
         db.dialog.setTextFill(Color.ORANGE);;
         return db;
     }
 
+    /**
+     * Returns an error dialog for duke.
+     *
+     * @param text dialog text
+     * @param img dialog user profile picture
+     * @return a DialogBox
+     * @see Image
+     */
     public static Node getDukeErrorDialog(String text, Image img) {
         var db = getDukeDialog(text, img);
         db.dialog.setTextFill(Color.RED);;

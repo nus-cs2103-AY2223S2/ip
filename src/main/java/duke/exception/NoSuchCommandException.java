@@ -2,12 +2,13 @@ package duke.exception;
 
 /**
  * NoSuchCommandException
+ *
+ * @see DukeException
  */
 public class NoSuchCommandException extends DukeException {
 
     /**
-     * Default constructor.
-     * @param errorMessage
+     * {@inheritDoc}
      */
     public NoSuchCommandException(String errorMessage) {
         super(errorMessage);

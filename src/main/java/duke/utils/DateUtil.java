@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
 /**
- * A utility class that provide useful methods for handling date data type.
+ * A utility class that provide useful functions for handling date objects.
  */
 public class DateUtil {
 
@@ -28,10 +28,11 @@ public class DateUtil {
      * Attempts to convert a string to a LocalDateTime object.
      * Solution below adapted from https://stackoverflow.com/a/48280447
      *
-     * @param input {@link String} object
-     * @return {@link LocalDateTime} object
+     * @param input string for conversion
+     * @return a date object
      * @throws DateTimeParseException if the provide input does not follow the date
      *                                format
+     * @see LocalDateTime
      */
     public static LocalDateTime toLocalDateTime(String input) throws DateTimeParseException {
         LocalDateTime dateTime;
@@ -47,15 +48,22 @@ public class DateUtil {
     /**
      * Converts date object to string.
      *
-     * @param date {@link LocalDateTime} object
-     * @return {@link String} object
+     * @param date object for conversion
+     * @return a date in string
+     * @see LocalDateTime
      */
     public static String dateToString(LocalDateTime date) {
         return date.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
+    /**
+     * Converts date object to string.
+     *
+     * @param date object for conversion
+     * @return a date in formatted string
+     */
     public static String dateToPrettyString(LocalDateTime date) {
-        if (date.toLocalTime().equals(LocalTime.of(0,0))) {
+        if (date.toLocalTime().equals(LocalTime.of(0, 0))) {
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy H:m"));

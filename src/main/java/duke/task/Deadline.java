@@ -5,40 +5,43 @@ import java.time.LocalDateTime;
 import duke.utils.DateUtil;
 
 /**
- * Deadline
+ * Deadline.
+ *
+ * @see Task
  */
 public class Deadline extends Task {
 
-    private LocalDateTime by;
+    private LocalDateTime startDate;
 
     /**
-     * Constructor
+     * Constructor.
      */
-    public Deadline(String title, LocalDateTime by) {
-        this(title, false, by);
+    public Deadline(String title, LocalDateTime startDate) {
+        this(title, false, startDate);
     }
 
     /**
-     * Constructor with predefined done state
+     * Constructor with predefined done state.
      */
-    public Deadline(String title, boolean isDone, LocalDateTime by) {
+    public Deadline(String title, boolean isDone, LocalDateTime startDate) {
         super(title, isDone);
-        this.by = by;
+        this.startDate = startDate;
     }
 
     /**
-     * returns by date.
-     * @return {@link LocalDateTime} object
+     * Returns by date.
+     * @return start date
+     * @see LocalDateTime
      */
     public LocalDateTime getBy() {
-        return by;
+        return startDate;
     }
 
     /**
      * {@inheritDoc}
      */
     public String toCsv() {
-        return "D," + super.toCsv() + "," + DateUtil.dateToString(by) + ",";
+        return "D," + super.toCsv() + "," + DateUtil.dateToString(startDate) + ",";
     }
 
     /**
@@ -47,7 +50,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "⌛ " + super.toString() + "\n   ↳ 📅 "
-            + DateUtil.dateToPrettyString(by)
+            + DateUtil.dateToPrettyString(startDate)
             + ".";
     }
 }
