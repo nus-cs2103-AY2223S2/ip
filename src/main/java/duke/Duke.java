@@ -25,7 +25,7 @@ public class Duke {
      * @return Duke greeting message.
      */
     public String greeting() {
-        return ui.dukeGreeting();
+        return Ui.dukeGreeting();
     }
 
     /**

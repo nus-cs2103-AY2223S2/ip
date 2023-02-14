@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Task that with a deadline.
  */
 public class Deadline extends Task {
-    protected final String by;
+    protected String by;
 
     public Deadline(String description, String by) {
         super(description);
@@ -26,6 +26,10 @@ public class Deadline extends Task {
         String[] split = description.split("/by ");
         LocalDate d1 = LocalDate.parse(split[1]);
         return new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+    }
+
+    public void setBy(String newBy) {
+        this.by = newBy;
     }
 
     /**

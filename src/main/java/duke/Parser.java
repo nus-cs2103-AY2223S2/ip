@@ -227,6 +227,10 @@ public class Parser {
             ((Event) taskToUpdate).setFrom(newDescArr[1].substring(5));
             ((Event) taskToUpdate).setTo(newDescArr[2].substring(3));
         }
+        if (taskToUpdate instanceof Deadline) {
+            LocalDate newDate = LocalDate.parse(newDesc.substring(4));
+            ((Deadline) taskToUpdate).setBy(newDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        }
         storage.updateFile(taskList);
         return taskToUpdate;
     }

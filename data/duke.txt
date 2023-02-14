@@ -1,3 +1,4 @@
 E|X | project meeting | 4pm - 6pm
 T|  | borrow book
-E|  | meeting | 5pm - 6pm
+E|  | meeting | 2pm - 5pm
+D|  | return book | Nov 15 2019
