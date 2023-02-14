@@ -18,7 +18,7 @@ public class VoidCommand extends Command{
 
     private VoidType voidType;
 
-    public VoidCommand(String keyword, ArrayList<String> params) {
+    public VoidCommand(String keyword, ArrayList<String> params) throws IllegalCommandException {
         super(keyword, params);
 
         switch (keyword) {
@@ -31,6 +31,8 @@ public class VoidCommand extends Command{
         case "forcequit":
             this.voidType = VoidType.FORCEQUIT;
             break;
+        default:
+            throw new IllegalCommandException("Invalid keyword for VoidCommand");
         }
 
     }

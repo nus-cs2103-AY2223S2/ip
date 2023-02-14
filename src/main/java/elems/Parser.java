@@ -1,18 +1,22 @@
 package elems;
 
-import commands.*;
-import dukeexceptions.IllegalCommandException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import commands.AddCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.ModifyCommand;
+import commands.VoidCommand;
+import dukeexceptions.IllegalCommandException;
+
 public class Parser {
 
-    private static final HashSet<String> addKeywords = new HashSet<>(Arrays.asList("todo"
-            , "deadline", "event"));
+    private static final HashSet<String> addKeywords = new HashSet<>(Arrays.asList("todo",
+            "deadline", "event"));
     private static final HashSet<String> deleteKeywords = new HashSet<>(Arrays.asList("delete"));
-    private static final HashSet<String> voidKeywords = new HashSet<>(Arrays.asList("list","bye","forcequit"));
+    private static final HashSet<String> voidKeywords = new HashSet<>(Arrays.asList("list", "bye", "forcequit"));
     private static final HashSet<String> modifyKeywords = new HashSet<>(Arrays.asList("mark", "unmark"));
 
     public Command parse(String input) throws IllegalCommandException {

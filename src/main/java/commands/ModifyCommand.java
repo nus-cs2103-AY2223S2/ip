@@ -22,7 +22,7 @@ public class ModifyCommand extends Command{
     public ModifyCommand(String keyword, ArrayList<String> params) throws IllegalCommandException {
         super(keyword, params);
 
-        switch (keyword){
+        switch (keyword) {
         case "mark":
             this.modifyType = ModifyType.MARK;
             break;
@@ -30,13 +30,13 @@ public class ModifyCommand extends Command{
             this.modifyType = ModifyType.UNMARK;
             break;
         default:
-            throw new IllegalCommandException("Invalid Command to initialise");
+            throw new IllegalCommandException("Invalid keyword for ModifyCommand");
         }
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.params.size() != 1){
+        if (this.params.size() != 1) {
             throw new IllegalInputException("Wrong number of parameters for this command!");
         }
         try {
@@ -56,8 +56,8 @@ public class ModifyCommand extends Command{
         } catch (TaskListIndexOutOfBoundsException e) {
             ui.errorDisplay(e);
         } catch (IOException e) {
-            ui.display("Seems like there is something wrong with the storage file \n" +
-                    "Any updates will not be saved!");
+            ui.display("Seems like there is something wrong with the storage file \n"
+                    + "Any updates will not be saved!");
             ui.errorDisplay(e);
             e.printStackTrace();
         }

@@ -1,6 +1,10 @@
 package commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import dukeexceptions.DukeException;
+import dukeexceptions.IllegalCommandException;
 import dukeexceptions.IllegalInputException;
 import dukeexceptions.TaskListIndexOutOfBoundsException;
 import elems.Storage;
@@ -8,12 +12,12 @@ import elems.TaskList;
 import elems.Ui;
 import items.Task;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class DeleteCommand extends Command{
-    public DeleteCommand(String keyword, ArrayList<String> params) {
+public class DeleteCommand extends Command {
+    public DeleteCommand(String keyword, ArrayList<String> params) throws IllegalCommandException {
         super(keyword, params);
+        if (!"delete".equals(keyword)) {
+            throw new IllegalCommandException("Invalid DeleteCommand");
+        }
     }
 
     @Override

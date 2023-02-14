@@ -1,12 +1,12 @@
+import java.util.Scanner;
+
 import commands.Command;
 import dukeexceptions.DukeException;
-import dukeexceptions.IllegalCommandException;
-import dukeexceptions.IllegalInputException;
-import elems.*;
+import elems.Parser;
+import elems.Storage;
+import elems.TaskList;
+import elems.Ui;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
 
