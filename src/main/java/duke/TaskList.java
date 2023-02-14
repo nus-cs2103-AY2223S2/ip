@@ -3,10 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.IntStream;
 
 /**
- * TaskList is the class to store all the tasks keyed in by the user during
+ * Stores all the tasks keyed in by the user during
  * the session. It has a generic type of Task, which means the type of data
  * stored in the list is Task. It is an immutable list and will always
  * return a new list if modified.

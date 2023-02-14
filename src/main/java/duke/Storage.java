@@ -7,7 +7,7 @@ import java.io.File;
 
 import java.io.IOException;
 /**
- * Storage class manages the reading and writing of the list of task into
+ * Manages the reading and writing of the list of task into
  * the user machine's hardisk. In the main class, Duke, the Storage class is
  * first used to check if there is the dukeList.txt file found in a dynamic
  * directory, which is OS independent. If the file is found, date from the
@@ -32,9 +32,8 @@ class Storage {
     static int SIZE_OF_BOX = 3;
 
     /**
-    * Sole constructor. (For invocation by subclass
-    * constructors, typically implicit)
-    */
+     * Makes the default constructoe exlicit
+     */
     protected Storage() {
     }
     /**
@@ -63,9 +62,7 @@ class Storage {
         }
     }
     /**
-     * Whenever the user list of task changes, the previous data in the
-     * dukeList is overwritten to a new list of tasks.
-     *
+     * Overwrites previous written data and writes new data
      * @param listOfTasks New list of tasks in String
      * @exception IOException
      */
@@ -83,7 +80,7 @@ class Storage {
         }
     }
     /**
-     * The text from dukeList.txt is processed. Manipulation is needed
+     * Processes and manipulates the text from file
      * because the text is stored as an array, and not as commands from the
      * user, since it does not make sense to store as the latter.
      *
@@ -137,7 +134,7 @@ class Storage {
     }
 
     /**
-     * Process the saved task to check if it is marked as done or undone.
+     * Processes the saved task to check if it is marked as done or undone.
      */
     void markTask(String task) {
         boolean isMark = ("" + task.charAt(1)).equals(Parser.MARK_SYMBOL) ||
@@ -147,7 +144,7 @@ class Storage {
         }
     }
     /**
-     * Change the format of the saved task that is not todo, deadline or
+     * Changes the format of the saved task that is not todo, deadline or
      * event so that the same method in TaskList can be invoked
      */
     void rephraseNoDate(String input) {
@@ -155,7 +152,7 @@ class Storage {
         markTask(input);
     }
     /**
-     * Change the format of the saved todo task so that the same method in
+     * Changes the format of the saved todo task so that the same method in
      * TaskList can be invoked
      */
     void rephraseToDo(String input) {
@@ -163,7 +160,7 @@ class Storage {
         markTask(input);
     }
     /**
-     * Change the format of the saved deadline task so that the same method in
+     * Changes the format of the saved deadline task so that the same method in
      * TaskList can be invoked
      */
     void rephraseDeadline(String input) {
@@ -174,7 +171,7 @@ class Storage {
         markTask(input);
     }
     /**
-     * Change the format of the saved events task so that the same method in
+     * Changes the format of the saved events task so that the same method in
      * TaskList can be invoked
      */
     void rephraseEvents(String input) {
@@ -193,7 +190,7 @@ class Storage {
         markTask(input);
     }
     /**
-     * Getter to get the current set of tasks
+     * Gets the current set of tasks
      * @return TaskList<Task>
      */
     TaskList<Task> getTasks() {
