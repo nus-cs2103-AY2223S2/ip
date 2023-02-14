@@ -20,12 +20,11 @@ public class Duke {
      * Constructor for Duke
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage();
         tasks = new TaskList();
         parser = new Parser(tasks);
+        ui = new Ui(parser);
     }
-
 
     /**
      * Greet user and perform command for the tasks they entered and save tasks in file
@@ -40,7 +39,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         String response = "";
-        response = parser.performCommand(input);
+        response = ui.generateReply(input);
         storage.save(this.tasks);
         return response;
     }
