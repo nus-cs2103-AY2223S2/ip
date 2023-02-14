@@ -25,13 +25,13 @@ public class Storage {
         // tries to create a file
         try {
             File newFile = new File(path.toUri());
-            if (newFile.createNewFile()) {
-                // System.out.println("File created: " + newFile.getName());
-            } else {
-                // System.out.println("duke.txt already exists.");
-            }
+            newFile.createNewFile();
+//            if (newFile.createNewFile()) {
+//                // System.out.println("File created: " + newFile.getName());
+//            } else {
+//                // System.out.println("duke.txt already exists.");
+//            }
         } catch (IOException e) {
-            // System.out.println("An error occurred");
             e.printStackTrace();
         }
 
@@ -40,9 +40,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(path.toFile());
             fileWriter.write(stringBuilder.toString());
             fileWriter.close();
-            // System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            // System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }

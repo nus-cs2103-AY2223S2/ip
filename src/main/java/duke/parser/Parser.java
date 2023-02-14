@@ -1,16 +1,10 @@
 package duke.parser;
 
-import duke.storage.Storage;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-import java.util.Scanner;
 public class Parser {
     private TaskList tasksList = new TaskList();
-    private Storage storage = new Storage();
-    // Scanner scanner = new Scanner(System.in);
-
-    // String input = "";
 
     public String getInput(String input) {
         try {

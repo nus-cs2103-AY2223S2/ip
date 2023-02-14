@@ -39,8 +39,6 @@ public class Task {
      */
     public String markAsDone() {
         this.isDone = true;
-//        System.out.println("Nice! I've marked this task as done:");
-//        System.out.println(this);
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Nice! I've marked this task as done:\n");
