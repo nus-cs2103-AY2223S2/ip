@@ -3,8 +3,6 @@ package duke.ui;
 import duke.Duke;
 import duke.TaskException;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -21,8 +19,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
 
     /**
@@ -31,8 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //scrollPane.hvalueProperty().bind(this.widthProperty());
-        dialogContainer.getChildren().add(new Label("Hello, duke here."));
+        dialogContainer.getChildren().add(new DialogBox("Hello, duke here.", true));
     }
 
     public void setDuke(Duke duke) {
@@ -44,9 +39,9 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         try {
             String response = duke.getResponse(input);
-            dialogContainer.getChildren().addAll(new Label(input), new Label(response));
+            dialogContainer.getChildren().addAll(new DialogBox(input, false), new DialogBox(response, true));
         } catch (TaskException e) {
-            dialogContainer.getChildren().addAll(new Label(input), new Label(e.getMessage()));
+            dialogContainer.getChildren().addAll(new DialogBox(input, false), new DialogBox(e.getMessage(), true));
         } finally {
             userInput.clear();
             assert userInput.getText().equals("");
