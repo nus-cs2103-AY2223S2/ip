@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -37,7 +38,7 @@ public class MarkCommand extends Command {
      * @param storage A Storage enabling Duke to store memory.
      * @return String The String message indicating status of action.
      */
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = tasks.markTask(num, true);
         return Ui.markTaskResponse(task);
     }
