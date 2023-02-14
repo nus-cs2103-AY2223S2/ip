@@ -10,6 +10,8 @@ import task.TaskList;
  */
 public class Sort implements Command {
     public static final String FORMAT = "sort";
+    public static final String ERROR = "You have no tasks to sort.";
+    public static final String SUCCESS = "Tasks sorted by date. Current tasks: %s";
 
     private Sort() {
     }
@@ -20,10 +22,10 @@ public class Sort implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
         if (taskList.isEmpty()) {
-            ui.showError("You have no tasks to sort.");
+            ui.showError(ERROR);
         }
         taskList.sort();
-        ui.showReply(String.format("Tasks sorted by date. Current tasks: %s", taskList.toString()));
+        ui.showReply(String.format(SUCCESS, taskList.toString()));
     }
 
     /**
