@@ -27,8 +27,10 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        this.genie = new Genie();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        showGreeting();
+        String greeting = showGreeting(genie);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
     }
 
     public void setDuke(Genie g) {
@@ -50,10 +52,8 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
     @FXML
-    private void showGreeting() {
-        String greeting = "Hello! This is Genie, your personal task tracker!\n";
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting, dukeImage)
-        );
+    private String showGreeting(Genie genie) {
+        String greeting = genie.showGreetingMessage();
+        return greeting;
     }
 }

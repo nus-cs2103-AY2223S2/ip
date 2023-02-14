@@ -18,6 +18,7 @@ public class Parser {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String FIND = "find";
+    private static final String HELP = "help";
 
     /**
      * A constructor for Parser class.
@@ -34,11 +35,14 @@ public class Parser {
         String lowerCaseInput = input.toLowerCase();
         boolean isBye = isBye(lowerCaseInput);
         boolean isList = isList(lowerCaseInput);
+        boolean isHelp = isHelp(lowerCaseInput);
         boolean isTaskRelated = isTaskRelated(lowerCaseInput);
         if (isBye) {
             return new ExitCommand(); // todo exit when bye
         } else if (isList) {
             return new ListCommand();
+        } else if (isHelp) {
+            return new HelpCommand();
         } else if (isTaskRelated) {
             int index;
             String command = isolateCommand(lowerCaseInput);
@@ -74,6 +78,9 @@ public class Parser {
     }
     public boolean isList(String command) {
         return command.equals(LIST);
+    }
+    public boolean isHelp(String command) {
+        return command.equals(HELP);
     }
     public boolean isTaskRelated(String input) {
         String command = isolateCommand(input);
