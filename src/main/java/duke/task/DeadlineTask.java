@@ -26,15 +26,21 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Returns true if the days to the deadline endTime from now is within the given days, false otherwise.
+     * Returns true if the days to the deadline endTime from now is within the given days
+     *      and the deadline is not marked as done, false otherwise.
      *
      * @param maxDays Number of days to the endTime from now in which this method should return true.
-     * @return True if the days to the endTime of this deadline from now is within the given days, false otherwise.
+     * @return True if the days to the endTime of this deadline from now is within the given days
+     *      and the deadline is not marked as done, false otherwise.
      */
     @Override
     public boolean isUpcoming(long maxDays) {
-        long daysBetween = LocalDateTime.now().until(endTime, ChronoUnit.DAYS);
-        return daysBetween <= maxDays && daysBetween >= 0;
+        boolean isEndTimeBeforeNow = LocalDateTime.now().compareTo(endTime) > 0;
+        if (isDone || isEndTimeBeforeNow) {
+            return false;
+        }
+        long fullDaysBetween = LocalDateTime.now().until(endTime, ChronoUnit.DAYS);
+        return fullDaysBetween <= maxDays;
     }
 
     /**

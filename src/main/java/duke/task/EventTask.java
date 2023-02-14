@@ -29,15 +29,21 @@ public class EventTask extends Task {
     }
 
     /**
-     * Returns true if the days to this event's startTime from now is within the given days, false otherwise.
+     * Returns true if the days to this event's startTime from now is within the given days and
+     *      the event is not marked as done, false otherwise.
      *
      * @param maxDays Number of days to the startTime from now in which this method should return true.
-     * @return True if the days to the startTime of this event from now is within the given days, false otherwise.
+     * @return True if the days to the startTime of this event from now is within the given days and the
+     *      event is not marked as done, false otherwise.
      */
     @Override
     public boolean isUpcoming(long maxDays) {
-        long daysBetween = LocalDateTime.now().until(startTime, ChronoUnit.DAYS);
-        return daysBetween <= maxDays && daysBetween >= 0;
+        boolean isStartTimeBeforeNow = LocalDateTime.now().compareTo(endTime) > 0;
+        if (isDone || isStartTimeBeforeNow) {
+            return false;
+        }
+        long fullDaysBetween = LocalDateTime.now().until(startTime, ChronoUnit.DAYS);
+        return fullDaysBetween <= maxDays;
     }
 
     /**
