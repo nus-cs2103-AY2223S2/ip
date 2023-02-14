@@ -41,7 +41,6 @@ public class Ui {
      * Closes the Scanner object and displays end message to the User.
      */
     public String closeCommand() {
-        System.out.println("    Bye. Hope to see you again soon!");
         this.command.close();
         return "    Bye. Hope to see you again soon!";
     }
@@ -59,7 +58,7 @@ public class Ui {
      * Displays the error message from being unable to retrieve
      * task history data.
      */
-    public void showLoadingError() {
-        System.out.println("History unable to be retrieved!");
+    public String showLoadingError() {
+        return "History unable to be retrieved!";
     }
 }
