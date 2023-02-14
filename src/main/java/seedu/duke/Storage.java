@@ -59,7 +59,7 @@ public class Storage {
      */
     public void write(TaskList tasks) throws DukeException {
         try {
-            writeToFile(tasks.tasksList, "data/duke.txt");
+            writeToFile(tasks.tasksList, filePath);
         } catch (IOException e) {
             throw new DukeException("Something went wrong: " + e.getMessage());
         }
@@ -76,7 +76,6 @@ public class Storage {
     public void writeToFile(List<Task> storage, String filePath) throws IOException {
         assert filePath != "" : "File Path should not be empty!";
         FileWriter fw = new FileWriter(filePath);
-
         for (Task element : storage) {
             String mark = "0";
             String tagsString = "";

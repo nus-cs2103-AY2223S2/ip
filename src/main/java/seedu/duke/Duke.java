@@ -5,6 +5,7 @@
 
 package seedu.duke;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,6 +52,7 @@ public class Duke {
     public Duke(String filepath) {
         assert filepath.equals("") : "File path should not be empty";
         ui = new Ui();
+        new File(filepath).getParentFile().mkdirs();
         storage = new Storage(filepath);
         if (!isFind) {
             try {
