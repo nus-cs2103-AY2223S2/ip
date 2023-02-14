@@ -1,8 +1,20 @@
 # User Guide
 Duke is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Duke allows the tracking of various types of tasks including todo list, events and deadlines.
 
-* Table of Contents
-  {:toc}
+- [Quick start](#quick-start)
+- [Features](#features)
+- [Usage](#usage)
+  - [Adding a todo: `todo`](#adding-a-todo--todo)
+  - [Adding a deadline: `deadline`](#adding-a-deadline--deadline)
+  - [Adding a event: `event`](#adding-an-event--event)
+  - [Listing all tasks: `list`](#listing-all-tasks--list)
+  - [Deleting a task: `delete`](#deleting-a-task--delete)
+  - [Finding specific tasks: `find`](#finding-specific-tasks--find)
+  - [Marking a task: `mark`](#marking-a-task--mark)
+  - [Unmarking a task: `unmark`](#unmarking-a-task--unmark)
+  - [Exiting the program: `bye`](#exiting-the-program--bye)
+- [Command summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -10,13 +22,13 @@ Duke is a desktop app for managing tasks, optimized for use via a Command Line I
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Duke.jar` file from [here]().
+1. Download the latest `duke.jar` file from [here](https://github.com/bofeng1999/ip/releases/tag/A-Release).
 
-1. Locate the file and double-click the file to start the application.
+1. Locate the file and launch the application using the command `java -jar duke.jar`.
 
 ![Ui.png](Ui.png)
 
-1. Type the command in the command box and press Enter to execute it.
+1. Type a command in the command box and press Enter to execute it.
 
 1. Refer to the [Features](#features) below for details of each command.
 
