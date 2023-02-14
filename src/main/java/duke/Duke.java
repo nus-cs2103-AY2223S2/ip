@@ -1,5 +1,6 @@
 package duke;
-import duke.Exceptions.NeroException;
+import duke.exceptions.NeroException;
+import duke.task.TaskList;
 
 import java.io.IOException;
 
@@ -11,7 +12,7 @@ public class Duke {
     public static final String DIRECTORY_PATH = "data";
     public static final String FILE_PATH = "data/duke.txt";
     private Storage storage;
-    private TaskList<Task> taskList;
+    private TaskList taskList;
 
     private Parser parser;
     private Ui ui;
@@ -24,7 +25,7 @@ public class Duke {
         try {
             this.taskList = storage.readFile();
         } catch (NeroException e) {
-            this.taskList = new TaskList<Task>();
+            this.taskList = new TaskList();
         }
         this.ui = new Ui();
         this.parser = new Parser();

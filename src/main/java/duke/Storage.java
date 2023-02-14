@@ -1,5 +1,9 @@
 package duke;
-import duke.Exceptions.NeroException;
+import duke.exceptions.NeroException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,8 +34,8 @@ public class Storage {
      * @return Task list containing saved tasks
      * @throws NeroException Throws when file is not found
      */
-    TaskList<Task> readFile() throws NeroException {
-        TaskList<Task> taskList = new TaskList<Task>();
+    TaskList readFile() throws NeroException {
+        TaskList taskList = new TaskList();
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdirs();
@@ -69,7 +73,7 @@ public class Storage {
      * @param taskList Task list containing all current tasks
      * @throws IOException Throws when file is not found
      */
-    void saveFile(TaskList<Task> taskList) throws IOException {
+    void saveFile(TaskList taskList) throws IOException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < taskList.getSize(); i++) {

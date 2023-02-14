@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.Ui;
 
 /**
  * Task is the parent class of ToDo, Event and Deadline. It contains description
@@ -9,6 +11,8 @@ public abstract class Task {
     public static final String SEPARATOR = " | ";
     private String description;
     private boolean isDone;
+
+    protected Ui ui = new Ui();
 
     /**
      * Constructor for Task
@@ -29,25 +33,25 @@ public abstract class Task {
     }
 
 
-    String getDescription() {
+    public String getDescription() {
         return this.description;
     }
     /**
-     * Converts true to 1 and false to 0 to be saved in duke.txt
+     * Converts true to 1 and false to 0 when saving in duke.txt
      * @return 1 if true else 0
      */
-    String convertBoolean() {
+    public String convertBoolean() {
         return (this.isDone) ? "1" : "0";
     }
 
-    String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
     }
 
     /**
      * Sets task as completed
      */
-    void setAsDone() {
+    public void setAsDone() {
         isDone = true;
     }
 
@@ -69,5 +73,6 @@ public abstract class Task {
     }
 
     public abstract String toSave();
+
 }
 

@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 /**
  * ToDo is a subclass of Task. It is the most general as it only
@@ -32,6 +34,7 @@ public class ToDo extends Task {
         return this.getTaskIcon() + SEPARATOR + convertBoolean()
                 + SEPARATOR + this.getDescription();
     }
+
     @Override
     public String toString() {
         return String.format("[%s]%s %s", this.getTaskIcon(), this.getStatusIcon(),

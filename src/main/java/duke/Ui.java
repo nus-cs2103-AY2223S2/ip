@@ -19,9 +19,6 @@ public class Ui {
                 "What would you like to do?";
     }
 
-
-
-
     String printTasksMessage() {
         return "Here are all your tasks!";
     }
@@ -67,7 +64,6 @@ public class Ui {
                 + "\n" + "%s" + "\n" + "Now you have %d tasks in the list!"
                 + "\n", deletedTask, taskListSize);
     }
-
 
     String printFileNotFound() {
         return "File not found :(((";

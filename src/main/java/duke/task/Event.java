@@ -1,5 +1,7 @@
-package duke;
-import duke.Exceptions.NeroException;
+package duke.task;
+import duke.exceptions.IncorrectDateFormatException;
+import duke.exceptions.NeroException;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +15,7 @@ public class Event extends Task {
 
     private LocalDate startDate;
     private LocalDate endDate;
+
 
     /**
      * Constructor for Event
@@ -30,7 +33,7 @@ public class Event extends Task {
             this.endDate = LocalDate.parse(endDate);
             assert this.endDate.isAfter(this.startDate);
         } catch (DateTimeParseException e) {
-            throw new NeroException("Invalid Date!");
+            throw new IncorrectDateFormatException();
         } catch (AssertionError e) {
             throw new NeroException("End date must be after start date!");
         }
@@ -51,7 +54,7 @@ public class Event extends Task {
             this.endDate = LocalDate.parse(endDate.trim());
             assert this.endDate.isAfter(this.startDate);
         } catch (DateTimeParseException e) {
-            throw new NeroException("Invalid Date!");
+            throw new IncorrectDateFormatException();
         } catch (AssertionError e) {
             throw new NeroException("End date must be after start date!");
         }
@@ -65,11 +68,12 @@ public class Event extends Task {
                 + endDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
+
     public String getTaskIcon() {
         return "E";
     }
 
-
+    @Override
     /**
      * @return String with task formatted to be saved into duke.txt
      */

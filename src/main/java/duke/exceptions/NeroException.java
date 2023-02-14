@@ -1,7 +1,7 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 /**
- * Class of exceptions that inherit from Exception
+ * Parent of all other exceptions, thrown in general cases
  */
 public class NeroException extends Exception {
 

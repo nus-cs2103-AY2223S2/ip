@@ -1,6 +1,7 @@
 package duke;
 
-import duke.Exceptions.*;
+import duke.exceptions.*;
+import duke.task.*;
 
 /**
  * Handles the reading and execution of inputs
@@ -13,15 +14,14 @@ public class Parser {
 
     /**
      * Reads input from user and splits it into cases based on Types specified
-     * in enum Types
+     * in enum
      * @param inputString Input from user
      * @param taskList       List containing all current tasks
      * @param ui             Ui that runs output
-     * @return Boolean based on input. Only returns true when command is bye,
-     *     which exits the chat bot. Else, returns false which continues the chat bot
+     * @return String which contains duke's response to the commands
      * @throws NeroException Throws an exception depending on the exception faced
      */
-    String parseCommand(String inputString, TaskList<Task> taskList, Ui ui) throws NeroException {
+    String parseCommand(String inputString, TaskList taskList, Ui ui) throws NeroException {
         try {
             String[] input = inputString.split(" ");
             switch (Enum.valueOf(Types.class, input[0].toUpperCase())) {
@@ -61,26 +61,23 @@ public class Parser {
                 }
             case DEADLINE:
                 try {
+                    //cleanedString contains [description, duration]
                     String[] cleanedString = cleanDeadline(inputString);
-                    String description = cleanedString[0];
-                    String duration = cleanedString[1];
-                    Task newTask = new Deadline(description, duration);
+                    Task newTask = new Deadline(cleanedString[0], cleanedString[1]);
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectFormatException();
+                    throw new IncorrectDeadlineFormatException();
                 }
             case EVENT:
                 try {
+                    //cleanedString contains [description, startDate, endDate]
                     String[] cleanedString = cleanEvent(inputString);
-                    String description = cleanedString[0];
-                    String startDate = cleanedString[1];
-                    String endDate = cleanedString[2];
-                    Task newTask = new Event(description, startDate, endDate);
+                    Task newTask = new Event(cleanedString[0], cleanedString[1], cleanedString[2]);
                     taskList.addTask(newTask);
                     return ui.printAddedTasks(newTask.toString(), taskList.getSize());
                 } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectFormatException();
+                    throw new IncorrectEventFormatException();
                 }
             case DELETE:
                 try {
@@ -92,12 +89,7 @@ public class Parser {
                     throw new IncorrectIndexException(taskList.getSize());
                 }
             case FIND:
-                TaskList<Task> newTaskList = new TaskList<>();
-                for (int i = 0; i < taskList.getSize(); i++) {
-                    if (taskList.get(i).containsWord(input[1])) {
-                        newTaskList.addTask(taskList.get(i));
-                    }
-                }
+                TaskList newTaskList = taskList.findMatchingTasks(input[1]);
                 if (newTaskList.getSize() > 0) {
                     return ui.printMatchingTasks() + "\n" + newTaskList.printTasks();
                 } else {
@@ -113,18 +105,20 @@ public class Parser {
                     if (currTask instanceof ToDo) {
                         return ui.printFailedReschedule();
                     } else if (currTask instanceof Deadline) {
-                        String newDuration = input[3];
-                        Task newDeadline = new Deadline(currTask.getDescription(), newDuration);
-                        taskList.set(taskIndex, newDeadline);
+                        String newDeadline = input[3];
+                        Task newTask = new Deadline(currTask.getDescription(), newDeadline);
+                        taskList.set(taskIndex, newTask);
                         return ui.printSuccessfulReschedule(newDeadline.toString());
                     } else {
                         String startDate = input[3];
                         String endDate = input[5];
-                        Task newEvent = new Event(currTask.getDescription(), startDate, endDate);
-                        taskList.set(taskIndex, newEvent);
-                        return ui.printSuccessfulReschedule(newEvent.toString());
+                        Task newTask = new Event(currTask.getDescription(), startDate, endDate);
+                        taskList.set(taskIndex, newTask);
+                        return ui.printSuccessfulReschedule(newTask.toString());
                     }
                 } catch (IndexOutOfBoundsException e) {
+                    throw new RescheduleException();
+                } catch (NumberFormatException e) {
                     throw new RescheduleException();
                 }
             default:
@@ -135,16 +129,26 @@ public class Parser {
         }
     }
 
+    /**
+     * Performs string cleaning on input from user for Deadline tasks
+     * @param inputString input from user
+     * @return array of strings containing [description of task, deadline of task]
+     */
     String[] cleanDeadline(String inputString) {
         String[] cleanedString = new String[2];
         String[] splitString = inputString.split("/");
         String description = splitString[0].replace("deadline", "");
-        String duration = splitString[1].replace("by", "");
+        String deadline = splitString[1].replace("by", "");
         cleanedString[0] = description;
-        cleanedString[1] = duration;
+        cleanedString[1] = deadline;
         return cleanedString;
     }
 
+    /**
+     * Performs string cleaning on input from user for Event tasks
+     * @param inputString input from user
+     * @return array of strings containing [description of task, start date of task, end date of task]
+     */
     String[] cleanEvent(String inputString) {
         String[] cleanedString = new String[3];
         String[] splitString = inputString.split("/");

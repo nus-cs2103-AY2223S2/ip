@@ -1,13 +1,12 @@
-package duke;
-import duke.Exceptions.NeroException;
+package duke.task;
+import duke.exceptions.NeroException;
 
 import java.util.ArrayList;
 
 /**
  * TaskList stores all current tasks
- * @param <Task>
  */
-public class TaskList<Task> {
+public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
@@ -18,7 +17,7 @@ public class TaskList<Task> {
     }
 
 
-    void addTask(Task task) {
+    public void addTask(Task task) {
         this.taskList.add(task);
     }
 
@@ -26,7 +25,7 @@ public class TaskList<Task> {
      * @param index location of the task in the TaskList
      * @return Task at the index of the TaskList
      */
-    Task get(int index) {
+    public Task get(int index) {
         return taskList.get(index);
     }
 
@@ -35,7 +34,7 @@ public class TaskList<Task> {
      * @param index location of the task to be removed
      * @throws NeroException Throws when index does not exist
      */
-    void removeTask(int index) throws NeroException {
+    public void removeTask(int index) throws NeroException {
         try {
             taskList.remove(index);
         } catch (IndexOutOfBoundsException e) {
@@ -43,7 +42,7 @@ public class TaskList<Task> {
                     + (taskList.size() - 1));
         }
     }
-    void set(int index, Task newTask) throws NeroException {
+    public void set(int index, Task newTask) throws NeroException {
         try {
             taskList.set(index, newTask);
         } catch (IndexOutOfBoundsException e) {
@@ -52,18 +51,29 @@ public class TaskList<Task> {
         }
     }
 
+
+    public TaskList findMatchingTasks(String word) {
+        TaskList newTaskList = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).containsWord(word)) {
+                newTaskList.addTask(taskList.get(i));
+            }
+        }
+        return newTaskList;
+    }
+
     /**
      * Prints the toString of all tasks in the taskList
      */
-    String printTasks() {
+    public String printTasks() {
         String toPrintTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
-            toPrintTasks += taskList.get(i).toString() + "\n";
+            toPrintTasks += String.format("%d. %s", (i + 1), taskList.get(i).toString()) + "\n";
         }
         return toPrintTasks;
     }
 
-    int getSize() {
+    public int getSize() {
         return taskList.size();
     }
 }

@@ -1,5 +1,6 @@
-package duke;
-import duke.Exceptions.NeroException;
+package duke.task;
+import duke.exceptions.IncorrectDateFormatException;
+import duke.exceptions.NeroException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,29 +17,29 @@ public class Deadline extends Task {
      * Constructor for Deadline
      * @param description Details of the Deadline task
      * @param isDone Keeps track of whether the Deadline task is completed
-     * @param duration Due date of the Deadline task, formatted as yyyy-mm-dd
+     * @param deadline Due date of the Deadline task, formatted as yyyy-mm-dd
      * @throws NeroException When the date is entered in the incorrect format (not yyyy-mm-dd)
      */
     public Deadline(String description, boolean isDone,
-            String duration) throws NeroException {
+            String deadline) throws NeroException {
         super(description, isDone);
         try {
-            this.date = LocalDate.parse(duration);
+            this.date = LocalDate.parse(deadline);
         } catch (DateTimeParseException e) {
-            throw new NeroException("Invalid Date!");
+            throw new IncorrectDateFormatException();
         }
     }
 
     /**
      * Similar as above constructor, except it initialises isDone to False by default
      */
-    public Deadline(String description, String duration)
-            throws NeroException {
+    public Deadline(String description, String deadline)
+            throws IncorrectDateFormatException {
         super(description);
         try {
-            this.date = LocalDate.parse(duration.trim());
+            this.date = LocalDate.parse(deadline.trim());
         } catch (DateTimeParseException e) {
-            throw new NeroException("Invalid Date!");
+            throw new IncorrectDateFormatException();
         }
     }
 
@@ -57,6 +58,8 @@ public class Deadline extends Task {
         return "by: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
+
+    @Override
     /**
      * @return String with task formatted to be saved into duke.txt
      */
