@@ -1,20 +1,39 @@
 package duke.tasks;
 
-import duke.Parser;
-
 import java.time.LocalDateTime;
 
+import duke.Parser;
+
+/**
+ * ToDo tasks.
+ */
 public class ToDos extends Task {
 
     private static Integer DAYS_IN_A_WEEK = 7;
+
+    /**
+     * Date when this task is marked completed.
+     */
     private LocalDateTime completionDate = null;
+
+    /**
+     * Date when this task is added.
+     */
     private LocalDateTime addedDate;
 
+    /**
+     * Creates a ToDo task.
+     * Sets added date to current timing, when this method is called.
+     */
     public ToDos(String description) {
         super(description);
         this.addedDate = LocalDateTime.now();
     }
 
+    /**
+     * Creates a ToDo task.
+     * Sets added date according to the date provided from the Storage file.
+     */
     public ToDos(String description, String addedDate) {
         super(description);
         this.addedDate = LocalDateTime.now();
@@ -25,6 +44,10 @@ public class ToDos extends Task {
     public String getStatusIcon() {
         return super.getStatusIcon();
     }
+
+    /**
+     * Parses the LocalDateTime added date to a String.
+     */
     public String parseAddSaving() {
         return Parser.dateTimeSaving(addedDate);
     }

@@ -1,7 +1,8 @@
 package duke.tasks;
 
-import java.time.LocalDateTime;
-
+/**
+ * Encapsulation of the tasks stored in the Chatbot.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

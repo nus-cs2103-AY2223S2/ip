@@ -10,9 +10,19 @@ import duke.tasks.Events;
 import duke.tasks.Task;
 import duke.tasks.ToDos;
 
+/**
+ * Storage to load and save tasks into files.
+ */
 public class Storage {
 
+    /**
+     * File path for saving the tasks.
+     */
     private static String path = "DukeData/tasks.txt";
+
+    /**
+     * Directory Path.
+     */
     private static String dirPath = "DukeData";
 
     /**

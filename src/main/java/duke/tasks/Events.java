@@ -1,21 +1,39 @@
 package duke.tasks;
 
-import duke.Duke;
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.Parser;
 
-import java.time.LocalDateTime;
-
+/**
+ * Event Task.
+ */
 public class Events extends Task {
 
-    static private String DEFAULT_TIME = "2359";
-    static private Integer DAYS_IN_A_WEEK = 7;
+    /**
+     * Default time that will be set, if user does not provide a time.
+     */
+    private static String DEFAULT_TIME = "2359";
+    private static Integer DAYS_IN_A_WEEK = 7;
 
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
+
+    /**
+     * Date when this task is marked completed.
+     */
     private LocalDateTime completionDate = null;
+
+    /**
+     * Date when this task is added.
+     */
     private LocalDateTime addedDate;
 
+    /**
+     * Creates an Event task.
+     * Sets added date to current timing, when this method is called.
+     * @throws DukeException
+     */
     public Events(String description, String startDate, String endDate) throws DukeException {
         super(description);
         this.startDate = Parser.stringToDateTime(startDate);
@@ -26,6 +44,11 @@ public class Events extends Task {
         }
     }
 
+    /**
+     * Creates an Event task.
+     * Sets added date according to the date provided from the Storage file.
+     * @throws DukeException
+     */
     public Events(String description, String startDate, String endDate, String addedDate) throws DukeException {
         super(description);
         this.startDate = Parser.stringToDateTime(startDate);
@@ -54,14 +77,23 @@ public class Events extends Task {
         return super.getDescription();
     }
 
+    /**
+     * Parses the LocalDateTime start date to a String.
+     */
     public String parseStartSaving() {
         return Parser.dateTimeSaving(startDate);
     }
 
+    /**
+     * Parses the LocalDateTime end date to a String.
+     */
     public String parseEndSaving() {
         return Parser.dateTimeSaving(startDate);
     }
 
+    /**
+     * Parses the LocalDateTime added date to a String.
+     */
     public String parseAddSaving() {
         return Parser.dateTimeSaving(addedDate);
     }

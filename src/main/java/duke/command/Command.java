@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command is an abstract class that encapsulates all Commands for the Chatbot.
+ */
 public abstract class Command {
     protected boolean isExit;
     protected String textCmd;

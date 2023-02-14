@@ -6,8 +6,19 @@ import java.util.List;
 
 import duke.tasks.Task;
 
+/**
+ * Stores all the current tasks provided by the user.
+ */
 public class TaskList {
+
+    /**
+     * List to contain all Tasks provided by users.
+     */
     protected List<Task> tasks;
+
+    /**
+     * Keep Track of number of tasks.
+     */
     protected int numTasks;
 
     /**
@@ -103,6 +114,11 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Provides the Statistics and Insights for the user.
+     *
+     * @return ArrayList of the different statistics of the user.
+     */
     public ArrayList<Integer> checkStatistics() {
         ArrayList<Integer> statistics = new ArrayList<>();
         int totalUrgentTasks = 0;
@@ -133,6 +149,12 @@ public class TaskList {
         return statistics;
     }
 
+    /**
+     * Returns all the tasks that contain the specific keyword provided by the user.
+     *
+     * @param keyWord The keyword given by the user.
+     * @return ArrayList of all the tasks that contains the keyword.
+     */
     public ArrayList<Task> getTasksByKeyWord(String keyWord) throws DukeException {
         ArrayList<Task> allFoundTasks = new ArrayList<>();
         for (Task task : tasks) {

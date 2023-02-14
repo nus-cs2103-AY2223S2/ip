@@ -5,11 +5,18 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * FindCommand finds all the tasks in the tasks list with the given keyword.
+ */
 public class FindCommand extends Command {
 
     private static Integer START_INDEX_OF_DESCRIPTION = 5;
 
-
+    /**
+     * Creates a FindCommand.
+     *
+     * @param textCmd user input.
+     */
     public FindCommand(String textCmd) {
         super(textCmd);
     }
@@ -22,6 +29,7 @@ public class FindCommand extends Command {
      * @param storage storage of Duke.
      * @param taskList task list containing all the tasks Duke is tracking.
      * @return the String of all the tasks that contains the keyword.
+     * @throws DukeException
      */
     @Override
     public String execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {

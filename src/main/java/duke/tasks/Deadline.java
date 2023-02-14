@@ -1,23 +1,45 @@
 package duke.tasks;
 
-import duke.Parser;
-
 import java.time.LocalDateTime;
 
+import duke.Parser;
+
+/**
+ * Deadline Task.
+ */
 public class Deadline extends Task {
 
-    static private String DEFAULT_TIME = "2359";
-    static private Integer DAYS_IN_A_WEEK = 7;
+    /**
+     * Default time that will be set, if user does not provide a time.
+     */
+    private static String DEFAULT_TIME = "2359";
+    private static Integer DAYS_IN_A_WEEK = 7;
     protected LocalDateTime dateBy;
+
+    /**
+     * Date when this task is marked completed.
+     */
     private LocalDateTime completionDate = null;
+
+    /**
+     * Date when this task is added.
+     */
     private LocalDateTime addedDate;
 
+    /**
+     * Creates a Deadline task.
+     * Sets added date to current timing, when this method is called.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.dateBy = Parser.stringToDateTime(by);
         this.addedDate = LocalDateTime.now();
     }
 
+    /**
+     * Creates a Deadline task.
+     * Sets added date according to the date provided from the Storage file.
+     */
     public Deadline(String description, String by, String addedDate) {
         super(description);
         this.dateBy = Parser.stringToDateTime(by);
@@ -38,10 +60,16 @@ public class Deadline extends Task {
         return super.getDescription();
     }
 
+    /**
+     * Parses the LocalDateTime deadline date to a String.
+     */
     public String parseBySaving() {
         return Parser.dateTimeSaving(dateBy);
     }
 
+    /**
+     * Parses the LocalDateTime added date to a String.
+     */
     public String parseAddSaving() {
         return Parser.dateTimeSaving(addedDate);
     }

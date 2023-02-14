@@ -3,12 +3,30 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ErrorCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.StatisticsCommand;
+import duke.command.UnmarkCommand;
 
-
+/**
+ * Parser class to convert to appriopriate types.
+ */
 public class Parser {
 
+    /**
+     * Formatter for String to LocalDateTime.
+     */
     private static DateTimeFormatter strFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+    /**
+     * Formatter for LocalDateTime to String.
+     */
     private static DateTimeFormatter ldtFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
 

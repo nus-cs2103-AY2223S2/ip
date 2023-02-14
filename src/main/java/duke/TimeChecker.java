@@ -2,9 +2,20 @@ package duke;
 
 import java.time.format.DateTimeFormatter;
 
+
+/**
+ * Checks and Updates the Time accordingly.
+ */
 public class TimeChecker {
 
+    /**
+     * Default time to be provided in case users do not specify time.
+     */
     private static String DEFAULT_TIME = "2359";
+
+    /**
+     * Time Formatter.
+     */
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
     /**

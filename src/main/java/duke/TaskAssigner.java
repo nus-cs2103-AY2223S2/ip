@@ -9,18 +9,59 @@ import duke.tasks.Events;
 import duke.tasks.Task;
 import duke.tasks.ToDos;
 
+/**
+ * Task Assigner to create the correct task type to be stored.
+ */
 public class TaskAssigner {
 
+    /**
+     * First Index of ToDo Description.
+     */
     private static Integer TODO_DESCRIPTION_INDEX = 5;
+
+    /**
+     * First Index of Deadline Description.
+     */
     private static Integer DEADLINE_DESCRIPTION_INDEX = 9;
+
+    /**
+     * Maximum size limit of String array when split for Deadline User input.
+     */
     private static Integer DEADLINE_MAX_SIZE = 2;
+
+    /**
+     * Length of /ny in user input.
+     */
     private static Integer LENGTH_OF_BY = 4;
+
+    /**
+     * First Index of Event Description.
+     */
     private static Integer EVENT_DESCRIPTION_INDEX = 6;
+
+    /**
+     * Maximum size limit of String array when split for Event User input.
+     */
     private static Integer EVENT_MAX_SIZE = 3;
+
+    /**
+     * Length of /from in user input.
+     */
     private static Integer LENGTH_OF_FROM = 6;
+
+    /**
+     * Length of /to in user input.
+     */
     private static Integer LENGTH_OF_TO = 4;
+
+    /**
+     * Constant to be minused off from index of the end date of event.
+     */
     private static Integer LENGTH_OF_EVENT_END_TIME = 5;
 
+    /**
+     * Keywords to creating all types of tasks.
+     */
     private static ArrayList<String> taskTypes = new ArrayList<>(List.of("todo", "event", "deadline"));
 
 
@@ -111,7 +152,8 @@ public class TaskAssigner {
         try {
             int startIndex = command.indexOf("/from") + LENGTH_OF_FROM;
             int endIndex = command.indexOf("/to") + LENGTH_OF_TO;
-            String startDate = TimeChecker.updateTime(command.substring(startIndex, endIndex - LENGTH_OF_EVENT_END_TIME));
+            String startDate = TimeChecker.updateTime(command.substring(startIndex,
+                    endIndex - LENGTH_OF_EVENT_END_TIME));
             String endDate = TimeChecker.updateTime(command.substring(endIndex));
             String eventDescription = command.substring(EVENT_DESCRIPTION_INDEX, startIndex - LENGTH_OF_FROM);
             return new Events(eventDescription, startDate, endDate);
