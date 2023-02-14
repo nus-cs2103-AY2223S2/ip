@@ -28,7 +28,7 @@ public class Duke {
     private VBox dialogContainer;
     private boolean isExit = false;
 
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yoda.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/yoda.png"));
 
     /**
      * Sets up the Main Window via Duke.
