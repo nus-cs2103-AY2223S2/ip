@@ -113,7 +113,7 @@ public class Storage {
      * @return The List of tasks.
      * @throws FileNotFoundException If file not found.
      */
-    public List<Task> readAddFileContents(String filePath) throws FileNotFoundException {
+    public List<Task> readAddFileContents(String filePath) throws FileNotFoundException, DukeException {
         assert filePath != "" : "File Path should not be empty!";
         File f = new File(filePath);
         List<Task> storage = new ArrayList<>();

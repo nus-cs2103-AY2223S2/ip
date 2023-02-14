@@ -7,7 +7,10 @@ package seedu.duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.stream.Collectors;
+
+import seedu.duke.DukeException;
 
 /**
  * Represents a deadline task. A <code>Deadline</code> object corresponds to a
@@ -24,9 +27,14 @@ public class Deadline extends Task {
      * @param description The description of the deadline task.
      * @param by The deadline of the deadline task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description.trim());
-        this.by = LocalDate.parse(by.trim());
+        try {
+            this.by = LocalDate.parse(by.trim());
+        } catch (DateTimeParseException e) {
+            String message = "Deadline format must be in YYYY-MM-DD format.";
+            throw new DukeException(message);
+        }
     }
 
     /**
