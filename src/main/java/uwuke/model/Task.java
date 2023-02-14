@@ -25,6 +25,10 @@ public abstract class Task {
         return msg;
     }
 
+    public boolean isDone() {
+        return isMarkedDone;
+    }
+
     private String getStatusIcon() {
         char c = isMarkedDone ? 'X' : ' ';
         return String.format("[%c]", c);

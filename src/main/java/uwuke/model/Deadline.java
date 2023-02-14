@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 import uwuke.view.Printer;
 
@@ -13,15 +12,16 @@ public class Deadline extends Task {
 
     private String deadlineString;
     private Optional<LocalDateTime> deadlineTime = Optional.empty();
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     public Deadline(String task, String deadline) {
         super(task);
         this.deadlineString = deadline;
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             this.deadlineTime = Optional.of(LocalDateTime.parse(deadline, formatter));
         } catch (DateTimeParseException e) {
-            Printer.printError("Could not parse date. Ignore this if you weren't trying to input a date!");
+            // // Comment out if this warning gets annoying
+            // Printer.printError("Could not parse date. Ignore this if you weren't trying to input a date!");
         }
     }
 
@@ -30,7 +30,7 @@ public class Deadline extends Task {
         return String.format("%s%s (by: %s)", 
                             "[D]", 
                             super.toString(),
-                            deadlineTime.map(Object::toString).orElse(deadlineString));
+                            deadlineTime.map(dl -> dl.format(formatter)).orElse(deadlineString));
     }
 
     /**
@@ -47,6 +47,6 @@ public class Deadline extends Task {
         LocalDateTime now = LocalDateTime.now();
         boolean isAfterNow = deadline.isAfter(now);
         boolean isMoreThanOneDayFromNow = now.plusDays(1).isAfter(deadline);
-        return isAfterNow && isMoreThanOneDayFromNow;
+        return isAfterNow && isMoreThanOneDayFromNow && !isDone();
     }
 }

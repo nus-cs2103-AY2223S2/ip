@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import uwuke.controller.Advisor;
 import uwuke.controller.Command;
+import uwuke.model.Deadline;
 import uwuke.model.TaskList;
 import uwuke.view.DialogBox;
 import uwuke.view.Printer;
@@ -132,16 +133,26 @@ public class UwUke extends Application {
 
     private static void inititialiseModels() {
         loadTaskFromStorage();
+        remindDeadlines();
     }
 
     private static void loadTaskFromStorage() {
-        tasks = new TaskList(CAPACITY);
         try {
             tasks = Storage.readSavedTasks();
         } catch (Exception e) {
             Printer.printError("Could not load save file or it doesn't exist, creating new task list");
             tasks = new TaskList();
         }
+    }
+
+    private static void remindDeadlines() {
+        // Go through the tasks and if the task is a deadline and is due soon, will remind the user.
+        // Typecast here is safe due to short circuit behaviour of &&
+        tasks.getList().forEach(t -> {
+            if (t instanceof Deadline && ((Deadline) t).isDueSoon()) {
+                Printer.printWithDecorations(t.toString() + " is due in less than 1 day!");
+            }
+        });
     }
 
     /**
