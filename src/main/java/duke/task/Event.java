@@ -49,7 +49,7 @@ public class Event extends Task {
      * @return the status of the Event task with its time formatted.
      */
     @Override
-    public String status() {
+    public String getStatus() {
 
         String status = this.getCompleted() ? "[X] " : "[ ] ";
         return "[" + TYPE_TO_STRING + "]" + status + this.getDetails()
@@ -63,7 +63,7 @@ public class Event extends Task {
      * @return all relevant information of the Event task in an ArrayList of Strings to be saved into the Database.
      */
     @Override
-    public ArrayList<String> data() {
+    public ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>();
         data.add(TYPE_TO_STRING);
         data.add(this.getCompleted() ? "X" : " ");

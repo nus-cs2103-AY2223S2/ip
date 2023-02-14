@@ -22,26 +22,27 @@ public abstract class Task {
         this.details = task;
     }
 
-    public abstract String status();
+    public abstract String getStatus();
+
+    /**
+     * @return all relevant information of the task in an ArrayList of Strings to be saved into the Database.
+     */
+    public abstract ArrayList<String> getData();
 
     public boolean isCompleted() {
         return this.isCompleted;
     }
 
     /** Marks the task as complete. */
-    public void complete() {
+    public void setComplete() {
         this.isCompleted = true;
     }
 
     /** Marks the task as incomplete */
-    public void incomplete() {
+    public void setIncomplete() {
         this.isCompleted = false;
     }
 
-    /**
-     * @return all relevant information of the task in an ArrayList of Strings to be saved into the Database.
-     */
-    public abstract ArrayList<String> data();
 
     public void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;

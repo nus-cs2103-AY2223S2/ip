@@ -42,7 +42,7 @@ public class FindCommand extends Command {
         for (Task task : tasks) {
             if (task.isContains(this.query)) {
                 queriedTasks.append("     ").append(numOfQueriedTasks + 1).append(". ")
-                        .append(task.status()).append("\n");
+                        .append(task.getStatus()).append("\n");
                 numOfQueriedTasks++;
             }
         }

@@ -20,9 +20,8 @@ public class ParserTest {
             fail(); //Should not reach here
         } catch (DukeException e) {
             assertEquals(e.getLocalizedMessage(),
-                    "\n" + "    ____________________________________________________________\n"
-                    + "Sorry I don't think there's a command like that!" + "\n"
-                    + "    ____________________________________________________________\n");
+                    "\n"
+                    + "Sorry I don't think there's a command like that!");
         }
     }
 

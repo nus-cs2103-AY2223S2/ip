@@ -57,69 +57,92 @@ public class Parser {
 
         String keyWord = words[0];
         String commandBody = words[1];
+
         switch (keyWord) {
         case "mark":
-            try {
-                int taskNumber = Integer.parseInt(words[1]);
-                if (taskNumber > lengthOfList || taskNumber <= 0 || commandBody.trim().isEmpty()) {
-                    throw new TaskNumberNotFoundException();
-                }
-                return new MarkCommand(taskNumber);
-            } catch (NumberFormatException e) {
-                throw new TaskNumberNotFoundException();
-            }
-        case "unmark":
+            return parseMarkCommand(commandBody, lengthOfList);
 
-            try {
-                int taskNumber = Integer.parseInt(words[1]);
-                if (taskNumber > lengthOfList || taskNumber <= 0 || commandBody.trim().isEmpty()) {
-                    throw new TaskNumberNotFoundException();
-                }
-                return new UnmarkCommand(taskNumber);
-            } catch (NumberFormatException e) {
-                throw new TaskNumberNotFoundException();
-            }
+        case "unmark":
+            return parseUnmarkCommand(commandBody, lengthOfList);
 
         case "todo":
-
-
-            if (commandBody.trim().isEmpty()) {
-                throw new BlankFieldTodoException();
-            }
-            return new AddToDoCommand(commandBody);
+            return parseAddToDoCommand(commandBody);
 
         case "deadline":
-
-
-            if (words[1].trim().isEmpty()) {
-                throw new BlankFieldDeadlineException();
-            }
-            return new AddDeadlineCommand(commandBody);
+            return parseAddDeadlineCommand(commandBody);
 
         case "event":
+            return parseAddEventCommand(commandBody);
 
-            if (words[1].trim().isEmpty()) {
-                throw new BlankFieldEventException();
-            }
-            return new AddEventCommand(commandBody);
         case "delete":
+            return parseDeleteCommand(commandBody, lengthOfList);
 
-
-            try {
-                int taskNumber = Integer.parseInt(words[1]);
-                if (taskNumber > lengthOfList || taskNumber <= 0 || words[1].trim().isEmpty()) {
-                    throw new TaskNumberNotFoundException();
-                }
-                return new DeleteCommand(taskNumber);
-            } catch (NumberFormatException e) {
-                throw new TaskNumberNotFoundException();
-            }
         case "find":
-            return new FindCommand(commandBody);
+            return parseFindCommand(commandBody);
+
         default:
             throw new UnknownCommandError();
-
         }
     }
 
+    private FindCommand parseFindCommand(String commandBody) {
+        return new FindCommand(commandBody);
+    }
+
+    private DeleteCommand parseDeleteCommand(String commandBody, int lengthOfList) throws TaskNumberNotFoundException {
+        try {
+            int taskNumber = Integer.parseInt(commandBody);
+            if (taskNumber > lengthOfList || taskNumber <= 0 || commandBody.trim().isEmpty()) {
+                throw new TaskNumberNotFoundException();
+            }
+            return new DeleteCommand(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new TaskNumberNotFoundException();
+        }
+    }
+
+    private AddEventCommand parseAddEventCommand(String commandBody) throws BlankFieldEventException {
+        if (commandBody.trim().isEmpty()) {
+            throw new BlankFieldEventException();
+        }
+        return new AddEventCommand(commandBody);
+    }
+
+    private AddDeadlineCommand parseAddDeadlineCommand(String commandBody) throws BlankFieldDeadlineException {
+        if (commandBody.trim().isEmpty()) {
+            throw new BlankFieldDeadlineException();
+        }
+        return new AddDeadlineCommand(commandBody);
+    }
+
+    private AddToDoCommand parseAddToDoCommand(String commandBody) throws BlankFieldTodoException {
+        if (commandBody.trim().isEmpty()) {
+            throw new BlankFieldTodoException();
+        }
+        return new AddToDoCommand(commandBody);
+    }
+
+    private MarkCommand parseMarkCommand(String commandBody, int lengthOfList) throws TaskNumberNotFoundException {
+        try {
+            int taskNumber = Integer.parseInt(commandBody);
+            if (taskNumber > lengthOfList || taskNumber <= 0 || commandBody.trim().isEmpty()) {
+                throw new TaskNumberNotFoundException();
+            }
+            return new MarkCommand(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new TaskNumberNotFoundException();
+        }
+    }
+
+    private UnmarkCommand parseUnmarkCommand(String commandBody, int lengthOfList) throws TaskNumberNotFoundException {
+        try {
+            int taskNumber = Integer.parseInt(commandBody);
+            if (taskNumber > lengthOfList || taskNumber <= 0 || commandBody.trim().isEmpty()) {
+                throw new TaskNumberNotFoundException();
+            }
+            return new UnmarkCommand(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new TaskNumberNotFoundException();
+        }
+    }
 }

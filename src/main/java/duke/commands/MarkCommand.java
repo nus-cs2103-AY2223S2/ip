@@ -34,10 +34,10 @@ public class MarkCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Database database) throws TaskNumberNotFoundException {
         assert this.isActive();
         Task task = taskList.getTask(this.taskNumber);
-        task.complete();
+        task.setComplete();
         ui.response(FRAME
-                + "     Nice! I've marked this task as done:\n"
-                + "       [X] " + task.getDetails() + "\n"
+                + "Nice! I've marked this task as done:\n"
+                + "[X] " + task.getDetails() + "\n"
                 + FRAME);
     }
 

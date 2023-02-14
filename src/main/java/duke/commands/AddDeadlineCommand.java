@@ -46,20 +46,20 @@ public class AddDeadlineCommand extends Command {
         assert this.isActive();
         // Extract deadline date and duke.task item.
         String[] lines = this.commandBody.split(" ");
-        boolean hasBy = false;
+        boolean hasByKeyword = false;
         StringBuilder task = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
         for (String line : lines) {
             if (Objects.equals(line, "/by")) {
-                hasBy = true;
-            } else if (!hasBy) {
+                hasByKeyword = true;
+            } else if (!hasByKeyword) {
                 task.append(" ").append(line);
             } else {
                 deadline.append(" ").append(line);
             }
         }
 
-        if (!hasBy) {
+        if (!hasByKeyword) {
             throw new IncludeByException();
         }
         if (task.toString().trim().isEmpty() || deadline.toString().trim().isEmpty()) {
@@ -70,9 +70,9 @@ public class AddDeadlineCommand extends Command {
             Deadline newDeadline = new Deadline(task.toString(), deadline.toString().stripLeading());
             taskList.addTask(newDeadline);
             ui.response(FRAME + "\n"
-                    + "     Got it. I've added this task:" + "\n"
-                    + "     " + newDeadline.status() + "\n"
-                    + "     Now you have " + taskList.length() + " tasks in the list" + "\n"
+                    + "Got it. I've added this task:" + "\n"
+                    + newDeadline.getStatus() + "\n"
+                    + "Now you have " + taskList.length() + " tasks in the list" + "\n"
                     + FRAME);
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
