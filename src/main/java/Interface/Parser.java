@@ -1,5 +1,9 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
@@ -10,12 +14,6 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 /**
  * Parsers input from user.
@@ -71,13 +69,13 @@ public class Parser {
 
         case "bye":
         case "list":
-            if(inputs.length != 1) {
+            if (inputs.length != 1) {
                 throw new DukeException(Ui.unreadableCommandResponse);
             }
             break;
 
         case "find":
-            if(inputs.length != 1 || splitFromInstruction(inputs[0]).length != 2) {
+            if (inputs.length != 1 || splitFromInstruction(inputs[0]).length != 2) {
                 throw new DukeException(Ui.incompleteFindCommandResponse);
             }
             break;
@@ -85,43 +83,43 @@ public class Parser {
         case "mark":
         case "unmark":
         case "delete":
-            if(inputs.length != 1 || splitFromInstruction(inputs[0]).length != 2) {
+            if (inputs.length != 1 || splitFromInstruction(inputs[0]).length != 2) {
                 throw new DukeException(Ui.incompleteSelectionCommandResponse);
             }
 
             String num = splitFromInstruction(inputs[0])[1];
-            if(!isValidSelection(num)) {
+            if (!isValidSelection(num)) {
                 throw new DukeException(Ui.invalidSelectionCommandResponse);
             }
             break;
 
         case "todo":
-            if(inputs.length != 1 || splitFromInstruction(inputs[0]).length != 2) {
+            if (inputs.length != 1 || splitFromInstruction(inputs[0]).length != 2) {
                 throw new DukeException(Ui.incompleteAddTodoCommandResponse);
             }
             break;
 
         case "deadline":
-            if(inputs.length != 2 || splitFromInstruction(inputs[0]).length != 2) {
+            if (inputs.length != 2 || splitFromInstruction(inputs[0]).length != 2) {
                 throw new DukeException(Ui.incompleteAddDeadlineCommandResponse);
             }
 
             String by = inputs[1].substring(3);
             boolean hasValidBy = isValidTime(by);
-            if(!hasValidBy) {
+            if (!hasValidBy) {
                 throw new DukeException(Ui.invalidTimeResponse);
             }
             break;
 
         case "event":
-            if(inputs.length != 3 || splitFromInstruction(inputs[0]).length != 2) {
+            if (inputs.length != 3 || splitFromInstruction(inputs[0]).length != 2) {
                 throw new DukeException(Ui.incompleteAddEventCommandResponse);
             }
 
             String from = inputs[1].substring(5);
             String to = inputs[2].substring(3);
             boolean hasValidDuration = isValidTime(from, to);
-            if(!hasValidDuration) {
+            if (!hasValidDuration) {
                 throw new DukeException(Ui.invalidTimeResponse);
             }
             break;
@@ -139,10 +137,10 @@ public class Parser {
      */
     private static boolean isValidTime(String... inputs) {
         try {
-            for(String x: inputs) {
+            for (String x: inputs) {
                 LocalDateTime.parse(x, FORMAT);
             }
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;

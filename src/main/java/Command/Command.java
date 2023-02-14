@@ -2,8 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-
 
 /**
  * Represents a command from the user.

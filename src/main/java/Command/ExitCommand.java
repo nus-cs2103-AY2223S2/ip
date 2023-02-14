@@ -29,11 +29,14 @@ public class ExitCommand extends Command {
      * @return String The String message indicating status of action.
      */
     public String execute(TaskList tasks, Storage storage) {
+        boolean isSaved = true;
         try {
             storage.saveData(tasks);
-            return Ui.exitResponse;
+            isSaved = true;
+
         } catch (IOException e) {
-            return Ui.addLineBreak(Ui.unableToSaveErrorMessage, Ui.exitResponse);
+            isSaved = false;
         }
+        return Ui.endResponse(isSaved);
     }
 }
