@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
+
 import duke.Duke;
 import duke.DukeException;
 import duke.task.Event;
@@ -64,11 +66,17 @@ public class AddEventCommand extends Command {
      */
     @Override
     public ReturnCode execute(Duke duke) {
-        duke.addNewTask(new Event(
-                taskDescription,
-                duke.dateTimeParser.parseDateTime(fromStr),
-                duke.dateTimeParser.parseDateTime(toStr)
-        ));
-        return ReturnCode.SUCCESS;
+        try {
+            duke.addNewTask(new Event(
+                    taskDescription,
+                    duke.dateTimeParser.parseDateTime(fromStr),
+                    duke.dateTimeParser.parseDateTime(toStr)
+            ));
+            return ReturnCode.SUCCESS;
+        } catch (DateTimeParseException e) {
+            duke.ui.warn("Sorry, I do not understand the date/time you just provided.");
+            duke.ui.println("Please provide in 'YYYY-MM-DD HH:MM:SS' or 'YYYY-MM-DD HH:MM' format.");
+            return ReturnCode.FAILURE;
+        }
     }
 }

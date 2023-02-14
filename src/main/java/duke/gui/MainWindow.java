@@ -62,8 +62,7 @@ public class MainWindow extends AnchorPane {
             duke.ui.println("Did you spell something wrongly?");
         } catch (DukeException e) {
             duke.ui.warn(e.getMessage());
-        }
-        finally {
+        } finally {
             String response = duke.ui.getRecentMessages();
 
             dialogContainer.getChildren().addAll(

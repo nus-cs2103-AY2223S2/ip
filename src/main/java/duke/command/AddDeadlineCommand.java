@@ -1,11 +1,13 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
+
 import duke.Duke;
 import duke.DukeException;
 import duke.task.Deadline;
 
 /**
- * Handles a request to add an deadline. Parameters of deadline should be provided.
+ * Handles a request to add a Deadline. Parameters of deadline should be provided.
  */
 public class AddDeadlineCommand extends Command {
 
@@ -48,7 +50,13 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public ReturnCode execute(Duke duke) throws DukeException {
-        duke.addNewTask(new Deadline(taskDescription, duke.dateTimeParser.parseDateTime(dueByStr)));
-        return ReturnCode.SUCCESS;
+        try {
+            duke.addNewTask(new Deadline(taskDescription, duke.dateTimeParser.parseDateTime(dueByStr)));
+            return ReturnCode.SUCCESS;
+        } catch (DateTimeParseException e) {
+            duke.ui.warn("Sorry, I do not understand the date/time you just provided.");
+            duke.ui.println("Please provide in 'YYYY-MM-DD HH:MM:SS' or 'YYYY-MM-DD HH:MM' format.");
+            return ReturnCode.FAILURE;
+        }
     }
 }
