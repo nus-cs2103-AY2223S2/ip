@@ -70,9 +70,7 @@ public class TaskHandler {
      * @throws EmptyContentException
      */
     public String eventHandler(String input) throws EmptyContentException {
-        if (input.length() < 7) {
-            throw new EmptyContentException("event");
-        }
+        assert input.length() > 7;
         String[] segments = Parser.extractArgsFromInput(input);
         String item = segments[0];
         String startTime = segments[1];
@@ -92,9 +90,7 @@ public class TaskHandler {
      * @throws EmptyContentException
      */
     public String todoHandler(String input) throws EmptyContentException {
-        if (input.length() < 5) {
-            throw new EmptyContentException("todo");
-        }
+        assert input.length() > 5;
         String[] segments = Parser.extractArgsFromInput(input);
         String item = segments[1];
 
@@ -114,9 +110,7 @@ public class TaskHandler {
      * @throws EmptyContentException
      */
     public String deadlineHandler(String input) throws EmptyContentException {
-        if (input.length() < 9) {
-            throw new EmptyContentException("deadline");
-        }
+        assert input.length() > 9;
         String[] segments = Parser.extractArgsFromInput(input);
         String item = segments[0];
         String deadline = segments[1];
@@ -138,10 +132,8 @@ public class TaskHandler {
      * @throws EmptyContentException
      * @throws InvalidTaskAccessException
      */
-    public String deleteHandler(String input) throws EmptyContentException, InvalidTaskAccessException {
-        if (input.length() < 7) {
-            throw new EmptyContentException("delete");
-        }
+    public String deleteHandler(String input) throws InvalidTaskAccessException {
+        assert input.length() > 7;
         int index = Parser.findIndex(input);
         if (index > content.size() || index < 0) {
             throw new InvalidTaskAccessException();
