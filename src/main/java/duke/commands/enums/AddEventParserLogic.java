@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.commands.enums;
 
 /**
  * Represents if the AddEventCommand parsing logic is within the task, start date or end date.
