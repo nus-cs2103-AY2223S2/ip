@@ -166,5 +166,21 @@ public class TaskHandler {
         return UIText.printFind(TaskList.getWordList());
 
     }
-
+    public String remindHandler() {
+        TaskList.findReminders();
+        List<Task> reminders = TaskList.getRemindList();
+        String allElements = "";
+        for (int i = 0; i < reminders.size(); i++) {
+            if (! reminders.isEmpty()) {
+                allElements = allElements + (i + 1) + ". " + reminders.get(i).toString() + "\n";
+            } else {
+                break;
+            }
+        }
+        if (allElements == "") {
+            return "No upcoming tasks!";
+        } else {
+            return "Here are your tasks for the next 7 days:" + "\n" + allElements;
+        }
+    }
 }

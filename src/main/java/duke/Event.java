@@ -9,6 +9,10 @@ public class Event extends Task {
         this.endTime = Parser.formatDateString(endTime);
     }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
     /**
      * Creates a string representation of the event.
      * @return String object of the event task.
