@@ -8,6 +8,7 @@ import alfred.command.DeleteCommand;
 import alfred.command.EventCommand;
 import alfred.command.ExitCommand;
 import alfred.command.FindCommand;
+import alfred.command.HelpCommand;
 import alfred.command.ListCommand;
 import alfred.command.ListDateCommand;
 import alfred.command.MarkCommand;
@@ -49,6 +50,8 @@ public class Parser {
             return new ExitCommand();
         case ("list"):
             return new ListCommand();
+        case ("help"):
+            return new HelpCommand();
         default:
             throw new InvalidCommandException(command);
         }

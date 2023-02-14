@@ -10,8 +10,6 @@ import alfred.ui.Ui;
  */
 public abstract class Command {
 
-    // Maybe can add storage.write() after every execute command?
-
     /**
      * Executes the command given by manipulating the tasks, updating the storage and displaying
      * any results back to the ui.
