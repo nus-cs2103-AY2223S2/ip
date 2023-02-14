@@ -46,7 +46,7 @@ public class UnmarkCommand implements Command {
             task.setIsDone(false);
 
             ui.showLine();
-            ui.showText("OK, I've marked this task as not done yet:");
+            ui.showText("Okay Sir! I've marked this task as not done yet:");
             ui.showText(task.toString());
             ui.showLine();
 

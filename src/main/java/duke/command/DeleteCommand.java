@@ -45,7 +45,7 @@ public class DeleteCommand implements Command {
             Task removedTask = taskList.deleteTask(taskNo);
 
             ui.showLine();
-            ui.showText("Noted. I've removed this task:");
+            ui.showText("Yes Sir! I've removed this task:");
             ui.showText(removedTask.toString());
             ui.showText(String.format("Now you have %d tasks in the list.", taskList.getTotalTasks()));
             ui.showLine();

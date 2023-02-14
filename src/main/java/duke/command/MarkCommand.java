@@ -46,7 +46,7 @@ public class MarkCommand implements Command {
             task.setIsDone(true);
 
             ui.showLine();
-            ui.showText("Nice! I've marked this task as done:");
+            ui.showText("Well done Sir! I've marked this task as done:");
             ui.showText(task.toString());
             ui.showLine();
 
