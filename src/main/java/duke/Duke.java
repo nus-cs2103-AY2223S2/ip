@@ -1,10 +1,16 @@
 package duke;
 
+/**
+ * The main class of the Duke program.
+ */
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * @param filepath the path of the file to be loaded.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
