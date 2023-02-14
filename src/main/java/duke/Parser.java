@@ -33,10 +33,10 @@ public class Parser {
         String body = "";
 
         boolean isFirstElement = true;
-        for (String str : rawBody.split("\\s+/")) {
+        for (String str : rawBody.split("/")) {
             if (isFirstElement) {
                 isFirstElement = false;
-                body = str;
+                body = str.trim();
                 continue;
             }
             String[] splittedParam = str.split(" +", 2);
