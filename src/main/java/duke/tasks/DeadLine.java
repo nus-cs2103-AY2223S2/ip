@@ -18,17 +18,17 @@ public class DeadLine extends Task {
      */
     public DeadLine(String keyword, String message, Boolean completed) {
         super(keyword, message, completed);
-        String[] separateText = this.description.split(" /by ");
+        String[] separateText = this.taskDescription.split(" /by ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.localDate = LocalDate.parse(separateText[1], formatter);
     }
 
     @Override
     public String provideDetails() {
-        String[] separateText = this.description.split(" /by ");
+        String[] separateText = this.taskDescription.split(" /by ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         String date = localDate.format(formatter);
-        return this.completed ? "[D]" + "[x] " + separateText[0] + " (by: " + date + ")"
+        return this.isComplete ? "[D]" + "[x] " + separateText[0] + " (by: " + date + ")"
                 : "[D]" + "[ ] " + separateText[0] + " (by: " + date + ")";
     }
 }
