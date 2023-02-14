@@ -3,7 +3,7 @@ package task;
 /**
  * The superclass of all kinds of tasks.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String name;
     protected boolean isMarked;
 
@@ -38,5 +38,15 @@ public class Task {
         } else {
             return "[ ] " + this.name;
         }
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        if (this instanceof Deadline && other instanceof Deadline) {
+            Deadline thisDeadline = (Deadline) this;
+            Deadline otherDeadline = (Deadline) other;
+            return thisDeadline.getDeadline().compareTo(otherDeadline.getDeadline());
+        }
+        return this.toString().compareTo(other.toString());
     }
 }

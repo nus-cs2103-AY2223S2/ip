@@ -1,5 +1,6 @@
 package task;
 
+import java.rmi.server.RemoteRef;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -22,11 +23,13 @@ public class Deadline extends Task {
         this.ddl = LocalDate.parse(name.substring(name.indexOf("/by") + 4));
     }
 
+    public LocalDate getDeadline() {
+        return ddl;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString().substring(0, "[ ] ".length())
                 + this.name + " (by: " + ddl.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
-
-
 }

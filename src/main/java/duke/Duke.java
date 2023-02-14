@@ -2,6 +2,7 @@ package duke;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import storage.Storage;
 import task.Command;
@@ -44,7 +45,7 @@ public class Duke {
      * @param taskGiven The task we want to add to the list.
      */
     public void addTask(Task taskGiven) {
-        this.taskList.add(taskGiven);
+        taskList.add(taskGiven);
     }
 
     /**
@@ -128,6 +129,7 @@ public class Duke {
         parser.checkInvalidInput(userInput, command);
 
         if (userInput.equals(parser.convertEnum(Command.LIST))) {
+            Collections.sort(taskList);
             output = taskList.printCurrentTasks();
         } else if (command.equals(parser.convertEnum(Command.MARK))) {
             String[] words = userInput.split(" ");
