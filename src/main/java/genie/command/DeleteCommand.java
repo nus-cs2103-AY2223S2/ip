@@ -14,7 +14,8 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task t = taskList.getTasks().get(index - 1);
         taskList.deleteTask(index - 1);
-        ui.showDeleteTaskMessage(t, taskList.getTasks().size());
+        int taskListSize = taskList.getTasks().size();
+        ui.showDeleteTaskMessage(t, taskListSize);
     }
     @Override
     public boolean isExitCommand() {

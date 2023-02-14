@@ -9,14 +9,6 @@ import java.util.Scanner;
  * Deals with interactions with the user.
  */
 public class Ui {
-
-    // Art generated from: https://patorjk.com/
-    private final static String GENIE_LOGO =
-                    "                       ______                  _       \n" +
-                    "                      / ____/  ___    ____    (_)  ___ \n" +
-                    "                     / / __   / _ \\  / __ \\  / /  / _ \\\n" +
-                    "                    / /_/ /  /  __/ / / / / / /  /  __/\n" +
-                    "                    \\____/   \\___/ /_/ /_/ /_/   \\___/ \n";
     private StringBuilder response;
     /**
      * A constructor for Ui class.
@@ -33,13 +25,6 @@ public class Ui {
     }
 
     /**
-     * Prints Genie logo.
-     */
-    public void bootLogo() {
-        response.append(GENIE_LOGO);
-    }
-
-    /**
      * Prints task list if it is not empty. Otherwise, prints an empty task message.
      * @param tasks
      */
@@ -48,20 +33,12 @@ public class Ui {
             response.append("Here are the tasks in your list:\n");
             for (int i = 1; i <= tasks.size(); i++) {
                 Task t = tasks.get(i - 1);
-                response.append(i + ". " + t.toString() + "\n");
+                String numberedTaskInfo = showNumberedTaskInfo(i, t);
+                response.append(numberedTaskInfo);
             }
         } else {
             showEmptyListMessage();
         }
-    }
-
-    /**
-     * Echos user's input.
-     * @return user's input
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
     }
 
     /**
@@ -135,7 +112,8 @@ public class Ui {
             response.append("Here are the matching tasks in your list:\n");
             for(int i = 1; i <= tasks.size(); i++) {
                 Task t = tasks.get(i - 1);
-                response.append(i + ". " + t.toString() + "\n");
+                String numberedTaskInfo = showNumberedTaskInfo(i, t);
+                response.append(numberedTaskInfo);
             }
         } else {
             showEmptyMatchingTasksMessage();
@@ -149,5 +127,9 @@ public class Ui {
     }
     public void clearResponse() {
         response.setLength(0);
+    }
+    public String showNumberedTaskInfo(int index, Task t) {
+        String numberedTaskInfo = index + ". " + t.toString() + "\n";
+        return numberedTaskInfo;
     }
 }

@@ -13,6 +13,9 @@ import java.util.Scanner;
  * the current task list available for viewing upon using the "list" command.
  */
 public class Storage {
+    private static final char TODO = 'T';
+    private static final char EVENT = 'E';
+    private static final char DEADLINE = 'D';
     private static final String PATH = "./data/duke.txt";
     private static FileWriter fw;
     private ArrayList<String> loadedTasks;
@@ -32,8 +35,7 @@ public class Storage {
      * @throws IOException if an error occurs while loading the data
      */
     //@author mandykqh-reused
-    //Reused from https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then
-    // -create-the-files-in-that-direct
+    //Reused from https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     //with minor modifications
     public TaskList loadData() throws IOException {
         File directory = new File("./data");
@@ -57,20 +59,21 @@ public class Storage {
      */
 
     public TaskList readTextFileToList(File f) throws IOException {
-        Scanner fs = new Scanner(f);
+        Scanner fileString = new Scanner(f);
         TaskList tasks = new TaskList();
-        while (fs.hasNext()) {
-            String strTask = fs.nextLine();
+        //boolean fileHasNext = fileString.hasNext();
+        while (fileString.hasNext()) {
+            String strTask = fileString.nextLine();
             char taskLetter = strTask.charAt(1);
             loadedTasks.add(strTask);
             switch (taskLetter) {
-            case 'T':
+            case TODO:
                 tasks.addToDoFromFile(strTask);
                 break;
-            case 'E':
+            case EVENT:
                 tasks.addEventFromFile(strTask);
                 break;
-            case 'D':
+            case DEADLINE:
                 tasks.addDeadlineFromFile(strTask);
                 break;
             }
@@ -100,7 +103,7 @@ public class Storage {
     public void saveListToFile(ArrayList<Task> list) throws IOException {
             fw = new FileWriter(PATH);
             for(Task t : list) {
-                String formatted = t.toFileFormat(); // format: [X][X] xxx | <from> - <by>
+                String formatted = t.toFileFormat();
                 fw.write(formatted);
                 fw.write("\n");
             }

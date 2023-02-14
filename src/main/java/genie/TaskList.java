@@ -12,6 +12,9 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private static final String TODO = "todo ";
+    private static final String DEADLINE = "deadline ";
+    private static final String EVENT = "event ";
 
     /**
      * A constructor that initialises <code>ArrayList&lt;Task&gt; of size 100.</code>
@@ -34,7 +37,8 @@ public class TaskList {
      * @return task
      */
     public Task addToDoFromUser(String i) {
-        ToDo t = new ToDo(i.replace("todo ", ""));
+        String descOnly = removeCommandFromInput(i, TODO);
+        ToDo t = new ToDo(descOnly);
         storeTask(t);
         return t;
     }
@@ -45,10 +49,11 @@ public class TaskList {
      * @return task
      */
     public Task addToDoFromFile(String sf) {
-        char status = sf.charAt(4);
-        ToDo t = new ToDo(sf.substring(7));
+        char status = statusFromTaskInfo(sf);
+        String desc = removeTypeAndStatus(sf);
+        ToDo t = new ToDo(desc);
         storeTask(t);
-        if (status == 'X') {
+        if (isMarked(status)) {
             t.markDone();
         }
         return t;
@@ -61,7 +66,10 @@ public class TaskList {
      */
     public Task addDeadlineFromUser(String i) {
         String[] contents = i.split(" /by ");
-        Deadline d = new Deadline(contents[0].replace("deadline ", ""), contents[1]);
+        String deadlineTime = contents[1];
+        String commandAndDesc = contents[0];
+        String descOnly = removeCommandFromInput(commandAndDesc, DEADLINE);
+        Deadline d = new Deadline(descOnly, deadlineTime);
         storeTask(d);
         return d;
     }
@@ -71,13 +79,14 @@ public class TaskList {
      * @return task
      */
     public Task addDeadlineFromFile(String sf) {
-        char status = sf.charAt(4);
-        String[] contents = sf.substring(7).split(" \\| ");
-        String deadlineDesc = contents[0];
+        char status = statusFromTaskInfo(sf);
+        String desc = removeTypeAndStatus(sf);
+        String[] contents = splitContents(desc);
+        String descOnly = contents[0];
         String deadlineBy = contents[1];
-        Deadline d = new Deadline(deadlineDesc, deadlineBy);
+        Deadline d = new Deadline(descOnly, deadlineBy);
         storeTask(d);
-        if (status == 'X') {
+        if (isMarked(status)) {
             d.markDone();
         }
         return d;
@@ -89,8 +98,12 @@ public class TaskList {
      */
     public Task addEventFromUser(String i) {
         String[] contents = i.split(" /from ");
-        String[] fromTo = contents[1].split(" /to ");
-        Event e = new Event(contents[0].replace("event ", ""), fromTo[0], fromTo[1]);
+        String[] timings_fromTo = contents[1].split(" /to ");
+        String from = timings_fromTo[0];
+        String to = timings_fromTo[1];
+        String commandAndDesc = contents[0];
+        String descOnly = removeCommandFromInput(commandAndDesc, EVENT);
+        Event e = new Event(descOnly, from, to);
         storeTask(e);
         return e;
     }
@@ -99,16 +112,19 @@ public class TaskList {
      * @param sf .txt input
      * @return task
      */
-    public Task addEventFromFile(String sf) {
-        char status = sf.charAt(4);
-        String[] contents = sf.substring(7).split(" \\| ");
-        String eventDesc = contents[0];
-        String[] eventFromTo = contents[1].split(" - ");
-        String eventFrom = eventFromTo[0];
-        String eventTo = eventFromTo[1];
-        Event e = new Event(eventDesc, eventFrom, eventTo);
+    public Task addEventFromFile(String sf) { // todo load up saved tasks when app starts
+        char status = statusFromTaskInfo(sf);
+        String desc = removeTypeAndStatus(sf);
+        String[] contents = splitContents(desc);
+        String descOnly = contents[0];
+        String timing = contents[1];
+        String[] splitTimings_from_to = timing.split(" - ");
+        String eventFrom = splitTimings_from_to[0];
+        String eventTo = splitTimings_from_to[1];
+
+        Event e = new Event(descOnly, eventFrom, eventTo);
         storeTask(e);
-        if (status == 'X') {
+        if (isMarked(status)) {
             e.markDone();
         }
         return e;
@@ -136,11 +152,30 @@ public class TaskList {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
-            if (t.containsWord(keyword)) {
+            boolean taskContainsKeyword = t.containsWord(keyword);
+            if (taskContainsKeyword) {
                 matchingTasks.add(t);
             }
         }
         return matchingTasks;
     }
     //@@author
+    public String removeCommandFromInput(String input, String command) {
+        String inputWithoutCommand = input.replace(command, "");
+        return inputWithoutCommand;
+    }
+    public char statusFromTaskInfo(String taskInfo) {
+        char status = taskInfo.charAt(4);
+        return status;
+    }
+    public String removeTypeAndStatus(String taskInfo) {
+        String content = taskInfo.substring(7);
+        return content;
+    }
+    public boolean isMarked(char status) {
+        return status == 'X';
+    }
+    public String[] splitContents(String content) {
+        return content.split(" \\| ");
+    }
 }
