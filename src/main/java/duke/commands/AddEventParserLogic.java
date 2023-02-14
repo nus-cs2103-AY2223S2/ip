@@ -1,13 +1,16 @@
 package duke.commands;
 
-public class inStartDateOrEndDate {
+/**
+ * Represents if the AddEventCommand parsing logic is within the task, start date or end date.
+ */
+public enum AddEventParserLogic {
     inTask("T"),
-    inStartDate("D"),
+    inStartDate("S"),
     inEndDate("E");
 
     private final String identifier;
 
-    inStartDateOrEndDate(String identifier) {
+    AddEventParserLogic(String identifier) {
         this.identifier = identifier;
     }
 

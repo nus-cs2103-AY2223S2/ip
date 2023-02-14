@@ -45,39 +45,45 @@ public class AddEventCommand extends Command {
         // State = 0 if extracting duke.task item
         // State = 1 if extracting start date
         // State = 2 if extracting end date
-        int state = 0;
+        AddEventParserLogic state = AddEventParserLogic.inTask;
         StringBuilder task = new StringBuilder();
         StringBuilder startDate = new StringBuilder();
         StringBuilder endDate = new StringBuilder();
+
         for (String line : lines) {
-            if (Objects.equals(line, "/from") && state == 0) {
-                state = 1;
-            } else if (Objects.equals(line, "/to") && state == 1) {
-                state = 2;
-            } else {
-                switch (state) {
-                case 0:
-                    task.append(" ").append(line);
-                    break;
-                case 1:
-                    startDate.append(" ").append(line);
-                    break;
-                case 2:
-                    endDate.append(" ").append(line);
-                    break;
-                default:
-                    //will never reach here.
-                }
+            if (Objects.equals(line, "/from") && state == AddEventParserLogic.inTask) {
+                state = AddEventParserLogic.inStartDate;
+                continue;
+            } else if (Objects.equals(line, "/to") && state == AddEventParserLogic.inStartDate) {
+                state = AddEventParserLogic.inEndDate;
+                continue;
+            }
+
+            switch (state) {
+            case inTask:
+                task.append(" ").append(line);
+                break;
+            case inStartDate:
+                startDate.append(" ").append(line);
+                break;
+            case inEndDate:
+                endDate.append(" ").append(line);
+                break;
+            default:
+                //will never reach here.
             }
         }
-        if (state != 2) {
+
+        if (state != AddEventParserLogic.inEndDate) {
             throw new IncludeToAndFromException();
         }
+
         if (task.toString().trim().isEmpty()
                 || startDate.toString().trim().isEmpty()
                 || endDate.toString().trim().isEmpty()) {
             throw new BlankFieldEventException();
         }
+
         try {
             Event newEvent = new Event(task.toString(), startDate.toString().stripLeading(),
                     endDate.toString().stripLeading());
