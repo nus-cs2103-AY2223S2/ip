@@ -9,13 +9,14 @@
 
 <fx:root maxWidth="1.7976931348623157E308" prefWidth="400.0" spacing="5.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="taskNumber" alignment="TOP_LEFT" maxHeight="Infinity" prefHeight="52.0" prefWidth="20.0" text="Task Number" />
-      <VBox prefHeight="49.0" prefWidth="325.0" spacing="3.0">
+       <Label fx:id="taskNumber" alignment="TOP_LEFT" maxHeight="Infinity" prefHeight="52.0" prefWidth="20.0" text="Task Number" />
+      <VBox prefHeight="49.0" prefWidth="325.0" spacing="3.0" HBox.hgrow="ALWAYS">
          <children>
             <Label fx:id="taskDescription" alignment="TOP_LEFT" maxHeight="Infinity" text="Task Description" wrapText="true">
                <font>
-                  <Font size="14.0" />
-               </font></Label>
+                  <Font size="16.0" />
+               </font>
+            </Label>
             <FlowPane fx:id="taskInfoContainer">
                <children>
                   <Label fx:id="taskType" alignment="TOP_LEFT" maxHeight="Infinity" style="-fx-background-color: #D3D3D3; -fx-background-radius: 10;" text="Task Type" textAlignment="CENTER">

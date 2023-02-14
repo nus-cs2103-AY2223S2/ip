@@ -30,7 +30,7 @@ import twofive.exception.MissingArgumentException;
  */
 public class Parser {
     /**
-     * Ensure a valid task number is provided when performing an action on a specific task.
+     * Ensures a valid task number is provided when performing an action on a specific task.
      *
      * @param input The full command entered by the user.
      * @return int representing the task number.
@@ -48,7 +48,7 @@ public class Parser {
     }
 
     /**
-     * Ensure a valid description is provided when adding a new task.
+     * Ensures a valid description is provided when adding a new task.
      *
      * @param input The full command entered by the user.
      * @param commandWord The command keyword.

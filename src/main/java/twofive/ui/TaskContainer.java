@@ -34,7 +34,9 @@ public class TaskContainer extends VBox {
         for (int i = 0; i < tasks.size(); i++) {
             ArrayList<String> taskDetails = tasks.get(i).getTaskDetails();
             taskDetails.add(0, Integer.toString(i + 1));
-            this.getChildren().add(TaskBox.getTaskBox(taskDetails.toArray(new String[0])));
+            TaskBox newTaskBox = TaskBox.getTaskBox(taskDetails.toArray(new String[0]));
+            newTaskBox.prefWidthProperty().bind(this.widthProperty());
+            this.getChildren().add(newTaskBox);
         }
     }
 }
