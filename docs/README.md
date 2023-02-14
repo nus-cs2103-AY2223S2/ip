@@ -1,25 +1,8 @@
 # User Guide
 ---
 ## Contents
-1. [Hello from Duke!](#hello-from-duke)  
-2. [Getting Started](#🙋‍♂️-getting-started)  
-    - [For Mac Users](#for-mac-users)
-    - [For Windows Users](#for-windows-users)
-3. [Features](#🧐-features)
-4. [Documentation](#📖-documentation)
-    - [Adding a To-Do](#adding-a-to-do-todo-task-description)
-    - [Adding a Deadline](#adding-a-deadline-deadline-task-description-by-date-time)
-    - [Adding an Event](#adding-an-event-event-task-description-from-date-time-to-date-time)
-    - [Viewing all tasks](#view-all-tasks-list)
-    - [Deleting a task](#delete-a-task-delete-task-index)
-    - [Mark or unmark a task](#mark-or-unmark-a-task-mark-task-index-and-unmark-task-index)
-    - [Finding a task](#finding-a-task-find-search-keywords)
-    - [Sorting tasks by name](#sorting-tasks-by-name-sort-name)
-    - [Sorting tasks by date](#sorting-tasks-by-date-sort-date)
-    - [Quitting Duke](#quitting-duke)
-    - [Other behaviours](#other-behaviours)
-5. [Under the Hood](#🛠-under-the-hood)
-6. [Customising Duke: Adding Commands](#👷‍♂️-adding-commands)
+* toc
+{:toc}
 
 ---
 # 👋  Hello from Duke!
@@ -48,8 +31,6 @@ A simple chatbot that manages things you need to do. With all the productivity a
 1. Launch your Powershell and navigate to `Duke.jar` file.
 2. Start Duke with `java -jar Duke.jar`
 
-### Quitting Duke
-1. Simply quit with the `bye` command.
 ---
 # 🧐 Features
 
