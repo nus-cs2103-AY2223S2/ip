@@ -152,7 +152,7 @@ public class Parser {
      * Checks if the input by user to select task is valid.
      *
      * @param num The String input by user.
-     * @return boolean Whether the input by user is valid.
+     * @return boolean Whether the select task input by user is valid.
      */
     private static boolean isValidSelection(String num) {
         try {
