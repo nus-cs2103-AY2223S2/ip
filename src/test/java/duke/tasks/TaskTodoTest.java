@@ -1,13 +1,14 @@
 package duke.tasks;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskTodoTest {
     private static final String TEST_UNESCAPED_DESC = "VERTICAL | BAR";
     private static final String TEST_ESCAPED_DESC = "VERTICAL \\| BAR";
     private static final String TEST_ENCODED_TASK = String.format(
-            "T | 1 | %s", 
+            "T | 1 | %s",
             TaskTodoTest.TEST_ESCAPED_DESC);
 
     private static TaskTodo getTestTask() {
@@ -15,7 +16,7 @@ public class TaskTodoTest {
         task.markAsDone();
         return task;
     }
-    
+
     @Test
     public void equals() {
         assertEquals(TaskTodoTest.getTestTask(), TaskTodoTest.getTestTask());

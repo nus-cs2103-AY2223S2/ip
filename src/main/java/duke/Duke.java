@@ -3,6 +3,7 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.function.Predicate;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidArgumentException;
 import duke.exceptions.DukeInvalidCommandException;
@@ -15,8 +16,6 @@ import duke.tasks.TaskTodo;
 
 /**
  * A simple task list program.
- * 
- * @see https://github.com/nus-cs2103-AY2223S2/ip
  */
 public class Duke {
     private Ui ui = new Ui();
@@ -24,6 +23,9 @@ public class Duke {
     private TaskList tasks;
     private Parser currentCommand;
 
+    /**
+     * Creates a new Duke instance.
+     */
     public Duke() {
         // Attempt to load task list from save file.
         try {
@@ -50,10 +52,10 @@ public class Duke {
             if (!this.ui.hasCommand()) {
                 continue;
             }
-            
+
             String input = this.ui.readCommand();
             this.currentCommand = new Parser(input);
-        
+
             try {
                 switch (this.currentCommand.baseCommand) {
                 case "todo":
@@ -105,14 +107,14 @@ public class Duke {
 
     /**
      * Handles the adding of todo-type tasks by the "todo" command.
-     * 
+     *
      * @throws DukeInvalidArgumentException If no description given.
      */
     private void addTodo() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a todo cannot be empty.");
         }
-        
+
         String description = this.currentCommand.body;
         Task task = new TaskTodo(description);
         this.tasks.add(task);
@@ -123,7 +125,7 @@ public class Duke {
 
     /**
      * Handles the adding of deadline-type tasks by the "deadline" command.
-     * 
+     *
      * @throws DukeInvalidArgumentException If no or invalid description/by-param are given.
      */
     private void addDeadline() throws DukeInvalidArgumentException {
@@ -136,7 +138,7 @@ public class Duke {
         if (this.currentCommand.namedParameters.get("by").isEmpty()) {
             throw new DukeInvalidArgumentException("The \"/by\" parameter of a deadline cannot be empty.");
         }
-        
+
         try {
             String description = this.currentCommand.body;
             Task task = new TaskDeadline(description, this.currentCommand.namedParameters.get("by"));
@@ -152,7 +154,7 @@ public class Duke {
 
     /**
      * Handles the adding of event-type tasks by the "event" command.
-     * 
+     *
      * @throws DukeInvalidArgumentException If no or invalid description/from-param/to-param are given.
      */
     private void addEvent() throws DukeInvalidArgumentException {
@@ -175,8 +177,8 @@ public class Duke {
         try {
             String description = this.currentCommand.body;
             Task task = new TaskEvent(
-                    description, 
-                    this.currentCommand.namedParameters.get("from"), 
+                    description,
+                    this.currentCommand.namedParameters.get("from"),
                     this.currentCommand.namedParameters.get("to"));
             this.tasks.add(task);
             this.ui.show("Got it. I've added this task:\n"
@@ -190,14 +192,14 @@ public class Duke {
 
     /**
      * Handles the marking of tasks as done, by the "mark" command.
-     * 
+     *
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
     private void mark() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
-        
+
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
         int taskIndex = Optional.of(this.currentCommand.body)
                 .filter(isNumeric)
@@ -216,14 +218,14 @@ public class Duke {
 
     /**
      * Handles the marking of tasks as not done, by the "unmark" command.
-     * 
+     *
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
     private void unmark() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
-        
+
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
         int taskIndex = Optional.of(this.currentCommand.body)
                 .filter(isNumeric)
@@ -243,14 +245,14 @@ public class Duke {
 
     /**
      * Handles the deleting of tasks by the "delete" command.
-     * 
+     *
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
     private void delete() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
-        
+
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
         int taskIndex = Optional.of(this.currentCommand.body)
                 .filter(isNumeric)

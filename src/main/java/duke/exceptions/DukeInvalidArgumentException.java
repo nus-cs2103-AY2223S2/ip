@@ -9,4 +9,3 @@ public class DukeInvalidArgumentException extends DukeException {
         super(message);
     }
 }
-

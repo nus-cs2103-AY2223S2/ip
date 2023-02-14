@@ -11,6 +11,13 @@ public class TaskEvent extends Task {
     /** The ending time for this event task. */
     public final LocalDate toTime;
 
+    /**
+     * Creates a new event-type task.
+     *
+     * @param description Event's description.
+     * @param fromTime Event's starting time.
+     * @param toTime Event's ending time.
+     */
     public TaskEvent(String description, String fromTime, String toTime) {
         super(description);
         this.fromTime = LocalDate.parse(fromTime);
@@ -18,9 +25,9 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * Parses a event task that has been encoded into a string, into a 
+     * Parses a event task that has been encoded into a string, into a
      * 'TaskEvent' instance.
-     * 
+     *
      * @param input The encoded event task.
      * @return The event task that was encoded.
      * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
@@ -31,7 +38,7 @@ public class TaskEvent extends Task {
         String description = values[2];
         String fromTime = values[3];
         String toTime = values[4];
-        
+
         TaskEvent output = new TaskEvent(description, fromTime, toTime);
         if (isDone) {
             output.markAsDone();
@@ -41,20 +48,20 @@ public class TaskEvent extends Task {
 
     @Override
     public String encodeAsString() {
-        return Task.encodeValues(new String[]{ 
-                "E", 
-                this.isDone ? "1" : "0", 
-                this.description, 
-                this.fromTime.toString(), 
-                this.toTime.toString() });
+        return Task.encodeValues(new String[]{
+            "E",
+            this.isDone ? "1" : "0",
+            this.description,
+            this.fromTime.toString(),
+            this.toTime.toString() });
     }
 
     @Override
     public String toString() {
         return String.format(
-                "[E]%s (from: %s to: %s)", 
-                super.toString(), 
-                Task.formatDate(this.fromTime), 
+                "[E]%s (from: %s to: %s)",
+                super.toString(),
+                Task.formatDate(this.fromTime),
                 Task.formatDate(this.toTime));
     }
 

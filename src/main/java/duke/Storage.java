@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import duke.exceptions.DukeSaveLoadException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -17,7 +18,7 @@ public class Storage {
 
     /**
      * Initialise a 'Storage' instance.
-     * 
+     *
      * @param filePath The data's save file's path.
      */
     public Storage(String filePath) {
@@ -26,7 +27,7 @@ public class Storage {
 
     /**
      * Reads the contents of a file, and return it.
-     * 
+     *
      * @param filePath The path of the file to be read.
      * @return Contents of the file.
      */
@@ -35,12 +36,12 @@ public class Storage {
             return new String(Files.readAllBytes(Paths.get(filePath)));
         } catch (IOException e) {
             return null;
-        } 
+        }
     }
 
     /**
      * Writes a string into the file (overwriting the old contents).
-     * 
+     *
      * @param filePath The path of the file to be written to.
      * @param content The contents to write into the file.
      * @throws DukeSaveLoadException If there's an error accessing/writing to the file.
@@ -55,7 +56,7 @@ public class Storage {
 
     /**
      * Loads the locally-saved data, and parse it into a 'TaskList' instance.
-     * 
+     *
      * @return The loaded task list from the save file.
      * @throws DukeSaveLoadException If there's an error parsing the save file.
      */
@@ -65,7 +66,7 @@ public class Storage {
         if (saveFileContents == null || saveFileContents.isBlank()) {
             return output;
         }
-        
+
         for (String encodedTask : saveFileContents.split("\n")) {
             Task task = Task.loadFromString(encodedTask);
             output.add(task);
@@ -76,7 +77,7 @@ public class Storage {
 
     /**
      * Saves a task list into a local file, to be loaded later.
-     * 
+     *
      * @param tasks The task list to be saved.
      * @throws DukeSaveLoadException If there's an error accessing/writing to the file.
      */
