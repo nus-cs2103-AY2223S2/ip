@@ -1,0 +1,55 @@
+list
+todo borrow book
+deadline return book /by 2023-01-28
+deadline do homework /by 2023-01-29
+event project meeting /from 2023-02-01 /to 2023-02-02
+event project meeting /to 2023-02-05 /from 2023-02-03
+mark 1
+mark 3
+mark 4
+list
+unmark 1
+unmark 3
+unmark 4
+list
+blah
+unknown-command
+mark
+mark NON-NUMERIC
+mark -1
+mark 0
+mark 999
+unmark
+unmark NON-NUMERIC
+unmark -1
+unmark 0
+unmark 999
+todo
+todo   
+deadline
+deadline   
+deadline DESCRIPTION   
+deadline DESCRIPTION /by   
+deadline DESCRIPTION /by INVALID DATE
+event
+event   
+event DESCRIPTION   
+event DESCRIPTION /from   
+event DESCRIPTION /from FROM TIME   
+event DESCRIPTION /from /to   
+event DESCRIPTION /from FROM TIME /to   
+event DESCRIPTION /to   
+event DESCRIPTION /to TO TIME   
+event DESCRIPTION /to /from   
+event DESCRIPTION /to TO TIME /from   
+event DESCRIPTION /from INVALID DATE /to INVALID DATE
+event DESCRIPTION /from 2023-01-27 /to INVALID DATE
+event DESCRIPTION /from INVALID DATE /to 2023-01-27
+delete 2
+list
+delete
+delete NON-NUMERIC
+delete -1
+delete 0
+delete 999
+quit
