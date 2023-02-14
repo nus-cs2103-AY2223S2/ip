@@ -23,6 +23,12 @@ public class Storage {
     // should have a read, write and search function in this class
 
     private Task taskFromText(String[] s){
+        /**
+         *  Reads the task from the Text.
+         *
+         * @param   s       The text to read the task from
+         * @return  task    Task that the user indicated
+         */
         String type = s[0]; // [T] = todo | [D] = deadline | [E] = event
         boolean isDone = s[1].equals("[X]"); // note that if not done, s[1] will be "["
         String name = "";
@@ -61,6 +67,12 @@ public class Storage {
     }
 
     private LocalDateTime formatDateTime(String s) {
+        /**
+         * Formats the datetime from string
+         *
+         * @param s     The text version of the datetime
+         * @return dateTime the formatted dateTime
+         */
         LocalDateTime dt = null;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
@@ -73,10 +85,13 @@ public class Storage {
 
     public List<Task> load() throws EmptyTaskListException, IOException {
         /**
-         * Loads the currently existing tasks and stuff? not sure
-         * this function goes into the new Tasklist()
-         * if empty return empty task list
-         * if not empty return the task list
+         *  Loads the currently existing tasks and stuff?
+         *  this function goes into the new Tasklist()
+         *  if empty throws EmptyTaskListException
+         *  if not empty return the tasklist current existing
+         *
+         * @param   none
+         * @return  taskList    The currently existing stuff from the save file.
          */
         File taskListText = null;
         List<Task> taskList = new ArrayList<>();
@@ -103,6 +118,12 @@ public class Storage {
     }
 
     public void write(TaskList tl) throws IOException {
+        /**
+         * Writes to the save file
+         *
+         * @param   tl Tasklist
+         * @return  none
+         */
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
         for (int i = 0; i < tl.len(); i++){
             System.out.println(tl.getTaskList().get(i).toString());

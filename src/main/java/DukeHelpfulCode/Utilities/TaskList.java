@@ -19,6 +19,12 @@ public class TaskList {
     private static List<Task> taskList = new ArrayList<>();
 
     public static List<Task> getTaskList() {
+        /**
+         * Returns the current state of the list.
+         *
+         * @param   none
+         * @return  taskList    The current taskList
+         */
         return taskList;
     }
 
@@ -33,7 +39,11 @@ public class TaskList {
 
     public String toString() {
         /**
-         * Returns vertical list of Tasks that is 1-index
+         * Returns the string representation of the current TaskList.
+         *
+         * @param   none
+         * @return  result  String representation of the tasklist
+         *                  Tasks are listed vertically with 1-index
          */
         String result = "";
         for (int i = 0; i < this.taskList.size(); i++){
@@ -43,6 +53,12 @@ public class TaskList {
     }
 
     public void add(Task task){
+        /**
+         * Adds Task to the TaskList.
+         *
+         * @param   task    The task to be added to the list
+         * @return  none
+         */
         if (taskList.contains(task)){
             System.out.println(LINEBREAK + "Oops, it seems that you have already added this Task to your list!\n");
         } else {
@@ -58,7 +74,7 @@ public class TaskList {
          * If i > userList.size(), throw TaskNotInListException.
          * If Task done but "mark" and vice versa, throw TaskAlrMarkException.
          *
-         * @param   isMark     User's command to "mar" or "unmark" a Task as done or not done.
+         * @param   isMark      User's command to "mar" or "unmark" a Task as done or not done.
          * @param   i           The index of the Task to be marked. Note that user input i is 1-index, so -1 is needed.
          */
         if (i > taskList.size()) {
@@ -73,6 +89,13 @@ public class TaskList {
     }
 
     public void delete(int taskNum) throws NoSuchTaskException {
+        /**
+         * Deletes the task selected by the user with the indexing
+         *
+         * @param   taskNum     taskNum is the 1-indexed indexing of the task chosen by the user to be deleted.
+         *                      It is 1-indexed because the dsiplay list is 1-indexed.
+         * @return  none
+         */
         // deletes taskNum-1 indexed task from the list
         if (taskNum > this.len() || taskNum <= 0){
             throw new NoSuchTaskException();
@@ -97,6 +120,12 @@ public class TaskList {
     }
 
     public int len() {
+        /**
+         * Returns the number of Tasks in the TaskList currently.
+         *
+         * @param none
+         * @return none
+         */
         return taskList.size();
     }
 

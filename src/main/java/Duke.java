@@ -6,6 +6,14 @@ import DukeHelpfulCode.Utilities.*;
 import DukeHelpfulCode.Commands.*;
 
 
+/**
+ * The Duke program is adapted DUKE from NUS SoC CS2103
+ * Duke is a glotified to-do list.
+ *
+ * @author  Yuan Hao
+ * @version who knows
+ * @since   11 Feb 2023
+ */
 
 public class Duke {
 
@@ -30,6 +38,12 @@ public class Duke {
     }
 
     public void run() {
+        /**
+         * Runs Duke.
+         *
+         * @param none
+         * @return none
+         */
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

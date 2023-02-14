@@ -16,6 +16,12 @@ public class UI {
 
     public void showWelcome(){
         /**
+         * Prints the welcome message
+         *
+         * @param   none
+         * @return  none
+         */
+        /**
          * Prints the Logo and Welcome Message
          */
         String logo = " ____        _        \n"
@@ -27,6 +33,12 @@ public class UI {
     }
 
     public void showCommands(){
+        /**
+         * Prints the list of commands.
+         *
+         * @param   none
+         * @return  none
+         */
         /**
          * Prints the list of Commands
          */
@@ -45,26 +57,53 @@ public class UI {
 
     public void showLine(){
         /**
-         * Prints the LINEBREAK
+         * Prints Linebreak.
+         *
+         * @param   none
+         * @return  none
          */
         System.out.println(LINEBREAK);
     }
 
     public void exit(){
+        /**
+         * Exits Duke.
+         *
+         * @param   none
+         * @return  none
+         */
         System.out.println(LINEBREAK + "Thanks for using DUKE. Hope you have a great day ahead!");
     }
 
     public void showLoadingError(){
+        /**
+         * Prints error message.
+         *
+         * @param   none
+         * @return  none
+         */
         System.out.println("Oops, there seems to be a problem with loading your previous Task List?\n");
     }
 
     public void showError(String message){
+        /**
+         * Prints the error message
+         *
+         * @param   message The error message to be displayed.
+         * @return  none
+         */
         System.out.println(message);
     }
 
     public void showList(){}
 
     public String readCommand() {
+        /**
+         * Reads the user Command.
+         *
+         * @params  none
+         * @return  command The command that the user inputs.
+         */
         Scanner sc = new Scanner(System.in);
         System.out.println("How may I help you today?\n");
         return sc.nextLine();
