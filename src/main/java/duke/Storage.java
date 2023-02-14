@@ -17,7 +17,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Initialise a 'Storage' instance.
+     * Creates a new 'Storage' instance.
      * 
      * @param filePath The data's save file's path.
      */
