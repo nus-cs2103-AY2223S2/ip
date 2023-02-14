@@ -1,0 +1,11 @@
+D | 0 | test | 2020-02-02
+E | 1 | career fair | 2011-01-01 | 2011-02-02
+T | 1 | homework
+T | 0 | hmw
+D | 0 | homework | 2022-02-02
+D | 0 | hm | 2022-02-02
+E | 0 | hm | 2022-02-02 | 2022-02-02
+E | 0 | valentine's day | 2023-02-14 | 2023-02-14
+T | 0 | aaaa veryyyy longggg taskkk to doooo aiyooo so many things to doo
+T | 0 | vday
+D | 0 | iP | 2022-02-14
