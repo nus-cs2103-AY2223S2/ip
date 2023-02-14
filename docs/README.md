@@ -20,13 +20,15 @@ Duke-Gerty is a chatbot designed to help users keep track of various tasks with 
 
 Ensure you have Java `11` or above installed in your Computer.
 
-Download the latest `Duke-Gerty.jar` from [here](link).
+Download the latest `Duke-Gerty.jar` from [here](https://github.com/kyueran/ip/releases).
 
 Copy the file to the folder you want to use as the home folder for the jar application.
 
 Open a command terminal, cd into the folder you put the jar file in, and use the java -jar `Duke-Gerty.jar` command to run the application.
-A GUI similar to the below should appear. ![Welcome](./Welcome.png)
-
+A GUI similar to the below should appear.
+<div align="center">
+<img src="./Welcome.png" width="100" height="150">
+</div>
 Type the command in the command box and either hit Enter on your keyboard or click `Send` to execute it.
 
 When you first launch the application, you can type in anything and a list of commands
