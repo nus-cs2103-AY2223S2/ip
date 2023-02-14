@@ -56,6 +56,7 @@ public class Ui {
         scrollPane.setFitToWidth(true);
 
         dialogContainer = new VBox();
+
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty().addListener((observable)-> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().addAll(
@@ -96,9 +97,18 @@ public class Ui {
 
     private void handleUserInput() {
         String userCmd = userInput.getText();
-
         Label userText = new Label(userCmd);
+        final String userResponseBorder = "-fx-border-color: grey;\n"
+                + "-fx-border-insets: 5;\n"
+                + "-fx-border-width: 3;\n"
+                + "-fx-border-style: dashed;\n";
+        userText.setStyle(userResponseBorder);
         Label dukeText = new Label(parser.parseCommandWithResponse(userCmd));
+        final String dukeResponseBorder = "-fx-border-color: orange;\n"
+                + "-fx-border-insets: 5;\n"
+                + "-fx-border-width: 3;\n"
+                + "-fx-border-style: dashed;\n";
+        dukeText.setStyle(dukeResponseBorder);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))

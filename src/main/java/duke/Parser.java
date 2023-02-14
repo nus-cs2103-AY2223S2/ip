@@ -120,7 +120,7 @@ public class Parser {
     }
 
     private String processHelpCommand() {
-        String header = "Duke Command Formats:\n";
+        String header = "DUKE MK-II Command Formats:\n";
         String todoCommandFormat = "1) Add a todo task: todo <task description> \n";
         String listCommandFormat = "2) List all tasks: list \n";
         String markCommandFormat = "3) Mark a task as completed: mark <task number> \n";
