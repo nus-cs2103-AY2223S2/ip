@@ -25,6 +25,7 @@ public class DeadlineCommand implements Command {
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         Task newTask = new Deadline(deadlineDescription, deadline);
+        assert newTask != null;
         tasks.addTask(newTask);
         String toDisplay = String.format("Gotcha! I have added this task:\n%s\nNow you have %d tasks in the list.",
                 newTask, tasks.getSize());
