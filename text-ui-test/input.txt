@@ -1,7 +1,0 @@
-todo Buy groceries
-deadline Do homework /by tomorrow
-event CNY /from Saturday /to Tuesday
-list
-mark 3
-unmark 3
-bye

@@ -8,11 +8,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * JavaFX component used to display dialogs for Bob
+ */
 public class DialogBox extends HBox {
-
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Returns an instance of DialogBox with the given text and image to display
+     * @param l Label containing the text to display
+     * @param iv ImageView to display
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

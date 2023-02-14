@@ -48,6 +48,7 @@ public class Storage {
     }
 
     private String encodeTask(Task t) {
+        assert t != null;
         String common = String.format("%s | %s | %s", t.type, t.isDone, t.description);
         StringBuilder encode = new StringBuilder(common);
         switch (t.type) {
@@ -59,6 +60,8 @@ public class Storage {
             Event e = (Event) t;
             encode.append(String.format(" | %s | %s", e.start, e.end));
             break;
+        default:
+            assert false;
         }
         return encode.toString();
     }
@@ -103,6 +106,6 @@ public class Storage {
             writer.flush(); // Write to file
         } catch (Exception e) {
             throw new BobException("Error while saving tasks :(");
-        } 
+        }
     }
 }

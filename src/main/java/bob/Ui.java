@@ -2,11 +2,19 @@ package bob;
 
 import java.util.ArrayList;
 
+/**
+ * Ui is a utility class with methods to return decorated text
+ */
 public class Ui {
     private String wrapper;
 
-    public Ui(String deco, int length) {
-        this.wrapper = deco.repeat(length);
+    /**
+     * Initialize an instance of Ui with a wrapper string made of character repeating length times
+     * @param character Character to repeat
+     * @param length Number of times to repeat the character
+     */
+    public Ui(String character, int length) {
+        this.wrapper = character.repeat(length);
     }
 
     private String getTaskDescription(Task t) {
@@ -18,6 +26,11 @@ public class Ui {
         return String.format("%s\n%s\n%s\n", wrapper, s, wrapper);
     }
 
+    /**
+     * Returns a string that represents a task list
+     * @param list Given task list to output
+     * @return String representation
+     */
     public String printList(ArrayList<Task> list) {
         assert list != null;
         if (list.size() == 0) {

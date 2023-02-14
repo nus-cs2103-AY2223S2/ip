@@ -3,6 +3,9 @@ package bob;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is a type of Task that also tracks the start date and end date
+ */
 public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
