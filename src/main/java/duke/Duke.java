@@ -18,6 +18,9 @@ import duke.tasks.TaskTodo;
  * A simple task list program.
  */
 public class Duke {
+    /** The response to indicate that the app should be closed. */
+    public static final String EXIT_RESPONSE = null;
+
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -299,7 +302,7 @@ public class Duke {
             case "quit":
             case "exit":
             case "bye":
-                return null;
+                return Duke.EXIT_RESPONSE;
             default:
                 throw new DukeInvalidCommandException();
             }
