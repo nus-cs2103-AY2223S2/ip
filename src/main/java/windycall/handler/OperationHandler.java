@@ -1,4 +1,4 @@
-package windycall.Handler;
+package windycall.handler;
 
 public abstract class OperationHandler {
 

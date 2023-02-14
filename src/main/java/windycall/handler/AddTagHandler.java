@@ -1,34 +1,34 @@
-package windycall.Handler;
+package windycall.handler;
+
+import java.util.List;
 
 import javafx.util.Pair;
 import windycall.parser.Parser;
 import windycall.storage.Storage;
 import windycall.task.Task;
 
-import java.util.List;
+public class AddTagHandler extends OperationHandler {
 
-public class UnmarkOperationHandler extends OperationHandler {
     @Override
     public String handle(String userCommand) {
         return "";
     }
 
     public String handle(Parser parser, List<Task> tasks, String[] parts, Storage storage) {
-//        int idx = parser.getUnmarkIndex(parts);
-        Pair<Integer, String> info = parser.getUnmarkIndex(parts);
+        // valid format: tag #index #tag
+        Pair<Integer, String> info = parser.getTagIndex(parts);
         int num = info.getKey();
-        String message = info.getValue();
-        assert num >= 1 && num <= tasks.size();
+        String tag = info.getValue();
         if (num >= 1 && num <= tasks.size()) {
-            tasks.get(num - 1).unmark();
-            String returnedMessage = "Good job! I've unmarked this task as not done yet:\n";
+            tasks.get(num - 1).changeTag(tag);
+            String returnedMessage = "I've successfully added tag #" + tag + " to this task:\n";
             returnedMessage += tasks.get(num - 1);
             storage.handleTaskChange(tasks);
             return returnedMessage;
         } else if (num > tasks.size() || (num < 1 && num != -1)) {
             return "Sorry, your index is out of range";
         } else {
-            return message;
+            return tag;
         }
     }
 }

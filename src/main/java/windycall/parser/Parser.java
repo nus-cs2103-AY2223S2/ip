@@ -2,10 +2,8 @@ package windycall.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import javafx.util.Pair;
-import windycall.Handler.AddDeadlineHandler;
-import windycall.Handler.AddEventHandler;
-import windycall.Handler.AddTodoHandler;
 import windycall.OperationType;
 import windycall.exception.WindyCallException;
 
@@ -124,16 +122,12 @@ public class Parser {
         switch (parts[0]) {
         case "todo":
             return OperationType.TODO;
-//            break;
         case "deadline":
             return OperationType.DEADLINE;
-//            break;
         case "event":
             return OperationType.EVENT;
-//            break;
         default:
             throw new WindyCallException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-//          break;
         }
     }
 

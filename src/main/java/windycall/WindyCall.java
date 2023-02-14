@@ -1,14 +1,20 @@
 package windycall;
 
-import windycall.Handler.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import windycall.exception.WindyCallException;
+import windycall.handler.AddTagHandler;
+import windycall.handler.AddTaskHandler;
+import windycall.handler.DeleteOperationHandler;
+import windycall.handler.FindOperationHandler;
+import windycall.handler.ListOperationHandler;
+import windycall.handler.MarkOperationHandler;
+import windycall.handler.UnmarkOperationHandler;
 import windycall.parser.Parser;
 import windycall.storage.Storage;
 import windycall.task.Task;
 import windycall.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Serves as a trigger of the whole WindyCall chatBox application.

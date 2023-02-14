@@ -56,7 +56,7 @@ public abstract class Task {
 
 
     public String getCurrentDescription() {
-        return "[" + this.getStatusIcon() + "]" + (tag.isEmpty() ? " " : "[#" + tag + "] ") +
-                this.description;
+        return "[" + this.getStatusIcon() + "]" + (tag.isEmpty() ? " " : "[#" + tag + "] ")
+                + this.description;
     }
 }

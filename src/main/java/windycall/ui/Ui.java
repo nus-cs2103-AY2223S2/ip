@@ -1,8 +1,8 @@
 package windycall.ui;
 
-import windycall.task.Task;
-
 import java.util.List;
+
+import windycall.task.Task;
 
 /**
  * Deals with interactions with the user

@@ -1,8 +1,9 @@
-package windycall.Handler;
-import windycall.task.Task;
-import windycall.ui.Ui;
+package windycall.handler;
 
 import java.util.List;
+
+import windycall.task.Task;
+import windycall.ui.Ui;
 
 public class ListOperationHandler extends OperationHandler {
 

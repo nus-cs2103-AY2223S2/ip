@@ -1,8 +1,8 @@
-package windycall.Handler;
+package windycall.handler;
 
+import windycall.exception.WindyCallException;
 import windycall.task.Task;
 import windycall.task.Todo;
-import windycall.exception.WindyCallException;
 
 public class AddTodoHandler extends AddTaskHandler {
 
@@ -16,7 +16,6 @@ public class AddTodoHandler extends AddTaskHandler {
             throw new WindyCallException("OOPS!!! The description of a todo cannot be empty!");
         }
         String description = message.substring(5);
-//        System.out.println("Got it. I've added this Todo task:");
         return new Todo(description, false);
     }
 }

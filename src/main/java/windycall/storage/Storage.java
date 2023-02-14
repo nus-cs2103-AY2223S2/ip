@@ -1,13 +1,5 @@
 package windycall.storage;
 
-import windycall.exception.WindyCallException;
-import windycall.parser.Parser;
-import windycall.ui.Ui;
-import windycall.task.Deadline;
-import windycall.task.Event;
-import windycall.task.Task;
-import windycall.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +7,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+
+import windycall.exception.WindyCallException;
+import windycall.parser.Parser;
+import windycall.task.Deadline;
+import windycall.task.Event;
+import windycall.task.Task;
+import windycall.task.Todo;
+import windycall.ui.Ui;
+
 
 /**
  * Deals with loading tasks from the file and handle tasks change
@@ -76,7 +77,8 @@ public class Storage {
                         try {
                             deadline = Parser.processDate(deadlineStr);
                         } catch (WindyCallException e) {
-
+                            // since load from file
+                            // for sure the format is correct
                         }
                         Task task = new Deadline(description, data.charAt(4) == 'X', deadline);
                         tasks.add(task);
@@ -89,7 +91,8 @@ public class Storage {
                         try {
                             deadline = Parser.processDate(deadlineStr);
                         } catch (WindyCallException e) {
-
+                            // since load from file
+                            // for sure the format is correct
                         }
                         String tag = data.substring(8, idx1 - 1);
                         Task task = new Deadline(description, data.charAt(4) == 'X', deadline, tag);
@@ -108,7 +111,8 @@ public class Storage {
                             from = Parser.processDate(fromStr);
                             to = Parser.processDate(toStr);
                         } catch (WindyCallException e) {
-
+                            // since load from file
+                            // for sure the format is correct
                         }
                         Task task = new Event(description, data.charAt(4) == 'X', from, to);
                         tasks.add(task);
@@ -125,7 +129,8 @@ public class Storage {
                             from = Parser.processDate(fromStr);
                             to = Parser.processDate(toStr);
                         } catch (WindyCallException e) {
-
+                            // since load from file
+                            // for sure the format is correct
                         }
                         String tag = data.substring(8, idx1 - 1);
                         Task task = new Event(description, data.charAt(4) == 'X', from, to, tag);
@@ -155,8 +160,6 @@ public class Storage {
                 myWriter.write(task.getFileFormat());
             }
             myWriter.close();
-//            Ui.space();
-//            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

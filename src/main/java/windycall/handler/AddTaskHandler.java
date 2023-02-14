@@ -1,12 +1,12 @@
-package windycall.Handler;
-
-import windycall.OperationType;
-import windycall.storage.Storage;
-import windycall.task.Task;
-import windycall.exception.WindyCallException;
-import windycall.parser.Parser;
+package windycall.handler;
 
 import java.util.List;
+
+import windycall.OperationType;
+import windycall.exception.WindyCallException;
+import windycall.parser.Parser;
+import windycall.storage.Storage;
+import windycall.task.Task;
 
 public class AddTaskHandler extends OperationHandler {
 
@@ -42,7 +42,6 @@ public class AddTaskHandler extends OperationHandler {
             break;
         default:
             throw new WindyCallException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-//            break;
         }
         String returnedMessage = "Got it. I've added this task:\n";
         returnedMessage += newTask + "\n";

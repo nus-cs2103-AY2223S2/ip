@@ -6,7 +6,9 @@ public class Todo extends Task {
         super(description, status);
     }
 
-    public Todo(String description, boolean status, String tag) { super(description, status, tag); }
+    public Todo(String description, boolean status, String tag) {
+        super(description, status, tag);
+    }
 
     @Override
     public String getTaskTypeIcon() {

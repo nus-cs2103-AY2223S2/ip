@@ -1,9 +1,9 @@
-package windycall.Handler;
+package windycall.handler;
+
+import java.util.List;
 
 import windycall.task.Task;
 import windycall.ui.Ui;
-
-import java.util.List;
 
 public class FindOperationHandler extends OperationHandler {
 

@@ -1,11 +1,11 @@
-package windycall.Handler;
+package windycall.handler;
 
+import java.time.LocalDate;
+
+import windycall.exception.WindyCallException;
 import windycall.parser.Parser;
 import windycall.task.Event;
 import windycall.task.Task;
-import windycall.exception.WindyCallException;
-
-import java.time.LocalDate;
 
 public class AddEventHandler extends AddTaskHandler {
 
