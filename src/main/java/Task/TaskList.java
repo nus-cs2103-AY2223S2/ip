@@ -2,6 +2,8 @@ package duke;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -116,14 +118,9 @@ public class TaskList {
      * @return TaskList The List containing all the related Tasks.
      */
     public TaskList findRelated(String word) {
-        TaskList lst = new TaskList(new ArrayList<>());
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task t = this.tasks.get(i);
-            if (t.isRelated(word)) {
-                lst.tasks.add(t);
-            }
-        }
-        return lst;
+        Stream<Task> filterTasks = this.tasks.stream().filter(s -> s.isRelated(word));
+        ArrayList<Task> lst = filterTasks.collect(Collectors.toCollection(ArrayList::new));
+        return new TaskList(lst);
     }
 
     /**
