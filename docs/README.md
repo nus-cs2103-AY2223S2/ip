@@ -13,7 +13,7 @@ You can skip this step if you have Java 11 or above on your computer.
 
 4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
 
-![](https://raw.githubusercontent.com/Mr-Teal/ip/master/docs/Ui.png)
+![This is an example use of T-Rex task manager](https://raw.githubusercontent.com/Mr-Teal/ip/master/docs/Ui.png)
 
 5. Try typing some commands!
 
