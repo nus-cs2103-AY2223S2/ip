@@ -1,7 +1,20 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hi, I'm duke and I am an automated chat bot
+What would you like to do?
+Got it! I've added this task to the list!
+[T][ ] return book 
+Now you have 1 tasks in the list!
 
+Got it! I've added this task to the list!
+[D][ ]  return book  (by: Sunday)
+Now you have 2 tasks in the list!
+
+Got it! I've added this task to the list!
+[E][ ]  project meeting  (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list!
+
+Great job on completing this task! 
+[D][X]  return book  (by: Sunday)
+Here are all your tasks: 
+1. [T][ ] return book 
+2. [D][X]  return book  (by: Sunday)
+3. [E][ ]  project meeting  (from: Mon 2pm to: 4pm)
