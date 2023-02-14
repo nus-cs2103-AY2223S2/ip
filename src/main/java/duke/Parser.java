@@ -1,6 +1,7 @@
 package duke;
 
 import task.DeadlineTask;
+import task.DurationTask;
 import task.EventTask;
 import task.Task;
 import task.TaskList;
@@ -144,6 +145,28 @@ public class Parser {
 
                 EventTask eventTask = new EventTask(eventName, eventStart, eventEnd);
                 return addTask(eventTask, eventName);
+
+            case "duration":
+                String durationDetails = input.substring(9);
+
+                if (durationDetails.split(" /for ").length < 2) {
+                    throw new DukeException("Hold up, you might be missing something here buddy!");
+                }
+                String durationName = durationDetails.split(" /for ")[0];
+                String durationLength = durationDetails.split(" /for ")[1];
+                int hours = Integer.parseInt(durationLength.split(":")[0]);
+                int mins = Integer.parseInt(durationLength.split(":")[1]);
+
+                if (hours <= 0 && mins <= 0) {
+                    throw new DukeException("Wait, you're giving yourself no time to do this?");
+                }
+
+                if (mins > 59 || mins < 0) {
+                    throw new DukeException("Minutes cannot be more than 59 or less than 0 dear child");
+                }
+
+                DurationTask durationTask = new DurationTask(durationName, hours, mins);
+                return addTask(durationTask, durationName);
 
             case "delete":
                 if (input.split(" ").length < 2) {

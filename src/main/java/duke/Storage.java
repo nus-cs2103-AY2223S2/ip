@@ -1,6 +1,7 @@
 package duke;
 
 import task.DeadlineTask;
+import task.DurationTask;
 import task.EventTask;
 import task.Task;
 import task.TaskList;
@@ -113,6 +114,15 @@ public class Storage {
                         LocalDate start = LocalDate.parse(startStr);
                         LocalDate end = LocalDate.parse(endStr);
                         task = new EventTask(eventName, start, end, complete);
+                        break;
+
+                    case "[Du]":
+                        String durationName = taskDetails.split(" \\( ")[0];
+                        String durationTime = taskDetails.split(" \\( ")[1];
+                        int hours = Integer.parseInt(durationTime.split(" hours")[0]);
+                        String minsStr = durationTime.split(" hours ")[1];
+                        int mins = Integer.parseInt(minsStr.split(" mins ")[0]);
+                        task = new DurationTask(durationName, hours, mins, complete);
                         break;
 
                     default:
