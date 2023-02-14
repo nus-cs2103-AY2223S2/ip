@@ -21,6 +21,8 @@ public class Parser {
             return createDeadline(input);
         } else if (input.startsWith("event")) {
             return createEvent(input);
+        } else if (input.startsWith("fixed")) {
+            return createFixed(input);
         } else if (input.startsWith("delete")) {
             return deleteTask(input);
         } else if (input.startsWith("find")) {
@@ -89,6 +91,24 @@ public class Parser {
         String[] eventData = { taskName, from, to };
 
         return new Command("addEvent", eventData);
+    }
+
+    private Command createFixed(String input) throws DukeException {
+        // Error handling
+        if (input.length() <= 6) {
+            throw new DukeException("FIXED TASK NEEDS A DESCRIPTION!");
+        }
+
+        // Get by String
+        String inputInfo = input.split(" ", 2)[1];
+        String[] fixedData = inputInfo.split(" /time ");
+
+        // Error handling (description or time needed cannot be empty)
+        if (fixedData[0].length() == 0 || fixedData[1].length() == 0) {
+            throw new DukeException("FIXED TASK DESCRIPTION AND TIME NEEDED CANNOT BE EMPTY!");
+        }
+
+        return new Command("addFixed", fixedData);
     }
 
     private Command deleteTask(String input) throws DukeException {

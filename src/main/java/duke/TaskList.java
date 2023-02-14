@@ -44,6 +44,12 @@ public class TaskList {
         return newEvent;
     }
 
+    public FixedTask addFixed(String descrip, String hours) {
+        FixedTask newFixedTask = new FixedTask(descrip, hours);
+        taskArr.add(newFixedTask);
+        return newFixedTask;
+    }
+
     public void removeTask(int index) {
         taskArr.remove(index);
     }

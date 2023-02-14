@@ -47,6 +47,9 @@ public class Command {
             case "addEvent":
                 doEvent(taskList, response);
                 break;
+            case "addFixed":
+                doFixed(taskList, response);
+                break;
             case "deleteTask":
                 doDelete(taskList, response);
                 break;
@@ -105,6 +108,15 @@ public class Command {
         String to = data[2];
         Event newEvent = taskList.addEvent(eventDescrip, from, to);
         response.showAddTask(newEvent);
+        taskList.saveList();
+    }
+
+    private void doFixed(TaskList taskList, Response response) {
+        assert data.length == 2;
+        String fixedDescrip = data[0];
+        String hours = data[1];
+        FixedTask newFixedTask = taskList.addFixed(fixedDescrip, hours);
+        response.showAddTask(newFixedTask);
         taskList.saveList();
     }
 

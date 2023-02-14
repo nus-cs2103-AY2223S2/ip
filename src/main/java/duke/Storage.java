@@ -47,6 +47,9 @@ public class Storage {
                     descrip = task.getDescription() + " | " + ((Event)task).getFromDate()
                             + " | " + ((Event)task).getToDate();
                     break;
+                case "F":
+                    descrip = task.getDescription() + " | " + ((FixedTask)task).getHours();
+                    break;
                 default:
                     descrip = "error";
                 }
@@ -96,6 +99,12 @@ public class Storage {
                     Event e = new Event(descrip, from, to);
                     e.setDone(isMarked);
                     taskArr.add(e);
+                    break;
+                case "F":
+                    String hours = dataArr[3];
+                    FixedTask fixedTask = new FixedTask(descrip, hours);
+                    fixedTask.setDone(isMarked);
+                    taskArr.add(fixedTask);
                     break;
                 }
             }
