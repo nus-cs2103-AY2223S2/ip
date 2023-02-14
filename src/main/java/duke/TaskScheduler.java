@@ -9,6 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+/**
+ * Schedueles recur tasks through the timeline class.
+ * @author Muhammad Reyaaz
+ * @version %I% %G%
+ * @since 11
+ */
 public class TaskScheduler extends TaskList<Recur> {
 
     private final List<Timeline> recurResponse;

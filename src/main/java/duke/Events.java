@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 /**
  * Extends the Task class, representing a task that is a type of event.
  *  @author Muhammad Reyaaz
@@ -10,7 +11,6 @@ import java.time.format.DateTimeParseException;
  *  @see Task
  *  @since 11
  */
-
 class Events extends Task {
 
     protected String from;
