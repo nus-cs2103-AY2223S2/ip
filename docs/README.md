@@ -1,4 +1,15 @@
-# Rick and Duke User Guide
+<style>
+img[src*="Ui"] {
+   width:400px;
+   height:600px;
+    display: flex
+}
+h1, h2, h3, p {
+  font-family: helvetica
+}
+</style>
+
+# Rick and Duke - User Guide
 
 >Listen to me, Morty. I know that new situations can be intimidating. You 
 >lookin’ around and it’s all scary and different, but y’know …
@@ -8,19 +19,21 @@
 Having issues with your memory? Always been wanting to do things, but somehow they are *erased* from your mind?
 Well, that's because you're not using Rick and ~~Morty~~ ***Duuuke***
 
-<style>
-img[src*="Ui"] {
-   width:400px;
-   height:600px;
-    display: flex
-}
-</style>
 <p align="center">
 <img src="Ui.png"/>
 </p>
 
+## Table of Contents
+
+---
+
+- **[Features](#features)**
+- **[Usage](#usage)**
+- **[Frequently Asked Questions](#frequently-asked-questions)**
 
 ## Features 
+
+---
 
 ### Add Tasks
 
@@ -49,6 +62,8 @@ your tasks from elsewhere! This also allows the app to save tasks to storage
 when you quit the app.
 
 ## Usage
+
+---
 
 ### `todo` - Add a Todo task
 
@@ -285,6 +300,8 @@ Rick indicates that the app is closing, and shuts down the app.
 
 ## Frequently Asked Questions
 
+---
+
 **Q**: How do I import a text file?<br/>
 **A**: Here's a view of the file directory where you store your app:
 ```text
@@ -313,3 +330,9 @@ D|0|deadline one|2/2/23 1200
 E|1|event one|2/2/23 1200|3/2/23 1200
 ```
 An improper format may crash the app, and your file may be corrupted.
+
+**Q**: Must I use the graphic interface (GUI)? Can't it be used in a terminal
+environment? <br/>
+**A**: It can! Simply update the `src/main/rick/Rick.java` file to print and
+receive commands from the terminal, instead of sending the responses to the GUI
+package classes.
