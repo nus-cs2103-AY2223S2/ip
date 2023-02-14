@@ -31,14 +31,14 @@ public class AddTaskCommand extends Command {
      */
     @Override
     public String getResponse(TaskList tasks, TaskStore taskStore) {
-        String response = tasks.size() < 4
-                ? ""
-                : tasks.size() > 10
-                        ? "What?!! You're going to dieee!\n"
-                        : "Another task? Phew >:(.\n";
-        response += response + "Added your task: " + this.task + "\n";
-        response += "You have " + tasks.size() + " tasks.";
-        return response;
+        String reaction = "";
+        if (tasks.size() > 10) {
+            reaction = "What?!! You're going to dieee!\n";
+        } else if (tasks.size() > 4) {
+            reaction = "Another task? Phew >:(.\n";
+        }
+        return reaction + "Added your task: " + this.task + "\n"
+                + "You have " + tasks.size() + " tasks.";
     }
     /**
      * {@inheritDoc}

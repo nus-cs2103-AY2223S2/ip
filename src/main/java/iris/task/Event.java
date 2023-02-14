@@ -23,8 +23,8 @@ public class Event extends Task {
     public Event(String name, String from, String to) throws DateTimeException {
         super(name);
         try {
-            this.from = LocalDateTime.parse(from.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-            this.to = LocalDateTime.parse(to.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         } catch (DateTimeParseException e) {
             throw new DateTimeException();
         }
@@ -43,9 +43,7 @@ public class Event extends Task {
      */
     @Override
     public String storageFormat() {
-        return String.join("|", "E", super.storageFormat(),
-                from.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")),
-                to.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))) + "\n";
+        return String.join("|", "E", super.storageFormat(), dateString(from), dateString(to)) + "\n";
     }
 
     /**
@@ -53,8 +51,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: "
-                + from.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a"))
-                + ", to: " + to.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a")) + ")";
+        return "[E]" + super.toString() + " (from: " + dateString(from) + ", to: " + dateString(to) + ")";
     }
 }
