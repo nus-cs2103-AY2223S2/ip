@@ -1,6 +1,8 @@
 # Duke User Guide
 Duke is a personal, lightweight and portable task manager that helps you manage your daily tasks.
 
+![Duke UI](Ui.png)
+
 ## Features 
 
 - Adding 3 types of tasks - Todos, Events, Deadlines
