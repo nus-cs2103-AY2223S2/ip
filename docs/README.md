@@ -4,11 +4,11 @@ prefer the use of Command Line Interface (CLI) while still having the perks of
 Graphical User Interface (GUI). If you are able to type fast, ***Duke*** can help you
 to keep track of tasks and remind you on the due dates.
 
-+ [Quick Start](#Quick-Start)
-+ [Features](#Features)
-+ [Usage](#Usage)
-+ [FAQ](#FAQ)
-+ [Command Summary](#Command-Summary)
++ [Quick Start](https://mrtwit99.github.io/ip#Quick-Start/)
++ [Features](https://mrtwit99.github.io/ip#Features/)
++ [Usage](https://mrtwit99.github.io/ip#Usage/)
++ [FAQ](https://mrtwit99.github.io/ip#FAQ/)
++ [Command Summary](https://mrtwit99.github.io/ip#Command-Summary/)
 
 ## Quick Start
 1. Ensure you have Java `11` or later versions installed in your Computer.
@@ -25,6 +25,7 @@ to keep track of tasks and remind you on the due dates.
 5. (Optional) Alternative method to launch the application is to run via the command terminal.
    1. Type `cmd` on your desktop search bar to locate and open the command prompt.
    2. Type `java -jar duke.jar` to launch the application!
+
       ```ruby
       java -jar duke.jar
       ```
