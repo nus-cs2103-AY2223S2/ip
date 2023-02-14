@@ -10,7 +10,7 @@ public class Deadline extends Task {
     public Deadline(String description, String deadline) {
         super(description);
         
-        this.deadline = LocalDate.parse()
+        this.deadline = LocalDate.parse(deadline);
 
     }
 

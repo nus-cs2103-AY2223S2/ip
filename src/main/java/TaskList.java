@@ -17,6 +17,10 @@ public class TaskList {
 
     }
 
+    public int getNumberOfTasks() {
+        return this.list.size();
+    }
+
     public void addTask(Task task) {
         this.list.add(task);
         System.out.println("Got it! I have added the following task: \n    " + task.toString());
@@ -33,6 +37,8 @@ public class TaskList {
         numberDone++;
 
     }
+
+
 
     public void markUndone(int taskNumber) {
         int indexAdjustedTaskNumber = taskNumber - 1;
@@ -58,13 +64,15 @@ public class TaskList {
 
     }
 
-    public void updateTasksInFile () throws IOException {
-        PrintWriter logger = new PrintWriter("Task Data.txt");
-        for (int i = 0; i < this.list.size(); i++) {
-            logger.write(this.list.get(i) + "\n");
-        }
-        logger.close();
+    public Task getTaskAtIndex (int index) throws IOException {
+       return this.list.get(index);
     }
+
+    public Task getLatestTask() {
+        return this.list.get(this.list.size() - 1);
+    }
+
+
 
     public void deleteTask(int taskNumber) {
         System.out.println("Noted! I have deleted this task: \n" + this.list.get(taskNumber - 1));

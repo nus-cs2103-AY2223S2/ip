@@ -11,6 +11,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
+        Storage storage = new Storage();
         String home = System.getProperty("user.home");
         File Task_Data = new File("Task Data.txt");
         try {
@@ -145,75 +146,8 @@ public class Duke {
 
 
 
-            /*if (userInput.equals("list")) {
-                horizontalLine();
-                list.printItems();
-                list.getTaskDetails();
-                horizontalLine();
-                userInput = scanner.nextLine();
-                continue;
-            } else if (userInputComponents[0].equals("mark") ||
-                       userInputComponents[0].equals("unmark")) {
-                String taskStatus = userInputComponents[0];
-                int taskNumber = Integer.parseInt(userInputComponents[1]);
-                if (taskStatus.equals("mark")) {
-                    horizontalLine();
-                    list.markDone(taskNumber);
-                    list.getTaskDetails();
-                    horizontalLine();
-                } else if (taskStatus.equals("unmark")) {
-                    horizontalLine();
-                    list.markUndone(taskNumber);
-                    list.getTaskDetails();
-                    horizontalLine();
-                }
-                userInput = scanner.nextLine();
-                continue;
-            } else if (userInputComponents[0].equals("todo")) {
-                try {
-                    horizontalLine();
-                    list.addTask(new ToDo(userInput.substring(5)));
-                    list.getTaskDetails();
-                    horizontalLine();
-                    userInput = scanner.nextLine();
-                    continue;
-                } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("The description of todo cannot be empty!");
-                    userInput = scanner.nextLine();
-                    continue;
-                }
-            } else if (userInputComponents[0].equals("deadline")) {
-                String[] splitDeadline = userInput.split("/");
-                String description = splitDeadline[0].substring(9);
-                String deadline = splitDeadline[1];
-                horizontalLine();
-                list.addTask(new Deadline(description, deadline));
-                list.getTaskDetails();
-                horizontalLine();
-                userInput = scanner.nextLine();
-                continue;
 
-            } else if (userInputComponents[0].equals("event")) {
-                String[] splitTimes = userInput.split("/");
-                String description = splitTimes[0].substring(6);
-                String startDayTime = splitTimes[1];
-                String endDayTime = splitTimes[2];
-                horizontalLine();
-                list.addTask(new Event(startDayTime, endDayTime, description));
-                list.getTaskDetails();
-                horizontalLine();
-                userInput = scanner.nextLine();
-                continue;
-            } else if (userInputComponents[0].equals("delete")) {
-                horizontalLine();
-                list.deleteTask(Integer.parseInt(userInputComponents[1]));
-                horizontalLine();
-                userInput = scanner.nextLine();
-                continue;
-            } else {
-                System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
-                userInput = scanner.nextLine();
-            } */
+
 
 
         }
@@ -236,14 +170,7 @@ public class Duke {
 
     }
 
-    public static void logTaskData(TaskList list) {
-        try {
-            list.updateTasksInFile();
 
-        } catch (IOException e) {
-            System.out.println("File does not exist");
-        }
-    }
 
 
 
