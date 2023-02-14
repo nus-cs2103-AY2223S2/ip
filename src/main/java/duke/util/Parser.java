@@ -88,13 +88,10 @@ public class Parser {
             String[] eventDetails = getCommandDetails(userInput).split(" /from ", 2);
             String eventDescription = eventDetails[0];
             String eventPeriod = eventDetails.length > 0 ? eventDetails[1] : null;
-
             if (eventPeriod == null) {
                 throw new DukeException("Enter a valid event period!");
             }
-
             String[] splitEventPeriod = eventPeriod.split(" /to ");
-
             if (splitEventPeriod.length < 2) {
                 throw new DukeException("Enter a valid event period!");
             }

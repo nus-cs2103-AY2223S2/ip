@@ -36,8 +36,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + "[" + this.getStatusIcon() + "] " + this.getDescription()
-                + " (from: " + this.fromDateTime.format(DATE_TIME_FORMATTER)
-                + " to: " + this.toDateTime.format(DATE_TIME_FORMATTER) + ")";
+        return String.format("[E][%s] %s (From: %s, To: %s)", this.getStatusIcon(), this.getDescription(),
+                this.fromDateTime.format(DATE_TIME_FORMATTER), this.toDateTime.format(DATE_TIME_FORMATTER));
     }
 }

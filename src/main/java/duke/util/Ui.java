@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
-
 /**
  * Interacts with the user by displaying messages.
  */

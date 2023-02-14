@@ -16,9 +16,16 @@ import duke.task.Todo;
  */
 public class Storage {
     private String filePath;
+    private Ui ui;
 
-    public Storage(String filePath) {
+    /**
+     * A constructor for Storage.
+     * @param filePath The file path of the data file.
+     * @param ui The current Ui that is running.
+     */
+    public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
+        this.ui = ui;
     }
 
     /**
@@ -73,7 +80,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            ui.displayMessage("Error loading data file!");
         }
         return tasks;
     }
@@ -81,9 +88,8 @@ public class Storage {
     /**
      * Stores the current tasks as data into data file.
      * @param tasks An ArrayList of current tasks.
-     * @throws DukeException If file cannot be located or created.
      */
-    public void saveData(ArrayList<Task> tasks) throws DukeException {
+    public void saveData(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (Task task : tasks) {
@@ -91,7 +97,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Error creating or finding file!");
+            ui.displayMessage("Error creating or finding file!");
         }
     }
 }

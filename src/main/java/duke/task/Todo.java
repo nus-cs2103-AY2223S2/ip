@@ -18,6 +18,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return String.format("[T][%s] %s", this.getStatusIcon(), this.getDescription());
     }
 }
