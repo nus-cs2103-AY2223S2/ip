@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.util.stream.IntStream;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.stream.IntStream;
 
 /**
  * Command to list all tasks.
@@ -39,11 +39,18 @@ public class ListCommand implements Command {
         assert args.length == 0;
 
         ui.showLine();
-        ui.showText("Here are the tasks in your list:");
 
-        IntStream.rangeClosed(1, taskList.getTotalTasks())
-                .forEach(taskNo -> ui.showText(
-                        String.format("%d. %s", taskNo, taskList.getTask(taskNo).toString())));
+        if (taskList.getTotalTasks() == 0) {
+            ui.showText("There are no tasks in your list, Sir!");
+        } else {
+            ui.showText("Here are the tasks in your list, Sir:");
+
+            IntStream.rangeClosed(1, taskList.getTotalTasks())
+                    .forEach(taskNo -> ui.showText(
+                            String.format("%d. %s", taskNo, taskList.getTask(taskNo).toString())));
+
+        }
+
         ui.showLine();
     }
 }

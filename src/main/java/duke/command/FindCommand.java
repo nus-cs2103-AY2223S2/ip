@@ -1,10 +1,7 @@
 package duke.command;
 
-import java.util.List;
-
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -46,11 +43,17 @@ public class FindCommand implements Command {
 
         ui.showLine();
 
-        ui.showText("Here are the matching tasks in your list:");
+        if (taskList.getTotalTasks() == 0) {
+            ui.showText("There are no tasks for me to search, Sir!");
+        } else {
+            ui.showText("Let me try to search your tasks, Sir:");
 
-        taskList.getAllTasks().stream()
-                .filter(task -> task.getDescription().contains(textToFind))
-                .forEach(task -> ui.showText(String.format("%s", task)));
+            taskList.getAllTasks().stream()
+                    .filter(task -> task.getDescription().contains(textToFind))
+                    .forEach(task -> ui.showText(String.format("%s", task)));
+
+            ui.showText("My search has completed, Sir!");
+        }
 
         ui.showLine();
     }
