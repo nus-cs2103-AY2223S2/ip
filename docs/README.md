@@ -86,7 +86,7 @@ Got it. I've added this task:
 Now you have ... tasks in the list.
 ```
 
-### `Mark / Unmark' - Describe action
+### `Mark / Unmark' - Mark/Unmark task
 
 You need to have tasks in your list in the first place.
 
