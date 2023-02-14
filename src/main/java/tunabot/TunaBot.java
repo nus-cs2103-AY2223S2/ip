@@ -8,6 +8,7 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.application.Platform;
 import tunabot.exceptions.InputException;
+import tunabot.gui.Gui;
 
 
 /**
@@ -41,7 +42,7 @@ public class TunaBot {
     public static void main(String[] args) {
         Application.launch(Gui.class, args);
     }
-    String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             String output = Parser.parse(input, tasks);
             if (input.equals("bye")) {

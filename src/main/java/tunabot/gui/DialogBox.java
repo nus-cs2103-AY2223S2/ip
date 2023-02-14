@@ -1,4 +1,4 @@
-package tunabot;
+package tunabot.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -49,10 +49,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the dialog box for the user with given text and image
+     * @param text String entered by user
+     * @param img User picture
+     * @return Dialog box for the user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Retyrns the dialog box for TunaBot
+     * @param text String returned by the parser
+     * @param img TunaBot picture
+     * @return Dialog box for TunaBot
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

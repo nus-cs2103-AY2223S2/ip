@@ -55,26 +55,11 @@ public class Parser {
             int index = Integer.parseInt(details[0]) - 1;
             Task updateTask = tasks.get(index);
             if (updateTask instanceof Event) {
-                Event updateEvent = (Event) updateTask;
-                if (details.length < 4) {
-                    throw new InputException("BLUB! Updating an Event needs a new name,"
-                        + " new start date and new end date!");
-                }
-                updateEvent.setName(details[1]);
-                updateEvent.setStart(details[2]);
-                updateEvent.setEnd(details[3]);
+                eventUpdate(details, (Event) updateTask);
             } else if (updateTask instanceof Deadline) {
-                Deadline updateDeadline = (Deadline) updateTask;
-                if (details.length < 3) {
-                    throw new InputException("BLUB! Updating a Deadline needs a new name and new deadline!");
-                }
-                updateDeadline.setName(details[1]);
-                updateDeadline.setDeadline(command[2]);
+                deadlineUpdate(command, details, (Deadline) updateTask);
             } else {
-                if (details.length < 2) {
-                    throw new InputException("BLUB! Updating a Task needs a new name!");
-                }
-                updateTask.setName(details[1]);
+                updateTask(details, updateTask);
             }
             return "Task has been updated!\n" + Ui.list(tasks);
         } catch (IllegalArgumentException e) {
@@ -82,6 +67,33 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InputException("BLUB! Task chosen isn't on the list!");
         }
+    }
+
+    private static void updateTask(String[] details, Task updateTask) throws InputException {
+        if (details.length < 2) {
+            throw new InputException("BLUB! Updating a Task needs a new name!");
+        }
+        updateTask.setName(details[1]);
+    }
+
+    private static void deadlineUpdate(String[] command, String[] details, Deadline updateTask) throws InputException {
+        Deadline updateDeadline = updateTask;
+        if (details.length < 3) {
+            throw new InputException("BLUB! Updating a Deadline needs a new name and new deadline!");
+        }
+        updateDeadline.setName(details[1]);
+        updateDeadline.setDeadline(command[2]);
+    }
+
+    private static void eventUpdate(String[] details, Event updateTask) throws InputException {
+        Event updateEvent = updateTask;
+        if (details.length < 4) {
+            throw new InputException("BLUB! Updating an Event needs a new name,"
+                + " new start date and new end date!");
+        }
+        updateEvent.setName(details[1]);
+        updateEvent.setStart(details[2]);
+        updateEvent.setEnd(details[3]);
     }
 
     private static String find(TaskList tasks, String[] command) throws InputException {

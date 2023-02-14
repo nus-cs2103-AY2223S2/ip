@@ -1,4 +1,4 @@
-package tunabot;
+package tunabot.gui;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tunabot.TunaBot;
 
 /**
  * Class that handles the GUI for user interaction.
@@ -22,8 +23,7 @@ public class Gui extends Application {
     }
 
     /**
-     * Overrides the {@code start} method for JavaFx.
-     *
+     * Overrides the start method for JavaFx.
      * @param stage the primary stage for this application, onto which the application scene can be
      *         set.
      */

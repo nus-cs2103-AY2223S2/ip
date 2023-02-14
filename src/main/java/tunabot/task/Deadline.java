@@ -31,7 +31,7 @@ public class Deadline extends Task {
      * Initializes new Deadline with the given name, status and deadline
      * @param name Name of Deadline
      * @param isDone Status of Deadline
-     * @param deadline Deadline of Deadline
+     * @param deadline Date of Deadline
      */
     public Deadline(String name, String isDone, String deadline) throws InputException {
         super(name, isDone);
@@ -55,10 +55,16 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         return deadline.format(formatter);
     }
+
+    /**
+     * Returns a string representation of the deadline that matches the format used in the save file
+     * @return save file friendly format
+     */
     @Override
     public String saveFormat() {
         return "T;" + this.getName() + ";" + this.getDone() + ";" + this.getDeadline();
     }
+
     @Override
     public String toString() {
         String box;

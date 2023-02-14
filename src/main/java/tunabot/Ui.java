@@ -60,13 +60,6 @@ public class Ui {
         System.out.println("BLUB! Problem with save file!");
     }
 
-    public void line() {
-        System.out.println(LINE);
-    }
-    public void printErrorMessage(Exception e) {
-        System.out.println(e.getMessage());
-    }
-
     /**
      * Prints error when date time format is wrong.
      */

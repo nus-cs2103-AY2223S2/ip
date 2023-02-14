@@ -49,6 +49,11 @@ public class Task {
     public void unmarkDone() {
         this.isDone = false;
     }
+
+    /**
+     * Returns a string representation of the task that matches the format used in the save file
+     * @return save file friendly format
+     */
     public String saveFormat() {
         return "T;" + this.name + ";" + this.isDone;
     }

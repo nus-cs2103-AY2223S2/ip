@@ -73,6 +73,10 @@ public class Event extends Task {
         return start.format(formatter);
     }
 
+    /**
+     * Returns a string representation of the event that matches the format used in the save file
+     * @return save file friendly format
+     */
     @Override
     public String saveFormat() {
         return "E;" + this.getName() + ";" + this.getDone() + ";" + this.getStart() + ";" + this.getEnd();
