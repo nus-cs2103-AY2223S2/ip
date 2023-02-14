@@ -86,13 +86,13 @@ public class Ui {
      * @param size the size of the list after the deletion.
      */
     public String showRemove(Task task, int size) {
-        return "Please clean up after yourself.\n" + task + "\nNow you have " + size + " tasks in the list.\n";
+        return "Please clean up after yourself:\n" + task + "\nNow you have " + size + " tasks in the list.\n";
     }
 
     public String showFind(TaskList list) {
         String ret = list.stream()
             .map(task -> (list.indexOf(task) + 1) + ". " + task + "\n")
-            .reduce("Now you are making me mad...\n", (a, b) -> a + b);
+            .reduce("Needle in a haystack...\n", (a, b) -> a + b);
         return ret;
     }
 

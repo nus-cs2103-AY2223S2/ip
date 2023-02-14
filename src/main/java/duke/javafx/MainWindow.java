@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void checkExit(String response) {
-        if (response.equals("Bye. Hope to see you again soon!\n")) {
+        if (response.equals("Good riddance...\n")) {
             Task<Void> task = new Task<Void>(){
                 @Override
                 public Void call() throws InterruptedException {

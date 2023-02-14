@@ -32,7 +32,7 @@ public class ParserTest {
             Parser.parse("test");
             fail("DukeException not thrown");
         } catch (DukeException e) {
-            assertEquals("What does that mean? I don't understand.", e.getMessage());
+            assertEquals("Stop messing up! What does that mean? I don't understand.", e.getMessage());
         }
     }
 
