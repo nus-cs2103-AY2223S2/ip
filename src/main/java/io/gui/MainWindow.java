@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane implements Ui {
         assert (userInput != null);
         assert (sendButton != null);
 
-        scrollPane.vvalueProperty().bind(dialogueContainer.heightProperty());
+        dialogueContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(scrollPane.getVmax()));
         showReply(WELCOME);
     }
 
