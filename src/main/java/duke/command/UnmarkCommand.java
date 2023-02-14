@@ -16,17 +16,16 @@ public class UnmarkCommand extends Command {
     /**
      * The string representation of the index to be unmarked as not done.
      */
-    private final String INDEX_STRING;
+    private final String indexString;
 
     /**
      * Constructor for a command to unmark a task as not done.
      *
-     * @param commandString The unmark command in string representation
-     * @param indexString   The string representation of the index to be unmarked as not done
+     * @param indexString The string representation of the index to be unmarked as not done
      */
-    public UnmarkCommand(String commandString, String indexString) {
-        super(AvailableCommands.UNMARK, commandString);
-        INDEX_STRING = indexString;
+    public UnmarkCommand(String indexString) {
+        super(AvailableCommands.UNMARK);
+        this.indexString = indexString;
     }
 
     /**
@@ -41,7 +40,7 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) throws DukeException {
         ArrayList<Task> t = tasks.getTasks();
-        int index = isValidIndex(INDEX_STRING, t);
+        int index = isValidIndex(indexString, t);
 
         t.get(index).unmarkTask();
 

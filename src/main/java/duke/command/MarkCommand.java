@@ -15,17 +15,16 @@ public class MarkCommand extends Command {
     /**
      * The string representation of the index to be marked as done.
      */
-    private final String INDEX_STRING;
+    private final String indexString;
 
     /**
      * Constructor for a command to mark a task as done.
      *
-     * @param commandString The mark command in string representation
-     * @param indexString   The string representation of the index to be marked as done
+     * @param indexString The string representation of the index to be marked as done
      */
-    public MarkCommand(String commandString, String indexString) {
-        super(AvailableCommands.MARK, commandString);
-        INDEX_STRING = indexString;
+    public MarkCommand(String indexString) {
+        super(AvailableCommands.MARK);
+        this.indexString = indexString;
     }
 
     /**
@@ -40,7 +39,7 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
-        int index = isValidIndex(INDEX_STRING, tasks);
+        int index = isValidIndex(indexString, tasks);
 
         tasks.get(index).markTask();
 

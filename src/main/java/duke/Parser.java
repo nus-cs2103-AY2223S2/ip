@@ -24,49 +24,61 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] inputSplit = fullCommand.split(" ", 2);
-        String command = inputSplit[0];
-        switch (command) {
+        switch (inputSplit[0]) {
         case "bye":
-            return new ExitCommand(command);
+            return new ExitCommand();
         case "list":
-            return new ListCommand(command);
+            return new ListCommand();
         case "mark":
-            if (inputSplit.length < 2) {
-                throw new DukeException("Mark command missing list numbering.");
-            }
-            return new MarkCommand(command, inputSplit[1]);
+            checkInput(inputSplit, ErrorMsg.MARK);
+            return new MarkCommand(inputSplit[1]);
         case "unmark":
-            if (inputSplit.length < 2) {
-                throw new DukeException("Unmark command missing list numbering.");
-            }
-            return new UnmarkCommand(command, inputSplit[1]);
+            checkInput(inputSplit, ErrorMsg.UNMARK);
+            return new UnmarkCommand(inputSplit[1]);
         case "todo":
-            if (inputSplit.length < 2) {
-                throw new DukeException("Todo command missing description.");
-            }
-            return new AddTodoCommand(command, inputSplit[1]);
+            checkInput(inputSplit, ErrorMsg.TODO);
+            return new AddTodoCommand(inputSplit[1]);
         case "deadline":
-            if (inputSplit.length < 2) {
-                throw new DukeException("Deadline command missing description.");
-            }
-            return new AddDeadlineCommand(command, inputSplit[1]);
+            checkInput(inputSplit, ErrorMsg.DEADLINE);
+            return new AddDeadlineCommand(inputSplit[1]);
         case "event":
-            if (inputSplit.length < 2) {
-                throw new DukeException("Event command missing description.");
-            }
-            return new AddEventCommand(command, inputSplit[1]);
+            checkInput(inputSplit, ErrorMsg.EVENT);
+            return new AddEventCommand(inputSplit[1]);
         case "delete":
-            if (inputSplit.length < 2) {
-                throw new DukeException("Delete command missing list numbering.");
-            }
-            return new DeleteCommand(command, inputSplit[1]);
+            checkInput(inputSplit, ErrorMsg.DELETE);
+            return new DeleteCommand(inputSplit[1]);
         case "find":
-            if (inputSplit.length < 2) {
-                throw new DukeException("Find command missing terms.");
-            }
-            return new FindCommand(command, inputSplit[1]);
+            checkInput(inputSplit, ErrorMsg.FIND);
+            return new FindCommand(inputSplit[1]);
         default:
-            throw new DukeException("Sorry but I don't understand what this means.");
+            throw new DukeException(ErrorMsg.DEFAULT.getText());
+        }
+    }
+
+    private static void checkInput(String[] inputSplit, ErrorMsg errorMsg) throws DukeException {
+        if (inputSplit.length < 2) {
+            throw new DukeException(errorMsg.getText());
+        }
+    }
+
+    private enum ErrorMsg {
+        MARK("Mark command missing list numbering."),
+        UNMARK("Unmark command missing list numbering."),
+        TODO("Todo command missing DESCRIPTION."),
+        DEADLINE("Deadline command missing DESCRIPTION."),
+        EVENT("Event command missing DESCRIPTION."),
+        DELETE("Delete command missing list numbering."),
+        FIND("Find command missing terms."),
+        DEFAULT("Sorry but I don't understand what this means.");
+
+        private final String text;
+
+        ErrorMsg(String text) {
+            this.text = text;
+        }
+
+        public String getText() {
+            return text;
         }
     }
 }

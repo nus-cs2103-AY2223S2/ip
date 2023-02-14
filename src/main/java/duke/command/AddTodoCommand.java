@@ -13,23 +13,22 @@ import duke.textui.TextUi;
  */
 public class AddTodoCommand extends Command {
     /**
-     * The description of the todo task.
+     * The DESCRIPTION of the todo task.
      */
-    private final String DATA;
+    private final String data;
 
     /**
      * Constructor for a command to add new todo task.
      *
-     * @param commandString The add todo command in string representation
-     * @param data          The description of the todo task
+     * @param data The DESCRIPTION of the todo task
      */
-    public AddTodoCommand(String commandString, String data) {
-        super(AvailableCommands.ADD_TODO, commandString);
-        DATA = data;
+    public AddTodoCommand(String data) {
+        super(AvailableCommands.ADD_TODO);
+        this.data = data;
     }
 
     /**
-     * Adds a new todo task into the task list with the given description.
+     * Adds a new todo task into the task list with the given DESCRIPTION.
      *
      * @param taskList List of tasks that are stored
      * @param ui       UI to deal with the visual output
@@ -37,7 +36,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
-        Task todo = new Todo(DATA);
+        Task todo = new Todo(data);
         taskList.addTask(todo);
 
         return ui.showAddTask(todo.toString(), taskList.size());

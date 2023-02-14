@@ -14,10 +14,12 @@ import javafx.stage.Stage;
  * The main process for starting the GUI for the chatbot.
  */
 public class Main extends Application {
+    public static final String FILE_PATH = "data" + File.separator + "tasks.txt";
+    public static final String DUKE_CHATBOT = "Duke Chatbot";
     /**
      *
      */
-    private final Duke DUKE = new Duke("data" + File.separator + "tasks.txt");
+    private final Duke duke = new Duke(FILE_PATH);
 
     /**
      * Creates a GUI with title of duke chatbot. It loads the main gui scene of the chatbot and sets it up.
@@ -34,8 +36,8 @@ public class Main extends Application {
             VBox vBox = fxmlLoader.load();
             Scene scene = new Scene(vBox);
             stage.setScene(scene);
-            stage.setTitle("Duke Chatbot");
-            fxmlLoader.<MainWindow>getController().setDuke(DUKE);
+            stage.setTitle(DUKE_CHATBOT);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

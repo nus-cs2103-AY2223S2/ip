@@ -57,16 +57,6 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box to be left aligned.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(getChildren());
-        FXCollections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-    }
-
-    /**
      * Factory constructor to create a dialog box corresponding to the user. Specifically, the dialog box is right
      * aligned with the respective text and profile image of the user.
      *
@@ -90,5 +80,15 @@ public class DialogBox extends HBox {
         DialogBox dialogBox = new DialogBox(text, image);
         dialogBox.flip();
         return dialogBox;
+    }
+
+    /**
+     * Flips the dialog box to be left aligned.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(getChildren());
+        FXCollections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 }

@@ -13,17 +13,16 @@ public class FindCommand extends Command {
     /**
      * The finding term.
      */
-    private final String KEYWORD;
+    private final String keyword;
 
     /**
-     * Constructor for a command to find all tasks that match the specific term as a substring.
+     * Constructor for a command to find all tasks that match the specific keyword as a substring.
      *
-     * @param commandString The find command in string representation
-     * @param term          The finding term
+     * @param keyword The finding keyword
      */
-    public FindCommand(String commandString, String term) {
-        super(AvailableCommands.FIND, commandString);
-        KEYWORD = term;
+    public FindCommand(String keyword) {
+        super(AvailableCommands.FIND);
+        this.keyword = keyword;
     }
 
     /**
@@ -36,16 +35,16 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
         String msgHeader = "These are the tasks with matching descriptions in them:";
-        String output = ui.showMsg(msgHeader);
+        StringBuilder output = new StringBuilder(ui.showMsg(msgHeader));
 
         int counter = 1;
         for (Task task : taskList.getTasks()) {
-            if (task.isInDescription(KEYWORD)) {
+            if (task.isInDescription(keyword)) {
                 String msg = String.format("%d. %s", counter++, task);
-                output += "\n";
-                output += ui.showMsg(msg);
+                output.append("\n");
+                output.append(ui.showMsg(msg));
             }
         }
-        return output;
+        return output.toString();
     }
 }

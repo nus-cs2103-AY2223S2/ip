@@ -13,19 +13,18 @@ import duke.textui.TextUi;
  */
 public class AddEventCommand extends Command {
     /**
-     * The description, start and end date of the event task.
+     * The DESCRIPTION, start and end date of the event task.
      */
-    private final String DATA;
+    private final String data;
 
     /**
      * Constructor for a command to add new event task.
      *
-     * @param commandString The add event command in string representation
-     * @param data          The description, start and end date of the event task
+     * @param data The DESCRIPTION, start and end date of the event task
      */
-    public AddEventCommand(String commandString, String data) {
-        super(AvailableCommands.ADD_EVENT, commandString);
-        DATA = data;
+    public AddEventCommand(String data) {
+        super(AvailableCommands.ADD_EVENT);
+        this.data = data;
     }
 
     /**
@@ -39,7 +38,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
-        String[] splitData1 = DATA.split(" /from ", 2);
+        String[] splitData1 = data.split(" /from ", 2);
         if (splitData1.length < 2) {
             throw new DukeException("Event command format error. Missing /from");
         }

@@ -16,17 +16,16 @@ public class DeleteCommand extends Command {
     /**
      * The string representation of the index to be deleted.
      */
-    private final String INDEX_STRING;
+    private final String indexString;
 
     /**
      * Constructor for a command to delete a task.
      *
-     * @param commandString The delete command in string representation
-     * @param indexString   The string representation of the index to be deleted
+     * @param indexString The string representation of the index to be deleted
      */
-    public DeleteCommand(String commandString, String indexString) {
-        super(AvailableCommands.DELETE, commandString);
-        INDEX_STRING = indexString;
+    public DeleteCommand(String indexString) {
+        super(AvailableCommands.DELETE);
+        this.indexString = indexString;
     }
 
     /**
@@ -41,7 +40,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
-        int index = isValidIndex(INDEX_STRING, tasks);
+        int index = isValidIndex(indexString, tasks);
 
         Task task = tasks.get(index);
         tasks.remove(index);

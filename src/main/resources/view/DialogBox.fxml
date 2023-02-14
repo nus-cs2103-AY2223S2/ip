@@ -5,8 +5,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<fx:root alignment="TOP_RIGHT" fillHeight="false" type="HBox" xmlns="http://javafx.com/javafx/11"
-         xmlns:fx="http://javafx.com/fxml/1">
+<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT" fillHeight="false" type="HBox"
+         xmlns="http://javafx.com/javafx/11">
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true" HBox.hgrow="ALWAYS">
             <HBox.margin>

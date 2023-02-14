@@ -1,8 +1,5 @@
 package duke.task;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * A task stores its description and on whether is it done or not. The task can be marked as done or unmarked as not
  * done.
@@ -16,7 +13,7 @@ public class Task {
     /**
      * The description of the task.
      */
-    protected String description;
+    protected final String description;
     /**
      * Tracks whether the task is done or not.
      */
@@ -101,24 +98,6 @@ public class Task {
      */
     public String toData() {
         return String.format("Task | marked: %s ; description: %s", getMarkedStatus(), description);
-    }
-
-    /**
-     * Checks on whether the string representation of the task is the same format as the one exported. If it is, then a
-     * new task is created with the described properties. Otherwise, return an empty task.
-     *
-     * @param data String representation of a task
-     * @return A task object that describes the given data of the task
-     */
-    public static Task readFromData(String data) {
-        Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*)");
-        Matcher matcher = pattern.matcher(data);
-        if (matcher.matches()) {
-            boolean isMarked = matcher.group(2).equals("1");
-            String description = matcher.group(4);
-            return new Task(description, isMarked);
-        }
-        return Task.EMPTY_TASK;
     }
 
     public boolean isInDescription(String term) {

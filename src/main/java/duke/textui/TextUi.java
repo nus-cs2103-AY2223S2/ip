@@ -14,13 +14,13 @@ public class TextUi {
     /**
      * A scanner that scans for user input.
      */
-    private final Scanner SCANNER;
+    private final Scanner scanner;
 
     /**
      * Constructor for a new UI with a scanner.
      */
     public TextUi() {
-        SCANNER = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     /**
@@ -39,15 +39,6 @@ public class TextUi {
 
         String output = concatMsgs(LINE, logo, introMsg, LINE);
         return showMsg(output);
-    }
-
-    /**
-     * Display a divider line.
-     *
-     * @return The string being displayed
-     */
-    public String showLine() {
-        return showMsg(TextUi.LINE);
     }
 
     /**
@@ -105,19 +96,10 @@ public class TextUi {
     }
 
     /**
-     * Scans and returns the full string representation of the command input.
-     *
-     * @return The full string representation of the command
-     */
-    public String readCommand() {
-        return SCANNER.nextLine();
-    }
-
-    /**
      * Closes the scanner that reads user input.
      */
     public void close() {
-        SCANNER.close();
+        scanner.close();
     }
 
     /**

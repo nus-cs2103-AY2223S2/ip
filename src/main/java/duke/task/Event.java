@@ -17,11 +17,11 @@ public class Event extends Task {
     /**
      * The start date of the event.
      */
-    private LocalDate from;
+    private final LocalDate from;
     /**
      * The end date of the event.
      */
-    private LocalDate to;
+    private final LocalDate to;
 
     /**
      * Constructor for an event task with the given description, start and end date. It checks on whether the start
@@ -59,26 +59,11 @@ public class Event extends Task {
         isDone = isMarked;
     }
 
-    @Override
-    public String toString() {
-        String formattedFrom = from.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String formattedTo = to.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format("[E]%s (from: %s, to: %s)", super.toString(), formattedFrom, formattedTo);
-    }
-
-    @Override
-    public String toData() {
-        String formattedFrom = from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String formattedTo = to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("Event | marked: %s ; description: %s ; from: %s ; to: %s", getMarkedStatus(),
-                description, formattedFrom, formattedTo);
-    }
-
     /**
      * Checks on whether the string representation of the event task is the same format as the one exported. If it is,
      * then a new task is created with the described properties. Otherwise, return an empty task.
      *
-     * @param data String representation of a event task
+     * @param data String representation of an event task
      * @return An event task object that describes the given data of the task
      */
     public static Task readFromData(String data) {
@@ -92,5 +77,20 @@ public class Event extends Task {
             return new Event(description, from, to, isMarked);
         }
         return Task.EMPTY_TASK;
+    }
+
+    @Override
+    public String toString() {
+        String formattedFrom = from.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedTo = to.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("[E]%s (from: %s, to: %s)", super.toString(), formattedFrom, formattedTo);
+    }
+
+    @Override
+    public String toData() {
+        String formattedFrom = from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String formattedTo = to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return String.format("Event | marked: %s ; description: %s ; from: %s ; to: %s", getMarkedStatus(),
+                description, formattedFrom, formattedTo);
     }
 }

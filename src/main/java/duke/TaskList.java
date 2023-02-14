@@ -11,13 +11,13 @@ public class TaskList {
     /**
      * The list of tasks.
      */
-    private final ArrayList<Task> TASKS;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for a new empty list of tasks.
      */
     public TaskList() {
-        TASKS = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @param tasks The list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
-        TASKS = tasks;
+        this.tasks = tasks;
     }
 
     /**
@@ -35,7 +35,7 @@ public class TaskList {
      * @return The list of tasks
      */
     public ArrayList<Task> getTasks() {
-        return TASKS;
+        return tasks;
     }
 
     /**
@@ -44,7 +44,7 @@ public class TaskList {
      * @param task New task to be added into the list
      */
     public void addTask(Task task) {
-        TASKS.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -53,6 +53,6 @@ public class TaskList {
      * @return The number of tasks in the list
      */
     public int size() {
-        return TASKS.size();
+        return tasks.size();
     }
 }

@@ -18,37 +18,15 @@ public class Command {
     /**
      * The command stored.
      */
-    private final AvailableCommands CURRENT_COMMAND;
-    /**
-     * The string representation of the command stored.
-     */
-    private final String COMMAND_STRING;
-
-    /**
-     * The list of commands that are available for use.
-     */
-
-    public enum AvailableCommands {
-        EXIT,
-        LIST,
-        MARK,
-        UNMARK,
-        DELETE,
-        ADD_TODO,
-        ADD_DEADLINE,
-        ADD_EVENT,
-        FIND
-    }
+    private final AvailableCommands currentCommand;
 
     /**
      * Constructor for a command object.
      *
      * @param currentCommand Command being stored that needs to be carried out
-     * @param commandString  String representation of the command stored
      */
-    public Command(AvailableCommands currentCommand, String commandString) {
-        CURRENT_COMMAND = currentCommand;
-        COMMAND_STRING = commandString;
+    public Command(AvailableCommands currentCommand) {
+        this.currentCommand = currentCommand;
     }
 
     /**
@@ -59,16 +37,7 @@ public class Command {
      * @param storage  Storage to deal with input and output of data
      */
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
-        return ui.showError(String.format("Error processing %s command", COMMAND_STRING));
-    }
-
-    /**
-     * Checks whether it is the exit command.
-     *
-     * @return Boolean result on whether it is the exit command
-     */
-    public boolean isExit() {
-        return CURRENT_COMMAND == AvailableCommands.EXIT;
+        return ui.showError(String.format("Error processing %s command", currentCommand.getText()));
     }
 
     /**
@@ -95,5 +64,31 @@ public class Command {
         }
 
         return index;
+    }
+
+    /**
+     * The list of commands that are available for use.
+     */
+
+    public enum AvailableCommands {
+        EXIT("bye"),
+        LIST("list"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        DELETE("delete"),
+        ADD_TODO("todo"),
+        ADD_DEADLINE("deadline"),
+        ADD_EVENT("event"),
+        FIND("find");
+
+        private final String commandString;
+
+        AvailableCommands(String commandString) {
+            this.commandString = commandString;
+        }
+
+        public String getText() {
+            return commandString;
+        }
     }
 }

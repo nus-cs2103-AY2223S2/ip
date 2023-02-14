@@ -12,11 +12,9 @@ import duke.textui.TextUi;
 public class ExitCommand extends Command {
     /**
      * Constructor for a command to exit the chatbot.
-     *
-     * @param commandString The exit command in string representation
      */
-    public ExitCommand(String commandString) {
-        super(AvailableCommands.EXIT, commandString);
+    public ExitCommand() {
+        super(AvailableCommands.EXIT);
     }
 
     /**

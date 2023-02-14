@@ -14,15 +14,15 @@ public class Duke {
     /**
      * Able to deal with the loading and storing of data of the respective tasks.
      */
-    private final Storage STORAGE;
+    private final Storage storage;
+    /**
+     * Sends out the display of the respective tasks.
+     */
+    private final TextUi textUi;
     /**
      * The list of tasks that is being tracked by the chatbot.
      */
     private TaskList taskList;
-    /**
-     * Sends out the display of the respective tasks.
-     */
-    private final TextUi UI;
 
     /**
      * Load a new chatbot with a new ui and storage. It obtains the data of the tasks stored if they are present. If
@@ -31,41 +31,13 @@ public class Duke {
      * @param filePath The file path of where the tasks are stored
      */
     public Duke(String filePath) {
-        UI = new TextUi();
-        STORAGE = new Storage(filePath);
+        textUi = new TextUi();
+        storage = new Storage(filePath);
         try {
-            taskList = new TaskList(STORAGE.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            UI.showError(e.getMessage());
+            textUi.showError(e.getMessage());
             taskList = new TaskList();
-        }
-    }
-
-    /**
-     * The main processing of the commands that are sent to the chatbot.
-     * The welcome text is shown first. Following that, the parser takes care of parsing all the commands to
-     * respective classes to be interpreted and executed. If there is an exception, it is displayed for the user to
-     * take note of when keying in their next command. Finally, an exit message is shown at the termination of the
-     * chatbot and the tasks data are stored.
-     */
-    @Deprecated
-    public void run() {
-        UI.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = UI.readCommand();
-                UI.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, UI, STORAGE);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                UI.showError(e.getMessage());
-            } catch (Exception e) {
-                UI.showMsg("Unknown command/error not caught!\n Please try again!");
-            } finally {
-                UI.showLine();
-            }
         }
     }
 
@@ -75,7 +47,7 @@ public class Duke {
      * @return The welcome message by the chatbot
      */
     public String getWelcome() {
-        return UI.showWelcome();
+        return textUi.showWelcome();
     }
 
     /**
@@ -87,8 +59,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String output = c.execute(taskList, UI, STORAGE);
-            return output;
+            return c.execute(taskList, textUi, storage);
         } catch (DukeException e) {
             return e.getMessage();
         } catch (Exception e) {

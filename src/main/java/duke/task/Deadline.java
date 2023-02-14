@@ -17,7 +17,7 @@ public class Deadline extends Task {
     /**
      * The due date of the deadline task.
      */
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Constructor for a deadline task with the given description and due date. It checks on whether the due date is
@@ -51,19 +51,6 @@ public class Deadline extends Task {
         isDone = isMarked;
     }
 
-    @Override
-    public String toString() {
-        String formattedBy = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format("[D]%s (by: %s)", super.toString(), formattedBy);
-    }
-
-    @Override
-    public String toData() {
-        String formattedBy = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", getMarkedStatus(),
-                this.description, formattedBy);
-    }
-
     /**
      * Checks on whether the string representation of the deadline task is the same format as the one exported. If it
      * is, then a new task is created with the described properties. Otherwise, return an empty task.
@@ -81,5 +68,18 @@ public class Deadline extends Task {
             return new Deadline(description, deadline, isMarked);
         }
         return Task.EMPTY_TASK;
+    }
+
+    @Override
+    public String toString() {
+        String formattedBy = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("[D]%s (by: %s)", super.toString(), formattedBy);
+    }
+
+    @Override
+    public String toData() {
+        String formattedBy = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", getMarkedStatus(),
+                description, formattedBy);
     }
 }

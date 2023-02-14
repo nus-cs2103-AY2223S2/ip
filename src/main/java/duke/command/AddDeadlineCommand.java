@@ -13,19 +13,18 @@ import duke.textui.TextUi;
  */
 public class AddDeadlineCommand extends Command {
     /**
-     * The description and due date stored as string representation.
+     * The DESCRIPTION and due date stored as string representation.
      */
-    private final String DATA;
+    private final String data;
 
     /**
      * Constructor for a command to add new deadline task.
      *
-     * @param commandString The add deadline command in string representation
-     * @param data          The description and due date of the deadline task
+     * @param data The DESCRIPTION and due date of the deadline task
      */
-    public AddDeadlineCommand(String commandString, String data) {
-        super(AvailableCommands.ADD_DEADLINE, commandString);
-        DATA = data;
+    public AddDeadlineCommand(String data) {
+        super(AvailableCommands.ADD_DEADLINE);
+        this.data = data;
     }
 
     /**
@@ -39,7 +38,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
-        String[] splitData = DATA.split(" /by ", 2);
+        String[] splitData = data.split(" /by ", 2);
         if (splitData.length < 2) {
             throw new DukeException("Deadline command format error. Missing /by");
         }

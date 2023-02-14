@@ -29,17 +29,6 @@ public class Todo extends Task {
         this.isDone = isMarked;
     }
 
-    @Override
-    public String toString() {
-        return String.format("[T]%s", super.toString());
-    }
-
-
-    @Override
-    public String toData() {
-        return String.format("Todo | marked: %s ; description: %s", getMarkedStatus(), description);
-    }
-
     /**
      * Checks on whether the string representation of the todo task is the same format as the one exported. If it is,
      * then a new task is created with the described properties. Otherwise, return an empty task.
@@ -56,5 +45,15 @@ public class Todo extends Task {
             return new Todo(description, isMarked);
         }
         return Task.EMPTY_TASK;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[T]%s", super.toString());
+    }
+
+    @Override
+    public String toData() {
+        return String.format("Todo | marked: %s ; description: %s", getMarkedStatus(), description);
     }
 }

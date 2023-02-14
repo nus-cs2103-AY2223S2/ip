@@ -14,6 +14,14 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends VBox {
     /**
+     * The profile image of the user.
+     */
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    /**
+     * The profile image of the chatbot.
+     */
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    /**
      * The scrollPane responsible for allowing the ability to scroll through user input and responses by the chatbot.
      */
     @FXML
@@ -33,20 +41,10 @@ public class MainWindow extends VBox {
      */
     @FXML
     private Button sendButton;
-
     /**
      * The chatbot instance.
      */
     private Duke duke;
-
-    /**
-     * The profile image of the user.
-     */
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    /**
-     * The profile image of the chatbot.
-     */
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
      * Initialises the scrollPane to have a container that contains all the dialog boxes so that it is scrollable.

@@ -15,11 +15,9 @@ import duke.textui.TextUi;
 public class ListCommand extends Command {
     /**
      * Constructor for a command to list the tasks saved in the task list.
-     *
-     * @param commandString The list command in string representation
      */
-    public ListCommand(String commandString) {
-        super(AvailableCommands.LIST, commandString);
+    public ListCommand() {
+        super(AvailableCommands.LIST);
     }
 
     /**
@@ -32,15 +30,15 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         String msgHeader = "Current data in the list are:";
-        String output = ui.showMsg(msgHeader);
+        StringBuilder output = new StringBuilder(ui.showMsg(msgHeader));
 
         ArrayList<Task> tasks = taskList.getTasks();
         for (int i = 0; i < tasks.size(); i++) {
             String msg = String.format("%d. %s", i + 1, tasks.get(i));
-            output += "\n";
-            output += ui.showMsg(msg);
+            output.append("\n");
+            output.append(ui.showMsg(msg));
         }
 
-        return output;
+        return output.toString();
     }
 }
