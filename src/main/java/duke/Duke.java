@@ -3,7 +3,6 @@ package duke;
 import duke.parser.Parser;
 
 import java.io.IOException;
-
 import java.util.Scanner;
 
 /**
@@ -16,7 +15,7 @@ public class Duke {
     /**
      * Main method
      * @param args arguments
-     * @throws IOException
+     * @throws IOException error during I/O operations
      */
     public static void main(String[] args) throws IOException {
         Ui ui = new Ui();
@@ -63,7 +62,6 @@ public class Duke {
                         break;
                     default:
                         System.out.println(ui.ERROR_UNKNOWN_COMMAND);
-                        break;
                 }
             } while (!command.equals("bye"));
 

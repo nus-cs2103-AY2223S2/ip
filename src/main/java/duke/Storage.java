@@ -26,7 +26,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
-    String filePath;
+    private final String filePath;
 
     Storage(String filePath) {
         this.filePath = filePath;
@@ -43,14 +43,14 @@ public class Storage {
 
         if (!d.exists()) {
             System.out.println("Data directory does not exist\nCreating new data directory...");
-            if(d.mkdir()) {
+            if (d.mkdir()) {
                 System.out.println("Successfully created new data directory");
             }
         }
 
-        if(!f.isFile()) {
+        if (!f.isFile()) {
             System.out.println("Save file does not exist!\nCreating new save file...");
-            if(f.createNewFile()) {
+            if (f.createNewFile()) {
                 System.out.println("Successfully created new file at " + this.filePath);
             }
         }
@@ -58,13 +58,14 @@ public class Storage {
 
     /**
      * Reads tasks from save file and loads it into memory
-     * @return ArrayList<Task> tasks of tasks read from save file
-     * @throws IOException
+     *
+     * @return ArrayList tasks of tasks read from save file
+     * @throws IOException error with I/O
      */
     ArrayList<Task> readFile() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
 
-        if(!new File(this.filePath).isFile()) {
+        if (!new File(this.filePath).isFile()) {
             createFile();
         }
 
@@ -94,6 +95,8 @@ public class Storage {
                         LocalDateTime to = LocalDateTime.parse(currArr[4], DATE_TIME_FORMATTER);
                         tasks.add(new Event(currArr[2], done, from, to));
                         break;
+                    default:
+                        break;
                 }
             }
         } catch (Exception e) {
@@ -120,8 +123,8 @@ public class Storage {
                     bw.write("D|" + done + "|" + t.getDesc() + "|" + ((Deadline) t).getDeadlineDay());
                 } else if (t instanceof Event) {
                     done = t.isDone() ? 1 : 0;
-                    bw.write("E|" + done + "|" + t.getDesc() + "|" +
-                            ((Event) t).getFrom() + "|" + ((Event) t).getTo());
+                    bw.write("E|" + done + "|" + t.getDesc() + "|"
+                            + ((Event) t).getFrom() + "|" + ((Event) t).getTo());
                 }
                 bw.write("\n");
             }

@@ -19,14 +19,14 @@ import java.util.regex.Pattern;
  * @version 0
  */
 public class TaskList {
-    static final Pattern DEADLINE_PATTERN = Pattern.compile("(.+)/by (.+)");
-    static final Pattern EVENT_PATTERN = Pattern.compile("(.+)/from (.+) /to (.+)");
-    static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
-
+    public static final Pattern DEADLINE_PATTERN = Pattern.compile("(.+)/by (.+)");
+    public static final Pattern EVENT_PATTERN = Pattern.compile("(.+)/from (.+) /to (.+)");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private final Ui ui = new Ui();
-    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public TaskList(ArrayList<Task> tasks) {
+        TaskList.tasks = tasks;
     }
 
     void listTask() {
@@ -113,6 +113,7 @@ public class TaskList {
     }
 
     /**
+     * Searches for task description that matches body
      *
      * @param body string to find
      */
@@ -128,7 +129,7 @@ public class TaskList {
             }
         }
 
-        if(!found){
+        if (!found) {
             System.out.println("No tasks matches your search :(");
         }
         System.out.println("-------------------------------------------------");
