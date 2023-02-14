@@ -4,14 +4,11 @@
 <?import java.net.URL?>
 
 <?import javafx.scene.control.TextField?>
-
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+
 <fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/fxml" styleClass="user-control-outer-container">
     <children>
         <StackPane alignment="CENTER">
@@ -27,9 +24,7 @@
                     </Button>
                 </right>
             </BorderPane>
-
         </StackPane>
-
     </children>
     <stylesheets>
         <URL value="@user-control.css" />

@@ -3,18 +3,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
 <?import java.net.URL?>
-<?import javafx.scene.layout.VBox?>
+
 <fx:root type="javafx.scene.layout.StackPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" styleClass="user-dialog-container">
     <children>
         <Label fx:id="dialog" text="Label" styleClass="user-dialog-text" />
-
-<!--        <VBox styleClass="user-dialog-bubble">-->
-<!--            <children>-->
-<!--                <Label fx:id="dialog" text="Label" styleClass="user-dialog-text" />-->
-<!--            </children>-->
-
-<!--        </VBox>-->
-
     </children>
     <stylesheets>
         <URL value="@user-dialog.css" />

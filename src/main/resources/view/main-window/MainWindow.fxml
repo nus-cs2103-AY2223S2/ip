@@ -14,19 +14,13 @@
     <center>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" vvalue="1.0" styleClass="scroll-pane">
             <content>
-                <VBox fx:id="dialogContainer" styleClass="dialog-container" />
+                <VBox fx:id="dialogContainer" />
             </content>
         </ScrollPane>
     </center>
-<!--    <children>-->
-
-        <bottom>
-            <UserControl fx:id="userControl" />
-        </bottom>
-
-<!--        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="100.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" styleClass="text-field" />-->
-<!--        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />-->
-<!--    </children>-->
+    <bottom>
+        <UserControl fx:id="userControl" />
+    </bottom>
     <stylesheets>
         <URL value="@main-window.css" />
     </stylesheets>
