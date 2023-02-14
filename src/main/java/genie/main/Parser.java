@@ -48,7 +48,7 @@ public class Parser {
                 }
                 return new AddCommand(taskType, i);
             case "find":
-                String keyword = i.replace("find ", "");
+                String keyword = i.replace("find ", ""); //todo handle empty keyword
                 return new FindCommand(keyword);
             default:
                 throw new InvalidInputException();
