@@ -25,7 +25,10 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img, boolean toFlip) {
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tiger.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/owl.jpg"));
+
+    private DialogBox(String text, Profile profile) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,8 +39,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
-        if (toFlip) {
+        if (profile == Profile.USER) {
+            displayPicture.setImage(userImage);
+        } else {
+            displayPicture.setImage(dukeImage);
+            dialog.setStyle("-fx-text-fill: white;");
+            this.setStyle("-fx-background-color: #191970;");
             this.flip();
         }
     }
@@ -52,12 +59,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, false);
+    public static DialogBox getUserDialog(String text) {
+        return new DialogBox(text, Profile.USER);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        return new DialogBox(text, img, true);
-
+    public static DialogBox getDukeDialog(String text) {
+        DialogBox db = new DialogBox(text, Profile.DUKE);
+        return db;
     }
 }
