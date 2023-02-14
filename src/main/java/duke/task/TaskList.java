@@ -143,7 +143,7 @@ public class TaskList {
      */
     public static void announceAdded() {
         System.out.println("Got it. I've added this task:");
-        System.out.println("Now we have " + tasks.size() + " tasks in the list.");
+        System.out.println("Now we have " + tasks.size() + " task(s) in the list.");
     }
 
     /**
@@ -153,7 +153,7 @@ public class TaskList {
     public static String announceAddedString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task:\n");
-        sb.append("Now we have " + tasks.size() + " tasks in the list.\n");
+        sb.append("Now we have " + tasks.size() + " task(s) in the list.\n");
         return sb.toString();
     }
 

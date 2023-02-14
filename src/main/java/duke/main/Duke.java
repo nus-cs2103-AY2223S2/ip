@@ -161,14 +161,14 @@ public class Duke extends Application {
      */
     public String getResponse(String input) throws DukeException, IOException {
         if (!logic.isValidCommand(input)) {
-            return "Didn't catch that, please input valid command. \n"
-                    + "Help me understand by following this format: \n"
+            return "Didn't catch that, please input valid command. \n \n"
+                    + "Help me understand by following this format: \n \n \n"
+                    + "todo ### \n \n"
+                    + "event ### /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm \n \n"
+                    + "deadline ### /by dd/mm/yyyy hhmm \n \n"
                     + "\n"
-                    + "Todo * \n"
-                    + "Event * /from [dd/mm/yyyy hh:mm] /to [dd/mm/yyyy hh:mm] \n"
-                    + "Deadline /by [dd/mm/yyyy hh:mm] \n"
-                    + "\n"
-                    + "* indicates the task you want me to record.";
+                    + "Do ensure that you date time is of the correct format. \n"
+                    + "### indicates the task you want me to record.";
         }
 
         if (logic.isTaskCommand(input)) {
