@@ -1,7 +1,10 @@
 package duke.gui;
 
+import java.io.IOException;
+
 import duke.Duke;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -21,18 +24,27 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tiger.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/owl.jpg"));
+
+    private Duke duke;
+
+    public MainWindow(Duke d) {
+        duke = d;
+        try {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
+        
     }
 
     /**
@@ -47,7 +59,6 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         displayMessage(Profile.DUKE, response);
-
     }
 
     @FXML
@@ -65,5 +76,10 @@ public class MainWindow extends AnchorPane {
         }
 
         dialogContainer.getChildren().add(dialogBox);
+    }
+
+    @FXML
+    public void greetUser() {
+        displayMessage(Profile.DUKE, "Hoot! How can I help you today?");
     }
 }

@@ -6,7 +6,6 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -19,15 +18,17 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            MainWindow root = new MainWindow();
-            fxmlLoader.setRoot(root);
-            fxmlLoader.setController(root);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Stage.fxml"));
+            MainWindow mainWindow = new MainWindow(duke);
+            fxmlLoader.setController(mainWindow);
             fxmlLoader.load();
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+
+            stage.setOnShowing(event -> {
+                mainWindow.greetUser();
+            });
+            
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
