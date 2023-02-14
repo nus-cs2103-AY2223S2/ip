@@ -11,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-
-//Bealdung
 public class TaskScheduler extends TaskList<Recur> {
 
     private PriorityBlockingQueue<Recur> priorityQueue;
@@ -66,35 +64,4 @@ public class TaskScheduler extends TaskList<Recur> {
             timeline.setCycleCount(Animation.INDEFINITE); // loop forever
         }
     }
-
-
-
-    //Threading way unused. Timeline is used.
-    /*
-    TaskScheduler () {
-        priorityQueue = new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime));
-        this(20, priorityQueue);
-    }
-    */
-
-    /*
-    TaskScheduler (int poolSize, PriorityBlockingQueue<Recur> priorityQueue) {
-        ExecutorService priorityJobPoolExecutor = Executors.newFixedThreadPool(poolSize);
-        this.priorityQueue = priorityQueue;
-        //priorityQueue = new PriorityBlockingQueue<>(100, Comparator.comparing(Recur::getMockRemainingTime));
-        ExecutorService priorityJobScheduler = Executors.newSingleThreadExecutor();
-        priorityJobScheduler.execute(() -> {
-            while (true) {
-                try {
-                    Recur nextScheduledEvent = priorityQueue.take();
-                    priorityJobPoolExecutor.execute(nextScheduledEvent);
-                    System.out.println(nextScheduledEvent.getDescription());
-                    TimeUnit.MILLISECONDS.sleep(1000);
-                } catch (InterruptedException e) {
-                    break;
-                }
-            }
-        });
-    }
-    */
 }
