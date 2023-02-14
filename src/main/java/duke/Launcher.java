@@ -2,7 +2,10 @@ package duke;
 
 import javafx.application.Application;
 
-public class launcher {
+/**
+ * Class in charge of launching the GUI and start Duke
+ */
+public class Launcher {
     public static void main(String[] args) {
         Application.launch(Main.class, args);
     }

@@ -59,6 +59,12 @@ public class TaskList {
         this.tasks.get(index).setIsCompleted(false);
     }
 
+    /**
+     * Sorts the task in the tasklist, and then update data.txt to the sorted
+     * version of tasks
+     *
+     * @param storage storage object in charge of stored tasks in data.txt
+     */
     public void sortTaskList(Storage storage) {
         Collections.sort(this.tasks);
         for (int i = 0; i < this.tasks.size(); i++) {

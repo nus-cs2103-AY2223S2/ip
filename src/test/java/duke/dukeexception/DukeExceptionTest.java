@@ -1,14 +1,14 @@
 package duke.dukeexception;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 
 public class DukeExceptionTest {
     @Test
-    public void DukeExceptionStringTest() {
-        String expected = "    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                "    ____________________________________________________________\n";
+    public void dukeExceptionStringTest() {
+        String expected = "I'm sorry, but I don't know what that means :-(\n";
         assertEquals(expected, new DukeException("I'm sorry, but I don't know what that means :-(").toString());
     }
 }

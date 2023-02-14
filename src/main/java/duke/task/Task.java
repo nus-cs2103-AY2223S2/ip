@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 
 /**
  * Class to represent the Task created by user

@@ -13,11 +13,15 @@ import duke.ui.Ui;
 /**
  * A class for managing tasks
  */
-public class Duke{
+public class Duke {
     private Ui ui;
     private TaskList tl;
     private Storage storage;
     private Parser parser;
+
+    /**
+     * Creates the necessary objects and populate the tasklist to run Duke
+     */
     public Duke() {
         this.ui = new Ui();
         this.tl = new TaskList();

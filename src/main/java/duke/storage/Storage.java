@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ import duke.tasklist.TaskList;
  * Task to manage and store tasks created by user in data.txt
  */
 public class Storage {
-    private static final String DATAPATH = "src/main/java/Duke/Storage/data.txt";
+    private static final String DATAPATH = "data.txt";
 
     /**
      * Constructor class for Storage
