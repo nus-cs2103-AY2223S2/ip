@@ -20,7 +20,7 @@ the benefits of a Graphical User Interface (GUI).
 - `mark 1`: Marks the 1st task as done.
 - `delete 1`: Deletes the 1st task.
 - `bye`: Exits the app.
-6. Refer to the [Features](##features) below for details of each command.
+6. Refer to the [Features](##Features) below for details of each command.
 <br />
 <br />
 
