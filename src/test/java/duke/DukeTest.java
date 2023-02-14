@@ -2,8 +2,12 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +22,11 @@ import duke.task.DummyTask;
 public class DukeTest {
 
     private Duke d;
+
+    @BeforeAll
+    static void oneTimeSetUp() {
+        System.setOut(new PrintStream(new ByteArrayOutputStream()));
+    }
 
     @BeforeEach
     void setUp() {
@@ -71,5 +80,10 @@ public class DukeTest {
 
         d.displayTaskCount();
         assertEquals("Now you have 1000 task(s) in the list.\n", d.ui.getRecentMessages());
+    }
+
+    @AfterAll
+    static void oneTimeTearDown() {
+        System.setOut(System.out);
     }
 }
