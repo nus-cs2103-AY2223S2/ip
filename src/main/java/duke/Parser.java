@@ -1,7 +1,18 @@
 package duke;
 
+/**
+ * Parser class to parse in input.
+ */
 public class Parser {
     private static final Ui ui = new Ui();
+
+    /**
+     * parse method to take in input and execute the required command.
+     * @param cmd the input command by user.
+     * @param list the TaskList that is to be accessed.
+     * @return a String that is created from executing the command.
+     * @throws DukeException if command is unknown.
+     */
     public static String parse(String cmd, TaskList list) throws DukeException {
         Command command = new Command(cmd, list, ui);
         try {
