@@ -38,10 +38,10 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the Duke instance to be used.
      * 
-     * @param d Duke instance.
+     * @param duke Duke instance.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
         String response = duke.getInitialResponse();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
     }

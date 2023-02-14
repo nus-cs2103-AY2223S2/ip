@@ -24,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image icon) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -35,7 +35,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setImage(icon);
     }
 
     /**
@@ -43,32 +43,32 @@ public class DialogBox extends HBox {
      * right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
+        ObservableList<Node> childNodes = FXCollections.observableArrayList(getChildren());
+        Collections.reverse(childNodes);
+        getChildren().setAll(childNodes);
         setAlignment(Pos.TOP_LEFT);
     }
 
     /**
      * Gets a dialog box for the user.
      * 
-     * @param text Dialog text.
-     * @param img User's icon.
+     * @param userText Dialog text.
+     * @param userIcon User's icon.
      * @return Dialog box for the user.
      */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String userText, Image userIcon) {
+        return new DialogBox(userText, userIcon);
     }
 
     /**
      * Gets a dialog box for Duke.
      * 
-     * @param text Dialog text.
-     * @param img Duke's icon.
+     * @param dukeText Dialog text.
+     * @param dukeIcon Duke's icon.
      * @return Dialog box for Duke.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String dukeText, Image dukeIcon) {
+        var db = new DialogBox(dukeText, dukeIcon);
         db.flip();
         return db;
     }
