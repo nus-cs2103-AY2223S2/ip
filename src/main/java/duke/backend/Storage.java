@@ -41,6 +41,7 @@ class Storage {
                 case "E":
                     t = new Event(savedData[2], savedData[3], savedData[4]);
                     break;
+                default:
                 }
                 if (savedData[1].equals("0")) {
                     t.unmark();
@@ -73,8 +74,10 @@ class Storage {
                 break;
             case "Event":
                 encoding = encoding + ("E | " + (t.isDone() ? "1" : "0" + " | "));
-                encoding = encoding + (t.getDescription() + " | " + ((Event) t).getStart() + " | " + ((Event) t).getEnd());
+                encoding = encoding + (t.getDescription() + " | " + ((Event) t).getStart() + " | "
+                        + ((Event) t).getEnd());
                 break;
+            default:
             }
             encoding = encoding + "\n";
         }

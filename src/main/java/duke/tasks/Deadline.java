@@ -30,7 +30,7 @@ public class Deadline extends Task {
 
     /**
      * String representation of a Deadline task.
-     * @return String in the format <code>[D] description (by: due date)/code>.
+     * @return String in the format <code>[D] description (by: due date)</code>.
      */
     @Override
     public String toString() {
