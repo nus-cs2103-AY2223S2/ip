@@ -32,16 +32,15 @@ public class Duke {
     /**
      * Runs the user interface for abstraction
      */
-    public void run() {
-        ui.greet();
-        parser.getTaskType();
-        storage.save(taskList);
-    }
+//    public void run() {
+//        ui.greet();
+//        parser.getTaskType();
+//        storage.save(taskList);
+//    }
 
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.run();
 
     }
 
@@ -49,7 +48,8 @@ public class Duke {
         if (input.equals("bye")) {
             System.exit(0);
         }
-        return input;
+        storage.save(taskList);
+        return parser.getDukeResponse(input);
     }
 }
 

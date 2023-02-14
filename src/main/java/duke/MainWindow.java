@@ -44,6 +44,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
             dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog("Hi! i'm Duke, what can I do for you?", dukeImage),
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );

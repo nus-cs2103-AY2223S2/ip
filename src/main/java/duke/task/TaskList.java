@@ -25,15 +25,18 @@ public class TaskList {
     public int getListSize() {
         return this.list.size();
     }
-    public void getList() {
+    public String getList() {
         int counter = 1;
+        StringBuilder str = new StringBuilder();
         for (Object task : this.list) {
-            System.out.println(counter + ". " + task.toString());
+            str.append(counter + ". " + task.toString());
+            str.append(System.getProperty("line.separator"));
             counter++;
         }
+        return str.toString();
     }
 
-    public void markTask(String[] parts) throws TaskDoesNotExistException {
+    public String markTask(String[] parts) throws TaskDoesNotExistException {
         //converting the index from String to Int
         int indexInt = Integer.parseInt(parts[1]) - 1;
 
@@ -44,10 +47,11 @@ public class TaskList {
 
         Task t = list.get(indexInt);
         t.markDone();
-        System.out.println("Nice! I've marked this duke.task as done:\n" + t.toString());
+        String str = "Nice! I've marked this duke.task as done:\n" + t.toString();
+        return str;
     }
 
-    public void unmarkTask(String[] parts) throws TaskDoesNotExistException {
+    public String unmarkTask(String[] parts) throws TaskDoesNotExistException {
         //converting the index from String to Int
         int indexInt = Integer.parseInt(parts[1]) - 1;
 
@@ -58,10 +62,11 @@ public class TaskList {
 
         Task t = list.get(indexInt);
         t.markUndone();
-        System.out.println("Okay.. I've unmarked this duke.task:\n" + t.toString());
+        String str = "Okay.. I've unmarked this duke.task:\n" + t.toString();
+        return str;
     }
 
-    public void deleteTask(String[] parts) throws TaskDoesNotExistException {
+    public String deleteTask(String[] parts) throws TaskDoesNotExistException {
         int indexInt = Integer.parseInt(parts[1]) - 1;
         //in case the duke.task.Task index to mark exceeds current number of Tasks or neg number
         if (indexInt + 1 > list.size() || indexInt < 0) {
@@ -70,13 +75,13 @@ public class TaskList {
 
         String task = list.get(indexInt).toString();
         list.remove(indexInt);
-        System.out.println("Noted. I've removed this duke.task: \n"
+        String str = "Noted. I've removed this duke.task: \n"
                 + task
-                + "\nNow you have " + list.size() + " tasks in the list.");
-
+                + "\nNow you have " + list.size() + " tasks in the list.";
+        return str;
     }
 
-    public void find(String[] parts) throws EmptyDescriptionException {
+    public String find(String[] parts) throws EmptyDescriptionException {
         if (parts.length == 1) {
             throw new EmptyDescriptionException();
         }
@@ -95,10 +100,11 @@ public class TaskList {
             }
 
         }
-        System.out.println("Here are the matching tasks in your list: \n" + newList);
+        String str = "Here are the matching tasks in your list: \n" + newList;
+        return str;
     }
 
-    public void createTask(String[] parts) throws EmptyDescriptionException {
+    public String createTask(String[] parts) throws EmptyDescriptionException {
 
         String taskType = parts[0];
 
@@ -112,8 +118,8 @@ public class TaskList {
                 String todoDescription = parts[1];
                 Task t = new Todo(todoDescription);
                 this.list.add(t);
-                System.out.println("New todo added: " + todoDescription);
-                break;
+                String str1 = "New todo added: " + todoDescription;
+                return str1;
 
             case "deadline":
                 //split into descrpition and time
@@ -126,8 +132,8 @@ public class TaskList {
                 LocalDate date = LocalDate.parse(time);
                 Task d = new Deadline(deadlineDescription, date);
                 list.add(d);
-                System.out.println("New deadline added: " + deadlineDescription);
-                break;
+                String str2 = "New deadline added: " + deadlineDescription;
+                return str2;
 
             case "event":
                 //split into descrpition and time
@@ -144,9 +150,10 @@ public class TaskList {
 
                 Task e  = new Event(eventDescription, fromdate, todate);
                 this.list.add(e);
-                System.out.println("New event added: " + eventDescription);
-                break;
+                String str3 = "New event added: " + eventDescription;
+                return str3;
 
         }
+        return "error";
     }
 }

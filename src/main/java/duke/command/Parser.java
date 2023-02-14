@@ -2,25 +2,20 @@ package duke.command;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.TaskDoesNotExistException;
 import duke.task.TaskList;
-import java.util.Scanner;
 
 public class Parser {
     public TaskList taskList;
-    public Scanner scanner;
     String input;
 
     public Parser(TaskList taskList) {
         this.taskList = taskList;
-        this.scanner = new Scanner(System.in);
     }
-    public void getTaskType() {
+    public String getDukeResponse(String input) {
 
-        input = scanner.nextLine();
-        while (!input.equals("bye")) {
             try {
                 //print List
                 if (input.equals("list")) {
-                    taskList.getList();
+                    return taskList.getList();
                 } else {
                     //split into 2, first part is duke.task type, second part is instruction
                     String[] parts = input.split(" ", 2);
@@ -28,36 +23,28 @@ public class Parser {
 
                     switch (taskType) {
                         case "mark":
-                            taskList.markTask(parts);
-                            break;
+                            return taskList.markTask(parts);
                         case "unmark":
-                            taskList.unmarkTask(parts);
-                            break;
+                            return taskList.unmarkTask(parts);
                         case "delete":
-                            taskList.deleteTask(parts);
-                            break;
+                            return taskList.deleteTask(parts);
                         case "find":
-                            taskList.find(parts);
-                            break;
+                            return taskList.find(parts);
                         case "todo":
-                            taskList.createTask(parts);
-                            break;
                         case "deadline":
-                            taskList.createTask(parts);
-                            break;
                         case "event":
-                            taskList.createTask(parts);
-                            break;
+                            return taskList.createTask(parts);
                     }
                 }
             } catch (TaskDoesNotExistException e) {
-                System.out.println(e.getMessage());
+                String str1 = e.getMessage();
+                return str1;
             } catch (EmptyDescriptionException e) {
-                System.out.println(e.getMessage());
+                String str2 = e.getMessage();
+                return str2;
             }
-            input = scanner.nextLine();
-        }
 
-        System.out.println("Bye! See you again soon.");
+            String str = "Sorry I'm not sure what you mean...";
+            return str;
     }
 }
