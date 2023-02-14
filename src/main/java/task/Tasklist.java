@@ -116,4 +116,15 @@ public class Tasklist {
         }
     }
 
+    public void find(String keyword) {
+        System.out.println("Here are the matching tasks in your list:\n");
+        int containsKeywordIndex = 1;
+        for (int i = 0; i < this.list.size(); i++) {
+            if (list.get(i).contains(keyword)) {
+                System.out.println(containsKeywordIndex + "." + this.list.get(i).toString());
+                containsKeywordIndex += 1;
+            }
+        }
+    }
+
 }

@@ -92,6 +92,8 @@ public class Parser {
             LocalDate endDate = LocalDate.parse(splitStartAndEnd[1].trim(), formatter);
             Event task = new Event(splitDescriptionAndDuration[0], startDate, endDate);
             return new AddCommand(task);
+        } if (keyword.equals("find")) {
+            return new FindCommand(splitString[1]);
         } else {
             throw new DukeException("Oh no!!! What is this? Please try again later!");
         }
