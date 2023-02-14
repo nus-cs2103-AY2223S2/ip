@@ -4,11 +4,11 @@ prefer the use of Command Line Interface (CLI) while still having the perks of
 Graphical User Interface (GUI). If you are able to type fast, ***Duke*** can help you
 to keep track of tasks and remind you on the due dates.
 
-+ [Quick Start](https://mrtwit99.github.io/ip#Quick-Start/)
-+ [Features](https://mrtwit99.github.io/ip#Features/)
-+ [Usage](https://mrtwit99.github.io/ip#Usage/)
-+ [FAQ](https://mrtwit99.github.io/ip#FAQ/)
-+ [Command Summary](https://mrtwit99.github.io/ip#Command-Summary/)
++ [Quick Start](#quick-start)
++ [Features](#features)
++ [Usage](#usage)
++ [FAQ](#faq)
++ [Command Summary](#command-summary)
 
 ## Quick Start
 1. Ensure you have Java `11` or later versions installed in your Computer.
