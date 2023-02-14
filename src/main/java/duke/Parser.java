@@ -1,11 +1,22 @@
 package duke;
 
-import duke.command.*;
+import static duke.utils.FormatHelper.INPUTFORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import static duke.utils.FormatHelper.INPUTFORMAT;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.EmptyCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnknownCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * Parser class that processes user inputs.

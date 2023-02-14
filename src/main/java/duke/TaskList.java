@@ -34,7 +34,7 @@ public class TaskList {
             StringBuilder response = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
                 Task curTask = tasks.get(i);
-                response.append((i+ 1)).append(".").append(curTask.toString());
+                response.append((i + 1)).append(".").append(curTask.toString());
                 if (i < tasks.size() - 1) {
                     response.append("\n");
                 }
