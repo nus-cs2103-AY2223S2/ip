@@ -21,7 +21,7 @@ A simple chatbot that manages things you need to do. With all the productivity a
 
 ****[IMPORTANT]****: Ensure you have Java installed on your device.
 
-1. Download `Duke.jar` from below or click [here](https://github.com/arkarsg/ip/releases/download/A-Jar/Duke.jar)
+1. Download `Duke.jar` [here](https://github.com/arkarsg/ip/releases/download/A-Jar/Duke.jar)
 
 #### For Mac users
 1. Launch your Terminal and navigate to `Duke.jar` file using the `cd` command.
@@ -131,6 +131,7 @@ Duke
 
 1. Create the logic for the new command by creating a new `java` file under `/commnands`.
     - The file should inherit `Command` and override the following method signature:
+
 ``` java
     /**
      * Execute the command from given tokens produced by Parser.
