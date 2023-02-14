@@ -57,85 +57,11 @@ public class Storage {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 if (data.charAt(0) == 'T') {
-                    if (data.charAt(9) == '|') {
-                        String description = data.substring(11);
-                        Task task = new Todo(description, data.charAt(4) == 'X');
-                        tasks.add(task);
-                    } else {
-                        int idx = data.indexOf("|", 7);
-                        String tag = data.substring(8, idx - 1);
-                        String description = data.substring(idx + 2);
-                        Task task = new Todo(description, data.charAt(4) == 'X', tag);
-                        tasks.add(task);
-                    }
+                    handleLoadTodo(data, tasks);
                 } else if (data.charAt(0) == 'D') {
-                    if (data.charAt(9) == '|') {
-                        int idx = data.indexOf("|", 10);
-                        String description = data.substring(11, idx - 1);
-                        String deadlineStr = data.substring(idx + 2);
-                        LocalDate deadline = null;
-                        try {
-                            deadline = Parser.processDate(deadlineStr);
-                        } catch (WindyCallException e) {
-                            // since load from file
-                            // for sure the format is correct
-                        }
-                        Task task = new Deadline(description, data.charAt(4) == 'X', deadline);
-                        tasks.add(task);
-                    } else {
-                        int idx1 = data.indexOf("|", 7);
-                        int idx2 = data.indexOf("|", idx1 + 1);
-                        String description = data.substring(idx1 + 2, idx2 - 1);
-                        String deadlineStr = data.substring(idx2 + 2);
-                        LocalDate deadline = null;
-                        try {
-                            deadline = Parser.processDate(deadlineStr);
-                        } catch (WindyCallException e) {
-                            // since load from file
-                            // for sure the format is correct
-                        }
-                        String tag = data.substring(8, idx1 - 1);
-                        Task task = new Deadline(description, data.charAt(4) == 'X', deadline, tag);
-                        tasks.add(task);
-                    }
+                    handleLoadDeadline(data, tasks);
                 } else {
-                    if (data.charAt(9) == '|') {
-                        int idx1 = data.indexOf("|", 10);
-                        int idx2 = data.indexOf("|", idx1 + 1);
-                        String description = data.substring(11, idx1 - 1);
-                        String fromStr = data.substring(idx1 + 2, idx2 - 1);
-                        String toStr = data.substring(idx2 + 2);
-                        LocalDate from = null;
-                        LocalDate to = null;
-                        try {
-                            from = Parser.processDate(fromStr);
-                            to = Parser.processDate(toStr);
-                        } catch (WindyCallException e) {
-                            // since load from file
-                            // for sure the format is correct
-                        }
-                        Task task = new Event(description, data.charAt(4) == 'X', from, to);
-                        tasks.add(task);
-                    } else {
-                        int idx1 = data.indexOf("|", 7);
-                        int idx2 = data.indexOf("|", idx1 + 1);
-                        int idx3 = data.indexOf("|", idx2 + 1);
-                        String description = data.substring(idx1 + 2, idx2 - 1);
-                        String fromStr = data.substring(idx2 + 2, idx3 - 1);
-                        String toStr = data.substring(idx3 + 2);
-                        LocalDate from = null;
-                        LocalDate to = null;
-                        try {
-                            from = Parser.processDate(fromStr);
-                            to = Parser.processDate(toStr);
-                        } catch (WindyCallException e) {
-                            // since load from file
-                            // for sure the format is correct
-                        }
-                        String tag = data.substring(8, idx1 - 1);
-                        Task task = new Event(description, data.charAt(4) == 'X', from, to, tag);
-                        tasks.add(task);
-                    }
+                    handleLoadEvent(data, tasks);
                 }
             }
             myReader.close();
@@ -144,6 +70,92 @@ public class Storage {
             e.printStackTrace();
         }
 
+    }
+
+    private void handleLoadTodo(String data, List<Task> tasks) {
+        if (data.charAt(9) == '|') {
+            String description = data.substring(11);
+            Task task = new Todo(description, data.charAt(4) == 'X');
+            tasks.add(task);
+        } else {
+            int idx = data.indexOf("|", 7);
+            String tag = data.substring(8, idx - 1);
+            String description = data.substring(idx + 2);
+            Task task = new Todo(description, data.charAt(4) == 'X', tag);
+            tasks.add(task);
+        }
+    }
+
+    private void handleLoadDeadline(String data, List<Task> tasks) {
+        if (data.charAt(9) == '|') {
+            int idx = data.indexOf("|", 10);
+            String description = data.substring(11, idx - 1);
+            String deadlineStr = data.substring(idx + 2);
+            LocalDate deadline = null;
+            try {
+                deadline = Parser.processDate(deadlineStr);
+            } catch (WindyCallException e) {
+                // since load from file
+                // for sure the format is correct
+            }
+            Task task = new Deadline(description, data.charAt(4) == 'X', deadline);
+            tasks.add(task);
+        } else {
+            int idx1 = data.indexOf("|", 7);
+            int idx2 = data.indexOf("|", idx1 + 1);
+            String description = data.substring(idx1 + 2, idx2 - 1);
+            String deadlineStr = data.substring(idx2 + 2);
+            LocalDate deadline = null;
+            try {
+                deadline = Parser.processDate(deadlineStr);
+            } catch (WindyCallException e) {
+                // since load from file
+                // for sure the format is correct
+            }
+            String tag = data.substring(8, idx1 - 1);
+            Task task = new Deadline(description, data.charAt(4) == 'X', deadline, tag);
+            tasks.add(task);
+        }
+    }
+
+    private void handleLoadEvent(String data, List<Task> tasks) {
+        if (data.charAt(9) == '|') {
+            int idx1 = data.indexOf("|", 10);
+            int idx2 = data.indexOf("|", idx1 + 1);
+            String description = data.substring(11, idx1 - 1);
+            String fromStr = data.substring(idx1 + 2, idx2 - 1);
+            String toStr = data.substring(idx2 + 2);
+            LocalDate from = null;
+            LocalDate to = null;
+            try {
+                from = Parser.processDate(fromStr);
+                to = Parser.processDate(toStr);
+            } catch (WindyCallException e) {
+                // since load from file
+                // for sure the format is correct
+            }
+            Task task = new Event(description, data.charAt(4) == 'X', from, to);
+            tasks.add(task);
+        } else {
+            int idx1 = data.indexOf("|", 7);
+            int idx2 = data.indexOf("|", idx1 + 1);
+            int idx3 = data.indexOf("|", idx2 + 1);
+            String description = data.substring(idx1 + 2, idx2 - 1);
+            String fromStr = data.substring(idx2 + 2, idx3 - 1);
+            String toStr = data.substring(idx3 + 2);
+            LocalDate from = null;
+            LocalDate to = null;
+            try {
+                from = Parser.processDate(fromStr);
+                to = Parser.processDate(toStr);
+            } catch (WindyCallException e) {
+                // since load from file
+                // for sure the format is correct
+            }
+            String tag = data.substring(8, idx1 - 1);
+            Task task = new Event(description, data.charAt(4) == 'X', from, to, tag);
+            tasks.add(task);
+        }
     }
 
     /**
