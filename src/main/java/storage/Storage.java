@@ -82,8 +82,8 @@ public class Storage {
      * description of the task and its marked status.
      *
      * @param description Description from the data file.
-     * @return A String array, with the zero index as the description of the' task
-     * and the first index as the marked status in String form.
+     * @return A String array, with the zero index as the description of the task
+     *     and the first index as the marked status in String form.
      */
     public String[] getDescriptionAndMarkedStatus(String description) {
         String[] words = description.split("] ");
