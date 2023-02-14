@@ -35,7 +35,7 @@ public class TunaBot {
         assert tasks != null : "Storage should have loaded either an existing "
             + "task list from save file or initialised a new task list";
     }
-    
+
     public static void main(String[] args) {
         Application.launch(Gui.class, args);
     }
