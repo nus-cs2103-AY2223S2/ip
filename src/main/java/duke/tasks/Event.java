@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    public final String start;
-    public final String end;
+    private final String start;
+    private final String end;
 
     /**
      * Constructor for an Event task.
@@ -22,6 +22,17 @@ public class Event extends Task {
         this.end = end;
     }
 
+<<<<<<< HEAD
+=======
+    public String getStart() {
+        return start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+>>>>>>> branch-A-codingStandard
     /**
      * String representation of an Event, in the format <code>[E] description (from: start to end)</code>.
      * @return String representation of Event object.

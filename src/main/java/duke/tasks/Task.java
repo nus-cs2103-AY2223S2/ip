@@ -40,6 +40,7 @@ abstract public class Task {
      * Marks this Task as done.
      */
     public void mark() {
+<<<<<<< HEAD
       this.isDone = true;
     }
 
@@ -51,12 +52,29 @@ abstract public class Task {
     }
 
     /**
+=======
+        this.isDone = true;
+    }
+
+    /**
+     * (Un)Marks this task as done.
+     */
+    public void unmark() {
+        this.isDone = false;
+    }
+
+    /**
+>>>>>>> branch-A-codingStandard
      * String representation of any Task, in the format <code>[doneIcon] description</code>.
      * @return String representation of this Task.
      */
     @Override
     public String toString() {
+<<<<<<< HEAD
       return "[" + this.getStatusIcon() + "] " + this.description;
+=======
+        return "[" + this.getStatusIcon() + "] " + this.description;
+>>>>>>> branch-A-codingStandard
     }
 }
 
