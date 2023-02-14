@@ -1,5 +1,10 @@
 package duke.tasks;
+import duke.exception.DukeInvalidArgumentsException;
+import duke.exception.DukeMissingArgumentException;
+import duke.exception.DukeTaskArgumentException;
 import java.time.LocalDateTime;
+import duke.Ui;
+
 
 /**
  * Represents the Task information with
@@ -8,6 +13,8 @@ import java.time.LocalDateTime;
 public abstract class Task {
     private String taskText;
     private boolean isCompleted;
+
+    private Ui ui;
 
     /**
      * Creates a new Task with the given task description
@@ -18,6 +25,7 @@ public abstract class Task {
     public Task(String taskText) {
         this.taskText = taskText;
         this.isCompleted = false;
+        this.ui = new Ui();
     }
 
     /**
