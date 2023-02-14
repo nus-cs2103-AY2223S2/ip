@@ -1,5 +1,9 @@
 # User Guide
 
+> "Habits are the compound interest of self-improvement." - James Clear ([source](https://www.goodreads.com/work/quotes/62221762-atomic-habits-an-easy-proven-way-to-build-good-habits-break-bad-one))
+
+Persona Duke is your personal companion, designed for you to finish your tasks.
+
 ## Features
 
 ### Add Task (Todo/Deadline/Event)
