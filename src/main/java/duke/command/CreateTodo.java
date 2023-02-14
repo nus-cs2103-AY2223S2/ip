@@ -17,6 +17,11 @@ public class CreateTodo extends Command {
       this.desc = desc;
    }
 
+    @Override
+    public String getCommand() {
+        return "todo";
+    }
+
    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Integer size = tasks.size();

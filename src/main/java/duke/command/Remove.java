@@ -19,6 +19,11 @@ public class Remove extends Command {
     }
 
     @Override
+    public String getCommand() {
+        return "remove";
+    }
+
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index > tasks.size() || index < 1) {
             throw new InvalidArgumentException(Integer.toString(index), "in the range of 1 to " + tasks.size());

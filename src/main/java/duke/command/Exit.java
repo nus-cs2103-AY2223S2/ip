@@ -16,6 +16,11 @@ public class Exit extends Command {
     }
 
     @Override
+    public String getCommand() {
+        return "bye";
+    }
+
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.save(tasks);
         return ui.showBye();

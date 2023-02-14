@@ -6,6 +6,8 @@ import duke.Ui;
 import duke.exceptions.DukeException;
 
 public abstract class Command {
+    public abstract String getCommand();
+
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public static boolean checkAlias(String alias) {

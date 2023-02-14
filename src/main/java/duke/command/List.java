@@ -14,6 +14,12 @@ public class List extends Command {
     public List() {
         super();
     }
+
+    @Override
+    public String getCommand() {
+        return "list";
+    }
+
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         return ui.showList(tasks);
     };

@@ -18,6 +18,11 @@ public class Set extends Command {
         this.command = command;
         this.newCommand = newCommand;
     }
+
+    @Override
+    public String getCommand() {
+        return "set";
+    }
     
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

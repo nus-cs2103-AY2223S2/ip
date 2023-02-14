@@ -23,6 +23,11 @@ public class CreateEvent extends Command {
     }
 
     @Override
+    public String getCommand() {
+        return "event";
+    }
+
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Integer size = tasks.size();
         tasks.add(new Event(description, start, end, false));

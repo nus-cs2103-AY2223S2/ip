@@ -17,6 +17,11 @@ public class Find extends Command {
     }
 
     @Override
+    public String getCommand() {
+        return "find";
+    }
+
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList matches = tasks.stream().filter(t -> t.getDescription().contains(keyword)).collect(TaskList::new, TaskList::add, TaskList::addAll);
         return ui.showFind(matches);

@@ -41,7 +41,7 @@ public class StorageTest {
         } catch (IOException e) {
             fail("IOException thrown");
         } catch (DukeException e) {
-            fail("DukeException thrown");
+            fail(e.getMessage());
         } finally {
             testFile.delete();
         }
@@ -69,7 +69,7 @@ public class StorageTest {
         // } catch (IOException e) {
         //     fail("IOException thrown");
         } catch (DukeException e) {
-            fail("DukeException thrown");
+            fail(e.getMessage());
         } finally {
             testFile.delete();
         }
