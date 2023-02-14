@@ -67,7 +67,7 @@ public class CommandParser {
 
         if (commandName.equals("bye")) {
             ui.showLine();
-            ui.showText("Bye. Hope to see you again soon!");
+            ui.showText("Bye Sir! Hope to see you again soon!");
             ui.showLine();
 
             hasUserQuit = true;
@@ -76,13 +76,13 @@ public class CommandParser {
 
         Command command = commandMap.get(commandName);
         if (command == null) {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("I'm sorry Sir! but I don't know what that means :-(");
         }
 
         Matcher commandPatternMatcher = Pattern.compile(command.getCommandRegexPattern()).matcher(input);
         if (!commandPatternMatcher.find()) {
             throw new DukeException(String.format(
-                    "I'm sorry, but can you retype again in this format:\n     %s", command.getCommandPattern()));
+                    "I'm sorry Sir! Can you retype again in this format:\n     %s", command.getCommandPattern()));
         }
 
         String[] args = new String[commandPatternMatcher.groupCount()];

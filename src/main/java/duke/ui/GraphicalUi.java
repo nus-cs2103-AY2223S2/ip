@@ -36,6 +36,6 @@ public class GraphicalUi implements Ui {
      */
     @Override
     public void showStartup() {
-        mainWindow.showReply("Welcome to Duke!");
+        mainWindow.showReply("Hello Sir! How can I help you?");
     }
 }
