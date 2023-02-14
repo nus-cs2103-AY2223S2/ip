@@ -22,6 +22,7 @@ public class Storage {
      * @param filePath The data's save file's path.
      */
     public Storage(String filePath) {
+        assert filePath != null : "File path should not be 'null'";
         this.filePath = filePath;
     }
 
@@ -67,6 +68,8 @@ public class Storage {
         if (saveFileContents == null || saveFileContents.isBlank()) {
             return output;
         }
+
+        assert saveFileContents != null : "File contents should not be 'null'";
 
         for (String encodedTask : saveFileContents.split("\n")) {
             Task task = Task.loadFromString(encodedTask);
