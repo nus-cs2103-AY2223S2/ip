@@ -15,9 +15,13 @@ import app.task.TaskList;
  */
 public class Duke {
     private static final Path STORAGE_LOCATION = Paths.get(".", "data", "storage.txt");
-
+    private static final String FIRST_LOAD_MESSAGE = "Heyo, I think this is your first time loading "
+            + "up this app! I have some default tasks written in for you below - feel free to edit or delete "
+            + "them at your leisure.\n\n"
+            + "Also, be sure to check out the docs at https://ajjajjajjajj.github.io/ip/!\n\n";
     private Storage storage;
     private TaskList taskList;
+
 
     /**
      * Constructor for Duke.
@@ -61,7 +65,15 @@ public class Duke {
     public String loadStorageData() {
         Command loadCommand = new LoadCommand();
         System.out.println("Loading storage data...");
-        return loadCommand.execute(taskList, storage).toString();
+        String message = loadCommand.execute(taskList, storage).toString();
+
+        // saves default storage into real storage
+        if (storage.isFirstLoad()) {
+            Command saveDefaultStorageCommand = new SaveCommand();
+            saveDefaultStorageCommand.execute(taskList, storage);
+            message = FIRST_LOAD_MESSAGE + message;
+        }
+        return message;
     }
 
     public String showSummary() {
