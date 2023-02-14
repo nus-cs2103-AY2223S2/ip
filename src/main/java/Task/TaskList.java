@@ -48,9 +48,16 @@ public class TaskList {
      * @param taskNum The number of the selected Task in the List.
      * @param isDone A boolean representing whether task has been completed.
      * @return Task The edited Task.
+     * @throws DukeException
      */
-    public Task markTask(int taskNum, boolean isDone) throws ArrayIndexOutOfBoundsException {
-        Task taskToMark = tasks.get(taskNum - 1);
+    public Task markTask(int taskNum, boolean isDone) throws DukeException {
+        Task taskToMark = null;
+        try {
+            taskToMark = tasks.get(taskNum - 1);
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException(Ui.outOfBoundSelectionResponse(this.getSize()));
+        }
+
         if (isDone) {
             taskToMark.mark();
         } else {
@@ -64,9 +71,17 @@ public class TaskList {
      *
      * @param taskNum The number of the selected Task in the List.
      * @return Task The deleted Task.
+     * @throws DukeException
      */
-    public Task deleteTask(int taskNum) {
-        Task deleteTask = tasks.remove(taskNum);
+    public Task deleteTask(int taskNum) throws DukeException {
+        Task deleteTask = null;
+
+        try {
+            deleteTask = tasks.remove(taskNum);
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException(Ui.outOfBoundSelectionResponse(this.getSize()));
+        }
+
         return deleteTask;
     }
 

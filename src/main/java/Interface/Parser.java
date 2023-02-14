@@ -173,48 +173,75 @@ public class Parser {
         switch(instruction) {
 
         case "bye":
+            assert(inputs.length == 1);
+
             command = new ExitCommand();
             break;
 
         case "list":
+            assert(inputs.length == 1);
+
             command = new ListCommand();
             break;
 
         case "find":
+            assert(inputs.length == 1);
+
             String keyword = splitFromInstruction(inputs[0])[1];
             command = new FindCommand(keyword);
             break;
 
         case "mark":
+            assert(inputs.length == 1);
+            assert(isValidSelection(splitFromInstruction(inputs[0])[1]));
+
             int markNum = Integer.parseInt(splitFromInstruction(inputs[0])[1]);
             command = new MarkCommand(markNum);
             break;
 
         case "unmark":
+            assert(inputs.length == 1);
+            assert(isValidSelection(splitFromInstruction(inputs[0])[1]));
+
             int unmarkNum = Integer.parseInt(splitFromInstruction(inputs[0])[1]);
             command = new UnmarkCommand(unmarkNum);
             break;
 
         case "delete":
+            assert(inputs.length == 1);
+            assert(isValidSelection(splitFromInstruction(inputs[0])[1]));
+
             int deleteNum = Integer.parseInt(splitFromInstruction(inputs[0])[1]);
             command = new DeleteCommand(deleteNum);
             break;
 
         case "todo":
+            assert(inputs.length == 1);
+
             String todoName = splitFromInstruction(inputs[0])[1];
             command = new AddTodoCommand(todoName);
             break;
 
         case "deadline":
+            assert(inputs.length == 2);
+
             String deadlineName = splitFromInstruction(inputs[0])[1];
             String by = inputs[1].substring(3);
+
+            assert(isValidTime(by));
+
             command = new AddDeadlineCommand(deadlineName, by);
             break;
 
         case "event":
+            assert(inputs.length == 3);
+
             String eventName = splitFromInstruction(inputs[0])[1];
             String from = inputs[1].substring(5);
             String to = inputs[2].substring(3);
+
+            assert(isValidTime(from, to));
+
             command = new AddEventCommand(eventName, from, to);
             break;
 
