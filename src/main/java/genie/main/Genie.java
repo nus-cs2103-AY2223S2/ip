@@ -43,4 +43,10 @@ public class Genie {
         }
         return "This should not print.\n";
     }
+    public String showGreetingMessage() {
+        ui.appendGreetingMessage();
+        String greetMessage = ui.getResponse();
+        ui.clearResponse();
+        return greetMessage;
+    }
 }

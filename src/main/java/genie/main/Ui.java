@@ -20,8 +20,10 @@ public class Ui {
     /**
      * Prints greet message.
      */
-    public void greet() {
-        response.append("Hello! This is Genie, your personal task tracker!");
+    public void appendGreetingMessage() {
+        response.append("Hello! This is Genie, your personal task tracker!\n\n");
+        response.append("To get started, here is a list of commands that I recognise:\n");
+        response.append(showAllCommands());
     }
 
     /**
@@ -33,7 +35,7 @@ public class Ui {
             response.append("Here are the tasks in your list:\n");
             for (int i = 1; i <= tasks.size(); i++) {
                 Task t = tasks.get(i - 1);
-                String numberedTaskInfo = showNumberedTaskInfo(i, t);
+                String numberedTaskInfo = appendNumberedTaskInfo(i, t);
                 response.append(numberedTaskInfo);
             }
         } else {
@@ -112,7 +114,7 @@ public class Ui {
             response.append("Here are the matching tasks in your list:\n");
             for(int i = 1; i <= tasks.size(); i++) {
                 Task t = tasks.get(i - 1);
-                String numberedTaskInfo = showNumberedTaskInfo(i, t);
+                String numberedTaskInfo = appendNumberedTaskInfo(i, t);
                 response.append(numberedTaskInfo);
             }
         } else {
@@ -122,14 +124,39 @@ public class Ui {
     public void showEmptyMatchingTasksMessage() {
         response.append("There are no matching tasks for your search :(\n");
     }
+    public void appendHelpMessage() {
+        response.append("No problem! Here is a list of commands I can recognise:\n");
+        response.append("\n");
+        response.append(showAllCommands());
+    }
     public String getResponse() {
         return response.toString();
     }
     public void clearResponse() {
         response.setLength(0);
     }
-    public String showNumberedTaskInfo(int index, Task t) {
+    public String appendNumberedTaskInfo(int index, Task t) {
         String numberedTaskInfo = index + ". " + t.toString() + "\n";
         return numberedTaskInfo;
+    }
+    public String showAllCommands() {
+        String allCommands = "* todo <task>\n" +
+                "* event <task> /from <time> /to <time>\n" +
+                "* deadline <task> /by <time>\n" +
+                "    - <time> (optional): YYYY-MM-DD HH:MM\n" +
+                "\n" +
+                "* delete <list number>\n" +
+                "    - deletes that task on the list\n" +
+                "* mark <list number>\n" +
+                "    - marks that task as done\n" +
+                "* unmark <list number>\n" +
+                "    - marks that task as undone\n" +
+                "* list\n" +
+                "    - shows your consolidated task list\n" +
+                "* find <keyword>\n" +
+                "    - finds all tasks with the specified keyword\n" +
+                "* help\n" +
+                "    - shows help page";
+        return allCommands;
     }
 }
