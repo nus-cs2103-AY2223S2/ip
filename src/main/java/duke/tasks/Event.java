@@ -2,7 +2,6 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * The class representing an Event task.
@@ -35,25 +34,17 @@ public class Event extends Task {
     }
 
     private void setFrom(String from) {
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(from, IN_FORMAT);
-            this.from = dateTime;
-        } catch (DateTimeParseException d) {
-            System.out.println("Invalid date/time format for Deadline.");
-        }
+        LocalDateTime dateTime = LocalDateTime.parse(from, IN_FORMAT);
+        this.from = dateTime;
     }
 
     private void setTo(String to) {
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(to, IN_FORMAT);
-            this.to = dateTime;
-        } catch (DateTimeParseException d) {
-            System.out.println("Invalid date/time format for Deadline.");
-        }
+        LocalDateTime dateTime = LocalDateTime.parse(to, IN_FORMAT);
+        this.to = dateTime;
     }
 
     private String duration() {
-        return " (from: " + this.from.format(OUT_FORMAT) + ", to: "
+        return "\n(from: " + this.from.format(OUT_FORMAT) + ", to: "
                 + this.to.format(OUT_FORMAT) + ")";
     }
 
@@ -62,7 +53,7 @@ public class Event extends Task {
      * @return String representing the format of Event Task.
      */
     public static String showFomat() {
-        return "Create an `Event` with: " + FORMAT;
+        return "Create an `Event` with:\n" + FORMAT;
     }
 
     public LocalDateTime getDate() {

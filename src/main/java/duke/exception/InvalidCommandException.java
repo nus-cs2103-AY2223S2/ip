@@ -9,13 +9,13 @@ public class InvalidCommandException extends Exception {
     public static final String MARK_FORMAT_EXCEPTION = "[ERROR] : Mark/unmark tasks with task number."
                                                     + HELP;
     public static final String NAME_FORMAT_EXCEPTION = "[ERROR] : Missing task name. ";
-    public static final String ARG_FORMAT_EXCEPTION = "[ERROR] Please specify date and time. ";
-    public static final String NULL_DELETE_EXCEPTION = "[ERROR] Missing task name to delete. Please specify a task."
+    public static final String ARG_FORMAT_EXCEPTION = "[ERROR] : Please specify date and time. ";
+    public static final String NULL_DELETE_EXCEPTION = "[ERROR] : Missing task name to delete. Please specify a task."
                                                     + HELP;
-    public static final String DELETE_FORMAT_EXCEPTION = "[ERROR] Delete task with task number."
+    public static final String DELETE_FORMAT_EXCEPTION = "[ERROR] : Delete task with task number."
                                                     + HELP;
-    public static final String FIND_FORMAT_EXCEPTION = "[ERROR] No search term(s) specified.";
-    public static final String SORT_FORMAT_EXCEPTION = "[ERROR] Please specify a sort key.";
+    public static final String FIND_FORMAT_EXCEPTION = "[ERROR] : No search term(s) specified.";
+    public static final String SORT_FORMAT_EXCEPTION = "[ERROR] : Please specify a sort key.";
     private String errorMessage;
 
     /**

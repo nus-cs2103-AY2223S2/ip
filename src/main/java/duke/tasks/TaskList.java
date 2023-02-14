@@ -106,6 +106,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Sorts the tasklist based on the given comparator input.
+     * Sort mutates the tasklist, thereby, affecting the behaviour of the next commands.
+     * @param c Comparator to compare Tasks
+     * @return List of sorted tasks based on key
+     */
     public String sort(Comparator<Task> c) {
         allTasks = allTasks.stream()
                             .sorted(c)

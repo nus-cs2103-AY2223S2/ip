@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_RIGHT" maxWidth="400.0" minWidth="-Infinity" prefHeight="123.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <Text fx:id="dialog" boundsType="VISUAL" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="300.0" HBox.hgrow="ALWAYS">
+      <Text fx:id="dialog" boundsType="VISUAL" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="270.0" HBox.hgrow="NEVER">
          <font>
             <Font name="Menlo Regular" size="13.0" />
          </font>

@@ -17,7 +17,8 @@ public class DukeIo {
                                          + "[mark] : Mark a task as completed\n"
                                          + "[unmark] : Unmark a completed task\n"
                                          + "[delete] : Delete a task from the list\n"
-                                         + "[find] : Find a task containing the keyword\n";
+                                         + "[find] : Find a task containing the keyword\n"
+                                         + "[sort] : Sort tasks alphabetically or by date\n";
     private static final String HELLO = "Hello! I am Duke.\n"
                                         + "What's on your mind today?\n";
     private static final String SAVE_SUCCESS = "Successfully saved all tasks\n";
@@ -56,7 +57,7 @@ public class DukeIo {
      * @return User-friendly success toast and task description rendered on GUI.
      */
     public String notifySuccessAdd(Task t) {
-        String out = "Successfully added: " + t.toString() + "\n";
+        String out = "Successfully added:\n" + "    " + t.toString() + "\n";
         return out;
     }
 
@@ -66,7 +67,7 @@ public class DukeIo {
      * @return User-friendly success toast and completed task rendered on GUI.
      */
     public String notifySuccessComplete(Task t) {
-        String out = "Successfully completed: " + t.toString() + "\n";
+        String out = "Successfully completed:\n" + "    " + t.toString() + "\n";
         return out;
     }
 
@@ -76,7 +77,7 @@ public class DukeIo {
      * @return User-friendly success toast of unmarked task rendered on GUI.
      */
     public String notifyUnmark(Task t) {
-        String out = "Unmarked task: " + t.toString() + "\n";
+        String out = "Unmarked task:\n" + "    " + t.toString() + "\n";
         return out;
     }
 
@@ -86,7 +87,7 @@ public class DukeIo {
      * @return User-friendly failure toast rendered on GUI.
      */
     public String notifyMarkFail(Task t) {
-        String out = "Cannot mark completed task: " + t.toString() + "\n";
+        String out = "Cannot mark completed task:\n" + "    " + t.toString() + "\n";
         return out;
     }
 
@@ -96,7 +97,7 @@ public class DukeIo {
      * @return User-friendly failure toast rendered on GUI.
      */
     public String notifyUnmarkFail(Task t) {
-        String out = "Cannot unmark incomplete task: " + t.toString() + "\n";
+        String out = "Cannot unmark incomplete task:\n" + "    " + t.toString() + "\n";
         return out;
     }
 

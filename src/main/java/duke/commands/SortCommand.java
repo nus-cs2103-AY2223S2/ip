@@ -3,9 +3,9 @@ package duke.commands;
 import java.util.Comparator;
 
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.tasks.taskcomparator.DateComparator;
 import duke.tasks.taskcomparator.DescriptionComparator;
-import duke.tasks.TaskList;
 import duke.utils.DukeIo;
 
 /**
@@ -16,7 +16,7 @@ public class SortCommand extends Command {
 
     /**
      * Public constructor for Deadline command.
-     * @param tokens Tokenised user inputs from user.
+     * @param sortKey Tokenised user inputs from user.
      */
     public SortCommand(String sortKey) {
         this.key = sortKey;

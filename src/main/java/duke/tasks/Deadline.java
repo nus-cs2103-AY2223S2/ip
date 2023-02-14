@@ -2,7 +2,6 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * The class representing a Deadline task.
@@ -29,16 +28,12 @@ public class Deadline extends Task {
     }
 
     private void setDeadline(String deadline) {
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(deadline, IN_FORMAT);
-            this.deadline = dateTime;
-        } catch (DateTimeParseException d) {
-            System.out.println("Invalid date/time format for Deadline.");
-        }
+        LocalDateTime dateTime = LocalDateTime.parse(deadline, IN_FORMAT);
+        this.deadline = dateTime;
     }
 
     private String deadline() {
-        return " (by: " + this.deadline.format(OUT_FORMAT) + ")";
+        return "\n(by: " + this.deadline.format(OUT_FORMAT) + ")";
     }
 
     /**
@@ -47,11 +42,15 @@ public class Deadline extends Task {
      * @return String representing the format of Deadline task.
      */
     public static String showFormat() {
-        return "Create a `deadline` with: " + FORMAT;
+        return "Create a `deadline` with:\n" + FORMAT;
     }
 
     public LocalDateTime getDate() {
         return deadline;
+    }
+
+    public static DateTimeFormatter getTimeFormat() {
+        return IN_FORMAT;
     }
 
     /**

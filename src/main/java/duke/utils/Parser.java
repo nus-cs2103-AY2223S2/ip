@@ -1,5 +1,7 @@
 package duke.utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,7 @@ import duke.commands.SortCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
 import duke.exception.InvalidCommandException;
+import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 
 /**
@@ -95,9 +98,19 @@ public class Parser {
                     new InvalidCommandException(
                             InvalidCommandException.NAME_FORMAT_EXCEPTION));
         }
-        String[] args = originalCmd.split("/by");
+
+        String desc = String.join(" ", t.subList(1, byIndex));
+        String deadline = String.join(" ", t.subList(byIndex + 1, t.size()));
+        String[] args = {desc, deadline};
         // There should only be 2 arguments if parsed correctly.
         assert args.length == 2;
+        try {
+            LocalDateTime.parse(deadline, Deadline.getTimeFormat());
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(
+                    new InvalidCommandException(
+                        InvalidCommandException.ARG_FORMAT_EXCEPTION));
+        }
         return new DeadlineCommand(args);
     }
 
@@ -118,6 +131,14 @@ public class Parser {
         String desc = String.join(" ", e.subList(1, fromIndex));
         String from = String.join(" ", e.subList(fromIndex + 1, toIndex));
         String to = String.join(" ", e.subList(toIndex + 1, e.size()));
+        try {
+            LocalDateTime.parse(from, Deadline.getTimeFormat());
+            LocalDateTime.parse(to, Deadline.getTimeFormat());
+        } catch (DateTimeParseException d) {
+            return new InvalidCommand(
+                    new InvalidCommandException(
+                        InvalidCommandException.ARG_FORMAT_EXCEPTION));
+        }
         String[] args = {desc, from, to};
         return new EventCommand(args);
     }
@@ -207,11 +228,15 @@ public class Parser {
                     new InvalidCommandException(InvalidCommandException.SORT_FORMAT_EXCEPTION));
         }
 
-        if (!tokens[1].equals("name") || !tokens[1].equals("date")) {
+        if (isInvalidSortKey(tokens[1])) {
             return new InvalidCommand(
                     new InvalidCommandException(InvalidCommandException.SORT_FORMAT_EXCEPTION));
         }
         return new SortCommand(tokens[1]);
+    }
+
+    private boolean isInvalidSortKey(String token) {
+        return !(token.equals("name") || token.equals("date"));
     }
 
     private Command parseBye() {

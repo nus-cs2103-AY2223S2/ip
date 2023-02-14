@@ -15,6 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+/**
+ * GUI for dialog box that shows on every user input and response.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Text dialog;
