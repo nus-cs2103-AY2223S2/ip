@@ -99,17 +99,6 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Welcome!");
-        alert.setHeaderText(null);
-        alert.setContentText(" ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n");
-
-        alert.show();
-
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -125,9 +114,7 @@ public class Duke extends Application {
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput();
-            } catch (DukeException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (DukeException | IOException e) {
                 e.printStackTrace();
             }
         });
@@ -135,9 +122,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             try {
                 handleUserInput();
-            } catch (DukeException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (DukeException | IOException e) {
                 e.printStackTrace();
             }
         });

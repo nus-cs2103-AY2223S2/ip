@@ -57,7 +57,6 @@ public class Parser {
                 return listOutput;
 
             case "bye":
-//                String byeOutput = "It was a pleasure to help, goodbye!";
                 return null;
 
             case "mark":
@@ -68,9 +67,7 @@ public class Parser {
                 try {
                     int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task selectedTask = taskList.get(taskIndex);
-//                    System.out.println("Done! I've marked this task as done :D");
                     selectedTask.check();
-//                    System.out.println(selectedTask);
                     String markOutput = "Done! I've marked this task as done :D\n";
                     markOutput += selectedTask;
                     return markOutput;
@@ -86,10 +83,8 @@ public class Parser {
                 try {
                     int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task unselectedTask = taskList.get(unmarkIndex);
-//                    System.out.println("This task is apparently not done huh D:");
                     String unmarkOutput = "This task is apparently not done huh D:\n";
                     unselectedTask.unCheck();
-//                    System.out.println(unselectedTask);
                     unmarkOutput += unselectedTask;
                     return unmarkOutput;
                 } catch (IndexOutOfBoundsException e) {

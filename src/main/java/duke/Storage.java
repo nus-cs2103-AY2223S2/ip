@@ -38,7 +38,7 @@ public class Storage {
      * @throws DukeException Thrown when unexpected behaviour occurs with Duke.
      */
     public void save(TaskList taskList) throws IOException, DukeException {
-        if (!file.getParentFile().exists()) { //check if directory exists, else make one
+        if (!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
                 throw new DukeException("Directories can't be made? Or did something go wrong...");
             }
@@ -58,7 +58,6 @@ public class Storage {
         }
 
         fileWriter.close();
-//        Ui.showSavedDataMessage();
     }
 
     /**
@@ -71,7 +70,7 @@ public class Storage {
         File f = new File(SAVED_PATH);
 
         try {
-            if (!f.exists()) { //file didn't exist yet
+            if (!f.exists()) {
                 Ui.showNewUserMessage();
                 return new Task[0];
             } else {
