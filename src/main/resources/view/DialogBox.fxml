@@ -20,6 +20,8 @@
       text="Label"
       wrapText="true"
       style="-fx-font-family: 'Consolas';"
+      minHeight="-Infinity"
+      maxHeight="Infinity"
     />
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
   </children>
