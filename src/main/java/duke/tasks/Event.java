@@ -48,9 +48,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
-        String start = startDate.format(format);
-        String end = endDate.format(format);
+        DateTimeFormatter startFormat = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        DateTimeFormatter endFormat = DateTimeFormatter.ofPattern("HH:mm");
+        String start = startDate.format(startFormat);
+        String end = endDate.format(endFormat);
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
     }
 }

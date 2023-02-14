@@ -1,6 +1,7 @@
 package duke.repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.tasks.Task;
 
@@ -62,6 +63,7 @@ public class TaskList {
      * @param taskIds id that identifies task to be deleted.
      */
     public void deleteTasks(ArrayList<Integer> taskIds) {
+        Collections.sort(taskIds);
         for (int i = 0; i < taskIds.size(); i++) {
             taskList.remove(taskIds.get(i) - i);
         }

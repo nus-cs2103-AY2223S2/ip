@@ -24,10 +24,10 @@ public class EventTest {
         Event event = new Event("Event Test", startDate, endDate);
 
         // Test Case 1: Unmarked
-        assertEquals("[E][ ] Event Test (from: 06 Aug 2023 14:00 to: 06 Aug 2023 16:00)", event.toString());
+        assertEquals("[E][ ] Event Test (from: 06 Aug 2023 14:00 to: 16:00)", event.toString());
 
         // Test Case 2: Marked
         event.markTask();
-        assertEquals("[E][X] Event Test (from: 06 Aug 2023 14:00 to: 06 Aug 2023 16:00)", event.toString());
+        assertEquals("[E][X] Event Test (from: 06 Aug 2023 14:00 to: 16:00)", event.toString());
     }
 }
