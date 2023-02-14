@@ -3,7 +3,7 @@
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your computer.
-2. Download the latest duke.jar from here.
+2. Download the latest duke.jar from [here](https://github.com/bojie3/ip/releases/tag/BCD-Extension).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Run the jar file to start the app. 
 5. Type the command in the command box and press Enter to execute it. 
