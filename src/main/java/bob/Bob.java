@@ -68,7 +68,7 @@ public class Bob extends Application {
         } catch (BobException e) {
             response = ui.errorPrint(e);
         }
-
+        assert response != null;
         return response;
     }
 
@@ -96,6 +96,7 @@ public class Bob extends Application {
     }
 
     private DialogBox showBobDialog(String text) {
+        assert text != null;
         Label bobText = new Label(text);
         return DialogBox.getBobDialog(bobText, new ImageView(bob));
     }
@@ -132,6 +133,9 @@ public class Bob extends Application {
         stage.show();
 
         format(stage, mainLayout);
+
+        // Setting event handlers
+        setHandlers();
     }
 
     // Format JavaFX
@@ -192,10 +196,7 @@ public class Bob extends Application {
     public void start(Stage stage) {
         setup(stage);
 
-        // Setting event handlers
-        setHandlers();
-
-        // Introduction message
+        // Set introduction message
         introduce();
 
         // Load task list from file

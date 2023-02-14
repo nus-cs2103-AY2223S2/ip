@@ -10,6 +10,7 @@ public class Ui {
     }
 
     private String getTaskDescription(Task t) {
+        assert t != null;
         return String.format("[%s][%s] %s", t.getTaskType(), t.getStatusIcon(), t);
     }
 
@@ -18,6 +19,7 @@ public class Ui {
     }
 
     public String printList(ArrayList<Task> list) {
+        assert list != null;
         if (list.size() == 0) {
             return "No tasks currently!";
         }
@@ -33,14 +35,17 @@ public class Ui {
     }
 
     public String errorPrint(BobException e) {
+        assert e != null;
         return wrapString("Sorry! An error has occurred :(") + e.getMessage();
     }
 
     public String printFilteredTasks(ArrayList<Task> list) {
+        assert list != null;
         return wrapString("Matching tasks:") + printList(list);
     }
 
     public String printTasks(ArrayList<Task> list) {
+        assert list != null;
         return wrapString("Current task list: ") + printList(list);
     }
 
@@ -50,21 +55,25 @@ public class Ui {
     }
 
     public String printTaskAdded(Task t) {
+        assert t != null;
         return wrapString("Successfully added a new task :)")
                 + getTaskDescription(t);
     }
 
     public String printMarkTask(Task t) {
+        assert t != null;
         return wrapString("Successfully marked a task :)")
                 + getTaskDescription(t);
     }
 
     public String printUnmarkTask(Task t) {
+        assert t != null;
         return wrapString("Successfully unmarked a task :)")
                 + getTaskDescription(t);
     }
 
     public String printDeleteTask(Task t) {
+        assert t != null;
         return wrapString("Successfully deleted a task :)")
                 + getTaskDescription(t);
     }
