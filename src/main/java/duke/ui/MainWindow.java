@@ -54,17 +54,22 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        if (input.trim().equals("exit")) {
+            logout();
+        }
+    }
+
+    private static void logout() {
         // adapted from
         // https://stackoverflow.com/questions/2258066/run-a-java-function-after-a-specific-number-of-seconds
-        if (input.equals("exit")) {
-            TimerTask timerTask = new TimerTask() {
-                public void run() {
-                    Platform.exit();
-                }
-            };
-            Timer timer = new Timer();
-            timer.schedule(timerTask, 1000L);
-        }
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.exit();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 1000L);
+
     }
 }
 

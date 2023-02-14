@@ -31,10 +31,10 @@ public class Parser {
         Command c;
         switch (cmd.toLowerCase()) {
         case "exit":
-            c = new ExitCommand();
+            c = new ExitCommand(split);
             break;
         case "list":
-            c = new ListCommand();
+            c = new ListCommand(split);
             break;
         case "delete":
             c = new DeleteCommand(split);
@@ -57,7 +57,6 @@ public class Parser {
             throw new DukeUnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }
         assert c != null : "Attempt to create empty command.";
-
         return c;
     }
 }

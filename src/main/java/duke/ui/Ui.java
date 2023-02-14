@@ -49,7 +49,7 @@ public class Ui {
      * @return message for add task command.
      */
     public String responseToLAddTaskCommand(Task task, TaskList taskList) {
-        return"Got it. I've added this task:\n  " + task + "\nNow you have "
+        return "Got it. I've added this task:\n  " + task + "\nNow you have "
                 + taskList.size() + " tasks in the list.";
     }
 

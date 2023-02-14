@@ -12,10 +12,11 @@ import java.time.format.DateTimeParseException;
 public class Deadlines extends Task {
     private String deadline;
     /**
-     * End time of deadline in "YYYY-MM-DDTHH:MM:SS" format
+     * End time of deadline in "dd/MM/yyyy HH:mm" format
      */
     private LocalDateTime formattedDeadline;
-    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private final String STANDARD_FORMAT = "dd/MM/yyyy HH:mm";
+    private final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern(STANDARD_FORMAT);
 
     /**
      * Constructor to create a deadline task.
@@ -28,9 +29,10 @@ public class Deadlines extends Task {
         super(description);
         try {
             this.deadline = deadline;
-            this.formattedDeadline = LocalDateTime.parse(deadline);
+            this.formattedDeadline = LocalDateTime.parse(deadline, FORMAT);
         } catch (DateTimeParseException e) {
-            throw new DukeInvalidArgumentException("The format of date-time is invalid.");
+            throw new DukeInvalidArgumentException(
+                    String.format("The format of date-time is invalid. Should be %s.", STANDARD_FORMAT));
         }
     }
 
@@ -40,6 +42,6 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D] %s (by: %s)", super.toString(), formattedDeadline.format(format));
+        return String.format("[D] %s (by: %s)", super.toString(), deadline);
     }
 }

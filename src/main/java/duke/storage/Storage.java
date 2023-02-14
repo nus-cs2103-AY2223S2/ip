@@ -158,7 +158,7 @@ public class Storage {
             DukeIoException, DukeEventOverlapException {
         TaskList result = new TaskList();
         for (Task task: load()) {
-            if (task.getDescription().contains(keyword)) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 result.add(task);
             }
         }

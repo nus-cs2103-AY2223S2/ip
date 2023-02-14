@@ -24,28 +24,32 @@ public class AddCommand extends Command {
     public AddCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException,
             DukeEventOverlapException {
         try {
-            this.task = createTask(fullCommand[0], fullCommand[1]);
+            String cmd = fullCommand[0];
+            String description = fullCommand[1].trim();
+            this.task = createTask(cmd, description);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeEmptyArgumentException("The description of " + fullCommand[0] + " command cannot be empty.");
         }
     }
 
     private Task createTask(String cmd, String description) throws DukeInvalidArgumentException,
-            DukeEventOverlapException {
+            DukeEventOverlapException, DukeEmptyArgumentException {
         try {
             Task task = null;
-            switch (cmd) {
+            switch (cmd.toLowerCase()) {
             case "todo":
                 task = new ToDos(description);
                 break;
             case "deadline":
-                String[] s1 = description.split("/by ", 2);
-                task = new Deadlines(s1[0], s1[1]);
+                String[] splitString = description.split("/by", 2);
+                task = new Deadlines(splitString[0].trim(), splitString[1].trim());
+                System.out.println("a: "+splitString[0].trim());
+                System.out.println("b: "+splitString[1].trim());
                 break;
             case "event":
-                String[] s2 = description.split("/from ", 2);
-                String[] s3 = s2[1].split(" /to ", 2);
-                task = new Events(s2[0], s3[0], s3[1]);
+                String[] splitDescription = description.split("/from", 2);
+                String[] splitTime = splitDescription[1].split("/to", 2);
+                task = new Events(splitDescription[0].trim(), splitTime[0].trim(), splitTime[1].trim());
             }
             assert task != null : "Empty task has been created";
             return task;

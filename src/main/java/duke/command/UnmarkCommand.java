@@ -3,6 +3,7 @@ package duke.command;
 import duke.exception.DukeEmptyArgumentException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeIoException;
+import duke.exception.DukeRepeatedCommandException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -11,8 +12,8 @@ import duke.ui.Ui;
 /**
  * Command to mark a task as not done yet.
  */
-public class UnmarkCommand extends Command {
-    private final int TOGGLE_LINE_NUMBER;
+    public class UnmarkCommand extends IndexCommand {
+    private final int LINE_NUMBER;
 
     /**
      * Constructor to create an unmark command.
@@ -24,11 +25,12 @@ public class UnmarkCommand extends Command {
     public UnmarkCommand(String[] fullCommand) throws DukeEmptyArgumentException,
             DukeInvalidArgumentException {
         try {
-            TOGGLE_LINE_NUMBER = Integer.parseInt(fullCommand[1]) - 1;
+            LINE_NUMBER = Integer.parseInt(fullCommand[1]) - 1;
+            throwExceptionIfNegativeIndex(LINE_NUMBER, "unmark");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeEmptyArgumentException("The description of unmark command cannot be empty.");
         } catch (NumberFormatException e) {
-            throw new DukeInvalidArgumentException("Delete command require integer to execute!");
+            throw new DukeInvalidArgumentException("Unmark command require integer to execute!");
         }
     }
 
@@ -39,16 +41,25 @@ public class UnmarkCommand extends Command {
 
     @Override
     public String execute(TaskList task, Ui ui, Storage storage) throws DukeIoException,
-            DukeInvalidArgumentException {
-        if (TOGGLE_LINE_NUMBER >= task.size()) {
-            throw new DukeInvalidArgumentException("There are only " + task.size()
-                    + " tasks in list, but want to unmark "
-                    + getOrdinalFor(TOGGLE_LINE_NUMBER + 1) + " task.");
-        }
-        Task t = task.getTaskAt(TOGGLE_LINE_NUMBER);
+            DukeInvalidArgumentException, DukeRepeatedCommandException {
+        Task t = retrieveTask(LINE_NUMBER, task, "Unmark");
         assert t != null: "Attempt to unmark an empty task";
-        t.setDone(false);
-        storage.updateData(TOGGLE_LINE_NUMBER, 0);
+
+        markTaskAsUndone(t);
+        storage.updateData(LINE_NUMBER, 0);
         return ui.responseToUnmarkTaskCommand(t);
+    }
+
+    private void markTaskAsUndone(Task t) throws DukeRepeatedCommandException {
+        throwExceptionIfTaskHasBeenUnmarkedBefore(t);
+        t.setDone(false);
+    }
+
+    private void throwExceptionIfTaskHasBeenUnmarkedBefore(Task t) throws DukeRepeatedCommandException {
+        if (t.getStatusIcon().equals("0")) {
+            throw new DukeRepeatedCommandException("You already mark "
+                    + getOrdinalFor(LINE_NUMBER + 1)
+                    + " task as undone.");
+        }
     }
 }

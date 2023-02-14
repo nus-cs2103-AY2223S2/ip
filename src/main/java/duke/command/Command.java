@@ -3,6 +3,7 @@ package duke.command;
 import duke.exception.DukeEventOverlapException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeIoException;
+import duke.exception.DukeRepeatedCommandException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -27,9 +28,11 @@ public abstract class Command {
      * @param storage Database that store previous undelete task.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
+     * @throws DukeEventOverlapException indicate there are events overlap with each other.
+     * @throws DukeRepeatedCommandException indicate that user repeat same command given before.
      */
     public abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException,
-            DukeIoException, DukeEventOverlapException;
+            DukeIoException, DukeEventOverlapException, DukeRepeatedCommandException;
 
     //@@author Jiayan-Lim-reused
     //Reused from
