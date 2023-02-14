@@ -20,8 +20,9 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String by) throws DateTimeException {
         super(name);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         try {
-            this.deadline = LocalDateTime.parse(by.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            this.deadline = LocalDateTime.parse(by, format);
         } catch (DateTimeParseException e) {
             throw new DateTimeException();
         }
@@ -36,8 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String storageFormat() {
-        return String.join("|", "D", super.storageFormat(),
-                deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))) + "\n";
+        return String.join("|", "D", super.storageFormat(), dateString(deadline)) + "\n";
     }
 
     /**
@@ -46,6 +46,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a")) + ")";
+                + dateString(deadline) + ")";
     }
 }

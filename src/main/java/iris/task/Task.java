@@ -4,6 +4,9 @@ import iris.exception.IrisException;
 import iris.exception.MissingFieldException;
 import iris.exception.NoTaskException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Abstract class that wraps the tasks - Deadline, Event and ToDo classes
  */
@@ -95,6 +98,10 @@ public abstract class Task {
      */
     public String storageFormat() {
         return String.join("|", this.status(), this.name);
+    }
+
+    protected String dateString(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
     }
 
     /**
