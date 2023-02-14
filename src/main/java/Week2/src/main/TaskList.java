@@ -85,8 +85,9 @@ public class TaskList<Task> {
      * @param index
      * @param index index of the task that user wants to remove
      */
-    public void remove(int index) {
-        this.list.remove(index);
+    public void removeT(int index) {
+        Task remtask = (Task) this.list.get(index);
+        this.list.remove(remtask);
     }
 
     /**

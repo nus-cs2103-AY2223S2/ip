@@ -11,9 +11,6 @@ public class Parser {
 
     private TaskList tasklist;
     private static boolean isBegin = false;
-
-
-
     Ui ui = new Ui();
 
     /**

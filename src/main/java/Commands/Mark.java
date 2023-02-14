@@ -21,9 +21,11 @@ public class Mark {
         int marking = Integer.parseInt(str);
         Task current = (Task) tasklist.get(marking - 1);
         current.setDone();
+
         String str1 = "Nice! I've marked this task as done:";
         String str2 = "[X] " + current.getContent();
         Duke.writeOn(current);
+
         return str1 + "\n" + str2;
     }
 }

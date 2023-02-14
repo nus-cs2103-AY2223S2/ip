@@ -31,9 +31,11 @@ public class Event extends Task {
         String[] tos = doit.split("/to");
         Task current = new Event(froms[0], fromses[0], tos[1]);
         tasklist.add(current);
+
         String str1 = "Got it. I've added this task:";
         String str2 = current.toString();
         Duke.writeOn(current);
+
         return str1 + "\n" + str2;
     }
 
