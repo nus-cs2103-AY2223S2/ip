@@ -19,7 +19,7 @@ public class Duke extends Application {
         try {
             Storage.loadFromFile(tasks);
         } catch (IOException e) {
-            // Ui.showLoadingError();
+            e.printStackTrace();
         }
     }
 
