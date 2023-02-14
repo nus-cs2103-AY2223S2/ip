@@ -2,6 +2,7 @@ title: Rick and Duke - Friendly chat-based task manager
 description: A chat-based task manager that helps you remember and manage tasks
 url: https://seeusim.github.io/ip
 
-remote_theme: jekyll/minima@2.5.1
+remote_theme: just-the-docs/just-the-docs@0.4.0
+
 plugins:
   - jekyll-remote-theme
