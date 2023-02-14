@@ -15,6 +15,50 @@
 
 **Features:**
 
-1. Bye 
+Things to take note of: 
+- features are CASE INSENSITIVE!
+- Words that are fully capitalised (e.g INDEX) refer to variable names
+- all DATE variables must be formatted as yyyy-mm-dd
 
+1. **Bye** <br>
+Guides user on how to exit the chatbot
 
+2. **List** <br>
+Displays a list of current tasks stored in Duke
+
+3. **Mark INDEX** <br>
+Sets the task at the specified INDEX as completed <br>
+<ins>Format</ins>
+    - INDEX refers to the task number, must be a valid positive integer greater than 0 and less than size of current task list
+
+4. **Unmark INDEX** <br>
+Sets the task at specified INDEX as uncompleted <br>
+<ins>Format</ins>
+    - INDEX refers to the task number, must be a valid positive integer greater than 0 and less than size of current task list
+
+5. **Todo DESCRIPTION** <br>
+Creates a ToDo task with the specified DESCRIPTION
+<ins>Format</ins>
+    - DESCRIPTION refers to the details of the task
+
+6. **Deadline DESCRIPTION /by DATE** <br>
+Creates a Deadline task with the specified DESCRIPTION and DEADLINE <br>
+<ins>Format</ins>
+    - DESCRIPTION refers to the details of the task
+    - DATE refers to the deadline when the task is due, must be in yyyy-mm-dd format
+
+7. **Event DESCRIPTION /from STARTDATE /to ENDDATE** <br>
+Creates an Event task with the specified DESCRIPTION, STARTDATE and ENDDATE <br>
+<ins>Format</ins>
+    - DESCRIPTION refers to the details of the task
+    - STARTDATE refers to the starting date of the event, must be in yyyy-mm-dd format
+    - ENDDATE refers to the ending date of the event, must be in yyyy-mm-dd format
+    - STARTDATE cannot be later than ENDDATE
+    
+8. **Reschedule INDEX VARARGS** <br>
+Reschedules a task to a later date. Task must be of type Deadline or Event <br>
+<ins>Format</ins>
+    - INDEX refers to the task number, must be a valid positive integer greater than 0 and less than size of current task list
+    - VARARGS refer to variable arguments. 
+    - For Deadline, VARARGS = /by DATE (e.g Reschedule 2 /by 2022-01-01), DATE must be in yyyy-mm-dd format
+    - For Event, VARARGS = /from STARTDATE /to ENDDATE (e.g reschedule 3 /from 2022-01-01 /to 2023-02-02), STARTDATE and ENDDATE must be in yyyy-mm-dd format
