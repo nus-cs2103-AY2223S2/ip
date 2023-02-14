@@ -22,12 +22,12 @@ public class Ui {
      */
     public String welcome(String commands) {
         //Logo of Duke
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
+        String logo = "$$$$$___ _______ $$_____ _______\n"
+                + "$$__$$__ _______ $$__$$_ _$$$$__\n"
+                + "$$___$$_ $$__$$_ $$_$$__ $$__$$_\n"
+                + "$$___$$_ $$__$$_ $$$$___ $$$$$$_\n"
+                + "$$__$$__ $$__$$_ $$_$$__ $$_____\n"
+                + "$$$$$___ _$$$_$_ $$__$$_ _$$$$$_\n";
         logo = "Hello from\n" + logo;
         logo += "How may i help you today?\n";
         logo += "Here are the lists of commands:\n";
