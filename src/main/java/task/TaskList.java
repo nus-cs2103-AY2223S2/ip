@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Add the given task to list.
+     * Adds the given task to list.
      * @param task the given task
      */
     public void add(Task task) {
@@ -46,7 +46,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task with the given task number from the list.
+     * Deletes the task with the given task number from the list.
      * @param taskNo the given task number
      * @return The deleted task.
      * @throws DukeException If there is no such task in the list with the given task number.
@@ -60,7 +60,7 @@ public class TaskList {
     }
 
     /**
-     * Get the list of tasks currently recorded.
+     * Gets the list of tasks currently recorded.
      * @return The list of tasks.
      */
     public ArrayList<Task> list() {

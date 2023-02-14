@@ -45,6 +45,9 @@ public class MainWindow extends BorderPane {
      */
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mascot.png"));
 
+    /**
+     * Initialises the MainWindow controller.
+     */
     @FXML
     public void initialize() {
         this.duke = new Duke(this, Paths.get(".", "data", "duke.txt"));
@@ -52,11 +55,19 @@ public class MainWindow extends BorderPane {
         userControl.setMainWindow(this);
     }
 
+    /**
+     * Adds a UserDialog component to the DialogContainer component.
+     * @param msg The message contained in the UserDialog component.
+     */
     public void addUserDialog(String msg) {
         UserDialog dialog = new UserDialog(msg);
         dialogContainer.getChildren().add(dialog);
     }
 
+    /**
+     * Adds a DukeDialog component to the DialogContainer component.
+     * @param msg The message contained in the DukeDialog component.
+     */
     public void addDukeDialog(String msg) {
         DukeDialog dialog = new DukeDialog(msg, dukeImage);
         dialogContainer.getChildren().add(dialog);

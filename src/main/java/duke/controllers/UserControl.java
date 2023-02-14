@@ -53,6 +53,9 @@ public class UserControl extends StackPane {
         }
     }
 
+    /**
+     * Initialises the UserControl controller.
+     */
     @FXML
     public void initialize() {
         Image sendIcon = new Image(this.getClass().getResourceAsStream("/images/send.png"));

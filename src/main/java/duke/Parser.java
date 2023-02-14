@@ -58,7 +58,7 @@ public class Parser {
     }
 
     /**
-     * Convert user-input datetime string to LocalDateTime object.
+     * Converts user-input datetime string to LocalDateTime object.
      * @param dateTimeString The user-input datetime string.
      * @return The input datetime represented as a LocalDateTime object.
      * @throws DukeException If the input string is not of the supported format: yyyy-M-d HHmm.
@@ -83,7 +83,7 @@ public class Parser {
     }
 
     /**
-     * Undo the pretty-formatted datetime string into the user-input datetime string format.
+     * Undos the pretty-formatted datetime string into the user-input datetime string format.
      * @param dateTime The pretty-formatted datetime string
      * @return A datetime string in the format: yyyy-M-d HHmm.
      */
