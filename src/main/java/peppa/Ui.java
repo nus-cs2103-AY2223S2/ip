@@ -6,15 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import peppa.commands.DeadlineCommand;
-import peppa.commands.DeleteCommand;
-import peppa.commands.EventCommand;
-import peppa.commands.ExitCommand;
-import peppa.commands.FindCommand;
-import peppa.commands.ListCommand;
-import peppa.commands.MarkCommand;
-import peppa.commands.TodoCommand;
-import peppa.commands.UnmarkCommand;
+import peppa.commands.*;
 
 /**
  * Represents a user interface screen for reading in user inputs and displaying messages in terminal.
@@ -47,6 +39,8 @@ public class Ui {
      */
     public static String getCommands() {
         return "> " + ListCommand.COMMAND_WORD + "\n"
+                + "> " + FilesCommand.COMMAND_WORD + "\n"
+                + "> " + SelectCommand.COMMAND_WORD + "\n"
                 + "> " + MarkCommand.COMMAND_WORD + "\n"
                 + "> " + UnmarkCommand.COMMAND_WORD + "\n"
                 + "> " + FindCommand.COMMAND_WORD + "\n"

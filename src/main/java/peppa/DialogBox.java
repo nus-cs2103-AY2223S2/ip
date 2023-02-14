@@ -56,6 +56,8 @@ public class DialogBox extends HBox {
     public static DialogBox getPeppaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setStyle("-fx-background-color:#DBC3C8; -fx-background-radius:10; -fx-border-width:0.5; " +
+                "-fx-border-color: black; -fx-border-radius: 10;");
         return db;
     }
 }
