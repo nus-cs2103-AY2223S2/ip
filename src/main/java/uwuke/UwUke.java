@@ -71,9 +71,12 @@ public class UwUke extends Application {
     }
 
     private void handleUserInput() {
+        assert userInput != null : "User Input Text Field should have been initialised!";
         String inputString = userInput.getText();
+        assert inputString != null : "User input should not be null!";
         Label userText = new Label(inputString);
         DialogBox userBox = DialogBox.getUserDialogBox(userText);
+        assert dialogContainer != null : "Dialog Container should be initialised!";
         dialogContainer.getChildren().add(userBox);
         displayDukeResponse(inputString);
         userInput.clear();
