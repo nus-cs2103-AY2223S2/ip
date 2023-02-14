@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setTextAlignment(TextAlignment.JUSTIFY);
+        dialog.setTextAlignment(TextAlignment.LEFT);
         dialog.setFont(new Font("Helvetica", 12));
         dialog.setTextFill(Color.web(textColor));
         dialog.setPadding(new Insets(5, 5, 5, 5));
