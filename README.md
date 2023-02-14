@@ -18,7 +18,7 @@ All you need to do is,
 And it is **FREE**!
 
 Features:
-- [x] Managing tasks
+- [X] Managing tasks
 - [ ] Mangaging deadlines (coming soon)
 - [ ] Reminders (coming soon)
 
