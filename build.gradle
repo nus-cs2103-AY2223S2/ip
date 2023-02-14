@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'checkstyle'
 }
 
 group 'iP'
@@ -13,6 +14,10 @@ repositories {
 
 test {
     useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion = '10.2'
 }
 
 sourceSets {

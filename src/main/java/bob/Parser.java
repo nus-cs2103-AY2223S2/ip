@@ -1,10 +1,14 @@
 package bob;
 
-import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Utility class to parse commands related to Bob
+ */
 public class Parser {
     private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd[ ha]");
 
@@ -49,13 +53,12 @@ public class Parser {
         String[] splitCommand = s.split(" /from | /to ");
 
         // Check if a description exists
-        String[] command_desc = splitCommand[0].split(" ");
-
+        String[] commandAndDescription = splitCommand[0].split(" ");
 
         return validMatches
                 && splitCommand.length == 3
-                && command_desc.length > 1
-                && command_desc[0].equals("event")
+                && commandAndDescription.length > 1
+                && commandAndDescription[0].equals("event")
                 && s.indexOf("/from") < s.indexOf("/to") // A valid command has /from before /to
                 && isDate(splitCommand[1])
                 && isDate(splitCommand[2]);
@@ -77,7 +80,7 @@ public class Parser {
         String[] words = s.split(" ");
 
         return words.length == 2
-                && words[0].equals("mark") 
+                && words[0].equals("mark")
                 && isInt(words[1]);
     }
 
@@ -86,9 +89,9 @@ public class Parser {
         String[] words = s.split(" ");
 
         return words.length == 2
-                && words[0].equals("unmark") 
+                && words[0].equals("unmark")
                 && isInt(words[1]);
-    } 
+    }
 
     private static boolean isDelete(String input) {
         String[] command = input.split(" ");
@@ -100,7 +103,12 @@ public class Parser {
         return command.length == 2 && command[0].equals("find");
     }
 
-    // Return the index from a mark/unmark/delete command
+    /**
+     * Parses and returns index specified in a mark/unmark/delete command
+     * @param s String command
+     * @return Integer representing index specified
+     * @throws BobException
+     */
     public static int parseIndex(String s) throws BobException {
         if (!isMark(s) && !isUnmark(s) && !isDelete(s)) {
             throw new BobException("Invalid mark/unmark command!");
@@ -141,9 +149,9 @@ public class Parser {
             throw new BobException("Invalid event command!");
         }
 
-        String[] command = s.split( " /from | /to ");
-        String[] command_desc = command[0].split(" ", 2);
-        String description = command_desc[1];
+        String[] command = s.split(" /from | /to ");
+        String[] commandAndDescription = command[0].split(" ", 2);
+        String description = commandAndDescription[1];
         LocalDate start = LocalDate.parse(command[1], format);
         LocalDate end = LocalDate.parse(command[2], format);
 
@@ -164,10 +172,9 @@ public class Parser {
         }
 
         String[] splitCommand = s.split(" /by ");
-        String[] command_desc = splitCommand[0].split(" ", 2);
-        String description = command_desc[1];
+        String[] commandAndDescription = splitCommand[0].split(" ", 2);
+        String description = commandAndDescription[1];
         LocalDate deadline = LocalDate.parse(splitCommand[1], format);
-        
         Deadline d = new Deadline(description, deadline);
         return d;
     }

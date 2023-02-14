@@ -2,7 +2,10 @@ package bob;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -10,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/** Bob is a chat bot that helps manage tasks */
 public class Bob extends Application {
     private Storage storage;
     private TaskList tasks;
@@ -23,6 +27,9 @@ public class Bob extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image bob = new Image(this.getClass().getResourceAsStream("/images/bob.png"));
 
+    /**
+     * Creates an instance of Bob which writes to a file with the path "data/taskList.txt"
+     */
     public Bob() {
         storage = new Storage("data/taskList.txt");
         ui = new Ui("~", 30);
@@ -78,9 +85,9 @@ public class Bob extends Application {
         } catch (BobException e) {
             DialogBox bob = showBobDialog(ui.errorPrint(e));
             dialogContainer.getChildren().add(bob);
-        } 
+        }
     }
-    
+
     private void saveTasks() {
         try {
             storage.save(tasks);
