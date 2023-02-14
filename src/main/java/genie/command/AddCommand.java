@@ -20,8 +20,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         switch (taskType) {
-        case TODO:
-        case "todo": // todo change to constant
+        case TODO: // todo change to constant
             task = taskList.addToDoFromUser(fullCommand);
             break;
         case DEADLINE:

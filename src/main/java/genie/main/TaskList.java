@@ -39,12 +39,10 @@ public class TaskList {
      */
     public Task addToDoFromUser(String i) {
         String descOnly = removeCommandFromInput(i, TODO);
-        ToDo t = new ToDo(descOnly);
-
+        assert !descOnly.equals(""): "Invalid";
         String[] commDescWords = commandDescriptionWords(i);
         assert commDescWords.length > 1: "Invalid";
 
-        assert !descOnly.equals("");
         ToDo t = new ToDo(descOnly);
         storeTask(t);
         return t;
