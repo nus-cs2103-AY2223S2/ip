@@ -24,21 +24,21 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
      * Marks the task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Marks the task as not done.
      */
     public void markAsNotDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -124,10 +124,10 @@ public abstract class Task {
             return false;
         }
         Task other = (Task) obj;
-        if (other.isDone != this.isDone) {
+        if (other.isDone != isDone) {
             return false;
         }
-        if (!other.description.equals(this.description)) {
+        if (!other.description.equals(description)) {
             return false;
         }
         return true;

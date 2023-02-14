@@ -27,13 +27,13 @@ public class TaskList extends ArrayList<Task> {
      * @return Summary status message.
      */
     public String getStatus() {
-        switch (this.size()) {
+        switch (size()) {
         case 0:
             return "Now you have no tasks in the list.";
         case 1:
             return "Now you have 1 task in the list.";
         default:
-            return String.format("Now you have %d task in the list.", this.size());
+            return String.format("Now you have %d task in the list.", size());
         }
     }
 
@@ -43,14 +43,14 @@ public class TaskList extends ArrayList<Task> {
      * @return The encoded task list.
      */
     public String encodeAsString() {
-        return this.stream()
+        return stream()
                 .map(task -> task.encodeAsString())
                 .collect(Collectors.joining("\n"));
     }
 
     @Override
     public String toString() {
-        if (this.isEmpty()) {
+        if (isEmpty()) {
             return "Nothing in the list.";
         }
 

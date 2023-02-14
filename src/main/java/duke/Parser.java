@@ -26,9 +26,9 @@ public class Parser {
      * Parses a command and break it down into its base command, body and params.
      */
     public Parser(String command) {
-        this.fullCommand = command;
+        fullCommand = command;
         String[] splittedCommand = command.split(" +", 2);
-        this.baseCommand = splittedCommand[0];
+        baseCommand = splittedCommand[0];
         String rawBody = splittedCommand.length > 1 ? splittedCommand[1].trim() : "";
         String body = "";
 
@@ -51,7 +51,7 @@ public class Parser {
      * @return Whether the command's body is empty.
      */
     public boolean hasEmptyBody() {
-        return this.body.isEmpty();
+        return body.isEmpty();
     }
 
     @Override

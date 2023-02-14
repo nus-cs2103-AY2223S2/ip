@@ -22,6 +22,6 @@ public abstract class DukeException extends Exception {
      * @return Formatted error message.
      */
     public String getDukeMessage() {
-        return DukeException.DUKE_MESSAGE_PREFIX + this.getMessage();
+        return DukeException.DUKE_MESSAGE_PREFIX + getMessage();
     }
 }
