@@ -51,7 +51,7 @@ Expected outcome:
 
 ```
 Got it, I've added this task:
- [D][ ] finished homework (by: Feb 01 2023)
+ [D][ ] finish homework (by: Feb 01 2023)
 Now you have 2 tasks in the list
 ```
 
@@ -88,7 +88,7 @@ Expected outcome:
 ```
 Here are the tasks in your list:
 1.[T][ ] read textbooks
-2.[D][ ] finished homework (by: Feb 01 2023)
+2.[D][ ] finish homework (by: Feb 01 2023)
 3.[E][ ] attend a meeting (from: 4pm to: 6pm)
 ```
 
@@ -189,6 +189,4 @@ Expected outcome:
 Bye. Hope to see you again soon!
 ```
 
-The program closes automatically.
-
-## Have Fun Using Duke!
+The program then closes automatically.
