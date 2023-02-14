@@ -33,7 +33,7 @@ to keep track of user's to-do list. Chattime provides various functions that hel
 
 ## Quick start
 1. Have Java 11 or above installed in local laptop or computer.
-2. Download the latest version (chattime v1.0) of chattime.jar from [here](https://github.com/laihuiqi/ip/releases).
+2. Download the latest version (chattime v1.0) of chattime.jar from [here](https://github.com/laihuiqi/ip/releases/tag/A-Release).
 3. Double-click on the downloaded chattime.jar file.
 4. You should see the bot is running now. The GUI should show a greeting screen.
 ![Start screen of chattime.](image/start.png)
@@ -303,18 +303,15 @@ Program window shuts immediately.
 
 
 ## Command Summary
----
-| Command   |                                                 Format                                                 |
-|-----------|:------------------------------------------------------------------------------------------------------:|
-| `help`    |                                                  help                                                  |
-| `bye`     |                                                  bye                                                   |
-| `deadline`|                    deadline <taskname> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>                    |
-| `delete`  |                                             delete <index>                                             |
-| `event`   |event <task> /from <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> /to <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>|
-| `find`    |                                             find <keyword>                                             |
-| `list`    |                                                  list                                                  |
-| `listTime`|                                     listTime <date in yyyy-mm-dd>                                      |
-| `mark`    |                                              mark <index>                                              |
-| `schedule`|                                     schedule <date in yyyy-mm-dd>                                      |
-| `todo`    |                                            todo <taskname>                                             |
-| `unmark`  |                                             unmark <index>                                             |
+`help` : help                                                  
+`bye` : bye                                                   
+`deadline` : deadline <taskname> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>                    
+`delete` : delete <index>                                             
+`event` : event <task> /from <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> /to <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>
+`find` : find <keyword>                                             
+`list` : list                                                  
+`listTime` : listTime <date in yyyy-mm-dd>                                      
+`mark` : mark <index>                                              
+`schedule` : schedule <date in yyyy-mm-dd>                                      
+`todo` : todo <taskname>                                             
+`unmark` : unmark <index>                                             
