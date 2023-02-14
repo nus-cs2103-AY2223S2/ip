@@ -147,6 +147,7 @@ Duke
             \utils\parser.java
             \commands
 ```
+
 1. Create the logic for the new command by creating a new `java` file under `/commnands`.
     - The file should inherit `Command` and override the following method signature:
 ``` java
@@ -163,4 +164,5 @@ Duke
 2. Open `parser.java`
 3. Under `populateCommnads()`, add your `command` and pass `tokens` to your custom parsing method that creates your custom command.
 4. Build and run via `Launcher.java`
+
 ---
