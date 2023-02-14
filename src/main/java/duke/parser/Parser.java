@@ -222,7 +222,6 @@ public class Parser {
         return new InvalidCommand();
     }
 
-
     private void checkParamExists(Boolean isExists, String errorMessage) throws DukeException {
         if (!isExists) {
             throw new DukeException(errorMessage);

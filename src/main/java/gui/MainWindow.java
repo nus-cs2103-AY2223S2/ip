@@ -1,32 +1,35 @@
 package gui;
 
 import duke.Duke;
+import duke.task.Task;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends BorderPane {
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     @FXML
-    private ScrollPane scrollPane;
+    private ScrollPane dialogScrollPane;
+    @FXML
+    private ScrollPane outputScrollPane;
     @FXML
     private VBox dialogContainer;
+    @FXML
+    private VBox outputContainer;
     @FXML
     private TextField userInput;
     private Duke duke;
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+        dialogScrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+        outputScrollPane.vvalueProperty().bind(this.outputContainer.heightProperty());
     }
 
     public void setDuke(Duke duke) {
@@ -34,7 +37,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void run() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.duke.getGreeting(), this.dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.duke.getGreeting()));
     }
 
     /**
@@ -45,9 +48,24 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = this.userInput.getText();
         String response = this.duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, this.userImage),
-                DialogBox.getDukeDialog(response, this.dukeImage));
+        displayDialog(input, response);
+        displayOutput(input);
         userInput.clear();
+    }
+
+    private void displayDialog(String input, String response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input),
+                DialogBox.getDukeDialog(response));
+    }
+
+    private void displayOutput(String input) {
+        String command = input.split(" ", 2)[0].toLowerCase();
+        if (command.equals("list") || command.equals("find")) {
+            outputContainer.getChildren().clear();
+            for (Task task : this.duke.getTasksToDisplay()) {
+                outputContainer.getChildren().add(TaskBox.getTaskBox(task));
+            }
+        }
     }
 }

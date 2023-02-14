@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<fx:root fx:id="taskBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+         minWidth="-Infinity" prefWidth="200.0" type="HBox" xmlns="http://javafx.com/javafx/19"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="displayTask" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"/>
+        <ImageView fx:id="displayMark" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"/>
+        <Label fx:id="description" text="Label" wrapText="true"/>
+    </children>
+</fx:root>

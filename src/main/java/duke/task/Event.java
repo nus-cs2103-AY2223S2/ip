@@ -50,7 +50,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString()
+        return super.toString()
                 + " (from: " + this.startDateTime.toLocalDate() + " " + this.startDateTime.toLocalTime()
                 + " to: " + this.endDateTime.toLocalDate() + " " + this.endDateTime.toLocalTime() + ")";
     }

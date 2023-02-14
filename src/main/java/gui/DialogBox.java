@@ -20,6 +20,10 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private static final Image USER_IMAGE = new Image("/images/user.png");
+    private static final Image DUKE_IMAGE = new Image("/images/duke.png");
+
     @FXML
     private Label dialog;
     @FXML
@@ -39,12 +43,12 @@ public class DialogBox extends HBox {
         this.displayPicture.setImage(img);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text) {
+        return new DialogBox(text, USER_IMAGE);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text) {
+        var db = new DialogBox(text, DUKE_IMAGE);
         db.flip();
         return db;
     }
