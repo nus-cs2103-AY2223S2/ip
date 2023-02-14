@@ -24,13 +24,10 @@ public class Task {
         this.isComplete = isComplete;
     }
 
-    /**
-     * Provides Details of the description.
-     * @return String detail message of description.
-     */
-    public String provideDetails() {
+    @Override
+    public String toString() {
         return isComplete ? "[x] " + taskDescription
-                : "[ ] " + taskDescription;
+                          : "[ ] " + taskDescription;
     }
 
     /**

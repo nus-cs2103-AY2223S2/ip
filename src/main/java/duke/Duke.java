@@ -19,11 +19,10 @@ public class Duke {
      * Constructs a new Duke session.
      */
     public Duke() {
-           Sender sender = new Sender();
-           Storage storage = new Storage(FILE_PATH);
+            Storage storage = new Storage(FILE_PATH);
             //Attempts to load Tasks from hard drive into the list of Tasks.
             TaskList tasks = new TaskList(storage.load());
-            this.parser = new Parser(sender, storage, tasks);
+            this.parser = new Parser(storage, tasks);
     }
 
     /**

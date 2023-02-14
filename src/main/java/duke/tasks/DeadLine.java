@@ -24,7 +24,7 @@ public class DeadLine extends Task {
     }
 
     @Override
-    public String provideDetails() {
+    public String toString() {
         String[] separateText = this.taskDescription.split(" /by ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         String date = localDate.format(formatter);

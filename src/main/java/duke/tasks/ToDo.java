@@ -16,7 +16,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String provideDetails() {
+    public String toString() {
         return this.isComplete? "[T]" + "[x] " + this.taskDescription
                 : "[T]" + "[ ] " + this.taskDescription;
     }

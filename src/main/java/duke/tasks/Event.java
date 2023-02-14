@@ -15,7 +15,7 @@ public class Event extends Task {
         super(keyword, message, isComplete);
     }
     @Override
-    public String provideDetails() {
+    public String toString() {
         String[] helperArray = this.taskDescription.split("/from");
         String firstPart = helperArray[0];
         String[] helperArray2 = helperArray[1].split("/to");

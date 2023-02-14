@@ -1,4 +1,5 @@
 package duke.storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
@@ -16,21 +17,24 @@ import duke.tasks.ToDo;
  */
 public class Storage {
     private File file;
+
     /**
      * Creates a new Storage session.
+     *
      * @param filePath File path to stored file in hard drive.
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
 
     }
+
     /**
      * Loads a list of tasks from hard drive.
+     *
      * @return A list of tasks stored in hard drive.
      * @throws DukeException when there is an error loading tasks from hard drive.
      */
     public ArrayList<Task> load() {
-
         //Creates a new tasklist for the current session.
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -76,104 +80,90 @@ public class Storage {
 
     /**
      * Updates task completion status in hard drive.
+     *
      * @param taskIdentifier A String that identifies the task in hard drive.
      * @throws DukeException when there is an error performing the operation.
      */
-    public void changeTaskStatus(String taskIdentifier) throws DukeException {
-        try {
-            String[] taskIdentifierSplit = taskIdentifier.split(" ", 2);
-            //The first item in the array is a String indicating status of completion. 1 for done, 0 for undone.
-            String completionStatus = taskIdentifierSplit[0];
-            //The second item in the array is the description of the task.
-            String taskDescription = taskIdentifierSplit[1];
+    public void changeTaskStatus(String taskIdentifier) throws Exception {
+        String[] taskIdentifierSplit = taskIdentifier.split(" ", 2);
+        //The first item in the array is a String indicating status of completion. 1 for done, 0 for undone.
+        String completionStatus = taskIdentifierSplit[0];
+        //The second item in the array is the description of the task.
+        String taskDescription = taskIdentifierSplit[1];
 
-            //update task description
-            String updatedTaskDescription = completionStatus.equals("1") ? "0 " + taskDescription
-                                                                         : "1 " + taskDescription;
+        //update task description
+        String updatedTaskDescription = completionStatus.equals("1") ? "0 " + taskDescription
+                : "1 " + taskDescription;
 
-            //To read the file and write the same thing but updating the status of the specified task
-            Scanner sc = new Scanner(file);
-            StringBuffer write = new StringBuffer();
+        //To read the file and write the same thing but updating the status of the specified task
+        Scanner sc = new Scanner(file);
+        StringBuffer write = new StringBuffer();
 
-            //Reading lines of the file and appending them to StringBuffer
-            while (sc.hasNextLine()) {
-                String nextLine = sc.nextLine();
-                if (nextLine.equals(taskIdentifier)) {
-                    write.append(updatedTaskDescription + "\n");
-                } else {
-                    write.append(nextLine + "\n");
-                }
+        //Reading lines of the file and appending them to StringBuffer
+        while (sc.hasNextLine()) {
+            String nextLine = sc.nextLine();
+            if (nextLine.equals(taskIdentifier)) {
+                write.append(updatedTaskDescription + "\n");
+            } else {
+                write.append(nextLine + "\n");
             }
-            String writeToFile = write.toString();
-            sc.close();
-            //instantiating the FileWriter class
-            FileWriter writer = new FileWriter("duke.txt");
-            writer.append(writeToFile);
-            writer.close();
         }
-        catch (Exception e) {
-            throw new DukeException("Oops! There was a problem changing the status of this task. " +
-                    "Please check that your command is used correctly. For help, type 'help'.");
-        }
+        String writeToFile = write.toString();
+        sc.close();
+        //instantiating the FileWriter class
+        FileWriter writer = new FileWriter("duke.txt");
+        writer.append(writeToFile);
+        writer.close();
     }
+
     /**
      * Deletes task from hard drive.
+     *
      * @param taskIdentifier A String that identifies the task in hard drive.
      * @throws DukeException when there is an error performing the operation.
      */
-    public void deleteTask(String taskIdentifier) throws DukeException {
-        try {
-            //Instantiating the Scanner class to read the file
-            Scanner sc = new Scanner(file);
-            StringBuffer write = new StringBuffer();
-            //Reading lines of the file and appending them to StringBuffer
-            while (sc.hasNextLine()) {
-                String nextLine = sc.nextLine();
-                if (nextLine.equals(taskIdentifier)) {
-                    //do nothing
-                } else {
-                    write.append(nextLine + "\n");
-                }
+    public void deleteTask(String taskIdentifier) throws Exception {
+        //Instantiating the Scanner class to read the file
+        Scanner sc = new Scanner(file);
+        StringBuffer write = new StringBuffer();
+        //Reading lines of the file and appending them to StringBuffer
+        while (sc.hasNextLine()) {
+            String nextLine = sc.nextLine();
+            if (nextLine.equals(taskIdentifier)) {
+                //do nothing
+            } else {
+                write.append(nextLine + "\n");
             }
-            String writeToFile = write.toString();
-            sc.close();
-            //instantiating the FileWriter class
-            FileWriter writer = new FileWriter("duke.txt");
-            writer.append(writeToFile);
-            writer.close();
         }
-        catch (Exception e) {
-           throw new DukeException("Oops! There was a problem deleting this task. " +
-                   "Please check that your command is used correctly. For help, type 'help'.");
-        }
+        String writeToFile = write.toString();
+        sc.close();
+        //instantiating the FileWriter class
+        FileWriter writer = new FileWriter("duke.txt");
+        writer.append(writeToFile);
+        writer.close();
     }
 
     /**
      * Adds a task to hard drive.
+     *
      * @param newTask Description of task to be added to hard drive.
      * @throws DukeException when there is an error performing the operation.
      */
-    public void addTask(String newTask) throws DukeException {
-        try {
-            //Instantiating the Scanner class to read the file
-            Scanner sc = new Scanner(file);
-            StringBuffer write = new StringBuffer();
-            //Reading lines of the file and appending them to StringBuffer
-            while (sc.hasNextLine()) {
-                write.append(sc.nextLine() + "\n");
-            }
-            String writeToFile = write.toString();
-            sc.close();
+    public void addTask(String newTask) throws Exception {
+        //Instantiating the Scanner class to read the file
+        Scanner sc = new Scanner(file);
+        StringBuffer write = new StringBuffer();
+        //Reading lines of the file and appending them to StringBuffer
+        while (sc.hasNextLine()) {
+            write.append(sc.nextLine() + "\n");
+        }
+        String writeToFile = write.toString();
+        sc.close();
 
-            writeToFile = writeToFile + newTask + "\n";
-            FileWriter writer = new FileWriter("duke.txt");
-            writer.append(writeToFile);
-            writer.close();
-        }
-        catch (Exception e) {
-            throw new DukeException("Oops! There was a problem adding this task. " +
-                    "Please check that your command is used correctly. For help, type 'help'.");
-        }
+        writeToFile = writeToFile + newTask + "\n";
+        FileWriter writer = new FileWriter("duke.txt");
+        writer.append(writeToFile);
+        writer.close();
     }
 }
 

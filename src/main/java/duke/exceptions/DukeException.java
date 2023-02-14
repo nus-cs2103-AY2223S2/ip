@@ -1,10 +1,12 @@
 package duke.exceptions;
 /**
- * Encapsulates specific errors that occur in the Duke chatbot.
+ * Encapsulates errors that occur in the Duke chatbot.
  */
 public class DukeException extends Exception {
-    public DukeException() {};
-
+    /**
+     * Constructs a new Duke Exception.
+     * @param errorMessage the error message to display
+     */
     public DukeException(String errorMessage) {
         super(errorMessage);
     };

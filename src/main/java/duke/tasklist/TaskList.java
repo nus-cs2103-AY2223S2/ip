@@ -32,7 +32,7 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = tasks.get(i);
             assert task != null : "Task is null";
-            if (task.provideDetails().contains(searchWord)) {
+            if (task.toString().contains(searchWord)) {
                 matchingTasks.add(task);
             }
         }
