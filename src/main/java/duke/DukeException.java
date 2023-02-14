@@ -1,9 +1,7 @@
 package duke;
 /**
- * DukeException is the custom error class that is thrown by other classes
- * if the user inputs an illegal argument present in the blacklist. It
- * extends IllegalArgumentException since an invalid blacklisted input is
- * indeed an argument that is not allowed.
+ * Gets thrown by other classes if the user inputs an illegal argument present in the blacklist.
+ * It extends IllegalArgumentException since an invalid blacklisted input is indeed an argument that is not allowed.
  * @author Muhammad Reyaaz
  * @version %I% %G%
  * @see IllegalArgumentException
@@ -11,8 +9,7 @@ package duke;
  */
 class DukeException extends IllegalArgumentException {
     /**
-    * Sole constructor. (For invocation by subclass
-    * constructors, typically implicit)
+    * Makes the default constructor explicit
     */
     protected DukeException() {
 
