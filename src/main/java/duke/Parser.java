@@ -30,7 +30,7 @@ public class Parser {
     public static String[] extractArgsFromInput(String input) {
         String[] splitCommand = input.split(" ", 2);
         String type = splitCommand[0];
-        if(type.equals("todo") || type.equals("find")) {
+        if (type.equals("todo") || type.equals("find")) {
             return splitCommand;
         } else {
             String[] segments = splitCommand[1].split("/");
@@ -46,8 +46,6 @@ public class Parser {
 
     public static String execute(String input, TaskHandler handler, UIText ui, Storage storage)
             throws UnknownInputException, EmptyContentException, InvalidTaskAccessException {
-//        String input = ui.getInput();
-//        System.out.println(ui.separate());
         if (input.equals("bye")) {
             return ui.exit();
         } else if (input.equals("list")) {

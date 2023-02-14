@@ -7,15 +7,17 @@ import java.util.List;
 
 public class TaskHandler {
     private List<Task> content;
+
     public TaskHandler(TaskList taskList) {
         this.content = taskList.getContent();
     }
+
     private static final String HEADER = "Got it. I've added this task:";
 
     public String display() {
         String allElements = "";
         for (int i = 0; i < content.size(); i++) {
-            if (! content.isEmpty()) {
+            if (!content.isEmpty()) {
                 allElements = allElements + (i + 1) + ". " + content.get(i).toString() + "\n";
             } else {
                 break;
@@ -30,21 +32,26 @@ public class TaskHandler {
 
     /**
      * Marks a task as done.
+     *
      * @param input User input.
      * @return Display of task marked if it exists.
      */
     public String markAsDone(String input) {
         int index = Parser.findIndex(input);
+        String nextTaskString = "";
         int listIndex = index + 1;
-        if (! content.isEmpty()) {
+        if (!content.isEmpty()) {
             content.get(index).setDone();
-            return "Nice! I've marked this task as done: " + "\n" + listIndex + ". " + content.get(index).toString();
+            return "Nice! I've marked this task as done: " + "\n" + listIndex + ". " + content.get(index).toString()
+                    + "\n" + nextTaskString;
         } else {
             return "No such task.";
         }
     }
+
     /**
      * Marks a task as undone.
+     *
      * @param input User input.
      * @return Display of task marked if it exists.
      */
@@ -53,10 +60,10 @@ public class TaskHandler {
         int listIndex = index + 1;
         if (content.isEmpty()) {
             return "No such task.";
-        } else if (! content.isEmpty() && content.get(index).isDone) {
+        } else if (!content.isEmpty() && content.get(index).isDone) {
             content.get(index).setUndone();
             return "Nice! I've marked this task as undone: " + "\n" + (listIndex) + ". " + content.get(index).toString();
-        } else if(!content.get(index).isDone) {
+        } else if (!content.get(index).isDone) {
             return "This task is already marked undone. ";
         } else {
             return "No such task.";
@@ -65,6 +72,7 @@ public class TaskHandler {
 
     /**
      * Creates an event task.
+     *
      * @param input User input.
      * @return Display of event task created.
      * @throws EmptyContentException
@@ -85,8 +93,10 @@ public class TaskHandler {
         content.add(newEvent);
         return HEADER + "\n" + newEvent + "\n" + String.format("Now you have %d tasks in the list.", content.size()) + "\n";
     }
+
     /**
      * Creates a todo task.
+     *
      * @param input User input.
      * @return Display of event task created.
      * @throws EmptyContentException
@@ -107,8 +117,10 @@ public class TaskHandler {
         return HEADER + "\n" + newTodo + "\n" + String.format("Now you have %d tasks in the list.", content.size()) + "\n";
 
     }
+
     /**
      * Creates a deadline task.
+     *
      * @param input User input.
      * @return Display of deadline task created.
      * @throws EmptyContentException
@@ -133,6 +145,7 @@ public class TaskHandler {
 
     /**
      * Deletes a task from the list.
+     *
      * @param input User input.
      * @return Confirmation of task deleted if it exists.
      * @throws EmptyContentException
@@ -155,6 +168,7 @@ public class TaskHandler {
 
     /**
      * Finds all tasks containing a keyword
+     *
      * @param input input of the user
      * @return string with a list of all tasks containing a given keyword
      * @throws EmptyContentException
@@ -166,5 +180,4 @@ public class TaskHandler {
         return UIText.printFind(TaskList.getWordList());
 
     }
-
 }

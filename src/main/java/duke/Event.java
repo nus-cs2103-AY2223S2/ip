@@ -1,8 +1,8 @@
 package duke;
 
 public class Event extends Task {
-    String startTime;
-    String endTime;
+    private String startTime;
+    private String endTime;
     public Event(String description, String startTime, String endTime) {
         super(description);
         this.startTime = Parser.formatDateString(startTime);
