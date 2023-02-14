@@ -16,6 +16,18 @@ public class Event extends Task {
         }
     }
 
+    public String changeFrom(LocalDate date) {
+        this.from = date;
+        return "Date has been changed:\n" +
+                this.toString();
+    }
+
+    public String changeTo(LocalDate date) {
+        this.to = date;
+        return "Date has been changed:\n" +
+                this.toString();
+    }
+
     @Override
     public String getFileDesc() {
         return "E|" + super.getFileDesc() + "|" + convertFileDate(this.from) + "|" + convertFileDate(this.to);

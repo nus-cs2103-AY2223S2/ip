@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import duke.task.Task;
@@ -38,6 +39,8 @@ public class Parser {
             return delete(input, taskList);
         case "find":
             return find(input, taskList);
+        case "reschedule":
+            return reschedule(input, taskList);
         case "bye":
             Platform.exit();
             return "Goodbye!";
@@ -207,5 +210,77 @@ public class Parser {
             throw new DukeException("Find needs a keyword.");
         }
         return "Here are the matching tasks in your list:\n" + taskList.findTask(input[1].strip());
+    }
+
+    public String reschedule(String[] input, TaskList taskList) throws DukeException {
+        if (input.length == 1) {
+            throw new DukeException("Format: reschedule <Task Type> <Task Index> </by or /from or /to> <YYYY-MM-DD>");
+        }
+
+        String[] commandArgs = input[1].split(" ");
+        if (commandArgs.length < 4) {
+            throw new DukeException("Format: reschedule <Task Type> <Task Index> </by or /from or /to> <yyyy-mm-dd>");
+        }
+
+        String taskType = commandArgs[0];
+        if (taskType.equals("deadline")) {
+            return changeDeadline(commandArgs, taskList);
+        } else if (taskType.equals("event")) {
+            return changeEvent(commandArgs, taskList);
+        } else {
+            throw new DukeException("You can only reschedule dates for deadline or event.");
+        }
+    }
+
+    private String changeDeadline(String[] commandArgs, TaskList taskList) throws  DukeException {
+        int index = Integer.parseInt(commandArgs[1]);
+        if (index > taskList.size()) {
+            throw new DukeException("Invalid deadline task given.");
+        }
+
+        Task task = taskList.get(index - 1);
+        if (task instanceof Deadline == false) {
+            throw new DukeException("Index given not a deadline.");
+        }
+
+        Deadline deadline = (Deadline) task;
+        if (!commandArgs[2].equals("/by")) {
+            throw new DukeException("Reschedule deadline needs a /by.");
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(commandArgs[3]);
+            return deadline.changeDate(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date after /by needs to be in format yyyy-mm-dd.");
+        }
+    }
+
+    private String changeEvent(String[] commandArgs, TaskList taskList) throws  DukeException {
+        int index = Integer.parseInt(commandArgs[1]);
+        if (index > taskList.size()) {
+            throw new DukeException("Invalid event task given.");
+        }
+
+        Task task = taskList.get(index - 1);
+        if (task instanceof Event == false) {
+            throw new DukeException("Index given not an event.");
+        }
+
+        Event event = (Event) task;
+        String dateToChange = commandArgs[2];
+
+        try {
+            LocalDate date = LocalDate.parse(commandArgs[3]);
+            if (dateToChange.equals("/from")) {
+                return event.changeFrom(date);
+            } else if (dateToChange.equals("/to")) {
+                return event.changeTo(date);
+            } else {
+                throw new DukeException("Reschedule event needs a /from or /to.");
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date after /from or /to needs to be in format yyyy-mm-dd.");
+        }
     }
 }

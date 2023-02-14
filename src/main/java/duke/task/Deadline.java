@@ -9,6 +9,12 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(start);
     }
 
+    public String changeDate(LocalDate date) {
+        this.deadline = date;
+        return "Date has been changed:\n" +
+                this.toString();
+    }
+
     @Override
     public String getFileDesc() {
         return "D|" + super.getFileDesc() + "|" + convertFileDate(this.deadline);
