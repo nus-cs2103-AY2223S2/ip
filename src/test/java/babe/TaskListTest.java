@@ -1,12 +1,6 @@
 package babe;
 
-
-import babe.task.Task;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +14,7 @@ public class TaskListTest {
      */
     public void addToDoTest_toMarkIsFalse_TaskNotMarked() {
         String taskString = taskList.addToDo("test", false);
-        assertEquals("[ ] test", taskString);
+        assertEquals("[T] [ ] test", taskString);
     }
 
     @Test
@@ -29,7 +23,7 @@ public class TaskListTest {
      */
     public void addToDoTest_toMarkIsTrue_TaskMarked() {
         String taskString = taskList.addToDo("test", true);
-        assertEquals("[X] test", taskString);
+        assertEquals("[T] [X] test", taskString);
     }
 
 }
