@@ -11,22 +11,15 @@ import leo.ui.Ui;
  */
 public class Leo {
 
-    private final Ui ui;
     private Parser parser;
 
     public Leo(String filePath) {
-        ui = new Ui();
-        run();
         try {
             Storage storage = new Storage(filePath);
             parser = new Parser(storage);
         } catch (LeoException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    private void run() {
-        ui.greetings();
     }
 
     /**

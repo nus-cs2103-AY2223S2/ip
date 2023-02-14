@@ -5,15 +5,23 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="leo.ui.MainWindow">
-    <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
-            <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
-            </content>
-        </ScrollPane>
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="720.0" style="-fx-background-color: linear-gradient(to BOTTOM, lightblue, skyblue);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="leo.ui.MainWindow">
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="600.0" vvalue="1.0" AnchorPane.bottomAnchor="42.39999999999998" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="620.0" />
+    </ScrollPane>
+    <HBox layoutY="558.0" prefHeight="46.0" prefWidth="600.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <TextField fx:id="userInput" layoutY="358.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="500.0" promptText="Hello, I am Leo! How can I assist you?" AnchorPane.bottomAnchor="1.0" HBox.hgrow="ALWAYS">
+            <font>
+                <Font name="Verdana" size="14.0" />
+            </font>
+        </TextField>
+        <Button fx:id="sendButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #fcd1a9; -fx-border-color: #000000; -fx-border-radius: 1; -fx-border-width: 1;" text="Enter" HBox.hgrow="ALWAYS">
+            <font>
+                <Font name="Verdana" size="16.0" />
+            </font>
+        </Button>
+    </HBox>
 </AnchorPane>
