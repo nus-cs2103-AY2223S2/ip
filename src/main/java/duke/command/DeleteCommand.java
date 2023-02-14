@@ -20,6 +20,7 @@ public class DeleteCommand implements Command {
     public String execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
         try {
             Task taskToDelete = tasks.getTask(taskNumber - 1);
+            assert taskToDelete != null;
             tasks.deleteTask(taskNumber - 1);
             String toDisplay = String.format("Alright, I have removed this task:\n%s\n"
                     + "Now you have %d tasks in the list.", taskToDelete.toString(), tasks.getSize());

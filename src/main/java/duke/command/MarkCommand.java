@@ -22,7 +22,6 @@ public class MarkCommand implements Command {
     }
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
-        //do this
         String toDisplay;
         if (toMark) {
             tasks.markTask(taskNumber - 1);
