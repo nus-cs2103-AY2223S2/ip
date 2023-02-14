@@ -18,7 +18,13 @@ import duke.tasks.TaskTodo;
  * A simple task list program.
  */
 public class Duke {
-    private Ui ui = new Ui();
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private String initialMsg = "Hello from\n" + LOGO;
     private Storage storage = new Storage("_duke_data.txt");
     private TaskList tasks;
     private Parser currentCommand;
@@ -31,86 +37,19 @@ public class Duke {
         try {
             this.tasks = this.storage.load();
         } catch (DukeSaveLoadException e) {
-            this.ui.showError(e);
+            initialMsg += "\n" + e.getDukeMessage();
             this.tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the app.
-     */
-    public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        this.ui.show("Hello from\n" + logo);
-
-        whileLoop:
-        while (true) {
-            if (!this.ui.hasCommand()) {
-                continue;
-            }
-
-            String input = this.ui.readCommand();
-            this.currentCommand = new Parser(input);
-
-            try {
-                switch (this.currentCommand.baseCommand) {
-                case "todo":
-                    this.addTodo();
-                    break;
-                case "deadline":
-                    this.addDeadline();
-                    break;
-                case "event":
-                    this.addEvent();
-                    break;
-                case "mark":
-                    this.mark();
-                    break;
-                case "unmark":
-                    this.unmark();
-                    break;
-                case "delete":
-                    this.delete();
-                    break;
-                case "list":
-                    this.list();
-                    break;
-                case "find":
-                    this.find();
-                    break;
-                case "q":
-                case "quit":
-                case "exit":
-                case "bye":
-                    this.ui.show("Bye. Hope to see you again soon!");
-                    break whileLoop;
-                default:
-                    throw new DukeInvalidCommandException();
-                }
-
-                this.storage.save(this.tasks);
-            } catch (DukeException e) {
-                this.ui.showError(e);
-            }
-        }
-
-        this.ui.close();
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * Handles the adding of todo-type tasks by the "todo" command.
+     * Handles the adding of todo-type tasks by the "todo" command, and returns the
+     * Duke's response.
      * 
+     * @return Duke's response.
      * @throws DukeInvalidArgumentException If no description given.
      */
-    private void addTodo() throws DukeInvalidArgumentException {
+    private String addTodo() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a todo cannot be empty.");
         }
@@ -118,18 +57,20 @@ public class Duke {
         String description = this.currentCommand.body;
         Task task = new TaskTodo(description);
         this.tasks.add(task);
-        this.ui.show("Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
-                + this.tasks.getStatus());
+                + this.tasks.getStatus();
     }
 
     /**
-     * Handles the adding of deadline-type tasks by the "deadline" command.
+     * Handles the adding of deadline-type tasks by the "deadline" command, and
+     * returns the Duke's response.
      * 
+     * @return Duke's response.
      * @throws DukeInvalidArgumentException If no or invalid description/by-param
      *         are given.
      */
-    private void addDeadline() throws DukeInvalidArgumentException {
+    private String addDeadline() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a deadline cannot be empty.");
         }
@@ -144,9 +85,9 @@ public class Duke {
             String description = this.currentCommand.body;
             Task task = new TaskDeadline(description, this.currentCommand.namedParameters.get("by"));
             this.tasks.add(task);
-            this.ui.show("Got it. I've added this task:\n"
+            return "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
-                    + this.tasks.getStatus());
+                    + this.tasks.getStatus();
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException(
                     "The \"/by\" value must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15).");
@@ -154,12 +95,13 @@ public class Duke {
     }
 
     /**
-     * Handles the adding of event-type tasks by the "event" command.
+     * Handles the adding of event-type tasks by the "event" command, and returns
+     * the Duke's response.
      * 
      * @throws DukeInvalidArgumentException If no or invalid
      *         description/from-param/to-param are given.
      */
-    private void addEvent() throws DukeInvalidArgumentException {
+    private String addEvent() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of an event cannot be empty.");
         }
@@ -183,9 +125,9 @@ public class Duke {
                     this.currentCommand.namedParameters.get("from"),
                     this.currentCommand.namedParameters.get("to"));
             this.tasks.add(task);
-            this.ui.show("Got it. I've added this task:\n"
+            return "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
-                    + this.tasks.getStatus());
+                    + this.tasks.getStatus();
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException(
                     "The \"/from\" and \"/to\" values must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15).");
@@ -193,11 +135,13 @@ public class Duke {
     }
 
     /**
-     * Handles the marking of tasks as done, by the "mark" command.
+     * Handles the marking of tasks as done, by the "mark" command, and returns the
+     * Duke's response.
      * 
+     * @return Duke's response.
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
-    private void mark() throws DukeInvalidArgumentException {
+    private String mark() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
@@ -215,15 +159,17 @@ public class Duke {
                 .orElseThrow(() -> new DukeInvalidArgumentException(
                         "Task index is beyond the range of the task list."));
         task.markAsDone();
-        this.ui.show("Nice! I've marked this task as done:\n" + "  " + task.toString());
+        return "Nice! I've marked this task as done:\n" + "  " + task.toString();
     }
 
     /**
-     * Handles the marking of tasks as not done, by the "unmark" command.
+     * Handles the marking of tasks as not done, by the "unmark" command, and
+     * returns the Duke's response.
      * 
+     * @return Duke's response.
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
-    private void unmark() throws DukeInvalidArgumentException {
+    private String unmark() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
@@ -241,15 +187,17 @@ public class Duke {
                 .orElseThrow(() -> new DukeInvalidArgumentException(
                         "Task index is beyond the range of the task list."));
         task.markAsNotDone();
-        this.ui.show("OK, I've marked this task as not done yet:\n" + "  " + task.toString());
+        return "OK, I've marked this task as not done yet:\n" + "  " + task.toString();
     }
 
     /**
-     * Handles the deleting of tasks by the "delete" command.
+     * Handles the deleting of tasks by the "delete" command, and returns the Duke's
+     * response.
      * 
+     * @return Duke's response.
      * @throws DukeInvalidArgumentException If no or invalid task-index is given.
      */
-    private void delete() throws DukeInvalidArgumentException {
+    private String delete() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
@@ -267,21 +215,27 @@ public class Duke {
                 .orElseThrow(() -> new DukeInvalidArgumentException(
                         "Task index is beyond the range of the task list."));
         this.tasks.remove(taskIndex);
-        this.ui.show("Noted. I've removed this task:\n" + "  " + task.toString());
+        return "Noted. I've removed this task:\n" + "  " + task.toString();
     }
 
     /**
-     * Handles the listing of tasks by the "list" command.
+     * Handles the listing of tasks by the "list" command, and returns the Duke's
+     * response.
+     * 
+     * @return Duke's response.
      */
-    private void list() {
+    private String list() {
         String header = "Here are the tasks in your list:\n";
-        this.ui.show(header + this.tasks.toString());
+        return header + this.tasks.toString();
     }
 
     /**
-     * Handles the finding of tasks using keywords, by the "find" command.
+     * Handles the finding of tasks using keywords, by the "find" command, and
+     * returns the Duke's response.
+     * 
+     * @return Duke's response.
      */
-    private void find() {
+    private String find() {
         String keyword = this.currentCommand.body;
         Task[] matchingTasks = this.tasks.stream()
                 .filter(task -> task.description.contains(keyword))
@@ -289,14 +243,72 @@ public class Duke {
         TaskList matchingTaskList = new TaskList(matchingTasks);
 
         String header = "Here are the matching tasks in your list:\n";
-        this.ui.show(header + matchingTaskList.toString());
+        return header + matchingTaskList.toString();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the Duke's initialisation response.
+     * 
+     * @return Initialisation response.
+     */
+    public String getInitialResponse() {
+        return initialMsg;
+    }
+
+    /**
+     * Gets Duke's response to a user input.
+     * 
+     * @param input User input.
+     * @return Duke's response.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (input.isEmpty()) {
+            return "";
+        }
+
+        this.currentCommand = new Parser(input);
+        String response;
+
+        try {
+            switch (this.currentCommand.baseCommand) {
+            case "todo":
+                response = this.addTodo();
+                break;
+            case "deadline":
+                response = this.addDeadline();
+                break;
+            case "event":
+                response = this.addEvent();
+                break;
+            case "mark":
+                response = this.mark();
+                break;
+            case "unmark":
+                response = this.unmark();
+                break;
+            case "delete":
+                response = this.delete();
+                break;
+            case "list":
+                response = this.list();
+                break;
+            case "find":
+                response = this.find();
+                break;
+            case "q":
+            case "quit":
+            case "exit":
+            case "bye":
+                response = "Bye. Hope to see you again soon!";
+                break;
+            default:
+                throw new DukeInvalidCommandException();
+            }
+
+            this.storage.save(this.tasks);
+            return response;
+        } catch (DukeException e) {
+            return e.getDukeMessage();
+        }
     }
 }
