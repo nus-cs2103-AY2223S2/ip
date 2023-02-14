@@ -9,10 +9,10 @@ public abstract class Task {
 
     /**
      * Constructor for Task.
-     * @param input Description of task.
+     * @param description Description of task.
      */
-    public Task(String input) {
-        this.description = input;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 

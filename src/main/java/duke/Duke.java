@@ -19,7 +19,7 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("./data.txt");
+        this.storage = new Storage("./data.txt", this.ui);
         this.tasks = new TaskList(storage.loadData());
     }
     /**
@@ -28,7 +28,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(filePath, this.ui);
         this.tasks = new TaskList(storage.loadData());
     }
     /**
