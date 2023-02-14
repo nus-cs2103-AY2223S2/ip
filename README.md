@@ -2,7 +2,7 @@
 > _"Time is the scarcest resource and unless it is managed nothing else can be managed."_  - Peter Drucker ([Source](https://www.azquotes.com/author/4147-Peter_Drucker/tag/time-management#:~:text=Time%20is%20the%20scarcest%20resource,nothing%20else%20can%20be%20managed.&text=Until%20we%20can%20manage%20time%2C%20we%20can%20manage%20nothing%20else.&text=One%20cannot%20buy%2C%20rent%20or%20hire%20more%20time.))
 
 BooBot helps you to keep track of your tasks, saving time and ensuring that you are on track. Problems would be scared
-away with good task management provided by BooBot. The [user guide](docs/README.md) for BooBot documents the details
+away with good task management provided by BooBot. The [user guide](https://eugenetangkj.github.io/ip/) for BooBot documents the details
 of the application.
 
 Main features of BooBot:
