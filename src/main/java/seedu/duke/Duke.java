@@ -395,7 +395,7 @@ public class Duke {
         isDisplayList = true;
         isFind = true;
         tempTasks = tasks.find(userParse);
-        if(tempTasks.tasksList.isEmpty()) {
+        if (tempTasks.tasksList.isEmpty()) {
             isFind = false;
         }
         return ui.findMessage(tempTasks);
