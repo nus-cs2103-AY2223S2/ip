@@ -96,7 +96,10 @@ public class DialogBox extends HBox {
      * @return a DialogBox object representing a user's dialog
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img);
+        userDialog.getStyleClass().add("user-background");
+        return userDialog;
+        //return new DialogBox(text, img);
     }
 
     /**

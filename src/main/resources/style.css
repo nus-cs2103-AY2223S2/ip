@@ -13,3 +13,7 @@
     -fx-background-radius: 20 20 20 20;
     -fx-padding: 20;
 }
+
+.user-background {
+    -fx-background-color: pink;
+}
