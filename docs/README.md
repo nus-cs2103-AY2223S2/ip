@@ -4,8 +4,12 @@ img[src*="Ui"] {
    height:600px;
     display: flex
 }
-h1, h2, h3, p {
+h1, h2, h3, li, p, ul {
   font-family: helvetica
+  font-size: responsive
+}
+h1, h2, h3, h4 {
+  font-weight: bold
 }
 </style>
 
