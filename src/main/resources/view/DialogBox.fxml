@@ -5,7 +5,11 @@
 <?import javafx.scene.text.Font?>
 
 
+<?import javafx.geometry.Insets?>
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="400" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets topRightBottomLeft="16" />
+   </padding>
    <Label fx:id="sender" text="sender">
       <font>
          <Font size="15.0"/>
