@@ -8,6 +8,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 class Parser {
@@ -117,6 +118,9 @@ class Parser {
                 } catch (IndexOutOfBoundsException ioobe) {
                     System.out.println("Sorry, the index number you've entered does not exist.");
                 }
+                break;
+            case "find":
+                ui.find(String.valueOf(keyword));
                 break;
             default:
                 // For unknown commands

@@ -1,6 +1,7 @@
 package duke.backend;
 
 import duke.tasks.Task;
+import javafx.util.Pair;
 
 import java.io.IOException;
 
@@ -44,6 +45,27 @@ class Ui {
         System.out.println(DIVIDER + "Here are the tasks in your list:\n");
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println(i + ". " + tasks.get(i - 1));
+        }
+        System.out.println(DIVIDER);
+    }
+
+    public void find(String searchKey) {
+        ArrayList<Task> currentTasks = taskManager.getWholeList();
+        ArrayList<Pair<Integer, Task>> searchResults = new ArrayList<>();
+        for (int i = 0; i < currentTasks.size(); i++) {
+            Task curr = currentTasks.get(i);
+            if (curr.getDescription().contains(searchKey)) {
+                searchResults.add(new Pair<Integer, Task>(i + 1, curr));
+            }
+        }
+        System.out.println(DIVIDER);
+        if (searchResults.size() != 0){
+            System.out.println("I've found these matching tasks:\n");
+            for (Pair p : searchResults) {
+                System.out.println(p.getKey() + ". " + p.getValue());
+            }
+        } else {
+            System.out.println("Sorry, I did not find any tasks matching your search keyword :-( .");
         }
         System.out.println(DIVIDER);
     }
