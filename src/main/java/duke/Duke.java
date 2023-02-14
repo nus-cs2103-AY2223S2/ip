@@ -22,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The runner function of the Duke program.
+     */
     public void run() {
         ui.printGreeting();
         boolean toContinue = true;
