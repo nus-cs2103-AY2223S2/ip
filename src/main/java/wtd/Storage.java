@@ -39,7 +39,7 @@ public class Storage {
     }
 
     /**
-     * Load the tasks from the file.
+     * Loads the tasks from the file.
      * 
      * @return the ArrayList of tasks.
      * @throws WtdException

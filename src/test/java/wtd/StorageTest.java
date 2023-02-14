@@ -66,8 +66,6 @@ public class StorageTest {
             assertEquals("D | 1 | test | 2020-01-01", s.nextLine());
             assertEquals("E | 0 | test | 2020-01-01 | 2020-01-02", s.nextLine());
             s.close();
-        // } catch (IOException e) {
-        //     fail("IOException thrown");
         } catch (WtdException e) {
             fail(e.getMessage());
         } finally {

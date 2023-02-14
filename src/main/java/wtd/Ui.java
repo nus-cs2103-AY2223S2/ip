@@ -19,28 +19,28 @@ public class Ui {
     }
 
     /**
-     * Display welcome message.
+     * Displays welcome message.
      */
     public String getWelcome() {
         return "Hey, why did you wake me up?\nI am the great Watt Toodu.\nDon't mess with me!\n";
     }
 
     /**
-     * Display line to separate user input and output.
+     * Displays line to separate user input and output.
      */
     public void showLine() {
         System.out.println("----------------------------------------");
     }
 
     /**
-     * Display goodbye message.
+     * Displays goodbye message.
      */
     public String showBye() {
         return "Good riddance...\n";
     }
 
     /**
-     * Display the given list of tasks.
+     * Displays the given list of tasks.
      * 
      * @param list the list of tasks to display.
      */
@@ -52,7 +52,7 @@ public class Ui {
     }
 
     /**
-     * Display the successful marking of a task.
+     * Displays the successful marking of a task.
      * 
      * @param task the task that was marked.
      */
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Display the successful unmarking of a task.
+     * Displays the successful unmarking of a task.
      * 
      * @param task the task that was unmarked.
      */
@@ -70,7 +70,7 @@ public class Ui {
     }
 
     /**
-     * Display the successful addition of a task.
+     * Displays the successful addition of a task.
      * 
      * @param task the task that was added.
      * @param size the size of the list after the addition.
@@ -80,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Display the successful deletion of a task.
+     * Displays the successful deletion of a task.
      * 
      * @param task the task that was deleted.
      * @param size the size of the list after the deletion.
@@ -97,7 +97,7 @@ public class Ui {
     }
 
     /**
-     * Display the succesful addition of a command alias.
+     * Displays the succesful addition of a command alias.
      * 
      * @param existing the existing command.
      * @param alias the alias of the command.
@@ -107,21 +107,21 @@ public class Ui {
     }
 
     /**
-     * Display the error message for loading the file.
+     * Displays the error message for loading the file.
      */
     public String showLoadingError() {
         return "Error loading file!\n";
     }
 
     /**
-     * Display the error message for saving the file.
+     * Displays the error message for saving the file.
      */
     public String showSavingError() {
         return "Error saving file!\n";
     }
 
     /**
-     * Display the error message for the given exception.
+     * Displays the error message for the given exception.
      * 
      * @param message the error message to display.
      */
@@ -130,7 +130,7 @@ public class Ui {
     }
 
     /**
-     * Read the user input.
+     * Reads the user input.
      * 
      * @return the user input string.
      */
