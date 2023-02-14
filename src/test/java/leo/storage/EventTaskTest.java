@@ -1,11 +1,12 @@
 package leo.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EventTaskTest {
 
@@ -36,6 +37,14 @@ public class EventTaskTest {
         EventTask eventTwo = new EventTask("meeting", dtOne, dtThree);
         assertEquals(expectedOne, eventOne.saveFormat());
         assertEquals(expectedTwo, eventTwo.saveFormat());
+    }
 
+    @Test
+    public void testWithinDate() {
+        EventTask eventOne = new EventTask("meeting", dtOne, dtTwo);
+        EventTask eventTwo = new EventTask("meeting", dtOne, dtThree);
+        LocalDate date = LocalDate.of(2023, 1, 20);
+        assertFalse(eventOne.withinDate(date));
+        assertTrue(eventTwo.withinDate(date));
     }
 }
