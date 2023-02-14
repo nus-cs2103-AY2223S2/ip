@@ -139,7 +139,7 @@ public class UwUke extends Application {
         try {
             tasks = Storage.readSavedTasks();
         } catch (Exception e) {
-            Printer.printError("Could not load save file, creating new task list");
+            Printer.printError("Could not load save file or it doesn't exist, creating new task list");
             tasks = new TaskList();
         }
     }
