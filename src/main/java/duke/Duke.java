@@ -8,6 +8,7 @@ import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.ReminderCommand;
@@ -87,6 +88,9 @@ public class Duke {
                 case "reminder":
                     new ReminderCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                     break;
+                case "help":
+                    new HelpCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
+                    break;
                 case "error":
                     break;
                 default:
@@ -138,6 +142,9 @@ public class Duke {
                 break;
             case "reminder":
                 message = new ReminderCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
+                break;
+            case "help":
+                message = new HelpCommand().execute(commandInfoList, this.tasks, this.storage, this.ui);
                 break;
             case "error":
                 message = commandInfoList.get(1);

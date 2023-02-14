@@ -109,7 +109,9 @@ public class Parser {
             break;
         case "reminder": // format: reminder
             break;
-        case "find":
+        case "help": // format: help
+            break;
+        case "find": // format: find | "tasks to find"
             partialCmd.add(tempTaskInfo[1].toLowerCase());
             break;
         case "mark": // format: mark | index
@@ -332,6 +334,8 @@ public class Parser {
         } else if (cmd.equals("bye")) {
             return true;
         } else if (cmd.equals("list")) {
+            return true;
+        } else if (cmd.equals("help")) {
             return true;
         } else {
             return false;
