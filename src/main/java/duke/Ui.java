@@ -4,6 +4,9 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Represents a duke.Ui object that handles the user interface.
+ */
 public class Ui {
 
     private final Scanner SC; // scanner to read user input.

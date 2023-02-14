@@ -50,6 +50,22 @@ public enum DukeCommand {
     }
 
     /**
+     * @param input the user input.
+     * @return a DukeCommand object. If the command is invalid, returns DukeCommand.INVALID.
+     */
+    public static DukeCommand getCommand(String input) {
+        for (DukeCommand c : DukeCommand.values()) {
+            if (c.getCommand().equals(input.split(" ")[0])) {
+                if (c != LIST && c != BYE) {
+                    c.setDescription(input.split(" ", 2)[1].trim());
+                }
+                return c;
+            }
+        }
+        return INVALID;
+    }
+
+    /**
      * Executes the command.
      * @param taskList task list.
      * @param ui ui.
@@ -130,20 +146,8 @@ public enum DukeCommand {
         case INVALID:
             ui.prettifyOut("Invalid command!");
             break;
+        default:
+            break;
         }
-    }
-
-    /**
-     * @param input the user input.
-     * @return a DukeCommand object. If the command is invalid, returns DukeCommand.INVALID.
-     */
-    public static DukeCommand getCommand(String input) {
-        for (DukeCommand c : DukeCommand.values()) {
-            if (c.getCommand().equals(input.split(" ")[0])) {
-                if (c != LIST && c != BYE) c.setDescription(input.split(" ", 2)[1].trim());
-                return c;
-            }
-        }
-        return INVALID;
     }
 }

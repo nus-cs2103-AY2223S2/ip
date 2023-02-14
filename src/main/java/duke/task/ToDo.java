@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a to-do task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     /**
      * @param description the description of the task.
      */

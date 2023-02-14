@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
+
+/**
+ * Represents a duke.Storage object that stores the tasks in the hard disk.
+ */
 public class Storage {
     private final File file;
     private final ArrayList<Task> tasks;

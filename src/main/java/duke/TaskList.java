@@ -1,9 +1,14 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+import duke.task.Task;
+
+
+
+/**
+ * Represents a duke.TaskList object that represents a list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
     public TaskList() {
@@ -19,7 +24,7 @@ public class TaskList {
      * @return the task at the specified index.
      */
     public Task getTask(int index) {
-        return  this.taskList.get(index);
+        return this.taskList.get(index);
     }
 
     /**

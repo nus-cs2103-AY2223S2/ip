@@ -10,11 +10,17 @@ public class Deadline extends Task {
 
     private final LocalDateTime by;
 
+    /**
+     * @param description the description of the task.
+     * @param by the deadline of the task.
+     */
     public Deadline(String description, String by) {
         super(description);
         String[] dateAndTime = by.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        if (dateAndTime.length == 1) by += " 2359";
+        if (dateAndTime.length == 1) {
+            by += " 2359";
+        }
         this.by = LocalDateTime.parse(by, formatter);
     }
 

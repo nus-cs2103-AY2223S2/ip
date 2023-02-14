@@ -21,8 +21,12 @@ public class Event extends Task {
         String[] toDateTime = to.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
-        if (fromDateTime.length != 2) from += " 0000";    // default to 00:00
-        if (toDateTime.length != 2) to += " 2359";        // default to 23:59
+        if (fromDateTime.length != 2) {
+            from += " 0000"; // default to 00:00
+        }
+        if (toDateTime.length != 2) {
+            to += " 2359"; // default to 23:59
+        }
 
         this.from = LocalDateTime.parse(from, formatter);
         this.to = LocalDateTime.parse(to, formatter);
@@ -33,13 +37,13 @@ public class Event extends Task {
      */
     public String toStorageString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + formatter.format(this.from) +
-                " | " + formatter.format(this.to);
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + formatter.format(this.from)
+                + " | " + formatter.format(this.to);
     }
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[E]" + super.toString() + " (from: " + formatter.format(this.from) + " to: " +
-                formatter.format(this.to) + ")";
+        return "[E]" + super.toString() + " (from: " + formatter.format(this.from) + " to: "
+                + formatter.format(this.to) + ")";
     }
 }
