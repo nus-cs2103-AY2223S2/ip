@@ -33,6 +33,7 @@ public class Ui {
                 + "list\n"
                 + "delete [index]\n"
                 + "date [date]\n"
+                + "find [description]\n"
                 + "reminder [days from today]\n"
                 + "date formats are in yyyy-mm-dd";
         return availableCommands;
