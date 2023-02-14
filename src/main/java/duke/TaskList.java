@@ -2,6 +2,10 @@ package duke;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.tasks.Task;
 
@@ -56,13 +60,19 @@ public class TaskList implements Serializable {
     }
 
     public String search(String keyword) {
+        Stream<Task> taskStream = listOfTasks.stream();
+        Stream<Task> filteredTaskStream = taskStream.filter(task -> task.hasKeyword(keyword));
+
+        List<Task> list = filteredTaskStream.collect(Collectors.toList());
         TaskList filteredTasks = new TaskList();
-        for (Task task: listOfTasks) {
-            if (task.hasKeyword(keyword)) {
-                filteredTasks.addTask(task);
-            }
-        }
+        ArrayList<Task> arrayList = new ArrayList<>(list);
+        filteredTasks.setListOfTasks(arrayList);
+
         return filteredTasks.toString();
+    }
+
+    private void setListOfTasks(ArrayList<Task> list) {
+        this.listOfTasks = list;
     }
 
     @Override
