@@ -8,54 +8,57 @@ import java.util.Arrays;
 public enum Commands {
     TODO("todo",
             "todo 'name'", "To add a task with only a name."
-
     ),
     DEADLINE("deadline",
             "deadline 'name' /by 'date'", "To add a task with a deadline."
-
     ),
     EVENT("event",
             "event 'name' /from 'date' /to 'date'", "To add an event with start and end time."
-
     ),
     BY("/by",
             "for deadline: /by 'date' in this format YYYY-MM-DDTHH:MM eg '2023-01-20T18:00'",
             "To specify a deadline for a task in this format YYYY-MM-DDTHH:MM eg '2023-01-20T18:00'"
-
     ),
     FROM("/from",
             "for event: /from 'date' in this format YYYY-MM-DDTHH:MM eg '2023-01-20T18:00'",
             "To specify the start date of an event in this format YYYY-MM-DDTHH:MM eg '2023-01-20T18:00'"
-
     ),
     TO("/to",
             "for event: /to 'date' in this format YYYY-MM-DDTHH:MM eg '2023-01-20T18:00'",
             "To specify the end date of an event in this format YYYY-MM-DDTHH:MM eg '2023-01-20T18:00'"
-
     ),
     MARK("mark",
             "mark 1", "To mark a task as done by specifying its number."
-
     ),
     UNMARK("unmark",
             "unmark 1", "To unmark a task as not done by specifying its number."
-
     ),
     DELETE("delete",
             "delete 1", "To remove a task by specifying its number."
-
     ),
     DEL("del",
             "del 1", "To remove a task by specifying its number."
-
     ),
     FIND("find",
             "find 'name'", "To find tasks with a specified name."
-
     ),
     SET("set",
             "set 'language'", "To set language for duke."
-
+    ),
+    LIST("list",
+            "list", "List out the tasks in the task list"
+    ),
+    CLEAR("clear",
+            "clear", "Clears the task list"
+    ),
+    EXPORT("export",
+            "export", "To export tasks to a markdown file"
+    ),
+    BYE("bye",
+            "bye", "To exit duke."
+    ),
+    EXIT("exit",
+            "exit", "To exit duke."
     ),
     HELP("help",
             "show this message",

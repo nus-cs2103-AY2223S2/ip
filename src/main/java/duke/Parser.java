@@ -11,6 +11,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.ExportCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
@@ -41,6 +42,8 @@ public class Parser {
             return new ClearCommand();
         case "help":
             return new HelpCommand();
+        case "export":
+            return new ExportCommand();
         case "bye":
         case "exit":
             return new ExitCommand();

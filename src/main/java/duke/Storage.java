@@ -21,8 +21,9 @@ public class Storage {
      * Given a list of tasks, it will save it into a txt file
      *
      * @param tasks TaskList object to get and set the list
+     * @throws DukeException
      */
-    public void save(TaskList tasks) {
+    public void save(TaskList tasks) throws DukeException {
         File dukeData = new File("duke_data.txt"); // Magic Strings
         try (PrintWriter writer = new PrintWriter(new FileWriter(dukeData));) {
             for (Task item : tasks.getList()) {
@@ -36,8 +37,28 @@ public class Storage {
                         .replace(")", ""));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            throw new DukeException(e.getMessage());
+        }
+    }
 
+    /**
+     * Given a list of tasks, it will save it into a md file
+     *
+     * @param tasks TaskList object to get and set the list
+     * @throws DukeException
+     */
+    public void saveMarkdown(TaskList tasks) throws DukeException {
+        File dukeData = new File("todo.md"); // Magic Strings
+        try (PrintWriter writer = new PrintWriter(new FileWriter(dukeData));) {
+            writer.println(Views.MD_HEADER_STRING.str());
+            for (Task item : tasks.getList()) {
+                writer.println(item.toMarkdownString()
+                        .replace("[T]", "")
+                        .replace("[D]", " Deadline: ")
+                        .replace("[E]", " Event: "));
+            }
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
         }
     }
 

@@ -1,3 +1,4 @@
+
 package duke.command;
 
 import duke.DukeException;
@@ -7,9 +8,18 @@ import duke.Ui;
 import duke.enums.Views;
 
 /**
- * Command: Creates a command to exit the program
+ * Command: Returns the Export message
  */
-public class ExitCommand extends Command {
+public class ExportCommand extends Command {
+
+    /**
+     * Creates Export Command
+     *
+     * @param query string from user
+     */
+    public ExportCommand() {
+    }
+
     /**
      * Executes the command
      *
@@ -18,8 +28,8 @@ public class ExitCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        Ui.printer(Views.END_STRING);
-        storage.save(tasks);
+        storage.saveMarkdown(tasks);
+        Ui.printer(Views.EXPORT_MD_STRING);
     }
 
     /**
@@ -31,8 +41,8 @@ public class ExitCommand extends Command {
      * @throws DukeException
      */
     public String executeString(TaskList tasks, Storage storage) throws DukeException {
-        storage.save(tasks);
-        return Views.END_STRING.str();
+        storage.saveMarkdown(tasks);
+        return Views.EXPORT_MD_STRING.str();
     }
 
     /**
@@ -41,6 +51,6 @@ public class ExitCommand extends Command {
      * @return boolean True if the command will exit the program
      */
     public boolean isExit() {
-        return true;
+        return false;
     }
 }

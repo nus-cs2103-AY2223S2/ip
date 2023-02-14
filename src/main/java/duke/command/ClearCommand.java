@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -14,8 +15,9 @@ public class ClearCommand extends Command {
      *
      * @param tasks   TaskList object to get and set the list
      * @param storage object required when command writes to file
+     * @throws DukeException
      */
-    public void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.clear();
         Ui.printer(Views.CLEAR_LIST_STRING);
         storage.save(tasks);
@@ -27,8 +29,9 @@ public class ClearCommand extends Command {
      * @param tasks   TaskList object to get and set the list
      * @param storage object required when command writes to file
      * @return returns the UI text instead of printing
+     * @throws DukeException
      */
-    public String executeString(TaskList tasks, Storage storage) {
+    public String executeString(TaskList tasks, Storage storage) throws DukeException {
         tasks.clear();
         storage.save(tasks);
         return Views.CLEAR_LIST_STRING.str();

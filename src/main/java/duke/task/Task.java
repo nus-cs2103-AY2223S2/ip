@@ -98,4 +98,19 @@ public abstract class Task implements Comparable<Task> {
         }
         return returnString + title;
     }
+
+    /**
+     * Get a String representation in markdown format to display to user of a Task
+     *
+     * @return String representation of the Task
+     */
+    public String toMarkdownString() {
+        String returnString = "";
+        if (isDone) {
+            returnString = "- [x] ";
+        } else {
+            returnString = "- [ ] ";
+        }
+        return returnString + title;
+    }
 }
