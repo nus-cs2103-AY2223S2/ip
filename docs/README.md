@@ -15,7 +15,7 @@ You can add different types of tasks:
 ### Feature-Marking Tasks
 
 You can mark tasks as completed when you are done with them.
-You can also unmark tasks, indicating incompleted tasks.
+You can also unmark tasks, indicating uncompleted tasks.
 
 ### Feature-Delete Tasks
 
@@ -46,7 +46,7 @@ Example of usage:
 
 Expected outcome:
 
-Description of the outcome.
+Creates Deadline Task.
 
 ```
 Got it. I've added this task:
@@ -62,7 +62,7 @@ Example of usage:
 
 Expected outcome:
 
-Description of the outcome.
+Creates Event Task.
 
 ```
 Got it. I've added this task:
@@ -76,7 +76,7 @@ Example of usage:
 
 `todo borrow book`
 
-Expected outcome:
+Creates ToDo Task.
 
 Description of the outcome.
 
