@@ -46,6 +46,8 @@ public class Parser {
         case "tag":
             return OperationType.TAG;
             //break;
+        case "bye":
+            return OperationType.BYE;
         default:
             return OperationType.ADDTASK;
             //break;

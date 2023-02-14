@@ -62,6 +62,8 @@ public class WindyCall {
                 AddTagHandler addTagHandler = new AddTagHandler();
                 return addTagHandler.handle(parser, tasks, parts, storage);
 //                break;
+            case BYE:
+                return "Bye. Always willing to provide my help for you!!!";
             default:
                 String returnedMessage;
                 try {
