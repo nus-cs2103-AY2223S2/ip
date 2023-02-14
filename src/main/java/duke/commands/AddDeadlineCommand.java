@@ -30,6 +30,6 @@ public class AddDeadlineCommand extends Command {
     public String execute(TaskList taskList, UiText uiText, Storage storage) {
         Task task = new DeadlineTask(description, dateTime);
         taskList.add(task);
-        return "added: " + task;
+        return "Added: " + task;
     }
 }

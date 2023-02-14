@@ -32,6 +32,6 @@ public class AddEventCommand extends Command {
     public String execute(TaskList taskList, UiText uiText, Storage storage) {
         Task task = new EventTask(description, startDateTime, endDateTime);
         taskList.add(task);
-        return "added: " + task;
+        return "Added: " + task;
     }
 }

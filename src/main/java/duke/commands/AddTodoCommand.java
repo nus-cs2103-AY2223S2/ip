@@ -20,6 +20,6 @@ public class AddTodoCommand extends Command {
     public String execute(TaskList taskList, UiText uiText, Storage storage) {
         Task task = new ToDoTask(description);
         taskList.add(task);
-        return "added: " + task;
+        return "Added: " + task;
     }
 }
