@@ -124,42 +124,38 @@ public class Duke {
         String[] expressions = userInput.split(" ");
         String command = expressions[0];
 
+        parser.checkEmpty(userInput, command);
+        parser.checkInvalidInput(userInput, command);
+
         if (userInput.equals(parser.convertEnum(Command.LIST))) {
             output = taskList.printCurrentTasks();
         } else if (command.equals(parser.convertEnum(Command.MARK))) {
-            parser.checkEmpty(userInput, command);
             String[] words = userInput.split(" ");
             int index = Integer.parseInt(words[1]) - 1;
             output = markAsDone(index);
         } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
-            parser.checkEmpty(userInput, command);
             String[] words = userInput.split(" ");
             int index = Integer.parseInt(words[1]) - 1;
             output = markAsUndone(index);
         } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
             output = ui.ending();
         } else if (command.equals(parser.convertEnum(Command.TODO))) {
-            parser.checkEmpty(userInput, command);
             Todo todoTask = new Todo(userInput);
             addTask(todoTask);
             output = messageOfAdd(todoTask);
         } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
-            parser.checkEmpty(userInput, command);
             Deadline ddlTask = new Deadline(userInput);
             addTask(ddlTask);
             output = messageOfAdd(ddlTask);
         } else if (command.equals(parser.convertEnum(Command.EVENT))) {
-            parser.checkEmpty(userInput, command);
             Event eventTask = new Event(userInput);
             addTask(eventTask);
             output = messageOfAdd(eventTask);
         } else if (command.equals(parser.convertEnum(Command.DELETE))) {
-            parser.checkEmpty(userInput, command);
             String[] words = userInput.split(" ");
             int index = Integer.parseInt(words[1]) - 1;
             output = deleteMessage(index);
         } else if (command.equals(parser.convertEnum(Command.FIND))) {
-            parser.checkEmpty(userInput, command);
             String keywords = userInput.substring(5);
             String[] keywordList = keywords.split(" ");
             output = findMessage(keywordList);

@@ -3,6 +3,8 @@ package task;
 
 import duke.*;
 
+import java.util.Objects;
+
 /**
  * Parser class that handles user input.
  */
@@ -32,20 +34,43 @@ public class Parser {
     /**
      * Check whether the user input is valid or not.
      *
-     * @param input The user input
+     * @param userInput The user input
      * @param command The corresponding command we check the input against.
      * @throws DukeException When the input does not follow the standard format.
      */
-    public void checkInvalidInput(String input, String command) throws DukeException {
-        switch (command) {
-        case "todo":
-            throw new InvalidTodoException();
-        case "deadline":
-            throw new InvalidDeadlineException();
-        case "event":
-            throw new InvalidEventException();
-        case "mark": case "unmark": case "delete": case "find":
-            throw new InvalidActionInput();
+    public void checkInvalidInput(String userInput, String command) throws DukeException {
+        String[] expressions = userInput.split(" ");
+        if (Objects.equals(command, "deadline")) {
+            if (!userInput.contains("/by")) {
+                throw new InvalidDeadlineException();
+            }
+            if ("deadline".length() + 1 == userInput.indexOf("/by")) {
+                throw new InvalidDeadlineException();
+            }
+            if (userInput.indexOf("/by") + "/by".length() == userInput.length()) {
+                throw new InvalidDeadlineException();
+            }
+        } else if (Objects.equals(command, "event")) {
+            if ((!userInput.contains("/from")) || (!userInput.contains("/to"))) {
+                throw new InvalidEventException();
+            }
+            if ("event".length() + 1 == userInput.indexOf("/from")) {
+                throw new InvalidEventException();
+            } else if (userInput.indexOf("/from") + "/from".length() + 1 == userInput.indexOf("/to")) {
+                throw new InvalidEventException();
+            } else if (userInput.indexOf("/to") + "/to".length() == userInput.length()) {
+                throw new InvalidEventException();
+            }
+        } else if (Objects.equals(command, "mark") || Objects.equals(command, "unmark")
+                || Objects.equals(command, "delete") || Objects.equals(command, "find")) {
+            if (expressions.length != 2) {
+                throw new InvalidActionInput();
+            }
+            try {
+                int taskNumber = Integer.parseInt(expressions[1]);
+            } catch (NumberFormatException exc) {
+                throw new InvalidActionInput();
+            }
         }
     }
 
