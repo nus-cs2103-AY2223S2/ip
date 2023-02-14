@@ -6,160 +6,122 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
-/**
- * Contains information of a deadline
- * Contains description and deadline of the deadline
- */
+/** Deals with deadline tasks. */
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    private final LocalDate by;
 
     /**
-     * Creates a deadline object
+     * Generates a new deadline task.
      *
-     * @param description The description of the deadline
-     * @param by Deadline time of the deadline
-     * @throws DukeException If specified by deadline could not be parsed to datetime
+     * @param description Description of task.
+     * @param by Deadline of task.
+     * @param isDone Status of task.
      */
-    public Deadline(String description, String by) throws DukeException {
-        super(description);
+    public Deadline(String description, String by, boolean... isDone) throws DukeException {
+        super(description.trim(), isDone.length > 0 && isDone[0]);
         try {
-            this.by = LocalDate.parse(by);
+            this.by = LocalDate.parse(by.trim());
         } catch (DateTimeParseException e) {
-            throw new DukeException("duke.task.Deadline could not be parsed to datetime");
+            throw new DukeException("The deadline of a deadline task must be in the format <YYYY-MM-DD>.");
+        }
+    }
+
+    public String getTimeFormat(LocalDate time) {
+        return time.format(DateTimeFormatter
+                .ofPattern("MMM d yyyy"));
+    }
+
+    /**
+     * Returns task in saved data format.
+     *
+     * @param delimiter String separating fields.
+     * @return Task in saved data format.
+     */
+    @Override
+    public String toSaveData(String delimiter) {
+        return "D" + delimiter
+                + getStatusIcon()
+                + delimiter
+                + getDescription()
+                + delimiter
+                + by;
+    }
+
+    /**
+     * Loads task from given saved data.
+     *
+     * @param data Saved data of task.
+     * @param delimiter String separating fields.
+     * @return New deadline task.
+     * @throws DukeException If saved data is missing some fields.
+     */
+    public static Deadline load(String data, String delimiter) throws DukeException {
+        try {
+            String[] fields = data.split(delimiter, 3);
+            String taskType = fields[0];
+            boolean status = fields[1].equals("X");
+            String[] taskFields = fields[2].split(delimiter, 2);
+            String description = taskFields[0].trim();
+            String by = taskFields[1].trim();
+
+            assert taskType.equals("D") : "Task is of the wrong type";
+
+            return new Deadline(description, by, status);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Saved data is missing some fields");
         }
     }
 
     /**
-     * Creates a deadline object
+     * Generates new deadline task from given user input.
      *
-     * @param description The description of the deadline
-     * @param by Deadline time of the deadline
-     * @param isDone Completion status of task
-     */
-    public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone);
-        this.by = LocalDate.parse(by);
-    }
-
-    public LocalDate getDeadline() {
-        return by;
-    }
-
-    /**
-     * Generate a Deadline object from user's command input
-     *
-     * @param input The user's command input
-     * @throws DukeException If the input from the user is missing some fields
+     * @param input User's input.
+     * @return New deadline task.
+     * @throws DukeException If input is missing some fields.
      */
     public static Deadline generate(String input) throws DukeException {
-        // Cleans input and checks for description and deadline
         try {
-            input = input.trim()
-                    .substring(9)
-                    .trim();
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing description and deadline");
-        }
+            String[] fields = input.trim().split(" ", 2);
+            String[] taskFields = fields[1].split(" /by ", 2);
+            String description = taskFields[0].trim();
+            String by = taskFields[1].trim();
 
-        try {
-            int index = input.indexOf("/by");
-            if (index < 0) {
-                throw new DukeException("Deadline missing deadline");
-            } else if (index == 0) {
-                throw new DukeException("Deadline missing description");
-            }
+            assert (fields[0].trim()
+                    .equalsIgnoreCase("deadline"))
+                    : "The given input is of the wrong task type";
 
-            // Generates duke.task.Deadline task
-            String description = input.substring(0, index - 1);
-            String by = input.substring(index + 4);
             return new Deadline(description, by);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing deadline");
-        }
-
-    }
-
-    /**
-     * Generate a Deadline object from saved data
-     *
-     * @param input The saved data of the task
-     * @param isDone The completion status of the task
-     * @throws DukeException If saved data of the deadline task is missing some fields
-     */
-    public static Deadline load(String input, boolean isDone) throws DukeException {
-        try {
-            // Cleans input and checks if fields are empty
-            input = input.trim();
-            if (input.equals("")) {
-                throw new DukeException("Deadline missing description and deadline");
-            }
-
-            // Checks for separator
-            int index = input.lastIndexOf("|");
-            if (index < 0) {
-                throw new DukeException("Deadline missing deadline");
-            } else if (index == 0) {
-                throw new DukeException("Deadline missing description");
-            }
-
-            // Generates duke.task.Deadline task
-            String description = input.substring(0, index - 1);
-            String by = input.substring(index + 2);
-            return new Deadline(description, by, isDone);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline missing deadline");
+            throw new DukeException("Deadline task is missing some fields.");
         }
     }
 
     /**
-     * Checks if specified task is a duplicate.
+     * Compares this task to the specified task.
      *
-     * @param task Task to compare to.
-     * @return True or False.
+     * @param task The task to compare this task against.
+     * @return true if the given task is equivalent to this task, false otherwise.
      */
-    public boolean isDup(Task task) {
-        boolean isSameClass = getClass()
-                .equals(task.getClass());
-        boolean isSameDescription = description
-                .equals(task.getDescription());
-        boolean isSameStatus = getStatusIcon()
-                .equals(task.getStatusIcon());
+    public boolean equals(Task task) {
+        boolean isSameClass = task.getClass().equals(getClass());
+        if (!isSameClass) {
+            return false;
+        }
 
-        Deadline deadline = (Deadline) task;
-        boolean isSameDeadline = getDeadline()
-                .equals(deadline.getDeadline());
+        boolean isSameDeadline = ((Deadline) task).by.equals(by);
 
-        return isSameClass
-                && isSameDescription
-                && isSameStatus
-                && isSameDeadline;
-
+        return super.equals(task) && isSameDeadline;
     }
 
     /**
-     * Returns type of task, completion status, description, and deadline of
-     * the deadline
+     * Returns the task's details in string format.
      *
-     * @return Type of task, completion status, description, and deadline of
-     *      the deadline
+     * @return Task's details.
      */
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.format(DateTimeFormatter
-                        .ofPattern("MMM d yyyy"))
-                + ")";
-    }
-
-    /**
-     * @inherit
-     * @return The Deadline task's saved data in string format
-     */
-    @Override
-    public String save() {
-        return "D | " + getStatusIcon()
-                + " | " + description
-                + " | " + by;
+                + " (by: " + getTimeFormat(by) + ")";
     }
 }

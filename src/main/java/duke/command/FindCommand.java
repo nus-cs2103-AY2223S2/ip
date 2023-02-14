@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
+import duke.task.Task;
 import duke.ui.Ui;
 
 /**
@@ -41,18 +42,16 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        AtomicInteger count = new AtomicInteger(1);
+        int count = 0;
         StringBuilder response = new StringBuilder(ui.getFindMessage());
-        tasks.getTasks()
-                .stream()
-                .filter(task -> task.getDescription()
-                        .toUpperCase()
-                        .contains(keyword))
-                .forEach(task -> response.append("\n")
-                        .append(count.getAndIncrement())
-                        .append(".")
-                        .append(task));
-        if (count.get() == 1) {
+        for (Task task: tasks.find(keyword)) {
+            response.append("\n")
+                    .append(count + 1)
+                    .append(".")
+                    .append(task);
+            count++;
+        }
+        if (count == 0) {
             return "There is no such task in your list";
         }
         return response.toString();

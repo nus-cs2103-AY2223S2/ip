@@ -1,33 +1,21 @@
 package duke.task;
 
-/**
- * Contains information of a task.
- * Contains description and completion status of the task.
- */
+import duke.DukeException;
+
+/** Deals with tasks. */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     /**
-     * Generates new task from description.
+     * Generates a new task.
      *
-     * @param description Description of new task.
+     * @param description Description of task.
+     * @param isDone Status of task.
      */
-    public Task(String description) {
+    public Task(String description, boolean... isDone) {
         this.description = description;
-        this.isDone = false;
-    }
-
-    /**
-     * Generates new task from description.
-     * Allows completion status to be specified.
-     *
-     * @param description Description of new task.
-     * @param isDone Completion status of new task.
-     */
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
+        this.isDone = isDone.length > 0 && isDone[0];
     }
 
     public String getDescription() {
@@ -35,56 +23,72 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return isDone ? "X" : " ";
     }
 
-    /**
-     * Changes completion status to done.
-     */
+    /** Changes status to done. */
     public void mark() {
         assert !isDone : "Task was already done";
         this.isDone = true;
     }
 
-    /**
-     * Changes completion status to not done.
-     */
+    /** Changes status to not done. */
     public void unmark() {
         assert isDone : "Task was not done";
         this.isDone = false;
     }
 
     /**
-     * Returns the task's saved data in string format.
+     * Returns task in saved data format.
      *
-     * @return The task's saved data in string format.
+     * @param delimiter String separating fields.
+     * @return Task in saved data format.
      */
-    public String save() {
-        return "  | " + getStatusIcon()
-                + " | " + description;
+    public String toSaveData(String delimiter) {
+        return " " + delimiter
+                + getStatusIcon()
+                + delimiter
+                + description;
     }
 
     /**
-     * Checks if specified task is a duplicate.
+     * Loads task from given saved data.
      *
-     * @param task Task to compare to.
-     * @return True or False.
+     * @param data Saved data of task.
+     * @param delimiter String separating fields.
+     * @return New task.
+     * @throws DukeException If saved data is missing some fields.
      */
-    public boolean isDup(Task task) {
-        boolean isSameClass = getClass()
-                .equals(task.getClass());
-        boolean isSameDescription = description
-                .equals(task.getDescription());
-        boolean isSameStatus = getStatusIcon()
-                .equals(task.getStatusIcon());
+    public static Task load(String data, String delimiter) throws DukeException {
+        try {
+            String[] fields = data.split(delimiter, 3);
+            String taskType = fields[0];
+            boolean status = fields[1].equals("X");
+            String description = fields[2];
 
-        return isSameClass
-                && isSameDescription
-                && isSameStatus;
+            assert taskType.equals(" ") : "Task is of the wrong type";
+
+            return new Task(description, status);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Saved data is missing some fields");
+        }
     }
 
     /**
-     * Returns the task's details.
+     * Compares this task to the specified task.
+     *
+     * @param task The task to compare this task against.
+     * @return true if the given task is equivalent to this task, false otherwise.
+     */
+    public boolean equals(Task task) {
+        boolean isSameDescription = task.description.equals(description);
+        boolean isSameStatus = task.isDone == isDone;
+
+        return isSameDescription && isSameStatus;
+    }
+
+    /**
+     * Returns the task's details in string format.
      *
      * @return Task's details.
      */

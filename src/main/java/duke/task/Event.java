@@ -1,170 +1,145 @@
 package duke.task;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
-/**
- * Contains information of an event
- * Contains description and duration of the event
- */
+/** Deals with event tasks. */
 public class Event extends Task {
 
-    protected LocalDate from;
-    protected LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     /**
-     * Creates an event object
+     * Generates a new event task.
      *
-     * @param description The description of the event
-     * @param from Starting time of the event
-     * @param to Ending time of the event
-     * @throws DukeException If specified from and to timings could not be parsed to datetime
+     * @param description Description of event.
+     * @param from Start time of event.
+     * @param to End time of event.
+     * @param isDone Status of event.
      */
-    public Event(String description, String from, String to) throws DukeException {
-        super(description);
+    public Event(String description, String from, String to, boolean... isDone) throws DukeException {
+        super(description, isDone.length > 0 && isDone[0]);
         try {
             this.from = LocalDate.parse(from);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Starting time could not be parsed to datetime");
+            throw new DukeException("The start time of an event must be in the format <YYYY-MM-DD>.");
         }
         try {
             this.to = LocalDate.parse(to);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Ending time could not be parsed to datetime");
+            throw new DukeException("The end time of an event must be in the format <YYYY-MM-DD>.");
         }
     }
 
+    public String getTimeFormat(LocalDate time) {
+        return time.format(DateTimeFormatter
+                .ofPattern("MMM d yyyy"));
+    }
+
     /**
-     * Creates a Event object
+     * Returns task in saved data format.
      *
-     * @param description The description of the deadline
-     * @param from duke.task.Deadline time of the deadline
-     * @param to duke.task.Deadline time of the deadline
-     * @param isDone Completion status of task
-     * @throws DukeException If specified from and to timings could not be parsed to datetime
+     * @param delimiter String separating fields.
+     * @return Task in saved data format.
      */
-    public Event(String description, String from, String to, boolean isDone) throws DukeException {
-        super(description, isDone);
-        try {
-            this.from = LocalDate.parse(from);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Starting time could not be parsed to datetime");
-        }
-        try {
-            this.to = LocalDate.parse(to);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Ending time could not be parsed to datetime");
-        }
-    }
-
-    public LocalDate getStartTime() {
-        return from;
-    }
-
-    public LocalDate getEndTime() {
-        return to;
+    @Override
+    public String toSaveData(String delimiter) {
+        return "E" + delimiter
+                + getStatusIcon()
+                + delimiter
+                + getDescription()
+                + delimiter
+                + from
+                + delimiter
+                + to;
     }
 
     /**
-     * Generate an Event object from user's command input
+     * Loads task from given saved data.
      *
-     * @param input The user's command input
-     * @throws DukeException If the input from the user is missing some fields
+     * @param data Saved data of task.
+     * @param delimiter String separating fields.
+     * @return New task.
+     * @throws DukeException If saved data is missing some fields.
+     */
+    public static Event load(String data, String delimiter) throws DukeException {
+        try {
+            String[] fields = data.split(delimiter, 3);
+            String taskType = fields[0];
+            boolean status = fields[1].equals("X");
+            String[] taskFields = fields[2].split(delimiter, 3);
+            String description = taskFields[0].trim();
+            String from = taskFields[1].trim();
+            String to = taskFields[2].trim();
+
+            assert taskType.equals("E") : "Task is of the wrong type";
+
+            return new Event(description, from, to, status);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Saved data is missing some fields");
+        }
+    }
+
+    /**
+     * Generates new event task from given user input.
+     *
+     * @param input User's input.
+     * @return New event task.
+     * @throws DukeException If input is missing some fields.
      */
     public static Event generate(String input) throws DukeException {
-        // Cleans input and checks for description and duration
         try {
-            input = input.trim()
-                    .substring(6)
-                    .trim();
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Event missing description and event duration");
-        }
+            String[] fields = input.trim().split(" ", 2);
+            String[] taskFields = fields[1].split(" /from | /to ", 3);
+            String description = taskFields[0].trim();
+            String from = taskFields[1].trim();
+            String to = taskFields[2].trim();
 
-        // Generates duke.task.Event task
-        try {
-            String[] data = input.split(" /from | /to ");
-            return new Event(data[0], data[1], data[2]);
+            assert (fields[0].trim()
+                    .equalsIgnoreCase("event"))
+                    : "The given input is of the wrong task type";
+
+            return new Event(description, from, to);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Event missing fields");
+            throw new DukeException("Event task is missing some fields.");
+        } catch (Exception e) {
+            throw new DukeException("1");
         }
     }
-
+    // event test /from 2023-02-01 /to 2023-03-01
     /**
-     * Generate a Event object from saved data
+     * Compares this task to the specified task.
      *
-     * @param input The saved data of the task
-     * @param isDone The completion status of the task
-     * @throws DukeException If saved data of the event task is missing some fields
+     * @param task The task to compare this task against.
+     * @return true if the given task is equivalent to this task, false otherwise.
      */
-    public static Event load(String input, boolean isDone) throws DukeException {
-        try {
-            String[] data = input.split(" \\| ");
-            String[] time = data[1].split(" - ");
-            return new Event(data[0], time[0], time[1], isDone);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Event missing fields");
+    public boolean equals(Task task) {
+        boolean isSameClass = task.getClass().equals(getClass());
+        if (!isSameClass) {
+            return false;
         }
+
+        boolean isSameStartTime = ((Event) task).from.isEqual(from);
+        boolean isSameEndTime = ((Event) task).to.isEqual(to);
+
+        return super.equals(task)
+                && isSameStartTime
+                && isSameEndTime;
     }
 
     /**
-     * Checks if specified task is a duplicate.
+     * Returns the task's details in string format.
      *
-     * @param task Task to compare to.
-     * @return True or False.
-     */
-    public boolean isDup(Task task) {
-        boolean isSameClass = getClass()
-                .equals(task.getClass());
-        boolean isSameDescription = description
-                .equals(task.getDescription());
-        boolean isSameStatus = getStatusIcon()
-                .equals(task.getStatusIcon());
-
-        Event event = (Event) task;
-        boolean isSameStart = getStartTime()
-                .equals(event.getStartTime());
-        boolean isSameEnd = getEndTime()
-                .equals(event.getEndTime());
-
-        return isSameClass
-                && isSameDescription
-                && isSameStatus
-                && isSameStart
-                && isSameEnd;
-
-    }
-
-    /**
-     * Returns type of task, completion status, description, and duration of
-     * the event
-     *
-     * @return Task type, status, description, and duration of the event
+     * @return Task's details.
      */
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + from
-                        .format(DateTimeFormatter
-                                .ofPattern("MMM d yyyy"))
-                + " to: " + to
-                        .format(DateTimeFormatter
-                                .ofPattern("MMM d yyyy"))
-                + ")";
-    }
-
-    /**
-     * @inherit
-     * @return Returns the Event task's saved data in string format.
-     */
-    @Override
-    public String save() {
-        return "E | " + getStatusIcon()
-                + " | " + description
-                + " | " + from
-                + " - " + to;
+                + " (from: " + getTimeFormat(from)
+                + " to: " + getTimeFormat(to) + ")";
     }
 }

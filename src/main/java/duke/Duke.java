@@ -10,7 +10,7 @@ public class Duke {
     public static final String DEFAULT_FILEPATH = "data/tasks.txt";
 
     private Storage storage = new Storage(DEFAULT_FILEPATH);
-    private TaskList tasks = new TaskList();
+    private TaskList tasks;
     private final Ui ui = new Ui();
 
     /**
@@ -28,6 +28,7 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             storage.setLoadError(true);
+            tasks = new TaskList();
             assert tasks.size() == 0 : "TaskList started with undefined task";
         }
     }
@@ -61,6 +62,8 @@ public class Duke {
                 ui.echo(response);
                 isExit = c.isExit();
             } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } catch (Exception e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();

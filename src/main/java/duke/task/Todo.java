@@ -2,101 +2,101 @@ package duke.task;
 
 import duke.DukeException;
 
-/**
- * Contains information of a todo
- * Contains description of the todo
- */
+/** Deals with todo tasks. */
 public class Todo extends Task {
 
     /**
-     * Creates a todo object
+     * Generates a new todo task.
      *
-     * @param description The description of the task
+     * @param description Description of task.
+     * @param isDone Status of task.
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, boolean... isDone) {
+        super(description, isDone.length > 0 && isDone[0]);
     }
 
     /**
-     * Creates a todo object
+     * Returns task in saved data format.
      *
-     * @param description Description of the todo task
-     * @param isDone Completion status of the todo task
+     * @param delimiter String separating fields.
+     * @return Task in saved data format.
      */
-    public Todo(String description, boolean isDone) {
-        super(description, isDone);
+    @Override
+    public String toSaveData(String delimiter) {
+        return "T" + delimiter
+                + getStatusIcon()
+                + delimiter
+                + getDescription();
     }
 
+    /**
+     * Loads task from given saved data.
+     *
+     * @param data Saved data of task.
+     * @param delimiter String separating fields.
+     * @return New todo task.
+     * @throws DukeException If saved data is missing some fields.
+     */
+    public static Todo load(String data, String delimiter) throws DukeException {
+        try {
+            String[] fields = data.split(delimiter, 3);
+            String taskType = fields[0];
+            boolean status = fields[1].equals("X");
+            String description = fields[2];
+
+            assert taskType.equals("T") : "Task is of the wrong type";
+
+            return new Todo(description, status);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Saved data is missing some fields");
+        }
+    }
 
     /**
-     * Generate a todo object from user's command input
+     * Generates new todo task from given user input.
      *
-     * @param input The user's command input
-     * @throws DukeException If saved data of the todo task is missing some fields
+     * @param input User's input.
+     * @return New todo task.
+     * @throws DukeException If input is missing some fields.
      */
     public static Todo generate(String input) throws DukeException {
-        // Cleans input and checks for description
         try {
-            String description = input.trim()
-                    .substring(5);
+            String[] fields = input.trim()
+                    .split(" ", 2);
+            String description = fields[1].trim();
+
+            assert (fields[0].trim()
+                    .equalsIgnoreCase("todo"))
+                    : "The given input is of the wrong task type";
+
             return new Todo(description);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("duke.task.Todo missing description");
+            throw new DukeException("The description of a todo cannot be empty.");
         }
     }
 
     /**
-     * Generate a todo object from saved data
+     * Compares this task to the specified task.
      *
-     * @param input The saved data of the task
-     * @param isDone The completion status of the task
-     * @throws DukeException If saved data of the todo task is missing some fields
+     * @param task The task to compare this task against.
+     * @return true if the given task is equivalent to this task, false otherwise.
      */
-    public static Todo load(String input, boolean isDone) throws DukeException {
-        // Cleans input and checks for description
-        input = input.trim();
-        if (input.equals("")) {
-            throw new DukeException("duke.task.Todo missing description");
+    public boolean equals(Task task) {
+        boolean isSameClass = task.getClass().equals(getClass());
+        if (!isSameClass) {
+            return false;
         }
-        return new Todo(input, isDone);
+
+        return super.equals(task);
     }
 
     /**
-     * Checks if specified task is a duplicate.
+     * Returns the task's details in string format.
      *
-     * @param task Task to compare to.
-     * @return True or False.
-     */
-    public boolean isDup(Task task) {
-        boolean isSameClass = getClass()
-                .equals(task.getClass());
-        boolean isSameDescription = description
-                .equals(task.getDescription());
-        boolean isSameStatus = getStatusIcon()
-                .equals(task.getStatusIcon());
-
-        return isSameClass
-                && isSameDescription
-                && isSameStatus;
-    }
-
-    /**
-     * Returns type of task, completion status, description of the task
-     *
-     * @return Type of task, completion status, description of the task
+     * @return Task's details.
      */
     @Override
     public String toString() {
         return "[T]" + super.toString();
-    }
-
-    /**
-     * @inherit
-     * @return The ToDo task's saved data in string format
-     */
-    @Override
-    public String save() {
-        return "T | " + getStatusIcon()
-                + " | " + description;
     }
 }

@@ -1,20 +1,31 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 /**
- * Contains the task list
- * Has operations to man tasks in the list
+ * Deals with tasks in list.
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
-    public TaskList(TaskList tasks) {
-        this.tasks = tasks.getTasks();
+    private ArrayList<Task> tasks;
+
+    /**
+     * Generates a list of task from specified data.
+     */
+    public TaskList(String... data) {
+        try {
+            tasks = new ArrayList<>();
+            for (String saveData : data) {
+                tasks.add(load(saveData));
+            }
+        } catch (DukeException e) {
+            tasks = new ArrayList<>();
+        }
     }
 
     public ArrayList<Task> getTasks() {
@@ -26,11 +37,11 @@ public class TaskList {
     }
 
     /**
-     * Gets the task at the specified index
+     * Gets the task at the specified index.
      *
-     * @param index Index of the task
-     * @return Task at specified index
-     * @throws DukeException If given index is not in the list
+     * @param index Index of the task.
+     * @return Task at specified index.
+     * @throws DukeException If given index is not in the list.
      */
     public Task get(int index) throws DukeException {
         try {
@@ -42,9 +53,45 @@ public class TaskList {
     }
 
     /**
-     * Adds specified task to list of tasks
+     * Converts list of tasks to save data.
      *
-     * @param task duke.task.Task to be added
+     * @return Array of task in saved data format.
+     */
+    public String[] toSaveData() {
+        String delimiter = " | ";
+
+        return tasks.stream()
+                .map(task -> task.toSaveData(delimiter))
+                .toArray(String[]::new);
+    }
+
+    /**
+     * Generates new task from specified save data.
+     *
+     * @param saveData The task's save data.
+     * @return Generated task.
+     * @throws DukeException If the specified save data has missing or invalid values
+     */
+    public Task load(String saveData) throws DukeException {
+        String delimiter = " \\| ";
+        switch (saveData.charAt(0)) {
+        case ' ':
+            return Task.load(saveData, delimiter);
+        case 'T':
+            return Todo.load(saveData, delimiter);
+        case 'D':
+            return Deadline.load(saveData, delimiter);
+        case 'E':
+            return Event.load(saveData, delimiter);
+        default:
+            throw new DukeException("Task is of the wrong type");
+        }
+    }
+
+    /**
+     * Adds specified task to list of tasks.
+     *
+     * @param task duke.task.Task to be added.
      */
     public void add(Task task) {
         assert task != null : "Task given is null";
@@ -52,10 +99,11 @@ public class TaskList {
     }
 
     /**
-     * Removes specified task from list of tasks
+     * Removes specified task from list of tasks.
      *
-     * @param index Index of task to be removed
-     * @throws DukeException If given index is not in the list of tasks
+     * @param index Index of task to be removed.
+     * @return The removed task.
+     * @throws DukeException If given index is not in the list of tasks.
      */
     public Task delete(int index) throws DukeException {
         try {
@@ -67,10 +115,22 @@ public class TaskList {
     }
 
     /**
-     * Marks specified task from list of tasks as done
+     * Finds tasks with description containing the specified keyword.
      *
-     * @param index Index of specified task
-     * @throws DukeException If given index is not in the list of tasks
+     * @param keyword Index of specified task.
+     */
+    public ArrayList<Task> find(String keyword) {
+        return tasks.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Marks specified task from list of tasks as done.
+     *
+     * @param index Index of specified task.
+     * @return The mark task.
+     * @throws DukeException If given index is not in the list of tasks.
      */
     public Task mark(int index) throws DukeException {
         try {
@@ -84,10 +144,11 @@ public class TaskList {
     }
 
     /**
-     * Changes the status of specified task from list of tasks back to not done
+     * Changes the status of specified task from list of tasks back to not done.
      *
-     * @param index Index of specified task
-     * @throws DukeException If given index is not in the list of tasks
+     * @param index Index of specified task.
+     * @return The unmarked task.
+     * @throws DukeException If given index is not in the list of tasks.
      */
     public Task unmark(int index) throws DukeException {
         try {
