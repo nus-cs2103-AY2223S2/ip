@@ -53,7 +53,7 @@ test {
 }
 
 application {
-    mainClassName = "crystal.Crystal"
+    mainClassName = "crystal.Launcher"
 }
 
 shadowJar {

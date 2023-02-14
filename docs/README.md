@@ -266,7 +266,7 @@ Example of usage:
 
 Expected outcome:
 
-Displays a good bye message to the user.
+Displays a good bye message to the user and closes the window.
 
 ```
 expected output
@@ -275,7 +275,8 @@ Thank You. Please come by again~!
 
 ------------------------------------------------
 ```
-### Command Summary
+
+## Command Summary
 
 1. `todo`: Creates todo task
 2. `deadline`: Creates deadline task
@@ -286,4 +287,4 @@ Thank You. Please come by again~!
 7. `delete`: Deletes a task
 8. `priority`: Set a priority level to a task
 9. `find`: Finds all the tasks with the specific keyword
-10. `bye`: Displays goodbye message
+10. `bye`: Displays goodbye message and close the window

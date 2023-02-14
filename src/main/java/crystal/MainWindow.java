@@ -1,5 +1,7 @@
 package crystal;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 //@@author Jeffry Lum-reused
 //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
@@ -56,5 +59,20 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getCrystalDialog(response, crystalImage)
         );
         userInput.clear();
+        // @@author francisyzy-reused
+        // Reused from https://github.com/francisyzy/ip/blob/master/src/main/java/duke/gui/MainWindow.java
+        // Inspiration from https://github.com/nus-cs2103-AY2223S2/forum/issues/99
+        if (input.equals("bye")) {
+            PauseTransition stop = new PauseTransition(Duration.seconds(1.5));
+
+            stop.setOnFinished(event -> {
+                Platform.exit();
+                // Solution fromn https://stackoverflow.com/a/20489749
+                System.exit(0);
+            });
+
+            // start the pause
+            stop.play();
+        }
     }
 }
