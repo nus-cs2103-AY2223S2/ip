@@ -8,7 +8,7 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void showWelcome(){
+    public void showWelcome() {
         System.out.println("What's up! I'm duuk.What do you want?");
     }
 

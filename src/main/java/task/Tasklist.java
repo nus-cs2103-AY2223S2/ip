@@ -1,8 +1,8 @@
 package task;
 
-import duke.Storage;
-
 import java.util.ArrayList;
+
+import duke.Storage;
 
 public class Tasklist {
     private ArrayList<Task> list;
@@ -25,13 +25,13 @@ public class Tasklist {
     public void markTaskAsDone(int index) {
         this.list.get(index).markDone();
         this.backend.save(this);
-        System.out.println( "Nice! I've marked this task as done:\n"
+        System.out.println("Nice! I've marked this task as done:\n"
                 + list.get(index).toString());
     }
     public void unmarkTask(int index) {
         this.list.get(index).unmark();
         this.backend.save(this);
-        System.out.println( "Nice! I've marked this task as done:\n"
+        System.out.println("Nice! I've marked this task as done:\n"
                 + list.get(index).toString());
     }
 
@@ -39,7 +39,7 @@ public class Tasklist {
         this.list.remove(index);
         backend.save(this);
         System.out.println("Noted. I've removed this task:\n"
-                + list.get(index).toString() );
+                + list.get(index).toString());
         totalNumberOfTasks();
     }
     public void totalNumberOfTasks() {

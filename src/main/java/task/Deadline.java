@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Deadline extends Task {
     private LocalDate dueDate;
-    static final String divider = " | ";
 
     public Deadline(String name, LocalDate dueDate) {
         super(name);
@@ -13,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveFormat() {
-        return "D" + super.toSaveFormat() + divider + dueDate;
+        return "D" + super.toSaveFormat() + DIVIDER + dueDate;
     }
 
     @Override

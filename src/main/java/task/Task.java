@@ -1,9 +1,9 @@
 package task;
 
 public class Task {
+    static final String DIVIDER = " | ";
     private boolean isMarked;
     private String name;
-    static final String divider = " | ";
 
 
     public Task(String name) {
@@ -24,8 +24,8 @@ public class Task {
     }
 
     public String toSaveFormat() {
-        String markToInt = this.isMarked? "1" : "0";
-        return divider + markToInt + divider + name ;
+        String markToInt = this.isMarked ? "1" : "0";
+        return DIVIDER + markToInt + DIVIDER + name;
     }
 
     @Override
