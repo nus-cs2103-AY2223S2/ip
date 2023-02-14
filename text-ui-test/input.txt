@@ -1,7 +1,0 @@
-todo borrow book
-deadline return book /by 23 Oct 2023
-event project meeting /from 22 Jan 2023 14:00 /to 23 Jan 2023 14:30
-deadline do homework /by 10 Jan 2023 14:00
-list
-todo
-blah

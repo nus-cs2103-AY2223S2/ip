@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -27,8 +28,9 @@ public class ExitCommand extends Command {
      * @param tasks A TaskList containing the set of task the user has.
      * @param storage A Storage enabling Duke to store memory.
      * @return String The String message indicating status of action.
+     * @throws DukeException
      */
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         boolean isSaved = true;
         try {
             storage.saveData(tasks);

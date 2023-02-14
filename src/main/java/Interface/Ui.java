@@ -144,8 +144,21 @@ public class Ui {
      * Returns a message indicating to user selected task was successfully unmarked.
      *
      * @param t The selected task.
+     * @return String The message indicating to user selected task was successfully unmarked.
      */
     public static String unmarkTaskResponse(Task t) {
         return "OK, I've marked this task as not done yet \n\n" + t + ".";
+    }
+
+    /**
+     * Returns a message indicating to user that the task number selected by user is invalid.
+     *
+     * @param num The number of the task input by user.
+     * @return String The message indicating to user selected task was invalid.
+     */
+    public static String outOfBoundSelectionResponse(int num) {
+        return "I'm sorry, but I don't understand what that means! "
+                + String.format("Remember to select the Task number (from 1 to %d). ", num)
+                + "Try re-typing your instruction!";
     }
 }
