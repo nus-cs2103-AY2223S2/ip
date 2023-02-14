@@ -29,6 +29,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         logo = "Hello from\n" + logo;
+        logo += "How may i help you today?\n";
         logo += "Here are the lists of commands:\n";
         logo += commands;
         return logo;
@@ -52,7 +53,7 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String markDisplay(TaskList tasks, Parser userParse) {
-        String uiText = "Nice! I've marked this task as done:\n";
+        String uiText = "Beep Boop! I've marked this task as done:\n";
         uiText += tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString() + "\n";
         return uiText;
     }
@@ -65,7 +66,7 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String unmarkDisplay(TaskList tasks, Parser userParse) {
-        String uiText = "OK, I've marked this task as not done yet:\n";
+        String uiText = "Roger that, I've marked this task as not done yet:\n";
         uiText += tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString() + "\n";
         return uiText;
     }
@@ -93,7 +94,7 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String addTodoMessage(TaskList tasks) {
-        String uiText = "Got it. I've added this task:\n";
+        String uiText = "On it, my MaStEr. I've successfully added this task:\n";
         uiText += tasks.tasksList.get(tasks.tasksCounter - 1).toString() + "\n";
         uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
@@ -106,7 +107,7 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String addDeadlineMessage(TaskList tasks) {
-        String uiText = "Got it. I've added this task:\n";
+        String uiText = "Deadline time!!! I've successfully added this task:\n";
         uiText += tasks.tasksList.get(tasks.tasksCounter - 1).toString() + "\n";
         uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
@@ -119,7 +120,7 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String addEventMessage(TaskList tasks) {
-        String uiText = "Got it. I've added this task:\n";
+        String uiText = "Oohhh look what we have here. I've added this task:\n";
         uiText += tasks.tasksList.get(tasks.tasksCounter - 1).toString() + "\n";
         uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
@@ -133,8 +134,8 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String deleteMessage(TaskList tasks, Task deleted) {
-        String uiText = "Noted. I've removed this task:\n";
-        uiText += deleted.toString() + "\n";
+        String uiText = "Time to eliminate this task:\n" + "*slays this task*\n";
+        uiText += deleted.toString() + "\n" + "*tasks disappeared successfully*\n";
         uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
     }
@@ -145,7 +146,7 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String bye() {
-        String uiText = "Bye. Hope to see you again soon!\n";
+        String uiText = "Good Bye, my youngling.\n";
         return uiText;
     }
 
@@ -158,7 +159,7 @@ public class Ui {
     public String findMessage(TaskList tasks) {
         String uiText = "";
         if (tasks.tasksList.isEmpty()) {
-            uiText += "Sorry! There are no matching tasks in your list.\n";
+            uiText += "Sorry! No matching tasks in your list.\n";
         } else {
             uiText += "Here are the matching tasks in your list:\n";
             uiText += list(tasks);
@@ -187,7 +188,7 @@ public class Ui {
      * @return The tag message for the display.
      */
     public String tagDisplay(TaskList tasks, Parser userParse) {
-        String uiText = "Nice! I've tagged this task:\n";
+        String uiText = "HashTag Time!!! I've tagged this task:\n";
         uiText += tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString() + "\n";
         return uiText;
     }
