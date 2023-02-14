@@ -1,4 +1,4 @@
-package uwuke.task;
+package uwuke.model;
 
 public class Event extends Task {
 

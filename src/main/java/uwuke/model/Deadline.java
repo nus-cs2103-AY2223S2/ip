@@ -1,4 +1,4 @@
-package uwuke.task;
+package uwuke.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import java.util.Optional;
 
-import uwuke.output.Printer;
+import uwuke.view.Printer;
 
 public class Deadline extends Task {
 

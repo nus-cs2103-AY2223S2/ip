@@ -1,4 +1,4 @@
-package uwuke.input;
+package uwuke.controller;
 
 /**
  * Enum thats lists all possible commands

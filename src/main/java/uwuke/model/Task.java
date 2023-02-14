@@ -1,4 +1,4 @@
-package uwuke.task;
+package uwuke.model;
 
 public abstract class Task {
     private boolean isMarkedDone = false;

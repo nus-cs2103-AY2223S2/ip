@@ -1,11 +1,10 @@
-package uwuke.task;
+package uwuke.model;
 
-import java.security.DrbgParameters.Capability;
 import java.util.ArrayList;
 
-import uwuke.input.Parser;
-import uwuke.output.DukeException;
-import uwuke.output.Printer;
+import uwuke.DukeException;
+import uwuke.controller.Parser;
+import uwuke.view.Printer;
 
 /**
  * Encapsulates an ArrayList to help with task operations

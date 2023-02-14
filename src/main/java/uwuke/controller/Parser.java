@@ -1,9 +1,9 @@
-package uwuke.input;
+package uwuke.controller;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import uwuke.output.DukeException;
+import uwuke.DukeException;
 
 /**
  * Main input processor with only static methods that attempts to extract useful information from user input.

@@ -13,17 +13,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import uwuke.gui.DialogBox;
-
-import uwuke.input.Advisor;
-import uwuke.input.Command;
-
-import uwuke.output.DukeException;
-import uwuke.output.Printer;
-import uwuke.output.Storage;
-
-import uwuke.task.TaskList;
+import uwuke.controller.Advisor;
+import uwuke.controller.Command;
+import uwuke.model.TaskList;
+import uwuke.view.DialogBox;
+import uwuke.view.Printer;
 
 public class UwUke extends Application {
 

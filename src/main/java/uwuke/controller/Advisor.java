@@ -1,4 +1,4 @@
-package uwuke.input;
+package uwuke.controller;
 
 /**
  * Advises users on potential solutions when no matching command is found.

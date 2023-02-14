@@ -1,11 +1,10 @@
-package uwuke.output;
+package uwuke.view;
 
 import java.util.ArrayList;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import uwuke.gui.DialogBox;
-import uwuke.task.Task;
+import uwuke.model.Task;
 
 /**
  * Helper class that prints out everything in required format to System.out

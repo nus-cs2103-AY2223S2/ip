@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import uwuke.controller.Parser;
+
 public class ParserTest {
     @Test
     public void parseDeadline_normalInput_success() throws Exception {
