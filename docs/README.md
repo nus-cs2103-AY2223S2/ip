@@ -309,6 +309,7 @@ Expected working days before issue is answered: 2 - 3 working days.
 
 
 ## Command Summary
+
 | Command      | Format                                                          | Expected Outcome                   |
 |--------------|-----------------------------------------------------------------|------------------------------------|
 | **ToDo**     | `todo tutorial 1`                                               | Adds a `ToDo` Task                 |
