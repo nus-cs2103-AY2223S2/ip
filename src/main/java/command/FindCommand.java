@@ -28,7 +28,7 @@ public class FindCommand implements Command {
         ui.list(result);
         storage.save(list);
     }
-
+    
     /**
      * Checks whether the task exits the programme
      * 

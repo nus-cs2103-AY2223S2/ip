@@ -9,6 +9,7 @@ import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.EventsCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.TodoCommand;
@@ -50,16 +51,25 @@ public class Parser {
         } else if (command.equals("mark")) {
             this.validateInputNotEmpty(splitInput, "☹ OOPS!!! You must specify which task to mark",
                     INPUT_LENGTH_VALIDATE);
+            if (!isNumeric(splitInput[1])) {
+                throw new DukeException("input must int");
+            }
             int inputIndex = Integer.parseInt(splitInput[1]);
             return new MarkCommand(inputIndex);
         } else if (command.equals("unmark")) {
             this.validateInputNotEmpty(splitInput, "☹ OOPS!!! You must specify which task to unmark",
                     INPUT_LENGTH_VALIDATE);
+            if (!isNumeric(splitInput[1])) {
+                throw new DukeException("input must int");
+            }
             int inputIndex = Integer.parseInt(splitInput[1]);
             return new UnMarkCommand(inputIndex);
         } else if (command.equals("delete")) {
             this.validateInputNotEmpty(splitInput, "☹ OOPS!!! You must specify which task to delete",
                     INPUT_LENGTH_VALIDATE);
+            if (!isNumeric(splitInput[1])) {
+                throw new DukeException("input must int");
+            }
             int inputIndex = Integer.parseInt(splitInput[1]);
             return new DeleteCommand(inputIndex);
         } else if (command.equals("todo")) {
@@ -122,6 +132,11 @@ public class Parser {
         } else if (command.equals("find")) {
             checkKeywordFormat(splitInput);
             return new FindCommand(splitInput[1]);
+        } else if (command.equals("help")) {
+            if (splitInput.length > 1) {
+                return new HelpCommand(splitInput[1]);
+            }
+            return new HelpCommand();
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

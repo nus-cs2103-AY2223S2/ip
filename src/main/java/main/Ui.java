@@ -32,7 +32,7 @@ public class Ui {
         
     }
 
-    private void appendToOutput(String str) {
+    public void appendToOutput(String str) {
         output.append(str);
     }
 
