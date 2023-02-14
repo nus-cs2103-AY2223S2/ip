@@ -58,7 +58,7 @@ public class Parser {
 
             case "bye":
 //                String byeOutput = "It was a pleasure to help, goodbye!";
-                return "";
+                return null;
 
             case "mark":
                 if (input.split(" ").length < 2) {

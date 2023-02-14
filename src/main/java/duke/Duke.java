@@ -166,8 +166,8 @@ public class Duke extends Application {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         System.out.println(dukeText);
-        if (dukeText.isEmpty()) {
-            Platform.exit();
+        if (dukeText == null) {
+            dukeText = "Nononono";
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),

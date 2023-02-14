@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -22,6 +24,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private javafx.scene.control.Button closeButton;
 
     private Duke duke;
 
@@ -31,6 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        welcomeMessage();
     }
 
     public void setDuke(Duke d) {
@@ -44,11 +49,35 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws DukeException, IOException {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String reply = duke.getResponse(input);
+        String response;
+        if (reply == null) {
+            // exit app
+            Platform.exit();
+            response = "Bye bye";
+        } else {
+            response = reply;
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    @FXML
+    private void welcomeMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Yo! Duke here! How might I be of service?", dukeImage)
+        );
+    }
+
+    @FXML
+    private void closeButtonAction(){
+        // get a handle to the stage
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
     }
 }
