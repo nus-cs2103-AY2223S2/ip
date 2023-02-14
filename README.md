@@ -1,24 +1,22 @@
-# duke.Duke project template
+# Duke chatbot
+>Every day, my daddy told me the same thing. 'Once a task is just begun, never leave it till it's done. Be the labour great or small, do it well or not at all.' - Quincy Jones
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Chatbot with functions:
+- Add todo tasks
+- Add deadline tasks with single deadline
+- Add event tasks with a start time and end time
+- Function to mark and unmark tasks as done or undone
+- Function to delete unwanted tasks
+- Function to list down recorded tasks
+- Function to close chatbot
 
-## Setting up in Intellij
+Steps to use the chatbot,
+1. Download the jar file [here](https://github.com/Yaladah/ip/releases/tag/A-Jar)
+2. Navigate to the directory containing the jar file.
+3. Open the terminal and run the file using `java -jar duke.jar`
+4. Have **FUN** with it!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+What you can do,
+- [x] Add tasks
+- [x] Manage tasks
+- [ ] Edit tasks (Coming soon)
