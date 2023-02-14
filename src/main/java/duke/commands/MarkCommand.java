@@ -1,5 +1,5 @@
 package duke.commands;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.setDone(this.index);
+    public String execute(TaskList tasks) {
+        return tasks.setDone(this.index);
     }
 }

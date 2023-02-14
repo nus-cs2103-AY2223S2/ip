@@ -1,5 +1,7 @@
 package duke.commands;
-import duke.Ui;
+import duke.dukeexceptions.MissingArgumentException;
+import duke.tasks.ToDo;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -15,7 +17,17 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addToDo(requestContent);
+    public String execute(TaskList tasks) throws MissingArgumentException {
+        if (requestContent.trim().equals("")) {
+            throw new MissingArgumentException("The description of a todo cannot be empty.");
+        }
+        ToDo newToDo = new ToDo(requestContent);
+        tasks.addToDo(newToDo);
+
+        String reply = "Got it. I've added this task:\n"
+                + "    " + newToDo.toString()
+                + "  Now you have " + tasks.getLen() + " tasks in the list.\n";
+        System.out.print(reply);
+        return reply;
     }
 }

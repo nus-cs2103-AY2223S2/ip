@@ -1,5 +1,5 @@
 package duke.commands;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -12,8 +12,8 @@ public class EndCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.outro();
-        return;
+    public String execute(TaskList tasks) {
+        Ui.outro();
+        return "Nice have the BEST DAY AHEAD!!!!!";
     }
 }

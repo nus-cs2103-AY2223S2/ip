@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 import duke.dukeexceptions.DukeExceptions;
 
 /**
@@ -11,7 +11,7 @@ public class Ui {
      */
     public void showWelcome() {
         String introduction = "  ________________________________\n"
-                + "  Hello! I'm Duke\n"
+                + "  Yo Great to see you!\n"
                 + "  What can I do for you?\n"
                 + "  ________________________________\n";
         System.out.println(introduction);
@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Prints the exit message.
      */
-    public void outro() {
+    public static void outro() {
         String bye = "  Bye! have a great day\n";
         System.out.println(bye);
     }
@@ -30,7 +30,7 @@ public class Ui {
      *
      * @param exception the exception to be printed
      */
-    public void showError(DukeExceptions exception) {
+    public static void showError(DukeExceptions exception) {
         String reply = exception.toString();
         System.out.println(reply);
     }
@@ -45,7 +45,7 @@ public class Ui {
      *
      * @param message the string to be printed
      */
-    public void displayMessage(String message) {
+    public static void displayMessage(String message) {
         System.out.print(message);
     }
 }

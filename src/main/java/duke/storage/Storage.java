@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.Ui;
+import duke.ui.Ui;
 import duke.dukeexceptions.DukeExceptions;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;

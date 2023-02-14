@@ -1,5 +1,7 @@
 package duke.commands;
-import duke.Ui;
+import duke.dukeexceptions.MissingArgumentException;
+import duke.tasks.Deadline;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -17,7 +19,25 @@ public class DeadlineCommand extends Command {
      * Adds deadline to a task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addDeadline(requestContent);
+    public String execute(TaskList tasks) throws MissingArgumentException {
+        String[] splitWithBy = requestContent.split(" /by ", 2);
+        String description = splitWithBy[0].trim();
+
+        if (description.equals("")) {
+            throw new MissingArgumentException("The description of a deadline cannot be empty.");
+        } else if (splitWithBy.length != 2 || splitWithBy[1].trim().equals("")) {
+            throw new MissingArgumentException("The deadline cannot be empty.");
+        }
+
+        String by = splitWithBy[1].trim();
+        Deadline newDeadline = new Deadline(description, by);
+        tasks.addDeadline(newDeadline);
+
+        String reply = "  Got it. I've added this task:\n"
+                + "    " + newDeadline.toString()
+                + "  Now you have " + tasks.getLen() + " tasks in the list.\n";
+        System.out.print(reply);
+        return reply;
+
     }
 }

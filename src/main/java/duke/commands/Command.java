@@ -1,5 +1,5 @@
 package duke.commands;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -24,10 +24,8 @@ public abstract class Command {
      * Processes the command and return a reply.
      *
      * @param tasks the task list
-     * @param ui ui to display messages to the user
-     * @param storage connection to local storage
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks);
 
     /**
      * Checks if the command is an exit command which terminates the program.

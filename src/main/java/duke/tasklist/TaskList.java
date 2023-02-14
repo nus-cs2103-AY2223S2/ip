@@ -1,5 +1,6 @@
 package duke.tasklist;
-import duke.Ui;
+import duke.dukeexceptions.InvalidArgumentException;
+import duke.ui.Ui;
 import duke.dukeexceptions.MissingArgumentException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -21,6 +22,10 @@ public class TaskList {
         this.len = 0;
     }
 
+    public int getLen(){
+        return this.len;
+    }
+
     /**
      * Retrieves a task from the task list.
      *
@@ -34,37 +39,42 @@ public class TaskList {
     /**
      * Prints out all the task in the task list.
      */
-    public void list() {
+    public String list() {
         String result = "";
         for (int i = 0; i < this.len; i++) {
             int index = i + 1;
             result += "  " + index + ". " + list[i].toString();
         }
         System.out.print(result);
+        return result;
     }
 
     /**
      * Marks the task at index as done.
      *
      * @param index index of task to be marked done
+     * @return formatted string of the task being marked
      */
-    public void setDone(int index) {
+    public String setDone(int index) {
         this.list[index].setDone();
         String reply = "  Nice! I've marked this task as done:\n"
                 + "    " + list[index].toString();
         System.out.print(reply);
+        return reply;
     }
 
     /**
      * Unmark the task at index as done.
      *
      * @param index index of task to be set as not done
+     * @return formatted string of the task being unmarked
      */
-    public void setNotDone(int index) {
+    public String setNotDone(int index) {
         this.list[index].setNotDone();
         String reply = "  OK, I've marked this task as not done:\n"
                 + "    " + list[index].toString();
         System.out.print(reply);
+        return reply;
     }
 
     /**
@@ -80,79 +90,31 @@ public class TaskList {
     /**
      * Adds a ToDo task to the list.
      *
-     * @param description the description of the task.
+     * @param toDo the toDo to be added
      */
-    public void addToDo(String description) throws MissingArgumentException {
-        if (description.trim().equals("")) {
-            throw new MissingArgumentException("The description of a todo cannot be empty.");
-        }
-
-        this.list[len] = new ToDo(description);
+    public void addToDo(ToDo toDo) {
+        this.list[len] = toDo;
         this.len++;
-
-        String reply = "Got it. I've added this task:\n"
-                + "    " + taskToString(len - 1)
-                + "  Now you have " + this.len + " tasks in the list.\n";
-        System.out.print(reply);
     }
 
     /**
      * Adds a Deadline task to the list.
      *
-     * @param requestContent the additional information needed to create a Deadline
+     * @param deadline Deadline to be added
      */
-    public void addDeadline(String requestContent) throws MissingArgumentException {
-        String[] splitWithBy = requestContent.split(" /by ", 2);
-        String description = splitWithBy[0].trim();
-
-        if (description.equals("")) {
-            throw new MissingArgumentException("The description of a deadline cannot be empty.");
-        } else if (splitWithBy.length != 2 || splitWithBy[1].trim().equals("")) {
-            throw new MissingArgumentException("The deadline cannot be empty.");
-        }
-
-        String by = splitWithBy[1].trim();
-        this.list[len] = new Deadline(description, by);
+    public void addDeadline(Deadline deadline) {
+        this.list[len] = deadline;
         this.len++;
-
-        String reply = "  Got it. I've added this task:\n"
-                + "    " + taskToString(len - 1)
-                + "  Now you have " + this.len + " tasks in the list.\n";
-        System.out.print(reply);
     }
 
     /**
      * Adds an Event to the task list.
      *
-     * @param requestContent the additional information needed to create an Event
+     * @param event to be added to the list
      */
-    public void addEvent(String requestContent) throws MissingArgumentException {
-        String[] splitFrom = requestContent.split(" /from ", 2);
-        String description = splitFrom[0].trim();
-
-        if (description.equals("")) {
-            throw new MissingArgumentException("The description of an event cannot be empty.");
-        } else if (splitFrom.length != 2) {
-            throw new MissingArgumentException("The from cannot be empty.");
-        }
-
-        String[] splitTo = splitFrom[1].split(" /to ", 2);
-        String from = splitTo[0].trim();
-        String to = splitTo[1].trim();
-
-        if (from.equals("")) {
-            throw new MissingArgumentException("The from cannot be empty.");
-        } else if (splitTo.length != 2 || splitTo[1].trim().equals("")) {
-            throw new MissingArgumentException("The to cannot be empty.");
-        }
-
-        this.list[len] = new Event(description, from, to);
+    public void addEvent(Event event) {
+        this.list[len] = event;
         this.len++;
-
-        String reply = "  Got it. I've added this task:\n"
-                + "    " + taskToString(len - 1)
-                + "  Now you have " + this.len + " tasks in the list.\n";
-        System.out.print(reply);
     }
 
     /**
@@ -169,8 +131,12 @@ public class TaskList {
      * Deletes the indexed task from the list.
      *
      * @param index the index of the task to be deleted
+     * @return a formatted string about the deleted task
      */
-    public void delete(int index) {
+    public String delete(int index) throws InvalidArgumentException {
+        if (index > this.len) {
+            throw new InvalidArgumentException("This task doesn't exist");
+        }
         Task deletedTask = list[index];
         for (int i = index; i < this.len; i++) {
             this.list[i] = this.list[i + 1];
@@ -181,6 +147,8 @@ public class TaskList {
                 + "    " + deletedTask.toString()
                 + "  Now you have " + this.len + " tasks in the list.\n";
         System.out.print(reply);
+        return reply;
+
     }
 
     /**
@@ -201,7 +169,7 @@ public class TaskList {
      *
      * @param keywords the keywords to be searched.
      */
-    public void find(String keywords, Ui ui) {
+    public String find(String keywords) {
         TaskList temp = new TaskList();
         for (int i = 0; i < this.len; i++) {
             Task currTask = this.list[i];
@@ -210,11 +178,15 @@ public class TaskList {
             }
         }
 
+        String reply = "";
         if (temp.len == 0) {
-            ui.displayMessage("There's nothing in your list that matched keyword\n");
+            reply = "There's nothing in your list that matched keyword\n";
+            Ui.displayMessage(reply);
         } else {
-            ui.displayMessage("Here are the matching tasks in your list:\n");
+            reply = "Here are the matching tasks in your list:\n";
+            Ui.displayMessage(reply);
         }
-        temp.list();
+        reply += temp.list();
+        return reply;
     }
 }

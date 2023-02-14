@@ -1,6 +1,6 @@
 package command;
 
-import duke.Ui;
+import duke.ui.Ui;
 import duke.commands.EventCommand;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
