@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Set private duke variable of MainWindows object and
-     * output intro message in gui
+     * output intro message to GUI
      *
      * @param d
      */
