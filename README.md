@@ -1,24 +1,15 @@
-# Duke project template
+Up next I'll be talking about how to make your resume stand out. On average, each corporate job offer attracts 250 resumes but only 4 to 6 people gets chosen to be interviewed, hence it is especially important to make your resume stand out from the rest. I'll be splitting this section into 4 parts, as you can see on the slides.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+The most impotant thing that recruiters are looking for is whether or not you can do the job, and how well can you do it. Hence, it is crucial for you to make your work experience section stand out by showing the recruiters exactly how well you could do the job. One quick tip to do so is to use numbers to describe your accomplishments. Numbers are a hard and fast way for the recruiter to know exactly how well you completed a task in your preious job. You can't argue with numbers. Secondly, you could highlight your top achievements, by placing the most relevant and recent achievements at the forefront of your resume such that it would be impossible for the recruiter to miss. Lastly, if you received awards for the work that you have done, it is good to include it on your resume.
 
-## Setting up in Intellij
+Up next, I will be talking about the usage of power words. Now imagine, you are a busy HR manager, and you read hundreds of thousands of resume every day. And every single one of them uses words like "helped, worked, responsible for". They sound the same. They are boring. That is where power words come in. Instead of communicating your job duties, why not show off your job duties? I'm sure that ya'll have been staring at the words on the screen for a while now, so take a moment to think about which of these words are 'power words' and which are not. (*shows words) Did you get them right? Words like 'Administered' and 'Conceptualized' shows how you were an integral part of your previous project, and makes your resume stand out from the rest of the competition.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Moving on, here are the top 10 software engineering skills of 2023, as referenced by glassdoor.com. Though these are the skills that recruiters are generally looking for, it is still important to look carefully at the job description and indicate the relevant skills needed for the job. Here are some creative ways to showcase your skills on your resume. These are done using canva.com, a tool that I would touch on later. 
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Lastly, you should most definitely omit irrelevant information in your resume. Having a long resume with lots of irrelevant information could bite you in many ways. The recruiter may simply be too lazy to read it, and even if he reads it, he would think that including these pointless information shows that you don't really know what you are looking for. So keep optional sections like 'interests and hobbies' short and concise, and definitely do not showcase your gaming achievements in your resume.
+
+Up next I will be discussing about certain tools that you can use to build and enhance you resume. Well, here I have two tools.
+
+First up, Canva.com. It's a free website that provides preset templates on everything ranging from brochures to resumes to cover letters. From there, you can choose the design that suits you and the industry that you are working in the most. You can opt for vibrant, elegant, or minimalist designs to make your resume visually stand out from the rest.
+
+Up next, V-mock. I'm sure that those of you who took CFG would remember this. It is basically a website that not only helps you build a resume, but also uses AI to give a score for how good your resume is. Granted, there are many flaws to this scoring feature, but it does give good feedback if your resume is lacking in certain sections, or if certain sentences in your resume are overused and not efective enough.
