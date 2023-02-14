@@ -4,7 +4,7 @@ package exception;
  * It extends the Exception class and provides a constructor that accepts a string as input.
  */
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Constructs a DukeException with the specified detail message.
      *

@@ -7,10 +7,9 @@ import java.time.LocalDate;
  * It extends the `Task` class and contains additional information
  * about the start and end date of the event.
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate startDetails;
     private LocalDate endDetails;
-    static final String divider = " | ";
 
     /**
      * Constructor that creates an instance of the `Event` class
@@ -35,7 +34,7 @@ public class Event extends Task{
      */
     @Override
     public String toSaveFormat() {
-        return "E" + super.toSaveFormat() + divider + startDetails + divider + endDetails;
+        return "E" + super.toSaveFormat() + DIVIDER + startDetails + DIVIDER + endDetails;
     }
 
     /**

@@ -3,9 +3,8 @@ package task;
 /**
 
  Todo is a subclass of {@link Task} that adds its own implementation for the toSaveFormat() and toString() methods.
- @author Your Name (if applicable)
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      Constructor to create a new Todo instance with the specified name.

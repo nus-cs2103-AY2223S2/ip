@@ -20,7 +20,7 @@ public class Ui {
     /**
      Show the welcome message to the user.
      */
-    public void showWelcome(){
+    public void showWelcome() {
         System.out.println("What's up! I'm duuk.What do you want?");
     }
 

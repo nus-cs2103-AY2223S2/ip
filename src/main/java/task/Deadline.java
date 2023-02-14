@@ -8,7 +8,6 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
     private LocalDate dueDate;
-    static final String divider = " | ";
 
     /**
      * Constructor for the Deadline class which takes in a name and a due date.
@@ -28,7 +27,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return "D" + super.toSaveFormat() + divider + dueDate;
+        return "D" + super.toSaveFormat() + DIVIDER + dueDate;
     }
 
     /**

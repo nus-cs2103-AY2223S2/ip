@@ -5,9 +5,9 @@ package task;
  * A task has a name and a mark indicating whether it's done or not.
  */
 public class Task {
+    static final String DIVIDER = " | ";
     private boolean isMarked;
     private String name;
-    static final String divider = " | ";
 
     /**
      * Constructs a new task with the given name.
@@ -45,8 +45,8 @@ public class Task {
      * @return the task in a format suitable for saving
      */
     public String toSaveFormat() {
-        String markToInt = this.isMarked? "1" : "0";
-        return divider + markToInt + divider + name ;
+        String markToInt = this.isMarked ? "1" : "0";
+        return DIVIDER + markToInt + DIVIDER + name;
     }
 
     /**

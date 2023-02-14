@@ -35,7 +35,7 @@ public class Duke {
      * @throws DukeException If there's an error during the execution of the Duke application.
      */
     public void start() throws DukeException {
-            userInterface.showWelcome();
+        userInterface.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -43,7 +43,7 @@ public class Duke {
                 userInterface.showLine(); // show the divider line ("_______")
                 Parser parser = new Parser(fullCommand);
                 Command command = parser.parseCommand();
-                command.execute(userInterface,tasklist, backend);
+                command.execute(userInterface, tasklist, backend);
                 isExit = command.isExit();
 
             } catch (DukeException e) {
@@ -63,7 +63,7 @@ public class Duke {
         Duke duke = new Duke("./data/duke.txt");
         try {
             duke.start();
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e);
         }
     }

@@ -1,14 +1,21 @@
 package duke;
 
-import java.io.*;
-
-import exception.DukeException;
-import task.*;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Tasklist;
+import task.Todo;
 /**
  * The `Storage` class is responsible for loading and saving tasks to/from a file.
  *
@@ -71,7 +78,9 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
-        if (!file.exists()) return tasks;
+        if (!file.exists()) {
+            return tasks;
+        }
 
         try {
             BufferedReader fileReader = new BufferedReader(new FileReader(file));
@@ -82,24 +91,23 @@ public class Storage {
 
                 Task task;
                 switch (taskType) {
-                    case "T":
-                        task = new Todo(parts[2]);
-                        break;
-                    case "D":
-
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        LocalDate dueDate = LocalDate.parse(parts[3], formatter);
-                        task = new Deadline(parts[2], dueDate);
-                        break;
-                    case "E":
-                        String startDate = parts[3];
-                        String endDate = parts [4];
-                        LocalDate start = Parser.parseFile(startDate);
-                        LocalDate end = Parser.parseFile(endDate);
-                        task = new Event(parts[2], start, end);
-                        break;
-                    default:
-                        throw new DukeException("Error parsing file, unexpected task type");
+                case "T":
+                    task = new Todo(parts[2]);
+                    break;
+                case "D":
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate dueDate = LocalDate.parse(parts[3], formatter);
+                    task = new Deadline(parts[2], dueDate);
+                    break;
+                case "E":
+                    String startDate = parts[3];
+                    String endDate = parts [4];
+                    LocalDate start = Parser.parseFile(startDate);
+                    LocalDate end = Parser.parseFile(endDate);
+                    task = new Event(parts[2], start, end);
+                    break;
+                default:
+                    throw new DukeException("Error parsing file, unexpected task type");
                 }
                 if (Integer.parseInt(parts[1].trim()) == 1) {
                     task.markDone();
