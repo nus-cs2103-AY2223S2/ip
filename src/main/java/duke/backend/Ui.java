@@ -51,6 +51,8 @@ class Ui {
 
     public void find(String searchKey) {
         ArrayList<Task> currentTasks = taskManager.getWholeList();
+        //  ArrayList<Pair> to keep track of the index in the Tasklist
+        //  so that user can use that index later..
         ArrayList<Pair<Integer, Task>> searchResults = new ArrayList<>();
         for (int i = 0; i < currentTasks.size(); i++) {
             Task curr = currentTasks.get(i);
