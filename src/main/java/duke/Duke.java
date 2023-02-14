@@ -39,7 +39,7 @@ public class Duke {
         Parser parser = new Parser(taskList, ui, storage);
         try {
             output = parser.parse(input);
-        } catch (WrongTask | OutOfBounds | EmptyDescription e) {
+        } catch (WrongTask | OutOfBounds | EmptyDescription | InvalidDeadlineDate | NoDate | InvalidEventFormat | InvalidUpdateEventFormat e) {
             return ui.errorMessage(e);
         }
         return output;

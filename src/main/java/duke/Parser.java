@@ -2,7 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +30,7 @@ public class Parser {
      * @throws EmptyDescription If the description of task is empty.
      * @throws OutOfBounds      If the number is out of bound.
      */
-    public String parse(String input) throws WrongTask, EmptyDescription, OutOfBounds {
+    public String parse(String input) throws WrongTask, EmptyDescription, OutOfBounds, InvalidDeadlineDate, NoDate, InvalidEventFormat, InvalidUpdateEventFormat {
         String[] arrNext = input.split(" ", 2);
         String next = arrNext[0];
         checkWrongTask(next);
@@ -113,13 +115,18 @@ public class Parser {
      * @param description The description of the Deadline task.
      * @return The new Deadline task.
      */
-    private static Task newDeadline(Storage storage, TaskList taskList, String description) {
-        String[] split = description.split("/by ");
-        LocalDate d1 = LocalDate.parse(split[1]);
-        Task newDeadline = new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-        taskList.addTask(newDeadline);
-        storage.appendToFile(newDeadline);
-        return newDeadline;
+    private static Task newDeadline(Storage storage, TaskList taskList, String description) throws InvalidDeadlineDate, NoDate {
+        try {
+            checkDeadlineDate(description);
+            String[] split = description.split("/by ");
+            LocalDate d1 = LocalDate.parse(split[1]);
+            Task newDeadline = new Deadline(split[0], d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            taskList.addTask(newDeadline);
+            storage.appendToFile(newDeadline);
+            return newDeadline;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDeadlineDate();
+        }
     }
 
     /**
@@ -130,7 +137,8 @@ public class Parser {
      * @param description The description of the Event task.
      * @return The new Event task.
      */
-    private static Task newEvent(Storage storage, TaskList taskList, String description) {
+    private static Task newEvent(Storage storage, TaskList taskList, String description) throws InvalidEventFormat {
+        checkEventFormat(description);
         String[] split = description.split("/");
         Task newEvent = new Event(split[0], split[1].substring(5), split[2].substring(3));
         taskList.addTask(newEvent);
@@ -219,17 +227,23 @@ public class Parser {
      * @param newDesc  The new description of the task.
      * @return The updated task.
      */
-    private static Task updateTask(Storage storage, TaskList taskList, String taskID, String newDesc) {
+    private static Task updateTask(Storage storage, TaskList taskList, String taskID, String newDesc) throws InvalidDeadlineDate, NoDate, InvalidUpdateEventFormat {
         int number = Integer.parseInt(taskID) - 1;
         Task taskToUpdate = taskList.getTask(number);
         if (taskToUpdate instanceof Event) {
+            checkUpdateEventFormat(newDesc);
             String[] newDescArr = newDesc.split("/");
             ((Event) taskToUpdate).setFrom(newDescArr[1].substring(5));
             ((Event) taskToUpdate).setTo(newDescArr[2].substring(3));
         }
         if (taskToUpdate instanceof Deadline) {
-            LocalDate newDate = LocalDate.parse(newDesc.substring(4));
-            ((Deadline) taskToUpdate).setBy(newDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            checkDeadlineDate(newDesc);
+            try {
+                LocalDate newDate = LocalDate.parse(newDesc.substring(4));
+                ((Deadline) taskToUpdate).setBy(newDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            } catch (DateTimeParseException e) {
+                throw new InvalidDeadlineDate();
+            }
         }
         storage.updateFile(taskList);
         return taskToUpdate;
@@ -274,6 +288,32 @@ public class Parser {
         boolean isKeyword = keywords.contains(keyword);
         if (!isKeyword) {
             throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    public static void checkDeadlineDate(String taskDesc) throws NoDate {
+        String checkBy = "/by";
+        boolean hasDate = taskDesc.contains(checkBy);
+        if (!hasDate) {
+            throw new NoDate();
+        }
+    }
+
+    public static void checkEventFormat(String taskDesc) throws InvalidEventFormat {
+        String checkFrom = "/from";
+        String checkTo = "/to";
+        boolean hasStartAndEnd = taskDesc.contains(checkFrom) && taskDesc.contains(checkTo);
+        if (!hasStartAndEnd) {
+            throw new InvalidEventFormat();
+        }
+    }
+
+    public static void checkUpdateEventFormat(String newDesc) throws InvalidUpdateEventFormat {
+        String checkFrom = "/from";
+        String checkTo = "/to";
+        boolean hasStartAndEnd = newDesc.contains(checkFrom) && newDesc.contains(checkTo);
+        if (!hasStartAndEnd) {
+            throw new InvalidUpdateEventFormat();
         }
     }
 }

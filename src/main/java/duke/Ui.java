@@ -86,6 +86,9 @@ public class Ui {
      */
     public String printMatchingTasks(TaskList tasklist) {
         String result = "Here are the matching tasks in your list:\n";
+        if (tasklist.getNumberOfTasks() == 0) {
+            return "There are no matching tasks in your list.";
+        }
         for (int i = 1; i < tasklist.getNumberOfTasks() + 1; i++) {
             result += i + ". " + tasklist.getTask(i - 1) + "\n";
         }
