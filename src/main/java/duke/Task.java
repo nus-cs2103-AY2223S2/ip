@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
  */
 public abstract class Task implements Snoozable {
     protected String taskType = "T";
+    protected LocalDateTime deadline = LocalDateTime.now();
     private final String taskName;
     private boolean isCompleted = false;
-    protected LocalDateTime deadline = LocalDateTime.now();
     /**
      * Constructor for Task class.
      *
@@ -69,7 +69,7 @@ public abstract class Task implements Snoozable {
 
     /**
      * Checks if the task description contains the specified keyword.
-     * @param keyword
+     * @param keyword Phrase to match with our Task.
      * @return Boolean indicating if the keyword is found in the task description.
      */
     public boolean containsKeyword(String keyword) {

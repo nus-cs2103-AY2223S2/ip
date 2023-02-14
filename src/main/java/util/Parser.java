@@ -13,7 +13,7 @@ public class Parser {
      * Static method to handle command input from User and carry out the appropriate actions.
      * @param command Action input from the user.
      * @param tasks TaskList object to manage tasks.
-     * @return Indicates if the Duke Program should continue to run.
+     * @return Output to be shown to the user.
      * @throws DukeException
      */
     public static String handleGeneralCommand(String command, TaskList tasks, Storage storage, Ui ui) {

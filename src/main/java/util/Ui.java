@@ -19,7 +19,8 @@ public class Ui {
     }
 
     /**
-     * Outputs greeting message to the User when Duke is booted up.
+     * Output greeting message to the User when Duke is booted up.
+     * @return Greeting message to user.
      */
     public String greetUser() {
         System.out.println(divider);
@@ -30,35 +31,11 @@ public class Ui {
     }
 
     /**
-     * Reads in the input from the user.
-     * @return String input from user.
-     */
-    public String nextInput() {
-        return this.command.nextLine();
-    }
-
-    /**
      * Closes the Scanner object and displays end message to the User.
+     * @return Goodbye message to User.
      */
     public String closeCommand() {
         this.command.close();
         return "    Bye. Hope to see you again soon!";
-    }
-
-    /**
-     * Outputs required message for the User.
-     * @return String output of text.
-     */
-    public String userOutput(String input) {
-        System.out.println(input);
-        return input;
-    }
-
-    /**
-     * Displays the error message from being unable to retrieve
-     * task history data.
-     */
-    public String showLoadingError() {
-        return "History unable to be retrieved!";
     }
 }

@@ -4,7 +4,6 @@ import duke.DeadlineTask;
 import duke.Event;
 import duke.Task;
 import duke.ToDo;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -93,7 +92,7 @@ public class TaskList {
      * Loads the tasks stored in the BufferedReader object into the task list.
      * @throws DukeException If IOException from the BufferedReader object is encountered.
      */
-    @SuppressWarnings("checkstyle:RightCurly")
+    @SuppressWarnings({"checkstyle:RightCurly", "checkstyle:MissingSwitchDefault"})
     public void load() throws DukeException {
         try {
             while (true) {
@@ -121,6 +120,8 @@ public class TaskList {
                     Event e = new Event(taskArr[TASK_NAME], start, end, Boolean.parseBoolean(taskArr[IS_DONE]));
                     this.taskList.add(e);
                     break;
+                default:
+                    throw new DukeException("Not a valid Task Type!");
                 }
             }
             br.close();
@@ -173,6 +174,12 @@ public class TaskList {
         return String.format("Now you have %d tasks in the list", taskList.size());
     }
 
+    /**
+     * Snoozes the task specified.
+     * @param command Action input from the user.
+     * @return New deadline of the task specified.
+     * @throws DukeException Index of task is invalid
+     */
     public String snoozeTask(String command) throws DukeException {
         // "snooze 1 /day 10 /hour 10 /minutes 20"
         ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
@@ -181,8 +188,7 @@ public class TaskList {
         int minutesIndex = input.indexOf("/minutes");
 
         if (dayIndex == -1 || hourIndex == -1 || minutesIndex == -1) {
-            throw new DukeException("Invalid Input!\n" + "Usage should be:\n" + "snooze {taskNumber} " +
-                    "/day {days} /hour {hour} /minutes {minutes}");
+            throw new DukeException("Invalid Input!\n" + "Usage should be:\n" + "/day {days} /hour {hour} /minutes {minutes}" + "snooze {taskNumber} ");
         }
         int taskNumber = Integer.parseInt(input.get(1)) - 1;
         int days = Integer.parseInt(input.get(dayIndex + 1));

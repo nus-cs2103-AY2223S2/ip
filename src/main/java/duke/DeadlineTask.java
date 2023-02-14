@@ -1,13 +1,13 @@
 package duke;
 
-import util.DateTimeParser;
-import util.DukeException;
-import util.TaskList;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import util.DateTimeParser;
+import util.DukeException;
+import util.TaskList;
 
 
 /**
@@ -71,7 +71,7 @@ public class DeadlineTask extends Task {
             } else if (i > byIndex) {
                 deadline.append(input.get(i));
                 if (i < input.size() - 1) {
-                    deadline.append(" "); 
+                    deadline.append(" ");
                 }
             }
         }
@@ -89,6 +89,13 @@ public class DeadlineTask extends Task {
         return String.format("%s (by: %s)", super.toString(), formatDateTime());
     }
 
+    /**
+     * Changes the deadline of the DeadlineTask.
+     * @param days Number of days to shift back.
+     * @param hours Number of hours to shift back.
+     * @param minutes Number of minutes to shift back.
+     * @return new deadline of the Deadline Task.
+     */
     public String snoozeDeadline(int days, int hours, int minutes) {
         this.deadline = this.deadline.plusDays(days);
         this.deadline = this.deadline.plusHours(hours);
@@ -96,6 +103,10 @@ public class DeadlineTask extends Task {
         return String.format("New deadline is %s!", DateTimeParser.datetimeFormatter(this.deadline) );
     }
 
+    /**
+     * Changes the deadline of the DeadlineTask by a default value of 5 minutes.
+     * @return New deadline of the DeadlineTask.
+     */
     public String snoozeDeadline() {
         return this.snoozeDeadline(0, 0, 5);
     }

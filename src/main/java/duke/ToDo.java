@@ -55,10 +55,21 @@ public class ToDo extends Task {
         return String.format("%s", super.toString());
     }
 
+    /**
+     * Changes the deadline of a ToDo Task.
+     * @param days Number of days to shift back.
+     * @param hours Number of hours to shift back.
+     * @param minutes Number of minutes to shift back.
+     * @return new deadline of the ToDo Task.
+     */
     public String snoozeDeadline(int days, int hours, int minutes) {
         return this.snoozeDeadline();
     }
 
+    /**
+     * Outputs the new deadline of the ToDo Task.
+     * @return new deadline of the ToDo Task.
+     */
     public String snoozeDeadline() {
         return "ToDo task has no deadline!";
     }

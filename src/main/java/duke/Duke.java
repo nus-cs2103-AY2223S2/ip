@@ -29,7 +29,6 @@ public class Duke extends Application {
     private final Storage storage;
     private Parser parser;
 
-
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private ScrollPane scrollPane;
@@ -37,7 +36,6 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
 
     /**
      * Initialises the Duke class which handles the TaskList, User Interface

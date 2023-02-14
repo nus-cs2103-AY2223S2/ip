@@ -1,12 +1,12 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import util.DateTimeParser;
 import util.DukeException;
 import util.TaskList;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.time.LocalDateTime;
 
 
 /**
@@ -85,6 +85,13 @@ public class Event extends Task {
         return t.addTask(e);
     }
 
+    /**
+     * Changes the deadline of the Event Task.
+     * @param days Number of days to shift back.
+     * @param hours Number of hours to shift back.
+     * @param minutes Number of minutes to shift back.
+     * @return new deadline of the Event Task.
+     */
     public String snoozeDeadline(int days, int hours, int minutes) {
         this.deadline = this.deadline.plusDays(days);
         this.deadline = this.deadline.plusHours(hours);
@@ -92,6 +99,10 @@ public class Event extends Task {
         return String.format("New deadline is %s!", DateTimeParser.datetimeFormatter(this.deadline));
     }
 
+    /**
+     * Changes the deadline of the Event by a default value of 5 minutes.
+     * @return New deadline of the Event.
+     */
     public String snoozeDeadline() {
         return this.snoozeDeadline(0, 0, 5);
     }
