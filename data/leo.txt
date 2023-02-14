@@ -1,10 +1,10 @@
 [D][ ] project | 29102023 12:00
-[E][ ] meeting | 29012023 20:00 | 29012023 22:00
-[T][X] run
+[E][X] meeting | 29012023 20:00 | 29012023 22:00
+[T][ ] run
 [T][ ] eat acai
-[T][ ] eat fruits
 [T][X] sleeping
 [D][ ] presentation | 10022023 17:00
 [D][ ] project | 20022023 12:00
 [D][ ] presentation | 20022023 13:00
 [E][ ] birthday | 20022023 12:00 | 23022023 01:00
+[T][ ] draft userguide
