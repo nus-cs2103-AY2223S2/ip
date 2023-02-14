@@ -19,6 +19,7 @@ public class Main extends Application{
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Watt Toodu");
             MainWindow controller = fxmlLoader.<MainWindow>getController();
             controller.setWtd(wtd);
             controller.showWelcome();
