@@ -15,6 +15,7 @@ import rick.lambdas.CheckedTaskListManipulator;
  *         AY22/23-S2 CS2103T
  */
 public class MultiManipulateCommand extends Command {
+    private final String command;
     private String userInterfaceMessage;
     private CheckedTaskListManipulator<Integer, String> commandFunction;
     private final ArrayList<Integer> indexes;
@@ -28,6 +29,7 @@ public class MultiManipulateCommand extends Command {
      */
     public MultiManipulateCommand(ArrayList<Integer> indexes, String cmd) {
         this.indexes = indexes;
+        this.command = cmd;
         switch (cmd) {
         case "delete":
             this.commandFunction = (TaskList ts, Integer index) -> ts.basicDelete(index);
@@ -77,6 +79,14 @@ public class MultiManipulateCommand extends Command {
             output.add(" ");
             output.add(String.format("These %s error(s) occurred:", errors.size()));
             output.addAll(errors.subList(0, Math.min(5, errors.size()))); //limit if range is large
+        }
+        if (this.command.equals("delete")) {
+            long ct = ts.filter(t -> true).count();
+            output.add(String.format(
+                    "Now you have %s task%s in the list.",
+                    ct > 0L ? ct : "no",
+                    ct != 1L ? "s" : ""
+            ));
         }
         return ui.section(output.toArray(String[]::new));
     }

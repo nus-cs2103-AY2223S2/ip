@@ -387,10 +387,16 @@ public class ManipulateCommandTest extends CommandTest {
 
         Command doubleHyphen = Parser.parse("delete --a");
         String actualUiDoubleHyphen = doubleHyphen.execute(TASK_LIST, UI);
+        long ct = STORAGE.size();
         String expectedUiDoubleHyphen = "Got it. I've deleted these 3 tasks:\n"
                 + "[T][ ] TODO: 1\n"
                 + "[T][ ] TODO: 2\n"
-                + "[T][ ] TODO: 3";
+                + "[T][ ] TODO: 3\n"
+                + String.format(
+                        "Now you have %s task%s in the list.",
+                        ct > 0L ? ct : "no",
+                        ct != 1L ? "s" : ""
+                );
 
         assertAll(() -> assertEquals(expectedUiAllSlash, actualUiAllSlash
                 ), () -> assertEquals(expectedUiSingleHyphen, actualUiSingleHyphen
