@@ -1,0 +1,7 @@
+TD|false|run
+D|false|run home |2023-01-29
+D|false|run |2023-01-02
+TD|false|lecture
+TD|false|ip
+D|false|run run run run run run |2000-10-10
+D|false|runnnnnnnnnnnnnnnnnnnnnnn |2000-10-10
