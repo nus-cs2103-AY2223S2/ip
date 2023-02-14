@@ -5,7 +5,9 @@ import duke.exception.DukeMissingArgumentException;
 import duke.exception.DukeTaskArgumentException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
+import java.util.Arrays;
 
 import duke.Ui;
 
@@ -48,10 +50,14 @@ public class TaskList {
     /**
      * Deletes a task from the TaskList
      * 
-     * @param taskIndex The index of the task
+     * @param taskIndices The index of the task
      */
-    public void deleteTask(int taskIndex) {
-        this.tasks.remove(taskIndex - 1);
+    public void deleteTask(String[] taskIndices) {
+        Arrays.sort(taskIndices, Collections.reverseOrder());
+        for (int i = 0; i < taskIndices.length; i++) {
+            int index = Integer.parseInt(taskIndices[i]);
+            this.tasks.remove(index - 1);
+        }
     }
 
     /**

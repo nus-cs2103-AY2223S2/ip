@@ -38,12 +38,16 @@ public class Ui {
      * Displays text after deleting task
      *
      * @param list the TaskList storing all the tasks
-     * @param taskIndex the index of task to be deleted
+     * @param taskIndices the index of task to be deleted
      */
-    public String taskDeleteDisplay(TaskList list, int taskIndex) {
+    public String taskDeleteDisplay(TaskList list, String[] taskIndices) {
         String displayResult = "";
-        displayResult += "Noted. I've removed this task:\n";
-        displayResult += "\t" + list.getTask(taskIndex).toString();
+        displayResult += "Noted. I've removed the tasks:\n";
+        for (int i = 0; i < taskIndices.length; i++) {
+            int index = Integer.parseInt(taskIndices[i]);
+            displayResult += "\t" + list.getTask(index).toString() + '\n';
+        }
+
         return displayResult;
     }
 

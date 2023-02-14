@@ -146,14 +146,21 @@ public class Command {
     private String deleteTask(String[] userInput) throws DukeTaskArgumentException,
             DukeMissingArgumentException, DukeInvalidArgumentsException {
         try {
-            int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > this.list.getListLength()) {
-                throw new DukeTaskArgumentException();
+            String indexString = userInput[1];
+            String[] listIndices = indexString.split(",");
+            System.out.println(listIndices[0]);
+            for (int i = 0; i < listIndices.length; i++) {
+                int taskIndex = Integer.parseInt(listIndices[i]);
+                if (taskIndex > this.list.getListLength()) {
+                    throw new DukeTaskArgumentException();
+                }
             }
 
-            String deleteResponse = this.ui.taskDeleteDisplay(this.list, taskIndex) + '\n'
-                    + this.ui.displayTasks(this.list.getListLength() - 1);
-            this.list.deleteTask(taskIndex);
+            System.out.println(listIndices.length);
+
+            String deleteResponse = this.ui.taskDeleteDisplay(this.list, listIndices)
+                    + this.ui.displayTasks(this.list.getListLength() - listIndices.length);
+            this.list.deleteTask(listIndices);
             return deleteResponse;
         } catch(IndexOutOfBoundsException e) {
             String task = "delete";
