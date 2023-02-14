@@ -42,29 +42,53 @@ public class Storage {
     public ArrayList<Task> loadData() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
-        ArrayList<Task> arr = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNextLine()) {
-            String[] parts = s.nextLine().split(Pattern.quote(" | "));
-            switch (parts[0]) {
-
-            case "T":
-                arr.add(new Todo(parts[2], Boolean.parseBoolean(parts[1])));
-                break;
-
-            case "D":
-                arr.add(new Deadline(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(4), FORMAT));
-                break;
-
-            case "E":
-                arr.add(new Event(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(6),
-                        parts[4].substring(4), FORMAT));
-                break;
-
-            default:
-                throw new FileNotFoundException();
-            }
+            String[] parts = parseData(s.nextLine());
+            String type = parts[0];
+            String isDone = parts[1];
+            addTask(tasks, type, isDone, parts);
         }
-        return arr;
+        return tasks;
+    }
+
+    private String[] parseData(String data) {
+        return data.split(Pattern.quote(" | "));
+    }
+
+    /**
+     * Adds a task to the Task List.
+     *
+     * @param tasks The array list of Tasks.
+     * @param type The type of this current task (T/E/D).
+     * @param isDone The status of Task.
+     * @param inputs The String stored in storage file.
+     */
+    private void addTask(ArrayList<Task> tasks, String type, String isDone, String[] inputs) {
+        String name = inputs[2];
+
+        switch (type) {
+
+        case "T":
+            Todo todo = new Todo(name, Boolean.parseBoolean(isDone));
+            tasks.add(todo);
+            break;
+
+        case "D":
+            String by = inputs[3].substring(4);
+            Deadline deadline = new Deadline(name, Boolean.parseBoolean(isDone), by, FORMAT);
+            tasks.add(deadline);
+            break;
+
+        case "E":
+            String from = inputs[3].substring(6);
+            String to = inputs[4].substring(4);
+            Event event = new Event(name, Boolean.parseBoolean(isDone), from, to, FORMAT);
+            tasks.add(event);
+
+        default:
+            // Do Nothing
+        }
     }
 
     /**

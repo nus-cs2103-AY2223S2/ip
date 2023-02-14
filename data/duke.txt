@@ -1,4 +1,5 @@
 D | 0 | return book | by: 11 Oct 2023 23:00
+D | 0 | assignment | by: 23 Oct 2023 10:00
 E | 0 | see stars | from: 12 Aug 2023 11:00 | to: 11 Oct 2023 11:00
 D | 0 | buying food | by: 11 Aug 2023 11:20
 E | 0 | meeting | from: 23 Feb 2023 20:00 | to: 12 Mar 2023 20:00
@@ -8,3 +9,4 @@ E | 0 | run | from: 20 Feb 2023 20:00 | to: 21 Feb 2023 20:10
 T | 0 | eat
 D | 0 | run | by: 20 Feb 2023 20:00
 E | 0 | run | from: 20 Feb 2023 20:00 | to: 20 Feb 2023 20:30
+D | 0 | homework | by: 23 Feb 2023 21:00
