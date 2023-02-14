@@ -18,9 +18,13 @@ public class DoAfter extends Task {
     @Override
     public String toString() {
         String[] separateText = this.taskDescription.split("/after");
+        //First part is  the description of the task
+        String description = separateText[0];
+        //Second part is the date in which the task must be done after.
+        String dateToDoAfter = separateText[1];
 
-        return this.isComplete ? "[DA]" + "[x] " + separateText[0] + " (after: " + separateText[1] + ")"
-                : "[DA]" + "[ ] " + separateText[0] + " (after: " + separateText[1] + ")";
+        return this.isComplete ? String.format("[DA][X] %s (after:%s)", description, dateToDoAfter)
+                               : String.format("[DA][] %s (after:%s)", description, dateToDoAfter);
     }
 }
 

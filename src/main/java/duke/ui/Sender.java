@@ -6,6 +6,10 @@ import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.storage.Storage;
 import duke.tasks.ToDo;
+import duke.tasks.DeadLine;
+import duke.tasks.Event;
+import duke.tasks.DoAfter;
+
 
 /**
  * Handles interactions with the user.
@@ -26,14 +30,14 @@ public class Sender {
     private static String HELP_MESSAGE = "The available commands are: \n" +
             "1) list\n" +
             "2) bye\n" +
-            "3) todo ________\n" +
-            "4) deadline ______ /by <YYYY-MM-DD> \n" +
-            "5) event ________ /from _______  /to _________\n" +
+            "3) todo _____\n" +
+            "4) deadline _____ /by _YYYY-MM-DD_\n" +
+            "5) event _____ /from _____ /to _____\n" +
             "6) doafter ______ /after _______\n" +
-            "7) unmark ____\n" +
-            "8) mark ______ \n" +
-            "9) help\n" +
-            "10) find ______ \n";
+            "7) unmark _____\n" +
+            "8) mark _____ \n" +
+            "9) find _____\n" +
+            "10) help\n";
 
     public Sender(Storage storage, TaskList tasks) {
         this.storage = storage;
@@ -76,8 +80,6 @@ public class Sender {
         return DUKE_RESPONSE + "These are the matching tasks: \n" + taskString;
     }
 
-
-
     public String markTask(int taskNumberToMark) throws DukeException {
         try {
             Task taskToMark = tasks.getTask(taskNumberToMark);
@@ -113,9 +115,9 @@ public class Sender {
         }
     }
 
-    public String addDeadline(String taskDescription) throws DukeException {
+    public String addDeadLine(String taskDescription) throws DukeException {
         try {
-        ToDo deadline = new ToDo("deadline", taskDescription, false);
+        DeadLine deadline = new DeadLine("deadline", taskDescription, false);
         tasks.addTask(deadline);
         storage.addTask(deadline.getStorageLine());
         return "I have added this new task:\n" + deadline
@@ -128,10 +130,10 @@ public class Sender {
 
     public String addEvent(String taskDescription) throws DukeException {
         try {
-        ToDo toDo = new ToDo("event", taskDescription, false);
-        tasks.addTask(toDo);
-        storage.addTask(toDo.getStorageLine());
-        return "I have added this new task:\n" + toDo
+        Event event = new Event("event", taskDescription, false);
+        tasks.addTask(event);
+        storage.addTask(event.getStorageLine());
+        return "I have added this new task:\n" + event
                 + "\nYou now currently have "
                 + tasks.getTaskCount() + " tasks.";
         } catch (Exception e) {
@@ -141,10 +143,10 @@ public class Sender {
 
     public String addDoAfter(String taskDescription) throws DukeException {
         try {
-        ToDo toDo = new ToDo("doafter", taskDescription, false);
-        tasks.addTask(toDo);
-        storage.addTask(toDo.getStorageLine());
-        return "I have added this new task:\n" + toDo
+        DoAfter doAfter = new DoAfter("doafter", taskDescription, false);
+        tasks.addTask(doAfter);
+        storage.addTask(doAfter.getStorageLine());
+        return "I have added this new task:\n" + doAfter
                 + "\nYou now currently have "
                 + tasks.getTaskCount() + " tasks.";
         } catch (Exception e) {

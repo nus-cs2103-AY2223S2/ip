@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.tasks.*;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.exceptions.DukeException;
@@ -58,7 +57,7 @@ public class Parser {
                 case "deadline":
                     //Rest of message describes the Task.
                     String bodyDeadline = userInput.split(" ", 2)[1];
-                    return sender.addDeadline(bodyDeadline);
+                    return sender.addDeadLine(bodyDeadline);
                 case "event":
                     //Rest of message describes the Task.
                     String bodyEvent = userInput.split(" ", 2)[1];
