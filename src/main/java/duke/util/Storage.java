@@ -58,7 +58,6 @@ public class Storage {
                     encodeSplit.add(s);
                 }
                 String type = encodeSplit.get(1);
-                assert type != null : "Loading the files, the type should not be null";
                 boolean isDone;
                 if (encodeSplit.get(2).equals("X")) {
                     isDone = true;
