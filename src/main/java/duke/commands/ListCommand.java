@@ -30,7 +30,7 @@ public class ListCommand extends Command {
         StringBuilder res = new StringBuilder(FRAME);
         for (int i = 0; i < taskList.length(); i++) {
             Task task = taskList.getTask(i + 1);
-            res.append("     ").append(i + 1).append(". ").append(task.status()).append("\n");
+            res.append("     ").append(i + 1).append(". ").append(task.getStatus()).append("\n");
         }
         ui.response(res.append(FRAME).toString());
     }

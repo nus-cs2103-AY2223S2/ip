@@ -36,7 +36,7 @@ public class AddToDoCommand extends Command {
         taskList.addTask(newToDo);
         ui.response(FRAME + "\n"
                 + "     Got it. I've added this task:" + "\n"
-                + "     " + newToDo.status() + "\n"
+                + "     " + newToDo.getStatus() + "\n"
                 + "     Now you have " + taskList.length() + " tasks in the list" + "\n"
                 + FRAME);
     }

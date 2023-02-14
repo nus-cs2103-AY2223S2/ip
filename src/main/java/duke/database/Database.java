@@ -83,7 +83,7 @@ public class Database {
             FileWriter writer = new FileWriter(this.filePath, false);
             StringBuilder data = new StringBuilder("");
             for (Task task: tasks) {
-                ArrayList<String> taskData = task.data();
+                ArrayList<String> taskData = task.getData();
                 data.append(String.join(this.delimiter, taskData));
                 data.append("\n");
             }

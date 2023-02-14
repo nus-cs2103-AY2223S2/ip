@@ -84,7 +84,7 @@ public class AddEventCommand extends Command {
             taskList.addTask(newEvent);
             ui.response(FRAME + "\n"
                     + "     Got it. I've added this task:" + "\n"
-                    + "     " + newEvent.status() + "\n"
+                    + "     " + newEvent.getStatus() + "\n"
                     + "     Now you have " + taskList.length() + " tasks in the list" + "\n"
                     + FRAME);
         } catch (DateTimeParseException e) {
