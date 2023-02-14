@@ -35,6 +35,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws DukeException {
+        assert this.isActive();
         ArrayList<Task> tasks = taskList.getTasks();
         StringBuilder queriedTasks = new StringBuilder(FRAME);
         int numOfQueriedTasks = 0;

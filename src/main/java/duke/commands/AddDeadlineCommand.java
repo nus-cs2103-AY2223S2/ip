@@ -43,6 +43,7 @@ public class AddDeadlineCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws IncludeByException,
             BlankFieldDeadlineException, InvalidDateException {
+        assert this.isActive();
         // Extract deadline date and duke.task item.
         String[] lines = this.commandBody.split(" ");
         boolean hasByKeyword = false;

@@ -27,6 +27,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws DukeException {
+        assert this.isActive();
         StringBuilder res = new StringBuilder(FRAME);
         for (int i = 0; i < taskList.length(); i++) {
             Task task = taskList.getTask(i + 1);

@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws TaskNumberNotFoundException {
+        assert this.isActive();
         String taskDescription = taskList.getTask(taskNumber).getStatus();
         taskList.deleteTask(taskNumber);
         ui.response(FRAME
