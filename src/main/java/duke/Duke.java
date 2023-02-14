@@ -113,6 +113,7 @@ public class Duke {
         ArrayList<String> commandInfoList = Parser.parse(input);
         if (isExit) {
             Platform.exit();
+            System.exit(0);
         }
         if (commandInfoList.size() != 0) { // checks if the command to run is VALID
             switch (commandInfoList.get(0)) { // runs the command as per the user request
