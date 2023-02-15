@@ -22,3 +22,22 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+# User guide
+
+You may skip this user guide if you deem it lengthy or do not have time to read it.
+Duke itself does provide all the guide you need :wink:
+### Available commands :
+
+#### - **todo** -  format: todo [task name]
+#### - **deadline** - format: deadline [task name] /by [dd/MM/yyyy:HHmm]
+#### - **event** - format: event [task name] /from [dd/MM/yyyy:HHmm] /to [dd/MM/yyyy:HHmm]
+#### - **list** - format: list
+#### - **mark** - format: mark [task index]
+#### - **delete** - format: delete [task index]
+#### - **find** - format: find [task name]
+#### - **archive** - format: archive
+
+
+
+
+

@@ -135,7 +135,7 @@ public class Parser {
                 }
                 break;
             } else
-                value = value + input;
+                value = value + " " +  input;
         }
 
         if(value == "") {
@@ -183,7 +183,7 @@ public class Parser {
                 c = new AddCommand(t);
                 break;
             } else
-                value = value + input;
+                value = value + " " + input;
         }
 
         if(value == "") {
