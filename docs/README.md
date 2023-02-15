@@ -198,7 +198,7 @@ Meow-k. I've updated the description of this task:
 ## FAQ
 
 **Q:** How do I transfer my data to another Computer?
-**A:** Install the app in the other computer and overwrite the empty `list.txt` file it creates in the `data` folder with the corresponding file in your previous CatBot home folder.
+<br>**A:** Install the app in the other computer and overwrite the empty `list.txt` file it creates in the `data` folder with the corresponding file in your previous CatBot home folder.
 
 ## Command Summary
 
