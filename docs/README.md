@@ -1,5 +1,5 @@
 # User Guide for **NerdBot**
-> 🤓🤓🤓
+> Your personalized task manager 🤓🤓🤓
 ## Features:
 1. Managing tasks
 2. Managing Deadlines and Events with dates
