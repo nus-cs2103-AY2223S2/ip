@@ -16,38 +16,39 @@
 **Features:**
 
 Things to take note of: 
-- features are CASE INSENSITIVE!
-- Words that are fully capitalised (e.g INDEX) refer to variable names
+- commands should only be in lower case
+- words that are fully capitalised (e.g INDEX) refer to variable names
 - all DATE variables must be formatted as yyyy-mm-dd
 
-1. **Bye** <br>
+**List of Commands** <br>
+1. **bye** <br>
 Guides user on how to exit the chatbot
 
-2. **List** <br>
+2. **list** <br>
 Displays a list of current tasks stored in Duke
 
-3. **Mark INDEX** <br>
+3. **mark INDEX** <br>
 Sets the task at the specified INDEX as completed <br>
 <ins>Format</ins>
     - INDEX refers to the task number, must be a valid positive integer greater than 0 and less than size of current task list
 
-4. **Unmark INDEX** <br>
+4. **unmark INDEX** <br>
 Sets the task at specified INDEX as uncompleted <br>
 <ins>Format</ins>
     - INDEX refers to the task number, must be a valid positive integer greater than 0 and less than size of current task list
 
-5. **Todo DESCRIPTION** <br>
+5. **todo DESCRIPTION** <br>
 Creates a ToDo task with the specified DESCRIPTION
 <ins>Format</ins>
     - DESCRIPTION refers to the details of the task
 
-6. **Deadline DESCRIPTION /by DATE** <br>
+6. **deadline DESCRIPTION /by DATE** <br>
 Creates a Deadline task with the specified DESCRIPTION and DEADLINE <br>
 <ins>Format</ins>
     - DESCRIPTION refers to the details of the task
     - DATE refers to the deadline when the task is due, must be in yyyy-mm-dd format
 
-7. **Event DESCRIPTION /from STARTDATE /to ENDDATE** <br>
+7. **event DESCRIPTION /from STARTDATE /to ENDDATE** <br>
 Creates an Event task with the specified DESCRIPTION, STARTDATE and ENDDATE <br>
 <ins>Format</ins>
     - DESCRIPTION refers to the details of the task
@@ -55,7 +56,7 @@ Creates an Event task with the specified DESCRIPTION, STARTDATE and ENDDATE <br>
     - ENDDATE refers to the ending date of the event, must be in yyyy-mm-dd format
     - STARTDATE cannot be later than ENDDATE
     
-8. **Reschedule INDEX VARARGS** <br>
+8. **reschedule INDEX VARARGS** <br>
 Reschedules a task to a later date. Task must be of type Deadline or Event <br>
 <ins>Format</ins>
     - INDEX refers to the task number, must be a valid positive integer greater than 0 and less than size of current task list
