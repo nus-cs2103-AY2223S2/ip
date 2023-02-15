@@ -52,9 +52,14 @@ public class TaskList {
      * @param taskIndices The index of the task
      */
     public void deleteTask(String[] taskIndices) {
-        Arrays.sort(taskIndices, Collections.reverseOrder());
+
         for (int i = 0; i < taskIndices.length; i++) {
-            int index = Integer.parseInt(taskIndices[i].trim());
+            taskIndices[i] = taskIndices[i].trim();
+        }
+        Arrays.sort(taskIndices, Collections.reverseOrder());
+
+        for (int i = 0; i < taskIndices.length; i++) {
+            int index = Integer.parseInt(taskIndices[i]);
             this.tasks.remove(index - 1);
         }
     }
