@@ -1,7 +1,7 @@
 # User Guide for TaskGenie
-TaskGenie frees your mind of having to remember things you need to do. 
-It is optimized for use via Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, TaskGenie can help keeps track of your tasks faster than traditional applications.
+TaskGenie frees your mind of having to remember things you need to do.  
+It is optimized for use via Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
+If you can type fast, TaskGenie can help keeps track of your tasks faster than traditional applications.  
 
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -31,43 +31,43 @@ If you can type fast, TaskGenie can help keeps track of your tasks faster than t
 
 ### Add A ToDo Task
 
-Creates a ToDo task.
-Format: `todo DESCRIPTION`
+Creates a ToDo task.  
+Format: `todo DESCRIPTION`  
 Examples:
 - `todo Buy Pencil` Creates a ToDo task to buy pencil.
 
 ### Add a Deadline
 
-Creates a Deadline task.
-Format: `deadline DESCRIPTION /by DATE`
+Creates a Deadline task.  
+Format: `deadline DESCRIPTION /by DATE`  
 Examples:
 - `deadline Pay Tax /by 2023-03-11 2359` Creates a Deadline task to pay for tax before 11 March 2023 2359H.
 
 ### Add an Event
 
-Creates a Event task.
-Format: `event DESCRIPTION /from DATE /to DATE`
+Creates a Event task.  
+Format: `event DESCRIPTION /from DATE /to DATE`  
 Examples:
 - `event Career Fair /from 2023-03-11 0000 /to 2023-03-13 2359` Creates a Event task for a Career Fair that goes from 11 March 2023 0000H to 13 March 2023 2359H.
 
 ### Find Task by Keyword
 
-Finds a task that contains the keyword.
-Format: `find DESCRIPTION`
+Finds a task that contains the keyword.  
+Format: `find DESCRIPTION`  
 Examples:
 - `find book` Finds all tasks that has the keyword *book* in its description.
 
 ### View Task List
 
-Views the current tasks you have.
-Format: `list`
+Views the current tasks you have.  
+Format: `list`  
 Examples:
 - `list` Shows all the tasks that you have.
 
 ### Edit a task
 
-Edits a task based on the number in the task list.
-Format: `update NUMBER /ATTRIBUTE DESCRIPTION`
+Edits a task based on the number in the task list.  
+Format: `update NUMBER /ATTRIBUTE DESCRIPTION`  
 Examples:
 - `update 1 /description Buy Eraser` Edits the first task on the task list with the new description to buy eraser.
 - `update 2 /by 2023-03-11 2359` Edits the second task on the task list with the new deadline set at 11 March 2023 2359H.
@@ -76,29 +76,29 @@ Examples:
 
 ### Mark Task as Done
 
-Marks task based on the number in the task list as done.
-Format: `mark NUMBER`
+Marks task based on the number in the task list as done.  
+Format: `mark NUMBER`  
 Examples:
 - `mark 2` Marks the second task on the task list as done.
 
 ### Mark Task as UnDone
 
-Unmarks task based on the number in the task list as not done.
-Format: `unmark NUMBER`
+Unmarks task based on the number in the task list as not done.  
+Format: `unmark NUMBER`  
 Examples:
 - `unmark 2` Unmarks the second task on the task list as not done.
 
 ### Delete a Task
 
-Deletes task based on the number in the task list.
-Format: `delete NUMBER`
+Deletes task based on the number in the task list.  
+Format: `delete NUMBER`  
 Examples:
 - `delete 2` Deletes the second task on the task list.
 
 ### Exit the Program
 
-Exit the Program and save your tasks.
-Format: `bye`
+Exit the Program and save your tasks.  
+Format: `bye`  
 Examples:
 - `bye` Exits the program and save your tasks.
 
@@ -108,7 +108,7 @@ TaskGenie data are saved in the hard disk automatically exiting the program. The
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?
+**Q**: How do I transfer my data to another Computer?  
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TaskGenie home folder.
 
 ## Command Summary
