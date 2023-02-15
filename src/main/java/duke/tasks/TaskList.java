@@ -1,8 +1,11 @@
 package duke.tasks;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.Storage;
+import duke.exceptions.CommandExecutionError;
 import duke.exceptions.ListIndexOutOfRange;
 
 
@@ -38,16 +41,23 @@ public class TaskList {
      * @param index Index of task to remove
      * @return Removed task
      */
-    public Task removeTask(int index) throws ListIndexOutOfRange {
+    public Task removeTask(int index) throws CommandExecutionError {
         int sizeBeforeRemove = this.countTasks();
+        Task removedTask;
         try {
-            Task removedTask = this.tasks.remove(index);
-            assert sizeBeforeRemove - this.countTasks() == 1;
-            return removedTask;
+            removedTask = this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getClass().getName());
             throw new ListIndexOutOfRange();
         }
+
+        try {
+            assert sizeBeforeRemove - this.countTasks() == 1;
+            Storage.saveToFile(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return removedTask;
     }
 
     /**
@@ -59,6 +69,11 @@ public class TaskList {
         this.tasks.add(task);
         assert this.countTasks() - sizeBeforeAdd == 1;
 
+        try {
+            Storage.saveToFile(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
