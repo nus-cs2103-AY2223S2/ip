@@ -33,7 +33,7 @@ public class AddCommand extends Command {
 
         output = output + "\n " + task;
 
-        ui.printText(output + "\n" + taskList.getNumberOfTask() + " tasks in the list.");
+        ui.printText(output + "\n\nYou have " + taskList.getNumberOfTask() + " tasks in the list.");
 
     }
 
