@@ -13,6 +13,13 @@ public class Parser {
     private Ui ui;
     private Storage storage;
     private int exceptionCount;
+    private final String eventErr = "OOPS!!! The description of a event cannot be \n\tempty.";
+    private final String deadlineErr = "OOPS!!! The description of a deadline cannot be \n\tempty.";
+    private final String todoErr = "OOPS!!! The description of a todo cannot be \n\tempty.";
+    private final String deleteErr = "OOPS!!! You have to choose a task to delete.";
+    private final String markErr = "OOPS!!! You have to choose a task to mark.";
+    private final String unmarkErr = "OOPS!!! You have to choose a task to unmark.";
+    private final String findErr = "OOPS!!! Invalid search term. Try adding a task \n\tdescription.";
 
     /**
      * Creates a new Parser object.
@@ -42,7 +49,7 @@ public class Parser {
         String cmd = parsedCommand[0];
         switch (cmd) {
         case "bye":
-            return goodbyeParser(input);
+            return goodbyeParser();
         case "list":
             return ui.printList(taskList.getList());
         case "mark":
@@ -69,10 +76,10 @@ public class Parser {
 
     /**
      * Parses the input to invoke the correct methods to close application.
-     * @param input The input string by the user.
+     *
      * @return The string that is shown before app closes.
      */
-    public String goodbyeParser(String input) {
+    public String goodbyeParser() {
         try {
             this.storage.save(taskList);
             return ui.goodbyeMessage();
@@ -88,7 +95,7 @@ public class Parser {
      */
     public String markParser(String input) {
         try {
-            markInputChecker(input);
+            generalInputChecker(input, markErr);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             taskList.markTaskAsDone(taskNum);
             return ui.markTaskAsDoneMessage(taskList.getTask(taskNum));
@@ -104,7 +111,7 @@ public class Parser {
      */
     public String unmarkParser(String input) {
         try {
-            unmarkInputChecker(input);
+            generalInputChecker(input, unmarkErr);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             taskList.markTaskAsIncomplete(taskNum);
             return ui.markTaskAsIncompleteMessage(taskList.getTask(taskNum));
@@ -120,7 +127,7 @@ public class Parser {
      */
     public String deleteParser(String input) {
         try {
-            deleteInputChecker(input);
+            generalInputChecker(input, deleteErr);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             taskList.deleteTaskFromList(taskNum);
             return ui.deletedTaskMessage(taskList.getTask(taskNum), taskList.numberOfTasks());
@@ -136,7 +143,7 @@ public class Parser {
      */
     public String eventParser(String input) {
         try {
-            eventInputChecker(input);
+            generalInputChecker(input, eventErr);
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
         }
@@ -152,7 +159,7 @@ public class Parser {
      */
     public String deadlineParser(String input) {
         try {
-            deadlineInputChecker(input);
+            generalInputChecker(input, deadlineErr);
             return addDeadlineFormatted(input);
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
@@ -166,7 +173,7 @@ public class Parser {
      */
     public String todoParser(String input) {
         try {
-            todoInputChecker(input);
+            generalInputChecker(input, todoErr);
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
         }
@@ -180,7 +187,7 @@ public class Parser {
      */
     public String findParser(String input) {
         try {
-            findTaskInputChecker(input);
+            generalInputChecker(input, findErr);
             return findTasks(input);
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
@@ -203,114 +210,30 @@ public class Parser {
     }
 
     /**
-     * Checks if the input for a Todo task is valid.
-     * @param input The input string.
-     * @throws DukeException if the input is invalid.
+     * A general method thaat ensures that the user inputs description when adding a task
+     * @param input
+     * @param err
+     * @throws DukeException
      */
-    public void todoInputChecker(String input) throws DukeException {
+    public void generalInputChecker(String input, String err) throws DukeException {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException(err);
         }
         if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException(err);
         }
     }
 
     /**
-     * Checks if the input for an Event task is valid.
-     * @param input The input string.
-     * @throws DukeException if the input is invalid.
+     * A special input checker to check if user types input to view command list wrongly.
+     * @param input The user input
+     * @throws DukeException if the user types in 'cmd' wrongly
      */
-    public void eventInputChecker(String input) throws DukeException {
-        String[] inputArray = input.split(" ", 2);
-        if (inputArray.length != 2) {
-            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-        }
-        if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-        }
-    }
-
-    /**
-     * Checks if the input for a Deadline task is valid.
-     * @param input The input string.
-     * @throws DukeException if the input is invalid.
-     */
-    public void deadlineInputChecker(String input) throws DukeException {
-        String[] inputArray = input.split(" ", 2);
-        if (inputArray.length != 2) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-        }
-        if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-        }
-    }
-
-    /**
-     * Checks if the input to delete a task is valid.
-     * @param input The input string.
-     * @throws DukeException if the input is invalid.
-     */
-    public void deleteInputChecker(String input) throws DukeException {
-        String[] inputArray = input.split(" ", 2);
-        if (inputArray.length != 2) {
-            throw new DukeException("OOPS!!! You have to choose a task to delete.");
-        }
-        if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! You have to choose a task to delete.");
-        }
-    }
-
-    /**
-     * Checks if the input to mark a task is valid.
-     * @param input The input string.
-     * @throws DukeException if the input is invalid.
-     */
-    public void markInputChecker(String input) throws DukeException {
-        String[] inputArray = input.split(" ", 2);
-        if (inputArray.length != 2) {
-            throw new DukeException("OOPS!!! You have to choose a task to mark.");
-        }
-        if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! You have to choose a task to mark.");
-        }
-    }
-
-    /**
-     * Checks if the input to unmark a task is valid.
-     * @param input The input string.
-     * @throws DukeException if the input is invalid
-     */
-    public void unmarkInputChecker(String input) throws DukeException {
-        String[] inputArray = input.split(" ", 2);
-        if (inputArray.length != 2) {
-            throw new DukeException("OOPS!!! You have to choose a task to unmark.");
-        }
-        if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! You have to choose a task to unmark.");
-        }
-    }
-
-    /**
-     * Checks if the input to find tasks is valid.
-     * @param input the input string.
-     * @throws DukeException if the input is invalid.
-     */
-    public void findTaskInputChecker(String input) throws DukeException {
-        String[] inputArray = input.split(" ", 2);
-        if (inputArray.length != 2) {
-            throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
-        }
-        if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
-        }
-    }
-
     public void cmdInputChecker(String input) throws DukeException {
         String[] inputArray = input.split(" ", 2);
-        if (inputArray.length >= 2) {
-            throw new DukeException("Invalid command used. Enter 'cmd' for a list of commands");
+        if (inputArray.length >= 2 && inputArray[1].trim().length() != 0) {
+            throw new DukeException("Invalid command used. Enter 'cmd' for a list of \n\tcommands");
         }
     }
 
