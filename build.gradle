@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'org.example'
-version '2.2'
+version '3.0'
 
 application{
     mainClassName = "duke.ui.Launcher"

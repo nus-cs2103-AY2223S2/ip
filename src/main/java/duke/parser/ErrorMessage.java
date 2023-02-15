@@ -44,6 +44,6 @@ public class ErrorMessage {
     public static final String EMPTY_ERROR = "OOPS!!! The instruction cannot be empty";
     public static final String STORAGE_ERROR = "OOPS!!! There's something wrong when reading the storage list";
     public static final String TASK_LIST_EMPTY_ERROR = "OOPS!!! Your task list is currently empty";
-    public static final String UNRECOGNIZED_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-( "
+    public static final String UNRECOGNIZED_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(\n "
             + "Please type in \"help\" to check all available commands.";
 }
