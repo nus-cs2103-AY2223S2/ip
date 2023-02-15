@@ -1,0 +1,9 @@
+todo do weekly assignment
+deadline do CS2103T IP /by 19th Jan
+event CS2103T lecture /from 19th 12pm /to 2pm
+todo do post-lecture quiz
+mark 1
+mark 2
+unmark 2
+list
+bye
