@@ -51,14 +51,15 @@ public class Parser {
      */
     public String performCommand(String input) {
         try {
-            this.checkCommand(input);
 
             if (input.equals("bye")) {
                 return "Bye. Hope to see you again soon!";
             } else if (input.equals("list")) {
                 return taskList.printList();
             } else {
+                this.checkCommand(input);
                 String[] arrOfString = input.split(" ");
+                assert arrOfString.length >= 1 : "Input format wrong!";
                 String command = arrOfString[0];
                 switch (command) {
                 case "mark":
@@ -96,6 +97,7 @@ public class Parser {
                     return taskList.find(input.substring(5));
 
                 default:
+                    assert false: "Unable to process command";
                     return "Please enter a valid command and/or task!";
                 }
             }
@@ -112,7 +114,8 @@ public class Parser {
      * @param input Input String by user
      * @return Perform command to return string by Duke
      */
-    public void checkCommand(String input) throws EmptyDescriptionException, WrongCommandException, WrongFormatException {
+    public void checkCommand(String input) throws EmptyDescriptionException, WrongCommandException,
+            WrongFormatException {
         String[] arrOfString = input.trim().split(" ");
         String command = arrOfString[0];
         if (listOfCommands.contains(input)) {
