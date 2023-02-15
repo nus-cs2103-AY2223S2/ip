@@ -5,7 +5,7 @@ package task;
  */
 public class Task {
     private String instruction;
-    private boolean status;
+    private boolean isCompleted;
 
     /**
      * Creates a new task without any deadlines
@@ -13,17 +13,17 @@ public class Task {
      */
     public Task(String instruction) {
         this.instruction = instruction;
-        this.status = false;
+        this.isCompleted = false;
     }
 
     /**
      * Marks entry as completed and prompts user if action is redundant.
      */
     public String setComplete() {
-        if (this.status) {
+        if (this.isCompleted) {
             return "Mission is already completed.";
         }
-        this.status = true;
+        this.isCompleted = true;
         return "Mission Completed!\n" + this;
     }
 
@@ -32,10 +32,10 @@ public class Task {
      * Marks entry as incomplete and prompts user if action is redundant.
      */
     public String setIncomplete() {
-        if (!this.status) {
+        if (!this.isCompleted) {
             return "Mission is originally incomplete.";
         }
-        this.status = false;
+        this.isCompleted = false;
         return "Mission Re-initialised\n" + this;
     }
 
@@ -49,7 +49,7 @@ public class Task {
     }
     @Override
     public String toString() {
-        if (status) {
+        if (isCompleted) {
             return "[X] " + instruction;
         }
         return "[ ] " + instruction;

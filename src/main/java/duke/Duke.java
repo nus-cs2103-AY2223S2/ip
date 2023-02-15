@@ -13,7 +13,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Initialise objects needed for the program.
+     * Constructor used to initialise objects used.
      */
     public Duke() {
         this.storage = new Storage();

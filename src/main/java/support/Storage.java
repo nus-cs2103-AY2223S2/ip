@@ -54,8 +54,8 @@ public class Storage {
     }
 
     /**
-     * Copy tasks from previous records into the current file.
-     * @param l Current tasklist to add to
+     * Reads from data stored for current process.
+     * @param l Current taskList to add to
      */
     public void updateTasks(TaskList l) {
         try {

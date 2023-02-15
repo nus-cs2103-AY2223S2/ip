@@ -13,7 +13,7 @@ public class Ui {
     private Parser parser = new Parser();
 
     /**
-     * Print greetings
+     * Manages CLI commands for Bond.
      */
     public Ui() {
         System.out.println("Echo! I'm Bond.");
@@ -27,11 +27,10 @@ public class Ui {
      * @param l reference to a record of list of tasks
      */
     public void nextMission(TaskList l) {
-        boolean check = true;
+        boolean isCompleted = true;
 
-        while (check) {
+        while (isCompleted) {
             System.out.println("\n----- Awaiting command -----");
-            // check = this.parser.readCommand(sc.nextLine(), l);
         }
     }
 }
