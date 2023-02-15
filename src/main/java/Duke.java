@@ -16,7 +16,7 @@ public class Duke {
         Parser parser = new Parser(storage);
         String home = System.getProperty("user.home");
         UI ui = new UI();
-        ui.printWelcomeMessage();
+        ui.printLogo();
         String userInput = scanner.nextLine();
 
 
