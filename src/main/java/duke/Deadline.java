@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String fullDescription, String by) {
         super(description, fullDescription);
+        assert fullDescription.startsWith("deadline");
         this.by = LocalDate.parse(by);
     }
 

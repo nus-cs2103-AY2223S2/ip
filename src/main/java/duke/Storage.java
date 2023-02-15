@@ -53,6 +53,7 @@ public class Storage {
      * @throws FileNotFoundException if the location to store the tasklist in is not available.
      */
     public void saveToFile(Tasklist tasklist) throws FileNotFoundException {
+        assert (fileCreation != null);
         storeInFile = new PrintWriter(fileCreation);
         for (int i = 0; i < tasklist.getList().size(); i++) {
             storeInFile.println(tasklist.getList().get(i).getFullDescription());
@@ -66,6 +67,7 @@ public class Storage {
      * Closes the directory or file once saving has been complete.
      */
     public void storageClose() {
+        assert (storeInFile != null);
         storeInFile.close();
     }
 
