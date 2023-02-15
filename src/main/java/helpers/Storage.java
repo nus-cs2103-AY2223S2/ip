@@ -12,10 +12,10 @@ import java.time.format.DateTimeParseException;
 import exceptions.DukeException;
 import tasks.*;
 
-public class Database {
+public class Storage {
     private File savedFile;
 
-    public Database(File savedFile) {
+    public Storage(File savedFile) {
         this.savedFile = savedFile;
     }
 

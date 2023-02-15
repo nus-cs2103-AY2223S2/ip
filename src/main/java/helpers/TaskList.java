@@ -2,20 +2,19 @@ package helpers;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import tasks.*;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
-    private final Database db;
+    private final Storage db;
     private String message;
 
     public TaskList() throws IOException {
         // Loads saved file if it exists, else creates empty new file
         File savedTasks = new File("./tasks.txt");
-        this.db = new Database(savedTasks);
+        this.db = new Storage(savedTasks);
         this.tasks = new ArrayList<Task>(db.populateTasks());
     }
 
