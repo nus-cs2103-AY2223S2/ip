@@ -151,6 +151,7 @@ public class Duke extends Application {
     }
 
     protected String getResponse(String input) {
+        assert !input.equals("") : "Input cannot be empty\n";
         String str = Parser.parse(input, tasks);
         storage.writeToFile(tasks.getDukeList());
         return str;
