@@ -57,21 +57,15 @@ class Storage {
             switch (taskType) {
             case "T":
                 task = tp.addTask("t " + description);
-                if (isDone) {
-                    tp.mark(task[0]);
-                }
+                tp.setStatus(task[0], isDone);
                 break;
             case "D":
                 task = tp.addTask("d " + description);
-                if (isDone) {
-                    tp.mark(task[0]);
-                }
+                tp.setStatus(task[0], isDone);
                 break;
             case "E":
                 task = tp.addTask("e " + description);
-                if (isDone) {
-                    tp.mark(task[0]);
-                }
+                tp.setStatus(task[0], isDone);
                 break;
             default:
                 throw new DukeException("CorruptedTaskListException");
