@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -37,28 +36,28 @@ public class Parser {
         String[] words = command.split(" ");
 
         switch (words[0]) {
-            case "find":
-                return findCommand(cmd, tasks);
-            case "list":
-                return Ui.showList(tasks);
-            case "mark":
-                return markCommand(cmd, tasks);
-            case "unmark":
-                return unmarkCommand(cmd, tasks);
-            case "todo":
-                return todoCommand(cmd, tasks);
-            case "deadline":
-                return deadlineCommand(cmd, tasks);
-            case "event":
-                return eventCommand(cmd, tasks);
-            case "delete":
-                return deleteCommand(cmd, tasks);
-            case "sort":
-                return sortCommand(cmd, tasks);
-            case "bye":
-                return Ui.exit();
-            default:
-                return "Sorry, I do not understand your instruction. Plz try again later";
+        case "find":
+            return findCommand(cmd, tasks);
+        case "list":
+            return Ui.showList(tasks);
+        case "mark":
+            return markCommand(cmd, tasks);
+        case "unmark":
+            return unmarkCommand(cmd, tasks);
+        case "todo":
+            return todoCommand(cmd, tasks);
+        case "deadline":
+            return deadlineCommand(cmd, tasks);
+        case "event":
+            return eventCommand(cmd, tasks);
+        case "delete":
+            return deleteCommand(cmd, tasks);
+        case "sort":
+            return sortCommand(cmd, tasks);
+        case "bye":
+            return Ui.exit();
+        default:
+            return "Sorry, I do not understand your instruction. Plz try again later";
         }
     }
 
@@ -142,6 +141,7 @@ public class Parser {
 
     /**
      * Deletes the task
+     *
      * @param cmd command
      * @param  tasks task
      * @return delete command
@@ -153,7 +153,7 @@ public class Parser {
 
         try {
             str += Ui.delete(words[1], tasks);
-            str  += "\n";
+            str += "\n";
         } catch (Exception e) {
             str += "  ☹ OOPS!!! The index number cannot be empty. \n";
         }
@@ -162,6 +162,7 @@ public class Parser {
 
     /**
      * Finds the task
+     *
      * @param cmd command
      * @param  tasks task
      * @return find result
@@ -202,9 +203,9 @@ public class Parser {
         try {
             if (!words[1].contains(" ")) {
                 info = command.substring(command.indexOf(" ") + 1);
-                task = new Todo(info, false);
+                task = new Todo(info, false, tasks, false);
                 tasks.add(task);
-                str += new Todo(info, false);
+                str += new Todo(info, false, tasks, false);
 
             }
         } catch (Exception e) {
@@ -233,14 +234,16 @@ public class Parser {
             LocalDateTime datetime1 = LocalDateTime.parse(deadline, formatter);
 
             task = new Deadline(info,
-                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")), false);
+                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
+                    false, tasks, false);
             str += new Deadline(info,
-                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")), false);
+                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
+                    false, tasks, false);
             str += "\n";
             tasks.add(task);
         } catch (Exception e) {
-            str += "  ☹ OOPS!!! Please follow the format: \n" +
-                    "deadline [task name] /by 01/02/2013 1820 \n";
+            str += "  ☹ OOPS!!! Please follow the format: \n"
+                    + "deadline [task name] /by 01/02/2013 1820 \n";
         }
         return str;
     }
@@ -270,20 +273,26 @@ public class Parser {
                 task = new Event(info,
                         datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
                         datetime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
+                        false,
+                        tasks,
                         false);
                 str += new Event(info,
                         datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
                         datetime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
-                        false);
+                        false,
+                        tasks,
+                        false
+                );
 
             } catch (DateTimeParseException e) {
-                task = new Event(info, fromtime, totime, false);
-                str += new Event(info, fromtime, totime, false);
+                task = new Event(info, fromtime, totime, false, tasks, false);
+                str += new Event(info, fromtime, totime, false, tasks, false);
             }
             tasks.add(task);
         } catch (Exception e) {
-            str += "  ☹ OOPS!!! Please follow the format:\n"+ "event [task name] " +
-                    "/from 01/02/2013 1820 /to 01/02/2013 2030 \n";
+            str += "  ☹ OOPS!!! Please follow the format:\n"
+                    + "event [task name] "
+                    + "/from 01/02/2013 1820 /to 01/02/2013 2030 \n";
         }
         return str;
     }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -11,15 +13,15 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 
 /**
  * An example of a custom control using FXML.
@@ -32,6 +34,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Gets dialog box
+     * @param text input in dialog box
+     * @param img image
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -63,6 +70,8 @@ public class DialogBox extends HBox {
         Border dialogBorder = new Border(borderStroke);
 
         dialog.setBorder(dialogBorder);
+        //text turn green
+        //dialog.setTextFill(Color.GREEN);
         dialog.setPadding(new Insets(15, 15, 15, 15));
     }
 

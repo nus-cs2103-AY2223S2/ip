@@ -1,7 +1,6 @@
 T | 1 | study
 D | 1 | discussion | Jan 1 2019 1630
 T | 1 | play
-T | 1 | k
 T | 0 | tuition
-T | 0 | eve
 D | 0 | iu | Sep 3 2023 1830
+E | 0 | jh | Jan 2 2023 1800 | Jan 2 2023 1830

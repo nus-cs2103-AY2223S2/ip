@@ -1,7 +1,5 @@
 package duke;
 
-import duke.tasks.Task;
-
 /**
  * Represents all methods such as showLogo, showWelcome...
  */
@@ -13,10 +11,10 @@ public class Ui {
      * @return greeting
      */
     public static String showWelcome() {
-        return INDENTATION + "Hello! I'm Duke" +
-                System.getProperty("line.separator") +
-                INDENTATION + "What can I do for you?" +
-                System.getProperty("line.separator");
+        return INDENTATION + "Hello! I'm Duke"
+                + System.getProperty("line.separator")
+                + INDENTATION + "What can I do for you?"
+                + System.getProperty("line.separator");
     }
 
     /**
@@ -33,7 +31,8 @@ public class Ui {
                 + "6. list\n"
                 + "7. delete [task index]\n"
                 + "8. find [task name]\n"
-                + "9. bye\n"
+                + "9. sort todo/deadline/event\n"
+                + "10. bye\n"
                 + "Let's start!";
         return userGuide;
     }
@@ -51,8 +50,8 @@ public class Ui {
      * @return error message
      */
     public String showLoadingError() {
-        return INDENTATION + "Loading error! please try again" +
-                System.getProperty("line.separator");
+        return INDENTATION + "Loading error! please try again"
+                + System.getProperty("line.separator");
     }
 
 
@@ -89,7 +88,8 @@ public class Ui {
 
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
-        tasks.get(number).isDone = true;
+        //tasks.get(number).isDone = true;
+        tasks.get(number).markDone();
 
 
         str.append("Nice! I've marked this task as done:");
@@ -113,7 +113,8 @@ public class Ui {
 
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
-        tasks.get(number).isDone = false;
+        //tasks.get(number).isDone = false;
+        tasks.get(number).markUndone();
 
         str.append("Nice! I've marked this task as done:");
         str.append(System.getProperty("line.separator"));
@@ -141,10 +142,12 @@ public class Ui {
         str.append(System.getProperty("line.separator"));
 
         tasks.remove(index);
-        Task.taskNum--;
+        //Task.taskNum--;
+        //tasks.size();
         assert tasks.size() == originalSize - 1;
 
-        str.append(" Now you have ").append(Task.taskNum).append(" tasks in the list.");
+        //Task.taskNum
+        str.append(" Now you have ").append(tasks.size()).append(" tasks in the list.");
         str.append(System.getProperty("line.separator"));
         return str.toString();
     }

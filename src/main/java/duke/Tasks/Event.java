@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.TaskList;
+
 /**
  * Represents event tasks
  */
@@ -15,8 +17,8 @@ public class Event extends Task {
      * @param to deadline for the task
      * @param isInFile check whether is in the saving file
      */
-    public Event(String description, String from, String to, boolean isInFile) {
-        super(description);
+    public Event(String description, String from, String to, boolean isInFile, TaskList tasks, boolean isDone) {
+        super(description, isDone);
         this.from = from;
         this.to = to;
 
@@ -24,7 +26,7 @@ public class Event extends Task {
             System.out.println(" " + "____________________________________________________________");
             System.out.println(" Got it. I've added this task:");
             System.out.println("  " + toString());
-            System.out.println(" Now you have " + taskNum + " tasks in the list.");
+            System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
             System.out.println(" " + "____________________________________________________________");
         }
     }
@@ -45,7 +47,7 @@ public class Event extends Task {
      */
     @Override
     public String file() {
-        String status = isDone ? "1" : "0";
-        return "E | " + status + " | " + getDescription() + " | " + this.from + " | " + this.to;
+        //String status = isDone ? "1" : "0";
+        return "E | " + super.file() + " | " + this.from + " | " + this.to;
     }
 }

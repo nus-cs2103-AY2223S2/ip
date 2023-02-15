@@ -42,20 +42,22 @@ public class Storage {
                 String[] commandInFile = data.split(" \\| ");
                 boolean isDoneInFile = commandInFile[1].equals("1");
                 if (commandInFile[0].equals("T")) {
-                    task = new Todo(commandInFile[2], true);
-                    task.isDone = isDoneInFile;
+                    task = new Todo(commandInFile[2], true, tasks, isDoneInFile);
+                    //task.isDone = isDoneInFile;
                     tasks.add(task);
                 } else if (commandInFile[0].equals("D")) {
-                    task = new Deadline(commandInFile[2], commandInFile[3], true);
-                    task.isDone = isDoneInFile;
+                    task = new Deadline(commandInFile[2], commandInFile[3],
+                            true, tasks, isDoneInFile);
+                    //task.isDone = isDoneInFile;
                     tasks.add(task);
                 } else if (commandInFile[0].equals("E")) {
-                    task = new Event(commandInFile[2], commandInFile[3], commandInFile[4], true);
-                    task.isDone = isDoneInFile;
+                    task = new Event(commandInFile[2], commandInFile[3],
+                            commandInFile[4], true, tasks, isDoneInFile);
+                    //task.isDone = isDoneInFile;
                     tasks.add(task);
                 }
                 if (task != null) {
-                    task.isDone = isDoneInFile;
+                    //task.isDone = isDoneInFile;
                 }
             }
         } catch (FileNotFoundException e) {

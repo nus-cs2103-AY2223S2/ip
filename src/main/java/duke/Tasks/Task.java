@@ -4,18 +4,18 @@ package duke.tasks;
  * Represents Task class
  */
 public class Task {
-    public static int taskNum;
+    private static int taskNum;
     private String description;
-    public boolean isDone;
+    private boolean isDone;
 
 
     /**
      * Task constructor
      * @param description task name
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
         taskNum++;
     }
 
@@ -25,6 +25,20 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : "   ");
+    }
+
+    /**
+     * Mark as done
+     */
+    public void markDone() {
+        this.isDone = true;
+    }
+
+    /**
+     * Mark as undone
+     */
+    public void markUndone() {
+        this.isDone = false;
     }
 
     /**
@@ -49,7 +63,7 @@ public class Task {
      * @return String
      */
     public String file() {
-        String status = isDone ? "1" : "0";
-        return " | " + status + " | " + getDescription();
+        String status = this.isDone ? "1" : "0";
+        return status + " | " + getDescription();
     }
 }
