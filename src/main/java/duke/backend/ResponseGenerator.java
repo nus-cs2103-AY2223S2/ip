@@ -53,7 +53,7 @@ public class ResponseGenerator {
      * @param e The duke.exception.DukeException to be printed.
      * @return the message to be printed.
      */
-    public static String printDukeException(DukeException e) {
+    public static String dukeExceptionMessage(DukeException e) {
         return e.getMessage();
     }
 
