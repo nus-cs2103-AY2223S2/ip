@@ -1,8 +1,9 @@
 package lele.task;
 
+import java.util.ArrayList;
+
 import lele.exception.NoPreviousCommandException;
 
-import java.util.ArrayList;
 
 /**
  * The place to store all the user's task, and perform
@@ -12,6 +13,28 @@ import java.util.ArrayList;
 public class TaskList {
     protected ArrayList<Task> list; // Always contain the most updated list
     private ArrayList<ArrayList<Task>> cache;
+
+    /**
+     * If the user does not have existing date, a new task list is created.
+     * Thus, this constructor will be used instead of the previous one.
+     */
+    public TaskList() {
+        this.list = new ArrayList<>();
+        this.cache = new ArrayList<>();
+        this.cache.add(new ArrayList<>());
+    }
+
+    /**
+     * Loads the task list provided from storage.
+     *
+     * @param storageList Loaded with tasks from storage
+     */
+    public TaskList(ArrayList<Task> storageList) {
+        this.list = storageList;
+        this.cache = new ArrayList<>();
+        // Adds the original task list in the storage to the cache
+        this.cache.add(storageList);
+    }
 
     /**
      * Important note: Cache the list FIRST before committing to any
@@ -53,27 +76,6 @@ public class TaskList {
         if (this.cache.size() > 1) {
             this.cache.subList(versionToBeRestoredTo + 1, this.cache.size()).clear();
         }
-    }
-    /**
-     * Loads the task list provided from storage.
-     *
-     * @param storageList Loaded with tasks from storage
-     */
-    public TaskList(ArrayList<Task> storageList) {
-        this.list = storageList;
-        this.cache = new ArrayList<>();
-        // Adds the original task list in the storage to the cache
-        this.cache.add(storageList);
-    }
-
-    /**
-     * If the user does not have existing date, a new task list is created.
-     * Thus, this constructor will be used instead of the previous one.
-     */
-    public TaskList() {
-        this.list = new ArrayList<>();
-        this.cache = new ArrayList<>();
-        this.cache.add(new ArrayList<>());
     }
 
     /**

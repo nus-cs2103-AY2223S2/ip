@@ -1,6 +1,16 @@
 package lele.parser;
 
-import lele.command.*;
+import lele.command.ByeCommand;
+import lele.command.Command;
+import lele.command.DeadlineCommand;
+import lele.command.DeleteCommand;
+import lele.command.EventCommand;
+import lele.command.FindCommand;
+import lele.command.ListCommand;
+import lele.command.MarkCommand;
+import lele.command.TodoCommand;
+import lele.command.UndoCommand;
+import lele.command.UnmarkCommand;
 import lele.exception.EmptyDescException;
 import lele.exception.UnknownCommandException;
 import lele.task.Deadline;
@@ -123,7 +133,7 @@ public class Parser {
                 return new FindCommand(inputArr[1]);
             case UNDO:
                 if (inputArr.length == 1) {
-                    throw new EmptyDescException("OOPS!!! You need to specify how many CRUD versions you want to undo!");
+                    throw new EmptyDescException("OOPS!!! Please specify how many CRUD versions you want to undo!");
                 }
                 int index = Integer.parseInt(inputArr[1]);
                 return new UndoCommand(index);

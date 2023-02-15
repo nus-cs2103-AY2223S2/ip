@@ -191,7 +191,13 @@ public class Ui {
         return sb.toString();
     }
 
-    public String printUndo(TaskList taskList, int index) {
+    /**
+     * Prints the response to an Undo command.
+     *
+     * @param index Versions to be undone by.
+     * @return String representation of response.
+     */
+    public String printUndo(int index) {
         if (index <= 0) {
             return "Please give a number more than 0!";
         } else if (index == 1) {

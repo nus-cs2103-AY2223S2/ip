@@ -1,11 +1,9 @@
 package lele.command;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import lele.exception.NoPreviousCommandException;
 import lele.storage.Storage;
-import lele.task.Task;
 import lele.task.TaskList;
 import lele.ui.Ui;
 
@@ -33,7 +31,7 @@ public class UndoCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, NoPreviousCommandException {
         taskList.restorePreviousList(this.index);
         storage.updateStorage(taskList);
-        return ui.printUndo(taskList, index);
+        return ui.printUndo(index);
     }
 
     /**
