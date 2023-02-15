@@ -21,6 +21,7 @@ public class UwUke extends Application {
     private static TaskList tasks;
 
     private Scene scene;
+    private AnchorPane anchorPane;
     private static Stage stage;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -28,16 +29,20 @@ public class UwUke extends Application {
 
     @Override
     public void start(Stage stage) {
+        initialiseHelperClasses();
+        loadMainWindow();
+        UwUke.stage = stage;
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void loadMainWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(UwUke.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            scene = new Scene(ap);
-            initialiseHelperClasses();
-            UwUke.stage = stage;
-            stage.setScene(scene);
-            stage.show();
+            anchorPane = fxmlLoader.load();
+            scene = new Scene(anchorPane);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed to load MainWindow.fxml");
         }
     }
 
