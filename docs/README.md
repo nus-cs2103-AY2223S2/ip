@@ -176,7 +176,7 @@ Expected outcome:
 
 Duke marks the task as undone and prints it.
 
-[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/find.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/find.png)
+[![find.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/find.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/find.png)
 
 ### `update [index] [new description]` - Update a task description
 
@@ -184,7 +184,6 @@ Updates the description of the task at the index given.
 
 When updating task description, just type the new description after the index.
 Names including any of the fields (/by, /from and /event) will be treated as an update of date and time.
-The date and time field is not necessary when updating task description.
 
 Example of usage:
 
@@ -194,7 +193,7 @@ Expected outcome:
 
 Updates the task description.
 
-[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatedes.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatedes.png)
+[![updatedes.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatedes.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatedes.png)
 
 ### `update [index] /by [dd/MM/yyyy hhmm]` - Update a Deadline task deadline
 
@@ -213,7 +212,7 @@ Expected outcome:
 
 Updates Deadline task's deadline.
 
-[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateby.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateby.png)
+[![updateby.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateby.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateby.png)
 
 ### `update [index] /from [dd/MM/yyyy hhmm]` - Update an Event task starting date and time
 
@@ -233,7 +232,7 @@ Expected outcome:
 
 Updates Event task's starting date and time.
 
-[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatefrom.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatefrom.png)
+[![updatefrom.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatefrom.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatefrom.png)
 
 ### `update [index] /to [dd/MM/yyyy hhmm]` - Update an Event task ending date and time
 
@@ -253,7 +252,7 @@ Expected outcome:
 
 Updates Event task's ending date and time.
 
-[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateto.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateto.png)
+[![updateto.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateto.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateto.png)
 
 ### `bye` - Exit Duke
 
@@ -267,4 +266,4 @@ Expected outcome:
 
 Duke replies with a goodbye message and then waits for a second before closing the window.
 
-[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/bye.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/bye.png)
+[![bye.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/bye.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/bye.png)
