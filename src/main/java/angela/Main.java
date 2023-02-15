@@ -6,6 +6,7 @@ import angela.exception.AngelaException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Angela");
+            stage.getIcons().add(new Image("/images/Angela.png"));
 
             angela = new Angela("data/angela.txt");
             fxmlLoader.<MainWindow>getController().setAngela(angela);
