@@ -9,7 +9,8 @@ public enum Request {
     MARK("mark"),
     UNMARK("unmark"),
     LIST("list"),
-    DELETE("delete");
+    DELETE("delete"),
+    HELP("help");
 
     private String name;
 
