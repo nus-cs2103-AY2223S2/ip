@@ -45,9 +45,9 @@ public class Parser {
         ToDo tdItem = new ToDo(description);
         listOfTasks.addTask(tdItem);
         assert listOfTasks.size() == lenBefore + 1;
-        return String.format("\tGot it. I have added this task:\n"
+        return String.format("\tGot it. I have added this mission:\n"
                              + "\t%s\n"
-                             + "\tNow you have %d tasks in the list.\n" + Ui.Underline(),tdItem.toString(), listOfTasks.size());
+                             + "\tNow you have %d missions in the listOfTasks.\n" + Ui.Underline(),tdItem.toString(), listOfTasks.size());
     }
 
     /**
@@ -63,9 +63,9 @@ public class Parser {
         int lenBefore = listOfTasks.size();
         listOfTasks.addTask(evItem);
         assert listOfTasks.size() == lenBefore + 1;
-        return String.format("\tGot it. I have added this task:\n "
+        return String.format("\tGot it. I have added this mission:\n "
                              + "\t%s\n"
-                             + "\tNow you have %d tasks in the listOfTasks.\n" + Ui.Underline(), evItem.toString(), listOfTasks.size());
+                             + "\tNow you have %d missions in the listOfTasks.\n" + Ui.Underline(), evItem.toString(), listOfTasks.size());
     }
 
     /**
@@ -81,9 +81,9 @@ public class Parser {
         Deadline dlItem = new Deadline(description, doneBy);
         listOfTasks.addTask(dlItem);
         assert listOfTasks.size() == lenBefore + 1;
-        return String.format("\tGot it. I have added this task:\n "
+        return String.format("\tGot it. I have added this mission:\n "
                              + "\t%s\n"
-                             + "\tYou have %d tasks in the listOfTasks.\n" + Ui.Underline(), dlItem.toString(), listOfTasks.size());
+                             + "\tYou have %d missions in the listOfTasks.\n" + Ui.Underline(), dlItem.toString(), listOfTasks.size());
     }
 
     /**
@@ -100,7 +100,7 @@ public class Parser {
         assert listOfTasks.size() == lenBefore - 1;
         return String.format( "\n%s\n"
                              + "\t%s removed\n"
-                             + "\tNow you have %d tasks in the listOfTasks.\n" + Ui.Underline() , Ui.showDeleteMessage(), removed.toString(), listOfTasks.size());
+                             + "\tNow you have %d missions in the listOfTasks.\n" + Ui.Underline() , Ui.showDeleteMessage(), removed.toString(), listOfTasks.size());
 
     }
     public static String findTask(TaskList listOfTasks, String wantedTask) {
@@ -114,12 +114,12 @@ public class Parser {
             }
         }
         if (containingList.size() == 0) {
-            return String.format("\tSorry you have no matching tasks.\n");
+            return String.format("\tSorry you have no matching missions.\n");
         }
         for (int i = 1; i <= containingList.size(); i++) {
             filteredTasks += String.format("\t" + i + ".%s" ,containingList.get(i - 1));
         }
-        return String.format("\tHere are the matching tasks in your listOfTasks:\n" + filteredTasks + "\n" + Ui.Underline());
+        return String.format("\tHere are the matching missions in your listOfTasks:\n" + filteredTasks + "\n" + Ui.Underline());
 
     }
     public static boolean getFlag() {

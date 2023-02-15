@@ -47,8 +47,8 @@ public class TaskList {
      */
     public String markDone(int i) {
         System.out.println(Ui.Underline());
-        arrayListOfTasks.get(i ).markDone();
-        return String.format("%s\n" + "\t%s\n" + Ui.Underline(), Ui.markedMessage(),arrayListOfTasks.get(i).toString());
+        arrayListOfTasks.get(i - 1).markDone();
+        return String.format("%s\n" + "\t%s\n" + Ui.Underline(), Ui.markedMessage(),arrayListOfTasks.get(i - 1).toString());
     }
 
     /**

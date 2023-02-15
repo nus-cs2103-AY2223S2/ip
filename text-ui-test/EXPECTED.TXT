@@ -8,26 +8,26 @@ Welcome! I'm Duke.
 What can I do for you?
 ________________________________________________________
 ________________________________________________________
-	Got it. I have added this task:
+	Got it. I have added this mission:
     [T][ ] eat
-	Now you have 1 tasks in the list.
+	Now you have 1 missions in the listOfTasks.
 ________________________________________________________
 ________________________________________________________
-	Nice! I've marked this task as done:
+	Nice! I've marked this mission as done:
 	[T][X] eat
 ________________________________________________________
 ________________________________________________________
-	Got it. I have added this task:
+	Got it. I have added this mission:
  	[D][ ] return book (by: Jan 01 2010 0600 PM)
-	You have 2 tasks in the listOfTasks.
+	You have 2 missions in the listOfTasks.
 ________________________________________________________
 ________________________________________________________
 	Got it. I have added this task:
     [E][ ] meeting (from:Jan 01 2010 1800 PM to:0700 PM)
-	Now you have 3 tasks in the list.
+	Now you have 3 missions in the listOfTasks.
 ________________________________________________________
 ________________________________________________________
-	Here are the tasks in your list:
+	Here are the missions in your listOfTasks:
 	1.[T][X] eat
 	2.[D][ ] return (by: Jan 01 2010 0600 PM)
 	3.[E][ ] meeting (from:Jan 01 2010 1800 PM to:0700 PM)
