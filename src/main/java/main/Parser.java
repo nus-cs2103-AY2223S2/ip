@@ -35,17 +35,17 @@ public class Parser {
             } else if (command.startsWith("find")) {
                 return new FindCommand(command.substring(5));
             } else if (command.startsWith("mark")) {
-                if (isInvalidNumeric(command.substring(5))) {
+                if (isInvalidNumber(command.substring(5))) {
                     throw new DukeException("Please enter a valid number");
                 }
                 return new MarkDoneCommand(Integer.parseInt(command.substring(5)));
             } else if (command.startsWith("unmark")) {
-                if (isInvalidNumeric(command.substring(7))) {
+                if (isInvalidNumber(command.substring(7))) {
                     throw new DukeException("Please enter a valid number");
                 }
                 return new MarkNotDoneCommand(Integer.parseInt(command.substring(7)));
             } else if (command.startsWith("delete")) {
-                if (isInvalidNumeric(command.substring(7))) {
+                if (isInvalidNumber(command.substring(7))) {
                     throw new DukeException("Please enter a valid number");
                 }
                 return new DeleteTaskCommand(Integer.parseInt(command.substring(7)));
@@ -88,13 +88,13 @@ public class Parser {
         return false;
     }
 
-    private static boolean isInvalidNumeric(String s) {
+    private static boolean isInvalidNumber(String s) {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private static LocalDate convertStringToDate(String time) {

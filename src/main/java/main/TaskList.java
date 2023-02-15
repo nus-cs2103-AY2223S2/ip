@@ -48,7 +48,7 @@ public class TaskList {
      */
 
     public Task markTaskDone(int index) {
-        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
         Task t = arrOfTasks.get(index);
         t.markDone();
         return t;
@@ -61,7 +61,7 @@ public class TaskList {
      * @return Task that is set as not done.
      */
     public Task markTaskNotDone(int index) {
-        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
         Task t = arrOfTasks.get(index);
         t.markNotDone();
         return t;
@@ -74,7 +74,7 @@ public class TaskList {
      * @return Task that is deleted.
      */
     public Task deleteTask(int index) {
-        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
         Task t = arrOfTasks.get(index);
         arrOfTasks.remove(index);
         return t;
@@ -87,7 +87,7 @@ public class TaskList {
      * @return Task at index.
      */
     public Task getTaskAtIndex(int index) {
-        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
         return arrOfTasks.get(index);
     }
 

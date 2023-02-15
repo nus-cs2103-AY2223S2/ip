@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 public class DialogBox extends HBox {
     @FXML
@@ -30,6 +31,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 
