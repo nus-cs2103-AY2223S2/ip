@@ -37,4 +37,15 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+    /**
+     * This method is called when the application should stop.
+     * There is a forced delay to allow the user to read the exit message before the window closes.
+     *
+     * @throws InterruptedException If the delay is interrupted.
+     */
+    @Override
+    public void stop() throws InterruptedException {
+        Thread.sleep(750);
+    }
 }

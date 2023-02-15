@@ -59,9 +59,11 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Cbot's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     *
+     * @throws InterruptedException If the exit delay is interrupted.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = cbot.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -72,8 +74,9 @@ public class MainWindow extends AnchorPane {
         exitCheck();
     }
 
-    private void exitCheck() {
+    private void exitCheck() throws InterruptedException {
         if (cbot.isBye()) {
+            Thread.sleep(250);
             Platform.exit();
         }
     }
