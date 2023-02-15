@@ -1,0 +1,7 @@
+todo borrow book
+list
+deadline return book /by 2/10/2000 1800
+event project meeting /from 2/12/2000 1500 /to 2/13/2000 1600
+todo borrow dildo
+list
+delete 3

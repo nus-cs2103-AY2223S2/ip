@@ -1,0 +1,4 @@
+[T][] | borrow book|
+[D][] | return book |(2000-10-02T18:00)
+[E][] | project meeting |(2000-12-02T15:00 : 2000-12-02T15:00)
+[T][] | borrow dildo|
