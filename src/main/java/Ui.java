@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Ui {
-  private String welcomeMessage = "Hey Buddy, I'm Duke\nWhat can I do for you?";
-  private String goodbyeMessage = "Goodbye friend. Hope to see you again soon!";
+  private final String WELCOME_MESSAGE = "Hey Buddy, I'm Duke\nWhat can I do for you?";
+  private final String GOODBYE_MESSAGE = "Goodbye friend. Hope to see you again soon!";
   private Scanner scanner;
 
   public Ui() {
@@ -10,7 +10,7 @@ public class Ui {
   }
 
   public void welcomeUser() {
-    System.out.println(welcomeMessage);
+    System.out.println(WELCOME_MESSAGE);
   }
 
   public String readInput() {
@@ -21,7 +21,7 @@ public class Ui {
 
   public void goodbyeUser() {
     System.out.println("======DUKE======");
-    System.out.println(goodbyeMessage);
+    System.out.println(GOODBYE_MESSAGE);
     this.scanner.close();
     System.out.println("================");
   }

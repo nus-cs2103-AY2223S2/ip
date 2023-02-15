@@ -51,7 +51,8 @@ public class Duke {
                     response = this.tasks.todo(textInput);
                     this.storage.writeTxt(tasks);             
                 } catch (DukeException e) {
-                    System.out.println(e);
+                    response = e.toString();
+                    this.ui.printResponse(response);
                     continue;
                 }
             }

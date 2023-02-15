@@ -46,14 +46,9 @@ public class Storage {
   }
 
   public void writeTxt(TaskList list) {
-    ArrayList<Task> taskList = list.get();
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        int length = taskList.size();
-        for (int i = 0; i < length; i++) {
-            String item = taskList.get(i).toData();
-            writer.write(item);
-            writer.newLine();
-        }
+        String toWrite = list.toWrite();
+        writer.write(toWrite);
     } catch (IOException e) {
         System.out.println("An error occurred while writing to the file: " + e.getMessage());
     }

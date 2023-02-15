@@ -7,10 +7,6 @@ public class TaskList {
     this.taskList = taskList;
   }
 
-  public ArrayList<Task> get() {
-     return this.taskList;
-  }
-
   public String delete(String textInput) {
       int i = Integer.parseInt(textInput.substring(7));
       Task t = taskList.get(i - 1);
@@ -63,11 +59,30 @@ public class TaskList {
       return output;
   }
 
+  public String toWrite() {
+    int length = this.taskList.size();
+    String result = "";
+      for (int i = 0; i < length; i++) {
+          String item = taskList.get(i).toData();
+          if (i == length - 1) {
+            result += item;
+            continue;
+          }
+          result += item + "\n";
+      }
+    return result;
+  }
+
   @Override
   public String toString() {
     String result = "";
     for (int i = 0; i < taskList.size(); i++) {
       String description = taskList.get(i).toString();
+      if (i == taskList.size() - 1) {
+        String output = String.format("%d. %s", i + 1, description);
+        result += output;
+        continue;
+      }
       String output = String.format("%d. %s", i + 1, description + "\n");
       result += output;
     }
