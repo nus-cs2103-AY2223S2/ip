@@ -102,7 +102,6 @@ public class Command {
         } catch (DukeException e) {
             commandResponse = String.format("%s\n", e);
         }
-        System.out.println(commandResponse);
         return commandResponse;
     }
 
