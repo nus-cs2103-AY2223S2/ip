@@ -120,7 +120,7 @@ Kirabot autosaves your task list for you! The save file can be accessed in the s
 
 ### Manual manipulation of savefile
 
-If you wanted to, you can manually alter the data of the savefile. However, keep in mind that a corrupted savefile will be overwritten.
+If you wanted to, you can manually alter the data of the savefile. However, keep in mind that a corrupted savefile will be **overwritten**.
 
 The savefile is a csv file, where each line is a task. The format is as shown:
 ```
