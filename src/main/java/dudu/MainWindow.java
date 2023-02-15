@@ -30,6 +30,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    // //@@author huanghao1998-reused
+    // Solution below adapted from "https://github.com/hansstanley/ip/blob/master/src/main/java/jarvis/ui/layout/MainWindow.java"
     public void setDudu(Dudu dudu) {
         this.dudu = dudu;
         this.userInput.setText("Hi");
