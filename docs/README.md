@@ -216,7 +216,7 @@ bella ciao
 |   2   |    [Add a Deadline Task](#add-a-deadline)     |         `deadline <description> /by <due date>`         |           `deadline homework /by 2023-02-17 2359`            |
 |   3   |         [Add an Event](#add-an-event)         | `event <description> /from <start date> /to <end date>` | `event internship /from 2023-05-08 0800 /to 2023-07-28 1800` |
 |   4   | [Find Task by Keyword](#find-task-by-keyword) |                    `find <keyword>`                     |                        `find CS2103T`                        |
-|   5   |       [View Task List](#view-task-list)       |                         `list`                          |                           `list`                             |
+|   5   |       [View Task List](#view-task-list)       |                         `list`                          |                            `list`                            |
 |   6   |    [Mark Task as Done](#mark-task-as-done)    |                     `mark <index>`                      |                           `mark 5`                           |
 |   7   |  [Mark Task as Undone](#mark-task-as-undone)  |                    `unmark <index>`                     |                          `unmark 5`                          |
 |   8   |        [Delete a Task](#delete-a-task)        |                    `delete <index>`                     |                          `delete 5`                          |
