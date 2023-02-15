@@ -78,4 +78,17 @@ public class Task{
         this.isDone = false;
         System.out.println("OK, I've marked this task as not done yet:\n"+ this);
     }
+
+    public static void delete(Task task) {
+        Task.actions -= 1;
+        Task.tasks.remove(task);
+        task.printDelete();
+
+    }
+    public void printDelete() {
+        System.out.println("Noted. I've removed this task: \n" + this);
+        System.out.println("Now you have " + Task.actions + " tasks in the list");
+    }
+
+
 }

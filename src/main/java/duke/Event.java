@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * This is a class for Event action
  */
-import duke.Task;
+
 public class Event extends Task {
     protected String from;
     protected String to;
@@ -19,17 +19,18 @@ public class Event extends Task {
      */
     public Event(String description, String date)  {
         super(description);
-        String[] fromandto = date.split("/");
-        this.from =  fromandto[0];
+        String[] fromAndTo = date.split("/");
+        this.from =  fromAndTo[0];
         this.from = from.replaceAll("from ", "");
         this.from = this.from.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         this.start = LocalDateTime.parse(this.from, formatter);
         this.date = date;
-        this.to = fromandto[1];
+        this.to = fromAndTo[1];
         this.to = to.replaceAll("to","");
         this.end = LocalDateTime.parse(this.to, formatter);
         Task.actions += 1;
+
     }
 
     /**
@@ -53,4 +54,20 @@ public class Event extends Task {
         return String.format("event || %s || %s || %s", super.toSaveString(), this.description, date);
     }
 
+    /**
+     * Print string representation when event is added to list
+     */
+    public void toPrintEventString() {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(this);
+        System.out.println("Now you have " + Task.actions + " tasks in the list");
+    }
+
+    /**
+     * Adds event into tasklist
+     */
+    public void handleEvent() {
+        this.toPrintEventString();
+        Task.tasks.add(this);
+    }
 }
