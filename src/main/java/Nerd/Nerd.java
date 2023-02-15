@@ -29,9 +29,9 @@ public class Nerd {
         storage = new Storage(filePath);
         try {
             storage.connect();
-            list = new TaskList(storage);
+            this.list = new TaskList(storage);
         } catch (Exception e) {
-            ui.printError(e.getMessage());
+            this.list = new TaskList();
         }
     }
 

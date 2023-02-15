@@ -11,7 +11,7 @@ import Nerd.storage.Storage;
  */
 public class TaskList {
     protected Storage storage;
-    ArrayList<Task> list = new ArrayList<>();
+    private ArrayList<Task> list;
 
     /**
      * Instantiates a TaskList Object that keeps track of the Tasks.
@@ -20,9 +20,17 @@ public class TaskList {
      */
     public TaskList(Storage storage) throws NerdException, FileNotFoundException {
         this.storage = storage;
+        this.list = new ArrayList<>(100);
         if (!storage.load(this)) {
             throw new NerdException("Sorry! I have detected weird inputs in the commands");
         }
+    }
+
+    /**
+     * Instantiates a TaskList Object that keeps track of the Tasks.
+     */
+    public TaskList() {
+        this.list = new ArrayList<>(100);
     }
 
     public void addTask(Task t) {

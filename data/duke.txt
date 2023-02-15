@@ -1,7 +1,0 @@
-T | 1 | read book
-D | 0 | return book | 2019-10-18
-D | 1 | project meeting | 2019-10-17
-T | 0 | join sports club
-E | 0 | book event | 2019-10-15 | 2019-10-16
-D | 0 | sell book  | 2019-12-12
-D | 0 | do cs2103  | 2023-02-19

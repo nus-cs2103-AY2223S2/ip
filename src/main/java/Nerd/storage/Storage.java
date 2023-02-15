@@ -56,17 +56,20 @@ public class Storage {
             }
         }
         return true;
-
     }
 
     /**
-     * Saves the current TaskList to the file.
+     * Saves the current TaskList to the file. Creates the file if file does not exist.
      *
      * @param list A TaskList object.
      * @throws IOException When file cannot be written
      */
     public void save(TaskList list) throws IOException{
         assert list != null : "Cannot save data from a non existing tasklist";
+        File directory = new File("data");
+        if (directory.exists() == false) {
+            directory.mkdirs();
+        }
         FileWriter myWriter = new FileWriter(file);
         for (int i = 0; i < list.getSize(); i++) {
             String line = list.getTask(i).toSave();
