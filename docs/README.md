@@ -5,13 +5,11 @@
 2. Managing Deadlines and Events with dates
 3. Reminders 
 4. Find tasks 
-5. list all the task currently in the Nerdbot
+5. list all the tasks
 
 ### Feature 1: task management
 * Add a task to the Nerdbot through the todo, deadline or event command.
-* Each task has a description. 
 * Each task can be marked or unmarked.
-* The NerdBot will notify the user whenever a task is added, deleted, marked or unmarked.
 
 ### Feature 2: Deadlines and Events
 * Add deadlines where a date is specified as the deadline of the task.
@@ -20,8 +18,6 @@
 
 ### Feature 3: Reminders
 * Make use of the reminder command to search for any deadlines and events within the specified days from your current date.
-* Dates are in the format YYYY-MM-DD.
-* The Nerdbot will display the tasks that are within the day range.
 
 ### Feature 4: Find tasks
 * Make use of the find command to search for any task description.
@@ -29,12 +25,10 @@
 
 ### Feature 5: list all tasks
 * Make use of the list command to display all current tasks managed by the Nerdbot.
-* The Nerdbot will display each task indexed from 1 and whether they are marked.
-* Deadline and Events will show their respective dates.
 
 ## Usage
 
-### todo - Adds a todo task
+### todo [description] - Adds a todo task
 Creates a new todo task that is saved to the Nerdbot
 
 Example of usage: 
@@ -51,7 +45,7 @@ Now you have 1 tasks in the list.
   
 ```
 
-### deadline - Adds a deadline task
+### deadline [description] /by [date] - Adds a deadline task
 Creates a new deadline task that is saved to the Nerdbot. Date format is YYYY-MM-DD.
 
 Example of usage: 
@@ -68,7 +62,7 @@ Now you have 1 tasks in the list.
 Be sure to finish these tasks before the deadline!
 ```
 
-### event - Adds an event task
+### event [description] /from [date] /to [date] - Adds an event task
 Creates a new event task that is saved to the Nerdbot. Date format is YYYY-MM-DD.
 
 Example of usage: 
@@ -82,4 +76,34 @@ Nerdbot will add the event "book event" to the list of managed tasks.
 Sure!, I've added the following event:
   [E][] book event (from: Dec 25 2023 to: Dec 27 2023)
 Now you have 1 tasks in the list.
+```
+
+### list - View all current tasks
+View all current tasks currently managed by Nerdbot.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+Nerdbot will show all tasks currently managed.
+
+```
+Here is the current list:
+ 1.[T][] buy book
+```
+
+### remind - View all current tasks
+View all current tasks currently managed by Nerdbot.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+Nerdbot will show all tasks currently managed.
+
+```
+Here is the current list:
+ 1.[T][] buy book
 ```
