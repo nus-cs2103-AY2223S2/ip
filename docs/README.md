@@ -1,3 +1,4 @@
+<a id="top"></a>
 # User Guide
 - Quickstart
 - Features
@@ -30,6 +31,8 @@ Displays a list of task you have created. You can also view the task number acco
 
 ![List image](UG_Images/list.png)
 
+
+[Back to top](#top)
 ## Todo
 Command format: `todo [NAME]`
 
@@ -39,6 +42,8 @@ Example: `todo borrow book: Harry Potter and the Goblet of Fire`
 
 ![todo image](UG_Images/todo.png)
 
+
+[Back to top](#top)
 ## Deadline
 Command format: `deadline [NAME] /by [DATE] [TIME]`
 
@@ -48,6 +53,8 @@ Example: `deadline Finish CSXXXX Assignment /by 24/03/2023 2359`
 
 ![deadline image](UG_Images/deadline.png)
 
+
+[Back to top](#top)
 ## Event
 Command format: `event [NAME] /from [DATE/TIME] /to [DATE/TIME]`
 
@@ -57,6 +64,8 @@ Example: `event Go for Standard Chartered 42.195km run /from Mon 2pm /to 5pm
 
 ![event image](UG_Images/event.png)
 
+
+[Back to top](#top)
 ## Mark
 Command format: `mark [NUMBER]`
 
@@ -67,6 +76,7 @@ Example: `mark 1`
 ![mark image](UG_Images/mark.png)
 
 
+[Back to top](#top)
 ## Unmark
 Command format: `unmark [NUMBER]`
 
@@ -76,6 +86,8 @@ Example: `unmark 1`
 
 ![unmark image](UG_Images/unmark.png)
 
+
+[Back to top](#top)
 ## Delete
 Command format: `delete [NUMBER]`
 
@@ -85,6 +97,8 @@ Example: `delete 1`
 
 ![delete image](UG_Images/delete.png)
 
+
+[Back to top](#top)
 ## Find
 Command format: `find [KEYWORD]`
 
@@ -94,6 +108,8 @@ Example: `find book`
 
 ![find image](UG_Images/find.png)
 
+
+[Back to top](#top)
 ## Undo
 Command format: `undo [NUMBER]`
 
@@ -104,6 +120,8 @@ Example: `undo 2`
 
 ![undo image](UG_Images/undo.png)
 
+
+[Back to top](#top)
 ## Bye
 Command format: `bye`
 
@@ -111,6 +129,8 @@ Say goodbye to Lele and exit the program.
 
 ![bye image](UG_Images/bye.png)
 
+
+[Back to top](#top)
 ## Summary
 |Command|Format|
 |-------|------|
@@ -124,3 +144,6 @@ Say goodbye to Lele and exit the program.
 |find|`find [KEYWORD]`|
 |undo|`undo [NUMBER]`
 |bye|`bye`|
+
+
+[Back to top](#top)
