@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,6 +11,12 @@ import Tasks.Deadline;
 import Tasks.Event;
 import Tasks.Task;
 import Tasks.ToDo;
+
+import java.util.List;
+import java.util.Scanner;
+import exceptions.IncorrectArgumentException;
+import exceptions.CluckException;
+
 
 public class Duke {
     private static final String MAKE_DEADLINE = "deadline";
