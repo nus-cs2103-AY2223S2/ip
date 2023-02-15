@@ -1,8 +1,10 @@
+package duke;
+
 public class Duke {
 
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
     private Parser parser;
 
     public Duke(String filePath) {
@@ -17,36 +19,36 @@ public class Duke {
         
         while (true) {
             String textInput = this.ui.readInput();
-            String response = "";
+            String response;
             this.parser = new Parser();
             this.parser.parse(textInput);
 
-            if (this.parser.action == "bye") {
+            if (this.parser.action.equals("bye")) {
                 this.ui.goodbyeUser();
                 return;
             }
 
-            else if (this.parser.action == "list") {
+            else if (this.parser.action.equals("list")) {
                 this.ui.listTasks(tasks);
                 continue;
             }
 
-            else if (this.parser.action == "delete") {
+            else if (this.parser.action.equals("delete")) {
                 response = this.tasks.delete(textInput);
                 this.storage.writeTxt(tasks);
             }
 
-            else if (this.parser.action == "mark") {
+            else if (this.parser.action.equals("mark")) {
                 response = this.tasks.mark(textInput);
                 this.storage.writeTxt(tasks);
             }
 
-            else if (this.parser.action == "unmark") {
+            else if (this.parser.action.equals("unmark")) {
                 response = this.tasks.unmark(textInput);
                 this.storage.writeTxt(tasks);
             }
 
-            else if (this.parser.action == "todo") {
+            else if (this.parser.action.equals("todo")) {
                 try {
                     response = this.tasks.todo(textInput);
                     this.storage.writeTxt(tasks);             
@@ -57,12 +59,12 @@ public class Duke {
                 }
             }
 
-            else if (this.parser.action == "deadline") {
+            else if (this.parser.action.equals("deadline")) {
                 response = this.tasks.deadline(textInput);
                 this.storage.writeTxt(tasks);
             }
 
-            else if (this.parser.action == "event") {
+            else if (this.parser.action.equals("event")) {
                 response = this.tasks.event(textInput);
                 this.storage.writeTxt(tasks);
             }
@@ -76,6 +78,6 @@ public class Duke {
     }
     
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke(System.getProperty("user.dir") + "/data/duke.txt").run();
     }
 }
