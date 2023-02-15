@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 class Parser {
@@ -25,6 +26,8 @@ class Parser {
         } else if (input.equals("list")) {
             return returnList(taskList);
         } else if (input.startsWith("mark")) {
+            return sortTaskList();
+        } else if (input.startsWith("mark")) {
             return mark(input);
         } else if (input.startsWith("unmark")) {
             return unmark(input);
@@ -44,6 +47,11 @@ class Parser {
         }
         out.append(String.format("%d. %s", size, taskList.get(size - 1)));
         return out.toString();
+    }
+
+    String sortTaskList() {
+        Collections.sort(taskList);
+        return returnList(taskList);
     }
 
     String setStatus(String input, Boolean isDone) {

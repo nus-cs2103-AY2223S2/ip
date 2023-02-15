@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Task entered by the user.
  */
-abstract class Task {
+abstract class Task implements Comparable<Task> {
     private String taskDescription;
     private Boolean isDone = false;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
@@ -48,6 +48,11 @@ abstract class Task {
 
     DateTimeFormatter getFormatter() {
         return formatter;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return this.getTaskDescription().compareTo(task.getTaskDescription());
     }
 
     @Override
