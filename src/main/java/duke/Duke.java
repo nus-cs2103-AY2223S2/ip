@@ -34,23 +34,18 @@ public class Duke {
             if (this.parser.action.equals("bye")) {
                 this.ui.goodbyeUser();
                 return;
-
             } else if (this.parser.action.equals("list")) {
                 this.ui.listTasks(tasks);
                 continue;
-
             } else if (this.parser.action.equals("delete")) {
                 response = this.tasks.delete(textInput);
                 this.storage.writeTxt(tasks);
-
             } else if (this.parser.action.equals("mark")) {
                 response = this.tasks.mark(textInput);
                 this.storage.writeTxt(tasks);
-
             } else if (this.parser.action.equals("unmark")) {
                 response = this.tasks.unmark(textInput);
                 this.storage.writeTxt(tasks);
-
             } else if (this.parser.action.equals("find")) {
                 try {
                     response = this.tasks.find(textInput);
@@ -59,7 +54,6 @@ public class Duke {
                     this.ui.printResponse(response);
                     continue;
                 }
-
             } else if (this.parser.action.equals("todo")) {
                 try {
                     response = this.tasks.todo(textInput);
@@ -69,15 +63,12 @@ public class Duke {
                     this.ui.printResponse(response);
                     continue;
                 }
-
             } else if (this.parser.action.equals("deadline")) {
                 response = this.tasks.deadline(textInput);
                 this.storage.writeTxt(tasks);
-
             } else if (this.parser.action.equals("event")) {
                 response = this.tasks.event(textInput);
                 this.storage.writeTxt(tasks);
-
             } else {
                 response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
