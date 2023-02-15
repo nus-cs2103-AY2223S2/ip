@@ -4,6 +4,23 @@ package duke.parser;
  * Represents the type of Command when there is a String user input.
  */
 public class Query {
+
+    /**
+     * List of possible query types from the user's input.
+     */
+    public enum QueryType {
+        list,
+        mark,
+        unmark,
+        delete,
+        todo,
+        deadline,
+        event,
+        invalid,
+        find,
+        exit
+    }
+
     protected String input;
 
     public Query(String input) {
@@ -26,11 +43,11 @@ public class Query {
     }
 
     /**
-     * Returns an enumeration of QueryType that tells what type of command the input is.
+     * Returns a QueryType that determines what type of command the input is.
      * @param input String to check.
      * @return A QueryType indicating the type of command.
      */
-    static QueryType queryType(String input) {
+    static QueryType getQueryType(String input) {
         if (input.equals("list")) {
             return QueryType.list;
         } else if (input.equals("bye")) {

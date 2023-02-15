@@ -69,8 +69,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(file);
             for (Task cur : taskList.getTasks()) {
                 String curText = cur.saveTask();
-                fileWriter.write(curText);
-                fileWriter.write('\n');
+                fileWriter.write(curText + '\n');
             }
             fileWriter.close();
         } catch (IOException err) {

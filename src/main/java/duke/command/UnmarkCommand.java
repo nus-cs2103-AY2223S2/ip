@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 import duke.ui.Ui;
 
 public class UnmarkCommand extends Command {
@@ -15,17 +14,13 @@ public class UnmarkCommand extends Command {
     }
 
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task cur = taskList.getTasks().get(index-1);
-        if (cur.getStatusIcon().equals(" ")) {
+        Task task = taskList.getTasks().get(index-1);
+        if (task.getStatusIcon().equals(" ")) {
             return "This task is already unmarked!";
         } else {
             taskList.unmarkTask(index);
-            String taskString = "[" + cur.getStatusIcon() + "] " + cur.getDescription();
-            if (!(cur instanceof Todo)) {
-                taskString += " (" + cur.getDuedateString() + ")";
             }
-            return "OK, I've marked this task as not done yet: \n" + taskString;
-        }
+        return "OK, I've marked this task as not done yet: \n" + taskList.formatTaskToString(task);
     }
 
     public boolean isExit() {

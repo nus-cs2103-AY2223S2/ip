@@ -9,8 +9,6 @@ public abstract class Task {
     protected String duedateString;
     protected char symbol;
 
-
-
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -31,6 +29,7 @@ public abstract class Task {
     public char getSymbol() {
         return symbol;
     }
+
     /**
      * Gets the status icon of a task to indicate if it is marked or not.
      * @return An "X" or " " if it is marked or unmarked respectively.

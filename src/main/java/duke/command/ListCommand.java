@@ -13,14 +13,9 @@ public class ListCommand extends Command {
             return "You have no tasks due!";
         } else {
             String response = "Here are the tasks you have due!\n";
-            for (Task cur : taskList.getTasks()) {
-                String taskString = taskList.getTasks().indexOf(cur) + 1 + ". [" + cur.getSymbol() + "] "
-                        + "[" + cur.getStatusIcon() + "] " + cur.getDescription();
-                if (!(cur instanceof Todo)) {
-                    taskString +=  " (" + cur.getDuedateString() + ")";
-                }
-                    response += taskString + "\n";
-                }
+            for (Task task : taskList.getTasks()) {
+                response += taskList.formatTaskToString(task) + "\n";
+            }
             return response;
         }
     }
