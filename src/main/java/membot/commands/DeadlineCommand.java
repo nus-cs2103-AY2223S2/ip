@@ -16,7 +16,7 @@ public class DeadlineCommand extends Command {
      * @param input User input into the application.
      * @param ui A Printable object used for UI display.
      */
-    public DeadlineCommand(String input, Printable ui) {
+    protected DeadlineCommand(String input, Printable ui) {
         super(input, ui);
     }
 

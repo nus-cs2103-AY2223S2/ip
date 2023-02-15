@@ -14,7 +14,7 @@ public class UndoneCommand extends Command {
      * @param input User input into the application.
      * @param ui A Printable object used for UI display.
      */
-    public UndoneCommand(String input, Printable ui) {
+    protected UndoneCommand(String input, Printable ui) {
         super(input, ui);
     }
 

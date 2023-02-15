@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
      * @param input User input into the application.
      * @param ui A Printable object used for UI display.
      */
-    public TodoCommand(String input, Printable ui) {
+    protected TodoCommand(String input, Printable ui) {
         super(input, ui);
     }
 

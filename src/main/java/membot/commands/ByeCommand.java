@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
      *
      * @param ui A Printable object used for UI display.
      */
-    public ByeCommand(Printable ui, Membot membot) {
+    protected ByeCommand(Printable ui, Membot membot) {
         super(ui);
 
         this.isExit = true;

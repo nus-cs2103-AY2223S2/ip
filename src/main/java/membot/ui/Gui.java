@@ -32,7 +32,7 @@ public class Gui extends Application {
             stage.setResizable(false);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setMembot(
-                    new Membot(new UiPrinter(fxmlLoader.<MainWindow>getController().getPrinter())));
+                    new Membot(new UiPrinter(fxmlLoader.<MainWindow>getController().getPrinter()), false));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
