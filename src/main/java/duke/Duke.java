@@ -19,7 +19,7 @@ public class Duke {
     public Duke()  {
         ui = new Ui();
         ui.displayLogo();
-        storage = new Storage("/Users/kristen/Documents/NUS/CS2109S/ip/data/duke.txt");
+        storage = new Storage();
         parser = new Parser();
     }
 

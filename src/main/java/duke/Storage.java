@@ -17,10 +17,7 @@ import java.io.IOException;
 
 
 public class Storage {
-    protected String filePath;
-    public Storage(String pathName) {
-        filePath = pathName;
-    }
+    private static final String FILE_PATH = "./data/duke.txt";
 
     /**
      * Update the text file with the given list
@@ -28,7 +25,7 @@ public class Storage {
      */
     public void updateFile(ArrayList<Task> entireList) throws FileNotFoundException {
         try {
-            PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));
+            PrintWriter pw = new PrintWriter(new FileOutputStream(FILE_PATH));
 
             for (int i = 0; i < entireList.size(); i++) {
                 Task task = entireList.get(i);
@@ -39,11 +36,11 @@ public class Storage {
                 String name = task.getItem();
                 String note = task.getNote();
 
-
                 if (type.equals("D")){
                     String time = task.getTime();
 
                     pw.println(type + "-" + isMark + "-" + name + "-" + time + "-" + note);
+
                 } else if (type.equals("E")) {
                     String time = task.getTime();
                     String startEnd [] = time.split("-", 2);
@@ -68,7 +65,7 @@ public class Storage {
 
     public ArrayList<Task> loadFile(ArrayList<Task> entireList, Ui ui) throws FileNotFoundException {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            BufferedReader br = new BufferedReader(new FileReader(FILE_PATH));
             String oneline;
 
             while ( (oneline = br.readLine() )!= null) {
@@ -132,7 +129,7 @@ public class Storage {
      * @throws ParseException
      */
     public Deadline convertStringToDeadline(String lines[]) throws ParseException {
-        String nameTime[] = lines[2].split("-", 2);
+        String nameTime[] = lines[2].split("-", 3);
 
         SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date date = converterDate.parse(nameTime[1]);
@@ -148,7 +145,7 @@ public class Storage {
      * @throws ParseException
      */
     public Event convertStringToEvent(String lines[]) throws ParseException {
-        String nameStartEnd[] = lines[2].split("-", 3);
+        String nameStartEnd[] = lines[2].split("-", 4);
         SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date date1 = converterDate.parse(nameStartEnd[1]);
         Date date2 = converterDate.parse(nameStartEnd[2]);

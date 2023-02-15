@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Platform;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -55,6 +57,10 @@ public class Ui {
     public void setMainWindow(MainWindow mainWindow) {
         assert mainWindow != null: "MainWindow not found in Ui";
         this.mainWindow = mainWindow;
+    }
+
+    public void exitProgram(){
+        Platform.exit();
     }
 }
 
