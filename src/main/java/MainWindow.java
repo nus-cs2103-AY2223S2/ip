@@ -37,7 +37,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setTaskmaster(UWUTaskmaster d) {
+    /**
+     * Sets the TaskMaster object to use for the application.
+     *
+     * @param d the TaskMaster object to use
+     */
+    public void setTaskMaster(UWUTaskmaster d) {
         taskmaster = d;
     }
 
@@ -51,7 +56,7 @@ public class MainWindow extends AnchorPane {
         String response = taskmaster.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, taskMasterImage)
+                DialogBox.getTaskmasterDialog(response, taskMasterImage)
         );
         userInput.clear();
     }

@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -23,7 +22,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
 
     private DialogBox(String text, Image img, boolean isUser) {
         try {
@@ -46,12 +44,7 @@ public class DialogBox extends HBox {
         } else {
             circleCrop = new Circle(25, 25, 25);
         }
-
-
-
-
         displayPicture.setClip(circleCrop);
-
     }
 
     /**
@@ -64,11 +57,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Returns a new DialogBox object displaying user input.
+     *
+     * @param text the text to display in the DialogBox
+     * @param img the image to display in the DialogBox
+     * @return a new DialogBox object that displays user input
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, true);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Returns a new DialogBox object displaying TaskMaster's response.
+     *
+     * @param text the text to display in the DialogBox
+     * @param img the image to display in the DialogBox
+     * @return a new DialogBox object that displays TaskMaster's response
+     */
+    public static DialogBox getTaskmasterDialog(String text, Image img) {
         var db = new DialogBox(text, img, false);
         db.flip();
         return db;
