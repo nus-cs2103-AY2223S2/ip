@@ -1,10 +1,10 @@
 todo ### false ### cs3230 hw
-deadline ### true ### dashboard ### 2023-01-25
-event ### false ### climbing camp ### 2023-01-26 ### 2023-01-28
+deadline ### false ### dashboard ### 2023-01-25
+event ### true ### climbing camp ### 2023-01-26 ### 2023-01-28
 todo ### true ### cs2103 Level-10
 deadline ### true ### passport renewal ### 2023-01-27
 deadline ### false ### proj1 ### 2023-02-15
-deadline ### false ### proj2 ### 2023-02-17
+deadline ### true ### proj2 ### 2023-02-17
 deadline ### false ### proj3 ### 2023-02-18
 event ### false ### event1 ### 2023-02-17 ### 2023-02-25
-event ### false ### Nepal Mountain ### 2023-05-08 ### 2023-05-28
+deadline ### true ### task ### 2023-02-15
