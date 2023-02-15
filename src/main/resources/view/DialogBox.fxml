@@ -2,14 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.effect.DropShadow?>
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308"  maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308"  maxWidth="1.7976931348623157E308"
+         prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171"
+         xmlns:fx="http://javafx.com/fxml/1">
+
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" style="-fx-text-fill: #FFFFFF; -fx-background-color: indianred" textOverrun="CLIP" >
+        <Label fx:id="dialog" text="Label" wrapText="true" style="-fx-text-fill: #FFFFFF;
+        -fx-background-color: indianred" textOverrun="CLIP" >
+
             <padding>
                 <Insets left="10.0" right="10.0" top="10.0" bottom="10.0"/>
             </padding>
