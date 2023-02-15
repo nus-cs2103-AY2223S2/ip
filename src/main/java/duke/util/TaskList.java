@@ -75,6 +75,16 @@ public class TaskList {
     }
 
     /**
+     * Method to replace a task from the task list, allowing for editing
+     *
+     * @param index Index of the task to be deleted
+     * @param task Task to replace
+     */
+    public void replaceTask(int index, Task task) {
+        taskList.set(index, task);
+    }
+
+    /**
      * Returns the String of the marked task.
      *
      * @param index Index of the task to be marked as done.

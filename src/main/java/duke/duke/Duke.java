@@ -80,7 +80,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         Parser parser = new Parser();
-        String[] processedLines = input.split(" ");
+        String[] processedLines = input.split(" ", 2);
         Command c;
         try {
             c = parser.parse(processedLines);
