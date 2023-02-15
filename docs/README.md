@@ -1,4 +1,16 @@
-Catbot (CB) is a desktop app for keeping track of various tasks, supporting those with deadlines as well as time windows.
+CatBot (CB) is a desktop app for keeping track of various tasks, supporting those with deadlines as well as time windows.
+
+# Quick Start
+
+1. Ensure you have Java `11` or above installed on your Computer.
+
+2. Download the latest `Duke.jar` from here.
+
+3. Copy the file to the folder you want to use as the _home folder_ for your CatBot.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Duke.jar` command to run the application.
+A GUI similar to the below should appear in a few seconds. Now you can start using CatBot!
+![GUI](https://creationsv2.github.io/ip/Ui.png)
 
 # User Guide
 
@@ -21,8 +33,8 @@ Supports easy update of tasks without needing for a re-entry
 ### `todo TASK_DESC` - Adds a task
 
 This adds a task with no timeframe specified.
-Replace TASK_DESC with the description of the task.
-TASK_DESC cannot be empty.
+Replace `TASK_DESC` with the description of the task.
+`TASK_DESC` cannot be empty.
 
 Example of usage: 
 
@@ -41,12 +53,12 @@ Now you have 1 tasks in the list.
 ### `deadline TASK_DESC /by END_DATETIME` - Adds a task with a deadline
 
 This adds a task with no timeframe specified.
-Replace TASK_DESC with the description of the task.
-TASK_DESC cannot be empty.
+Replace `TASK_DESC` with the description of the task.
+`TASK_DESC` cannot be empty.
 
-Replace END_DATETIME with the date and time of the deadline.
-END_DATETIME cannot be empty.
-END_DATETIME has to be in the format `YYYY-MM-DD HHMM`.
+Replace `END_DATETIME` with the date and time of the deadline.
+`END_DATETIME` cannot be empty.
+`END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
 
 Example of usage: 
 
@@ -65,16 +77,16 @@ Now you have 1 tasks in the list.
 ### `event TASK_DESC /from START_DATETIME /to END_DATETIME` - Adds an event with a timeframe
 
 This adds a task with no timeframe specified.
-Replace TASK_DESC with the description of the task.
-TASK_DESC cannot be empty.
+Replace `TASK_DESC` with the description of the task.
+`TASK_DESC` cannot be empty.
 
-Replace START_DATETIME with the date and time of the deadline.
-START_DATETIME cannot be empty.
-START_DATETIME has to be in the format `YYYY-MM-DD HHMM`.
+Replace `START_DATETIME` with the date and time of the deadline.
+`START_DATETIME` cannot be empty.
+`START_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
 
-Replace END_DATETIME with the date and time of the deadline.
-END_DATETIME cannot be empty.
-END_DATETIME has to be in the format `YYYY-MM-DD HHMM`.
+Replace `END_DATETIME` with the date and time of the deadline.
+`END_DATETIME` cannot be empty.
+`END_DATETIME` has to be in the format `YYYY-MM-DD HHMM`.
 
 Example of usage: 
 
@@ -107,4 +119,59 @@ Here are the tasks in your list:
 1. [T][ ] Pet cat
 2. [D][ ] Buy Catfood (By Feb 1 2023 2:00 PM)
 3. [E][ ] Walk cat (From: Feb 1 2023 2:00 PM to: Feb 1 2023 5:00 PM)
+```
+
+### `mark TASK_ID` - Marks a task as done
+
+Marks a task specified by `TASK_ID` as done.
+`TASK_ID` can be viewed using the `list` command above.
+
+Example of usage: 
+
+`mark 1`
+
+Expected outcome:
+
+All tasks will be listed.
+
+```
+Nice! I've marked this task as done:
+	[T][X] Pet cat
+```
+
+### `unmark TASK_ID` - Marks a task as undone
+
+Marks a task specified by `TASK_ID` as undone.
+`TASK_ID` can be viewed using the `list` command above.
+
+Example of usage: 
+
+`unmark 1`
+
+Expected outcome:
+
+All tasks will be listed.
+
+```
+Meow-k! I've marked this task as not done yet:
+	[T][ ] Pet cat
+```
+
+### `UPDATE TASK_ID TASK_DESCRIPTION` - Updates the description of a task
+
+Updates the description of a task specified by `TASK_ID` to the new description specified by `TASK_DESCRIPTION`.
+`TASK_ID` can be viewed using the `list` command above.
+`TASK_DESCRIPTION` cannot be empty.
+
+Example of usage: 
+
+`update 1 Pet dog`
+
+Expected outcome:
+
+All tasks will be listed.
+
+```
+Meow-k. I've updated the description of this task:
+	[T][ ] Pet dog
 ```

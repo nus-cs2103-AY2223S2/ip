@@ -1,2 +1,2 @@
-T/0/todo Buy catnip
+T/0/Pet dog
 D/0/Bring cat to vet/2023-02-15 1000
