@@ -22,7 +22,7 @@ public class MainWindow extends AnchorPane {
 
     private Genie genie;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/img_5.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/genie.jpeg"));
 
     @FXML

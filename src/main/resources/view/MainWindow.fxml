@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="genie.main.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: A0C3D2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="genie.main.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="5.0" layoutY="556.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="307.0" style="-fx-background-radius: 20;" />
-        <Button fx:id="sendButton" layoutX="317.0" layoutY="556.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-radius: 20; -fx-background-color: #818d92;" text="Send" textFill="WHITE">
+        <TextField fx:id="userInput" layoutX="11.0" layoutY="557.0" onAction="#handleUserInput" prefHeight="38.0" prefWidth="298.0" styleClass="user-textField" />
+        <Button fx:id="sendButton" layoutX="316.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="38.0" prefWidth="74.0" style="-fx-background-radius: 20; -fx-background-color: #818d92;" text="Send" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>

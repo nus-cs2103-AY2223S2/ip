@@ -74,7 +74,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
         //reuse https://github.com/nus-cs2103-AY2122S1/ip/commit/431922e7e6dad589d4fef90b2ec80aa3bb4a627e#diff-4bd115e01415644e457f638c000e6faa69119532fcf434e710c78868d688b943
-        //dialogBox.label.getStyleClass().add("user-label");
+        dialogBox.dialog.getStyleClass().add("user-dialog");
         return dialogBox;
     }
 
