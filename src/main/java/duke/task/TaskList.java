@@ -196,9 +196,9 @@ public class TaskList {
      */
     public String find(String search) {
         String finalTasksString = "";
-        for (int i = 0; i < tasks.size(); i ++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
-            if(currentTask.toString().trim().contains(search)) {
+            if (currentTask.toString().trim().contains(search)) {
                 finalTasksString += (i + 1) + "." + tasks.get(i) + "\n";
             }
         }

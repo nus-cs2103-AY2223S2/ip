@@ -135,7 +135,7 @@ public class Parser {
         } else if (parsedInput[1].isEmpty()) {
             throw new DukeException("description of todo is missing ^.~");
         }
-            return parsedInput[1];
+        return parsedInput[1];
     }
 
     /**

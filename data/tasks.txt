@@ -2,4 +2,3 @@ T | 0 | debug
 T | 0 | submit hw
 T | 0 | nails
 D | 0 | do something  | 2023-02-14
-E | 0 | get dressed  | today  | tonight

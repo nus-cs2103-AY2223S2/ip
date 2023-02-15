@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * Run.
+     * Runs Duke for CLI
      */
     public void run() {
         ui.showWelcome();
@@ -52,6 +52,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns response from Duke for a specific user input
+     * @param input
+     * @return String of response from Duke for input
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

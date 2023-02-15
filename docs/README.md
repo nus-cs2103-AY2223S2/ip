@@ -4,7 +4,8 @@ Welcome to EggDuke! He might be a bit lazy like you, but he helps you keep track
 
 
 ![EggDuke](https://i0.wp.com/yumetwinsblog.wpcomstaging.com/wp-content/uploads/2021/12/df97f2deda4e833a45247d07c15b0c136a57937e_465804506659e4c3d02445c894cf5bf8fdadc08a_gu_announcement_01.jpg?fit=410%2C231&ssl=1)
-##Set-up instructions
+
+## Set-up instructions
 1. Start the Duke.jar file with the command `java -jar Duke.jar` in the directory where 
 you downloaded Duke.jar.
 2. Ensure jar has write and execute access in the current directory.
