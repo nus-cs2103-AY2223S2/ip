@@ -10,9 +10,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" styleClass="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="4.0" layoutY="557.0" onAction="#handleUserInput" prefHeight="39.0" prefWidth="315.0" promptText="Enter a command here" AnchorPane.bottomAnchor="3.0">
+        <TextField fx:id="userInput" layoutX="5.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="39.0" prefWidth="409.0" promptText="Enter a command here" AnchorPane.bottomAnchor="3.0">
          <font>
             <Font name="System Font" size="13.0" />
          </font>
@@ -26,7 +26,7 @@
                </color>
             </InnerShadow>
          </effect></TextField>
-        <Button fx:id="sendButton" alignment="CENTER" contentDisplay="CENTER" layoutX="321.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="38.0" prefWidth="76.0" text="Send" textAlignment="CENTER" textFill="#5088b5">
+        <Button fx:id="sendButton" alignment="CENTER" contentDisplay="CENTER" layoutX="420.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="38.0" prefWidth="76.0" text="Send" textAlignment="CENTER" textFill="#5088b5">
          <font>
             <Font name="Andale Mono" size="13.0" />
          </font>
@@ -40,9 +40,9 @@
                </color>
             </InnerShadow>
          </effect></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="555.0" prefWidth="400.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="555.0" prefWidth="500.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="560.0" prefWidth="390.0" />
+                <VBox fx:id="dialogContainer" prefHeight="560.0" prefWidth="484.0" />
             </content>
         </ScrollPane>
     </children>
