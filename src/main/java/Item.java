@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Item {
     private String name;
     private Boolean done;
