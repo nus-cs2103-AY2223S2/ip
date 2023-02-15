@@ -2,23 +2,24 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidCommandException;
-import duke.exception.DukeTaskArgumentException;
-import duke.exception.DukeMissingArgumentException;
 import duke.exception.DukeInvalidArgumentsException;
-
+import duke.exception.DukeMissingArgumentException;
+import duke.exception.DukeTaskArgumentException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-
-import duke.tasks.Task;
-import duke.tasks.Todo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 
+/**
+ * Functionality of Duke CLI Commands
+ */
 public class Command {
     private enum DukeCommand {
         BYE, LIST,
@@ -34,6 +35,12 @@ public class Command {
     private Ui ui;
     private TaskList list;
 
+    /**
+     * Initializes a Command object
+     *
+     * @param dukeQuery
+     * @param list
+     */
     public Command(String dukeQuery, TaskList list) {
         this.ui = new Ui();
         this.list = list;
@@ -47,35 +54,31 @@ public class Command {
         }
     }
 
-    public DukeCommand getCommand() {
-        return currCommand;
-    }
-
     public String executeCommand(TaskList list, String[] userInput) {
         try {
             switch (this.currCommand) {
-            case BYE :
+            case BYE:
                 commandResponse = this.ui.exitDisplay();
                 break;
-            case LIST :
+            case LIST:
                 commandResponse = this.ui.displayList(list);
                 break;
-            case MARK :
+            case MARK:
                 commandResponse = this.list.markComplete(userInput, list);
                 break;
-            case UNMARK :
+            case UNMARK:
                 commandResponse = this.list.markIncomplete(userInput, list);
                 break;
-            case TODO :
+            case TODO:
                 commandResponse = this.addTodo(userInput);
                 break;
-            case DEADLINE :
+            case DEADLINE:
                 commandResponse = this.addDeadline(userInput);
                 break;
-            case EVENT :
+            case EVENT:
                 commandResponse = this.addEvent(userInput);
                 break;
-            case DELETE :
+            case DELETE:
                 commandResponse = this.deleteTask(userInput);
                 break;
             case LISTDATE:
@@ -84,9 +87,9 @@ public class Command {
             case FIND:
                 commandResponse = this.findTasks(userInput);
                 break;
-            case FAIL :
+            case FAIL:
                 throw new DukeInvalidCommandException();
-            default :
+            default:
                 commandResponse = "Please try again !!";
             }
         } catch (DukeException e) {
@@ -96,7 +99,7 @@ public class Command {
         return commandResponse;
     }
 
-    private String addTodo(String[] userInput) throws DukeMissingArgumentException{
+    private String addTodo(String[] userInput) throws DukeMissingArgumentException {
         try {
             Todo todo = new Todo(userInput[1]);
             this.list.addTask(todo);
