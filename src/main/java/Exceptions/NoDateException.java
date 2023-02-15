@@ -3,7 +3,7 @@ package exceptions;
 /**
  * This class is used to throw an exception when there is no date.
  */
-public class NoDateException extends DukeException {
+public class NoDateException extends TaskGenieException {
     /**
      * Constructor for the NoDateException.
      * @param task The task that has no date.

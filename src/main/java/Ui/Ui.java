@@ -5,20 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import exceptions.DukeException;
+import exceptions.TaskGenieException;
 import tasks.Task;
 
 /**
- * This class handles the user interface of Duke.
+ * This class handles the user interface of TaskGenie.
  */
 public class Ui {
-    protected static final String LOGO = " ____        _        \n"
-                                        + "|  _ \\ _   _| | _____ \n"
-                                        + "| | | | | | | |/ / _ \\\n"
-                                        + "| |_| | |_| |   <  __/\n"
-                                        + "|____/ \\__,_|_|\\_\\___|\n";
     protected static final String OUTLINES = "____________________________________________________________";
-    protected static final String INTRODUCTION = "Hello! I'm Duke\nWhat can I do for you?";
+    protected static final String INTRODUCTION = "Hello! I'm TaskGenie\nWhat can I do for you?";
     protected static final String READ_LIST = "Here are the tasks in your list:";
     protected static final String FAREWELL = "Bye. Hope to see you again soon!";
     protected static final String DONE_TASK = "Nice! I've marked this task as done:";
@@ -74,10 +69,10 @@ public class Ui {
     }
 
     /**
-     * Print the error message under a DukeException.
-     * @param e A DukeException error.
+     * Print the error message under a TaskGenieException.
+     * @param e A TaskGenieException error.
      */
-    public void showError(DukeException e) {
+    public void showError(TaskGenieException e) {
         System.out.println(e.getMessage());
     }
 

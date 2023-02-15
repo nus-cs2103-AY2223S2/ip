@@ -1,9 +1,9 @@
-package duke;
+package taskgenie;
 
 import java.io.IOException;
 
 import commands.Command;
-import exceptions.DukeException;
+import exceptions.TaskGenieException;
 import parser.Parser;
 import storage.Storage;
 import storage.TaskList;
@@ -12,17 +12,17 @@ import ui.Ui;
 /**
  * This program allows you to keep track of your upcoming To Dos, Deadlines and Events.
  */
-public class Duke {
+public class TaskGenie {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
 
     /**
-     * Constructor for the Duke file
+     * Constructor for the TaskGenie file
      * @param filePath The file path given in String.
      * @throws IOException Throws if there is an I/O error.
      */
-    public Duke(String filePath) {
+    public TaskGenie(String filePath) {
         assert filePath != null;
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -30,15 +30,15 @@ public class Duke {
     }
 
     /**
-     * The program runs the Duke file with the correct file path.
+     * The program runs the TaskGenie file with the correct file path.
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new TaskGenie("data/taskGenie.txt").run();
     }
 
     /**
-     * Runs the Duke program.
+     * Runs the TaskGenie program.
      * @throws IOException Throws if there is an I/O error.
      */
     public void run() {
@@ -50,7 +50,7 @@ public class Duke {
                 Command c = Parser.parseCommand(fullCommand);
                 c.execute(tasks, ui, storage);
                 isContinueConvo = c.isContinueConvo();
-            } catch (DukeException e) {
+            } catch (TaskGenieException e) {
                 ui.showError(e);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -67,7 +67,7 @@ public class Duke {
         try {
             Command c = Parser.parseCommand(input);
             return c.execute(tasks, ui, storage);
-        } catch (DukeException e) {
+        } catch (TaskGenieException e) {
             return e.getMessage();
         }
     }

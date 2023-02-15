@@ -1,4 +1,4 @@
-package duke;
+package taskgenie;
 
 import java.io.IOException;
 
@@ -9,12 +9,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ui.MainWindow;
 /**
- * This program allows you to start the Duke application.
+ * This program allows you to start the TaskGenie application.
  */
 public class Main extends Application {
-    private Duke duke = new Duke("data/duke.txt");
+    private TaskGenie taskGenie = new TaskGenie("data/taskGenie.txt");
     public static void main(String[] args) throws IOException {
-        Duke.main(args);
+        TaskGenie.main(args);
     }
 
     @Override
@@ -24,9 +24,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.setTitle("TaskGenie");
             stage.setResizable(false);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setTaskGenie(taskGenie);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

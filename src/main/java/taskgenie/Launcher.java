@@ -1,4 +1,4 @@
-package duke;
+package taskgenie;
 
 import javafx.application.Application;
 

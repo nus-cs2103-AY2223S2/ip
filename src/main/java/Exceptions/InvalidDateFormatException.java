@@ -3,7 +3,7 @@ package exceptions;
 /**
  * This class is used to throw an exception when an the date given is not in the correct format.
  */
-public class InvalidDateFormatException extends DukeException {
+public class InvalidDateFormatException extends TaskGenieException {
     /**
      * Constructor for the InvalidDateFormatException.
      * @param err The error.

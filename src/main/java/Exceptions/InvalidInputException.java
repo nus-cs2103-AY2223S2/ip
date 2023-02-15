@@ -3,7 +3,7 @@ package exceptions;
 /**
  * This class is used to throw an exception when an unknown command is selected.
  */
-public class InvalidInputException extends DukeException {
+public class InvalidInputException extends TaskGenieException {
     /**
      * Constructor for the InvalidInputException.
      * @param err The error.

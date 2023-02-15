@@ -1,7 +1,6 @@
 package ui;
 
 import commands.EndCommand;
-import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -13,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import parser.Parser;
+import taskgenie.TaskGenie;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,10 +26,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private TaskGenie taskGenie;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image taskGenieImage = new Image(this.getClass().getResourceAsStream("/images/DaTaskGenie.png"));
 
 
     /**
@@ -39,25 +39,25 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.getIntroduction(), dukeImage)
+                DialogBox.getTaskGenieDialog(Ui.getIntroduction(), taskGenieImage)
         );
     }
 
-    public void setDuke(Duke d) {
-        this.duke = d;
+    public void setTaskGenie(TaskGenie d) {
+        this.taskGenie = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing TaskGenie's reply and
+     * then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = taskGenie.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getTaskGenieDialog(response, taskGenieImage)
         );
         userInput.clear();
         checkIfClosePlatform(input);
