@@ -3,7 +3,7 @@ Roody is a Java application that builds upon a Command-Line Interface to allow
 users to manage their tasks and displays them via a Graphical Interface.
 His bright personality comes from an 8-year-old dog named Roody.
 
-![Picture of Roody](/src/main/resources/images/DaRoody.png)
+![Picture of Roody](/src/main/resources/images/DaRoody%20-%20Docs.png)
 
 ## Requirements
 - Java 11
