@@ -34,12 +34,12 @@ public class AddDeadline extends Command{
      * The function splits the input using '/by', stores the split string in an arr of string, stores
      * the first index in the array as a task description, and creates a new Deadline object with the
      * description and due_by date
-     * 
-     * @param tasks a list of tasks
+     *  @param tasks a list of tasks
      * @param ui a reference to the UI object
      * @param storage a Storage object that contains the methods to save the tasks to a file
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try{
             //splits the input using '/by', stores the split string in an arr of string
             String[] arrOfStr = description.split("/by ");
@@ -55,10 +55,11 @@ public class AddDeadline extends Command{
             Deadline d = new Deadline(this.description, this.dueBy);
             tasks.add(d);
             storage.saveTaskList(tasks);
-            ui.printAddedTask(d, tasks.size());
+            return ui.printAddedTask(d, tasks.size());
 
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
+
     }
 }

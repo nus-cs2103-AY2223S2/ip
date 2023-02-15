@@ -31,17 +31,16 @@ public class AddTodo extends Command{
      * The function takes in a task list, a storage, and a ui, and then creates a new task object with
      * the description of the command, adds it to the task list, saves the task list, and prints the
      * added task
-     * 
-     * @param tasks the list of tasks
-     * @param storage Storage
+     *  @param tasks the list of tasks
      * @param ui the user interface
+     * @param storage Storage
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Todo t = new Todo(this.description);
         tasks.add(t);
         storage.saveTaskList(tasks);
-        ui.printAddedTask(t, tasks.size());
-        
- 
+        return ui.printAddedTask(t, tasks.size());
+
     }
 }

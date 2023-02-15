@@ -1,11 +1,11 @@
 package duke;
 import duke.commands.Command;
 
-public class Duke{
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
     // Loads up the previous tasks if there are any.
     public Duke(String filepath) {
         this.ui = new Ui();
@@ -40,12 +40,21 @@ public class Duke{
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+        return ui.printInvalidCommandError();
+    }
+}
+
+
 
     // public static void main(String[] args) {
     //     new Duke("data/tasks.txt").run();
     // }
     
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
-    }
-}
+
