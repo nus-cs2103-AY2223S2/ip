@@ -130,7 +130,7 @@ public class Task implements Serializable {
 
         public static Deadline createDeadline(String taskDesc, String cmd) throws MissingDeadlineException {
             try {
-                Deadline dl = new Deadline(taskDesc.split(" ", 2)[0], cmd);
+                Deadline dl = new Deadline(taskDesc.split("/by", 2)[0], cmd);
                 String[] dlDetails = taskDesc.split("/by", 2);
                 if (dlDetails.length < 2 || dlDetails[1].equals("")) {
                     throw new MissingDeadlineException();
@@ -169,7 +169,7 @@ public class Task implements Serializable {
         }
 
         public static Event createEvent(String taskDesc, String cmd) throws MissingTimelineException {
-            Event ev = new Event(taskDesc.split(" ", 2)[0], cmd);
+            Event ev = new Event(taskDesc.split("/from", 2)[0], cmd);
             String[] evDetails = taskDesc.split("/from", 2)[1].split("/to", 2);
             try {
                 System.out.println(Arrays.toString(evDetails));
