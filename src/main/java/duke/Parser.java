@@ -1,5 +1,6 @@
 package duke;
 
+import duke.Command.*;
 import duke.ui.Ui;
 
 /**
@@ -8,7 +9,7 @@ import duke.ui.Ui;
 public class Parser {
 
     /**
-     * Constructor for the Deadline class.
+     * Constructor for the Parser class.
      */
     public Parser() {
     }
@@ -85,5 +86,55 @@ public class Parser {
             commandResponse+="This command is not supported!";
         }
         return commandResponse;
+    }
+
+    public String runCommand2(String inputCommand, TaskList tasks, Storage storage, Ui ui) {
+        int selectedNum;
+        String commandParams;
+        String commandResponse;
+        commandParams = "";
+        commandResponse = "";
+
+        Command pendingCommand;
+
+        String[] inputCmdArr = inputCommand.split(" ");
+        switch(inputCmdArr[0]) {
+            case "list":
+                pendingCommand = new ListCommand();
+                break;
+            case "todo":
+                commandParams = inputCommand.split(" ", 2)[1];
+                pendingCommand = new ToDoCommand(commandParams);
+                break;
+            case "deadline":
+                commandParams = inputCommand.split(" ", 2)[1];
+                pendingCommand = new DeadlineCommand(commandParams);
+                break;
+            case "event":
+                commandParams = inputCommand.split(" ", 2)[1];
+                pendingCommand = new EventCommand(commandParams);
+                break;
+            case "mark":
+                commandParams = inputCommand.split(" ", 2)[1];
+                pendingCommand = new MarkCommand(commandParams);
+                break;
+            case "unmark":
+                commandParams = inputCommand.split(" ", 2)[1];
+                pendingCommand = new UnmarkCommand(commandParams);
+                break;
+            case "delete":
+                commandParams = inputCommand.split(" ", 2)[1];
+                pendingCommand = new DeleteCommand(commandParams);
+                break;
+            case "search":
+                commandParams = inputCommand.split(" ", 2)[1];
+                pendingCommand = new SearchCommand(commandParams);
+                break;
+            default:
+                pendingCommand = new ListCommand();
+                //add unsupporteed command here
+        }
+        return pendingCommand.executeCommand(storage, tasks);
+//        return commandResponse;
     }
 }
