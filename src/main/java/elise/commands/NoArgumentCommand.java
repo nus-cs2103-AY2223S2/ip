@@ -5,6 +5,9 @@ import elise.internal.Storage;
 import elise.internal.TaskList;
 import elise.internal.Ui;
 
+/**
+ * Command with no argument.
+ */
 public class NoArgumentCommand implements Command {
 
     private final int code;

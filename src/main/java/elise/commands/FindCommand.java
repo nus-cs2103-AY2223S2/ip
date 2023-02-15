@@ -5,7 +5,9 @@ import elise.internal.Storage;
 import elise.internal.TaskList;
 import elise.internal.Ui;
 
-// Command which finds specific task base on keyword.
+/**
+ * Command which finds specific task based on keyword.
+ */
 public class FindCommand implements Command {
     private final int code;
     private final String keyword;

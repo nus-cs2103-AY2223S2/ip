@@ -1,8 +1,5 @@
 package elise.internal;
 
-import elise.EliseException;
-import elise.tasks.Task;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -13,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import elise.EliseException;
+import elise.tasks.Task;
 
 /**
  * Storage class to manage file saved in hard disk.

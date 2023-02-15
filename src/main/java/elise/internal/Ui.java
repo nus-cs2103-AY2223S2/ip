@@ -1,11 +1,11 @@
 package elise.internal;
 
-import elise.EliseException;
-import elise.tasks.Task;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
+
+import elise.EliseException;
+import elise.tasks.Task;
 
 /**
  * User interface class to interact with the user.

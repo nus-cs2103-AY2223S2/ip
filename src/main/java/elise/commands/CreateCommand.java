@@ -1,13 +1,15 @@
 package elise.commands;
 
+import java.io.IOException;
+
 import elise.internal.Storage;
 import elise.internal.TaskList;
 import elise.internal.Ui;
 import elise.tasks.Task;
 
-import java.io.IOException;
-
-// Command which creates a task
+/**
+ * Command which creates a task
+ */
 public class CreateCommand implements Command {
 
     private final int code;

@@ -1,11 +1,11 @@
 package elise.commands;
 
+import java.io.IOException;
+
 import elise.EliseException;
 import elise.internal.Storage;
 import elise.internal.TaskList;
 import elise.internal.Ui;
-
-import java.io.IOException;
 
 /**
  * Abstraction of a command to be executed.

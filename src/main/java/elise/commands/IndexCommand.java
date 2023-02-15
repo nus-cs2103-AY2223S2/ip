@@ -1,14 +1,16 @@
 package elise.commands;
 
-import elise.*;
+import java.io.IOException;
+
+import elise.EliseException;
 import elise.internal.Storage;
 import elise.internal.TaskList;
 import elise.internal.Ui;
 import elise.tasks.Task;
 
-import java.io.IOException;
-
-// Command which involves finding a task by index and operating on it
+/**
+ * Command which involves finding a task by index and operating on it
+ */
 public class IndexCommand implements Command {
 
     private final int index;

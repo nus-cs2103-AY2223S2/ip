@@ -1,12 +1,12 @@
 package elise;
 
+import java.io.IOException;
+
 import elise.commands.Command;
 import elise.internal.Parser;
 import elise.internal.Storage;
 import elise.internal.TaskList;
 import elise.internal.Ui;
-
-import java.io.IOException;
 
 /**
  * Elise is a personal assistant chat-bot that help to keep track of various stuff.

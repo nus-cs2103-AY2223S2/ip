@@ -1,12 +1,12 @@
 package elise.internal;
 
+import java.util.List;
+
 import elise.EliseException;
 import elise.tasks.Deadline;
 import elise.tasks.Event;
 import elise.tasks.Task;
 import elise.tasks.ToDo;
-
-import java.util.List;
 
 /**
  * TaskList manages operations regarding Task.
