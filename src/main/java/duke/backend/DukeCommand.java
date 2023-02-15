@@ -85,51 +85,51 @@ public enum DukeCommand {
             int taskToDelete = Integer.parseInt(this.description) - 1;
             try {
                 Task deletedTask = taskList.deleteTask(taskToDelete);
-                String out = ResponseGenerator.printTaskDeleted(deletedTask, taskList.getSize());
+                String response = ResponseGenerator.printTaskDeleted(deletedTask, taskList.getSize());
                 storage.save(taskList);
-                return out;
+                return response;
             } catch (DukeException e) {
-                return ResponseGenerator.printDukeException(e);
+                return ResponseGenerator.dukeExceptionMessage(e);
             }
         case TODO:
             try {
                 ToDo todo = Parser.parseTodo(this.description);
                 taskList.addTask(todo);
-                String out = ResponseGenerator.printTaskAdded(todo, taskList.getSize());
+                String response = ResponseGenerator.printTaskAdded(todo, taskList.getSize());
                 storage.save(taskList);
-                return out;
+                return response;
             } catch (DukeException e) {
-                return ResponseGenerator.printDukeException(e);
+                return ResponseGenerator.dukeExceptionMessage(e);
             }
         case DEADLINE:
             try {
                 Deadline deadline = Parser.parseDeadline(this.description);
                 taskList.addTask(deadline);
-                String out = ResponseGenerator.printTaskAdded(deadline, taskList.getSize());
+                String response = ResponseGenerator.printTaskAdded(deadline, taskList.getSize());
                 storage.save(taskList);
-                return out;
+                return response;
             } catch (DukeException e) {
-                return ResponseGenerator.printDukeException(e);
+                return ResponseGenerator.dukeExceptionMessage(e);
             }
         case EVENT:
             try {
                 Event event = Parser.parseEvent(this.description);
                 taskList.addTask(event);
-                String out = ResponseGenerator.printTaskAdded(event, taskList.getSize());
+                String response = ResponseGenerator.printTaskAdded(event, taskList.getSize());
                 storage.save(taskList);
-                return out;
+                return response;
             } catch (DukeException e) {
-                return ResponseGenerator.printDukeException(e);
+                return ResponseGenerator.dukeExceptionMessage(e);
             }
         case MARK:
             try {
                 int taskToMark = Integer.parseInt(this.description) - 1;
                 Task markedTask = taskList.markTaskDone(taskToMark);
-                String out = ResponseGenerator.printTaskMarked(markedTask);
+                String response = ResponseGenerator.printTaskMarked(markedTask);
                 storage.save(taskList);
-                return out;
+                return response;
             } catch (DukeException e) {
-                return ResponseGenerator.printDukeException(e);
+                return ResponseGenerator.dukeExceptionMessage(e);
             }
         case FIND:
             TaskList foundTasks = taskList.findTasks(this.description);
@@ -138,11 +138,11 @@ public enum DukeCommand {
             try {
                 int taskToUnmark = Integer.parseInt(this.description) - 1;
                 Task unmarkedTask = taskList.markTaskUndone(taskToUnmark);
-                String out = ResponseGenerator.printTaskUnmarked(unmarkedTask);
+                String response = ResponseGenerator.printTaskUnmarked(unmarkedTask);
                 storage.save(taskList);
-                return out;
+                return response;
             } catch (DukeException e) {
-                return ResponseGenerator.printDukeException(e);
+                return ResponseGenerator.dukeExceptionMessage(e);
             }
         default:
             return "Invalid command!";
