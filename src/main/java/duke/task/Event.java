@@ -17,9 +17,9 @@ public class Event extends Task {
      * @param endDateInput end date of event
      */
     public Event(String taskString, LocalDate startDateInput, LocalDate endDateInput) {
-        super(taskString.substring(6, taskString.indexOf("/") - 1));
+        super(taskString.substring(6, taskString.indexOf("/from") - 1));
 
-        taskDescription = taskString.substring(6, taskString.indexOf("/") - 1);
+        taskDescription = taskString.substring(6, taskString.indexOf("/to") - 1);
         startDate = startDateInput;
         endDate = endDateInput;
     }

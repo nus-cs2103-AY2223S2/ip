@@ -8,12 +8,7 @@ public class HandleDelete {
     public HandleDelete() {
     }
 
-    public static String performDelete(String input, TaskList tasklist) throws WrongFormatException {
-        boolean correctFormat = input.equals("delete\\s\\d+");
-
-        if (!correctFormat) {
-            throw new WrongFormatException("delete 'Task Number'");
-        }
+    public static String performDelete(String input, TaskList tasklist) {
 
         try {
             int taskNum = Integer.parseInt(input.substring(7)) - 1;

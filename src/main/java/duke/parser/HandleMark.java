@@ -7,12 +7,7 @@ public class HandleMark {
     public HandleMark() {
     }
 
-    public static String performMark(String input, TaskList tasklist) throws WrongFormatException {
-        boolean correctFormat = input.equals("mark\\s\\d+");
-
-        if (!correctFormat) {
-            throw new WrongFormatException("mark 'Task Number'");
-        }
+    public static String performMark(String input, TaskList tasklist) {
 
         try {
             int taskNum = Integer.parseInt(input.substring(5)) - 1;

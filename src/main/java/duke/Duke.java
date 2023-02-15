@@ -20,7 +20,7 @@ public class Duke {
      * Constructor for Duke
      */
     public Duke() {
-        storage = new Storage();
+        storage = new Storage("./data/duke.txt");
         tasks = new TaskList();
         parser = new Parser(tasks);
         ui = new Ui(parser);

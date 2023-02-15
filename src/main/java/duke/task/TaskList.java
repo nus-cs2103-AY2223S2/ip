@@ -2,9 +2,6 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exception.EmptyDescriptionException;
-import duke.exception.WrongCommandException;
-
 /**
  * TaskList to contain all the tasks in a list
  */
@@ -16,6 +13,10 @@ public class TaskList {
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> tasklist) {
+        this.taskList = tasklist;
     }
 
 

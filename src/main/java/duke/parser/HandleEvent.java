@@ -13,10 +13,23 @@ public class HandleEvent {
     }
 
     public static String performEvent(String input, TaskList tasklist) throws WrongFormatException {
-        boolean correctStartDateFormat = input.contains(" /from ");
-        boolean correctEndDateFormat = input.contains(" /to ");
-        boolean startDateBeforeEndDate = input.split("/from")[0].length() < input.split("/to")[0].length();
-        boolean correctFormat = correctStartDateFormat && correctEndDateFormat && startDateBeforeEndDate;
+        boolean correctFormat;
+
+        try {
+            String taskCommand = input.substring(6);
+            String[] arrOfString = input.split("/from");
+            String[] arrOfStringDate = arrOfString[1].split("/to");
+            String trimmedTaskDes = arrOfString[0].trim();
+            String trimmedStartDate = arrOfStringDate[0].trim();
+            String trimmedEndDate = arrOfStringDate[1].trim();
+            correctFormat = trimmedTaskDes.length() > 0 && trimmedStartDate.length() > 0
+                    && trimmedEndDate.length() > 0;
+            if (!(input.contains (" /from ") && input.contains(" /to "))) {
+                correctFormat = false;
+            }
+        } catch (IndexOutOfBoundsException e){
+            correctFormat = false;
+        }
 
         if (!correctFormat) {
             throw new WrongFormatException("event 'Task description' /from 'start date' /to 'end date'");
@@ -24,8 +37,8 @@ public class HandleEvent {
 
         try {
             LocalDate startDate = LocalDate.parse(
-                    input.substring(input.indexOf("/") + 6,
-                            input.lastIndexOf("/") - 1));
+                    input.substring(input.indexOf("/from") + 6,
+                            input.lastIndexOf("/to") - 1));
             LocalDate endDate = LocalDate.parse(
                     input.substring(input.lastIndexOf("/") + 4));
             Task taskEvent = new Event(input, startDate, endDate);
