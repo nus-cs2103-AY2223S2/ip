@@ -1,4 +1,4 @@
-package duke;
+package duncan;
 
 import java.io.Serializable;
 import java.util.ArrayList;

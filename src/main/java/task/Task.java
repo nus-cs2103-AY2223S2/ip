@@ -1,6 +1,6 @@
 package task;
 
-import duke.Ui;
+import duncan.Ui;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package duke;
+package duncan;
 
 import command.*;
 import exception.DukeException;
@@ -9,21 +9,21 @@ import exception.EmptyDescriptionException;
  * Represents a parser object to parse input commands
  */
 public class Parser {
-    private DukeList dukelist;
-    private DukeList archive;
+    private DuncanList dukelist;
+    private DuncanList archive;
     private Storage storage;
     private Ui ui;
 
     /**
      * Creates a Parser object
      *
-     * @param dukeList a DukeList that can be accessed by this Parser
-     * @param archive a DukeList containing archived tasks
+     * @param duncanList a DuncanList that can be accessed by this Parser
+     * @param archive a DuncanList containing archived tasks
      * @param storage a Storage that is used to read and write
      * @param ui a Ui to handle interaction with the user
      */
-    public Parser (DukeList dukeList, DukeList archive, Storage storage , Ui ui) {
-        this.dukelist = dukeList;
+    public Parser (DuncanList duncanList, DuncanList archive, Storage storage , Ui ui) {
+        this.dukelist = duncanList;
         this.archive = archive;
         this.storage = storage;
         this.ui = ui;

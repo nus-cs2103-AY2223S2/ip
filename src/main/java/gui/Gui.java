@@ -1,6 +1,6 @@
 package gui;
 
-import duke.Duke;
+import duncan.Duncan;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -24,10 +24,10 @@ public class Gui extends Application {
     private javafx.scene.control.TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image duncan = new Image(this.getClass().getResourceAsStream("/images/Basketball.jpg"));
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Football.jpg"));
+    private Image duncanImage = new Image(this.getClass().getResourceAsStream("/images/Basketball.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Football.jpg"));
 
-    private Duke duke = new Duke("./data/duke.DukeList.ser", "./data/duke.DukeArchive.ser", this);
+    private Duncan duncan = new Duncan("./data/duncan.DuncanList.ser", "./data/duncan.DuncanArchive.ser", this);
 
 
     @Override
@@ -47,7 +47,7 @@ public class Gui extends Application {
         primaryStage.show();
 
         //2
-        primaryStage.setTitle("Duke");
+        primaryStage.setTitle("Duncan");
         primaryStage.setResizable(false);
         primaryStage.setMinHeight(600.0);
         primaryStage.setMinWidth(400.0);
@@ -57,7 +57,6 @@ public class Gui extends Application {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
@@ -84,8 +83,8 @@ public class Gui extends Application {
         });
 
         dialogContainer.getChildren().addAll(
-                new DialogBox(new Label("Waddup the name's Duncan. Sorry but Duke couldn't make it, had a pretty bad stomach-ache."), new ImageView(duncan)),
-                new DialogBox(new Label("So what do you need bro?"), new ImageView(duncan))
+                new DialogBox(new Label("Waddup the name's Duncan. Sorry but Duncan couldn't make it, had a pretty bad stomach-ache."), new ImageView(duncanImage)),
+                new DialogBox(new Label("So what do you need bro?"), new ImageView(duncanImage))
         );
     }
 
@@ -96,18 +95,18 @@ public class Gui extends Application {
         List<String> labelList = getResponse(inputText);
 
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user))
+                new DialogBox(userText, new ImageView(userImage))
         );
 
         dialogContainer.getChildren().addAll(labelList.stream()
-                .map((string -> new DialogBox(new Label(string), new ImageView(duncan))))
+                .map((string -> new DialogBox(new Label(string), new ImageView(duncanImage))))
                 .collect(Collectors.toList()));
         userInput.clear();
 
     }
 
     private List<String> getResponse(String input) {
-        return duke.run(input);
+        return duncan.run(input);
     }
 
     public void close() {

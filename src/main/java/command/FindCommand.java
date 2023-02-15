@@ -1,14 +1,14 @@
 package command;
 
-import duke.DukeList;
+import duncan.DuncanList;
 
 public class FindCommand extends Command{
     private String task;
-    private DukeList dukeList;
+    private DuncanList duncanList;
 
-    public FindCommand(String task, DukeList dukeList) {
+    public FindCommand(String task, DuncanList duncanList) {
         this.task = task;
-        this.dukeList = dukeList;
+        this.duncanList = duncanList;
     }
 
 
@@ -19,6 +19,6 @@ public class FindCommand extends Command{
 
     @Override
     public void execute() {
-        this.dukeList.findSubString(task);
+        this.duncanList.findSubString(task);
     }
 }

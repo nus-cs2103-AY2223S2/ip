@@ -1,4 +1,4 @@
-package duke;
+package duncan;
 
 import task.*;
 import exception.*;
@@ -7,11 +7,11 @@ import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DukeList implements Serializable {
+public class DuncanList implements Serializable {
     private ArrayList<Task> list = new ArrayList<>();
     private Ui ui;
 
-    public DukeList(Ui ui) {
+    public DuncanList(Ui ui) {
         this.ui = ui;
     }
 
@@ -51,7 +51,7 @@ public class DukeList implements Serializable {
     }
 
     public void findSubString(String subString) {
-        DukeList foundList = new DukeList(ui);
+        DuncanList foundList = new DuncanList(ui);
         for (Task task : this.list) {
             if (task.hasSubstring(subString)) {
                 foundList.add(task);
@@ -94,10 +94,10 @@ public class DukeList implements Serializable {
         throw new TaskOutOfRangeException("Yo, I can't find the task at " + i);
     }
 
-    public void transferTaskTo(DukeList dukeList, int taskNumber) {
+    public void transferTaskTo(DuncanList duncanList, int taskNumber) {
         try {
             Task transferringTask = this.delete(taskNumber);
-            dukeList.add(transferringTask);
+            duncanList.add(transferringTask);
             ui.addStatement("Ok, transferred " + transferringTask +".");
         } catch (Exception e) {
             ui.addStatement(e.getMessage());

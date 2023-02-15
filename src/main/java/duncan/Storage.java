@@ -1,4 +1,4 @@
-package duke;
+package duncan;
 
 import exception.UnknownFileTypeException;
 
@@ -25,13 +25,13 @@ public class Storage {
         }
     }
 
-    public void save(DukeList dukeList, String fileType) {
+    public void save(DuncanList duncanList, String fileType) {
         try {
             String path = getFilePath(fileType);
 
             FileOutputStream fos = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(dukeList);
+            oos.writeObject(duncanList);
             oos.flush();
             oos.close();
             fos.close();
@@ -45,7 +45,7 @@ public class Storage {
 
     }
 
-    public DukeList retrieve(String fileType) {
+    public DuncanList retrieve(String fileType) {
 
         try {
             String path = getFilePath(fileType);
@@ -54,9 +54,9 @@ public class Storage {
                 FileInputStream fis = new FileInputStream(path);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 try {
-                    DukeList savedDukeList = (DukeList) ois.readObject();
-                    savedDukeList.setUi(ui);
-                    return savedDukeList;
+                    DuncanList savedDuncanList = (DuncanList) ois.readObject();
+                    savedDuncanList.setUi(ui);
+                    return savedDuncanList;
 
                 } catch (IOException e) {
                     ui.addStatement("Creating new save");
@@ -76,6 +76,6 @@ public class Storage {
         } catch (UnknownFileTypeException e) {
             ui.addStatement(e.getMessage());
         }
-        return new DukeList(ui);
+        return new DuncanList(ui);
     }
 }

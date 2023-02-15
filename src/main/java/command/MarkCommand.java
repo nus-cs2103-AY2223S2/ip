@@ -1,25 +1,25 @@
 package command;
 
-import duke.DukeList;
-import duke.Ui;
+import duncan.DuncanList;
+import duncan.Ui;
 
 public class MarkCommand extends Command{
 
     private String task;
     private boolean marker;
-    private DukeList dukeList;
+    private DuncanList duncanList;
     private Ui ui;
 
 
-    public MarkCommand(String task, boolean marker, DukeList dukeList) {
+    public MarkCommand(String task, boolean marker, DuncanList duncanList) {
         this.task = task;
         this.marker = marker;
-        this.dukeList = dukeList;
+        this.duncanList = duncanList;
     }
 
     @Override
     public void execute() {
-        dukeList.findAndMark(task, marker);
+        duncanList.findAndMark(task, marker);
     }
 
     @Override

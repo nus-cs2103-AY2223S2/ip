@@ -1,13 +1,13 @@
 package command;
 
-import duke.DukeList;
+import duncan.DuncanList;
 
 public class RetrieveCommand extends Command {
     private String archiveTaskNumber;
-    private DukeList list;
-    private DukeList archive;
+    private DuncanList list;
+    private DuncanList archive;
 
-    public RetrieveCommand(String archiveTaskNumber, DukeList list, DukeList archive) {
+    public RetrieveCommand(String archiveTaskNumber, DuncanList list, DuncanList archive) {
         this.archiveTaskNumber = archiveTaskNumber;
         this.list = list;
         this.archive = archive;

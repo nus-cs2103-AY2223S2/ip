@@ -1,23 +1,22 @@
 package command;
 
-import duke.DukeList;
-import duke.Storage;
-import duke.Ui;
+import duncan.DuncanList;
+import duncan.Storage;
 
 public class ExitCommand extends Command {
-    private DukeList dukeList;
-    private DukeList archive;
+    private DuncanList duncanList;
+    private DuncanList archive;
     private Storage storage;
 
-    public ExitCommand(DukeList dukeList, DukeList archive, Storage storage) {
-        this.dukeList = dukeList;
+    public ExitCommand(DuncanList duncanList, DuncanList archive, Storage storage) {
+        this.duncanList = duncanList;
         this.archive = archive;
         this.storage = storage;
     }
 
     @Override
     public void execute() {
-        storage.save(this.dukeList, "list");
+        storage.save(this.duncanList, "list");
         storage.save(this.archive, "archive");
     }
 

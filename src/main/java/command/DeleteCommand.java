@@ -1,6 +1,6 @@
 package command;
 
-import duke.DukeList;
+import duncan.DuncanList;
 import exception.TaskOutOfRangeException;
 
 /**
@@ -8,20 +8,20 @@ import exception.TaskOutOfRangeException;
  */
 public class DeleteCommand extends Command {
     private String taskNumber;
-    private DukeList dukelist;
+    private DuncanList dukelist;
 
     /**
      * Creates a DeleteCommand with the given task string
      * @param taskNumber the text of the task to be deleted
-     * @param dukeList the DukeList from which to delete the task
+     * @param duncanList the DuncanList from which to delete the task
      */
-    public DeleteCommand(String taskNumber, DukeList dukeList) {
+    public DeleteCommand(String taskNumber, DuncanList duncanList) {
         this.taskNumber = taskNumber;
-        this.dukelist = dukeList;
+        this.dukelist = duncanList;
     }
 
     /**
-     * Deletes the given task from the DukeList
+     * Deletes the given task from the DuncanList
      */
     @Override
     public void execute() {

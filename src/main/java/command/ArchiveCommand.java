@@ -1,13 +1,13 @@
 package command;
 
-import duke.DukeList;
+import duncan.DuncanList;
 
 public class ArchiveCommand extends Command{
     private String taskNumber;
-    private DukeList list;
-    private DukeList archive;
+    private DuncanList list;
+    private DuncanList archive;
 
-    public ArchiveCommand(String taskNumber, DukeList list, DukeList archive) {
+    public ArchiveCommand(String taskNumber, DuncanList list, DuncanList archive) {
         this.taskNumber = taskNumber;
         this.list = list;
         this.archive = archive;
