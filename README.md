@@ -13,7 +13,7 @@ JeoBot keeps you worry-free by keeping track of the things you need to do.
 - What's more, it is **FREE**!
 
 ### Activation
-1. Download the latest JAR release file from [here](https://github.com/Jun-How/ip/releases).
+1. Download the latest JAR release file from [here](https://github.com/Jun-How/ip/releases/tag/A-Release).
 2. Double-click it.
 3. Add your tasks.
 4. Let it manage your tasks for you 😉
