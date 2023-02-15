@@ -243,7 +243,7 @@ public class Commands {
         String[] str = input.split("/");
         try {
             Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1),
-                    stringToDate(str[1].substring(3)));
+                    parseStringToDate(str[1].substring(3)));
             taskList.addTask(newTask);
             storage.saveTaskListToStorage(taskList);
             return textUi.getTaskAddedMessage(newTask, taskList.getArraySize());
@@ -274,8 +274,8 @@ public class Commands {
         String[] str = input.split("/");
         try {
             Task newTask = new Event(str[0].substring(0, str[0].length() - 1),
-                    stringToDate(str[1].substring(5, str[1].length() - 1)),
-                    stringToDate(str[2].substring(3)));
+                    parseStringToDate(str[1].substring(5, str[1].length() - 1)),
+                    parseStringToDate(str[2].substring(3)));
             taskList.addTask(newTask);
             storage.saveTaskListToStorage(taskList);
             return textUi.getTaskAddedMessage(newTask, taskList.getArraySize());
@@ -290,7 +290,7 @@ public class Commands {
      * @return LocalDate corresponding to the given string.
      * @throws WrongDateFormatException If the given string does not follow the correct format.
      */
-    public static LocalDate stringToDate(String s) throws WrongDateFormatException {
+    public static LocalDate parseStringToDate(String s) throws WrongDateFormatException {
         try {
             return LocalDate.parse(s, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (DateTimeParseException e) {
