@@ -34,7 +34,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -49,10 +48,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns user dialog containing text and display picture.
+     * @param text text to be displayed
+     * @param img image of user
+     * @return A dialog box with text and image
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns Dudu dialog containing text and display picture.
+     * @param text text to be displayed
+     * @param img image of Dudu
+     * @return A dialog box with text and image
+     */
     public static DialogBox getDuduDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
