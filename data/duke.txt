@@ -2,5 +2,5 @@ T | 1 | read book
 D | 1 | return book | 28-05-2023
 E | 0 | project meeting | Aug 6th 2pm | Aug 6th 4pm
 T | 0 | join sports club
-T | 0 | jogging 
+T | 1 | jogging 
 E | 1 |  |  23 jan  |  29 jan
