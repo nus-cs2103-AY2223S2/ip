@@ -23,11 +23,13 @@ public class TaskList {
     }
 
     public void markTask(int taskIndex) {
+        assert taskList.size() > 0;
         Task taskToMark = this.getTask(taskIndex);
         taskToMark.mark();
     }
 
     public void unmarkTask(int taskIndex) {
+        assert taskList.size() > 0;
         Task taskToMark = this.getTask(taskIndex);
         taskToMark.unmark();
     }
