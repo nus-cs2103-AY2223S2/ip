@@ -13,5 +13,16 @@ src/main/resources/docs/
 *.iml
 bin/
 
+*.class
+*.jar
+*.exe
+
+*.log
+*.txt
+*.ser
+
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+tasks.ser
+tasks.txt
