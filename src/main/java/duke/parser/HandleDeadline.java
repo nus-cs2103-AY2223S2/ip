@@ -4,7 +4,7 @@ import duke.exception.WrongFormatException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -13,7 +13,7 @@ public class HandleDeadline {
     public HandleDeadline() {
     }
 
-    public static String performDeadline(String input, TaskList tasklist) throws WrongFormatException{
+    public static String performDeadline(String input, TaskList tasklist, Ui ui) throws WrongFormatException{
         boolean correctFormat = true;
         try {
             String taskCommand = input.substring(9);
@@ -35,13 +35,12 @@ public class HandleDeadline {
                     input.substring(input.indexOf("/by") + 4));
             Task taskDeadline = new Deadline(input, deadline);
             if (tasklist.checkDuplicates(taskDeadline)) {
-                return "OOPS! You have added this task before already!";
+                return ui.showError("OOPS! You have added this task before already!");
             }
             tasklist.addTask(taskDeadline);
-            return "Got it. I've added this task: \n  " + taskDeadline
-                    + "\nNow you have " + tasklist.getSize() + " tasks in the list.";
+            return ui.showAddTask(taskDeadline.toString(), tasklist.getSize());
         } catch (DateTimeParseException e){
-            return "Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10";
+            return ui.showError("Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10");
         }
     }
 }

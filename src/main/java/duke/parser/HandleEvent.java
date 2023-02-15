@@ -4,6 +4,7 @@ import duke.exception.WrongFormatException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -12,11 +13,10 @@ public class HandleEvent {
     public HandleEvent() {
     }
 
-    public static String performEvent(String input, TaskList tasklist) throws WrongFormatException {
+    public static String performEvent(String input, TaskList tasklist, Ui ui) throws WrongFormatException {
         boolean correctFormat;
 
         try {
-            String taskCommand = input.substring(6);
             String[] arrOfString = input.split("/from");
             String[] arrOfStringDate = arrOfString[1].split("/to");
             String trimmedTaskDes = arrOfString[0].trim();
@@ -43,13 +43,12 @@ public class HandleEvent {
                     input.substring(input.lastIndexOf("/") + 4));
             Task taskEvent = new Event(input, startDate, endDate);
             if (tasklist.checkDuplicates(taskEvent)) {
-                return "OOPS! You have added this task before already!";
+                return ui.showError("OOPS! You have added this task before already!");
             }
             tasklist.addTask(taskEvent);
-            return "Got it. I've added this task: \n  " + taskEvent
-                    + "\nNow you have " + tasklist.getSize() + " tasks in the list.";
+            return ui.showAddTask(taskEvent.toString(), tasklist.getSize());
         } catch (DateTimeParseException e){
-            return "Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10";
+            return ui.showError("Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10");
         }
     }
 }
