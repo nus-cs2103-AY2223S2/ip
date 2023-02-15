@@ -122,6 +122,14 @@ public class TaskList {
         return ui.printMarkTaskMsg(isDone, task);
     }
 
+    /**
+     * Finds the tasks which contains the same input descriptions.
+     *
+     * @param input User input
+     * @param ui    The Ui to be used for printing messages.
+     * @return The print statement.
+     * @throws DukeException Checks the validation of input.
+     */
     public String findTask(String input, Ui ui) throws DukeException {
         if (input.trim().equals("find")) {
             throw new DukeException("\t ☹ OOPS!!! The description of a find cannot be empty.\n");
