@@ -44,8 +44,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-
-    public String getResponse(String input) {
-        return input;
-    }
 }
