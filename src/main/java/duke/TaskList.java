@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Adds the input task to the tasklist
+     *
      * @param t The task to be added
      * @return A response acknowledging the addition of a task.
      */
@@ -39,6 +40,7 @@ public class TaskList {
 
     /**
      * Lists the items in the tasklist along with their completed state.
+     *
      * @return Response containing the contents of the tasklist in text form.
      */
     public String listItems() {
@@ -57,13 +59,15 @@ public class TaskList {
 
     /**
      * Marks or unmarks a specified task in the tasklist depending on the action given.
+     *
      * @param param The index of the task.
      * @param action One of two actions: "mark" or "unmark".
      * @return A string detailing whether the action was successful or not.
      * @throws DukeInvalidInputException
-     * @throws DukeEmptyInputException
      */
-    public String changeState(String param, String action) throws DukeInvalidInputException, DukeEmptyInputException {
+    public String changeState(String param, String action) throws DukeInvalidInputException {
+        assert param != null;
+        assert param.length() != 0;
         Pattern pattern = Pattern.compile("\\s");
         Matcher matcher = pattern.matcher(param.trim());
         if (matcher.find()) {
@@ -87,6 +91,7 @@ public class TaskList {
 
     /**
      * Deletes specified task from the tasklist.
+     *
      * @param input The index of the task.
      * @return A string telling the user if the deletion of the task was successful.
      * @throws DukeInvalidInputException
@@ -114,6 +119,7 @@ public class TaskList {
 
     /**
      * Converts the tasklist contents into formatted text that can be stored in a text file.
+     *
      * @return A string of a certain format that represents the tasklist contents.
      */
     public String listToText() {
@@ -126,6 +132,7 @@ public class TaskList {
 
     /**
      * Loads a task into the tasklist based on formatted text.
+     *
      * @param taskText The string representing the task.
      */
     public void loadTask(String taskText) {
@@ -138,6 +145,7 @@ public class TaskList {
 
     /**
      * Finds tasks with the keyword in their description and returns them.
+     *
      * @param keywords The keywords used to search the task description.
      * @return A string containing all the tasks that contain the keywords.
      * @throws DukeEmptyInputException

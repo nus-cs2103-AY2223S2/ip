@@ -2,17 +2,24 @@ package duke;
 
 import duke.commands.Command;
 import duke.exceptions.DukeUnknownInputException;
-import duke.commands.*;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
+import duke.commands.TodoCommand;
+import duke.commands.DeadlineCommand;
+import duke.commands.EventCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 
 /**
  * Helps to parse user input into commands that the chat bot understands.
  * @author lukkesreysandeur
  */
 public class Parser {
-    public Parser() {}
-
     /**
      * Parses the user inputted command and returns a command; throws error if command is invalid.
+     *
      * @param fullCommand Command entered by the user.
      * @return Command object that will handle the requested action.
      * @throws DukeUnknownInputException

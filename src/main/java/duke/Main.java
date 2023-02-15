@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +11,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    /** An instance of the duke chatbot. */
     private Duke duke = new Duke();
 
     @Override

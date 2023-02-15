@@ -1,7 +1,7 @@
 package duke;
 
 import duke.commands.Command;
-import duke.exceptions.*;
+import duke.exceptions.DukeException;
 
 /**
  * Represents the Duke chatbot.
@@ -28,39 +28,31 @@ public class Duke {
         try {
             storage.loadState(tasks);
         } catch (DukeException e) {
-            ui.showError(e);
+            System.out.println(ui.showError(e));
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
     /**
-     * Runs the Duke chatbot, prompts the user for inputs to perform certain actions.
+     * Runs the Duke chatbot.
+     *
+     * @return The welcome message.
      */
     public String run() {
         return ui.welcomeMessage();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                Command c = parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e);
-//            }
-//        }
-//        ui.sayBye();
     }
 
+    /**
+     * Parses the input into a command and returns the result to the GUI.
+     *
+     * @param input The user input.
+     * @return A string with the chatbot's response.
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return e.toString();
+            return ui.showError(e);
         }
     }
 }
