@@ -1,13 +1,14 @@
 package elise.commands;
 
+import elise.EliseException;
 import elise.internal.Storage;
 import elise.internal.TaskList;
 import elise.internal.Ui;
 
 // Command which finds specific task base on keyword.
 public class FindCommand implements Command {
-    private int code;
-    private String keyword;
+    private final int code;
+    private final String keyword;
 
     /**
      * Constructor for Command of specified code and keyword.
@@ -21,7 +22,12 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) {
-        return Ui.wrapText(taskList.find(keyword));
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws EliseException {
+        if (code == 0) {
+            return ui.wrapText(taskList.find(keyword));
+        } else {
+            throw new EliseException("Invalid code.");
+        }
+
     }
 }

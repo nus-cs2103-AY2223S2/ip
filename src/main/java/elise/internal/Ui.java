@@ -26,7 +26,7 @@ public class Ui {
         return wrapText(logo);
     }
 
-    public static String wrapText(String text) {
+    public String wrapText(String text) {
         return BORDER + "\n" + text + "\n" + BORDER;
     }
 
