@@ -116,7 +116,8 @@ public class Parser {
      * @return String of question to ask
      */
     public String askUserWhichFind() {
-        return ("Which find command are you looking for?\nfindtask or findtime?");
+        return ("Which find command are you looking for?\n"
+                + "findtask, findtime, find free times?");
     }
     /**
      * Finds the task indicated by the user.

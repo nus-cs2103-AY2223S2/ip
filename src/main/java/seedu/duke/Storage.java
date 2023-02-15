@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -45,8 +48,19 @@ public class Storage {
     public void loadTasks(ToDoList todolist) throws FileNotFoundException {
         System.out.println("\tTasks from the previous session:\n");
         System.out.println("\t--------------------------");
-        File f = new File(dataPath);
-        Scanner s = new Scanner(f);
+
+        Path path = Paths.get(dataPath);
+        File newFile = new File(dataPath);
+        try {
+            if (!Files.exists(path)) {
+                Files.createDirectories(path.getParent());
+                boolean success = newFile.createNewFile();
+                assert success : "File cannot be created.";
+            }
+        } catch (IOException e) {
+            System.out.println("File can't be loaded.");
+        }
+        Scanner s = new Scanner(newFile);
 
         while (s.hasNext()) {
             String curr = s.nextLine();
