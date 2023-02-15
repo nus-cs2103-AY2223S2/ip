@@ -140,14 +140,14 @@ Nice, this task has been marked as done:
 ```
 
 ### unmark [task index] - unmark a specific task
-unmarks the task of the given index
+Unmarks the task of the given index
 
 Example of usage: 
 
 `unmark 1`
 
 Expected outcome:
-unmarks the task and displays a message confirming the action.
+Unmarks the task and displays a message confirming the action.
 
 ```
 Nice, this task has been unmarked:
@@ -155,17 +155,33 @@ Nice, this task has been unmarked:
 ```
 
 ### delete [task index] - deletes a specific task
-deletes the task of the given index
+Deletes the task of the given index
 
 Example of usage: 
 
 `delete 1`
 
 Expected outcome:
-delete the task and displays a message confirming the action.
+Delete the task and displays a message confirming the action.
 
 ```
 Finally done?!, Sure, this task has been removed:
   [T][] return book
 Now you have 0 tasks in the list
+```
+
+### date [date] - searches for tasks of a given date
+Finds tasks that fall on the given date and displays them.
+Dates are in the format YYYY-MM-DD
+
+Example of usage: 
+
+`date 2023-12-25`
+
+Expected outcome:
+Searches all tasks that have the same date and displays them in the Nerdbot
+
+```
+Tasks occurring on 2023-12-25:
+  [T][] return book
 ```
