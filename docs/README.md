@@ -6,7 +6,7 @@ the benefits of a Graphical User Interface (GUI).
 ***
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your computer. Else, you can install it from [here](https://www.oracle.com/java/technologies/downloads/#java11).
-2. Download the latest duke.Duke.jar from [here](duke.Duke.jar).
+2. Download the latest duke.Duke.jar from [here](https://github.com/bernicetoh/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
 <figure>
@@ -31,6 +31,7 @@ Shows a list of all tasks in the task list.<br />
 Format: `list`
 <br />
 <br />
+
 
 ### Adding a todo: `todo`
 Adds a todo task to the task list.<br />
