@@ -95,12 +95,16 @@ public class TaskList {
     public TaskList findTask(String taskContent) {
         Storage temp = new Storage("temp.ser");
         TaskList foundTasks = new TaskList(temp);
+        addTask(taskContent, foundTasks);
+        return foundTasks;
+    }
+
+    private void addTask(String taskContent, TaskList foundTasks) {
         for (int i = 0; i < this.tasks.size(); i++) {
             if (this.getTaskContent(i).contains(taskContent)) {
                 foundTasks.addTask(this.tasks.get(i));
             }
         }
-        return foundTasks;
     }
 
     /**
