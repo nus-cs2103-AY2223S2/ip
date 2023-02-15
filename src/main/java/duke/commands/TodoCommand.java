@@ -14,6 +14,7 @@ import duke.exceptions.DukeInvalidInputException;
 public class TodoCommand extends Command {
     /**
      * Initialises the todo command.
+     *
      * @param input The given user input.
      */
     public TodoCommand(String input) {
@@ -22,6 +23,7 @@ public class TodoCommand extends Command {
 
     /**
      * Initialises the todo, adds it to the tasklist, then saves the current state of the tasklist.
+     *
      * @param tasks The tasklist to add the deadline to.
      * @param ui The ui object used to interact with the user.
      * @param storage The storage object that saves the current state of the tasklist.
@@ -32,7 +34,6 @@ public class TodoCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException {
         String response = tasks.add(Todo.createTodo(input));
         storage.saveState(tasks);
-//        ui.printResponse(response);
         return response;
     }
 }

@@ -13,6 +13,7 @@ import duke.Ui;
 public class UnmarkCommand extends Command {
     /**
      * Initialises the unmark command.
+     *
      * @param input The given user input.
      */
     public UnmarkCommand(String input) {
@@ -21,6 +22,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Marks the specified task as not done.
+     *
      * @param tasks The tasklist to add the deadline to.
      * @param ui The ui object used to interact with the user.
      * @param storage The storage object that saves the current state of the tasklist.
@@ -31,7 +33,6 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
         String response = tasks.changeState(input, "unmark");
         storage.saveState(tasks);
-//        ui.printResponse(response);
         return response;
     }
 }

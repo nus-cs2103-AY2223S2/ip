@@ -12,6 +12,7 @@ import duke.Ui;
 public class DeleteCommand extends Command {
     /**
      * Initialises the delete command.
+     *
      * @param input The given user input.
      */
     public DeleteCommand(String input) {
@@ -20,7 +21,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the specified task.
-     * @param tasks The tasklist to add the deadline to.
+     *
+     * @param tasks The tasklist to delete from.
      * @param ui The ui object used to interact with the user.
      * @param storage The storage object that saves the current state of the tasklist.
      * @throws DukeInvalidInputException

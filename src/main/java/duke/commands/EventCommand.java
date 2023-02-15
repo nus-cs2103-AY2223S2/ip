@@ -14,6 +14,7 @@ import duke.exceptions.DukeInvalidInputException;
 public class EventCommand extends Command {
     /**
      * Initialises the event command.
+     *
      * @param input The given user input.
      */
     public EventCommand(String input) {
@@ -22,7 +23,8 @@ public class EventCommand extends Command {
 
     /**
      * Initialises the event, adds it to the tasklist, then saves the current state of the tasklist.
-     * @param tasks The tasklist to add the deadline to.
+     *
+     * @param tasks The tasklist to add the event to.
      * @param ui The ui object used to interact with the user.
      * @param storage The storage object that saves the current state of the tasklist.
      * @throws DukeInvalidInputException

@@ -14,6 +14,7 @@ import duke.Ui;
 public class ExitCommand extends Command {
     /**
      * Initialises the exit command.
+     *
      * @param input The given user input.
      */
     public ExitCommand(String input) {
@@ -22,7 +23,8 @@ public class ExitCommand extends Command {
 
     /**
      * Checks if the syntax of the bye statement is correct, throws error if not.
-     * @param tasks The tasklist to add the deadline to.
+     *
+     * @param tasks The given tasklist.
      * @param ui The ui object used to interact with the user.
      * @param storage The storage object that saves the current state of the tasklist.
      * @throws DukeInvalidInputException
