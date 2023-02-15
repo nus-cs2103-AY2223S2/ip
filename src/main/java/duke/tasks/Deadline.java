@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    private String description;
     private LocalDate dueDate;
 
     public Deadline(String instruction) throws DukeException, DateTimeParseException {

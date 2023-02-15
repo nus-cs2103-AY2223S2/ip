@@ -57,6 +57,26 @@ public class TaskList {
         return message;
     }
 
+    public String find(String keyword) {
+        ArrayList<Task> searchResults = new ArrayList<>();
+        for (Task task : tasks) {
+            String desc = task.getDescription();
+            if (desc.contains(keyword)) {
+                searchResults.add(task);
+            }
+        }
+
+        if (searchResults.size() == 0) {
+            return "There are no matching tasks in your list.\n";
+        }
+
+        String searchList = "Here are the matching tasks in your list:\n";
+        for (int i = 1; i <= searchResults.size(); i++) {
+            searchList += String.format("%d. %s\n", i, searchResults.get(i-1));
+        }
+        return searchList;
+    }
+
     public void save() {
         String toWrite = "";
         String instr;
