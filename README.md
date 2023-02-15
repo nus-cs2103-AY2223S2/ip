@@ -39,10 +39,15 @@ Duke itself does provide all the guide you need :wink:
 
 ### Features :
 Add a task - todo,deadline,event
+
 List all the tasks - list
+
 Mark the tasks that you have completed - mark
+
 Delete tasks - delete
+
 Find tasks - find
+
 Archive all the current tasks, stores these existing tasks into a file in the directory "data" - archive
 
 
