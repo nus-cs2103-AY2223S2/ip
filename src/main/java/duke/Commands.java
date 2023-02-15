@@ -185,16 +185,18 @@ public class Commands {
         if (processedString.equals("")) {
             throw new NoDescriptionException("delete");
         }
-
         int indexToDelete = Integer.parseInt(input) - 1;
+
         if (indexToDelete >= taskList.getArraySize() || indexToDelete < 0) {
             throw new TaskNotFoundException();
         }
 
+        Task deletedTask = taskList.getTask(indexToDelete);
         taskList.removeTask(indexToDelete);
+
         storage.saveTaskListToStorage(taskList);
-        return textUi.getTaskRemovedMessage(taskList.getTask(indexToDelete),
-                taskList.getArraySize() - 1);
+        return textUi.getTaskRemovedMessage(deletedTask,
+                taskList.getArraySize());
     }
 
     /**
