@@ -7,7 +7,8 @@ public class Task {
 
     /**
      * Constructor to make a task that the user has specified and wants to be placed on the tasklist.
-     * @param description the type of task.
+     *
+     * @param description     the type of task.
      * @param fullDescription the entire string of user input for the task.
      */
     public Task(String description, String fullDescription) {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * Returns a string to see if the task is marked or unmarked.
+     *
      * @return "X" if the task has been marked or empty otherwise.
      */
     public String getStatusIcon() {
@@ -40,6 +42,7 @@ public class Task {
 
     /**
      * Returns the entire string of the user input.
+     *
      * @return user input.
      */
     public String getFullDescription() {
@@ -47,7 +50,8 @@ public class Task {
     }
 
     /**
-     * Check if a particular task is marked or unmarked.
+     * Return true if a particular task is marked and false if task is unmarked.
+     *
      * @return a boolean to see if a task has been completed.
      */
     public boolean isDoneStatus() {
@@ -55,7 +59,7 @@ public class Task {
     }
 
     public String getDescription() {
-        return  description;
+        return description;
     }
 
     @Override

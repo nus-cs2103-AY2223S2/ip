@@ -4,9 +4,6 @@ public class Ui {
     /**
      * Handles the welcome user interface when the programs start.
      */
-//    public void welcome() {
-//        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
-//    }
     public String welcome() {
         return "Hello! I'm duke.\nWhat can I do for you?";
     }
