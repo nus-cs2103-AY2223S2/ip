@@ -144,7 +144,7 @@ public class TaskTracker {
     public String listTasks() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < getNumTasks(); i++) {
-            sb.append("\n\t").append(i + 1).append(". ").append(tasks.get(i));
+            sb.append("\n\n").append(i + 1).append(". ").append(tasks.get(i));
         }
         return sb.toString();
     }
@@ -162,7 +162,7 @@ public class TaskTracker {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < matches.size(); i++) {
-            sb.append("\n\t").append(i + 1).append(". ").append(matches.get(i));
+            sb.append("\n\n").append(i + 1).append(". ").append(matches.get(i));
         }
         return sb.toString();
     }

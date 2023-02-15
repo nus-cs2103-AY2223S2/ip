@@ -38,6 +38,7 @@ public class Query {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         StringBuilder argStr = new StringBuilder();
         arguments.forEach((key, value) -> argStr.append(String.format(" %s:%s", key, value)));

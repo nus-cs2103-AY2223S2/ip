@@ -33,7 +33,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Todo / " + getTaskDescription();
+        return "Todo " + getTaskDescription();
     }
 
     protected String getTaskDescription() {

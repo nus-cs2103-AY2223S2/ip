@@ -23,7 +23,7 @@ public class Event extends Deadline {
 
     @Override
     public String toString() {
-        return String.format("Event / %s (from %s to %s)", getTaskDescription(),
+        return String.format("Event %s (from %s to %s)", getTaskDescription(),
                 startDate.format(DateTimeFormatter.ofPattern(DATETIME_DISPLAY_PATTERN)),
                 endDate.format(DateTimeFormatter.ofPattern(DATETIME_DISPLAY_PATTERN)));
     }

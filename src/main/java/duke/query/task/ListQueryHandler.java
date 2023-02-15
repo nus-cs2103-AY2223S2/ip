@@ -21,6 +21,10 @@ public class ListQueryHandler extends TaskQueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        return tt.getNumTasks() < 1 ? "No items!" : tt.listTasks();
+        if (tt.getNumTasks() < 1 ) {
+            return "No items!";
+        } else {
+            return String.format("Here are your tasks!%s", tt.listTasks());
+        }
     }
 }

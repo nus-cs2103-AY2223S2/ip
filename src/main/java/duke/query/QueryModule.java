@@ -1,8 +1,8 @@
 package duke.query;
 
-import duke.DukeException;
-
 import java.util.HashMap;
+
+import duke.DukeException;
 
 public abstract class QueryModule {
     public abstract void init() throws DukeException;

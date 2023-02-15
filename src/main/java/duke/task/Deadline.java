@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("Deadline / %s (by %s)", getTaskDescription(),
+        return String.format("Deadline %s (by %s)", getTaskDescription(),
                 endDate.format(DateTimeFormatter.ofPattern(DATETIME_DISPLAY_PATTERN)));
     }
 

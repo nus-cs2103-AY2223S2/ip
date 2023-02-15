@@ -12,7 +12,7 @@ import duke.query.task.TaskQueryModule;
  */
 public class Bot {
     private QueryProcessor queryProcessor;
-    private boolean hasInit;
+    private boolean hasInit = false;
 
     /**
      * Initializes the bot.
