@@ -1,16 +1,17 @@
 package duke.task;
 
 import duke.UI.TextOutput;
-
+import duke.exception.DukeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 /**
  * Represents task of the type 'deadline'.
  */
 public class Deadline extends Task {
-    private LocalDateTime time = null;
+    private LocalDateTime time;
 
     /**
      * Constructs a new Deadline instance with the given content, date and isDone state.
@@ -40,10 +41,14 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String updateTaskTime(String ... dates) {
+    public String updateTaskTime(String ... dates) throws DukeException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         format.withLocale(Locale.ENGLISH);
-        this.time = LocalDateTime.parse(dates[0] + " " + dates[1], format);
+        try {
+            this.time = LocalDateTime.parse(dates[0] + " " + dates[1], format);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format.");
+        }
         return TextOutput.makePostponeString(this);
     }
 }

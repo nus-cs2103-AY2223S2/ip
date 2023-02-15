@@ -1,8 +1,6 @@
 package duke.UI;
 
 import duke.Duke;
-import duke.Parser;
-import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,14 +31,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello, I am Duke, your personal task management bot!" +
-                        "How can I be of your assistance today? \n", dukeImage)
+                DialogBox.getDukeDialog("Hello, I am Duke, your personal task management bot! \n"
+                        + "How can I be of your assistance today? \n", dukeImage)
         );
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        this.duke = d;
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(this.duke.loadStorage(), dukeImage)
+        );
     }
 
     /**

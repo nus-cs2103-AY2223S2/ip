@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DukeException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ abstract public class Task implements Serializable {
     private Boolean isDone;
     protected type taskType;
 
-    abstract public String updateTaskTime(String ... dates);
+    abstract public String updateTaskTime(String ... dates) throws DukeException;
 
     /**
      * Constructs an instance of Task with the given content and state of whether it is done.

@@ -1,8 +1,11 @@
 package duke.task;
+import duke.Duke;
 import duke.Storage;
 import duke.UI.TextOutput;
+import duke.exception.DukeException;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -108,11 +111,15 @@ public class TaskList {
         }
     }
 
-    public String updateTaskTime(int id, String ... dates) {
+    public String updateTaskTime(int id, String ... dates) throws DukeException {
         if (this.tasks.size() < id) {
             return TextOutput.makeTaskNotFoundString();
         }
-        return this.tasks.get(id - 1).updateTaskTime(dates);
+        try {
+            return this.tasks.get(id - 1).updateTaskTime(dates);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format.");
+        }
     }
 
     /**

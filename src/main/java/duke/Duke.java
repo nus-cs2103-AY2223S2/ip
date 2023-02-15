@@ -8,14 +8,20 @@ import duke.task.TaskList;
  * Defines the main logic of the Duke bot.
  */
 public class Duke {
-    public TaskList list;
-    public static boolean isBotOff = false;
+    private TaskList list;
+    private static boolean isBotOff = false;
+    private Storage storage;
+    public static boolean isIsBotOff = false;
+
 
     Duke() {
-        Storage storage = new Storage("tasks.ser");
+        this.storage = new Storage("tasks.ser");
         assert storage != null: "New storage object was created";
         this.list = new TaskList(storage);
-        System.out.println(storage.loadTasks(this.list));
+    }
+
+    public String loadStorage() {
+        return storage.loadTasks(this.list);
     }
 
     /**

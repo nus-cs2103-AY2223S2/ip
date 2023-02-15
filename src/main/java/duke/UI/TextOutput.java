@@ -72,4 +72,11 @@ public class TextOutput {
     public static String makeUnsuccessSaveString(Exception e) {
         return "Sorry, unable to save your current tasks due to " + e.getMessage();
     }
+
+    public static String makeInvalidUpdateString() {
+        return "Sorry, your update command is not supported \n"
+                + "Please be reminded that the date format: \n"
+                + "update [task_index] [d/MM/yyyy HHmm] [d/MM/yyyy HHmm] for events \n"
+                + "or update [task_index] [d/MM/yyyy HHmm] for todos";
+    }
 }
