@@ -53,7 +53,7 @@ public class TaskList {
      */
     public Task mark(int index) throws NonExistentTask {
         index -= 1;
-        if (index >= this.taskCount) {
+        if (!this.validUnMarkedTask(index)) {
             throw new NonExistentTask("");
         }
         tasks.get(index).mark();
@@ -68,7 +68,7 @@ public class TaskList {
      */
     public Task unmark(int index) throws NonExistentTask {
         index = index - 1;
-        if (index >= this.taskCount) {
+        if (!this.validMarkedTask(index)) {
             throw new NonExistentTask("");
         }
         tasks.get(index).unmark();
@@ -143,6 +143,14 @@ public class TaskList {
         }
 
         return res;
+    }
+
+    public boolean validUnMarkedTask(int index) {
+        return index < this.taskCount;
+    }
+
+    public boolean validMarkedTask(int index) {
+        return index < this.taskCount && this.tasks.get(index).isMarked();
     }
 
 

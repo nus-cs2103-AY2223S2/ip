@@ -48,8 +48,8 @@ public class Parser {
                     throw new CommandNotFoundException(input);
             }
             return command;
-        }catch (ArrayIndexOutOfBoundsException e){
-            throw new CommandNotFoundException("");
+        }catch (ArrayIndexOutOfBoundsException | AvaException e){
+            throw new CommandNotFoundException(input);
         }
     }
     private String[] splitInput(String input){

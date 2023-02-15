@@ -4,6 +4,7 @@ package Ava.commands;
 import Ava.Storage;
 import Ava.TaskList;
 import Ava.exceptions.AvaException;
+import Ava.exceptions.CommandNotFoundException;
 import Ava.exceptions.NonExistentTask;
 import Ava.tasks.Task;
 
@@ -21,8 +22,10 @@ public class MarkTask implements AvaCommand {
      * MarkTask Contructor
      * @param parsedInput string array of the index of the task to be marked.
      */
-    public MarkTask(String[] parsedInput) {
+    public MarkTask(String[] parsedInput) throws NonExistentTask {
+
         this.parsedInput = parsedInput;
+        this.isCorrectInput();
     }
 
     /**
@@ -34,6 +37,9 @@ public class MarkTask implements AvaCommand {
      */
     @Override
     public boolean run(TaskList t, Storage s) throws AvaException {
+        assert this.parsedInput.length == 1 && isDigit(parsedInput[0].charAt(0)): "Invalid Input";
+
+
         this.changedTask = t.mark(Integer.valueOf(this.parsedInput[0]));
         t.updateStorage(s);
         return true;
