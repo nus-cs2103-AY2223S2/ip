@@ -2,11 +2,12 @@ package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 
-import java.time.LocalDate;
 
 /**
  * The type Task list test.
