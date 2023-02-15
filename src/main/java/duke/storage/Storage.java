@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -39,7 +38,7 @@ public class Storage {
      *
      * @return the saved tasks as a list
      */
-    public List<String> load() {
+    public ArrayList<String> load() {
         return getSavedTasksAsList();
     }
 
@@ -99,8 +98,8 @@ public class Storage {
         return !path.isEmpty();
     }
 
-    private List<String> getSavedTasksAsList() {
-        List<String> savedTaskList = new ArrayList<>();
+    private ArrayList<String> getSavedTasksAsList() {
+        ArrayList<String> savedTaskList = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(this.file));
             String s = br.readLine();
@@ -119,7 +118,7 @@ public class Storage {
 
     private void replaceLineInFile(int index, String text) {
         try {
-            List<String> tasks = getSavedTasksAsList();
+            ArrayList<String> tasks = getSavedTasksAsList();
             FileWriter fw = new FileWriter(this.file, false);
             for (int i = 0; i < tasks.size(); i++) {
                 if (i != index) { // not the line we want to replace
@@ -136,7 +135,7 @@ public class Storage {
     }
 
     private String getUpdatedLine(int lineToUpdate, int updateIndex, char newValue) {
-        List<String> tasks = getSavedTasksAsList();
+        ArrayList<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(lineToUpdate));
         sb.setCharAt(updateIndex, newValue);
         return sb.toString();

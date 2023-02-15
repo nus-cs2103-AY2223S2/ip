@@ -3,7 +3,6 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * The TaskList class represent a list of all the tasks added by the user.
@@ -19,7 +18,7 @@ public class TaskList {
      *
      * @param tasks the list of saved tasks
      */
-    public TaskList(List<String> tasks) {
+    public TaskList(ArrayList<String> tasks) {
         for (String t : tasks) {
             Task task = processTask(t);
             add(task);

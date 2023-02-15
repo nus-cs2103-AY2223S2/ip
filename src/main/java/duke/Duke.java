@@ -57,11 +57,11 @@ public class Duke {
     public String getResponse(String input) {
         Command command = new Parser().parseCommand(input);
         command.execute(this.storage, this.tasks, this.ui);
-        return ui.getResponse();
+        return this.ui.getResponse();
     }
 
     public List<Task> getTasksToDisplay() {
-        return ui.getTasksToDisplay();
+        return this.ui.getTasksToDisplay();
     }
 
     private Boolean pathNotEmpty(String path) {
