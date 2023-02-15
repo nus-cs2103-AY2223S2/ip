@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<!-- Solution below adapted from
+https://se-education.org/guides/tutorials/javaFxPart4.html#javafx-tutorial-part-4-using-fxml -->
+<?import javafx.scene.control.ScrollPane?>
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="Infinity" prefWidth="600.0"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ScrollPane fx:id="scrollPane" minHeight="100.0" prefHeight="200.0"
+                    maxHeight="250.0" prefWidth="490.0">
+            <content>
+                <Label fx:id="dialog" text="Label" wrapText="true" />
+            </content>
+        </ScrollPane>
+        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0"
+                   pickOnBounds="true" preserveRatio="true" />
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+    </padding>
+</fx:root>

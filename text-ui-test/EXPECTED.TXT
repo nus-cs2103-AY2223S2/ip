@@ -1,7 +1,209 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+----------------------------------------------------
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hope you are doing great!
+What can I do for you?
+----------------------------------------------------
+Enter your prompt below:
+You have zero tasks now!
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: That is not a recognized command!
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: That is not a recognized command!
+
+----------------------------------------------------
+Enter your prompt below:
+Added this to your task list:
+  [T][ ] borrow book
+Number of tasks left: 1
+----------------------------------------------------
+Enter your prompt below:
+Added this to your task list:
+  [D][ ] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+Number of tasks left: 2
+----------------------------------------------------
+Enter your prompt below:
+Added this to your task list:
+  [E][ ] access party (from: Sunday, May 05, 2019 15:00 PM, to: Tuesday, May 05, 2020 16:00 PM)
+Number of tasks left: 3
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your todo command is as such
+
+todo name-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your deadline command is as such
+
+deadline name-of-task /by date-of-deadline (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your event command is as such
+
+event name-of-task /from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)
+
+----------------------------------------------------
+Enter your prompt below:
+Your tasks so far!!
+1. [T][ ] borrow book
+2. [D][ ] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+3. [E][ ] access party (from: Sunday, May 05, 2019 15:00 PM, to: Tuesday, May 05, 2020 16:00 PM)
+----------------------------------------------------
+Enter your prompt below:
+Solid work man! This task is marked done
+[D][X] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+----------------------------------------------------
+Enter your prompt below:
+Your tasks so far!!
+1. [T][ ] borrow book
+2. [D][X] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+3. [E][ ] access party (from: Sunday, May 05, 2019 15:00 PM, to: Tuesday, May 05, 2020 16:00 PM)
+----------------------------------------------------
+Enter your prompt below:
+Aww what happened? This task is marked as undone
+[D][ ] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+----------------------------------------------------
+Enter your prompt below:
+Your tasks so far!!
+1. [T][ ] borrow book
+2. [D][ ] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+3. [E][ ] access party (from: Sunday, May 05, 2019 15:00 PM, to: Tuesday, May 05, 2020 16:00 PM)
+----------------------------------------------------
+Enter your prompt below:
+Solid work man! This task is marked done
+[T][X] borrow book
+----------------------------------------------------
+Enter your prompt below:
+Aww what happened? This task is marked as undone
+[T][ ] borrow book
+----------------------------------------------------
+Enter your prompt below:
+Your tasks so far!!
+1. [T][ ] borrow book
+2. [D][ ] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+3. [E][ ] access party (from: Sunday, May 05, 2019 15:00 PM, to: Tuesday, May 05, 2020 16:00 PM)
+----------------------------------------------------
+Enter your prompt below:
+Added this to your task list:
+  [T][ ] do 2103t project
+Number of tasks left: 4
+----------------------------------------------------
+Enter your prompt below:
+Your tasks so far!!
+1. [T][ ] borrow book
+2. [D][ ] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+3. [E][ ] access party (from: Sunday, May 05, 2019 15:00 PM, to: Tuesday, May 05, 2020 16:00 PM)
+4. [T][ ] do 2103t project
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your mark command is as such
+
+mark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your mark command is as such
+
+mark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your unmark command is as such
+
+unmark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your unmark command is as such
+
+unmark index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Removed this from your task list:
+  [T][ ] do 2103t project
+Number of tasks left: 3
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your delete command is as such
+
+delete index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Command Exception: Make sure that your delete command is as such
+
+delete index-of-task
+
+----------------------------------------------------
+Enter your prompt below:
+Removed this from your task list:
+  [D][ ] do problem set 0 (by: Tuesday, May 05, 2020 15:00 PM)
+Number of tasks left: 2
+----------------------------------------------------
+Enter your prompt below:
+Sad...Alright bye!
+----------------------------------------------------

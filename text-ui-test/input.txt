@@ -1,0 +1,37 @@
+list
+test
+help
+todo borrow book
+deadline do problem set 0 /by 2020-05-05 15:00
+event access party /from 2019-05-05 15:00 /to 2020-05-05 16:00
+todo
+deadline
+event
+deadline do this by sunday
+deadline            /by sunday
+deadline this /by
+event from 1900hrs /to monday
+event this /from 1900hrs to monday
+event this /from 1900hrs
+event this /to today
+event    /from 1900hrs /to today
+event this /from        /to
+list
+mark 2
+list
+unmark 2
+list
+mark 1
+unmark 1
+list
+todo do 2103t project
+list
+mark -1
+mark 6
+unmark -1
+unmark 7
+delete 4
+delete 0
+delete -1
+delete 2
+bye
