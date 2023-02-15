@@ -63,18 +63,21 @@ public class Deadline extends Task {
     }
     @Override
     public String storeTaskString() {
-        return this.getTaskType() + " | " + this.getMarkedString()
+        String str = this.getTaskType() + " | " + this.getMarkedString()
                 + " | " + this.getDescription() + " | " + this.getDateTime();
+        return str;
     }
     @Override
     public String toString() {
-        String str = this.getDescription();
+        String discription = this.getDescription();
         boolean checked = this.isDone();
         String dateTime = this.getDateTime();
+        String str = "";
         if (checked) {
-            return "[D][X] " + str + " (by: " + dateTime + ")";
+            str = "[D][X] " + discription + " (by: " + dateTime + ")";
         } else {
-            return "[D][ ] " + str + " (by: " + dateTime + ")";
+            str = "[D][ ] " + discription + " (by: " + dateTime + ")";
         }
+        return str;
     }
 }

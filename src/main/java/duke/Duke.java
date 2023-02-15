@@ -11,7 +11,7 @@ import userinteraction.Ui;
  * The main class of the program.
  */
 public class Duke {
-    private final static String FILE_PATH = ".\\src\\data\\duke.txt";
+    private static final String FILE_PATH = ".\\src\\data\\duke.txt";
 
     private final Ui ui;
     private final Storage storage;
@@ -30,8 +30,6 @@ public class Duke {
      * Runs the whole program.
      */
     public void run() {
-        ui.printWelcomeMsg();
-        ui.printLine();
         boolean isExit = false;
         while (!isExit) {
             try {
