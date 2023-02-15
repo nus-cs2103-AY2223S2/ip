@@ -2,6 +2,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 public class Deadline extends Task {
 
@@ -9,9 +13,6 @@ public class Deadline extends Task {
     LocalDate deadline;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-
-
-
 
     public Deadline(String description, String deadlineString) throws IOException {
         super(description);
@@ -25,6 +26,9 @@ public class Deadline extends Task {
                 System.out.println("Please enter the date in this format: dd-MMM-YYYY OR dd/MMM/YYYY");
             }
         }
+        
+
+
 
     }
 
