@@ -1,4 +1,4 @@
-package helpers;
+package duke.helpers;
 
 public class UI {
     private static final String LINE = "____________________________________________________________\n";

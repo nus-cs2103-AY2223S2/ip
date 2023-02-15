@@ -1,4 +1,4 @@
-package helpers;
+package duke.helpers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 import java.time.format.DateTimeParseException;
 
-import exceptions.DukeException;
-import tasks.*;
+import duke.tasks.Deadline;
+import duke.exceptions.DukeException;
+import duke.tasks.*;
 
 public class Storage {
     private File savedFile;
@@ -71,12 +72,12 @@ public class Storage {
             fw.write(encodedTasks);
             fw.flush();
             fw.close();
-            for (int i = 0; i < 5; i++) {
-                Thread.sleep(500);
-                System.out.print("............");
+            for (int i = 0; i < 60; i++) {
+                Thread.sleep(15);
+                System.out.print(".");
             }
             System.out.print("\n");
-            Thread.sleep(500);
+            Thread.sleep(250);
             System.out.println("Your tasks have been successfully saved! :-)");
         } catch (IOException e) {
             System.out.println("Sorry, unable to save your tasks right now.");

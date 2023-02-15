@@ -1,10 +1,10 @@
-package helpers;
+package duke.helpers;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import tasks.*;
+import duke.tasks.*;
 
 public class TaskList {
     private final ArrayList<Task> tasks;

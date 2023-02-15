@@ -1,10 +1,10 @@
-package helpers;
+package duke.helpers;
 
-import exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.time.format.DateTimeParseException;
 

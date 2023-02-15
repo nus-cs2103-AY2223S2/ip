@@ -1,8 +1,9 @@
+package duke;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import tasks.*;
-import helpers.*;
+
+import duke.helpers.*;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
