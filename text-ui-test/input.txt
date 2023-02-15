@@ -1,0 +1,32 @@
+list
+event tryout test /from 29/6/2023 /to 01/10/2024
+list
+todo
+deadline test error
+deadline /by test error
+list
+event test error
+event test /from error
+event /from error /to error
+event test /to error
+list
+mark 2
+mark 3
+unmark 1
+mark 4
+list
+unmark -1
+delete 5
+list
+deadline delete /by 5/5/2023
+list
+find tes
+find e
+delete 3
+mark 3
+list
+delete 3
+mark 1
+unmark 2
+list
+bye

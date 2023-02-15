@@ -5,3 +5,195 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+____________________________________________________________
+What can the Duke help you with today?
+____________________________________________________________
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][x] test
+2.[D][ ] gaming (by: 29th april 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has add the following task:
+ - [E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+You now have 3 task!
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][x] test
+2.[D][ ] gaming (by: 29th april 2023)
+3.[E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][x] test
+2.[D][ ] gaming (by: 29th april 2023)
+3.[E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+Not enough details are given!
+The Duke expects more information!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][x] test
+2.[D][ ] gaming (by: 29th april 2023)
+3.[E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has mark the following task:
+ - [D][x] gaming (by: 29th april 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has mark the following task:
+ - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has unmark the following task:
+ - [T][ ] test
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+It seems like the number given isn't on the list!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+It seems like the number given isn't on the list!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+It seems like the number given isn't on the list!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has add the following task:
+ - [D][ ] delete (by: 05 May 2023)
+You now have 4 task!
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+4.[D][ ] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The keyword given is:
+
+"tes"
+
+The Duke has found the following tasks:
+1.[T][ ] test
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The keyword given is:
+
+"e"
+
+The Duke has found the following tasks:
+1.[T][ ] test
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+4.[D][ ] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has delete the following task:
+ - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+You now have 3 task!
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has mark the following task:
+ - [D][x] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[D][x] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has delete the following task:
+ - [D][x] delete (by: 05 May 2023)
+You now have 2 task!
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has mark the following task:
+ - [T][x] test
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has unmark the following task:
+ - [D][ ] gaming (by: 29th april 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][x] test
+2.[D][ ] gaming (by: 29th april 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+____________________________________________________________
+Goodbye, feel free to call the Duke again whenever you need.
+____________________________________________________________
+
