@@ -1,9 +1,18 @@
 package cluck;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 import cluck.exceptions.TaskIndexOutOfBoundsException;
+import cluck.tasks.Deadline;
+import cluck.tasks.Event;
 import cluck.tasks.Task;
+import cluck.tasks.ToDo;
 
 /**
  * TaskList contains the tasks. In a list. Yea.
@@ -66,4 +75,42 @@ public class TaskList {
         }
     }
 
+    public void addSavedTask(String taskData) {
+        Task task = Task.buildTask(taskData.split("\\|"));
+        if (task == null) {
+            return;
+        }
+        taskList.add(task);
+    }
+    public void readSave(File savedFile) {
+        try {
+            Scanner saveFileScanner = new Scanner(savedFile);
+            while (saveFileScanner.hasNextLine()) {
+                this.addSavedTask(saveFileScanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Saves the current list of tasks into 'CluckSave.txt'.
+     * This will overwrite previous saves.
+     * There should be no missing directory error since readSave()
+     * will create the save directory if it does not exist.
+     *
+     * @param saveFile save location for tasks in task list
+     */
+    public void writeSave(File saveFile) {
+        try {
+            FileWriter writer = new FileWriter(saveFile);
+            for (Task t : taskList) {
+                writer.write(t.makeSaveFormat());
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Buh oh! An error occurred!!");
+            e.printStackTrace();
+        }
+    }
 }

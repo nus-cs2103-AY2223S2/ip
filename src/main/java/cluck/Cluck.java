@@ -13,6 +13,7 @@ import cluck.tasks.Deadline;
 import cluck.tasks.Event;
 import cluck.tasks.Task;
 import cluck.tasks.ToDo;
+import cluck.TaskList;
 
 
 public class Cluck {
@@ -26,6 +27,12 @@ public class Cluck {
     private static final String SAVE_DIR_STRING = "SavedData";
     private static final String SAVE_FILE_STRING = "CluckSave.txt";
 
+    private TaskList taskList = new TaskList();
+
+    /**
+     * @param strNum String of interest.
+     * @return returns true if strNum is a number in string format, false otherwise.
+     */
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
@@ -38,94 +45,15 @@ public class Cluck {
         return true;
     }
 
-    private static ArrayList<Task> readSave() {
-        try {
-            if (new File(SAVE_DIR_STRING).mkdirs()) { // returns true if directory was made as it did not exist
-                return new ArrayList<Task>(); // no save file can possibly exist if directory does not exist
-            }
-            File saveFile = new File(SAVE_FILE_STRING);
-            if (saveFile.exists()) {
-                try {
-                    ArrayList<Task> savedTasks = new ArrayList<>();
-                    Scanner saveFileScanner = new Scanner(saveFile);
-
-                    while (saveFileScanner.hasNextLine()) {
-                        populateTaskListFromSave(savedTasks, saveFileScanner.nextLine());
-                    }
-                    return savedTasks;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-            return new ArrayList<Task>();
-        } catch (SecurityException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void populateTaskListFromSave(ArrayList<Task> taskList, String taskData) {
-        Task task = buildTask(taskData.split("\\|"));
-        if (task == null) {
-            return;
-        }
-        taskList.add(task);
-    }
-
-    private static Task buildTask(String[] savedTaskFields) {
-        System.out.println(Arrays.toString(savedTaskFields));
-        boolean isMarked;
-        if (savedTaskFields[1].equals("1")) {
-            isMarked = true;
-        } else if (savedTaskFields[1].equals("0")) {
-            isMarked = false;
-        } else {
-            System.out.println("Corrupted data!");
-            return null;
-        }
-
-        switch (savedTaskFields[0]) {
-        case "E":
-            return new Event(isMarked, savedTaskFields[2], savedTaskFields[3], savedTaskFields[4]);
-
-        case "D":
-            return new Deadline(isMarked, savedTaskFields[2], savedTaskFields[3]);
-
-        case "T":
-            return new ToDo(isMarked, savedTaskFields[2]);
-
-        default:
-            return null;
-        }
-    }
-
     /**
-     * Saves the current list of tasks into 'CluckSave.txt'.
-     * This will overwrite previous saves.
-     * There should be no missing directory error since readSave()
-     * will create the save directory if it does not exist.
-     *
-     * @param toDolist is the list of tasks in the currently running Cluck instance
+     * @param args
      */
-    private static void writeSave(ArrayList<Task> toDolist) {
-        try {
-            File saveFile = new File(SAVE_FILE_STRING);
-            FileWriter writer = new FileWriter(saveFile);
-            for (Task t : toDolist) {
-                writer.write(t.makeSaveFormat());
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Buh oh! An error occurred!!");
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
         System.out.println(Messages.MESSAGE_LOGO);
         System.out.println(Messages.MESSAGE_WELCOME);
 
         boolean loop = true;
-        ArrayList<Task> toDoList = readSave();
+        TaskList toDoList = TaskList.readSave();
         Scanner sc = new Scanner(System.in);
 
         while (loop) {
