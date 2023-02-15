@@ -96,7 +96,7 @@ public class Parser {
      * @param input
      * @return true if input is todo task , else false
      */
-    public static boolean is_toDo(String input) {
+    public static boolean isTodo(String input) {
         assert input.length() > 0 && input != null : "string input should not be empty";
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
@@ -127,7 +127,7 @@ public class Parser {
      * @param input
      * @return true if input is deadline, else false
      */
-    public static boolean is_Deadline(String input) {
+    public static boolean isDeadline(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
             if (firstword_Arr[0].equalsIgnoreCase("deadline")) {
@@ -143,7 +143,7 @@ public class Parser {
      * @param input
      * @return true if input is mark, else false
      */
-    public static boolean is_Mark(String input) {
+    public static boolean isMark(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
             if (firstword_Arr[0].equalsIgnoreCase("mark")) {
@@ -153,7 +153,7 @@ public class Parser {
         return false;
     }
 
-    public static boolean is_Find(String input) {
+    public static boolean isFind(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
             if (firstword_Arr[0].equalsIgnoreCase("find")) {
@@ -163,7 +163,7 @@ public class Parser {
         return false;
     }
 
-    public static String get_Findable(String input) {
+    public static String getFindable(String input) {
         return input.split(" ", 2)[1];
     }
 
@@ -192,7 +192,7 @@ public class Parser {
      * @param input
      * @return true if input is list, else false
      */
-    public static boolean is_List(String input) {
+    public static boolean isList(String input) {
         return input.equalsIgnoreCase("list");
     }
 
@@ -201,7 +201,7 @@ public class Parser {
      * @param input
      * @return true if input is bye, else false
      */
-    public static boolean is_Bye(String input) {
+    public static boolean isBye(String input) {
         return input.equalsIgnoreCase("bye");
     }
 
@@ -210,7 +210,7 @@ public class Parser {
      * @param input
      * @return true if input is delete, else false
      */
-    public static boolean is_Delete(String input) {
+    public static boolean isDelete(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
             if (firstword_Arr[0].equalsIgnoreCase("delete")) {

@@ -25,13 +25,13 @@ public class Ui {
         assert s.length() >= 0: "number of letters in command should not be a negative number";
         ArrayList<Task> tasks = t.getTasks();
         // user enters list command
-        if (Parser.is_List(s)) {
+        if (Parser.isList(s)) {
             TaskList taskListing = new TaskList(tasks);
             return taskListing.displayTasks();
             // return string of tasks -> make displayTasks() return string first
 
             // user enters mark or unmark command
-        } else if (Parser.is_Mark(s) || Parser.isUnmark(s)) {
+        } else if (Parser.isMark(s) || Parser.isUnmark(s)) {
             int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
             tasks.get(taskNumber).toggleMarked();
             String output = "";
@@ -43,11 +43,11 @@ public class Ui {
             return output + "  " + tasks.get(taskNumber).toString();
 
             // user enters a new task
-        } else if (Parser.is_toDo(s)) {
+        } else if (Parser.isTodo(s)) {
             Todo todo = new Todo(Parser.getTodo(s));
             tasks.add(todo);
             return "   added: " + todo;
-        } else if (Parser.is_Deadline(s)) {
+        } else if (Parser.isDeadline(s)) {
             Deadline deadline = Parser.parseDeadline(s);
             tasks.add(deadline);
             return "   added: " + deadline;
@@ -56,7 +56,7 @@ public class Ui {
             Event event = Parser.parseEvent(s);
             return "    added: " + event;
 
-        } else if (Parser.is_Delete(s)) {
+        } else if (Parser.isDelete(s)) {
                 int index = Parser.getIndex(s);
             if (tasks.size() != 0 && index > 0 && index <= tasks.size()) {
                 Task deletedTask = tasks.get(index);
@@ -69,7 +69,7 @@ public class Ui {
 
 
             }
-        else if (Parser.is_Find(s)) {
+        else if (Parser.isFind(s)) {
             String findString = s.split(" ", 2)[1];
             ArrayList<Task> foundTasks = new ArrayList<Task>();
             for (Task task : tasks) {
@@ -120,7 +120,6 @@ public class Ui {
         } else if (s.contains("bye")) {
             return "    Bye. Hope to see you soon!";
         } else {
-            //throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             return "    OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
