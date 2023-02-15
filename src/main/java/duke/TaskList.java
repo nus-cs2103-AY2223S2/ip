@@ -17,11 +17,11 @@ public class TaskList {
         return dukeList;
     }
 
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         dukeList.add(t);
-        System.out.println("Got it. I've added this task:\n  "
+        return "Got it. I've added this task:\n  "
                 + t.toString() + "\nNow you have " + dukeList.size()
-                + " tasks in the list.");
+                + " tasks in the list.";
     }
 
     /**
@@ -29,56 +29,66 @@ public class TaskList {
      * @param n the task number that the user wants to mark/unmark.
      *
      * @param isDone the boolean that decides whether to mark or unmark.
+     * @return
      */
-    public void mark(int n, boolean isDone) {
-        Task t = dukeList.get(n);
-        if (isDone) {
-            t.markAsDone();
-            System.out.println("Nice! I've marked this task as done:\n"
-                    + "  [" + t.getStatusIcon() + "] " + t.description);
-        } else {
-            t.unMark();
-            System.out.println("OK, I've marked this task as not done yet:\n"
-                    + "  [" + t.getStatusIcon() + "] " + t.description);
+    public String mark(int n, boolean isDone) throws IndexOutOfBoundsException {
+        try {
+            Task t = dukeList.get(n);
+            if (isDone) {
+                t.markAsDone();
+                return "Nice! I've marked this task as done:\n"
+                        + "  [" + t.getStatusIcon() + "] " + t.description;
+            } else {
+                t.unMark();
+                return "OK, I've marked this task as not done yet:\n"
+                        + "  [" + t.getStatusIcon() + "] " + t.description;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return "The index you mentioned does not exist";
         }
     }
 
-    public void delete(int n) {
-        Task t = dukeList.get(n);
-        dukeList.remove(n);
-        System.out.println("Noted. I've removed this task:\n  "
-                + t.toString()
-                + "\nNow you have " + dukeList.size()
-                + " tasks in the list.");
+    public String delete(int n) {
+        try {
+            Task t = dukeList.get(n);
+            dukeList.remove(n);
+            return "Noted. I've removed this task:\n  "
+                    + t.toString()
+                    + "\nNow you have " + dukeList.size()
+                    + " tasks in the list.";
+        } catch (IndexOutOfBoundsException e){
+            return "The index you mentioned does not exist";
+        }
     }
 
     /**
      * The method prints out all the tasks in the list.
      */
-    public void find(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String find(String keyword) {
+        String str = "Here are the matching tasks in your list:";
         for (int i = 1; i <= dukeList.size(); i++) {
             Task t = dukeList.get(i - 1);
             String[] s = t.description.split(" ");
             for (int j = 0; j < s.length; j++) {
                 if (s[j].equals(keyword)) {
-                    System.out.println("" + i + ". " + t.toString());
+                    str += "\n" + i + ". " + t.toString();
                     break;
                 }
             }
         }
+        return str;
     }
 
-    public void recite() {
+    public String recite() {
         if (dukeList.size() == 0) {
-            System.out.println("Your list is empty");
+            return "Your list is empty";
         } else {
-            System.out.println("Here are the tasks in you list");
-
+            String str = "Here are the tasks in you list";
             for (int i = 1; i <= dukeList.size(); i++) {
                 Task t = dukeList.get(i - 1);
-                System.out.println("" + i + ". " + t.toString());
+                str += "\n" + i + ". " + t.toString();
             }
+            return str;
         }
     }
 

@@ -40,7 +40,7 @@ public class Parser {
         }
         if (str.equals("bye")) {
             ui.bye();
-            return "do nothing";
+            return "bye";
         }
         return "na";
     }
@@ -52,22 +52,21 @@ public class Parser {
      * @param str is the string that the user inputted
      * @param taskList is that list that will be acted on by the command.
      */
-    public static void parse(String str, TaskList taskList) {
+    public static String parse(String str, TaskList taskList) {
         switch (getSwitch(str)) {
         case "list":
-            taskList.recite();
-            break;
+            return taskList.recite();
 
         case "mark":
             String num = str.split(" ", 2)[1];
             int n = Integer.parseInt(num) - 1;
-            taskList.mark(n, true);
-            break;
+            return taskList.mark(n, true);
+
         case "unmark":
             String num_1 = str.split(" ", 2)[1];
             int n_1 = Integer.parseInt(num_1) - 1;
-            taskList.mark(n_1, false);
-            break;
+            return taskList.mark(n_1, false);
+
         case "todo":
             Task a;
             try {
@@ -76,8 +75,8 @@ public class Parser {
                 System.out.println(e.getMessage());
                 break;
             }
-            taskList.addTask(a);
-            break;
+            return taskList.addTask(a);
+
         case "deadline":
             Task b = null;
             try {
@@ -88,8 +87,8 @@ public class Parser {
                 System.out.println(e.getMessage());
                 break;
             }
-            taskList.addTask(b);
-            break;
+            return taskList.addTask(b);
+
         case "event":
             Task c = null;
             try {
@@ -101,23 +100,23 @@ public class Parser {
                 System.out.println(e.getMessage());
                 break;
             }
-            taskList.addTask(c);
-            break;
+            return taskList.addTask(c);
+
         case "delete":
             String num_D = str.split(" ", 2)[1];
             int nD = Integer.parseInt(num_D) - 1;
-            taskList.delete(nD);
-            break;
+            return taskList.delete(nD);
+
         case "find":
             String keyword = str.replace("find ", "");
-            taskList.find(keyword);
-            break;
-        case "na":
-            ui.unknownCommand();
-            break;
+            return taskList.find(keyword);
 
-        case "do nothing":
-            break;
+        case "na":
+            return ui.unknownCommand();
+
+        case "bye":
+            return ui.bye();
         }
+        return "invalid";
     }
 }
