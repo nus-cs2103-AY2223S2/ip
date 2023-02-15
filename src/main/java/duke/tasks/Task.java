@@ -16,6 +16,10 @@ public abstract class Task {
         return this.instruction;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void setDone() {
         this.isDone = true;
     }
