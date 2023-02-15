@@ -29,6 +29,7 @@ Example of usage:
 ### `deadline` - Adds a task with a due date
 
 It will add a task to Duke's list with its due date.
+
 It will also convert the month of date to from numbers to word if the input date is given as `d/m/yyyy`
 
 Usage:
@@ -111,6 +112,7 @@ Example of usage:
 ### `find` - Finds a task
 
 It will find tasks in Duke's list that contains the given keyword.
+
 If more than 1 keyword are given, it will find only tasks that contains the entire keywords in its exact order.
 
 Usage:
