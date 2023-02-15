@@ -32,7 +32,9 @@ public class FuzzySearch {
     }
 
     /**
-     * This code uses the Levenshtein distance algorithm to compare strings.
+     * This code was taken from the Levenshtein distance algorithm to compare strings.
+     * Referenced from:
+     * https://www.geeksforgeeks.org/java-program-to-implement-levenshtein-distance-computing-algorithm/
      * The algorithm was first published by Vladimir Levenshtein in 1965.
      * @param s1 first string
      * @param s2 second string

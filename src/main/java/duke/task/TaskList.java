@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import duke.exception.DukeException;
 
@@ -40,42 +41,26 @@ public class TaskList {
     }
 
     /**
-     * Returns a Task object at a specific index.
+     * Returns a deep copy of a Task object at a specific index.
      *
      * @param i index.
      * @return Task object at index.
      */
     public Task getTaskAtIndex(Integer i) {
-        return tasks.get(i);
-    }
-
-    /**
-     * Returns a duke.task.TaskList of tasks matching the string description.
-     *
-     * @param description of a task.
-     */
-    public void matchDescription(String description) {
-        FuzzySearch search = new FuzzySearch();
-        System.out.println("Here are the tasks matched in your list: ");
-        Integer numMatches = 0;
-        Boolean noExactMatch = true;
-        // Look for exact matches first.
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = this.getTaskAtIndex(i);
-            if (task.getDescription().equals(description)) {
-                noExactMatch = false;
-                System.out.println((++numMatches) + ". " + task.toString());
-            }
+        Task original = tasks.get(i);
+        if (original instanceof Todo) {
+            Todo copy = new Todo(original.getDescription());
+            return copy;
+        } else if (original instanceof Deadline) {
+            Deadline copy = new Deadline(original.getDescription(), ((Deadline) original).getBy());
+            return copy;
+        } else if (original instanceof Event) {
+            Event copy = new Event(original.getDescription(), ((Event) original).getFrom(), ((Event) original).getTo());
+            return copy;
+        } else {
+            assert original instanceof Task : "Something is not a task";
         }
-        // Look for similar matches.
-        Task similarTask = search.fuzzySearch(description, this, 5);
-        if (noExactMatch && similarTask != null) {
-            System.out.println("It seems that there are no exact matches. \n "
-                    + "Here's the most similar task I could find");
-            System.out.println(1 + ". " + similarTask.toString());
-        } else if (noExactMatch && numMatches == 0) {
-            System.out.println("It seems that there are no matches.");
-        }
+        return null;
     }
 
     /**
@@ -88,19 +73,29 @@ public class TaskList {
         sb.append("Here are the tasks matched in your list: \n");
         FuzzySearch search = new FuzzySearch();
         Integer numMatches = 0;
-        Boolean noExactMatch = true;
-        for (int i = 0; i < tasks.size(); i++) {
+        // Keep track what of duplicates
+        HashSet<String> dictionary = new HashSet<>();
+
+        for (int i = 0; i < this.size(); i++) {
             Task task = this.getTaskAtIndex(i);
-            if (task.getDescription().equals(description)) {
+            String taskDescriptionWithoutSpace = task.getDescription().replaceAll("\\s", "");
+            String descriptionWithoutSpace = description.replaceAll("\\s", "");
+            if (description.equals(task.getDescription())) {
+                dictionary.add(task.toString());
+                sb.append((++numMatches) + ". " + task.toString() + "\n");
+            } else if (taskDescriptionWithoutSpace.contains(descriptionWithoutSpace)) {
+                dictionary.add(task.toString());
                 sb.append((++numMatches) + ". " + task.toString() + "\n");
             }
         }
-        // Look for similar matches.
-        Task similarTask = search.fuzzySearch(description, this, 5);
-        if (noExactMatch && similarTask != null) {
-            sb.append("It seems that there are no exact matches. \n "
-                    + "Here's the most similar task I could find \n");
-            sb.append(1 + ". " + similarTask.toString());
+        if (numMatches == 0) {
+            sb.append("\n Unfortunately, I could not find any exact matches.");
+        }
+        // Look for at least one similar match.
+        Task taskSimilar = search.fuzzySearch(description, this, 5);
+        if (taskSimilar != null && !dictionary.contains(taskSimilar.toString())) {
+            sb.append("\n The following might be relevant to you: \n");
+            sb.append((++numMatches) + ". " + taskSimilar.toString() + "\n");
         }
         return sb.toString();
     }
@@ -114,7 +109,7 @@ public class TaskList {
     public void deleteTaskAtIndex(Integer i) {
         try {
             if (i < 0 || i >= tasks.size()) {
-                throw new DukeException("☹ OOPS!!! The number to delete is invalid.");
+                throw new DukeException("OOPS!!! The number to delete is invalid.");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
