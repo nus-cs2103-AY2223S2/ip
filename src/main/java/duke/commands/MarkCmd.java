@@ -16,7 +16,7 @@ public class MarkCmd extends Command {
 
     /**
      * Constructor method.
-     * 
+     *
      * @param taskList Task list of the task to mark
      * @param lineInput Command line input that the user entered
      */

@@ -31,7 +31,7 @@ public class Main extends Application {
             stage.setOnShowing(event -> {
                 mainWindow.greetUser();
             });
-            
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

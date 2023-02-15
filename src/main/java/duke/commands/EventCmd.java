@@ -19,7 +19,7 @@ public class EventCmd extends Command {
 
     /**
      * Constructor method.
-     * 
+     *
      * @param taskList Task list to add the Event task to
      * @param lineInput Command line input that the user entered
      */

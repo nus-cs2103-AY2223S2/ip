@@ -12,7 +12,7 @@ public class ListCmd extends Command {
 
     /**
      * Constructor method.
-     * 
+     *
      * @param taskList Task list to output to UI
      * @param lineInput Command line input that the user entered
      */

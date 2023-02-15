@@ -18,7 +18,7 @@ public class DeadlineCmd extends Command {
 
     /**
      * Constructor method.
-     * 
+     *
      * @param taskList Task list to add the Deadline task to
      * @param lineInput Command line input that the user entered
      */

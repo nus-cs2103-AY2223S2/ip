@@ -4,7 +4,7 @@ package duke.exceptions;
 public class EventFromToNotSpecified extends MissingCommandArguments {
     /**
      * Constructor method.
-     * 
+     *
      * @param errorMessage Error message to display to user
      */
     public EventFromToNotSpecified() {
