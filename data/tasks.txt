@@ -1,3 +1,0 @@
-todo  buy bread1
-deadline submit iP /by 01/04/2023 23590
-event competition /from 22/10/2022 0900 /to 22/10/2022 17000
