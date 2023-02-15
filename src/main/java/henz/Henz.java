@@ -83,11 +83,6 @@ public class Henz {
     public String getResponse(String input) {
         Command command = Parser.parse(input);
 
-        // Breaks when is an exit command
-        if (command.isExit()) {
-            return "Todeloo!";
-        }
-
         // Executes command
         return command.execute(this.tasks, this.ui, this.storage);
     }
@@ -100,3 +95,4 @@ public class Henz {
         new Henz("data/henz.txt").run();
     }
 }
+
