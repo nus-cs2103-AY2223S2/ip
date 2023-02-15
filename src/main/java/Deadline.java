@@ -9,12 +9,6 @@ public class Deadline extends Task {
     LocalDate deadline;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-    DateTimeFormatter formatter3= DateTimeFormatter.ofPattern("yyyy-MMM-dd");
-    DateTimeFormatter formatter4 = DateTimeFormatter.ofPattern("yyyy/MMM/dd");
-
-    DateTimeFormatter formatter5 = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
-    DateTimeFormatter formatter6 = DateTimeFormatter.ofPattern("MMM/dd/yyyy");
-
 
 
 
@@ -28,23 +22,7 @@ public class Deadline extends Task {
             try {
                 this.deadline = LocalDate.parse(this.deadlineString, formatter2);
             } catch (DateTimeParseException e2) {
-                try {
-                    this.deadline = LocalDate.parse(this.deadlineString, formatter3);
-                } catch (DateTimeParseException e3) {
-                    try {
-                        this.deadline = LocalDate.parse(this.deadlineString, formatter4);
-                    } catch (DateTimeParseException e4) {
-                        try {
-                            this.deadline = LocalDate.parse(this.deadlineString, formatter5);
-                        } catch (DateTimeParseException e5) {
-                            try {
-                                this.deadline = LocalDate.parse(this.deadlineString, formatter6);
-                            } catch (DateTimeParseException e6) {
-                                throw new IOException();
-                            }
-                        }
-                    }
-                }
+                System.out.println("Please enter the date in this format: dd-MMM-YYYY OR dd/MMM/YYYY");
             }
         }
 
