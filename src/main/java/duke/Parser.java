@@ -28,6 +28,7 @@ public class Parser {
             boolean hasDetails = arr.length != 1;
             switch (arr[0]) {
             case "bye":
+            case "exit":
                 str = ui.exit();
                 break;
             case "list":
