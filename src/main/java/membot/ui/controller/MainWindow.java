@@ -31,7 +31,6 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream(USER_ICON));
     private final Image botImage = new Image(this.getClass().getResourceAsStream(BOT_ICON));
-//    private
 
     @FXML
     public void initialize() {
