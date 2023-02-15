@@ -7,8 +7,13 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(boolean isMarked, String content) {
+        super(isMarked, content);
+    }
+
+
     @Override
-    public String toSavedString() {
+    public String addDivider() {
         return "T | " + super.toSavedString();
     }
 

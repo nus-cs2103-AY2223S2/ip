@@ -15,6 +15,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class Duke extends Application{
     private Storage storage;
@@ -30,9 +32,9 @@ public class Duke extends Application{
 
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws DukeException, IOException {
         storage = new Storage(System.getProperty("user.dir") +"/data/duke.txt");
-        tasks = new TaskList(storage.load());
+        tasks = storage.loadFile();
 
         //Step 1. Setting up required components
 
@@ -88,11 +90,21 @@ public class Duke extends Application{
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException | IOException e) {
+                e.getMessage();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
     /**
@@ -113,7 +125,7 @@ public class Duke extends Application{
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException, IOException {
         String input = userInput.getText();
         String response = Ui.handleCommand(input, tasks);
         Label userText = new Label(input + "  ");
@@ -124,7 +136,7 @@ public class Duke extends Application{
         );
         userInput.clear();
         if (input.contains("bye")) {
-            storage.saveData(tasks);
+            storage.saveToFile(tasks);
             Platform.exit();
         }
     }
@@ -136,6 +148,5 @@ public class Duke extends Application{
     private String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
 }
 

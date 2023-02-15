@@ -41,10 +41,26 @@ public class Parser {
      * @param input
      * @return returns the index of that command as an int type
      */
-    public static int getIndex(String input) {
+    public static int getIndex(String input) throws DukeException {
+
         String int_Str = input.split(" ", 2)[1];
-        int index = Integer.parseInt(int_Str);
-        return index;
+        try {
+            int index = Integer.parseInt(int_Str);
+            return index;
+        } catch(Exception e){
+            throw new DukeException("Not a valid index!");
+        }
+    }
+
+    public static int getTaskNum(String input) throws DukeException {
+
+        String int_Str = input.split(" ")[1];
+        try {
+            int index = Integer.parseInt(int_Str);
+            return index;
+        } catch(Exception e){
+            throw new DukeException("Not a valid index!");
+        }
     }
 
     /**
@@ -96,7 +112,7 @@ public class Parser {
      * @param input
      * @return true if input is event task, else false
      */
-    public static boolean is_Event(String input) {
+    public static boolean isEvent(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
             if (firstword_Arr[0].equalsIgnoreCase("event")) {
@@ -151,10 +167,20 @@ public class Parser {
         return input.split(" ", 2)[1];
     }
 
-    public static boolean is_Unmark(String input) {
+    public static boolean isUnmark(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
             if (firstword_Arr[0].equalsIgnoreCase("unmark")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSnooze(String input) {
+        String[] firstword_Arr = input.split(" ", 2);
+        if (firstword_Arr.length == 2 ) {
+            if (firstword_Arr[0].equalsIgnoreCase("snooze")) {
                 return true;
             }
         }

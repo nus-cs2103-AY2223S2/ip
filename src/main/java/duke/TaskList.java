@@ -28,7 +28,19 @@ public class TaskList {
         return s;
     }
 
+    public int size() {
+        return this.tasks.size();
+    }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+
+    public Task get(int i) {
+        return tasks.get(i);
+    }
+
+    public void add(Task task) {
+        tasks.add(task);
     }
 }

@@ -2,21 +2,26 @@ package duke;
 
 import duke.Ui;
 // custom duke.Task class to store individual tasks that the user enters
-public class Task {
+public abstract class Task {
     protected String description;
-    protected boolean isDone;
+    protected boolean isMarked;
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.isMarked = false;
+    }
+
+    public Task(Boolean isMarked, String Task_content) {
+        this.description = Task_content;
+        this.isMarked = isMarked;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return (isMarked ? "[X]" : "[ ]"); // mark done task with X
     }
 
     public void toggleMarked() {
-        this.isDone = !this.isDone;
+        this.isMarked = !this.isMarked;
     }
 
     public String getDescription() {
@@ -24,12 +29,17 @@ public class Task {
     }
 
     public String toSavedString() {
-        return this.isDone ? "1 | " + this.description : "0 | " + this.description;
+        return this.isMarked ? "1 | " + this.description : "0 | " + this.description;
     }
 
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.description;
     }
+
+    public boolean isMarked() {
+        return this.isMarked;
+    }
+    public abstract String addDivider();
 }
 

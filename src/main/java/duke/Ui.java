@@ -1,6 +1,12 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 // class Ui - handles all the lines to be printed and all the user inputs (commands)
 public class Ui {
@@ -14,43 +20,22 @@ public class Ui {
         return "    Hi! I'm Duke\n    How can I help?";
     }
 
-/*    public void takeCommands(TaskList t) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-
-        ArrayList<Task> tasks = t.getTasks();
-        int taskCounter = tasks.size();
-        while (!s.equals("bye")) {
-            try {
-                // method handleCommand handles current command, returns updated taskCounter variable
-                taskCounter = handleCommand(s, tasks, taskCounter);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            // take in next command
-            s = sc.nextLine();
-        }
-
-        System.out.println("    Bye. Hope to see you soon!");
-    }*/
-
-    public static String handleCommand(String s, TaskList t) {
+    public static String handleCommand(String s, TaskList t) throws DukeException {
         assert t.getTasks().size() >= 0: "Number of tasks should be not be a  negative number";
         assert s.length() >= 0: "number of letters in command should not be a negative number";
         ArrayList<Task> tasks = t.getTasks();
         // user enters list command
-        if (s.contains("list")) {
+        if (Parser.is_List(s)) {
             TaskList taskListing = new TaskList(tasks);
             return taskListing.displayTasks();
             // return string of tasks -> make displayTasks() return string first
 
             // user enters mark or unmark command
-        } else if (s.contains("mark") || s.contains("unmark")) {
+        } else if (Parser.is_Mark(s) || Parser.isUnmark(s)) {
             int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
             tasks.get(taskNumber).toggleMarked();
             String output = "";
-            if (s.contains("unmark")) {
+            if (Parser.isUnmark(s)) {
                 output += "    OK, I've marked this task as not done yet:";
             } else {
                 output += "    Nice! I've marked this task as done:";
@@ -58,49 +43,34 @@ public class Ui {
             return output + "  " + tasks.get(taskNumber).toString();
 
             // user enters a new task
-        } else if (s.contains("todo")) {
-            if (s.substring(4).isBlank()) {
-                return "    OOPS!!! The description of a todo cannot be empty.";
-            } else {
-                Task newTask = new Todo(s.substring(5));
-                tasks.add(newTask);
-                return "    added: " + newTask;
-            }
+        } else if (Parser.is_toDo(s)) {
+            Todo todo = new Todo(Parser.getTodo(s));
+            tasks.add(todo);
+            return "   added: " + todo;
+        } else if (Parser.is_Deadline(s)) {
+            Deadline deadline = Parser.parseDeadline(s);
+            tasks.add(deadline);
+            return "   added: " + deadline;
 
-        } else if (s.contains("deadline")) {
-            if (s.substring(8).isBlank()) {
-                return "    OOPS!!! The description of a deadline cannot be empty.";
-            } else {
-                String by = s.substring(s.indexOf("/") + 4);
-                Task newTask = new Deadline(s.substring(9, s.indexOf("/") - 1), by);
-                tasks.add(newTask);
-                return "    added: " + newTask;
-            }
+        } else if (Parser.isEvent(s)) {
+            Event event = Parser.parseEvent(s);
+            return "    added: " + event;
 
-        } else if (s.contains("event")) {
-            if (s.substring(5).isBlank()) {
-                return "    OOPS!!! The description of a event cannot be empty.";
-            } else {
-                String from = s.substring(s.indexOf("/") + 6, s.lastIndexOf("/") - 1);
-                String to = s.substring(s.lastIndexOf("/") + 4);
-                Task newTask = new Event(s.substring(6, s.indexOf("/") - 1), from, to);
-                tasks.add(newTask);
-                return "    added: " + newTask;
-            }
-
-        } else if (s.contains("delete")) {
-            if (s.substring(6).isBlank()) {
-                return "    OOPS!!! You have not entered anything to delete.";
-            } else {
-                int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
-                Task deletedTask = tasks.get(taskNumber);
-                tasks.remove(taskNumber);
+        } else if (Parser.is_Delete(s)) {
+                int index = Parser.getIndex(s);
+            if (tasks.size() != 0 && index > 0 && index <= tasks.size()) {
+                Task deletedTask = tasks.get(index);
+                tasks.remove(index);
                 return "    Noted. I've removed this task:\n      " + deletedTask +
                         "\n    Now you have " + tasks.size()+ " tasks in the list";
+            } else {
+                return " OOPS!!!  task number is out of bounds!";
+            }
+
 
             }
-        } else if (s.contains("find")) {
-            String findString = s.substring(5);
+        else if (Parser.is_Find(s)) {
+            String findString = s.split(" ", 2)[1];
             ArrayList<Task> foundTasks = new ArrayList<Task>();
             for (Task task : tasks) {
                 if (task.toString().contains(findString)) {
@@ -110,7 +80,43 @@ public class Ui {
             TaskList searchResults = new TaskList(foundTasks);
             return "Here are the tasks I found!\n" + searchResults.displayTasks();
 
-            // make displayTasks return a String
+
+        } else if (Parser.isSnooze(s)) {
+            //edit existing deadline
+            //format: snooze 1 /to
+            try {
+                Parser.getTaskNum(s);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+
+            int taskNumber = Parser.getTaskNum(s) - 1;
+
+
+            Task snoozedTask = tasks.get(taskNumber);
+            if (!(snoozedTask instanceof Deadline)) {
+                return "    OOPS!!! Task must be a deadline to snooze!";
+            }
+
+            Deadline deadline = (Deadline) snoozedTask;
+
+            String date  = (s.split(" /to", 2)[1]).trim();
+
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            try {
+                LocalDate snoozedDate = LocalDate.parse(date, formatter);
+            } catch(DateTimeParseException e) {
+                return "Date is an invalid format! Should be yyyy-MM-dd HH:mm";
+            }
+
+            if (LocalDateTime.parse(date, formatter).compareTo(deadline.getDeadline()) > 0) {
+                tasks.set(taskNumber, new Deadline(deadline.getDescription(), date));
+                Deadline newDeadline = (Deadline) tasks.get(taskNumber);
+                return deadline + " has been snoozed to " + newDeadline.getDeadline();
+            } else {
+                return  "    OOPS!!! Cannot snooze to an earlier or same timing!";
+            }
         } else if (s.contains("bye")) {
             return "    Bye. Hope to see you soon!";
         } else {
