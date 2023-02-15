@@ -1,0 +1,46 @@
+list
+todo
+deadline
+event
+somerandomcommand
+todo CS2103 Tutorial 1
+list
+todo CS2103 Tutorial 2 /by tomorrow
+deadline CS2103 Tutorial 2 /by tomorrow
+list
+deadline /by tomorrow CS2103 Tutorial 3
+deadline CS2103 Tutorial 3 /by
+deadline CS2103 Tutorial 3 /from today 2pm /to today 4pm
+event CS2103 Tutorial 3 /from today 2pm /to today 3pm
+event CS2103 Tutorial 4 /to next monday 3pm /from next monday 2pm
+list
+event CS2103 Tutorial 5 /to 2pm
+event CS2103 Tutorial 5 /from 4pm
+event CS2103 Tutorial 5 /from /to 4pm
+event CS2103 Tutorial 5 /from /to
+event /from 2pm CS2103 Tutorial 5 /to 4pm
+done 1
+done 3
+todo Another task on hand
+todo Yet another one
+done 4
+done 10
+done 0
+done 1
+undone 2
+undone 1
+undone 10
+undone 0
+delete 2
+delete 10
+delete 0
+deadline Finish up CS2103 Project /by tomorrow 5pm
+list
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+list
+bye
