@@ -10,7 +10,7 @@ public class Storage {
     private static File f;
 
     /**
-     * construct a Storage object that stores data into a file.
+     * constructs a Storage object that stores data into a file.
      * @param filePath file path leading to data directory.
      * @throws DukeException if file not found.
      */
