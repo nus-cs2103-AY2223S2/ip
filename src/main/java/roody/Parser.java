@@ -2,6 +2,7 @@ package roody;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import roody.commands.Command;
 import roody.commands.DeleteCommand;
@@ -144,7 +145,9 @@ public class Parser {
     }
 
     private static String[] parseEvent(String[] splitCmd) throws RoodyException {
-        boolean isWrongFlag = !(splitCmd[1].substring(0, 4).equals("from") && splitCmd[1].substring(0, 2).equals("to"));
+        System.out.println(Arrays.toString(splitCmd));
+        boolean isWrongFlag = !(splitCmd[1].trim().substring(0, 4).equals("from")
+                && splitCmd[2].trim().substring(0, 2).equals("to"));
         if (splitCmd.length != 3 || isWrongFlag) {
             throw new RoodyException("No date was detected! - /from {date} /to {date}");
         }

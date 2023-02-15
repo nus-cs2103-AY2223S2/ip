@@ -121,7 +121,7 @@ public class Ui {
         Integer listIndex = 0;
         for (Task task : list) {
             listIndex++;
-            stringBuilder.append(listIndex.toString() + '.' + task.toString() + '\n');
+            stringBuilder.append(listIndex.toString() + ". " + task.toString() + '\n');
         }
         assert list.size() == listIndex : "Error while printing, task number mismatch";
         return stringBuilder.toString();
