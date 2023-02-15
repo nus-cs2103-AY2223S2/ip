@@ -10,7 +10,6 @@ import panav.ui.Ui;
  */
 public abstract class Command {
 
-    private String commandName;
 
     /**
      * Abstract method to denote behaviour of each command when called.

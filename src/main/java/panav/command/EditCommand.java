@@ -13,7 +13,6 @@ public class EditCommand extends Command {
 
     private String fullCommand;
     private boolean isMark;
-    private boolean flag;
 
     /**
      * Constructor to initialise attributes.
@@ -23,7 +22,6 @@ public class EditCommand extends Command {
     public EditCommand(String fullCommand, boolean isMark) {
         this.fullCommand = fullCommand;
         this.isMark = isMark;
-        this.flag = isMark;
     }
 
     public final String COMMAND_WORD = isMark ? "mark" : "unmark";
