@@ -66,7 +66,7 @@ deadline CS2103T UG Submission /by 2023-02-17 2359
 ```
 
 **Expected outcome:**
-*Returns response with the description of your event.*
+*Returns response with the description of your deadline.*
 ```markdown
 Great! I've added this task for you
  [D][ ] CS2103T UG Submission (by: Feb 17 2023, 11:59PM) 
