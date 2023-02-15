@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UiTest {
     @Test
     public void welcomeMessage() {
-        assertEquals("Hello! I'm Duke\nWhat can I do for you?", new Ui().showWelcomeMessage());
+        assertEquals("Hello! I'm Spongebob\nWhat can I do for you?", new Ui().showWelcomeMessage());
     }
 
     @Test

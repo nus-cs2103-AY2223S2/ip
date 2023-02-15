@@ -19,6 +19,7 @@ public class Parser {
      * @throws SpongebobUnknownCommandException indicate that an unknown command has been passed.
      * @throws SpongebobEmptyArgumentException indicate that a command has been passed an empty argument.
      * @throws SpongebobInvalidArgumentException indicate that a command has been passed an illegal argument.
+     * @throws SpongebobEventOverlapException indicate there are overlapping tasks exist.
      */
     public static Command parse(String input) throws SpongebobUnknownCommandException,
             SpongebobEmptyArgumentException, SpongebobInvalidArgumentException, SpongebobEventOverlapException {

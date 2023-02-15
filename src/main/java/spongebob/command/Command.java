@@ -27,6 +27,7 @@ public abstract class Command {
      * @param task list that store the task.
      * @param ui User Interface of the application.
      * @param storage Database that store previous undelete task.
+     * @return response given by spongebob.
      * @throws SpongebobInvalidArgumentException indicate that a command has been passed an illegal argument.
      * @throws SpongebobIoException indicate failed or interrupted I/O operations occurred.
      * @throws SpongebobEventOverlapException indicate there are events overlap with each other.

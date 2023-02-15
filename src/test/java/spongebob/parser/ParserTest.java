@@ -18,7 +18,7 @@ public class ParserTest {
             SpongebobInvalidArgumentException, SpongebobUnknownCommandException, SpongebobEventOverlapException {
         assertEquals(ExitCommand.class, Parser.parse("EXIT").getClass());
         assertEquals(ListCommand.class, Parser.parse("liST").getClass());
-        assertEquals(MarkCommand.class, Parser.parse("mArK").getClass());
+        assertEquals(MarkCommand.class, Parser.parse("mArK 1").getClass());
     }
 
     @Test

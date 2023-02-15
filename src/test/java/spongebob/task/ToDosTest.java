@@ -11,12 +11,12 @@ public class ToDosTest {
 
     @Test
     public void toString_ValidTask1_StringReturned(){
-        assertEquals("[T][0] Do Homework", task1.toString());
+        assertEquals("[T] [0] Do Homework", task1.toString());
     }
 
     @Test
     public void toString_ValidTask2_StringReturned(){
-        assertEquals("[T][0] Do CS2103T IP", task2.toString());
+        assertEquals("[T] [0] Do CS2103T IP", task2.toString());
     }
 }
 

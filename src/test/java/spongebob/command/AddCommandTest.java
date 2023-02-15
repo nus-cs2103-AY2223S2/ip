@@ -20,8 +20,8 @@ public class AddCommandTest {
     public void isExit() throws SpongebobEmptyArgumentException,
             SpongebobInvalidArgumentException, SpongebobEventOverlapException {
         assertEquals(false, new AddCommand(new String[]{"todo", "do ip"}).isExit());
-        assertEquals(false, new AddCommand(new String[]{"deadline", "do ip /by 2023-01-17T23:59:59"}).isExit());
-        assertEquals(false, new AddCommand(new String[]{"event", "do ip /from 2023-01-01T00:00:00 /to " +
-                "2023-01-17T23:59:59"}).isExit());
+        assertEquals(false, new AddCommand(new String[]{"deadline", "do ip /by 28/01/2023 23:59"}).isExit());
+        assertEquals(false, new AddCommand(new String[]{"event",
+                "do ip /from 28/01/2023 23:59 /to 29/01/2023 23:59"}).isExit());
     }
 }

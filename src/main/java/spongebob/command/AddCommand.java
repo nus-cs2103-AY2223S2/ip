@@ -21,6 +21,7 @@ public class AddCommand extends Command {
      * @param fullCommand User input command.
      * @throws SpongebobEmptyArgumentException indicate that a command has been passed an empty argument.
      * @throws SpongebobInvalidArgumentException indicate that a command has been passed an illegal argument.
+     * @throws SpongebobEventOverlapException indicate there are overlapping tasks exist.
      */
     public AddCommand(String[] fullCommand) throws SpongebobEmptyArgumentException, SpongebobInvalidArgumentException,
             SpongebobEventOverlapException {

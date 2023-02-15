@@ -34,6 +34,7 @@ public class Events extends Task {
      * @param startTime starting time of events.
      * @param endTime end time of events.
      * @throws SpongebobInvalidArgumentException indicate that a command has been passed an illegal argument.
+     * @throws SpongebobEventOverlapException indicate there are overlapping tasks exist.
      */
     public Events(String description, String startTime, String endTime) throws SpongebobInvalidArgumentException,
             SpongebobEventOverlapException {
