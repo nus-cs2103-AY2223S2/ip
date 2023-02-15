@@ -54,6 +54,14 @@ public class Membot {
         try {
             command = Command.parse(s, ui, this);
             command.execute();
+
+            if (this.manager != null) {
+                try {
+                    Task.save(this.manager);
+                } catch (IOException e) {
+                    this.ui.printlnError(e.toString());
+                }
+            }
         } catch (EmptyInputException | InvalidCommandException e) {
             this.ui.printlnError("Sorry I do not understand what to do!");
         }
@@ -63,14 +71,6 @@ public class Membot {
      * Cleans up Membot and exits.
      */
     public void exit() {
-        if (this.manager != null) {
-            try {
-                Task.save(this.manager);
-            } catch (IOException e) {
-                this.ui.printlnError(e.toString());
-            }
-        }
-
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
