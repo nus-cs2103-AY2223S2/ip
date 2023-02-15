@@ -4,17 +4,17 @@ Welcome to Krusty Krab. Here are a list of features and commands that will make 
 
 ## Features 
 
-| Command                 | Description |
-|-------------------------|-----|
-| `bye` `exit`            | Exit the app |
-| `todo`<br/> `t`         | Create a new task 
-| `deadline` <br/> `d`    | Create a new task to be completed by a given date
-| `event`<br/>`e`         | Create a new event with a start and end date
-| `list`<br/>`ls`<br/>`l` | List all tasks
-| `delete`<br/>`rm`       | Delete a task
-| `mark`<br/>`m`          | Mark task as completed
-| `unmark` <br/>`um`      | Unmark completed task
-| `find`<br/>`f`           | Search for a task
+| Command                 | Description                                       |
+|-------------------------|---------------------------------------------------|
+| `bye` `exit`            | Exit the app                                      |
+| `todo`<br/> `t`         | Create a new task                                 |
+| `deadline` <br/> `d`    | Create a new task to be completed by a given date |
+| `event`<br/>`e`         | Create a new event with a start and end date      |
+| `list`<br/>`ls`<br/>`l` | List all tasks                                    |
+| `delete`<br/>`rm`       | Delete a task                                     |
+| `mark`<br/>`m`          | Mark task as completed                            |
+| `unmark` <br/>`um`      | Unmark completed task                             |
+| `find`<br/>`f`          | Search for a task                                 |
 
 ### Feature - Quit Program
 
