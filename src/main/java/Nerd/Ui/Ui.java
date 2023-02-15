@@ -69,7 +69,7 @@ public class Ui {
     }
 
     public String printSearchResponse(String result, String description) {
-        String output = "Easy command for me! Here are the tasks that are associated with" + description + ":\n";
+        String output = "Easy command for me! Here are the tasks that are associated with " + description + ":\n";
         output += result;
         return output;
     }
