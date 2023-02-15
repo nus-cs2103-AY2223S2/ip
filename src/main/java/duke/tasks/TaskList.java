@@ -3,6 +3,8 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.exceptions.ListIndexOutOfRange;
+
 
 /**
  * Wrapper class for list to contain tasks
@@ -36,11 +38,15 @@ public class TaskList {
      * @param index Index of task to remove
      * @return Removed task
      */
-    public Task removeTask(int index) {
+    public Task removeTask(int index) throws ListIndexOutOfRange {
         int sizeBeforeRemove = this.countTasks();
-        Task removedTask = this.tasks.remove(index);
-        assert sizeBeforeRemove - this.countTasks() == 1;
-        return removedTask;
+        try {
+            Task removedTask = this.tasks.remove(index);
+            assert sizeBeforeRemove - this.countTasks() == 1;
+            return removedTask;
+        } catch (Exception e) {
+            throw new ListIndexOutOfRange();
+        }
     }
 
     /**
