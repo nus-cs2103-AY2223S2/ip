@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="colette.gui.HelpWindow">
+    <children>
+        <VBox fx:id="dialogContainer">
+            <StackPane prefWidth="250.0" maxWidth="250.0" maxHeight="Infinity" style="-fx-padding: 10 10 10 10;">
+                <Text fx:id="helpText" text="label" textAlignment="center" style="-fx-font-family: Lucida Grande; -fx-font-size: 20;"/>
+            </StackPane>
+            <StackPane prefWidth="250.0" style="-fx-padding: 0 0 10 0;">
+                <Hyperlink fx:id="userGuideHyperlink" text="You can also visit the user guide!" textAlignment="center" style="-fx-font-family: Lucida Grande; -fx-font-size: 20;"/>
+            </StackPane>
+        </VBox>
+    </children>
+</AnchorPane>

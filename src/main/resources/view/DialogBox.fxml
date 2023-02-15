@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" style="-fx-padding: 10 10 10 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <StackPane prefWidth="250.0" maxWidth="250.0" maxHeight="Infinity" style="-fx-padding: 10 10 10 10; -fx-border-width: 1; -fx-border-color: black; -fx-background-color: gainsboro; -fx-border-radius: 7; -fx-background-radius: 7;">
+      <Text fx:id="dialog" text="label" textAlignment="center" style="-fx-font-family: Lucida Grande; -fx-font-size: 15;"/>
+    </StackPane>
+    <StackPane style="-fx-padding: 0 10 0 10;" >
+      <ImageView fx:id="displayPicture" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
+    </StackPane>
+  </children>
+  <padding>
+    <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+  </padding>
+</fx:root>
