@@ -38,6 +38,6 @@ public class DeadlineCommand extends Command {
             throw new DuplicateException();
         }
         storage.saveTask(list.addTask(deadline));
-        return "Got it. I've added this task:\n  " + deadline + "\n" + list.getTotalTask();
+        return "Got it. I've added this task:\n  " + deadline + "\n" + list.getTotalTask() + "\n";
     }
 }

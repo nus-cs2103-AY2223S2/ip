@@ -33,6 +33,6 @@ public class TodoCommand extends Command {
             throw new DuplicateException();
         }
         storage.saveTask(list.addTask(todo));
-        return "Got it. I've added this task:\n  " + todo + "\n" + list.getTotalTask();
+        return "Got it. I've added this task:\n  " + todo + "\n" + list.getTotalTask() + "\n";
     }
 }

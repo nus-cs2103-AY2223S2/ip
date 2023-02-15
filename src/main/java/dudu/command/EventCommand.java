@@ -39,6 +39,6 @@ public class EventCommand extends Command {
             throw new DuplicateException();
         }
         storage.saveTask(list.addTask(event));
-        return "Got it. I've added this task:\n  " + event + "\n" + list.getTotalTask();
+        return "Got it. I've added this task:\n  " + event + "\n" + list.getTotalTask() + "\n";
     }
 }

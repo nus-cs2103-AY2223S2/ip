@@ -29,7 +29,7 @@ public class MarkCommand extends Command {
             Task currTask = list.getTask(index);
             currTask.markAsDone();
             storage.saveTask(list.getList());
-            return "Nice! I've marked this task as done:\n  " + currTask;
+            return "Nice! I've marked this task as done:\n  " + currTask + "\n";
         } catch (TaskNumRangeException ex) {
             return ex.toString();
         } catch (DuduException ex) {
