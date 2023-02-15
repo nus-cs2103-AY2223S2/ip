@@ -15,8 +15,8 @@ import javafx.scene.layout.VBox;
  * ChatPane is a javafx component that acts as the GUI interface for the user to interact with the underlying duke.
  */
 public class ChatPane extends AnchorPane {
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/niko.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/giga.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
