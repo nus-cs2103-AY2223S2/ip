@@ -21,8 +21,8 @@ public class Event extends Task {
 
     @Override
     public String formatForFile() {
-        String formattedStartDate = startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        String formattedEndDate = endDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        String formattedStartDate = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        String formattedEndDate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         if (this.isDone) {
             return "E | " + 1 + " | " + description + " | " + formattedStartDate + " | " + formattedEndDate + "\n";
         } else {

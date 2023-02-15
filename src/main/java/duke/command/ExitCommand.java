@@ -3,6 +3,7 @@ package duke.command;
 import duke.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
+import javafx.application.Platform;
 
 public class ExitCommand extends Command {
 
@@ -16,6 +17,7 @@ public class ExitCommand extends Command {
     @Override
     public String initCommand(TaskList tasks, Ui ui, Storage storage) {
         storage.saveData(tasks);
+        Platform.exit();
         return ui.displayGoodbyeMessage();
     }
 }

@@ -20,7 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String formatForFile() {
-        String formattedByDate = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        String formattedByDate = this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         if (this.isDone) {
             return "D | " + 1 + " | " + description + " | " + formattedByDate + "\n";
         } else {
