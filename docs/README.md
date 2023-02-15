@@ -22,7 +22,7 @@ Hello! JeoBot is a 🔥 _fiery_ 🔥 chatbot focused on helping you manage your 
    - [bye](#bye)
 
 ## Setting Up
-1. Download the latest JAR release file from [here](https://github.com/Jun-How/ip/releases).
+1. Download the latest JAR release file from [here](https://github.com/Jun-How/ip/releases/tag/A-Release).
 2. Double-click it.
 3. Add your tasks.
 4. Let it manage your tasks for you 😉
