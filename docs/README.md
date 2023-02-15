@@ -8,7 +8,7 @@ To start using Duke, you can:
 - Navigate to the directory in terminal, 
 - Use the `java -jar CS2103T-iP.jar` command to run the application.
 
-## Features 👾
+## Features ⚙️
 
 Duke is packed with various features, such as:
 
@@ -180,8 +180,9 @@ Quit the app.
 `bye`
 
 ```
-Bye, hope to see you again!
+> bye
+  Bye, hope to see you again!
 ```
 
-### Saving the data
+## Saving the data 📁
 Duke task are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
