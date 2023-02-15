@@ -15,19 +15,17 @@ public class Duke {
     /** TaskList that keeps track of all the tasks added */
     private TaskList tasks;
 
+    /** TaskList that keeps track of all the notes added */
     private NoteList notes;
-
 
     /** Ui that handles user interface jobs */
     private Ui ui;
 
     /**
-     * Initializes an Duke object with the given values.
+     * Initializes a Duke object with the given values.
      *
      * @param taskFilePath The name of the file where you keep list of tasks
      * @param noteFilePath The name of the file where you keep list of tasks
-     * @return A Duke instance
-     * @throws FileNotFoundException
      */
     public Duke(String taskFilePath, String noteFilePath) {
         try {
@@ -57,74 +55,124 @@ public class Duke {
     /**
      * Starts running the Duke
      *
-     * @throws IOException
+     * @throws IOException Exception in reading commands
      */
     public void run() throws IOException {
         ui.greet();
         String str;
         while (true) {
-            str = ui.getLine();
-            if (str.equals("bye")) {
+            str = ui.getLine().trim();
+            String[] keywords = str.split(" ");
+            String command = keywords[0].toLowerCase();
+
+            switch (command) {
+            case "bye":
                 ui.goodBye();
                 tasks.close();
-                break;
-            }
-            if (str.equalsIgnoreCase("list")) {
+                notes.close();
+                ui.close();
+                return ;
+
+            case "list":
                 ui.listCommand();
-            } else if (str.length() >= 5 && str.toLowerCase().startsWith("mark ")) {
+                break;
+
+            case "mark":
                 ui.markCommand(str, storage);
-            } else if (str.length() >= 6 && str.toLowerCase().startsWith("unmark ")) {
+                break;
+
+            case "unmark":
                 ui.unmarkCommand(str, storage);
-            } else if (str.length() >= 5 && str.toLowerCase().startsWith("todo ")) {
+                break;
+
+            case "todo":
                 ui.todoCommand(str, storage);
-            } else if (str.length() >= 6 && str.toLowerCase().startsWith("event ")) {
+                break;
+
+            case "event":
                 ui.eventCommand(str, storage);
-            } else if (str.length() >= 9 && str.toLowerCase().startsWith("deadline ")) {
+                break;
+
+            case "deadline":
                 ui.deadlineCommand(str, storage);
-            } else if (str.length() >= 7 && str.toLowerCase().startsWith("delete ")) {
+                break;
+
+            case "delete":
                 ui.deleteCommand(str, storage);
-            } else if (str.length() >= 5 && str.toLowerCase().startsWith("find ")) {
+                break;
+
+            case "find":
                 ui.findCommand(str);
-            }  else if (str.length() >= 5 && str.toLowerCase().startsWith("note ")) {
+                break;
+
+            case "note":
                 ui.noteCommand(str, storage);
-            }  else if (str.equalsIgnoreCase("notes")) {
+                break;
+
+            case "n-delete":
+                ui.deleteNoteCommand(str, storage);
+                break;
+
+            case "notes":
                 ui.listNotesCommand();
-            } else {
+                break;
+
+            default:
                 System.out.println(new InvalidCommandException().getMessage());
             }
+
         }
-        ui.close();
     }
 
     public String getResponse(String command) throws IOException {
-        if (command.equals("bye")) {
+        String[] keywords = command.split(" ");
+        String lowerCaseCommand = keywords[0].toLowerCase();
+
+        switch (lowerCaseCommand) {
+        case "bye":
             tasks.close();
+            notes.close();
             return ui.goodBye();
-        }
-        if (command.equalsIgnoreCase("list")) {
+
+        case "list":
             return ui.listCommand();
-        } else if (command.equalsIgnoreCase("notes")) {
-            return ui.listNotesCommand();
-        } else if (command.length() >= 5 && command.toLowerCase().startsWith("mark ")) {
+
+        case "mark":
             return ui.markCommand(command, storage);
-        } else if (command.length() >= 6 && command.toLowerCase().startsWith("unmark ")) {
+
+        case "unmark":
             return ui.unmarkCommand(command, storage);
-        } else if (command.length() >= 5 && command.toLowerCase().startsWith("todo ")) {
+
+        case "todo":
             return ui.todoCommand(command, storage);
-        } else if (command.length() >= 6 && command.toLowerCase().startsWith("event ")) {
+
+        case "event":
             return ui.eventCommand(command, storage);
-        } else if (command.length() >= 9 && command.toLowerCase().startsWith("deadline ")) {
+
+        case "deadline":
             return ui.deadlineCommand(command, storage);
-        } else if (command.length() >= 7 && command.toLowerCase().startsWith("delete ")) {
+
+        case "delete":
             return ui.deleteCommand(command, storage);
-        } else if (command.length() >= 5 && command.toLowerCase().startsWith("find ")) {
+
+        case "find":
             return ui.findCommand(command);
-        } else if (command.length() >= 5 && command.toLowerCase().startsWith("note ")) {
+
+        case "note":
             return ui.noteCommand(command, storage);
-        } else {
+
+        case "n-delete":
+            return ui.deleteNoteCommand(command, storage);
+
+        case "notes":
+            return ui.listNotesCommand();
+
+        default:
             System.out.println(new InvalidCommandException().getMessage());
             return new InvalidCommandException().getMessage();
         }
+
+
     }
 
 

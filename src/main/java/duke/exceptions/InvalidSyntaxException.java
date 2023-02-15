@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+/** An Exception class that informs user about invalid syntax issues */
 public class InvalidSyntaxException extends DukeException {
     /**
      * Initialize an duke.exceptions.InvalidSyntaxException exception, which represents

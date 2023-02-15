@@ -4,8 +4,10 @@ package duke;
 import duke.exceptions.*;
 //CHECKSTYLE:ON
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /** A class Parser that deals with making sense of the user command */
 public class Parser {
@@ -51,14 +53,13 @@ public class Parser {
      */
     public static String getDeadline(String line) throws MissingTimeException, InvalidSyntaxException {
         try {
-            String toReturn = line.substring(3);
-            if (toReturn.isBlank()) {
-                throw new MissingTimeException();
-            }
             if (!line.startsWith("by ")) {
                 throw new InvalidSyntaxException();
             }
-
+            String toReturn = line.substring("by ".length());
+            if (toReturn.isBlank()) {
+                throw new MissingTimeException();
+            }
             return toReturn;
         } catch (IndexOutOfBoundsException err) {
             throw new MissingTimeException();
@@ -75,7 +76,7 @@ public class Parser {
      *                                    0 or larger than list size
      * @returns The task number
      */
-    public static int getTaskNumber(String str, int from) throws MissingArgumentsException, InvalidTaskNumberException {
+    public static int getNumber(String str, int from) throws MissingArgumentsException, InvalidTaskNumberException {
         int numOfTask;
         try {
             numOfTask = Integer.parseInt(str.substring(from));
@@ -114,8 +115,8 @@ public class Parser {
                 throw new InvalidSyntaxException();
             }
 
-            arr[0] = arr[0].substring(5);
-            arr[1] = arr[1].substring(3);
+            arr[0] = arr[0].substring("from ".length()).trim();
+            arr[1] = arr[1].substring("to ".length()).trim();
             if (arr[0].isBlank() || arr[1].isBlank()) {
                 throw new MissingTimeException();
             }
@@ -137,11 +138,9 @@ public class Parser {
     public static String getName(String str, int from) throws MissingNameException, MissingArgumentsException {
         try {
             String name = str.substring(from);
-
             if (name.isBlank()) {
                 throw new MissingNameException();
             }
-
             return name;
         }  catch (IndexOutOfBoundsException err) {
             throw new MissingArgumentsException();
@@ -154,9 +153,14 @@ public class Parser {
      * @param d LocalDate object
      * @returns The date parsed
      */
-    public static String getString(LocalDate d) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
-        return d.format(formatter);
+    public static String getParsedDate(LocalDate d) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
+            return d.format(formatter);
+        } catch (DateTimeException err) {
+            System.out.println(err.getMessage());
+            return "";
+        }
     }
 
     /**
@@ -165,8 +169,7 @@ public class Parser {
      * @param str The string
      * @returns The LocalDate object
      */
-    public static LocalDate getDate(String str) {
-        // Solve the exception here
+    public static LocalDate getLocalDateObject(String str) throws DateTimeParseException {
         return LocalDate.parse(str);
     }
 
@@ -176,9 +179,13 @@ public class Parser {
      * @param str The string of form "MMM dd YYYY"
      * @returns The string of form "YYYY-MM-DD"
      */
-    public static String getDateMMM(String str) {
-        // Solve the exception here
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return LocalDate.parse(str, formatter).toString();
+    public static String getDateOfInputForm(String str) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            return LocalDate.parse(str, formatter).toString();
+        } catch (DateTimeParseException err) {
+            System.out.println(err);
+            return "";
+        }
     }
 }

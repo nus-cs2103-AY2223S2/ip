@@ -13,7 +13,7 @@ public class Deadline extends Task {
     private LocalDate deadline;
 
     /**
-     * Initializes an Deadline object with the given values.
+     * Initializes a Deadline object with the given values.
      *
      * @param name The name of the deadline
      * @param deadline The deadline time of the task
@@ -23,14 +23,14 @@ public class Deadline extends Task {
     public Deadline(String name, String deadline) throws InvalidDateFormatException {
         super(name);
         try {
-            this.deadline = Parser.getDate(deadline);
+            this.deadline = Parser.getLocalDateObject(deadline);
         } catch (DateTimeParseException err) {
             throw new InvalidDateFormatException();
         }
     }
 
     /**
-     * Initializes an Deadline object with the given values.
+     * Initializes a Deadline object with the given values.
      *
      * @param name The name of the deadline
      * @param deadline The deadline time of the task
@@ -38,10 +38,10 @@ public class Deadline extends Task {
      * @return A deadline instance
      * @throws InvalidDateFormatException If the deadline passed as String is not of format "YYYY-MM-DD"
      */
-    public Deadline(String name, String deadline, boolean isDone) throws InvalidDateFormatException {
+    public Deadline(String name, String deadline, boolean isDone) throws InvalidDateFormatException{
         super(name, isDone);
         try {
-            this.deadline = Parser.getDate(deadline);
+            this.deadline = Parser.getLocalDateObject(deadline);
         } catch (DateTimeParseException err) {
             throw new InvalidDateFormatException();
         }
@@ -56,6 +56,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "D | " + super.toString() + " | " + Parser.getString(deadline);
+        return "D | " + super.toString() + " | " + Parser.getParsedDate(deadline);
     }
 }

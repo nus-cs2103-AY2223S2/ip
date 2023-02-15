@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+/** An Exception class that informs user about an invalid command entered */
 public class InvalidCommandException extends DukeException {
     /**
      * Initialize an duke.exceptions.InvalidCommandException exception, which represents

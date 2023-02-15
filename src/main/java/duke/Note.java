@@ -1,34 +1,26 @@
 package duke;
 
+/**
+ * A class that represents a Note
+ */
 public class Note {
-    /** Name of the task */
+    /** Content of the note */
     private String note;
 
     /**
-     * Initializes an Note object with the given values.
+     * Initializes a Note object with the given values.
      *
-     * @param note The name of the note
+     * @param note The content of the note
      * @return A note instance
      */
     public Note(String note) {
         this.note = note;
     }
 
-
     /**
-     * Get the name of the task
+     * Returns the string representation of the note
      *
-     * @return A string representation of the task's name
-     */
-    public String getNote() {
-        return this.note;
-    }
-
-    /**
-     * Returns the string representation of the task, including
-     * whether the task is done or not.
-     *
-     * @return The string representation of the task.
+     * @return The string representation of the note.
      */
     @Override
     public String toString() {

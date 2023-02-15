@@ -13,6 +13,10 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
+/**
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -33,7 +37,6 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         avatar.setImage(img);
     }
-
 
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);

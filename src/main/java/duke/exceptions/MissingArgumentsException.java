@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+/** An Exception class that informs user about missing arguments in a command */
 public class MissingArgumentsException extends DukeException {
     /**
      * Initialize a MissingArguments exception, which represents

@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+/** An Exception class that informs user about missing time element */
 public class MissingTimeException extends DukeException {
     /**
      * Initialize a duke.exceptions.MissingTimeException exception, which represents

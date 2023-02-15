@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+/** An Exception class that informs user about invalid task number */
 public class InvalidTaskNumberException extends DukeException {
     /**
      * Initialize an InvalidTaskNumber exception, which represents

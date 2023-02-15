@@ -13,6 +13,9 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 
+/**
+ * A GUI for Duke using FXML
+ */
 public class DukeGui extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

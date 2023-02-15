@@ -1,5 +1,6 @@
 package duke.exceptions;
 
+/** An Exception class that informs user about missing name of task */
 public class MissingNameException extends DukeException {
     /**
      * Initialize a duke.exceptions.MissingNameException exception, which represents

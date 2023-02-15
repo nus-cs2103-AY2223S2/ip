@@ -1,13 +1,15 @@
 package duke;
 
-
+//CHECKSTYLE:OFF
 import duke.exceptions.*;
+//CHECKSTYLE:ON
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/** A UI class that deals with interactions with the user */
 public class Ui {
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -17,7 +19,7 @@ public class Ui {
     private static final String GREETING = "Hello from\n" + LOGO;
     private static final String LIST = "Duke presents tasks in your list: ";
     private static final String BYE = "Duke says bye bye ~~";
-    private static final String MATCHING = "Duke finds these items containg your keyword: ";
+    private static final String MATCHING = "Duke finds these items containing your keyword: ";
 
     private BufferedReader bf;
 
@@ -52,27 +54,19 @@ public class Ui {
     }
 
     public String listCommand() {
-        ArrayList<Task> arr = TaskList.getList();
-        if (arr.size() == 0) {
-            System.out.println("Duke sees no tasks in your list");
-            return "Duke sees no tasks in your list";
-        }
-        return listTasks(arr);
+        ArrayList<Task> tasks = TaskList.getList();
+        return printList(tasks, "tasks");
     }
 
     public String listNotesCommand() {
-        ArrayList<Note> arr = NoteList.getList();
-        if (arr.size() == 0) {
-            System.out.println("Duke sees no notes in your list");
-            return "Duke sees no notes in your list";
-        }
-        return listNotes(arr);
+        ArrayList<Note> notes = NoteList.getList();
+        return printList(notes, "notes");
     }
 
      static String todoCommand(String str, Storage storage) throws IOException {
         Task toDo;
         try {
-            toDo = new ToDo(Parser.getName(str, 5));
+            toDo = new ToDo(Parser.getName(str, "todo ".length()));
         } catch (MissingArgumentsException | MissingNameException err) {
             System.out.println(err.getMessage());
             return err.getMessage();
@@ -80,33 +74,28 @@ public class Ui {
 
         TaskList.addTask(toDo);
         storage.loadTasks();
-        lineUI();
-        String res = "Got it. I've added this task:\n" + toDo
-                        + "\n" + "Now you have " + TaskList.getList().size() + " tasks in the list.";
-        System.out.println(res);
-        lineUI();
+        String res = "Got it. I've added this task:\n" + toDo + "\n"
+                 + "Now you have " + TaskList.getList().size() + " tasks in the list.";
+        printWithLines(res);
         return res;
-
     }
 
      static String eventCommand(String str, Storage storage) throws IOException {
         try {
-            String[] foo;
+            String[] nameAndTheRest;
             try {
-                foo = Parser.separate(str.substring(6));
+                nameAndTheRest = Parser.separate(str.substring("event ".length()));
             } catch (IndexOutOfBoundsException err) {
                 throw new MissingArgumentsException();
             }
 
-            String[] bar = Parser.getDuration(foo[1]);
-            Task toAdd = new Event(foo[0], bar[0], bar[1]);
+            String[] dur = Parser.getDuration(nameAndTheRest[1]);
+            Task toAdd = new Event(nameAndTheRest[0], dur[0], dur[1]);
             TaskList.addTask(toAdd);
             storage.loadTasks();
-            lineUI();
             String res = "Got it. I've added this task:\n" + toAdd + "\n"
-                        + "Now you have " + TaskList.getList().size() + " tasks in the list.";
-            System.out.println(res);
-            lineUI();
+                    + "Now you have " + TaskList.getList().size() + " tasks in the list.";
+            printWithLines(res);
             return res;
         } catch (MissingArgumentsException | MissingNameException | MissingTimeException | InvalidSyntaxException err) {
             System.out.println(err.getMessage());
@@ -117,21 +106,19 @@ public class Ui {
 
      static String deadlineCommand(String str, Storage storage) throws IOException {
         try {
-            String[] foo;
+            String[] nameAndTheRest;
             try {
-                foo = Parser.separate(str.substring(9));
+                nameAndTheRest = Parser.separate(str.substring("deadline ".length()));
             } catch (IndexOutOfBoundsException err) {
                 throw new MissingArgumentsException();
             }
 
-            Task toAdd = new Deadline(foo[0], Parser.getDeadline(foo[1]));
+            Task toAdd = new Deadline(nameAndTheRest[0], Parser.getDeadline(nameAndTheRest[1]));
             TaskList.addTask(toAdd);
             storage.loadTasks();
-            lineUI();
             String res = "Got it. I've added this task:\n" + toAdd + "\n"
-                        + "Now you have " + TaskList.getList().size() + " tasks in the list.";
-            System.out.println(res);
-            lineUI();
+                    + "Now you have " + TaskList.getList().size() + " tasks in the list.";
+            printWithLines(res);
             return res;
         } catch (MissingArgumentsException | MissingTimeException | MissingNameException | InvalidSyntaxException |
                  InvalidDateFormatException err) {
@@ -143,7 +130,7 @@ public class Ui {
      static String deleteCommand(String str, Storage storage) throws IOException {
         int num;
         try {
-            num = Parser.getTaskNumber(str, 7);
+            num = Parser.getNumber(str, "delete ".length());
         } catch (MissingArgumentsException | InvalidTaskNumberException err) {
             System.out.println(err.getMessage());
             return err.getMessage();
@@ -151,11 +138,9 @@ public class Ui {
 
         Task removed = TaskList.remove(num - 1);
         storage.loadTasks();
-        lineUI();
         String res = "Noted. I've removed this task:\n" + removed + "\n"
                     + "Now you have " + TaskList.getList().size() + " tasks in the list.";
-        System.out.println(res);
-        lineUI();
+        printWithLines(res);
         return res;
 
     }
@@ -163,7 +148,7 @@ public class Ui {
      String markCommand(String str, Storage storage) throws IOException {
         int index;
         try {
-            index = Parser.getTaskNumber(str,5) - 1;
+            index = Parser.getNumber(str, "mark ".length()) - 1;
         } catch (MissingArgumentsException | InvalidTaskNumberException err) {
             System.out.println(err.getMessage());
             return err.getMessage();
@@ -171,17 +156,15 @@ public class Ui {
 
         String name = TaskList.markDone(index);
         storage.loadTasks();
-        lineUI();
-        String res = "Nice! duke.Duke has marked this task as done:\n" + "[X] " + name;
-        System.out.println(res);
-        lineUI();
+        String res = "Nice! Duke has marked this task as done:\n" + "[X] " + name;
+        printWithLines(res);
         return res;
     }
 
      String unmarkCommand(String str, Storage storage) throws IOException {
         int index;
         try {
-            index = Parser.getTaskNumber(str,7) - 1;
+            index = Parser.getNumber(str, "unmark ".length()) - 1;
         } catch (MissingArgumentsException | InvalidTaskNumberException err) {
             System.out.println(err.getMessage());
             return err.getMessage();
@@ -189,39 +172,30 @@ public class Ui {
 
         String name = TaskList.markUndone(index);
         storage.loadTasks();
-        lineUI();
-        String res = "OK, duke.Duke has marked this task as not done yet:\n" +  "[O] " + name;
-        System.out.println(res);
-        lineUI();
+        String res = "OK, Duke has marked this task as not done yet:\n" +  "[O] " + name;
+        printWithLines(res);
         return res;
     }
 
     String findCommand(String str) {
         String keyword;
         try {
-            keyword = Parser.getName(str, 5);
+            keyword = Parser.getName(str, "find ".length());
         } catch (MissingNameException | MissingArgumentsException err) {
             System.out.println(err.getMessage());
             return err.getMessage();
         }
 
         ArrayList<Task> matchedTasks = TaskList.findMatch(keyword);
-        if (matchedTasks.size() == 0) {
-            System.out.println("Duke finds no tasks containing the keyword given");
-            return "Duke finds no tasks containing the keyword given";
-        } else {
-            lineUI();
-            String res = MATCHING + "\n" + listTasks(matchedTasks);
-            System.out.println(res);
-            lineUI();
-            return res;
-        }
+        String res = MATCHING + "\n" + printList(matchedTasks, "matching tasks");
+        printWithLines(res);
+        return res;
     }
 
     String noteCommand(String str, Storage storage) throws IOException{
         String note;
         try {
-            note = Parser.getName(str, 5);
+            note = Parser.getName(str, "note ".length());
         } catch (MissingNameException | MissingArgumentsException err) {
             System.out.println(err.getMessage());
             return err.getMessage();
@@ -230,41 +204,50 @@ public class Ui {
         Note toAdd = new Note(note);
         NoteList.addNote(toAdd);
         storage.loadNotes();
-        lineUI();
         String res = "Got it. I've added this note:\n" + toAdd
-                + "\n" + "Now you have " + NoteList.getList().size() + " tasks in the list.";
-        System.out.println(res);
+                + "\n" + "Now you have " + NoteList.getList().size() + " notes in the list.";
+        printWithLines(res);
+        return res;
+    }
+
+    String deleteNoteCommand(String str, Storage storage) throws IOException {
+        int numOfNote;
+        try {
+            numOfNote = Parser.getNumber(str, "n-delete ".length());
+        } catch (MissingArgumentsException | InvalidTaskNumberException err) {
+            System.out.println(err.getMessage());
+            return err.getMessage();
+        }
+
+        Note removed = NoteList.remove(numOfNote - 1);
+        storage.loadNotes();
+        String res = "Noted. I've removed this note:\n" + removed + "\n"
+                + "Now you have " + NoteList.getList().size() + " notes in the list.";
+        printWithLines(res);
+        return res;
+    }
+
+    String printList(ArrayList<? extends Object> arr, String type) {
+        if (arr.size() == 0) {
+            System.out.println("Duke sees no " + type + " in your list");
+            return "Duke sees no " + type + " in your list";
+        }
+
+        String res = "";
+        int count = 1;
+        while (count <= arr.size()) {
+            Object item = arr.get(count - 1);
+            res += count + ". " + item.toString() + "\n";
+            System.out.println(count + ". " + item);
+            count++;
+        }
+        return res;
+    }
+
+    private static void printWithLines(String toPrint) {
         lineUI();
-        return res;
-
-
-
-    }
-
-    String listNotes(ArrayList<Note> arr) {
-        String res = "";
-        int cnt = 1;
-        while (cnt <= arr.size()) {
-            Note item = arr.get(cnt - 1);
-            res += cnt + "." + item.toString() + "\n";
-            System.out.println(cnt + "." + item.toString());
-            cnt++;
-        }
-        return res;
-    }
-
-
-
-    String listTasks(ArrayList<Task> arr) {
-        String res = "";
-        int cnt = 1;
-        while (cnt <= arr.size()) {
-            Task item = arr.get(cnt - 1);
-            res += cnt + "." + item.toString() + "\n";
-            System.out.println(cnt + "." + item.toString());
-            cnt++;
-        }
-        return res;
+        System.out.println(toPrint);
+        lineUI();
     }
 
      static void lineUI() {

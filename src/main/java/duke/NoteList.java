@@ -2,31 +2,28 @@ package duke;
 
 import java.util.ArrayList;
 
+/** A class NoteList that contains the list of notes e.g., it has operations to add/delete notes in the list */
 public class NoteList {
     /** The array that stores the list */
     private static ArrayList<Note> notes;
 
     /**
-     * Initializes an TaskList object.
-     *
-     */
-    public NoteList() {
-        notes = new ArrayList<>();
-    }
-
-    /**
      * Initializes an TaskList object with the given array.
      *
-     * @param tasks The given array that contains tasks
+     * @param notes The given array that contains tasks
      */
     public NoteList(ArrayList<Note> notes){
         this.notes = notes;
     }
 
+    /**
+     * Return the list of all notes
+     *
+     * @return List of all notes
+     */
     public static ArrayList<Note> getList() {
         return notes;
     }
-
 
     /**
      * Add the task into the array
@@ -48,7 +45,7 @@ public class NoteList {
     }
 
     /**
-     * Destroy the TaskList
+     * Destroy the NoteList
      */
     public static void close() {
         notes = null;

@@ -8,14 +8,6 @@ public class TaskList {
     private static ArrayList<Task> tasks;
 
     /**
-     * Initializes an TaskList object.
-     *
-     */
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
-
-    /**
      * Initializes an TaskList object with the given array.
      *
      * @param tasks The given array that contains tasks
@@ -24,6 +16,11 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Return the list of all tasks
+     *
+     * @return List of all tasks
+     */
     public static ArrayList<Task> getList() {
         return tasks;
     }
