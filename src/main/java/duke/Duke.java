@@ -6,6 +6,8 @@ import java.io.IOException;
 import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.Ui;
+import duke.exception.DukeException;
+import duke.exception.EmptyTaskListException;
 import duke.exception.FileLoadingException;
 
 enum Action {
@@ -111,12 +113,14 @@ public class Duke {
                 }
             } catch (IllegalArgumentException e) {
                 ui.showUnknownError();
+            } catch (DukeException error) {
+                ui.says(error.getMessage());
             }
             try {
                 file.overwrite(listOfAction);
                 arr = ui.getInput();
                 s = arr[0];
-            } catch (FileLoadingException error) {
+            } catch (DukeException error) {
                 ui.says(error.getMessage());
             }
         }
@@ -180,7 +184,7 @@ public class Duke {
             file.overwrite(listOfAction);
         } catch (IllegalArgumentException e) {
             return ui.showUnknownError();
-        } catch (FileLoadingException e) {
+        } catch (DukeException e) {
             return (e.getMessage());
         }
         return response;

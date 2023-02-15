@@ -3,6 +3,7 @@ package duke.command;
 import java.io.IOException;
 import java.util.Arrays;
 
+import duke.exception.EmptyTaskListException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingContentException;
 import duke.task.Task;
@@ -147,7 +148,20 @@ public class TaskList {
      * @throw InvalidIndexException if array at specific index is null
      */
     public boolean checkValidIndex(int index) {
-        return (arr[index] != null);
+        return (index >= 0 && arr[index] != null);
+    }
+
+    /**
+     * Clear task list entirely
+     * @throws EmptyTaskListException if task list is originally empty
+     */
+    public void clear() throws EmptyTaskListException {
+        if (this.getValidLen() <= 0) {
+            throw new EmptyTaskListException();
+        }
+        for (int i = 0; i < this.getValidLen(); i++) {
+            this.arr[i] = null;
+        }
     }
 
     /**

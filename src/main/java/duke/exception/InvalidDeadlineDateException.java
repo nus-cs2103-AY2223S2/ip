@@ -5,6 +5,6 @@ package duke.exception;
  */
 public class InvalidDeadlineDateException extends DukeException {
     public InvalidDeadlineDateException() {
-        super("WOOF! What were you thinking boss?? The deadline date time format should be YYYY-MM-DD! Change it NOW!");
+        super("WOOF! What were you thinking Boss?? The deadline date time format should be YYYY-MM-DD! Change it NOW!");
     }
 }

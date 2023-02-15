@@ -1,3 +1,1 @@
-[T][X] cleanthe house 
-[T][ ] clean the beach 
-[E][ ] walk the dog  (from: Oct 10 2020 10:00 AM to: Oct 10 2020 11:00 AM)
+[T][ ] go home 

@@ -3,10 +3,7 @@ package duke.command;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.exception.InvalidDeadlineDateException;
-import duke.exception.InvalidEventDateTimeException;
-import duke.exception.InvalidIndexException;
-import duke.exception.MissingContentException;
+import duke.exception.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -37,6 +34,15 @@ public class Ui {
      */
     public void says(String message) {
         System.out.println(message);
+    }
+
+    /**
+     * Let Duke (or Kyle) says what he should say when deleting the whole task list
+     * @return the message
+     */
+    public static String saysDeleteAllMessage() {
+        return "YAY! Kyle clears your task list! It's now empty! "
+                + "Boss, hurry, add more jobs for the Minions to do!";
     }
 
     /**
@@ -125,9 +131,9 @@ public class Ui {
      * @param taskList original task list
      * @return appropriate message
      */
-    public String list(TaskList taskList) {
+    public String list(TaskList taskList) throws EmptyTaskListException {
         if (taskList.isEmpty()) {
-            return ("WOOF! Boss! You do not have any tasks in your task list!");
+            throw new EmptyTaskListException();
         }
         Parser.updateLastCommand("list");
         return (taskList.list());
@@ -173,7 +179,7 @@ public class Ui {
             reply = (listOfAction.mark(index - 1));
             Parser.updateLastCommand(String.format("mark %d", index - 1));
             return reply;
-        } catch (MissingContentException | InvalidIndexException | IOException e) {
+        } catch (MissingContentException | InvalidIndexException | IOException | IndexNotNumberException e) {
             return (e.getMessage());
         }
     }
@@ -193,7 +199,7 @@ public class Ui {
             reply = (listOfAction.unmark(index));
             Parser.updateLastCommand(String.format("unmark %d", index - 1));
             return reply;
-        } catch (MissingContentException | InvalidIndexException | IOException e) {
+        } catch (MissingContentException | InvalidIndexException | IOException | IndexNotNumberException e) {
             return (e.getMessage());
         }
     }
@@ -218,6 +224,8 @@ public class Ui {
             }
         } catch (MissingContentException | InvalidIndexException e) {
             return (e.getMessage());
+        } catch (IndexNotNumberException e) {
+            return Parser.deleteAll(listOfAction, command);
         }
     }
 

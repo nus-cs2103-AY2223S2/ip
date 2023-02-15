@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.exception.EmptyTaskListException;
+import duke.exception.IndexNotNumberException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingContentException;
 
@@ -73,6 +75,24 @@ public class Parser {
     }
 
     /**
+     * Parse and do deleteAll command
+     * @param listOfAction original task list
+     * @param command input command from user
+     * @return message from Duke
+     */
+    public static String deleteAll(TaskList listOfAction, String[] command) {
+        try {
+            if (command[1].equalsIgnoreCase("all")) {
+                listOfAction.clear();
+                return (Ui.saysDeleteAllMessage());
+            }
+        } catch (EmptyTaskListException e) {
+            return e.getMessage();
+        }
+        return new Ui().showUnknownError();
+    }
+
+    /**
      * Makes sense of adding to do command from users
      * @param arr array of original array
      * @return full string command for users
@@ -102,10 +122,12 @@ public class Parser {
      * @throws InvalidIndexException if task list does not have such index
      */
     public static int getTaskIndex(TaskList listOfAction, String[] command) throws MissingContentException,
-            InvalidIndexException {
-        int taskIndex;
+            InvalidIndexException, IndexNotNumberException {
+        int taskIndex = 0;
         try {
             taskIndex = Integer.parseInt(command[1]);
+        } catch (NumberFormatException e) {
+            throw new IndexNotNumberException();
         } catch (NullPointerException e) {
             throw new MissingContentException();
         }
