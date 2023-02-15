@@ -28,16 +28,22 @@ You may skip this user guide if you deem it lengthy or do not have time to read 
 Duke itself does provide all the guide you need :wink:
 ### Available commands :
 
-#### - **todo** -  format: todo [task name]
-#### - **deadline** - format: deadline [task name] /by [dd/MM/yyyy:HHmm]
-#### - **event** - format: event [task name] /from [dd/MM/yyyy:HHmm] /to [dd/MM/yyyy:HHmm]
-#### - **list** - format: list
-#### - **mark** - format: mark [task index]
-#### - **delete** - format: delete [task index]
-#### - **find** - format: find [task name]
-#### - **archive** - format: archive
+#### **todo** -  format: todo [task name]
+#### **deadline** - format: deadline [task name] /by [dd/MM/yyyy:HHmm]
+#### **event** - format: event [task name] /from [dd/MM/yyyy:HHmm] /to [dd/MM/yyyy:HHmm]
+#### **list** - format: list
+#### **mark** - format: mark [task index]
+#### **delete** - format: delete [task index]
+#### **find** - format: find [task name]
+#### **archive** - format: archive
 
-
+### Features :
+Add a task - todo,deadline,event
+List all the tasks - list
+Mark the tasks that you have completed - mark
+Delete tasks - delete
+Find tasks - find
+Archive all the current tasks, stores these existing tasks into a file in the directory "data" - archive
 
 
 
