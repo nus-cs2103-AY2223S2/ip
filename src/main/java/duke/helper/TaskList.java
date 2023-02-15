@@ -51,7 +51,7 @@ public class TaskList {
      * @param taskNo Task number to be deleted
      * @return task that has been deleted
      */
-    public String deleteTask(String taskNo) throws DukeException{
+    public String deleteTask(String taskNo) throws DukeException {
         Task task = getTask(taskNo, "delete");
         tasks.remove(task);
         return ui.showDelete(task, tasks.size());
@@ -64,9 +64,9 @@ public class TaskList {
      * @param taskId id of the task
      */
     public String markTask(boolean isDone, String taskId) throws DukeException {
-            Task taskToMark = getTask(taskId, "mark");
-            taskToMark.setIsDone(isDone);
-            return ui.showMark(isDone, taskToMark);
+        Task taskToMark = getTask(taskId, "mark");
+        taskToMark.setIsDone(isDone);
+        return ui.showMark(isDone, taskToMark);
     }
 
     public Task getTask(String taskNum, String type) throws DukeException {

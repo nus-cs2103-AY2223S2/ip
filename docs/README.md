@@ -3,16 +3,16 @@
 A todo CLI app that helps you manage your todos, deadlines and events!!
 
 ## Features 
-*list
-*mark
-*unmark
-*todo
-*deadline
-*event
-*delete
-*find
-*help
-*bye
+* list
+* mark
+* unmark
+* todo
+* deadline
+* event
+* delete
+* find
+* help
+* bye
 
 ## Usage
 

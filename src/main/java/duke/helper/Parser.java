@@ -46,29 +46,31 @@ public class Parser {
         String type = inputs[0];
 
         switch (type) {
-            case "list":
-                return tasks.outputList();
-            case "mark":
-                return tasks.markTask(true, inputs[1]);
-            case "unmark":
-                return tasks.markTask(false, inputs[1]);
-            case "todo":
-                return parseToDo(inputs);
-            case "deadline":
-                return parseDeadline(inputs);
-            case "event":
-                return parseEvent(inputs);
-            case "delete":
-                return tasks.deleteTask(inputs[1]);
-            case "find":
-                return parseFind(inputs[1]);
-            case "help":
-                return parseHelp(inputs[1]);
-            case "bye":
-                Platform.exit();
-            default:
-                throw new InvalidTaskCommandException();
+        case "list":
+            return tasks.outputList();
+        case "mark":
+            return tasks.markTask(true, inputs[1]);
+        case "unmark":
+            return tasks.markTask(false, inputs[1]);
+        case "todo":
+            return parseToDo(inputs);
+        case "deadline":
+            return parseDeadline(inputs);
+        case "event":
+            return parseEvent(inputs);
+        case "delete":
+            return tasks.deleteTask(inputs[1]);
+        case "find":
+            return parseFind(inputs[1]);
+        case "help":
+            return parseHelp(inputs[1]);
+        case "bye":
+            Platform.exit();
+            break;
+        default:
+            throw new InvalidTaskCommandException();
         }
+        return "";
     }
 
     /**
@@ -103,14 +105,29 @@ public class Parser {
         }
     }
 
-    public String parseToDo(String[] inputs) throws DukeException {
+    /**
+     * Parses the todo command
+     *
+     * @param inputs different parts of the todo command
+     * @return a string to show the creation of a todo task
+     * @throws EmptyTaskException Throws when the task has no description
+     */
+    public String parseToDo(String[] inputs) throws EmptyTaskException {
         checkTaskDesc(inputs);
         Task toDoTask = new ToDo(inputs[1], false);
         tasks.addToTasks(toDoTask);
         return ui.showTaskOutput(toDoTask, tasks.getTasks().size());
     }
 
-    public String parseDeadline(String[] inputs) throws DukeException {
+    /**
+     * Parses the deadline command
+     *
+     * @param inputs different parts of the deadline command
+     * @return a string to show the creation of a deadline task
+     * @throws EmptyTaskException Throws when the task has no description
+     * @throws InvalidDateTimeException Throws when the dateTime input is invalid
+     */
+    public String parseDeadline(String[] inputs) throws EmptyTaskException, InvalidDateTimeException {
         checkTaskDesc(inputs);
         String[] deadlineDesc = inputs[1].split(" /by ");
         Task deadlineTask = new Deadline(deadlineDesc[0], handleDateTime(deadlineDesc[1]));
@@ -119,12 +136,14 @@ public class Parser {
     }
 
     /**
-     * Split the event desc
+     * Parses the event command
      *
-     * @param inputs the desc of an event task
-     * @return a string array with all the parts of an event desc
+     * @param inputs different parts of the event command
+     * @return a string to show the creation of an event task
+     * @throws EmptyTaskException Throws when the task has no description
+     * @throws InvalidDateTimeException Throws when the dateTime input is invalid
      */
-    public String parseEvent(String[] inputs) throws DukeException {
+    public String parseEvent(String[] inputs) throws EmptyTaskException, InvalidDateTimeException {
         checkTaskDesc(inputs);
         String eventDesc = inputs[1].split(" /from ")[0];
         String from = inputs[1].split(" /from ")[1].split(" /to ")[0];
@@ -137,18 +156,32 @@ public class Parser {
         return ui.showTaskOutput(eventTask, tasks.getSize());
     }
 
-    public String parseFind(String input) {
+    /**
+     * Parses the find command
+     *
+     * @param keyword filters the displayed list according to the keyword
+     * @return a string to show the display message of the find command
+     */
+    public String parseFind(String keyword) {
         ArrayList<Task> taskList = tasks.getTasks();
         ArrayList<Task> output = new ArrayList<>();
         for (Task task : taskList) {
-            if (task.toString().contains(input)) {
+            if (task.toString().contains(keyword)) {
                 output.add(task);
             }
         }
         return ui.filter(output);
     }
 
-    public String parseHelp(String input) throws DukeException {
-        return ui.showHelpMessage(input);
+    /**
+     * Parses the help command
+     *
+     * @param command the command the user needs help with
+     * @return a String showing the user how to use the command
+     * @throws EmptyTaskException Throws when the help command is not followed by another command
+     * @throws InvalidTaskCommandException Throws when the help command is followed by something that is not a command
+     */
+    public String parseHelp(String command) throws EmptyTaskException, InvalidTaskCommandException {
+        return ui.showHelpMessage(command);
     }
 }

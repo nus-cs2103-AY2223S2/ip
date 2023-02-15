@@ -3,7 +3,6 @@ package duke.helper;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidTaskCommandException;
 import duke.task.Task;
@@ -74,32 +73,40 @@ public class Ui {
         return output;
     }
 
-    public String showHelpMessage(String input) throws DukeException {
-        if (input.equals("")) {
+    /**
+     * Returns the help message
+     *
+     * @param command the command the user needs help with
+     * @return help message
+     * @throws EmptyTaskException Throws when help command is not followed by a command
+     * @throws InvalidTaskCommandException Throws when help command is followed by something that is not a command
+     */
+    public String showHelpMessage(String command) throws EmptyTaskException, InvalidTaskCommandException {
+        if (command.equals("")) {
             throw new EmptyTaskException("help");
         }
 
-        switch (input) {
-            case "list":
-                return "Enter: list";
-            case "mark":
-                return "Enter: mark <task number>";
-            case "unmark":
-                return "Enter: unmark <task number>";
-            case "todo":
-                return "Enter: todo <task>";
-            case "deadline":
-                return "Enter: deadline <task> /by <yyyy-MM-dd>T<HH:MM>";
-            case "event":
-                return "Enter: event <task> /from <yyyy-MM-dd>T<HH:MM> /to <yyyy-MM-dd>T<HH:MM>";
-            case "delete":
-                return "Enter: delete <task number>";
-            case "find":
-                return "Enter: find <keyword>";
-            case "bye":
-                return "Enter: bye";
-            default:
-                throw new InvalidTaskCommandException();
+        switch (command) {
+        case "list":
+            return "Enter: list";
+        case "mark":
+            return "Enter: mark <task number>";
+        case "unmark":
+            return "Enter: unmark <task number>";
+        case "todo":
+            return "Enter: todo <task>";
+        case "deadline":
+            return "Enter: deadline <task> /by <yyyy-MM-dd>T<HH:MM>";
+        case "event":
+            return "Enter: event <task> /from <yyyy-MM-dd>T<HH:MM> /to <yyyy-MM-dd>T<HH:MM>";
+        case "delete":
+            return "Enter: delete <task number>";
+        case "find":
+            return "Enter: find <keyword>";
+        case "bye":
+            return "Enter: bye";
+        default:
+            throw new InvalidTaskCommandException();
         }
     }
 }
