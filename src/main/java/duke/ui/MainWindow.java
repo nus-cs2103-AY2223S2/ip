@@ -6,7 +6,6 @@ import duke.Duke;
 import duke.utils.ReplyString;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -25,10 +24,6 @@ public class MainWindow extends AnchorPane {
     private VBox displayViewBox;
     @FXML
     private TextField inputField;
-
-    // Variables not used currently but may be used in the future.
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 

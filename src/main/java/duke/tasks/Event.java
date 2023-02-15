@@ -11,8 +11,8 @@ public class Event extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
 
-    public Event(String title, LocalDateTime start, LocalDateTime end, boolean done) {
-        super(title, done);
+    public Event(String title, LocalDateTime start, LocalDateTime end, boolean isDone) {
+        super(title, isDone);
         this.start = start;
         this.end = end;
     }

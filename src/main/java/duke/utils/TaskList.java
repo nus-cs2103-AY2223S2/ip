@@ -58,20 +58,20 @@ public class TaskList {
      * @param type the type of the task.
      * @param start the start date and time of the task, if applicable.
      * @param end the end date and time of the task, if applicable.
-     * @param done the completion status of the task.
+     * @param isDone the completion status of the task.
      * @param shouldPrintOutput a boolean specifying if the function should print
      *     an output as acknowledgement for adding the task to the TaskList.
      */
     public String addToList(String title, TaskType type, LocalDateTime start,
-                          LocalDateTime end, boolean done, boolean shouldPrintOutput) {
+                          LocalDateTime end, boolean isDone, boolean shouldPrintOutput) {
         // TODO: Create multiple addToLists with different method signature
         Task task;
         if (type == TaskType.TODO) {
-            task = new ToDo(title, done);
+            task = new ToDo(title, isDone);
         } else if (type == TaskType.DEADLINE) {
-            task = new Deadline(title, end, done);
+            task = new Deadline(title, end, isDone);
         } else if (type == TaskType.EVENT) {
-            task = new Event(title, start, end, done);
+            task = new Event(title, start, end, isDone);
         } else {
             // TODO: Think of how to show the user this issue
             return "Something seems wrong with the task type...I could not add this task";
@@ -105,13 +105,13 @@ public class TaskList {
      * Changes the completion status of the task at the specified index, within the TaskList.
      *
      * @param taskIndex an integer referencing the index of a task.
-     * @param completionStatus a boolean specifying whether the task is completed or not.
+     * @param isDone a boolean specifying whether the task is completed or not.
      */
-    public String changeTaskCompletionStatus(int taskIndex, boolean completionStatus) {
+    public String changeTaskCompletionStatus(int taskIndex, boolean isDone) {
         Task task = this.array.get(taskIndex);
-        task.setDone(completionStatus);
+        task.setDone(isDone);
         String resultString = "";
-        if (completionStatus) {
+        if (isDone) {
             resultString += "Solid work man! This task is marked done\n";
         } else {
             resultString += "Aww what happened? This task is marked as undone\n";
@@ -120,6 +120,12 @@ public class TaskList {
         return resultString;
     }
 
+    /**
+     * Returns the string representation of all the tasks related to the keyword specified.
+     *
+     * @param keyword a keyword to search all tasks.
+     * @return a String representing all the results of the search.
+     */
     public String find(String keyword) {
         TaskList result = new TaskList();
         for (Task t: this.array) {

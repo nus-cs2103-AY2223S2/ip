@@ -2,6 +2,9 @@ package duke.utils;
 
 import duke.tasks.Task;
 
+/**
+ * Stores and handles any string literal or operations related to Duke.
+ */
 public class ReplyString {
 
     private static final String LOGO = " ____        _        \n"

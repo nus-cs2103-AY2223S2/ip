@@ -4,11 +4,11 @@ package duke.tasks;
  * Represents a task within Duke.
  */
 public abstract class Task {
-    private boolean done;
+    private boolean isDone;
     private String title;
 
-    public Task(String title, boolean done) {
-        this.done = done;
+    public Task(String title, boolean isDone) {
+        this.isDone = isDone;
         this.title = title;
     }
 
@@ -21,11 +21,11 @@ public abstract class Task {
     }
 
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**

@@ -21,7 +21,6 @@ public class DialogBox extends HBox {
     // Solution adapted from
     // https://se-education.org/guides/tutorials/javaFxPart4.html#javafx-tutorial-part-4-using-fxml
 
-    // Variables not used currently but may be used in the future.
     @FXML
     private Label dialog;
     @FXML

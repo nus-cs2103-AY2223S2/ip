@@ -8,6 +8,12 @@
     https://se-education.org/guides/conventions/java/intermediate.html
 -->
 
+<!--
+@@author praveenkrishna05120-reused
+Reused from https://github.com/se-edu/addressbook-level3/blob/master/config/checkstyle/checkstyle.xml
+with minor modifications
+-->
+
 <module name="Checker">
 
     <module name="FileTabCharacter">
@@ -381,10 +387,7 @@
             <property name="validateComments" value="true"/>
         </module>
 
-        <!--
-        JAVADOC CHECKS
-        To be added back later on in the project
-        -->
-
     </module>
 </module>
+
+<!--@@author-->

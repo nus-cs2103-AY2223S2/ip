@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Represents all possible commands within Duke.
+ */
 public enum Commands {
     LIST,
     BYE,

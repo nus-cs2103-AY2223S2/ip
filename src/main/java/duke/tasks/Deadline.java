@@ -10,8 +10,8 @@ public class Deadline extends Task {
 
     private LocalDateTime dateBy;
 
-    public Deadline(String title, LocalDateTime dateBy, boolean done) {
-        super(title, done);
+    public Deadline(String title, LocalDateTime dateBy, boolean isDone) {
+        super(title, isDone);
         this.dateBy = dateBy;
     }
 
