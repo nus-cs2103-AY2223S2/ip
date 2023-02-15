@@ -28,6 +28,7 @@ public class AddEventCommand extends Command {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+        assert !(endDate.isBefore(startDate)): "starting date should be before ending date";
     }
 
     /**

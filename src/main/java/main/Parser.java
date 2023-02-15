@@ -54,20 +54,23 @@ public class Parser {
             } else if (command.startsWith("deadline")) {
                 String[] str = command.substring(9).split("/");
                 String description = str[0];
-                String dueDate = str[1].substring(3, 13);
-                if (isInvalidDate(dueDate)) {
+                if (isInvalidDate(str[1].substring(3, 13))) {
                     throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
                 }
-                return new AddDeadlineCommand(description, convertStringToDate(dueDate));
+                LocalDate dueDate = convertStringToDate(str[1].substring(3, 13));
+                return new AddDeadlineCommand(description, dueDate);
             } else if (command.startsWith("event")) {
                 String[] str = command.substring(6).split("/");
                 String description = str[0];
-                String startDate = str[1].substring(5, 15);
-                String endDate = str[2].substring(3, 13);
-                if (isInvalidDate(startDate) || isInvalidDate(endDate)) {
+                if (isInvalidDate(str[1].substring(5, 15)) || isInvalidDate(str[2].substring(3, 13))) {
                     throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
                 }
-                return new AddEventCommand(description, convertStringToDate(startDate), convertStringToDate(endDate));
+                LocalDate startDate = convertStringToDate(str[1].substring(5, 15));
+                LocalDate endDate = convertStringToDate(str[2].substring(3, 13));
+                if (endDate.isBefore(startDate)) {
+                    throw new DukeException("ending date cannot be before starting date");
+                }
+                return new AddEventCommand(description, startDate, endDate);
             } else {
                 throw new DukeException("Please input a valid command");
             }
