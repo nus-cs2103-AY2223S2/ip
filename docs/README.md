@@ -2,8 +2,9 @@
 ![Ui](./Ui.png)
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
-  * [Run the project in intelliJ](#run-the-project-in-intellij)
-  * [Run the project in terminal](#run-the-project-in-terminal)
+  - [Run the project in terminal](#run-the-project-in-terminal)
+  - [Run the project in intelliJ](#run-the-project-in-intellij)
+
 - [Command Summary](#command-summary)
 - [Features](#features)
   * [Adds Todo Tasks](#adds-todo-tasks)
@@ -35,6 +36,30 @@ This project, Mr. Bear, is based on [Project Duke](https://github.com/nus-cs2103
 This is a simple user guide for the usage of Mr. Bear Application.
 
 ## Quick Start
+### Run the project in terminal
+
+1. Download the latest  **Mr.Bear.jar** file from [here](https://github.com/Yufannnn/ip/releases)
+2. Navigate to any empty folder and place the downloaded file into that folder.
+3. Navigate your terminal directory to the folder that contains your **Bill.jar** file
+4. To launch the Mr. Bear Application, you have two options:
+    * Double-click the "Mr.Bear.jar" file on your device.
+    * Open the command prompt and enter the command:
+        ```
+        java -jar Mr.Bear.jar
+        ```
+        If you prefer a Command Line Interface, type:
+        ```
+        java -jar Mr.Bear.jar -cli 
+		```
+5. You should expect the Graphical User Interface (GUI) to appear in a matter of seconds.
+6. You should expect to see a window as shown below: 
+
+![welcome](welcome.png)
+
+7. When the application is running, enter the "help" command to view a list of available commands and learn the tasks that the chatbot can help with.
+```
+help
+````
 
 ### Run the project in intelliJ
 
@@ -65,31 +90,6 @@ This is a simple user guide for the usage of Mr. Bear Application.
 5. If the setup was successful, the graphical user interface should appear shortly.
 
 6. You can now type in your command and press Enter to run it.
-
-### Run the project in terminal
-
-1. Download the latest  **Mr.Bear.jar** file from [here](https://github.com/Yufannnn/ip/releases)
-2. Navigate to any empty folder and place the downloaded file into that folder.
-3. Navigate your terminal directory to the folder that contains your **Bill.jar** file
-4. To launch the Mr. Bear Application, you have two options:
-    * Double-click the "Mr.Bear.jar" file on your device.
-    * Open the command prompt and enter the command:
-        ```
-        java -jar Mr.Bear.jar
-        ```
-        If you prefer a Command Line Interface, type:
-        ```
-        java -jar Mr.Bear.jar -cli 
-		```
-5. You should expect the Graphical User Interface (GUI) to appear in a matter of seconds.
-6. You should expect to see a window as shown below: 
-
-![welcome](welcome.png)
-
-7. When the application is running, enter the "help" command to view a list of available commands and learn the tasks that the chatbot can help with.
-```
-help
-````
 
 
 ## Command Summary

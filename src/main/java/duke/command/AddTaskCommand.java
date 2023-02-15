@@ -10,6 +10,8 @@ import duke.ui.Ui;
  * A more specific instruction class that encapsulates the action of adding a task
  * into the given TaskList.
  */
+
+// generate codes for
 public class AddTaskCommand extends Command {
     private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n%s\n"
             + "Now you have %d tasks in the list.";
