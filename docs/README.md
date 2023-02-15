@@ -123,16 +123,26 @@ Example of usage:
 
 `find reading week`
 
+#
+
+### `bye` - Saves Duke's list of tasks
+
+It will save the list of tasks and their status (marked or unmarked) in Duke as a text file in user's home directory.
+
+Usage:
+
+`bye`
 
 ## Command Summary
 
-| **Command** | **Format**                     | 
-|:-----------:|:-------------------------------|
-|    todo     | `todo keyword [more keywords]` | 
-|  deadline   | `deadline keyword [more keywords] /by date [more keywords]` | 
+| **Command** | **Format**                                                                          | 
+|:-----------:|:------------------------------------------------------------------------------------|
+|    todo     | `todo keyword [more keywords]`                                                      | 
+|  deadline   | `deadline keyword [more keywords] /by date [more keywords]`                         | 
 |    event    | `event keyword [more keywords] /from date [more keywords] /to date [more keywords]` | 
-|    list     | `list`                         | 
-|    mark     | `mark index`                   | 
-|   unmark    | `unmark index`                 | 
-|   delete    | `delete index`                 | 
-|    find     | `find keyword [more keywords]` | 
+|    list     | `list`                                                                              | 
+|    mark     | `mark index`                                                                        | 
+|   unmark    | `unmark index`                                                                      | 
+|   delete    | `delete index`                                                                      | 
+|    find     | `find keyword [more keywords]`                                                      | 
+|     bye     | `bye`                                                                               | 
