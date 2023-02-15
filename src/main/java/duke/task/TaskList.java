@@ -131,7 +131,7 @@ public class TaskList {
      */
     public String deleteTaskAtIndexString(Integer i) {
         if (i < 0 || i >= tasks.size()) {
-            return "☹ OOPS!!! The number to delete is invalid.";
+            return "OOPS!!! The number to delete is invalid.";
         }
         Task toDelete = this.getTaskAtIndex(i);
         tasks.remove(toDelete);
@@ -204,7 +204,7 @@ public class TaskList {
      */
     public String taskMarkedAtIndexString(Integer i) {
         if (i < 0 || i >= this.size()) {
-            return "☹ OOPS!!! The number to mark is invalid.";
+            return "OOPS!!! The number to mark is invalid.";
         }
         return this.getTaskAtIndex(i).taskDoneString();
     }
@@ -217,7 +217,7 @@ public class TaskList {
     public void taskUnmarkedAtIndex(Integer i) {
         try {
             if (i < 0 || i >= this.size()) {
-                throw new DukeException("☹ OOPS!!! The number to mark is invalid.");
+                throw new DukeException("OOPS!!! The number to unmark is invalid.");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -232,7 +232,7 @@ public class TaskList {
      */
     public String taskUnmarkedAtIndexString(Integer i) {
         if (i < 0 || i >= this.size()) {
-            return "☹ OOPS!!! The number to mark is invalid.";
+            return "OOPS!!! The number to unmark is invalid.";
         }
         return this.getTaskAtIndex(i).taskNotDoneString();
     }

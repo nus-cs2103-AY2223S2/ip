@@ -26,6 +26,20 @@ import javafx.stage.Stage;
  *      Description: The main class for the duke.main.Duke application.
  */
 public class Duke extends Application {
+    private static final String INSTRUCTIONS = "Didn't catch that, please input valid command. \n \n"
+            + "Help me understand by following this format: \n \n \n"
+            + "todo ### \n \n"
+            + "event ### /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm \n \n"
+            + "deadline ### /by dd/mm/yyyy hhmm \n \n"
+            + "Do ensure that you date time is of the correct format. \n"
+            + "\n"
+            + "To query or make changes in the list, use: \n"
+            + "list \n"
+            + "find ### \n"
+            + "delete INDEX \n"
+            + "mark INDEX \n"
+            + "unmark INDEX \n \n"
+            + "### indicates the task and INDEX indicates the number on the list.";
     private static Parser logic = new Parser();
     private static Storage store = new Storage();
     private static TaskList tasks = new TaskList();
@@ -41,13 +55,7 @@ public class Duke extends Application {
      * @return String
      */
     public String greeting() {
-        return "\n"
-            + "     _               _       \n"
-            + "  _ | | __ _  _ __  (_) ___  \n"
-            + " | || |/ _` || '  \\ | |/ -_) \n"
-            + "  \\__/ \\__,_||_|_|_||_|\\___| \n"
-            + "                             \n"
-            + "Hi, I am Jamie. What should I put in your task management list?";
+        return "Hi, I am Jamie. What should I put in your task management list?";
     }
 
     @Override
@@ -97,7 +105,6 @@ public class Duke extends Application {
         //
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
 
         // Step 3
         sendButton.setOnMouseClicked((event) -> {
@@ -161,15 +168,9 @@ public class Duke extends Application {
      */
     public String getResponse(String input) throws DukeException, IOException {
         if (!logic.isValidCommand(input)) {
-            return "Didn't catch that, please input valid command. \n \n"
-                    + "Help me understand by following this format: \n \n \n"
-                    + "todo ### \n \n"
-                    + "event ### /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm \n \n"
-                    + "deadline ### /by dd/mm/yyyy hhmm \n \n"
-                    + "\n"
-                    + "Do ensure that you date time is of the correct format. \n"
-                    + "### indicates the task you want me to record.";
+            return INSTRUCTIONS;
         }
+        Storage.autoSave(tasks);
 
         if (logic.isTaskCommand(input)) {
             Task task = logic.toTask(input);
@@ -187,6 +188,7 @@ public class Duke extends Application {
             return tasks.taskUnmarkedAtIndexString(--taskNumber);
         } else if (input.startsWith("delete")) {
             int taskNumber = logic.indexToDelete(input);
+            tasks.deleteTaskAtIndexString(--taskNumber);
             return tasks.deleteTaskAtIndexString(--taskNumber);
         } else {
             assert input.startsWith("find") == true : "unhandled command.";

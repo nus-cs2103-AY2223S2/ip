@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
  *      Description: Task class that Todo, Event and Deadline inherits from.
  */
 public class Task {
+    private static final String SEPARATOR = "____________________________________________________________";
     protected String description;
     protected boolean isDone;
-    private final String SEPARATOR = "____________________________________________________________";
 
     /**
      * Constructor for the Task class.

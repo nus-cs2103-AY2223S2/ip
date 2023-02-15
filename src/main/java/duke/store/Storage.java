@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -17,8 +18,8 @@ import duke.task.Todo;
  *      Description: duke.store.Storage class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private static final String COMPLETE_MSG = "    ๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑    ";
-    private static final String INCOMPLETE_MSG = "    (｡-_-｡ ) INCOMPLETE ( ｡-_-｡)    ";
+    private static final String COMPLETE_MSG = "    ==> COMPLETED!";
+    private static final String INCOMPLETE_MSG = "    ==> INCOMPLETE!";
     private static String savePath;
     private static String loadPath;
 
@@ -26,15 +27,17 @@ public class Storage {
      * Constructor for the storage.
      */
     public Storage() {
-        // Get the directory of from our root.
+        // Get the directory from our root.
         String root;
         try {
             root = Paths.get(".").toRealPath().normalize().toString();
+            System.out.println(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         // Make sure that it is independent of the OS.
         savePath = java.nio.file.Paths.get(root, "src", "data", "duke.txt").toString();
+        System.out.println(savePath);
     }
 
     /**
@@ -48,13 +51,37 @@ public class Storage {
     }
 
     /**
+     * Checks the existence of file path for saving, else creates a directory for it.
+     * @throws IOException
+     */
+    public static void makeDirectory() throws IOException {
+        String root = Paths.get(".").toRealPath().normalize().toString();
+        String dir = java.nio.file.Paths.get(root, "src", "data").toString();
+        File f = new File(dir);
+        File src = new File(java.nio.file.Paths.get(root, "src").toString());
+        if (src.exists()) {
+            System.out.println("Recording changes as usual...");
+        } else {
+            System.out.println("Missing file directory, creating one now.");
+            f.mkdirs();
+        }
+    }
+
+    /**
      * Saves all the tasks in the duke.task.TaskList objects by writing it into the savePath directory.
      *
      * @throws IOException if the directory is invalid.
      */
     public static void autoSave(TaskList tasks) throws IOException {
+        makeDirectory();
         File f = new File(savePath);
         FileWriter fw = new FileWriter(f.getAbsolutePath());
+        // Header of the save file
+        LocalDateTime now = LocalDateTime.now();
+        fw.write("Last Saved at " + now);
+        fw.write(System.lineSeparator()); // new line
+        fw.write(System.lineSeparator()); // new line
+        // Body of the save file
         try {
             if (tasks.size() == 0) {
                 fw.write("");

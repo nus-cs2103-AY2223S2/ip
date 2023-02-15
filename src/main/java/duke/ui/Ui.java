@@ -6,8 +6,8 @@ package duke.ui;
  *      Description: duke.ui.Ui class deals with interaction with the user.
  */
 public class Ui {
-    private final String LINE = "____________________________________________________________";
-    private final String LOGO = " ____        _        \n"
+    private static final String LINE = "____________________________________________________________";
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
