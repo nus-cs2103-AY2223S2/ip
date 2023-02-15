@@ -3,16 +3,17 @@ package duke;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * Defines the main logic of the Duke bot.
  */
 public class Duke {
+    public static boolean isBotOff = false;
     private TaskList list;
-    private static boolean isBotOff = false;
     private Storage storage;
-    public static boolean isIsBotOff = false;
-
 
     Duke() {
         this.storage = new Storage("tasks.ser");
@@ -34,6 +35,12 @@ public class Duke {
         try {
             Parser.createCommand(input);
             output = Parser.execute(this.list);
+            if(isBotOff) {
+                //Credits: Copied from https://stackoverflow.com/questions/15747277/
+                // how-to-make-java-program-exit-after-a-couple-of-seconds
+                Executors.newSingleThreadScheduledExecutor().schedule(() ->
+                        System.exit(0), 250, TimeUnit.MILLISECONDS);
+            }
         } catch (DukeException e) {
             output = e.getMessage();
         }

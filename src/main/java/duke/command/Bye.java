@@ -16,7 +16,7 @@ public class Bye extends Command {
      */
     @Override
     public String execute(TaskList list) {
-        Duke.isIsBotOff = true;
+        Duke.isBotOff = true;
         return TextOutput.makeByeString();
     }
 }

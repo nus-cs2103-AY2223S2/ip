@@ -21,7 +21,7 @@ public class TextOutput {
     }
 
     public static String makeByeString() {
-        return "Duke.Command.Bye. Hope to see you again soon!";
+        return "Hope to see you again soon!";
     }
 
     public static String makeTaskFoundString(TaskList taskList) {
