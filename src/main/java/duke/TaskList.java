@@ -86,10 +86,10 @@ public class TaskList {
      * @param taskNumber The number of the task to be deleted from the list.
      * @throws DukeException Throws a DukeException if the task number is invalid.
      */
-    public void deleteTaskFromList(int taskNumber) throws DukeException {
+    public Task deleteTaskFromList(int taskNumber) throws DukeException {
         if (taskNumber < 1 || taskNumber > numberOfTasks()) {
             throw new DukeException("OOPS!!! Invalid task number. Please try again.");
         }
-        tasks.remove(taskNumber - 1);
+        return tasks.remove(taskNumber - 1);
     }
 }

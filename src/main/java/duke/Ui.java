@@ -62,7 +62,7 @@ public class Ui {
      * @return The message that tells user that a task has been added.
      */
     public String addedTaskMessage(Task t, int size) {
-        String s1 = ("\tGot it. I've added this task:");
+        String s1 = ("\tYeah boi... You have a new task:");
         String s2 = ("\n\t" + t);
         String s3 = ("\n\tNow you have " + size + " tasks in the list.");
         return s1 + s2 + s3;

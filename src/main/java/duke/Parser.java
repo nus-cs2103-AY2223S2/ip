@@ -129,8 +129,8 @@ public class Parser {
         try {
             generalInputChecker(input, deleteErr);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
-            taskList.deleteTaskFromList(taskNum);
-            return ui.deletedTaskMessage(taskList.getTask(taskNum), taskList.numberOfTasks());
+            Task t = taskList.deleteTaskFromList(taskNum);
+            return ui.deletedTaskMessage(t, taskList.numberOfTasks());
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
         }
