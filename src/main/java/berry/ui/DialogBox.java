@@ -3,7 +3,6 @@ package berry.ui;
 import java.io.IOException;
 import java.util.Collections;
 
-import berry.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -85,18 +84,19 @@ public class DialogBox extends HBox {
 
     private void style() {
         Rectangle r = new Rectangle();
-        r.setHeight(100.0);
-        r.setArcHeight(50.0);
-        r.setArcWidth(50.0);
-        r.setWidth(100.0);
+        r.setHeight(90.0);
+        r.setWidth(90.0);
+        r.setArcHeight(100.0);
+        r.setArcWidth(100.0);
         displayPicture.setClip(r);
 
         this.setSpacing(5);
         this.setFillHeight(false);
 
-        BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+        BorderStroke borderStroke = new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,
                 new CornerRadii(10.0), new BorderWidths(1.0));
         Border dialogBorder = new Border(borderStroke);
+
         dialog.setBorder(dialogBorder);
         dialog.setPadding(new Insets(10, 10, 10, 10));
     }
