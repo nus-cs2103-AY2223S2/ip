@@ -30,7 +30,7 @@ public class TaskGenie {
     }
 
     /**
-     * The program runs the TaskGenie file with the correct file path.
+     * Run TaskGenie with the correct file path.
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
@@ -60,8 +60,9 @@ public class TaskGenie {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response based on the user input.
+     * @param input User input.
+     * @return Response based on the user input.
      */
     public String getResponse(String input) {
         try {

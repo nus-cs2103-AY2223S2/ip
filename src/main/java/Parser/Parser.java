@@ -47,7 +47,7 @@ public class Parser {
     }
 
     /**
-     * Convert the string into the correct command.
+     * Return the correct command by parsing the string.
      * @param userInput The user input.
      * @return The command.
      */
