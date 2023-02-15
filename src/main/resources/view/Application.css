@@ -1,10 +1,10 @@
 #sendButton {
     -fx-background-color: 
-        linear-gradient(#5b5eff, #0017e6),
-        linear-gradient(#84fff9, #44e9f2),
-        linear-gradient(#6ae9ff, #22efd4),
-        linear-gradient(#57fff4 0%, #02dbf8 50%, #0bbdee 100%),
-        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+        linear-gradient(#40414E, #40414E),
+        linear-gradient(#40414E, #40414E),
+        linear-gradient(#40414E, #40414E),
+        linear-gradient(#40414E 0%, #40414E 50%, #40414E 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255, 255, 255, 0.1), rgba(255,255,255,0));
     -fx-background-radius: 30;
     -fx-background-insets: 0,1,2,3,0;
     -fx-text-fill: #654b00;
