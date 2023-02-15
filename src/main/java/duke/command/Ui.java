@@ -27,7 +27,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("\nHello, I'm Duke");
+        System.out.println("\nHello, I'm Kyle");
         System.out.println("What can I do for you?");
     }
 
@@ -60,7 +60,7 @@ public class Ui {
      * @return unknown message.
      */
     public String showUnknownError() {
-        return ("WOOF!!! I'm sorry boss, "
+        return ("WOOF!!! Kyle is so sorry boss, "
                 + "but I don't know what that means :-(");
     }
 
@@ -79,7 +79,7 @@ public class Ui {
      * @return Duke's response
      */
     public String saysUnDo(String commandType, String commandDetail) {
-        return ("WOOF! Got it! I will undo the last command!" + "\n"
+        return ("WOOF! Got it! Kyle will undo the last command!" + "\n"
                 + "The following task has been un-" + commandType
                 + "ed: " + "\n" + commandDetail);
     }
@@ -89,7 +89,7 @@ public class Ui {
      * @return Duke's response
      */
     public String saysUnableToUndo() {
-        return "WOOF!! The last command cannot be undone!";
+        return "WOOF!! Kyle thinks the last command cannot be undone!";
     }
 
     /**
@@ -114,7 +114,7 @@ public class Ui {
                 Parser.updateLastCommand("find");
                 return (taskList.findWord(arr[1]));
             } else {
-                return ("Sorry boss! No task found!");
+                return ("Sorry boss! Kyle cannot find any tasks recorded!");
             }
         }
         return (new MissingContentException()).getMessage();
@@ -127,7 +127,7 @@ public class Ui {
      */
     public String list(TaskList taskList) {
         if (taskList.isEmpty()) {
-            return ("WOOF! You do not have any tasks in your task list!");
+            return ("WOOF! Boss! You do not have any tasks in your task list!");
         }
         Parser.updateLastCommand("list");
         return (taskList.list());
@@ -283,7 +283,7 @@ public class Ui {
                 String end = (new Parser()
                         .getEventTime(command, startIndex, endIndex))[1];
                 Parser.updateLastCommand("event");
-                System.out.println("Got it. I've added this task:");
+                System.out.println("WOOF! Got it. Kyle has added this task for you boss:");
                 return (listOfAction.add(new Event("event",
                         detail, start, end)));
             } catch (MissingContentException | InvalidEventDateTimeException e) {
