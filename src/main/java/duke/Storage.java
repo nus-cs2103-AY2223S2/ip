@@ -1,9 +1,12 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,6 +27,19 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    private File createLocalStorage() throws DukeException {
+        try {
+            Files.createDirectories(Paths.get(this.filePath.getParent().toString()));
+            File storageFile = this.filePath.toFile();
+            if (!storageFile.exists()) {
+                storageFile.createNewFile();
+            }
+            return storageFile;
+        } catch (IOException e) {
+            throw new DukeException("Error! Could not find local storage directory/file...");
+        }
+    }
+
     /**
      * Retrieves saved tasks from local file.
      * @return The list of tasks stored in the local file.
@@ -33,10 +49,7 @@ public class Storage {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
 
-            File tasksData = this.filePath.toFile();
-            if (!tasksData.exists()) {
-                tasksData.createNewFile();
-            }
+            File tasksData = createLocalStorage();
 
             Scanner fileReader = new Scanner(tasksData);
             while (fileReader.hasNextLine()) {
@@ -52,8 +65,8 @@ public class Storage {
             }
             fileReader.close();
             return tasks;
-        } catch (IOException e) {
-            throw new DukeException("The directory that stores the tasks data does not exist...");
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Error! Could not find the local storage file...");
         }
     }
 
