@@ -1,11 +1,10 @@
+package Duke;
 
-import Duke.TaskList;
-import Exceptions.DukeMainExceptions;
+import Duke.Exceptions.DukeMainExceptions;
 import Duke.Storage.Storage;
-import Duke.Ui;
-import Duke.Parser;
+import Duke.command.Command;
 
-import Exceptions.CommandNotFoundException;
+import Duke.Exceptions.CommandNotFoundException;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,7 +17,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor of Duke class.
+     * Constructor of Duke.Duke class.
      *
      * @param filePath The path that can access to the file.
      * @throws IOException
@@ -56,5 +55,21 @@ public class Duke {
     public static void main(String[] args) throws CommandNotFoundException, IOException {
         new Duke("data/duke.txt").run();
 
+    }
+
+    public String getResponse(String input) throws IOException {
+        if (this.taskList == null) {
+            try {
+                taskList = new TaskList(storage.loadTasks());
+            } catch (DukeMainExceptions | IOException exception) {
+                System.out.println(exception.toString());
+            }
+        }
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(taskList, storage, ui);
+        } catch (DukeMainExceptions exception) {
+            return exception.toString();
+        }
     }
 }

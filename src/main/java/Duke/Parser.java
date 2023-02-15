@@ -3,7 +3,7 @@ package Duke;
 import Duke.Storage.Storage;
 import Duke.Tasks.Task;
 
-import Exceptions.CommandNotFoundException;
+import Duke.Exceptions.CommandNotFoundException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,26 +26,27 @@ public class Parser {
     /**
      * Parses the input by the users to corresponding commands
      *
-     * @param input The command inserted by the users.
+     * @param input The Duke.command inserted by the users.
      * @throws CommandNotFoundException
      */
-    public void parse(String input) throws CommandNotFoundException, IOException {
-        assert (input != null) : "The command cannot be null.";
+    public String parse(String input) throws CommandNotFoundException, IOException {
+        assert (input != null) : "The Duke.command cannot be null.";
         String[] splitCommand = input.split(" ");
         String command = splitCommand[0].toUpperCase();
         String splitDescription;
+        String response;
         switch (command) {
         case "LIST":
-            t.list();
+            response = t.list();
             break;
         case "MARK":
-            t.mark(Integer.parseInt(splitCommand[1]));
+            response = t.mark(Integer.parseInt(splitCommand[1]));
             break;
         case "UNMARK":
-            t.unmark(Integer.parseInt(splitCommand[1]));
+            response = t.unmark(Integer.parseInt(splitCommand[1]));
             break;
         case "DELETE":
-            t.delete(Integer.parseInt(splitCommand[1]));
+            response = t.delete(Integer.parseInt(splitCommand[1]));
             break;
         case "TODO":
             splitDescription = input.split(" ", 2).length == 2
@@ -76,5 +77,6 @@ public class Parser {
             throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
         }
 //        storage.storeTasks();
+        return response;
     }
 }
