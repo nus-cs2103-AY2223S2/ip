@@ -16,6 +16,7 @@ public class Event extends Task {
 
     /**
      * Initialises an event object.
+     *
      * @param event The name of the event.
      * @param from The starting time.
      * @param to The ending time.
@@ -28,6 +29,7 @@ public class Event extends Task {
 
     /**
      * Creates a new event object, throws error if input is invalid.
+     *
      * @param input A string that contains the parameters entered after the user command.
      * @return The created event object.
      * @throws DukeInvalidInputException
@@ -60,6 +62,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the event.
+     *
      * @return A string representing the event.
      */
     @Override
@@ -69,6 +72,7 @@ public class Event extends Task {
 
     /**
      * Converts the event into a text format that can be saved to a text file.
+     *
      * @return A string representing the event in a different format.
      */
     @Override

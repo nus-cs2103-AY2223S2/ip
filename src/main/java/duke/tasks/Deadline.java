@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Initialises the deadline object.
+     *
      * @param description The name of the deadline.
      * @param by The date/time to finish it by.
      */
@@ -24,6 +25,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new deadline object, throws error if input is invalid.
+     *
      * @param input A string that contains the parameters entered after the user command.
      * @return The created deadline object.
      * @throws DukeInvalidInputException
@@ -50,6 +52,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of the deadline.
+     *
      * @return A string representing the deadline.
      */
     @Override
@@ -59,6 +62,7 @@ public class Deadline extends Task {
 
     /**
      * Converts the deadline into a text format that can be saved to a text file.
+     *
      * @return A string representing the deadline in a different format.
      */
     @Override
