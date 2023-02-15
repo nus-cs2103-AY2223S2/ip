@@ -46,7 +46,7 @@ public class Storage {
         while (s.hasNextLine()) {
             String[] parts = parseData(s.nextLine());
             String type = parts[0];
-            String isDone = parts[1];
+            boolean isDone = changeToBoolean(parts[1]);
             addTask(tasks, type, isDone, parts);
         }
         return tasks;
@@ -54,6 +54,14 @@ public class Storage {
 
     private String[] parseData(String data) {
         return data.split(Pattern.quote(" | "));
+    }
+
+    private boolean changeToBoolean(String boo) {
+        if (boo.equals("1")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -64,26 +72,27 @@ public class Storage {
      * @param isDone The status of Task.
      * @param inputs The String stored in storage file.
      */
-    private void addTask(ArrayList<Task> tasks, String type, String isDone, String[] inputs) {
+    private void addTask(ArrayList<Task> tasks, String type, boolean isDone, String[] inputs) {
         String name = inputs[2];
 
         switch (type) {
 
         case "T":
-            Todo todo = new Todo(name, Boolean.parseBoolean(isDone));
+
+            Todo todo = new Todo(name, isDone);
             tasks.add(todo);
             break;
 
         case "D":
             String by = inputs[3].substring(4);
-            Deadline deadline = new Deadline(name, Boolean.parseBoolean(isDone), by, FORMAT);
+            Deadline deadline = new Deadline(name, isDone, by, FORMAT);
             tasks.add(deadline);
             break;
 
         case "E":
             String from = inputs[3].substring(6);
             String to = inputs[4].substring(4);
-            Event event = new Event(name, Boolean.parseBoolean(isDone), from, to, FORMAT);
+            Event event = new Event(name, isDone, from, to, FORMAT);
             tasks.add(event);
             break;
 

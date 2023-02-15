@@ -46,6 +46,8 @@ public class ParserTest {
             Command find = Parser.parse("find food");
             assertTrue(find instanceof FindCommand);
 
+            Command updateTodo = Parser.parse("update 6 /name:run");
+
         } catch (duke.DukeException e) {
             System.out.println(e.toString());
         }
