@@ -43,13 +43,13 @@ test {
 }
 
 application {
-    mainClassName = "javafx.Launcher"
+    mainClassName = "gui.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "windycall"
     archiveClassifier = null
-    archiveVersion = '1.1'
+    archiveVersion = '1.2'
 }
 
 checkstyle {
