@@ -2,28 +2,50 @@
 
 ## Features 
 
-### Feature-ABC
+### Feature-List
+
+#Words in UPPER_CASE are the parameters to be supplied by the user.
+
+Lists all current tasks in tasklist.
+Format: view
+
+
+### Feature-Delete
 
 Description of the feature.
+Format: delete INDEX
+Examples: - delete 1
+          - delete 3
 
-### Feature-XYZ
+### Feature-Add Todo Task
 
-Description of the feature.
+Adds Todo Task to tasklist.
+Format: todo TASK_DESCRIPTION
+Examples: - todo gym
+          - todo run
 
-## Usage
+### Feature-Add Deadline Task
+Adds Deadline Task to tasklist.
+Format: deadline TASK_DESCRIPTION /by DATE/DATETIME
+Examples: - deadline report /by 8/12/2020
+          - deadline homework /by 10/12/2020 1600
 
-### `Keyword` - Describe action
+### Feature-Add Event Task
+Adds Event Task to tasklist.
+Format: event TASK_DESCRIPTION /from DATE /to DATE
+Examples: - event carnival /from 8/12/2020 /to 10/12/2020
+          - event festival /from 10/12/2020 /to 20/12/2020
 
-Describe the action and its outcome.
+### Feature-Mark
+Marks a task in tasklist as completed.
+Format: mark INDEX
+Examples: - mark 1
+          - mark 5
 
-Example of usage: 
+### Feature-Unmark
+Unmarks a task as uncompleted.
+Format: unmark INDEX
+Examples: - unmark 1
+          - unmark 5
 
-`keyword (optional arguments)`
 
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
