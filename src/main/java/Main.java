@@ -1,8 +1,10 @@
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -26,6 +28,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            Image icon = new Image(Objects.requireNonNull(Main.class.getResource(
+                    "/images/DaJeo.png")).toString());
+            stage.getIcons().add(icon);
+            stage.setTitle("JeoBot");
             fxmlLoader.<MainWindow>getController().setJeo(jeo);
             stage.show();
         } catch (IOException e) {

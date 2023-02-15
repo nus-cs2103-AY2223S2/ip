@@ -11,7 +11,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 
@@ -40,7 +47,8 @@ public class DialogBox extends HBox {
         dialog.setBackground(new Background(new BackgroundFill(Color.SNOW, new CornerRadii(15.0), Insets.EMPTY)));
         dialog.setText(text);
         displayPicture.setImage(img);
-        BorderStroke stroke = new BorderStroke(Color.VIOLET, BorderStrokeStyle.SOLID, new CornerRadii(15.0), new BorderWidths(1.5));
+        BorderStroke stroke = new BorderStroke(Color.VIOLET, BorderStrokeStyle.SOLID,
+                new CornerRadii(15.0), new BorderWidths(1.5));
         dialog.setBorder(new Border(stroke));
         dialog.setPadding(new Insets(10.0, 10.0, 10.0, 10.0));
         HBox.setMargin(dialog, new Insets(10.0, 10.0, 0.0, 10.0));
