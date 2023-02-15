@@ -50,3 +50,36 @@ Sure!, I've added the following todo task:
 Now you have 1 tasks in the list.
   
 ```
+
+### deadline - Adds a deadline task
+Creates a new deadline task that is saved to the Nerdbot. Date format is YYYY-MM-DD.
+
+Example of usage: 
+
+`deadline return book /by 2023-12-25`
+
+Expected outcome:
+Nerdbot will add the deadlined task "return book" to the list of managed tasks.
+
+```
+Sure!, I've added the following deadline:
+  [D][] buy book (by: Dec 25 2023)
+Now you have 1 tasks in the list.
+Be sure to finish these tasks before the deadline!
+```
+
+### event - Adds an event task
+Creates a new event task that is saved to the Nerdbot. Date format is YYYY-MM-DD.
+
+Example of usage: 
+
+`event book event /from 2023-12-25 /to 2023-12-27`
+
+Expected outcome:
+Nerdbot will add the event "book event" to the list of managed tasks.
+
+```
+Sure!, I've added the following event:
+  [E][] book event (from: Dec 25 2023 to: Dec 27 2023)
+Now you have 1 tasks in the list.
+```
