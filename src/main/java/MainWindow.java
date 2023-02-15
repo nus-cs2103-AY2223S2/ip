@@ -57,10 +57,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-//    @FXML
-//    private boolean checkDialogbox() {
-//        return dialogContainer.getChildren().contains(DialogBox.getDukeDialog("", dukeImage));
-//    }
     @FXML
     private void greetUser() {
         dialogContainer.getChildren().addAll(
