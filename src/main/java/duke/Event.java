@@ -15,6 +15,7 @@ public class Event extends Task {
      * @param description description of event
      * @param from        start time of event as a String
      * @param to          end time of event as a String
+     * @param note        note attached to the Event
      * @throws MissingDescriptionException missing description
      */
     public Event(String description, String from, String to, String note) throws MissingDescriptionException {

@@ -30,6 +30,13 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * gets a response to be displayed on the UI depending on the user's input
+     *
+     * @param input user input
+     * @return the output to be displayed by Duke
+     */
     public String getResponse(String input) {
         String response = "";
         if (!input.equals("bye")) {

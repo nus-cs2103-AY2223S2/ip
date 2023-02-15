@@ -26,15 +26,6 @@ public class Task {
     }
 
     /**
-     * gets the description of the task
-     * 
-     * @return a string representing the description of the task
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
      * gets the completion status of the task
      * 
      * @return a String "X" representing completed or " " representing uncompleted

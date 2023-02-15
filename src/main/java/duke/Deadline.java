@@ -16,6 +16,7 @@ public class Deadline extends Task {
      * 
      * @param description description of task
      * @param date        date of the deadline
+     * @param note note attached to the deadline task
      * @throws MissingDescriptionException missing description
      */
     public Deadline(String description, LocalDate date, String note) throws MissingDescriptionException {

@@ -69,6 +69,11 @@ public class Storage {
         }
     }
 
+    /**
+     * creates a directory data containing a file if the directory and/or the file does not exist yet
+     *
+     * @throws DukeException error in creating file
+     */
     private void createFile() throws DukeException {
         try {
             File data = new File("./data");
@@ -80,6 +85,13 @@ public class Storage {
         }
     }
 
+    /**
+     * creates a Task instance based on data from Duke.txt
+     *
+     * @param data information of a Task stored in Duke.txt
+     * @return Task instance
+     * @throws DukeException error creating task instance from task in duke.txt
+     */
     private Task createTask(String data) throws DukeException {
         String[] info = data.split(Task.DIVIDER);
         String type = info[0];

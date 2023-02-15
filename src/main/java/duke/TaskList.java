@@ -30,7 +30,7 @@ public class TaskList {
      * adds a new Todo into arraylist
      *
      * @param command input by the user
-     *
+     * @return message after adding a Todo into arraylist (or error message if it failed to add)
      */
     public String addTodo(String command) {
         try {
@@ -55,7 +55,7 @@ public class TaskList {
      * adds a new Deadline into arraylist
      *
      * @param command input by the user
-     *
+     * @return message after adding a Deadline into arraylist (or error message if it failed to add)
      */
     public String addDeadline(String command) {
         try {
@@ -88,7 +88,7 @@ public class TaskList {
      * adds a new Event into arraylist
      *
      * @param command input by the user
-     *
+     * @return message after adding an Event into the arraylist (or error message if it failed to add)
      */
     public String addEvent(String command) {
         try {
@@ -120,7 +120,8 @@ public class TaskList {
      * marks a task in the arraylist as completed
      * 
      * @param command user input
-     * @throws IndexOutOfBoundsException
+     * @return message after task has been marked (or error message if it failed)
+     * @throws IndexOutOfBoundsException invalid index given
      */
     public String markTask(String command) throws IndexOutOfBoundsException {
         try {
@@ -139,7 +140,8 @@ public class TaskList {
      * unmarks a task in arraylist to not done
      * 
      * @param command user input
-     * @throws IndexOutOfBoundsException
+     * @return message after task has been unmarked
+     * @throws IndexOutOfBoundsException invalid index given
      */
     public String unmarkTask(String command) throws IndexOutOfBoundsException {
         try {
@@ -158,7 +160,8 @@ public class TaskList {
      * removes a task from the arraylist
      * 
      * @param command input by user
-     * @throws IndexOutOfBoundsException
+     * @return message after task has been deleted
+     * @throws IndexOutOfBoundsException invalid index given
      */
     public String deleteTask(String command) throws IndexOutOfBoundsException {
         try {
@@ -174,10 +177,11 @@ public class TaskList {
 
     /**
      * finds tasks from the tasklist that contain description matching given keyword
-     * 
+     *
+     * @return list of the tasks that contain the keyword as a String
      * @param command input by user
      */
-    public String findTask(String command) throws DukeException {
+    public String findTask(String command) {
         try {
             String keyword = command.split(" ", 2)[1];
             ArrayList<Task> matchingTasks = new ArrayList<Task>();
