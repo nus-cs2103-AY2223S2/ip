@@ -72,7 +72,8 @@ public class Ui {
     public String getWelcomeMessage() {
         String[] quotes = new String[]{
             "\"Just keep swimming. Just keep swimming, swimming, swimming. What do we do? We swim, swim.\"",
-            "\"It's there, I know it is because when I look at you, I can feel it. And I, I look at you and… I'm home.\"",
+            "\"It's there, I know it is because when I look at you, I can feel it. And I, I look at you and… "
+                + "I'm home.\"",
             "\"Well then, how are we gonna do that unless we give it a shot and hope for the best?\"",
             "\"It's the ocean, silly, we're not the only two in here.\"",
             "\"Whoa, whoa, whoa! Hey! Relax. Take a deep breath.\"",

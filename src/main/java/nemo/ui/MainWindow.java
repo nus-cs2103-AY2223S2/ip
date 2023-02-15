@@ -70,9 +70,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getNemoErrorDialog(response, nemoErrorImage)
             );
-        }
-
-        else {
+        } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getNemoDialog(response, nemoImage)
