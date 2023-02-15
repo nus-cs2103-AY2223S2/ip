@@ -18,7 +18,7 @@ import jeo.ui.Ui;
 /**
  * Represents the bot which the user may run.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class JeoBot {
     protected static final String DATE_PARSE = "yyyy-MM-dd";

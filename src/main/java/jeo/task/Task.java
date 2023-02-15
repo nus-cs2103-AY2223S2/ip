@@ -3,7 +3,7 @@ package jeo.task;
 /**
  * Represents a generic task.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public abstract class Task {
     protected String description;

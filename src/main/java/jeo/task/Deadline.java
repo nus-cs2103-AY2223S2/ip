@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a task that has a deadline.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class Deadline extends Task {
     protected static final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";

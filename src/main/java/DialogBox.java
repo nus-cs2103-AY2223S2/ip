@@ -27,7 +27,7 @@ import javafx.scene.paint.Color;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class DialogBox extends HBox {
     @FXML

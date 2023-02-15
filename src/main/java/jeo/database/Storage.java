@@ -17,7 +17,7 @@ import jeo.task.ToDo;
 /**
  * Represents the storage for loading and saving tasks.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class Storage {
     protected static final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";

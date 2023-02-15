@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 /**
  * Represents a GUI for Jeo using FXML.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class Main extends Application {
     private static final String PATH = "./data.txt";

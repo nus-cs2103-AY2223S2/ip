@@ -11,7 +11,7 @@ import jeo.task.Task;
 /**
  * Represents the Ui for dealing with user interactions.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class Ui {
     protected static final String BOT_NAME = "JeoBot";

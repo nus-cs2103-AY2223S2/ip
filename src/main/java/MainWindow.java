@@ -20,7 +20,7 @@ import jeo.ui.Ui;
 /**
  * Represents the controller for MainWindow. Provides the layout for the other controls.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class MainWindow extends AnchorPane {
     @FXML

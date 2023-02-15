@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a task that lasts for a period of time.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class Event extends Task {
     protected static final String DATE_TIME_PARSED = "yyyy-MM-dd HH:mm";

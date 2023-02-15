@@ -8,7 +8,7 @@ import jeo.exception.JeoException;
 /**
  * Represents the parser which parses user input as a string.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class Parser {
 

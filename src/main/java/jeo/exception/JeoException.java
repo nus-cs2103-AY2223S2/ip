@@ -3,7 +3,7 @@ package jeo.exception;
 /**
  * Represents the custom exception that is thrown when an error is encountered while parsing user input.
  * @author Goh Jun How
- * @version 0.1
+ * @version 0.3
  */
 public class JeoException extends Exception {
 
