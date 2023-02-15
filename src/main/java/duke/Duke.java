@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
 public class Duke extends Application {
     final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
@@ -156,6 +155,7 @@ public class Duke extends Application {
                     String errMsg = "You have not upload any task yet";
                     throw new DukeException(errMsg);
                 }
+                assert taskList.size() > 0;
                 res = "Here are the tasks in your list: \n";
                 i = 1;
                 for (Task task : taskList) {
@@ -166,13 +166,15 @@ public class Duke extends Application {
             case "DELETE":
                 try {
                     int num = Integer.parseInt(input.substring(7));
+                    assert num >= 1;
                     Task currTask = taskList.get(num - 1);
                     taskList.remove(currTask);
                     storage.update_data(taskList);
                     return "Noted. I've removed this task: \n  " + currTask.toString() + "\n"
                             + "Now you have " + (taskList.size()) + " tasks in the list";
                 } catch (IndexOutOfBoundsException err1) {
-                    String errMsg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
+                    String errMsg = "☹ OOPS!!! The Task number that you have keyed in is invalid."
+                            + "Please key in a valid Number.";
                     return errMsg;
                 } catch (NumberFormatException err2) {
                     String errMsg = "☹ OOPS!!! Please key in a valid Number.";
@@ -187,7 +189,7 @@ public class Duke extends Application {
                     storage.update_data(taskList);
                     return "Nice! I've marked this task as done\n" + currTask.getStatusIcon() + " " + currTask.getDes();
                 } catch (IndexOutOfBoundsException err1) {
-                    String errMsg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
+                    String errMsg = "☹ OOPS!!! The Duke.Task number that you have keyed in is invalid.";
                     return errMsg;
                 } catch (NumberFormatException err2) {
                     String errMsg = "☹ OOPS!!! Please key in a valid Number.";
@@ -203,7 +205,7 @@ public class Duke extends Application {
                     return "OK, I've marked this task as not done yet\n"
                             + currTask.getStatusIcon() + " " + currTask.getDes();
                 } catch (IndexOutOfBoundsException err1) {
-                    String errMsg = "☹ OOPS!!! Please the Duke.Task "
+                    String errMsg = "☹ OOPS!!! The Duke.Task "
                             + "number that you have keyed in is invalid.";
                     return errMsg;
                 } catch (NumberFormatException err2) {
@@ -218,6 +220,7 @@ public class Duke extends Application {
                 ToDos todo = new ToDos(input.substring(5), 0);
                 taskList.add(todo);
                 storage.update_data(taskList);
+                assert taskList.size() >= 1;
                 return "added: " + todo + "\n"
                         + "Now you have " + taskList.size() + " tasks in the list";
             case "DEADLINE":
@@ -231,6 +234,7 @@ public class Duke extends Application {
                     Deadline deadline = new Deadline(ddlStringArr[0].substring(9), deadlineTime, 0);
                     taskList.add(deadline);
                     storage.update_data(taskList);
+                    assert taskList.size() >= 1;
                     return "added: " + deadline + "\n"
                             + "Now you have " + taskList.size() + " tasks in the list";
                 } catch (DateTimeParseException e) {
@@ -259,6 +263,7 @@ public class Duke extends Application {
                     Event event = new Event(eventStringArr[0].substring(6), from, to, 0);
                     taskList.add(event);
                     storage.update_data(taskList);
+                    assert taskList.size() >= 1;
                     return "Got it. I've added this task \n" + "added: " + event + "\n"
                             + "Now you have " + taskList.size() + " tasks in the list";
                 } catch (DateTimeParseException e) {
