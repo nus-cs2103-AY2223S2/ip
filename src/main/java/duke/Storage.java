@@ -73,7 +73,7 @@ public class Storage {
         }
     }
 
-    public TaskList convertFileToTaskList (Path filePath) {
+     */
         List<String> allLines;
         TaskList resultTaskList;
         allLines = readFileAsList(filePath);
@@ -82,7 +82,7 @@ public class Storage {
     }
 
 
-    public List<String> readFileAsList(Path filePath) {
+    private List<String> readFileAsList(Path filePath) {
         List<String> allLines;
         try {
             allLines = Files.readAllLines(filePath);
@@ -93,9 +93,10 @@ public class Storage {
     }
 
 
-    public TaskList convertListToTaskList(List<String> list) {
+    private TaskList convertListToTaskList(List<String> list) {
         TaskList result;
         result = new TaskList();
+
         for (int i = 0; i < list.size(); i++) {
             String currString = list.get(i);
             Task curr = convertStringToTask(currString);
@@ -104,15 +105,13 @@ public class Storage {
         return result;
     }
 
-    public Task convertStringToTask(String itemString) {
+    private Task convertStringToTask(String itemString) {
         String[] lineArray;
         boolean taskStatus;
         Task resultingTask;
 
         resultingTask = null;
-
         lineArray = itemString.split(",");
-
         taskStatus = lineArray[1].equals("1");
 
         switch (lineArray[0]) {
@@ -132,7 +131,7 @@ public class Storage {
         return resultingTask;
     }
 
-    public void createNewFile(File fileToWrite) {
+    private void createNewFile(File fileToWrite) {
         try {
             FileUtils.write(fileToWrite, "");
         } catch (IOException e) {
