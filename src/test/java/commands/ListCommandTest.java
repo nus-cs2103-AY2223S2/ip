@@ -28,7 +28,7 @@ public class ListCommandTest {
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
         p = new UiPrinter(System.out::println);
-        m = new Membot(p);
+        m = new Membot(p, true);
 
         assertDoesNotThrow(this.outputStreamCaptor::reset);
     }

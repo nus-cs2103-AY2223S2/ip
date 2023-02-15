@@ -28,7 +28,7 @@ import membot.view.UiPrinter;
 public class CommandTest {
     private final Consumer<String> c = System.out::println;
     private final UiPrinter p = new UiPrinter(c);
-    private final Membot m = new Membot(p);
+    private final Membot m = new Membot(p, true);
 
     @Test
     public void parseTest() {

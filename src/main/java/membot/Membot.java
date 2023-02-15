@@ -16,6 +16,7 @@ import membot.view.Printable;
  */
 public class Membot {
     private static final String FILE_NAME = "./data/tasks.txt";
+    private static final String TEST_FILE_NAME = "./data/test_tasks.txt";
     private static final int EXIT_DELAY = 500;
     private final Printable ui;
     private StorageManager manager;
@@ -25,12 +26,14 @@ public class Membot {
      * used if there are multiple types of views to render (e.g. CLI and GUI).
      *
      * @param ui The engine for displaying data to a user view.
+     * @param isTest True if Membot instance is used for test purposes, false otherwise.
      */
-    public Membot(Printable ui) {
+    public Membot(Printable ui, boolean isTest) {
         this.ui = ui;
 
         try {
-            this.manager = new StorageManager(FILE_NAME);
+            String fileName = isTest ? TEST_FILE_NAME : FILE_NAME;
+            this.manager = new StorageManager(fileName);
             Task.load(manager.loadFromFile());
             this.execute("help");
         } catch (IOException e) {
