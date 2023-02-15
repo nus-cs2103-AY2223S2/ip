@@ -1,5 +1,3 @@
-T | 0 | read book
-T | 0 | gym
-D | 0 | return book (by: Feb 06 2023 0600 pm)
-D | 0 | do assignment (by: Feb 08 2023 0600 pm)
+D | 0 | return book (by: Feb 16 2023 0600 pm)
 E | 0 | bfast with friends (from: tues 9am to: tues 10am)
+T | 0 | sleep
