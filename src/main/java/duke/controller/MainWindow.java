@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        createDukeDialogBox(Ui.getWelcome(), dukeImage);
+        createDukeDialogBox(Ui.getWelcome(), dukeImage, false);
     }
 
     public void setDuke(Duke duke) {
@@ -57,10 +57,10 @@ public class MainWindow extends AnchorPane {
         try {
             String response = getResponse(input);
             createUserDialogBox(input, userImage);
-            createDukeDialogBox(response, dukeImage);
+            createDukeDialogBox(response, dukeImage, false);
         } catch (DukeException e) {
             createUserDialogBox(input, userImage);
-            createDukeDialogBox(e.getMessage(), dukeImage);
+            createDukeDialogBox(e.getMessage(), dukeImage, true);
         }
         userInput.clear();
     }
@@ -72,7 +72,7 @@ public class MainWindow extends AnchorPane {
      * @throws DukeException Exception thrown from Duke package methods.
      */
     private String getResponse(String input) throws DukeException {
-        String fullCommand = Ui.readCommand(input);
+        String fullCommand = UserInputParser.checkInputForInvalidCharacter(input);
         Command c = UserInputParser.parse(fullCommand);
         boolean isExitCommand = c instanceof ExitCommand;
         if (isExitCommand) {
@@ -113,9 +113,9 @@ public class MainWindow extends AnchorPane {
      * @param label Text to be displayed on the dialog box.
      * @param image Image to be displayed on the dialog box.
      */
-    private void createDukeDialogBox(String label, Image image) {
+    private void createDukeDialogBox(String label, Image image, boolean isError) {
         dialogContainer.getChildren().addAll(
-                new DialogBox(label, image).getDukeDialog()
+                new DialogBox(label, image).getDukeDialog(isError)
         );
     }
 }

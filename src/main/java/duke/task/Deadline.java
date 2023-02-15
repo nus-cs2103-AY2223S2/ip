@@ -50,7 +50,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D][%c] %s (by: %s) %s", getStatusIcon(), description,
+        return String.format("[D][%c] %s\n(by: %s) %s", getStatusIcon(), description,
                 Ui.getStringDateTime(deadline), super.getUrgentMessage(deadline));
     }
 
@@ -60,7 +60,7 @@ public class Deadline extends Task {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {
-            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
+            throw new DukeException("Invalid datetime format.\nPlease use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
         }
     }
 

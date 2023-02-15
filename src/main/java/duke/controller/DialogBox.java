@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 
 /**
  * An example of a custom control using FXML.
@@ -59,10 +60,13 @@ public class DialogBox extends HBox {
         return this;
     }
 
-    public DialogBox getDukeDialog() {
+    public DialogBox getDukeDialog(boolean isError) {
         this.flip();
         dialog.setStyle("-fx-border-color: black; -fx-border-radius: 5; -fx-label-padding: 5; "
                 + "-fx-background-color: D4C5E2;");
+        if (isError) {
+            dialog.setTextFill(Paint.valueOf("#8f001a"));
+        }
         return this;
     }
 }
