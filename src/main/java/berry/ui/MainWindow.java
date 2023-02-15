@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -30,8 +29,9 @@ public class MainWindow extends AnchorPane {
 
     private Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userDefault.png"));
-    private Image berryImage = new Image(this.getClass().getResourceAsStream("/images/berryDefault.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/piupiuDefault.png"));
+    private Image berryDefaultImage = new Image(this.getClass().getResourceAsStream("/images/molangDefault.png"));
+    private Image berryThinkImage = new Image(this.getClass().getResourceAsStream("/images/molangThink.png"));
 
     @FXML
     public void initialize() {
@@ -55,6 +55,7 @@ public class MainWindow extends AnchorPane {
     public void handleUserInput() {
         String input = userInput.getText();
         String response = berry.getResponse(input);
+        Image berryImageShown = berryDefaultImage;
 
         if (input.equals("bye")) {
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -62,11 +63,16 @@ public class MainWindow extends AnchorPane {
             pause.play();
             userInput.setDisable(true);
             sendButton.setDisable(true);
+        } else {
+            String command = input.split(" ")[0];
+            if (command.equals("unmark") || command.equals("delete")) {
+                berryImageShown = berryThinkImage;
+            }
         }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBerryDialog(response, berryImage)
+                DialogBox.getBerryDialog(response, berryImageShown)
         );
         userInput.clear();
     }
@@ -75,7 +81,7 @@ public class MainWindow extends AnchorPane {
         String dukeText = Ui.showWelcome();
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getBerryDialog(dukeText, berryImage)
+                DialogBox.getBerryDialog(dukeText, berryDefaultImage)
         );
     }
 

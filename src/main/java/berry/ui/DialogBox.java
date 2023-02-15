@@ -82,15 +82,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    private void style() {
-        Rectangle r = new Rectangle();
-        r.setHeight(90.0);
-        r.setWidth(90.0);
-        r.setArcHeight(100.0);
-        r.setArcWidth(100.0);
-        displayPicture.setClip(r);
-
-        this.setSpacing(5);
+    private void style() {this.setSpacing(5);
         this.setFillHeight(false);
 
         BorderStroke borderStroke = new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,

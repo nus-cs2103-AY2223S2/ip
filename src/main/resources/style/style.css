@@ -1,13 +1,10 @@
-@font-face {
-    src: url(../fonts/A-Little-Sunshine.ttf);
-}
-
 Button {
     -fx-background-radius: 10em;
+    -fx-background-image: url("/images/endDefault.png");
 }
 
 VBox {
-    -fx-background-color: #Ffe9fe;
+    -fx-background-image: url("/images/background.png");
     -fx-background-size: 100%;
     -fx-background-position: bottom;
     -fx-padding: 10;

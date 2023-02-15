@@ -67,7 +67,7 @@ public abstract class Task {
      * @return a string representing its isDone status
      */
     public String getStatusIcon() {
-        return isDone ? "X" : " ";
+        return isDone ? "X" : "  ";
     }
 
     public HashSet<String> getTags() {
