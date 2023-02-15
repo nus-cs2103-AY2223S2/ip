@@ -90,7 +90,7 @@ Replace `END_DATETIME` with the date and time of the deadline.
 
 Example of usage: 
 
-`deadline Walk cat /from 2023-02-01 1400 /to 2023-02-01 1700`
+`event Walk cat /from 2023-02-01 1400 /to 2023-02-01 1700`
 
 Expected outcome:
 
@@ -119,6 +119,25 @@ Here are the tasks in your list:
 1. [T][ ] Pet cat
 2. [D][ ] Buy Catfood (By Feb 1 2023 2:00 PM)
 3. [E][ ] Walk cat (From: Feb 1 2023 2:00 PM to: Feb 1 2023 5:00 PM)
+```
+
+### `delete TASK_ID` - Delete a task
+
+Deletes a task specified by `TASK_ID` as done.
+`TASK_ID` can be viewed using the `list` command above.
+
+Example of usage: 
+
+`delete 1`
+
+Expected outcome:
+
+All tasks will be listed.
+
+```
+Meow-ted. I've removed this task:
+	[T][X] Pet cat
+Now you have 0 tasks in the list.
 ```
 
 ### `mark TASK_ID` - Marks a task as done
@@ -157,7 +176,7 @@ Meow-k! I've marked this task as not done yet:
 	[T][ ] Pet cat
 ```
 
-### `UPDATE TASK_ID TASK_DESCRIPTION` - Updates the description of a task
+### `update TASK_ID TASK_DESCRIPTION` - Updates the description of a task
 
 Updates the description of a task specified by `TASK_ID` to the new description specified by `TASK_DESCRIPTION`.
 `TASK_ID` can be viewed using the `list` command above.
@@ -175,3 +194,21 @@ All tasks will be listed.
 Meow-k. I've updated the description of this task:
 	[T][ ] Pet dog
 ```
+
+## FAQ
+
+**Q:** How do I transfer my data to another Computer?
+**A:** Install the app in the other computer and overwrite the empty `list.txt` file it creates in the `data` folder with the corresponding file in your previous CatBot home folder.
+
+## Command Summary
+
+Action | Format, Examples
+--------|------------------
+**Add task** | `todo TASK_DESC` <br> e.g., `todo Pet cat`
+**Add deadline** | `deadline TASK_DESC /by END_DATETIME` <br> e.g., `deadline Buy Catfood /by 2023-02-01 1400`
+**Add event** | `event TASK_DESC /from START_DATETIME /to END_DATETIME` <br> e.g., `event Walk cat /from 2023-02-01 1400 /to 2023-02-01 1700`
+**List** | `list`
+**Mark as Done** | `mark TASK_ID` <br> e.g., `mark 1`
+**Mark as Undone** | `unmark TASK_ID` <br> e.g., `unmark 1`
+**Delete task** | `delete TASK_ID` <br> e.g., `delete 1`
+**Update task** | `update TASK_ID TASK_DESCRIPTION` <br> e.g., `update 1 Pet dog`
