@@ -30,8 +30,7 @@ public class Start extends Application{
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-
+    private AnchorPane mainLayout;
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -57,7 +56,24 @@ public class Start extends Application{
         initalize("data/duke.txt");
 
         //Step 1. Setting up required components
+        step1(stage);
 
+        //Step 2. Formatting the window to look as expected
+        step2(stage);
+
+        //Step 3. Add functionality to handle user input.
+        step3();
+
+        //Step 4. Welcome Message
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(getDialogLabel(ui.welcomeMessage()), new ImageView(duke))
+        );
+    }
+
+    /**
+     * Step 1: Setting up required components
+     */
+    public void step1(Stage stage) {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -66,15 +82,19 @@ public class Start extends Application{
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        AnchorPane mainLayout = new AnchorPane();
+        mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
+    }
 
-        //Step 2. Formatting the window to look as expected
+    /**
+     * Step 2: Formatting the window to look as expected
+     */
+    public void step2(Stage stage) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -103,8 +123,13 @@ public class Start extends Application{
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
-        //Step 3. Add functionality to handle user input.
+    /**
+     * Step 3. Add functionality to handle user input.
+     * When user enters an input, handleUserInput() will be triggered.
+     */
+    public void step3() {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -115,14 +140,6 @@ public class Start extends Application{
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Step 4. Welcome Message
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(getDialogLabel(ui.welcomeMessage()), new ImageView(duke))
-        );
-
-
-
     }
 
     /**
@@ -168,8 +185,8 @@ public class Start extends Application{
              Command c = parser.parse(fullCommand,ui);
              response = c.execute(tasks,ui,storage);
              isExit = c.isExit();
-         } catch (NullPointerException e) {
-
+         } catch (RuntimeException e) {
+             response = ui.wrongInput();
          }
 
          if(isExit == true) {

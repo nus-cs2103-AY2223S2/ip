@@ -15,20 +15,13 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n"
-                + "Commands are : list,todo,mark,deadline and event";
+                + "Commands are: list,todo,mark,deadline,event & archive";
 
         return logo;
     }
 
-    public void customMessage(String message) {
-        System.out.println(message);
-    }
-    public void customMessage(Task value) {
-        System.out.println(value);
-    }
-
     public String showMarkSucess(Task value) {
-        return "Nice! I've marked this task as done: [X]" + value;
+        return "Nice! I've marked this task as done: " + value;
     }
 
     public String showNumberOfListings(int index) {
@@ -48,6 +41,21 @@ public class Ui {
         }
     }
 
+    public String addCommandsFormat(String command) {
+        if(command.equals("todo")) {
+            return "\nAn example:\ntodo CS2103 Assignment";
+        } else if (command.equals("deadline")) {
+            return "\nAn example:\ndeadline CS2103 Assignment /by 01/03/2023:1800";
+        } else if (command.equals("event") || command.contains("event") ) {
+            return "\nAn example:\nevent CS2103 Exam /from 01/03/2023:1800" +
+                    " /to 01/03/2023:2000";
+        }
+        return null;
+    }
+
+    public String wrongInput() {
+        return "Missing input or input is of wrong type";
+    }
     public String byeMessage() {
         return "Bye. Hope to see you again soon!";
     }

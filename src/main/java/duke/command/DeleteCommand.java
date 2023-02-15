@@ -31,10 +31,9 @@ public class DeleteCommand extends Command {
         String message = "Noted. I've removed this task: \n" +
                 tasks.get(index) + "\n" +
                 ui.showNumberOfListings(tasks.size() - 1);
-
         tasks.remove(index);
         storage.empty();
-        storage.writeFromList(tasks,storage.getFilePath());
+        storage.writeFromList(tasks, storage.getFilePath());
         return message;
     }
 }

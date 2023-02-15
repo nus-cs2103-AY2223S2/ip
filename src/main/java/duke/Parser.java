@@ -46,7 +46,7 @@ public class Parser {
 
         String action = nextString();
         Command c = null;
-        Task t;
+        Task t = null;
 
         switch (action) {
         case "list":
@@ -70,99 +70,127 @@ public class Parser {
             break;
         }
         case "todo": {
-            String value = getToDo();
-            if (value != null && !value.isEmpty())  {
-                t = new Todo(value, false);
-                c = new AddCommand(t);
-            } else {
-                c = new ErrorCommand(ErrorCommand.types.emptyDesc,"todo");
-            }
+            c = todoHelper(c,t);
             break;
         }
         case "deadline": {
-            String input;
-            String value = "";
-            String date ;
-            boolean isBy = false; // Check whether the user has typed /by in his command
-
-            while ((input = nextString()) != null) {
-                if (input.equals("/by")) {
-                    date = nextString();
-                    isBy = true;
-                    LocalDateTime dateTime = stringToDateTime(date);
-                    if(dateTime != null) {
-                        t = new Deadline(value, dateTime, false);
-                        c = new AddCommand(t);
-                    } else {
-                        c = new ErrorCommand(ErrorCommand.types.dateTime,"deadline");
-                    }
-                    break;
-                } else
-                    value = value + input;
-            }
-
-            if(value == "") {
-                c = new ErrorCommand(ErrorCommand.types.emptyDesc,"deadline");
-            } else if (isBy == false) {
-                c = new ErrorCommand(ErrorCommand.types.missingBy,"deadline");
-            }
+            c = deadlineHelper(c,t);
             break;
         }
         case "event": {
-            String input;
-            String value = "";
-            String from;
-            String to ;
-            boolean isFrom = false;
-
-            while ((input = nextString()) != null) {
-                if (input.equals("/from")) {
-                    from = nextString();
-                    LocalDateTime dateTime;
-                    isFrom = true;
-                    dateTime = stringToDateTime(from);
-                    if(dateTime == null) {
-                        c = new ErrorCommand(ErrorCommand.types.dateTime,"event from");
-                        break;
-                    }
-                    String isTo = nextString();
-                    if(!(isTo != null && isTo.equals("/to"))) {
-                        c = new ErrorCommand(ErrorCommand.types.missingTo,"event to");
-                        break;
-                    }
-                    to = nextString();
-                    LocalDateTime dateTime2;
-                    dateTime2 = stringToDateTime(to);
-                    if(dateTime2 == null) {
-                        c = new ErrorCommand(ErrorCommand.types.dateTime,"event to");
-                        break;
-                    }
-                    t = new Event(value, dateTime, dateTime2, false);
-                    c = new AddCommand(t);
-                    break;
-                } else
-                    value = value + input;
-            }
-
-            if(value == "") {
-                c = new ErrorCommand(ErrorCommand.types.emptyDesc,"event");
-            } else if (isFrom == false) {
-                c = new ErrorCommand(ErrorCommand.types.missingFrom,"event");
-            }
+            c = eventHelper(c,t);
             break;
         }
         case "archive": {
             c = new ArchiveCommand();
             break;
         }
+        case "exit": {
+            c = new ExitCommand();
+            break;
+        }
         default:
             c = new UnknownCommand();
             break;
         }
-
         //Assertion Check
         assert c == null: "Command c should not be null";
+        return c;
+    }
 
+    /**
+     * A helper method to parse todo
+     * @return ErrorCommand or AddCommand
+     */
+    public Command todoHelper(Command c, Task t) {
+        String value = getToDo();
+        if (value != null && !value.isEmpty())  {
+            t = new Todo(value, false);
+            c = new AddCommand(t);
+        } else {
+            c = new ErrorCommand(ErrorCommand.types.emptyDesc,"todo");
+        }
+        return c;
+    }
+    /**
+     * A helper method to parse Deadline
+     * @return ErrorCommand or AddCommand
+     */
+    public Command deadlineHelper(Command c,Task t) {
+        String input;
+        String value = "";
+        String date ;
+        boolean isBy = false; // Check whether the user has typed /by in his command
+
+        while ((input = nextString()) != null) {
+            if (input.equals("/by")) {
+                date = nextString();
+                isBy = true;
+                LocalDateTime dateTime = stringToDateTime(date);
+                if(dateTime != null) {
+                    t = new Deadline(value, dateTime, false);
+                    c = new AddCommand(t);
+                } else {
+                    c = new ErrorCommand(ErrorCommand.types.dateTime,"deadline");
+                }
+                break;
+            } else
+                value = value + input;
+        }
+
+        if(value == "") {
+            c = new ErrorCommand(ErrorCommand.types.emptyDesc,"deadline");
+        } else if (isBy == false) {
+            c = new ErrorCommand(ErrorCommand.types.missingBy,"deadline");
+        }
+        return c;
+    }
+
+    /**
+     * A helper method to parse Event
+     * @return ErrorCommand or AddCommand
+     */
+    public Command eventHelper(Command c,Task t) {
+        String input;
+        String value = "";
+        String from;
+        String to ;
+        boolean isFrom = false;
+
+        while ((input = nextString()) != null) {
+            if (input.equals("/from")) {
+                from = nextString();
+                LocalDateTime dateTime;
+                isFrom = true;
+                dateTime = stringToDateTime(from);
+                if(dateTime == null) {
+                    c = new ErrorCommand(ErrorCommand.types.dateTime,"event from");
+                    break;
+                }
+                String isTo = nextString();
+                if(!(isTo != null && isTo.equals("/to"))) {
+                    c = new ErrorCommand(ErrorCommand.types.missingTo,"event");
+                    break;
+                }
+                to = nextString();
+                LocalDateTime dateTime2;
+                dateTime2 = stringToDateTime(to);
+                if(dateTime2 == null) {
+                    c = new ErrorCommand(ErrorCommand.types.dateTime,"event to");
+                    break;
+                }
+                t = new Event(value, dateTime, dateTime2, false);
+                c = new AddCommand(t);
+                break;
+            } else
+                value = value + input;
+        }
+
+        if(value == "") {
+            c = new ErrorCommand(ErrorCommand.types.emptyDesc,"event");
+        } else if (isFrom == false) {
+            c = new ErrorCommand(ErrorCommand.types.missingFrom,"event");
+        }
         return c;
     }
 
@@ -176,16 +204,6 @@ public class Parser {
         return null;
     }
 
-    //Custom method for ToDo command
-    public String getToDo() {
-        String[] arr = fullCommand.split(" ", 2);
-        try {
-            return arr[1].trim();
-        } catch(ArrayIndexOutOfBoundsException e)  {
-            return null;
-        }
-    }
-
     //try and catch for tk.nextToken() for string
     public String nextString() {
         try {
@@ -194,6 +212,16 @@ public class Parser {
             ui.showError(1);
         }
         return null;
+    }
+
+    //Custom method for todoHelper()
+    public String getToDo() {
+        String[] arr = fullCommand.split(" ", 2);
+        try {
+            return arr[1].trim();
+        } catch(ArrayIndexOutOfBoundsException e)  {
+            return null;
+        }
     }
 
     //Convert String to datetime format

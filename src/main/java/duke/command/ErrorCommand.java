@@ -24,8 +24,11 @@ public class ErrorCommand extends Command {
 
     private types error;
     private String name;
+
     /**
      * Constructor
+     * @param error types(enum) of error
+     * @param name  name of the error
      */
     public ErrorCommand(types error, String name) {
         this.error = error;
@@ -38,17 +41,18 @@ public class ErrorCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String format = ui.addCommandsFormat(this.name);
         switch(error) {
         case emptyDesc:
-            return "Sorry ! " + name + " description must not be empty";
+            return "Sorry ! " + name + " description must not be empty" + format;
         case dateTime:
-            return "Sorry ! " + name + " datetime format must be in dd/MM/yyyy:HHmm";
+            return "Sorry ! " + name + " datetime format must be in dd/MM/yyyy:HHmm" + format;
         case missingBy:
-            return "Sorry ! " + name + " missing /by in your input";
+            return "Sorry ! " + name + " missing /by in your input" + format;
         case missingFrom:
-            return "Sorry ! " + name + "missing /from in your input";
+            return "Sorry ! " + name + " missing /from in your input" + format;
         case missingTo:
-            return "Sorry ! " + name + "missing /to in your input";
+            return "Sorry ! " + name + " missing /to in your input" + format;
         default:
             return ui.showLoadingError();
         }
