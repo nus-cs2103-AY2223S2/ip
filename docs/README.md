@@ -127,7 +127,7 @@ Example of usage:
 
 ### `bye` - Saves Duke's list of tasks
 
-It will save the list of tasks and their status (marked or unmarked) in Duke as a text file in user's home directory.
+It will save the list of tasks and their status (marked or unmarked) as a text file in user's home directory.
 
 Usage:
 
