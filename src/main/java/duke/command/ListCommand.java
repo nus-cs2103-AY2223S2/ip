@@ -23,6 +23,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (tasks.size() <= 0) {
+            return "Seems like you don't have any tasks yet!";
+        }
         return tasks.print();
     }
 }
