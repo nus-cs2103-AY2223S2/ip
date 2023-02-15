@@ -8,7 +8,7 @@ import duke.command.FindCommand;
 import duke.command.GuideCommand;
 import duke.command.MarkCommand;
 import duke.command.PrintListCommand;
-import duke.command.TodoCommand;
+import duke.command.ToDoCommand;
 import duke.command.UnknownCommand;
 import duke.command.UnmarkCommand;
 
@@ -42,7 +42,7 @@ public class Parser {
             int unmarkIdx = Integer.parseInt(content);
             return new UnmarkCommand(unmarkIdx);
         case "todo":
-            return new TodoCommand(content);
+            return new ToDoCommand(content);
         case "deadline":
             return new DeadlineCommand(content);
         case "event":

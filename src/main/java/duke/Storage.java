@@ -49,7 +49,7 @@ public class Storage {
             switch(eventType) {
             case "T":
                 try {
-                    tasks.add(title);
+                    tasks.addToDo(title);
                     if (isDone.equals("1")) {
                         tasks.getTask(i + 1).markDone();
                     }
@@ -59,7 +59,7 @@ public class Storage {
                 break;
             case "D":
                 try {
-                    tasks.add(title, dateTime);
+                    tasks.addDeadline(title, dateTime);
                     if (taskData[1].equals("1")) {
                         tasks.getTask(i + 1).markDone();
                     }
@@ -72,7 +72,7 @@ public class Storage {
                 String fromDateTime = duration[0];
                 String toDateTime = duration[1];
                 try {
-                    tasks.add(title, fromDateTime, toDateTime);
+                    tasks.addEvent(title, fromDateTime, toDateTime);
                     if (isDone.equals("1")) {
                         tasks.getTask(i + 1).markDone();
                     }

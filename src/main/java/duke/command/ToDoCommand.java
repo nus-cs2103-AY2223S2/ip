@@ -6,30 +6,31 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Command that finds the list of tasks that contains the given content when executed.
+ * Command that is used to add a todo task when executed.
  */
-public class FindCommand extends Command {
+public class ToDoCommand extends Command {
     private String content;
 
     /**
-     * Class constructor of FindCommand.
-     * @param content the content to be searched
+     * Class constructor of TodoCommand.
+     * @param content the content of the todo task that contains its title.
      */
-    public FindCommand(String content) {
+    public ToDoCommand(String content) {
         this.content = content;
     }
 
     /**
-     * Finds the list of tasks that contains the given content.
+     * Executes the ToDoCommand to add an event task into the given TaskList.
      * @param tasks the TaskList of the Duke
      * @param ui the Ui of the Duke
      * @param storage the storage of the Duke
-     * @return the list of tasks that contains the given content
+     * @return the message to indicate addition of the todo task
      * @throws DukeException if error occurs during addition of the todo task
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String res = tasks.find(content);
+        content = content.trim();
+        String res = tasks.addToDo(content);
         return res;
     }
 

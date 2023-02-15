@@ -1,11 +1,13 @@
 package duke.GUI;
 
-import duke.GUI.Main;
 import javafx.application.Application;
 
+/**
+ * Launcher that launches Duke
+ */
 public class Launcher {
     /**
-     * Main method of Duke. Sets the path of the data file saved.
+     * Main method of Duke.
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
