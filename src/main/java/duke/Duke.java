@@ -255,14 +255,4 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
-
-    /**
-     * Begins running a new Duke instance.
-     *
-     * @param args Command-line arguments (ignored).
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
 }
