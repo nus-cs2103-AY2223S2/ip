@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -20,10 +21,15 @@ public class Duke {
      * Constructor for Duke
      */
     public Duke() {
+        ui = new Ui();
         storage = new Storage("./data/duke.txt");
-        tasks = new TaskList();
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadError();
+            tasks = new TaskList();
+        }
         parser = new Parser(tasks);
-        ui = new Ui(parser);
     }
 
     /**
@@ -39,7 +45,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         String response = "";
-        response = ui.generateReply(input);
+        response = parser.performCommand(input, ui);;
         storage.save(this.tasks);
         return response;
     }

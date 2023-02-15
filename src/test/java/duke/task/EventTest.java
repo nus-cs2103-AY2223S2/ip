@@ -13,8 +13,7 @@ public class EventTest {
 
     @BeforeEach
     public void setUp() {
-        eventTask = new Event("event return book /from 2020-10-10 /to 2021-10-10",
-                LocalDate.parse("2020-10-10"), LocalDate.parse("2021-10-10"));
+        eventTask = new Event("return book", "2020-10-10", "2021-10-10");
     }
 
     @Test

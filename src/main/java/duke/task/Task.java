@@ -65,4 +65,8 @@ public abstract class Task {
         }
         return this.fullDetails().equals(t.fullDetails());
     };
+
+    public String toBeSaved() {
+        return this.currentTaskStatus() + "///" + this.taskString;
+    }
 }

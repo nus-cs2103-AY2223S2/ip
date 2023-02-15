@@ -9,6 +9,8 @@ public class Event extends Task {
     private String taskDescription;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String startDateString;
+    private String endDateString;
 
     /**
      * Constructor for Event task
@@ -16,12 +18,14 @@ public class Event extends Task {
      * @param startDateInput start date of event
      * @param endDateInput end date of event
      */
-    public Event(String taskString, LocalDate startDateInput, LocalDate endDateInput) {
-        super(taskString.substring(6, taskString.indexOf("/from") - 1));
+    public Event(String taskString, String startDateInput, String endDateInput) {
+        super(taskString);
 
-        taskDescription = taskString.substring(6, taskString.indexOf("/from") - 1);
-        startDate = startDateInput;
-        endDate = endDateInput;
+        taskDescription = taskString;
+        startDateString = startDateInput;
+        startDate = LocalDate.parse(startDateInput);
+        endDateString = endDateInput;
+        endDate = LocalDate.parse(endDateInput);
     }
 
     @Override
@@ -39,14 +43,25 @@ public class Event extends Task {
      * @return String of a formatted timeline
      */
     public String getTimeline() {
-        return this.startDate.format(
-                DateTimeFormatter.ofPattern("MMM d yyyy")) + " to "
-                + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return this.getStartDate() + " to " + this.getEndDate();
+    }
+
+    public String getStartDate() {
+        return this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public String getEndDate() {
+        return this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (" + this.getTimeline() + ")";
+    }
+
+    @Override
+    public String toBeSaved() {
+        return "E" + "///" + super.toBeSaved() + "///" + this.startDateString + "///" + this.endDateString;
     }
 }

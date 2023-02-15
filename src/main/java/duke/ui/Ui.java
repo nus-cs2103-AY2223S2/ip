@@ -6,10 +6,8 @@ import duke.parser.Parser;
  * Ui class to handle interactions with user
  */
 public class Ui {
-    private Parser parser;
 
-    public Ui(Parser parser) {
-        this.parser = parser;
+    public Ui() {
     }
 
     /**
@@ -17,7 +15,7 @@ public class Ui {
      * @return String to greet user
      */
     public String greet() {
-        return "Hello! I'm Pingu \nWhat can I do for you?";
+        return "Hello! I'm Pingu!! \nWhat can I do for you?";
     }
 
     public String sayBye() {
@@ -53,13 +51,13 @@ public class Ui {
         return "Ok, I've marked this task as not done yet: \n  " + task;
     }
 
-
     public String showList(String list) {
         return list;
     }
 
-    public String generateReply(String input) {
-        return this.parser.performCommand(input, this);
+    public void showLoadError() {
+        System.out.println("Oops! Unable to load file!");
     }
+
 
 }

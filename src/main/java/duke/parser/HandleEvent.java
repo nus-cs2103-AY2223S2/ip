@@ -14,8 +14,8 @@ public class HandleEvent {
     }
 
     public static String performEvent(String input, TaskList tasklist, Ui ui) throws WrongFormatException {
+        /*
         boolean correctFormat;
-
         try {
             String[] arrOfString = input.split("/from");
             String[] arrOfStringDate = arrOfString[1].split("/to");
@@ -35,13 +35,15 @@ public class HandleEvent {
             throw new WrongFormatException("event 'Task description' /from 'start date' /to 'end date'");
         }
 
+         */
+
         try {
-            LocalDate startDate = LocalDate.parse(
-                    input.substring(input.indexOf("/from") + 6,
-                            input.lastIndexOf("/to") - 1));
-            LocalDate endDate = LocalDate.parse(
-                    input.substring(input.lastIndexOf("/") + 4));
-            Task taskEvent = new Event(input, startDate, endDate);
+            String taskString = input.trim().substring(6, input.indexOf(" /from"));
+            String startDate = input.substring(input.indexOf(" /from ") + 7, input.lastIndexOf(" /to "));
+            LocalDate.parse(startDate);
+            String endDate = input.substring(input.indexOf(" /to ") + 5);
+            LocalDate.parse(endDate);
+            Task taskEvent = new Event(taskString, startDate, endDate);
             if (tasklist.checkDuplicates(taskEvent)) {
                 return ui.showError("OOPS! You have added this task before already!");
             }
@@ -49,6 +51,8 @@ public class HandleEvent {
             return ui.showAddTask(taskEvent.toString(), tasklist.getSize());
         } catch (DateTimeParseException e){
             return ui.showError("Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10");
+        } catch (IndexOutOfBoundsException e) {
+            throw new WrongFormatException("event 'Task description' /from 'start date' /to 'end date'");
         }
     }
 }

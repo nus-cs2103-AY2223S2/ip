@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Duke;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -36,8 +38,8 @@ public class Storage {
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
             }
-            FileWriter myWriter = new FileWriter(filepath);
-            myWriter.close();
+            //FileWriter myWriter = new FileWriter(filepath);
+            //myWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -49,14 +51,14 @@ public class Storage {
      * @return List of tasks
      * @throws IOException If unable to read file
      */
-    public List<Task> load() {
+    public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
             BufferedReader myReader = new BufferedReader(new FileReader(this.taskFile));
             String line = myReader.readLine();
 
             while (line != null) {
-                String[] str = line.split(" | ");
+                String[] str = line.split("///", 5);
                 String taskType = str[0];
                 String isCompleted = str[1];
                 String taskDes = str[2];
@@ -67,10 +69,10 @@ public class Storage {
                     task = new ToDo(taskDes);
                     break;
                 case "D":
-                    task = new Deadline(taskDes, LocalDate.parse(str[3]));
+                    task = new Deadline(taskDes, str[3]);
                     break;
                 case "E":
-                    task = new Event(taskDes, LocalDate.parse(str[3]), LocalDate.parse(str[4]));
+                    task = new Event(taskDes, str[3], str[4]);
                     break;
                 default:
                     assert false: "Unable to load task!";
@@ -81,12 +83,12 @@ public class Storage {
                 }
 
                 taskList.add(task);
+                line = myReader.readLine();
             }
             myReader.close();
         } catch (IOException e) {
-            System.out.print(e);
+            throw new DukeException("Unable to load file");
         }
-
         return taskList;
 
     }
@@ -100,7 +102,7 @@ public class Storage {
         try {
             BufferedWriter myWriter = new BufferedWriter(new FileWriter(this.taskFile));
             for (Task task: taskList.getTaskList()) {
-                myWriter.write(task.toString() + "\n");
+                myWriter.write(task.toBeSaved() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {

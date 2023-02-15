@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     private String taskDescription;
     private LocalDate deadLine;
+    private String deadlineString;
 
     /**
      * Constructor of Deadline task
@@ -17,11 +18,12 @@ public class Deadline extends Task {
      * @param deadline deadline for the task
      */
 
-    public Deadline(String taskString, LocalDate deadline) {
-        super(taskString.substring(9, taskString.indexOf("/") - 1));
+    public Deadline(String taskString, String deadline) {
+        super(taskString);
 
-        taskDescription = taskString.substring(9, taskString.indexOf("/") - 1);
-        deadLine = deadline;
+        taskDescription = taskString;
+        deadLine = LocalDate.parse(deadline);
+        deadlineString = deadline;
     }
 
     @Override
@@ -47,5 +49,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " ( by: " + this.getDeadline() + " )";
+    }
+
+    @Override
+    public String toBeSaved() {
+        return "D" + "///" + super.toBeSaved() + "///" + this.deadlineString + "///" + "null";
     }
 }

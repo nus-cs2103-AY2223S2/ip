@@ -11,13 +11,14 @@ public class HandleToDo {
     }
 
     public static String performToDo(String input, TaskList tasklist, Ui ui) throws WrongFormatException {
-        boolean correctFormat = input.split("").length > 1;
-
-        if (!correctFormat) {
+        String taskString;
+        try {
+            taskString = input.trim().substring(5);
+        } catch (StringIndexOutOfBoundsException e) {
             throw new WrongFormatException("todo 'Task description'");
         }
 
-        Task taskToDo = new ToDo(input);
+        Task taskToDo = new ToDo(taskString);
         if (tasklist.checkDuplicates(taskToDo)) {
             return ui.showError("OOPS! You have added this task before already!");
         }

@@ -14,26 +14,12 @@ public class HandleDeadline {
     }
 
     public static String performDeadline(String input, TaskList tasklist, Ui ui) throws WrongFormatException{
-        boolean correctFormat = true;
+
         try {
-            String taskCommand = input.substring(9);
-            String[] arrOfString = taskCommand.split("/by");
-            String trimmedTaskDes = arrOfString[0].trim();
-            String trimmedDeadline = arrOfString[1].trim();
-            correctFormat = trimmedTaskDes.length() > 0 && trimmedDeadline.length() > 0;
-            if (!input.contains (" /by ")) {
-                correctFormat = false;
-            }
-        } catch (IndexOutOfBoundsException e){
-            correctFormat = false;
-        }
-        if (!correctFormat) {
-            throw new WrongFormatException("deadline 'Task description' /by 'deadline date'");
-        }
-        try {
-            LocalDate deadline = LocalDate.parse(
-                    input.substring(input.indexOf("/by") + 4));
-            Task taskDeadline = new Deadline(input, deadline);
+            String taskString = input.substring(9, input.indexOf(" /by "));
+            String deadline =  input.substring(input.indexOf(" /by ") + 5);
+            LocalDate.parse(deadline);
+            Task taskDeadline = new Deadline(taskString, deadline);
             if (tasklist.checkDuplicates(taskDeadline)) {
                 return ui.showError("OOPS! You have added this task before already!");
             }
@@ -41,6 +27,8 @@ public class HandleDeadline {
             return ui.showAddTask(taskDeadline.toString(), tasklist.getSize());
         } catch (DateTimeParseException e){
             return ui.showError("Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10");
+        } catch (IndexOutOfBoundsException e) {
+            throw new WrongFormatException("deadline 'Task description' /by 'deadline date'");
         }
     }
 }

@@ -1,4 +1,7 @@
 package duke.task;
+import duke.exception.DukeException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +20,7 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> tasklist) {
+    public TaskList(List<Task> tasklist) throws DukeException {
         this.taskList = tasklist;
     }
 
@@ -75,14 +78,6 @@ public class TaskList {
         taskList.add(task);
     }
 
-    /**
-     * Inform user that the task has been successfully added
-     * @param task Task that has been added
-     */
-    public String printAddComment(Task task) {
-        return "Got it. I've added this task: \n  " + task
-                + "\nNow you have " + taskList.size() + " tasks in the list.";
-    }
 
     /**
      * Delete the task from the list
@@ -93,15 +88,6 @@ public class TaskList {
     }
 
     public boolean checkDuplicates(Task task) {
-        /*
-        List<Task> inputList = this.taskList;
-        Set<Task> inputSet = new HashSet<>(inputList);
-        if (inputSet.size() < inputList.size()) {
-            return true;
-        }
-        return false;
-
-         */
         for (int i = 0; i < this.taskList.size(); i++) {
             if ((taskList.get(i)).equals(task)) {
                 return true;

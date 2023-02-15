@@ -13,8 +13,7 @@ public class DeadlineTest {
 
     @BeforeEach
     public void setUp() {
-        deadlineTask = new Deadline("deadline return book /by 2020-10-10",
-                LocalDate.parse("2020-10-10"));
+        deadlineTask = new Deadline("return book", "2020-10-10");
     }
 
     @Test

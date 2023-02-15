@@ -11,7 +11,7 @@ public class TodoTest {
 
     @BeforeEach
     public void setUp() {
-        toDoTask = new ToDo("todo return book");
+        toDoTask = new ToDo("return book");
     }
 
     @Test

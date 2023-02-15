@@ -12,9 +12,9 @@ public class ToDo extends Task {
      * @param taskString user taskString input
      */
     public ToDo(String taskString) {
-        super(taskString.substring(5));
+        super(taskString);
 
-        taskDescription = taskString.substring(5);
+        taskDescription = taskString;
     }
 
     @Override
@@ -31,6 +31,11 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String toBeSaved() {
+        return "T" + "///" + super.toBeSaved() + "///" + "null" + "///" + "null";
     }
 
 }
