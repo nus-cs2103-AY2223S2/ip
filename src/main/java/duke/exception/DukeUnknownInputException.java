@@ -22,6 +22,6 @@ public class DukeUnknownInputException extends DukeException {
      */
     @Override
     public String toString() {
-        return "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "\t:( OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

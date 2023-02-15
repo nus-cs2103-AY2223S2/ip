@@ -31,8 +31,8 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         int index = Command.getMarkIndex(this.fullCommand) - 1;
-        if (index >= tasks.getLength()) {
-            throw new DukeBadInstructionFormatException("Mark index"
+        if (index >= tasks.getLength() || index <= 0) {
+            throw new DukeBadInstructionFormatException("Mark index "
                     + "out of range.");
         }
         storage.fileMarkTask(index);
