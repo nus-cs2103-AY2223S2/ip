@@ -18,7 +18,6 @@ public class Event extends Task {
         this.from = from.replace("from", "");
         this.to = to.replace("to", "");
     }
-
     /**
      * @param details details of the task
      */
@@ -26,11 +25,17 @@ public class Event extends Task {
         super(details);
     }
 
+    public String getFrom() {
+        return from;
+    }
     /**
      * @return the description of the task in String type indicating as an Event type
      */
     @Override
     public String toString() {
-        return icon + super.toString() + " (from:" + from + " to:" + to + ")";
+        if (from == null || to == null) {
+            return icon + super.toString();
+        }
+        return icon + super.toString() + " (from " + from + " to " + to + ")";
     }
 }

@@ -8,19 +8,23 @@ import java.util.ArrayList;
 /**
  * The class to convert date given in string to Date class
  */
-public class DateStringConverter {
+public class TimeDate {
     private final String[] dayOfWeek = new String[]{"FRIDAY", "MONDAY", "SATURDAY",
         "SUNDAY", "THURSDAY", "TUESDAY", "WEDNESDAY"};
 
+    private final String[] dayOfWeekAbbreviation = new String[]{"FRI", "MON", "SAT",
+        "SUN", "THU", "TUE", "WED"};
+
     /**
      * A method to convert the String type to date type
+     *
      * @param input a String input of date
      * @return A LocalDate object
      */
     public LocalDate convertDateInput(String input) {
         input.replace("/", "-");
         for (int i = 0; i < dayOfWeek.length; i++) {
-            if (input.equalsIgnoreCase(dayOfWeek[i])) {
+            if (input.equalsIgnoreCase(dayOfWeek[i]) || input.equalsIgnoreCase(dayOfWeekAbbreviation[i])) {
                 DayOfWeek dayOfWeek = DayOfWeek.valueOf(input.toUpperCase());
                 LocalDate today = LocalDate.now();
                 LocalDate nextDate = today.with(dayOfWeek);
@@ -49,7 +53,7 @@ public class DateStringConverter {
      * @return Deadline object
      */
     public Deadline deadlineWithDateTime(ArrayList<Task> taskArrayList, String description) {
-        DateStringConverter converter = new DateStringConverter();
+        TimeDate converter = new TimeDate();
         String des = description.substring(description.indexOf(" ")).trim();
         String[] deadline = des.split("/by");
         String[] timeExists = deadline[1].trim().split(" ");
@@ -82,7 +86,7 @@ public class DateStringConverter {
             if (tasks.get(i) instanceof Deadline) {
                 Deadline singleTask = ((Deadline) tasks.get(i));
                 String[] s = singleTask.toString().split(":");
-                DateStringConverter converter = new DateStringConverter();
+                TimeDate converter = new TimeDate();
                 LocalDate dueDate = converter.convertDateInput(s[1].replace(")", "").trim());
                 if (dueDate.isBefore(date)) {
                     deadlineTasks.add(singleTask);

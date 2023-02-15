@@ -38,6 +38,9 @@ class TaskList {
      */
     public String mark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
         index -= 1;
+        if (index >= taskArrayList.size() || index <= -1) {
+            throw new TaskNotExist();
+        }
         assert index >= 0 : "Invalid Index";
         assert index < taskArrayList.size() : "Invalid index";
         taskArrayList.get(index).mark();
@@ -50,8 +53,11 @@ class TaskList {
      * @param index         the task index
      * @throws TaskNotExist throws an error if the index overflow or when the task does not exists
      */
-    public String unMark(ArrayList<Task> taskArrayList, int index) {
+    public String unMark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
         index -= 1;
+        if (index >= taskArrayList.size() || index <= -1) {
+            throw new TaskNotExist();
+        }
         assert index >= 0 : "Invalid Index";
         assert index < taskArrayList.size() : "Invalid index";
         return userInterface.setUnMarkTask() + taskArrayList.get(index).toString();
@@ -80,7 +86,7 @@ class TaskList {
      * @throws MissingDescription throws an error when the task given does not contain description
      */
     public String deadline(ArrayList<Task> taskArrayList, String description) throws MissingDescription {
-        DateStringConverter converter = new DateStringConverter();
+        TimeDate converter = new TimeDate();
         if (!description.contains(" ")) {
             throw new MissingDescription();
         }
@@ -125,6 +131,9 @@ class TaskList {
                 return "Noted: I've removed all tasks";
             } else {
                 int deleteIndex = Integer.parseInt(index[1]);
+                if (deleteIndex >= taskArrayList.size() || deleteIndex <= -1) {
+                    throw new TaskNotExist();
+                }
                 assert deleteIndex >= 0 : "Invalid Index";
                 assert deleteIndex < taskArrayList.size() : "Invalid index";
                 return "Noted: I've remove this task\n" + taskArrayList.remove(deleteIndex - 1);
@@ -144,7 +153,7 @@ class TaskList {
     public String deadlineChecker(ArrayList<Task> taskArrayList, String description) {
         try {
             String[] index = description.split("/");
-            DateStringConverter converter = new DateStringConverter();
+            TimeDate converter = new TimeDate();
             LocalDate deadline = converter.convertDateInput(index[1].trim());
             ArrayList<Deadline> deadlineTasks = converter.checkDeadlineTask(taskArrayList, deadline);
             String output = "Here is the list before this deadline: " + deadline + "\n";
@@ -157,7 +166,6 @@ class TaskList {
             return "I do not understand what you type >.< !! Enter in by/ YYYY-MM-DD";
         }
     }
-
     /**
      * A method to find the matching task according to the user input
      * @param key the input value to search for

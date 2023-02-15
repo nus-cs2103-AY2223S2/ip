@@ -56,7 +56,8 @@ public class Parser {
             if (tokens.length == 1) {
                 throw new DukeException("I do not understand what you type >.< !! Enter in by/ YYYY-MM-DD");
             }
-            return taskListHandler.deadlineChecker(taskArrayList, inputType);
+            String deadLineTasks = taskListHandler.deadlineChecker(taskArrayList, inputType);
+            return deadLineTasks;
         } else if (tokens[0].equalsIgnoreCase("find")) {
             if (tokens.length == 1) {
                 throw new MissingDescription();
