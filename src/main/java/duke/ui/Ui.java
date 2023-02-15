@@ -11,7 +11,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Ui handles everything that is shown to user
+ * Ui handles everything that is shown to user.
  *
  * @author Guo-KeCheng
  */
@@ -77,10 +77,10 @@ public class Ui {
     }
 
     /**
-     * Print out list of tasks that matches with keyword
+     * Print out list of tasks that matches with keyword.
      *
-     * @param taskList TaskList to be compared against
-     * @return String representation of list of matching tasks
+     * @param taskList TaskList to be compared against.
+     * @return String representation of list of matching tasks.
      */
     public String printFoundList(TaskList taskList) {
         String output = "What you're finding and what you're seeing is not what's happening: \n";
@@ -96,7 +96,7 @@ public class Ui {
     /**
      * Prints the message from marking a task.
      *
-     * @param task Task to be marked
+     * @param task Task to be marked.
      * @return String message to be printed.
      */
     public String printMarkedTask(Task task) {
@@ -117,7 +117,7 @@ public class Ui {
      * Prints the message from deleting a task.
      *
      * @param task Task to be deleted.
-     * @return String message to be printed..
+     * @return String message to be printed.
      */
     public String printDeletedTask(Task task) {
         return "I will have greater respect for you if you stop deleting tasks"
