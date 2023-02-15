@@ -50,16 +50,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.run(), dukeImage, "#d4fffd"));
     }
 
-    public void setInstructions() {
-        String userGuide = "How to use?:\n \nThere are 3 different types of activities: \n 1. todo (todo ____)\n 2. " +
-                "deadline (deadline ____ /by ____ [yyyy-mm-dd]) \n 3. event (event ____ /from ____ /to ____ \n \n You" +
-                " can" +
-                " also do this: \n 1. list \n 2. mark _ \n 3. unmark _ \n 4. delete _ \n 5. find ____ \n \nEnjoy " +
-                "Using " +
-                "~\n ";
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(userGuide, dukeImage, "#d4fffd"));
-    }
-
     public void setDuke(Duke d) {
         duke = d;
     }
