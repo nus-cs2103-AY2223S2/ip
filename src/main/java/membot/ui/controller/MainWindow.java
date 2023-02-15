@@ -15,6 +15,9 @@ import membot.Membot;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String BOT_ICON = "/assets/botIcon.png";
+    private static final String USER_ICON = "/assets/userIcon.png";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,8 +29,9 @@ public class MainWindow extends AnchorPane {
 
     private Membot membot;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/assets/userIcon.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/assets/botIcon.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream(USER_ICON));
+    private final Image botImage = new Image(this.getClass().getResourceAsStream(BOT_ICON));
+//    private
 
     @FXML
     public void initialize() {
@@ -39,11 +43,11 @@ public class MainWindow extends AnchorPane {
     }
 
     public Consumer<String> getPrinter() {
-        return s -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(s, dukeImage));
+        return s -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(s, botImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Membot's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
