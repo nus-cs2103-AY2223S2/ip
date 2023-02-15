@@ -19,6 +19,7 @@ public class Find extends Command {
         String content = this.getCommandStorage();
         assert content != "": "Must provide task content to find tasks";
         String[] substrings = content.split("find ");
+        assert substrings.length > 0: "Must specify the task contents to find";
         String item = substrings[1];
         TaskList foundTasks = tasks.findTask(item);
         if (foundTasks.getTaskCount() == 0) {
