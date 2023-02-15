@@ -288,7 +288,7 @@ public class Parser {
             throw new DukeException("OOPS!!! You have to choose a task to unmark.");
         }
         if (inputArray[1].trim().length() == 0) {
-            throw new DukeException("OOPS!!! You have to choose a task to delete.");
+            throw new DukeException("OOPS!!! You have to choose a task to unmark.");
         }
     }
 
@@ -317,6 +317,7 @@ public class Parser {
     /**
      * Finds the tasks that have a description containing the query
      * @param input The input string that is used to find tasks.
+     * @return The list of found tasks
      * @throws DukeException if the input string does not match any task descriptions.
      */
     public String findTasks(String input) throws DukeException {
@@ -347,6 +348,7 @@ public class Parser {
     /**
      * Adds a deadline object with the formatted date to the list.
      * @param input The input string
+     * @return the output of the inputDeadline method
      * @throws DukeException if the format of the date is wrong.
      */
     public String addDeadlineFormatted(String input) throws DukeException {
@@ -356,7 +358,7 @@ public class Parser {
             return inputDeadline(constructor[0], temp);
 
         } catch (Exception e) {
-            throw new DukeException("Please input date in format of dd/MM/yyyy");
+            throw new DukeException("Your date must in format of dd/MM/yyyy");
         }
     }
 
@@ -364,6 +366,7 @@ public class Parser {
      * Inputs a new Event object into the list.
      * @param s The description of the event.
      * @param time The time of the event.
+     * @return the UI message when a task is added
      */
     public String inputEvent(String s, String time) {
         Event event = new Event(s, time);
@@ -375,6 +378,7 @@ public class Parser {
      * Inputs a new Deadline object into the list.
      * @param s The description of the deadline.
      * @param d The date of the deadline.
+     * @return the UI message when a task is added
      */
     public String inputDeadline(String s, LocalDate d) {
         Deadline deadline = new Deadline(s, d);
@@ -385,6 +389,7 @@ public class Parser {
     /**
      * Inputs a new Todo object into the list.
      * @param s The description of the todo task.
+     * @return the UI message when a task is added
      */
     public String inputTodo(String s) {
         Todo todo = new Todo(s);

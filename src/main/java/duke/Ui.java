@@ -33,6 +33,7 @@ public class Ui {
     /**
      * Prints a formatted message.
      * @param s The string input to be printed.
+     * @return The formatted message in string format.
      */
     public String printMessage(String s) {
         return ("\t" + s);
@@ -116,7 +117,7 @@ public class Ui {
      * @return the message that is seen before printing found tasks.
      */
     public String findTasksMessage() {
-       return ("Here are the matching tasks in your list:");
+       return ("\tAre you looking for one of these?");
     }
 
     /**
@@ -141,7 +142,7 @@ public class Ui {
      * @return the message in String format that shows the task modified
      */
     public String markTaskAsDoneMessage(Task t) {
-        return printMessage("Nice! I've marked this task as done:\n\t" + t);
+        return printMessage("Good job! You have completed this task:\n\t" + t);
     }
 
     /**
