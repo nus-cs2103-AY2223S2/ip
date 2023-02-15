@@ -31,7 +31,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String greeting = "Hello! I'm Chiwa, your personal chatbot (◔◡◔✿)\nWhat can I do for you today?";
+        String greeting = "Hello! I'm Kasa Jesus.\n";
+        greeting += "I see you need help, fellow eggy. What do you need to do?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
     }
 

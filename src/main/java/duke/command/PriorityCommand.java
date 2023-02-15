@@ -42,7 +42,7 @@ public class PriorityCommand extends Command {
 
         Task task = tasks.get(this.taskIndex);
         task.setPriority(this.priorityLevel);
-        String msg = "Ok, I've updated the priority of the following task for you: \n";
+        String msg = "Ok, I've updated the priority of the following task: \n";
         msg += task.toString();
         msg += "\n";
         storage.saveTasks(tasks.getTasks());

@@ -36,7 +36,8 @@ public class FindCommand extends Command {
         }
 
         if (matchingTasks.size() > 0) {
-            String msg = "I've found the following matching task(s) in your list! \n";
+            String msg = "I sense something... \n";
+            msg += "Eureka! I've found the following matching task(s): \n";
             msg += matchingTasks.print();
             msg += "\n";
             return msg;

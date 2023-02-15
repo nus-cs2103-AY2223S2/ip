@@ -44,10 +44,10 @@ public class MarkCommand extends Command {
         String msg;
         if (isMark) {
             task.mark();
-            msg = "Congratulations for completing the task ^^ I've marked it as done: \n";
+            msg = "Ok, I've marked this as done eggy~: \n";
         } else {
             task.unmark();
-            msg = "Ok, I've unmarked the task for you: \n";
+            msg = "Ok, I've unmarked this for you~: \n";
         }
         storage.saveTasks(tasks.getTasks());
         msg += task.toString();

@@ -31,7 +31,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         tasks.add(this.task);
-        String msg = "Ok, I've added this task and set its priority as medium by default: \n";
+        String msg = "Ok, time to add this task! Its priority will be medium by default: \n";
         msg += task.toString();
         msg += "\n";
         msg += String.format("You now have %d task(s) in your list! \n", tasks.size());
