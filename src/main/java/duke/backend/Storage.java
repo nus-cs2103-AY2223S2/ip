@@ -2,6 +2,7 @@ package duke.backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -111,6 +112,29 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             fw.write(tasks.toStorageString());
             fw.close();
+        } catch (IOException e) {
+            throw new DukeException("File not found");
+        }
+    }
+
+    /**
+     * @param currentTasks the current storage of tasks
+     * @throws DukeException if the file is not found.
+     */
+    public void archive(Storage currentTasks) throws DukeException {
+        try {
+            // Copy current storage to archive
+            FileReader fr = new FileReader(currentTasks.file);
+            FileWriter fw = new FileWriter(file);
+            while (fr.read() != -1) {
+                fw.write(fr.read());
+            }
+            fr.close();
+            fw.close();
+            // clear current storage of archived tasks
+            FileWriter fw2 = new FileWriter(currentTasks.file);
+            fw2.write("");
+            fw2.close();
         } catch (IOException e) {
             throw new DukeException("File not found");
         }
