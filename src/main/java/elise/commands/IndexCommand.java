@@ -11,8 +11,8 @@ import java.io.IOException;
 // Command which involves finding a task by index and operating on it
 public class IndexCommand implements Command {
 
-    private int index;
-    private int code;
+    private final int index;
+    private final int code;
 
     /**
      * Constructor for Command of specified code and index.

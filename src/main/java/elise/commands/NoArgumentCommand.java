@@ -7,7 +7,7 @@ import elise.internal.Ui;
 
 public class NoArgumentCommand implements Command {
 
-    private int code;
+    private final int code;
 
     /**
      * Constructor for Command of specified code.

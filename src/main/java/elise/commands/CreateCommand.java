@@ -10,8 +10,8 @@ import java.io.IOException;
 // Command which creates a task
 public class CreateCommand implements Command {
 
-    private int code;
-    private String[] content;
+    private final int code;
+    private final String[] content;
 
     /**
      * Constructor for Command of specified code and message.
