@@ -52,16 +52,20 @@ public class Todo extends Task {
     }
     @Override
     public String storeTaskString() {
-        return this.getTaskType() + " | " + this.getMarkedString() + " | " + this.getDescription();
+        String str = this.getTaskType() + " | " +
+                this.getMarkedString() + " | " + this.getDescription();
+        return str;
     }
     @Override
     public String toString() {
         boolean checked = this.isDone();
-        String str = this.getDescription();
+        String discription = this.getDescription();
+        String str = "";
         if (checked) {
-            return "[T][X] " + str;
+            str = "[T][X] " + discription;
         } else {
-            return "[T][ ] " + str;
+            str = "[T][ ] " + discription;
         }
+        return str;
     }
 }
