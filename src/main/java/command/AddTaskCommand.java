@@ -27,8 +27,8 @@ abstract class AddTaskCommand extends Command {
      * @throws DukeException Checks the validation of input.
      */
     @Override
-    public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-
+    public String process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return null;
     }
 
     /**

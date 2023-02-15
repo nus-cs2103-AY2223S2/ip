@@ -21,21 +21,21 @@ public class Ui {
     public String readCommand() {
         return scanner.nextLine();
     }
-    public void printWelcomeMsg() {
-        String str = LOGO + "\t Hello! I am duke.Duke.\n"  +
+    public String printWelcomeMsg() {
+        String str = LOGO + "\t Hello! I am Duke.\n"  +
                 "\t What can I do for you?\n";
-        System.out.println(str);
+        return str;
     }
-    public void printLine() {
-        System.out.println(SEPARATE_LINE);
+    public String printLine() {
+        return SEPARATE_LINE;
     }
-    public void printAddTaskMsg(TaskList taskList, Task task) {
+    public String printAddTaskMsg(TaskList taskList, Task task) {
         String str = "\t Got it. I've added this task:\n  " + "\t\t " +
                 task.toString() + "\n\t Now you have " +
                 taskList.getSize() + " tasks in the list\n";
-        System.out.println(str);
+        return str;
     }
-    public void printMarkTaskMsg(boolean isMarked, Task task) {
+    public String printMarkTaskMsg(boolean isMarked, Task task) {
         String str = "";
         if (isMarked) {
             str = "\t Nice! I've marked this task as done: \n" +
@@ -44,20 +44,25 @@ public class Ui {
             str = "\t OK, I've marked this task as not done yet: \n" +
                     "\t\t " + task.toString() + "\n";
         }
-        System.out.println(str);
+        return str;
     }
-    public void printDeleteTaskMsg(Task task, int size) {
+    public String printDeleteTaskMsg(Task task, int size) {
         String str = "\t Noted. I've removed this task:\n" + "\t\t " +
                 task.toString() + "\n\t Now you have " +
                 size + " tasks in the list.\n";
-        System.out.println(str);
+        return str;
     }
 
-    public void printFindTaskMsg() {
+    public String printFindTaskMsg() {
         String str = "\t Here are the matching tasks in your list:";
-        System.out.println(str);
+        return str;
     }
-    public void printByeMsg() {
-        System.out.println(BYE_MSG);
+
+    public String printWrongMsg() {
+        String str = "\t ☹ OOPS!!! I'm sorry, but I don't know what that means.\n";
+        return str;
+    }
+    public String printByeMsg() {
+        return BYE_MSG;
     }
 }

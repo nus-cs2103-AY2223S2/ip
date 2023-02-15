@@ -47,6 +47,18 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.process(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

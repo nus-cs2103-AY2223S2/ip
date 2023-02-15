@@ -31,7 +31,7 @@ abstract public class Command {
      * @param storage  Saves all tasks in a file
      * @throws DukeException Checks the validation of input.
      */
-    public abstract void process(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String process(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks whether exit the program.

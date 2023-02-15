@@ -29,10 +29,10 @@ public class AddTodoCommand extends AddTaskCommand {
      * @throws DukeException Checks the validation of input.
      */
     @Override
-    public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Todo todo = Todo.generate(this.getInput());
         taskList.addTask(todo);
         storage.saveData(taskList);
-        ui.printAddTaskMsg(taskList, todo);
+        return ui.printAddTaskMsg(taskList, todo);
     }
 }

@@ -32,8 +32,8 @@ public class MarkTaskCommand extends Command {
      * @throws DukeException Checks the validation of input.
      */
     @Override
-    public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markTask(isMarked, this.getInput(), ui, storage);
+    public String process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return taskList.markTask(isMarked, this.getInput(), ui, storage);
     }
 
     /**
