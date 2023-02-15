@@ -1,4 +1,4 @@
-package duke;
+package parser;
 
 /**
  * Parser is a program that help identify the command type of user inputs

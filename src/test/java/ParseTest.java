@@ -1,6 +1,6 @@
 //package seedu;
 
-import duke.Parser;
+import parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
