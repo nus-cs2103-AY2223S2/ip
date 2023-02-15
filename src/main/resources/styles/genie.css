@@ -6,11 +6,11 @@
 
 .genie-dialog {
     -fx-background-color: F7F5EB;
-    -fx-background-radius: 20;
+    -fx-background-radius: 5 20 20 20;
 }
 .user-dialog {
      -fx-background-color: EEE3CB;
-     -fx-background-radius: 20;
+     -fx-background-radius: 20 5 20 20;
  }
 .user-textField {
     -fx-padding: 2 15 2 15;
