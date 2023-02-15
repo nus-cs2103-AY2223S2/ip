@@ -4,13 +4,6 @@
 
 > ###### _Why remember things, when Duke can do it for you? 🤔_
 
-## Duke is:
-
-- simple user interface
-- text-based
-- easy to learn
-- ~~FAST~~ ***SUPER FAST*** to use
-
 ## Features
 
 ### Task Management 💻
@@ -24,7 +17,7 @@ Duke stores your tasks in a local memory, so you don't have to worry about losin
 
 ## Usage
 
-### `help` - Provides a list of commands
+### `help` - Provides a list of commands 🆘
 
 Shows the user a list of commands that Duke would understand
 
@@ -46,7 +39,7 @@ MY COMMANDS ARE:
 10. EXIT PROGRAM:        bye
 ```
 
-### `todo` - Adds a Todo task
+### `todo` - Adds a Todo task 📝
 
 Adds a Todo task to your task list
 
@@ -60,19 +53,31 @@ read book
 Now you have 1 tasks in your list.
 ```
 
-These are just 2 of the many commands available!
+### `bye` - Exits Duke 👋
+
+Exit Duke program
+
+Example of usage: `bye`
+
+Expected outcome:
+
+```
+Bye. Hope to see you again soon!
+```
+
+These are just 3 of the many commands available! Look at the command summary below for a comprehensive usage of Duke!
 
 ## Command Summary
 
-| Command | Format                                                         |
-|---------|----------------------------------------------------------------|
-| todo    | todo [descr]                                                   |
+| Command  | Format                                                        |
+|----------|---------------------------------------------------------------|
+| todo     | todo [descr]                                                  |
 | deadline | deadline [descr] /by [YYYY-MM-DD HH:MM]                       |
-| event   | event [descr] /from [YYYY-MM-DD HH:MM] /to [YYYY-MM-DD HH:MM]  |
-| mark    | mark [index]                                                   |
-| unmark  | unmark [index]                                                 |
-| delete  | delete [index]                                                 |
-| find    | find [keyword]                                                 |
-| list    | list                                                           |
-| help    | help                                                           |
-| bye     | bye                                                            |
+| event    | event [descr] /from [YYYY-MM-DD HH:MM] /to [YYYY-MM-DD HH:MM] |
+| mark     | mark [index]                                                  |
+| unmark   | unmark [index]                                                |
+| delete   | delete [index]                                                |
+| find     | find [keyword]                                                |
+| list     | list                                                          |
+| help     | help                                                          |
+| bye      | bye                                                           |
