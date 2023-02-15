@@ -101,11 +101,33 @@ Now you have 1 tasks in the list.
 
 Event task named "My Birthday" that runs from Feb 22 2023 to Feb 23 2023 has been deleted from Duke.
 
-### `find {keyword}` - Find all tasks with matching description
+### `tag {index} {tag name}` - Tags a specific task with a tag
+
+Tags specific task from the list.
+
+Takes in a parameter `{index}` which is the order (number shown using the command `list`) of the specific task to tag.
+
+Takes in another parameter `{tag}` which is the name of the tag to be tagged with. Does not have to start with '#'.
+
+Example of usage:
+
+`tag 2 project`
+
+Expected outcome:
+
+```
+Tagged task 2 with #project
+```
+
+Second task in the list has been tagged with `#project`.
+
+### `find {keyword}` - Find all tasks with matching description or tag
 
 Find all tasks with description that contains `{keyword}` and prints them as list.
 
 Takes in a parameter `{keyword}` which is a case-sensitive keyword or keyphrase.
+
+If `{keyword}` begins with '#', finds all tasks with matching `tag`.
 
 Example of usage:
 
@@ -115,7 +137,7 @@ Expected outcome:
 
 ```
 Here are the matching tasks in your list:
-1. [T][X] CS2103T User Guide
+1. [T][X] CS2103T User Guide #project
 ```
 
 ### `bye` - Exits the program
