@@ -63,6 +63,7 @@ public class ResponseGenerator {
      * @return the message to be printed.
      */
     public static String printTaskAdded(Task task, int size) {
+        assert task != null : "task should not be null";
         return "Got it. I've added this task:\n  " + task + "\nNow you have " + size + " tasks in the list.";
     }
 
@@ -72,6 +73,7 @@ public class ResponseGenerator {
      * @return the message to be printed.
      */
     public static String printTaskMarked(Task task) {
+        assert task != null : "task should not be null";
         return "Nice! I've marked this task as done:\n  " + task;
     }
 
@@ -80,6 +82,7 @@ public class ResponseGenerator {
      * @return the message to be printed.
      */
     public static String printTaskUnmarked(Task task) {
+        assert task != null : "task should not be null";
         return "OK, I've marked this task as not done yet:\n" + task;
     }
 
@@ -89,6 +92,7 @@ public class ResponseGenerator {
      * @return the message to be printed.
      */
     public static String printTaskDeleted(Task task, int size) {
+        assert task != null : "task should not be null";
         return "Noted. I've removed this task:\n  " + task + "\nNow you have " + size + " tasks in the list.";
     }
 }
