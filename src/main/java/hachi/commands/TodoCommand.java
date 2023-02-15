@@ -29,7 +29,6 @@ public class TodoCommand extends Command {
             }
             Todo tdTask = new Todo(input.substring(5, input.length()));
             tasks.add(tdTask);
-            storage.saveTaskList(tasks);
             return ui.showAdded(tasks, tdTask);
         } catch (HachiExceptions e) {
             return e.getMessage();

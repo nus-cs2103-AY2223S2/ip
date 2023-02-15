@@ -22,6 +22,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle("Hachi");
             fxmlLoader.<MainWindow>getController().setHachi(hachi);
+            fxmlLoader.<MainWindow>getController().showWelcome();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

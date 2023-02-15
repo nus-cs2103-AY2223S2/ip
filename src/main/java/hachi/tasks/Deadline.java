@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates a Task with a deadline.
  */
 public class Deadline extends Task {
-    protected String time;
+    protected LocalDate time;
+    private static final DateTimeFormatter TO = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Ddl constructor.
@@ -15,13 +16,9 @@ public class Deadline extends Task {
      * @param input The description of the task.
      * @param time  The deadline of the task.
      */
-    public Deadline(String input, String time) {
+    public Deadline(String input, LocalDate time) {
         super(input);
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        LocalDate output = LocalDate.parse(time, dateFormatter);
-        DateTimeFormatter newPattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        this.time = output.format(newPattern);
+        this.time = time;
     }
 
     public boolean checkInput(Deadline taskOne, Deadline taskTwo) {
@@ -52,7 +49,7 @@ public class Deadline extends Task {
      * @return String representation of the Ddl object
      */
     public String toString() {
-        return "   [D]" + super.toString() + " (by: " + this.time + ")";
+        return "   [D]" + super.toString() + " (by: " + this.time.format(TO) + ")";
     }
 
 }

@@ -1,5 +1,6 @@
 package hachi.commands;
 
+import hachi.main.HachiExceptions;
 import hachi.main.Storage;
 import hachi.main.TaskList;
 import hachi.main.Ui;
@@ -20,9 +21,11 @@ public class ExitCommand extends Command {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.saveTaskList(tasks);
-        return ui.showExitMessage();
-
+        try {
+            storage.saveTaskList(tasks);
+            return ui.showExitMessage();
+        } catch (HachiExceptions e) {
+            return ui.showSavingError();
+        }
     }
-
 }

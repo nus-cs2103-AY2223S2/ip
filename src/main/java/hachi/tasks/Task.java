@@ -17,6 +17,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getInput() {
+        return this.input;
+    }
+
     /**
      * Marks a task as done.
      */

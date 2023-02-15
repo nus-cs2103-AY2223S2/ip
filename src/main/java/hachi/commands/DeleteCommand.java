@@ -29,7 +29,6 @@ public class DeleteCommand extends Command {
             int index_de = Integer.parseInt(input.substring(7));
             Task task = tasks.get(index_de - 1);
             tasks.remove(index_de - 1);
-            storage.saveTaskList(tasks);
             return ui.showDeleted(tasks, task);
         } catch (HachiExceptions e) {
             return e.getMessage();

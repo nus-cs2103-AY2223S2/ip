@@ -17,6 +17,10 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     /**
      * Returns a Task of the specified index.
      *
@@ -46,6 +50,15 @@ public class TaskList {
         }
     }
 
+    public String getStoredString() {
+        String ls = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            ls += "\n       " + tasks.get(i);
+        }
+        return ls;
+    }
+
+
     /**
      * Removes a Task from the TaskList.
      *
@@ -71,6 +84,14 @@ public class TaskList {
      * @return string representation of the TaskList.
      */
     public String toString() {
-        return "" + this.tasks;
+        String list = "Here are your tasks: \n";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i == tasks.size() - 1) {
+                list += i + 1 + ". " + tasks.get(i);
+            } else {
+                list += i + 1 + ". " + tasks.get(i) + "\n";
+            }
+        }
+        return list;
     }
 }

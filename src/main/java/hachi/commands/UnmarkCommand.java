@@ -30,7 +30,6 @@ public class UnmarkCommand extends Command {
             int index = Integer.parseInt(input.substring(7));
             Task task = tasks.get(index - 1);
             task.unmark();
-            storage.saveTaskList(tasks);
             return separator + "\n" + "\n" + "   okie dokie, I've marked this task as not done yet: " + "\n" + task;
         } catch (HachiExceptions e) {
             return e.getMessage();

@@ -30,7 +30,6 @@ public class MarkCommand extends Command {
             int index = Integer.parseInt(input.substring(5));
             Task task = tasks.get(index - 1);
             task.mark();
-            storage.saveTaskList(tasks);
             return separator + "\n" + "\n" + "   good job! I've marked this task as done: " + "\n" + task;
         } catch (HachiExceptions e) {
             return e.getMessage();
