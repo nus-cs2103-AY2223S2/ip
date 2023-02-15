@@ -55,7 +55,7 @@ public class Parser {
      */
     private static void checkForEmptyInput(String input) throws DukeException {
         if (input.isEmpty()) {
-            throw new DukeException("Empty Input");
+            throw new DukeException("Where is your IQ? Wait, I mean your input.");
         }
     }
 
@@ -103,10 +103,10 @@ public class Parser {
                 return new FindCommand(filtered_input, taskList, ui);
 
             default:
-                throw new DukeException("OOPS!!! Something went wrong.");
+                throw new DukeException("Something went wrong.");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
+            throw new DukeException("I'm afraid for the future of this country if you can't make yourself understood.");
         }
     }
 
@@ -117,32 +117,31 @@ public class Parser {
         if (result.length == 1) {
             switch (commandType) {
             case MARK:
-                throw new DukeException("Incorrect command: mark <valid task index>");
+                throw new DukeException("I hate to tell you, but your mark syntax is wrong!");
 
             case UNMARK:
-                throw new DukeException("Incorrect command: unmark <valid task index>");
+                throw new DukeException("I hate to tell you, but your unmark syntax is wrong!");
 
             case DELETE:
-                throw new DukeException("Incorrect command: delete <valid task index>");
+                throw new DukeException("I hate to tell you, but your delete syntax is wrong!");
 
             case SEEK:
-                throw new DukeException("Incorrect command: seek <valid duration>");
+                throw new DukeException("I hate to tell you, but your seek syntax is wrong!");
 
             case TODO:
-                throw new DukeException("OOPS!!! Missing Todo Name.");
+                throw new DukeException("Where is you Todo Name? You're disgusting!");
 
             case DEADLINE:
-                throw new DukeException("OOPS!!! Missing Deadline Name.");
+                throw new DukeException("Where is you Deadline Name? You're disgusting!");
 
             case EVENT:
-                throw new DukeException("OOPS!!! Missing Event Name.");
+                throw new DukeException("Where is you Event Name? You're disgusting!");
 
             case FIND:
-                throw new DukeException("OOPS!!! Missing Keyword.");
+                throw new DukeException("O-M-G! You are missing the keyword.");
 
             default:
-                return "";
-            // Will not reach here
+                return ""; // Will not reach here
             }
         } else {
             return result[1];

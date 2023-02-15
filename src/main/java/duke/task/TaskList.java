@@ -2,12 +2,9 @@ package duke.task;
 
 import duke.exception.DukeException;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
@@ -123,12 +120,15 @@ public class TaskList implements Iterable<Task> {
 
             long duration;
             switch (unitOfTime) {
+            case "day":
             case "days":
                 duration = firstEnd.until(secondStart, ChronoUnit.DAYS);
                 break;
+            case "hour":
             case "hours":
                 duration = firstEnd.until(secondStart, ChronoUnit.HOURS);
                 break;
+            case "minute":
             case "minutes":
                 duration = firstEnd.until(secondStart, ChronoUnit.MINUTES);
             default:

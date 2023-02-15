@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
+import javafx.application.Platform;
 
 
 /**
@@ -39,7 +40,7 @@ public class ByeCommand extends Command {
         } catch (IOException e) {
             return ui.showError(e.getMessage());
         }
-
+        
         return ui.printBye();
 
     }

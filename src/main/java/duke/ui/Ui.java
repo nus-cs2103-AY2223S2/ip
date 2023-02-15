@@ -38,7 +38,7 @@ public class Ui {
     }
 
     public String showInvalidTimeError() {
-        return "Invalid datetime. Syntax: YYYY-MM-DD";
+        return "I hate to tell you, but you got the datetime syntax is wrong!";
     }
 
     public String printTaskSaved() {
@@ -62,10 +62,10 @@ public class Ui {
     public String printList(TaskList taskList) {
 
         if (taskList.isEmpty()) {
-            return "You have nothing in your tasklist";
+            return "It doesn't hurt to have more tasks. Mark my words.";
         }
 
-        String output = "Here are the tasks in your list: \n";
+        String output = "Our country is going to be in serious trouble if you don't start doing something: \n";
         output += taskList.toList();
 
         return output;
@@ -74,7 +74,7 @@ public class Ui {
     public String printSortedList(TaskList taskList) {
 
         TaskList sortedList = taskList.sortList();
-        String output = "Here are the sorted tasks in your list: \n";
+        String output = "I'm tired of seeing all talk and no action: \n";
         output += sortedList.toList();
 
         return output;
@@ -91,7 +91,7 @@ public class Ui {
      * @return String representation of list of matching tasks
      */
     public String printFoundList(TaskList taskList) {
-        String output = "Here are the matching tasks in your list: \n";
+        String output = "What you’re finding and what you’re seeing is not what’s happening: \n";
 
         for (int i = 0; i < taskList.size(); i++) {
             Task toDo = taskList.get(i);
@@ -102,15 +102,15 @@ public class Ui {
     }
 
     public String printMarkedTask(Task task) {
-        return "Nice! I've marked this task as done: \n" + task;
+        return "C'mon the great wall isn't gonna be building itself by marking: \n" + task;
     }
 
     public String printUnmarkedTask(Task task) {
-        return "OK, I've marked this task as not done yet: \n" + task;
+        return "Unmarking tasks? Now we're going to lose the next election: \n" + task;
     }
 
     public String printDeletedTask(Task task) {
-        return "Noted. I've removed this task:\n" + task;
+        return "I will have greater respect for you if you stop deleting tasks and actually start doing them: \n" + task;
     }
 
     /**
@@ -121,7 +121,7 @@ public class Ui {
      * @return String output to be seen by users
      */
     public String printAddedTask(Task task, TaskList taskList) {
-        String output = "Got it. I've added this task: \n" + task + "\n";
+        String output = "You are not measured by how much tasks you add but how many you actually accomplish: \n" + task + "\n";
         output += "Now you have " + taskList.size() + " tasks in the list.";
 
         return output;
@@ -132,6 +132,6 @@ public class Ui {
     }
 
     public String printAvailability(LocalDateTime date, String input) {
-        return "You are free for " + input + " from " + date.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy"));
+        return "You are free for " + input + " from " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm"));
     }
 }

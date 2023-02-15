@@ -142,7 +142,8 @@ public abstract class Task implements Comparable<Task> {
      */
     @Override
     public String toString() {
-        return (isCompleted ? "[X] " + task : "[ ] " + task);
+
+        return (isCompleted ? "[\u2713] " + task : "[\u274C] " + task);
     }
 
 }

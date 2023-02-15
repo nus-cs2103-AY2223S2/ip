@@ -5,9 +5,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Executable command to mark an existing task as completed.
@@ -47,7 +47,7 @@ public class SeekCommand extends Command {
 
         // If index falls out of bounds
         if (inputs.length != 2) {
-            throw new DukeException("OOPS!!! Invalid syntax");
+            throw new DukeException("Invalid syntax!");
         }
 
         int quantifier = Integer.parseInt(inputs[0]);
@@ -56,10 +56,16 @@ public class SeekCommand extends Command {
         }
 
         String unitOfTime = inputs[1];
+        HashSet<String> timeUnits;
 
-        System.out.println(unitOfTime);
-        if (!unitOfTime.equals("days") && !unitOfTime.equals("hours") && !unitOfTime.equals("minutes")) {
-            throw new DukeException("Wrong unit of time");
+        if (quantifier == 1) {
+            timeUnits = new HashSet<>(Arrays.asList("day", "hour", "minute"));
+        } else {
+            timeUnits = new HashSet<>(Arrays.asList("days", "hours", "minutes"));
+        }
+
+        if (!timeUnits.contains(unitOfTime)) {
+            throw new DukeException("If you can't get the unit of time correct, what else can you do?");
         }
 
         LocalDateTime availableDate = taskList.seekAvailability(quantifier, unitOfTime);

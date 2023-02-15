@@ -27,17 +27,6 @@ public class Main extends Application {
         stage.getIcons().add(stageIcon);
 
         showLandingView();
-
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-//            AnchorPane ap = fxmlLoader.load();
-//            Scene scene = new Scene(ap);
-//            stage.setScene(scene);
-//            fxmlLoader.<duke.ui.MainWindow>getController().setDuke(duke);
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     /**
@@ -58,7 +47,7 @@ public class Main extends Application {
     }
 
     /**
-     * Sets the scene to the landing view.
+     * Sets the scene to the Main Page.
      */
     public void showMainPage() {
         try {

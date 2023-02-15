@@ -6,16 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * Controller for gui.components.Landing. Provides the layout for the other controls.
+ * Controller for Landing. Provides the layout for the other controls.
  */
+//@@author Zxun2-reused
+//Inspired by Zxun2
 public class Landing extends AnchorPane {
     @FXML
     private Button startButton;
 
-    /**
-     * This function is called when the GUI window starts.
-     * It is used to set icons, title, and on start-up commands.
-     */
     @FXML
     public void initialize() {
     }
@@ -24,3 +22,4 @@ public class Landing extends AnchorPane {
         startButton.setOnAction(event -> main.showMainPage());
     }
 }
+//@@author
