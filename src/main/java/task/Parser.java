@@ -62,7 +62,7 @@ public class Parser {
                 throw new InvalidEventException();
             }
         } else if (Objects.equals(command, "mark") || Objects.equals(command, "unmark")
-                || Objects.equals(command, "delete") || Objects.equals(command, "find")) {
+                || Objects.equals(command, "delete")) {
             if (expressions.length != 2) {
                 throw new InvalidActionInput();
             }

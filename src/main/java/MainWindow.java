@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -50,7 +52,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -58,6 +60,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         if (response == "Bye~ Hope to see you again soon:)") {
+            sleep(3000);
             Platform.exit();
         }
         userInput.clear();

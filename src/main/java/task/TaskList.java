@@ -32,14 +32,12 @@ public class TaskList extends ArrayList<Task> {
         assert keywords.length >= 1 : "The number of input keywords should not be 0";
         String result = "";
         int count = 1;
-        for (int i = 0; i < this.size(); i++) {
-            for (String keyword: keywords) {
-                if (this.get(i).toString().contains(keyword) && i == this.size() - 1) {
-                    result += count + ". " + this.get(i);
-                } else if (this.get(i).toString().contains(keyword) && i != this.size() - 1) {
+        for (String keyword: keywords) {
+            for (int i = 0; i < this.size(); i++) {
+                if (this.get(i).toString().contains(keyword)) {
                     result += count + ". " + this.get(i) + "\n";
+                    count += 1;
                 }
-                count += 1;
             }
         }
         return result;
