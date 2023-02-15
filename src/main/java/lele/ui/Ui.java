@@ -110,7 +110,7 @@ public class Ui {
      */
     public String printTaskList(TaskList taskList) {
         clearBuffer();
-        sb.append("Here are the tasks in your list dawg:\n");
+        sb.append("Here are the tasks in your list!:\n");
         sb.append(taskList.printList());
         return sb.toString();
     }

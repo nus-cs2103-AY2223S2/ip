@@ -141,7 +141,6 @@ public class TaskList {
      * @param index The location of the task in the array list
      */
     public void markStatus(int index) {
-        assert list.get(index - 1) == null : "Object called should be of type task.";
         cacheList();
         list.get(index - 1).markStatus(true);
     }
