@@ -34,6 +34,6 @@ public class Ui {
     }
 
     public String showError(DukeException err) {
-        return "\t" + err;
+        return "\t" + err.getMessage();
     }
 }
