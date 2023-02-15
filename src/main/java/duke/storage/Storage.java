@@ -24,10 +24,10 @@ public class Storage {
 
     /**
      * Reads file if exists.
-     * Create directory (if necessary) and file if the file do not exist.
+     * Creates directory (if necessary) and file if the file do not exist.
      *
      * @return List of tasks that are loaded from local storage.
-     * @throws DukeException Throws exception if file cannot be found locally or created.
+     * @throws DukeException if file cannot be found locally or created.
      */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);
@@ -46,8 +46,8 @@ public class Storage {
     /**
      * Saves tasks to local storage.
      *
-     * @param tasks All the tasks that should be saved to local storage.
-     * @throws DukeException Throws exception if task cannot be obtained to save to file.
+     * @param tasks that should be saved to local storage.
+     * @throws DukeException if task cannot be obtained.
      */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
@@ -61,19 +61,32 @@ public class Storage {
         }
     }
 
-    private ArrayList<Task> readTasks(Scanner s) throws DukeException {
+    /**
+     * Reads tasks from scanner.
+     *
+     * @param scanner used to read tasks.
+     * @return Array of tasks read from scanner.
+     * @throws DukeException if there is error with parsing.
+     */
+    private ArrayList<Task> readTasks(Scanner scanner) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
-        while (s.hasNext()) {
-            Task task = FileInputParser.parse(s.nextLine());
+        while (scanner.hasNext()) {
+            Task task = FileInputParser.parse(scanner.nextLine());
             tasks.add(task);
         }
         return tasks;
     }
 
-    private void createFileAndDir(File f) throws DukeException {
+    /**
+     * Creates file and/or directory if they do not exist.
+     *
+     * @param file object used to create directory and/or file.
+     * @throws DukeException if file cannot be created.
+     */
+    private void createFileAndDir(File file) throws DukeException {
         try {
-            f.getParentFile().mkdirs();
-            f.createNewFile();
+            file.getParentFile().mkdirs();
+            file.createNewFile();
         } catch (IOException ioe) {
             throw new DukeException("Fake Duke can't create the file.");
         }

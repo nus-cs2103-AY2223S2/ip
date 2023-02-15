@@ -11,11 +11,11 @@ public class Todo extends Task {
     /**
      * Constructor for Todo class, which sets its description and status.
      *
-     * @param description Description of Todo task.
-     * @param taskStatus Status of Todo task.
+     * @param input of Todo task.
+     * @param taskStatus of Todo task.
      */
-    public Todo(String description, String taskStatus) {
-        super(description);
+    public Todo(String input, String taskStatus) {
+        super(input);
         markTaskIfNeeded(taskStatus, this);
     }
 

@@ -8,7 +8,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Deletes task from list of tasks when user input indicates delete.
+ * Deletes task from list of tasks when user input states delete.
  */
 public class DeleteCommand extends Command {
     private static final String ERROR_MESSAGE = "Invalid task index found. Unable to delete.";
@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand.
      *
-     * @param taskIndexes String of indexes of tasks to be deleted.
+     * @param taskIndexes to be deleted.
      */
     public DeleteCommand(String ... taskIndexes) {
         try {
@@ -34,8 +34,8 @@ public class DeleteCommand extends Command {
      * Deletes task and updates the task list in the local storage.
      *
      * @param tasks List of tasks.
-     * @param storage Storage object that handles all Storage actions.
-     * @throws DukeException Throws exception from the methods called in this method.
+     * @param storage object that handles all Storage actions.
+     * @throws DukeException from the methods called in this method.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
@@ -51,9 +51,9 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the tasks indicated in taskIndexes.
      *
-     * @param tasks List of all tasks.
+     * @param tasks to be deleted.
      * @return String of tasks that have been deleted.
-     * @throws DukeException Thrown if there is a problem with deleteTask.
+     * @throws DukeException if there is a problem with deleteTask.
      */
     private String deleteTasks(TaskList tasks) throws DukeException {
         String taskString = "";

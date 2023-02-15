@@ -13,25 +13,11 @@ public class Task {
     /**
      * Constructor for Task class, used to set description and status of task.
      *
-     * @param description Description of task.
+     * @param input for Task.
      */
-    public Task(String description) {
-        this.description = description;
+    public Task(String input) {
+        description = input;
         this.isDone = false;
-    }
-
-    /**
-     * Marks task as done.
-     */
-    public void mark() {
-        isDone = true;
-    }
-
-    /**
-     * Unmarks task as undone.
-     */
-    public void unmark() {
-        isDone = false;
     }
 
     public LocalDateTime getDate() {
@@ -39,18 +25,16 @@ public class Task {
         return null;
     }
 
-    /**
-     * Returns X if task is marked done.
-     * If task is unmarked, a space is returned.
-     *
-     * @return Character to indicate the status of the task.
-     */
-    public char getStatusIcon() {
+    protected char getStatusIcon() {
         return (isDone) ? 'X' : ' ';
     }
 
-    public String getDescription() {
+    protected String getDescription() {
         return this.description;
+    }
+
+    public String getRawTask() {
+        return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, description);
     }
 
     /**
@@ -64,21 +48,12 @@ public class Task {
     }
 
     /**
-     * Returns the raw String representation of a Task to be stored in the local file for storage.
+     * Returns warning message if the date time of the task is expired or expiring soon, within a week.
      *
-     * @return Raw String representation of a Task in this format: T ~ {status} ~ {description}.
-     */
-    public String getRawTask() {
-        return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, description);
-    }
-
-    /**
-     * Returns warning message if the date time of the task is expired or expiring soon.
-     *
-     * @param dateTime Date time of the task.
+     * @param dateTime of the task.
      * @return Warning message to be printed to user.
      */
-    public String getUrgentMessage(LocalDateTime dateTime) {
+    protected String getUrgentMessage(LocalDateTime dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDateTime sevenDaysAhead = currentDateTime.plusDays(7);
         if (currentDateTime.compareTo(dateTime) > 0) {
@@ -90,6 +65,26 @@ public class Task {
         }
     }
 
+    /**
+     * Marks task as done.
+     */
+    protected void mark() {
+        isDone = true;
+    }
+
+    /**
+     * Unmarks task as undone.
+     */
+    protected void unmark() {
+        isDone = false;
+    }
+
+    /**
+     * Marks task if it has a status of 1.
+     *
+     * @param taskStatus of the task in String.
+     * @param task to be marked if needed.
+     */
     protected void markTaskIfNeeded(String taskStatus, Task task) {
         boolean isTaskStatusUnmarkValid = taskStatus.equals("0");
         boolean isTaskStatusMarkValid = taskStatus.equals("1");

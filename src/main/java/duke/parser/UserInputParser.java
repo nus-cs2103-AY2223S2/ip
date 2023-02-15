@@ -1,7 +1,6 @@
 package duke.parser;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -18,7 +17,7 @@ import duke.task.Event;
 import duke.task.Todo;
 
 /**
- * Make sense of user input into the app.
+ * Makes sense of user input into the app.
  */
 public class UserInputParser {
     private enum Action {
@@ -55,12 +54,12 @@ public class UserInputParser {
     /**
      * Parses input data entered by user.
      *
-     * @param input User input for the program menu.
+     * @param input for the program menu.
      * @return Command that user entered.
-     * @throws DukeException Throws exception if input format is invalid.
+     * @throws DukeException if input format is invalid.
      */
     public static Command parse(String input) throws DukeException {
-        String[] splitInputs = input.split(" ");
+        String[] splitInputs = input.trim().split(" ");
         checkInputFormat(splitInputs.length, MinimumLengths.EMPTY.length,
                 "Sorry, Fake Duke wants you to enter something.");
         return getCommand(getAction(splitInputs), input, splitInputs);
@@ -107,21 +106,23 @@ public class UserInputParser {
 
     private static Command getAddTodoCommand(String input, String[] splitInputs) throws DukeException {
         checkInputFormat(splitInputs.length, MinimumLengths.TODO.length,
-                "The description of a todo cannot be empty.");
+                "The description of a todo cannot be empty.\nValid input format: todo {description}");
         Todo todo = new Todo(input.split(" ", 2)[1]);
         return new AddCommand(todo);
     }
 
     private static Command getAddDeadlineCommand(String input, String[] splitInputs) throws DukeException {
         checkInputFormat(splitInputs.length, MinimumLengths.DEADLINE.length,
-                "Deadline must follow this format: deadline {description} /by {YYYY-MM-DD} {HH:MM}");
+                "Wrong deadline format.\n"
+                        + "Valid input format: deadline {description} /by {YYYY-MM-DD} {HH:MM}");
         Deadline deadline = new Deadline(input.split(" ", 2)[1]);
         return new AddCommand(deadline);
     }
 
     private static Command getAddEventCommand(String input, String[] splitInputs) throws DukeException {
         checkInputFormat(splitInputs.length, MinimumLengths.EVENT.length,
-                "Event must follow this format: event {description} /from {YYYY-MM-DD} {HH:MM} "
+                "Wrong event format."
+                        + "\nValid input format: event {description} /from {YYYY-MM-DD} {HH:MM} "
                         + "/to {YYYY-MM-DD} {HH:MM}");
         Event event = new Event(input.split(" ", 2)[1]);
         return new AddCommand(event);
@@ -129,27 +130,27 @@ public class UserInputParser {
 
     private static Command getMarkCommand(String[] splitInputs) throws DukeException {
         checkInputFormat(splitInputs.length, MinimumLengths.MARK.length,
-                "The task index cannot be empty.");
+                "The task index cannot be empty.\nValid input format: mark {index}");
         String[] markIndexes = getIndexes(splitInputs);
         return new MarkCommand(markIndexes);
     }
 
     private static Command getUnmarkCommand(String[] splitInputs) throws DukeException {
         checkInputFormat(splitInputs.length, MinimumLengths.UNMARK.length,
-                "The task index cannot be empty.");
+                "The task index cannot be empty.\nValid input format: unmark {index}");
         String[] unmarkIndexes = getIndexes(splitInputs);
         return new UnmarkCommand(unmarkIndexes);
     }
 
     private static Command getDeleteCommand(String[] splitInputs) throws DukeException {
         checkInputFormat(splitInputs.length, MinimumLengths.DELETE.length,
-                "The task index cannot be empty.");
+                "The task index cannot be empty.\nValid input format: delete {index}");
         return new DeleteCommand(getIndexes(splitInputs));
     }
 
     private static Command getFindCommand(String input, String[] splitInputs) throws DukeException {
         checkInputFormat(splitInputs.length, MinimumLengths.FIND.length,
-                "You must include the keyword you wish to search.");
+                "You must include the keyword you wish to search.\nValid input format: find {keyword}");
         return new FindCommand(input.split(" ", 2)[1]);
     }
 
@@ -170,10 +171,10 @@ public class UserInputParser {
     /**
      * Checks the format of the input entered by user.
      *
-     * @param inputLength Length of the input entered by the user.
-     * @param minimumLength Valid minimum length of the input.
-     * @param errorMessage Error message to be printed on the program.
-     * @throws DukeException Throws exception if input length does not meet minimum length.
+     * @param inputLength entered by the user.
+     * @param minimumLength of the input.
+     * @param errorMessage to be printed on the program.
+     * @throws DukeException if input length does not meet minimum length.
      */
     private static void checkInputFormat(int inputLength, int minimumLength, String errorMessage)
             throws DukeException {
@@ -187,7 +188,7 @@ public class UserInputParser {
      * Checks if input has invalid character "~".
      *
      * @return Command that was read.
-     * @throws DukeException Throws exception if command has invalid character.
+     * @throws DukeException if command has invalid character.
      */
     public static String checkInputForInvalidCharacter(String command) throws DukeException {
         if (command.contains("~")) {

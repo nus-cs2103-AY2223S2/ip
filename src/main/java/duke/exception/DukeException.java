@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Provides duke class an Exception.
+ * Provides Duke class an Exception.
  */
 public class DukeException extends Exception {
     public DukeException(String errMsg) {

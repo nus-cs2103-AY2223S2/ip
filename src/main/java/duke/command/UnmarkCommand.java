@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Unmarks task when user input indicates unmark.
+ * Unmarks task when user input states unmark.
  */
 public class UnmarkCommand extends Command {
     private final String[] taskIndexes;
@@ -19,8 +19,8 @@ public class UnmarkCommand extends Command {
      * Unmarks task and updates the task list in the local storage.
      *
      * @param tasks List of tasks.
-     * @param storage Storage object that handles all Storage actions.
-     * @throws DukeException Throws exception from the methods called in this method.
+     * @param storage object that handles all Storage actions.
+     * @throws DukeException from the methods called in this method.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
@@ -34,7 +34,7 @@ public class UnmarkCommand extends Command {
      *
      * @param tasks List of all tasks.
      * @return String of tasks that have been unmarked.
-     * @throws DukeException Thrown if there is a problem with unmarkTask.
+     * @throws DukeException if there is a problem with unmarkTask.
      */
     private String unmarkTasks(TaskList tasks) throws DukeException {
         String taskString = "";

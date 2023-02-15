@@ -29,7 +29,7 @@ public class FileInputParser {
     }
 
     /**
-     * Processes one task from the list of tasks in file in the local storage.
+     * Processes one task from the list of tasks in file that is stored in the local storage.
      *
      * @param input One task to be processed.
      * @throws DukeException Throws exception if input format is invalid.
@@ -50,10 +50,10 @@ public class FileInputParser {
     /**
      * Returns Task depending on the file input.
      *
-     * @param taskType Type of task in the file input.
-     * @param splitInputs File input in an array of String.
+     * @param taskType specified in the file input.
+     * @param splitInputs from an array of Strings.
      * @return Task.
-     * @throws DukeException Thrown if invalid file input format is used.
+     * @throws DukeException if invalid file input format is used.
      */
     private static Task getTask(TaskType taskType, String[] splitInputs) throws DukeException {
         switch (taskType) {
@@ -75,16 +75,14 @@ public class FileInputParser {
         }
     }
 
-
-
     /**
      * Checks the format of the input in the local file.
      *
-     * @param inputLength Length of the task in the local file.
-     * @param minimumLength Valid minimum length of the input.
-     * @param errorMessage Error message to be printed on the program.
+     * @param inputLength of the task in the local file.
+     * @param minimumLength of the input.
+     * @param errorMessage to be printed on the program.
      */
-    public static void checkFileInputFormat(int inputLength, int minimumLength, String errorMessage) {
+    private static void checkFileInputFormat(int inputLength, int minimumLength, String errorMessage) {
         boolean isValidLength = inputLength >= minimumLength;
         assert isValidLength : String.format("Local file data/tasks.txt does not have valid format. %s",
                 errorMessage);

@@ -10,15 +10,14 @@ import duke.exception.DukeException;
 public class EventTest {
     @Test
     public void toString_validDateTime_success() throws DukeException {
-        assertEquals("[E][ ] internship (from: Mon 02-09-2024 12:22PM to: Tue 02-09-2025 12:22PM) "
-                        + "!! TASK EXPIRING SOON! !!",
+        assertEquals("[E][ ] internship\n(from: Mon 02-09-2024 12:22PM\nto: Tue 02-09-2025 12:22PM)",
                 new Event("internship /from 2024-09-02 12:22 /to 2025-09-02 12:22").toString());
     }
 
     @Test
     public void toString_invalidDateTime_dukeExceptionThrown() throws DukeException {
         try {
-            assertEquals("[E][ ] internship (from: Mon 02-09-2024 12:22PM to: Tue 02-09-2025 12:22PM) "
+            assertEquals("[E][ ] internship\n(from: Mon 02-09-2024 12:22PM to: Tue 02-09-2025 12:22PM)\n"
                             + "!! TASK EXPIRING SOON! !!",
                     new Event("internship /from 2024-09-02 12:22 /to 2025-09-02 12").toString());
             fail();

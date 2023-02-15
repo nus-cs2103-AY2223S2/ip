@@ -12,9 +12,9 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Constructor for Duke class
+     * Constructor for Duke class.
      *
-     * @param filePath File path of the local file for tasks storage.
+     * @param filePath of the local file for tasks storage.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);

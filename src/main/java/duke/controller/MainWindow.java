@@ -68,8 +68,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Generates Fake Duke's response for user.
      *
-     * @param input User input to Fake Duke.
-     * @throws DukeException Exception thrown from Duke package methods.
+     * @param input to Fake Duke.
+     * @throws DukeException from Duke package methods.
      */
     private String getResponse(String input) throws DukeException {
         String fullCommand = UserInputParser.checkInputForInvalidCharacter(input);
@@ -86,11 +86,11 @@ public class MainWindow extends AnchorPane {
     /**
      * Closes app when called.
      *
-     * @param c Command object.
-     * @throws DukeException Error thrown from Command object.
+     * @param command object.
+     * @throws DukeException from Command object.
      */
-    private void closeApp(Command c) throws DukeException {
-        System.out.println(c.execute(duke.getTasks(), duke.getStorage()));
+    private void closeApp(Command command) throws DukeException {
+        System.out.println(command.execute(duke.getTasks(), duke.getStorage()));
         Stage stage = (Stage) dialogContainer.getScene().getWindow();
         stage.close();
     }
@@ -98,8 +98,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates a user dialog box using the label and image passed into this method.
      *
-     * @param label Text to be displayed on the dialog box.
-     * @param image Image to be displayed on the dialog box.
+     * @param label to be displayed on the dialog box.
+     * @param image to be displayed on the dialog box.
      */
     private void createUserDialogBox(String label, Image image) {
         dialogContainer.getChildren().addAll(
@@ -108,10 +108,10 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates a duke dialog box using the label and image passed into this method.
+     * Creates a Fake Duke dialog box using the label and image passed into this method.
      *
-     * @param label Text to be displayed on the dialog box.
-     * @param image Image to be displayed on the dialog box.
+     * @param label to be displayed on the dialog box.
+     * @param image to be displayed on the dialog box.
      */
     private void createDukeDialogBox(String label, Image image, boolean isError) {
         dialogContainer.getChildren().addAll(

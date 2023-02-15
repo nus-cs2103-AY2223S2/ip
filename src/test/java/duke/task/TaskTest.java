@@ -23,7 +23,7 @@ public class TaskTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         LocalDateTime expiredDateTime = LocalDateTime.parse("2020-10-01 12:33", formatter);
-        assertEquals("!! TASK EXPIRED! !!", new Task("read book").getUrgentMessage(expiredDateTime));
+        assertEquals("\n!! TASK EXPIRED! !!", new Task("read book").getUrgentMessage(expiredDateTime));
 
         LocalDateTime futureDateTime = LocalDateTime.parse("2030-10-01 12:33", formatter);
         assertEquals("", new Task("read book").getUrgentMessage(futureDateTime));

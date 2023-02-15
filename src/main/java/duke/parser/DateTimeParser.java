@@ -12,7 +12,7 @@ public class DateTimeParser {
      * Returns the valid format of the datetime of the Task.
      * Valid format: {yyyy-MM-dd HH:mm}
      *
-     * @param input Datetime input provided by user.
+     * @param input provided by user.
      * @return Datetime of Task in valid format.
      */
     public static LocalDateTime parse(String input) throws DateTimeParseException {

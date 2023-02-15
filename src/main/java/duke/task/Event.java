@@ -9,38 +9,57 @@ import duke.parser.DateTimeParser;
 import duke.ui.Ui;
 
 /**
- * Represents an Event, which is a type of Task that starts at a specific datetime and ends at a specific datetime.
+ * Represents an Event, which is a type of Task that starts and ends at specific date times.
  */
 public class Event extends Task {
-    protected LocalDateTime startDateTime;
-    protected LocalDateTime endDateTime;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
 
     /**
      * Constructor for Event class that sets the description and event start and end date times.
      *
-     * @param description Description of Event.
-     * @throws DukeException Throws exception if unable to set date times.
+     * @param input for event.
+     * @throws DukeException if unable to set date times.
      */
-    public Event(String description) throws DukeException {
-        super(description.split(" /from ")[0]);
-        setEventDateTimes(description);
+    public Event(String input) throws DukeException {
+        super(input.split(" /from ")[0]);
+        setEventDateTimes(input);
     }
 
     /**
      * Constructor for Event class that sets the description, event start and end date times, and event status.
      *
-     * @param description Description of Event.
-     * @throws DukeException Throws exception if unable to set date times.
+     * @param input for event.
+     * @throws DukeException if unable to set date times.
      */
-    public Event(String description, String taskStatus) throws DukeException {
-        super(description.split(" /from ")[0]);
-        setEventDateTimes(description);
+    public Event(String input, String taskStatus) throws DukeException {
+        super(input.split(" /from ")[0]);
+        setEventDateTimes(input);
         markTaskIfNeeded(taskStatus, this);
+    }
+
+    private void setEventDateTimes(String input) throws DukeException {
+        try {
+            String dateTimes = input.split(" /from ")[1];
+            startDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[0]);
+            endDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[1]);
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
+        } catch (DateTimeParseException dtpe) {
+            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
+        }
     }
 
     @Override
     public LocalDateTime getDate() {
         return startDateTime;
+    }
+
+    @Override
+    public String getRawTask() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return String.format("E ~ %d ~ %s ~ %s ~ %s\n", isDone ? 1 : 0, description,
+                formatter.format(startDateTime), formatter.format(endDateTime));
     }
 
     /**
@@ -51,33 +70,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%c] %s\n(from: %s to: %s) %s", getStatusIcon(), description,
+        return String.format("[E][%c] %s\n(from: %s\nto: %s)%s", getStatusIcon(), description,
                 Ui.getStringDateTime(startDateTime), Ui.getStringDateTime(endDateTime),
                 super.getUrgentMessage(startDateTime));
-    }
-
-    private void setEventDateTimes(String description) throws DukeException {
-        try {
-            String dateTimes = description.split(" /from ")[1];
-            startDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[0]);
-            endDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[1]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
-        } catch (DateTimeParseException dtpe) {
-            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
-        }
-    }
-
-    /**
-     * Returns the raw String representation of an Event to be stored in the local file for storage.
-     *
-     * @return Raw String representation of a Task in this format:
-     *     E ~ {status} ~ {description} ~ {start datetime} ~ {end datetime}.
-     */
-    @Override
-    public String getRawTask() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return String.format("E ~ %d ~ %s ~ %s ~ %s\n", isDone ? 1 : 0, description,
-                dtf.format(startDateTime), dtf.format(endDateTime));
     }
 }

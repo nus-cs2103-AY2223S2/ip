@@ -16,9 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * A custom control using FXML that represents a dialog box consisting of an ImageView to represent the speaker's face
+ * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -29,10 +28,10 @@ public class DialogBox extends HBox {
     /**
      * Creates DialogBox object based on the text and img passed into this constructor.
      *
-     * @param text Text to be displayed on the DialogBox.
-     * @param img Image to be printed on the DialogBox.
+     * @param text to be displayed on the DialogBox.
+     * @param image to be printed on the DialogBox.
      */
-    public DialogBox(String text, Image img) {
+    public DialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -43,17 +42,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
-    }
-
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        displayPicture.setImage(image);
     }
 
     public DialogBox getUserDialog() {
@@ -68,5 +57,15 @@ public class DialogBox extends HBox {
             dialog.setTextFill(Paint.valueOf("#8f001a"));
         }
         return this;
+    }
+
+    /**
+     * Mirrors the entire dialog box.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 }
