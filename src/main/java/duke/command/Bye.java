@@ -11,7 +11,7 @@ public class Bye extends Command {
 
 
     /**
-     * Sets the offbot indicator to be true and print the exit message.
+     * Sets the isOffbot indicator to be true and print the exit message.
      * @param list of tasks.
      */
     @Override

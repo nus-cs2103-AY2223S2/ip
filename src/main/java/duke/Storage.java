@@ -21,7 +21,9 @@ public class Storage {
      * Stores an ArrayList of Tasks in local hard disk.
      * @param task The ArrayList of Tasks to store in the local hard disk.
      */
-    //Credits: Adapted from CHATGPT
+    //@@author CHATGPT
+    //Reused from https://chat.openai.com/chat
+    // with minor modifications
     public String saveTasks(ArrayList<Task> task) {
         try {
             FileOutputStream file = new FileOutputStream(this.fileName);

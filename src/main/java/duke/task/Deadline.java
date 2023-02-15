@@ -15,6 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new Deadline instance with the given content, date and isDone state.
+     * <p>
      * It also stores the string data as a LocalDateTime object.
      * @param content content of the task.
      * @param date deadline of the task.

@@ -1,6 +1,5 @@
 package duke;
 
-import java.awt.*;
 import java.io.IOException;
 import duke.UI.MainWindow;
 import javafx.application.Application;

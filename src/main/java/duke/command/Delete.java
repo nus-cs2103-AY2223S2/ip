@@ -14,6 +14,7 @@ public class Delete extends Command {
 
     /**
      * Removes the selected task from the task list, and decrement the task count by 1.
+     * <p>
      * Print the message to show the user the task deleted.
      * @param list The list of tasks from which task needs to be deleted.
      */

@@ -7,8 +7,9 @@ import duke.exception.UnknownCommand;
 import duke.task.TaskList;
 
 /**
- * Implements the parsing of command line arguments, and create and put the corresponding command with the parsed input
- * arguments into the command queue.
+ * Implements the parsing of command line arguments.
+ * <p>
+ * Then create and put the corresponding command with the parsed input as arguments.
  */
 public class Parser {
     private static Command command;
