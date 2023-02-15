@@ -43,4 +43,21 @@ public class Deadline extends Task {
         String timeStr = this.start.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy"));
         return String.format("deadline || %s || %s || %s", super.toSaveString(), this.description, timeStr);
     }
+
+    /**
+     * Prints out the line to show that a deadline task has been added
+     */
+    public void toPrintDeadlineString() {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(this);
+        System.out.println("Now you have " + Task.actions + " tasks in the list");
+    }
+
+    /**
+     * Adds deadline into tasklist
+     */
+    public void handleDeadline() {
+        this.toPrintDeadlineString();
+        Task.tasks.add(this);
+    }
 }
