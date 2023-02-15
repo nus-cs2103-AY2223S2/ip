@@ -21,7 +21,7 @@ public abstract class Task {
     public abstract String getFileDescription();
 
     /**
-     * obtain the icon for the status of the task.
+     * obtains the icon for the status of the task.
      * @return String where an X demarcates a task that is done.
      */
     public String getStatusIcon() {
@@ -29,14 +29,14 @@ public abstract class Task {
     }
 
     /**
-     * set a task as done.
+     * sets a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * set a task as undone.
+     * sets a task as undone.
      */
     public void unmark() {
         this.isDone = false;
