@@ -1,18 +1,47 @@
 # User Guide for `/* ask-prof-duke */`
 
 
-## Installation
+## Table of Contents
+1. [Installation](#installation)
+1. [Features](#features)
+1. [Usage](#usage)
+    1. [Add task](#add-task)
+    1. [Delete task](#delete-task)
+    1. [List tasks](#list-tasks)
+    1. [Mark task](#mark-task)    
+    1. [Unmark task](#unmark-task)
+    1. [Find tasks](#find-tasks)    
+    1. [Undo](#undo)    
+    1. [Exit chat session](#exit)     
+1. [Frequently Asked Questions (FAQ)](#faq)
+    
+    
+## Installation <a name="installation"></a>
 
-1. Download the JAR file from here. 
-2. Move the JAR file into an empty folder. The folder name is up to you.
-3. Open the JAR file and proceed to start a chat session with prof duke!
+1. Download the JAR file from [here](https://github.com/jmestxr/ip/releases/download/v0.2/duke.jar). 
+2. Open the JAR file.
+3. Proceed to start a chat session with prof duke through the graphical user interface (GUI)!
+
+If all goes well, your app should look like this:
+<img width="712" alt="showcase" src="https://user-images.githubusercontent.com/87931905/219123712-c33acc69-d4cc-42d1-bca4-d7da12abe336.png">
+    
+    
+## Features <a name="feature"></a>
+1. **Add task**: Add a new task to be recorded.
+1. **Delete task**: Delete an existing task.
+1. **List tasks**: List all tasks that are currently recorded.
+1. **Mark task**: Record a task as complete.
+1. **Unmark task**: Record a task as incomplete.
+1. **Find tasks**: Find a task by title.
+1. **Undo**: Undo the previous command executed.
+1. **Exit**: End the current chat session.
 
 
-## Features
 
-### Add task
+## Usage <a name="usage"></a>
+
+### Add task <a name="add-task"></a>
 Add a task that can be any of the three supported types: Todo, Deadline, Event.
-
 The command for adding each task type is given as follows:
 
 | Task Type | Command                                                            | Example of usage                                            |
@@ -22,13 +51,13 @@ The command for adding each task type is given as follows:
 | Event     | `event <task title> /from <YYYY-M-d> <HHmm> /to <YYYY-M-d> <HHmm>` | `event career fair /from 2023-2-10 1200 /to 2023-2-11 1700` |
 
 
-### Delete task
+### Delete task <a name="delete-task"></a>
 Delete a task of a provided task number in the task list.<br>(can be displayed by `list` command. See next section on **List tasks**.)
 
 **Command:** `delete <task number>`
 
 
-### List tasks
+### List tasks <a name="list-tasks"></a>
 Display all tasks that are currently recorded in the task list for the current session.
 
 **Command:** `list`
@@ -42,19 +71,19 @@ Here are the tasks in your list:
 ```
 
 
-### Mark task
+### Mark task <a name="mark-task"></a>
 Record a task of a given task number as completed.
 
 **Command:** `mark <task number>`
 
 
-### Mark task
+### Unmark task <a name="unmark-task"></a>
 Record a task of a given task number as not completed.
 
 **Command:** `unmark <task number>`
 
 
-### Find tasks
+### Find tasks <a name="find-tasks"></a>
 Find a task by title. A list of tasks containing the search query specified will be returned.
 
 **Command:** `find <search query>`
@@ -69,14 +98,19 @@ Here are the matching tasks in your list:
 ```
 
 
-### Undo
+### Undo <a name="undo"></a>
 Undo the previous command executed.
 
 **Command:** `undo`
 
 
-### Exit chat session
+### Exit chat session <a name="exit"></a>
 End the current chat session. The updated list of tasks will be saved in the local storage.
 
 **Command:** `bye`
 
+
+## Frequently Asked Questions (FAQ) <a name="faq"></a>
+
+**1.** I can't seem to save my changes made to the task list from the previous session. What is happening?<br>
+**Ans:** You have probably closed the GUI rather than ending the chat session through the `bye` command. At the moment, the app is only able to save your changes upon exiting the chat session through the `bye` command.
