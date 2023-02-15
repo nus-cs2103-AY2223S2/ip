@@ -26,6 +26,7 @@ public class Storage {
     public static Tasklist load() throws FileNotFoundException {
         Tasklist listOfThings = new Tasklist();
         File saveFile = new File(SAVE_LOCATION);
+        assert saveFile.exists() : "File does not exist!";
         Scanner fileReader = new Scanner(saveFile);
         while (fileReader.hasNextLine()) {
             String data = fileReader.nextLine();
