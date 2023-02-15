@@ -4,9 +4,11 @@
 
 > Dudu is a task manager which help you to keep track of your todo, deadline and event tasks
 
-## Features 
-<hr/>
+## Features
 
+- Create different type of tasks and store in a list.
+- Manage the tasks by marking them as done or undone; delete them if necessary. 
+- Find tasks based on their name.
 
 ## Usage
 
