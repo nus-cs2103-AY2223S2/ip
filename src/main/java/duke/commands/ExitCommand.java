@@ -34,7 +34,7 @@ public class ExitCommand extends Command {
             DukeException e =  new DukeInvalidInputException("Say bye properly by typing only bye!");
             return e.toString();
         }
-        return "Bye! Hope to see you again soon!";
+        return ui.sayBye();
     }
 
     /**

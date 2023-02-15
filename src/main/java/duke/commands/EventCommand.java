@@ -32,7 +32,6 @@ public class EventCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
         String response = tasks.add(Event.createEvent(super.input));
         storage.saveState(tasks);
-//        ui.printResponse(response);
         return response;
     }
 }
