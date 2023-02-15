@@ -69,9 +69,10 @@ public class Task {
     public String getDescription() {
         return description;
     }
+    //reuse https://stackoverflow.com/questions/17134773/to-check-if-string-contains-particular-word
     public boolean containsWord(String keyword) {
         Pattern pattern = Pattern.compile("\\b" + keyword + "\\b", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(description);
+        Matcher matcher = pattern.matcher(getDescription());
         return matcher.find();
     }
 }

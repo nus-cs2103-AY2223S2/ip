@@ -66,7 +66,7 @@ public class Parser {
                 }
                 return new AddCommand(command, lowerCaseInput);
             case FIND:
-                String keyword = lowerCaseInput.replace(FIND, "");
+                String keyword = lowerCaseInput.replace(FIND + " ", "");
                 return new FindCommand(keyword);
             }
         }
