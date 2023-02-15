@@ -20,9 +20,7 @@
 }
 
 .dialog-box {
-    -fx-font-size: 13;
     -fx-background-color: #FFF0D8;
-    -fx-background-insets: 1;
     -fx-padding: 10;
     -fx-background-radius: 10;
 }
