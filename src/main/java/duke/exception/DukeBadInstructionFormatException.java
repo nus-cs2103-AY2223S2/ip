@@ -21,6 +21,6 @@ public class DukeBadInstructionFormatException extends DukeException {
      */
     @Override
     public String toString() {
-        return "\t☹ OOPS!!! " + this.message;
+        return "\t:( OOPS!!! " + this.message;
     }
 }

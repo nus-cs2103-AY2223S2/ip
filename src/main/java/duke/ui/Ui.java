@@ -38,7 +38,7 @@ public class Ui {
     private final String lineSeperation = "\t___________________________________"
             + "_________________________";
     private final String loadingErrorMessage = "Error loading file from storage.";
-    private final String remindMessage = "\tReminder about tasks:\n\t";
+    private final String remindMessage = "\tReminder about tasks:\n";
     private final String emptyListMessage = "\tNothing found!";
     /**
      * Constructor for <code>Duke</code>'s <code>Ui</code>.
@@ -181,7 +181,7 @@ public class Ui {
      * @return Formatted string of the number of items in a <code>TaskList</code>
      */
     public String getTaskListLengthString(TaskList tl) {
-        return String.format("Now you have %d tasks in the list.",
+        return String.format("\nNow you have %d tasks in the list.",
                 tl.getLength());
     }
 }
