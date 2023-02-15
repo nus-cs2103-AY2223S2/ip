@@ -200,12 +200,12 @@ public class Storage {
         }
         Files.write(dataPath, "".getBytes());
         Task firstTask = listOfTasks.get(0);
-        String toSave = "1." + firstTask.toString() + " \n";
+        String toSave = "1." + firstTask.toString() + "\n";
         Files.write(dataPath, toSave.getBytes(), StandardOpenOption.APPEND);
         for (int i = 1; i < listOfTasks.size(); i++) {
             Integer currIndex = i + 1;
             Task currTask = listOfTasks.get(i);
-            String toUse = currIndex.toString() + "." + currTask.toString() + " \n";
+            String toUse = currIndex.toString() + "." + currTask.toString() + "\n";
             Files.write(dataPath, toUse.getBytes(), StandardOpenOption.APPEND);
         }
     }

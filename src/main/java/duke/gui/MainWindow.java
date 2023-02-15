@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         String firstGreetings = "Hello from THE Duke bot! What can I do for you?";
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(firstGreetings, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(firstGreetings, dukeImage, "duke"));
     }
 
     /**
@@ -66,8 +66,8 @@ public class MainWindow extends AnchorPane {
         duke.run(this);
         String response = this.dukeOutput;
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage, "user"),
+                DialogBox.getDukeDialog(response, dukeImage, "duke")
         );
         userInput.clear();
     }

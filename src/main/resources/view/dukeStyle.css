@@ -1,0 +1,30 @@
+#sendButton {
+    -fx-background-image: url("https://www.shutterstock.com/image-vector/sword-icon-vector-beautiful-isolated-260nw-332205464.jpg");
+    -fx-border-color: rosybrown;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+#dialog {
+    -fx-background-radius: 80px;
+    -fx-border-radius:80px;
+    -fx-border-color: black;
+    -fx-background-color: aliceblue;
+    -fx-padding: 30px;
+}
+
+#dialogContainer {
+    -fx-background-image: url("https://wallpaper.dog/large/20467462.jpg");
+    -fx-background-position: center;
+    -fx-background-size: contain;
+}
+
+#imageView {
+    -fx-background-color: transparent;
+}
+
+#userInput {
+    -fx-background-color: papayawhip;
+    -fx-border-color: rosybrown;
+}
+
