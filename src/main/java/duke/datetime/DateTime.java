@@ -20,7 +20,7 @@ public class DateTime {
     private final LocalTime time;
 
     /**
-     * An instance of date and time.
+     * Constructs an instance of date and time.
      *
      * @param input Input of date and time in "YYYY-MM-DD TTTT".
      * @throws IllegalArgumentException When input is not of correct format.
