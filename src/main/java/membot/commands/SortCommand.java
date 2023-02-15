@@ -36,24 +36,7 @@ public class SortCommand extends Command {
                 Task.sort(Comparator.comparing(Task::getTitle));
                 break;
             case DATE:
-                Task.sort((t1, t2) -> {
-                    LocalDateTime t1DT;
-                    LocalDateTime t2DT;
-
-                    try {
-                        t1DT = DateTimeParser.parse(t1.getDeadline());
-                    } catch (DateTimeParseException e) {
-                        return 1;
-                    }
-
-                    try {
-                        t2DT = DateTimeParser.parse(t2.getDeadline());
-                    } catch (DateTimeParseException e) {
-                        return -1;
-                    }
-
-                    return t1DT.compareTo(t2DT);
-                });
+                Task.sort(this::sortByDate);
                 break;
             case STATUS:
                 Task.sort(Comparator.comparing(Task::printStatus));
@@ -80,6 +63,25 @@ public class SortCommand extends Command {
     private String getSortOptions(String delimiter) {
         return String.join(delimiter, Arrays.stream(SortOption.class.getEnumConstants())
                 .map(x -> x.toString().toLowerCase()).toArray(String[]::new));
+    }
+
+    private int sortByDate(Task t1, Task t2) {
+        LocalDateTime t1DT;
+        LocalDateTime t2DT;
+
+        try {
+            t1DT = DateTimeParser.parse(t1.getDeadline());
+        } catch (DateTimeParseException e) {
+            return 1;
+        }
+
+        try {
+            t2DT = DateTimeParser.parse(t2.getDeadline());
+        } catch (DateTimeParseException e) {
+            return -1;
+        }
+
+        return t1DT.compareTo(t2DT);
     }
 }
 
