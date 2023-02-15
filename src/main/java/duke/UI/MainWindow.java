@@ -9,13 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-//Entire class adapted from JavaFX tutorial
+//@@author se-education.org
+//Reused from https://se-education.org/guides/tutorials/javaFxPart3.html
+//with minor modifications
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

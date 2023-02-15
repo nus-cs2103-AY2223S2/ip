@@ -1,10 +1,8 @@
 package duke.task;
-import duke.Duke;
+
 import duke.Storage;
 import duke.UI.TextOutput;
 import duke.exception.DukeException;
-
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 public class TaskList {
 
     private int taskCount = 0;
-    private Storage storage = new Storage("tasks.ser");
+    private Storage storage;
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
     public TaskList(Storage store) {
@@ -28,6 +26,7 @@ public class TaskList {
 
     /**
      * Adds a new task in to the task list, and increments the task count by 1.
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         this.tasks.add(task);
@@ -37,6 +36,7 @@ public class TaskList {
 
     /**
      * Print out the list of tasks in the TaskList object.
+     * @return String The string representation of the tasks in the list.
      */
     //Credits: adapted from CHATGPT
     public String listTasks() {
@@ -47,17 +47,6 @@ public class TaskList {
             i++;
         }
         return result;
-    }
-
-    public TaskList getTaskByTime(LocalDateTime time) {
-        Storage temp = new Storage("temp.ser");
-        TaskList newTaskList = new TaskList(temp);
-        for (int i = 0; i < this.getTaskCount(); i++) {
-            if (this.tasks.get(i).getTime() == time) {
-                newTaskList.addTask(this.tasks.get(i));
-            }
-        }
-        return newTaskList;
     }
 
     /**
@@ -103,6 +92,11 @@ public class TaskList {
         return foundTasks;
     }
 
+    /**
+     * Add the task containing the task with given taskContent to the given TaskList.
+     * @param taskContent The content of the new task to be added.
+     * @param foundTasks The taskList containing the task added.
+     */
     private void addTask(String taskContent, TaskList foundTasks) {
         for (int i = 0; i < this.tasks.size(); i++) {
             if (this.getTaskContent(i).contains(taskContent)) {
@@ -111,6 +105,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates the dates of the task with the given numerical id to the given dates.
+     * @param id The numerical id of the task whose dates are to be updated.
+     * @param dates The new dates.
+     * @return The string representation of the update task.
+     * @throws DukeException If the date format is invalid.
+     */
     public String updateTaskTime(int id, String ... dates) throws DukeException {
         if (this.tasks.size() < id) {
             return TextOutput.makeTaskNotFoundString();

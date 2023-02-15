@@ -29,8 +29,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of the Deadline object.
-     * @return String
+     * Constructs the string representation of the Deadline object.
+     * @return String representation of the Deadline object.
      */
     @Override
     public String toString() {
@@ -40,6 +40,12 @@ public class Deadline extends Task {
                 + "[" + this.getStatusIcon() + "] " + this.getTaskContent() + " (by: " + time + ")";
     }
 
+    /**
+     * Implements the update task time functionality.
+     * @param dates The new dates.
+     * @return The updated task string representation or error notifications.
+     * @throws DukeException
+     */
     @Override
     public String updateTaskTime(String ... dates) throws DukeException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

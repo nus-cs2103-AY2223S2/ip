@@ -79,4 +79,8 @@ public class TextOutput {
                 + "update [task_index] [d/MM/yyyy HHmm] [d/MM/yyyy HHmm] for events \n"
                 + "or update [task_index] [d/MM/yyyy HHmm] for todos";
     }
+
+    public static String makeErrorString() {
+        return "There seems to be an unknown error with your command, please rephrase and try again. \n";
+    }
 }

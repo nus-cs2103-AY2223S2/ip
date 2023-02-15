@@ -31,10 +31,6 @@ abstract public class Task implements Serializable {
         this.isDone = whetherDone;
     }
 
-    public LocalDateTime getTime() {
-        return this.time;
-    }
-
     public String getTaskContent() {
         return taskContent;
     }
@@ -47,12 +43,13 @@ abstract public class Task implements Serializable {
      * Returns the string representation of whether a task is done.
      * @return String representation of the task status.
      */
-    //Credits: Copied from https://nus-cs2103-ay2223s2.github.io/website/schedule/week2/project.html
+    //@@author 2103t Teaching Team
+    //Reused from https://nus-cs2103-ay2223s2.github.io/website/schedule/week2/project.html
     public String getStatusIcon() {
         return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     public type getTypeIcon() {
-        return this.taskType; // mark done task with X
+        return this.taskType;
     }
 }

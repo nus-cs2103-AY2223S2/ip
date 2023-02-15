@@ -1,17 +1,16 @@
 package duke.task;
 
 import duke.UI.TextOutput;
-
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import java.util.Locale;
+
 
 /**
  * Represents task of the type 'Event'.
  */
 public class Event extends Task {
-    private LocalDateTime from = null;
-    private LocalDateTime to = null;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     /**
      * Constructs a new Event instance with the given content, from_date and isDone state and
@@ -31,7 +30,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of the Event object.
+     * Constructs the string representation of the Event object.
      * @return String The string representation of the Event object.
      */
     @Override
@@ -43,6 +42,11 @@ public class Event extends Task {
                 + "[" + this.getStatusIcon() + "] " + this.getTaskContent() + " (from: " + from + " to: " + to + ")";
     }
 
+    /**
+     * Implements the update task time functionality.
+     * @param dates The new dates.
+     * @return The updated task string representation or error notifications.
+     */
     @Override
     public String updateTaskTime(String ... dates) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

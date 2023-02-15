@@ -1,5 +1,9 @@
 package duke.command;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.TaskList;
+import duke.task.Task;
 import duke.UI.TextOutput;
 
 /**
@@ -18,7 +22,7 @@ public class TaskCreationCommands extends Command {
     @Override
     public String execute(TaskList list){
         String content = this.getCommandStorage();
-        Task task = null;
+        Task task;
         if (content.matches("^deadline\\s.*$")) {
             String back = content.substring(9);
             String[] substrings = back.split(" /by ");
@@ -34,6 +38,8 @@ public class TaskCreationCommands extends Command {
         } else if (content.matches("^todo\\s.*$")) {
             String desc = content.substring(5);
             task = new Todo(desc, false);
+        } else {
+            return TextOutput.makeErrorString();
         }
         list.addTask(task);
         return TextOutput.makeAddString(task.toString(), list.getTaskCount());

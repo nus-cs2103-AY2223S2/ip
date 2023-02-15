@@ -23,7 +23,7 @@ public class Update extends Command {
         System.arraycopy(substrings, 2, dates, 0, substrings.length - 2);
         try {
             return tasks.updateTaskTime(Integer.parseInt(taskId), dates);
-        } catch (Exception e) {
+        } catch (DukeException e) {
             return TextOutput.makeInvalidUpdateString();
         }
     }

@@ -38,7 +38,9 @@ public class Storage {
      * Retrieves an ArrayList of Tasks from the local hard disk.
      * @return ArrayList of Tasks.
      */
-    //Credits: Adapted from CHATGPT
+    //@@author CHATGPT
+    //Reused from https://chat.openai.com/chat
+    // with minor modifications
     public String loadTasks(TaskList list) {
         try {
             FileInputStream file = new FileInputStream(this.fileName);

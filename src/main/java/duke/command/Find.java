@@ -13,7 +13,7 @@ public class Find extends Command {
 
     /**
      * Implements the find task functionality. If found, then prints out the list of tasks found; alert user otherwise.
-     * @param tasks the list of tasks to search.
+     * @param tasks The list of tasks to search.
      */
     public String execute(TaskList tasks) {
         String content = this.getCommandStorage();

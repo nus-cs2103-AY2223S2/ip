@@ -2,7 +2,6 @@ package duke.UI;
 
 import java.io.IOException;
 import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,10 +14,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
+ * Implements the custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
+//@@author se-education.org
+//Reused from https://se-education.org/guides/tutorials/javaFxPart3.html
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
