@@ -1,4 +1,7 @@
-package elise;
+package elise.internal;
+
+import elise.EliseException;
+import elise.tasks.Task;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,7 +28,7 @@ public class Storage {
      *
      * @param filePath Path of the file.
      */
-    protected Storage(String filePath) {
+    public Storage(String filePath) {
         Path file = Paths.get(PROJECT_PATH + filePath);
         System.out.println(file);
         try {
@@ -45,7 +48,7 @@ public class Storage {
      * @return List of initial tasks saved by data file.
      * @throws EliseException Possibly corrupted data file.
      */
-    protected List<Task> load() throws EliseException {
+    public List<Task> load() throws EliseException {
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(filePath.toFile());
@@ -66,7 +69,7 @@ public class Storage {
      *
      * @throws IOException Unexpected IOException.
      */
-    protected void write() throws IOException {
+    public void write() throws IOException {
         FileWriter writer = new FileWriter(this.filePath.toString());
         for (Task t : taskState) {
             String s = t.fileMessage();
