@@ -1,5 +1,9 @@
 package duke;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import duke.commands.Command;
@@ -34,6 +38,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         assert pathNotEmpty(filePath);
+        createFilePathAndFile(filePath);
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(this.storage.load());
         this.ui = new Ui();
@@ -66,5 +71,17 @@ public class Duke {
 
     private Boolean pathNotEmpty(String path) {
         return !path.isEmpty();
+    }
+
+    private void createFilePathAndFile(String filePath) {
+        try {
+            Path p = Paths.get(filePath);
+            Files.createDirectories(p.getParent()); // create directory, if not exist
+            if (!Files.exists(p)) {
+                Files.createFile(p); // create file, if not exist
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

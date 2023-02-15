@@ -1,8 +1,10 @@
 package gui;
 
+import java.util.Arrays;
+import java.util.List;
+
 import duke.Duke;
 import duke.task.Task;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -61,11 +63,17 @@ public class MainWindow extends BorderPane {
 
     private void displayOutput(String input) {
         String command = input.split(" ", 2)[0].toLowerCase();
-        if (command.equals("list") || command.equals("find")) {
+        if (isCommandThatRequiresToDisplay(command)) {
             outputContainer.getChildren().clear();
             for (Task task : this.duke.getTasksToDisplay()) {
                 outputContainer.getChildren().add(TaskBox.getTaskBox(task));
             }
         }
+    }
+
+    private Boolean isCommandThatRequiresToDisplay(String command) {
+        List<String> commandsRequireDisplay =
+                Arrays.asList("todo", "deadline", "event", "mark", "unmark", "delete", "find", "list");
+        return commandsRequireDisplay.contains(command);
     }
 }

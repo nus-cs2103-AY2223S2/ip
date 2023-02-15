@@ -22,7 +22,7 @@ public class Main extends Application {
     private final Duke duke = new Duke("data/tasks.txt");
 
     /**
-     * Exits the application after three second.
+     * Exits the application after one second.
      */
     public static void exit() {
         new Timer().schedule(new TimerTask() {
@@ -31,7 +31,7 @@ public class Main extends Application {
                 Platform.exit();
                 System.exit(0);
             }
-        }, 3000);
+        }, 1000);
     }
 
     /**
