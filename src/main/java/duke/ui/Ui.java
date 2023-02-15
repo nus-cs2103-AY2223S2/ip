@@ -66,11 +66,11 @@ public class Ui {
                 + "bye";
 
         String response = "";
-        response = response + msg + "\n";
+        response = response + msg;
 
         if (msg.equals("Hmm, your command format's a little off!")) {
             System.out.println(formats);
-            response += formats;
+            response += "\n" + formats;
         }
         return response;
     }
