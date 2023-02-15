@@ -32,6 +32,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(this.duke.showWelcomeMessage(), dukeImage));
+        userInput.setPromptText("Enter command here");
+        userInput.setFocusTraversable(false);
     }
 
     public void setDuke(Duke d) {
