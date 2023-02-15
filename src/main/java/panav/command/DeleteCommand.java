@@ -1,7 +1,6 @@
 package panav.command;
 
 import panav.exception.DukeException;
-import panav.exception.InvalidNumberException;
 import panav.storage.Storage;
 import panav.task.Task;
 import panav.task.TaskList;
@@ -10,7 +9,7 @@ import panav.ui.Ui;
 /**
  * Class to encapsulate a 'delete' command, extends from Command.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "delete";
     private final String fullCommand;
@@ -44,25 +43,6 @@ public class DeleteCommand extends Command {
 
     }
 
-    /**
-     * Returns the index number for commands which manipulate the list.
-     *
-     * @param command The command which is manipulating list.
-     * @param taskListLength The number of elements in the list.
-     * @return Index number in command.
-     * @throws InvalidNumberException If the index doesn't exist.
-     */
-    public static int readNumber(String command, int taskListLength) throws InvalidNumberException {
-        int len = command.length();
-        char charNum = command.charAt(len - 1);
-        String stringNum = String.valueOf(charNum);
-        int number = Integer.parseInt(stringNum);
-        if (number > taskListLength || number < 1) {
-            throw new InvalidNumberException("Oops!! There is no such index number in your list");
-        } else {
-            return number;
-        }
-    }
     @Override
     public String toString() {
         return DeleteCommand.COMMAND_WORD;

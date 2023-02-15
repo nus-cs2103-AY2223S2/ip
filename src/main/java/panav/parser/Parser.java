@@ -1,14 +1,6 @@
 package panav.parser;
 
-import panav.command.Command;
-import panav.command.DeadlineCommand;
-import panav.command.DeleteCommand;
-import panav.command.EditCommand;
-import panav.command.EventCommand;
-import panav.command.ExitCommand;
-import panav.command.FindCommand;
-import panav.command.ListCommand;
-import panav.command.TodoCommand;
+import panav.command.*;
 import panav.exception.InvalidInputException;
 
 /**
@@ -42,9 +34,9 @@ public class Parser {
                 String to = parseEvent(fullCommand, command)[2];
                 return new EventCommand(eventMessage, from, to);
             case "mark":
-                return new EditCommand(fullCommand, true);
+                return new MarkCommand(fullCommand);
             case "unmark":
-                return new EditCommand(fullCommand, false);
+                return new UnmarkCommand(fullCommand);
             case "bye":
                 return new ExitCommand();
             case "delete":
