@@ -30,6 +30,6 @@ public class Todo extends Task {
 
     @Override
     public String updateTaskTime(String ... dates) {
-        return TextOutput.makeDelayFailString();
+        return TextOutput.makeDisplayFailString();
     }
 }

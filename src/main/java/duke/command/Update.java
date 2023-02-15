@@ -25,7 +25,7 @@ public class Update extends Command {
         System.arraycopy(substrings, 2, dates, 0, substrings.length - 2);
         try {
             return tasks.updateTaskTime(Integer.parseInt(taskId), dates);
-        } catch (DukeException e) {
+        } catch (DukeException | NumberFormatException e) {
             return TextOutput.makeInvalidUpdateString();
         }
     }

@@ -65,7 +65,7 @@ public class TextOutput {
                 + task.toString();
     }
 
-    public static String makeDelayFailString() {
+    public static String makeDisplayFailString() {
         return "Sorry, the indicated task type cannot be postponed. \n";
     }
 
