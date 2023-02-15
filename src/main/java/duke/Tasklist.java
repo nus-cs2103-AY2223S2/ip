@@ -1,6 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * The Tasklist class encapsulates
@@ -82,16 +85,13 @@ public class Tasklist {
 
 	public String findTasks(String searchWord) {
 		String returnedString = "";
-		for (int i = 0; i < listOfTasks.size(); i++) {
-			Task task = listOfTasks.get(i);
-			if (task.matchesTask(searchWord)) {
-				returnedString += i + ". " + task + "\n";
-			}
-		}
+		Predicate<Task> byMatch = task -> task.description.contains(searchWord);
+		returnedString = listOfTasks.stream()
+				.filter(byMatch).map(Task::toString).collect(Collectors.joining("\n"));
 		if (returnedString.isEmpty()) {
 			return "No tasks found!";
 		} else {
-			return returnedString;
+			return "Here are some tasks found!\n" + returnedString;
 		}
 	}
 
