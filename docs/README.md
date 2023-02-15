@@ -28,14 +28,14 @@ Example: ```todo run``` will add run to your list of tasks
 
 2. #### Add Deadline Tasks: ```deadline```  
 Add a Deadline Task that you have to complete by a certain deadline using the ```deadline``` keyword.  
-Deadline will be entered behind a slash, with the format of **__'ddMMyyyy HH:mm'__**.  
+Deadline will be entered behind a slash, with the format of ***'ddMMyyyy HH:mm'***.  
    
 Example: ```deadline project /23022023 14:00``` will add project to your list of tasks  
 
 3. #### Add Event Tasks: ```event```
 Add an Event that you have to attend using the ```event``` keyword.  
 Duration of the event will be entered with behind a slash, with the first slash representing the start of the event and the second slash representing the end of the event.  
-Duration format for the start and end of the event will follow **__'ddMMyyyy HH:mm'__**.  
+Duration format for the start and end of the event will follow ***'ddMMyyyy HH:mm'***.  
    
 Example: ```event CS2103T Lecture /17022023 14:00 /17022023 16:00``` will add CS2103T Lecture to your list of tasks  
 
@@ -112,7 +112,7 @@ Example: ```unmark 3``` will unmark the third task on the list
 ### Viewing Tasks: ```view```   
 
 View the tasks on a certain date using the ```view``` keyword. 
-A valid date of format **__'ddMMyyyy'__** should be entered behind the keyword to view the schedule of that day.   
+A valid date of format ***'ddMMyyyy'*** should be entered behind the keyword to view the schedule of that day.   
 
 Example: ```view 20022023``` will show the tasks involving Feb 20, 2023  
 
