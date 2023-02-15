@@ -13,12 +13,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. If there are any further prompts, accept the defaults.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/membot/membot.Membot.java` file, right-click it, and choose `Run membot.Membot.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Welcome to
-                             _             _   
-_ __ ___    ___  _ __ ___  | |__    ___  | |_
-| '_ ` _ \  / _ \| '_ ` _ \ | '_ \  / _ \ | __|
-| | | | | ||  __/| | | | | || |_) || (_) || |_
-|_| |_| |_| \___||_| |_| |_||_.__/  \___/  \__|
-   ```
+3. After that, locate the `src/main/java/membot/membot.Membot.java` file, right-click it, and choose `Run membot.Membot.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see `Membot` working:
+
+<div style="text-align: center;">
+  <img src="./docs/Ui.png" width="280">
+</div>
