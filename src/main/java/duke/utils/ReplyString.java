@@ -13,8 +13,7 @@ public class ReplyString {
                                 + "| |_| | |_| |   <  __/\n"
                                 + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String INITIAL_GREETING = "Hope you are doing great!\nWhat can I do for you?\n";
-    private static final String DOTTED_LINE = "----------------------------------------------------\n";
-    private static final String ON_STARTUP = LOGO + INITIAL_GREETING + DOTTED_LINE;
+    private static final String ON_STARTUP = LOGO + INITIAL_GREETING;
     private static final String PROMPT_QUESTION = "Enter your prompt below:";
     private static final String GOODBYE = "Sad...Alright bye!";
 
@@ -46,7 +45,6 @@ public class ReplyString {
             result.append(taskString);
             result.append("\n");
         }
-        result.append("\n");
         return result.toString();
     }
 

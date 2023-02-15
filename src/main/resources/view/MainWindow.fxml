@@ -8,11 +8,16 @@
 
 <!-- Solution below adapted from
 https://se-education.org/guides/tutorials/javaFxPart4.html#javafx-tutorial-part-4-using-fxml -->
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
     <children>
-        <TextField fx:id="inputField" layoutY="565.0" onAction="#handleUserInput" prefHeight="35.0" prefWidth="525.0" />
-        <Button fx:id="sendButton" layoutX="524.0" layoutY="565.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="35.0" prefWidth="65.0" text="Enter" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="565.0" prefWidth="590.0" vvalue="1.0">
+        <TextField fx:id="inputField" layoutY="565.0" onAction="#handleUserInput"
+                   prefHeight="35.0" prefWidth="525.0" />
+        <Button fx:id="sendButton" layoutX="524.0" layoutY="565.0" mnemonicParsing="false"
+                onAction="#handleUserInput" prefHeight="35.0" prefWidth="65.0" text="Enter" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="565.0"
+                    prefWidth="590.0" vvalue="1.0">
             <content>
                 <VBox fx:id="displayViewBox" prefHeight="558.0" prefWidth="590.0" />
             </content>
