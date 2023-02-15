@@ -74,12 +74,12 @@ public class Parser {
             }
 
             if (timestr.length == 2 && timestr[1].isEmpty()) {
-                newDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
+                newDeadlineTask = new DeadlineTask(deadstr[0].trim(),timestr[0]);
             } else if (timestr.length == 2) {
                 System.out.println(timestr[1].isEmpty());
-                newDeadlineTask = new DeadlineTask(deadstr[0],timestr[0],timestr[1]);
+                newDeadlineTask = new DeadlineTask(deadstr[0].trim(),timestr[0],timestr[1]);
             } else if (timestr.length == 1) {
-                newDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
+                newDeadlineTask = new DeadlineTask(deadstr[0].trim(),timestr[0]);
             }
 
             return new AddCommand(newDeadlineTask);
@@ -88,7 +88,7 @@ public class Parser {
             if(arrOfStr.length <= 1) {
                 throw new RuntimeException("Specification of the ToDoTask is missing\n");
             }
-            ToDoTask NewToDoTask = new ToDoTask(arrOfStr[1]);
+            ToDoTask NewToDoTask = new ToDoTask(arrOfStr[1].trim());
             return new AddCommand(NewToDoTask);
 
         } else if(arrOfStr[0].equals("event")) {
@@ -103,7 +103,7 @@ public class Parser {
             if(dateTimeStr.length != 2) {
                 throw new RuntimeException("Specification of the EventTask is missing\n");
             }
-            EventTask NewEventTask = new EventTask(eventStr[0], dateTimeStr[0], dateTimeStr[1]);
+            EventTask NewEventTask = new EventTask(eventStr[0].trim(), dateTimeStr[0], dateTimeStr[1]);
             return new AddCommand(NewEventTask);
 
         } else if(arrOfStr[0].equals("delete")) {

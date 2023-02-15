@@ -94,7 +94,7 @@ public class Storage {
                 char deadline = 'D';
                 if(Character.compare(str.charAt(4),todo) == 0) {
                     String[] arrOfStr= str.split("] ", 2);
-                    ToDoTask currentTask = new ToDoTask(arrOfStr[1]);
+                    ToDoTask currentTask = new ToDoTask(arrOfStr[1].trim());
                     Command currentCommand = new AddCommand(currentTask);
                     currentCommand.execute(this.tasks,this.ui,this);
                     
@@ -103,7 +103,7 @@ public class Storage {
                     String[] arrOfStrStr= arrOfStr[1].split("\\(From: ", 2);
                     String[] arrOfStrStrStr= arrOfStrStr[1].split("To: ", 2);
                     String[] arrOfStrStrStrStr= arrOfStrStrStr[1].split("\\)", 2);
-                    EventTask currentTask = new EventTask(arrOfStrStr[0],arrOfStrStrStr[0],arrOfStrStrStrStr[0]);
+                    EventTask currentTask = new EventTask(arrOfStrStr[0].trim(),arrOfStrStrStr[0],arrOfStrStrStrStr[0]);
                     Command currentCommand = new AddCommand(currentTask);
                     currentCommand.execute(this.tasks,this.ui,this);
 
@@ -116,10 +116,10 @@ public class Storage {
                     if(arrOfStrStrStr[0].length() < 12) {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
                         LocalDate date = LocalDate.parse(arrOfStrStrStr[0],formatter);
-                        currentTask = new DeadlineTask(arrOfStrStr[0], date);
+                        currentTask = new DeadlineTask(arrOfStrStr[0].trim(), date);
                     } else {
                         LocalDateTime dateTime = LocalDateTime.parse(arrOfStrStrStr[0]);
-                        currentTask = new DeadlineTask(arrOfStrStr[0], dateTime);
+                        currentTask = new DeadlineTask(arrOfStrStr[0].trim(), dateTime);
                     }
 
                     Command currentCommand = new AddCommand(currentTask);

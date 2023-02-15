@@ -29,7 +29,7 @@ public class TaskList {
      */
     public boolean addTask(Task e) {
         for(int i = 0; i < this.items.size() ;i++) {
-            Task currentTask = this.indexOf(i);
+            Task currentTask = items.get(i);
             if(currentTask.equals(e)) {
                 return false;
             }
