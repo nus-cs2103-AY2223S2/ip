@@ -1,8 +1,5 @@
 package elise;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 /**
@@ -21,7 +18,6 @@ public class Parser {
      * @return Command parsed.
      */
     protected static Command read(String sCommand) throws EliseException {
-        int rank;
         Word command;
         String[] val = sCommand.split(" ", 2);
         try {
@@ -30,7 +26,6 @@ public class Parser {
             throw new EliseException("Invalid input.");
         }
         String s = val.length > 1 ? val[1].trim() : "";
-        String[] message;
 
         if (s.length() > 500) {
             throw new EliseException("Message body is too long!");
@@ -132,8 +127,6 @@ public class Parser {
         }
     }
 
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-
     /**
      * Parses string to produce a MaybeDate.
      *
@@ -141,14 +134,6 @@ public class Parser {
      * @return MaybeDate of the period.
      */
     protected static MaybeDate parseDate(String s) {
-        String temp = s;
-        if (s.length() == 10) {
-            temp = temp + " 2359";
-        }
-        try {
-            return new MaybeDate(LocalDateTime.parse(temp, INPUT_FORMAT));
-        } catch (DateTimeParseException e) {
-            return new MaybeDate(s);
-        }
+        return DateParser.parseDate(s);
     }
 }
