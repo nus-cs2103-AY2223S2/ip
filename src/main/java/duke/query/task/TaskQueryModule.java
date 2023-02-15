@@ -1,12 +1,12 @@
 package duke.query.task;
 
+import java.util.HashMap;
+
 import duke.DukeException;
-import duke.query.IQueryHandler;
+import duke.query.QueryHandler;
 import duke.query.QueryModule;
 import duke.query.QueryType;
 import duke.task.TaskTracker;
-
-import java.util.HashMap;
 
 public class TaskQueryModule extends QueryModule {
     private final TaskTracker tt = new TaskTracker();
@@ -23,7 +23,7 @@ public class TaskQueryModule extends QueryModule {
      * @param queryTypeToQueryHandler
      */
     @Override
-    public void installQueryHandlers(HashMap<QueryType, IQueryHandler> queryTypeToQueryHandler) {
+    public void installQueryHandlers(HashMap<QueryType, QueryHandler> queryTypeToQueryHandler) {
         queryTypeToQueryHandler.put(QueryType.TODO, new TodoQueryHandler(tt));
         queryTypeToQueryHandler.put(QueryType.DEADLINE, new DeadlineQueryHandler(tt));
         queryTypeToQueryHandler.put(QueryType.EVENT, new EventQueryHandler(tt));

@@ -5,7 +5,7 @@ import duke.DukeException;
 /**
  * The SimpleResponseQueryHandler class handles simple responses to user queries.
  */
-public class SimpleResponseQueryHandler implements IQueryHandler {
+public class SimpleResponseQueryHandler extends QueryHandler {
     private final String response;
 
     public SimpleResponseQueryHandler(String response) {

@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class QueryProcessor {
     private static final String GOODBYE_RES = "GOOD BYE!";
     private static final String UNKNOWN_COMMAND_RES = "Your command is not of the known tongue!";
-    private final HashMap<QueryType, IQueryHandler> queryTypeToQueryHandler;
+    private final HashMap<QueryType, QueryHandler> queryTypeToQueryHandler;
 
     public QueryProcessor(QueryModule... modules) throws DukeException {
         queryTypeToQueryHandler = new HashMap<>();
@@ -19,14 +19,14 @@ public class QueryProcessor {
 
     public String processQuery(Query query) {
         try {
-            IQueryHandler queryHandler = getQueryHandler(query.getQueryType());
+            QueryHandler queryHandler = getQueryHandler(query.getQueryType());
             return queryHandler.processQuery(query);
         } catch (DukeException e) {
             return "I have failed you my liege! " + e.getMessage();
         }
     }
 
-    private IQueryHandler getQueryHandler(QueryType queryType) throws UnknownCommandException {
+    private QueryHandler getQueryHandler(QueryType queryType) throws UnknownCommandException {
         if (queryTypeToQueryHandler.containsKey(queryType)) {
             return queryTypeToQueryHandler.get(queryType);
         }

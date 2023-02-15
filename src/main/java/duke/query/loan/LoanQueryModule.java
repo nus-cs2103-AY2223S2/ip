@@ -3,9 +3,8 @@ package duke.query.loan;
 import java.util.HashMap;
 
 import duke.DukeException;
-import duke.loan.Loan;
 import duke.loan.LoanShark;
-import duke.query.IQueryHandler;
+import duke.query.QueryHandler;
 import duke.query.QueryModule;
 import duke.query.QueryType;
 
@@ -24,7 +23,7 @@ public class LoanQueryModule extends QueryModule {
      * @param queryTypeToQueryHandler
      */
     @Override
-    public void installQueryHandlers(HashMap<QueryType, IQueryHandler> queryTypeToQueryHandler) {
+    public void installQueryHandlers(HashMap<QueryType, QueryHandler> queryTypeToQueryHandler) {
         queryTypeToQueryHandler.put(QueryType.LOAN, new LoanQueryHandler(ls));
     }
 }
