@@ -1,5 +1,4 @@
 # User Guide
-<hr/>
 
 ## Dudu
 
@@ -10,7 +9,6 @@
 
 
 ## Usage
-<hr/>
 
 ### `hi` - Greeting to Dudu 
 
