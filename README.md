@@ -8,16 +8,20 @@
 
 Here's to making task scheduling great again!
 
-## Quick Setup
+## Quick Setup ⚙️
 
 1. Ensure you have `Java 11` or above installed in your Computer.
-2. Download the latest `duke.jar` from here.
+2. Download the latest `duke.jar` from [here](https://github.com/Guo-KeCheng/ip/releases/tag/Jar-Released).
 3. Copy the file to the folder you want to use as the home folder for your **TrumpBot**.
 4. Open a command terminal, cd into the folder you put the jar file in
 5. Use the command: `java -jar duke.jar` to run the application.
 6. A GUI similar to the below should appear in a few seconds.
 
-## Acknowledgement
+## User Guide 📖
+
+If you are interested in using **TrumpBot**, do refer to the [User Guide](https://guo-kecheng.github.io/ip/).
+
+## Acknowledgement 🫶
 
 - The project is based on the greenfield Java project Duke, and created as part of CS2103T's (a module under NUS School of Computing) submissions.
 - [@sikai00](https://github.com/sikai00/KarenBot) and [@Zxun2](https://github.com/Zxun2/ip) are two exemplary works I constantly benchmarked myself against.
