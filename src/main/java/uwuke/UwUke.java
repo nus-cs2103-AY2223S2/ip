@@ -1,17 +1,13 @@
 package uwuke;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import uwuke.controller.Advisor;
 import uwuke.controller.Command;
@@ -22,113 +18,37 @@ import uwuke.view.Printer;
 
 public class UwUke extends Application {
 
-    private static final int CAPACITY = 100;
     private static TaskList tasks;
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
     private Scene scene;
-    private Stage stage;
+    private static Stage stage;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
-        initialiseGuiElements(stage);
-        configureGuiElements(stage);
-        initialiseHelperClasses();
-        stage.setScene(scene);
-        stage.show();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(UwUke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            scene = new Scene(ap);
+            initialiseHelperClasses();
+            UwUke.stage = stage;
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initialiseHelperClasses() {
-        Printer.setDialogContainer(dialogContainer);
         DialogBox.setDukeImage(duke);
         DialogBox.setUserImage(user);
         inititialiseModels();
     }
 
-    private void initialiseGuiElements(Stage stage) {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-        userInput = new TextField();
-        sendButton = new Button("Send");
-        AnchorPane mainLayout = new AnchorPane();
-        scene = new Scene(mainLayout);
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        mainLayout.setPrefSize(400.0, 600.0);
-        this.stage = stage;
-    }
-
-    private void configureGuiElements(Stage stage) {
-        configureStage(stage);
-        configureScrollPane();
-        configureAnchorPane();
-        configureDialogContainer();
-        configureUserInputTextField();
-        configureSendButton();
-    }
-
-    private void handleUserInput() {
-        assert userInput != null : "User Input Text Field should have been initialised!";
-        String inputString = userInput.getText();
-        assert inputString != null : "User input should not be null!";
-        Label userText = new Label(inputString);
-        DialogBox userBox = DialogBox.getUserDialogBox(userText);
-        assert dialogContainer != null : "Dialog Container should be initialised!";
-        dialogContainer.getChildren().add(userBox);
-        displayDukeResponse(inputString);
-        userInput.clear();
-    }
-
-    private void displayDukeResponse(String input) {
+    public static void displayDukeResponse(String input) {
         run(input);
-    }
-
-    private void configureSendButton() {
-        sendButton.setPrefWidth(55.0);
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-    }
-
-    private void configureUserInputTextField() {
-        userInput.setPrefWidth(325.0);
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-    }
-
-    private void configureDialogContainer() {
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-    private static void configureStage(Stage stage) {
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-    }
-
-    private void configureScrollPane() {
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-    }
-
-    private void configureAnchorPane() {
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
     private static void inititialiseModels() {
@@ -160,7 +80,7 @@ public class UwUke extends Application {
      * Will identify command based on it's type, raw input string can be passed in directly.
      * @param input command string
      */
-    private void performCommand(String input) throws DukeException {
+    private static void performCommand(String input) throws DukeException {
         switch (Command.matchCommand(input)) {
         case LIST:
             Printer.printTasks(tasks.getList());
@@ -216,7 +136,7 @@ public class UwUke extends Application {
         }
     }
 
-    private void run(String input) {
+    private static void run(String input) {
         try {
             handleIllegalCharacter(input);
             performCommand(input);
