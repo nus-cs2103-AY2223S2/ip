@@ -1,4 +1,4 @@
-package duke;
+package duke.backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -14,14 +15,14 @@ import duke.task.ToDo;
 
 
 /**
- * Represents a duke.Storage object that stores the tasks in the hard disk.
+ * Represents a duke.backend.Storage object that stores the tasks in the hard disk.
  */
 public class Storage {
     private final File file;
     private final ArrayList<Task> tasks;
 
     /**
-     * Creates a duke.Storage object.
+     * Creates a duke.backend.Storage object.
      *
      * @param filePath the path of the file to be stored.
      */

@@ -1,11 +1,12 @@
-package duke;
+package duke.backend;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
 /**
- * Represents a duke.Parser object that parses the input string from the user.
+ * Represents a duke.backend.Parser object that parses the input string from the user.
  */
 public class Parser {
 
