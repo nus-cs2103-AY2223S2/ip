@@ -7,7 +7,7 @@ Duke is a program that lets users keep track of their tasks easily with simple c
 + Mark & unmark tasks to show if it is completed or not
 + Display all tasks in Duke's list to the user
 + Find tasks using keywords
-+ Saves Duke's list when you want to exit & loads it when you open again
++ Saves Duke's list & loads it when you open again
 + Reminds users of tasks happening in 10 days time when you open Duke
 
 ## Usage
