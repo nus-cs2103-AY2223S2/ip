@@ -73,15 +73,27 @@ public class Storage {
         }
     }
 
+    /**
+     * This method converts the saved file to a TaskList.
+     *
+     * @param filePath The File to be converted.
+     * @return TaskList after conversion.
      */
+    private TaskList convertFileToTaskList (Path filePath) {
         List<String> allLines;
         TaskList resultTaskList;
         allLines = readFileAsList(filePath);
+
         resultTaskList = convertListToTaskList(allLines);
         return resultTaskList;
     }
 
-
+    /**
+     * This method reads the file in the path provided as a List of Strings.
+     *
+     * @param filePath The File to be read.
+     * @return List of Strings after reading.
+     */
     private List<String> readFileAsList(Path filePath) {
         List<String> allLines;
         try {
@@ -92,7 +104,12 @@ public class Storage {
         return allLines;
     }
 
-
+    /**
+     * This method converts the list of Tasks represented as Strings into a TaskList.
+     *
+     * @param list The list of tasks to be converted.
+     * @return The TaskList after conversion.
+     */
     private TaskList convertListToTaskList(List<String> list) {
         TaskList result;
         result = new TaskList();
@@ -105,6 +122,12 @@ public class Storage {
         return result;
     }
 
+    /**
+     * This method converts individual Task represented as String into Task.
+     *
+     * @param itemString The task represented in String form.
+     * @return The task after it is converted.
+     */
     private Task convertStringToTask(String itemString) {
         String[] lineArray;
         boolean taskStatus;
@@ -131,6 +154,11 @@ public class Storage {
         return resultingTask;
     }
 
+    /**
+     * This method creates a new file if the file do not exist.
+     *
+     * @param fileToWrite The file to be created.
+     */
     private void createNewFile(File fileToWrite) {
         try {
             FileUtils.write(fileToWrite, "");
