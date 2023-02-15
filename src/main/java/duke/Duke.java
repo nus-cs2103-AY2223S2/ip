@@ -35,16 +35,16 @@ public class Duke {
     }
 
     private String acceptOneCommand(String input) {
+        String output = "";
         try {
             Command command = parser.parseCommand(input);
             if (command.isExit()) {
                 Platform.exit();
             } else {
-                return command.execute(taskList, uiText, storage);
+                output = command.execute(taskList, uiText, storage);
             }
             storage.save(taskList);
-            assert false : "Should not reach this point";
-            return null;
+            return output;
         } catch (DukeException e) {
             return e.toString();
         }
