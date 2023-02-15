@@ -20,20 +20,26 @@ import duke.task.ToDo;
  * Storage class that manage loading of tasks from file and saving of tasks in file
  */
 public class Storage {
-    private String filePath;
-    private File taskSaved;
+    //private String filePath;
+    private File taskFile;
 
     /**
      * Constructor of Storage
      */
-    public Storage() {
-        this.filePath = "C:/Users/linwe/Documents/TaskSaved.txt";
+    public Storage(String filepath) {
         try {
-            this.taskSaved = new File(this.filePath);
-            FileWriter myWriter = new FileWriter(this.filePath);
+            File directory = new File("./data/");
+            taskFile = new File(filepath);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            if (!taskFile.exists()) {
+                taskFile.createNewFile();
+            }
+            FileWriter myWriter = new FileWriter(filepath);
             myWriter.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -46,7 +52,7 @@ public class Storage {
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
         try {
-            BufferedReader myReader = new BufferedReader(new FileReader(this.taskSaved));
+            BufferedReader myReader = new BufferedReader(new FileReader(this.taskFile));
             String line = myReader.readLine();
 
             while (line != null) {
@@ -92,7 +98,7 @@ public class Storage {
      */
     public void save(TaskList taskList) {
         try {
-            BufferedWriter myWriter = new BufferedWriter(new FileWriter(this.taskSaved));
+            BufferedWriter myWriter = new BufferedWriter(new FileWriter(this.taskFile));
             for (Task task: taskList.getTaskList()) {
                 myWriter.write(task.toString() + "\n");
             }
