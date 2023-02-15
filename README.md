@@ -26,4 +26,4 @@
 ### Undo and Redo any changes!
 :astonished: Nemo supports undoing and redoing any changes you make to the task tracker in that session.
 
-![Ui](Ui.png)
+![Ui](docs/Ui.png)
