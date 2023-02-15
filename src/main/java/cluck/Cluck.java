@@ -1,3 +1,4 @@
+package cluck;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,18 +8,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
+import cluck.tasks.Deadline;
+import cluck.tasks.Event;
+import cluck.tasks.Task;
+import cluck.tasks.ToDo;
 
-import java.util.List;
-import java.util.Scanner;
-import exceptions.IncorrectArgumentException;
-import exceptions.CluckException;
+import cluck.messages.Messages;
 
-
-public class Duke {
+public class Cluck {
     private static final String MAKE_DEADLINE = "deadline";
     private static final String MAKE_TODO = "todo";
     private static final String MAKE_EVENT = "event";

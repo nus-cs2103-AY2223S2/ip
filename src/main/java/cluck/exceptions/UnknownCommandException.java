@@ -1,4 +1,4 @@
-package exceptions;
+package cluck.exceptions;
 
 public class UnknownCommandException {
 }
