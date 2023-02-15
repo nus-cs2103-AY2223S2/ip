@@ -11,6 +11,7 @@ public class Hachi {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Hachi constructuor.
@@ -20,12 +21,17 @@ public class Hachi {
     public Hachi(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        this.parser = new Parser();
         try {
-            this.tasks = storage.loadTaskList();
+            this.tasks = new TaskList(storage.loadTaskList());
         } catch (Exception e) {
             this.ui.showLoadingError();
             this.tasks = new TaskList();
         }
+    }
+
+    public String getWelcomeMessage() {
+        return this.ui.welcomeMessage();
     }
 
     /**

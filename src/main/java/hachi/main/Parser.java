@@ -1,6 +1,13 @@
 package hachi.main;
 
 import hachi.commands.*;
+import hachi.tasks.Deadline;
+import hachi.tasks.Event;
+import hachi.tasks.Task;
+import hachi.tasks.Todo;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Handles user instruction and perform the corresponding type of command.
@@ -51,5 +58,37 @@ public class Parser {
             throw new IllegalArgumentException();
         }
     }
+    public static Task parseSaved(String input) {
+        String[] splitInput = input.split(" ");
+        String taskType = splitInput[0];
+        String taskStatus = splitInput[1];
+        String taskDescription = splitInput[2];
+        Task newTask;
+
+        switch (taskType) {
+            case "T":
+                newTask = new Todo(taskDescription);
+                break;
+            case "E":
+                String[] eventTiming = splitInput[3].split("to");
+                newTask = new Event(taskDescription, eventTiming[0],eventTiming[1]);
+                break;
+            case "D":
+                newTask = new Deadline(taskDescription, LocalDate.parse(splitInput[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+        if (taskStatus.equals("1")) {
+            newTask.mark();
+        } else {
+            newTask.unmark();
+        }
+        return newTask;
+    }
 }
+
+
+
 

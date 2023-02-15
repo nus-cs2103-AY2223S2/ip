@@ -1,5 +1,6 @@
 package hachi.commands;
 
+import hachi.main.HachiExceptions;
 import hachi.main.TaskList;
 import hachi.main.Ui;
 import hachi.main.Storage;
@@ -21,15 +22,9 @@ public class ListCommand extends Command {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (tasks.size() > 0) {
-            String msg = separator + "\n" + "\n" + "   Here are the tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                int num = i + 1;
-                msg += "    " + num + ". " + tasks.get(i) + "\n";
-            }
-            return msg;
-        } else {
-            return ui.noTasksMessage();
-        }
+
+        return ui.printList(tasks);
+
     }
 }
+

@@ -39,7 +39,6 @@ public class EventCommand extends Command {
                     input.substring(index_e1 + 6, index_e2 - 1),
                     input.substring(index_e2 + 4, input.length()));
             toDoList.add(eventTask);
-            storage.saveTaskList(toDoList);
             return separator + "\n" + "\n" + "   okie dokie. I've added this task:" + "\n" + eventTask +
                     "   Now you have " + toDoList.size() + " tasks in the list.";
         } catch (HachiExceptions e) {

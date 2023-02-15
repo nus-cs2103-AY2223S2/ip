@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,17 +32,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        this.hachi = new Hachi("hachi.txt");
-        String welcome = Ui.welcomeMessage();
+    }
+
+    @FXML
+    public void showWelcome() {
+        String welcome = hachi.getWelcomeMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getHachiDialog(welcome, hachiImage)
         );
+        userInput.clear();
     }
 
     public void setHachi(Hachi h) {
         assert h != null;
         hachi = h;
     }
+
+
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -54,5 +63,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getHachiDialog(response, hachiImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(task, 800L);
+        }
     }
 }

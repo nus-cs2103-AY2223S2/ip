@@ -3,6 +3,13 @@ package hachi.main;
 
 import hachi.tasks.Task;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Ui interface that interacts with the user.
  */
@@ -54,18 +61,24 @@ public class Ui {
     /**
      * Prints an error message if it fails to load saved tasks in storage.
      */
-    public void showLoadingError() {
-        System.out.println("Unable to load tasks from storage");
+    public String showLoadingError() {
+        return separator + "\n" + "\n" + "Unable to load tasks from storage";
+
     }
+
+    public String showSavingError() {
+        return separator + "\n" + "\n" + "Unable to save tasks to storage";
+    }
+
 
     /**
      * Prints the welcome message.
      */
-    public static String welcomeMessage() {
+    public String welcomeMessage() {
 
         String intro = "   Hello I'm hachi\n   What can I do for you today?\n";
 
-        String tasks = "\n   hachi can do these for you" +
+        intro += "\n   hachi can do these for you" +
                 "\n   ♡ list               \n| View your to-do list" +
                 "\n   ♡ todo \"task\"         \n| Add a task to your to-do list" +
                 "\n   ♡ deadline \"task\" /by \"yyyy-mm-dd\"   \n| Add a task to complete by the specified deadline" +
@@ -73,8 +86,28 @@ public class Ui {
                 "\n   ♡ mark \"num\"                     \n| Mark the (num)th item in your list as completed" +
                 "\n   ♡ unmark \"num\"                     \n| Mark the (num)th item in your list as uncompleted" +
                 "\n   ♡ bye                                \n| Quit hachi\n";
+        intro += getSavedString();
 
-        return separator + "\n" + "\n" + intro + "\n" + separator +  "\n" + tasks + "\n" + separator;
+        return separator + "\n" + "\n" + intro + "\n" + separator ;
+    }
+    private String getSavedString() {
+        String str = "";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("hachi.txt"));
+            Stream<String> contentStream = reader.lines();
+            List<String> contentList = contentStream.collect(Collectors.toList());
+
+            for (String content : contentList) {
+                str += "\n" + content;
+            }
+        } catch (FileNotFoundException e) {
+            return "no file";
+        }
+        return str;
+    }
+
+    public String printList(TaskList tasks) {
+        return separator + "\n" + "\n" + tasks + "\n" + separator ;
     }
 
 

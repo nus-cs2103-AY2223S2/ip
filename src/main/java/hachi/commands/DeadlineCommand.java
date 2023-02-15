@@ -6,6 +6,8 @@ import hachi.main.Ui;
 import hachi.main.Storage;
 import hachi.tasks.Deadline;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -32,9 +34,9 @@ public class DeadlineCommand extends Command {
             if (index_ddl - 1 < 9) {
                 throw new HachiExceptions(ui.emptyDescription());
             }
-            Deadline ddlTask = new Deadline(input.substring(9, index_ddl - 1), input.substring(index_ddl + 4, input.length()));
+            Deadline ddlTask = new Deadline(input.substring(9, index_ddl - 1), LocalDate.parse(input.substring(index_ddl + 4, input.length()), DateTimeFormatter.ofPattern("dd MMM yyyy")));
             tasks.add(ddlTask);
-            storage.saveTaskList(tasks);
+
             return ui.showAdded(tasks, ddlTask);
         } catch (HachiExceptions e) {
             return e.getMessage();
