@@ -3,16 +3,32 @@ import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
+import java.nio.file.FileAlreadyExistsException;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.util.Scanner;
-
 public class Storage {
 
 
 
-    public Storage() {
+    public Storage(TaskList list) {
+        createStorageFile(list);
+    }
 
+    public static void createStorageFile(TaskList list) {
+        File Task_Data = new File("Task Data.txt");
+        try {
+            Task_Data.createNewFile();
+            list.loadTaskData(Task_Data);
+        } catch (FileAlreadyExistsException e){ // nothing should be done if the file already exists
+            System.out.println("The file already exists");
+        } catch (IOException e) {
+            System.out.println("File creation was unsuccessful");
+
+        }
     }
 
 

@@ -1,114 +1,104 @@
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Parser {
+    Storage storage;
+
+    public Parser(Storage storage) {
+        this.storage = storage;
+    }
 
 
-    Scanner scanner = new Scanner(System.in);
-    String userInput = scanner.nextLine();
-    while (userInput != "bye") {
-        String[] userInputComponents = userInput.split(" ");
-        String requestType = userInputComponents[0];
-        try {
-            Request request = Request.getRequest(requestType);
+    public void parseAndExecute(String userInput, TaskList list) {
 
-            switch (request) {
-                case LIST: {
-                    horizontalLine();
-                    list.printItems();
-                    list.getTaskDetails();
-                    horizontalLine();
-                    userInput = scanner.nextLine();
-                    logTaskData(list);
-                    continue;
-                }
 
-                case MARK: {
-                    int taskNumber = Integer.parseInt(userInputComponents[1]);
-                    horizontalLine();
-                    list.markDone(taskNumber);
-                    list.getTaskDetails();
-                    horizontalLine();
-                    userInput = scanner.nextLine();
-                    logTaskData(list);
-                    continue;
-                }
+            String[] userInputComponents = userInput.split(" ");
+            String requestType = userInputComponents[0];
+            try {
+                Request request = Request.getRequest(requestType);
+                System.out.println(request.name());
 
-                case UNMARK: {
-                    int taskNumber = Integer.parseInt(userInputComponents[1]);
-                    horizontalLine();
-                    list.markUndone(taskNumber);
-                    list.getTaskDetails();
-                    horizontalLine();
-                    userInput = scanner.nextLine();
-                    logTaskData(list);
-                    continue;
-
-                }
-
-                case TODO: {
-                    try {
-                        horizontalLine();
-                        list.addTask(new ToDo(userInput.substring(5)));
+                switch (request) {
+                    case LIST: {
+                        UI.horizontalLine();
+                        list.printItems();
                         list.getTaskDetails();
-                        horizontalLine();
-                        logTaskData(list);
-                        userInput = scanner.nextLine();
-
-                        continue;
-                    } catch (StringIndexOutOfBoundsException e) {
-                        System.out.println("The description of todo cannot be empty!");
-                        userInput = scanner.nextLine();
-                        continue;
+                        UI.horizontalLine();
+                        break;
                     }
-                }
-                case DEADLINE: {
-                    String[] splitDeadline = userInput.split("/");
-                    String description = splitDeadline[0].substring(9);
-                    String deadline = splitDeadline[1];
-                    horizontalLine();
-                    list.addTask(new Deadline(description, deadline));
-                    list.getTaskDetails();
-                    horizontalLine();
-                    logTaskData(list);
-                    userInput = scanner.nextLine();
 
-                    continue;
-                }
-                case EVENT: {
-                    String[] splitTimes = userInput.split("/");
-                    String description = splitTimes[0].substring(6);
-                    String startDayTime = splitTimes[1];
-                    String endDayTime = splitTimes[2];
-                    horizontalLine();
-                    list.addTask(new Event(startDayTime, endDayTime, description));
-                    list.getTaskDetails();
-                    horizontalLine();
-                    logTaskData(list);
-                    userInput = scanner.nextLine();
+                    case MARK: {
+                        int taskNumber = Integer.parseInt(userInputComponents[1]);
+                        UI.horizontalLine();
+                        list.markDone(taskNumber);
+                        list.getTaskDetails();
+                        UI.horizontalLine();
+                        break;
+                    }
 
-                    continue;
-                }
+                    case UNMARK: {
+                        int taskNumber = Integer.parseInt(userInputComponents[1]);
+                        UI.horizontalLine();
+                        list.markUndone(taskNumber);
+                        list.getTaskDetails();
+                        UI.horizontalLine();
+                        break;
+                    }
 
-                case DELETE: {
-                    horizontalLine();
-                    list.deleteTask(Integer.parseInt(userInputComponents[1]));
-                    horizontalLine();
-                    logTaskData(list);
-                    userInput = scanner.nextLine();
+                    case TODO: {
+                        try {
+                            UI.horizontalLine();
+                            list.addTask(new ToDo(userInput.substring(5)));
+                            list.getTaskDetails();
+                            UI.horizontalLine();
+                        } catch (StringIndexOutOfBoundsException e) {
+                            System.out.println("The description of todo cannot be empty!");
+                        }
+                        break;
+                    }
+                    case DEADLINE: {
+                        String[] splitDeadline = userInput.split("/");
+                        String description = splitDeadline[0].substring(9);
+                        String deadline = splitDeadline[1];
+                        UI.horizontalLine();
+                        list.addTask(new Deadline(description, deadline));
+                        list.getTaskDetails();
+                        UI.horizontalLine();
+                        break;
+                    }
+                    case EVENT: {
+                        String[] splitTimes = userInput.split("/");
+                        String description = splitTimes[0].substring(6);
+                        String startDayTime = splitTimes[1];
+                        String endDayTime = splitTimes[2];
+                        UI.horizontalLine();
+                        list.addTask(new Event(startDayTime, endDayTime, description));
+                        list.getTaskDetails();
+                        UI.horizontalLine();
+                        break;
+                    }
 
-                    continue;
-                }
-                default: {
-                    System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
-                    userInput = scanner.nextLine();
-                }
+                    case DELETE: {
+                        UI.horizontalLine();
+                        list.deleteTask(Integer.parseInt(userInputComponents[1]));
+                        UI.horizontalLine();
+                        break;
+                    }
+                    default: {
+                        System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
+                    }
 
+                }
+            } catch (DukeException e) {
+                System.out.println("Invalid Duke Request; please re-enter your request!");
             }
-        } catch (DukeException e){
-            System.out.println("Invalid Duke Request; please re-enter your request!");
+
+
+        try {
+            storage.updateTasksInFile(list);
+        } catch (IOException e) {
+            System.out.println("Unable to open storage file");
         }
-
-
 
 
 
@@ -116,8 +106,6 @@ public class Parser {
 
     }
 
-            System.out.println("Bye for now! Hope to see you again!");
-
 }
 
-}
+
