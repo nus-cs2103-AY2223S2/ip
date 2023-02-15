@@ -20,10 +20,11 @@ public class Reminder {
                 continue;
             } else if (currTask.getTaskType().equals("D")) {
                 Deadline dTask = (Deadline) currTask;
-                if (dTask.getDeadline().isBefore(timeToSendReminders)) {
-                    continue;
-                } else {
+                LocalDateTime checkDiff = dTask.getDeadline();
+                if (checkDiff.isBefore(timeToSendReminders) && checkDiff.isAfter(LocalDateTime.now())) {
                     upcomingTasks.add((Deadline) currTask);
+                } else {
+                    continue;
                 }
             }
         }

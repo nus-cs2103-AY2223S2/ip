@@ -1,3 +1,3 @@
-T | 0 | gym
+D | 0 | return book (by: Feb 16 2023 0600 pm)
 E | 0 | bfast with friends (from: tues 9am to: tues 10am)
-D | 0 | do iP (by: Feb 16 2023 0200 pm)
+T | 0 | sleep
