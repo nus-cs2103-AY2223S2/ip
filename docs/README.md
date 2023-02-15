@@ -11,7 +11,7 @@ Here's to making task scheduling great again!
 
 ## Quick Start
 1. Ensure you have `Java 11` or above installed in your Computer.
-2. Download the latest `duke.jar` from here.
+2. Download the latest `duke.jar` from [here](https://github.com/Guo-KeCheng/ip/releases/tag/Jar-Released).
 3. Copy the file to the folder you want to use as the home folder for your **TrumpBot**.
 4. Open a command terminal, cd into the folder you put the jar file in
 5. Use the command: `java -jar duke.jar` to run the application.
