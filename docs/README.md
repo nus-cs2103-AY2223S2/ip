@@ -22,7 +22,7 @@ This user guide is written for users who are interested to learn more about how 
 
 ## Introduction
 
-![Membot Screenshot](./Ui.png | width=250)
+<img src="./Ui.png" width="280">
 
 Membot is your personal chat-bot that helps manage your tasks well! It works well with tasks with a deadline, or even tasks with a starting and ending date. It is built for keyboard users and is blazing fast to use.
 
