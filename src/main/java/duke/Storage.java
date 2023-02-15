@@ -17,8 +17,6 @@ public class Storage {
     Path filePath;
     /** File object of storage entry. */
     File dukeDataFile;
-    /** TaskList to be loaded from storage. */
-    TaskList loadTaskList;
 
     /**
      * Constructor for the Storage class.
@@ -27,7 +25,6 @@ public class Storage {
      */
     public Storage(String s) {
         filePath = Paths.get(home, "data", s);
-        loadTaskList = new TaskList();
     }
 
     //TODO: Just a test, will remove later
@@ -47,47 +44,22 @@ public class Storage {
      * @throws DukeException If there is any issues with reading the file
      */
     public TaskList load() throws DukeException{
+        TaskList result;
         dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
-            System.out.println("FILE EXIST");
-            TaskList loadTaskList= new TaskList();
-            try {
-                List<String> allLines = Files.readAllLines(filePath);
-                for (String line : allLines) {
-                    String[] lineArray = line.split(",");
-                    boolean b;
-                    if (lineArray[1].equals("1")) {
-                        b = true;
-                    } else {
-                        b = false;
-                    }
-                    switch (lineArray[0]) {
-                        case "T":
-                            loadTaskList.addTask(lineArray[2], b);
-                            break;
-                        case "D":
-                            loadTaskList.addTask(lineArray[2], lineArray[3], b);
-                            break;
-                        case "E":
-                            loadTaskList.addTask(lineArray[2], lineArray[3], lineArray[4], b);
-                            break;
-                        case "":
-                            break;
-                    }
-                }
-                return loadTaskList;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            result = convertFileToTaskList(filePath);
+            //1. Convert file to list
+            //2. Using each item in list to convert to tasklist
+            //3. return task list
         } else {
-            System.out.println("NO EXIST");
             try {
                 FileUtils.write(dukeDataFile, "");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            result = new TaskList();
         }
-        return new TaskList();
+        return result;
     }
 
     /**
@@ -105,6 +77,76 @@ public class Storage {
             FileUtils.writeStringToFile(dukeDataFile, outputString.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public TaskList convertFileToTaskList (Path filePath) {
+        List<String> allLines;
+        TaskList resultTaskList;
+        allLines = readFileAsList(filePath);
+        resultTaskList = convertListToTaskList(allLines); //better method name
+        return resultTaskList;
+    }
+
+
+    public List<String> readFileAsList(Path filePath) {
+        List<String> allLines;
+        try {
+            allLines = Files.readAllLines(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return allLines;
+    }
+
+
+    public TaskList convertListToTaskList(List<String> list) {
+        TaskList result;
+        result = new TaskList();
+        for (String line : list) {
+            String[] lineArray = line.split(",");
+            boolean b;
+            if (lineArray[1].equals("1")) {
+                b = true;
+            } else {
+                b = false;
+            }
+            switch (lineArray[0]) {
+                case "T":
+                    result.addTask(lineArray[2], b);
+                    break;
+                case "D":
+                    result.addTask(lineArray[2], lineArray[3], b);
+                    break;
+                case "E":
+                    result.addTask(lineArray[2], lineArray[3], lineArray[4], b);
+                    break;
+                case "":
+                    break;
+            }
+        }
+        return result;
+    }
+
+    public Task convertStringToTask(String itemString) {
+        String[] lineArray;
+        boolean taskStatus;
+
+        lineArray = itemString.split(",");
+        taskStatus = lineArray[1].equals("1");
+
+        switch (lineArray[0]) {
+            case "T":
+                result.addTask(lineArray[2], b);
+                break;
+            case "D":
+                result.addTask(lineArray[2], lineArray[3], b);
+                break;
+            case "E":
+                result.addTask(lineArray[2], lineArray[3], lineArray[4], b);
+                break;
+            case "":
+                break;
         }
     }
 }

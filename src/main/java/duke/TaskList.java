@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * A class that allows operations on a list of tasks.
  */
 public class TaskList {
+
     /** ArrayList used to store all the task. */
     protected ArrayList<Task> tasks;
 
@@ -16,6 +17,14 @@ public class TaskList {
     public TaskList() {
         //Default constructor for empty Duke.TaskList
         tasks = new ArrayList<Task>();
+    }
+
+    /**
+     * Method to add task directly.
+     * @param task The task to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     /**
@@ -59,7 +68,15 @@ public class TaskList {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Method to list out all the task currently in the list and return as a string..
+     *
+     * @return The list of results in a String.
+     */
     public String returnTaskAsString() {
+        if (tasks.size() == 0) {
+            return "No task in task list at the moment.";
+        }
         String result;
         result = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -79,6 +96,12 @@ public class TaskList {
         System.out.println(t + " is now gone!");
     }
 
+    /**
+     * Method to delete the selected task.
+     *
+     * @param index The index of the to be deleted task
+     * @return String representation of the task that is removed.
+     */
     public String deleteTaskWithResult(int index) {
         //Cache task for displaying.
         Task t = tasks.get(index - 1);
@@ -96,6 +119,12 @@ public class TaskList {
         System.out.println("I marked this task as done:\n" + tasks.get(index - 1));
     }
 
+    /**
+     * Method to mark the selected task as done.
+     *
+     * @param index The index of the to be marked task
+     * @return String representation of the task that is marked.
+     */
     public String markTaskWithResult(int index) {
         tasks.get(index - 1).markDone();
         return "I marked this task as done:\n" + tasks.get(index - 1);
@@ -111,6 +140,12 @@ public class TaskList {
         System.out.println("I marked this task as undone:\n" + tasks.get(index - 1));
     }
 
+    /**
+     * Method to unmark the selected task as done.
+     *
+     * @param index The index of the to be unmarked task
+     * @return String representation of the task that is unmarked.
+     */
     public String unMarkTaskWithResult(int index) {
         tasks.get(index - 1).markUndone();
         return "I marked this task as undone:\n" + tasks.get(index - 1);
@@ -128,6 +163,8 @@ public class TaskList {
 
     /**
      * Method to return the last task added to the list as String.
+     *
+     * @return String representation of the newest task added as String.
      */
     public String returnNewestTaskAsString() {
        return "Task added:\n"
@@ -148,6 +185,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to search through the task list to find a specific task
+     * @param searchString The string to search with.
+     * @return The String representation of what is found in the TaskList.
+     */
     public String searchTaskWithResult(String searchString) {
         String res;
         res = "";
@@ -156,6 +198,11 @@ public class TaskList {
                 res = res + (i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
         }
+
+        if (res.equals("")) {
+            return "Found nothing matching your condition!";
+        }
+
         return res;
     }
 }
