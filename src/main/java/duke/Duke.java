@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import duke.commands.Command;
 import duke.commands.CommandInput;
-import duke.exceptions.CommandExecutionError;
 import duke.tasks.TaskList;
 
 /**
@@ -22,13 +21,8 @@ public class Duke {
         }
     }
 
-    public String getResponse(String commandInput) {
-        Command command = CommandInput.getCommandFromInput(commandInput, this.tasks);
-        try {
-            return command.execute();
-        } catch (CommandExecutionError e) {
-            return "I couldn't do what you asked for. \n" + e.toString();
-        }
+    public Command getCommand(String commandInput) {
+        return CommandInput.getCommandFromInput(commandInput, this.tasks);
     }
 
     public boolean isSuccessfulExecution(String response) {

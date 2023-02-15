@@ -3,6 +3,10 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.Duke;
+import duke.commands.ByeCmd;
+import duke.commands.Command;
+import duke.exceptions.CommandExecutionError;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -50,10 +54,21 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String commandInput = userInput.getText();
-        String response = duke.getResponse(commandInput);
-        displayMessage(Profile.USER, commandInput, duke.isSuccessfulExecution(response));
         userInput.clear();
+        Command command = duke.getCommand(commandInput);
+        String response;
+        try {
+            response = command.execute();
+        } catch (CommandExecutionError e) {
+            response = "I couldn't do what you asked for. \n" + e.toString();
+        }
+
+        displayMessage(Profile.USER, commandInput, duke.isSuccessfulExecution(response));
         displayMessage(Profile.DUKE, response, duke.isSuccessfulExecution(response));
+
+        if (command instanceof ByeCmd) {
+            Platform.exit();
+        }
     }
 
     @FXML
