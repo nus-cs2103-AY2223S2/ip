@@ -4,9 +4,6 @@ import elise.EliseException;
 import elise.MaybeDate;
 import elise.commands.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 /**
@@ -135,8 +132,6 @@ public class Parser {
         }
     }
 
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-
     /**
      * Parses string to produce a MaybeDate.
      *
@@ -144,14 +139,6 @@ public class Parser {
      * @return MaybeDate of the period.
      */
     public static MaybeDate parseDate(String s) {
-        String temp = s;
-        if (s.length() == 10) {
-            temp = temp + " 2359";
-        }
-        try {
-            return new MaybeDate(LocalDateTime.parse(temp, INPUT_FORMAT));
-        } catch (DateTimeParseException e) {
-            return new MaybeDate(s);
-        }
+        return DateParser.parseDate(s);
     }
 }
