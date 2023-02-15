@@ -16,6 +16,10 @@ public abstract class Task {
         this.isCompleted = false;
     }
 
+    public abstract String getTask();
+
+    public abstract String fullDetails();
+
     /**
      * Check current status of task, whether it is marked completed or not
      * @return X means completed and space means not completed
@@ -51,9 +55,6 @@ public abstract class Task {
      * Get description of task
      * @return String of task description
      */
-    public abstract String getTask();
-
-    public abstract String fullDetails();
 
     public String toString() {
         return this.currentTaskStatus() + " " + this.taskString;

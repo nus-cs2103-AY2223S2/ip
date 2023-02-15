@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/Images/Clown.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/Pingu.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/Images/user1.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/Duke1.png"));
 
     @FXML
     public void initialize() {
@@ -49,6 +52,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        /*
+        if (response.equals("Bye. Hope to see you again soon!")) {
+            System.exit(0);
+        }
+
+         */
         userInput.clear();
     }
 }

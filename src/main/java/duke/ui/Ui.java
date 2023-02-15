@@ -15,7 +15,7 @@ public class Ui {
      * @return String to greet user
      */
     public String greet() {
-        return "Hello! I'm Pingu!! \nWhat can I do for you?";
+        return "Hello! I'm Bear Bear!! \nWhat can I do for you?";
     }
 
     public String sayBye() {

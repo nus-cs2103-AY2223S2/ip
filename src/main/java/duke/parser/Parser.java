@@ -49,31 +49,22 @@ public class Parser {
             switch (command) {
             case "bye":
                 return HandleBye.performBye(input, ui);
-
             case "list":
                 return HandleList.performList(input, taskList, ui);
-
             case "mark":
                 return HandleMark.performMark(input, taskList, ui);
-
             case "unmark":
                 return HandleUnmark.performUnmark(input, taskList, ui);
-
             case "todo":
                 return HandleToDo.performToDo(input, taskList, ui);
-
             case "deadline":
                 return HandleDeadline.performDeadline(input, taskList, ui);
-
             case "event":
                 return HandleEvent.performEvent(input, taskList, ui);
-
             case "delete":
                 return HandleDelete.performDelete(input, taskList, ui);
-
             case "find":
                 return HandleFind.performFind(input, taskList, ui);
-
             default:
                 assert false: "Unable to process command";
                 return ui.showError("Please enter a valid command and/or task!");
