@@ -1,8 +1,1 @@
-Deadline|false|eat food|23/12/2023 1200
-Deadline|false|do the dishes|21/01/2023 2300
-Event|false|6|10/02/2023 1630|10/02/2023 1730
-Event|false|7|10/02/2023 1700|10/02/2023 1800
-Event|false|8|10/02/2023 2200|10/02/2023 2300
-Event|false|HAHA|15/02/2023 2300|16/02/2023 0200
-Event|false|hello|16/02/2023 0400|16/02/2023 0900
-Event|false|lmao|16/02/2023 1200|16/02/2023 1400
+
