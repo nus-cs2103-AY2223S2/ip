@@ -7,6 +7,7 @@ public class Event extends Task {
 
     public Event(String description, String fullDescription, String from, String to) {
         super(description, fullDescription);
+        assert fullDescription.startsWith("event");
         this.from = from;
         this.to = to;
     }

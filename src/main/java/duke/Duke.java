@@ -61,8 +61,5 @@ public class Duke  {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
         Duke duke = new Duke("data/tasks.txt");
-        System.out.println("test2");
-        System.out.println(duke.feedingIntoInterface("todo task"));
-
     }
 }

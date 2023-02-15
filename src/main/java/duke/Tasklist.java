@@ -117,4 +117,8 @@ public class Tasklist {
     public ArrayList<Task> getList() {
         return storage;
     }
+
+    public int taskSize() {
+        return storage.size();
+    }
 }

@@ -1,10 +1,5 @@
 package duke;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Tasklist;
-import duke.Ui;
-
 import java.io.FileNotFoundException;
 
 public class Parser {
@@ -24,18 +19,37 @@ public class Parser {
         if (userInput.equals("list")) {
             return tasklist.printList();
         } else if (userInput.contains("mark") && userInput.substring(0, 4).equals("mark")) {
+            assert userInput.substring(5).equals("") || Integer.valueOf(userInput.substring(5)) < tasklist.taskSize();
+            if (userInput.substring(5).equals("")) {
+                return "☹ OOPS!!! The task number of mark cannot be empty.";
+            } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
+                return"☹ OOPS!!! The task number is greater than the size of tasklist.";
+            }
             int position = Integer.valueOf(userInput.substring(5));
             return tasklist.updateTask("mark", position - 1);
         } else if (userInput.contains("unmark") && userInput.substring(0, 6).equals("unmark")) {
+            assert userInput.substring(7).equals("") || Integer.valueOf(userInput.substring(7)) < tasklist.taskSize();
+            if (userInput.substring(5).equals("")) {
+                return "☹ OOPS!!! The task number of mark cannot be empty.";
+            } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
+                return"☹ OOPS!!! The task number is greater than the size of tasklist.";
+            }
             int position = Integer.valueOf(userInput.substring(7));
             return tasklist.updateTask("unmark", position - 1);
         } else if (userInput.contains("delete") && userInput.substring(0, 6).equals("delete")) {
+            assert userInput.substring(7).equals("") || Integer.valueOf(userInput.substring(7)) < tasklist.taskSize();
+            if (userInput.substring(5).equals("")) {
+                return "☹ OOPS!!! The task number of mark cannot be empty.";
+            } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
+                return "☹ OOPS!!! The task number is greater than the size of tasklist.";
+            }
             int position = Integer.valueOf(userInput.substring(7));
             return tasklist.updateTask("delete", position - 1);
         } else if (userInput.contains("todo") && userInput.substring(0, 4).equals("todo")) {
             if (userInput.substring(5).equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                return "☹ OOPS!!! The description of a todo cannot be empty.";
             } else {
+                assert (userInput.substring(5) != null);
                 return tasklist.addingActivities("todo", userInput);
             }
         } else if (userInput.contains("deadline") && userInput.substring(0, 8).equals("deadline")) {
@@ -43,6 +57,7 @@ public class Parser {
                 return "☹ OOPS!!! The description of a deadline cannot be empty.";
 //                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
+                assert (userInput.substring(9) != null);
                 return tasklist.addingActivities("deadline", userInput);
             }
         } else if (userInput.contains("event") && userInput.substring(0, 5).equals("event")) {
@@ -50,6 +65,7 @@ public class Parser {
                 return "☹ OOPS!!! The description of a event cannot be empty.";
 //                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             } else {
+                assert (userInput.substring(6) != null);
                 return tasklist.addingActivities("event", userInput);
             }
         } else if (userInput.contains("find") && userInput.substring(0, 4).equals("find")) {
@@ -57,9 +73,11 @@ public class Parser {
                 return "☹ OOPS!!! The description of find cannot be empty.";
 //                throw new DukeException("☹ OOPS!!! The description of find cannot be empty.");
             } else {
+                assert (userInput.substring(5) != null);
                 return tasklist.findingActivities(userInput.substring(5));
             }
         } else if (userInput.equals("bye")) {
+            assert (storage != null);
             storage.saveToFile(tasklist);
             storage.storageClose();
             return ui.bye();
