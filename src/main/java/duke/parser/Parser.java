@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,7 +19,7 @@ import duke.exceptions.DukeWrongNumberOfArgumentsException;
  */
 public class Parser {
     private List<String> parseByRegex(String regex, String command) {
-        // https://www.tutorialspoint.com/javaregex/javaregex_capturing_groups.htm
+        // Solution below adapted from https://www.tutorialspoint.com/javaregex/javaregex_capturing_groups.htm
         List<String> result = new ArrayList<>();
         Pattern r = Pattern.compile(regex);
         Matcher m = r.matcher(command);
@@ -39,7 +39,7 @@ public class Parser {
     private void assertTokenLength(List<String> tokens, int length) throws DukeWrongNumberOfArgumentsException {
         if (tokens.size() != length) {
             throw new DukeWrongNumberOfArgumentsException("Wrong number of arguments supplied. This command requires "
-                    + length + " number of arguments.");
+                    + (length - 1) + " number of arguments.");
         }
     }
 

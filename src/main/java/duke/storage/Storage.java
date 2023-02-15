@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -49,6 +49,8 @@ public class Storage {
     public List<Task> loadData() {
         List<Task> result = new ArrayList<>();
         try {
+            // Solution below adapted from
+            // https://www.sghill.net/2014/how-do-i-make-cross-platform-file-paths-in-java/
             Path path = Paths.get(System.getProperty("user.dir"), BACKUP_FILE_DIR, BACKUP_FILE_NAME);
             if (!Files.exists(path)) {
                 Files.createDirectories(Paths.get(System.getProperty("user.dir"), BACKUP_FILE_DIR));
@@ -74,6 +76,7 @@ public class Storage {
     public void saveData(List<Task> userTasks) {
         Path path = Paths.get(System.getProperty("user.dir"), BACKUP_FILE_DIR, BACKUP_FILE_NAME);
         BufferedWriter bw = null;
+        // Solution below adapted from
         // https://beginnersbook.com/2014/01/how-to-write-to-file-in-java-using-bufferedwriter/
         try {
             bw = Files.newBufferedWriter(path);

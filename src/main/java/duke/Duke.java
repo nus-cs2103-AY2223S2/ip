@@ -5,10 +5,12 @@ import java.util.stream.Collectors;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
+import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.tasklist.TaskList;
 
 /**
  * Main entry point of the program.
@@ -45,6 +47,7 @@ public class Duke {
         assert tokens.size() == 2;
         int index = Integer.parseInt(tokens.get(1)) - 1;
         this.taskApplication.markTask(index);
+        this.taskApplication.save();
         return String.format("Nice! I've marked this task as done:\n%s", this.taskApplication.getTask(index));
     }
 
@@ -52,6 +55,7 @@ public class Duke {
         assert tokens.size() == 2;
         int index = Integer.parseInt(tokens.get(1)) - 1;
         this.taskApplication.unmarkTask(index);
+        this.taskApplication.save();
         return String.format("OK! I've marked this task as not done yet:\n%s", this.taskApplication.getTask(index));
     }
 
@@ -59,6 +63,7 @@ public class Duke {
         assert tokens.size() == 2;
         Task newTask = new ToDo(tokens.get(1));
         this.taskApplication.addTask(newTask);
+        this.taskApplication.save();
         return String.format(
                 "OK! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 newTask, this.taskApplication.getNoOfTasks()
@@ -69,6 +74,7 @@ public class Duke {
         assert tokens.size() == 3;
         Task newTask = new Deadline(tokens.get(1), tokens.get(2));
         this.taskApplication.addTask(newTask);
+        this.taskApplication.save();
         return String.format(
                 "OK! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 newTask, this.taskApplication.getNoOfTasks()
@@ -79,6 +85,7 @@ public class Duke {
         assert tokens.size() == 4;
         Task newTask = new Event(tokens.get(1), tokens.get(2), tokens.get(3));
         this.taskApplication.addTask(newTask);
+        this.taskApplication.save();
         return String.format(
                 "OK! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 newTask, this.taskApplication.getNoOfTasks()
@@ -93,6 +100,7 @@ public class Duke {
                 .map(s -> Integer.parseInt(s) - 1)
                 .collect(Collectors.toList());
         List<Task> tasks = this.taskApplication.popMultipleTasks(indexes);
+        this.taskApplication.save();
         return String.format("OK! I've removed this task:\n%s\nNow you have %d tasks in the list.",
                 getTasksAsString(tasks), this.taskApplication.getNoOfTasks());
     }
@@ -106,7 +114,7 @@ public class Duke {
     }
 
     private String byeCommand() {
-        this.taskApplication.close();
+        this.taskApplication.save();
         this.isExit = true;
         return "Bye. Hope to see you again soon!";
     }
@@ -138,6 +146,12 @@ public class Duke {
     public boolean getIsExit() {
         return this.isExit;
     }
+
+    /**
+     * Executes the given command and returns the output of that command.
+     * @param input user command.
+     * @return Output of user command.
+     */
     public String getResponse(String input) {
         try {
             return this.parseCommand(input);

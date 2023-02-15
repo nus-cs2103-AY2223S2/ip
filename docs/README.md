@@ -176,7 +176,8 @@ Here are the tasks that you want:
 
 Format: `delete arg1 ...`
 
-Delete all tasks with the index `arg1, arg2, ...`. Index of a task can be found by listing all tasks using the command `list`.
+Delete all tasks with the index `arg1, arg2, ...`. Index of a task can be found by listing all tasks using the 
+command `list`. Note that all indexes must be unique.
 
 Example of usage:
 

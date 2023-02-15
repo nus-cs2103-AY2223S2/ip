@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import duke.exceptions.DukeException;
+import duke.parser.Parser;
 
 public class ParserTest {
     @Test

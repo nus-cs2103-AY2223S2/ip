@@ -1,10 +1,9 @@
-package duke;
+package duke.tasklist;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import duke.exceptions.DukeInvalidArgumentException;
+import duke.storage.Storage;
 import duke.task.Task;
 
 /**
@@ -35,7 +34,7 @@ public class TaskList {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
                     String.format("There are only %d tasks, so you can't get a task "
-                            + "with index %d", this.userTasks.size(), index)
+                            + "with index %d", this.userTasks.size(), index + 1)
             );
         }
         this.userTasks.get(index).setIsDone(true);
@@ -50,7 +49,7 @@ public class TaskList {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
                     String.format("There are only %d tasks, so you can't get a task "
-                            + "with index %d", this.userTasks.size(), index)
+                            + "with index %d", this.userTasks.size(), index + 1)
             );
         }
         this.userTasks.get(index).setIsDone(false);
@@ -74,7 +73,7 @@ public class TaskList {
         if (index < 0 || index > this.userTasks.size() - 1) {
             throw new DukeInvalidArgumentException(
                     String.format("There are only %d tasks, so you can't get a task "
-                            + "with index %d\n", this.userTasks.size(), index)
+                            + "with index %d\n", this.userTasks.size(), index + 1)
             );
         }
         return this.userTasks.remove(index);
@@ -91,10 +90,17 @@ public class TaskList {
             if (index < 0 || index > this.userTasks.size() - 1) {
                 throw new DukeInvalidArgumentException(
                         String.format("There are only %d tasks, so you can't get a task "
-                                + "with index %d\n", this.userTasks.size(), index)
+                                + "with index %d\n", this.userTasks.size(), index + 1)
                 );
             }
         }
+        Set<Integer> uniqueIndexes = new HashSet<>(indexes);
+        if (uniqueIndexes.size() < indexes.size()) {
+            throw new DukeInvalidArgumentException(
+                    String.format("All indexes must be unique.")
+            );
+        }
+
         indexes.sort(Collections.reverseOrder());
         List<Task> result = new ArrayList<>();
         for (int index: indexes) {
@@ -149,10 +155,11 @@ public class TaskList {
         return this.userTasks.size();
     }
 
+
     /**
      * Saves the underlying data to duke.Storage.
      */
-    public void close() {
+    public void save() {
         this.storage.saveData(this.userTasks);
     }
 
