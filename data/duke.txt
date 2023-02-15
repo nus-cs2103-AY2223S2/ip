@@ -1,6 +1,6 @@
 T|1|read book
-D|0|go to perth|today
-E|1|play touch|today  |tmr
+D|0|go to perth|2019-11-01
+E|1|play touch|2019-11-01|2019-12-02
 T|0|fly back
-D|1|task 3|tmr
-E|0|ok|yes|yes
+D|1|send video|2021-10-25
+D|0|finish proj|2023-01-01

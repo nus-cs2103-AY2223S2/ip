@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
   protected String description;
   protected boolean isDone;
@@ -14,7 +17,7 @@ public class Task {
   public static class Todo extends Task {
 
     public Todo(String description) {
-        super(description);
+        super(description.strip());
     }
 
     @Override
@@ -35,11 +38,11 @@ public class Task {
 
   public static class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
 
     public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
+        super(description.strip());
+        this.by = LocalDate.parse(by);
     }
 
     @Override
@@ -54,19 +57,20 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String byFormatted = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + super.toString() + " (by: " + byFormatted + ")";
     }
   }
 
   public static class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDate from;
+    protected LocalDate to;
 
     public Event(String description, String from, String to) {
-        super(description);
-        this.from = from;
-        this.to = to;
+        super(description.strip());
+        this.from = LocalDate.parse(from);
+        this.to = LocalDate.parse(to);
 
     }
 
@@ -82,7 +86,9 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + "to: " + to + ")";
+        String fromFormatted = from.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String toFormatted = to.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[E]" + super.toString() + " (from: " + fromFormatted + " to: " + toFormatted + ")";
     }
   }
 

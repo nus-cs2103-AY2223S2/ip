@@ -18,22 +18,22 @@ public class Storage {
       String line;
       while ((line = reader.readLine()) != null) {
           String[] parts = line.split("\\|");
-          if (parts[0].equalsIgnoreCase("T")) {
-              Task t = new Task.Todo(parts[2]);
+          if (parts[0].strip().equalsIgnoreCase("T")) {
+              Task t = new Task.Todo(parts[2].strip());
               taskList.add(t);
-              if (parts[1].equalsIgnoreCase("1")) {
+              if (parts[1].strip().equalsIgnoreCase("1")) {
                   t.markDone();
               }
-          } else if (parts[0].equalsIgnoreCase("D")) {
-              Task t = new Task.Deadline(parts[2], parts[3]);
+          } else if (parts[0].strip().equalsIgnoreCase("D")) {
+              Task t = new Task.Deadline(parts[2].strip(), parts[3].strip());
               taskList.add(t);
-              if (parts[1].equalsIgnoreCase("1")) {
+              if (parts[1].strip().equalsIgnoreCase("1")) {
                   t.markDone();
               }
           } else {
-              Task t = new Task.Event(parts[2], parts[3] + " ", parts[4]);
+              Task t = new Task.Event(parts[2].strip(), parts[3].strip(), parts[4].strip());
               taskList.add(t);
-              if (parts[1].equalsIgnoreCase("1")) {
+              if (parts[1].strip().equalsIgnoreCase("1")) {
                   t.markDone();
               }
           }
