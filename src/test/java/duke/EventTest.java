@@ -1,12 +1,10 @@
-package duke;
+package duke.tasks;
 
-import duke.tasks.Event;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
@@ -30,5 +28,4 @@ public class EventTest {
         event.setUndone();
         assertFalse(event.isCompleted());
     }
-
 }

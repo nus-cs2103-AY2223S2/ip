@@ -1,12 +1,12 @@
 package duke.helpers;
 
+import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import duke.exceptions.DukeException;
-import java.time.format.DateTimeParseException;
 
 /**
  * Intermediary between UI which receive instructions
@@ -27,7 +27,8 @@ public class Parser {
     /**
      * Constructor for Parser: logic intermediary.
      *
-     * @param taskList Contains ArrayList<Task> and task manipulation methods
+     * @param taskList Contains ArrayList of tasks,
+     *                as well as task manipulation methods
      */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
@@ -83,9 +84,8 @@ public class Parser {
                 message += "Usage: 'deadline task /by YYYY-MM-DD'\n";
             } catch (DukeException e) {
                 message = e.getMessage();
-            } finally {
-                break;
             }
+            break;
         case "event":
             task = new Event(instruction);
             message = "Got it. I've added this task:\n";

@@ -3,7 +3,8 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.helpers.*;
+import duke.helpers.TaskList;
+import duke.helpers.UI;
 
 /**
  * Main Duke class file. Sets up UI and loads up saved tasks if any.
@@ -12,6 +13,11 @@ import duke.helpers.*;
  * @author jengoc415
  */
 public class Duke {
+    /**
+     * Main Duke program
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         UI ui = new UI(new TaskList());
         ui.greeting();
@@ -25,5 +31,3 @@ public class Duke {
         }
     }
 }
-
-

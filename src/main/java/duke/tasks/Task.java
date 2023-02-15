@@ -12,6 +12,11 @@ public abstract class Task {
     protected String modifiedInstr;
     protected String description;
 
+    /**
+     * Constructor for Tasks. To be inherited by child classes.
+     *
+     * @param instr Full instruction keyed in by user
+     */
     public Task(String instr) {
         this.instruction = instr;
         this.isDone = false;

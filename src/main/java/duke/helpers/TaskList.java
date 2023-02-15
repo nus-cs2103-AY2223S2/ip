@@ -1,10 +1,10 @@
 package duke.helpers;
 
-import duke.tasks.Task;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import java.io.IOException;
+import duke.tasks.Task;
 
 /**
  * Stores array of Tasks and handles any manipulation of tasks in array.
@@ -46,7 +46,7 @@ public class TaskList {
     public String list() {
         String list = "";
         for (int i = 1; i <= tasks.size(); i++) {
-            list += String.format("%d. %s\n", i, tasks.get(i-1));
+            list += String.format("%d. %s\n", i, tasks.get(i - 1));
         }
         return list;
     }
@@ -125,7 +125,7 @@ public class TaskList {
 
         String searchList = "Here are the matching tasks in your list:\n";
         for (int i = 1; i <= searchResults.size(); i++) {
-            searchList += String.format("%d. %s\n", i, searchResults.get(i-1));
+            searchList += String.format("%d. %s\n", i, searchResults.get(i - 1));
         }
         return searchList;
     }

@@ -1,19 +1,18 @@
 package duke.helpers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-
-import duke.exceptions.DukeException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 /**
  * Save tasks to local hard drive and loading it when program starts.
@@ -72,14 +71,12 @@ public class Storage {
                     if (completed) {
                         task.setDone();
                     }
-                } catch (DateTimeParseException dtpe) {
-
-                } catch (DukeException e) {
-
+                } catch (DateTimeParseException | DukeException dtpe) {
+                    throw new DukeException("Date Time error");
                 }
             }
             sc.close();
-        } catch (FileNotFoundException fnfe) {
+        } catch (FileNotFoundException | DukeException fnfe) {
             savedFile.createNewFile();
         }
         return tasks;
