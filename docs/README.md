@@ -1,7 +1,7 @@
 # User Guide
 <hr/>
 
- ## Dudu
+## Dudu
 
 > Dudu is a task manager which help you to keep track of your todo, deadline and event tasks
 
@@ -12,7 +12,7 @@
 ## Usage
 <hr/>
 
-### `Hi` - Greeting to Dudu 
+### `hi` - Greeting to Dudu 
 
 > Send a greeting to Dudu, and Dudu will request for your service.
 
