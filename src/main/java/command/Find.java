@@ -36,8 +36,8 @@ public class Find implements Command {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("find"))
                 .ignoreThen(Parser.nextStr().many())
-                .map(lst -> lst.stream().map(s -> s.toLowerCase()).collect(Collectors.toList()))
-                .<Command>map(lst -> new Find(lst))
+                .map(lst -> lst.stream().map(String::toLowerCase).collect(Collectors.toList()))
+                .<Command>map(Find::new)
                 .overrideMsg(FORMAT);
     }
 }

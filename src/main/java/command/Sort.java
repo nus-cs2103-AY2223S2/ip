@@ -25,7 +25,7 @@ public class Sort implements Command {
             ui.showError(ERROR);
         }
         taskList.sort();
-        ui.showReply(String.format(SUCCESS, taskList.toString()));
+        ui.showReply(String.format(SUCCESS, taskList));
     }
 
     /**

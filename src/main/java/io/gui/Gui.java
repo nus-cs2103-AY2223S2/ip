@@ -20,7 +20,6 @@ public class Gui extends Application {
     private TaskList taskList;
     private Storage<TaskList> storage;
     private FXMLLoader fxmlLoader;
-    private AnchorPane mainWindow;
 
     /**
      * Actions to perform when Application is launched.
@@ -30,7 +29,7 @@ public class Gui extends Application {
     public void start(Stage stage) {
         try {
             fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainWindow.fxml"));
-            mainWindow = fxmlLoader.load();
+            AnchorPane mainWindow = fxmlLoader.load();
             fxmlLoader.<MainWindow>getController().setGui(this);
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
@@ -77,8 +76,6 @@ public class Gui extends Application {
                 lst -> lst,
                 error -> {
                     switch (error) {
-                        case FILE_NOT_FOUND:
-                            return new TaskList();
                         case IO_ERROR:
                         case CAST_ERROR:
                             fxmlLoader.<MainWindow>getController()

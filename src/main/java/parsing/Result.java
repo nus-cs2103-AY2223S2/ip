@@ -8,7 +8,7 @@ import util.Pair;
 
 /**
  * Result of a parse by a Parser
- * 
+ *
  * @param <T> Wrapped type
  * @see Parser
  */
@@ -38,7 +38,7 @@ public class Result<T> {
 
     /**
      * Checks if wrapped object satisfies condition
-     * 
+     *
      * @param condition Condition to test
      * @param errorMsg  Error message if condition unsatisfied
      * @return New filtered result
@@ -49,7 +49,7 @@ public class Result<T> {
 
     /**
      * Overrides message if this is Error
-     * 
+     *
      * @param errorMsg Message to override with
      * @return New result
      */
@@ -75,7 +75,7 @@ public class Result<T> {
 
     /**
      * Converts result to new object based on 2 mapping functions
-     * 
+     *
      * @param <U>           Type of new object
      * @param okFunction    Function to convert Pair<parsedObject, remainingInput>
      *                      to new object if this is ok
@@ -84,13 +84,13 @@ public class Result<T> {
      * @return New object
      */
     public <U> U match(Function<? super Pair<? extends T, ? extends String>, ? extends U> okFunction,
-            Function<? super String, ? extends U> errorFunction) {
+                       Function<? super String, ? extends U> errorFunction) {
         return this.result.match(okFunction, errorFunction);
     }
 
     /**
      * Maps parsed object to new wrapped object if this is ok
-     * 
+     *
      * @param f Mapping function
      * @return New result
      */

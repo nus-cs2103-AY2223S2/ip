@@ -9,9 +9,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import util.Util;
+
 /**
  * General Task abstract class
- * 
+ *
  * @see Serializable
  */
 public abstract class Task implements Serializable {
@@ -19,8 +20,8 @@ public abstract class Task implements Serializable {
     protected final boolean isDone;
 
     /**
-     * @param desc Task description
-     * @param done Task completed info
+     * @param desc   Task description
+     * @param isDone Task completed info
      */
     protected Task(String desc, boolean isDone) {
         this.desc = desc;
@@ -45,23 +46,23 @@ public abstract class Task implements Serializable {
 
     /**
      * Checks if task description contains keywords
-     * 
+     *
      * @param keywords List of keywords
      */
     public boolean hasKeywords(List<String> keywords) {
         Set<String> descKeywords = Util.splitWhitespace(desc).stream()
-                .map(s -> s.toLowerCase())
+                .map(String::toLowerCase)
                 .collect(Collectors.toCollection(HashSet::new));
 
-        
+
         return keywords.stream()
-                .map(word -> descKeywords.contains(word))
+                .map(descKeywords::contains)
                 .reduce(true, (a, b) -> a && b);
     }
 
     /**
      * Get date of task. If task has no date,
-     * optional.empty returned.
+     * Empty optional returned.
      */
     public abstract Optional<LocalDate> getDate();
 

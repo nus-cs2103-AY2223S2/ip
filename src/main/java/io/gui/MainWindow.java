@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import util.Pair;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -67,8 +68,8 @@ public class MainWindow extends AnchorPane implements Ui {
         userInput.clear();
 
         Command command = Command.parser().parse(userText).match(
-                pr -> pr.first(),
-                msg -> Error.of(msg));
+                Pair::first,
+                Error::of);
         command.execute(gui.getTaskList(), this, gui.getStorage());
         if (command.isExit()) {
             Platform.exit();
@@ -91,7 +92,7 @@ public class MainWindow extends AnchorPane implements Ui {
 
     /**
      * Sets gui property which allows MainWindow to modify gui properties.
-     * 
+     *
      * @param gui Gui object
      */
     void setGui(Gui gui) {

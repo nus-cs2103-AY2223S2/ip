@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import command.Command;
 import command.Error;
 import task.TaskList;
+import util.Pair;
 
 /**
  * User interface (Command line).
@@ -44,8 +45,6 @@ public class Cli implements Ui {
                 lst -> lst,
                 error -> {
                     switch (error) {
-                        case FILE_NOT_FOUND:
-                            return new TaskList();
                         case IO_ERROR:
                         case CAST_ERROR:
                             showReply("Error loading tasks, tasks have been reset.");
@@ -65,7 +64,7 @@ public class Cli implements Ui {
     public void showReply(String msg) {
         System.out.println();
         List<String> lst = msg.lines()
-                .flatMap(s -> split(s))
+                .flatMap(Cli::split)
                 .collect(Collectors.toList());
         IntStream.range(0, lst.size())
                 .mapToObj(i -> (i == 0 ? String.format(OUTPUT_FORMAT, "D:  ", lst.get(i))
@@ -97,8 +96,8 @@ public class Cli implements Ui {
         while (!isExit) {
             String userInput = scanner.nextLine();
             Command command = Command.parser().parse(userInput).match(
-                    pr -> pr.first(),
-                    msg -> Error.of(msg));
+                    Pair::first,
+                    Error::of);
             command.execute(taskList, this, storage);
             isExit = command.isExit();
         }
@@ -106,13 +105,13 @@ public class Cli implements Ui {
 
     /**
      * Splits large strings into lines below a max line length.
-     * 
+     *
      * @param line string to be split.
      * @return Stream of lines.
      */
     private static Stream<String> split(String line) {
         return line.length() <= MAX_LINE_LENGTH ? Stream.of(line)
                 : Stream.concat(Stream.of(line.substring(0, MAX_LINE_LENGTH + 1)),
-                        split(line.substring(MAX_LINE_LENGTH + 1)));
+                split(line.substring(MAX_LINE_LENGTH + 1)));
     }
 }

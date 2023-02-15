@@ -13,7 +13,7 @@ import util.Either;
 
 /**
  * Manages storing of objects.
- * 
+ *
  * @param <T> Object to be stored.
  * @see Serializable
  */
@@ -23,7 +23,7 @@ public class Storage<T extends Serializable> {
     private final Class<T> type;
     private final String filepath;
 
-    public static enum StorageError {
+    public enum StorageError {
         FILE_NOT_FOUND,
         IO_ERROR,
         CAST_ERROR
@@ -38,14 +38,14 @@ public class Storage<T extends Serializable> {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        
+
     }
 
     /**
-     * @return Storage object.
-     * @param <T> Type of object to store.
+     * @param <T>      Type of object to store.
      * @param type     class object for type parameter.
      * @param filename filename for storage file.
+     * @return Storage object.
      */
     public static <T extends Serializable> Storage<T> of(Class<T> type, String filename) {
         String filepath = DIR + '/' + filename;
@@ -58,7 +58,7 @@ public class Storage<T extends Serializable> {
      * @see StorageError
      */
     public Either<T, StorageError> load() {
-        ObjectInputStream inputStream = null;
+        ObjectInputStream inputStream;
 
         try {
             inputStream = new ObjectInputStream(new FileInputStream(filepath));
@@ -82,14 +82,14 @@ public class Storage<T extends Serializable> {
 
     /**
      * Saves object into the file.
-     * 
+     *
      * @param object Object to be saved.
      * @return Either a success message or a StorageError.
      * @see Either
      * @see StorageError
      */
     public Either<String, StorageError> save(T object) {
-        ObjectOutputStream outputStream = null;
+        ObjectOutputStream outputStream;
 
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(this.filepath));

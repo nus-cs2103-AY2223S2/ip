@@ -44,7 +44,7 @@ public class Add implements Command {
                 .ignoreThen(Parser.strParserIgnoreCase("todo"))
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.nextLine())
-                .map(s -> Util.cleanup(s))
+                .map(Util::cleanup)
                 .<Task>bind(s -> Parser.retn(new Todo(s)))
                 .overrideMsg(TODO_FORMAT);
     }
@@ -93,6 +93,6 @@ public class Add implements Command {
         return todoParser()
                 .or(deadlineParser())
                 .or(eventParser())
-                .map(t -> new Add(t));
+                .map(Add::new);
     }
 }

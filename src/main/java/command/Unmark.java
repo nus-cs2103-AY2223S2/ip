@@ -41,7 +41,7 @@ public class Unmark implements Command {
                 .ignoreThen(Parser.strParserIgnoreCase("unmark"))
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.decimal())
-                .<Command>map(x -> new Unmark(x))
+                .<Command>map(Unmark::new)
                 .overrideMsg(FORMAT);
     }
 }

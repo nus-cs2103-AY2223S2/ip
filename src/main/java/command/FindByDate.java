@@ -8,11 +8,11 @@ import parsing.Parser;
 import task.TaskList;
 
 /**
- * Manages finding taks by date
+ * Manages finding tasks by date
  */
 public class FindByDate implements Command {
     private static final String FORMAT = "findbydate 'YYYY-MM-DD'";
-    
+
     private final LocalDate date;
 
     private FindByDate(LocalDate date) {
@@ -35,7 +35,7 @@ public class FindByDate implements Command {
                 .ignoreThen(Parser.strParserIgnoreCase("findbydate"))
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.dateParser())
-                .<Command>map(d -> new FindByDate(d))
+                .<Command>map(FindByDate::new)
                 .overrideMsg(FORMAT);
     }
 }

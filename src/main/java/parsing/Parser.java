@@ -14,7 +14,7 @@ import util.Util;
  * Wrapper around a function from a string input to a
  * parsed object plus remaining input, or if parsing fails,
  * an error message.
- * 
+ *
  * @param <T> Type of parsed object
  * @see Result
  */
@@ -33,7 +33,7 @@ public class Parser<T> {
 
     /**
      * Parses input string
-     * 
+     *
      * @param input Input string
      * @return Result of parse
      */
@@ -44,32 +44,32 @@ public class Parser<T> {
     /**
      * Chain multiple parsers together, while keeping
      * parse result within scope
-     * 
+     *
      * @param <U> Type of new object to parse
      * @param f   Function from original parse result to new parser
      * @return New parser
      */
     public <U> Parser<U> bind(Function<T, Parser<U>> f) {
-        return new Parser<U>(inp -> this.parse(inp).match(
+        return new Parser<>(inp -> this.parse(inp).match(
                 pr -> f.apply(pr.first()).parse(pr.second()),
-                msg -> Result.error(msg)));
+                Result::error));
     }
 
     /**
      * Chain 2 parsers, ignoring result from first parse.
-     * 
+     *
      * @param p Next parser in chain
      * @return New parser
      */
     public <U> Parser<U> ignoreThen(Parser<U> p) {
         return new Parser<>(inp -> this.parse(inp).match(
                 pr -> p.parse(pr.second()),
-                msg -> Result.error(msg)));
+                Result::error));
     }
 
     /**
      * Chain 2 parsers, ignoring result form second parse.
-     * 
+     *
      * @param p Next Parser in chain
      * @return New parser
      */
@@ -77,13 +77,13 @@ public class Parser<T> {
         return new Parser<>(inp -> this.parse(inp).match(
                 pr -> p.parse(pr.second()).match(
                         pr2 -> Result.ok(pr.first(), pr2.second()),
-                        msg -> Result.error(msg)),
-                msg -> Result.error(msg)));
+                        Result::error),
+                Result::error));
     }
 
     /**
      * Chain 2 parsers, result will be whichever parser succeeds first.
-     * 
+     *
      * @param p Other parser to try
      * @return New parser
      */
@@ -97,9 +97,9 @@ public class Parser<T> {
 
     /**
      * Tries this parser as many times as possible
-     * 
+     *
      * @return Parser that parses a list of the original type.
-     *         Empty list returned if no parse succeeds.
+     * Empty list returned if no parse succeeds.
      */
     public Parser<List<T>> many() {
         Function<String, Result<Stream<T>>> f = new Function<>() {
@@ -110,7 +110,7 @@ public class Parser<T> {
                             Result<Stream<T>> prev = this.apply(pr.second());
                             return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
                         },
-                        msg -> Result.ok(Stream.<T>of(), inp));
+                        msg -> Result.ok(Stream.of(), inp));
             }
         };
         return new Parser<>(inp -> f.apply(inp).map(s -> s.collect(Collectors.toList())));
@@ -119,7 +119,7 @@ public class Parser<T> {
 
     /**
      * Many until another parser succeeds. Other parser result ignored.
-     * 
+     *
      * @param <U> Type of other parser
      * @param p   Other parser that ends attempt to parse
      * @return New parser
@@ -143,27 +143,27 @@ public class Parser<T> {
 
     /**
      * Same as many except that result must have at least 1 element.
-     * 
+     *
      * @see #many()
      */
     public Parser<List<T>> some() {
-        return many().satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse succesfull.");
+        return many().satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse successful.");
     }
 
     /**
      * Same as manyUntil except that result must have at least 1 element.
-     * 
+     *
      * @param <U> Type of other parser
      * @param p   Other parser that ends attempt to parse
      * @see #manyUntil(Parser)
      */
     public <U> Parser<List<T>> someUntil(Parser<U> p) {
-        return manyUntil(p).satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse successfull.");
+        return manyUntil(p).satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse successful.");
     }
 
     /**
      * Replaces error message if result is an error.
-     * 
+     *
      * @param errorMsg Message to replace with
      */
     public Parser<T> overrideMsg(String errorMsg) {
@@ -172,7 +172,7 @@ public class Parser<T> {
 
     /**
      * Parser fails if result does not satisfy condition
-     * 
+     *
      * @see Result#filterOrElse(Predicate, String)
      */
     public Parser<T> satisfyOrElse(Predicate<T> condition, String failMsg) {
@@ -181,19 +181,16 @@ public class Parser<T> {
 
     /**
      * Maps parser to new parser of new type
-     * 
+     *
      * @see Result#map(Function)
      */
     public <U> Parser<U> map(Function<? super T, ? extends U> f) {
-        return new Parser<>(inp -> {
-            return this.parse(inp).map(f);
-        });
+        return new Parser<>(inp -> this.parse(inp).map(f));
     }
 
     /**
-     * @return Parser that parses a string of a certain number of characters
-     * 
      * @param amt Number of characters to parse
+     * @return Parser that parses a string of a certain number of characters
      */
     public static Parser<String> take(int amt) {
         return new Parser<>(inp -> {
@@ -205,65 +202,59 @@ public class Parser<T> {
     }
 
     /**
-     * @return Parser that parses a string of characters that satisfy a condition
-     * 
      * @param pred Condition that characters must satisfy
+     * @return Parser that parses a string of characters that satisfy a condition
      */
-    public static <U> Parser<String> takeWhile(Predicate<Character> pred) {
+    public static Parser<String> takeWhile(Predicate<Character> pred) {
         return anyChar()
                 .satisfyOrElse(pred, "")
                 .many()
-                .map(l -> Util.listToString(l));
+                .map(Util::listToString);
     }
 
     /**
-     * @return Parser that parses a string of characters until an ending condition
-     *         is
-     *         satisfied
-     * 
      * @param pred Ending condition
+     * @return Parser that parses a string of characters until an ending condition
+     * is
+     * satisfied
      */
     public static Parser<String> takeTill(Predicate<Character> pred) {
         return anyChar()
                 .satisfyOrElse(pred.negate(), "")
                 .many()
-                .map(l -> Util.listToString(l));
+                .map(Util::listToString);
     }
 
     /**
-     * @return Parser that skips over input. Result must be ignored.
-     * 
      * @param amt Number of characters to skip
+     * @return Parser that skips over input. Result must be ignored.
      */
     public static Parser<Void> skip(int amt) {
         return take(amt).map(s -> null);
     }
 
     /**
-     * @return Parser that skips over characters while characters satisfy condition.
-     *         Result must be ignored.
-     * 
      * @param pred Condition that characters must satisfy
+     * @return Parser that skips over characters while characters satisfy condition.
+     * Result must be ignored.
      */
-    public static <U> Parser<Void> skipWhile(Predicate<Character> pred) {
+    public static Parser<Void> skipWhile(Predicate<Character> pred) {
         return takeWhile(pred).map(s -> null);
     }
 
     /**
-     * @return Parser that skips over characters until condition is satisfied.
-     *         Result must be ignored.
-     * 
      * @param pred Condition that ends the parsing
+     * @return Parser that skips over characters until condition is satisfied.
+     * Result must be ignored.
      */
     public static Parser<Void> skipTill(Predicate<Character> pred) {
         return takeTill(pred).map(s -> null);
     }
 
     /**
-     * @return Parser that returns a fixed value, regardless of input.
-     *         Does not consume input.
-     * 
      * @param res Result to be returned
+     * @return Parser that returns a fixed value, regardless of input.
+     * Does not consume input.
      */
     public static <U> Parser<U> retn(U res) {
         return new Parser<>(inp -> Result.ok(res, inp));
@@ -282,30 +273,27 @@ public class Parser<T> {
     }
 
     /**
-     * @return Parser that parses a certain character
-     * 
      * @param c Character to be parsed
+     * @return Parser that parses a certain character
      */
     public static Parser<Character> charParser(char c) {
         return anyChar().satisfyOrElse(x -> x == c, String.format("Character %s not found.", c));
     }
 
     /**
-     * @return Parser that parses a certain string
-     * 
      * @param str String to be parsed
+     * @return Parser that parses a certain string
      */
     public static Parser<String> strParser(String str) {
-        return take(str.length()).satisfyOrElse(s -> s.equals(str), String.format("String %s not found."));
+        return take(str.length()).satisfyOrElse(s -> s.equals(str), String.format("String %s not found.", str));
     }
 
     /**
      * @return strParser except case is ignored
-     * 
      * @see #strParser(String)
      */
     public static Parser<String> strParserIgnoreCase(String str) {
-        return take(str.length()).satisfyOrElse(s -> s.toLowerCase().equals(str.toLowerCase()),
+        return take(str.length()).satisfyOrElse(s -> s.equalsIgnoreCase(str),
                 String.format("String %s not found. (case ignored).", str));
     }
 
@@ -314,20 +302,19 @@ public class Parser<T> {
      */
     public static Parser<String> nextStr() {
         return skipSpace()
-                .ignoreThen(takeTill(c -> WS.contains(c)))
+                .ignoreThen(takeTill(WS::contains))
                 .satisfyOrElse(s -> !s.isEmpty(), "No next string found.");
     }
 
     /**
-     * @return Parser that parses a string before another parse succeeds
-     * 
      * @param p Parser to compare against
+     * @return Parser that parses a string before another parse succeeds
      */
     public static <T> Parser<String> strUntil(Parser<T> p) {
         return anyChar()
                 .someUntil(p)
-                .map(l -> Util.listToString(l))
-                .map(s -> Util.cleanup(s));
+                .map(Util::listToString)
+                .map(Util::cleanup);
     }
 
     /**
@@ -336,17 +323,17 @@ public class Parser<T> {
     public static Parser<String> nextLine() {
         return anyChar()
                 .someUntil(endOfLine())
-                .map(s -> Util.listToString(s))
+                .map(Util::listToString)
                 .overrideMsg("End of input.");
     }
 
     /**
-     * @return Parser that parses a unsigned integer
+     * @return Parser that parses an unsigned integer
      */
     public static Parser<Integer> positiveDecimal() {
         return takeWhile(c -> c >= 48 && c < 58)
                 .satisfyOrElse(s -> !s.isEmpty(), "No parsable integers.")
-                .map(s -> Integer.parseInt(s))
+                .map(Integer::parseInt)
                 .overrideMsg("Failed to parse unsigned integer.");
     }
 
@@ -371,15 +358,15 @@ public class Parser<T> {
 
     /**
      * @return Parser that skips over spaces.
-     *         Result must be ignored.
+     * Result must be ignored.
      */
     public static Parser<Void> skipSpace() {
-        return skipWhile(c -> WS.contains(c));
+        return skipWhile(WS::contains);
     }
 
     /**
-     * @return Parser that succeds if input is at EOL.
-     *         Result must be ignored.
+     * @return Parser that succeeds if input is at EOL.
+     * Result must be ignored.
      */
     public static Parser<Void> endOfLine() {
         return new Parser<>(inp -> {
@@ -405,6 +392,6 @@ public class Parser<T> {
                         return Result.error("Failed to parse date.");
                     }
                 },
-                msg -> Result.error(msg)));
+                Result::error));
     }
 }

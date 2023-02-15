@@ -29,7 +29,7 @@ public class Delete implements Command {
             return;
         }
         taskList.deleteTask(this.taskNum);
-        ui.showReply(String.format(SUCCESS, this.taskNum, taskList.toString()));
+        ui.showReply(String.format(SUCCESS, this.taskNum, taskList));
     }
 
     /**
@@ -41,7 +41,7 @@ public class Delete implements Command {
                 .ignoreThen(Parser.strParserIgnoreCase("delete"))
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.decimal())
-                .<Command>map(x -> new Delete(x))
+                .<Command>map(Delete::new)
                 .overrideMsg(FORMAT);
     }
 }

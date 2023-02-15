@@ -15,7 +15,7 @@ public class Util {
 
     /**
      * Splits string into list of strings by whitespace.
-     * 
+     *
      * @param str String to be split
      * @return List of strings
      */
@@ -39,7 +39,7 @@ public class Util {
 
     /**
      * Clears whitespace at beginning and end of string
-     * 
+     *
      * @param str String to process
      * @return Resultant string
      */
@@ -61,12 +61,12 @@ public class Util {
 
     /**
      * Fuses list of characters into a single string
-     * 
+     *
      * @param s List of characters
      * @return Resultant string
      */
     public static String listToString(List<Character> s) {
-        return s.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b);
+        return s.stream().map(Object::toString).reduce("", (a, b) -> a + b);
     }
 
 }

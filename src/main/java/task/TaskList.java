@@ -3,6 +3,7 @@ package task;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,7 +12,7 @@ import util.Pair;
 
 /**
  * List of tasks with formatting methods
- * 
+ *
  * @see Serializable
  * @see Task
  */
@@ -40,8 +41,8 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * @return Task description with formatting applied
      * @param number Number of task in the list
+     * @return Task description with formatting applied
      */
     public String get(int number) {
         int index = number - 1;
@@ -57,7 +58,7 @@ public class TaskList implements Serializable {
 
     /**
      * Adds task to list
-     * 
+     *
      * @param task Task to be added
      */
     public void addTask(Task task) {
@@ -66,7 +67,7 @@ public class TaskList implements Serializable {
 
     /**
      * Marks task as completed
-     * 
+     *
      * @param number Number of task in the list
      */
     public void markTask(int number) {
@@ -76,7 +77,7 @@ public class TaskList implements Serializable {
 
     /**
      * Unmarks task
-     * 
+     *
      * @param number Number of task in the list
      */
     public void unmarkTask(int number) {
@@ -86,7 +87,7 @@ public class TaskList implements Serializable {
 
     /**
      * Deletes task
-     * 
+     *
      * @param number Number of task in the list
      */
     public void deleteTask(int number) {
@@ -96,9 +97,9 @@ public class TaskList implements Serializable {
 
     /**
      * Finds tasks in the list via date
-     * 
-     * @return Task descriptions with formatting applied
+     *
      * @param date Date to compare with
+     * @return Task descriptions with formatting applied
      * @see LocalDate
      */
     public String findByDate(LocalDate date) {
@@ -114,7 +115,7 @@ public class TaskList implements Serializable {
 
     /**
      * Finds tasks in list via keywords
-     * 
+     *
      * @param keywords List of keywords
      * @return Task descriptions with formatting applied
      */
@@ -137,14 +138,14 @@ public class TaskList implements Serializable {
         List<Integer> indexesToSort = IntStream.range(0, this.size())
                 .mapToObj(i -> new Pair<>(i, this.lst.get(i)))
                 .filter(pr -> pr.second().getDate().isPresent())
-                .map(pr -> pr.first())
+                .map(Pair::first)
                 .collect(Collectors.toList());
 
         List<Task> sortedFilteredTasks = this.lst.stream()
                 .filter(task -> task.getDate().isPresent())
-                .sorted((a, b) -> a.getDate().get().compareTo(b.getDate().get()))
+                .sorted(Comparator.comparing(a -> a.getDate().get()))
                 .collect(Collectors.toList());
-        
+
         IntStream.range(0, indexesToSort.size())
                 .mapToObj(i -> new Pair<>(indexesToSort.get(i), sortedFilteredTasks.get(i)))
                 .forEach(pr -> this.lst.set(pr.first(), pr.second()));

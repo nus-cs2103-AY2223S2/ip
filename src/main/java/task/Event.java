@@ -8,7 +8,7 @@ import java.util.Optional;
  * Event task
  */
 public class Event extends Task {
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yy");
 
     private final LocalDate start;
     private final LocalDate end;

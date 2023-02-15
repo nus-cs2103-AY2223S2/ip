@@ -37,7 +37,7 @@ public class Mark implements Command {
         return Parser.strParserIgnoreCase("mark")
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.decimal())
-                .<Command>map(x -> new Mark(x))
+                .<Command>map(Mark::new)
                 .overrideMsg(FORMAT);
     }
 }

@@ -27,7 +27,7 @@ public class DialogueBox extends HBox {
 
     /**
      * @param text display text
-     * @param img Image of dialogue source.
+     * @param img  Image of dialogue source.
      */
     private DialogueBox(String text, Image img) {
         try {
@@ -63,9 +63,9 @@ public class DialogueBox extends HBox {
 
     /**
      * Get dialogue box with formatting specialized for user input.
-     * 
+     *
      * @param text Text content of dialogue
-     * @param img User profile image
+     * @param img  User profile image
      */
     public static DialogueBox getUserDialogue(String text, Image img) {
         return new DialogueBox(text, img);
@@ -73,9 +73,9 @@ public class DialogueBox extends HBox {
 
     /**
      * Get dialogue box with formatting specialized for chatbot reply.
-     * 
+     *
      * @param text Text content of dialogue
-     * @param img Chatbot profile image
+     * @param img  Chatbot profile image
      */
     public static DialogueBox getBotDialogue(String text, Image img) {
         var db = new DialogueBox(text, img);
