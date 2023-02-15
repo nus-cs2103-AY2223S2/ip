@@ -34,6 +34,57 @@ public class Storage {
     }
 
     /**
+     * Loads the data file.
+     * Creates directory if necessary.
+     * @return File found/created.
+     */
+    private File initializeFile() {
+        File data = new File(filePath);
+        File folder = new File(defaultFolderPath);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        return data;
+    }
+
+    /**
+     * Scans data file into given ArrayList.
+     * @param data File to extract data from.
+     * @param list List to write data to.
+     * @throws RoodyException If faulty data is loaded.
+     * @throws FileNotFoundException If file is not found.
+     */
+    private void scanFile(File data, ArrayList<Task> list) throws RoodyException, FileNotFoundException {
+        Scanner s = new Scanner(data);
+        while (s.hasNextLine()) {
+            String task = s.nextLine();
+            String[] inputs = task.split("\\|");
+            // inputs should be less than 5
+            assert inputs.length <= 5 : "Error while loading, too many arguments";
+            // filter by task
+            Task temp;
+            switch(inputs[2]) {
+            case "T":
+                temp = new Todo(inputs[0]);
+                break;
+            case "D":
+                temp = new Deadline(inputs[0], LocalDate.parse(inputs[3]));
+                break;
+            case "E":
+                temp = new Event(inputs[0], LocalDate.parse(inputs[3]), LocalDate.parse(inputs[4]));
+                break;
+            default:
+                throw new RoodyException("Error loading text");
+            }
+            if (inputs[1].equals("true")) {
+                temp.setDone();
+            }
+            list.add(temp);
+        }
+        s.close();
+    }
+
+    /**
      * Returns information from the data file.
      * If folder not present, creates a new folder.
      * If file not present, creates a new file.
@@ -42,44 +93,12 @@ public class Storage {
     public ArrayList<Task> loadFile() {
         ArrayList<Task> list = new ArrayList<>();
         try {
-            File data = new File(filePath);
-            File folder = new File(defaultFolderPath);
-            Scanner s = new Scanner(data);
-            // check if file exists
-            if (!folder.exists()) {
-                folder.mkdir();
+            File data = initializeFile();
+            if (!data.createNewFile()) {
+                scanFile(data, list);
             }
-            if (data.createNewFile()) {
-            } else {
-                String task = "";
-                while (s.hasNextLine()) {
-                    task = s.nextLine();
-                    String[] inputs = task.split("\\|");
-                    // inputs should be less than 5
-                    assert inputs.length <= 5 : "Error while loading, too many arguments";
-                    // filter by task
-                    Task temp;
-                    if (inputs[2].equals("T")) {
-                        temp = new Todo(inputs[0]);
-                    } else if (inputs[2].equals("D")) {
-                        temp = new Deadline(inputs[0], LocalDate.parse(inputs[3]));
-                    } else if (inputs[2].equals("E")) {
-                        temp = new Event(inputs[0], LocalDate.parse(inputs[3]), LocalDate.parse(inputs[4]));
-                    } else {
-                        throw new RoodyException("Error loading text");
-                    }
-                    if (inputs[1].equals("true")) {
-                        temp.setDone();
-                    }
-                    list.add(temp);
-                }
-                s.close();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
         } catch (IOException | RoodyException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("An error occurred.\n" + e.getMessage());
         }
         return list;
     }

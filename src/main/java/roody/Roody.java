@@ -39,16 +39,12 @@ public class Roody {
      * @return A Roody response.
      */
     public String getResponse(String input) {
-        //String message = ui.showLine();
         String message = "";
         try {
             Command c = Parser.parse(input);
             message += c.execute(taskList, ui, storage);
         } catch (RoodyException e) {
-            ui.showLine();
-            message += e.getMessage() + '\n';
-        } finally {
-            //message += ui.showLine();
+            message += e.getMessage();
         }
         return message;
     }

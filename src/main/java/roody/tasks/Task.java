@@ -4,7 +4,7 @@ package roody.tasks;
  * Represents a Task.
  */
 public abstract class Task {
-    private boolean done;
+    private boolean isDone;
     private String description;
 
     /**
@@ -12,17 +12,17 @@ public abstract class Task {
      * @param description The description of the Task.
      */
     public Task(String description) {
-        this.done = false;
+        this.isDone = false;
         this.description = description;
     }
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
     public void setUnDone() {
-        this.done = false;
+        this.isDone = false;
     }
     public char getType() {
         return 'a';
@@ -33,7 +33,7 @@ public abstract class Task {
      * @return Task for saving.
      */
     public String saveTask() {
-        return this.description + '|' + this.done;
+        return this.description + '|' + this.isDone;
     }
     @Override
     public String toString() {
