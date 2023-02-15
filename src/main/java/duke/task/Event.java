@@ -67,4 +67,18 @@ public class Event extends Task {
         String e = Formatter.formatDateForStorage(this.end);
         return ("E | " + super.formatForStorage() + String.format(" | %s | %s", s, e));
     }
+
+    /**
+     * Searches for given date in the task description.
+     *
+     * @param dateToFind The given date to find.
+     * @return True if date matches start or end date, false otherwise.
+     */
+    @Override
+    public boolean containDate(LocalDate dateToFind) {
+        if (this.start.equals(dateToFind) || this.end.equals(dateToFind)) {
+            return true;
+        }
+        return false;
+    }
 }

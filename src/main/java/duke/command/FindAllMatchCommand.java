@@ -5,9 +5,11 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Encapsulates the related fields and behavior of the command to find tasks with a keyword.
+ * Encapsulates the related fields and behavior
+ * of the command to find tasks with names that matches
+ * exactly with the given keyword.
  */
-public class FindCommand extends Command {
+public class FindAllMatchCommand extends Command {
     private String keyword;
 
     /**
@@ -15,12 +17,13 @@ public class FindCommand extends Command {
      *
      * @param keyword The keyword to search for in the list of tasks.
      */
-    public FindCommand(String keyword) {
+    public FindAllMatchCommand(String keyword) {
         this.keyword = keyword;
     }
 
     /**
-     * Finds the tasks that contain the given keyword.
+     * Finds (case-insensitive) the tasks with names that
+     * partially or fully contain the given keyword.
      *
      * @param tasks The ArrayList of tasks.
      * @param storage The class that reads and write program data to hard drive.
@@ -29,6 +32,6 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
-        return tasks.find(this.keyword);
+        return tasks.findAllMatch(this.keyword);
     }
 }

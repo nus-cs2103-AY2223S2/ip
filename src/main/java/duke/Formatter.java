@@ -10,6 +10,7 @@ public class Formatter {
     /**
      * Formats LocalDate to day month year format
      * and returns the string representation of it.
+     *
      * @param localDate The given LocalDate to be formatted.
      * @return Returns the string representation of the formatted date.
      */
@@ -23,6 +24,7 @@ public class Formatter {
     /**
      * Formats LocalDate to yyyy/mm/dd format
      * and returns the string representation of it.
+     *
      * @param localDate The given LocalDate to be formatted.
      * @return Returns the string representation of the formatted date.
      */

@@ -35,12 +35,14 @@ public class DialogBox extends HBox {
 
     /**
      * Instantiates DialogBox.
+     *
      * @param text A string that represents user's input or duke's response.
      * @param img The user's or duke's icon.
      */
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -67,6 +69,7 @@ public class DialogBox extends HBox {
     /**
      * Instantiates DialogBox where the ImageView is on the right and text on the left,
      * which represents the user's input.
+     *
      * @param text The user's input.
      * @param img The user's icon.
      * @return A DialogBox representing the user's input message.
@@ -78,6 +81,7 @@ public class DialogBox extends HBox {
     /**
      * Instantiates DialogBox where the ImageView is on the left and text on the right,
      * which represents the duke's response.
+     *
      * @param text Duke's response.
      * @param img Duke's icon.
      * @return A DialogBox representing duke's response message.

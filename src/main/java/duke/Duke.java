@@ -1,28 +1,23 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.ToDo;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.ToDo;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Encapsulates the related fields and behavior of Duke.
@@ -122,7 +117,8 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(this.userInput , 1.0);
         AnchorPane.setBottomAnchor(this.userInput, 1.0);
 
-        //A handler on the VBox that react to its own size changing and scrolling the ScrollPane down.
+        //A handler on the VBox that react to its own size changing
+        // and scrolling the ScrollPane down.
         //Scroll down to the end every time dialogContainer's height changes.
         this.dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
 
@@ -137,7 +133,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
+     * Creates two dialog boxes, one echoing user input
+     * and the other containing Duke's reply
      * and then appends them to the dialog container.
      * Clears the user input after processing.
      */

@@ -18,6 +18,7 @@ public class Main extends Application {
     /**
      * Stages the primary stage onto the screen.
      * This is the starting point of the application.
+     *
      * @param stage The primary stage for this application.
      */
     @Override
@@ -35,11 +36,12 @@ public class Main extends Application {
     }
 
     /**
-     * Stores data of the tasks in the local hard drive
+     * Stops the entire application and
+     * stores data of the tasks in the local hard drive
      * upon exiting the application.
      */
     @Override
-    public void stop(){
+    public void stop() {
         this.duke.store();
     }
 }

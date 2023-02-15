@@ -1,7 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.Formatter;
 import duke.exception.OutOfBoundsException;
 
 /**
@@ -136,13 +138,13 @@ public class TaskList {
     }
 
     /**
-     * Searches for tasks with names that contain the given keyword
-     * and prints them out.
+     * Searches for tasks with names that completely matches
+     * the given keyword (case-insensitive) and prints them out.
      *
      * @param keyword The keyword to search for.
      * @return The results of the search.
      */
-    public String find(String keyword) {
+    public String findAllMatch(String keyword) {
         int size = this.tasks.size();
         int currIndex = 0;
         int printIndex = 1;
@@ -157,7 +159,64 @@ public class TaskList {
             currIndex++;
         }
         if (printIndex == 1) {
-            return "None of the items in your list matches with \"" + keyword + "\"";
+            return "None of the items in your list completely matches with \"" + keyword + "\"";
+        }
+        assert printIndex > 1 : "Item could not be found.";
+        return sb.toString();
+    }
+
+    /**
+     * Searches for tasks with names that partially or completely matches
+     * the given keyword (case-insensitive) and prints them out.
+     *
+     * @param keyword The keyword to search for.
+     * @return The results of the search.
+     */
+    public String findFlexibly(String keyword) {
+        int size = this.tasks.size();
+        int currIndex = 0;
+        int printIndex = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
+        while (currIndex < size) {
+            Task curr = this.tasks.get(currIndex);
+            if (curr.containKeyword(keyword)) {
+                sb.append(String.format("\n%d. %s", printIndex, curr));
+                printIndex++;
+            }
+            currIndex++;
+        }
+        if (printIndex == 1) {
+            return "None of the items in your list contains the keyword \"" + keyword + "\"";
+        }
+        assert printIndex > 1 : "Item could not be found.";
+        return sb.toString();
+    }
+
+    /**
+     * Searches for tasks with dates that matches
+     * the given date and prints them out.
+     *
+     * @param dateToFind The date to search for.
+     * @return The results of the search.
+     */
+    public String findDate(LocalDate dateToFind) {
+        int size = this.tasks.size();
+        int currIndex = 0;
+        int printIndex = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
+        while (currIndex < size) {
+            Task curr = this.tasks.get(currIndex);
+            if (curr.containDate(dateToFind)) {
+                sb.append(String.format("\n%d. %s", printIndex, curr));
+                printIndex++;
+            }
+            currIndex++;
+        }
+        if (printIndex == 1) {
+            String dateFormatted = Formatter.formatDateForPrint(dateToFind);
+            return "None of the items in your list have the date \"" + dateFormatted + "\"";
         }
         assert printIndex > 1 : "Item could not be found.";
         return sb.toString();

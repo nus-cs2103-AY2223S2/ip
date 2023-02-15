@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Encapsulates the related fields and behavior of a task.
  */
@@ -87,5 +89,15 @@ public class Task {
     public boolean containKeyword(String keyword) {
         String formatName = " " + this.name.toUpperCase() + " ";
         return formatName.contains(keyword.toUpperCase());
+    }
+
+    /**
+     * Searches for given date in the task description.
+     *
+     * @param dateToFind The given date to find.
+     * @return False as Task does not have a date field.
+     */
+    public boolean containDate(LocalDate dateToFind) {
+        return false;
     }
 }

@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeIcon.png"));
 
     /**
-     *
+     * Binds the v value property to the height of the dialogContainer.
      */
     @FXML
     public void initialize() {
@@ -34,7 +34,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Initialise Duke and greets user.
+     * Initialises Duke and greets user.
+     *
      * @param d A Duke instance.
      */
     public void setDuke(Duke d) {

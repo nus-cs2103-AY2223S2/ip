@@ -57,4 +57,18 @@ public class Deadline extends Task {
         return ("D | " + super.formatForStorage()
                 + String.format(" | %s", Formatter.formatDateForStorage(this.end)));
     }
+
+    /**
+     * Searches for given date in the task description.
+     *
+     * @param dateToFind The given date to find.
+     * @return True if date matches start or end date, false otherwise.
+     */
+    @Override
+    public boolean containDate(LocalDate dateToFind) {
+        if (this.end.equals(dateToFind)) {
+            return true;
+        }
+        return false;
+    }
 }

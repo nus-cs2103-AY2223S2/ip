@@ -9,6 +9,7 @@ import javafx.application.Application;
 public class Launcher {
     /**
      * Starts the application.
+     *
      * @param args A string array of arguments from the command line.
      */
     public static void main(String... args) {

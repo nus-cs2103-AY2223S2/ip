@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
@@ -97,7 +97,8 @@ public class Storage {
     }
 
     /**
-     * Write the given string input to file using given fileWriter.
+     * Writes the given string input to file using given fileWriter.
+     *
      * @param fileWriter The fileWriter to use to write input.
      * @param input The input to write into file
      */
