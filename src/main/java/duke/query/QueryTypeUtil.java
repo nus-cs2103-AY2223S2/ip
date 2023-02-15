@@ -4,16 +4,18 @@ package duke.query;
  * The QueryTypeUtil class provides utility functions for handling query types.
  */
 public class QueryTypeUtil {
-    private static final String BYE_QUERY_TYPE = "bye";
-    private static final String LIST_QUERY_TYPE = "list";
-    private static final String MARK_QUERY_TYPE = "mark";
-    private static final String UNMARK_QUERY_TYPE = "unmark";
-    private static final String DELETE_QUERY_TYPE = "delete";
-    private static final String TODO_QUERY_TYPE = "todo";
-    private static final String DEADLINE_QUERY_TYPE = "deadline";
-    private static final String EVENT_QUERY_TYPE = "event";
-    private static final String FIND_QUERY_TYPE = "find";
-    private static final String LOAN_QUERY_TYPE = "loan";
+    public static final String GREET_QUERY_TYPE = "hi";
+    public static final String HELP_QUERY_TYPE = "help";
+    public static final String BYE_QUERY_TYPE = "bye";
+    public static final String LIST_QUERY_TYPE = "list";
+    public static final String MARK_QUERY_TYPE = "mark";
+    public static final String UNMARK_QUERY_TYPE = "unmark";
+    public static final String DELETE_QUERY_TYPE = "delete";
+    public static final String TODO_QUERY_TYPE = "todo";
+    public static final String DEADLINE_QUERY_TYPE = "deadline";
+    public static final String EVENT_QUERY_TYPE = "event";
+    public static final String FIND_QUERY_TYPE = "find";
+    public static final String LOAN_QUERY_TYPE = "loan";
 
     /**
      * @param queryTypeStr string that represents a query type
@@ -21,6 +23,10 @@ public class QueryTypeUtil {
      */
     public static QueryType getQueryTypeFromString(String queryTypeStr) {
         switch (queryTypeStr) {
+        case GREET_QUERY_TYPE:
+            return QueryType.GREET;
+        case HELP_QUERY_TYPE:
+            return QueryType.HELP;
         case TODO_QUERY_TYPE:
             return QueryType.TODO;
         case DEADLINE_QUERY_TYPE:

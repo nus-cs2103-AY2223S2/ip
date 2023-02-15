@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 public class TaskTrackerTest {
     @Test

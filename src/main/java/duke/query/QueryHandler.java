@@ -1,6 +1,7 @@
 package duke.query;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.query.exception.InvalidCommandParamException;
 
 public abstract class QueryHandler {
     /**

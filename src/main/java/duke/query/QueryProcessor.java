@@ -1,6 +1,7 @@
 package duke.query;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.query.exception.UnknownCommandException;
 
 import java.util.HashMap;
 

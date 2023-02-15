@@ -1,6 +1,6 @@
-package duke.query;
+package duke.query.exception;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 public class InvalidCommandParamException extends DukeException {
     public InvalidCommandParamException(String msg) {

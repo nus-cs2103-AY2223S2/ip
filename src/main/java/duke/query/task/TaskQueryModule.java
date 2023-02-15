@@ -2,7 +2,7 @@ package duke.query.task;
 
 import java.util.HashMap;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.query.QueryHandler;
 import duke.query.QueryModule;
 import duke.query.QueryType;

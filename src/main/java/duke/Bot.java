@@ -1,9 +1,11 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.query.Query;
 import duke.query.QueryParser;
 import duke.query.QueryProcessor;
 import duke.query.QueryType;
+import duke.query.core.CoreModule;
 import duke.query.loan.LoanQueryModule;
 import duke.query.task.TaskQueryModule;
 
@@ -20,7 +22,11 @@ public class Bot {
      * @throws DukeException
      */
     public void init() throws DukeException {
-        queryProcessor = new QueryProcessor(new TaskQueryModule(), new LoanQueryModule());
+        queryProcessor = new QueryProcessor(
+                new CoreModule(),
+                new TaskQueryModule(),
+                new LoanQueryModule()
+        );
         hasInit = true;
     }
 

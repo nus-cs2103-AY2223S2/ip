@@ -2,6 +2,7 @@ package duke.gui;
 
 import duke.Bot;
 import duke.BotResult;
+import duke.query.QueryTypeUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -31,6 +32,12 @@ public class MainWindow extends AnchorPane {
 
     public void setBot(Bot b) {
         this.bot = b;
+        String greeting = bot.process(QueryTypeUtil.GREET_QUERY_TYPE).getResponse();
+        String help = bot.process(QueryTypeUtil.HELP_QUERY_TYPE).getResponse();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, dukeImage),
+                DialogBox.getDukeDialog(help, dukeImage)
+        );
     }
 
     @FXML
@@ -39,7 +46,6 @@ public class MainWindow extends AnchorPane {
         if (input.isBlank()) {
             return;
         }
-
         BotResult botResult = bot.process(input);
 
         if (botResult.getStatus() == BotResult.BotStatus.Exit) {

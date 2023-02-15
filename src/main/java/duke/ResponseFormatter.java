@@ -12,6 +12,6 @@ public class ResponseFormatter implements IFormatter {
      */
     @Override
     public String format(String msg) {
-        return String.format("%s\n", msg);
+        return String.format("%s", msg);
     }
 }

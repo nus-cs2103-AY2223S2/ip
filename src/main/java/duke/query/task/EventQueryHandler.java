@@ -1,11 +1,8 @@
 package duke.query.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
-import duke.query.InvalidCommandParamException;
+import duke.exception.DukeException;
 import duke.query.Query;
 import duke.task.Task;
 import duke.task.TaskTracker;

@@ -1,6 +1,8 @@
-package duke.query;
+package duke.query.core;
 
-import duke.DukeException;
+import duke.exception.DukeException;
+import duke.query.Query;
+import duke.query.QueryHandler;
 
 /**
  * The SimpleResponseQueryHandler class handles simple responses to user queries.

@@ -1,9 +1,9 @@
 package duke.query.loan;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.loan.LoanShark;
 import duke.query.QueryHandler;
-import duke.query.InvalidCommandParamException;
+import duke.query.exception.InvalidCommandParamException;
 import duke.query.Query;
 
 public class LoanQueryHandler extends QueryHandler {

@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * The Event class represents a task that has a start date and end date.

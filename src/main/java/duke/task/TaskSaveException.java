@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 public class TaskSaveException extends DukeException {
     public TaskSaveException(String errorMsg) {

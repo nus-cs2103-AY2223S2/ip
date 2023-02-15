@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * The Task class represents a todo item with a description and can be marked / unmarked as complete.
