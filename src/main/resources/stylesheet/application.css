@@ -1,0 +1,20 @@
+.root {
+  /* Applies styling for the root node */
+  -fx-background-color: linear-gradient(
+    from 0% 0% to 100% 200%,
+    repeat,
+    #fbeee6 0%,
+    #dc143c 50%
+  );
+  -fx-font-family: "Courier New";
+}
+
+.label {
+  -fx-font-size: 12;
+  -fx-padding: 10px;
+}
+
+.button {
+    -fx-background-color: #fbeee6;
+    -fx-text-fill:#8B4000;
+}
