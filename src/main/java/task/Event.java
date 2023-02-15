@@ -31,7 +31,7 @@ public class Event extends Task {
      * @return Details of event task.
      */
     public String toText() {
-        return "E" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + startDate + "|" + endDate;
+        return "E" + "|" + getDescription() + "|" + (isDone() ? 1 : 0) + "|" + startDate + "|" + endDate;
     }
 
     /**

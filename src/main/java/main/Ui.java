@@ -52,7 +52,7 @@ public class Ui {
      * Outputs details of the task that is marked as done.
      * @param t Task that is marked as done.
      */
-    public void outputTaskDone(Task t) {
+    public void outputMarkTaskDone(Task t) {
         str.append("Nice! I've marked this task as done:\n");
         str.append(t + "\n");
     }
@@ -61,7 +61,7 @@ public class Ui {
      * Outputs details of the task that is marked as not done.
      * @param t Task that is marked as not done.
      */
-    public void outputTaskNotDone(Task t) {
+    public void outputMarkTaskNotDone(Task t) {
         str.append("OK, I've marked this task as not done yet:\n");
         str.append(t + "\n");
     }
@@ -79,9 +79,9 @@ public class Ui {
      * Outputs details of all the tasks.
      * @param taskList List of tasks.
      */
-    public void outputListTask(TaskList taskList) {
-        str.append("You have ").append(taskList.getTotalNumberOfTask()).append(" tasks in the list.\n");
-        for (int i = 0; i < taskList.getTotalNumberOfTask(); i++) {
+    public void outputAllTask(TaskList taskList) {
+        str.append("You have ").append(taskList.getTotalNumOfTasks()).append(" tasks in the list.\n");
+        for (int i = 0; i < taskList.getTotalNumOfTasks(); i++) {
             str.append(i + 1 + "." + taskList.getTaskAtIndex(i) + "\n");
         }
     }
@@ -91,7 +91,7 @@ public class Ui {
      *
      * @param taskList List of tasks searched.
      */
-    public void outputFindTask(ArrayList<Task> taskList) {
+    public void outputFoundTask(ArrayList<Task> taskList) {
         str.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             str.append(i + 1 + "." + taskList.get(i) + "\n");

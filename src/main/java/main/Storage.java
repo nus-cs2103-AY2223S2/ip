@@ -17,6 +17,7 @@ import task.Todo;
  */
 public class Storage {
     private final String filePath;
+    private Scanner Sc;
 
     /**
      * Constructs Storage.
@@ -25,39 +26,43 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        assert filePath.equals("tasks.txt");
     }
 
     /**
      * Creates a file is file does not exist. Otherwise, read from file to restore list of tasks.
      *
-     * @return List of tasks that is read from file.
      * @throws DukeException Throws exception when there is error reading from file.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public void openFile() throws DukeException {
         try {
-            File f = new File(filePath);
-            f.createNewFile();
-            Scanner s = new Scanner(f);
-            ArrayList<Task> arrOfTask = new ArrayList<>();
-            while (s.hasNext()) {
-                String[] arr = s.nextLine().split("\\|");
-                Task t;
-                if (arr[0].equals("T")) {
-                    t = new Todo(arr[1]);
-                } else if (arr[0].equals("D")) {
-                    t = new Deadline(arr[1], LocalDate.parse(arr[3]));
-                } else {
-                    t = new Event(arr[1], LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
-                }
-                if (arr[2].equals("1")) {
-                    t.taskDone();
-                }
-                arrOfTask.add(t);
-            }
-            return arrOfTask;
+            File file = new File(filePath);
+            file.createNewFile();
+            Sc = new Scanner(file);
         } catch (IOException e) {
             throw new DukeException("Cannot open file");
         }
+    }
+
+    public ArrayList<Task> loadFromFile() {
+        ArrayList<Task> arrOfTasks = new ArrayList<>();
+        while (Sc.hasNext()) {
+            String[] arr = Sc.nextLine().split("\\|");
+            Task t;
+            if (arr[0].equals("T")) {
+                t = new Todo(arr[1]);
+            } else if (arr[0].equals("D")) {
+                t = new Deadline(arr[1], LocalDate.parse(arr[3]));
+            } else {
+                assert arr[1].equals("E");
+                t = new Event(arr[1], LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
+            }
+            if (arr[2].equals("1")) {
+                t.markDone();
+            }
+            arrOfTasks.add(t);
+        }
+        return arrOfTasks;
     }
 
     /**

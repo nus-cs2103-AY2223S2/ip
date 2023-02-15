@@ -10,17 +10,17 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
-    private final LocalDate endDate;
+    private final LocalDate dueDate;
 
     /**
      * Constructs Deadline.
      *
      * @param name Description of the task.
-     * @param endDate Deadline of the task.
+     * @param dueDate Deadline of the task.
      */
-    public Deadline(String name, LocalDate endDate) {
+    public Deadline(String name, LocalDate dueDate) {
         super(name);
-        this.endDate = endDate;
+        this.dueDate = dueDate;
     }
 
     /**
@@ -29,8 +29,7 @@ public class Deadline extends Task {
      * @return Details of deadline task.
      */
     public String toText() {
-
-        return "D" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + endDate;
+        return "D" + "|" + getDescription() + "|" + (isDone() ? 1 : 0) + "|" + dueDate;
     }
 
     /**
@@ -40,6 +39,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + formatOfDate.format(endDate) + ")";
+        return "[D]" + super.toString() + " (by: " + formatOfDate.format(dueDate) + ")";
     }
 }

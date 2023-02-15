@@ -7,7 +7,7 @@ public class Todo extends Task {
 
 
     /**
-     * Construct Todo.
+     * Construct todo.
      *
      * @param name Description of the task.
      */
@@ -22,7 +22,7 @@ public class Todo extends Task {
      */
     public String toText() {
 
-        return "T" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0);
+        return "T" + "|" + getDescription() + "|" + (isDone() ? 1 : 0);
     }
 
     /**

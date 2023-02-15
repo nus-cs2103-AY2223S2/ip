@@ -35,7 +35,7 @@ public class FindCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> t = taskList.findTask(keyword);
-        ui.outputFindTask(t);
+        ui.outputFoundTask(t);
     }
 }
 

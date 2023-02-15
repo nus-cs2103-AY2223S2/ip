@@ -32,13 +32,15 @@ public class DeleteTaskCommand extends Command {
      * @throws DukeException Throws exception if user input is invalid.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (index > taskList.getTotalNumberOfTask()) {
-            throw new DukeException("Index too large");
-        } else if (index < 0) {
-            throw new DukeException("Index too small");
+        if (!isValidIndex(index, taskList.getTotalNumOfTasks())) {
+            throw new DukeException("Index is out of bound");
         }
         Task t = taskList.deleteTask(index);
         storage.writeFile(taskList);
         ui.outputDeleteTask(t);
+    }
+
+    public boolean isValidIndex(int index, int totalNumOfTasks) {
+        return index >= 0 && index <= totalNumOfTasks;
     }
 }

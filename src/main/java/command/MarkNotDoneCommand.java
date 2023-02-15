@@ -31,14 +31,16 @@ public class MarkNotDoneCommand extends Command {
      * @throws DukeException Throws exception if index is invalid.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (index > taskList.getTotalNumberOfTask()) {
-            throw new DukeException("Index too large");
-        } else if (index < 0) {
-            throw new DukeException("Index too small");
+        if (!isValidIndex(index, taskList.getTotalNumOfTasks())) {
+            throw new DukeException("Index is out of bound");
         }
-        Task t = taskList.taskNotDone(index);
+        Task t = taskList.markTaskNotDone(index);
         storage.writeFile(taskList);
-        ui.outputTaskNotDone(t);
+        ui.outputMarkTaskNotDone(t);
+    }
+
+    public boolean isValidIndex(int index, int totalNumOfTasks) {
+        return index >= 0 && index <= totalNumOfTasks;
     }
 }
 
