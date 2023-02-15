@@ -93,17 +93,33 @@ Here is the current list:
  1.[T][] buy book
 ```
 
-### remind - View all current tasks
-View all current tasks currently managed by Nerdbot.
+### reminder [days] - View all tasks that are "days" from deadline
+View all tasks that needs reminders.
 
 Example of usage: 
 
-`list`
+`reminder 10`
 
 Expected outcome:
-Nerdbot will show all tasks currently managed.
+Nerdbot will show all upcoming deadlines/events
 
 ```
-Here is the current list:
- 1.[T][] buy book
+REMINDERS!:
+4 days to Event:
+[E][] book event (from: Dec 25 2023 to: Dec 27 2023)
+```
+
+### find [description] - Find a specific task
+Find and displays all tasks that associate with the given description.
+
+Example of usage: 
+
+`find book`
+
+Expected outcome:
+Display all tasks that have the given description.
+
+```
+Easy command for me! Here are the tasks that are associated with book:
+[T][] read book
 ```
