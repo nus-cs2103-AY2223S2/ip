@@ -27,7 +27,7 @@ public class TodoCommand extends Command {
         try {
             String[] normalised = InputValidator.normaliseTodoInput(this.input);
             ToDo task = new ToDo(normalised[1]);
-            this.ui.println(task.toString());
+            this.ui.println("New task created!", "", task.toString());
             this.ui.printSeparator();
             new ListCommand(this.ui).execute();
         } catch (InvalidCommandException e) {

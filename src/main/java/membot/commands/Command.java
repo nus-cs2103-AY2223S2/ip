@@ -91,19 +91,3 @@ public abstract class Command {
     public abstract void execute();
 }
 
-/**
- * Valid commands that is recognised by membot.Membot.
- */
-enum CommandType {
-    HELP,
-    LIST,
-    DONE,
-    UNDONE,
-    DELETE,
-    FIND,
-    TODO,
-    DEADLINE,
-    EVENT,
-    SORT,
-    BYE
-}
