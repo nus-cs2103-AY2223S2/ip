@@ -137,15 +137,4 @@ public class Event extends Task {
         return result;
     }
 
-
-
-
-    private boolean hasOverlapWith(Event event) {
-        return event.getStartTime().compareTo(this.getEndTime()) < 0;
-    }
-
-    public boolean isExceededWithOverlapBy(Event event) {
-        return (this.hasOverlapWith(event) && (event.getEndTime()
-                .compareTo(this.getEndTime()) > 0));
-    }
 }

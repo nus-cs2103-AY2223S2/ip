@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final UWUTaskmaster taskmaster = new UWUTaskmaster();
+    private final UwUTaskmaster taskmaster = new UwUTaskmaster();
 
     /**
      * Initializes and displays the main application window.

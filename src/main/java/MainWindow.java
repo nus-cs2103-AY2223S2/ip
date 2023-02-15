@@ -1,3 +1,5 @@
+import java.io.InputStream;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,13 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.InputStream;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    public AnchorPane myAnchorPane;
+    @FXML
+    private AnchorPane myAnchorPane;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -22,18 +25,26 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private UWUTaskmaster taskmaster;
+    private UwUTaskmaster taskmaster;
 
-    InputStream userImageStream = this.getClass().getResourceAsStream("/images/profile.jpg");
-    InputStream taskMasterStream = this.getClass().getResourceAsStream("/images/uwu.jpg");
-    Image userImage = new Image(userImageStream);
-    Image taskMasterImage = new Image(taskMasterStream);
+    private final InputStream userImageStream = this.getClass().getResourceAsStream("/images/profile.jpg");
+    private final InputStream taskMasterStream = this.getClass().getResourceAsStream("/images/uwu.jpg");
 
+    private final Image userImage;
+    private final Image taskMasterImage;
 
+    {
+        assert userImageStream != null;
+        userImage = new Image(userImageStream);
+        assert taskMasterStream != null;
+        taskMasterImage = new Image(taskMasterStream);
+    }
+
+    /**
+     * Initialises the user interface of the application.
+     */
     @FXML
     public void initialize() {
-        assert userImageStream != null;
-        assert taskMasterStream != null;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -42,7 +53,7 @@ public class MainWindow extends AnchorPane {
      *
      * @param d the TaskMaster object to use
      */
-    public void setTaskMaster(UWUTaskmaster d) {
+    public void setTaskMaster(UwUTaskmaster d) {
         taskmaster = d;
     }
 

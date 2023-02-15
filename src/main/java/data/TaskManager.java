@@ -104,34 +104,42 @@ public class TaskManager {
         return taskView;
     }
 
-    private ArrayList<Event> getEventsAfterNow() {
+    /**
+     * Returns a list of incomplete Events whose end times are after the current time.
+     *
+     * @return the list of incomplete Events
+     */
+    private ArrayList<Event> getIncompleteEventsAfterNow() {
         LocalDateTime currentTime = LocalDateTime.now();
-        // note that this is temporary
-        LocalDateTime dateTime = LocalDateTime.of(2023, 2, 10, 9, 30);
         return taskList.stream()
                 .filter(task -> {
-            if (task instanceof Event) {
-                LocalDateTime endTime = ((Event) task).getEndTime();
-                return endTime.compareTo(dateTime) > 0;
-            }
-            return false;
-        }).map(task -> (Event) task)
+                    if (task instanceof Event) {
+                        if (task.isCompleted()) {
+                            return false;
+                        }
+                        LocalDateTime endTime = ((Event) task).getEndTime();
+                        return endTime.compareTo(currentTime) > 0;
+                    }
+                    return false;
+                }).map(task -> (Event) task)
                 .sorted(Comparator.comparing(Event::getStartTime))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-
+    /**
+     * Returns a list of FreeTimeBlock instances which are calculated from the user's schedule.
+     * @param desiredFreeTime the sought amount of free time in seconds
+     * @return the list of FreeTimeBlock instances
+     */
     public ArrayList<FreeTimeBlock> getFreeTimes(int desiredFreeTime) {
-        ArrayList<Event> eventsList = getEventsAfterNow();
-//        eventsList.forEach(event -> System.out.println(event.toString()));
+        ArrayList<Event> eventsList = getIncompleteEventsAfterNow();
         ArrayList<FreeTimeBlock> freeTimeBlocks = new ArrayList<>();
-        LocalDateTime dateTime = LocalDateTime.of(2023, 2, 10, 9, 30);
 
-        if (
-                (eventsList.size() > 0) &&
-                (eventsList.get(0)
+        if ((
+                eventsList.size() > 0)
+                        && (eventsList.get(0)
                 .getStartTime()
-                .compareTo(dateTime) > 0)) {
+                .compareTo(LocalDateTime.now()) > 0)) {
             freeTimeBlocks.add(new FreeTimeBlock(null, eventsList.get(0).getStartTime()));
         }
 
@@ -139,14 +147,16 @@ public class TaskManager {
 
             if (eventsList.isEmpty()) {
                 freeTimeBlocks.add(new FreeTimeBlock(null, null));
-                freeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
-                return freeTimeBlocks;
+                return freeTimeBlocks.stream()
+                        .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))
+                        .collect(Collectors.toCollection(ArrayList::new));
             }
 
             Event event = eventsList.get(0);
             freeTimeBlocks.add(new FreeTimeBlock(event.getEndTime(), null));
-            freeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
-            return freeTimeBlocks;
+            return freeTimeBlocks.stream()
+                    .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
 
         LocalDateTime freeBlockStart = eventsList.get(0).getEndTime();
@@ -166,8 +176,6 @@ public class TaskManager {
         }
 
         freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, null));
-
-        //        filteredFreeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
 
         return freeTimeBlocks.stream()
                 .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))

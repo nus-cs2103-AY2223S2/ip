@@ -1,5 +1,3 @@
-import java.io.InputStream;
-
 import static javafx.application.Platform.exit;
 
 import data.TaskFileReaderWriter;
@@ -12,8 +10,7 @@ import utils.Parser;
  * of tasks such as events, deadlines and to-dos
  * @author Nicholas Lee
  */
-public class UWUTaskmaster  {
-
+public class UwUTaskmaster {
     private final TaskFileReaderWriter taskReaderWriter;
     private final Parser parser;
     private final TaskManager taskManager;
@@ -21,7 +18,7 @@ public class UWUTaskmaster  {
     /**
      * Initialises the bot
      */
-    public UWUTaskmaster() {
+    public UwUTaskmaster() {
 
         // Create a TaskFileReaderWriter instance to read from the txt file
         this.taskReaderWriter = new TaskFileReaderWriter();
@@ -35,10 +32,10 @@ public class UWUTaskmaster  {
         this.parser = new Parser(taskManager);
     }
     /**
-     Handles user input by checking for the keyword "bye" and if so, updates the task file and exits the application.
-     If the input does not contain "bye", the input is processed by the parser to get a bot response.
-     The user input and bot response are added to the main window.
-     @param input The user input as a string.
+     * Handles user input by checking for the keyword "bye" and if so, updates the task file and exits the application.
+     * If the input does not contain "bye", the input is processed by the parser to get a bot response
+     * @param input The user input as a string.
+     * @return The bot response as a string
      */
     public String getResponse(String input) {
 
@@ -50,8 +47,6 @@ public class UWUTaskmaster  {
             exit();
             return "";
         }
-
-        //        mainWindow.addDialogue(input, botResponse);
         return parser.processInput(input);
     }
 

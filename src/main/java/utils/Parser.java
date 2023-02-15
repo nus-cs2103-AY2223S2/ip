@@ -67,15 +67,15 @@ public class Parser {
     /**
      * This method is used to parse user input and obtain the user's exact desired free time in seconds
      *
-     * @param input the raw input string provided by the user
-     * @return a String representing the user's query of a task
+     * @param input the raw input number (in hours) as string provided by the user
+     * @return an integer representing the number of free seconds the user is requesting
      * @throws DukeInvalidCommandException if the input provided by the user could not be parsed
      */
     public int getDesiredFreeTime(String input) throws DukeInvalidCommandException {
         String[] segments = input.split(" ", 2);
         int result;
         try {
-            result = Integer.parseInt(segments[1]);
+            result = Integer.parseInt(segments[1]) * 3600;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
         }
@@ -229,6 +229,11 @@ public class Parser {
         return Format.displayFilteredTasks(taskView);
     }
 
+    /**
+     * Finds the earliest free time block that fits the user's desired free time
+     * @param input the user's input specifying the desired free time
+     * @return a String containing a description of the earliest free time block that fits the desired free time
+     */
     public String findFreeTimeEvent(String input) {
         int desiredFreeTime;
         String output;
@@ -237,7 +242,7 @@ public class Parser {
         } catch (DukeInvalidCommandException e) {
             return e.getMessage();
         }
-        ArrayList<FreeTimeBlock> freeTimes= taskManager.getFreeTimes(desiredFreeTime);
+        ArrayList<FreeTimeBlock> freeTimes = taskManager.getFreeTimes(desiredFreeTime);
 
         if (freeTimes.isEmpty()) {
             output = Response.NO_FREE_SLOTS.toString();

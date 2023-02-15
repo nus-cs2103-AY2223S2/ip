@@ -112,7 +112,8 @@ public enum Response {
     NO_FREE_SLOTS {
         @Override
         public String toString() {
-            return "Noo I can't find any free slots for the duration you requested! Why you so busy? Perhaps twy again?";
+            return "Noo I can't find any free slots for the duration you requested! "
+                    + "Why you so busy? Perhaps twy again?";
         }
     },
 
