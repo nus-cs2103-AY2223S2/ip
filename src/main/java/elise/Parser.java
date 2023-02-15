@@ -41,63 +41,95 @@ public class Parser {
         case LIST:
             return new Command(1);
         case MARK:
-            try {
-                rank = Integer.parseInt(s);
-                return new Command(2, rank - 1);
-            } catch (NumberFormatException e) {
-                throw new EliseException("OOPS! mark must have an integer rank");
-            }
+            return mark(s);
         case UNMARK:
-            try {
-                rank = Integer.parseInt(s);
-                return new Command(3, rank - 1);
-            } catch (NumberFormatException e) {
-                throw new EliseException("OOPS! unmark must have an integer rank");
-            }
+            return unmark(s);
         case TODO:
-            if (s.isEmpty()) {
-                throw new EliseException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            return new Command(4, new String[] {s});
+            return todo(s);
         case DEADLINE:
-            message = s.split("/by ");
-            message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
-            if (message.length != 2 || message[0].isEmpty() || message[1].isEmpty()) {
-                throw new EliseException("OOPS!!! Command should be in the format 'deadline [D] /by [D]'\n"
-                        + "The descriptions, [] cannot be empty.");
-            }
-            return new Command(5, message);
+            return deadline(s);
         case EVENT:
-            int indexFrom = s.indexOf("/from");
-            int indexTo = s.indexOf("/to");
-            message = s.split("/from |/to ");
-            message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
-            if (message.length != 3 || message[0].isEmpty()
-                    || message[1].isEmpty() || message[2].isEmpty()
-                    || indexFrom == -1 || indexTo == -1 || indexFrom >= indexTo) {
-                throw new EliseException("OOPS!!! Command should be in the format 'event [M] /from [D] /to [D]'\n"
-                        + "The descriptions, [] cannot be empty.");
-            }
-            return new Command(6, message);
+            return event(s);
         case DELETE:
-            try {
-                rank = Integer.parseInt(s);
-                return new Command(7, rank - 1);
-            } catch (NumberFormatException e) {
-                throw new EliseException("OOPS! delete must have an integer rank.");
-            }
+            return delete(s);
         case FIND:
-            if (s.isEmpty()) {
-                throw new EliseException("Specify a keyword.");
-            }
-            return new Command(8, s);
+            return find(s);
         case HELP:
             return new Command(9);
         default:
             // Unreachable
             return null;
         }
+    }
 
+    private static Command find(String s) throws EliseException {
+        if (s.isEmpty()) {
+            throw new EliseException("Specify a keyword.");
+        }
+        return new Command(8, s);
+    }
+
+    private static Command delete(String s) throws EliseException {
+        int rank;
+        try {
+            rank = Integer.parseInt(s);
+            return new Command(7, rank - 1);
+        } catch (NumberFormatException e) {
+            throw new EliseException("OOPS! delete must have an integer rank.");
+        }
+    }
+
+    private static Command event(String s) throws EliseException {
+        String[] message;
+        int indexFrom = s.indexOf("/from");
+        int indexTo = s.indexOf("/to");
+        message = s.split("/from |/to ");
+        message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
+        if (message.length != 3 || message[0].isEmpty()
+                || message[1].isEmpty() || message[2].isEmpty()
+                || indexFrom == -1 || indexTo == -1 || indexFrom >= indexTo) {
+            throw new EliseException("OOPS!!! Command should be in the format 'event [M] /from [D] /to [D]'\n"
+                    + "The descriptions, [] cannot be empty.");
+        }
+        return new Command(6, message);
+    }
+
+    private static Command deadline(String s) throws EliseException {
+        String[] message;
+        message = s.split("/by ");
+        message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
+        if (message.length != 2 || message[0].isEmpty() || message[1].isEmpty()) {
+            throw new EliseException("OOPS!!! Command should be in the format 'deadline [D] /by [D]'\n"
+                    + "The descriptions, [] cannot be empty.");
+        }
+        return new Command(5, message);
+    }
+
+    private static Command todo(String s) throws EliseException {
+        if (s.isEmpty()) {
+            throw new EliseException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        return new Command(4, new String[]{s});
+    }
+
+    private static Command unmark(String s) throws EliseException {
+        int rank;
+        try {
+            rank = Integer.parseInt(s);
+            return new Command(3, rank - 1);
+        } catch (NumberFormatException e) {
+            throw new EliseException("OOPS! unmark must have an integer rank");
+        }
+    }
+
+    private static Command mark(String s) throws EliseException {
+        int rank;
+        try {
+            rank = Integer.parseInt(s);
+            return new Command(2, rank - 1);
+        } catch (NumberFormatException e) {
+            throw new EliseException("OOPS! mark must have an integer rank");
+        }
     }
 
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
