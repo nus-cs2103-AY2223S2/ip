@@ -22,6 +22,8 @@ public class Ui {
     /** Formats reply to tell user task has been added. */
     public String formatAddTaskReply(TaskList taskList, Task task) {
         String formattedReply;
+        assert taskList != null;
+        assert task != null;
         formattedReply = String.format(
                 "Got it. I've added this task:\n\t%s\n"
                         + "Now you have %d task(s) in the list.",
