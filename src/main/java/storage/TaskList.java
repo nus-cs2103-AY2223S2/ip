@@ -39,6 +39,7 @@ public class TaskList {
         if (inputLine.length > 1) {
             throw new DukeException("\t ☹ OOPS!!! The format is invalid!\n");
         }
+        assert inputLine.length == 1;
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
             str += "\t " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
@@ -71,6 +72,7 @@ public class TaskList {
         if (inputLine.length < 2) {
             throw new DukeException("\t ☹ OOPS!!! The format is invalid, please give numbers.\n");
         }
+        assert inputLine.length == 2;
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(inputLine[1]);
@@ -103,6 +105,7 @@ public class TaskList {
         if (inputLine.length < 2) {
             throw new DukeException("\t ☹ OOPS!!! The format is invalid, please give numbers.\n");
         }
+        assert inputLine.length == 2;
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(inputLine[1]) - 1;
@@ -135,6 +138,7 @@ public class TaskList {
         if (inputLine.length < 2) {
             throw new DukeException("\t ☹ OOPS!!! The format is invalid, please give a search information.\n");
         }
+        assert inputLine.length == 2;
         ui.printFindTaskMsg();
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
