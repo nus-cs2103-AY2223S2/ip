@@ -1,11 +1,13 @@
-todo read book
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
-todo fix laptop
+list
+todo Complete CS2103T Quiz
+deadline iP Submission /by 17/02/2023 23:59
+todo Prepare TA slides
+event 2101 OP1 presentation /from 16/02/2023 12:00 /to 16/02/2023 14:00
+list
 mark 1
-list
-mark 3
-unmark 1
-delete 1
-list
+todo Meet Alice for lunch
+todo Complete Essay for GESS1025
+find presentation
+listdate 17/02/2023
+delete 3,5
 bye

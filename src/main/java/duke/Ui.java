@@ -61,6 +61,7 @@ public class Ui {
         if (listSize == 0) {
             return "You have no tasks...";
         }
+        displayResult += "Here are your tasks: \n\n";
         for (int i = 1; i <= listSize; i++) {
             displayResult += i + ". " + list.getTask(i).toString() + '\n';
         }
@@ -123,8 +124,9 @@ public class Ui {
      * @param list the TaskList storing the Task objects
      */
     public String matchFoundDisplay(TaskList list) {
-        String displayResult = "Here are the matching tasks in your list:\n";
+        String displayResult = "";
         displayResult += displayList(list);
         return displayResult;
     }
+
 }

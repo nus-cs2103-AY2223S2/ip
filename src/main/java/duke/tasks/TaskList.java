@@ -160,7 +160,7 @@ public class TaskList {
      * @return the filtered list
      */
     public ArrayList<Task> getFilteredTasks(String keyword) {
-        return this.tasks.stream().filter(x -> x.toString()
-                .contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
+        return this.tasks.stream().filter(x -> x.toString().toLowerCase()
+                .contains(keyword.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 }

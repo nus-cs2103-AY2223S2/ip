@@ -102,7 +102,7 @@ public class Command {
         } catch (DukeException e) {
             commandResponse = String.format("%s\n", e);
         }
-
+        System.out.println(commandResponse);
         return commandResponse;
     }
 
@@ -185,10 +185,10 @@ public class Command {
         int counter = 1;
         String response = "";
 
-        for (int i = 0; i < this.list.getListLength(); i++) {
+        for (int i = 1; i <= this.list.getListLength(); i++) {
             String taskType = this.list.getTask(i).getTaskType();
-            LocalDate taskDate = this.list.getTask(i).getDate().toLocalDate();
             if (taskType.equals("D") || taskType.equals(("E"))) {
+                LocalDate taskDate = this.list.getTask(i).getDate().toLocalDate();
                 if (date.equals(taskDate)) {
                     response += String.format("\t%d. %s", counter,
                             this.list.getTask(i).toString()) + '\n';
@@ -196,6 +196,10 @@ public class Command {
             }
         }
         assert response != null;
+        if (response.equals("")) {
+            return "There are no tasks on this date.";
+        }
+        response = "Here are your tasks: \n" + response;
         return response;
     }
 
