@@ -38,6 +38,40 @@ public class UserInteraction {
         System.out.println("");
     }
 
+    public String printGuiLogo() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        return printWithBracketGui(logo);
+    }
+
+    public String printWithBracketGui(String input) {
+        String toPrintOut = "";
+        if (input.contains("\n")) {
+            String[] inputSplitArray = input.split("\n");
+            List<String> inputSplitList = Arrays.asList(inputSplitArray);
+            int max = 0;
+            for (int i = 0; i < inputSplitList.size(); i++) {
+                if (inputSplitList.get(i).length() > max) {
+                    max = inputSplitList.get(i).length();
+                }
+            }
+            toPrintOut += "_".repeat(max) + "\n";
+            toPrintOut += input + "\n";
+            toPrintOut += "_".repeat(max) + "\n";
+        } else {
+            int size = input.length();
+            toPrintOut += "_".repeat(size) + "\n";
+            toPrintOut += input;
+            toPrintOut += "_".repeat(size) + "\n";
+        }
+        return toPrintOut;
+    }
+
+
+
     /**
      * Print a specified {@code String} input wrapped
      * in a styled box.
