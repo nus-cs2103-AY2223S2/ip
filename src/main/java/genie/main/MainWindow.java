@@ -22,15 +22,15 @@ public class MainWindow extends AnchorPane {
 
     private Genie genie;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/img_5.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/genie.jpeg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image genieImage = new Image(this.getClass().getResourceAsStream("/images/genie.jpeg"));
 
     @FXML
     public void initialize() {
         this.genie = new Genie();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greeting = showGreeting(genie);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getGenieDialog(greeting, genieImage));
     }
 
     public void setDuke(Genie g) {
@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
         String response = genie.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getGenieDialog(response, genieImage)
         );
         userInput.clear();
     }

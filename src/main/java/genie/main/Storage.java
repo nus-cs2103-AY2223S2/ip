@@ -16,7 +16,7 @@ public class Storage {
     private static final char TODO = 'T';
     private static final char EVENT = 'E';
     private static final char DEADLINE = 'D';
-    private static final String PATH = "./data/duke.txt";
+    private static final String PATH = "./data/genie.txt";
     private static FileWriter fw;
     private ArrayList<String> loadedTasks;
 
@@ -34,9 +34,10 @@ public class Storage {
      * @return <code>TaskList</code> containing an array of Tasks read from the file
      * @throws IOException if an error occurs while loading the data
      */
-    //@author mandykqh-reused
-    //Reused from https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
-    //with minor modifications
+    // @author mandykqh-reused
+    // Reused from https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create
+    // -the-files-in-that-direct
+    // with minor modifications
     public TaskList loadData() throws IOException {
         File directory = new File("./data");
         if (!directory.exists()){
@@ -61,7 +62,6 @@ public class Storage {
     public TaskList readTextFileToList(File f) throws IOException {
         Scanner fileString = new Scanner(f);
         TaskList tasks = new TaskList();
-        //boolean fileHasNext = fileString.hasNext();
         while (fileString.hasNext()) {
             String strTask = fileString.nextLine();
             char taskLetter = strTask.charAt(1);
@@ -78,7 +78,7 @@ public class Storage {
                 break;
             }
         }
-        saveListToFile(tasks.getTasks()); //TODO save by each task as stopping program/bugs wipes all data
+        saveListToFile(tasks.getTasks()); //TODO !! save by each task as stopping program/bugs wipes all data
         return tasks;
     }
     /*

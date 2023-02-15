@@ -140,23 +140,25 @@ public class Ui {
         return numberedTaskInfo;
     }
     public String showAllCommands() {
-        String allCommands = "* todo <task>\n" +
-                "* event <task> /from <time> /to <time>\n" +
-                "* deadline <task> /by <time>\n" +
+        String allCommands = "• todo <task>\n" +
+                "• event <task> /from <time> /to <time>\n" +
+                "• deadline <task> /by <time>\n" +
                 "    - <time> (optional): YYYY-MM-DD HH:MM\n" +
                 "\n" +
-                "* delete <list number>\n" +
+                "• delete <list number>\n" +
                 "    - deletes that task on the list\n" +
-                "* mark <list number>\n" +
+                "• mark <list number>\n" +
                 "    - marks that task as done\n" +
-                "* unmark <list number>\n" +
+                "• unmark <list number>\n" +
                 "    - marks that task as undone\n" +
-                "* list\n" +
+                "• list\n" +
                 "    - shows your consolidated task list\n" +
-                "* find <keyword>\n" +
+                "• find <keyword>\n" +
                 "    - finds all tasks with the specified keyword\n" +
-                "* help\n" +
-                "    - shows help page";
+                "• help\n" +
+                "    - shows help page\n" +
+                "• bye\n" +
+                "    - saves your task list and terminates the application";
         return allCommands;
     }
 }
