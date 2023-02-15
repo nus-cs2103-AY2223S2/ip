@@ -8,7 +8,7 @@ the benefits of a Graphical User Interface (GUI).
 1. Ensure you have Java 11 or above installed in your computer. Else, you can install it from [here](https://www.oracle.com/java/technologies/downloads/#java11).
 2. Download the latest duke.Launcher.jar from [here](https://github.com/bernicetoh/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
-4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Duke.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
+4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Launcher.jar` command to run the application. A GUI similar to the below should appear in a few seconds.
 <figure>
     <img src="/docs/images/starting_display.png"
          alt="Starting GUI">
@@ -157,7 +157,7 @@ need to save manually.
 |------------|--------------------------------------------------------------------------------------------------------------|
 | list       | `list`                                                                                                       |
 | todo       | `todo [task]`<br/>e.g., `todo homework`                                                                      |
-| deadline   | `deadline [task] /by [YYYY-MM-DD]`<br/>e.g., `deadline return book/by 2019-10-15`                            |
+| deadline   | `deadline [task] /by [YYYY-MM-DD]`<br/>e.g., `deadline return book /by 2019-10-15`                           |
 | event      | `event [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD]`<br/>e.g., `event project /from 2018-03-10 /to 2018-03-11` |
 | mark       | `mark [task number]`<br/>e.g., `mark 1`                                                                      |
 | unmark     | `unmark [task number]`<br/>e.g., `unmark 1`                                                                  |
