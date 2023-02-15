@@ -73,7 +73,7 @@ public class Ui {
                 + "04. MARK A TASK:         mark [index]\n"
                 + "05. UNMARK A TASK:       unmark [index]\n"
                 + "06. DELETE A TASK:       delete [index]\n"
-                + "07. DISPLAY COMMANDS:    help\n"
+                + "07. FIND A TASK:         find [keyword]\n"
                 + "08. LIST ALL TASKS:      list\n"
                 + "09. DISPLAY COMMANDS:    help\n"
                 + "10. EXIT PROGRAM:        bye";

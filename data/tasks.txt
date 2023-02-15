@@ -1,0 +1,8 @@
+T |   | Read Book
+T |   | Eat Lunch
+T | X | Learn Guitar
+T | X | read book
+D |   | Finish CS2103 Project | 2023-03-01T23:59
+D | X | Finish Reading Book | 2023-06-01T23:59
+E |   | CS2103 Meeting | 2023-02-28T18:00 | 2023-02-28T20:00
+E |   | Meet Friends | 2023-04-15T12:00 | 2023-04-15T18:00
