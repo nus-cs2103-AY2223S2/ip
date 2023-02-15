@@ -47,13 +47,13 @@ Example of usage:
 `todo buy groceries [/tag impt...]`
 
 ### `deadline`
-Adds a Deadline task to your list with the specified due date and time in the format `yyyy-MM-dd HH:mm`. Tags are optional (indicated by []).
+Adds a Deadline task to your list with the specified due date and time in the format `yyyy-MM-dd HH:mm`. Tags are optional (indicated by [ ]).
 
 Example of usage:
 `deadline assignment /by 2023-03-02 23:59 [/tag impt...]`
 
 ### `event`
-Adds an Event task to your list with the specified start, end dates and times in the format `yyyy-MM-dd HH:mm`. Tags are optional (indicated by []).
+Adds an Event task to your list with the specified start, end dates and times in the format `yyyy-MM-dd HH:mm`. Tags are optional (indicated by [ ]).
 
 Example of usage:
 `event business trip /from 2023-03-01 08:00 /to 2023-03-03 23:00 [/tag impt...]`
