@@ -14,7 +14,7 @@ public class Deadline extends Task {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
 
-    public Deadline(String description, String deadlineString) throws IOException {
+    public Deadline(String description, String deadlineString)  {
         super(description);
         this.deadlineString = deadlineString.strip();
         try {

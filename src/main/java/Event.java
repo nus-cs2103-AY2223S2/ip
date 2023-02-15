@@ -19,7 +19,7 @@ public class Event extends Task {
 
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
-    public Event(String startTime, String endTime, String description) throws IOException {
+    public Event(String startTime, String endTime, String description) {
         super(description);
         String[] startComponents = startTime.strip().split(" ");
         String[] endComponents = endTime.strip().split(" ");
