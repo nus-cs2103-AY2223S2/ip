@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     protected Object from;
@@ -17,18 +18,21 @@ public class Event extends Task {
     }
 
     public void isDate() {
-        LocalDate d1, d2;
+        LocalDate d1;
+        LocalDate d2;
         try {
             d1 = LocalDate.parse((String) from);
             this.from = d1;
             from = ((LocalDate) from).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
+            //do nothing, this.from is not a date.
         }
         try {
             d2 = LocalDate.parse((String) to);
             this.to = d2;
             to = ((LocalDate) to).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
+            //do nothing, this.to is not a date.
         }
     }
 
