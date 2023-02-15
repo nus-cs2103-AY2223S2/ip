@@ -53,6 +53,10 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Prints the list of tasks.
+     * @param tasks
+     */
     public static void printList(ArrayList<Task> tasks) {
         System.out.println("Here are your tasks, you legend!:\n");
         printDivider();
@@ -63,6 +67,11 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Prints the list of tasks with indices.
+     * @param foundTasks
+     * @param foundTaskIndices
+     */
     public static void printListWithIndices(ArrayList<Task> foundTasks, ArrayList<Integer> foundTaskIndices) {
         if (foundTasks.isEmpty()) {
             Ui.printResponse("You've been caught offside my friend, no tasks found!");
@@ -77,6 +86,11 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Returns String representation of the list of tasks.
+     * @param tasks
+     * @return
+     */
     public static String getList(ArrayList<Task> tasks) {
         String response = "Here are your tasks, you legend!:\n\n";
         for (int i = 0; i < tasks.size(); i++) {
@@ -85,6 +99,12 @@ public class Ui {
         return response;
     }
 
+    /**
+     * Returns String representation of the list of found tasks with indices.
+     * @param foundTasks
+     * @param foundTaskIndices
+     * @return
+     */
     public static String getListWithIndices(ArrayList<Task> foundTasks, ArrayList<Integer> foundTaskIndices) {
         if (foundTasks.isEmpty()) {
             return "You've been caught offside my friend, no tasks found!";
@@ -97,18 +117,27 @@ public class Ui {
         return response;
     }
 
+    /**
+     * Returns String representation of Task marked as done.
+     * @param tasks
+     * @param taskNumber
+     * @return
+     */
     public static String getMarkMessage(ArrayList<Task> tasks, int taskNumber) {
         tasks.get(taskNumber).setDone();
         return String.format("Well done on completing the task! Let me mark that as done! Campeon del mundo!\n%s\n", tasks.get(taskNumber));
     }
 
+    /**
+     * Returns String representation of Task marked as not done.
+     * @param tasks
+     * @param taskNumber
+     * @return
+     */
     public static String getUnmarkMessage(ArrayList<Task> tasks, int taskNumber) {
         tasks.get(taskNumber).setNotDone();
         return String.format("Ok, I've marked that as not done! Please get to it :(\n%s\n", tasks.get(taskNumber));
     }
-
-
-
 
 
     /**
@@ -131,6 +160,11 @@ public class Ui {
         printDivider();
     }
 
+    /**
+     * Returns help message (list of available commands).
+     * @return
+     */
+
     public static String getHelp() {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the commands you can use:\n\n");
@@ -147,6 +181,9 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Prints help message (list of available commands).
+     */
     public static void printHelp() {
         Ui.printResponse(Ui.getHelp());
     }
