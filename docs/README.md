@@ -23,7 +23,7 @@ is optimized for use via Command Line Interface (CLI) and Graphical User Interfa
 1. Ensure you have `Java 11` or above installed in your Computer.
 2. Download the latest `chad.jar` from [here](https://github.com/Jnjy/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for your ChadBot.
-4. Open a command terminal, cd into the folder you put the `jar` file in, and use the `java -jar addressbook.jar` command to run the application.
+4. Open a command terminal, cd into the folder you put the `jar` file in, and use the `java -jar chad.jar` command to run the application.
 5. Proceed to explore more on what ChadBot has to offer.
 
 

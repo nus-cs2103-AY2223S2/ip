@@ -54,11 +54,12 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "chad.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "chad"
+    mainClassName = "chad.Launcher"
     archiveClassifier = null
 }
 
