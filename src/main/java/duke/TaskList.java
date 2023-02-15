@@ -61,16 +61,15 @@ public class TaskList {
     /**
      * Takes in a user text input, processes it to find matching records, and returns the response message
      *
-     * @param textInput the input message from the user
+     * @param parts the input message from the user
      * @return the response message to be printed
      * @throws DukeException if no find keyword is given
      */
-    public String find(String textInput) throws DukeException {
-        String[] parts = textInput.split(" ", 2);
+    public String find(String... parts) throws DukeException {
         if (parts.length == 1 || parts[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The description of find command cannot be empty.");
         }
-        String keyword = "(.*)" + textInput.substring(5) + "(.*)";
+        String keyword = "(.*)" + parts[1] + "(.*)";
         String result = "Here are the matching tasks in your list:\n";
         boolean found = false;
         int index = 1;
@@ -89,16 +88,15 @@ public class TaskList {
     /**
      * Takes in a user text input, processes it add a to-do task, and returns the response message
      *
-     * @param textInput the input message from the user
+     * @param parts the input message from the user
      * @return the response message to be printed
      * @throws DukeException if the text input is invalid
      */
-    public String todo(String textInput) throws DukeException {
-        String[] parts = textInput.split(" ", 2);
+    public String todo(String... parts) throws DukeException {
         if (parts.length == 1 || parts[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        Task t = new Task.Todo(textInput.substring(5));
+        Task t = new Task.Todo(parts[1].trim());
         taskList.add(t);
         return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t, taskList.size());
     }
@@ -109,8 +107,7 @@ public class TaskList {
      * @param textInput the input message from the user
      * @return the response message to be printed
      */
-    public String deadline(String textInput) {
-        String[] parts = textInput.split("/");
+    public String deadline(String... parts) {
         Task t = new Task.Deadline(parts[0].substring(9), parts[1].substring(3));
         taskList.add(t);
         return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t, taskList.size());
@@ -122,8 +119,7 @@ public class TaskList {
      * @param textInput the input message from the user
      * @return the response message to be printed
      */
-    public String event(String textInput) {
-        String[] parts = textInput.split("/");
+    public String event(String... parts) {
         Task t = new Task.Event(parts[0].substring(6), parts[1].substring(5), parts[2].substring(3));
         taskList.add(t);
         return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t, taskList.size());

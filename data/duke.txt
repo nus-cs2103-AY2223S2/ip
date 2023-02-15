@@ -1,5 +1,6 @@
-T|1|read book
 D|0|go to perth|2019-11-01
 E|1|play touch|2019-11-01|2019-12-02
 D|0|finish proj|2023-01-01
-E|0|book fair|2023-01-01|2023-01-02
+E|1|book fair|2023-01-01|2023-01-02
+T|0|read book
+D|0|do homework|2023-01-02

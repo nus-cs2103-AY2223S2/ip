@@ -48,7 +48,8 @@ public class Duke {
                 this.storage.writeTxt(tasks);
             } else if (this.parser.action.equals("find")) {
                 try {
-                    response = this.tasks.find(textInput);
+                    String[] parts = textInput.split(" ", 2);
+                    response = this.tasks.find(parts);
                 } catch (DukeException e) {
                     response = e.toString();
                     this.ui.printResponse(response);
@@ -56,7 +57,8 @@ public class Duke {
                 }
             } else if (this.parser.action.equals("todo")) {
                 try {
-                    response = this.tasks.todo(textInput);
+                    String[] parts = textInput.split(" ", 2);
+                    response = this.tasks.todo(parts);
                     this.storage.writeTxt(tasks);
                 } catch (DukeException e) {
                     response = e.toString();
@@ -64,9 +66,11 @@ public class Duke {
                     continue;
                 }
             } else if (this.parser.action.equals("deadline")) {
-                response = this.tasks.deadline(textInput);
+                String[] parts = textInput.split("/");
+                response = this.tasks.deadline(parts);
                 this.storage.writeTxt(tasks);
             } else if (this.parser.action.equals("event")) {
+                String[] parts = textInput.split("/");
                 response = this.tasks.event(textInput);
                 this.storage.writeTxt(tasks);
             } else {
