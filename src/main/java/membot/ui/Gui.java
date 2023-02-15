@@ -22,6 +22,8 @@ public class Gui extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Membot");
+            stage.setMinWidth(400);
+            stage.setMinHeight(600);
             stage.setResizable(false);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setMembot(
