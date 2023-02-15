@@ -1,12 +1,15 @@
 package duke.gui;
 
 import duke.Bot;
+import duke.BotResult;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -37,7 +40,14 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        String response = bot.process(input).getResponse();
+        BotResult botResult = bot.process(input);
+
+        if (botResult.getStatus() == BotResult.BotStatus.Exit) {
+            Platform.exit();
+            return;
+        }
+
+        String response = botResult.getResponse();
         dialogContainer.getChildren().addAll(
                DialogBox.getUserDialog(input, userImage),
                DialogBox.getDukeDialog(response, dukeImage)

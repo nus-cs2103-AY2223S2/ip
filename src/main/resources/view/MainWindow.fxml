@@ -19,7 +19,7 @@
             <content>
                 <VBox fx:id="dialogContainer" prefHeight="515.0" prefWidth="387.0" spacing="30.0" style="-fx-background-color: #2D373F;">
                <padding>
-                  <Insets bottom="70.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="70.0" left="10.0" right="10.0" top="25.0" />
                </padding>
             </VBox>
             </content>

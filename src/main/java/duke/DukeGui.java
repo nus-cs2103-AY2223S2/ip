@@ -29,6 +29,7 @@ public class DukeGui extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(DukeGui.class.getResource(MAIN_WINDOW_RESOURCE_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("iPman");
             stage.setMinHeight(MIN_HEIGHT);
             stage.setMinWidth(MIN_WIDTH);
             stage.setScene(scene);

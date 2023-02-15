@@ -25,9 +25,9 @@
                </color>
             </DropShadow>
          </effect></TextFlow>
-      <VBox alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="44.0">
+      <VBox alignment="BOTTOM_RIGHT" prefHeight="32.0" prefWidth="34.0">
          <children>
-              <ImageView fx:id="displayPicture" fitHeight="44.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+              <ImageView fx:id="displayPicture" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/ipman-profile.png" />
                </image>

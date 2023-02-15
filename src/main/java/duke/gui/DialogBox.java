@@ -49,7 +49,7 @@ public class DialogBox extends HBox {
         dialogText.setFont(dialogueFont);
         dialogText.setFill(paint);
         dialog.setStyle(style);
-        DropShadow dropShadow = new DropShadow(BlurType.ONE_PASS_BOX, (Color) paint, 0, 0, 0, 5);
+        DropShadow dropShadow = new DropShadow(BlurType.ONE_PASS_BOX, (Color) paint, 0, 0, 0, 3);
         dialog.setEffect(dropShadow);
         dialog.getChildren().add(dialogText);
         displayPicture.setImage(img);
