@@ -91,11 +91,14 @@ public class Parser {
             message = "Got it. I've added this task:\n";
             message += taskList.add(task);
             break;
+        case "find":
+            String keyword = instrSplit[1];
+            message = taskList.find(keyword);
+            break;
         default:
             message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
             break;
         }
-
         UI.printWithLines(message);
         return isBye;
     }

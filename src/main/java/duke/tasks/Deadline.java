@@ -12,7 +12,6 @@ import java.time.format.DateTimeParseException;
  * @author jengoc415
  */
 public class Deadline extends Task {
-    private String description;
     private LocalDate dueDate;
 
     /**
