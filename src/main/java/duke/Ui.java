@@ -81,7 +81,7 @@ public class Ui {
      * Welcome message during startup.
      */
     public static void welcomeMessage() {
-        System.out.println("Hello.\n" + "I am a task organizer!\n");
+        System.out.println("Greetings Sigma.\n" + "I am GigaChad. What do you wish to do?\n");
     }
 
     /**
