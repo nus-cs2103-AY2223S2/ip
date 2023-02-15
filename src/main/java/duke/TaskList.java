@@ -58,17 +58,6 @@ public class TaskList {
     }
 
     /**
-     * Method to print out all task in number point form.
-     */
-    public void printTask() {
-        System.out.println("    ____________________________________________________________");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + ". " + tasks.get(i).toString());
-        }
-        System.out.println("    ____________________________________________________________");
-    }
-
-    /**
      * Method to list out all the task currently in the list and return as a string..
      *
      * @return The list of results in a String.
@@ -89,17 +78,6 @@ public class TaskList {
      * Method to delete the selected task.
      *
      * @param index The index of the to be deleted task
-     */
-    public void deleteTask(int index) {
-        Task t = tasks.get(index - 1);
-        tasks.remove(index - 1);
-        System.out.println(t + " is now gone!");
-    }
-
-    /**
-     * Method to delete the selected task.
-     *
-     * @param index The index of the to be deleted task
      * @return String representation of the task that is removed.
      */
     public String deleteTaskWithResult(int index) {
@@ -107,16 +85,6 @@ public class TaskList {
         Task t = tasks.get(index - 1);
         tasks.remove(index - 1);
         return t + " is now gone!";
-    }
-
-    /**
-     * Method to mark the selected task as done.
-     *
-     * @param index The index of the to be marked task
-     */
-    public void markTask(int index) {
-        tasks.get(index - 1).markDone();
-        System.out.println("I marked this task as done:\n" + tasks.get(index - 1));
     }
 
     /**
@@ -134,31 +102,11 @@ public class TaskList {
      * Method to unmark the selected task as done.
      *
      * @param index The index of the to be unmarked task
-     */
-    public void unMarkTask(int index) {
-        tasks.get(index - 1).markUndone();
-        System.out.println("I marked this task as undone:\n" + tasks.get(index - 1));
-    }
-
-    /**
-     * Method to unmark the selected task as done.
-     *
-     * @param index The index of the to be unmarked task
      * @return String representation of the task that is unmarked.
      */
     public String unMarkTaskWithResult(int index) {
         tasks.get(index - 1).markUndone();
         return "I marked this task as undone:\n" + tasks.get(index - 1);
-    }
-
-    /**
-     * Method to print the last task added to the list.
-     */
-    public void printNewestTask() {
-        System.out.println("Task added:\n"
-                + tasks.get(tasks.size() - 1)
-                + "\nTotal task now: "
-                + tasks.size());
     }
 
     /**
@@ -171,18 +119,6 @@ public class TaskList {
                 + tasks.get(tasks.size() - 1)
                 + "\nTotal task now: "
                 + tasks.size();
-    }
-
-    /**
-     * Method to search through the task list to find a specific task
-     * @param searchString The string to search with.
-     */
-    public void searchTask(String searchString) {
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).taskDesc.contains(searchString)) {
-                System.out.println((i + 1) + ". " + tasks.get(i).toString());
-            }
-        }
     }
 
     /**
