@@ -1,7 +1,7 @@
 # User Guide for Duke by Bo kuan
 > Simple task tracker
 
-##Getting started
+## Getting started
 1. Download this repository.
 2. Open your command prompt
 3. Navigate to the directory containing the jar file eg. `cd <path to clone>/build/libs`
