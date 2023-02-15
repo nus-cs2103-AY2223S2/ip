@@ -1,5 +1,9 @@
 
+import java.io.IOException;
+
+
 import java.nio.file.FileAlreadyExistsException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -27,20 +31,8 @@ public class Duke {
         System.out.println("Thanks and have a great day ahead!");
 
 
-
-
-
-
-
-
-
-        }
-
-
-
+    }
 }
-
-
 
 
 
