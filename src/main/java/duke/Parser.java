@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 class Parser {
 
     private TaskList taskList;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private DateTimeFormatter altFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
 
     Parser(TaskList taskList) {
         this.taskList = taskList;
@@ -42,6 +44,13 @@ class Parser {
         }
         out.append(String.format("%d. %s", size, taskList.get(size - 1)));
         return out.toString();
+    }
+
+    String setStatus(String input, Boolean isDone) {
+        int i = Integer.parseInt(input.split(" ", 2)[1]) - 1;
+        Task task = taskList.get(i);
+        task.setStatus(isDone);
+        return String.format("\tNice! I've marked this task as done:\n\t  %s", task);
     }
 
     String mark(String input) {
@@ -81,55 +90,25 @@ class Parser {
     }
 
     String[] addTask(String input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         String[] split = input.split(" ", 2);
         String taskType = split[0];
         try {
             switch (taskType) {
             case "t": //fallthrough
             case "todo": {
-                if (split[1].equals("")) {
-                    DukeException.rethrow("ToDoException");
-                }
-                Task task = new ToDo(split[1]);
-                taskList.add(task);
-                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+                return addToDo(split);
             }
             case "d": {
-                DateTimeFormatter altFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
-                String[] s = split[1].split(" by: ");
-                LocalDateTime byTime = LocalDateTime.parse(s[1], altFormatter);
-                Task task = new Deadline(s[0], byTime);
-                taskList.add(task);
-                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+                return addDeadline(split, true);
             }
             case "deadline": {
-                String[] s = split[1].split(" /by ");
-                LocalDateTime byTime = LocalDateTime.parse(s[1], formatter);
-                Task task = new Deadline(s[0], byTime);
-                taskList.add(task);
-                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+                return addDeadline(split, false);
             }
             case "e": {
-                DateTimeFormatter altFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
-                String[] s = split[1].split(" from: ", 2);
-                String taskDescription = s[0];
-                s = s[1].split(" to: ");
-                LocalDateTime fromTime = LocalDateTime.parse(s[0], altFormatter);
-                LocalDateTime toTime = LocalDateTime.parse(s[1], altFormatter);
-                Task task = new Event(taskDescription, fromTime, toTime);
-                taskList.add(task);
-                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+                return addEvent(split, true);
             }
             case "event": {
-                String[] s = split[1].split(" /from ", 2);
-                String taskDescription = s[0];
-                s = s[1].split(" /to ");
-                LocalDateTime fromTime = LocalDateTime.parse(s[0], formatter);
-                LocalDateTime toTime = LocalDateTime.parse(s[1], formatter);
-                Task task = new Event(taskDescription, fromTime, toTime);
-                taskList.add(task);
-                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+                return addEvent(split, false);
             }
             default:
                 DukeException.rethrow("UnknownCommand");
@@ -138,5 +117,45 @@ class Parser {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    String[] addToDo(String[] input) throws Exception {
+        if (input[1].equals("")) {
+            DukeException.rethrow("ToDoException");
+        }
+        Task task = new ToDo(input[1]);
+        taskList.add(task);
+        return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+    }
+
+    String[] addDeadline(String[] input, Boolean isAlt) {
+        DateTimeFormatter dtFormat;
+        if (isAlt) {
+            dtFormat = altFormatter;
+        } else {
+            dtFormat = formatter;
+        }
+        String[] s = input[1].split(" /by ");
+        LocalDateTime byTime = LocalDateTime.parse(s[1], dtFormat);
+        Task task = new Deadline(s[0], byTime);
+        taskList.add(task);
+        return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+    }
+
+    String[] addEvent(String[] input, Boolean isAlt) {
+        DateTimeFormatter dtFormat;
+        if (isAlt) {
+            dtFormat = altFormatter;
+        } else {
+            dtFormat = formatter;
+        }
+        String[] s = input[1].split(" /from ", 2);
+        String taskDescription = s[0];
+        s = s[1].split(" /to ");
+        LocalDateTime fromTime = LocalDateTime.parse(s[0], dtFormat);
+        LocalDateTime toTime = LocalDateTime.parse(s[1], dtFormat);
+        Task task = new Event(taskDescription, fromTime, toTime);
+        taskList.add(task);
+        return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
     }
 }

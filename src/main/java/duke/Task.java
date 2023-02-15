@@ -24,6 +24,15 @@ abstract class Task {
         isDone = false;
     }
 
+    /**
+     * Marks task if done if boolean is True otherwise False.
+     *
+     * @param isDone Description state of task.
+     */
+    void setStatus(Boolean isDone) {
+        this.isDone = isDone;
+    }
+
     void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
     }
