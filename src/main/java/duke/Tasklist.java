@@ -39,8 +39,7 @@ public class Tasklist {
         case "delete":
             Task deletedTask = storage.get(position);
             storage.remove(position);
-            return "Noted. I've removed this task:\n" + deletedTask.toString() + "\nNow you have " + (storage.size()) + " " +
-                    "tasks in the list";
+            return "Noted. I've removed this task:\n" + deletedTask.toString() + "\nNow you have " + (storage.size()) + " " + "tasks in the list";
         }
         return "";
     }
@@ -68,21 +67,18 @@ public class Tasklist {
         case "todo":
             Todo todoTask = new Todo(content.substring(5), content);
             storage.add(todoTask);
-            return "Got it. I've added this task:\n  " + todoTask.toString() + "\nNow you have " + storage.size() +
-                    " tasks in the list";
+            return "Got it. I've added this task:\n  " + todoTask.toString() + "\nNow you have " + storage.size() + " tasks in the list";
         case "deadline":
             int position = content.indexOf("/by ");
             Deadline deadlineTask = new Deadline(content.substring(9, position), content, content.substring(position + 4));
             storage.add(deadlineTask);
-            return "Got it. I've added this task:\n  " + deadlineTask.toString() + "\nNow you have " + storage.size() +
-                " tasks in the list";
+            return "Got it. I've added this task:\n  " + deadlineTask.toString() + "\nNow you have " + storage.size() + " tasks in the list";
         case "event":
             int position1 = content.indexOf("/from ");
             int position2 = content.indexOf("/to ");
             Event eventTask = new Event(content.substring(6, position1), content, content.substring(position1 + 6, position2), content.substring(position2 + 4));
             storage.add(eventTask);
-            return "Got it. I've added this task:\n  " + eventTask.toString() + "\nNow you have " + storage.size() +
-                    " tasks in the list";
+            return "Got it. I've added this task:\n  " + eventTask.toString() + "\nNow you have " + storage.size() + " tasks in the list";
         }
         return "";
     }

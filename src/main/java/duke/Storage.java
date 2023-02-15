@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
     private PrintWriter storeInFile;
-    private boolean filePresent = false;
+    private boolean isFilePresent = false;
     private File fileCreation;
 
     /**
@@ -37,7 +37,7 @@ public class Storage {
             if (fileCreation.createNewFile()) {
                 System.out.println("File created: " + fileCreation.getName());
             } else {
-                filePresent = true;
+                isFilePresent = true;
                 System.out.println("File already exists.");
             }
 
@@ -78,7 +78,7 @@ public class Storage {
      * @throws FileNotFoundException if the file where the old tasklist was stored at is not available.
      */
     public ArrayList<Task> load() throws DukeException, FileNotFoundException {
-        if (filePresent) {
+        if (isFilePresent) {
             ArrayList<Task> storage = new ArrayList<Task>();
             File fileScanning = new File(filePath);
             Scanner sc = new Scanner(fileScanning);

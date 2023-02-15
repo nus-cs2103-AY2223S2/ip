@@ -14,8 +14,7 @@ public class Parser {
      * @throws DukeException         if user command is not understood or incorrect.
      * @throws FileNotFoundException if file to store the tasklist do not exist.
      */
-    public String parse(String userInput, Tasklist tasklist, Ui ui, Storage storage) throws DukeException,
-            FileNotFoundException {
+    public String parse(String userInput, Tasklist tasklist, Ui ui, Storage storage) throws FileNotFoundException {
         if (userInput.equals("list")) {
             return tasklist.printList();
         } else if (userInput.contains("mark") && userInput.substring(0, 4).equals("mark")) {
@@ -23,7 +22,7 @@ public class Parser {
             if (userInput.substring(5).equals("")) {
                 return "☹ OOPS!!! The task number of mark cannot be empty.";
             } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
-                return"☹ OOPS!!! The task number is greater than the size of tasklist.";
+                return "☹ OOPS!!! The task number is greater than the size of tasklist.";
             }
             int position = Integer.valueOf(userInput.substring(5));
             return tasklist.updateTask("mark", position - 1);
@@ -32,7 +31,7 @@ public class Parser {
             if (userInput.substring(5).equals("")) {
                 return "☹ OOPS!!! The task number of mark cannot be empty.";
             } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
-                return"☹ OOPS!!! The task number is greater than the size of tasklist.";
+                return "☹ OOPS!!! The task number is greater than the size of tasklist.";
             }
             int position = Integer.valueOf(userInput.substring(7));
             return tasklist.updateTask("unmark", position - 1);
@@ -63,7 +62,6 @@ public class Parser {
         } else if (userInput.contains("event") && userInput.substring(0, 5).equals("event")) {
             if (userInput.substring(6).equals("")) {
                 return "☹ OOPS!!! The description of a event cannot be empty.";
-//                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             } else {
                 assert (userInput.substring(6) != null);
                 return tasklist.addingActivities("event", userInput);
@@ -71,7 +69,6 @@ public class Parser {
         } else if (userInput.contains("find") && userInput.substring(0, 4).equals("find")) {
             if (userInput.substring(5).equals("")) {
                 return "☹ OOPS!!! The description of find cannot be empty.";
-//                throw new DukeException("☹ OOPS!!! The description of find cannot be empty.");
             } else {
                 assert (userInput.substring(5) != null);
                 return tasklist.findingActivities(userInput.substring(5));
@@ -83,7 +80,6 @@ public class Parser {
             return ui.bye();
         } else {
             return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-//            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
