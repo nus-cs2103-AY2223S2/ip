@@ -10,8 +10,9 @@ public class ToDoTest {
 
     @Test
     public void toString_singleInstance_correctRepresentation() {
-        Todo todo = new Todo("a");
-        String expectedMessage = "[T][ ] a";
+        String descr = "Todo test";
+        Todo todo = new Todo(descr);
+        String expectedMessage = "Todo test";
         String actualMessage = todo.toString();
         assertEquals(expectedMessage, actualMessage);
     }
