@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.JavaFxGuiOut"
+            maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <GridPane>
+        <TextField
+                fx:id="userInput"
+                GridPane.columnIndex="0"
+                GridPane.columnSpan="1"
+                GridPane.rowIndex="1"
+                GridPane.rowSpan="1"
+                prefWidth="545.0"
+                promptText="Command..."
+                onAction="#handleUserInput"
+        />
+        <Button
+                fx:id="sendButton"
+                GridPane.columnIndex="1"
+                GridPane.columnSpan="1"
+                GridPane.rowIndex="1"
+                GridPane.rowSpan="1"
+                prefWidth="55.0"
+                mnemonicParsing="false"
+                onAction="#handleUserInput"
+                text="Send"
+        />
+        <ScrollPane
+                fx:id="scrollPane"
+                GridPane.columnIndex="0"
+                GridPane.columnSpan="2"
+                GridPane.rowIndex="0"
+                GridPane.rowSpan="1"
+                fitToWidth="true"
+                hbarPolicy="NEVER"
+                vbarPolicy="ALWAYS"
+                prefHeight="385"
+                prefWidth="585"
+                hvalue="1.0"
+                vvalue="1.0">
+            <VBox fx:id="dialogContainer"/>
+        </ScrollPane>
+    </GridPane>
+</AnchorPane>
