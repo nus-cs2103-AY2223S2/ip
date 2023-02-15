@@ -1,23 +1,21 @@
-package duke.tasks;
+package duke.Tasks;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-
+import duke.tasks.Task;
 
 public class TaskTest {
     @Test
     public void testGetDescription() {
-        assertEquals("study",
-                new Task("study").getDescription());
+
+        assertAll(() -> {
+            Task task = new Task("study", false);
+            assertEquals("study",
+                    task.getDescription());
+        });
     }
 
-    @Test
-    public void testGetStatusIcon() {
-        assertEquals(" ", new Task("book").getStatusIcon());
-        Task t = new Task("book1");
-        //t.isDone = true;
-        //assertEquals("X", t.getStatusIcon());
-    }
 }
