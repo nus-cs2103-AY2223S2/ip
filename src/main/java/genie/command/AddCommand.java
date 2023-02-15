@@ -5,6 +5,8 @@ import genie.main.TaskList;
 import genie.main.Ui;
 import genie.task.Task;
 
+import java.io.IOException;
+
 public class AddCommand extends Command {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
@@ -18,7 +20,7 @@ public class AddCommand extends Command {
         this.fullCommand = fullCommand;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         switch (taskType) {
         case TODO: // todo change to constant
             task = taskList.addToDoFromUser(fullCommand);
