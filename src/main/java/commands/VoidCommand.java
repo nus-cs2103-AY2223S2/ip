@@ -1,23 +1,33 @@
 package commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import dukeexceptions.DukeException;
 import dukeexceptions.IllegalCommandException;
 import elems.Storage;
 import elems.TaskList;
 import elems.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class VoidCommand extends Command{
+/**
+ * Represents a <code>Command</code> that does not influence the state of the <code>TaskList</code>
+ * @author clydelhui
+ */
+public class VoidCommand extends Command {
     enum VoidType {
         LIST,
         BYE,
         FORCEQUIT
     }
 
-    private VoidType voidType;
+    private final VoidType voidType;
 
+    /**
+     * Constructor to produce a new <code>VoidCommand</code>
+     * @param keyword The keyword for the given <code>VoidCommand</code>
+     * @param params The parameters associated with the given <code>VoidCommand</code>
+     * @throws IllegalCommandException When the given keyword is not valid
+     */
     public VoidCommand(String keyword, ArrayList<String> params) throws IllegalCommandException {
         super(keyword, params);
 
@@ -37,6 +47,13 @@ public class VoidCommand extends Command{
 
     }
 
+    /**
+     * {@inheritDoc}
+     * @param tasks The <code>TaskList</code> to be acted on by the <code>Command</code>
+     * @param ui The <code>Ui</code> to be acted on by the <code>Command</code>
+     * @param storage The <code>Storage</code> to be acted on by the <code>Command</code>
+     * @throws DukeException when unable to execute Command
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (!this.params.get(0).isEmpty()) {
@@ -58,8 +75,8 @@ public class VoidCommand extends Command{
             } catch (IOException e) {
                 ui.errorDisplay(e);
                 e.printStackTrace();
-                ui.display("Tasks were unable to be saved, if you still wish to quit without" +
-                        "saving, try using \"forcequit\" ");
+                ui.display("Tasks were unable to be saved, if you still wish to quit without"
+                        + "saving, try using \"forcequit\" ");
             }
             break;
         case FORCEQUIT:
@@ -74,6 +91,8 @@ public class VoidCommand extends Command{
                 System.exit(0);
             }
             break;
+        default:
+            throw new IllegalCommandException("No defined action to execute");
         }
     }
 }

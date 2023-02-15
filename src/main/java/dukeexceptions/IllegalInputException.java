@@ -1,6 +1,10 @@
 package dukeexceptions;
 
-public class IllegalInputException extends DukeException{
+/**
+ * An exception that is thrown when an Illegal input is keyed in by the user
+ * @author clydelhui
+ */
+public class IllegalInputException extends DukeException {
     public IllegalInputException(String s) {
         super(s);
     }

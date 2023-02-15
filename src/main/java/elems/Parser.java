@@ -11,6 +11,11 @@ import commands.ModifyCommand;
 import commands.VoidCommand;
 import dukeexceptions.IllegalCommandException;
 
+/**
+ * A Pasrser that parses String input from the user and
+ * generates an appropriate <code>Command</code>
+ * @author clydelhui
+ */
 public class Parser {
 
     private static final HashSet<String> addKeywords = new HashSet<>(Arrays.asList("todo",
@@ -19,6 +24,12 @@ public class Parser {
     private static final HashSet<String> voidKeywords = new HashSet<>(Arrays.asList("list", "bye", "forcequit"));
     private static final HashSet<String> modifyKeywords = new HashSet<>(Arrays.asList("mark", "unmark"));
 
+    /**
+     * Returns an appropriate <code>Command</code> given the user's <code>String</code> input
+     * @param input The String input from the user
+     * @return The <code>Command</code> associated with the given String input
+     * @throws IllegalCommandException when an invalid input has been given
+     */
     public Command parse(String input) throws IllegalCommandException {
         String[] commandSplit = input.split(" ", 2);
         String keyword = commandSplit[0];

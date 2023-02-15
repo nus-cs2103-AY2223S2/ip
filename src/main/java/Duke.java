@@ -7,7 +7,16 @@ import elems.Storage;
 import elems.TaskList;
 import elems.Ui;
 
+/**
+ * The main program that runs the task list chatbot Duke
+ * @author clydelhui
+ */
 public class Duke {
+
+    /**
+     * The main method
+     * @param args nil
+     */
     public static void main(String[] args) {
 
 
@@ -18,7 +27,7 @@ public class Duke {
 
         Storage storage = new Storage("data.txt", ui);
 
-        TaskList taskList = new TaskList(storage);
+        TaskList taskList = new TaskList(storage, ui);
 
         Parser parser = new Parser();
 

@@ -2,15 +2,31 @@ package items;
 
 import java.time.LocalDate;
 
-public class Deadline extends Task{
+/**
+ * Represents a Deadline task
+ * @author clydelhui
+ */
+public class Deadline extends Task {
     private final LocalDate endDate;
+
+    /**
+     * Creates a <code>Deadline</code> with the given description and end date
+     * @param description The description of the <code>Deadline</code>
+     * @param endDate the end date of the <code>Deadline</code>
+     */
     public Deadline(String description, LocalDate endDate) {
         super(description, "D");
         this.endDate = endDate;
     }
 
-    public Deadline(String description, boolean done, LocalDate endDate) {
-        super(description, "D", done);
+    /**
+     * Creates a <code>Deadline</code> with the given description, status and end date
+     * @param description The description of the <code>Deadline</code>
+     * @param isDone A boolean which indicates if the <code>Deadline</code> is done
+     * @param endDate
+     */
+    public Deadline(String description, boolean isDone, LocalDate endDate) {
+        super(description, "D", isDone);
         this.endDate = endDate;
     }
 
@@ -21,7 +37,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + this.getTaskType() + "]" + "[" + this.getStatusIcon() + "]"
                 + this.description + "/" + this.endDate;
     }

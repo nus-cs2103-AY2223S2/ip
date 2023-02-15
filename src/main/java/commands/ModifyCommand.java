@@ -1,5 +1,8 @@
 package commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import dukeexceptions.DukeException;
 import dukeexceptions.IllegalCommandException;
 import dukeexceptions.IllegalInputException;
@@ -8,10 +11,11 @@ import elems.Storage;
 import elems.TaskList;
 import elems.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class ModifyCommand extends Command{
+/**
+ * Represents a command which modifies a <code>Task</code> in a given <code>TaskList</code>
+ * @author clydelhui
+ */
+public class ModifyCommand extends Command {
     enum ModifyType {
         MARK,
         UNMARK
@@ -19,6 +23,14 @@ public class ModifyCommand extends Command{
 
     private final ModifyType modifyType;
 
+    /**
+     * Constructor that creates an <code>AddCommand</code> object given a keyword and
+     * an <code>ArrayList</code> of strings of parameters
+     * @param keyword The keyword for the <code>AddCommand</code>
+     * @param params An <code>ArrayList</code> containing the parameters of the command
+     *               in <code>String</code> type
+     * @throws IllegalCommandException If the given keyword does not match any valid keywords
+     */
     public ModifyCommand(String keyword, ArrayList<String> params) throws IllegalCommandException {
         super(keyword, params);
 
@@ -48,6 +60,8 @@ public class ModifyCommand extends Command{
             case UNMARK:
                 tasks.unmarkTask(taskIndex);
                 break;
+            default:
+                throw new IllegalCommandException("Invalid type of ModifyCommand");
             }
             storage.refreshStorage(tasks);
             ui.display("Task successfully modified! \n" + tasks.getTaskString(taskIndex));

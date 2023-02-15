@@ -2,6 +2,10 @@ package elems;
 
 import java.util.Scanner;
 
+/**
+ * Represents the User Interface that takes in input and displays output to the user
+ * @author clydelhui
+ */
 public class Ui {
 
     private static final String logo = " ____        _        \n"
