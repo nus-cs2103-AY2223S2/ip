@@ -67,6 +67,10 @@ public class Parser {
                 return new AddCommand(command, lowerCaseInput);
             case FIND:
                 String keyword = lowerCaseInput.replace(FIND + " ", "");
+                int keywordSize = inputWords.length;
+                if (keywordSize == 1) {
+                    throw new EmptyInputException(command);
+                }
                 return new FindCommand(keyword);
             }
         }
