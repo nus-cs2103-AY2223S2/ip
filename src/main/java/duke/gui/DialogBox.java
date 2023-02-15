@@ -18,7 +18,7 @@ import javafx.scene.text.*;
 public class DialogBox extends HBox {
     private static final String DIALOG_BOX_RESOURCE_PATH = "/view/DialogBox.fxml";
     private static final String ROBOTO_BOLD_RESOURCE_PATH = "/fonts/Roboto-Bold.ttf";
-    private static final int DIALOGUE_BOX_FONT_SIZE = 14;
+    private static final int DIALOGUE_BOX_FONT_SIZE = 12;
     private static final Paint BOT_COLOR = Color.valueOf("D34747");
     private static final Paint USER_COLOR = Color.valueOf("5B78C1");
     private static final String USER_BORDER_RADIUS_STYLE = "-fx-background-radius: 5 5 1 5;";
