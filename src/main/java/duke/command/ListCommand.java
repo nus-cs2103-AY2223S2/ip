@@ -31,4 +31,10 @@ public class ListCommand extends Command{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String output = "list\nThis commands list all the tasks entered";
+        return output;
+    }
 }

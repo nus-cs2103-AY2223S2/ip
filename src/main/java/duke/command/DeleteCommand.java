@@ -41,4 +41,13 @@ public class DeleteCommand extends Command{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String output = "delete taskIndex" +
+                "\nThis command deletes a task of that index" +
+                "\nExample: delete 2";
+
+        return output;
+    }
 }

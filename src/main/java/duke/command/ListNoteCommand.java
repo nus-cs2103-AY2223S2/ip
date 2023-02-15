@@ -35,4 +35,14 @@ public class ListNoteCommand extends Command{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String output = "listNote\nThis command is to list all tasks that consist note";
+
+        output = output + "\n\nlistNote taskWithNoteIndex" +
+                "\nThis command is to list only one specific task with note" +
+                "\nExample: listNote 3";
+        return output;
+    }
 }

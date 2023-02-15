@@ -28,4 +28,12 @@ public class AddNoteCommand extends Command{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String output = "addNote taskIndex: message" +
+                "\nThis command adds a note to the task of the selected index" +
+                "\nExample: addNote 3: Meeting location is at Utown";
+        return output;
+    }
 }

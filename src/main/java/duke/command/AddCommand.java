@@ -46,4 +46,20 @@ public class AddCommand extends Command {
         return false;
     }
 
+    @Override
+    public String toString() {
+        String output = "todo taskname" +
+                "\nThis command adds a todoTask" +
+                "\nExample: todo Buy fruits";
+
+        output  = output + "\n\ndeadline taskname /by dd/MM/yyyy HH:mm" +
+                "\nThe commands shows add a deadline task" +
+                "\nExample: deadline Math homework /by 08/03/2023 23:59";
+
+        output = output + "\n\nevent taskname /by dd/MM/yyyy HH:mm /to dd/MM/yyyy HH:mm" +
+                "\nThis command adds a event task"+
+                "\nExample: event Science Fair at NUS /from 23/04/2023 10:00 /to 23/04/2023 18:00\n";
+
+        return output;
+    }
 }

@@ -24,4 +24,12 @@ public class DeleteNoteCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String output = "deleteNote taskIndex" +
+                "\n This command deletes the note in the selected task" +
+                "\nExample: deleteNote 3";
+        return output;
+    }
 }

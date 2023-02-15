@@ -38,4 +38,13 @@ public class UnmarkCommand extends Command{
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String output = "unmark taskIndex" +
+                "\nThis commands unmark the task of the index as incomplete" +
+                "\nExample: unmark 3";
+
+        return output;
+    }
 }

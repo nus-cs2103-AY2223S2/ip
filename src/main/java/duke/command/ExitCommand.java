@@ -31,4 +31,10 @@ public class ExitCommand extends Command{
     public boolean isExit() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        String output = "bye\nThis command exits out of the program";
+        return output;
+    }
 }

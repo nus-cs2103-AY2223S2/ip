@@ -83,6 +83,8 @@ public class Parser {
                     int deleteNoteIndex = checkIndex(instruction[1], tasklist) - 1;
                     return new DeleteNoteCommand(deleteNoteIndex);
 
+                case "help" :
+                    return new HelpCommand();
 
                 default:
                     throw new ArgumentException("No such commands");

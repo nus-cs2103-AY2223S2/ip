@@ -42,4 +42,13 @@ public class MarkCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String output = "mark taskIndex" +
+                "\nThis command marks the task as complete" +
+                "\nExample: mark 3";
+
+        return output;
+    }
 }

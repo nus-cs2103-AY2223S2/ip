@@ -18,7 +18,7 @@ public class FindCommand extends Command{
     }
 
     /**
-     * executes the purpose of the
+     * executes the purpose of the FindCommand
      * @param taskList use to find the tasks with the word
      * @param storage can be ignored but is required due to the abstract class
      * @param ui use to print out tasks with word
@@ -31,5 +31,13 @@ public class FindCommand extends Command{
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        String output = "find word" +
+                "\nThis command helps to find all task that contains the word entered" +
+                "\nExample: find homework";
+        return output;
     }
 }
