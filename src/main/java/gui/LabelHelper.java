@@ -14,6 +14,7 @@ public class LabelHelper {
     public static Label from(String s) {
         Label p = new Label(s);
         p.setWrapText(true);
+        p.setMinHeight(100);
         return p;
     }
 }

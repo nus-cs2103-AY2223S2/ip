@@ -6,11 +6,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="gui.JavaFxGuiOut"
-            maxHeight="-Infinity"
-            maxWidth="-Infinity"
-            minHeight="-Infinity"
-            minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0">
+            minHeight="400.0" minWidth="600.0">
 
     <GridPane>
         <TextField
@@ -19,7 +15,7 @@
                 GridPane.columnSpan="1"
                 GridPane.rowIndex="1"
                 GridPane.rowSpan="1"
-                prefWidth="545.0"
+                minWidth="545.0"
                 promptText="Command..."
                 onAction="#handleUserInput"
         />
@@ -29,7 +25,7 @@
                 GridPane.columnSpan="1"
                 GridPane.rowIndex="1"
                 GridPane.rowSpan="1"
-                prefWidth="55.0"
+                minWidth="70.0"
                 mnemonicParsing="false"
                 onAction="#handleUserInput"
                 text="Send"
@@ -43,8 +39,8 @@
                 fitToWidth="true"
                 hbarPolicy="NEVER"
                 vbarPolicy="ALWAYS"
-                prefHeight="385"
-                prefWidth="585"
+                prefHeight="585"
+                prefWidth="385"
                 hvalue="1.0"
                 vvalue="1.0">
             <VBox fx:id="dialogContainer"/>

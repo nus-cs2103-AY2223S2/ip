@@ -21,9 +21,9 @@ public abstract class Task {
     public String getDoneMark() {
         switch (status) {
         case COMPLETED:
-            return "X";
+            return "[X]";
         case INCOMPLETE:
-            return " ";
+            return "[ ]";
         default:
             return "ERROR";
         }
