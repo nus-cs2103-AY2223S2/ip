@@ -1,4 +1,7 @@
-package spongebob.ui;
+package spongebob;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,10 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import spongebob.Spongebob;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Sets up the window of the app.
@@ -28,9 +27,9 @@ public class MainWindow extends AnchorPane {
 
     private Spongebob spongebob;
     private final Image USER_IMAGE = new Image(
-            this.getClass().getResourceAsStream("/images/patrick.png"));
+            this.getClass().getResourceAsStream("/images/Patrick.png"));
     private final Image SPONGEBOB_IMAGE = new Image(
-            this.getClass().getResourceAsStream("/images/SpongeBob.jpg"));
+            this.getClass().getResourceAsStream("/images/Spongebob.jpg"));
 
     /**
      * Initializes the scene.
@@ -38,7 +37,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //scrollPane.setFitToHeight(true);
     }
 
     /**

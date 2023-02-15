@@ -1,7 +1,6 @@
 package spongebob;
 
 import javafx.application.Application;
-import spongebob.ui.Main;
 
 /**
  * Entry point of the application.

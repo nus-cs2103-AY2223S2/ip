@@ -6,7 +6,11 @@ import spongebob.exception.SpongebobInvalidArgumentException;
 import spongebob.exception.SpongebobIoException;
 
 import spongebob.storage.Storage;
-import spongebob.task.*; // all class from task packages are needed.
+import spongebob.task.Deadlines;
+import spongebob.task.Events;
+import spongebob.task.Task;
+import spongebob.task.TaskList;
+import spongebob.task.ToDos;
 import spongebob.ui.Ui;
 
 /**

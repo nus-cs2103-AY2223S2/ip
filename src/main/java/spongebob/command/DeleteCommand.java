@@ -47,7 +47,7 @@ public class DeleteCommand extends IndexedCommand {
 
         String responseMsg = ui.responseToDeleteTaskCommand(task, DELETED_LINE_NUMBER);
         task.removeTaskAt(DELETED_LINE_NUMBER);
-        storage.removeData(DELETED_LINE_NUMBER);
+        storage.removeData(DELETED_LINE_NUMBER, t);
         return responseMsg;
     }
 }

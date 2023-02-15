@@ -1,29 +1,29 @@
 package spongebob.task;
 
-import spongebob.exception.SpongebobEventOverlapException;
-import spongebob.exception.SpongebobInvalidArgumentException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import spongebob.exception.SpongebobEventOverlapException;
+import spongebob.exception.SpongebobInvalidArgumentException;
 
 /**
  * Event type of task.
  */
 public class Events extends Task {
     /** Stores starting time and ending time of every event. */
-    private static ArrayList<Events> eventTimeList = new ArrayList<>();
+    private static ArrayList<Events> EVENT_LIST = new ArrayList<>();
     private static final String STANDARD_FORMAT = "dd/MM/yyyy HH:mm";
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern(STANDARD_FORMAT);
     /**
      * Starting time of events in "dd/MM/yyyy HH:mm" format
      */
-    private LocalDateTime formattedStartTime;
+    private final LocalDateTime FORMATTED_START_TIME;
     /**
      * End time of events in "dd/MM/yyyy HH:mm" format
      */
-    private LocalDateTime formattedEndTime;
+    private final LocalDateTime FORMATTED_END_TIME;
     private String startTime;
     private String endTime;
 
@@ -41,27 +41,17 @@ public class Events extends Task {
         super(description);
         try {
             setUserInputTimeInChronologicalOrder(startTime, endTime);
-            this.formattedStartTime = LocalDateTime.parse(this.startTime, FORMAT);
-            this.formattedEndTime = LocalDateTime.parse(this.endTime, FORMAT);
+            this.FORMATTED_START_TIME = LocalDateTime.parse(this.startTime, FORMAT);
+            this.FORMATTED_END_TIME = LocalDateTime.parse(this.endTime, FORMAT);
             if (checkOverlappingEvents()) {
                 throw new SpongebobEventOverlapException("Event overlap with previous event.");
             } else {
-                eventTimeList.add(this);
+                EVENT_LIST.add(this);
             }
         } catch (DateTimeParseException e) {
             throw new SpongebobInvalidArgumentException(
                     String.format("The format of date-time is invalid.\nShould be %s", STANDARD_FORMAT));
         }
-    }
-
-    /**
-     * Constructor to create an events task.
-     *
-     * @param description full description of event task, including its starting and ending time.
-     */
-    public Events(String[] description) {
-        super(description[2]);
-        setUserInputTimeInChronologicalOrder(description[3], description[4]);
     }
 
     private void setUserInputTimeInChronologicalOrder(String... time) {
@@ -84,11 +74,11 @@ public class Events extends Task {
 
     // Checks whether scheduling anomalies occur between different events.
     private boolean checkOverlappingEvents() {
-        for (Events otherEvent: eventTimeList) {
+        for (Events otherEvent: EVENT_LIST) {
             // let [x1, x2] and [y1, y2] be two interval
             // check overlap: !(x2 < y1 || x1 > y2) == x2 > y1 && x1 < y2
-            if (formattedStartTime.isBefore(otherEvent.formattedEndTime)
-                    && formattedEndTime.isAfter(otherEvent.formattedStartTime)) {
+            if (FORMATTED_START_TIME.isBefore(otherEvent.FORMATTED_END_TIME)
+                    && FORMATTED_END_TIME.isAfter(otherEvent.FORMATTED_START_TIME)) {
                 return true;
             }
         }
@@ -98,36 +88,24 @@ public class Events extends Task {
     /**
      * Resets event time list everytime the program start its execution.
      *
-     * @param eventTimeList list of event task that stored in the data file.
+     * @param eventList list of event task that stored in the data file.
      */
-    public static void setEventTimeList(ArrayList<Events> eventTimeList) {
-        Events.eventTimeList = eventTimeList;
+    public static void setEventList(ArrayList<Events> eventList) {
+        EVENT_LIST = eventList;
     }
 
     /**
      * Removes the event task from the event time list everytime the user delete event task.
      *
-     * @param description description of task that stored in the file.
+     * @param t event that deleted from the file.
      */
-    public static void deleteEventTimeList(String[] description) {
-        Events event = new Events(description);
-        eventTimeList.remove(event);
+    public static void deleteEventTimeList(Events t) {
+        EVENT_LIST.remove(t);
     }
 
     @Override
     public String toString() {
         return String.format("[E] %s (from: %s to: %s)",
-                super.toString(), formattedStartTime.format(FORMAT), formattedEndTime.format(FORMAT));
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Events) {
-            Events e = (Events) obj;
-            return getDescription().trim().equals(e.getDescription().trim())
-                    && getStartTime().trim().equals(e.getStartTime().trim())
-                    && getEndTime().trim().equals(e.getEndTime().trim());
-        }
-        return false;
+                super.toString(), FORMATTED_START_TIME.format(FORMAT), FORMATTED_END_TIME.format(FORMAT));
     }
 }

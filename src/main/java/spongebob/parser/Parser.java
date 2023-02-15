@@ -1,6 +1,13 @@
 package spongebob.parser;
 
-import spongebob.command.*; // All classes from command folder are needed.
+import spongebob.command.AddCommand;
+import spongebob.command.Command;
+import spongebob.command.DeleteCommand;
+import spongebob.command.ExitCommand;
+import spongebob.command.FindCommand;
+import spongebob.command.ListCommand;
+import spongebob.command.MarkCommand;
+import spongebob.command.UnmarkCommand;
 
 import spongebob.exception.SpongebobEmptyArgumentException;
 import spongebob.exception.SpongebobEventOverlapException;

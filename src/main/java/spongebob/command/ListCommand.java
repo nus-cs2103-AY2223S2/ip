@@ -1,7 +1,6 @@
 package spongebob.command;
 
 import spongebob.exception.SpongebobUnknownCommandException;
-
 import spongebob.storage.Storage;
 import spongebob.task.TaskList;
 import spongebob.ui.Ui;

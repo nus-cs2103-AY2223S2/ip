@@ -1,10 +1,10 @@
 package spongebob.task;
 
-import spongebob.exception.SpongebobInvalidArgumentException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import spongebob.exception.SpongebobInvalidArgumentException;
 
 /**
  * Deadline type of task

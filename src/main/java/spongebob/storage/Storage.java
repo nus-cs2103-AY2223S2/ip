@@ -1,11 +1,5 @@
 package spongebob.storage;
 
-import spongebob.exception.SpongebobEventOverlapException;
-import spongebob.exception.SpongebobFileNotFoundException;
-import spongebob.exception.SpongebobInvalidArgumentException;
-import spongebob.exception.SpongebobIoException;
-import spongebob.task.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +7,16 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import spongebob.exception.SpongebobEventOverlapException;
+import spongebob.exception.SpongebobFileNotFoundException;
+import spongebob.exception.SpongebobInvalidArgumentException;
+import spongebob.exception.SpongebobIoException;
+
+import spongebob.task.Deadlines;
+import spongebob.task.Events;
+import spongebob.task.Task;
+import spongebob.task.ToDos;
 
 /**
  * Represents the file to store the task list.
@@ -116,10 +120,10 @@ public class Storage {
      * @param lineNumber line number in the file to be deleted.
      * @throws SpongebobIoException indicate failed or interrupted I/O operations occurred.
      */
-    public void removeData(int lineNumber) throws SpongebobIoException {
+    public void removeData(int lineNumber, Task task) throws SpongebobIoException {
         try {
             List<String> allLines = Files.readAllLines(path);
-            removeDataFromEventListIfIsEventTask(allLines.get(lineNumber));
+            removeDataFromEventListIfIsEventTask(task);
             // remove the line from spongebob.txt
             allLines.remove(lineNumber);
             Files.write(path, allLines);
@@ -128,9 +132,9 @@ public class Storage {
         }
     }
 
-    private void removeDataFromEventListIfIsEventTask(String description) {
-        if (description.contains("[E]")) {
-            Events.deleteEventTimeList(description.split(" | "));
+    private void removeDataFromEventListIfIsEventTask(Task t) {
+        if (t instanceof Events) {
+            Events.deleteEventTimeList((Events) t);
         }
     }
 
@@ -177,7 +181,7 @@ public class Storage {
                 eventTasks.add((Events) task);
             }
         }
-        Events.setEventTimeList(eventTasks);
+        Events.setEventList(eventTasks);
     }
 
     private Task createTaskFromStorage(String description) throws SpongebobInvalidArgumentException,
