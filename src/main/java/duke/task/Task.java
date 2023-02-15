@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Encapsulates the related fields and behavior of a task.
  */
-public class Task {
+public abstract class Task {
     //name of the task.
     private String name;
 
@@ -87,7 +87,7 @@ public class Task {
      * @return True if name contains keyword, false otherwise.
      */
     public boolean containKeyword(String keyword) {
-        String formatName = " " + this.name.toUpperCase() + " ";
+        String formatName = this.name.toUpperCase();
         return formatName.contains(keyword.toUpperCase());
     }
 
