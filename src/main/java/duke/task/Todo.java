@@ -11,8 +11,8 @@ import duke.storage.serializer.TaskSerializer;
 public class Todo extends Task {
     private static final String ICON = "T";
 
-    public Todo(String description, boolean completed) throws DukeException {
-        super(description, completed);
+    public Todo(String description, boolean isCompleted) throws DukeException {
+        super(description, isCompleted);
     }
 
     /**
@@ -32,8 +32,8 @@ public class Todo extends Task {
     public static TaskDeserializer getDeserializer() {
         return (TaskSerializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
-            boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
-            return new Todo(description, completed);
+            boolean isCompleted = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
+            return new Todo(description, isCompleted);
         };
     }
 
@@ -42,7 +42,7 @@ public class Todo extends Task {
         Serializer ts = new TaskSerializer();
         ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
-        ts.add(COMPLETED_KEY, completed);
+        ts.add(COMPLETED_KEY, isCompleted);
         return ts.toString();
     }
 

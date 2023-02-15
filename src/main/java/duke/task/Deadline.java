@@ -21,12 +21,12 @@ public class Deadline extends Task {
      * Initialises a Deadline task.
      *
      * @param description Description of the task.
-     * @param completed Whether the task is completed
+     * @param isCompleted Whether the task is completed
      * @param by Due date of task.
      * @throws DukeException
      */
-    public Deadline(String description, boolean completed, String by) throws DukeException {
-        super(description, completed);
+    public Deadline(String description, boolean isCompleted, String by) throws DukeException {
+        super(description, isCompleted);
         try {
             this.by = LocalDateTime.parse(by, RECEIVE_FORMAT);
         } catch (DateTimeParseException e) {
@@ -51,9 +51,9 @@ public class Deadline extends Task {
     public static TaskDeserializer getDeserializer() {
         return (TaskSerializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
-            boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
+            boolean isCompleted = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
             String by = serializer.get(BY_KEY).toString();
-            return new Deadline(description, completed, by);
+            return new Deadline(description, isCompleted, by);
         };
     }
 
@@ -62,7 +62,7 @@ public class Deadline extends Task {
         Serializer ts = new TaskSerializer();
         ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
-        ts.add(COMPLETED_KEY, completed);
+        ts.add(COMPLETED_KEY, isCompleted);
         ts.add(BY_KEY, by.format(RECEIVE_FORMAT));
         return ts.toString();
     }

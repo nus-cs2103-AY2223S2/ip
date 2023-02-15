@@ -14,21 +14,21 @@ public abstract class Task {
     protected static final DateTimeFormatter RECEIVE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy kkmm");
     protected static final DateTimeFormatter PRINT_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-uuuu,EEE,hh:mma");
     protected String description;
-    protected boolean completed;
+    protected boolean isCompleted;
 
     /**
      * Initialises a task.
      *
      * @param description Description of task.
-     * @param completed Whether the task has been completed.
+     * @param isCompleted Whether the task has been completed.
      * @throws DukeException
      */
-    public Task(String description, boolean completed) throws DukeException {
+    public Task(String description, boolean isCompleted) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("The description of a task cannot be empty");
         }
         this.description = description;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     public abstract String serialize();
@@ -38,15 +38,15 @@ public abstract class Task {
     }
 
     public boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     public void mark() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     public void unmark() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public boolean matches(String pattern) {

@@ -23,13 +23,13 @@ public class Event extends Task {
      * Initialises an Event task.
      *
      * @param description Description of event.
-     * @param completed Whether the event has been completed.
+     * @param isCompleted Whether the event has been completed.
      * @param from Start time of event.
      * @param to End time of event.
      * @throws DukeException
      */
-    public Event(String description, boolean completed, String from, String to) throws DukeException {
-        super(description, completed);
+    public Event(String description, boolean isCompleted, String from, String to) throws DukeException {
+        super(description, isCompleted);
         try {
             this.from = LocalDateTime.parse(from, RECEIVE_FORMAT);
         } catch (DateTimeParseException e) {
@@ -59,10 +59,10 @@ public class Event extends Task {
     public static TaskDeserializer getDeserializer() {
         return (TaskSerializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
-            boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
+            boolean isCompleted = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
             String from = serializer.get(FROM_KEY).toString();
             String to = serializer.get(TO_KEY).toString();
-            return new Event(description, completed, from, to);
+            return new Event(description, isCompleted, from, to);
         };
     }
 
@@ -71,7 +71,7 @@ public class Event extends Task {
         Serializer ts = new TaskSerializer();
         ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
-        ts.add(COMPLETED_KEY, completed);
+        ts.add(COMPLETED_KEY, isCompleted);
         ts.add(FROM_KEY, from.format(RECEIVE_FORMAT));
         ts.add(TO_KEY, to.format(RECEIVE_FORMAT));
         return ts.toString();

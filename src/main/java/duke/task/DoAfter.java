@@ -21,12 +21,12 @@ public class DoAfter extends Task {
      * Initialises an DoAfter task.
      *
      * @param description Description of DoAfter task.
-     * @param completed Whether the DoAfter task has been completed.
+     * @param isCompleted Whether the DoAfter task has been completed.
      * @param after Time to be completed after.
      * @throws DukeException
      */
-    public DoAfter(String description, boolean completed, String after) throws DukeException {
-        super(description, completed);
+    public DoAfter(String description, boolean isCompleted, String after) throws DukeException {
+        super(description, isCompleted);
         try {
             this.after = LocalDateTime.parse(after, RECEIVE_FORMAT);
         } catch (DateTimeParseException e) {
@@ -51,9 +51,9 @@ public class DoAfter extends Task {
     public static TaskDeserializer getDeserializer() {
         return (TaskSerializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
-            boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
+            boolean isCompleted = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
             String after = serializer.get(AFTER_KEY).toString();
-            return new DoAfter(description, completed, after);
+            return new DoAfter(description, isCompleted, after);
         };
     }
 
@@ -62,7 +62,7 @@ public class DoAfter extends Task {
         Serializer ts = new TaskSerializer();
         ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
-        ts.add(COMPLETED_KEY, completed);
+        ts.add(COMPLETED_KEY, isCompleted);
         ts.add(AFTER_KEY, after.format(RECEIVE_FORMAT));
         return ts.toString();
     }
