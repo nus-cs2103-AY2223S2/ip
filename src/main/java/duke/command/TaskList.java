@@ -70,7 +70,7 @@ public class TaskList {
             res += String.format("%d.%s", j + 1, arr[j]);
             res += "\n";
         }
-        return ("Here are the tasks in your list:" + "\n" + res);
+        return ("Here are the tasks in the EVIL list:" + "\n" + res);
     }
 
     /**
@@ -159,6 +159,7 @@ public class TaskList {
         if (this.getValidLen() <= 0) {
             throw new EmptyTaskListException();
         }
+        Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
         for (int i = 0; i < this.getValidLen(); i++) {
             this.arr[i] = null;
         }
@@ -192,9 +193,9 @@ public class TaskList {
                         trace++;
                     }
 
-                    return ("Noted. I've removed this task:" + "\n" + original + "\n"
-                            + String.format("Now you have %d "
-                            + "tasks in the list", this.getValidLen()));
+                    return ("Noted. Kyle's removed this EVIL task:" + "\n" + original + "\n"
+                            + String.format("Now Boss has %d "
+                            + "tasks in the EVIL list", this.getValidLen()));
                 }
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidIndexException();
@@ -218,10 +219,10 @@ public class TaskList {
         Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
         arr[len] = task.toString();
         Parser.updateLastCommandDetail(task.toString());
-        return ("Got it. I've added this task:" + "\n" + task.toString()
+        return ("Got it. Kyle's added this EVIL task:" + "\n" + task.toString()
                 + "\n"
-                + String.format("Now you have %d "
-                + "tasks in the list", this.getValidLen()));
+                + String.format("Now Boss has %d "
+                + "tasks in the EVIL list", this.getValidLen()));
     }
 
     /**
@@ -242,7 +243,7 @@ public class TaskList {
                 res += "\n";
             }
         }
-        return ("WOOF! Here  are the matching tasks in your list:" + "\n" + res);
+        return ("WOOF! Here  are the matching tasks in the EVIL list:" + "\n" + res);
     }
 
     /**

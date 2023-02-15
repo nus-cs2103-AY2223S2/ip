@@ -10,7 +10,7 @@
     <children>
         <Label fx:id="dialog" lineSpacing="1.0" style="-fx-background-color: grey; -fx-background-radius: 50;" text="Label" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true">
          <HBox.margin>
-            <Insets />
+            <Insets bottom="5.0" left="5.0" top="5.0" />
          </HBox.margin>
          <font>
             <Font name="Franklin Gothic Book" size="12.0" />

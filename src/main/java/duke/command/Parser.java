@@ -66,10 +66,13 @@ public class Parser {
         } else if (lastCommand.startsWith("delete ")) {
             taskList.overwrite(lastTaskList);
             return ui.saysUnDo("mark", lastCommandDetail);
-        } else if (lastCommand.startsWith("todo ") || lastCommand.startsWith("event ")
-                || lastCommand.startsWith("deadline ")) {
+        } else if (lastCommand.startsWith("todo") || lastCommand.startsWith("event")
+                || lastCommand.startsWith("deadline")) {
             taskList.overwrite(lastTaskList);
-            return ui.saysUnDo("mark", lastCommandDetail);
+            return ui.saysUnDo("add", lastCommandDetail);
+        } else if (lastCommand.startsWith("clear")) {
+            taskList.overwrite(lastTaskList);
+            return ui.saysUnDo("clear");
         }
         return ui.saysUnableToUndo();
     }
@@ -84,6 +87,7 @@ public class Parser {
         try {
             if (command[1].equalsIgnoreCase("all")) {
                 listOfAction.clear();
+                Parser.updateLastCommand("clear");
                 return (Ui.saysDeleteAllMessage());
             }
         } catch (EmptyTaskListException e) {

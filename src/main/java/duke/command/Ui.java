@@ -96,6 +96,17 @@ public class Ui {
     }
 
     /**
+     * Returns what Duke will respond to an Undo command
+     * @param commandType last command type
+     * @return Duke's message
+     */
+    public String saysUnDo(String commandType) {
+        return ("WOOF! Got it! Kyle will undo the last command!" + "\n"
+                + "The task(s) has been un-" + commandType
+                + "ed!");
+    }
+
+    /**
      * Returns Duke's response to an unable-to-be-undone command
      * @return Duke's response
      */
@@ -296,7 +307,6 @@ public class Ui {
                 String end = (new Parser()
                         .getEventTime(command, startIndex, endIndex))[1];
                 Parser.updateLastCommand("event");
-                System.out.println("WOOF! Got it. Kyle has added this task for you boss:");
                 return (listOfAction.add(new Event("event",
                         detail, start, end)));
             } catch (MissingContentException | InvalidEventDateTimeException e) {
