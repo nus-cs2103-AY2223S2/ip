@@ -8,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -46,6 +49,8 @@ public class DialogBox extends HBox {
         dialogText.setFont(dialogueFont);
         dialogText.setFill(paint);
         dialog.setStyle(style);
+        DropShadow dropShadow = new DropShadow(BlurType.ONE_PASS_BOX, (Color) paint, 0, 0, 0, 5);
+        dialog.setEffect(dropShadow);
         dialog.getChildren().add(dialogText);
         displayPicture.setImage(img);
     }

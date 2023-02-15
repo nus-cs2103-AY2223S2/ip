@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.TextFlow?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
@@ -15,7 +17,14 @@
          </padding>
          <HBox.margin>
             <Insets left="10.0" right="10.0" />
-         </HBox.margin></TextFlow>
+         </HBox.margin>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="1.0" offsetY="5.0" radius="0.0" width="0.0">
+               <color>
+                  <Color red="0.35686275362968445" green="0.47058823704719543" blue="0.7568627595901489" />
+               </color>
+            </DropShadow>
+         </effect></TextFlow>
       <VBox alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="44.0">
          <children>
               <ImageView fx:id="displayPicture" fitHeight="44.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
