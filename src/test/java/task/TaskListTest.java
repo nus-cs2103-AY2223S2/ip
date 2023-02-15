@@ -16,17 +16,12 @@ import duke.task.Todo;
 
 public class TaskListTest {
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
     @Test
     public void get_populatedList_taskListReturned() {
         ArrayList<Task> expectedTaskList = new ArrayList<>();
         expectedTaskList.add(new Todo("1"));
-        expectedTaskList.add(new Deadline("2",
-                LocalDateTime.parse("2024-01-01 01:01", formatter)));
-        expectedTaskList.add(new Event("3",
-                LocalDateTime.parse("2024-01-01 01:01", formatter),
-                LocalDateTime.parse("2024-02-02 02:02", formatter)));
+        expectedTaskList.add(new Deadline("2", getFirstDateTime()));
+        expectedTaskList.add(new Event("3", getFirstDateTime(), getSecondDateTime()));
 
         TaskList taskList = getPopulatedTaskList();
         ArrayList<Task> actualTaskList = taskList.get();
@@ -39,11 +34,8 @@ public class TaskListTest {
         ArrayList<Task> expectedTaskList = new ArrayList<>();
         expectedTaskList.add(new Todo("1"));
         expectedTaskList.add(new Todo("4"));
-        expectedTaskList.add(new Deadline("2",
-                LocalDateTime.parse("2024-01-01 01:01", formatter)));
-        expectedTaskList.add(new Event("3",
-                LocalDateTime.parse("2024-01-01 01:01", formatter),
-                LocalDateTime.parse("2024-02-02 02:02", formatter)));
+        expectedTaskList.add(new Deadline("2", getFirstDateTime()));
+        expectedTaskList.add(new Event("3", getFirstDateTime(), getSecondDateTime()));
 
         TaskList taskList = getPopulatedTaskList();
         taskList.add(new Todo("4"));
@@ -56,8 +48,7 @@ public class TaskListTest {
     public void delete_populatedList() {
         ArrayList<Task> expectedTaskList = new ArrayList<>();
         expectedTaskList.add(new Todo("1"));
-        expectedTaskList.add(new Deadline("2",
-                LocalDateTime.parse("2024-01-01 01:01", formatter)));
+        expectedTaskList.add(new Deadline("2", getFirstDateTime()));
 
         TaskList taskList = getPopulatedTaskList();
         taskList.delete(2);
@@ -106,5 +97,17 @@ public class TaskListTest {
         tasksStringFormat.add("D |   | 2 | 2024-01-01T01:01");
         tasksStringFormat.add("E |   | 3 | 2024-01-01T01:01 | 2024-02-02T02:02");
         return new TaskList(tasksStringFormat);
+    }
+
+    private LocalDateTime getFirstDateTime() {
+        String dateTime = "2024-01-01 01:01";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(dateTime, formatter);
+    }
+
+    private LocalDateTime getSecondDateTime() {
+        String dateTime = "2024-02-02 02:02";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(dateTime, formatter);
     }
 }
