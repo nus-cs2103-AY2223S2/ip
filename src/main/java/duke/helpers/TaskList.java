@@ -6,22 +6,43 @@ import java.util.ArrayList;
 
 import duke.tasks.*;
 
+/**
+ * Stores array of Tasks and handles any manipulation of tasks in array.
+ *
+ * @author jengoc415
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
     private final Storage db;
     private String message;
 
+    /**
+     * Constructor to load previously saved tasks if any.
+     * Else creates a new blank .txt file.
+     *
+     * @throws IOException faulty file input
+     */
     public TaskList() throws IOException {
         // Loads saved file if it exists, else creates empty new file
         File savedTasks = new File("./tasks.txt");
         this.db = new Storage(savedTasks);
-        this.tasks = new ArrayList<Task>(db.populateTasks());
+        this.tasks = db.populateTasks();
     }
 
+    /**
+     * Checks if taskList is currently empty.
+     *
+     * @return true if empty, else false.
+     */
     public boolean isEmpty() {
         return tasks.size() == 0;
     }
 
+    /**
+     * List out all current tasks with their completion status.
+     *
+     * @return Paragraph list of all tasks
+     */
     public String list() {
         String list = "";
         for (int i = 1; i <= tasks.size(); i++) {
@@ -30,24 +51,49 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Marks task as complete.
+     *
+     * @param index Index of task to mark as completed.
+     * @return Task that was marked as completed.
+     */
     public Task mark(int index) {
         Task task = tasks.get(index - 1);
         task.setDone();
         return task;
     }
 
+    /**
+     * Marks task as incomplete.
+     *
+     * @param index Index of task to mark as incomplete.
+     * @return Task that was marked as incomplete.
+     */
     public Task unmark(int index) {
         Task task = tasks.get(index - 1);
         task.setUndone();
         return task;
     }
 
+    /**
+     * Deletes task.
+     *
+     * @param index Index of task to be deleted.
+     *              All subsequent tasks index will be moved up.
+     * @return Task that was deleted.
+     */
     public Task delete(int index) {
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
         return task;
     }
 
+    /**
+     * Add task (todo, deadline, event) to list of tasks.
+     *
+     * @param task task to be added.
+     * @return Task to be added as well as successful prompt.
+     */
     public String add(Task task) {
         tasks.add(task);
 
@@ -57,6 +103,11 @@ public class TaskList {
         return message;
     }
 
+    /**
+     * Encodes tasks into a paragraph of text.
+     * Encoded text is passed to storage to save
+     * into local hard drive.
+     */
     public void save() {
         String toWrite = "";
         String instr;

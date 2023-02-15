@@ -1,5 +1,10 @@
 package duke.tasks;
 
+/**
+ * Abstract class to be inherited by specific types of tasks. Some common task manipulation methods implemented.
+ *
+ * @author jengoc415
+ */
 public abstract class Task {
     protected String instruction;
     protected boolean isDone;

@@ -8,6 +8,12 @@ import duke.tasks.Todo;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Intermediary between UI which receive instructions
+ * and TaskList which contains logic to process instructions.
+ *
+ * @author jengoc415
+ */
 public class Parser {
     private TaskList taskList;
     private Task task;
@@ -18,10 +24,21 @@ public class Parser {
     private int index;
     private boolean isBye = false;
 
+    /**
+     * Constructor for Parser: logic intermediary.
+     *
+     * @param taskList Contains ArrayList<Task> and task manipulation methods
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Process instructions by interacting with relevant classes
+     *
+     * @param instr Full string instruction
+     * @return Determines whether program terminates.
+     */
     public boolean parse(String instr) {
         this.instruction = instr;
         this.instrSplit = instr.split(" ");

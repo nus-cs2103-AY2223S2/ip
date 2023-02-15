@@ -6,10 +6,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Inherits abstract class Task. Characterised by description and due date.
+ *
+ * @author jengoc415
+ */
 public class Deadline extends Task {
     private String description;
     private LocalDate dueDate;
 
+    /**
+     * Constructor for task type: deadline
+     *
+     * @param instruction full instruction keyed in by user
+     * @throws DukeException erroneous entry by user
+     * @throws DateTimeParseException incorrect due date format
+     */
     public Deadline(String instruction) throws DukeException, DateTimeParseException {
         super(instruction);
         this.modifiedInstr = instruction.substring(9);

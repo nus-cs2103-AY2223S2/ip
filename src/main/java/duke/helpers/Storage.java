@@ -13,13 +13,30 @@ import duke.tasks.Deadline;
 import duke.exceptions.DukeException;
 import duke.tasks.*;
 
+/**
+ * Save tasks to local hard drive and loading it when program starts.
+ *
+ * @author jengoc415
+ */
 public class Storage {
     private File savedFile;
 
+    /**
+     * Constructor for storage instance
+     *
+     * @param savedFile File to read/write to
+     */
     public Storage(File savedFile) {
         this.savedFile = savedFile;
     }
 
+    /**
+     * Load tasks saved in local hard disk.
+     * If no previously saved file, create a new blank file.
+     *
+     * @return An ArrayList of tasks for Duke to do CRUD operations on.
+     * @throws IOException Due to possible faulty inputs
+     */
     public ArrayList<Task> populateTasks() throws IOException {
         Scanner sc;
         ArrayList<Task> tasks = new ArrayList<>();
@@ -66,6 +83,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save tasks into a file in local hard drive.
+     *
+     * @param encodedTasks Tasks with extended instructions
+     *                     to include completion status.
+     */
     public void saveTasks(String encodedTasks) {
         try {
             FileWriter fw = new FileWriter(savedFile);
