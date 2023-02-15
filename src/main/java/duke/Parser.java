@@ -44,6 +44,8 @@ public class Parser {
                 return ui.find(findTaskParsed());
             case "CLEAR":
                 return ui.clearList();
+            case "TAG":
+                return ui.tag(getTaskNum(), getTag());
             case "BYE" :
                 return ui.end();
             default:
@@ -66,6 +68,14 @@ public class Parser {
 
         for (int i = 1; i < this.raw.length; i++) {
             sb.append(this.raw[i] + " ");
+        }
+        return sb.toString();
+    }
+
+    public String getTag() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 2; i < raw.length; i++) {
+            sb.append(this.raw[i]);
         }
         return sb.toString();
     }

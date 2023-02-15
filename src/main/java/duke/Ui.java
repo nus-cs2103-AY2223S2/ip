@@ -65,7 +65,6 @@ public class Ui {
      */
     public String end() throws IOException {
         save();
-
         return outro;
     }
 
@@ -316,6 +315,19 @@ public class Ui {
         ArrayList<Task> newEmptyList = new ArrayList<>();
         this.tList.setList(newEmptyList);
         return "Ok! All tasks deleted.";
+    }
+
+    public String tag(int num, String s) {
+        assert num > 0: "Wrong num!!";
+        if (this.getList().isEmpty()) {
+            return emptyErr();
+        }
+        if (num >= this.tList.size()) {
+            return ("Task no." + (num + 1) + " not found. Try again.");
+        } else {
+            this.tList.get(num).tag(s);
+            return "Nice! " + this.tList.get(num) + "is tagged as " + this.tList.get(num).getTag() + ".";
+        }
     }
 
     public String wrongInput() {

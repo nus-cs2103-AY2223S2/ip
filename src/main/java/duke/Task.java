@@ -9,6 +9,7 @@ package duke;
 public class Task {
     private String name;
     private boolean done;
+    private  String tagging;
 
     /**
      * Constructor for Task object.
@@ -46,6 +47,14 @@ public class Task {
      */
     public boolean isMarked() {
         return this.done;
+    }
+
+    public void tag(String s) {
+        this.tagging = "#" + s;
+    }
+
+    public String getTag() {
+        return this.tagging;
     }
 
     @Override
