@@ -55,7 +55,7 @@ Here are the tasks in your list:
 
 <hr/>
 
-### `todo [KEYWORD]` - Add a TODO task
+### `todo [DESCRIPTION]` - Add a TODO task
 
 > Dudu will help you add the todo task to the list, and tells you the total number of tasks you have.
 
@@ -76,7 +76,7 @@ Now you have 4 tasks in the list.
 
 <hr/>
 
-### `deadline [KEYWORD] /by [yyyy-MM-dd]` - Add a DEADLINE task
+### `deadline [DESCRIPTION] /by [yyyy-MM-dd]` - Add a DEADLINE task
 
 > Dudu will help you add the deadline task to the list, and tells you the total number of tasks you have.
 
@@ -97,7 +97,7 @@ Now you have 5 tasks in the list.
 
 <hr/>
 
-### `event [KEYWORD] /from [yyyy-MM-dd] /to [yyyy-MM-dd]` - Add a EVENT task
+### `event [DESCRIPTION] /from [yyyy-MM-dd] /to [yyyy-MM-dd]` - Add a EVENT task
 
 > Dudu will help you add the event task to the list, and tells you the total number of tasks you have.
 
@@ -121,87 +121,99 @@ Now you have 6 tasks in the list.
 
 ### `delete [INDEX]` - Delete a task
 
-Describe the action and its outcome.
+> Dudu will help you delete a task denoted at the index.
 
 Example of usage:
 
-`keyword (optional arguments)`
+`delete 1`
 
 Expected outcome:
 
-Description of the outcome.
+Dudu should send you the following
 
 ```
-expected output
+Noted. I've removed this task:
+  [T][X] read book
+Now you have 5 tasks in the list.
 ```
+![This is a screenshot of the outcome](image/delete.png)
 
 <hr/>
 
 ### `mark [INDEX]` - Mark a task as DONE
 
-Describe the action and its outcome.
+> Dudu will help you mark your task denoted at the index to DONE
 
 Example of usage:
 
-`keyword (optional arguments)`
+`mark 3`
 
 Expected outcome:
 
-Description of the outcome.
+Dudu should send you the following
 
 ```
-expected output
+Nice! I've marked this task as done:
+  [T][X] study chapter 1
 ```
+![This is a screenshot of the outcome](image/mark.png)
 
 <hr/>
 
 ### `unmark [INDEX]` - Mark a task as UNDONE
 
-Describe the action and its outcome.
+> Dudu will help you mark your DONE task denoted at the index to UNDONE
 
 Example of usage:
 
-`keyword (optional arguments)`
+`unmark 3`
 
 Expected outcome:
 
-Description of the outcome.
+Dudu should send you the following
 
 ```
-expected output
+OK, I've marked this task as not done yet:
+  [T][ ] study chapter 1
 ```
+![This is a screenshot of the outcome](image/unmark.png)
 
 <hr/>
 
 ### `find [KEYWORD]` - Find a task
 
-Describe the action and its outcome.
+> Dudu will help you find the tasks associated with the keyword
 
 Example of usage:
 
-`keyword (optional arguments)`
+`find study`
 
 Expected outcome:
 
-Description of the outcome.
+Dudu should send you the following
 
 ```
-expected output
+Here are the matching tasks in your list:
+1.[T][ ] study chapter 1
 ```
 <hr/>
 
+![This is a screenshot of the outcome](image/find.png)
+
 ### `bye` - Exit application
 
-Describe the action and its outcome.
+> Send a goodbye to Dudu, eventually Dudu will go to rest
 
 Example of usage:
 
-`keyword (optional arguments)`
+`bye`
 
 Expected outcome:
 
-Description of the outcome.
+Dudu should send you the following
 
 ```
-expected output
+Bye. Hope to see you again soon!
+Press any key to continue...
 ```
+![This is a screenshot of the outcome](image/bye.png)

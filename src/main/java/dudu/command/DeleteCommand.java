@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
         try {
             Task currTask = list.getTask(index);
             storage.updateTask(list.delete(index));
-            return "Noted. I've removed this task:\n  " + currTask + list.getTotalTask() + "\n";
+            return "Noted. I've removed this task:\n  " + currTask + "\n" + list.getTotalTask() + "\n";
         } catch (TaskNumRangeException ex) {
             return ex.toString();
         }
