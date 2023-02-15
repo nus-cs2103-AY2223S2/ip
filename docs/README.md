@@ -49,7 +49,7 @@ Duke prints out the ToDo task you just added and the new number of tasks on your
 
 [T] indicates that this task is of type ToDo.
 
-[![todo.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Ftodo.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Ftodo.png)
+[![todo.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/todo.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/todo.png)
 
 ### `deadline [description] /by [dd/MM/yyyy hhmm]` - Add a Deadline task
 
@@ -67,7 +67,7 @@ Duke prints out the Deadline task you just added and the new number of tasks on 
 
 [D] indicates that this task is of type Deadline.
 
-[![deadline.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fdeadline.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fdeadline.png)
+[![deadline.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/deadline.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/deadline.png)
 
 ### `event [description] /from [dd/MM/yyyy hhmm] /to [dd/MM/yyyy hhmm]` - Add an Event task
 
@@ -85,7 +85,7 @@ Duke prints out the event task you just added and the new number of tasks on you
 
 [E] indicates that this task is of type Event.
 
-[![event.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fevent.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fevent.png)
+[![event.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/event.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/event.png)
 
 ### `delete [index]` - Delete a task
 
@@ -100,7 +100,7 @@ Expected outcome:
 
 Duke prints out the task you deleted and the number of tasks left on your list.
 
-[![delete.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fdelete.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fdelete.png)
+[![delete.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/delete.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/delete.png)
 
 ### `mark [index]` - Mark a task as done
 
@@ -117,7 +117,7 @@ Duke marks the task as done and congratulates you before printing the task.
 
 [X] means that the task is done.
 
-[![mark.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fmark.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fmark.png)
+[![mark.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/mark.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/mark.png)
 
 ### `unmark [index]` - Mark a task as undone
 
@@ -134,7 +134,7 @@ Duke marks the task as undone and prints it.
 
 [ ] means that the task is not done yet.
 
-[![unmark.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Funmark.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Funmark.png)
+[![unmark.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/unmark.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/unmark.png)
 
 ### `list` - List all tasks
 
@@ -158,7 +158,7 @@ All tasks are printed out.
 
 [ ] indicates that this task is not done yet.
 
-[![list.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Flist.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Flist.png)
+[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/list.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/list.png)
 
 ### `find [keyword]` - Find a task
 
@@ -176,7 +176,7 @@ Expected outcome:
 
 Duke marks the task as undone and prints it.
 
-[![list.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Ffind.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Ffind.png)
+[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/find.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/find.png)
 
 ### `update [index] [new description]` - Update a task description
 
@@ -194,7 +194,7 @@ Expected outcome:
 
 Updates the task description.
 
-[![list.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdatedes.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdatedes.png)
+[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatedes.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatedes.png)
 
 ### `update [index] /by [dd/MM/yyyy hhmm]` - Update a Deadline task deadline
 
@@ -213,7 +213,7 @@ Expected outcome:
 
 Updates Deadline task's deadline.
 
-[![list.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdateby.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdateby.png)
+[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateby.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateby.png)
 
 ### `update [index] /from [dd/MM/yyyy hhmm]` - Update an Event task starting date and time
 
@@ -233,7 +233,7 @@ Expected outcome:
 
 Updates Event task's starting date and time.
 
-[![list.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdatefrom.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdatefrom.png)
+[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatefrom.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updatefrom.png)
 
 ### `update [index] /to [dd/MM/yyyy hhmm]` - Update an Event task ending date and time
 
@@ -253,7 +253,7 @@ Expected outcome:
 
 Updates Event task's ending date and time.
 
-[![list.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdateto.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fupdateto.png)
+[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateto.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/updateto.png)
 
 ### `bye` - Exit Duke
 
@@ -267,4 +267,4 @@ Expected outcome:
 
 Duke replies with a goodbye message and then waits for a second before closing the window.
 
-[![list.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fbye.png)](..%2Fsrc%2Fmain%2Fresources%2Fimages%2Fbye.png)
+[![list.png](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/bye.png)](https://raw.githubusercontent.com/kohkaixun/ip/master/src/main/resources/images/bye.png)
