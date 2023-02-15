@@ -4,15 +4,13 @@ import leo.leoexception.IncorrectMarkException;
 import leo.leoexception.IncorrectUnmarkException;
 import leo.ui.Ui;
 
-import java.time.LocalDate;
-
 /**
  * Represents a Task. A <code>Task</code> object contains the String description.
  */
 public class Task {
 
     private final String task;
-    private boolean done;
+    private boolean isDone;
     private TaskType type;
 
     /**
@@ -22,7 +20,7 @@ public class Task {
      */
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
         this.type = TaskType.TODO;
     }
 
@@ -41,7 +39,7 @@ public class Task {
      * @return Status of Task.
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
@@ -50,22 +48,22 @@ public class Task {
      * @throws IncorrectMarkException If task is marked.
      */
     public void mark() throws IncorrectMarkException {
-        if (this.done) {
+        if (this.isDone) {
             throw new IncorrectMarkException();
         }
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
-     * Unmarks Task that is not done.
+     * Unmark Task that is not done.
      *
      * @throws IncorrectUnmarkException If task is not marked.
      */
     public void unmark() throws IncorrectUnmarkException {
-        if (!this.done) {
+        if (!this.isDone) {
             throw new IncorrectUnmarkException();
         }
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -87,7 +85,7 @@ public class Task {
     }
 
     /**
-     * Set the TaskType of Task.
+     * Indicate the type of Task to be recorded.
      *
      * @param tt TaskType to be set to the Task.
      */
