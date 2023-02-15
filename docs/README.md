@@ -13,6 +13,7 @@
 
 ## Features 
 Note that commands are case sensitive and should all be lower case.
+
 Datetime should follow format YYYY-MM-DD HH:MM. EG `2021-12-12 12:00`
 
 ### Adding to-do: `todo`
