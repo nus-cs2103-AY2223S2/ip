@@ -52,12 +52,12 @@ test {
 }
 
 application {
-    mainClassName = "seedu.taskGenie.Launcher"
+    mainClassName = "seedu.taskgenie.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "TaskGenie"
-    mainClassName = "taskGenie.Launcher"
+    mainClassName = "taskgenie.Launcher"
     archiveClassifier = null
 }
 
