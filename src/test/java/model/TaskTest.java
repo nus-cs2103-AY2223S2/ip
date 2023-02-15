@@ -38,18 +38,18 @@ public class TaskTest {
 
         Task t1 = new ToDo("todo 1");
         assertDoesNotThrow(() -> Task.setStatusCompleted(1));
-        assertEquals("X", t1.printStatus());
+        assertEquals("✔️", t1.printStatus());
 
         assertDoesNotThrow(() -> Task.setStatusCompleted(1));
-        assertEquals("X", t1.printStatus());
+        assertEquals("✔️", t1.printStatus());
 
         Task t2 = new Deadline("deadline 2", "today");
         assertDoesNotThrow(() -> Task.setStatusCompleted(2));
-        assertEquals("X", t2.printStatus());
+        assertEquals("✔️", t2.printStatus());
 
         Task t3 = new Event("event 3", "today 2pm", "today 4pm");
         assertDoesNotThrow(() -> Task.setStatusCompleted(3));
-        assertEquals("X", t3.printStatus());
+        assertEquals("✔️", t3.printStatus());
     }
 
     @Test
@@ -136,7 +136,7 @@ public class TaskTest {
         assertEquals(" ", t1.printStatus());
 
         Task.setStatusCompleted(1);
-        assertEquals("X", t1.printStatus());
+        assertEquals("✔️", t1.printStatus());
     }
 
     @AfterEach

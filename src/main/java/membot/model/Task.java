@@ -115,7 +115,7 @@ public abstract class Task {
         case NEW:
             return " ";
         case COMPLETED:
-            return "X";
+            return "✔️";
         default:
             assert false : "Available Task status are: NEW, COMPLETED";
         }
