@@ -1,6 +1,6 @@
-# Membot project template
+# Membot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Membot is your personal chat-bot that helps manage your tasks well! It works well with tasks with a deadline, or even tasks with a starting and ending date. It is built for keyboard users and is blazing fast to use.
 
 ## Setting up in Intellij
 
