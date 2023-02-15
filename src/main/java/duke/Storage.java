@@ -61,9 +61,11 @@ public class Storage {
             isFileCreated = true;
         }
 
+        assert isFileCreated;
         String data = lst.listToText();
         try {
             FileWriter writer = new FileWriter(saveLocation);
+            assert writer != null;
             writer.write(data);
             writer.close();
         } catch(IOException e) {
@@ -77,6 +79,7 @@ public class Storage {
      * @throws DukeCannotFindFileException
      */
     public void loadState(TaskList lst) throws DukeCannotFindFileException {
+        assert isFileCreated;
         if (!isFileCreated) {
             throw new DukeCannotFindFileException();
         }
