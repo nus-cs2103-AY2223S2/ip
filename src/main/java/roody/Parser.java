@@ -2,7 +2,6 @@ package roody;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 import roody.commands.Command;
 import roody.commands.DeleteCommand;
@@ -51,7 +50,6 @@ public class Parser {
     }
 
     private static void checkInputFormat(String[] commands, String[] splitCmds) throws RoodyException {
-        System.out.println(Arrays.toString(commands));
         switch (commands[0]) {
         case "start":
         case "list":
