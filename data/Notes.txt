@@ -1,3 +1,3 @@
-hello
-my waist size is 28
-bye
+T | 1 | return book
+D | 0 | return book | 21/02/2023 15:00
+E | 0 | CS2103T Tutorial | 16/02/2023 15:00 - 16/02/2023 16:00

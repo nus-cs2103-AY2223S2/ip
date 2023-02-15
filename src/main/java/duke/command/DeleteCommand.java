@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Note;
 import duke.storage.Storage;
 import duke.storage.TaskList;
@@ -19,14 +20,29 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Extracts index of task that will be deleted from user input.
+     * @param userInput User input.
+     * @return Index of task that will be deleted.
+     */
+    public int getIndex(String userInput) throws DukeException {
+        int toDelete;
+        try {
+            toDelete = Integer.parseInt(userInput.split(" ")[1]) - 1;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Please enter a task index.");
+        }
+        return toDelete;
+    }
+
+    /**
      * Executes user input and deletes specified task from current TaskList.
      * @param tasks Current TaskList.
      * @param notes Current Note.
      * @return Message to inform user that task has been deleted.
      */
-    //@Override
-    public String execute(TaskList tasks, Note notes) {
-        int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
+    @Override
+    public String execute(TaskList tasks, Note notes) throws DukeException {
+        int taskIndex = getIndex(userInput);
         Task toDelete = tasks.getTask(taskIndex);
         tasks.deleteTask(taskIndex);
         Storage.saveTasksToTaskLog(tasks);

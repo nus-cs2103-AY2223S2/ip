@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Note;
 import duke.storage.TaskList;
 import duke.task.Task;
@@ -24,12 +25,12 @@ public class TodoCommand extends Command {
      * @param input User input.
      * @return Todo task name in String format.
      */
-    public String getTodoName(String input) {
+    public String getTodoName(String input) throws DukeException {
         String name = "";
         try {
             name = input.substring(5);
         } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops! Please enter a valid todo task format.\n");
+            throw new DukeException("Oops! Please enter a valid todo task format.\n");
         }
         return name;
     }
@@ -39,7 +40,7 @@ public class TodoCommand extends Command {
      * @param input User input.
      * @return ToDo task.
      */
-    public Task translateInput(String input) {
+    public Task translateInput(String input) throws DukeException {
         return new ToDo(getTodoName(input));
     }
 
@@ -50,7 +51,7 @@ public class TodoCommand extends Command {
      * @return Message to inform user that ToDo task has been added.
      */
     @Override
-    public String execute(TaskList tasks, Note notes) {
+    public String execute(TaskList tasks, Note notes) throws DukeException {
         int taskCount = tasks.getSize() + 1;
         String taskWord = (taskCount == 1) ? "task" : "tasks";
         Task newTask = translateInput(userInput);

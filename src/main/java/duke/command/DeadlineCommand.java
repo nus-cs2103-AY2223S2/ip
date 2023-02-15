@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Note;
 import duke.storage.TaskList;
 import duke.parser.Parser;
@@ -28,12 +29,12 @@ public class DeadlineCommand extends Command {
      * @param input User input.
      * @return Deadline name in String format.
      */
-    public String getDeadlineName(String input) {
+    public String getDeadlineName(String input) throws DukeException {
         String deadlineName = "";
         try {
             deadlineName = input.split(" /by ")[0].substring(9);
         } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
-            System.out.println("Oops! Please enter a valid deadline task format.\n");
+            throw new DukeException ("Oops! Please enter a valid deadline task format.\n");
         }
         return deadlineName;
     }
@@ -43,12 +44,12 @@ public class DeadlineCommand extends Command {
      * @param input User input.
      * @return Deadline time in LocalDateTime format.
      */
-    public LocalDateTime getDeadlineTime(String input) {
+    public LocalDateTime getDeadlineTime(String input) throws DukeException {
         LocalDateTime deadlineTime = null;
         try {
             deadlineTime = Parser.dateFormatter(input.split(" /by ")[1]);
         } catch (DateTimeParseException e) {
-            System.out.println("Oops! Please enter deadline according to a valid 'DD/MM/YYYY HH:mm' format.\n");
+            throw new DukeException("Oops! Please enter deadline according to a valid 'DD/MM/YYYY HH:mm' format.\n");
         }
         return  deadlineTime;
     }
@@ -58,7 +59,7 @@ public class DeadlineCommand extends Command {
      * @param input User input
      * @return Deadline task
      */
-    public Task translateInput(String input) {
+    public Task translateInput(String input) throws DukeException {
         return new Deadline(getDeadlineName(input), getDeadlineTime(input));
     }
 
@@ -69,7 +70,7 @@ public class DeadlineCommand extends Command {
      * @return Message to inform user that Deadline task has been added.
      */
     @Override
-    public String execute(TaskList tasks, Note notes) {
+    public String execute(TaskList tasks, Note notes) throws DukeException {
         int taskCount = tasks.getSize() + 1;
         String taskWord = (taskCount == 1) ? "task" : "tasks";
         Task newTask = translateInput(userInput);

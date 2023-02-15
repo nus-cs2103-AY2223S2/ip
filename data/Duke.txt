@@ -1,6 +1,0 @@
-D | 0 | return book | 10/02/2023 15:00
-T | 0 | read book
-T | 0 | read book
-T | 0 | drink coffee
-T | 0 | make coffee
-T | 0 | buy book

@@ -25,16 +25,6 @@ public final class Parser {
     }
 
     /**
-     * Get keyword from find command
-     * @param input User input containing find command
-     * @return String representation of keyword
-     */
-    public static String getFindKeyword(String input) {
-        assert input.length() > 5: "Find keyword cannot be empty";
-        return input.substring(5);
-    }
-
-    /**
      * Translate a task log line to its respective Task object
      * @param taskLog Task log to be translated
      * @return Task which was represented by its task log format
@@ -75,12 +65,16 @@ public final class Parser {
         assert userInput != null: "User input cannot be blank";
         String command = userInput.split(" ")[0];
         switch (command) {
+        case "help":
+            return new HelpCommand(userInput);
         case "bye":
             return new ExitCommand(userInput);
         case "list":
             return new ListCommand(userInput);
         case "delete":
             return new DeleteCommand(userInput);
+        case "clear":
+            return new ClearCommand(userInput);
         case "mark":
             return new MarkCommand(userInput);
         case "unmark":

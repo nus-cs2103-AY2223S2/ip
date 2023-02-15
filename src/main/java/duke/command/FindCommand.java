@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Note;
 import duke.storage.TaskList;
-import duke.parser.Parser;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -18,6 +18,21 @@ public class FindCommand extends Command {
      */
     public FindCommand(String userInput) {
         super(userInput);
+    }
+
+    /**
+     * Get keyword from find command
+     * @param input User input containing find command
+     * @return String representation of keyword
+     */
+    public String getFindKeyword(String input) throws DukeException {
+        assert input.length() > 5: "Find keyword cannot be empty";
+        try {
+            input.substring(5);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Please enter a keyword.");
+        }
+        return input.substring(5);
     }
 
     /**
@@ -43,8 +58,8 @@ public class FindCommand extends Command {
      * @return List of tasks which match keyword in String format.
      */
     @Override
-    public String execute(TaskList tasks, Note notes) {
-        String keyword = Parser.getFindKeyword(userInput);
+    public String execute(TaskList tasks, Note notes) throws DukeException {
+        String keyword = getFindKeyword(userInput);
         ArrayList<Task> foundTasks = tasks.filterTasks(keyword);
         if (foundTasks.size() == 0) {
             return "There are no matching tasks\n";

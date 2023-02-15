@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Note;
 import duke.storage.TaskList;
 
@@ -22,6 +23,6 @@ public abstract class Command {
      * @param tasks Current TaskList.
      * @param notes Current Note.
      */
-    public abstract String execute(TaskList tasks, Note notes);
+    public abstract String execute(TaskList tasks, Note notes) throws DukeException;
 
 }

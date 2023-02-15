@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.Duke;
 import duke.parser.Parser;
 import duke.task.Task;
 
@@ -7,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -58,6 +60,16 @@ public class Storage {
             taskLog.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteAllTasks() {
+        try {
+            PrintWriter writer = new PrintWriter(Duke.getTASK_LOG_PATH());
+            writer.print("");
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

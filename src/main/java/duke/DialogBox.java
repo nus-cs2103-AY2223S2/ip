@@ -25,18 +25,32 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private DialogBox(String text, Image img, String user) {
+        if(user.equals("Duke")) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/UserDialogBox.fxml"));
+                fxmlLoader.setController(this);
+                fxmlLoader.setRoot(this);
+                fxmlLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+            dialog.setText(text);
+            displayPicture.setImage(img);
+        } else {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DukeDialogBox.fxml"));
+                fxmlLoader.setController(this);
+                fxmlLoader.setRoot(this);
+                fxmlLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            dialog.setText(text);
+            displayPicture.setImage(img);
+        }
     }
 
     /**
@@ -50,11 +64,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "Duke");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "User");
         db.flip();
         return db;
     }

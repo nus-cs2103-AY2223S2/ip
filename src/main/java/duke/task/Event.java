@@ -23,6 +23,10 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
     /**
      * Converts event task to its task log format to be saved in task log file
      * @return String representing event task in task log format
