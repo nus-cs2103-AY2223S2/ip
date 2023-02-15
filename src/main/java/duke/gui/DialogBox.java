@@ -18,15 +18,19 @@ import javafx.scene.text.*;
 public class DialogBox extends HBox {
     private static final String DIALOG_BOX_RESOURCE_PATH = "/view/DialogBox.fxml";
     private static final String ROBOTO_BOLD_RESOURCE_PATH = "/fonts/Roboto-Bold.ttf";
+    private static final int DIALOGUE_BOX_FONT_SIZE = 14;
     private static final Paint BOT_COLOR = Color.valueOf("D34747");
     private static final Paint USER_COLOR = Color.valueOf("5B78C1");
+    private static final String USER_BORDER_RADIUS_STYLE = "-fx-background-radius: 5 5 1 5;";
+    private static final String BOT_BORDER_RADIUS_STYLE = "-fx-background-radius: 5 5 5 1;";
+    private static final String BACKGROUND_COLOR_STYLE = "-fx-background-color: #D9D9D9;";
 
     @FXML
     private TextFlow dialog;
     @FXML
     private ImageView displayPicture;
 
-    public DialogBox(String text, Image img, Paint paint) {
+    public DialogBox(String text, Image img, Paint paint, String style) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(DIALOG_BOX_RESOURCE_PATH));
             fxmlLoader.setController(this);
@@ -37,8 +41,11 @@ public class DialogBox extends HBox {
         }
 
         Text dialogText = new Text(text);
-        dialogText.setFont(Font.loadFont(MainWindow.class.getResourceAsStream(ROBOTO_BOLD_RESOURCE_PATH), 12));
+        Font dialogueFont = Font.loadFont(
+                MainWindow.class.getResourceAsStream(ROBOTO_BOLD_RESOURCE_PATH), DIALOGUE_BOX_FONT_SIZE);
+        dialogText.setFont(dialogueFont);
         dialogText.setFill(paint);
+        dialog.setStyle(style);
         dialog.getChildren().add(dialogText);
         displayPicture.setImage(img);
     }
@@ -55,11 +62,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, USER_COLOR);
+        return new DialogBox(text, img, USER_COLOR,
+                String.format("%s\n%s", BACKGROUND_COLOR_STYLE, USER_BORDER_RADIUS_STYLE));
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, BOT_COLOR);
+        var db = new DialogBox(text, img, BOT_COLOR,
+                String.format("%s\n%s", BACKGROUND_COLOR_STYLE, BOT_BORDER_RADIUS_STYLE));
         db.flip();
         return db;
     }
