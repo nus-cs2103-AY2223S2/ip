@@ -27,18 +27,18 @@ public class Delete extends Command {
     
     /**
      * This function removes a task from the task list
-     * 
-     * @param tasks the list of tasks
+     *  @param tasks the list of tasks
      * @param ui the user interface
      * @param storage the storage object
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         if(this.index > tasks.size() - 1 || this.index < 0) {
             throw new DukeException("Sorry, you used an invalid index");
         }
         this.t = tasks.getTask(index);
         tasks.removeTask(index);
         storage.saveTaskList(tasks);
-        ui.printRemovedMessage(this.t, tasks.size());
+        return ui.printRemovedMessage(this.t, tasks.size());
     }
 }

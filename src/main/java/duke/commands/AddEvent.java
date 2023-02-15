@@ -30,12 +30,12 @@ public class AddEvent extends Command {
     /**
      * This function creates a new event object with the description, start and end time, adds it to
      * the task list, saves the task list to storage and prints the added task to the user
-     * 
-     * @param tasks the list of tasks
-     * @param storage Storage
+     *  @param tasks the list of tasks
      * @param ui the user interface
+     * @param storage Storage
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try{
             // Splitting the input into an array of strings using /from and /to to seperate the strings.
             String[] arrOfStr = this.description.split("/from|/to");
@@ -52,10 +52,10 @@ public class AddEvent extends Command {
             Event e = new Event(this.description, this.start, this.end);
             tasks.add(e);
             storage.saveTaskList(tasks);
-            ui.printAddedTask(e, tasks.size());
+            return ui.printAddedTask(e, tasks.size());
 
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
-        }        
+            return ui.showError(e.getMessage());
+        }
     }
 }

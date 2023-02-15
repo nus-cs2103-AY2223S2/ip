@@ -25,18 +25,18 @@ public class Mark extends Command{
     /**
      * The function takes in a task list, a user interface, and a storage, and then marks the task at
      * the index as done, saves the task list, and prints the marked task
-     * 
-     * @param tasks the list of tasks
+     *  @param tasks the list of tasks
      * @param ui the user interface
      * @param storage Storage
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(this.index > tasks.size() - 1 || this.index < 0) {
             throw new DukeException("Sorry, you used an invalid index");
         }
         this.t = tasks.getTask(this.index);
         this.t.markAsDone();
         storage.saveTaskList(tasks);
-        ui.printMarked(this.t);
+        return ui.printMarked(this.t);
     }
 }

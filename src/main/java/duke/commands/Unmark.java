@@ -25,18 +25,18 @@ public class Unmark extends Command{
     
     /**
      * This function is used to mark a task as not done
-     * 
-     * @param tasks the list of tasks
+     *  @param tasks the list of tasks
      * @param ui the user interface
      * @param storage Storage
+     * @return
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(this.index > tasks.size() - 1 || this.index < 0) {
             throw new DukeException("Sorry, you used an invalid index");
         }
         this.t = tasks.getTask(this.index);
         this.t.markAsNotDone();
         storage.saveTaskList(tasks);
-        ui.printUnmarked(this.t);
+        return ui.printUnmarked(this.t);
     }
 }

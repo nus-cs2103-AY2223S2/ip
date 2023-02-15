@@ -33,11 +33,12 @@ public class TaskList implements Serializable{
         this.tasks.remove(index);
     }
 
-    public void list(){
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        StringBuilder listOfTasks = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
+            listOfTasks.append(i + 1).append(". ").append(this.tasks.get(i)).append("\n");
         }
+        return listOfTasks.toString();
     }
 
 
