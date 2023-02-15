@@ -1,4 +1,5 @@
 package duke.commands;
+
 import duke.exceptions.DukeEmptyInputException;
 import duke.exceptions.DukeInvalidInputException;
 import duke.TaskList;
@@ -15,6 +16,7 @@ public abstract class Command {
 
     /**
      * Initialises the command object.
+     *
      * @param input The given user input.
      */
     public Command(String input) {
@@ -26,6 +28,7 @@ public abstract class Command {
 
     /**
      * Returns whether the command is an exit command.
+     *
      * @return true if the command is an exit command;
      *         false otherwise.
      */

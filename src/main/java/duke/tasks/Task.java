@@ -15,6 +15,7 @@ public class Task {
 
     /**
      * Initilaises the task object.
+     *
      * @param name A string representing the name of the task.
      */
     public Task(String name) {
@@ -24,6 +25,7 @@ public class Task {
 
     /**
      * Marks a task as done; does nothing if it was already marked.
+     *
      * @return Response indicating if the task was successfully marked done or
      *         if the task was already marked done.
      */
@@ -37,6 +39,7 @@ public class Task {
 
     /**
      * Marks a task as not done.
+     *
      * @return Response indicating if the task was successfully marked not done or
      *         if the task was already marked not done.
      */
@@ -50,6 +53,7 @@ public class Task {
 
     /**
      * Returns a status icon indicating if the task has been marked done.
+     *
      * @return X if the task has been done, a space otherwise.
      */
     public String getStatusIcon() {
@@ -58,6 +62,7 @@ public class Task {
 
     /**
      * Returns the string representation of the task.
+     *
      * @return A string representing the task.
      */
     @Override
@@ -67,6 +72,7 @@ public class Task {
 
     /**
      * Converts the task into a text format that can be saved to a text file.
+     *
      * @return A string representing the task in a different format.
      */
     public String toText() {
@@ -75,6 +81,7 @@ public class Task {
 
     /**
      * Converts string that has been formatted in a certain way into a task.
+     *
      * @param taskText The string representing the task.
      * @return The newly created task from the text.
      * @throws DukeInvalidInputException
@@ -108,6 +115,7 @@ public class Task {
 
     /**
      * Returns the name of the task.
+     *
      * @return The name of the task.
      */
     public String getName() {

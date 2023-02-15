@@ -40,6 +40,7 @@ public class Storage {
     /**
      * Saves the current state of the tasklist by writing to a text file.
      * Creates new folder and file if they cannot be found, then sets the booleans to true.
+     *
      * @param lst The current tasklist object.
      */
     public void saveState(TaskList lst) {
@@ -75,6 +76,7 @@ public class Storage {
 
     /**
      * Loads the saved text file into the tasklist, throws error if the file cannot be found.
+     *
      * @param lst The tasklist to be saved into.
      * @throws DukeCannotFindFileException
      */

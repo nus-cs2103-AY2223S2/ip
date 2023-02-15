@@ -9,6 +9,7 @@ import duke.exceptions.DukeInvalidInputException;
 public class Todo extends Task {
     /**
      * Initialises the todo object.
+     *
      * @param name The name of the task.
      */
     private Todo(String name) {
@@ -17,6 +18,7 @@ public class Todo extends Task {
 
     /**
      * Creates a new todo object, throws error if input is invalid.
+     *
      * @param input A string that contains the parameters entered after the user command.
      * @return The created todo object.
      * @throws DukeInvalidInputException
@@ -31,6 +33,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of the todo.
+     *
      * @return A string representing the todo.
      */
     @Override
@@ -40,6 +43,7 @@ public class Todo extends Task {
 
     /**
      * Converts the todo into a text format that can be saved to a text file.
+     * 
      * @return A string representing the todo in a different format.
      */
     @Override

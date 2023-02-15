@@ -14,6 +14,7 @@ import duke.Ui;
 public class ListCommand extends Command {
     /**
      * Initialises the list command.
+     *
      * @param input The given user input.
      */
     public ListCommand(String input) {
@@ -22,6 +23,7 @@ public class ListCommand extends Command {
 
     /**
      * Lists all items currently in the tasklist.
+     *
      * @param tasks The tasklist to add the deadline to.
      * @param ui The ui object used to interact with the user.
      * @param storage The storage object that saves the current state of the tasklist.
@@ -36,7 +38,6 @@ public class ListCommand extends Command {
             return e.toString();
         }
         String response = tasks.listItems();
-//        ui.printResponse(response);
         return response;
     }
 }
