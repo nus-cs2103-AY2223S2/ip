@@ -7,8 +7,6 @@ import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.Ui;
 import duke.exception.DukeException;
-import duke.exception.EmptyTaskListException;
-import duke.exception.FileLoadingException;
 
 enum Action {
     Bye,
