@@ -36,5 +36,12 @@ public class Deadline extends Task {
         return "[" + this.getTypeIcon() + "]"
                 + "[" + this.getStatusIcon() + "] " + this.getTaskContent() + " (by: " + time + ")";
     }
+
+    @Override
+    public void postponeTask(String ... dates) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        format.withLocale(Locale.ENGLISH);
+        this.time = LocalDateTime.parse(dates[0], format);
+    }
 }
 

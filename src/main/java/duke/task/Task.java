@@ -18,6 +18,8 @@ abstract public class Task implements Serializable {
     private Boolean isDone;
     protected type taskType;
 
+    abstract public void postponeTask(String ... dates);
+
     /**
      * Constructs an instance of Task with the given content and state of whether it is done.
      * @param content the content of the task.

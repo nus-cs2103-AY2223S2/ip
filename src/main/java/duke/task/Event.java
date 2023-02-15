@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 /**
  * Represents task of the type 'Event'.
@@ -38,5 +39,13 @@ public class Event extends Task {
         String to = this.to.format(format);
         return "[" + this.getTypeIcon() + "]"
                 + "[" + this.getStatusIcon() + "] " + this.getTaskContent() + " (from: " + from + " to: " + to + ")";
+    }
+
+    @Override
+    public void postponeTask(String ... dates) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        this.from = LocalDateTime.parse(dates[0], format);
+        this.to = LocalDateTime.parse(dates[1], format);
+        this.time = this.to;
     }
 }
