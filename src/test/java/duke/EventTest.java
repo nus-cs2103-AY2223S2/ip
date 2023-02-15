@@ -1,27 +1,34 @@
 package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.InvalidDateTimeException;
 import duke.task.Event;
 
 public class EventTest {
     @Test
-    public void eventDesc_correctDesc_noExceptionThrown() throws InvalidDateTimeException {
-        assertEquals("[E][ ] project meeting (from: 2023-01-25 14:00 to: 2023-01-25 14:00)",
+    public void testEventToString() {
+        assertEquals("[E][ ] project meeting (from: Jan-1-2022 14:00 to: Jan-23-2022 14:00)",
             new Event("project meeting",
-                "25/1/2023 1400", "25/1/2023 1600", false).toString());
+                "Jan-1-2022 14:00", "Jan-23-2022 14:00", false).toString());
     }
 
     @Test
-    public void eventDesc_wrongDay_exceptionThrown() {
-        InvalidDateTimeException thrown = assertThrows(InvalidDateTimeException.class, ()
-                -> new Event("project meeting", "25/1/2023 1400",
-                    "25/1/2023 1600", false));
-        assertEquals("OOPS!!! Invalid DateTime inputs!",
-                thrown.toString());
+    public void testMarkEvent() {
+        Event mockEvent = new Event("project meeting",
+                "Jan-1-2022 14:00", "Jan-23-2022 14:00", false);
+        mockEvent.setIsDone(true);
+        assertEquals("[E][X] project meeting (from: Jan-1-2022 14:00 to: Jan-23-2022 14:00)",
+                mockEvent.toString());
+    }
+
+    @Test
+    public void testUnmarkEvent() {
+        Event mockEvent = new Event("project meeting",
+                "Jan-1-2022 14:00", "Jan-23-2022 14:00", true);
+        mockEvent.setIsDone(false);
+        assertEquals("[E][ ] project meeting (from: Jan-1-2022 14:00 to: Jan-23-2022 14:00)",
+                mockEvent.toString());
     }
 }

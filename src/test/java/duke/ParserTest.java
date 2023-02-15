@@ -14,7 +14,7 @@ public class ParserTest {
     public void checkTaskDesc_emptyTodo_exceptionThrown() {
         EmptyTaskException thrown = assertThrows(EmptyTaskException.class, ()
                 -> Parser.checkTaskDesc(new String[]{"todo"}));
-        assertEquals("OOPS!!! The description of a todo task cannot be empty.",
+        assertEquals("OOPS!!! The description of a todo command cannot be empty.",
                 thrown.toString());
     }
 
