@@ -1,29 +1,91 @@
 # User Guide
 
+Duke is a desktop app that reminds you of all the tasks that you have to carry out!!
+
 ## Features 
+1. Adding tasks
+   - Todo
+   - Deadline
+   - Event
+2. Viewing tasks
+3. Editing task 
+4. Locating task
+5. Deleting task 
+6. Marking task 
+7. Unmarking task 
+8. Exiting the program 
 
-### Feature-ABC
+### Adding a task
+Adds a task to Duke
 
-Description of the feature.
+Format: ```{task} {description} {startDate} {endDate}```
 
-### Feature-XYZ
+- task: either todo deadline/event
+- description: description of the task
+- startDate: start date of the task
+- endDate: end date of the task
 
-Description of the feature.
+*{startDate} and {endDate} is optional for ToDo task.*
 
-## Usage
+*{startDate} is required and {endDate} is optional for Deadline task.*
 
-### `Keyword` - Describe action
+*{startDate} and {endDate} is required for Event task.*
 
-Describe the action and its outcome.
+### Viewing task
+View all task stored in Duke
 
-Example of usage: 
+Format: ```list```
 
-`keyword (optional arguments)`
+### Editing task
+Updating an existing task in Duke
 
-Expected outcome:
+Format: ```update {index} {description} {startDate} {endDate}```
 
-Description of the outcome.
+- index: index of the task 
+- description: description of the task
+- startDate: start date of the task
+- endDate: end date of the task
 
-```
-expected output
-```
+*{startDate} and {endDate} is optional for ToDo task.*
+
+*{startDate} is required and {endDate} is optional for Deadline task.*
+
+*{startDate} and {endDate} is required for Event task.*
+
+### Locating task
+Finds any task that has a description that matches given keyword
+
+Format: ```find {keyword}```
+
+- keyword: keyword to be located in task's description
+
+
+### Delete task
+Delete task from Duke
+
+Format: ```delete {index} ```
+
+- index: index of the task 
+
+### Mark task
+Mark an existing task in Duke as completed
+
+Format: ```mark {index}```
+
+- index: index of the task 
+
+### Unmark task
+Unmark an existing task in Duke as incomplete
+
+Format: ```Unmark {index}```
+
+- index: index of the task 
+
+### Killing the program
+Terminating Duke
+
+Format: ```Bye```
+
+
+
+
