@@ -98,7 +98,7 @@ The task will be added.
 
 ```
 Got it. I've added this task:
-	[E][ ] Walk cat (From: Feb 1 2023 2:00 PM to: Feb 1 2023 5:00 PM)
+	[E][ ] Walk cat (from: Feb 1 2023 2:00 PM to: Feb 1 2023 5:00 PM)
 Now you have 1 tasks in the list.
 ```
 
@@ -132,7 +132,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks will be listed.
+Task with id `TASK_ID` will be deleted.
 
 ```
 Meow-ted. I've removed this task:
@@ -151,7 +151,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks will be listed.
+Task with id `TASK_ID` will be marked as done.
 
 ```
 Nice! I've marked this task as done:
@@ -169,7 +169,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks will be listed.
+Task with id `TASK_ID` will be marked as undone.
 
 ```
 Meow-k! I've marked this task as not done yet:
@@ -188,7 +188,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks will be listed.
+Task with id TASK_ID will have description changed to `TASK_DESCRIPTION`.
 
 ```
 Meow-k. I've updated the description of this task:
