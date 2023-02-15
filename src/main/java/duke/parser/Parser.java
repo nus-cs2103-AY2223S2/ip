@@ -78,6 +78,9 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand("Please specify the task number and level u would like me to " +
                     "prioritize it!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new InvalidCommand("Please specify the level u would like me to " +
+                    "prioritize it!");
         }
     }
 
@@ -89,8 +92,11 @@ public class Parser {
             return new TagCommand(targetIndex, tagName);
         } catch (DukeException e) {
             return new InvalidCommand(e.getMessage());
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException s) {
             return new InvalidCommand("Please specify the task number and level u would like me to " +
+                    "tag!");
+        } catch (ArrayIndexOutOfBoundsException a) {
+            return new InvalidCommand("Please specify the level u would like me to " +
                     "tag!");
         }
     }
@@ -250,13 +256,13 @@ public class Parser {
     private static int parseArgsAsDisplayedIndex(String args) throws DukeException {
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            throw new DukeException("Could not find index number to parse");
+            throw new DukeException("Could not find index number to parse.");
         }
         try {
             int targetIndex = Integer.parseInt(matcher.group("targetIndex"));
             return targetIndex;
         } catch (NumberFormatException ne) {
-            throw new DukeException("You have not specified the task number");
+            throw new DukeException("You have not specified the task number.");
         }
     }
 
@@ -265,7 +271,7 @@ public class Parser {
             LocalDate localDate = LocalDate.parse(time);
             return localDate;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Can't parse date/time");
+            throw new DukeException("Can't parse date/time!");
         }
     }
 }
