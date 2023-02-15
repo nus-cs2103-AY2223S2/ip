@@ -44,7 +44,8 @@ public class TaskList {
             Task removedTask = this.tasks.remove(index);
             assert sizeBeforeRemove - this.countTasks() == 1;
             return removedTask;
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getClass().getName());
             throw new ListIndexOutOfRange();
         }
     }
