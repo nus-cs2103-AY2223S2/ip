@@ -60,7 +60,7 @@ public class Duke {
             Command c = parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return "Sorry Duke failed to understand";
+            return e.toString();
         }
     }
 }

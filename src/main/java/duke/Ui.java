@@ -54,7 +54,8 @@ public class Ui {
     /**
      * Says bye to the user after the exit command is called.
      */
-    public void sayBye() {
-        printResponse("Bye! Hope to see you again soon!");
+    public String sayBye() {
+
+        return "Bye! Hope to see you again soon!";
     }
 }

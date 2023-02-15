@@ -1,12 +1,10 @@
 package duke.commands;
 
 import duke.exceptions.DukeEmptyInputException;
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidInputException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 /**
  * Represents the command to delete a certain task.
  * @author lukkesreysandeur
@@ -31,12 +29,10 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
         if (input.equals("")) {
-            DukeException e = new DukeEmptyInputException();
-            return e.toString();
+            throw new DukeEmptyInputException();
         }
         String response = tasks.delete(input);
         storage.saveState(tasks);
-//        ui.printResponse(response);
         return response;
     }
 }
