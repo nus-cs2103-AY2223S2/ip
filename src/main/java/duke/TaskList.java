@@ -132,7 +132,7 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Please give the index of the task you wish to mark!";
         } catch (IndexOutOfBoundsException e) {
-            return "There are only " + tasks.size() + " tasks in the list!";
+            return "There is no task of that index!";
         }
     }
 
@@ -152,7 +152,7 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Please give the index of the task you wish to unmark!";
         } catch (IndexOutOfBoundsException e) {
-            return "There are only " + tasks.size() + " tasks in the list!";
+            return "There is no task of that index";
         }
     }
 
@@ -173,7 +173,7 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Please give the index of the task you wish to delete!";
         } catch (IndexOutOfBoundsException e) {
-            return "There are only " + tasks.size() + " tasks in the list!";
+            return "There is no task of that index";
         }
     }
 
