@@ -29,27 +29,36 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        String desc = query.getParam();
-        if (desc == null || desc.isBlank()) {
-            throw new InvalidCommandParamException("Please provide a description for your deadline!");
-        }
-
-        String endDateStr = query.getArgument("/by");
-        if (endDateStr == null || endDateStr.isBlank()) {
-            throw new InvalidCommandParamException("Please provide a end date for your deadline!");
-        }
-
-        LocalDateTime endDateTime;
-        try {
-            endDateTime = LocalDateTime.parse(endDateStr, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
-        } catch (DateTimeParseException e) {
-            throw new InvalidCommandParamException(
-                    String.format("Please provide a valid end date for your deadline! (%s)", DATETIME_PATTERN));
-        }
+        String desc = getNotBlankParam(query, "Please provide a description for your deadline!");
+        LocalDateTime endDateTime = getLocalDateTimeFromQuery(query, "/by", "end date");
 
         Task newTask = tt.addDeadline(desc, endDateTime);
 
         tt.saveAllTasks();
         return "Added task " + newTask;
+    }
+
+    protected LocalDateTime getLocalDateTimeFromQuery(Query query, String argKey, String expectedParam)
+            throws InvalidCommandParamException {
+        String dateStr = getNotBlankArg(query, argKey, getInvalidCommandResponse(expectedParam));
+        return getLocalDateTimeFromDateStr(dateStr, expectedParam);
+    }
+
+    protected LocalDateTime getLocalDateTimeFromDateStr(String dateStr, String expectedParam)
+            throws InvalidCommandParamException {
+        try {
+            return LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandParamException(
+                    getInvalidCommandResponse(expectedParam, DATETIME_PATTERN));
+        }
+    }
+
+    protected static String getInvalidCommandResponse(String expectedParam) {
+        return getInvalidCommandResponse(expectedParam, "");
+    }
+
+    protected static String getInvalidCommandResponse(String expectedParam, String correctFormat) {
+        return String.format("Please provide a valid %s! %s", expectedParam, correctFormat);
     }
 }
