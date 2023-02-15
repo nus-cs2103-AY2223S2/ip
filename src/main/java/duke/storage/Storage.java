@@ -24,12 +24,13 @@ public class Storage {
      * @throws DukeException
      */
     public static List<Task> load() throws DukeException {
-        File f = null;
         Scanner sc = null;
+        File file = new File(DATA_PATH);
         List<Task> tasks = new ArrayList<>();
         try {
-            f = new File(DATA_PATH);
-            sc = new Scanner(f);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 TaskSerializer ts = new TaskSerializer(sc.nextLine());
                 tasks.add(ts.createTask());
@@ -37,8 +38,9 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException("No data file found");
         } finally {
-            assert sc != null : "sc should not be null";
-            sc.close();
+            if (sc != null) {
+                sc.close();
+            }
         }
         return tasks;
     }
