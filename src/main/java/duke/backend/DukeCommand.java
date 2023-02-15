@@ -12,16 +12,18 @@ import duke.task.ToDo;
  * Represents a duke.backend.DukeCommand object that represents a command.
  */
 public enum DukeCommand {
+    ARCHIVE("archive"),
     BYE("bye"),
-    LIST("list"),
-    DELETE("delete"),
-    TODO("todo"),
     DEADLINE("deadline"),
+    DELETE("delete"),
     EVENT("event"),
     FIND("find"),
+    INVALID("invalid"),
+    LIST("list"),
     MARK("mark"),
-    UNMARK("unmark"),
-    INVALID("invalid");
+    TODO("todo"),
+    UNMARK("unmark");
+
 
     /**
      * the command.  For example, the command of the command "to-do read book" is "to-do".
@@ -74,8 +76,15 @@ public enum DukeCommand {
      * @param storage the storage.
      * @return the output message.
      */
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, Storage archiveStorage) {
         switch (this) {
+        case ARCHIVE:
+            try {
+                archiveStorage.archive(storage);
+                return ResponseGenerator.printTasksArchived(taskList);
+            } catch (DukeException e) {
+                return ResponseGenerator.dukeExceptionMessage(e);
+            }
         case BYE:
             exit();
             return ResponseGenerator.goodbyeMessage();

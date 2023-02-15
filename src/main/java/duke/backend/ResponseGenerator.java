@@ -95,4 +95,12 @@ public class ResponseGenerator {
         assert task != null : "task should not be null";
         return "Noted. I've removed this task:\n  " + task + "\nNow you have " + size + " tasks in the list.";
     }
+
+    /**
+     * @param taskList The task list that was archived.
+     * @return the message to be printed.
+     */
+    public static String printTasksArchived(TaskList taskList) {
+        return "Archived the following tasks:\n" + taskList.deleteAllTasks();
+    }
 }

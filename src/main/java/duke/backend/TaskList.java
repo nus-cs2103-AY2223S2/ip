@@ -70,6 +70,15 @@ public class TaskList {
     }
 
     /**
+     * @return the string representation of the task list that was deleted.
+     */
+    public String deleteAllTasks() {
+        String message = taskList.toString();
+        this.taskList.clear();
+        return message;
+    }
+
+    /**
      * @return the string representation of the task list in the format to be stored in the hard disk.
      */
     public String toStorageString() {
