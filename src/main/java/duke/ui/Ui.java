@@ -16,7 +16,6 @@ public class Ui {
     private final int indentSpace;
     private StringBuilder response = new StringBuilder();
 
-    //Constructors
     /**
      * Constructor that sets HorizontalLineLength to be 70 and IndentSpace to be 4 by default.
      */
@@ -37,7 +36,6 @@ public class Ui {
         this.indentSpace = indentSpace;
     }
 
-    //Methods
     /**
      * The indent method that places an indentation as specified by the space indent
      * at the start of every line.

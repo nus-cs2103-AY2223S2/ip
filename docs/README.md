@@ -70,26 +70,11 @@ help
 
 1. Open Intellij.
 2. If you are not on the welcome screen, navigate to "File" > "Close Project" to close any existing projects.
-3. At this point, you should be seeing the welcome screen and be able to either import a project or open one.
-4. Set up the correct JDK version, as follows:
-	1. Launch Intellij and select "Configure" from the welcome screen or navigate to "File" > "Project Structure".
-	2. Once in the Project Structure window, click on "Project" and choose "Project SDK" from the drop-down menu.
-	3. In the SDKs section, confirm that JDK 11 is selected. If it's not present, click on "New..." and locate the JDK 11 installation on your system.
-	4. Pick the correct version and press "OK" to set it as the default SDK for your project.
-	5. Click "Apply" and "OK" to save the changes and exit the Project Structure window.
-
-3. Here are the steps to import the project into Intellij:
-	1. Start Intellij and go to "File" > "Open" or "File" > "Import Project".
-	2. Find the project folder, select the root directory of the project, and click "OK".
-	3. The project will be imported and the necessary build and indexing will occur automatically. If any configuration or dependencies are prompted, accept the default options.
-	4. Upon completion of the import, the project should be fully functional for running and debugging within Intellij.
-
-
-4. After the import is completed, you can access the src/main/java/Launcher.java file. To run it, simply right-click on it and choose the option "Run Launcher".
-
-5. If the setup was successful, the graphical user interface should appear shortly.
-
-6. You can now type in your command and press Enter to run it.
+3. Set up the correct JDK version.
+4. Import the project into Intellij.
+5. After the import is completed, you can access the src/main/java/Launcher.java file. To run it, simply right-click on it and choose the option "Run Launcher".
+6. If the setup was successful, the graphical user interface should appear shortly.
+7. You can now type in your command and press Enter to run it.
 
 
 ## Command Summary
