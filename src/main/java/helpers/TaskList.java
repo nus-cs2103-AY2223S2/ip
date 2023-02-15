@@ -2,6 +2,7 @@ package helpers;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import tasks.*;
@@ -50,6 +51,7 @@ public class TaskList {
 
     public String add(Task task) {
         tasks.add(task);
+
         message = String.format("    %s\n", task);
         String s = tasks.size() == 1 ? "task" : "tasks";
         message += String.format("Now you have %d %s in the list.\n", tasks.size(), s);

@@ -1,9 +1,12 @@
 package helpers;
 
+import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     private TaskList taskList;
@@ -36,17 +39,17 @@ public class Parser {
             case "mark":
                 index = Integer.parseInt(instrSplit[1]);
                 message = "Nice! I've marked this task as done:\n";
-                message += "    " + taskList.mark(index);
+                message += "    " + taskList.mark(index) + "\n";
                 break;
             case "unmark":
                 index = Integer.parseInt(instrSplit[1]);
                 message = "OK, I've marked this task as not done yet:\n";
-                message += "    " + taskList.unmark(index);
+                message += "    " + taskList.unmark(index) + "\n";
                 break;
             case "delete":
                 index = Integer.parseInt(instrSplit[1]);
                 message = "Noted. I've removed this task:\n";
-                message += "    " + taskList.delete(index);
+                message += "    " + taskList.delete(index) + "\n";
                 break;
             case "todo":
                 task = new Todo(instr);
@@ -54,10 +57,18 @@ public class Parser {
                 message += taskList.add(task);
                 break;
             case "deadline":
-                task = new Deadline(instruction);
-                message = "Got it. I've added this task:\n";
-                message += taskList.add(task);
-                break;
+                try {
+                    task = new Deadline(instruction);
+                    message = "Got it. I've added this task:\n";
+                    message += taskList.add(task);
+                } catch (DateTimeParseException e) {
+                    message = "Date format incorrect!!\n";
+                    message += "Usage: 'deadline task /by YYYY-MM-DD'\n";
+                } catch (DukeException e) {
+                    message = e.getMessage();
+                } finally {
+                    break;
+                }
             case "event":
                 task = new Event(instruction);
                 ;

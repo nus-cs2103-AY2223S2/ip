@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.format.DateTimeParseException;
+
+import exceptions.DukeException;
 import tasks.*;
 
 public class Database {
@@ -29,28 +32,34 @@ public class Database {
         try {
             sc = new Scanner(savedFile);
             while (sc.hasNextLine()) {
-                extendedInstr = sc.nextLine();
-                // first character in instruction shows if task is completed
-                completed = Integer.parseInt(extendedInstr.substring(0, 1)) == 1 ? true : false;
-                instr = extendedInstr.substring(2);
-                instrSplit = instr.split(" ");
-                command = instrSplit[0];
+                try {
+                    extendedInstr = sc.nextLine();
+                    // first character in instruction shows if task is completed
+                    completed = Integer.parseInt(extendedInstr.substring(0, 1)) == 1 ? true : false;
+                    instr = extendedInstr.substring(2);
+                    instrSplit = instr.split(" ");
+                    command = instrSplit[0];
 
-                if (command.equals("todo")) {
-                    task = new Todo(instr);
-                } else if (command.equals("deadline")) {
-                    task = new Deadline(instr);
-                } else {
-                    task = new Event(instr);
-                }
-                tasks.add(task);
+                    if (command.equals("todo")) {
+                        task = new Todo(instr);
+                    } else if (command.equals("deadline")) {
+                        task = new Deadline(instr);
+                    } else {
+                        task = new Event(instr);
+                    }
+                    tasks.add(task);
 
-                if (completed) {
-                    task.setDone();
+                    if (completed) {
+                        task.setDone();
+                    }
+                } catch (DateTimeParseException dtpe) {
+
+                } catch (DukeException e) {
+
                 }
             }
             sc.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException fnfe) {
             savedFile.createNewFile();
         }
         return tasks;
