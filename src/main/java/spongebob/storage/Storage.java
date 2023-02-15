@@ -4,7 +4,7 @@ import spongebob.exception.SpongebobEventOverlapException;
 import spongebob.exception.SpongebobFileNotFoundException;
 import spongebob.exception.SpongebobInvalidArgumentException;
 import spongebob.exception.SpongebobIoException;
-import spongebob.task.*; // All classed from task subpackage are needed.
+import spongebob.task.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +25,8 @@ public class Storage {
      * Constructor to create a storage.
      *
      * @param filepath string representation of the path.
-     * @throws SpongebobFileNotFoundException indicate attempt to open the file denoted by a specified pathname has
-     *     failed.
+     * @throws SpongebobFileNotFoundException indicate attempt to open the file denoted by a
+     *     specified pathname has failed.
      */
     public Storage(String filepath) throws SpongebobFileNotFoundException {
         try {
@@ -65,7 +65,7 @@ public class Storage {
     public void updateData(Task t) throws SpongebobIoException {
         try {
             List<String> allLines = Files.readAllLines(path);
-            createTaskDescriptionInAllLine(t, allLines);
+            createTaskDescriptionForTasklist(t, allLines);
             Files.write(path, allLines);
         } catch (IOException e) {
             throw new SpongebobIoException("Cannot read from " + filePath + " data file");
@@ -83,14 +83,14 @@ public class Storage {
         try {
             List<String> allLines = Files.readAllLines(path);
             // overwrite the spongebob.txt file by updating the task's new status
-            updateTaskStatusInAllLine(lineNumber, status, allLines);
+            updateTaskStatusForTasklist(lineNumber, status, allLines);
             Files.write(path, allLines);
         } catch (IOException e) {
             throw new SpongebobIoException("Cannot read from " + filePath + " data file");
         }
     }
 
-    private static void createTaskDescriptionInAllLine(Task t, List<String> allLines) {
+    private static void createTaskDescriptionForTasklist(Task t, List<String> allLines) {
         String s = String.format("%s | %s | %s", t.toString().charAt(1), t.getStatusIcon(), t.getDescription());
         if (t instanceof Deadlines) {
             // create string description for deadline task to store in data file
@@ -104,7 +104,7 @@ public class Storage {
         allLines.add(s);
     }
 
-    private static void updateTaskStatusInAllLine(int lineNumber, int status, List<String> allLines) {
+    private static void updateTaskStatusForTasklist(int lineNumber, int status, List<String> allLines) {
         String line = allLines.get(lineNumber);
         String s = line.substring(0, 4) + status + line.substring(5);
         allLines.set(lineNumber, s);
@@ -119,11 +119,18 @@ public class Storage {
     public void removeData(int lineNumber) throws SpongebobIoException {
         try {
             List<String> allLines = Files.readAllLines(path);
+            removeDataFromEventListIfIsEventTask(allLines.get(lineNumber));
             // remove the line from spongebob.txt
             allLines.remove(lineNumber);
             Files.write(path, allLines);
         } catch (IOException e) {
             throw new SpongebobIoException("Cannot read from " + filePath + " data file");
+        }
+    }
+
+    private void removeDataFromEventListIfIsEventTask(String description) {
+        if (description.contains("[E]")) {
+            Events.deleteEventTimeList(description.split(" | "));
         }
     }
 
@@ -133,8 +140,16 @@ public class Storage {
      * @return list of task that stored in the file before.
      * @throws SpongebobIoException indicate failed or interrupted I/O operations occurred.
      * @throws SpongebobInvalidArgumentException indicate that a command has been passed an illegal argument.
+     * @throws SpongebobEventOverlapException indicate there are overlapping tasks exist.
      */
-    public ArrayList<Task> load() throws SpongebobIoException,
+    public ArrayList<Task> setUpStorageAndLoadData() throws SpongebobIoException, SpongebobInvalidArgumentException,
+            SpongebobEventOverlapException {
+        ArrayList<Task> task = load();
+        setEventTaskList(task);
+        return task;
+    }
+
+    private ArrayList<Task> load() throws SpongebobIoException,
             SpongebobInvalidArgumentException, SpongebobEventOverlapException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -155,24 +170,14 @@ public class Storage {
         }
     }
 
-    /**
-     * Finds all matched tasks from the data file given a specific keyword.
-     *
-     * @param keyword keyword that used to find related task from the data file.
-     * @return a list of tasks which match the keyword.
-     * @throws SpongebobInvalidArgumentException indicate that a command has been passed an illegal argument.
-     * @throws SpongebobIoException indicate failed or interrupted I/O operations occurred.
-     * @throws SpongebobEventOverlapException indicate there are overlapping tasks exist.
-     */
-    public TaskList findDataFromFile(String keyword) throws SpongebobInvalidArgumentException,
-            SpongebobIoException, SpongebobEventOverlapException {
-        TaskList result = new TaskList();
-        for (Task task: load()) {
-            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                result.add(task);
+    private void setEventTaskList(ArrayList<Task> tasks) {
+        ArrayList<Events> eventTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task instanceof Events) {
+                eventTasks.add((Events) task);
             }
         }
-        return result;
+        Events.setEventTimeList(eventTasks);
     }
 
     private Task createTaskFromStorage(String description) throws SpongebobInvalidArgumentException,

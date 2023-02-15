@@ -1,6 +1,5 @@
 package spongebob.task;
 
-import javafx.util.Pair;
 import spongebob.exception.SpongebobEventOverlapException;
 import spongebob.exception.SpongebobInvalidArgumentException;
 
@@ -14,19 +13,19 @@ import java.util.ArrayList;
  */
 public class Events extends Task {
     /** Stores starting time and ending time of every event. */
-    private static final ArrayList<Pair<LocalDateTime, LocalDateTime>> eventTimeList = new ArrayList<>();
+    private static ArrayList<Events> eventTimeList = new ArrayList<>();
+    private static final String STANDARD_FORMAT = "dd/MM/yyyy HH:mm";
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern(STANDARD_FORMAT);
     /**
      * Starting time of events in "dd/MM/yyyy HH:mm" format
      */
-    private final LocalDateTime FORMATTED_STARTED_TIME;
+    private LocalDateTime formattedStartTime;
     /**
      * End time of events in "dd/MM/yyyy HH:mm" format
      */
-    private final LocalDateTime FORMATTED_END_TIME;
-    private final String START_TIME;
-    private final String END_TIME;
-    private final String STANDARD_FORMAT = "dd/MM/yyyy HH:mm";
-    private final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern(STANDARD_FORMAT);
+    private LocalDateTime formattedEndTime;
+    private String startTime;
+    private String endTime;
 
     /**
      * Constructor to create an event instance.
@@ -40,14 +39,13 @@ public class Events extends Task {
             SpongebobEventOverlapException {
         super(description);
         try {
-            this.FORMATTED_STARTED_TIME = LocalDateTime.parse(startTime, FORMAT);
-            this.FORMATTED_END_TIME = LocalDateTime.parse(endTime, FORMAT);
-            this.START_TIME = startTime;
-            this.END_TIME = endTime;
-            if (isOverlapping()) {
+            setUserInputTimeInChronologicalOrder(startTime, endTime);
+            this.formattedStartTime = LocalDateTime.parse(this.startTime, FORMAT);
+            this.formattedEndTime = LocalDateTime.parse(this.endTime, FORMAT);
+            if (checkOverlappingEvents()) {
                 throw new SpongebobEventOverlapException("Event overlap with previous event.");
             } else {
-                eventTimeList.add(new Pair<>(this.FORMATTED_STARTED_TIME, this.FORMATTED_END_TIME));
+                eventTimeList.add(this);
             }
         } catch (DateTimeParseException e) {
             throw new SpongebobInvalidArgumentException(
@@ -55,32 +53,80 @@ public class Events extends Task {
         }
     }
 
+    /**
+     * Constructor to create an events task.
+     *
+     * @param description full description of event task, including its starting and ending time.
+     */
+    public Events(String[] description) {
+        super(description[2]);
+        setUserInputTimeInChronologicalOrder(description[3], description[4]);
+    }
+
+    private void setUserInputTimeInChronologicalOrder(String... time) {
+        if (LocalDateTime.parse(time[0], FORMAT).isBefore(LocalDateTime.parse(time[1], FORMAT))) {
+            this.startTime = time[0];
+            this.endTime = time[1];
+        } else {
+            this.startTime = time[1];
+            this.endTime = time[0];
+        }
+    }
+
     public String getStartTime() {
-        return START_TIME;
+        return startTime;
     }
 
     public String getEndTime() {
-        return END_TIME;
+        return endTime;
     }
 
-    /**
-     * Checks whether scheduling anomalies occur between different events.
-     *
-     * @return true if anomalies scheduling, otherwise false.
-     */
-    private boolean isOverlapping() {
-        for (Pair<LocalDateTime, LocalDateTime> otherEvent: eventTimeList) {
-            if (!(FORMATTED_STARTED_TIME.isAfter(otherEvent.getValue())
-                    || FORMATTED_END_TIME.isBefore(otherEvent.getKey()))) {
+    // Checks whether scheduling anomalies occur between different events.
+    private boolean checkOverlappingEvents() {
+        for (Events otherEvent: eventTimeList) {
+            // let [x1, x2] and [y1, y2] be two interval
+            // check overlap: !(x2 < y1 || x1 > y2) == x2 > y1 && x1 < y2
+            if (formattedStartTime.isBefore(otherEvent.formattedEndTime)
+                    && formattedEndTime.isAfter(otherEvent.formattedStartTime)) {
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * Resets event time list everytime the program start its execution.
+     *
+     * @param eventTimeList list of event task that stored in the data file.
+     */
+    public static void setEventTimeList(ArrayList<Events> eventTimeList) {
+        Events.eventTimeList = eventTimeList;
+    }
+
+    /**
+     * Removes the event task from the event time list everytime the user delete event task.
+     *
+     * @param description description of task that stored in the file.
+     */
+    public static void deleteEventTimeList(String[] description) {
+        Events event = new Events(description);
+        eventTimeList.remove(event);
+    }
+
     @Override
     public String toString() {
         return String.format("[E] %s (from: %s to: %s)",
-                super.toString(), FORMATTED_STARTED_TIME.format(FORMAT), FORMATTED_END_TIME.format(FORMAT));
+                super.toString(), formattedStartTime.format(FORMAT), formattedEndTime.format(FORMAT));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Events) {
+            Events e = (Events) obj;
+            return getDescription().trim().equals(e.getDescription().trim())
+                    && getStartTime().trim().equals(e.getStartTime().trim())
+                    && getEndTime().trim().equals(e.getEndTime().trim());
+        }
+        return false;
     }
 }

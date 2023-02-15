@@ -91,7 +91,7 @@ public class Ui {
     }
 
     /**
-     * Returns response to delete command.
+     * Returns response to find command.
      *
      * @param taskList list that contained the task
      * @return message for find task command.
@@ -100,8 +100,7 @@ public class Ui {
         if (taskList.isEmpty()) {
             return "Could not find task matched!";
         }
-
-        StringBuilder msg = new StringBuilder();
+        StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
             msg.append("\n").append(index).append(".").append(taskList.getTaskAt(i).toString());

@@ -3,8 +3,8 @@ package spongebob.command;
 import spongebob.exception.SpongebobEmptyArgumentException;
 import spongebob.exception.SpongebobInvalidArgumentException;
 import spongebob.exception.SpongebobIoException;
-import spongebob.storage.Storage;
 
+import spongebob.storage.Storage;
 import spongebob.task.Task;
 import spongebob.task.TaskList;
 import spongebob.ui.Ui;

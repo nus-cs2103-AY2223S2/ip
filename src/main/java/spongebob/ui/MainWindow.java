@@ -41,6 +41,11 @@ public class MainWindow extends AnchorPane {
         //scrollPane.setFitToHeight(true);
     }
 
+    /**
+     * Sets up the welcome message.
+     *
+     * @param d spongebob that has been created.
+     */
     public void setSpongebob(Spongebob d) {
         assert d != null : "Spongebob hasn't been created.";
         spongebob = d;
@@ -62,7 +67,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (input.trim().equals("exit")) {
+        if (input.toLowerCase().trim().equals("exit")) {
             logout();
         }
     }

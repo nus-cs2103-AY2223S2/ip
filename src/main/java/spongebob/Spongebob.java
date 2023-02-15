@@ -29,7 +29,7 @@ public class Spongebob {
 
         try {
             storage = new Storage(filePath);
-            setTasks(new TaskList(storage.load()));
+            setTasks(new TaskList(storage.setUpStorageAndLoadData()));
         } catch (SpongebobException e) {
             Storage.setDefaultStorage();
             setTasks(new TaskList());

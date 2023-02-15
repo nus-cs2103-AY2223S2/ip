@@ -1,10 +1,6 @@
 package spongebob.command;
 
 import spongebob.exception.SpongebobEmptyArgumentException;
-import spongebob.exception.SpongebobEventOverlapException;
-import spongebob.exception.SpongebobInvalidArgumentException;
-import spongebob.exception.SpongebobIoException;
-
 import spongebob.storage.Storage;
 import spongebob.task.TaskList;
 import spongebob.ui.Ui;
@@ -36,9 +32,20 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) throws SpongebobInvalidArgumentException,
-            SpongebobIoException, SpongebobEventOverlapException {
-        TaskList taskList = storage.findDataFromFile(keyword);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        TaskList taskList = findDataFromList(tasks, keyword);
         return ui.responseToFindTaskCommand(taskList);
+    }
+
+
+    // Finds all matched tasks from the tasklist given a specific keyword.
+    private TaskList findDataFromList(TaskList tasks, String keyword) {
+        TaskList result = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.getTaskAt(i).getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(tasks.getTaskAt(i));
+            }
+        }
+        return result;
     }
 }
