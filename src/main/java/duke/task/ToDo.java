@@ -72,9 +72,9 @@ public class ToDo extends Task {
         if (anotherTask instanceof ToDo) {
             return -1;
         } else if (anotherTask instanceof Deadline) {
-            return -1;
+            return 1;
         } else if (anotherTask instanceof Event) {
-            return -1;
+            return 1;
         } else {
             return 0; // never reach here
         }

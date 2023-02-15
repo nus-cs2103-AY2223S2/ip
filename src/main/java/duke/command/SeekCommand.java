@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.util.Storage;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashSet;
 
 /**
  * Executable command to mark an existing task as completed.
@@ -68,8 +68,8 @@ public class SeekCommand extends Command {
             throw new DukeException("If you can't get the unit of time correct, what else can you do?");
         }
 
-        LocalDateTime availableDate = taskList.seekAvailability(quantifier, unitOfTime);
+        String availableDate = taskList.seekAvailability(quantifier, unitOfTime);
 
-        return ui.printAvailability(availableDate, input);
+        return availableDate;
     }
 }

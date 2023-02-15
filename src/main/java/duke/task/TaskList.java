@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import duke.ui.Ui;
 
 /**
  * A list of Tasks.
@@ -75,44 +76,60 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Use streams to iterate through the list of Task
+     * Use streams to iterate through the list of Task.
      *
-     * @return String representation of list of tasks
+     * @return String representation of list of tasks.
      */
     public String toList() {
-        return taskList.stream()
-                .map(Task::toString)
+        return IntStream.range(0, taskList.size())
+                .mapToObj(i -> (i + 1) + ". " + taskList.get(i).toString())
                 .collect(Collectors.joining("\n"));
     }
 
+    /**
+     * Sort the tasklist based on nearest deadline.
+     *
+     * @return Sorted tasklist.
+     */
     public TaskList sortList() {
         ArrayList<Task> arrayList = new ArrayList<>(taskList.stream().sorted().collect(Collectors.toList()));
 
         return new TaskList(arrayList);
     }
 
-
-    public LocalDateTime seekAvailability(int quantifier, String unitOfTime) throws DukeException {
+    /**
+     * Find the next available time slot where user is free for the specified duration.
+     *
+     * @param quantifier Integer quantifier.
+     * @param unitOfTime String unit of time.
+     * @return String result to be shown on GUI.
+     */
+    public String seekAvailability(int quantifier, String unitOfTime) {
         TaskList sortedList = sortList();
 
         LocalDateTime result = null;
 
+        // Goes through sorted list
         for (int i = 0; i < sortedList.size() - 1; i++) {
             Task startTask = sortedList.get(i);
             Task endTask = sortedList.get(i + 1);
 
+            // Once reach a todo, no more tasks with deadline in the list
             if (startTask instanceof ToDo) {
                 break;
             }
 
+            // Once the second task used for comparison is a todo, update result with right bound
             if (endTask instanceof ToDo) {
                 result = startTask.getSecondEnd();
                 break;
             }
 
+            // If the first task ends after the second task starts
             LocalDateTime firstEnd = startTask.getFirstEnd();
             LocalDateTime secondStart = endTask.getSecondStart();
 
+            // Update the right bound to the second task right bound
             if (firstEnd.isAfter(secondStart)) {
                 result = endTask.getSecondEnd();
                 break;
@@ -131,6 +148,7 @@ public class TaskList implements Iterable<Task> {
             case "minute":
             case "minutes":
                 duration = firstEnd.until(secondStart, ChronoUnit.MINUTES);
+                break;
             default:
                 duration = -1;
             }
@@ -142,9 +160,9 @@ public class TaskList implements Iterable<Task> {
         }
 
         if (result == null) {
-            throw new DukeException("You can get started right away.");
+            return "You can get started right away.";
         } else {
-            return result;
+            return Ui.printAvailability(result, quantifier, unitOfTime);
         }
     }
 

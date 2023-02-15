@@ -1,11 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * Event: subclass of Task that tracks startDate and endDate

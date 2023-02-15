@@ -51,7 +51,8 @@ public class UnmarkCommand extends Command {
         }
 
         if (ind >= taskList.size() || ind < 0) {
-            throw new DukeException("If you look at the task number, you would know what's happening. And I say this in tears.");
+            throw new DukeException("If you look at the task number, you would know "
+                    + "what's happening. And I say this in tears.");
         }
 
         if (ind >= taskList.size() || ind < 0) {

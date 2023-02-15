@@ -1,6 +1,17 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.SeekCommand;
+import duke.command.SortCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -66,7 +77,7 @@ public class Parser {
             CommandType commandType = CommandType.valueOf(inputs[0].toUpperCase());
 
             // Filter out any invalid inputs to always instantiate command with correct inputs
-            String filtered_input = filterInput(input);
+            String filteredInput = filterInput(input);
 
             switch (commandType) {
             case BYE:
@@ -79,28 +90,28 @@ public class Parser {
                 return new SortCommand(taskList, ui, storage);
 
             case SEEK:
-                return new SeekCommand(filtered_input, taskList, ui, storage);
+                return new SeekCommand(filteredInput, taskList, ui, storage);
 
             case MARK:
-                return new MarkCommand(filtered_input, taskList, ui, storage);
+                return new MarkCommand(filteredInput, taskList, ui, storage);
 
             case UNMARK:
-                return new UnmarkCommand(filtered_input, taskList, ui, storage);
+                return new UnmarkCommand(filteredInput, taskList, ui, storage);
 
             case DELETE:
-                return new DeleteCommand(filtered_input, taskList, ui, storage);
+                return new DeleteCommand(filteredInput, taskList, ui, storage);
 
             case TODO:
-                return new TodoCommand(filtered_input, taskList, ui, storage);
+                return new TodoCommand(filteredInput, taskList, ui, storage);
 
             case DEADLINE:
-                return new DeadlineCommand(filtered_input, taskList, ui, storage);
+                return new DeadlineCommand(filteredInput, taskList, ui, storage);
 
             case EVENT:
-                return new EventCommand(filtered_input, taskList, ui, storage);
+                return new EventCommand(filteredInput, taskList, ui, storage);
 
             case FIND:
-                return new FindCommand(filtered_input, taskList, ui);
+                return new FindCommand(filteredInput, taskList, ui);
 
             default:
                 throw new DukeException("Something went wrong.");
