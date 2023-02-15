@@ -31,7 +31,7 @@ public class DeadlineCmd extends Command {
         this.deadline = Deadline.create(this.lineInput);
         taskList.add(this.deadline);
 
-        return String.format("Got it. I've added this task:\n%s\n%s",
+        return String.format("Well, well... another task to the list:\n%s\n%s",
                 Ui.indentString(this.deadline.toString(), 1),
                 Ui.numTaskToString(taskList.countTasks()));
     }

@@ -29,7 +29,7 @@ public class MarkCmd extends Command {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         Task taskToMark = taskList.get(index).markDone();
         assert taskToMark.getIsDone() == true;
-        String output = "Nice! I've marked this task as done:";
+        String output = "Wonderful. You've completed the task:";
         return String.format("%s\n%s", output,
                 Ui.indentString(taskToMark.toString(), 1));
     }

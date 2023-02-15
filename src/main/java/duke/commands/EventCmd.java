@@ -32,7 +32,7 @@ public class EventCmd extends Command {
         this.event = Event.create(this.lineInput);
         taskList.add(this.event);
 
-        return String.format("Got it. I've added this task:\n%s\n%s",
+        return String.format("A new event! I hope it's at night:\n%s\n%s",
                 Ui.indentString(this.event.toString(), 1),
                 Ui.numTaskToString(taskList.countTasks()));
     }

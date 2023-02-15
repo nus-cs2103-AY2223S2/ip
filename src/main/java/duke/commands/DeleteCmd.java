@@ -30,7 +30,7 @@ public class DeleteCmd extends Command {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = this.taskList.removeTask(index);
 
-        return String.format("Noted. I've removed this task:\n%s\n%s",
+        return String.format("The task has disappeared into the night...:\n%s\n%s",
                 Ui.indentString(this.task.toString(), 1),
                 Ui.numTaskToString(taskList.countTasks()));
     }

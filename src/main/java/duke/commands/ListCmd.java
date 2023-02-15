@@ -22,6 +22,6 @@ public class ListCmd extends Command {
 
     /** Executes UI reply. */
     public String execute() {
-        return String.format("Here are the tasks in your list:\n%s", taskList.toString());
+        return String.format("Here's your list:\n%s", taskList.toString());
     }
 }

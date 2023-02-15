@@ -20,6 +20,6 @@ public class ByeCmd extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Bye. Hope to see you again soon!";
+        return "Goodnight... Zzz...";
     }
 }

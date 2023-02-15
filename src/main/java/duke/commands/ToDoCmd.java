@@ -30,7 +30,7 @@ public class ToDoCmd extends Command {
         this.toDo = ToDo.create(this.lineInput);
         taskList.add(this.toDo);
 
-        return String.format("Got it. I've added this task:\n%s\n%s",
+        return String.format("I'll remember this task:\n%s\n%s",
                 Ui.indentString(this.toDo.toString(), 1),
                 Ui.numTaskToString(taskList.countTasks()));
     };

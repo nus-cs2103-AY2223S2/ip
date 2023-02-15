@@ -75,6 +75,6 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void greetUser() {
-        displayMessage(Profile.DUKE, "Hoot! How can I help you today?", false);
+        displayMessage(Profile.DUKE, "Hoot! How may I assist you on this fine night?", false);
     }
 }

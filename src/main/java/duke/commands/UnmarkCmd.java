@@ -30,7 +30,7 @@ public class UnmarkCmd extends Command {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         Task taskToUnmark = taskList.get(index).markDone();
         assert taskToUnmark.getIsDone() == false;
-        String output = "Ok, I've marked this task as not done yet:";
+        String output = "I've marked this task as incomplete:";
         return String.format("%s\n%s", output,
                 Ui.indentString(taskToUnmark.toString(), 1));
     }

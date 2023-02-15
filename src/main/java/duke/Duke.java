@@ -27,12 +27,12 @@ public class Duke {
         try {
             return command.execute();
         } catch (CommandExecutionError e) {
-            return "Couldn't execute command :/ \n" + e.toString();
+            return "I couldn't do what you asked for. \n" + e.toString();
         }
     }
 
     public boolean isSuccessfulExecution(String response) {
-        return response.startsWith("Couldn't execute command :/");
+        return response.startsWith("I couldn't do what you asked for.");
     }
 }
 

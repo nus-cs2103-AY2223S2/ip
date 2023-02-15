@@ -22,6 +22,6 @@ public class FindCmd extends Command {
         String[] findKeywords = Parser.parseFindKeyword(this.lineInput);
         this.findResult = this.taskList.find(findKeywords);
 
-        return String.format("Here are matching tasks in your list:\n%s", findResult.toString());
+        return String.format("Here's what I spotted:\n%s", findResult.toString());
     }
 }
