@@ -24,7 +24,7 @@ public class Deadline extends Task {
             String deadline) throws NeroException {
         super(description, isDone);
         try {
-            this.date = LocalDate.parse(deadline);
+            this.date = LocalDate.parse(deadline.trim());
         } catch (DateTimeParseException e) {
             throw new IncorrectDateFormatException();
         }
@@ -33,14 +33,8 @@ public class Deadline extends Task {
     /**
      * Similar as above constructor, except it initialises isDone to False by default
      */
-    public Deadline(String description, String deadline)
-            throws IncorrectDateFormatException {
-        super(description);
-        try {
-            this.date = LocalDate.parse(deadline.trim());
-        } catch (DateTimeParseException e) {
-            throw new IncorrectDateFormatException();
-        }
+    public Deadline(String description, String deadline) throws NeroException {
+        this(description, false, deadline);
     }
 
 

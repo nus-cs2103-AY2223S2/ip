@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exceptions.NeroException;
 import duke.task.Task;
 
 /**
@@ -13,15 +14,15 @@ public class ToDo extends Task {
      * @param description Details of the task
      * @param isDone Keeps track of whether the task is completed
      */
-    public ToDo(String description, boolean isDone) {
+    public ToDo(String description, boolean isDone) throws NeroException {
         super(description, isDone);
     }
 
     /**
      * Same as above constructor, but with isDone initialised as false
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description) throws NeroException {
+        this(description, false);
     }
 
     public String getTaskIcon() {

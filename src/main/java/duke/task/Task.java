@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.Ui;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.NeroException;
 
 /**
  * Task is the parent class of ToDo, Event and Deadline. It contains description
@@ -19,7 +21,11 @@ public abstract class Task {
      * @param description Details of the task
      * @param isDone Keeps track of whether task is completed
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) throws NeroException {
+        description = description.trim();
+        if (description.length() == 0) {
+            throw new EmptyDescriptionException();
+        }
         this.description = description;
         this.isDone = isDone;
     }
@@ -27,9 +33,8 @@ public abstract class Task {
     /**
      * Same as above constructor, except isDone is initalised to false
      */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+    public Task(String description) throws NeroException {
+        this(description, false);
     }
 
 

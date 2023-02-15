@@ -29,8 +29,8 @@ public class Event extends Task {
                  String startDate, String endDate) throws NeroException {
         super(description, isDone);
         try {
-            this.startDate = LocalDate.parse(startDate);
-            this.endDate = LocalDate.parse(endDate);
+            this.startDate = LocalDate.parse(startDate.trim());
+            this.endDate = LocalDate.parse(endDate.trim());
             assert this.endDate.isAfter(this.startDate);
         } catch (DateTimeParseException e) {
             throw new IncorrectDateFormatException();
@@ -48,16 +48,7 @@ public class Event extends Task {
      */
     public Event(String description, String startDate,
             String endDate) throws NeroException {
-        super(description);
-        try {
-            this.startDate = LocalDate.parse(startDate.trim());
-            this.endDate = LocalDate.parse(endDate.trim());
-            assert this.endDate.isAfter(this.startDate);
-        } catch (DateTimeParseException e) {
-            throw new IncorrectDateFormatException();
-        } catch (AssertionError e) {
-            throw new NeroException("End date must be after start date!");
-        }
+        this(description, false, startDate, endDate);
     }
 
     /**

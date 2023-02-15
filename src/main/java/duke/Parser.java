@@ -2,6 +2,7 @@ package duke;
 
 import duke.exceptions.*;
 import duke.task.*;
+import duke.commands.*;
 
 /**
  * Handles the reading and execution of inputs
@@ -26,101 +27,35 @@ public class Parser {
             String[] input = inputString.split(" ");
             switch (Enum.valueOf(Types.class, input[0].toUpperCase())) {
             case BYE:
-                return ui.printExitInstructions();
+                Command newCommand = new ByeCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             case LIST:
-                return ui.printTasksMessage() + "\n" + taskList.printTasks();
-            case MARK: {
-                try {
-                    int taskToMark = Integer.parseInt(input[1]) - 1;
-                    Task currTask = taskList.get(taskToMark);
-                    currTask.setAsDone();
-                    return ui.printMarkedTaskMessage(currTask.toString());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectIndexException(taskList.getSize());
-                }
-            }
-            case UNMARK: {
-                try {
-                    int taskToUnmark = Integer.parseInt(input[1]) - 1;
-                    Task currTask = taskList.get(taskToUnmark);
-                    currTask.setAsUndone();
-                    return ui.printUnmarkedTaskMessage(currTask.toString());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectIndexException(taskList.getSize());
-                }
-            }
+                newCommand = new ListCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
+            case MARK:
+                newCommand = new MarkCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
+            case UNMARK:
+                newCommand = new UnmarkCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             case TODO:
-                int index = inputString.indexOf("todo");
-                try {
-                    String description = inputString.substring(index + 5);
-                    Task newTask = new ToDo(description);
-                    taskList.addTask(newTask);
-                    return ui.printAddedTasks(newTask.toString(), taskList.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectToDoException();
-                }
+                newCommand = new ToDoCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             case DEADLINE:
-                try {
-                    //cleanedString contains [description, duration]
-                    String[] cleanedString = cleanDeadline(inputString);
-                    Task newTask = new Deadline(cleanedString[0], cleanedString[1]);
-                    taskList.addTask(newTask);
-                    return ui.printAddedTasks(newTask.toString(), taskList.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectDeadlineFormatException();
-                }
+                newCommand = new DeadlineCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             case EVENT:
-                try {
-                    //cleanedString contains [description, startDate, endDate]
-                    String[] cleanedString = cleanEvent(inputString);
-                    Task newTask = new Event(cleanedString[0], cleanedString[1], cleanedString[2]);
-                    taskList.addTask(newTask);
-                    return ui.printAddedTasks(newTask.toString(), taskList.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectEventFormatException();
-                }
+                newCommand = new EventCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             case DELETE:
-                try {
-                    int toDelete = Integer.parseInt(input[1]) - 1;
-                    Task removedTask = taskList.get(toDelete);
-                    taskList.removeTask(toDelete);
-                    return ui.printDeletedTasks(removedTask.toString(), taskList.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IncorrectIndexException(taskList.getSize());
-                }
+                newCommand = new DeleteCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             case FIND:
-                TaskList newTaskList = taskList.findMatchingTasks(input[1]);
-                if (newTaskList.getSize() > 0) {
-                    return ui.printMatchingTasks() + "\n" + newTaskList.printTasks();
-                } else {
-                    return ui.printNoMatchingTasks();
-                }
+                newCommand = new FindCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             case RESCHEDULE:
-                try {
-                    int taskIndex = Integer.parseInt(input[1]) - 1;
-                    if (taskIndex >= taskList.getSize() || taskIndex < 0) {
-                        throw new IncorrectIndexException(taskList.getSize());
-                    }
-                    Task currTask = taskList.get(taskIndex);
-                    if (currTask instanceof ToDo) {
-                        return ui.printFailedReschedule();
-                    } else if (currTask instanceof Deadline) {
-                        String newDeadline = input[3];
-                        Task newTask = new Deadline(currTask.getDescription(), newDeadline);
-                        taskList.set(taskIndex, newTask);
-                        return ui.printSuccessfulReschedule(newDeadline.toString());
-                    } else {
-                        String startDate = input[3];
-                        String endDate = input[5];
-                        Task newTask = new Event(currTask.getDescription(), startDate, endDate);
-                        taskList.set(taskIndex, newTask);
-                        return ui.printSuccessfulReschedule(newTask.toString());
-                    }
-                } catch (IndexOutOfBoundsException e) {
-                    throw new RescheduleException();
-                } catch (NumberFormatException e) {
-                    throw new RescheduleException();
-                }
+                newCommand = new RescheduleCommand(ui, taskList);
+                return newCommand.executeCommand(inputString);
             default:
                 return ui.printCommandNotDetected();
             }
