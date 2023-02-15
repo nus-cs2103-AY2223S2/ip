@@ -69,6 +69,25 @@ public class TaskList {
     }
 
     /**
+     * Method to check if a task is already marked.
+     * @param index index of task.
+     * @return whether it is marked.
+     */
+    public boolean isMarked(int index) {
+        Task task = tasks.get(index);
+        return task.isDone();
+    }
+    /**
+     * Method to check if a task is not yet marked.
+     * @param index index of task.
+     * @return true if task is not marked, otherwise false.
+     */
+    public boolean isNotMarked(int index) {
+        Task task = tasks.get(index);
+        return !task.isDone();
+    }
+
+    /**
      * Method to mark a task as done in the list.
      * @param index the index of task to be marked.
      */

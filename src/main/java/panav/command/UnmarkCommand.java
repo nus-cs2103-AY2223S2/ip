@@ -33,6 +33,9 @@ public class UnmarkCommand extends EditCommand {
             // ArrayList of tasks has to be non-empty to be able to mark/unmark a task.
             assert (lengthTasks > 0);
             int editIndex = super.readNumber(fullCommand, lengthTasks);
+            if (tasks.isNotMarked(editIndex - 1)) {
+                return "The task you are trying to unmark is already not marked!!";
+            }
             text = tasks.unmarkTask(editIndex - 1);
         } catch (DukeException e) {
             return e.getMessage();
