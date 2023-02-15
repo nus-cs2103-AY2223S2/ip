@@ -8,7 +8,7 @@ public class Ui {
     /**
      * greets the user when Duke starts up
      *
-     * @return greeting message 
+     * @return greeting message
      */
     public String greet() {
         return "Hello! I'm Somebody\n" + "What can I do for you?";
