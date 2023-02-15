@@ -1,0 +1,22 @@
+todo borrow book
+list
+deadline return book /by Sunday
+event project meeting /from Mon 2pm /to 4pm
+list
+mark 1
+mark 2
+unmark 2
+list
+i like to speak rubbish
+todo
+deadline
+deadline pay taxes
+deadline pay taxes /by
+event finish cs2103
+event finish cs2103 /from
+event finish cs2103 /from tuesday 2am /to
+delete 1
+list
+delete 2
+list
+delete 5

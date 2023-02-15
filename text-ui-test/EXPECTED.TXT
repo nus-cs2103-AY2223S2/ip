@@ -1,7 +1,61 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+Hello there! I am 4RTHUR
+4RTHUR: Added task Todo/[ ] borrow book
+
+4RTHUR: 1. Todo/[ ] borrow book
+
+
+4RTHUR: Added task Deadline/[ ] return book (by Sunday)
+
+4RTHUR: Added task Event/[ ] project meeting (from Mon 2pm to 4pm)
+
+4RTHUR: 1. Todo/[ ] borrow book
+2. Deadline/[ ] return book (by Sunday)
+3. Event/[ ] project meeting (from Mon 2pm to 4pm)
+
+
+4RTHUR: Task marked as complete: Todo/[X] borrow book
+
+4RTHUR: Task marked as complete: Deadline/[X] return book (by Sunday)
+
+4RTHUR: Task marked as incomplete: Deadline/[ ] return book (by Sunday)
+
+4RTHUR: 1. Todo/[X] borrow book
+2. Deadline/[ ] return book (by Sunday)
+3. Event/[ ] project meeting (from Mon 2pm to 4pm)
+
+
+4RTHUR: I have failed you my liege! Your command is not of the known tongue!
+
+4RTHUR: I have failed you my liege! Please provide a description for your todo!
+
+4RTHUR: I have failed you my liege! Please provide a description for your deadline!
+
+4RTHUR: I have failed you my liege! Please provide an end date for your deadline!
+
+4RTHUR: I have failed you my liege! Please provide an end date for your deadline!
+
+4RTHUR: I have failed you my liege! Please provide a start date for the event!
+
+4RTHUR: I have failed you my liege! Please provide a start date for the event!
+
+4RTHUR: I have failed you my liege! Please provide an end date for the event!
+
+4RTHUR: Task deleted: Todo/[X] borrow book
+
+4RTHUR: 1. Deadline/[ ] return book (by Sunday)
+2. Event/[ ] project meeting (from Mon 2pm to 4pm)
+
+
+4RTHUR: Task deleted: Event/[ ] project meeting (from Mon 2pm to 4pm)
+
+4RTHUR: 1. Deadline/[ ] return book (by Sunday)
+
+
+4RTHUR: I have failed you my liege! Task 4 not found!
 
