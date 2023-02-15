@@ -2,6 +2,7 @@ package membot.commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Comparator;
 
 import membot.model.Task;
@@ -22,7 +23,7 @@ public class SortCommand extends Command {
     public void execute() {
         if (!InputValidator.isSingleInputValid(this.input, false, false)) {
             this.ui.printlnError(
-                    "Invalid Syntax: \"sort [option]\"",
+                    String.format("Invalid Syntax: \"sort [%s]\"", getSortOptions("|")),
                     "",
                     "Example: \"sort date\""
             );
@@ -61,12 +62,12 @@ public class SortCommand extends Command {
                 Task.sort(Comparator.comparing(Task::getTaskType));
                 break;
             default:
-                assert false : "Available options are: date, status, title, type";
+                assert false : String.format("Available options are: %s", getSortOptions(", "));
             }
         } catch (IllegalArgumentException e) {
             this.ui.printlnError(
                     "Invalid sort option!",
-                    "Available options are: date, status, title, type"
+                    String.format("Available options are: %s", getSortOptions(", "))
             );
             this.ui.printSeparator();
             return;
@@ -74,6 +75,11 @@ public class SortCommand extends Command {
 
         new ListCommand(this.ui).execute();
         this.ui.printSeparator();
+    }
+
+    private String getSortOptions(String delimiter) {
+        return String.join(delimiter, Arrays.stream(SortOption.class.getEnumConstants())
+                .map(x -> x.toString().toLowerCase()).toArray(String[]::new));
     }
 }
 
