@@ -1,4 +1,7 @@
-package elise;
+package elise.internal;
+
+import elise.EliseException;
+import elise.tasks.Task;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,7 +19,7 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    protected String showWelcome() {
+    public String showWelcome() {
         String logo = "█▀▀ █░░ █ █▀ █▀▀\n"
                 + "██▄ █▄▄ █ ▄█ ██▄\n";
         logo += "Hello! I am a personal Chat-bot who keep track of various things!\nEnter help to view commands!";
@@ -33,7 +36,7 @@ public class Ui {
      * @param e EliseException.
      * @return Error message.
      */
-    protected String showError(EliseException e) {
+    public String showError(EliseException e) {
         return wrapText(e.getMessage());
     }
 
@@ -42,7 +45,7 @@ public class Ui {
      *
      * @param t Task marked done.
      */
-    protected String markDoneMessage(Task t) {
+    public String markDoneMessage(Task t) {
         return wrapText("Nice! I've marked this task as done:\n"
                 + t.fullMessage());
     }
@@ -52,7 +55,7 @@ public class Ui {
      *
      * @param t Task marked undone.
      */
-    protected String markUndoneMessage(Task t) {
+    public String markUndoneMessage(Task t) {
         return wrapText("Nice! I've marked this task as not done yet:\n"
                 + t.fullMessage());
     }
@@ -72,7 +75,7 @@ public class Ui {
      * @param t Task added.
      * @param taskList Task manager.
      */
-    protected String addMessage(Task t, TaskList taskList) {
+    public String addMessage(Task t, TaskList taskList) {
         return wrapText("Got it. I've added this task:\n" + t.fullMessage() + "\n"
                 + sizeMessage(taskList));
     }
@@ -83,7 +86,7 @@ public class Ui {
      * @param t Task deleted.
      * @param taskList Task manager.
      */
-    protected String deleteMessage(Task t, TaskList taskList) {
+    public String deleteMessage(Task t, TaskList taskList) {
         return wrapText("Noted. I've removed this task:\n" + t.fullMessage() + "\n"
                 + sizeMessage(taskList));
     }
@@ -91,7 +94,7 @@ public class Ui {
     /**
      * Prints help message.
      */
-    protected String showHelp() {
+    public String showHelp() {
         return wrapText(HELP_MESSAGE);
     }
 }

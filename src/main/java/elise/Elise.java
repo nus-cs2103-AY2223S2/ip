@@ -1,5 +1,11 @@
 package elise;
 
+import elise.commands.Command;
+import elise.internal.Parser;
+import elise.internal.Storage;
+import elise.internal.TaskList;
+import elise.internal.Ui;
+
 import java.io.IOException;
 
 /**
@@ -15,7 +21,6 @@ public class Elise {
      * Constructor for Elise.
      *
      * @param filePath Path of initial data file.
-     * @throws EliseException if filePath is invalid.
      */
     public Elise(String filePath) {
         try {

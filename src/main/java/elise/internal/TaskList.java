@@ -1,4 +1,10 @@
-package elise;
+package elise.internal;
+
+import elise.EliseException;
+import elise.tasks.Deadline;
+import elise.tasks.Event;
+import elise.tasks.Task;
+import elise.tasks.ToDo;
 
 import java.util.List;
 
@@ -14,14 +20,14 @@ public class TaskList {
      *
      * @param tasks Initial tasks.
      */
-    protected TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
      * Lists out all tasks and their status.
      */
-    protected String list() {
+    public String list() {
         if (tasks.size() == 0) {
             return "No tasks left :)";
         }
@@ -39,7 +45,7 @@ public class TaskList {
      *
      * @param keyword Keyword to match.
      */
-    protected String find(String keyword) {
+    public String find(String keyword) {
         int rank = 1;
         // Matches exact keyword. Do not match part of word.
         String regex = ".*\\b" + keyword + "\\b.*";
@@ -64,7 +70,7 @@ public class TaskList {
      * @return The task at the index.
      * @throws EliseException Invalid index.
      */
-    protected Task markDone(int index) throws EliseException {
+    public Task markDone(int index) throws EliseException {
         if (index < 0 || index >= tasks.size()) {
             throw new EliseException("OOPS!!! Invalid index");
         }
@@ -82,7 +88,7 @@ public class TaskList {
      * @return The task at the index.
      * @throws EliseException Invalid index.
      */
-    protected Task markUndone(int index) throws EliseException {
+    public Task markUndone(int index) throws EliseException {
         if (index < 0 || index >= tasks.size()) {
             throw new EliseException("OOPS!!! Invalid index.");
         }
@@ -99,7 +105,7 @@ public class TaskList {
      * @return The task at the index.
      * @throws EliseException Invalid index.
      */
-    protected Task delete(int index) throws EliseException {
+    public Task delete(int index) throws EliseException {
         if (index < 0 || index >= tasks.size()) {
             throw new EliseException("OOPS!!! Invalid index.");
         }
@@ -112,7 +118,7 @@ public class TaskList {
      * @param code Code of the task
      * @return The task created.
      */
-    protected Task addTask(int code, String[] message) {
+    public Task addTask(int code, String[] message) {
         Task t;
         if (code == 0) {
             t = new ToDo(false, message);
@@ -133,7 +139,7 @@ public class TaskList {
      *
      * @return Number of tasks.
      */
-    protected int getSize() {
+    public int getSize() {
         return tasks.size();
     }
 
@@ -146,7 +152,7 @@ public class TaskList {
      * @return Task created.
      * @throws EliseException Unsupported code.
      */
-    protected static Task getInstance(String code, boolean status, String[] content) throws EliseException {
+    public static Task getInstance(String code, boolean status, String[] content) throws EliseException {
         if (code.equals("T")) {
             return new ToDo(status, content);
         } else if (code.equals("D")) {

@@ -18,7 +18,7 @@ public class MaybeDate {
      *
      * @param timeString String of this period.
      */
-    protected MaybeDate(String timeString) {
+    public MaybeDate(String timeString) {
         isTime = false;
         this.timeString = timeString;
     }
@@ -28,7 +28,7 @@ public class MaybeDate {
      *
      * @param dateTime Date and time of this period.
      */
-    protected MaybeDate(LocalDateTime dateTime) {
+    public MaybeDate(LocalDateTime dateTime) {
         isTime = true;
         this.dateTime = dateTime;
     }

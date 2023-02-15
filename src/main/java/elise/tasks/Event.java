@@ -1,4 +1,7 @@
-package elise;
+package elise.tasks;
+
+import elise.MaybeDate;
+import elise.internal.Parser;
 
 /**
  * Represents an event task.
@@ -13,7 +16,7 @@ public class Event extends Task {
      * @param status Completed or not.
      * @param content Contains message, start and end dates.
      */
-    protected Event(boolean status, String[] content) {
+    public Event(boolean status, String[] content) {
         super(status, content[0]);
         this.begin = Parser.parseDate(content[1]);
         this.end = Parser.parseDate(content[2]);
@@ -44,7 +47,7 @@ public class Event extends Task {
      * @return String representation of event task to be stored in file.
      */
     @Override
-    protected String fileMessage() {
+    public String fileMessage() {
         return String.format("%s||%d||%s||%s||%s\n", getTypeIcon(), isDone ? 1 : 0, content, begin, end);
     }
 }

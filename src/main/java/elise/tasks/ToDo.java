@@ -1,4 +1,4 @@
-package elise;
+package elise.tasks;
 
 /**
  * Represents a to-do task.
@@ -9,16 +9,16 @@ public class ToDo extends Task {
      * Constructor for ToDo
      *
      * @param status Completed or not.
-     * @param content
+     * @param content Content of message.
      */
-    protected ToDo(boolean status, String[] content) {
+    public ToDo(boolean status, String[] content) {
         super(status, content[0]);
     }
 
     /**
      * Returns the type icon dedicated to the todo task.
      *
-     * @return Type icon of todo task
+     * @return Type icon of todo task.
      */
     protected String getTypeIcon() {
         return "T";
@@ -30,7 +30,7 @@ public class ToDo extends Task {
      * @return String representation of todo task to be stored in file.
      */
     @Override
-    protected String fileMessage() {
+    public String fileMessage() {
         return String.format("%s||%d||%s\n", getTypeIcon(), isDone ? 1 : 0, content);
     }
 }

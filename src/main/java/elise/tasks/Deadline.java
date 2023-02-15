@@ -1,9 +1,12 @@
-package elise;
+package elise.tasks;
+
+import elise.MaybeDate;
+import elise.internal.Parser;
 
 /**
  * Represent a task with a deadline.
  */
-class Deadline extends Task {
+public class Deadline extends Task {
     private MaybeDate end;
 
     /**
@@ -12,7 +15,7 @@ class Deadline extends Task {
      * @param status Completed or not.
      * @param content Contains message and end date.
      */
-    protected Deadline(boolean status, String[] content) {
+    public Deadline(boolean status, String[] content) {
         super(status, content[0]);
         this.end = Parser.parseDate(content[1]);
     }
@@ -43,7 +46,7 @@ class Deadline extends Task {
      * @return String representation of deadline task to be stored in file.
      */
     @Override
-    protected String fileMessage() {
+    public String fileMessage() {
         return String.format("%s||%d||%s||%s\n", getTypeIcon(), isDone ? 1 : 0, content, end);
     }
 }

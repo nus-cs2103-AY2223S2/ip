@@ -1,4 +1,4 @@
-package elise;
+package elise.tasks;
 
 /**
  * Represents a task with modifiable status.
@@ -14,7 +14,7 @@ public abstract class Task {
      * @param status Completed or not.
      * @param content Message body.
      */
-    protected Task(boolean status, String content) {
+    public Task(boolean status, String content) {
         this.isDone = status;
         this.content = content;
     }
@@ -24,21 +24,21 @@ public abstract class Task {
      *
      * @return Status icon of the task.
      */
-    protected String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
      * Marks task as completed.
      */
-    protected void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 
     /**
      * Marks task as not completed.
      */
-    protected void markAsUndone() {
+    public void markAsUndone() {
         isDone = false;
     }
 
@@ -57,10 +57,9 @@ public abstract class Task {
      *
      * @return Full details of the task.
      */
-    protected String fullMessage() {
+    public String fullMessage() {
         return String.format("[%s][%s] %s", getTypeIcon(), getStatusIcon(), this);
     }
 
-    protected abstract String fileMessage();
-
+    public abstract String fileMessage();
 }
