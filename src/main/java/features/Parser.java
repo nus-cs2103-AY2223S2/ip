@@ -31,7 +31,7 @@ public class Parser {
         case ("bye"):
             return new CommandBye().handle(inputs);
 
-        // Duke lists out all Tasks.Task names in TaskList when input is "list"
+        // Duke prints a random fun fact when input is "fact"
         case ("fact"):
             return new CommandFact().handle(inputs);
 

@@ -1,5 +1,6 @@
 # Duke (With Less User Respect) User Guide
 
+Note: This project contains some code reused and modified from third-party sources. (Stack Overflow)
 ## features 
 
 ### Task-keeping
