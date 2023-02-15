@@ -20,6 +20,7 @@ public class Delete extends Command {
     @Override
     public String execute(TaskList list) {
         String content = this.getCommandStorage();
+        assert content != "" : "Content must not be empty";
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
         taskNumber -= 1; //to get to the correct index in array
         Task deletedTask = list.deleteTask(taskNumber);

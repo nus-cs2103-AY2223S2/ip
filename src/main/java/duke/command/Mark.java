@@ -20,6 +20,7 @@ public class Mark extends Command {
     public String execute(TaskList tasks) {
         String content = this.getCommandStorage();
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
+        assert taskNumber != -1: "The content must be a number";
         taskNumber -= 1;
         tasks.markTask(taskNumber, true);
         return TextOutput.makeMarkDoneString(tasks, taskNumber);
