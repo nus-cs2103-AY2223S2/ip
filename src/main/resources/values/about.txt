@@ -1,0 +1,5 @@
+This is a duke chatbot, which supports command line input to add todo, deadline and event tasks.
+The chatbot also supports the basic options of deleting and listing all of these tasks. You can also mark and unmark
+tasks to show whether you have completed them.
+We store all of your tasks locally so you never lose track of them even when the application is restarted.
+Start using this chatbot today.

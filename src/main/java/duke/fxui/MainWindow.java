@@ -1,11 +1,17 @@
 package duke.fxui;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 import duke.Duke;
+import duke.DukeException;
 import duke.command.ExitCommand;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -47,11 +53,6 @@ public class MainWindow extends VBox {
     @FXML
     private TextField userInput;
     /**
-     * The button for user to click to send their command.
-     */
-    @FXML
-    private Button sendButton;
-    /**
      * The chatbot instance.
      */
     private Duke duke;
@@ -59,7 +60,14 @@ public class MainWindow extends VBox {
      * Delay of 2 second when the program is exiting.
      */
     private final PauseTransition delay = new PauseTransition(Duration.seconds(2));
-
+    /**
+     * Alert box to show the commands or about information when clicking on menu items.
+     */
+    private Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.CLOSE);
+    /**
+     * Minimum width of the alert box when shown.
+     */
+    private static final int MIN_WIDTH = 700;
     /**
      * Initialises the scrollPane to have a container that contains all the dialog
      * boxes so that it is scrollable.
@@ -81,6 +89,7 @@ public class MainWindow extends VBox {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
         delay.setOnFinished(event -> Platform.exit());
+        alert.getDialogPane().setMinWidth(MIN_WIDTH);
     }
 
     /**
@@ -102,5 +111,44 @@ public class MainWindow extends VBox {
         if (response.equals(ExitCommand.EXIT_MSG)) {
             delay.play();
         }
+    }
+
+    @FXML
+    private void handleShowCommands() {
+        String helpPath = "/values/help.txt" ;
+        String helpError = "Error occurred when reading help text file.";
+        String helpText = readResource(helpPath, helpError);
+
+        alert.setContentText(helpText);
+        alert.setTitle("Commands");
+
+        alert.show();
+    }
+
+    @FXML
+    private void handleShowAbout() {
+        String aboutPath = "/values/about.txt" ;
+        String aboutError = "Error occurred when reading about text file.";
+        String aboutText = readResource(aboutPath, aboutError);
+
+        alert.setContentText(aboutText);
+        alert.setTitle("About");
+
+        alert.show();
+    }
+
+    private String readResource(String path, String errorMsg) throws DukeException {
+        InputStream inputStream = this.getClass().getResourceAsStream(path);
+        String text = "";
+
+        assert inputStream != null;
+
+        try {
+            text = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new DukeException(errorMsg);
+        }
+
+        return text;
     }
 }

@@ -86,7 +86,8 @@ public class Command {
         ADD_TODO("todo"),
         ADD_DEADLINE("deadline"),
         ADD_EVENT("event"),
-        FIND("find");
+        FIND("find"),
+        HELP("help");
 
         private final String commandString;
 

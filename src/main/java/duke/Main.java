@@ -35,6 +35,8 @@ public class Main extends Application {
         try {
             assert this.getClass().getResourceAsStream("/images/user.png") != null;
             assert this.getClass().getResourceAsStream("/images/duke.png") != null;
+            assert this.getClass().getResourceAsStream("/values/help.txt") != null;
+            assert this.getClass().getResourceAsStream("/values/about.txt") != null;
 
             FXMLLoader fxmlLoader =
                     new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

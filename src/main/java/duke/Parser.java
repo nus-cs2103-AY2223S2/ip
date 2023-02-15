@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -31,6 +32,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "help":
+            return new HelpCommand();
         case "mark":
             checkInput(inputSplit, ErrorMsg.MARK);
             return new MarkCommand(inputSplit[1]);

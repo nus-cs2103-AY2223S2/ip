@@ -1,0 +1,19 @@
+These are the commands that are available:
+help : Enter the command "help" to show the list of all commands.
+bye : Enter the command "bye" to close the application.
+list : Enter the command "list" to show a list of all tasks that are stored.
+delete : Enter the command "delete x" to delete the x-th task from the task list.
+         Note: x is a number and needs to be within the range 1 and the number of tasks stored.
+mark : Enter the command "mark x" to mark the x-th task as being completed.
+       Note: x is a number and needs to be within the range 1 and the number of tasks stored.
+unmark : Enter the command "unmark x" to unmark the x-th task as not being completed.
+         Note: x is a number and needs to be within the range 1 and the number of tasks stored.
+find : Enter the command "find x" to find any tasks whose description contains "x" within it.
+todo : Enter the command "todo x" where x is the description to add a todo task with the provided description.
+deadline : Enter the command "deadline x /by y" where x is the description and y is the deadline of the task to add a
+           deadline task with the provided description and deadline.
+           Note: y has to be in the format yyyy-mm-dd (i.e. 2023-01-01).
+event : Enter the command "event x /from y /to z" where x is the description of the event, y is the start date of the
+        event and z is the end date of the event. An event task will be added with the provided description, start and
+        end date.
+        Note: y and z has to be in the format yyyy-mm-dd (i.e. 2023-01-01).
