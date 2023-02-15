@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" styleClass="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutX="5.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="39.0" prefWidth="409.0" promptText="Enter a command here" AnchorPane.bottomAnchor="3.0">
+         <font>
+            <Font name="System Font" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <InnerShadow height="10.68" radius="5.2075" width="12.15">
+               <color>
+                  <Color red="0.6399999856948853" green="0.6335999965667725" blue="0.6335999965667725" opacity="0.47609943151474" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+        <Button fx:id="sendButton" alignment="CENTER" contentDisplay="CENTER" layoutX="420.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="38.0" prefWidth="76.0" text="Send" textAlignment="CENTER" textFill="#5088b5">
+         <font>
+            <Font name="Andale Mono" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <effect>
+            <InnerShadow height="20.18" radius="9.057500000000001" width="18.05">
+               <color>
+                  <Color opacity="0.151472270488739" />
+               </color>
+            </InnerShadow>
+         </effect></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="555.0" prefWidth="500.0" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="560.0" prefWidth="484.0" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

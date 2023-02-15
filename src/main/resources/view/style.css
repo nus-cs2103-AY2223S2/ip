@@ -1,0 +1,26 @@
+.root {
+    /* Edit of default mordena css from https://gist.github.com/maxd/63691840fc372f22f470 */
+
+    -fx-base: rgba(208,233,233,255);
+    -fx-background: rgba(208,233,233,255);
+    -fx-background-size: 100% 100%;
+}
+
+.button {
+   -fx-background-color: rgba(117,196,217,255);
+   -fx-text-fill: rgba(69,31,15,255);
+}
+
+.button:hover {
+    -fx-background-color: rgba(71,178,214,255);
+}
+
+.text-input {
+    -fx-background-color: rgba(252,241,229,255);
+}
+
+.dialog-box {
+    -fx-background-color: #FFF0D8;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+}

@@ -1,0 +1,14 @@
+list
+todo homework
+event party
+9pm
+12am
+deadline assignment
+tomorrow 12pm
+list
+check 1
+check 4
+delete 2
+check 3
+list
+uncheck 1
