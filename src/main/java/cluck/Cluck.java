@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import cluck.messages.Messages;
 import cluck.tasks.Deadline;
 import cluck.tasks.Event;
 import cluck.tasks.Task;
 import cluck.tasks.ToDo;
 
-import cluck.messages.Messages;
 
 public class Cluck {
     private static final String MAKE_DEADLINE = "deadline";
@@ -121,15 +121,8 @@ public class Cluck {
     }
 
     public static void main(String[] args) {
-        String logo = " _____  _               _____   _\n"
-                + "|  ___|| |     _    _  |  ___| | |  _\n"
-                + "| |    | |    | |  | | | |     | |/ /\n"
-                + "| |___ | |___ | |__| | | |___  |    \\\n"
-                + "|_____||_____||______| |_____| |_| \\_\\\n";
-
-        System.out.println(logo);
-        System.out.println("    Howdy! I'm Cluck!\n"
-                + "    What can I cluck-a-doodle-do for you?");
+        System.out.println(Messages.MESSAGE_LOGO);
+        System.out.println(Messages.MESSAGE_WELCOME);
 
         boolean loop = true;
         ArrayList<Task> toDoList = readSave();
@@ -143,12 +136,12 @@ public class Cluck {
             switch (words[0]) {
             case "bye":
                 writeSave(toDoList);
-                System.out.println("    Buh-cluck, see ya!");
+                System.out.println(Messages.MESSAGE_GOODBYE);
                 loop = false;
                 break;
 
             case "list":
-                System.out.println("    Here are the tasks in your list:");
+                System.out.println(Messages.MESSAGE_LIST_DISPLAY);
                 for (int i = 0; i < toDoList.size(); i++) {
                     System.out.println("    " + (i + 1) + ": " + toDoList.get(i).toString());
                 }
@@ -156,43 +149,43 @@ public class Cluck {
 
             case "mark":
                 if (words.length == 1) {
-                    System.out.println("    Mucka blucka - Buh cluck! Which task do you wanna mark?");
+                    System.out.println(Messages.MESSAGE_INDEX_MISSING);
                 } else if (isNumeric(words[1])) {
                     Integer itemNumber = Integer.parseInt(words[1]);
                     if (itemNumber > toDoList.size() || itemNumber <= 0) {
-                        System.out.println("    That's not...? In the list...? Buh caw?");
+                        System.out.println(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
                     } else {
                         toDoList.get(itemNumber - 1).mark();
-                        System.out.println("    Marked it! Cluck-a-doodle-done!\n"
+                        System.out.println(Messages.MESSAGE_MARK_SUCCESSFUL
                                 + toDoList.get(itemNumber - 1).toString());
                     }
                 } else {
-                    System.out.println("    Ya gotta give me a working number, bucko!");
+                    System.out.println(Messages.MESSAGE_INDEX_INVALID);
                 }
                 break;
 
             case "unmark":
                 if (words.length == 1) {
-                    System.out.println("    Which task do you wanna unmark? Muckah buck!");
+                    System.out.println(Messages.MESSAGE_INDEX_MISSING);
                 } else if (isNumeric(words[1])) {
                     Integer itemNumber = Integer.parseInt(words[1]);
                     if (itemNumber > toDoList.size() || itemNumber <= 0) {
-                        System.out.println("    That's not...? In the list...? Buh caw?");
+                        System.out.println(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
                     } else {
                         toDoList.get(itemNumber - 1).unmark();
-                        System.out.println("    Unmarked it! Cluckiddy cluck!\n"
+                        System.out.println(Messages.MESSAGE_UNMARK_SUCCESSFUL
                                 + toDoList.get(itemNumber - 1).toString());
                     }
                 } else {
-                    System.out.println("    Ya gotta give me a working number, bucko!");
+                    System.out.println(Messages.MESSAGE_INDEX_INVALID);
                 }
                 break;
 
             case MAKE_TODO:
                 Task newTodo = new ToDo(input.substring(5));
                 toDoList.add(newTodo);
-                System.out.println("    added todo:\n    " + newTodo.toString());
-                System.out.println("    Now there's " + toDoList.size() + " items in your list!");
+                System.out.println(Messages.MESSAGE_TODO_ADDED + "\n" + newTodo.toString());
+                System.out.println(String.format(Messages.MESSAGE_LIST_COUNT, toDoList.size()));
                 break;
 
             case MAKE_DEADLINE:
@@ -203,8 +196,8 @@ public class Cluck {
                     String dueDate = fields[1];
                     Task currDeadline = new Deadline(description, dueDate);
                     toDoList.add(currDeadline);
-                    System.out.println("    added deadline: " + currDeadline.toString());
-                    System.out.println("    Now there's " + toDoList.size() + " items in your list!");
+                    System.out.println(Messages.MESSAGE_DEADLINE_ADDED + currDeadline.toString());
+                    System.out.println(String.format(Messages.MESSAGE_LIST_COUNT, toDoList.size()));
                     break;
                 }
                 System.out.println("    You're missing the '/by' flag, bucko!");
@@ -216,8 +209,8 @@ public class Cluck {
                     String[] fields = substring.split("\\s/\\w{2,4}\\s");
                     Task currEvent = new Event(fields[0], fields[1], fields[2]);
                     toDoList.add(currEvent);
-                    System.out.println("    added event: " + currEvent.toString());
-                    System.out.println("    Now there's " + toDoList.size() + " items in your list!");
+                    System.out.println(Messages.MESSAGE_EVENT_ADDED + currEvent.toString());
+                    System.out.println(String.format(Messages.MESSAGE_LIST_COUNT, toDoList.size()));
                     break;
                 }
                 System.out.println("    You're missing the either the '/from' or '/to' flag, or both! Buhcock!");
@@ -225,22 +218,22 @@ public class Cluck {
 
             case "delete":
                 if (words.length == 1) {
-                    System.out.println("    Mucka blucka - Buh cluck! Which task do you wanna delete?");
+                    System.out.println(Messages.MESSAGE_INDEX_MISSING);
                 } else if (isNumeric(words[1])) {
                     Integer itemNumber = Integer.parseInt(words[1]);
                     if (itemNumber > toDoList.size() || itemNumber <= 0) {
-                        System.out.println("    That's not...? In the list...? Buh caw?");
+                        System.out.println(Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
                     } else {
-                        System.out.println("   Buh cuck! Removed the following:\n"
+                        System.out.println(Messages.MESSAGE_DELETE_SUCCESSFUL + "\n"
                                 + toDoList.get(itemNumber - 1).toString());
                     }
                 } else {
-                    System.out.println("    Ya gotta give me a working number, bucko!");
+                    System.out.println(Messages.MESSAGE_INDEX_INVALID);
                 }
                 break;
 
             default:
-                System.out.println("    You gotta give me a command!");
+                System.out.println(Messages.MESSAGE_INVALID_COMMAND);
             }
         }
     }
