@@ -15,6 +15,9 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    //Credit to @Junyi00 for the simple and easy to understand serialisation method for level-7
+    //serialise and deserialise methods used in the task package classes are adopted from him
+
     /**
      * Initialises a task.
      * <p>
