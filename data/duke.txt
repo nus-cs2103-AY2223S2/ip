@@ -1,2 +1,4 @@
-[T]/!@#&/X/!@#&/ read book /!@#&/ name: harry potter
-[E]/!@#&/ /!@#&/ rate movie /!@#&/ give a high rating/!@#&/ mon 4pm /!@#&/ tues 6pm
+[E]/!@#&/X/!@#&/ movie screening /!@#&/@vivocity/!@#&/ Mon 4pm /!@#&/ 6pm
+[T]/!@#&/ /!@#&/ rate movie /!@#&/give a high rating!
+[D]/!@#&/ /!@#&/ CS2103T assignment /!@#&/There are no notes!/!@#&/17 Feb 2023
+[T]/!@#&/ /!@#&/ do 2103T quiz /!@#&/on canvas

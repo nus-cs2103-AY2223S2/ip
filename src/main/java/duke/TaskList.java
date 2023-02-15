@@ -172,6 +172,8 @@ public class TaskList {
                     + tasks.size() + " tasks in the list.";
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Please give the index of the task you wish to delete!";
+        } catch (IndexOutOfBoundsException e) {
+            return "There are only " + tasks.size() + " tasks in the list!";
         }
     }
 
