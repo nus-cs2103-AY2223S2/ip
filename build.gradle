@@ -52,7 +52,7 @@ test {
 }
 
 application {
-    mainClassName = "page.Page"
+    mainClassName = "page.gui.Launcher"
 }
 
 shadowJar {
