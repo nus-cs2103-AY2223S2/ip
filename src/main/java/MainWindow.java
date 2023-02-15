@@ -53,6 +53,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.equals("It was nice talking, see you soon!\n")) {
+            DialogBox.getLeoDialog(response, leoImage);
             System.exit(0);
         }
     }

@@ -2,6 +2,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Objects;
+
 import leo.parser.Parser;
 import leo.storage.Storage;
 import leo.task.TaskList;
@@ -23,6 +25,7 @@ public class Leo {
 
 
     public String getResponse(String input){
+        assert !input.equals("") : "Input should not be empty\n";
         String[] request = parser.parseRequest(input);
         String response = "";
         if (taskList == null) {
