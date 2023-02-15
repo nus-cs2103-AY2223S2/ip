@@ -6,39 +6,39 @@ package duke;
 public class Event extends Task {
 
     /** String used to represent the start time of event. */
-    protected String from;
+    protected String taskStartTime;
     /** String used to represent the end time of event. */
-    protected String to;
+    protected String taskEndTime;
     /** String used to assign the name of the event. */
-    protected String desc;
+    protected String taskDesc;
 
     /**
      * Constructor for the Event class.
      *
-     * @param desc The name of the task.
-     * @param from The starting time of event.
-     * @param to The ending time of event.
+     * @param taskDesc The name of the task.
+     * @param taskStartTime The starting time of event.
+     * @param taskEndTime The ending time of event.
      */
-    public Event(String desc, String from, String to) {
-        super(desc);
-        this.desc = desc;
-        this.from = from;
-        this.to = to;
+    public Event(String taskDesc, String taskStartTime, String taskEndTime) {
+        super(taskDesc);
+        this.taskDesc = taskDesc;
+        this.taskStartTime = taskStartTime;
+        this.taskEndTime = taskEndTime;
     }
 
     /**
      * Overloaded constructor for the Event class.
      *
-     * @param desc The name of the task.
-     * @param from The starting time of event.
-     * @param to The ending time of event.
-     * @param b The status of the task.
+     * @param taskDesc The name of the task.
+     * @param taskStartTime The starting time of event.
+     * @param taskEndTime The ending time of event.
+     * @param taskStatus The status of the task.
      */
-    public Event(String desc, String from, String to, boolean b) {
-        super(desc, b);
-        this.desc = desc;
-        this.from = from;
-        this.to = to;
+    public Event(String taskDesc, String taskStartTime, String taskEndTime, boolean taskStatus) {
+        super(taskDesc, taskStatus);
+        this.taskDesc = taskDesc;
+        this.taskStartTime = taskStartTime;
+        this.taskEndTime = taskEndTime;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + taskStartTime + " to: " + taskEndTime + ")";
     }
 
     /**
@@ -54,9 +54,9 @@ public class Event extends Task {
      */
     public String asCsv() {
         if (super.isDone) {
-            return "E,1," + desc + "," + from + "," + to;
+            return "E,1," + taskDesc + "," + taskStartTime + "," + taskEndTime;
         } else {
-            return "E,0," + desc + "," + from + "," + to;
+            return "E,0," + taskDesc + "," + taskStartTime + "," + taskEndTime;
         }
     }
 }
