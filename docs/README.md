@@ -12,6 +12,7 @@ e.g. if the command specifies `list 123`, it will be interpreted as `list`
 ### `todo` - Creating a new Todo task.
 
 Creates a new Todo task and adds it to the list of tasks.
+
 Format: `todo DESCRIPTION`
 
 Example of usage: 
