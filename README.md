@@ -16,7 +16,9 @@ A GUI similar to the below should appear. Note that when the app runs for the fi
 
 5. Type the command in the command box and press `Send` button or Enter on keyboard to execute.
 
-Here are all the commands:
+## Features
+
+Here are all of the features:
 * `todo [content]`: add a todo task to the task list. Example: `todo play football`
 * `deadline [content] /by [date in dd/mm/yyyy format]`: add a deadline task to the task list, that need to be completed by `date`. Example: `deadline assignment 02/05/2023`
 * `event [content] /from [date1 in dd/mm/yyyy format] /to [date2 in dd/mm/yyyy format]`: add an event task to the task list, that starts from `date1` and ends at `date2`. Example: `event project /from 02/03/2023 /to 05/03/2023`
