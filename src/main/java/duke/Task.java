@@ -6,29 +6,29 @@ package duke;
 public abstract class Task {
 
     /** Boolean used to determine if the task is completed or not. */
-    protected boolean isDone = false;
+    protected boolean taskStatus = false;
     /** String used to assign the name of the task. */
-    protected String name;
+    protected String taskDesc;
 
     /**
      * Constructor for the Task class.
      *
-     * @param name The name of the Task.
+     * @param taskDesc The name of the Task.
      */
-    public Task(String name) {
-        this.name = name;
+    public Task(String taskDesc) {
+        this.taskDesc = taskDesc;
     }
 
     /**
      * Constructor for the Task class. Overloaded to allow setting of
      * the completion directly.
      *
-     * @param name The name of the Task.
-     * @param b The boolean value to be assigned
+     * @param taskDesc The name of the Task.
+     * @param taskStatus The boolean value to be assigned for completion of Task.
      */
-    public Task(String name, boolean b) {
-        this.name = name;
-        this.isDone = b;
+    public Task(String taskDesc, boolean taskStatus) {
+        this.taskDesc = taskDesc;
+        this.taskStatus = taskStatus;
     }
 
     /**
@@ -51,10 +51,10 @@ public abstract class Task {
      * @return Task in String representation.
      */
     public String toString() {
-        if (isDone) {
-            return "[X] " + name;
+        if (taskStatus) {
+            return "[X] " + taskDesc;
         } else {
-            return "[ ] " + name;
+            return "[ ] " + taskDesc;
         }
     }
 

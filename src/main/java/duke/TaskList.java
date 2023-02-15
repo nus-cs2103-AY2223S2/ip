@@ -179,7 +179,7 @@ public class TaskList {
      */
     public void searchTask(String searchString) {
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).name.contains(searchString)) {
+            if (tasks.get(i).taskDesc.contains(searchString)) {
                 System.out.println((i + 1) + ". " + tasks.get(i).toString());
             }
         }
@@ -194,7 +194,7 @@ public class TaskList {
         String res;
         res = "";
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).name.contains(searchString)) {
+            if (tasks.get(i).taskDesc.contains(searchString)) {
                 res = res + (i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
         }
