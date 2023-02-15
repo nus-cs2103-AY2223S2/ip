@@ -1,11 +1,10 @@
-# User Guide
-
----
-
 # User Guide to Henz!
 
-![Ui](./Ui.png)
+<div align="center">
+  <img src="./Ui.png" alt="Sublime's custom image"/>
+</div>
 
+## Content Page
 -   [Introduction](#introduction)
 -   [Quick Start](#quick-start)
     -   [Run the project in terminal](#run-the-project-in-terminal)
