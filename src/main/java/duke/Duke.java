@@ -33,6 +33,71 @@ public class Duke {
         }
     }
 
+    private String handleByeCommand() {
+        return ui.getGoodbyeMessage();
+    }
+
+    private String handleListCommand() {
+        return tasks.toString();
+    }
+
+    private String handleMarkCommand(String taskIndex) throws DukeException {
+        int taskNumber = Integer.parseInt(taskIndex);
+        tasks.setDone(taskNumber, true);
+        Task task = tasks.getTask(taskNumber);
+        return ui.getMarkTaskMessage(task);
+    }
+
+    private String handleUnmarkCommand(String taskIndex) throws DukeException {
+        int taskNumber = Integer.parseInt(taskIndex);
+        tasks.setDone(taskNumber, false);
+        Task task = tasks.getTask(taskNumber);
+        return ui.getUnmarkTaskMessage(task);
+    }
+
+    private String handleDeleteCommand(String taskIndex) throws DukeException {
+        int taskNumber = Integer.parseInt(taskIndex);
+        Task task = tasks.getTask(taskNumber);
+        tasks.deleteTask(taskNumber);
+        return ui.getDeleteTaskMessage(task, tasks);
+    }
+
+    private String handleFindCommand(String searchString) {
+        return ui.getFindTaskMessage(tasks.findTasks(searchString));
+    }
+
+    private String handleTodoCommand(String priorityStr, String description) throws DukeException {
+        int priority = Integer.parseInt(priorityStr);
+        if (priority <= 0) {
+            throw new InvalidCommandException("Priority must be a positive integer.");
+        }
+        Task task = new ToDo(description, priority);
+        tasks.addTask(task);
+        return ui.getAddTaskMessage(task, tasks);
+    }
+
+    private String handleDeadlineCommand(String priorityStr, String description, String deadline) throws DukeException {
+        int priority = Integer.parseInt(priorityStr);
+        if (priority <= 0) {
+            throw new InvalidCommandException("Priority must be a positive integer.");
+        }
+        Task task = new Deadline(description, priority, Parser.parseDate(deadline, false));
+        tasks.addTask(task);
+        return ui.getAddTaskMessage(task, tasks);
+    }
+
+    private String handleEventCommand(String priorityStr, String description, String startTime, String endTime)
+            throws DukeException {
+        int priority = Integer.parseInt(priorityStr);
+        if (priority <= 0) {
+            throw new InvalidCommandException("Priority must be a positive integer.");
+        }
+        Task task = new Event(description, priority, Parser.parseDate(startTime, false),
+            Parser.parseDate(endTime, false));
+        tasks.addTask(task);
+        return ui.getAddTaskMessage(task, tasks);
+    }
+
     /**
      * Responds to a given input message.
      *
@@ -40,66 +105,37 @@ public class Duke {
      * @return An appropriate response.
      */
     public String getResponse(String input) {
-        Task task;
         try {
             String[] parsedCommand = Parser.parseCommand(input);
             String command = parsedCommand[0];
             String response;
             switch (command) {
             case "bye":
-                response = ui.getGoodbyeMessage();
+                response = handleByeCommand();
                 break;
             case "list":
-                response = tasks.toString();
+                response = handleListCommand();
                 break;
             case "mark":
-                int taskNumber = Integer.parseInt(parsedCommand[1]);
-                tasks.setDone(taskNumber, true);
-                task = tasks.getTask(taskNumber);
-                response = ui.getMarkTaskMessage(task);
+                response = handleMarkCommand(parsedCommand[1]);
                 break;
             case "unmark":
-                taskNumber = Integer.parseInt(parsedCommand[1]);
-                tasks.setDone(taskNumber, false);
-                task = tasks.getTask(taskNumber);
-                response = ui.getUnmarkTaskMessage(task);
+                response = handleUnmarkCommand(parsedCommand[1]);
                 break;
             case "delete":
-                taskNumber = Integer.parseInt(parsedCommand[1]);
-                task = tasks.getTask(taskNumber);
-                tasks.deleteTask(taskNumber);
-                response = ui.getDeleteTaskMessage(task, tasks);
+                response = handleDeleteCommand(parsedCommand[1]);
                 break;
             case "find":
-                response = ui.getFindTaskMessage(tasks.findTasks(parsedCommand[1]));
+                response = handleFindCommand(parsedCommand[1]);
                 break;
             case "todo":
-                int priority = Integer.parseInt(parsedCommand[2]);
-                if (priority <= 0) {
-                    throw new InvalidCommandException("Priority must be a positive integer.");
-                }
-                task = new ToDo(parsedCommand[1], priority);
-                tasks.addTask(task);
-                response = ui.getAddTaskMessage(task, tasks);
+                response = handleTodoCommand(parsedCommand[2], parsedCommand[1]);
                 break;
             case "deadline":
-                priority = Integer.parseInt(parsedCommand[2]);
-                if (priority <= 0) {
-                    throw new InvalidCommandException("Priority must be a positive integer.");
-                }
-                task = new Deadline(parsedCommand[1], priority, Parser.parseDate(parsedCommand[3], false));
-                tasks.addTask(task);
-                response = ui.getAddTaskMessage(task, tasks);
+                response = handleDeadlineCommand(parsedCommand[2], parsedCommand[1], parsedCommand[3]);
                 break;
             case "event":
-                priority = Integer.parseInt(parsedCommand[2]);
-                if (priority <= 0) {
-                    throw new InvalidCommandException("Priority must be a positive integer.");
-                }
-                task = new Event(parsedCommand[1], priority, Parser.parseDate(parsedCommand[3], false),
-                    Parser.parseDate(parsedCommand[4], false));
-                tasks.addTask(task);
-                response = ui.getAddTaskMessage(task, tasks);
+                response = handleEventCommand(parsedCommand[2], parsedCommand[1], parsedCommand[3], parsedCommand[4]);
                 break;
             default:
                 throw new UnknownCommandException();

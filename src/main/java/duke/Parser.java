@@ -15,7 +15,7 @@ import tasks.Task;
  */
 public class Parser {
     /**
-     * Get the input corresponding to the input required to request to close the application.
+     * Returns the input corresponding to the input required to request to close the application.
      *
      * @return The input that will close the application.
      */
@@ -38,50 +38,34 @@ public class Parser {
             return new String[] {"list"};
         } else if (toParse.startsWith("mark")) {
             Matcher matcher = compileAndMatch("mark (.*)", toParse);
-            if (noMatchFound(matcher, 1)) {
-                throw new InvalidCommandException("The task number of a mark command cannot be empty.");
-            }
+            checkForMatch(matcher, 1, "The task number of a mark command cannot be empty.");
             return new String[] {"mark", matcher.group(1)};
         } else if (toParse.startsWith("unmark")) {
             Matcher matcher = compileAndMatch("unmark (.*)", toParse);
-            if (noMatchFound(matcher, 1)) {
-                throw new InvalidCommandException("The task number of an unmark command cannot be empty.");
-            }
+            checkForMatch(matcher, 1, "The task number of an unmark command cannot be empty.");
             return new String[] {"unmark", matcher.group(1)};
         } else if (toParse.startsWith("delete")) {
             Matcher matcher = compileAndMatch("delete (.*)", toParse);
-            if (noMatchFound(matcher, 1)) {
-                throw new InvalidCommandException(
-                    "The task number to be deleted must be specified, and must be an integer.");
-            }
+            checkForMatch(matcher, 1, "The task number to be deleted must be specified, and must be an integer.");
             return new String[] {"delete", matcher.group(1)};
         } else if (toParse.startsWith("find")) {
             Matcher matcher = compileAndMatch("find (.*)", toParse);
-            if (noMatchFound(matcher, 1)) {
-                throw new InvalidCommandException("Must supply a search string to the find command.");
-            }
+            checkForMatch(matcher, 1, "Must supply a search string to the find command.");
             return new String[] {"find", matcher.group(1)};
         } else if (toParse.startsWith("todo")) {
             Matcher matcher = compileAndMatch("todo (.*) /prio (\\d+)", toParse);
-            if (noMatchFound(matcher, 2)) {
-                throw new InvalidCommandException(
-                    "The description of a todo cannot be empty, and the priority must be a positive integer.");
-            }
+            checkForMatch(matcher, 2,
+                "The description of a todo cannot be empty, and the priority must be a positive integer.");
             return new String[] {"todo", matcher.group(1), matcher.group(2)};
         } else if (toParse.startsWith("deadline")) {
             Matcher matcher = compileAndMatch("deadline (.*) /by (.*) /prio (\\d+)", toParse);
-            if (noMatchFound(matcher, 3)) {
-                throw new InvalidCommandException(
-                    "The end date of a deadline cannot be empty, and the priority must be a positive integer.");
-            }
+            checkForMatch(matcher, 3,
+                "The end date of a deadline cannot be empty, and the priority must be a positive integer.");
             return new String[] {"deadline", matcher.group(1), matcher.group(3), matcher.group(2)};
         } else if (toParse.startsWith("event")) {
             Matcher matcher = compileAndMatch("event (.*) /from (.*) /to (.*) /prio (\\d+)", toParse);
-            if (noMatchFound(matcher, 4)) {
-                throw new InvalidCommandException(
-                    "An event must have a nonempty from date and to date, and the priority must be a positive integer."
-                );
-            }
+            checkForMatch(matcher, 4,
+                "An event must have a nonempty from date and to date, and the priority must be a positive integer.");
             return new String[] {"event", matcher.group(1), matcher.group(4), matcher.group(2), matcher.group(3)};
         } else {
             throw new UnknownCommandException();
@@ -93,24 +77,25 @@ public class Parser {
      *
      * @param matcher            Matcher containing the regex and the string to be matched with.
      * @param expectedGroupCount Number of groups that should be matched.
-     * @return Whether the matcher did not find a result with the correct number of groups.
+     * @param errorMessage       Description of the error that is indicated by a failed match.
+     * @throws DukeException if the actual number of groups matched is not the same as expected.
      */
-    private static boolean noMatchFound(Matcher matcher, int expectedGroupCount) {
+    private static void checkForMatch(Matcher matcher, int expectedGroupCount, String errorMessage)
+            throws DukeException {
         if (!matcher.find()) {
-            return true;
+            throw new InvalidCommandException(errorMessage);
         }
 
         try {
             // Ignore the first group which is the entire matched string
             for (int i = 1; i < expectedGroupCount + 1; i++) {
                 if (matcher.group(i).length() == 0) {
-                    return true;
+                    throw new InvalidCommandException(errorMessage);
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            return true;
+            throw new InvalidCommandException(errorMessage);
         }
-        return false;
     }
 
     /**

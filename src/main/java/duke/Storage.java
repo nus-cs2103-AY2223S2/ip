@@ -19,7 +19,8 @@ public class Storage {
      */
     public Storage(String dataFilePath) {
         this.dataFilePath = dataFilePath;
-        // Create the directories if they do not exist
+        // Create the directories if they do not exist. Adapted from
+        // https://stackoverflow.com/questions/4040624/how-to-create-a-file-including-folders-for-a-given-path.
         try {
             File targetFile = new File(dataFilePath);
             File parent = targetFile.getParentFile();

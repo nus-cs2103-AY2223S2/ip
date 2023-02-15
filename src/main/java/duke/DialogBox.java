@@ -50,9 +50,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Create a new dialog box representing the user.
+     * Creates a new dialog box representing the user.
+     *
      * @param text Text to be displayed in the dialog box.
-     * @param img Image of the user.
+     * @param img  Image of the user.
      * @return A new dialog box representing the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -60,9 +61,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Create a new dialog box representing the Duke chatbot.
+     * Creates a new dialog box representing the Duke chatbot.
+     *
      * @param text Text to be displayed in the dialog box.
-     * @param img Image of the user.
+     * @param img  Image of the user.
      * @return A new dialog box representing a message sent by the chatbot.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
