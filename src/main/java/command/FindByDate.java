@@ -20,7 +20,7 @@ public class FindByDate implements Command {
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
         ui.showReply(taskList.findByDate(this.date));
