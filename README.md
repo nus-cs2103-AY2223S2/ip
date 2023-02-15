@@ -1,24 +1,23 @@
-# Duke project template
+<h1 >TrumpBot <img src="https://user-images.githubusercontent.com/96603198/218978652-78eda5bc-614b-482a-b56e-219dd87cd88d.jpg" height=auto width="50" style="vertical-align: middle;"> </h1>
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+<p align="center">
+<img src="https://user-images.githubusercontent.com/96603198/218981470-eee60694-6ef7-4a3e-bdd5-e94d491d2b0c.png" align="center" height="600" width=auto>
+</p>
 
-## Setting up in Intellij
+**TrumpBot** is a desktop chatbot that will help you manage your tasks. It offers the convenience of a Command Line Interface (CLI) with the added benefit of a Graphical User Interface (GUI). With TrumpBot, you can manage your tasks and get more done in less time, especially if you're a fast typist. 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Here's to making task scheduling great again!
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Quick Setup
+
+1. Ensure you have `Java 11` or above installed in your Computer.
+2. Download the latest `duke.jar` from here.
+3. Copy the file to the folder you want to use as the home folder for your **TrumpBot**.
+4. Open a command terminal, cd into the folder you put the jar file in
+5. Use the command: `java -jar duke.jar` to run the application.
+6. A GUI similar to the below should appear in a few seconds.
+
+## Acknowledgement
+
+- The project is based on the greenfield Java project Duke, and created as part of CS2103T's (a module under NUS School of Computing) submissions.
+- [@sikai00](https://github.com/sikai00/KarenBot) and [@Zxun2](https://github.com/Zxun2/ip) are two exemplary works I constantly benchmarked myself against.
