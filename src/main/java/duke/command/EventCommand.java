@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Note;
+import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.parser.Parser;
 import duke.task.Event;
@@ -95,6 +96,7 @@ public class EventCommand extends Command{
         String taskWord = (taskCount == 1) ? "task" : "tasks";
         Event newTask = translateInput(userInput);
         tasks.addTask(newTask);
+        Storage.saveTasksToTaskLog(tasks);
         return Ui.addTaskMessage(newTask, taskCount, taskWord);
     }
 }

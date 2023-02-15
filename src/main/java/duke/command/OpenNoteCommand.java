@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.storage.Note;
+import duke.storage.Storage;
 import duke.storage.TaskList;
 
 /**
@@ -24,6 +25,10 @@ public class OpenNoteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Note notes) {
-        return notes.getNotes();
+        if (Storage.loadNotesFromFile().equals("")) {
+            return "You current do not have any notes.";
+        } else {
+            return "Here are your current notes:\n" + Storage.loadNotesFromFile();
+        }
     }
 }

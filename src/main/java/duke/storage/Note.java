@@ -21,4 +21,8 @@ public class Note {
     public void addNote(String newNote) {
         notes += (newNote + "\n");
     }
+
+    public void deleteAll() {
+        this.notes = "";
+    }
 }

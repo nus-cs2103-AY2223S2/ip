@@ -91,6 +91,8 @@ public final class Parser {
             return new NoteCommand(userInput);
         case "opennotes":
             return new OpenNoteCommand(userInput);
+        case "clearnotes":
+            return new ClearNotesCommand(userInput);
         default:
             throw new DukeException("Invalid command type");
         }

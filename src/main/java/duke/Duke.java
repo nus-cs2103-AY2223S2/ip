@@ -32,8 +32,12 @@ public class Duke {
         notes = new Note(noteStorage.loadNotesFromFile());
     }
 
-    public static String getTASK_LOG_PATH() {
+    public static String getTaskLogPath() {
         return TASK_LOG_PATH;
+    }
+
+    public static String getNotesPath() {
+        return NOTES_PATH;
     }
 
     public String getResponse(String input) {

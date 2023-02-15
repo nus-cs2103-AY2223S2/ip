@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Note;
+import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.task.Task;
 import duke.task.ToDo;
@@ -56,6 +57,7 @@ public class TodoCommand extends Command {
         String taskWord = (taskCount == 1) ? "task" : "tasks";
         Task newTask = translateInput(userInput);
         tasks.addTask(newTask);
+        Storage.saveTasksToTaskLog(tasks);
         return Ui.addTaskMessage(newTask, taskCount, taskWord);
     }
 }

@@ -53,7 +53,7 @@ public class Storage {
      */
     public static void saveTasksToTaskLog(TaskList taskList) {
         try {
-            FileWriter taskLog = new FileWriter(filePath);
+            FileWriter taskLog = new FileWriter(Duke.getTaskLogPath());
             for (Task i : taskList.getTasks()) {
                 taskLog.write(i.toLog());
             }
@@ -64,9 +64,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Delete all tasks in task log.
+     */
     public static void deleteAllTasks() {
         try {
-            PrintWriter writer = new PrintWriter(Duke.getTASK_LOG_PATH());
+            PrintWriter writer = new PrintWriter(Duke.getTaskLogPath());
             writer.print("");
             writer.close();
         } catch (IOException e) {
@@ -94,8 +97,8 @@ public class Storage {
      * Loads tasks from task log file
      * @return An ArrayList of Tasks from task log
      */
-    public String loadNotesFromFile() {
-        File notes = new File(filePath);
+    public static String loadNotesFromFile() {
+        File notes = new File(Duke.getNotesPath());
         Scanner noteScanner = null;
         try {
             noteScanner = new Scanner(notes);
@@ -116,7 +119,7 @@ public class Storage {
      */
     public static void saveNotesToFile(Note notes) {
         try {
-            FileWriter noteFile = new FileWriter(filePath);
+            FileWriter noteFile = new FileWriter(Duke.getNotesPath());
             noteFile.write(notes.getNotes());
             noteFile.close();
         } catch (IOException e) {
@@ -138,6 +141,19 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println("Notes file cannot be created");
+        }
+    }
+
+    /**
+     * Delete all tasks in task log.
+     */
+    public static void deleteNotes() {
+        try {
+            PrintWriter writer = new PrintWriter(Duke.getNotesPath());
+            writer.print("");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
