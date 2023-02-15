@@ -10,6 +10,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    public static final String GREETING = "Saul Goodman! What can I do for you?";
+
     /**
      * Constructor for Duke object.
      *

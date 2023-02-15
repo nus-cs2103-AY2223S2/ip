@@ -24,12 +24,17 @@ public class MainWindow {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Finger.png"));
+    private Image saulImage = new Image(this.getClass().getResourceAsStream("/images/Saul.png"));
+
+
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Duke.GREETING, saulImage)
+        );
     }
 
     public void setDuke(Duke duke) {
@@ -45,7 +50,7 @@ public class MainWindow {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, saulImage)
         );
         userInput.clear();
     }

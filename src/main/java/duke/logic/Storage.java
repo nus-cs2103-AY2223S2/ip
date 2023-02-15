@@ -92,7 +92,7 @@ public class Storage {
 
             bufferedReader.close();
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println("loading error");
             throw new DukeException();
         }
     }
