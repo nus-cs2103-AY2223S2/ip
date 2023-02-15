@@ -93,6 +93,17 @@ public class Parser {
             }
             break;
 
+        /*case "edit":
+            if (inputs.length != 2 || splitFromInstruction(inputs[0]).length != 2) {
+                throw new DukeException(Ui.incompleteSelectionCommandResponse);
+            }
+
+            String num = splitFromInstruction(inputs[0])[1];
+            if (!isValidSelection(num)) {
+                throw new DukeException(Ui.invalidSelectionCommandResponse);
+            }
+            break;*/
+
         case "todo":
             if (inputs.length != 1 || splitFromInstruction(inputs[0]).length != 2) {
                 throw new DukeException(Ui.incompleteAddTodoCommandResponse);
@@ -214,6 +225,12 @@ public class Parser {
             int deleteNum = Integer.parseInt(splitFromInstruction(inputs[0])[1]);
             command = new DeleteCommand(deleteNum);
             break;
+
+        /*case "edit":
+            int editNum = Integer.parseInt(splitFromInstruction(inputs[0])[1]);
+            String editItem = inputs[1];
+            command = new EditCommand(editNum, editItem);
+            break;*/
 
         case "todo":
             assert(inputs.length == 1);

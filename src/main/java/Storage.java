@@ -85,6 +85,7 @@ public class Storage {
             String to = inputs[4].substring(4);
             Event event = new Event(name, Boolean.parseBoolean(isDone), from, to, FORMAT);
             tasks.add(event);
+            break;
 
         default:
             // Do Nothing

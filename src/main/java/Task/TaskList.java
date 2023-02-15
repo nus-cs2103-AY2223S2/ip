@@ -56,7 +56,7 @@ public class TaskList {
         Task taskToMark = null;
         try {
             taskToMark = tasks.get(taskNum - 1);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Ui.outOfBoundSelectionResponse(this.getSize()));
         }
 
@@ -80,7 +80,7 @@ public class TaskList {
 
         try {
             deleteTask = tasks.remove(taskNum);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Ui.outOfBoundSelectionResponse(this.getSize()));
         }
 
