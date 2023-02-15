@@ -10,6 +10,7 @@ import duke.tasks.Task;
 import duke.tasks.DeadLine;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
+import duke.tasks.DoAfter;
 
 /**
  * Handles storing of Tasks in hard drive.
@@ -65,6 +66,9 @@ public class Storage {
                     case "todo":
                         ToDo taskToDo = new ToDo("todo", bodyMessage, isComplete);
                         tasks.add(taskToDo);
+                    case "doafter":
+                        DoAfter taskDoAfter = new DoAfter("doafter", bodyMessage, isComplete);
+                        tasks.add(taskDoAfter);
                     default:
                         //do nothing, task is not valid
                 }
