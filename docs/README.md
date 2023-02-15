@@ -1,6 +1,6 @@
 # User Guide
 
-<img align="left" width="100" height="100" src="/src/main/resources/images/lion.jpeg">
+<img align="left" width="100" height="100" src="https://github.com/jamieeeleow/ip/blob/ab260ffb4c824b04ed549849c52fcf53a8d00232/src/main/resources/images/lion.jpeg">
 
 ## **Welcome to _Leo_.**  
 Leo is an application used to manage your tasks!   
