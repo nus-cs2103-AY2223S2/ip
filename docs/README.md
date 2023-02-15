@@ -33,15 +33,15 @@ Here's to making task scheduling great again!
 
 ## Key Features 
 
-### &check; _Case Insensitive Keywords_ :fire:
+### &#10003; _Case Insensitive Keywords_ 🔥
 
 **TrumpBot** adopts the use of case insensitive keywords. Users can enter commands and options more easily without having to worry about getting the capitalization exactly right. This can reduce user frustration and lead to a more pleasant and enjoyable user experience.
 
-### &check; _Auto-save_ :floppy_disk:
+### &#10003; _Auto-save_ 💾
 
 **TrumpBot** automatically save changes made by users to a text file named `duke.text` under the `data` folder. Not only does this prevents data loss, it removes the stress associated with the possibility of losing past progress. With auto-save, users can work more efficiently with fewer interruptions.
 
-### &check; _Time Management_ :clock9:
+### &#10003; _Time Management_ 🕘
 
 **TrumpBot** is able to scan through user's list of tasks and check for the next available free time down to the minutes. By identifying free time slots, **TrumpBot** allows users to plan and schedule tasks more efficiently, making the most of your available time.
 
