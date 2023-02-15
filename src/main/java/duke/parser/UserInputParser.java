@@ -1,6 +1,7 @@
 package duke.parser;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -71,7 +72,7 @@ public class UserInputParser {
 
     private static Action getAction(String[] splitInputs) throws DukeException {
         try {
-            return Action.valueOf(splitInputs[0]);
+            return Action.valueOf(splitInputs[0].toLowerCase());
         } catch (IllegalArgumentException e) {
             throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
@@ -180,5 +181,18 @@ public class UserInputParser {
         if (isInvalidLength) {
             throw new DukeException(errorMessage);
         }
+    }
+
+    /**
+     * Checks if input has invalid character "~".
+     *
+     * @return Command that was read.
+     * @throws DukeException Throws exception if command has invalid character.
+     */
+    public static String checkInputForInvalidCharacter(String command) throws DukeException {
+        if (command.contains("~")) {
+            throw new DukeException("Fake Duke doesn't like it when the input has the symbol ~.");
+        }
+        return command;
     }
 }

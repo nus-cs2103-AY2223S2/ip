@@ -12,26 +12,13 @@ import duke.task.TaskList;
  * Handles interactions with the user.
  */
 public class Ui {
-    private static final String SEPARATOR = "=====================================\n";
-
-    /**
-     * Reads command from scanner object.
-     *
-     * @return Command that was read.
-     * @throws DukeException Throws exception if command is invalid.
-     */
-    public static String readCommand(String command) throws DukeException {
-        if (command.contains("~")) {
-            throw new DukeException("Fake Duke doesn't like it when the input has the symbol ~.");
-        }
-        return command;
-    }
+    private static final String SEPARATOR = "=========================\n";
 
     /**
      * Prints out the greeting for Fake Duke.
      */
     public static String getWelcome() {
-        return "Hello!~ I'm the one and only ! FAKE DUKE !\nWhat can I do for you?\n";
+        return "Hello!\nI'm the one and only FAKE DUKE!\nWhat can I do for you?\n";
     }
 
     /**

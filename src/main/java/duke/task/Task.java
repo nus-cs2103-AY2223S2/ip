@@ -80,13 +80,11 @@ public class Task {
      */
     public String getUrgentMessage(LocalDateTime dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
-        int diff = currentDateTime.compareTo(dateTime);
-        boolean isTaskExpired = (diff > 0);
-        boolean isTaskExpiringSoon = (diff == -1);
-        if (isTaskExpired) {
-            return "!! TASK EXPIRED! !!";
-        } else if (isTaskExpiringSoon) {
-            return "!! TASK EXPIRING SOON! !!";
+        LocalDateTime sevenDaysAhead = currentDateTime.plusDays(7);
+        if (currentDateTime.compareTo(dateTime) > 0) {
+            return "\n!! TASK EXPIRED! !!";
+        } else if (sevenDaysAhead.compareTo(dateTime) > 0) {
+            return "\n!! TASK EXPIRING WITHIN A WEEK !!";
         } else {
             return "";
         }
