@@ -1,4 +1,6 @@
 package duke;
+import duke.command.Command;
+
 import java.util.List;
 
 /**
@@ -28,9 +30,17 @@ public class Ui {
         }
         System.out.print('\n');
     }
-    
-    public void showList(TaskList taskList) {
-        taskList.showList();
+    public String parseIn(String in, TaskList taskList, Ui ui, Storage storage) {
+        try {
+            Command c = Parser.parseIn(in);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            //empty because exception should be caught by parser or command class
+        }
+        return "no response";
+    }
+    public String showList(TaskList taskList) {
+       return taskList.showList();
     }
     public void print(String word) {
         System.out.println(word);

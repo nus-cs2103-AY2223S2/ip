@@ -26,8 +26,6 @@ public class Parser {
                     return new DeleteCommand(Integer.parseInt(parm.get(1)));
             case FIND:
                     return new FindCommand(parm.subList(1, parm.size()));
-            case SOMETHINGELSE:
-                throw new DukeException();
             default:
                 throw new DukeException();
             }

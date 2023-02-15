@@ -7,9 +7,9 @@ public class MarkCommand extends Command {
         this.taskInt = taskInt;
         this.isMarked = isMarked;
     }
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            taskList.markTask(taskInt,isMarked);
+            return taskList.markTask(taskInt,isMarked);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e);
         } catch (NumberFormatException e) {

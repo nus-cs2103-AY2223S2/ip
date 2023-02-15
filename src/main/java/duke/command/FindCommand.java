@@ -8,11 +8,11 @@ public class FindCommand extends Command {
     public FindCommand(List<String> arg) {
         this.arg = arg;
     }
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (this.arg.size() > 1) {
             throw new DukeException("only seaches by ONE keyword");
         }
-        ui.print(taskList.find(arg.get(0)));
+        return taskList.find(arg.get(0));
     }
 }
 

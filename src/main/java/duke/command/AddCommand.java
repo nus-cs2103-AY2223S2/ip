@@ -2,7 +2,7 @@ package duke.command;
 import duke.*;
 import duke.task.*;
 import java.util.List;
-public class AddCommand extends Command { 
+public class AddCommand extends Command {
     private CommandEnum command;
     private List<String> arg;
 
@@ -10,46 +10,44 @@ public class AddCommand extends Command {
         this.command = command;
         this.arg = arg;
     }
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         switch(this.command) {
             case TODO:
                 if (arg.size() == 0) {
                     throw new DukeException("TASK MUST HAS DESCRIPSHUN MEOW");
                 }
                 String description = String.join(" ", arg);
-                taskList.addList(new Todo(description));
-                break;
+                return taskList.addList(new Todo(description));
             case DEADLINE:
-                try{
-                    deadline(taskList, ui, storage);
-                } catch (IllegalArgumentException e) {
-                    throw new DukeException(e);
-                } catch (Exception e) {
-                    throw new DukeException(e);
-                }
-                break;
-           case EVENT: 
                 try {
-                    event(taskList, ui, storage);
+                    return deadline(taskList, ui, storage);
                 } catch (IllegalArgumentException e) {
                     throw new DukeException(e);
                 } catch (Exception e) {
                     throw new DukeException(e);
                 }
-                break;
+            case EVENT:
+                try {
+                    return event(taskList, ui, storage);
+                } catch (IllegalArgumentException e) {
+                    throw new DukeException(e);
+                } catch (Exception e) {
+                    throw new DukeException(e);
+                }
             default:
-                throw new DukeException();
+                return "idk what you are saying";
         }
     }
-    private void deadline(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String deadline(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int byIndex = arg.indexOf("/by");
         List<String> commandTempArg = arg.subList(1, byIndex);
         String description = String.join(" ", commandTempArg);
         commandTempArg = arg.subList(byIndex + 1, arg.size());
         String deadline = String.join(" ", commandTempArg);
-        taskList.addList(new Deadline(description, deadline));
+        return taskList.addList(new Deadline(description, deadline));
     }
-    private void event(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String event(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int fromIndex = arg.indexOf("/from");
         int toIndex = arg.indexOf("/to");
         List<String> commandTempArg = arg.subList(1, fromIndex);
@@ -59,7 +57,7 @@ public class AddCommand extends Command {
         List<String> t = arg.subList(toIndex + 1, arg.size()); //t is temp to pass into join func
         String tDescription = String.join(" ", commandTempArg);
         tDescription = String.join(" ", t);
-        taskList.addList(new Event(description, fDescription, tDescription));
+        return taskList.addList(new Event(description, fDescription, tDescription));
     }
 }
 
