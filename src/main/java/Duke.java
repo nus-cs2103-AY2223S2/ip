@@ -19,7 +19,7 @@ public class Duke {
         ui.printLogo();
         String userInput = scanner.nextLine();
 
-
+        // code that obtains the user input and calls the Parser's method to execute the command
         while (!userInput.equals("bye")) {
             parser.parseAndExecute(userInput, list);
             userInput = scanner.nextLine();
