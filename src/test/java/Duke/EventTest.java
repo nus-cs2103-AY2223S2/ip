@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.Tasks.Event;
+import duke.Tasks.Event;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

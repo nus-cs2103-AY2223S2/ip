@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package duke.Tasks;
 
 /**
  * Represents task table class
@@ -24,12 +24,11 @@ public class Table extends Task {
         String message;
         if (table.size() == 0) {
             message = "    ____________________________________________________________\n" +
-                    "    Yo there is no task in your list, go get some rest!";
+                    "    Yo there is no task in your list, go get some rest!\n";
         } else {
             message = "    ____________________________________________________________\n" +
                     "    Here are the task(s) in your list:\n";
         }
-        //System.out.println(message);
         for (int i = 0; i < table.size(); i ++) {
             message = message.concat("    " + (i + 1) + "." + "    " + table.get(i) + "\n");
         }

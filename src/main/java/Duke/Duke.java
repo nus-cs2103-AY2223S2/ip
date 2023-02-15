@@ -1,14 +1,12 @@
-package Duke;
+package duke;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 
-import Duke.Exceptions.*;
-import Duke.Tasks.Disk;
-import Duke.Tasks.Monitor;
-import Duke.Tasks.Task;
-import Duke.Tasks.TaskTable;
+import duke.Exceptions.*;
+import duke.Tasks.Disk;
+import duke.Tasks.Monitor;
+import duke.Tasks.Task;
+import duke.Tasks.TaskTable;
 
 
 /**
@@ -44,13 +42,13 @@ public class Duke {
         monitor.displayLogo();
         monitor.welcome();
 
-        boolean running = true;
-        while (running) {
+        boolean isRunning = true;
+        while (isRunning) {
             try {
                 String command = monitor.getCommand();
                 Task newTask = Interpreter.interpret(command, table);
                 newTask.run(table, monitor, disk);
-                running = !newTask.exited; // if newTask exits stop running
+                isRunning = !newTask.isExited; // if newTask exits stop isRunning
             } catch (InvalidCommandException | InvalidTimeFormatException |
                      MissingDescriptionException | OutRangeException | NullPointerException | DuplicateException e) {
                 continue;
@@ -62,9 +60,6 @@ public class Duke {
     /**
      * The main method
      * @param args the args
-     * @throws InvalidTimeFormatException
-     * @throws InvalidCommandException
-     * @throws MissingDescriptionException
      */
     public static void main(String[] args) {
         Duke d = new Duke("data/tasks.txt");
@@ -79,7 +74,6 @@ public class Duke {
             message = t.run(table, monitor, disk);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            //e.printStackTrace();
             message = "    ____________________________________________________________\n" +
                     e.getMessage() +
                     "\n    ____________________________________________________________\n";

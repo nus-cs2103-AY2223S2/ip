@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package duke.Tasks;
 
 
 import java.time.LocalDateTime;
@@ -79,7 +79,7 @@ public class Event extends Task {
     @Override
     public String reformat() {
         String d;
-        if (done) {
+        if (isDone) {
             d = "1";
         } else {
             d = "0";

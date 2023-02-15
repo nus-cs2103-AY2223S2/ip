@@ -1,12 +1,12 @@
-package Duke.Tasks;
+package duke.Tasks;
 
 /**
  * Represents the Task class
  */
 public class Task {
 
-    public boolean exited;
-    protected boolean done;
+    public boolean isExited;
+    protected boolean isDone;
     protected String desc;
 
     /**
@@ -15,7 +15,7 @@ public class Task {
      * @param desc the description of the task
      */
     public Task(boolean done, String desc) {
-        this.done = done;
+        this.isDone = done;
         this.desc = desc;
     }
 
@@ -32,7 +32,7 @@ public class Task {
      * @return String
      */
     public String showIfDone() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X]";
         } else {
             return "[ ]";
@@ -44,7 +44,7 @@ public class Task {
      * @return Task
      */
     public Task mark() {
-        this.done = true;
+        this.isDone = true;
         return this;
     }
 
@@ -53,7 +53,7 @@ public class Task {
      * @return Task
      */
     public Task unmark() {
-        this.done = false;
+        this.isDone = false;
         return this;
     }
 
@@ -81,7 +81,7 @@ public class Task {
      */
     public String reformat() {
         String d;
-        if (done) {
+        if (isDone) {
             d = "1";
         } else {
             d = "0";

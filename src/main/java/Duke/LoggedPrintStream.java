@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.FilterOutputStream;
 import java.io.IOException;

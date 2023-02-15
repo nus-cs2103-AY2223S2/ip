@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.Exceptions.*;
-import Duke.Tasks.*;
+import duke.Exceptions.*;
+import duke.Tasks.*;
 import java.lang.String;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +21,7 @@ public class Interpreter {
      * The method mark marks the Task as done
      * @param command the command by the user
      * @param table the task table
-     * @return Task
+     * @return Task the Task marked as done
      * @throws InvalidCommandException
      * @throws OutRangeException
      */
@@ -51,7 +51,7 @@ public class Interpreter {
      * The method unmark unmarks the Task as undone
      * @param command the command from the user
      * @param table the task table
-     * @return Task
+     * @return Task the Task marked as undone
      * @throws InvalidCommandException
      * @throws OutRangeException
      */
@@ -81,7 +81,7 @@ public class Interpreter {
      * The method delete deletes the certain Task
      * @param command the command from the user
      * @param table the task table
-     * @return Task
+     * @return Task the deleted Task
      * @throws InvalidCommandException
      * @throws OutRangeException
      */
@@ -111,7 +111,7 @@ public class Interpreter {
      * The method addTask adds new task to the Task table
      * @param command the command from the user
      * @param table the task table
-     * @return Task
+     * @return Task the added Task
      * @throws InvalidTimeFormatException
      * @throws MissingDescriptionException
      */
@@ -219,7 +219,7 @@ public class Interpreter {
      * The method interpret interprets the command
      * @param command the command from the user
      * @param table the task table
-     * @return Task
+     * @return Task a new Task created
      * @throws InvalidTimeFormatException
      * @throws MissingDescriptionException
      * @throws InvalidCommandException
@@ -232,7 +232,6 @@ public class Interpreter {
         } catch (Exception e) {
             throw new InvalidCommandException();
         }
-        // System.out.println(op);
         switch (op) {
             case mark:
                 return mark(command, table);

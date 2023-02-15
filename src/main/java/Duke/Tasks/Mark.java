@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package duke.Tasks;
 
 /**
  * Represents the Mark class

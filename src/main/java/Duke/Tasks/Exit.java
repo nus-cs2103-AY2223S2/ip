@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package duke.Tasks;
 
 /**
  * Represents the Exit class
@@ -9,6 +9,15 @@ public class Exit extends Task {
      */
     public Exit() {
         super(false, "exit");
-        this.exited = true;
+        this.isExited = true;
+    }
+
+    @Override
+    public String run(TaskTable table, Monitor monitor, Disk disk) {
+        this.isExited = true;
+        String message = "    ____________________________________________________________\n" +
+                "     Come back with something better next time.\n" +
+                "    ____________________________________________________________\n";
+        return message;
     }
 }
