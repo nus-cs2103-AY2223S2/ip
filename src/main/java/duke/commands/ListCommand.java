@@ -20,7 +20,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.setResponse("Here are the tasks in your list (on the right >>>)\n");
-        ui.setTasksToDisplay(tasks.get());
+        if (tasks.isEmpty()) {
+            ui.setResponse("Task list is currently empty!\n");
+        } else {
+            ui.setResponse("Here are the tasks in your list (on the right >>>)\n");
+            ui.setTasksToDisplay(tasks.get());
+        }
     }
 }

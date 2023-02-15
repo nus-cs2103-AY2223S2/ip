@@ -90,6 +90,15 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Returns true if task list is empty; otherwise, false.
+     *
+     * @return true if task list is empty; otherwise, false
+     */
+    public Boolean isEmpty() {
+        return this.taskList.isEmpty();
+    }
+
     private Task processTask(String s) {
         String[] data = s.split(" \\| ");
         String type = data[0];
