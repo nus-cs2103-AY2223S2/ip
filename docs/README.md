@@ -39,7 +39,7 @@ Duration format for the start and end of the event will follow **__'ddMMyyyy HH:
    
 Example: ```event CS2103T Lecture /17022023 14:00 /17022023 16:00``` will add CS2103T Lecture to your list of tasks  
 
-<img align="center" width="500" height="500" src="/images/add-tasks.png">
+<img align="center" width="500" height="500" src="https://raw.githubusercontent.com/jamieeeleow/ip/master/images/add-tasks.png">
 
 ***  
 
@@ -50,7 +50,7 @@ A positive integer (ie. 1, 2, 3...) must be specified behind the keyword and the
     
 Example: ```delete 2``` will delete the second item in the list
 
-<img align="center" width="500" height="300" src="/images/delete.png">
+<img align="center" width="500" height="300" src="https://raw.githubusercontent.com/jamieeeleow/ip/master/images/delete.png">
     
 ***    
 
@@ -69,7 +69,7 @@ The task you are looking for should be entered behind the keyword.
 
 Example: ```find project``` will list out all the tasks that contains the word 'project'   
 
-<img align="center" width="500" height="150" src="/images/find.png">
+<img align="center" width="500" height="150" src="https://raw.githubusercontent.com/jamieeeleow/ip/master/images/find.png">
 
 ***
 
@@ -79,7 +79,7 @@ List out all the tasks using the ```list``` keyword.
 
 Example: ```list``` will list out all the tasks that exist   
 
-<img align="center" width="500" height="280" src="/images/list.png">
+<img align="center" width="500" height="280" src="https://raw.githubusercontent.com/jamieeeleow/ip/master/images/list.png">
 
 ***  
 
@@ -92,7 +92,7 @@ Note: Task to be marked should exist and should not already be marked.
 
 Example: ```mark 3``` will mark the third task on the list  
 
-<img align="center" width="500" height="130" src="/images/mark.png">
+<img align="center" width="500" height="130" src="https://raw.githubusercontent.com/jamieeeleow/ip/master/images/mark.png">
 
 ***
 
@@ -105,7 +105,7 @@ Note: Task to be unmarked should exist and should already be marked.
 
 Example: ```unmark 3``` will unmark the third task on the list   
 
-<img align="center" width="500" height="130" src="/images/unmark.png">
+<img align="center" width="500" height="130" src="https://raw.githubusercontent.com/jamieeeleow/ip/master/images/unmark.png">
 
 ***
 
@@ -116,4 +116,4 @@ A valid date of format **__'ddMMyyyy'__** should be entered behind the keyword t
 
 Example: ```view 20022023``` will show the tasks involving Feb 20, 2023  
 
-<img align="center" width="500" height="150" src="/images/view.png">
+<img align="center" width="500" height="150" src="https://raw.githubusercontent.com/jamieeeleow/ip/master/images/view.png">
