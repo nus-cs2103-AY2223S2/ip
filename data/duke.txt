@@ -1,0 +1,5 @@
+T=X=Ask Mr. Tan about the assignment deadline
+D= =Complete CS2103T assignment=tomorrow
+E=X=Study for CS2106 test=Feb 12 2023, 0832 hrs=Feb 13 2023, 0832 hrs
+T= =Microwave snacks
+D= =a=now

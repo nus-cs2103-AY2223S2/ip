@@ -1,0 +1,14 @@
+list
+lis
+todo Eat
+deadline Sleep /by 2023/11/12 18:47
+event Rave /from 2024/04/15 15:45 /to tomorrow
+list
+mark 1
+mark 3
+list
+unmark 1
+delete 2
+delete 3
+list
+bye
