@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Task;
-import duke.task.TaskList;
 
 /**
  * Class for the Ui object.
@@ -38,7 +37,7 @@ public class Ui {
      * @return String displaying the welcome message whenever Shinchan is activated.
      */
     public static String showWelcome() {
-        return "Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?";
+        return "Hello from\n" + logo + "Konnichiwa! I'm Shinchan\nWhat can I do for you?";
     }
 
     public String showEditedMsg(Task task) {
@@ -64,7 +63,7 @@ public class Ui {
     }
 
     public String showHelp() {
-        String availableHelp = "These are the commands ShinChan recognise given his age:\n"
+        String availableHelp = "These are the commands I recognise given my age:\n"
                 + "- todo [task description]: add a task of type Todo\n"
                 + "- deadline [task description] /by [due date]: add a task of type Deadline, "
                 + "shinchan only can comprehend date of format dd-mm-yyyy HHmm :(\n"
@@ -96,7 +95,7 @@ public class Ui {
      * @return String object containing delete message displayed for user.
      */
     public String showDeleteMessage(Task task, String tasksLen) {
-        return "Noted. I've removed this task:\n  "
+        return "Action Kamen BEEEEPP BEEEPP BEEEP. I've removed this task:\n  "
                 + task + "\nNow you have " + tasksLen + " tasks in the list.";
     }
 
@@ -109,7 +108,7 @@ public class Ui {
      * @return String object containing add task message displayed for user.
      */
     public String showAddTaskMsg(Task task, String tasksLen) {
-        return "Got it. I've added this task:\n  "
+        return "Being an adult is tiring... I've added this task:\n  "
                 + task + "\nNow you have " + tasksLen + " tasks in the list.";
     }
 
@@ -130,7 +129,7 @@ public class Ui {
      * @return String object containing marked task message displayed for user.
      */
     public String showMarkedMsg(Task task) {
-        return "Nice! I've marked this task as done:\n" + task;
+        return "Action Kamen BEEEEPP BEEEPP BEEEP! This task is marked as done:\n" + task;
     }
 
     /**
@@ -141,7 +140,7 @@ public class Ui {
      * @return String object containing unmark task message displayed for user.
      */
     public String showUnmarkedMsg(Task task) {
-        return "Ok, I've marked this as not done yet:\n" + task;
+        return "Make up your mind!!! No chocobi for you before it is done:\n" + task + "\n" + "marked as incomplete.";
     }
 
     /**
@@ -152,7 +151,7 @@ public class Ui {
      * @return String object containing tasks with the keyword specified by users displayed for user.
      */
     public String showRelevantTasks(ArrayList<Task> tasklist) {
-        String currStr = "Here are the matching tasks in your list:\n";
+        String currStr = "That was a hard word... but here's the matching tasks in your list:\n";
         int counter = 1;
         for (int i = 0; i < tasklist.size(); i++) {
             currStr = currStr + counter + "." + tasklist.get(i);
@@ -170,7 +169,7 @@ public class Ui {
     }
 
     public String showReminders () {
-        return "You have an upcoming deadline";
+        return "BEEEP POOO BEEP POOO ~~ You have an upcoming deadline";
     }
 
     public String showUpcomingTasks(ArrayList<Deadline> tasks) {
