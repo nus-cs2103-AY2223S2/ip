@@ -1,0 +1,22 @@
+#dialogContainer {
+    -fx-background-color: #2E4057;
+}
+
+
+#dialogBox {
+    -fx-padding: 10 15 10 15;
+}
+
+
+#dialog {
+    -fx-padding: 10 20 10 20;
+    -fx-font-size: 13px;
+    -fx-background-color: #62929E;
+    -fx-background-radius: 10;
+    -fx-text-fill: #FFFFFF;
+    -fx-margin-left: 20;
+    -fx-margin-right: 20;
+    -fx-width: fit;
+
+}
+

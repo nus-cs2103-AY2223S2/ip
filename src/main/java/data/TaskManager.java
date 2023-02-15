@@ -2,7 +2,6 @@ package data;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -168,12 +167,10 @@ public class TaskManager {
 
         freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, null));
 
-        ArrayList<FreeTimeBlock> filteredFreeTimeBlocks = freeTimeBlocks.stream()
+        //        filteredFreeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
+
+        return freeTimeBlocks.stream()
                 .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))
                 .collect(Collectors.toCollection(ArrayList::new));
-
-//        filteredFreeTimeBlocks.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
-
-        return filteredFreeTimeBlocks;
     }
 }
