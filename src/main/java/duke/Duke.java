@@ -165,36 +165,4 @@ public class Duke extends Application {
         }
         return "An error occured";
     }
-//	/**
-//	 * The main method of our program
-//	 *
-//	 * @param args Ignored
-//	 */
-//    public static void main(String[] args) {
-//
-//        Ui.showWelcomeMessage();
-//
-//        Tasklist tasklist = new Tasklist();
-//        try {
-//            File saveFile = new File(SAVE_LOCATION);
-//            if (saveFile.createNewFile()) {
-//                System.out.println("Save file created: " + saveFile.getName());
-//            } else {
-//                tasklist = Storage.load();
-//            }
-//        } catch (IOException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
-//
-//
-//        boolean loop = true;
-//        while (loop) {
-//            Scanner echoScanner = new Scanner(System.in);
-//            String msg = echoScanner.nextLine();
-//
-//            loop = Parser.isReceivedCommand(tasklist, msg, echoScanner, loop);
-//        }
-//    }
-
 }
