@@ -60,6 +60,7 @@ class TaskList {
         }
         assert index >= 0 : "Invalid Index";
         assert index < taskArrayList.size() : "Invalid index";
+        taskArrayList.get(index).unmark();
         return userInterface.setUnMarkTask() + taskArrayList.get(index).toString();
     }
 
@@ -91,7 +92,7 @@ class TaskList {
             throw new MissingDescription();
         }
         Deadline deadline = converter.deadlineWithDateTime(taskArrayList, description);
-        return deadline + userInterface.setAddedTask() + "Now you have "
+        return userInterface.setAddedTask() + deadline + "\n" + "Now you have "
                     + taskArrayList.size() + " task(s) in the list.";
     }
 

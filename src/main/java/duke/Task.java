@@ -22,9 +22,9 @@ public class Task {
      */
     public String isDone() {
         if (status) {
-            return "[X]";
+            return "X";
         } else {
-            return "[ ]";
+            return " ";
         }
     }
 
@@ -47,16 +47,13 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (status && (details.contains("[ ]") || details.contains("[X]"))) {
-            details.replace("[ ]", "[X]");
-            return details;
-        } else if (!status && (details.contains("[ ]") || details.contains("[X]"))) {
-            details.replace("[X]", "[ ]");
-            return details;
-        } else if (!details.contains("[ ]") || !details.contains("[X]")) {
-            return isDone() + " " + this.details;
-        } else {
-            return this.details;
+        if (details.contains("[ ]") || details.contains("[X]")) {
+            if (status) {
+                return details.replace("[ ]", "[X]");
+            } else {
+                return details.replace("[X]", "[ ]");
+            }
         }
+        return "[" + isDone() + "]" + " " + details;
     }
 }

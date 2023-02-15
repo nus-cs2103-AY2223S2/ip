@@ -54,7 +54,7 @@ public class Deadline extends Task {
             String iconWithTime = icon + super.toString() + "(by: " + date + " " + time + ")";
             return iconWithTime;
         } else if (date != null) {
-            String iconWithDate = icon + super.toString() + "(by: " + date + " " + time + ")";
+            String iconWithDate = icon + super.toString() + "(by: " + date + ")";
             return iconWithDate;
         } else {
             String iconWithoutTimeDate = icon + super.toString();

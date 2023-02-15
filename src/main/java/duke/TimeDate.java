@@ -28,6 +28,9 @@ public class TimeDate {
                 DayOfWeek dayOfWeek = DayOfWeek.valueOf(input.toUpperCase());
                 LocalDate today = LocalDate.now();
                 LocalDate nextDate = today.with(dayOfWeek);
+                if (nextDate.isBefore(today)) {
+                    nextDate = nextDate.plusDays(7);
+                }
                 return nextDate;
             }
         }

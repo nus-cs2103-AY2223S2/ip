@@ -25,9 +25,6 @@ public class Event extends Task {
         super(details);
     }
 
-    public String getFrom() {
-        return from;
-    }
     /**
      * @return the description of the task in String type indicating as an Event type
      */
