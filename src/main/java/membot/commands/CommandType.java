@@ -14,5 +14,5 @@ public enum CommandType {
     DEADLINE,
     EVENT,
     SORT,
-    BYE
+    EXIT
 }

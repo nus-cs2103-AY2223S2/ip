@@ -9,12 +9,12 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 import membot.Membot;
-import membot.commands.ByeCommand;
 import membot.commands.Command;
 import membot.commands.DeadlineCommand;
 import membot.commands.DeleteCommand;
 import membot.commands.DoneCommand;
 import membot.commands.EventCommand;
+import membot.commands.ExitCommand;
 import membot.commands.FindCommand;
 import membot.commands.HelpCommand;
 import membot.commands.ListCommand;
@@ -36,7 +36,7 @@ public class CommandTest {
         assertThrows(EmptyInputException.class, () -> Command.parse("", p, m));
         assertDoesNotThrow(() -> assertTrue(Command.parse("help", p, m) instanceof HelpCommand));
         assertDoesNotThrow(() -> assertTrue(Command.parse("list", p, m) instanceof ListCommand));
-        assertDoesNotThrow(() -> assertTrue(Command.parse("bye", p, m) instanceof ByeCommand));
+        assertDoesNotThrow(() -> assertTrue(Command.parse("exit", p, m) instanceof ExitCommand));
         assertDoesNotThrow(() -> assertTrue(Command.parse("done", p, m) instanceof DoneCommand));
         assertDoesNotThrow(() -> assertTrue(Command.parse("undone", p, m) instanceof UndoneCommand));
         assertDoesNotThrow(() -> assertTrue(Command.parse("delete", p, m) instanceof DeleteCommand));

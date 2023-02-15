@@ -14,7 +14,7 @@ import membot.Membot;
 import membot.commands.Command;
 import membot.view.UiPrinter;
 
-public class ByeCommandTest {
+public class ExitCommandTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -34,8 +34,8 @@ public class ByeCommandTest {
     @Test
     public void executeTest() {
         assertDoesNotThrow(() -> {
-            Command byeCommand = Command.parse("bye", p, m);
-            byeCommand.execute();
+            Command exitCommand = Command.parse("exit", p, m);
+            exitCommand.execute();
 
             assertEquals(
                     "Have a good day! Good bye!",

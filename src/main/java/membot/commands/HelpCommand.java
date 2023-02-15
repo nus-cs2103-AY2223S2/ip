@@ -55,7 +55,7 @@ public class HelpCommand extends Command {
             return "mark a task as completed";
         case UNDONE:
             return "mark a task as incomplete";
-        case BYE:
+        case EXIT:
             return "exit Membot";
         default:
             return "";

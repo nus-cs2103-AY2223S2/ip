@@ -57,8 +57,8 @@ public abstract class Command {
                 return new HelpCommand(ui);
             case LIST:
                 return new ListCommand(ui);
-            case BYE:
-                return new ByeCommand(ui, membot);
+            case EXIT:
+                return new ExitCommand(ui, membot);
             case DONE:
                 return new DoneCommand(input, ui);
             case UNDONE:

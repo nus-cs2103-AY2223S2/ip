@@ -6,14 +6,14 @@ import membot.view.Printable;
 /**
  * Represents a command that will exit the application. It has <code>isExit</code> set to true.
  */
-public class ByeCommand extends Command {
+public class ExitCommand extends Command {
     private final Membot membot;
     /**
      * Generates a <code>ByeCommand</code> object.
      *
      * @param ui A Printable object used for UI display.
      */
-    protected ByeCommand(Printable ui, Membot membot) {
+    protected ExitCommand(Printable ui, Membot membot) {
         super(ui);
 
         this.isExit = true;
