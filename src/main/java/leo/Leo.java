@@ -4,7 +4,6 @@ import leo.command.Command;
 import leo.command.Parser;
 import leo.leoexception.LeoException;
 import leo.storage.Storage;
-import leo.ui.Ui;
 
 /**
  * Leo class to run the main task application.
