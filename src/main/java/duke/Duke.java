@@ -48,6 +48,16 @@ public class Duke {
                 this.storage.writeTxt(tasks);
             }
 
+            else if (this.parser.action.equals("find")) {
+                try {
+                    response = this.tasks.find(textInput);
+                } catch (DukeException e) {
+                    response = e.toString();
+                    this.ui.printResponse(response);
+                    continue;
+                }
+            }
+
             else if (this.parser.action.equals("todo")) {
                 try {
                     response = this.tasks.todo(textInput);

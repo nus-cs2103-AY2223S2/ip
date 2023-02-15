@@ -1,5 +1,6 @@
 package duke;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -22,7 +23,7 @@ public class TaskList {
       int i = Integer.parseInt(textInput.substring(5));
       Task currTask = taskList.get(i - 1);
       currTask.markDone();
-      String output = "Nice! I've marked this task as done\n" + currTask.toString();
+      String output = "Nice! I've marked this task as done\n" + currTask;
       return output;
   }
 
@@ -30,9 +31,30 @@ public class TaskList {
       int i = Integer.parseInt(textInput.substring(7));
       Task currTask = taskList.get(i - 1);
       currTask.markUndone();
-      String output = "OK, I've marked this task as not done yet:\n" + currTask.toString();
+      String output = "OK, I've marked this task as not done yet:\n" + currTask;
       return output;
   }
+
+    public String find(String textInput) throws DukeException {
+        String[] parts = textInput.split(" ", 2);
+        if (parts.length == 1 || parts[1] == "") {
+            throw new DukeException("☹ OOPS!!! The description of find command cannot be empty.");
+        }
+        String keyword = "(.*)" + textInput.substring(5) + "(.*)";
+        String result = "Here are the matching tasks in your list:\n";
+        boolean found = false;
+        int index = 1;
+        for (int i = 0; i < taskList.size(); i++) {
+            String description = taskList.get(i).toString();
+            if (description.matches(keyword)) {
+                found = true;
+                String output = String.format("%d. %s", index, description + "\n");
+                result += output;
+                index++;
+            }
+        }
+        return found ? result.trim() : "Sorry, there are no matching tasks :-(";
+    }
 
   public String todo(String textInput) throws DukeException {
       String[] parts = textInput.split(" ", 2);
@@ -41,7 +63,7 @@ public class TaskList {
       }
       Task t = new Task.Todo(textInput.substring(5));
       taskList.add(t);
-      String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
+      String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t, taskList.size());
       return output;
   }
 
@@ -49,7 +71,7 @@ public class TaskList {
       String[] parts = textInput.split("/");
       Task t = new Task.Deadline(parts[0].substring(9), parts[1].substring(3));
       taskList.add(t);
-      String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
+      String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t, taskList.size());
       return output;
     }
 
@@ -57,7 +79,7 @@ public class TaskList {
       String[] parts = textInput.split("/");
       Task t = new Task.Event(parts[0].substring(6), parts[1].substring(5), parts[2].substring(3));
       taskList.add(t);
-      String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
+      String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t, taskList.size());
       return output;
   }
 
@@ -66,13 +88,9 @@ public class TaskList {
     String result = "";
       for (int i = 0; i < length; i++) {
           String item = taskList.get(i).toData();
-          if (i == length - 1) {
-            result += item;
-            continue;
-          }
           result += item + "\n";
       }
-    return result;
+    return result.trim();
   }
 
   @Override
@@ -80,14 +98,9 @@ public class TaskList {
     String result = "";
     for (int i = 0; i < taskList.size(); i++) {
       String description = taskList.get(i).toString();
-      if (i == taskList.size() - 1) {
-        String output = String.format("%d. %s", i + 1, description);
-        result += output;
-        continue;
-      }
       String output = String.format("%d. %s", i + 1, description + "\n");
       result += output;
     }
-    return result;
+    return result.trim();
   }
 }

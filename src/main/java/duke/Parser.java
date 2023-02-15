@@ -27,6 +27,11 @@ public class Parser {
       this.action = "unmark";  
     }
 
+    else if (textInput.length() >= 6 &&
+            textInput.substring(0, 4).equalsIgnoreCase("find")) {
+      this.action = "find";
+    }
+
     else if (textInput.length() >= 4 &&
             textInput.substring(0, 4).equalsIgnoreCase("todo")) {
       this.action = "todo";
@@ -40,6 +45,10 @@ public class Parser {
     else if (textInput.length() >= 7 && 
             textInput.substring(0, 5).equalsIgnoreCase("event")) {
       this.action = "event";
+    }
+
+    else {
+      this.action = "not found";
     }
   }
 }
