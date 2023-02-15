@@ -43,28 +43,46 @@ public class Parser {
             if (addon.length <= 1) {
                 throw new DukeException("Oops!! I do not have enough information to create a deadline task!\n"
                         + "You might be missing a date or the task description.");
-            } else {
-                String byString = addon[1];
-                String[] byPart = byString.split(" ", 2);
-                String by = byPart[1];
-                task = new Deadline(description, by);
             }
+            String byString = addon[1];
+            String[] byPart = byString.split(" ", 2);
+
+            boolean isProperSyntax = byPart[0].equals("by");
+            if (!isProperSyntax) {
+                String errorMessage = "Hmm it seem like you are trying to add an deadline here," +
+                        " but I don't quite understand what you're trying to say! \n";
+                errorMessage += "The proper syntax is: \n";
+                errorMessage += "deadline abc /by yyyy-mm-dd";
+                throw new DukeException(errorMessage);
+            }
+
+            String by = byPart[1];
+            task = new Deadline(description, by);
         } else {
             // event
             String[] addon = rest.split(" /", 3);
             String description = addon[0];
-            if (addon.length <= 1) {
+            if (addon.length <= 2) {
                 throw new DukeException("Oops!! I do not have enough information to create a event task!\n"
                         + "Please ensure you have indicated the duration using /from and /to!");
-            } else {
-                String fromString = addon[1];
-                String[] fromPart = fromString.split(" ", 2);
-                String from = fromPart[1];
-                String toString = addon[2];
-                String[] toPart = toString.split(" ", 2);
-                String to = toPart[1];
-                task = new Event(description, from, to);
             }
+            String fromString = addon[1];
+            String[] fromPart = fromString.split(" ", 2);
+            String toString = addon[2];
+            String[] toPart = toString.split(" ", 2);
+
+            boolean isProperSyntax = fromPart[0].equals("from") && toPart[0].equals("to");
+            if (!isProperSyntax) {
+                String errorMessage = "Hmm it seem like you are trying to add an event here," +
+                        " but I don't quite understand what you're trying to say! \n";
+                errorMessage += "The proper syntax is: \n";
+                errorMessage += "event abc /from date1 /to date2";
+                throw new DukeException(errorMessage);
+            }
+
+            String from = fromPart[1];
+            String to = toPart[1];
+            task = new Event(description, from, to);
         }
         return task;
 
