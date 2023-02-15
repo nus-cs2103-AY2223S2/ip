@@ -54,7 +54,7 @@ public class JeoBot {
      * @return The output message.
      */
     public String run(String input) {
-        StringBuilder sb = new StringBuilder(ui.bodyDivider()).append("\n");
+        StringBuilder sb = new StringBuilder();
         try {
             HashMap<String, String> hm = Parser.parseString(input);
             Command command = Command.valueOf(hm.get("command").toUpperCase());
@@ -142,8 +142,6 @@ public class JeoBot {
             sb.append(ui.dateTimeParsingErrorMessage());
         } catch (JeoException e) {
             sb.append(ui.jeoErrorMessage(e.getMessage()));
-        } finally {
-            sb.append("\n").append(ui.bodyDivider());
         }
         return sb.toString();
     }
@@ -155,6 +153,6 @@ public class JeoBot {
      * @return The response of JeoBot.
      */
     public String getResponse(String input) {
-        return "Jeo: \n" + run(input);
+        return run(input);
     }
 }

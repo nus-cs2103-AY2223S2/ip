@@ -2,12 +2,13 @@ import java.util.Objects;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import jeo.ui.Ui;
@@ -41,6 +42,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY)));
         dialogContainer.getChildren().add(DialogBox.getJeoDialog(ui.greetingMessage(), jeoImage));
     }
 
@@ -69,8 +71,7 @@ public class MainWindow extends AnchorPane {
      * @param response String representing JeoBot's reply to the input.
      */
     private void handleExit(String response) {
-        String rawResponse = response.split("\\n")[2];
-        if (rawResponse.equals(ui.exitMessage())) {
+        if (response.equals(ui.exitMessage())) {
             Stage sb = (Stage) scrollPane.getScene().getWindow();
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> sb.close());

@@ -18,27 +18,11 @@ public class Ui {
     protected static final String DATE_TO_PRINT = "d MMM yyyy";
 
     /**
-     * Returns a divider for the greeting message.
-     * @return a divider for the greeting message.
-     */
-    public String startingDivider() {
-        return "----------------------------";
-    }
-
-    /**
-     * Returns a divider for command response messages.
-     * @return a divider for command response messages.
-     */
-    public String bodyDivider() {
-        return "_______________________________________________________";
-    }
-
-    /**
      * Returns the greeting message.
      * @return the greeting message.
      */
     public String greetingMessage() {
-        return startingDivider() + "\nGreetings from " + BOT_NAME + "!\n" + "How may I help you?\n" + startingDivider();
+        return "Greetings from " + BOT_NAME + "!\n" + "How may I help you?";
     }
 
     /**

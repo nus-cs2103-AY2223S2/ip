@@ -5,12 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
 
 /**
  * Represents an example of a custom control using FXML.
@@ -34,9 +37,13 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.setBackground(new Background(new BackgroundFill(Color.SNOW, new CornerRadii(15.0), Insets.EMPTY)));
         dialog.setText(text);
         displayPicture.setImage(img);
+        BorderStroke stroke = new BorderStroke(Color.VIOLET, BorderStrokeStyle.SOLID, new CornerRadii(15.0), new BorderWidths(1.5));
+        dialog.setBorder(new Border(stroke));
+        dialog.setPadding(new Insets(10.0, 10.0, 10.0, 10.0));
+        HBox.setMargin(dialog, new Insets(10.0, 10.0, 0.0, 10.0));
     }
 
     /**
