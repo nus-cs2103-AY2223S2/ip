@@ -2,6 +2,7 @@ package nemo.ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import nemo.task.Task;
 
@@ -69,7 +70,18 @@ public class Ui {
      * @return Welcome message
      */
     public String getWelcomeMessage() {
-        String welcomeMessage = "Hello! I'm Nemo \nWhat can I do for you?";
+        String[] quotes = new String[]{
+            "\"Just keep swimming. Just keep swimming, swimming, swimming. What do we do? We swim, swim.\"",
+            "\"It's there, I know it is because when I look at you, I can feel it. And I, I look at you and… I'm home.\"",
+            "\"Well then, how are we gonna do that unless we give it a shot and hope for the best?\"",
+            "\"It's the ocean, silly, we're not the only two in here.\"",
+            "\"Whoa, whoa, whoa! Hey! Relax. Take a deep breath.\"",
+            "\"Yes, trust. It's what friends do.\""
+        };
+        Random r = new Random();
+        int randomInt = r.ints(1, 0, quotes.length - 1).findFirst().getAsInt();
+        String welcomeMessage = "Hey Dory!\nWhat can I do for you?\n\n";
+        welcomeMessage += "Here's a quote to start your day:\n" + quotes[randomInt];
         return welcomeMessage;
     }
     /**
@@ -78,7 +90,7 @@ public class Ui {
      * @return Exit message
      */
     public String getExitMessage() {
-        String exitMessage = "Bye! Hope to see you again soon!";
+        String exitMessage = "Bye Dory! Hope to see you again soon!";
         return exitMessage;
     }
 
@@ -89,7 +101,7 @@ public class Ui {
      * @return Add task message.
      */
     public String getAddTaskMessage(Task task, int taskCount) {
-        String addTaskMessage = "Got it. I've added this task:\n     " + task //
+        String addTaskMessage = "Awesome. I've added this task:\n     " + task //
                 + "\nNow you have " + taskCount + " tasks in the list";
         return addTaskMessage;
     }
@@ -101,7 +113,7 @@ public class Ui {
      * @return Delete task message.
      */
     public String getDeleteTaskMessage(Task task, int taskCount) {
-        String deleteTaskMessage = "Noted. I've removed this task:\n     " + task //
+        String deleteTaskMessage = "Okay! I've removed this task:\n     " + task //
                 + "\nNow you have " + taskCount + " tasks in the list";
         return deleteTaskMessage;
     }
@@ -146,4 +158,12 @@ public class Ui {
         return didRedo ? "Sure, I have redone your previous change" : "There is nothing to redo";
     }
 
+    /**
+     * Get error message.
+     *
+     * @return Error message.
+     */
+    public String getErrorMessage() {
+        return "Sorry Dory, I've somehow encountered an error!";
+    }
 }

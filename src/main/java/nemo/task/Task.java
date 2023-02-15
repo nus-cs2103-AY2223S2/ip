@@ -69,7 +69,7 @@ public abstract class Task {
             result = new Event(splitStr[2], splitStr[3], splitStr[4]);
             break;
         default:
-            throw new NemoException("Invalid encoded String encountered");
+            throw new NemoException("I could not decode the tasks saved in the log :(");
         }
         if (splitStr[1].equals("true")) {
             result.markDone();

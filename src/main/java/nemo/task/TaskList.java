@@ -66,7 +66,7 @@ public class TaskList {
             taskCount--;
             return deletedTask;
         } catch (IndexOutOfBoundsException e) {
-            throw new NemoException("No task with given task number of " + taskNumber);
+            throw new NemoException("Hmm... It seems that there are no task with given task number of " + taskNumber);
         }
     }
 
@@ -86,7 +86,7 @@ public class TaskList {
             task.markDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new NemoException("No task with given task number of " + taskNumber);
+            throw new NemoException("Hmm... It seems that there are no task with given task number of " + taskNumber);
         }
     }
 
@@ -106,7 +106,7 @@ public class TaskList {
             task.unmarkDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new NemoException("No task with given task number of " + taskNumber);
+            throw new NemoException("Hmm... It seems that there are no task with given task number of " + taskNumber);
         }
     }
 

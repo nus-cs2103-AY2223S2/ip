@@ -38,7 +38,7 @@ public class Storage {
                 scanner.close();
                 taskList.loadTasks(taskArray);
             } catch (IOException e) {
-                throw new NemoException("Error when loading from save");
+                throw new NemoException("Shucks! I faced an error loading your previous tasks!");
             }
         }
     }

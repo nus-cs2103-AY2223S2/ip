@@ -43,7 +43,7 @@ public class Nemo {
             Command c = parser.parse(input);
             return c.execute(taskList, ui, storage);
         } catch (NemoException e) {
-            return e.getMessage();
+            return ui.getErrorMessage() + "\n" + e.getMessage();
         }
     }
 

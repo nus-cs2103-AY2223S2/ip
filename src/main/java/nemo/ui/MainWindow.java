@@ -29,6 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image nemoImage = new Image(this.getClass().getResourceAsStream("/images/Nemo.png"));
+    private Image nemoErrorImage = new Image(this.getClass().getResourceAsStream("/images/NemoError.png"));
+
 
     /**
      * Constructs a MainWindow instance.
@@ -63,10 +65,19 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = nemo.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getNemoDialog(response, nemoImage)
-        );
+        if (response.split(" ", 2)[0].equals("Sorry")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getNemoErrorDialog(response, nemoErrorImage)
+            );
+        }
+
+        else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getNemoDialog(response, nemoImage)
+            );
+        }
         userInput.clear();
     }
 

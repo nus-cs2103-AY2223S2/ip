@@ -32,7 +32,7 @@ public class Event extends Task {
             this.from = fromDate;
             this.to = toDate;
         } catch (DateTimeParseException e) {
-            throw new NemoException("Format of date was not recognized");
+            throw new NemoException("The format of date was not recognized. Try something like this YYYY-MM-DD. :)");
         }
     }
 

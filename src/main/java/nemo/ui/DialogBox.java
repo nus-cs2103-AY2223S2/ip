@@ -22,6 +22,8 @@ import javafx.scene.shape.Polygon;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String NEMO_DIALOG_COLOR = "f88d64";
+    private static final String NEMO_ERROR_COLOR = "dd3d00";
     @FXML
     private Label dialog;
     @FXML
@@ -44,21 +46,18 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    private void flip(String color) {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         // tmp.get(1) returns triangle polygon
         tmp.get(1).setScaleX(-1);
-        ((Polygon) tmp.get(1)).setFill(getNemoColor());
+        ((Polygon) tmp.get(1)).setFill(Color.valueOf(color));
         //tmp.get(2) returns label
-        tmp.get(2).setStyle("-fx-background-color: #f88d64; -fx-padding: 8; -fx-border-radius: 5px; "
-                + "-fx-background-radius: 5px; -fx-font-size: 14;");
+        String style = String.format("-fx-background-color: #%s; -fx-padding: 8; -fx-border-radius: 5px; "
+                + "-fx-background-radius: 5px; -fx-font-size: 14;", color);
+        tmp.get(2).setStyle(style);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-    }
-
-    private static Color getNemoColor() {
-        return Color.valueOf("f88d64");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -67,7 +66,13 @@ public class DialogBox extends HBox {
 
     public static DialogBox getNemoDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.flip(NEMO_DIALOG_COLOR);
+        return db;
+    }
+
+    public static DialogBox getNemoErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip(NEMO_ERROR_COLOR);
         return db;
     }
 }

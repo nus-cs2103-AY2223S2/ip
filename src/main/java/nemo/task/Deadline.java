@@ -28,7 +28,7 @@ public class Deadline extends Task {
             LocalDate byDate = LocalDate.parse(by);
             this.by = byDate;
         } catch (DateTimeParseException e) {
-            throw new NemoException("Format of date was not recognized");
+            throw new NemoException("The format of date was not recognized. Try something like this YYYY-MM-DD. :)");
         }
     }
 
