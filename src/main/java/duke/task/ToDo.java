@@ -22,6 +22,11 @@ public class ToDo extends Task {
         return this.taskDescription;
     }
 
+    @Override
+    public String fullDetails() {
+        return this.taskDescription;
+    }
+
 
     @Override
     public String toString() {

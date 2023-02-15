@@ -19,7 +19,7 @@ public class Event extends Task {
     public Event(String taskString, LocalDate startDateInput, LocalDate endDateInput) {
         super(taskString.substring(6, taskString.indexOf("/from") - 1));
 
-        taskDescription = taskString.substring(6, taskString.indexOf("/to") - 1);
+        taskDescription = taskString.substring(6, taskString.indexOf("/from") - 1);
         startDate = startDateInput;
         endDate = endDateInput;
     }
@@ -27,6 +27,11 @@ public class Event extends Task {
     @Override
     public String getTask() {
         return this.taskDescription;
+    }
+
+    @Override
+    public String fullDetails() {
+        return this.taskDescription + " " + this.getTimeline();
     }
 
     /**
@@ -38,6 +43,7 @@ public class Event extends Task {
                 DateTimeFormatter.ofPattern("MMM d yyyy")) + " to "
                 + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
 
     @Override
     public String toString() {

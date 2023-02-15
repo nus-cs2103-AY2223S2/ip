@@ -29,6 +29,12 @@ public class Deadline extends Task {
         return this.taskDescription;
     }
 
+    @Override
+    public String fullDetails() {
+        return this.taskDescription + " " + this.getDeadline();
+    }
+
+
     /**
      * Format the deadline date in the MMM d yyyy style
      * @return String of a formatted deadline
@@ -36,6 +42,7 @@ public class Deadline extends Task {
     public String getDeadline() {
         return this.deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
 
     @Override
     public String toString() {

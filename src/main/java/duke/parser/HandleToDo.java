@@ -17,6 +17,9 @@ public class HandleToDo {
         }
 
         Task taskToDo = new ToDo(input);
+        if (tasklist.checkDuplicates(taskToDo)) {
+            return "OOPS! You have added this task before already!";
+        }
         tasklist.addTask(taskToDo);
         return "Got it. I've added this task: \n  " + taskToDo
                 + "\nNow you have " + tasklist.getSize() + " tasks in the list.";

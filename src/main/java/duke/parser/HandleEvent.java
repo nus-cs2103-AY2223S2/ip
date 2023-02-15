@@ -42,6 +42,9 @@ public class HandleEvent {
             LocalDate endDate = LocalDate.parse(
                     input.substring(input.lastIndexOf("/") + 4));
             Task taskEvent = new Event(input, startDate, endDate);
+            if (tasklist.checkDuplicates(taskEvent)) {
+                return "OOPS! You have added this task before already!";
+            }
             tasklist.addTask(taskEvent);
             return "Got it. I've added this task: \n  " + taskEvent
                     + "\nNow you have " + tasklist.getSize() + " tasks in the list.";

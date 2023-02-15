@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Parent Task class which contains details of a task
  */
-public class Task {
+public abstract class Task {
     private String taskString;
     private boolean isCompleted;
 
@@ -51,11 +51,18 @@ public class Task {
      * Get description of task
      * @return String of task description
      */
-    public String getTask() {
-        return this.taskString;
-    }
+    public abstract String getTask();
+
+    public abstract String fullDetails();
 
     public String toString() {
         return this.currentTaskStatus() + " " + this.taskString;
     }
+
+    public boolean equals(Task t) {
+        if (this == t) {
+            return true;
+        }
+        return this.fullDetails().equals(t.fullDetails());
+    };
 }

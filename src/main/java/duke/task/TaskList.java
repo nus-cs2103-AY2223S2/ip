@@ -1,6 +1,8 @@
 package duke.task;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * TaskList to contain all the tasks in a list
@@ -90,11 +92,23 @@ public class TaskList {
         taskList.remove(taskNum);
     }
 
-    /**
-     * Find the list of tasks containing the targetString
-     * @param targetString String to be found
-     * @return List of tasks containing the targetString
-     */
+    public boolean checkDuplicates(Task task) {
+        /*
+        List<Task> inputList = this.taskList;
+        Set<Task> inputSet = new HashSet<>(inputList);
+        if (inputSet.size() < inputList.size()) {
+            return true;
+        }
+        return false;
+
+         */
+        for (int i = 0; i < this.taskList.size(); i++) {
+            if ((taskList.get(i)).equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
