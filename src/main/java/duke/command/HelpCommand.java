@@ -9,6 +9,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.textui.TextUi;
 
+/**
+ * A command that stores the command to show help on all the commands available. The action of showing the help text
+ * can be carried out when called.
+ */
 public class HelpCommand extends Command {
     /**
      * Constructor for a command to show help texts.
