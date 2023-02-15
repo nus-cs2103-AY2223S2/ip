@@ -24,9 +24,11 @@
 ## Features
 
 ## List
+Command format: `list`
+
 Displays a list of task you have created. You can also view the task number accordingly for other commands.
 
-Command format: `list`
+![List image](UG images/list.png)
 
 ## Todo
 Command format: `todo [NAME]`
@@ -35,12 +37,16 @@ Creates a to-do task to the list by stating the name of the task.
 
 Example: `todo borrow book: Harry Potter and the Goblet of Fire`
 
+![todo image](UG images/todo.png)
+
 ## Deadline
 Command format: `deadline [NAME] /by [DATE] [TIME]`
 
 Creates a daedline task, by stating the name, followed by a data and time after `/by`. The date should be formatted in DD/MM/YYYY format.
 
 Example: `deadline Finish CSXXXX Assignment /by 24/03/2023 2359`
+
+![deadline image](UG images/deadline.png)
 
 ## Event
 Command format: `event [NAME] /from [DATE/TIME] /to [DATE/TIME]`
@@ -49,12 +55,16 @@ Creates an event task, stating a name, a date or time after /from, and another i
 
 Example: `event Go for Standard Chartered 42.195km run /from Mon 2pm /to 5pm
 
+![event image](UG images/event.png)
+
 ## Mark
 Command format: `mark [NUMBER]`
 
 Ticks a task to mark it done, by stating the task number.
 
 Example: `mark 1`
+
+![mark image](UG images/mark.png)
 
 
 ## Unmark
@@ -64,6 +74,8 @@ Unticks a task to mark it undone, by stating the task number.
 
 Example: `unmark 1`
 
+![unmark image](UG images/unmark.png)
+
 ## Delete
 Command format: `delete [NUMBER]`
 
@@ -71,12 +83,16 @@ Deletes a task in the list, by stating the task number.
 
 Example: `delete 1`
 
+![delete image](UG images/delete.png)
+
 ## Find
 Command format: `find [KEYWORD]`
 
 Find a task/tasks containing a keyword given.
 
 Example: `find book`
+
+![find image](UG images/find.png)
 
 ## Undo
 Command format: `undo [NUMBER]`
@@ -86,10 +102,14 @@ Only commands that are under Create, Mark/Unmark and Delete can be undone.
 
 Example: `undo 2`
 
+![undo image](UG images/undo.png)
+
 ## Bye
 Command format: `bye`
 
 Say goodbye to Lele and exit the program.
+
+![bye image](UG images/bye.png)
 
 ## Summary
 |Command|Format|
