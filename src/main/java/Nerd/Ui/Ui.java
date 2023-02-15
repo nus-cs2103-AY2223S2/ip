@@ -5,6 +5,8 @@ import Nerd.entities.Event;
 import Nerd.entities.Task;
 import Nerd.entities.TaskList;
 
+import java.time.LocalDate;
+
 /**
  * Represents the user interface of the Chat bot.
  */
@@ -109,12 +111,13 @@ public class Ui {
     /**
      * Searches the current tasklist for a specific input date.
      *
-     * @param date The string representation of the date to be searched.
+     * @param dateString The string representation of the date to be searched.
      * @param list The tasklist of the current nerd bot state.
      * @return The list of tasks that associate with the date given in the tasklist.
      */
-    public String printSearchDate(String date, TaskList list) {
-        String output = "Tasks occurring on " + date + ":\n";
+    public String printSearchDate(String dateString, TaskList list) {
+        String output = "Tasks occurring on " + dateString + ":\n";
+        LocalDate date = LocalDate.parse(dateString.trim());
         for (int i = 0; i < list.getSize(); i++) {
             Task currTask = list.getTask(i);
             if (currTask instanceof Deadline) {
