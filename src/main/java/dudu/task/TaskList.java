@@ -94,7 +94,7 @@ public class TaskList {
     public String printList() {
         StringBuilder sb = new StringBuilder();
         if (list.size() == 0) {
-            sb.append("There is no task in your list");
+            sb.append("There is no task in your list\n");
         } else {
             sb.append("Here are the tasks in your list:\n");
             for (int i = 0; i < list.size(); i++) {

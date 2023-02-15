@@ -48,7 +48,7 @@ test {
 }
 
 application {
-    mainClassName = "dudu.Dudu"
+    mainClassName = "dudu.Launcher"
 }
 
 shadowJar {
