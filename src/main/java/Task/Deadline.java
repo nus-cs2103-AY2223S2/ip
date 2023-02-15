@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.DukeException;
+
 /**
  * Represents a Task with a deadline.
  */
@@ -36,6 +38,29 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = LocalDateTime.parse(by, format);
         this.format = format;
+    }
+
+    /**
+     * Edits the selected task.
+     *
+     * @param item The item to be updated.
+     * @param newInformation The new information.
+     * @throws DukeException
+     */
+    @Override
+    public void edit(String item, String newInformation) throws DukeException {
+        switch(item) {
+        case "name":
+            this.name = newInformation;
+            break;
+
+        case "by":
+            this.by = LocalDateTime.parse(newInformation, format);
+            break;
+
+        default:
+            throw new DukeException(duke.Ui.invalidItemUpdateResponse(this));
+        }
     }
 
     /**

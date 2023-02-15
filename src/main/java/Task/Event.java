@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.DukeException;
+import duke.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -41,6 +44,33 @@ public class Event extends Task {
         this.from = LocalDateTime.parse(from, format);
         this.to = LocalDateTime.parse(to, format);
         this.format = format;
+    }
+
+    /**
+     * Edits the selected task.
+     *
+     * @param item The item to be updated.
+     * @param newInformation The new information.
+     * @throws duke.DukeException
+     */
+    @Override
+    public void edit(String item, String newInformation) throws DukeException {
+        switch(item) {
+        case "name":
+            this.name = newInformation;
+            break;
+
+        case "to":
+            this.to = LocalDateTime.parse(newInformation, format);
+            break;
+
+        case "from":
+            this.from = LocalDateTime.parse(newInformation, format);
+            break;
+
+        default:
+            throw new DukeException(Ui.invalidItemUpdateResponse(this));
+        }
     }
 
     /**

@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
@@ -14,6 +15,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+import duke.command.UpdateCommand;
 
 /**
  * Parsers input from user.
@@ -57,6 +59,11 @@ public class Parser {
         return inputs.split(" ", 2);
     }
 
+    private static String[] getItemCategory(String input) {
+        String[] items = input.split(":", 2);
+        return items;
+    }
+
     /**
      * Checks if a user input is valid. Throws a DukeException is it is invalid.
      *
@@ -87,9 +94,28 @@ public class Parser {
                 throw new DukeException(Ui.incompleteSelectionCommandResponse);
             }
 
-            String num = splitFromInstruction(inputs[0])[1];
-            if (!isValidSelection(num)) {
+            String selectNum = splitFromInstruction(inputs[0])[1];
+            if (!isValidSelection(selectNum)) {
                 throw new DukeException(Ui.invalidSelectionCommandResponse);
+            }
+            break;
+
+        case "update":
+            if (inputs.length < 2) {
+                throw new DukeException(Ui.incompleteSelectionCommandResponse);
+            } else if (splitFromInstruction(inputs[0]).length != 2) {
+                throw new DukeException(Ui.incompleteUpdateCommandResponse);
+            }
+
+            String updateNum = splitFromInstruction(inputs[0])[1];
+            String[] items = inputs[1].split(":", 2);
+            if (items.length != 2) {
+                throw new DukeException(Ui.incompleteUpdateCommandResponse);
+            }
+            if (!isValidSelection(updateNum)) {
+                throw new DukeException(Ui.invalidSelectionCommandResponse);
+            } else if (!isValidItem(items[0], items[1])) {
+                throw new DukeException(Ui.incompleteUpdateCommandResponse);
             }
             break;
 
@@ -127,6 +153,13 @@ public class Parser {
         default:
             throw new DukeException(Ui.unreadableCommandResponse);
         }
+    }
+
+    private static boolean isValidItem(String item, String newInformation) {
+        if(item.equals("by") || item.equals("from") || item.equals("to")) {
+            return isValidTime(newInformation);
+        }
+        return true;
     }
 
     /**
@@ -213,6 +246,13 @@ public class Parser {
 
             int deleteNum = Integer.parseInt(splitFromInstruction(inputs[0])[1]);
             command = new DeleteCommand(deleteNum);
+            break;
+
+        case "update":
+            int updateNum = Integer.parseInt(splitFromInstruction(inputs[0])[1]);
+            String item = getItemCategory(inputs[1])[0].toLowerCase();
+            String newInfo = getItemCategory(inputs[1])[1];
+            command = new UpdateCommand(updateNum, item, newInfo);
             break;
 
         case "todo":

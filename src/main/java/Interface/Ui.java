@@ -15,8 +15,8 @@ public class Ui {
             "deadline [name] /by:[time] - Add a Deadline Task (format for time: 14 Oct 2023 23:00)",
             "event [name] /from:[time] /to:[time] - Add an Event Task (format for time: 14 Oct 2023 23:00)");
 
-    protected static String successfulLoadResponse = "I've successfully retrieved your past task list!";
-    protected static String unsuccessfulLoadResponse = "Sorry! I was unable to load your task list from memory!";
+    protected static String successfulLoadResponse = "I've successfully retrieved from memory!";
+    protected static String unsuccessfulLoadResponse = "Sorry! I was unable to retrieve from memory!";
 
     protected static String askForTaskResponse = "What can I do for you today?";
 
@@ -28,6 +28,9 @@ public class Ui {
             + "Maybe you forgot to select a Task. " + "Try re-typing your instruction!";
     protected static String invalidSelectionCommandResponse = "I'm sorry, but I don't understand what that means! "
             + "Remember to select the Task number. " + "Try re-typing your instruction!";
+    protected static String incompleteUpdateCommandResponse = "I'm sorry, but I don't understand what that means! "
+            + "Maybe you forgot to include what to update. " + "Try re-typing your instruction! "
+            + "(format: update [num] /[item]:[new information])";
     protected static String incompleteAddTodoCommandResponse = "I'm sorry, but I don't understand what that means! "
             + "Try re-typing your instruction! (format: todo [name])";
     protected static String incompleteAddDeadlineCommandResponse = "I'm sorry, but I don't understand what that means! "
@@ -36,6 +39,8 @@ public class Ui {
             + "Try re-typing your instruction! (format: event [name] /from:[time] /to:[time])";
     protected static String invalidTimeResponse = "OOPS!!! You have key in an invalid date. "
             + "(format: 14 Oct 2023 23:00)";
+
+    protected static String unsuccessfulSaveResponse = "Sorry! I was not able to save your previous instructions.";
 
     /**
      * Returns a Response to signify end of program.
@@ -56,9 +61,15 @@ public class Ui {
      * @return String Response message with line break
      */
     public static String addLineBreak(String... inputs) {
-        String str = inputs[0];
-        for (int i = 1; i < inputs.length; i++) {
-            str = str + "\n" + inputs[i];
+        String str = "";
+        for (int i = 0; i < inputs.length; i++) {
+            if (str.equals("")) {
+                str = inputs[i];
+            } else if (inputs[i].equals("")) {
+                str = str;
+            } else {
+                str = str + "\n" + inputs[i];
+            }
         }
         return str;
     }
@@ -101,6 +112,28 @@ public class Ui {
     }
 
     /**
+     * Returns a message indicating to user that the item to update is not available.
+     *
+     * @param t The selected task to update.
+     * @return String The message indicating to user selected task cannot be updated.
+     */
+    public static String invalidItemUpdateResponse(Task t) {
+        return "I'm sorry, but this task below cannot be updated: \n\n" + t + "\n\nMaybe the item to be updated is "
+                + "invalid. Try re-typing your instruction! (format: update [num] /[item]:[new information])";
+    }
+
+    /**
+     * Returns a message indicating to user selected task was successfully marked.
+     *
+     * @param t The selected task.
+     * @return String The message indicating to user selected task was successfully marked.
+     */
+    public static String updateTaskResponse(Task t) {
+        return "Nice! I've update this task: \n\n" + t;
+    }
+
+
+    /**
      * Returns the list of Tasks.
      *
      * @param tasks The array of tasks.
@@ -137,7 +170,7 @@ public class Ui {
      * @return String The message indicating to user selected task was successfully marked.
      */
     public static String markTaskResponse(Task t) {
-        return "Nice! I've marked this task as done: \n\n " + t + ".";
+        return "Nice! I've marked this task as done: \n\n" + t;
     }
 
     /**
@@ -147,7 +180,7 @@ public class Ui {
      * @return String The message indicating to user selected task was successfully unmarked.
      */
     public static String unmarkTaskResponse(Task t) {
-        return "OK, I've marked this task as not done yet \n\n" + t + ".";
+        return "OK, I've marked this task as not done yet \n\n" + t;
     }
 
     /**

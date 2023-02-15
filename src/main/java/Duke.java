@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import duke.command.Command;
 
@@ -23,17 +24,30 @@ public class Duke {
         this.isEnd = false;
     }
 
+    private boolean hasLoadedSuccessfully() {
+        try {
+            this.tasks = new TaskList(storage.loadData());
+            return true;
+        } catch (FileNotFoundException e) {
+            this.tasks = new TaskList();
+            return false;
+        }
+    }
+
+    private boolean hasSavedSuccessfully(TaskList tasks, Storage storage) {
+        try {
+            System.out.println(Ui.listTaskResponse(tasks));
+            storage.saveData(tasks);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
     public String getPreviousTaskResponse() {
         String startingMessage = Ui.welcomeResponse;
         String askForTask = Ui.askForTaskResponse;
-        String loadMessage = "";
-        try {
-            this.tasks = new TaskList(storage.loadData());
-            loadMessage = Ui.successfulLoadResponse;
-        } catch (FileNotFoundException e) {
-            this.tasks = new TaskList();
-            loadMessage = Ui.unsuccessfulLoadResponse;
-        }
+        String loadMessage = hasLoadedSuccessfully() ? Ui.successfulLoadResponse : Ui.unsuccessfulLoadResponse;
         String response = Ui.addDoubleLineBreak(startingMessage, Ui.instructionResponse, loadMessage,
                 Ui.listTaskResponse(this.tasks), askForTask);
         return response;
@@ -51,10 +65,13 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            String loadMessage = hasLoadedSuccessfully() ? "" : Ui.unsuccessfulLoadResponse;
             String fullCommand = input;
             Command c = Parser.parse(fullCommand);
             isEnd = c.isExit();
-            return c.execute(tasks, storage);
+            String response = c.execute(tasks, storage);
+            String saveMessage = hasSavedSuccessfully(tasks, storage) ? "" : Ui.unsuccessfulSaveResponse;
+            return Ui.addLineBreak(loadMessage, response, saveMessage);
         } catch (DukeException e) {
             return e.toString();
         }

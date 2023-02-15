@@ -1,11 +1,14 @@
 package duke.task;
 
+import duke.DukeException;
+import duke.Ui;
+
 /**
  * Represents a Task.
  */
 public class Task {
 
-    private String name;
+    protected String name;
     private boolean isDone;
 
     /**
@@ -51,6 +54,20 @@ public class Task {
      */
     public boolean isRelated(String word) {
         return this.name.contains(word);
+    }
+
+    /**
+     * Edits the selected task.
+     *
+     * @param item The item to be updated.
+     * @param newInformation The new information.
+     * @throws DukeException
+     */
+    public void edit(String item, String newInformation) throws DukeException {
+        if(!item.equals("name")) {
+            throw new DukeException(Ui.invalidItemUpdateResponse(this));
+        }
+        this.name = newInformation;
     }
 
     /**
