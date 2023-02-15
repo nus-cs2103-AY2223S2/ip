@@ -14,12 +14,18 @@ public class Duke {
     /**
      * Constructor to initialize required components
      */
-    public Duke() throws  DukeException {
+    public Duke() throws DukeException {
         storage = new Storage();
         tasks = storage.recoverList();
         parser = new Parser();
     }
 
+    /**
+     * Executes commands given user input
+     * @param input User input
+     * @return String of result from command execution
+     * @throws DukeException If command is invalid or there is storage saving issues
+     */
     public String executeCommand(String input) throws DukeException {
         Command command = parser.parse(input);
         if (command == Parser.EXIT_COMMAND) {

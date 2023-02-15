@@ -3,7 +3,6 @@ package duke;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,6 +24,11 @@ public class TaskList implements Serializable {
         listOfTasks = new ArrayList<>();
     }
 
+    /**
+     * Add a task to the list
+     * @param task Task to be added
+     * @return String result of adding task
+     */
     public String addTask(Task task) {
         listOfTasks.add(task);
 
@@ -33,6 +37,12 @@ public class TaskList implements Serializable {
                 + listOfTasks.size();
     }
 
+    /**
+     * Mark task in list as completed
+     * @param taskIndex Index of task in list
+     * @return Result of marking task
+     * @throws DukeException If index is invalid
+     */
     public String markTask(int taskIndex) throws DukeException {
         try {
             return listOfTasks.get(taskIndex - 1).mark();
@@ -41,6 +51,12 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Unmark task in list as completed
+     * @param taskIndex Index of task in list
+     * @return String result of unmarking task
+     * @throws DukeException If index is invalid
+     */
     public String unmarkTask(int taskIndex) throws DukeException {
         try {
             return listOfTasks.get(taskIndex - 1).unmark();
@@ -49,6 +65,12 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Delete task in list
+     * @param taskIndex Index of task in list
+     * @return String result of deleting task
+     * @throws DukeException If index is invalid
+     */
     public String deleteTask(int taskIndex) throws DukeException {
         try {
             Task toRemove = listOfTasks.get(taskIndex - 1);
@@ -59,6 +81,11 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Searches list of tasks for any that has similar keyword
+     * @param keyword Word to be searched amongst tasks
+     * @return String result of all matched tasks
+     */
     public String search(String keyword) {
         Stream<Task> taskStream = listOfTasks.stream();
         Stream<Task> filteredTaskStream = taskStream.filter(task -> task.hasKeyword(keyword));

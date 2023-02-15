@@ -1,5 +1,7 @@
 package duke.client.components;
 
+import java.io.InputStream;
+
 import duke.Duke;
 import duke.DukeException;
 import javafx.fxml.FXML;
@@ -10,12 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.InputStream;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String USER_IMAGE_PATH = "/images/doomer.jpg";
+    private static final String DUKE_IMAGE_PATH = "/images/chad.jpg";
+
+    private Duke duke;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -25,16 +30,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-
-    private static final String USER_IMAGE_PATH = "/images/doomer.jpg";
-    private static final String DUKE_IMAGE_PATH = "/images/chad.jpg";
-
     private InputStream userImageResource = this.getClass().getResourceAsStream(USER_IMAGE_PATH);
     private InputStream dukeImageResource = this.getClass().getResourceAsStream(DUKE_IMAGE_PATH);
     private final Image userImage = new Image(userImageResource);
     private final Image dukeImage = new Image(dukeImageResource);
 
+    /**
+     * Initializes main window component in GUI
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

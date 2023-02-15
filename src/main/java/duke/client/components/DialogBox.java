@@ -1,18 +1,19 @@
 package duke.client.components;
 
+import java.io.IOException;
+import java.net.URL;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.Node;
 
-import java.io.IOException;
-import java.net.URL;
 
 /**
  * An example of a custom control using FXML.
@@ -20,12 +21,12 @@ import java.net.URL;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String RESOURCE_PATH = "/view/DialogBox.fxml";
+
     @FXML
     private Label dialogLabel;
     @FXML
     private ImageView displayPicture;
-
-    private static final String RESOURCE_PATH = "/view/DialogBox.fxml";
 
     private DialogBox(String text, Image image) {
         try {
