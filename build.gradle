@@ -46,7 +46,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Launcher"
+    archiveBaseName = "version 0.2"
     archiveClassifier = null
 }
 

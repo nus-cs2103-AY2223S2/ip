@@ -47,14 +47,14 @@ public class Ui {
      */
     public static String sayBye() {
         System.out.println(Ui.Underline());
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope you never need me again!";
     }
 
     /**
      * The method of markedMessage()
      */
     public static String markedMessage() {
-        return"\tNice! I've marked this task as done:";
+        return"\tNice! I've finally finished this mission:";
 
     }
 
@@ -62,14 +62,14 @@ public class Ui {
      * The method of unMarkedMessage()
      */
     public static String unMarkedMessage() {
-        return"\tOK, I've marked this task as not done yet:";
+        return"\tUhh, I have not done this:";
     }
 
     /**
      * The method of showDeleteMessage()
      */
     public static String showDeleteMessage() {
-        return "\tNoted. I've removed this task:";
+        return "\tOkay. that's one off the list:";
     }
 
 
@@ -78,7 +78,7 @@ public class Ui {
      * The method of listMsg()
      */
     public static String listMsg() {
-        return "\tHere are the tasks in your list:";
+        return "\tHere are the missions:";
 
     }
 

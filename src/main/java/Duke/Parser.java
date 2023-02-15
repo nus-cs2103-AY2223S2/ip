@@ -92,14 +92,13 @@ public class Parser {
      * @param listOfTasks list of task task is deleted from
      */
     public static String delete(String number, TaskList listOfTasks) {
+        System.out.println(Ui.Underline());
         int lenBefore = listOfTasks.size();
         Task removed = listOfTasks.get(Integer.parseInt(number.split(" ")[1]) );
         int nummbering = Integer.parseInt(number.split(" ")[1]);
         listOfTasks.removeTask(nummbering);
         assert listOfTasks.size() == lenBefore - 1;
-        Ui.Underline();
-        return String.format(Ui.Underline()
-                             + "\n%s\n"
+        return String.format( "\n%s\n"
                              + "\t%s removed\n"
                              + "\tNow you have %d tasks in the listOfTasks.\n" + Ui.Underline() , Ui.showDeleteMessage(), removed.toString(), listOfTasks.size());
 
