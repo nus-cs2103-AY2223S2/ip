@@ -1,8 +1,15 @@
 package duke;
 
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.backend.TaskList;
+import duke.exception.DukeException;
+import duke.task.ToDo;
+
+
+
 public class TaskListTest {
     @Test
     public void testTaskList() {
@@ -22,7 +29,7 @@ public class TaskListTest {
     public void testDeleteTask() {
         TaskList taskList = new TaskList();
         taskList.addTask(new ToDo("test"));
-        try{
+        try {
             taskList.deleteTask(0);
         } catch (DukeException e) {
             System.out.println(e.getMessage());

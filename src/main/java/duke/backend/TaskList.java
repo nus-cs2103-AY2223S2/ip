@@ -1,9 +1,15 @@
-package duke;
-
-import duke.task.Task;
+package duke.backend;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+import duke.task.Task;
+
+
+
+/**
+ * Represents a duke.backend.TaskList object that represents a list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
     public TaskList() {
@@ -12,14 +18,6 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
-    }
-
-    /**
-     * @param index the index of the task to be retrieved.
-     * @return the task at the specified index.
-     */
-    public Task getTask(int index) {
-        return  this.taskList.get(index);
     }
 
     /**
@@ -64,7 +62,7 @@ public class TaskList {
      */
     public Task deleteTask(int index) throws DukeException {
         if (index >= this.taskList.size()) {
-            throw new DukeException("duke.task.Task does not exist!");
+            throw new DukeException("Task does not exist!");
         }
         Task deletedTask = this.taskList.get(index);
         this.taskList.remove(index);

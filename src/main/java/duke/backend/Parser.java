@@ -1,9 +1,13 @@
-package duke;
+package duke.backend;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
+/**
+ * Represents a duke.backend.Parser object that parses the input string from the user.
+ */
 public class Parser {
 
     public Parser() {
@@ -14,7 +18,7 @@ public class Parser {
      * @param input the input string from the user.
      * @return the duke.task.ToDo object created from the input string.
      */
-    public static ToDo parseTodo(String input)  {
+    public static ToDo parseTodo(String input) {
         return new ToDo(input);
     }
 
