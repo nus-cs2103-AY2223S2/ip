@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import membot.Membot;
+import membot.view.Message;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -41,8 +42,8 @@ public class MainWindow extends AnchorPane {
         this.membot = d;
     }
 
-    public Consumer<String> getPrinter() {
-        return s -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(s, botImage));
+    public Consumer<Message> getPrinter() {
+        return m -> dialogContainer.getChildren().add(DialogBox.getMembotDialog(m.getMessage(), botImage, m.isError()));
     }
 
     /**
@@ -54,7 +55,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage)
+                DialogBox.getUserDialog(input, userImage, false)
         );
         this.membot.execute(input);
         userInput.clear();
