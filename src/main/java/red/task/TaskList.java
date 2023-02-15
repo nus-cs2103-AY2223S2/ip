@@ -18,7 +18,7 @@ public class TaskList {
      * @param size The maximum num of elements we can put in the queue.
      */
     public TaskList(int size) {
-        this.items = new ArrayList<Task>(size);
+        this.items = new ArrayList<>(size);
     }
 
     /**
@@ -28,8 +28,26 @@ public class TaskList {
      * @return false if the queue is full; true if e is added successfully.
      */
     public boolean addTask(Task e) {
+        for(int i = 0; i < this.items.size() ;i++) {
+            Task currentTask = this.indexOf(i);
+            if(currentTask.equals(e)) {
+                return false;
+            }
+        }
         items.add(e);
         return true;
+    }
+
+    public static void main(String[] args) {
+        ToDoTask arg = new ToDoTask("eat");
+        ToDoTask argg = new ToDoTask("eat");
+        ToDoTask arggg = new ToDoTask("eatt");
+        TaskList tlist = new TaskList(100);
+        tlist.addTask(arg);
+        System.out.println(tlist.addTask(argg));
+        System.out.println(tlist.addTask(arggg));
+        System.out.println(tlist);
+
     }
 
     /**

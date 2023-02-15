@@ -57,5 +57,25 @@ public class Task {
         str = String.format("[" + statusIcon + "] " + this.description);
         return str;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+        Task checkedObj = (Task) obj;
+        boolean isSameDescription = this.description.equals(checkedObj.description);
+
+        if (isSameDescription) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 }
 

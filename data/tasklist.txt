@@ -1,9 +1,3 @@
 This is your current task list:
-1. [E][ ] cry          (From: 2pm         To: 8am) 
-2. [T][ ] eat5        
-3. [T][ ] die  
-4. [T][ ] eat food  
-5. [T][ ] eat drink  
-6. [D][ ] die  (Before: Nov 08 2022) 
-7. [D][ ] dieee  (Before: 2022-11-08T16:00) 
+1. [T][ ] eat 
 

@@ -1,5 +1,7 @@
 package red.task;
 
+import red.command.AddCommand;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -98,5 +100,42 @@ public class DeadlineTask extends Task {
             return "[D]" + super.toString() + " (Before: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
         return "[D]" + super.toString() + " (Before: " + dateTime  + ")";
+    }
+
+    /**
+     * Compares this object to the specified object.
+     *
+     * @param obj the object to compare with.
+     * @return true if the objects are the same; false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof DeadlineTask)) {
+            return false;
+        }
+        DeadlineTask checkedObj = (DeadlineTask) obj;
+        boolean isSameDescription = this.description.equals(checkedObj.description);
+        boolean isSameDate = false;
+        boolean isSameDateTime = false;
+        if(dateTime == null) {
+            isSameDate = this.date.equals(checkedObj.date);
+        }
+        if(date == null) {
+            isSameDateTime = this.dateTime.equals(checkedObj.dateTime);
+        }
+
+
+
+        if (isSameDescription && isSameDateTime) {
+            return true;
+        }
+        if (isSameDescription && isSameDate) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -34,9 +34,14 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
-        tasks.addTask(this.task);
-        ui.addCurrentReply("New Task Added: " + task.getDescription() +"\n");
-        ui.addCurrentReply("There are now " + tasks.getTaskListSize() + " task(s) awaiting completion\n");
+        boolean isAdded = tasks.addTask(task);
+        if(isAdded) {
+            ui.addCurrentReply("New Task Added: " + task.getDescription() +"\n");
+            ui.addCurrentReply("There are now " + tasks.getTaskListSize() + " task(s) awaiting completion\n");
+            return;
+        }
+        ui.addCurrentReply("Specified Task already exists\n");
+
     }
 
     /**
