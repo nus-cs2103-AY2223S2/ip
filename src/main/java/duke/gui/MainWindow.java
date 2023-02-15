@@ -1,4 +1,4 @@
-package duke.Gui;
+package duke.gui;
 
 import duke.Duke;
 

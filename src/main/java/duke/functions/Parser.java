@@ -49,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * The method reads an array of String inputs and uses the first value of the array
+     * Reads an array of String inputs and uses the first value of the array
      * to determine which operations shall be performed on the ToDoList object.
      * Returns a String that is the output message of the command performed.
      *
@@ -103,9 +103,9 @@ public class Parser {
     }
 
     /**
-     * The method reads a scanner and uses it to read and load the contents of
-     * the file in the scanner to a ToDoList object. It returns the ToDoList
-     * object loaded with the file's content.
+     * Reads a scanner and uses it to read and load the contents of the file
+     * in the scanner to a ToDoList object. It returns the ToDoList object
+     * loaded with the file's content.
      *
      * @param sc The Scanner containing the file to be read to load the ToDoList
      *           object.
@@ -146,7 +146,7 @@ public class Parser {
     }
 
     /**
-     * The method reads a String input and returns the integer representation of that String.
+     * Reads a String input and returns the integer representation of that String.
      *
      * @param input The String to be parsed into an integer.
      * @return An integer that is obtained from parsing the given input.
@@ -161,12 +161,12 @@ public class Parser {
     }
 
     /**
-     * The method reads an array of String inputs and uses the first value of the array
+     * Reads an array of String inputs and uses the first value of the array
      * to determine which type of Task object should be added to the given ToDoList object.
      *
      * @param inputs The Array of String containing the operation to be performed
-     *              and its additional parameters. The first value of the array should
-     *              contain the type of Task object to be added to the ToDoList object.
+     *               and its additional parameters. The first value of the array should
+     *               contain the type of Task object to be added to the ToDoList object.
      * @param list The ToDoList object that the newly created Task object should be added to.
      * @return A String that specifies the operation carried out on which Task object.
      * @throws DukeException If the given array of String contains insufficient or wrong
