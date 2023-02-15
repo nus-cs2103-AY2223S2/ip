@@ -125,6 +125,7 @@ public class Command {
             }
         }
         TaskList matches = new TaskList(matchingTaskList);
+        assert matches.size() < LIST.size() : "list of filtered task should not be bigger than actual task list";
         String result = "Here are the matching tasks in your list:\n" + matches;
         return result;
     }
