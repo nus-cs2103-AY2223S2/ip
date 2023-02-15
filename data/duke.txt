@@ -1,3 +1,7 @@
-descriptionWrite unit testscompletedfalsecategoryT
-by26/1/2023 2303descriptioncomplete unit testscompletedfalsecategoryD
-descriptionunit test celebrationsfrom26/1/2023 2303completedfalseto26/1/2023 2359categoryE
+descriptionTaekwondo Gradingfrom15/2/2023 0730completedtrueto15/2/2023 0930categoryE
+by17/2/2023 2359descriptionFinish IPcompletedfalsecategoryD
+descriptionRehearse for CS2101 OP1completedtruecategoryT
+descriptionUser guide for IPcompletedtruecategoryT
+descriptionclean the dishescompletedfalsecategoryT
+by17/2/2023 2359descriptionsubmit CS2103T IPcompletedfalsecategoryD
+descriptionCheck internship updatescompletedfalseafter17/2/2023 1200categoryA

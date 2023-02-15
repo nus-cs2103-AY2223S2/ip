@@ -38,7 +38,7 @@ public class Core {
             Task task = tasks.mark(index);
             ui.markTask(task);
         } else if (cmd.matches("^unmark [0-9]*$")) {
-            int index = Integer.parseInt(cmd.substring(5)) - 1;
+            int index = Integer.parseInt(cmd.substring(7)) - 1;
             Task task = tasks.unmark(index);
             ui.unmarkTask(task);
         } else if (cmd.matches("^todo .*$")) {
