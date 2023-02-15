@@ -38,7 +38,8 @@ public class Sender {
             "7) unmark _____\n" +
             "8) mark _____ \n" +
             "9) find _____\n" +
-            "10) help\n";
+            "10 delete _____\n" +
+            "11) help\n";
 
     /**
      * Constructs a new Sender instance.
