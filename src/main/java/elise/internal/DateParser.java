@@ -1,4 +1,6 @@
-package elise;
+package elise.internal;
+
+import elise.MaybeDate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

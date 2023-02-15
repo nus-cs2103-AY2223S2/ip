@@ -9,7 +9,7 @@ public class EliseException extends Exception {
      *
      * @param message Error message.
      */
-    protected EliseException(String message) {
+    public EliseException(String message) {
         super(message);
     }
 }
