@@ -25,6 +25,10 @@ import javafx.util.Duration;
  */
 public class MainWindow extends VBox {
     /**
+     * Minimum width of the alert box when shown.
+     */
+    private static final int MIN_WIDTH = 700;
+    /**
      * The profile image of the user.
      */
     @SuppressWarnings("ConstantConditions")
@@ -63,11 +67,7 @@ public class MainWindow extends VBox {
     /**
      * Alert box to show the commands or about information when clicking on menu items.
      */
-    private Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.CLOSE);
-    /**
-     * Minimum width of the alert box when shown.
-     */
-    private static final int MIN_WIDTH = 700;
+    private final Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.CLOSE);
     /**
      * Initialises the scrollPane to have a container that contains all the dialog
      * boxes so that it is scrollable.
@@ -115,7 +115,7 @@ public class MainWindow extends VBox {
 
     @FXML
     private void handleShowCommands() {
-        String helpPath = "/values/help.txt" ;
+        String helpPath = "/values/help.txt";
         String helpError = "Error occurred when reading help text file.";
         String helpText = readResource(helpPath, helpError);
 
@@ -127,7 +127,7 @@ public class MainWindow extends VBox {
 
     @FXML
     private void handleShowAbout() {
-        String aboutPath = "/values/about.txt" ;
+        String aboutPath = "/values/about.txt";
         String aboutError = "Error occurred when reading about text file.";
         String aboutText = readResource(aboutPath, aboutError);
 
@@ -139,7 +139,7 @@ public class MainWindow extends VBox {
 
     private String readResource(String path, String errorMsg) throws DukeException {
         InputStream inputStream = this.getClass().getResourceAsStream(path);
-        String text = "";
+        String text;
 
         assert inputStream != null;
 

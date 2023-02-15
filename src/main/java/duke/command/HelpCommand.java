@@ -28,7 +28,7 @@ public class HelpCommand extends Command {
     public String execute(TaskList taskList, TextUi ui, Storage storage)
             throws DukeException {
         InputStream helpStream = this.getClass().getResourceAsStream("/values/help.txt");
-        String helpText = "";
+        String helpText;
 
         assert helpStream != null;
 
