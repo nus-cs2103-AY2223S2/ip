@@ -140,7 +140,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return windycall.run(input);
+        return windycall.run(input.trim());
     }
 
 }
