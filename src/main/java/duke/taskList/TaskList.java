@@ -68,7 +68,7 @@ public class TaskList {
             // Checks if provided index is in range.
             throw new DukeException("index");
         } else {
-            output = "Noted. I've removed this task:";
+            output = "Meow-ted. I've removed this task:";
             output += "\n    " + list.get(index).toString();
             list.remove(index);
             output += "\nNow you have " + list.size() + " tasks in the list.";
@@ -112,7 +112,7 @@ public class TaskList {
             throw new DukeException("index");
         } else {
             list.get(index).markAsUndone();
-            output = "OK, I've marked this task as not done yet:";
+            output = "Meow-k, I've marked this task as not done yet:";
             output += "\n    " + list.get(index).toString();
             return output;
         }
@@ -170,7 +170,7 @@ public class TaskList {
             throw new DukeException("index");
         } else {
             list.get(index).updateDescription(contents[2]);
-            output = "OK, I've updated the description of this task:";
+            output = "Meow-k, I've updated the description of this task:";
             output += "\n    " + list.get(index).toString();
             return output;
         }

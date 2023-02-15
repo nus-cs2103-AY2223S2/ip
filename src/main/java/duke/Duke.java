@@ -75,7 +75,7 @@ public class Duke {
             case UNKNOWN:
                 throw new DukeException("unknown");
             case BYE:
-                output = "Bye. Hope to see you soon!";
+                output = "Meow. Hope to see you soon!";
                 break;
             case UPDATE:
                 output = tasks.updateTask(Parser.contents(input));
@@ -88,14 +88,14 @@ public class Duke {
             return output;
         } catch (DukeException e) {
             if (e.getMessage().equals("index")) {
-                return "OOPS!!! Index out of range.";
+                return "MEOW!!! Index out of range.";
             } else if (e.getMessage().equals("unknown")) {
-                return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+                return "MEOW!!! I'm sorry, but I don't know what that means :-(";
             } else if (e.getMessage().equals("update")) {
                 return "Incorrect format detected." + "\nPlease enter update in the following format:"
                         + "\n    update index description";
             } else {
-                return "OOPS!!! The description of a " + e.getMessage() + " cannot be empty.";
+                return "MEOW!!! The description of a " + e.getMessage() + " cannot be empty.";
             }
         } catch (DateTimeParseException e) {
             return "Incorrect format detected." + "\nPlease enter date/time in the following format:"
