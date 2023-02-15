@@ -33,6 +33,7 @@ public class UwUke extends Application {
         loadMainWindow();
         scene.getStylesheets().add(getClass().getResource("/view/Application.css").toExternalForm());
         UwUke.stage = stage;
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
