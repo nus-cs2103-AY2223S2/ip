@@ -24,10 +24,6 @@ public class AddTaskCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
-        assert tasks != null : "Tasks should not be null";
-        assert ui != null : "Ui should not be null";
-        assert storage != null : "Storage should not be null";
-
         String output = ui.showAdd() + tasks.addTask(task);
         storage.saveTasks(tasks);
         return output;

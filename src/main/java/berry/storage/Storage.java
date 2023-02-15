@@ -1,6 +1,8 @@
 package berry.storage;
 
+import berry.exception.BerryException;
 import berry.exception.IllegalValueException;
+import berry.exception.IncorrectDateException;
 import berry.task.Task;
 import berry.task.TaskList;
 
@@ -72,12 +74,12 @@ public class Storage {
      *      else returns a task list filled with tasks from the storage file.
      * @throws FileNotFoundException if the file could not be found.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException, IncorrectDateException {
         ArrayList<Task> listOfTasks = new ArrayList<Task>();
 
         Scanner sc = new Scanner(createFile());
         while (sc.hasNext()) {
-            Task taskToLoad= Task.interpretTextToTask(sc.nextLine());
+            Task taskToLoad = Task.interpretTextToTask(sc.nextLine());
             listOfTasks.add(taskToLoad);
         }
         return listOfTasks;

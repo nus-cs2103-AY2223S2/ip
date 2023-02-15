@@ -1,10 +1,10 @@
 package berry.ui;
 
-import berry.task.Task;
-import berry.task.TaskList;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import berry.task.Task;
+import berry.task.TaskList;
 
 /**
  * Deals with interactions with the user.
@@ -23,14 +23,18 @@ public class Ui {
         return sc.nextLine();
     }
 
+    public static String show(String toPrint) {
+        return toPrint;
+    }
+
     public static String showWelcome() {
         String logo = "";
-        return logo + "\nHey there! I'm Berry the Bunny~ ૮ ˶ᵔ ᵕ ᵔ˶ ა\n"
+        return logo + "Hey there! \nI'm Berry the Bunny~ ૮ ˶ᵔ ᵕ ᵔ˶ ა\n"
                 + "What are you looking to plan today?";
     }
 
     public static String showGoodbye() {
-        return "Bye! I hope Berry was helpful to you ˶• ༝ •˶";
+        return "Bye! I hope Berry was helpful to you <: \n";
     }
 
     public static String showError(String message) {
@@ -47,11 +51,11 @@ public class Ui {
     }
 
     public static String showUnmark() {
-       return "Okay! I'll set the task as not done. ₍ ˃ ⤙ ˂ ₎\n";
+        return "Okay! I'll set the task as not done. \n₍ ˃ ⤙ ˂ ₎\n";
     }
 
     public static String showMark() {
-        return "Alright~ I'll set the task as done! ₍ ˶ᵔ ᵕ ᵔ˶ ₎\n";
+        return "Alright~ I'll set the task as done! \n₍ ˶ᵔ ᵕ ᵔ˶ ₎\n";
     }
 
     public static String showAdd() {
@@ -67,6 +71,6 @@ public class Ui {
     }
 
     public static String showLoadingError() {
-        return "I can't seem to load the file ˶> _ <˶ \n";
+        return "I can't seem to load the file \n˶> _ <˶ \n";
     }
 }

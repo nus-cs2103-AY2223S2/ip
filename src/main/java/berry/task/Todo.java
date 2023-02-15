@@ -1,17 +1,25 @@
 package berry.task;
 
+import java.util.HashSet;
+
 /**
  * Represents a todo task.
  */
 public class Todo extends Task {
-
     public Todo(String description) {
         super(description);
     }
 
     public Todo(String description, boolean isDone) {
-        super(description);
-        this.isDone = isDone;
+        super(description, isDone);
+    }
+
+    public Todo(String description, boolean isDone, HashSet<String> tags) {
+        super(description, isDone, tags);
+    }
+
+    public Todo(String description, HashSet<String> tags) {
+        super(description, tags);
     }
 
     /**
@@ -21,11 +29,32 @@ public class Todo extends Task {
      */
     @Override
     public String interpretTaskToText() {
-        return "T | " + this.getStatusIcon() + " | " + this.description;
+        String output = "T | " + this.getStatusIcon() + " | " + this.description;
+        if (this.tags == null) {
+            return output;
+        }
+
+        output += " |t";
+        for (String tag : this.tags) {
+            if (!tag.isBlank()) {
+                output += " #" + tag;
+            }
+        }
+        return output;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String output = "[T]" + super.toString();
+        if (this.tags == null) {
+            return output;
+        }
+
+        for (String tag : this.tags) {
+            if (!tag.isBlank()) {
+                output += " #" + tag;
+            }
+        }
+        return output;
     }
 }

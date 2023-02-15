@@ -1,5 +1,6 @@
 package berry;
 
+import berry.ui.DialogBox;
 import berry.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;

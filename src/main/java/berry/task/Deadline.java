@@ -1,10 +1,11 @@
 package berry.task;
 
-import berry.exception.IncorrectDateException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashSet;
+
+import berry.exception.IncorrectDateException;
 
 /**
  * Represents a deadline task.
@@ -16,17 +17,32 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) throws IncorrectDateException {
         super(description);
+        checkAndAssignDate(by);
+    }
+
+    public Deadline(String description, boolean isDone, String by) throws IncorrectDateException {
+        super(description);
+        this.isDone = isDone;
+        checkAndAssignDate(by);
+    }
+
+    public Deadline(String description, String by, HashSet<String> tags) throws IncorrectDateException {
+        super(description, tags);
+        checkAndAssignDate(by);
+    }
+
+    public Deadline(String description, boolean isDone, String by, HashSet<String> tags) throws IncorrectDateException {
+        super(description, isDone, tags);
+        this.isDone = isDone;
+        checkAndAssignDate(by);
+    }
+
+    private void checkAndAssignDate(String by) throws IncorrectDateException {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new IncorrectDateException();
         }
-    }
-
-    public Deadline(String description, boolean isDone, String by) {
-        super(description);
-        this.isDone = isDone;
-        this.by = LocalDate.parse(by);
     }
 
     /**
@@ -36,11 +52,34 @@ public class Deadline extends Task {
      */
     @Override
     public String interpretTaskToText() {
-        return "D | " + this.getStatusIcon() + " | " + this.description + " | " + this.by;
+        String output = "D | " + this.getStatusIcon() + " | " + this.description + " | " + this.by;
+        if (this.tags == null) {
+            return output;
+        }
+
+        output += " |t";
+        for (String tag : this.tags) {
+            if (!tag.isBlank()) {
+                output += " #" + tag;
+            }
+        }
+        return output;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String output = "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+
+        if (this.tags == null) {
+            return output;
+        }
+
+        for (String tag : this.tags) {
+            if (!tag.isBlank()) {
+                output += " #" + tag;
+            }
+        }
+        return output;
     }
 }

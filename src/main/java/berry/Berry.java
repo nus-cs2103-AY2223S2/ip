@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import berry.command.Command;
 import berry.exception.BerryException;
+import berry.exception.IncorrectDateException;
 import berry.parser.Parser;
 import berry.storage.Storage;
 import berry.task.TaskList;
@@ -39,11 +40,9 @@ public class Berry {
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        } catch (IncorrectDateException e) {
+            ui.show(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) throws Storage.InvalidStorageFilePathException {
-//        new Berry("data/tasks.txt").run();
     }
 
     public String getResponse(String input) {
