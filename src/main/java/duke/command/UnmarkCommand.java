@@ -31,7 +31,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
         int index = Command.getMarkIndex(this.fullCommand) - 1;
-        if (index >= tasks.getLength() || index <= 0) {
+        if (index >= tasks.getLength() || index < 0) {
             throw new DukeBadInstructionFormatException("Unmark index "
                     + "out of range.");
         }

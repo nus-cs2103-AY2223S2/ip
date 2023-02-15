@@ -181,7 +181,7 @@ public class Ui {
      * @return Formatted string of the number of items in a <code>TaskList</code>
      */
     public String getTaskListLengthString(TaskList tl) {
-        return String.format("\nNow you have %d tasks in the list.",
+        return String.format("\n\tNow you have %d tasks in the list.",
                 tl.getLength());
     }
 }
