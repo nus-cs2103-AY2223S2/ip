@@ -28,7 +28,6 @@ public class Panav {
 
     /**
      * Constructor to initialise the various classes in program.
-     * @param filePath the path of the file to be read from.
      */
     public Panav() throws IOException {
         ui = new Ui();
@@ -41,21 +40,6 @@ public class Panav {
         }
 
 
-    }
-
-
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
 

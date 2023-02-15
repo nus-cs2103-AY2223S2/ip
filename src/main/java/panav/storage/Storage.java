@@ -27,6 +27,7 @@ public class Storage {
     protected File file;
     private final String filePath = "storage/data/panav.txt";
 
+    // try-catch block reused from Jun Hao(tP team member) with minor modifications
     public Storage() throws IOException {
         try {
             file = new File(filePath);

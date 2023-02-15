@@ -49,7 +49,7 @@ public class EditCommand extends Command {
                 text = tasks.unmarkTask(editIndex - 1);
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
         return text;
 

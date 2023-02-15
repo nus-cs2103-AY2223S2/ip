@@ -1,2 +1,1 @@
-T ~ 0 ~ work  
-D ~ 0 ~ work ~ tonight  
+T ~ 1 ~ work     

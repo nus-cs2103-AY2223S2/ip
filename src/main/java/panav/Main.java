@@ -13,7 +13,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    //private final String filePath = "C:\\Users\\panav\\OneDrive\\Desktop\\CS2103T\\ip\\src\\main\\java\\data\\panav.txt";
     private Panav panav;
 
     /**
