@@ -18,8 +18,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void process(TaskList taskList, Ui ui, Storage storage) {
-        ui.printByeMsg();
+    public String process(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printByeMsg();
     }
     @Override
     public boolean isExit() {

@@ -34,17 +34,16 @@ public class TaskList {
      * @param input User input.
      * @throws DukeException Checks the validation of input.
      */
-    public void listTask(String input) throws DukeException {
+    public String listTask(String input) throws DukeException {
         String[] inputLine = input.split(" ", 2);
         if (inputLine.length > 1) {
             throw new DukeException("\t ☹ OOPS!!! The format is invalid!\n");
         }
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
-            str = "\t " + (i + 1) + ". " + tasks.get(i).toString();
-            System.out.println(str);
+            str += "\t " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
-        System.out.print("");
+        return str;
     }
 
     /**
@@ -64,7 +63,7 @@ public class TaskList {
      * @param storage Deletes a task in a file.
      * @throws DukeException Checks the validation of input.
      */
-    public void deleteTask(String input, Ui ui, Storage storage) throws DukeException {
+    public String deleteTask(String input, Ui ui, Storage storage) throws DukeException {
         if (input.trim().equals("delete")) {
             throw new DukeException("\t ☹ OOPS!!! The description of a delete cannot be empty.\n");
         }
@@ -85,7 +84,7 @@ public class TaskList {
         Task task = tasks.get(taskIndex - 1);
         tasks.remove(taskIndex - 1);
         storage.saveData(this);
-        ui.printDeleteTaskMsg(task, tasks.size());
+        return ui.printDeleteTaskMsg(task, tasks.size());
     }
 
     /**
@@ -96,7 +95,7 @@ public class TaskList {
      * @param ui     The Ui to be used for printing messages.
      * @throws DukeException Checks the validation of input.
      */
-    public void markTask(boolean isDone, String input, Ui ui, Storage storage) throws DukeException {
+    public String markTask(boolean isDone, String input, Ui ui, Storage storage) throws DukeException {
         if (input.trim().equals("mark") || input.trim().equals("unmark")) {
             throw new DukeException("\t ☹ OOPS!!! Please input a number.\n");
         }
@@ -117,10 +116,10 @@ public class TaskList {
         Task task = tasks.get(taskIndex);
         task.setDone(isDone);
         storage.saveData(this);
-        ui.printMarkTaskMsg(isDone, task);
+        return ui.printMarkTaskMsg(isDone, task);
     }
 
-    public void findTask(String input, Ui ui) throws DukeException {
+    public String findTask(String input, Ui ui) throws DukeException {
         if (input.trim().equals("find")) {
             throw new DukeException("\t ☹ OOPS!!! The description of a find cannot be empty.\n");
         }
@@ -132,9 +131,9 @@ public class TaskList {
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(inputLine[1])) {
-                str = "\t " + (i + 1) + ". " + tasks.get(i).toString();
-                System.out.println(str);
+                str += "\t " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
         }
+        return str;
     }
 }

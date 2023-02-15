@@ -29,10 +29,10 @@ public class AddEventCommand extends AddTaskCommand {
      * @throws DukeException Checks the validation of input.
      */
     @Override
-    public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Event event = Event.generate(this.getInput());
         taskList.addTask(event);
         storage.saveData(taskList);
-        ui.printAddTaskMsg(taskList, event);
+        return ui.printAddTaskMsg(taskList, event);
     }
 }

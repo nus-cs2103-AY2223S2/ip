@@ -28,8 +28,8 @@ public class ListCommand extends Command {
      * @throws DukeException Checks the validation of input.
      */
     @Override
-    public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.listTask(this.getInput());
+    public String process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return taskList.listTask(this.getInput());
     }
 
     @Override

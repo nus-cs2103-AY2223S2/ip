@@ -12,8 +12,8 @@ public class FindTaskCommand extends Command{
     }
 
     @Override
-    public void process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.findTask(this.getInput(), ui);
+    public String process(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return taskList.findTask(this.getInput(), ui);
     }
 
     @Override
