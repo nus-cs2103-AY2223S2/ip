@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -291,6 +290,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if there is a date for Deadline tasks.
+     *
+     * @param taskDesc Description of the Deadline task.
+     * @throws NoDate If the Deadline task has no date.
+     */
     public static void checkDeadlineDate(String taskDesc) throws NoDate {
         String checkBy = "/by";
         boolean hasDate = taskDesc.contains(checkBy);
@@ -299,6 +304,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if Event task has start and end time.
+     *
+     * @param taskDesc Description of the Event task.
+     * @throws InvalidEventFormat If the Event task has no start or end time.
+     */
     public static void checkEventFormat(String taskDesc) throws InvalidEventFormat {
         String checkFrom = "/from";
         String checkTo = "/to";
@@ -308,6 +319,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if updating Event tasks in correct format.
+     *
+     * @param newDesc Description of the update event.
+     * @throws InvalidUpdateEventFormat If Event task is not updated in correct format.
+     */
     public static void checkUpdateEventFormat(String newDesc) throws InvalidUpdateEventFormat {
         String checkFrom = "/from";
         String checkTo = "/to";

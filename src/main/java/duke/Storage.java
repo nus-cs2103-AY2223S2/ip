@@ -37,16 +37,19 @@ public class Storage {
                 String data = sc.nextLine();
                 String[] command = data.split("\\|");
                 boolean isDoneInFile = command[1].charAt(0) == 'X';
-                if (command[0].equals("T")) {
+                switch (command[0]) {
+                case "T":
                     prevTask = new Todo(data.substring(6));
                     prevTask.isDone = isDoneInFile;
                     taskList.addTask(prevTask);
-                } else if (command[0].equals("D")) {
+                    break;
+                case "D":
                     prevTask = new Deadline(command[2].substring(1),
                             command[3].substring(1));
                     prevTask.isDone = isDoneInFile;
                     taskList.addTask(prevTask);
-                } else if (command[0].equals("E")) {
+                    break;
+                case "E":
                     String[] splitString = command[3].substring(1).
                             split("-");
                     prevTask = new Event(command[2].substring(1),
@@ -54,6 +57,7 @@ public class Storage {
                             splitString[1].substring(1));
                     prevTask.isDone = isDoneInFile;
                     taskList.addTask(prevTask);
+                    break;
                 }
             }
         } catch (FileNotFoundException e1) {
@@ -64,7 +68,7 @@ public class Storage {
                 folder.mkdir();
                 newFile.createNewFile();
             } catch (IOException e) {
-                System.out.println("Handle exception here");
+                System.out.println("I/O error occurred");
             }
         }
         return taskList;

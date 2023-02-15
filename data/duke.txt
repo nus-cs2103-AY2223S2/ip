@@ -1,3 +1,2 @@
-T|  | borrow book
-D|  | return book | Nov 15 2019
-E|  | meeting | 2pm - 6pm
+D|  | return book | Oct 19 2019
+E|  | project meeting  | 2pm - 4pm

@@ -18,16 +18,7 @@ public class Duke {
         storage = new Storage(filePath);
         taskList = storage.loadFile();
     }
-
-    /**
-     * Shows Duke greeting message.
-     *
-     * @return Duke greeting message.
-     */
-    public String greeting() {
-        return Ui.dukeGreeting();
-    }
-
+    
     /**
      * Gets response from user input.
      *
