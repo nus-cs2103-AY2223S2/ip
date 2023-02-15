@@ -11,7 +11,7 @@
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
-   <AnchorPane minHeight="-Infinity" style="-fx-background-color: #18A558; -fx-background-radius: 10;">
+   <AnchorPane fx:id="dialogContainer" minHeight="-Infinity" style="-fx-background-color: #18A558; -fx-background-radius: 10;">
       <children>
           <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Label" wrapText="true" AnchorPane.rightAnchor="0.0">
             <font>
