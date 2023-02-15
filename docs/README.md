@@ -1,7 +1,7 @@
 # User Guide 
 
 ## Welcome to the brand new release of Hi Doraemon! 
-> One should not fear failing. Instead, one should fear not being able to stand up and try again after failing. " - A wise man
+>  You shouldn’t be crying over those things that happened in the past. Think of this, why do you think your eyes are placed in front? That is for you to see what’s up ahead. ~Doraemon
 
 ## What is Hi Doraemon? 
 
@@ -22,7 +22,7 @@ Fret not! Hi Doraemon is here to save the day!
 - **_Easily_** keep track of all your **_tasks, events, deadlines, and do-afters_**! :alarm_clock:
 - Last of all, it is **_free_**!
 
-## Usage
+## Feature Summary
 
 ### `list` - lists all your current tasks
 ### `todo {task description}` - adds a new to-do task 
@@ -37,17 +37,23 @@ Fret not! Hi Doraemon is here to save the day!
 ### `bye` - sends a goodbye message
 
 
-## Examples 
+## Examples of usage
+`todo buy book`
 
 `deadline return library book /by 2023-06-20`
+
 `event host party /from 3pm /to 6pm`
-`doafter go to Sentosa /after end of exams 
+
+`doafter go to Sentosa /after end of exams`
+
 `unmark 3`
+
 `mark 2`
+
 `delete 3`
+
 `find book`
 
-
 #
-![DALL·E 2023-02-04 16 17 49 - A cute robot that everyone will love that helps you schedule tasks](https://user-images.githubusercontent.com/95480800/216757061-58adf39c-9118-4d09-bbaa-1a08574dd867.png)
+![Doraemon](https://user-images.githubusercontent.com/95480800/219050454-c6bd34fd-14ff-41f6-8b6d-ae83603c69ca.png)
 
