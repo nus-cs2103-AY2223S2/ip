@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="USE_COMPUTED_SIZE" minHeight="USE_COMPUTED_SIZE" maxWidth="USE_COMPUTED_SIZE" minWidth="USE_COMPUTED_SIZE" prefHeight="USE_COMPUTED_SIZE"
-         prefWidth="USE_COMPUTED_SIZE.0" type="HBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
+<fx:root alignment="CENTER_RIGHT" maxWidth="400.0" minWidth="-Infinity" prefHeight="123.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <Label fx:id="dialog" text="Label" wrapText="true" />
   <padding>
     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
