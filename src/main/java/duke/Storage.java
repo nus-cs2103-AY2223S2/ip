@@ -65,9 +65,7 @@ public class Storage {
             userData.mkdir();
         }
         File dukeTxt = new File(userData, "duke.txt");
-        if (!dukeTxt.exists()) {
-            dukeTxt.createNewFile();
-        } else {
+        if (dukeTxt.exists()) {
             FileReader fw = new FileReader(dukeTxt);
             BufferedReader dukeRead = new BufferedReader(fw);
             String line = dukeRead.readLine();
