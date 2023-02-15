@@ -1,5 +1,6 @@
 package Duke;
 
+import Duke.Exceptions.EmptyDescriptionException;
 import Duke.Tasks.TaskList;
 import java.io.IOException;
 import java.lang.String;
@@ -46,8 +47,8 @@ public class Duke  {
         try {
             response = Parser.parse(input, this.list);
             storage.saveData(list);
-       } catch (IOException e) {
-           e.printStackTrace();
+       } catch (IOException  | EmptyDescriptionException e) {
+            return String.format("%s\n", e);
        }
        return response;
     }

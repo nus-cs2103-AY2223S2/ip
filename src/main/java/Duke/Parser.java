@@ -36,11 +36,12 @@ public class Parser {
 
     /**
      * The method for addTodo
-     * @param description the description of task to do
+     * @param instct the description of task to do
      * @param listOfTasks the TasklistOfTasks where tasks are stored in
      */
-    private static String addTodo(String description, TaskList listOfTasks) throws DuplicateException {
+    private static String addTodo(String instct, TaskList listOfTasks) throws DuplicateException, IndexOutOfBoundsException {
         System.out.println(Ui.Underline());
+        String description = instct.split(" ", 2)[1];
         int lenBefore = listOfTasks.size();
         ToDo tdItem = new ToDo(description);
         listOfTasks.addTask(tdItem);
@@ -57,7 +58,7 @@ public class Parser {
      * @param start the starting time of the event
      * @param end the ending time of the event
      */
-    private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) throws DuplicateException {
+    private static String addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) throws DuplicateException{
         System.out.println(Ui.Underline());
         Events evItem = new Events(description, start, end);
         int lenBefore = listOfTasks.size();
@@ -122,6 +123,13 @@ public class Parser {
         return String.format("\tHere are the matching missions in your listOfTasks:\n" + filteredTasks + "\n" + Ui.Underline());
 
     }
+
+    private static boolean excptCheck(Object ex)  {
+        if (ex instanceof IndexOutOfBoundsException){
+            return true;
+        }
+        return false;
+    }
     public static boolean getFlag() {
         return isRunning;
     }
@@ -133,7 +141,7 @@ public class Parser {
      * @param listOfTasks TasklistOfTasks  which actions are to be performed on
      * @return int of -1 if bye instruct is parsed else 1 is return to signal program to continue running
      */
-    public static String parse(String instct, TaskList listOfTasks) throws IOException  {
+    public static String parse(String instct, TaskList listOfTasks) throws IOException, EmptyDescriptionException  {
         try {
              if((instct.split(" ").length) == 1) {
                  if (instct.split(" ")[0].equals("list")) {
@@ -145,48 +153,49 @@ public class Parser {
                      return Ui.sayBye();
                  }
                  throw new UnknownCommandException();
-             } else if ((instct.split(" ").length) > 1 ) {
-                if (instct.split(" ")[0].equals("mark")) {
-                    int numbering = Integer.parseInt(instct.split(" ")[1]) ;
-                    return listOfTasks.markDone(numbering);
+             } else {
+                 if (instct.split(" ")[0].equals("mark")) {
+                     int numbering = Integer.parseInt(instct.split(" ")[1]);
+                     return listOfTasks.markDone(numbering);
 
-                } else if (instct.split(" ")[0].equals("unmark")) {
-                    int numbering = Integer.parseInt(instct.split(" ")[1]);
-                    return listOfTasks.markNotDone(numbering);
+                 } else if (instct.split(" ")[0].equals("unmark")) {
+                     int numbering = Integer.parseInt(instct.split(" ")[1]);
+                     return listOfTasks.markNotDone(numbering);
 
 
-                } else if (instct.split(" ")[0].equals("todo")) {
-                    String description = instct.split(" ", 2)[1];
-                    return addTodo(description, listOfTasks);
+                 } else if (instct.split(" ")[0].equals("todo")) {
+                     String description = instct.split(" ", 2)[1];
+                     return addTodo(description, listOfTasks);
 
-                } else if (instct.split(" ")[0].equals("deadline")) {
-                    String temp = instct.split(" /by ")[1];
-                    String temp2 = instct.split(" /by ")[0];
-                    String description = temp2.split(" ", 2)[1];
-                    LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
-                    return addDeadline(description, listOfTasks, doneBy);
+                 } else if (instct.split(" ")[0].equals("deadline")) {
+                     String temp = instct.split(" /by ")[1];
+                     String temp2 = instct.split(" /by ")[0];
+                     String description = temp2.split(" ", 2)[1];
+                     LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
+                     return addDeadline(description, listOfTasks, doneBy);
 
-                } else if (instct.split(" ")[0].equals("event")) {
-                    String[] temp = instct.split("/from | /to ");
-                    String description = temp[0].split(" ", 2)[1];
-                    LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
-                    LocalTime to = LocalTime.parse(temp[2], HrFormat);
-                    return addEvents(description, listOfTasks, from, to);
+                 } else if (instct.split(" ")[0].equals("event")) {
+                     String[] temp = instct.split("/from | /to ");
+                     String description = temp[0].split(" ", 2)[1];
+                     LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
+                     LocalTime to = LocalTime.parse(temp[2], HrFormat);
+                     return addEvents(description, listOfTasks, from, to);
 
-                } else if (instct.split(" ")[0].equals("delete")) {
-                    return delete(instct, listOfTasks);
+                 } else if (instct.split(" ")[0].equals("delete")) {
+                     return delete(instct, listOfTasks);
 
-                } else if (instct.split(" ")[0].equals("find")) {
-                    String wantedTask = instct.split(" ")[1];
-                    return findTask(listOfTasks, wantedTask);
+                 } else if (instct.split(" ")[0].equals("find")) {
+                     String wantedTask = instct.split(" ")[1];
+                     return findTask(listOfTasks, wantedTask);
 
-                } else {
-                    throw new UnknownCommandException();
-                }
-            } else {
+                 } else {
+                     throw new UnknownCommandException();
+                 }
+             }
+        } catch (DukeException | DateTimeParseException | IndexOutOfBoundsException ex) {
+            if(excptCheck(ex)){
                 throw new EmptyDescriptionException(instct.split(" ")[0]);
             }
-        } catch (DukeException | DateTimeParseException ex) {
             return String.format("%s\n", ex);
         }
     }
