@@ -1,7 +1,19 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello, Duke here. How can I help you?
+Added: test
+1: [T][] test
+done
+1: [T][X] test
+done
+1: [T][] test
+Invalid format
+Added:  abc
+Invalid format
+Added: abc
+1: [T][] test
+2: [D][] abc (by: tomorrow)
+3: [E][] abc (From 1 to 2)
+Removing item 1: [T][] test
+Removal successful. New list:
+1: [D][] abc (by: tomorrow)
+2: [E][] abc (From 1 to 2)
+Bye, hope to see you again.

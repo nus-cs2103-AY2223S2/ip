@@ -1,0 +1,11 @@
+todo test
+list
+mark 1
+unmark 1
+deadline adfgdfg
+deadline abc /by tomorrow
+event asdgdasg
+event abc /from 1 /to 2
+list
+delete 1
+bye
