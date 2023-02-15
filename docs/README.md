@@ -31,6 +31,7 @@ Now you have 1 tasks in the list.
 ### `deadline` - Creating a new Deadline task.
 
 Creates a new Deadline task and adds it to the list of tasks.
+
 Format: `deadline DESCRIPTION /by DATE`
 
 Example of usage: 
@@ -50,6 +51,7 @@ Now you have 1 tasks in the list.
 ### `event` - Creating a new Event task.
 
 Creates a new Event task and adds it to the list of tasks.
+
 Format: `event DESCRIPTION /from START TIME /to END TIME`
 
 Example of usage: 
@@ -69,6 +71,7 @@ Now you have 1 tasks in the list.
 ### `mark` - Marking a task.
 
 Marks a task as done.
+
 Format: `mark NUMBER`
 
 Example of usage: 
@@ -87,6 +90,7 @@ Nice! I've marked this task as done:
 ### `unmark` - Unmarking a task.
 
 Unmarks a task as done.
+
 Format: `unmark NUMBER`
 
 Example of usage: 
@@ -105,7 +109,6 @@ OK, I've marked this task as not done yet:
 ### `list` - Listing all tasks.
 
 List all the tasks.
-Format: `list`
 
 Example of usage: 
 
@@ -125,6 +128,7 @@ Here's the tasks in your list:
 ### `find` - Finding a task.
 
 Find tasks with matching keywords.
+
 Format: `find KEYWORD`
 
 Example of usage: 
@@ -144,6 +148,7 @@ Here are the matching tasks in your list:
 ### `delete` - Deleting an existing task.
 
 Removes a task from the list.
+
 Format: `delete NUMBER`
 
 Example of usage: 
@@ -163,6 +168,7 @@ Now you have 2 tasks in the list.
 ### `update` - Updating a task.
 
 Updates details of a task (e.g. end time).
+
 Format: `update NUMBER /by DATE` or `update NUMBER /from START TIME /to END TIME`
 
 Example of usage: 
