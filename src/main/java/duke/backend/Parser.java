@@ -10,8 +10,7 @@ import duke.task.ToDo;
  */
 public class Parser {
 
-    public Parser() {
-    }
+    public Parser() {}
 
     /**
      * Parses the input string from the user representing a todo task.
@@ -19,6 +18,7 @@ public class Parser {
      * @return the duke.task.ToDo object created from the input string.
      */
     public static ToDo parseTodo(String input) {
+        assert input != null : "Input string cannot be null";
         return new ToDo(input);
     }
 
@@ -29,6 +29,8 @@ public class Parser {
      * @throws DukeException if the input string is invalid.
      */
     public static Deadline parseDeadline(String input) throws DukeException {
+        assert input != null : "Input string cannot be null";
+
         String[] splitDescriptionAndBy = input.split(" /by ", 2);
         if (splitDescriptionAndBy.length == 1) {
             throw new DukeException("The deadline of a deadline task cannot be empty.");
@@ -43,6 +45,7 @@ public class Parser {
      * @throws DukeException if the input string is invalid.
      */
     public static Event parseEvent(String input) throws DukeException {
+        assert input != null : "Input string cannot be null";
 
         String[] splitDescriptionAndDuration = input.split(" /from ", 2);
         if (splitDescriptionAndDuration.length == 1) {
