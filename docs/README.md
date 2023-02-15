@@ -180,8 +180,9 @@ Quit the app.
 `bye`
 
 ```
-Bye, hope to see you again!
+> bye
+  Bye, hope to see you again!
 ```
 
-### Saving the data
+## Saving the data
 Duke task are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
