@@ -27,6 +27,7 @@ public class Main extends Application {
 
             stage.setTitle("Owlly");
             stage.setIconified(false);
+            stage.setResizable(false);
             stage.setOnShowing(event -> {
                 mainWindow.greetUser();
             });
