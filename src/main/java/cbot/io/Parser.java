@@ -13,7 +13,7 @@ import cbot.task.TaskList;
  */
 public class Parser {
     private Command command;
-    private String text;
+    private String input;
 
     /**
      * Constructs a new instance to process the user's current input. Attempts to recognize the Command,
@@ -29,16 +29,14 @@ public class Parser {
             throw new BadInputException("Please avoid using: \"" + Task.SEP + "\"");
         }
 
-        String trimmed = input.trim();
         boolean matchFound = false;
 
         for (Command c : Command.values()) {
-            String match = c.getMatch(trimmed);
+            matchFound = c.matches(input);
 
-            if (!match.isEmpty()) {
+            if (matchFound) {
                 this.command = c;
-                this.text = match;
-                matchFound = true;
+                this.input = input.trim();
                 break;
             }
         }
@@ -77,6 +75,6 @@ public class Parser {
      */
     public String respond(TaskList tl)
             throws PoorInputException, DateTimeParseException {
-        return this.command.runCommand(tl, this.text);
+        return this.command.runCommand(tl, this.input);
     }
 }

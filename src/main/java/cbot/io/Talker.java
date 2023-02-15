@@ -74,8 +74,9 @@ public class Talker {
      * @return The datetime formatting suggestion.
      */
     public static String warnTime() {
-        return ERROR + "Sorry, I don't know how to interpret that datetime\n"
-                + WARNING + "Try something in the form: yyyy-MM-dd HH:mm";
+        return WARNING + "Sorry, I don't know how to interpret that datetime."
+                + "Try something in the form:\n"
+                + "yyyy-MM-dd HH:mm";
     }
 
     /**

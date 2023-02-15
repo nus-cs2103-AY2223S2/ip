@@ -42,7 +42,7 @@ public enum Command {
             "unmark"),
 
     /** Deletes the stipulated task from the list. */
-    DELETE(CommandFunction::doRemove,
+    DELETE(CommandFunction::doDelete,
             true, true,
             "del ", "delete ", "rem ", "remove ", "- "),
 
@@ -89,12 +89,12 @@ public enum Command {
     /** Displays the tasks that fall before the given date. */
     BEFORE(CommandFunction::doBefore,
             true, false,
-            "before "),
+            "bef ", "before "),
 
     /** Catches BEFORE calls with no input. */
     BEFORE_BAD(CommandFunction::doNoInput,
             false, false,
-            "before"),
+            "bef", "before"),
 
     /** Displays the tasks that fall after the given date. */
     AFTER(CommandFunction::doAfter,
@@ -119,22 +119,22 @@ public enum Command {
     /** Displays the tasks that contain the input. */
     FIND(CommandFunction::doFind,
             true, false,
-            "find "),
+            "find ", "search "),
 
     /** Catches FIND calls with no input. */
     FIND_BAD(CommandFunction::doNoInput,
             false, false,
-            "find"),
+            "find", "search"),
 
     /** Changes the description of the selected task. */
     EDIT(CommandFunction::doEdit,
             true, true,
-            "edit "),
+            "edit ", "fix "),
 
     /** Catches EDIT calls with no input. */
     EDIT_BAD(CommandFunction::doNoInput,
             false, false,
-            "edit");
+            "edit", "fix");
 
     private final ThrowingBiFunction<TaskList, String, String> f;
     private final boolean hasText;
@@ -168,19 +168,18 @@ public enum Command {
     /**
      * Returns the relevant text if the start of the given String matches the Command keyword.
      * Else, the empty String "" is returned.
-     * e.g. "mark 1" matches the keyword "mark " in MARK, so "1" is returned.
+     * e.g. "mark 1" matches the keyword "mark " in MARK, so "mark 1" is returned.
      *
      * @param input The text to check.
      * @return The extracted text, if any.
-     * @see Parser
      */
-    public String getMatch(String input) {
-        String lowText = input.toLowerCase();
+    String extractText(String input) {
+        String trimmed = input.trim();
+        String lowText = trimmed.toLowerCase();
 
         if (!this.hasText) {
-            // should match exactly
             return (names.contains(lowText))
-                    ? lowText
+                    ? trimmed
                     : "";
         }
 
@@ -189,11 +188,23 @@ public enum Command {
             boolean longEnough = (lowText.length() > nameLen);
             if (longEnough
                     && lowText.substring(0, nameLen).equals(name)) {
-                return input.substring(nameLen).trim();
+                return trimmed.substring(nameLen);
             }
         }
 
         return "";
+    }
+
+    /**
+     * Returns true if the start of the given input matches any of the Command keywords.
+     * e.g. "mark 1" matches the keyword "mark " in MARK, so true is returned.
+     *
+     * @param input The input to check.
+     * @return Whether the input matches the Command keyword.
+     * @see Parser
+     */
+    public boolean matches(String input) {
+        return (!extractText(input).isEmpty());
     }
 
     /**
