@@ -42,8 +42,17 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        int ind = Integer.parseInt(input) - 1;
+        int ind = -1;
 
+        try {
+            ind = Integer.parseInt(input) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("It's a disgrace to not be able to tell numbers from alphabets...");
+        }
+
+        if (ind >= taskList.size() || ind < 0) {
+            throw new DukeException("If you look at the task number, you would know what's happening. And I say this in tears.");
+        }
         // If index falls out of bounds
         if (ind >= taskList.size() || ind < 0) {
             throw new DukeException("OOPS!!! Invalid task number :(");
