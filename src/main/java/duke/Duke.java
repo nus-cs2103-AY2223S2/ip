@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
  */
 public class Duke {
     private final Storage storage;
+    private final Storage archiveStorage;
     private TaskList tasks;
 
     /**
@@ -19,6 +20,7 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage("data/duke.txt");
+        archiveStorage = new Storage("data/archive.txt");
         try {
             tasks = storage.load();
         } catch (DukeException e) {
@@ -35,6 +37,6 @@ public class Duke {
     @FXML
     public String getResponse(String input) {
         DukeCommand command = Parser.parseInput(input);
-        return command.execute(tasks, storage);
+        return command.execute(tasks, storage, archiveStorage);
     }
 }
