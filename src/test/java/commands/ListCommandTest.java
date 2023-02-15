@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.function.Consumer;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,6 @@ public class ListCommandTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    private final Consumer<String> c = System.out::println;
     private UiPrinter p;
     private Membot m;
 
@@ -27,7 +25,7 @@ public class ListCommandTest {
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
-        p = new UiPrinter(System.out::println);
+        p = new UiPrinter(m -> System.out.println(m.getMessage()));
         m = new Membot(p, true);
 
         assertDoesNotThrow(this.outputStreamCaptor::reset);

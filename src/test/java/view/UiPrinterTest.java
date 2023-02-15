@@ -35,7 +35,7 @@ public class UiPrinterTest {
 
     @Test
     public void printlnTest() {
-        UiPrinter p = new UiPrinter(System.out::println);
+        UiPrinter p = new UiPrinter(m -> System.out.println(m.getMessage()));
 
         String[] s1 = {"test", "1", "2", "3"};
 
@@ -61,13 +61,13 @@ public class UiPrinterTest {
 
     @Test
     public void printlnErrorTest() {
-        UiPrinter p = new UiPrinter(System.out::println);
+        UiPrinter p = new UiPrinter(m -> System.out.println(m.getMessage()));
 
         String[] s1 = {"testerror", "1", "2", "3"};
 
         p.printlnError(s1);
         assertEquals(
-                "*Error*\n" + String.join("\n", s1),
+                String.join("\n", s1),
                 this.outputStreamCaptor.toString().trim()
         );
     }

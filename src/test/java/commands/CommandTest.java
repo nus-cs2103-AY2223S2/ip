@@ -23,10 +23,11 @@ import membot.commands.TodoCommand;
 import membot.commands.UndoneCommand;
 import membot.utils.EmptyInputException;
 import membot.utils.InvalidCommandException;
+import membot.view.Message;
 import membot.view.UiPrinter;
 
 public class CommandTest {
-    private final Consumer<String> c = System.out::println;
+    private final Consumer<Message> c = m -> System.out.println(m.getMessage());
     private final UiPrinter p = new UiPrinter(c);
     private final Membot m = new Membot(p, true);
 
