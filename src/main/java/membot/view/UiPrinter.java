@@ -6,9 +6,9 @@ import java.util.function.Consumer;
  * Printer for JavaFX view interface.
  */
 public class UiPrinter implements Printable {
-    private final Consumer<String> printer;
+    private final Consumer<Message> printer;
 
-    public UiPrinter(Consumer<String> printer) {
+    public UiPrinter(Consumer<Message> printer) {
         this.printer = printer;
     }
 
@@ -18,7 +18,7 @@ public class UiPrinter implements Printable {
             return;
         }
 
-        printer.accept(concat(out));
+        printer.accept(new Message(concat(out), false));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class UiPrinter implements Printable {
             return;
         }
 
-        printer.accept(String.format("*Error*\n%s", concat(out)));
+        printer.accept(new Message(concat(out), true));
     }
 
     @Override
