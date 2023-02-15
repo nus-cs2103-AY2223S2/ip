@@ -1,3 +1,2 @@
-T/1/bye
-D/0/ohnoes!!!/2019-10-12 1900
-E/0/why/2023-10-12 1900/2024-10-10 1200
+T/0/todo Buy catnip
+D/0/Bring cat to vet/2023-02-15 1000
