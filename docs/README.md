@@ -132,7 +132,7 @@ Prints a guide on the list of commands that can be used within Bond.
 
 Example of usage:
 
-`help`
+`Help`
 
 Expected outcome:
 
