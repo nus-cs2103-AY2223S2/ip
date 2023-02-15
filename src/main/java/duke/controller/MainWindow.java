@@ -30,7 +30,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    // Image below saved from https://www.flaticon.com/free-icon/dinosaur_4681809
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    // Image below saved from https://www.flaticon.com/free-icon/chatbot_3273660
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/FakeDuke.png"));
 
     /**
