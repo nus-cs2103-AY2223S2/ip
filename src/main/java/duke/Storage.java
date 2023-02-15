@@ -3,6 +3,8 @@ package duke;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,6 +46,7 @@ class Storage {
         Scanner sc = new Scanner(new FileReader(fileName));
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
+            assert TO_MATCH.matcher(s).matches() : "File is corrupted :(";
             Matcher matcher = TO_MATCH.matcher(s);
             if (!matcher.matches()) {
                 throw new DukeException("CorruptedTaskListException");
@@ -85,6 +88,7 @@ class Storage {
      * @throws IOException If I/O error occurs while writing.
      */
     void write(String s) throws IOException {
+        assert Files.exists(Paths.get(fileName)) : "File should exist!";
         FileWriter fw = new FileWriter(fileName);
         fw.write(s);
         fw.close();
