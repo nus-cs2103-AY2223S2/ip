@@ -1,9 +1,17 @@
 package duke.exception;
 
+/**
+ * Exception for missing arguments
+ */
 public class DukeMissingArgumentException extends DukeException {
     private String task;
 
-    public DukeMissingArgumentException(String task){
+    /**
+     * Initializes the exception
+     *
+     * @param task
+     */
+    public DukeMissingArgumentException(String task) {
         this.task = task;
     }
 

@@ -1,10 +1,8 @@
 package duke;
+import java.util.ArrayList;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import java.util.ArrayList;
-
 
 /**
  * Deals with interactions with the user
@@ -30,7 +28,7 @@ public class Ui {
     public String taskAddDisplay(Task task, int listLength) {
         String displayResult = "";
         displayResult += "Got it. I've added this task:\n";
-        displayResult += "\t" + task.toString() +'\n';
+        displayResult += "\t" + task.toString() + '\n';
         displayResult += displayTasks(listLength);
         return displayResult;
     }
@@ -60,10 +58,10 @@ public class Ui {
     public String displayList(TaskList list) {
         String displayResult = "";
         int listSize = list.getListLength();
-        if(listSize == 0) {
+        if (listSize == 0) {
             return "You have no tasks...";
         }
-        for(int i = 1; i <= listSize; i++) {
+        for (int i = 1; i <= listSize; i++) {
             displayResult += i + ". " + list.getTask(i).toString() + '\n';
         }
         return displayResult;

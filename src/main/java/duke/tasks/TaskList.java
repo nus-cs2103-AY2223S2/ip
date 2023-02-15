@@ -1,27 +1,27 @@
 package duke.tasks;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
+import duke.Ui;
 import duke.exception.DukeInvalidArgumentsException;
 import duke.exception.DukeMissingArgumentException;
 import duke.exception.DukeTaskArgumentException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.Arrays;
 
-import duke.Ui;
 
 /**
- * Creates a list of tasks to be stored in the Duke program
+ * Creates a list of tasks to be stored in the Duke program.
  */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
     private Ui ui = new Ui();
 
     /**
-     * Creates a new TaskList with an empty list of tasks 
-     * or loaded list of tasks from the hard disk
-     * 
+     * Creates a new TaskList with an empty list of tasks.
+     * or loaded list of tasks from the hard disk.
+     *
      * @param loadList Contains the loaded list of tasks from the hard disk
      */
     public TaskList(ArrayList<Task> loadList) {
@@ -29,18 +29,17 @@ public class TaskList {
     }
 
     /**
-     * Returns the length of the TaskList
-     * 
-     * @return
+     * Returns the length of the TaskList.
+     *
+     * @return length of list
      */
     public int getListLength() {
         return this.tasks.size();
     }
 
     /**
+     * Adds a task to the TaskList.
      *
-     * Adds a task to the TaskList
-     * 
      * @param task Task
      */
     public void addTask(Task task) {
@@ -48,8 +47,8 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the TaskList
-     * 
+     * Deletes a task from the TaskList.
+     *
      * @param taskIndices The index of the task
      */
     public void deleteTask(String[] taskIndices) {
@@ -61,10 +60,9 @@ public class TaskList {
     }
 
     /**
-     * Returns a task at a given index
-     * 
+     * Returns a task at a given index.
      * @param taskIndex
-     * @return 
+     * @return task object
      */
     public Task getTask(int taskIndex) {
         return this.tasks.get(taskIndex - 1);
@@ -72,7 +70,7 @@ public class TaskList {
 
     /**
      * Checks if the TaskList is empty
-     * 
+     *
      * @return the boolean representing whether the list is empty
      */
     public boolean isEmpty() {
@@ -84,7 +82,7 @@ public class TaskList {
      *
      * @param userInput
      * @param tasks
-     * @return
+     * @return task string
      * @throws DukeInvalidArgumentsException
      * @throws DukeMissingArgumentException
      * @throws DukeTaskArgumentException
@@ -123,7 +121,7 @@ public class TaskList {
      *
      * @param userInput
      * @param tasks
-     * @return
+     * @return task string
      * @throws DukeMissingArgumentException
      * @throws DukeInvalidArgumentsException
      * @throws DukeTaskArgumentException
@@ -162,7 +160,7 @@ public class TaskList {
      * @return the filtered list
      */
     public ArrayList<Task> getFilteredTasks(String keyword) {
-        return this.tasks.stream().filter(x -> x.toString().
-                contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
+        return this.tasks.stream().filter(x -> x.toString()
+                .contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
     }
 }

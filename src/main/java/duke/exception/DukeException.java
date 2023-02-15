@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Parent class for exceptions.
+ */
 public abstract class DukeException extends Exception {
     @Override
     public String toString() {

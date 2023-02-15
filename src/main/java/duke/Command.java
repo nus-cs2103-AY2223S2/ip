@@ -1,15 +1,15 @@
 package duke;
-
-import duke.exception.DukeException;
-import duke.exception.DukeInvalidCommandException;
-import duke.exception.DukeInvalidArgumentsException;
-import duke.exception.DukeMissingArgumentException;
-import duke.exception.DukeTaskArgumentException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidArgumentsException;
+import duke.exception.DukeInvalidCommandException;
+import duke.exception.DukeMissingArgumentException;
+import duke.exception.DukeTaskArgumentException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -54,6 +54,13 @@ public class Command {
         }
     }
 
+    /**
+     * Returns the response of each command
+     *
+     * @param list
+     * @param userInput
+     * @return The string result
+     */
     public String executeCommand(TaskList list, String[] userInput) {
         try {
             switch (this.currCommand) {
@@ -119,15 +126,15 @@ public class Command {
             Deadline deadline = new Deadline(deadlineText, deadlineDate);
             this.list.addTask(deadline);
             return this.ui.taskAddDisplay(deadline, this.list.getListLength());
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             String task = "deadline";
             throw new DukeMissingArgumentException(task);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return "Invalid Date format (Required format: DD/MM/YYYY HH:MM)";
         }
     }
 
-    private String addEvent(String[] userInput) throws DukeMissingArgumentException{
+    private String addEvent(String[] userInput) throws DukeMissingArgumentException {
         try {
             String eventInfo[] = userInput[1].split("/from|/to");
             String eventText = eventInfo[0].trim();
@@ -141,7 +148,7 @@ public class Command {
         } catch (IndexOutOfBoundsException e) {
             String task = "event";
             throw new DukeMissingArgumentException(task);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return "Invalid Date format (Required format: DD/MM/YYYY HH:MM)";
         }
     }
@@ -164,7 +171,7 @@ public class Command {
                     + this.ui.displayTasks(this.list.getListLength() - listIndices.length);
             this.list.deleteTask(listIndices);
             return deleteResponse;
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             String task = "delete";
             throw new DukeMissingArgumentException(task);
         } catch (NumberFormatException e) {
@@ -178,11 +185,11 @@ public class Command {
         int counter = 1;
         String response = "";
 
-        for(int i = 0; i < this.list.getListLength(); i++) {
+        for (int i = 0; i < this.list.getListLength(); i++) {
             String taskType = this.list.getTask(i).getTaskType();
             LocalDate taskDate = this.list.getTask(i).getDate().toLocalDate();
-            if(taskType.equals("D") || taskType.equals(("E"))) {
-                if(date.equals(taskDate)) {
+            if (taskType.equals("D") || taskType.equals(("E"))) {
+                if (date.equals(taskDate)) {
                     response += String.format("\t%d. %s", counter,
                             this.list.getTask(i).toString()) + '\n';
                 }
@@ -194,14 +201,14 @@ public class Command {
 
     private String findTasks(String[] userInput) {
         String keyword = userInput[1];
-        if(this.list.isEmpty()) {
+        if (this.list.isEmpty()) {
             return "There is not no task in the list.";
         }
 
-        ArrayList<Task> filteredTasks= this.list.getFilteredTasks(keyword);
+        ArrayList<Task> filteredTasks = this.list.getFilteredTasks(keyword);
         TaskList foundTasks = new TaskList(filteredTasks);
 
-        if(foundTasks.isEmpty()) {
+        if (foundTasks.isEmpty()) {
             return this.ui.noMatchFoundDisplay();
         } else {
             return this.ui.matchFoundDisplay(foundTasks);

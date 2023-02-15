@@ -1,23 +1,24 @@
 package duke;
-
-import duke.exception.DukeDataException;
-import duke.exception.DukeException;
-
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.tasks.TaskList;
-
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeDataException;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+
+
+
 
 /**
  * Deals with loading tasks from the file
@@ -39,20 +40,20 @@ public class Storage {
     /**
      * Loads the data from the filepath specified
      *
-     * @return the ArrayList<Task> storing the stored tasks
+     * @return the list storing the stored tasks
      */
     public ArrayList<Task> loadData() {
         ArrayList<Task> list = new ArrayList<>();
         File data = new File(this.filePath);
         try {
             Scanner fileSc = new Scanner(data);
-            while(fileSc.hasNextLine()) {
+            while (fileSc.hasNextLine()) {
                 String fileData = fileSc.nextLine();
                 String[] taskData = fileData.split("\\|");
                 list.add(readData(taskData));
             }
             fileSc.close();
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             this.createFile();
         } catch (DukeException e) {
             System.out.println(e);

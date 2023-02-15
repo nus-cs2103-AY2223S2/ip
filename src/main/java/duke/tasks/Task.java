@@ -1,8 +1,6 @@
 package duke.tasks;
-import duke.exception.DukeInvalidArgumentsException;
-import duke.exception.DukeMissingArgumentException;
-import duke.exception.DukeTaskArgumentException;
 import java.time.LocalDateTime;
+
 import duke.Ui;
 
 
@@ -18,8 +16,7 @@ public abstract class Task {
 
     /**
      * Creates a new Task with the given task description
-     * with deafult status as false
-     * 
+     * with deafult status as false.
      * @param taskText description of the task
      */
     public Task(String taskText) {
@@ -29,12 +26,10 @@ public abstract class Task {
     }
 
     /**
-     * Changes the status of the task to the opposite of its current status
-     * 
-     * @return void
+     * Changes the status of the task to the opposite of its current status.
      */
     public void changeStatus() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             this.isCompleted = false;
         } else {
             this.isCompleted = true;
@@ -43,9 +38,8 @@ public abstract class Task {
 
     /**
      * Returns the status of the task
-     * 
+     *
      * @return boolean status of the task
-     * 
      */
     public boolean getStatus() {
         return this.isCompleted;
@@ -53,7 +47,7 @@ public abstract class Task {
 
     /**
      * Returns the status of the task in String format
-     * 
+     *
      * @return String status of the task
      */
     public String getCurrentStatus() {
@@ -79,9 +73,9 @@ public abstract class Task {
     public abstract String getTaskType();
 
     /**
-     * Returns the string representation of task status 
-     * and description
-     * 
+     * Returns the string representation of task status
+     * and description.
+     *
      * @return the string representation
      */
     @Override

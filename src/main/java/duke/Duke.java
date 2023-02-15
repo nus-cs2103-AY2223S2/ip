@@ -1,25 +1,25 @@
 package duke;
-
-import duke.tasks.TaskList;
-
 import java.io.IOException;
 
+import duke.tasks.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
+
+
 
 /**
  * Represents the chatbot
  */
-public class Duke extends Application{
-    private static String FILEPATH = "./data/duke.txt";
+public class Duke extends Application {
+    private static String FILE_PATH = "./data/duke.txt";
     private TaskList list;
     private Ui ui;
     private Storage storage;
@@ -39,7 +39,7 @@ public class Duke extends Application{
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(FILEPATH);
+        this.storage = new Storage(FILE_PATH);
         this.list = new TaskList(this.storage.loadData());
         this.parser = new Parser();
         this.dukeCommand = new Command("fail", this.list);
@@ -65,7 +65,11 @@ public class Duke extends Application{
     }
 
 
-    public static void main(String[] args)  {
+    /**
+     * Creates a Duke object
+     * @param args
+     */
+    public static void main(String[] args) {
         Duke dukeObj = new Duke();
         dukeObj.ui.initialDisplay();
     }
@@ -73,10 +77,7 @@ public class Duke extends Application{
     /**
      * Creates layout for gui
      *
-     * @param stage the primary stage for this application, onto which
-     * the application scene can be set.
-     * Applications may create other stages, if needed, but they will not be
-     * primary stages.
+     * @param stage the primary stage for this application
      */
     @Override
     public void start(Stage stage) {

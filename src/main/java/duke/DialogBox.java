@@ -1,5 +1,4 @@
 package duke;
-
 import java.io.IOException;
 import java.util.Collections;
 
@@ -37,9 +36,9 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         if (type == "duke") {
-            dialog.setStyle("-fx-border-color: grey; -fx-border-width: 0; " +
-                    "-fx-background-radius: 10px; -fx-border-radius: 10px; " +
-                    "-fx-border-style: solid; -fx-background-color: lightgrey; -fx-text-fill:black;");
+            dialog.setStyle("-fx-border-color: grey; -fx-border-width: 0; "
+                    + "-fx-background-radius: 10px; -fx-border-radius: 10px; "
+                    + "-fx-border-style: solid; -fx-background-color: lightgrey; -fx-text-fill:black;");
         }
         displayPicture.setImage(img);
     }

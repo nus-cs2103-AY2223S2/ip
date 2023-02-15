@@ -6,10 +6,8 @@ import java.time.LocalDateTime;
  * Represents a Todo task
  */
 public class Todo extends Task {
-    
     /**
-     * Initializes a Todo object
-     * 
+     * Initializes a Todo object.
      * @param taskText the task description
      */
     public Todo(String taskText) {
@@ -22,8 +20,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the formatted text to be stored
-     * in the Duke text file
+     * Returns the formatted text to be stored.
+     * in the Duke text file.
      *
      * @return the formatted string
      */
