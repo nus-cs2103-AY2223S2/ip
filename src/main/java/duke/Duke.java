@@ -13,6 +13,7 @@ public class Duke {
 
     Duke() {
         Storage storage = new Storage("tasks.ser");
+        assert storage != null: "New storage object was created";
         this.list = new TaskList(storage);
         System.out.println(storage.loadTasks(this.list));
     }
