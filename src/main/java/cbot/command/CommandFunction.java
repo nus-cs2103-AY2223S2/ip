@@ -14,7 +14,8 @@ import cbot.task.TaskList;
 import cbot.util.TimeStuff;
 
 class CommandFunction {
-    private static int checkIndex(TaskList tl, String text) throws PoorInputException {
+    private static int checkIndex(TaskList tl, String text)
+            throws PoorInputException {
         try {
             int num = Integer.parseInt(text);
 
@@ -29,7 +30,8 @@ class CommandFunction {
         }
     }
 
-    private static ArrayList<Integer> splitNums(TaskList tl, String text) throws PoorInputException {
+    private static ArrayList<Integer> splitNums(TaskList tl, String text)
+            throws PoorInputException {
         ArrayList<Integer> nums = new ArrayList<>();
 
         String[] strings = text.split(" ");
@@ -60,29 +62,29 @@ class CommandFunction {
     }
 
     // Command static methods to be called by Parser, and run by runCommand
-    static String doNoInput(TaskList tl, String text)
+    static String doNoInput(TaskList tl, String input)
             throws PoorInputException {
-        throw new PoorInputException(text.toUpperCase() + " needs an input");
+        throw new PoorInputException(input.toUpperCase() + " needs an input");
     }
 
-    static String doBye(TaskList tl, String text) {
-        assert (!Command.BYE.getMatch(text).isEmpty()) : "This should only be accessed by BYE";
+    static String doBye(TaskList tl, String input) {
+        assert (Command.BYE.matches(input)) : "This should only be accessed by BYE";
 
         return Talker.sayBye();
     }
 
-    static String doList(TaskList tl, String text) {
-        assert (!Command.LIST.getMatch(text).isEmpty()) : "This should only be accessed by LIST";
+    static String doList(TaskList tl, String input) {
+        assert (Command.LIST.matches(input)) : "This should only be accessed by LIST";
 
         return (tl.getCount() == 0)
                 ? Talker.say("Freedom! You have no tasks :D")
                 : Talker.say("Here's what you have:\n") + Talker.printMany(tl.listTasks());
     }
 
-    static String doMark(TaskList tl, String text)
+    static String doMark(TaskList tl, String input)
             throws PoorInputException {
-        assert (!text.isEmpty()) : "MARK must have input text. Error should have been caught";
-
+        assert (Command.MARK.matches(input)) : "This should only be accessed by MARK";
+        String text = Command.MARK.extractText(input);
         ArrayList<Integer> nums = splitNums(tl, text);
 
         if (nums.size() == 1) {
@@ -99,10 +101,10 @@ class CommandFunction {
         return Talker.say("That's great! I've marked:" + markedTasks);
     }
 
-    static String doUnmark(TaskList tl, String text)
+    static String doUnmark(TaskList tl, String input)
             throws PoorInputException {
-        assert (!text.isEmpty()) : "UNMARK must have input text. Error should have been caught";
-
+        assert (Command.UNMARK.matches(input)) : "This should only be accessed by UNMARK";
+        String text = Command.UNMARK.extractText(input);
         ArrayList<Integer> nums = splitNums(tl, text);
 
         if (nums.size() == 1) {
@@ -119,10 +121,10 @@ class CommandFunction {
         return Talker.say("Shucks D: I've unmarked:" + unmarkedTasks);
     }
 
-    static String doRemove(TaskList tl, String text)
+    static String doDelete(TaskList tl, String input)
             throws PoorInputException {
-        assert (!text.isEmpty()) : "DELETE must have input text. Error should have been caught";
-
+        assert (Command.DELETE.matches(input)) : "This should only be accessed by DELETE";
+        String text = Command.DELETE.extractText(input);
         ArrayList<Integer> nums = splitNums(tl, text);
 
         if (nums.size() == 1) {
@@ -141,15 +143,16 @@ class CommandFunction {
         return Talker.say("Gotcha! I've deleted:" + deletedTasks);
     }
 
-    static String doTodo(TaskList tl, String text) {
-        assert (!text.isEmpty()) : "TODO must have input text. Error should have been caught";
-
+    static String doTodo(TaskList tl, String input) {
+        assert (Command.TODO.matches(input)) : "This should only be accessed by TODO";
+        String text = Command.TODO.extractText(input);
         return Talker.say(tl.addTask(new Task(text)));
     }
 
-    static String doDeadline(TaskList tl, String text)
+    static String doDeadline(TaskList tl, String input)
             throws PoorInputException, DateTimeParseException {
-        assert (!text.isEmpty()) : "DEADLINE must have input text. Error should have been caught";
+        assert (Command.DEADLINE.matches(input)) : "This should only be accessed by DEADLINE";
+        String text = Command.DEADLINE.extractText(input);
 
         String byKeyword = "/by ";
         int byLength = byKeyword.length();
@@ -164,16 +167,17 @@ class CommandFunction {
             throw new BadInputException("Missing due date");
         }
 
-        String dlDesc = text.substring(0, byIndex);
+        String dlDesc = text.substring(0, byIndex).trim();
         String dlDueStr = text.substring(byIndex + byLength);
 
         LocalDateTime dlDue = TimeStuff.textToDT(dlDueStr);
         return Talker.say(tl.addTask(new Deadline(dlDesc, dlDue)));
     }
 
-    static String doEvent(TaskList tl, String text)
+    static String doEvent(TaskList tl, String input)
             throws PoorInputException, DateTimeParseException {
-        assert (!text.isEmpty()) : "EVENT must have input text. Error should have been caught";
+        assert (Command.EVENT.matches(input)) : "This should only be accessed by EVENT";
+        String text = Command.EVENT.extractText(input);
 
         String fromKeyword = "/from ";
         String toKeyword = "/to ";
@@ -197,7 +201,7 @@ class CommandFunction {
             throw new BadInputException("Missing end date");
         }
 
-        String eDesc = text.substring(0, fromIndex);
+        String eDesc = text.substring(0, fromIndex).trim();
         String eStartStr = text.substring(fromIndex + fromLength, toIndex);
         String eEndStr = text.substring(toIndex + toLength);
 
@@ -205,15 +209,15 @@ class CommandFunction {
         LocalDateTime eEnd = TimeStuff.textToDT(eEndStr);
 
         if (eStart.isAfter(eEnd)) {
-            throw new BadInputException("Hey! You have to start *before* you end...");
+            throw new PoorInputException("Hey! You have to start *before* you end...");
         }
 
         return Talker.say(tl.addTask(new Event(eDesc, eStart, eEnd)));
     }
 
-    static String doSort(TaskList tl, String text)
+    static String doSort(TaskList tl, String input)
             throws PoorInputException {
-        assert (!Command.SORT.getMatch(text).isEmpty()) : "This should only be accessed by SORT";
+        assert (Command.SORT.matches(input)) : "This should only be accessed by SORT";
 
         if (tl.getCount() == 0) {
             throw new PoorInputException("You have no tasks to sort :P");
@@ -224,9 +228,10 @@ class CommandFunction {
                 + Talker.printMany(tl.listTasks());
     }
 
-    static String doBefore(TaskList tl, String text)
+    static String doBefore(TaskList tl, String input)
             throws PoorInputException, DateTimeParseException {
-        assert (!text.isEmpty()) : "BEFORE must have input text. Error should have been caught";
+        assert (Command.BEFORE.matches(input)) : "This should only be accessed by BEFORE";
+        String text = Command.BEFORE.extractText(input);
         checkFilterCount(tl);
 
         LocalDateTime bef = TimeStuff.textToDT(text);
@@ -238,9 +243,10 @@ class CommandFunction {
                 : Talker.say("Here are your tasks before " + text.trim() + ":\n") + Talker.printMany(arrBef);
     }
 
-    static String doAfter(TaskList tl, String text)
+    static String doAfter(TaskList tl, String input)
             throws PoorInputException, DateTimeParseException {
-        assert (!text.isEmpty()) : "AFTER must have input text. Error should have been caught";
+        assert (Command.AFTER.matches(input)) : "This should only be accessed by AFTER";
+        String text = Command.AFTER.extractText(input);
         checkFilterCount(tl);
 
         LocalDateTime aft = TimeStuff.textToDT(text);
@@ -252,8 +258,10 @@ class CommandFunction {
                 : Talker.say("Here are your tasks after " + text.trim() + ":\n") + Talker.printMany(arrAft);
     }
 
-    static String doFilter(TaskList tl, String text) throws PoorInputException {
-        assert (!text.isEmpty()) : "FILTER must have input text. Error should have been caught";
+    static String doFilter(TaskList tl, String input)
+            throws PoorInputException {
+        assert (Command.FILTER.matches(input)) : "This should only be accessed by FILTER";
+        String text = Command.FILTER.extractText(input);
         checkFilterCount(tl);
 
         String msg;
@@ -318,8 +326,10 @@ class CommandFunction {
                 : Talker.say(msg) + Talker.printMany(arrFilter);
     }
 
-    static String doFind(TaskList tl, String text) throws PoorInputException {
-        assert (!text.isEmpty()) : "FIND must have input text. Error should have been caught";
+    static String doFind(TaskList tl, String input)
+            throws PoorInputException {
+        assert (Command.FIND.matches(input)) : "This should only be accessed by FIND";
+        String text = Command.FIND.extractText(input);
         checkFilterCount(tl);
 
         String lowText = text.toLowerCase();
@@ -331,8 +341,10 @@ class CommandFunction {
                 : Talker.say("Here! I found these:\n") + Talker.printMany(arrFind);
     }
 
-    static String doEdit(TaskList tl, String text) throws PoorInputException {
-        assert (!text.isEmpty()) : "EDIT must have input text. Error should have been caught";
+    static String doEdit(TaskList tl, String input)
+            throws PoorInputException {
+        assert (Command.EDIT.matches(input)) : "This should only be accessed by EDIT";
+        String text = Command.EDIT.extractText(input);
 
         int spaceIndex = checkKeyword(text, " ");
 
