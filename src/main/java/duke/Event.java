@@ -53,7 +53,7 @@ public class Event extends Task {
      * {@inheritDoc}
      */
     public String asCsv() {
-        if (super.isDone) {
+        if (super.taskStatus) {
             return "E,1," + taskDesc + "," + taskStartTime + "," + taskEndTime;
         } else {
             return "E,0," + taskDesc + "," + taskStartTime + "," + taskEndTime;

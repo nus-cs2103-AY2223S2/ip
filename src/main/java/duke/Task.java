@@ -35,14 +35,14 @@ public abstract class Task {
      * Method to mark task as done.
      */
     public void markDone() {
-        isDone = true;
+        taskStatus = true;
     }
 
     /**
      * Method to unmark task as done.
      */
     public void markUndone() {
-        isDone = false;
+        taskStatus = false;
     }
 
     /**

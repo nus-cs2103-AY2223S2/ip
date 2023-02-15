@@ -56,7 +56,7 @@ public class Deadline extends Task {
      * {@inheritDoc}
      */
     public String asCsv() {
-        if (super.isDone) {
+        if (super.taskStatus) {
             return "D,1" + taskDesc + "," + taskEndTime;
         } else {
             return "D,0" + taskDesc + "," + taskEndTime;
