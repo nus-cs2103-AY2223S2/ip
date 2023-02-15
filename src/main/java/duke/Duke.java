@@ -199,7 +199,6 @@ public class Duke extends Application {
         return response(ui, storage, parser, list, input);
     }
 
-
     /**
      * Starts the duke program and checks for various commands
      * @param ui UI onject responsible for User interactions
