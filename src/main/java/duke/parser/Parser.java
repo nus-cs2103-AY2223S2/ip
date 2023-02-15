@@ -25,7 +25,7 @@ public class Parser {
     /**
      * Parses user input and produces an output.
      * @param userInput the user input
-     * @exception DukeException error thrown when user gives an invalid input
+     * @throws DukeException when user gives an invalid input
      */
     public String parse(String userInput) throws DukeException {
         String[] inputSplitByWords = userInput.split(" ", 2);

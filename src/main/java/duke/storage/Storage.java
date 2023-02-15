@@ -11,21 +11,19 @@ import duke.tasks.DeadLine;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
 
-
 /**
  * Handles storing of Tasks in hard drive.
  */
 public class Storage {
+    /** The file instance in the hard drive that stores the tasks. */
     private File file;
 
     /**
      * Creates a new Storage session.
-     *
      * @param filePath File path to stored file in hard drive.
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
-
     }
 
     /**
@@ -51,7 +49,7 @@ public class Storage {
                 String[] nextLine = scanner.nextLine().split(" ", 3);
                 //first Word should be a number indicating if task has been completed or not. Initialise boolean value.
                 Boolean isComplete = nextLine[0].equals("1") ? true : false;
-                //second word should be either deadline, event, or ToDo.
+                //second word should be either deadline, event, or to do.
                 String secondWord = nextLine[1];
                 //Rest of the message contains details about the task.
                 String bodyMessage = nextLine[2];

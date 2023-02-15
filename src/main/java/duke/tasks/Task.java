@@ -18,6 +18,12 @@ public class Task {
      */
     String storedData;
 
+    /**
+     * Constructs a new Task.
+     * @param keyword the keyword of the task
+     * @param taskDescription the description of the task
+     * @param isComplete the status of the task
+     */
     public Task(String keyword, String taskDescription, Boolean isComplete) {
         this.taskDescription = taskDescription;
         this.storedData = keyword + " " + taskDescription;
