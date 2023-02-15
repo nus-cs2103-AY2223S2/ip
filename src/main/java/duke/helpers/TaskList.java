@@ -1,10 +1,12 @@
 package duke.helpers;
 
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.tasks.*;
+import java.io.IOException;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
