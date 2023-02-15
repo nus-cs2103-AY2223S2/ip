@@ -37,23 +37,23 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String dialogBoxstyle = "-fx-background-radius: 22;";
+        String dialogBoxStyle = "-fx-background-radius: 22;";
         dialog.setText(text);
 
         if (profile == Profile.USER) {
             displayPicture.setImage(userImage);
-            dialogBoxstyle += "-fx-background-color: #FD7F00;";
+            dialogBoxStyle += "-fx-background-color: #FD7F00;";
         } else {
             displayPicture.setImage(dukeImage);
             dialog.setStyle("-fx-text-fill: white;");
-            dialogBoxstyle += "-fx-background-color: #191970;";
+            dialogBoxStyle += "-fx-background-color: #191970;";
             this.flip();
         }
 
         if (highlightError) {
             dialog.setStyle("-fx-text-fill: red;");
         }
-        this.setStyle(dialogBoxstyle);
+        this.setStyle(dialogBoxStyle);
     }
 
     /**
