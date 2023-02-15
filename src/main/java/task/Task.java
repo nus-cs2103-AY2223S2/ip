@@ -4,16 +4,16 @@ package task;
  * Class that store details of a task.
  */
 public abstract class Task {
-    private String nameOfTask;
+    private final String description;
     private boolean done;
 
     /**
      * Constructs Task.
      *
-     * @param name Description of the task.
+     * @param description Description of the task.
      */
-    public Task(String name) {
-        this.nameOfTask = name;
+    public Task(String description) {
+        this.description = description;
         done = false;
     }
 
@@ -22,21 +22,21 @@ public abstract class Task {
      *
      * @return description of task.
      */
-    public String getNameOfTask() {
-        return nameOfTask;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * Sets the task to be done.
      */
-    public void taskDone() {
+    public void markDone() {
         this.done = true;
     }
 
     /**
      * Sets the take to be not done.
      */
-    public void taskNotDone() {
+    public void markNotDone() {
         this.done = false;
     }
 
@@ -64,6 +64,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.isDone() ? "X" : " ") + "] " + this.getNameOfTask();
+        return "[" + (this.isDone() ? "X" : " ") + "] " + this.description;
     }
 }

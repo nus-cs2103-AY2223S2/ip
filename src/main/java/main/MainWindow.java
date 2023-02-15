@@ -50,8 +50,9 @@ public class MainWindow extends AnchorPane {
     }
 
     private void welcome() {
+        String welcomeMessage = "Hello! I'm Duke, your task planner\n" + "What can I do for you?";
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke, your task planner\n" + "What can I do for you?", dukeImage));
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
 }

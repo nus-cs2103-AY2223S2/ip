@@ -14,17 +14,17 @@ import task.Task;
  */
 public class AddDeadlineCommand extends Command {
     private final String description;
-    private final LocalDate endDate;
+    private final LocalDate dueDate;
 
     /**
      * Constructs AddDeadlineCommand.
      *
      * @param description Description of the deadline task.
-     * @param endDate Deadline of the task.
+     * @param dueDate Deadline of the task.
      */
-    public AddDeadlineCommand(String description, LocalDate endDate) {
+    public AddDeadlineCommand(String description, LocalDate dueDate) {
         this.description = description;
-        this.endDate = endDate;
+        this.dueDate = dueDate;
 
     }
 
@@ -37,10 +37,9 @@ public class AddDeadlineCommand extends Command {
      * @throws DukeException Throws exception if user input is invalid.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task t = new Deadline(description, endDate);
+        Task t = new Deadline(description, dueDate);
         taskList.addTask(t);
         storage.writeFile(taskList);
         ui.outputAddTask(t);
     }
-
 }

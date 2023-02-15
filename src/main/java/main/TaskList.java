@@ -11,15 +11,15 @@ import task.Task;
  */
 public class TaskList {
 
-    private final ArrayList<Task> arrOfTask;
+    private final ArrayList<Task> arrOfTasks;
 
     /**
      * Constructs TaskList
      *
-     * @param arrOfTask Task already in the list.
+     * @param arrOfTasks Task already in the list.
      */
-    public TaskList(ArrayList<Task> arrOfTask) {
-        this.arrOfTask = arrOfTask;
+    public TaskList(ArrayList<Task> arrOfTasks) {
+        this.arrOfTasks = arrOfTasks;
     }
 
     /**
@@ -27,8 +27,8 @@ public class TaskList {
      *
      * @return Total number of tasks.
      */
-    public int getTotalNumberOfTask() {
-        return arrOfTask.size();
+    public int getTotalNumOfTasks() {
+        return arrOfTasks.size();
     }
 
     /**
@@ -37,7 +37,7 @@ public class TaskList {
      * @param t New task to be added.
      */
     public void addTask(Task t) {
-        arrOfTask.add(t);
+        arrOfTasks.add(t);
     }
 
     /**
@@ -46,10 +46,11 @@ public class TaskList {
      * @param index Index of task to be set as done.
      * @return Task that is set as done.
      */
-    public Task taskDone(int index) {
-        assert index > 0 && index < arrOfTask.size(): "index should be valid";
-        Task t = arrOfTask.get(index);
-        t.taskDone();
+
+    public Task markTaskDone(int index) {
+        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        Task t = arrOfTasks.get(index);
+        t.markDone();
         return t;
     }
 
@@ -59,10 +60,10 @@ public class TaskList {
      * @param index Index of task to be set as not done.
      * @return Task that is set as not done.
      */
-    public Task taskNotDone(int index) {
-        assert index > 0 && index < arrOfTask.size(): "index should be valid";
-        Task t = arrOfTask.get(index);
-        t.taskNotDone();
+    public Task markTaskNotDone(int index) {
+        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        Task t = arrOfTasks.get(index);
+        t.markNotDone();
         return t;
     }
 
@@ -73,9 +74,9 @@ public class TaskList {
      * @return Task that is deleted.
      */
     public Task deleteTask(int index) {
-        assert index > 0 && index < arrOfTask.size(): "index should be valid";
-        Task t = arrOfTask.get(index);
-        arrOfTask.remove(index);
+        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        Task t = arrOfTasks.get(index);
+        arrOfTasks.remove(index);
         return t;
     }
 
@@ -86,8 +87,8 @@ public class TaskList {
      * @return Task at index.
      */
     public Task getTaskAtIndex(int index) {
-        assert index > 0 && index < arrOfTask.size(): "index should be valid";
-        return arrOfTask.get(index);
+        assert index > 0 && index < arrOfTasks.size(): "index should be valid";
+        return arrOfTasks.get(index);
     }
 
     /**
@@ -97,13 +98,13 @@ public class TaskList {
      * @return List of tasks that contains keyword.
      */
     public ArrayList<Task> findTask(String keyword) {
-        ArrayList<Task> matchedTask = new ArrayList<>();
-        for (Task t : arrOfTask) {
-            if (t.getNameOfTask().contains(keyword)) {
-                matchedTask.add(t);
+        ArrayList<Task> matchingTask = new ArrayList<>();
+        for (Task t : arrOfTasks) {
+            if (t.getDescription().contains(keyword)) {
+                matchingTask.add(t);
             }
         }
-        return matchedTask;
+        return matchingTask;
     }
 
     /**
@@ -113,7 +114,7 @@ public class TaskList {
      * @throws IOException Throws Exception when there is error writing to the file.
      */
     public void writeToFile(FileWriter fw) throws IOException {
-        for (Task t : arrOfTask) {
+        for (Task t : arrOfTasks) {
             fw.write(t.toText() + "\n");
         }
     }

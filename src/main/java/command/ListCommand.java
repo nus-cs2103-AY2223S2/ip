@@ -19,7 +19,6 @@ public class ListCommand extends Command {
      * @throws DukeException Throws exception if index is invalid.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.outputListTask(taskList);
+        ui.outputAllTask(taskList);
     }
-
 }

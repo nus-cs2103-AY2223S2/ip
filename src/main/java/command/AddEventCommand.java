@@ -14,8 +14,8 @@ import task.Task;
  */
 public class AddEventCommand extends Command {
     private final String description;
-    private final LocalDate endDate;
     private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
      * Constructs AddEventCommand.
@@ -26,8 +26,8 @@ public class AddEventCommand extends Command {
      */
     public AddEventCommand(String description, LocalDate startDate, LocalDate endDate) {
         this.description = description;
-        this.endDate = endDate;
         this.startDate = startDate;
+        this.endDate = endDate;
         assert !(endDate.isBefore(startDate)): "starting date should be before ending date";
     }
 
