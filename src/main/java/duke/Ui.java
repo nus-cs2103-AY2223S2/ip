@@ -16,7 +16,7 @@ public class Ui {
     }
 
     // prints out welcome greeting to user when Duke is run
-    public String showWelcome() {
+    public String greet() {
         return "    Hi! I'm Duke\n    How can I help?";
     }
 
