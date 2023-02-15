@@ -1,24 +1,37 @@
-# duke.Duke project template
+# User Guide for Duke by Bo kuan
+> Simple task tracker
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Getting started
+1. Download this repository.
+2. Open your command prompt
+3. Navigate to the directory containing the jar file eg. `cd <path to clone>/build/libs`
+4. run the command `java -jar duke.jar`
+## Features
 
-## Setting up in Intellij
+- [x] Add, delete, list and mark tasks -
+  Track your `todo`, `deadline` and `event` tasks
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+- [x]  Find tasks -
+  Find tasks using keywords from your task list
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+- [x]  Reminders -
+  Automatic reminders for `event` and `deadline` tasks
+
+- [x] Storage - Remembers previous tasks after closing the program
+## Usage
+- Add tasks
+   - `todo <TASK_NAME>` - create a `todo` task
+   - `deadline <TASK_NAME> /by dd/mm/yyyy HHMM` - create a `deadline` task
+   - `event <TASK_NAME> /from dd/mm/yyyy HHMM /to dd/mm/yyyy HHMM` - create an `event` task
+- View tasks
+   - `list` - see all tasks in task list
+   - `find <KEYWORD>` see all tasks containing keyword
+- Remove tasks
+   - `delete <INDEX>` - delete task number index
+   - `clear` - delete all tasks
+- Changing task status
+   - `mark <INDEX>` - marks task number index as done
+   - `unmark <INDEX>` - unmarks task number index
+- Exit
+   - `bye` - exit program
+
