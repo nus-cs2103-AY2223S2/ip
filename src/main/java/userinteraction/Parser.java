@@ -1,10 +1,18 @@
 package userinteraction;
 
-import command.*;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddTodoCommand;
+import command.Command;
+import command.DeleteTaskCommand;
+import command.ExitCommand;
+import command.FindTaskCommand;
+import command.InvalidCommand;
+import command.ListCommand;
+import command.MarkTaskCommand;
+
 
 public class Parser {
-
-    private static final Ui ui = new Ui();
 
     public static Command parse(String input) {
         if (input.equals("bye")) {

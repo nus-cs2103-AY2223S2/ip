@@ -73,24 +73,27 @@ public class Event extends Task {
     }
     @Override
     public String storeTaskString() {
-        return this.getTaskType() + " | " +
+        String str = this.getTaskType() + " | " +
                 this.getMarkedString() + " | " +
                 this.getDescription() + " | " +
                 this.getStart() + " | " + this.getEnd();
+        return str;
     }
 
     @Override
     public String toString() {
-        String str = this.getDescription();
+        String discription = this.getDescription();
         boolean checked = this.isDone();
         String startTime = this.getStart();
         String endTime = this.getEnd();
+        String str = "";
         if (checked) {
-            return "[E][X] " + str + " (from: " + startTime +
+            str = "[E][X] " + discription + " (from: " + startTime +
                     " to: " + endTime + ")";
         } else {
-            return "[E][ ] " + str + " (from: " + startTime +
+            str = "[E][ ] " + discription + " (from: " + startTime +
                     " to: " + endTime + ")";
         }
+        return str;
     }
 }
