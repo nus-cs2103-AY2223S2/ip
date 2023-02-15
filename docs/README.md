@@ -11,7 +11,7 @@ You can also mark a task as done or uncompleted.
 
 ### Detect overlapping event
 
-Spongebob chatbox will alert you when there are more than 2 event overlap with each other.
+Spongebob chatbox will alert you when there are more than 2 events overlap with each other.
 
 ### Find the tasks with specific keyword
 
@@ -28,7 +28,7 @@ data loss.
 
 Add a "todo" task into your tasklist.
 
-Format: todo <description>
+Format: todo {description}
 
 Example of usage: 
 
@@ -46,7 +46,7 @@ Now you have 1 tasks in the list.
 
 Add a "deadline" task into your tasklist.
 
-Format: deadline <description> /by dd/mm/yyyy hh:mm
+Format: deadline {description} /by {dd/mm/yyyy hh:mm}
 
 Example of usage: 
 
@@ -64,7 +64,7 @@ Now you have 2 tasks in the list.
 
 Add a "event" task into your tasklist.
 
-Format: event <description> /from dd/mm/yyyy hh:mm /to dd/mm/yyyy hh:mm
+Format: event {description} /from {dd/mm/yyyy hh:mm} /to {dd/mm/yyyy hh:mm}
 
 Example of usage: 
 
@@ -101,7 +101,7 @@ Here are the tasks in your list:
 
 Show the task is done.
 
-Format: mark <number>
+Format: mark {number}
 
 Example of usage: 
 
@@ -118,7 +118,7 @@ Nice! I've marked this task as done:
 
 Show the task is not done yet.
 
-Format: unmark <number>
+Format: unmark {number}
 
 Example of usage: 
 
@@ -135,7 +135,7 @@ Ok! I've marked this task as not done yet:
 
 Delete the task from your tasklist.
 
-Format: delete <number>
+Format: delete {number}
 
 Example of usage: 
 
@@ -153,7 +153,7 @@ Now you have 2 tasks in the list.
 
 Search for a task that match the keyword
 
-Format: find
+Format: find {keyword}
 
 Example of usage: 
 
