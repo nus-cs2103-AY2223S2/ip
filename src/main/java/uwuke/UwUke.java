@@ -31,6 +31,7 @@ public class UwUke extends Application {
     public void start(Stage stage) {
         initialiseHelperClasses();
         loadMainWindow();
+        scene.getStylesheets().add(getClass().getResource("/view/Application.css").toExternalForm());
         UwUke.stage = stage;
         stage.setScene(scene);
         stage.show();
