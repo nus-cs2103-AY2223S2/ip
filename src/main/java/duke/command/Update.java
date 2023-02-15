@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.UI.TextOutput;
 import duke.task.TaskList;
 
-public class Snooze extends Command {
+public class Update extends Command {
 
-    public Snooze(String str) {
+    public Update(String str) {
         this.setCommandStorage(str);
     }
 
@@ -17,12 +16,9 @@ public class Snooze extends Command {
         String content = this.getCommandStorage();
         assert content != "": "Must provide arguments to snooze a task";
         String[] substrings = content.split(" ");
-        String item = substrings[1];
-        String days = substrings[2];
-        TaskList foundTasks = tasks.findTask(item);
-        if (foundTasks.getTaskCount() == 0) {
-            return TextOutput.makeTaskFoundString();
-        }
-        foundTasks.loadTasks();
+        String taskId = substrings[1];
+        String[] dates = new String[substrings.length - 2];
+        System.arraycopy(substrings, 2, dates, 0, substrings.length - 2);
+        return tasks.updateTaskTime(Integer.parseInt(taskId), dates);
     }
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.UI.TextOutput;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.Locale;
@@ -42,10 +44,11 @@ public class Event extends Task {
     }
 
     @Override
-    public void postponeTask(String ... dates) {
+    public String updateTaskTime(String ... dates) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.from = LocalDateTime.parse(dates[0], format);
         this.to = LocalDateTime.parse(dates[1], format);
         this.time = this.to;
+        return TextOutput.makePostponeString(this);
     }
 }

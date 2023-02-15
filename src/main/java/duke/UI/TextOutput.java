@@ -29,7 +29,7 @@ public class TextOutput {
                 + taskList.listTasks();
     }
 
-    public static String makeTaskFoundString() {
+    public static String makeTaskNotFoundString() {
         return "Sorry, there is no such tasks.";
     }
 
@@ -58,6 +58,15 @@ public class TextOutput {
 
     public static String makeSucessSaveString() {
         return "Successfully saved your current tasks.";
+    }
+
+    public static String makePostponeString(Task task) {
+        return "Successfully updated your task time to the following: \n"
+                + task.toString();
+    }
+
+    public static String makeDelayFailString() {
+        return "Sorry, the indicated task type cannot be postponed. \n";
     }
 
     public static String makeUnsuccessSaveString(Exception e) {

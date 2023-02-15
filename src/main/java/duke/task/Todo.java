@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.UI.TextOutput;
+
 /**
  * Represents task of the type 'Todo'.
  */
@@ -24,5 +26,10 @@ public class Todo extends Task {
     public String toString() {
         return "[" + this.getTypeIcon() + "]"
                 + "[" + this.getStatusIcon() + "] " + this.getTaskContent();
+    }
+
+    @Override
+    public String updateTaskTime(String ... dates) {
+        return TextOutput.makeDelayFailString();
     }
 }

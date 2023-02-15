@@ -23,7 +23,7 @@ public class Find extends Command {
         String item = substrings[1];
         TaskList foundTasks = tasks.findTask(item);
         if (foundTasks.getTaskCount() == 0) {
-            return TextOutput.makeTaskFoundString();
+            return TextOutput.makeTaskNotFoundString();
         } else {
             return TextOutput.makeTaskFoundString(foundTasks);
         }

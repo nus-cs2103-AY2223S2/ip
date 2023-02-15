@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.UI.TextOutput;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.Locale;
@@ -38,10 +40,11 @@ public class Deadline extends Task {
     }
 
     @Override
-    public void postponeTask(String ... dates) {
+    public String updateTaskTime(String ... dates) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         format.withLocale(Locale.ENGLISH);
-        this.time = LocalDateTime.parse(dates[0], format);
+        this.time = LocalDateTime.parse(dates[0] + " " + dates[1], format);
+        return TextOutput.makePostponeString(this);
     }
 }
 

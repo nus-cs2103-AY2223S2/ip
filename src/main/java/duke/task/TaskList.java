@@ -1,6 +1,7 @@
 package duke.task;
 import duke.Storage;
-import duke.command.Command;
+import duke.UI.TextOutput;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -105,6 +106,13 @@ public class TaskList {
                 foundTasks.addTask(this.tasks.get(i));
             }
         }
+    }
+
+    public String updateTaskTime(int id, String ... dates) {
+        if (this.tasks.size() < id) {
+            return TextOutput.makeTaskNotFoundString();
+        }
+        return this.tasks.get(id - 1).updateTaskTime(dates);
     }
 
     /**

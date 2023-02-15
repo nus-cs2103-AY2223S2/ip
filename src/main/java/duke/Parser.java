@@ -61,6 +61,12 @@ public class Parser {
             Parser.command = new SearchByDate(time);
         } else if (input.matches("find\\s.*$")) {
             Parser.command = new Find(input);
+        } else if (input.matches("update\\s.*$")) {
+            if (input.split(" ").length < 3) {
+                throw new InsufficientArguments("OOPS!!! The format of update must follow " +
+                        "update [task_index] [d/MM/yyyy HHmm] [d/MM/yyyy HHmm]");
+            }
+            Parser.command = new Update(input);
         } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") ||
                 input.matches("^todo\\s.*$")) {
             if (input.split(" ").length < 2) {
