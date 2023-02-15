@@ -80,6 +80,7 @@ public class TaskList {
     }
 
     public String deleteTaskWithResult(int index) {
+        //Cache task for displaying.
         Task t = tasks.get(index - 1);
         tasks.remove(index - 1);
         return t + " is now gone!";
