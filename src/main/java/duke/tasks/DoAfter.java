@@ -24,7 +24,7 @@ public class DoAfter extends Task {
         String dateToDoAfter = separateText[1];
 
         return this.isComplete ? String.format("[DA][X] %s (after:%s)", description, dateToDoAfter)
-                               : String.format("[DA][] %s (after:%s)", description, dateToDoAfter);
+                               : String.format("[DA][ ] %s (after:%s)", description, dateToDoAfter);
     }
 }
 
