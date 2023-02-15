@@ -145,6 +145,7 @@ public class Duke extends Application {
         );
         this.userInput.clear();
 
+        //Reused from https://stackoverflow.com/questions/27334455
         if (this.isExit) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> stage.close());

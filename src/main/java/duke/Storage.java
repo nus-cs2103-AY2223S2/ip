@@ -43,7 +43,7 @@ public class Storage {
     }
 
     /**
-     * Load past data inputted by user.
+     * Loads past data inputted by user.
      * @return An array of tasks containing the list of tasks still in the list after user previously exited.
      * @throws DukeException When filepath of file that is supposed to store past data cannot be created or found.
      */
@@ -70,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Save new data inputted by user.
+     * Saves new data inputted by user.
      * @param taskList The TaskList object storing the list of Task objects.
      * @throws DukeException When filepath of file that is supposed to store new data cannot be created or found.
      */

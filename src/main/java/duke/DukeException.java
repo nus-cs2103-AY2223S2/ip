@@ -16,7 +16,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Used to get the error message describing the problem.
+     * Gets error message describing the problem.
      * @return The error message.
      */
     public String getMessage() {

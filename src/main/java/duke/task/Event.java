@@ -31,19 +31,23 @@ public class Event extends Task {
         String target2 = " /to ";
         LocalDateTime startDateTime;
         LocalDateTime endDateTime;
+
         int index1 = str.indexOf(target1);
         int index2 = str.indexOf(target2);
         String description = str.substring(0, index1);
         String start = str.substring(index1 + 7, index2);
         String end = str.substring(index2 + 5);
+
         int startFirstSlash = start.indexOf("/");
         int startSecondSlash = start.indexOf("/", startFirstSlash + 1);
         int endFirstSlash = end.indexOf("/");
         int endSecondSlash = end.indexOf("/", endFirstSlash + 1);
+
         String startDay = startFirstSlash == 1 ? "d" : "dd";
         String startMonth = startSecondSlash - startFirstSlash == 2 ? "M" : "MM";
         String endDay = endFirstSlash == 1 ? "d" : "dd";
         String endMonth = endSecondSlash - endFirstSlash == 2 ? "M" : "MM";
+
         DateTimeFormatter startInFormatter = DateTimeFormatter.ofPattern(startDay + "/" + startMonth + "/yyyy HHmm");
         DateTimeFormatter endInFormatter = DateTimeFormatter.ofPattern(endDay + "/" + endMonth + "/yyyy HHmm");
         try {
@@ -52,6 +56,7 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new RuntimeException("Invalid date and time! Please try again!");
         }
+
         if (startDateTime.isAfter(endDateTime)) {
             throw new RuntimeException("Unable to create duke.task.Event! "
                     + "Starting date and time cannot be after ending date and time!");

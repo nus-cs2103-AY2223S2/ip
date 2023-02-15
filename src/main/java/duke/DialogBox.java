@@ -35,8 +35,6 @@ public class DialogBox extends HBox {
         this.circle.setFill(this.imagePattern);
 
         this.text.setWrapText(true);
-        //this.displayPicture.setFitWidth(100.0);
-        //this.displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(this.text, this.circle);
