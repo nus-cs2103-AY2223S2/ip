@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.saveTasks(taskList);
         ui.close();
-        return "Bye. Hope to see you again soon!";
+        return " ";
     }
     public boolean isExit() {
         return true;

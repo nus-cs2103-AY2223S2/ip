@@ -52,7 +52,7 @@ public class Parser {
      * @throws DukeException If a task that the input is trying to add to the task list is invalid.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        QueryType inputType = Query.queryType(fullCommand);
+        Query.QueryType inputType = Query.getQueryType(fullCommand);
         String[] fullCommandArr = fullCommand.split(" ");
 
         switch (inputType) {

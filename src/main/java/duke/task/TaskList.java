@@ -34,9 +34,9 @@ public class TaskList {
      * @param index The number of the task to delete.
      * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
      */
-    public Task deleteTask(int index) throws DukeException {
+    public void deleteTask(int index) throws DukeException {
         try {
-            return tasks.remove(index - 1);
+            tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
         }
@@ -47,12 +47,11 @@ public class TaskList {
      * @param index The number of the task to unmark.
      * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
      */
-    public Task unmarkTask(int index) throws DukeException {
+    public void unmarkTask(int index) throws DukeException {
         try {
             Task task = tasks.get(index - 1);
             task.markUndone();
             assert task.getStatusIcon().equals(" "): "Task should be unmarked";
-            return task;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
         }
@@ -63,12 +62,11 @@ public class TaskList {
      * @param index The number of the task to mark.
      * @throws DukeException If the number specified is invalid (> Number of tasks in task list or <= 0).
      */
-    public Task markTask(int index) throws DukeException {
+    public void markTask(int index) throws DukeException {
         try {
             Task task = tasks.get(index - 1);
             task.markDone();
             assert task.getStatusIcon().equals("X"): "Task should be marked";
-            return task;
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("That task does not exist!");
         }
@@ -86,4 +84,14 @@ public class TaskList {
     public int getNumTasks() {
         return tasks.size();
     }
+
+    public String formatTaskToString(Task task) {
+        String taskString = tasks.indexOf(task) + 1 + ". [" + task.getSymbol() + "] "
+                + "[" + task.getStatusIcon() + "] " + task.getDescription();
+        if (!(task instanceof Todo)) {
+            taskString +=  " (" + task.getDuedateString() + ")";
+        }
+        return taskString;
+    }
+
 }
