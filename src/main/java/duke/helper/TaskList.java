@@ -3,7 +3,7 @@ package duke.helper;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidTaskNumException;
+import duke.exception.InvalidTaskNumberException;
 import duke.exception.NotANumberException;
 import duke.task.Task;
 
@@ -75,7 +75,7 @@ public class TaskList {
             assert taskNo >= 0 : "Task number should be 1 or more";
             return tasks.get(taskNo);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskNumException();
+            throw new InvalidTaskNumberException();
         } catch (NumberFormatException e) {
             throw new NotANumberException(type);
         }

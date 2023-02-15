@@ -7,7 +7,6 @@ import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidTaskCommandException;
 import duke.task.Task;
-import javafx.application.Platform;
 
 /**
  * Ui class that handles all the interactions with the users
@@ -17,14 +16,6 @@ public class Ui {
 
     public Ui() {
         this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Prints the exit message and close the scanner
-     */
-    public String showExit() {
-        scanner.close();
-        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -89,26 +80,26 @@ public class Ui {
         }
 
         switch (input) {
-        case "list":
-            return "Enter: list";
-        case "mark":
-            return "Enter: mark <task number>";
-        case "unmark":
-            return "Enter: unmark <task number>";
-        case "todo":
-            return "Enter: todo <task>";
-        case "deadline":
-            return "Enter: deadline <task> /by yyyy-MM-dd HH:MM";
-        case "event":
-            return "Enter: event <task> /from yyyy-MM-dd HH:MM /to yyyy-MM-dd HH:MM";
-        case "delete":
-            return "Enter: delete <task number>";
-        case "find":
-            return "Enter: find <keyword>";
-        case "bye":
-            return "Enter: bye";
-        default:
-            throw new InvalidTaskCommandException();
+            case "list":
+                return "Enter: list";
+            case "mark":
+                return "Enter: mark <task number>";
+            case "unmark":
+                return "Enter: unmark <task number>";
+            case "todo":
+                return "Enter: todo <task>";
+            case "deadline":
+                return "Enter: deadline <task> /by <yyyy-MM-dd>T<HH:MM>";
+            case "event":
+                return "Enter: event <task> /from <yyyy-MM-dd>T<HH:MM> /to <yyyy-MM-dd>T<HH:MM>";
+            case "delete":
+                return "Enter: delete <task number>";
+            case "find":
+                return "Enter: find <keyword>";
+            case "bye":
+                return "Enter: bye";
+            default:
+                throw new InvalidTaskCommandException();
         }
     }
 }

@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 
 import duke.exception.DukeException;
 import duke.helper.Parser;
@@ -24,14 +23,9 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-
-        try {
-            db = new FileSystem("data/dukeTasks.txt");
-            this.tasks = new TaskList(db.loadFromFile());
-            this.parser = new Parser(tasks, ui);
-        } catch (DukeException | IOException e) {
-            System.out.println(e);
-        }
+        db = new FileSystem("data/dukeTasks.txt");
+        this.tasks = new TaskList(db.loadFromFile());
+        this.parser = new Parser(tasks, ui);
     }
 
     /**
@@ -46,7 +40,7 @@ public class Duke {
         try {
             output = this.parser.parseInputs(input);
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         } finally {
             db.updateFile(tasks);
         }

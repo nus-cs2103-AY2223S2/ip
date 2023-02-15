@@ -46,28 +46,28 @@ public class Parser {
         String type = inputs[0];
 
         switch (type) {
-        case "list":
-            return tasks.outputList();
-        case "mark":
-            return tasks.markTask(true, inputs[1]);
-        case "unmark":
-            return tasks.markTask(false, inputs[1]);
-        case "todo":
-            return toDoCommand(inputs);
-        case "deadline":
-            return deadlineCommand(inputs);
-        case "event":
-            return eventCommand(inputs);
-        case "delete":
-            return tasks.deleteTask(inputs[1]);
-        case "find":
-            return findCommand(inputs[1]);
-        case "help":
-            return helpCommand(inputs[1]);
-        case "bye":
-            Platform.exit();
-        default:
-            throw new InvalidTaskCommandException();
+            case "list":
+                return tasks.outputList();
+            case "mark":
+                return tasks.markTask(true, inputs[1]);
+            case "unmark":
+                return tasks.markTask(false, inputs[1]);
+            case "todo":
+                return parseToDo(inputs);
+            case "deadline":
+                return parseDeadline(inputs);
+            case "event":
+                return parseEvent(inputs);
+            case "delete":
+                return tasks.deleteTask(inputs[1]);
+            case "find":
+                return parseFind(inputs[1]);
+            case "help":
+                return parseHelp(inputs[1]);
+            case "bye":
+                Platform.exit();
+            default:
+                throw new InvalidTaskCommandException();
         }
     }
 
@@ -92,31 +92,31 @@ public class Parser {
      * @return a LocalDateTime object
      * @throws InvalidDateTimeException If incorrect dateTime values are given
      */
-    public static LocalDateTime handleDateTime(String dateTime) throws InvalidDateTimeException {
+    public static String handleDateTime(String dateTime) throws InvalidDateTimeException {
         assert dateTime.length() > 0 : "DateTime not provided!";
 
         try {
-            return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM-d-yyyy HH:mm");
+            return LocalDateTime.parse(dateTime).format(pattern);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
         }
     }
 
-    public String toDoCommand(String[] inputs) throws DukeException {
+    public String parseToDo(String[] inputs) throws DukeException {
         checkTaskDesc(inputs);
         Task toDoTask = new ToDo(inputs[1], false);
         tasks.addToTasks(toDoTask);
         return ui.showTaskOutput(toDoTask, tasks.getTasks().size());
     }
 
-    public String deadlineCommand(String[] inputs) throws DukeException {
+    public String parseDeadline(String[] inputs) throws DukeException {
         checkTaskDesc(inputs);
         String[] deadlineDesc = inputs[1].split(" /by ");
-        Task deadlineTask = new Deadline(deadlineDesc[0], handleDateTime(deadlineDesc[1]).toString());
+        Task deadlineTask = new Deadline(deadlineDesc[0], handleDateTime(deadlineDesc[1]));
         tasks.addToTasks(deadlineTask);
         return ui.showTaskOutput(deadlineTask, tasks.getSize());
     }
-
 
     /**
      * Split the event desc
@@ -124,21 +124,20 @@ public class Parser {
      * @param inputs the desc of an event task
      * @return a string array with all the parts of an event desc
      */
-    public String eventCommand(String[] inputs) throws DukeException {
+    public String parseEvent(String[] inputs) throws DukeException {
         checkTaskDesc(inputs);
-        String[] eventDesc = new String[3];
-        eventDesc[0] = inputs[1].split(" /from ")[0];
-        eventDesc[1] = inputs[1].split(" /from ")[1].split(" /to ")[0];
-        eventDesc[2] = inputs[1].split(" /from ")[1].split(" /to ")[1];
+        String eventDesc = inputs[1].split(" /from ")[0];
+        String from = inputs[1].split(" /from ")[1].split(" /to ")[0];
+        String to = inputs[1].split(" /from ")[1].split(" /to ")[1];
 
-        Task eventTask = new Event(eventDesc[0],
-                handleDateTime(eventDesc[1]).toString(),
-                handleDateTime(eventDesc[2]).toString());
+        Task eventTask = new Event(eventDesc,
+                handleDateTime(from),
+                handleDateTime(to));
         tasks.addToTasks(eventTask);
         return ui.showTaskOutput(eventTask, tasks.getSize());
     }
 
-    public String findCommand(String input) {
+    public String parseFind(String input) {
         ArrayList<Task> taskList = tasks.getTasks();
         ArrayList<Task> output = new ArrayList<>();
         for (Task task : taskList) {
@@ -149,7 +148,7 @@ public class Parser {
         return ui.filter(output);
     }
 
-    public String helpCommand(String input) throws DukeException {
+    public String parseHelp(String input) throws DukeException {
         return ui.showHelpMessage(input);
     }
 }
