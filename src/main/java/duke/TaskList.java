@@ -23,9 +23,10 @@ public class TaskList {
     /**
      * Add a Todo Task to the TaskList.
      * @param title the content of the new Todo Task
+     * @return the message that indicates the addition of the new todo task
      * @throws DukeException if the content is empty
      */
-    public String add(String title) throws DukeException {
+    public String addToDo(String title) throws DukeException {
         if (isEmpty(title)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -42,9 +43,10 @@ public class TaskList {
      * Add a Deadline Task to the TaskList.
      * @param title the content of the new Deadline Task
      * @param deadline the deadline date and time of the new Deadline Task
+     * @return the message that indicates the addition of the new deadline task
      * @throws DukeException if the content is empty
      */
-    public String add(String title, String deadline) throws DukeException {
+    public String addDeadline(String title, String deadline) throws DukeException {
         if (isEmpty(title) || isEmpty(deadline)) {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
@@ -58,13 +60,14 @@ public class TaskList {
     }
 
     /**
-     * Add a Event Task to the TaskList.
+     * Add an Event Task to the TaskList.
      * @param title the content of the new Event Task
      * @param fromDateTime the start date and time of the new Event Task
      * @param toDateTime the end date and time of the new Event Task
+     * @return the message that indicates the addition of the new event task
      * @throws DukeException if the content is empty
      */
-    public String add(String title, String fromDateTime, String toDateTime) throws DukeException {
+    public String addEvent(String title, String fromDateTime, String toDateTime) throws DukeException {
         if (title.equals("") || fromDateTime.equals("") || toDateTime.equals("")) {
             throw new DukeException("The description and duration of an event cannot be empty.");
         }
@@ -93,6 +96,7 @@ public class TaskList {
     /**
      * Deletes a Task from the TaskList.
      * @param index the index of the Task to be deleted
+     * @return the message that indicates the deletion of the task.
      */
     public String delete(int index) {
         String res = "";
@@ -116,19 +120,23 @@ public class TaskList {
     /**
      * Finds tasks that contains the target string.
      * @param target the target string to find
+     * @return the list of tasks that contains the target string in String.
      */
     public String find(String target) {
         String res = "";
         ArrayList<Task> foundTasks = new ArrayList<>();
+        ArrayList<Integer> taskIndexes = new ArrayList<>();
         foundTasks.add(new ToDo("zeroth"));
+        taskIndexes.add(0);
         res += "Here are the matching tasks in your list:\n";
         for (int i = 1; i < tasks.size(); i++) {
             if (tasks.get(i).getTask().contains(target)) {
                 foundTasks.add(tasks.get(i));
+                taskIndexes.add(i);
             }
         }
         for (int i = 1; i < foundTasks.size(); i++) {
-            res += i + ". " + foundTasks.get(i).toString() + "\n";
+            res += taskIndexes.get(i) + ". " + foundTasks.get(i).toString() + "\n";
         }
         return res;
     }
