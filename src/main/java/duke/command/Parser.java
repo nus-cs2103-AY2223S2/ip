@@ -61,19 +61,15 @@ public class Parser {
         } else if (lastCommand.startsWith("unmark ")) {
             taskList.overwrite(lastTaskList);
             return ui.saysUnDo("unmark", lastCommandDetail);
-
         } else if (lastCommand.startsWith("delete ")) {
             taskList.overwrite(lastTaskList);
             return ui.saysUnDo("mark", lastCommandDetail);
-
         } else if (lastCommand.startsWith("todo ") || lastCommand.startsWith("event ")
                 || lastCommand.startsWith("deadline ")) {
             taskList.overwrite(lastTaskList);
             return ui.saysUnDo("mark", lastCommandDetail);
-
-        } else {
-            return ui.saysUnableToUndo();
         }
+        return ui.saysUnableToUndo();
     }
 
     /**

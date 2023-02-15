@@ -124,7 +124,6 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        //ui.showWelcome();
         TaskList listOfAction = tasks;
         Storage file = storage;
         String[] arr = ui.getInput(input);
