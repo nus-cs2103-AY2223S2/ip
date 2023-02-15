@@ -39,7 +39,9 @@ public class Deadline extends Task {
      */
     public Deadline(String task, boolean isCompleted, String endDate) throws DateTimeParseException {
         super(task, isCompleted);
-        this.endDate = LocalDateTime.parse(endDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
+        this.endDate = LocalDateTime.parse(endDate, formatter);
     }
 
     /**
@@ -69,7 +71,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getDescription() {
-        return getTask() + " | " + endDate;
+        return getTask() + " | " + endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     public LocalDateTime getEndDate() {
@@ -84,7 +86,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + "(by: " + endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm")) + ")";
+                + "(by: " + endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
     }
 
     @Override

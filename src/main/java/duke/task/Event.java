@@ -49,8 +49,11 @@ public class Event extends Task {
     public Event(String task, boolean isCompleted, String startDate, String endDate)
             throws DateTimeParseException {
         super(task, isCompleted);
-        this.endDate = LocalDateTime.parse(endDate);
-        this.startDate = LocalDateTime.parse(startDate);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
+        this.startDate = LocalDateTime.parse(startDate, formatter);
+        this.endDate = LocalDateTime.parse(endDate, formatter);
     }
 
     /**
@@ -88,7 +91,8 @@ public class Event extends Task {
      */
     @Override
     public String getDescription() {
-        return getTask() + " | " + startDate + " | " + endDate;
+        return getTask() + " | " + startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")) + " | "
+                + endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     /**
@@ -99,8 +103,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + "(from: " + startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm"))
-                + " to: " + endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm")) + ")";
+                + "(from: " + startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                + " to: " + endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
     }
 
     @Override

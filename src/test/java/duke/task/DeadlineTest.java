@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 public class DeadlineTest {
     @Test
     public void testGetDescription() {
-        Deadline deadline = new Deadline("Deadline Name", "1999-12-12");
-        assertEquals("Deadline Name | 1999-12-12", deadline.getDescription());
+        Deadline deadline = new Deadline("Deadline Name", "12/12/1999 1300");
+        assertEquals("Deadline Name | 12/12/1999 1300", deadline.getDescription());
     }
 
     @Test
     public void testGetStatus() {
-        Deadline deadline = new Deadline("Deadline Name", true, "1999-12-12");
+        Deadline deadline = new Deadline("Deadline Name", true, "12/12/1999 1300");
         assertEquals("true", deadline.getStatus());
     }
 }

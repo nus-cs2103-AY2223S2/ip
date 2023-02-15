@@ -15,7 +15,7 @@ public class EventTest {
 
     @Test
     public void testGetStatus() {
-        Event event = new Event("Event Name", true, "1999-12-12", "1999-12-12");
+        Event event = new Event("Event Name", true, "12/12/1999 1300", "12/12/1999 1600");
         assertEquals("true", event.getStatus());
     }
 }
