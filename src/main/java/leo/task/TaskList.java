@@ -87,46 +87,48 @@ public class TaskList implements Serializable {
                 throw new InvalidCommandException();
             }
 
-            else if (Task.descCommands.contains(parsedRequest[0]) && parsedRequest.length <= 1) {
-                throw new EmptyFieldException();
-            }
+           if (Task.descCommands.contains(parsedRequest[0])) {
+                processDescriptiveRequest(parsedRequest);
+                return;
+           }
 
             switch (parsedRequest[0]) {
             case "help":
                 Ui.printHelp();
                 break;
             case "list":
-                Ui.printResponse("Here are your tasks, you legend!:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("%d) %s\n", i + 1, tasks.get(i));
-                }
-                Ui.printDivider();
-                break;
-            case "mark":
-                tasks.get(Parser.getTaskID(parsedRequest[1])).setDone();
-                break;
-            case "unmark":
-                tasks.get(Parser.getTaskID(parsedRequest[1])).setNotDone();
-                break;
-            case "delete":
-                deleteTask(Parser.getTaskID(parsedRequest[1]));
-                break;
-            case "find":
-                findTask(parsedRequest[1]);
-                if (foundTasks.isEmpty()) {
-                    Ui.printResponse("You've been caught offside my friend, no tasks found!");
-                    break;
-                }
-                Ui.printResponse("Here are the matching tasks in your list:");
-                for (int i = 0; i < foundTasks.size(); i++) {
-                    System.out.printf("%d) %s\n", foundTaskIndices.get(i), foundTasks.get(i));
-                }
-                Ui.printResponse("To perform any action on these tasks, use the stated indices.");
-                Ui.printDivider();
+                Ui.printList(tasks);
                 break;
             default:
-                addTask(parsedRequest);
-                break;
+                throw new InvalidCommandException();
+            }
+
+        } catch (LeoTaskException e) {
+            Ui.printError(e);
+        }
+    }
+
+    public void processDescriptiveRequest(String[] parsedRequest) throws LeoTaskException{
+        try {
+            if (parsedRequest.length <= 1) {
+                throw new EmptyFieldException();
+            }
+            switch (parsedRequest[0]) {
+                case "mark":
+                    tasks.get(Parser.getTaskID(parsedRequest[1])).setDone();
+                    break;
+                case "unmark":
+                    tasks.get(Parser.getTaskID(parsedRequest[1])).setNotDone();
+                    break;
+                case "delete":
+                    deleteTask(Parser.getTaskID(parsedRequest[1]));
+                    break;
+                case "find":
+                    Ui.printListWithIndices(foundTasks, foundTaskIndices);
+                    break;
+                default:
+                    addTask(parsedRequest);
+                    break;
             }
         } catch (LeoTaskException e) {
             Ui.printError(e);
@@ -139,44 +141,47 @@ public class TaskList implements Serializable {
             if (!Task.commands.contains(parsedRequest[0])) {
                 throw new InvalidCommandException();
             }
-            else if (Task.descCommands.contains(parsedRequest[0]) && parsedRequest.length <= 1) {
-                throw new EmptyFieldException();
+            if (Task.descCommands.contains(parsedRequest[0])) {
+                return processDescriptiveRequestGUI(parsedRequest);
             }
             switch (parsedRequest[0]) {
                 case "help":
                     response = Ui.getHelp();
                     break;
                 case "bye":
-                    response = "It was nice talking, see you soon!\n";
+                    response = Ui.exitGUI();
                     break;
                 case "list":
-                    response = "Here are your tasks, you legend!:\n";
-                    for (int i = 0; i < tasks.size(); i++) {
-                        response += String.format("%d) %s\n", i + 1, tasks.get(i));
-                    }
+                    response = Ui.getList(tasks);
                     break;
+                default:
+                    throw new InvalidCommandException();
+            }
+        } catch (LeoTaskException e) {
+            response = e.getMessage();
+        }
+        return response;
+    }
+
+    public String processDescriptiveRequestGUI(String[] parsedRequest){
+        String response = "";
+        try {
+            if (parsedRequest.length <= 1) {
+                throw new EmptyFieldException();
+            }
+            switch (parsedRequest[0]) {
                 case "mark":
-                    tasks.get(Parser.getTaskID(parsedRequest[1])).setDone();
-                    response = String.format("Well done on completing the task! Let me mark that as done! Campeon del mundo!\n%s\n", tasks.get(Parser.getTaskID(parsedRequest[1])));
+                    response = Ui.getMarkMessage(tasks, Parser.getTaskID(parsedRequest[1]));
                     break;
                 case "unmark":
-                    tasks.get(Parser.getTaskID(parsedRequest[1])).setNotDone();
-                    response = String.format("Ok, I've marked that as not done! Please get to it :(\n%s\n", tasks.get(Parser.getTaskID(parsedRequest[1])));
+                    response = Ui.getUnmarkMessage(tasks, Parser.getTaskID(parsedRequest[1]));
                     break;
                 case "delete":
                     response = deleteTaskGUI(Parser.getTaskID(parsedRequest[1]));
                     break;
                 case "find":
                     findTask(parsedRequest[1]);
-                    if (foundTasks.isEmpty()) {
-                        response = "You've been caught offside my friend, no tasks found!";
-                        break;
-                    }
-                    response = "Here are the matching tasks in your list:\n";
-                    for (int i = 0; i < foundTasks.size(); i++) {
-                        response += String.format("%d) %s\n", foundTaskIndices.get(i), foundTasks.get(i));
-                    }
-                    response += "To perform any action on these tasks, use the stated indices.";
+                    response = Ui.getListWithIndices(foundTasks, foundTaskIndices);
                     break;
                 default:
                     response = addTaskGUI(parsedRequest);

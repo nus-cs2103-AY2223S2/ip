@@ -24,9 +24,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String resourcePath) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(resourcePath));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -38,10 +38,23 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private static class DialogBoxUser extends DialogBox{
+        DialogBoxUser(String text, Image img) {
+            super(text, img, "/view/DialogBoxUser.fxml");
+        }
+    }
+
+    private static class DialogBoxLeo extends DialogBox{
+        DialogBoxLeo(String text, Image img) {
+            super(text, img, "/view/DialogBoxLeo.fxml");
+        }
+    }
+
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
@@ -49,11 +62,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBoxUser(text, img);
     }
 
     public static DialogBox getLeoDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBoxLeo(text, img);
         db.flip();
         return db;
     }
