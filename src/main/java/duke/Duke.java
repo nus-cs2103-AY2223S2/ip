@@ -13,7 +13,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDos;
 
 public class Duke extends Application {
     final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
@@ -279,7 +282,7 @@ public class Duke extends Application {
                 res = "Here are the matching tasks in your list:\n";
                 i = 1;
                 for (Task task : taskList) {
-                    if (task.description.contains(fileInputArr[1])) {
+                    if (task.getDescription().contains(fileInputArr[1])) {
                         res += i + ". " + task + "\n";
                         i++;
                     }

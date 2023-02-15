@@ -1,4 +1,6 @@
-package duke;
+package task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * ToDos is a variation of Tasks that carries a task description
@@ -7,6 +9,7 @@ package duke;
  * @since 0.0
  */
 public class ToDos extends Task {
+
     private int isDone;
 
     public ToDos(String description, Integer isDone) {
@@ -42,4 +45,3 @@ public class ToDos extends Task {
         return "[T][" + isDone + "]" + description;
     }
 }
-
