@@ -204,7 +204,7 @@ public class Sender {
      */
     public String addDoAfter(String taskDescription) throws DukeException {
         try {
-        DoAfter doAfter = new DoAfter("doafter", taskDescription, false);
+        DoAfter doAfter = new DoAfter("DA", taskDescription, false);
         tasks.addTask(doAfter);
         storage.addTask(doAfter.getStorageLine());
         return "I have added this new task:\n" + doAfter

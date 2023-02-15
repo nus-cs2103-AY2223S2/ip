@@ -50,7 +50,7 @@ public class Storage {
                 String[] nextLine = scanner.nextLine().split(" ", 3);
                 //first Word should be a number indicating if task has been completed or not. Initialise boolean value.
                 Boolean isComplete = nextLine[0].equals("1") ? true : false;
-                //second word should be either deadline, event, or to do.
+                //second word should be either deadline, event, to-do, or do-after.
                 String secondWord = nextLine[1];
                 //Rest of the message contains details about the task.
                 String bodyMessage = nextLine[2];
@@ -66,9 +66,11 @@ public class Storage {
                     case "todo":
                         ToDo taskToDo = new ToDo("todo", bodyMessage, isComplete);
                         tasks.add(taskToDo);
-                    case "doafter":
-                        DoAfter taskDoAfter = new DoAfter("doafter", bodyMessage, isComplete);
+                        break;
+                    case "DA":
+                        DoAfter taskDoAfter = new DoAfter("DA", bodyMessage, isComplete);
                         tasks.add(taskDoAfter);
+                        break;
                     default:
                         //do nothing, task is not valid
                 }
