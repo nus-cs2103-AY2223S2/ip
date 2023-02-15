@@ -27,12 +27,8 @@ public class Storage {
      * @param filePath the path of the file to be stored.
      */
     public Storage(String filePath) {
-        if (filePath == null) {
-            throw new IllegalArgumentException("File path cannot be null");
-        }
-        if (filePath.isBlank()) {
-            throw new IllegalArgumentException("File path cannot be blank");
-        }
+        assert filePath != null : "File path cannot be null";
+        assert !filePath.isBlank() : "File path cannot be blank";
 
         this.file = new File(filePath);
         if (!this.file.exists()) {
