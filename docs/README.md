@@ -2,7 +2,7 @@
 
 Duke is a program that lets users keep track of their tasks easily with simple commands.
 
----
+#
 ## Features 
 + Add & delete tasks to Duke's list along with their due date or start and end date
 + Mark & unmark tasks to show if it is completed or not
@@ -11,7 +11,7 @@ Duke is a program that lets users keep track of their tasks easily with simple c
 + Saves Duke's list when you want to exit & loads it when you open again
 + Reminds users of tasks happening in 10 days time when you open Duke
 
----
+#
 ## Usage
 
 ### `todo` - Adds a task with no date
@@ -123,7 +123,7 @@ Example of usage:
 
 `find reading week`
 
----
+#
 ## Command Summary
 
 | **Command** | **Format**                     | 
