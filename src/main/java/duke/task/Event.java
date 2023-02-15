@@ -24,6 +24,11 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Edit the information of an Event object.
+     * @param partToBeEdited
+     * @param content
+     */
     public void editInfo(String partToBeEdited, String content) {
         switch (partToBeEdited) {
         case "desc":

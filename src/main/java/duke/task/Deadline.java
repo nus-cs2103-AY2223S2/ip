@@ -29,35 +29,48 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Edit the information of a Deadline object.
+     * @param partToBeEdited
+     * @param content
+     */
     public void editInfo(String partToBeEdited, String content) {
         switch (partToBeEdited) {
-            case "desc":
-                this.description = content;
-                break;
-            case "by":
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                LocalDateTime dueDate = LocalDateTime.parse(content, formatter);
-                this.by = dueDate;
-                break;
-            default:
-                break;
+        case "desc":
+            this.description = content;
+            break;
+        case "by":
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+            LocalDateTime dueDate = LocalDateTime.parse(content, formatter);
+            this.by = dueDate;
+            break;
+        default:
+            break;
         }
     }
 
+    /**
+     * Get the task type of a Deadline object.
+     * @return String object
+     */
     @Override
     public String getTaskType() {
         return this.taskType;
     }
 
+    /**
+     * Get the deadline of the Deadline task.
+     * @return LocalDateTime object representing the due date of the task
+     */
     public LocalDateTime getDeadline() {
         return this.by;
     }
+
     /**
      * Message printed when a new Deadline task is added.
      *
      * @return String representing the Deadline task information.
      */
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a")) + ")";

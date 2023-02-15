@@ -62,6 +62,10 @@ public class Ui {
         return errorMsg;
     }
 
+    /**
+     * Display all the commands available for the users to use and how to use it.
+     * @return
+     */
     public String showHelp() {
         String availableHelp = "These are the commands I recognise given my age:\n"
                 + "- todo [task description]: add a task of type Todo\n"
@@ -168,10 +172,11 @@ public class Ui {
         return "No existing tasklist!";
     }
 
-    public String showReminders () {
-        return "BEEEP POOO BEEP POOO ~~ You have an upcoming deadline";
-    }
-
+    /**
+     * Show all the upcoming deadlines for the user when Shinchan is launched.
+     * @param tasks
+     * @return
+     */
     public String showUpcomingTasks(ArrayList<Deadline> tasks) {
         String str = "";
 
@@ -187,7 +192,7 @@ public class Ui {
             }
         }
 
-        return showLine() + "You have " + tasks.size() + " upcoming tasks due\n" + str;
+        return showLine() + "BEEEP POOO BEEP POOO ~~ You have " + tasks.size() + " upcoming tasks due\n" + str;
     }
 
     /**

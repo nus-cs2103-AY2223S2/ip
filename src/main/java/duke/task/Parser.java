@@ -1,6 +1,16 @@
 package duke.task;
 
-import duke.command.*;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.EditCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * Class for Parser object.
@@ -45,6 +55,10 @@ public class Parser {
         return arr;
     }
 
+    /**
+     * Split the command for deadline into command, task description and deadline.
+     * @param tempArr
+     */
     public static void splitDeadlineCommand(String[] tempArr) {
         String[] temp2;
         temp2 = tempArr[1].split("/", 2);
@@ -55,6 +69,10 @@ public class Parser {
         System.arraycopy(temp2, 0, arr, tempArr.length - 1, temp2.length);
     }
 
+    /**
+     * Split the command for event into command, task description from and by.
+     * @param tempArr
+     */
     public static void splitEventCommand(String[] tempArr) {
         String[] temp2;
         temp2 = tempArr[1].split("/");
@@ -73,9 +91,9 @@ public class Parser {
     public static Command parse(String command) {
         Command parsedCommand = null;
         String[] arr = splitCommand(command);
-        final String COMMAND_TYPE = arr[0].trim();
+        String commandType = arr[0].trim();
 
-        switch (COMMAND_TYPE) {
+        switch (commandType) {
         case BYE:
             parsedCommand = new ExitCommand();
             break;
@@ -115,8 +133,8 @@ public class Parser {
             parsedCommand = new EditCommand(arr[1].trim(), arr[2].trim(), arr[3].trim());
             break;
         case HELP:
-                parsedCommand = new HelpCommand();
-                break;
+            parsedCommand = new HelpCommand();
+            break;
         default:
             System.out.println("No such command!");
         }

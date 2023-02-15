@@ -73,11 +73,23 @@ public class AddCommand extends Command {
         this.by = by;
     }
 
+    /**
+     * Create a new Task object.
+     * @param tasks
+     * @param storage
+     * @return Task object
+     */
     public Task addToDo(TaskList tasks, Storage storage) {
         Task task = new Todo(taskDesc);
         return task;
     }
 
+    /**
+     * Create a new Task object.
+     * @param tasks
+     * @param storage
+     * @return Task object
+     */
     public Task addDeadline(TaskList tasks, Storage storage) {
         Task task = null;
         try {
@@ -91,6 +103,12 @@ public class AddCommand extends Command {
         return task;
     }
 
+    /**
+     * Create a new Task object.
+     * @param tasks
+     * @param storage
+     * @return Task object
+     */
     public Task addEvent(TaskList tasks, Storage storage) {
         Task task = new Event(taskDesc, from.substring(5), by.substring(3));
         return task;
@@ -98,7 +116,7 @@ public class AddCommand extends Command {
 
     /**
      * Add the task into the task list and update the task in the tasks.txt.
-     *  @param tasks
+     * @param tasks
      * @param ui
      * @param storage
      * @return
@@ -117,6 +135,7 @@ public class AddCommand extends Command {
             break;
         case EVENT:
             task = addEvent(tasks, storage);
+            break;
         default:
             break;
         }

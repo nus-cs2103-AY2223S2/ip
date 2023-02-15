@@ -40,6 +40,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Set the status of the task based on the input in the tasks.txt file.
+     * @param status
+     * @param task
+     */
     public void markTaskStatus(String status, Task task) {
         if (status.equals("0")) {
             task.markAsIncomplete();
@@ -48,6 +53,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Take in the String object which contains the deadline of the task and format it to a LocalDateTime object
+     * @param str
+     * @return a LocalDateTime object
+     */
     public Deadline formatDeadlineStr(String str) {
         String updatedStr = str.replace("(", "").replace(")", "").trim();
         String[] paraForDeadline = updatedStr.split("by: ", 2);
@@ -60,6 +70,12 @@ public class Storage {
         LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
         return new Deadline(paraForDeadline[0], dueDate);
     }
+
+    /**
+     * Format the String object which consists of the event start date and event end date.
+     * @param str
+     * @return
+     */
 
     public Event formatEventStr(String str) {
         String updatedStr = str.replace("(", "").replace(")", "").trim();
@@ -78,9 +94,9 @@ public class Storage {
 
     private Task convertStrToTask(String str) {
         Task task = null;
-        final String TASK_TYPE = str.substring(0, 1);
-        final String STATUS_OF_TASK = str.substring(4, 5);
-        switch (TASK_TYPE) {
+        String taskType = str.substring(0, 1);
+        final String statusOfTask = str.substring(4, 5);
+        switch (taskType) {
         case TODO:
             task = new Todo(str.substring(8));
             break;
@@ -93,7 +109,7 @@ public class Storage {
         default:
             break;
         }
-        markTaskStatus(STATUS_OF_TASK, task);
+        markTaskStatus(statusOfTask, task);
         return task;
     }
 

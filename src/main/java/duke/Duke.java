@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDateTime;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
@@ -7,8 +9,6 @@ import duke.task.Parser;
 import duke.task.Reminder;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 
 /**
  * Class for the Duke object.

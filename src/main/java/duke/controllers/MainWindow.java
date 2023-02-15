@@ -1,9 +1,9 @@
 package duke.controllers;
 
+import java.time.LocalDateTime;
+
 import duke.Duke;
-import duke.storage.Storage;
 import duke.task.Reminder;
-import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,8 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.time.LocalDateTime;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -51,6 +49,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)
         );
     }
+
+    /**
+     * Display the reminder message to inform users if there is any upcoming deadline.
+     */
 
     public void showReminders() {
         dialogContainer.getChildren().addAll(

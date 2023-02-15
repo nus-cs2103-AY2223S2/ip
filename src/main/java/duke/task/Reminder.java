@@ -1,12 +1,15 @@
 package duke.task;
 
-import duke.ui.Ui;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import duke.ui.Ui;
+
+/**
+ * Reminder class to send reminders about any upcoming deadlines.
+ */
 public class Reminder {
-    LocalDateTime timeToSendReminders;
+    private LocalDateTime timeToSendReminders;
 
     public Reminder(LocalDateTime now) {
         timeToSendReminders = now.plusHours(24);
