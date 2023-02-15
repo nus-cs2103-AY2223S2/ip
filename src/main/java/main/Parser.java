@@ -55,11 +55,16 @@ public class Parser {
             } else if (command.startsWith("event")) {
                 String[] str2 = command.substring(6).split("/");
                 try {
-                    return new AddEventCommand(str2[0],
-                            LocalDate.parse(str2[1].substring(5, 15)), LocalDate.parse(str2[2].substring(3, 13)));
+                    LocalDate startDate = LocalDate.parse(str2[1].substring(5, 15));
+                    LocalDate endDate = LocalDate.parse(str2[2].substring(3, 13));
+                    if (endDate.isBefore(startDate)) {
+                        throw new DukeException("ending date cannot be before starting date");
+                    }
+                    return new AddEventCommand(str2[0], startDate, endDate);
                 } catch (DateTimeException e) {
                     throw new DukeException("Please enter a valid date in the form YYYY-MM-DD");
                 }
+
             } else {
                 throw new DukeException("Please input a valid command");
             }
