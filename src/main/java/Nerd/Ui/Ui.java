@@ -83,6 +83,9 @@ public class Ui {
      * @return The list of tasks currently in the tasklist.
      */
     public String printListResponse(TaskList list) {
+        if(list.getSize() == 0) {
+            return "Current Task List is empty!";
+        }
         String output = "Here is the current list:\n";
         for (int i = 0; i < list.getSize(); i++) {
             Task t = list.getTask(i);
