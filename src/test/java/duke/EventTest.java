@@ -7,8 +7,8 @@ public class EventTest {
     @Test
     public void TestAdditionOfEventToTaskList() {
         TaskList tasks = new TaskList();
-        tasks.addTask("test task /from 2pm /to 6pm", "event");
-        assertEquals("1. [E][ ] test task (from: 2pm to: 6pm)\n", tasks.tasksToStringFormat());
+        tasks.addEvent("test task /from 2pm /to 6pm");
+        assertEquals("1. [E][ ] test task (from: 2pm to: 6pm)\n", tasks.getTaskList());
     }
 
 }

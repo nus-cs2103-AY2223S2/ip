@@ -14,58 +14,24 @@ public class Parser {
      * @throws DukeException
      */
     public static String parse(String userInput, TaskList lst) throws DukeException {
-
-
-        String[] inputArr = userInput.split(" ", 2);
-
         if (userInput.equals("bye")) {
-
-            return "bye";
-
+            return ui.exit();
         } else if (userInput.equals("list")) {
-
-            return "Here are the tasks in your list:\n" + lst.getTaskList();
-
+            return ui.listCommandMessage() + lst.getTaskList();
         } else if (userInput.startsWith("mark")) {
-
-            String details = inputArr[1];
-            int taskNum = Integer.parseInt(details);
-            return lst.markTask(taskNum);
-
+            return lst.markTask(userInput);
         } else if (userInput.startsWith("unmark")) {
-
-            String details = inputArr[1];
-            int taskNum = Integer.parseInt(details);
-            return lst.unmarkTask(taskNum);
-
+            return lst.unmarkTask(userInput);
         } else if (userInput.startsWith("todo")) {
-
-            String details = inputArr[1];
-            return lst.addTask(details, "todo");
-
+            return lst.addToDo(userInput);
         } else if (userInput.startsWith("deadline")) {
-
-            String details = inputArr[1];
-            return lst.addTask(details, "deadline");
-
+            return lst.addDeadline(userInput);
         } else if (userInput.startsWith("event")) {
-
-            String details = inputArr[1];
-            return lst.addTask(details, "event");
-
+            return lst.addEvent(userInput);
         } else if (userInput.startsWith("delete")) {
-
-            String details = inputArr[1];
-            int taskNum = Integer.parseInt(details);
-            return lst.deleteTask(taskNum);
-
+            return lst.deleteTask(userInput);
         } else if (userInput.startsWith("find")) {
-            try {
-                String keyword = inputArr[1];
-                return lst.findTask(keyword);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return "Please enter the correct keyword";
-            }
+            return lst.findTask(userInput);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

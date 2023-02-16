@@ -8,15 +8,15 @@ public class Ui {
     /**
      * Displays a greeting to the user when he first opens the application
      */
-    public void greet() {
-        System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
+    public String greet() {
+        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
     /**
      * Displays a goodbye message to the user when he closes the application
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -24,5 +24,9 @@ public class Ui {
      */
     public void showLoadingError() {
         System.out.println("There was an error in loading your file");
+    }
+
+    public String listCommandMessage() {
+        return "Here are the tasks in your list:\n";
     }
 }
