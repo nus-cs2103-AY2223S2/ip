@@ -4,7 +4,6 @@ Welcome to CorkyNotes! CorkyNotes is a desktop app for managing your tasks, opti
 
 
 ## Features
-</br>
 
 
 ### Create different tasks
@@ -39,7 +38,7 @@ java -jar ip-0.2.jar -mode gui or simply java -jar ip-0.2.jar to use the GUI ins
 
 
 ## Usage
-</br>
+
 
 ### Add todo: `todo`
 Adds a todo to the list of tasks.
@@ -103,7 +102,7 @@ Now you have 3 tasks in the list.
 ```
 
 ### Add event: `Period Task`
-Adds an event to the list of tasks.
+Adds an period task to the list of tasks.
 
 Command format:
 
@@ -117,65 +116,61 @@ Example of usage:
 
 Expected outcome:
 
-Nee added this task:
-  [E][ ] play ctf (at: Sep 20 2021, 11:59 PM)
-Nee has 1 task in the list.
+```
+Got it. I've added this task:
+[P][ ] watch football (from: Nov 24 2023, 12:00 PM to Nov 24 2023, 2:00 PM)
+Now you have 4 tasks in the list.
+```
 
-Mark Task as Done: done
+### Mark Task as Done: `done`
 Marks the task as completed.
 
-Format: done [index]
+Format: `done [index]`
 
-💡 Ensure index is within {1, 2, ... list_size}
+💡 Ensure index is within `{1, 2, ... list_size}`
 
 Example of usage:
 
-done 2 marks the second task in the list as done.
+`done 2` marks the second task in the list as done.
 
 Expected outcome:
 
-Nice! Task done:
-  [T][X] get coffee
+```
+Nice! I've marked this task as done:
+[D][X] do the dishes (by: Nov 24 2023, 12:00 PM)
+```
 
-Find Tasks: find
+### Find Tasks: `find`
 Lists all tasks that match the keyword.
 
 Command format:
 
-find [keyword]
+`find [keyword]`
 
 Example of usage:
 
-find apple lists all tasks that contain apple.
+`find dishes` lists all tasks that contain dishes.
 
 
-Undo commands: undo
-Command format:
 
-undo [number_of_commands]
-
-Example of usage:
-
-undo 1 Undos one command and returns the list of tasks.
-
-💡 Ensure there is a previous command to undo.
-
-
-List tasks: list
+### List tasks: `list`
 Lists all tasks that have been added.
 
 Sample task list:
 
-[T][X] get coffee
-[D][ ] do ip (by: Dec 12 2021, 11:59 PM)
-[E][ ] play ctf (at: Sep 9 2021, 8:00 PM)
+```
+1. [T][ ] see the sunrise
+2. [D][X] do the dishes (by: Nov 24 2023, 12:00 PM)
+3. [E][ ] watch football (from: Nov 24 2023, 12:00 PM to Nov 24 2023, 2:00 PM)
+4. [P][ ] watch football (from: Nov 24 2023, 12:00 PM to Nov 24 2023, 2:00 PM)
+```
 
-Exit the program: bye
+### Exit the program: `bye`
 Exits the program and closes the GUI window.
 
 Example of usage:
 
-bye
+`bye`
 
 Expected outcome:
 
