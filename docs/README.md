@@ -55,7 +55,7 @@ Got it, I've added this task:
 Now you have 2 tasks in the list
 ```
 
-### `EVENT DESCRIPTION /FROM TIME /TO TIME` - Add a Deadline Task
+### `EVENT DESCRIPTION /FROM TIME /TO TIME` - Add an Event Task
 
 This will add an event with a duration to your task list.
 
@@ -75,7 +75,7 @@ Got it, I've added this task:
 Now you have 3 tasks in the list
 ```
 
-### `LIST` - Add a Deadline Task
+### `LIST` - List all the current tasks
 
 This will prompt Duke to show the list of tasks you currently have.
 
