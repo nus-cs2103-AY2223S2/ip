@@ -1,7 +1,7 @@
 package duncan;
 
 import command.*;
-import exception.DukeException;
+import exception.DuncanException;
 import exception.UnknownInputException;
 import exception.EmptyDescriptionException;
 
@@ -9,7 +9,7 @@ import exception.EmptyDescriptionException;
  * Represents a parser object to parse input commands
  */
 public class Parser {
-    private DuncanList dukelist;
+    private DuncanList duncanList;
     private DuncanList archive;
     private Storage storage;
     private Ui ui;
@@ -23,21 +23,21 @@ public class Parser {
      * @param ui a Ui to handle interaction with the user
      */
     public Parser (DuncanList duncanList, DuncanList archive, Storage storage , Ui ui) {
-        this.dukelist = duncanList;
+        this.duncanList = duncanList;
         this.archive = archive;
         this.storage = storage;
         this.ui = ui;
     }
 
     /**
-     * Returns the respective DukeExceptions
+     * Returns the respective DuncanExceptions
      *
-     * @param firstWord the String that used to check the type of DukeException to return
+     * @param firstWord the String that used to check the type of DuncanException to return
      * @return EmptyDescriptionException if the firstWord is a recognized task name, and
      * UnknownInputException if it is not recognized.
      */
 
-    private DukeException checkAddExceptions(String firstWord) {
+    private DuncanException checkAddExceptions(String firstWord) {
 
         boolean isTodo = firstWord.equals("todo");
         boolean isDeadline = firstWord.equals("deadline");
@@ -59,7 +59,7 @@ public class Parser {
 
     public Command getArchiveCommand(String[] array) {
         if (array.length == 2) {
-            return new ArchiveCommand(array[1], dukelist, archive);
+            return new ArchiveCommand(array[1], duncanList, archive);
         } else {
             return new ListCommand(this.archive, this.ui);
         }
@@ -73,34 +73,34 @@ public class Parser {
      * @throws EmptyDescriptionException when there is a valid command with no content
      * @throws UnknownInputException when the input text doe not correspond to any known command
      */
-    public Command parse(String inputText) throws DukeException{
+    public Command parse(String inputText) throws DuncanException {
         String[] array = inputText.split(" ", 2);
         try {
             String firstWord = array[0];
             boolean isWrongLength = array.length != 2;
             if (inputText.equals("bye")) {
-                return new ExitCommand(this.dukelist, this.archive, this.storage);
+                return new ExitCommand(this.duncanList, this.archive, this.storage);
             } else {
                 switch (firstWord) {
                     case "list":
-                        return new ListCommand(this.dukelist, this.ui);
+                        return new ListCommand(this.duncanList, this.ui);
                     case "mark":
-                        return new MarkCommand(array[1], true, dukelist);
+                        return new MarkCommand(array[1], true, duncanList);
                     case "unmark":
-                        return new MarkCommand(array[1], false, dukelist);
+                        return new MarkCommand(array[1], false, duncanList);
                     case "delete":
-                        return new DeleteCommand(array[1], dukelist);
+                        return new DeleteCommand(array[1], duncanList);
                     case "find":
-                        return new FindCommand(array[1], dukelist);
+                        return new FindCommand(array[1], duncanList);
                     case "archive":
                         return getArchiveCommand(array);
                     case "retrieve":
-                        return new RetrieveCommand(array[1], dukelist, archive);
+                        return new RetrieveCommand(array[1], duncanList, archive);
                     default:
                         if (isWrongLength) {
                             throw checkAddExceptions(firstWord);
                         }
-                        return new AddCommand(array[0], array[1], dukelist);
+                        return new AddCommand(array[0], array[1], duncanList);
                     }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
