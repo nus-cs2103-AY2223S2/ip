@@ -25,8 +25,7 @@ public class Parser {
      * @throws DukeUnknownInputException
      */
     public Command parse(String fullCommand) throws DukeUnknownInputException {
-        String sanitisedCommand = fullCommand.trim();
-        String[] commands = sanitisedCommand.split(" ", 2);
+        String[] commands = fullCommand.split(" ", 2);
         String command = commands[0];
         String params;
         if (commands.length != 2) {
@@ -34,7 +33,7 @@ public class Parser {
         } else {
             params = commands[1];
         }
-        switch (command.toLowerCase()) {
+        switch (command) {
         case "list":
             return new ListCommand(params);
         case "mark":

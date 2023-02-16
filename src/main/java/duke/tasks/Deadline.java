@@ -69,47 +69,4 @@ public class Deadline extends Task {
     public String toText() {
         return String.format("D %d %s /by %s\n", super.isDone ? 1 : 0, super.name, by);
     }
-
-    /**
-     * Returns the name of the Deadline.
-     *
-     * @return The name of the Deadline.
-     */
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    /**
-     * Returns true if the object is the same as the Deadline, false otherwise.
-     *
-     * @param o Object to be compared to.
-     * @return True if the object is a Deadline and shares the same name;
-     *         false otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof Deadline) {
-            Deadline d = (Deadline) o;
-            return d.getName().equals(this.getName());
-        }
-        return false;
-    }
-
-    /**
-     * Returns the hashcode of the Deadline.
-     *
-     * @return The corresponding hashcode.
-     */
-    @Override
-    public int hashCode() {
-        int result = 19;
-        if (this.getName() != null) {
-            result = 31 * result + this.getName().hashCode();
-        }
-        if (by != null) {
-            result = 31 * result + by.hashCode();
-        }
-        return result;
-    }
 }

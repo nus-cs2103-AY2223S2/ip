@@ -19,7 +19,6 @@ public class Task {
      * @param name A string representing the name of the task.
      */
     public Task(String name) {
-        assert name != null;
         this.name = name;
         this.isDone = false;
     }
