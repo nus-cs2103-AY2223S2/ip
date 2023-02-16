@@ -74,9 +74,7 @@ public class Ui {
         display(this.welcome);
     };
 
-    public String getWelcome() {
-        return this.welcome;
-    }
+
 
     /**
      * Displays text on the screen.
@@ -92,5 +90,8 @@ public class Ui {
      */
     public void showError(Exception err) {
         display(err.getMessage());
+    }
+    public String getWelcome() {
+        return this.welcome;
     }
 }
