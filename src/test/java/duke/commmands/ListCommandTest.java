@@ -1,12 +1,13 @@
 package duke.commmands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.commands.ListCommand;
 import duke.tasks.TodoTask;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListCommandTest {
     static final String NORMAL_INPUT = "list";

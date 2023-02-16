@@ -21,9 +21,22 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    public static final String EXIT_MESSAGE = "Farewell. Always at your service.";
+    public static final String GREET_MESSAGE = "Hello, I'm Ekud! What can I do for you?";
+    private static final String LOGO =
+            " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+
+    enum MessageOwner {
+        DUKE,
+        USER;
+    }
     private static final String USER_IMAGE_PATH = "/images/doomer.jpg";
     private static final String DUKE_IMAGE_PATH = "/images/chad.jpg";
-
     private Duke duke;
     @FXML
     private ScrollPane scrollPane;
@@ -89,19 +102,5 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDialog(message, ownerImage, isFlipped)
         );
-    }
-
-    public static final String EXIT_MESSAGE = "Farewell. Always at your service.";
-    public static final String GREET_MESSAGE = "Hello, I'm Ekud! What can I do for you?";
-    private static final String LOGO =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-
-    enum MessageOwner {
-        DUKE,
-        USER
     }
 }

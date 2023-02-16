@@ -1,8 +1,10 @@
 package duke.tasks;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class DeadlineTaskTest {
     static final String SPACED_TASK_NAME = "deadline test";

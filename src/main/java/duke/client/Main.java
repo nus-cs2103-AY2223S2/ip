@@ -6,10 +6,9 @@ package duke.client;
 import java.io.IOException;
 import java.net.URL;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.client.components.MainWindow;
-import duke.Duke;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
