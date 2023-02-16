@@ -33,7 +33,16 @@ public class Parser {
         return s.equalsIgnoreCase("bye");
     }
 
-    public String runCommand2(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    /**
+     * This method runs the main command that the user inputs to Duke.
+     *
+     * @param inputCommand The command for Duke to process.
+     * @param tasks The TaskList for Duke to process.
+     * @param storage The storage for Duke's files.
+     * @return The String representation of Duke's response.
+     * @throws DukeException
+     */
+    public String runCommand(String inputCommand, TaskList tasks, Storage storage) throws DukeException {
         int selectedNum;
         String commandParams;
         String commandResponse;
