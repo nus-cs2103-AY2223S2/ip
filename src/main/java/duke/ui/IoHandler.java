@@ -104,6 +104,13 @@ public interface IoHandler {
      * @return Duke's goodbye.
      */
     public String produceGoodbyeOutput();
+
+    /**
+     * Undoes the previous Ouput of Duke.
+     *
+     * @return null
+     */
+    public String undoOutput();
     // endregion
 
 }

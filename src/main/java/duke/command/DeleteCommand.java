@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
         Integer taskNum = ui.getTaskNum();
         String s = tasks.delete(taskNum);
         store.saveToFile(tasks);
-        return ui.produceDukeOutput("\tNoted. I've removed this task:\n\t  " + s + "\n" + "\tNow you have "
+        return ui.produceDukeOutput("Noted. I've removed this task:\n\t" + s + "\n" + "Now you have "
                 + Integer.toString(tasks.size()) + " tasks in the list.\n");
     };
 }

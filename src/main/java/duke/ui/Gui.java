@@ -12,6 +12,8 @@ public class Gui implements IoHandler {
     private String command;
     private String others;
 
+    public Gui() {}
+
     /**
      * Constuctor for Gui.
      *
@@ -42,7 +44,7 @@ public class Gui implements IoHandler {
 
     @Override
     public String produceInputAsOutput() {
-        return produceDukeOutput("\tDuke: " + others.strip() + "\n");
+        return produceDukeOutput("Duke: " + others.strip() + "\n");
     }
 
     @Override
@@ -123,10 +125,10 @@ public class Gui implements IoHandler {
 
     @Override
     public String produceTaskListOutput(TaskList tasks) {
-        String ls = "\tHere are the tasks in your list:\n";
+        String ls = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task temp = tasks.get(i);
-            ls = ls + "\t" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
+            ls = ls + "" + Integer.toString(i + 1) + "." + temp.toString() + "\n";
         }
         return produceDukeOutput(ls);
     }
@@ -139,6 +141,11 @@ public class Gui implements IoHandler {
     @Override
     public String produceExceptionOutput(String message) {
         return produceDukeOutput("\t" + message + "\n");
+    }
+
+    @Override
+    public String undoOutput() {
+        return null;
     }
 
 }

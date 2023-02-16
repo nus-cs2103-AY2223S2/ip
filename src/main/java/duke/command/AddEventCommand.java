@@ -24,7 +24,7 @@ public class AddEventCommand extends Command {
         Event temp = new Event(data[0], data[1], data[2]);
         tasks.add(temp);
         store.saveToFile(tasks);
-        return ui.produceDukeOutput("\tGot it. I've added this task:\n" + "\t  " + temp.toString()
-                + "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
+        return ui.produceDukeOutput("Got it. I've added this task:\n" + "\t" + temp.toString()
+                + "\nNow you have " + Integer.toString(tasks.size()) + " tasks in the list.\n");
     };
 }

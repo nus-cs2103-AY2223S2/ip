@@ -7,28 +7,23 @@ import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.task.History;
 import duke.task.TaskList;
 import duke.ui.Gui;
 
 /**
- * The Duke class represents a CLI chatbot that performs operations based on CLI
- * user input.
+ * The Duke class represents a CLI chatbot that performs operations based on CLI user input.
  * <p>
- * Currently, Duke accepts the commands:
- * {@code echo, list, mark, unmark, todo, deadline, event, bye}
+ * Currently, Duke accepts the commands: {@code echo, list, mark, unmark, todo, deadline, event, bye}
  */
 public class Duke {
     private TaskList tasks;
     private Storage store;
     private Gui gui;
-    private History history;
 
     /**
      * Constructs Duke.
      */
     public Duke() {
-        history = History.getInstance();
         try {
             store = new Storage("src/main/resources/duke.txt");
             tasks = store.loadFromFile();
@@ -50,9 +45,6 @@ public class Duke {
             String command = gui.getCommand();
             Command c = Parser.parseCommand(command);
             String response = c.execute(tasks, gui, store);
-            if (response != "Undid last command") {
-                history.addState(tasks);
-            }
 
             // from https://stackoverflow.com/questions/21974415
             if (c.canExit()) {

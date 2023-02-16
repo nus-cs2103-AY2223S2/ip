@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.storage.History;
 import duke.storage.Storage;
-import duke.task.History;
 import duke.task.TaskList;
 import duke.ui.IoHandler;
 
@@ -18,9 +18,8 @@ public class UndoCommand extends Command {
     @Override
     public String execute(TaskList tasks, IoHandler ui, Storage store) throws DukeException {
         ui.throwAwayInput();
-        tasks.setState(history.undoState());
-        store.saveToFile(tasks);
-        return ui.produceDukeOutput("Undid last command");
+        tasks.setState(history.undoTaskState());
+        return ui.undoOutput();
     }
 
 }

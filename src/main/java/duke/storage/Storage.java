@@ -63,6 +63,7 @@ public class Storage {
 
             out.close();
             temp.close();
+            History.getInstance().addTaskState(tasks);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -85,10 +86,11 @@ public class Storage {
 
             in.close();
             temp.close();
-
+            History.getInstance().addTaskState(output);
             return output;
         } catch (EOFException e) {
             // do nothing, expected from empty save file
+            History.getInstance().addTaskState(new TaskList());
         } catch (Exception e) {
             throw new DukeException("Unable to read file: " + e.getMessage());
         }

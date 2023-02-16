@@ -22,7 +22,7 @@ public class MarkCommand extends Command {
         Integer taskNum = ui.getTaskNum();
         String s = tasks.mark(taskNum);
         store.saveToFile(tasks);
-        return ui.produceDukeOutput("\tNice! I've marked this task as done:\n\t  " + s + "\n");
+        return ui.produceDukeOutput("Nice! I've marked this task as done:\n\t" + s + "\n");
     };
 
 }

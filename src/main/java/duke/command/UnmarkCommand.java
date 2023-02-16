@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
         Integer taskNum = ui.getTaskNum();
         String s = tasks.unmark(taskNum);
         store.saveToFile(tasks);
-        return ui.produceDukeOutput("\tOK, I've marked this task as not done yet:" + "\n\t  " + s + "\n");
+        return ui.produceDukeOutput("OK, I've marked this task as not done yet:" + "\n\t" + s + "\n");
     };
 
 }
