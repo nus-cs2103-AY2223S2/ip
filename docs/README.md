@@ -63,7 +63,6 @@ Add a deadline task called "return book" with a finish-by date of Aug 30 2023 8:
 [D][] return book (by: Aug 30 2023 08:00)
 ```
 
-
 ### `event DESCRIPTION /from DATE(DD/MM/YYYY hh:mm) /to DATE(DD/MM/YYYY hh:mm)`
 
 Add an event task to the list with the given start and end dates.
@@ -85,7 +84,7 @@ Add an event task called "surprise holiday" with a start date of May 8 2023 0:00
 
 View a list of all added tasks.
 
-Example of usage:
+Example of usage: 
 
 `list'
 
@@ -94,7 +93,7 @@ Example of usage:
 
 Delete a task from the list based on its index number.
 
-Example of usage:
+Example of usage: 
 
 `delete 2`
 
@@ -112,6 +111,6 @@ Example of usage:
 
 Mark a task from the list as NOT finished based on its index number.
 
-Example of usage:
+Example of usage: 
 
 `unmark 1`
