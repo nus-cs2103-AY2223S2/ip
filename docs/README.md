@@ -1,14 +1,6 @@
 # ChadBot 
 Chadbot application is designed for user to **manage their day-to-day tasks**. It
-is optimized for use via Command Line Interface (CLI) and Graphical User Interface (GUI).
-
-<br/>
-
-<div align="center">
- <img src="./Ui.png" alt="UI">
-</div>
- 
-<br/>
+is optimized for use via Command Line Interface (CLI) and Graphical User Interface (GUI). With ChadBot, you will never need to worry about missing your event and deadline again!
  
  ## Content
 - [Quick Start](#quick-start)
@@ -33,8 +25,13 @@ is optimized for use via Command Line Interface (CLI) and Graphical User Interfa
 2. Download the latest `chad.jar` from [here](https://github.com/Jnjy/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for your ChadBot.
 4. Open a command terminal, cd into the folder you put the `jar` file in, and use the `java -jar chad.jar` command to run the application.
-5. Proceed to explore more on what ChadBot has to offer.
+5. ChadBot will launch and you will see the screen below. You may then proceed to explore more on what ChadBot has to offer.
 
+<br/>
+
+<div align="center">
+ <img src="./Ui.png" alt="UI">
+</div>
 
 ## Features 
 
@@ -59,6 +56,9 @@ Great! I've added this task for you
  [T][ ] CS2103T Week 6 Task 
 You have 1 tasks in the list.
 ```
+
+<br/>
+
 ### Add a Deadline
 
 Adds a deadline task into the current task list.
@@ -81,6 +81,8 @@ Great! I've added this task for you
  [D][ ] CS2103T UG Submission (by: Feb 17 2023, 11:59PM) 
 You have 1 tasks in the list.
 ```
+
+<br/>
 
 ### Add an Event
 
@@ -105,6 +107,9 @@ Great! I've added this task for you
  [E][ ] TP Project (from: Feb 14 2023, 11:59PM to: Apr 14 2023, 11:59PM) 
 You have 13 tasks in the list.
 ```
+
+<br/>
+
 ### Find Task by Keyword
 
 Find task with specified keyword in the current task list.
@@ -124,11 +129,18 @@ find CS2103T
 [D][ ] CS2103T UG Submission (by: Feb 17 2023, 11:59PM)
 ```
 
+<br/>
+
 ### View Task List
 
 View the current task list.
 
 **Command Format:** `list`
+
+**Example of usage:**
+```markdown
+list
+```
 
 **Expected outcome:**
 *Returns all item in the task list.*
@@ -137,6 +149,9 @@ View the current task list.
 2: [D][ ] CS2103T UG Submission (by: Feb 17 2023, 11:59PM)
 3: [E][ ] TP Project (from: Feb 14 2023, 11:59PM to: Apr 14 2023, 11:59PM)
 ```
+
+<br/>
+
 ### Mark Task as Done
 
 Mark task of specified index in the current task list as **done**.
@@ -158,6 +173,8 @@ Nice! I have marked this task as done
  [T][X] CS2103T Week 6 Task
 ```
 
+<br/>
+
 ### Mark Task as UnDone
 
 Mark task of specified index in the current task list as **undone**.
@@ -178,6 +195,8 @@ unmark 11
 Aww! One more task on the list 
  [T][ ] CS2103T Week 6 Task
 ```
+
+<br/>
 
 ### Delete a Task
 
@@ -201,13 +220,15 @@ Noted. I've removed this task:
 Now you have 12 tasks in the list.
 ```
 
+<br/>
+
 ### Exiting the Program
 
 Exit the Program.
 
 **Command Format:** `bye`
 
-**Expected of usage:**
+**Example of usage:**
 ```markdown
 bye
 ```
@@ -217,6 +238,8 @@ bye
 ```markdown
 bella ciao
 ```
+
+<br/>
 
 ## Command Summary
 | Index |                   Commands                    |                     Command Format                      |                        Example Usage                         | 
