@@ -16,37 +16,29 @@ public class Parser {
         if (combined.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
             return "bye";
-        }
-        //Displays the list of items
-        if (combined.equals("list")) {
+        } else if (combined.equals("list")) {
+            //Displays the list of items
             return TaskList.displayList(array);
-        }
-        //Mark the task as done
-        else if (splitInput[0].equals("mark")) {
+        } else if (splitInput[0].equals("mark")) {
+            //Mark the task as done
             return TaskList.markTask(array, splitInput);
-        }
-        //Unmark the task as done
-        else if (splitInput[0].equals("unmark")) {
+        } else if (splitInput[0].equals("unmark")) {
+            //Unmark the task as done
             return TaskList.unmarkTask(array, splitInput);
-        }
-        //Creates a Deadline type Task
-        else if (splitInput[0].equals("deadline")) {
+        } else if (splitInput[0].equals("deadline")) {
+            //Creates a Deadline type Task
             return Deadline.createDeadlineTask(array, splitInput);
-        }
-        //Creates an Event type Task
-        else if (splitInput[0].equals("event")) {
+        } else if (splitInput[0].equals("event")) {
+            //Creates an Event type Task
             return Event.createEventTask(array, splitInput);
-        }
-        //Creates a Todo type Task
-        else if (splitInput[0].equals("todo")) {
+        } else if (splitInput[0].equals("todo")) {
+            //Creates a Todo type Task
             return Todo.createTodoTask(array, splitInput);
-        }
-        //Deletes a Task
-        else if (splitInput[0].equals("delete")) {
+        } else if (splitInput[0].equals("delete")) {
+            //Deletes a Task
             return TaskList.deleteTask(array, splitInput);
-        }
-        //Finds a Task
-        else if (splitInput[0].equals("find")) {
+        } else if (splitInput[0].equals("find")) {
+            //Finds a Task
             return TaskList.searchTask(array, splitInput);
         } else {
             try {
