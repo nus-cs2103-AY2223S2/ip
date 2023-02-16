@@ -32,6 +32,8 @@ Examples:
 1. `todo read book`
 2. `todo buy milk`
 
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
+
 -------------------
 ### 2. Adding a `deadline` task
 #### `deadline <deadline name> /by <deadline>`
@@ -40,6 +42,8 @@ Examples:
 2. `deadline CS2105 assignment 1 /by 18/02/2023 23:59`
 
 Note that time has to be in DD/MM/YYYY HH:mm format.
+
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
 ### 3. Adding an `event` task
@@ -50,10 +54,14 @@ Examples:
 
 Note that time has to be in DD/MM/YYYY HH:mm format.
 
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
+
 -------------------
 ### 4. `list` all tasks
 #### `list`
 Tasks will be loaded from task log file.
+
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
 ### 5. `delete` task
@@ -64,6 +72,8 @@ Example:
 Task corresponding to its task index in task list will be deleted.
 Warning: this command is irreversible.
 
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
+
 -------------------
 ### 6. `mark` task as done
 #### `mark <task index>`
@@ -71,6 +81,8 @@ Example:
 `mark 3`
 
 Task corresponding to its task index in task list will be marked as done.
+
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
 ### 7. `unmark` task
@@ -80,11 +92,15 @@ Example:
 
 Task corresponding to its task index in task list will be unmarked.
 
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
+
 -------------------
 ### 8. `clear` all tasks
 #### `clear`
 
 Clears all active tasks from task list.
+
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
 ### 9. Add a new `note`
@@ -93,9 +109,13 @@ Example:
 1. `note Jack wants a watch as a birthday gift`
 2. `note My waist size is 30`
 
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
+
 -------------------
 ### 10. Open current notes with `opennotes`
 #### `opennotes`
+
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
 ### 11. Clear current notes with `clearnotes`
@@ -103,8 +123,12 @@ Example:
 
 Warning: this command is irreversible.
 
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
+
 -------------------
 ### 12. Open command list with `help`
 #### `help`
+
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 
