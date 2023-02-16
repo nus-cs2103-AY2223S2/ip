@@ -19,6 +19,7 @@ public class DukeGui extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duchess");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
