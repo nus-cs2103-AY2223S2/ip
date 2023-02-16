@@ -5,6 +5,7 @@ import seedu.duke.TaskList;
 import seedu.duke.Ui;
 
 public class MarkCommand extends Command {
+    public static final String COMMAND = "mark";
     private String[] tokens;
 
     public MarkCommand(String[] tokens) {
@@ -15,7 +16,7 @@ public class MarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int taskNumber = Character.getNumericValue(tokens[1].charAt(0));
         tasks.mark(taskNumber, storage);
-        ui.printMarkingDone(tasks.get(taskNumber));
+        ui.showMarkingDone(tasks.get(taskNumber));
     }
 
     @Override
