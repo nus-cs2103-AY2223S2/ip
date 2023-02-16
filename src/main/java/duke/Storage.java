@@ -7,8 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// class Storage - handles the loading of data when duke is run and
-// saving of data when duke is closed
+/**
+ * handles the loading of data when duke is run and saving of data when duke is closed
+ */
 class Storage {
     private String filePath;
 
@@ -16,6 +17,9 @@ class Storage {
         this.filePath = s;
     }
 
+    /**
+     * Loads stored data from data.txt and stores it in an ArrayList
+     */
     public ArrayList<Task> load() {
         assert this.filePath.length() > 0 : "filePath should not be empty";
         File file = new File(this.filePath);
@@ -40,7 +44,9 @@ class Storage {
         }
         return tasks;
     }
-
+    /**
+     * Helper method for load(), helps convert stored string into Task objects
+     */
     public static void loadSaved(String s, ArrayList<Task> tasks) {
         assert tasks.size() >= 0 : "Number of tasks should be a positive number";
         if (s.substring(0, 1).equals("T")) {
@@ -71,6 +77,9 @@ class Storage {
         }
     }
 
+    /**
+     * Saves data from a TaskList into data.txt in String format
+     */
     public void saveData(TaskList t) {
         ArrayList<Task> tasks = t.getTasks();
         assert tasks.size() >= 0 : "Number of tasks should be a positive number";
