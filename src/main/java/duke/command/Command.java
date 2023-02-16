@@ -12,20 +12,11 @@ public abstract class Command {
     /**
      * Abstract method to be used by the other commands from inherited class.
      *
-     * @param tl       - list of tasks.
-     * @param storage  - harddisk store using textfile.
+     * @param tl      - list of tasks.
+     * @param storage - harddisk store using textfile.
      * @return String  - returns the result of the command.
      */
     public abstract String execute(TaskList tl, Storage storage);
-
-    /**
-     * Checks if program needs to be exited from command bye.
-     *
-     * @return boolean - true or false depending on the command.
-     */
-    public boolean isExit() {
-        return false;
-    }
 
     /**
      * Checks that the format of the commands are correct.
@@ -38,9 +29,9 @@ public abstract class Command {
         String cmdtype = cmd.split(" ")[0];
         // check that duke.command list must not have any more description
         if (cmdtype.equals("list") && cmdtype.length() != cmd.length()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but list cannot have a description.");
+            throw new DukeException("I'm sorry, but list cannot have a description.");
         } else if (cmdtype.equals("todo") && cmdtype.length() == cmd.length()) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty.");
         } else if (cmdtype.equals("deadline")) {
             try {
                 int indexOfBy = cmd.indexOf("/by ");
@@ -48,8 +39,8 @@ public abstract class Command {
                 String activity = cmd.substring(cmdtype.length() + 1, indexOfBy - 1);
                 String date = cmd.substring(indexOfDate);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format of a deadline: "
-                        + "deadline {activity} /by {yyyy-mm-dd} {hhmm}");
+                throw new DukeException("The format of a deadline: "
+                        + "deadline {task} /by {yyyy-mm-dd} {hhmm}");
             }
         } else if (cmdtype.equals("event")) {
             try {
@@ -61,8 +52,8 @@ public abstract class Command {
                 String from = cmd.substring(indexOfFromTime, indexOfTo - 1);
                 String to = cmd.substring(indexOfToTime);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format of a event: "
-                        + "event {activity} /from {datetime} /to {datetime}");
+                throw new DukeException("The format of a event: "
+                        + "event {task} /from {datetime} /to {datetime}");
             }
         }
         return true;

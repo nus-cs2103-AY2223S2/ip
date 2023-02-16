@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 
 /**
@@ -16,12 +17,13 @@ public class Duke {
     private String res;
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
 
     /**
      * Constructor for Duke.
      *
-     * @param filePath the path fo the file.
+     * @param filePath the path of the file.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -32,6 +34,15 @@ public class Duke {
             res = e.getMessage();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Gets the startup message of the chatbot.
+     *
+     * @return String the initialization message
+     */
+    public String getGreetingMessage() {
+        return ui.getInitMessage();
     }
 
 
@@ -50,7 +61,7 @@ public class Duke {
         } catch (DukeException e) {
             this.res = e.getMessage();
         } catch (IllegalArgumentException e) {
-            this.res = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            this.res = "I'm sorry, but I don't know what that means.";
         } finally {
             storage.updateStorage(tasks);
         }

@@ -73,6 +73,9 @@ public class TaskList {
             assert tmp.toString() != "" : "Empty Task should not exist in the tasklst";
             res += counter++ + ". " + tmp.toString() + "\n";
         }
+        if (res == "") {
+            res = "Your list is empty!";
+        }
         return res;
     }
 

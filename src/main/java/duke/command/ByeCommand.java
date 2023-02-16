@@ -19,14 +19,4 @@ public class ByeCommand extends Command {
     public String execute(TaskList tl, Storage storage) {
         return "Bye. Hope to see you again soon!";
     }
-
-    /**
-     * Overrides isExit method from the abstract class of Command.
-     *
-     * @return boolean returns true as the user is exiting from the chatbot.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
