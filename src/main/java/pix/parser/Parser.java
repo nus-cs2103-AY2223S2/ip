@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import pix.Pix;
 import pix.commands.ByeCommand;
 import pix.commands.Command;
 import pix.commands.DeadlineCommand;
