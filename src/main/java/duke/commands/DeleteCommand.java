@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.database.Database;
-import duke.exception.marktaskexceptions.MarkTaskNumberInvalidException;
+import duke.exception.tasklistexceptions.TaskListTaskNumberInvalidException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @param database database of Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Database database) {
+    public void execute(TaskList taskList, Ui ui, Database database) throws TaskListTaskNumberInvalidException {
         assert this.isActive();
         String taskDescription = taskList.getTask(taskNumber).getStatus();
         taskList.deleteTask(taskNumber);

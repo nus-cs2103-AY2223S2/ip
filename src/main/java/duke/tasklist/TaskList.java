@@ -2,7 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
-import duke.exception.marktaskexceptions.MarkTaskNumberInvalidException;
+import duke.exception.tasklistexceptions.TaskListTaskNumberInvalidException;
 import duke.task.Task;
 
 
@@ -41,8 +41,12 @@ public class TaskList {
      * @param taskNumber identifier of the task.
      * @return the task corresponding to the identifier.
      */
-    public Task getTask(int taskNumber) {
-        return this.tasks.get(taskNumber - 1);
+    public Task getTask(int taskNumber) throws TaskListTaskNumberInvalidException {
+        try {
+            return this.tasks.get(taskNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskListTaskNumberInvalidException();
+        }
     }
 
     /**
@@ -50,8 +54,12 @@ public class TaskList {
      *
      * @param taskNumber identifier of the task.
      */
-    public void deleteTask(int taskNumber) {
-        this.tasks.remove(taskNumber - 1);
+    public void deleteTask(int taskNumber) throws TaskListTaskNumberInvalidException {
+        try {
+            this.tasks.remove(taskNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskListTaskNumberInvalidException();
+        }
     }
 
     /**
