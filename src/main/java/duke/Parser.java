@@ -25,7 +25,7 @@ class Parser {
             return sayBye();
         } else if (input.equals("list")) {
             return returnList(taskList);
-        } else if (input.startsWith("mark")) {
+        } else if (input.startsWith("sort")) {
             return sortTaskList();
         } else if (input.startsWith("mark")) {
             return mark(input);
