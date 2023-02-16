@@ -26,8 +26,8 @@ public class DeadLineCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String message = "Got it. I've added this task:\n" + this.deadline
-                + String.format("\nNow you have %s tasks in the list.", tasks.size());
+        String message = "Boop. I've added this task:\n" + this.deadline
+                + String.format("\nNow you have %s tasks in the list. Beep.", tasks.size());
         tasks.add(this.deadline);
         ui.display(message);
 

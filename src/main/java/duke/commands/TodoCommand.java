@@ -28,8 +28,8 @@ public class TodoCommand extends Command {
         int previousLength = tasks.size();
         tasks.add(this.todo);
         assert tasks.size() - previousLength == 1;
-        String message = "Got it. I've added this task:\n" + this.todo
-                + String.format("\nNow you have %s tasks in the list.", tasks.size());
+        String message = "Beep. I've added this task:\n" + this.todo
+                + String.format("\nNow you have %s tasks in the list. Boop.", tasks.size());
         ui.display(message);
         try {
             storage.dumpFile(tasks);

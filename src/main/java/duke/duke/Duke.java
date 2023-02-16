@@ -14,7 +14,7 @@ public class Duke {
 
     public static final String DEFAULT_PATH = System.getProperty("user.dir")
             + "/data/tasks.txt";
-    private Ui ui;
+    private static Ui ui = new Ui();
     private Storage storage;
     private TaskList list;
 
@@ -23,7 +23,7 @@ public class Duke {
      * @param filePath A string which denotes the path to store Duke's data.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
+
         this.storage = new Storage(filePath);
         TaskList temp;
         try {
@@ -75,6 +75,10 @@ public class Duke {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    public String getWelcome() {
+        return this.ui.getWelcome();
     }
 
 

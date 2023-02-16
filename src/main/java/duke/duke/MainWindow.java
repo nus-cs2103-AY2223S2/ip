@@ -25,6 +25,8 @@ public class MainWindow extends AnchorPane {
             this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(
             this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private Image greetImage = new Image(
+            this.getClass().getResourceAsStream("/images/NotOpenAi.jpg"));
 
     @FXML
     public void initialize() {
@@ -55,4 +57,17 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    /**
+     * Greets the user.
+     */
+    @FXML
+    public void greetUser() {
+        String greeting = this.duke.getWelcome();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, greetImage)
+        );
+        userInput.clear();
+    }
+
 }

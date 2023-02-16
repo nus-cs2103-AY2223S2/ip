@@ -26,13 +26,13 @@ public class EventCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(this.event);
-        String message = "Got it. I've added this task:\n" + this.event
-                + String.format("\nNow you have %s tasks in the list.", tasks.size());
+        String message = "Beep. I've added this task:\n" + this.event
+                + String.format("\nNow you have %s tasks in the list. Boop.", tasks.size());
         ui.display(message);
         try {
             storage.dumpFile(tasks);
         } catch (Exception err) {
-            throw new DukeException("Error while saving file!");
+            throw new DukeException("Error while saving file! Boop beep");
         }
         return message;
 
