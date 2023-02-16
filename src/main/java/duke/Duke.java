@@ -76,7 +76,8 @@ public class Duke {
         } catch (DukeException de) {
             return ui.showError(de);
         } catch (Exception e) {
-            return "Unaccounted for: " + e.getMessage() + "\n";
+
+            return "Unaccounted for: " + e.getClass() + e.getMessage() + "\n";
         }
     }
 }

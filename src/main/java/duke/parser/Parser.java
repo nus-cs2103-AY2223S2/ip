@@ -1,5 +1,6 @@
 package duke.parser;
 
+import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -99,35 +100,41 @@ public class Parser {
             throw new DukeException("Error encountered when creating task! Please ensure input is valid.");
         }
     }
-    public static Command getValueCommand(String fullCommand) {
+    public static Command getValueCommand(String fullCommand) throws DukeException {
         String command = Parser.returnCommand(fullCommand, VALUE_COMMANDS);
         String[] inputArr;
         Command valueCommand;
-        switch (command) {
-        case "unmark ":
-            inputArr = fullCommand.split(" ");
-            int toUnmark = Integer.parseInt(inputArr[1]);
-            valueCommand = new UnmarkCommand(toUnmark);
-            break;
-        case "mark ":
-            inputArr = fullCommand.split(" ");
-            int toMark = Integer.parseInt(inputArr[1]);
-            valueCommand = new MarkCommand(toMark);
-            break;
-        case "delete ":
-            inputArr = fullCommand.split(" ");
-            int toDelete = Integer.parseInt(inputArr[1]);
-            valueCommand = new DeleteCommand(toDelete);
-            break;
-        case "find ":
-            inputArr = fullCommand.split(" ", 2);
-            String[] toFind = inputArr[1].split(" ");
-            valueCommand = new FindCommand(toFind);
-            break;
-        default:
-            return null;
+        try {
+            switch (command) {
+                case "unmark ":
+                    inputArr = fullCommand.split(" ");
+                    int toUnmark = Integer.parseInt(inputArr[1]);
+                    valueCommand = new UnmarkCommand(toUnmark);
+                    break;
+                case "mark ":
+                    inputArr = fullCommand.split(" ");
+                    int toMark = Integer.parseInt(inputArr[1]);
+                    valueCommand = new MarkCommand(toMark);
+                    break;
+                case "delete ":
+                    inputArr = fullCommand.split(" ");
+                    int toDelete = Integer.parseInt(inputArr[1]);
+                    valueCommand = new DeleteCommand(toDelete);
+                    break;
+                case "find ":
+                    inputArr = fullCommand.split(" ", 2);
+                    String[] toFind = inputArr[1].split(" ");
+                    valueCommand = new FindCommand(toFind);
+                    break;
+                default:
+                    return null;
+            }
+            return valueCommand;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Missing task index! Please indicate the task ID.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Task ID must be an integer! Please try again.");
         }
-        return valueCommand;
     }
 
     /**
