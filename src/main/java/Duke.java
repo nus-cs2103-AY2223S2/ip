@@ -1,128 +1,70 @@
-<<<<<<< HEAD
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import tasks.Task;
-=======
-import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
-import tasks.*;
->>>>>>> branch-level-8
+import commands.Command;
+import exceptions.DukeException;
+import parser.Parser;
+import storage.Storage;
+import storage.TaskList;
+import ui.Ui;
+
 
 public class Duke {
     
-    public static void main(String[] args) throws Exception {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("---------------------------------- \n Hello from\n" + logo + "\n What can I do for you? \n ---------------------------------\n");
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList();
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        new Duke().run();
+    }
+
+    public void run() throws IOException {
+        ui.greetUser();
+
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.printException(e);
+        }
 
         awaitInput();
+
     }
+    
+    private void awaitInput() throws IOException {
 
-    private static void awaitInput() throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String userInput = ui.getUserInput();
 
-        String userInput = br.readLine();
-        while (!userInput.equalsIgnoreCase("BYE")) {   
-            handleInput(userInput);
-            userInput = br.readLine();
+        while (!userInput.toUpperCase().equals("BYE")) {   
+            this.handleInput(userInput); 
+            userInput = ui.getUserInput();
         }
-        System.out.println("\n----------------------------------\n\n Bye! Hope to see you again!\n\n----------------------------------");
+
+        ui.endSession();
     }
 
-    enum Job {
-        LIST,
-        MARK,
-        UNMARK,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE,
-        CHECK,
-        INVALID
-    }
+    private void handleInput(String userInput) {
 
-    private static void handleInput(String userInput) {
-        System.out.println("\n----------------------------------\n");
+        try {
+            Command c = Parser.parseCommand(userInput);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            this.ui.printException(e);
+        }
+    
         
-        String[] commands = userInput.split(" ");
-
-        String j = commands[0].toUpperCase();
-        Job job;
-
-        try {
-            job = Job.valueOf(j);
-        } catch (IllegalArgumentException e) {
-            job = Job.INVALID;
-        }
-
-        switch(job) {
-<<<<<<< HEAD
-        case LIST:
-            Task.listTasks();
-            break;
-        case MARK:
-            Task.markTasks(Integer.parseInt(commands[1])-1);
-            break;
-        case UNMARK:
-            Task.unmarkTasks(Integer.parseInt(commands[1])-1);
-            break;
-        case DELETE:
-            Task.deleteTask(Integer.parseInt(commands[1])-1);
-            break;
-        default:
-            String taskName = "";
-            for (int i = 1; i < commands.length; i++) {
-                taskName += commands[i] + " ";
-            }
-            try {
-                Task.addTask(commands[0], taskName);
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-=======
-            case LIST:
-                Task.listTasks();
-                break;
-            case CHECK:
-                try {
-                    Task.check(LocalDate.parse(commands[1]));
-                } catch (DateTimeParseException e) {
-                    System.out.println("Please enter the date in the format: yyyy-mm-dd");
-                }
-                break;
-            case MARK:
-                Task.markTasks(Integer.parseInt(commands[1])-1);
-                break;
-            case UNMARK:
-                Task.unmarkTasks(Integer.parseInt(commands[1])-1);
-                break;
-            case DELETE:
-                Task.deleteTask(Integer.parseInt(commands[1])-1);
-                break;
-            default:
-                String taskName = "";
-                for (int i = 1; i < commands.length; i++) {
-                    taskName += commands[i] + " ";
-                }
-                try {
-                    Task.addTask(commands[0], taskName);
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                }
->>>>>>> branch-level-8
-        }
-        System.out.println("\n----------------------------------\n");
-        try {
-            Task.save();
-        } catch (IOException e) { // should not encounter this.
-            System.out.println(e.getMessage());
-        }
+        // try {
+        //     storage.save(tasks);
+        // } catch (IOException e) { // should not encounter this.
+        //     System.out.println(e.getMessage());
+        // }
     }
 
 }

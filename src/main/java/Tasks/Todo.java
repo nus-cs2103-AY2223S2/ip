@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.LocalDate;
+
 import exceptions.NoTaskDescriptionException;
 
 /** 
@@ -7,8 +9,12 @@ import exceptions.NoTaskDescriptionException;
  */
 public class Todo extends Task {
 
-    protected Todo(String name) throws NoTaskDescriptionException{
+    public Todo(String name) throws NoTaskDescriptionException{
         super(name, "ToDo");
+    }
+
+    public boolean contains(LocalDate date) {
+        return false;
     }
 
     /**
@@ -20,7 +26,7 @@ public class Todo extends Task {
     }
 
     @Override
-    protected String stringifyTaskToSave() {
-        return "T|" + super.stringifyTaskToSave();
+    public String stringifyTaskToSave() {
+        return "TODO|" + super.stringifyTaskToSave();
     }
 }

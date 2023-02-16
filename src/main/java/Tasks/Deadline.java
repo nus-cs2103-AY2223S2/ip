@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import exceptions.NoTaskDescriptionException;
-import parsing.ParsedDate;
+import parser.ParsedDate;
 
 /**
  * This class represents a Deadline Task to be done, with a deadline
@@ -12,7 +12,7 @@ import parsing.ParsedDate;
 public class Deadline extends Task {
     private ParsedDate endDate;
 
-    protected Deadline(String name, LocalDateTime endDate) throws NoTaskDescriptionException{
+    public Deadline(String name, LocalDateTime endDate) throws NoTaskDescriptionException{
         super(name, "Deadline");
         this.endDate = new ParsedDate(endDate);
     }
@@ -22,7 +22,7 @@ public class Deadline extends Task {
      * 
      * @param date date to compare endDate to
      */
-    public boolean isEqualDate(LocalDate date) {
+    public boolean contains(LocalDate date) {
         return this.endDate.isEqualDate(date);
     }
 
@@ -35,7 +35,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    protected String stringifyTaskToSave() {
-        return "D|" + super.stringifyTaskToSave() + "|" + this.endDate;
+    public String stringifyTaskToSave() {
+        return "DEADLINE|" + super.stringifyTaskToSave() + "|" + this.endDate;
     }
 }

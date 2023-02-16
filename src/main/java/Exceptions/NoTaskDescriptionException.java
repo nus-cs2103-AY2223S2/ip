@@ -1,7 +1,7 @@
 package exceptions;
 
-public class NoTaskDescriptionException extends Exception {
+public class NoTaskDescriptionException extends DukeException {
     public NoTaskDescriptionException(String string) {
-        super("OOPS!!! The description of a " + string + " cannot be empty!");
+        super("OOPS!!! The description of a " + string + " task cannot be empty!");
     }
 }

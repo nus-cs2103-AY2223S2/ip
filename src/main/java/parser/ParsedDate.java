@@ -1,4 +1,4 @@
-package parsing;
+package parser;
 
 import java.text.DecimalFormat;
 import java.time.DayOfWeek;

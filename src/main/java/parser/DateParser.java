@@ -1,4 +1,4 @@
-package parsing;
+package parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ import java.time.format.FormatStyle;
 /**
  * This class parses strings into LocalDateTime format
  */
-public class ParseDate {
+public class DateParser {
     /**
      * Converts String into LocalDateTime format
      * 
