@@ -50,8 +50,8 @@ public class Event extends Task {
     @Override
     public String updateTaskTime(String ... dates) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        this.from = LocalDateTime.parse(dates[0], format);
-        this.to = LocalDateTime.parse(dates[1], format);
+        this.from = LocalDateTime.parse(dates[0] + " " + dates[1], format);
+        this.to = LocalDateTime.parse(dates[2] + " " + dates[3], format);
         this.time = this.to;
         return TextOutput.makePostponeString(this);
     }

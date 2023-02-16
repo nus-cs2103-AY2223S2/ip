@@ -16,6 +16,6 @@ public class Echo extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        return TextOutput.makeEchoString(tasks.toString());
+        return TextOutput.makeEchoString(this.getCommandStorage().split("echo ")[1]);
     }
 }

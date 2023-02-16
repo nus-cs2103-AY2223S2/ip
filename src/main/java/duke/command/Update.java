@@ -18,7 +18,7 @@ public class Update extends Command {
      */
     public String execute(TaskList tasks){
         String content = this.getCommandStorage();
-        assert content != "": "Must provide arguments to snooze a task";
+        assert content != "": "Must provide arguments to change task dates.";
         String[] substrings = content.split(" ");
         String taskId = substrings[1];
         String[] dates = new String[substrings.length - 2];

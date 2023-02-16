@@ -50,6 +50,8 @@ public class Parser {
             Parser.command = new Delete(input);
         } else if (input.matches("find\\s.*$")) {
             Parser.command = new Find(input);
+        } else if (input.matches("echo\\s.*$")) {
+                Parser.command = new Echo(input);
         } else if (input.matches("update\\s.*$")) {
             if (input.split(" ").length < 3) {
                 throw new InsufficientArguments("OOPS!!! The format of update must follow " +
