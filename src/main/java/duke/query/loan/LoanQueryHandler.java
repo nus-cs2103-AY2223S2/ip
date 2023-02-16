@@ -8,6 +8,7 @@ import duke.query.QueryHandler;
 import duke.query.exception.InvalidCommandParamException;
 
 public class LoanQueryHandler extends QueryHandler {
+    private static final String QUERY_SYNTAX = "loan <amount> /holder <holder> /desc <description>";
     private LoanShark loanShark;
 
     public LoanQueryHandler(LoanShark loanShark) {
@@ -21,10 +22,12 @@ public class LoanQueryHandler extends QueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        String holder = getNotBlankArg(query, "/holder", "Please provide a holder for the loan!");
+        String holder = getNotBlankArg(query, "/holder", getErrorMessage("holder", QUERY_SYNTAX));
         int amount = getAmountFromQuery(query);
-        String description = getNotBlankArg(query, "/description", "Please provide a description for the loan!");
-        Loan newLoan = loanShark.addLoan(amount, description, holder);
+        String description = getNotBlankArg(query, "/desc",
+                getErrorMessage("description", QUERY_SYNTAX));
+        Loan newLoan = loanShark.addLoan(amount, amount, description, holder);
+        loanShark.saveLoans();
 
         return String.format("New loan added:\n%s\n\nHere are your active loans.\n%s",
                 newLoan,
@@ -32,11 +35,11 @@ public class LoanQueryHandler extends QueryHandler {
         );
     }
 
-    private static int getAmountFromQuery(Query query) throws InvalidCommandParamException {
+    private int getAmountFromQuery(Query query) throws InvalidCommandParamException {
         try {
             return (int) (Double.parseDouble(query.getParam()) * 100);
         } catch (NumberFormatException e) {
-            throw new InvalidCommandParamException("Please provide an amount for this loan!");
+            throw new InvalidCommandParamException(getErrorMessage("amount", QUERY_SYNTAX));
         }
     }
 }

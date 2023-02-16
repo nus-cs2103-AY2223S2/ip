@@ -1,8 +1,8 @@
 package duke.loan;
 
 public class Owed extends Loan {
-    public Owed(String name, int amountLentInCents, String description) {
-        super(name, amountLentInCents, description);
+    public Owed(String name, int balance, int original, String description) {
+        super(name, balance, original, description);
     }
 
     /**
@@ -16,7 +16,7 @@ public class Owed extends Loan {
 
     @Override
     public String toString() {
-        return String.format("Me << %s << %s %s %s",
-                getBalanceInDollarsString(), name, getResolvedIndicator(), description);
+        return String.format("Me << %s << %s [ %s ]",
+                getBalanceInDollarsString(), name, description);
     }
 }

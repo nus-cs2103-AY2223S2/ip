@@ -14,16 +14,20 @@ public class LoanAccount {
         this.holder = holder;
     }
 
+    public String getHolder() {
+        return holder;
+    }
+
     public int getBalanceInCents() {
         return activeLoans.stream()
                 .map(Loan::getBalanceInCents)
                 .reduce(0, Integer::sum);
     }
 
-    public Owe addNewOwe(int amountInCents, String description) {
+    public Owe addOwe(int balance, int amountInCents, String description) {
         assert amountInCents < 0 : "Owe amount must be negative!";
-        int oweBalance = attemptToResolveLoans(amountInCents);
-        Owe newOwe = new Owe(holder, oweBalance, description);
+        int oweBalance = attemptToResolveLoans(balance);
+        Owe newOwe = new Owe(holder, oweBalance, amountInCents, description);
         if (!newOwe.isResolved()) {
             activeLoans.add(newOwe);
         }
@@ -31,10 +35,10 @@ public class LoanAccount {
         return newOwe;
     }
 
-    public Owed addNewOwed(int amountInCents, String description) {
+    public Owed addOwed(int balance, int amountInCents, String description) {
         assert amountInCents > 0 : "Owed amount must be positive!";
-        int owedBalance = attemptToResolveLoans(amountInCents);
-        Owed newOwed = new Owed(holder, owedBalance, description);
+        int owedBalance = attemptToResolveLoans(balance);
+        Owed newOwed = new Owed(holder, owedBalance, amountInCents, description);
         if (!newOwed.isResolved()) {
             activeLoans.add(newOwed);
         }
@@ -44,7 +48,7 @@ public class LoanAccount {
 
     private int attemptToResolveLoans(int amountUsedToResolve) {
         boolean isBalancePositive = getBalanceInCents() > 0;
-        // Attempt to resolve active loans.
+
         while (activeLoans.size() > 0
                 && (isBalancePositive && amountUsedToResolve < 0 || !isBalancePositive && amountUsedToResolve > 0)) {
             Loan loan = activeLoans.peek();
@@ -68,5 +72,19 @@ public class LoanAccount {
         StringBuilder collectionStr = new StringBuilder();
         loans.forEach(l -> collectionStr.append(l).append("\n"));
         return collectionStr.toString();
+    }
+
+    public String serializeActiveLoans() {
+        return serializeLoanCollection(activeLoans);
+    }
+
+    public String serializeRecord() {
+        return serializeLoanCollection(record);
+    }
+
+    private String serializeLoanCollection(Collection<Loan> loanCollection) {
+        StringBuilder serialized = new StringBuilder();
+        loanCollection.forEach(l -> serialized.append(l.serialize()).append("\n"));
+        return serialized.toString();
     }
 }

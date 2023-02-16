@@ -28,4 +28,9 @@ public abstract class QueryHandler {
         }
         return param;
     }
+
+    protected String getErrorMessage(String invalidParam, String correctSyntax) {
+        return String.format("\nPlease provide a valid \"%s\"!\n\nThis is how you should do it:\n%s",
+                invalidParam, correctSyntax);
+    }
 }

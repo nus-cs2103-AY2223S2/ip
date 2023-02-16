@@ -1,5 +1,7 @@
 package duke.loan;
 
+import duke.exception.DukeException;
+
 import java.util.HashMap;
 
 public class LoanShark {
@@ -9,7 +11,7 @@ public class LoanShark {
         loanAccounts = new HashMap<>();
     }
 
-    public Loan addLoan(int amountInCents, String description, String holder) {
+    public Loan addLoan(int balance, int amountInCents, String description, String holder) {
         LoanAccount loanAccount;
 
         if (!loanAccounts.containsKey(holder)) {
@@ -20,9 +22,9 @@ public class LoanShark {
         }
 
         if (amountInCents > 0) {
-            return loanAccount.addNewOwed(amountInCents, description);
+            return loanAccount.addOwed(balance, amountInCents, description);
         } else {
-            return loanAccount.addNewOwe(amountInCents, description);
+            return loanAccount.addOwe(balance, amountInCents, description);
         }
     }
 
@@ -46,5 +48,13 @@ public class LoanShark {
 
     private static String getMissingLoanAccountString(String accountHolder) {
         return String.format("No loan account belongs to %s!", accountHolder);
+    }
+
+    public void saveLoans() throws DukeException {
+        LoanSharkStorage.saveAccounts(loanAccounts.values());
+    }
+
+    public void load() throws DukeException {
+        LoanSharkStorage.loadAccounts(this);
     }
 }

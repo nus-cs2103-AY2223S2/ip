@@ -5,11 +5,13 @@ public abstract class Loan {
 
     protected String name;
     protected int balanceInCents;
+    protected int originalAmount;
     protected String description;
 
-    public Loan(String name, int balanceInCents, String description) {
+    public Loan(String name, int balanceInCents, int originalAmount, String description) {
         this.name = name;
         this.balanceInCents = balanceInCents;
+        this.originalAmount = originalAmount;
         this.description = description;
     }
 
@@ -32,6 +34,9 @@ public abstract class Loan {
     }
 
     protected String getBalanceInDollarsString() {
+        if (isResolved()) {
+            return "RESOLVED!";
+        }
         int absBalanceInCents = Math.abs(balanceInCents);
         return String.format("%s.%s",
                 absBalanceInCents / 100, absBalanceInCents % 100);
@@ -48,7 +53,7 @@ public abstract class Loan {
         }
     }
 
-    protected String getResolvedIndicator() {
-        return String.format("[%s]", isResolved() ? "RESOLVED" : " ");
+    public String serialize() {
+        return String.join("|", name, "" + balanceInCents, "" + originalAmount, description);
     }
 }

@@ -18,7 +18,7 @@ public class LoanQueryModule extends QueryModule {
      */
     @Override
     public void init() throws DukeException {
-        // Nothing to initialize.
+        ls.load();
     }
 
     /**
