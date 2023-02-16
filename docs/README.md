@@ -146,5 +146,3 @@ Description of the outcome.
 Okay!I've marked this task as done:
   [T][X] read book
 ```
-
-http://YZmunchmunch.github.io/ip/ 
