@@ -3,7 +3,6 @@ package main;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import task.Task;
 
@@ -17,7 +16,7 @@ public class TaskList {
     /**
      * Constructs TaskList
      *
-     * @param arrOfTasks Task already in the list.
+     * @param arrOfTasks The history of taskList that was previously input by user.
      */
     public TaskList(ArrayList<Task> arrOfTasks) {
         this.arrOfTasks = arrOfTasks;
@@ -47,7 +46,6 @@ public class TaskList {
      * @param index Index of task to be set as done.
      * @return Task that is set as done.
      */
-
     public Task markTaskDone(int index) {
         assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
         Task t = arrOfTasks.get(index);
@@ -92,6 +90,13 @@ public class TaskList {
         return arrOfTasks.get(index);
     }
 
+    /**
+     * Add recurrence to a task by index.
+     *
+     * @param index Index of task to have new recurrence.
+     * @param recurrence New recurrence to be added to the task.
+     * @return Task that has new recurrence
+     */
     public Task addRecurrence(int index, String recurrence) {
         assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
         Task t = arrOfTasks.get(index);

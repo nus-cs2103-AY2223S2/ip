@@ -17,22 +17,22 @@ public class Ui {
     }
 
     /**
-     * Output goodbye messages to users when programme ends.
+     * Outputs goodbye messages to users when programme ends.
      */
     public static void outputExit() {
         str.append("Bye. Hope to see you again soon!\n");
     }
 
-
     /**
-     * Output a first blank line.
+     * Creates an empty string builder by deleting the previous content.
      */
     public void startOfInput() {
         str.setLength(0);
     }
 
     /**
-     * Output a last blank line.
+     * Returns the content of the string builder to be output to the screen.
+     *
      * @return A stringBuilder that contains all output to be printed.
      */
     public String endOfInput() {
@@ -41,6 +41,7 @@ public class Ui {
 
     /**
      * Outputs details of the task that is added.
+     *
      * @param t Task that is added.
      */
     public void outputAddTask(Task t) {
@@ -50,6 +51,7 @@ public class Ui {
 
     /**
      * Outputs details of the task that is marked as done.
+     *
      * @param t Task that is marked as done.
      */
     public void outputMarkTaskDone(Task t) {
@@ -59,6 +61,7 @@ public class Ui {
 
     /**
      * Outputs details of the task that is marked as not done.
+     *
      * @param t Task that is marked as not done.
      */
     public void outputMarkTaskNotDone(Task t) {
@@ -68,6 +71,7 @@ public class Ui {
 
     /**
      * Outputs details of the task that is deleted.
+     *
      * @param t Task that is deleted.
      */
     public void outputDeleteTask(Task t) {
@@ -75,6 +79,11 @@ public class Ui {
         str.append(t + "\n");;
     }
 
+    /**
+     * Outputs details of the tasks that has a new recurrence.
+     *
+     * @param t Task that has new recurrence.
+     */
     public void outputAddRecurrence(Task t) {
         str.append("Noted. I've added recurrence for this task:\n");
         str.append(t + "\n");;
@@ -82,6 +91,7 @@ public class Ui {
 
     /**
      * Outputs details of all the tasks.
+     *
      * @param taskList List of tasks.
      */
     public void outputAllTask(TaskList taskList) {
@@ -105,6 +115,7 @@ public class Ui {
 
     /**
      * Outputs details of why an exception is raised.
+     *
      * @param message Details of why an exception is raised.
      */
     public void outputError(String message) {

@@ -59,10 +59,20 @@ public abstract class Task {
         return this.done;
     }
 
+    /**
+     * Set the recurrence status of the task to daily, weekly, monthly or yearly.
+     *
+     * @param r The recurrence status of the task.
+     */
     public void setRecurrence(String r) {
         this.recurrence = Recurrence.valueOf(r.toUpperCase());
     }
 
+    /**
+     * Return the recurrence status of the task.
+     *
+     * @return Returns recurrence status of the task.
+     */
     public String getRecurrence() {
         switch (recurrence) {
             case NONE:
@@ -79,6 +89,12 @@ public abstract class Task {
         return null;
     }
 
+    /**
+     * Get the next recurring date of a task.
+     *
+     * @param curDate The current date.
+     * @return The date of the next recurrence.
+     */
     public LocalDate getNextDate(LocalDate curDate) {
         switch (recurrence) {
             case DAILY:
@@ -93,6 +109,9 @@ public abstract class Task {
         return null;
     }
 
+    /**
+     * Mark the task as not done when the task get refreshed.
+     */
     public void refresh() {
         markNotDone();
     }
@@ -102,7 +121,6 @@ public abstract class Task {
      *
      * @return Details of task.
      */
-
     public String toText() {
         return (isDone() ? 1 : 0) + "|" + getRecurrence() + "|" + getDescription();
     }

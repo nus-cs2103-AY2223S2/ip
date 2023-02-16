@@ -10,7 +10,7 @@ import task.Task;
 
 
 /**
- * Find task that matches keyword.
+ * Find all tasks with description that contains the keyword.
  */
 public class FindCommand extends Command {
 
@@ -19,14 +19,14 @@ public class FindCommand extends Command {
     /**
      * Constructs FindCommand.
      *
-     * @param keyword Keywords to find matching task.
+     * @param keyword Keywords to search of specific tasks.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
     /**
-     * Outputs all task that matches keyword to user and updates the file.
+     * Retrieves all task that has description containing the keyword, outputs to user and updates the file.
      *
      * @param taskList List of task.
      * @param ui Ui.
