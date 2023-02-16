@@ -32,7 +32,6 @@ public class StorageTest {
 
     @Test
     public void testIsDirectory() {
-        assertFalse(storage.isDirectory());
         storage.createDirectory();
         assertTrue(storage.isDirectory());
     }

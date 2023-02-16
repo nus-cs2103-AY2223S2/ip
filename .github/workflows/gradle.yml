@@ -35,7 +35,7 @@ jobs:
 
       - name: Install Linux packages
         if: runner.os == 'Linux'
-        run: sudo apt-get install dos2unix
+        run: apt-get install dos2unix
 
       - name: Install MacOS packages
         if: always() && runner.os == 'macOS'
