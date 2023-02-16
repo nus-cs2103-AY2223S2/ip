@@ -29,7 +29,7 @@ Shows the next task with the nearest deadline.
 
 ## Usage
 
-1. ### `list` - List all tasks
+- ### `list` - List all tasks
 
     Jarvis will return a list of all tasks of the user.
 
@@ -43,7 +43,7 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-2. ### `todo` - Creates a 'todo' type Task
+- ### `todo` - Creates a 'todo' type Task
 
     This task only has a description. No time parameters taken.
     Example of usage: `todo cook dinner`
@@ -57,7 +57,7 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-3. ### `deadline` - Creates a 'deadline' type Task
+- ### `deadline` - Creates a 'deadline' type Task
 
     This task has a description and a deadline.
     Example of usage: `deadline finish essay /2023-02-22`
@@ -72,7 +72,7 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-4. ### `event` - Creates a 'event' type Task
+- ### `event` - Creates a 'event' type Task
 
     This task has a description and a time span.
     Example of usage: `event travel /2023-02-25 /2023-02-28`
@@ -88,7 +88,7 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-5. ### `mark` - Marks a task as done
+- ### `mark` - Marks a task as done
 
     This task has a description and a time span.
     Example of usage: `mark 1`
@@ -104,7 +104,7 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-6. ### `unmark` - Un-marks a task as done
+- ### `unmark` - Un-marks a task as done
 
     This task has a description and a time span.
     Example of usage: `unmark 1`
@@ -120,7 +120,7 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-7. ### `unmark` - Un-marks a task as done
+- ### `unmark` - Un-marks a task as done
 
     This task has a description and a time span.
     Example of usage: `unmark 1`
