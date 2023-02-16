@@ -17,12 +17,12 @@ public class Ui {
      */
     public static String dukeGreeting() {
         String greeting = "";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        greeting = "Hello from\n" + logo + "Hello! I'm Duke\n" + "What can I do for you?";
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+        greeting = "Hey there! I'm Lucy (=^･ω･^=)\n" + "What can I do for you today?";
         return greeting;
     }
 
@@ -33,7 +33,7 @@ public class Ui {
      * @return Response to let the user know the task has been marked.
      */
     public String showMark(Task taskToMark) {
-        return "Nice! I've marked this task as done:\n" + taskToMark;
+        return "Meowww~ I've marked this task as done:\n" + taskToMark;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Ui {
      * @return Response to let the user know the task has been unmarked.
      */
     public String showUnmark(Task taskToUnmark) {
-        return "OK, I've marked this task as not done yet:\n" + taskToUnmark;
+        return "OK, I've marked this task as not done yet:\n" + taskToUnmark + "\nRemember to complete your tasks on time!";
     }
 
     /**
@@ -54,7 +54,7 @@ public class Ui {
      * @return Response to let the user know task has been added.
      */
     public String showTaskOutput(Task task, int size) {
-        return "Got it. I've added this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
+        return "Gotcha, Lucy has added this task ~\n" + task + "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
@@ -65,7 +65,7 @@ public class Ui {
      * @return Response to let the user know task has been removed.
      */
     public String showDelete(Task task, int size) {
-        return "Noted. I've removed this task:\n" + task + "\nNow you have " + size + " tasks in the list.";
+        return "OK! This task is removed:\n" + task + "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
@@ -75,7 +75,7 @@ public class Ui {
      * @return Response to let the user know task has been updated.
      */
     public String showUpdate(Task taskToUpdate) {
-        return "OK, I've updated this task:\n" + taskToUpdate;
+        return "No problem, this task is updated:\n" + taskToUpdate + "\nLet me know if you want to change anything else!";
     }
 
     /**
@@ -85,7 +85,7 @@ public class Ui {
      * @return Response to show users the matching tasks.
      */
     public String printMatchingTasks(TaskList tasklist) {
-        String result = "Here are the matching tasks in your list:\n";
+        String result = "Matching tasks are here ฅ(＾・ω・＾ฅ)\n";
         if (tasklist.getNumberOfTasks() == 0) {
             return "There are no matching tasks in your list.";
         }
@@ -107,9 +107,11 @@ public class Ui {
 
     /**
      * Terminates the program.
+     *
+     * @return Response to exiting the program.
      */
     public String exit() {
         System.exit(0);
-        return "Bye. Hope to see you again soon!";
+        return "Bye bye";
     }
 }

@@ -58,7 +58,7 @@ public class TaskList {
      * @return String representation of the tasklist.
      */
     public String getTaskList() {
-        String result = "Here are the tasks in your list:\n";
+        String result = "These are the tasks in your list:\n";
         for (int i = 0; i < taskArray.size(); i++) {
             result += i + 1 + "." + taskArray.get(i) + "\n";
         }
