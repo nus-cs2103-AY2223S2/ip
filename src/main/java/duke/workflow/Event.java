@@ -10,6 +10,8 @@ public abstract class Event {
     }
     public abstract Event toNext();
 
+    public abstract Event toNextGui(String nextTask);
+
     public abstract TaskList getTaskList();
 
     public boolean getStatus() {

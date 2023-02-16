@@ -47,6 +47,11 @@ public class Ending extends Event {
     }
 
     @Override
+    public Event toNextGui(String nextTask) {
+        return this;
+    }
+
+    @Override
     public String toString() {
         return "VERY WELL. THE WORLD IS SAFE FROM YOUR PLAN. FOR NOW";
     }

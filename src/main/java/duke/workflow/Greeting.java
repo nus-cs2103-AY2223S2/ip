@@ -55,6 +55,11 @@ public class Greeting extends Event {
     }
 
     @Override
+    public Event toNextGui(String nextTask) {
+        return this;
+    }
+
+    @Override
     public String toString() {
         return "SHALL WE PLAY A GAME?";
     }

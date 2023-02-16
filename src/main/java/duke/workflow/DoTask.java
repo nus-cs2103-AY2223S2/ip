@@ -162,6 +162,121 @@ public class DoTask extends Event {
         return this;
     }
 
+    public Event toNextGui(String nextTask) {
+        if (nextTask.equals("BYE")) {
+            return new Ending(this.taskList);
+        } else {
+            try {
+                UserInputException.checkUserInput(nextTask, this.taskList.getSize());
+                if (nextTask.equals("LIST")) {
+                    this.firstGreet = false;
+                    this.lastCommand = nextTask;
+                    return this;
+                } else {
+                    String[] command = nextTask.split(" ");
+                    List<String> words = Arrays.asList(command);
+                    if (words.get(0).equals("MARK")) {
+                        this.firstGreet = false;
+                        this.lastCommand = nextTask;
+                        this.taskList = this.taskList.markDone(Integer.valueOf(words.get(1)) - 1);
+                        return this;
+                    }
+                    if (words.get(0).equals("UNMARK")) {
+                        this.firstGreet = false;
+                        this.lastCommand = nextTask;
+                        this.taskList = this.taskList.unMark(Integer.valueOf(words.get(1)) - 1);
+                        return this;
+                    }
+                    if (words.get(0).equals("TODO")) {
+                        String[] toDoTask = nextTask.split("TODO ");
+                        List<String> toDoAction = Arrays.asList(toDoTask);
+                        this.firstGreet = false;
+                        this.lastCommand = toDoAction.get(1);
+                        ToDo newTask = new ToDo(toDoAction.get(1));
+                        this.taskList = this.taskList.addTask(newTask);
+                        for (String i : words) {
+                            this.storage = this.storage.addToStorage(i, newTask);
+                        }
+                        return this;
+                    }
+                    if (words.get(0).equals("DEADLINE")) {
+                        String[] toDoTask = nextTask.split(" /BY ");
+                        List<String> deadlineList = Arrays.asList(toDoTask);
+                        String deadlineAction = deadlineList.get(0);
+                        String[] deadlinePhraseArray = deadlineAction.split("DEADLINE ");
+                        List<String> deadlinePhraseList = Arrays.asList(deadlinePhraseArray);
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        Deadline newTask = new Deadline(
+                                LocalDateTime.parse(deadlineList.get(1), format),
+                                deadlinePhraseList.get(1));
+                        for (String i : words) {
+                            this.storage = this.storage.addToStorage(i, newTask);
+                        }
+                        this.firstGreet = false;
+                        this.lastCommand = deadlinePhraseList.get(1);
+                        this.taskList = this.taskList.addTask(newTask);
+                        return this;
+                    }
+                    if (words.get(0).equals("EVENT")) {
+                        String[] splitFrom = nextTask.split(" /FROM ");
+                        List<String> eventActionSplit = Arrays.asList(splitFrom);
+                        String timeLinePhrase = eventActionSplit.get(1);
+                        String eventAction = eventActionSplit.get(0);
+                        String[] eventPhraseArray = eventAction.split("EVENT ");
+                        List<String> eventPhraseList = Arrays.asList(eventPhraseArray);
+                        String[] timeFrame = timeLinePhrase.split(" /TO ");
+                        List<String> timeLineSplit = Arrays.asList(timeFrame);
+                        String eventBegin = timeLineSplit.get(0);
+                        String eventEnd = timeLineSplit.get(1);
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        ScheduledEvent newTask = new ScheduledEvent(
+                                LocalDateTime.parse(eventBegin, format),
+                                LocalDateTime.parse(eventEnd, format),
+                                eventPhraseList.get(1));
+                        for (String i : words) {
+                            this.storage = this.storage.addToStorage(i, newTask);
+                        }
+                        this.firstGreet = false;
+                        this.lastCommand = eventPhraseList.get(1);
+                        this.taskList = this.taskList.addTask(newTask);
+                        return this;
+                    }
+                    if (words.get(0).equals("DELETE")) {
+                        this.firstGreet = false;
+                        this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
+                        String[] splitRemovedTask = this.removedTask.toString().split(" ");
+                        List<String> removedTaskArray = Arrays.asList(splitRemovedTask);
+                        for (String i : removedTaskArray) {
+                            this.storage = this.storage.removeFromStorage(i, this.removedTask);
+                        }
+                        this.lastCommand = nextTask;
+                        this.taskList = this.taskList.removeTask(Integer.valueOf(words.get(1)) - 1);
+                        return this;
+                    }
+                    if (words.get(0).equals("FIND")) {
+                        String[] toFind = nextTask.split("FIND ");
+                        List<String> keywords = Arrays.asList(toFind);
+                        TaskList findList = this.storage.getTaskList(keywords.get(1));
+                        this.firstGreet = false;
+                        this.foundList = findList;
+                        this.lastCommand = nextTask;
+                        return this;
+                    }
+                }
+            } catch (DukeException exception) {
+                System.out.println(exception);
+            } catch (Exception exception) {
+                System.out.println("ERRRR ERROR ERRR. SYSTEM FAILURE. UNKNOWN EXCEPTION. ERR ERR");
+            }
+        }
+        return this;
+    }
+
+
+
+
+
+
     public TaskList getTaskList() {
         return this.taskList;
     }

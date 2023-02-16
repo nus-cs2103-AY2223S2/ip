@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.io.input.ui.DialogBox;
 
+import duke.workflow.Event;
 import duke.workflow.Greeting;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,6 +30,10 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private UserInteraction chatbot = new UserInteraction();
+
+    private int runningDuke = -1;
+
+    private Event currentEvent;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Doraemon.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Vader.jpg"));
@@ -64,22 +69,58 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage),
                 DialogBox.getDukeDialog(toPrintOut, dukeImage));
+    }
 
+    private int runDuke() {
+        String isPlaying = userInput.getText();
+        userInput.clear();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(isPlaying, userImage));
+        if (isPlaying.equals("NO")) {
+            Greeting greeting = new Greeting(0);
+            Event nextEvent = greeting.toNext();
+            this.currentEvent = nextEvent;
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(nextEvent.toString(), dukeImage));
+            return 0;
+        } else if (isPlaying.equals("YES")) {
+            Greeting greeting = new Greeting(1);
+            Event nextEvent = greeting.toNext();
+            this.currentEvent = nextEvent;
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(nextEvent.toString(), dukeImage));
+
+            return 1;
+        } else {
+            String warning = "FOCUS, HUMAN. "
+                    + "YOU ARE TO ENTER INPUT WITH FULL CAPS.";
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(warning, dukeImage));
+            return -1;
+        }
     }
 
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-
-
-
-
-
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog("Sup Bro", dukeImage)
-        );
-        userInput.clear();
+        if (this.runningDuke < 0) {
+            runningDuke = runDuke();
+        } else if (runningDuke > 0) {
+            if (this.currentEvent.getStatus() == false) {
+                String input = userInput.getText();
+                userInput.clear();
+                this.currentEvent = this.currentEvent.toNextGui(input);
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(this.currentEvent.toString(), dukeImage));
+            } else {
+                String input = userInput.getText();
+                userInput.clear();
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog("Sup Bro", dukeImage));
+            }
+        } else {
+            return;
+        }
     }
 }
