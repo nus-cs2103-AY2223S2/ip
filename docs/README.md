@@ -1,7 +1,7 @@
 # User Guide
 Duke is a desktop software built in Java that allows users to create, delete, update and view tasks of different types - Todos, Events and Deadlines. Users have access to the highly intuitive GUI which allows them to manage the tasks much more efficiently.
 - [Features](#features)
-  - [Adding a task : `todo | event | deadline`](#adding a task)
+  - [Adding a task : `todo | event | deadline`](#adding-a-task)
   - [Deleting a task : `delete`](#deleting-a-task)
   - [Listing all tasks : `list`](#listing-all-tasks)
   - [Searching a task : `search`](#searching-a-task)
@@ -10,7 +10,7 @@ Duke is a desktop software built in Java that allows users to create, delete, up
 
 ## Features
 
-### Adding a task : `todo | event | deadline`
+### Adding a task : `todo | event | deadline`  <a name="adding-a-task"></a>
 Add a new task of the chosen type to the existing task list. 
 
 Format: 
@@ -23,7 +23,7 @@ Example of usage:
 - `event Sam wedding /from 1/12/2022 1600 /to 1/12/2022 2100`
 - `deadline assignment 5 /by 1/01/2023 2359`
 
-### Deleting a task : `delete`
+### Deleting a task : `delete`  <a name="deleting-a-task"></a>
 Delete a task with the given task number from the existing task list.
 
 Format:
@@ -32,14 +32,14 @@ Format:
 Example of usage:
 - `delete 2`
 
-### Listing all tasks : `list`
+### Listing all tasks : `list`  <a name="listing-all-tasks"></a>
 
 List all the tasks in the current task list.
 
 Format:
 - `list`
 
-### Searching a task : `search`
+### Searching a task : `search`  <a name="searching-a-task"></a>
 Search and list all the tasks with the given content.
 
 Format:
@@ -48,7 +48,7 @@ Format:
 Example of usage:
 - `search quiz`
 
-### Updating task dates : `update`
+### Updating task dates : `update`  <a name="updating-task-dates"></a>
 Update the task with the given id with the new given dates.
 
 Format:
