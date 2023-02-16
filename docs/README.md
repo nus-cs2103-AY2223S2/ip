@@ -6,9 +6,19 @@
 
 ## Features
 
+- Interact with Dudu
+  - [Send greeting](#hi---greeting-to-dudu)
+  - [Say Goodbye](#bye---exit-application)
 - Create different type of tasks and store in a list.
+  - [Todo task](#todo-description---add-a-todo-task)
+  - [Deadline task](#deadline-description-by-yyyy-mm-dd---add-a-deadline-task)
+  - [Event task](#event-description-from-yyyy-mm-dd-to-yyyy-mm-dd---add-a-event-task)
 - Manage the tasks by marking them as done or undone; delete them if necessary. 
+  - [Mark as Done](#mark-index---mark-a-task-as-done)
+  - [Mark as Undone](#unmark-index---mark-a-task-as-undone)
+  - [Delete a task](#delete-index---delete-a-task)
 - Find tasks based on their name.
+  - [Find a task](#find-keyword---find-a-task)
 
 ## Usage
 
