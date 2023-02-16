@@ -21,7 +21,7 @@ public class FindCommand extends Command {
 
         String output = ui.showFind();
         String listOfTasksWithKeyword = tasks.findTaskIndexWithKeyword(listOfKeywords);
-        return output + listOfTasksWithKeyword;
+        return output + "\t" + listOfTasksWithKeyword;
 
     }
 }
