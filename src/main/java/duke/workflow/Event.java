@@ -8,13 +8,13 @@ public abstract class Event {
     public Event (boolean isFinalEvent) {
         this.isFinalEvent = isFinalEvent;
     }
-    public abstract Event toNextEvent();
+    public abstract Event toNext();
 
     public abstract Event toNextGui(String nextTask);
 
     public abstract TaskList getTaskList();
 
-    public boolean isFinalEvent() {
+    public boolean getStatus() {
         return this.isFinalEvent;
     }
 }

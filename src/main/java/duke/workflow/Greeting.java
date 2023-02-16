@@ -10,7 +10,7 @@ import duke.util.TaskList;
  */
 
 public class Greeting extends Event {
-    private String status;
+    private int status;
 
     /**
      * Constructs the {@code Greeting} event that greets the user.
@@ -19,11 +19,21 @@ public class Greeting extends Event {
      */
     public Greeting() {
         super(false);
-        this.status = "";
+        this.status = -1;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    /**
+     * Constructs the {@code Greeting} event that greets the user. The
+     * flag status inPlay is decided by the user
+     *
+     * @param inPlay the flag status to decided whether the program
+     *               will end or will continue to run. 0 if the user
+     *               doesn't want to use Duke, and 1 if he/ she does.
+     */
+
+    public Greeting(int inPlay) {
+        super(false);
+        this.status = inPlay;
     }
 
     /**
@@ -33,8 +43,8 @@ public class Greeting extends Event {
      *          {@code DoTask} if the user wants to use Duke.
      */
 
-    public Event toNextEvent() {
-        if (this.status.equals("NOT PLAYING")) {
+    public Event toNext() {
+        if (this.status == 0) {
             return new Ending();
         } else {
             return new DoTask();
@@ -49,7 +59,8 @@ public class Greeting extends Event {
         return this;
     }
 
-    public String greet() {
+    @Override
+    public String toString() {
         return "SHALL WE PLAY A GAME?";
     }
 }
