@@ -14,6 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 
@@ -86,10 +89,7 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-        //Initial greeting
-        String greet = "Hello! I'm Broccoli the dinosaur \n";
-        greet += "           <|°▿▿▿▿°|/ \n";
-        greet += "      What can I do for you?";
+        String greet = Ui.getGreeting();
         Label greeting = new Label(greet);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, new ImageView(duke)));
         //Scroll down to the end every time dialogContainer's height changes.
@@ -112,7 +112,6 @@ public class Duke extends Application {
             }
         });
     }
-
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.

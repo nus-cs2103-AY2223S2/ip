@@ -40,6 +40,9 @@ public class Parser {
         } else if (splitInput[0].equals("find")) {
             //Finds a Task
             return TaskList.searchTask(array, splitInput);
+        } else if (splitInput[0].equals("help")) {
+            //Displays help message
+            return Ui.helpMessage();
         } else {
             try {
                 throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
