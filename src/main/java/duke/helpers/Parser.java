@@ -43,147 +43,167 @@ public class Parser {
     public static void handleInputs(VBox dialogContainer, TaskList tasks, TextField userInput, Image user, Image muse) {
         String input = userInput.getText();
         Label userText = new Label(input);
-        dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(userText, new ImageView(user))
-        );
-
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(user)));
         String outputString = "";
         boolean hasHandledInput = false;
-
-
         String[] splitArr = input.split(" ");
+        handleAndOutputString result = new handleAndOutputString(hasHandledInput, outputString);
         try {
-
             assert (!hasHandledInput) : "The program thinks it's done processing the commands!\n" +
                     "This is dangerous, please take a look @ Parser.java. :0 \n";
-
-            if (input.equals("bye") && !hasHandledInput) {
-                outputString = Ui.doFarewell();
-                hasHandledInput = setCaseHandled();
-            }
-
-            //bye case is now handled, if handled a case, will skip the rest of the conditionals.
-
-            if (input.equals("help") && !hasHandledInput) {
-                outputString = Ui.formatStr(Ui.generateHelpSheet());
-                hasHandledInput = setCaseHandled();
-            }
-
-            //help, in case user needs help is handled here.
-
-            if (input.equals("list") && !hasHandledInput) {
-               outputString = Ui.formatStr(tasks.listThings());
-               hasHandledInput = setCaseHandled();
-            }
-
-            //list case is now handled
-
-            if (splitArr.length == 1 && !hasHandledInput) {
-                throw new VagueInputException("Oh no! What do you mean? \n" +
-                        "I'm confused. Please specify... @.@");
-            }
-
-            //case where invalid input is entered is handled here.
-
-            if ((splitArr[0].equals("mark") || splitArr[0].equals("unmark")) && !hasHandledInput) {
-                if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
-                    throw new OutOfIndexException("Help! \n" +
-                            "The number has to be within range of our task-list!\n" +
-                            "try again.");
-                }
-                if (splitArr[0].equals("mark") &&
-                        tasks.getTask(Integer.parseInt(splitArr[1]) - 1).
-                                getMark() != false) {
-                    throw new WrongBooleanException("Hey! \n" +
-                            "This is already done. You can't mark it again. :0 \n" +
-                            "try again.");
-                } else if (splitArr[0].equals("unmark") &&
-                        tasks.getTask(Integer.parseInt(splitArr[1]) - 1).
-                                getMark() != true) {
-                    throw new WrongBooleanException("Hey! \n" +
-                            "This is undone. You can't mark it undone again. :0 \n" +
-                            "try again.");
-                }
-                hasHandledInput = setCaseHandled();
-                outputString = tasks.mark(splitArr[0], (Integer.parseInt(splitArr[1]) - 1));
-            }
-
-            if (splitArr[0].equals("delete") && !hasHandledInput) {
-                if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
-                    throw new OutOfIndexException("Help! \n" +
-                            "The number has to be within range of our task-list!\n" +
-                            "Please try again!");
-                }
-                Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
-                tasks.removeTask(Integer.parseInt(splitArr[1]) - 1);
-                outputString = Ui.formatStr(tasks.deleteReport(newTask));
-                hasHandledInput = setCaseHandled();
-            }
-
-            if (splitArr[0].equals("find") && !hasHandledInput) {
-                String searchTerm = input.substring(5);
-                boolean hasFoundAnyTerms = false;
-                String outputResults = "";
-                for (int i = 0; i < tasks.getSize(); i++) {
-                    if (!tasks.getTask(i).getContent().contains(searchTerm)) {
-                        continue;
-                    }
-                    if (outputResults == "") {
-                        outputResults += (i + 1) + tasks.getTask(i).toString();
-                        hasFoundAnyTerms = true;
-                        continue;
-                    }
-                    outputResults += "\n" + (i + 1) + tasks.getTask(i).toString();
-                    hasFoundAnyTerms = true;
-                }
-                outputString = Ui.outputSearchResults(hasFoundAnyTerms, outputResults);
-                hasHandledInput = setCaseHandled();
-            }
-
-            if (splitArr[0].equals("todo") && !hasHandledInput) {
-                Todo newTodo = new Todo(input);
-                tasks.addTask(newTodo);
-                outputString = Ui.formatStr(tasks.addReport(newTodo));
-                hasHandledInput = setCaseHandled();
-            }
-            if (splitArr[0].equals("deadline") && !hasHandledInput) {
-                Deadline newDead = new Deadline(input);
-                tasks.addTask(newDead);
-                outputString = Ui.formatStr(tasks.addReport(newDead));
-                hasHandledInput = setCaseHandled();
-            }
-            if (splitArr[0].equals("event") && !hasHandledInput) {
-                Event newEvent = new Event(input);
-                tasks.addTask(newEvent);
-                outputString = Ui.formatStr(tasks.addReport(newEvent));
-                hasHandledInput = setCaseHandled();
-            }
-
-            if (hasHandledInput == false){
-                throw new VagueInputException("Oh no! What do you mean? \n" +
-                        "I'm confused. Please specify... @.@");
+            result = handleOneWordCommands(input, tasks, splitArr, result);
+            result = handleMark(tasks, splitArr, result);
+            result = handleDelete(splitArr, tasks, result);
+            result = handleFind(input, splitArr, tasks, result);
+            result = handleTasks(splitArr, input, tasks, result);
+            if (result.getHasHandled() == false){
+                throw new VagueInputException("Oh no! What do you mean? \n" + "I'm confused. Please specify... @.@");
             }
         }
-
-        //end of try loop, we will now address errors and print the response of muse.
-
         catch (VagueInputException ex) {
-            outputString = Ui.formatStr(ex.getMessage());
+            result.setOutputString(Ui.formatStr(ex.getMessage()));
         } catch (OutOfIndexException ex) {
-            outputString = Ui.formatStr(ex.getMessage());
+            result.setOutputString(Ui.formatStr(ex.getMessage()));
         } catch (WrongBooleanException ex) {
-            outputString = Ui.formatStr(ex.getMessage());
+            result.setOutputString(Ui.formatStr(ex.getMessage()));
         }
-
-        //we handle all the possible exceptions here, and catch them, updating
-        //muse's input to reflect addressing the error.
-
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(new Label(outputString), new ImageView(muse))
-        );
+                DialogBox.getDukeDialog(new Label(result.getOutputString()), new ImageView(muse)));
     }
-
     private static boolean setCaseHandled() {
         return true;
+    }
+
+    private static handleAndOutputString handleMark(TaskList tasks, String[] splitArr, handleAndOutputString result)
+            throws OutOfIndexException, WrongBooleanException {
+        if ((splitArr[0].equals("mark") || splitArr[0].equals("unmark")) && !result.getHasHandled()) {
+            if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
+                throw new OutOfIndexException("Help! \n" +
+                        "The number has to be within range of our task-list!\n" + "try again.");
+            }
+            if (splitArr[0].equals("mark") &&
+                    tasks.getTask(Integer.parseInt(splitArr[1]) - 1).getMark() != false) {
+                throw new WrongBooleanException("Hey! \n" +
+                        "This is already done. You can't mark it again. :0 \n" + "try again.");
+            } else if (splitArr[0].equals("unmark") &&
+                    tasks.getTask(Integer.parseInt(splitArr[1]) - 1).getMark() != true) {
+                throw new WrongBooleanException("Hey! \n" +
+                        "This is undone. You can't mark it undone again. :0 \n" + "try again.");
+            }
+            result.setTrue();
+            result.setOutputString(tasks.mark(splitArr[0], (Integer.parseInt(splitArr[1]) - 1)));
+        } return result;
+    }
+
+    private static handleAndOutputString handleOneWordCommands(String input, TaskList tasks,
+            String[] splitArr, handleAndOutputString result) throws VagueInputException {
+        String outputString = "";
+        if (input.equals("bye") && !result.getHasHandled()) {
+            result.setOutputString(Ui.doFarewell());
+            result.setTrue();
+        }
+        if (input.equals("help") && !result.getHasHandled()) {
+            result.setOutputString(Ui.generateHelpSheet());
+            result.setTrue();
+        }
+        if (input.equals("list") && !result.getHasHandled()) {
+            result.setOutputString(Ui.formatStr(tasks.listThings()));
+            result.setTrue();
+        }
+        if (splitArr.length == 1 && !result.getHasHandled()) {
+            throw new VagueInputException("Oh no! What do you mean? \n" +
+                    "I'm confused. Please specify... @.@");
+        }
+        return result;
+    }
+
+    private static handleAndOutputString handleDelete(String[] splitArr,
+            TaskList tasks, handleAndOutputString result) throws OutOfIndexException {
+        if (splitArr[0].equals("delete") && !result.getHasHandled()) {
+            if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
+                throw new OutOfIndexException("Help! \n" +
+                        "The number has to be within range of our task-list!\n" +
+                        "Please try again!");
+            }
+            Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
+            tasks.removeTask(Integer.parseInt(splitArr[1]) - 1);
+            result.setOutputString(Ui.formatStr(tasks.deleteReport(newTask)));
+            result.setTrue();
+        }
+        return result;
+    }
+
+    private static handleAndOutputString handleFind(String input, String[] splitArr,
+            TaskList tasks, handleAndOutputString result) throws OutOfIndexException {
+        if (splitArr[0].equals("find") && ! result.getHasHandled()) {
+            String searchTerm = input.substring(5);
+            boolean hasFoundAnyTerms = false;
+            String outputResults = "";
+            for (int i = 0; i < tasks.getSize(); i++) {
+                if (!tasks.getTask(i).getContent().contains(searchTerm)) {
+                    continue;
+                }
+                if (outputResults == "") {
+                    outputResults += (i + 1) + tasks.getTask(i).toString();
+                    hasFoundAnyTerms = true;
+                    continue;
+                }
+                outputResults += "\n" + (i + 1) + tasks.getTask(i).toString();
+                hasFoundAnyTerms = true;
+            }
+            result.setOutputString(Ui.outputSearchResults(hasFoundAnyTerms, outputResults));
+            result.setTrue();
+        }
+        return result;
+    }
+
+    private static handleAndOutputString handleTasks(String[] splitArr, String input,
+            TaskList tasks, handleAndOutputString result) {
+        if (splitArr[0].equals("todo") && ! result.getHasHandled()) {
+            Todo newTodo = new Todo(input);
+            tasks.addTask(newTodo);
+            result.setOutputString(Ui.formatStr(tasks.addReport(newTodo)));
+            result.setTrue();
+        }
+        if (splitArr[0].equals("deadline") && !result.getHasHandled()) {
+            Deadline newDead = new Deadline(input);
+            tasks.addTask(newDead);
+            result.setOutputString(Ui.formatStr(tasks.addReport(newDead)));
+            result.setTrue();
+        }
+        if (splitArr[0].equals("event") && !result.getHasHandled()) {
+            Event newEvent = new Event(input);
+            tasks.addTask(newEvent);
+            result.setOutputString(Ui.formatStr(tasks.addReport(newEvent)));
+            result.setTrue();
+        }
+        return result;
+    }
+}
+ class handleAndOutputString {
+    private String outputString;
+    private boolean hasHandledInput;
+
+    public handleAndOutputString(boolean hasHandledInput, String outputString) {
+        this.outputString = outputString;
+        this.hasHandledInput = hasHandledInput;
+    }
+
+    public handleAndOutputString setTrue() {
+        this.hasHandledInput = true;
+        return this;
+    }
+
+    public handleAndOutputString setOutputString(String outputString) {
+        this.outputString = outputString;
+        return this;
+    }
+
+    public String getOutputString() {
+        return this.outputString;
+    }
+
+    public boolean getHasHandled() {
+        return this.hasHandledInput;
     }
 }
