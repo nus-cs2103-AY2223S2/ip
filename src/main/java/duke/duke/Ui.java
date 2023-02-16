@@ -44,7 +44,9 @@ public class Ui {
                 + "..........V..**:.........:V.....**....V......V.........:**:.V*........\n"
                 + "..........***:...........:F*****V*....V******I............***:........";
         this.scanner = new Scanner(System.in);
-        this.welcome = "Hello! I'm GPT0.01!\nWhat can I do for you?";
+        this.welcome = "Hi, this is a message from the developer of GPT0.01!\n"
+                + "Please do not abuse this AI and try to get it to do nonsensical things.\n"
+                + "Also, this AI can't write essays for you. Use GPT-4 Instead.";
         this.divider = "\n____________________________________________________________\n";
 
     }
@@ -71,6 +73,13 @@ public class Ui {
     public void showWelcome() {
         display(this.welcome);
     };
+
+    /**
+     * Returns the welcome message.
+     */
+    public String getGreetings() {
+        return this.welcome;
+    }
 
     /**
      * Displays text on the screen.

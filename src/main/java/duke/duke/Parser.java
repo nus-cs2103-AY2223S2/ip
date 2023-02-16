@@ -74,7 +74,7 @@ public class Parser {
             String description = this.queries(line, Todos.KEYWORDS).get(0);
             c = new TodoCommand(new Todos(description));
             break;
-            case "event":
+        case "event":
             if (line.length == 1) {
                 throw new NoArgsException("deadline");
             } else if (joined.split("/").length != 3) {
@@ -106,10 +106,12 @@ public class Parser {
             break;
 
         case "undo":
+            int index;
             if (line.length == 1) {
-                throw new NoArgsException("undo command");
+                index = 1;
+            } else {
+                index = this.singleQueryInteger(line);
             }
-            int index = this.singleQueryInteger(line);
             if (index < 0) {
                 throw new InvalidException();
             }

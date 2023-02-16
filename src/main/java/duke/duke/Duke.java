@@ -40,6 +40,10 @@ public class Duke {
         this(DEFAULT_PATH);
     }
 
+    public String getGreetings() {
+        return this.ui.getGreetings();
+    }
+
     public static void main(String[] args) {
         String txtDir = System.getProperty("user.dir") + "/data/tasks.txt";
         Duke instance = new Duke(txtDir);
@@ -70,7 +74,6 @@ public class Duke {
 
 
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
