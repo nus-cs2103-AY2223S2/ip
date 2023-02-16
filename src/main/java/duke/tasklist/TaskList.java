@@ -2,7 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
-import duke.exception.TaskNumberNotFoundException;
+import duke.exception.marktaskexceptions.MarkTaskNumberInvalidException;
 import duke.task.Task;
 
 
@@ -40,13 +40,13 @@ public class TaskList {
      * Returns the task according to the identifier.
      * @param taskNumber identifier of the task.
      * @return the task corresponding to the identifier.
-     * @throws TaskNumberNotFoundException thrown when the identifier does not exist in the taskList.
+     * @throws MarkTaskNumberInvalidException thrown when the identifier does not exist in the taskList.
      */
-    public Task getTask(int taskNumber) throws TaskNumberNotFoundException {
+    public Task getTask(int taskNumber) throws MarkTaskNumberInvalidException {
         try {
             return this.tasks.get(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskNumberNotFoundException();
+            throw new MarkTaskNumberInvalidException();
         }
     }
 
@@ -54,13 +54,13 @@ public class TaskList {
      * Deletes the task according to the identifier.
      *
      * @param taskNumber identifier of the task.
-     * @throws TaskNumberNotFoundException thrown when the identifier does not exist in the taskList.
+     * @throws MarkTaskNumberInvalidException thrown when the identifier does not exist in the taskList.
      */
-    public void deleteTask(int taskNumber) throws TaskNumberNotFoundException {
+    public void deleteTask(int taskNumber) throws MarkTaskNumberInvalidException {
         try {
             this.tasks.remove(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskNumberNotFoundException();
+            throw new MarkTaskNumberInvalidException();
         }
     }
 

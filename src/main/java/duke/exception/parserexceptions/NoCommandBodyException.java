@@ -7,6 +7,6 @@ import duke.exception.DukeException;
  */
 public class NoCommandBodyException extends DukeException {
     public NoCommandBodyException() {
-        super("\n" + "Oh my, I'm gonna need a command body!" + "\n");
+        super("\n" + "Oh my, I'm gonna need some parameters along with that keyword!" + "\n");
     }
 }

@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.database.Database;
-import duke.exception.TaskNumberNotFoundException;
+import duke.exception.marktaskexceptions.MarkTaskNumberInvalidException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     /**
      * Represents a command to delete a task stored in from Duke.
      *
-     * @param taskNumber The identifier of the task.
+     * @param taskNumber The identifier of the task to be deleted.
      */
     public DeleteCommand(int taskNumber) {
         super();
@@ -27,10 +27,11 @@ public class DeleteCommand extends Command {
      * @param taskList taskList of Duke.
      * @param ui user interface object of Duke.
      * @param database database of Duke.
-     * @throws TaskNumberNotFoundException thrown when the taskNumber identifier does not exist in the taskList of Duke.
+     * @throws MarkTaskNumberInvalidException thrown when the taskNumber identifier does not exist in the taskList of
+     *         Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Database database) throws TaskNumberNotFoundException {
+    public void execute(TaskList taskList, Ui ui, Database database) throws MarkTaskNumberInvalidException {
         assert this.isActive();
         String taskDescription = taskList.getTask(taskNumber).getStatus();
         taskList.deleteTask(taskNumber);
