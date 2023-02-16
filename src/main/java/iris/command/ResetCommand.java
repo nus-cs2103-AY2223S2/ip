@@ -23,7 +23,7 @@ public class ResetCommand extends Command {
      */
     @Override
     public String getResponse(TaskList tasks, TaskStore taskStore) throws IrisException {
-        return "Your task list has been resetted. You have no commands.";
+        return "Your task list has been resetted. You have no tasks.";
     }
 
     /**
