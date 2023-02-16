@@ -26,6 +26,8 @@ public class TaskList {
 
     /**
      * Lists out all tasks and their status.
+     *
+     * @return List of all tasks and status.
      */
     public String list() {
         if (tasks.size() == 0) {
@@ -44,6 +46,7 @@ public class TaskList {
      * Lists out all tasks with matching keyword.
      *
      * @param keyword Keyword to match.
+     * @return Return list of tasks by keyword.
      */
     public String find(String keyword) {
         int rank = 1;

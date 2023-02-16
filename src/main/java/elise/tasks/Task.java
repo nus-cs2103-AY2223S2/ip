@@ -45,6 +45,8 @@ public abstract class Task {
     protected abstract String getTypeIcon();
 
     /**
+     * Returns String representation of task.
+     *
      * @return String representation of the generic task
      */
     @Override
