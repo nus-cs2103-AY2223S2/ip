@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
             + "To add a task with a deadline, type \"deadline \" + your task + \"/by \" + your deadline.\n"
             + "To add an event, type \"event \" + your event + "
             + "\"/from \" + event start time + \"/to \" + event end time.\n"
-            + "For deadlines and events, the date and time should by in the format\n"
+            + "For deadlines and events, the date and time should by in the format "
             + "\"dd-MM-yyyy HHmm\". Eg: 15-05-2019 1800.\n"
             + "To see an list of your tasks, type \"list\".\n"
             + "To mark a task as done, type \"mark <task number>\".\n"
@@ -24,9 +24,9 @@ public class HelpCommand extends Command {
             + "A task marked with a X is done.\n"
             + "To reset the task list type \"reset\".\n"
             + "To get a list of deadlines and events on a particular day, type \"filter \" + date (dd-MM-yyyy).\n"
-            + "To get a list of deadlines and events during a period of time, type\n"
+            + "To get a list of deadlines and events during a period of time, type "
             + "\"filter \" + start of period \" /to \" end of period (dd-MM-yyyy HHmm).\n"
-            + "To find a task, type \"find <keywords>\""
+            + "To find a task, type \"find <keywords>\".\n"
             + "To close me, type \"bye\".\n"
             + "Have fun!";
 
