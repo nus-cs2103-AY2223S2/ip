@@ -5,6 +5,7 @@ package duke;
 //import javafx.scene.control.Label;
 //import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -128,6 +129,28 @@ public class TaskList {
         Task t = new Task.Event(parts[0].substring(6), parts[1].substring(5), parts[2].substring(3));
         taskList.add(t);
         return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t, taskList.size());
+    }
+
+    public String postpone(String... parts) throws DukeException {
+        String keyword = "(.*)" + parts[0].substring(9).trim() + "(.*)";
+        boolean found = false;
+        String result = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
+            if (t.toString().matches(keyword)) {
+                found = true;
+                boolean isChanged = t.postponeDeadline(parts[1].substring(3).trim());
+                if (isChanged) {
+                    result = "Deadline has been changed!";
+                } else {
+                    result = "Invalid postpone date! Must be after the current deadline.";
+                }
+            }
+        }
+        if (!found) {
+            result = "No such deadline!";
+        }
+        return result;
     }
 
     /**

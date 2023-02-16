@@ -37,6 +37,9 @@ public class Parser {
         } else if (textInput.length() >= 7 &&
                 textInput.substring(0, 5).equalsIgnoreCase("event")) {
             this.action = "event";
+        } else if (textInput.length() >= 10 &&
+                textInput.substring(0, 8).equalsIgnoreCase("postpone")) {
+            this.action = "postpone";
         } else {
             this.action = "not found";
         }

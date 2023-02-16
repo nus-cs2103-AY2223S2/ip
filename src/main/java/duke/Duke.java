@@ -85,6 +85,17 @@ public class Duke {
             } catch (AssertionError e) {
                 response = e.toString();
             }
+
+        } else if (this.parser.action.equals("postpone")) {
+            try {
+                String[] parts = textInput.split("/");
+                assert parts.length >= 2 : "Invalid input for event task";
+                response = this.tasks.postpone(parts);
+                this.storage.writeTxt(tasks);
+            } catch (DukeException e) {
+                response = e.toString();
+            }
+
         } else {
             response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
