@@ -10,6 +10,10 @@ class Joe {
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Runs Joe, my java bot!
+     *
+     */
     public Joe() {
         try {
             storage = new Storage("duke.txt");
@@ -21,6 +25,12 @@ class Joe {
         parser = new Parser(taskList);
     }
 
+    /**
+     * Handles the response for Joe
+     *
+     * @param input Input to handle.
+     * @return String Joe's response.
+     */
     String handleResponse(String input) {
         String out = parser.parse(input);;
         try {

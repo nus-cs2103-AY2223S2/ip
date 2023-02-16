@@ -11,6 +11,12 @@ public class Duke {
         joe = new Joe();
     }
 
+    /**
+     * Gets Joe to handle the input.
+     *
+     * @param input Input to handle.
+     * @return String Joe's response.
+     */
     static String handleResponse(String input) {
         return joe.handleResponse(input);
     }

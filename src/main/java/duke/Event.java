@@ -10,7 +10,7 @@ public class Event extends Task {
     private final LocalDateTime fromTime;
     private final LocalDateTime toTime;
 
-     /**
+    /**
      * Constructor for the Event.
      *
      * @param taskDescription Description of the Event.

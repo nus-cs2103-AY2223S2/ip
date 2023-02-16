@@ -25,7 +25,7 @@ abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Marks task if done if boolean is True otherwise False.
+     * Sets task status to boolean.
      *
      * @param isDone Description state of task.
      */
@@ -33,6 +33,11 @@ abstract class Task implements Comparable<Task> {
         this.isDone = isDone;
     }
 
+    /**
+     * Sets the task description.
+     *
+     * @param taskDescription of task.
+     */
     void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
     }
@@ -46,6 +51,11 @@ abstract class Task implements Comparable<Task> {
         return taskDescription;
     }
 
+    /**
+     * Gets the Formatter.
+     *
+     * @return The Formatter.
+     */
     DateTimeFormatter getFormatter() {
         return formatter;
     }

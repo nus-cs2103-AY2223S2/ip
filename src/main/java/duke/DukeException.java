@@ -1,11 +1,19 @@
 package duke;
 
+/**
+ * This is DukeException which contains Duke's exceptions.
+ */
 public class DukeException extends Exception {
 
     public DukeException(String msg) {
         super(msg);
     }
 
+    /**
+     * Wrapper to rethrows errors.
+     *
+     * @param s Input string to rethrow.
+     */
     public static void rethrow(String s) throws ToDoException, UnknownCommandException, CorruptedTaskListException {
         try {
             if (s.equals("ToDoException")) {

@@ -10,8 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represents a persistent storage that creates a file
- * , can be written to and read from.
+ * Represents a persistent storage that creates a file.
+ * Can write to and read from file.
  */
 class Storage {
     private static final Pattern TO_MATCH;
