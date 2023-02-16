@@ -26,9 +26,9 @@ public class DateHandler {
      */
     public static LocalDateTime parse(String input) throws exceptions.invalid.Input {
         try {
-            LocalDateTime ret =  LocalDateTime.parse(input, dateTimeFormat);
+            LocalDateTime ret = LocalDateTime.parse(input, dateTimeFormat);
             ret.format(printFormat);
-            System.out.println(ret.format(printFormat));
+
             return ret;
         } catch (DateTimeParseException e) {
             throw new exceptions.invalid.Input(

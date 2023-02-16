@@ -219,20 +219,19 @@ public class Parser {
      * This method returns the help message to be printed.
      * @return Returns the help message.
      */
-    private static String helpMessage(){
-        String ret = "List: Lists all file" +
-                "mark [integer]\n" +
-                "unmark [integer]\n" +
-                "todo [description]\n" +
-                "deadline [description] /by [yyyy/MM/dd HHmm]\n" +
-                "event [description] /from [yyyy/MM/dd HHmm] /to [yyyy/MM/dd HHmm]\n" +
-                "find [keyword]\n" +
-                "delete [integer]\n" +
-                "save\n" +
-                "load\n" +
-                "bye\n" +
-                "help"
-                ;
+    private static String helpMessage() {
+        String ret = "List: Lists all file"
+                + "mark [integer]\n"
+                + "unmark [integer]\n"
+                + "todo [description]\n"
+                + "deadline [description] /by [yyyy/MM/dd HHmm]\n"
+                + "event [description] /from [yyyy/MM/dd HHmm] /to [yyyy/MM/dd HHmm]\n"
+                + "find [keyword]\n"
+                + "delete [integer]\n"
+                + "save\n"
+                + "load\n"
+                + "bye\n"
+                + "help";
         return ret;
     }
 

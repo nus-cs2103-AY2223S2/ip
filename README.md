@@ -48,7 +48,7 @@ Add a deadline task.
 Usage : `deadline [description] /by [yyyy/MM/dd HHmm]`
 
 Example:
-> deadline homework /by 2022-10-5
+> deadline homework /by 2022/10/05 1000
 
 ### Event
 Add an event task.
