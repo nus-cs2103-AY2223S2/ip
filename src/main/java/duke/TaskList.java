@@ -3,7 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// class TaskList - handles lists of Task objects using an ArrayList
+/**
+ * Handles lists of Task objects using an ArrayList
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -11,10 +13,37 @@ public class TaskList {
         this.tasks = t;
     }
 
-    public TaskList() {
-        this.tasks = new ArrayList<Task>();
+    /**
+     * Add Task to the TaskList
+     */
+    public void addTask(Task t) {
+        tasks.add(t);
     }
 
+    /**
+     * Removes Task from the TaskList
+     */
+    public void remove(int i) {
+        tasks.remove(i);
+    }
+
+    /**
+     * Retrieves the total number of Tasks in the TaskList
+     */
+    public int size() {
+        return tasks.size();
+    }
+
+    /**
+     * Retrieves Task from the TaskList based on a given index
+     */
+    public Task get(int i) {
+        return tasks.get(i);
+    }
+
+    /**
+     * Displays all the tasks in the TaskList as a formatted String
+     */
     public String displayTasks() {
         String s = "";
         assert s.length() == 0 : "String s should be empty";
@@ -30,6 +59,9 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * Displays all the sorted tasks in the TaskList as a formatted String
+     */
     public String displaySorted() {
         // array sorted output sortedStrings,
         // index 0 for to do, index 1 for deadline, index 2 for events
@@ -52,6 +84,9 @@ public class TaskList {
         return sortedOutput;
     }
 
+    /**
+     * Retrieves the arraylist of Tasks in the TaskList
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
