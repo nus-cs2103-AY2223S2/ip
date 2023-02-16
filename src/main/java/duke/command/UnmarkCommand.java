@@ -25,9 +25,9 @@ public class UnmarkCommand extends Command {
                     .split("unmark")[1]
                     .trim());
         } catch (NumberFormatException e) {
-            throw new DukeException("Index given is not an integer");
+            throw DukeException.getErrorTaskNumberFormat();
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("An index for a task was not given");
+            throw DukeException.getErrorTaskArrayIndexOutOfBounds();
         }
     }
 

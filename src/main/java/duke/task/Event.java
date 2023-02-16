@@ -26,12 +26,12 @@ public class Event extends Task {
         try {
             this.from = LocalDate.parse(from);
         } catch (DateTimeParseException e) {
-            throw new DukeException("The start time of an event must be in the format <YYYY-MM-DD>.");
+            throw DukeException.getErrorTaskTimeFormat("an event", "start time");
         }
         try {
             this.to = LocalDate.parse(to);
         } catch (DateTimeParseException e) {
-            throw new DukeException("The end time of an event must be in the format <YYYY-MM-DD>.");
+            throw DukeException.getErrorTaskTimeFormat("an event", "end time");
         }
     }
 
@@ -80,7 +80,7 @@ public class Event extends Task {
 
             return new Event(description, from, to, status);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Saved data is missing some fields");
+            throw DukeException.getErrorTaskLoadMissingField();
         }
     }
 
@@ -105,9 +105,7 @@ public class Event extends Task {
 
             return new Event(description, from, to);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Event task is missing some fields.");
-        } catch (Exception e) {
-            throw new DukeException("1");
+            throw DukeException.getErrorTaskMissingField("Event");
         }
     }
     // event test /from 2023-02-01 /to 2023-03-01

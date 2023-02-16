@@ -70,7 +70,9 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (Exception e) {
-                ui.showError("There was an unknown error");
+                ui.showError(DukeException
+                        .getError()
+                        .getMessage());
             } finally {
                 ui.showLine();
             }
@@ -89,12 +91,20 @@ public class Duke {
     }
 
     public String getResponse(String input) throws DukeException {
-        Command c = Parser.parse(input);
-        c.execute(tasks, ui, storage);
-        String response = c.getResponse();
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            String response = c.getResponse();
 
-        assert response != null : "Response is null";
+            assert response != null : "Response is null";
 
-        return response;
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return DukeException
+                    .getError()
+                    .getMessage();
+        }
     }
 }

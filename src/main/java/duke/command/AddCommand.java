@@ -35,7 +35,7 @@ public class AddCommand extends Command {
         // Check for duplicate
         for (Task task: tasks.getTasks()) {
             if (task.equals(this.task)) {
-                throw new DukeException("Task is already in the TaskList");
+                throw DukeException.getErrorTaskDuplicate();
             }
         }
 

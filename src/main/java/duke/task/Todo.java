@@ -48,7 +48,7 @@ public class Todo extends Task {
 
             return new Todo(description, status);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Saved data is missing some fields");
+            throw DukeException.getErrorTaskLoadMissingField();
         }
     }
 
@@ -71,7 +71,7 @@ public class Todo extends Task {
 
             return new Todo(description);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw DukeException.getErrorTaskMissingField("todo");
         }
     }
 

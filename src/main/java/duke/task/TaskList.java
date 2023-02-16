@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
 
 /**
  * Deals with tasks in list.
@@ -35,22 +31,6 @@ public class TaskList {
 
     public int size() {
         return tasks.size();
-    }
-
-    /**
-     * Gets the task at the specified index.
-     *
-     * @param index Index of the task.
-     * @return Task at specified index.
-     * @throws DukeException If given index is not in the list.
-     */
-    public Task get(int index) throws DukeException {
-        try {
-            assert index >= 0 : "Index given is negative";
-            return tasks.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Index is not in the list of task");
-        }
     }
 
     /**
@@ -85,7 +65,7 @@ public class TaskList {
         case 'E':
             return Event.load(saveData, delimiter);
         default:
-            throw new DukeException("Task is of the wrong type");
+            throw DukeException.getErrorTaskType();
         }
     }
 
@@ -111,7 +91,7 @@ public class TaskList {
             assert index > 0 : "Index given is less than 1";
             return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Index of task to be removed is not in the list of task");
+            throw DukeException.getErrorTaskIndexOutOfBounds("removed");
         }
     }
 
@@ -142,7 +122,7 @@ public class TaskList {
             task.mark();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Index of task to be marked is not in the list of task");
+            throw DukeException.getErrorTaskIndexOutOfBounds("marked");
         }
     }
 
@@ -160,7 +140,8 @@ public class TaskList {
             task.unmark();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Index of task to be unmarked is not in the list of task");
+            throw DukeException.getErrorTaskIndexOutOfBounds("unmarked");
+
         }
     }
 }

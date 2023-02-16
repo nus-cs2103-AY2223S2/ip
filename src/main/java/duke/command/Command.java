@@ -17,7 +17,7 @@ public abstract class Command {
         return response;
     }
 
-    public void setResponse(String response) {
+    protected void setResponse(String response) {
         this.response = response;
     }
 
