@@ -98,15 +98,23 @@ Expected outcome:
 `
 
 ## Summary of Commands
-**cmd**                                 : shows list of commands
-**todo** <description>                  : adds a todo task
-**deadline** <description> /by <date>   : adds a deadline task (Note: date should be in format dd/mm/yyyy)
-**event** <description> /from <date/time> /to <date/time>: adds an event task (Note: date/time is in format dd/mm/yyyy hh:mm)
-**mark** <task number>                  : marks a task as done
-**unmark** <task number>                : marks a task as incomplete
-**list**`                               : shows your task list
-**delete** <task number>                : deletes a task from the list
-**find** <keyword>                      : searches for a task in the list
+***cmd***: shows list of commands
+
+***todo*** description: adds a todo task
+
+***deadline*** description /***by*** <date>: adds a deadline task (Note: date should be in format dd/mm/yyyy)
+
+***event*** description /***from*** <date/time> /***to*** <date/time>: adds an event task (Note: date/time is in format dd/mm/yyyy hh:mm)
+
+***mark*** taskNumber: marks a task as done
+
+***unmark*** taskNumber: marks a task as incomplete
+
+***list*** : shows your task list
+
+***delete*** taskNumber: deletes a task from the list
+
+***find*** keyword: searches for a task in the list
 
 ## Acknowledgements
 Adapted from: https://github.com/se-edu/addressbook-level3/blob/master/docs/UserGuide.md
