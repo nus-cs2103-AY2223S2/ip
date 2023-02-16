@@ -20,7 +20,7 @@ Duke chatbot is a **desktop app for managing tasks** (CLI) while still having th
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar duke.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds.<br>
-   ![Ui](images/Khabib,png)
+   ![Ui](Ui.png)
 
 1. There are also a alternatives to run the Duke chatbot:
     1. Go to the root directory. Then do ./gradlew build. After the test cases has
@@ -132,7 +132,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find borrow book` returns `borrow book mockingbird` and `borrow book mythical-man-month`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a task : `delete`
 
