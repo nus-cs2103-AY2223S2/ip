@@ -174,7 +174,7 @@ public class Duke {
         if (LocalDateTime.parse(date, formatter).compareTo(deadline.getDeadline()) > 0) {
             tasks.set(taskNumber, new Deadline(deadline.getDescription(), date));
             Deadline newDeadline = (Deadline) tasks.get(taskNumber);
-            throw new DukeException(deadline + " has been snoozed to " + newDeadline.getDeadline());
+            throw new DukeException(deadline + " has been snoozed to " + newDeadline);
         } else {
             throw new DukeException("    OOPS!!! Cannot snooze to an earlier or same timing!");
         }

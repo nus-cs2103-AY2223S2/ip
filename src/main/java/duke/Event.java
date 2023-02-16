@@ -21,14 +21,14 @@ public class Event extends Task {
         }
     }
 
-    public Event(boolean isMarked, String content, String from, String to) {
+    public Event(boolean isMarked, String content, String from, String to) throws DukeException {
         super(isMarked, content);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             this.from = LocalDateTime.parse(from.trim(), formatter);
             this.to = LocalDateTime.parse(to.trim(), formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
+        } catch (Exception e) {
+            throw new DukeException("Date might not be the right format! Make sure it is <desc> /from <yyyy-MM-dd HH:mm> /to <yyyy-MM-dd HH:mm>");
         }
     }
 
