@@ -1,10 +1,10 @@
 package jeno.command;
 
 import jeno.exception.JenoException;
+import jeno.parser.Parser;
 import jeno.storage.Note;
 import jeno.storage.Storage;
 import jeno.storage.TaskList;
-import jeno.parser.Parser;
 import jeno.task.Deadline;
 import jeno.task.Task;
 import jeno.ui.Ui;
@@ -52,7 +52,7 @@ public class DeadlineCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new JenoException("Oops! Please enter deadline according to a valid 'DD/MM/YYYY HH:mm' format.\n");
         }
-        return  deadlineTime;
+        return deadlineTime;
     }
 
     /**

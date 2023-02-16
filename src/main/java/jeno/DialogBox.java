@@ -36,7 +36,7 @@ public class DialogBox extends HBox {
                 e.printStackTrace();
             }
 
-        } else if (user.equals("Jeno")){
+        } else if (user.equals("Jeno")) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/JenoDialogBox.fxml"));
                 fxmlLoader.setController(this);

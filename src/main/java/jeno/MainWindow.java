@@ -60,5 +60,4 @@ public class MainWindow extends AnchorPane {
         }
         userInput.clear();
     }
-
 }

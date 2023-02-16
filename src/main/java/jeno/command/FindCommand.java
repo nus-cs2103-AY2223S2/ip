@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      * @return String representation of keyword
      */
     public String getFindKeyword(String input) throws JenoException {
-        assert input.length() > 5: "Find keyword cannot be empty";
+        assert input.length() > 5 : "Find keyword cannot be empty";
         try {
             input.substring(5);
         } catch (StringIndexOutOfBoundsException e) {

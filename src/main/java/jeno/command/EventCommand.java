@@ -1,10 +1,10 @@
 package jeno.command;
 
 import jeno.exception.JenoException;
+import jeno.parser.Parser;
 import jeno.storage.Note;
 import jeno.storage.Storage;
 import jeno.storage.TaskList;
-import jeno.parser.Parser;
 import jeno.task.Event;
 import jeno.ui.Ui;
 
@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Class for EventCommand.
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
 
     /**
      * Constructor for EventCommand.
@@ -52,7 +52,7 @@ public class EventCommand extends Command{
         } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
             throw new JenoException("Oops! Please enter a valid deadline task format.\n");
         } catch (DateTimeParseException e) {
-            throw new JenoException("Oops! Please enter deadline according to a valid 'DD/MM/YYYY HH:mm' format.\n");
+            throw new JenoException("Oops! Please enter start time according to a valid 'DD/MM/YYYY HH:mm' format.\n");
         }
         return startTime;
     }
@@ -70,7 +70,7 @@ public class EventCommand extends Command{
         } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
             throw new JenoException("Oops! Please enter a valid event task format.\n");
         } catch (DateTimeParseException e) {
-            throw new JenoException("Oops! Please enter start time and end time according to 'DD/MM/YYYY HH:mm' format.\n");
+            throw new JenoException("Oops! Please enter end time according to 'DD/MM/YYYY HH:mm' format.\n");
         }
         return endTime;
     }

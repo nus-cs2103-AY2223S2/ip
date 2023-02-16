@@ -21,7 +21,7 @@ public final class Parser {
      * @return Date Time as a LocalDateTime object
      */
     public static LocalDateTime dateFormatter(String dateTime) {
-        assert dateTime.length() == 16: "Incorrect dateTime format";
+        assert dateTime.length() == 16 : "Incorrect dateTime format";
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
@@ -31,7 +31,7 @@ public final class Parser {
      * @return Task which was represented by its task log format
      */
     public static Task translateTaskLogToTask(String taskLog) {
-        assert taskLog != null: "Task Log cannot be blank";
+        assert taskLog != null : "Task Log cannot be blank";
         Task taskToReturn = new Task();
         String[] taskLogCommands = taskLog.split(" \\| ");
         String taskType = taskLogCommands[0];
@@ -63,7 +63,7 @@ public final class Parser {
     }
 
     public static Command getCommandType(String userInput) throws JenoException {
-        assert userInput != null: "User input cannot be blank";
+        assert userInput != null : "User input cannot be blank";
         String command = userInput.split(" ")[0];
         switch (command) {
         case "help":
@@ -95,8 +95,8 @@ public final class Parser {
         case "clearnotes":
             return new ClearNotesCommand(userInput);
         default:
-            throw new JenoException("Oops! Please enter a valid command.\n" +
-                    "To view list of features, type in 'help' in the command box.");
+            throw new JenoException("Oops! Please enter a valid command.\n"
+                    + "To view list of features, type in 'help' in the command box.");
         }
     }
 }
