@@ -33,12 +33,12 @@ public class TaskFactory {
             case "event":
                 return makeEvent(instruction);
             default:
-
+                throw new TaskFactoryException("Invalid task type");
             }
         } catch (MissingTaskDescriptionException | InvalidDateTimeFormatException e) {
             throw e;
         }
-        return null;
+
     }
 
     private Task makeTodo(String instruction) throws MissingTaskDescriptionException {
