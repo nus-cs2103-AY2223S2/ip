@@ -243,6 +243,7 @@ public class Parser {
             return e.getMessage();
         }
         ArrayList<FreeTimeBlock> freeTimes = taskManager.getFreeTimes(desiredFreeTime);
+        freeTimes.forEach(freeTimeBlock -> System.out.println(freeTimeBlock.toString()));
 
         if (freeTimes.isEmpty()) {
             output = Response.NO_FREE_SLOTS.toString();
