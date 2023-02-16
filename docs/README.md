@@ -15,14 +15,14 @@
 3. [event](https://afiqzu.github.io/ip/#3-adding-an-event-task)
 4. [list](https://afiqzu.github.io/ip/#4-list-all-tasks)
 5. [find](https://afiqzu.github.io/ip/#5-find-task)
-6. [delete](https://afiqzu.github.io/ip/#5-delete-task)
-7. [mark](https://afiqzu.github.io/ip/#6-mark-task-as-done)
-8. [unmark](https://afiqzu.github.io/ip/#7-unmark-task)
-9. [clear](https://afiqzu.github.io/ip/#8-clear-all-tasks)
-10. [note](https://afiqzu.github.io/ip/#9-add-a-new-note)
-11. [opennotes](https://afiqzu.github.io/ip/#10-open-current-notes-with-opennotes)
-12. [clearnotes](https://afiqzu.github.io/ip/#11-clear-current-notes-with-clearnotes)
-13. [help](https://afiqzu.github.io/ip/#12-open-command-list-with-help)
+6. [delete](https://afiqzu.github.io/ip/#6-delete-task)
+7. [mark](https://afiqzu.github.io/ip/#7-mark-task-as-done)
+8. [unmark](https://afiqzu.github.io/ip/#8-unmark-task)
+9. [clear](https://afiqzu.github.io/ip/#9-clear-all-tasks)
+10. [note](https://afiqzu.github.io/ip/#10-add-a-new-note)
+11. [opennotes](https://afiqzu.github.io/ip/#11-open-current-notes-with-opennotes)
+12. [clearnotes](https://afiqzu.github.io/ip/#12-clear-current-notes-with-clearnotes)
+13. [help](https://afiqzu.github.io/ip/#13-open-command-list-with-help)
 
 
 ## Features
