@@ -1,11 +1,12 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-import task.Task;
-import task.TaskList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import task.Task;
+import task.TaskList;
 
 /**
  * Driver to test the actions available on TaskList.

@@ -35,4 +35,3 @@ public class UserDialog extends StackPane {
         dialog.setText(text);
     }
 }
-

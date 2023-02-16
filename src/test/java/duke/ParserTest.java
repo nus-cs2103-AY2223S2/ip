@@ -1,5 +1,10 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import command.AddCommand;
 import command.Command;
 import command.DeleteCommand;
@@ -9,10 +14,6 @@ import command.ListCommand;
 import command.MarkCommand;
 import command.UndoCommand;
 import command.UnmarkCommand;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Driver to test the parsing commands of Parser.
