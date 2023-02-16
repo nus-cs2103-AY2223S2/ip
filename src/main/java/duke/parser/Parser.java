@@ -47,12 +47,12 @@ public class Parser {
                 int taskNoUnmark = Integer.parseInt(words[1]);
                 return new UnmarkCommand(taskNoUnmark);
             case DEADLINE:
-                String[] parts = inputLine.split("/");
-                Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
+                String[] deadlineParts = inputLine.split("/");
+                Deadline task = new Deadline(deadlineParts[0].split(" ", 2)[1], 0, deadlineParts[1]);
                 return new AddCommand(task);
             case EVENT:
-                String[] parts1 = inputLine.split(" /");
-                Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
+                String[] eventParts = inputLine.split(" /");
+                Event event = new Event(eventParts[0].split(" ", 2)[1], 0, eventParts[1], eventParts[2]);
                 return new AddCommand(event);
             case TODO:
                 Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
@@ -62,7 +62,8 @@ public class Parser {
             case FIND:
                 return new FindCommand(inputLine.split(" ", 2)[1]);
             case TAG:
-                return new TagCommand(Integer.parseInt(words[1]), words[2]);
+                String[] tagParts = inputLine.split(" ", 3);
+                return new TagCommand(Integer.parseInt(words[1]), tagParts[2]);
             default:
                 throw new DukeException("Not a valid command: " + inputLine);
             }

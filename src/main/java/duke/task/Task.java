@@ -81,7 +81,7 @@ public class Task {
         if (!tags.isEmpty()) {
             result.append(" Tags: ");
             for (String tag : tags) {
-                result.append(tag);
+                result.append(tag).append(" ");
             }
         }
         return result.toString();

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("src/main/java/data/tasks.txt", "src/main/java/data");
+    private Duke duke = new Duke("data/task.txt", "data");
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.isResizable();
+            stage.setTitle("👑👑👑ClashPlanner👑👑👑");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

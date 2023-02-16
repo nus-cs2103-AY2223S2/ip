@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 /**
  * Class mainly used for displaying and formatting messages.
  */

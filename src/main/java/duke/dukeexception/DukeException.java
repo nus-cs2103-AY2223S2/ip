@@ -1,5 +1,6 @@
 package duke.dukeexception;
 
+
 /**
  * Class that handles exceptions unique to the duke.Duke application
  */
@@ -34,6 +35,8 @@ public class DukeException extends Exception {
             throw new DukeException("☹ OOPS!!! Please specify which task to find (e.g. find homework).");
         case "tag":
             throw new DukeException("☹ OOPS!!! Please specify which task to tag (e.g. tag 1 #must do).");
+        default:
+            throw new DukeException("Not a valid command");
         }
     }
 }
