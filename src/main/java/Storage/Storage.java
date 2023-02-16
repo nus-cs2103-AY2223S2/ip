@@ -24,7 +24,6 @@ public class Storage {
     /**
      * Constructor for the Storage.
      * @param filePath The filepath for the database.
-     * @throws IOException Throws if there is an I/O error.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -42,7 +41,6 @@ public class Storage {
     /**
      * Load the database from the local file.
      * @return The database
-     * @throws IOException Throws if there is an I/O error.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> db = new ArrayList<Task>(100);
@@ -75,7 +73,6 @@ public class Storage {
     /**
      * Store the database back into the local file.
      * @param tasks The tasks to be stored.
-     * @throws IOException Throws if there is an I/O error.
      */
     public void store(TaskList tasks) {
         List<Task> db = tasks.getTasks();

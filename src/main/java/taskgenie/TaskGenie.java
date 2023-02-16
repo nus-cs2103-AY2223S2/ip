@@ -20,7 +20,6 @@ public class TaskGenie {
     /**
      * Constructor for the TaskGenie file
      * @param filePath The file path given in String.
-     * @throws IOException Throws if there is an I/O error.
      */
     public TaskGenie(String filePath) {
         assert filePath != null;
@@ -39,7 +38,6 @@ public class TaskGenie {
 
     /**
      * Runs the TaskGenie program.
-     * @throws IOException Throws if there is an I/O error.
      */
     public void run() {
         boolean isContinueConvo = true;

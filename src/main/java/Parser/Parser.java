@@ -129,7 +129,7 @@ public class Parser {
     /**
      * Checks to ensure that there is a description.
      * @param message The message to be checked.
-     * @throws NoDescriptionException Throws if no description is found.
+     * @throws InvalidInputException Throws if no description is found.
      */
     private static void checkForNumber(String message) throws InvalidInputException {
         String[] temp = message.split(" ");
