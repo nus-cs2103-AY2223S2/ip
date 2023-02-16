@@ -12,13 +12,6 @@ public class List implements Command {
     private static final String FORMAT = "list";
 
     /**
-     * {@inheritDoc}
-     */
-    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
-        ui.showReply("Tasks: " + taskList.toString());
-    }
-
-    /**
      * @return Parser that can parse the bye command.
      * @see Parser
      */
@@ -27,5 +20,12 @@ public class List implements Command {
                 .ignoreThen(Parser.strParserIgnoreCase("list"))
                 .<Command>map(ok -> new List())
                 .overrideMsg(FORMAT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        ui.showReply("Tasks: " + taskList.toString());
     }
 }

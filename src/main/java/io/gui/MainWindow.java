@@ -18,7 +18,8 @@ import util.Pair;
  */
 public class MainWindow extends AnchorPane implements Ui {
     private static final String WELCOME = "Hello. My name is D.\nI am a simple task manager, designed to serve humanity.";
-
+    private final Image userImg = new Image(this.getClass().getResourceAsStream("/images/default_user_pic.png"));
+    private final Image dImg = new Image(this.getClass().getResourceAsStream("/images/cyborg_girl.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,11 +28,7 @@ public class MainWindow extends AnchorPane implements Ui {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Gui gui;
-
-    private final Image userImg = new Image(this.getClass().getResourceAsStream("/images/default_user_pic.png"));
-    private final Image dImg = new Image(this.getClass().getResourceAsStream("/images/cyborg_girl.png"));
 
     /**
      * Setup of tasks and storage.

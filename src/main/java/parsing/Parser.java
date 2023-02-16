@@ -1,5 +1,7 @@
 package parsing;
 
+import util.Util;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -7,8 +9,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import util.Util;
 
 /**
  * Wrapper around a function from a string input to a
@@ -19,9 +19,8 @@ import util.Util;
  * @see Result
  */
 public class Parser<T> {
-    private final Function<String, Result<T>> fn;
-
     private static final List<Character> WS = List.of(' ', '\n', '\t', '\r');
+    private final Function<String, Result<T>> fn;
 
     /**
      * @param fn Function from string to Result
@@ -29,163 +28,6 @@ public class Parser<T> {
      */
     public Parser(Function<String, Result<T>> fn) {
         this.fn = fn;
-    }
-
-    /**
-     * Parses input string
-     *
-     * @param input Input string
-     * @return Result of parse
-     */
-    public Result<T> parse(String input) {
-        return fn.apply(input);
-    }
-
-    /**
-     * Chain multiple parsers together, while keeping
-     * parse result within scope
-     *
-     * @param <U> Type of new object to parse
-     * @param f   Function from original parse result to new parser
-     * @return New parser
-     */
-    public <U> Parser<U> bind(Function<T, Parser<U>> f) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> f.apply(pr.first()).parse(pr.second()),
-                Result::error));
-    }
-
-    /**
-     * Chain 2 parsers, ignoring result from first parse.
-     *
-     * @param p Next parser in chain
-     * @return New parser
-     */
-    public <U> Parser<U> ignoreThen(Parser<U> p) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> p.parse(pr.second()),
-                Result::error));
-    }
-
-    /**
-     * Chain 2 parsers, ignoring result form second parse.
-     *
-     * @param p Next Parser in chain
-     * @return New parser
-     */
-    public <U> Parser<T> thenIgnore(Parser<U> p) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> p.parse(pr.second()).match(
-                        pr2 -> Result.ok(pr.first(), pr2.second()),
-                        Result::error),
-                Result::error));
-    }
-
-    /**
-     * Chain 2 parsers, result will be whichever parser succeeds first.
-     *
-     * @param p Other parser to try
-     * @return New parser
-     */
-    public Parser<T> or(Parser<T> p) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> Result.ok(pr.first(), pr.second()),
-                msg -> p.parse(inp).match(
-                        pr -> Result.ok(pr.first(), pr.second()),
-                        msg2 -> Result.error(msg + '\n' + msg2))));
-    }
-
-    /**
-     * Tries this parser as many times as possible
-     *
-     * @return Parser that parses a list of the original type.
-     * Empty list returned if no parse succeeds.
-     */
-    public Parser<List<T>> many() {
-        Function<String, Result<Stream<T>>> f = new Function<>() {
-            @Override
-            public Result<Stream<T>> apply(String inp) {
-                return parse(inp).match(
-                        pr -> {
-                            Result<Stream<T>> prev = this.apply(pr.second());
-                            return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
-                        },
-                        msg -> Result.ok(Stream.of(), inp));
-            }
-        };
-        return new Parser<>(inp -> f.apply(inp).map(s -> s.collect(Collectors.toList())));
-
-    }
-
-    /**
-     * Many until another parser succeeds. Other parser result ignored.
-     *
-     * @param <U> Type of other parser
-     * @param p   Other parser that ends attempt to parse
-     * @return New parser
-     */
-    public <U> Parser<List<T>> manyUntil(Parser<U> p) {
-        Function<String, Result<Stream<T>>> f = new Function<>() {
-            @Override
-            public Result<Stream<T>> apply(String inp) {
-                return p.parse(inp).match(
-                        pr -> Result.ok(Stream.of(), pr.second()),
-                        e -> parse(inp).match(
-                                pr -> {
-                                    Result<Stream<T>> prev = this.apply(pr.second());
-                                    return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
-                                },
-                                msg -> Result.error(String.format("Ending Flag: %s", e))));
-            }
-        };
-        return new Parser<>(inp -> f.apply(inp).map(s -> s.collect(Collectors.toList())));
-    }
-
-    /**
-     * Same as many except that result must have at least 1 element.
-     *
-     * @see #many()
-     */
-    public Parser<List<T>> some() {
-        return many().satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse successful.");
-    }
-
-    /**
-     * Same as manyUntil except that result must have at least 1 element.
-     *
-     * @param <U> Type of other parser
-     * @param p   Other parser that ends attempt to parse
-     * @see #manyUntil(Parser)
-     */
-    public <U> Parser<List<T>> someUntil(Parser<U> p) {
-        return manyUntil(p).satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse successful.");
-    }
-
-    /**
-     * Replaces error message if result is an error.
-     *
-     * @param errorMsg Message to replace with
-     */
-    public Parser<T> overrideMsg(String errorMsg) {
-        return new Parser<>(inp -> this.parse(inp).overrideMsg(errorMsg));
-    }
-
-    /**
-     * Parser fails if result does not satisfy condition
-     *
-     * @see Result#filterOrElse(Predicate, String)
-     */
-    public Parser<T> satisfyOrElse(Predicate<T> condition, String failMsg) {
-        return new Parser<>(inp -> this.parse(inp).filterOrElse(condition, failMsg));
-    }
-
-    /**
-     * Maps parser to new parser of new type
-     *
-     * @see Result#map(Function)
-     */
-    public <U> Parser<U> map(Function<? super T, ? extends U> f) {
-        return new Parser<>(inp -> this.parse(inp).map(f));
     }
 
     /**
@@ -393,5 +235,162 @@ public class Parser<T> {
                     }
                 },
                 Result::error));
+    }
+
+    /**
+     * Parses input string
+     *
+     * @param input Input string
+     * @return Result of parse
+     */
+    public Result<T> parse(String input) {
+        return fn.apply(input);
+    }
+
+    /**
+     * Chain multiple parsers together, while keeping
+     * parse result within scope
+     *
+     * @param <U> Type of new object to parse
+     * @param f   Function from original parse result to new parser
+     * @return New parser
+     */
+    public <U> Parser<U> bind(Function<T, Parser<U>> f) {
+        return new Parser<>(inp -> this.parse(inp).match(
+                pr -> f.apply(pr.first()).parse(pr.second()),
+                Result::error));
+    }
+
+    /**
+     * Chain 2 parsers, ignoring result from first parse.
+     *
+     * @param p Next parser in chain
+     * @return New parser
+     */
+    public <U> Parser<U> ignoreThen(Parser<U> p) {
+        return new Parser<>(inp -> this.parse(inp).match(
+                pr -> p.parse(pr.second()),
+                Result::error));
+    }
+
+    /**
+     * Chain 2 parsers, ignoring result form second parse.
+     *
+     * @param p Next Parser in chain
+     * @return New parser
+     */
+    public <U> Parser<T> thenIgnore(Parser<U> p) {
+        return new Parser<>(inp -> this.parse(inp).match(
+                pr -> p.parse(pr.second()).match(
+                        pr2 -> Result.ok(pr.first(), pr2.second()),
+                        Result::error),
+                Result::error));
+    }
+
+    /**
+     * Chain 2 parsers, result will be whichever parser succeeds first.
+     *
+     * @param p Other parser to try
+     * @return New parser
+     */
+    public Parser<T> or(Parser<T> p) {
+        return new Parser<>(inp -> this.parse(inp).match(
+                pr -> Result.ok(pr.first(), pr.second()),
+                msg -> p.parse(inp).match(
+                        pr -> Result.ok(pr.first(), pr.second()),
+                        msg2 -> Result.error(msg + '\n' + msg2))));
+    }
+
+    /**
+     * Tries this parser as many times as possible
+     *
+     * @return Parser that parses a list of the original type.
+     * Empty list returned if no parse succeeds.
+     */
+    public Parser<List<T>> many() {
+        Function<String, Result<Stream<T>>> f = new Function<>() {
+            @Override
+            public Result<Stream<T>> apply(String inp) {
+                return parse(inp).match(
+                        pr -> {
+                            Result<Stream<T>> prev = this.apply(pr.second());
+                            return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
+                        },
+                        msg -> Result.ok(Stream.of(), inp));
+            }
+        };
+        return new Parser<>(inp -> f.apply(inp).map(s -> s.collect(Collectors.toList())));
+
+    }
+
+    /**
+     * Many until another parser succeeds. Other parser result ignored.
+     *
+     * @param <U> Type of other parser
+     * @param p   Other parser that ends attempt to parse
+     * @return New parser
+     */
+    public <U> Parser<List<T>> manyUntil(Parser<U> p) {
+        Function<String, Result<Stream<T>>> f = new Function<>() {
+            @Override
+            public Result<Stream<T>> apply(String inp) {
+                return p.parse(inp).match(
+                        pr -> Result.ok(Stream.of(), pr.second()),
+                        e -> parse(inp).match(
+                                pr -> {
+                                    Result<Stream<T>> prev = this.apply(pr.second());
+                                    return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
+                                },
+                                msg -> Result.error(String.format("Ending Flag: %s", e))));
+            }
+        };
+        return new Parser<>(inp -> f.apply(inp).map(s -> s.collect(Collectors.toList())));
+    }
+
+    /**
+     * Same as many except that result must have at least 1 element.
+     *
+     * @see #many()
+     */
+    public Parser<List<T>> some() {
+        return many().satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse successful.");
+    }
+
+    /**
+     * Same as manyUntil except that result must have at least 1 element.
+     *
+     * @param <U> Type of other parser
+     * @param p   Other parser that ends attempt to parse
+     * @see #manyUntil(Parser)
+     */
+    public <U> Parser<List<T>> someUntil(Parser<U> p) {
+        return manyUntil(p).satisfyOrElse(s -> !s.isEmpty(), "some: Less than 1 parse successful.");
+    }
+
+    /**
+     * Replaces error message if result is an error.
+     *
+     * @param errorMsg Message to replace with
+     */
+    public Parser<T> overrideMsg(String errorMsg) {
+        return new Parser<>(inp -> this.parse(inp).overrideMsg(errorMsg));
+    }
+
+    /**
+     * Parser fails if result does not satisfy condition
+     *
+     * @see Result#filterOrElse(Predicate, String)
+     */
+    public Parser<T> satisfyOrElse(Predicate<T> condition, String failMsg) {
+        return new Parser<>(inp -> this.parse(inp).filterOrElse(condition, failMsg));
+    }
+
+    /**
+     * Maps parser to new parser of new type
+     *
+     * @see Result#map(Function)
+     */
+    public <U> Parser<U> map(Function<? super T, ? extends U> f) {
+        return new Parser<>(inp -> this.parse(inp).map(f));
     }
 }

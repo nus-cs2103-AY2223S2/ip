@@ -15,8 +15,8 @@ public class Error implements Command {
     }
 
     /**
-     * @return Error command.
      * @param msg Error message to be shown.
+     * @return Error command.
      */
     public static Error of(String msg) {
         return new Error(msg);

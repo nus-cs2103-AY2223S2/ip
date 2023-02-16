@@ -1,7 +1,5 @@
 package io.gui;
 
-import java.io.IOException;
-
 import io.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import task.TaskList;
+
+import java.io.IOException;
 
 /**
  * Graphical User Interface
@@ -20,6 +20,13 @@ public class Gui extends Application {
     private TaskList taskList;
     private Storage<TaskList> storage;
     private FXMLLoader fxmlLoader;
+
+    /**
+     * Entry point into app
+     */
+    public static void launch(String... args) {
+        Application.launch(Gui.class, args);
+    }
 
     /**
      * Actions to perform when Application is launched.
@@ -58,13 +65,6 @@ public class Gui extends Application {
     @Override
     public void stop() {
         storage.save(taskList);
-    }
-
-    /**
-     * Entry point into app
-     */
-    public static void launch(String... args) {
-        Application.launch(Gui.class, args);
     }
 
     /**

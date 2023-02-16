@@ -20,19 +20,6 @@ public class Unmark implements Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
-        if (this.taskNum < 1 || this.taskNum > taskList.size()) {
-            ui.showError(ERROR);
-            return;
-        }
-        taskList.unmarkTask(this.taskNum);
-        ui.showReply(SUCCESS + taskList.get(this.taskNum));
-    }
-
-    /**
      * @return Parser that can parse the unmark command.
      * @see Parser
      */
@@ -43,5 +30,18 @@ public class Unmark implements Command {
                 .ignoreThen(Parser.decimal())
                 .<Command>map(Unmark::new)
                 .overrideMsg(FORMAT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        if (this.taskNum < 1 || this.taskNum > taskList.size()) {
+            ui.showError(ERROR);
+            return;
+        }
+        taskList.unmarkTask(this.taskNum);
+        ui.showReply(SUCCESS + taskList.get(this.taskNum));
     }
 }

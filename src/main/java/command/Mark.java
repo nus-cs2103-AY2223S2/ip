@@ -17,6 +17,18 @@ public class Mark implements Command {
     }
 
     /**
+     * @return Parser that can parse the mark command.
+     * @see Parser
+     */
+    public static Parser<Command> parser() {
+        return Parser.strParserIgnoreCase("mark")
+                .thenIgnore(Parser.skipSpace())
+                .ignoreThen(Parser.decimal())
+                .<Command>map(Mark::new)
+                .overrideMsg(FORMAT);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -27,17 +39,5 @@ public class Mark implements Command {
         }
         taskList.markTask(this.taskNum);
         ui.showReply(SUCCESS + taskList.get(this.taskNum));
-    }
-
-    /**
-     * @return Parser that can parse the mark command.
-     * @see Parser
-     */
-    public static Parser<Command> parser() {
-        return Parser.strParserIgnoreCase("mark")
-                .thenIgnore(Parser.skipSpace())
-                .ignoreThen(Parser.decimal())
-                .<Command>map(Mark::new)
-                .overrideMsg(FORMAT);
     }
 }

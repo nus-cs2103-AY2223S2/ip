@@ -1,8 +1,5 @@
 package io.gui;
 
-import java.io.IOException;
-import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.shape.Circle;
+
+import java.io.IOException;
+import java.util.Collections;
 
 /**
  * Dialogue box for user inputs and duke outputs.
@@ -51,17 +51,6 @@ public class DialogueBox extends HBox {
     }
 
     /**
-     * Reverses all children of dialogue box so that it is
-     * aligned to the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_RIGHT);
-    }
-
-    /**
      * Get dialogue box with formatting specialized for user input.
      *
      * @param text Text content of dialogue
@@ -88,5 +77,16 @@ public class DialogueBox extends HBox {
         var db = getBotDialogue(text, img);
         db.dialogue.getStyleClass().add("label-error");
         return db;
+    }
+
+    /**
+     * Reverses all children of dialogue box so that it is
+     * aligned to the right.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_RIGHT);
     }
 }

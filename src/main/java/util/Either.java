@@ -12,70 +12,6 @@ import java.util.function.Predicate;
  * @param <R> Type of invalid result
  */
 public interface Either<L, R> {
-    default boolean isLeft() {
-        return !isRight();
-    }
-
-    default boolean isRight() {
-        return !isLeft();
-    }
-
-    /**
-     * Extracts the left value if it is left, otherwise returns default value
-     *
-     * @param def Default value
-     */
-    L fromLeft(L def);
-
-    /**
-     * Extracts the right value if it is right, otherwise returns default value
-     *
-     * @param def Default value
-     */
-    R fromRight(R def);
-
-    /**
-     * If isLeft, maps the function over the wrapped object, otherwise returns
-     * original right object
-     *
-     * @param <T> Left type of resultant Either
-     * @param f   Mapping function
-     * @return new Either object
-     */
-    <T> Either<T, R> map(Function<? super L, ? extends T> f);
-
-    /**
-     * Allows user to chain multiple methods that return Either objects.
-     * If right object is returned within the chain, chaining will stop and right
-     * object will be
-     * returned at the end.
-     *
-     * @param <T> left type of resultant Either
-     * @param f   Function that accepts left object and returns another Either
-     *            object
-     */
-    <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f);
-
-    /**
-     * Checks if left object satisfies predicate
-     *
-     * @param tester  Predicate to test left object
-     * @param failRes Object if left object fails predicate
-     * @return Left if original left object satisfies predicate, Right(failRes) if
-     * not and the original right object if Either is originally right
-     */
-    Either<L, R> filterOrElse(Predicate<? super L> tester, R failRes);
-
-    /**
-     * Matches the appropriate function to produce new output
-     *
-     * @param <T> Type of the new object
-     * @param l   Function to match if this is left
-     * @param r   Function to match if this is right
-     * @return new object
-     */
-    <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r);
-
     static <L, R> Either<L, R> left(L l) {
         return new Either<>() {
             private final L left = l;
@@ -169,4 +105,68 @@ public interface Either<L, R> {
             }
         };
     }
+
+    default boolean isLeft() {
+        return !isRight();
+    }
+
+    default boolean isRight() {
+        return !isLeft();
+    }
+
+    /**
+     * Extracts the left value if it is left, otherwise returns default value
+     *
+     * @param def Default value
+     */
+    L fromLeft(L def);
+
+    /**
+     * Extracts the right value if it is right, otherwise returns default value
+     *
+     * @param def Default value
+     */
+    R fromRight(R def);
+
+    /**
+     * If isLeft, maps the function over the wrapped object, otherwise returns
+     * original right object
+     *
+     * @param <T> Left type of resultant Either
+     * @param f   Mapping function
+     * @return new Either object
+     */
+    <T> Either<T, R> map(Function<? super L, ? extends T> f);
+
+    /**
+     * Allows user to chain multiple methods that return Either objects.
+     * If right object is returned within the chain, chaining will stop and right
+     * object will be
+     * returned at the end.
+     *
+     * @param <T> left type of resultant Either
+     * @param f   Function that accepts left object and returns another Either
+     *            object
+     */
+    <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f);
+
+    /**
+     * Checks if left object satisfies predicate
+     *
+     * @param tester  Predicate to test left object
+     * @param failRes Object if left object fails predicate
+     * @return Left if original left object satisfies predicate, Right(failRes) if
+     * not and the original right object if Either is originally right
+     */
+    Either<L, R> filterOrElse(Predicate<? super L> tester, R failRes);
+
+    /**
+     * Matches the appropriate function to produce new output
+     *
+     * @param <T> Type of the new object
+     * @param l   Function to match if this is left
+     * @param r   Function to match if this is right
+     * @return new object
+     */
+    <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r);
 }

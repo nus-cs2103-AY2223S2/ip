@@ -1,10 +1,10 @@
 package parsing;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import util.Either;
 import util.Pair;
+
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Result of a parse by a Parser

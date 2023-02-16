@@ -1,15 +1,15 @@
 package io;
 
+import command.Command;
+import command.Error;
+import task.TaskList;
+import util.Pair;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import command.Command;
-import command.Error;
-import task.TaskList;
-import util.Pair;
 
 /**
  * User interface (Command line).
@@ -58,6 +58,26 @@ public class Cli implements Ui {
     }
 
     /**
+     * Entry point into app
+     */
+    public static void launch(String... args) {
+        Cli cli = new Cli(Storage.of(TaskList.class, "taskList.ser"));
+        cli.run();
+    }
+
+    /**
+     * Splits large strings into lines below a max line length.
+     *
+     * @param line string to be split.
+     * @return Stream of lines.
+     */
+    private static Stream<String> split(String line) {
+        return line.length() <= MAX_LINE_LENGTH ? Stream.of(line)
+                : Stream.concat(Stream.of(line.substring(0, MAX_LINE_LENGTH + 1)),
+                split(line.substring(MAX_LINE_LENGTH + 1)));
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -82,14 +102,6 @@ public class Cli implements Ui {
     }
 
     /**
-     * Entry point into app
-     */
-    public static void launch(String... args) {
-        Cli cli = new Cli(Storage.of(TaskList.class, "taskList.ser"));
-        cli.run();
-    }
-
-    /**
      * Main run loop
      */
     private void run() {
@@ -101,17 +113,5 @@ public class Cli implements Ui {
             command.execute(taskList, this, storage);
             isExit = command.isExit();
         }
-    }
-
-    /**
-     * Splits large strings into lines below a max line length.
-     *
-     * @param line string to be split.
-     * @return Stream of lines.
-     */
-    private static Stream<String> split(String line) {
-        return line.length() <= MAX_LINE_LENGTH ? Stream.of(line)
-                : Stream.concat(Stream.of(line.substring(0, MAX_LINE_LENGTH + 1)),
-                split(line.substring(MAX_LINE_LENGTH + 1)));
     }
 }

@@ -10,23 +10,6 @@ import task.TaskList;
  */
 public interface Command {
     /**
-     * Interacts with inputs to produce required side effects.
-     *
-     * @param taskList TaskList to be modified.
-     * @param storage  Tells storage to store/extract data if command requires it.
-     * @see TaskList
-     * @see Storage
-     */
-    void execute(TaskList taskList, Ui ui, Storage<TaskList> storage);
-
-    /**
-     * @return true if Duke should exit after executing this command.
-     */
-    default boolean isExit() {
-        return false;
-    }
-
-    /**
      * @return Parser<Command> that can parse input string and turn it into a
      * command.
      * @see Parser
@@ -41,5 +24,22 @@ public interface Command {
                 .or(Exit.parser())
                 .or(Find.parser())
                 .or(Sort.parser());
+    }
+
+    /**
+     * Interacts with inputs to produce required side effects.
+     *
+     * @param taskList TaskList to be modified.
+     * @param storage  Tells storage to store/extract data if command requires it.
+     * @see TaskList
+     * @see Storage
+     */
+    void execute(TaskList taskList, Ui ui, Storage<TaskList> storage);
+
+    /**
+     * @return true if Duke should exit after executing this command.
+     */
+    default boolean isExit() {
+        return false;
     }
 }

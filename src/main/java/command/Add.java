@@ -3,11 +3,7 @@ package command;
 import io.Storage;
 import io.Ui;
 import parsing.Parser;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import task.*;
 import util.Util;
 
 /**
@@ -23,15 +19,6 @@ public class Add implements Command {
 
     private Add(Task task) {
         this.task = task;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
-        taskList.addTask(this.task);
-        ui.showReply(String.format(SUCCESS, taskList.getLast()));
     }
 
     /**
@@ -94,5 +81,14 @@ public class Add implements Command {
                 .or(deadlineParser())
                 .or(eventParser())
                 .map(Add::new);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        taskList.addTask(this.task);
+        ui.showReply(String.format(SUCCESS, taskList.getLast()));
     }
 }

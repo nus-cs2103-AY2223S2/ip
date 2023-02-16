@@ -17,6 +17,16 @@ public class Sort implements Command {
     }
 
     /**
+     * @return Parser that can parse sort command.
+     */
+    public static Parser<Command> parser() {
+        return Parser.skipSpace()
+                .ignoreThen(Parser.strParserIgnoreCase("sort"))
+                .<Command>map(str -> new Sort())
+                .overrideMsg(FORMAT);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -26,15 +36,5 @@ public class Sort implements Command {
         }
         taskList.sort();
         ui.showReply(String.format(SUCCESS, taskList));
-    }
-
-    /**
-     * @return Parser that can parse sort command.
-     */
-    public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("sort"))
-                .<Command>map(str -> new Sort())
-                .overrideMsg(FORMAT);
     }
 }

@@ -9,14 +9,6 @@ public class Exit implements Command {
     private static final String FORMAT = "bye";
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
-
-    /**
      * @return Parser that can parse the bye command.
      * @see Parser
      */
@@ -31,7 +23,15 @@ public class Exit implements Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList,Ui ui, Storage<TaskList> storage) {
+    public boolean isExit() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
         String reply = storage.save(taskList).match(
                 ok -> "Tasks saved successfully.\nBye.",
                 err -> "Failed to save tasks.\nBye.");

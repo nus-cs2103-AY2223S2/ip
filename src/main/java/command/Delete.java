@@ -20,19 +20,6 @@ public class Delete implements Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
-        if (this.taskNum < 1 || this.taskNum > taskList.size()) {
-            ui.showError(ERROR);
-            return;
-        }
-        taskList.deleteTask(this.taskNum);
-        ui.showReply(String.format(SUCCESS, this.taskNum, taskList));
-    }
-
-    /**
      * @return Parser that can parse the delete command.
      * @see Parser
      */
@@ -43,5 +30,18 @@ public class Delete implements Command {
                 .ignoreThen(Parser.decimal())
                 .<Command>map(Delete::new)
                 .overrideMsg(FORMAT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
+        if (this.taskNum < 1 || this.taskNum > taskList.size()) {
+            ui.showError(ERROR);
+            return;
+        }
+        taskList.deleteTask(this.taskNum);
+        ui.showReply(String.format(SUCCESS, this.taskNum, taskList));
     }
 }

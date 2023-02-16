@@ -1,15 +1,8 @@
 package io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 import util.Either;
+
+import java.io.*;
 
 /**
  * Manages storing of objects.
@@ -22,12 +15,6 @@ public class Storage<T extends Serializable> {
 
     private final Class<T> type;
     private final String filepath;
-
-    public enum StorageError {
-        FILE_NOT_FOUND,
-        IO_ERROR,
-        CAST_ERROR
-    }
 
     private Storage(Class<T> type, String filepath) {
         this.type = type;
@@ -101,5 +88,11 @@ public class Storage<T extends Serializable> {
         } catch (IOException ex) {
             return Either.right(StorageError.IO_ERROR);
         }
+    }
+
+    public enum StorageError {
+        FILE_NOT_FOUND,
+        IO_ERROR,
+        CAST_ERROR
     }
 }
