@@ -151,5 +151,6 @@ public class DukeApp extends Application {
         assert input.length() != 0 : "input should not be empty";
         Command command = new Parser().parseCommand(input);
         return command.execute(taskList, storage, ui);
+
     }
 }
