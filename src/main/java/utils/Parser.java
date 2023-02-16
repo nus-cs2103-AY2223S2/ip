@@ -25,6 +25,7 @@ public class Parser {
      * @throws TaskFactoryException
      */
     public Command parse(String fullCommand) throws InvalidCommandException, TaskFactoryException {
+        fullCommand += " ";
         String[] splitStr = fullCommand.split("\\s+", 2);
         String command = splitStr[0];
 
@@ -50,4 +51,6 @@ public class Parser {
         }
 
     }
+
+
 }

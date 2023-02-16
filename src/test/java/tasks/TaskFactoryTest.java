@@ -11,7 +11,7 @@ public class TaskFactoryTest {
     @Test
     void makeTodo_emptyTaskDescription_exceptionThrown() {
         Exception e = assertThrows(TreeBotException.class, () -> new TaskFactory().make("todo", ""));
-        assertEquals("Task Description cannot be empty!", e.getMessage());
+        assertEquals("Todo task parameter cannot be empty", e.getMessage());
     }
 
     @Test

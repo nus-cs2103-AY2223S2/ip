@@ -25,13 +25,17 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageFormatString() {
-        return "D|" + (isDone ? "1" : "0") + "|" + this.taskDescription + "|" + this.deadline.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        return "D|" + (isDone ? "1" : "0") +
+                "|" + this.taskDescription +
+                "|" + this.deadline.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")" ;
+        return "[D]" + super.toString()
+                + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"))
+                + ")" ;
     }
 
     @Override

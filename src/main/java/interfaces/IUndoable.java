@@ -1,5 +1,12 @@
 package interfaces;
 
+/**
+ * Represents an interface for <code>Command</code> that can be undone.
+ */
 public interface IUndoable {
-    public void undo();
+
+    /**
+     * Undo this command.
+     */
+    void undo();
 }

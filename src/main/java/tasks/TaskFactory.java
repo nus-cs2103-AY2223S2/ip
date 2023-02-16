@@ -10,6 +10,9 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a factory that makes <code>Task</code> objects according to parameters.
+ */
 public class TaskFactory {
 
     /**
@@ -25,10 +28,13 @@ public class TaskFactory {
         try {
             switch (taskType) {
             case "todo":
+                checkTodoParameters(parameters);
                 return makeTodo(parameters);
             case "deadline":
+                checkDeadlineParameters(parameters);
                 return makeDeadline(parameters);
             case "event":
+                checkEventParameters(parameters);
                 return makeEvent(parameters);
             default:
                 throw new TaskFactoryException("Invalid task type");
@@ -48,7 +54,7 @@ public class TaskFactory {
         return new Todo(taskDescription);
     }
 
-    private Task makeDeadline(String parameter) throws InvalidDateTimeFormatException {
+    private Task makeDeadline(String parameter) throws TaskFactoryException {
         String taskDescription = parameter.split(" /by ", 2)[0];
         String taskDeadline = parameter.split(" /by ",2 )[1];
 
@@ -61,7 +67,7 @@ public class TaskFactory {
 
     }
 
-    private Task makeEvent(String parameter) throws InvalidDateTimeFormatException {
+    private Task makeEvent(String parameter) throws TaskFactoryException {
         String taskDescription = parameter.split(" /from ", 2)[0];
         String taskStart = parameter.split(" /from ", 2)[1].split(" /to ",2)[0];
         String taskEnd = parameter.split(" /from ", 2)[1].split(" /to ",2)[1];
@@ -85,6 +91,26 @@ public class TaskFactory {
            throw e;
         }
 
+
+    }
+
+    private void checkTodoParameters(String todoParameters) throws TaskFactoryException {
+        if (todoParameters.isEmpty()) {
+            throw new TaskFactoryException("Todo task parameter cannot be empty");
+        }
+    }
+
+    private void checkDeadlineParameters(String deadlineParameters) throws TaskFactoryException {
+        if (deadlineParameters.isEmpty()) {
+            throw new TaskFactoryException("Deadline task parameter cannot be empty");
+        }
+
+    }
+
+    private void checkEventParameters(String eventParameters) throws TaskFactoryException {
+        if (eventParameters.isEmpty()) {
+            throw new TaskFactoryException("Event task parameter cannot be empty");
+        }
 
     }
 

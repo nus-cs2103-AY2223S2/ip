@@ -26,15 +26,18 @@ public class Event extends Task {
 
     @Override
     public String toStorageFormatString() {
-        return "E|" + (isDone? "1" : "0") + "|" +
-                this.taskDescription + "|" +
-                this.start.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")) + "|" + this.end.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        return "E|" + (isDone? "1" : "0") +
+                "|" + this.taskDescription +
+                "|" + this.start.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")) +
+                "|" + this.end.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
-        return "[E]" + super.toString() + " (from: " + start.format(dateTimeFormatter) + " to: " + end.format(dateTimeFormatter) +")";
+        return "[E]" + super.toString() +
+                " (from: " + start.format(dateTimeFormatter) +
+                " to: " + end.format(dateTimeFormatter) + ")";
     }
     @Override
     public boolean equals(Object o) {
