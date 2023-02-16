@@ -31,8 +31,6 @@ public class Parser {
      * @throws DukeException if the input is not recognised
      */
     public static Command parse(String inputLine) throws DukeException {
-        DukeException.checkInput(inputLine);
-
         String[] words = inputLine.split(" ");
 
         try {
@@ -71,6 +69,7 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             throw new DukeException("Not a valid command: " + inputLine);
         } catch (ArrayIndexOutOfBoundsException e) {
+            DukeException.checkInput(inputLine);
             throw new DukeException("Incorrect command format: " + inputLine);
         }
     }
