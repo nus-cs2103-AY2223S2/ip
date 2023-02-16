@@ -160,7 +160,7 @@ bye
 ```
 
 
-##FAQ
+## FAQ
 
 __Q:__ How do I transfer my data to another Computer?
 __A:__ Install Saturday and overwrite the empty data file with the data of Saturday on your original machine.
