@@ -40,28 +40,18 @@ public class TaskList {
      * Returns the task according to the identifier.
      * @param taskNumber identifier of the task.
      * @return the task corresponding to the identifier.
-     * @throws MarkTaskNumberInvalidException thrown when the identifier does not exist in the taskList.
      */
-    public Task getTask(int taskNumber) throws MarkTaskNumberInvalidException {
-        try {
-            return this.tasks.get(taskNumber - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new MarkTaskNumberInvalidException();
-        }
+    public Task getTask(int taskNumber) {
+        return this.tasks.get(taskNumber - 1);
     }
 
     /**
      * Deletes the task according to the identifier.
      *
      * @param taskNumber identifier of the task.
-     * @throws MarkTaskNumberInvalidException thrown when the identifier does not exist in the taskList.
      */
-    public void deleteTask(int taskNumber) throws MarkTaskNumberInvalidException {
-        try {
-            this.tasks.remove(taskNumber - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new MarkTaskNumberInvalidException();
-        }
+    public void deleteTask(int taskNumber) {
+        this.tasks.remove(taskNumber - 1);
     }
 
     /**

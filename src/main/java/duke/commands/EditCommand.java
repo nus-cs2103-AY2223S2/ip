@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.database.Database;
 import duke.exception.DukeException;
+import duke.exception.marktaskexceptions.MarkTaskNumberInvalidException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -29,10 +30,9 @@ public class EditCommand extends Command {
      * @param taskList taskList of Duke.
      * @param ui user interface object of Duke.
      * @param database database of Duke.
-     * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Database database) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Database database) throws MarkTaskNumberInvalidException {
         assert this.isActive();
         Task task = taskList.getTask(this.taskNumber);
         String oldDetails = task.getDetails();

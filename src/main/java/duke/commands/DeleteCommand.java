@@ -27,18 +27,16 @@ public class DeleteCommand extends Command {
      * @param taskList taskList of Duke.
      * @param ui user interface object of Duke.
      * @param database database of Duke.
-     * @throws MarkTaskNumberInvalidException thrown when the taskNumber identifier does not exist in the taskList of
-     *         Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Database database) throws MarkTaskNumberInvalidException {
+    public void execute(TaskList taskList, Ui ui, Database database) {
         assert this.isActive();
         String taskDescription = taskList.getTask(taskNumber).getStatus();
         taskList.deleteTask(taskNumber);
         ui.response(FRAME
                 + " Noted. I've removed this task:\n"
                 + taskDescription
-                + "Now you have " + taskList.length() + " tasks in the list." + "\n"
+                + "\nNow you have " + taskList.length() + " tasks in the list." + "\n"
                 + FRAME);
     }
 }

@@ -28,10 +28,9 @@ public class UnmarkCommand extends Command {
      * @param taskList taskList of Duke.
      * @param ui user interface object of Duke.
      * @param database database of Duke.
-     * @throws MarkTaskNumberInvalidException thrown when there is no task with that taskNumber
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Database database) throws MarkTaskNumberInvalidException {
+    public void execute(TaskList taskList, Ui ui, Database database) {
         assert this.isActive();
         Task task = taskList.getTask(this.taskNumber);
         task.setIncomplete();
