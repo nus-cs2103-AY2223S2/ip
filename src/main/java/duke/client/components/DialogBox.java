@@ -1,3 +1,6 @@
+/**
+ * Adapted from SE-EDU JavaFX tutorial https://se-education.org/guides/tutorials/javaFx.html
+ */
 package duke.client.components;
 
 import java.io.IOException;

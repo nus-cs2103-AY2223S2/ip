@@ -107,7 +107,9 @@ public class TaskList implements Serializable {
         StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < listOfTasks.size(); i++) {
-            result.append("\n").append(i + 1).append(LIST_INDEX_SEPARATOR).append(listOfTasks.get(i));
+            result.append(System.lineSeparator())
+                    .append(i + 1).append(LIST_INDEX_SEPARATOR)
+                    .append(listOfTasks.get(i));
         }
         return result.toString();
     }

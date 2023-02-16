@@ -1,9 +1,13 @@
+/**
+ * Adapted from SE-EDU JavaFX tutorial https://se-education.org/guides/tutorials/javaFx.html
+ */
 package duke.client.components;
 
 import java.io.InputStream;
 
 import duke.Duke;
 import duke.DukeException;
+import duke.Launcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -65,7 +69,7 @@ public class MainWindow extends AnchorPane {
         }
         if (response.equals(Duke.TERMINATION_INDICATION)) {
             showExitMessage();
-            // TODO: Exit program
+            Launcher.exit();
             return;
         }
         displayMessage(response, MessageOwner.DUKE);

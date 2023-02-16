@@ -33,6 +33,6 @@ public class Duke {
         }
         String result = command.execute(tasks);
         storage.saveTaskChangesToFile(tasks);
-        return  result;
+        return result;
     }
 }
