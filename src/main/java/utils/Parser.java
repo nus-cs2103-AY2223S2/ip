@@ -4,6 +4,7 @@ import commands.*;
 
 import exception.InvalidCommandException;
 import exception.TaskFactoryException;
+import exception.TreeBotException;
 import tasks.TaskFactory;
 
 /**
@@ -24,7 +25,7 @@ public class Parser {
      * @throws InvalidCommandException
      * @throws TaskFactoryException
      */
-    public Command parse(String fullCommand) throws InvalidCommandException, TaskFactoryException {
+    public Command parse(String fullCommand) throws TreeBotException {
         fullCommand += " ";
         String[] splitStr = fullCommand.split("\\s+", 2);
         String command = splitStr[0];
@@ -37,11 +38,23 @@ public class Parser {
         case "event":
             return new AddCommand(taskFactory.make(command, splitStr[1]));
         case "delete":
-            return new DeleteCommand(Integer.parseInt(splitStr[1]));
+            try {
+                return new DeleteCommand(Integer.parseInt(splitStr[1]));
+            } catch (NumberFormatException e) {
+                throw new TreeBotException("Valid index must be given");
+            }
         case "mark":
-            return new ToggleMarkTaskCommand(Integer.parseInt(splitStr[1]), true);
+            try {
+                return new ToggleMarkTaskCommand(Integer.parseInt(splitStr[1]), true);
+            } catch (NumberFormatException e) {
+                throw new TreeBotException("Valid index must be given");
+            }
         case "unmark":
-            return new ToggleMarkTaskCommand(Integer.parseInt(splitStr[1]), false);
+            try {
+                return new ToggleMarkTaskCommand(Integer.parseInt(splitStr[1]), false);
+            } catch (NumberFormatException e) {
+                throw new TreeBotException("Valid index must be given");
+            }
         case "find":
             return new FindCommand(splitStr[1]);
         case "undo":
