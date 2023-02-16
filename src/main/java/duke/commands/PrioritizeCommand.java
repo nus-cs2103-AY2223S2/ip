@@ -37,8 +37,8 @@ public class PrioritizeCommand extends Command {
                 storage.save(taskList);
                 return ui.printPrioritizedTask(t, taskList);
             } else {
-                return ui.printError("Oops! This task has already been tagged as a " + priority +
-                        " priority." );
+                return ui.printError("Oops! This task has already been tagged as a "
+                        + priority + " priority.");
             }
         } catch (IndexOutOfBoundsException e) {
             return ui.printError("Huh... the task does not exist.");

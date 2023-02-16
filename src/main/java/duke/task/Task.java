@@ -87,7 +87,7 @@ public abstract class Task {
         } catch (NullPointerException e) {
             sign = "     ";
         }
-       return sign;
+        return sign;
     }
 
     public void setTag(String tagName) {
@@ -99,7 +99,7 @@ public abstract class Task {
     }
 
     public String getLatestTag() {
-        return this.tags.get(tags.size()-1);
+        return this.tags.get(tags.size() - 1);
     }
 
     public String tagsToString() {

@@ -76,11 +76,11 @@ public class Parser {
         } catch (DukeException e) {
             return new InvalidCommand(e.getMessage());
         } catch (StringIndexOutOfBoundsException e) {
-            return new InvalidCommand("Please specify the task number and level u would like me to " +
-                    "prioritize it!");
+            return new InvalidCommand("Please specify the task number and level u would like me to "
+                    + "prioritize it!");
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new InvalidCommand("Please specify the level u would like me to " +
-                    "prioritize it!");
+            return new InvalidCommand("Please specify the level u would like me to "
+                    + "prioritize it!");
         }
     }
 
@@ -93,11 +93,11 @@ public class Parser {
         } catch (DukeException e) {
             return new InvalidCommand(e.getMessage());
         } catch (StringIndexOutOfBoundsException s) {
-            return new InvalidCommand("Please specify the task number and level u would like me to " +
-                    "tag!");
+            return new InvalidCommand("Please specify the task number and level u would like me to "
+                    + "tag!");
         } catch (ArrayIndexOutOfBoundsException a) {
-            return new InvalidCommand("Please specify the level u would like me to " +
-                    "tag!");
+            return new InvalidCommand("Please specify the level u would like me to "
+                    + "tag!");
         }
     }
 

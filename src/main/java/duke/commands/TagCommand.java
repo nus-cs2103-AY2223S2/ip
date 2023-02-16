@@ -36,7 +36,7 @@ public class TagCommand extends Command {
                 storage.save(taskList);
                 return ui.printTaggedTask(t, taskList);
             } else {
-                return ui.printError("This task has already been tagged as #" + tagName + "." );
+                return ui.printError("This task has already been tagged as #" + tagName + ".");
             }
         } catch (IndexOutOfBoundsException e) {
             return ui.printError("Huh... the task does not exist.");

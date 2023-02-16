@@ -4,7 +4,6 @@ import duke.Duke;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class TextUi {
@@ -70,11 +69,11 @@ public class TextUi {
 
     public String printPrioritizedTask(Task t, TaskList tasks) {
         String priority = t.getPriority();
-        System.out.println("Okay, I've marked this task as " + priority.toLowerCase() +
-                " priority:");
+        System.out.println("Okay, I've marked this task as " + priority.toLowerCase()
+                + " priority:");
         System.out.println("    " + t + NEXT_RESPONSE);
-        return ("Okay, I've marked this task as " + priority.toLowerCase() +
-                " priority:\n" + "    " + t + NEXT_RESPONSE);
+        return ("Okay, I've marked this task as " + priority.toLowerCase()
+                + " priority:\n" + "    " + t + NEXT_RESPONSE);
     }
 
     public String printTaggedTask(Task t, TaskList tasks) {
@@ -104,7 +103,7 @@ public class TextUi {
     public String printNext() {
         String str = "What else can I do for you?";
         System.out.println(str + NEXT_RESPONSE);
-        return(str + NEXT_RESPONSE);
+        return (str + NEXT_RESPONSE);
     }
 
     public String getUserCommand() {
