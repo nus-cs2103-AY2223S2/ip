@@ -4,16 +4,19 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 
 public class Storage {
@@ -25,6 +28,13 @@ public class Storage {
      */
     public void updateFile(ArrayList<Task> entireList) throws FileNotFoundException {
         try {
+
+            File file = new File(FILE_PATH);
+            if(!file.exists()) {
+                Files.createDirectories(Paths.get("./data/"));
+                file.createNewFile();
+            }
+
             PrintWriter pw = new PrintWriter(new FileOutputStream(FILE_PATH));
 
             for (int i = 0; i < entireList.size(); i++) {
