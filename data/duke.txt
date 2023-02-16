@@ -1,5 +1,3 @@
-T / 1 / aa
-T / 0 / as
-T / 1 / asdsa
-T / 0 / sadas
-T / 0 / asd
+E / 0 / ab / from 2012-12-05 / to 2012-12-06
+D / 1 / aaa  / by 2021-05-01
+E / 0 / astas / from 2012-06-01 / to 2012-06-11
