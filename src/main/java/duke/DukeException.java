@@ -1,4 +1,4 @@
-package seedu.duke;
+package duke;
 
 /**
  * Exception for handling possible Duke problems.
@@ -29,15 +29,15 @@ public class DukeException extends Exception {
      */
     public void EmptyDescriptionException() {
         switch (this.task) {
-            case "todo":
-                System.out.println("OOPS!!! The description of a todo task cannot be empty.");
-                break;
-            case "deadline":
-                System.out.println("OOPS!!! The description of a deadline task cannot be empty.");
-                break;
-            case "event":
-                System.out.println("OOPS!!! The description of an event task cannot be empty.");
-                break;
+        case "todo":
+            System.out.println("OOPS!!! The description of a todo task cannot be empty.");
+            break;
+        case "deadline":
+            System.out.println("OOPS!!! The description of a deadline task cannot be empty.");
+            break;
+        case "event":
+            System.out.println("OOPS!!! The description of an event task cannot be empty.");
+            break;
         }
     }
 
@@ -46,12 +46,12 @@ public class DukeException extends Exception {
      */
     public void MarkedException() {
         switch (this.task) {
-            case "marked":
-                System.out.println("This task has already been marked as done.");
-                break;
-            case "unmarked":
-                System.out.println("This task was already marked as not done.");
-                break;
+        case "marked":
+            System.out.println("This task has already been marked as done.");
+            break;
+        case "unmarked":
+            System.out.println("This task was already marked as not done.");
+            break;
         }
     }
 

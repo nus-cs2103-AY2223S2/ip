@@ -1,12 +1,12 @@
-package seedu.duke;
+package duke;
 
 import java.io.IOException;
+import duke.command.Command;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Parser parser;
 
     /**
      * Loads the list of tasks stored in the text file given by 'filepath'.
@@ -34,11 +34,11 @@ public class Duke {
         while (!isEnd) {
             try {
                 String input = ui.getInput();
-                parser = new Parser();
-                parser.parse(input, tasks, storage, ui);
-                isEnd = parser.checkEnd(input);
+                Command command = Parser.parse(input);
+                command.execute(tasks, storage, ui);
+                isEnd = command.checkEnd();
             } catch (DukeException e) {
-                ui.showGenericError();
+                ui.showError(e);
             }
         }
     }
