@@ -1,5 +1,5 @@
 #sendButton {
-    -fx-background-image: url("https://www.shutterstock.com/image-vector/sword-icon-vector-beautiful-isolated-260nw-332205464.jpg");
+    -fx-background-image: url("/images/crossedSword.png");
     -fx-border-color: rosybrown;
     -fx-background-position: center;
     -fx-background-size: cover;
@@ -14,7 +14,7 @@
 }
 
 #dialogContainer {
-    -fx-background-image: url("https://wallpaper.dog/large/20467462.jpg");
+    -fx-background-image: url("/images/dungeonBG.png");
     -fx-background-position: center;
     -fx-background-size: contain;
 }
