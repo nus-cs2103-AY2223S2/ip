@@ -41,7 +41,7 @@ public class TaskList {
                 throw new DukeExceptions("List is empty!");
             }
         } catch (DukeExceptions de) {
-            System.out.println("List is empty!");
+            return "List is empty!";
         }
         for (int i = 0; i < tasks.size(); i++) {
             output += i + 1 + ". " + tasks.get(i).toString() + "\n";
