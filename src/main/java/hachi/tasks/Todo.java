@@ -4,6 +4,7 @@ package hachi.tasks;
  * Encapsulates a Task without a date.
  */
 public class Todo extends Task {
+    private static final String tag = "T";
 
     /**
      * Todo constructor.
@@ -29,6 +30,17 @@ public class Todo extends Task {
             }
         }
         return false;
+    }
+
+    /**
+     * Formats the task into a string to be saved locally
+     *
+     * @return A String of tasks with specified format.
+     */
+    public String saveTask() {
+        String completed = this.isDone ? "1" : "0";
+        return this.tag + " | " + completed + " | "
+                + this.input;
     }
 
     /**

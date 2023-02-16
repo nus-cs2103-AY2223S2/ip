@@ -4,6 +4,7 @@ package hachi.tasks;
  * Encapsulates a Task with a starting date and an ending date..
  */
 public class Event extends Task {
+    private static final String tag = "E";
     private String from;
     private String to;
 
@@ -43,6 +44,19 @@ public class Event extends Task {
             }
         }
         return false;
+    }
+
+    /**
+     * Formats the task into a string to be saved locally
+     *
+     * @return A String of tasks with specified format.
+     */
+    public String saveTask() {
+        String completed = this.isDone ? "1" : "0";
+        return this.tag + " | " + completed + " | "
+                + this.input
+                + " | " + this.from
+                + " to " + this.to;
     }
 
     /**

@@ -1,6 +1,5 @@
 package hachi.commands;
 
-import hachi.main.HachiExceptions;
 import hachi.main.TaskList;
 import hachi.main.Ui;
 import hachi.main.Storage;
@@ -10,7 +9,6 @@ import hachi.main.Storage;
  */
 public class ListCommand extends Command {
     private String input;
-    static String separator = "‿୨♡୧‿‿‿‿୨♡୧‿‿‿‿୨♡୧‿";
 
     /**
      * ListCommand constructor.
@@ -22,9 +20,10 @@ public class ListCommand extends Command {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-
+        if (tasks.size() == 0) {
+            return ui.noTasksMessage();
+        }
         return ui.printList(tasks);
-
     }
 }
 

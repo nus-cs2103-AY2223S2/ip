@@ -3,9 +3,9 @@ package hachi.tasks;
 /**
  * Encapsulates a job to be done.
  */
-public class Task {
+public abstract class Task {
     protected String input;
-    private boolean isDone;
+    protected boolean isDone;
 
     /**
      * Task constructor.
@@ -34,6 +34,13 @@ public class Task {
     public void unmark() {
         this.isDone = false;
     }
+
+    /**
+     * Formats the task into a string to be saved locally
+     *
+     * @return A String of tasks with specified format.
+     */
+    public abstract String saveTask();
 
     /**
      * Return the string representation of the task.

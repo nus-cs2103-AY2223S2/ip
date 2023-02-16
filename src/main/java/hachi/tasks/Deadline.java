@@ -1,14 +1,20 @@
 package hachi.tasks;
 
+import hachi.main.HachiExceptions;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates a Task with a deadline.
  */
 public class Deadline extends Task {
+    private static final String tag = "D";
     protected LocalDate time;
-    private static final DateTimeFormatter TO = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateTimeFormatter TO = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 
     /**
      * Ddl constructor.
@@ -20,6 +26,8 @@ public class Deadline extends Task {
         super(input);
         this.time = time;
     }
+
+
 
     public boolean checkInput(Deadline taskOne, Deadline taskTwo) {
         return taskOne.input.equals(taskTwo.input);
@@ -40,6 +48,19 @@ public class Deadline extends Task {
             }
         }
         return false;
+    }
+
+    /**
+     * Formats the task into a string to be saved locally
+     *
+     * @return A String of tasks with specified format.
+     */
+    public String saveTask() {
+        String completed = this.isDone ? "1" : "0";
+        String formattedDate = time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        return this.tag + " | " + completed + " | "
+                + this.input + " | " + formattedDate;
     }
 
     /**

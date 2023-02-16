@@ -58,23 +58,29 @@ public class Parser {
             throw new IllegalArgumentException();
         }
     }
+
+    /**
+     * Converts strings of tasks in the hard disk to Task instances.
+     * @param input String of task to be converted to a Task instance.
+     * @return A Task instance.
+     */
     public static Task parseSaved(String input) {
         String[] splitInput = input.split(" ");
         String taskType = splitInput[0];
-        String taskStatus = splitInput[1];
-        String taskDescription = splitInput[2];
+        String taskStatus = splitInput[2];
+        String taskDescription = splitInput[4] ;
         Task newTask;
 
         switch (taskType) {
             case "T":
                 newTask = new Todo(taskDescription);
                 break;
-            case "E":
-                String[] eventTiming = splitInput[3].split("to");
-                newTask = new Event(taskDescription, eventTiming[0],eventTiming[1]);
-                break;
             case "D":
-                newTask = new Deadline(taskDescription, LocalDate.parse(splitInput[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                String deadlineTiming = splitInput[6];
+                newTask = new Deadline(taskDescription, LocalDate.parse(deadlineTiming, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                break;
+            case "E":
+                newTask = new Event(taskDescription, splitInput[6], splitInput[8]);
                 break;
             default:
                 throw new IllegalArgumentException();

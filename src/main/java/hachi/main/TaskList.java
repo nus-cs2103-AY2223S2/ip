@@ -42,6 +42,12 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    /**
+     * Checks if a task from a new input has already been added to the TaskList.
+     *
+     * @param task New Task to be added.
+     * @throws HachiExceptions
+     */
     public void checkDuplicate(Task task) throws HachiExceptions {
         for (int i = 0; i < size(); i++) {
             if (tasks.get(i).equals(task)) {
@@ -50,12 +56,32 @@ public class TaskList {
         }
     }
 
-    public String getStoredString() {
-        String ls = "";
+    /**
+     * Provides the string representation of TaskList to be written to the hard disk.
+     *
+     * @return String representation of TaskList.
+     */
+    public String getTaskList() {
+        String result = "";
         for (int i = 0; i < tasks.size(); i++) {
-            ls += "\n       " + tasks.get(i);
+            result += tasks.get(i).saveTask() + "\n";
         }
-        return ls;
+        return result;
+    }
+
+    /**
+     * Prints out the tasks in the TaskList.
+     *
+     * @return All tasks in the TaskList.
+     */
+    public String list() {
+        String result = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            int index = i + 1;
+            result += "  " + index + ". " + tasks.get(i).toString();
+        }
+        System.out.print(result);
+        return result;
     }
 
 
@@ -77,14 +103,13 @@ public class TaskList {
         return this.tasks.size();
     }
 
-
     /**
      * Return the string representation of the TaskList.
      *
-     * @return string representation of the TaskList.
+     * @return String representation of the TaskList.
      */
     public String toString() {
-        String list = "Here are your tasks: \n";
+        String list = " ";
         for (int i = 0; i < tasks.size(); i++) {
             if (i == tasks.size() - 1) {
                 list += i + 1 + ". " + tasks.get(i);
