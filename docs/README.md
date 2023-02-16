@@ -12,25 +12,66 @@ Adds a task with deadline.
 
 ### Add event task: event
 
-Add an event occuring within a specific timeline.
+Adds an event occuring within a specific timeline.
 
-### Check task as completed: mark
+### Check task: mark
 
-Description of the feature.
+Checks off task as completed.
 
-### Uncheck task as incompleted: unmark
+### Uncheck task: unmark
 
-Description of the feature.
+Unchecks task as incomplete.
 
 ### Delete task: delete
 
-Description of the feature.
+Deletes task.
 
 ### View all tasks: list
 
-Description of the feature.
+Lists all completed and incompleted tasks.
 
 ## Usage
+
+#### todo
+
+Adds a task into task list and outputs success message.
+
+Example of usage: 
+
+`todo read a book`
+
+Expected outcome:
+
+Outputs success message.
+
+```
+____________________________________________________________
+  Got it. I've added this task:
+    [T][ ] read a book
+  Now you have 1 task in the list.
+____________________________________________________________
+```
+
+#### deadline
+
+Adds a task with deadline into task list and outputs success message.
+
+Example of usage: 
+
+`deadline return book /by 2050-01-01`
+
+Expected outcome:
+
+Outputs success message.
+
+```
+____________________________________________________________
+  Got it. I've added this task:
+    [D][ ] return book (by: Jan 1 2050)
+  Now you have 2 tasks in the list.
+____________________________________________________________
+```
+
 
 ### `Keyword` - Describe action
 
