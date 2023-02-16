@@ -5,10 +5,11 @@ import duke.Task;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FindCommand extends Command {
-    String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -17,13 +18,15 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> filtered = tasks.findAllTasksWithKeyword(this.keyword);
-        StringBuilder toPrint = new StringBuilder();
-        for (int i = 0; i < filtered.size(); i++) {
-            if (i != 0) {
-                toPrint.append("\n");
-            }
-            toPrint.append(i + 1).append(": ").append(filtered.get(i));
+        if (filtered.size() == 0){
+            this.setOutput("Can't find tasks with this keyword yo~");
+            return;
         }
-        ui.printInBanner(toPrint.toString());
+
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < filtered.size(); i++) {
+            strings.add((i + 1) + ": " + filtered.get(i));
+        }
+        this.setOutput(strings.toArray(new String[0]));
     }
 }

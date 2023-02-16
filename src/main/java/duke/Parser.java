@@ -33,8 +33,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.contains("|")) {
-            System.out.println("Neeeee fuzakenjaNEYOO\nDon't use the | character da yo");
-            throw new DukeException();
+            throw new DukeException("Neeeee fuzakenjaNEYOO\nDon't use the | character da yo!!");
         }
 
         Iterator<String> args = Arrays.stream(fullCommand.split(" ")).iterator();
@@ -51,14 +50,14 @@ public class Parser {
             case "mark":
             case "unmark":
                 if (!args.hasNext()) {
-                    throw new DukeException("WAKANDEYO!!! >:(");
+                    throw new DukeException("Need an index da yo~");
                 }
 
                 int idx;
                 try {
                     idx = Integer.parseInt(args.next());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("WAKANDEYO!!! >:(");
+                    throw new DukeException("Not a valid index da yo~");
                 }
 
                 return new MarkCommand(cmdWord.equals("mark"), idx);
@@ -71,7 +70,7 @@ public class Parser {
                 try {
                     by = parseDate(copyUntilDelimiter(args));
                 } catch (IllegalArgumentException e) {
-                    throw new DukeException("WAKANDEYO!!!! >:(");
+                    throw new DukeException("Not a valid date da yo~ I recognise YYYY-MM-DD date formats~");
                 }
 
                 return new AddCommand(new Deadline(name, by));
@@ -84,32 +83,31 @@ public class Parser {
                     from = parseDate(copyUntilDelimiter(args, "/to"));
                     to = parseDate(copyUntilDelimiter(args));
                 } catch (IllegalArgumentException e) {
-                    throw new DukeException();
+                    throw new DukeException("Not a valid date da yo~ I recognise YYYY-MM-DD date formats~");
                 }
 
                 return new AddCommand(new Event(name, from, to));
             case "delete":
                 if (!args.hasNext()) {
-                    throw new DukeException("WAKANDEYO!!! >:(");
+                    throw new DukeException("Need an index da yo~");
                 }
 
                 try {
                     idx = Integer.parseInt(args.next());
                 } catch (NumberFormatException e) {
-                    throw new DukeException("WAKANDEYO!!! >:(");
+                    throw new DukeException("Not a valid index da yo~");
                 }
                 return new DeleteCommand(idx);
             case "find":
                 if (!args.hasNext()) {
-                    throw new DukeException("WAKANDEYO!!! >:(");
+                    throw new DukeException("Need a keyword to search for da yo~");
                 }
 
                 String keyword = args.next();
                 return new FindCommand(keyword);
 
             default:
-                throw new DukeException();
-                // printErrorMessage(ErrorEnum.UNKNOWN_INPUT);
+                throw new DukeException("WAKANDEYO!!! >:(");
         }
     }
 
