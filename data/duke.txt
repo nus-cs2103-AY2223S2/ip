@@ -1,4 +1,2 @@
-D | 0 | hello | Dec 10 2019
-T | 0 | hello
-E | 0 | read book | now | tomorrow
-T | 1 | hi
+D | 0 | hello | now
+D | 0 | hello | now

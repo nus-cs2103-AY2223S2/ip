@@ -9,8 +9,11 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class TaskList {
-    static ArrayList<Task> list;
+    private static ArrayList<Task> list;
 
+    public TaskList(ArrayList<Task> t) {
+        this.list = t;
+    }
     public TaskList() {
         list = new ArrayList<>();
     }
@@ -49,9 +52,9 @@ public class TaskList {
      * @param array The array of tasks.
      * @param splitInput The user's input for unmarking a task.
      */
-    public static void unmarkTask(ArrayList<Task> array, String[] splitInput) {
-        array.get((Integer.parseInt(splitInput[1])-1)).markAsUnDone();
-        Ui.unmarkTask(array, splitInput);
+    public static String unmarkTask(ArrayList<Task> array, String[] splitInput) {
+        array.get((Integer.parseInt(splitInput[1]) - 1)).markAsUnDone();
+        return Ui.unmarkTask(array, splitInput);
     }
 
     /**
@@ -60,9 +63,9 @@ public class TaskList {
      * @param array The array of tasks.
      * @param splitInput The user's input for marking a task.
      */
-    public static void markTask(ArrayList<Task> array, String[] splitInput) {
-        array.get((Integer.parseInt(splitInput[1])-1)).markAsDone();
-        Ui.markTask(array, splitInput);
+    public static String markTask(ArrayList<Task> array, String[] splitInput) {
+        array.get((Integer.parseInt(splitInput[1]) - 1)).markAsDone();
+        return Ui.markTask(array, splitInput);
     }
 
     /**
@@ -71,9 +74,9 @@ public class TaskList {
      * @param array The array of tasks.
      * @param splitInput The user's input for deleting a task.
      */
-    public static void deleteTask(ArrayList<Task> array, String[] splitInput) {
-        array.remove((Integer.parseInt(splitInput[1])-1));
-        Ui.removeTask(array, splitInput);
+    public static String deleteTask(ArrayList<Task> array, String[] splitInput) {
+        array.remove((Integer.parseInt(splitInput[1]) - 1));
+        return Ui.removeTask(array, splitInput);
     }
 
     /**
@@ -81,8 +84,8 @@ public class TaskList {
      *
      * @param array The array of tasks.
      */
-    public static void displayList(ArrayList<Task> array) {
-        Ui.displayList(array);
+    public static String displayList(ArrayList<Task> array) {
+        return Ui.displayList(array);
     }
 
     /**
@@ -91,7 +94,7 @@ public class TaskList {
      * @param array The array of tasks.
      * @param splitInput The user's input for searching for a task.
      */
-    public static void searchTask(ArrayList<Task> array, String[] splitInput) {
+    public static String searchTask(ArrayList<Task> array, String[] splitInput) {
         String searchTerm = splitInput[1].toLowerCase();
         ArrayList<Task> searchResults = new ArrayList<Task>();
         int resultCount = 0;
@@ -104,12 +107,14 @@ public class TaskList {
         }
 
         if (resultCount == 0) {
-            System.out.println("No tasks found with the keyword " + searchTerm + ".");
+            return "No tasks found with the keyword " + searchTerm + ".";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String list = "";
+            list += "Here are the matching tasks in your list:" + "\n";
             for (int i = 0; i < searchResults.size(); i++) {
-                System.out.println((i + 1) + "." + searchResults.get(i));
+                list += (i + 1) + "." + searchResults.get(i) + "\n";
             }
+            return list;
         }
     }
 

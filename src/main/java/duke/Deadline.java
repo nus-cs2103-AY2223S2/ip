@@ -75,7 +75,7 @@ public class Deadline extends Task {
      * @param array a list of tasks.
      * @param splitInput an array of strings containing the user input.
      */
-    public static void createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
+    public static String createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")) {
             try {
                 throw new DukeException("deadline");
@@ -107,13 +107,14 @@ public class Deadline extends Task {
                 LocalDate ld = LocalDate.parse(date, formatter);
                 Deadline d = new Deadline(desc, ld);
                 array.add(d);
-                Ui.addTask(array, d);
+                return Ui.addTask(array, d);
             } else {
                 Deadline d = new Deadline(desc, date);
                 array.add(d);
-                Ui.addTask(array, d);
+                return Ui.addTask(array, d);
             }
         }
+        return "error";
     }
     /**
      * Checks whether a string is an instance of LocalDate

@@ -1,19 +1,18 @@
 package duke;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.paint.Paint;
-import javafx.scene.layout.CornerRadii;
 
 public class DialogBox extends HBox {
 
@@ -50,14 +49,18 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         DialogBox user = new DialogBox(l, iv);
-        user.setBackground(new Background(new BackgroundFill(Color.rgb(136, 172, 224), new CornerRadii(20) , Insets.EMPTY)));
+        Color color = Color.rgb(136, 172, 224);
+        CornerRadii radius = new CornerRadii(20);
+        user.setBackground(new Background(new BackgroundFill(color, radius , Insets.EMPTY)));
         return user;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(173, 216, 230), new CornerRadii(20) , Insets.EMPTY)));
+        Color color = Color.rgb(173, 216, 230);
+        CornerRadii radius = new CornerRadii(20);
+        db.setBackground(new Background(new BackgroundFill(color, radius , Insets.EMPTY)));
         return db;
     }
 }

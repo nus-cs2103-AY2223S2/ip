@@ -4,10 +4,8 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
-
-import util.*;
+import util.DukeException;
 
 /**
  * The Event class extends the Task class and represents a task with a duration.
@@ -19,7 +17,6 @@ public class Event extends Task {
 
     protected String from;
     protected String to;
-    static String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
 
     /**
      * Constructs a new Event object with the given task and due date.
@@ -81,15 +78,13 @@ public class Event extends Task {
      * @param array  a list of tasks.
      * @param splitInput an array of strings containing the user input.
      */
-    public static void createEventTask(ArrayList<Task> array, String[] splitInput) {
+    public static String createEventTask(ArrayList<Task> array, String[] splitInput) {
         String combinedString = String.join(" ", splitInput);
         if (splitInput.length == 1 || splitInput[1].equals("")) {
             try {
                 throw new DukeException("event");
             } catch (Exception e) {
-                System.out.println(divider);
                 System.out.println(e.toString());
-                System.out.println(divider);
             }
         } else {
             String event = combinedString.split(" ", 2)[1];
@@ -106,15 +101,16 @@ public class Event extends Task {
                         LocalDate ldTo = LocalDate.parse(to, formatter);
                         Event e = new Event(desc, ldFrom, ldTo);
                         array.add(e);
-                        Ui.addTask(array, e);
+                        return Ui.addTask(array, e);
                     } else {
                         Event e = new Event(desc, from, to);
                         array.add(e);
-                        Ui.addTask(array, e);
+                        return Ui.addTask(array, e);
                     }
                 }
             }
         }
+        return "error";
     }
 
     /**
@@ -145,7 +141,8 @@ public class Event extends Task {
      * @param separator The separator to use between elements.
      * @param startIndex The start index of the range.
      * @param endIndex The end index of the range.
-     * @return A string that consists of the elements of the array joined with the separator, or null if the array is null.
+     * @return A string that consists of the elements of the array
+     *          joined with the separator, or null if the array is null.
      */
     public static String join(Object[] array, String separator, int startIndex, int endIndex) {
         if (array == null) {
@@ -186,5 +183,5 @@ public class Event extends Task {
         String timePeriod = from + d + to;
         return "E" + d + marked + d + description + d + timePeriod;
     }
-  }
+}
 

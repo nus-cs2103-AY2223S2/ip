@@ -1,19 +1,21 @@
 package duke;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 
 
 /**
@@ -24,6 +26,9 @@ import javafx.scene.image.ImageView;
  * @version 1.0
  */
 public class Duke extends Application {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui = new Ui();
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -35,6 +40,9 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
+        storage = new Storage(System.getProperty("user.dir") + "/data/duke.txt");
+        tasks = new TaskList(storage.load());
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -51,7 +59,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Broccoli");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -65,7 +73,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -79,28 +86,30 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
+        //Initial greeting
+        String greet = "Hello! I'm Broccoli the dinosaur \n";
+        greet += "           <|°▿▿▿▿°|/ \n";
+        greet += "      What can I do for you?";
+        Label greeting = new Label(greet);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, new ImageView(duke)));
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -122,49 +131,21 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+    private void handleUserInput() throws IOException {
+        String input = userInput.getText();
+        String[] splitInput = input.split("\\s+");
+        String response = Parser.parseInput(splitInput);
+
+        Label userText = new Label(input);
+        Label dukeText = new Label(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
-    }
-
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Broccoli heard: " + input;
-    }
-    /**
-     * The main method of the application.
-     * This method initializes the task list, loads tasks from the saved file,
-     * greets the user, and handles user inputs.
-     * @param args
-     */
-    public static void main(String[] args) {
-        TaskList list = new TaskList();
-        try {
-            Storage.loadFile(list);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        Ui.greet();
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            String userInput = sc.nextLine();
-            String[] splitInput = userInput.split("\\s+");
-            Parser.parseInput(splitInput);
-            try {
-                Storage.saveToFile(list);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        if (input.contains("bye")) {
+            storage.saveToFile(tasks);
+            Platform.exit();
         }
     }
 }

@@ -1,9 +1,6 @@
 package duke;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,60 +14,62 @@ import util.DukeException;
  */
 public class Storage {
     /**
-     * Creates a directory for storing task data and a new file for storing the tasks if it does not exist.
+     * The file path of the save file.
      */
-    public static void initSaveFile() {
-        File dir = new File("src/main/data/");
-        dir.mkdirs();
-        // create a file object for the current location
-        File file = new File(dir, "duke.txt");
-
-        try {
-            // create a new file with name specified
-            // by the file object
-            boolean value = file.createNewFile();
-            if (value) {
-                FileWriter output = new FileWriter("duke.txt");
-                output.write("---------------LIST OF TASKS--------------------");
-                output.append('\n');
-                System.out.println("New Save File is created.");
-            } else {
-                System.out.println("Save file already exists.");
-            }
-        } catch(Exception e) {
-            e.getStackTrace();
-        }
-    }
+    private String filePath;
     /**
-     * Loads tasks from a file and adds them to a task list.
-     * @param list a list of tasks
-     * @throws IOException if there is an error reading from the file
-     * @throws DukeException if there is an error in the format of the file
+     * Creates a new instance of Storage with the specified file path.
+     * @param s the file path of the save file
      */
-    public static void loadFile(TaskList list) throws IOException, DukeException {
-        File file = new File(System.getProperty("user.dir") + "/data/duke.txt");
-        File dir = new File(System.getProperty("user.dir") + "/data");
+    public Storage(String s) {
+        this.filePath = s;
+    }
 
-        // if directory has not been created, make directory
+    /**
+     * Loads a list of tasks from the save file.
+     * @return an ArrayList of Task objects loaded from the save file
+     */
+    public ArrayList<Task> load() {
+        assert this.filePath.length() > 0 : "this file path should not be empty";
+        File file = new File(this.filePath);
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        File dir = new File(System.getProperty("user.dir") + "/data");
         if (!dir.exists()) {
             dir.mkdir();
         }
-
-        file.createNewFile();
-        //takes file's content as input, scans through files and adds items to the list
-        Scanner sc = new Scanner(file);
-
-        while (sc.hasNext()) {
-            String[] currLine = sc.nextLine().split(" \\| ");
-            if (currLine[0].equalsIgnoreCase("T")) {
-                list.add(new Todo(strToBool(currLine[1]), currLine[2]));
-            } else if (currLine[0].equalsIgnoreCase("D")) {
-                list.add(new Deadline(strToBool(currLine[1]), currLine[2], currLine[3]));
-            } else if (currLine[0].equalsIgnoreCase("E")) {
-                list.add(new Event(strToBool(currLine[1]), currLine[2], currLine[3], currLine[4]));
-            } else {
-                throw new DukeException("Read Error");
+        try {
+            Scanner saveFile = new Scanner(file);
+            System.out.println("    Saved data found, welcome back!");
+            while (saveFile.hasNextLine()) {
+                loadFile(saveFile.nextLine(), tasks);
             }
+        } catch (IOException | DukeException ex) {
+            System.out.println("    No saved data not found, new file will be created");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return tasks;
+    }
+    /**
+     * Loads a single line from the save file as a Task object and adds it to the specified ArrayList.
+     * @param s a single line from the save file
+     * @param list the ArrayList to which the Task object is added
+     * @throws IOException if there is an error reading from the file
+     * @throws DukeException if there is an error in the format of the file
+     */
+    public static void loadFile(String s, ArrayList<Task> list) throws IOException, DukeException {
+        String[] currLine = s.split(" \\| ");
+        if (currLine[0].equalsIgnoreCase("T")) {
+            list.add(new Todo(strToBool(currLine[1]), currLine[2]));
+        } else if (currLine[0].equalsIgnoreCase("D")) {
+            list.add(new Deadline(strToBool(currLine[1]), currLine[2], currLine[3]));
+        } else if (currLine[0].equalsIgnoreCase("E")) {
+            list.add(new Event(strToBool(currLine[1]), currLine[2], currLine[3], currLine[4]));
+        } else {
+            throw new DukeException("Read Error");
         }
     }
     /**
