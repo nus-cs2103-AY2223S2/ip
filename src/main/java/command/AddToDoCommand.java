@@ -33,7 +33,7 @@ public class AddToDoCommand extends AddTaskCommand {
         ToDo toDo = ToDo.generate(this.getInputArr());
         tasks.addTask(toDo);
         storage.writeData(tasks);
-        String output = ui.addTaskMsg(tasks, toDo);
+        String output = ui.getAddTaskMsg(tasks, toDo);
         System.out.println(output);
         return output;
     }

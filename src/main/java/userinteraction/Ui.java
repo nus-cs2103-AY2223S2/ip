@@ -55,11 +55,15 @@ public class Ui {
         return "Hello from\n" + LOGO + "\nWhat can I do for you?";
     }
 
+    public void printWelcomeMsg() {
+        System.out.println(getWelcomeMsg());
+    }
+
     /**
      * Prints divider line.
      */
-    public String getLineString() {
-        return DIVIDER_LINE;
+    public void printLineString() {
+        System.out.println(DIVIDER_LINE);
     }
 
     /**

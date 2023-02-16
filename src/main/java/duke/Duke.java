@@ -30,6 +30,8 @@ public class Duke {
      * Runs entire program
      */
     public void run() {
+        ui.printWelcomeMsg();
+        ui.printLineString();
         boolean isBye = false;
         while (!isBye) {
             try {

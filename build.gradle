@@ -44,11 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
-}
-
-checkstyle {
-    toolVersion = '10.2'
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
