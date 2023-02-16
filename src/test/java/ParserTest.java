@@ -47,7 +47,7 @@ public class ParserTest {
             Command find = Parser.parse("find food");
             assertTrue(find instanceof FindCommand);
 
-            Command updateTodo = Parser.parse("update 1 /name:run");
+            Command updateTodo = Parser.parse("update 1 /name:eat");
             assertTrue(updateTodo instanceof UpdateCommand);
 
         } catch (duke.DukeException e) {
@@ -88,16 +88,6 @@ public class ParserTest {
             Command updateTodo = Parser.parse("uPDAte 6 /name:run");
             assertTrue(updateTodo instanceof UpdateCommand);
 
-        } catch (duke.DukeException e) {
-            System.out.println(e.toString());
-        }
-    }
-
-    @Test
-    public void parse_UpdateCommand_noExceptionThrown() {
-        try {
-            Command updateTodo = Parser.parse("update 1 /name:run");
-            assertTrue(updateTodo instanceof UpdateCommand);
         } catch (duke.DukeException e) {
             System.out.println(e.toString());
         }

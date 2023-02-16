@@ -36,7 +36,6 @@ public class Duke {
 
     private boolean hasSavedSuccessfully(TaskList tasks, Storage storage) {
         try {
-            System.out.println(Ui.listTaskResponse(tasks));
             storage.saveData(tasks);
             return true;
         } catch (IOException e) {

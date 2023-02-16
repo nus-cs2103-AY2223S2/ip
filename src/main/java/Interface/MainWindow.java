@@ -52,6 +52,7 @@ public class MainWindow extends AnchorPane {
      * Clears the user input after processing.
      */
     public void setDuke(Duke d) {
+        duke = d;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getWelcomeResponse(), dukeImage),
                 DialogBox.getDukeDialog(duke.getPreviousTaskResponse(), dukeImage),
