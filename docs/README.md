@@ -67,7 +67,7 @@ Example of usage:
 - if task with the number 1 is a Todo:
   -  not compatible with the command
 
-### Exit application : `bye`
+### Exit application : `bye`  <a name="exiting-application"></a>
 
 Exit the Java application and GUI.
 
