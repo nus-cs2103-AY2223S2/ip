@@ -1,6 +1,6 @@
-# User Guide
+<span style="color: red;"># User Guide</span>
 Duke is a desktop software built in Java that allows users to create, delete, update and view tasks of different types - Todos, Events and Deadlines. Users have access to the highly intuitive GUI which allows them to manage the tasks much more efficiently.
-- [Features](#features)
+- <span style="color: yellow;">[Features](#features)</span>
   - [Add tasks](#add)
   - [Delete a task](#delete)
   - [List all tasks](#listing-tasks)
