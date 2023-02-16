@@ -52,7 +52,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: "
+        return "[E]" + super.toString() + "(from: "
                 + formatOfDate.format(startDate) + " to: " + formatOfDate.format(endDate) + ")";
     }
 }
