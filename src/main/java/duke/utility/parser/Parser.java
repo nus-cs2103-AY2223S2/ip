@@ -55,7 +55,7 @@ public class Parser {
             throw wrongCommandFormat;
         }
 
-        String message = "\n" + list.getTotal() + "\n" + list.toString();
+        String message = list.getTotal() + list.toString();
         return message;
     }
 

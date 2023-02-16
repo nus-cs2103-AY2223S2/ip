@@ -85,8 +85,8 @@ public class TaskList implements Serializable {
      */
     public String markedTask(int index) throws DukeException {
         try {
-            String message = "Nice! One Task Down!\n" + this.getTask(index).toString() + "\n";
             tasks.get(index).setMarked(true);
+            String message = "Nice! One Task Down!\n" + this.getTask(index).toString() + "\n";
             return message;
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
@@ -103,8 +103,8 @@ public class TaskList implements Serializable {
      */
     public String unmarkedTask(int index) throws DukeException {
         try {
-            String message = "One more task to go ):\n" + this.getTask(index).toString() + "\n";
             tasks.get(index).setMarked(false);
+            String message = "One more task to go ):\n" + this.getTask(index).toString() + "\n";
             return message;
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
