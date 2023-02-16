@@ -12,17 +12,17 @@
         <Label fx:id="dialog" minHeight="-Infinity" prefWidth="335.0" style="-fx-border-color: black;
         -fx-border-radius: 5; -fx-label-padding: 5; -fx-background-color: C9D7F8;" text="Label" textFill="#493657"
                textOverrun="WORD_ELLIPSIS" wrapText="true">
-         <font>
-             <Font name="Berlin Sans FB" size="16.0" />
-         </font>
-         <HBox.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </HBox.margin></Label>
+            <font>
+                <Font name="Berlin Sans FB" size="16.0" />
+            </font>
+            <HBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </HBox.margin></Label>
         <ImageView fx:id="displayPicture" fitHeight="85.0" fitWidth="85.0" opacity="0.69" pickOnBounds="true"
                    preserveRatio="true">
-         <HBox.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </HBox.margin></ImageView>
+            <HBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
