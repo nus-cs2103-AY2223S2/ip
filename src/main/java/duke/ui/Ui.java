@@ -8,14 +8,12 @@ import java.util.Scanner;
 public class Ui {
 
     protected Scanner sc;
-    protected final boolean isText;
 
     /**
      * Creates a user interface that interacts with the user.
      */
-    public Ui(boolean... isText) {
+    public Ui() {
         sc = new Scanner(System.in);
-        this.isText = isText.length == 0 || isText[0];
     }
 
     /**
@@ -45,9 +43,6 @@ public class Ui {
     }
     public String getDeleteMessage() {
         return "Noted. I've removed this task:";
-    }
-    public String getExitMessage() {
-        return "Bye. Hope to see you again soon!";
     }
     public String getFindMessage() {
         return "Here are the matching tasks in your list:";
@@ -119,13 +114,5 @@ public class Ui {
      */
     public void showError(String errorMessage) {
         echo("☹ OOPS!!! " + errorMessage + " :-(");
-    }
-
-    /**
-     * Shows the error message of the exception encountered when loading tasks
-     * from save data
-     */
-    public void showLoadingError() {
-        showError("There was an error while loading from save file");
     }
 }
