@@ -29,8 +29,8 @@ public class UwUke extends Application {
 
     @Override
     public void start(Stage stage) {
-        initialiseHelperClasses();
         loadMainWindow();
+        initialiseHelperClasses();
         scene.getStylesheets().add(getClass().getResource("/view/Application.css").toExternalForm());
         UwUke.stage = stage;
         stage.setResizable(false);
