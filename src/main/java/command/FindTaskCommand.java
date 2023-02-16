@@ -38,4 +38,9 @@ public class FindTaskCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean isDataSourceChanged() {
+        return false;
+    }
 }

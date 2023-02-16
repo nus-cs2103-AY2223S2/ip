@@ -17,43 +17,120 @@ import task.ToDo;
  * Storage class to save data to file.
  */
 public class Storage {
+    private static final String PATH_STORAGE = "src/data/filepath.txt";
+    private static final String DEFAULT_FILE_PATH = "src/data/tasks.txt";
+    private static final String DEFAULT_DIRECTORY_PATH = "src/data";
     /**
      * Path to file for saving.
      */
-    private final String filePath;
+    private String filePath;
     /**
      * Path to directory that contains file for saving.
      */
-    private final String directoryPath;
+    private String directoryPath;
 
     /**
      * Public Constructor.
-     *
-     * @param filePath String path to file for saving.
-     * @param directoryPath String path to directory that contains file for saving.
      */
-    public Storage(String filePath, String directoryPath) {
-        this.filePath = filePath;
-        this.directoryPath = directoryPath;
+    public Storage() throws DukeException {
+        readFilePath();
         createFile();
+    }
+
+    private void readFilePath() throws DukeException {
+        try {
+            makeDirectory(DEFAULT_DIRECTORY_PATH);
+            File fileStoragePath = new File(PATH_STORAGE);
+            if (!fileStoragePath.exists()) {
+                initFilePath(fileStoragePath);
+                return;
+            }
+            Scanner scanner = new Scanner(fileStoragePath);
+            if (scanner.hasNext()) {
+                directoryPath = scanner.nextLine();
+            }
+            if (scanner.hasNext()) {
+                filePath = scanner.nextLine();
+            } else {
+                System.out.println("File corrupted, reinitialising file");
+                initFilePath(fileStoragePath);
+            }
+            scanner.close();
+        } catch (IOException e) {
+            throw new DukeException("File unable to be created");
+        } catch (Exception e) {
+            throw new DukeException("File corrupted");
+        }
     }
 
     /**
      * Creates file for saving if it does not exist.
      */
-    private void createFile() {
+    private void createFile() throws DukeException {
         try {
-            File directory = new File(directoryPath);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            makeDirectory(directoryPath);
+            makeFile(filePath);
         } catch (IOException e) {
-            System.out.println("File unable to be created");
+            throw new DukeException("File unable to be created");
         }
+    }
+
+    private void makeDirectory(String directoryPath) {
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            if (directory.mkdirs()) {
+                System.out.println("Directory created successfully");
+            }
+        }
+        assert directory.exists();
+    }
+
+    private void makeFile(String filePath) throws IOException {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            if (file.createNewFile()) {
+                System.out.println("File created successfully");
+            }
+        }
+        assert file.exists();
+    }
+
+    private void saveFilePath() throws IOException {
+        FileWriter fileWriter = new FileWriter(PATH_STORAGE);
+        fileWriter.write(directoryPath + "\n");
+        fileWriter.write(filePath);
+        fileWriter.close();
+    }
+
+    private void initFilePath(File file) throws IOException {
+        if (file.createNewFile()) {
+            System.out.println("File created successfully");
+        }
+        filePath = DEFAULT_FILE_PATH;
+        directoryPath = DEFAULT_DIRECTORY_PATH;
+        saveFilePath();
+    }
+
+    /**
+     * Change data storage file path.
+     * @param inputArr User input.
+     * @return Message to user.
+     */
+    public String changeDataSource(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Invalid command");
+        }
+        this.filePath = inputArr[1];
+        this.directoryPath = inputArr[1].substring(0, inputArr[1].lastIndexOf("/"));
+        createFile();
+        try {
+            saveFilePath();
+        } catch (IOException e) {
+            throw new DukeException("Failed to save file path");
+        }
+        String output = "File path successfully changed";
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -61,7 +138,7 @@ public class Storage {
      *
      * @return TaskList that is generated from data saved in file.
      */
-    public TaskList readData() {
+    public TaskList readData() throws DukeException {
         ArrayList<Task> arrayList = new ArrayList<>();
         File file = new File(filePath);
         Scanner scanner;
@@ -85,9 +162,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException("File not found");
         }
         return new TaskList(arrayList);
     }
@@ -97,7 +172,7 @@ public class Storage {
      *
      * @param tasks To write data to file.
      */
-    public void writeData(TaskList tasks) {
+    public void writeData(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             ArrayList<Task> arrayList = tasks.getTasks();
@@ -106,7 +181,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Error: Unable to save task");
+            throw new DukeException("Error: Unable to save task");
         }
     }
 }

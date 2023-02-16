@@ -46,12 +46,12 @@ public class ToDo extends Task {
     }
     @Override
     public String getStoreTaskString() {
-        return this.getTaskType() + " | " + this.getCheckedString() + " | " + this.getStr();
+        return this.getTaskType() + " | " + this.getCheckedString() + " | " + this.getTask();
     }
     @Override
     public String toString() {
         boolean checked = this.isChecked();
-        String str = this.getStr();
+        String str = this.getTask();
         if (checked) {
             return "[T][X] " + str;
         } else {

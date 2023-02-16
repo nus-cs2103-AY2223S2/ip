@@ -19,10 +19,7 @@ abstract class AddTaskCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        //abstract class, does nothing.
-        return null;
-    }
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Does not exit program.
@@ -31,6 +28,11 @@ abstract class AddTaskCommand extends Command {
      */
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean isDataSourceChanged() {
         return false;
     }
 }

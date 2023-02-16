@@ -10,7 +10,7 @@ public class DeadLine extends Task {
     /**
      * Store for deadLine date.
      */
-    private String dateTime;
+    private final String dateTime;
 
     /**
      * Private constructor.
@@ -64,12 +64,12 @@ public class DeadLine extends Task {
     @Override
     public String getStoreTaskString() {
         return this.getTaskType() + " | " + this.getCheckedString()
-                + " | " + this.getStr() + " | " + this.getDateTime();
+                + " | " + this.getTask() + " | " + this.getDateTime();
     }
 
     @Override
     public String toString() {
-        String str = this.getStr();
+        String str = this.getTask();
         boolean checked = this.isChecked();
         String dateTime = this.getDateTime();
         if (checked) {
