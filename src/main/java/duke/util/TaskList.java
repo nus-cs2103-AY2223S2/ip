@@ -79,6 +79,7 @@ public class TaskList {
      */
 
     public Task getTask(int index) {
+        assert (index >= 0);
         return this.listTask.get(index);
     }
 
@@ -100,6 +101,7 @@ public class TaskList {
      */
 
     public TaskList removeTask(int index) {
+        assert (index >= 0);
         this.listTask.remove(index);
         return this;
     }
