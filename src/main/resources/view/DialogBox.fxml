@@ -10,7 +10,7 @@
     <children>
         <Label fx:id="dialog" maxHeight="-Infinity" text="Label" wrapText="true">
          <font>
-            <Font name="Apple LiGothic Medium" size="25.0" />
+            <Font name="BM HANNA Pro OTF" size="25.0" />
          </font></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>

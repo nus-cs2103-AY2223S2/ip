@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<!--Looked at Zhu Yufan's code for the design of the MainWindow, mainly because my MainWindow does not scale
-properly when I try to resize the window-->
+<!--@@ZhuYufan {@NBQian}-reused-->
+<!--reused code such that my dialog box would move as desired when I resize the window-->
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1008.0" style="-fx-background-color: linear-gradient(to BOTTOM, lightblue, skyblue);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="600.0" stylesheets="@Background.css" vvalue="1.0" AnchorPane.bottomAnchor="42.39999999999998" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="620.0" />
@@ -27,3 +27,4 @@ properly when I try to resize the window-->
         </Button>
     </HBox>
 </AnchorPane>
+<!--@@Zhu Yufan-->
