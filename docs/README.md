@@ -33,7 +33,7 @@ All you have to do is let me know what your tasks are, and I'll take care of the
 3. Open cmd on the directory you installed the file on and run `java -jar {name}.jar` in terminal.
 4. Use the chatbox by entering commands mentioned below.
 
-**The UI of PlanPal should look like this: **
+**The UI of PlanPal should look like this:**
 ![Ui.png](Ui.png)
 
 ## Commands
