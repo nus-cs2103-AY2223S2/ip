@@ -1,7 +1,4 @@
 package AddTasks;
-
-import AddTasks.Task;
-
 public class Todo extends Task {
 
     /**

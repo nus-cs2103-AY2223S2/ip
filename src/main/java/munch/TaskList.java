@@ -7,16 +7,14 @@ import AddTasks.Todo;
 import Exceptions.IncompleteInputException;
 import Exceptions.InvalidInputException;
 import javafx.application.Platform;
-import munch.Parser;
 
-import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
 
-    public static ArrayList<String> getResponse(ArrayList<Task> tasks, String word, String[] words) throws IncompleteInputException, InvalidInputException {
+    public static ArrayList<String> getResponse(ArrayList<Task> tasks, String word, String[] words) {
         ArrayList<String> lines = new ArrayList<>();
         try {
             if (word.equals("list")) {
@@ -83,14 +81,19 @@ public class TaskList {
         int sepPos2 = word.indexOf(separator2);
         String str = word.substring(sepPos1 + separator1.length() + 1, sepPos2 - 1);
         String date = word.substring(sepPos2 + 1 + separator2.length());
-        LocalDate convertDate = Parser.convertToDate(date);
-        Deadlines deadline = new Deadlines(str, convertDate);
-        if (isDuplicate(tasks, str)) {
-            return Ui.duplicateTaskMessage();
+        if (isCorrectFormat(date))  {
+            LocalDate convertDate = Parser.convertToDate(date);
+            Deadlines deadline = new Deadlines(str, convertDate);
+            if (isDuplicate(tasks, str)) {
+                return Ui.duplicateTaskMessage();
+            } else {
+                tasks.add(deadline);
+                return Ui.addTaskMessage() + "\n" + deadline + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+            }
         } else {
-            tasks.add(deadline);
-            return Ui.addTaskMessage() + "\n" + deadline + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+            return Ui.wrongDateFormatMessage();
         }
+
     }
 
     public static String addEventTask(ArrayList<Task> tasks, String word) {
@@ -103,14 +106,18 @@ public class TaskList {
         String str = word.substring(sepPos1 + separator1.length() + 1, sepPos2 - 1);
         String from = word.substring(sepPos2 + 1 + separator2.length(), sepPos3 - 1);
         String to = word.substring(sepPos3 + 1 + separator3.length());
-        LocalDate convertFrom = Parser.convertToDate(from);
-        LocalDate convertTo = Parser.convertToDate(to);
-        Events event = new Events(str, convertFrom, convertTo);
-        if (isDuplicate(tasks, str)) {
-            return Ui.duplicateTaskMessage();
+        if (isCorrectFormat(from) && isCorrectFormat(to)) {
+            LocalDate convertFrom = Parser.convertToDate(from);
+            LocalDate convertTo = Parser.convertToDate(to);
+            Events event = new Events(str, convertFrom, convertTo);
+            if (isDuplicate(tasks, str)) {
+                return Ui.duplicateTaskMessage();
+            } else {
+                tasks.add(event);
+                return Ui.addTaskMessage() + "\n" + event + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+            }
         } else {
-            tasks.add(event);
-            return Ui.addTaskMessage() + "\n" + event + "\n" + "Now you have " + tasks.size() + " task(s) in the list ~~";
+            return Ui.wrongDateFormatMessage();
         }
     }
 
@@ -147,10 +154,14 @@ public class TaskList {
     public static Boolean isDuplicate(ArrayList<Task> tasks, String word) {
         boolean isDuplicate = false;
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).description.contains(word)) {
+            if (tasks.get(i).description.equals(word)) {
                 isDuplicate = true;
             }
         }
         return isDuplicate;
+    }
+
+    public static Boolean isCorrectFormat(String date) {
+        return date.matches("\\d{2}/\\d{2}/\\d{4}");
     }
 }

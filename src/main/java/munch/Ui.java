@@ -40,8 +40,8 @@ public class Ui {
     /**
      * Prints an error message when the input format for date is wrong.
      */
-    public static void wrongDateFormatMessage() {
-        System.out.println("Wrong format for date! [Format: dd/MM/yyyy]");
+    public static String wrongDateFormatMessage() {
+        return "Wrong format for date! [Format: dd/MM/yyyy]";
     }
 
     /**

@@ -16,8 +16,10 @@ public class Parser {
         LocalDate localDate = LocalDate.from(sf.parse(date));
         return localDate;
     }
-//    public static String printFormat(String by) {
-//        String newFormat = by.format(String.valueOf(DateTimeFormatter.ofPattern("MMM d yyyy")));
-//        return newFormat;
-//    }
+
+    public static LocalDate wordsToDate(String date) {
+        DateTimeFormatter sf = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate localDate = LocalDate.from(sf.parse(date));
+        return localDate;
+    }
 }
