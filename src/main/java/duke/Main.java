@@ -29,6 +29,7 @@ public class Main extends Application {
             VBox ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            scene.getRoot().setStyle("-fx-font-family: 'ui-serif'");
 
             fxmlLoader.<MainWindow>getController().welcome();
             fxmlLoader.<MainWindow>getController().setDuke(duke);

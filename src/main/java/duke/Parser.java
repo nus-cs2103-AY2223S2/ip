@@ -63,7 +63,7 @@ public class Parser {
     public static String parseInput(TaskList list, String userInput)
             throws TaskNotExistException, MissingNumberException, MissingDescriptionException, CheckNotFindException,
             NoSortTypeException {
-        switch (userInput.split("\\s+")[0]) {
+        switch (userInput.split("\\s+")[0].toLowerCase()) {
         case "bye":
             Platform.exit();
             return "";

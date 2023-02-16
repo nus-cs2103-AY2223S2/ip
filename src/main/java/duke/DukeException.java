@@ -29,7 +29,7 @@ public class DukeException extends Exception {
 
 class MissingDescriptionException extends DukeException {
     public MissingDescriptionException(String taskType) {
-        super("Oh no, the description of a " + taskType + " cannot be empty! Please try again.");
+        super("Oh no, the description of a " + taskType + " is missing! Please try again.");
     }
 }
 

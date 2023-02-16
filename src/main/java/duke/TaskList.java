@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     private int checkIndex(String userInput, String type) throws MissingNumberException, TaskNotExistException {
-        if (!userInput.contains(" ")) {
+        if ((userInput.split("\\s+")).length == 1) {
             throw new MissingNumberException(type);
         }
 
@@ -130,7 +130,7 @@ public class TaskList {
      * @throws MissingDescriptionException To do task is missing a description.
      */
     public String todo(String userInput) throws MissingDescriptionException {
-        if (!userInput.contains(" ")) {
+        if ((userInput.split("\\s+")).length == 1) {
             throw new MissingDescriptionException("todo");
         }
 
@@ -150,16 +150,28 @@ public class TaskList {
      * @throws MissingDescriptionException Deadline task is missing a description.
      */
     public String deadline(String userInput) throws MissingDescriptionException {
-        if (!userInput.contains(" ")) {
+        String ddDate = "";
+        String ddDescription = "";
+        int i = 1;
+        String[] input = userInput.split("\\s+");
+
+        while (i < input.length) {
+           if(input[i].equals("/by")) {
+               ddDate = input[i + 1] + " " + input[i + 2];
+               i += 3;
+           } else {
+               ddDescription += input[i] + " ";
+               i += 1;
+           }
+        }
+
+        boolean isMissingDate = (ddDate.trim()).length() == 0;
+        boolean isMissingDescription = (ddDescription.trim()).length() == 0;
+        boolean isInvalidFormat = isMissingDate || isMissingDescription;
+
+        if(isInvalidFormat) {
             throw new MissingDescriptionException("deadline");
         }
-        if (!userInput.contains("/")) {
-            throw new MissingDescriptionException("deadline");
-        }
-        String ddFull = userInput.substring(userInput.indexOf(" ")).trim();
-        String ddDescription = ddFull.split("/")[0];
-        String ddDate = ddFull.split("/")[1].substring(ddFull.split("/")[1]
-                .indexOf(" ")).trim();
 
         Deadline deadline = new Deadline(ddDescription, new TimeConvertor(ddDate));
         lists.add(deadline);
@@ -175,18 +187,32 @@ public class TaskList {
      * @throws MissingDescriptionException Event task is missing a description.
      */
     public String event(String userInput) throws MissingDescriptionException {
-        if (!userInput.contains(" ")) {
-            throw new MissingDescriptionException("event");
+        String eventDescription = "";
+        String eventFrom = "";
+        String eventTo = "";
+        int i = 1;
+        String[] input = userInput.split("\\s+");
+
+        while(i < input.length) {
+            if(input[i].equals("/from")) {
+                eventFrom = input[i + 1] + " " + input[i + 2];
+                i += 3;
+            } else if(input[i].equals("/to")) {
+                eventTo = input[i + 1] + " " + input[i + 2];
+            } else {
+                eventDescription += input[i] + " ";
+                i += 1;
+            }
         }
-        if (!userInput.contains("/")) {
-            throw new MissingDescriptionException("event");
+
+        boolean isMissingFrom = (eventFrom.trim()).length() == 0;
+        boolean isMissingTo = (eventTo.trim()).length() == 0;
+        boolean isMissingDescription = (eventDescription.trim()).length() == 0;
+        boolean isInvalidFormat = isMissingFrom || isMissingTo || isMissingDescription;
+
+        if(isInvalidFormat) {
+            throw new MissingDescriptionException("deadline");
         }
-        String eventFull = userInput.substring(userInput.indexOf(" ")).trim();
-        String eventDescription = eventFull.split("/")[0];
-        String eventFrom = eventFull.split("/")[1]
-                .substring(eventFull.split("/")[1].indexOf(" ")).trim();
-        String eventTo = eventFull.split("/")[2].substring(eventFull
-                .split("/")[2].indexOf(" ")).trim();
 
         Event event = new Event(eventDescription, new TimeConvertor(eventFrom), new TimeConvertor(eventTo));
         lists.add(event);
@@ -221,7 +247,7 @@ public class TaskList {
      * @throws MissingNumberException User not specific which task to find.
      */
     public String find(String userInput) throws MissingDescriptionException {
-        if (!userInput.contains(" ")) {
+        if ((userInput.split("\\s+")).length == 1) {
             throw new MissingDescriptionException("find");
         }
 
@@ -285,7 +311,7 @@ public class TaskList {
     }
 
     public String sort(String userInput) throws NoSortTypeException {
-        if (!userInput.contains(" ")) {
+        if ((userInput.split("\\s+")).length == 1) {
             throw new NoSortTypeException();
         }
 

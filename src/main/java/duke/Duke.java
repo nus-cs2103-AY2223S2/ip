@@ -55,6 +55,8 @@ public class Duke {
             return ioExceptionMessage();
         } catch (DateTimeException e) {
             return dateTimeExceptionMessage();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return arrayIndexOutOfBoundsException();
         }
     }
 
@@ -69,6 +71,9 @@ public class Duke {
     public String dateTimeExceptionMessage() {
         return "Invalid date time format, please try again!";
     }
+
+    public String arrayIndexOutOfBoundsException() {return "Invalid format, please ensure your input is in the " +
+            "correct format!";}
 }
 
 

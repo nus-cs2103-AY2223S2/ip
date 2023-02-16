@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="557.0" prefWidth="800.0" VBox.vgrow="ALWAYS" fitToWidth="true">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="557.0" prefWidth="400.0" VBox.vgrow="ALWAYS" fitToWidth="true">
             <content>
                 <VBox fx:id="dialogContainer" maxHeight="Infinity" prefWidth="588.0" />
             </content>
         </ScrollPane>
         <HBox alignment="CENTER">
             <children>
-                <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" prefWidth="424.0" />
+                <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" prefWidth="360.0" />
                 <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
             </children>
             <padding>
