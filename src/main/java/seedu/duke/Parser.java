@@ -209,7 +209,7 @@ public class Parser {
         int lengthOfStringEvent = 5;
         int firstSlashIndex = command.indexOf("/");
         String timeString = command.substring(firstSlashIndex + 1);
-        boolean isValidCommand = firstSlashIndex == -1 || !timeString.contains("/");
+        boolean isValidCommand = firstSlashIndex != -1 && timeString.contains("/");
         if (isValidCommand) {
             int secondSlashIndex = timeString.indexOf("/") + firstSlashIndex + 1;
             String startTime = command.substring(firstSlashIndex + 1, secondSlashIndex);

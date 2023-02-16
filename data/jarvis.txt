@@ -1,5 +1,5 @@
-[E][ ] meeting  (Start: Jan 25 2023 | End: Jan 27 2023)
-[T][ ] sing
-[T][ ] run
-[D][ ] eat (Due: Jan 01 2023)
-[E][ ] meeting  (Start: Feb 02 2023 | End: Feb 03 2023)
+[T][ ] cook dinner
+[D][ ] finish essay  (Due: Feb 22 2023)
+[D][ ] read lecture  (Due: Feb 23 2023)
+[E][ ] travel  (Start: Feb 25 2023 | End: Feb 28 2023)
+[T][ ] feed the fish
