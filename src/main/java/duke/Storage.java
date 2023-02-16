@@ -109,8 +109,6 @@ public class Storage {
             assert entireList.size() >= 0: "Something went wrong when loading the task in Storage";
 
         } catch (IOException i) {
-            ui.printText("File not found! Proceeding without a saved file.\nPlease note that you will not be able" +
-                    " to save your progress either but you can still use me as you wish :>\n");
 
         } catch (ParseException e) {
             ui.printText("Unable to load file. Please check your that the item's date where it should be in the " +

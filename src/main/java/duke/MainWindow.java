@@ -80,8 +80,4 @@ public class MainWindow extends AnchorPane {
             );
         }
     }
-
-    public void passNotesToUserInput (String notes) {
-        userInput.setText(notes);
-    }
 }
