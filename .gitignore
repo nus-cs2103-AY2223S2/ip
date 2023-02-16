@@ -3,6 +3,8 @@
 /out/
 /*.iml
 
+/.vscode/
+
 # Gradle build files
 /.gradle/
 /build/
@@ -12,6 +14,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+data/
 
 /text-ui-test/ACTUAL.TXT
-text-ui-test/EXPECTED-UNIX.TXT

@@ -1,0 +1,13 @@
+.root {
+    -fx-base: rgba(60, 63, 65, 255); 
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.label-bot {
+    -fx-text-fill: #9cfffe;
+}
+
+.label-error {
+    -fx-text-fill: tomato;
+}

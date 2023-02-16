@@ -1,0 +1,40 @@
+todo borrow book
+todo meal prep
+deadline return book /by sunday
+event project meeting /from Mon 2pm /to 4pm
+list
+mark 1
+mark 5
+list
+unmark 2
+unmark 5
+unmark 1
+list
+
+todo
+deadline 
+event
+
+list
+fasd
+sdafsad
+sadfasd
+mark 2
+mark 3
+list
+unmark 2
+unmark 3
+list
+deadline eat me /by
+event /from tt /to
+event party /from /to
+deadline /by time
+delete 1
+delete 2
+delete 3
+list
+delete 1
+delete 2
+list
+delete 1
+bye

@@ -34,7 +34,7 @@ D: Task marked completed:
 	1) [T][X] borrow book
 
 
-D: Task not in list.
+D: Task has not been added.
 
 
 D: You have these tasks:
@@ -48,7 +48,7 @@ D: Task marked incomplete:
 	2) [T][ ] meal prep
 
 
-D: Task not in list.
+D: Task has not been added.
 
 
 D: Task marked incomplete:
@@ -133,51 +133,6 @@ D: Some inputs are blank.
 
 
 D: Some inputs are blank.
-
-
-D: Task has been deleted:
-	1) [T][ ] borrow book
-
-Tasks remaining: 
-	1) [T][ ] meal prep
-	2) [D][ ] return book (by: sunday)
-	3) [E][ ] project meeting (from: Mon 2pm to: 4pm)
-
-
-D: Task has been deleted:
-	2) [D][ ] return book (by: sunday)
-
-Tasks remaining: 
-	1) [T][ ] meal prep
-	2) [E][ ] project meeting (from: Mon 2pm to: 4pm)
-
-
-D: Task not in list.
-
-
-D: You have these tasks:
-	1) [T][ ] meal prep
-	2) [E][ ] project meeting (from: Mon 2pm to: 4pm)
-
-
-D: Task has been deleted:
-	1) [T][ ] meal prep
-
-Tasks remaining: 
-	1) [E][ ] project meeting (from: Mon 2pm to: 4pm)
-
-
-D: Task not in list.
-
-
-D: You have these tasks:
-	1) [E][ ] project meeting (from: Mon 2pm to: 4pm)
-
-
-D: Task has been deleted:
-	1) [E][ ] project meeting (from: Mon 2pm to: 4pm)
-
-Tasks remaining: You have no tasks
 
 
 D: Bye

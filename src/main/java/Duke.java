@@ -1,10 +1,13 @@
+import io.gui.Gui;
+
+/**
+ * Main class
+ */
 public class Duke {
+    /**
+     * Main function
+     */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Gui.launch(args);
     }
 }
