@@ -1,7 +1,12 @@
 # User Guide for `/* ask-prof-duke */`
+Too much to :poop: to remember? FRET NOT! Prof Duke is here to manage your woes! Start using **`/* ask-prof-duke */`**, a chatbot that automates your task
+tracking endeavours and make life so much simpler for you!
+
+![demo](https://user-images.githubusercontent.com/87931905/219407500-f8e047ab-b3b0-4fc3-9560-79630b30ff20.gif)
 
 
 ## Table of Contents
+
 1. [Installation](#installation)
 1. [Features](#features)
 1. [Usage](#usage)
@@ -19,14 +24,14 @@
 ## Installation <a name="installation"></a>
 
 1. Download the JAR file from [here](https://github.com/jmestxr/ip/releases/download/v0.2/duke.jar). 
-2. Open the JAR file.
-3. Proceed to start a chat session with prof duke through the graphical user interface (GUI)!
+2. Open the JAR file by typing the command `java -jar duke.jar` on your command line interface (CLI). Make sure that on the CLI, you are in the same directory (folder) that contains the downloaded JAR file.
+3. Proceed to start a chat session with Prof Duke through the graphical user interface (GUI)!
 
-If all goes well, your app should look like this:
-<img width="712" alt="showcase" src="https://user-images.githubusercontent.com/87931905/219123712-c33acc69-d4cc-42d1-bca4-d7da12abe336.png">
+If all goes well, your app should look like this:<br>
+<img width="612" alt="showcase" src="https://user-images.githubusercontent.com/87931905/219394138-73503f76-dbf7-47e4-8712-e11a2d536eff.png">
+
     
-    
-## Features <a name="feature"></a>
+## Features <a name="features"></a>
 1. **Add task**: Add a new task to be recorded.
 1. **Delete task**: Delete an existing task.
 1. **List tasks**: List all tasks that are currently recorded.
@@ -112,5 +117,18 @@ End the current chat session. The updated list of tasks will be saved in the loc
 
 ## Frequently Asked Questions (FAQ) <a name="faq"></a>
 
-**1.** I can't seem to save my changes made to the task list from the previous session. What is happening?<br>
-**Ans:** You have probably closed the GUI rather than ending the chat session through the `bye` command. At the moment, the app is only able to save your changes upon exiting the chat session through the `bye` command.
+> **I can't seem to save my changes made to the task list from the previous session. What is happening?**<br>
+
+*You have probably closed the GUI rather than ending the chat session through the `bye` command. At the moment, the app is only able to save your changes upon exiting the chat session through the `bye` command.*<br><br>
+
+
+> **Help! I'm unable to open the app and nothing happens after double clicling the JAR file...**<br>
+
+*You should run the app's JAR file through the command `java -jar duke.txt` on your CLI.*<br><br>
+
+
+
+> **I'm still unable to open the app's JAR file after running the command `java -jar duke.txt` on my CLI! I keep getting this error: `Error: Unable to access jarfile duke.jar`.**<br>
+
+*Before running the command, make sure that on the CLI, you are in the same directory (folder) that contains the downloaded JAR file.*<br><br>
+
