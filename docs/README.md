@@ -1,4 +1,4 @@
-# User Guide
+# Duke: User Guide
 
 Welcome to Duke! Your preferred task management platform.
 
