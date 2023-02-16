@@ -1,10 +1,6 @@
 import duke.Duke;
 import javafx.application.Application;
 
-
-import duke.Duke;
-import javafx.application.Application;
-
 /**
  * A launcher class to workaround classpath issues.
  */
