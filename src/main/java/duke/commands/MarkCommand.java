@@ -32,12 +32,12 @@ public class MarkCommand extends Command {
         if (isMarking) {
             tasks.markTask(num);
             message = String.format(
-                    "Beep boop :D I've marked this task as done:\n %s", tasks.get(num));
+                    "Beep boop! I've marked this task as done:\n %s", tasks.get(num));
             ui.display(message);
         } else {
             tasks.unmarkTask(num);
             message = String.format(
-                    "Boop beep D: I've unmarked this task as done:\n %s", tasks.get(num));
+                    "Boop beep! I've unmarked this task as done:\n %s", tasks.get(num));
             ui.display(message);
         }
 

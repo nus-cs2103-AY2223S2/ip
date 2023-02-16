@@ -37,11 +37,11 @@ public class FindCommand extends Command {
         }
         String message;
         if (searchWords.isEmpty()) {
-            message = "Unfortunately, nothing matches your search. Beep.";
+            message = "Unfortunately, nothing matches your search. Beep :(";
             ui.display(message);
             return message;
         } else {
-            String s = "Boop. Here are the matching tasks in your list: \n";
+            String s = "Boop :). Here are the matching tasks in your list: \n";
             for (int i = 0; i < searchWords.size(); i++) {
                 s = s + searchWords.get(i) + "\n";
             }

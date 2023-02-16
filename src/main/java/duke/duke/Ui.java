@@ -44,9 +44,9 @@ public class Ui {
                 + "..........V..**:.........:V.....**....V......V.........:**:.V*........\n"
                 + "..........***:...........:F*****V*....V******I............***:........";
         this.scanner = new Scanner(System.in);
-        this.welcome = "Hi, this is a message from the developer of GPT0.01!\n"
-                + "Please do not abuse this AI and try to get it to do nonsensical things.\n"
-                + "Also, this AI can't write essays for you. Use GPT-4 Instead.";
+        this.welcome = "Hi, this is a message from the developer of DukeyGPT0.01."
+                + "\nPlease do not abuse this AI and try to make it do nonsensical things.\n"
+                + "Also, this AI can't write essays for you. Use GPT-4 instead.";
         this.divider = "\n____________________________________________________________\n";
 
     }
@@ -74,10 +74,7 @@ public class Ui {
         display(this.welcome);
     };
 
-    /**
-     * Returns the welcome message.
-     */
-    public String getGreetings() {
+    public String getWelcome() {
         return this.welcome;
     }
 
