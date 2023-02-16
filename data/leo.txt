@@ -10,4 +10,4 @@
 [T][ ] study for midterms
 [D][ ] critical thinking essay | 03032023 23:59
 [E][ ] tutorial | 03032023 12:00 | 03032023 13:00
-[E][ ] vacation | 01032023 11:00 | 05032023 10:00
+[E][X] vacation | 01032023 11:00 | 05032023 10:00

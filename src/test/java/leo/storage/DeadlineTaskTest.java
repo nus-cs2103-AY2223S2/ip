@@ -1,12 +1,14 @@
 package leo.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DeadlineTaskTest {
 
@@ -28,9 +30,9 @@ public class DeadlineTaskTest {
 
     @Test
     public void testSameDay() {
-        LocalDate date_one = LocalDate.of(2023, 1, 19);
-        LocalDate date_two = LocalDate.of(2020, 1, 19);
-        assertTrue(deadline.sameDay(date_one));
-        assertFalse(deadline.sameDay(date_two));
+        LocalDate dateOne = LocalDate.of(2023, 1, 19);
+        LocalDate dateTwo = LocalDate.of(2020, 1, 19);
+        assertTrue(deadline.sameDay(dateOne));
+        assertFalse(deadline.sameDay(dateTwo));
     }
 }
