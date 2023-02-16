@@ -2,9 +2,18 @@ package userinteraction;
 
 import command.*;
 
-
+/**
+ * Parses all the user input into corresponding commands to be executed.
+ */
 public class Parser {
 
+    /**
+     * Checks whether the commands are valid. If it is valid, return a corresponding
+     * command.
+     *
+     * @param input The user input.
+     * @return The corresponding command.
+     */
     public static Command parse(String input) {
         if (input.equals("bye")) {
             return new ExitCommand(input);

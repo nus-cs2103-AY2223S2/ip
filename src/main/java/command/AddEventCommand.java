@@ -15,7 +15,6 @@ public class AddEventCommand extends AddTaskCommand {
      *
      * @param input String from a user input.
      */
-
     public AddEventCommand(String input) {
         super(input);
     }
@@ -25,7 +24,8 @@ public class AddEventCommand extends AddTaskCommand {
      *
      * @param taskList Stores all tasks.
      * @param ui       The Ui to be used for printing messages.
-     * @param storage  Saves all tasks in a file
+     * @param storage  Saves all tasks in a file.
+     * @return Returns the String message about adding an event task.
      * @throws DukeException Checks the validation of input.
      */
     @Override

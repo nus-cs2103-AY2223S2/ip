@@ -6,7 +6,7 @@ import storage.TaskList;
 import userinteraction.Ui;
 
 /**
- * Command class for listing tasks.
+ * Command class for listing all the available commands.
  */
 public class HelpCommand extends Command {
 
@@ -24,7 +24,8 @@ public class HelpCommand extends Command {
      *
      * @param taskList Stores all tasks.
      * @param ui       The Ui to be used for printing messages.
-     * @param storage  Saves all tasks in a file
+     * @param storage  Saves all tasks in a file.
+     * @return Returns a list of available commands.
      * @throws DukeException Checks the validation of input.
      */
     @Override
@@ -32,6 +33,11 @@ public class HelpCommand extends Command {
         return ui.printHelpMsg(storage);
     }
 
+    /**
+     * Checks whether exit the program.
+     *
+     * @return Boolean Exit the program.
+     */
     @Override
     public boolean isExit() {
         return false;

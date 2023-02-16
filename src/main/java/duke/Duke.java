@@ -23,7 +23,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(FILE_PATH,HELP_FILEPATH);
+        storage = new Storage(FILE_PATH, HELP_FILEPATH);
         taskList = storage.loadData();
     }
 
@@ -58,6 +58,12 @@ public class Duke {
     public Ui getUi() {
         return ui;
     }
+
+    /**
+     * Main method of the Duke.
+     *
+     * @param args String array argument
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

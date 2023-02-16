@@ -52,8 +52,8 @@ public class Todo extends Task {
     }
     @Override
     public String storeTaskString() {
-        String str = this.getTaskType() + " | " +
-                this.getMarkedString() + " | " + this.getDescription();
+        String str = this.getTaskType() + " | "
+                + this.getMarkedString() + " | " + this.getDescription();
         return str;
     }
     @Override

@@ -6,7 +6,7 @@ import storage.TaskList;
 import userinteraction.Ui;
 
 /**
- * Command class for mark or unmarking tasks.
+ * Command class for marking or unmarking tasks.
  */
 public class MarkTaskCommand extends Command {
 
@@ -28,7 +28,8 @@ public class MarkTaskCommand extends Command {
      *
      * @param taskList Stores all tasks.
      * @param ui       The Ui to be used for printing messages.
-     * @param storage  Saves all tasks in a file
+     * @param storage  Saves all tasks in a file.
+     * @return Returns String message about marking or unmarking message.
      * @throws DukeException Checks the validation of input.
      */
     @Override

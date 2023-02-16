@@ -24,7 +24,8 @@ public class ListCommand extends Command {
      *
      * @param taskList Stores all tasks.
      * @param ui       The Ui to be used for printing messages.
-     * @param storage  Saves all tasks in a file
+     * @param storage  Saves all tasks in a file.
+     * @return Returns a list of tasks are stored.
      * @throws DukeException Checks the validation of input.
      */
     @Override
@@ -32,6 +33,11 @@ public class ListCommand extends Command {
         return taskList.listTask(this.getInput());
     }
 
+    /**
+     * Checks whether exit the program.
+     *
+     * @return Boolean Exit the program.
+     */
     @Override
     public boolean isExit() {
         return false;

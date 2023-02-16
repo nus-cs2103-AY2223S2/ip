@@ -24,6 +24,7 @@ public class DeleteTaskCommand extends Command {
      * @param taskList Stores all tasks.
      * @param ui       The Ui to be used for printing messages.
      * @param storage  Deletes a task in a file.
+     * @return Returns the String message about deleting a task.
      * @throws DukeException Checks the validation of input.
      */
     @Override

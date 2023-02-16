@@ -14,6 +14,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 /**
  * Storage class to deal with the file.
  */
@@ -106,6 +108,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load all commands from help.txt.
+     *
+     * @return Returns all available commands.
+     */
     public String loadHelpExplanationFile() {
         Path file = Paths.get(".", helpFilePath);
         String explanation = "";

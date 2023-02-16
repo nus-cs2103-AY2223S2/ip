@@ -32,6 +32,7 @@ public class TaskList {
      * List all the tasks.
      *
      * @param input User input.
+     * @return Returns a list of tasks are stored.
      * @throws DukeException Checks the validation of input.
      */
     public String listTask(String input) throws DukeException {
@@ -62,6 +63,7 @@ public class TaskList {
      * @param input User input
      * @param ui    The Ui to be used for printing messages.
      * @param storage Deletes a task in a file.
+     * @return Returns delete message of specific task.
      * @throws DukeException Checks the validation of input.
      */
     public String deleteTask(String input, Ui ui, Storage storage) throws DukeException {
@@ -95,6 +97,7 @@ public class TaskList {
      * @param isDone Boolean to mark or unmark a task.
      * @param input  User Input.
      * @param ui     The Ui to be used for printing messages.
+     * @return Returns mark or unmark task message.
      * @throws DukeException Checks the validation of input.
      */
     public String markTask(boolean isDone, String input, Ui ui, Storage storage) throws DukeException {
@@ -127,7 +130,7 @@ public class TaskList {
      *
      * @param input User input
      * @param ui    The Ui to be used for printing messages.
-     * @return The print statement.
+     * @return Returns a list of tasks whose contain the input.
      * @throws DukeException Checks the validation of input.
      */
     public String findTask(String input, Ui ui) throws DukeException {

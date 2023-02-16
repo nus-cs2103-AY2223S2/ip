@@ -6,7 +6,7 @@ import storage.TaskList;
 import userinteraction.Ui;
 
 /**
- * Command class for adding deadline tasks.
+ * Command class for showing invalid command.
  */
 public class InvalidCommand extends Command {
     /**
@@ -24,6 +24,7 @@ public class InvalidCommand extends Command {
      * @param taskList Stores all tasks.
      * @param ui       The Ui to be used for printing messages.
      * @param storage  Deletes a task in a file.
+     * @return Returns the invalid input message.
      * @throws DukeException Checks the validation of input.
      */
     @Override

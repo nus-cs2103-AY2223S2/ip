@@ -8,7 +8,7 @@ import userinteraction.Ui;
 /**
  * Abstract class about users' commands.
  */
-abstract public class Command {
+public abstract class Command {
     private final String input;
     /**
      * Class constructor.
@@ -28,7 +28,8 @@ abstract public class Command {
      *
      * @param taskList Stores all tasks.
      * @param ui       The Ui to be used for printing messages.
-     * @param storage  Saves all tasks in a file
+     * @param storage  Saves all tasks in a file.
+     * @return Returns the String message.
      * @throws DukeException Checks the validation of input.
      */
     public abstract String process(TaskList taskList, Ui ui, Storage storage) throws DukeException;
