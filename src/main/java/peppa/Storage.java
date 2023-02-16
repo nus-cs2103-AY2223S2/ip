@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,6 +36,10 @@ public class Storage {
         return this.dataSources;
     }
 
+    /**
+     * Initialises the current Storage object.
+     * If more than 1 possible data source is detected, don't define file yet.
+     */
     public void initialiseStorage() {
         try {
             int fileCount = dataSources.size();
@@ -57,6 +60,8 @@ public class Storage {
 
     /**
      * Loads existing task data from local file.
+     *
+     * @param taskList Tasklist to store tasks into.
      */
     public void loadData(TaskList taskList) {
         try {
@@ -66,7 +71,7 @@ public class Storage {
                 Parser.parseFileEntry(line, taskList);
             }
             p.setTasks(taskList);
-            Ui.displayMessage("Done!");
+            sc.close();
         } catch (FileNotFoundException e) {
             Ui.displayMessage("Boink! Peppa could not locate the file. Please try again.");
         } catch (PeppaException e) {

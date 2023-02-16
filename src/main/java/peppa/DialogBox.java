@@ -25,6 +25,13 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a dialogue box with the specified text and image.
+     *
+     * @param text Text to display in the dialogue box.
+     * @param img Image to display alongside the text.
+     */
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,15 +56,30 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a user dialogue box.
+     *
+     * @param text Text to display in the dialogue box.
+     * @param img Image to display alongside the text.
+     * @return Dialogue box with default layout (ImageView on the right and text on the left).
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a Peppa dialogue box.
+     *
+     * @param text Text to display in the dialogue box.
+     * @param img Image to display alongside the text.
+     * @return Dialogue box with flipped layout (ImageView on the left and text on the right).
+     */
+
     public static DialogBox getPeppaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.dialog.setStyle("-fx-background-color:#DBC3C8; -fx-background-radius:10; -fx-border-width:0.5; " +
-                "-fx-border-color: black; -fx-border-radius: 10;");
+        db.dialog.setStyle("-fx-background-color:#DBC3C8; -fx-background-radius:10; -fx-border-width:0.5; "
+                + "-fx-border-color: black; -fx-border-radius: 10;");
         return db;
     }
 }

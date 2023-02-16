@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -48,6 +47,11 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Defines a Peppa dialogue box with the specified message.
+     *
+     * @param msg Text to display in the dialogue box.
+     */
     public void setPeppaDialog(String msg) {
         this.dialogContainer.getChildren().add(DialogBox.getPeppaDialog(msg, peppaImage));
     }
@@ -60,6 +64,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = peppa.getResponse(input);
+        if (response.equals(Ui.terminateSession())) {
+            System.exit(0);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getPeppaDialog(response, peppaImage)

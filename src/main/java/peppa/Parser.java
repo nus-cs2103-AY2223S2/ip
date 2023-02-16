@@ -25,6 +25,10 @@ import peppa.commands.UnmarkCommand;
  * Represents a parser that converts user input into Commands that can be executed.
  */
 public class Parser {
+
+    /**
+     * Constructs a parser object.
+     */
     public Parser() {
 
     }
@@ -204,6 +208,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a select file request into a SelectCommand object.
+     *
+     * @param args Array of arguments obtained from splitting the given command around a whitespace character.
+     * @return SelectCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
     public static Command parseSelectCommand(String[] args) {
         try {
             String idxStr = args[1];

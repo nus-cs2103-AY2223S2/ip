@@ -1,11 +1,11 @@
 package peppa;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import peppa.commands.Command;
 import peppa.commands.TodoCommand;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test

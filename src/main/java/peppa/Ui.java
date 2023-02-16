@@ -1,25 +1,32 @@
 package peppa;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
-import peppa.commands.*;
+import peppa.commands.DeadlineCommand;
+import peppa.commands.DeleteCommand;
+import peppa.commands.EventCommand;
+import peppa.commands.ExitCommand;
+import peppa.commands.FilesCommand;
+import peppa.commands.FindCommand;
+import peppa.commands.ListCommand;
+import peppa.commands.MarkCommand;
+import peppa.commands.SelectCommand;
+import peppa.commands.TodoCommand;
+import peppa.commands.UnmarkCommand;
 
 /**
  * Represents a user interface screen for reading in user inputs and displaying messages in terminal.
  */
 public class Ui {
     public static final String DIVIDER = "=============================================";
-    private Scanner sc;
 
     /**
      * Constructs a user interface for the command-line version of Peppa.
      */
     public Ui() {
-        sc = new Scanner(System.in);
+
     }
 
     /**
@@ -51,6 +58,13 @@ public class Ui {
                 + "> " + ExitCommand.COMMAND_WORD + "\n";
     }
 
+    /**
+     * Returns a list of possible data sources.
+     *
+     * @param sources ArrayList of data sources.
+     * @return List of possible data sources.
+     */
+
     public static String getDataSources(ArrayList<File> sources) {
         StringBuilder response = new StringBuilder("Oink! Peppa found "
                 + sources.size() + " data sources: \n");
@@ -80,6 +94,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Returns custom message for file selection.
+     *
+     * @return Load file message.
+     */
     public static String getLoadFileMessage() {
         return "Please select a file to load data from: \n";
     }
@@ -117,6 +136,13 @@ public class Ui {
         }
         return response.toString();
     }
+
+    /**
+     * Returns custom message upon a successful select file operation.
+     *
+     * @param f Name of file that was selected as data source.
+     * @return Select file message.
+     */
 
     public static String getSelectFileMessage(File f) {
         return "Oink! Peppa has successfully loaded data from " + f.getName() + ".\n"
@@ -158,49 +184,11 @@ public class Ui {
     }
 
     /**
-     * Prints the introductory greeting message upon initialisation of the chatbot.
-     */
-    public static void greetUser() {
-        String logo = " ____  ____  ____  ____   __\n"
-                + "(  _ \\(  __)(  _ \\(  _ \\ / _\\\n"
-                + " ) __/ ) _)  ) __/ ) __//    \\\n"
-                + "(__)  (____)(__)  (__)  \\_/\\_/\n";
-        String art = "       _\n"
-                + "  <`--'\\>______\n"
-                + "  /. .  `'     \\\n"
-                + " (`')  ,        @\n"
-                + "  `-._,        /\n"
-                + "     )-)_/--( >  jv\n"
-                + "    ''''  ''''\n";
-        System.out.println(DIVIDER);
-        System.out.println("Oink! I'm\n" + logo + art);
-        System.out.println("Nice to meet you! How can I assist you today?");
-        System.out.println(DIVIDER);
-    }
-
-    /**
-     * Prints divider line for nicer formatting.
-     */
-    public static void insertDivider() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
      * Returns farewell message upon leaving the chatbot.
      *
      * @return Farewell message.
      */
-    public String terminateSession() {
-        this.sc.close();
+    public static String terminateSession() {
         return "Oink oink! See you again :)";
-    }
-
-    /**
-     * Reads and returns the command entered by the user.
-     *
-     * @return User-provided input.
-     */
-    public String readCommand() {
-        return this.sc.nextLine();
     }
 }

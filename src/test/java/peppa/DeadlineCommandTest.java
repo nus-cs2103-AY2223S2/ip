@@ -1,15 +1,17 @@
 package peppa;
 
-import org.junit.jupiter.api.Test;
-import peppa.commands.DeadlineCommand;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import peppa.commands.DeadlineCommand;
 
 public class DeadlineCommandTest {
     @Test
     public void getParameterValue_noDescription_exceptionThrown() {
         Exception exception = assertThrows(PeppaException.class, () -> {
-            String command = "deadline /by 2359";
+            String command = "deadline /by 02/02/2023 2359";
             int paramIndex = DeadlineCommand.getParameterIndex(command);
             DeadlineCommand.getParameterValue(command, DeadlineCommand.DESC_INDEX, paramIndex - 1);
         });

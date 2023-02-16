@@ -55,7 +55,7 @@ Format: `event <task_description> /from <start_date_in_dd/mm/yyyy> /to <end_date
 
 Examples:
 * `event Family trip to Japan /from 21/02/2023 /to 27/02/2023`
-* `event Chalet with friends /from 06/06/2023 to /08/06/2023`
+* `event Chalet with friends /from 06/06/2023 /to /08/06/2023`
 
 <br/>
 

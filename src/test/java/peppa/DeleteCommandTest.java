@@ -1,11 +1,12 @@
 package peppa;
 
-import org.junit.jupiter.api.Test;
-import peppa.commands.Command;
-import peppa.commands.DeleteCommand;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import peppa.commands.Command;
+import peppa.commands.DeleteCommand;
 
 public class DeleteCommandTest {
     @Test
