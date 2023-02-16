@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+import pix.Pix;
 import pix.commands.ByeCommand;
 import pix.commands.Command;
 import pix.commands.DeadlineCommand;
@@ -149,15 +150,19 @@ public class Parser {
         if (isNotValidLength) {
             throw new PixException(deadlineErrorMessage);
         }
-        String description = removeCommand(slashed[0]);
-        String dueDate = removeCommand(slashed[1]);
-        boolean isEmptyValue = description.isEmpty() || dueDate.isEmpty();
-        if (isEmptyValue) {
-            throw new PixException(deadlineErrorMessage);
-        }
         try {
-            return new DeadlineCommand(description, dueDate);
-        } catch (DateTimeParseException e) {
+            String description = removeCommand(slashed[0]);
+            String dueDate = removeCommand(slashed[1]);
+            boolean isEmptyValue = description.isEmpty() || dueDate.isEmpty();
+            if (isEmptyValue) {
+                throw new PixException(deadlineErrorMessage);
+            }
+            try {
+                return new DeadlineCommand(description, dueDate);
+            } catch (DateTimeParseException e) {
+                throw new PixException(deadlineErrorMessage);
+            }
+        } catch (IllegalArgumentException e) {
             throw new PixException(deadlineErrorMessage);
         }
     }
@@ -176,18 +181,22 @@ public class Parser {
         if (isNotValidLength) {
             throw new PixException(eventErrorMessage);
         }
-        String description = removeCommand(slashed[0]);
-        String eventStart = removeCommand(slashed[1]);
-        String eventEnd = removeCommand(slashed[2]);
-        boolean isEmptyValue = description.isEmpty()
-                || eventStart.isEmpty()
-                || eventEnd.isEmpty();
-        if (isEmptyValue) {
-            throw new PixException(eventErrorMessage);
-        }
         try {
-            return new EventCommand(description, eventStart, eventEnd);
-        } catch (DateTimeParseException e) {
+            String description = removeCommand(slashed[0]);
+            String eventStart = removeCommand(slashed[1]);
+            String eventEnd = removeCommand(slashed[2]);
+            boolean isEmptyValue = description.isEmpty()
+                    || eventStart.isEmpty()
+                    || eventEnd.isEmpty();
+            if (isEmptyValue) {
+                throw new PixException(eventErrorMessage);
+            }
+            try {
+                return new EventCommand(description, eventStart, eventEnd);
+            } catch (DateTimeParseException e) {
+                throw new PixException(eventErrorMessage);
+            }
+        } catch (IllegalArgumentException e) {
             throw new PixException(eventErrorMessage);
         }
     }
