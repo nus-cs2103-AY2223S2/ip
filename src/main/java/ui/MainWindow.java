@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private TreeBot treeBot;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/TreeBot.png"));
 
     @FXML
     public void initialize() {
