@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     /**
      * Construct Event.
@@ -26,13 +26,20 @@ public class Event extends Task {
         assert endDate.isAfter(startDate) || endDate.isEqual(startDate) : "end date should not be before start date";
     }
 
+    @Override
+    public void refresh() {
+        super.refresh();
+        startDate = getNextDate(startDate);
+        endDate = getNextDate(endDate);
+    }
+
     /**
      * Returns the details of the event task to be written in file.
      *
      * @return Details of event task.
      */
     public String toText() {
-        return "E" + "|" + getDescription() + "|" + (isDone() ? 1 : 0) + "|" + startDate + "|" + endDate;
+        return "E" + "|" + super.toText() + "|" + startDate + "|" + endDate;
     }
 
     /**

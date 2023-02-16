@@ -3,6 +3,7 @@ package main;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import task.Task;
 
@@ -89,6 +90,13 @@ public class TaskList {
     public Task getTaskAtIndex(int index) {
         assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
         return arrOfTasks.get(index);
+    }
+
+    public Task addRecurrence(int index, String recurrence) {
+        assert index >= 0 && index < arrOfTasks.size(): "index should be valid";
+        Task t = arrOfTasks.get(index);
+        t.setRecurrence(recurrence);
+        return t;
     }
 
     /**

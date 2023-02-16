@@ -22,7 +22,7 @@ public class Todo extends Task {
      */
     public String toText() {
 
-        return "T" + "|" + getDescription() + "|" + (isDone() ? 1 : 0);
+        return "T" + "|" + super.toText();
     }
 
     /**
