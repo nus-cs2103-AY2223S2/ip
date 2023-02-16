@@ -2,10 +2,9 @@ package duke.parser;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-
-import duke.exception.WrongFormatException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongCommandException;
+import duke.exception.WrongFormatException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -66,10 +65,10 @@ public class Parser {
             case "find":
                 return HandleFind.performFind(input, taskList, ui);
             default:
-                assert false: "Unable to process command";
+                assert false : "Unable to process command";
                 return ui.showError("Please enter a valid command and/or task!");
             }
-        } catch (EmptyDescriptionException | WrongCommandException | WrongFormatException e){
+        } catch (EmptyDescriptionException | WrongCommandException | WrongFormatException e) {
             return ui.showError(e.getMessage());
         } catch (DateTimeParseException e) {
             return ui.showError("Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10");
@@ -79,8 +78,10 @@ public class Parser {
 
     /**
      * Check whether the command and input is valid or invalid
-     * @param input Input String by user
-     * @return Perform command to return string by Duke
+     * @param input Input entered by user
+     * @param command
+     * @throws EmptyDescriptionException Exception thrown when there is no description/ task number after the command
+     * @throws WrongCommandException Exception thrown when the command does not exist
      */
     public void checkCommand(String input, String command) throws EmptyDescriptionException, WrongCommandException {
         if (listOfCommands.contains(input)) {

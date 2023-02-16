@@ -1,11 +1,9 @@
 package duke.task;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeException;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * TaskList to contain all the tasks in a list
@@ -20,8 +18,8 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> tasklist) throws DukeException {
-        this.taskList = tasklist;
+    public TaskList(List<Task> TaskList) throws DukeException {
+        this.taskList = TaskList;
     }
 
 
@@ -39,7 +37,7 @@ public class TaskList {
 
 
     /**
-     * Prints the list of tasks
+     * Prints all the tasks in the taks list
      */
     public String printList() {
         if (taskList.size() == 0) {
@@ -83,10 +81,15 @@ public class TaskList {
      * Delete the task from the list
      * @param taskNum Task number of task in the list to be deleted
      */
-    public void deleteTask(int taskNum) throws IndexOutOfBoundsException{
+    public void deleteTask(int taskNum) throws IndexOutOfBoundsException {
         taskList.remove(taskNum);
     }
 
+    /**
+     * Check if the task has exact same details with any of the existing tasks
+     * @param task task to be checked
+     * @return True if there is an existing task that has the same details as the task being checked
+     */
     public boolean checkDuplicates(Task task) {
         for (int i = 0; i < this.taskList.size(); i++) {
             if ((taskList.get(i)).equals(task)) {

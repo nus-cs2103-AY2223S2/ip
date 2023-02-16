@@ -1,21 +1,32 @@
 package duke.parser;
+import java.util.ArrayList;
+import java.util.List;
 
 import duke.exception.WrongFormatException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Processes and handle the find command
+ */
 public class HandleFind {
     public HandleFind() {
     }
 
+    /**
+     * Check whether the input line to find matching tasks that contain target word is in the correct format or not
+     * Perform the searching of target word in task list if input is in correct format
+     * @param input Entered by user
+     * @param tasklist List of existing tasks
+     * @param ui Ui that would generate reply for the user
+     * @return A String to respond to user through ui, printing the matching tasks that contain the target word
+     * @throws WrongFormatException This exception is thrown when input is not in correct format
+     */
     public static String performFind(String input, TaskList tasklist, Ui ui) throws WrongFormatException {
         boolean correctFormat = input.trim().split(" ").length > 1;
         if (!correctFormat) {
-            throw new WrongFormatException("find 'Target word'");
+            throw new WrongFormatException("find <Target word>");
         }
 
         String targetString = input.substring(5);

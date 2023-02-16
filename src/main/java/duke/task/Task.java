@@ -60,6 +60,12 @@ public abstract class Task {
         return this.currentTaskStatus() + " " + this.taskString;
     }
 
+    /**
+     * Check if the two task has exact same detail
+     * Details such as task description, deadline, event start date and event end date
+     * @param t Task to check with
+     * @return True if the two tasks has exact same details, which means this task is duplicated
+     */
     public boolean equals(Task t) {
         if (this == t) {
             return true;
