@@ -11,6 +11,7 @@ import iris.exception.DateTimeException;
  */
 public class Deadline extends Task {
     private final LocalDateTime deadline;
+    private final String deadlineStr;
 
     /**
      * Constructor for a Deadline task
@@ -20,6 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String by) throws DateTimeException {
         super(name);
+        this.deadlineStr = by;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         try {
             this.deadline = LocalDateTime.parse(by, format);
@@ -37,7 +39,7 @@ public class Deadline extends Task {
      */
     @Override
     public String storageFormat() {
-        return String.join("|", "D", super.storageFormat(), dateString(deadline)) + "\n";
+        return String.join("|", "D", super.storageFormat(), this.deadlineStr) + "\n";
     }
 
     /**
@@ -45,7 +47,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + dateString(deadline) + ")";
+        return "[D]" + super.toString() + " (by: " + dateString(deadline) + ")";
     }
 }

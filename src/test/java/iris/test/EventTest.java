@@ -11,7 +11,7 @@ import iris.task.Event;
 public class EventTest {
     @Test
     public void testStringConversion_correctDate_success() throws DateTimeException {
-        assertEquals("[E][ ] meeting(from: 29 Jan 2022 03:00 PM, to: 29 Jan 2022 06:00 PM)",
+        assertEquals("[E][ ] meeting (from: 29 Jan 2022 03:00 PM, to: 29 Jan 2022 06:00 PM)",
                 new Event("meeting", "29-01-2022 1500", "29-01-2022 1800").toString());
     }
 

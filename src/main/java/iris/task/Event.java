@@ -12,6 +12,8 @@ import iris.exception.DateTimeException;
 public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
+    private final String fromStr;
+    private final String toStr;
 
     /**
      * Constructor for Event
@@ -22,6 +24,8 @@ public class Event extends Task {
      */
     public Event(String name, String from, String to) throws DateTimeException {
         super(name);
+        this.fromStr = from;
+        this.toStr = to;
         try {
             this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
             this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
@@ -43,7 +47,7 @@ public class Event extends Task {
      */
     @Override
     public String storageFormat() {
-        return String.join("|", "E", super.storageFormat(), dateString(from), dateString(to)) + "\n";
+        return String.join("|", "E", super.storageFormat(), fromStr, toStr) + "\n";
     }
 
     /**

@@ -11,7 +11,7 @@ import iris.task.Deadline;
 public class DeadlineTest {
     @Test
     public void testStringConversion_correctDate_success() throws DateTimeException {
-        assertEquals("[D][ ] assignment(by: 29 Jan 2022 11:59 PM)",
+        assertEquals("[D][ ] assignment (by: 29 Jan 2022 11:59 PM)",
                 new Deadline("assignment", "29-01-2022 2359").toString());
     }
 

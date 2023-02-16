@@ -101,7 +101,7 @@ public abstract class Task {
     }
 
     protected String dateString(LocalDateTime date) {
-        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"));
     }
 
     /**
