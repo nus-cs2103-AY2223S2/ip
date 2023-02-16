@@ -34,6 +34,7 @@ public class MarkCommand extends Command {
 
     @Override
     public void loadCommand(ArrayList<Task> tasks) {
+        assert index >= -1 && index < tasks.size(); // Values set during writing to file shouldn't be out of range
         tasks.get(Math.floorMod(index, tasks.size())).setDone(true); // Using floorMod handles -1 case for last index
     }
 }
