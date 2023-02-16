@@ -110,4 +110,8 @@ public class Ui {
         return BYE_MSG;
     }
 
+    public void closeScanner() {
+        scanner.close();
+    }
+
 }

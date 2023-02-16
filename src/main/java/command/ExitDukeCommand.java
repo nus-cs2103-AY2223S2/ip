@@ -21,6 +21,7 @@ public class ExitDukeCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = ui.getByeMsg();
         System.out.println(output);
+        ui.closeScanner();
         return output;
     }
 
