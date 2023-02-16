@@ -1,0 +1,11 @@
+todo eat lunch
+deadline do HW /by 2023-10-10 14:00
+event play tennis /from 2023-10-10 14:00 /to 2023-10-10 15:00
+list
+mark 1
+unmark 2
+delete 1
+delete 2
+list
+clear
+bye
