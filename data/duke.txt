@@ -1,8 +1,3 @@
-D|1|go to perth|2019-11-01
-E|1|play touch|2019-11-01|2019-12-02
 T|0|read book
-T|1|finish book
+D|1|go to perth|2019-11-01
 E|0|do tasks|2023-01-01|2023-01-02
-D|0|yes|2023-01-01
-D|0|yes|2023-01-01
-D|0|yes|2023-01-01
