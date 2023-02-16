@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 
 public class FindCommand extends Command {
-    private String query;
+    private final String query;
 
     public FindCommand(String query) {
         this.query = query;

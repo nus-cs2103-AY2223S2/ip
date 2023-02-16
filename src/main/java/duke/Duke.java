@@ -18,31 +18,13 @@ public class Duke {
         }
     }
 
-    public void run() {
-        ui.printWelcomeMsg();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String cmd = ui.getNextCommand();
-                ui.printLine();
-                Command c = Parser.parse(cmd);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            } finally {
-                ui.printLine();
-            }
-        }
-    }
-
     public String getResponse(String input) {
         StringBuilder sb = new StringBuilder();
         try {
             Command c = Parser.parse(input);
             sb.append(c.execute(tasks, ui, storage));
         } catch (DukeException e) {
-            ui.printError(e.getMessage());
+            return ui.printError(e.getMessage());
         }
 
         return sb.toString();

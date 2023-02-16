@@ -6,7 +6,7 @@ import duke.Storage;
 import duke.task.Task;
 
 public class UntickCommand extends Command{
-    private int taskIndex;
+    private final int taskIndex;
 
     public UntickCommand(int taskIndex) {
         this.taskIndex = taskIndex;

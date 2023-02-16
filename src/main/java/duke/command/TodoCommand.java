@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.Storage;
 import duke.task.Task;
 public class TodoCommand extends Command {
-    private String title;
+    private final String title;
 
     public TodoCommand(String title) {
         this.title = title;

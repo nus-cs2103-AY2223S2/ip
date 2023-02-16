@@ -6,9 +6,9 @@ import duke.Storage;
 import duke.task.Task;
 import java.time.LocalDate;
 public class EventCommand extends Command {
-    private String title;
-    private LocalDate from;
-    private LocalDate to;
+    private final String title;
+    private final LocalDate from;
+    private final LocalDate to;
 
     public EventCommand(String title, LocalDate from, LocalDate to) {
         this.title = title;
