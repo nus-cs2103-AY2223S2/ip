@@ -4,6 +4,7 @@ import exceptions.DukeException;
 
 /**
  * Parses user input into usable terms for core.Duke.
+ * @author EL
  */
 public class Parser {
     private String userInput;
@@ -81,7 +82,7 @@ public class Parser {
         }
 
         switch (desire) {
-        case FIND:
+        case FIND: //intentionally hook onto TODO
         case TODO: {
             // Return descriptor
             return new String[]{userInput.trim()};
@@ -144,7 +145,7 @@ public class Parser {
     }
 
     /**
-     * Parses save file and loads it into the given TaskMaster
+     * Parses save file and loads it into the given TaskMaster.
      *
      * @param task The task stored in the safe file
      * @param tm   The runtime TaskMaster object
@@ -157,11 +158,11 @@ public class Parser {
             break;
         case "D":
             tm.addDeadLine(task[1], Boolean.parseBoolean(task[2]),
-                    DateHandler.convert(task[3]));
+                    DateHandler.parse(task[3]));
             break;
         case "E":
             tm.addEvent(task[1], Boolean.parseBoolean(task[2]),
-                    DateHandler.convert(task[3]), DateHandler.convert(task[4]));
+                    DateHandler.parse(task[3]), DateHandler.parse(task[4]));
             break;
         default:
             throw new exceptions.invalid.Input(String.format("Unknown command for %s", task[0]));
@@ -188,10 +189,10 @@ public class Parser {
             return tm.addToDo(args[0], false);
         case "event":
             args = extractTaskParams(Keyword.EVENT);
-            return tm.addEvent(args[0], false, DateHandler.convert(args[1]), DateHandler.convert(args[2]));
+            return tm.addEvent(args[0], false, DateHandler.parse(args[1]), DateHandler.parse(args[2]));
         case "deadline":
             args = extractTaskParams(Keyword.DEADLINE);
-            return tm.addDeadLine(args[0], false, DateHandler.convert(args[1]));
+            return tm.addDeadLine(args[0], false, DateHandler.parse(args[1]));
         case "delete":
             return tm.deleteTask(extractIndexParams());
         case "save":
@@ -210,6 +211,5 @@ public class Parser {
             throw new exceptions.invalid.Command();
         }
     }
-
 
 }

@@ -8,6 +8,7 @@ import task.Task;
 
 /**
  * core.TaskMaster is the managing class for all Tasks.
+ * @author EL
  */
 public class TaskMaster {
     private final LinkedList<Task> tasks;
@@ -105,8 +106,9 @@ public class TaskMaster {
      */
     public String deleteTask(int index) throws exceptions.invalid.Index {
         try {
+            Task remove = tasks.get(index);
             tasks.remove(index);
-            return "Noted. I've removed this task:";
+            return "Noted. I've removed this task:\n" + remove;
         } catch (IndexOutOfBoundsException e) {
             throw new exceptions.invalid.Index(index);
         }

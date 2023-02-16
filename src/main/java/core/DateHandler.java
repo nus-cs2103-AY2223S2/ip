@@ -17,16 +17,19 @@ public class DateHandler {
     private static DateTimeFormatter printFormat = DateTimeFormatter.ofPattern(printPattern);
 
     /**
-     * Converts string input into LocalDateTime.
+     * This method parses string input into LocalDateTime.
      * By default, format is set by DTFPattern.
      *
-     * @param userin User input
+     * @param input User input
      * @return LocalDateTime object representing time.
      * @throws exceptions.invalid.Input Thrown when the user enters an incorrect date time.
      */
-    public static LocalDateTime convert(String userin) throws exceptions.invalid.Input {
+    public static LocalDateTime parse(String input) throws exceptions.invalid.Input {
         try {
-            return LocalDateTime.parse(userin, dateTimeFormat);
+            LocalDateTime ret =  LocalDateTime.parse(input, dateTimeFormat);
+            ret.format(printFormat);
+            System.out.println(ret.format(printFormat));
+            return ret;
         } catch (DateTimeParseException e) {
             throw new exceptions.invalid.Input(
                     String.format("Incorrect date time format! Should be '%s'", dtfPattern));
@@ -34,22 +37,27 @@ public class DateHandler {
     }
 
     /**
-     * Unconverts pattern dateTimeFormat input into DTFPattern.
+     * This method converts local date time into string format recognized by the load function.
      * Primarily used for saving.
-     * @param userin LocalDateTime in dateTimeFormat
-     * @return userin in DTFPattern DTFPattern
+     *
+     * @param input LocalDateTime in dateTimeFormat
+     * @return input in DTFPattern DTFPattern
      */
-    public static String unconvert(LocalDateTime userin) {
-        return userin.format(DateTimeFormatter.ofPattern(dtfPattern));
+    public static String convertForSave(LocalDateTime input) {
+        String ret = input.format(DateTimeFormatter.ofPattern(dtfPattern));
+        return ret;
     }
 
     /**
-     * Return time now according to dateTimeFormat format.
-     * @return the time now.
+     * This method is for printing of the time saved in Task.
+     * Primarily used in print statements.
+     *
+     * @param input LocalDateTime in dateTimeFormat
+     * @return input in DTFPattern DTFPattern
      */
-    public static LocalDateTime timeNow() {
-        LocalDateTime ret = LocalDateTime.now();
-        ret.format(dateTimeFormat);
+    public static String convertForPrint(LocalDateTime input) {
+        String ret = input.format(printFormat);
         return ret;
     }
+
 }

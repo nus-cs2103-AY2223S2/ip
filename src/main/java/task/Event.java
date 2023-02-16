@@ -32,7 +32,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s , to: %s)", super.toString(), this.from, this.to);
+        return String.format("[E]%s (from: %s , to: %s)", super.toString(), DateHandler.convertForPrint(this.from),
+                DateHandler.convertForPrint(this.to));
     }
 
     /**
@@ -43,7 +44,7 @@ public class Event extends Task {
     @Override
     public String toCsv() {
         return String.format("E,%s,%s,%s,%s", this.getTaskDescription(), this.getComplete(),
-                DateHandler.unconvert(this.from), DateHandler.unconvert(this.to));
+                DateHandler.convertForSave(this.from), DateHandler.convertForSave(this.to));
     }
 
 }

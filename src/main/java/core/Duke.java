@@ -6,7 +6,6 @@ import exceptions.DukeException;
  * DUKE
  * CS2103 project
  * @author EDWIN LIM
- * @version 0.01
  */
 
 public class Duke {
@@ -14,15 +13,17 @@ public class Duke {
     private static TaskMaster taskMaster;
 
     /**
-     * Main method for the program
-     * @param args UNUSED
+     * Calls the main method of Duke.
+     * Calling this would initialize Duke for the GUI.
+     *
+     * args is unused here.
+     * @param args system arguments passed to the program.
      */
     public static void main(String[] args) {
 
         boolean shouldQuit = false;
         String userInput;
 
-        // greetCli();
         ioHandler.println(greet());
         initialize();
         ioHandler.flush();
@@ -43,11 +44,12 @@ public class Duke {
                 ioHandler.flush();
             }
         }
-        goodbyeCli();
     }
 
     /**
-     * Initialize core.Duke by initializing needed classes.
+     * Initializes core functionality needed to run the program.
+     * TaskMaster, IO handler and reminders are checked here.
+     * @return Returns reminder message for deadlines if any.
      */
     public static String initialize() {
         ioHandler = new DukeIO();
@@ -64,24 +66,8 @@ public class Duke {
     }
 
     /**
-     * Prints standard welcome message.
-     */
-    public static void greetCli() {
-        String logo = "                __  __ _           \n"
-                + "               / _|/ _| |          \n"
-                + "__      ____ _| |_| |_| | ___  ___ \n"
-                + "\\ \\ /\\ / / _` |  _|  _| |/ _ \\/ __|\n"
-                + " \\ V  V / (_| | | | | | |  __/\\__ \\\n"
-                + "  \\_/\\_/ \\__,_|_| |_| |_|\\___||___/\n";
-        ioHandler.println("Hello from\n" + logo + "\n");
-        ioHandler.println("Hello! I'm " + "Waffles");
-        ioHandler.println("What can I do for you?");
-        ioHandler.flush();
-    }
-
-    /**
-     * Prints standard welcome message.
-     * @return standard welcome message.
+     * This method returns the standard welcome message.
+     * @return This returns the standard welcome message.
      */
     public static String greet() {
         StringBuilder ret = new StringBuilder();
@@ -101,17 +87,8 @@ public class Duke {
     }
 
     /**
-     * Prints standard goodbye message and closes DIO.
-     */
-    public static void goodbyeCli() {
-        ioHandler.writeSave(taskMaster);
-        ioHandler.println("Bye. Hope to see you again soon!");
-        ioHandler.flush();
-        ioHandler.close();
-    }
-
-    /**
-     * Prints standard goodbye message and closes DIO.
+     * This method is called when the program closes.
+     * The save feature will be called here.
      */
     public static void goodbye() {
         ioHandler.writeSave(taskMaster);

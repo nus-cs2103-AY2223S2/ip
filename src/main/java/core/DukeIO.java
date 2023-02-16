@@ -18,13 +18,12 @@ import exceptions.DukeException;
  */
 public class DukeIO extends PrintWriter {
 
-    // To look into placing into Document/Appdata like locations instead of this directory
     private static final Path LOCAL_SETTINGS_DIR = Paths.get(System.getProperty("user.dir"), "data");
     private static final Path LOCAL_SAVE = Paths.get(LOCAL_SETTINGS_DIR.toString(), "data.csv");
     private final BufferedReader bf;
 
     /**
-     * Constructor for DukeIO class.
+     * This method is the constructor for DukeIO class.
      * This object can be used for all IO purposes, primarily printing messages and reading of user input.
      */
     public DukeIO() {
@@ -134,10 +133,8 @@ public class DukeIO extends PrintWriter {
      * @param tm the runtime TaskMaster object
      */
     public static void writeSave(TaskMaster tm) {
-        // System.out.println(LOCAL_SAVE);
         BufferedWriter file = writeFileBW();
         try {
-            // System.out.println(tm.exportToCsv());
             file.write(tm.exportToCsv());
             file.close();
         } catch (IOException | NullPointerException e) {

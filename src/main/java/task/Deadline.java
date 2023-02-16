@@ -30,7 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.by);
+        return String.format("[D]%s (by: %s)", super.toString(), DateHandler.convertForPrint(this.by));
     }
 
     /**
@@ -41,7 +41,7 @@ public class Deadline extends Task {
     @Override
     public String toCsv() {
         return String.format("D,%s,%s,%s", this.getTaskDescription(),
-                this.getComplete(), DateHandler.unconvert(this.by));
+                this.getComplete(), DateHandler.convertForSave(this.by));
     }
 
     /**
