@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        String firstGreetings = "Hello from THE Duke bot! What can I do for you?";
+        String firstGreetings = "What does a filthy orc want from me?";
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(firstGreetings, dukeImage, "duke"));
     }
 

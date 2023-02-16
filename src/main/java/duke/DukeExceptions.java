@@ -22,22 +22,23 @@ public class DukeExceptions extends Exception {
      */
     @Override
     public String toString() {
-        String toReturn = ":( Sorry, this is not a supported command!";
+        String toReturn = "This isn't even a valid command you dumb orc!";
         if (printThisOut.equals("Wrong size for mark/unmark")) {
-            toReturn = ":( Sorry, the number input is wrong. Please check the possible indexes again using list!";
+            toReturn = "Dumb orc, the number input is wrong. You'd better check"
+                    + " the possible indexes again using list!";
         }
         if (printThisOut.equals("deadline") || printThisOut.equals("todo")) {
-            toReturn = ":( Sorry, the description of a " + this.printThisOut + " cannot be empty!";
+            toReturn = "Dumb orc, the description of a " + this.printThisOut + " cannot be empty!";
         }
         if (printThisOut.equals("event")) {
-            toReturn = ":( Sorry, the description of an " + this.printThisOut + " cannot be empty!";
+            toReturn = "Dumb orc, the description of an " + this.printThisOut + " cannot be empty!";
         }
         if (printThisOut.equals("find")) {
-            toReturn = ":( Sorry, please input a keyword!";
+            toReturn = "Dumb orc, you didn't input a keyword!";
         }
         if (printThisOut.equals("bad tag")) {
-            toReturn = "Hey, it appears you did not follow the tag format properly."
-                    + "No worries, try again with this format: tag index-of-task #tagname";
+            toReturn = "Oi dumb orc, can't you follow the tag format properly? "
+                    + "Try again with this format: tag index-of-task #tagname";
         }
         return toReturn;
     }

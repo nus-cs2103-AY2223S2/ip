@@ -26,7 +26,7 @@ public class Deadlines extends Task {
      */
     public Deadlines(String taskName) throws DukeExceptions, DateTimeParseException {
         super(taskName.split("/by ")[0]);
-        if (taskName.length() <= 0 || taskName.isBlank()) {
+        if (taskName.length() <= 0 || taskName.isBlank() || !taskName.contains("/by")) {
             throw new DukeExceptions("deadline");
         }
         this.endsBy = taskName.split("/by ")[1];

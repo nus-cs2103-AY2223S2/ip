@@ -32,7 +32,8 @@ public class TaskList {
      * @return String representation of the list of tasks currently stored.
      */
     public String toRead() {
-        String toPrint = "Here are the tasks in your list:\n";
+        String toPrint = "Damn, can't believe I'm doing you a favour...\n";
+        toPrint += "Here are the tasks in your list:\n";
         for (int i = 0; i < listOfTasks.size(); i++) {
             Integer currIndex = i + 1;
             Task currTask = listOfTasks.get(i);
@@ -40,6 +41,7 @@ public class TaskList {
                     + currTask.getTag() + "\n";
             toPrint += toUse;
         }
+        toPrint += "Man, now I have to wash myself clean after helping an orc...";
         return toPrint;
     }
 
@@ -61,8 +63,9 @@ public class TaskList {
             listOfTags.deleteTagAtIndex(indexToUse);
             assert sizeBeforeDelete - 1 == listOfTasks.size() : "It appears the"
                     + "task has not been successfully deleted.";
-            String toOutput = "Noted. I've removed this task:\n  " + gettingTask.toString()
-                    + "\nNow you have " + listOfTasks.size() + " tasks in the list";
+            String toOutput = "You owe me one, filthy pig. I've removed this task:\n  "
+                    + gettingTask.toString() + "\nNow you have "
+                    + listOfTasks.size() + " tasks in the list";
             return toOutput;
         } catch (DukeExceptions DE) {
             return DE.toString();
@@ -76,7 +79,9 @@ public class TaskList {
      * @return String representation of the list of tasks containing given keyword.
      */
     public String findTasks(String keyword) {
-        String starter = "Here are the matching tasks in your list:";
+        String starter = "Can't you orcs find things on your own?\n";
+        starter += "Fine...\n";
+        starter += "Here are the matching tasks in your list:";
         Integer firstIndex = 1;
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task currTask = listOfTasks.get(i);
@@ -87,6 +92,7 @@ public class TaskList {
                 starter += printThis;
             }
         }
+        starter += "\nMan, now I have to wash myself clean after helping an orc...";
         return starter;
     }
 
@@ -104,11 +110,13 @@ public class TaskList {
                 + "the task has not been added successfully.";
         String toPrint = "";
         if (listOfTasks.size() == 1) {
-            toPrint = "Got it. I've added this task:\n  " + toAdd.toString()
-                    + "\nNow you have " + listOfTasks.size() + " task in the list.";
+            toPrint = "You owe me one, filthy pig. I've added this task:\n  "
+                    + toAdd.toString() + "\nNow you have "
+                    + listOfTasks.size() + " task in the list.";
         } else {
-            toPrint = "Got it. I've added this task:\n  " + toAdd.toString()
-                    + "\nNow you have " + listOfTasks.size() + " tasks in the list.";
+            toPrint = "You owe me one, filthy pig. I've added this task:\n  "
+                    + toAdd.toString() + "\nNow you have "
+                    + listOfTasks.size() + " tasks in the list.";
         }
         return toPrint;
     }
@@ -130,7 +138,8 @@ public class TaskList {
             currTask.setDone();
             assert currTask.isDone() : "It appears that the task was not"
                     + "successfully marked as done.";
-            String toOutput = "Nice! I've marked this task as done:\n  " + currTask.toString();
+            String toOutput = "Can't you mark your own things? Fine," +
+                    " I've marked this task as done:\n  " + currTask.toString();
             return toOutput;
         } catch (DukeExceptions DE) {
             return DE.toString();
@@ -154,7 +163,8 @@ public class TaskList {
             currTask.setUndone();
             assert !currTask.isDone() : "It appears that the task was not"
                     + "successfully marked as not done.";
-            String toOutput = "Ok, I've marked this task as not done yet:\n  " + currTask.toString();
+            String toOutput = "Can't you unmark your own tasks? Fine, I've marked" +
+                    " this task as not done yet:\n  " + currTask.toString();
             return toOutput;
         } catch (DukeExceptions DE) {
             return DE.toString();
@@ -173,7 +183,7 @@ public class TaskList {
             Deadlines taskOfInterest = (Deadlines) listOfTasks.get(indexToUse);
             return taskOfInterest.taskDate();
         } else {
-            String toReturn = "This task does not have a due date!";
+            String toReturn = "Dumb orc, this task doesn't even have a due date!";
             return toReturn;
         }
     }
