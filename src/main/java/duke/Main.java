@@ -25,6 +25,8 @@ public class Main extends Application {
             Scene scene = new Scene(ui);
             stage.setScene(scene);
             fxmlLoader.<Ui>getController().setDuke(this.duke);
+            stage.setMinWidth(400.0);
+            stage.setMinHeight(600.0);
             scene.getStylesheets().add(
                     Objects.requireNonNull(Ui.class.getResource("/view/style.css")).toExternalForm());
             stage.show();
