@@ -37,6 +37,16 @@ public class Storage {
         String root = Paths.get("").toAbsolutePath().toString();
         this.dataFilePath = Paths.get(root, filePath).toString();
 
+        new File(this.dataFilePath).getParentFile().mkdirs();
+
+        if (!(new File(this.dataFilePath).exists())) {
+            try {
+                new File(this.dataFilePath).createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         this.taskFile = new File(this.dataFilePath);
         this.data = new TaskList(loadData());
     }
@@ -135,7 +145,7 @@ public class Storage {
     }
 
     /**
-     * Unmarks a task in the list.
+     * Unmark a task in the list.
      * Prints error message if task is not marked or not in the list.
      *
      * @param num Index of task to be unmarked.
