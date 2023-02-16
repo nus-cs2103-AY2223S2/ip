@@ -32,7 +32,8 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
     }
     public String getWelcomeMessage() {
-        return "Hello! I'm Duke\n"
+        return "Hello! I'm Jamie 😃\n"
+                + "A personality of the Duke project.\n"
                 + "What can I do for you?";
     }
     public String getFarewellMessage() {
