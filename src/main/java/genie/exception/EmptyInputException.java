@@ -1,8 +1,9 @@
 package genie.exception;
 
-import java.awt.*;
-
-public class EmptyInputException extends DukeException {
+/**
+ * Handles exceptions where user input is empty.
+ */
+public class EmptyInputException extends GenieException {
     public EmptyInputException(String s) {
         super("Uh oh! The description of " + s + " cannot be empty.");
     }

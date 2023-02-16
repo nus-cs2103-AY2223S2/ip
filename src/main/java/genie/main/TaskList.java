@@ -182,27 +182,69 @@ public class TaskList {
         return matchingTasks;
     }
     //@@author
+
+    /**
+     * Retrieves just the description of user input.
+     * @param input
+     * @param command
+     * @return description
+     */
     public String removeCommandFromInput(String input, String command) {
         String inputWithoutCommand = input.replace(command, "");
         return inputWithoutCommand;
     }
+
+    /**
+     * Retrieves the status of task info.
+     * @param taskInfo
+     * @return 'X' if status is marked, ' ' otherwise
+     */
     public char statusFromTaskInfo(String taskInfo) {
         char status = taskInfo.charAt(4);
         return status;
     }
+
+    /**
+     * Removes task type and status of task info.
+     * @param taskInfo
+     * @return description of task info only
+     */
     public String removeTypeAndStatus(String taskInfo) {
         String content = taskInfo.substring(7);
         return content;
     }
+
+    /**
+     * Checks if task status is marked.
+     * @param status
+     * @return true if marked, false otherwise
+     */
     public boolean isMarked(char status) {
         return status == 'X';
     }
+
+    /**
+     * Splits string content into an array, separated by '|'.
+     * @param content
+     * @return string array
+     */
     public String[] splitContents(String content) {
         return content.split(" \\| ");
     }
+
+    /**
+     * Splits full command into an array, separated by " ".
+     * @param fullCommand
+     * @return string array
+     */
     public String[] commandDescriptionWords(String fullCommand) {
         return fullCommand.split(" ");
     }
+
+    /**
+     * Returns size of task list.
+     * @return size
+     */
     public int numOfTasks() {
         int len = tasks.size();
         return len;

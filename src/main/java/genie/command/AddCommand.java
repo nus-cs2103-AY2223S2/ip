@@ -7,6 +7,10 @@ import genie.task.Task;
 
 import java.io.IOException;
 
+
+/**
+ * Deals with execution of 'to do, deadline, event'
+ */
 public class AddCommand extends Command {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
@@ -19,6 +23,13 @@ public class AddCommand extends Command {
         this.taskType = taskType;
         this.fullCommand = fullCommand;
     }
+
+    /**
+     * Executes the required actions for 'to do, mark, delete' and generates its corresponding response.
+     * @param taskList
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         switch (taskType) {
@@ -35,6 +46,11 @@ public class AddCommand extends Command {
         int size = taskList.getTasks().size();
         ui.appendAddTaskMessage(task, size);
     }
+
+    /**
+     * Checks if command is 'bye'
+     * @return true if is 'bye', false otherwise
+     */
     @Override
     public boolean isExitCommand() {
         return false;

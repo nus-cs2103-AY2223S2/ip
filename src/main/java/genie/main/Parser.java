@@ -1,7 +1,7 @@
 package genie.main;
 
 import genie.command.*;
-import genie.exception.DukeException;
+import genie.exception.GenieException;
 import genie.exception.EmptyInputException;
 import genie.exception.InvalidInputException;
 
@@ -29,9 +29,9 @@ public class Parser {
      * Takes in a user input and returns its corresponding command for further action by Genie.
      * @param input user input
      * @return <Code>Command</Code> aligning to the user's input
-     * @throws DukeException if error occurs in parsing
+     * @throws GenieException if error occurs in parsing
      */
-    public Command parse(String input) throws DukeException {
+    public Command parse(String input) throws GenieException {
         String lowerCaseInput = input.toLowerCase();
         boolean isBye = isBye(lowerCaseInput);
         boolean isList = isList(lowerCaseInput);
@@ -77,15 +77,38 @@ public class Parser {
         throw new InvalidInputException();
     }
 
+    /**
+     * Checks if command is 'bye'.
+     * @param command
+     * @return True if is 'bye', false otherwise.
+     */
     public boolean isBye(String command) {
         return command.equals(BYE);
     }
+
+    /**
+     * Checks if command is 'list'.
+     * @param command
+     * @return True if is 'list', false otherwise.
+     */
     public boolean isList(String command) {
         return command.equals(LIST);
     }
+
+    /**
+     * Checks if command is 'help'.
+     * @param command
+     * @return True if is 'help', false otherwise.
+     */
     public boolean isHelp(String command) {
         return command.equals(HELP);
     }
+
+    /**
+     * Checks if command is task related (unmark, mark, delete, to do, event, deadline, find).
+     * @param input
+     * @return True if is task related, false otherwise.
+     */
     public boolean isTaskRelated(String input) {
         String command = isolateCommand(input);
         boolean isTaskRelated = command.equals(MARK) ||
@@ -97,12 +120,30 @@ public class Parser {
                 command.equals(FIND);
         return isTaskRelated;
     }
+
+    /**
+     * Retrieves only the command from the entire user input.
+     * @param input
+     * @return command
+     */
     public String isolateCommand(String input) {
         return inputWords(input)[0];
     }
+
+    /**
+     * Returns user input in an array, separated by " ".
+     * @param input
+     * @return user input in a String array
+     */
     public String[] inputWords(String input) {
         return input.split(" ");
     }
+
+    /**
+     * Parses string index to int.
+     * @param index
+     * @return index
+     */
     public int parseInt(String index) {
         int parsedInt = Integer.parseInt(index);
         return parsedInt;

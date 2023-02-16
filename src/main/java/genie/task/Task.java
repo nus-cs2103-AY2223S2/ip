@@ -63,13 +63,15 @@ public class Task {
     public String toFileFormat() {
         return this.getStatusBox() + this.description;
     }
-    public boolean contains(String keyword) {
-        return description.contains(keyword);
-    }
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Checks if the task description contains the specified keyword
+     * @param keyword
+     * @return true if task matches keyword, false otherwise
+     */
     // @@author mandkqh-reuse
     // Reused from: https://stackoverflow.com/questions/17134773/to-check-if-string-contains-particular-word
     // with minor modifications

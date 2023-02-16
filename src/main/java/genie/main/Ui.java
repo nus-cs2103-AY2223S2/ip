@@ -17,12 +17,17 @@ public class Ui {
     }
 
     /**
-     * Prints greet message.
+     * Appends greeting for new users.
      */
     public void appendNewUserGreeting() {
         response.append("Hello! This is Genie, your personal task tracker!\n\n");
         appendGreetingHelpMessage();
     }
+
+    /**
+     * Appends greeting for old users.
+     * @param loadedTasks
+     */
     public void appendOldUserGreeting(ArrayList<String> loadedTasks) {
         response.append("Hey, glad to have you back!\n\n");
         appendLoadedTasks(loadedTasks);
@@ -100,6 +105,11 @@ public class Ui {
     public void showEmptyListMessage() {
         response.append("Your task list is currently empty! Let's get started! ^-^\n");
     }
+
+    /**
+     * Appends task list that matches specified keyword.
+     * @param tasks
+     */
     public void printMatchingTaskList(ArrayList<Task> tasks) {
         if(tasks.size() > 0) {
             response.append("Here are the matching tasks in your list:\n");
@@ -112,28 +122,57 @@ public class Ui {
             showEmptyMatchingTasksMessage();
         }
     }
+
+    /**
+     * Appends empty matching tasks message.
+     */
     public void showEmptyMatchingTasksMessage() {
         response.append("There are no matching tasks for your search :(\n");
     }
+
+    /**
+     * Appends help message.
+     */
     public void appendHelpMessage() {
         response.append("No problem! Here is a list of commands I can recognise:\n");
         response.append("\n");
         response.append(showAllCommands());
     }
+
+    /**
+     * Appends help message when Genie greets a new user.
+     */
     public void appendGreetingHelpMessage() {
         response.append("To get started, here is a list of commands that I recognise:\n");
         response.append(showAllCommands());
     }
+
     public String getResponse() {
         return response.toString();
     }
+
+    /**
+     * Clears responses appended to it.
+     */
     public void clearResponse() {
         response.setLength(0);
     }
+
+    /**
+     * Appends index number to the task.
+     * @param index
+     * @param t task
+     * @return task with index number
+     */
     public String appendNumberedTaskInfo(int index, Task t) {
         String numberedTaskInfo = index + ". " + t.toString() + "\n";
         return numberedTaskInfo;
     }
+
+    /**
+     * Shows all recognisable commands.
+     * @return all commands with help usage
+     */
     public String showAllCommands() {
         String allCommands = "• todo <task>\n" +
                 "• event <task> /from <time> /to <time>\n" +
@@ -157,6 +196,10 @@ public class Ui {
         return allCommands;
     }
 
+    /**
+     * Appends loaded tasks.
+     * @param loadedTasks
+     */
     public void appendLoadedTasks(ArrayList<String> loadedTasks) {
         String strTasks = "Here is a record of your task list from where you had previously left off:\n";
         for (int i = 0; i < loadedTasks.size(); i++) {
@@ -166,6 +209,11 @@ public class Ui {
         }
         response.append(strTasks);
     }
+
+    /**
+     * Appends custom message.
+     * @param customMessage
+     */
     public void appendCustomMessage(String customMessage) {
         response.append(customMessage);
     }
