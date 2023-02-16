@@ -1,7 +1,4 @@
 package task;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * ToDos is a variation of Tasks that carries a task description
  * @author CShuwen
@@ -9,9 +6,14 @@ import java.time.format.DateTimeFormatter;
  * @since 0.0
  */
 public class ToDos extends Task {
-
     private int isDone;
 
+    /**
+     * Create a ToDo Task
+     *
+     * @param description decription of a task.
+     * @param isDone 0 represents the task is not done and 1 represents the task is done.
+     */
     public ToDos(String description, Integer isDone) {
         super(description, isDone);
         this.isDone = isDone;

@@ -1,10 +1,4 @@
-package Storage;
-
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDos;
-
+package storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +7,11 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDos;
 
 /**
  * Storage is a class that help store data in the local file and also read data from local file,
@@ -23,6 +22,11 @@ import java.util.Scanner;
 public class Storage {
     private final String dataAddress;
 
+    /**
+     * Create a storage
+     *
+     * @param fileName the target filename that the data should be stored
+     */
     public Storage(String fileName) {
         Path currentRelativePath = Paths.get("");
         String currentRelativePathName = currentRelativePath.toAbsolutePath().toString();

@@ -26,9 +26,9 @@ public class Task {
     }
 
     /**
-     * return the description of a task.
+     * return the description of a task
      *
-     * @return the description of a task.
+     * @return the description of a task
      */
     public String getDes() {
         return description;
@@ -37,11 +37,12 @@ public class Task {
     /**
      * Return an icon representation of whether a task is done
      *
-     * @return an icon of "[ ]" when the task is not done and "[X]" otherwise .
+     * @return an icon of "[ ]" when the task is not done and "[X]" otherwise
      */
     public String getStatusIcon() {
         return (isDone == 1 ? "[X]" : "[ ]");
     }
+
     /**
      * Mark a task as done
      */
