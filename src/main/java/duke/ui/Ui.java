@@ -18,7 +18,7 @@ public class Ui {
     public String printWelcomeMessage() {
         return "\t____________________________________________________________\n"
                 + "\tHello! I'm NoDuKo\n"
-                + "\tWhat can I do for you?\n"
+                + "\tWhat can I not do for you?\n"
                 + "\t____________________________________________________________";
     }
 
@@ -28,7 +28,7 @@ public class Ui {
      */
     public String printByeMessage() {
         return "\t____________________________________________________________\n"
-                + "\tBye. Hope to see you again soon!\n"
+                + "\tBye. Hope to not see you again soon!\n"
                 + "\t____________________________________________________________";
     }
 
@@ -41,7 +41,7 @@ public class Ui {
     public String printTaskAdded(Task task, int taskCount) {
         return "\tGot it. I've added this task:\n"
                 + "\t\t" + task + "\n"
-                + "\tNow you have " + taskCount + " tasks in the list.";
+                + "\tNow you have " + taskCount + " tasks in the list.\n \tThat's way too many.";
     }
 
     /**
@@ -61,7 +61,7 @@ public class Ui {
      * @return The string to be printed.
      */
     public String printSortedTasks(ArrayList<Task> tasks) {
-        String output = "\tHere are the tasks in your list:";
+        String output = "\tHere are the tasks in your list, ohno:";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             output += "\n\t\t" + (i + 1) + "." + t;
@@ -75,7 +75,7 @@ public class Ui {
      * @return The string to be printed.
      */
     public String printTaskUnmarked(Task task) {
-        return "\tNice! I've marked this task as not done:\n"
+        return "\tGood luck! I've marked this task as not done:\n"
                 + "\t\t" + task;
     }
 
@@ -86,7 +86,7 @@ public class Ui {
      * @return The string to be printed.
      */
     public String printTaskDeleted(Task task, int taskCount) {
-        return "\tNoted. I've removed this task:\n"
+        return "\tWhy? I've removed this task:\n"
                 + "\t\t" + task + "\n"
                 + "\tNow you have " + taskCount + " tasks in the list.";
     }
