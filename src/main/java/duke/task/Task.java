@@ -33,4 +33,8 @@ public class Task {
     public void setPriority(Priority priorityLevel) {
         this.priority = priorityLevel;
     }
+
+    public void setPriority(String priorityLevel) {
+        this.priority = Priority.parsePriority(priorityLevel);
+    }
 }

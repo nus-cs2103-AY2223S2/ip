@@ -22,4 +22,17 @@ public enum Priority {
             }
             return result;
         }
+
+        public static Priority parsePriority(String priorityLevel) {
+            switch (priorityLevel) {
+            case "LOW":
+                return Priority.LOW;
+            case "MEDIUM":
+                return Priority.MEDIUM;
+            case "HIGH":
+                return Priority.HIGH;
+            default:
+                return null;
+            }
+        }
 }

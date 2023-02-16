@@ -41,10 +41,8 @@ public class Storage {
 
     /**
      * Retrieves a Todo task from a line in the storage file.
-     * @return a Todo task previously saved in the file.
      *
-     * @throws IOException if file cannot be read
-     * @throws DukeException if user input cannot be understood
+     * @return a Todo task previously saved in the file.
      */
     private Task retrieveTodo(String taskDescriptor, boolean isDone) {
         Task task = new Todo(taskDescriptor.trim());
@@ -56,10 +54,8 @@ public class Storage {
 
     /**
      * Retrieves a Deadline task from a line in the storage file.
-     * @return a Deadline task previously saved in the file.
      *
-     * @throws IOException if file cannot be read
-     * @throws DukeException if user input cannot be understood
+     * @return a Deadline task previously saved in the file.
      */
     private Task retrieveDeadline(String taskDescriptor, boolean isDone) throws DukeException {
         String[] restStrings = taskDescriptor.split("by:", 2);
@@ -74,11 +70,9 @@ public class Storage {
     }
 
     /**
-     * Retrieves a Event task from a line in the storage file.
-     * @return a Event task previously saved in the file.
+     * Retrieves an Event task from a line in the storage file.
      *
-     * @throws IOException if file cannot be read
-     * @throws DukeException if user input cannot be understood
+     * @return an Event task previously saved in the file.
      */
     private Task retrieveEvent(String taskDescriptor, boolean isDone) {
         String[] restStrings = taskDescriptor.split("from:", 2);
@@ -103,15 +97,15 @@ public class Storage {
      */
     public ArrayList<Task> retrieveTasks() throws IOException, DukeException {
         File f = new File(DEFAULT_FILEPATH);
-        f.getParentFile().mkdirs();
-        if (!f.exists()) {
-            f.createNewFile();
+        if (f.createNewFile()) {
+            return new ArrayList<>();
         }
+
         Scanner scanner = new Scanner(f);
         ArrayList<Task> tasks = new ArrayList<>();
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] inputs = line.split("]", 3);
+            String firstLine = scanner.nextLine();
+            String[] inputs = firstLine.split("]", 3);
             assert inputs.length == 3 : "Too few arguments; likely storage of tasks in file was not done correctly.";
             String taskType = inputs[0];
             String status = inputs[1];
@@ -119,16 +113,20 @@ public class Storage {
             String rest = inputs[2];
             Task task;
 
+            String secondLine = scanner.nextLine();
+            String[] priorityInputs = secondLine.split(" ", 2);
+            assert priorityInputs.length == 2 : "Too few arguments; likely priority of tasks was not saved correctly.";
+            String priorityLevel = priorityInputs[1];
+
             if (taskType.equals("[T")) {
                 task = retrieveTodo(rest, isDone);
-                tasks.add(task);
             } else if (taskType.equals("[D")) {
                 task = retrieveDeadline(rest, isDone);
-                tasks.add(task);
             } else {
                 task = retrieveEvent(rest, isDone);
-                tasks.add(task);
             }
+            task.setPriority(priorityLevel);
+            tasks.add(task);
         }
         return tasks;
     }
