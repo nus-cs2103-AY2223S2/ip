@@ -1,7 +1,5 @@
 package parsing;
 
-import util.Util;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -9,6 +7,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import util.Util;
 
 /**
  * Wrapper around a function from a string input to a
@@ -56,9 +56,7 @@ public class Parser<T> {
 
     /**
      * @param pred Ending condition
-     * @return Parser that parses a string of characters until an ending condition
-     * is
-     * satisfied
+     * @return Parser that parses a string of characters until an ending condition is satisfied
      */
     public static Parser<String> takeTill(Predicate<Character> pred) {
         return anyChar()
@@ -78,7 +76,7 @@ public class Parser<T> {
     /**
      * @param pred Condition that characters must satisfy
      * @return Parser that skips over characters while characters satisfy condition.
-     * Result must be ignored.
+     *         Result must be ignored.
      */
     public static Parser<Void> skipWhile(Predicate<Character> pred) {
         return takeWhile(pred).map(s -> null);
@@ -87,7 +85,7 @@ public class Parser<T> {
     /**
      * @param pred Condition that ends the parsing
      * @return Parser that skips over characters until condition is satisfied.
-     * Result must be ignored.
+     *         Result must be ignored.
      */
     public static Parser<Void> skipTill(Predicate<Character> pred) {
         return takeTill(pred).map(s -> null);
@@ -96,7 +94,7 @@ public class Parser<T> {
     /**
      * @param res Result to be returned
      * @return Parser that returns a fixed value, regardless of input.
-     * Does not consume input.
+     *         Does not consume input.
      */
     public static <U> Parser<U> retn(U res) {
         return new Parser<>(inp -> Result.ok(res, inp));
@@ -200,7 +198,7 @@ public class Parser<T> {
 
     /**
      * @return Parser that skips over spaces.
-     * Result must be ignored.
+     *         Result must be ignored.
      */
     public static Parser<Void> skipSpace() {
         return skipWhile(WS::contains);
@@ -208,7 +206,7 @@ public class Parser<T> {
 
     /**
      * @return Parser that succeeds if input is at EOL.
-     * Result must be ignored.
+     *         Result must be ignored.
      */
     public static Parser<Void> endOfLine() {
         return new Parser<>(inp -> {
@@ -313,7 +311,7 @@ public class Parser<T> {
      * Tries this parser as many times as possible
      *
      * @return Parser that parses a list of the original type.
-     * Empty list returned if no parse succeeds.
+     *         Empty list returned if no parse succeeds.
      */
     public Parser<List<T>> many() {
         Function<String, Result<Stream<T>>> f = new Function<>() {

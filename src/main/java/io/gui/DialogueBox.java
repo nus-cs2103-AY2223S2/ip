@@ -1,5 +1,8 @@
 package io.gui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,9 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.shape.Circle;
-
-import java.io.IOException;
-import java.util.Collections;
 
 /**
  * Dialogue box for user inputs and duke outputs.

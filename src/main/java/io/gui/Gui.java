@@ -1,5 +1,7 @@
 package io.gui;
 
+import java.io.IOException;
+
 import io.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Graphical User Interface

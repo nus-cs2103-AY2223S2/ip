@@ -73,8 +73,7 @@ public class Util {
     public static String listToString(List<Character> s) {
         return s.stream()
                 .map(Object::toString)
-                .reduce("",
-                        (a, b) -> a + b);
+                .reduce("", (a, b) -> a + b);
     }
 
     /**
@@ -86,8 +85,7 @@ public class Util {
      */
     public static String join(String delimiter, String... lines) {
         return Stream.of(lines)
-                .reduce("",
-                        (a, b) -> a + delimiter + b)
+                .reduce("", (a, b) -> a + delimiter + b)
                 .substring(delimiter.length());
     }
 

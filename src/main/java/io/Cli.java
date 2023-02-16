@@ -1,15 +1,15 @@
 package io;
 
-import command.Command;
-import command.Error;
-import task.TaskList;
-import util.Pair;
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import command.Command;
+import command.Error;
+import task.TaskList;
+import util.Pair;
 
 /**
  * User interface (Command line).

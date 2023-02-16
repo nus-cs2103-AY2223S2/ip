@@ -12,6 +12,14 @@ import java.util.function.Predicate;
  * @param <R> Type of invalid result
  */
 public interface Either<L, R> {
+    /**
+     * Construct left object
+     *
+     * @param <L> Type of left object
+     * @param <R> Type of right object
+     * @param l   Wrapped object
+     * @return Left(l)
+     */
     static <L, R> Either<L, R> left(L l) {
         return new Either<>() {
             private final L left = l;
@@ -62,6 +70,14 @@ public interface Either<L, R> {
         };
     }
 
+    /**
+     * Construct right object
+     *
+     * @param <L> Type of left object
+     * @param <R> Type of right object
+     * @param r   Inner object
+     * @return Right(r)
+     */
     static <L, R> Either<L, R> right(R r) {
         return new Either<>() {
             private final R right = r;
@@ -159,7 +175,7 @@ public interface Either<L, R> {
      * @param tester  Predicate to test left object
      * @param failRes Object if left object fails predicate
      * @return Left if original left object satisfies predicate, Right(failRes) if
-     * not and the original right object if Either is originally right
+     *         not and the original right object if Either is originally right
      */
     Either<L, R> filterOrElse(Predicate<? super L> tester, R failRes);
 

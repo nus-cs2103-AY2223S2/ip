@@ -1,10 +1,10 @@
 package parsing;
 
-import util.Either;
-import util.Pair;
-
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import util.Either;
+import util.Pair;
 
 /**
  * Result of a parse by a Parser
@@ -77,9 +77,9 @@ public class Result<T> {
      * Converts result to new object based on 2 mapping functions
      *
      * @param <U>           Type of new object
-     * @param okFunction    Function to convert Pair<parsedObject, remainingInput>
+     * @param okFunction    Function to convert pair of (parsedObject, remainingInput)
      *                      to new object if this is ok
-     * @param errorFunction Function to conver error message to new object if this
+     * @param errorFunction Function to convert error message to new object if this
      *                      is error
      * @return New object
      */

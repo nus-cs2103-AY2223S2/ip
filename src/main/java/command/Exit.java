@@ -5,6 +5,9 @@ import io.Ui;
 import parsing.Parser;
 import task.TaskList;
 
+/**
+ * Manages bye command
+ */
 public class Exit implements Command {
     public static final String HELP_MSG = "Saves all tasks and exits app.\nFormat: bye";
     private static final String FORMAT = "bye";
@@ -33,10 +36,9 @@ public class Exit implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
-        String reply = storage.save(taskList)
-                .match(
-                        ok -> "Tasks saved successfully.\nBye.",
-                        err -> "Failed to save tasks.\nBye.");
+        String reply = storage.save(taskList).match(
+                ok -> "Tasks saved successfully.\nBye.",
+                err -> "Failed to save tasks.\nBye.");
         ui.showReply(reply);
     }
 }

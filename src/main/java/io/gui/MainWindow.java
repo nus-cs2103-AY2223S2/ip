@@ -17,7 +17,8 @@ import util.Pair;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane implements Ui {
-    private static final String WELCOME = "Hello. My name is D.\nI am a simple task manager, designed to serve humanity.";
+    private static final String WELCOME = "Hello. My name is D.\n"
+            + "I am a simple task manager, designed to serve humanity.";
     private final Image userImg = new Image(this.getClass()
             .getResourceAsStream("/images/default_user_pic.png"));
     private final Image dImg = new Image(this.getClass()

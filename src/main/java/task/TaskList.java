@@ -1,7 +1,5 @@
 package task;
 
-import util.Pair;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import util.Pair;
 
 /**
  * List of tasks with formatting methods

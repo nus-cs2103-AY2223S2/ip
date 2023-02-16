@@ -1,7 +1,5 @@
 package task;
 
-import util.Util;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -9,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import util.Util;
 
 /**
  * General Task abstract class

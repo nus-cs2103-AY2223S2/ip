@@ -1,12 +1,12 @@
 package command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import io.Storage;
 import io.Ui;
 import parsing.Parser;
 import task.TaskList;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Manages finding tasks via keywords
