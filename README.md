@@ -18,7 +18,7 @@ Waffles got you covered.
 ![Waffles UI](./Ui.png "UI")
 
 ### Download:
-* [Download](https://github.com/9fc70c892/ip)
+* [Download](https://github.com/9fc70c892/ip/releases/download/A-Release/9fc70c892_ip.jar)
 
 ---
 If you are a Java programmer, you can experiment or add on to our [Source Code](https://github.com/9fc70c892/ip/)!
