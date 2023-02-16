@@ -45,8 +45,8 @@ public class Duke {
             assert response != null : "Response cannot be null";
 
             return response;
-        } catch (DukeException e) {
-            return "Error: " + e.getMessage();
+        } catch (DukeException exception) {
+            return "Error: " + exception.getMessage();
         }
     }
 
