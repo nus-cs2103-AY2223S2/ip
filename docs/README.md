@@ -13,7 +13,7 @@ And he wants to share it with you.
 1. Install `Java 11`.
 2. Download LeDuke from here.
 3. Put the LeDuke `jar` file into your desired folder.
-4. Run java `-jar .\LeDuke.jar` to start the app.
+4. Run java `-jar .\duke.jar` to start the app.
 
 
 ## Features 

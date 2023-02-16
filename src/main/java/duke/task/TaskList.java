@@ -58,7 +58,7 @@ public class TaskList {
      */
     public String listTasks() throws DukeException {
         if (taskList.size() == 0) {
-            throw new DukeException("No tasks available.");
+            throw new DukeException("No LeTasks available.");
         }
 
         /* Updates indexToTask hashmap and creates a string representing the task list */
@@ -92,7 +92,7 @@ public class TaskList {
                 .collect(Collectors.toList());
 
         if (filteredTaskList.size() == 0) {
-            throw new DukeException("No matching task found.");
+            throw new DukeException("No matching LeTask found.");
         }
 
         return convertListToString(filteredTaskList);
