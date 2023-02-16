@@ -47,20 +47,6 @@ public class Ui {
         return output;
     }
     /**
-     * A formatted string confirming the removal of a task from the list.
-     *
-     * @param array The ArrayList of tasks from which the task will be removed.
-     * @param splitInput The user's input for removing a task.
-     * @return A formatted string confirming the removal of the task from the list.
-     */
-    static String removeTask(ArrayList<Task> array, String[] splitInput) {
-        String output = "";
-        output += "Noted. I've removed this task:" + "\n";
-        output += "      " + array.get((Integer.parseInt(splitInput[1]) - 1)).toString() + "\n";
-        output += "Now you have " + array.size() + " tasks in the list." + "\n";
-        return output;
-    }
-    /**
      * A formatted string confirming the task is marked as done.
      *
      * @param array The ArrayList of tasks to which the task will be marked as done.

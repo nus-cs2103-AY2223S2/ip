@@ -53,6 +53,9 @@ public class TaskList {
      * @param splitInput The user's input for unmarking a task.
      */
     public static String unmarkTask(ArrayList<Task> array, String[] splitInput) {
+        if (Integer.parseInt(splitInput[1]) > array.size()) {
+            return "Task " + splitInput[1] + " does not exist :(";
+        }
         array.get((Integer.parseInt(splitInput[1]) - 1)).markAsUnDone();
         return Ui.unmarkTask(array, splitInput);
     }
@@ -64,6 +67,9 @@ public class TaskList {
      * @param splitInput The user's input for marking a task.
      */
     public static String markTask(ArrayList<Task> array, String[] splitInput) {
+        if (Integer.parseInt(splitInput[1]) > array.size()) {
+            return "Task " + splitInput[1] + " does not exist :(";
+        }
         array.get((Integer.parseInt(splitInput[1]) - 1)).markAsDone();
         return Ui.markTask(array, splitInput);
     }
@@ -75,8 +81,15 @@ public class TaskList {
      * @param splitInput The user's input for deleting a task.
      */
     public static String deleteTask(ArrayList<Task> array, String[] splitInput) {
+        if (Integer.parseInt(splitInput[1]) > array.size()) {
+            return "Task " + splitInput[1] + " does not exist :(";
+        }
+        String output = "";
+        output += "Noted. I've removed this task:" + "\n";
+        output += "      " + array.get((Integer.parseInt(splitInput[1]) - 1)).toString() + "\n";
         array.remove((Integer.parseInt(splitInput[1]) - 1));
-        return Ui.removeTask(array, splitInput);
+        output += "Now you have " + array.size() + " tasks in the list." + "\n";
+        return output;
     }
 
     /**
