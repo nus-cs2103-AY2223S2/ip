@@ -11,7 +11,8 @@ public class DukeTest {
     public void getWelcome() {
         // A unit test for Duke#getWelcome
         // test setup
-        String welcomeMessage = "Hello! I'm Duke\n"
+        String welcomeMessage = "Hello! I'm Jamie 😃\n"
+                + "A personality of the Duke project.\n"
                 + "What can I do for you?";
 
         // automatically verify the response

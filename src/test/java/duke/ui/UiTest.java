@@ -28,7 +28,8 @@ public class UiTest {
     public void getWelcomeMessage() {
         // A unit test for Ui#getWelcomeMessage
         // test setup
-        String message = "Hello! I'm Duke\n"
+        String message = "Hello! I'm Jamie 😃\n"
+                + "A personality of the Duke project.\n"
                 + "What can I do for you?";
 
         // automatically verify the response
