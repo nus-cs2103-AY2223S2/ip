@@ -55,7 +55,7 @@ public class Parser {
         try {
 
             assert (!hasHandledInput) : "The program thinks it's done processing the commands!\n" +
-                    "This is dangerous, please take a look @ Parser.java. :0 \n"; 
+                    "This is dangerous, please take a look @ Parser.java. :0 \n";
 
             if (input.equals("bye") && !hasHandledInput) {
                 outputString = Ui.doFarewell();
