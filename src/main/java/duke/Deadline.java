@@ -27,8 +27,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (" + this.dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ')'
-                + "\nPriority: " + getPriority();
+        return "[D]" + super.toString() + " (" + this.dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ')';
     }
 
     /**
@@ -40,7 +39,6 @@ public class Deadline extends Task {
         String completionStatus = this.getStatusIcon();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dueDateString = this.dueDate.format(dateFormatter);
-        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + getPriority() + DIVIDER + super.description +
-                DIVIDER + dueDateString;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + super.description + DIVIDER + dueDateString;
     }
 }

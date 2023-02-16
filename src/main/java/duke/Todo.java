@@ -22,7 +22,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString() + "\nPriority: " + getPriority();
+        return "[T]" + super.toString();
     }
 
     /**
@@ -32,6 +32,6 @@ public class Todo extends Task {
     @Override
     public String toStorageData() {
         String completionStatus = this.getStatusIcon();
-        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + getPriority() + DIVIDER + super.description;
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + super.description;
     }
 }

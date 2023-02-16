@@ -30,8 +30,7 @@ public class Storage {
         String[] dataArr = data.split(Task.DIVIDER);
         String taskType = dataArr[0];
         String completionStatus = dataArr[1];
-        String priority = dataArr[2];
-        String description = dataArr[3];
+        String description = dataArr[2];
         Task task;
 
         switch (taskType) {
@@ -39,14 +38,14 @@ public class Storage {
                 task = new Todo(description);
                 break;
             case "[D]":
-                String dueDateString = dataArr[4];
+                String dueDateString = dataArr[3];
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate dueDate = LocalDate.parse(dueDateString, dateFormatter);
                 task = new Deadline(description, dueDate);
                 break;
             case "[E]":
-                String from = dataArr[4];
-                String to = dataArr[5];
+                String from = dataArr[3];
+                String to = dataArr[4];
                 task = new Event(description, from, to);
                 break;
             default:
@@ -55,7 +54,6 @@ public class Storage {
         if (completionStatus.equals("X")) {
             task.mark();
         }
-        task.assignPriority(priority);
         return task;
     }
 

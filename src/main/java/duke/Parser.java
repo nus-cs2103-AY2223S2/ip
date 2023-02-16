@@ -32,8 +32,6 @@ public class Parser {
             return lst.deleteTask(userInput);
         } else if (userInput.startsWith("find")) {
             return lst.findTask(userInput);
-        } else if (userInput.startsWith("priority")) {
-            return lst.markPriority(userInput);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
