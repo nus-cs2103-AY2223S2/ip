@@ -43,7 +43,7 @@ jobs:
 
       - name: Install Windows packages
         if: always() && runner.os == 'Windows'
-        run: sudo apt-get install dos2unix
+        run: apt-get install dos2unix
 
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
