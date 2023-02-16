@@ -8,12 +8,18 @@ import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Command created when user types deadline as first word in input
+ */
 public class DeadlineCommand extends Command {
 
     public DeadlineCommand(Ui ui, TaskList taskList) {
         super(ui, taskList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String executeCommand(String userInput) throws NeroException {
         try {
@@ -27,6 +33,12 @@ public class DeadlineCommand extends Command {
         }
     }
 
+    /**
+     * performs cleaning on deadline input
+     * @param inputString input entered by user
+     * @return String array containing [description, deadline]
+     * @throws NeroException incorrect capitalisation exception and incorrect date format exception
+     */
     String[] cleanDeadline(String inputString) throws NeroException {
         String[] cleanedString = new String[2];
         String[] splitString = inputString.split("/");

@@ -7,7 +7,7 @@ package duke.exceptions;
 public class IncorrectEventFormatException extends NeroException {
 
     public IncorrectEventFormatException() {
-        super("Format of a deadline should be: {description} /from {start date} /to {end date}");
+        super("Format of an event should be: {description} /from {start date} /to {end date}");
     }
 
 }

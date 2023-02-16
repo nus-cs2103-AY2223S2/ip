@@ -63,36 +63,4 @@ public class Parser {
             throw new IncorrectInputException();
         }
     }
-
-    /**
-     * Performs string cleaning on input from user for Deadline tasks
-     * @param inputString input from user
-     * @return array of strings containing [description of task, deadline of task]
-     */
-    String[] cleanDeadline(String inputString) {
-        String[] cleanedString = new String[2];
-        String[] splitString = inputString.split("/");
-        String description = splitString[0].replace("deadline", "");
-        String deadline = splitString[1].replace("by", "");
-        cleanedString[0] = description;
-        cleanedString[1] = deadline;
-        return cleanedString;
-    }
-
-    /**
-     * Performs string cleaning on input from user for Event tasks
-     * @param inputString input from user
-     * @return array of strings containing [description of task, start date of task, end date of task]
-     */
-    String[] cleanEvent(String inputString) {
-        String[] cleanedString = new String[3];
-        String[] splitString = inputString.split("/");
-        String description = splitString[0].replace("event", "");
-        String startDate = splitString[1].replace("from", "");
-        String endDate = splitString[2].replace("to", "");
-        cleanedString[0] = description;
-        cleanedString[1] = startDate;
-        cleanedString[2] = endDate;
-        return cleanedString;
-    }
 }

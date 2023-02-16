@@ -9,12 +9,18 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Command created when user types event as first word in input
+ */
 public class EventCommand extends Command {
 
     public EventCommand(Ui ui, TaskList taskList) {
         super(ui, taskList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String executeCommand(String userInput) throws NeroException {
         try {
@@ -28,6 +34,12 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * performs string cleaning on event input
+     * @param inputString input entered by user
+     * @return String array containing [description, start date, end date]
+     * @throws NeroException incorrect capitalisation exception and incorrect date exception
+     */
     String[] cleanEvent(String inputString) throws NeroException {
         String[] cleanedString = new String[3];
         String[] splitString = inputString.split("/");

@@ -6,12 +6,19 @@ import duke.exceptions.NeroException;
 import duke.exceptions.RescheduleException;
 import duke.task.*;
 
+/**
+ * Command created when user types reschedule as first word in input
+ */
 public class RescheduleCommand extends Command {
+
 
     public RescheduleCommand(Ui ui, TaskList taskList) {
         super(ui, taskList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String executeCommand(String userInput) throws NeroException {
         String[] input = userInput.split(" ");

@@ -6,12 +6,18 @@ import duke.exceptions.NeroException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Command created when user types delete as first word in input
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(Ui ui, TaskList taskList) {
         super(ui, taskList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String executeCommand(String userInput) throws NeroException {
         String[] input = userInput.split(" ");

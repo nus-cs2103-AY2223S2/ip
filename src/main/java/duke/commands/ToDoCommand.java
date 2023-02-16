@@ -3,18 +3,23 @@ package duke.commands;
 import duke.Ui;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.IncorrectCapitalisationException;
-import duke.exceptions.IncorrectToDoException;
 import duke.exceptions.NeroException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
+/**
+ * Command created when user types todo as first word in input
+ */
 public class ToDoCommand extends Command {
 
     public ToDoCommand(Ui ui, TaskList taskList) {
         super(ui, taskList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String executeCommand(String userInput) throws NeroException {
         int index = userInput.indexOf("todo");
