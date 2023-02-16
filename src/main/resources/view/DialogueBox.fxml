@@ -5,17 +5,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0"
-         stylesheets="@styles.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19">
+
+<fx:root alignment="CENTER_LEFT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" spacing="20.0" stylesheets="@styles.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
-        <Label fx:id="dialogue" text="Label" wrapText="true">
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="dialogue" style="-fx-border-color: silver; -fx-border-radius: 10; -fx-border-insets: -10;" text="Label" wrapText="true">
             <font>
-                <Font name="Comic Sans MS" size="14.0"/>
+                <Font name="Comic Sans MS" size="14.0" />
             </font>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
         </Label>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+        <Insets bottom="15.0" left="5.0" right="20.0" top="15.0" />
     </padding>
 </fx:root>
