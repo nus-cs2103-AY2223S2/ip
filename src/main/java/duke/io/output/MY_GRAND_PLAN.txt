@@ -1,4 +1,0 @@
-T |   | DRINK WATER
-T | X | EAT EAT
-D |   | HOC NGN (BY: 10PM)
-E | X | NOC (FROM: 2 AUG TO: 12 JAN)
