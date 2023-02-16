@@ -29,11 +29,10 @@ Shows the next task with the nearest deadline.
 
 ## Usage
 
-- ### `list` - List all tasks
+### `list` - List all tasks
 
-    Jarvis will return a list of all tasks of the user.
-
-    Example of usage: `list`
+Jarvis will return a list of all tasks of the user.<br>
+Example of usage: `list`
 
 Expected outcome:
 
@@ -43,10 +42,11 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-- ### `todo` - Creates a 'todo' type Task
+### `todo` - Creates a 'todo' type Task
 
-    This task only has a description. No time parameters taken.
-    Example of usage: `todo cook dinner`
+This task only has a description.<br>
+No time parameters taken.<br>
+Example of usage: `todo cook dinner`
 
 Expected outcome:
 
@@ -57,10 +57,10 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-- ### `deadline` - Creates a 'deadline' type Task
+### `deadline` - Creates a 'deadline' type Task
 
-    This task has a description and a deadline.
-    Example of usage: `deadline finish essay /2023-02-22`
+This task has a description and a deadline.<br>
+Example of usage: `deadline finish essay /2023-02-22`
 
 Expected outcome:
 
@@ -72,10 +72,10 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-- ### `event` - Creates a 'event' type Task
+### `event` - Creates a 'event' type Task
 
-    This task has a description and a time span.
-    Example of usage: `event travel /2023-02-25 /2023-02-28`
+This task has a description and a time span.<br>
+Example of usage: `event travel /2023-02-25 /2023-02-28`
 
 Expected outcome:
 
@@ -88,10 +88,10 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-- ### `mark` - Marks a task as done
+### `mark` - Marks a task as done
 
-    This task has a description and a time span.
-    Example of usage: `mark 1`
+This task has a description and a time span.<br>
+Example of usage: `mark 1`
 
 Expected outcome:
 
@@ -104,10 +104,10 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-- ### `unmark` - Un-marks a task as done
+### `unmark` - Un-marks a task as done
 
-    This task has a description and a time span.
-    Example of usage: `unmark 1`
+This task has a description and a time span.<br>
+Example of usage: `unmark 1`
 
 Expected outcome:
 
@@ -120,10 +120,10 @@ Tasks for Tony Stark:
 -------------------
 ```
 
-- ### `unmark` - Un-marks a task as done
+### `unmark` - Un-marks a task as done
 
-    This task has a description and a time span.
-    Example of usage: `unmark 1`
+This task has a description and a time span.<br>
+Example of usage: `unmark 1`
 
 Expected outcome:
 
