@@ -1,5 +1,9 @@
 package duke;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Handles interactions with the users.
  */
@@ -17,12 +21,7 @@ public class Ui {
      */
     public static String dukeGreeting() {
         String greeting = "";
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-        greeting = "Hey there! I'm Lucy (=^･ω･^=)\n" + "What can I do for you today?";
+        greeting = "Hey there! I'm Lucy (=^･ω･^=)\n" + "What can I do for you today?\n" + userGuide();
         return greeting;
     }
 
@@ -105,13 +104,33 @@ public class Ui {
         return e.getMessage();
     }
 
+    public static String userGuide() {
+        return "\nLucy only understands the following:\n"
+                + "1. todo DESCRIPTION\n"
+                + "2. deadline DESCRIPTION /by YYYY-MM-DD\n"
+                + "3. event DESCRIPTION /from X /to Y\n"
+                + "4. mark NUMBER\n"
+                + "5. unmark NUMBER\n"
+                + "6. list\n"
+                + "7. find KEYWORD \n"
+                + "8. delete NUMBER\n"
+                + "9. update NUMBER /by YYYY-MM-DD\n"
+                + "10. update NUMBER /from X /to Y";
+    }
+
     /**
      * Terminates the program.
      *
      * @return Response to exiting the program.
      */
     public String exit() {
-        System.exit(0);
-        return "Bye bye";
+        Timer timer = new Timer();
+        TimerTask exitApp = new TimerTask() {
+            public void run() {
+                System.exit(0);
+            }
+        };
+        timer.schedule(exitApp, new Date(System.currentTimeMillis() + 2 * 1000));
+        return "(=｀ェ´=) Bye bye!";
     }
 }
