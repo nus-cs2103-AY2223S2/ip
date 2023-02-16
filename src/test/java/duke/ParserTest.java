@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.task.Parser;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -27,7 +28,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseUnknownCommandTest() {
+    public void parseUnknownCommandTest() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new Todo("return book"));
         TaskList tasklist = new TaskList(tasks);

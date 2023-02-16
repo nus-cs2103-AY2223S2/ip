@@ -94,7 +94,7 @@ public class AddCommand extends Command {
         Task task = null;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-            LocalDateTime dueDate = LocalDateTime.parse(deadlineDue.substring(3), formatter);
+            LocalDateTime dueDate = LocalDateTime.parse(deadlineDue, formatter);
             task = new Deadline(taskDesc, dueDate);
             return task;
         } catch (DateTimeException e) {

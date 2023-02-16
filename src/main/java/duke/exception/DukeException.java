@@ -4,6 +4,7 @@ package duke.exception;
  * Exceptions that are specific to Duke.
  */
 public class DukeException extends Exception {
+    private String message;
     /**
      * Constructor for DukeException.
      *
@@ -11,6 +12,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String message) {
         super(message);
+        this.message = message;
     }
 
     /**
@@ -21,6 +23,10 @@ public class DukeException extends Exception {
     @Override
     public String getMessage() {
         return "OOPS! " + super.getMessage();
+    }
+
+    public String printError() {
+        return this.message;
     }
 
 }

@@ -1,7 +1,6 @@
 package duke.storage;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -131,12 +130,32 @@ public class Storage {
                 currLine = bufReader.readLine();
             }
             bufReader.close();
-        } catch (FileNotFoundException e) {
-            throw new DukeException(e.getMessage());
+            return taskList;
+
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
-        } finally {
-            return taskList;
+        }
+    }
+
+    /**
+     * Check if the directory, data and the text file exists.
+     * @param filePath
+     */
+    public void checkPathExists(String filePath) {
+        Path dataDir = Paths.get("ip/data");
+        Path dataFile = Paths.get("ip/data/tasks.txt");
+        try {
+            if (!Files.isDirectory(dataDir)) {
+                Files.createDirectories(dataDir);
+                Files.createFile(dataFile);
+            } else {
+                // if directory exist, check if duke.txt exists
+                if (!Files.exists(dataFile)) {
+                    Files.createFile(dataFile);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -148,19 +167,8 @@ public class Storage {
      */
 
     public void update(Task task) throws IOException {
-        Path dataDir = Paths.get("ip/data");
         Path dataFile = Paths.get("ip/data/tasks.txt");
-
-        // directory does not exists
-        if (!Files.isDirectory(dataDir)) {
-            Files.createDirectory(dataDir);
-            Files.createFile(dataFile);
-        } else {
-            // if directory exist, check if duke.txt exists
-            if (!Files.exists(dataFile)) {
-                Files.createFile(dataFile);
-            }
-        }
+        checkPathExists(filePath);
 
         assert Files.exists(dataFile) : "tasks.txt file should be created";
         FileWriter writer = new FileWriter("ip/data/tasks.txt", true);
@@ -189,15 +197,11 @@ public class Storage {
             String line = bufReader.readLine();
 
             while (line != null) {
-                if (currLine == taskNum) {
-                    line = bufReader.readLine();
-                    currLine++;
-                    continue;
-                } else {
+                if (currLine != taskNum) {
                     writerToTempFile.write(line + "\n");
-                    line = bufReader.readLine();
-                    currLine++;
                 }
+                line = bufReader.readLine();
+                currLine++;
             }
             bufReader.close();
             writerToTempFile.close();

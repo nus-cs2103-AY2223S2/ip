@@ -65,6 +65,11 @@ public class Duke {
                 ui.showLine();
             } catch (NullPointerException e) {
                 continue;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Invalid command! Use command 'help' to see the commands available for use :)");
+                continue;
+            } catch (DukeException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -84,12 +89,16 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         if (!isExit) {
-            Command c = Parser.parse(input);
-            assert c != null : "command should not be null";
-            isExit = c.isExit();
-            return c.execute(tasks, ui, storage);
+            try {
+                Command c = Parser.parse(input);
+                assert c != null : "command should not be null";
+                isExit = c.isExit();
+                return c.execute(tasks, ui, storage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return "Invalid command! Use command 'help' to see the commands available for use :)";
+            }
         } else {
             return ui.exit();
         }

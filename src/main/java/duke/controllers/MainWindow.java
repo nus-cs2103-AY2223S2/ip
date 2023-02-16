@@ -3,6 +3,7 @@ package duke.controllers;
 import java.time.LocalDateTime;
 
 import duke.Duke;
+import duke.exception.DukeException;
 import duke.task.Reminder;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
@@ -65,7 +66,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

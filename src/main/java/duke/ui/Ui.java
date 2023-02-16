@@ -58,7 +58,7 @@ public class Ui {
      *
      * @param errorMsg
      */
-    public String showError(String errorMsg) {
+    public static String showError(String errorMsg) {
         return errorMsg;
     }
 
@@ -88,6 +88,10 @@ public class Ui {
      */
     public String showListMessage() {
         return "Here are the tasks in your list:";
+    }
+
+    public String showEmptyListMessage() {
+        return "No tasks created yet!!";
     }
 
     /**

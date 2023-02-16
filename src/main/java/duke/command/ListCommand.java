@@ -23,6 +23,11 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         int counter = 1;
         String currList = "\n";
+
+        if (tasks.getLength() == 0) {
+            return ui.showEmptyListMessage();
+        }
+
         for (int i = 0; i < tasks.getLength(); i++) {
             currList = currList + counter + "." + tasks.getTask(i).toString() + "\n";
             counter++;
