@@ -14,6 +14,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+import duke.command.UpdateCommand;
 
 public class ParserTest {
     @Test
@@ -47,6 +48,7 @@ public class ParserTest {
             assertTrue(find instanceof FindCommand);
 
             Command updateTodo = Parser.parse("update 6 /name:run");
+            assertTrue(updateTodo instanceof UpdateCommand);
 
         } catch (duke.DukeException e) {
             System.out.println(e.toString());
@@ -82,6 +84,9 @@ public class ParserTest {
 
             Command find = Parser.parse("finD food");
             assertTrue(find instanceof FindCommand);
+
+            Command updateTodo = Parser.parse("uPDAte 6 /name:run");
+            assertTrue(updateTodo instanceof UpdateCommand);
 
         } catch (duke.DukeException e) {
             System.out.println(e.toString());
