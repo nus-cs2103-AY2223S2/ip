@@ -57,6 +57,7 @@ public class Events extends Task {
      * @param isDone The boolean showing if the Task has been done.
      * @param startTime The start time of the Event Task.
      * @param endTime The end time of the Event Task.
+     * @return The event object.
      */
     public static Events createEvents(String description, boolean isDone, String startTime, String endTime) {
         // Attempt to interpret the duration as a LocalDateTime object.

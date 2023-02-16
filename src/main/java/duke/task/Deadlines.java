@@ -44,6 +44,7 @@ public class Deadlines extends Task {
      * @param description The description of the Task.
      * @param isDone The boolean showing if the Task has been done.
      * @param deadline The due date of the Task.
+     * @return The Deadline object
      */
     public static Deadlines createDeadlines(String description, boolean isDone, String deadline) {
         // Attempt to interpret the due date as a LocalDateTime object.

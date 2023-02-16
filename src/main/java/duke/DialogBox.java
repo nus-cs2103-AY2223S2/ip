@@ -1,5 +1,7 @@
 package duke;
 
+import static javafx.geometry.Pos.TOP_LEFT;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -18,7 +20,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 
-import static javafx.geometry.Pos.*;
 
 /**
  * An example of a custom control using FXML.
@@ -27,6 +28,13 @@ import static javafx.geometry.Pos.*;
  * Taken From: https://se-education.org/guides/tutorials/javaFxPart4.html
  */
 public class DialogBox extends HBox {
+
+    private static final int X_PADDING = 30;
+
+    private static final int Y_PADDING = 40;
+
+    private static final int EDGE_RADIUS = 25;
+
     @FXML
     private Label dialog;
     @FXML
@@ -35,12 +43,6 @@ public class DialogBox extends HBox {
     private Rectangle textBubble;
     @FXML
     private SVGPath textTriangle;
-
-    private final int X_PADDING = 30;
-
-    private final int Y_PADDING = 40;
-
-    private final int EDGE_RADIUS = 25;
 
     private DialogBox(String text, Image img) {
         try {
