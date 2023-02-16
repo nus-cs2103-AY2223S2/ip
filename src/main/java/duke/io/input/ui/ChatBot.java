@@ -22,7 +22,7 @@ import duke.workflow.Greeting;
  *
  */
 
-public class UserInteraction {
+public class ChatBot {
     /**
      * Print out Duke's logo.
      */
@@ -70,8 +70,6 @@ public class UserInteraction {
         return toPrintOut;
     }
 
-
-
     /**
      * Print a specified {@code String} input wrapped
      * in a styled box.
@@ -107,43 +105,33 @@ public class UserInteraction {
     public void chatBegin() {
         Scanner sc = new Scanner(System.in);
         Greeting greeting = new Greeting();
-        UserInteraction.printWithBracket(greeting.toString());
-        String isPlaying = sc.nextLine();
-        if (isPlaying.equals("NO")) {
-            greeting = new Greeting(0);
-            Event nextEvent = greeting.toNext();
-            UserInteraction.printWithBracket(nextEvent.toString());
-        } else if (isPlaying.equals("YES")) {
-            greeting = new Greeting(1);
-            Event nextEvent = greeting.toNext();
-            UserInteraction.printWithBracket(nextEvent.toString());
-            while (nextEvent.getStatus() == false) {
-                nextEvent = nextEvent.toNext();
-                UserInteraction.printWithBracket(nextEvent.toString());
+        ChatBot.printWithBracket(greeting.greet());
+        String isUsingDuke = sc.nextLine();
+
+        while (!isUsingDuke.equals("YES") && !isUsingDuke.equals("NO")) {
+            ChatBot.printWithBracket("FOCUS, HUMAN. "
+                    + "YOU ARE TO ENTER INPUT WITH FULL CAPS.");
+            isUsingDuke = sc.nextLine();
+        }
+
+        if (isUsingDuke.equals("NO")) {
+            greeting.setStatus("NOT PLAYING");
+            Event nextEvent = greeting.toNextEvent();
+            ChatBot.printWithBracket(nextEvent.toString());
+        } else if (isUsingDuke.equals("YES")) {
+            greeting.setStatus("PLAYING");
+            Event nextEvent = greeting.toNextEvent();
+            ChatBot.printWithBracket(nextEvent.toString());
+
+            while (!nextEvent.isFinalEvent()) {
+                nextEvent = nextEvent.toNextEvent();
+                ChatBot.printWithBracket(nextEvent.toString());
             }
+
             System.out.println("SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ");
             String isSaving = sc.nextLine();
             if (isSaving.equals("YES")) {
                 Storage.saveProgress(nextEvent.getTaskList());
-            }
-        } else {
-            while (!isPlaying.equals("YES") && !isPlaying.equals("NO")) {
-                UserInteraction.printWithBracket("FOCUS, HUMAN. "
-                        + "YOU ARE TO ENTER INPUT WITH FULL CAPS.");
-                isPlaying = sc.nextLine();
-            }
-            if (isPlaying.equals("NO")) {
-                greeting = new Greeting(0);
-                Event end = greeting.toNext();
-                UserInteraction.printWithBracket(end.toString());
-            } else {
-                greeting = new Greeting(1);
-                Event nextEvent = greeting.toNext();
-                UserInteraction.printWithBracket(nextEvent.toString());
-                while (nextEvent.getStatus() == false) {
-                    nextEvent = nextEvent.toNext();
-                    UserInteraction.printWithBracket(nextEvent.toString());
-                }
             }
         }
     }

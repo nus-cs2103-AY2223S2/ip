@@ -24,7 +24,7 @@ import duke.util.service.ToDo;
  */
 
 public class DoTask extends Event {
-    private boolean firstGreet;
+    private boolean firstTimeUsing;
     private String lastCommand;
     private TaskList taskList;
     private Task removedTask;
@@ -37,7 +37,7 @@ public class DoTask extends Event {
      */
     public DoTask() {
         super(false);
-        this.firstGreet = true;
+        this.firstTimeUsing = true;
         this.lastCommand = "";
         this.taskList = new TaskList();
         this.storage = new Storage();
@@ -50,7 +50,7 @@ public class DoTask extends Event {
      * @return a new event that follows from the last user input
      */
 
-    public Event toNext() {
+    public Event toNextEvent() {
         Scanner sc = new Scanner(System.in);
         String nextTask = sc.nextLine();
         if (nextTask.equals("BYE")) {
@@ -59,28 +59,30 @@ public class DoTask extends Event {
             try {
                 UserInputException.checkUserInput(nextTask, this.taskList.getSize());
                 if (nextTask.equals("LIST")) {
-                    this.firstGreet = false;
+                    this.firstTimeUsing = false;
                     this.lastCommand = nextTask;
                     return this;
                 } else {
                     String[] command = nextTask.split(" ");
                     List<String> words = Arrays.asList(command);
                     if (words.get(0).equals("MARK")) {
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = nextTask;
                         this.taskList = this.taskList.markDone(Integer.valueOf(words.get(1)) - 1);
+                        assert (this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).getStatus() == true);
                         return this;
                     }
                     if (words.get(0).equals("UNMARK")) {
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = nextTask;
                         this.taskList = this.taskList.unMark(Integer.valueOf(words.get(1)) - 1);
+                        assert (this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).getStatus() == false);
                         return this;
                     }
                     if (words.get(0).equals("TODO")) {
                         String[] toDoTask = nextTask.split("TODO ");
                         List<String> toDoAction = Arrays.asList(toDoTask);
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = toDoAction.get(1);
                         ToDo newTask = new ToDo(toDoAction.get(1));
                         this.taskList = this.taskList.addTask(newTask);
@@ -102,7 +104,7 @@ public class DoTask extends Event {
                         for (String i : words) {
                             this.storage = this.storage.addToStorage(i, newTask);
                         }
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = deadlinePhraseList.get(1);
                         this.taskList = this.taskList.addTask(newTask);
                         return this;
@@ -126,13 +128,13 @@ public class DoTask extends Event {
                         for (String i : words) {
                             this.storage = this.storage.addToStorage(i, newTask);
                         }
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = eventPhraseList.get(1);
                         this.taskList = this.taskList.addTask(newTask);
                         return this;
                     }
                     if (words.get(0).equals("DELETE")) {
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
                         String[] splitRemovedTask = this.removedTask.toString().split(" ");
                         List<String> removedTaskArray = Arrays.asList(splitRemovedTask);
@@ -147,7 +149,7 @@ public class DoTask extends Event {
                         String[] toFind = nextTask.split("FIND ");
                         List<String> keywords = Arrays.asList(toFind);
                         TaskList findList = this.storage.getTaskList(keywords.get(1));
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.foundList = findList;
                         this.lastCommand = nextTask;
                         return this;
@@ -169,20 +171,20 @@ public class DoTask extends Event {
             try {
                 UserInputException.checkUserInput(nextTask, this.taskList.getSize());
                 if (nextTask.equals("LIST")) {
-                    this.firstGreet = false;
+                    this.firstTimeUsing = false;
                     this.lastCommand = nextTask;
                     return this;
                 } else {
                     String[] command = nextTask.split(" ");
                     List<String> words = Arrays.asList(command);
                     if (words.get(0).equals("MARK")) {
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = nextTask;
                         this.taskList = this.taskList.markDone(Integer.valueOf(words.get(1)) - 1);
                         return this;
                     }
                     if (words.get(0).equals("UNMARK")) {
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = nextTask;
                         this.taskList = this.taskList.unMark(Integer.valueOf(words.get(1)) - 1);
                         return this;
@@ -190,7 +192,7 @@ public class DoTask extends Event {
                     if (words.get(0).equals("TODO")) {
                         String[] toDoTask = nextTask.split("TODO ");
                         List<String> toDoAction = Arrays.asList(toDoTask);
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = toDoAction.get(1);
                         ToDo newTask = new ToDo(toDoAction.get(1));
                         this.taskList = this.taskList.addTask(newTask);
@@ -212,7 +214,7 @@ public class DoTask extends Event {
                         for (String i : words) {
                             this.storage = this.storage.addToStorage(i, newTask);
                         }
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = deadlinePhraseList.get(1);
                         this.taskList = this.taskList.addTask(newTask);
                         return this;
@@ -236,13 +238,13 @@ public class DoTask extends Event {
                         for (String i : words) {
                             this.storage = this.storage.addToStorage(i, newTask);
                         }
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.lastCommand = eventPhraseList.get(1);
                         this.taskList = this.taskList.addTask(newTask);
                         return this;
                     }
                     if (words.get(0).equals("DELETE")) {
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
                         String[] splitRemovedTask = this.removedTask.toString().split(" ");
                         List<String> removedTaskArray = Arrays.asList(splitRemovedTask);
@@ -257,7 +259,7 @@ public class DoTask extends Event {
                         String[] toFind = nextTask.split("FIND ");
                         List<String> keywords = Arrays.asList(toFind);
                         TaskList findList = this.storage.getTaskList(keywords.get(1));
-                        this.firstGreet = false;
+                        this.firstTimeUsing = false;
                         this.foundList = findList;
                         this.lastCommand = nextTask;
                         return this;
@@ -273,63 +275,66 @@ public class DoTask extends Event {
     }
 
 
-
-
-
-
     public TaskList getTaskList() {
         return this.taskList;
+    }
+
+    public String printMarkedItem(int index) {
+        String toPrintOut = "";
+        toPrintOut += "MARKED. ONE STEP CLOSER..." + '\n';
+        toPrintOut += this.taskList.getTask(index).toString() + '\n';
+        return toPrintOut;
     }
 
     @Override
     public String toString() {
         String toPrintOut = "";
-        if (this.firstGreet) {
+        if (this.firstTimeUsing) {
             toPrintOut += "INTERESTING. VERY INTERESTING. WHAT'S YOUR PLANS?";
+        } else if (lastCommand.equals("LIST")) {
+            toPrintOut += this.taskList.toString();
         } else {
-            if (lastCommand.equals("LIST")) {
-                toPrintOut += this.taskList.toString();
-            } else {
-                String[] command = lastCommand.split(" ");
-                List<String> words = Arrays.asList(command);
-                if (words.get(0).equals("MARK")) {
-                    toPrintOut += "MARKED. ONE STEP CLOSER..." + '\n';
-                    toPrintOut += this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).toString() + '\n';
-                } else if (words.get(0).equals("UNMARK")) {
-                    toPrintOut += "HAVING OTHER PLANS I SEE..." + '\n';
-                    toPrintOut += this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).toString() + '\n';
-                } else if (words.get(0).equals("DELETE")) {
-                    toPrintOut += "KABOOM. GONE. REDUCED TO ATOMS. HOW EXCITING!" + '\n';
-                    toPrintOut += '\n' + "TASK " + this.removedTask.toString() + " NO LONGER EXISTED" + '\n';
-                    int numberOfTasks = this.taskList.getSize();
-                    if (numberOfTasks > 1) {
-                        toPrintOut += numberOfTasks + " TASKS LEFT. BETTER HURRY." + '\n';
-                    } else {
-                        toPrintOut += "ONLY " + numberOfTasks + " TASK LEFT. BORING DAYS AHEAD." + '\n';
-                    }
-                } else if (words.get(0).equals("FIND")) {
-                    toPrintOut += "YOU'RE STARTING TO FORGET..." + '\n';
-                    if (this.foundList.getSize() == 0) {
-                        toPrintOut += "THIS WAS NEVER IN YOUR PLANS";
-                    } else {
-                        toPrintOut += '\n' + "LET ME REMIND YOU OF WHAT YOU STARTED" + '\n';
-                        for (int i = 0; i < this.foundList.getSize(); i++) {
-                            toPrintOut += this.foundList.getTask(i).toString() + '\n';
-                        }
-                    }
+            String[] command = lastCommand.split(" ");
+            List<String> commandWords = Arrays.asList(command);
+
+            if (commandWords.get(0).equals("MARK")) {
+                int index = Integer.valueOf(commandWords.get(1)) - 1;
+                toPrintOut += printMarkedItem(index);
+            } else if (commandWords.get(0).equals("UNMARK")) {
+                toPrintOut += "HAVING OTHER PLANS I SEE..." + '\n';
+                toPrintOut += this.taskList.getTask(Integer.valueOf(commandWords.get(1)) - 1).toString() + '\n';
+            } else if (commandWords.get(0).equals("DELETE")) {
+                toPrintOut += "KABOOM. GONE. REDUCED TO ATOMS. HOW EXCITING!" + '\n';
+                toPrintOut += '\n' + "TASK " + this.removedTask.toString() + " NO LONGER EXISTED" + '\n';
+                int numberOfTasks = this.taskList.getSize();
+                if (numberOfTasks > 1) {
+                    toPrintOut += numberOfTasks + " TASKS LEFT. BETTER HURRY." + '\n';
                 } else {
-                    toPrintOut += "SO YOU WANT TO ADD " + '"' + this.lastCommand + '"' + ". VERY WELL..." + '\n';
-                    toPrintOut += '\n' + "ADDED: " + lastCommand + '\n';
-                    int numberOfTasks = this.taskList.getSize();
-                    if (numberOfTasks > 1) {
-                        toPrintOut += numberOfTasks + " TASKS. BETTER HURRY." + '\n';
-                    } else {
-                        toPrintOut += "ONLY " + numberOfTasks + " TASK. BORING DAYS AHEAD." + '\n';
-                    }
-                    toPrintOut += '\n' + "WHAT ELSE?";
+                    toPrintOut += "ONLY " + numberOfTasks + " TASK LEFT. BORING DAYS AHEAD." + '\n';
                 }
+            } else if (commandWords.get(0).equals("FIND")) {
+                toPrintOut += "YOU'RE STARTING TO FORGET..." + '\n';
+                if (this.foundList.getSize() == 0) {
+                    toPrintOut += "THIS WAS NEVER IN YOUR PLANS";
+                } else {
+                    toPrintOut += '\n' + "LET ME REMIND YOU OF WHAT YOU STARTED" + '\n';
+                    for (int i = 0; i < this.foundList.getSize(); i++) {
+                        toPrintOut += this.foundList.getTask(i).toString() + '\n';
+                    }
+                }
+            } else {
+                toPrintOut += "SO YOU WANT TO ADD " + '"' + this.lastCommand + '"' + ". VERY WELL..." + '\n';
+                toPrintOut += '\n' + "ADDED: " + lastCommand + '\n';
+                int numberOfTasks = this.taskList.getSize();
+                if (numberOfTasks > 1) {
+                    toPrintOut += numberOfTasks + " TASKS. BETTER HURRY." + '\n';
+                } else {
+                    toPrintOut += "ONLY " + numberOfTasks + " TASK. BORING DAYS AHEAD." + '\n';
+                }
+                toPrintOut += '\n' + "WHAT ELSE?";
             }
         }
         return toPrintOut;
     }
 }
+
