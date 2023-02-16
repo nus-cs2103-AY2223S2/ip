@@ -47,9 +47,9 @@ public class Parser {
                 return new ByeCommand(fileManager);
             case "find":
                 return new FindCommand(inputArr[1]);
-            case "check":
+            case "mark":
                 return new MarkCommand(inputArr[1]);
-            case "uncheck":
+            case "unmark":
                 return new UnmarkCommand(inputArr[1]);
             case "delete":
                 return new DeleteCommand(inputArr[1]);
