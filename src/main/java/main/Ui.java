@@ -75,6 +75,11 @@ public class Ui {
         str.append(t + "\n");;
     }
 
+    public void outputAddRecurrence(Task t) {
+        str.append("Noted. I've added recurrence for this task:\n");
+        str.append(t + "\n");;
+    }
+
     /**
      * Outputs details of all the tasks.
      * @param taskList List of tasks.

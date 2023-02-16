@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
-    private final LocalDate dueDate;
+    private LocalDate dueDate;
 
     /**
      * Constructs Deadline.
@@ -23,13 +23,18 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    @Override
+    public void refresh() {
+        super.refresh();
+        dueDate = getNextDate(dueDate);
+    }
     /**
      * Returns the details of the deadline task to be written in file.
      *
      * @return Details of deadline task.
      */
     public String toText() {
-        return "D" + "|" + getDescription() + "|" + (isDone() ? 1 : 0) + "|" + dueDate;
+        return "D" + "|" + super.toText() + "|" + dueDate;
     }
 
     /**
