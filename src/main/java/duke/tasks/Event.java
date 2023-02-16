@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.DateHandler;
+import duke.logic.DateHandler;
 import duke.exceptions.DukeEmptyInputException;
 import duke.exceptions.DukeInvalidInputException;
 

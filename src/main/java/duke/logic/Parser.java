@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import duke.commands.Command;
 import duke.exceptions.DukeUnknownInputException;

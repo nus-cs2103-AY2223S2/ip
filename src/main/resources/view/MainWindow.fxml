@@ -5,14 +5,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<!--Adapted from https://github.com/elizabethhky/ip/blob/master/src/main/resources/view/MainWindow.fxml-->
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="duke.gui.MainWindow" style="-fx-background-color: #FFF8FF;">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" maxWidth="1.7976931348623157E308" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0"
+                   AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="70.0"
+                   promptText="Enter commands here..."
+                   style="-fx-background-radius: 0.5; -fx-background-color: #D5CFE8; -fx-text-fill: #000000;
+                   -fx-prompt-text-fill: #000000;"/>
+        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
+                AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0"
+                prefHeight="41.0" prefWidth="76.0" style="-fx-background-radius: 0.5; -fx-background-color: #E8D5CF;
+                -fx-text-fill: #000000;" text="Enter">
+            <font>
+                <Font size="13.0" name="Helvetica"/>
+            </font>
+        </Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0"
+                    vvalue="1.0" style="-fx-background-color: #FFF8FF;" fitToWidth="true"
+                    AnchorPane.leftAnchor="1.0" AnchorPane.bottomAnchor="41.0"
+                    AnchorPane.topAnchor="1.0" AnchorPane.rightAnchor="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0"/>
             </content>
         </ScrollPane>
     </children>

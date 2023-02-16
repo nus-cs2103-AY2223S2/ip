@@ -2,9 +2,9 @@ package duke.commands;
 
 import duke.exceptions.DukeEmptyInputException;
 import duke.exceptions.DukeInvalidInputException;
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
+import duke.logic.TaskList;
+import duke.logic.Ui;
+import duke.logic.Storage;
 
 /**
  * Represents a command that can be executed by the program as a result of user input.

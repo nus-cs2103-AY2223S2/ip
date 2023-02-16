@@ -2,6 +2,10 @@ package duke;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
+import duke.logic.Parser;
+import duke.logic.Storage;
+import duke.logic.TaskList;
+import duke.logic.Ui;
 
 /**
  * Represents the Duke chatbot.
