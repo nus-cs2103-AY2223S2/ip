@@ -1,4 +1,4 @@
-[T][ ] buy groceries
-[D][ ] rf | Fri, 03/02/2023, 11:59 PM
-[D][ ] hf | Mon, 03/04/2023, 11:59 PM
-[D][ ] hfj | Sat, 04/03/2023, 11:59 PM
+[T][ ] lecture
+[T][X] lecture
+[D][X] test | Fri, 03/03/2023, 11:45 PM
+[D][ ] exam | Tue, 04/04/2023, 9:23 AM
