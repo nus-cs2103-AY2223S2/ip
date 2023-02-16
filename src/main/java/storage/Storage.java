@@ -39,11 +39,14 @@ public class Storage {
      */
     public TaskList load() {
         if (!file.exists()) {
-            System.out.println("cannot find file");
             try {
+                File directory = new File(this.file.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("error occurred");
+                System.out.println("unable to make new file");
             }
         }
         TaskList list = new TaskList();
@@ -109,7 +112,7 @@ public class Storage {
             }
             output.close();
         } catch (FileNotFoundException e) {
-            System.out.println("error occurred");
+            System.out.println("printWriter file");
         }
     }
 }
