@@ -1,18 +1,30 @@
 package duke;
 
-/**
- * Main class
- */
-public class Duke {
+import java.io.IOException;
 
-    /**
-     * All logic for duke to handle user input
-     * @throws DukeExceptions
-     */
-    public static void dukeHandleInput(String input) throws DukeExceptions {
-        Ui.intro();
-        Storage.createDataDir();
-        TaskList tasks = new TaskList(Storage.load());
-        tasks.handleInput(input);
+import duke.javafx.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+/**
+ * A GUI for Duke using FXML.
+ */
+public class Duke extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
