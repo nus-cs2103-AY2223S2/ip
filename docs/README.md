@@ -2,13 +2,15 @@
 
 ## Features
 
-### Feature-ABC
+### Adding Different Task Types
+This app allows you add 3 different task types: a Todo item, a Deadline item and an Event item. 
+Supporting marking, searching and more, this app has got you covered in managing all the tasks
+you'll ever have!
 
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
+### Tagging
+In addition to simply creating tasks, you can also tag tasks as well! Simply by using the `/tag` flag 
+when creating your tasks, you can add tags to make your tasks more organised and neat. You can search 
+for your tags easily through the `find` command as well. 
 
 ## Usage
 
