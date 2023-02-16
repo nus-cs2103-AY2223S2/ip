@@ -20,6 +20,7 @@ public class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+        assert from.isBefore(to);
     }
 
     @Override
