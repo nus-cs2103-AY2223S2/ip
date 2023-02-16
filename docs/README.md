@@ -4,10 +4,10 @@ The Knight is a chat bot which is designed to help free you from life's smallest
 
 Be grateful, for the Knight helps anyone, even orcs.
 
-1. [Quick Start][#quick-start]
-2. [Features][#features]
-3. [Usage][#usage]
-4. [Summary][#summary]
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+3. [Usage](#usage)
+4. [Summary](#summary)
 
 ## Quick Start
 Ready to remember less, and achieve more?
