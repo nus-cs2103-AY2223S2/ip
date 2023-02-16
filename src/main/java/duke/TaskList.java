@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.lang.StringBuilder;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Represents the list that contains the tasks of the chat bot.
@@ -16,13 +17,15 @@ import java.util.ArrayList;
  */
 public class TaskList {
     /** List to store the tasks. */
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
+    private final HashSet<Task> unique;
 
     /**
      * Initialises the tasklist by creating a new list to store the tasks.
      */
     public TaskList() {
         this.list = new ArrayList<>();
+        this.unique = new HashSet<>();
     }
 
     /**
@@ -32,6 +35,9 @@ public class TaskList {
      * @return A response acknowledging the addition of a task.
      */
     public String add(Task t) {
+        if (!unique.add(t)) {
+            return "Perhaps you forgot, but you've already added this task!";
+        }
         list.add(t);
         int size = list.size();
         return String.format("Sure no problem. I've added this task:\n\t%s\nNow you have %d task%s in the list",
@@ -105,6 +111,7 @@ public class TaskList {
         try {
             int index = Integer.parseInt(input.trim());
             Task removed = list.remove(index - 1);
+            unique.remove(removed);
             int size = list.size();
             return String.format("Sure thing. This task has been deleted:\n\t%s\nNow you have %d task%s in the list",
                     removed, size, size == 1 ? "" : "s");
@@ -137,7 +144,7 @@ public class TaskList {
      */
     public void loadTask(String taskText) {
         try {
-            list.add(Task.fromText(taskText));
+            this.add(Task.fromText(taskText));
         } catch (DukeException e) {
             System.out.println("Text is formatted wrongly");
         }
