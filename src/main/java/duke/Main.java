@@ -18,6 +18,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("The Karen");
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             String greetingMessage = duke.getGreetingMessage();
