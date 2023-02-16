@@ -101,4 +101,8 @@ public class Cbot {
             return Talker.warnTime();
         }
     }
+
+    private void hug(Object obj) {
+        // cbot gives obj a hug :)
+    }
 }

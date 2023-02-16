@@ -28,7 +28,7 @@ Well, here's the solution you need!
 
 ---
 
-## Usage
+## Commands
 
 ### `bye` - Close Cbot
 
