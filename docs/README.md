@@ -36,7 +36,7 @@ Saturday has a lot of cool commands to help you get things organized and have fu
 ---
 A **ToDo** has **no timeframe**.
 <p align="center">
-  <img width="640" src="ip/assets/todo.png">
+  <img width="640" src="/ip/assets/todo.png">
 </p>
 
 ```
@@ -47,7 +47,7 @@ todo {task description}
 ---
 A **Deadline** has **one deadline timeframe**.
 <p align="center">
-  <img width="640" src="ip/assets/deadline.png">
+  <img width="640" src="/ip/assets/deadline.png">
 </p>
 
 ```
