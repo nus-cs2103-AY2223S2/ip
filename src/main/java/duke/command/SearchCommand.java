@@ -3,6 +3,9 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Models a Search command issued.
+ */
 public class SearchCommand extends Command {
 
     private String searchString;

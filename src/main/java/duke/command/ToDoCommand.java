@@ -3,6 +3,9 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Models a ToDo command issued.
+ */
 public class ToDoCommand extends Command {
 
     private String taskDesc;

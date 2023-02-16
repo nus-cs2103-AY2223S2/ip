@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Models a Mark command issued.
+ */
 public class MarkCommand extends Command {
 
     private int index;

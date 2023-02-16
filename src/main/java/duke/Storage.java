@@ -31,16 +31,6 @@ public class Storage {
         filePath = Paths.get(home, "data", s);
     }
 
-    //TODO: Just a test, will remove later
-    public void dirTest() {
-        try {
-            dukeDataFile = new File(filePath.toString());
-            FileUtils.write(dukeDataFile, "Test\ning");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * This method loads the tasks in storage to TaskList.
      *

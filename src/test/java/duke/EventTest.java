@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
@@ -13,7 +13,8 @@ public class EventTest {
 
     @Test
     public void addTest2() {
-        assertEquals("[E][X] UNICON (from: Monday to: Tuesday)", new Event("UNICON", "Monday", "Tuesday", true).toString());
+        assertEquals("[E][X] UNICON (from: Monday to: Tuesday)",
+                new Event("UNICON", "Monday", "Tuesday", true).toString());
     }
 
 }

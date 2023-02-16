@@ -3,12 +3,19 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Models a Event command issued.
+ */
 public class EventCommand extends Command {
 
     private String taskDesc;
     private String taskStartTime;
     private String taskEndTime;
 
+    /**
+     * Constructor for the Event Command
+     * @param commandParams The parameter to pass to Event command.
+     */
     public EventCommand(String commandParams) {
         String[] eventDescArr = commandParams.split(" /from ");
         this.taskDesc = eventDescArr[0];

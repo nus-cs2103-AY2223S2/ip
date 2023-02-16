@@ -124,7 +124,7 @@ public class TaskList {
      * @return String representation of the newest task added as String.
      */
     public String returnNewestTaskAsString() {
-       return "Task added:\n"
+        return "Task added:\n"
                 + tasks.get(tasks.size() - 1)
                 + "\nTotal task now: "
                 + tasks.size();

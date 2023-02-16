@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Models a Delete command issued.
+ */
 public class DeleteCommand extends Command {
 
     private int index;

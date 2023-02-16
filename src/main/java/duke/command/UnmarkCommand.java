@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Models a Unmark command issued.
+ */
 public class UnmarkCommand extends Command {
 
     private int index;

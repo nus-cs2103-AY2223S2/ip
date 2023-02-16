@@ -3,6 +3,9 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Models a List command issued.
+ */
 public class ListCommand extends Command {
 
     public ListCommand() {
