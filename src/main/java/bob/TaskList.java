@@ -99,6 +99,19 @@ public class TaskList {
         return filteredTasks;
     }
 
+    public ArrayList<Deadline> getReminders() {
+        ArrayList<Deadline> reminders = new ArrayList<>();
+
+        for (Task t: list) {
+            // Check for Deadlines
+            if (t instanceof Deadline) {
+                reminders.add((Deadline) t);
+            }
+        }
+
+        return reminders;
+    }
+
     public ArrayList<Task> getList() {
         return this.list;
     }

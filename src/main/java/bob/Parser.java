@@ -68,11 +68,11 @@ public class Parser {
     // Command: deadline <description> /by <deadline>
     private static boolean isDeadline(String s) {
         String[] splitCommand = s.split(" /by ");
-        String[] command_desc = splitCommand[0].split(" ", 2);
+        String[] commandAndDescription = splitCommand[0].split(" ", 2);
 
         return splitCommand.length == 2
-                && command_desc.length == 2
-                && command_desc[0].equals("deadline")
+                && commandAndDescription.length == 2
+                && commandAndDescription[0].equals("deadline")
                 && isDate(splitCommand[1]);
     }
 

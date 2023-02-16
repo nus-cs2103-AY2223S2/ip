@@ -17,6 +17,16 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Checks if deadline is overdue with respect to today's date
+     */
+    public boolean isOverdue() {
+        LocalDate today = LocalDate.now();
+        boolean isNotDone = !this.isDone;
+        boolean isOverdue = today.isAfter(this.deadline);
+        return isNotDone && isOverdue;
+    }
+
     /** String representation of a Deadline task */
     @Override
     public String toString() {

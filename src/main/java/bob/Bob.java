@@ -36,7 +36,7 @@ public class Bob extends Application {
         tasks = new TaskList();
     }
 
-    private String handleList(String input) {
+    private String handleList() {
         return ui.printTasks(tasks.getList());
     }
 
@@ -53,7 +53,7 @@ public class Bob extends Application {
     }
 
     private String handleDeadline(String input) throws BobException {
-        Task t = Parser.parseEvent(input);
+        Task t = Parser.parseDeadline(input);
         tasks.add(t);
         return ui.printTaskAdded(t);
     }
@@ -70,7 +70,7 @@ public class Bob extends Application {
 
     private String handleDelete(String input) throws BobException {
         int index = Parser.parseIndex(input);
-        return ui.printDeleteTask(tasks.get(index));
+        return ui.printDeleteTask(tasks.delete(index));
     }
 
     private String handleFind(String input) throws BobException {
@@ -78,12 +78,15 @@ public class Bob extends Application {
         return ui.printFilteredTasks(tasks.find(keyword));
     }
 
+    private String handleRemind() {
+        return ui.printReminders(tasks.getReminders());
+    }
 
     private String getResponse(String input) {
         String response;
         try {
             if (input.equals("list")) {
-                response = handleList(input);
+                response = handleList();
             } else if (input.startsWith("todo")) {
                 response = handleTodo(input);
             } else if (input.startsWith("event")) {
@@ -98,6 +101,8 @@ public class Bob extends Application {
                 response = handleDelete(input);
             } else if (input.startsWith("find")) {
                 response = handleFind(input);
+            } else if (input.equals("remind")) {
+                response = handleRemind();
             } else { // Invalid command
                 throw new BobException("No valid command was entered!");
             }
@@ -146,8 +151,10 @@ public class Bob extends Application {
                 user,
                 bob
         );
-
+        
         userInput.clear();
+
+        // Save task list to data file after every input
         saveTasks();
     }
 
