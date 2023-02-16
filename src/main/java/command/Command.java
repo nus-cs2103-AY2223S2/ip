@@ -6,7 +6,7 @@ import main.TaskList;
 import main.Ui;
 
 /**
- * Takes in the details of a command and preform the command.
+ * Takes in the details of a command and performs the command.
  */
 public abstract class Command {
 
@@ -21,7 +21,7 @@ public abstract class Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {};
 
     /**
-     * Returns whether is it an exit command.
+     * Returns whether a command is an exit command.
      *
      * @return A boolean that represents whether the command is an exit command.
      */

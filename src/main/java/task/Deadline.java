@@ -23,6 +23,9 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Updates the due date of the deadline task to the next recurring date.
+     */
     @Override
     public void refresh() {
         super.refresh();

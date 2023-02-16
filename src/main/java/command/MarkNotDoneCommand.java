@@ -39,6 +39,12 @@ public class MarkNotDoneCommand extends Command {
         ui.outputMarkTaskNotDone(t);
     }
 
+    /**
+     * Checks if the index is within the bounds of the taskList.
+     *
+     * @param totalNumOfTasks The total number of task in the taskList.
+     * @return Return true is the index is out of bounds.
+     */
     public boolean isInvalidIndex(int totalNumOfTasks) {
         return index < 0 || index >= totalNumOfTasks;
     }

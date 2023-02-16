@@ -26,6 +26,9 @@ public class Event extends Task {
         assert endDate.isAfter(startDate) || endDate.isEqual(startDate) : "end date should not be before start date";
     }
 
+    /**
+     * Updates the starting date and the ending date of the event task to the next recurring date.
+     */
     @Override
     public void refresh() {
         super.refresh();

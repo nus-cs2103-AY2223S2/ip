@@ -25,7 +25,7 @@ public class Parser {
      *
      * @param command Message that user input.
      * @return Corresponding command.
-     * @throws DukeException Throws exception when user input invalid command.
+     * @throws DukeException Throws exception when user input invalid command or command with wrong format.
      */
     public static Command parse(String command) throws DukeException {
         try {
@@ -86,15 +86,27 @@ public class Parser {
         }
     }
 
-    private static boolean isInvalidDate(String time) {
+    /**
+     * Checks if the date input is correct.
+     *
+     * @param date Date input by user.
+     * @return Returns true if the date is invalid.
+     */
+    private static boolean isInvalidDate(String date) {
         try {
-            LocalDate.parse(time);
+            LocalDate.parse(date);
         } catch (DateTimeException e) {
             return true;
         }
         return false;
     }
 
+    /**
+     * Checks if the number that users input can be converted to Integers.
+     *
+     * @param s Input by users that should be converted to Integers.
+     * @return Returns true if the input is invalid.
+     */
     private static boolean isInvalidNumber(String s) {
         try {
             Integer.parseInt(s);
@@ -104,6 +116,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Converts the time input by users to a LocalDate.
+     *
+     * @param time Time input by users that should be converted to LocalDate.
+     * @return Returns the corresponding LocalDate from input.
+     */
     private static LocalDate convertStringToDate(String time) {
         return LocalDate.parse(time);
     }
