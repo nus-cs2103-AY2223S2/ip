@@ -77,7 +77,6 @@ public class Storage {
                     t.markAsDone();
                 }
                 arrayList.add(t);
-
             }
             if (parts[0].equals("D")) {
                 Task t = new Deadline(parts[2], LocalDateTime.parse(parts[3]));
@@ -107,7 +106,6 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
 
         for (int i = 0; i < tasks.getLength(); i++) {
-
             Task t = tasks.get(i);
             if (t instanceof Todo) {
                 fw.write("T/" + t.getStatusIconBinary() + "/" + t.getDescription());
@@ -119,9 +117,7 @@ public class Storage {
                 fw.write("E/" + t.getStatusIconBinary() + "/" + t.getDescription()
                         + "/" + ((Event) t).getFrom() + "/" + ((Event) t).getTo());
             }
-
             fw.write(System.lineSeparator());
-
         }
         fw.close();
     }

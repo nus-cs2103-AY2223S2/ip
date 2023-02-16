@@ -47,7 +47,9 @@ public class Duke  {
     }
 
     /**
-     * Runs the main program.
+     * Returns response of program as String given user input.
+     * @param answer User input.
+     * @return Response of Duke.
      */
     public String getResponse(String answer) {
 

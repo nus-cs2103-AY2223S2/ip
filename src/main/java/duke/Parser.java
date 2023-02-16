@@ -16,6 +16,9 @@ public class Parser {
 
     protected String answer;
 
+    /**
+     * Constructor for Parser object.
+     */
     public Parser() {}
     /**
      * Constructor for Parser object.

@@ -9,35 +9,43 @@ import duke.tasklist.TaskList;
  * Handles interaction with the user.
  */
 public class Ui {
+
+    /**
+     * Constructor for Ui.
+     */
     public Ui() {
 
     }
 
     /**
-     * Prints out the greeting when the program first runs.
+     * Returns string when user starts Duke.
+     * @return String of greeting.
      */
     public String showGreeting() {
         return "Meow I'm Toto! What can I do for you?";
     }
 
     /**
-     * Prints out note after user inputs bye.
+     * Returns string when user saves Duke.
+     * @return String of goodbye.
      */
     public String sayGoodbye() {
         return "Content is saved! Enter exit to quit the program, CATch you later!";
     }
 
     /**
-     * Prints out note after a task is marked.
+     * Returns string response when a task is marked.
      * @param task Task that is marked.
+     * @return String response.
      */
     public String showMarked(Task task) {
         return "I've marked this task as done: " + task;
     }
 
     /**
-     * Prints out note after a task is unmarked.
+     * Returns string response when a task is unmarked.
      * @param task Task that is unmarked.
+     * @return String response.
      */
     public String showUnmarked(Task task) {
         return "I've marked this task as not done yet: " + task;
@@ -52,8 +60,9 @@ public class Ui {
     }
 
     /**
-     * Prints out note after a task is added.
+     * Returns sting response of when a task is added.
      * @param task Task that is added.
+     * @return String response.
      */
     public String showAddTask(Task task) {
 
@@ -61,8 +70,9 @@ public class Ui {
     }
 
     /**
-     * Prints out error message when the program runs into an invalid input.
+     * Returns string response of when Duke encounters an error.
      * @param error Error message.
+     * @return String response.
      */
     public String showError(String error) {
         return error;
@@ -78,7 +88,7 @@ public class Ui {
     }
 
     /**
-     * Returns the string representation when the user archives all the tasks.
+     * Returns string representation when the user archives all the tasks.
      * @return String after user archives all tasks.
      */
     public String showArchivedAll() {
