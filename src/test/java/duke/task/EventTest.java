@@ -43,4 +43,18 @@ public class EventTest {
         assertEquals("9/01/2020 1200", event.getFrom());
         assertEquals("10/01/2020 1300", event.getTo());
     }
+
+    @Test
+    public void testEventEquals() {
+        Event event = new Event("test", "9/01/2020 1200", "10/01/2020 1300");
+        Event event2 = new Event("test", "9/01/2020 1200", "10/01/2020 1300");
+        assertEquals(event, event2);
+    }
+
+    @Test
+    public void testEventNotEquals() {
+        Event event = new Event("test", "9/01/2020 1200", "10/01/2020 1300");
+        Event event2 = new Event("test2", "9/01/2020 1200", "10/01/2020 1300");
+        assertEquals(false, event.equals(event2));
+    }
 }

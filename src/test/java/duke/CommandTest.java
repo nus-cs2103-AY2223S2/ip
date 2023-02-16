@@ -8,6 +8,7 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
 import duke.command.Command;
+import duke.command.FindTasksCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskCommand;
 import duke.command.RemoveTaskCommand;
@@ -59,5 +60,32 @@ public class CommandTest {
     public void testUnmarkCommand() {
         Command command = new UnmarkTaskCommand(1);
         assertEquals(command.toString(), "UnmarkTaskCommand{index=1}");
+    }
+
+    @Test
+    public void TestFindTasksCommand() {
+        Command command = new FindTasksCommand("test");
+        assertEquals(command.toString(), "FindTasksCommand{keyword=test}");
+    }
+
+    @Test
+    public void TestCommandEquality() {
+        Command command1 = new FindTasksCommand("test");
+        Command command2 = new FindTasksCommand("test");
+        assertEquals(command1, command2);
+    }
+
+    @Test
+    public void TestCommandInequality() {
+        Command command1 = new FindTasksCommand("test");
+        Command command2 = new FindTasksCommand("test2");
+        assertEquals(command1.equals(command2), false);
+    }
+
+    @Test
+    public void TestCommandInequalityWithDifferentClass() {
+        Command command1 = new FindTasksCommand("test");
+        Command command2 = new ListTasksCommand();
+        assertEquals(command1.equals(command2), false);
     }
 }

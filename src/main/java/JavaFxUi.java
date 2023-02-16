@@ -8,12 +8,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.*;
 import javafx.stage.Stage;
 
 /**

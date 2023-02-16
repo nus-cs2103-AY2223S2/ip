@@ -1,4 +1,5 @@
 package duke.task;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -40,5 +41,12 @@ public class DeadlineTest {
     public void testDeadlineGetDate() {
         Deadline deadline = new Deadline("test", "15/01/2020 1215");
         assertEquals("15/01/2020 1215", deadline.getDeadline());
+    }
+
+    @Test
+    public void testDeadlineEquals() {
+        Deadline deadline = new Deadline("test", "01/01/2020 1215");
+        Deadline deadline2 = new Deadline("test", "01/01/2020 1215");
+        assertEquals(deadline, deadline2);
     }
 }

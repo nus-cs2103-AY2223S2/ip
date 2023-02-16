@@ -29,4 +29,38 @@ public class ToDoTest {
         ToDo todo = new ToDo("test");
         assertEquals("[T][ ] test", todo.toString());
     }
+
+    @Test
+    public void testToDoDoneToString() {
+        ToDo todo = new ToDo("test");
+        todo.markAsDone();
+        assertEquals("[T][X] test", todo.toString());
+    }
+
+    @Test
+    public void testToDoToFileString() {
+        ToDo todo = new ToDo("test");
+        assertEquals("T | 0 | test", todo.toFileString());
+    }
+
+    @Test
+    public void testToDoDoneToFileString() {
+        ToDo todo = new ToDo("test");
+        todo.markAsDone();
+        assertEquals("T | 1 | test", todo.toFileString());
+    }
+
+    @Test
+    public void testToDoEquals() {
+        ToDo todo = new ToDo("test");
+        ToDo todo2 = new ToDo("test");
+        assertEquals(todo, todo2);
+    }
+
+    @Test
+    public void testToDoNotEquals() {
+        ToDo todo = new ToDo("test");
+        ToDo todo2 = new ToDo("test2");
+        assertFalse(todo.equals(todo2));
+    }
 }

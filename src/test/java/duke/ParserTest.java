@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import duke.command.AddDeadlineCommand;
 import duke.command.AddToDoCommand;
+import duke.command.FindTasksCommand;
 import duke.command.ListTasksCommand;
+import duke.command.MarkTaskCommand;
+import duke.command.RemoveTaskCommand;
 import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.ToDo;
-
-
 
 public class ParserTest {
     @Test
@@ -46,6 +47,20 @@ public class ParserTest {
     public void testParseCommand() throws DukeException {
         Parser parser = new Parser();
         assertEquals(parser.parseCommand("list"), new ListTasksCommand());
+    }
+
+    @Test
+    public void testParseInvalidCommand() {
+        Parser parser = new Parser();
+        assertThrows(DukeException.class, () -> parser.parseCommand("invalid"),
+                "I'm sorry, but I don't know what that means :-(");
+    }
+
+    @Test
+    public void testParseInvalidCommandWithArguments() {
+        Parser parser = new Parser();
+        assertThrows(DukeException.class, () -> parser.parseCommand("invalid test"),
+                "I'm sorry, but I don't know what that means :-(");
     }
 
 }
