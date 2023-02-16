@@ -54,41 +54,66 @@ Example of usage:
 
 Expected outcome:
 
+```
 Got it. I've added this task:
 [T][ ] see the sunrise
 Now you have 1 task in the list.
+```
 
-Add deadline: deadline
+### Add deadline: `deadline`
 Adds a deadline to the list of tasks.
 
 Command format:
 
-deadline [description] /by [due_date]
+`deadline [description] /by [due_date]`
 
-💡 Ensure due_date is [dd/MM/yy] [HHmm] 
+💡 Ensure `due_date` is `[dd-MM-yyyy] [HH:mm]` 
 
 Example of usage:
 
-deadline do ip /by 20/9/21 2359
+`deadline do the dishes /by 24-11-2023 12:00`
 
 Expected outcome:
 
-Nee added this task:
-  [D][ ] do ip (by: Sep 20 2021, 11:59 PM)
-Nee has 1 task in the list.
+```
+Got it. I've added this task:
+[D][ ] do the dishes (by: Nov 24 2023, 12:00 PM)
+Now you have 2 tasks in the list.
+```
 
-Add event: event
+### Add event: `event`
 Adds an event to the list of tasks.
 
 Command format:
 
-event [description] /at [time]
+`event [description] /from [start_date] /to [end date]`
 
-💡 Ensure time is [dd/MM/yy] [HHmm] 
+💡 Ensure `start_date` and `end_date` are `[dd-MM-yyyy] [HH:mm]` 
 
 Example of usage:
 
-event play ctf /at 20/9/21 2359
+`event watch football /from 24-11-2023 12:00 /to 24-11-2023 14:00`
+
+Expected outcome:
+
+```
+Got it. I've added this task:
+[E][ ] watch football (from: Nov 24 2023, 12:00 PM to Nov 24 2023, 2:00 PM)
+Now you have 3 tasks in the list.
+```
+
+### Add event: `Period Task`
+Adds an event to the list of tasks.
+
+Command format:
+
+`period [description] /from [start_date] /to [end_date]`
+
+💡 Ensure `start_date` and `end_date` are `[dd-MM-yyyy] [HH:mm]` 
+
+Example of usage:
+
+`period watch football /from 24-11-2023 12:00 /to 24-11-2023 14:00`
 
 Expected outcome:
 
