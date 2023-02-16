@@ -24,12 +24,12 @@ public enum Command {
     /** Marks the stipulated task as done. */
     MARK(CommandFunction::doMark,
             true, true,
-            "mark "),
+            "mark ", "x "),
 
     /** Catches MARK calls with no input. */
     MARK_BAD(CommandFunction::doNoInput,
             false, false,
-            "mark"),
+            "mark", "x"),
 
     /** Marks the stipulated task as not done. */
     UNMARK(CommandFunction::doUnmark,
@@ -44,42 +44,42 @@ public enum Command {
     /** Deletes the stipulated task from the list. */
     DELETE(CommandFunction::doDelete,
             true, true,
-            "del ", "delete ", "rem ", "remove ", "- "),
+            "delete ", "del ", "remove ", "rem ", "- "),
 
     /** Catches DELETE calls with no input. */
     DELETE_BAD(CommandFunction::doNoInput,
             false, false,
-            "del", "delete", "rem", "remove", "-"),
+            "delete", "del", "remove", "rem", "-"),
 
     /** Adds a To-Do task to the list. */
     TODO(CommandFunction::doTodo,
             true, true,
-            "td ", "todo ", "+ "),
+            "todo ", "td ", "t ", "+ "),
 
     /** Catches TODO calls with no input. */
     TODO_BAD(CommandFunction::doNoInput,
             false, false,
-            "td", "todo", "+"),
+            "todo", "td", "t", "+"),
 
     /** Adds a Deadline task to the list. */
     DEADLINE(CommandFunction::doDeadline,
             true, true,
-            "deadline ", "dl "),
+            "deadline ", "dl ", "d "),
 
     /** Catches DEADLINE calls with no input. */
     DEADLINE_BAD(CommandFunction::doNoInput,
             false, false,
-            "deadline", "dl"),
+            "deadline", "dl", "d"),
 
     /** Adds an Event task to the list. */
     EVENT(CommandFunction::doEvent,
             true, true,
-            "e ", "ev ", "event "),
+            "event ", "ev ", "e "),
 
     /** Catches EVENT calls with no input. */
     EVENT_BAD(CommandFunction::doNoInput,
             false, false,
-            "e", "ev", "event"),
+            "event", "ev", "e"),
 
     /** Sorts the list by date and description. */
     SORT(CommandFunction::doSort,
@@ -129,12 +129,12 @@ public enum Command {
     /** Changes the description of the selected task. */
     EDIT(CommandFunction::doEdit,
             true, true,
-            "edit ", "fix "),
+            "edit ", "change ", "fix "),
 
     /** Catches EDIT calls with no input. */
     EDIT_BAD(CommandFunction::doNoInput,
             false, false,
-            "edit", "fix");
+            "edit", "change", "fix");
 
     private final ThrowingBiFunction<TaskList, String, String> f;
     private final boolean hasText;

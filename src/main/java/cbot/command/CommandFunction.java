@@ -297,22 +297,26 @@ class CommandFunction {
 
         case "complete":
             // Fallthrough
+        case "completed":
+            // Fallthrough
         case "done":
             // Fallthrough
-        case "completed":
+        case "marked":
             // Fallthrough
         case "x":
             msg = "Ok! Here are the Tasks you've completed:\n";
             arrFilter = tl.listFilter(t -> t.getStatus().equals(Task.DONE_TRUE));
             break;
 
+        case "!done":
+            // Fallthrough
         case "incomplete":
             // Fallthrough
         case "not done":
             // Fallthrough
-        case "!done":
-            // Fallthrough
         case "undone":
+            // Fallthrough
+        case "unmarked":
             msg = "Ok! Here are the Tasks you haven't completed yet:\n";
             arrFilter = tl.listFilter(t -> t.getStatus().equals(Task.DONE_FALSE));
             break;
