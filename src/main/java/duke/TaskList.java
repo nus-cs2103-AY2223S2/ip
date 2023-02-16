@@ -1,9 +1,14 @@
 package duke;
 
+//import javafx.application.Application;
+//import javafx.scene.Scene;
+//import javafx.scene.control.Label;
+//import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 /**
- * A task list that handles operations from the user to manage their tasks and interact with the storage
+ * A task list that handles operations from the user to manage their tasks and interact with storage
  */
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -104,7 +109,7 @@ public class TaskList {
     /**
      * Takes in a user text input, processes it add a deadline task, and returns the response message
      *
-     * @param textInput the input message from the user
+     * @param parts the input message from the user
      * @return the response message to be printed
      */
     public String deadline(String... parts) {
@@ -116,7 +121,7 @@ public class TaskList {
     /**
      * Takes in a user text input, processes it add an event task, and returns the response message
      *
-     * @param textInput the input message from the user
+     * @param parts the input message from the user
      * @return the response message to be printed
      */
     public String event(String... parts) {
