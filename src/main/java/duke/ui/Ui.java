@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * Handles interactions with the user.
  */
 public class Ui {
-    private static final String SEPARATOR = "=========================\n";
+    private static final String SEPARATOR = "------------------------------------------\n";
 
     /**
      * Prints out the greeting for Fake Duke.
@@ -74,7 +74,7 @@ public class Ui {
     public static String getListOutput(TaskList taskList) throws DukeException {
         String str = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
-            str = String.format("%s%s%d.%s\n", str, SEPARATOR, i, taskList.getTask(i - 1).toString());
+            str = String.format("%s%s%d. %s\n", str, SEPARATOR, i, taskList.getTask(i - 1).toString());
         }
         return str;
     }
@@ -95,7 +95,7 @@ public class Ui {
     public static String getFindOutput(ArrayList<Task> foundTasks) {
         String str = "Here are the matching tasks in your list:\n";
         for (int i = 1; i <= foundTasks.size(); i++) {
-            str = String.format("%s%d.%s\n", str, i, foundTasks.get(i - 1));
+            str = String.format("%s%d. %s\n", str, i, foundTasks.get(i - 1));
         }
         return str;
     }
@@ -103,7 +103,7 @@ public class Ui {
     public static String getSortOutput(ArrayList<Task> filteredTasks) {
         String str = "Here are the matching tasks in your list:\n";
         for (int i = 1; i <= filteredTasks.size(); i++) {
-            str = String.format("%s%d.%s\n", str, i, filteredTasks.get(i - 1));
+            str = String.format("%s%d. %s\n", str, i, filteredTasks.get(i - 1));
         }
         return str;
     }
