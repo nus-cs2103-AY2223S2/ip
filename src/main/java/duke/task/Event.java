@@ -70,7 +70,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%c] %s\n(from: %s\nto: %s) %s", getStatusIcon(), description,
+        return String.format("[E][%c] %s\n(from: %s\nto: %s)%s", getStatusIcon(), description,
                 Ui.getStringDateTime(startDateTime), Ui.getStringDateTime(endDateTime),
                 super.getUrgentMessage(startDateTime));
     }

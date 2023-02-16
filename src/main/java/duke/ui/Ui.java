@@ -60,7 +60,7 @@ public class Ui {
         if (filteredTasks.size() > 0) {
             String str = "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= filteredTasks.size(); i++) {
-                str = String.format("%s%d. %s\n", str, i, filteredTasks.get(i - 1));
+                str = String.format("%s%s%d. %s\n", str, SEPARATOR, i, filteredTasks.get(i - 1));
             }
             return str;
         } else {
