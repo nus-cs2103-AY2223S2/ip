@@ -81,6 +81,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e);
         }
+        assert arrayList.size() >= 0;
         return arrayList;
     }
 
@@ -91,6 +92,7 @@ public class Storage {
      * @throws IOException if the file duke.txt is not found.
      */
     public void update_data(ArrayList<Task> arrayList) {
+        assert arrayList.size() >= 0;
         String data = "";
         try {
             FileWriter fw = new FileWriter(this.dataAddress);
