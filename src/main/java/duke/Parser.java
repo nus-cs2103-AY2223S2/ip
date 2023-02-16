@@ -13,17 +13,17 @@ import java.util.Scanner;
  * Executes the commands.
  */
 public class Parser {
-    private Scanner sc;
     private boolean parserIsDone;
+    private TaskList tasks;
 
     /**
      * Constructor to create a Parser object.
      *
-     * @param sc The Scanner that takes input from the user.
+     * @param tasks The Scanner that takes input from the user.
      */
-    public Parser(Scanner sc) {
-        this.sc = sc;
+    public Parser(TaskList tasks) {
         this.parserIsDone = false;
+        this.tasks = tasks;
     }
 
     /**
@@ -32,8 +32,7 @@ public class Parser {
      * @param tasks The task list to be modified.
      * @return The task list after parsing through user input from the scanner.
      */
-    public TaskList parse(TaskList tasks) throws DukeException {
-        String input = sc.nextLine();
+    public TaskList parse(String input) throws DukeException {
         if (isFind(input)) {
             return find(input, tasks);
         }else if (isBye(input)) {
@@ -48,11 +47,11 @@ public class Parser {
             return delete(input, tasks);
         } else {
             if (isToDo(input)) {
-                tasks.add(newToDo(input, tasks.size()));
+                tasks.add(newToDo(input, tasks.size() + 1));
             } else if (isDeadline(input)) {
-                tasks.add(newDeadline(input, tasks.size()));
+                tasks.add(newDeadline(input, tasks.size() + 1));
             } else if (isEvent(input)) {
-                tasks.add(newEvent(input, tasks.size()));
+                tasks.add(newEvent(input, tasks.size() + 1));
             } else {
                 throw new DukeException("Please input a task with either todo, deadline or event prefixed!");
             }
@@ -65,8 +64,8 @@ public class Parser {
      *
      * @return The boolean representing whether the parser is done parsing.
      */
-    public boolean notDone() {
-        return !parserIsDone;
+    public boolean isDone() {
+        return parserIsDone;
     }
 
     /**
@@ -126,8 +125,8 @@ public class Parser {
      */
     public boolean isMark(String input, int listSize) {
         if (input.length() >=  6 && input.startsWith("mark ") && isNumeric(input.substring(5))) {
-            int taskindex = Integer.parseInt(input.substring(5)) - 1;
-            return !(taskindex < 0 || taskindex > listSize - 1);
+            int taskIndex = Integer.parseInt(input.substring(5)) - 1;
+            return !(taskIndex < 0 || taskIndex > listSize - 1);
         }
         return false;
     }
@@ -140,8 +139,8 @@ public class Parser {
      */
     public boolean isUnMark(String input, int listSize) {
         if (input.length() >=  8 && input.startsWith("unmark ") && isNumeric(input.substring(7))) {
-            int taskindex = Integer.parseInt(input.substring(7)) - 1;
-            return !(taskindex < 0 || taskindex > listSize - 1);
+            int taskIndex = Integer.parseInt(input.substring(7)) - 1;
+            return !(taskIndex < 0 || taskIndex > listSize - 1);
         }
         return false;
     }
@@ -154,8 +153,8 @@ public class Parser {
      */
     public boolean isDelete(String input, int listSize) {
         if (input.length() >=  8 && input.startsWith("delete ") && isNumeric(input.substring(7))) {
-            int taskindex = Integer.parseInt(input.substring(7)) - 1;
-            return !(taskindex < 0 || taskindex > listSize - 1);
+            int taskIndex = Integer.parseInt(input.substring(7)) - 1;
+            return !(taskIndex < 0 || taskIndex > listSize - 1);
         }
         return false;
     }
@@ -230,9 +229,9 @@ public class Parser {
      * @return The Task List with the specified item marked.
      */
     public TaskList mark(String input, TaskList tasks) {
-        int taskindex = Integer.parseInt(input.substring(5)) - 1;
-        tasks.get(taskindex).markAsDone();
-        Ui.markMessage(tasks.get(taskindex));
+        int taskIndex = Integer.parseInt(input.substring(5)) - 1;
+        tasks.get(taskIndex).markAsDone();
+        Ui.markMessage(tasks.get(taskIndex));
         return tasks;
     }
 
@@ -244,9 +243,9 @@ public class Parser {
      * @return The Task List with the specified item unmarked.
      */
     public TaskList unMark(String input, TaskList tasks) {
-        int taskindex = Integer.parseInt(input.substring(7)) - 1;
-        tasks.get(taskindex).markAsNotDone();
-        Ui.unmarkMessage(tasks.get(taskindex));
+        int taskIndex = Integer.parseInt(input.substring(7)) - 1;
+        tasks.get(taskIndex).markAsNotDone();
+        Ui.unMarkMessage(tasks.get(taskIndex));
         return tasks;
     }
 
@@ -258,9 +257,9 @@ public class Parser {
      * @return The Task List with the specified item deleted.
      */
     public TaskList delete(String input, TaskList tasks) {
-        int taskindex = Integer.parseInt(input.substring(7)) - 1;
-        tasks.remove(taskindex);
-        Ui.deleteMessage(tasks.get(taskindex));
+        int taskIndex = Integer.parseInt(input.substring(7)) - 1;
+        tasks.remove(taskIndex);
+        Ui.deleteMessage(tasks.get(taskIndex));
         return tasks;
     }
 

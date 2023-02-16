@@ -1,6 +1,8 @@
 package GUI;
 
 import duke.Duke;
+import duke.Ui;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -18,6 +20,7 @@ import java.util.Objects;
 
 
 public class Main extends Application {
+    Duke GigaChad;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -87,46 +90,55 @@ public class Main extends Application {
         Scene scene = new Scene(mainLayout);
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
+        //Starting Duke
+        GigaChad = new Duke("data.txt");
+        Label dukeText = new Label(getResponse());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Ui.receiveInput(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getUserDialog(userText, new ImageView(user))
+        );
+        GigaChad.run();
+        Label dukeText = new Label(getResponse());
+        dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+        if (Ui.isDukeClosed()) {
+            closeDuke();
+        }
     }
 
+    public void closeDuke() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                Platform.exit();
+            }
+        }).start();
+    }
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Gotcha Sigma. Let me do it for you~ " + input;
+    private String getResponse() {
+        return Ui.dukeResponse();
     }
 
     public static void main(String[] args) {
-        new Duke("data.txt").run();
+
     }
 }

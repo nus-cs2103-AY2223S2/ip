@@ -18,24 +18,24 @@ public class Duke {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         tasks = storage.readData();
+        Ui.welcomeMessage();
     }
 
     /**
      * Starts the Duke program.
      */
     public void run() {
-        Ui.welcomeMessage();
-        Parser parser = new Parser(new Scanner(System.in));
+        String input = Ui.getInput();
+        Parser parser = new Parser(tasks);
         try {
-            while (parser.notDone()) {
-                tasks = parser.parse(tasks);
-            }
+            parser.parse(input);
         } catch (DukeException e) {
-            System.out.println("ParseError: " + e);
+            Ui.errorMessage(e);
         } finally {
-            storage.writeData();
-            Ui.farewellMessage();
+            if(parser.isDone()) {
+                storage.writeData();
+                Ui.farewellMessage();
+            }
         }
     }
-
 }

@@ -29,8 +29,10 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(100.0);
         displayPicture.setStyle("-fx-padding: 20; -fx-border-radius: 20");
         displayPicture.setClip(circle);
+
         pictureText = new Label(l.getText(), displayPicture);
         pictureText.setWrapText(true);
+//        pictureText.setStyle("-fx-background-color: blue");
 
         pictureText.setContentDisplay(ContentDisplay.RIGHT);
         this.setAlignment(Pos.TOP_RIGHT);
@@ -42,6 +44,7 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
+//        this.pictureText.setStyle("-fx-background-color: yellow");
         this.setAlignment(Pos.TOP_LEFT);
         this.pictureText.setContentDisplay(ContentDisplay.LEFT);
         this.getChildren().setAll(pictureText);

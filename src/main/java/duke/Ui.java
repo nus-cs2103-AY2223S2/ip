@@ -7,10 +7,25 @@ import duke.task.Task;
  */
 public class Ui {
 
+    private static String input;
+    private static String response;
+
+    private static boolean dukeClosed = false;
     /**
      * Constructor that creates an instance of Ui.
      */
     public Ui() {
+    }
+
+    public static String dukeResponse() {
+        return response;
+    }
+    public static String getInput() {
+        return input;
+    }
+
+    public static void receiveInput(String input) {
+        Ui.input = input;
     }
 
     /**
@@ -19,10 +34,11 @@ public class Ui {
      * @param tasks The TaskList to be printed.
      */
     public static void listMessage(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+        response = "";
+        response += "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int j = i + 1;
-            System.out.println(j + "." + tasks.get(i).toString());
+            response += j + "." + tasks.get(i).toString() + "\n";
         }
     }
 
@@ -33,10 +49,11 @@ public class Ui {
      * @param tasks The TaskList to be printed.
      */
     public static void findMessage(String searchFor, TaskList tasks) {
-        System.out.println("Here are the tasks in your list that contain [" + searchFor + "]:");
+        response = "";
+        response += "Here are the tasks in your list that contain [" + searchFor + "]:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int j = i + 1;
-            System.out.println(j + "." + tasks.get(i).toString());
+            response += j + "." + tasks.get(i).toString() +"\n";
         }
     }
 
@@ -46,7 +63,8 @@ public class Ui {
      * @param task The task marked as done.
      */
     public static void markMessage(Task task) {
-        System.out.println("Solid! I'm marking this task as done:\n" + task);
+        response = "";
+        response += "Nice work Sigma. I'm marking this task as done:\n" + task +"\n";
     }
 
     /**
@@ -54,8 +72,9 @@ public class Ui {
      *
      * @param task The task marked as not done.
      */
-    public static void unmarkMessage(Task task) {
-        System.out.println("Aight, marking this as not done:\n" + task);
+    public static void unMarkMessage(Task task) {
+        response = "";
+        response += "Sigma, I am marking this as not done:\n" + task +"\n";
     }
 
     /**
@@ -64,7 +83,8 @@ public class Ui {
      * @param task The task deleted.
      */
     public static void deleteMessage(Task task) {
-        System.out.println("Swee! One less task to go! Removing...\n" + task);
+        response = "";
+        response += "Sigma move! One less task to go! Removing...\n" + task +"\n";
     }
 
     /**
@@ -73,22 +93,30 @@ public class Ui {
      * @param task The task added to the TaskList.
      */
     public static void addMessage(Task task, int taskListSize) {
-        System.out.println("Roger. This task has been added:\n" + "  " + task);
-        System.out.println("Now you have " + taskListSize + " tasks in your list.");
+        response = "";
+        response += "Let's go Sigma. This task has been added:\n" + "  " + task +"\n";
+        response += "Now you have " + taskListSize + " tasks in your list.";
     }
 
     /**
      * Welcome message during startup.
      */
     public static void welcomeMessage() {
-        System.out.println("Greetings Sigma.\n" + "I am GigaChad. What do you wish to do?\n");
+        response = "Greetings fellow Sigma.\n" + "I am GigaChad. What do you wish to conquer today?\n";
     }
 
     /**
      * Farewell message on bye command.
      */
     public static void farewellMessage() {
-        System.out.println("Writing list to storage. Kay thanks bye!");
+        response = "";
+        response += "Writing list to storage. Hope to Sigma you again! \n";
+        response += "GigaChad is leaving the chat......";
+        dukeClosed = true;
+    }
+
+    public static boolean isDukeClosed() {
+        return dukeClosed;
     }
 
     /**
@@ -97,6 +125,7 @@ public class Ui {
      * @param e The given Exception.
      */
     public static void errorMessage(Exception e) {
-        System.out.println(e);
+        response = "";
+        response += e;
     }
 }
