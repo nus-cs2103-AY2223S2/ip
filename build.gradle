@@ -7,9 +7,6 @@ plugins {
 
 checkstyle {
     toolVersion = '10.2'
-//    checkstyleMain.enabled = false
-//    checkstyleTest.enabled = false
-
 }
 
 
@@ -53,14 +50,16 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.gui.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
+    mainClassName = "duke.gui.Launcher"
 }
 
 run{
     standardInput = System.in
 }
+
