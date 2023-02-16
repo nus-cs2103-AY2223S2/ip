@@ -56,7 +56,10 @@ Expected outcome:
 
 The addition of the deadline will be acknowledged.
 The dateline will be parsed into a text format.
+
+
 ![deadline](https://i.imgur.com/hM61HBv.png)
+
 
 ### `event` - Adds an event task.
 
@@ -70,7 +73,11 @@ Example of usage:
 Expected outcome:
 
 The addition of the event task will be acknowledged.
+
+
 ![event](https://i.imgur.com/KY9yCTw.png)
+
+
 
 ### `within` - Adds a within task.
 
@@ -83,7 +90,10 @@ Example of usage:
 
 Expected outcome:
 The addition of the within task will be acknowledged.
+
+
 ![within](https://i.imgur.com/df6x8oG.png)
+
 
 ### `delete` - Deletes a task from the list.
 
@@ -97,7 +107,10 @@ Expected outcome:
 
 Deletes the task of the first index.
 The deleted task is shown before being deleted, and the number of remaining task listed.
+
+
 ![delete](https://i.imgur.com/X36tF6O.png)
+
 
 ### `list` - List out all the tasks to be done.
 
@@ -110,11 +123,11 @@ Example of usage:
 Expected outcome:
 
 Shows the list of tasks.
+
+
 ![list](https://i.imgur.com/ka3MMXp.png)
 
-```
-expected output
-```
+
 ### `mark and unmark` - Describe action
 
 Marks a task as complete for unmarked taskk
@@ -128,11 +141,9 @@ Expected outcome:
 
 Marks the 3rd task as done
 
+
 ![mark](https://i.imgur.com/tgVrdlZ.png)
 
-```
-expected output
-```
 
 ## Future updates
 
