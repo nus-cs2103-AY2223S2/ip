@@ -35,11 +35,6 @@ public class Ui {
     public String sayBye() {
         return "Chenquieh. Hope to see you again Premier Azamat!";
     }
-
-   // public Boolean checkBye() {
-   //     String echo = scanner.nextLine().trim();
-   //     return this.parser.isExit(echo);
-   // }
     /**
      * Parses the user's input as Duke runs.
      */
