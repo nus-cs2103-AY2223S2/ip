@@ -43,9 +43,6 @@ Expected outcome:
 
 The addition of the todo will be acknowledged.
 
-```
-expected output
-```
 ### `deadline` - Adds a deadline task
 
 Deadline task is a task associated with a deadline that it must be completed by.
@@ -61,99 +58,82 @@ The addition of the deadline will be acknowledged.
 The dateline will be parsed into a text format.
 ![deadline](https://i.imgur.com/hM61HBv.png)
 
-```
-expected output
-```
-### `Keyword` - Describe action
+### `event` - Adds an event task.
 
-Describe the action and its outcome.
+Event task is a task associated with a period where it must be done during
+The formatting for this period is not as strict as deadline.
 
 Example of usage: 
 
-`keyword (optional)`
+`event Do Advent of Code /from 1 Dec /to 25 Dec`
 
 Expected outcome:
 
-Description of the outcome.
+The addition of the event task will be acknowledged.
+![event](https://i.imgur.com/KY9yCTw.png)
 
-```
-expected output
-```
-### `Keyword` - Describe action
+### `within` - Adds a within task.
 
-Describe the action and its outcome.
+Within task is a task associated with a period where it must be done in
+Similar to event task.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`within get dinner /between 5:30pm and /and 8:30pm.
 
 Expected outcome:
+The addition of the within task will be acknowledged.
+![within](https://i.imgur.com/df6x8oG.png)
 
-Description of the outcome.
+### `delete` - Deletes a task from the list.
 
-```
-expected output
-```
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
+Deletes a task from the list by index
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`delete 1`
 
 Expected outcome:
 
-Description of the outcome.
+Deletes the task of the first index.
+The deleted task is shown before being deleted, and the number of remaining task listed.
+![delete](https://i.imgur.com/X36tF6O.png)
 
-```
-expected output
-```
-### `Keyword` - Describe action
+### `list` - List out all the tasks to be done.
 
-Describe the action and its outcome.
+Lists out the tasks in your task list.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-Description of the outcome.
+Shows the list of tasks.
+![list](https://i.imgur.com/ka3MMXp.png)
 
 ```
 expected output
 ```
-### `Keyword` - Describe action
+### `mark and unmark` - Describe action
 
-Describe the action and its outcome.
+Marks a task as complete for unmarked taskk
+Unmarks a task as incomplete for completed task.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`mark 3`
 
 Expected outcome:
 
-Description of the outcome.
+Marks the 3rd task as done
+
+![mark](https://i.imgur.com/tgVrdlZ.png)
 
 ```
 expected output
 ```
-### `Keyword` - Describe action
 
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
 ## Future updates
 
 Duke Atreides promises to improve his AI in the next iteration. Hopefully.
