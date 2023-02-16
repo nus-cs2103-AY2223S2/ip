@@ -29,7 +29,7 @@ public class Ui {
      * @return String representing welcome message.
      */
     public String sayHello() {
-        return this.formResponse("LEBRON JAMESSSS #kidfromAkron #kingme");
+        return this.formResponse("LEBRON JAMESSS #kidfromAkron #kingme");
     }
 
     /**
