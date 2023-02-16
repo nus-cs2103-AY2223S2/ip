@@ -5,9 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
 
-/**
- * Type of task with description and a date to finish it by
- */
+// class Deadline - Type of task with description and a date to finish it by
 public class Deadline extends Task {
 
     protected LocalDate by;
@@ -19,18 +17,12 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by, df);
     }
 
-    /**
-     * Convert to the formatted String to be saved in
-     */
     @Override
     public String toSavedString() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy").withLocale(Locale.ENGLISH);
         return "D | " + super.toSavedString() + " | " + this.by.format(df);
     }
 
-    /**
-     * Convert to the formatted String to be displayed in
-     */
     @Override
     public String toString() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy").withLocale(Locale.ENGLISH);

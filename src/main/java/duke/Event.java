@@ -6,9 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
 
-/**
- * Type of task with description, a start date + time and an end time
- */
+// class Event - Type of task with description, a start date + time and an end time
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalTime to;
@@ -27,9 +25,6 @@ public class Event extends Task {
         this.to = LocalTime.parse(to, df2);
     }
 
-    /**
-     * Convert to the format to be saved in
-     */
     @Override
     public String toSavedString() {
         DateTimeFormatter df = DateTimeFormatter.
@@ -44,9 +39,6 @@ public class Event extends Task {
         return savedString;
     }
 
-    /**
-     * Convert to the format to be displayed in
-     */
     @Override
     public String toString() {
         DateTimeFormatter df = DateTimeFormatter
