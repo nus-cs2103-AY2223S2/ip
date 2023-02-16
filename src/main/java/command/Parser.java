@@ -25,7 +25,6 @@ public class Parser {
      */
     public String processInput(String input) {
         String[] inputAnalyzed = input.split(" ");
-        String operationText, additionText;
         try {
             checkIllegalCharacter(input);
             operationText = checkOperationInputs(input, inputAnalyzed);
@@ -37,6 +36,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             return Ui.showInvalidInputError("I only take integers for number inputs.");
         }
+        assert !input.contains("#"): "Input should not have #";
         if (operationText != null) {
             return operationText;
         } else if (additionText != null) {

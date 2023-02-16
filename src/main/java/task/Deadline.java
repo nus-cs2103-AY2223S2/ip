@@ -26,6 +26,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String task = super.toString();
+        assert !task.equals("") && !dead.equals(""): "Error checker did not catch missing input";
         return "[D] " + task + " (by: " + dead + ")";
     }
 

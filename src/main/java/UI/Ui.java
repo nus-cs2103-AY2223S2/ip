@@ -9,27 +9,6 @@ public class Ui {
     // For all interactions with the user
 
     /**
-     * Constructor for UI object.
-     */
-    public Ui() {
-    }
-
-    //@@author IceFire
-    //Reused from https://stackoverflow.com/questions/36514289
-    // with minor modifications
-    /**
-     * Prints a dashed line.
-     */
-    private static void dashedLine()
-    {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 90; i++) {
-            sb.append("-");
-        }
-        System.out.println(sb.toString());
-    }
-
-    /**
      * Closes the UI from accepting any more inputs.
      */
     public static String close() {
@@ -49,7 +28,8 @@ public class Ui {
      * Prints the opening message for Duke.
      */
     public static String startMessage() {
-        return "My name is Skyler White yo \nHow can I help you?";
+        return "My name is Skyler White yo \nHow can I help you? Type help to learn " +
+                "about the full list of commands.";
     }
 
     /**

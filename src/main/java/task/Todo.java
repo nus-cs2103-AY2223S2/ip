@@ -8,6 +8,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String task = super.toString();
+        assert !task.equals(""): "Error checker did not catch missing input";
         return "[T] " + task;
     }
 

@@ -38,6 +38,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         String task = super.toString();
+        boolean isTaskEmpty = task.equals("");
+        boolean isStartStringEmpty = startString.equals("");
+        boolean isEndStringEmpty = endString.equals("");
+        assert !isTaskEmpty && !isStartStringEmpty && !isEndStringEmpty: "Error checker did not catch missing input";
         return "[E] " + task + " (from: " + startString + " to: " + endString + ")";
     }
 
