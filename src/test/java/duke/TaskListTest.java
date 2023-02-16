@@ -7,7 +7,7 @@ public class TaskListTest {
     @Test
     public void addDeadlineTest_whenAddDeadline_thenReturnDeadlineAsTask() {
         TaskList tasks = new TaskList();
-        tasks.addTask("test0 /by 2019-12-02", "deadline");
-        assertEquals("1. [D][ ]test0  (by: 2 Dec 2019)", tasks.toString());
+        tasks.addDeadline("deadline test0 /by 2019-12-02 /note on canvas");
+        assertEquals("1. [D][ ] test0 (by: 2 Dec 2019)\nNote: on canvas", tasks.toString());
     }
 }
