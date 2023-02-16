@@ -10,7 +10,7 @@ Duke is a desktop software built in Java that allows users to create, delete, up
 - [FAQ](#faq)
 - [Command summary](#command-summary)
 
-## Features (#features)
+## Features
 
 ### Feature-ABC
 
