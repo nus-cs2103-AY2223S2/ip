@@ -8,6 +8,7 @@
 
 <fx:root alignment="TOP_RIGHT"  maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
   <children>
+    <!-- Solution adapted from https://github.com/bernardwan/ip/blob/master/src/main/resources/view/DialogBox.fxml -->
      <Label fx:id="dialog"  text="Label" wrapText="true" minHeight="-Infinity" style="-fx-background-color: #FFFCC9; -fx-background-radius: 10; -fx-padding: 10 10 10 10;" textFill="BLACK" alignment="CENTER" >
      </Label>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" ><HBox.margin>
