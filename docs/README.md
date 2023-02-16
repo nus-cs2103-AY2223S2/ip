@@ -9,20 +9,19 @@
 2. [Features](https://github.com/afiqzu/ip/edit/master/docs/README.md#features)
 
 ## Command Summary
-| Command | Format                    | Example           |
-|---------|---------------------------|-------------------|
-| [todo](https://github.com/afiqzu/ip/edit/master/docs/README.md#1-adding-a-todo-task)    | `todo <todo name>`        | `todo read book`  |
-| [deadline](https://github.com/afiqzu/ip/edit/master/docs/README.md#2-adding-a-deadline-task)| `deadline <deadline name> /by <deadline> ` | `deadline return book /by 17/02/2023 15:00`|
-| [event](https://github.com/afiqzu/ip/edit/master/docs/README.md#3-adding-an-event-task)   | `event <event name> /from <start time> /to <end time>` | `event CS2103T Lecture /from 17/02/2023 12:00 /to 17/02/2023 14:00`|
-| [list](https://github.com/afiqzu/ip/edit/master/docs/README.md#4-list-all-tasks)    | `list` | - |
-| [delete](https://github.com/afiqzu/ip/edit/master/docs/README.md#5-delete-task) | `delete <task index>` | `delete 2` |
-| [mark](https://github.com/afiqzu/ip/edit/master/docs/README.md#6-mark-task-as-done) | `mark <task index>` | `mark 3`|
-| [unmark](https://github.com/afiqzu/ip/edit/master/docs/README.md#7-unmark-task) | `unmark <task index>` | `unmark 3`|
-| [clear](https://github.com/afiqzu/ip/edit/master/docs/README.md#8-clear-all-tasks) | `clear` | - |
-| [note](https://github.com/afiqzu/ip/edit/master/docs/README.md#9-add-a-new-note) | `note <note>` | `note Jack wants a watch as a birthday gift`|
-| [opennotes](https://github.com/afiqzu/ip/edit/master/docs/README.md#10-open-current-notes-with-opennotes) | `opennotes`| - |
-| [clearnotes](https://github.com/afiqzu/ip/edit/master/docs/README.md#10-open-current-notes-with-opennotes) | `clearnotes` | - |
-| [help](https://github.com/afiqzu/ip/edit/master/docs/README.md#12-open-command-list-with-help) | `help` | - |
+
+1. [todo](https://github.com/afiqzu/ip/edit/master/docs/README.md#1-adding-a-todo-task)
+2. [deadline](https://github.com/afiqzu/ip/edit/master/docs/README.md#2-adding-a-deadline-task)
+3. [event](https://github.com/afiqzu/ip/edit/master/docs/README.md#3-adding-an-event-task)
+4. [list](https://github.com/afiqzu/ip/edit/master/docs/README.md#4-list-all-tasks)
+5. [delete](https://github.com/afiqzu/ip/edit/master/docs/README.md#5-delete-task)
+6. [mark](https://github.com/afiqzu/ip/edit/master/docs/README.md#6-mark-task-as-done)
+7. [unmark](https://github.com/afiqzu/ip/edit/master/docs/README.md#7-unmark-task)
+8. [clear](https://github.com/afiqzu/ip/edit/master/docs/README.md#8-clear-all-tasks)
+9. [note](https://github.com/afiqzu/ip/edit/master/docs/README.md#9-add-a-new-note)
+10. [opennotes](https://github.com/afiqzu/ip/edit/master/docs/README.md#10-open-current-notes-with-opennotes)
+11. [clearnotes](https://github.com/afiqzu/ip/edit/master/docs/README.md#10-open-current-notes-with-opennotes)
+12. [help](https://github.com/afiqzu/ip/edit/master/docs/README.md#12-open-command-list-with-help)
 
 
 ## Features
