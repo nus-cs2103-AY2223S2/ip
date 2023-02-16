@@ -1,16 +1,23 @@
-'Add' Commands - Records associated task
+'Create' commands - Records associated task:
+todo [M] - Creates a todo task
+deadline [M] /by [D] - Creates a deadline task with end date
+event [M] /from [D] /to [D] - Creates an event task with start/end date
 
-todo [M] - replace [M] with message.
-deadline [M] /by [D] - replace [M] with message and [D] with date/time.
-event [M] /from [D] /to [D] - replace [M] with message and [D] with date/time.
-
-Intended date/time should be in format:
-dd-MM-yyyy HHmm or dd-MM-yyyy.
-Otherwise, the time will be treated as plain text.
-
+Miscellaneous commands:
 list - Lists all tasks.
 mark [R] - Marks task as done, replace [R] with rank of task.
 unmark [R] - Marks task as not done, replace [R] with rank of task.
 find [K] - Lists all matching task, replace [K] with keyword.
-
+help - Shows help message.
 bye - Exits the chat bot.
+
+Labels - Replace entirely:
+[M] - Message
+[D] - Date/Time
+[R] - Rank
+[K] - Keyword
+
+Intended date/time format is flexible:
+* dd-MM-yyyy HHmm or dd/MM/yyyy
+* DDD - next day of week, exclusive of today
+* Otherwise, the time will be treated as plain text.
