@@ -50,6 +50,28 @@ public class LoanShark {
         return String.format("No loan account belongs to %s!", accountHolder);
     }
 
+    public String getLoanSummaryString() {
+        StringBuilder sb = new StringBuilder();
+        if (loanAccounts.isEmpty()) {
+            return "No loans found!";
+        }
+        loanAccounts.forEach((holder, loanAccount) -> {
+                sb.append(String.format("%s: ", holder));
+                int balance = loanAccount.getBalanceInCents();
+                if (balance == 0) {
+                    sb.append("ALL OK!\n\n");
+                } else {
+                    sb.append("Balance: $")
+                            .append(loanAccount.getBalanceInDollarsString())
+                            .append("\n")
+                            .append(loanAccount.getActiveLoansString())
+                            .append("\n");
+                }
+            }
+        );
+        return sb.toString();
+    }
+
     public void saveLoans() throws DukeException {
         LoanSharkStorage.saveAccounts(loanAccounts.values());
     }

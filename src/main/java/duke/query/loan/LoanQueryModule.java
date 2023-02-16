@@ -10,6 +10,7 @@ import duke.query.QueryModule;
 public class LoanQueryModule extends QueryModule {
     public static final String LOAN_QUERY_TYPE = "loan";
     public static final String LOAN_RECORD_QUERY_TYPE = "loan-record";
+    public static final String LOAN_SUMMARY_QUERY_TYPE = "loan-summary";
 
     private final LoanShark ls = new LoanShark();
 
@@ -28,5 +29,6 @@ public class LoanQueryModule extends QueryModule {
     public void installQueryHandlers(HashMap<String, QueryHandler> commandToQueryHandler) {
         commandToQueryHandler.put(LOAN_QUERY_TYPE, new LoanQueryHandler(ls));
         commandToQueryHandler.put(LOAN_RECORD_QUERY_TYPE, new LoanRecordQueryHandler(ls));
+        commandToQueryHandler.put(LOAN_SUMMARY_QUERY_TYPE, new LoanSummaryQueryHandler(ls));
     }
 }

@@ -24,6 +24,15 @@ public class LoanAccount {
                 .reduce(0, Integer::sum);
     }
 
+    public String getBalanceInDollarsString() {
+        int balanceInCents = activeLoans.stream()
+                .map(Loan::getBalanceInCents)
+                .reduce(0, Integer::sum);
+        int absBalanceInCents = Math.abs(balanceInCents);
+        return String.format("%s.%s",
+                absBalanceInCents / 100, absBalanceInCents % 100);
+    }
+
     public Owe addOwe(int balance, int amountInCents, String description) {
         assert amountInCents < 0 : "Owe amount must be negative!";
         int oweBalance = attemptToResolveLoans(balance);
