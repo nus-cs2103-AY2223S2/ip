@@ -7,37 +7,40 @@ public class UI {
     /**
      * Displays the welcome message
      */
-    public void start() {
+    public String start() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("ฅʕ•ᴥ•ʔฅ :: Hiii! I'm duke, here to help you with your tasks!");
-        System.out.println("•──────────────────♛─────────────────•");
+        String out = "Hello from\n" + logo
+                + "\n('v') :: Hiii! I'm duke, here to help you with your tasks!\n"
+                + "•──────────────────♛─────────────────•";
+        return out;
     }
 
     /**
      * Displays the tasks in the TaskList
      * @param list Current TaskList
      */
-    public void showList(TaskList list) {
-        System.out.println("ʕ•ᴥ•ʔっ :: Here are the task(s) in your list:");
+    public String showList(TaskList list) {
+        String out = "('.') :: Here are the task(s) in your list:";
         for (int i = 1; i <= list.getSize(); i++) {
-            System.out.println(i + "." + list.getTask(i-1).toString());
+            out = out +"\n" + i + "." + list.getTask(i-1).toString();
         }
+        return out;
     }
 
     /**
      * Displays the tasks that match the keyword
      * @param list List of tasks that match the keyword
      */
-    public void showFoundTasks(TaskList list) {
-        System.out.println("ʕ•ᴥ•ʔっ :: Here are the matching task(s) in your list:");
+    public String showFoundTasks(TaskList list) {
+        String out = "('v') :: Here are the matching task(s) in your list:";
         for (int i = 1; i <= list.getSize(); i++) {
-            System.out.println(i + "." + list.getTask(i-1).toString());
+            out = out +"\n" + i + "." + list.getTask(i-1).toString();
         }
+        return out;
     }
 
     /**
@@ -45,9 +48,10 @@ public class UI {
      * @param list Current TaskList
      * @param index Index of the task to be marked
      */
-    public void mark(TaskList list, int index) {
+    public String mark(TaskList list, int index) {
         list.getTask(index - 1).setDone();
-        System.out.println("ʕ•̀ω•́ʔ✧ :: Nice! I've marked this task as done:\n  " + list.getTask(index - 1).toString());
+        String out = "('v')! :: Nice! I've marked this task as done:\n  " + list.getTask(index - 1).toString();
+        return out;
     }
 
     /**
@@ -55,9 +59,10 @@ public class UI {
      * @param list Current TaskList
      * @param index Index of the task to be unmarked
      */
-    public void unmark(TaskList list, int index) {
+    public String unmark(TaskList list, int index) {
         list.getTask(index - 1).setUndone();
-        System.out.println("ʕ•̀ω•́ʔ✧ :: OK, I've marked this task as not done yet:\n  " + list.getTask(index - 1).toString());
+        String out = "('v')! :: OK, I've marked this task as not done yet:\n  " + list.getTask(index - 1).toString();
+        return out;
     }
 
     /**
@@ -65,11 +70,12 @@ public class UI {
      * @param list Current TaskList
      * @param name Description of the Todo task
      */
-    public void addTodo(TaskList list, String name) {
+    public String addTodo(TaskList list, String name) {
         list.addTask(new ToDo(name));
-        System.out.println("ฅʕ'ᴥ'ʔฅ :: Got it. I've added this task:");
-        System.out.println("  " + list.getTask(list.getSize() - 1).toString());
-        System.out.println("ʕ•ᴥ•ʔっ :: Now you have " + list.getSize() + " task(s) in the list.");
+        String out = "('v')! :: Got it. I've added this task:\n";
+        out += "  " + list.getTask(list.getSize() - 1).toString();
+        out += "\n('.') :: Now you have " + list.getSize() + " task(s) in the list.";
+        return out;
     }
 
     /**
@@ -78,11 +84,12 @@ public class UI {
      * @param name Description of the deadline task
      * @param deadline Deadline of the deadline task
      */
-    public void addDeadline(TaskList list, String name, String deadline) {
+    public String addDeadline(TaskList list, String name, String deadline) {
         list.addTask(new Deadline(name, deadline));
-        System.out.println("ฅʕ'ᴥ'ʔฅ :: Got it. I've added this task:");
-        System.out.println("  " + list.getTask(list.getSize() - 1).toString());
-        System.out.println("ʕ•ᴥ•ʔっ :: Now you have " + list.getSize() + " task(s) in the list.");
+        String out = "('v')! :: Got it. I've added this task:\n";
+        out += "  " + list.getTask(list.getSize() - 1).toString();
+        out += "\n('.') :: Now you have " + list.getSize() + " task(s) in the list.";
+        return out;
     }
 
     /**
@@ -92,11 +99,12 @@ public class UI {
      * @param start Start time/date of the event task
      * @param end End time/date of the event task
      */
-    public void addEvent(TaskList list, String name, String start, String end) {
+    public String addEvent(TaskList list, String name, String start, String end) {
         list.addTask(new Event(name, start, end));
-        System.out.println("ฅʕ'ᴥ'ʔฅ :: Got it. I've added this task:");
-        System.out.println("  " + list.getTask(list.getSize() - 1).toString());
-        System.out.println("ʕ•ᴥ•ʔっ :: Now you have " + list.getSize() + " task(s) in the list.");
+        String out = "('v')! :: Got it. I've added this task:\n";
+        out += "  " + list.getTask(list.getSize() - 1).toString();
+        out += "\n('.') :: Now you have " + list.getSize() + " task(s) in the list.";
+        return out;
     }
 
     /**
@@ -104,16 +112,36 @@ public class UI {
      * @param list Description of the event task
      * @param index Index of the task to be removed
      */
-    public void removeTask(TaskList list, int index) {
-        System.out.println("ฅʕ'ᴥ'ʔฅ :: Noted. I've removed this task :");
-        System.out.println("  " + list.removeTask(index - 1).toString());
-        System.out.println("ʕ•ᴥ•ʔっ :: Now you have " + list.getSize() + " task(s) in the list.");
+    public String removeTask(TaskList list, int index) {
+        String out = "('o') :: Noted. I've removed this task :\n";
+        out += "  " + list.removeTask(index - 1).toString();
+        out += "\n('.') :: Now you have " + list.getSize() + " task(s) in the list.";
+        return out;
     }
 
     /**
      * Displays the exit message
      */
-    public void showExit() {
-        System.out.println("ʕっ￫ᴥ￩ʔっ :: Buhbyeee, hope to see you again soon!");
+    public String showExit() {
+        return "('v')!! :: Buhbyeee, hope to see you again soon!";
+    }
+
+    public String showException(DukeException e) {
+        return e.toString();
+    }
+
+    public String getHelp() {
+        String out = "Available features: \n";
+        out += "'retrieve data' -> retrieve data from where you left off last\n";
+        out += "'list' -> list out current tasks\n";
+        out += "'todo [description]' -> add a todo task to the list\n";
+        out += "'deadline [description] /by [deadline]' -> add a deadline task to the list\n";
+        out += "'event [description] /from [start] /to [end]' -> add an event task to the list\n";
+        out += "'mark [task number]' -> marks the task as done\n";
+        out += "'unmark [task number]' -> marks the task as not done\n";
+        out += "'delete [task number]' -> removes task from the list\n";
+        out += "'find [keyword]' -> lists all the tasks containing the keyword\n";
+        out += "'bye' -> exits the program";
+        return out;
     }
 }
