@@ -15,7 +15,7 @@ public class DeadlinesTest {
         } catch (DukeExceptions DE) {
             caughtIt = DE.toString();
         }
-        assertEquals(":( Sorry, the description of a deadline cannot be empty!", caughtIt);
+        assertEquals("Dumb orc, the description of a deadline cannot be empty!", caughtIt);
     }
 
     @Test

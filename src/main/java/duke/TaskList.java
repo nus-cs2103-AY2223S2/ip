@@ -138,8 +138,8 @@ public class TaskList {
             currTask.setDone();
             assert currTask.isDone() : "It appears that the task was not"
                     + "successfully marked as done.";
-            String toOutput = "Can't you mark your own things? Fine," +
-                    " I've marked this task as done:\n  " + currTask.toString();
+            String toOutput = "Can't you mark your own things? Fine,"
+                    + " I've marked this task as done:\n  " + currTask.toString();
             return toOutput;
         } catch (DukeExceptions DE) {
             return DE.toString();
@@ -163,8 +163,8 @@ public class TaskList {
             currTask.setUndone();
             assert !currTask.isDone() : "It appears that the task was not"
                     + "successfully marked as not done.";
-            String toOutput = "Can't you unmark your own tasks? Fine, I've marked" +
-                    " this task as not done yet:\n  " + currTask.toString();
+            String toOutput = "Can't you unmark your own tasks? Fine, I've marked"
+                    + " this task as not done yet:\n  " + currTask.toString();
             return toOutput;
         } catch (DukeExceptions DE) {
             return DE.toString();

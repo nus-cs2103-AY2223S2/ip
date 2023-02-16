@@ -15,7 +15,7 @@ public class EventsTest {
         } catch (DukeExceptions DE) {
             caughtIt = DE.toString();
         }
-        assertEquals(":( Sorry, the description of an event cannot be empty!", caughtIt);
+        assertEquals("Dumb orc, the description of an event cannot be empty!", caughtIt);
     }
 
     @Test

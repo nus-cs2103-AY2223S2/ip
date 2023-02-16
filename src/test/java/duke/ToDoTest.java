@@ -14,7 +14,7 @@ public class ToDoTest {
         } catch (DukeExceptions DE) {
             caughtIt = DE.toString();
         }
-        assertEquals(":( Sorry, the description of a todo cannot be empty!", caughtIt);
+        assertEquals("Dumb orc, the description of a todo cannot be empty!", caughtIt);
 
     }
 
