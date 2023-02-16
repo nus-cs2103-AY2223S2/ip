@@ -28,8 +28,10 @@ public class TagList {
         Integer indexInString = index;
         this.listOfTags.set(index, newTag);
         indexInString++;
-        String toReturn = "Done! The task at index " + indexInString.toString()
-                + " has successfully been tagged with " + newTag + "!";
+        String toReturn = "Ugh, do I really need change the tag for you? Fine...\n"
+                + " The task at index " + indexInString.toString()
+                + " has successfully been tagged with " + newTag + ".\n"
+                + "Getting my hands dirty just for an orc....";
         return toReturn;
     }
 
