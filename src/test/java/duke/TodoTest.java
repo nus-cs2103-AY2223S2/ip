@@ -23,4 +23,17 @@ public class TodoTest {
         assertTrue(todo.getIsDone());
     }
 
+    @Test
+    public void testTodoToString() {
+        Todo todo = new Todo("Buy milk");
+        assertEquals("[T][ ] Buy milk", todo.toString());
+    }
+
+    @Test
+    public void testTodoToStringCompletion() {
+        Todo todo = new Todo("Buy milk");
+        todo.markAsDone();
+        assertEquals("[T][X] Buy milk", todo.toString());
+    }
+
 }

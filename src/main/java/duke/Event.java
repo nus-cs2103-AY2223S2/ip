@@ -69,7 +69,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from:" + from + " to:" + to + ")";
+        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
 
@@ -184,5 +184,14 @@ public class Event extends Task {
         String timePeriod = from + d + to;
         return "E" + d + marked + d + description + d + timePeriod;
     }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public String getTo() {
+        return to;
+    }
 }
+
 

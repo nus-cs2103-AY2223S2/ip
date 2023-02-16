@@ -75,7 +75,7 @@ public abstract class Task {
      * @return The string representation of the task.
      */
     public String toString() {
-        return "[" + getStatusIcon() + "]" + this.description;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 
     /**
