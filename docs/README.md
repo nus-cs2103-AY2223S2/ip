@@ -72,6 +72,85 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
+#### event
+
+Adds an event task occurring over a period into task list and outputs success message.
+
+Example of usage: 
+
+`event reading event /from 2050-01-01 /to 2050-01-02`
+
+Expected outcome:
+
+Outputs success message.
+
+```
+____________________________________________________________
+  Got it. I've added this task:
+    [E][ ] reading event (from: Jan 1 2050 to: Jan 2 2050)
+  Now you have 3 tasks in the list.
+____________________________________________________________
+```
+
+#### mark
+
+Marks a task index from task list as complete and outputs success message.
+
+Example of usage: 
+
+`mark 1`
+
+Expected outcome:
+
+Outputs success message.
+
+```
+____________________________________________________________
+  Got it. I've marked this task:
+    [T][ ] read a book
+  Now you have 1 task in the list.
+____________________________________________________________
+```
+
+#### unmark
+
+Unmarks a task index from task list as incomplete and outputs success message.
+
+Example of usage: 
+
+`unmark 1`
+
+Expected outcome:
+
+Outputs success message.
+
+```
+____________________________________________________________
+  Got it. I've marked this task:
+    [T][ ] read a book
+  Now you have 1 task in the list.
+____________________________________________________________
+```
+
+#### list
+
+Lists all task index from task list as complete and outputs success message.
+
+Example of usage: 
+
+`mark 1`
+
+Expected outcome:
+
+Outputs success message.
+
+```
+____________________________________________________________
+  Got it. I've marked this task:
+    [T][ ] read a book
+  Now you have 1 task in the list.
+____________________________________________________________
+```
 
 ### `Keyword` - Describe action
 
