@@ -2,23 +2,23 @@ package util;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EitherTest {
     @Test
     public void testLeft() {
         var left = Either.left("test");
         var right = Either.right("oops");
-        assertEquals(true, left.isLeft());
-        assertEquals(false, right.isLeft());
+        assertTrue(left.isLeft());
+        assertFalse(right.isLeft());
     }
 
     @Test
     public void testRight() {
         var left = Either.left(69);
         var right = Either.right("error");
-        assertEquals(false, left.isRight());
-        assertEquals(true, right.isRight());
+        assertFalse(left.isRight());
+        assertTrue(right.isRight());
     }
 
     @Test
