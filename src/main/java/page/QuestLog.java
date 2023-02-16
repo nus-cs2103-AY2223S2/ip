@@ -91,6 +91,7 @@ public class QuestLog {
      * @return i-th quest in the Quest Log.
      */
     public Quest getQuest(int i) {
+        assert i <= quests.size() : "invalid index";
         return quests.get(i - 1);
     }
 
@@ -100,6 +101,7 @@ public class QuestLog {
      * @param i Index of the quest to be deleted.
      */
     public void deleteQuest(int i) {
+        assert i <= quests.size() : "invalid index";
         quests.remove(i - 1);
     }
 
@@ -109,6 +111,7 @@ public class QuestLog {
      * @param i Index of the quest to be marked complete.
      */
     public void completeQuest(int i) {
+        assert i <= quests.size() : "invalid index";
         quests.get(i - 1).markComplete();
     }
 
@@ -118,6 +121,7 @@ public class QuestLog {
      * @param i Index of the quest to be marked incomplete.
      */
     public void incompleteQuest(int i) {
+        assert i <= quests.size() : "invalid index";
         quests.get(i - 1).markIncomplete();
     }
 

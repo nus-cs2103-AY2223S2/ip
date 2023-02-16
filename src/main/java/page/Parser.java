@@ -35,6 +35,7 @@ public class Parser {
             return new CommandHelp();
         default:
             String[] splitInput = input.split(" ", 2);
+            assert splitInput.length != 0 : "splitInput should have at least 1 element.";
             String firstWord = splitInput[0];
             switch (firstWord) {
             case "todo":
@@ -159,7 +160,7 @@ public class Parser {
     }
 
     private boolean hasNoSplit(String[] arr) {
-        return arr.length == 1;
+        return arr.length <= 1;
     }
 }
 

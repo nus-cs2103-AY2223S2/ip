@@ -67,3 +67,7 @@ checkstyle {
 run {
     standardInput = System.in
 }
+
+tasks.withType(JavaExec) {
+    enableAssertions = true
+}
