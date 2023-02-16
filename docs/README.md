@@ -4,20 +4,18 @@ having the benefits of a Graphical User Interface (GUI).
 
 ## Quick start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest duke.Launcher.jar from [here]().
+2. Download the latest duke.jar from [here]().
 3. Copy the file to the folder you want to use as the home folder for Duke.
-4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar duke.Launcher.jar command to run the application.
-A GUI similar to the below should appear in a few seconds. 
-<figure>
-    <img src="/docs/images/Starting.png">
-</figure>
+4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar duke.jar command to run the application.
+A GUI similar to the below should appear in a few seconds.
+![This is an image](/docs/Starting.png)
 5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
 Some example commands you can try:
 
--`list` : Lists all contacts.
--`todo gym` : Adds a todo task with task description `gym`.
--`mark 1` : Marks the first task as done.
--`delete 1` : Deletes the first task shown in the current list.
+- `list` : Lists all contacts.
+- `todo gym` : Adds a todo task with task description `gym`.
+- `mark 1` : Marks the first task as done.
+- `delete 1` : Deletes the first task shown in the current list.
 
 6. Refer to the [Features](##Features) below for details of each command.
 
