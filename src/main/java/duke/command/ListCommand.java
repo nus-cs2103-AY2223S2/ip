@@ -1,9 +1,9 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.TaskList;
 import duke.tag.Tag;
-
-import java.util.Arrays;
 
 /**
  * A command representing the user viewing the full list of tasks in the task list.
@@ -31,7 +31,7 @@ public class ListCommand extends Command {
         } else {
             Tag tag = new Tag(tagName);
             TaskList tasksFound = tasks.listTagged(tag);
-            return tasksFound.getListOfTasks();
+            return tasksFound.getListOfTaggedTasks(tagName);
         }
     }
 }

@@ -69,9 +69,9 @@ public class TaskList {
         return task;
     }
 
-    private void checkTaskNumValidity (int taskNum) throws InvalidTaskNumberException {
+    private void checkTaskNumValidity(int taskNum) throws InvalidTaskNumberException {
         if (taskNum < 1 || taskNum > getNumOfTasks()) {
-            throw new InvalidTaskNumberException(taskNum);
+            throw new InvalidTaskNumberException(taskNum + "");
         }
     }
 
@@ -88,6 +88,12 @@ public class TaskList {
         return tasksFound;
     }
 
+    /**
+     * Find list of tasks that is tagged to a certain Tag object.
+     *
+     * @param tag Tag to find.
+     * @return TaskList object containing all tasks tagged to provided Tag object.
+     */
     public TaskList listTagged(Tag tag) {
         TaskList tasksFound = new TaskList();
         tasks.stream().filter(x -> x.getTag().equals(tag))
@@ -131,6 +137,32 @@ public class TaskList {
         IntStream.range(0, tasks.size()).mapToObj(x -> String.format("%d. %s\n", x + 1, tasks.get(x)))
                 .forEach(listOfTasks::append);
         return listOfTasks.toString();
+    }
+
+    /**
+     * Returns String representation of list of tasks tagged to tagName.
+     *
+     * @param tagName Name of tag to search for.
+     * @return String representation of list of tasks tagged to tagName.
+     */
+    public String getListOfTaggedTasks(String tagName) {
+        if (tasks.isEmpty()) {
+            return String.format("There are no tasks tagged %s!", tagName);
+        }
+        return String.format("Here are the tasks tagged %s:\n%s", tagName, getListOfTasks());
+    }
+
+    /**
+     * Returns String representation of list of tasks containing keyword.
+     *
+     * @param keyword Keyword to search for.
+     * @return String representation of list of tasks containing keyword.
+     */
+    public String getListOfTasksFound(String keyword) {
+        if (tasks.isEmpty()) {
+            return String.format("There are no tasks found with keyword %s!", keyword);
+        }
+        return String.format("Here are the tasks found with keyword %s:\n%s", keyword, getListOfTasks());
     }
 
     /**

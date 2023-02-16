@@ -28,7 +28,7 @@ public class Tag {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if(obj instanceof Tag) {
+        } else if (obj instanceof Tag) {
             Tag t = (Tag) obj;
             return this.name.equals(t.name);
         } else {

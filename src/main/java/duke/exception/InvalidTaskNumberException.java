@@ -10,7 +10,7 @@ public class InvalidTaskNumberException extends DukeException {
      *
      * @param taskNum task number input by user
      */
-    public InvalidTaskNumberException(int taskNum) {
-        super(String.format("Task number %d doesn't exist!", taskNum));
+    public InvalidTaskNumberException(String taskNum) {
+        super(String.format("Task number %s doesn't exist!", taskNum));
     }
 }

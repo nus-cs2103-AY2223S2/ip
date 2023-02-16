@@ -17,7 +17,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(TaskList tasks, String keyword) {
         super(tasks);
-        this.keyword = keyword;
+        this.keyword = keyword.substring(4).trim();
     }
 
     /**
@@ -26,6 +26,6 @@ public class FindCommand extends Command {
     @Override
     public String execute() {
         TaskList tasksFound = tasks.findTasks(keyword);
-        return tasksFound.getListOfTasks();
+        return tasksFound.getListOfTasksFound(keyword);
     }
 }

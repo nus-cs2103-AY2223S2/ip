@@ -5,7 +5,7 @@ import duke.Parser;
 /**
  * A DukeException that deals with incorrect date time format that the user inputs.
  */
-public class InvalidDateTimeException extends DukeException{
+public class InvalidDateTimeException extends DukeException {
     /**
      * Constructor for InvalidDateTimeException.
      */

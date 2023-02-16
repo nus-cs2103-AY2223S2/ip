@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.tag.Tag;
-
 import java.time.LocalDateTime;
+
+import duke.tag.Tag;
 
 /**
  * An Event which is a type of Task.
@@ -24,6 +24,14 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description Task description.
+     * @param start Starting time of event.
+     * @param end Ending time of event.
+     * @param tag Tag object that task is tagged to.
+     */
     public Event(String description, LocalDateTime start, LocalDateTime end, Tag tag) {
         super(description, tag);
         this.start = start;
@@ -34,16 +42,11 @@ public class Event extends Task {
      * Constructor for Event.
      *
      * @param description Task description.
-     * @param isDone Completed status of task.
+     * @param isDone Task's completed status
      * @param start Starting time of event.
      * @param end Ending time of event.
+     * @param tag Tag object that task is tagged to.
      */
-    public Event(String description, boolean isDone, LocalDateTime start, LocalDateTime end) {
-        super(description, isDone);
-        this.start = start;
-        this.end = end;
-    }
-
     public Event(String description, boolean isDone, LocalDateTime start, LocalDateTime end, Tag tag) {
         super(description, isDone, tag);
         this.start = start;

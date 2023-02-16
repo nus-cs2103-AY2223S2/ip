@@ -1,17 +1,17 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.Parser;
 import duke.tag.EmptyTag;
 import duke.tag.Tag;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * An abstract class Task
  */
 public abstract class Task {
-    private static final String DATE_TIME_DISPLAY_FORMAT =  "MMM dd yyyy HH:mm";
+    private static final String DATE_TIME_DISPLAY_FORMAT = "MMM dd yyyy HH:mm";
 
     protected String description;
     protected boolean isDone;
