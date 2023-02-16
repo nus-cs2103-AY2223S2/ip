@@ -5,9 +5,12 @@ import duke.query.Query;
 import duke.query.QueryHandler;
 
 public class HelpQueryHandler extends QueryHandler {
-    private static final String HELP_TEXT = "Here are some commands you can try!";
-    private static final String LIST_HELP_TEXT = "1. list - list all tasks.";
-    private static final String TODO_HELP_TEXT = "2. todo <description> - add a task with <description>.";
+    private static final String HELP_TEXT = "Get work done with these commands!";
+    private final Help help;
+
+    HelpQueryHandler(Help help) {
+        this.help = help;
+    }
 
     /**
      * @param query a user input string
@@ -16,11 +19,16 @@ public class HelpQueryHandler extends QueryHandler {
      */
     @Override
     public String processQuery(Query query) throws DukeException {
-        return String.join("\n",
-                HELP_TEXT,
-                "",
-                LIST_HELP_TEXT,
-                TODO_HELP_TEXT
-        );
+        return HELP_TEXT + "\n\n" + help.getHelp();
+    }
+
+    @Override
+    public String getQueryDescription() {
+        return "help \n- Displays help.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return "help";
     }
 }

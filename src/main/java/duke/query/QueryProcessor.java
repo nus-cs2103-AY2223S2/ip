@@ -3,6 +3,7 @@ package duke.query;
 import duke.exception.DukeException;
 import duke.query.exception.UnknownCommandException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class QueryProcessor {
@@ -33,5 +34,17 @@ public class QueryProcessor {
         }
 
         throw new UnknownCommandException(String.format(UNKNOWN_COMMAND_RES, command));
+    }
+
+    /**
+     * Generates help text from registered query handlers.
+     * @return help text
+     */
+    public String generateHelpTextFromQueryHandlers() {
+        ArrayList<String> helpTexts = new ArrayList<String>();
+        for (QueryHandler qh : commandToQueryHandler.values()) {
+            helpTexts.add(qh.getQueryDescription());
+        }
+        return String.join("\n\n", helpTexts);
     }
 }

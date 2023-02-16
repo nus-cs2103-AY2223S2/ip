@@ -35,6 +35,17 @@ public class LoanQueryHandler extends QueryHandler {
         );
     }
 
+    @Override
+    public String getQueryDescription() {
+        return "loan \n- Adds a loan with an amount (negative represents owed, positive represents lent) "
+                + "and is associated with a holder and description.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return QUERY_SYNTAX;
+    }
+
     private int getAmountFromQuery(Query query) throws InvalidCommandParamException {
         try {
             return (int) (Double.parseDouble(query.getParam()) * 100);

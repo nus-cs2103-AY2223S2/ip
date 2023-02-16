@@ -32,4 +32,14 @@ public class EventQueryHandler extends DeadlineQueryHandler {
         tt.saveAllTasks();
         return "Added task " + newTask;
     }
+
+    @Override
+    public String getQueryDescription() {
+        return "event \n- Adds a new event.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return String.format("event <description> /from <%s> /to <%s>", DATETIME_PATTERN, DATETIME_PATTERN);
+    }
 }

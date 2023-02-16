@@ -27,4 +27,14 @@ public class ListQueryHandler extends TaskQueryHandler {
             return String.format("Here are your tasks!%s", tt.listTasks());
         }
     }
+
+    @Override
+    public String getQueryDescription() {
+        return "list \n- Lists all tasks.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return "list";
+    }
 }

@@ -27,4 +27,14 @@ public class DeleteQueryHandler extends TaskQueryHandler {
         tt.saveAllTasks();
         return "Task deleted: " + t;
     }
+
+    @Override
+    public String getQueryDescription() {
+        return "delete \n- Deletes a task.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return String.format("delete <index of task to delete>");
+    }
 }

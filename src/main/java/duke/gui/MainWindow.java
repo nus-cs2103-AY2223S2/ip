@@ -35,10 +35,8 @@ public class MainWindow extends AnchorPane {
     public void setBot(Bot b) {
         this.bot = b;
         String greeting = bot.process(CoreModule.GREET_QUERY_TYPE).getResponse();
-        String help = bot.process(CoreModule.HELP_QUERY_TYPE).getResponse();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting, dukeImage),
-                DialogBox.getDukeDialog(help, dukeImage)
+                DialogBox.getDukeDialog(greeting, dukeImage)
         );
         status.setText(bot.getPersonality().getRandomFlavourText());
     }

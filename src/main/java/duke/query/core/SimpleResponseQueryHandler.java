@@ -25,4 +25,16 @@ public class SimpleResponseQueryHandler extends QueryHandler {
     public String processQuery(Query query) throws DukeException {
         return response;
     }
+
+    @Override
+    public String getQueryDescription() {
+        // No help required.
+        return "";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        // No syntax required.
+        return "";
+    }
 }

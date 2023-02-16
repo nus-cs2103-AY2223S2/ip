@@ -61,4 +61,14 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
     protected static String getInvalidCommandResponse(String expectedParam, String correctFormat) {
         return String.format("Please provide a valid %s! %s", expectedParam, correctFormat);
     }
+
+    @Override
+    public String getQueryDescription() {
+        return "deadline \n- Adds a new deadline.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return String.format("deadline <description> /by <%s>", DATETIME_PATTERN);
+    }
 }

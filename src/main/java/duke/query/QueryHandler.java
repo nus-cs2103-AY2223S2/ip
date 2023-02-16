@@ -13,6 +13,22 @@ public abstract class QueryHandler {
      */
     public abstract String processQuery(Query query) throws DukeException;
 
+    /**
+     * Returns a help text for query.
+     * @return query help string
+     */
+    public abstract String getQueryDescription();
+
+    /**
+     * Returns the defined syntax for the query.
+     * @return query syntax string
+     */
+    public abstract String getQuerySyntax();
+
+    public String getQueryHelp() {
+        return getQueryDescription() + "\n\t" + getQuerySyntax();
+    }
+
     protected String getNotBlankArg(Query query, String argKey, String errMsg) throws InvalidCommandParamException {
         String arg = query.getArgument(argKey);
         if (arg == null || arg.isBlank()) {

@@ -5,6 +5,7 @@ import duke.query.Query;
 import duke.query.QueryParser;
 import duke.query.QueryProcessor;
 import duke.query.core.CoreModule;
+import duke.query.core.Help;
 import duke.query.loan.LoanQueryModule;
 import duke.query.task.TaskQueryModule;
 
@@ -14,6 +15,7 @@ import duke.query.task.TaskQueryModule;
 public class Bot {
     private QueryProcessor queryProcessor;
     private BotPersonality botPersonality;
+    private Help help;
     private boolean hasInit = false;
 
     public BotPersonality getPersonality() {
@@ -26,12 +28,14 @@ public class Bot {
      * @throws DukeException
      */
     public void init() throws DukeException {
+        this.help = new Help();
         botPersonality = new BotPersonality();
         queryProcessor = new QueryProcessor(
-                new CoreModule(),
+                new CoreModule(help),
                 new TaskQueryModule(),
                 new LoanQueryModule()
         );
+        this.help.setHelp(queryProcessor.generateHelpTextFromQueryHandlers());
         hasInit = true;
     }
 

@@ -6,6 +6,7 @@ import duke.query.Query;
 import duke.query.QueryHandler;
 
 public class LoanSummaryQueryHandler extends QueryHandler {
+    private static final String QUERY_SYNTAX = "loan-summary";
     private final LoanShark ls;
 
     LoanSummaryQueryHandler(LoanShark ls) {
@@ -18,5 +19,15 @@ public class LoanSummaryQueryHandler extends QueryHandler {
     @Override
     public String processQuery(Query query) throws DukeException {
         return "Here is the summary of your current loans!\n" + ls.getLoanSummaryString();
+    }
+
+    @Override
+    public String getQueryDescription() {
+        return "loan-summary \n- Displays a summary of all loans.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return QUERY_SYNTAX;
     }
 }

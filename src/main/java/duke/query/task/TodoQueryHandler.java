@@ -25,6 +25,16 @@ public class TodoQueryHandler extends TaskQueryHandler {
         String desc = getNotBlankParam(query, "Please provide a description for your todo!");
         Task newTask = tt.addTodo(desc);
         tt.saveAllTasks();
-        return "Added task " + newTask;
+        return "Added todo " + newTask;
+    }
+
+    @Override
+    public String getQueryDescription() {
+        return "todo \n- Adds a new todo.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return String.format("todo <description>");
     }
 }

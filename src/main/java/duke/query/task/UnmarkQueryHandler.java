@@ -28,4 +28,14 @@ public class UnmarkQueryHandler extends TaskQueryHandler {
         tt.saveAllTasks();
         return "Task marked as incomplete: " + t;
     }
+
+    @Override
+    public String getQueryDescription() {
+        return "unmark \n- Unmarks a task as complete.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return "unmark <index of task to unmark>";
+    }
 }

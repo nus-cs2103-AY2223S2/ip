@@ -19,4 +19,14 @@ public class FindTaskQueryHandler extends TaskQueryHandler {
         String matchStr = tt.listTasksByKeyword(keyword);
         return matchStr.isBlank() ? "No matches found for " + keyword : matchStr;
     }
+
+    @Override
+    public String getQueryDescription() {
+        return "find \n- Finds all tasks that match the provided keyword.";
+    }
+
+    @Override
+    public String getQuerySyntax() {
+        return "find <keyword>";
+    }
 }
