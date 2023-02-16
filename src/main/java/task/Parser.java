@@ -1,9 +1,17 @@
 package task;
 
+import java.time.DateTimeException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import command.AddTask;
 import command.Command;
@@ -17,12 +25,21 @@ import command.Mark;
 import command.Save;
 import command.Unmark;
 import exception.MikiArgsException;
+import exception.NatDateParseException;
 import exception.TaskParseException;
+
+import static java.time.LocalDate.now;
+import static task.Task.DATE_IN_FMT;
 
 /**
  * A parser for Miki interactive command-line inputs.
  */
 public class Parser {
+    private static final List<String> DAY_NAMES =
+            Arrays.asList("mon", "tue", "wed", "thu", "fri", "sat", "sun");
+    private static final List<String> MONTH_NAMES =
+            Arrays.asList("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec");
+
     /**
      * Parses a <code>ListTasks</code> command from a provided <code>String[]</code> of
      * space-separated tokens.
@@ -66,16 +83,16 @@ public class Parser {
         LocalDateTime toDate = null;
         if (!from.isEmpty()) {
             try {
-                fromDate = LocalDateTime.parse(from, Task.DATE_IN_FMT);
-            } catch (DateTimeParseException ex) {
-                throw new MikiArgsException(from + " needs to be formatted as " + Task.DATE_IN_FMT_STR + "!");
+                fromDate = parseDate(from, false);
+            } catch (NatDateParseException ex) {
+                throw new MikiArgsException("\"" + from + "\"... is... when??!? write " + Task.DATE_IN_FMT_STR + "!!");
             }
         }
         if (!to.isEmpty()) {
             try {
-                toDate = LocalDateTime.parse(to, Task.DATE_IN_FMT);
-            } catch (DateTimeParseException ex) {
-                throw new MikiArgsException(to + " needs to be formatted as " + Task.DATE_IN_FMT_STR + "!");
+                toDate = parseDate(to, true);
+            } catch (NatDateParseException ex) {
+                throw new MikiArgsException("\"" + to + "\"... is... when??!? write " + Task.DATE_IN_FMT_STR + "!!");
             }
         }
 
@@ -100,6 +117,300 @@ public class Parser {
             throw new MikiArgsException("\"" + args[0] + "\" isn't a real integer! There's no task #" + args[0] + "!");
         }
         return idx;
+    }
+
+    private static int filterDayOfWeek(ArrayList<String> args) {
+        int res = -1;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).length() < 3) {
+                continue;
+            }
+            String trunc = args.get(i).substring(0, 3).toLowerCase();
+            if (DAY_NAMES.contains(trunc)) {
+                res = DAY_NAMES.indexOf(trunc) + 1;
+                matches++;
+                args.remove(i);
+                i--;
+            }
+        }
+        if (matches != 1) {
+            return -1;
+        }
+        return res;
+    }
+
+    private static int filterMonth(ArrayList<String> args) {
+        int res = -1;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).length() < 3) {
+                continue;
+            }
+            String trunc = args.get(i).substring(0, 3).toLowerCase();
+            if (MONTH_NAMES.contains(trunc)) {
+                res = MONTH_NAMES.indexOf(trunc) + 1;
+                matches++;
+                args.remove(i);
+                i--;
+            }
+        }
+        if (matches != 1) {
+            return -1;
+        }
+        return res;
+    }
+
+    private static int filterMeridiem(ArrayList<String> args) {
+        int res = -1;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).length() < 2) {
+                continue;
+            }
+            if (args.get(i).substring(0, 2).equalsIgnoreCase("am")) {
+                res = 0;
+                matches++;
+                args.remove(i);
+                i--;
+            } else if (args.get(i).substring(0, 2).equalsIgnoreCase("pm")) {
+                res = 1;
+                matches++;
+                args.remove(i);
+                i--;
+            }
+        }
+        if (matches != 1) {
+            return -1;
+        }
+        return res;
+    }
+
+    private static LocalTime filterTime(ArrayList<String> args) {
+        LocalTime res = null;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).contains(":")) {
+                String[] parts = args.get(i).split(":");
+                if (parts.length != 2) {
+                    continue;
+                }
+                try {
+                    res = LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+                } catch (NumberFormatException | DateTimeException ex) {
+                    continue;
+                }
+                matches++;
+                args.remove(i);
+                i--;
+            }
+        }
+        if (matches != 1) {
+            return null;
+        }
+        return res;
+    }
+
+    private static LocalDate filterDate(ArrayList<String> args) {
+        LocalDate res = null;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (i >= 2 && args.get(i).length() == 4) {
+                try {
+                    res = LocalDate.of(
+                            Integer.parseInt(args.get(i)),
+                            Integer.parseInt(args.get(i - 1)),
+                            Integer.parseInt(args.get(i - 2)));
+                    matches++;
+                    args.remove(i);
+                    args.remove(i - 1);
+                    args.remove(i - 2);
+                    i -= 3;
+                } catch (NumberFormatException | DateTimeException ex) {
+                    // Do nothing
+                }
+            } else if (i < args.size() - 2 && args.get(i).length() == 4) {
+                try {
+                    res = LocalDate.of(
+                            Integer.parseInt(args.get(i)),
+                            Integer.parseInt(args.get(i + 1)),
+                            Integer.parseInt(args.get(i + 2)));
+                    matches++;
+                    args.remove(i + 2);
+                    args.remove(i + 1);
+                    args.remove(i);
+                    i--;
+                } catch (NumberFormatException | DateTimeException ex) {
+                    // Do nothing
+                }
+            }
+        }
+        if (matches != 1) {
+            return null;
+        }
+        return res;
+    }
+
+    private static int filterYear(ArrayList<String> args) {
+        int res = -1;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).length() == 4) {
+                try {
+                    res = Integer.parseInt(args.get(i));
+                } catch (NumberFormatException ex) {
+                    continue;
+                }
+                matches++;
+                args.remove(i);
+                i--;
+            }
+        }
+        if (matches != 1) {
+            return -1;
+        }
+        return res;
+    }
+
+    private static int filterDayOfMonth(ArrayList<String> args) {
+        int res = -1;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            if (args.get(i).length() < 2) {
+                continue;
+            }
+            String suf = args.get(i).substring(args.get(i).length() - 2).toLowerCase();
+            if (suf.equals("st") || suf.equals("nd") || suf.equals("rd") || suf.equals("th")) {
+                try {
+                    res = Integer.parseInt(args.get(i).substring(0, args.get(i).length() - 2));
+                } catch (NumberFormatException ex) {
+                    continue;
+                }
+                matches++;
+                args.remove(i);
+                i--;
+            }
+        }
+        if (matches != 1) {
+            return -1;
+        }
+        return res;
+    }
+
+    private static int filterResidualDayOfMonth(ArrayList<String> args) {
+        int res = -1;
+        int matches = 0;
+        for (int i = 0; i < args.size(); i++) {
+            try {
+                res = Integer.parseInt(args.get(i));
+            } catch (NumberFormatException ex) {
+                continue;
+            }
+            matches++;
+            args.remove(i);
+            i--;
+        }
+        if (matches != 1) {
+            return -1;
+        }
+        return res;
+    }
+
+    public static LocalDateTime parseDate(String dateStr, boolean isLatestTiming) throws NatDateParseException {
+        try {
+            return LocalDateTime.parse(dateStr, DATE_IN_FMT);
+        } catch (DateTimeParseException ex) {
+            // Do nothing
+        }
+
+        String cleanDateStr = dateStr.replace(",", "").replace("-", "");
+        ArrayList<String> tokens = new ArrayList<>(Arrays.asList(cleanDateStr.split(" ")));
+
+        int dayOfWeek = filterDayOfWeek(tokens);
+        int dayOfMonth = filterDayOfMonth(tokens);
+        int month = filterMonth(tokens);
+        LocalTime time = filterTime(tokens);
+        int meridiem = filterMeridiem(tokens);
+        LocalDate date = filterDate(tokens);
+        int year = filterYear(tokens);
+        int residualDayOfMonth = filterResidualDayOfMonth(tokens);
+
+        LocalTime altTime = isLatestTiming ? LocalTime.MAX : LocalTime.MIN;
+        if (time != null && meridiem > -1) {
+            if (meridiem == 1) {
+                time = LocalTime.of(time.getHour() % 12 + 12, time.getMinute());
+            }
+        }
+
+        if (date != null) {
+            return LocalDateTime.of(date, time != null ? time : altTime);
+        }
+        if (dayOfMonth > -1) {
+            if (year < 0) {
+                year = now().getYear();
+            }
+            if (month < 0) {
+                month = now().getMonthValue();
+            }
+            try {
+                date = LocalDate.of(year, month, dayOfMonth);
+                return LocalDateTime.of(date, time != null ? time : altTime);
+            } catch (DateTimeException ex) {
+                // Do nothing
+            }
+        }
+        if (residualDayOfMonth > -1 && month > -1) {
+            if (year < 0) {
+                year = now().getYear();
+            }
+            try {
+                date = LocalDate.of(year, month, residualDayOfMonth);
+                return LocalDateTime.of(date, time != null ? time : altTime);
+            } catch (DateTimeException ex) {
+                // Do nothing
+            }
+        }
+        if (dayOfWeek > -1) {
+            date = now().with(DayOfWeek.of(dayOfWeek));
+            return LocalDateTime.of(date, time != null ? time : altTime);
+        }
+        if (residualDayOfMonth > -1) {
+            if (year < 0) {
+                year = now().getYear();
+            }
+            month = now().getMonthValue();
+            try {
+                date = LocalDate.of(year, month, residualDayOfMonth);
+                return LocalDateTime.of(date, time != null ? time : altTime);
+            } catch (DateTimeException ex) {
+                // Do nothing
+            }
+        }
+        if (month > -1) {
+            if (year < 0) {
+                year = now().getYear();
+            }
+            try {
+                date = isLatestTiming ? YearMonth.of(year, month).atEndOfMonth() : LocalDate.of(year, month, 1);
+                return LocalDateTime.of(date, time != null ? time : altTime);
+            } catch (DateTimeException ex) {
+                // Do nothing
+            }
+        }
+        if (year > -1) {
+            try {
+                date = isLatestTiming
+                        ? LocalDate.of(year, 1, 1).with(TemporalAdjusters.lastDayOfYear())
+                        : LocalDate.of(year, 1, 1);
+                return LocalDateTime.of(date, time != null ? time : altTime);
+            } catch (DateTimeException ex) {
+                // Do nothing
+            }
+        }
+        if (time != null) {
+            return LocalDateTime.of(now(), time);
+        }
+        throw new NatDateParseException("could not parse natural date");
     }
 
     /**

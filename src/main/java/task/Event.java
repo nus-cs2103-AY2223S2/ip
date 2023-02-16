@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import exception.NatDateParseException;
 import exception.TaskParseException;
 
 /**
@@ -81,14 +82,14 @@ public class Event extends Task {
         LocalDateTime fromDate;
         LocalDateTime toDate;
         try {
-            fromDate = LocalDateTime.parse(from, DATE_IN_FMT);
-        } catch (DateTimeParseException ex) {
-            throw new TaskParseException(from + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
+            fromDate = Parser.parseDate(from, false);
+        } catch (NatDateParseException ex) {
+            throw new TaskParseException("\"" + from + "\"... is... when??!? write " + DATE_IN_FMT_STR + "!!");
         }
         try {
-            toDate = LocalDateTime.parse(to, DATE_IN_FMT);
-        } catch (DateTimeParseException ex) {
-            throw new TaskParseException(to + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
+            toDate = Parser.parseDate(to, true);
+        } catch (NatDateParseException ex) {
+            throw new TaskParseException("\"" + to + "\"... is... when??!? write" + DATE_IN_FMT_STR + "!!");
         }
 
         return new Event(objective, fromDate, toDate);

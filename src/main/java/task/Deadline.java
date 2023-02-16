@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import exception.NatDateParseException;
 import exception.TaskParseException;
 
 /**
@@ -60,9 +61,9 @@ public class Deadline extends Task {
         }
 
         try {
-            return new Deadline(objective, LocalDateTime.parse(by, DATE_IN_FMT));
-        } catch (DateTimeParseException ex) {
-            throw new TaskParseException(by + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
+            return new Deadline(objective, Parser.parseDate(by, true));
+        } catch (NatDateParseException ex) {
+            throw new TaskParseException("\"" + by + "\"... is... when??!? write " + DATE_IN_FMT_STR + "!!");
         }
     }
 
