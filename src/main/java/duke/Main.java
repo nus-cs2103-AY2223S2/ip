@@ -27,6 +27,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Ui.fxml"));
             AnchorPane ui = fxmlLoader.load();
             Scene scene = new Scene(ui);
+            stage.setTitle("DukeBot");
             stage.setScene(scene);
             fxmlLoader.<Ui>getController().setDuke(this.duke);
             stage.setMinWidth(400.0);

@@ -1,6 +1,4 @@
-T lol
-D  Dumb Dumb2000-10-10T10:10
-T 10
-D 12023-10-20T10:24
-D  do wwwork2010-10-10T10:00
-E  do work2022-10-10T10:002022-10-10T22:00
+T Do work for CS2103T
+TXPlay cards with Sammy
+D  Complete KidneyWorks script2023-02-18T10:00
+E  HackForGood finals2023-02-18T14:302023-02-18T18:00

@@ -63,7 +63,7 @@ public class MessageBox extends HBox {
     }
 
     public static MessageBox getUserDialog(String text, Image img) {
-        MessageBox userMessage = new MessageBox(text, img);
+        MessageBox userMessage = new MessageBox(text, null);
         userMessage.getDialog().getStyleClass().add("userMessage");
         return userMessage;
     }
