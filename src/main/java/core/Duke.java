@@ -13,7 +13,7 @@ public class Duke {
     private static TaskMaster taskMaster;
 
     /**
-     * Calls the main method of Duke.
+     * This method is the main method of Duke.
      * Calling this would initialize Duke for the GUI.
      *
      * args is unused here.
@@ -31,7 +31,7 @@ public class Duke {
         while (!shouldQuit) {
             userInput = ioHandler.readLn();
             if (!userInput.isEmpty()) {
-                ioHandler.lb();
+
                 try {
                     Parser input = new Parser(userInput);
                     ioHandler.println(input.parse(taskMaster));
@@ -40,15 +40,16 @@ public class Duke {
                 } catch (DukeException de) {
                     ioHandler.println(de.getMessage());
                 }
-                ioHandler.lb();
+
                 ioHandler.flush();
             }
         }
     }
 
     /**
-     * Initializes core functionality needed to run the program.
+     * This method initializes core functionality needed to run the program.
      * TaskMaster, IO handler and reminders are checked here.
+     *
      * @return Returns reminder message for deadlines if any.
      */
     public static String initialize() {
@@ -67,6 +68,7 @@ public class Duke {
 
     /**
      * This method returns the standard welcome message.
+     *
      * @return This returns the standard welcome message.
      */
     public static String greet() {
@@ -95,7 +97,8 @@ public class Duke {
     }
 
     /**
-     * Process user commands and returns appropriate message.
+     * This method process user commands and returns appropriate message.
+     *
      * @param userInput String from the user
      * @return Message depending on how the command is interpreted.
      */

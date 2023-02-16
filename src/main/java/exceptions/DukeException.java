@@ -8,7 +8,7 @@ public class DukeException extends Exception {
     protected static final String OOPS = "OOPS!!!";
 
     /**
-     * Constructor to pass on forward to Exception
+     * This method constructs to pass on forward to Exception
      * @param msg Message to pass to Exception
      */
     public DukeException(String msg) {

@@ -5,7 +5,7 @@ package exceptions.missing;
  */
 public class Parameter extends exceptions.DukeException {
     /**
-     * Constructs a Missing Parameter Exception for the given TaskType
+     * this method constructs a Missing Parameter Exception for the given TaskType
      * @param taskType The task type
      */
     public Parameter(String taskType) {

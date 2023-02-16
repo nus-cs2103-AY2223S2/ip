@@ -6,7 +6,7 @@ package exceptions;
 public class Quit extends DukeException {
 
     /**
-     * Constructor to pass on forward to Exception
+     * This method's constructor passes forward the message to Exception.
      */
     public Quit() {
         super("");

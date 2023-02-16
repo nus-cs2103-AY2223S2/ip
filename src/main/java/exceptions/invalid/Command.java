@@ -5,14 +5,10 @@ package exceptions.invalid;
  */
 public class Command extends exceptions.DukeException {
     /**
-     * Constructs an Invalid Command Exception.
+     * This method constructs an Invalid Command Exception.
      * Informs user of invalid command.
      */
     public Command() {
         super(String.format("%s I'm sorry, but I don't know what you just said means :-(", OOPS));
-    }
-
-    public Command(String str) {
-        super(String.format("Internal error: Issue with understanding command", str));
     }
 }

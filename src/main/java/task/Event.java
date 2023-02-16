@@ -12,7 +12,7 @@ public class Event extends Task {
     private final LocalDateTime to;
 
     /**
-     * Constructs an Event task with the given name, status and timing details.
+     * This method constructs an Event task with the given name, status and timing details.
      *
      * @param description The name of this Event
      * @param isComplete The status of this Event
@@ -26,7 +26,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of an Event task.
+     * This method returns the String representation of an Event task.
      *
      * @return The name of this task and the timing details.
      */
@@ -37,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of an Event task delimited by commas.
+     * This method returns the String representation of an Event task delimited by commas.
      *
      * @return The name of this task and the timing details in CSV format.
      */

@@ -7,7 +7,7 @@ public abstract class Task {
     private final String taskDescription;
 
     /**
-     * Constructs a Task with the provided name and status.
+     * This method constructs a Task with the provided name and status.
      *
      * @param description The description or name of the task
      * @param isComplete The status of this task
@@ -18,7 +18,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns the name of the Task.
+     * This method returns the name of the Task.
+     *
      * @return The description or name of this Task.
      */
     public String getTaskDescription() {
@@ -26,7 +27,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns the state of the task alongside with the task name.
+     * This method returns the state of the task alongside with the task name.
+     *
      * Example output:
      * `[X] read book` would mean that the task `read book` is complete.
      * `[ ] read book` would mean that the task `read book` is incomplete.

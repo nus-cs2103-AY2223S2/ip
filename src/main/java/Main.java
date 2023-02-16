@@ -18,6 +18,14 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * This method is called for javafx to run.
+     *
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -33,6 +41,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * This method is called for javafx is closed.
+     *
+     * This will perform all the necessary shutdown features.
+     */
     @Override
     public void stop() {
         duke.goodbye();

@@ -12,7 +12,7 @@ public class Deadline extends Task {
     private final LocalDateTime by;
 
     /**
-     * Constructs a Deadline task with the given name, status and timing details.
+     * This method constructs a Deadline task with the given name, status and timing details.
      *
      * @param description The name or description of this Deadline.
      * @param isComplete The status of this Deadline.
@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the String representation of the Deadline task.
+     * This method returns the String representation of the Deadline task.
      *
      * @return The name of this task and the timing details.
      */
@@ -34,7 +34,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the String representation of an Event task delimited by commas.
+     * This method returns the String representation of an Event task delimited by commas.
      *
      * @return The name of this task and the timing details in CSV format.
      */
@@ -45,7 +45,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the LocalDateTime of when this task must be completed by.
+     * This method returns the LocalDateTime of when this task must be completed by.
+     *
      * @return time
      */
     public LocalDateTime getBy() {

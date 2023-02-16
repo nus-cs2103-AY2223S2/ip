@@ -26,7 +26,6 @@ public class MainWindow extends AnchorPane {
 
     private core.Duke duke;
 
-    //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
@@ -34,10 +33,13 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * This method initializes the GUI and greets the user.
+     *
+     * @param d The duke object used in the running of the application.
+     */
     public void setDuke(core.Duke d) {
         duke = d;
-
-        //System.out.println(core.Duke.greet());
         String response = core.Duke.greet();
         String initResponse = duke.initialize();
         dialogContainer.getChildren().addAll(
@@ -47,7 +49,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing core.Duke's reply and then appends them
+     * This method creates one dialog box containing Duke's reply and then appends them
      * to the dialog container. Clears the user input after processing.
      */
     @FXML

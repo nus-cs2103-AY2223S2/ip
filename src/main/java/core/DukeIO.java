@@ -15,6 +15,7 @@ import exceptions.DukeException;
 
 /**
  * Handles all text and file input output for core.Duke.
+ * @author EL
  */
 public class DukeIO extends PrintWriter {
 
@@ -32,7 +33,8 @@ public class DukeIO extends PrintWriter {
     }
 
     /**
-     * Reads user input and returns as string.
+     * This method reads the user input, and it returns as a string.
+     *
      * @return User input as String.
      */
     public String readLn() {
@@ -46,14 +48,7 @@ public class DukeIO extends PrintWriter {
     }
 
     /**
-     * Prints line break.
-     */
-    public void lb() {
-        this.println("____________________________________________________________");
-    }
-
-    /**
-     * Create buffered reader for file reading.
+     * This method creates a buffered reader for file reading.
      *
      * @param filePath The name of the file to open
      * @return Buffered Reader.
@@ -71,8 +66,8 @@ public class DukeIO extends PrintWriter {
     }
 
     /**
-     * Create buffered writer for file writing.
-     * Additionally, creates the file if file has not been created before.
+     * This method creates a buffered writer for file writing.
+     * Additionally, this would create the file if file has not been created before.
      *
      * @return Buffered writer
      */
@@ -90,7 +85,8 @@ public class DukeIO extends PrintWriter {
     }
 
     /**
-     * Creates file for writing if it does not exist.
+     * This method creates the file for writing if it does not exist.
+     *
      * @param filePath The path to create the file at.
      */
     private static void createFile(Path filePath) {
@@ -110,7 +106,8 @@ public class DukeIO extends PrintWriter {
     }
 
     /**
-     * Read save file and populates the given TaskMaster object.
+     * This method reads the save file and populates the given TaskMaster object.
+     *
      * @param tm the runtime TaskMaster object
      * @throws DukeException is thrown when the save file is not found.
      */
@@ -129,7 +126,8 @@ public class DukeIO extends PrintWriter {
     }
 
     /**
-     * Write to save file everything that is stored in the given TaskMaster object.
+     * This method writes to the save file everything that is stored in the given TaskMaster object.
+     *
      * @param tm the runtime TaskMaster object
      */
     public static void writeSave(TaskMaster tm) {

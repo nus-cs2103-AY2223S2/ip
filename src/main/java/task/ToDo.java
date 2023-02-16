@@ -7,7 +7,7 @@ package task;
 public class ToDo extends Task {
 
     /**
-     * Constructs a ToDo task with the given name/description and status.
+     * This method constructs a ToDo task with the given name/description and status.
      *
      * @param description The name of this Todo task.
      * @param isComplete The status of this task.
@@ -17,7 +17,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the String representation of the Todo task.
+     * This method returns the String representation of the Todo task.
      * @return The string representation of this Todo.
      */
     @Override
@@ -26,7 +26,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the String representation of the Todo task delimited by commas.
+     * This method returns the String representation of the Todo task delimited by commas.
      *
      * @return The string representation of this Todo task in CSV format.
      */

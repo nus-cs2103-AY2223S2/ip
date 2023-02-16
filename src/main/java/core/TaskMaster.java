@@ -14,14 +14,14 @@ public class TaskMaster {
     private final LinkedList<Task> tasks;
 
     /**
-     * Constructor which creates a TaskMaster instance.
+     * This method is the constructor which creates a TaskMaster instance.
      */
     public TaskMaster() {
         tasks = new LinkedList<>();
     }
 
     /**
-     * Returns the list of stored Tasks.
+     * This method returns the list of stored Tasks.
      *
      * @return The list of stored Tasks
      */
@@ -42,7 +42,7 @@ public class TaskMaster {
     }
 
     /**
-     * Adds the task into the list.
+     * This method adds the task into the list.
      *
      * @param task The task to be added to this list
      * @return A message indicating that the task has been added
@@ -58,7 +58,7 @@ public class TaskMaster {
     }
 
     /**
-     * Returns the task at the index.
+     * This method returns the task at the index.
      * Note this expects the index to be a one-indexed value.
      *
      * @param index The index to be accessed
@@ -74,7 +74,7 @@ public class TaskMaster {
     }
 
     /**
-     * Marks the task at index with the provided status.
+     * This method marks the task at index with the provided status.
      * Note this expects the index to be a one-indexed value.
      *
      * @param index The task at the index stored in this list
@@ -98,7 +98,7 @@ public class TaskMaster {
     }
 
     /**
-     * Deletes the task at the index.
+     * This method deletes the task at the index.
      *
      * @param index The index to be deleted
      * @return A message indicating that the task has been deleted
@@ -115,7 +115,7 @@ public class TaskMaster {
     }
 
     /**
-     * Creates a Todo task and adds it to the list.
+     * This method creates a Todo task and adds it to the list.
      *
      * @param taskName The name of the Todo
      * @param status The completion status of this ToDo
@@ -126,7 +126,7 @@ public class TaskMaster {
     }
 
     /**
-     * Creates a Deadline task and adds it to the list.
+     * This method creates a Deadline task and adds it to the list.
      *
      * @param taskName The name of this Deadline
      * @param status The completion status of this Deadline
@@ -139,7 +139,7 @@ public class TaskMaster {
     }
 
     /**
-     * Creates an Event task and adds it to the list.
+     * This method creates an Event task and adds it to the list.
      *
      * @param taskName The name of this Event
      * @param status The completion status of this Event
@@ -152,7 +152,7 @@ public class TaskMaster {
     }
 
     /**
-     * Returns CSV formatted list of all the Tasks for exporting.
+     * This method returns CSV formatted list of all the Tasks for exporting.
      *
      * @return list of all Tasks in CSV format.
      */
@@ -171,9 +171,10 @@ public class TaskMaster {
     }
 
     /**
-     * Return list of tasks with the keyword
+     * This method returns list of tasks with the keyword
+     *
      * @param keyword The keyword to find stored in the list.
-     * @return
+     * @return This returns tasks that contains the keyword.
      */
     public String findTask(String keyword) {
         keyword = keyword.toLowerCase();
@@ -194,12 +195,10 @@ public class TaskMaster {
     }
 
     /**
-     * Return a string containing tasks with the latest deadline.
+     * This method returns a string containing tasks with the latest deadline.
      * @return string to be print.
      */
     public String getReminder() {
-
-        System.out.println("Printing reminders");
 
         StringBuilder ret = new StringBuilder();
 
@@ -222,7 +221,10 @@ public class TaskMaster {
                     }
                 }
             }
-            ret.append("The following tasks are up coming!\n");
+
+            if (latestDeadline.size() > 0) {
+                ret.append("The following tasks are up coming!\n");
+            }
 
             for (Deadline dl : latestDeadline) {
                 ret.append(dl);

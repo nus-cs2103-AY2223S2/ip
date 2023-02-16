@@ -11,14 +11,14 @@ public class Parser {
     private final String keyword;
 
     /**
-     * For enum attempt
+     * For enum attempt.
      */
     public enum Keyword {
         TODO, DEADLINE, EVENT, FIND
     }
 
     /**
-     * Constructor for Parser class.
+     * This is the constructor method for Parser class.
      *
      * @param userInput The command to parse
      */
@@ -38,7 +38,7 @@ public class Parser {
     }
 
     /**
-     * Returns first word of user input.
+     * This method returns first word of user input.
      * For example 'mark 1', 'mark' would be considered as the keyword.
      *
      * @return The command which the user has typed.
@@ -48,7 +48,7 @@ public class Parser {
     }
 
     /**
-     * Returns integer from user input.
+     * This method returns integer from user input.
      * This assumes that the second item in the user input is an integer.
      * Example: 'mark 1', '1' is expected to be an integer.
      *
@@ -69,7 +69,7 @@ public class Parser {
     }
 
     /**
-     * Extracts commands for task creation.
+     * This method extracts commands for task creation.
      *
      * @param desire Which Task is being called
      * @return The appropriate inputs needed to create a Task
@@ -122,7 +122,7 @@ public class Parser {
     }
 
     /**
-     * Splits String based on delimiter.
+     * This method splits user input based on delimiter.
      * Example:
      * splitByDelimiter("Gymkhana /from TIME /to TIME","/from",2)
      * returns ["Gymkhana","TIME /to TIME"]
@@ -145,7 +145,7 @@ public class Parser {
     }
 
     /**
-     * Parses save file and loads it into the given TaskMaster.
+     * This method parses save file and loads it into the given TaskMaster.
      *
      * @param task The task stored in the safe file
      * @param tm   The runtime TaskMaster object
@@ -170,7 +170,8 @@ public class Parser {
     }
 
     /**
-     * Parse user input into meaningful commands.
+     * This method parses user input into meaningful commands.
+     *
      * @param tm The runtime TaskMaster object
      * @return Message from the corresponding commands to print out.
      * @throws DukeException Thrown when missing parameters is found or index error etc.
@@ -205,11 +206,34 @@ public class Parser {
             throw new exceptions.Quit();
         case "find":
             return tm.findTask(extractTaskParams(Keyword.FIND)[0]);
-        case "?":
+        case "help":
+            return helpMessage();
+        case "l33tmagic":
             throw new exceptions.Unimplemented();
         default:
             throw new exceptions.invalid.Command();
         }
+    }
+
+    /**
+     * This method returns the help message to be printed.
+     * @return Returns the help message.
+     */
+    private static String helpMessage(){
+        String ret = "List: Lists all file" +
+                "mark [integer]\n" +
+                "unmark [integer]\n" +
+                "todo [description]\n" +
+                "deadline [description] /by [yyyy/MM/dd HHmm]\n" +
+                "event [description] /from [yyyy/MM/dd HHmm] /to [yyyy/MM/dd HHmm]\n" +
+                "find [keyword]\n" +
+                "delete [integer]\n" +
+                "save\n" +
+                "load\n" +
+                "bye\n" +
+                "help"
+                ;
+        return ret;
     }
 
 }

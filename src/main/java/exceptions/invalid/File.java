@@ -5,7 +5,7 @@ package exceptions.invalid;
  */
 public class File extends exceptions.DukeException {
     /**
-     * Constructs an Invalid File Exception for the given filepath.
+     * This method constructs an Invalid File Exception for the given filepath.
      *
      * Example:
      * User tries to access file that does not exist.
