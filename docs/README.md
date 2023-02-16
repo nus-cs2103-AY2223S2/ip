@@ -2,6 +2,15 @@
 Chadbot application is designed for user to **manage their day-to-day tasks**. It
 is optimized for use via Command Line Interface (CLI) and Graphical User Interface (GUI).
 
+<br/>
+
+<div align="center">
+ <img src="./Ui.png" alt="UI">
+</div>
+ 
+<br/>
+ 
+ ## Content
 - [Quick Start](#quick-start)
 - [Features](#features)
   * [Add a Todo Task](#add-a-todo-task)
