@@ -14,13 +14,6 @@ public abstract class Ui {
      */
     public abstract void printAutoDiv();
 
-    /**
-     * Prints a line of output to the user interface,
-     * formatted with indentation for clarity.
-     *
-     * @param s <code>String</code> to be printed.
-     */
-    //public abstract void print(String s);
     public abstract void printUser(String s);
 
     public abstract void printMiki(String s);

@@ -42,7 +42,7 @@ public class EventTest {
         TaskParseException ex = assertThrows(TaskParseException.class, () -> {
             Event.parseArgs(new String[]{"Body", "/from", "malformed", "/to", "2023-03-04", "14:20"});
         });
-        assertEquals("malformed needs to be formatted as " + DATE_IN_FMT_STR + "!", ex.getMessage());
+        assertEquals("\"malformed\"... is... when??!? write " + DATE_IN_FMT_STR + "!!", ex.getMessage());
     }
 
     @Test

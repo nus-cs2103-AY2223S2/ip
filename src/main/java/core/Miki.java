@@ -3,6 +3,7 @@ package core;
 import java.io.IOException;
 
 import command.Command;
+import command.ExceptionPrint;
 import command.RefreshTasks;
 import shigure.Ui;
 import storage.Storage;
@@ -47,7 +48,7 @@ public class Miki {
         ui.printDiv();
         ui.clearInput();
 
-        if (Parser.isListCommand(cmdLine)) {
+        if (Parser.isListCommand(cmdLine) && !(cmd instanceof ExceptionPrint)) {
             listFilter = cmd;
         } else {
             assert listFilter != null : "Task filter should be non-null";
