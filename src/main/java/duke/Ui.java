@@ -5,6 +5,11 @@ public class Ui {
     public Ui() {
     }
 
+    /**
+     * The method greets the user by returning a string.
+     *
+     * @return returns a string that greets the user.
+     */
     public String greetings() {
         String logo = "DUKE\n";
         return "Hello from\n" + logo + "What can I do for you today?";
@@ -14,6 +19,11 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * The method is called when there is an error loading the file.
+     *
+     * @return returns a String message.
+     */
     public String showLoadingError() {
         return "Error occurred in loading file.";
     }

@@ -21,14 +21,14 @@ public class Storage {
     public void writeToFile(ArrayList<Task> dukeList) {
         try {
             FileWriter writer = new FileWriter(filePath, false);
-            for(Task t: dukeList) {
+            for (Task t: dukeList) {
                 if (t instanceof Deadline) {
                     writer.write("D | " + t.getStatusIcon() + " | " + t.description + " |by " + ((Deadline) t).by
                             + System.lineSeparator());
                 }
                 if (t instanceof Event) {
                     writer.write("E | " + t.getStatusIcon() + " | " + t.description + " |f " + ((Event) t).from
-                            + " |t " +  ((Event) t).to + System.lineSeparator());
+                            + " |t " + ((Event) t).to + System.lineSeparator());
                 }
                 if (t instanceof Todo) {
                     writer.write("T | " + t.getStatusIcon() + " | " + t.description + System.lineSeparator());
@@ -52,13 +52,13 @@ public class Storage {
         if (f.exists()) {
             try {
                 Scanner s = new Scanner(new File(filePath));
-//                new FileWriter(filePath, false).close();
+                //new FileWriter(filePath, false).close();
                 while (s.hasNextLine()) {
                     String str = s.nextLine();
                     System.out.println(str);
                     if (str.startsWith("E")) {
                         Event e = new Event(str.substring(8, str.indexOf(" |f")),
-                                str.substring(str.indexOf(" |f") +4, str.indexOf(" |t")),
+                                str.substring(str.indexOf(" |f") + 4, str.indexOf(" |t")),
                                 str.substring(str.indexOf(" |t") + 4));
                         if (str.startsWith("E | X")) {
                             e.markAsDone();
@@ -100,5 +100,5 @@ public class Storage {
             }
         }
         return dukeList;
-        }
+    }
 }

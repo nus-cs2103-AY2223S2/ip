@@ -63,17 +63,16 @@ public class Parser {
             return taskList.mark(n, true);
 
         case "unmark":
-            String num_1 = str.split(" ", 2)[1];
-            int n_1 = Integer.parseInt(num_1) - 1;
-            return taskList.mark(n_1, false);
+            String num1 = str.split(" ", 2)[1];
+            int n1 = Integer.parseInt(num1) - 1;
+            return taskList.mark(n1, false);
 
         case "todo":
             Task a;
             try {
                 a = new Todo(str.replace("todo ", ""));
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                break;
+                return e.getMessage();
             }
             return taskList.addTask(a);
 
@@ -83,9 +82,8 @@ public class Parser {
                 String[] descriptionBy = str.replace("deadline ", "").split(" /by ");
                 b = new Deadline(descriptionBy[0], descriptionBy[1]);
                 b.isDate();
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                break;
+            } catch (Exception e) {
+                return "Your command did not work, please try again";
             }
             return taskList.addTask(b);
 
@@ -97,14 +95,13 @@ public class Parser {
                 c = new Event(descriptionFromTo[0], fromTo[0], fromTo[1]);
                 c.isDate();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                break;
+                return "Your command did not work, please try again";
             }
             return taskList.addTask(c);
 
         case "delete":
-            String num_D = str.split(" ", 2)[1];
-            int nD = Integer.parseInt(num_D) - 1;
+            String numD = str.split(" ", 2)[1];
+            int nD = Integer.parseInt(numD) - 1;
             return taskList.delete(nD);
 
         case "find":

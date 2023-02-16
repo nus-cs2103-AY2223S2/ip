@@ -29,7 +29,7 @@ public class TaskList {
      * @param n the task number that the user wants to mark/unmark.
      *
      * @param isDone the boolean that decides whether to mark or unmark.
-     * @return
+     * @return returns a String indicating that the command was succesful or unsuccesful.
      */
     public String mark(int n, boolean isDone) throws IndexOutOfBoundsException {
         try {
@@ -56,13 +56,16 @@ public class TaskList {
                     + t.toString()
                     + "\nNow you have " + dukeList.size()
                     + " tasks in the list.";
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             return "The index you mentioned does not exist";
         }
     }
 
     /**
-     * The method prints out all the tasks in the list.
+     * The method returns out all tasks relating to the keyword typed by the user.
+     *
+     * @param keyword the word typed by the user to find tasks relating to it.
+     * @return returns all the tasks relating to the keyword.
      */
     public String find(String keyword) {
         String str = "Here are the matching tasks in your list:";
@@ -79,6 +82,11 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * The method returns all the tasks in the list.
+     *
+     * @return returns all the tasks in the list.
+     */
     public String recite() {
         if (dukeList.size() == 0) {
             return "Your list is empty";

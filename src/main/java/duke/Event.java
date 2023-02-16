@@ -13,7 +13,7 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
         if (description.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
     }
 
