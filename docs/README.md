@@ -4,7 +4,7 @@
 
 ### Add task: todo
 
-<span style="color:grey">Adds a task without any deadline.</span>.
+<span style="color:blue">Adds a task without any deadline.</span>.
 
 ### Add deadline task: deadline
 
