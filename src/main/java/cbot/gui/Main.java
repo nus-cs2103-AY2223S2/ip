@@ -30,6 +30,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Cbot v1.0");
             fxmlLoader.<MainWindow>getController().setCbot(cbot);
             fxmlLoader.<MainWindow>getController().greetUser();
             stage.show();
