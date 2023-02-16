@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String keyword = input.substring(5);
         int counter = 0;
-        StringBuilder matchingTasks = new StringBuilder("Here are the matching tasks in your list:");
+        StringBuilder matchingTasks = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
             Task findTask = tasks.get(i);
             if (findTask.contains(keyword)) {
