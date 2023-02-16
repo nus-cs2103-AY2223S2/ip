@@ -31,11 +31,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //dialogContainer.getChildren().add(Parser.DialogBox.getIrisDialog(this.iris.startingMessage(), irisImage));
     }
 
     public void setIris(Iris i) {
         this.iris = i;
+        dialogContainer.getChildren().add(DialogBox.getIrisDialog(this.iris.startingMessage(), irisImage));
     }
 
     /**
