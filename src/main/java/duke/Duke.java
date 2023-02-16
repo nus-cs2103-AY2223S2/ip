@@ -1,11 +1,13 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -47,6 +49,15 @@ public class Duke {
 
     public Ui getUi() {
         return ui;
+    }
+
+    public ArrayList<String>getTasks() {
+        ArrayList<Task>initTasks = tasks.getTasks();
+        ArrayList<String>convertTask = new ArrayList<>();
+        for (int i = 0; i < initTasks.size(); i++) {
+            convertTask.add((i + 1) + ". " + initTasks.get(i).toString());
+        }
+        return convertTask;
     }
 }
 

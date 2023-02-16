@@ -54,6 +54,6 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("Error writing to file");
         }
         ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have "
-                        + tasks.getSize() + " duke.tasks in the list.");
+                        + tasks.getSize() + " tasks in the list.");
     }
 }

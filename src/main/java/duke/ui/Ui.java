@@ -36,7 +36,7 @@ public class Ui {
      * @return the welcome message.
      */
     public String showWelcome() {
-        return "Hello from Duke,\nWhat can I do for you?";
+        return "My empress,\nHow can I help you?";
     }
 
     /**
@@ -61,7 +61,7 @@ public class Ui {
 
 
     public void showGoodbyeMessage() {
-        showToUser("Bye. Hope to see you again soon!");
+        showToUser("Take care, my empress!");
     }
 
     public void showError(String e) {
