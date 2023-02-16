@@ -39,7 +39,7 @@ jobs:
 
       - name: Install MacOS packages
         if: always() && runner.os == 'macOS'
-        run: sudo brew install dos2unix
+        run: brew install dos2unix
 
       - name: Install Windows packages
         if: always() && runner.os == 'Windows'
