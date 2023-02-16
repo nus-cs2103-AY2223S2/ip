@@ -15,3 +15,20 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+src/main/java/duke/Deadline.class
+src/main/java/duke/DialogBox.class
+src/main/java/duke/DontKnowWhatThatMeansException.class
+src/main/java/duke/Duke.class
+src/main/java/duke/DukeExceptions.class
+src/main/java/duke/EmptyDescriptionException.class
+src/main/java/duke/Event.class
+src/main/java/duke/Launcher.class
+src/main/java/duke/Main.class
+src/main/java/duke/MainWindow.class
+src/main/java/duke/Parser.class
+src/main/java/duke/PastDataDoesNotExistException.class
+src/main/java/duke/Storage.class
+src/main/java/duke/Tasks.class
+src/main/java/duke/TasksList.class
+src/main/java/duke/Todo.class
+src/main/java/duke/UI.class
