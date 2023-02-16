@@ -1,6 +1,8 @@
 # User Guide
 Welcome to CorkyNotes! CorkyNotes is a desktop app for managing your tasks, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CorkyNotes can get your task management done faster than traditional GUI apps.
 
+![Screenshot](Ui.png)
+
 
 
 ## Features
