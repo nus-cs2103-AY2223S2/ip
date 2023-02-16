@@ -73,11 +73,17 @@ public class Parser {
      * @param userInput full user input string
      * @return index of task specified
      */
-    public static int getTaskIndex(String userInput) {
-        String[] arrOfStr = userInput.split(" ");
-        String strIndex = arrOfStr[1];
-        int intIndex = Integer.parseInt(strIndex) - 1;
-        return intIndex;
+    public static int getTaskIndex(String userInput) throws DukeException {
+        try {
+            String[] arrOfStr = userInput.split(" ");
+            String strIndex = arrOfStr[1];
+            int intIndex = Integer.parseInt(strIndex) - 1;
+            return intIndex;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Failed because no task index was specified!");
+        } catch (Exception e) {
+            throw new DukeException("Failed because " + e.getMessage());
+        }
     }
 
     /**
@@ -223,31 +229,46 @@ public class Parser {
     /**
      * Parse mark command.
      * @param userInput full user input
-     * @return new MarkCommand
+     * @return new MarkCommand or new ErrorCommand if an error is caught
      */
     private static Command parseMark(String userInput) {
-        int taskIndex = getTaskIndex(userInput);
-        return new MarkCommand(taskIndex);
+        try {
+            int taskIndex = getTaskIndex(userInput);
+            return new MarkCommand(taskIndex);
+        } catch (DukeException e) {
+            Ui.showResponse(e.getMessage());
+            return new ErrorCommand(e.getMessage());
+        }
     }
 
     /**
      * Parse unmark command.
      * @param userInput full user input
-     * @return new UnmarkCommand
+     * @return new UnmarkCommand or new ErrorCommand if an error is caught
      */
     private static Command parseUnmark(String userInput) {
-        int taskIndex = getTaskIndex(userInput);
-        return new UnmarkCommand(taskIndex);
+        try {
+            int taskIndex = getTaskIndex(userInput);
+            return new UnmarkCommand(taskIndex);
+        } catch (DukeException e) {
+            Ui.showResponse(e.getMessage());
+            return new ErrorCommand(e.getMessage());
+        }
     }
 
     /**
      * Parse delete command.
      * @param userInput
-     * @return new DeleteCommand
+     * @return new DeleteCommand or new ErrorCommand if an error is caught
      */
     private static Command parseDelete(String userInput) {
-        int taskIndex = getTaskIndex(userInput);
-        return new DeleteCommand(taskIndex);
+        try {
+            int taskIndex = getTaskIndex(userInput);
+            return new DeleteCommand(taskIndex);
+        } catch (DukeException e) {
+            Ui.showResponse(e.getMessage());
+            return new ErrorCommand(e.getMessage());
+        }
     }
 
     /**

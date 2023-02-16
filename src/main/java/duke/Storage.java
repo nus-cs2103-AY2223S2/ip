@@ -22,6 +22,7 @@ public class Storage {
 
     /**
      * Constructor for Storage.
+     * @param fileDir
      * @param filePath
      */
     public Storage(String fileDir, String filePath) {
