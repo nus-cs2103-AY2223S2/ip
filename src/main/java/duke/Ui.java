@@ -84,7 +84,7 @@ public class Ui {
      * @return Response to show users the matching tasks.
      */
     public String printMatchingTasks(TaskList tasklist) {
-        String result = "Matching tasks are here ฅ(＾・ω・＾ฅ)\n";
+        String result = "Matching tasks are here:\n";
         if (tasklist.getNumberOfTasks() == 0) {
             return "There are no matching tasks in your list.";
         }
