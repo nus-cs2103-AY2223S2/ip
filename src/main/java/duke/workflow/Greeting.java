@@ -1,5 +1,6 @@
 package duke.workflow;
 
+import duke.util.Storage;
 import duke.util.TaskList;
 
 /**
@@ -37,7 +38,9 @@ public class Greeting extends Event {
         if (this.status.equals("NOT PLAYING")) {
             return new Ending();
         } else {
-            return new DoTask();
+            DoTask doTask = new DoTask();
+            doTask.setTaskList(Storage.loadProgress());
+            return doTask;
         }
     }
     public TaskList getTaskList() {

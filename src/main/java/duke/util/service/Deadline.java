@@ -23,6 +23,17 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(LocalDateTime deadline, String action, boolean isDone) {
+        super("D", action, isDone);
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String getAdditionalInfo() {
+        return "/BY " + deadline.format(
+                DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy"));
+    }
+
     @Override
     public String toString() {
         return super.toString() + " (BY: " + this.deadline.format(

@@ -17,4 +17,8 @@ public class ToDo extends Task {
     public ToDo(String action) {
         super("T", action);
     }
+
+    public ToDo(String action, boolean isDone) {
+        super("T", action, isDone);
+    }
 }

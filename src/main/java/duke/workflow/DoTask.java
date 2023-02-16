@@ -44,6 +44,10 @@ public class DoTask extends Event {
         this.foundList = new TaskList();
     }
 
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
     /**
      * Determines the next possible action after the user has entered an input.
      *
@@ -290,7 +294,12 @@ public class DoTask extends Event {
     public String toString() {
         String toPrintOut = "";
         if (this.firstTimeUsing) {
+            if (this.taskList.getSize() == 0) {
             toPrintOut += "INTERESTING. VERY INTERESTING. WHAT'S YOUR PLANS?";
+            } else {
+                toPrintOut += "WELCOME BACK... WHAT'S YOUR PLAN TODAY...";
+            }
+
         } else if (lastCommand.equals("LIST")) {
             toPrintOut += this.taskList.toString();
         } else {

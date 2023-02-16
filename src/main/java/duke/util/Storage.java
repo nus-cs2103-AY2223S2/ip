@@ -1,10 +1,18 @@
 package duke.util;
 
+import duke.util.service.Deadline;
+import duke.util.service.ScheduledEvent;
+import duke.util.service.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -36,18 +44,11 @@ public class Storage {
         File savedFile = new File("MY_GRAND_PLAN.txt");
         System.out.println("[X] FILE CREATED");
         try {
-            FileWriter myWriter = new FileWriter("MY_GRAND_PLAN.txt", true);
+            FileWriter myWriter = new FileWriter("MY_GRAND_PLAN.txt", false);
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task currenttask = taskList.getTask(i);
-                if (currenttask.getStatus()) {
-                    myWriter.write(currenttask.getNature()
-                            + " | " + "X" + " | " + currenttask.getAction()
-                            + currenttask.getAdditionalInfo() + '\n');
-                } else {
-                    myWriter.write(currenttask.getNature()
-                            + " | " + " " + " | " + currenttask.getAction()
-                            + currenttask.getAdditionalInfo() + '\n');
-                }
+                myWriter.write(currenttask.getNature() + " " + currenttask.getStatus() + " "
+                        + currenttask.getAction() + " "+ currenttask.getAdditionalInfo() + '\n');
             }
             myWriter.close();
             System.out.println("[X] FINISHED WRITING");
@@ -70,6 +71,50 @@ public class Storage {
             TaskList returnTaskList = new TaskList();
             while (progressScanner.hasNextLine()) {
                 String data = progressScanner.nextLine();
+                String[] availableTask = data.split(" ");
+                List<String> availableTaskAsList = Arrays.asList(availableTask);
+                boolean isDone = Boolean.parseBoolean(availableTaskAsList.get(1));
+                if (availableTaskAsList.get(0).equals("T")) {
+                    String action = "";
+                    for (int i = 2; i < availableTaskAsList.size(); i++) {
+                        action += availableTaskAsList.get(i) + " ";
+                    }
+                    returnTaskList.addTask(new ToDo(action, isDone));
+                } else if (availableTaskAsList.get(0).equals("D")) {
+                    String actionAndDate = "";
+                    for (int i = 2; i < availableTaskAsList.size(); i++) {
+                        actionAndDate += availableTaskAsList.get(i) + " ";
+                    }
+                    String[] deadlineInfo = actionAndDate.split(" /BY ");
+                    List<String> deadlineInfoAsList = Arrays.asList(deadlineInfo);
+                    String date = deadlineInfoAsList.get(1);
+
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
+
+                    returnTaskList.addTask(
+                            new Deadline(LocalDateTime.parse(date,format), deadlineInfoAsList.get(0), isDone));
+                } else {
+                    String actionAndDate = "";
+                    for (int i = 2; i < availableTaskAsList.size(); i++) {
+                        actionAndDate += availableTaskAsList.get(i) + " ";
+                    }
+
+                    String[] eventInfo = actionAndDate.split(" /FROM ");
+                    List<String> eventInfoAsList = Arrays.asList(eventInfo);
+
+                    String dateInfo = eventInfoAsList.get(1);
+
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
+
+                    String[] dateInfoAsArray = dateInfo.split(" /TO ");
+                    List<String> dateInfoAsList = Arrays.asList(dateInfoAsArray);
+
+                    returnTaskList.addTask(
+                            new ScheduledEvent(LocalDateTime.parse(dateInfoAsList.get(0), format),
+                                    LocalDateTime.parse(dateInfoAsList.get(1), format), eventInfoAsList.get(0), isDone));
+
+
+                }
 
             }
             progressScanner.close();
