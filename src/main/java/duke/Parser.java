@@ -1,19 +1,22 @@
 package duke;
 
+import java.util.HashMap;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import javafx.util.Pair;
 
-import java.util.HashMap;
-
+/**
+ * Class representing the parser.
+ */
 public class Parser {
     private static final BadCommandException BAD_PARAMS_ERROR =
             new BadCommandException("There are insufficient or invalid arguments!");
     private static final BadCommandException UNKNOWN_COMMAND_ERROR =
             new BadCommandException("I'm sorry, but I don't know what that means :-(");
-    private static final String PARAMS_DELIMITER =  "/";
+    private static final String PARAMS_DELIMITER = "/";
 
     private enum Command {
         LIST("list"),
@@ -24,8 +27,9 @@ public class Parser {
         DEADLINE("deadline"),
         EVENT("event"),
         FIND("find");
-        private final String commandStr;
         private static final HashMap<String, Command> STRING_TO_COMMAND_MAP = new HashMap<>();
+        private final String commandStr;
+
         static {
             for (Command command: values()) {
                 STRING_TO_COMMAND_MAP.put(command.commandStr, command);
@@ -148,7 +152,7 @@ public class Parser {
      * @param tasks The TaskList to be managed.
      * @param ui The Ui to be used to print messages.
      * @throws BadCommandException If the parameters of the input string are insufficient, or if
-     * the command given is not recognised.
+     *          the command given is not recognised.
      */
     public String parseString(String inputStr, TaskList tasks, Ui ui) throws BadCommandException {
         inputStr = inputStr.trim();

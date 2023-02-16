@@ -1,20 +1,23 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
+import duke.DukeException;
+
+/**
+ * Class representing an event
+ */
 public class Event extends Task {
+    protected static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy[ HHmm]");
+    protected static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
     protected String startStr;
     protected LocalDateTime startDateTime;
     protected String endStr;
     protected LocalDateTime endDateTime;
-    protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy[ HHmm]");
-    protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
 
     /**
      * Returns an Event object.
@@ -30,6 +33,15 @@ public class Event extends Task {
         setEndTime(endStr);
     }
 
+    /**
+     * Returns an Event object, with tags.
+     *
+     * @param description Description of the event.
+     * @param startStr A String representing the start date.
+     * @param endStr A String representing the end date.
+     * @param tags Tags of the Event.
+     * @throws DukeException
+     */
     public Event(String description, String startStr, String endStr, String tags) throws DukeException {
         super(description.trim(), TaskIcon.EVENT, tags);
         setStartTime(startStr);
@@ -42,7 +54,7 @@ public class Event extends Task {
             throw new DukeException("The start time of an event cannot be empty.");
         }
         try {
-            TemporalAccessor temporalAccessor = inputFormatter.parseBest(
+            TemporalAccessor temporalAccessor = INPUT_FORMATTER.parseBest(
                     startStr, LocalDateTime::from, LocalDate::from);
             if (temporalAccessor instanceof LocalDateTime) {
                 startDateTime = (LocalDateTime) temporalAccessor;
@@ -60,7 +72,7 @@ public class Event extends Task {
             throw new DukeException("The end time of an event cannot be empty.");
         }
         try {
-            TemporalAccessor temporalAccessor = inputFormatter.parseBest(
+            TemporalAccessor temporalAccessor = INPUT_FORMATTER.parseBest(
                     endStr, LocalDateTime::from, LocalDate::from);
             if (temporalAccessor instanceof LocalDateTime) {
                 endDateTime = (LocalDateTime) temporalAccessor;
@@ -85,8 +97,8 @@ public class Event extends Task {
         return String.format(
             "%s (from: %s to: %s)",
             super.toString(),
-            startDateTime == null ? startStr : startDateTime.format(outputFormatter),
-            endDateTime == null ? endStr : endDateTime.format(outputFormatter)
+            startDateTime == null ? startStr : startDateTime.format(OUTPUT_FORMATTER),
+            endDateTime == null ? endStr : endDateTime.format(OUTPUT_FORMATTER)
         );
     }
 }

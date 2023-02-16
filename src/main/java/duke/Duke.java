@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,37 +9,47 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Class encapsulating the entire Duke application.
+ */
 public class Duke extends Application {
-    private Storage storage;
+    protected static final String DATA_DIR = "data/";
+    protected static final String DATA_FILENAME = "duke.txt";
+    protected static final String WELCOME_MESSAGE = "Hello! I'm Duke!\nWhat can I do for you?";
+    protected static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    protected static final String EXIT_COMMAND = "bye";
+    private static final double STAGE_WIDTH = 500;
+    private static final double STAGE_HEIGHT = 750;
+    private static final double SEND_BUTTON_WIDTH = 55;
+    private final Storage storage;
     private TaskList tasks;
-    private Parser parser;
-    private Ui ui;
-    static protected final String DATA_DIR = "data/";
-    static protected final String DATA_FILENAME = "duke.txt";
-    static protected final String WELCOME_MESSAGE = "Hello! I'm Duke!\nWhat can I do for you?";
-    static protected final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    static protected final String EXIT_COMMAND = "bye";
+    private final Parser parser;
+    private final Ui ui;
 
     // For javaFX UI
-    private double STAGE_WIDTH = 500;
-    private double STAGE_HEIGHT = 750;
-    private double SEND_BUTTON_WIDTH = 55;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/cartoon_user.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream(("/images/cartoon_robot.png")));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/cartoon_user.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream(("/images/cartoon_robot.png")));
+
     public Duke() {
         this(DATA_DIR + DATA_FILENAME);
     }
+
     /**
      * Returns a Duke object.
+     *
      * @param filePath The file path where the data file is located.
      */
     public Duke(String filePath) {
@@ -102,10 +111,10 @@ public class Duke extends Application {
 
         // Styling ScrollPane
         dialogContainer.setBackground(new Background(
-                new BackgroundFill(
-                        Color.rgb(40, 40, 40),
-                        CornerRadii.EMPTY,
-                        Insets.EMPTY)
+                        new BackgroundFill(
+                                Color.rgb(40, 40, 40),
+                                CornerRadii.EMPTY,
+                                Insets.EMPTY)
                 )
         );
         dialogContainer.setPadding(new Insets(0, 0, 10, 0));

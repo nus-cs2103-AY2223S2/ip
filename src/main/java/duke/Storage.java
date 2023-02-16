@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,10 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+/**
+ * Class representing the loading and retrieving of data.
+ */
 public class Storage {
+    protected static final String LOAD_ERROR_PREFIX_STRING = "Error retrieving local data: ";
+    protected static final String SAVE_ERROR_PREFIX_STRING = "Error saving data: ";
     protected String filePath;
-    final protected String LOAD_ERROR_PREFIX_STRING = "Error retrieving local data: ";
-    final protected String SAVE_ERROR_PREFIX_STRING = "Error saving data: ";
 
     /**
      * Returns a Storage object.
@@ -85,8 +88,8 @@ public class Storage {
                     }
                 } catch (DukeException e) {
                     throw new DukeException(String.format(
-                            LOAD_ERROR_PREFIX_STRING +
-                                    "Error processing row %d of %s: %s",
+                            LOAD_ERROR_PREFIX_STRING
+                                    + "Error processing row %d of %s: %s",
                             rowCnt,
                             filePath,
                             e.getMessage()

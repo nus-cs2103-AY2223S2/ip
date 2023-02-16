@@ -1,32 +1,40 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.HashMap;
 
+import duke.DukeException;
+
+/**
+ * Class representing a Task.
+ */
 public abstract class Task {
+    /**
+     * Enum representing the task icon.
+     */
     public enum TaskIcon {
-        TODO ("T"),
-        EVENT ("E"),
-        DEADLINE ("D");
-        private final String iconString;
+        TODO("T"),
+        EVENT("E"),
+        DEADLINE("D");
         private static final HashMap<String, TaskIcon> STRING_TO_ENUM_MAP = new HashMap<>();
+        private final String iconString;
 
         static {
-            for (TaskIcon taskIcon: values()) {
+            for (TaskIcon taskIcon : values()) {
                 STRING_TO_ENUM_MAP.put(taskIcon.getIconString(), taskIcon);
             }
+        }
+
+        TaskIcon(String iconString) {
+            this.iconString = iconString;
         }
 
         public static TaskIcon valueOfIconString(String iconString) {
             return STRING_TO_ENUM_MAP.get(iconString);
         }
-        TaskIcon(String iconString) {
-            this.iconString = iconString;
-        }
 
         /**
          * Getter function for the symbol of the enum
+         *
          * @return Symbol string
          */
         public String getIconString() {
@@ -40,6 +48,7 @@ public abstract class Task {
 
     /**
      * Returns a Task object.
+     *
      * @param description Description of the task.
      */
     protected Task(String description, TaskIcon taskIcon) throws DukeException {
@@ -51,7 +60,7 @@ public abstract class Task {
         }
     }
 
-    protected Task (String description, TaskIcon taskIcon, String tags) throws DukeException {
+    protected Task(String description, TaskIcon taskIcon, String tags) throws DukeException {
         this(description, taskIcon);
         this.tags = tags.trim();
         if (this.tags.equals("")) {

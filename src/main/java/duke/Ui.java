@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class for managing the UI.
+ */
 public class Ui {
     /**
      * Shows normal display message.

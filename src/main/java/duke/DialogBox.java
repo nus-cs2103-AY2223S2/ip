@@ -1,26 +1,30 @@
 package duke;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * HBox class representing the individual dialog boxes.
+ */
 public class DialogBox extends HBox {
-    private Label text;
+    private static final Color DUKE_BG_COLOR = Color.rgb(54, 54, 54);
+    private static final Color USER_BG_COLOR = Color.rgb(2, 119, 189);
+    private static final CornerRadii CORNER_RADIUS = new CornerRadii(5);
+    private static final double IMAGE_WIDTH = 40.0;
+    private static final double IMAGE_HEIGHT = 40.0;
     private ImageView displayPicture;
-    private static Color DUKE_BG_COLOR = Color.rgb(54, 54, 54);
-    private static Color USER_BG_COLOR = Color.rgb(2, 119, 189);
-    private static CornerRadii CORNER_RADIUS = new CornerRadii(5);
-    private static double IMAGE_WIDTH = 40.0;
-    private static double IMAGE_HEIGHT = 40.0;
+    private Label text;
 
     /**
      * Creates a new DialogBox.

@@ -1,12 +1,15 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
+import duke.task.Task;
+
+/**
+ * Class representing the list of Tasks.
+ */
 public class TaskList {
-    protected final static BadCommandException INDEX_OOB_ERROR =
+    protected static final BadCommandException INDEX_OOB_ERROR =
             new BadCommandException("Index given is out of bounds!");
     protected ArrayList<Task> tasks;
 
@@ -16,6 +19,7 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<>();
     }
+
     /**
      * Initialises an TaskList containing some Tasks.
      */
@@ -29,6 +33,7 @@ public class TaskList {
 
     /**
      * Adds a task.
+     *
      * @param newTask The task to be added.
      */
     public void addTask(Task newTask) {
@@ -37,6 +42,7 @@ public class TaskList {
 
     /**
      * Removes a task.
+     *
      * @param idx The index of the task to be removed.
      * @return The removed task.
      * @throws BadCommandException If the idx given is OOB.
@@ -52,6 +58,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
+     *
      * @param idx Index of the task.
      * @throws BadCommandException If the idx given is OOB.
      */
@@ -64,6 +71,7 @@ public class TaskList {
 
     /**
      * Unmarks a task as done.
+     *
      * @param idx Index of the task.
      * @throws BadCommandException If the idx given is OOB.
      */
@@ -76,6 +84,7 @@ public class TaskList {
 
     /**
      * Retrieves a task.
+     *
      * @param idx Index of the task.
      * @throws BadCommandException If the idx given is OOB.
      */
@@ -88,16 +97,17 @@ public class TaskList {
 
     /**
      * Retreives tasks using a keyword.
+     *
      * @param keyword Keyword to be given.
      * @return TaskList containing the matching tasks.
      */
     public TaskList getTasksByKeyword(String keyword) {
         String trimmedKeyword = keyword.trim().toLowerCase();
         TaskList matchingTasks = new TaskList();
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             String taskString = task.toString().toLowerCase();
             if (task.toString().toLowerCase().contains(trimmedKeyword)
-                || trimmedKeyword.contains(taskString)) {
+                    || trimmedKeyword.contains(taskString)) {
                 matchingTasks.addTask(task);
             }
         }
@@ -107,6 +117,7 @@ public class TaskList {
     public int getSize() {
         return tasks.size();
     }
+
     @Override
     public String toString() {
         StringBuilder listOutput = new StringBuilder();

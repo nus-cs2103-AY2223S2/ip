@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * Class representing a Todo.
+ */
 public class Todo extends Task {
     public Todo(String description) throws DukeException {
         super(description.trim(), TaskIcon.TODO);
