@@ -14,7 +14,7 @@ import luffy.task.Todo;
  * Class contains variables and methods related to interactions with the user.
  */
 public class Ui {
-    private static final String LINE = "____________________________________________________________";
+    private static final String LINE = "________________________________";
     private final Scanner input;
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
      * @return Response after printing lst.
      */
     public String showList(TaskList taskList) {
-        return showLine() + "Here are the tasks in your list:\n" + taskList.printList() + showLine();
+        return showLine() + "Here are the tasks in your list:\n" + taskList.printList() + showLine() + showLine();
     }
 
     /**

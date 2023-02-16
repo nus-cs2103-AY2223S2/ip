@@ -164,6 +164,7 @@ public class TaskList {
             Task task = this.lst.get(i);
             if (task.isTaskInSchedule(date)) {
                 schedule += String.format("%d. %s\n", count, task);
+                count++;
             }
         }
         return schedule;
