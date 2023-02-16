@@ -7,10 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.command.AddDeadlineCommand;
 import duke.command.AddToDoCommand;
-import duke.command.FindTasksCommand;
 import duke.command.ListTasksCommand;
-import duke.command.MarkTaskCommand;
-import duke.command.RemoveTaskCommand;
 import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.ToDo;

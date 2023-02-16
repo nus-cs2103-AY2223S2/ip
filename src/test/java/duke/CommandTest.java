@@ -63,27 +63,27 @@ public class CommandTest {
     }
 
     @Test
-    public void TestFindTasksCommand() {
+    public void testFindTasksCommand() {
         Command command = new FindTasksCommand("test");
         assertEquals(command.toString(), "FindTasksCommand{keyword=test}");
     }
 
     @Test
-    public void TestCommandEquality() {
+    public void testCommandEquality() {
         Command command1 = new FindTasksCommand("test");
         Command command2 = new FindTasksCommand("test");
         assertEquals(command1, command2);
     }
 
     @Test
-    public void TestCommandInequality() {
+    public void testCommandInequality() {
         Command command1 = new FindTasksCommand("test");
         Command command2 = new FindTasksCommand("test2");
         assertEquals(command1.equals(command2), false);
     }
 
     @Test
-    public void TestCommandInequalityWithDifferentClass() {
+    public void testCommandInequalityWithDifferentClass() {
         Command command1 = new FindTasksCommand("test");
         Command command2 = new ListTasksCommand();
         assertEquals(command1.equals(command2), false);
