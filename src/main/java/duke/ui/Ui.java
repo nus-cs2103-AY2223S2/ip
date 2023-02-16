@@ -30,7 +30,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
     }
     public String getWelcomeMessage() {
-        return "Hello! I'm Jamie 😃\n"
+        return "Hello! I'm Jamie\n"
                 + "A personality of the Duke project.\n"
                 + "What can I do for you?";
     }
@@ -113,6 +113,6 @@ public class Ui {
      * @param errorMessage Error message
      */
     public void showError(String errorMessage) {
-        echo("☹ OOPS!!! " + errorMessage + " :-(");
+        echo("OOPS!!! " + errorMessage + " :-(");
     }
 }

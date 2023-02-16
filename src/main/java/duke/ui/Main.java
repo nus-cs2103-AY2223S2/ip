@@ -6,6 +6,7 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,6 +17,9 @@ public class Main extends Application {
 
     private final Duke duke = new Duke();
 
+    private final Image dukeLogo = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png"));
+
     @Override
     public void start(Stage stage) {
         try {
@@ -24,8 +28,10 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
+            stage.setTitle("Jamie Task Manager");
+            stage.getIcons().add(dukeLogo);
             stage.setResizable(false);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -3,12 +3,13 @@ package duke.ui;
 import duke.Duke;
 import duke.DukeException;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass()
             .getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaDuke.png"));
+            .getResourceAsStream("/images/DaJamie.png"));
 
     /**
      * Initializes the gui for Duke.
@@ -37,14 +38,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)
-        );
+
+        Color color = Color.LIGHTGOLDENRODYELLOW;
+        CornerRadii round = new CornerRadii(10);
+        BackgroundFill background = new BackgroundFill(color, round, Insets.EMPTY);
+        dialogContainer.setBackground(new Background(background));
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
         String loadErrorMessage = duke.getLoadErrorMessage();
         if (loadErrorMessage != null) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(loadErrorMessage, dukeImage)
-            );
+            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(loadErrorMessage, dukeImage));
         }
 
     }
@@ -63,10 +66,9 @@ public class MainWindow extends AnchorPane {
         DialogBox userDialogBox = DialogBox.getUserDialog(input, userImage);
         dialogContainer.getChildren().add(userDialogBox);
 
-        String response = "";
-        DialogBox dukeDialogBox = null;
+        DialogBox dukeDialogBox;
         try {
-            response = duke.getResponse(input);
+            String response = duke.getResponse(input);
             dukeDialogBox = DialogBox.getDukeDialog(response, dukeImage);
         } catch (DukeException e) {
             dukeDialogBox = DialogBox.getErrorDialog(e.getMessage(), dukeImage);
