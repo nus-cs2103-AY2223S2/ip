@@ -23,6 +23,14 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Updates a task based on type of update and newValue.
+     * 
+     * @param type the type of update.
+     * @param newValue the updated value.
+     * @return a reply message string.
+     * @throws DukeException if type of update is not compatible with Event obj.
+     */
     public void update(UpdateType type, String newValue) throws DukeException {
         if(type == UpdateType.by) {
             throw new DukeException("/by does not exist in Event Object.");

@@ -17,6 +17,14 @@ public class ToDo extends Task {
         super(name);
     }
 
+    /**
+     * Updates a task based on type of update and newValue.
+     * 
+     * @param type the type of update.
+     * @param newValue the updated value.
+     * @return a reply message string.
+     * @throws DukeException if type of update is not compatible with ToDo obj.
+     */
     public void update(UpdateType type, String newValue) throws DukeException {
         if(type != UpdateType.name) {
             throw new DukeException("/by, /from, /to does not exist in ToDo Object.");

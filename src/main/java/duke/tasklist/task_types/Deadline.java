@@ -29,6 +29,14 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Updates a task based on type of update and newValue.
+     * 
+     * @param type the type of update.
+     * @param newValue the updated value.
+     * @return a reply message string.
+     * @throws DukeException if type of update is not compatible with Deadline obj.
+     */
     public void update(UpdateType type, String newValue) throws DukeException {
         if(type == UpdateType.from || type == UpdateType.to) {
             throw new DukeException("/from and /to does not exist in Deadline Object.");
