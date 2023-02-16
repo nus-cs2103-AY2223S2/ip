@@ -1,5 +1,6 @@
 package jeno.command;
 
+import jeno.exception.JenoException;
 import jeno.storage.Note;
 import jeno.storage.TaskList;
 
@@ -8,6 +9,7 @@ public class HelpCommand extends Command {
             "todo <task name>\n" +
             "deadline <deadline name> /by <deadline time>*\n" +
             "event <event name> /from <start time> /by <end time>*\n" +
+            "find <keyword>\n" +
             "delete\n" +
             "clear\n" +
             "list\n" +
@@ -16,7 +18,9 @@ public class HelpCommand extends Command {
             "note <note>\n" +
             "opennotes\n" +
             "clearnotes\n\n" +
-            "Note that time has to be in 'DD/MM/YYYY HH:mm' format.";
+            "Note that time has to be in 'DD/MM/YYYY HH:mm' format.\n\n" +
+            "For detailed command description, type in 'help <command name>'\n" +
+            "E.g. 'help todo'";
 
     /**
      * Constructor for Command class.
@@ -32,7 +36,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Note notes) {
+    public String execute(TaskList tasks, Note notes) throws JenoException {
         if (userInput.length() > 4) {
             switch (getCommand(userInput)) {
             case ("todo"):
@@ -62,8 +66,26 @@ public class HelpCommand extends Command {
                         "List all active tasks in task list.";
             case("mark"):
                 return "mark <task index>\n\n" +
-                        "Mark a task of index specified in <task index> as done.\n";
+                        "Mark a task of index specified in <task index> as done.";
+            case("unmark"):
+                return "unmark <task index>\n\n" +
+                        "Unmark a task of index specified in <task index>.";
+            case("find"):
+                return "find <keyword>\n\n" +
+                        "Display all tasks in current task list that contains keyword.";
+            case("note"):
+                return "note <note>\n\n" +
+                        "Store note inputted in <note> field.";
+            case("opennotes"):
+                return "opennotes\n\n" +
+                        "Display current notes.";
+            case("clearnotes"):
+                return "clearnotes\n\n" +
+                        "Delete all notes.";
             default:
+                if(!getCommand(userInput).isBlank()) {
+                    throw new JenoException("Oops! Please enter a valid command.");
+                }
             }
         }
         return helpMessage;
