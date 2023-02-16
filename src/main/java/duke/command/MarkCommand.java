@@ -33,6 +33,6 @@ public class MarkCommand extends Command {
         Task task = tasks.get(index);
         task.mark();
         storage.saveTasks(tasks);
-        return "Nice! I've marked this task as done:\n" + task;
+        return "Good job finishing this lightweight task:\n" + task;
     };
 }

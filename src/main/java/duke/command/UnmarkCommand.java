@@ -33,6 +33,6 @@ public class UnmarkCommand extends Command {
         Task task = tasks.get(index);
         task.unmark();
         storage.saveTasks(tasks);
-        return "OK, I've marked this task as not done yet:\n" + task;
+        return "Remember to do this lightweight tasks:\n" + task;
     };
 }

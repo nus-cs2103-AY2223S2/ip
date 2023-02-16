@@ -10,6 +10,6 @@
 }
 
 #scrollPane {
-    -fx-background-color: linear-gradient(to right, #FF3838, #FFA0A0);
+    -fx-background-color: linear-gradient(to right, #828282, #ABABAB);
     -fx-background: transparent;
 }

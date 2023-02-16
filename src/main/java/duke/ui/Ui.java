@@ -8,14 +8,14 @@ public class Ui {
      * Prints welcome message.
      */
     public String showWelcomeMessage() {
-        return "Hello, I am Duke. \nWhat can I do for you?";
+        return "I am Ronnie, lightweight baby! \nWhat can I do for you?";
     }
 
     /**
      * Prints farewell message when user exits.
      */
     public String farewellMessage() {
-        return "Bye. Hope to see you again soon!!!";
+        return "Bye. Make sure to consume your protein!!";
     }
 }
 

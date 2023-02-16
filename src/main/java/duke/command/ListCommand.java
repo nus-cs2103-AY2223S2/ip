@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      * @param storage The Storage object to save the task after execution.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        StringBuilder listOfTasks = new StringBuilder("Here are your tasks: \n");
+        StringBuilder listOfTasks = new StringBuilder("Here's what you need to do to become massive: \n");
         for (int i = 0; i < tasks.getSize(); i++) {
             listOfTasks.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
