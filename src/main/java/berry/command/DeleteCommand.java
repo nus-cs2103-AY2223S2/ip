@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
             output += ui.showDelete();
-            tasks.deleteTask(taskIndex);
+            output += tasks.deleteTask(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }

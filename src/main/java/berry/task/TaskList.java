@@ -39,9 +39,9 @@ public class TaskList {
      */
     public String deleteTask(int index) {
         assert index > 0 : "Task index should be bigger than 0";
-        String output = listOfTasks.get(index - 1).toString();
+        String output = "\t" + listOfTasks.get(index - 1).toString();
         listOfTasks.remove(index - 1);
-        output += getNumberOfTasks();
+        output += "\n" + getNumberOfTasks();
         return output;
     }
 
@@ -103,6 +103,6 @@ public class TaskList {
      * Prints the number of tasks in the task list.
      */
     public String getNumberOfTasks() {
-        return "You now have " + listOfTasks.size() + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა";
+        return "You now have " + listOfTasks.size() + " task(s) in the list";
     }
 }

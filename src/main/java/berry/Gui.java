@@ -31,6 +31,7 @@ public class Gui extends Application {
             MainWindow mainWindow = fxmlLoader.getController();
             mainWindow.setBerry(berry);
             mainWindow.setStage(stage);
+            stage.setTitle("🍒Berry🍒");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

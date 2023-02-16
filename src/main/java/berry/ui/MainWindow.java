@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,9 +30,9 @@ public class MainWindow extends AnchorPane {
 
     private Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/piupiuDefault.png"));
-    private Image berryDefaultImage = new Image(this.getClass().getResourceAsStream("/images/molangDefault.png"));
-    private Image berryThinkImage = new Image(this.getClass().getResourceAsStream("/images/molangThink.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userDefault.png"));
+    private Image berryDefaultImage = new Image(this.getClass().getResourceAsStream("/images/berryDefault.png"));
+    private Image berryThinkImage = new Image(this.getClass().getResourceAsStream("/images/berryThink.png"));
 
     @FXML
     public void initialize() {
@@ -84,5 +85,4 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getBerryDialog(dukeText, berryDefaultImage)
         );
     }
-
 }

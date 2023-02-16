@@ -146,6 +146,7 @@ public class Parser {
         String byDate = containsTag(userInput)
                 ? userInput.split(PREFIX_BY)[1].split(PREFIX_TAG)[0].trim()
                 : userInput.split(PREFIX_BY)[1].trim();
+
         // If there is no tags. Exception thrown if description contains tags.
         if (!containsTag(userInput)) {
             return new AddTaskCommand(new Deadline(description, byDate));

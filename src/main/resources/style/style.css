@@ -1,6 +1,6 @@
 Button {
     -fx-background-radius: 10em;
-    -fx-background-image: url("/images/endDefault.png");
+    -fx-background-color: #fac8dd;
 }
 
 VBox {
@@ -10,7 +10,13 @@ VBox {
     -fx-padding: 10;
 }
 
-DialogBox {
+TextField {
+    -fx-background-radius: 10em;
+}
+
+.my-dialog {
     -fx-background-radius: 15;
+    -fx-background-color: white;
+    -fx-opacity: 75%;
     -fx-padding: 10;
 }

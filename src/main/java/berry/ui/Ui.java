@@ -3,6 +3,7 @@ package berry.ui;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import berry.exception.NoTasksException;
 import berry.task.Task;
 import berry.task.TaskList;
 
@@ -15,21 +16,18 @@ public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
     /**
-     * Reads the user input.
+     * General command to show a string to the ui.
      *
-     * @return the user input as a string
+     * @param toPrint string to be printed to ui
+     * @return string to be printed to ui
      */
-    public static String readCommand() {
-        return sc.nextLine();
-    }
-
     public static String show(String toPrint) {
         return toPrint;
     }
 
     public static String showWelcome() {
         String logo = "";
-        return logo + "Hey there! \nI'm Berry the Bunny~ ૮ ˶ᵔ ᵕ ᵔ˶ ა\n"
+        return logo + "Hey there! \nI'm Berry the Bunny~ <3 \n"
                 + "What are you looking to plan today?";
     }
 
@@ -37,33 +35,35 @@ public class Ui {
         return "Bye! I hope Berry was helpful to you <: \n";
     }
 
-    public static String showError(String message) {
-        return message;
-    }
-
-    public static String showListOfTasks(TaskList tasks) {
+    public static String showListOfTasks(TaskList tasks) throws NoTasksException {
         ArrayList<Task> listOfTasks = tasks.getList();
+        int length = listOfTasks.size();
+
+        if (length == 0) {
+            throw new NoTasksException();
+        }
+
         String output = "Here's what I have for you:\n";
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            output += (i + 1) + ". " + listOfTasks.get(i).toString() + "\n";
+        for (int i = 0; i < length; i++) {
+            output += "\t" + (i + 1) + ". " + listOfTasks.get(i).toString() + "\n";
         }
         return output;
     }
 
     public static String showUnmark() {
-        return "Okay! I'll set the task as not done. \n₍ ˃ ⤙ ˂ ₎\n";
+        return "Okay! I'll set the task as not done\n";
     }
 
     public static String showMark() {
-        return "Alright~ I'll set the task as done! \n₍ ˶ᵔ ᵕ ᵔ˶ ₎\n";
+        return "Alright~ I'll set the task as done!\n";
     }
 
     public static String showAdd() {
-        return "Done and ready to go~ I've added this task for ya!\n";
+        return "You can do it! I've added this task for ya\n";
     }
 
     public static String showDelete() {
-        return "Here you go! I've deleted this task for ya.\n";
+        return "Here you go! I've deleted this task for ya\n";
     }
 
     public static String showFind() {
@@ -71,6 +71,6 @@ public class Ui {
     }
 
     public static String showLoadingError() {
-        return "I can't seem to load the file \n˶> _ <˶ \n";
+        return "I can't seem to load the file\n";
     }
 }

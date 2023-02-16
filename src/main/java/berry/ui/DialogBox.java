@@ -20,7 +20,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -82,9 +81,10 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    private void style() {this.setSpacing(5);
+    private void style() {
+        this.setSpacing(5);
         this.setFillHeight(false);
-
+        dialog.getStyleClass().add("my-dialog");
         BorderStroke borderStroke = new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,
                 new CornerRadii(10.0), new BorderWidths(1.0));
         Border dialogBorder = new Border(borderStroke);
