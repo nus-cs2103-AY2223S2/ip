@@ -5,3 +5,4 @@ T | 1 | join sports club
 D | 1 | submit assignment | 2023-01-26
 D | 0 | clear todo list | 2023-02-01
 T | 0 | get my stuff together
+T | 0 | sleep more

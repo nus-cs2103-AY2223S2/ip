@@ -8,7 +8,7 @@ public class ParserTest {
     @Test
     public void getMarkNumTest() {
         try {
-            assertArrayEquals(Parser.getMarkNum("mark 2", true),
+            assertEquals(new Parser().getMarkNum("mark 2", true),
                     2);
         }
         catch (Exception ignored) {
@@ -18,7 +18,7 @@ public class ParserTest {
     @Test
     public void getTodoNameTest() {
         try {
-            assertArrayEquals(Parser.getTodoName("todo hello"),
+            assertEquals(new Parser().getTodoName("todo hello"),
                     "hello");
         }
         catch (Exception ignored) {
