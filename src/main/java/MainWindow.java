@@ -55,7 +55,7 @@ public class MainWindow extends VBox {
      */
     @FXML
     private void welcomeMessage() {
-        String message = "Welcome to the Pepe Bot.\nTry Adding a Task with (todo, deadline or event)";
+        String message = "Welcome to the Pepe Bot.\nType 'help' for command syntax.";
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(message, dukeImage)
