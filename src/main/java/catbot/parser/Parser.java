@@ -1,5 +1,6 @@
 package catbot.parser;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import catbot.CatBotException;
 import catbot.commands.AddDeadlineCommand;
 import catbot.commands.AddEventCommand;
+import catbot.commands.AddRecurringCommand;
 import catbot.commands.AddTodoCommand;
 import catbot.commands.Command;
 import catbot.commands.DeleteCommand;
@@ -58,6 +60,24 @@ public class Parser {
                 LocalDateTime to = LocalDateTime.parse(temp[2].strip());
                 return new AddEventCommand(temp[0].strip(), from, to);
             } catch (DateTimeParseException e) {
+                throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new CatBotException("That's the wrong format!");
+            }
+
+        case "recurring":
+            try {
+                temp = commandComponents[1].split("/at|/every", 3);
+                LocalDateTime at = LocalDateTime.parse(temp[1].strip());
+                Duration every = Duration.parse(temp[2].strip());
+                if (every.isNegative() || every.isZero()) {
+                    throw new CatBotException("I can't travel back in time ... yet!");
+                }
+                return new AddRecurringCommand(temp[0].strip(), at, every);
+            } catch (DateTimeParseException e) {
+                if (e.toString().contains("Duration")) {
+                    throw new CatBotException("Durations should be in the format P#DT#H#M#S");
+                }
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new CatBotException("That's the wrong format!");
