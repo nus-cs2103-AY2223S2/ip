@@ -16,13 +16,16 @@ import duke.task.Todo;
  * Storage deals with loading tasks from the file and saving tasks to the file.
  */
 public class Storage {
+
+    private String fileDir;
     private String filePath;
 
     /**
      * Constructor for Storage.
      * @param filePath
      */
-    public Storage(String filePath) {
+    public Storage(String fileDir, String filePath) {
+        this.fileDir = fileDir;
         this.filePath = filePath;
     }
 
@@ -31,10 +34,14 @@ public class Storage {
      * @return arraylist of tasks
      * @throws FileNotFoundException
      */
-    public ArrayList<Task> loadContents() throws FileNotFoundException, DukeException {
+    public ArrayList<Task> loadContents() throws IOException, DukeException {
+        File folder = new File(this.fileDir);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
         File f = new File(this.filePath);
         if (!f.exists()) {
-            throw new FileNotFoundException("File does not exist!");
+            f.createNewFile();
         }
         Scanner sc = new Scanner(f);
         ArrayList<Task> taskList = new ArrayList<Task>();

@@ -14,8 +14,8 @@ public class Duke {
      * Constructor for Duke.
      * @param filePath
      */
-    public Duke(String filePath) {
-        this.storage = new Storage(filePath);
+    public Duke(String fileDir, String filePath) {
+        this.storage = new Storage(fileDir, filePath);
         this.ui = new Ui();
         try {
             this.tasks = new TaskList(storage.loadContents());
@@ -30,7 +30,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke("data", "data/duke.txt").run();
     }
 
     /**
