@@ -2,6 +2,7 @@ package nemo.ui;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -75,6 +76,9 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getNemoDialog(response, nemoImage)
             );
+            if (response.split(" ", 2)[0].equals("Bye")) {
+                Platform.exit();
+            }
         }
         userInput.clear();
     }
