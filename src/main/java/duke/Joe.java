@@ -30,6 +30,4 @@ class Joe {
         }
         return out;
     }
-
-
 }

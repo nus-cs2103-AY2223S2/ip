@@ -28,4 +28,9 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void stop() throws InterruptedException {
+        Thread.sleep(500);
+    }
 }

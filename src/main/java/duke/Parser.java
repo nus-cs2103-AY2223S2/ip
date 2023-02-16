@@ -42,10 +42,14 @@ class Parser {
     String returnList(List<Task> taskList) {
         StringBuilder out = new StringBuilder();
         int size = taskList.size();
-        for (int i = 1; i < size; i++) {
-            out.append(String.format("%d. %s\n", i, taskList.get(i - 1)));
+        if (taskList.size() > 0) {
+            for (int i = 1; i < size; i++) {
+                out.append(String.format("%d. %s\n", i, taskList.get(i - 1)));
+            }
+            out.append(String.format("%d. %s", size, taskList.get(size - 1)));
+        } else {
+            out.append("Your list is empty hehe.");
         }
-        out.append(String.format("%d. %s", size, taskList.get(size - 1)));
         return out.toString();
     }
 
@@ -79,7 +83,7 @@ class Parser {
         int i = Integer.parseInt(input.split(" ", 2)[1]) - 1;
         Task task = taskList.remove(i);
         String out = String.format("\tNoted. I've removed this task:\n\t  %s", task);
-        out += String.format("\n\tNow you have %d tasks in the list.", taskList.size());
+        out += String.format("\nNow you have %d tasks in the list.", taskList.size());
         return out;
     }
 
@@ -122,9 +126,15 @@ class Parser {
                 DukeException.rethrow("UnknownCommand");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return new String[]{"", "Oops your command is not recognized"};
         }
         return null;
+    }
+
+    String formatAddTask(Task task) {
+        String out = String.format("Added:\n\t%s", task);
+        out += String.format("\nNow you have %d tasks in the list.", taskList.size());
+        return out;
     }
 
     String[] addToDo(String[] input) throws Exception {
@@ -133,37 +143,44 @@ class Parser {
         }
         Task task = new ToDo(input[1]);
         taskList.add(task);
-        return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+        return new String[]{String.valueOf(taskList.size()), formatAddTask(task)};
     }
 
     String[] addDeadline(String[] input, Boolean isAlt) {
         DateTimeFormatter dtFormat;
+        String[] s;
         if (isAlt) {
             dtFormat = altFormatter;
+            s = input[1].split(" by: ");
         } else {
             dtFormat = formatter;
+            s = input[1].split(" /by ");
         }
-        String[] s = input[1].split(" /by ");
         LocalDateTime byTime = LocalDateTime.parse(s[1], dtFormat);
         Task task = new Deadline(s[0], byTime);
         taskList.add(task);
-        return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+        return new String[]{String.valueOf(taskList.size()), formatAddTask(task)};
     }
 
     String[] addEvent(String[] input, Boolean isAlt) {
         DateTimeFormatter dtFormat;
+        String[] s;
+        String taskDescription;
         if (isAlt) {
             dtFormat = altFormatter;
+            s = input[1].split(" from: ", 2);
+            taskDescription = s[0];
+            s = s[1].split(" to: ");
         } else {
             dtFormat = formatter;
+            s = input[1].split(" /from ", 2);
+            taskDescription = s[0];
+            s = s[1].split(" /to ");
         }
-        String[] s = input[1].split(" /from ", 2);
-        String taskDescription = s[0];
-        s = s[1].split(" /to ");
         LocalDateTime fromTime = LocalDateTime.parse(s[0], dtFormat);
         LocalDateTime toTime = LocalDateTime.parse(s[1], dtFormat);
         Task task = new Event(taskDescription, fromTime, toTime);
         taskList.add(task);
-        return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+        return new String[]{String.valueOf(taskList.size()), formatAddTask(task)};
     }
 }
