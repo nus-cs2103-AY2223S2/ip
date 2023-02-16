@@ -24,7 +24,6 @@ public class ParserTest {
         Storage storage = new Storage("data/tasks");
         Tasklist tasklist = new Tasklist();
         Parser parser = new Parser();
-        DukeException exception = assertThrows(DukeException.class, () -> parser.parse("bird", tasklist, ui, storage));
-        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", exception.getMessage());
+        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Type /help for user guide.", parser.parse("bird", tasklist, ui, storage));
     }
 }
