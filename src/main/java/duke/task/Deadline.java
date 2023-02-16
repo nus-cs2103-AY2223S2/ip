@@ -12,7 +12,7 @@ import duke.parser.Parser;
  */
 public class Deadline extends Task {
     protected String duedate;
-
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     /**
      * Constructor for Deadline task, loaded from the storage file.
      * @param input Description of task including its due date.
@@ -25,7 +25,7 @@ public class Deadline extends Task {
         this.description = temp[0].trim();
         LocalDate inputFormatter = LocalDate.parse(temp[1]);
         this.duedate = inputFormatter.toString();
-        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        this.duedateString = inputFormatter.format(dateTimeFormatter);
     }
 
     /**
@@ -47,14 +47,10 @@ public class Deadline extends Task {
         this.description = descriptionArr[0];
         LocalDate inputFormatter = Parser.parseDate(descriptionArr[1]);
         this.duedate = inputFormatter.toString();
-        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        this.duedateString = inputFormatter.format(dateTimeFormatter);
     }
     public String saveTask() {
         return this.symbol + "," + isDone + "," + this.description + "," + duedate;
-    }
-
-    public String getDuedate() {
-        return this.duedate.toString();
     }
 }
 

@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 
 public class FindCommand extends Command {
     private String input;

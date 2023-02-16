@@ -1,7 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -10,9 +12,13 @@ import duke.parser.Parser;
  * Represents an Event task that has a description, a start date and time as well as an end date and time.
  */
 public class Event extends Task {
-    protected String startTime;
-    protected String endTime;
+    protected LocalDateTime startTime;
+    protected String startTimeString;
+    protected LocalDateTime endTime;
+    protected String endTimeString;
     protected DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
 
     /**
      * Constructor for Event task, loaded from the storage file.
@@ -22,12 +28,14 @@ public class Event extends Task {
     public Event(String input, boolean isDone) {
         super(input, isDone);
         this.symbol = 'E';
-        String[] temp = input.split(",");
-        this.description = temp[0].trim();
-        String[] dueArr = temp[1].split(" to ");
-        this.startTime = LocalDateTime.parse(dueArr[0], displayFormatter).toString();
-        this.endTime = LocalDateTime.parse(dueArr[1], displayFormatter).toString();
-        this.duedateString = temp[1];
+        String[] taskStringArr = input.split(",");
+        this.description = taskStringArr[0].trim();
+        String[] dueArr = taskStringArr[1].split(" to ");
+        this.startTime = LocalDateTime.parse(dueArr[0],inputFormatter);
+        this.startTimeString = startTime.format(displayFormatter);
+        this.endTime = LocalDateTime.parse(dueArr[1], inputFormatter);
+        this.endTimeString = endTime.format(displayFormatter);
+        this.duedateString = taskStringArr[1];
     }
 
     /**
@@ -49,11 +57,14 @@ public class Event extends Task {
         }
         this.description = eventArr[0];
         String[] dueArr = eventArr[1].split(" to ");
-        this.startTime = Parser.parseDateTime(dueArr[0]).toString();
-        this.endTime = Parser.parseDateTime(dueArr[1]).toString();
-        this.duedateString = startTime + " to " + endTime;
+        this.startTime = LocalDateTime.parse(dueArr[0], inputFormatter);
+        this.startTimeString = startTime.format(displayFormatter);
+        this.endTime = LocalDateTime.parse(dueArr[1], inputFormatter);
+        this.endTimeString = endTime.format(displayFormatter);
+        this.duedateString = startTimeString + " to " + endTimeString;
 
     }
+
     public String saveTask() {
         return this.symbol + "," + isDone + "," + this.description + "," + duedateString;
     }
