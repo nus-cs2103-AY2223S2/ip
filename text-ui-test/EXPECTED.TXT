@@ -5,3 +5,256 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+---------------------
+
+---------------------
+	Duke: Hi
+---------------------
+---------------------
+	Duke: Hi but very long and very wow
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [T][ ] read book
+	Now you have 1 tasks in the list.
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [D][ ] return book (by: Tue, 6 Jun 23)
+	Now you have 2 tasks in the list.
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	Now you have 3 tasks in the list.
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [T][ ] join sports club
+	Now you have 4 tasks in the list.
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [T][ ] borrow book
+	Now you have 5 tasks in the list.
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[T][ ] read book
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	4.[T][ ] join sports club
+	5.[T][ ] borrow book
+---------------------
+---------------------
+	Duke: OOPS!!! Please input a valid task number
+---------------------
+---------------------
+	Duke: OOPS!!! Please input a valid task number
+---------------------
+---------------------
+	Duke: OOPS!!! Please input a valid task number
+---------------------
+---------------------
+	Duke: OOPS!!! Please input a valid task number
+---------------------
+---------------------
+	Duke: OOPS!!! Please input a valid task number
+---------------------
+---------------------
+	Nice! I've marked this task as done:
+	  [T][X] read book
+---------------------
+---------------------
+	Nice! I've marked this task as done:
+	  [T][X] join sports club
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[T][X] read book
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	4.[T][X] join sports club
+	5.[T][ ] borrow book
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [D][ ] return book (by: Sat, 2 Sep 23)
+	Now you have 6 tasks in the list.
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	Now you have 7 tasks in the list.
+---------------------
+---------------------
+	Got it. I've added this task:
+	  [T][ ] a
+	Now you have 8 tasks in the list.
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[T][X] read book
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[T][ ] borrow book
+	4.[D][ ] return book (by: Sat, 2 Sep 23)
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	2.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[D][ ] return book (by: Tue, 6 Jun 23)
+	2.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	4.[D][ ] return book (by: Sat, 2 Sep 23)
+	5.[T][ ] borrow book
+	6.[T][ ] a
+	7.[T][X] read book
+	8.[T][X] join sports club
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[T][X] read book
+	2.[D][ ] return book (by: Tue, 6 Jun 23)
+	3.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	4.[T][X] join sports club
+	5.[T][ ] borrow book
+	6.[D][ ] return book (by: Sat, 2 Sep 23)
+	7.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	8.[T][ ] a
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [T][X] read book
+	Now you have 7 tasks in the list.
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[D][ ] return book (by: Tue, 6 Jun 23)
+	2.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	3.[T][X] join sports club
+	4.[T][ ] borrow book
+	5.[D][ ] return book (by: Sat, 2 Sep 23)
+	6.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	7.[T][ ] a
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [D][ ] return book (by: Tue, 6 Jun 23)
+	Now you have 6 tasks in the list.
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	2.[T][X] join sports club
+	3.[T][ ] borrow book
+	4.[D][ ] return book (by: Sat, 2 Sep 23)
+	5.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	6.[T][ ] a
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [T][ ] borrow book
+	Now you have 5 tasks in the list.
+---------------------
+---------------------
+	Here are the tasks in your list:
+	1.[E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	2.[T][X] join sports club
+	3.[D][ ] return book (by: Sat, 2 Sep 23)
+	4.[E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	5.[T][ ] a
+---------------------
+---------------------
+	Duke: OOPS!!! Please enter a number between 1 and 5
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [E][ ] project meeting (from: Sun, 06 Aug to: Tue, 08 Aug 23)
+	Now you have 4 tasks in the list.
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [T][X] join sports club
+	Now you have 3 tasks in the list.
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [D][ ] return book (by: Sat, 2 Sep 23)
+	Now you have 2 tasks in the list.
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [E][ ] project meeting (from: Sat, 17 Jun to: Sun, 18 Jun 23)
+	Now you have 1 tasks in the list.
+---------------------
+---------------------
+	Noted. I've removed this task:
+	  [T][ ] a
+	Now you have 0 tasks in the list.
+---------------------
+---------------------
+	Duke: OOPS!!! There are no tasks to be deleted.
+---------------------
+---------------------
+	Duke: OOPS!!! I don't understand that command
+---------------------
+---------------------
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
+---------------------
+---------------------
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
+---------------------
+---------------------
+	Duke: OOPS!!! The deadline command should be used like this:
+	deadline {name} /by {date}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+---------------------
+---------------------
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
+---------------------
+---------------------
+	Duke: OOPS!!! Write the date in this format: YYYY-MM-DD
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+---------------------
+---------------------
+	Duke: OOPS!!! The event command should be used like this:
+	event {name} /from {YYYY-MM-DD} /to {YYYY-MM-DD}
+---------------------
+---------------------
+	Goodbye!
+---------------------

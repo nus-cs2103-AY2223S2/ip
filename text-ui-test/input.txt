@@ -1,0 +1,52 @@
+echo Hi
+echo Hi but very long and very wow
+todo read book
+deadline return book /by 2023-06-06
+event project meeting /from 2023-08-06 /to 2023-08-08
+todo join sports club
+todo borrow book
+list
+mark abacasda ad wadadaw aw a D
+mark 
+delete 
+unmark 
+unmark awdawda w aa wa a adawda 
+mark 1
+mark 4
+list with some weird continue text
+deadline return book /by 2023-09-02
+event project meeting /from 2023-06-17 /to 2023-06-18
+todo a
+find book
+find project 
+priority
+list
+delete 1
+list
+delete 1
+list
+delete 3
+list
+delete 10
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 5
+wrong command prints message
+deadline missingdate /by 
+deadline missingBy tmr
+deadline      /by missingname
+deadline /by   
+deadline
+event
+event /from /to 
+event missingFromTo /from /to
+event missingTo /from /to tmr
+event    /from now /to tmr
+event    /from   /to tmr
+event missingFromTo
+event missingFrom /to tmr
+event missingTo /from now
+bye
