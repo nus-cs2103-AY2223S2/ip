@@ -1,6 +1,8 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -57,11 +59,20 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            if (c.isGoodbye()) {
-                return "END_COMMAND" + c.execute(tasks, storage, ui);
-            } else {
-                return c.execute(tasks, storage, ui);
+            boolean isModify = true;
+            if (c instanceof ListCommand || c instanceof FindCommand || c.isGoodbye()) {
+                isModify = false;
             }
+            String toReturn;
+            if (c.isGoodbye()) {
+                toReturn = "END_COMMAND" + c.execute(tasks, storage, ui);
+            } else {
+                toReturn = c.execute(tasks, storage, ui);
+            }
+            if (isModify) {
+                storage.save(tasks);
+            }
+            return toReturn;
         } catch (DukeException de) {
             return ui.showError(de);
         } catch (Exception e) {
