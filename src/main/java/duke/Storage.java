@@ -43,12 +43,12 @@ public class Storage {
         }
         try {
             Scanner saveFile = new Scanner(file);
-            System.out.println("    Saved data found, welcome back!");
+            System.out.println("Saved data found, welcome back!");
             while (saveFile.hasNextLine()) {
                 loadFile(saveFile.nextLine(), tasks);
             }
         } catch (IOException | DukeException ex) {
-            System.out.println("    No saved data not found, new file will be created");
+            System.out.println("No saved data found, new file will be created");
             try {
                 file.createNewFile();
             } catch (IOException e) {

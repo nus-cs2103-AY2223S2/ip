@@ -19,28 +19,28 @@ public class Parser {
         } else if (combined.equals("list")) {
             //Displays the list of items
             return TaskList.displayList(array);
-        } else if (splitInput[0].equals("mark")) {
+        } else if (splitInput[0].equalsIgnoreCase("mark")) {
             //Mark the task as done
             return TaskList.markTask(array, splitInput);
-        } else if (splitInput[0].equals("unmark")) {
+        } else if (splitInput[0].equalsIgnoreCase("unmark")) {
             //Unmark the task as done
             return TaskList.unmarkTask(array, splitInput);
-        } else if (splitInput[0].equals("deadline")) {
+        } else if (splitInput[0].equalsIgnoreCase("deadline")) {
             //Creates a Deadline type Task
             return Deadline.createDeadlineTask(array, splitInput);
-        } else if (splitInput[0].equals("event")) {
+        } else if (splitInput[0].equalsIgnoreCase("event")) {
             //Creates an Event type Task
             return Event.createEventTask(array, splitInput);
-        } else if (splitInput[0].equals("todo")) {
+        } else if (splitInput[0].equalsIgnoreCase("todo")) {
             //Creates a Todo type Task
             return Todo.createTodoTask(array, splitInput);
-        } else if (splitInput[0].equals("delete")) {
+        } else if (splitInput[0].equalsIgnoreCase("delete")) {
             //Deletes a Task
             return TaskList.deleteTask(array, splitInput);
-        } else if (splitInput[0].equals("find")) {
+        } else if (splitInput[0].equalsIgnoreCase("find")) {
             //Finds a Task
             return TaskList.searchTask(array, splitInput);
-        } else if (splitInput[0].equals("help")) {
+        } else if (splitInput[0].equalsIgnoreCase("help")) {
             //Displays help message
             return Ui.helpMessage();
         } else {
