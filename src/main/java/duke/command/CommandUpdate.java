@@ -32,6 +32,6 @@ public class CommandUpdate extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task updatedTask = tasks.update(idx - 1, updateComponents);
         storage.save(tasks.getList());
-        return "Task updated: " + updatedTask;
+        return "LeTask updated: " + updatedTask;
     }
 }

@@ -32,6 +32,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaSmith.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaLebron.png"));
+    private Image dukeImageError = new Image(this.getClass().getResourceAsStream("/images/DaLebronMad.png"));
 
     /**
      * Constructor for MainWindow class.
@@ -78,10 +79,11 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
         boolean isError = (response.startsWith("Error: "));
+        Image dukeImg = isError ? dukeImageError : dukeImage;
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage, isError)
+                DialogBox.getDukeDialog(response, dukeImg, isError)
         );
         userInput.clear();
 

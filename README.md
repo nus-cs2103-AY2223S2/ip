@@ -1,15 +1,35 @@
-# Duke project template
+# A User Guide to LeDuke
+- - - 
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "I'm going to use all my tools, my God-given ability,
+> and make the best life I can with it. - Lebron James"
 
-## Setting up in Intellij
+One of the tools Lebron James mentioned is LeDuke, a **CLI-based task-management application** that
+allowed him to juggle the responsibilities of being the GOAT in basketball.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+And he wants to share it with you.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
+## Quick Start
+- - -
+1. Install `Java 11`.
+2. Download LeDuke from here.
+3. Put the LeDuke `jar` file into your desired folder.
+4. Run java `-jar .\LeDuke.jar` to start the app.
+
+
+## Features
+- - -
+- `LIST` out the tasks you have
+- Add different types of tasks, including:
+   - `TODO`, a task that need to be done
+   - `DEADLINE`, a task that has a deadline date
+   - `EVENT`, a task that has a start and end date
+- `MARK` tasks as done/undone
+- `DELETE` unwanted tasks
+- `FIND` tasks based on keywords
+- `UPDATE` existing tasks
+
+## Interface
+- - -
+
+![LeDuke](Ui.png)
