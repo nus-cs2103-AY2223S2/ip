@@ -97,6 +97,7 @@ public class Storage {
      */
     public ArrayList<Task> retrieveTasks() throws IOException, DukeException {
         File f = new File(DEFAULT_FILEPATH);
+        f.getParentFile().mkdirs();
         if (f.createNewFile()) {
             return new ArrayList<>();
         }
