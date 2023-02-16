@@ -52,6 +52,9 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
     }
 
+    /**
+     * Sets the appearance of the Skylar textbox to be different from that of the user.
+     */
     private void setNewAppearance() {
         dialog.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         dialog.setStyle("-fx-background-color: burlywood; " +
@@ -63,10 +66,22 @@ public class DialogBox extends HBox {
                 "-fx-background-radius: 5");
     }
 
+    /**
+     * Sets up the user's dialog box.
+     * @param text the text to be displayed in the box
+     * @param img the user's display icon
+     * @return the created dialogbox
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Sets up Skylar's dialog box.
+     * @param text the text to be displayed in the box
+     * @param img the user's display icon
+     * @return the created dialogbox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
