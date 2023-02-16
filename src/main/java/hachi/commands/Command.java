@@ -18,13 +18,4 @@ public abstract class Command {
      * @return True if execution is successful, false if it is not.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * Indicates whether the program exits
-     *
-     * @return True if the program needs to exit, false if it does not.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -3,18 +3,16 @@ package hachi.main;
 import hachi.tasks.Task;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.Scanner;
+
 
 /**
  * Deals with saving tasks in the file and loading tasks from the file.
  */
 public class Storage {
     private File filePath;
+
     /**
      * Storage constructor.
      *
@@ -32,11 +30,7 @@ public class Storage {
     public void saveTaskList(TaskList tasks) throws HachiExceptions{
         try {
             FileWriter writer = new FileWriter(this.filePath);
-
-            String content = "  hachi finds the following items saved in your list ";
-            content = content.concat(tasks.getStoredString());
-
-            writer.write(content);
+            writer.write(tasks.getTaskList());
             writer.close();
         } catch (IOException e) {
             throw new IllegalArgumentException();
@@ -52,11 +46,12 @@ public class Storage {
     public ArrayList<Task> loadTaskList() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-
-            Stream<String> content = reader.lines();
-            content.forEach(s -> addToList(s, tasks));
-
+            Scanner scanner = new Scanner(this.filePath);
+            while (scanner.hasNextLine()) {
+                String nextLine = scanner.nextLine();
+                tasks.add(Parser.parseSaved(nextLine));
+            }
+           scanner.close();
         } catch (FileNotFoundException e1) {
             filePath.getParentFile().mkdirs();
             filePath.createNewFile();
@@ -68,11 +63,6 @@ public class Storage {
             return tasks;
         }
     }
-    private void addToList(String text, ArrayList<Task> tasks) {
-        Task task = Parser.parseSaved(text);
-        if (task != null) {
-            tasks.add(task);
-        }
-    }
+
 
 }

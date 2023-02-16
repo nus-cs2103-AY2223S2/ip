@@ -34,7 +34,7 @@ public class DeadlineCommand extends Command {
             if (index_ddl - 1 < 9) {
                 throw new HachiExceptions(ui.emptyDescription());
             }
-            Deadline ddlTask = new Deadline(input.substring(9, index_ddl - 1), LocalDate.parse(input.substring(index_ddl + 4, input.length()), DateTimeFormatter.ofPattern("dd MMM yyyy")));
+            Deadline ddlTask = new Deadline(input.substring(9, index_ddl - 1), LocalDate.parse(input.substring(index_ddl + 4, input.length()), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             tasks.add(ddlTask);
 
             return ui.showAdded(tasks, ddlTask);
