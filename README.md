@@ -13,7 +13,6 @@ Prerequisites: JDK 11.
 
 All you need to do to set it up:
 
-
 1. Download it from [here](https://github.com/GlennOngJunJie/ip/releases/tag/A-Release)
 2. Choose where you want to save your progress on your desktop
 3. Add todos, events, deadlines
