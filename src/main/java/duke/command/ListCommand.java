@@ -4,19 +4,19 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListCommand extends Command {
     public ListCommand() {
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        StringBuilder toPrint = new StringBuilder();
+        List<String> strings = new ArrayList<>();
         for (int i = 0; i < tasks.getSize(); i++) {
-            if (i != 0) {
-                toPrint.append("\n");
-            }
-            toPrint.append(i + 1).append(": ").append(tasks.get(i));
+            strings.add((i + 1) + ": " + tasks.get(i));
         }
-        ui.printInBanner(toPrint.toString());
+        this.setOutput(strings.toArray(new String[0]));
     }
 }

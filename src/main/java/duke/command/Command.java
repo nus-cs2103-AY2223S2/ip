@@ -1,18 +1,22 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
 public abstract class Command {
-    protected String cmdWord;
     private static final Command NONE = new NoCommand();
+    protected String cmdOutput;
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-
-    public boolean isExit() {
-        return false;
-    }
+    /**
+     * Runs a command.
+     *
+     * @param tasks Tasklist
+     * @param ui UI
+     * @param storage Storage
+     */
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     private static class NoCommand extends Command {
         public NoCommand() {
@@ -20,10 +24,19 @@ public abstract class Command {
 
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
+
         }
     }
 
     public static Command none() {
         return NONE;
+    }
+
+    public String getOutput() {
+        return this.cmdOutput;
+    }
+
+    public void setOutput(String... output) {
+        this.cmdOutput = String.join("\n", output);
     }
 }

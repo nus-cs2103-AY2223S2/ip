@@ -16,5 +16,6 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
         storage.saveTasklistToFile(tasks);
+        this.cmdOutput = "Okay~ I've added the task for you~\n" + task;
     }
 }
