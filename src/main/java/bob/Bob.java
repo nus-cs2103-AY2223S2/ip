@@ -60,11 +60,13 @@ public class Bob extends Application {
 
     private String handleMark(String input) throws BobException {
         int index = Parser.parseIndex(input);
+        tasks.mark(index);
         return ui.printMarkTask(tasks.get(index));
     }
 
     private String handleUnmark(String input) throws BobException {
         int index = Parser.parseIndex(input);
+        tasks.unmark(index);
         return ui.printUnmarkTask(tasks.get(index));
     }
 

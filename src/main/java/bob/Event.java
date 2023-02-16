@@ -16,8 +16,20 @@ public class Event extends Task {
         this.end = end;
     }
 
+    @Override
     public String toString() {
         DateTimeFormatter f = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return String.format("%s | %s to %s", this.description, this.start.format(f), this.end.format(f));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Event) {
+            Event e = (Event) o;
+            return this.description.equals(e.description)
+                    && this.start.isEqual(e.start)
+                    && this.end.isEqual(e.end);
+        }
+        return false;
     }
 }

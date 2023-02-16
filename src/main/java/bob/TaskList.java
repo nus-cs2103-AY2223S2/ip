@@ -17,11 +17,24 @@ public class TaskList {
         return index <= 0 || index > list.size();
     }
 
+    private void validate(int index) throws BobException {
+        boolean isEmpty = this.list.size() == 0;
+        boolean isOutOfRange = index <= 0 || index > this.list.size();
+
+        if (isEmpty) {
+            throw new BobException("Task list is empty!");
+        } else if (isOutOfRange) {
+            String err = String.format("Index given should be in range [1-%s]", this.list.size());
+            throw new BobException(err);
+        }
+    }
+
     /**
      * Adds a given Task object to the list
      * @param t
      */
     public void add(Task t) {
+        assert t != null;
         list.add(t);
     }
 
@@ -31,10 +44,7 @@ public class TaskList {
      * @throws BobException If index is out of range
      */
     public void mark(int index) throws BobException {
-        if (isInvalidIndex(index)) {
-            String error = String.format("Index given should be in range [1-%s]", list.size());
-            throw new BobException(error);
-        }
+        validate(index);
 
         // Since list is 0-indexed
         list.get(index - 1).mark();
@@ -46,10 +56,7 @@ public class TaskList {
      * @throws BobException If index is out of range
      */
     public void unmark(int index) throws BobException {
-        if (isInvalidIndex(index)) {
-            String error = String.format("Index given should be in range [1-%s]", list.size());
-            throw new BobException(error);
-        }
+        validate(index);
 
         // Since list is 0-indexed
         list.get(index - 1).unmark();
@@ -61,10 +68,7 @@ public class TaskList {
      * @throws BobException If index is out of range
      */
     public Task delete(int index) throws BobException {
-        if (isInvalidIndex(index)) {
-            String error = String.format("Index given should be in range [1-%s]", list.size());
-            throw new BobException(error);
-        }
+        validate(index);
 
         // Since list is 0-indexed
         return list.remove(index - 1);
@@ -77,10 +81,7 @@ public class TaskList {
      * @throws BobException If index is out of range
      */
     public Task get(int index) throws BobException {
-        if (isInvalidIndex(index)) {
-            String error = String.format("Index given should be in range [1-%s]", list.size());
-            throw new BobException(error);
-        }
+        validate(index);
 
         // Since list is 0-indexed
         return list.get(index - 1);
