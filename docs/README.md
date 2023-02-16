@@ -30,7 +30,7 @@ Deletes task.
 
 Lists all completed and incompleted tasks.
 
-## Keyword Usuage 🔑
+## Keyword Usage 🔑
 
 ### todo
 
