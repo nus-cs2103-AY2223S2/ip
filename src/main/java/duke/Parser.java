@@ -41,9 +41,11 @@ public class Parser {
             return find(input, taskList);
         case "reschedule":
             return reschedule(input, taskList);
+        case "help":
+            return help();
         case "bye":
             Platform.exit();
-            return "Goodbye!";
+            return "Peace out!";
         default:
             throw new DukeException("Sorry I do not understand the command");
         }
@@ -114,7 +116,7 @@ public class Parser {
         }
         Task t = new Todo(input[1].strip());
         taskList.addTask(t);
-        return "Added new todo:\n  " + t + "\nNumber of tasks: " + taskList.size();
+        return "I have added a new todo:\n  " + t + "\nNumber of tasks: " + taskList.size();
     }
 
     /**
@@ -137,7 +139,7 @@ public class Parser {
         try {
             Task t = new Deadline(tempInput[0].strip(), tempInput[1].strip());
             taskList.addTask(t);
-            return "Added new deadline:\n  " + t + "\nNumber of tasks: " + taskList.size();
+            return "I have added a new deadline:\n  " + t + "\nNumber of tasks: " + taskList.size();
         } catch (DateTimeParseException e) {
             throw new DukeException("Date after /by needs to be in format yyyy-mm-dd.");
         }
@@ -161,12 +163,12 @@ public class Parser {
         String[] from = tempInput[1].split(" ",2);
         String[] to = tempInput[2].split(" ",2);
         if (from.length == 1 || to.length == 1) {
-            throw new DukeException("/from and /to needs a date/time.");
+            throw new DukeException("/from and /to needs a date.");
         }
         try {
             Task t = new Event(tempInput[0].strip(), from[1].strip(), to[1].strip());
             taskList.addTask(t);
-            return "Added new event:\n  " + t + "\nNumber of tasks: " + taskList.size();
+            return "I have added a new event:\n  " + t + "\nNumber of tasks: " + taskList.size();
         } catch (DateTimeParseException e) {
             throw new DukeException("Date after /from and /to needs to be in format yyyy-mm-dd.");
         }
@@ -209,7 +211,7 @@ public class Parser {
         if (input.length == 1) {
             throw new DukeException("Find needs a keyword.");
         }
-        return "Here are the matching tasks in your list:\n" + taskList.findTask(input[1].strip());
+        return "I have found these matching tasks in your list:\n" + taskList.findTask(input[1].strip());
     }
 
     public String reschedule(String[] input, TaskList taskList) throws DukeException {
@@ -282,5 +284,19 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeException("Date after /from or /to needs to be in format yyyy-mm-dd.");
         }
+    }
+
+    public String help() {
+        return "I only understand these commands:\n"
+                + "list\n"
+                + "bye\n"
+                + "todo <name>\n"
+                + "deadline <name> /by <yyyy-mm-dd>\n"
+                + "event <name> /from <yyyy-mm-dd> /to <yyyy-mm-dd>\n"
+                + "reschedule <deadline/event> <index> </by /from /to> <yyyy-mm-dd>\n"
+                + "mark <index>\n"
+                + "unmark <index>\n"
+                + "find <keyword>\n"
+                + "help";
     }
 }

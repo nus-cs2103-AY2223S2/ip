@@ -67,7 +67,7 @@ public class TaskList {
     public String deleteTask(int i) {
         Task t = this.tasks.remove(i);
         count--;
-        return "Deleted task:\n  " + t + "\nNumber of tasks: " + count;
+        return "I have deleted task:\n  " + t + "\nNumber of tasks: " + count;
     }
 
     /**
@@ -77,7 +77,7 @@ public class TaskList {
     public String markTask(int i) {
         Task t = this.tasks.get(i);
         t.mark();
-        return "Task has been marked as done:\n " + t;
+        return "Sick! I have marked the task as done:\n " + t;
     }
 
     /**
@@ -87,7 +87,7 @@ public class TaskList {
     public String unmarkTask(int i) {
         Task t = this.tasks.get(i);
         t.unmark();
-        return "Task has been marked as not done:\n " + t;
+        return "Nuuu! I have marked the task as not done:\n " + t;
     }
 
     /**

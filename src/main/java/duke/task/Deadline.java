@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     public String changeDate(LocalDate date) {
         this.deadline = date;
-        return "Date has been changed:\n" +
+        return "I have changed the date:\n" +
                 this.toString();
     }
 

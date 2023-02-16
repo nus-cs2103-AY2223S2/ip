@@ -18,13 +18,13 @@ public class Event extends Task {
 
     public String changeFrom(LocalDate date) {
         this.from = date;
-        return "Date has been changed:\n" +
+        return "I have changed the /from date:\n" +
                 this.toString();
     }
 
     public String changeTo(LocalDate date) {
         this.to = date;
-        return "Date has been changed:\n" +
+        return "I have changed the /to date\n" +
                 this.toString();
     }
 
