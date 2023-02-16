@@ -1,9 +1,10 @@
-## Duke task planner :technologist:
+## Duke task planner
 
-> 'He who fails to plan is planning to fail' -- Winston Churchill 
+> *"He who fails to plan is planning to fail"* -- Winston Churchill 
+> ([Source](https://www.qlik.com/blog/if-you-fail-to-plan-you-are-planning-to-fail-benjamin-franklin))
 
-DukePro is a task planner that is *free*, download it from [here](https://github.com/liujiayue314/ip/releases/tag/A-Jar). 
-Programmers can also use it in intelliJ, by running `main` method.
+DukePro is a task planner that is *free*, downloadable it from [here](https://github.com/liujiayue314/ip/releases/tag/A-Jar)!. 
+Programmers can also use it in intelliJ, by running `main` method. :technologist:
 
 It frees your mind of having to remember things you need to do. It's
 + Fast to install
