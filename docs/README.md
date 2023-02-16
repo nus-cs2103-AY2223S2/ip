@@ -1,4 +1,21 @@
-# User Guide for Duke: The task-list chatbot
+# User Guide for Duke: The task-list chatbot.
+<div align="center">
+  <img src="./Ui.png" />
+</div>
+
+## Contents
+1. [Quick Start](#quick-start)
+2. [Command Summary](#command-summary)
+3. [Features](#features)
+    - [Exit](#bye---saves-and-exits-duke)
+    - [Add Todo](#todo---adds-todo-task)
+    - [Add Deadline](#deadline---adds-deadline-task)
+    - [Add Event](#event---adds-event-task)
+    - [Delete Tasks](#delete---removes-task-from-task-list)
+    - [Mark Tasks](#mark---marks-task-as-done)
+    - [Unmark Tasks](#unmark---marks-task-as-not-done)
+    - [List Tasks](#list---lists-all-tasks)
+    - [Find Task](#find---searches-task-list-for-keyword)
 
 ## Quick Start
 
@@ -7,41 +24,21 @@
 3. Place `duke.jar` into a folder of your choice.
 4. Double click `duke.jar` to run.
 
-## Features 
+## Command Summary
 
-### Feature-Greets user
+| Index | Description | Format | Example |
+| :-: | :-: | :-: | :-: |
+| 1 | [Exit session](#bye---saves-and-exits-duke) | `bye` | `bye` |
+| 2 | [Add Todo Task](#todo---adds-todo-task) | `todo <Description>` | `todo iP` |
+| 3 | [Add Deadline Task](#deadline---adds-deadline-task) | `deadline <Description> /by <Due Date>` | `deadline submission /by 17/02/2023 2359` |
+| 4 | [Add Event Task](#event---adds-event-task) | `event <Description> /from <Duration> /to <Duration>` | `event workout /from 17/02/2023 1800 / to 17/02/2023 2000` |
+| 5 | [Delete Task](#delete---removes-task-from-task-list) | `delete <Index>` | `delete 1` |
+| 6 | [Mark Task](#mark---marks-task-as-done) | `mark <Index>` | `mark 1` |
+| 7 | [Unmark Task](#unmark---marks-task-as-not-done) | `unmark <Index>` | `unmark 1` |
+| 8 | [List Tasks](#list---lists-all-tasks) | `list` | `list` |
+| 9 | [Find Task](#find---searches-task-list-for-keyword) | `find <keyword>` | `find submission` |
 
-Duke greets the user on startup.
-
-### Feature-Exit
-
-Closes session with Duke and saves task-list data.
-
-### Add Tasks
-
-Add Tasks to Duke's task-list.
-There are 3 types of tasks available:
-- Todos 
-- Deadlines
-- Events
-
-### Delete Tasks
-
-Delete Tasks from Duke's task-list.
-
-### Mark/Unmark Tasks
-
-Mark/Unmark Tasks in Duke's task-list as complete/incomplete.
-
-### List Tasks
-
-List all Tasks in Duke's task-list.
-
-### Find Tasks
-
-Searches for Tasks that contains the keyword from Duke's task-list.
-
-## Usage
+## Features
 
 ### `bye` - Saves and exits Duke
 
@@ -56,7 +53,7 @@ Expected outcome:
 Saves and exits Duke.
 
 ```
-bye
+Bye. Hope to see you again soon!
 ```
 
 ### `todo` - Adds Todo task
