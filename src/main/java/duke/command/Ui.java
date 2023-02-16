@@ -51,22 +51,6 @@ public class Ui {
     }
 
     /**
-     * Prints out error message.
-     * @return error message
-     */
-    public String showError(String message) {
-        return (message);
-    }
-
-    /**
-     * Prints out loading error message.
-     * @return file not existed error message
-     */
-    public String showLoadingError() {
-        return ("File not existed");
-    }
-
-    /**
      * Prints out unknown error message if command is invalid.
      * @return unknown message.
      */
@@ -80,6 +64,7 @@ public class Ui {
      * @return goodbye message
      */
     public String bye() {
+        Parser.updateLastCommand("bye");
         return ("WOOF WOOF WOOF! Kyle is sad to see you leave!");
     }
 
@@ -92,18 +77,18 @@ public class Ui {
     public String saysUnDo(String commandType, String commandDetail) {
         return ("WOOF! Got it! Kyle will undo the last command!" + "\n"
                 + "The following task has been un-" + commandType
-                + "ed: " + "\n" + commandDetail);
+                + "-ed: " + "\n" + commandDetail);
     }
 
     /**
-     * Returns what Duke will respond to an Undo command
+     * Returns what Duke will respond to an Undo command without command detail
      * @param commandType last command type
      * @return Duke's message
      */
     public String saysUnDo(String commandType) {
         return ("WOOF! Got it! Kyle will undo the last command!" + "\n"
                 + "The task(s) has been un-" + commandType
-                + "ed!");
+                + "-ed!");
     }
 
     /**
@@ -115,22 +100,38 @@ public class Ui {
     }
 
     /**
-     * Prints out line for separation.
+     * Returns Duke's message to add command
+     * @param task task added
+     * @param numberOfTasks number of tasks after added
+     * @return Duke's message
      */
-    public void showLine() {
-        System.out.println("_____________________________");
+    public static String saysAddCommand(String task, int numberOfTasks) {
+        return "Got it. Kyle's added this EVIL task:" + "\n" + task
+                + "\n"
+                + String.format("Now Boss has %d "
+                + "tasks in the EVIL list", numberOfTasks);
+    }
+
+    /**
+     * Returns Duke's message to delete command
+     * @param task task deleted
+     * @param numberOfRemainingTasks number of tasks after deletion
+     * @return Duke's message
+     */
+    public static String saysDeleteCommand(String task, int numberOfRemainingTasks) {
+        return "Noted. Kyle's removed this EVIL task:" + "\n" + task + "\n"
+                + String.format("Now Boss has %d "
+                + "tasks in the EVIL list", numberOfRemainingTasks);
     }
 
 
     /**
-     * Prints out if input array is not empty
+     * Returns Duke's respond to find command from user
      * Update the most recent command correspondingly
      * @param arr input array.
-     * @print instruction.
      * @return appropriate message
-     * @throw MissingContentException if input array is empty.
      */
-    public String findWordIntro(TaskList taskList, String[] arr, boolean containsKeyword) {
+    public String findWord(TaskList taskList, String[] arr, boolean containsKeyword) {
         if (arr.length >= 1) {
             if (containsKeyword) {
                 Parser.updateLastCommand("find");
@@ -143,9 +144,10 @@ public class Ui {
     }
 
     /**
-     * Returns message for listing out task list
+     * Returns message for list command from user
      * @param taskList original task list
      * @return appropriate message
+     * @throws EmptyTaskListException if task list is currently empty
      */
     public String list(TaskList taskList) throws EmptyTaskListException {
         if (taskList.isEmpty()) {
@@ -155,6 +157,11 @@ public class Ui {
         return (taskList.list());
     }
 
+    /**
+     * Returns message to undo command
+     * @param tasklist original tasklist
+     * @return Duke's respond
+     */
     public String undo(TaskList tasklist) {
         return Parser.undo(tasklist);
     }
@@ -231,13 +238,11 @@ public class Ui {
         String reply = "";
         try {
             int index = Parser.getTaskIndex(listOfAction, command) - 1;
-            try {
-                reply = (listOfAction.delete(index));
-                Parser.updateLastCommand(String.format("delete %d", index - 1));
-                return reply;
-            } catch (IOException e) {
-                return (new InvalidIndexException().getMessage());
-            }
+            reply = (listOfAction.delete(index));
+            Parser.updateLastCommand(String.format("delete %d", index - 1));
+            return reply;
+        } catch (IOException e) {
+            return (new InvalidIndexException().getMessage());
         } catch (MissingContentException | InvalidIndexException e) {
             return (e.getMessage());
         } catch (IndexNotNumberException e) {
@@ -293,29 +298,15 @@ public class Ui {
      * @param command from user's input
      * @return Duke's response to user's input
      */
-    public String addEvent(TaskList listOfAction, String[] command) {
+    public String addEvent(TaskList listOfAction, String[] command) throws InvalidEventDateTimeException {
         try {
-            try {
-                int startIndex = new Parser()
-                        .getEventStartTimeIndex(command);
-                int endIndex = new Parser()
-                        .getEventEndTimeIndex(command, startIndex);
-                String detail = new Parser()
-                        .getEventDetail(command);
-                String start = (new Parser()
-                        .getEventTime(command, startIndex, endIndex))[0];
-                String end = (new Parser()
-                        .getEventTime(command, startIndex, endIndex))[1];
-                Parser.updateLastCommand("event");
-                return (listOfAction.add(new Event("event",
-                        detail, start, end)));
-            } catch (MissingContentException | InvalidEventDateTimeException e) {
-                return (e.getMessage());
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidEventDateTimeException();
-            }
-        } catch (InvalidEventDateTimeException e) {
+            Event newEvent = Parser.getEventFull(command);
+            Parser.updateLastCommand("event");
+            return (listOfAction.add(newEvent));
+        } catch (MissingContentException | InvalidEventDateTimeException e) {
             return (e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidEventDateTimeException();
         }
     }
 }

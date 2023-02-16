@@ -1,3 +1,1 @@
-[T][ ] go home 
-[D][ ] steal the moon  (by: Feb 16 2023)
-[E][ ] new meeting with Minions  (from: Feb 16 2023 12:00 AM to: Feb 17 2023 12:00 AM)
+[T][X] go home 

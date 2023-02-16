@@ -94,22 +94,18 @@ public class TaskList {
      * @param num index at which task need to be marked as done.
      * @return new task list with task marked.
      */
-    public String mark(int num) throws IOException {
+    public String mark(int num) throws IOException, InvalidIndexException {
         try {
-            try {
-                if (arr[num] != null) {
-                    Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
-                    String original = arr[num];
-                    arr[num] = new Task(String.valueOf(original.charAt(1)),
-                            original.substring(7), true).toString();
-                    Parser.updateLastCommandDetail(arr[num]);
-                    return ("OK, I've marked this task as done:" + "\n" + arr[num]);
-                }
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidIndexException();
+            if (arr[num] != null) {
+                Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
+                String original = arr[num];
+                arr[num] = new Task(String.valueOf(original.charAt(1)),
+                        original.substring(7), true).toString();
+                Parser.updateLastCommandDetail(arr[num]);
+                return ("OK, I've marked this EVIL task as done:" + "\n" + arr[num]);
             }
-        } catch (InvalidIndexException e) {
-            return (e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException();
         }
         return "";
     }
@@ -131,7 +127,7 @@ public class TaskList {
                         original.substring(7), false);
                 arr[num] = newTask.toString();
                 Parser.updateLastCommandDetail(arr[num]);
-                return ("OK, I've marked this task as not done yet:" + "\n" + arr[num]);
+                return ("OK, I've marked this EVIL task as not done yet:" + "\n" + arr[num]);
             } catch (IndexOutOfBoundsException e) {
                 throw new InvalidIndexException();
             }
@@ -173,35 +169,28 @@ public class TaskList {
      * @return new task list with task deleted.
      * @throw InvalidIndexException if array at specific index is null if array at specific index is null
      */
-    public String delete(int num1) throws IOException {
+    public String delete(int num1) throws IOException, InvalidIndexException {
         try {
-            try {
-                if (num1 < this.getValidLen()) {
-                    String original = arr[num1];
-                    int trace = num1;
-                    String[] originalList = new String[100];
-                    for (int k = 0; k < 100; k++) {
-                        originalList[k] = arr[k];
-                    }
-                    Parser.updateLastTaskList(new TaskList(originalList));
-                    Parser.updateLastCommandDetail(original);
-                    arr[trace] = arr[trace + 1];
-                    trace++;
-
-                    while ((trace >= 1) && (originalList[trace - 1] != null)) {
-                        arr[trace] = originalList[trace + 1];
-                        trace++;
-                    }
-
-                    return ("Noted. Kyle's removed this EVIL task:" + "\n" + original + "\n"
-                            + String.format("Now Boss has %d "
-                            + "tasks in the EVIL list", this.getValidLen()));
+            if (num1 < this.getValidLen()) {
+                String original = arr[num1];
+                int trace = num1;
+                String[] originalList = new String[100];
+                for (int k = 0; k < 100; k++) {
+                    originalList[k] = arr[k];
                 }
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidIndexException();
+                Parser.updateLastTaskList(new TaskList(originalList));
+                Parser.updateLastCommandDetail(original);
+                arr[trace] = arr[trace + 1];
+                trace++;
+
+                while ((trace >= 1) && (originalList[trace - 1] != null)) {
+                    arr[trace] = originalList[trace + 1];
+                    trace++;
+                }
+                return (Ui.saysDeleteCommand(original, this.getValidLen()));
             }
-        } catch (InvalidIndexException e) {
-            return (e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException();
         }
         return new InvalidIndexException().getMessage();
     }
@@ -219,10 +208,7 @@ public class TaskList {
         Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
         arr[len] = task.toString();
         Parser.updateLastCommandDetail(task.toString());
-        return ("Got it. Kyle's added this EVIL task:" + "\n" + task.toString()
-                + "\n"
-                + String.format("Now Boss has %d "
-                + "tasks in the EVIL list", this.getValidLen()));
+        return Ui.saysAddCommand(task.toString(), this.getValidLen());
     }
 
     /**
@@ -248,7 +234,6 @@ public class TaskList {
 
     /**
      * Checks if there is any task that contains the given keyword.
-     *
      * @param keyWord given keyword.
      * @return true if there is any task contains the keyword and false otherwise.
      */

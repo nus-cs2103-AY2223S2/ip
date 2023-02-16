@@ -26,9 +26,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/newGru.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/GruDuke.png"));
 
+    private String welcomeMessage = "WOOF! Bello Boss!\nThe Minions are so useless, let Kyle assist you!\n"
+            + "What can Kyle do for you today?";
+
     @FXML
-    public void initialize() {
+    private void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        DialogBox firstDialogBox = DialogBox.getDukeDialog(welcomeMessage, dukeImage);
+        dialogContainer.getChildren().add(firstDialogBox);
     }
 
     public void setDuke(Duke d) {

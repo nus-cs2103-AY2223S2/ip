@@ -1,10 +1,14 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskListException;
 import duke.exception.IndexNotNumberException;
+import duke.exception.InvalidEventDateTimeException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingContentException;
+import duke.task.Event;
 
 /**
  * Makes sense of what users say
@@ -16,7 +20,7 @@ public class Parser {
     private static String lastCommand = "";
     private static String lastCommandDetail = "";
     private static TaskList lastTaskList = new TaskList();
-    private static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     /**
      * Update last command
@@ -36,7 +40,7 @@ public class Parser {
 
     /**
      * Update last task list (update to before most recent command is applied on Duke)
-     * @param newTaskList what the task list was before most recent command is applied
+     * @param newTaskList what the task list was before the most recent command is applied
      */
     public static void updateLastTaskList(TaskList newTaskList) {
         lastTaskList = newTaskList;
@@ -50,6 +54,10 @@ public class Parser {
         return lastTaskList;
     }
 
+    public static String getLastCommand() {
+        return lastCommand;
+    }
+
     /**
      * Undo response to user input
      * And update task list correspondingly
@@ -57,24 +65,40 @@ public class Parser {
      * @return Duke's response
      */
     public static String undo(TaskList taskList) {
-        if (lastCommand.startsWith("mark ")) {
+        String commandType = Parser.parseLastCommandType(lastCommand);
+        if (commandType.equals("clear") || commandType.equals("undo")) {
+            TaskList originalTaskList = new TaskList(Arrays.copyOf(taskList.readTaskList(), 100));
             taskList.overwrite(lastTaskList);
-            return ui.saysUnDo("mark", lastCommandDetail);
-        } else if (lastCommand.startsWith("unmark ")) {
+            Parser.updateLastTaskList(originalTaskList);
+            Parser.updateLastCommand("undo");
+            return ui.saysUnDo(commandType);
+        } else if (!commandType.equals("last command is unable to undo")) {
+            TaskList originalTaskList = new TaskList(Arrays.copyOf(taskList.readTaskList(), 100));
             taskList.overwrite(lastTaskList);
-            return ui.saysUnDo("unmark", lastCommandDetail);
-        } else if (lastCommand.startsWith("delete ")) {
-            taskList.overwrite(lastTaskList);
-            return ui.saysUnDo("mark", lastCommandDetail);
-        } else if (lastCommand.startsWith("todo") || lastCommand.startsWith("event")
-                || lastCommand.startsWith("deadline")) {
-            taskList.overwrite(lastTaskList);
-            return ui.saysUnDo("add", lastCommandDetail);
-        } else if (lastCommand.startsWith("clear")) {
-            taskList.overwrite(lastTaskList);
-            return ui.saysUnDo("clear");
+            Parser.updateLastTaskList(originalTaskList);
+            Parser.updateLastCommand("undo");
+            return ui.saysUnDo(commandType, lastCommandDetail);
         }
         return ui.saysUnableToUndo();
+    }
+
+    /**
+     * Returns command type of the last command if it is undo-able
+     * @param recentCommand most recent valid command
+     * @return type of recent command if it's undo-able
+     */
+    public static String parseLastCommandType(String recentCommand) {
+        if (recentCommand.startsWith("unmark ") || recentCommand.startsWith("mark ")
+            || recentCommand.startsWith("delete ")) {
+            String[] commandInArray = recentCommand.split(" ");
+            return commandInArray[0];
+        } else if (recentCommand.startsWith("todo") || recentCommand.startsWith("deadline")
+                || recentCommand.startsWith("event")) {
+            return "add";
+        } else if (recentCommand.startsWith("clear") || recentCommand.equals("undo")) {
+            return recentCommand;
+        }
+        return "last command is unable to undo";
     }
 
     /**
@@ -102,7 +126,7 @@ public class Parser {
      * @return full string command for users
      */
     public static String parseToDo(String[] arr) throws MissingContentException {
-        String remaining = "";
+        String remaining;
         try {
             remaining = arr[1];
             remaining += " ";
@@ -121,13 +145,13 @@ public class Parser {
      * Gets index at which task should perform on task list
      * @param listOfAction original task list
      * @param command user's command input
-     * @return index of tasklist
+     * @return index of task list
      * @throws MissingContentException if command does not specify index
      * @throws InvalidIndexException if task list does not have such index
      */
     public static int getTaskIndex(TaskList listOfAction, String[] command) throws MissingContentException,
             InvalidIndexException, IndexNotNumberException {
-        int taskIndex = 0;
+        int taskIndex;
         try {
             taskIndex = Integer.parseInt(command[1]);
         } catch (NumberFormatException e) {
@@ -199,7 +223,6 @@ public class Parser {
     public String getDeadlineFull(String[] command) {
         String remaining = "";
         try {
-            String detail = this.getDeadlineDetail(command);
             int pointer = this.getDeadlineTimeIndex(command);
             for (int j = pointer; j < command.length; j++) {
                 if (String.valueOf(command[j]).equals("/")) {
@@ -225,7 +248,7 @@ public class Parser {
      * @return the index of starting time.
      * @throws MissingContentException if arr is empty.
      */
-    public int getEventStartTimeIndex(String[] arr) throws MissingContentException {
+    private int getEventStartTimeIndex(String[] arr) throws MissingContentException {
         int startIndex = minSize;
         for (int j = 1; j < arr.length; j++) {
             if (String.valueOf(arr[j]).equals("/from")) {
@@ -247,7 +270,7 @@ public class Parser {
      * @return event detail.
      * @throws MissingContentException if arr is empty.
      */
-    public String getEventDetail(String[] arr) throws MissingContentException {
+    private String getEventDetail(String[] arr) throws MissingContentException {
         if (arr.length <= 1) {
             throw new MissingContentException();
         }
@@ -271,7 +294,7 @@ public class Parser {
      * @param startIndex starting index where indicates starting time of event.
      * @return the index of ending time.
      */
-    public int getEventEndTimeIndex(String[] arr, int startIndex) throws MissingContentException {
+    private int getEventEndTimeIndex(String[] arr, int startIndex) throws MissingContentException {
         int endIndex = minSize;
         for (int j = startIndex; j < arr.length; j++) {
             if (String.valueOf(arr[j]).equals("/to")) {
@@ -294,7 +317,7 @@ public class Parser {
      * @param endIndex ending index where indicates ending time of event.
      * @return an array consists of event start time and event ent time specifically in String.
      */
-    public String[] getEventTime(String[] arr, int startIndex, int endIndex) {
+    private String[] getEventTime(String[] arr, int startIndex, int endIndex) {
         String[] eventTime = new String[4];
         String start = "";
         String end = "";
@@ -331,14 +354,35 @@ public class Parser {
             track = String.valueOf(s.charAt(tracker));
         }
         assert tracker != minSize : "Cannot get event time - missing input from user";
-        String date = String.valueOf(s.substring(0, tracker));
-        String time = String.valueOf(s.substring(tracker + 1));
+        String date = (s.substring(0, tracker));
+        String time = (s.substring(tracker + 1));
         String timeFormatted = "";
         for (int i = 0; i < time.length(); i += 2) {
-            timeFormatted += String.valueOf(time.substring(i, i + 2));
+            timeFormatted += (time.substring(i, i + 2));
             timeFormatted += ":";
         }
         timeFormatted += inSecond;
         return date + "T" + timeFormatted;
+    }
+
+    /**
+     * Returns event in correct format based on user's input
+     * @param command input from user
+     * @return event in correct format
+     * @throws MissingContentException if user did not provide event detail
+     * @throws InvalidEventDateTimeException if event is in incorrect date time format
+     */
+    public static Event getEventFull(String[] command) throws MissingContentException, InvalidEventDateTimeException {
+        int startIndex = new Parser()
+                .getEventStartTimeIndex(command);
+        int endIndex = new Parser()
+                .getEventEndTimeIndex(command, startIndex);
+        String detail = new Parser()
+                .getEventDetail(command);
+        String start = (new Parser()
+                .getEventTime(command, startIndex, endIndex))[0];
+        String end = (new Parser()
+                .getEventTime(command, startIndex, endIndex))[1];
+        return new Event("event", detail, start, end);
     }
 }

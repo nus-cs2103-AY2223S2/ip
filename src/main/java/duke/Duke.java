@@ -67,7 +67,7 @@ public class Duke {
                         + s.substring(1));
                 switch (myAction) {
                 case Find:
-                    ui.says(ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
+                    ui.says(ui.findWord(listOfAction, arr, listOfAction.checkWord(arr[1])));
                     break;
 
                 case Bye:
@@ -136,7 +136,7 @@ public class Duke {
                     + s.substring(1));
             switch (myAction) {
             case Find:
-                response = (ui.findWordIntro(listOfAction, arr, listOfAction.checkWord(arr[1])));
+                response = (ui.findWord(listOfAction, arr, listOfAction.checkWord(arr[1])));
                 break;
 
             case Bye:
