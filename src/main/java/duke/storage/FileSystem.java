@@ -13,7 +13,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import jdk.swing.interop.SwingInterOpUtils;
 
 /**
  * FileSystem class that handles the saving and loading of tasks
