@@ -30,7 +30,7 @@ public class EventQueryHandler extends DeadlineQueryHandler {
 
         Task newTask = tt.addEvent(desc, startDate, endDate);
         tt.saveAllTasks();
-        return "Added task " + newTask;
+        return "Added " + newTask;
     }
 
     @Override

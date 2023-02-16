@@ -35,7 +35,7 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
         Task newTask = tt.addDeadline(desc, endDateTime);
 
         tt.saveAllTasks();
-        return "Added task:\n" + newTask;
+        return "Added \n" + newTask;
     }
 
     protected LocalDateTime getLocalDateTimeFromQuery(Query query, String argKey, String expectedParam)

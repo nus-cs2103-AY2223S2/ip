@@ -79,7 +79,7 @@ public class LoanAccount {
 
     private String getAccountCollectionString(Collection<Loan> loans) {
         StringBuilder collectionStr = new StringBuilder();
-        loans.forEach(l -> collectionStr.append(l).append("\n"));
+        loans.forEach(l -> collectionStr.append("\n").append(l));
         return collectionStr.toString();
     }
 
@@ -93,7 +93,7 @@ public class LoanAccount {
 
     private String serializeLoanCollection(Collection<Loan> loanCollection) {
         StringBuilder serialized = new StringBuilder();
-        loanCollection.forEach(l -> serialized.append(l.serialize()).append("\n"));
+        loanCollection.forEach(l -> serialized.append("\n").append(l.serialize()));
         return serialized.toString();
     }
 }
