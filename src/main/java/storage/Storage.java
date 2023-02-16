@@ -16,38 +16,14 @@ import java.nio.charset.StandardCharsets;
  * Represents the tasks stored on harddrive
  */
 public class Storage {
-    private String dataFolder = new File("data").getAbsolutePath();
-    private String tasksFile = new File("data/duke.txt").getAbsolutePath();
-    private Path tfPath = Paths.get(tasksFile);
-    private ArrayList<String> stringTaskList = new ArrayList<String>();
-
+    private File file = new File("data/duke.txt");
     /**
      * Constructor for storage object.
      * If data folder or duke.txt folder does not exist, creates them in directory.
      */
     public Storage(){
-        //if data folder does not exist
-        File f = new File(dataFolder);
-        if (!f.exists()){
-            f.mkdir();
-        }
-
-        File f1 = new File(tasksFile);
-        if (f1.exists()) {
-            try {
-                List<String> fileContent = new ArrayList<>(Files.readAllLines(tfPath, StandardCharsets.UTF_8));
-                for (int i = 0; i < fileContent.size(); i++) {
-                    stringTaskList.add(fileContent.get(i));
-                }
-            } catch(IOException e){
-                System.out.println(e.getMessage());
-            }
-        } else{
-            try {
-                f.createNewFile();
-            } catch(IOException e){
-                e.getMessage();
-            }
+        if (!file.exists()){
+            file.getParentFile().mkdir();
         }
     }
 
@@ -62,7 +38,7 @@ public class Storage {
             for (Task task: taskList){
                 stringTaskList.add(task.toFileString());
             }
-            Files.write(tfPath, stringTaskList, StandardCharsets.UTF_8);
+            Files.write(file.toPath(), stringTaskList, StandardCharsets.UTF_8);
         } catch(IOException e){
             System.out.println("Something went wrong");
         }
