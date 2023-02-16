@@ -1,4 +1,7 @@
-1|T| |this
-2|T| |that
-3|T| |that
-4|E| |hello|2023-02-25T14:00|2023-02-25T15:00
+1|D|X|CS2030 HW1|2023-02-20T14:00
+2|T| |CS1231 Lecture Recap
+3|E| |Company DND Event|2023-02-25T14:00|2023-02-25T15:00
+4|T| |Visit parents
+5|T| |Meet parents
+6|T| |Borrow new library book
+7|E| |Attend concert|2023-12-27T17:00|2023-12-27T19:00

@@ -170,7 +170,7 @@ public class Ui {
      * @return Formatted message as a string.
      */
     public String stringOfTaskNumbers(TaskList tl) {
-        String toShow = String.format("Now you have %d tasks in your list", tl.size());
+        String toShow = String.format("Now you have %d task(s) in your list", tl.size());
         return toShow;
     }
 }
