@@ -98,8 +98,6 @@ public class Deadline extends Task {
             }
             String date = splitInput[splitInput.length - 1];
             String desc = splitInput[1];
-
-
             if (isDate(date)) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate ld = LocalDate.parse(date, formatter);
