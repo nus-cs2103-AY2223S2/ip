@@ -36,7 +36,7 @@ Saturday has a lot of cool commands to help you get things organized and have fu
 ---
 A **ToDo** has **no timeframe**.
 <p align="center">
-  <img width="640" src="/docs/assets/todo.png">
+  <img width="640" src="todo.png">
 </p>
 
 ```
