@@ -10,6 +10,7 @@ import task.TaskList;
  */
 public class List implements Command {
     private static final String FORMAT = "list";
+    public static final String HELP_MSG = "Lists all tasks.\nFormat: " + FORMAT;
 
     /**
      * @return Parser that can parse the bye command.

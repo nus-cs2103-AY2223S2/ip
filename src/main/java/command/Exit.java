@@ -6,6 +6,7 @@ import parsing.Parser;
 import task.TaskList;
 
 public class Exit implements Command {
+    public static final String HELP_MSG = "Saves all tasks and exits app.\nFormat: bye";
     private static final String FORMAT = "bye";
 
     /**

@@ -12,6 +12,7 @@ public class Delete implements Command {
     private static final String ERROR = "Task not in list.";
     private static final String SUCCESS = "Task %d has been deleted.\nTasks remaining: %s";
     private static final String FORMAT = "delete 'task number'";
+    public static final String HELP_MSG = "Deletes task from list.\nFormat: " + FORMAT;
 
     private final int taskNum;
 

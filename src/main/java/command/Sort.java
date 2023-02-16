@@ -12,6 +12,8 @@ public class Sort implements Command {
     public static final String FORMAT = "sort";
     public static final String ERROR = "You have no tasks to sort.";
     public static final String SUCCESS = "Tasks sorted by date. Current tasks: %s";
+    public static final String HELP_MSG = "Sorts tasks by date. Tasks with no dates remain in the same position.\nFormat: "
+            + FORMAT;
 
     private Sort() {
     }

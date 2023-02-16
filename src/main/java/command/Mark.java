@@ -9,6 +9,7 @@ public class Mark implements Command {
     private static final String ERROR = "Task not in list.";
     private static final String SUCCESS = "Task has been marked.";
     private static final String FORMAT = "mark 'task number'";
+    public static final String HELP_MSG = "Mark specific task as done.\nFormat: " + FORMAT;
 
     private final int taskNum;
 

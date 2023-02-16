@@ -12,8 +12,11 @@ import util.Util;
 public class Add implements Command {
     private static final String SUCCESS = "Task added: %s";
     private static final String TODO_FORMAT = "todo 'description'";
+    public static final String HELP_MSG_TODO = "Adds todo task to the list.\nFormat: " + TODO_FORMAT;
     private static final String DEADLINE_FORMAT = "deadline 'description' /by 'YYYY-MM-DD'";
+    public static final String HELP_MSG_DEADLINE = "Adds deadline task to the list.\nFormat: " + DEADLINE_FORMAT;
     private static final String EVENT_FORMAT = "event 'description' /from 'YYYY-MM-DD' /to 'YYYY-MM-DD'";
+    public static final String HELP_MSG_EVENT = "Adds event task to the list.\nFormat: " + EVENT_FORMAT;
 
     private final Task task;
 

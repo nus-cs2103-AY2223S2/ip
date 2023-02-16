@@ -13,8 +13,9 @@ import java.util.stream.Collectors;
  */
 public class Find implements Command {
     private static final String FORMAT = "find 'keywords'";
+    public static final String HELP_MSG = "Finds tasks from list with matching keywords.\nFormat: " +
+            FORMAT;
     private static final String SUCCESS = "Tasks found: %s";
-
     final List<String> keywords;
 
     private Find(List<String> keywords) {

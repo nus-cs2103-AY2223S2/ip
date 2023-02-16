@@ -11,7 +11,8 @@ import task.TaskList;
 public class Unmark implements Command {
     private static final String ERROR = "Task not in list.";
     private static final String SUCCESS = "Task has been unmarked.";
-    private static final String FORMAT = "mark 'task number'";
+    private static final String FORMAT = "unmark 'task number'";
+    public static final String HELP_MSG = "Unmark specific task.\nFormat: " + FORMAT;
 
     private final int taskNum;
 

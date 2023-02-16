@@ -2,6 +2,7 @@ package util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Static utility functions not tied to any class
@@ -67,6 +68,19 @@ public class Util {
      */
     public static String listToString(List<Character> s) {
         return s.stream().map(Object::toString).reduce("", (a, b) -> a + b);
+    }
+
+    /**
+     * Joins strings using a specified delimiter
+     *
+     * @param delimiter Delimiter string
+     * @param lines     Strings to join
+     * @return Joined string
+     */
+    public static String join(String delimiter, String... lines) {
+        return Stream.of(lines)
+                .reduce("", (a, b) -> a + delimiter + b)
+                .substring(delimiter.length());
     }
 
 }

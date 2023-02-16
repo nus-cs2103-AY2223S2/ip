@@ -12,6 +12,8 @@ import java.time.LocalDate;
  */
 public class FindByDate implements Command {
     private static final String FORMAT = "findbydate 'YYYY-MM-DD'";
+    public static final String HELP_MSG = "Finds tasks from list with matching date.\nFormat: " +
+            FORMAT;
 
     private final LocalDate date;
 
