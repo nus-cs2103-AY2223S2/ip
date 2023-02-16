@@ -34,7 +34,7 @@
                   <Insets left="5.0" />
                </HBox.margin>
             </ImageView>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0">
                <children>
                   <ImageView fitHeight="16.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                      <image>

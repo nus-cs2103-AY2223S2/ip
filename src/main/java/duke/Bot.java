@@ -14,7 +14,12 @@ import duke.query.task.TaskQueryModule;
  */
 public class Bot {
     private QueryProcessor queryProcessor;
+    private BotPersonality botPersonality;
     private boolean hasInit = false;
+
+    public BotPersonality getPersonality() {
+        return this.botPersonality;
+    }
 
     /**
      * Initializes the bot.
@@ -22,6 +27,7 @@ public class Bot {
      * @throws DukeException
      */
     public void init() throws DukeException {
+        botPersonality = new BotPersonality();
         queryProcessor = new QueryProcessor(
                 new CoreModule(),
                 new TaskQueryModule(),
