@@ -47,6 +47,7 @@ public class Storage {
      * @throws CatBotException if there was an error while parsing the save file.
      */
     public ArrayList<Task> load() throws CatBotException {
+        assert saveFile.exists() : saveFile.getPath();
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
@@ -69,6 +70,7 @@ public class Storage {
      * @param message is the string to append to the save file
      */
     public void writeToSaveFile(String message) throws CatBotException {
+        assert saveFile.exists() : saveFile.getPath();
         try (FileWriter writer = new FileWriter(saveFile, true)) {
             writer.write(message);
         } catch (IOException e) {
@@ -81,6 +83,7 @@ public class Storage {
      * @param tasks is the TaskList to write to disk
      */
     public void saveToFile(TaskList tasks) throws CatBotException {
+        assert saveFile.exists() : saveFile.getPath();
         try (FileWriter writer = new FileWriter(saveFile, false)) {
             for (Task task: tasks) {
                 writer.write(task.toCommand() + "\n");
