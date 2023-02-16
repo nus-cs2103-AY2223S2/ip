@@ -1,6 +1,6 @@
 # NoDuKo
 
-> "God save the Queen." - Albert Einstein, probably ([(source)] (https://www.google.com)) 👀👀 😉
+> "God save the Queen." - Albert Einstein, probably ([(source)](https://www.google.com)) 👀👀 😉
 
 NoDuKo - Say No to Duke. ~~Be Free.~~
 
@@ -49,3 +49,5 @@ public class Welcome {
    |      | |_| | |_| |   <  _ _/
    |      |____/ \__, _|_|\_\___ |
    ```
+#### Acknowledgements
+The JavaFx UI was from the SE Education codebase. [link](https://se-education.org/guides/tutorials/javaFx.html)
