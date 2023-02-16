@@ -1,2 +1,4 @@
-package seedu.duke.commands;public class AddCommand {
+package seedu.duke.commands;
+
+public abstract class AddCommand extends Command {
 }
