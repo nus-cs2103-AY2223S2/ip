@@ -27,8 +27,9 @@ public class TaskList {
     }
 
     public String[] enumerate(){
-        String[] taskStringList = new String[taskList.size()];
-        for (int i = 0; i < taskList.size(); i++) {
+        int length = this.taskList.size();
+        String[] taskStringList = new String[length];
+        for (int i = 0; i < length; i++) {
             taskStringList[i] = taskList.get(i).toString();
         }
         return taskStringList;
@@ -69,6 +70,22 @@ public class TaskList {
         return task.toString();
     }
 
+    public String[] searchTaskDescription(String searchTerm) {
+        ArrayList<String> matchingItems = new ArrayList<>();
+        for (Task current : this.taskList) {
+            String currentDescription = current.getDescription();
+            String[] parsedDescription = currentDescription.split(" ");
+            for (String word : parsedDescription) {
+                if (word.equals(searchTerm)) {
+                    matchingItems.add(current.toString());
+                }
+            }
+        }
+        String[] result = new String[matchingItems.size()];
+        matchingItems.toArray(result);
+        return result;
+    }
+
     private void loadFromStorageText(ArrayList<String> storageText) {
         this.taskList = new ArrayList<>();
         String[] taskStringArray = storageText.toArray(new String[0]);
@@ -90,9 +107,4 @@ public class TaskList {
             }
         }
     }
-
-
-
-
-
 }
