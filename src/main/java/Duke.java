@@ -35,44 +35,20 @@ public class Duke {
         }
     }
 
-    /**
-     * This is the main run method for Duke.
-     */
-    public void runDuke() {
-        ui.printGreetings();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            try {
-                parser.executeCommand(fullCommand, tasks, storage, ui);
-            } catch (DukeException e) {
-                e.getMessage();
-            }
-            isExit = parser.isExit(fullCommand);
-        }
-        assert isExit;
-        ui.closeScanner();
-        ui.printExit();
-    }
 
     public String getDukeResponse(String input) {
 
         /* This is the string in response to the user input **/
         String dukeResponse;
-
-        dukeResponse = parser.runCommand(input, tasks, storage, ui);
+        try {
+            dukeResponse = parser.runCommand2(input, tasks, storage, ui);
+        } catch (DukeException e) {
+            dukeResponse = e.getMessage();
+        }
 
         assert !dukeResponse.equals("");
 
         return dukeResponse;
     }
 
-    /**
-     * This is the main method which invokes Duke to run.
-     *
-     * @param args Unused.
-     */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").runDuke();
-    }
 }

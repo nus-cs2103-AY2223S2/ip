@@ -1,5 +1,6 @@
 package duke;
 
+import duke.Command.*;
 import duke.ui.Ui;
 
 /**
@@ -8,7 +9,7 @@ import duke.ui.Ui;
 public class Parser {
 
     /**
-     * Constructor for the Deadline class.
+     * Constructor for the Parser class.
      */
     public Parser() {
     }
@@ -23,7 +24,7 @@ public class Parser {
         return s.equalsIgnoreCase("bye");
     }
 
-    public String runCommand(String inputCommand, TaskList tasks, Storage storage, Ui ui) {
+    public String runCommand(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException{
         int selectedNum;
         String commandResponse;
         commandResponse = "";
@@ -90,103 +91,64 @@ public class Parser {
         return commandResponse;
     }
 
-
-    //TODO: Abstract out printing to UI elements
-    /**
-     * This method executes the command itself.
-     *
-     * @param inputCommand The command to execute.
-     * @param tasks The TaskList to use.
-     * @param storage The Storage to use.
-     * @param ui The Ui that is displayed to user.
-     * @throws DukeException If there is an error.
-     */
-    public void executeCommand(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public String runCommand2(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException {
         int selectedNum;
+        String commandParams;
+        String commandResponse;
+        commandParams = "";
+        commandResponse = "";
+
+        Command pendingCommand;
+
         String[] inputCmdArr = inputCommand.split(" ");
         switch(inputCmdArr[0]) {
-        case "list":
-            tasks.printTask();
-            break;
-        case "todo":
-            String todoDesc;
-            try {
-                todoDesc = inputCommand.split(" ", 2)[1];
-            } catch (Exception e) {
-                throw new DukeException("Description of todo cannot be empty!!");
-            }
-            tasks.addTask(todoDesc, false);
-            tasks.printNewestTask();
-            storage.save(tasks);
-            break;
-        case "deadline":
-            String deadlineInput;
-            try {
-                deadlineInput = inputCommand.split(" ", 2)[1];
-            } catch (Exception e) {
-                throw new DukeException("Description of deadline cannot be empty!!");
-            }
-            String[] deadlineDesc = deadlineInput.split(" /by ");
-            tasks.addTask(deadlineDesc[0], deadlineDesc[1], false);
-            tasks.printNewestTask();
-            storage.save(tasks);
-            break;
-        case "event":
-            String eventInput;
-            try {
-                eventInput = inputCommand.split(" ", 2)[1];
-            } catch (Exception e) {
-                throw new DukeException("Description of event cannot be empty!!");
-            }
-            String[] eventDescArr = eventInput.split(" /from ");
-            String eventDesc = eventDescArr[0];
-            String[] eventTimeArr = eventDescArr[1].split(" /to ");
-            String eventFrom = eventTimeArr[0];
-            String eventTo = eventTimeArr[1];
-            tasks.addTask(eventDesc, eventFrom, eventTo, false);
-            tasks.printNewestTask();
-            storage.save(tasks);
-            break;
-        case "mark":
-            selectedNum = Integer.parseInt(inputCmdArr[1]);
-            tasks.markTask(selectedNum);
-            storage.save(tasks);
-            break;
-        case "unmark":
-            selectedNum = Integer.parseInt(inputCmdArr[1]);
-            tasks.unMarkTask(selectedNum);
-            storage.save(tasks);
-            break;
-        case "delete":
-            int numToDelete;
-            try {
-                numToDelete = Integer.parseInt(inputCommand.split(" ", 2)[1]);
-            } catch (Exception e) {
-                throw new DukeException("Please enter a valid number to delete!");
-            }
-            tasks.deleteTask(numToDelete);
-            storage.save(tasks);
-            break;
-        case "search":
-            String searchStr;
-            try {
-                searchStr = inputCommand.split(" ", 2)[1];
-            } catch (Exception e) {
-                throw new DukeException("Description of todo cannot be empty!!");
-            }
-            tasks.searchTask(searchStr);
-            break;
-        case "Storage":
-            //System.out.println("I RAN HERE!");
-            tasks = storage.load();
-            break;
-        case "Save":
-            storage.save(tasks);
-            break;
-        case "bye":
-            break;
-        default:
-            throw new DukeException("I don't get it!");
+            case "list":
+                pendingCommand = new ListCommand();
+                break;
+            case "todo":
+                commandParams = getParams(inputCommand);
+                pendingCommand = new ToDoCommand(commandParams);
+                break;
+            case "deadline":
+                commandParams = getParams(inputCommand);
+                pendingCommand = new DeadlineCommand(commandParams);
+                break;
+            case "event":
+                commandParams = getParams(inputCommand);
+                pendingCommand = new EventCommand(commandParams);
+                break;
+            case "mark":
+                commandParams = getParams(inputCommand);
+                pendingCommand = new MarkCommand(commandParams);
+                break;
+            case "unmark":
+                commandParams = getParams(inputCommand);
+                pendingCommand = new UnmarkCommand(commandParams);
+                break;
+            case "delete":
+                commandParams = getParams(inputCommand);
+                pendingCommand = new DeleteCommand(commandParams);
+                break;
+            case "search":
+                commandParams = getParams(inputCommand);
+                pendingCommand = new SearchCommand(commandParams);
+                break;
+            default:
+                pendingCommand = new UnknownCommand();
         }
+        return pendingCommand.executeCommand(storage, tasks);
+    }
+
+    private String getParams(String input) throws DukeException {
+        String[] inputArr;
+        String returnValue;
+
+        try {
+            inputArr = input.split(" ", 2);
+            returnValue = inputArr[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("There is no parameter specified!");
+        }
+        return returnValue;
     }
 }

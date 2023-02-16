@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     /** String used to represent the deadline of task. */
-    protected String by;
+    protected String taskEndTime;
 
     /** String used to assign the name of the task. */
-    protected String desc;
+    protected String taskDesc;
 
     /** Date object used to represent the deadline of task. */
     private LocalDate byDate;
@@ -20,28 +20,28 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class.
      *
-     * @param desc The name of the task.
-     * @param by The deadline of the task.
+     * @param taskDesc The name of the task.
+     * @param taskEndTime The deadline of the task.
      */
-    public Deadline(String desc, String by) {
-        super(desc);
-        this.desc = desc;
-        this.by = by;
-        byDate = LocalDate.parse(by);
+    public Deadline(String taskDesc, String taskEndTime) {
+        super(taskDesc);
+        this.taskDesc = taskDesc;
+        this.taskEndTime = taskEndTime;
+        byDate = LocalDate.parse(taskEndTime);
     }
 
     /**
      * Overloaded constructor for the Deadline class.
      *
-     * @param desc The name of the task.
-     * @param by The deadline of the task.
-     * @param b The status of the task.
+     * @param taskDesc The name of the task.
+     * @param taskEndTime The deadline of the task.
+     * @param taskStatus The status of the task.
      */
-    public Deadline(String desc, String by, boolean b) {
-        super(desc, b);
-        this.desc = desc;
-        this.by = by;
-        byDate = LocalDate.parse(by);
+    public Deadline(String taskDesc, String taskEndTime, boolean taskStatus) {
+        super(taskDesc, taskStatus);
+        this.taskDesc = taskDesc;
+        this.taskEndTime = taskEndTime;
+        byDate = LocalDate.parse(taskEndTime);
     }
 
     /**
@@ -56,10 +56,10 @@ public class Deadline extends Task {
      * {@inheritDoc}
      */
     public String asCsv() {
-        if (super.isDone) {
-            return "D,1" + desc + "," + by;
+        if (super.taskStatus) {
+            return "D,1" + taskDesc + "," + taskEndTime;
         } else {
-            return "D,0" + desc + "," + by;
+            return "D,0" + taskDesc + "," + taskEndTime;
         }
     }
 }

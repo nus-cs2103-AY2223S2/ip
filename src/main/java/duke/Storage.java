@@ -17,8 +17,6 @@ public class Storage {
     Path filePath;
     /** File object of storage entry. */
     File dukeDataFile;
-    /** TaskList to be loaded from storage. */
-    TaskList loadTaskList;
 
     /**
      * Constructor for the Storage class.
@@ -27,7 +25,6 @@ public class Storage {
      */
     public Storage(String s) {
         filePath = Paths.get(home, "data", s);
-        loadTaskList = new TaskList();
     }
 
     //TODO: Just a test, will remove later
@@ -47,47 +44,15 @@ public class Storage {
      * @throws DukeException If there is any issues with reading the file
      */
     public TaskList load() throws DukeException{
+        TaskList result;
         dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
-            System.out.println("FILE EXIST");
-            TaskList loadTaskList= new TaskList();
-            try {
-                List<String> allLines = Files.readAllLines(filePath);
-                for (String line : allLines) {
-                    String[] lineArray = line.split(",");
-                    boolean b;
-                    if (lineArray[1].equals("1")) {
-                        b = true;
-                    } else {
-                        b = false;
-                    }
-                    switch (lineArray[0]) {
-                        case "T":
-                            loadTaskList.addTask(lineArray[2], b);
-                            break;
-                        case "D":
-                            loadTaskList.addTask(lineArray[2], lineArray[3], b);
-                            break;
-                        case "E":
-                            loadTaskList.addTask(lineArray[2], lineArray[3], lineArray[4], b);
-                            break;
-                        case "":
-                            break;
-                    }
-                }
-                return loadTaskList;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            result = convertFileToTaskList(filePath);
         } else {
-            System.out.println("NO EXIST");
-            try {
-                FileUtils.write(dukeDataFile, "");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            createNewFile(dukeDataFile);
+            result = new TaskList();
         }
-        return new TaskList();
+        return result;
     }
 
     /**
@@ -103,6 +68,100 @@ public class Storage {
         }
         try {
             FileUtils.writeStringToFile(dukeDataFile, outputString.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * This method converts the saved file to a TaskList.
+     *
+     * @param filePath The File to be converted.
+     * @return TaskList after conversion.
+     */
+    private TaskList convertFileToTaskList (Path filePath) {
+        List<String> allLines;
+        TaskList resultTaskList;
+        allLines = readFileAsList(filePath);
+
+        resultTaskList = convertListToTaskList(allLines);
+        return resultTaskList;
+    }
+
+    /**
+     * This method reads the file in the path provided as a List of Strings.
+     *
+     * @param filePath The File to be read.
+     * @return List of Strings after reading.
+     */
+    private List<String> readFileAsList(Path filePath) {
+        List<String> allLines;
+        try {
+            allLines = Files.readAllLines(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return allLines;
+    }
+
+    /**
+     * This method converts the list of Tasks represented as Strings into a TaskList.
+     *
+     * @param list The list of tasks to be converted.
+     * @return The TaskList after conversion.
+     */
+    private TaskList convertListToTaskList(List<String> list) {
+        TaskList result;
+        result = new TaskList();
+
+        for (int i = 0; i < list.size(); i++) {
+            String currString = list.get(i);
+            Task curr = convertStringToTask(currString);
+            result.addTask(curr);
+        }
+        return result;
+    }
+
+    /**
+     * This method converts individual Task represented as String into Task.
+     *
+     * @param itemString The task represented in String form.
+     * @return The task after it is converted.
+     */
+    private Task convertStringToTask(String itemString) {
+        String[] lineArray;
+        boolean taskStatus;
+        Task resultingTask;
+
+        resultingTask = null;
+        lineArray = itemString.split(",");
+        taskStatus = lineArray[1].equals("1");
+
+        switch (lineArray[0]) {
+            case "T":
+                resultingTask = new ToDo(lineArray[2], taskStatus);
+                break;
+            case "D":
+                resultingTask = new Deadline(lineArray[2], lineArray[3], taskStatus);
+                break;
+            case "E":
+                resultingTask = new Event(lineArray[2], lineArray[3], lineArray[4], taskStatus);
+                break;
+            default:
+                break;
+        }
+
+        return resultingTask;
+    }
+
+    /**
+     * This method creates a new file if the file do not exist.
+     *
+     * @param fileToWrite The file to be created.
+     */
+    private void createNewFile(File fileToWrite) {
+        try {
+            FileUtils.write(fileToWrite, "");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
