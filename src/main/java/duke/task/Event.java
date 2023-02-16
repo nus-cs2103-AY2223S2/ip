@@ -4,6 +4,7 @@ package duke.task;
  * Subclass of tasks representing an event task
  */
 public class Event extends Task {
+    private static final String TYPE = "E";
     private String startDateTime;
     private String dueDateTime;
 
@@ -16,7 +17,7 @@ public class Event extends Task {
      * @param isDone whether the task is done
      */
     public Event(String description, String from, String to, boolean isDone) {
-        super(description, isDone, "E");
+        super(description, isDone, TYPE);
 
         this.startDateTime = from;
         this.dueDateTime = to;
@@ -30,7 +31,7 @@ public class Event extends Task {
      * @param to ending date and time of event
      */
     public Event(String description, String from, String to) {
-        super(description, false, "E");
+        super(description, false, TYPE);
 
         startDateTime = from;
         dueDateTime = to;

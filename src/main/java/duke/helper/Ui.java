@@ -3,8 +3,7 @@ package duke.helper;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exception.EmptyTaskException;
-import duke.exception.InvalidTaskCommandException;
+import duke.exception.InvalidCommandException;
 import duke.task.Task;
 
 /**
@@ -23,11 +22,11 @@ public class Ui {
      * @param task task to be removed
      * @param size number of remaining tasks
      */
-    public static String showDelete(Task task, int size) {
+    public String outputDeleteMsg(Task task, int size) {
         assert size >= 0 : "Size of TaskList should be zero or more";
-        return "Noted. I've removed this task:\n"
-                + task
-                + String.format("\nNow you have %d tasks in the list.", size);
+        StringBuilder output = new StringBuilder("Noted. I've removed this task:\n");
+        output.append(task).append(String.format("\nNow you have %d tasks in the list.", size));
+        return output.toString();
     }
 
     /**
@@ -36,16 +35,15 @@ public class Ui {
      * @param isDone whether a task will be marked or unmarked
      * @param taskToMark task to be marked or unmarked
      */
-    public String showMark(boolean isDone, Task taskToMark) {
-        String output = "";
+    public String outputMarkMsg(boolean isDone, Task taskToMark) {
+        StringBuilder output = new StringBuilder();
         if (isDone) {
-            output = "Nice! I've marked this task as done:\n";
+            output.append("Nice! I've marked this task as done:\n");
         } else {
-            output = "OK, I've marked this task as not done yet:\n";
+            output.append("OK, I've marked this task as not done yet:\n");
         }
-        return output + taskToMark;
+        return output.append(taskToMark).toString();
     }
-
 
     /**
      * Prints the message when a task is added
@@ -53,11 +51,11 @@ public class Ui {
      * @param task task to be added
      * @param size the number of tasks after the task is added
      */
-    public String showTaskOutput(Task task, int size) {
+    public String outputAddTaskMsg(Task task, int size) {
         assert size >= 0 : "Size of TaskList should be zero or more";
-        return "Got it. I've added this task:\n"
-                + task
-                + "\nNow you have " + size + " tasks in the list.";
+        StringBuilder output = new StringBuilder("Got it. I've added this task:\n");
+        output.append(task).append("\nNow you have " + size + " tasks in the list.");
+        return output.toString();
     }
 
     /**
@@ -65,12 +63,12 @@ public class Ui {
      *
      * @param taskList List of all the tasks
      */
-    public String filter(ArrayList<Task> taskList) {
-        String output = "Here are the matching tasks in your list:\n";
+    public String outputFilterMsg(ArrayList<Task> taskList) {
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task task : taskList) {
-            output += task + "\n";
+            output.append(task).append("\n");
         }
-        return output;
+        return output.toString();
     }
 
     /**
@@ -78,14 +76,9 @@ public class Ui {
      *
      * @param command the command the user needs help with
      * @return help message
-     * @throws EmptyTaskException Throws when help command is not followed by a command
-     * @throws InvalidTaskCommandException Throws when help command is followed by something that is not a command
+     * @throws InvalidCommandException Throws when help command is followed by something that is not a command
      */
-    public String showHelpMessage(String command) throws EmptyTaskException, InvalidTaskCommandException {
-        if (command.equals("")) {
-            throw new EmptyTaskException("help");
-        }
-
+    public String outputHelpMsg(String command) throws InvalidCommandException {
         switch (command) {
         case "list":
             return "Enter: list";
@@ -106,7 +99,7 @@ public class Ui {
         case "bye":
             return "Enter: bye";
         default:
-            throw new InvalidTaskCommandException();
+            throw new InvalidCommandException();
         }
     }
 }

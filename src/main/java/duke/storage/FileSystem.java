@@ -18,16 +18,12 @@ import duke.task.ToDo;
  * FileSystem class that handles the saving and loading of tasks
  */
 public class FileSystem {
-    private static final int POS_TYPE = 1;
-    private static final int POS_IS_MARK = 4;
-    private static final int POS_DESC = 7;
     private File file;
 
     /**
      * Constructor for FileSystem class
      *
      * @param relFilePath files's location
-     * @throws IOException If file cannot be created
      */
     public FileSystem(String relFilePath) {
         String dirPath = relFilePath.split("/")[0];
@@ -62,7 +58,7 @@ public class FileSystem {
                 appendToFile(t.toString());
             }
         } catch (IOException e) {
-            e.toString();
+            System.out.println(e);
         }
     }
 
@@ -73,6 +69,9 @@ public class FileSystem {
      * @throws FileNotFoundException If the file cannot be found
      */
     public ArrayList<Task> loadFromFile() {
+        int typePos = 1;
+        int markPos = 4;
+        int descPos = 7;
         Scanner scanner = null;
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -84,9 +83,9 @@ public class FileSystem {
 
         while (scanner.hasNextLine()) {
             String task = scanner.nextLine();
-            char taskType = task.charAt(POS_TYPE);
-            boolean isMark = task.charAt(POS_IS_MARK) == 'X';
-            String taskDesc = task.substring(POS_DESC);
+            char taskType = task.charAt(typePos);
+            boolean isMark = task.charAt(markPos) == 'X';
+            String taskDesc = task.substring(descPos);
 
             if (taskType == 'T') {
                 tasks.add(new ToDo(taskDesc, isMark));
@@ -116,30 +115,40 @@ public class FileSystem {
     /**
      * Creates a deadline based on the data stored
      *
-     * @param deadlineDesc Description of the deadline
+     * @param input Description of the deadline
      * @param isMark Whether the deadline has been marked done
      * @return A deadline stored in the file
      */
-    public Deadline createDeadlineFromData(String deadlineDesc, boolean isMark) {
-        String[] deadlineArr = deadlineDesc.split(" \\(by: ");
-        int dateTimeLen = deadlineArr[1].length() - 1;
-        String by = deadlineArr[1].substring(0, dateTimeLen);
-        return new Deadline(deadlineArr[0], by, isMark);
+    public Deadline createDeadlineFromData(String input, boolean isMark) {
+        String bySeparator = " \\(by: ";
+        String[] deadlineArr = input.split(bySeparator);
+        String deadlineDesc = deadlineArr[0];
+        String dateTime = deadlineArr[1];
+
+        int dateTimeLen = dateTime.length() - 1;
+        String by = dateTime.substring(0, dateTimeLen);
+        return new Deadline(deadlineDesc, by, isMark);
     }
 
     /**
      * Creates an event based on the data stored
      *
-     * @param eventDesc Description of the event
+     * @param input Description of the event
      * @param isMark Whether the task has been marked done
      * @return An event stored in the file
      */
-    public Event createEventFromData(String eventDesc, boolean isMark) {
-        String[] eventArr = eventDesc.split(" \\(from: ");
-        String[] dateTimeArr = eventArr[1].split(" to: ");
+    public Event createEventFromData(String input, boolean isMark) {
+        String fromSeparator = " \\(from: ";
+        String toSeparator = " to: ";
+
+        String[] eventArr = input.split(fromSeparator);
+        String eventDesc = eventArr[0];
+
+        String[] dateTimeArr = eventArr[1].split(toSeparator);
+        String from = dateTimeArr[0];
         int endingDateTimeLen = dateTimeArr[1].length() - 1;
         String to = dateTimeArr[1].substring(0, endingDateTimeLen);
-        return new Event(eventArr[0], dateTimeArr[0], to, isMark);
+        return new Event(eventDesc, from, to, isMark);
     }
 }
 

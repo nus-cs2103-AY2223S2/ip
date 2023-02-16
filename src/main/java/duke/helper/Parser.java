@@ -6,9 +6,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.exception.EmptyTaskException;
+import duke.exception.EmptyCommandException;
 import duke.exception.InvalidDateTimeException;
-import duke.exception.InvalidTaskCommandException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -42,16 +42,18 @@ public class Parser {
      */
     public String parseInputs(String desc) throws DukeException {
         assert desc.length() > 0 : "Inputs should not be empty!";
-        String[] inputs = desc.split(" ", 2);
+
+        String spaceSeparator = " ";
+        String[] inputs = desc.split(spaceSeparator, 2);
         String type = inputs[0];
 
         switch (type) {
         case "list":
             return tasks.outputList();
         case "mark":
-            return tasks.markTask(true, inputs[1]);
+            return parseMark(inputs);
         case "unmark":
-            return tasks.markTask(false, inputs[1]);
+            return parseUnmark(inputs);
         case "todo":
             return parseToDo(inputs);
         case "deadline":
@@ -59,16 +61,16 @@ public class Parser {
         case "event":
             return parseEvent(inputs);
         case "delete":
-            return tasks.deleteTask(inputs[1]);
+            return parseDelete(inputs);
         case "find":
-            return parseFind(inputs[1]);
+            return parseFind(inputs);
         case "help":
-            return parseHelp(inputs[1]);
+            return parseHelp(inputs);
         case "bye":
             Platform.exit();
             break;
         default:
-            throw new InvalidTaskCommandException();
+            throw new InvalidCommandException();
         }
         return "";
     }
@@ -76,13 +78,14 @@ public class Parser {
     /**
      * Checks if the task desc is not empty
      *
-     * @param taskDesc Desc of the task
+     * @param inputs Desc of the task
      * @return true if the task desc is not empty
-     * @throws EmptyTaskException If task desc is empty
+     * @throws EmptyCommandException If task desc is empty
      */
-    public static boolean checkTaskDesc(String[] taskDesc) throws EmptyTaskException {
-        if (taskDesc.length == 1) {
-            throw new EmptyTaskException(taskDesc[0]);
+    public static boolean checkCommandDesc(String[] inputs) throws EmptyCommandException {
+        if (inputs.length == 1) {
+            String command = inputs[0];
+            throw new EmptyCommandException(command);
         }
         return true;
     }
@@ -97,8 +100,10 @@ public class Parser {
     public static String handleDateTime(String dateTime) throws InvalidDateTimeException {
         assert dateTime.length() > 0 : "DateTime not provided!";
 
+        String dateTimePattern = "MMM-d-yyyy HH:mm";
+
         try {
-            DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM-d-yyyy HH:mm");
+            DateTimeFormatter pattern = DateTimeFormatter.ofPattern(dateTimePattern);
             return LocalDateTime.parse(dateTime).format(pattern);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
@@ -106,17 +111,43 @@ public class Parser {
     }
 
     /**
+     * Parses the mark command
+     *
+     * @param inputs different parts of the mark command
+     * @return a string to show the display message of the mark command
+     * @throws DukeException If no or wrong task number provided
+     */
+    public String parseMark(String[] inputs) throws DukeException {
+        checkCommandDesc(inputs);
+        String taskToMark = inputs[1];
+        return tasks.changeMarkStatus(true, taskToMark);
+    }
+
+    /**
+     * Parses the unmark command
+     *
+     * @param inputs different parts of the unmark command
+     * @return a string to show the display message of the unmark command
+     * @throws DukeException If no or wrong task number provided
+     */
+    public String parseUnmark(String[] inputs) throws DukeException {
+        checkCommandDesc(inputs);
+        String taskToUnmark = inputs[1];
+        return tasks.changeMarkStatus(false, taskToUnmark);
+    }
+
+    /**
      * Parses the todo command
      *
      * @param inputs different parts of the todo command
      * @return a string to show the creation of a todo task
-     * @throws EmptyTaskException Throws when the task has no description
+     * @throws EmptyCommandException If the task has no description
      */
-    public String parseToDo(String[] inputs) throws EmptyTaskException {
-        checkTaskDesc(inputs);
+    public String parseToDo(String[] inputs) throws EmptyCommandException {
+        checkCommandDesc(inputs);
         Task toDoTask = new ToDo(inputs[1], false);
         tasks.addToTasks(toDoTask);
-        return ui.showTaskOutput(toDoTask, tasks.getTasks().size());
+        return ui.outputAddTaskMsg(toDoTask, tasks.getTasks().size());
     }
 
     /**
@@ -124,15 +155,18 @@ public class Parser {
      *
      * @param inputs different parts of the deadline command
      * @return a string to show the creation of a deadline task
-     * @throws EmptyTaskException Throws when the task has no description
-     * @throws InvalidDateTimeException Throws when the dateTime input is invalid
+     * @throws EmptyCommandException If the task has no description
+     * @throws InvalidDateTimeException If the dateTime input is invalid
      */
-    public String parseDeadline(String[] inputs) throws EmptyTaskException, InvalidDateTimeException {
-        checkTaskDesc(inputs);
-        String[] deadlineDesc = inputs[1].split(" /by ");
-        Task deadlineTask = new Deadline(deadlineDesc[0], handleDateTime(deadlineDesc[1]));
+    public String parseDeadline(String[] inputs) throws EmptyCommandException, InvalidDateTimeException {
+        checkCommandDesc(inputs);
+        String bySeparator = " /by ";
+        String[] deadlineArr = inputs[1].split(bySeparator);
+        String deadlineDesc = deadlineArr[0];
+        String by = deadlineArr[1];
+        Task deadlineTask = new Deadline(deadlineDesc, handleDateTime(by));
         tasks.addToTasks(deadlineTask);
-        return ui.showTaskOutput(deadlineTask, tasks.getSize());
+        return ui.outputAddTaskMsg(deadlineTask, tasks.getSize());
     }
 
     /**
@@ -140,29 +174,49 @@ public class Parser {
      *
      * @param inputs different parts of the event command
      * @return a string to show the creation of an event task
-     * @throws EmptyTaskException Throws when the task has no description
-     * @throws InvalidDateTimeException Throws when the dateTime input is invalid
+     * @throws EmptyCommandException If the command has no description
+     * @throws InvalidDateTimeException If the dateTime input is invalid
      */
-    public String parseEvent(String[] inputs) throws EmptyTaskException, InvalidDateTimeException {
-        checkTaskDesc(inputs);
-        String eventDesc = inputs[1].split(" /from ")[0];
-        String from = inputs[1].split(" /from ")[1].split(" /to ")[0];
-        String to = inputs[1].split(" /from ")[1].split(" /to ")[1];
+    public String parseEvent(String[] inputs) throws EmptyCommandException, InvalidDateTimeException {
+        checkCommandDesc(inputs);
+        String fromSeparator = " /from ";
+        String toSeparator = " /to ";
+        String[] eventArr = inputs[1].split(fromSeparator);
+        String eventDesc = eventArr[0];
+        String[] dateTimeArr = eventArr[1].split(toSeparator);
+        String from = dateTimeArr[0];
+        String to = dateTimeArr[1];
 
         Task eventTask = new Event(eventDesc,
                 handleDateTime(from),
                 handleDateTime(to));
         tasks.addToTasks(eventTask);
-        return ui.showTaskOutput(eventTask, tasks.getSize());
+        return ui.outputAddTaskMsg(eventTask, tasks.getSize());
+    }
+
+    /**
+     * Parses the delete command
+     *
+     * @param inputs different parts of the delete command
+     * @return a string to show the display message of the delete command
+     * @throws DukeException If no or wrong task number provided
+     */
+    public String parseDelete(String[] inputs) throws DukeException {
+        checkCommandDesc(inputs);
+        String taskNumber = inputs[1];
+        return tasks.deleteTask(taskNumber);
     }
 
     /**
      * Parses the find command
      *
-     * @param keyword filters the displayed list according to the keyword
+     * @param inputs different parts of the find command
      * @return a string to show the display message of the find command
+     * @throws EmptyCommandException If the command has no keyword
      */
-    public String parseFind(String keyword) {
+    public String parseFind(String[] inputs) throws EmptyCommandException {
+        checkCommandDesc(inputs);
+        String keyword = inputs[1];
         ArrayList<Task> taskList = tasks.getTasks();
         ArrayList<Task> output = new ArrayList<>();
         for (Task task : taskList) {
@@ -170,18 +224,20 @@ public class Parser {
                 output.add(task);
             }
         }
-        return ui.filter(output);
+        return ui.outputFilterMsg(output);
     }
 
     /**
      * Parses the help command
      *
-     * @param command the command the user needs help with
+     * @param inputs different parts of the help command
      * @return a String showing the user how to use the command
-     * @throws EmptyTaskException Throws when the help command is not followed by another command
-     * @throws InvalidTaskCommandException Throws when the help command is followed by something that is not a command
+     * @throws EmptyCommandException If the help command is not followed by another command
+     * @throws InvalidCommandException If the help command is followed by something that is not a command
      */
-    public String parseHelp(String command) throws EmptyTaskException, InvalidTaskCommandException {
-        return ui.showHelpMessage(command);
+    public String parseHelp(String[] inputs) throws EmptyCommandException, InvalidCommandException {
+        checkCommandDesc(inputs);
+        String command = inputs[1];
+        return ui.outputHelpMsg(command);
     }
 }

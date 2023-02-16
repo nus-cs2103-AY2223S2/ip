@@ -4,6 +4,7 @@ package duke.task;
  * Subclass of task representing a deadline task
  */
 public class Deadline extends Task {
+    private static final String TYPE = "D";
     private String dueDateTime;
 
     /**
@@ -14,7 +15,7 @@ public class Deadline extends Task {
      * @param isDone whether the task is done
      */
     public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone, "D");
+        super(description, isDone, TYPE);
         this.dueDateTime = by;
     }
 
@@ -25,7 +26,7 @@ public class Deadline extends Task {
      * @param by task's deadline
      */
     public Deadline(String description, String by) {
-        super(description, false, "D");
+        super(description, false, TYPE);
         this.dueDateTime = by;
     }
 
