@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
 
 
 /**
@@ -48,13 +47,16 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    private void flip(boolean isError) {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
 
-        /* Change the colour of Duke's dialog */
-        dialog.getStyleClass().add("label-duke");
-
+        /* Change the colour of Duke's dialog based on whether it is error message */
+        if (isError) {
+            dialog.getStyleClass().add("label-duke-error");
+        } else {
+            dialog.getStyleClass().add("label-duke");
+        }
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
@@ -63,9 +65,9 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean isError) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.flip(isError);
         return db;
     }
 }

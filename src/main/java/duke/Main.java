@@ -53,8 +53,6 @@ public class Main extends Application {
 
         /* Checks user's answer */
         Optional<ButtonType> answer = alert.showAndWait();
-        if (answer.get() == buttonYes) {
-            stage.close();
-        }
+        answer.filter(response -> response == buttonYes).ifPresent(event -> stage.close());
     }
 }

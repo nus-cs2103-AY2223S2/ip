@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private final Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaSmith.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaLebron.png"));
 
     /**
@@ -65,7 +64,7 @@ public class MainWindow extends AnchorPane {
     private void showWelcomeMessage() {
         String welcomeMessage = duke.createWelcomeMessage();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage, false)
         );
     }
 
@@ -77,9 +76,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        boolean isError = (response.startsWith("Error: "));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, isError)
         );
         userInput.clear();
 

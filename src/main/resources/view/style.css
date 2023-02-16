@@ -28,3 +28,7 @@
 .label-duke {
     -fx-background-color: #F2CD5C;
 }
+
+.label-duke-error {
+    -fx-background-color: #CD0404;
+}
