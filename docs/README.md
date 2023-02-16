@@ -1,8 +1,8 @@
 # Squirtle(daDuke)'s User Guide
-Ever felt like there's way too many things your have to keep track of?
-To the point it's too much for your brain capacity that you end up 
+Ever felt like there are way too many things you have to keep track of?
+To the point, it's too much for the brain capacity that you end up
 forgetting to do something way too often!
-No worries as Squirtle is here to help you! 
+No worries as Squirtle is here to help you!
 
 ![This is an image](/squirtle.png)
 
