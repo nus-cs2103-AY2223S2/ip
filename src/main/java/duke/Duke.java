@@ -91,20 +91,12 @@ public class Duke {
     }
 
     public String getResponse(String input) throws DukeException {
-        try {
-            Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
-            String response = c.getResponse();
+        Command c = Parser.parse(input);
+        c.execute(tasks, ui, storage);
+        String response = c.getResponse();
 
-            assert response != null : "Response is null";
+        assert response != null : "Response is null";
 
-            return response;
-        } catch (DukeException e) {
-            return e.getMessage();
-        } catch (Exception e) {
-            return DukeException
-                    .getError()
-                    .getMessage();
-        }
+        return response;
     }
 }
