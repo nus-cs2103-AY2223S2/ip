@@ -15,7 +15,7 @@ public class ListCommand extends Command {
         StringBuilder taskList = new StringBuilder("List of tasks: \n");
         int index = 1;
         for (Task task: tasks) {
-            taskList.append("  ").append(index++).append(".").append(task).append("\n");
+            taskList.append(String.format("  %02d.%s\n", index++, task.toString()));
         }
 
         ui.setNextOutput(taskList.toString());

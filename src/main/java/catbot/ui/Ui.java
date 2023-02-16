@@ -1,24 +1,18 @@
 package catbot.ui;
 
-import java.util.Scanner;
-
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
  * Handles all UI features.
  */
 public class Ui {
-    private static final int MAX_LINE_LENGTH = 120;
     private Text nextOutput;
-    private final Scanner inputScanner;
 
     /**
      * Initialises a Ui instance.
      */
     public Ui() {
         nextOutput = null;
-        inputScanner = new Scanner(System.in);
     }
 
     /**
@@ -27,8 +21,7 @@ public class Ui {
      */
     public void setNextOutput(String message) {
         nextOutput = new Text(message);
-        nextOutput.setFont(Font.getDefault());
-        nextOutput.setStyle("-fx-text-fill: snow");
+        nextOutput.setStyle("-fx-text-fill: snow; -fx-font-family: Monospaced");
     }
 
     /**
@@ -37,8 +30,7 @@ public class Ui {
      */
     public Text getError(String message) {
         Text error = new Text(message);
-        error.setFont(Font.getDefault());
-        error.setStyle("-fx-text-fill: firebrick;");
+        error.setStyle("-fx-text-fill: firebrick; -fx-font-family: Monospaced");
         return error;
     }
 
