@@ -19,7 +19,7 @@ public class AddEventCommand extends Command {
     private final LocalDateTime endsAt;
 
     /**
-     * Constructs a new {@code AddCommand} for a {@code EventTask}.
+     * Constructs a new {@code AddEventCommand} for a {@code EventTask}.
      *
      * @param description is the description of the task.
      * @param startsAt    is the time at which the event starts.

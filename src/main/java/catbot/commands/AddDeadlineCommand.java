@@ -19,7 +19,6 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Constructs a new {@code AddDeadlineCommand} for a {@code DeadlineTask}.
-     *
      * @param description is the description of the task.
      * @param dueBy       is the date and time by which the task is due.
      */

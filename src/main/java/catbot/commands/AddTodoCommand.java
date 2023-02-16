@@ -17,7 +17,6 @@ public class AddTodoCommand extends Command {
 
     /**
      * Constructs a new {@code AddTodoCommand} for a {@code ToDoTask}.
-     *
      * @param description is the description of the task.
      */
     public AddTodoCommand(String description) {
