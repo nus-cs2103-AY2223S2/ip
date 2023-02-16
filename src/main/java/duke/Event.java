@@ -4,9 +4,9 @@ package duke;
  * Event class
  */
 public class Event extends Task {
-
-    String from;
-    String to;
+    private static final String TASK_TYPE = "[E]";
+    private String from;
+    private String to;
 
     /**
      * constructor for an instantiating an event object
@@ -27,7 +27,16 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return TASK_TYPE + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+    }
 
+    /**
+     * Returns the string representation of the event object to be stored into the data.txt file
+     * @return String string representation with dividers to be stored in the data.txt file
+     */
+    @Override
+    public String toStorageData() {
+        return TASK_TYPE + DIVIDER + this.getStatusIcon() + DIVIDER + super.description + DIVIDER + this.from
+                + DIVIDER + this.to;
     }
 }

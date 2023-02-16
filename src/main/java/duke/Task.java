@@ -4,6 +4,7 @@ package duke;
  * Task class
  */
 public class Task {
+    protected static final String DIVIDER = "/!@#&/";
     protected String description;
     protected boolean isDone;
 
@@ -53,5 +54,13 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    /**
+     * Returns string representation of a task to be stored in the data.txt file
+     * @return String string representation of a task to be stored in the data.txt file
+     */
+    public String toStorageData() {
+        return this.toString();
     }
 }

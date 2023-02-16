@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Deadline class
  */
 public class Deadline extends Task {
-    LocalDate dueDate;
+    private static final String TASK_TYPE = "[D]";
+    private LocalDate dueDate;
 
     /**
      * Constructor for instantiating a deadline object
@@ -27,5 +28,17 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (" + this.dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ')';
+    }
+
+    /**
+     * Returns the string representation of the deadline object to be stored in the data.txt file
+     * @return the string representation with dividers of the deadline object to be stored in the data.txt file
+     */
+    @Override
+    public String toStorageData() {
+        String completionStatus = this.getStatusIcon();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dueDateString = this.dueDate.format(dateFormatter);
+        return TASK_TYPE + DIVIDER + completionStatus + DIVIDER + super.description + DIVIDER + dueDateString;
     }
 }

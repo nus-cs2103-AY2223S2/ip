@@ -24,7 +24,7 @@ public class Parser {
 
         } else if (userInput.equals("list")) {
 
-            return lst.getTaskList();
+            return "Here are the tasks in your list:\n" + lst.getTaskList();
 
         } else if (userInput.startsWith("mark")) {
 

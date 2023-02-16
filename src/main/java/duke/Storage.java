@@ -26,6 +26,48 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    private Task createTask(String data) throws DukeException{
+        String[] dataArr = data.split(Task.DIVIDER);
+        String taskType = dataArr[0];
+        String completionStatus = dataArr[1];
+        String description = dataArr[2];
+        Task task;
+
+        switch (taskType) {
+            case "[T]":
+                task = new Todo(description);
+                break;
+            case "[D]":
+                String dueDateString = dataArr[3];
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dueDate = LocalDate.parse(dueDateString, dateFormatter);
+                task = new Deadline(description, dueDate);
+                break;
+            case "[E]":
+                String from = dataArr[3];
+                String to = dataArr[4];
+                task = new Event(description, from, to);
+                break;
+            default:
+                throw new DukeException("Unknown task type found in data.txt file");
+        }
+        if (completionStatus.equals("X")) {
+            task.mark();
+        }
+        return task;
+    }
+
+    private void createFile() throws DukeException {
+        try {
+            File data = new File("./data");
+            File f_new = new File(filePath);
+            data.mkdir();
+            f_new.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Error creating file");
+        }
+    }
+
     /**
      * Loads the file at the specified file path into the storage object
      * @return ArrayList an arraylist of tasks loaded from the file
@@ -35,53 +77,19 @@ public class Storage {
         File f = new File(filePath);
         if (f.exists()) {
             try {
-                Scanner scannerTxtFile = new Scanner(f);
-                while (scannerTxtFile.hasNext()) {
-                    String txt = scannerTxtFile.nextLine();
-                    if (txt.charAt(1) == 'T') {
-                        String details = txt.substring(7);
-                        Task t = new Todo(details);
-                        if (txt.charAt(4) == 'X') {
-                            t.mark();
-                        }
-                        loadedTasks.add(t);
-                    } else if (txt.charAt(1) == 'D') {
-                        String[] detailsAndDueDate = txt.substring(7).split(" \\(");
-                        String details = detailsAndDueDate[0];
-                        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate dueDate = LocalDate.parse(detailsAndDueDate[1]
-                                .substring(0, detailsAndDueDate[1].length() - 1), dateFormatter);
-                        Task t = new Deadline(details, dueDate);
-                        if (txt.charAt(4) == 'X') {
-                            t.mark();
-                        }
-                        loadedTasks.add(t);
-                    } else if (txt.charAt(1) == 'E') {
-                        String[] detailsAndDate = txt.substring(7).split(" \\(");
-                        String details = detailsAndDate[0];
-                        String[] tmp = detailsAndDate[1].split(" to: ");
-                        String to = tmp[1].substring(0, tmp[1].length() - 1);
-                        String from = tmp[0].split("from: ")[1];
-                        Task t = new Event(details, from, to);
-                        if (txt.charAt(4) == 'X') {
-                            t.mark();
-                        }
-                        loadedTasks.add(t);
-                    }
+                Scanner sc = new Scanner(f);
+                while (sc.hasNext()) {
+                    String data = sc.nextLine();
+                    System.out.println(data);
+                    Task taskToAdd = createTask(data);
+                    loadedTasks.add(taskToAdd);
                 }
-                scannerTxtFile.close();
+                sc.close();
             } catch (FileNotFoundException e) {
                 System.out.println("File could not be found");
             }
         } else {
-            try {
-                File data = new File("./data");
-                File f_new = new File(filePath);
-                data.mkdir();
-                f_new.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Error creating file");
-            }
+            createFile();
         }
         return this.loadedTasks;
     }
@@ -96,7 +104,7 @@ public class Storage {
             File f = new File(filePath);
             f.createNewFile();
             FileWriter fw = new FileWriter(filePath, false);
-            fw.write(tasks.getTaskList());
+            fw.write(tasks.toStorageData());
             fw.close();
         } catch (IOException e) {
             System.out.println("error writing into file");

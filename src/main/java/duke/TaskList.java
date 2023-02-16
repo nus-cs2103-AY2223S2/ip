@@ -150,4 +150,13 @@ public class TaskList {
         assert !(result.getSize() == 0);
         return "Here are the matching tasks in your list:\n" + result.getTaskList();
     }
+
+    public String toStorageData() {
+        String storageData = "";
+        for (Task task : tasks) {
+            storageData += task.toStorageData();
+            storageData += "\n";
+        }
+        return storageData;
+    }
 }
