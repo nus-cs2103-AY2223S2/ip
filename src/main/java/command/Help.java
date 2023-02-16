@@ -36,7 +36,7 @@ public class Help implements Command {
     public static Parser<Command> parser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("help"))
-                .ignoreThen(Parser.nextStr())
+                .ignoreThen(Parser.nextStr().or(Parser.strParser("")))
                 .map(String::toLowerCase)
                 .map(Help::new);
     }
@@ -80,6 +80,7 @@ public class Help implements Command {
             ui.showReply(Sort.HELP_MSG);
             break;
         case "all":
+        case "":
             ui.showReply(COMMAND_LST);
             break;
         default:
