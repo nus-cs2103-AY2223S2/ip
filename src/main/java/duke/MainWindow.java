@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_icon.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/space_Lin.jpg"));
 
     @FXML
     public void initialize() {
@@ -44,12 +44,23 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        String userStyle = "-fx-font-size: 14pt;\n" +
+                "    -fx-font-family: \"Courier\";\n" +
+                "    -fx-text-fill: black;\n" +
+                "    -fx-background-color: #00ced1;\n" +
+                "    -fx-font-style: normal;\n" +
+                "    -fx-font-weight: normal;";
+        String dukeStyle = "-fx-font-size: 12pt;\n" +
+                "    -fx-font-family: \"Helvetica\";\n" +
+                "    -fx-text-fill: black;\n" +
+                "    -fx-background-color: #e9967a;\n" +
+                "    -fx-font-style: normal;";
         if (response == null) {
             Platform.exit();
         }
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage, userStyle),
+                DialogBox.getDukeDialog(response, dukeImage, dukeStyle)
         );
         userInput.clear();
     }
