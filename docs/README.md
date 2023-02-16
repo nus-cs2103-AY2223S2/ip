@@ -1,4 +1,4 @@
-# ![Atreides](https://static.wikia.nocookie.net/dune/images/4/4b/Screenshot_2019-03-13-01-29-34-1.png/revision/latest?cb=20190313003040) Duke Atreides Guide
+# ![Atreides](https://i.pinimg.com/originals/a8/86/10/a8861028676de1e4f70c617e4e41dcd0.png) Duke Atreides Guide
 
 ## Features 
 
