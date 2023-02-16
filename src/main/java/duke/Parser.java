@@ -1,15 +1,15 @@
 package duke;
 
-import duke.Command.Command;
-import duke.Command.DeadlineCommand;
-import duke.Command.DeleteCommand;
-import duke.Command.EventCommand;
-import duke.Command.ListCommand;
-import duke.Command.MarkCommand;
-import duke.Command.SearchCommand;
-import duke.Command.ToDoCommand;
-import duke.Command.UnknownCommand;
-import duke.Command.UnmarkCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.SearchCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnknownCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * This is the class that parses the command sent to Duke.
@@ -52,39 +52,39 @@ public class Parser {
 
         String[] inputCmdArr = inputCommand.split(" ");
         switch(inputCmdArr[0]) {
-            case "list":
-                pendingCommand = new ListCommand();
-                break;
-            case "todo":
-                commandParams = getParams(inputCommand);
-                pendingCommand = new ToDoCommand(commandParams);
-                break;
-            case "deadline":
-                commandParams = getParams(inputCommand);
-                pendingCommand = new DeadlineCommand(commandParams);
-                break;
-            case "event":
-                commandParams = getParams(inputCommand);
-                pendingCommand = new EventCommand(commandParams);
-                break;
-            case "mark":
-                commandParams = getParams(inputCommand);
-                pendingCommand = new MarkCommand(commandParams);
-                break;
-            case "unmark":
-                commandParams = getParams(inputCommand);
-                pendingCommand = new UnmarkCommand(commandParams);
-                break;
-            case "delete":
-                commandParams = getParams(inputCommand);
-                pendingCommand = new DeleteCommand(commandParams);
-                break;
-            case "search":
-                commandParams = getParams(inputCommand);
-                pendingCommand = new SearchCommand(commandParams);
-                break;
-            default:
-                pendingCommand = new UnknownCommand();
+        case "list":
+            pendingCommand = new ListCommand();
+            break;
+        case "todo":
+            commandParams = getParams(inputCommand);
+            pendingCommand = new ToDoCommand(commandParams);
+            break;
+        case "deadline":
+            commandParams = getParams(inputCommand);
+            pendingCommand = new DeadlineCommand(commandParams);
+            break;
+        case "event":
+            commandParams = getParams(inputCommand);
+            pendingCommand = new EventCommand(commandParams);
+            break;
+        case "mark":
+            commandParams = getParams(inputCommand);
+            pendingCommand = new MarkCommand(commandParams);
+            break;
+        case "unmark":
+            commandParams = getParams(inputCommand);
+            pendingCommand = new UnmarkCommand(commandParams);
+            break;
+        case "delete":
+            commandParams = getParams(inputCommand);
+            pendingCommand = new DeleteCommand(commandParams);
+            break;
+        case "search":
+            commandParams = getParams(inputCommand);
+            pendingCommand = new SearchCommand(commandParams);
+            break;
+        default:
+            pendingCommand = new UnknownCommand();
         }
         return pendingCommand.executeCommand(storage, tasks);
     }

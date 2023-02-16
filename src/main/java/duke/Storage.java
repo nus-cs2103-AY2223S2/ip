@@ -1,7 +1,5 @@
 package duke;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,14 +7,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+
+
+/**
+ * This is the class that processes the storage needs of Duke.
+ */
 public class Storage {
 
     /** String representation of user home directory. */
-    String home = System.getProperty("user.home");
+    private String home = System.getProperty("user.home");
     /** Path object of storage entry. */
-    Path filePath;
+    private Path filePath;
     /** File object of storage entry. */
-    File dukeDataFile;
+    private File dukeDataFile;
 
     /**
      * Constructor for the Storage class.
@@ -43,7 +47,7 @@ public class Storage {
      * @return New TaskList if storage is empty, else the loaded TaskList
      * @throws DukeException If there is any issues with reading the file
      */
-    public TaskList load() throws DukeException{
+    public TaskList load() throws DukeException {
         TaskList result;
         dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
@@ -79,7 +83,7 @@ public class Storage {
      * @param filePath The File to be converted.
      * @return TaskList after conversion.
      */
-    private TaskList convertFileToTaskList (Path filePath) {
+    private TaskList convertFileToTaskList(Path filePath) {
         List<String> allLines;
         TaskList resultTaskList;
         allLines = readFileAsList(filePath);
@@ -138,17 +142,17 @@ public class Storage {
         taskStatus = lineArray[1].equals("1");
 
         switch (lineArray[0]) {
-            case "T":
-                resultingTask = new ToDo(lineArray[2], taskStatus);
-                break;
-            case "D":
-                resultingTask = new Deadline(lineArray[2], lineArray[3], taskStatus);
-                break;
-            case "E":
-                resultingTask = new Event(lineArray[2], lineArray[3], lineArray[4], taskStatus);
-                break;
-            default:
-                break;
+        case "T":
+            resultingTask = new ToDo(lineArray[2], taskStatus);
+            break;
+        case "D":
+            resultingTask = new Deadline(lineArray[2], lineArray[3], taskStatus);
+            break;
+        case "E":
+            resultingTask = new Event(lineArray[2], lineArray[3], lineArray[4], taskStatus);
+            break;
+        default:
+            break;
         }
 
         return resultingTask;

@@ -1,20 +1,20 @@
-package duke.Command;
+package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 
-public class UnmarkCommand extends Command {
+public class DeleteCommand extends Command {
 
     private int index;
 
-    public UnmarkCommand(String commandParams) {
+    public DeleteCommand(String commandParams) {
         this.index = Integer.parseInt(commandParams);
     }
 
     @Override
     public String executeCommand(Storage storage, TaskList tasks) throws DukeException {
-        String result = tasks.unMarkTaskWithResult(index);
+        String result = tasks.deleteTaskWithResult(index);
         storage.save(tasks);
         return result;
     }
