@@ -30,6 +30,7 @@ public class Storage {
      * @return an ArrayList of Task objects loaded from the save file
      */
     public ArrayList<Task> load() {
+        //assert feature used to ensure that the file path is not empty
         assert this.filePath.length() > 0 : "this file path should not be empty";
         File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<Task>();
