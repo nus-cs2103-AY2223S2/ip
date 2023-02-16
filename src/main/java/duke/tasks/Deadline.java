@@ -45,7 +45,6 @@ public class Deadline extends Task {
         if (arg1.isEmpty() || arg2.isEmpty()) {
             throw new DukeEmptyInputException();
         }
-        System.out.println(arg2.length());
         arg2 = DateHandler.parse(arg2);
         return new Deadline(arg1, arg2);
     }

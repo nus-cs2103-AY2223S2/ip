@@ -22,7 +22,8 @@ public class Ui {
      * Greets the user after the chatbot is started.
      */
     public String welcomeMessage() {
-        return "Hello! I'm Interrobang\nWhat can I do for you today?";
+        return "Hello! I'm Interrobang\nWhat can I do for you today?" +
+                "\n\nEnter 'help' to view all commands!";
     }
 
     /**

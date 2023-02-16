@@ -31,6 +31,9 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidInputException, DukeEmptyInputException {
+        if (input.equals("")) {
+            throw new DukeEmptyInputException();
+        }
         String response = tasks.changeState(input, "mark");
         storage.saveState(tasks);
         return response;
