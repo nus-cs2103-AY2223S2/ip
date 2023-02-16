@@ -17,7 +17,6 @@ import catbot.commands.EchoCommand;
 import catbot.commands.FindCommand;
 import catbot.commands.ListCommand;
 import catbot.commands.MarkCommand;
-import catbot.commands.SaveCommand;
 
 /**
  * Handles parsing user input.
@@ -126,8 +125,6 @@ public class Parser {
                 throw new CatBotException("That's the wrong format!");
             }
 
-        case "bye":
-            return new SaveCommand();
 
         default:
             throw new CatBotException("I don't know what you mean.");
