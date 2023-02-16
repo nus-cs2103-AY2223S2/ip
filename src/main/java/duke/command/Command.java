@@ -1,9 +1,13 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.TextUi;
-import duke.Storage;
-import duke.DukeException;
+
+/**
+ * An abstract class that execute specific action
+ */
 public abstract class Command {
 
     /**

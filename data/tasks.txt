@@ -1,3 +1,5 @@
-[ ] Event : concert [ Feb 03 2023 - Feb 03 2023 ]
-[X] Todo : singggg
-[X] Todo : run
+[ ] Todo : run
+[ ] Event : concert [ Jan 01 2023 - Jan 01 2023 ]
+[X] Deadline : assignment 2 [ Jan 29 2023 ]
+[ ] Todo : run
+[X] Todo : play

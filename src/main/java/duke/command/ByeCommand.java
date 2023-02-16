@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.TextUi;
 
+/**
+ * Executes exit from the app action
+ */
 public class ByeCommand extends Command {
 
     /**

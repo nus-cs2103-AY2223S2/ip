@@ -3,6 +3,10 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
+
+/**
+ * Stores the tasks as a list according to the order they are being added
+ */
 public class TaskList {
     public ArrayList<Task> tasksList;
 

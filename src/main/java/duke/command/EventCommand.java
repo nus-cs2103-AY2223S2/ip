@@ -1,10 +1,14 @@
 package duke.command;
 
+import duke.task.Event;
 import duke.Storage;
+import duke.task.Task;
 import duke.TaskList;
 import duke.TextUi;
-import duke.task.Task;
-import duke.task.Event;
+
+/**
+ * Creates a event task and add it to the task list upon execution
+ */
 
 public class EventCommand extends Command {
     private final String DETAILS;

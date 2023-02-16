@@ -1,12 +1,10 @@
 package duke.command;
 
+import duke.task.Deadline;
 import duke.Storage;
 import duke.TaskList;
 import duke.TextUi;
 import duke.task.Task;
-import duke.task.Deadline;
-
-import java.util.*;
 
 /**
  * Represents a DeadlineCommand class which adds a deadline task
@@ -32,8 +30,6 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasksList, TextUi ui, Storage storage) {
         String[] detailArray = DETAILS.split("/");
-        System.out.println(DETAILS);
-        System.out.println(Arrays.toString(detailArray));
         String description = detailArray[0].strip();
         String by = detailArray[1].strip();
         Task deadline = new Deadline(description, by);

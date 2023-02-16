@@ -21,13 +21,13 @@ public class TextUi {
             "BYE  :  Exits the app" + '\n';
     private final static String ADD_TASK_MESSAGE =
             "Nice! I've added this task to your task list :" ;
-    private final static String MARK_TASK_MESSAGE =
+    private static final String MARK_TASK_MESSAGE =
             "Well Done!!! I've marked this task as done :";
-    private final static String UNMARK_TASK_MESSAGE =
+    private static final String UNMARK_TASK_MESSAGE =
             "Alright. I've marked this task as undone :";
-    private final static String DELETE_TASK_MESSAGE =
+    private static final String DELETE_TASK_MESSAGE =
             "NOTED. I've removed this task from your task list :";
-    private final static String FIND_TASK_MESSAGE = "Here are some similar tasks I have found in your task list:";
+    private static final String FIND_TASK_MESSAGE = "Here are some similar tasks I have found in your task list:";
 
     public String showGreetMessage() {
         return "I am Panda, your personal task manager. How may I assist you today?";
@@ -44,6 +44,7 @@ public class TextUi {
         return "Now you have " + taskList.getList().size() +
                 " tasks in your task list.";
     }
+
     public String showAddTaskMessage(Task task) {
         return ADD_TASK_MESSAGE + '\n'
                 + task;
