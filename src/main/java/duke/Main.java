@@ -5,8 +5,14 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import static javafx.scene.layout.BackgroundPosition.CENTER;
+import static javafx.scene.layout.BackgroundRepeat.NO_REPEAT;
+import static javafx.scene.layout.BackgroundRepeat.REPEAT;
+import static javafx.scene.layout.BackgroundSize.*;
 
 /**
  * A GUI for Duke using FXML.

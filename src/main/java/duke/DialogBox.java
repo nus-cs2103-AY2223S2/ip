@@ -59,6 +59,7 @@ public class DialogBox extends HBox {
         Border dialogBorder = new Border(borderStroke);
         dialog.setBorder(dialogBorder);
         dialog.setPadding(new Insets(15, 15, 15, 15));
+        dialog.getStyleClass().add("my-dialog");
     }
 
     /**
