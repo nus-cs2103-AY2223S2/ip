@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Deadlines Task.
@@ -36,6 +37,25 @@ public class Deadlines extends Task {
         super(description, isDone);
         this.dueDate = null;
         this.stringDueDate = deadline;
+    }
+
+    /**
+     * Factory method for Deadlines object where dueDate is a String.
+     * @param description The description of the Task.
+     * @param isDone The boolean showing if the Task has been done.
+     * @param deadline The due date of the Task.
+     */
+    public static Deadlines createDeadlines(String description, boolean isDone, String deadline) {
+        // Attempt to interpret the due date as a LocalDateTime object.
+        // If exception is thrown, treat deadline as a String.
+        // Create Deadlines object and add it into the list.
+        // Adds object into the output String.
+        try {
+            LocalDateTime tempDueDate = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            return new Deadlines(description, isDone, tempDueDate);
+        } catch (DateTimeParseException dateTimeParseException) {
+            return new Deadlines(description, isDone, deadline);
+        }
     }
 
     /**

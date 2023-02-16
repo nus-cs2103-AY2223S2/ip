@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents an Events Task.
@@ -48,6 +49,27 @@ public class Events extends Task {
         this.stringStartTime = startTime;
         this.endTime = null;
         this.stringEndTime = endTime;
+    }
+
+    /**
+     * Factory method for Events objects.
+     * @param description The description of the Task.
+     * @param isDone The boolean showing if the Task has been done.
+     * @param startTime The start time of the Event Task.
+     * @param endTime The end time of the Event Task.
+     */
+    public static Events createEvents(String description, boolean isDone, String startTime, String endTime) {
+        // Attempt to interpret the duration as a LocalDateTime object.
+        // If exception is thrown, treat duration as a String.
+        // Create Events object and add it into the list.
+        // Adds the object into the output string.
+        try {
+            LocalDateTime tempStartTime = LocalDateTime.parse(startTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            LocalDateTime tempEndTime = LocalDateTime.parse(endTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            return new Events(description, isDone, tempStartTime, tempEndTime);
+        } catch (DateTimeParseException dateTimeParseException) {
+            return new Events(description, isDone, startTime, endTime);
+        }
     }
 
     /**

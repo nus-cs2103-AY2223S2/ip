@@ -1,8 +1,5 @@
 package duke.tasklist;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeInvalidTaskNumberException;
@@ -55,7 +52,7 @@ public class TaskList {
      * An Events Task requires a descriptions, a duration(/from and /to) in input String s
      * <p>
      * @param type The type of Task to be created
-     * @param s The the data required to create the new Task
+     * @param s The data required to create the new Task
      * @return Message to user informing about successfully creation and adding the new Task into the list.
      * @throws DukeMissingDescriptionException If s does not contain a description for Task.
      * @throws DukeMissingDeadlineException If s does not contain /by which signifies the due date.
@@ -240,20 +237,9 @@ public class TaskList {
             throw new DukeMissingDescriptionException();
         }
 
-        // Attempt to interpret the due date as a LocalDateTime object.
-        // If exception is thrown, treat deadline as a String.
-        // Create Deadlines object and add it into the list.
-        // Adds object into the output String.
-        Deadlines dueDate = null;
-        try {
-            LocalDateTime localBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-            dueDate = new Deadlines(desc, false, localBy);
-        } catch (DateTimeParseException dateTimeParseException) {
-            dueDate = new Deadlines(desc, false, by);
-        } finally {
-            tasks.add(dueDate);
-            return "  " + dueDate;
-        }
+        Deadlines dueDate = Deadlines.createDeadlines(desc, false, by);
+        tasks.add(dueDate);
+        return "  " + dueDate;
     }
 
     /**
@@ -271,23 +257,9 @@ public class TaskList {
         String endTime = s.substring(toIndex + 5).strip();
         String desc = s.substring(0, fromIndex).strip();
 
-        // Attempt to interpret the duration as a LocalDateTime object.
-        // If exception is thrown, treat duration as a String.
-        // Create Events object and add it into the list.
-        // Adds the object into the output string.
-        Events event = null;
-        try {
-            LocalDateTime localStartTime = LocalDateTime.parse(startTime,
-                    DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-            LocalDateTime localEndTime = LocalDateTime.parse(endTime,
-                    DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-            event = new Events(desc, false, localStartTime, localEndTime);
-        } catch (DateTimeParseException dateTimeParseException) {
-            event = new Events(desc, false, startTime, endTime);
-        } finally {
-            tasks.add(event);
-            return "  " + event;
-        }
+        Events event = Events.createEvents(desc, false, startTime, endTime);
+        tasks.add(event);
+        return "  " + event;
     }
 
     /**

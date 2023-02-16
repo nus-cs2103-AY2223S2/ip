@@ -142,10 +142,10 @@ public class Storage {
                 tasks.add(new ToDos(details[0], Boolean.parseBoolean(details[1])));
                 break;
             case "deadline":
-                tasks.add(new Deadlines(details[0], Boolean.parseBoolean(details[1]), details[2]));
+                tasks.add(Deadlines.createDeadlines(details[0], Boolean.parseBoolean(details[1]), details[2]));
                 break;
             case "event":
-                tasks.add(new Events(details[0], Boolean.parseBoolean(details[1]), details[2], details[3]));
+                tasks.add(Events.createEvents(details[0], Boolean.parseBoolean(details[1]), details[2], details[3]));
                 break;
             default:
                 throw new DukeUnknownCommandException();
