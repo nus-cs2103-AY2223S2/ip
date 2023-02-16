@@ -67,7 +67,7 @@ public class Ui {
     }
 
     /**
-     * Prints task added succesfully.
+     * Prints task added successfully.
      *
      * @param taskList Stores all tasks.
      * @param task Task user just added.
@@ -80,14 +80,14 @@ public class Ui {
     /**
      * Prints task marked or unmarked successfully.
      *
-     * @param isMarked Boolean for whether task is marked or unamrked.
+     * @param isMarked Boolean for whether task is marked or unmarked.
      * @param task Task specified by user.
      */
     public String getMarkTaskMsg(boolean isMarked, Task task) {
         if (isMarked) {
-            return "Nice! I've marked this task as done: \n" + "[x] " + task.getStr();
+            return "Nice! I've marked this task as done: \n" + "[x] " + task.getTask();
         } else {
-            return "OK, I've marked this task as not done yet: \n" + "[ ] " + task.getStr();
+            return "OK, I've marked this task as not done yet: \n" + "[ ] " + task.getTask();
         }
     }
 

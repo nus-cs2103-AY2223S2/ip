@@ -120,8 +120,8 @@ public class TaskList {
         int number = 1;
         StringBuilder output = new StringBuilder();
         for (Task stored : tasks) {
-            if (stored.getStr().equals(inputArr[1])) {
-                output.append(number).append(". ").append(stored.toString()).append("\n");
+            if (stored.getTask().equals(inputArr[1])) {
+                output.append(number).append(". ").append(stored).append("\n");
                 number++;
             }
         }

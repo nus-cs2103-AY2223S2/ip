@@ -1,8 +1,11 @@
 package userinteraction;
 
+
+
 import command.AddDeadLineCommand;
 import command.AddEventCommand;
 import command.AddToDoCommand;
+import command.ChangeDataSourceCommand;
 import command.Command;
 import command.DeleteTaskCommand;
 import command.ExitDukeCommand;
@@ -19,7 +22,7 @@ public class Parser {
      * All possible commands by user.
      */
     private enum CommandNames {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, CHANGEFILE, BYE
     }
 
     /**
@@ -49,6 +52,8 @@ public class Parser {
                 return new DeleteTaskCommand(inputArr);
             case FIND:
                 return new FindTaskCommand(inputArr);
+            case CHANGEFILE:
+                return new ChangeDataSourceCommand(inputArr);
             case BYE:
                 return new ExitDukeCommand(inputArr);
             default:

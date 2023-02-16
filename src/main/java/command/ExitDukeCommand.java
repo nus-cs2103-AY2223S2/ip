@@ -33,4 +33,9 @@ public class ExitDukeCommand extends Command {
     public boolean isExit() {
         return true;
     }
+
+    @Override
+    public boolean isDataSourceChanged() {
+        return false;
+    }
 }

@@ -79,13 +79,13 @@ public class Event extends Task {
     @Override
     public String getStoreTaskString() {
         return this.getTaskType() + " | " + this.getCheckedString() + " | "
-                + this.getStr() + " | " + this.getStart() + " | " + this.getEnd();
+                + this.getTask() + " | " + this.getStart() + " | " + this.getEnd();
     }
 
 
     @Override
     public String toString() {
-        String str = this.getStr();
+        String str = this.getTask();
         boolean checked = this.isChecked();
         String startTime = this.getStart();
         String endTime = this.getEnd();

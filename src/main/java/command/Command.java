@@ -36,6 +36,8 @@ public abstract class Command {
      */
     public abstract boolean isExit();
 
+    public abstract boolean isDataSourceChanged();
+
     public String[] getInputArr() {
         return inputArr;
     }
