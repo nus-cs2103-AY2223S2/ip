@@ -48,54 +48,65 @@ For example, `mark 3` will cause the checkbox beside the task to change from `[]
 Format: `to-do [name of to-do]`
 Example usage: `to-do make breakfast`
 
-UwU TaskMaster creates a new to-do `7. TO-DO: make breakfast[]`.
+![todo](/src/main/resources/images/todo.png)
+
+Outcome: UwU TaskMaster creates a new to-do `7. TO-DO: make breakfast[]`.
 
 ### `deadline` - Creates and adds a new deadline task
 Format: `deadline [name of deadline] /by [dd/mm/yyyy HH:mm]`
 Example usage: `deadline submit assignment /by 11/3/2023 1500`
 
-UwU TaskMaster creates a new deadline `7. DEADLINE: submit assignment (By Mar 11 2023 3:00PM)[]`.
+![deadline](/src/main/resources/images/deadline.png)
+
+Outcome: UwU TaskMaster creates a new deadline `7. DEADLINE: submit assignment (By Mar 11 2023 3:00PM)[]`.
 
 ### `event` - Creates and adds a new event task
 Format: `event [name of event] /from [dd/mm/yyyy HH:mm] /to [dd/mm/yyyy HH:mm]`
 Example usage: `event meet Alex for lunch /from 13/2/2023 1200 /to 13/2/2023 1300`
 
-UwU TaskMaster creates a new event `7. EVENT: meet Alex for lunch (From Feb 13 2023 12:00PM to Feb 13 2023 1:00PM)[]`.
+![event](/src/main/resources/images/event.png)
 
+Outcome: UwU TaskMaster creates a new event `7. EVENT: meet Alex for lunch (From Feb 13 2023 12:00PM to Feb 13 2023 1:00PM)[]`.
 
 ### `delete` - deletes a task in the list
 Format: `delete [taskNumber]`
 Example usage: `delete 2`
 
-UwU TaskMaster deletes the task prefixed with 2.
+![delete](/src/main/resources/images/delete.png)
 
+Outcome: UwU TaskMaster deletes the task prefixed with 2.
 
 ### `mark` - Marks a task as completed
 Format: `mark [taskNumber]`
 Example usage: `mark 1`
 
+![mark](/src/main/resources/images/mark.png)
 
-UwU TaskMaster marks the task prefixed with 1 as complete by changing the task status from `[]` to `[X]`.
+Outcome: UwU TaskMaster marks the task prefixed with 1 as complete by changing the task status from `[]` to `[X]`.
 
 ### `umark` - Marks a task as incomplete
 Format: `unmark [taskNumber]`
 Example usage: `unmark 1`
 
-UwU TaskMaster marks the task prefixed with 1 as incomplete by changing the task status from `[X]` to `[]`.
+![unmark](/src/main/resources/images/unmark.png)
 
+Outcome: UwU TaskMaster marks the task prefixed with 1 as incomplete by changing the task status from `[X]` to `[]`.
 
 ### `find` - Search for tasks by keyword
 Format: `find [keyword]`
 Example usage: `find lecture`
 
-UwU TaskMaster returns a snapshot of tasks matching the keyword.
+![find](/src/main/resources/images/find.png)
 
+Outcome: UwU TaskMaster returns a snapshot of tasks matching the keyword.
 
 ### `free` - Search for free time slots by hours
 Format: `free [numberOfDesiredHours]`
 Example usage: `free 2`
 
-UwU TaskMaster returns the closest free time slot it could find in your schedule that matches or exceeds the number of desired hours you requested.
+![free](/src/main/resources/images/free.png)
+
+Outcome: UwU TaskMaster returns the closest free time slot it could find in your schedule that matches or exceeds the number of desired hours you requested.
 
 ### `bye` - End the conversation and closes the bot
 Format: `bye`
