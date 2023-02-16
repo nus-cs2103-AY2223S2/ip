@@ -7,7 +7,7 @@ started!
 ## Features 
 
 ### Add task
-You can add 3 types of tasks: to do, deadline or arrive. You also 
+You can add 3 types of tasks: to do, deadline or event. You also 
 have the option to tag your tasks with a keyword.
 
 ### Delete task
@@ -21,6 +21,13 @@ description, or list all tasks tagged to a certain word.
 You can mark your tasks as completed or not completed yet. All 
 tasks will be marked as uncompleted by default.
 
+## Notes:
+- Duke is not case-sensitive. Typing ```list``` and ```LIST``` is equivalent
+- Items in square brackets are optional.
+- ```/tag``` should be followed by one word. Any additional parameters will
+be ignored.
+- All date and time should follow the following format ```{YYYY-MM-DD HH:MM}```
+
 ## Usage
 
 ### 1. `list` - Lists tasks
@@ -32,7 +39,7 @@ Example of usage:
 `list school` lists all tasks tagged 'school'
 
 
-### 2. `todo` - Creates a new to do.
+### 2. `todo` - Creates a new to do
 
 Example of usage:
 
