@@ -25,15 +25,22 @@ public class Parser {
             String content = event_Arr[0];
             String[] period_Arr = event_Arr[1].split(" /to");
             if (period_Arr.length == 2) {
-                String from = period_Arr[0];
-                String to = period_Arr[1];
-                return new Event(content, from, to);
+                String from = period_Arr[0].trim();
+                String to = period_Arr[1].trim();
+                System.out.println(from);
+                System.out.println(to);
+                return new Event(content, from.trim(), to.trim());
             } else {
                 throw new DukeException("Invalid Input! You need to specify a /from and /to or content is empty!");
             }
         } else {
             throw new DukeException("Invalid Input! You need to specify a /from and /to or content is empty!");
         }
+    }
+
+    public static int parseMark(String input) {
+        int taskNumber = Integer.parseInt(input.substring(input.length() - 1)) - 1;
+        return taskNumber;
     }
 
     /**
@@ -45,8 +52,7 @@ public class Parser {
 
         String int_Str = input.split(" ", 2)[1];
         try {
-            int index = Integer.parseInt(int_Str);
-            return index;
+            return Integer.parseInt(int_Str) - 1;
         } catch(Exception e){
             throw new DukeException("Not a valid index!");
         }
@@ -86,9 +92,13 @@ public class Parser {
      * @param input
      * @return description of the todo task
      */
-    public static String getTodo(String input) {
+    public static Todo parseTodo(String input) {
         String todo = input.split(" ", 2)[1];
-        return todo;
+        return new Todo(todo);
+    }
+
+    public static String parseSnooze(String input) {
+        return (input.split(" /to", 2)[1]).trim();
     }
 
     /**
@@ -97,14 +107,15 @@ public class Parser {
      * @return true if input is todo task , else false
      */
     public static boolean isTodo(String input) {
+
         assert input.length() > 0 && input != null : "string input should not be empty";
-        String[] firstword_Arr = input.split(" ", 2);
-        if (firstword_Arr.length == 2 ) {
-            if (firstword_Arr[0].equalsIgnoreCase("todo")) {
-                return true;
+            String[] firstword_Arr = input.trim().split(" ", 2);
+            if (firstword_Arr.length == 2) {
+                if (firstword_Arr[0].equalsIgnoreCase("todo")) {
+                    return true;
+                }
             }
-        }
-        return false;
+            return false;
     }
 
     /**
@@ -164,7 +175,7 @@ public class Parser {
     }
 
     public static String getFindable(String input) {
-        return input.split(" ", 2)[1];
+        return (input.split(" ", 2)[1]).trim();
     }
 
     public static boolean isUnmark(String input) {
@@ -212,20 +223,11 @@ public class Parser {
      */
     public static boolean isDelete(String input) {
         String[] firstword_Arr = input.split(" ", 2);
-        if (firstword_Arr.length == 2 ) {
+        if (firstword_Arr.length == 2) {
             if (firstword_Arr[0].equalsIgnoreCase("delete")) {
                 return true;
             }
         }
         return false;
-    }
-
-    /**
-     * Checks if input is clear command
-     * @param input
-     * @return true if input is clear, else false
-     */
-    public static boolean is_Clear(String input) {
-        return input.equalsIgnoreCase("clear");
     }
 }

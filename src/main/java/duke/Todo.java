@@ -14,7 +14,8 @@ public class Todo extends Task {
 
     @Override
     public String addDivider() {
-        return "T | " + super.toSavedString();
+        String d = " | ";
+        return "T" + d + super.addDivider();
     }
 
     @Override

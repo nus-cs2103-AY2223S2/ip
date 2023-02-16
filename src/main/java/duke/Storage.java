@@ -5,14 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 // class Storage - handles the loading of data when duke is run and
 // saving of data when duke is closed
 public class Storage {
@@ -22,37 +14,41 @@ public class Storage {
         this.filePath = s;
     }
 
-    public static TaskList loadFile() throws IOException, DukeException {
-        File file = new File(System.getProperty("user.dir") + "/data/Duke.Duke.txt");
-        File dir = new File(System.getProperty("user.dir") + "/data");
+    public TaskList loadFile() throws IOException, DukeException {
+        try {
+            File file = new File(System.getProperty("user.dir") + filePath);
+            File dir = new File(System.getProperty("user.dir") + "/data");
 
-        // if directory has not been created, make directory
-        if (! dir.exists() ) {
-            System.out.println("Directory created");
-            dir.mkdir();
-        }
-
-        file.createNewFile();
-
-        Scanner sc = new Scanner(file);  //takes file's content as input, scans through files and adds items to the list
-        TaskList list = new TaskList();
-        while (sc.hasNext()) {
-            String[] currLine = sc.nextLine().split(" \\| ");
-            if (currLine[0].equalsIgnoreCase("T")) {
-                list.add(new Todo(strToBool(currLine[1]), currLine[2]));
-            } else if (currLine[0].equalsIgnoreCase("D")) {
-                list.add(new Deadline(strToBool(currLine[1]), currLine[2], currLine[3]));
-            } else if (currLine[0].equalsIgnoreCase("E")) {
-                list.add(new Event(strToBool(currLine[1]), currLine[2], currLine[3], currLine[4]));
-            } else {
-                throw new DukeException("Read Error");
+            // if directory has not been created, make directory
+            if (!dir.exists()) {
+                dir.mkdir();
             }
-        }
 
-        return list;
+            file.createNewFile();
+
+            Scanner sc = new Scanner(file);  //takes file's content as input, scans through files and adds items to the list
+            TaskList list = new TaskList();
+            while (sc.hasNext()) {
+                String[] currLine = sc.nextLine().split(" \\| ");
+                if (currLine[0].equalsIgnoreCase("T")) {
+                    list.add(new Todo(strToBool(currLine[1]), currLine[2]));
+                } else if (currLine[0].equalsIgnoreCase("D")) {
+                    list.add(new Deadline(strToBool(currLine[1]), currLine[2], currLine[3]));
+                } else if (currLine[0].equalsIgnoreCase("E")) {
+                    System.out.println(currLine.length);
+                    list.add(new Event(strToBool(currLine[1]), currLine[2], currLine[3], currLine[4]));
+                } else {
+                    throw new DukeException("Read Error");
+                }
+            }
+
+            return list;
+        } catch(Exception e) {
+            throw new DukeException("Error Reading Save File!");
+        }
     }
     public static boolean strToBool(String str) {
-        if (str == "1") {
+        if (str.equalsIgnoreCase("1")) {
             return true;
         } else {
             return false;

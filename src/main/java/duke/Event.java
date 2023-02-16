@@ -1,10 +1,7 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
@@ -13,11 +10,15 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws DukeException {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.from = LocalDateTime.parse(from, formatter);
-        this.to = LocalDateTime.parse(to, formatter);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            this.from = LocalDateTime.parse(from, formatter);
+            this.to = LocalDateTime.parse(to, formatter);
+        } catch(Exception e) {
+            throw new DukeException("Date might not be the right format! Make sure it is <desc> /from <yyyy-MM-dd HH:mm> /to <yyyy-MM-dd HH:mm>");
+        }
     }
 
     public Event(boolean isMarked, String content, String from, String to) {
@@ -33,16 +34,17 @@ public class Event extends Task {
 
     @Override
     public String addDivider() {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").withLocale(Locale.ENGLISH);
-        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.ENGLISH);
+        String d = " | ";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        return "E | " + super.toSavedString() + " | " + this.from.format(df) + " | " + this.to.format(df2);
+        return "E" + d + super.addDivider() + d + this.from.format(df) + d + this.to.format(df2);
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").withLocale(Locale.ENGLISH);
-        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.ENGLISH);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy HH a").withLocale(Locale.ENGLISH);
+        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("MMM dd yyyy HH a").withLocale(Locale.ENGLISH);
         return "[E]" + super.toString() + " (from: " + from.format(df) + " to: " + to.format(df2) + ")";
     }
 

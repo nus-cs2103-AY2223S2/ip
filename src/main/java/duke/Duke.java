@@ -1,152 +1,202 @@
 package duke;
 
-
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import static duke.Parser.parseMark;
+import static duke.Ui.*;
 
-public class Duke extends Application{
+/**
+ * Duke class that helps to handle and execute commands
+ */
+public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui = new Ui();
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
-
-
-    @Override
-    public void start(Stage stage) throws DukeException, IOException {
-        storage = new Storage(System.getProperty("user.dir") +"/data/duke.txt");
-        tasks = storage.loadFile();
-
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Label(ui.greet()), new ImageView(duke))
-        );
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (DukeException | IOException e) {
-                e.getMessage();
-            }
-        });
-
-        userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (DukeException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
+    private Ui ui;
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Constructor method
+     * @param filePath
+     * @throws DukeException
      */
-    private void handleUserInput() throws DukeException, IOException {
-        String input = userInput.getText();
-        String response = Ui.handleCommand(input, tasks);
-        Label userText = new Label(input + "  ");
-        Label dukeText = new Label(response);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-        if (input.contains("bye")) {
-            storage.saveToFile(tasks);
-            Platform.exit();
+    public Duke(String filePath) throws DukeException {
+        // Initialize the task list
+        this.tasks = new TaskList();
+        // Initialize the user interface
+        this.ui = new Ui();
+        // Initialize the storage object
+        this.storage = new Storage(filePath);
+
+
+        try {
+            // Attempt to load tasks from storage
+            this.tasks = this.storage.loadFile();
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String handleCommand(String s) throws DukeException {
+        assert this.tasks.getTasks().size() >= 0: "Number of tasks should be not be a  negative number";assert s.length() >= 0: "number of letters in command should not be a negative number";
+
+        // user enters list command
+        try {
+            if (Parser.isList(s)) {
+                return displayTasks(tasks);
+
+            } else if (Parser.isMark(s)) {
+
+                int taskNumber = parseMark(s);
+                executeMark(taskNumber, tasks);
+                return displayMarked(taskNumber, tasks);
+
+            } else if (Parser.isUnmark(s)) {
+                int taskNumber = parseMark(s);
+                executeUnmark(taskNumber, tasks);
+                return displayUnmarked(taskNumber, tasks);
+
+            } else if (Parser.isTodo(s)) {
+                Todo todo = Parser.parseTodo(s);
+                tasks.add(todo);
+                return displayTask(todo);
+
+            } else if (Parser.isDeadline(s)) {
+                Deadline deadline = Parser.parseDeadline(s);
+                tasks.add(deadline);
+                return displayTask(deadline);
+
+            } else if (Parser.isEvent(s)) {
+                Event event = Parser.parseEvent(s);
+                tasks.add(event);
+                return displayTask(event);
+
+            } else if (Parser.isDelete(s)) {
+                return executeDelete(s);
+
+            } else if (Parser.isFind(s)) {
+                TaskList searchResults = executeFind(s, tasks);
+                return displayFind(searchResults);
+
+            } else if (Parser.isSnooze(s)) {
+                executeSnooze(s, tasks);
+                return displaySnooze(s, tasks);
+
+            } else if (Parser.isBye(s)) {
+                return "    Bye. Hope to see you soon!";
+
+            } else {
+                return "    OOPS!!! I'm sorry, but I don't know what that means :-(";
+
+            }
+        } catch (DukeException e ) {
+            return e.getMessage();
+        }
     }
+
+    public String executeDelete(String s) throws DukeException {
+        int index = Parser.getIndex(s);
+        if (tasks.size() != 0 && index >= 0 && index <= tasks.size() - 1) {
+            Task deletedTask = tasks.get(index);
+            tasks.remove(index);
+            return "    Noted. I've removed this task:\n      " + deletedTask +
+                    "\n    Now you have " + tasks.size() + " tasks in the list";
+        } else {
+            throw new DukeException("Index Out Of Bounds!");
+        }
+    }
+
+
+    public static TaskList executeFind(String s, TaskList tasks) {
+        String findString = Parser.getFindable(s);
+        TaskList foundTasks = new TaskList();
+        for (int i = 0; i < tasks.size(); i++ ) {
+            Task task = tasks.get(i);
+            if (task.toString().contains(findString)) {
+                foundTasks.add(task);
+            }
+        }
+        return  foundTasks;
+    }
+
+    public static void executeMark(int taskNumber, TaskList tasks) throws DukeException {
+        if ( taskNumber > tasks.size() - 1 || taskNumber < 0) {
+            throw new DukeException("     OOPS! Index Out Of Bounds !");
+        }
+        tasks.get(taskNumber).mark();
+    }
+
+    public static void executeUnmark(int taskNumber, TaskList tasks) throws DukeException {
+        if ( taskNumber > tasks.size() - 1 || taskNumber < 0) {
+            throw new DukeException("     OOPS! Index Out Of Bounds !");
+        }
+        tasks.get(taskNumber).unmark();
+    }
+
+    /**
+     *
+     * @param s
+     * @param tasks
+     * @throws DukeException
+     */
+    public static void executeSnooze(String s, TaskList tasks) throws DukeException {
+        //edit existing deadline
+        //format: snooze 1 /to
+        try {
+            Parser.getTaskNum(s);
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
+
+        int taskNumber = Parser.getTaskNum(s) - 1;
+
+        Task snoozedTask = tasks.get(taskNumber);
+        if (!(snoozedTask instanceof Deadline)) {
+            throw new DukeException("    OOPS!!! Task must be a deadline to snooze!");
+        }
+
+        Deadline deadline = (Deadline) snoozedTask;
+
+        String date  = Parser.parseSnooze(s);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        try {
+            LocalDate.parse(date, formatter);
+        } catch(DateTimeParseException e) {
+            throw new DukeException("Date is an invalid format! Should be yyyy-MM-dd HH:mm");
+        }
+
+        if (LocalDateTime.parse(date, formatter).compareTo(deadline.getDeadline()) > 0) {
+            tasks.set(taskNumber, new Deadline(deadline.getDescription(), date));
+            Deadline newDeadline = (Deadline) tasks.get(taskNumber);
+            throw new DukeException(deadline + " has been snoozed to " + newDeadline.getDeadline());
+        } else {
+            throw new DukeException("    OOPS!!! Cannot snooze to an earlier or same timing!");
+        }
+    }
+
+    TaskList getTasks() {
+        return this.tasks;
+    }
+
+    /**
+     * Takes an input and generates a response
+     * @param input
+     * @return response as a String
+     */
+    String getResponse(String input) {
+        try {
+            return handleCommand(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+
 }
 

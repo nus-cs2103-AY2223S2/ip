@@ -14,20 +14,6 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    public String displayTasks() {
-        String s = "";
-        if (tasks.isEmpty()) {
-            s += "    No tasks";
-        } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
-                s += "    " + (i + 1) + ". " + task;
-                s += i != tasks.size() ? "\n" : "";
-            }
-        }
-        return s;
-    }
-
     public int size() {
         return this.tasks.size();
     }
@@ -42,5 +28,13 @@ public class TaskList {
 
     public void add(Task task) {
         tasks.add(task);
+    }
+
+    public void remove(int index) {
+        tasks.remove(index);
+    }
+
+    public void set(int index, Task task) {
+        tasks.set(index, task);
     }
 }

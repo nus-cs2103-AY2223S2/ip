@@ -2,7 +2,6 @@ package duke;
 
 
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -21,18 +20,13 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String content, LocalDateTime deadline) {
-        super(content);
-        this.deadline = deadline;
-    }
-
     public Deadline(boolean isMarked, String content, String deadline) {
         super(isMarked, content);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
+            System.out.println("Invalid date format should be  deadline <desc> /by <yyyy-MM-dd HH:mm>");
         }
     }
 
@@ -43,9 +37,8 @@ public class Deadline extends Task {
     @Override
     public String addDivider() {
         String d = " | ";
-        int marked = this.isMarked() ? 1 : 0;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "D" + d + marked + d + getDescription() + d + deadline.format(formatter);
+        return "D" + d + super.addDivider() + d + deadline.format(formatter);
     }
 
     @Override
