@@ -1,0 +1,36 @@
+#dialog {
+    -fx-background-color: #f8f8ff;
+    -fx-background-radius: 8px;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-padding: 7px;
+    -fx-border-radius: 6px;
+    -fx-scale-shape: true;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    -fx-font-family: "Comic Sans MS";
+    -fx-effect: dropshadow(gaussian, black, 5,0,0,0);
+}
+
+#pictureBorder {
+    -fx-background-color: #f8f8ff;
+    -fx-background-radius: 8px;
+    -fx-border-color: #0000cd;
+    -fx-border-width: 2px;
+    -fx-border-radius: 6px;
+    -fx-border-style: solid;
+    -fx-effect: dropshadow(gaussian, black, 5,0,0,0);
+}
+
+#dialogContainer {
+    -fx-background-image: url("https://wallpapercave.com/wp/wp10320826.jpg");
+    -fx-background-size: stretch;
+}
+
+#userInput {
+    -fx-background-color: #f8f8ff;
+}
+
+#sendButton {
+    -fx-font-family: "Comic Sans MS";
+}
