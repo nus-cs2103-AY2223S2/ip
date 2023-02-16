@@ -23,7 +23,6 @@ public class CommandDelete extends Command {
 
     @Override
     public String execute(Ui ui, Storage storage, QuestLog questLog) throws PageException {
-
         if (index > questLog.size() || index <= 0) {
             throw new PageException("Sorry, that's not a valid quest index!");
         } else {
