@@ -48,7 +48,7 @@ For example, `mark 3` will cause the checkbox beside the task to change from `[]
 Format: `to-do [name of to-do]`
 Example usage: `to-do make breakfast`
 
-![todo](/src/main/resources/images/todo.png)
+![todo](images/todo.png)
 
 Outcome: UwU TaskMaster creates a new to-do `7. TO-DO: make breakfast[]`.
 
@@ -56,7 +56,7 @@ Outcome: UwU TaskMaster creates a new to-do `7. TO-DO: make breakfast[]`.
 Format: `deadline [name of deadline] /by [dd/mm/yyyy HH:mm]`
 Example usage: `deadline submit assignment /by 11/3/2023 1500`
 
-![deadline](/src/main/resources/images/deadline.png)
+![deadline](images/deadline.png)
 
 Outcome: UwU TaskMaster creates a new deadline `7. DEADLINE: submit assignment (By Mar 11 2023 3:00PM)[]`.
 
@@ -64,7 +64,7 @@ Outcome: UwU TaskMaster creates a new deadline `7. DEADLINE: submit assignment (
 Format: `event [name of event] /from [dd/mm/yyyy HH:mm] /to [dd/mm/yyyy HH:mm]`
 Example usage: `event meet Alex for lunch /from 13/2/2023 1200 /to 13/2/2023 1300`
 
-![event](/src/main/resources/images/event.png)
+![event](images/event.png)
 
 Outcome: UwU TaskMaster creates a new event `7. EVENT: meet Alex for lunch (From Feb 13 2023 12:00PM to Feb 13 2023 1:00PM)[]`.
 
@@ -72,7 +72,7 @@ Outcome: UwU TaskMaster creates a new event `7. EVENT: meet Alex for lunch (From
 Format: `delete [taskNumber]`
 Example usage: `delete 2`
 
-![delete](/src/main/resources/images/delete.png)
+![delete](images/delete.png)
 
 Outcome: UwU TaskMaster deletes the task prefixed with 2.
 
@@ -80,7 +80,7 @@ Outcome: UwU TaskMaster deletes the task prefixed with 2.
 Format: `mark [taskNumber]`
 Example usage: `mark 1`
 
-![mark](/src/main/resources/images/mark.png)
+![mark](images/mark.png)
 
 Outcome: UwU TaskMaster marks the task prefixed with 1 as complete by changing the task status from `[]` to `[X]`.
 
@@ -88,7 +88,7 @@ Outcome: UwU TaskMaster marks the task prefixed with 1 as complete by changing t
 Format: `unmark [taskNumber]`
 Example usage: `unmark 1`
 
-![unmark](/src/main/resources/images/unmark.png)
+![unmark](images/unmark.png)
 
 Outcome: UwU TaskMaster marks the task prefixed with 1 as incomplete by changing the task status from `[X]` to `[]`.
 
@@ -96,7 +96,7 @@ Outcome: UwU TaskMaster marks the task prefixed with 1 as incomplete by changing
 Format: `find [keyword]`
 Example usage: `find lecture`
 
-![find](/src/main/resources/images/find.png)
+![find](images/find.png)
 
 Outcome: UwU TaskMaster returns a snapshot of tasks matching the keyword.
 
@@ -104,7 +104,7 @@ Outcome: UwU TaskMaster returns a snapshot of tasks matching the keyword.
 Format: `free [numberOfDesiredHours]`
 Example usage: `free 2`
 
-![free](/src/main/resources/images/free.png)
+![free](images/free.png)
 
 Outcome: UwU TaskMaster returns the closest free time slot it could find in your schedule that matches or exceeds the number of desired hours you requested.
 
