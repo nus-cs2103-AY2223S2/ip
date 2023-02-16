@@ -1,5 +1,7 @@
 # User Guide
 
+Duke chatbot is a GUI based application that does task management with basic functionalities.
+
 ## Features
 
 ### Listing all tasks `list`
@@ -67,7 +69,8 @@ Firstly, it is a todo task `[T]` for buying masks as completed `[X]`.
 
 Secondly, it is a deadline task `[D]` for finishing CS2103T ip by Feb 17 2023 `(by: *)` that is not completed `[ ]`.
 
-Lastly, it is an event task `[E]` for CS2103T tp project from February 17, 2023 to Apr 12, 2023 `(from: *, to: *)` as not being completed yet `[ ]`.
+Lastly, it is an event task `[E]` for CS2103T tp project from February 17, 2023 to Apr 12, 2023 `(from: *, to: *)` as
+not being completed yet `[ ]`.
 
 ### `mark` - Mark task
 
@@ -85,7 +88,6 @@ I've marked this task as done:
 ```
 
 This shows the second task marked as done by the `[X]` representation.
-
 
 ### `unmark` - Unmarks task
 
@@ -139,12 +141,143 @@ event : Enter the command "event x /from y /to z" where x is the description of 
 This shows all the commands with its corresponding syntax. It states its function, together with what needs to be noted.
 
 For example:
+
 ```
 mark : Enter the command "mark x" to mark the x-th task as being completed.
 Note: x is a number and needs to be within the range 1 and the number of tasks stored.
 ```
 
-This states that the `mark` command has a syntax of `mark x` where `x` represents the x-th task. It states that the corresponding task is marked as complete. The user also needs to `Note:` that x needs to be within the size of the task list.
+This states that the `mark` command has a syntax of `mark x` where `x` represents the x-th task. It states that the
+corresponding task is marked as complete. The user also needs to `Note:` that x needs to be within the size of the task
+list.
 
+### `todo` - Add todo task
 
+Adds a todo task with a description.
 
+Syntax: `todo <description>`
+
+Example of usage: `todo Buy shampoo`
+
+Expected outcome:
+
+```
+I've added this task into the list:
+[T][ ] Buy shampoo
+Now you have a total of 4 tasks in the list
+```
+
+This shows that a todo task `[T]` has been added with description `Buy shampoo`.
+It also shows that there is a total of `4` tasks after the addition of this new task.
+
+### `deadline` - Add deadline task
+
+Adds a deadline task with a description and due date for the task.
+
+Syntax: `deadline <description> /by <due date>`, where due date has format of `yyyy-MM-dd`
+
+Example of usage: `deadline Finish assignment /by 2023-02-16`
+
+Expected outcome:
+
+```
+I've added this task into the list:
+[D][ ] Finish assignment (by: Feb 16 2023)
+Now you have a total of 4 tasks in the list
+```
+
+This shows that a deadline task `[D]` has been added with description `Finish assignment` and due date `Feb 16 2023`.
+It also shows that there is a total of `4` tasks after the addition of this new task.
+
+### `event` - Add event task
+
+Adds an event task with a description, together with start and end dates for the event.
+
+Syntax: `event <description> /from <start date> /to <end date>`, where start and end date have format `yyyy-MM-dd`
+
+Example of usage: `deadline SOC Career Fest /from 2023-02-07 /to 2023-02-08`
+
+Expected outcome:
+
+```
+I've added this task into the list:
+[E][ ] SOC Career Fest (from: Feb 7 2023, to: Feb 8 2023)
+Now you have a total of 4 tasks in the list
+```
+
+This shows that an event task `[E]` has been added with description `SOC Career Fest`, with start date `Feb 7 2023`
+and end date `Feb 8 2023`. It also shows that there is a total of `4` tasks after the addition of this new task.
+
+### `delete` - Delete a task
+
+Delete the specified task.
+
+Syntax: `delete <index>`
+
+Example of usage: `delete 1`
+
+Expected outcome:
+
+```
+I've deleted this task from the list:
+[T][X] Buy masks
+Now you have a total of 2 tasks in the list
+```
+
+This shows that the task in index `1` was deleted, which corresponded to `[T][X] Buy masks`. This resulted in the 
+number of tasks left in the list to be `2`.
+
+### Find task `find`
+
+Finds all tasks that have substring that match the keyword provided.
+
+Syntax: `find <keyword>`
+
+Example of usage: `find CS2103T`
+
+Expected outcome:
+
+```
+These are the tasks with matching descriptions in them:
+1. [D][ ] Finish CS2103T ip (by: Feb 17 2023)
+2. [E][ ] CS2103T tp project (from: Feb 17 2023, to: Apr 12 2023)
+```
+
+This shows that there are `2` tasks that match the keyword `CS2103T` and listed them out with their descriptions.
+
+### `bye` - Exit program
+
+Saves all the tasks and exits the program.
+
+Syntax: `bye`
+
+Example of usage: `bye`
+
+Expected outcome:
+
+```
+Thank you for coming!
+Hope to see you again soon!
+~~Bye
+```
+
+This means that the program is saving all of the tasks into your local storage and going to exit the program in `2` 
+seconds time.
+
+## Data Manipulation
+
+The default data path for saving tasks is `/data/tasks.txt`. You can manually change the data inside this file for 
+your own benefit. However, bear in mind that you need to keep with the format of each different type of tasks 
+(`todo`, `deadline`, `event`) to prevent corrupted once you save the task file.
+
+The format of each task are as follows:
+
+```
+Todo | marked: <1/0> ; description: <description>
+Deadline | marked: <1/0> ; description: <description> ; deadline: <due date>
+Event | marked: <1/0> ; description: <description> ; from: <start date> ; to: <end date>
+```
+
+Each line represents the format for `todo`, `deadline` and `event` respectively. `<1/0>` represents whether the task 
+is marked as completed. `<description>` is the description of the task. `<due date>`, `<start date>` and `<end 
+date>` are in the format `yyyy-MM-dd`.
