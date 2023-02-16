@@ -49,7 +49,8 @@ public class CatBot {
     }
 
     /**
-     * Get CatBot's response for a given input command.
+     * Gets CatBot's response for a given input command.
+     *
      * @param input is the command the user input
      * @return CatBot's output
      */
