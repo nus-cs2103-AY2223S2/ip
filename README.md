@@ -2,7 +2,7 @@
 
 #### JenoBot is a personal Command-Line-Interface desktop application that helps you to keep track of your daily tasks.
 
-![](Ui.png)
+![](docs/Ui.png)
 
 ## Content
 1. [Command Summary](https://github.com/afiqzu/ip#command-summary)
