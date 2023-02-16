@@ -19,6 +19,7 @@ public class FindCommand implements Command {
      * @param keyword Keyword to match.
      */
     public FindCommand(int code, String keyword) {
+        assert code == 0 || code == 1 : "Wrong code";
         this.code = code;
         this.keyword = keyword;
     }
