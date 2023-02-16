@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (input.equals("bye")) {
             // Adapted from https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
-            PauseTransition exitPause = new PauseTransition(Duration.seconds(3));
+            PauseTransition exitPause = new PauseTransition(Duration.seconds(2));
             exitPause.setOnFinished(event -> Platform.exit());
             exitPause.play();
         }

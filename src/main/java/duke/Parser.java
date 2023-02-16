@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
@@ -98,6 +99,7 @@ public class Parser {
             generalInputChecker(input, markErr);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             taskList.markTaskAsDone(taskNum);
+            this.storage.save(taskList);
             return ui.markTaskAsDoneMessage(taskList.getTask(taskNum));
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
@@ -114,6 +116,7 @@ public class Parser {
             generalInputChecker(input, unmarkErr);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             taskList.markTaskAsIncomplete(taskNum);
+            this.storage.save(taskList);
             return ui.markTaskAsIncompleteMessage(taskList.getTask(taskNum));
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
@@ -130,6 +133,7 @@ public class Parser {
             generalInputChecker(input, deleteErr);
             int taskNum = Integer.parseInt(input.split(" ")[1]);
             Task t = taskList.deleteTaskFromList(taskNum);
+            this.storage.save(taskList);
             return ui.deletedTaskMessage(t, taskList.numberOfTasks());
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
@@ -143,13 +147,11 @@ public class Parser {
      */
     public String eventParser(String input) {
         try {
-            generalInputChecker(input, eventErr);
+            eventChecker(input, eventErr);
+            return addEventFormatted(input);
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
         }
-        String[] eventConstructor = input.replace("event ", "").split("/at ");
-        String timeModified = eventConstructor[1].replace("from ", "");
-        return inputEvent(eventConstructor[0], timeModified);
     }
 
     /**
@@ -174,6 +176,7 @@ public class Parser {
     public String todoParser(String input) {
         try {
             generalInputChecker(input, todoErr);
+
         } catch (DukeException e) {
             return ui.printMessage(e.getMessage());
         }
@@ -210,10 +213,10 @@ public class Parser {
     }
 
     /**
-     * A general method thaat ensures that the user inputs description when adding a task
-     * @param input
-     * @param err
-     * @throws DukeException
+     * A general method that ensures that the user inputs description when adding a task
+     * @param input The user input
+     * @param err The error message in String format
+     * @throws DukeException The exception that prints err.
      */
     public void generalInputChecker(String input, String err) throws DukeException {
         String[] inputArray = input.split(" ", 2);
@@ -221,6 +224,19 @@ public class Parser {
             throw new DukeException(err);
         }
         if (inputArray[1].trim().length() == 0) {
+            throw new DukeException(err);
+        }
+    }
+
+    /**
+     * A special input checker to check if user inputs event wrongly.
+     * @param input The user input
+     * @err The error message in String format
+     * @throws DukeException if the user adds event task wrongly
+     */
+    public void eventChecker(String input, String err) throws DukeException {
+        String[] inputArray = input.split(" ", 2);
+        if (inputArray.length < 2) {
             throw new DukeException(err);
         }
     }
@@ -286,15 +302,44 @@ public class Parser {
     }
 
     /**
+     * Adds an event object with the formatted date to the list.
+     * @param input The input string
+     * @return the output of the inputEvent method
+     * @throws DukeException if the format of the dates are wrong.
+     */
+    public String addEventFormatted(String input) throws DukeException {
+        try {
+            String[] constructor = input.split(" ", 2);
+            String desc = constructor[1].split(" ", 2)[0];
+            String fromStr = constructor[1].split( " /from ")[1].split(" /to ")[0];
+            String toStr = constructor[1].split(" /from ")[1].split(" /to ")[1];
+            if (desc.length() == 0 || fromStr.length() == 0 || toStr.length() == 0) {
+                throw new DukeException("Remember to add description, from and to date!");
+            }
+            LocalDateTime from = LocalDateTime.parse(fromStr, DateTimeFormatter.ofPattern("dd/MM/yyyy H:mm"));
+            LocalDateTime to = LocalDateTime.parse(toStr, DateTimeFormatter.ofPattern("dd/MM/yyyy H:mm"));
+            return inputEvent(desc, from, to);
+        } catch (Exception e) {
+            throw new DukeException("Remember to follow the correct input format!");
+        }
+    }
+
+    /**
      * Inputs a new Event object into the list.
      * @param s The description of the event.
-     * @param time The time of the event.
+     * @param from The time of the event.
+     * @param to The end of the event.
      * @return the UI message when a task is added
      */
-    public String inputEvent(String s, String time) {
-        Event event = new Event(s, time);
-        taskList.add(event);
-        return ui.addedTaskMessage(event, taskList.numberOfTasks());
+    public String inputEvent(String s, LocalDateTime from, LocalDateTime to) {
+        try {
+            Event event = new Event(s, from, to);
+            taskList.add(event);
+            this.storage.save(taskList);
+            return ui.addedTaskMessage(event, taskList.numberOfTasks());
+        } catch (Exception e) {
+            return ui.printMessage(e.getMessage());
+        }
     }
 
     /**
@@ -304,9 +349,13 @@ public class Parser {
      * @return the UI message when a task is added
      */
     public String inputDeadline(String s, LocalDate d) {
-        Deadline deadline = new Deadline(s, d);
-        taskList.add(deadline);
-        return ui.addedTaskMessage(deadline, taskList.numberOfTasks());
+       try {
+           Deadline deadline = new Deadline(s, d); taskList.add(deadline);
+           this.storage.save(taskList);
+           return ui.addedTaskMessage(deadline, taskList.numberOfTasks());
+       } catch (Exception e) {
+           return ui.printMessage(e.getMessage());
+       }
     }
 
     /**
@@ -315,8 +364,13 @@ public class Parser {
      * @return the UI message when a task is added
      */
     public String inputTodo(String s) {
-        Todo todo = new Todo(s);
-        taskList.add(todo);
-        return ui.addedTaskMessage(todo, taskList.numberOfTasks());
+        try {
+            Todo todo = new Todo(s);
+            taskList.add(todo);
+            this.storage.save(taskList);
+            return ui.addedTaskMessage(todo, taskList.numberOfTasks());
+        } catch (Exception e) {
+            return ui.printMessage(e.getMessage());
+        }
     }
 }

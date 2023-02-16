@@ -1,20 +1,29 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Encapsulates an Event as a specific type of Task.
  */
 
 public class Event extends Task {
-    private String timeOfEvent;
+    private LocalDateTime from;
+    private LocalDateTime to;
+    private DateTimeFormatter PATTERN = DateTimeFormatter.ofPattern("MMM dd yyyy H:mm");
 
     /**
      * Creates an Event object.
      * @param description The description of the event.
-     * @param timeOfEvent The date/time of the event.
+     * @param from The date/time of the start of event.
+     * @param to The date/time of the end of the event.
      */
-    public Event(String description, String timeOfEvent) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) throws DukeException {
         super(description);
-        this.timeOfEvent = timeOfEvent;
+        this.to = to;
+        this.from = from;
+
     }
 
     /**
@@ -23,15 +32,25 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timeOfEvent + ")";
+        if (isDone) {
+            return String.format("[E][X] %s (from: %s to: %s)", description, outputFormatDate(from),
+                    outputFormatDate(to));
+        }
+        return String.format("[E][ ] %s (from: %s to: %s)", description, outputFormatDate(from), outputFormatDate(to));
     }
 
     /**
      * Creates a string representation of the Event object that is saved in a file.
      * @return The string representation of the Event object that is stored in a text file.
      */
+
+    public String outputFormatDate(LocalDateTime date) {
+        return date.format(PATTERN);
+    }
+
     @Override
     public String sendOutputToFile() {
-        return String.format("E | %d | %s | %s" , isDone ? 1 : 0, description, timeOfEvent);
+        return String.format("E | %d | %s | %s | %s" , isDone ? 1 : 0, description,
+                outputFormatDate(from), outputFormatDate(to));
     }
 }

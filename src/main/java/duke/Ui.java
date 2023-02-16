@@ -6,29 +6,11 @@ import java.util.Scanner;
  * Encapsulates the messages seen in the User Interface.
  */
 public class Ui {
-    private Scanner scanner;
 
     /**
      * Creates a new UI object.
      */
-    Ui() {
-        scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Returns the user input.
-     * @return The string format of the scanned user input.
-     */
-    String readInput() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Closes the scanner.
-     */
-    void close() {
-        scanner.close();
-    }
+    Ui() {}
 
     /**
      * Prints a formatted message.
@@ -100,7 +82,9 @@ public class Ui {
         String intro = "\tBelow is a list of commands for you to use!";
         String list = "\n\t1. To see your LIST, use command: 'list'";
         String task1 = "\n\n\t2. To add a general TODO task, use command:\n\t'todo <description>'";
-        String task2 = "\n\n\t3. To add an EVENT, use command:\n\t'event <description> /at <place and description>'";
+        String task2 = "\n\n\t3. To add an EVENT, use command:" +
+                "\n\t'event <description> /from <date/time> /to <date/time>'";
+        String event = "\n\tNOTE: Your date/time should be in the format: \n\tDD/MM/YYYY HH:MM";
         String task3 = "\n\n\t4. To add a DEADLINE, use command:\n\t'deadline <description> /by <due date>'";
         String deadline = "\n\tNOTE: Your due date should be in the format: \n\tDD/MM/YYYY";
         String delete = "\n\n\t5. To DELETE a task, use command:\n\t'delete <Task number in the list>'";
@@ -108,7 +92,8 @@ public class Ui {
         String unmark = "\n\n\t7. To UNMARK a task as not done, use command:\n\t'unmark <Task number in the list>'";
         String find = "\n\n\t8. To SEARCH for certain tasks in the list, use \n\tcommand:\n\t'find <keyword>'";
         String bye = "\n\n\t9. To CLOSE the application, use command: 'bye'";
-        String totalList = intro + list + task1 + task2 + task3 + deadline + delete + mark + unmark + find + bye;
+        String totalList = intro + list + task1 + task2 + event + task3
+                + deadline + delete + mark + unmark + find + bye;
         return totalList;
     }
 
@@ -152,7 +137,6 @@ public class Ui {
      */
     public String markTaskAsIncompleteMessage(Task t) {
         return printMessage("OK, I've marked this task as not done yet:\n\t" + t);
-
     }
 
     /**
@@ -164,7 +148,7 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             int taskNumber = i + 1;
-           sb.append(String.format("\t%d. %s\n", taskNumber, tasks.get(i)));
+           sb.append(String.format("%d. %s\n", taskNumber, tasks.get(i)));
         }
         return sb.toString();
     }

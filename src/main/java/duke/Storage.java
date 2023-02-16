@@ -2,6 +2,7 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -58,7 +59,9 @@ public class Storage {
                 Task task;
                 switch (taskType) {
                 case "E":
-                    task = new Event(curr[2], curr[3]);
+                    LocalDateTime from = LocalDateTime.parse(curr[3], DateTimeFormatter.ofPattern("MMM dd yyyy H:mm"));
+                    LocalDateTime to = LocalDateTime.parse(curr[4], DateTimeFormatter.ofPattern("MMM dd yyyy H:mm"));
+                    task = new Event(curr[2], from, to);
                     handleTask(task, curr);
                     tasks.add(task);
                     break;
