@@ -30,6 +30,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        greet(dialogContainer);
+
+    }
+
+    private void greet(VBox dialogContainer) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hello! I am treebot, how may i be of service?", dukeImage)
+        );
     }
 
     public void setTreeBot(TreeBot t) {
