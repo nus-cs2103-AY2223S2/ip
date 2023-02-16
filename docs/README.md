@@ -31,7 +31,7 @@
 | 1 | [Exit session](#bye---saves-and-exits-duke) | `bye` | `bye` |
 | 2 | [Add Todo Task](#todo---adds-todo-task) | `todo <Description>` | `todo iP` |
 | 3 | [Add Deadline Task](#deadline---adds-deadline-task) | `deadline <Description> /by <Due Date>` | `deadline submission /by 17/02/2023 2359` |
-| 4 | [Add Event Task](#event---adds-event-task) | `event <Description> /from <Duration> /to <Duration>` | `event workout /from 17/02/2023 1800 / to 17/02/2023 2000` |
+| 4 | [Add Event Task](#event---adds-event-task) | `event <Description> /from <Duration> /to <Duration>` | `event workout /from 17/02/2023 1800 /to 17/02/2023 2000` |
 | 5 | [Delete Task](#delete---removes-task-from-task-list) | `delete <Index>` | `delete 1` |
 | 6 | [Mark Task](#mark---marks-task-as-done) | `mark <Index>` | `mark 1` |
 | 7 | [Unmark Task](#unmark---marks-task-as-not-done) | `unmark <Index>` | `unmark 1` |
