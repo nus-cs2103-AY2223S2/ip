@@ -43,3 +43,6 @@ Description of the outcome.
 ```
 expected output
 ```
+## Future updates
+
+Duke Atreides promises to improve his AI in the next iteration. Hopefully.
