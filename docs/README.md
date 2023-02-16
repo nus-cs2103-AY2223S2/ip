@@ -1,9 +1,9 @@
 # The Karen User Guide
 
-## :wave: Introduction
+## 👋 Introduction
 The Karen is a chatbot to help keep track of your tasks. Be careful though, she is not the most polite woman out there.
 
-## :woman: Features
+## 👩 Features
 
 ### Add a Todo task
 
