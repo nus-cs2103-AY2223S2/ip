@@ -55,6 +55,7 @@ public class Duke {
         try {
             String userCommandText = input;
             Command c = Parser.parse(userCommandText);
+            assert c instanceof Command : "c should be a Command";
             return c.executeReturnString(this.tasks, this.ui, this.storage);
         } catch (DukeException e) {
             return ui.formatMessage(e.getMessage());
