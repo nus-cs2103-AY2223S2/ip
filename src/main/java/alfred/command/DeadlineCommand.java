@@ -37,7 +37,7 @@ public class DeadlineCommand extends Command {
         if (descriptionArr.length == 1) {
             throw new InvalidCommandException("deadline");
         }
-        Task task = new Deadline(descriptionArr[0], lineArr[1]);
+        Task task = new Deadline(lineArr[0], lineArr[1]);
         tasks.addTask(task);
 
         String numTasks = tasks.getSize() == 1 ? "task" : "tasks";

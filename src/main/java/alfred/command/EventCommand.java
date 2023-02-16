@@ -33,7 +33,7 @@ public class EventCommand extends Command {
         if (descriptionArr.length == 1) {
             throw new InvalidCommandException("event");
         }
-        Task task = new Event(descriptionArr[0], lineArr[1], lineArr[2]);
+        Task task = new Event(lineArr[0], lineArr[1], lineArr[2]);
         tasks.addTask(task);
 
         String numTasks = tasks.getSize() == 1 ? "task" : "tasks";
