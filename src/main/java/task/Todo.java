@@ -1,7 +1,5 @@
 package task;
 
-import task.Task;
-
 /**
  * Todo class inherits from the Task class and is used for representing all
  * todo tasks.
@@ -17,7 +15,7 @@ public class Todo extends Task {
      *
      * @param description Description for the todo task.
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
     }
 

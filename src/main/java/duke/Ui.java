@@ -52,7 +52,7 @@ public class Ui {
         stage.setMinWidth(400.0);
     }
 
-    private TextField setupUserInput(){
+    private TextField setupUserInput() {
         TextField userInput = new TextField();
         userInput.setPrefWidth(320.0);
         userInput.setOnAction((event) -> {

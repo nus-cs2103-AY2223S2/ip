@@ -1,5 +1,4 @@
 package task;
-import task.Task;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -47,7 +46,7 @@ public class Deadline extends Task {
      * Overrides the default toString method.
      *
      * @return A text UI representing a deadline entry, displaying the task type, completion status, description
-     * and the deadline date and time.
+     *         and the deadline date and time.
      *
      */
     @Override

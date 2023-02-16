@@ -12,7 +12,7 @@ import task.TaskList;
  * @version     %I%, %G%
  * @since       1.0
  */
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

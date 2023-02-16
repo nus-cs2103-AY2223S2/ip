@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.stage.Stage;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+
 
 /**
  * Parser class is used for making sense of all possible user commands.
@@ -127,10 +132,10 @@ public class Parser {
         String markCommandFormat = "3) Mark a task as completed: mark <task number> \n";
         String unmarkCommandFormat = "4) Unmark a task to incompleted: unmark <task number> \n";
         String deleteCommandFormat = "5) Delete a task: delete <task number> \n";
-        String deadlineCommandFormat = "6) Add a task with end deadline: deadline <task description> " +
-                "/by <YYYY-MM-DD HH:MM> \n";
-        String eventCommandFormat = "7) Add a task with start and end date: event <task description> " +
-                "/from <YYYY-MM-DD HH:MM> /to <YYYY-MM-DD HH:MM> \n";
+        String deadlineCommandFormat = "6) Add a task with end deadline: deadline <task description> "
+                + "/by <YYYY-MM-DD HH:MM> \n";
+        String eventCommandFormat = "7) Add a task with start and end date: event <task description> "
+                + "/from <YYYY-MM-DD HH:MM> /to <YYYY-MM-DD HH:MM> \n";
         String findCommandFormat = "8) Find a task: find <task description>\n";
         StringBuilder builder = new StringBuilder();
         builder.append(header)
@@ -156,7 +161,7 @@ public class Parser {
                 + listOfInputs;
     }
 
-    private String processMarkCommand(String userInput) throws DukeException{
+    private String processMarkCommand(String userInput) throws DukeException {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
@@ -177,7 +182,7 @@ public class Parser {
         return resultString;
     }
 
-    private String processUnmarkCommand(String userInput) throws DukeException{
+    private String processUnmarkCommand(String userInput) throws DukeException {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
@@ -198,7 +203,7 @@ public class Parser {
         return resultString;
     }
 
-    private String processDeleteCommand(String userInput) throws DukeException{
+    private String processDeleteCommand(String userInput) throws DukeException {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         if (indexOfFirstSpace == -1 || userInput.substring(indexOfFirstSpace + 1).isBlank()) {
@@ -215,7 +220,7 @@ public class Parser {
             resultString += "Now you have " + TaskList.getUserTasks().size() + " tasks in the list.\n";
         } catch (NumberFormatException nfe) {
 
-            throw new DukeException( " Beep boop. Please supply a valid task number you wish to delete.\n");
+            throw new DukeException(" Beep boop. Please supply a valid task number you wish to delete.\n");
         }
         Storage.saveTasksToFile(TaskList.getUserTasks());
         return resultString;
@@ -292,8 +297,8 @@ public class Parser {
         String[] eventEndSplitStr = eventEnd.split(" ");
 
         if (eventStartSplitStr.length != 2 || eventEndSplitStr.length != 2) {
-            throw new DukeException(" Beep boop. The event start and the event end must defined " +
-                    "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n");
+            throw new DukeException(" Beep boop. The event start and the event end must defined "
+                    + "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n");
         }
         String eventStartDate = eventStartSplitStr[0];
         String eventStartTime = eventStartSplitStr[1];
@@ -320,13 +325,13 @@ public class Parser {
                     + "Now you have " + TaskList.getUserTasks().size() + " tasks in the list.\n";
             Storage.saveTasksToFile(TaskList.getUserTasks());
         } catch (DateTimeParseException | ParseException e) {
-            throw new DukeException(" Beep boop. The event start and the event end must defined " +
-                    "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n");
+            throw new DukeException(" Beep boop. The event start and the event end must defined "
+                    + "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n");
         }
         return resultString;
     }
 
-    private String processFindCommand(String userInput) throws DukeException{
+    private String processFindCommand(String userInput) throws DukeException {
         String resultString = "";
         int indexOfFirstSpace = userInput.indexOf(" ");
         String toFind = userInput.substring(indexOfFirstSpace + 1);
@@ -349,7 +354,7 @@ public class Parser {
                         .append(matches.get(i)).append("\n");
             }
             resultString = "Here are the matching tasks in your list:\n"
-                    + listOfMatches ;
+                    + listOfMatches;
         }
         return resultString;
     }

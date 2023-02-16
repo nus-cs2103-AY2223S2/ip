@@ -10,12 +10,12 @@ import java.util.ArrayList;
  * @since       1.0
  */
 public class TaskList {
-    public static ArrayList<Task> userTasks;
-    public TaskList(ArrayList<Task> tasks){
+    private static ArrayList<Task> userTasks;
+    public TaskList(ArrayList<Task> tasks) {
         userTasks = tasks;
     }
 
-    public static ArrayList<Task> getUserTasks(){
+    public static ArrayList<Task> getUserTasks() {
         return userTasks;
     }
 }

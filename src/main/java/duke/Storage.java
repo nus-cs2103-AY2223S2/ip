@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
+
 /**
  * Storage class is used for loading stored tasks from a file and saving tasks back to the file
  * upon any user modification.
@@ -22,8 +23,8 @@ import java.util.Date;
  */
 public class Storage {
     private File saveFile;
-    private static final String SAVE_FILE_DIR_PATH = System.getProperty("user.dir") + "/data/";
-    private static final String SAVE_FILE_PATH = SAVE_FILE_DIR_PATH + "dukeSave.txt";
+    private final static String SAVE_FILE_DIR_PATH = System.getProperty("user.dir") + "/data/";
+    private final static String SAVE_FILE_PATH = SAVE_FILE_DIR_PATH + "dukeSave.txt";
     public Storage() {
         File savedFileDir = new File(SAVE_FILE_DIR_PATH);
         File savedTaskFile = new File(SAVE_FILE_PATH);
@@ -37,8 +38,8 @@ public class Storage {
         } catch (IOException e){
             e.printStackTrace();
         }
-        assert savedFileDir.exists(): "saved file directory does not exist.";
-        assert savedTaskFile.exists(): "saved task file does not exist.";
+        assert savedFileDir.exists() : "saved file directory does not exist.";
+        assert savedTaskFile.exists() : "saved task file does not exist.";
         this.saveFile = savedTaskFile;
     }
 
@@ -47,7 +48,8 @@ public class Storage {
         userTasks.add(newTodo);
     }
 
-    private void processAndAddDeadline(String[] parts, String taskDescription, boolean completed, ArrayList<Task> userTasks) {
+    private void processAndAddDeadline(String[] parts, String taskDescription,
+                                       boolean completed, ArrayList<Task> userTasks) {
         try {
             String[] deadlineParts = parts[3].split(" ");
             String deadlineDate = deadlineParts[0];
@@ -61,7 +63,8 @@ public class Storage {
         }
     }
 
-    private void processAndAddEvent(String[] parts, String taskDescription, boolean completed, ArrayList<Task> userTasks) {
+    private void processAndAddEvent(String[] parts, String taskDescription,
+                                    boolean completed, ArrayList<Task> userTasks) {
         try {
             String[] eventStartParts = parts[3].split(" ");
             String[] eventEndParts = parts[4].split(" ");
@@ -76,7 +79,7 @@ public class Storage {
             Event newEvent = new Event(taskDescription, parsedStartDate, parsedStartTime,
                     parsedEndDate, parsedEndTime, completed);
             userTasks.add(newEvent);
-        } catch(DateTimeParseException | ParseException e) {
+        } catch (DateTimeParseException | ParseException e) {
             e.printStackTrace();
         }
     }
@@ -114,24 +117,24 @@ public class Storage {
             String toWrite = "";
             FileWriter fileWriter = new FileWriter(SAVE_FILE_PATH);
 
-            for(int i = 0; i< taskList.size(); i++) {
+            for (int i = 0; i < taskList.size(); i++) {
                 String taskType = taskList.get(i).getClass().getTypeName();
                 switch (taskType) {
                     case "task.Todo":
-                        Todo todo = (Todo)taskList.get(i);
+                        Todo todo = (Todo) taskList.get(i);
                         toWrite = "todo|" + (todo.getIsDone() ? 1 : 0) + "|" + todo.getDescription() + "\n";
                         fileWriter.write(toWrite);
                         break;
                     case "task.Deadline":
                         Deadline deadline = (Deadline) taskList.get(i);
-                        toWrite = "deadline|" +(deadline.getIsDone() ? 1 : 0) + "|" +
-                                deadline.getDescription() + "|" + deadline.getDeadline() + "\n";
+                        toWrite = "deadline|" + (deadline.getIsDone() ? 1 : 0) + "|"
+                                + deadline.getDescription() + "|" + deadline.getDeadline() + "\n";
                         fileWriter.write(toWrite);
                         break;
                     case "task.Event":
-                        Event event = (Event)taskList.get(i);
-                        toWrite = "event|" + (event.getIsDone() ? 1 : 0) + "|" +event.getDescription() + "|" +
-                                event.getEventStart() + "|" + event.getEventEnd() + "\n";
+                        Event event = (Event) taskList.get(i);
+                        toWrite = "event|" + (event.getIsDone() ? 1 : 0) + "|" + event.getDescription() + "|"
+                                + event.getEventStart() + "|" + event.getEventEnd() + "\n";
                         fileWriter.write(toWrite);
                         break;
                     default:

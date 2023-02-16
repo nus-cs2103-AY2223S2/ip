@@ -7,12 +7,19 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class DialogBox extends HBox{
+/**
+ * DialogBox class is used for representing a custom JavaFX HBox.
+ *
+ * @author      Tseng Chen-Yu
+ * @version     %I%, %G%
+ * @since       1.0
+ */
+public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
-    public DialogBox(Label l, ImageView iv){
-        assert l != null: "dialog box label is null";
-        assert iv != null: "dialog box imageview is null";
+    public DialogBox(Label l, ImageView iv) {
+        assert l != null : "dialog box label is null";
+        assert iv != null : "dialog box imageview is null";
         text = l;
         displayPicture = iv;
         text.setWrapText(true);
@@ -25,7 +32,7 @@ public class DialogBox extends HBox{
 
     }
 
-    private void flip(){
+    private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);

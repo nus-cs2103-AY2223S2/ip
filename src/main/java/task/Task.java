@@ -18,16 +18,16 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return (isDone ? "X" : " "); //mark done task with X
     }
-    public void setIsDone(boolean done){
+    public void setIsDone(boolean done) {
         this.isDone = done;
     }
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return this.isDone;
     }
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
     @Override

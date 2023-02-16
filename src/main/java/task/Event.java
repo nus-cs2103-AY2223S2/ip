@@ -1,5 +1,4 @@
 package task;
-import task.Task;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -31,7 +30,8 @@ public class Event extends Task {
      * @param eventEndDate End time for the event task.
      * @param isDone Event task completion status.
      */
-    public Event(String description, LocalDate eventStartDate, Date eventStartTime, LocalDate eventEndDate, Date eventEndTime, boolean isDone) {
+    public Event(String description, LocalDate eventStartDate, Date eventStartTime,
+                 LocalDate eventEndDate, Date eventEndTime, boolean isDone) {
         super(description, isDone);
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
@@ -65,7 +65,7 @@ public class Event extends Task {
      * Overrides the default toString method.
      *
      * @return A text UI representing an event entry, displaying the task type, completion status, description
-     * and the event start date and time, as well as the event end date and time.
+     *         and the event start date and time, as well as the event end date and time.
      *
      */
     @Override
@@ -76,7 +76,7 @@ public class Event extends Task {
         String formattedEndTime = new SimpleDateFormat("h:mm a").format(eventEndTime);
         String eventStartCombined = formattedStartDate + " " + formattedStartTime;
         String eventEndCombined = formattedEndDate + " " + formattedEndTime;
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (from: " + eventStartCombined +
-                " to: " + eventEndCombined +")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (from: " + eventStartCombined
+                + " to: " + eventEndCombined + ")";
     }
 }
