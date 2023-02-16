@@ -60,18 +60,24 @@ public class Parser {
             task = new ToDoTask(description);
             break;
         case "D":
-            task = new DeadlineTask(description, parseDateTime(parsed[3]));
+            String deadlineEndTime = parsed[3];
+            task = new DeadlineTask(description, parseDateTime(deadlineEndTime));
             break;
         case "E":
-            task = new EventTask(description, parseDateTime(parsed[3]), parseDateTime(parsed[4]));
+            String eventStartTime = parsed[3];
+            String eventEndTime = parsed[4];
+            task = new EventTask(description, parseDateTime(eventStartTime), parseDateTime(eventEndTime));
             break;
         default:
             throw new CannotReadFileAngelaException();
         }
-        if (isTaskDone) {
-            task.setDone(true);
-        }
+
+        setTaskDoneValue(task, isTaskDone);
         return task;
+    }
+
+    private void setTaskDoneValue(Task task, boolean isDone) {
+        task.setDone(isDone);
     }
 
     /**
@@ -104,7 +110,6 @@ public class Parser {
             return new ReminderCommand();
         default:
             return null;
-
         }
     }
 
@@ -112,60 +117,90 @@ public class Parser {
         if (parts.length < 2) {
             throw new EmptyArgumentAngelaException();
         }
+
+        String arguments = parts[1];
+
         switch (commandType) {
         case MARK_TASK_AS_DONE:
-            try {
-                int number = Integer.parseInt(parts[1]);
-                return new MarkTaskAsDoneCommand(number);
-            } catch (NumberFormatException e) {
-                throw new InvalidArgumentAngelaException();
-            }
+            return parseMarkDoneCommand(arguments);
         case MARK_TASK_AS_UNDONE:
-            try {
-                int number = Integer.parseInt(parts[1]);
-                return new MarkTaskAsUndoneCommand(number);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new InvalidArgumentAngelaException();
-            }
+            return parseMarkUndoneCommand(arguments);
         case DELETE:
-            try {
-                int number = Integer.parseInt(parts[1]);
-                return new DeleteTaskCommand(number);
-            } catch (NumberFormatException e) {
-                throw new InvalidArgumentAngelaException();
-            }
+            return parseDeleteCommand(arguments);
         case TODO:
-            return new AddTodoCommand(parts[1]);
+            return parseTodoCommand(arguments);
         case DEADLINE:
-            try {
-                String[] splitArgs = parts[1].split(" /by ");
-                return new AddDeadlineCommand(splitArgs[0], parseDateTime(splitArgs[1]));
-            } catch (DateTimeParseException e) {
-                throw new InvalidArgumentAngelaException();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new EmptyArgumentAngelaException();
-            }
+            return parseDeadlineCommand(arguments);
         case EVENT:
-            try {
-                String[] splitArgs = parts[1].split(" /from ");
-                String[] times = splitArgs[1].split(" /to ");
-                return new AddEventCommand(splitArgs[0], parseDateTime(times[0]), parseDateTime(times[1]));
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new EmptyArgumentAngelaException();
-            } catch (DateTimeParseException e) {
-                throw new InvalidArgumentAngelaException();
-            }
+            return parseEventCommand(arguments);
         case FIND:
-            try {
-                String keyword = parts[1];
-                return new FindCommand(keyword);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new EmptyArgumentAngelaException();
-            }
+            return parseFindCommand(arguments);
         default:
             assert false : "Should not reach this point";
         }
 
         return null;
+    }
+
+    private Command parseMarkDoneCommand(String arguments) throws InvalidArgumentAngelaException {
+        try {
+            int number = Integer.parseInt(arguments);
+            return new MarkTaskAsDoneCommand(number);
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentAngelaException();
+        }
+    }
+
+    private Command parseMarkUndoneCommand(String arguments) throws InvalidArgumentAngelaException {
+        try {
+            int number = Integer.parseInt(arguments);
+            return new MarkTaskAsUndoneCommand(number);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidArgumentAngelaException();
+        }
+    }
+
+    private Command parseDeleteCommand(String arguments) throws InvalidArgumentAngelaException {
+        try {
+            int number = Integer.parseInt(arguments);
+            return new DeleteTaskCommand(number);
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentAngelaException();
+        }
+    }
+
+    private Command parseTodoCommand(String arguments) {
+        return new AddTodoCommand(arguments);
+    }
+
+    private Command parseDeadlineCommand(String arguments) throws AngelaException {
+        try {
+            String[] splitArgs = arguments.split(" /by ");
+            return new AddDeadlineCommand(splitArgs[0], parseDateTime(splitArgs[1]));
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentAngelaException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyArgumentAngelaException();
+        }
+    }
+
+    private Command parseEventCommand(String arguments) throws AngelaException {
+        try {
+            String[] splitArgs = arguments.split(" /from ");
+            String[] times = splitArgs[1].split(" /to ");
+            return new AddEventCommand(splitArgs[0], parseDateTime(times[0]), parseDateTime(times[1]));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyArgumentAngelaException();
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentAngelaException();
+        }
+    }
+
+    private Command parseFindCommand(String arguments) throws EmptyArgumentAngelaException {
+        try {
+            return new FindCommand(arguments);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyArgumentAngelaException();
+        }
     }
 }

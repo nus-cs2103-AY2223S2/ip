@@ -76,15 +76,19 @@ public class Storage {
         }
         try {
             List<String> lst = Files.readAllLines(Paths.get(filePath));
-            taskList = new TaskList();
-            Task task;
-            for (String line : lst) {
-                task = parser.parseSave(line);
-                taskList.add(task);
-            }
+            addTaskStringsToTaskList(lst, taskList, parser);
             return taskList;
         } catch (IOException | IndexOutOfBoundsException | CannotReadFileAngelaException e) {
             throw new CannotReadFileAngelaException();
+        }
+    }
+
+    private void addTaskStringsToTaskList(List<String> taskStrings, TaskList taskList, Parser parser)
+            throws CannotReadFileAngelaException {
+        Task task;
+        for (String line : taskStrings) {
+            task = parser.parseSave(line);
+            taskList.add(task);
         }
     }
 }
