@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClassName = "berry.Berry"
+    mainClassName = "berry.Launcher"
 }
 
 shadowJar {
