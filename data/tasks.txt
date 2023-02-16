@@ -1,4 +1,3 @@
 T | 0 | hangout
 T | 0 | slep
 D | 0 | tooo | 2012-11-11 13:00
-T | 0 | homeworkd
