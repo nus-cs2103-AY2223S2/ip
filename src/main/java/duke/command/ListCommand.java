@@ -25,7 +25,7 @@ public class ListCommand extends Command {
     private Optional<String> filterString;
 
     /**
-     * Default constructor.
+     * Constructs a list command.
      */
     public ListCommand() {
         this.filterDate = Optional.empty();
@@ -33,7 +33,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Default constructor for filtering by date.
+     * Constructs a list command with filtering by date.
      *
      * @param filterDate date for filtering
      * @see LocalDateTime
@@ -43,7 +43,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Default constructor for filtering by keyword.
+     * Constructs a list command with filtering by keyword.
      *
      * @param filterString keyword for filtering
      */
@@ -52,7 +52,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Base constructor, internal use only to control the filtering option.
+     * Constructs a list command.
+     * For internal use only to control the filtering option.
+     *
      * @param filterDate date for filtering
      * @param filterString keyword for filtering
      * @see LocalDateTime

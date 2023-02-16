@@ -18,7 +18,7 @@ public class Duke {
     private DukeRepo db;
 
     /**
-     * Default constructor.
+     * Constructs a duke agent with data loaded from file.
      */
     public Duke() {
         db = new DukeRepoImpl();

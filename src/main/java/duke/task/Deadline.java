@@ -14,14 +14,14 @@ public class Deadline extends Task {
     private LocalDateTime startDate;
 
     /**
-     * Constructor.
+     * Constructs a deadline.
      */
     public Deadline(String title, LocalDateTime startDate) {
         this(title, false, startDate);
     }
 
     /**
-     * Constructor with predefined done state.
+     * Constructs a deadline with predefined done state.
      */
     public Deadline(String title, boolean isDone, LocalDateTime startDate) {
         super(title, isDone);

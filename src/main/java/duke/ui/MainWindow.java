@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
     private String originalText = "";
 
     /**
-     * Default constructor.
+     * Constructs GUI main window.
      *
      * @param duke {@link Duke} duke agent
      */

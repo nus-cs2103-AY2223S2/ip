@@ -15,14 +15,14 @@ public class Event extends Task {
     private LocalDateTime endDate;
 
     /**
-     * Constructor.
+     * Constructs an event.
      */
     public Event(String title, LocalDateTime from, LocalDateTime to) {
         this(title, false, from, to);
     }
 
     /**
-     * Constructor with predefined done state.
+     * Constructs an event with predefined done state.
      */
     public Event(String title, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(title, isDone);

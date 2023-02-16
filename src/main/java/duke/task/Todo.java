@@ -8,14 +8,14 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Constructor.
+     * Constructs a todo.
      */
     public Todo(String title) {
         this(title, false);
     }
 
     /**
-     * Constructor with predefined done state.
+     * Constructs a todo with predefined done state.
      */
     public Todo(String title, boolean isDone) {
         super(title, isDone);

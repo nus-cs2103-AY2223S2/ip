@@ -6,7 +6,7 @@ package duke.exception;
 public class DukeException extends Exception {
 
     /**
-     * Default constructor.
+     * Constructs a general duke exception.
      * @param errorMessage a message describing the exception
      */
     public DukeException(String errorMessage) {

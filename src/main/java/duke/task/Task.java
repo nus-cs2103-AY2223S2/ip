@@ -8,7 +8,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Defualt constructor with default done status.
+     * Constructs a task with default done status.
      *
      * @param title task title
      * @param isDone boolean marked indicator
@@ -19,7 +19,7 @@ public class Task {
     }
 
     /**
-     * Defualt constructor with self define done status.
+     * Constructs a task with self define done status.
      *
      * @param title task title
      * @param isDone boolean marked indicator

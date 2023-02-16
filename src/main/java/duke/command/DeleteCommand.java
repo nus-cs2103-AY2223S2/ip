@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     private int[] taskIds;
 
     /**
-     * Default constructor.
+     * Constructs a delete command.
      *
      * @param taskIds int[] ids to be deleted
      */

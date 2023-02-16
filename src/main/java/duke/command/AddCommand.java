@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     private LocalDateTime endDate;
 
     /**
-     * Constructor for adding a todo.
+     * Constructs a todo.
      *
      * @param title  task title
      * @param isDone boolean marked indicator
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Constructor for adding a deadline.
+     * Constructs a deadline.
      *
      * @param title     task title
      * @param isDone    boolean marked indicator
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Constructor for adding an event.
+     * Constructs an event.
      *
      * @param title     task title
      * @param isDone    boolean marked indicator
@@ -63,7 +63,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Base constructor for creating different types of tasks.
+     * Constructs different types of tasks.
      *
      * @param tType     {@link DukeCommand} enum task type
      * @param title     task title

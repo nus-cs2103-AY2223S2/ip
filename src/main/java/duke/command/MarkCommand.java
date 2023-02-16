@@ -19,7 +19,7 @@ public class MarkCommand extends Command {
     private boolean isDone;
 
     /**
-     * Default constructor.
+     * Constructs a mark command.
      *
      * @param taskId   int
      * @param isDone boolean

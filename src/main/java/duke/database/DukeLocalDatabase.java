@@ -29,14 +29,14 @@ class DukeLocalDatabase {
     private boolean isClosed;
 
     /**
-     * Default constructor.
+     * Constructs a local database instance.
      */
     public DukeLocalDatabase() {
         this(false);
     }
 
     /**
-     * Default constructor.
+     * Constructs a local database instance with test mode option.
      */
     public DukeLocalDatabase(boolean isTestMode) {
         tasks = new ArrayList<Task>();

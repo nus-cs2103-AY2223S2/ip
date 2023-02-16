@@ -15,14 +15,14 @@ public class DukeRepoImpl extends DukeRepo {
     private DukeLocalDatabase local;
 
     /**
-     * Default constructor.
+     * Constructs a data layer repo object.
      */
     public DukeRepoImpl() {
         this(false);
     }
 
     /**
-     * Constructor for testing.
+     * Constructs a data layer repo object for testing.
      */
     public DukeRepoImpl(boolean isTestMode) {
         local = new DukeLocalDatabase(isTestMode);
