@@ -3,8 +3,16 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * ListTasks command which lists out the current TaskList.
+ */
 public class ListTasks extends Command {
 
+    /**
+     * Constructor for ListTasks
+     *
+     * @param input The user input.
+     */
     public ListTasks(String input) {
         super(input);
     }

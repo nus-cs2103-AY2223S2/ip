@@ -12,15 +12,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Manages all storage reading and writing functions. Uses file path to read and write to a
- * specific location on the hard disk.
+ * Manages all storage reading and writing functions. Parses TaskList from storage into Tasks.
  */
 public class Storage {
     private String filePath;
     private TaskList tasks;
 
     /**
-     * Constructor to create a Storage object to store the Task List.
+     * Constructor to create a Storage object to store the TaskList.
      *
      * @param filePath The file path to where the list of tasks is stored.
      */

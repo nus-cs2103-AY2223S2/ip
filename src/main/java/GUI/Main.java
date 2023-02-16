@@ -18,7 +18,9 @@ import javafx.scene.image.ImageView;
 
 import java.util.Objects;
 
-
+/**
+ * Sets up the GUI of the application.
+ */
 public class Main extends Application {
     Duke GigaChad;
     private ScrollPane scrollPane;
@@ -28,6 +30,12 @@ public class Main extends Application {
     private Scene scene;
     private Image user = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/sigma.jpg")));
     private Image duke = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Giga_Chad.jpg")));
+
+    /**
+     * Sets up the GUI of the application.
+     *
+     * @param stage The stage of the application.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -101,6 +109,7 @@ public class Main extends Application {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * Sends user input to Duke.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -119,6 +128,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Closes the application.
+     */
     public void closeDuke() {
         new Thread(() -> {
             try {
@@ -130,15 +142,13 @@ public class Main extends Application {
             }
         }).start();
     }
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Retrieves response from Duke.
+     *
+     * @return Duke response.
      */
     private String getResponse() {
         return Ui.dukeResponse();
-    }
-
-    public static void main(String[] args) {
-
     }
 }

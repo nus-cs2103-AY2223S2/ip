@@ -1,8 +1,8 @@
 package duke;
 
+import duke.command.Bye;
 import duke.command.Command;
 import duke.exception.DukeException;
-import java.util.Scanner;
 
 /**
  * A task management program that reads user input to create and delete tasks.
@@ -17,8 +17,8 @@ public class Duke {
      * @param filePath The file path to where the list of tasks is stored.
      */
     public Duke(String filePath) {
-        storage = new Storage(filePath);
-        tasks = storage.readData();
+        this.storage = new Storage(filePath);
+        this.tasks = storage.readData();
         Ui.welcomeMessage();
     }
 
@@ -28,13 +28,14 @@ public class Duke {
     public void run() {
         String input = Ui.getInput();
         Parser parser = new Parser(tasks);
+        Command command = null;
         try {
-            Command command = parser.parse(input);
+            command = parser.parse(input);
             tasks = command.execute(tasks);
         } catch (DukeException e) {
             Ui.errorMessage(e);
         } finally {
-            if(parser.isDone()) {
+            if(command instanceof Bye) {
                 storage.writeData();
                 Ui.farewellMessage();
             }

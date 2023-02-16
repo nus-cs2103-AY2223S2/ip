@@ -2,42 +2,32 @@ package duke;
 
 import duke.command.*;
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
-import java.util.Scanner;
 
 /**
- * Parses all user input into commands such as bye, list, mark, unmark, and the 3 tasks ToDo, Deadline and Event.
- * Executes the commands.
+ * Parses all user input into commands.
  */
 public class Parser {
-    private boolean parserIsDone;
     private TaskList tasks;
 
     /**
      * Constructor to create a Parser object.
      *
-     * @param tasks The Scanner that takes input from the user.
+     * @param tasks The TaskList.
      */
     public Parser(TaskList tasks) {
-        this.parserIsDone = false;
         this.tasks = tasks;
     }
 
     /**
-     * Parses the user input into commands for Duke.
+     * Parses the user input into an executable Command for Duke.
      *
-     * @param tasks The task list to be modified.
-     * @return The task list after parsing through user input from the scanner.
+     * @param input The user input
+     * @return The Command parsed from the user input.
      */
     public Command parse(String input) throws DukeException {
         if (isFind(input)) {
             return new Find(input);
         } else if (isBye(input)) {
-            parserIsDone = true;
             return new Bye(input);
         } else if (isList(input)) {
             return new ListTasks(input);
@@ -55,18 +45,9 @@ public class Parser {
             } else if (isEvent(input)) {
                 return new Add(input, "event");
             } else {
-                throw new DukeException("Please input a task with either todo, deadline or event prefixed!");
+                throw new DukeException("Please input a valid command!");
             }
         }
-    }
-
-    /**
-     * Checks if the parser is done parsing.
-     *
-     * @return The boolean representing whether the parser is done parsing.
-     */
-    public boolean isDone() {
-        return parserIsDone;
     }
 
     /**
@@ -164,7 +145,8 @@ public class Parser {
      */
     public boolean isDeadline(String input) throws DukeException {
         if (input.length() >= 8 && input.startsWith("deadline")) {
-            if (input.equals("deadline") || input.substring(8).isBlank() || input.equals("deadline /by") || input.equals("deadline /by ")) {
+            if (input.equals("deadline") || input.substring(8).isBlank() ||
+                    input.equals("deadline /by") || input.equals("deadline /by ")) {
                 throw new DukeException("DEADLINE needs a description!");
             } else return input.contains(" /by ");
         }
@@ -182,9 +164,9 @@ public class Parser {
             if (input.equals("event") || input.substring(5).isBlank()) {
                 throw new DukeException("EVENT needs a description!");
             }
-            int fromdex = input.indexOf(" /from ");
-            int todex = input.indexOf(" /to ");
-            if (fromdex + 7 > todex) {
+            int fromIndex = input.indexOf(" /from ");
+            int toIndex = input.indexOf(" /to ");
+            if (fromIndex + 7 > toIndex) {
                 throw new DukeException("What are you saying?");
             }
             return true;

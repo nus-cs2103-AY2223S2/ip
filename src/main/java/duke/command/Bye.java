@@ -1,16 +1,23 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 
+/**
+ * Bye command which is a command placeholder for the program to stop.
+ */
 public class Bye extends Command {
 
+    /**
+     * Constructor for Bye
+     *
+     * @param input The user input.
+     */
     public Bye(String input) {
         super(input);
     }
 
     /**
-     * Ends the parser.
+     * Does nothing.
      *
      * @param tasks The current Task List.
      * @return The current Task List.

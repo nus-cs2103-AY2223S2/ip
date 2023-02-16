@@ -8,8 +8,18 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Add command which adds tasks to the TaskList.
+ */
 public class Add extends Command {
     private String taskType;
+
+    /**
+     * Constructor for Add
+     *
+     * @param input The user input.
+     * @param taskType The type of task being added.
+     */
     public Add(String input, String taskType) {
         super(input);
         this.taskType = taskType;

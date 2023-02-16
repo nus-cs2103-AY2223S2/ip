@@ -3,8 +3,16 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Find command which finds tasks by keyword.
+ */
 public class Find extends Command {
 
+    /**
+     * Constructor for Find
+     *
+     * @param input The user input.
+     */
     public Find(String input) {
         super(input);
     }

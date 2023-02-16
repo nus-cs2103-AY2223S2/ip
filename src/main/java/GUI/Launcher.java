@@ -3,7 +3,7 @@ package GUI;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * A launcher class to workaround classpath issues. Launches the main application.
  */
 public class Launcher {
     public static void main(String[] args) {

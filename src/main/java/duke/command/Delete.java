@@ -3,8 +3,16 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Delete command which removes a task from the TaskList.
+ */
 public class Delete extends Command {
 
+    /**
+     * Constructor for Delete
+     *
+     * @param input The user input.
+     */
     public Delete(String input) {
         super(input);
     }
