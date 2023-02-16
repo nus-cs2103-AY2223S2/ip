@@ -1,0 +1,4 @@
+[T][ ] lecture
+[T][X] lecture
+[D][X] test | Fri, 03/03/2023, 11:45 PM
+[D][ ] exam | Tue, 04/04/2023, 9:23 AM

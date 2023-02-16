@@ -1,0 +1,19 @@
+.background {
+    /* -fx-background-image: url("/images/background1.jpeg"); A2D9FF*/
+    -fx-background-color: white;
+    -fx-background-size: contain;
+}
+
+.genie-dialog {
+    -fx-background-color: D2DAFF;
+    -fx-background-radius: 5 20 20 20;
+}
+.user-dialog {
+     -fx-background-color: linear-gradient(to right, B1B2FF, ECC5FB);
+     -fx-background-radius: 20 5 20 20;
+ }
+.user-textField {
+    -fx-padding: 2 57 2 15;
+    -fx-background-radius: 31;
+    -fx-background-color: EEF1FF;
+}

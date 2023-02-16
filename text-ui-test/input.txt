@@ -1,0 +1,10 @@
+deadline homework /by 2023-01-23 23:59
+event meeting /from 4pm /to 6pm
+list
+mark 2
+list
+unmark 2
+list
+find homework
+find hw
+bye
