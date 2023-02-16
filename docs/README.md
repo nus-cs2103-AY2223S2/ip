@@ -13,10 +13,10 @@ Alfred is Bruce Wayne (Batman)'s loyal butler. He is a wise and intelligent man 
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed on your Computer.
-2. Download Alfred here.
+2. Download Alfred [here](https://github.com/ruiyigan/ip/releases/download/A-Release/alfred.jar).
 3. Copy the jar file into an empty folder.
 4. Open a command window in that folder.
-5. Run the command java -jar {filename}.jar e.g., java -jar Alfred.jar (i.e., run the command in the same folder as the jar file).
+5. Run the command java -jar {filename}.jar e.g., java -jar alfred.jar (i.e., run the command in the same folder as the jar file).
 
 
 ## Summary of Commands
