@@ -63,7 +63,7 @@ public class TaskList {
 
     public String printList() {
         int counter = 0;
-        StringBuilder toReturn = new StringBuilder("Here are the tasks in your list my premier:");
+        StringBuilder toReturn = new StringBuilder("Here are the tasks in your list my premier:").append(System.getProperty("line.separator"));
         for (Task i : arrList) {
             counter++;
             toReturn.append(counter).append(". ").append(i.toString()).append(System.getProperty("line.separator"));
