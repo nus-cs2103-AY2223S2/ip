@@ -29,7 +29,7 @@ public class MarkCommand extends Command {
 
         String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
-            output += ui.showMark() + tasks.markTaskDone(taskIndex);
+            output += ui.showMark() + "\t" + tasks.markTaskDone(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }

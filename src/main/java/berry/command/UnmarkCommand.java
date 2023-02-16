@@ -29,7 +29,7 @@ public class UnmarkCommand extends Command {
 
         String output = "";
         if (tasks.isIndexWithinRange(taskIndex)) {
-            output += ui.showUnmark() + tasks.markTaskNotDone(taskIndex);
+            output += ui.showUnmark() + "\t" + tasks.markTaskNotDone(taskIndex);
         } else {
             throw new IndexOutOfRangeException();
         }
