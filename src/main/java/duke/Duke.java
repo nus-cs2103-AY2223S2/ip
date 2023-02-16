@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -17,7 +19,6 @@ import util.Storage;
 import util.TaskList;
 import util.Ui;
 
-import java.io.File;
 
 
 /**
@@ -26,12 +27,12 @@ import java.io.File;
  */
 public class Duke extends Application {
     private static final String divider = "    ____________________________________________________________";
+    private static final String FILE_DIR = "data";
+    private static final String FILE_PATH = FILE_DIR + File.separator + "duke.txt";
     private TaskList tasks;
     private final Ui ui;
     private final Storage storage;
     private Parser parser;
-    private static final String FILE_DIR = "data";
-    private static final String FILE_PATH = FILE_DIR + File.separator + "duke.txt";
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
