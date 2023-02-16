@@ -1,5 +1,8 @@
 package catbot.tasklist;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The parent class of all tasks.
  */
@@ -44,6 +47,21 @@ public abstract class Task {
      */
     protected String getStatusIcon() {
         return isDone ? "✓" : " ";
+    }
+
+    protected String formatDate(LocalDateTime date) {
+        String formatPattern;
+
+        if (date.getYear() == LocalDateTime.now().getYear()) {
+            formatPattern = "d MMM, hh:mm a";
+            if (date.getDayOfYear() == LocalDateTime.now().getDayOfYear()) {
+                formatPattern = "hh:mm a";
+            }
+        } else {
+            formatPattern = "d MMM yyyy, hh:mm a";
+        }
+
+        return date.format(DateTimeFormatter.ofPattern(formatPattern));
     }
 
     @Override

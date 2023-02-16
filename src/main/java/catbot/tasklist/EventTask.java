@@ -1,8 +1,6 @@
 package catbot.tasklist;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 /**
  * Stores an event task which happens from a certain time to a certain time.
@@ -21,10 +19,6 @@ public class EventTask extends Task {
         super(task);
         startsAt = from;
         endsAt = to;
-    }
-
-    private String formatDate(LocalDateTime date) {
-        return date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
     }
 
     @Override
