@@ -18,6 +18,11 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        Launcher l = new Launcher();
+        Launcher.main(args);
+    }
+
     public String getResponse(String input) {
         StringBuilder sb = new StringBuilder();
         try {
