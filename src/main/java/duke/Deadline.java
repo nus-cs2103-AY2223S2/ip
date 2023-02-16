@@ -16,6 +16,7 @@ import util.DukeException;
 public class Deadline extends Task {
 
     protected String by;
+    static String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
 
     /**
      * Constructs a new Deadline object with the given task and due date.
