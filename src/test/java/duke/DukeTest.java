@@ -24,6 +24,6 @@ public class DukeTest {
     public void getResponse_wrongIndex_exceptionMessageGiven() {
         Duke duke = new Duke();
         String exceptionString = duke.getResponse("delete 1");
-        assertEquals("Error: Task index out of bounds.", exceptionString);
+        assertEquals("Error: LeTask index out of bounds.", exceptionString);
     }
 }
