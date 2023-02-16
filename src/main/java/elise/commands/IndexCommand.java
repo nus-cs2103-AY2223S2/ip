@@ -23,6 +23,7 @@ public class IndexCommand implements Command {
      * @param index index of list to perform action.
      */
     public IndexCommand(int code, int index) {
+        assert code == 0 || code == 1 || code == 2 : "Wrong code";
         this.index = index;
         this.code = code;
     }
