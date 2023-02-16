@@ -1,5 +1,9 @@
 package iris.command;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import iris.Main;
 import iris.TaskList;
 import iris.TaskStore;
 
@@ -9,6 +13,21 @@ import iris.TaskStore;
 public class ExitCommand extends Command {
     private static final String EXIT_TEXT = "Bye! Hope to see you soon!";
 
+    class TimedExit extends TimerTask {
+        public void run() {
+            Main.quit();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(TaskList tasks, TaskStore taskStore) {
+        Timer timer = new Timer();
+        TimerTask task = new TimedExit();
+        timer.schedule(task, 1000);
+    }
     /**
      * {@inheritDoc}
      */
