@@ -3,12 +3,14 @@ package duke.controller;
 import duke.Duke;
 import duke.Ui;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -20,8 +22,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -35,6 +35,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.welcomeMsg(), dukeImage)
         );
+        BackgroundFill backgroundFill = new BackgroundFill(Color.SNOW,
+                null, null);
+
+        dialogContainer.setBackground(new Background(backgroundFill));
     }
 
     public void setDuke(Duke d) {
