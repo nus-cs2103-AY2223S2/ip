@@ -49,7 +49,7 @@ public class TaskList implements Serializable {
      */
     public void addTask(Task task) throws DukeException {
         // check if the task alr exists
-        for (Task storedTask : this.list ) {
+        for (Task storedTask : this.list) {
             boolean isEqual = storedTask.getDescription().equals(storedTask.getDescription());
             if (isEqual) {
                 throw new DukeException(TypeOfTask.storage, 2);

@@ -9,16 +9,12 @@
     -fx-font-size: 13px;
 }
 #sendButton {
-    -fx-background-color: "#1D9BF0";
+    -fx-background-color: hotpink;
     -fx-border-width: 2px;
     -fx-border-style: solid;
     -fx-border-color: black;
     -fx-border-radius: 10px;
     -fx-background-radius: 13px
-}
-
-#mainContainer {
-    -fx-background-color: white;
 }
 
 #scrollPane {
@@ -30,11 +26,11 @@
 }
 
 #mainContainer {
-    -fx-background-color: white;
+    -fx-background-color: aquamarine;
 }
 
 #closeProgramButton {
-    -fx-background-color: "#1D9BF0";
+    -fx-background-color: hotpink;
     -fx-border-width: 2px;
     -fx-border-color: black;
     -fx-border-radius: 10px;
