@@ -40,9 +40,11 @@ public class Duke {
 
         /* This is the string in response to the user input **/
         String dukeResponse;
-
-        dukeResponse = parser.runCommand2(input, tasks, storage, ui);
-
+        try {
+            dukeResponse = parser.runCommand2(input, tasks, storage, ui);
+        } catch (DukeException e) {
+            dukeResponse = e.getMessage();
+        }
         return dukeResponse;
     }
 

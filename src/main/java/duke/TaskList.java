@@ -80,8 +80,11 @@ public class TaskList {
      * @param index The index of the to be deleted task
      * @return String representation of the task that is removed.
      */
-    public String deleteTaskWithResult(int index) {
+    public String deleteTaskWithResult(int index) throws DukeException {
         //Cache task for displaying.
+        if (index < 1 || index > tasks.size()) {
+            throw new DukeException("Task index out of my range!");
+        }
         Task t = tasks.get(index - 1);
         tasks.remove(index - 1);
         return t + " is now gone!";

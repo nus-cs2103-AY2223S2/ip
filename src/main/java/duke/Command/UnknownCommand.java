@@ -3,14 +3,14 @@ package duke.Command;
 import duke.Storage;
 import duke.TaskList;
 
-public class ListCommand extends Command {
+public class UnknownCommand extends Command {
 
-    public ListCommand() {
+    public UnknownCommand() {
     }
 
     @Override
     public String executeCommand(Storage storage, TaskList tasks) {
-        return tasks.returnTaskAsString();
+        return "Command Unsupported! Sorry :(";
     }
 
 }

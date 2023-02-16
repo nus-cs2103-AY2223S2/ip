@@ -24,7 +24,7 @@ public class Parser {
         return s.equalsIgnoreCase("bye");
     }
 
-    public String runCommand(String inputCommand, TaskList tasks, Storage storage, Ui ui) {
+    public String runCommand(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException{
         int selectedNum;
         String commandResponse;
         commandResponse = "";
@@ -88,7 +88,7 @@ public class Parser {
         return commandResponse;
     }
 
-    public String runCommand2(String inputCommand, TaskList tasks, Storage storage, Ui ui) {
+    public String runCommand2(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException {
         int selectedNum;
         String commandParams;
         String commandResponse;
@@ -103,38 +103,49 @@ public class Parser {
                 pendingCommand = new ListCommand();
                 break;
             case "todo":
-                commandParams = inputCommand.split(" ", 2)[1];
+                commandParams = getParams(inputCommand);
                 pendingCommand = new ToDoCommand(commandParams);
                 break;
             case "deadline":
-                commandParams = inputCommand.split(" ", 2)[1];
+                commandParams = getParams(inputCommand);
                 pendingCommand = new DeadlineCommand(commandParams);
                 break;
             case "event":
-                commandParams = inputCommand.split(" ", 2)[1];
+                commandParams = getParams(inputCommand);
                 pendingCommand = new EventCommand(commandParams);
                 break;
             case "mark":
-                commandParams = inputCommand.split(" ", 2)[1];
+                commandParams = getParams(inputCommand);
                 pendingCommand = new MarkCommand(commandParams);
                 break;
             case "unmark":
-                commandParams = inputCommand.split(" ", 2)[1];
+                commandParams = getParams(inputCommand);
                 pendingCommand = new UnmarkCommand(commandParams);
                 break;
             case "delete":
-                commandParams = inputCommand.split(" ", 2)[1];
+                commandParams = getParams(inputCommand);
                 pendingCommand = new DeleteCommand(commandParams);
                 break;
             case "search":
-                commandParams = inputCommand.split(" ", 2)[1];
+                commandParams = getParams(inputCommand);
                 pendingCommand = new SearchCommand(commandParams);
                 break;
             default:
-                pendingCommand = new ListCommand();
-                //add unsupporteed command here
+                pendingCommand = new UnknownCommand();
         }
         return pendingCommand.executeCommand(storage, tasks);
-//        return commandResponse;
+    }
+
+    private String getParams(String input) throws DukeException {
+        String[] inputArr;
+        String returnValue;
+
+        try {
+            inputArr = input.split(" ", 2);
+            returnValue = inputArr[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("There is no parameter specified!");
+        }
+        return returnValue;
     }
 }
