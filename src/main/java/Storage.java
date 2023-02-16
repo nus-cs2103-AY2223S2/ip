@@ -3,16 +3,27 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
+import java.nio.file.Paths;
 
-public class Save {
+public class Storage {
+
+    private final String filePath;
+    private final String filePathParent;
+
+    Storage(String filePath) {
+        this.filePath = filePath;
+        this.filePathParent = Paths.get(filePath).getParent().toString();
+    }
 
     public List<Task> loadTxtFile() throws IOException {
+
         List<Task> allTasks = new ArrayList<>();
-        File file3 = new File("./data/");
+
+        File file3 = new File(this.filePathParent);
         if (!file3.exists()) {
             file3.mkdir();
         }
-        File file = new File("./data/duke.txt");
+        File file = new File(this.filePath);
         if (file.exists()) {
             List<String> taskList = new ArrayList<>();
             FileReader file2 = new FileReader(file);
@@ -53,12 +64,12 @@ public class Save {
         return allTasks;
     }
 
-    public void saveListToFile(String command, Task task, List<Task> taskList) throws IOException {
-        File file3 = new File("./data/");
+    public void saveListToFile(String command, Task task, TaskList taskList) throws IOException {
+        File file3 = new File(this.filePathParent);
         if (!file3.exists()) {
             file3.mkdir();
         }
-        File file = new File("./data/duke.txt");
+        File file = new File(this.filePath);
         FileWriter file1 = new FileWriter(file, true);
         BufferedWriter buffer = new BufferedWriter(file1);
 
@@ -101,7 +112,7 @@ public class Save {
                         task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             }
             bufferedReader.readLine();
-            for (int i = taskIndex + 1; i <= taskList.size(); i++) {
+            for (int i = taskIndex + 1; i <= taskList.getNumberOfTask(); i++) {
                 unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
             }
             file.createNewFile();
@@ -130,7 +141,7 @@ public class Save {
                         task.getEventEndTime().format(dateTimeFormatter1) + "\n";
             }
             bufferedReader.readLine();
-            for (int i = taskIndex + 1; i <= taskList.size(); i++) {
+            for (int i = taskIndex + 1; i <= taskList.getNumberOfTask(); i++) {
                 unchangedTasks = unchangedTasks + bufferedReader.readLine() + "\n";
             }
             file.createNewFile();
@@ -147,7 +158,7 @@ public class Save {
                 undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
             }
             bufferedReader.readLine();
-            for (int i = taskIndex; i <= taskList.size(); i++) {
+            for (int i = taskIndex; i <= taskList.getNumberOfTask(); i++) {
                 undeletedTasks = undeletedTasks + bufferedReader.readLine() + "\n";
             }
             file.createNewFile();
