@@ -3,7 +3,6 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * This class deals with interactions with the user.
