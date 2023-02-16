@@ -85,6 +85,9 @@ public class TaskList {
      * @param array The array of tasks.
      */
     public static String displayList(ArrayList<Task> array) {
+        if (array.size() == 0) {
+            return "You have no tasks in your list.";
+        }
         return Ui.displayList(array);
     }
 
