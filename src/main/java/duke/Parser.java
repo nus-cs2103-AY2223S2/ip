@@ -10,7 +10,6 @@ import duke.Command.SearchCommand;
 import duke.Command.ToDoCommand;
 import duke.Command.UnknownCommand;
 import duke.Command.UnmarkCommand;
-import duke.ui.Ui;
 
 /**
  * This is the class that parses the command sent to Duke.
