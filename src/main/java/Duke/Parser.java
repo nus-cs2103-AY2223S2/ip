@@ -164,8 +164,8 @@ public class Parser {
 
 
                  } else if (instct.split(" ")[0].equals("todo")) {
-                     String description = instct.split(" ", 2)[1];
-                     return addTodo(description, listOfTasks);
+
+                     return addTodo(instct, listOfTasks);
 
                  } else if (instct.split(" ")[0].equals("deadline")) {
                      String temp = instct.split(" /by ")[1];
