@@ -50,8 +50,8 @@ public class Add implements Command {
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.strUntil(Parser.strParserIgnoreCase("/by")))
                 .thenIgnore(Parser.skipSpace())
-                .<Task>bind(s -> Parser.dateParser().bind(
-                        d -> Parser.retn(new Deadline(s, d))))
+                .<Task>bind(s -> Parser.dateParser()
+                        .bind(d -> Parser.retn(new Deadline(s, d))))
                 .overrideMsg(DEADLINE_FORMAT);
     }
 
@@ -66,11 +66,12 @@ public class Add implements Command {
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.strUntil(Parser.strParserIgnoreCase("/from")))
                 .thenIgnore(Parser.skipSpace())
-                .<Task>bind(s -> Parser.dateParser().thenIgnore(Parser.skipSpace())
+                .<Task>bind(s -> Parser.dateParser()
+                        .thenIgnore(Parser.skipSpace())
                         .thenIgnore(Parser.strParserIgnoreCase("/to"))
-                        .thenIgnore(Parser.skipSpace()).bind(
-                                df -> Parser.dateParser().bind(
-                                        dt -> Parser.retn(new Event(s, df, dt)))))
+                        .thenIgnore(Parser.skipSpace())
+                        .bind(df -> Parser.dateParser()
+                                .bind(dt -> Parser.retn(new Event(s, df, dt)))))
                 .overrideMsg(EVENT_FORMAT);
     }
 
@@ -80,8 +81,7 @@ public class Add implements Command {
      * @see Add
      */
     public static Parser<Command> parser() {
-        return todoParser()
-                .or(deadlineParser())
+        return todoParser().or(deadlineParser())
                 .or(eventParser())
                 .map(Add::new);
     }

@@ -43,10 +43,7 @@ public class DialogueBox extends HBox {
         HBox.setHgrow(dialogue, Priority.ALWAYS);
         displayPicture.setImage(img);
         double radius = displayPicture.getFitHeight() / 2;
-        Circle circleClip = new Circle(
-                radius,
-                radius,
-                radius);
+        Circle circleClip = new Circle(radius, radius, radius);
         displayPicture.setClip(circleClip);
     }
 
@@ -69,13 +66,15 @@ public class DialogueBox extends HBox {
     public static DialogueBox getBotDialogue(String text, Image img) {
         var db = new DialogueBox(text, img);
         db.flip();
-        db.dialogue.getStyleClass().add("label-bot");
+        db.dialogue.getStyleClass()
+                .add("label-bot");
         return db;
     }
 
     public static DialogueBox getErrorDialogue(String text, Image img) {
         var db = getBotDialogue(text, img);
-        db.dialogue.getStyleClass().add("label-error");
+        db.dialogue.getStyleClass()
+                .add("label-error");
         return db;
     }
 

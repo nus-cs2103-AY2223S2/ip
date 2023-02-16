@@ -226,15 +226,16 @@ public class Parser<T> {
      * @return Parser that can parse dates
      */
     public static Parser<LocalDate> dateParser() {
-        return new Parser<>(inp -> take(10).parse(inp).match(
-                pr -> {
-                    try {
-                        return Result.ok(LocalDate.parse(pr.first()), pr.second());
-                    } catch (DateTimeParseException ex) {
-                        return Result.error("Failed to parse date.");
-                    }
-                },
-                Result::error));
+        return new Parser<>(inp -> take(10).parse(inp)
+                .match(
+                        pr -> {
+                            try {
+                                return Result.ok(LocalDate.parse(pr.first()), pr.second());
+                            } catch (DateTimeParseException ex) {
+                                return Result.error("Failed to parse date.");
+                            }
+                        },
+                        Result::error));
     }
 
     /**
@@ -256,9 +257,11 @@ public class Parser<T> {
      * @return New parser
      */
     public <U> Parser<U> bind(Function<T, Parser<U>> f) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> f.apply(pr.first()).parse(pr.second()),
-                Result::error));
+        return new Parser<>(inp -> this.parse(inp)
+                .match(
+                        pr -> f.apply(pr.first())
+                                .parse(pr.second()),
+                        Result::error));
     }
 
     /**
@@ -268,9 +271,10 @@ public class Parser<T> {
      * @return New parser
      */
     public <U> Parser<U> ignoreThen(Parser<U> p) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> p.parse(pr.second()),
-                Result::error));
+        return new Parser<>(inp -> this.parse(inp)
+                .match(
+                        pr -> p.parse(pr.second()),
+                        Result::error));
     }
 
     /**
@@ -280,11 +284,13 @@ public class Parser<T> {
      * @return New parser
      */
     public <U> Parser<T> thenIgnore(Parser<U> p) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> p.parse(pr.second()).match(
-                        pr2 -> Result.ok(pr.first(), pr2.second()),
-                        Result::error),
-                Result::error));
+        return new Parser<>(inp -> this.parse(inp)
+                .match(
+                        pr -> p.parse(pr.second())
+                                .match(
+                                        pr2 -> Result.ok(pr.first(), pr2.second()),
+                                        Result::error),
+                        Result::error));
     }
 
     /**
@@ -294,11 +300,13 @@ public class Parser<T> {
      * @return New parser
      */
     public Parser<T> or(Parser<T> p) {
-        return new Parser<>(inp -> this.parse(inp).match(
-                pr -> Result.ok(pr.first(), pr.second()),
-                msg -> p.parse(inp).match(
+        return new Parser<>(inp -> this.parse(inp)
+                .match(
                         pr -> Result.ok(pr.first(), pr.second()),
-                        msg2 -> Result.error(msg + '\n' + msg2))));
+                        msg -> p.parse(inp)
+                                .match(
+                                        pr -> Result.ok(pr.first(), pr.second()),
+                                        msg2 -> Result.error(msg + '\n' + msg2))));
     }
 
     /**
@@ -319,7 +327,8 @@ public class Parser<T> {
                         msg -> Result.ok(Stream.of(), inp));
             }
         };
-        return new Parser<>(inp -> f.apply(inp).map(s -> s.collect(Collectors.toList())));
+        return new Parser<>(inp -> f.apply(inp)
+                .map(s -> s.collect(Collectors.toList())));
 
     }
 
@@ -334,17 +343,19 @@ public class Parser<T> {
         Function<String, Result<Stream<T>>> f = new Function<>() {
             @Override
             public Result<Stream<T>> apply(String inp) {
-                return p.parse(inp).match(
-                        pr -> Result.ok(Stream.of(), pr.second()),
-                        e -> parse(inp).match(
-                                pr -> {
-                                    Result<Stream<T>> prev = this.apply(pr.second());
-                                    return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
-                                },
-                                msg -> Result.error(String.format("Ending Flag: %s", e))));
+                return p.parse(inp)
+                        .match(
+                                pr -> Result.ok(Stream.of(), pr.second()),
+                                e -> parse(inp).match(
+                                        pr -> {
+                                            Result<Stream<T>> prev = this.apply(pr.second());
+                                            return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
+                                        },
+                                        msg -> Result.error(String.format("Ending Flag: %s", e))));
             }
         };
-        return new Parser<>(inp -> f.apply(inp).map(s -> s.collect(Collectors.toList())));
+        return new Parser<>(inp -> f.apply(inp)
+                .map(s -> s.collect(Collectors.toList())));
     }
 
     /**
@@ -373,7 +384,8 @@ public class Parser<T> {
      * @param errorMsg Message to replace with
      */
     public Parser<T> overrideMsg(String errorMsg) {
-        return new Parser<>(inp -> this.parse(inp).overrideMsg(errorMsg));
+        return new Parser<>(inp -> this.parse(inp)
+                .overrideMsg(errorMsg));
     }
 
     /**
@@ -382,7 +394,8 @@ public class Parser<T> {
      * @see Result#filterOrElse(Predicate, String)
      */
     public Parser<T> satisfyOrElse(Predicate<T> condition, String failMsg) {
-        return new Parser<>(inp -> this.parse(inp).filterOrElse(condition, failMsg));
+        return new Parser<>(inp -> this.parse(inp)
+                .filterOrElse(condition, failMsg));
     }
 
     /**
@@ -391,6 +404,7 @@ public class Parser<T> {
      * @see Result#map(Function)
      */
     public <U> Parser<U> map(Function<? super T, ? extends U> f) {
-        return new Parser<>(inp -> this.parse(inp).map(f));
+        return new Parser<>(inp -> this.parse(inp)
+                .map(f));
     }
 }

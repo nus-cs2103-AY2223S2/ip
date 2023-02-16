@@ -46,45 +46,45 @@ public class Help implements Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage<TaskList> storage) {
         switch (command) {
-            case "todo":
-                ui.showReply(Add.HELP_MSG_TODO);
-                break;
-            case "deadline":
-                ui.showReply(Add.HELP_MSG_DEADLINE);
-                break;
-            case "event":
-                ui.showReply(Add.HELP_MSG_EVENT);
-                break;
-            case "delete":
-                ui.showReply(Delete.HELP_MSG);
-                break;
-            case "bye":
-                ui.showReply(Exit.HELP_MSG);
-                break;
-            case "find":
-                ui.showReply(Find.HELP_MSG);
-                break;
-            case "findbydate":
-                ui.showReply(FindByDate.HELP_MSG);
-                break;
-            case "list":
-                ui.showReply(List.HELP_MSG);
-                break;
-            case "mark":
-                ui.showReply(Mark.HELP_MSG);
-                break;
-            case "unmark":
-                ui.showReply(Unmark.HELP_MSG);
-                break;
-            case "sort":
-                ui.showReply(Sort.HELP_MSG);
-                break;
-            case "all":
-                ui.showReply(COMMAND_LST);
-                break;
-            default:
-                ui.showError(ERROR);
-                break;
+        case "todo":
+            ui.showReply(Add.HELP_MSG_TODO);
+            break;
+        case "deadline":
+            ui.showReply(Add.HELP_MSG_DEADLINE);
+            break;
+        case "event":
+            ui.showReply(Add.HELP_MSG_EVENT);
+            break;
+        case "delete":
+            ui.showReply(Delete.HELP_MSG);
+            break;
+        case "bye":
+            ui.showReply(Exit.HELP_MSG);
+            break;
+        case "find":
+            ui.showReply(Find.HELP_MSG);
+            break;
+        case "findbydate":
+            ui.showReply(FindByDate.HELP_MSG);
+            break;
+        case "list":
+            ui.showReply(List.HELP_MSG);
+            break;
+        case "mark":
+            ui.showReply(Mark.HELP_MSG);
+            break;
+        case "unmark":
+            ui.showReply(Unmark.HELP_MSG);
+            break;
+        case "sort":
+            ui.showReply(Sort.HELP_MSG);
+            break;
+        case "all":
+            ui.showReply(COMMAND_LST);
+            break;
+        default:
+            ui.showError(ERROR);
+            break;
         }
     }
 }

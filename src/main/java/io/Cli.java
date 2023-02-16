@@ -41,18 +41,19 @@ public class Cli implements Ui {
         System.out.println(LOGO);
         this.scanner = new Scanner(System.in);
         this.storage = storage;
-        this.taskList = this.storage.load().match(
-                lst -> lst,
-                error -> {
-                    switch (error) {
-                        case IO_ERROR:
-                        case CAST_ERROR:
-                            showReply("Error loading tasks, tasks have been reset.");
-                            return new TaskList();
-                        default:
-                            return new TaskList();
-                    }
-                });
+        this.taskList = this.storage.load()
+                .match(
+                        lst -> lst,
+                        error -> {
+                            switch (error) {
+                            case IO_ERROR:
+                            case CAST_ERROR:
+                                showReply("Error loading tasks, tasks have been reset.");
+                                return new TaskList();
+                            default:
+                                return new TaskList();
+                            }
+                        });
         this.showReply(String.format("Current tasks: %s", this.taskList.toString()));
         this.isExit = false;
     }
@@ -72,8 +73,8 @@ public class Cli implements Ui {
      * @return Stream of lines.
      */
     private static Stream<String> split(String line) {
-        return line.length() <= MAX_LINE_LENGTH ? Stream.of(line)
-                : Stream.concat(Stream.of(line.substring(0, MAX_LINE_LENGTH + 1)),
+        return line.length() <= MAX_LINE_LENGTH ? Stream.of(line) : Stream.concat(
+                Stream.of(line.substring(0, MAX_LINE_LENGTH + 1)),
                 split(line.substring(MAX_LINE_LENGTH + 1)));
     }
 
@@ -88,7 +89,8 @@ public class Cli implements Ui {
                 .collect(Collectors.toList());
         IntStream.range(0, lst.size())
                 .mapToObj(i -> (i == 0 ? String.format(OUTPUT_FORMAT, "D:  ", lst.get(i))
-                        : String.format(OUTPUT_FORMAT, " ", lst.get(i))))
+                        : String.format(OUTPUT_FORMAT,
+                        " ", lst.get(i))))
                 .forEach(System.out::println);
         System.out.println();
     }
@@ -107,9 +109,9 @@ public class Cli implements Ui {
     private void run() {
         while (!isExit) {
             String userInput = scanner.nextLine();
-            Command command = Command.parser().parse(userInput).match(
-                    Pair::first,
-                    Error::of);
+            Command command = Command.parser()
+                    .parse(userInput)
+                    .match(Pair::first, Error::of);
             command.execute(taskList, this, storage);
             isExit = command.isExit();
         }

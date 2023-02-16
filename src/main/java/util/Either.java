@@ -18,7 +18,8 @@ public interface Either<L, R> {
 
             @Override
             public String toString() {
-                return String.format("Left(%s)", this.left.toString());
+                return String.format("Left(%s)",
+                        this.left.toString());
             }
 
             @Override
@@ -43,9 +44,10 @@ public interface Either<L, R> {
 
             @Override
             public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, ? extends R>> f) {
-                return f.apply(this.left).match(
-                        Either::left,
-                        Either::right);
+                return f.apply(this.left)
+                        .match(
+                                Either::left,
+                                Either::right);
             }
 
             @Override
@@ -66,7 +68,8 @@ public interface Either<L, R> {
 
             @Override
             public String toString() {
-                return String.format("Right(%s)", this.right.toString());
+                return String.format("Right(%s)",
+                        this.right.toString());
             }
 
             @Override

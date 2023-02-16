@@ -18,8 +18,10 @@ import util.Pair;
  */
 public class MainWindow extends AnchorPane implements Ui {
     private static final String WELCOME = "Hello. My name is D.\nI am a simple task manager, designed to serve humanity.";
-    private final Image userImg = new Image(this.getClass().getResourceAsStream("/images/default_user_pic.png"));
-    private final Image dImg = new Image(this.getClass().getResourceAsStream("/images/cyborg_girl.png"));
+    private final Image userImg = new Image(this.getClass()
+            .getResourceAsStream("/images/default_user_pic.png"));
+    private final Image dImg = new Image(this.getClass()
+            .getResourceAsStream("/images/cyborg_girl.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -41,7 +43,8 @@ public class MainWindow extends AnchorPane implements Ui {
         assert (userInput != null);
         assert (sendButton != null);
 
-        dialogueContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(scrollPane.getVmax()));
+        dialogueContainer.heightProperty()
+                .addListener(observable -> scrollPane.setVvalue(scrollPane.getVmax()));
         showReply(WELCOME);
     }
 
@@ -60,13 +63,13 @@ public class MainWindow extends AnchorPane implements Ui {
         if (userText.isEmpty()) {
             return;
         }
-        dialogueContainer.getChildren().addAll(
-                DialogueBox.getUserDialogue(userText, userImg));
+        dialogueContainer.getChildren()
+                .addAll(DialogueBox.getUserDialogue(userText, userImg));
         userInput.clear();
 
-        Command command = Command.parser().parse(userText).match(
-                Pair::first,
-                Error::of);
+        Command command = Command.parser()
+                .parse(userText)
+                .match(Pair::first, Error::of);
         command.execute(gui.getTaskList(), this, gui.getStorage());
         if (command.isExit()) {
             Platform.exit();
@@ -79,12 +82,14 @@ public class MainWindow extends AnchorPane implements Ui {
      */
     @Override
     public void showReply(String msg) {
-        dialogueContainer.getChildren().addAll(DialogueBox.getBotDialogue(msg, dImg));
+        dialogueContainer.getChildren()
+                .addAll(DialogueBox.getBotDialogue(msg, dImg));
     }
 
     @Override
     public void showError(String errorMsg) {
-        dialogueContainer.getChildren().addAll(DialogueBox.getErrorDialogue(errorMsg, dImg));
+        dialogueContainer.getChildren()
+                .addAll(DialogueBox.getErrorDialogue(errorMsg, dImg));
     }
 
     /**

@@ -9,7 +9,10 @@ import java.util.stream.Stream;
  */
 public class Util {
 
-    private static final List<Character> WS = List.of(' ', '\n', '\t', '\r');
+    private static final List<Character> WS = List.of(' ',
+            '\n',
+            '\t',
+            '\r');
 
     private Util() {
     }
@@ -57,7 +60,8 @@ public class Util {
             return "";
         }
 
-        return str.substring(start, end);
+        return str.substring(start,
+                end);
     }
 
     /**
@@ -67,7 +71,10 @@ public class Util {
      * @return Resultant string
      */
     public static String listToString(List<Character> s) {
-        return s.stream().map(Object::toString).reduce("", (a, b) -> a + b);
+        return s.stream()
+                .map(Object::toString)
+                .reduce("",
+                        (a, b) -> a + b);
     }
 
     /**
@@ -79,7 +86,8 @@ public class Util {
      */
     public static String join(String delimiter, String... lines) {
         return Stream.of(lines)
-                .reduce("", (a, b) -> a + delimiter + b)
+                .reduce("",
+                        (a, b) -> a + delimiter + b)
                 .substring(delimiter.length());
     }
 

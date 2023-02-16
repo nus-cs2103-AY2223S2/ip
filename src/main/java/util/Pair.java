@@ -35,6 +35,8 @@ public class Pair<T, U> {
 
     @Override
     public String toString() {
-        return String.format("<%s, %s>", this.first.toString(), this.second.toString());
+        return String.format("<%s, %s>",
+                this.first.toString(),
+                this.second.toString());
     }
 }

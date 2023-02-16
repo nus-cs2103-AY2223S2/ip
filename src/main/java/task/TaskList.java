@@ -72,7 +72,8 @@ public class TaskList implements Serializable {
      */
     public void markTask(int number) {
         int index = number - 1;
-        this.lst.set(index, this.lst.get(index).markDone());
+        this.lst.set(index, this.lst.get(index)
+                .markDone());
     }
 
     /**
@@ -82,7 +83,8 @@ public class TaskList implements Serializable {
      */
     public void unmarkTask(int number) {
         int index = number - 1;
-        this.lst.set(index, this.lst.get(index).markNotDone());
+        this.lst.set(index, this.lst.get(index)
+                .markNotDone());
     }
 
     /**
@@ -104,7 +106,8 @@ public class TaskList implements Serializable {
      */
     public String findByDate(LocalDate date) {
         String res = IntStream.range(0, this.size())
-                .filter(i -> this.lst.get(i).hasDate(date))
+                .filter(i -> this.lst.get(i)
+                        .hasDate(date))
                 .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
                 .reduce("", (a, b) -> a + b);
         if (res.isEmpty()) {
@@ -121,7 +124,8 @@ public class TaskList implements Serializable {
      */
     public String findByKeywords(List<String> keywords) {
         String res = IntStream.range(0, this.size())
-                .filter(i -> this.lst.get(i).hasKeywords(keywords))
+                .filter(i -> this.lst.get(i)
+                        .hasKeywords(keywords))
                 .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
                 .reduce("", (a, b) -> a + b);
         if (res.isEmpty()) {
@@ -137,13 +141,17 @@ public class TaskList implements Serializable {
     public void sort() {
         List<Integer> indexesToSort = IntStream.range(0, this.size())
                 .mapToObj(i -> new Pair<>(i, this.lst.get(i)))
-                .filter(pr -> pr.second().getDate().isPresent())
+                .filter(pr -> pr.second()
+                        .getDate()
+                        .isPresent())
                 .map(Pair::first)
                 .collect(Collectors.toList());
 
         List<Task> sortedFilteredTasks = this.lst.stream()
-                .filter(task -> task.getDate().isPresent())
-                .sorted(Comparator.comparing(a -> a.getDate().get()))
+                .filter(task -> task.getDate()
+                        .isPresent())
+                .sorted(Comparator.comparing(a -> a.getDate()
+                        .get()))
                 .collect(Collectors.toList());
 
         IntStream.range(0, indexesToSort.size())

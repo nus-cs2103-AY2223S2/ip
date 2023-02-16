@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
  */
 public class Find implements Command {
     private static final String FORMAT = "find 'keywords'";
-    public static final String HELP_MSG = "Finds tasks from list with matching keywords.\nFormat: " +
-            FORMAT;
+    public static final String HELP_MSG = "Finds tasks from list with matching keywords.\nFormat: "
+            + FORMAT;
     private static final String SUCCESS = "Tasks found: %s";
     final List<String> keywords;
 
@@ -28,8 +28,11 @@ public class Find implements Command {
     public static Parser<Command> parser() {
         return Parser.skipSpace()
                 .ignoreThen(Parser.strParserIgnoreCase("find"))
-                .ignoreThen(Parser.nextStr().many())
-                .map(lst -> lst.stream().map(String::toLowerCase).collect(Collectors.toList()))
+                .ignoreThen(Parser.nextStr()
+                        .many())
+                .map(lst -> lst.stream()
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toList()))
                 .<Command>map(Find::new)
                 .overrideMsg(FORMAT);
     }

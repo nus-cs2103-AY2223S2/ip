@@ -50,7 +50,8 @@ public abstract class Task implements Serializable {
      * @param keywords List of keywords
      */
     public boolean hasKeywords(List<String> keywords) {
-        Set<String> descKeywords = Util.splitWhitespace(desc).stream()
+        Set<String> descKeywords = Util.splitWhitespace(desc)
+                .stream()
                 .map(String::toLowerCase)
                 .collect(Collectors.toCollection(HashSet::new));
 
