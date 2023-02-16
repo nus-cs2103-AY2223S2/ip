@@ -5,8 +5,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -20,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private VBox dialogContainer;
     @FXML
-    private TextField userInput;
+    private TextArea userInput;
     @FXML
     private Button sendButton;
 
@@ -31,6 +32,15 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        userInput.setWrapText(true);
+        userInput.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                handleUserInput();
+            }
+        });
+
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -39,6 +49,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getPreviousTaskResponse(), dukeImage)
         );
+
         userInput.clear();
     }
 
@@ -55,6 +66,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
         userInput.clear();
 
         if (duke.getIsEnd()) {
