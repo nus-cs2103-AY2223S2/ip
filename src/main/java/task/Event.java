@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +14,14 @@ public class Event extends Task {
     private final LocalDate from;
     private final LocalDate to;
 
+    /**
+     * Create an Event Task
+     *
+     * @param description decription of a task.
+     * @param from starting time of the task
+     * @param to ending time of the task
+     * @param isDone 0 represents the task is not done and 1 represents the task is done.
+     */
     public Event(String description, LocalDate from, LocalDate to, Integer isDone) {
         super(description, isDone);
         this.isDone = isDone;

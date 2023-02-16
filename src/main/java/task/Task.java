@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 /**
  * Task is an object that contains all information about a task
@@ -21,10 +21,14 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
-     * return the description of a task.
+     * return the description of a task
      *
-     * @return the description of a task.
+     * @return the description of a task
      */
     public String getDes() {
         return description;
@@ -33,11 +37,12 @@ public class Task {
     /**
      * Return an icon representation of whether a task is done
      *
-     * @return an icon of "[ ]" when the task is not done and "[X]" otherwise .
+     * @return an icon of "[ ]" when the task is not done and "[X]" otherwise
      */
     public String getStatusIcon() {
         return (isDone == 1 ? "[X]" : "[ ]");
     }
+
     /**
      * Mark a task as done
      */
