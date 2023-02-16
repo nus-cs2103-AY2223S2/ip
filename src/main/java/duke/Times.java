@@ -31,6 +31,6 @@ public class Times {
 
     @Override
     public String toString() {
-        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+        return d.format(DateTimeFormatter.ofPattern("MMM / d / yyyy, hh:mm a"));
     }
 }

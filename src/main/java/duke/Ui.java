@@ -28,7 +28,7 @@ public class Ui {
      * Greets to user
      */
     public String sayHello() {
-        return "Hello! I'm Luminus\nWhat can I do for you?\n";
+        return "Hello! I'm Duke\nWhat can I do for you?\n";
     }
 
     public String sayBye() {

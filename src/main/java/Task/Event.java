@@ -30,7 +30,7 @@ public class Event extends Task {
     /**
      * Creates event object
      * Format: event {description} /from {time} /to {time}
-     * Example: event read book /from 2019-10-15 1530 /to 2020-12-11 1200
+     * Example: event carnival /from 2019-10-15 1530 /to 2020-12-11 1200
      * @param input -> Input Chat which starts with "event"
      * @return Event object
      * @throws DukeException if format of event task is wrong.
