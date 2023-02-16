@@ -1,5 +1,7 @@
 package graphics;
 
+import java.time.temporal.TemporalAccessor;
+
 import graphics.TaskView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import javafx.stage.Stage;
 import saturday.Saturday;
 import saturday.collections.TaskList;
 import saturday.models.Task;
+import saturday.utilities.DateTimeParser;
 
 public class Controller {
     @FXML
@@ -40,9 +43,10 @@ public class Controller {
         try {
             taskListContainer.getChildren().clear();
             for (Task task : taskList) {
-                TaskView t = TaskView.getTaskView(task);
-                taskListContainer.getChildren().add(t);
-                System.out.println("yo");
+                if (task.isDisplayed()) {
+                    TaskView t = TaskView.getTaskView(task);
+                    taskListContainer.getChildren().add(t);
+                }
             }
         } catch (Exception e) {
             System.out.println("ERROR");

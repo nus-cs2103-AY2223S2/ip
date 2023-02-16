@@ -1,12 +1,9 @@
 package saturday;
 
-import java.util.Scanner;
-
 import saturday.collections.TaskList;
 import saturday.command.Command;
 import saturday.exceptions.SaturdayException;
 import saturday.utilities.Storage;
-import saturday.utilities.Ui;
 /**
  * The main class for the Saturday application.
  * This class initializes a task list and storage for the application, and handles the

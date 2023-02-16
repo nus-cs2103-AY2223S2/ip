@@ -102,9 +102,8 @@ public class TaskList extends ArrayList<Task> {
      * Returns a TaskList containing all tasks that are on the specified date
      *
      * @param date date to filter tasks by
-     * @return TaskList of tasks on the specified date
      */
-    public TaskList getTaskListOnDate(String date) {
+    public void getTaskListOnDate(String date) {
         TemporalAccessor inputDate = DateTimeParser.parseDate(date);
         TaskList taskListOnDate = new TaskList();
         if (inputDate instanceof LocalDate) {
@@ -113,11 +112,15 @@ public class TaskList extends ArrayList<Task> {
                     TemporalAccessor deadline = ((Deadline) task).getDeadline();
                     if (deadline instanceof LocalDate) {
                         if (((LocalDate) inputDate).isEqual((LocalDate) deadline)) {
-                            taskListOnDate.add(task);
+                            task.display();
+                        } else {
+                            task.unDisplay();
                         }
                     } else if (deadline instanceof LocalDateTime) {
                         if (((LocalDate) inputDate).isEqual(((LocalDateTime) deadline).toLocalDate())) {
-                            taskListOnDate.add(task);
+                            task.display();
+                        } else {
+                            task.unDisplay();
                         }
                     }
                 } else if (task instanceof Event) {
@@ -126,18 +129,23 @@ public class TaskList extends ArrayList<Task> {
                     if (from instanceof LocalDate && to instanceof LocalDate) {
                         if (((LocalDate) inputDate).isEqual((LocalDate) from)
                                 || ((LocalDate) inputDate).isEqual((LocalDate) to)) {
-                            taskListOnDate.add(task);
+                            task.display();
+                        } else {
+                            task.unDisplay();
                         }
                     } else if (from instanceof LocalDateTime && to instanceof LocalDateTime) {
                         if (((LocalDate) inputDate).isEqual(((LocalDateTime) from).toLocalDate())
                                 || ((LocalDate) inputDate).isEqual(((LocalDateTime) to).toLocalDate())) {
-                            taskListOnDate.add(task);
+                            task.display();
+                        } else {
+                            task.unDisplay();
                         }
                     }
+                } else {
+                    task.unDisplay();
                 }
             }
         }
-        return taskListOnDate;
     }
 
     /**
@@ -157,16 +165,25 @@ public class TaskList extends ArrayList<Task> {
      * @param query Substring to query
      * @return TaskList of tasks involving the String query
      */
-    public TaskList find(String query) {
-        TaskList queriedTaskList = new TaskList();
+    public void find(String query) {
         Iterator<Task> iterator = this.iterator();
         while (iterator.hasNext()) {
             Task task = iterator.next();
             if (task.contains(query)) {
-                queriedTaskList.add(task);
+                task.display();
+            } else {
+                task.unDisplay();
             }
         }
-        return queriedTaskList;
+    }
+
+    /**
+     * Sets all tasks in the TaskList to be displayed.
+     */
+    public void setAllAsDisplayed() {
+        for (Task task : this) {
+            task.display();
+        }
     }
 
     /**

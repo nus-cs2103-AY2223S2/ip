@@ -1,6 +1,5 @@
 package saturday.command;
 
-import saturday.Saturday;
 import saturday.collections.TaskList;
 import saturday.exceptions.SaturdayException;
 import saturday.models.Deadline;
@@ -77,12 +76,12 @@ public enum Command {
         public String execute(TaskList taskList, String args) {
             int on = args.indexOf("/on");
             if (args.equals("list")) {
-                return "Here are the tasks in your list:\n\t" + taskList.toString();
+                taskList.setAllAsDisplayed();
+                return "Here are the tasks in your list";
             } else if (on != -1) {
                 String date = args.substring(on + 4);
-                TaskList taskListOnDate = taskList.getTaskListOnDate(date);
-                return "Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date))
-                        + "\n\t" + taskListOnDate.toString();
+                taskList.getTaskListOnDate(date);
+                return "Here are the tasks on " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date));
             } else {
                 throw new SaturdayException("OOPS!!! Input a valid date to check your list against");
             }
@@ -160,12 +159,12 @@ public enum Command {
         @Override
         public String execute(TaskList taskList, String args) {
             int space = args.indexOf(" ");
-            if (space != 1) {
+            if (space == -1) {
                 throw new SaturdayException("OOPS!!! What is it you're trying to find?");
             }
             String query = args.substring(args.indexOf(" ") + 1);
-            TaskList queriedTaskList = taskList.find(query);
-            return "Here are the tasks in your list:\n\t" + queriedTaskList.toString();
+            taskList.find(query);
+            return "Here are the tasks in your query";
         }
     },
     /**

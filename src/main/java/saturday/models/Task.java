@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
     private int index;
     private boolean isDone;
+    private boolean isDisplayed;
     private String description;
 
     /**
@@ -21,6 +22,7 @@ public class Task implements Serializable {
     public Task(int index, String description) {
         this.index = index;
         this.isDone = false;
+        this.isDisplayed = true;
         this.description = description;
     }
 
@@ -65,6 +67,26 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
+    /**
+     * Display the task.
+     */
+    public void display() {
+        this.isDisplayed = true;
+    }
+
+    /**
+     * Un display the task.
+     */
+    public void unDisplay() {
+        this.isDisplayed = false;
+    }
+
+    /**
+     * Returns whether the task is being displayed or not.
+     */
+    public boolean isDisplayed() {
+        return this.isDisplayed;
+    }
 
     public boolean contains(String query) {
         return this.description.contains(query);

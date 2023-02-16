@@ -10,26 +10,23 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 2em;" stylesheets="@../values/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.Controller">
     <children>
-        <BorderPane prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: #352f44; -fx-background-radius: 1em;" stylesheets="@../values/style.css">
+        <BorderPane prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 1em;" styleClass="background-color" stylesheets="@../values/style.css">
             <center>
                 <BorderPane prefHeight="600.0" prefWidth="520.0" style="-fx-background-color: #FBFCFC; -fx-background-radius: 1em;" BorderPane.alignment="CENTER">
                     <top>
                         <Pane prefHeight="125.0" prefWidth="520.0" style="-fx-background-radius: 1em;" BorderPane.alignment="CENTER">
                             <children>
-                                <Label fx:id="lblName1" layoutX="45.0" layoutY="37.0" text="Your Dashboard" textFill="#352f44">
+                                <Label fx:id="lblName1" layoutX="254.0" layoutY="46.0" text="Dashboard" textFill="#352f44">
                                     <font>
-                                        <Font size="28.0" />
+                                        <Font name="System Bold" size="40.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblGreeting1" layoutX="55.0" layoutY="75.0" text="Some lorem ipsum and add you description here" textFill="#9a9a9a">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
                         <Line endX="417.0" endY="-1.0" layoutX="276.0" layoutY="126.0" startX="-276.0" startY="-1.0" />
                             </children>
                         </Pane>
@@ -39,7 +36,7 @@
                             <center>
                                 <ScrollPane prefHeight="545.0" prefWidth="688.0" style="-fx-background-color: #FBFCFC; -fx-background-radius: 1em;" styleClass="transparent">
                                     <content>
-                                        <VBox fx:id="taskListContainer" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="675.0" styleClass="transparent" stylesheets="@../values/style.css">
+                                        <VBox fx:id="taskListContainer" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="690.0" styleClass="transparent" stylesheets="@../values/style.css">
                                             <padding>
                                                 <Insets bottom="10.0" top="10.0" />
                                             </padding>
@@ -70,41 +67,31 @@
                <top>
                       <Pane prefHeight="398.0" prefWidth="497.0" BorderPane.alignment="CENTER">
                           <children>
-                              <TextField fx:id="commandField" layoutX="45.0" layoutY="357.0" onAction="#handleCommand" prefHeight="34.0" prefWidth="393.0" promptText="Enter command" style="-fx-background-color: #989AAD; -fx-background-radius: 1em;" styleClass="text-input">
-                                  <padding>
-                                      <Insets left="15.0" />
-                                  </padding>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                              </TextField>
-                              <Label fx:id="lblName" layoutX="49.0" layoutY="73.0" text="Hi! It's Saturday" textFill="#fbfcfc">
+                              <Label fx:id="lblName" layoutX="47.0" layoutY="63.0" text="Hi! It's Saturday" textFill="#fbfcfc">
                                   <font>
-                                      <Font name="System Font" size="36.0" />
+                                      <Font size="44.0" />
                                   </font>
                               </Label>
-                              <Label fx:id="lblGreeting" layoutX="59.0" layoutY="127.0" text="Welcome back to your workspace, you've got some work to do..." textFill="#9a9a9a">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
                               <Button fx:id="exitButton" alignment="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleExitButtonAction" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: #989AAD; -fx-background-radius: 1em;" text="X" textAlignment="CENTER" textFill="#cdcdcd">
                            <font>
                               <Font name="Apple Braille" size="13.0" />
                            </font>
                         </Button>
-                        <Label fx:id="lblName2" layoutX="47.0" layoutY="309.0" text="How can I help you?" textFill="#fbfcfc">
+                        <Label fx:id="lblName2" layoutX="49.0" layoutY="125.0" text="How can I help you?" textFill="#cdcdcd">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
+                        <Circle fill="#e4a7eb33" layoutX="249.0" layoutY="306.0" radius="78.0" stroke="#72158f00" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Circle fill="#e4a7eb4d" layoutX="249.0" layoutY="306.0" radius="57.0" stroke="#72158f00" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Circle fill="#e8e8e866" layoutX="249.0" layoutY="306.0" radius="32.0" stroke="#72158f00" strokeType="INSIDE" strokeWidth="0.0" />
                           </children>
                       </Pane>
                </top>
-               <center>
-                  <Pane BorderPane.alignment="CENTER">
+               <bottom>
+                  <Pane prefHeight="272.0" prefWidth="497.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="responseField" layoutX="59.0" layoutY="221.0" minWidth="60.0" style="-fx-background-color: #FBFCFC;" styleClass="rcorners1" stylesheets="@../values/style.css" text="..." textFill="#352f44">
+                        <Label fx:id="responseField" alignment="TOP_LEFT" layoutX="52.0" layoutY="86.0" minWidth="60.0" style="-fx-background-color: #FBFCFC;" styleClass="rcorners1" stylesheets="@../values/style.css" textFill="#352f44">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -112,9 +99,17 @@
                               <Insets bottom="12.0" left="16.0" right="16.0" top="12.0" />
                            </padding>
                         </Label>
+                              <TextField fx:id="commandField" layoutX="52.0" layoutY="30.0" onAction="#handleCommand" prefHeight="34.0" prefWidth="393.0" promptText="Enter command" style="-fx-background-color: #989AAD; -fx-background-radius: 1em;" styleClass="text-input">
+                                  <padding>
+                                      <Insets left="15.0" />
+                                  </padding>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                              </TextField>
                      </children>
                   </Pane>
-               </center>
+               </bottom>
             </BorderPane>
             </left>
             <padding>

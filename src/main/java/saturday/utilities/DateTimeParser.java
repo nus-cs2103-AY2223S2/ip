@@ -71,9 +71,9 @@ public class DateTimeParser {
         String result;
         DateTimeFormatter formatter;
         if (dateTime instanceof LocalDate) {
-            formatter = DateTimeFormatter.ofPattern("dd MMM yy");
+            formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         } else {
-            formatter = DateTimeFormatter.ofPattern("dd MMM yy hh:mm a");
+            formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
         }
         result = formatter.format(dateTime);
         return result;
