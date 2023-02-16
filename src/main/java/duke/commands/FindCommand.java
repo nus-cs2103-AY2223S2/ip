@@ -35,8 +35,7 @@ public class FindCommand extends Command {
     public String execute(TaskList list, Storage store) throws DukeException {
         String response = "Here are the matching tasks in your list:\n";
         if (list.size() == 0) {
-            response += "OOPS!!! Your list is empty.";
-            return response;
+            return "Uh-oh, your list is empty.";
         }
         List<Task> filterList = list.stream().filter(x -> x.getName().indexOf(targetName) >= 0)
                 .collect(Collectors.toList());
@@ -51,7 +50,7 @@ public class FindCommand extends Command {
             }
         }
         if (count == 0) {
-            response += "OOPS!!! There are no matching tasks in your list.";
+            return "Uh-oh, I can't find any matching task in your list.";
         }
         return response;
     }

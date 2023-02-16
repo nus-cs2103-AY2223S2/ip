@@ -33,7 +33,7 @@ public class MarkCommand extends Command {
         }
         list.stream().filter(x -> list.indexOf(x) == markNumber - 1).forEach(y -> y.setStatus(true));
         store.save(list);
-        String response = "Nice! I've marked this task as done:\n";
+        String response = "Okay, I've marked this task as done:\n";
         response += list.get(markNumber - 1).toString();
         return response;
     }

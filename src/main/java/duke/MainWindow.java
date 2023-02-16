@@ -30,6 +30,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greeting = "Greetings, Human. I am Space Lin, goddess of servant universe. Tell me what you need.";
+        Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+        String style = "-fx-font-size: 12pt;\n" +
+                "    -fx-font-family: \"Helvetica\";\n" +
+                "    -fx-text-fill: black;\n" +
+                "    -fx-background-color: #e9967a;\n" +
+                "    -fx-font-style: normal;";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
     }
 
     public void setDuke(Duke d) {

@@ -18,8 +18,7 @@ public class ListCommand extends Command {
     public String execute(TaskList list, Storage store) {
         String response = "Here are the tasks in your list:\n";
         if (list.size() == 0) {
-            response += "OOPS!!! Your list is empty.";
-            return response;
+            return "Uh-oh, your list is empty.";
         }
         for (int i = 0; i < list.size(); i++) {
             response += Integer.toString(i + 1);
