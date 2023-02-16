@@ -1,0 +1,8 @@
+deadline return book /by 25/01/2023 1800
+event project meeting /from 25/01/2023 1700 /to 25/01/2023 1800
+list
+event presentation /from 14/02/2023 1200
+event presentation /from 14022023 1200 /to 14022023 1400
+mark 1
+list
+bye
