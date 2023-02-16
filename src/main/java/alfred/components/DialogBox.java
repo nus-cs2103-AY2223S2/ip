@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 
 /**
@@ -44,7 +45,15 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
+
         displayPicture.setImage(img);
+        double height = displayPicture.getFitHeight();
+        double width = displayPicture.getFitWidth();
+        Circle circle = new Circle(width / 2, height / 2, Math.min(height, width) / 2);
+        displayPicture.setClip(circle);
+        displayPicture.setFitWidth(circle.getRadius() * 2);
+        displayPicture.setFitHeight(circle.getRadius() * 2);
     }
 
     private void flip() {

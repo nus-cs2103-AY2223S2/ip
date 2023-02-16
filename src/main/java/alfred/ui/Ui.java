@@ -87,7 +87,7 @@ public class Ui {
     public String getIntro() {
         StringBuilder intro = new StringBuilder();
         intro.append(getLines());
-        intro.append("Hello! I'm Alfred :>\n How can I help you today?\n");
+        intro.append("Hello! I'm Alfred :>\nHow can I help you today?\n");
         intro.append(getLines());
         return intro.toString();
     }

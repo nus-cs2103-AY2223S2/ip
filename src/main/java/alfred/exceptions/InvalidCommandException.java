@@ -5,7 +5,7 @@ package alfred.exceptions;
  */
 public class InvalidCommandException extends AlfredException {
 
-    private static final String INVALID_COMMAND = "I'm sorry, but I don't know what that means";
+    private static final String INVALID_COMMAND = "I'm sorry, but I don't know what that means\n";
 
     /**
      * Constructs an InvalidCommandException object that contains the invalid command error message.
