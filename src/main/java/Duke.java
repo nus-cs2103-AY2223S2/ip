@@ -44,13 +44,21 @@ public class Duke {
         }
     }
 
-    public String getPreviousTaskResponse() {
+    public String getWelcomeResponse() {
         String startingMessage = Ui.welcomeResponse;
-        String askForTask = Ui.askForTaskResponse;
-        String loadMessage = hasLoadedSuccessfully() ? Ui.successfulLoadResponse : Ui.unsuccessfulLoadResponse;
-        String response = Ui.addDoubleLineBreak(startingMessage, Ui.instructionResponse, loadMessage,
-                Ui.listTaskResponse(this.tasks), askForTask);
+        String response = Ui.addDoubleLineBreak(startingMessage, Ui.instructionResponse);
         return response;
+    }
+
+    public String getPreviousTaskResponse() {
+        String loadMessage = hasLoadedSuccessfully() ? Ui.successfulLoadResponse : Ui.unsuccessfulLoadResponse;
+        String response = Ui.addDoubleLineBreak(loadMessage, Ui.listTaskResponse(this.tasks));
+        return response;
+    }
+
+    public String getAskForTaskResponse() {
+        String askForTask = Ui.askForTaskResponse;
+        return askForTask;
     }
 
     public boolean getIsEnd() {
