@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@Application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwuke.view.MainWindow">
+  <children>
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: #343540;" vvalue="1.0">
+      <content>
+        <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="399.0" style="-fx-background-color: #343540;" />
+      </content>
+    </ScrollPane>
+      <HBox alignment="BASELINE_CENTER" layoutY="553.0" prefHeight="46.0" prefWidth="400.0" style="-fx-background-color: #343540;">
+         <children>
+          <TextField fx:id="userInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput" prefHeight="48.0" prefWidth="342.0" promptText="Example: deadline Do Stuff /by 17/2/2023 2359" style="-fx-background-color: #40414E;" stylesheets="@Application.css">
+               <font>
+                  <Font name="Menlo Regular" size="12.0" />
+               </font>
+            </TextField>
+            <ImageView fitHeight="16.0" fitWidth="18.0" pickOnBounds="true" rotate="-41.6" scaleX="2.0" scaleY="2.0" scaleZ="2.0" translateX="23.0" translateY="10.0">
+               <image>
+                  <Image url="@../images/send.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <effect>
+                  <ColorAdjust brightness="0.57" />
+               </effect>
+            </ImageView>
+          <Button fx:id="sendButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="58.0" prefWidth="56.0" visible="false" />
+         </children>
+      </HBox>
+  </children>
+</AnchorPane>

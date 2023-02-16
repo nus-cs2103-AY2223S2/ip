@@ -6,8 +6,6 @@ import java.time.format.DateTimeParseException;
 
 import java.util.Optional;
 
-import uwuke.view.Printer;
-
 public class Deadline extends Task {
 
     private String deadlineString;

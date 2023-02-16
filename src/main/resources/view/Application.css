@@ -1,0 +1,18 @@
+#userInput {
+    -fx-text-fill: white;
+}
+
+#sendButton {
+    -fx-background-color: 
+        linear-gradient(#40414E, #40414E),
+        linear-gradient(#40414E, #40414E),
+        linear-gradient(#40414E, #40414E),
+        linear-gradient(#40414E 0%, #40414E 50%, #40414E 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255, 255, 255, 0.1), rgba(255,255,255,0));
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20 10 20;
+}

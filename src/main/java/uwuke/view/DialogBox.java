@@ -1,7 +1,11 @@
 package uwuke.view;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -10,21 +14,27 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
+    
+    @FXML
     private Label text;
+
+    @FXML
     private ImageView displayPicture;
+
     private static Image userImage;
     private static Image dukeImage;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+    public DialogBox(String inputText, Image inputImage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+            text.setText(inputText);
+            displayPicture.setImage(inputImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void setUserImage(Image userImage) {
@@ -51,8 +61,8 @@ public class DialogBox extends HBox {
      * @param picView
      * @return
      */
-    public static DialogBox getUserDialogBox(Label text) {
-        return new DialogBox(text, new ImageView(userImage));
+    public static DialogBox getUserDialogBox(String text) {
+        return new DialogBox(text, userImage);
     }
     
     /**
@@ -63,9 +73,9 @@ public class DialogBox extends HBox {
      * @param picView
      * @return
      */
-    public static DialogBox getDukeDialogBox(Label text) {
-        DialogBox db = new DialogBox(text, new ImageView(dukeImage));
-        db.flip();
+    public static DialogBox getDukeDialogBox(String text) {
+        DialogBox db = new DialogBox(text, dukeImage);
+        // db.flip();
         return db;
     }
 }
