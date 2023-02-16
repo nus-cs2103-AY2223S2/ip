@@ -14,7 +14,7 @@
 2. [deadline](https://github.com/afiqzu/ip#2-adding-a-deadline-task)
 3. [event](https://github.com/afiqzu/ip#3-adding-an-event-task)
 4. [list](https://github.com/afiqzu/ip#4-list-all-tasks)
-5. [find]
+5. [find](https://github.com/afiqzu/ip#5-find-task)
 6. [delete](https://github.com/afiqzu/ip#6-delete-task)
 7. [mark](https://github.com/afiqzu/ip#7-mark-task-as-done)
 8. [unmark](https://github.com/afiqzu/ip#8-unmark-task)
