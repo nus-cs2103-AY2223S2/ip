@@ -32,6 +32,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean marked() {
+        return this.isDone;
+    }
+
     public String getDescription() {
         return description;
     }

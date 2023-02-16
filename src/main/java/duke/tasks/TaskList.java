@@ -36,7 +36,7 @@ public class TaskList {
         ArrayList<Task> deadlines = new ArrayList<>();
 
         for (Task task : tasks) {
-            if (task.isDeadline() && task.getDeadline().isBefore(by)) {
+            if (task.isDeadline() && task.getDeadline().isBefore(by) && !task.marked()) {
                 deadlines.add(task);
             }
         }
