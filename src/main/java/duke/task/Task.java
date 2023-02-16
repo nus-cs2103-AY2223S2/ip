@@ -77,9 +77,12 @@ public class Task {
      * @return a String representing all tags
      */
     public String showTags() {
-        StringBuilder result = new StringBuilder(" Tags: ");
-        for (String tag : tags) {
-            result.append(tag);
+        StringBuilder result = new StringBuilder();
+        if (!tags.isEmpty()) {
+            result.append(" Tags: ");
+            for (String tag : tags) {
+                result.append(tag);
+            }
         }
         return result.toString();
     }
