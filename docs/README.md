@@ -31,12 +31,6 @@ Period Taks are tasks with a description, from date, to date, and completion sta
 Forgot what you added? Corky tracks them for you. You can even mark and delete task as and when they are completed.
 
 
-Prefer CLI to GUI?
-java -jar ip-0.2.jar -mode cli to switch to CLI mode.
-
-java -jar ip-0.2.jar -mode gui or simply java -jar ip-0.2.jar to use the GUI instead.
-
-
 ## Usage
 
 
