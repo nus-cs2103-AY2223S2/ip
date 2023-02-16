@@ -1,4 +1,6 @@
-# Duke Atreides Guide ![Atreides](https://i.pinimg.com/originals/a8/86/10/a8861028676de1e4f70c617e4e41dcd0.png) 
+# Duke Atreides Guide 
+
+![Atreides](https://i.pinimg.com/originals/a8/86/10/a8861028676de1e4f70c617e4e41dcd0.png) 
 
 ## Features 
 
