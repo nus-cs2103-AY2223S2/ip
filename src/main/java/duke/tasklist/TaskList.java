@@ -91,7 +91,7 @@ public class TaskList {
     public String mark(String s) throws DukeInvalidTaskNumberException, DukeTaskNumberOutOfRangeException {
         int num = TaskList.stringToInt(s);
 
-        if (num < -1 || num > tasks.size()) {
+        if (num < 1 || num > tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
         return tasks.get(num - 1).mark();
@@ -107,7 +107,7 @@ public class TaskList {
     public String unMark(String s) throws DukeInvalidTaskNumberException, DukeTaskNumberOutOfRangeException {
         int num = TaskList.stringToInt(s);
 
-        if (num < -1 || num > tasks.size()) {
+        if (num < 1 || num > tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
         return tasks.get(num - 1).unMark();
@@ -124,7 +124,7 @@ public class TaskList {
         int num = TaskList.stringToInt(s);
 
         String output = "Noted. I've removed this task:\n";
-        if (num < -1 || num > tasks.size()) {
+        if (num < 1 || num > tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
         Task removed = tasks.remove(num - 1);
