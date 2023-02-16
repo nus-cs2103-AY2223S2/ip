@@ -10,8 +10,8 @@ import duke.parser.Parser;
  * Represents an Event task that has a description, a start date and time as well as an end date and time.
  */
 public class Event extends Task {
-    protected LocalDateTime startTime;
-    protected LocalDateTime endTime;
+    protected String startTime;
+    protected String endTime;
     protected DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
     /**
@@ -23,10 +23,10 @@ public class Event extends Task {
         super(input, isDone);
         this.symbol = 'E';
         String[] temp = input.split(",");
-        this.description = temp[0];
+        this.description = temp[0].trim();
         String[] dueArr = temp[1].split(" to ");
-        this.startTime = LocalDateTime.parse(dueArr[0], displayFormatter);
-        this.endTime = LocalDateTime.parse(dueArr[1], displayFormatter);
+        this.startTime = LocalDateTime.parse(dueArr[0], displayFormatter).toString();
+        this.endTime = LocalDateTime.parse(dueArr[1], displayFormatter).toString();
         this.duedateString = temp[1];
     }
 
@@ -49,9 +49,10 @@ public class Event extends Task {
         }
         this.description = eventArr[0];
         String[] dueArr = eventArr[1].split(" to ");
-        this.startTime = Parser.parseDateTime(dueArr[0]);
-        this.endTime = Parser.parseDateTime(dueArr[1]);
-        this.duedateString = startTime.format(displayFormatter) + " to " + endTime.format(displayFormatter);
+        this.startTime = Parser.parseDateTime(dueArr[0]).toString();
+        this.endTime = Parser.parseDateTime(dueArr[1]).toString();
+        this.duedateString = startTime + " to " + endTime;
+
     }
     public String saveTask() {
         return this.symbol + "," + isDone + "," + this.description + "," + duedateString;

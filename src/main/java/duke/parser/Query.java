@@ -29,6 +29,7 @@ public class Query {
 
     /**
      * Determines if a string consists of only numbers
+     *
      * @param str String to check
      * @return a boolean indicating whether the string is numeric or not.
      */
@@ -44,6 +45,7 @@ public class Query {
 
     /**
      * Returns a QueryType that determines what type of command the input is.
+     *
      * @param input String to check.
      * @return A QueryType indicating the type of command.
      */
@@ -55,7 +57,9 @@ public class Query {
         }
 
         String[] inputArr = input.split(" ");
-        if (inputArr.length == 2 && isNumeric(inputArr[1])) {
+        if (inputArr[0].equals("find")) {
+            return QueryType.find;
+        } else if (inputArr.length == 2 && isNumeric(inputArr[1])) {
             if (inputArr[0].equals("mark")) {
                 return QueryType.mark;
             } else if (inputArr[0].equals("unmark")) {
@@ -63,8 +67,6 @@ public class Query {
             } else if (inputArr[0].equals("delete")) {
                 return QueryType.delete;
             }
-        } else if (inputArr[0].equals("find")) {
-            return QueryType.find;
         } else if (inputArr[0].equals("todo")) {
             return QueryType.todo;
         } else if (inputArr[0].equals("deadline")) {
