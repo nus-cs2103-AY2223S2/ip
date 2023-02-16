@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.DukeException;
+import duke.Ui;
 
 /**
  * Represents a Task with a duration.

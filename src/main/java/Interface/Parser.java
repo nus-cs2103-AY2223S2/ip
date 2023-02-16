@@ -234,7 +234,7 @@ public class Parser {
      * @return String The String input without line break and unnecessary whitespaces.
      */
     private static String removeWhitespaceEnter(String input) {
-        return input.trim().replaceAll("/n", "");
+        return input.trim().replaceAll("\n", "");
     }
 
     /**
@@ -265,7 +265,7 @@ public class Parser {
 
 
     private static boolean isValidItem(String item, String newInformation) {
-        if(item.equals("by") || item.equals("from") || item.equals("to")) {
+        if (item.equals("by") || item.equals("from") || item.equals("to")) {
             return isValidTime(newInformation);
         }
         return true;

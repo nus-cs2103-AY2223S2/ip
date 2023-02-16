@@ -93,4 +93,15 @@ public class ParserTest {
         }
     }
 
+    @Test
+    public void test1() {
+        try {
+            Command updateTodo = Parser.parse("update 1 /name:run");
+            assertTrue(updateTodo instanceof UpdateCommand);
+        } catch (duke.DukeException e) {
+            System.out.println(e.toString());
+        }
+
+    }
+
 }

@@ -64,7 +64,7 @@ public class Task {
      * @throws DukeException
      */
     public void edit(String item, String newInformation) throws DukeException {
-        if(!item.equals("name")) {
+        if (!item.equals("name")) {
             throw new DukeException(Ui.invalidItemUpdateResponse(this));
         }
         this.name = newInformation;

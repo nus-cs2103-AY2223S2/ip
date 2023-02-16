@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import duke.DukeException;
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -89,13 +87,22 @@ public class TaskList {
         return deleteTask;
     }
 
+    /**
+     * Edits the selected task with new information.
+     *
+     * @param taskNum The number of the selected Task in the List.
+     * @param item The item or detail to be modified.
+     * @param newInfo The new information to modify to.
+     * @return Task The newly modified Task.
+     * @throws DukeException
+     */
     public Task editTask(int taskNum, String item, String newInfo) throws DukeException {
         Task editTask = null;
 
         try {
             editTask = tasks.get(taskNum - 1);
             editTask.edit(item, newInfo);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Ui.outOfBoundSelectionResponse(this.getSize()));
         }
         return editTask;
