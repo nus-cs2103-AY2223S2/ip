@@ -1,5 +1,5 @@
 # User Guide for `/* ask-prof-duke */`
-Too much to :poop: to remember? FRET NOT! Prof Duke is here to manage your woes! Start using **`/* ask-prof-duke */`**, a chatbot that automates your task
+Too much to 💩 to remember? FRET NOT! Prof Duke is here to manage your woes! Start using **`/* ask-prof-duke */`**, a chatbot that automates your task
 tracking endeavours and make life so much simpler for you!
 
 ![demo](https://user-images.githubusercontent.com/87931905/219407500-f8e047ab-b3b0-4fc3-9560-79630b30ff20.gif)
@@ -70,26 +70,28 @@ Display all tasks that are currently recorded in the task list for the current s
 **Expected outcome**:
 ```
 Here are the tasks in your list:
-[T][] do calculus assignment
-[D][] write up user guide for cs2103T ip (by: 17 Feb 2023 2359)
-[E][X] christmas party @ ben's (from: 25 Dec 2023 1800 to: 26 Dec 2023 0200)
+1. [T][ ] do calculus assignment
+2. [D][ ] write up user guide for cs2103T ip (by: 17 Feb 2023 2359)
+3. [E][X] christmas party @ ben's (from: 25 Dec 2023 1800 to: 26 Dec 2023 0200)
 ```
 
 
 ### Mark task <a name="mark-task"></a>
-Record a task of a given task number as completed.
+Record a task of a given task number in the task list as completed.
 
 **Command:** `mark <task number>`
 
 
 ### Unmark task <a name="unmark-task"></a>
-Record a task of a given task number as not completed.
+Record a task of a given task number in the task list as not completed.
 
 **Command:** `unmark <task number>`
 
 
 ### Find tasks <a name="find-tasks"></a>
-Find a task by title. A list of tasks containing the search query specified will be returned.
+Find a task by title. A list of tasks containing the search query specified will be returned.<br>
+
+****Note: This search query is case-insensitive.***
 
 **Command:** `find <search query>`
 
@@ -98,7 +100,7 @@ Find a task by title. A list of tasks containing the search query specified will
 **Expected outcome:**
 ```
 Here are the matching tasks in your list:
-[T][] math homework
+[T][ ] math homework
 [T][X] science homework
 ```
 
@@ -110,22 +112,35 @@ Undo the previous command executed.
 
 
 ### Exit chat session <a name="exit"></a>
-End the current chat session. The updated list of tasks will be saved in the local storage.
+End the current chat session. The GUI will close within 3 seconds of executing the `bye` command. The updated list of tasks will be saved in the local storage.
 
 **Command:** `bye`
 
 
 ## Frequently Asked Questions (FAQ) <a name="faq"></a>
 
+> **I'm unsure of the task number of the task I want to delete/mark/unmark. How can I obtain that?**<br>
+
+*You can execute the `list` command to list all the tasks in order of their task number. Search through your desired task and its corresponding task number. For example, if your desired task is "do calculus assignment" and the output of the `list` command is given as follows:*<br>
+
+```
+Here are the tasks in your list:
+1. [T][ ] do calculus assignment
+2. [D][ ] write up user guide for cs2103T ip (by: 17 Feb 2023 2359)
+3. [E][X] christmas party @ ben's (from: 25 Dec 2023 1800 to: 26 Dec 2023 0200)
+```
+
+*then the corresponding task number you are looking for is 1.*<br><br>
+
+
 > **I can't seem to save my changes made to the task list from the previous session. What is happening?**<br>
 
-*You have probably closed the GUI rather than ending the chat session through the `bye` command. At the moment, the app is only able to save your changes upon exiting the chat session through the `bye` command.*<br><br>
+*You have probably closed the GUI through the ❌ button on the top left of the app window, force quit or pressing Ctrl+C in your CLI, rather than ending the chat session through the `bye` command. At the moment, the app is only able to save your changes upon exiting the chat session through the `bye` command.*<br><br>
 
 
 > **Help! I'm unable to open the app and nothing happens after double clicling the JAR file...**<br>
 
 *You should run the app's JAR file through the command `java -jar duke.txt` on your CLI.*<br><br>
-
 
 
 > **I'm still unable to open the app's JAR file after running the command `java -jar duke.txt` on my CLI! I keep getting this error: `Error: Unable to access jarfile duke.jar`.**<br>
