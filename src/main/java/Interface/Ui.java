@@ -6,9 +6,9 @@ import duke.task.Task;
  * Contains a list of responses by Duke.
  */
 public class Ui {
-    protected static String welcomeResponse = "Hello! I'm Duke!";
+    protected static String welcomeResponse = "Hi! Duke at your service!";
 
-    protected static String instructionResponse = addLineBreak("Here are some useful commands formats:",
+    protected static String instructionResponse = addLineBreak("Here are some useful command formats:",
             "[mark/unmark/delete] [task number] - Select a Task to Mark, Unmark or Delete",
             "find [keyword] - Find a Task with the provided keyword",
             "todo [name] - Add a Todo task",
@@ -52,7 +52,7 @@ public class Ui {
         if (isSaved) {
             return "Bye. Hope to see you again soon!";
         } else {
-            return "Sorry, I encountered some issues while saving your task list! Bye. Hope to see you again soon!";
+            return "I'm sorry, I encountered some issues while saving your task list! Bye. Hope to see you again soon!";
         }
     }
     /**
