@@ -34,6 +34,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
     }
 
     public void setDuke(Duke d) {
@@ -65,5 +67,6 @@ public class MainWindow extends AnchorPane {
         if (Objects.equals(response, "Bye. Hope to see you again soon!")) {
             Platform.exit();
         }
+
     }
 }
