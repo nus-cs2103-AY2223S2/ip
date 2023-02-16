@@ -5,7 +5,7 @@ package task;
  */
 public class Task {
     private String name;
-    private Boolean completed;
+    private Boolean isCompleted;
 
     /**
      * Constructor for a Task.
@@ -14,7 +14,7 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -25,21 +25,21 @@ public class Task {
      */
     public Task(String name, Boolean isDone) {
         this.name = name;
-        this.completed = isDone;
+        this.isCompleted = isDone;
     }
 
     /**
      * To mark a Task as done.
      */
     public void check() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
      * To unmark a done Task.
      */
     public void unCheck() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public String getName() {
@@ -48,7 +48,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return "[X] " + this.name;
         } else {
             return "[ ] " + this.name;
