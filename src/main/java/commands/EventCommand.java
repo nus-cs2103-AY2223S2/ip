@@ -38,8 +38,9 @@ public class EventCommand extends Command {
      * Returns the starting date to initialise the Event.
      * @param userInput The user input.
      * @return The starting date.
+     * @throws NoDateException Throws if no date(s) is/are found.
      */
-    public String getFrom(String userInput) {
+    public String getFrom(String userInput) throws NoDateException {
         String[] temp = userInput.substring(6).split(" /from ")[1].split(" /to ");
         if (temp[0].trim().equals("")) {
             throw new NoDateException("event", null);
@@ -51,8 +52,9 @@ public class EventCommand extends Command {
      * Returns the ending date to initialise the Event.
      * @param userInput The user input.
      * @return The ending date.
+     * @throws NoDateException Throws if no date(s) is/are found.
      */
-    public String getUntil(String userInput) {
+    public String getUntil(String userInput) throws NoDateException {
         String[] temp = userInput.substring(6).split(" /from ")[1].split(" /to ");
         if (temp.length == 1) {
             throw new NoDateException("event", null);

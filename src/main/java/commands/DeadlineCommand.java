@@ -36,8 +36,9 @@ public class DeadlineCommand extends Command {
      * Returns the deadline to initialise the Deadline.
      * @param userInput The user input.
      * @return The deadline.
+     * @throws InvalidDateFormatException Throws if date format is incorrect.
      */
-    public String getBy(String userInput) {
+    public String getBy(String userInput) throws InvalidDateFormatException {
         String[] temp = userInput.substring(9).split(" /by ");
         if (temp.length == 1) {
             throw new InvalidDateFormatException(null);

@@ -35,9 +35,10 @@ public class FindCommand extends Command {
      * @param ui The user interface.
      * @param storage The storage.
      * @return String for executing the command.
+     * @throws NoTaskException Throws if no tasks are in the task list.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws NoTaskException {
         assert tasks != null;
         assert ui != null;
         assert storage != null;

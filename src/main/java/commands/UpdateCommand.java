@@ -65,6 +65,7 @@ public class UpdateCommand extends Command {
     /**
      * Updates the respective detail of the task.
      * @param task The task to update.
+     * @throws InvalidAttributeException Throws if the attribute selected is not part of the task.
      */
     private void updateTask(Task task) {
         switch(this.detailToEdit.toLowerCase()) {
