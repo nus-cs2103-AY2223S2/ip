@@ -86,7 +86,7 @@ View a list of all added tasks.
 
 Example of usage: 
 
-`list'
+`list`
 
 
 ### `delete INDEX`
