@@ -7,7 +7,7 @@
 ## Features
 
 - Interact with Dudu
-  - [Send greeting](#hi---greeting-to-dudu)
+  - [Say Hi](#hi---greeting-to-dudu)
   - [Say Goodbye](#bye---exit-application)
 - Create different type of tasks and store in a list.
   - [Todo task](#todo-description---add-a-todo-task)
