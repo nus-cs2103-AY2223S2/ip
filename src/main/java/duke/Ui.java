@@ -2,7 +2,8 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String WELCOME_MESSAGE = "Hello Boss.\n" + "How may i help you?\n";
+    private static final String WELCOME_MESSAGE = "Hi there, my name's Duke!\n" + "I'm your personal task manager.\n"
+        + "How may i help you?\n";
     private static final String LINE = "__________________________________________\n";
 
     private final Scanner SCANNER;
@@ -32,7 +33,7 @@ public class Ui {
     }
 
     public String showTaskSize(int size) {
-        return "Now you have " + size + " tasks in the list. + \n";
+        return "Now you have " + size + " tasks in the list. \n";
     }
 
     public String showMarked(Task task) {
