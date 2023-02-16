@@ -22,7 +22,7 @@ Once you've launched Duke, you can enter commands to manage your tasks. Here are
 - `delete <task index>` - Deletes a task
 - `find <keyword>` - Searches for tasks containing a keyword
 
-## Usage
+## Examples
 
 ### `list`
 
