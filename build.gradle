@@ -54,14 +54,14 @@ test {
 }
 
 application {
-    mainClassName = "Sunday"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "sunday"
+    archiveBaseName = "Sunday"
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }
