@@ -1,35 +1,41 @@
-
 import java.io.IOException;
-
-
-import java.nio.file.FileAlreadyExistsException;
-
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.nio.file.Files;
 public class Duke {
-    public static void main(String[] args) {
 
+    private Storage storage;
+    private Parser parser;
+    private UI ui;
+    private TaskList list;
 
+    public Duke () {
+        ui = new UI();
+        list = new TaskList();
+        storage = new Storage(list);
+        parser = new Parser(storage);
+    }
+
+    public void run() {
         Scanner scanner = new Scanner(System.in);
-        TaskList list = new TaskList();
-        Storage storage = new Storage(list);
-        Parser parser = new Parser(storage);
-        String home = System.getProperty("user.home");
-        UI ui = new UI();
-        ui.printLogo();
+        ui.printWelcome();
         String userInput = scanner.nextLine();
-
-        // code that obtains the user input and calls the Parser's method to execute the command
         while (!userInput.equals("bye")) {
-            parser.parseAndExecute(userInput, list);
+            try {
+                parser.parseAndExecute(userInput, list);
+            } catch (IOException e) {
+                ui.printInvalidDateFormatMessage();
+                userInput = scanner.nextLine();
+                continue;
+            }
+            ui.printNextCommandMessage();
             userInput = scanner.nextLine();
+
         }
         System.out.println("Thanks and have a great day ahead!");
 
+    }
+    public static void main(String[] args) {
+        new Duke().run();
 
     }
 }

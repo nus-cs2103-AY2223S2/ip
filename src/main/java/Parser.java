@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -9,14 +10,13 @@ public class Parser {
     }
 
 
-    public void parseAndExecute(String userInput, TaskList list) {
+    public void parseAndExecute(String userInput, TaskList list) throws IOException {
 
 
             String[] userInputComponents = userInput.split(" ");
             String requestType = userInputComponents[0];
             try {
                 Request request = Request.getRequest(requestType);
-                System.out.println(request.name());
 
                 switch (request) {
                     case LIST: {
@@ -105,6 +105,10 @@ public class Parser {
 
 
     }
+
+
+
+
 
 }
 

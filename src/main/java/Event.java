@@ -3,6 +3,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 
 public class Event extends Task {
     String startDayTime;
@@ -45,8 +46,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return (isDone? "[E][X] " : "[E][ ] ") + description + ". From: " + this.startDate.toString() + "@ " +
-                this.startTime.toString() +
-                ". To: " + this.endDate.toString() + "@ " + this.endTime.toString();
+        String formattedStartDate = startDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+        String formattedEndDate = endDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+        return (isDone? "[E][X] " : "[E][ ] ") + description + ". From: " + formattedStartDate + " @ " +
+                this.startTime.toString() + " hrs" +
+                ". To: " + formattedEndDate + " @ " + this.endTime.toString() + " hrs";
     }
 }
