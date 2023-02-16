@@ -143,55 +143,58 @@ public class Parser {
      */
     public static String parse(String instct, TaskList listOfTasks) throws IOException, EmptyDescriptionException  {
         try {
-             if((instct.split(" ").length) == 1) {
-                 if (instct.split(" ")[0].equals("list")) {
-                     String response = listOut(listOfTasks);
-                     return response;
+             if (instct.split(" ")[0].equals("list")) {
+                 String response = listOut(listOfTasks);
+                 return response;
 
-                 } else if (instct.split(" ")[0].equals("bye")) {
-                     isRunning = false;
-                     return Ui.sayBye();
-                 }
-                 throw new UnknownCommandException();
-             } else {
-                 if (instct.split(" ")[0].equals("mark")) {
-                     int numbering = Integer.parseInt(instct.split(" ")[1]);
-                     return listOfTasks.markDone(numbering);
-
-                 } else if (instct.split(" ")[0].equals("unmark")) {
-                     int numbering = Integer.parseInt(instct.split(" ")[1]);
-                     return listOfTasks.markNotDone(numbering);
-
-
-                 } else if (instct.split(" ")[0].equals("todo")) {
-
-                     return addTodo(instct, listOfTasks);
-
-                 } else if (instct.split(" ")[0].equals("deadline")) {
-                     String temp = instct.split(" /by ")[1];
-                     String temp2 = instct.split(" /by ")[0];
-                     String description = temp2.split(" ", 2)[1];
-                     LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
-                     return addDeadline(description, listOfTasks, doneBy);
-
-                 } else if (instct.split(" ")[0].equals("event")) {
-                     String[] temp = instct.split("/from | /to ");
-                     String description = temp[0].split(" ", 2)[1];
-                     LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
-                     LocalTime to = LocalTime.parse(temp[2], HrFormat);
-                     return addEvents(description, listOfTasks, from, to);
-
-                 } else if (instct.split(" ")[0].equals("delete")) {
-                     return delete(instct, listOfTasks);
-
-                 } else if (instct.split(" ")[0].equals("find")) {
-                     String wantedTask = instct.split(" ")[1];
-                     return findTask(listOfTasks, wantedTask);
-
-                 } else {
-                     throw new UnknownCommandException();
-                 }
+             } else if (instct.split(" ")[0].equals("bye")) {
+                 isRunning = false;
+                 return Ui.sayBye();
              }
+
+
+             if (instct.split(" ")[0].equals("mark")) {
+                 int numbering = Integer.parseInt(instct.split(" ")[1]);
+                 return listOfTasks.markDone(numbering);
+
+             } else if (instct.split(" ")[0].equals("unmark")) {
+                 int numbering = Integer.parseInt(instct.split(" ")[1]);
+                 return listOfTasks.markNotDone(numbering);
+
+
+             } else if (instct.split(" ")[0].equals("todo")) {
+
+                 if((instct.split(" ").length) == 1){
+                     throw new EmptyDescriptionException(instct.split(" ")[0]);
+                 }
+
+                 return addTodo(instct, listOfTasks);
+
+             } else if (instct.split(" ")[0].equals("deadline")) {
+                 String temp = instct.split(" /by ")[1];
+                 String temp2 = instct.split(" /by ")[0];
+                 String description = temp2.split(" ", 2)[1];
+                 LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
+                 return addDeadline(description, listOfTasks, doneBy);
+
+             } else if (instct.split(" ")[0].equals("event")) {
+                 String[] temp = instct.split("/from | /to ");
+                 String description = temp[0].split(" ", 2)[1];
+                 LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
+                 LocalTime to = LocalTime.parse(temp[2], HrFormat);
+                 return addEvents(description, listOfTasks, from, to);
+
+             } else if (instct.split(" ")[0].equals("delete")) {
+                 return delete(instct, listOfTasks);
+
+             } else if (instct.split(" ")[0].equals("find")) {
+                 String wantedTask = instct.split(" ")[1];
+                 return findTask(listOfTasks, wantedTask);
+
+             } else {
+                 throw new UnknownCommandException();
+             }
+
         } catch (DukeException | DateTimeParseException | IndexOutOfBoundsException ex) {
             if(excptCheck(ex)){
                 throw new EmptyDescriptionException(instct.split(" ")[0]);
