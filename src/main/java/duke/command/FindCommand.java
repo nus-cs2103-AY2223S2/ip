@@ -19,12 +19,13 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasksList, TextUi ui, Storage storage) {
         ui.showFindMessage();
+        String res = "";
         for (Task task: tasksList.getList()) {
             if (task.toString().contains(this.DETAILS)) {
-                System.out.println(task);
+                res += "" + task + '\n';
             }
         }
-        return ui.showBorder();
+        return res;
     }
 
     @Override

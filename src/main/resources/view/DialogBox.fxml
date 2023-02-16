@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="dialog" alignment="CENTER" style="-fx-background-color: teal blue; -fx-background-radius: 10px;" text="Label" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Apple Braille Outline 8 Dot" size="12.0" />
+         </font>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis></Label>
+        <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 5 5 5 5; -fx-background-radius: 50;">
+         <image>
+            <Image url="@../../../../../../../../../Pictures/gym.jpeg" />
+         </image>
+      </ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
