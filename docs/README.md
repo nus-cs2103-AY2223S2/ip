@@ -39,8 +39,6 @@ A **ToDo** has **no timeframe**.
   <img width="640" src="./assets/todo.png">
 </p>
 
-![todo](./assets/todo.png)
-
 ```
 todo {task description}
 ```
