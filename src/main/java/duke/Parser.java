@@ -18,7 +18,7 @@ public class Parser {
         if (userInput.equals("list")) {
             return tasklist.printList();
         } else if (userInput.contains("mark") && userInput.substring(0, 4).equals("mark")) {
-            assert userInput.substring(5).equals("") || Integer.valueOf(userInput.substring(5)) < tasklist.taskSize();
+            assert userInput.substring(5).equals("") || Integer.valueOf(userInput.substring(5)) <= tasklist.taskSize();
             if (userInput.substring(5).equals("")) {
                 return "☹ OOPS!!! The task number of mark cannot be empty. Type /help for user guide.";
             } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
@@ -27,7 +27,7 @@ public class Parser {
             int position = Integer.valueOf(userInput.substring(5));
             return tasklist.updateTask("mark", position - 1);
         } else if (userInput.contains("unmark") && userInput.substring(0, 6).equals("unmark")) {
-            assert userInput.substring(7).equals("") || Integer.valueOf(userInput.substring(7)) < tasklist.taskSize();
+            assert userInput.substring(7).equals("") || Integer.valueOf(userInput.substring(7)) <= tasklist.taskSize();
             if (userInput.substring(5).equals("")) {
                 return "☹ OOPS!!! The task number of mark cannot be empty. Type /help for user guide.";
             } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
@@ -36,7 +36,7 @@ public class Parser {
             int position = Integer.valueOf(userInput.substring(7));
             return tasklist.updateTask("unmark", position - 1);
         } else if (userInput.contains("delete") && userInput.substring(0, 6).equals("delete")) {
-            assert userInput.substring(7).equals("") || Integer.valueOf(userInput.substring(7)) < tasklist.taskSize();
+            assert userInput.substring(7).equals("") || Integer.valueOf(userInput.substring(7)) <= tasklist.taskSize();
             if (userInput.substring(5).equals("")) {
                 return "☹ OOPS!!! The task number of mark cannot be empty. Type /help for user guide.";
             } else if (Integer.valueOf(userInput.substring(5)) > tasklist.taskSize()) {
