@@ -36,7 +36,7 @@ Saturday has a lot of cool commands to help you get things organized and have fu
 ---
 A **ToDo** has **no timeframe**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/todo.png">
+  <img width="640" src="/assets/todo.png">
 </p>
 
 ```
@@ -47,7 +47,7 @@ todo {task description}
 ---
 A **Deadline** has **one deadline timeframe**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/deadline.png">
+  <img width="640" src="/assets/deadline.png">
 </p>
 
 ```
@@ -58,7 +58,7 @@ deadline {task description} /by {hh:mm dd MM yyyy}
 ---
 An **Event** has **one start timeframe** and **one end timeframe**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/event.png">
+  <img width="640" src="/assets/event.png">
 </p>
 
 ```
@@ -69,7 +69,7 @@ event {task description} /from {hh:mm dd MM yyyy} /to {hh:mm dd MM yyyy}
 ---
 **Mark** a task as **done**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/mark.png">
+  <img width="640" src="/assets/mark.png">
 </p>
 
 ```
@@ -80,7 +80,7 @@ mark {index #}
 ---
 **Mark** a task as **undone**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/unmark.png">
+  <img width="640" src="/assets/unmark.png">
 </p>
 
 ```
@@ -91,7 +91,7 @@ unmark {index #}
 ---
 **Delete** a task.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/delete.png">
+  <img width="640" src="/assets/delete.png">
 </p>
 
 ```
@@ -102,7 +102,7 @@ delete {index #}
 ---
 **View** your **entire task list**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/list.png">
+  <img width="640" src="/assets/list.png">
 </p>
 
 ```
@@ -113,7 +113,7 @@ list
 ---
 **View** tasks on a **specific date**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/list-on.png">
+  <img width="640" src="/assets/list-on.png">
 </p>
 
 ```
@@ -124,7 +124,7 @@ list /on {hh:mm dd MM yyyy}
 ---
 **Find** tasks with a specific **keyword**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/find.png">
+  <img width="640" src="/assets/find.png">
 </p>
 
 ```
@@ -135,7 +135,7 @@ find {keyword}
 ---
 **Sort** your task list by **time**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/sort.png">
+  <img width="640" src="/assets/sort.png">
 </p>
 
 ```
@@ -146,7 +146,7 @@ sort
 ---
 **Sort** your task list by **index**.
 <p align="center">
-  <img width="640" src="/ip/docs/assets/unsort.png">
+  <img width="640" src="/assets/unsort.png">
 </p>
 
 ```
