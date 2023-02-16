@@ -27,17 +27,24 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_icon.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/space_Lin.jpg"));
 
+    private String dukeStyle = "-fx-font-size: 12pt;\n" +
+            "    -fx-font-family: \"Helvetica\";\n" +
+            "    -fx-text-fill: black;\n" +
+            "    -fx-background-color: #e9967a;\n" +
+            "    -fx-font-style: normal;";
+
+    private String userStyle = "-fx-font-size: 14pt;\n" +
+            "    -fx-font-family: \"Courier\";\n" +
+            "    -fx-text-fill: black;\n" +
+            "    -fx-background-color: #00ced1;\n" +
+            "    -fx-font-style: normal;\n" +
+            "    -fx-font-weight: normal;";
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greeting = "Greetings, Human. I am Space Lin, goddess of servant universe. Tell me what you need.";
-        Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-        String style = "-fx-font-size: 12pt;\n" +
-                "    -fx-font-family: \"Helvetica\";\n" +
-                "    -fx-text-fill: black;\n" +
-                "    -fx-background-color: #e9967a;\n" +
-                "    -fx-font-style: normal;";
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage, dukeStyle));
     }
 
     public void setDuke(Duke d) {
@@ -52,17 +59,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        String userStyle = "-fx-font-size: 14pt;\n" +
-                "    -fx-font-family: \"Courier\";\n" +
-                "    -fx-text-fill: black;\n" +
-                "    -fx-background-color: #00ced1;\n" +
-                "    -fx-font-style: normal;\n" +
-                "    -fx-font-weight: normal;";
-        String dukeStyle = "-fx-font-size: 12pt;\n" +
-                "    -fx-font-family: \"Helvetica\";\n" +
-                "    -fx-text-fill: black;\n" +
-                "    -fx-background-color: #e9967a;\n" +
-                "    -fx-font-style: normal;";
         if (response == null) {
             Platform.exit();
         }
