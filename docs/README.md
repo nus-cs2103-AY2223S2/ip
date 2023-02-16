@@ -38,22 +38,28 @@ Example of usage:
 
 Expected outcome:
 
+![todo task](https://i.imgur.com/l137CDf.png)
+
+
 The addition of the todo will be acknowledged.
 
 ```
 expected output
 ```
-### `Keyword` - Describe action
+### `deadline` - Adds a deadline task
 
-Describe the action and its outcome.
+Deadline task is a task associated with a deadline that it must be completed by.
+Note that formatting of the deadline must be of `YYYY-MM-DD` e.g. `2023-02-14'
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`deadline finish duke /by 2023-02-16`
 
 Expected outcome:
 
-Description of the outcome.
+The addition of the deadline will be acknowledged.
+The dateline will be parsed into a text format.
+![deadline](https://i.imgur.com/hM61HBv.png)
 
 ```
 expected output
@@ -64,7 +70,7 @@ Describe the action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`keyword (optional)`
 
 Expected outcome:
 
