@@ -94,7 +94,7 @@ ____________________________________________________________
 
 #### mark
 
-Marks a task index from task list as complete and outputs success message.
+Marks a task from task list as complete and outputs success message.
 
 Example of usage: 
 
@@ -107,14 +107,14 @@ Outputs success message.
 ```
 ____________________________________________________________
   Got it. I've marked this task:
-    [T][ ] read a book
-  Now you have 1 task in the list.
+    [T][X] read a book
+  Now you have 3 task in the list.
 ____________________________________________________________
 ```
 
 #### unmark
 
-Unmarks a task index from task list as incomplete and outputs success message.
+Unmarks a task from task list as incomplete and outputs success message.
 
 Example of usage: 
 
@@ -126,9 +126,29 @@ Outputs success message.
 
 ```
 ____________________________________________________________
-  Got it. I've marked this task:
+  Got it. I've unmarked this task:
     [T][ ] read a book
-  Now you have 1 task in the list.
+  Now you have 3 task in the list.
+____________________________________________________________
+```
+
+#### delete
+
+Deletes a task from task list and outputs success message.
+
+Example of usage: 
+
+`delete 1`
+
+Expected outcome:
+
+Outputs success message.
+
+```
+____________________________________________________________
+  Noted. I've removed this task:
+    [T][ ] read a book
+  Now you have 2 tasks in the list.
 ____________________________________________________________
 ```
 
@@ -138,32 +158,17 @@ Lists all task index from task list as complete and outputs success message.
 
 Example of usage: 
 
-`mark 1`
+`list`
 
 Expected outcome:
 
-Outputs success message.
+Outputs the list of tasks.
 
 ```
 ____________________________________________________________
-  Got it. I've marked this task:
-    [T][ ] read a book
-  Now you have 1 task in the list.
+  Here are the tasks in your list:
+  1.[T][ ] borrow book
+  2.[D][ ] return book (by: Jan 1 2050)
+  3.[E][ ] book event (from: Jan 1 2050 to: Jan 2 2050)
 ____________________________________________________________
-```
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
 ```
