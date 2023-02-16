@@ -111,9 +111,9 @@ public class TaskList {
         return Ui.markTaskMsg(task);
     }
 
-    /** 
+    /**
      * Marks task as uncompleted and outputs success message.
-     * 
+     *
      * @param task Task to be unmarked.
      * @return Success message.
      */

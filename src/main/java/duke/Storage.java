@@ -37,7 +37,6 @@ public class Storage {
             if (!file.exists()) {
                 throw new DukeException("File does not exists!\n");
             }
-            
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String input = scanner.nextLine();
