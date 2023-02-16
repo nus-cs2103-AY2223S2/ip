@@ -5,7 +5,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 import catbot.CatBotException;
-import catbot.commands.AddCommand;
+import catbot.commands.AddDeadlineCommand;
+import catbot.commands.AddEventCommand;
+import catbot.commands.AddTodoCommand;
 import catbot.commands.Command;
 import catbot.commands.DeleteCommand;
 import catbot.commands.EchoCommand;
@@ -31,7 +33,7 @@ public class Parser {
         switch (cmd[0].toLowerCase(Locale.ROOT)) {
         case "todo":
             try {
-                return new AddCommand(cmd[1].strip());
+                return new AddTodoCommand(cmd[1].strip());
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new CatBotException("That's the wrong format!");
             }
@@ -40,7 +42,7 @@ public class Parser {
             try {
                 temp = cmd[1].split("/by", 2);
                 LocalDateTime by = LocalDateTime.parse(temp[1].strip());
-                return new AddCommand(temp[0].strip(), by);
+                return new AddDeadlineCommand(temp[0].strip(), by);
             } catch (DateTimeParseException e) {
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -52,7 +54,7 @@ public class Parser {
                 temp = cmd[1].split("/from|/to", 3);
                 LocalDateTime from = LocalDateTime.parse(temp[1].strip());
                 LocalDateTime to = LocalDateTime.parse(temp[2].strip());
-                return new AddCommand(temp[0].strip(), from, to);
+                return new AddEventCommand(temp[0].strip(), from, to);
             } catch (DateTimeParseException e) {
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
             } catch (ArrayIndexOutOfBoundsException e) {
