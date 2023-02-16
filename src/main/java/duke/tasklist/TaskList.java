@@ -66,8 +66,9 @@ public class TaskList implements Serializable {
      */
     public String deleteTask(int index) throws DukeException {
         try {
+            String message = "Deleted one task \n" + this.getTask(index).toString() + "\n";
             tasks.remove(index);
-            String message = "Deleted one task \n" + this.getTask(index).toString() + "\n" + this.getTotal();
+            message += this.getTotal();
             return message;
         } catch (IndexOutOfBoundsException e) {
             throw invalidIndex;
@@ -138,11 +139,10 @@ public class TaskList implements Serializable {
      * @return a reply message string.
      */
     public String filter(String name) {
-        String message = "\nHere are the matching tasks in your list:" + "\n";
         Stream<Task> taskStream = this.tasks.stream();
         TaskList filteredTasks = new TaskList(taskStream.filter(task -> task.getName().contains(name))
                 .collect(Collectors.toList()));
-        message += filteredTasks.getSize() == 0 ? "No results found." : filteredTasks.toString();
+        String message = filteredTasks.getSize() == 0 ? "No results found." : "\nHere are the matching tasks in your list:" + "\n" + filteredTasks.toString();
         return message;
     }
 
