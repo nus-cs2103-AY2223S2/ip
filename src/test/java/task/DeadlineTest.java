@@ -1,29 +1,44 @@
 package task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Test;
 class DeadlineTest {
-            @Test
-        void DeadlineText() {
-            Deadline Deadline = new Deadline("testDeadline", LocalDate.of(2023, 1,1));
-            assertEquals("testDeadline", Deadline.getDescription(), "getNameOfTask() works");
-            assertFalse(Deadline.isDone(), "task done initiated to false");
-            Deadline.markDone();
-            assertTrue(Deadline.isDone(), "taskDone() works");
-            Deadline.markNotDone();
-            assertFalse(Deadline.isDone(), "taskNotDone() works");
-            assertEquals("D|testDeadline|0|2023-01-01", Deadline.toText(), "toText() when not done works");
-            Deadline.markDone();
-            assertEquals("D|testDeadline|1|2023-01-01", Deadline.toText(), "toText() when done works");
-            Deadline.markNotDone();
-            assertEquals("[D][ ] testDeadline (by: Jan-01-2023)", Deadline.toString(), "toString() when not done works");
-            Deadline.markDone();
-            assertEquals("[D][X] testDeadline (by: Jan-01-2023)", Deadline.toString(), "toString() when done works");
-        }
-        
+    @Test
+    void testInitiateDeadline() {
+        Deadline newDeadline = new Deadline("testDeadline", LocalDate.of(2023, 1, 1));
+        assertEquals("testDeadline", newDeadline.getDescription(), "getNameOfTask()");
+        assertFalse(newDeadline.isDone(), "task done initiated to false");
+    }
 
+    @Test
+    void testMarkTaskDone() {
+        Deadline newDeadline = new Deadline("testDeadline", LocalDate.of(2023, 1, 1));
+        newDeadline.markDone();
+        assertTrue(newDeadline.isDone(), "taskDone()");
+        assertEquals("D|1| |testDeadline|2023-01-01", newDeadline.toText(), "toText() when done");
+        assertEquals("[D][X][ ] testDeadline (by: Jan-01-2023)", newDeadline.toString(), "toString() when done");
+    }
+
+    @Test
+    void testMarkDone() {
+        Deadline newDeadline = new Deadline("testDeadline", LocalDate.of(2023, 1, 1));
+        newDeadline.markNotDone();
+        assertFalse(newDeadline.isDone(), "taskNotDone()");
+        assertEquals("D|0| |testDeadline|2023-01-01", newDeadline.toText(), "toText() when not done");
+        assertEquals("[D][ ][ ] testDeadline (by: Jan-01-2023)", newDeadline.toString(), "toString() when not done");
+    }
+
+    @Test
+    void testRecurrence() {
+        Deadline newDeadline = new Deadline("testDeadline", LocalDate.of(2023, 1, 1));
+        newDeadline.setRecurrence("daily");
+        assertEquals(newDeadline.getRecurrence(), "D", "set recurrence of task to daily");
+        assertEquals("D|0|D|testDeadline|2023-01-01", newDeadline.toText(), "toText() when not done");
+        assertEquals("[D][ ][D] testDeadline (by: Jan-01-2023)", newDeadline.toString(), "toString() when not done");
+    }
 }
