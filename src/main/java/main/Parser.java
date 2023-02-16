@@ -51,7 +51,7 @@ public class Parser {
                 }
                 return new DeleteTaskCommand(Integer.parseInt(command.substring(7)));
             } else if (command.startsWith("recurrence")) {
-                String[] str = command.substring(10).split(" ");
+                String[] str = command.substring(11).split(" ");
                 if (isInvalidNumber(str[1])) {
                     throw new DukeException("Please enter a valid number");
                 }
