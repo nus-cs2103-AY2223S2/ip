@@ -1,5 +1,7 @@
-package iris;
+package iris.ui;
 
+import iris.Iris;
+import iris.ui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

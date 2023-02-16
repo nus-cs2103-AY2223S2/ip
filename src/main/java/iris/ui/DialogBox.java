@@ -1,4 +1,4 @@
-package iris;
+package iris.ui;
 
 import java.io.IOException;
 import java.util.Collections;
