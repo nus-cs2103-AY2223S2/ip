@@ -29,6 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
         welcomeMessage();
     }
 
@@ -37,7 +38,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Pepe's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -51,6 +52,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Crafts a dialog box, that contains a welcome message from Pepe.
+     */
     @FXML
     private void welcomeMessage() {
         String message = "Welcome to the Pepe Bot.\nTry Adding a Task with (todo, deadline or event)";

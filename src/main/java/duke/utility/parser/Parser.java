@@ -167,7 +167,7 @@ public class Parser {
      * 
      * @param command the command segments based on the user's input
      * @param list    the list of tasks.
-     * @return UiMessage object containing what type of command to print out.
+     * @return the reply String message.
      * @throws DukeException if the command format is invalid or missing any special
      *                       parameter (/by
      *                       e.g)
@@ -185,6 +185,16 @@ public class Parser {
         return list.addTask(eventObj);
     }
 
+    /**
+     * Finds the task from the list.
+     * 
+     * @param command the command segments based on the user's input
+     * @param list    the list of tasks.
+     * @return the reply String message.
+     * @throws DukeException if the command format is invalid or missing any special
+     *                       parameter (/by
+     *                       e.g)
+     */
     private static String findTasks(String[] command, TaskList list) throws DukeException {
         if (command.length > 2) {
             throw wrongCommandFormat;
@@ -199,6 +209,16 @@ public class Parser {
         return list.filter(keyword);
     }
 
+    /**
+     * Updates a task from the list.
+     * 
+     * @param command the command segments based on the user's input
+     * @param list    the list of tasks.
+     * @return the reply String message.
+     * @throws DukeException if the command format is invalid or missing any special
+     *                       parameter (/by
+     *                       e.g)
+     */
     private static String updateTask(String[] command, TaskList list) throws DukeException {
         try {
             if (command.length != 4) {
