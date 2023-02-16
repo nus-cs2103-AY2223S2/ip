@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import leo.parser.Parser;
 import leo.storage.Storage;
+import leo.task.LeoTaskException;
 import leo.task.TaskList;
 import leo.ui.Ui;
 
@@ -24,7 +25,7 @@ public class Leo {
     }
 
 
-    public String getResponse(String input){
+    public String getResponse(String input) throws LeoTaskException {
         assert !input.equals("") : "Input should not be empty\n";
         String[] request = parser.parseRequest(input);
         String response = "";

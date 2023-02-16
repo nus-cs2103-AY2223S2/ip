@@ -58,7 +58,7 @@ public class TaskList implements Serializable {
 
     private String deleteTaskGUI(int taskId) throws LeoTaskException {
         if (tasks.isEmpty()) {
-            Ui.printError(new EmptyDeletionException());
+            throw new EmptyDeletionException();
         }
         String taskDesc = tasks.remove(taskId).toString();
         return String.format("Alright! I've removed this from your list: %s\nYou have %d tasks in your list, vamos, get moving!\n", taskDesc, tasks.size());
@@ -135,60 +135,52 @@ public class TaskList implements Serializable {
         }
     }
 
-    public String processRequestGUI(String[] parsedRequest){
+    public String processRequestGUI(String[] parsedRequest) throws LeoTaskException {
         String response = "";
-        try {
-            if (!Task.commands.contains(parsedRequest[0])) {
+        if (!Task.commands.contains(parsedRequest[0])) {
+            throw new InvalidCommandException();
+        }
+        if (Task.descCommands.contains(parsedRequest[0])) {
+            return processDescriptiveRequestGUI(parsedRequest);
+        }
+        switch (parsedRequest[0]) {
+            case "help":
+                response = Ui.getHelp();
+                break;
+            case "bye":
+                response = Ui.exitGUI();
+                break;
+            case "list":
+                response = Ui.getList(tasks);
+                break;
+            default:
                 throw new InvalidCommandException();
-            }
-            if (Task.descCommands.contains(parsedRequest[0])) {
-                return processDescriptiveRequestGUI(parsedRequest);
-            }
-            switch (parsedRequest[0]) {
-                case "help":
-                    response = Ui.getHelp();
-                    break;
-                case "bye":
-                    response = Ui.exitGUI();
-                    break;
-                case "list":
-                    response = Ui.getList(tasks);
-                    break;
-                default:
-                    throw new InvalidCommandException();
-            }
-        } catch (LeoTaskException e) {
-            response = e.getMessage();
         }
         return response;
     }
 
-    public String processDescriptiveRequestGUI(String[] parsedRequest){
+    public String processDescriptiveRequestGUI(String[] parsedRequest) throws LeoTaskException {
         String response = "";
-        try {
-            if (parsedRequest.length <= 1) {
-                throw new EmptyFieldException();
-            }
-            switch (parsedRequest[0]) {
-                case "mark":
-                    response = Ui.getMarkMessage(tasks, Parser.getTaskID(parsedRequest[1]));
-                    break;
-                case "unmark":
-                    response = Ui.getUnmarkMessage(tasks, Parser.getTaskID(parsedRequest[1]));
-                    break;
-                case "delete":
-                    response = deleteTaskGUI(Parser.getTaskID(parsedRequest[1]));
-                    break;
-                case "find":
-                    findTask(parsedRequest[1]);
-                    response = Ui.getListWithIndices(foundTasks, foundTaskIndices);
-                    break;
-                default:
-                    response = addTaskGUI(parsedRequest);
-                    break;
-            }
-        } catch (LeoTaskException e) {
-            response = e.getMessage();
+        if (parsedRequest.length <= 1) {
+            throw new EmptyFieldException();
+        }
+        switch (parsedRequest[0]) {
+            case "mark":
+                response = Ui.getMarkMessage(tasks, Parser.getTaskID(parsedRequest[1]));
+                break;
+            case "unmark":
+                response = Ui.getUnmarkMessage(tasks, Parser.getTaskID(parsedRequest[1]));
+                break;
+            case "delete":
+                response = deleteTaskGUI(Parser.getTaskID(parsedRequest[1]));
+                break;
+            case "find":
+                findTask(parsedRequest[1]);
+                response = Ui.getListWithIndices(foundTasks, foundTaskIndices);
+                break;
+            default:
+                response = addTaskGUI(parsedRequest);
+                break;
         }
         return response;
     }

@@ -57,6 +57,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getLeoDialog(response, leoImage);
                 System.exit(0);
             }
+        } catch (LeoTaskException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userInput.getText(), userImage),
+                    DialogBox.getLeoDialog(e.getMessage(), leoImage)
+            );
+            userInput.clear();
         } catch (Exception e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userInput.getText(), userImage),
