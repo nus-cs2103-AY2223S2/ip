@@ -1,7 +1,7 @@
 # User Guide
 
 Feel free to skip this user guide if you deem it lengthy or 
-not have time to read. Duke provides all the guide you need
+do not have time to read. Duke provides all the guide you need
 :wink:
 
 ## Commands available

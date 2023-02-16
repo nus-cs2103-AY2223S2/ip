@@ -15,7 +15,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n"
-                + "Commands are: list,todo,mark,deadline,event,find & archive";
+                + "Commands are: todo,deadline,event,list,mark,delete,find & archive";
 
         return logo;
     }
