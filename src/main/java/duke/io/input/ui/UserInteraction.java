@@ -110,15 +110,15 @@ public class UserInteraction {
         UserInteraction.printWithBracket(greeting.toString());
         String isPlaying = sc.nextLine();
         if (isPlaying.equals("NO")) {
-            greeting = new Greeting(0);
-            Event nextEvent = greeting.toNext();
+            greeting.setStatus("NOT PLAYING");
+            Event nextEvent = greeting.toNextEvent();
             UserInteraction.printWithBracket(nextEvent.toString());
         } else if (isPlaying.equals("YES")) {
-            greeting = new Greeting(1);
-            Event nextEvent = greeting.toNext();
+            greeting.setStatus("PLAYING");
+            Event nextEvent = greeting.toNextEvent();
             UserInteraction.printWithBracket(nextEvent.toString());
-            while (nextEvent.getStatus() == false) {
-                nextEvent = nextEvent.toNext();
+            while (!nextEvent.isFinalEvent()) {
+                nextEvent = nextEvent.toNextEvent();
                 UserInteraction.printWithBracket(nextEvent.toString());
             }
             System.out.println("SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ");
@@ -133,15 +133,16 @@ public class UserInteraction {
                 isPlaying = sc.nextLine();
             }
             if (isPlaying.equals("NO")) {
-                greeting = new Greeting(0);
-                Event end = greeting.toNext();
+                greeting = new Greeting();
+                greeting.setStatus("NOT PLAYING");
+                Event end = greeting.toNextEvent();
                 UserInteraction.printWithBracket(end.toString());
             } else {
                 greeting = new Greeting(1);
-                Event nextEvent = greeting.toNext();
+                Event nextEvent = greeting.toNextEvent();
                 UserInteraction.printWithBracket(nextEvent.toString());
-                while (nextEvent.getStatus() == false) {
-                    nextEvent = nextEvent.toNext();
+                while (!nextEvent.isFinalEvent()) {
+                    nextEvent = nextEvent.toNextEvent();
                     UserInteraction.printWithBracket(nextEvent.toString());
                 }
             }
