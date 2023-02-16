@@ -84,6 +84,7 @@ public class Main extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
 
         stage.setScene(scene);
         stage.show();
