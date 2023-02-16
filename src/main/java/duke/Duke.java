@@ -12,7 +12,6 @@ import duke.ui.Ui;
  * A Duke object is created when Duke is run.
  */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -55,10 +54,14 @@ public class Duke {
         }
     }
 
-    String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, storage, ui);
+            if (c.isGoodbye()) {
+                return "END_COMMAND" + c.execute(tasks, storage, ui);
+            } else {
+                return c.execute(tasks, storage, ui);
+            }
         } catch (DukeException de) {
             return ui.showError(de);
         } catch (Exception e) {

@@ -35,7 +35,7 @@ public class Ui {
      * Returns Duke's greeting message.
      */
     public String greet() {
-        return "What's up! XyDuke here!\nHow can I be of assistance?\n";
+        return "What's up! XyDuck here!\nHow can I be of assistance?\n";
     }
 
     /**
