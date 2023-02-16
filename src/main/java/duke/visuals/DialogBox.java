@@ -13,6 +13,15 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates the default dialog box that we will see in Muse's interface.
+     * This includes text (label l) and an image (imageview iv).
+     *
+     * @param l this is a label, and provides the text that will be displayed in an
+     *                          individual DialogBox.
+     * @param iv This provides the image (aka the profile pic) that will be viewed
+     *                          in each individual DialogBox.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -33,10 +42,22 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * This is a helper function that generates a DialogBox, with the user's avatar image.
+     *
+     * @param l this provides text for the user's DialogBox.
+     * @param iv this provides the image for user's DialogBox.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * This is a helper function that generates a DialogBox, with muse's (the bot) avatar image.
+     *
+     * @param l this provides text for the muse's DialogBox.
+     * @param iv this provides the image for muse's DialogBox.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
