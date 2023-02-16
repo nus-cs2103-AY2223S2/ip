@@ -6,14 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends BorderPane {
+    @FXML
+    private HBox inputBox;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,9 +32,13 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image catbotImage = new Image(this.getClass().getResourceAsStream("/images/DaCatBot.png"));
 
+    /**
+     * Initialises the Main Window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        HBox.setHgrow(userInput, Priority.ALWAYS);
     }
 
     /**
