@@ -94,6 +94,7 @@ Diffcult tasks? Tag them!
 
 ## Command Summary
 
+
 |                     Command                     |                              Description                               |
 |:-----------------------------------------------:|:----------------------------------------------------------------------:|
 |               todo `description`                |              Creates a todo with the given `description`               |

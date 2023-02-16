@@ -15,7 +15,17 @@ import javafx.scene.layout.VBox;
 public class MainWindow extends AnchorPane {
 
     public static final String START = "I am The Task Mechanic!\n"
-            + "How can I help you today?\n";
+            + "How can I help you today?\n" + "\nHere are the commands:\n"
+            + "1. Add task - todo {description}\n"
+            + "2. Add event - event {description} /from {date} /to {date}\n"
+            + "3. Add deadline - deadline {description} /by {YYYY-MM-DD} HH:MM\n"
+            + "4. Mark task as done - mark {task no}\n"
+            + "5. Mark task as not done - unmark {task no}\n"
+            + "6. Find tasks in list which matches - find {word/phrase}\n"
+            + "7. Tag task with description - tag {task no} {tag description}\n"
+            + "8. Show all tasks - list\n"
+            + "9. Remove task - delete {task no}\n"
+            + "10. End Program - bye";
     @FXML
     private ScrollPane scrollPane;
     @FXML

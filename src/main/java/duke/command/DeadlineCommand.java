@@ -108,7 +108,7 @@ public class DeadlineCommand extends Command {
             return "Deadline is over, please insert another deadline.";
 
         } else {
-            return "Wrong Format, Please fill in with the following format: YYYY-MM-DD h:mm";
+            return "Wrong Format, Please fill in with the following format: YYYY-MM-DD HH:MM";
         }
 
     }

@@ -1,7 +1,8 @@
 [T][ ] eat #bz
 [E][ ] finish hw #ok
-[D][X] finish code   (by: Dec 1 2023 09:00 PM)         
-[T][ ] finish       
-[T][ ] eat      
+[D][X] finish code   (by: Dec 1 2023 09:00 PM)          
+[T][ ] finish        
+[T][ ] eat       
 [D][ ] do ip   (by: Feb 17 2023 11:59 PM) #done
-[D][ ] do hw   (by: Dec 1 2023 07:00 PM)
+[D][ ] do hw   (by: Dec 1 2023 07:00 PM) 
+[T][ ] done 
