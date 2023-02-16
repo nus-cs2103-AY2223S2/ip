@@ -15,7 +15,7 @@ public class EventTest {
     }
 
     @Test
-    public void toString_invalidDateTime_dukeExceptionThrown() throws DukeException {
+    public void toString_invalidDateTime_dukeExceptionThrown() {
         try {
             assertEquals("[E][ ] internship\n(from: Mon 02-09-2024 12:22PM to: Tue 02-09-2025 12:22PM)\n"
                             + "!! TASK EXPIRING SOON! !!",

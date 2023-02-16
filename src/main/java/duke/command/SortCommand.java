@@ -47,4 +47,9 @@ public class SortCommand extends Command {
             return tasks.getEvents();
         }
     }
+
+    @Override
+    public String toString() {
+        return String.format("Sort %s task(s)", taskType);
+    }
 }

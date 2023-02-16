@@ -18,4 +18,9 @@ public class ExitCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         return Ui.getExitOutput();
     }
+
+    @Override
+    public String toString() {
+        return String.format("Exits");
+    }
 }
