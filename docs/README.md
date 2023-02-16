@@ -1,12 +1,8 @@
 ---
-layout: page
-title: User Guide
+**User Guide**
 ---
 
 Duke chatbot is a **desktop app for managing tasks** (CLI) while still having the benefits of a Graphical User Interface (GUI). It has a Cristiano Ronaldo personality.
-
-* Table of Contents
-  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
