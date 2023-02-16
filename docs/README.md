@@ -1,6 +1,3 @@
-# build settings
-theme: modernist
-
 # Broccoli Task Manager
 
 Welcome to Broccoli, your personal task manager! <|°▿▿▿▿°|/
