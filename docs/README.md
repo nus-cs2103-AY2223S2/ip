@@ -8,6 +8,7 @@ having the benefits of a Graphical User Interface (GUI).
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar duke.jar command to run the application.
 A GUI similar to the below should appear in a few seconds.
+<br>
 ![This is an image](/docs/Starting.png)
 5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
 Some example commands you can try:
