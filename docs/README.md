@@ -3,13 +3,15 @@ Duke is a desktop application that helps you manage your daily tasks. It's,
 - easy to learn
 - ~~FAST~~ _SUPER_ FAST to use
 
-- [Quick start](#quick-start)
-- [Features](#features)
-  *[Add a task](#add-a-task)
-  *[Mark/Unmark a task](#markunmark-a-task)
-  *[Delete a task](#delete-a-task)
-  *[Find a task](#find-a-task)
-- [Summary of Commands](#summary-of-commands)
+[Quick start](#quick-start)
+
+[Features](#features)
+  - [Add a task](#add-a-task)
+  - [Mark/Unmark a task](#markunmark-a-task)
+  - [Delete a task](#delete-a-task)
+  - [Find a task](#find-a-task)
+
+[Summary of Commands](#summary-of-commands)
 
 ## Quick start
 
