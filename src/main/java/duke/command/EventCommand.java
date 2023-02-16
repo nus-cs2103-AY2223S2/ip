@@ -5,7 +5,10 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class EventCommand extends Command{
+/**
+ * Class for Event command.
+ */
+public class EventCommand extends Command {
     private String input;
 
     /**
@@ -17,6 +20,13 @@ public class EventCommand extends Command{
         this.input = input;
     }
 
+    /**
+     * Executes an Event command.
+     *
+     * @param tasks TaskList object containing the list of tasks
+     * @param ui The Ui object to display messages.
+     * @param storage The Storage object to save the task after execution.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         int firstDashIndex = input.indexOf("/");
         int secondDashIndex = input.lastIndexOf("/");
@@ -26,7 +36,7 @@ public class EventCommand extends Command{
         Event event = new Event(taskName, from, to);
         tasks.add(event);
         storage.saveTasks(tasks);
-        return "Got it. I've added this task: " + event +
-                "\nNow you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task: " + event
+                + "\nNow you have " + tasks.getSize() + " tasks in the list.";
     };
 }

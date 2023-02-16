@@ -4,7 +4,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class ListCommand extends Command{
+/**
+ * Class for List command.
+ */
+public class ListCommand extends Command {
     private String input;
 
     /**
@@ -16,6 +19,13 @@ public class ListCommand extends Command{
         this.input = input;
     }
 
+    /**
+     * Executes a list command by listing all the tasks.
+     *
+     * @param tasks TaskList object containing the list of tasks
+     * @param ui The Ui object to display messages.
+     * @param storage The Storage object to save the task after execution.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder listOfTasks = new StringBuilder("Here are your tasks: \n");
         for (int i = 0; i < tasks.getSize(); i++) {

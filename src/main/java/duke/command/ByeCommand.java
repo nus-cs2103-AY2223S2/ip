@@ -4,29 +4,24 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class ByeCommand extends Command{
-    private String input;
-
+/**
+ * Class for Bye command.
+ */
+public class ByeCommand extends Command {
     /**
      * Constructor for command "Bye".
-     *
-     * @param input The user's input.
      */
-    public ByeCommand(String input) {
-        this.input = input;
-    }
-
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.farewellMessage();
-    };
+    public ByeCommand() {}
 
     /**
-     * Overrides the parent Command class and returns true.
+     * Executes a Bye command bye replying with a farewell message.
      *
-     * @return true.
+     * @param tasks TaskList object containing the list of tasks
+     * @param ui The Ui object to display messages.
+     * @param storage The Storage object to save the task after execution.
      */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        super.setExit();
+        return ui.farewellMessage();
+    };
 }

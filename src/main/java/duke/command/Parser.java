@@ -25,7 +25,7 @@ public class Parser {
         switch(cn) {
         case BYE:
         case B:
-            return new ByeCommand(input);
+            return new ByeCommand();
 
         case LIST:
         case L:

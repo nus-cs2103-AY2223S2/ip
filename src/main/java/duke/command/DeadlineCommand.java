@@ -6,6 +6,9 @@ import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class for Deadline command.
+ */
 public class DeadlineCommand extends Command {
     private String input;
 
@@ -18,6 +21,13 @@ public class DeadlineCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes a deadline command.
+     *
+     * @param tasks TaskList object containing the list of tasks
+     * @param ui The Ui object to display messages.
+     * @param storage The Storage object to save the task after execution.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int dashIndex = input.indexOf("/");
         String taskName = input.substring(9, dashIndex);
@@ -25,7 +35,7 @@ public class DeadlineCommand extends Command {
         Deadline deadline = new Deadline(taskName, by);
         tasks.add(deadline);
         storage.saveTasks(tasks);
-        return "Got it. I've added this task: \n" + deadline +
-                "\nNow you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task: \n" + deadline
+                + "\nNow you have " + tasks.getSize() + " tasks in the list.";
     };
 }

@@ -5,6 +5,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class for Find command.
+ */
 public class FindCommand extends Command {
     private String input;
 
@@ -17,6 +20,13 @@ public class FindCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes a find command by listing current tasks that contain input.
+     *
+     * @param tasks TaskList object containing the list of tasks
+     * @param ui The Ui object to display messages.
+     * @param storage The Storage object to save the task after execution.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String keyword = input.substring(5);
         int counter = 0;

@@ -5,7 +5,10 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class UnmarkCommand extends Command{
+/**
+ * Class for Unmark command.
+ */
+public class UnmarkCommand extends Command {
     private String input;
 
     /**
@@ -17,6 +20,13 @@ public class UnmarkCommand extends Command{
         this.input = input;
     }
 
+    /**
+     * Executes an unmark command.
+     *
+     * @param tasks TaskList object containing the list of tasks
+     * @param ui The Ui object to display messages.
+     * @param storage The Storage object to save the task after execution.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] commandString = input.split(" ");
         int index = Integer.parseInt(commandString[1]) - 1;

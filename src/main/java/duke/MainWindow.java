@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialize the ui of the chat interface.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();
@@ -35,6 +38,9 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Set the duke interface.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
