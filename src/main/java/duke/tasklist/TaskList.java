@@ -142,7 +142,7 @@ public class TaskList implements Serializable {
         Stream<Task> taskStream = this.tasks.stream();
         TaskList filteredTasks = new TaskList(taskStream.filter(task -> task.getName().contains(name))
                 .collect(Collectors.toList()));
-        message += filteredTasks.toString();
+        message += filteredTasks.getSize() == 0 ? "No results found." : filteredTasks.toString();
         return message;
     }
 
