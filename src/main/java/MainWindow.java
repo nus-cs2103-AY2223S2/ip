@@ -19,8 +19,8 @@ public class MainWindow extends VBox {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pepe.jpg"));
 
     /**
      * Called when MainWindow is created in Main.java.
