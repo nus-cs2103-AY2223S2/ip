@@ -4,13 +4,27 @@
 
 ## Features 
 
-### Feature-ABC
+Duke Atreides has 4 main features for you to keep track of your daily tasks.
 
-Description of the feature.
+### Adding tasks
 
-### Feature-XYZ
+You can add 4 different types of tasks, specifically todo, deadline, event and within.
+More details on how to use these classes below.
 
-Description of the feature.
+### Deleting tasks
+
+Finished your task? You can delete the task by index.
+
+### Mark tasks
+
+You can mark your tasks as done and unmark them, should you wish to keep a task
+but note its completion.
+
+### Automatic save
+
+After every command, your set of tasks is automatically saved.
+It is also saved across usage so you can see your set of tasks automatically 
+everytime you start the application.
 
 ## Usage
 
