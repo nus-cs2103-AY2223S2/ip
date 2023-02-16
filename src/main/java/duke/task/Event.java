@@ -3,6 +3,7 @@ package duke.task;
 import duke.UI.TextOutput;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 
 /**
@@ -22,7 +23,7 @@ public class Event extends Task {
      */
     public Event(String content, boolean isDone, String from, String to) {
         super(content, isDone);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
         this.from = LocalDateTime.parse(from, format);
         this.to = LocalDateTime.parse(to, format);
         this.taskType = taskType.E;
@@ -35,7 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm", Locale.ENGLISH);
         String from = this.from.format(format);
         String to = this.to.format(format);
         return "[" + this.getTypeIcon() + "]"
@@ -49,7 +50,7 @@ public class Event extends Task {
      */
     @Override
     public String updateTaskTime(String ... dates) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
         this.from = LocalDateTime.parse(dates[0] + " " + dates[1], format);
         this.to = LocalDateTime.parse(dates[2] + " " + dates[3], format);
         this.time = this.to;

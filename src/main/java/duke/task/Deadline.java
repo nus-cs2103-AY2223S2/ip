@@ -23,7 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String content, String date, boolean isDone) {
         super(content, isDone);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
         format.withLocale(Locale.ENGLISH);
         this.time = LocalDateTime.parse(date, format);
         this.taskType = this.taskType.D;
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm", Locale.ENGLISH);
         String time = this.time.format(format);
         return "[" + this.getTypeIcon() + "]"
                 + "[" + this.getStatusIcon() + "] " + this.getTaskContent() + " (by: " + time + ")";
@@ -49,7 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String updateTaskTime(String ... dates) throws DukeException {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm", Locale.ENGLISH);
         format.withLocale(Locale.ENGLISH);
         try {
             this.time = LocalDateTime.parse(dates[0] + " " + dates[1], format);

@@ -4,6 +4,8 @@ import duke.UI.TextOutput;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Update extends Command {
 
     public Update(String str) {
