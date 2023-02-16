@@ -38,9 +38,10 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             return command.execute(tasks, ui, storage);
+        } catch (IllegalArgumentException e) {
+            return "Please give an actual command. Read the user guide for more information";
         } catch (DukeException e) {
-            System.out.println("Unrecognized command");
+            return e.getMessage();
         }
-        return "OOPS!!! I'm sorry, but I don't know what that means :(((((";
     }
 }

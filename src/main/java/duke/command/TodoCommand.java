@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -27,8 +28,12 @@ public class TodoCommand extends Command {
      * @param ui The Ui object to display messages.
      * @param storage The Storage object to save the task after execution.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String taskName = input.substring(5);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String[] commandString = input.split(" ");
+        if (commandString.length < 2) {
+            throw new DukeException("Please indicate a task you want to do.");
+        }
+        String taskName = commandString[1];
         Todo todo = new Todo(taskName);
         tasks.add(todo);
         storage.saveTasks(tasks);

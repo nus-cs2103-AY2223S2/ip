@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -27,7 +28,11 @@ public class EventCommand extends Command {
      * @param ui The Ui object to display messages.
      * @param storage The Storage object to save the task after execution.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (!input.contains("/from") & !input.contains("/to)")) {
+            throw new DukeException("Please include when is the start and end of the event with "
+                    + "/from and /to");
+        }
         int firstDashIndex = input.indexOf("/");
         int secondDashIndex = input.lastIndexOf("/");
         String taskName = input.substring(6, firstDashIndex);

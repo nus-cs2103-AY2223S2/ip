@@ -29,6 +29,9 @@ public class DeadlineCommand extends Command {
      * @param storage The Storage object to save the task after execution.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (!input.contains("/by")) {
+            throw new DukeException("Please include when is the deadline by using /by format");
+        }
         int dashIndex = input.indexOf("/");
         String taskName = input.substring(9, dashIndex);
         String by = input.substring(dashIndex + 4);
@@ -37,5 +40,5 @@ public class DeadlineCommand extends Command {
         storage.saveTasks(tasks);
         return "Got it. I've added this task: \n" + deadline
                 + "\nNow you have " + tasks.getSize() + " tasks in the list.";
-    };
+    }
 }
