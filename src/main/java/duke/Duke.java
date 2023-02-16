@@ -32,7 +32,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Duke duke = new Duke();
+        System.out.println("start method");
 
         dukeGui.start(stage);
     }

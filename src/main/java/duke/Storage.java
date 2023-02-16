@@ -16,12 +16,10 @@ public class Storage {
     private String filename;
 
     public Storage(String filename) {
-        this.filename = filename;
-        try {
-            File f = new File(filename);
-            f.createNewFile();
-        } catch (IOException e) {
-            System.out.println("IOException error: " + e);
+        this.filename = "data/" + filename;
+        File f = new File(this.filename);
+        if (!f.exists()){
+            f.getParentFile().mkdir();
         }
     }
 
@@ -60,7 +58,7 @@ public class Storage {
             }
             writer.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found error");
+            System.out.println("storeList: File not found error");
         } catch (IOException e) {
             System.out.println("IOException");
         }
@@ -110,7 +108,7 @@ public class Storage {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found error");
+            System.out.println("loadList: File not found error");
         }
         return taskArr;
     }
