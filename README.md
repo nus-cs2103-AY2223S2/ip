@@ -22,33 +22,59 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
-# User guide
+# User Guide
 
-You may skip this user guide if you deem it lengthy or do not have time to read it.
-Duke itself does provide all the guide you need :wink:
-### Available commands :
+Feel free to skip this user guide if you deem it lengthy or
+do not have time to read. Duke provides all the guide you need
+:wink:
 
-#### **todo** -  format: todo [task name]
-#### **deadline** - format: deadline [task name] /by [dd/MM/yyyy:HHmm]
-#### **event** - format: event [task name] /from [dd/MM/yyyy:HHmm] /to [dd/MM/yyyy:HHmm]
-#### **list** - format: list
-#### **mark** - format: mark [task index]
-#### **delete** - format: delete [task index]
-#### **find** - format: find [task name]
-#### **archive** - format: archive
+## Commands available
 
-### Features :
-Add a task - todo,deadline,event
-
-List all the tasks - list
-
-Mark the tasks that you have completed - mark
-
-Delete tasks - delete
-
-Find tasks - find
-
-Archive all the current tasks, stores these existing tasks into a file in the directory "data" - archive
+* `todo <description>` Adds a new todo task
+   - Example of Usage
+     ```
+       todo CS2103 Tutorial
+     ```
+* `deadline <description> /by <dd/MM/yyyy:HHmm>` Adds a new deadline task
+   - Example of Usage
+     ```
+     deadline CS2103 Assignment /by 05/03/2023:2359
+     ```
+* `event <description> /from <dd/MM/yyyy:HHmm> /to <dd/MM/yyyy:HHmm>` Adds a new event task
+   - Example of Usage
+     ```
+     event CS2103 Exam /from 05/04/2023:1800 /to 05/04/2023:2000
+     ```
+* `list` List down all the tasks
+   - Example of Usage
+     ```
+     list
+     ```
+* `mark <index>` Mark a task as done
+   - Example of Usage
+     ```
+     mark 1
+     ```
+* `delete <index>` Delete a task
+   - Example of Usage
+     ```
+     delete 1
+     ```
+* `find <name of task>` Find a task
+   - Example of Usage
+     ```
+     find CS2103
+     ```
+*  `archive` Archive all the existing tasks into a file stored in data
+   - Example of Usage
+     ```
+     archive
+     ```
+*   `exit` Exit the program
+   - Example of Usage
+     ```
+     exit
+     ```
 
 
 
