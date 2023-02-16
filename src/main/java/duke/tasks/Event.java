@@ -10,7 +10,7 @@ public class Event extends Task {
     private String eventSpan;
 
     /**
-     * Event Contructor: Takes in and process event content and deadline, stores it.
+     * Event Constructor: Takes in and process event content and deadline, stores it.
      *
      * @param content Contains the typed input read from user, changes it into Event object.
      */
@@ -55,13 +55,13 @@ public class Event extends Task {
 
     public String toString() {
         String sign = "";
-        return ". [E][" + super.markSign(super.mark) + "] " + super.content + this.eventSpan;
+        return ". [E][" + super.markSign(super.isMark) + "] " + super.content + this.eventSpan;
     }
 
     /**
      * Provides the String to be stored in duke.txt when program terminates.
      */
     public String printRecord() {
-        return "[E]" + " [" + super.markSign(super.mark) + "] " + super.content + this.eventSpan + "\n";
+        return "[E]" + " [" + super.markSign(super.isMark) + "] " + super.content + this.eventSpan + "\n";
     }
 }

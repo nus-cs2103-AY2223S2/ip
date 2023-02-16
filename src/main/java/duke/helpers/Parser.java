@@ -108,9 +108,6 @@ public class Parser {
                 outputString = tasks.mark(splitArr[0], (Integer.parseInt(splitArr[1]) - 1));
             }
 
-            //the mark input case has been handled, throws exception when boolean logic fails.
-            // e.g. entering mark when the entry has clearly been marked.
-
             if (splitArr[0].equals("delete") && !hasHandledInput) {
                 if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
                     throw new OutOfIndexException("Help! \n" +
@@ -122,8 +119,6 @@ public class Parser {
                 outputString = Ui.formatStr(tasks.deleteReport(newTask));
                 hasHandledInput = setCaseHandled();
             }
-
-            //delete input has been handled
 
             if (splitArr[0].equals("find") && !hasHandledInput) {
                 String searchTerm = input.substring(5);
@@ -145,8 +140,6 @@ public class Parser {
                 hasHandledInput = setCaseHandled();
             }
 
-            //has handled the find entry input.
-
             if (splitArr[0].equals("todo") && !hasHandledInput) {
                 Todo newTodo = new Todo(input);
                 tasks.addTask(newTodo);
@@ -166,15 +159,10 @@ public class Parser {
                 hasHandledInput = setCaseHandled();
             }
 
-            //handling the todo, deadline and event tasks to the list scenarios.
-
             if (hasHandledInput == false){
                 throw new VagueInputException("Oh no! What do you mean? \n" +
                         "I'm confused. Please specify... @.@");
             }
-
-            //handles all the remaining cases, that will be invalid.
-
         }
 
         //end of try loop, we will now address errors and print the response of muse.

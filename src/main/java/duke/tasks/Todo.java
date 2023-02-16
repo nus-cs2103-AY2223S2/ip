@@ -6,14 +6,14 @@ public class Todo extends Task {
     }
 
     public String toString() {
-        return ". [T][" + super.markSign(super.mark) + "] " + super.content;
+        return ". [T][" + super.markSign(super.isMark) + "] " + super.content;
     }
 
-    public Todo(String content, boolean mark) {
-        super(content, mark);
+    public Todo(String content, boolean isMark) {
+        super(content, isMark);
     }
 
     public String printRecord() {
-        return "[T]" + " [" + super.markSign(super.mark) + "] " + super.content + "\n";
+        return "[T]" + " [" + super.markSign(super.isMark) + "] " + super.content + "\n";
     }
 }

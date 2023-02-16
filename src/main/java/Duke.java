@@ -31,10 +31,10 @@ import javafx.scene.image.ImageView;
  *
  */
 public class Duke extends Application {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
+    private ScrollPane scrollPane = new ScrollPane();
+    private VBox dialogContainer = new VBox();
+    private TextField userInput = new TextField();
+    private Button sendButton = new Button("Send");
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image muse = new Image(this.getClass().getResourceAsStream("/images/muse.jfif"));
@@ -42,54 +42,32 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-
-            //this block does the initialization of needed components and helpers,
-            //to load saved data, and to initialize visual components.
-            scrollPane = new ScrollPane();
-            dialogContainer = new VBox();
-            userInput = new TextField();
-            sendButton = new Button("Send");
             AnchorPane mainLayout = new AnchorPane();
-            Scanner sc = new Scanner(System.in);
             String textDir = System.getProperty("user.dir") + "/duke.txt";
             File file = new File(textDir);
             TaskList tasks = new TaskList();
             PrintWriter pw = new PrintWriter(new FileWriter(textDir, true));
             Storage.loadData(textDir, file, tasks);
-
-
             scrollPane.setContent(dialogContainer);
             mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-
-            //initializing of scene
             scene = new Scene(mainLayout);
             stage.setScene(scene);
             stage.show();
 
-
-            //using GuiCustomiser to change dimensions and look of components.
             GuiCustomiser.setMuseStage(stage);
             GuiCustomiser.boxDimensionChange(mainLayout, userInput, sendButton, dialogContainer);
             GuiCustomiser.setMuseScrollPaneVisuals(scrollPane);
             GuiCustomiser.setMuseAnchorPaneVisuals(mainLayout, scrollPane, sendButton, userInput);
-
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(new Label(Ui.doGreeting()), new ImageView(muse))
-            );
-
+                    DialogBox.getDukeDialog(new Label(Ui.doGreeting()), new ImageView(muse)));
             GuiHelper.addEventListeners
                     (sendButton, userInput, dialogContainer, pw, textDir, tasks, stage, user, muse, scrollPane);
-
-            //these have to be done when the application ends
             Storage.saveData(pw, textDir, tasks);
             Ui.doFarewell();
-
         }
         catch(IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String[] args) {

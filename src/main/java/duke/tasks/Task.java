@@ -5,25 +5,25 @@ import duke.helpers.Ui;
  * Represents a Task object in TaskList, has 3 subclasses (Todo, Event, Deadline)
  */
 public class Task {
-    protected boolean mark;
+    protected boolean isMark;
     protected String content;
 
     /**
-     * Constructs an object of the Task class. By default, mark field is false.
+     * Constructs an object of the Task class. By default, isMark field is false.
      */
     public Task(String content) {
         this.content = content;
-        this.mark = false;
+        this.isMark = false;
     }
 
     /**
      * Constructs an object of the Task class.
      *
-     * @param alternative sets the boolean field mark into true/false to initialize the Task obj.
+     * @param alternative sets the boolean field isMark into true/false to initialize the Task obj.
      */
     public Task(String content, boolean alternative) {
         this.content = content;
-        this.mark = alternative;
+        this.isMark = alternative;
     }
 
     public String getContent() {
@@ -31,21 +31,21 @@ public class Task {
     }
 
     public boolean getMark() {
-        return this.mark;
+        return this.isMark;
     }
 
     /**
-     * Allows for changing of the "mark" field within the Task class. Inverts the mark.
+     * Allows for changing of the "isMark" field within the Task class. Inverts the isMark.
      */
     public String setMark() {
-        this.mark = !this.mark;
+        this.isMark = !this.isMark;
         String outputStr;
-        if (mark == true) {
+        if (isMark == true) {
             outputStr = "NICE! You finished this: \n"
-                    + "[" + markSign(this.mark) + "] " + this.content;
+                    + "[" + markSign(this.isMark) + "] " + this.content;
         } else {
             outputStr = "Ok, you have undone this: \n"
-                    + "[" + markSign(this.mark) + "] " + this.content;
+                    + "[" + markSign(this.isMark) + "] " + this.content;
         }
         return Ui.formatStr(outputStr);
     }
@@ -61,7 +61,7 @@ public class Task {
     }
 
     public String toString() {
-        return ". [" + markSign(this.mark) + "] " + this.content;
+        return ". [" + markSign(this.isMark) + "] " + this.content;
     }
 
     public String printRecord() {

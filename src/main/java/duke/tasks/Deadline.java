@@ -35,10 +35,10 @@ public class Deadline extends Task {
 
     public String toString() {
         String sign = "";
-        return ". [D][" +super.markSign(super.mark) + "] " + super.content + deadlineDue;
+        return ". [D][" +super.markSign(super.isMark) + "] " + super.content + deadlineDue;
     }
 
     public String printRecord() {
-        return "[D]" + " [" + super.markSign(super.mark) + "] " + super.content + this.deadlineDue + "\n";
+        return "[D]" + " [" + super.markSign(super.isMark) + "] " + super.content + this.deadlineDue + "\n";
     }
 }
