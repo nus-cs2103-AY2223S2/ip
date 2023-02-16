@@ -17,6 +17,10 @@ public class Main extends Application {
 
     private final Duke duke = new Duke("data/tasks.txt");
 
+    /**
+     * Starts up the UI for DukeBot.
+     * @param stage stage on which the ui elements are to be placed on.
+     */
     @Override
     public void start(Stage stage) {
         try {

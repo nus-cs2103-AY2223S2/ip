@@ -8,7 +8,7 @@ import javafx.application.Application;
 public class Launcher {
 
     /**
-     * Default main method
+     * Represents the default main method
      * @param args arguments to be passed in.
      */
     public static void main(String[] args) {

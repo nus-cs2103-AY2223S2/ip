@@ -20,7 +20,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute method which will be run immediately after the generation of the command. Implementation
+     * Executes method which will be run immediately after the generation of the command. Implementation
      * depends on the command being run.
      *
      * @param taskList taskList of Duke.
