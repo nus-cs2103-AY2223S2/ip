@@ -9,8 +9,6 @@ import java.time.format.DateTimeParseException;
  * @author lukkesreysandeur
  */
 public class DateHandler {
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
     /**
      * Parses a user entered string into a date.
      *

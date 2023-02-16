@@ -11,6 +11,7 @@ import duke.commands.EventCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 
 /**
  * Helps to parse user input into commands that the chat bot understands.
@@ -53,6 +54,8 @@ public class Parser {
             return new ExitCommand(params);
         case "find":
             return new FindCommand(params);
+        case "help":
+            return new HelpCommand(params);
         default:
             throw new DukeUnknownInputException();
         }
