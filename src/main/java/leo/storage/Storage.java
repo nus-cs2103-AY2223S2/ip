@@ -20,6 +20,7 @@ public class Storage {
         try {
             FileOutputStream fileOut = new FileOutputStream("taskList.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
             out.writeObject(tl);
             out.close();
             fileOut.close();
