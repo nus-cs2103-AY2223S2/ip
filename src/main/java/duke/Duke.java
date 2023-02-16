@@ -36,10 +36,11 @@ public class Duke {
 
     /**
      * Retrieves a response for the input and recurResponse. It calls the readFromMemory method to read
-     * the task list from memory, sets up a new print stream, calls the execute method from the Ui class to update the task list,
+     * the task list from memory, sets up a new print stream, calls the execute method
+     * from the Ui class to update the task list,
      * resets the print stream, writes the updated task list to memory, and returns the output of the new print stream.
-     *  @param input - a string representing the user input
-     *  @param recurResponse - a list of timelines representing recurring tasks
+     * @param input - a string representing the user input
+     * @param recurResponse - a list of timelines representing recurring tasks
      * @return - a string representation of the output from the new print stream
      */
     @FXML

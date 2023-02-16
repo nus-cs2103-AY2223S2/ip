@@ -18,9 +18,9 @@ import javafx.scene.shape.Circle;
 /**
  * Creates a custom user and bot dialog chat in GUI.
  * It combines an Image and a text into a HBox.
- *  * @author Muhammad Reyaaz
- *  * @version %I% %G%
- *  * @since 11
+ * @author Muhammad Reyaaz
+ * @version %I% %G%
+ * @since 11
  */
 public class DialogBox extends HBox {
     @FXML

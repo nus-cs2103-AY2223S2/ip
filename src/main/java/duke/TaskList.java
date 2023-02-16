@@ -16,13 +16,13 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 class TaskList<T> {
 
+    private static final int INCREMENT = 1;
     private final ArrayList<Task> tasks;
-    //List starts numbering from 1
-    private final static int INCREMENT = 1;
+
     /**
      * Instantiate new list of tasks from an ArrayList
      *
-     * @param newTasks Type TaskList<T>
+     * @param newTasks Type TaskList
      */
     TaskList(TaskList<T> newTasks) {
         tasks = new ArrayList<Task>(newTasks.tasks);
@@ -52,7 +52,7 @@ class TaskList<T> {
      * Display to the user in a pretty format all the tasks in the list,
      * starting from 1.
      *
-     * @return TaskList<T>
+     * @return TaskList
      *
      */
     TaskList<T> listAllTasks() {
@@ -95,7 +95,7 @@ class TaskList<T> {
      * new TaskList is returned with the added task.
      *
      * @param newTask Task to add
-     * @return TaskList<T>
+     * @return TaskList
      */
     TaskList<T> add(Task newTask) {
         TaskList<T> newTasks = new TaskList<T>(tasks);
@@ -125,7 +125,7 @@ class TaskList<T> {
      * returned with the modified marked / unmarked status of a particular
      * task.
      *
-     * @return TaskList<T>
+     * @return TaskList
      */
     TaskList<T> set(int index, Task task) {
 
@@ -139,7 +139,7 @@ class TaskList<T> {
      * immutability nature of TaskList, a new TaskList will be returned with
      * the corresponding task deleted.
      *
-     * @return TaskList<T>
+     * @return TaskList
      */
     TaskList<T> removeTask(int index) {
         TaskList<T> newTasks = new TaskList<T>(tasks);

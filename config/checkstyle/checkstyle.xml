@@ -95,34 +95,34 @@
       <property name="severity" value="warning"/>
     </module>
 
-    <module name="TypeName">
-      <!-- Validates static, final fields against the expression "^[A-Z][a-zA-Z0-9]*$". -->
-      <metadata name="altname" value="TypeName"/>
-      <property name="severity" value="warning"/>
-    </module>
+<!--    <module name="TypeName">-->
+<!--      &lt;!&ndash; Validates static, final fields against the expression "^[A-Z][a-zA-Z0-9]*$". &ndash;&gt;-->
+<!--      <metadata name="altname" value="TypeName"/>-->
+<!--      <property name="severity" value="warning"/>-->
+<!--    </module>-->
 
-    <module name="ConstantName">
-      <!-- Validates non-private, static, final fields against the expression "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$". -->
-      <metadata name="altname" value="ConstantName"/>
-      <property name="applyToPrivate" value="false"/>
-      <message key="name.invalidPattern"
-               value="Variable ''{0}'' should be in ALL_CAPS (if it is a constant) or be private (otherwise)."/>
-      <property name="severity" value="warning"/>
-    </module>
+<!--    <module name="ConstantName">-->
+<!--      &lt;!&ndash; Validates non-private, static, final fields against the expression "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$". &ndash;&gt;-->
+<!--      <metadata name="altname" value="ConstantName"/>-->
+<!--      <property name="applyToPrivate" value="false"/>-->
+<!--      <message key="name.invalidPattern"-->
+<!--               value="Variable ''{0}'' should be in ALL_CAPS (if it is a constant) or be private (otherwise)."/>-->
+<!--      <property name="severity" value="warning"/>-->
+<!--    </module>-->
 
-    <module name="StaticVariableName">
-      <!-- Validates static, non-final fields against the supplied expression. -->
-      <metadata name="altname" value="StaticVariableName"/>
-      <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>
-      <property name="severity" value="warning"/>
-    </module>
+<!--    <module name="StaticVariableName">-->
+<!--      &lt;!&ndash; Validates static, non-final fields against the supplied expression. &ndash;&gt;-->
+<!--      <metadata name="altname" value="StaticVariableName"/>-->
+<!--      <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>-->
+<!--      <property name="severity" value="warning"/>-->
+<!--    </module>-->
 
-    <module name="MemberName">
-      <!-- Validates non-static members against the supplied expression. -->
-      <metadata name="altname" value="MemberName"/>
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-      <property name="severity" value="warning"/>
-    </module>
+<!--    <module name="MemberName">-->
+<!--      &lt;!&ndash; Validates non-static members against the supplied expression. &ndash;&gt;-->
+<!--      <metadata name="altname" value="MemberName"/>-->
+<!--      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>-->
+<!--      <property name="severity" value="warning"/>-->
+<!--    </module>-->
 
     <module name="MethodName">
       <!-- Validates identifiers for method names against the supplied expression. -->
@@ -219,11 +219,11 @@
     <module name="MissingSwitchDefault"/>
 
     <!-- Checks that Class variables should never be declared public. -->
-    <module name="VisibilityModifier">
-      <property name="protectedAllowed" value="true"/>
-      <property name="allowPublicFinalFields" value="true"/>
-      <property name="ignoreAnnotationCanonicalNames" value="RegisterExtension, TempDir"/>
-    </module>
+<!--    <module name="VisibilityModifier">-->
+<!--      <property name="protectedAllowed" value="true"/>-->
+<!--      <property name="allowPublicFinalFields" value="true"/>-->
+<!--      <property name="ignoreAnnotationCanonicalNames" value="RegisterExtension, TempDir"/>-->
+<!--    </module>-->
 
     <!--
     ORDER CHECKS

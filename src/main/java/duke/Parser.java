@@ -269,18 +269,18 @@ class Parser {
      * @exception DukeException
      */
     static TaskList<Task> events(Scanner sc, TaskList<Task> tasks) {
-         String description = sc.nextLine();
-         if (description.trim().length() == 0) {
-             throw new DukeException("Event must not be empty");
-         }
-         String[] dateRange = description.split("/from");
-         Task newTask = new Events(dateRange[0],dateRange[1].split("/to")[0],dateRange[1].split("/to")[1]);
-         return tasks.add(newTask);
+        String description = sc.nextLine();
+        if (description.trim().length() == 0) {
+            throw new DukeException("Event must not be empty");
+        }
+        String[] dateRange = description.split("/from");
+        Task newTask = new Events(dateRange[0], dateRange[1].split("/to")[0], dateRange[1].split("/to")[1]);
+        return tasks.add(newTask);
     }
 
     static TaskList<Task> find(Scanner sc, TaskList<Task> tasks) {
-         System.out.println(FIND_COMMAND);
-         tasks.listFindTasks(sc.nextLine(), tasks);
-         return tasks;
+        System.out.println(FIND_COMMAND);
+        tasks.listFindTasks(sc.nextLine(), tasks);
+        return tasks;
     }
 }

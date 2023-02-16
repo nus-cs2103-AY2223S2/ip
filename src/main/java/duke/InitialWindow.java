@@ -35,7 +35,7 @@ public class InitialWindow {
     @FXML
     public void switchToScene1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/view/MainWindow.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);

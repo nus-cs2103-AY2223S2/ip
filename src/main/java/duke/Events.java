@@ -67,7 +67,7 @@ class Events extends Task {
     /**
      * Converts the given date string into the specified format (MMM dd yyyy).
      * @param date The date string to be converted
-     * @return The converted date string in the specified format, or the original date string if there is a parsing exception
+     * @return The converted date string in the specified format
      */
     String localDateParser(String date) {
         try {

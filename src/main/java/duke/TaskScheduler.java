@@ -29,7 +29,7 @@ public class TaskScheduler extends TaskList<Recur> {
      * @param dukeImage       Image of Duke to display in the dialog box
      * @param input           input string
      */
-    TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, Image dukeImage, String input) {
+    TaskScheduler(List<Timeline> recurResponse, VBox dialogContainer, Image dukeImage, String input) {
         this.recurResponse = recurResponse;
         this.dialogContainer = dialogContainer;
         this.dukeImage = dukeImage;
@@ -45,7 +45,7 @@ public class TaskScheduler extends TaskList<Recur> {
      * @param dialogContainer VBox container to store the dialog boxes for the recurring tasks
      * @param input           input string
      */
-    TaskScheduler(List<Timeline> recurResponse,VBox dialogContainer, String input) {
+    TaskScheduler(List<Timeline> recurResponse, VBox dialogContainer, String input) {
         this.recurResponse = recurResponse;
         this.dialogContainer = dialogContainer;
         if (input.contains("recur")) {

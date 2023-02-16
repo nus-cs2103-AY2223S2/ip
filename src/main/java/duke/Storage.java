@@ -1,35 +1,32 @@
 package duke;
 
-import java.util.Scanner;
-
-import java.io.FileWriter;
 import java.io.File;
-
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 /**
  * Manages the reading and writing of the list of task into
  * the user machine's hardisk. In the main class, Duke, the Storage class is
  * first used to check if there is the dukeList.txt file found in a dynamic
  * directory, which is OS independent. If the file is found, date from the
- * file is read and processed into TaskList<Task>. If the file is not found,
+ * file is read and processed into TaskList. If the file is not found,
  * the text file is created, and everytime a user changes the list of tasks,
  * the new list of task is saved into the text file. The old list of task is
  * overwritten to save space.
- *
  * @author Muhammad Reyaaz
  * @version %I% %G%
- * @since 11
  * @see TaskList
+ * @since 11
  */
 class Storage {
+    static String FILENAME = "/dukeList.txt";
+    static int SIZE_OF_BOX = 3;
     //Dynamic directory
     private String directory = System.getProperty("user.dir");
-    static String FILENAME = "/dukeList.txt";
     //Full directory with dukeList.txt
     private java.io.File path = new java.io.File(directory + FILENAME);
     //New TaskList<Task> to read / write from/into
     private TaskList<Task> tasks = new TaskList<>();
-    static int SIZE_OF_BOX = 3;
 
     /**
      * Makes the default constructoe exlicit
@@ -113,7 +110,7 @@ class Storage {
                     rephraseEvents(task);
                 }
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             this.createDirectory();
         }
     }
@@ -125,7 +122,8 @@ class Storage {
      * @return hasSymbol
      */
     boolean isSymbol(String task, String symbol) {
-        if (("" + task.charAt(1)).equals(symbol) || ("" + task.charAt(2)).equals(symbol)) {
+        if (("" + task.charAt(1)).equals(symbol)
+                || ("" + task.charAt(2)).equals(symbol)) {
             return true;
 
         } else {
@@ -137,8 +135,8 @@ class Storage {
      * Processes the saved task to check if it is marked as done or undone.
      */
     void markTask(String task) {
-        boolean isMark = ("" + task.charAt(1)).equals(Parser.MARK_SYMBOL) ||
-                ("" + task.charAt(4)).equals(Parser.MARK_SYMBOL);
+        boolean isMark = ("" + task.charAt(1)).equals(Parser.MARK_SYMBOL)
+                || ("" + task.charAt(4)).equals(Parser.MARK_SYMBOL);
         if (isMark) {
             this.tasks = Parser.mark(this.tasks.numberOfTasks() - 1, this.tasks);
         }
@@ -156,7 +154,7 @@ class Storage {
      * TaskList can be invoked
      */
     void rephraseToDo(String input) {
-        this.tasks = Parser.toDo(input.substring(7),this.tasks);
+        this.tasks = Parser.toDo(input.substring(7), this.tasks);
         markTask(input);
     }
     /**
@@ -166,7 +164,7 @@ class Storage {
     void rephraseDeadline(String input) {
         int indexOfBracket = input.indexOf(" (");
         String task = input.substring(7, indexOfBracket);
-        String deadlineDate = input.substring(indexOfBracket + (2* SIZE_OF_BOX), input.length() - 1);
+        String deadlineDate = input.substring(indexOfBracket + (2 * SIZE_OF_BOX), input.length() - 1);
         this.tasks = Parser.deadline(task, deadlineDate, this.tasks);
         markTask(input);
     }
@@ -179,7 +177,7 @@ class Storage {
         int indexOfTo = input.indexOf("(to: ");
         String task = input.substring(7, indexOfFrom);
         String fromDate = input.substring(indexOfFrom + (2 * SIZE_OF_BOX), indexOfTo - 1);
-        String toDate =  input.substring(indexOfTo + SIZE_OF_BOX + 1, input.length() - 1);
+        String toDate = input.substring(indexOfTo + SIZE_OF_BOX + 1, input.length() - 1);
 
         fromDate = fromDate.trim();
         toDate = toDate.trim();
@@ -191,7 +189,7 @@ class Storage {
     }
     /**
      * Gets the current set of tasks
-     * @return TaskList<Task>
+     * @return TaskList
      */
     TaskList<Task> getTasks() {
         return tasks;

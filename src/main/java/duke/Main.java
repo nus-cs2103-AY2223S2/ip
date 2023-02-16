@@ -17,10 +17,9 @@ public class Main extends Application {
     /**
      * Creates an instance of the FXMLLoader class, which is used to load the FXML file
      * Sets the title of the stage to Duke
-     * @param stage the primary stage for this application, onto which
-     * the application scene can be set.
-     * Applications may create other stages, if needed, but they will not be
-     * primary stages.
+     * @param stage the primary stage for this application, onto which the application scene can be set.
+     *     Applications may create other stages, if needed, but they will not be
+     *     primary stages.
      */
     @Override
     public void start(Stage stage) {

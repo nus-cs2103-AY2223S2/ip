@@ -4,7 +4,7 @@ package duke;
  * Represents a recurring event that has a description, a start time, an end time, and a mock remaining time.
  * Implements the Runnable interface and provides a run method that sleeps for the mock remaining time.
  */
-public class Recur implements Runnable  {
+public class Recur implements Runnable {
 
     private String description;
     private String from;

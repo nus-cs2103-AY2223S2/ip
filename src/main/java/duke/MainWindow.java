@@ -37,19 +37,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Duke duke;
 
+    private final List<Timeline> recurResponse = new ArrayList<>();
+
     private final Image userImage =
             new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Khabib.png")));
     private final Image dukeImage =
             new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Ronaldo.png")));
 
-    List<Timeline> recurResponse = new ArrayList<>();
-
-    Image image = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Wallpaper.png")));
-    BackgroundSize backgroundSize = new BackgroundSize(1, 1, false, false, false, false);
-    BackgroundImage backgroundImage =
+    private final Image image = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/Wallpaper.png")));
+    private final BackgroundSize backgroundSize = new BackgroundSize(1, 1, false, false, false, false);
+    private final BackgroundImage backgroundImage =
             new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
                     BackgroundPosition.CENTER, backgroundSize);
-    Background background = new Background(backgroundImage);
+    private final Background background = new Background(backgroundImage);
 
     /**
      * Runs at the start of the javafx lifecycle.
