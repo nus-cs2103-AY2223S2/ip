@@ -3,6 +3,7 @@ package duke.ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import duke.DukeException;
@@ -179,47 +180,52 @@ public class Parser {
     public static Command parseUpdateTask(String updateDescription)
             throws NumberFormatException, DateTimeParseException, DukeException {
 
-        /* Obtains index of task and the updateComponents */
+        /* Obtains index of task and what to update */
         int limiter = 2;
         String[] indexAndUpdate = updateDescription.split(" ", limiter);
 
         if (indexAndUpdate.length < limiter) {
-            throw new DukeException("Update component missing!");
+            throw new DukeException("Update information missing.");
         }
 
         int index = Integer.parseInt(indexAndUpdate[0].trim());
         String update = indexAndUpdate[1];
 
+        /* Splits the update information based on the update components */
         String regex = "((?=/description|/by|/from|/to)|(?<=/description|/by|/from|/to))";
         String[] updateComponents = update.split(regex);
 
-        // System.out.println(Arrays.toString(updateComponents));
+        System.out.println(Arrays.toString(updateComponents));
 
-        /* Creates a list of pairs of task component and its detail */
+        /* Creates a list of pairs of task component and the updated information */
         List<Pair<TaskComponent, ?>> updateComponentsList = new ArrayList<>();
         for (int i = 0; i < updateComponents.length - 1; i = i + 2) {
             String component = updateComponents[i].trim();
-            String updatedContent = updateComponents[i + 1].trim();
+            String updateContent = updateComponents[i + 1].trim();
 
             switch (component) {
             case "/description":
-                updateComponentsList.add(new Pair<>(TaskComponent.DESCRIPTION, updatedContent));
+                updateComponentsList.add(new Pair<>(TaskComponent.DESCRIPTION, updateContent));
                 break;
             case "/by":
-                LocalDate newBy = LocalDate.parse(updatedContent);
+                LocalDate newBy = LocalDate.parse(updateContent);
                 updateComponentsList.add(new Pair<>(TaskComponent.BY, newBy));
                 break;
             case "/from":
-                LocalDate newFrom = LocalDate.parse(updatedContent);
+                LocalDate newFrom = LocalDate.parse(updateContent);
                 updateComponentsList.add(new Pair<>(TaskComponent.FROM, newFrom));
                 break;
             case "/to":
-                LocalDate newTo = LocalDate.parse(updatedContent);
+                LocalDate newTo = LocalDate.parse(updateContent);
                 updateComponentsList.add(new Pair<>(TaskComponent.TO, newTo));
                 break;
             default:
                 throw new DukeException("Invalid task component: " + component);
             }
+        }
+
+        if (updateComponentsList.isEmpty()) {
+            throw new DukeException("Invalid update command format.");
         }
 
         return new CommandUpdate(index, updateComponentsList);

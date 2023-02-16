@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private final Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LeDuke_avatar.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaSmith.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaLebron.png"));
 
     /**
      * Constructor for MainWindow class.
@@ -54,6 +54,8 @@ public class MainWindow extends AnchorPane {
         showWelcomeMessage();
     }
 
+
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -62,7 +64,7 @@ public class MainWindow extends AnchorPane {
     private void showWelcomeMessage() {
         String welcomeMessage = duke.createWelcomeMessage();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage, false)
         );
     }
 
@@ -74,9 +76,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        boolean isError = (response.startsWith("Error: "));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, isError)
         );
         userInput.clear();
 

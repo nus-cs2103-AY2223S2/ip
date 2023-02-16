@@ -46,7 +46,7 @@ public class Duke {
 
             return response;
         } catch (DukeException e) {
-            return e.getMessage();
+            return "Error: " + e.getMessage();
         }
     }
 
