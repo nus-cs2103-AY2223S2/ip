@@ -46,7 +46,7 @@ public class Ui {
      * @return String containing exit message.
      */
     public String showExit() {
-        return showLine() + "Bye bye! Luffy will go to sleep now!\nHope to see you again soon!! :>\n" + showLine();
+        return "Bye bye! Luffy will go to sleep now!\nHope to see you again soon!! :>\n";
     }
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
      * @return Response after printing lst.
      */
     public String showList(TaskList taskList) {
-        return showLine() + "Here are the tasks in your list:\n" + taskList.printList() + showLine() + showLine();
+        return "Here are the tasks in your list:\n" + taskList.printList() + "\n";
     }
 
     /**
@@ -64,7 +64,7 @@ public class Ui {
      * @return Response after task marked as done.
      */
     public String showMarkedTask(Task task) {
-        return showLine() + "Okay! I've marked this task as done:\n" + task.toString() + "\n" + showLine();
+        return "Okay! I've marked this task as done:\n" + task.toString() + "\n";
     }
 
     /**
@@ -73,8 +73,8 @@ public class Ui {
      * @return Response after task marked as undone.
      */
     public String showUnmarkedTask(Task task) {
-        return showLine() + "Okay! I've marked this task as not done yet:\n"
-                + task.toString() + "\n" + showLine();
+        return "Okay! I've marked this task as not done yet:\n"
+                + task.toString() + "\n";
     }
 
     /**
@@ -84,8 +84,8 @@ public class Ui {
      * @return Response after delete is successful.
      */
     public String showDeletedTask(Task task, int size) {
-        return showLine() + "Okay! I've removed this task from the list:\n" + task.toString() + "\n"
-                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+        return "Okay! I've removed this task from the list:\n" + task.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size);
     }
 
     /**
@@ -95,8 +95,8 @@ public class Ui {
      * @return Response after todo successfully created.
      */
     public String showTodo(Todo todo, int size) {
-        return showLine() + "Got it! I've added: \n" + " " + todo.toString() + "\n"
-                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+        return "Got it! I've added: \n" + " " + todo.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size);
     }
 
     /**
@@ -106,8 +106,8 @@ public class Ui {
      * @return Response after deadline successfully created.
      */
     public String showDeadline(Deadline deadline, int size) {
-        return showLine() + "Got it! I've added: \n" + " " + deadline.toString() + "\n"
-                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+        return "Got it! I've added: \n" + " " + deadline.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size);
     }
 
     /**
@@ -117,13 +117,13 @@ public class Ui {
      * @return Response after event successfully created.
      */
     public String showEvent(Event event, int size) {
-        return showLine() + "Got it! I've added: \n" + " " + event.toString() + "\n"
-                + String.format("Now you have %d tasks in the list!\n", size) + showLine();
+        return "Got it! I've added: \n" + " " + event.toString() + "\n"
+                + String.format("Now you have %d tasks in the list!\n", size);
     }
 
     public String showSchedule(TaskList taskList, LocalDate date) {
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return showLine() + "Here is your schedule for " + formattedDate + ":)\n"
-                + taskList.printSchedule(date) + showLine();
+        return "Here is your schedule for " + formattedDate + ":)\n"
+                + taskList.printSchedule(date) + "\n";
     }
 }

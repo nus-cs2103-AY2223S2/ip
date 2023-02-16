@@ -54,7 +54,6 @@ public class Luffy {
             return response;
         } catch (LuffyException e) {
             response = ui.showError(e.toString());
-            response += ui.showLine();
             return response;
         }
     }

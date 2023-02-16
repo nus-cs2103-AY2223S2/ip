@@ -23,7 +23,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui) throws LuffyException {
         String response = taskList.printMatchingList(this.keyword);
-        response += ui.showLine();
         return response;
     }
 }
