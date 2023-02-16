@@ -1,6 +1,5 @@
 package duke.parser;
 
-import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -106,28 +105,28 @@ public class Parser {
         Command valueCommand;
         try {
             switch (command) {
-                case "unmark ":
-                    inputArr = fullCommand.split(" ");
-                    int toUnmark = Integer.parseInt(inputArr[1]);
-                    valueCommand = new UnmarkCommand(toUnmark);
-                    break;
-                case "mark ":
-                    inputArr = fullCommand.split(" ");
-                    int toMark = Integer.parseInt(inputArr[1]);
-                    valueCommand = new MarkCommand(toMark);
-                    break;
-                case "delete ":
-                    inputArr = fullCommand.split(" ");
-                    int toDelete = Integer.parseInt(inputArr[1]);
-                    valueCommand = new DeleteCommand(toDelete);
-                    break;
-                case "find ":
-                    inputArr = fullCommand.split(" ", 2);
-                    String[] toFind = inputArr[1].split(" ");
-                    valueCommand = new FindCommand(toFind);
-                    break;
-                default:
-                    return null;
+            case "unmark ":
+                inputArr = fullCommand.split(" ");
+                int toUnmark = Integer.parseInt(inputArr[1]);
+                valueCommand = new UnmarkCommand(toUnmark);
+                break;
+            case "mark ":
+                inputArr = fullCommand.split(" ");
+                int toMark = Integer.parseInt(inputArr[1]);
+                valueCommand = new MarkCommand(toMark);
+                break;
+            case "delete ":
+                inputArr = fullCommand.split(" ");
+                int toDelete = Integer.parseInt(inputArr[1]);
+                valueCommand = new DeleteCommand(toDelete);
+                break;
+            case "find ":
+                inputArr = fullCommand.split(" ", 2);
+                String[] toFind = inputArr[1].split(" ");
+                valueCommand = new FindCommand(toFind);
+                break;
+            default:
+                return null;
             }
             return valueCommand;
         } catch (ArrayIndexOutOfBoundsException e) {
