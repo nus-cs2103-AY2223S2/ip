@@ -23,7 +23,7 @@ and want to keep track of the important things in your life, Leo has your back.
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `leo.jar` from [here](
+2. Download the latest `leo.jar` from [here](https://github.com/vigonometry/ip/releases/tag/A-Release)
 3. Copy the file to the folder you want to use as the _home folder_ for your Leo.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar leo.jar` command to run the application.
 5. Type the command in the command box and press Enter to execute it.
