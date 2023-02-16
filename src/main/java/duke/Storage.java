@@ -26,21 +26,18 @@ public class Storage {
             while (filePath2.contains("/")) {
                 int slashPos = filePath2.indexOf("/");
                 File dirCreation = new File(filePath2.substring(0, slashPos));
-                if (dirCreation.mkdir()) {
-                    System.out.println("Directory has been created successfully");
-                } else {
-                    System.out.println("Directory already exist");
-                }
+//                if (dirCreation.mkdir()) {
+//                    System.out.println("Directory has been created successfully");
+//                } else {
+//                    System.out.println("Directory already exist");
+//                }
+                dirCreation.mkdir();
                 filePath2 = filePath2.substring(slashPos + 1);
             }
             fileCreation = new File(filePath);
-            if (fileCreation.createNewFile()) {
-                System.out.println("File created: " + fileCreation.getName());
-            } else {
+            if (!fileCreation.createNewFile()) {
                 isFilePresent = true;
-                System.out.println("File already exists.");
             }
-
         } catch (IOException e) {
             System.out.println("Folder do not exist.");
             e.printStackTrace();

@@ -30,6 +30,5 @@ public class Duke  {
     }
 
     public static void main(String[] args) throws DukeException, IOException {
-        Duke duke = new Duke("data/tasks.txt");
     }
 }
