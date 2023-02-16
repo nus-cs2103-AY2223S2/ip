@@ -1,0 +1,30 @@
+import duke.*;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class ParserTest {
+    @Test
+    public void parserTest1() throws IOException, DukeException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("data/tasks");
+        Tasklist tasklist = new Tasklist();
+        Parser parser = new Parser();
+        parser.parse("todo read", tasklist, ui, storage);
+        parser.parse("mark 1", tasklist, ui, storage);
+        assertEquals(true, tasklist.getList().get(0).isDoneStatus());
+    }
+
+    @Test
+    public void parserTest2() throws IOException, DukeException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("data/tasks");
+        Tasklist tasklist = new Tasklist();
+        Parser parser = new Parser();
+        DukeException exception = assertThrows(DukeException.class, () -> parser.parse("bird", tasklist, ui, storage));
+        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", exception.getMessage());
+    }
+}
