@@ -1,0 +1,15 @@
+#userInput {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 13;
+}
+
+#sendButton {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 18;
+    -fx-background-color: #00ACFF;
+}
+
+#scrollPane {
+    -fx-background-color: linear-gradient(to right, #FF3838, #FFA0A0);
+    -fx-background: transparent;
+}
