@@ -132,12 +132,14 @@ class TaskList {
                 return "Noted: I've removed all tasks";
             } else {
                 int deleteIndex = Integer.parseInt(index[1]);
-                if (deleteIndex >= taskArrayList.size() || deleteIndex <= 0) {
+                if (deleteIndex > taskArrayList.size() || deleteIndex <= 0) {
                     throw new TaskNotExist();
                 }
-                assert deleteIndex >= 0 : "Invalid Index";
-                assert deleteIndex < taskArrayList.size() : "Invalid index";
-                return "Noted: I've remove this task\n" + taskArrayList.remove(deleteIndex - 1);
+                assert deleteIndex >= 0 && deleteIndex <= taskArrayList.size() : "Invalid Index";
+                String taskDesciption = taskArrayList.get(deleteIndex - 1).toString();
+                storage.deleteOne(taskArrayList, deleteIndex);
+
+                return "Noted: I've remove this task\n" + taskDesciption;
             }
         } catch (IOException e) {
             return e.getMessage();

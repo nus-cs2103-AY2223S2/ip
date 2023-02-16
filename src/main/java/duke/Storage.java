@@ -104,4 +104,14 @@ public class Storage {
         dukeTxt.delete();
         dukeTxt.createNewFile();
     }
+
+    /**
+     * @param tasks an arraylist of tasks
+     * @param index the index to delete
+     * @throws IOException exception to handle wrong userinput and output
+     */
+    public void deleteOne(ArrayList<Task> tasks, int index) throws IOException {
+        tasks.remove(index - 1);
+        saveData(tasks);
+    }
 }
