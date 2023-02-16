@@ -2,6 +2,7 @@ package bob;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -25,9 +26,12 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
+        text.setPadding(new Insets(0, 10, 0, 10));
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
+        // Set padding for dialog boxes
+        this.setPadding(new Insets(5, 0, 15, 0));
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }
@@ -45,6 +49,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getBobDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
+        db.setStyle("-fx-background-color: #89D08E");
         db.flip();
         return db;
     }

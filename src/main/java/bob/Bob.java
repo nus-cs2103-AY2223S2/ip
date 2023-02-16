@@ -8,9 +8,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 /** Bob is a chat bot that helps manage tasks */
@@ -32,7 +32,7 @@ public class Bob extends Application {
      */
     public Bob() {
         storage = new Storage("data/taskList.txt");
-        ui = new Ui("~", 30);
+        ui = new Ui("-", 30);
         tasks = new TaskList();
     }
 
@@ -191,6 +191,7 @@ public class Bob extends Application {
         stage.setMinWidth(400);
 
         mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setStyle("-fx-background-color: #89D08E");
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
