@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -21,9 +24,10 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Ui ui;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/emz.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/leon.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/otis.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/jesse.png"));
 
     @FXML
     public void initialize() {
@@ -31,7 +35,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        Ui ui = new Ui();
+        ui = new Ui();
         duke = d;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(ui.greet(), dukeImage)
@@ -51,5 +55,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        }
     }
 }

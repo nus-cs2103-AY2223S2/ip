@@ -8,6 +8,8 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    private String priority = " ";
+
     /**
      * Constructor for instantiating a Task object
      * @param description description of the task
@@ -31,6 +33,26 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Returns the priority of the task
+     * @return String priority
+     */
+    public String getPriority() {
+        return this.priority;
+    }
+
+    public void assignPriority(String priority) {
+        try {
+            if (priority.equals("low") || priority.equals("medium") || priority.equals("high")) {
+                this.priority = priority;
+            } else {
+                throw new DukeException("Please input a valid priority: low / medium / high");
+            }
+        } catch (DukeException e) {
+            e.getMessage();
+        }
     }
 
     /**

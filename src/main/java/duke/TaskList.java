@@ -182,6 +182,24 @@ public class TaskList {
         }
     }
 
+    public String markPriority(String input) {
+        String response = "";
+        try {
+            String inputArr[] = input.split(" ", 3);
+            String taskNum = inputArr[1];
+            String priority = inputArr[2];
+            int index = Integer.parseInt(taskNum);
+            Task currTask = tasks.get(index - 1);
+            currTask.assignPriority(priority);
+            response = "Nice! I have assigned this task:\n" + currTask + "\nas " + priority + " priority";
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            response = "Please input a valid index";
+        }
+        return response;
+
+    }
+
     /**
      * Converts task list to storage data
      * @return String task list in storage data format with dividers

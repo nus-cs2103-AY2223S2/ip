@@ -27,7 +27,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return TASK_TYPE + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return TASK_TYPE + super.toString() + " (from: " + this.from + " to: " + this.to + ")"
+                + "\nPriority: " + getPriority();
     }
 
     /**
@@ -36,7 +37,7 @@ public class Event extends Task {
      */
     @Override
     public String toStorageData() {
-        return TASK_TYPE + DIVIDER + this.getStatusIcon() + DIVIDER + super.description + DIVIDER + this.from
-                + DIVIDER + this.to;
+        return TASK_TYPE + DIVIDER + this.getStatusIcon() + DIVIDER + getPriority() + DIVIDER + super.description
+                + DIVIDER + this.from + DIVIDER + this.to;
     }
 }
