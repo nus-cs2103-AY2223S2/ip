@@ -104,7 +104,7 @@ public class Parser {
                     }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Your command is too short man");
+            ui.addStatement("Your command is too short man");
         }
         return new InvalidCommand();
     }
