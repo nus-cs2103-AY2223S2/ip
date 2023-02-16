@@ -132,7 +132,7 @@ class TaskList {
                 return "Noted: I've removed all tasks";
             } else {
                 int deleteIndex = Integer.parseInt(index[1]);
-                if (deleteIndex >= taskArrayList.size() || deleteIndex <= -1) {
+                if (deleteIndex >= taskArrayList.size() || deleteIndex <= 0) {
                     throw new TaskNotExist();
                 }
                 assert deleteIndex >= 0 : "Invalid Index";
