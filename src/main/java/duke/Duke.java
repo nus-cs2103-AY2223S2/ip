@@ -2,6 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Duke  {
     private Storage storage;
@@ -9,7 +10,7 @@ public class Duke  {
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filepath) throws IOException {
+    public Duke(String filepath) throws IOException, ParseException {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filepath);
@@ -25,7 +26,7 @@ public class Duke  {
         return this.ui.welcome();
     }
 
-    public String feedingIntoInterface(String userInput) throws DukeException, FileNotFoundException {
+    public String feedingIntoInterface(String userInput) throws DukeException, FileNotFoundException, ParseException {
         return this.parser.parse(userInput, tasks, ui, storage);
     }
 

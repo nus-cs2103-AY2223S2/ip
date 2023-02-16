@@ -26,11 +26,6 @@ public class Storage {
             while (filePath2.contains("/")) {
                 int slashPos = filePath2.indexOf("/");
                 File dirCreation = new File(filePath2.substring(0, slashPos));
-//                if (dirCreation.mkdir()) {
-//                    System.out.println("Directory has been created successfully");
-//                } else {
-//                    System.out.println("Directory already exist");
-//                }
                 dirCreation.mkdir();
                 filePath2 = filePath2.substring(slashPos + 1);
             }

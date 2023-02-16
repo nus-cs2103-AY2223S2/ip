@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Tasklist {
@@ -62,18 +64,29 @@ public class Tasklist {
      * @param type    the type of task to be added.
      * @param content the user input that they typed in the command line.
      */
-    public String addingActivities(String type, String content) {
+    public String addingActivities(String type, String content) throws DateTimeParseException{
         switch (type) {
         case "todo":
             Todo todoTask = new Todo(content.substring(5), content);
             storage.add(todoTask);
             return "Got it. I've added this task:\n  " + todoTask.toString() + "\nNow you have " + storage.size() + " tasks in the list";
         case "deadline":
+            if (!content.contains("/by")) {
+                return "☹ OOPS!!! The syntax for deadline is wrong. Type /help for user guide.";
+            }
             int position = content.indexOf("/by ");
+            try {
+                LocalDate.parse(content.substring(position + 4));
+            } catch (DateTimeParseException e) {
+                return "☹ OOPS!!! The date is in the wrong format. Type /help for user guide.";
+            }
             Deadline deadlineTask = new Deadline(content.substring(9, position), content, content.substring(position + 4));
             storage.add(deadlineTask);
             return "Got it. I've added this task:\n  " + deadlineTask.toString() + "\nNow you have " + storage.size() + " tasks in the list";
         case "event":
+            if (!(content.contains("/from")) || !(content.contains("/to"))) {
+                return "☹ OOPS!!! The syntax for event is wrong. Type /help for user guide.";
+            }
             int position1 = content.indexOf("/from ");
             int position2 = content.indexOf("/to ");
             Event eventTask = new Event(content.substring(6, position1), content, content.substring(position1 + 6, position2), content.substring(position2 + 4));

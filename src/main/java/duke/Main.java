@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,8 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setWelcomeMessage();
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }

@@ -1,7 +1,6 @@
 package duke;
 
-import duke.DialogBox;
-import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +11,7 @@ import javafx.scene.Group;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
@@ -59,11 +59,14 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws DukeException, FileNotFoundException {
+    private void handleUserInput() throws DukeException, FileNotFoundException, ParseException, InterruptedException {
         String input = userInput.getText();
         String response = duke.feedingIntoInterface(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage, "#eca3b3"),
                 new Group(DialogBox.getDukeDialog(response, dukeImage, "#d4fffd")));
         userInput.clear();
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
     }
 }

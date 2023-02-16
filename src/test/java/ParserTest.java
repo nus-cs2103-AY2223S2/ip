@@ -2,13 +2,13 @@ import duke.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
-    public void parserTest1() throws IOException, DukeException {
+    public void parserTest1() throws IOException, DukeException, ParseException {
         Ui ui = new Ui();
         Storage storage = new Storage("data/tasks");
         Tasklist tasklist = new Tasklist();
@@ -19,7 +19,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parserTest2() throws IOException, DukeException {
+    public void parserTest2() throws IOException, DukeException, ParseException {
         Ui ui = new Ui();
         Storage storage = new Storage("data/tasks");
         Tasklist tasklist = new Tasklist();
