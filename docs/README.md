@@ -1,6 +1,6 @@
 # User Guide
 
-Duke helps you keep track of our tasks so that you don't have to.
+Grand Duke helps you keep track of our tasks so that you don't have to.
 
 ## Features
 
@@ -39,7 +39,10 @@ A to-do task with the description of homework is added to your list of tasks.
 `event Midterms /from 2023-02-13 /to 2023-02-15`
 
 **Expected outcome:**
-An event task with the description of Midterms (from: Feb 13 2023 to Feb 15 2023) is added to your list of tasks.
+An event task with the description of `Midterms (from: Feb 13 2023 to Feb 15 2023)` is added to your list of tasks.
+
+**Note:** 
+The date must be in the format of `YYYY-MM-DD`.
 
 ### `deadline` - Add a deadline
 
@@ -49,8 +52,11 @@ An event task with the description of Midterms (from: Feb 13 2023 to Feb 15 2023
 **Example of usage:**
 `deadline Assignment 1 /by 2023-02-15`
 
+**Note:**
+The date must be in the format of `YYYY-MM-DD`.
+
 **Expected outcome:**
-A deadline task with the description of Assignment 1 (by: Feb 15 2023) is added to your list of tasks.
+A deadline task with the description of `Assignment 1 (by: Feb 15 2023)` is added to your list of tasks.
 
 ### `delete` - Delete a task
 
@@ -80,10 +86,13 @@ Your list of tasks is displayed.
 `find SEARCH_TERM`
 
 **Example of usage:**
-`find midterms`
+`find Midterms`
 
 **Expected outcome:**
-Tasks with the search term "midterms" in their description are displayed.
+Tasks with the search term `Midterms` in their description are displayed.
+
+**Note:**
+The `SEARCH_TERM` is case-sensitive.
 
 ### `mark` - Mark a task
 
@@ -110,7 +119,7 @@ The first task is marked as undone.
 ### `tag` - tag a task
 
 **Format:**
-`tag TASK_INDEX #TAG`
+`tag TASK_INDEX #YOUR_TAG`
 
 **Example of usage:**
 `tag 1 #important`
@@ -127,4 +136,4 @@ Your first task is tagged as important.
 `bye`
 
 **Expected outcome:**
-The session with Grand Duke ends.
+The session with Grand Duke ends. The window will be automatically closed.
