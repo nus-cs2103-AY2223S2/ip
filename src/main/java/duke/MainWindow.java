@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String greeting = "Greetings, Human. I am Space Lin, goddess of servant universe. Tell me what you need.";
+        String greeting = "Greetings, human. I am Space Lin, goddess of servant universe. Tell me what you need.";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage, dukeStyle));
     }
 

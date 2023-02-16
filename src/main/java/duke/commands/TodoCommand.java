@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Todos;
@@ -37,7 +36,7 @@ public class TodoCommand extends Command {
      * @param store
      */
     @Override
-    public String execute(TaskList list, Storage store) throws DukeException {
+    public String execute(TaskList list, Storage store) {
         Todos newTodo = new Todos((taskName));
         if (list.isExist(newTodo)) {
             return "Ah, the task is already in the list.";

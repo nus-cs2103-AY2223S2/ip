@@ -27,9 +27,9 @@ public class MarkCommand extends Command {
      * @param store
      */
     @Override
-    public String execute(TaskList list, Storage store) throws DukeException {
+    public String execute(TaskList list, Storage store) {
         if (markNumber < 1 || markNumber > list.size()) {
-            throw new DukeException("Sorry, this task number is invalid.");
+            return "This task number is invalid. Use 'list' to check how many tasks you have.";
         }
         list.stream().filter(x -> list.indexOf(x) == markNumber - 1).forEach(y -> y.setStatus(true));
         store.save(list);

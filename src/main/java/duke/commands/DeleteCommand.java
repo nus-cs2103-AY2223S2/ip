@@ -28,9 +28,9 @@ public class DeleteCommand extends Command {
      * @param store
      */
     @Override
-    public String execute(TaskList list, Storage store) throws DukeException {
+    public String execute(TaskList list, Storage store) {
         if (deleteNumber < 1 || deleteNumber > list.size()) {
-            throw new DukeException("Sorry, this task number is invalid.");
+            return "This task number is invalid. Use 'list' to check how many tasks you have.";
         }
         Task removed = list.get(this.deleteNumber - 1);
         list.remove(this.deleteNumber - 1);

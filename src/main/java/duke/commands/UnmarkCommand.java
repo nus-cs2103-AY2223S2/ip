@@ -36,9 +36,9 @@ public class UnmarkCommand extends Command {
      * @param store
      */
     @Override
-    public String execute(TaskList list, Storage store) throws DukeException {
+    public String execute(TaskList list, Storage store) {
         if (unmarkNumber < 1 || unmarkNumber > list.size()) {
-            throw new DukeException("Sorry, this task number is invalid.");
+            return "This task number is invalid. Use 'list' to check how many tasks you have.";
         }
         list.stream().filter(x -> list.indexOf(x) == unmarkNumber - 1).forEach(y -> y.setStatus(false));
         store.save(list);
