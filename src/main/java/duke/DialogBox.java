@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img, String user) {
-        if(user.equals("Duke")) {
+        if (user.equals("User")) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/UserDialogBox.fxml"));
                 fxmlLoader.setController(this);
@@ -36,8 +36,6 @@ public class DialogBox extends HBox {
                 e.printStackTrace();
             }
 
-            dialog.setText(text);
-            displayPicture.setImage(img);
         } else {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DukeDialogBox.fxml"));
@@ -48,9 +46,9 @@ public class DialogBox extends HBox {
                 e.printStackTrace();
             }
 
-            dialog.setText(text);
-            displayPicture.setImage(img);
         }
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
@@ -64,11 +62,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, "Duke");
+        return new DialogBox(text, img, "User");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, "User");
+        var db = new DialogBox(text, img, "Duke");
         db.flip();
         return db;
     }

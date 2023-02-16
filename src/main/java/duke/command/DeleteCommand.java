@@ -43,8 +43,13 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Note notes) throws DukeException {
         int taskIndex = getIndex(userInput);
-        Task toDelete = tasks.getTask(taskIndex);
-        tasks.deleteTask(taskIndex);
+        Task toDelete = null;
+        try {
+            toDelete = tasks.getTask(taskIndex);
+            tasks.deleteTask(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Please enter a valid index.");
+        }
         Storage.saveTasksToTaskLog(tasks);
         String taskCount = (tasks.getSize() - 1 == 1) ? "task" : "tasks";
         return ("Got it. I've removed this task:\n   "

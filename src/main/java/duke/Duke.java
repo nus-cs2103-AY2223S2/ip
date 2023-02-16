@@ -50,7 +50,7 @@ public class Duke {
     }
 
     public String showWelcomeMessage() {
-        return "Hello! I am JenoBot, a personal CLI chatbot that will" +
+        return "Hello! I am JenoBot, a personal CLI chatbot that will " +
                 "help you to keep track of your daily tasks.\n\n" +
                 "To view the list of features, type in 'help' in the command box.";
     }

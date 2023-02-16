@@ -26,7 +26,7 @@ public class OpenNoteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Note notes) {
         if (Storage.loadNotesFromFile().equals("")) {
-            return "You current do not have any notes.";
+            return "You currently do not have any notes.";
         } else {
             return "Here are your current notes:\n" + Storage.loadNotesFromFile();
         }
