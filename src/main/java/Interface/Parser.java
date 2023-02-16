@@ -30,11 +30,22 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String input) throws DukeException {
-        String[] inputs = input.split(" /");
+        String editInput = removeWhitespaceEnter(input);
+        String[] inputs = editInput.split(" /");
         String instruction = getInstruction(inputs);
         checkValidCommand(instruction, inputs);
         Command command = getCommand(instruction, inputs);
         return command;
+    }
+
+    /**
+     * Removes line breaks and unnecessary whitespaces from input.
+     *
+     * @param input The String input from user.
+     * @return String The String input without line break and unnecessary whitespaces.
+     */
+    private static String removeWhitespaceEnter(String input) {
+        return input.trim().replaceAll("/n", "");
     }
 
     /**
