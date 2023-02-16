@@ -1,10 +1,18 @@
 package duke.exceptions;
 
-import java.lang.Exception;
+import duke.ui.Ui;
 
-public class DukeException extends Exception{
-    public DukeException(String message)
-    {
-        throw new IllegalArgumentException(message);
+/**
+ *
+ */
+public class DukeException extends Exception {
+    private static Ui ui;
+
+    public DukeException(String message) {
+        ui.showError(message);
+    }
+
+    public static void setUi(Ui dukeUi) {
+        ui = dukeUi;
     }
 }

@@ -1,17 +1,20 @@
 package duke.commands;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
+/**
+ * A class that handles adding deadline.
+ */
 public class AddDeadlineCommand extends Command {
 
-    private String userInput;
+    private final String userInput;
 
     /**
      * Constructor for the AddDeadlineCommand class.
@@ -35,11 +38,11 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputs = userInput.split(" ");
         if (inputs.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         String[] taskNameAndDeadline = userInput.split(" ", 2)[1].split(" /by ");
         if (taskNameAndDeadline.length < 2) {
-            throw new DukeException("☹ OOPS!! The date of a deadline cannot be empty.");
+            throw new DukeException("OOPS!! The date of a deadline cannot be empty.");
         }
         String taskName = taskNameAndDeadline[0];
         String deadline = taskNameAndDeadline[1];
@@ -50,6 +53,7 @@ public class AddDeadlineCommand extends Command {
         } catch (IOException e) {
             throw new DukeException("Error writing to file");
         }
-        ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have " + tasks.getSize() + " duke.tasks in the list.");
+        ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have "
+                        + tasks.getSize() + " duke.tasks in the list.");
     }
 }

@@ -1,14 +1,20 @@
 package duke.tasks;
 
-import duke.Duke;
-import duke.exceptions.DukeException;
-
 import java.time.LocalDate;
 
+import duke.exceptions.DukeException;
+
+/**
+ * A class for task.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for task.
+     * @param description the description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -30,7 +36,9 @@ public class Task {
         return description;
     }
 
-    public boolean isDeadline() { return false; }
+    public boolean isDeadline() {
+        return false;
+    }
 
     public LocalDate getDeadline() throws DukeException {
         throw new DukeException("Not a deadline");

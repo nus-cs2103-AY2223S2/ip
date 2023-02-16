@@ -1,18 +1,26 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
+/**
+ * A class that handles removing marking from tasks.
+ */
+public class UnmarkCommand extends Command {
 
-public class UnmarkCommand extends Command{
+    private final int idx;
 
-    private int idx;
-
+    /**
+     * Constructor for unmark task.
+     * @param idx index for task to be unmarked.
+     */
     public UnmarkCommand(int idx) {
         this.idx = idx;
+        assert idx >= 0;
     }
 
     @Override
@@ -21,7 +29,7 @@ public class UnmarkCommand extends Command{
         tasks.unmarkTask(idx - 1);
         try {
             storage.writeMarkingToFile(storage.getFilePath(), "0", idx - 1);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Error overwriting");
         }
         ui.showToUser("    " + idx + "." + tasks.printTask(idx - 1));

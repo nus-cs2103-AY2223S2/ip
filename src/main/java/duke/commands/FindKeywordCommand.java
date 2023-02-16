@@ -5,8 +5,11 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A class that handles finding task by keyword.
+ */
 public class FindKeywordCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindKeywordCommand(String keyword) {
         this.keyword = keyword;

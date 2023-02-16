@@ -5,31 +5,44 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class for the output of user interface.
+ */
 public class Ui {
 
-    private static final String LINE_PREFIX = "|| ";
     private static final String LS = System.lineSeparator();
-    private static final String DIVIDER = "===================================================";
 
     private final Scanner in;
     private final PrintStream out;
-    private ArrayList<String> responses;
+    private final ArrayList<String> responses;
 
     public Ui() {
         this(System.in, System.out);
     }
 
+    /**
+     * Constructor for ui.
+     * @param in the user input.
+     * @param out the program output.
+     */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
         responses = new ArrayList<>();
     }
 
+    /**
+     * Show the welcome message.
+     * @return the welcome message.
+     */
     public String showWelcome() {
-        String message = "Hello from Duke,\n What can I do for you?";
-        return message;
+        return "Hello from Duke,\n What can I do for you?";
     }
 
+    /**
+     * Adds the program's response to an array.
+     * @param message the response to be added.
+     */
     public void showToUser(String... message) {
         for (String m : message) {
             responses.add(m.replace("\n", LS));
@@ -37,13 +50,13 @@ public class Ui {
     }
 
     public String getResponses() {
-        String concatenatedResponse = "";
+        StringBuilder concatenatedResponse = new StringBuilder();
         for (String r : responses) {
-            concatenatedResponse += r + "\n";
+            concatenatedResponse.append(r).append("\n");
             System.out.println(r);
         }
         responses.clear();
-        return concatenatedResponse;
+        return concatenatedResponse.toString();
     }
 
 

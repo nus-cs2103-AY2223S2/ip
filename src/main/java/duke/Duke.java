@@ -9,14 +9,22 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The main class of the Duke application, storing the ui, storage and task list.
+ */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
+    /**
+     * Initializing the storage, ui and task list.
+     * @param filePath the file path for the storage
+     */
     public Duke(String filePath) {
         ui = new Ui();
+        DukeException.setUi(ui);
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.readTaskList());
@@ -32,13 +40,14 @@ public class Duke {
             c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             ui.showError(e.getMessage());
+        } finally {
+            return ui.getResponses();
         }
-
-        return ui.getResponses();
     }
 
-    public Ui getUi() { return ui;}
-
+    public Ui getUi() {
+        return ui;
+    }
 }
 
 

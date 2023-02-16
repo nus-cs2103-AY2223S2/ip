@@ -11,6 +11,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A class that handles finding deadline by date.
+ */
 public class FindDeadlineCommand extends Command {
     protected String userInput;
 

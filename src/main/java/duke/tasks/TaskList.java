@@ -1,10 +1,13 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.exceptions.DukeException;
+
+/**
+ * A class for storing tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
@@ -22,9 +25,9 @@ public class TaskList {
     public ArrayList<Task> getDeadlineBefore(LocalDate by) throws DukeException {
         ArrayList<Task> deadlines = new ArrayList<>();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).isDeadline() && tasks.get(i).getDeadline().isBefore(by)) {
-                deadlines.add(tasks.get(i));
+        for (Task task : tasks) {
+            if (task.isDeadline() && task.getDeadline().isBefore(by)) {
+                deadlines.add(task);
             }
         }
         return deadlines;

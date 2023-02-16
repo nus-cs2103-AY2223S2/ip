@@ -3,17 +3,53 @@ package duke.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.commands.*;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindDeadlineCommand;
+import duke.commands.FindKeywordCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
 
+/**
+ * A class that parses user's input into commands.
+ */
 public class Parser {
 
     /**
-     * Parses user input into command for execution.
+     * Parses user input as adder command for execution.
      *
      * @param userInput user's input string
      * @return A command with respect to the user's input
      */
+    public static Command parseAdderCommand(String userInput) {
+        String[] inputs = userInput.split(" ");
+        String taskType = inputs[0];
+        switch (taskType) {
+        case "todo": {
+            return new AddToDoCommand(userInput);
+        }
+        case "deadline": {
+            return new AddDeadlineCommand(userInput);
+        }
+        case "event": {
+            return new AddEventCommand(userInput);
+        }
+        default:
+            return new Command();
+        }
+    }
 
+    /**
+     * Parses user input as command for execution.
+     *
+     * @param userInput user's input string
+     * @return A command with respect to the user's input
+     */
     public static Command parse(String userInput) {
         Pattern mark = Pattern.compile("mark [0-9]+");
         Pattern unmark = Pattern.compile("unmark [0-9]+");
@@ -46,21 +82,7 @@ public class Parser {
             String by = userInput.split(" ")[1];
             return new FindDeadlineCommand(by);
         } else {
-            String[] inputs = userInput.split(" ");
-            String taskType = inputs[0];
-            switch (taskType) {
-                case "todo": {
-                    return new AddToDoCommand(userInput);
-                }
-                case "deadline": {
-                    return new AddDeadlineCommand(userInput);
-                }
-                case "event": {
-                    return new AddEventCommand(userInput);
-                }
-                default:
-                    return new Command();
-            }
+            return parseAdderCommand(userInput);
         }
     }
 }

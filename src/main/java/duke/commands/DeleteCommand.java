@@ -1,18 +1,26 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
+/**
+ * A class that handles deletion command.
+ */
+public class DeleteCommand extends Command {
 
-public class DeleteCommand extends Command{
+    private final int idx;
 
-    private int idx;
-
+    /**
+     * Constructor for delete command.
+     * @param idx the index of task to be deleted.
+     */
     public DeleteCommand(int idx) {
         this.idx = idx;
+        assert idx >= 0;
     }
 
     /**
@@ -29,7 +37,7 @@ public class DeleteCommand extends Command{
         tasks.deleteTask(idx - 1);
         try {
             storage.deleteTaskInFile(storage.getFilePath(), idx - 1);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Error deleting");
         }
         ui.showToUser("Now you have " + tasks.getSize() + " tasks in the list.");

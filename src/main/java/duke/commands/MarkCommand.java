@@ -1,18 +1,26 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
+/**
+ * A class that handles marking task.
+ */
+public class MarkCommand extends Command {
 
-public class MarkCommand extends Command{
+    private final int idx;
 
-    private int idx;
-
+    /**
+     * Constructor for mark command.
+     * @param idx index of task to be marked.
+     */
     public MarkCommand(int idx) {
         this.idx = idx;
+        assert idx >= 0;
     }
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -20,7 +28,7 @@ public class MarkCommand extends Command{
         tasks.markTask(idx - 1);
         try {
             storage.writeMarkingToFile(storage.getFilePath(), "1", idx - 1);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Error overwriting");
         }
         ui.showToUser("    " + idx + "." + tasks.printTask(idx - 1));

@@ -1,13 +1,16 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-
-public class ListCommand extends Command{
+/**
+ * A class that handles listing all tasks.
+ */
+public class ListCommand extends Command {
 
     public ListCommand() {
     }
