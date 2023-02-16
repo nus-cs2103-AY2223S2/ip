@@ -40,7 +40,7 @@ public class MarkCommand extends Command {
         String taskString = "";
         for (String taskIndex: taskIndexes) {
             try {
-                taskString = String.format("%s%s\n", taskString,
+                taskString = String.format("%s%s%s\n", taskString, Ui.SEPARATOR,
                         tasks.markTask(Integer.parseInt(taskIndex) - 1));
             } catch (NumberFormatException e) {
                 System.out.println("Invalid task index, skipping the marking of this task");

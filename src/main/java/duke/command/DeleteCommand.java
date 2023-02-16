@@ -59,7 +59,7 @@ public class DeleteCommand extends Command {
         String taskString = "";
         int deleteOffset = 1;
         for (int taskIndex: taskIndexes) {
-            taskString = String.format("%s%s\n", taskString,
+            taskString = String.format("%s%s%s\n", taskString, Ui.SEPARATOR,
                     tasks.deleteTask(taskIndex - deleteOffset));
             deleteOffset++;
         }

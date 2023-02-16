@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * Provides the output string for the user's GUI.
  */
 public class Ui {
-    private static final String SEPARATOR = "------------------------------------------\n";
+    public static final String SEPARATOR = "------------------------------------------\n";
 
     public static String getWelcome() {
         return "Hello!\nI'm the one and only FAKE DUKE!\nWhat can I do for you?\n";
