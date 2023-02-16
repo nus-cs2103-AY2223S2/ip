@@ -10,7 +10,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Main logic of Duke the chat bot which tracks the user's tasks.
+ * Main logic of Duke the chat-bot which tracks the user's tasks.
  */
 public class Duke {
     private Storage storage;

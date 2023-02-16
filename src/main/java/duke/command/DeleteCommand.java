@@ -50,6 +50,5 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             throw new DukeException("Please indicate an integer in your index");
         }
-
     };
 }

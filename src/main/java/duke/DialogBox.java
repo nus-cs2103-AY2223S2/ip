@@ -29,7 +29,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
     @FXML
-    private Circle circle = new Circle(35,30,30);
+    private Circle circle = new Circle(35, 30, 30);
 
     private DialogBox(String text, Image img) {
         try {
@@ -43,7 +43,7 @@ public class DialogBox extends HBox {
 
         dialog.setWrapText(true);
         dialog.setText(text);
-        dialog.setFont(Font.font("Poppins", FontWeight.EXTRA_BOLD, FontPosture.ITALIC, 14));
+        dialog.setFont(Font.font("Poppins", FontWeight.EXTRA_BOLD, FontPosture.ITALIC, 12));
         displayPicture.setImage(img);
         displayPicture.setClip(circle);
     }
