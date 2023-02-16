@@ -150,7 +150,7 @@ public class JeoBot {
      * Returns the response from JeoBot.
      *
      * @param input The input from the user.
-     * @return The response of JeoBot.
+     * @return The response message of JeoBot.
      */
     public String getResponse(String input) {
         return run(input);
