@@ -78,7 +78,7 @@ public class Task {
      */
     public String taskNotDoneString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\"OK, I've marked this task as not done yet:\"\n");
+        sb.append("OK, I've marked this task as not done yet: \n");
         sb.append(this.toString() + "\n");
         isDone = false;
         return sb.toString();

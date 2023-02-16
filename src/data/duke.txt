@@ -1,6 +1,5 @@
-Last Saved at 2023-02-16T01:12:27.504549
+Last Saved at 2023-02-16T14:23:02.598709700
 
-Todo: run     ==> INCOMPLETE!
-Todo: wa ter platns     ==> INCOMPLETE!
 Todo: water plants     ==> INCOMPLETE!
-Todo: project meeting     ==> INCOMPLETE!
+Todo: water     ==> INCOMPLETE!
+Todo: plant plants     ==> INCOMPLETE!

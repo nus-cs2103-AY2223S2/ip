@@ -41,26 +41,12 @@ public class TaskList {
     }
 
     /**
-     * Returns a deep copy of a Task object at a specific index.
-     *
+     * Returns a Task object at a specific index.
      * @param i index.
      * @return Task object at index.
      */
     public Task getTaskAtIndex(Integer i) {
-        Task original = tasks.get(i);
-        if (original instanceof Todo) {
-            Todo copy = new Todo(original.getDescription());
-            return copy;
-        } else if (original instanceof Deadline) {
-            Deadline copy = new Deadline(original.getDescription(), ((Deadline) original).getBy());
-            return copy;
-        } else if (original instanceof Event) {
-            Event copy = new Event(original.getDescription(), ((Event) original).getFrom(), ((Event) original).getTo());
-            return copy;
-        } else {
-            assert original instanceof Task : "Something is not a task";
-        }
-        return null;
+        return tasks.get(i);
     }
 
     /**
@@ -70,7 +56,7 @@ public class TaskList {
      */
     public String matchDescriptionString(String description) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks matched in your list: \n");
+        sb.append("Here are the task(s) matched in your list: \n");
         FuzzySearch search = new FuzzySearch();
         Integer numMatches = 0;
         // Keep track what of duplicates
@@ -125,11 +111,11 @@ public class TaskList {
      * @return  a String
      */
     public String deleteTaskAtIndexString(Integer i) {
-        if (i < 0 || i >= tasks.size()) {
+        if (i < 0 || i >= this.size()) {
             return "OOPS!!! The number to delete is invalid.";
         }
         Task toDelete = this.getTaskAtIndex(i);
-        tasks.remove(toDelete);
+        this.tasks.remove(toDelete);
         return TaskList.announceRemovedString(toDelete);
     }
 
@@ -160,7 +146,7 @@ public class TaskList {
     public static void announceRemoved(Task t) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t.toString());
-        System.out.println("Now we have " + tasks.size() + " tasks in the list.");
+        System.out.println("Now we have " + tasks.size() + " task(s) in the list.");
     }
 
     /**
@@ -172,7 +158,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task:\n");
         sb.append(t.toString() + "\n");
-        sb.append("Now we have " + tasks.size() + " tasks in the list.\n");
+        sb.append("Now we have " + tasks.size() + " task(s) in the list.\n");
         return sb.toString();
     }
 
@@ -246,7 +232,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list: \n");
+        sb.append("Here are the task(s) in your list: \n");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = this.getTaskAtIndex(i);
             sb.append((i + 1) + ". " + task.toString() + "\n");
