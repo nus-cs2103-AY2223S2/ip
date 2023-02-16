@@ -13,6 +13,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import jdk.swing.interop.SwingInterOpUtils;
 
 /**
  * FileSystem class that handles the saving and loading of tasks
@@ -30,17 +31,13 @@ public class FileSystem {
         File dir = new File(dirPath);
         file = new File(relFilePath);
 
-        if (!dir.exists()) {
+        try {
             dir.mkdirs();
+            file.createNewFile();
+        } catch (IOException | SecurityException e) {
+            System.out.println(e);
         }
 
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-        }
     }
 
     /**
