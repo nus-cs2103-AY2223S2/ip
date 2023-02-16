@@ -1,88 +1,157 @@
-User Guide
-Features
-Add a Task
-Duke allows you to add tasks to your todo list. There are 3 types of tasks that you can add - Todo, Event, Deadline, Recurring Tasks.
+# User Guide
+Welcome to CorkyNotes! CorkyNotes is a desktop app for managing your tasks, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CorkyNotes can get your task management done faster than traditional GUI apps.
 
-Manage a Task
-With Duke, you can view your tasks and mark them as done. This allows you to keep track of your completed and impending tasks.
 
-Usage
-todo - Add a ToDo task
-Adds a task that does not have a date/time.
 
-Example of usage:
+## Features
+</br>
 
-todo order mcdonald breakfast
 
-Expected outcome:
+### Create different tasks
+CorkyNotes supports 4 different types of tasks:
 
-Duke has added your Todo to the task list.
+- Todos
+- Deadlines
+- Events
+- Period Tasks
 
-I have added this task:
-[T][ ] order mcdonald breakfast
-deadline - Add a Deadline
-Adds a task that must be completed by a date. Date must be in the format of dd-MM-yyyy HH:mm
+1. Todos
+Todos are tasks with a description and completion status.
 
-Example of usage:
+2. Deadlines
+Deadlines are tasks with a description, due date, and completion status.
 
-deadline cs2100 assignment /by 15-09-2021 23:59
+3. Events
+Events are tasks with a description, from date, to date, and completion status.
 
-Expected outcome:
+4. Period Tasks
+Period Taks are tasks with a description, from date, to date, and completion status. Period Tasks are similar to that of Event tasks.
 
-Duke has added your Deadline Task to the list.
 
-I have added this task:
-[D][ ] cs2100 assignment (by: Sep 15 2021, 23:59)
-event - Add an Event
-Adds a task that occurs at a date
+### View your tasks
+Forgot what you added? Corky tracks them for you. You can even mark and delete task as and when they are completed.
 
-Example of usage:
 
-event Piano concert /at 21-09-2021 17:00
+Prefer CLI to GUI?
+java -jar ip-0.2.jar -mode cli to switch to CLI mode.
 
-Expected outcome:
+java -jar ip-0.2.jar -mode gui or simply java -jar ip-0.2.jar to use the GUI instead.
 
-Duke has added your Event to the task list.
 
-I have added this task:
-[E][ ] Piano concert (at: 21 Sep 2021, 17:00)
-recur - Add a Recurring Task
-Adds a task that occurs every week on a particular day.
+## Usage
+</br>
 
-Example of usage:
+### Add todo: `todo`
+Adds a todo to the list of tasks.
 
-recur swimming lesson /every sunday
+Command format:
 
-Expected outcome:
-
-Duke has added your Recurring task to the task list. The date the task is to be completed by changes every week to the
-
-I have added this task:
-[T][ ] order mcdonald breakfast
-done - Marks a task as completed
-Marks a task at a given index in the list as completed.
+`todo [description]`
 
 Example of usage:
 
-done 1
+`todo see the sunrise`
 
 Expected outcome:
 
-Duke has marked the first task in the list as done.
+Got it. I've added this task:
+[T][ ] see the sunrise
+Now you have 1 task in the list.
 
-I have marked this task as done:
-[T][X] order mcdonald breakfast
-list - lists all the tasks
-Lists all the task in the todo list.
+Add deadline: deadline
+Adds a deadline to the list of tasks.
+
+Command format:
+
+deadline [description] /by [due_date]
+
+💡 Ensure due_date is [dd/MM/yy] [HHmm] 
 
 Example of usage:
 
-list
+deadline do ip /by 20/9/21 2359
 
 Expected outcome:
 
-Duke displays all the tasks in the list.
+Nee added this task:
+  [D][ ] do ip (by: Sep 20 2021, 11:59 PM)
+Nee has 1 task in the list.
 
-Here are the tasks in your list:
-1. [T][X] order mcdonald breakfast
-2. [E][ ] Piano concert (at: 21 Sep 2021, 17:00)
+Add event: event
+Adds an event to the list of tasks.
+
+Command format:
+
+event [description] /at [time]
+
+💡 Ensure time is [dd/MM/yy] [HHmm] 
+
+Example of usage:
+
+event play ctf /at 20/9/21 2359
+
+Expected outcome:
+
+Nee added this task:
+  [E][ ] play ctf (at: Sep 20 2021, 11:59 PM)
+Nee has 1 task in the list.
+
+Mark Task as Done: done
+Marks the task as completed.
+
+Format: done [index]
+
+💡 Ensure index is within {1, 2, ... list_size}
+
+Example of usage:
+
+done 2 marks the second task in the list as done.
+
+Expected outcome:
+
+Nice! Task done:
+  [T][X] get coffee
+
+Find Tasks: find
+Lists all tasks that match the keyword.
+
+Command format:
+
+find [keyword]
+
+Example of usage:
+
+find apple lists all tasks that contain apple.
+
+
+Undo commands: undo
+Command format:
+
+undo [number_of_commands]
+
+Example of usage:
+
+undo 1 Undos one command and returns the list of tasks.
+
+💡 Ensure there is a previous command to undo.
+
+
+List tasks: list
+Lists all tasks that have been added.
+
+Sample task list:
+
+[T][X] get coffee
+[D][ ] do ip (by: Dec 12 2021, 11:59 PM)
+[E][ ] play ctf (at: Sep 9 2021, 8:00 PM)
+
+Exit the program: bye
+Exits the program and closes the GUI window.
+
+Example of usage:
+
+bye
+
+Expected outcome:
+
+GUI closes
