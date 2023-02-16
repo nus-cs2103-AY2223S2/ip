@@ -35,7 +35,7 @@ public class Events extends Task {
                 LocalDate date = LocalDate.parse(strtime, df);
                 this.strDate = date;
             } catch (DateTimeParseException e2) {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("The time format is invalid. Correct example: '/from 2023-02-16 /to 2023-02-17 18:00'");
             }
         }
         try {

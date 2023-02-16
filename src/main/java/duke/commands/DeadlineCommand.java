@@ -47,7 +47,12 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage store) throws DukeException {
-        Deadlines newDeadline = new Deadlines(taskName, time);
+        Deadlines newDeadline = null;
+        try {
+            newDeadline = new Deadlines(taskName, time);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
         if (list.isExist(newDeadline)) {
             return "Ah, the task is already in the list.";
         }

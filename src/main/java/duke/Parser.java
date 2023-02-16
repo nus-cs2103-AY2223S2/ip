@@ -12,7 +12,7 @@ public class Parser {
      *
      * @return command objects based on different command keywords.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) {
         String[] arr1 = input.split("/");
         String[] arr2 = arr1[0].split(" ");
         try {

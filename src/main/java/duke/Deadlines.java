@@ -33,7 +33,7 @@ public class Deadlines extends Task {
                 LocalDate date = LocalDate.parse(sTime, df);
                 this.date = date;
             } catch (DateTimeParseException e2) {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("The time format is invalid. Correct examples: '/by 2023-02-16' and '/by 2023-02-16 18:00'");
             }
         }
     }

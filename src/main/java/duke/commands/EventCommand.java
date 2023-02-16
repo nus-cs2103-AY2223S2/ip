@@ -1,9 +1,6 @@
 package duke.commands;
 
-import duke.DukeException;
-import duke.Events;
-import duke.Storage;
-import duke.TaskList;
+import duke.*;
 
 /**
  * A command type that the chatting bot can read.
@@ -61,7 +58,12 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage store) throws DukeException {
-        Events newEvent = new Events(taskName, sTime, eTime);
+        Events newEvent = null;
+        try {
+            newEvent = new Events(taskName, sTime, eTime);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
         if (list.isExist(newEvent)) {
             return "Ah, the task is already in the list.";
         }
