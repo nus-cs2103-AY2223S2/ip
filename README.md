@@ -70,7 +70,7 @@ do not have time to read. Duke provides all the guide you need
      ```
      archive
      ```
-*   `exit` Exit the program
+*  `exit` Exit the program
    - Example of Usage
      ```
      exit
