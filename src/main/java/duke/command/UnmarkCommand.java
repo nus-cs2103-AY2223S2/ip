@@ -48,4 +48,9 @@ public class UnmarkCommand extends Command {
         }
         return taskString;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Unmark task(s) %s", taskIndexes.toString());
+    }
 }

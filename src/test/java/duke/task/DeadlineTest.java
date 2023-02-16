@@ -15,7 +15,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void toString_invalidDateTime_dukeExceptionThrown() throws DukeException {
+    public void toString_invalidDateTime_dukeExceptionThrown() {
         try {
             assertEquals("[D][ ] return book\n(by: Mon 02-09-2019 12:22PM)\n!! TASK EXPIRED! !!",
                     new Deadline("return book /by 2019-09-02 12:22:33").toString());

@@ -28,4 +28,9 @@ public class FindCommand extends Command {
         ArrayList<Task> foundTasks = tasks.findTask(keyword);
         return Ui.getFindOrSortOutput(foundTasks);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Finds task(s) with this keyword: %s", keyword);
+    }
 }

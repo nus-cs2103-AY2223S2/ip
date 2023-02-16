@@ -20,4 +20,9 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         return Ui.getListOutput(tasks);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Lists all tasks");
+    }
 }

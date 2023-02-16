@@ -65,4 +65,9 @@ public class DeleteCommand extends Command {
         }
         return taskString;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Delete task(s) %s", taskIndexes.toString());
+    }
 }

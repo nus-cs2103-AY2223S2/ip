@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
-    public void testStringConversion() {
+    public void toString_validInput_success() {
         assertEquals("[ ] read book", new Task("read book").toString());
     }
 
     @Test
-    public void testGetRawTask() {
+    public void getRawTask_validInput_success() {
         assertEquals("T ~ 0 ~ read book\n", new Task("read book").getRawTask());
     }
 
     @Test
-    public void testGetUrgentMessage() {
+    public void getUrgentMessage_validTypesOfDateTime_success() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         LocalDateTime expiredDateTime = LocalDateTime.parse("2020-10-01 12:33", formatter);

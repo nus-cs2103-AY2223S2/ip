@@ -10,7 +10,7 @@ import duke.task.Todo;
  * Makes sense of the file input from the local file.
  */
 public class FileInputParser {
-    private enum TaskType {
+    protected enum TaskType {
         T,
         D,
         E
@@ -39,7 +39,7 @@ public class FileInputParser {
         return getTask(getTaskType(splitInputs), splitInputs);
     }
 
-    private static TaskType getTaskType(String[] splitInputs) throws DukeException {
+    protected static TaskType getTaskType(String[] splitInputs) throws DukeException {
         try {
             return TaskType.valueOf(splitInputs[0]);
         } catch (IllegalArgumentException e) {
@@ -55,7 +55,7 @@ public class FileInputParser {
      * @return Task.
      * @throws DukeException if invalid file input format is used.
      */
-    private static Task getTask(TaskType taskType, String[] splitInputs) throws DukeException {
+    protected static Task getTask(TaskType taskType, String[] splitInputs) throws DukeException {
         switch (taskType) {
         case T:
             checkFileInputFormat(splitInputs.length, MinimumLengths.TODO.length,
