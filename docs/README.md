@@ -1,8 +1,9 @@
 # User Guide
 ## Duke
-A todo CLI app that helps you manage your todos, deadlines and events!!
+Duke is a todo Command Line Interface (CLI) app that helps you manage your todos, deadlines 
+and events while still having the benefits of a Graphical User Interface (GUI).
 
-## Features 
+### Features 
 * list
 * mark
 * unmark
@@ -14,11 +15,15 @@ A todo CLI app that helps you manage your todos, deadlines and events!!
 * help
 * bye
 
-## Usage
+Things to take note about the format:
+Words in `<>` are the parameters that **must be supplied** by the user.
+e.g in mark <task number>, <task number> is a parameter which can be used as mark 2.
 
-### list - Lists all the tasks added
+### Usage
 
-###### Example of usage:
+#### list - Lists all the tasks added
+
+###### Examples:
 `list`
 
 ###### Expected outcome:
@@ -30,12 +35,12 @@ Here are the tasks in your list:
 2.[D][ ] ip (by:Feb-17-2023 23:59)
 ```
 
-### mark - Marks the selected task
+#### mark - Marks the selected task
 
 ###### Format:
 `mark <task number>`
 
-###### Example of usage:
+###### Examples:
 `mark 2`
 
 ###### Expected outcome:
@@ -46,12 +51,12 @@ Nice! I've marked this task as done:
 [D][X] ip (by:Feb-17-2023 23:59)
 ```
 
-### unmark - Unmark the selected task
+#### unmark - Unmark the selected task
 
 ###### Format:
 `unmark <task number>`
 
-###### Example of usage:
+###### Examples:
 `unmark 2`
 
 ###### Expected outcome:
@@ -62,12 +67,12 @@ OK, I've marked this task as not done yet:
 [D][ ] ip (by:Feb-17-2023 23:59)
 ```
 
-### todo - Creates a todo task
+#### todo - Creates a todo task
 
 ###### Format:
 `todo <task desc>`
 
-###### Example of usage:
+###### Examples:
 `todo tp`
 
 ###### Expected outcome:
@@ -79,12 +84,12 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### deadline - Creates a deadline task
+#### deadline - Creates a deadline task
 
 ###### Format:
 `deadline <deadline desc> /by <yyyy-MM-dd>T<HH:mm>`
 
-###### Example of usage:
+###### Examples:
 `deadline cs2106 lab /by 2023-03-05T23:59`
 
 ###### Expected outcome:
@@ -96,12 +101,12 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ```
 
-### event - Creates an event
+#### event - Creates an event
 
 ###### Format:
-`event <event desc> /by <yyyy-MM-dd>T<HH:mm>`
+`event <event desc> /from <yyyy-MM-dd>T<HH:mm> /to <yyyy-MM-dd>T<HH:mm>`
 
-###### Example of usage:
+###### Examples:
 `event career fest /from 2023-02-07T09:00 /to 2023-02-09T17:00`
 
 ###### Expected outcome:
@@ -113,12 +118,12 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ```
 
-### delete - Deletes the selected task
+#### delete - Deletes the selected task
 
 ###### Format:
 `delete <task number>`
 
-###### Example of usage:
+###### Examples:
 `delete 1`
 
 ###### Expected outcome:
@@ -130,12 +135,12 @@ Noted. I've removed this task:
 Now you have 4 tasks in the list.
 ```
 
-### find - Filters the list according to the keyword
+#### find - Filters the list according to the keyword
 
 ###### format:
 `find <keyword>`
 
-###### Example of usage:
+###### Examples:
 
 `find lab`
 
@@ -147,12 +152,12 @@ Here are the matching tasks in your list:
 [D][ ] cs2106 lab (by: Mar-5-2023 23:59)
 ```
 
-### help - Provides help with the selected command
+#### help - Provides help with the selected command
 
 ###### format:
 `help <command>`
 
-###### Example of usage:
+###### Examples:
 `help mark`
 
 ###### Expected outcome:
@@ -162,9 +167,9 @@ Shows the format to use the mark command
 Enter: mark <task number>
 ```
 
-### bye - Terminates the program
+#### bye - Terminates the program
 
-###### Example of usage:
+###### Examples:
 `bye`
 
 ###### Expected outcome:
