@@ -41,6 +41,9 @@ public class Parser {
             commandArr = command.split(" ");
             selection = Actions.valueOf(commandArr[0].toUpperCase());
             switch (selection) {
+            case GREET:
+                response = parseGreet();
+                break;
             case LIST:
                 response = parsePrint();
                 break;
@@ -81,10 +84,28 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Returns welcome message to greet user.
+     * @return A welcome message.
+     */
+    private String parseGreet() {
+        return "Welcome to PurrfectPlanner! \nHow may I help you? owo";
+    }
+
+    /**
+     * Prints the tasks list.
+     * @return String representation of the tasks list.
+     */
     private String parsePrint() {
         return tasks.printList();
     }
 
+    /**
+     * Parses command relevant to marking a task.
+     * @param command Command to be parsed.
+     * @return Result of marking the task if it is successful
+     *          or error message for invalid input.
+     */
     private String parseMark(String command) {
         String[] commandArr = command.split(" ");
         Task task = tasks.getTask(Integer.parseInt(commandArr[1]) - 1);
@@ -97,6 +118,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses command relevant to creating a Todo task.
+     * @param command Command to be parsed.
+     * @return Result of creating the Todo object if it is successful or error message for invalid input.
+     * @throws DukeException If the command has wrong format.
+     */
     private String parseTodo(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         if (commandArr.length < 2) {
@@ -106,6 +133,12 @@ public class Parser {
         return tasks.addTask(todo, false);
     }
 
+    /**
+     * Parses command relevant to creating a Deadline task.
+     * @param command Command to be parsed.
+     * @return Result of creating the Deadline object if it is successful or error message for invalid input.
+     * @throws DukeException If the command has wrong format.
+     */
     private String parseDeadline(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         if (commandArr.length < 2) {
@@ -120,6 +153,12 @@ public class Parser {
         return tasks.addTask(deadline, false);
     }
 
+    /**
+     * Parses command relevant to creating a Event task.
+     * @param command Command to be parsed.
+     * @return Result of creating the Event object if it is successful or error message for invalid input.
+     * @throws DukeException If the command has wrong format.
+     */
     private String parseEvent(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         if (commandArr.length < 2) {
@@ -140,6 +179,12 @@ public class Parser {
         return tasks.addTask(event, false);
     }
 
+    /**
+     * Parses command relevant to deleting a task.
+     * @param command Command to be parsed.
+     * @return Result of deleting the task if it is successful or error message for invalid input.
+     * @throws DukeException If the command has wrong format.
+     */
     private String parseDelete(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         if (commandArr.length < 2) {
@@ -152,6 +197,12 @@ public class Parser {
         return tasks.deleteTask(taskNumber - 1);
     }
 
+    /**
+     * Parses command relevant to finding tasks by keywords.
+     * @param command Command to be parsed.
+     * @return Tasks that matched the keywords.
+     * @throws DukeException If the command has wrong format.
+     */
     private String parseFind(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         if (commandArr.length < 2) {
@@ -161,15 +212,23 @@ public class Parser {
         String[] keywords = command.split(" ");
         return tasks.findMatchingTasks(keywords);
     }
-
+    /**
+     * Parses command relevant to sorting tasks. Tasks will be sorted by completion status,
+     * then by the lexicographic order of their description.
+     * @return Sorted tasks.
+     */
     private String parseSort() {
         return tasks.sortTasks();
     }
 
+    /**
+     * Returns message to say goodbye to user.
+     * @return Goodbye message.
+     */
     private String parseBye() {
         return "Bye bye!";
     }
 
-    enum Actions { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE, SORT }
+    enum Actions { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE, SORT, GREET }
 
 }

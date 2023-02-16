@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Objects;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -52,7 +50,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (duke.isExit) {
+        if (duke.isEnd()) {
             System.exit(0);
         }
     }

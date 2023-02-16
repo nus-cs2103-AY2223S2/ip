@@ -1,6 +1,5 @@
 package duke;
 import java.io.IOException;
-import java.util.Scanner;
 
 import exception.DukeException;
 
@@ -12,7 +11,7 @@ public class Duke {
     private static TaskList tasks;
     private Storage storage;
     private Parser parser;
-    public boolean isExit;
+    private boolean isExit;
 
     /**
      * Initializes a bot with provided path to the storage space.
@@ -51,4 +50,9 @@ public class Duke {
     public String getWelcomeMessage() {
         return parser.parse("greet");
     }
+
+    public boolean isEnd() {
+        return isExit;
+    }
+
 }

@@ -109,6 +109,11 @@ public class TaskList {
         return tasksList.toString();
     }
 
+    /**
+     * Sort tasks by completion status, then by the lexicographic order of their description.
+     * This will also print the sorted tasks list.
+     * @return String of sorted tasks list.
+     */
     public String sortTasks() {
         Collections.sort(tasks, Comparator.comparing(Task::isTaskDone).thenComparing(Task::getDescription));
         return printList();
