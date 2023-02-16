@@ -10,10 +10,14 @@ import duke.tasks.Task;
  * method that takes in a TaskList, Ui and Storage. The execute method marks the task at the given
  * index as done and saves the task list to storage
  */
-public class Mark extends Command{
+public class Mark extends Command {
     private int index;
     private Task t;
 
+    /**
+     * A constructor that takes in a String index and throws a DukeException if the index is not a
+     * number.
+     */
     public Mark(String index) throws DukeException {
         try {
             this.index = Integer.parseInt(index) - 1;
@@ -31,7 +35,7 @@ public class Mark extends Command{
      * @return
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(this.index > tasks.size() - 1 || this.index < 0) {
+        if (this.index > tasks.size() - 1 || this.index < 0) {
             throw new DukeException("Sorry, you used an invalid index");
         }
         this.t = tasks.getTask(this.index);

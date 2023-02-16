@@ -1,12 +1,18 @@
 package duke;
 import duke.commands.Command;
 
+/**
+ * Duke is a class that takes in a filepath and loads up the previous tasks if there are any
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    // Loads up the previous tasks if there are any.
+    /**
+     * The constructor of Duke. It takes in a filepath and loads up the previous tasks if there are
+     * any.
+     */
     public Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
@@ -45,16 +51,7 @@ public class Duke {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
-        return ui.printInvalidCommandError();
     }
 }
-
-
-
-    // public static void main(String[] args) {
-    //     new Duke("data/tasks.txt").run();
-    // }
-    
-

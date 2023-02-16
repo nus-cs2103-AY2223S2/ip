@@ -16,6 +16,9 @@ import javafx.scene.layout.HBox;
 
 
 
+/**
+ * It's a custom control that extends HBox and has a label and an image view.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

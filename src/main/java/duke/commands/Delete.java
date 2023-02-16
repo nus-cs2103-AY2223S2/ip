@@ -14,26 +14,25 @@ import duke.tasks.Task;
 public class Delete extends Command {
     private int index;
     private Task t;
-    
+    /**
+     * A constructor that takes in a String index and assigns it to the index variable.
+     */
     public Delete(String index) throws DukeException {
         try {
             this.index = Integer.parseInt(index) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("invalid index");
         }
-        
     }
-    
-    
     /**
      * This function removes a task from the task list
-     *  @param tasks the list of tasks
+     * @param tasks the list of tasks
      * @param ui the user interface
      * @param storage the storage object
      * @return
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        if(this.index > tasks.size() - 1 || this.index < 0) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (this.index > tasks.size() - 1 || this.index < 0) {
             throw new DukeException("Sorry, you used an invalid index");
         }
         this.t = tasks.getTask(index);

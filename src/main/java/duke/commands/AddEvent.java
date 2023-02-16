@@ -12,9 +12,10 @@ public class AddEvent extends Command {
     private String description;
     private String start;
     private String end;
-
-    // This is the constructor of the class AddEvent. It takes in a string input and splits it into 3
-    // parts, the description, start and end of the event.
+    /**
+     * This is the constructor of the class AddEvent. It takes in a string input and splits it into 3
+     * parts, the description, start and end of the event.
+     */
     public AddEvent(String input) {
         try {
             if (input.length() < 6) {
@@ -36,15 +37,16 @@ public class AddEvent extends Command {
      * @return
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        try{
+        try {
             // Splitting the input into an array of strings using /from and /to to seperate the strings.
             String[] arrOfStr = this.description.split("/from|/to");
             if (arrOfStr.length < 3) {
-                throw new DukeException("please indicate the event in the follow format: (event description) + /from (event start date/time) /to (event end date/time)");
-                
+                throw new DukeException("please indicate the event in the follow format: (event description) + "
+                 + "/from (event start date/time) /to (event end date/time)");
+
             } else {
-            //stores the first index in the array as the task description
-            //second index as start of event and third index as end of event
+                //stores the first index in the array as the task description
+                //second index as start of event and third index as end of event
                 this.description = arrOfStr[0];
                 this.start = arrOfStr[1];
                 this.end = arrOfStr[2];

@@ -11,10 +11,14 @@ import duke.tasks.Task;
  * Storage object. It gets the task at the index from the TaskList and marks it as not done. It then
  * saves the TaskList to the Storage and prints the task that was unmarked
  */
-public class Unmark extends Command{
+public class Unmark extends Command {
     private int index;
     private Task t;
 
+    /**
+     * This is the constructor of the Unmark class. It takes in a String index and assigns it to the
+     * instance variable index.
+     */
     public Unmark(String index) throws DukeException {
         try {
             this.index = Integer.parseInt(index) - 1;
@@ -22,7 +26,7 @@ public class Unmark extends Command{
             throw new DukeException("invalid index");
         }
     }
-    
+
     /**
      * This function is used to mark a task as not done
      *  @param tasks the list of tasks
@@ -31,7 +35,7 @@ public class Unmark extends Command{
      * @return
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(this.index > tasks.size() - 1 || this.index < 0) {
+        if (this.index > tasks.size() - 1 || this.index < 0) {
             throw new DukeException("Sorry, you used an invalid index");
         }
         this.t = tasks.getTask(this.index);
