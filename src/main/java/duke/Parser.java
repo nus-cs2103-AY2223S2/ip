@@ -22,11 +22,11 @@ public class Parser {
                 return command.markCommand();
             } else if (cmd.startsWith("unmark")) {
                 return command.unmarkCommand();
-            } else if (cmd.startsWith("todo")) {
+            } else if (cmd.startsWith("todo") || cmd.startsWith("t ")) {
                 return command.toDoCommand();
-            } else if (cmd.startsWith("deadline")) {
+            } else if (cmd.startsWith("deadline") || cmd.startsWith("d ")) {
                 return command.deadlineCommand();
-            } else if (cmd.startsWith("event")) {
+            } else if (cmd.startsWith("event") || cmd.startsWith("e ")) {
                 return command.eventCommand();
             } else if (cmd.startsWith("delete")) {
                 return command.deleteCommand();

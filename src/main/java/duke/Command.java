@@ -63,7 +63,12 @@ public class Command {
      * @throws EmptyDescriptionException if description of task is empty.
      */
     public String toDoCommand() throws EmptyDescriptionException {
-        String str = INPUT.replace("todo", "");
+        String str = "";
+        if(INPUT.startsWith("todo")) {
+            str = INPUT.replace("todo", "");
+        } else if (INPUT.startsWith("t ")) {
+            str = INPUT.substring(2, INPUT.length());
+        }
         ToDo toDo = new ToDo(str);
         LIST.add(toDo);
         return UI.showAdd(toDo) + UI.showTaskSize(LIST.size());
@@ -75,7 +80,12 @@ public class Command {
      * @throws EmptyDescriptionException if description of task is empty.
      */
     public String deadlineCommand() throws EmptyDescriptionException {
-        String str = INPUT.replace("deadline", "");
+        String str = "";
+        if (INPUT.startsWith("deadline")) {
+            str = INPUT.replace("deadline", "");
+        } else if (INPUT.startsWith("d ")) {
+            str = INPUT.substring(2, INPUT.length());
+        }
         String description = str.split("/by")[0];
         String dateAndTime = str.split("/by ")[1];
         Deadline deadline = new Deadline(description, dateAndTime);
@@ -89,7 +99,12 @@ public class Command {
      * @throws EmptyDescriptionException if description of task is empty.
      */
     public String eventCommand() throws EmptyDescriptionException {
-        String str = INPUT.replace("event", "");
+        String str = "";
+        if (INPUT.startsWith("event")) {
+            str = INPUT.replace("event", "");
+        } else if (INPUT.startsWith("e ")) {
+            str = INPUT.substring(2, INPUT.length());
+        }
         String description = str.split("/from")[0];
         String temp = str.split("/from")[1];
         String from = temp.split("/to")[0];
