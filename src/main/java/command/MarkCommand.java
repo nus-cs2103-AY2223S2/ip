@@ -2,6 +2,7 @@ package command;
 
 import duke.Storage;
 import duke.Ui;
+import task.Task;
 import task.Tasklist;
 
 /**
@@ -27,8 +28,11 @@ public class MarkCommand implements Command {
      @param storage the storage backend to use for persistence
      */
     @Override
-    public void execute(Ui ui, Tasklist list, Storage storage) {
-        list.markTaskAsDone(index);
+    public String execute(Ui ui, Tasklist list, Storage storage) {
+        int oneIndex = this.index + 1;
+        Task markedTask = list.getTask(oneIndex);
+        list.markTaskAsDone(this.index);
+        return ui.getMarkReply(markedTask);
     }
 
     /**

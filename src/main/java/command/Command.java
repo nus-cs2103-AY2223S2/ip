@@ -14,7 +14,7 @@ public interface Command {
      @param list The task list containing the tasks.
      @param storage The storage where the data is stored.
      */
-    public void execute(Ui ui, Tasklist list, Storage storage);
+    public String execute(Ui ui, Tasklist list, Storage storage);
 
     /**
      This method returns a boolean indicating if this command should cause the program to exit.

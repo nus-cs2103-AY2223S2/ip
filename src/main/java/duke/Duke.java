@@ -1,5 +1,13 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import command.Command;
 import exception.DukeException;
 import task.Tasklist;
@@ -13,11 +21,14 @@ public class Duke {
     private Storage backend;
     private Tasklist tasklist;
 
+
+
     /**
      * Constructor for the Duke class, which takes in a file path as a parameter.
      *
      * @param filePath The file path to the backend storage file.
      */
+
     public Duke(String filePath) {
         this.userInterface = new Ui();
         this.backend = new Storage(filePath);
@@ -27,13 +38,15 @@ public class Duke {
             userInterface.displayErrorMessage(e.getMessage());
             this.tasklist = new Tasklist();
         }
+        this.userInterface = new Ui();
+
     }
 
     /**
      * The main method to start the Duke application.
      *
      * @throws DukeException If there's an error during the execution of the Duke application.
-     */
+
     public void start() throws DukeException {
         userInterface.showWelcome();
         boolean isExit = false;
@@ -53,18 +66,21 @@ public class Duke {
             }
         }
     }
-
-    /**
-     * The main method for the Duke application.
-     *
-     * @param args The command line arguments passed to the Duke application.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke("./data/duke.txt");
+    */
+    public String start(String input) {
         try {
-            duke.start();
+            Parser parser = new Parser(input);
+            Command command = parser.parseCommand();
+            return command.execute(userInterface, tasklist, backend);
         } catch (DukeException e) {
-            System.out.println(e);
+            return userInterface.displayErrorMessage(e.getMessage());
         }
     }
+
+    public String getResponse(String input) {
+        return this.start(input);
+    }
+
+
+
 }

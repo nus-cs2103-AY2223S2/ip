@@ -28,8 +28,9 @@ public class AddCommand implements Command {
      @param storage the storage object
      */
     @Override
-    public void execute(Ui ui, Tasklist list, Storage storage) {
+    public String execute(Ui ui, Tasklist list, Storage storage) {
         list.add(this.newTask);
+        return ui.getAddReply(this.newTask);
     }
 
     /**

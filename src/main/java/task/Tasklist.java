@@ -38,7 +38,6 @@ public class Tasklist {
     public void add(Task task) {
         this.list.add(task);
         this.backend.save(this);
-        System.out.println("Got it. I've added this task:\n " + task.toString());
     }
 
     /**
@@ -49,8 +48,6 @@ public class Tasklist {
     public void markTaskAsDone(int index) {
         this.list.get(index).markDone();
         this.backend.save(this);
-        System.out.println("Nice! I've marked this task as done:\n"
-                + list.get(index).toString());
     }
 
     /**
@@ -61,8 +58,6 @@ public class Tasklist {
     public void unmarkTask(int index) {
         this.list.get(index).unmark();
         this.backend.save(this);
-        System.out.println("Nice! I've marked this task as done:\n"
-                + list.get(index).toString());
     }
 
     /**
@@ -73,16 +68,6 @@ public class Tasklist {
     public void deleteTask(int index) {
         this.list.remove(index);
         backend.save(this);
-        System.out.println("Noted. I've removed this task:\n"
-                + list.get(index).toString());
-        totalNumberOfTasks();
-    }
-
-    /**
-     * Prints the total number of tasks in the task list.
-     */
-    public void totalNumberOfTasks() {
-        System.out.println("Now you have " + this.list.size() + " tasks in the list.");
     }
 
     /**
@@ -116,15 +101,42 @@ public class Tasklist {
         }
     }
 
-    public void find(String keyword) {
-        System.out.println("Here are the matching tasks in your list:\n");
-        int containsKeywordIndex = 1;
+    public Tasklist find(String keyword) {
+        Tasklist matchedList = new Tasklist();
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            if (task.contains(keyword)) {
+                matchedList.add(task);
+            }
+        }
+        return matchedList;
+    }
+/**
+ *
+i nt containsKeywordIndex = 1;
         for (int i = 0; i < this.list.size(); i++) {
             if (list.get(i).contains(keyword)) {
                 System.out.println(containsKeywordIndex + "." + this.list.get(i).toString());
                 containsKeywordIndex += 1;
             }
         }
+ */
+
+    public boolean isEmpty() {
+        return this.list.isEmpty();
+    }
+
+    public String toString() {
+        String result;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 1; i <= list.size(); i++) {
+            stringBuilder.append(this.getTask(i));
+            if (i != list.size()) {
+                stringBuilder.append("\n");
+            }
+        }
+        result = stringBuilder.toString();
+        return result;
     }
 
 }

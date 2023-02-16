@@ -13,13 +13,10 @@ public class ExitCommand implements Command {
      * Creates a new ExitCommand instance.
      */
     public ExitCommand() {
-
     }
     @Override
-    public void execute(Ui ui, Tasklist list, Storage storage) {
-
-        System.out.println("Bye. Hope to see you again soon!");
-        ui.closeDuke();
+    public String execute(Ui ui, Tasklist list, Storage storage) {
+        return ui.getExitReply();
     }
 
     /**

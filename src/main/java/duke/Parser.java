@@ -50,8 +50,8 @@ public class Parser {
             int index = Integer.parseInt(splitString[1]) - 1;
             return new MarkCommand(index);
         } else if (keyword.contains("delete")) {
-            int index = Integer.parseInt(splitString[1]) - 1;
-            return new DeleteCommand(index);
+            int zeroIndex = Integer.parseInt(splitString[1]) - 1;
+            return new DeleteCommand(zeroIndex);
 
         } else if (keyword.equals("todo")) {
             int startIndex = keyword.length();

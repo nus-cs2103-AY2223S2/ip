@@ -23,8 +23,9 @@ public class ListCommand implements Command {
      @param storage the storage backend
      */
     @Override
-    public void execute(Ui ui, Tasklist list, Storage storage) {
-        list.inString();
+    public String execute(Ui ui, Tasklist list, Storage storage) {
+
+        return ui.getListReply(list);
     }
 
     /**

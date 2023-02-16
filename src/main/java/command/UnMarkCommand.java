@@ -2,6 +2,7 @@ package command;
 
 import duke.Storage;
 import duke.Ui;
+import task.Task;
 import task.Tasklist;
 
 /**
@@ -24,8 +25,11 @@ public class UnMarkCommand implements Command {
      @param storage The storage backend used to persist the task list
      */
     @Override
-    public void execute(Ui ui, Tasklist list, Storage storage) {
-        list.unmarkTask(index);
+    public String execute(Ui ui, Tasklist list, Storage storage) {
+        int oneIndex = this.index + 1;
+        Task UnMarkedTask = list.getTask(oneIndex);
+        list.unmarkTask(this.index);
+        return ui.getUnMarkReply(UnMarkedTask);
     }
 
     /**
