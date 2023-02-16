@@ -8,8 +8,8 @@ import duke.task.Task;
 import duke.textui.TextUi;
 
 /**
- * A command that stores the command to add a new event task. The action of
- * adding the task can be carried out when called.
+ * A command that stores the command to add a new event task. The action of adding the task can be carried out when
+ * called.
  */
 public class AddEventCommand extends Command {
     /**
@@ -29,17 +29,16 @@ public class AddEventCommand extends Command {
 
     /**
      * Adds a new event task into the task list.
-     * The start and end dates are filtered out. If they exist, then an event task
-     * will be created. Otherwise, an exception would be thrown stating that
-     * either the start or end dates were not specified.
+     * The start and end dates are filtered out. If they exist, then an event task will be created. Otherwise, an
+     * exception would be thrown stating that either the start or end dates were not specified.
      *
      * @param taskList List of tasks that are stored
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
+     * @return The string of what is printed out after execution
      */
     @Override
-    public String execute(TaskList taskList, TextUi ui, Storage storage)
-            throws DukeException {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         String[] splitData1 = data.split(" /from ", 2);
         if (splitData1.length < 2) {
             throw new DukeException("Event command format error. Missing /from");

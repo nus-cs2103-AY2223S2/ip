@@ -3,16 +3,14 @@ package duke.textui;
 import java.util.Scanner;
 
 /**
- * UI that deals with the display of data for the user once the chatbot is
- * started up.
+ * UI that deals with the display of data for the user once the chatbot is started up.
  */
 public class TextUi {
 
     /**
      * Divider line.
      */
-    private static final String LINE =
-            "__________________________________________";
+    private static final String LINE = "__________________________________________";
     /**
      * A scanner that scans for user input.
      */
@@ -66,8 +64,8 @@ public class TextUi {
     }
 
     /**
-     * Displays the string representation of the task being added, together with
-     * the new updated number of tasks in the task list.
+     * Displays the string representation of the task being added, together with the new updated number of tasks in
+     * the task list.
      *
      * @param taskString The string representation of the task being added
      * @param size       The number of tasks in the list of tasks
@@ -75,16 +73,15 @@ public class TextUi {
      */
     public String showAddTask(String taskString, int size) {
         String msgHeader = "I've added this task into the list:";
-        String msgFooter =
-                String.format("Now you have a total of %s tasks in the list", size);
+        String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
 
         String output = concatMsgs(msgHeader, taskString, msgFooter);
         return showMsg(output);
     }
 
     /**
-     * Displays the string representation of the task being deleted, together with
-     * the new updated number of tasks in the task list.
+     * Displays the string representation of the task being deleted, together with the new updated number of tasks in
+     * the task list.
      *
      * @param taskString The string representation of the task being deleted
      * @param size       The number of tasks in the list of tasks
@@ -92,8 +89,7 @@ public class TextUi {
      */
     public String showDeleteTask(String taskString, int size) {
         String msgHeader = "I've deleted this task into the list:";
-        String msgFooter =
-                String.format("Now you have a total of %s tasks in the list", size);
+        String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
 
         String output = concatMsgs(msgHeader, taskString, msgFooter);
         return showMsg(output);

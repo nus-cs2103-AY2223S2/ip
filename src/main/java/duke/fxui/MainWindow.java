@@ -19,9 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * The main GUI window where the user input and chatbot responses are shown. The
- * user can key in their commands to be processed by the chatbot here and obtain
- * the corresponding response.
+ * The main GUI window where the user input and chatbot responses are shown. The user can key in their commands to be
+ * processed by the chatbot here and obtain the corresponding response.
  */
 public class MainWindow extends VBox {
     /**
@@ -31,18 +30,23 @@ public class MainWindow extends VBox {
     /**
      * The profile image of the user.
      */
-    @SuppressWarnings("ConstantConditions")
-    private final Image userImage =
-            new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    @SuppressWarnings("DataFlowIssue")
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     /**
      * The profile image of the chatbot.
      */
-    @SuppressWarnings("ConstantConditions")
-    private final Image dukeImage =
-            new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    @SuppressWarnings("DataFlowIssue")
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     /**
-     * The scrollPane responsible for allowing the ability to scroll through user
-     * input and responses by the chatbot.
+     * Delay of 2 second when the program is exiting.
+     */
+    private final PauseTransition delay = new PauseTransition(Duration.seconds(2));
+    /**
+     * Alert box to show the commands or about information when clicking on menu items.
+     */
+    private final Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.CLOSE);
+    /**
+     * The scrollPane responsible for allowing the ability to scroll through user input and responses by the chatbot.
      */
     @FXML
     private ScrollPane scrollPane;
@@ -60,17 +64,9 @@ public class MainWindow extends VBox {
      * The chatbot instance.
      */
     private Duke duke;
+
     /**
-     * Delay of 2 second when the program is exiting.
-     */
-    private final PauseTransition delay = new PauseTransition(Duration.seconds(2));
-    /**
-     * Alert box to show the commands or about information when clicking on menu items.
-     */
-    private final Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.CLOSE);
-    /**
-     * Initialises the scrollPane to have a container that contains all the dialog
-     * boxes so that it is scrollable.
+     * Initialises the scrollPane to have a container that contains all the dialog boxes so that it is scrollable.
      */
     @FXML
     public void initialize() {
@@ -78,24 +74,22 @@ public class MainWindow extends VBox {
     }
 
     /**
-     * Sets a reference that the duke chatbot started and shows the welcome
-     * message by the chatbot.
+     * Sets a reference that the duke chatbot started and shows the welcome message by the chatbot. Setup delay to
+     * close the GUI when time is up. Setup the alert box to have a minimum width as the one specified.
      *
      * @param duke Duke instance
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
 
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
         delay.setOnFinished(event -> Platform.exit());
         alert.getDialogPane().setMinWidth(MIN_WIDTH);
     }
 
     /**
-     * Handles the command by the user. The command by the user is processed and a
-     * response is obtained. Dialog boxes for the user command and the chatbot
-     * response is displayed in the GUI. The text field is cleared afterwards.
+     * Handles the command by the user. The command by the user is processed and a response is obtained. Dialog boxes
+     * for the user command and the chatbot response is displayed in the GUI. The text field is cleared afterwards.
      */
     @FXML
     private void handleUserInput() {
@@ -103,7 +97,8 @@ public class MainWindow extends VBox {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage));
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
         userInput.clear();
 
         assert userInput.getText().equals("");
@@ -113,6 +108,10 @@ public class MainWindow extends VBox {
         }
     }
 
+    /**
+     * Handles the call by the user click on the menu item on help about commands. An alert box with the help text on
+     * all the possible commands together with how they are used are displayed.
+     */
     @FXML
     private void handleShowCommands() {
         String helpPath = "/values/help.txt";
@@ -125,6 +124,10 @@ public class MainWindow extends VBox {
         alert.show();
     }
 
+    /**
+     * Handles the call by the user click on the menu item on about the chatbot. An alert box with the description
+     * of the chatbot.
+     */
     @FXML
     private void handleShowAbout() {
         String aboutPath = "/values/about.txt";
@@ -137,18 +140,24 @@ public class MainWindow extends VBox {
         alert.show();
     }
 
+    /**
+     * Reads the text resource file provided. If the file path does not exist, then an exception with the error
+     * message is thrown. Otherwise, the string of all text in the text resource file is returned.
+     *
+     * @param path     The path to the text resource file
+     * @param errorMsg Error message to be returned if file path does not exist
+     * @return The result of reading the text resource file
+     * @throws DukeException If the file path does not exist
+     */
     private String readResource(String path, String errorMsg) throws DukeException {
         InputStream inputStream = this.getClass().getResourceAsStream(path);
-        String text;
 
         assert inputStream != null;
 
         try {
-            text = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DukeException(errorMsg);
         }
-
-        return text;
     }
 }

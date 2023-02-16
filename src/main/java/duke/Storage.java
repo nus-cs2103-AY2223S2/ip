@@ -16,19 +16,25 @@ import duke.task.Todo;
  * Storage interface that deals with the loading and storing of the tasks' data.
  */
 public class Storage {
+    /**
+     * Error message for unknown entry format being read.
+     */
     public static final String DATA_READ_ERROR = "Unknown entry in data file";
-    public static final String UNEXPECTED_ERROR_GETTING_DATA =
-            "Unexpected error when getting data.";
-    public static final String ERROR_CREATING_NEW_FILE =
-            "Error when trying to create new file.";
+    /**
+     * Error message for reading the data file.
+     */
+    public static final String UNEXPECTED_ERROR_GETTING_DATA = "Unexpected error when getting data.";
+    /**
+     * Error message when there is a problem creating a new file.
+     */
+    public static final String ERROR_CREATING_NEW_FILE = "Error when trying to create new file.";
     /**
      * The file path where the tasks data are stored.
      */
     private final String filePath;
 
     /**
-     * Constructor for a new storage interface with the file path of the tasks
-     * data provided.
+     * Constructor for a new storage interface with the file path of the tasks data provided.
      *
      * @param filePath The file path where the tasks data are stored
      */
@@ -36,16 +42,20 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    private static void checkError(IOException e) {
+    /**
+     * Checks on whether the error is due to the file not being found.
+     *
+     * @param e The error being checked
+     */
+    private static void isFileNotFoundError(IOException e) {
         if (!(e instanceof FileNotFoundException)) {
             throw new DukeException(UNEXPECTED_ERROR_GETTING_DATA);
         }
     }
 
     /**
-     * Attempt to load the tasks based on the data of the tasks provided. If the
-     * file does not exist, then a new blank file is created instead. Throws an
-     * exception if the program cannot create a new file or there is an error
+     * Attempt to load the tasks based on the data of the tasks provided. If the file does not exist, then a new
+     * blank file is created instead. Throws an exception if the program cannot create a new file or there is an error
      * obtaining the data from the file path.
      *
      * @return A list of tasks loaded from the file path
@@ -55,13 +65,18 @@ public class Storage {
         try {
             loadTasks(tasks);
         } catch (IOException e) {
-            checkError(e);
+            isFileNotFoundError(e);
             makeFile();
         }
         return tasks;
     }
 
-    private void makeFile() {
+    /**
+     * Creates a new file with the given file path. Throws an error if it is not possible.
+     *
+     * @throws DukeException If new file cannot be created
+     */
+    private void makeFile() throws DukeException {
         File file = new File(filePath);
         try {
             // noinspection ResultOfMethodCallIgnored
@@ -73,6 +88,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task objects from the file from the file path into an array list after processing each line of task
+     * data.
+     *
+     * @param tasks The list to add tasks into
+     * @throws FileNotFoundException If file is not found
+     */
     private void loadTasks(ArrayList<Task> tasks) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
@@ -89,9 +111,8 @@ public class Storage {
     }
 
     /**
-     * Saves all the tasks into their corresponding string representation to be
-     * loaded in the future. Throws an exception if there is an error accessing or
-     * saving the data to the file path.
+     * Saves all the tasks into their corresponding string representation to be loaded in the future. Throws an
+     * exception if there is an error accessing or saving the data to the file path.
      *
      * @param tasks The list of tasks to be saved
      * @throws DukeException If there is an error saving the data of the tasks
@@ -108,8 +129,7 @@ public class Storage {
     }
 
     /**
-     * Converts the list of tasks provided to the corresponding string
-     * representation to be saved.
+     * Converts the list of tasks provided to the corresponding string representation to be saved.
      *
      * @param taskList The list of tasks
      * @return The string representation of all the tasks
@@ -124,8 +144,7 @@ public class Storage {
     }
 
     /**
-     * Converts a string representation of the task into its respective task
-     * object and is returned.
+     * Converts a string representation of the task into its respective task object and is returned.
      *
      * @param data The string representation of the task data
      * @return A corresponding task to the provided data

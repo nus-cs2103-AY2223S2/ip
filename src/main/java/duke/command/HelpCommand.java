@@ -27,10 +27,10 @@ public class HelpCommand extends Command {
      * @param taskList List of tasks that are stored
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
+     * @return The string of what is printed out after execution
      */
     @Override
-    public String execute(TaskList taskList, TextUi ui, Storage storage)
-            throws DukeException {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         InputStream helpStream = this.getClass().getResourceAsStream("/values/help.txt");
         String helpText;
 

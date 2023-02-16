@@ -1,8 +1,8 @@
 package duke.task;
 
 /**
- * A task stores its description and on whether is it done or not. The task can
- * be marked as done or unmarked as not done.
+ * A task stores its description and on whether is it done or not. The task can be marked as done or unmarked as not
+ * done.
  */
 public class Task {
 
@@ -30,20 +30,7 @@ public class Task {
     }
 
     /**
-     * Constructor for a task with the provided description and its status of
-     * completion.
-     *
-     * @param description The description of the task
-     * @param isDone      Whether the task is done or not
-     */
-    public Task(String description, boolean isDone) {
-        this(description);
-        this.isDone = isDone;
-    }
-
-    /**
-     * Checks the completion status of the task and returns a string
-     * representation of it.
+     * Checks the completion status of the task and returns a string representation of it.
      *
      * @return String representation of completion status
      */
@@ -66,8 +53,7 @@ public class Task {
     }
 
     /**
-     * Provides a string representation of the task to be displayed by the
-     * chatbot.
+     * Provides a string representation of the task to be displayed by the chatbot.
      *
      * @return String representation of task to be displayed
      */
@@ -95,17 +81,21 @@ public class Task {
     }
 
     /**
-     * Creates a string representation of the task so that it can be imported in
-     * the future.
+     * Creates a string representation of the task so that it can be imported in the future.
      *
      * @return String representation of task to be stored for future imports
      */
     public String toData() {
-        return String.format("Task | marked: %s ; description: %s",
-                getMarkedStatus(), description);
+        return String.format("Task | marked: %s ; description: %s", getMarkedStatus(), description);
     }
 
-    public boolean isInDescription(String term) {
-        return description.contains(term);
+    /**
+     * Checks whether the keyword is in the description of the task.
+     *
+     * @param keyword Keyword to check within the description
+     * @return Boolean on whether the keyword is in the description
+     */
+    public boolean isInDescription(String keyword) {
+        return description.contains(keyword);
     }
 }
