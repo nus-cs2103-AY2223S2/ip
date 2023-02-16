@@ -34,7 +34,7 @@ public class TaskList {
      */
     public String getTaskStrings() throws StorerEmptyException {
 
-        String concat = "";
+        String concat = "Here are your current tasks:";
         for (int i = 1; i <= this.storer.size(); i++) {
             int j = i - 1;
             concat = concat + "\n" + i + ". " + this.storer.get(j);

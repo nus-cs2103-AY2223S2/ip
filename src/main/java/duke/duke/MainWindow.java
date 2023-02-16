@@ -36,6 +36,12 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Greets the user.
+     */
+    public void greetUSer() {
+
+    }
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

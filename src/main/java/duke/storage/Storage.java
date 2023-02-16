@@ -126,6 +126,11 @@ public class Storage {
 
     }
 
+    /**
+     * Deletes all tasks before a task at a given index.
+     * @param index Index of a task before which all tasks are deleted.
+     * @throws DukeException If an error is encountered while accessing information.
+     */
     public void deleteBefore(int index) throws DukeException {
         try {
             Stream<String> tasks = readAll(index);
