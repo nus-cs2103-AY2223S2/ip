@@ -28,6 +28,111 @@ everytime you start the application.
 
 ## Usage
 
+### `todo` - Adds a todo task
+
+Todo task is a simple task with no associated date and time
+
+Example of usage: 
+
+`todo [taskname] (optional arguments)`
+
+Expected outcome:
+
+The addition of the todo will be acknowledged.
+
+```
+expected output
+```
+### `Keyword` - Describe action
+
+Describe the action and its outcome.
+
+Example of usage: 
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+Description of the outcome.
+
+```
+expected output
+```
+### `Keyword` - Describe action
+
+Describe the action and its outcome.
+
+Example of usage: 
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+Description of the outcome.
+
+```
+expected output
+```
+### `Keyword` - Describe action
+
+Describe the action and its outcome.
+
+Example of usage: 
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+Description of the outcome.
+
+```
+expected output
+```
+### `Keyword` - Describe action
+
+Describe the action and its outcome.
+
+Example of usage: 
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+Description of the outcome.
+
+```
+expected output
+```
+### `Keyword` - Describe action
+
+Describe the action and its outcome.
+
+Example of usage: 
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+Description of the outcome.
+
+```
+expected output
+```
+### `Keyword` - Describe action
+
+Describe the action and its outcome.
+
+Example of usage: 
+
+`keyword (optional arguments)`
+
+Expected outcome:
+
+Description of the outcome.
+
+```
+expected output
+```
 ### `Keyword` - Describe action
 
 Describe the action and its outcome.
