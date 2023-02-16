@@ -22,11 +22,16 @@ public enum Command {
     /**
      * Initializes the task list.
      */
-    HELLO("hello") {
+    INITIALIZE("init") {
         @Override
-        public String execute(String input) throws SundayException {
-            boolean isNewUser = list.load();
-            return Ui.getWelcomeMessage(isNewUser);
+        public void execute(String filepath) throws SundayException {
+            Ui.printWelcome();
+            boolean isFirstLaunch = list.load();
+            if (isFirstLaunch) {
+                Ui.printCreatedSaveFile();
+            } else {
+                Ui.printLoadedSaveFile();
+            }
         }
     },
 
@@ -35,11 +40,11 @@ public enum Command {
      */
     LIST("list") {
         @Override
-        public String execute(String input) {
+        public void execute(String input) {
             if (list.isEmpty()) {
-                return Ui.getEmptyTaskListMessage();
+                Ui.printEmptyTaskList();
             } else {
-                return Ui.getTaskListMessage(list);
+                Ui.printTaskList(list);
             }
         }
     },
@@ -49,7 +54,7 @@ public enum Command {
      */
     DEADLINE("deadline") {
         @Override
-        public String execute(String input) throws SundayException {
+        public void execute(String input) throws SundayException {
             try {
                 input = input.substring(1);
                 String[] strArr = input.split(" ");
@@ -73,7 +78,7 @@ public enum Command {
 
                 Task deadline = new Deadline(description, by);
                 list.add(deadline);
-                return Ui.getAddedTaskMessage(deadline, list.getUncompletedSize());
+                Ui.printAddedTask(deadline, list.getUncompletedSize());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of a deadline cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -90,7 +95,7 @@ public enum Command {
      */
     EVENT("event") {
         @Override
-        public String execute(String input) throws SundayException {
+        public void execute(String input) throws SundayException {
             try {
                 input = input.substring(1);
                 String[] strArr = input.split(" ");
@@ -122,7 +127,7 @@ public enum Command {
                 String end = sb.toString().substring(0, sb.length() - 1);
                 Task event = new Event(description, start, end);
                 list.add(event);
-                return Ui.getAddedTaskMessage(event, list.getUncompletedSize());
+                Ui.printAddedTask(event, list.getUncompletedSize());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of an event cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -139,12 +144,12 @@ public enum Command {
      */
     TODO("todo") {
         @Override
-        public String execute(String input) throws SundayException {
+        public void execute(String input) throws SundayException {
             try {
                 String description = input.substring(1);
                 Task toDo = new ToDo(description);
                 list.add(toDo);
-                return Ui.getAddedTaskMessage(toDo, list.getUncompletedSize());
+                Ui.printAddedTask(toDo, list.getUncompletedSize());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of a todo cannot be empty.");
             }
@@ -156,11 +161,11 @@ public enum Command {
      */
     MARK("mark") {
         @Override
-        public String execute(String input) throws SundayException {
+        public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(input.substring(1)) - 1;
                 Task marked = list.mark(index);
-                return Ui.getMarkedTaskMessage(marked, list.getUncompletedSize());
+                Ui.printMarkedTask(marked, list.getUncompletedSize());
             } catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to mark");
             } catch (IndexOutOfBoundsException e) {
@@ -174,11 +179,11 @@ public enum Command {
      */
     UNMARK("unmark") {
         @Override
-        public String execute(String input) throws SundayException {
+        public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(input.substring(1)) - 1;
                 Task unmarked = list.unmark(index);
-                return Ui.getUnmarkedTaskMessage(unmarked, list.getUncompletedSize());
+                Ui.printUnmarkedTask(unmarked, list.getUncompletedSize());
             } catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to unmark");
             } catch (IndexOutOfBoundsException e) {
@@ -192,11 +197,11 @@ public enum Command {
      */
     DELETE("delete") {
         @Override
-        public String execute(String input) throws SundayException {
+        public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
                 Task deleted = list.delete(index);
-                return Ui.getDeletedTaskMessage(deleted, list.getUncompletedSize());
+                Ui.printDeletedTask(deleted, list.getUncompletedSize());
             } catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to delete");
             } catch (IndexOutOfBoundsException e) {
@@ -207,10 +212,10 @@ public enum Command {
 
     FIND("find") {
         @Override
-        public String execute(String input) {
+        public void execute(String input) {
             String keyword = input.substring(1);
             TaskList found = list.find(keyword);
-            return Ui.getListFoundMessage(found);
+            Ui.printListFound(found);
         }
     },
 
@@ -219,9 +224,9 @@ public enum Command {
      */
     BYE("bye") {
         @Override
-        public String execute(String input) throws SundayException {
+        public void execute(String input) throws SundayException {
             boolean didSave = list.save();
-            return Ui.getGoodbyeMessage(didSave);
+            Ui.printGoodbye(didSave);
         }
     };
 
@@ -248,8 +253,7 @@ public enum Command {
      * Executes the command with the given input.
      *
      * @param input The input to be used for executing the command.
-     * @return The response to the shown to the user.
      * @throws SundayException If any error occurs during the execution of the command.
      */
-    public abstract String execute(String input) throws SundayException;
+    public abstract void execute(String input) throws SundayException;
 }

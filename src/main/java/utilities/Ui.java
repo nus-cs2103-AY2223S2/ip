@@ -11,11 +11,15 @@ import task.Task;
 
 /**
  * The Ui class is a user interface for the Sunday task manager.
- * It contains methods for returning the appropriate responses according to user inputs.
+ * It contains methods for reading user input, printing output to the console, and closing the user interface.
  *
  * @author Tan Yan-Hao Joshua
  */
 public class Ui {
+
+    private static String bar = "____________________________________________________________";
+
+    private static String indent = "    ";
 
     private static PrintStream dummyStream = new PrintStream(new OutputStream() {
         @Override
@@ -27,6 +31,21 @@ public class Ui {
     private static PrintStream defaultStream = System.out;
 
     private Scanner sc = new Scanner(System.in);
+
+    /**
+     * Reads a user's command as a string array containing two elements.
+     * The first element is the command and the second is the input.
+     *
+     * @return The user's command as a string array.
+     */
+    public String[] readCommand() {
+        String command = this.sc.next();
+        String input = this.sc.nextLine();
+        String[] fullCommand = new String[2];
+        fullCommand[0] = command;
+        fullCommand[1] = input;
+        return fullCommand;
+    }
 
     /**
      * Closes the user interface.
@@ -52,155 +71,178 @@ public class Ui {
     }
 
     /**
-     * Returns the appropriate welcome message to the user, depending on whether the user is new or not.
-     *
-     * @param isNewUser True if the user is new, otherwise False.
-     * @return The appropriate welcome message.
+     * Prints a bar to the console.
      */
-    public static String getWelcomeMessage(boolean isNewUser) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Hi! I'm Sunday, pleasure to meet you!\n");
-        sb.append("How can I help?\n");
-        if (isNewUser) {
-            sb.append("It appears we haven't met!\n");
-            sb.append("Start typing away your tasks and I'll note them down accordingly :)\n");
-        } else {
-            sb.append("It appears we've met! I've restored your task list from our last session.\n");
-        }
-        return sb.toString();
+    private static void printBar() {
+        System.out.println(indent + bar);
     }
 
     /**
-     * Returns a task list as a message to the user.
+     * Prints text to the console.
      *
-     * @param taskList The task list to be viewed.
-     * @return The task list as a message.
+     * @param text The text to be printed.
      */
-    public static String getTaskListMessage(TaskList taskList) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here's everything I've noted down for you:\n");
+    private static void printText(String text) {
+        System.out.println(indent + text);
+    }
+
+    /**
+     * Prints a welcome message to the console.
+     */
+    public static void printWelcome() {
+        printBar();
+        printText("Hi! I'm Sunday, pleasure to meet you!");
+        printText("How can I help?");
+        printBar();
+    }
+
+    /**
+     * Prints a message to the console indicating that a new save file has been created.
+     */
+    public static void printCreatedSaveFile() {
+        printBar();
+        printText("It appears we haven't met!");
+        printText("Start typing away your tasks and I'll note them down accordingly :)");
+        printBar();
+    }
+
+    /**
+     * Prints a message to the console indicating that a saved file has been loaded.
+     */
+    public static void printLoadedSaveFile() {
+        printBar();
+        printText("It appears we've met! I've restored your task list from our last session.");
+        printBar();
+    }
+
+    /**
+     * Prints a task list to the console.
+     *
+     * @param taskList The task list to be printed.
+     */
+    public static void printTaskList(TaskList taskList) {
+        printBar();
+        printText("Here's everything I've noted down for you:");
 
         String[] strArr = taskList.toString().split("\n");
         for (int i = 0; i < strArr.length; i++) {
-            sb.append(i + 1).append(". ").append(strArr[i]).append("\n");
+            printText(indent + (i + 1) + ". " + strArr[i]);
         }
-        return sb.toString();
+
+        printBar();
     }
 
     /**
-     * Returns a message to the user indicating that the task list is empty.
-     *
-     * @return The message indicating that the task list is empty.
-     */
-    public static String getEmptyTaskListMessage() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Your list is currently empty.\n");
-        sb.append("Tell me what to note down and I'll remember it accordingly!\n");
-        return sb.toString();
-    }
-
-    /**
-     * Returns a message to the user indicating that a task has been added to the task list.
+     * Prints a message to the console indicating that a task has been added to the task list.
      *
      * @param task The task that has been added.
      * @param uncompletedSize The number of uncompleted tasks in the task list.
-     * @return The message indicating that a task has been added to the task list.
      */
-    public static String getAddedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Got it. I've added this task:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+    public static void printAddedTask(Task task, int uncompletedSize) {
+        Ui.printBar();
+        Ui.printText("Got it. I've added this task:");
+        Ui.printText("  " + task.toString());
+        Ui.printText("Now you have " + uncompletedSize + " task(s) in the list.");
+        Ui.printBar();
     }
 
     /**
-     * Returns a message to the user indicating that a task has been marked as complete.
+     * Prints a message to the console indicating that a task has been marked as complete.
      *
      * @param task The task that has been marked.
      * @param uncompletedSize The number of uncompleted tasks in the task list.
-     * @return The message indicating that a task has been marked as complete.
      */
-    public static String getMarkedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Well Done! I've marked this task as done:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+    public static void printMarkedTask(Task task, int uncompletedSize) {
+        Ui.printBar();
+        Ui.printText("Well Done! I've marked this task as done:");
+        Ui.printText("  " + task.toString());
+        Ui.printText("Now you have " + uncompletedSize + " task(s) in the list.");
+        Ui.printBar();
     }
 
     /**
-     * Returns a message to the user indicating that a task has been unmarked.
+     * Prints a message to the console indicating that a task has been unmarked.
      *
      * @param task The task that has been unmarked.
      * @param uncompletedSize The number of uncompleted tasks in the task list.
-     * @return The message indicating that a task has been unmarked.
      */
-    public static String getUnmarkedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("OK, I've marked this task as not done yet:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+    public static void printUnmarkedTask(Task task, int uncompletedSize) {
+        printBar();
+        printText("OK, I've marked this task as not done yet:");
+        printText("  " + task);
+        printText("Now you have " + uncompletedSize + " task(s) in the list.");
+        printBar();
     }
 
     /**
-     * Returns a message to the user indicating that a task has been deleted from the task list.
+     * Prints a message to the console indicating that a task has been deleted from the task list.
      *
      * @param task The task that has been deleted.
      * @param uncompletedSize The number of uncompleted tasks in the task list.
-     * @return The message indicating that a task has been deleted from the task list.
      */
-    public static String getDeletedTaskMessage(Task task, int uncompletedSize) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Noted. I've removed this task:\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(uncompletedSize).append(" task(s) in the list.\n");
-        return sb.toString();
+    public static void printDeletedTask(Task task, int uncompletedSize) {
+        Ui.printBar();
+        Ui.printText("Noted. I've removed this task:");
+        Ui.printText("  " + task.toString());
+        Ui.printText("Now you have " + uncompletedSize + " task(s) in the list.");
+        Ui.printBar();
     }
 
     /**
-     * Returns an error message to the user.
+     * Prints an error message to the console.
      *
      * @param e The exception that was thrown.
-     * @return The error message.
      */
-    public static String showException(SundayException e) {
-        return e.getMessage();
+    public static void printException(SundayException e) {
+        printBar();
+        printText(e.getMessage());
+        printBar();
     }
 
     /**
-     * Returns a goodbye message to the user.
+     * Prints a goodbye message to the console.
      *
      * @param didSave Indicates whether the task list was saved before the program exited.
-     * @return The goodbye message.
      */
-    public static String getGoodbyeMessage(boolean didSave) {
-        StringBuilder sb = new StringBuilder();
+    public static void printGoodbye(boolean didSave) {
+        printBar();
         if (didSave) {
-            sb.append("Okay, I've save your list for the next session!\n");
+            printSavedToFile();
         }
-        sb.append("Goodbye and have a pleasant day!\n");
-        return sb.toString();
+        printText("Goodbye and have a pleasant day!");
+        printBar();
+    }
+
+    private static void printSavedToFile() {
+        Ui.printText("Okay, I've save your list for the next session!");
     }
 
     /**
-     * Returns the task list in a specific format to the user.
+     * Prints a message to the console indicating that the task list is empty.
+     */
+    public static void printEmptyTaskList() {
+        printBar();
+        printText("Your list is currently empty.");
+        printText("Tell me what to note down and I'll remember it accordingly!");
+        printBar();
+    }
+
+    /**
+     * Prints the task list in a specific format to the console.
      *
      * @param taskList The task list to be printed.
-     * @return The task list in a specific format to the user.
      */
-    public static String getListFoundMessage(TaskList taskList) {
-        StringBuilder sb = new StringBuilder();
+    public static void printListFound(TaskList taskList) {
+        printBar();
         if (taskList.isEmpty()) {
-            sb.append("Looks like you don't have any tasks matching that description.\n");
+            printText("Looks like you don't have any tasks matching that description.");
         } else {
-            sb.append("Here are the task(s) I've found:\n");
+            Ui.printText("Here are the task(s) I've found:");
             String[] strArr = taskList.toString().split("\n");
             for (int i = 0; i < strArr.length; i++) {
-                sb.append(i + 1).append(". ").append(strArr[i]).append("\n");
+                printText(indent + (i + 1) + ". " + strArr[i]);
             }
         }
-        return sb.toString();
+        printBar();
     }
 }
