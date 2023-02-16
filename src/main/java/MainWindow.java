@@ -45,16 +45,24 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = leo.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getLeoDialog(response, leoImage)
-        );
-        userInput.clear();
-        if (response.equals("It was nice talking, see you soon!\n")) {
-            DialogBox.getLeoDialog(response, leoImage);
-            System.exit(0);
+        try {
+            String input = userInput.getText();
+            String response = leo.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getLeoDialog(response, leoImage)
+            );
+            userInput.clear();
+            if (response.equals("It was nice talking, see you soon!\n")) {
+                DialogBox.getLeoDialog(response, leoImage);
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userInput.getText(), userImage),
+                    DialogBox.getLeoDialog(e.getMessage(), leoImage)
+            );
+            userInput.clear();
         }
     }
 
