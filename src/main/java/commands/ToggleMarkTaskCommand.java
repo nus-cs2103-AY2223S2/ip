@@ -24,7 +24,9 @@ public class ToggleMarkTaskCommand extends Command implements IUndoable {
     }
     @Override
     public String execute() {
-        this.markedTask = !isMarkAsDone ? taskList.unmarkTask(index) : taskList.markTask(index);
+        this.markedTask = !isMarkAsDone
+                ? taskList.unmarkTask(index)
+                : taskList.markTask(index);
         try {
             storage.saveTasks(taskList.getArrayListCopy());
             return toResultString();
@@ -34,7 +36,9 @@ public class ToggleMarkTaskCommand extends Command implements IUndoable {
     }
 
     public void undo() {
-        this.markedTask = !isMarkAsDone ? taskList.markTask(index) : taskList.unmarkTask(index);
+        this.markedTask = !isMarkAsDone
+                ?  taskList.markTask(index)
+                : taskList.unmarkTask(index);
     }
 
     @Override
