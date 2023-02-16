@@ -34,7 +34,7 @@ public class DeadLineCommand extends Command {
         try {
             storage.dumpFile(tasks);
         } catch (Exception err) {
-            throw new DukeException("Error while saving file!");
+            throw new DukeException("Baap. Error while saving file!");
         }
         return message;
 
