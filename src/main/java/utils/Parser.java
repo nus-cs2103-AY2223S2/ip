@@ -34,7 +34,7 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
-            return new AddCommand(this.taskFactory.make(fullCommand));
+            return new AddCommand(taskFactory.make(command, splitStr[1]));
         case "delete":
             return new DeleteCommand(Integer.parseInt(splitStr[1]));
         case "mark":

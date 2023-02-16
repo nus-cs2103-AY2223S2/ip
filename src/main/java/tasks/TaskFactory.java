@@ -16,22 +16,20 @@ public class TaskFactory {
      * Returns a Task according to the given instruction.
      * Parses the instruction to determine which type of Command to return.
      *
-     * @param instruction
+     * @param
      * @return Task object as specified by the instruction.
      * @throws TaskFactoryException
      */
-    public Task make(String instruction) throws TaskFactoryException {
-        String[] splitStr = instruction.split("\\s+", 2);
-        String taskType = splitStr[0];
+    public Task make(String taskType, String parameters) throws TaskFactoryException {
 
         try {
             switch (taskType) {
             case "todo":
-                return makeTodo(instruction);
+                return makeTodo(parameters);
             case "deadline":
-                return makeDeadline(instruction);
+                return makeDeadline(parameters);
             case "event":
-                return makeEvent(instruction);
+                return makeEvent(parameters);
             default:
                 throw new TaskFactoryException("Invalid task type");
             }
@@ -41,21 +39,19 @@ public class TaskFactory {
 
     }
 
-    private Task makeTodo(String instruction) throws MissingTaskDescriptionException {
-        String[] splitStr = instruction.split("\\s+", 2);
-
-        if (splitStr.length < 2) {
+    private Task makeTodo(String parameter) throws MissingTaskDescriptionException {
+        String taskDescription = parameter;
+        if (taskDescription.isEmpty()) {
             throw new MissingTaskDescriptionException("Task Description cannot be empty!");
         }
 
-        String taskDescription = splitStr[1];
         return new Todo(taskDescription);
     }
 
-    private Task makeDeadline(String instruction) throws InvalidDateTimeFormatException {
-        String[] splitStr = instruction.split("\\s+", 2);
-        String taskDescription = splitStr[1].split(" /by ")[0];
-        String taskDeadline =splitStr[1].split(" /by ")[1];
+    private Task makeDeadline(String parameter) throws InvalidDateTimeFormatException {
+        String taskDescription = parameter.split(" /by ", 2)[0];
+        String taskDeadline = parameter.split(" /by ",2 )[1];
+
         try {
             LocalDateTime taskDeadlineDateTime = parseDate(taskDeadline);
             return new Deadline(taskDescription, taskDeadlineDateTime);
@@ -65,11 +61,10 @@ public class TaskFactory {
 
     }
 
-    private Task makeEvent(String instruction) throws InvalidDateTimeFormatException {
-        String[] splitStr = instruction.split("\\s+", 2);
-        String taskDescription = splitStr[1].split(" /from ")[0];
-        String taskStart =splitStr[1].split(" /from ")[1].split(" /to ")[0];
-        String taskEnd =splitStr[1].split(" /from ")[1].split(" /to ")[1];
+    private Task makeEvent(String parameter) throws InvalidDateTimeFormatException {
+        String taskDescription = parameter.split(" /from ", 2)[0];
+        String taskStart = parameter.split(" /from ", 2)[1].split(" /to ",2)[0];
+        String taskEnd = parameter.split(" /from ", 2)[1].split(" /to ",2)[1];
 
         try {
             LocalDateTime taskStartDateTime = parseDate(taskStart);
