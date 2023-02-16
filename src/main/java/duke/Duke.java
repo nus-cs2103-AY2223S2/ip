@@ -12,6 +12,7 @@ public class Duke {
     private static TaskList tasks;
     private Storage storage;
     private Parser parser;
+    public boolean isExit;
 
     /**
      * Initializes a bot with provided path to the storage space.
@@ -38,6 +39,16 @@ public class Duke {
      */
     public String getResponse(String input) {
         String res = parser.parse(input);
+        isExit = res.equals("Bye bye!");
         return res;
+    }
+
+    /**
+     * Greets user with a welcome message.
+     *
+     * @return Welcome message.
+     */
+    public String getWelcomeMessage() {
+        return parser.parse("greet");
     }
 }
