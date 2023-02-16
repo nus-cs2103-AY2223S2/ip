@@ -2,28 +2,36 @@
 
 ## Features 
 
-### Feature-ABC
+### Task Tracking
 
-Description of the feature.
+Add different categories of tasks to the list. 
+Tasks can be marked, unmarked, or deleted.
+Find tasks by keywords or date.
 
-### Feature-XYZ
+ChatBot will remember tasks next time app is opened.
 
-Description of the feature.
+![](Tasks.png)
+
+### Sort Tasks
+
+Tasks with date info can be sorted in ascending order. Tasks without date info will remain in the same spot.
+
+![](Sort.png)
 
 ## Usage
 
-### `Keyword` - Describe action
+### `help` 
 
-Describe the action and its outcome.
+Prompts bot to provide more info about commands.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`help 'command'`
 
-Expected outcome:
+`help all`
 
-Description of the outcome.
+`help`
 
-```
-expected output
-```
+![](Help.png)
+
+All details and formats for other commands could be obtained using `help`
