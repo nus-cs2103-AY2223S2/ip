@@ -17,7 +17,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage store) throws DukeException {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Remember to come back to me soon.";
     }
 
     /**

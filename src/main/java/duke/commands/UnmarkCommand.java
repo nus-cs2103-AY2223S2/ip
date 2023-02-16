@@ -42,7 +42,7 @@ public class UnmarkCommand extends Command {
         }
         list.stream().filter(x -> list.indexOf(x) == unmarkNumber - 1).forEach(y -> y.setStatus(false));
         store.save(list);
-        String response = "Nice! I've marked this task as not done yet:\n";
+        String response = "Okay, I've marked this task as not done yet:\n";
         response += list.get(unmarkNumber - 1).toString();
         return response;
     }
