@@ -52,11 +52,11 @@ The date must be in the format of `YYYY-MM-DD`.
 **Example of usage:**
 `deadline Assignment 1 /by 2023-02-15`
 
-**Note:**
-The date must be in the format of `YYYY-MM-DD`.
-
 **Expected outcome:**
 A deadline task with the description of `Assignment 1 (by: Feb 15 2023)` is added to your list of tasks.
+
+**Note:**
+The date must be in the format of `YYYY-MM-DD`.
 
 ### `delete` - Delete a task
 
