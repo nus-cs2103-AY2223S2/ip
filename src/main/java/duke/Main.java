@@ -22,7 +22,6 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Ui.fxml"));
             AnchorPane ui = fxmlLoader.load();
-            ui.setStyle("");
             Scene scene = new Scene(ui);
             stage.setScene(scene);
             fxmlLoader.<Ui>getController().setDuke(this.duke);

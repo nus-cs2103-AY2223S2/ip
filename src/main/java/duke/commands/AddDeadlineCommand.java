@@ -67,6 +67,7 @@ public class AddDeadlineCommand extends Command {
         }
 
         try {
+            System.out.println(deadline.toString().stripLeading());
             Deadline newDeadline = new Deadline(task.toString(), deadline.toString().stripLeading());
             taskList.addTask(newDeadline);
             ui.response(FRAME + "\n"

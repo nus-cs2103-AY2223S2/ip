@@ -21,7 +21,8 @@ public class ParserTest {
         } catch (DukeException e) {
             assertEquals(e.getLocalizedMessage(),
                     "\n"
-                    + "Sorry I don't think there's a command like that!");
+                    + "Sorry I don't think there's a command like that!"
+                    + "\n");
         }
     }
 

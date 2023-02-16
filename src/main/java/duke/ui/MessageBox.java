@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 
 /**
@@ -34,8 +35,17 @@ public class MessageBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        this.dialog.setText(text);
+        this.dialog.getStyleClass().add("message");
+        this.dialog.setAlignment(Pos.CENTER);
         displayPicture.setImage(img);
+        Circle pictureClip = new Circle(
+                this.displayPicture.getX() + this.displayPicture.getFitWidth() / 2,
+                this.displayPicture.getY() + this.displayPicture.getFitWidth() / 2,
+                this.displayPicture.getFitWidth() / 2
+        );
+        this.displayPicture.setClip(pictureClip);
+
     }
 
     /**
@@ -48,13 +58,20 @@ public class MessageBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    private Label getDialog() {
+        return this.dialog;
+    }
+
     public static MessageBox getUserDialog(String text, Image img) {
-        return new MessageBox(text, img);
+        MessageBox userMessage = new MessageBox(text, img);
+        userMessage.getDialog().getStyleClass().add("userMessage");
+        return userMessage;
     }
 
     public static MessageBox getDukeDialog(String text, Image img) {
-        var dukeMessage = new MessageBox(text, img);
+        MessageBox dukeMessage = new MessageBox(text, img);
         dukeMessage.flip();
+        dukeMessage.getDialog().getStyleClass().add("dukeMessage");
         return dukeMessage;
     }
 }
