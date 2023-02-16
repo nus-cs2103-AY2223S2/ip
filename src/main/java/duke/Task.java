@@ -37,7 +37,7 @@ public class Task {
     }
 
     /**
-     * Set task as done or not done.
+     * Sets task as done or not done.
      *
      * @param isDone Status of the task to be set.
      */
