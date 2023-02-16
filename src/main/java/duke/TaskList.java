@@ -40,30 +40,84 @@ public class TaskList {
 
                 switch (line[0].trim()) {
                 case "T":
-                    taskList.add(new Todo(line[2].trim()));
-                    if (line[1].equals("1")) {
-                        taskList.get(taskList.size() - 1).markAsDone();
+                    addTodo(line, taskList);
+                    if (isMarked(line[1])) {
+                        markLast(taskList);
                     }
                     break;
                 case "D":
-                    LocalDate time = LocalDate.parse(line[3].trim());
-                    taskList.add(new Deadline(line[2].trim() + " ", time));
-                    if (line[1].trim().equals("1")) {
-                        taskList.get(taskList.size() - 1).markAsDone();
+                    addDeadline(line, taskList);
+                    if (isMarked(line[1])) {
+                        markLast(taskList);
                     }
                     break;
                 case "E":
-                    taskList.add(new Event(line[2].trim() + " ", line[3].trim()));
-                    if (line[1].trim().equals("1")) {
-                        taskList.get(taskList.size() - 1).markAsDone();
+                    addEvent(line, taskList);
+                    if (isMarked(line[1])) {
+                        markLast(taskList);
                     }
                     break;
                 default:
-                    assert false: line[0].trim();
+                    assert false : line[0].trim();
                 }
             }
         } catch (FileNotFoundException e) {
             Ui.fileExceptionUi();
+        }
+    }
+
+    /**
+     * Adds a todo task to the ArrayList
+     *
+     * @param line     Parsed task details
+     * @param taskList ArrayList of tasks
+     */
+    public void addTodo(String[] line, ArrayList<Task> taskList) {
+        taskList.add(new Todo(line[2].trim()));
+    }
+
+    /**
+     * Adds an event task to the ArrayList
+     *
+     * @param line     Parsed task details
+     * @param taskList ArrayList of tasks
+     */
+    public void addEvent(String[] line, ArrayList<Task> taskList) {
+        taskList.add(new Event(line[2].trim() + " ", line[3].trim()));
+    }
+
+    /**
+     * Adds a deadline task to the ArrayList
+     *
+     * @param line     Parsed task details
+     * @param taskList ArrayList of tasks
+     */
+    public void addDeadline(String[] line, ArrayList<Task> taskList) {
+        LocalDate time = LocalDate.parse(line[3].trim());
+        taskList.add(new Deadline(line[2].trim() + " ", time));
+    }
+
+
+    /**
+     * Marks the last current task in the ArrayList of tasks as done
+     *
+     * @param taskList The ArrayList of tasks
+     */
+    public void markLast(ArrayList<Task> taskList) {
+        taskList.get(taskList.size() - 1).markAsDone();
+    }
+
+    /**
+     * Tests whether the task is marked as done
+     *
+     * @param input The task status indicated as 1 or 0
+     * @return True if the task is done and false otherwise
+     */
+    public boolean isMarked(String input) {
+        if (input.trim().equals("1")) {
+            return true;
+        } else {
+            return false;
         }
     }
 

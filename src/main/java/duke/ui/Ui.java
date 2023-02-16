@@ -1,49 +1,23 @@
 package duke.ui;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 import duke.TaskList;
 import duke.tasks.Task;
 
 
-import java.util.ArrayList;
-
-
 public class Ui {
 
-    /**
-     * Displays welcome message
-     */
-    public static String showWelcome() {
-        return ("Hello! I'm Duke.\n"
-            + "What can I do for you?\n");
-    }
-
-    /**
-     * Displays a line
-     */
-    public static String showLine() {
-        return ("------------------------------------------------------------------------------");
-    }
-
-    /**
-     * Reads a line from the user
-     */
-    public static String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String cur = sc.nextLine();
-        return cur;
-    }
 
     /**
      * Adds a task to the task list
      *
-     * @param task The task created
+     * @param task    The task created
      * @param counter The counter of the number of total tasks
      */
     public String addTask(Task task, int counter) {
         return ("Got it. I've added this task:\n"
-            + "  " + task.toString() +"\n"
+            + "  " + task.toString() + "\n"
             + "Now you have " + counter + " tasks in the list.");
     }
 
@@ -53,15 +27,13 @@ public class Ui {
      * @param list The task list
      */
     public String listUI(TaskList list) {
-       String tasks = "";
-        for(int j = 0; j < list.getLength(); j++) {
+        String tasks = "";
+        for (int j = 0; j < list.getLength(); j++) {
             int k = j + 1;
             tasks = tasks.concat(k + "." + list.getTask(j).toString() + "\n");
         }
-       return ( "Here are the tasks in your list:\n"
-           + tasks);
-
-
+        return ("Here are the tasks in your list:\n"
+            + tasks);
     }
 
     /**
@@ -72,16 +44,9 @@ public class Ui {
     public String mark(Task task) {
         return (
             "Nice! I've marked this task as done:\n"
-            + "  " + task.toString());
-
+                + "  " + task.toString());
     }
 
-    /**
-     * Displays that the directory is not found
-     */
-    public static String directoryExceptionUi() {
-        return ("   OOPS!!! Directory not found, please create the directory \"data\" first\n");
-    }
 
     /**
      * Displays that the file is not found
@@ -93,6 +58,7 @@ public class Ui {
 
     /**
      * Shows error given as the input
+     *
      * @param error Error input
      */
     public static String showError(String error) {
@@ -100,7 +66,7 @@ public class Ui {
             return (error);
 
         } else {
-            return("   OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            return ("   OOPS!!! I'm sorry, but I don't know what that means :-(\n");
 
         }
     }
@@ -108,47 +74,43 @@ public class Ui {
 
     /**
      * Marks the task as unfinished
+     *
      * @param task The task to be marked
      */
     public String unmark(Task task) {
-        return("OK, I've marked this task as not done yet:\n"
+        return ("OK, I've marked this task as not done yet:\n"
             + "  " + task.toString());
     }
 
-    /**
-     * Displays bye messgae to the user
-     */
-    public static String bye() {
-       return ("Bye. Hope to see you again soon!");
-
-    }
 
     /**
      * Deletes a task from the task list
      *
-     * @param task The task to be deleted
+     * @param task    The task to be deleted
      * @param counter The counter of the total number of tasks
      */
     public static String delete(Task task, int counter) {
-       return ("Noted. I've removed this task:\n"
-           + "  " + task.toString() +"\n"
-           + "Now you have " + counter + " tasks in the list.");
+        return ("Noted. I've removed this task:\n"
+            + "  " + task.toString() + "\n"
+            + "Now you have " + counter + " tasks in the list.");
 
     }
 
     /**
      * Tells the user that no command has been added
+     *
      * @return String meaning no command added yet
      */
-    public static String NoPreCommand() {
+    public static String cannotFindPreCommand() {
         return ("Sorry there is no command yet.");
     }
 
     /**
      * Tells the user that previous command is not able to be undone
+     *
      * @return String meaning previous command cannot be undone
      */
-    public static String InvalidPreCommand() {
+    public static String failUndo() {
         return ("Sorry the previous command cannot be undone.");
     }
 
@@ -157,13 +119,13 @@ public class Ui {
      * Finds tasks in the task list
      *
      * @param found The indexes of the tasks found in the task list
-     * @param list The task list
+     * @param list  The task list
      */
     public static String find(ArrayList<Integer> found, TaskList list) {
         int counter = 1;
         String tasks = "";
         for (Integer cur : found) {
-            tasks = tasks.concat(counter + "." + list.getTask(cur).toString() +"\n");
+            tasks = tasks.concat(counter + "." + list.getTask(cur).toString() + "\n");
             counter += 1;
         }
         return ("Here are the matching tasks in your list:\n" +

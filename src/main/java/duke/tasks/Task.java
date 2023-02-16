@@ -6,8 +6,6 @@ public class Task {
     protected boolean isDone;
 
 
-
-
     /**
      * Initialises the object
      *
@@ -17,13 +15,6 @@ public class Task {
         this.description = description;
         this.isDone = false;
         counter += 1;
-    }
-
-    /**
-     * Decreases the counter by 1
-     */
-    public static void decreaseCounter() {
-        counter -= 1;
     }
 
     /**
@@ -42,16 +33,12 @@ public class Task {
      * @return a String representing whether task is done
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    /**
-     * Gets the details of the task
-     *
-     * @return a string description of the task
-     */
-    public String getDescription() {
-        return this.description; // mark done task with X
+        // mark done task with X
+        if (isDone) {
+            return "X";
+        } else {
+            return " ";
+        }
     }
 
     /**

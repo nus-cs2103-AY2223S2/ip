@@ -1,13 +1,8 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
-import javafx.scene.image.Image;
-
 
 import duke.command.Command;
-import duke.exceptions.DirectoryNotFoundException;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -16,7 +11,6 @@ import duke.ui.Ui;
 
 public class Duke {
 
-
     private Command preCommand;
     private Storage storage;
     private TaskList tasks;
@@ -24,14 +18,8 @@ public class Duke {
 
     private boolean isExit = false;
 
-    private Image user = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private Image duke = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
-
-
-
     /**
      * Initialises the object
-     *
      */
     public Duke(String filePath) {
         preCommand = null;
@@ -39,8 +27,8 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        }  catch (DukeException e) {
-            ui.showError(e.getMessage());
+        } catch (DukeException e) {
+            Ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -50,34 +38,24 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input){
+    public String getResponse(String input) {
         try {
             Command c = Parser.parse(input, preCommand);
             isExit = c.isExit();
             if (isExit) {
-                assert isExit;
                 String dukeText = "bye";
                 return dukeText;
             }
             this.preCommand = c;
             return (c.execute(tasks, ui, storage));
         } catch (IllegalArgumentException e) {
-            return ui.showError("wrong");
-        } catch (DirectoryNotFoundException e) {
-            return  ui.showError(e.toString());
-        } catch (FileNotFoundException e) {
-            return  ui.showError(e.getMessage());
+            return Ui.showError("wrong");
         } catch (IOException e) {
-            return ui.showError(e.getMessage());
+            return Ui.showError(e.getMessage());
         } catch (DukeException e) {
-            return ui.showError(e.toString());
+            return Ui.showError(e.toString());
         }
-
     }
-
-
-
-
 
 
 }

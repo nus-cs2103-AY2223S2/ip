@@ -13,6 +13,7 @@ public class Todo extends Task {
         super(description);
         this.todo = description;
     }
+
     /**
      * Outputs the details of the task
      *
@@ -21,6 +22,7 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + "[" + super.getStatusIcon() + "] " + this.todo;
     }
+
     /**
      * Gets the type of task
      *
@@ -29,6 +31,7 @@ public class Todo extends Task {
     public String getType() {
         return "T";
     }
+
     /**
      * Gets the type of task
      *

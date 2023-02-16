@@ -9,8 +9,8 @@ public class ByeCommand extends Command {
     /**
      * Executes the current command
      *
-     * @param list The task list
-     * @param ui The ui object
+     * @param list    The task list
+     * @param ui      The ui object
      * @param storage The storage object
      */
     public String execute(TaskList list, Ui ui, Storage storage) {

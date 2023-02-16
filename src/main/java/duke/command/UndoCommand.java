@@ -1,11 +1,12 @@
 package duke.command;
 
 import duke.TaskList;
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
-public class UndoCommand extends Command{
+public class UndoCommand extends Command {
 
     protected Command preCommand;
 
@@ -21,16 +22,17 @@ public class UndoCommand extends Command{
     /**
      * Executes the current command
      *
-     * @param list The task list
-     * @param ui The ui object
+     * @param list    The task list
+     * @param ui      The ui object
      * @param storage The storage object
+     * @throws DukeException Throws DukeException of a specific massage
      */
-    public String execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         if (preCommand instanceof AddTaskCommand) {
-            Task deleted = list.delete(list.getLength()-1);
+            Task deleted = list.delete(list.getLength() - 1);
             storage.write(list);
-            return ui.delete(deleted, list.getLength());
-        } else if(preCommand instanceof DeleteCommand) {
+            return Ui.delete(deleted, list.getLength());
+        } else if (preCommand instanceof DeleteCommand) {
             list.add((((DeleteCommand) preCommand).getDeleted()));
             storage.write(list);
             return ui.addTask(((DeleteCommand) preCommand).getDeleted(), list.getLength());
@@ -43,9 +45,9 @@ public class UndoCommand extends Command{
             storage.write(list);
             return ui.mark(marked);
         } else if (preCommand == null) {
-            return ui.NoPreCommand();
+            return Ui.cannotFindPreCommand();
         } else {
-            return ui.InvalidPreCommand();
+            return Ui.failUndo();
         }
     }
 

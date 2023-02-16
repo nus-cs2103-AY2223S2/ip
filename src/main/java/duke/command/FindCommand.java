@@ -12,6 +12,7 @@ public class FindCommand extends Command {
 
     /**
      * Initialises the object
+     *
      * @param input The task user wants to find
      */
     public FindCommand(String input) {
@@ -23,8 +24,9 @@ public class FindCommand extends Command {
 
     /**
      * Executes the instruction
-     * @param list The task list object
-     * @param ui The ui object
+     *
+     * @param list    The task list object
+     * @param ui      The ui object
      * @param storage The storage object
      */
     public String execute(TaskList list, Ui ui, Storage storage) {
@@ -41,6 +43,7 @@ public class FindCommand extends Command {
 
     /**
      * Tells if this is the exit command
+     *
      * @return
      */
     public boolean isExit() {

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.TaskList;
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -26,15 +27,16 @@ public class DeleteCommand extends Command {
     /**
      * Executes the current command
      *
-     * @param list The task list
-     * @param ui The ui object
+     * @param list    The task list
+     * @param ui      The ui object
      * @param storage The storage object
+     * @throws DukeException Throws DukeException of a specific massage
      */
-    public String execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         Task task = list.delete(index);
         this.deleted = task;
         storage.write(list);
-        return ui.delete(task, list.getLength());
+        return Ui.delete(task, list.getLength());
     }
 
     /**
@@ -46,6 +48,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Gets the deleted task
+     *
      * @return The deleted task
      */
     public Task getDeleted() {

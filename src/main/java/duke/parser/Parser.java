@@ -18,8 +18,6 @@ import duke.tasks.Event;
 import duke.tasks.Todo;
 
 
-
-
 public class Parser {
 
 
@@ -28,8 +26,8 @@ public class Parser {
      *
      * @param input The input from the user
      * @return A command object corresponding to the user's command
-     * @throws DukeException
-     * @throws IllegalArgumentException
+     * @throws DukeException            Throws Duke Exception that contains a specific error message
+     * @throws IllegalArgumentException Throws an exception when the input command does not exist
      */
     public static Command parse(String input, Command preCommand) throws DukeException, IllegalArgumentException {
         String command = input.split(" ")[0].toUpperCase();
@@ -43,7 +41,6 @@ public class Parser {
         case UNMARK:
             index = Integer.valueOf(input.split(" ")[1]);
             return new MarkUndoneCommand(index - 1);
-
         case DEADLINE:
             String detail = input.split("/")[0].split(" ", 2)[1];
             //parse the input to extract the deadline time
@@ -79,7 +76,7 @@ public class Parser {
         default:
             throw new DukeException(
                 "   OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-              );
+            );
         }
     }
 }
