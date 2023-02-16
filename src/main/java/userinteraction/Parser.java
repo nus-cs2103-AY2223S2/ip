@@ -1,15 +1,6 @@
 package userinteraction;
 
-import command.AddDeadlineCommand;
-import command.AddEventCommand;
-import command.AddTodoCommand;
-import command.Command;
-import command.DeleteTaskCommand;
-import command.ExitCommand;
-import command.FindTaskCommand;
-import command.InvalidCommand;
-import command.ListCommand;
-import command.MarkTaskCommand;
+import command.*;
 
 
 public class Parser {
@@ -33,6 +24,8 @@ public class Parser {
             return new DeleteTaskCommand(input);
         } else if (input.startsWith("find")) {
             return new FindTaskCommand(input);
+        } else if (input.startsWith("help")) {
+            return new HelpCommand(input);
         } else {
             return new InvalidCommand(input);
         }

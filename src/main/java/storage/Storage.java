@@ -21,13 +21,16 @@ public class Storage {
 
     private final String filePath;
 
+    private final String helpFilePath;
+
     /**
      * Class constructor.
      *
      * @param filePath The path of a file to be stored.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, String helpFilePath) {
         this.filePath = filePath;
+        this.helpFilePath = helpFilePath;
         checkFileExit();
     }
 
@@ -102,4 +105,19 @@ public class Storage {
             System.out.println("\t Invalid Path.\n");
         }
     }
+
+    public String loadHelpExplanationFile() {
+        Path file = Paths.get(".", helpFilePath);
+        String explanation = "";
+        try {
+            byte[] bs = Files.readAllBytes(file);
+            explanation = new String(bs);
+        } catch (FileNotFoundException e) {
+            System.out.println("\t File not found.\n");
+        } catch (IOException e) {
+            System.out.println("\t Invalid Path.\n");
+        }
+        return explanation;
+    }
+
 }

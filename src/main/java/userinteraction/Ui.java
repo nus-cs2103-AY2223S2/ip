@@ -1,6 +1,7 @@
 package userinteraction;
 
 import storage.TaskList;
+import storage.Storage;
 import task.Task;
 
 import java.util.Scanner;
@@ -61,6 +62,10 @@ public class Ui {
     public String printWrongMsg() {
         String str = "\t ☹ OOPS!!! I'm sorry, but I don't know what that means.\n";
         return str;
+    }
+
+    public String printHelpMsg(Storage storage) {
+        return storage.loadHelpExplanationFile();
     }
     public String printByeMsg() {
         return BYE_MSG;
