@@ -6,21 +6,21 @@
 
 Duke Atreides has 4 main features for you to keep track of your daily tasks.
 
-### Adding tasks
+### 1. Adding tasks :heavy_plus_sign:
 
 You can add 4 different types of tasks, specifically todo, deadline, event and within.
 More details on how to use these classes below.
 
-### Deleting tasks
+### 2. Deleting tasks :x:
 
 Finished your task? You can delete the task by index.
 
-### Mark tasks
+### 3. Mark tasks :heavy_check_mark:
 
 You can mark your tasks as done and unmark them, should you wish to keep a task
 but note its completion.
 
-### Automatic save
+### 4. Automatic save :floppy_disk:
 
 After every command, your set of tasks is automatically saved.
 It is also saved across usage so you can see your set of tasks automatically 
