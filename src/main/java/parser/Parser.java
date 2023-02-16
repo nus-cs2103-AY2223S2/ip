@@ -23,6 +23,8 @@ public class Parser {
             return "BYE";
         } else if (input.equals("list")) {
             return "LIST";
+        } else if (input.equals("undo")) {
+            return "UNDO";
         } else if (len >= 8 && input.substring(0, 6).equals("delete")) {
             return "DELETE";
         } else if (len >= 6 && input.substring(0, 4).equals("mark")) {

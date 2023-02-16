@@ -178,6 +178,8 @@ public class Duke extends Application {
             return response.getFindResponse(input, taskList);
         case "ERROR":
             return response.getErrorResponse();
+        case "UNDO":
+            return response.getUndoResponse(storage);
         default:
             break;
         }

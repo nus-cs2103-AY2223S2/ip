@@ -1,7 +1,5 @@
 package storage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -21,9 +19,11 @@ import task.ToDos;
  */
 public class Storage {
     private final String dataAddress;
+    private final String prevDataAddress;
 
     /**
-     * Create a storage
+     * Creates a files to store Duke's data, including the current data file and a file that
+     * stores Duke's data before the previous command.
      *
      * @param fileName the target filename that the data should be stored
      */
@@ -31,6 +31,7 @@ public class Storage {
         Path currentRelativePath = Paths.get("");
         String currentRelativePathName = currentRelativePath.toAbsolutePath().toString();
         this.dataAddress = currentRelativePathName + "\\data\\" + fileName;
+        this.prevDataAddress = currentRelativePathName + "\\data\\" + "prev" + fileName;
         try {
             File fileParent = new File(currentRelativePathName + "\\data");
             if (!fileParent.exists()) {
@@ -39,6 +40,10 @@ public class Storage {
             File dataFile = new File(dataAddress);
             if (!dataFile.exists()) {
                 dataFile.createNewFile();
+            }
+            File prevDataFile = new File(prevDataAddress);
+            if (!dataFile.exists()) {
+                prevDataFile.createNewFile();
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -91,16 +96,37 @@ public class Storage {
      * @param arrayList an arraylist of tasks that need to be stored in duke.txt
      * @throws IOException if the file duke.txt is not found.
      */
-    public void update_data(ArrayList<Task> arrayList) {
-        assert arrayList.size() >= 0;
-        String data = "";
+    public void update_data(ArrayList<Task> arrayList){
         try {
+            System.out.println();
+            FileInputStream inputStream = new FileInputStream(this.dataAddress);
+            FileOutputStream outputStream = new FileOutputStream(this.prevDataAddress);
+            int i;
+            while ((i = inputStream.read()) != -1) {
+                outputStream.write(i);
+            }
+            assert arrayList.size() >= 0;
+            String data = "";
             FileWriter fw = new FileWriter(this.dataAddress);
             for (Task t: arrayList) {
                 data += t.dataFormat() + "\n";
             }
             fw.write(data);
             fw.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void undo(){
+        try {
+            System.out.println();
+            FileInputStream inputStream = new FileInputStream(this.prevDataAddress);
+            FileOutputStream outputStream = new FileOutputStream(this.dataAddress);
+            int i;
+            while ((i = inputStream.read()) != -1) {
+                outputStream.write(i);
+            }
         } catch (IOException e) {
             System.out.println(e);
         }

@@ -201,4 +201,10 @@ public class Response {
             return e.toString();
         }
     }
+
+    public String getUndoResponse(Storage storage) {
+        storage.undo();
+        return "Previous action Undone! (You may only undo the most recent command)";
+    }
+
 }
