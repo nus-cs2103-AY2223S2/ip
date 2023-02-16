@@ -27,6 +27,10 @@ public class Ui {
         return "Noted. I've removed this task:\n" + task.toString() + "\n";
     }
 
+    public String showFind(TaskList tasks) {
+        return "Here are the matching tasks in your list:\n" + tasks + "\n";
+    }
+
     public String showTaskSize(int size) {
         return "Now you have " + size + " tasks in the list. + \n";
     }
