@@ -81,10 +81,10 @@ public class TaskList {
      * @return String representation of the task that is removed.
      */
     public String deleteTaskWithResult(int index) throws DukeException {
-        //Cache task for displaying.
         if (index < 1 || index > tasks.size()) {
             throw new DukeException("Task index out of my range!");
         }
+        //Cache task for displaying.
         Task t = tasks.get(index - 1);
         tasks.remove(index - 1);
         return t + " is now gone!";
@@ -96,7 +96,10 @@ public class TaskList {
      * @param index The index of the to be marked task
      * @return String representation of the task that is marked.
      */
-    public String markTaskWithResult(int index) {
+    public String markTaskWithResult(int index) throws DukeException {
+        if (index < 1 || index > tasks.size()) {
+            throw new DukeException("Task index out of my range!");
+        }
         tasks.get(index - 1).markDone();
         return "I marked this task as done:\n" + tasks.get(index - 1);
     }
@@ -107,7 +110,10 @@ public class TaskList {
      * @param index The index of the to be unmarked task
      * @return String representation of the task that is unmarked.
      */
-    public String unMarkTaskWithResult(int index) {
+    public String unMarkTaskWithResult(int index) throws DukeException {
+        if (index < 1 || index > tasks.size()) {
+            throw new DukeException("Task index out of my range!");
+        }
         tasks.get(index - 1).markUndone();
         return "I marked this task as undone:\n" + tasks.get(index - 1);
     }

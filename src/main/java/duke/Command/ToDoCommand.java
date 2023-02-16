@@ -8,7 +8,7 @@ public class ToDoCommand extends Command {
     private String taskDesc;
 
     public ToDoCommand(String commandParams) {
-        this.taskDesc = commandParams.split(" ", 2)[1];
+        this.taskDesc = commandParams;
     }
 
     @Override
