@@ -33,16 +33,11 @@ public class Storage {
      * @throws NoStorageFileException If file cannot be found.
      * @throws IncorrectMarkException If Task has already been marked.
      */
-    public Storage(String filePath) throws NoStorageFileException, IncorrectMarkException{
+    public Storage(String filePath) throws NoStorageFileException, IncorrectMarkException {
         String root = Paths.get("").toAbsolutePath().toString();
         this.dataFilePath = Paths.get(root, filePath).toString();
 
         this.taskFile = new File(this.dataFilePath);
-        try {
-            taskFile.createNewFile();
-        } catch (IOException e) {
-            throw new NoStorageFileException();
-        }
         this.data = new TaskList(loadData());
     }
 
