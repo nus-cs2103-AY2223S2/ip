@@ -18,7 +18,7 @@ DukeyGPT0.01 has a few recognised commands:
    - unmark [index]: unmarks the task.
    - remove [index]: removes a task at index [index]
    - find [keyword]: finds a task whose description matches the keyword, at least partially.
-
+   - undo [optional number]: undo a number of commands, but [optional number] steps. If [optional number] is not provided, 1 is assumed.
 ## Using DukeyGPT0.01 is [_FUN_](https://user-images.githubusercontent.com/113227987/219424104-2ebfd467-7088-438a-ba7a-ec800dd02e9a.png)!
 
 

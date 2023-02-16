@@ -106,7 +106,6 @@ public class Parser {
             break;
 
         case "undo":
-
             int index;
             if (line.length == 1) {
                 index = 1;
