@@ -50,6 +50,7 @@ public class Duke {
             }
             isExit = parser.isExit(fullCommand);
         }
+        assert isExit;
         ui.closeScanner();
         ui.printExit();
     }
@@ -60,6 +61,8 @@ public class Duke {
         String dukeResponse;
 
         dukeResponse = parser.runCommand(input, tasks, storage, ui);
+
+        assert !dukeResponse.equals("");
 
         return dukeResponse;
     }
