@@ -52,6 +52,8 @@
     -fx-body-color: -fx-color;
     -fx-body-color-bottomup: -fx-color;
     -fx-body-color-to-right: -fx-color;
+
+    -fx-font-family: 'default'
 }
 
 /* =========== SCROLL PANE ================================================= */
@@ -170,4 +172,9 @@
 .event-box:hover,
 .deadline-box:hover {
     -fx-color: -fx-hover-base;
+}
+
+@font-face {
+    font-family: 'default';
+    src: url("consolas.ttf") format('truetype');
 }
