@@ -86,14 +86,39 @@ public class Storage {
             if (!folderDir.exists()) {
                 folderDir.mkdirs();
             }
+
             File file = new File(this.filePath);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException error) {
+                    throw new LoadException();
+                }
+
+            }
+
             taskList = new ArrayList<Task>();
 
         } catch (Exception err) {
+            String[] folders = this.filePath.split("/");
+            String dirs = "/" + String.join(
+                    "/", Arrays.copyOf(folders, folders.length - 1));
+            File folderDir = new File(dirs);
+
+            if (!folderDir.exists()) {
+                folderDir.mkdirs();
+            }
+            File file = new File(this.filePath);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException error) {
+                    throw new LoadException();
+                }
+            }
 
             throw new LoadException();
         }
-
         return new TaskList(taskList);
     }
 
@@ -121,6 +146,7 @@ public class Storage {
 
             writeAll(log);
         } catch (Exception err) {
+
             throw new LoadException();
         }
 
