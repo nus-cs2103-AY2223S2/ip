@@ -8,23 +8,6 @@ How may I be of service to you?
 
 Enter your command:
 Here are the tasks in your list:
-1. [D][X] return book [by Oct 15 2019 13:25]
-2. [E][X] project meeting [from: Nov 15 2019 10:00 to: Nov 25 2019 12:00]
-3. [T][ ] borrow another book
-Enter your command:
-Noted. I've removed this task:
-[D][X] return book [by Oct 15 2019 13:25]
-Now you have 2 tasks in the list.
-Enter your command:
-Noted. I've removed this task:
-[T][ ] borrow another book
-Now you have 1 tasks in the list.
-Enter your command:
-Noted. I've removed this task:
-[E][X] project meeting [from: Nov 15 2019 10:00 to: Nov 25 2019 12:00]
-Now you have 0 tasks in the list.
-Enter your command:
-Here are the tasks in your list:
 You do not have any tasks for now!
 Enter your command:
 [T][ ] borrow book
@@ -65,4 +48,20 @@ Here are the tasks in your list:
 2. [E][X] project meeting [from: Nov 15 2019 10:00 to: Nov 25 2019 12:00]
 3. [T][ ] borrow another book
 Enter your command:
+Task list has been sorted!
+Enter your command:
+Here are the tasks in your list:
+1. [T][ ] borrow another book
+2. [D][X] return book [by Oct 15 2019 13:25]
+3. [E][X] project meeting [from: Nov 15 2019 10:00 to: Nov 25 2019 12:00]
+Enter your command:
+Noted. I've removed this task:
+[T][ ] borrow another book
+Now you have 2 tasks in the list.
+Enter your command:
+Noted. I've removed this task:
+[E][X] project meeting [from: Nov 15 2019 10:00 to: Nov 25 2019 12:00]
+Now you have 1 tasks in the list.
+Enter your command:
+
 Bye. Hope to see you again soon!

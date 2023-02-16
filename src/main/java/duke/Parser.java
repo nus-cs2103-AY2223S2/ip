@@ -205,8 +205,10 @@ public class Parser {
         try {
             String keyword = userInput.substring(5);
             return keyword;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Find failed because no keyword(s) mentioned :(");
         } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeException("Find failed because " + e.getMessage());
         }
     }
 
