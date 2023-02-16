@@ -12,7 +12,6 @@ public class Storage {
     /**
      * constructs a Storage object that stores data into a file.
      * @param filePath file path leading to data directory.
-     * @throws DukeException if file not found.
      */
     public Storage(String filePath) {
         f = new File(filePath);

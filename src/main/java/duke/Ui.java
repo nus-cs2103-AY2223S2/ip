@@ -1,19 +1,11 @@
 package duke;
-import java.util.Scanner;
 
 public class Ui {
     private static final String WELCOME_MESSAGE = "Hi there, my name's Duke!\n" + "I'm your personal task manager.\n"
         + "How may i help you?\n";
     private static final String LINE = "__________________________________________\n";
 
-    private final Scanner SCANNER;
-
     public Ui() {
-        this.SCANNER = new Scanner(System.in);
-    }
-
-    public String readCommand() {
-        return SCANNER.nextLine();
     }
 
     public String showWelcome() {

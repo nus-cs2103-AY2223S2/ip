@@ -4,7 +4,7 @@ public class ToDo extends Task {
     /**
      * constructs a toDo task object.
      * @param description description of this task.
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException if description of task is missing.
      */
     public ToDo(String description) throws EmptyDescriptionException {
         super(description);

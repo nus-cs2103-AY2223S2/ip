@@ -65,9 +65,9 @@ public class Command {
     public String toDoCommand() throws EmptyDescriptionException {
         String str = "";
         if(INPUT.startsWith("todo")) {
-            str = INPUT.substring(5, INPUT.length());
+            str = INPUT.substring(5);
         } else if (INPUT.startsWith("t ")) {
-            str = INPUT.substring(2, INPUT.length());
+            str = INPUT.substring(2);
         }
         ToDo toDo = new ToDo(str);
         LIST.add(toDo);
@@ -82,9 +82,9 @@ public class Command {
     public String deadlineCommand() throws EmptyDescriptionException {
         String str = "";
         if (INPUT.startsWith("deadline")) {
-            str = INPUT.substring(9, INPUT.length());
+            str = INPUT.substring(9);
         } else if (INPUT.startsWith("d ")) {
-            str = INPUT.substring(2, INPUT.length());
+            str = INPUT.substring(2);
         }
         String description = str.split("/by")[0];
         String dateAndTime = str.split("/by ")[1];
@@ -101,9 +101,9 @@ public class Command {
     public String eventCommand() throws EmptyDescriptionException {
         String str = "";
         if (INPUT.startsWith("event")) {
-            str = INPUT.substring(6, INPUT.length());
+            str = INPUT.substring(6);
         } else if (INPUT.startsWith("e ")) {
-            str = INPUT.substring(2, INPUT.length());
+            str = INPUT.substring(2);
         }
         String description = str.split("/from")[0];
         String temp = str.split("/from")[1];

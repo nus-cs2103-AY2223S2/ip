@@ -1,14 +1,10 @@
 package duke;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
-    private Storage storage;
-    private final Ui UI;
+    private final Storage STORAGE = new Storage("data/duke.txt");
     private TaskList tasks;
 
     /**
@@ -21,7 +17,7 @@ public class Duke {
         if (input.equals("bye")) {
             try {
                 response = Parser.parse(input, tasks);
-                storage.write("data/duke.txt", tasks);
+                STORAGE.write("data/duke.txt", tasks);
             } catch (DukeException e) {
                 response = e.toString();
             } catch (IOException e) {
@@ -42,10 +38,9 @@ public class Duke {
      * @throws DukeException if file is not found.
      */
     public Duke() throws DukeException {
-        storage = new Storage("data/duke.txt");
-        UI = new Ui();
+        Ui UI = new Ui();
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(STORAGE.load());
         } catch (DukeException e) {
             UI.showError();
             tasks = new TaskList();
