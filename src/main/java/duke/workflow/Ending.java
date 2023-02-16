@@ -34,7 +34,7 @@ public class Ending extends Event {
         this.taskList = taskList;
     }
 
-    public Event toNext() {
+    public Event toNextEvent() {
         return this;
     }
 
