@@ -29,12 +29,20 @@ public class Parser {
             break;
         case "D":
             LocalDate by = parseDate(taskArr[3]);
-            newTask = new Deadline(taskArr[2], by);
+            Deadline newDeadline = new Deadline(taskArr[2], by);
+            if (taskArr.length == 5 && taskArr[4].equals("S")) {
+                newDeadline.snooze();
+            }
+            newTask = newDeadline;
             break;
         case "E":
             LocalDate from = parseDate(taskArr[3]);
             LocalDate to = parseDate(taskArr[4]);
-            newTask = new Event(taskArr[2], from, to);
+            Event newEvent = new Event(taskArr[2], from, to);
+            if (taskArr.length == 6 && taskArr[5].equals("S")) {
+                newEvent.snooze();
+            }
+            newTask = newEvent;
             break;
         default:
             throw new DukeException();
@@ -73,6 +81,10 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(cmdArr[1]) - 1);
         case "find":
             return new FindCommand(cmd.replaceAll("find", "").trim());
+        case "snooze":
+            return new SnoozeCommand(Integer.parseInt(cmdArr[1]) - 1);
+        case "unsnooze":
+            return new UnsnoozeCommand(Integer.parseInt(cmdArr[1]) - 1);
         }
 
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

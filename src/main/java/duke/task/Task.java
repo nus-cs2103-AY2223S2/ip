@@ -7,6 +7,7 @@ import java.util.Collection;
 public class Task {
     private final String title;
     private Boolean isDone;
+    private boolean isSnoozed = false;
 
     public Task(String title) {
         this.title = title;
@@ -25,6 +26,18 @@ public class Task {
      */
     public void untick() {
         this.isDone = false;
+    }
+
+    public void snooze() {
+        this.isSnoozed = true;
+    }
+
+    public void unsnooze() {
+        this.isSnoozed = false;
+    }
+
+    public boolean getSnoozed() {
+        return this.isSnoozed;
     }
 
     /**

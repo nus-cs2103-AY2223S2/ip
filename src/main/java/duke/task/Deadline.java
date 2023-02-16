@@ -17,7 +17,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String str = "[D]" + super.toString()
+                + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        if (super.getSnoozed()) {
+            str += " (snoozed)";
+        }
+        return str;
     }
 
     /**
@@ -26,6 +31,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toSavedString() {
-        return "D|" + super.toSavedString() + "|" + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String str = "D|" + super.toSavedString()
+                    + "|" + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (super.getSnoozed()) {
+            str += "S";
+        }
+        return str;
     }
 }

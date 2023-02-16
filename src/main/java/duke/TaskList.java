@@ -97,10 +97,32 @@ public class TaskList {
     }
 
     /**
-     * Delete a task form the task list
-     * @param taskIndex index of the task to be deleted
-     * @return deleted task
+     * Mark a task as done
+     * @param taskIndex the index of the task to be marked
+     * @return the task that was marked
      */
+    public Task snoozeTask(int taskIndex) {
+        Task task = tasks.get(taskIndex);
+        task.snooze();
+        return task;
+    }
+
+    /**
+     * Mark a task as not done
+     * @param taskIndex the index of the task to be marked
+     * @return the task that was marked
+     */
+    public Task unsnoozeTask(int taskIndex) {
+        Task task = tasks.get(taskIndex);
+        task.unsnooze();
+        return task;
+    }
+
+        /**
+         * Delete a task form the task list
+         * @param taskIndex index of the task to be deleted
+         * @return deleted task
+         */
     public Task deleteTask(int taskIndex) {
         return tasks.remove(taskIndex);
     }

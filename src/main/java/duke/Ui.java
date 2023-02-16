@@ -99,4 +99,12 @@ public class Ui {
     public String printError(String err) {
         return err;
     }
+
+    public String printSnoozeTask(Task task) {
+       return "OK! I've snoozed this task:\n" + task;
+    }
+
+    public String printUnsnoozeTask(Task task) {
+        return "OK! I've unsnoozed this task:\n" + task;
+    }
 }
