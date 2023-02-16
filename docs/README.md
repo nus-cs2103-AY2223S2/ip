@@ -168,6 +168,8 @@ including (but not limited to): `yyyy-MM-DD HHmm`, `d/M/y H:m`, and `MMM d y`.
 
 #### Example: `after 1 Jan 2023`
 
+#### Aliases: `aft`
+
 <br/>
 
 ### `before` - Filter tasks before a date

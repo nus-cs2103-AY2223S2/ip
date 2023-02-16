@@ -89,7 +89,7 @@ public enum Command {
     /** Displays the tasks that fall before the given date. */
     BEFORE(CommandFunction::doBefore,
             true, false,
-            "bef ", "before "),
+            "before ", "bef "),
 
     /** Catches BEFORE calls with no input. */
     BEFORE_BAD(CommandFunction::doNoInput,
@@ -99,12 +99,12 @@ public enum Command {
     /** Displays the tasks that fall after the given date. */
     AFTER(CommandFunction::doAfter,
             true, false,
-            "after "),
+            "after ", "aft "),
 
     /** Catches AFTER calls with no input. */
     AFTER_BAD(CommandFunction::doNoInput,
             false, false,
-            "after"),
+            "after", "aft"),
 
     /** Displays the tasks that match the given filter. */
     FILTER(CommandFunction::doFilter,
