@@ -79,6 +79,7 @@ public class TaskList {
      */
 
     public Task getTask(int index) {
+        assert (index >= 0);
         return this.listTask.get(index);
     }
 

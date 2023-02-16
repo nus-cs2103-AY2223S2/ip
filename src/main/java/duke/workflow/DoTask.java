@@ -69,12 +69,14 @@ public class DoTask extends Event {
                         this.firstGreet = false;
                         this.lastCommand = nextTask;
                         this.taskList = this.taskList.markDone(Integer.valueOf(words.get(1)) - 1);
+                        assert(this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).getStatus() == true);
                         return this;
                     }
                     if (words.get(0).equals("UNMARK")) {
                         this.firstGreet = false;
                         this.lastCommand = nextTask;
                         this.taskList = this.taskList.unMark(Integer.valueOf(words.get(1)) - 1);
+                        assert(this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).getStatus() == false);
                         return this;
                     }
                     if (words.get(0).equals("TODO")) {
