@@ -1,2 +1,2 @@
-T/0/Pet dog
+T/0/pet cat
 D/0/Bring cat to vet/2023-02-15 1000
