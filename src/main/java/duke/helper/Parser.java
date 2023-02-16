@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
-import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateTimeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -34,10 +34,10 @@ public class Parser {
     }
 
     /**
-     * Parse user inputs
+     * Parses user inputs
      *
      * @param desc description of the task
-     * @return String representation of Task
+     * @return output message of command
      * @throws DukeException If input is invalid
      */
     public String parseInputs(String desc) throws DukeException {
@@ -91,10 +91,10 @@ public class Parser {
     }
 
     /**
-     * Parse the dateTime description into a LocalDateTime object
+     * Parses the dateTime description into a LocalDateTime object
      *
      * @param dateTime dateTime description
-     * @return a LocalDateTime object
+     * @return a string representation of the LocalDateTime object
      * @throws InvalidDateTimeException If incorrect dateTime values are given
      */
     public static String handleDateTime(String dateTime) throws InvalidDateTimeException {
@@ -103,8 +103,8 @@ public class Parser {
         String dateTimePattern = "MMM-d-yyyy HH:mm";
 
         try {
-            DateTimeFormatter pattern = DateTimeFormatter.ofPattern(dateTimePattern);
-            return LocalDateTime.parse(dateTime).format(pattern);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimePattern);
+            return LocalDateTime.parse(dateTime).format(formatter);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
         }
@@ -113,7 +113,7 @@ public class Parser {
     /**
      * Parses the mark command
      *
-     * @param inputs different parts of the mark command
+     * @param inputs the different parts of the mark command
      * @return a string to show the display message of the mark command
      * @throws DukeException If no or wrong task number provided
      */
@@ -126,7 +126,7 @@ public class Parser {
     /**
      * Parses the unmark command
      *
-     * @param inputs different parts of the unmark command
+     * @param inputs the different parts of the unmark command
      * @return a string to show the display message of the unmark command
      * @throws DukeException If no or wrong task number provided
      */
@@ -139,7 +139,7 @@ public class Parser {
     /**
      * Parses the todo command
      *
-     * @param inputs different parts of the todo command
+     * @param inputs the different parts of the todo command
      * @return a string to show the creation of a todo task
      * @throws EmptyCommandException If the task has no description
      */

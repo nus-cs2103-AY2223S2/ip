@@ -19,7 +19,6 @@ public class Duke {
 
     /**
      * Constructor for Duke class
-     *
      */
     public Duke() {
         this.ui = new Ui();

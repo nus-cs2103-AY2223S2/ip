@@ -36,6 +36,8 @@ public class TaskList {
 
     /**
      * Prints all the tasks stored in the list
+     *
+     * @return output message of the list command
      */
     public String outputList() {
         StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
@@ -48,12 +50,13 @@ public class TaskList {
     /**
      * Deletes the task from the tasklist
      *
-     * @param taskNo Task number to be deleted
-     * @return task that has been deleted
+     * @param taskId Task number to be deleted
+     * @return output message of the deleting a task
+     * @throws DukeException If task number is invalid
      */
-    public String deleteTask(String taskNo) throws DukeException {
+    public String deleteTask(String taskId) throws DukeException {
         String deleteCommand = "delete";
-        Task task = getTask(taskNo, deleteCommand);
+        Task task = getTask(taskId, deleteCommand);
         tasks.remove(task);
         return ui.outputDeleteMsg(task, tasks.size());
     }
@@ -63,6 +66,8 @@ public class TaskList {
      *
      * @param isDone whether the task is done
      * @param taskId id of the task
+     * @return output message of the changing the mark status of a task
+     * @throws DukeException If task number is invalid
      */
     public String changeMarkStatus(boolean isDone, String taskId) throws DukeException {
         String markCommand = "mark";
@@ -74,15 +79,15 @@ public class TaskList {
     /**
      * Obtains the task according to the task number
      *
-     * @param taskNum task number of the task to be returned
+     * @param taskNumber task number of the task to be returned
      * @param type type of the task
      * @return the task obtained using its task number
      * @throws InvalidTaskNumberException Throws when task number is invalid
      * @throws NotANumberException Throws when task number is not a number
      */
-    public Task getTask(String taskNum, String type) throws InvalidTaskNumberException, NotANumberException {
+    public Task getTask(String taskNumber, String type) throws InvalidTaskNumberException, NotANumberException {
         try {
-            int taskNo = Integer.parseInt(taskNum) - 1;
+            int taskNo = Integer.parseInt(taskNumber) - 1;
             assert taskNo >= 0 : "Task number should be 1 or more";
             return tasks.get(taskNo);
         } catch (IndexOutOfBoundsException e) {

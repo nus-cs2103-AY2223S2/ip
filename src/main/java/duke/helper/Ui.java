@@ -21,6 +21,7 @@ public class Ui {
      *
      * @param task task to be removed
      * @param size number of remaining tasks
+     * @return output message of deleting a task
      */
     public String outputDeleteMsg(Task task, int size) {
         assert size >= 0 : "Size of TaskList should be zero or more";
@@ -34,6 +35,7 @@ public class Ui {
      *
      * @param isDone whether a task will be marked or unmarked
      * @param taskToMark task to be marked or unmarked
+     * @return output message of changing the mark status of a task
      */
     public String outputMarkMsg(boolean isDone, Task taskToMark) {
         StringBuilder output = new StringBuilder();
@@ -50,6 +52,7 @@ public class Ui {
      *
      * @param task task to be added
      * @param size the number of tasks after the task is added
+     * @return output message of adding a task
      */
     public String outputAddTaskMsg(Task task, int size) {
         assert size >= 0 : "Size of TaskList should be zero or more";
@@ -62,6 +65,7 @@ public class Ui {
      * prints the message for searching a file
      *
      * @param taskList List of all the tasks
+     * @return output message of finding tasks according to the provided keyword
      */
     public String outputFilterMsg(ArrayList<Task> taskList) {
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");

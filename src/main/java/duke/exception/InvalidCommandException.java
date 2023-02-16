@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * InvalidTaskException class handles task that are invalid
+ * InvalidTaskException class handles command that are invalid
  */
 public class InvalidCommandException extends DukeException {
     public InvalidCommandException() {
