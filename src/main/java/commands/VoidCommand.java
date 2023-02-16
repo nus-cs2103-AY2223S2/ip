@@ -1,15 +1,15 @@
 package commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import dukeexceptions.DukeException;
 import dukeexceptions.IllegalCommandException;
 import elems.Storage;
 import elems.TaskList;
 import elems.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class VoidCommand extends Command{
+public class VoidCommand extends Command {
     enum VoidType {
         LIST,
         BYE,
@@ -58,8 +58,8 @@ public class VoidCommand extends Command{
             } catch (IOException e) {
                 ui.errorDisplay(e);
                 e.printStackTrace();
-                ui.display("Tasks were unable to be saved, if you still wish to quit without" +
-                        "saving, try using \"forcequit\" ");
+                ui.display("Tasks were unable to be saved, if you still wish to quit without"
+                        + "saving, try using \"forcequit\" ");
             }
             break;
         case FORCEQUIT:
