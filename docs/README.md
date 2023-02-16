@@ -5,23 +5,23 @@
 ![](Ui.png)
 
 ## Content
-1. [Command Summary](https://github.com/afiqzu/ip/edit/master/docs/README.md#command-summary)
-2. [Features](https://github.com/afiqzu/ip/edit/master/docs/README.md#features)
+1. [Command Summary](https://afiqzu.github.io/ip/#command-summary)
+2. [Features](https://afiqzu.github.io/ip/#features)
 
 ## Command Summary
 
-1. [todo](https://github.com/afiqzu/ip/edit/master/docs/README.md#1-adding-a-todo-task)
-2. [deadline](https://github.com/afiqzu/ip/edit/master/docs/README.md#2-adding-a-deadline-task)
-3. [event](https://github.com/afiqzu/ip/edit/master/docs/README.md#3-adding-an-event-task)
-4. [list](https://github.com/afiqzu/ip/edit/master/docs/README.md#4-list-all-tasks)
-5. [delete](https://github.com/afiqzu/ip/edit/master/docs/README.md#5-delete-task)
-6. [mark](https://github.com/afiqzu/ip/edit/master/docs/README.md#6-mark-task-as-done)
-7. [unmark](https://github.com/afiqzu/ip/edit/master/docs/README.md#7-unmark-task)
-8. [clear](https://github.com/afiqzu/ip/edit/master/docs/README.md#8-clear-all-tasks)
-9. [note](https://github.com/afiqzu/ip/edit/master/docs/README.md#9-add-a-new-note)
-10. [opennotes](https://github.com/afiqzu/ip/edit/master/docs/README.md#10-open-current-notes-with-opennotes)
-11. [clearnotes](https://github.com/afiqzu/ip/edit/master/docs/README.md#10-open-current-notes-with-opennotes)
-12. [help](https://github.com/afiqzu/ip/edit/master/docs/README.md#12-open-command-list-with-help)
+1. [todo](https://afiqzu.github.io/ip/#1-adding-a-todo-task)
+2. [deadline](https://afiqzu.github.io/ip/#2-adding-a-deadline-task)
+3. [event](https://afiqzu.github.io/ip/#3-adding-an-event-task)
+4. [list](https://afiqzu.github.io/ip/#4-list-all-tasks)
+5. [delete](https://afiqzu.github.io/ip/#5-delete-task)
+6. [mark](https://afiqzu.github.io/ip/#6-mark-task-as-done)
+7. [unmark](https://afiqzu.github.io/ip/#7-unmark-task)
+8. [clear](https://afiqzu.github.io/ip/#8-clear-all-tasks)
+9. [note](https://afiqzu.github.io/ip/#9-add-a-new-note)
+10. [opennotes](https://afiqzu.github.io/ip/#10-open-current-notes-with-opennotes)
+11. [clearnotes](https://afiqzu.github.io/ip/#11-clear-current-notes-with-clearnotes)
+12. [help](https://afiqzu.github.io/ip/#12-open-command-list-with-help)
 
 
 ## Features
