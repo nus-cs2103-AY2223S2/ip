@@ -16,7 +16,10 @@ import items.Event;
 import items.Task;
 import items.ToDo;
 
-
+/**
+ * Represents a command which adds a <code>Task</code> to a given <code>TaskList</code>
+ * @author clydelhui
+ */
 public class AddCommand extends Command {
 
     enum TaskType {
@@ -25,8 +28,16 @@ public class AddCommand extends Command {
         EVENT
     }
 
-    TaskType taskType;
+    private final TaskType taskType;
 
+    /**
+     * Constructor that creates an <code>AddCommand</code> object given a keyword and
+     * an <code>ArrayList</code> of strings of parameters
+     * @param keyword The keyword for the <code>AddCommand</code>
+     * @param params An <code>ArrayList</code> containing the parameters of the command
+     *               in <code>String</code> type
+     * @throws IllegalCommandException If the given keyword does not match any valid keywords
+     */
     public AddCommand(String keyword, ArrayList<String> params) throws IllegalCommandException {
         super(keyword, params);
 
@@ -45,6 +56,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @param tasks The <code>TaskList</code> to be acted on by the <code>Command</code>
+     * @param ui The <code>Ui</code> to be acted on by the <code>Command</code>
+     * @param storage The <code>Storage</code> to be acted on by the <code>Command</code>
+     * @throws DukeException When the <code>Task</code> is unable to be successfully added to the <code>TaskList</code>
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.params.size() == 0 || this.params.size() > 3) {

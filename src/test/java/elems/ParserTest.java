@@ -1,12 +1,14 @@
 package elems;
 
-import dukeexceptions.IllegalCommandException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import dukeexceptions.IllegalCommandException;
 
 public class ParserTest {
     @Test
-    public void invalidKeywordTest(){
+    public void invalidKeywordTest() {
         Parser parser = new Parser();
         String testInput = "what 1 2 3";
 
