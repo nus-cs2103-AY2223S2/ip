@@ -38,7 +38,8 @@ public abstract class Task {
     }
 
     /**
-     * Internal method for getting the icon for a marked task
+     * Gets the mark icon for a task
+     *
      * @return a string that should be placed in the slot indicating whether this task is marked
      */
     protected String getStatusIcon() {

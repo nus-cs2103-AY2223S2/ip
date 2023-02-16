@@ -3,10 +3,13 @@ package catbot;
 import java.util.ArrayList;
 
 import catbot.commands.Command;
+import catbot.commands.SaveCommand;
 import catbot.parser.Parser;
 import catbot.storage.Storage;
 import catbot.tasklist.TaskList;
 import catbot.ui.Ui;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.text.Text;
 
 
@@ -46,7 +49,8 @@ public class CatBot {
     }
 
     /**
-     * Get CatBot's response for a given input command.
+     * Gets CatBot's response for a given input command.
+     *
      * @param input is the command the user input
      * @return CatBot's output
      */
@@ -57,6 +61,19 @@ public class CatBot {
             return ui.getNextOutput();
         } catch (CatBotException e) {
             return ui.getError(e.getMessage());
+        }
+    }
+
+    /**
+     * Saves data to the file when the program is closed.
+     */
+    public void close() {
+        try {
+            new SaveCommand().execute(tasks, ui, storage);
+        } catch (CatBotException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "There was an error while saving:\n" + e.getMessage(), ButtonType.CLOSE);
+            alert.showAndWait();
         }
     }
 
