@@ -5,7 +5,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a MarkCommand that implements the interface Command.
+ * Represents a MarkCommand that implements the Command interface.
  */
 public class MarkCommand implements Command {
     private int taskNumber;

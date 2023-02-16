@@ -5,7 +5,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a ByeCommand that implements the interface Command.
+ * Represents a ByeCommand that implements the Command interface.
  */
 public class ByeCommand implements Command {
 

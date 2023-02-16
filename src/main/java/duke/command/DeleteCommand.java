@@ -7,7 +7,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a DeleteCommand that implements the interface Command.
+ * Represents a DeleteCommand that implements the Command interface.
  */
 public class DeleteCommand implements Command {
     private int taskNumber;

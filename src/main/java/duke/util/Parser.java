@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.TodoCommand;
@@ -101,6 +102,8 @@ public class Parser {
             return new DeleteCommand(taskNumber);
         case "find":
             return new FindCommand(getCommandDetails(userInput));
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException("Enter a valid task!");
         }

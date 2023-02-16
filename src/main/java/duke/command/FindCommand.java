@@ -8,7 +8,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a FindCommand that implements the interface Command.
+ * Represents a FindCommand that implements the Command interface.
  */
 public class FindCommand implements Command {
     private String keyword;
