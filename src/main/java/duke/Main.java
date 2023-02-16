@@ -27,7 +27,7 @@ public class Main extends Application {
         stage.setScene(scene);
 
         /* Custom stage settings */
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle(duke.getName());
         stage.setOnCloseRequest(event -> {
             event.consume();

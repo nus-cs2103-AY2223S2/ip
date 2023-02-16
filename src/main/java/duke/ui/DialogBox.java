@@ -12,8 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 
 
 /**
@@ -27,6 +29,7 @@ public class DialogBox extends HBox {
     @FXML
     private Circle circle;
 
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -38,6 +41,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         circle.setFill(new ImagePattern(img));
     }
 
@@ -47,6 +51,10 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
+
+        /* Change the colour of Duke's dialog */
+        dialog.getStyleClass().add("label-duke");
+
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
