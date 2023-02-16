@@ -121,7 +121,7 @@ class TaskList {
      */
     public String delete(ArrayList<Task> taskArrayList, String description) throws DukeException {
         try {
-            Storage storage = new Storage("./userRecords/duke.txt");
+            Storage storage = new Storage("./userData/duke.txt");
             if (!description.contains(" ")) {
                 throw new DukeException("OOPS!! Please indicate the task index to delete!");
             }

@@ -108,7 +108,7 @@ public class Storage {
     /**
      * @param tasks an arraylist of tasks
      * @param index the index to delete
-     * @throws IOException exception to handle wrong userinput and output
+     * @throws IOException exception to handle wrong user input
      */
     public void deleteOne(ArrayList<Task> tasks, int index) throws IOException {
         tasks.remove(index - 1);
