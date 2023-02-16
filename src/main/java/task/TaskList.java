@@ -113,7 +113,8 @@ public class TaskList {
 
         while (tasksIterator.hasNext()) {
             Task task = tasksIterator.next();
-            if (task.description.contains(query)) {
+            String description = task.description.toLowerCase();
+            if (description.contains(query.toLowerCase())) {
                 results.add(task);
             }
         }
