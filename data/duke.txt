@@ -1,7 +1,6 @@
-1. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-2. [T][X] read book
-3. [T][ ] borrow book
-4. [T][ ] borrow pen
-5. [T][ ] throw rubbish
-6. [T][ ] borrow paper
-7. [T][ ] borrow phone
+1. [T][ ] borrow book
+2. [D][X] return book (by: Oct 15 2019 06:00 PM)
+3. [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+4. [T][ ] join sports club
+5. [D][X] return book (by: Dec 2 2023 01:50 PM)
+6. [T][ ] borrow pen

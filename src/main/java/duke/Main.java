@@ -19,7 +19,7 @@ public class Main extends Application {
     private static Stage stage;
     private Duke duke = new Duke("data/duke.txt");
     private final Image icon = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private final String title = "Duke";
+    private final String title = "PlanPal";
 
     @Override
     public void start(Stage stage) {

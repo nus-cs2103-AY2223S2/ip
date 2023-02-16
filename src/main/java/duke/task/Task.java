@@ -14,8 +14,8 @@ public class Task {
     /**
      * Constructor for Task.
      *
-     * @param type the type of command of the given task.
-     * @param doneStatus checks if the task is mark or unmark.
+     * @param type        the type of command of the given task.
+     * @param doneStatus  checks if the task is mark or unmark.
      * @param description the description of the task written by the user.
      */
     public Task(String type, String doneStatus, String description) {
@@ -41,7 +41,7 @@ public class Task {
      * @return String - Returns the status of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done duke.task with X
+        return (isDone ? "X" : " ");
     }
 
     /**

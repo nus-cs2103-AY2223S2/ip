@@ -12,7 +12,7 @@ public class Ui {
      * @return String the initialization message.
      */
     public static String getInitMessage() {
-        String msg = "Hello and welcome! I'm Duke, a chatbot here to assist you. How may I help you today?\n\n"
+        String msg = "Hello and welcome! I'm PlanPal, a chatbot here to assist you. How may I help you today?\n\n"
                 + "Here are the commands: \n"
                 + "bye \n"
                 + "list \n"
@@ -21,7 +21,7 @@ public class Ui {
                 + "find {task} \n"
                 + "delete {task} \n"
                 + "todo {task} \n"
-                + "deadline {task} /by {yyyy-mm-dd} {hhmm} \n"
+                + "deadline {task} /by {YYYY-MM-DD} {HHMM} \n"
                 + "event {task} /from {datetime} /to {datetime}";
         return msg;
     }

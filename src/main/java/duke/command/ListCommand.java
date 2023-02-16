@@ -17,6 +17,10 @@ public class ListCommand extends Command {
      * @return String returns the result of the command execution.
      */
     public String execute(TaskList tl, Storage storage) {
-        return tl.getTasksString();
+        String res = tl.getTasksString();
+        if (res == "") {
+            res = "Your list is empty!";
+        }
+        return res;
     }
 }

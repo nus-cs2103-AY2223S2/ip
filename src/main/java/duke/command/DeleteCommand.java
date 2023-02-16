@@ -29,8 +29,8 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tl, Storage storage) {
         Task task = tl.removeTask(this.id - 1);
-        String res = "Noted. I've removed this duke.task:\n" + task
-                + "\n Now you have " + tl.getSize() + " tasks in the list.";
+        String res = "Noted. I've removed this task:\n" + task
+                + "\nNow you have " + tl.getSize() + " tasks in the list.";
         return res;
     }
 }

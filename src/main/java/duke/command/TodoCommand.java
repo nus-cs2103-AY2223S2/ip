@@ -36,8 +36,8 @@ public class TodoCommand extends Command {
             res = "Task has already been added to the task list!";
         } else {
             tl.addTask(task);
-            res = "Got it. I've added this duke.task:\n" + task
-                    + "\n Now you have " + tl.getSize() + " tasks in the list.";
+            res = "Got it. I've added this task:\n" + task
+                    + "\nNow you have " + tl.getSize() + " tasks in the list.";
         }
         return res;
     }

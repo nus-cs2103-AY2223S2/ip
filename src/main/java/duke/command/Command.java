@@ -40,7 +40,7 @@ public abstract class Command {
                 String date = cmd.substring(indexOfDate);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("The format of a deadline: "
-                        + "deadline {task} /by {yyyy-mm-dd} {hhmm}");
+                        + "deadline {task} /by {YYYY-MM-DD} {HHMM}");
             }
         } else if (cmdtype.equals("event")) {
             try {
