@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -40,6 +40,11 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        Rectangle clip = new Rectangle((int)displayPicture.getFitWidth(), (int)displayPicture.getFitHeight());
+        clip.setArcHeight(20);
+        clip.setArcWidth(20);
+        displayPicture.setClip(clip);
     }
 
 
@@ -51,7 +56,9 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
+        dialog.setStyle("-fx-padding: 15; -fx-background-insets: 5; -fx-background-color: #659EC7; " +
+                "-fx-background-radius: 10; -fx-text-fill: white;");
     }
 
     /**
@@ -61,7 +68,6 @@ public class DialogBox extends HBox {
      * @param img The user avatar.
      * @return Wrap the user input text and avatar inside a DialogBox.
      */
-
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
