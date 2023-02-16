@@ -51,7 +51,6 @@ public enum Command {
         @Override
         public String execute(String input) throws SundayException {
             try {
-                input = input.substring(1);
                 String[] strArr = input.split(" ");
                 int i = 0;
                 StringBuilder sb = new StringBuilder();
@@ -60,6 +59,7 @@ public enum Command {
                     sb.append(" ");
                     i++;
                 }
+                assert strArr[i].equals("/by") || strArr[i].equals("(by:");
                 String description = sb.toString().substring(0, sb.length() - 1);
 
                 sb.setLength(0);
@@ -69,6 +69,7 @@ public enum Command {
                     sb.append(" ");
                     i++;
                 }
+
                 String by = sb.toString().substring(0, sb.length() - 1);
 
                 Task deadline = new Deadline(description, by);
@@ -101,6 +102,7 @@ public enum Command {
                     sb.append(" ");
                     j++;
                 }
+                assert strArr[j].equals("/from") || strArr[j].equals("(from:");
                 String description = sb.toString().substring(0, sb.length() - 1);
 
                 sb.setLength(0);
@@ -110,6 +112,7 @@ public enum Command {
                     sb.append(" ");
                     j++;
                 }
+                assert strArr[j].equals("/to") || strArr[j].equals("to:");
                 String start = sb.toString().substring(0, sb.length() - 1);
 
                 sb.setLength(0);
@@ -141,6 +144,7 @@ public enum Command {
         @Override
         public String execute(String input) throws SundayException {
             try {
+                assert !input.substring(1).isEmpty();
                 String description = input.substring(1);
                 Task toDo = new ToDo(description);
                 list.add(toDo);

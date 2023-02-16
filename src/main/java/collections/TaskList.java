@@ -32,6 +32,7 @@ public class TaskList {
      * @param task The task to add.
      */
     public void add(Task task) {
+        assert task != null;
         this.list.add(task);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @return The marked task.
      */
     public Task mark(int index) {
+        assert index >= 0 && index < this.list.size();
         this.list.get(index).mark();
         return this.list.get(index);
     }
@@ -53,6 +55,7 @@ public class TaskList {
      * @return The unmarked task.
      */
     public Task unmark(int index) {
+        assert index >= 0 && index < this.list.size();
         this.list.get(index).unmark();
         return this.list.get(index);
     }
@@ -64,6 +67,7 @@ public class TaskList {
      * @return The deleted task.
      */
     public Task delete(int index) {
+        assert index >= 0 && index < this.list.size();
         return this.list.remove(index);
     }
 
@@ -74,6 +78,7 @@ public class TaskList {
      * @return The task at the specified index.
      */
     public Task getTask(int index) {
+        assert index >= 0 && index < this.list.size();
         return this.list.get(index);
     }
 
