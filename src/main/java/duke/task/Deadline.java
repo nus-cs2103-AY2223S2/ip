@@ -11,7 +11,7 @@ import duke.parser.Parser;
  * Represents a Deadline Task that has a description and a due date.
  */
 public class Deadline extends Task {
-    protected LocalDate duedate;
+    protected String duedate;
 
     /**
      * Constructor for Deadline task, loaded from the storage file.
@@ -22,9 +22,9 @@ public class Deadline extends Task {
         super(input, isDone);
         this.symbol = 'D';
         String[] temp = input.split(",");
-        this.description = temp[0];
+        this.description = temp[0].trim();
         LocalDate inputFormatter = LocalDate.parse(temp[1]);
-        this.duedate = inputFormatter;
+        this.duedate = inputFormatter.toString();
         this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
@@ -46,11 +46,15 @@ public class Deadline extends Task {
         }
         this.description = descriptionArr[0];
         LocalDate inputFormatter = Parser.parseDate(descriptionArr[1]);
-        this.duedate = inputFormatter;
+        this.duedate = inputFormatter.toString();
         this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
     public String saveTask() {
         return this.symbol + "," + isDone + "," + this.description + "," + duedate;
+    }
+
+    public String getDuedate() {
+        return this.duedate.toString();
     }
 }
 

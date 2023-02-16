@@ -68,7 +68,7 @@ public class Parser {
             Event event = new Event(fullCommand);
             return new AddCommand(event);
         case find:
-            return new FindCommand(fullCommandArr[1]);
+            return new FindCommand(fullCommand);
         case mark:
             return new MarkCommand(Integer.parseInt(fullCommandArr[1]));
         case unmark:

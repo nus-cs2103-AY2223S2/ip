@@ -73,12 +73,22 @@ public class TaskList {
     }
 
     public ArrayList<Task> findTasks(String input) {
+        String inputToLowerCase = input.toLowerCase().trim();
         ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task cur : this.tasks) {
-            if (cur.getDescription().contains(input)) {
-                foundTasks.add(cur);
+        for (Task task : this.tasks) {
+            if (task.getDescription().toLowerCase().contains(inputToLowerCase)) {
+                foundTasks.add(task);
+            } else if (task instanceof Deadline) {
+                if (((Deadline) task).duedate.contains(inputToLowerCase) || task.getDuedateString().contains(inputToLowerCase)) {
+                    foundTasks.add(task);
+                }
+            } else if (task instanceof Event) {
+                if (task.getDuedateString().contains(inputToLowerCase) || ((Event) task).startTime.contains(inputToLowerCase) || ((Event) task).endTime.contains(inputToLowerCase)) {
+                    foundTasks.add(task);
+                }
             }
         }
+                //if event or deadline, check dates
         return foundTasks;
     }
     public int getNumTasks() {

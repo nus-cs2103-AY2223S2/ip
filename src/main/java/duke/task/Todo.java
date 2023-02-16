@@ -29,7 +29,7 @@ public class Todo extends Task {
         if (inputArr.length == 1 || inputArr[1].isBlank()) {
             throw new DukeException("Sorry, the description of a todo cannot be empty!");
         }
-        this.description = inputArr[1];
+        this.description = inputArr[1].trim();
     }
 
     public String saveTask() {
