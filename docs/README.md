@@ -60,12 +60,12 @@ Marks a task in the task list as done.
 
 Format: `mark INDEX` or `m INDEX`
 
-
 - Marks the task of the specified `INDEX`.
 - The `INDEX` refers to the index number shown in the displayed task list.
 - The index **must be a positive integer** 1, 2, 3, ...
 
-  Examples:
+Examples:
+
 - `list` followed by `mark 1` marks the 1st task in the task list as done.
 - `find gym` followed by `m 2` marks the 2nd person in the results of the `find` command.
 
