@@ -42,7 +42,6 @@ class Storage {
     TaskList load() throws IOException, DukeException {
         TaskList tl = new TaskList();
         Parser tp = new Parser(tl);
-        String[] task;
         Scanner sc = new Scanner(new FileReader(fileName));
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
@@ -57,15 +56,15 @@ class Storage {
             String description = matcher.group("arguments");
             switch (taskType) {
             case "T":
-                task = tp.addTask("t " + description);
+                tp.addTask("t " + description);
                 tp.setStatus(index, isDone);
                 break;
             case "D":
-                task = tp.addTask("d " + description);
+                tp.addTask("d " + description);
                 tp.setStatus(index, isDone);
                 break;
             case "E":
-                task = tp.addTask("e " + description);
+                tp.addTask("e " + description);
                 tp.setStatus(index, isDone);
                 break;
             default:
