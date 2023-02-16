@@ -12,15 +12,13 @@ Duke is a desktop software built in Java that allows users to create, delete, up
 
 ## Features
 
-### Add Tasks[#add]
+### Adding a task
 
 Description of the feature.
 
-### Feature-XYZ
+### Deleting a task
 
 Description of the feature.
-
-## Usage
 
 ### `Keyword` - Describe action
 
