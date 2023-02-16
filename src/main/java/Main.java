@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import treebot.TreeBot;
+
 import ui.MainWindow;
 
 public class Main extends Application {
