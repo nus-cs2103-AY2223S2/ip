@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
+ * Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
