@@ -14,6 +14,7 @@ import duke.commands.FindKeywordCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
+import duke.commands.ViewScheduleCommand;
 
 /**
  * A class that parses user's input into commands.
@@ -70,11 +71,13 @@ public class Parser {
         Pattern delete = Pattern.compile("delete [0-9]+");
         Pattern find = Pattern.compile("find .*");
         Pattern findBy = Pattern.compile("findBy .*");
+        Pattern viewSchedule = Pattern.compile("viewSchedule .*");
         Matcher matchMark = mark.matcher(userInput);
         Matcher matchUnmark = unmark.matcher(userInput);
         Matcher matchDelete = delete.matcher(userInput);
         Matcher matchFind = find.matcher(userInput);
         Matcher matchFindBy = findBy.matcher(userInput);
+        Matcher matchViewSchedule = viewSchedule.matcher(userInput);
 
         if (userInput.equals("list")) {
             return new ListCommand();
@@ -91,6 +94,9 @@ public class Parser {
         } else if (matchFindBy.matches()) {
             String by = userInput.split(" ")[1];
             return new FindDeadlineCommand(by);
+        } else if (matchViewSchedule.matches()) {
+            String date = userInput.split(" ")[1];
+            return new ViewScheduleCommand(date);
         } else {
             return parseAdderCommand(userInput);
         }

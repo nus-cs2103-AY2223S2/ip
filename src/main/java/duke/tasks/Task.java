@@ -40,8 +40,16 @@ public class Task {
         return false;
     }
 
+    public boolean isEvent() {
+        return false;
+    }
+
     public LocalDate getDeadline() throws DukeException {
         throw new DukeException("Not a deadline");
+    }
+
+    public boolean isBetween(LocalDate date) throws DukeException {
+        throw new DukeException("Not an event");
     }
 
     @Override

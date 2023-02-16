@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exceptions.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -22,7 +24,17 @@ public class Event extends Task {
         this.to = to;
         assert from.isBefore(to);
     }
-
+    @Override
+    public boolean isEvent() {
+        return true;
+    }
+    @Override
+    public boolean isBetween(LocalDate date) {
+        if ((date.isAfter(from) && date.isBefore(to)) || date.isEqual(from) || date.isEqual(to)) {
+            return true;
+        }
+        return false;
+    }
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))

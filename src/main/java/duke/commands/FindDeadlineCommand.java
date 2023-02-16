@@ -34,7 +34,7 @@ public class FindDeadlineCommand extends Command {
             }
 
             for (int i = 0; i < deadlines.size(); i++) {
-                ui.showToUser(i + "." + deadlines.get(i).toString());
+                ui.showToUser((i + 1) + "." + deadlines.get(i).toString());
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Please enter a valid date!!");

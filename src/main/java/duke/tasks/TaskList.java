@@ -22,6 +22,16 @@ public class TaskList {
         return tasks;
     }
 
+    public ArrayList<Task> getTasks(LocalDate date) throws DukeException {
+        ArrayList<Task> schedule = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.isEvent() && task.isBetween(date)) {
+                schedule.add(task);
+            }
+        }
+        return schedule;
+    }
+
     public ArrayList<Task> getDeadlineBefore(LocalDate by) throws DukeException {
         ArrayList<Task> deadlines = new ArrayList<>();
 
