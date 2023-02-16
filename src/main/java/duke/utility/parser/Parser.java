@@ -17,10 +17,30 @@ import duke.utility.enums.UpdateType;
  * @author Brian Quek
  */
 public class Parser {
-    private static DukeException wrongCommandFormat = new DukeException("Wrong command format inserted.");
+    private static DukeException wrongCommandFormat = new DukeException("Wrong command format inserted.\nType 'help' for more information.");
     private static DukeException noNumericParam = new DukeException("Parameter is not a numerical value.");
     private static DukeException noSpecialParam = new DukeException("Missing special param e.g /by, /from, /to");
     private static DukeException emptyParam = new DukeException("Empty parameter inserted.");
+    private static final String HELP_COMMAND = "list \n " +
+                                                "-displays the list of tasks.\n\n" +
+                                                "todo [NAME]\n" +
+                                                "-creates a todo task.\n\n" +
+                                                "deadline [NAME] /by [YYYY-MM-DD]\n" +
+                                                "-creates a deadline task.\n" +
+                                                "event [name] /from [FROM] /to [TO]\n" +
+                                                "-creates a event task.\n\n" +
+                                                "mark [INDEX]\n" +
+                                                "-marks the task based on its index.\n\n" +
+                                                "unmark [INDEX]\n" +
+                                                "-unmarks the task based on its index.\n\n" +
+                                                "update [INDEX] [TYPE] [NEW_VALUE]\n" +
+                                                "-updates the value of the task based on the index\n and type (E.g /name /by /from /to).\n\n" +
+                                                "find [KEYWORD]\n" +
+                                                "-finds all tasks' name that contains the keyword.\n\n" + 
+                                                "help\n" + 
+                                                "-returns command syntax that Pepe can offer.\n\n" + 
+                                                "bye\n" +
+                                                "-terminates program";
 
     /**
      * Prints the list of tasks stored in the TaskList.
@@ -234,6 +254,14 @@ public class Parser {
         }
     }
 
+    private static String helpMenu(String[] command) throws DukeException {
+        if (command.length != 1) {
+            throw wrongCommandFormat;
+        }
+
+        return HELP_COMMAND;
+    }
+
     /**
      * Reads the input of the user and parse the input accordingly.
      * 
@@ -265,11 +293,13 @@ public class Parser {
                     return findTasks(command, list);
                 case update:
                     return updateTask(command, list);
+                case help:
+                    return helpMenu(command); 
                 default:
                     return createToDo(command, list);
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("Invalid command.");
+            throw new DukeException("Invalid command.\nType 'help' for more information.");
         }
 
     }

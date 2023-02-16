@@ -3,12 +3,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends VBox {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -20,8 +19,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pepe.jpg"));
 
     /**
      * Called when MainWindow is created in Main.java.
@@ -29,7 +28,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
         welcomeMessage();
     }
 
@@ -57,7 +55,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void welcomeMessage() {
-        String message = "Welcome to the Pepe Bot.\nTry Adding a Task with (todo, deadline or event)";
+        String message = "Welcome to the Pepe Bot.\nType 'help' for command syntax.";
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(message, dukeImage)
