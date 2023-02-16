@@ -1,10 +1,10 @@
-# User Guide
+# User Guide 📖
 
-## Features 
+## Features 📄
 
 ### Add task: todo
 
-<span style="color:blue">Adds a task without any deadline.</span>.
+Adds a task without any deadline.
 
 ### Add deadline task: deadline
 
@@ -30,7 +30,7 @@ Deletes task.
 
 Lists all completed and incompleted tasks.
 
-## Usage
+## Keyword Usuage 🔑
 
 ### todo
 
