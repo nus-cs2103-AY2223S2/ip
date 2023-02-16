@@ -6,6 +6,7 @@ import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -28,6 +29,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle(APP_NAME);
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/FakeDuke.png")));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
