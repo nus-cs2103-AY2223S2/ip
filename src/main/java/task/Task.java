@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public abstract class Task {
     private final String description;
-    private boolean done;
+    private boolean isDone;
     private Recurrence recurrence = Recurrence.NONE;
 
     enum Recurrence {
@@ -24,7 +24,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        done = false;
+        isDone = false;
     }
 
     /**
@@ -33,6 +33,7 @@ public abstract class Task {
      * @return description of task.
      */
     public String getDescription() {
+
         return description;
     }
 
@@ -40,14 +41,14 @@ public abstract class Task {
      * Sets the task to be done.
      */
     public void markDone() {
-        this.done = true;
+        isDone = true;
     }
 
     /**
      * Sets the take to be not done.
      */
     public void markNotDone() {
-        this.done = false;
+        isDone = false;
     }
 
     /**
@@ -56,7 +57,7 @@ public abstract class Task {
      * @return a boolean representing whether task is done.
      */
     public boolean isDone() {
-        return this.done;
+        return isDone;
     }
 
     /**
@@ -134,6 +135,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (done ? "X" : " ") + "]" + "[" + getRecurrence() + "] " + this.description;
+        return "[" + (isDone ? "X" : " ") + "]" + "[" + getRecurrence() + "] " + this.description;
     }
 }
