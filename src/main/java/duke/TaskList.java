@@ -44,6 +44,7 @@ public class TaskList {
     public Todo addTodo(String title) {
         Todo newTodo = new Todo(title);
         tasks.add(newTodo);
+        assert newTodo.getTitle().equals(title);
         return newTodo;
     }
 
@@ -56,6 +57,7 @@ public class TaskList {
     public Deadline addDeadline(String title, LocalDate by) {
         Deadline newDeadline = new Deadline(title, by);
         tasks.add(newDeadline);
+        assert newDeadline.getTitle().equals(title);
         return newDeadline;
     }
 
@@ -69,6 +71,7 @@ public class TaskList {
     public Event addEvent(String title, LocalDate from, LocalDate to) {
         Event newEvent = new Event(title, from, to);
         tasks.add(newEvent);
+        assert newEvent.getTitle().equals(title);
         return newEvent;
     }
 
