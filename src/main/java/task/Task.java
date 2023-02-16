@@ -75,18 +75,19 @@ public abstract class Task {
      */
     public String getRecurrence() {
         switch (recurrence) {
-            case NONE:
-                return " ";
-            case DAILY:
-                return "D";
-            case WEEKLY:
-                return"W";
-            case MONTHLY:
-                return "M";
-            case YEARLY:
-                return "Y";
+        case NONE:
+            return " ";
+        case DAILY:
+            return "D";
+        case WEEKLY:
+            return "W";
+        case MONTHLY:
+            return "M";
+        case YEARLY:
+            return "Y";
+        default:
+            return null;
         }
-        return null;
     }
 
     /**
@@ -97,16 +98,17 @@ public abstract class Task {
      */
     public LocalDate getNextDate(LocalDate curDate) {
         switch (recurrence) {
-            case DAILY:
-                return curDate.plusDays(1);
-            case WEEKLY:
-                return curDate.plusWeeks(1);
-            case MONTHLY:
-                return curDate.plusMonths(1);
-            case YEARLY:
-                return curDate.plusYears(1);
+        case DAILY:
+            return curDate.plusDays(1);
+        case WEEKLY:
+            return curDate.plusWeeks(1);
+        case MONTHLY:
+            return curDate.plusMonths(1);
+        case YEARLY:
+            return curDate.plusYears(1);
+        default:
+            return null;
         }
-        return null;
     }
 
     /**

@@ -82,7 +82,7 @@ public class Storage {
         if (cmd[0].equals("T")) {
             return new Todo(cmd[3]);
         } else if (cmd[0].equals("D")) {
-            return  new Deadline(cmd[3], LocalDate.parse(cmd[4]));
+            return new Deadline(cmd[3], LocalDate.parse(cmd[4]));
         } else {
             assert cmd[0].equals("E");
             return new Event(cmd[3], LocalDate.parse(cmd[4]), LocalDate.parse(cmd[5]));
@@ -103,7 +103,8 @@ public class Storage {
             }
             if (LocalDate.now().get(ChronoField.DAY_OF_MONTH) == 1) {
                 monthlyRefresh = true;
-            } if (LocalDate.now().get(ChronoField.DAY_OF_YEAR) == 1) {
+            }
+            if (LocalDate.now().get(ChronoField.DAY_OF_YEAR) == 1) {
                 yearlyRefresh = true;
             }
         }

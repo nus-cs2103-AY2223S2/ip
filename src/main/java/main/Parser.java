@@ -1,5 +1,8 @@
 package main;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import command.AddDeadlineCommand;
 import command.AddEventCommand;
 import command.AddTodoCommand;
@@ -10,10 +13,7 @@ import command.FindCommand;
 import command.ListCommand;
 import command.MarkDoneCommand;
 import command.MarkNotDoneCommand;
-import command.RepeatCommand;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
+import command.RecurrenceCommand;
 
 /**
  * Class that makes sense of user input.
@@ -50,12 +50,12 @@ public class Parser {
                     throw new DukeException("Please enter a valid number");
                 }
                 return new DeleteTaskCommand(Integer.parseInt(command.substring(7)));
-            } else if (command.startsWith("repeat")) {
-                String[] str = command.substring(7).split(" ");
+            } else if (command.startsWith("recurrence")) {
+                String[] str = command.substring(10).split(" ");
                 if (isInvalidNumber(str[1])) {
                     throw new DukeException("Please enter a valid number");
                 }
-                return new RepeatCommand(str[0], Integer.parseInt(str[1]));
+                return new RecurrenceCommand(str[0], Integer.parseInt(str[1]));
             } else if (command.startsWith("todo")) {
                 return new AddTodoCommand(command.substring(5));
             } else if (command.startsWith("deadline")) {

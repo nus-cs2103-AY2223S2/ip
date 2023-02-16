@@ -6,10 +6,10 @@ import command.Command;
  * Runs the application.
  */
 public class Duke {
+    private static final String filePath = "tasks.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    private static final String filePath = "tasks.txt";
 
     /**
      * Constructs Duke task manager.

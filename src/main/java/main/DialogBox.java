@@ -15,6 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
+/**
+ * DialogBox that contains an image differentiating users and take planner and contains the text written by users
+ * and output by task planner.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

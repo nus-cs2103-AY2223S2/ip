@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Nobita.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Doraemon.png"));
 
+    /**
+     * Initializes the chat.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -49,10 +52,12 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Outputs welcome message to user when user starts the task planner.
+     */
     private void welcome() {
         String welcomeMessage = "Hello! I'm Duke, your task planner\n" + "What can I do for you?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
-
 }
