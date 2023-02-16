@@ -65,8 +65,8 @@ public class Storage {
         while (sc.hasNext()) {
             String[] cmd = sc.nextLine().split("\\|");
             Task t = getTask(cmd);
-            getRecurrence(cmd, t);
             getTaskDone(cmd, t);
+            getRecurrence(cmd, t);
             arrOfTasks.add(t);
         }
         return arrOfTasks;

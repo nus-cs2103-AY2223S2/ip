@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Output exit message to users.
+     * Output exit message to users and updates the file.
      *
      * @param taskList List of task.
      * @param ui Ui.
@@ -28,6 +28,7 @@ public class ExitCommand extends Command {
      * @throws DukeException Throws exception if user input is invalid.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        storage.writeFile(taskList);
         Ui.outputExit();
     }
 }
