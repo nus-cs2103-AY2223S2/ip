@@ -2,11 +2,11 @@
 
 ## Features 
 
-### Feature-ABC
+### Add task: todo
 
 Description of the feature.
 
-### Feature-XYZ
+### Add deadline task: deadline
 
 Description of the feature.
 
