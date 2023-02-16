@@ -1,4 +1,4 @@
-# User Guide
+# Grand Duke User Guide
 
 Grand Duke helps you keep track of our tasks so that you don't have to.
 
