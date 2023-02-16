@@ -45,6 +45,9 @@ public class Duke {
         } catch (DukeException e) {
             dukeResponse = e.getMessage();
         }
+
+        assert !dukeResponse.equals("");
+
         return dukeResponse;
     }
 

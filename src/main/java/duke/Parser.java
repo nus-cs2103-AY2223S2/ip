@@ -85,6 +85,9 @@ public class Parser {
         default:
             commandResponse+="This command is not supported!";
         }
+
+        assert !commandResponse.equals("");
+        
         return commandResponse;
     }
 
