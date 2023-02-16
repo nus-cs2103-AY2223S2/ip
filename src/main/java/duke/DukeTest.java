@@ -1,5 +1,10 @@
 package duke;
 
+import duke.command.Command;
+import duke.dukeExcpetion.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -47,7 +52,7 @@ public class DukeTest {
                 cmdHandle.execArgs(taskList);
             }
         } catch (DukeException dukeErr){
-            fail(dukeErr.errorMessage);
+            fail(dukeErr.getErrorMessage());
         }
     }
 

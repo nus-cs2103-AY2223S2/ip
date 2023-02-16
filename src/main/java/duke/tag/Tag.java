@@ -1,4 +1,4 @@
-package duke;
+package duke.tag;
 
 /**
  * {@code Tag} class that stores tag for any task

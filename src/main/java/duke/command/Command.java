@@ -1,6 +1,10 @@
-package duke;
+package duke.command;
 
+import duke.GUI.GUI;
+import duke.dukeExcpetion.DukeException;
+import duke.tag.Tag;
 import duke.task.*;
+import duke.*;
 
 import java.util.List;
 import java.util.regex.Matcher;

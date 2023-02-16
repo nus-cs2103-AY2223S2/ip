@@ -1,4 +1,6 @@
-package duke;
+package duke.parser;
+
+import duke.command.Command;
 
 /**
  * {@code Parser} class encapsulates parsing of raw inputs

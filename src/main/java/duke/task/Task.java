@@ -1,7 +1,6 @@
 package duke.task;
 
-import duke.Tag;
-import duke.TaskList;
+import duke.tag.Tag;
 
 /**
  * super class {@code Task} that encapsulates common attributes of a task:

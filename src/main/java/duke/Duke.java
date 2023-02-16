@@ -1,9 +1,12 @@
 package duke;
 
-import javafx.application.Application;
+import duke.GUI.GUI;
+import duke.dukeExcpetion.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
 import javafx.application.Platform;
-import javafx.stage.Stage;
-
+import duke.command.Command;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -13,7 +16,7 @@ import java.nio.file.Paths;
 /**
  * {@code Duke} class that encapsulates Duke program
  */
-public class Duke extends Application {
+public class Duke {
     /**
      * filePath of file to be accessed or edited
      */
@@ -22,31 +25,24 @@ public class Duke extends Application {
     /**
      * stores a list of tasks to complete
      */
-    private TaskList taskList;
+    private static TaskList taskList;
 
     /**
      * stores data of file specified by path
      */
-    private Storage storage;
+    public static Storage storage;
 
     /**
      * handles gui of Duke Application
      */
-    private GUI gui= new GUI();
-
-    /**
-     * Default constructor to circumvent NoSuchMethodException problem when running
-     * Application.launch
-     *
-     * Credit to @rmj1405 for providing the tip :)
-     */
-    public Duke() {}
+    private GUI gui;
 
     /**
      * Constructor method of {@code Duke} class
      * @param filePath path of file to be accessed or edited
      */
-    public Duke(String filePath) {
+    public Duke(String filePath, GUI gui) {
+        this.gui = gui;
         path = Paths.get(filePath, "data", "Duke.txt");
         try {
             if (!Files.exists(path)) {
@@ -80,19 +76,9 @@ public class Duke extends Application {
             return output;
         } catch (DukeException err) {
             String errMsg = GUI.BORDERLINE
-                    + err.errorMessage.trim() + "\n"
+                    + err.getErrorMessage().trim() + "\n"
                     + GUI.BORDERLINE;
             return errMsg;
         }
-    }
-
-    /**
-     * Starts Duke Application with default stage provided
-     * @param stage default stage provided to start the application
-     */
-    @Override
-    public void start(Stage stage) {
-        gui.startUpProgram(stage);
-        gui.runEvent();
     }
 }

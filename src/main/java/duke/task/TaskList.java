@@ -1,6 +1,9 @@
-package duke;
+package duke.task;
 
-import duke.task.*;
+import duke.GUI.GUI;
+import duke.dukeExcpetion.DukeException;
+import duke.tag.Tag;
+import duke.tag.TagLibrary;
 
 import java.util.ArrayList;
 import java.util.List;

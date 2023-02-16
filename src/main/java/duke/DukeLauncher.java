@@ -12,6 +12,6 @@ public class DukeLauncher {
      * @param args Command Line Arguments
      */
     public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+        Application.launch(MainWindow.class, args);
     }
 }

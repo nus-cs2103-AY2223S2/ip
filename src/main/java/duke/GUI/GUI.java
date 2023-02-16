@@ -1,5 +1,7 @@
-package duke;
+package duke.GUI;
 
+import duke.Duke;
+import duke.dukeExcpetion.DukeException;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -51,15 +53,11 @@ public class GUI{
      */
     private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
 
-    /**
-     * dukeProgram to access and modify taskList and storage
-     */
-    private Duke dukeProgram = new Duke(System.getProperty("user.dir"));
 
     /**
      * Borderlines for every message sent by Duke
      */
-    static final String BORDERLINE =  "_____________________________________\n";
+    public static final String BORDERLINE =  "_____________________________________\n";
 
     /**
      * VValue for scroll and anchor panes
@@ -159,20 +157,20 @@ public class GUI{
     /**
      * Performs necessary actions when user presses the send button
      */
-    public void runEvent() {
-        sendButton.setOnMouseClicked((event) -> handleUserInput());
+    public void runEvent(Duke dukeProgram) {
+        sendButton.setOnMouseClicked((event) -> handleUserInput(dukeProgram));
 
-        userInput.setOnAction((event) -> handleUserInput());
+        userInput.setOnAction((event) -> handleUserInput(dukeProgram));
     }
 
     /**
      * Handles inputs from user and performs the necessary
      * actions
      */
-    public void handleUserInput() {
+    public void handleUserInput(Duke program) {
         String text = userInput.getText();
         Label userText = new Label(text);
-        String dukeReply = dukeProgram.getResponse(text);
+        String dukeReply = program.getResponse(text);
 
         if (dukeReply.equals("bye")){
             String byeMessage = BORDERLINE
@@ -215,6 +213,6 @@ public class GUI{
      * @param dukeError error message in DukeException object
      */
     public void displayError(DukeException dukeError){
-        System.out.println(dukeError.errorMessage);
+        System.out.println(dukeError.getErrorMessage());
     }
 }

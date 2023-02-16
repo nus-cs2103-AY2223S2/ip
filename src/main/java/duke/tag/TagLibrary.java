@@ -1,4 +1,4 @@
-package duke;
+package duke.tag;
 
 import java.util.HashMap;
 
