@@ -100,4 +100,11 @@ public class MainWindow extends AnchorPane implements Ui {
     void setGui(Gui gui) {
         this.gui = gui;
     }
+
+    /**
+     * @return Image used by D
+     */
+    Image getDImg() {
+        return dImg;
+    }
 }

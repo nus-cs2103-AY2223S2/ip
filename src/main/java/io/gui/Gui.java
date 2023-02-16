@@ -45,6 +45,7 @@ public class Gui extends Application {
             stage.setMinWidth(MIN_WIDTH);
             stage.setMinHeight(MIN_HEIGHT);
             stage.setTitle("D");
+            stage.getIcons().add(fxmlLoader.<MainWindow>getController().getDImg());
             stage.show();
 
             loadTasks();
