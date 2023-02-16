@@ -27,6 +27,12 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     private Ui ui;
 
+    /**
+     * Constructor for Dialog Box
+     *
+     * @param text
+     * @param img
+     */
     private DialogBox(String text, Image img) {
         ui = new Ui();
         try {
@@ -57,10 +63,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for user to return based on inputs
+     *
+     * @param text
+     * @param img
+     * @return
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box for alfred to return based on inputs
+     *
+     * @param text
+     * @param img
+     * @return
+     */
     public static DialogBox getAlfredDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

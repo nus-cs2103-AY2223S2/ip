@@ -6,6 +6,7 @@ package alfred.exception;
 public class AlfredException extends Exception {
     /**
      * Creates an instance of AlfredException.
+     *
      * @param errorMessage
      */
     public AlfredException(String errorMessage) {

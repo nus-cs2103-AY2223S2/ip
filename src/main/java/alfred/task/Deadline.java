@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Creates an instance of deadline.
+     *
      * @param description
      * @param date
      */
@@ -20,13 +21,23 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Get storage details to return
+     *
+     * @return
+     */
     @Override
     public String getStorageDetails() {
         return this.description + " | " + this.date.toString();
     }
 
+    /**
+     * Get task type which is deadline
+     *
+     * @return
+     */
     @Override
-    public String getEventType() {
+    public String getTaskType() {
         return "D";
     }
 

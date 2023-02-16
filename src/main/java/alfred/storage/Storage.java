@@ -39,7 +39,7 @@ public class Storage {
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task task = taskList.getTask(i);
                 StringBuilder taskString = new StringBuilder();
-                taskString.append(task.getEventType());
+                taskString.append(task.getTaskType());
                 taskString.append(" | " + task.getStatusIcon() + " | ");
                 taskString.append(task.getStorageDetails() + "\n");
                 fileWriter.write(taskString.toString());
@@ -51,7 +51,7 @@ public class Storage {
     }
 
     /**
-     *  Load data from file path and stores it in an ArrayList for alfred.main.Alfred
+     * Load data from file path and stores it in an ArrayList for alfred.main.Alfred
      *
      * @return ArrayList containing tasks from file based on file path
      */

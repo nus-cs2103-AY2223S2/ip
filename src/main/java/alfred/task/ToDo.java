@@ -9,11 +9,21 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Get task type which is todo
+     *
+     * @return
+     */
     @Override
-    public String getEventType() {
+    public String getTaskType() {
         return "T";
     }
 
+    /**
+     * Get and return storage type
+     *
+     * @return
+     */
     @Override
     public String getStorageDetails() {
         return this.description;

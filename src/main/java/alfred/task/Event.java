@@ -23,13 +23,23 @@ public class Event extends Task {
         this.endDate = endDate;
     }
 
+    /**
+     * Get storage details to return
+     *
+     * @return
+     */
     @Override
     public String getStorageDetails() {
         return this.description + " | " + this.startDate.toString() + " - " + this.endDate.toString();
     }
 
+    /**
+     * Get task type which is event
+     *
+     * @return
+     */
     @Override
-    public String getEventType() {
+    public String getTaskType() {
         return "E";
     }
 
