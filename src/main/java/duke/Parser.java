@@ -29,7 +29,8 @@ public class Parser {
      * @throws EmptyDescription If the description of task is empty.
      * @throws OutOfBounds      If the number is out of bound.
      */
-    public String parse(String input) throws WrongTask, EmptyDescription, OutOfBounds, InvalidDeadlineDate, NoDate, InvalidEventFormat, InvalidUpdateEventFormat {
+    public String parse(String input) throws WrongTask, EmptyDescription, OutOfBounds, InvalidDeadlineDate, NoDate,
+            InvalidEventFormat, InvalidUpdateEventFormat {
         String[] arrNext = input.split(" ", 2);
         String next = arrNext[0];
         checkWrongTask(next);
@@ -114,7 +115,8 @@ public class Parser {
      * @param description The description of the Deadline task.
      * @return The new Deadline task.
      */
-    private static Task newDeadline(Storage storage, TaskList taskList, String description) throws InvalidDeadlineDate, NoDate {
+    private static Task newDeadline(Storage storage, TaskList taskList, String description) throws
+            InvalidDeadlineDate, NoDate {
         try {
             checkDeadlineDate(description);
             String[] split = description.split("/by ");
@@ -226,7 +228,8 @@ public class Parser {
      * @param newDesc  The new description of the task.
      * @return The updated task.
      */
-    private static Task updateTask(Storage storage, TaskList taskList, String taskID, String newDesc) throws InvalidDeadlineDate, NoDate, InvalidUpdateEventFormat {
+    private static Task updateTask(Storage storage, TaskList taskList, String taskID, String newDesc) throws
+            InvalidDeadlineDate, NoDate, InvalidUpdateEventFormat {
         int number = Integer.parseInt(taskID) - 1;
         Task taskToUpdate = taskList.getTask(number);
         if (taskToUpdate instanceof Event) {
@@ -256,7 +259,8 @@ public class Parser {
      * @throws EmptyDescription If the description of task is empty.
      */
     public static boolean checkEmptyDescription(String[] checkString) throws EmptyDescription {
-        if (checkString.length == 1 && !Objects.equals(checkString[0], "list") && !Objects.equals(checkString[0], "bye")) {
+        if (checkString.length == 1 && !Objects.equals(checkString[0], "list")
+                && !Objects.equals(checkString[0], "bye")) {
             throw new EmptyDescription(" The description of " + checkString[0] + " cannot be empty.");
         }
         return true;
@@ -283,7 +287,8 @@ public class Parser {
      * @throws WrongTask If the keyword is not the input.
      */
     public static void checkWrongTask(String keyword) throws WrongTask {
-        List<String> keywords = Arrays.asList("bye", "todo", "deadline", "event", "mark", "unmark", "list", "delete", "find", "update");
+        List<String> keywords = Arrays.asList("bye", "todo", "deadline", "event", "mark", "unmark", "list",
+                "delete", "find", "update");
         boolean isKeyword = keywords.contains(keyword);
         if (!isKeyword) {
             throw new WrongTask(" I'm sorry, but I don't know what that means :-(");

@@ -54,7 +54,7 @@ public class DialogBox extends HBox {
         this.setSpacing(10);
         this.setFillHeight(false);
 
-        BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+        BorderStroke borderStroke = new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID,
                 new CornerRadii(20.0), new BorderWidths(1.0));
         Border dialogBorder = new Border(borderStroke);
         dialog.setBorder(dialogBorder);

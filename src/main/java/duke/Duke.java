@@ -18,7 +18,7 @@ public class Duke {
         storage = new Storage(filePath);
         taskList = storage.loadFile();
     }
-    
+
     /**
      * Gets response from user input.
      *
@@ -30,7 +30,8 @@ public class Duke {
         Parser parser = new Parser(taskList, ui, storage);
         try {
             output = parser.parse(input);
-        } catch (WrongTask | OutOfBounds | EmptyDescription | InvalidDeadlineDate | NoDate | InvalidEventFormat | InvalidUpdateEventFormat e) {
+        } catch (WrongTask | OutOfBounds | EmptyDescription | InvalidDeadlineDate | NoDate | InvalidEventFormat
+                | InvalidUpdateEventFormat e) {
             return ui.errorMessage(e);
         }
         return output;

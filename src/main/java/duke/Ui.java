@@ -42,7 +42,8 @@ public class Ui {
      * @return Response to let the user know the task has been unmarked.
      */
     public String showUnmark(Task taskToUnmark) {
-        return "OK, I've marked this task as not done yet:\n" + taskToUnmark + "\nRemember to complete your tasks on time!";
+        return "OK, I've marked this task as not done yet:\n" + taskToUnmark
+                + "\nRemember to complete your tasks on time!";
     }
 
     /**
@@ -74,7 +75,8 @@ public class Ui {
      * @return Response to let the user know task has been updated.
      */
     public String showUpdate(Task taskToUpdate) {
-        return "No problem, this task is updated:\n" + taskToUpdate + "\nLet me know if you want to change anything else!";
+        return "No problem, this task is updated:\n" + taskToUpdate
+                + "\nLet me know if you want to change anything else!";
     }
 
     /**
@@ -104,6 +106,11 @@ public class Ui {
         return e.getMessage();
     }
 
+    /**
+     * Shows user all possible commands.
+     *
+     * @return Response to show user the possible commands.
+     */
     public static String userGuide() {
         return "\nLucy only understands the following:\n"
                 + "1. todo DESCRIPTION\n"
