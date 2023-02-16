@@ -65,4 +65,12 @@ public class Leo {
             return;
         }
     }
+
+    /**
+     * Exits Leo.
+     */
+    public void exit() {
+        Storage.writeObjectToFile(taskList);
+        parser.close();
+    }
 }

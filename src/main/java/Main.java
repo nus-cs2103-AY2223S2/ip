@@ -23,6 +23,11 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setLeo(leo);
             stage.show();
+
+            stage.setOnCloseRequest(event -> {
+                fxmlLoader.<MainWindow>getController().handleExit();
+            });
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -57,4 +57,10 @@ public class MainWindow extends AnchorPane {
             System.exit(0);
         }
     }
+
+    //method to handle exit if user clicks on the red cross
+    @FXML
+    public void handleExit(){
+        leo.exit();
+    }
 }
