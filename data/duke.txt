@@ -1,3 +1,4 @@
 E | 1 | attend a meeting| from 4pm to 6pm
-D | 0 | finish homework| 2023-02-01
-T | 1 | say hi
+D | 1 | finish homework| 2023-02-01
+T | 0 | wash clothes
+D | 0 | say hi| 2022-01-01

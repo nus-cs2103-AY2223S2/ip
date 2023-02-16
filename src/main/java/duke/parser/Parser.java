@@ -1,6 +1,8 @@
 package duke.parser;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.regex.PatternSyntaxException;
 
 import duke.Commands;
 import duke.command.AddTaskCommand;
@@ -42,26 +44,37 @@ public class Parser {
             index = Integer.valueOf(input.split(" ")[1]);
             return new MarkUndoneCommand(index - 1);
         case DEADLINE:
-            String detail = input.split("/")[0].split(" ", 2)[1];
-            //parse the input to extract the deadline time
-            String timeDescription =
-                input.split("/")[1].split(" ")[0] + ": "
-                    + input.split("/")[1].split(" ", 2)[1];
-            LocalDate time = LocalDate.parse(timeDescription.split(": ", 2)[1]);
-            return new AddTaskCommand(new Deadline(detail, time));
+            try {
+                String detail = input.split("/")[0].split(" ", 2)[1];
+                //parse the input to extract the deadline time
+
+                String timeDescription =
+                    input.split("/")[1].split(" ")[0] + ": "
+                        + input.split("/")[1].split(" ", 2)[1];
+                LocalDate time = LocalDate.parse(timeDescription.split(": ", 2)[1]);
+                return new AddTaskCommand(new Deadline(detail, time));
+            } catch (ArrayIndexOutOfBoundsException | PatternSyntaxException | DateTimeParseException e) {
+                throw new DukeException("   OOPS!!! Your input format is wrong.\n"
+                    + " Try deadline do homework /by 2023-01-02");
+            }
         case EVENT:
-            detail = input.split("/")[0].split(" ", 2)[1];
-            //parse the input to extract the duration of the event
-            timeDescription = input.split("/")[1].split(" ")[0] + " "
-                + input.split("/")[1].split(" ", 2)[1]
-                + input.split("/")[2].split(" ")[0] + " "
-                + input.split("/")[2].split(" ", 2)[1];
-            return new AddTaskCommand(new Event(detail, timeDescription));
+            try {
+                String detail = input.split("/")[0].split(" ", 2)[1];
+                //parse the input to extract the duration of the event
+                String timeDescription = input.split("/")[1].split(" ")[0] + " "
+                    + input.split("/")[1].split(" ", 2)[1]
+                    + input.split("/")[2].split(" ")[0] + " "
+                    + input.split("/")[2].split(" ", 2)[1];
+                return new AddTaskCommand(new Event(detail, timeDescription));
+            } catch (ArrayIndexOutOfBoundsException | PatternSyntaxException e) {
+                throw new DukeException("   OOPS!!! Your input format is wrong.\n"
+                    + " Try event meeting /from (anytime) /to (anytime)");
+            }
         case TODO:
             if (input.split(" ").length == 1) {
                 throw new DukeException("   OOPS!!! The description of a todo cannot be empty.\n");
             }
-            detail = input.split(" ", 2)[1];
+            String detail = input.split(" ", 2)[1];
             return new AddTaskCommand(new Todo(detail));
         case DELETE:
             index = Integer.valueOf(input.split(" ")[1]);
