@@ -80,9 +80,9 @@ public class Parser {
     private enum ErrorMsg {
         MARK("Mark command missing list numbering."),
         UNMARK("Unmark command missing list numbering."),
-        TODO("Todo command missing DESCRIPTION."),
-        DEADLINE("Deadline command missing DESCRIPTION."),
-        EVENT("Event command missing DESCRIPTION."),
+        TODO("Todo command missing description."),
+        DEADLINE("Deadline command missing description."),
+        EVENT("Event command missing description."),
         DELETE("Delete command missing list numbering."),
         FIND("Find command missing terms."),
         DEFAULT("Sorry but I don't understand what this means.");
