@@ -14,11 +14,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * The DialogBox class handles the UI of the duke bot.
+ * It includes methods getUser and getDuke dialog which gives different designs.
+ */
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates a dialogbox with Text and Image.
+     * @param l the text to be displayed.
+     * @param iv the image to be displayed
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -47,6 +56,11 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Creates a dialogbox with Text and Image for the User.
+     * @param l the text to be displayed.
+     * @param iv the image to be displayed
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         DialogBox user = new DialogBox(l, iv);
         Color color = Color.rgb(136, 172, 224);
@@ -54,7 +68,11 @@ public class DialogBox extends HBox {
         user.setBackground(new Background(new BackgroundFill(color, radius , Insets.EMPTY)));
         return user;
     }
-
+    /**
+     * Creates a dialogbox with Text and Image for the bot.
+     * @param l the text to be displayed.
+     * @param iv the image to be displayed
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

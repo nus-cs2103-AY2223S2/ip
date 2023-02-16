@@ -1,6 +1,9 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -79,11 +82,7 @@ public class Storage {
      * @return the corresponding boolean value
      */
     public static boolean strToBool(String str) {
-        if (str.equalsIgnoreCase("1")) {
-            return true;
-        } else {
-            return false;
-        }
+        return str.equalsIgnoreCase("1");
     }
     /**
      * Saves a list of tasks to a file.
