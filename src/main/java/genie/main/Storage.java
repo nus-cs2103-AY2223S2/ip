@@ -78,15 +78,10 @@ public class Storage {
                 break;
             }
         }
-        saveListToFile(tasks.getTasks()); //TODO !! save by each task as stopping program/bugs wipes all data
+        //saveListToFile(tasks.getTasks());
         return tasks;
     }
-    /*
-    public void saveTaskToFile(genie.task.Task t) throws IOException {
-        fw.write(t.toString());
-        fw.write("\n");
-    }
-    */
+
     /**
      * Closes <code>FileWriter</code>.
      * @throws IOException if an error occurs in closing <code>FileWriter</code>
@@ -114,6 +109,10 @@ public class Storage {
      * @return task list in <code>ArrayList&lt;String&gt;</code>
      */
     public ArrayList<String> getLoadedTaskList() {
-        return this.loadedTasks;
+        return loadedTasks;
+    }
+
+    public boolean isEmpty() {
+        return loadedTasks.size() == 0;
     }
 }

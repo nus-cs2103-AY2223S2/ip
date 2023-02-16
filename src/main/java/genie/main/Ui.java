@@ -20,10 +20,14 @@ public class Ui {
     /**
      * Prints greet message.
      */
-    public void appendGreetingMessage() {
+    public void appendNewUserGreeting() {
         response.append("Hello! This is Genie, your personal task tracker!\n\n");
-        response.append("To get started, here is a list of commands that I recognise:\n");
-        response.append(showAllCommands());
+        appendGreetingHelpMessage();
+    }
+    public void appendOldUserGreeting(ArrayList<String> loadedTasks) {
+        response.append("Hey, glad to have you back!\n\n");
+        appendLoadedTasks(loadedTasks);
+        appendCustomMessage("\nNow, what can I do for you?");
     }
 
     /**
@@ -58,7 +62,7 @@ public class Ui {
      */
     public void appendAddTaskMessage(Task t, int size) {
         response.append("Got it. I've added this task:\n  " + t.toString() + "\n");
-        response.append("Now you have " + size + " tasks in the list.");
+        response.append("Now you have " + size + " task(s) in the list.");
     }
 
     /**
@@ -81,7 +85,7 @@ public class Ui {
      * Prints add farewell message.
      */
     public void showFarewellMessage() {
-        response.append("Bye. Hope to see you again soon!\n");
+        response.append("Bye bye now, I hope you had a productive day!\n");
     }
 
     /**
@@ -129,6 +133,10 @@ public class Ui {
         response.append("\n");
         response.append(showAllCommands());
     }
+    public void appendGreetingHelpMessage() {
+        response.append("To get started, here is a list of commands that I recognise:\n");
+        response.append(showAllCommands());
+    }
     public String getResponse() {
         return response.toString();
     }
@@ -160,5 +168,18 @@ public class Ui {
                 "• bye\n" +
                 "    - saves your task list and terminates the application";
         return allCommands;
+    }
+
+    public void appendLoadedTasks(ArrayList<String> loadedTasks) {
+        String strTasks = "Here is a record of your task list from where you had previously left off:\n";
+        for (int i = 0; i < loadedTasks.size(); i++) {
+            String task = loadedTasks.get(i);
+            int number = i + 1;
+            strTasks += "  " + number + ". " + task + "\n";
+        }
+        response.append(strTasks);
+    }
+    public void appendCustomMessage(String customMessage) {
+        response.append(customMessage);
     }
 }
