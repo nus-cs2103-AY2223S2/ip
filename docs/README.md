@@ -32,7 +32,7 @@ Lists all completed and incompleted tasks.
 
 ## Usage
 
-#### todo
+### todo
 
 Adds a task into task list and outputs success message.
 
@@ -52,7 +52,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-#### deadline
+### deadline
 
 Adds a task with deadline into task list and outputs success message.
 
@@ -72,7 +72,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-#### event
+### event
 
 Adds an event task occurring over a period into task list and outputs success message.
 
@@ -92,7 +92,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-#### mark
+### mark
 
 Marks a task from task list as complete and outputs success message.
 
@@ -112,7 +112,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-#### unmark
+### unmark
 
 Unmarks a task from task list as incomplete and outputs success message.
 
@@ -132,7 +132,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-#### delete
+### delete
 
 Deletes a task from task list and outputs success message.
 
@@ -152,7 +152,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-#### list
+### list
 
 Lists all task index from task list as complete and outputs success message.
 
