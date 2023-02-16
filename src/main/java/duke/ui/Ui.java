@@ -12,7 +12,7 @@ public class Ui {
      * @return String the initialization message.
      */
     public static String getInitMessage() {
-        String msg = "Hello and welcome! I'm Duke, a chatbot here to assist you. How can I help you today?\n\n"
+        String msg = "Hello and welcome! I'm Duke, a chatbot here to assist you. How may I help you today?\n\n"
                 + "Here are the commands: \n"
                 + "bye \n"
                 + "list \n"
