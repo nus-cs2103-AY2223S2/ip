@@ -20,7 +20,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setMinHeight(200);
-            stage.setMinWidth(600);
+            stage.setMinWidth(500);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

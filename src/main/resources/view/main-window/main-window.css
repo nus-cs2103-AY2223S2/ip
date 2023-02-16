@@ -12,9 +12,9 @@
 /* ================================ MAIN WINDOW ================================ */
 .app-container {
     -fx-min-height: 200;
-    -fx-pref-width: 600;
+    -fx-pref-width: 500;
     -fx-padding: 10;
-    -fx-font-size: 14;
+    -fx-font-size: 13;
     -fx-font-family: monospace;
     -fx-font-weight: bold;
     -fx-background-color: -white;
@@ -25,7 +25,7 @@
     -fx-pref-height: 75;
     -fx-max-width: Infinity;
     -fx-text-fill: -black;
-    -fx-font-size: 28;
+    -fx-font-size: 26;
     -fx-alignment: top-right;
 }
 
@@ -34,7 +34,7 @@
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-min-height: 50;
-    -fx-pref-height: 600;
+    -fx-pref-height: 500;
     -fx-fit-to-width: true;
 }
 

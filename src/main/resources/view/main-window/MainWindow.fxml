@@ -7,7 +7,7 @@
 <?import java.net.URL?>
 
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.controllers.MainWindow" styleClass="app-container">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.controllers.MainWindow" styleClass="app-container">
     <top>
         <Label text="/* ask-prof-duke */" styleClass="header-title" />
     </top>

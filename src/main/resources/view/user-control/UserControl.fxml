@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/fxml" styleClass="user-control-outer-container">
+<fx:root type="javafx.scene.layout.StackPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml" styleClass="user-control-outer-container">
     <children>
         <StackPane alignment="CENTER">
             <BorderPane styleClass="user-control-inner-container">
