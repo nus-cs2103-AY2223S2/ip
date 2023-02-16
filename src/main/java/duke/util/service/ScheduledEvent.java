@@ -29,11 +29,18 @@ public class ScheduledEvent extends Task {
         this.dateEnd = dateEnd;
     }
 
+    public ScheduledEvent(LocalDateTime dateBegin,
+                          LocalDateTime dateEnd, String action, boolean isDone) {
+        super("E", action, isDone);
+        this.dateBegin = dateBegin;
+        this.dateEnd = dateEnd;
+    }
+
     @Override
     public String getAdditionalInfo() {
-        return " (FROM: " + dateBegin.format(
+        return " /FROM " + dateBegin.format(
                 DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy"))
-                + " TO: " + dateEnd.format(
+                + " /TO " + dateEnd.format(
                         DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) + ")";
     }
 

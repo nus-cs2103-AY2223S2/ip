@@ -1,5 +1,6 @@
 package duke.workflow;
 
+import duke.util.Storage;
 import duke.util.TaskList;
 
 /**
@@ -10,7 +11,7 @@ import duke.util.TaskList;
  */
 
 public class Greeting extends Event {
-    private int status;
+    private String status;
 
     /**
      * Constructs the {@code Greeting} event that greets the user.
@@ -19,21 +20,11 @@ public class Greeting extends Event {
      */
     public Greeting() {
         super(false);
-        this.status = -1;
+        this.status = "";
     }
 
-    /**
-     * Constructs the {@code Greeting} event that greets the user. The
-     * flag status inPlay is decided by the user
-     *
-     * @param inPlay the flag status to decided whether the program
-     *               will end or will continue to run. 0 if the user
-     *               doesn't want to use Duke, and 1 if he/ she does.
-     */
-
-    public Greeting(int inPlay) {
-        super(false);
-        this.status = inPlay;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     /**
@@ -43,11 +34,13 @@ public class Greeting extends Event {
      *          {@code DoTask} if the user wants to use Duke.
      */
 
-    public Event toNext() {
-        if (this.status == 0) {
+    public Event toNextEvent() {
+        if (this.status.equals("NOT PLAYING")) {
             return new Ending();
         } else {
-            return new DoTask();
+            DoTask doTask = new DoTask();
+            doTask.setTaskList(Storage.loadProgress());
+            return doTask;
         }
     }
     public TaskList getTaskList() {
@@ -59,8 +52,7 @@ public class Greeting extends Event {
         return this;
     }
 
-    @Override
-    public String toString() {
+    public String greet() {
         return "SHALL WE PLAY A GAME?";
     }
 }

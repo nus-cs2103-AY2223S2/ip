@@ -23,6 +23,14 @@ public class Task {
         this.action = action;
     }
 
+    public Task (String nature, String action, boolean isDone) {
+        this.nature = nature;
+        this.isDone = isDone;
+        this.action = action;
+    }
+
+
+
     /**
      * Mark a task as done.
      *

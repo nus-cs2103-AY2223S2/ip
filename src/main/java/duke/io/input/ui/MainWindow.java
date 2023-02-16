@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private UserInteraction chatbot = new UserInteraction();
+    private ChatBot chatbot = new ChatBot();
 
     private int runningDuke = -1;
 
@@ -77,15 +77,17 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(isPlaying, userImage));
         if (isPlaying.equals("NO")) {
-            Greeting greeting = new Greeting(0);
-            Event nextEvent = greeting.toNext();
+            Greeting greeting = new Greeting();
+            greeting.setStatus("NOT PLAYING");
+            Event nextEvent = greeting.toNextEvent();
             this.currentEvent = nextEvent;
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(nextEvent.toString(), dukeImage));
             return 0;
         } else if (isPlaying.equals("YES")) {
-            Greeting greeting = new Greeting(1);
-            Event nextEvent = greeting.toNext();
+            Greeting greeting = new Greeting();
+            greeting.setStatus("PLAYING");
+            Event nextEvent = greeting.toNextEvent();
             this.currentEvent = nextEvent;
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(nextEvent.toString(), dukeImage));
@@ -105,7 +107,7 @@ public class MainWindow extends AnchorPane {
         if (this.runningDuke < 0) {
             runningDuke = runDuke();
         } else if (runningDuke > 0) {
-            if (this.currentEvent.getStatus() == false) {
+            if (!this.currentEvent.isFinalEvent()) {
                 String input = userInput.getText();
                 userInput.clear();
                 this.currentEvent = this.currentEvent.toNextGui(input);
