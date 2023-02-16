@@ -74,15 +74,22 @@ public class MainWindow extends VBox {
     }
 
     /**
-     * Sets a reference that the duke chatbot started and shows the welcome message by the chatbot. Setup delay to
+     * Sets a reference to a new instance of duke chatbot and shows the welcome message by the chatbot. Setup delay to
      * close the GUI when time is up. Setup the alert box to have a minimum width as the one specified.
      *
-     * @param duke Duke instance
+     * @param filePath File path of saved data;
      */
-    public void setDuke(Duke duke) {
-        this.duke = duke;
+    public void setup(String filePath) {
+        this.duke = new Duke(filePath);
+
+        String errorMsg = duke.setup();
 
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
+
+        if (!errorMsg.equals("")) {
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMsg, dukeImage));
+        }
+
         delay.setOnFinished(event -> Platform.exit());
         alert.getDialogPane().setMinWidth(MIN_WIDTH);
     }

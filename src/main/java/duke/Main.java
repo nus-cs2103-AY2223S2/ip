@@ -23,10 +23,6 @@ public class Main extends Application {
      * The name of the chatbot.
      */
     public static final String DUKE_CHATBOT = "Duke Chatbot";
-    /**
-     * Duke instance with the given file path.
-     */
-    private final Duke duke = new Duke(FILE_PATH);
 
     /**
      * Creates a GUI with title of duke chatbot. It loads the main gui scene of the chatbot and sets it up.
@@ -48,7 +44,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle(DUKE_CHATBOT);
             stage.getIcons().add(new Image("/images/duke.png"));
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setup(FILE_PATH);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

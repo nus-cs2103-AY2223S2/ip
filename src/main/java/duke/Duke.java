@@ -26,20 +26,30 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Load a new chatbot with a new ui and storage. It obtains the data of the tasks stored if they are present. If
-     * not, a new empty list of tasks is assigned instead.
+     * Load a new chatbot with a new ui and storage with the file path provided.
      *
      * @param filePath The file path of where the tasks are stored
      */
     public Duke(String filePath) {
         textUi = new TextUi();
         storage = new Storage(filePath);
+    }
+
+    /**
+     * Setups duke tasklist by reading the data from the file specified by the file path. Returns a string
+     * representing the error if there is any when reading the data.
+     *
+     * @return String representing the error message
+     */
+    public String setup() {
+        String msg = "";
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            textUi.showError(e.getMessage());
+            msg = textUi.showError(e.getMessage());
             taskList = new TaskList();
         }
+        return msg;
     }
 
     /**
