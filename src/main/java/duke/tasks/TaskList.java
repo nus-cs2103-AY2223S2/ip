@@ -23,7 +23,8 @@ public class TaskList {
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int index = 0; index < this.tasks.size(); index++) {
-            result.append((index == 0 ? "" : "\n") + (index + 1) + ". " + this.tasks.get(index).toString());
+            boolean addNewLine = (index != 0 || index < this.tasks.size() - 1);
+            result.append((addNewLine ? "\n" : "") + (index + 1) + ". " + this.tasks.get(index).toString());
         }
         return result.toString();
     }
