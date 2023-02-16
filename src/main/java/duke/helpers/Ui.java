@@ -56,9 +56,10 @@ public class Ui {
         helpMessage += "todo xxx - this enters a Todo task, where xxx will be the task name.\n";
         helpMessage += "deadline xxx /by yyy - this enters a deadline task, where xxx will be the task name." +
                 "yyy will be the deadline timing.\n";
-        helpMessage += "deadline xxx /by dd/mm/yyyy - entering deadlines in this style registers the actual date!\n";
+        helpMessage += "deadline xxx /by dd/mm/yyyy TTTT (time in 24h)" +
+                " - entering deadlines in this style registers the actual date!\n";
         helpMessage += "event xxx /from yyy /to zzz - This enters a event task, with yyy and zzz being the start" +
-                "and end times of the event. They can be in dd/mm/yyyy form too. \n";
+                "and end times of the event. They can be in dd/mm/yyyy TTTT form too. \n";
         helpMessage += "\n----------------USEFUL COMMANDS-------------------\n\n";
         helpMessage += "find xxxx - Muse will find entry/entries with the word xxxx inside!\n";
         helpMessage += "delete x - Muse will delete the entry with the entry number x!\n";
