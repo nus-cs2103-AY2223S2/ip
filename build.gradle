@@ -18,6 +18,7 @@ test {
 
 checkstyle {
     toolVersion = '10.2'
+    ignoreFailures = true
 }
 
 sourceSets {

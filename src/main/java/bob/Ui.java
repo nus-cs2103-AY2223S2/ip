@@ -31,7 +31,7 @@ public class Ui {
      * @param list Given task list to output
      * @return String representation
      */
-    public String printList(ArrayList<Task> list) {
+    private String printList(ArrayList<Task> list) {
         assert list != null;
         if (list.size() == 0) {
             return "No tasks currently!";
@@ -54,12 +54,39 @@ public class Ui {
 
     public String printFilteredTasks(ArrayList<Task> list) {
         assert list != null;
+        // No matching tasks found
+        if (list.size() == 0) {
+            return wrapString("No matching tasks found!");
+        }
+
         return wrapString("Matching tasks:") + printList(list);
     }
 
     public String printTasks(ArrayList<Task> list) {
         assert list != null;
         return wrapString("Current task list: ") + printList(list);
+    }
+
+    public String printReminders(ArrayList<Deadline> reminders) {
+        assert reminders != null;
+        // No deadline tasks found
+        if (reminders.size() == 0) {
+            return wrapString("No deadlines ");
+        }
+
+        StringBuilder string = new StringBuilder();
+        // Iterate through list items sequentially
+        for (int i = 0, n = reminders.size(); i < n; i++) {
+            Deadline d = reminders.get(i);
+            String s = String.format("%d. %s | %s", i + 1, d.description, d.deadline);
+            string.append(s);
+            if (d.isOverdue()) {
+                string.append(" (overdue!) ");
+            }
+            string.append("\n");
+        }
+
+        return wrapString("Reminders on your deadlines: ") + string;
     }
 
     public String printIntroduction() {
