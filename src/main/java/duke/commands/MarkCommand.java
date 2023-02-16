@@ -2,9 +2,9 @@ package duke.commands;
 
 import duke.exceptions.DukeEmptyInputException;
 import duke.exceptions.DukeInvalidInputException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Storage;
+import duke.logic.TaskList;
+import duke.logic.Ui;
 
 /**
  * Represent the command to mark a task as done.

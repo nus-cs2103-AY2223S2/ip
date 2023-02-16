@@ -3,9 +3,9 @@ package duke.commands;
 import duke.exceptions.DukeEmptyInputException;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidInputException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Storage;
+import duke.logic.TaskList;
+import duke.logic.Ui;
 
 /**
  * Represents the command used to exit the program.
