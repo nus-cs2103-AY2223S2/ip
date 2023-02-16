@@ -66,7 +66,7 @@ public class Duke {
             isExit = command.isExit();
             if (isExit) {
                 reply += "\n" + saveTasks()
-                        + "\nPress Enter again to exit";
+                        + "\nTo exit, Press Enter You Must";
             }
             return reply;
         } catch (DukeException e) {

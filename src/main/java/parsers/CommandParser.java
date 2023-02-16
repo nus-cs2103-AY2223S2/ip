@@ -71,7 +71,7 @@ public class CommandParser extends Parser {
         } catch (DukeException e) {
             throw e;
         } catch (IllegalArgumentException e) {
-            throw new UnknownCommandException("Fall to the Dark Side, you must not."
+            throw new UnknownCommandException("Fall to the Dark Side, you must not. "
                     + "Invalid Command!", null);
         }
     }
