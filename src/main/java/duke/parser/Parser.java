@@ -23,8 +23,8 @@ public class Parser {
     /**
      * Parses user input as adder command for execution.
      *
-     * @param userInput user's input string
-     * @return A command with respect to the user's input
+     * @param userInput user's input string.
+     * @return A command with respect to the user's input.
      */
     public static Command parseAdderCommand(String userInput) {
         String[] inputs = userInput.split(" ");
@@ -42,6 +42,20 @@ public class Parser {
         default:
             return new Command();
         }
+    }
+
+    /**
+     * Parses user input as marker command for execution.
+     * @param userInput user's input string.
+     * @param isMark A boolean to indicate if it is mark or unmark command.
+     * @return A command with respect to the user's input.
+     */
+    public static Command parseMarkerCommand(String userInput, Boolean isMark) {
+        int idx = Integer.parseInt(userInput.split(" ")[1]);
+        if (isMark) {
+            return new MarkCommand(idx);
+        }
+        return new UnmarkCommand(idx);
     }
 
     /**
@@ -66,12 +80,8 @@ public class Parser {
             return new ListCommand();
         } else if (userInput.equals("bye")) {
             return new ExitCommand();
-        } else if (matchMark.matches()) {
-            int idx = Integer.parseInt(userInput.split(" ")[1]);
-            return new MarkCommand(idx);
-        } else if (matchUnmark.matches()) {
-            int idx = Integer.parseInt(userInput.split(" ")[1]);
-            return new UnmarkCommand(idx);
+        } else if (matchMark.matches() || matchUnmark.matches()) {
+            return parseMarkerCommand(userInput, matchMark.matches());
         } else if (matchDelete.matches()) {
             int idx = Integer.parseInt(userInput.split(" ")[1]);
             return new DeleteCommand(idx);
