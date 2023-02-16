@@ -88,6 +88,7 @@ public class TaskStore {
                 while (fileScanner.hasNextLine()) {
                     tasks.add(Task.parse(fileScanner.nextLine()));
                 }
+                fileScanner.close();
             } catch (FileNotFoundException e) {
                 this.taskFile.createNewFile();
             }
