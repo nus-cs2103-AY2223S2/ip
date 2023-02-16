@@ -19,9 +19,9 @@ DukeyGPT0.01 has a few recognised commands:
 - remove [index]: removes a task at index [index]
 - find [keyword]: finds a task whose description matches the keyword, at least partially.
 
-## Using DukeyGPT0.01 is _FUN_!
+## Using DukeyGPT0.01 is [_FUN_](https://user-images.githubusercontent.com/113227987/219424104-2ebfd467-7088-438a-ba7a-ec800dd02e9a.png)!
 
-[Ui](https://user-images.githubusercontent.com/113227987/219423599-c84bb4ef-81ac-4596-9d5a-4331310b9b19.png)
+
    ```
    Hello from
    me
