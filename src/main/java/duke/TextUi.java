@@ -3,10 +3,8 @@ package duke;
 import duke.task.Task;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 public class TextUi {
-    private final static String BORDER = "***************************";
-    private final static String DASH = "___________________________";
-    private final static String LOGO = "Current no available Logo";
     private final static String USER_INSTRUCTION = "" +
             "TODO  :  Adds a task to task list    [ Format :  TODO_<TASK_DESCRIPTION> ]" + '\n' +
             "LIST  :  List ALL tasks from task list     [ Format : LIST ]" + '\n' +
@@ -20,8 +18,7 @@ public class TextUi {
             "( DATE_TIME = YYYY-MM-DD HHMM )" + '\n' +
             "DELETE  :  Remove task from task list    " +
             "[ Format :  DELETE_<TASK_NUMBER> ]" +'\n' +
-            "BYE  :  Exits the app" + '\n' +
-            DASH + '\n' ;
+            "BYE  :  Exits the app" + '\n';
     private final static String ADD_TASK_MESSAGE =
             "Nice! I've added this task to your task list :" ;
     private final static String MARK_TASK_MESSAGE =
@@ -32,24 +29,14 @@ public class TextUi {
             "NOTED. I've removed this task from your task list :";
     private final static String FIND_TASK_MESSAGE = "Here are some similar tasks I have found in your task list:";
 
-    public String showBorder() {
-        return BORDER;
-    }
-
     public String showGreetMessage() {
-        return BORDER + '\n' +
-            LOGO + '\n' + '\n' +
-            "------WELCOME !!!------" + '\n' +
-            "I am Panda, your personal task manager. How may I assist you today?" +
-                '\n' + '\n' + USER_INSTRUCTION;
+        return "I am Panda, your personal task manager. How may I assist you today?";
     }
 
     public String readUserCommand() {
         Scanner sc = new Scanner(System.in);
-        System.out.println(BORDER);
         System.out.println("Enter Commands :");
         String userCommand = sc.nextLine();
-        System.out.println(BORDER);
         return userCommand;
     }
 
@@ -58,39 +45,36 @@ public class TextUi {
                 " tasks in your task list.";
     }
     public String showAddTaskMessage(Task task) {
-        return BORDER +  '\n' +
-                ADD_TASK_MESSAGE + '\n' +
-                task;
+        return ADD_TASK_MESSAGE + '\n'
+                + task;
     }
 
     public String showMarkTaskMessage(Task task) {
-        return BORDER +  '\n' +
-                MARK_TASK_MESSAGE + '\n' +
-                task + '\n' +
-                BORDER;
+        return MARK_TASK_MESSAGE + '\n'
+                + task;
     }
 
     public String showUnmarkTaskMessage(Task task) {
-        return BORDER +  '\n' +
-                UNMARK_TASK_MESSAGE + '\n' +
-                task + '\n' +
-                BORDER;
+        return UNMARK_TASK_MESSAGE + '\n'
+                + task;
     }
 
     public String showDeleteTaskMessage(Task task) {
-        return BORDER + '\n' +
-                DELETE_TASK_MESSAGE + '\n' +
-                task;
+        return DELETE_TASK_MESSAGE + '\n'
+                + task;
     }
 
     public String showTaskList(TaskList taskslist) {
-        taskslist.list();
-        return BORDER;
+        String taskList = "These are the tasks in your task list :" + '\n';
+        for (Task task : taskslist.getList()) {
+            taskList += "" + task + '\n';
+        }
+        taskList += "" + showTotalCountMessage(taskslist);
+        return taskList;
     }
 
     public String showFindMessage() {
-        return BORDER + '\n' +
-                FIND_TASK_MESSAGE;
+        return FIND_TASK_MESSAGE;
     }
 
     public String showLoadingError() {
@@ -102,10 +86,8 @@ public class TextUi {
     }
 
     public String showExitMessage() {
-        return BORDER + '\n'
-                + "It's great working with you! "
-                + "See you again soon. BYE!!!"
-                + BORDER;
+        return "It's great working with you! "
+                + "See you again soon. BYE!!!";
     }
 
 }

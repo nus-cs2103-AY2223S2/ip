@@ -1,5 +1,3 @@
-[X] Event : date [ Feb 14 2023 - Feb 14 2023 ]
-[ ] Todo : play
-[ ] Todo : run
-[ ] Event : drink [ Jan 02 2023 - Jan 02 2023 ]
-[ ] Todo : run
+[ ] Event : concert [ Feb 03 2023 - Feb 03 2023 ]
+[X] Todo : singggg
+[X] Todo : run
