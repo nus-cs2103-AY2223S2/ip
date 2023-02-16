@@ -1,0 +1,36 @@
+.background {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Times";
+    -fx-text-fill: brown;
+    -fx-opacity: 0.9;
+}
+
+.send-button {
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #f0ffff;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: brown;
+    -fx-opacity: 0.9;
+}
+
+.vertical-box {
+    -fx-background-insets: 2px;
+    -fx-background-radius: 6px;
+    -fx-padding: 10px;
+    -fx-opacity: 0.9;
+}
+
+.scroll-pane {
+    -fx-opacity: 0.7;
+    -fx-background-color: transparent;
+}
+
