@@ -6,8 +6,8 @@ import duke.query.exception.UnknownCommandException;
 import java.util.HashMap;
 
 public class QueryProcessor {
-    private static final String GOODBYE_RES = "GOOD BYE!";
-    private static final String UNKNOWN_COMMAND_RES = "Your command is not of the known tongue!";
+    private static final String UNKNOWN_COMMAND_RES = "I do not know what to do for \"%s\". Please try again.";
+    private static final String COMMAND_FAILED_RES = "Sorry, but I could not perform my duties!";
     private final HashMap<String, QueryHandler> commandToQueryHandler;
 
     public QueryProcessor(QueryModule... modules) throws DukeException {
@@ -23,7 +23,7 @@ public class QueryProcessor {
             QueryHandler queryHandler = getQueryHandler(query.getCommand());
             return queryHandler.processQuery(query);
         } catch (DukeException e) {
-            return "I have failed you my liege! " + e.getMessage();
+            return COMMAND_FAILED_RES + "\n" + e.getMessage();
         }
     }
 
@@ -32,6 +32,6 @@ public class QueryProcessor {
             return commandToQueryHandler.get(command);
         }
 
-        throw new UnknownCommandException(UNKNOWN_COMMAND_RES);
+        throw new UnknownCommandException(String.format(UNKNOWN_COMMAND_RES, command));
     }
 }

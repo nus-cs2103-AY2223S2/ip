@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LoanAccount {
-    private String holder;
+    private final String holder;
     private final Queue<Loan> activeLoans = new LinkedList<Loan>();
     private final ArrayList<Loan> record = new ArrayList<Loan>();
 

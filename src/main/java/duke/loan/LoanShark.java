@@ -32,15 +32,19 @@ public class LoanShark {
 
     public String getAccountLoanRecordString(String accountHolder) {
         if (!loanAccounts.containsKey(accountHolder)) {
-            return String.format("No loan account belongs to %s!", accountHolder);
+            return getMissingLoanAccountString(accountHolder);
         }
         return loanAccounts.get(accountHolder).getRecordString();
     }
 
     public String getAccountActiveLoansString(String accountHolder) {
         if (!loanAccounts.containsKey(accountHolder)) {
-            return String.format("No loan account belongs to %s!", accountHolder);
+            return getMissingLoanAccountString(accountHolder);
         }
         return loanAccounts.get(accountHolder).getActiveLoansString();
+    }
+
+    private static String getMissingLoanAccountString(String accountHolder) {
+        return String.format("No loan account belongs to %s!", accountHolder);
     }
 }
