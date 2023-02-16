@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 public class Task {
-    private String title;
+    private final String title;
     private Boolean isDone;
 
     public Task(String title) {

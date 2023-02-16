@@ -7,11 +7,10 @@ import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>(100);
@@ -38,7 +37,7 @@ public class TaskList {
 
     /**
      * Adds a new todo to the task list
-     * @param title
+     * @param title of todo
      * @return new todo
      */
     public Todo addTodo(String title) {
@@ -49,7 +48,7 @@ public class TaskList {
 
     /**
      * Adds a new deadline to the task list
-     * @param title
+     * @param title of task
      * @param by date to finish deadline by
      * @return new deadline
      */
@@ -61,9 +60,9 @@ public class TaskList {
 
     /**
      * Adds a new event to the task list
-     * @param title
-     * @param from
-     * @param to
+     * @param title of event
+     * @param from date event starts
+     * @param to date event ends
      * @return new event
      */
     public Event addEvent(String title, LocalDate from, LocalDate to) {

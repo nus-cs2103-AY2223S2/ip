@@ -10,11 +10,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Storage {
-    private File dataFile;
+    private final File dataFile;
 
     public Storage(String filepath) {
-        File dataFile = new File(filepath);
-        this.dataFile = dataFile;
+        this.dataFile = new File(filepath);
     }
 
     /**
@@ -24,13 +23,15 @@ public class Storage {
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
-            if (!dataFile.createNewFile()) {
-                BufferedReader br = new BufferedReader(new FileReader(dataFile));
-                String line = br.readLine();
-                while (line != null) {
-                    tasks.add(Parser.parseSavedTask(line));
-                    line = br.readLine();
-                }
+            if (dataFile.createNewFile()) {
+                return tasks;
+            }
+
+            BufferedReader br = new BufferedReader(new FileReader(dataFile));
+            String line = br.readLine();
+            while (line != null) {
+                tasks.add(Parser.parseSavedTask(line));
+                line = br.readLine();
             }
             return tasks;
         } catch (Exception e) {

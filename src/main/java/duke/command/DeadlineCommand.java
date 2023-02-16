@@ -8,8 +8,8 @@ import duke.task.Task;
 import java.time.LocalDate;
 
 public class DeadlineCommand extends Command {
-    private String title;
-    private LocalDate by;
+    private final String title;
+    private final LocalDate by;
 
     public DeadlineCommand(String title, LocalDate by) {
         this.title = title;

@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.Storage;
 import duke.task.Task;
 public class DeleteCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;

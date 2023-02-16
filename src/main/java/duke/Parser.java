@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    private static DateTimeFormatter savedDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter savedDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Returns Task by parsing a saved string.
@@ -23,16 +23,20 @@ public class Parser {
     public static Task parseSavedTask(String savedTask) {
         String[] taskArr = savedTask.split("\\|");
         Task newTask;
-        if (taskArr[0].equals("T")) {
+        switch (taskArr[0]) {
+        case "T":
             newTask = new Todo(taskArr[2]);
-        } else if (taskArr[0].equals("D")) {
-            LocalDate by = LocalDate.parse(taskArr[3], savedDateFormatter);
+            break;
+        case "D":
+            LocalDate by = parseDate(taskArr[3]);
             newTask = new Deadline(taskArr[2], by);
-        } else if (taskArr[0].equals("E")) {
-            LocalDate from = LocalDate.parse(taskArr[3], savedDateFormatter);
-            LocalDate to = LocalDate.parse(taskArr[4], savedDateFormatter);
+            break;
+        case "E":
+            LocalDate from = parseDate(taskArr[3]);
+            LocalDate to = parseDate(taskArr[4]);
             newTask = new Event(taskArr[2], from, to);
-        } else {
+            break;
+        default:
             throw new DukeException();
         }
         return newTask;
@@ -75,24 +79,24 @@ public class Parser {
     }
 
     private static DeadlineCommand parseDeadline(String cmd) {
-        try {
             String[] cmdArr = cmd.split("/by");
             String title = cmdArr[0].replaceAll("deadline", "").trim();
-            LocalDate by = LocalDate.parse(cmdArr[1].substring(1), savedDateFormatter);
+            LocalDate by = parseDate(cmdArr[1].substring(1));
             return new DeadlineCommand(title, by);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Sorry! That is the incorrect date format. Please use dd/MM/yyyy");
-        }
     }
 
     private static EventCommand parseEvent(String cmd) {
-        try {
             String[] cmdArr = cmd.split("/from");
             String title = cmdArr[0].replaceAll("event", "").trim();
             String[] times = cmdArr[1].split("/to");
-            LocalDate from = LocalDate.parse(times[0].trim(), savedDateFormatter);
-            LocalDate to = LocalDate.parse(times[1].trim(), savedDateFormatter);
+            LocalDate from = parseDate(times[0].trim());
+            LocalDate to = parseDate(times[1].trim());
             return new EventCommand(title, from, to);
+    }
+
+    private static LocalDate parseDate(String dateString) {
+        try {
+            return LocalDate.parse(dateString, savedDateFormatter);
         } catch (DateTimeParseException e) {
             throw new DukeException("Sorry! That is the incorrect date format. Please use dd/MM/yyyy");
         }
