@@ -25,14 +25,15 @@ public class Parser {
     public Command parseCommand(String input) throws NerdException, IllegalArgumentException {
         String[] split = input.split(" ");
         CommandEnums type;
-
         try {
             type = CommandEnums.valueOf(split[0].toUpperCase().strip());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Sorry! I have no idea what that means ??? >:c");
         }
 
-        if (isEmptyCommand(split) && !type.getCommand().equals("list")) {
+        boolean isArgumentCommand = !type.getCommand().equals("list") && !type.getCommand().equals("bye");
+
+        if (isEmptyCommand(split) && isArgumentCommand) {
             throw new NerdException("According to my calculations, there are empty inputs!\n" +
                     "Please follow the valid command list above :D");
         }
