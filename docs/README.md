@@ -14,14 +14,15 @@
 2. [deadline](https://afiqzu.github.io/ip/#2-adding-a-deadline-task)
 3. [event](https://afiqzu.github.io/ip/#3-adding-an-event-task)
 4. [list](https://afiqzu.github.io/ip/#4-list-all-tasks)
-5. [delete](https://afiqzu.github.io/ip/#5-delete-task)
-6. [mark](https://afiqzu.github.io/ip/#6-mark-task-as-done)
-7. [unmark](https://afiqzu.github.io/ip/#7-unmark-task)
-8. [clear](https://afiqzu.github.io/ip/#8-clear-all-tasks)
-9. [note](https://afiqzu.github.io/ip/#9-add-a-new-note)
-10. [opennotes](https://afiqzu.github.io/ip/#10-open-current-notes-with-opennotes)
-11. [clearnotes](https://afiqzu.github.io/ip/#11-clear-current-notes-with-clearnotes)
-12. [help](https://afiqzu.github.io/ip/#12-open-command-list-with-help)
+5. [find](https://afiqzu.github.io/ip/#5-find-task)
+6. [delete](https://afiqzu.github.io/ip/#5-delete-task)
+7. [mark](https://afiqzu.github.io/ip/#6-mark-task-as-done)
+8. [unmark](https://afiqzu.github.io/ip/#7-unmark-task)
+9. [clear](https://afiqzu.github.io/ip/#8-clear-all-tasks)
+10. [note](https://afiqzu.github.io/ip/#9-add-a-new-note)
+11. [opennotes](https://afiqzu.github.io/ip/#10-open-current-notes-with-opennotes)
+12. [clearnotes](https://afiqzu.github.io/ip/#11-clear-current-notes-with-clearnotes)
+13. [help](https://afiqzu.github.io/ip/#12-open-command-list-with-help)
 
 
 ## Features
@@ -64,7 +65,18 @@ Tasks will be loaded from task log file.
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 5. `delete` task
+### 5. `find` task
+#### `find <keyword>`
+Display all tasks containing keyword.
+
+Example:
+1. `find book`
+2. `find CS2103T`
+
+[Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
+
+-------------------
+### 6. `delete` task
 #### `delete <task index>`
 Example:
 `delete 2`
@@ -75,7 +87,7 @@ Warning: this command is irreversible.
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 6. `mark` task as done
+### 7. `mark` task as done
 #### `mark <task index>`
 Example:
 `mark 3`
@@ -85,7 +97,7 @@ Task corresponding to its task index in task list will be marked as done.
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 7. `unmark` task
+### 8. `unmark` task
 #### `unmark <task index>`
 Example:
 `unmark 3`
@@ -95,7 +107,7 @@ Task corresponding to its task index in task list will be unmarked.
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 8. `clear` all tasks
+### 9. `clear` all tasks
 #### `clear`
 
 Clears all active tasks from task list.
@@ -103,7 +115,7 @@ Clears all active tasks from task list.
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 9. Add a new `note`
+### 10. Add a new `note`
 #### `note <note>`
 Example:
 1. `note Jack wants a watch as a birthday gift`
@@ -112,13 +124,13 @@ Example:
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 10. Open current notes with `opennotes`
+### 11. Open current notes with `opennotes`
 #### `opennotes`
 
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 11. Clear current notes with `clearnotes`
+### 12. Clear current notes with `clearnotes`
 #### `clearnotes`
 
 Warning: this command is irreversible.
@@ -126,7 +138,7 @@ Warning: this command is irreversible.
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
 
 -------------------
-### 12. Open command list with `help`
+### 13. Open command list with `help`
 #### `help`
 
 [Go back to command summary](https://afiqzu.github.io/ip/#command-summary)
