@@ -19,30 +19,33 @@ public class Ui {
     }
 
     public static String getAddOutput(Task task, TaskList taskList) {
-        return String.format("Got it. I've added this task:\n\n%s\n\nNow you have %d tasks in the list.",
-                task.toString(), taskList.getSize());
+        String taskStringToBePrinted = taskList.getSize() > 1 ? "tasks" : "task";
+        return String.format("Got it. I've added this task:\n\n%s\n\nNow you have %d %s in the list.",
+                task.toString(), taskList.getSize(), taskStringToBePrinted);
     }
 
     public static String getDeleteOutput(String taskString, TaskList taskList) {
-        return String.format("Noted. I've removed this task:\n\n%s\nNow you have %d tasks in the list.",
-                taskString, taskList.getSize());
+        String taskStringToBePrinted = taskList.getSize() > 1 ? "tasks" : "task";
+        return String.format("Noted. I've removed:\n%s\nNow you have %d %s in the list.",
+                taskString, taskList.getSize(), taskStringToBePrinted);
     }
 
     public static String getMarkOutput(String taskString) {
         return taskString.equals("")
                 ? "I marked nothing...\n"
-                : String.format("Nice! I've marked this task as done:\n%s", taskString);
+                : String.format("Nice! I've marked:\n%s", taskString);
     }
 
     public static String getUnmarkOutput(String taskString) {
         return taskString.equals("")
                 ? "I unmarked nothing...\n"
-                : String.format("OK, I've marked this task as not done yet:\n%s", taskString);
+                : String.format("OK, I've unmarked:\n%s", taskString);
     }
 
     public static String getListOutput(TaskList taskList) throws DukeException {
+        String taskStringToBePrinted = taskList.getSize() > 1 ? "tasks" : "task";
         if (taskList.getSize() > 0) {
-            String str = "Here are the tasks in your list:\n";
+            String str = String.format("Here are the %s in your list:\n", taskStringToBePrinted);
             for (int i = 1; i <= taskList.getSize(); i++) {
                 str = String.format("%s%s%d. %s\n", str, SEPARATOR, i, taskList.getTask(i - 1).toString());
             }
@@ -57,8 +60,9 @@ public class Ui {
     }
 
     public static String getFindOrSortOutput(ArrayList<Task> filteredTasks) {
+        String taskStringToBePrinted = filteredTasks.size() > 1 ? "tasks" : "task";
         if (filteredTasks.size() > 0) {
-            String str = "Here are the matching tasks in your list:\n";
+            String str = String.format("Here are the matching %s in your list:\n", taskStringToBePrinted);
             for (int i = 1; i <= filteredTasks.size(); i++) {
                 str = String.format("%s%s%d. %s\n", str, SEPARATOR, i, filteredTasks.get(i - 1));
             }
