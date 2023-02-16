@@ -206,9 +206,10 @@ Dudu should send you the following
 Here are the matching tasks in your list:
 1.[T][ ] study chapter 1
 ```
-<hr/>
 
 ![This is a screenshot of the outcome](image/find.png)
+
+<hr/>
 
 ### `bye` - Exit application
 
