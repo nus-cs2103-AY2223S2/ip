@@ -18,6 +18,8 @@ public class Parser {
         } else if (command.startsWith("unmark")) {
             int taskNumber = Integer.parseInt(command.split(" ")[1]);
             return new UnmarkCommand(taskNumber);
+        } else if (command.startsWith("deleteAll")) {
+            return new DeleteAllCommand(command.split(" ")[1]);
         } else if (command.startsWith("delete")) {
             int taskNumber = Integer.parseInt(command.split(" ")[1]);
             return new DeleteCommand(taskNumber);

@@ -36,10 +36,6 @@ public class Storage {
                 String currTask = s.nextLine();
                 String[] taskSplit = currTask.split(" \\| ");
 
-                for (String c : taskSplit) {
-                    System.out.println(c);
-                }
-
                 if (taskSplit[0].equals("T")) {
                     task = new Todo(taskSplit[2]);
                 } else if (taskSplit[0].equals("D")) {

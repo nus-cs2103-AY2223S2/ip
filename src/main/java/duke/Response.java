@@ -66,6 +66,37 @@ public class Response {
     }
 
     /**
+     * Returns message when tasks are deleted from the task list.
+     *
+     * @param removedTasks Tasks that were removed from task list.
+     * @param taskList Current list of tasks.
+     * @param keyword Keyword that was used to remove tasks.
+     * @return
+     */
+    public String showDeleteAllTasks(List<Task> removedTasks, List<Task> taskList, String keyword) {
+        String message = "Okay fine, I have removed these tasks which contain " + keyword + ":\n";
+
+        for (Task t : removedTasks) {
+            message += t.toString() + "\n";
+        }
+
+        message += "Now you have " + taskList.size() + " tasks left.";
+
+        return message;
+    }
+
+    /**
+     * Returns message when no tasks are found.
+     *
+     * @param keyword Keyword used to search for tasks.
+     * @return
+     */
+    public String showNoTasksFound(String keyword) {
+        return "Are you sure there are any tasks which contain "
+                + keyword + "?";
+    }
+
+    /**
      * Returns message when a new task is added to the task list.
      *
      * @param task Task that was added.
