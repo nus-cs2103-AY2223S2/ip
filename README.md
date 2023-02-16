@@ -13,7 +13,7 @@ Prerequisites: JDK 11.
 
 All you need to do to set it up:
 
-1. Download it from [here](https://github.com/GlennOngJunJie/ip/releases/tag/A-Jar)
+1. Download it from [here](https://github.com/GlennOngJunJie/ip/releases/tag/A-Release)
 2. Choose where you want to save your progress on your desktop
 3. Add todos, events, deadlines
 4. You can also mark task, unmark tasks, delete task or even find all the task with a particular name
