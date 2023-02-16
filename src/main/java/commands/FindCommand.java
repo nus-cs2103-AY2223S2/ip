@@ -1,12 +1,15 @@
 package commands;
 
-import tasks.TaskList;
-import utils.Storage;
-
+/**
+ * Represents a <code>Command</code> that when executed finds a task containing a given keyword.
+ */
 public class FindCommand extends Command{
     private String keyword;
-    private TaskList taskList;
 
+    /**
+     * Constructs a <code>FindCommand</code> for a particular keyword.
+     * @param keyword the tasks containing this keyword is found by the command when executed.
+     */
     public FindCommand(String keyword) {
         super();
         this.keyword = keyword;

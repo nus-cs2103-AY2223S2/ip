@@ -8,13 +8,16 @@ import utils.Storage;
 
 import java.io.IOException;
 
+/**
+ * Represents a <code>Command</code> that when executed adds a given task to the list of tasks.
+ */
 public class AddCommand extends Command implements IUndoable {
 
     private Task task;
 
     /**
-     * Returns a Command that when executed adds a task to the list of tasks.
-     * @param task
+     * Default constructor.
+     * @param task task to be added to task list.
      */
     public AddCommand(Task task) {
         this.task = task;
@@ -33,6 +36,7 @@ public class AddCommand extends Command implements IUndoable {
 
     }
 
+    @Override
     public void undo() {
         this.taskList.deleteTask(task);
     }

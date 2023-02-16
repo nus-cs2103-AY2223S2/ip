@@ -6,13 +6,16 @@ import tasks.Task;
 
 import java.io.IOException;
 
+/**
+ * Represents a <code>Command</code> that when executed deletes a task at a particular index.
+ */
 public class DeleteCommand extends Command implements IUndoable {
     private int index;
     private Task deletedTask;
 
     /**
-     * Returns a Command that when executed deletes a task at a given index of TaskList.
-     * @param index
+     * Constructs <code>DeleteCommand</code>.
+     * @param index of the task to be deleted.
      */
     public DeleteCommand(int index) {
         this.index = index;
@@ -32,6 +35,7 @@ public class DeleteCommand extends Command implements IUndoable {
         }
     }
 
+    @Override
     public void undo() {
         this.taskList.addTask(deletedTask, index);
     }

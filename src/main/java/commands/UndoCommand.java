@@ -1,5 +1,8 @@
 package commands;
 
+/**
+ * Represents a <code>Command</code> that when executed undoes the most recent command in history.
+ */
 public class UndoCommand extends Command {
 
 
