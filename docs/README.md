@@ -13,9 +13,14 @@
 
 <p> Berry feels happy for you~ See how her apperance changes when you are being productive!</p>
 
+### 3. Categorise Your Tasks `#amazing`
+
+<p> Why put all your tasks together? </p>
+You can hashtag them and put them into categories
+
 ## 🍒Usage🍒
 
-### `todo <task_name>` - adds a task to do 
+### `todo <task_name> [#<tag_name>]` - adds a task to do 
 
 This adds a new task for berry to manage.
 
@@ -33,7 +38,7 @@ You can do it! I've added this task for ya
 
 ---
 
-### `deadline <task_name> /by<YYYY-MM-DD>` - adds a task with a deadline
+### `deadline <task_name> /by<YYYY-MM-DD> [#<tag_name>]` - adds a task with a deadline
 
 This adds a new task with a deadline for berry to manage.
 
@@ -51,7 +56,7 @@ You can do it! I've added this task for ya
 
 ---
 
-### `event <task_name> /from<YYYY-MM-DD> /to<YYYY-MM-DD>` - adds an event
+### `event <task_name> /from<YYYY-MM-DD> /to<YYYY-MM-DD> [#<tag_name>]` - adds an event
 
 This adds a new task as an event between a time period for berry to manage.
 
