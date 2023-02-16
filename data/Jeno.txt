@@ -3,4 +3,4 @@ D | 1 | return book | 28/02/2023 15:00
 E | 0 | CS2103T Tutorial | 16/02/2023 15:00 - 16/02/2023 16:00
 T | 1 | eat lunch
 E | 0 | CS2103T Lecture | 17/02/2023 14:00 - 17/02/2023 16:00
-T | 1 | eat dinner
+T | 0 | eat dinner
