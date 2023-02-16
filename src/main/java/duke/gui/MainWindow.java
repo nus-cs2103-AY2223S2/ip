@@ -2,7 +2,7 @@ package duke.gui;
 
 import duke.Bot;
 import duke.BotResult;
-import duke.query.QueryTypeUtil;
+import duke.query.core.CoreModule;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -34,8 +34,8 @@ public class MainWindow extends AnchorPane {
 
     public void setBot(Bot b) {
         this.bot = b;
-        String greeting = bot.process(QueryTypeUtil.GREET_QUERY_TYPE).getResponse();
-        String help = bot.process(QueryTypeUtil.HELP_QUERY_TYPE).getResponse();
+        String greeting = bot.process(CoreModule.GREET_QUERY_TYPE).getResponse();
+        String help = bot.process(CoreModule.HELP_QUERY_TYPE).getResponse();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greeting, dukeImage),
                 DialogBox.getDukeDialog(help, dukeImage)

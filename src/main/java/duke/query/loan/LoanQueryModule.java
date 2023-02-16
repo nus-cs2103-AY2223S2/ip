@@ -6,9 +6,11 @@ import duke.exception.DukeException;
 import duke.loan.LoanShark;
 import duke.query.QueryHandler;
 import duke.query.QueryModule;
-import duke.query.QueryType;
 
 public class LoanQueryModule extends QueryModule {
+    public static final String LOAN_QUERY_TYPE = "loan";
+    public static final String LOAN_RECORD_QUERY_TYPE = "loan-record";
+
     private final LoanShark ls = new LoanShark();
 
     /**
@@ -20,11 +22,11 @@ public class LoanQueryModule extends QueryModule {
     }
 
     /**
-     * @param queryTypeToQueryHandler
+     * @param commandToQueryHandler
      */
     @Override
-    public void installQueryHandlers(HashMap<QueryType, QueryHandler> queryTypeToQueryHandler) {
-        queryTypeToQueryHandler.put(QueryType.LOAN, new LoanQueryHandler(ls));
-        queryTypeToQueryHandler.put(QueryType.LOAN_RECORD, new LoanRecordQueryHandler(ls));
+    public void installQueryHandlers(HashMap<String, QueryHandler> commandToQueryHandler) {
+        commandToQueryHandler.put(LOAN_QUERY_TYPE, new LoanQueryHandler(ls));
+        commandToQueryHandler.put(LOAN_RECORD_QUERY_TYPE, new LoanRecordQueryHandler(ls));
     }
 }

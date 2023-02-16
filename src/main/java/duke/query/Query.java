@@ -15,10 +15,6 @@ public class Query {
         return this.command;
     }
 
-    public QueryType getQueryType() {
-        return QueryTypeUtil.getQueryTypeFromString(this.command);
-    }
-
     public void setParam(String param) {
         this.param = param;
     }

@@ -3,12 +3,14 @@ package duke.query.core;
 import duke.exception.DukeException;
 import duke.query.QueryHandler;
 import duke.query.QueryModule;
-import duke.query.QueryType;
-import javafx.scene.control.cell.ProgressBarTableCell;
 
 import java.util.HashMap;
 
 public class CoreModule extends QueryModule {
+    public static final String GREET_QUERY_TYPE = "hi";
+    public static final String HELP_QUERY_TYPE = "help";
+    public static final String BYE_QUERY_TYPE = "bye";
+
     /**
      * @throws DukeException
      */
@@ -18,11 +20,11 @@ public class CoreModule extends QueryModule {
     }
 
     /**
-     * @param queryTypeToQueryHandler
+     * @param commandToQueryHandler
      */
     @Override
-    public void installQueryHandlers(HashMap<QueryType, QueryHandler> queryTypeToQueryHandler) {
-        queryTypeToQueryHandler.put(QueryType.GREET, new GreetQueryHandler());
-        queryTypeToQueryHandler.put(QueryType.HELP, new HelpQueryHandler());
+    public void installQueryHandlers(HashMap<String, QueryHandler> commandToQueryHandler) {
+        commandToQueryHandler.put(GREET_QUERY_TYPE, new GreetQueryHandler());
+        commandToQueryHandler.put(HELP_QUERY_TYPE, new HelpQueryHandler());
     }
 }

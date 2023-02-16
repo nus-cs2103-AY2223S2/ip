@@ -5,10 +5,17 @@ import java.util.HashMap;
 import duke.exception.DukeException;
 import duke.query.QueryHandler;
 import duke.query.QueryModule;
-import duke.query.QueryType;
 import duke.task.TaskTracker;
 
 public class TaskQueryModule extends QueryModule {
+    public static final String LIST_QUERY_TYPE = "list";
+    public static final String MARK_QUERY_TYPE = "mark";
+    public static final String UNMARK_QUERY_TYPE = "unmark";
+    public static final String DELETE_QUERY_TYPE = "delete";
+    public static final String TODO_QUERY_TYPE = "todo";
+    public static final String DEADLINE_QUERY_TYPE = "deadline";
+    public static final String EVENT_QUERY_TYPE = "event";
+    public static final String FIND_QUERY_TYPE = "find";
     private final TaskTracker tt = new TaskTracker();
 
     /**
@@ -20,17 +27,17 @@ public class TaskQueryModule extends QueryModule {
     }
 
     /**
-     * @param queryTypeToQueryHandler
+     * @param commandToQueryHandler
      */
     @Override
-    public void installQueryHandlers(HashMap<QueryType, QueryHandler> queryTypeToQueryHandler) {
-        queryTypeToQueryHandler.put(QueryType.TODO, new TodoQueryHandler(tt));
-        queryTypeToQueryHandler.put(QueryType.DEADLINE, new DeadlineQueryHandler(tt));
-        queryTypeToQueryHandler.put(QueryType.EVENT, new EventQueryHandler(tt));
-        queryTypeToQueryHandler.put(QueryType.LIST, new ListQueryHandler(tt));
-        queryTypeToQueryHandler.put(QueryType.FIND, new FindTaskQueryHandler(tt));
-        queryTypeToQueryHandler.put(QueryType.MARK, new MarkQueryHandler(tt));
-        queryTypeToQueryHandler.put(QueryType.UNMARK, new UnmarkQueryHandler(tt));
-        queryTypeToQueryHandler.put(QueryType.DELETE, new DeleteQueryHandler(tt));
+    public void installQueryHandlers(HashMap<String, QueryHandler> commandToQueryHandler) {
+        commandToQueryHandler.put(TODO_QUERY_TYPE, new TodoQueryHandler(tt));
+        commandToQueryHandler.put(DEADLINE_QUERY_TYPE, new DeadlineQueryHandler(tt));
+        commandToQueryHandler.put(EVENT_QUERY_TYPE, new EventQueryHandler(tt));
+        commandToQueryHandler.put(LIST_QUERY_TYPE, new ListQueryHandler(tt));
+        commandToQueryHandler.put(FIND_QUERY_TYPE, new FindTaskQueryHandler(tt));
+        commandToQueryHandler.put(MARK_QUERY_TYPE, new MarkQueryHandler(tt));
+        commandToQueryHandler.put(UNMARK_QUERY_TYPE, new UnmarkQueryHandler(tt));
+        commandToQueryHandler.put(DELETE_QUERY_TYPE, new DeleteQueryHandler(tt));
     }
 }

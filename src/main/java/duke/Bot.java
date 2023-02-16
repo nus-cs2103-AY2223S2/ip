@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.query.Query;
 import duke.query.QueryParser;
 import duke.query.QueryProcessor;
-import duke.query.QueryType;
 import duke.query.core.CoreModule;
 import duke.query.loan.LoanQueryModule;
 import duke.query.task.TaskQueryModule;
@@ -51,7 +50,7 @@ public class Bot {
         BotResult.BotStatus status = BotResult.BotStatus.Successful;
 
         Query query = QueryParser.parseQuery(input);
-        if (query.getQueryType() == QueryType.EXIT) {
+        if (query.getCommand().equals(CoreModule.BYE_QUERY_TYPE)) {
             status = BotResult.BotStatus.Exit;
         }
 
