@@ -88,7 +88,7 @@ public class TextUi {
      * @return The string being displayed
      */
     public String showDeleteTask(String taskString, int size) {
-        String msgHeader = "I've deleted this task into the list:";
+        String msgHeader = "I've deleted this task from the list:";
         String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
 
         String output = concatMsgs(msgHeader, taskString, msgFooter);
