@@ -197,8 +197,8 @@ public class Duke {
                     try {
                         System.out.println(LINE);
                         ToDo todos = new ToDo(splittedCmd[1]);
-                        bw.write("T / 0 / " + splittedCmd[1] + "\n");
                         list.add(todos);
+                        bw.write("T / 0 / " + splittedCmd[1] + "\n");
                         System.out.println("\t" + "Got it. I've added this task:");
                         System.out.println("\t" + todos.toString());
                         System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
@@ -215,8 +215,8 @@ public class Duke {
                         String task = request[0];
                         String date = request[1];
                         Deadline deadline = new Deadline(task, date);
-                        bw.write("D / 0 / " + task + " / " + date + "\n");
                         list.add(deadline);
+                        bw.write("D / 0 / " + task + " / " + date + "\n");
                         System.out.println("\t" + deadline.toString());
                         System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
                         System.out.println(LINE + "\n");
@@ -232,9 +232,9 @@ public class Duke {
                         String task = request[0];
                         String from = request[1];
                         String to = request[2];
-                        bw.write("E / 0 / " + task + "/ " + from + "/ " + to + "\n");
                         Event event = new Event(task, from, to);
                         list.add(event);
+                        bw.write("E / 0 / " + task + "/ " + from + "/ " + to + "\n");
                         System.out.println("\t" + event.toString());
                         System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
                         System.out.println(LINE + "\n");
