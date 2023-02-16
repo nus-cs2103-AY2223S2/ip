@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -94,6 +95,8 @@ public class Storage {
                         taskDetails = currTask.split(" \\[ ] ")[1];
                     }
 
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu");
+
                     switch (taskType) {
                     case "[T]":
                         task = new TodoTask(taskDetails, complete);
@@ -102,7 +105,7 @@ public class Storage {
                     case "[D]":
                         String deadlineName = taskDetails.split(" \\(by: ")[0];
                         String date = taskDetails.split(" \\(by: ")[1].split("\\)")[0];
-                        LocalDate deadLine = LocalDate.parse(date);
+                        LocalDate deadLine = LocalDate.parse(date, formatter);
                         task = new DeadlineTask(deadlineName, deadLine, complete);
                         break;
 
@@ -111,8 +114,8 @@ public class Storage {
                         String eventPeriod = taskDetails.split("\\(from: ")[1];
                         String startStr = eventPeriod.split(" to: ")[0];
                         String endStr = eventPeriod.split(" to: ")[1].split("\\)")[0];
-                        LocalDate start = LocalDate.parse(startStr);
-                        LocalDate end = LocalDate.parse(endStr);
+                        LocalDate start = LocalDate.parse(startStr, formatter);
+                        LocalDate end = LocalDate.parse(endStr, formatter);
                         task = new EventTask(eventName, start, end, complete);
                         break;
 

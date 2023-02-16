@@ -71,6 +71,7 @@ public class Parser {
                     selectedTask.check();
                     String markOutput = "Done! I've marked this task as done :D\n";
                     markOutput += selectedTask;
+                    storage.save(taskList);
                     return markOutput;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
@@ -87,6 +88,7 @@ public class Parser {
                     String unmarkOutput = "This task is apparently not done huh D:\n";
                     unselectedTask.unCheck();
                     unmarkOutput += unselectedTask;
+                    storage.save(taskList);
                     return unmarkOutput;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
@@ -178,6 +180,7 @@ public class Parser {
                     Task deleteTask = taskList.get(deleteIndex);
                     String deleteOutput = "Done! " + deleteTask + " has been deleted for good.";
                     taskList.remove(deleteIndex);
+                    storage.save(taskList);
                     return deleteOutput;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
@@ -215,8 +218,9 @@ public class Parser {
         }
     }
 
-    private String addTask(Task task, String name) {
+    private String addTask(Task task, String name) throws DukeException, IOException {
         taskList.add(task);
+        storage.save(taskList);
         return "Item added: " + name;
     }
 }
