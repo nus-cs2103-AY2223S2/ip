@@ -1,6 +1,10 @@
+# Java class files
+*.class
+
 # IDEA files
 /.idea/
 /out/
+/data/
 /*.iml
 
 # Gradle build files

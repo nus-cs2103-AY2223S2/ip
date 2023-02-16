@@ -1,0 +1,18 @@
+todo read book
+deadline return book /by June 6th
+deadline return book /by 2023-06-06
+event project meeting /from June 7th 2pm /to June 7th 4pm
+event project meeting /from 2023-06-07 14:00 /to 2023-06-07 18:00
+event carnival /from 2023-06-05 /to 2023-06-08
+list
+mark 0
+mark 5
+mark 1
+todo buy groceries
+delete 6
+delete 5
+on 2023-06-06
+event backward /from 2023-06-06 14:00 /to 2023-06-06 08:00
+help
+hello
+bye

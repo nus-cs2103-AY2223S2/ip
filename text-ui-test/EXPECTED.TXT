@@ -1,7 +1,112 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ |          ______    ______
+ | ____    |      |  |      |
+ |      |  |      |  |      |
+ | ____ |  |______|  |______|
 
+_______________________________________________________________________________________________
+Boo! Nice to meet you.
+I am here to scare all your problems away by keeping track of your tasks.
+What can I help you with today?
+
+Supported Commands:
+1. list -> Provides a list of existing tasks.
+2. mark X -> Marks task number X as done.
+3. unmark X -> Marks task number X as undone.
+4. todo taskName -> Creates a todo task with name taskName.
+5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.
+6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,
+   start date startDate, and end date endDate.
+7. delete X -> Deletes task number X from the list.
+8. on givenDate -> Displays all the tasks that occur on givenDate.
+9. help -> Prints the list of commands supported by this bot.
+
+Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Added task to list:
+[T][ ] read book
+Currently, there is 1 task in your list.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please check that you entered a valid date, and that the date should be in the format of
+yyyy-MM-dd hh:mm or yyyy-MM-dd.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Added task to list:
+[D][ ] return book (by: June 06 2023)
+Currently, there are 2 tasks in your list.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please check that you entered a valid date, and that the date should be in the format of
+yyyy-MM-dd hh:mm or yyyy-MM-dd.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Added task to list:
+[E][ ] project meeting (from: June 07 2023 14:00 to: June 07 2023 18:00)
+Currently, there are 3 tasks in your list.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Added task to list:
+[E][ ] carnival (from: June 05 2023 to: June 08 2023)
+Currently, there are 4 tasks in your list.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Here are the tasks in your list:
+1. [T][ ] read book
+2. [D][ ] return book (by: June 06 2023)
+3. [E][ ] project meeting (from: June 07 2023 14:00 to: June 07 2023 18:00)
+4. [E][ ] carnival (from: June 05 2023 to: June 08 2023)
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 4 tasks.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 4 tasks.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Poof! One less worry. The following task is now marked as done:
+[T][X] read book
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Added task to list:
+[T][ ] buy groceries
+Currently, there are 5 tasks in your list.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Please enter a valid task number. You currently have 5 tasks.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Ta-da! The following task has been deleted.
+[T][ ] buy groceries
+Current number of tasks is: 4.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Tasks on: June 06 2023
+1. [D][ ] return book (by: June 06 2023)
+2. [E][ ] carnival (from: June 05 2023 to: June 08 2023)
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Start date must be before end date.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Supported Commands:
+1. list -> Provides a list of existing tasks.
+2. mark X -> Marks task number X as done.
+3. unmark X -> Marks task number X as undone.
+4. todo taskName -> Creates a todo task with name taskName.
+5. deadline taskName /by date -> Creates a deadline task with name taskName and deadline date.
+6. event taskName /from startDate /to endDate -> Creates an event task with name taskName,
+   start date startDate, and end date endDate.
+7. delete X -> Deletes task number X from the list.
+8. on givenDate -> Displays all the tasks that occur on givenDate.
+9. help -> Prints the list of commands supported by this bot.
+
+Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Sorry. I do not understand this command. Please try again.
+_______________________________________________________________________________________________
+_______________________________________________________________________________________________
+Goodbye. Hope that I have managed to scare all your problems away.
+Have a great day! :)
+_______________________________________________________________________________________________
