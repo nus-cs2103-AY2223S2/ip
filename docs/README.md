@@ -96,7 +96,7 @@ Result:
 
 ### Mark
 
-`mark {Task Index}`
+`mark {task index}`
 
 Format: `mark 1`
 
@@ -109,7 +109,7 @@ Nice! I've marked this task as done:
 
 ### Unmark
 
-`unmark [Task Index]`
+`unmark [task index]`
 
 Format: `unmark 1`
 
@@ -121,6 +121,8 @@ Ok, I've marked this task as not done yet:
 ```
 
 ### Delete:
+
+`delete {task index}`
 
 Format: `delete 3`
 
@@ -161,14 +163,14 @@ Bye! Hope to see you again soon!
 
 ## Command Summary
 
-|                     Command                     |                            Description                            |
-|:-----------------------------------------------:|:-----------------------------------------------------------------:|
-|               todo `description`                |       Adds a todo with the given `description` to the list        |
-| deadline `description` /by `YYYY-MM-DD` `HH:MM` | Adds a deadline with the given `description` set by the datetime. |
-|   event `description` /from `when` /to `when`   |  Adds a event with the given `description` set by the datetime.   |
-|                      list                       |                   Lists all the current tasks.                    |
-|                mark `Task Index`                |        Marks task `Task Index` from the list as complete.         |
-|               unmark `Task Index`               |       Marks task `Task Index` from the list as incomplete.        |
-|               delete `Task Index`               |             Deletes task `Task Index` from the list.              |
-|                 find `keyword`                  |      Finds tasks which matches the `keyword` from the list.       |
-|                       bye                       |                        Exit from PlanPal.                         |
+|                 Command                  |                        Description                         |
+|:----------------------------------------:|:----------------------------------------------------------:|
+|               todo `task`                |       Adds a todo with the given `task` to the list        |
+| deadline `task` /by `YYYY-MM-DD` `HH:MM` | Adds a deadline with the given `task` set by the datetime. |
+|   event `task` /from `when` /to `when`   |  Adds a event with the given `task` set by the datetime.   |
+|                   list                   |                Lists all the current tasks.                |
+|            mark `task index`             |     Marks task `task index` from the list as complete.     |
+|           unmark `task index`            |    Marks task `task index` from the list as incomplete.    |
+|           delete `task index`            |          Deletes task `task index` from the list.          |
+|              find `keyword`              |   Finds tasks which matches the `keyword` from the list.   |
+|                   bye                    |                    Exits from PlanPal.                     |
