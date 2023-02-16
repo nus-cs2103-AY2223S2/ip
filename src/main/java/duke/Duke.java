@@ -12,7 +12,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.util.Scanner;
 
 public class Duke extends Application {
     private duke.Storage storage;
@@ -27,18 +26,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke(String filePath) {
-        storage = new Storage(filePath);
-        ui = new Ui();
-        parser = new Parser();
-        try {
-            tasks = new TaskList(storage.readFile());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
     public Duke() {
         storage = new Storage("data/tasks.txt");
         ui = new Ui();
@@ -51,23 +38,6 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * This method is called in the main method, and it runs the chatbot.
-     */
-    public void run() {
-        ui.greetings();
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            String str = sc.nextLine();
-            Parser.parse(str, tasks);
-            storage.writeToFile(tasks.getDukeList());
-
-            if (str.equals("bye")) {
-                break;
-            }
-        }
-    }
 
     @Override
     public void start(Stage stage) {
@@ -133,7 +103,6 @@ public class Duke extends Application {
 
 
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
