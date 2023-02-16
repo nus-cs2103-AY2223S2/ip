@@ -5,7 +5,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a ListCommand that implements the interface Command.
+ * Represents a ListCommand that implements the Command interface.
  */
 public class ListCommand implements Command {
 

@@ -7,7 +7,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a DeadlineCommand that implements the interface Command.
+ * Represents a DeadlineCommand that implements the Command interface.
  */
 public class DeadlineCommand implements Command {
     private String deadlineDescription;

@@ -7,7 +7,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents an EventCommand that implements the interface Command.
+ * Represents an EventCommand that implements the Command interface .
  */
 public class EventCommand implements Command {
     private String eventDescription;

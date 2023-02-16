@@ -7,7 +7,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a TodoCommand that implements the interface Command.
+ * Represents a TodoCommand that implements the Command interface.
  */
 public class TodoCommand implements Command {
     private String todoDescription;
