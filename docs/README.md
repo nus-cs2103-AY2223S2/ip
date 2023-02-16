@@ -34,6 +34,8 @@ Add a Deadline task to Duke. A Deadline task is a task that needs to be complete
 
 Format: `deadline [name] /by:[time]`
 
+- `[time]` needs to be in format: DD MMM YYYY HH:MM (e.g 17 Feb 2023 20:00)
+
 Example: `deadline ip /by:17 Feb 2023 23:59`
 
 ### Adding a Event task : `event`
@@ -41,6 +43,8 @@ Example: `deadline ip /by:17 Feb 2023 23:59`
 Add an Event task to Duke. An Event task is a task that is done within a specific timing.
 
 Format: `event [name] /from:[time] /to:[time]`
+
+- `[time]` needs to be in format: DD MMM YYYY HH:MM (e.g 17 Feb 2023 20:00)
 
 Example: `event tp group meeting /from:19 Feb 2023 22:00 /to:19 Feb 2023 23:00`
 

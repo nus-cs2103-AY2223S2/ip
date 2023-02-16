@@ -39,42 +39,6 @@ public class Parser {
     }
 
     /**
-     * Removes line breaks and unnecessary whitespaces from input.
-     *
-     * @param input The String input from user.
-     * @return String The String input without line break and unnecessary whitespaces.
-     */
-    private static String removeWhitespaceEnter(String input) {
-        return input.trim().replaceAll("/n", "");
-    }
-
-    /**
-     * Gets instruction from user input.
-     *
-     * @param inputs The user input.
-     * @return String The instruction word.
-     */
-    private static String getInstruction(String[] inputs) {
-        String instruction = inputs[0].split(" ", 2)[0];
-        return instruction.toLowerCase();
-    }
-
-    /**
-     * Splits the instruction from task name or selected number.
-     *
-     * @param inputs The user input.
-     * @return String[] The split input.
-     */
-    private static String[] splitFromInstruction(String inputs) {
-        return inputs.split(" ", 2);
-    }
-
-    private static String[] getItemCategory(String input) {
-        String[] items = input.split(":", 2);
-        return items;
-    }
-
-    /**
      * Checks if a user input is valid. Throws a DukeException is it is invalid.
      *
      * @param instruction The instruction from user input.
@@ -163,45 +127,6 @@ public class Parser {
         default:
             throw new DukeException(Ui.unreadableCommandResponse);
         }
-    }
-
-    private static boolean isValidItem(String item, String newInformation) {
-        if(item.equals("by") || item.equals("from") || item.equals("to")) {
-            return isValidTime(newInformation);
-        }
-        return true;
-    }
-
-    /**
-     * Checks if the time is in correct format.
-     *
-     * @param inputs The time in the form of a String inputted by the user.
-     * @return boolean Whether the time is in correct format.
-     */
-    private static boolean isValidTime(String... inputs) {
-        try {
-            for (String x: inputs) {
-                LocalDateTime.parse(x, FORMAT);
-            }
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Checks if the input by user to select task is valid.
-     *
-     * @param num The String input by user.
-     * @return boolean Whether the select task input by user is valid.
-     */
-    private static boolean isValidSelection(String num) {
-        try {
-            Integer.parseInt(num);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -300,5 +225,81 @@ public class Parser {
         }
 
         return command;
+    }
+
+    /**
+     * Removes line breaks and unnecessary whitespaces from input.
+     *
+     * @param input The String input from user.
+     * @return String The String input without line break and unnecessary whitespaces.
+     */
+    private static String removeWhitespaceEnter(String input) {
+        return input.trim().replaceAll("/n", "");
+    }
+
+    /**
+     * Gets instruction from user input.
+     *
+     * @param inputs The user input.
+     * @return String The instruction word.
+     */
+    private static String getInstruction(String[] inputs) {
+        String instruction = inputs[0].split(" ", 2)[0];
+        return instruction.toLowerCase();
+    }
+
+    /**
+     * Splits the instruction from task name or selected number.
+     *
+     * @param inputs The user input.
+     * @return String[] The split input.
+     */
+    private static String[] splitFromInstruction(String inputs) {
+        return inputs.split(" ", 2);
+    }
+
+    private static String[] getItemCategory(String input) {
+        String[] items = input.split(":", 2);
+        return items;
+    }
+
+
+    private static boolean isValidItem(String item, String newInformation) {
+        if(item.equals("by") || item.equals("from") || item.equals("to")) {
+            return isValidTime(newInformation);
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the time is in correct format.
+     *
+     * @param inputs The time in the form of a String inputted by the user.
+     * @return boolean Whether the time is in correct format.
+     */
+    private static boolean isValidTime(String... inputs) {
+        try {
+            for (String x: inputs) {
+                LocalDateTime.parse(x, FORMAT);
+            }
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the input by user to select task is valid.
+     *
+     * @param num The String input by user.
+     * @return boolean Whether the select task input by user is valid.
+     */
+    private static boolean isValidSelection(String num) {
+        try {
+            Integer.parseInt(num);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }
