@@ -4,8 +4,8 @@ Duke is a task planner chat bot that is optimized for Command Line Interface whi
 
 ## Features 
 
-### Adds a todo task
-A todo task is a task to be done, without any due dates. A todo task is represented by a 'T' in the first box.
+### Add a todo task
+A todo task is a task without any due dates. A todo task is represented by a 'T' in the first box.
 
 Input format:
 
@@ -23,8 +23,8 @@ Got it. I’ve added this task:
 [T][ ][ ] buy groceries
 ```
 
-### Adds a deadline task
-A dealine task is a task to be done, with a due dates. A deadline task is represented by a 'D' in the first box.
+### Add a deadline task
+A dealine task is a task with a due date. A deadline task is represented by a 'D' in the first box.
 
 Input format:
 
@@ -42,8 +42,8 @@ Got it. I’ve added this task:
 [D][ ][ ] quiz (by: Jan-01-2023)
 ```
 
-### Adds a event task
-A event task is a task to be done, that has a starting date and an ending date. An event task is represented by a 'E' in the first box.
+### Add a event task
+A event task is a task that has a starting date and an ending date. An event task is represented by a 'E' in the first box.
 
 Input format:
 
@@ -77,7 +77,7 @@ You have 3 tasks in the list.
 3.[E][ ][ ] CNY holiday (from: Jan-23-2023 to: Jan-24-2023)
 ```
 
-### Mark a task as done
+### Mark a task
 A task can be marked as done when it is completed. A task marked as done is represented by a ‘X’ in the second box.
 
 Input format:
@@ -96,7 +96,7 @@ Nice! I’ve marked this task as done:
 [T][X][ ] buy groceries
 ```
 
-### Unmark a task as done
+### Unmark a task
 A task can be unmarked as not done when it is not completed. A task marked as not done is represented by an empty space in the second box.
 
 Input format:
@@ -155,7 +155,7 @@ Here are the matching tasks in your list:
 ### Add recurrence to a task
 Users can add recurrence for task that is happening on a regular basis. The available frequencies are: daily, weekly, monthly, yearly. A task with recurrence is represented by the initial of the frequency in the third box.
 
-At the start of the day/week/month/year, the task will be automatically marked as not done. All dates related to the task (if any) will automatically be updated.
+At the start of the day/week/month/year, the task will be automatically marked as not done. All dates related to the task (if any) will automatically be updated according to the frequency of the recurrence.
 
 Input format:
 
