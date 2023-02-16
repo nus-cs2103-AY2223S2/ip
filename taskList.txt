@@ -1,3 +1,2 @@
 D|0|buy gameboy cartridge|2023-04-04
-T|0|listen to the radio
 E|0|sleepover @Bob's place|2023-05-05|2023-05-06

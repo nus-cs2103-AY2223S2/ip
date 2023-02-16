@@ -47,7 +47,7 @@ public class Parser {
             Platform.exit();
             return "Peace out!";
         default:
-            throw new DukeException("Sorry I do not understand the command");
+            throw new DukeException("Sorry I do not understand the command :(");
         }
     }
 

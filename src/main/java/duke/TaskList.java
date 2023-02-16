@@ -67,7 +67,7 @@ public class TaskList {
     public String deleteTask(int i) {
         Task t = this.tasks.remove(i);
         count--;
-        return "I have deleted task:\n  " + t + "\nNumber of tasks: " + count;
+        return "I have deleted the task:\n  " + t + "\nNumber of tasks: " + count;
     }
 
     /**
