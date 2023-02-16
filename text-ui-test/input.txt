@@ -1,0 +1,46 @@
+list
+todo
+todo test
+todo     test
+mark
+mark 7
+mark 4  6
+mark abc
+mark 1
+unmark
+unmark 2
+unmark 5    4
+unmark ab
+unmark 1
+delete
+delete 6
+delete 6    4
+delete hf
+delete 1
+list
+deadline
+deadline finish level 6
+deadline /by week 2
+deadline   /by week 2
+deadline finish level-6 /by
+deadline finish level-6 /by
+deadline finish level-6    /by
+deadline finish level-6 /by week 2
+deadline     finish level-6    /by     week 2
+mark      1
+unmark     1
+delete      1
+list
+event
+event work out
+event /from 2pm /to 4pm
+event       /from 2pm /to 4pm
+event work out /from 2pm /to
+event work out /from 2pm /to
+event work out /from 2pm      /to
+event work out /from /to 4pm
+event work out /from      /to 4pm
+event work out /from 2pm /to 4pm
+event     work out   /from    2pm    /to     4pm
+list
+bye
