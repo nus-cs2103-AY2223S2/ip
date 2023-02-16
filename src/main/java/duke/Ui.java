@@ -23,7 +23,7 @@ public class Ui {
     }
 
     Command acceptCommand(String command) throws DukeException {
-        return parser.processCommand(command, tasks);
+        return parser.processCommand(command.toLowerCase(), tasks);
     }
 
     static String showGreetingsMessage() {

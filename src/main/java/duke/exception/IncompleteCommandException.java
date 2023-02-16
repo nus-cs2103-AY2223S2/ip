@@ -8,6 +8,6 @@ public class IncompleteCommandException extends DukeException {
      * Constructor for IncompleteCommandException.
      */
     public IncompleteCommandException() {
-        super("The command entry is incomplete!");
+        super("The command is incomplete!");
     }
 }
