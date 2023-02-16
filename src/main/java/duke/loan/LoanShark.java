@@ -9,7 +9,7 @@ public class LoanShark {
         loanAccounts = new HashMap<>();
     }
 
-    public void addLoan(int amountInCents, String description, String holder) {
+    public Loan addLoan(int amountInCents, String description, String holder) {
         LoanAccount loanAccount;
 
         if (!loanAccounts.containsKey(holder)) {
@@ -20,9 +20,9 @@ public class LoanShark {
         }
 
         if (amountInCents > 0) {
-            loanAccount.addNewOwed(amountInCents, description);
-        } else if (amountInCents < 0) {
-            loanAccount.addNewOwe(amountInCents, description);
+            return loanAccount.addNewOwed(amountInCents, description);
+        } else {
+            return loanAccount.addNewOwe(amountInCents, description);
         }
     }
 
@@ -30,7 +30,17 @@ public class LoanShark {
         System.out.println(loanAccounts.get(accountHolder).getRecordString());
     }
 
-    public String getAccountActiveLoansString(String accountHolder) {
+    public String getAccountLoanRecordString(String accountHolder) {
+        if (!loanAccounts.containsKey(accountHolder)) {
+            return String.format("No loan account belongs to %s!", accountHolder);
+        }
         return loanAccounts.get(accountHolder).getRecordString();
+    }
+
+    public String getAccountActiveLoansString(String accountHolder) {
+        if (!loanAccounts.containsKey(accountHolder)) {
+            return String.format("No loan account belongs to %s!", accountHolder);
+        }
+        return loanAccounts.get(accountHolder).getActiveLoansString();
     }
 }

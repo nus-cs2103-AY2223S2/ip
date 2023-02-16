@@ -1,10 +1,11 @@
 package duke.query.loan;
 
 import duke.exception.DukeException;
+import duke.loan.Loan;
 import duke.loan.LoanShark;
+import duke.query.Query;
 import duke.query.QueryHandler;
 import duke.query.exception.InvalidCommandParamException;
-import duke.query.Query;
 
 public class LoanQueryHandler extends QueryHandler {
     private LoanShark loanShark;
@@ -23,11 +24,12 @@ public class LoanQueryHandler extends QueryHandler {
         String holder = getNotBlankArg(query, "/holder", "Please provide a holder for the loan!");
         int amount = getAmountFromQuery(query);
         String description = getNotBlankArg(query, "/description", "Please provide a description for the loan!");
-        loanShark.addLoan(amount, description, holder);
+        Loan newLoan = loanShark.addLoan(amount, description, holder);
 
-        StringBuilder response = new StringBuilder();
-        response.append(loanShark.getAccountActiveLoansString(holder));
-        return response.toString();
+        return String.format("New loan added:\n%s\n\nHere are your active loans.\n%s",
+                newLoan,
+                loanShark.getAccountActiveLoansString(holder)
+        );
     }
 
     private static int getAmountFromQuery(Query query) throws InvalidCommandParamException {

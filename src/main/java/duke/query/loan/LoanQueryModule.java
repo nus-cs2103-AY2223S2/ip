@@ -25,5 +25,6 @@ public class LoanQueryModule extends QueryModule {
     @Override
     public void installQueryHandlers(HashMap<QueryType, QueryHandler> queryTypeToQueryHandler) {
         queryTypeToQueryHandler.put(QueryType.LOAN, new LoanQueryHandler(ls));
+        queryTypeToQueryHandler.put(QueryType.LOAN_RECORD, new LoanRecordQueryHandler(ls));
     }
 }

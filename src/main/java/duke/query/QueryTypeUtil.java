@@ -16,6 +16,7 @@ public class QueryTypeUtil {
     public static final String EVENT_QUERY_TYPE = "event";
     public static final String FIND_QUERY_TYPE = "find";
     public static final String LOAN_QUERY_TYPE = "loan";
+    public static final String LOAN_RECORD_QUERY_TYPE = "loan-record";
 
     /**
      * @param queryTypeStr string that represents a query type
@@ -47,6 +48,8 @@ public class QueryTypeUtil {
             return QueryType.EXIT;
         case LOAN_QUERY_TYPE:
             return QueryType.LOAN;
+        case LOAN_RECORD_QUERY_TYPE:
+            return QueryType.LOAN_RECORD;
         default:
             return QueryType.UNKNOWN;
         }

@@ -20,7 +20,7 @@ public class LoanAccount {
                 .reduce(0, Integer::sum);
     }
 
-    public void addNewOwe(int amountInCents, String description) {
+    public Owe addNewOwe(int amountInCents, String description) {
         assert amountInCents < 0 : "Owe amount must be negative!";
         int oweBalance = attemptToResolveLoans(amountInCents);
         Owe newOwe = new Owe(holder, oweBalance, description);
@@ -28,9 +28,10 @@ public class LoanAccount {
             activeLoans.add(newOwe);
         }
         record.add(newOwe);
+        return newOwe;
     }
 
-    public void addNewOwed(int amountInCents, String description) {
+    public Owed addNewOwed(int amountInCents, String description) {
         assert amountInCents > 0 : "Owed amount must be positive!";
         int owedBalance = attemptToResolveLoans(amountInCents);
         Owed newOwed = new Owed(holder, owedBalance, description);
@@ -38,6 +39,7 @@ public class LoanAccount {
             activeLoans.add(newOwed);
         }
         record.add(newOwed);
+        return newOwed;
     }
 
     private int attemptToResolveLoans(int amountUsedToResolve) {
