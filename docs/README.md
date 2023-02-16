@@ -1,29 +1,62 @@
-# User Guide
+# PurrfectPlanner
 
-## Features 
+PurrfectPlanner is a desktop application for managing your tasks. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-### Feature-ABC
+![](Ui.png)
 
-Description of the feature.
 
-### Feature-XYZ
+## Commands
+1. todo
+2. deadline
+3. event
+4. delete
+5. list
+6. mark
+7. unmark
+8. find
+9. sort
 
-Description of the feature.
+### 1. Adding a todo task: `todo`
+`todo <task description>`
 
-## Usage
+example: `todo study`
 
-### `Keyword` - Describe action
+### 2. Adding a deadline task: `deadline`
+`deadline <task description> /by <deadline>`
 
-Describe the action and its outcome.
+example: `deadline study /by 2023-02-17`
 
-Example of usage: 
+### 3. Adding a event task: `event`
+`event <task description> /from <start time> /to <end time>`
 
-`keyword (optional arguments)`
+example: `event study /from 2023-02-17 /to 2023-02-18`
 
-Expected outcome:
+### 4. Delete a task: `delete`
+`delete <task index>`
 
-Description of the outcome.
+example: `delete 0`
 
-```
-expected output
-```
+### 5. Listing all tasks: `list`
+`list`
+
+example: `list`
+
+### 6. Mark a task as done: `mark`
+`mark <task index>`
+
+example: `mark 1`
+
+### 7. Mark a task as not done: `unmark`
+`unmark <task index>`
+
+example: `unmark 1`
+
+### 8. Find tasks that match the given keywords: `find`
+`find <keywords>`
+
+example: `find study read play`
+
+### 9. Sort tasks: `sort`
+`sort`
+
+example: `sort`

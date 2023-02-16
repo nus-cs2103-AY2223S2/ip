@@ -1,24 +1,62 @@
-# Duke project template
+# PurrfectPlanner
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+PurrfectPlanner is a desktop application for managing your tasks. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-## Setting up in Intellij
+![](docs/Ui.png)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Commands
+1. todo
+2. deadline
+3. event
+4. delete
+5. list
+6. mark
+7. unmark
+8. find
+9. sort
+
+### 1. Adding a todo task: `todo`
+`todo <task description>`
+
+example: `todo study`
+
+### 2. Adding a deadline task: `deadline`
+`deadline <task description> /by <deadline>`
+
+example: `deadline study /by 2023-02-17`
+
+### 3. Adding a event task: `event`
+`event <task description> /from <start time> /to <end time>`
+
+example: `event study /from 2023-02-17 /to 2023-02-18`
+
+### 4. Delete a task: `delete`
+`delete <task index>`
+
+example: `delete 0`
+
+### 5. Listing all tasks: `list`
+`list`
+
+example: `list`
+
+### 6. Mark a task as done: `mark`
+`mark <task index>`
+
+example: `mark 1`
+
+### 7. Mark a task as not done: `unmark`
+`unmark <task index>`
+
+example: `unmark 1`
+
+### 8. Find tasks that match the given keywords: `find`
+`find <keywords>`
+
+example: `find study read play`
+
+### 9. Sort tasks: `sort`
+`sort`
+
+example: `sort`
