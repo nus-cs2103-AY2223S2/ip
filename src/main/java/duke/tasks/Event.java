@@ -27,7 +27,7 @@ public class Event extends Task {
             this.end = LocalDate.parse(end);
         } catch (DateTimeParseException e) {
             throw new DukeException("Parse Error: " + e.getMessage() + "\n"
-                    + "\tAccepted format: \"YYYY-MM-DD\"");
+                    + "Accepted format: \"YYYY-MM-DD\"");
         }
 
     }

@@ -58,7 +58,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #daf8f9;");
+        db.setStyle("-fx-background-color: #FAC9B8;");
         return db;
     }
 

@@ -24,7 +24,7 @@ public class Deadline extends Task {
             this.deadline = LocalDate.parse(deadline);
         } catch (DateTimeParseException e) {
             throw new DukeException("Parse Error: " + e.getMessage() + "\n"
-                    + "\tAccepted format: \"YYYY-MM-DD\"");
+                    + "Accepted format: \"YYYY-MM-DD\"");
         }
     }
 
