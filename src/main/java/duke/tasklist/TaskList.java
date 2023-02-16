@@ -32,6 +32,7 @@ public class TaskList implements Serializable {
      * Adds a task into the ArrayList.
      * 
      * @param task the added task
+     * @return a reply message string.
      */
     public String addTask(Task task) {
         tasks.add(task);
@@ -60,6 +61,7 @@ public class TaskList implements Serializable {
      * Deletes a task from the ArrayList based on the given index.
      * 
      * @param index the index of the ArrayList.
+     * @return a reply message string.
      * @throws DukeException if the index is out of bounds.
      */
     public String deleteTask(int index) throws DukeException {
@@ -78,6 +80,7 @@ public class TaskList implements Serializable {
      * Marks a task from the ArrayList based on the given index.
      * 
      * @param index the index of the ArrayList.
+     * @return a reply message string.
      * @throws DukeException if the index is out of bounds.
      */
     public String markedTask(int index) throws DukeException {
@@ -95,6 +98,7 @@ public class TaskList implements Serializable {
      * Unmarks a task from the ArrayList based on the given index.
      * 
      * @param index the index of the ArrayList.
+     * @return a reply message string.
      * @throws DukeException if the index is out of bounds.
      */
     public String unmarkedTask(int index) throws DukeException {
@@ -127,6 +131,12 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
+    /**
+     * Filters for tasks based on the given keyword.
+     * 
+     * @param name the keyword to search in every task.
+     * @return a reply message string.
+     */
     public String filter(String name) {
         String message = "\nHere are the matching tasks in your list:" + "\n";
         Stream<Task> taskStream = this.tasks.stream();
@@ -136,6 +146,15 @@ public class TaskList implements Serializable {
         return message;
     }
 
+    /**
+     * Updates a task based on the specific index and type of update.
+     * 
+     * @param index the index of the array.
+     * @param type the type of update.
+     * @param newValue the updated value.
+     * @return a reply message string.
+     * @throws DukeException if the index is out of bounds.
+     */
     public String update(int index, UpdateType type, String newValue) throws DukeException {
         try {
             String message = "";
