@@ -50,6 +50,9 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         }
-        return "error";
+        String error = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        error += "Type 'help' to see a list of commands";
+        return error;
+
     }
 }

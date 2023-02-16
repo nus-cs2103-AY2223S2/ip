@@ -1,9 +1,11 @@
 package duke;
 
+import java.awt.*;
 import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,11 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -45,17 +48,23 @@ public class Duke extends Application {
     public void start(Stage stage) {
         storage = new Storage(System.getProperty("user.dir") + "/data/duke.txt");
         tasks = new TaskList(storage.load());
+        Color color = Color.rgb(202, 231, 193);
+        CornerRadii radius = new CornerRadii(5);
+        Background greenBackground = new Background(new BackgroundFill(color, radius, Insets.EMPTY));
 
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.setBackground(greenBackground);
         scrollPane.setContent(dialogContainer);
-
+        scrollPane.setBackground(greenBackground);
         userInput = new TextField();
+        userInput.setPromptText("task Watch The Good Dino /by Tomorrow"); //to set the hint text
+        userInput.requestFocus(); //to not setting the focus on that node so that the hint will display immediately
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
+        mainLayout.setBackground(greenBackground);
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);

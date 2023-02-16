@@ -7,10 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -31,11 +28,11 @@ public class DialogBox extends HBox {
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
-        final Circle clip = new Circle(50, 50, 50);
+        final Circle clip = new Circle(25, 25, 25);
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(50.0);
+        displayPicture.setFitHeight(50.0);
 
         text.setPadding(new Insets(0, 10, 0, 10));
         displayPicture.setClip(clip);
@@ -62,10 +59,14 @@ public class DialogBox extends HBox {
      * @param iv the image to be displayed
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        DialogBox user = new DialogBox(l, iv);
-        Color color = Color.rgb(136, 172, 224);
+        Color darkBlueColor = Color.rgb(136, 172, 224);
+        Color lightBlueColor = Color.rgb(173, 216, 230);
         CornerRadii radius = new CornerRadii(20);
-        user.setBackground(new Background(new BackgroundFill(color, radius , Insets.EMPTY)));
+        Background darkBlueBackground = new Background(new BackgroundFill(darkBlueColor, radius , Insets.EMPTY));
+        l.setBackground(darkBlueBackground);
+        l.setBorder(new Border(new BorderStroke(lightBlueColor, BorderStrokeStyle.SOLID, radius, new BorderWidths(1))));
+        DialogBox user = new DialogBox(l, iv);
+        //user.setBackground(lightBlueBackground);
         return user;
     }
     /**
@@ -74,11 +75,15 @@ public class DialogBox extends HBox {
      * @param iv the image to be displayed
      */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
+        Color lightBlueColor = Color.rgb(173, 216, 230);
+        Color darkBlueColor = Color.rgb(136, 172, 224);
+        CornerRadii radius = new CornerRadii(20);
+        Background lightBlueBackground = new Background(new BackgroundFill(lightBlueColor, radius , Insets.EMPTY));
+        l.setBackground(lightBlueBackground);
+        l.setBorder(new Border(new BorderStroke(darkBlueColor, BorderStrokeStyle.SOLID, radius, new BorderWidths(1))));
         var db = new DialogBox(l, iv);
         db.flip();
-        Color color = Color.rgb(173, 216, 230);
-        CornerRadii radius = new CornerRadii(20);
-        db.setBackground(new Background(new BackgroundFill(color, radius , Insets.EMPTY)));
+        //db.setBackground(lightBlueBackground);
         return db;
     }
 }

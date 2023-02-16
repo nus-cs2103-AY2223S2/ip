@@ -14,8 +14,8 @@ public class Ui {
         //Initial greeting
         String greet = "Hello! I'm Broccoli the dinosaur \n";
         greet += "                      <|°▿▿▿▿°|/ \n";
-        greet += "      What can I do for you?";
-        greet += " ‧˚₊•-----------୨୧-----------•‧₊˚⊹";
+        greet += "      What can I do for you?\n";
+        greet += " ‧˚₊•-----------୨୧-----------•‧₊˚⊹\n";
         greet += " input 'help' for a list of commands";
         return greet;
     }
@@ -26,7 +26,7 @@ public class Ui {
      * @return The formatted string of the list of tasks.
      */
     public static String displayList(ArrayList<Task> array) {
-        String list = "";
+        String list = "Here are the tasks in your list:\n";
         for (int j = 0; j < array.size(); j++) {
             list += "      " + (j + 1) + "." + array.get(j).toString() + "\n";
         }
@@ -41,9 +41,9 @@ public class Ui {
      */
     static String addTask(ArrayList<Task> array, Task t) {
         String output = "";
-        output += "     Got it. I've added this task:" + "\n";
+        output += "Got it. I've added this task:" + "\n";
         output += "     " + t.toString() + "\n";
-        output += "     Now you have " + array.size() + " tasks in the list.";
+        output += "Now you have " + array.size() + " tasks in the list.";
         return output;
     }
     /**
@@ -55,9 +55,9 @@ public class Ui {
      */
     static String removeTask(ArrayList<Task> array, String[] splitInput) {
         String output = "";
-        output += "      Noted. I've removed this task:" + "\n";
+        output += "Noted. I've removed this task:" + "\n";
         output += "      " + array.get((Integer.parseInt(splitInput[1]) - 1)).toString() + "\n";
-        output += "      Now you have " + array.size() + " tasks in the list." + "\n";
+        output += "Now you have " + array.size() + " tasks in the list." + "\n";
         return output;
     }
     /**
@@ -69,7 +69,7 @@ public class Ui {
      */
     static String markTask(ArrayList<Task> array, String[] splitInput) {
         String output = "";
-        output += "      Nice! I've marked this task as done:" + "\n";
+        output += "Nice! I've marked this task as done:" + "\n";
         output += "      " + array.get((Integer.parseInt(splitInput[1]) - 1)).toString();
         return output;
     }
@@ -82,7 +82,7 @@ public class Ui {
      */
     static String unmarkTask(ArrayList<Task> array, String[] splitInput) {
         String output = "";
-        output += "      OK, I've marked this task as not done yet:";
+        output += "OK, I've marked this task as not done yet:";
         output += "      " + array.get((Integer.parseInt(splitInput[1]) - 1)).toString();
         return output;
     }
