@@ -1,8 +1,13 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+
 
 /**
  * Abstract class to allow different commands to be inherited from.
@@ -37,7 +42,14 @@ public abstract class Command {
                 int indexOfBy = cmd.indexOf("/by ");
                 int indexOfDate = indexOfBy + 4;
                 String activity = cmd.substring(cmdtype.length() + 1, indexOfBy - 1);
-                String date = cmd.substring(indexOfDate);
+                String datetime = cmd.substring(indexOfDate);
+                LocalDate date = LocalDate.parse(datetime.split(" ")[0]);
+                LocalTime time = LocalTime.parse(datetime.split(" ")[1], DateTimeFormatter.ofPattern("HHmm"));
+                if (date.isBefore(LocalDate.now())) {
+                    throw new DukeException("The given date has passed! Please enter a new date.");
+                } else if (time.isBefore(LocalTime.now())) {
+                    throw new DukeException("The given time has passed! Please enter a new time.");
+                }
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("The format of a deadline: "
                         + "deadline {task} /by {YYYY-MM-DD} {HHMM}");
