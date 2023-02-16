@@ -1,6 +1,18 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.AddNoteCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DeleteNoteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.ListNoteCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -310,22 +322,13 @@ public class Parser {
         return indexAndNote;
     }
 
-//    public int checkListNote (String indexString, TaskList tasklist) throws ArgumentException {
-//        //check if index enter is a number
-//        if (!indexString.matches("[0-9]+")) {
-//            throw new ArgumentException("Index does not exist");
-//        }
-//
-//        int index = Integer.parseInt(indexString);
-//
-//        //check if index can be found in the task list
-//        if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
-//            throw new ArgumentException("Can't find the index");
-//        }
-//
-//        return index;
-//    }
-
+    /**
+     * Checks if the index given is valid
+     * @param indexString given by the user to be check
+     * @param tasklist to check if the index in within the boundary of the task list
+     * @return int version of the index
+     * @throws ArgumentException
+     */
     public int checkIndex(String indexString, TaskList tasklist) throws ArgumentException {
         //check if index enter is a number
         if (!indexString.matches("[0-9]+")) {

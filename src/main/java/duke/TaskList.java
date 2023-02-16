@@ -118,6 +118,10 @@ public class TaskList {
         return selectedTask.toString();
     }
 
+    /**
+     * All tasks that contains note will be return as a string
+     * @return string that represents all the task that contains note
+     */
     public String viewAllTasksWithNotes() {
         String output = "";
         for (int i = 0; i < allTasks.size(); i++) {
@@ -131,6 +135,11 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * A single task given the index that consist of the note will be return as string
+     * @param index of the task with note
+     * @return string of the single task with note given index
+     */
     public String viewSingleTaskWithNote(int index) {
         Task task = allTasks.get(index);
         if (task.getIsNoteBlank()) {
@@ -140,6 +149,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the notes in the task with the given index
+     * @param index of the task with the to be deleted note
+     * @return the task that consist of the deleted note
+     */
     public String deleteNoteInTask (int index) {
         Task task = allTasks.get(index);
         if (task.getIsNoteBlank()) {

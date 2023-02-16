@@ -59,6 +59,9 @@ public class Ui {
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * Ends the program
+     */
     public void exitProgram(){
         Platform.exit();
     }
