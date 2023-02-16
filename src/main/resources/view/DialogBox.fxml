@@ -13,7 +13,7 @@ https://se-education.org/guides/tutorials/javaFxPart4.html#javafx-tutorial-part-
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ScrollPane fx:id="scrollPane" minHeight="280.0" prefHeight="300.0"
-                    maxHeight="Infinity" prefWidth="490.0">
+                    maxHeight="Infinity" minWidth="450.0" prefWidth="450.0">
             <content>
                 <Label fx:id="dialog" text="Label" wrapText="true" />
             </content>
