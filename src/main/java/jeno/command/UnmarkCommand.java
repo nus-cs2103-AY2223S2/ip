@@ -27,8 +27,9 @@ public class UnmarkCommand extends Command {
      * @throws JenoException if index is invalid.
      */
     public Task getToUnmarkTask(String userInput, TaskList tasks) throws JenoException {
-        int toUnmark = Integer.parseInt(userInput.substring(7));
+        int toUnmark;
         try {
+            toUnmark = Integer.parseInt(userInput.substring(7));
             Task toUnmarkTask = tasks.getTask(toUnmark - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new JenoException("Oops! Please enter a valid index");

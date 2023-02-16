@@ -27,8 +27,9 @@ public class MarkCommand extends Command {
      * @throws JenoException if index is invalid.
      */
     public Task getToMarkTask(String userInput, TaskList tasks) throws JenoException {
-        int toMark = Integer.parseInt(userInput.substring(5));
+        int toMark;
         try {
+            toMark = Integer.parseInt(userInput.substring(5));
             Task toMarkTask = tasks.getTask(toMark - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new JenoException("Oops! Please enter a valid index");
