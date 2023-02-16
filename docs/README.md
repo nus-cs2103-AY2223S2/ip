@@ -7,7 +7,7 @@ the benefits of a Graphical User Interface (GUI).
 ***
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your computer. Else, you can install it from [here](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx).
-2. Download the latest Launcher.jar from [here]().
+2. Download the latest Launcher.jar from [here](https://github.com/RubyNguyen07/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open a command terminal. `cd` into the folder you put the jar file in, and use the `java -jar duke.Launcher.jar` command to run the application.
 5. Type the command in the input box and press `Send` to execute it. Some example commands you can try:
