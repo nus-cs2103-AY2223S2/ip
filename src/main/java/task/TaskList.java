@@ -17,35 +17,49 @@ public class TaskList extends ArrayList<Task> {
             String[] lineSplit = line.split("#");
             switch (lineSplit[0]) {
             case "T":
-                // To-do entry
-                Task todo = new Todo(lineSplit[2]);
-                if (parseInt(lineSplit[1]) == 1) {
-                    todo.setChecked(true);
-                }
-                this.add(todo);
+                initializeNewTodo(lineSplit);
                 break;
             case "D":
-                // task.Deadline
-                Task dead = new Deadline(lineSplit[2], lineSplit[3]);
-                if (parseInt(lineSplit[1]) == 1) {
-                    dead.setChecked(true);
-                }
-                this.add(dead);
+                initializeNewDeadline(lineSplit);
                 break;
             case "E":
-                // task.Event
-                Task event = new Event(lineSplit[2], lineSplit[3], lineSplit[4]);
-                if (parseInt(lineSplit[1]) == 1) {
-                    event.setChecked(true);
-                }
-                this.add(event);
-                //Fallthrough
+                initializeNewEvent(lineSplit);
+                break;
+            default:
+                System.out.println("Invalid input: " + line);
             }
         }
     }
 
-    public TaskList() {
+    private void initializeNewEvent(String[] lineSplit) {
+        // task.Event
+        Task event = new Event(lineSplit[2], lineSplit[3], lineSplit[4]);
+        if (parseInt(lineSplit[1]) == 1) {
+            event.setChecked(true);
+        }
+        this.add(event);
+    }
 
+    private void initializeNewTodo(String[] lineSplit) {
+        // To-do entry
+        Task todo = new Todo(lineSplit[2]);
+        if (parseInt(lineSplit[1]) == 1) {
+            todo.setChecked(true);
+        }
+        this.add(todo);
+    }
+
+    private void initializeNewDeadline(String[] lineSplit) {
+        // task.Deadline
+        Task dead = new Deadline(lineSplit[2], lineSplit[3]);
+        if (parseInt(lineSplit[1]) == 1) {
+            dead.setChecked(true);
+        }
+        this.add(dead);
+    }
+
+    public TaskList() {
+        super();
     }
 
     public void mark(int index) throws IndexOutOfBoundsException {
