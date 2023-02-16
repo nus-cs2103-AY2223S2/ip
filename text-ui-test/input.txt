@@ -1,0 +1,20 @@
+todo borrow book
+deadline return book /by 2019-10-15 1800
+event project meeting /from Aug 6th 2pm /to 4pm
+todo join sports club
+mark 1
+mark 4
+todo read book
+list
+deadline return book /by 2023-12-02 1350
+event project meeting /from Mon 2pm /to 4pm
+list test1
+todo
+deadline test2
+event test3
+blah
+delete 3
+list
+delete 2
+list
+bye
