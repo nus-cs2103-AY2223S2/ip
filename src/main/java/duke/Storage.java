@@ -17,7 +17,7 @@ class Storage {
     private static final Pattern TO_MATCH;
 
     static {
-        TO_MATCH = Pattern.compile("[0-9]*\\. \\[(?<type>[DTH])]\\[(?<done>[ X])] (?<arguments>.*)");
+        TO_MATCH = Pattern.compile("(?<index>[0-9]*)\\. \\[(?<type>[DTH])]\\[(?<done>[ X])] (?<arguments>.*)");
     }
 
     private final String fileName;
@@ -51,21 +51,22 @@ class Storage {
             if (!matcher.matches()) {
                 throw new DukeException("CorruptedTaskListException");
             }
+            String index = matcher.group("index");
             String taskType = matcher.group("type");
             boolean isDone = matcher.group("done").equals("X");
             String description = matcher.group("arguments");
             switch (taskType) {
             case "T":
                 task = tp.addTask("t " + description);
-                tp.setStatus(task[0], isDone);
+                tp.setStatus(index, isDone);
                 break;
             case "D":
                 task = tp.addTask("d " + description);
-                tp.setStatus(task[0], isDone);
+                tp.setStatus(index, isDone);
                 break;
             case "E":
                 task = tp.addTask("e " + description);
-                tp.setStatus(task[0], isDone);
+                tp.setStatus(index, isDone);
                 break;
             default:
                 throw new DukeException("CorruptedTaskListException");

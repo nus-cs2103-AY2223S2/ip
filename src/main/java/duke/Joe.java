@@ -26,7 +26,7 @@ class Joe {
         try {
             storage.write(parser.returnList(parser.getTaskList()));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return out;
     }

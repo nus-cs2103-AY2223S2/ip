@@ -55,7 +55,7 @@ class Parser {
     }
 
     String setStatus(String input, Boolean isDone) {
-        int i = Integer.parseInt(input.split(" ", 2)[1]) - 1;
+        int i = Integer.parseInt(input) - 1;
         Task task = taskList.get(i);
         task.setStatus(isDone);
         return String.format("\tNice! I've marked this task as done:\n\t  %s", task);
@@ -122,7 +122,7 @@ class Parser {
                 DukeException.rethrow("UnknownCommand");
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
