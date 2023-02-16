@@ -32,6 +32,10 @@ public class Deadline extends Task {
                 .ofPattern("MMM d yyyy"));
     }
 
+    public String getDeadline() {
+        return by.toString();
+    }
+
     /**
      * Returns task in saved data format.
      *

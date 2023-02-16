@@ -40,6 +40,14 @@ public class Event extends Task {
                 .ofPattern("MMM d yyyy"));
     }
 
+    public String getStartTime() {
+        return from.toString();
+    }
+
+    public String getEndTime() {
+        return to.toString();
+    }
+
     /**
      * Returns task in saved data format.
      *

@@ -2,31 +2,37 @@ package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 public class TodoTest {
+    private final String description = "Hello World";
+    private final Todo task = new Todo(description);
 
     @Test
-    public void getDescription() {
-        // A unit test for Task#getDescription
+    public void toSaveData() {
+        // A unit test for Todo#toSaveData
         // test setup
-        String description = "Hello World";
-        Todo task = new Todo(description);
+        String delimiter = " | ";
+        String saveData = "T"
+                + delimiter + " "
+                + delimiter + description;
 
         // automatically verify the response
-        assertEquals(task.getDescription(),
-                description);
+        assertEquals(task.toSaveData(delimiter),
+                saveData);
     }
 
     @Test
-    public void getStatusIcon() {
-        // A unit test for Task#getStatusIcon
+    public void generate() throws DukeException {
+        // A unit test for Todo#generate
         // test setup
-        String description = "Hello World";
-        Todo task = new Todo(description);
+        Todo task = Todo.generate("todo " + description);
 
         // automatically verify the response
+        assertEquals(task.getDescription(),
+                this.task.getDescription());
         assertEquals(task.getStatusIcon(),
-                " ");
+                this.task.getStatusIcon());
     }
 }
