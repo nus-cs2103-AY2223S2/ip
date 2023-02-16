@@ -4,7 +4,7 @@ To the point it's too much for your brain capacity that you end up
 forgetting to do something way too often!
 No worries as Squirtle is here to help you! 
 
-![This is an image](/../src/main/resources/images/squirtle.png)
+![This is an image](/squirtle.png)
 
 
 ## Features 
