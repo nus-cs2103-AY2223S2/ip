@@ -226,6 +226,12 @@ public class Ui {
         printText("Tell me what to note down and I'll remember it accordingly!");
         printBar();
     }
+
+    /**
+     * Prints the task list in a specific format to the console.
+     *
+     * @param taskList The task list to be printed.
+     */
     public static void printListFound(TaskList taskList) {
         printBar();
         if (taskList.isEmpty()) {
@@ -234,7 +240,7 @@ public class Ui {
             Ui.printText("Here are the task(s) I've found:");
             String[] strArr = taskList.toString().split("\n");
             for (int i = 0; i < strArr.length; i++) {
-                printText(indent + (i+1) + ". " + strArr[i]);
+                printText(indent + (i + 1) + ". " + strArr[i]);
             }
         }
         printBar();
