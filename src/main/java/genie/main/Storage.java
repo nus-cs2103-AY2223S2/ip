@@ -34,7 +34,7 @@ public class Storage {
      * @return <code>TaskList</code> containing an array of Tasks read from the file
      * @throws IOException if an error occurs while loading the data
      */
-    // @author mandykqh-reused
+    // @@author mandykqh-reused
     // Reused from https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create
     // -the-files-in-that-direct
     // with minor modifications
@@ -45,13 +45,12 @@ public class Storage {
         }
         File file = new File(PATH);
         if (file.createNewFile()) {
-            //System.out.println("Seems like you're new here. Welcome onboard and let's get started! ^-^");
             return new TaskList();
         } else {
             return readTextFileToList(file);
         }
     }
-    //@author
+    //@@author
     /**
      * Reads contents of the loaded .txt file into a <code>TaskList</code>.
      * @param f loaded file

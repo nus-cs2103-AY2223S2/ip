@@ -43,14 +43,18 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
-        //reuse
+        // @@author mandykqh-reuse
+        // Reused from https://github.com/nus-cs2103-AY2122S1/ip/commit/431922e7e6dad589d4fef90b2ec80aa3bb4a627e#diff
+        // -4bd115e01415644e457f638c000e6faa69119532fcf434e710c78868d688b943
+        // with minor modifications
         Circle circle = new Circle(
                 displayPicture.getFitWidth() / 2,
                 displayPicture.getFitHeight() / 2,
                 displayPicture.getFitWidth() / 2);
         displayPicture.setClip(circle);
+        // @@author
 
-        // @author mandykqh-reuse
+        // @@author mandykqh-reuse
         // Reused from https://stackoverflow.com/questions/20489908/border-radius-and-shadow-on-imageview
         // with minor modifications
         SnapshotParameters parameters = new SnapshotParameters();
@@ -58,7 +62,7 @@ public class DialogBox extends HBox {
         WritableImage image = displayPicture.snapshot(parameters, null);
         displayPicture.setClip(null);
         displayPicture.setEffect(new DropShadow(20, Color.BLACK));
-        // @author
+        // @@author
         displayPicture.setImage(image);
     }
 
@@ -74,12 +78,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        // @author mandykqh-reuse
-        // Reused from https://github.com/nus-cs2103-AY2122S1/ip/commit/431922e7e6dad589d4fef90b2ec80aa3bb4a627e#diff
-        // -4bd115e01415644e457f638c000e6faa69119532fcf434e710c78868d688b943
-        // with minor modifications
         dialogBox.dialog.getStyleClass().add("user-dialog");
-        // @author
         return dialogBox;
     }
 

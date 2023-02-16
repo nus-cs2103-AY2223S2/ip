@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * Adds <code>ToDo</code> into task list from user's input.
+     * Adds To do into task list from user's input.
      * @param i user's input
      * @return task
      */
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * Adds <code>ToDo</code> into task list from .txt file input.
+     * Adds To do into task list from .txt file input.
      * @param sf .txt input
      * @return task
      */
@@ -128,7 +128,7 @@ public class TaskList {
      * @param sf .txt input
      * @return task
      */
-    public Task addEventFromFile(String sf) { // todo load up saved tasks when app starts
+    public Task addEventFromFile(String sf) {
         char status = statusFromTaskInfo(sf);
         String desc = removeTypeAndStatus(sf);
 

@@ -15,14 +15,14 @@ public class AddCommand extends Command {
     private String fullCommand;
     private Task task;
 
-    public AddCommand(String taskType, String fullCommand) { //todo javadoc for command package
+    public AddCommand(String taskType, String fullCommand) {
         this.taskType = taskType;
         this.fullCommand = fullCommand;
     }
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         switch (taskType) {
-        case TODO: // todo change to constant
+        case TODO:
             task = taskList.addToDoFromUser(fullCommand);
             break;
         case DEADLINE:

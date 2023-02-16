@@ -23,7 +23,7 @@ public class Task {
      * @return "X" if marked done, " " otherwise
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /**
@@ -69,11 +69,15 @@ public class Task {
     public String getDescription() {
         return description;
     }
-    //reuse https://stackoverflow.com/questions/17134773/to-check-if-string-contains-particular-word
+
+    // @@author mandkqh-reuse
+    // Reused from: https://stackoverflow.com/questions/17134773/to-check-if-string-contains-particular-word
+    // with minor modifications
     public boolean containsWord(String keyword) {
         Pattern pattern = Pattern.compile("\\b" + keyword + "\\b", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(getDescription());
         return matcher.find();
     }
+    // @@author
 }
 

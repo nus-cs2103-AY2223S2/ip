@@ -21,7 +21,7 @@ public class Genie {
         try {
             tasks = storage.loadData();
         } catch (IOException e) {
-           e.getMessage(); //todo fix this
+           e.getMessage();
         }
     }
 

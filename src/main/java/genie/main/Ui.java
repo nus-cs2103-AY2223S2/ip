@@ -3,7 +3,6 @@ package genie.main;
 import genie.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
@@ -94,18 +93,6 @@ public class Ui {
     public void showErrorMessage() {
         response.append("Something went wrong here xx...\n");
     }
-    /*
-    public void printLoadedTaskList(ArrayList<String> tl) {
-        if (tl.isEmpty()) {
-            showEmptyListMessage();
-        } else {
-            response.append("Here is a record of your task list from where you had previously left off:\n");
-            for (int i = 0; i < tl.size(); i++) {
-                response.append("  " + tl.get(i) + "\n");
-            }
-            response.append("\nNow, what can I do for you?\n");
-    }
-    */
 
     /**
      * Prints empty list message.

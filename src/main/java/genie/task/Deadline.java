@@ -8,7 +8,7 @@ import java.util.Date;
  * Deals with creating deadline tasks.
  */
 public class Deadline extends Task {
-    protected String by; //TODO make by to be of type Date
+    protected String by;
 
     /**
      * A constructor that takes in the task descriptor and deadline.
@@ -18,7 +18,6 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        //this.by = parseDate(by);
     }
 
     /**
@@ -33,8 +32,6 @@ public class Deadline extends Task {
             this.by = formattedDate;
             return "[D]" + super.toString() + " (by: " + formattedDate + ")";
         } catch (ParseException e) {
-            //return "Sorry, I can't recognize this date format! ><\n" +
-            //        "Try this format instead: deadline xxx /by YYYY-MM-DD hh:mm";
             return "[D]" + super.toString() + " (by: " + this.by + ")";
         }
     }
@@ -51,25 +48,9 @@ public class Deadline extends Task {
             this.by = formattedDate;
             return "[D]" + super.toString() + " | " + formattedDate;
         } catch (ParseException e) {
-            //return "Sorry, I can't recognize this date format! ><\n" +
-            //        "Try this format instead: deadline xxx /by YYYY-MM-DD hh:mm";
             return "[D]" + super.toString() + " | " + this.by;
         }
     }
-
-    /*
-    public String parseDate(String date) {
-        try {
-            Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(this.by);
-            String formattedDate = new SimpleDateFormat("EEE, dd/MM/yyyy, hma").format(d);
-            return formattedDate;
-        } catch (ParseException e) {
-            //return "Sorry, I can't recognize this date format! ><\n" +
-            //        "Try this format instead: deadline xxx /by YYYY-MM-DD hh:mm";
-            return date;
-        }
-    }
-    */
 }
 
 

@@ -1,7 +1,5 @@
 package genie.task;
 
-import genie.task.Task;
-
 /**
  * Deals with creating event tasks.
  */
