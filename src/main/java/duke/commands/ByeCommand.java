@@ -10,7 +10,7 @@ import duke.storage.TaskList;
  */
 public class ByeCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws StorerEmptyException {
-        String message = "BYE! Hope to see you again soon!";
+        String message = "Bye! Remember not to abuse OpenAI's user policy!";
         ui.display(message);
         return message;
     }

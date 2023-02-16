@@ -33,7 +33,9 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle("DukeyGPT0.01");
 
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().greetUser();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

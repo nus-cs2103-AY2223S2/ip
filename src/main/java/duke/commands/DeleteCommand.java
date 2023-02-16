@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         } else {
 
             Task e = tasks.remove(this.num);
-            String message = "Noted. I've removed this task:\n"
+            String message = "Beep boop. I've removed this task:\n"
                     + e + "\n Now you have " + tasks.size() + " tasks in the list.";
 
             assert tasks.size() >= 0;

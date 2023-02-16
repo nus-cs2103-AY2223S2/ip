@@ -17,7 +17,7 @@ public class UndoCommand extends Command {
 
         tasks.replace(store.loadFile(this.index));
         store.deleteBefore(this.index);
-        return "Okay, I have undone what you did by " + index + " step.";
+        return "Okay, I have undone what you did by " + index + " step. Boop";
     }
 
 }

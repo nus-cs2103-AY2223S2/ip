@@ -74,7 +74,7 @@ public class Parser {
             String description = this.queries(line, Todos.KEYWORDS).get(0);
             c = new TodoCommand(new Todos(description));
             break;
-            case "event":
+        case "event":
             if (line.length == 1) {
                 throw new NoArgsException("deadline");
             } else if (joined.split("/").length != 3) {
