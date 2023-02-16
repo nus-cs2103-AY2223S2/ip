@@ -35,38 +35,43 @@ public class Parser {
 
         String[] words = inputLine.split(" ");
 
-        CommandType commandtype = CommandType.valueOf(words[0].toUpperCase());
-
-        switch (commandtype) {
-        case BYE:
-            return new ByeCommand();
-        case LIST:
-            return new ListCommand();
-        case MARK:
-            int taskNoMark = Integer.parseInt(words[1]);
-            return new MarkCommand(taskNoMark);
-        case UNMARK:
-            int taskNoUnmark = Integer.parseInt(words[1]);
-            return new UnmarkCommand(taskNoUnmark);
-        case DEADLINE:
-            String[] parts = inputLine.split("/");
-            Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
-            return new AddCommand(task);
-        case EVENT:
-            String[] parts1 = inputLine.split(" /");
-            Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
-            return new AddCommand(event);
-        case TODO:
-            Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
-            return new AddCommand(todo);
-        case DELETE:
-            return new DeleteCommand(Integer.parseInt(words[1]));
-        case FIND:
-            return new FindCommand(inputLine.split(" ", 2)[1]);
-        case TAG:
-            return new TagCommand(Integer.parseInt(words[1]), words[2]);
-        default:
+        try {
+            CommandType commandtype = CommandType.valueOf(words[0].toUpperCase());
+            switch (commandtype) {
+            case BYE:
+                return new ByeCommand();
+            case LIST:
+                return new ListCommand();
+            case MARK:
+                int taskNoMark = Integer.parseInt(words[1]);
+                return new MarkCommand(taskNoMark);
+            case UNMARK:
+                int taskNoUnmark = Integer.parseInt(words[1]);
+                return new UnmarkCommand(taskNoUnmark);
+            case DEADLINE:
+                String[] parts = inputLine.split("/");
+                Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
+                return new AddCommand(task);
+            case EVENT:
+                String[] parts1 = inputLine.split(" /");
+                Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
+                return new AddCommand(event);
+            case TODO:
+                Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
+                return new AddCommand(todo);
+            case DELETE:
+                return new DeleteCommand(Integer.parseInt(words[1]));
+            case FIND:
+                return new FindCommand(inputLine.split(" ", 2)[1]);
+            case TAG:
+                return new TagCommand(Integer.parseInt(words[1]), words[2]);
+            default:
+                throw new DukeException("Not a valid command: " + inputLine);
+            }
+        } catch (IllegalArgumentException e) {
             throw new DukeException("Not a valid command: " + inputLine);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Incorrect command format: " + inputLine);
         }
     }
 
