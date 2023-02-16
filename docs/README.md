@@ -15,7 +15,7 @@
 ## Features
 
 ### Track your Tasks!
-:writing_hand: Nemo supports the following 3 types of tasks. They can be deletes 
+:writing_hand: Nemo supports the following 3 types of tasks. 
 1. **ToDos** - a task that needs to be completed eventually
 2. **Deadlines** - a task that has a deadline for completion
 3. **Events** - a task that has a start and end date
