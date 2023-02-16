@@ -25,40 +25,89 @@ public class Parser {
      */
     public String processInput(String input) {
         String[] inputAnalyzed = input.split(" ");
-        if (input.contains("#")) {
-            return Ui.showInvalidInputError("Illegal character '#'.");
-        }
-        assert !input.contains("#"): "Input should not have #";
         try {
-            switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
-            case "bye":
-                return processByeOperation(inputAnalyzed);
-            case "list":
-                return processListOperation(inputAnalyzed);
-            case "mark":
-                return processMarkOperation(inputAnalyzed);
-            case "unmark":
-                return processUnmarkOperation(inputAnalyzed);
-            case "deadline":
-                return processDeadlineOperation(input);
-            case "todo":
-                return processTodoOperation(input);
-            case "event":
-                return processEventOperation(input);
-            case "delete":
-                return processDeleteOperation(inputAnalyzed);
-            case "find":
-                return processFindOperation(input);
-            default:
-                return Ui.unknownCommand();
-                //Fallthrough
-            }
+            checkIllegalCharacter(input);
+            operationText = checkOperationInputs(input, inputAnalyzed);
+            additionText =  checkAddEntryInputs(input, inputAnalyzed);
         } catch (InvalidInputException e) {
             return Ui.showInvalidInputError(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             return Ui.showArrayOutOfBoundsError();
         } catch (NumberFormatException e) {
             return Ui.showInvalidInputError("I only take integers for number inputs.");
+        }
+        assert !input.contains("#"): "Input should not have #";
+        if (operationText != null) {
+            return operationText;
+        } else if (additionText != null) {
+            return additionText;
+        } else {
+            return Ui.unknownCommand();
+        }
+    }
+
+    /**
+     * Checks if the input contains the # character, which interferes with the storing function of the program.
+     * @param input the user's input
+     * @throws InvalidInputException for when the user has written an input with #
+     */
+    public void checkIllegalCharacter(String input) throws InvalidInputException {
+        if (input.contains("#")) {
+            throw new InvalidInputException("Illegal character '#'.");
+        }
+    }
+
+    /**
+     * Checks if the user's input corresponds to one of the commands that operates the list or the program at large, and
+     * calls the corresponding commands if so.
+     * @param input the user's input
+     * @param inputAnalyzed the user's input after splitting based on spaces
+     * @return the output text to be displayed on the UI, or null if the input does not match
+     * @throws InvalidInputException when the user inputs their command in the wrong format
+     * @throws IndexOutOfBoundsException when the user attempts to access a position in the list that doesn't exist
+     * @throws NumberFormatException when the user inputs something other than an integer
+     */
+    public String checkOperationInputs(String input, String[] inputAnalyzed) throws InvalidInputException,
+            IndexOutOfBoundsException, NumberFormatException {
+        switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
+        case "bye":
+            return processByeOperation(inputAnalyzed);
+        case "list":
+            return processListOperation(inputAnalyzed);
+        case "mark":
+            return processMarkOperation(inputAnalyzed);
+        case "unmark":
+            return processUnmarkOperation(inputAnalyzed);
+        case "delete":
+            return processDeleteOperation(inputAnalyzed);
+        case "find":
+            return processFindOperation(input);
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * Checks if the user's input corresponds to one of the commands that adds new elements to the list, and calls the
+     * corresponding commands if so.
+     * @param input the user's input
+     * @param inputAnalyzed the user's input after splitting based on spaces
+     * @return the output text to be displayed on the UI, or null if the input does not match
+     * @throws InvalidInputException when the user inputs their command in the wrong format
+     * @throws IndexOutOfBoundsException when the user attempts to access a position in the list that doesn't exist
+     * @throws NumberFormatException when the user inputs something other than an integer
+     */
+    public String checkAddEntryInputs(String input, String[] inputAnalyzed) throws InvalidInputException,
+            IndexOutOfBoundsException, NumberFormatException {
+        switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
+        case "deadline":
+            return processDeadlineOperation(input);
+        case "todo":
+            return processTodoOperation(input);
+        case "event":
+            return processEventOperation(input);
+        default:
+            return null;
         }
     }
 
@@ -148,9 +197,9 @@ public class Parser {
                     + "with i being an integer.");
         }
         int index = parseInt(inputAnalyzed[1]);
-        Task temp = list.get(index - 1);
+        Task tempTask = list.get(index - 1);
         list.remove(index - 1);
-        return Ui.showDeleteSuccess(temp, list);
+        return Ui.showDeleteSuccess(tempTask, list);
     }
 
 
@@ -174,9 +223,9 @@ public class Parser {
         if (details.equals("")) {
             throw new InvalidInputException("Missing deadline description.");
         }
-        Deadline newDead = new Deadline(details, date);
-        list.add(newDead);
-        return Ui.showAddTaskSuccess(newDead, list);
+        Deadline newDeadline = new Deadline(details, date);
+        list.add(newDeadline);
+        return Ui.showAddTaskSuccess(newDeadline, list);
     }
 
 
@@ -211,7 +260,6 @@ public class Parser {
      */
 
     private String processEventOperation(String input) throws IndexOutOfBoundsException, InvalidInputException {
-        //Analyze
         String[] eventAnalyze;
         String[] timeAnalyze;
         try {
@@ -220,18 +268,18 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException("Missing /from or /to. Format is \"event [name] /from [time] /to [time]\"");
         }
-        String start = timeAnalyze[0].trim();
-        String over = timeAnalyze[1].trim();
+
+        String startTime = timeAnalyze[0].trim();
+        String overTime = timeAnalyze[1].trim();
         String details = eventAnalyze[0]
                             .split("event")[1]
                             .trim();
-        if (start.equals("") || over.equals("") || details.equals("")) {
+        if (startTime.equals("") || overTime.equals("") || details.equals("")) {
             throw new InvalidInputException("Missing details for at least one of the sections.");
         }
         //Add Item
-        Event newEvent = new Event(details, start, over);
+        Event newEvent = new Event(details, startTime, overTime);
         list.add(newEvent);
-        //UI.Ui Section
         return Ui.showAddTaskSuccess(newEvent, list);
     }
 
