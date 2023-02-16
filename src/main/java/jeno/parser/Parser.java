@@ -95,7 +95,8 @@ public final class Parser {
         case "clearnotes":
             return new ClearNotesCommand(userInput);
         default:
-            throw new JenoException("Invalid command type");
+            throw new JenoException("Oops! Please enter a valid command.\n" +
+                    "To view list of features, type in 'help' in the command box.");
         }
     }
 }

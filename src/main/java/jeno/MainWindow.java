@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = jeno.getResponse(input);
-        if(response.startsWith("Oops")) {
+        if (response.startsWith("Oops")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getJenoErrorDialog(response, jenoImage)

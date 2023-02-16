@@ -17,7 +17,10 @@
          </font>
          <HBox.margin>
             <Insets />
-         </HBox.margin></Label>
+         </HBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Label>
         <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
