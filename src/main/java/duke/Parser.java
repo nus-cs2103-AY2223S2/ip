@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -32,31 +33,31 @@ public class Parser {
      * @param tasks The task list to be modified.
      * @return The task list after parsing through user input from the scanner.
      */
-    public TaskList parse(String input) throws DukeException {
+    public Command parse(String input) throws DukeException {
         if (isFind(input)) {
-            return find(input, tasks);
-        }else if (isBye(input)) {
-            return bye(tasks);
+            return new Find(input);
+        } else if (isBye(input)) {
+            parserIsDone = true;
+            return new Bye(input);
         } else if (isList(input)) {
-            Ui.listMessage(tasks);
+            return new ListTasks(input);
         } else if (isMark(input, tasks.size())) {
-            return mark(input, tasks);
+            return new Mark(input);
         } else if (isUnMark(input, tasks.size())) {
-            return unMark(input, tasks);
+            return new Unmark(input);
         } else if (isDelete(input, tasks.size())) {
-            return delete(input, tasks);
+            return new Delete(input);
         } else {
             if (isToDo(input)) {
-                tasks.add(newToDo(input, tasks.size() + 1));
+                return new Add(input, "todo");
             } else if (isDeadline(input)) {
-                tasks.add(newDeadline(input, tasks.size() + 1));
+                return new Add(input, "deadline");
             } else if (isEvent(input)) {
-                tasks.add(newEvent(input, tasks.size() + 1));
+                return new Add(input, "event");
             } else {
                 throw new DukeException("Please input a task with either todo, deadline or event prefixed!");
             }
         }
-        return tasks;
     }
 
     /**
@@ -76,25 +77,6 @@ public class Parser {
      */
     public boolean isFind(String input) {
         return input.length() >= 6 && input.startsWith("find ");
-    }
-
-    /**
-     * Searches for and prints out a list of tasks containing the queried term in a find command.
-     *
-     * @param input The input String.
-     * @param tasks The TaskList to be searched.
-     * @return The original TaskList unmodified.
-     */
-    public TaskList find(String input, TaskList tasks) {
-        String searchFor = input.substring(5);
-        TaskList found = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription().contains(searchFor)) {
-                found.add(tasks.get(i));
-            }
-        }
-        Ui.findMessage(searchFor, found);
-        return tasks;
     }
 
     /**
@@ -208,105 +190,6 @@ public class Parser {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Ends the parser.
-     *
-     * @param tasks The current Task List.
-     * @return The current Task List.
-     */
-    public TaskList bye(TaskList tasks) {
-        parserIsDone = true;
-        return tasks;
-    }
-
-    /**
-     * Marks the user-specified item in the Task List.
-     *
-     * @param input The user input.
-     * @param tasks The current Task List.
-     * @return The Task List with the specified item marked.
-     */
-    public TaskList mark(String input, TaskList tasks) {
-        int taskIndex = Integer.parseInt(input.substring(5)) - 1;
-        tasks.get(taskIndex).markAsDone();
-        Ui.markMessage(tasks.get(taskIndex));
-        return tasks;
-    }
-
-    /**
-     * Unmarks the user-specified item in the Task List.
-     *
-     * @param input The user input.
-     * @param tasks The current Task List.
-     * @return The Task List with the specified item unmarked.
-     */
-    public TaskList unMark(String input, TaskList tasks) {
-        int taskIndex = Integer.parseInt(input.substring(7)) - 1;
-        tasks.get(taskIndex).markAsNotDone();
-        Ui.unMarkMessage(tasks.get(taskIndex));
-        return tasks;
-    }
-
-    /**
-     * Deletes the user-specified item in the Task List.
-     *
-     * @param input The user input.
-     * @param tasks The current Task List.
-     * @return The Task List with the specified item deleted.
-     */
-    public TaskList delete(String input, TaskList tasks) {
-        int taskIndex = Integer.parseInt(input.substring(7)) - 1;
-        tasks.remove(taskIndex);
-        Ui.deleteMessage(tasks.get(taskIndex));
-        return tasks;
-    }
-
-    /**
-     * Creates a new ToDo task and prints a message for the user
-     * confirming the addition of the task to the Task List.
-     *
-     * @param input The user input.
-     * @param taskSize The current Task List size.
-     * @return The created task.
-     */
-    public Task newToDo(String input, int taskSize) {
-        Task task = new ToDo(input.substring(5));
-        Ui.addMessage(task, taskSize);
-        return task;
-    }
-
-    /**
-     * Creates a new Deadline task and prints a message for the user
-     * confirming the addition of the task to the Task List.
-     *
-     * @param input The user input.
-     * @param taskSize The current Task List size.
-     * @return The created task.
-     */
-    public Task newDeadline(String input, int taskSize) throws DukeException {
-        int index = input.indexOf(" /by ");
-        Task task = new Deadline(input.substring(9, index), input.substring(index + 5));
-        Ui.addMessage(task, taskSize);
-        return task;
-    }
-
-    /**
-     * Creates a new Event task and prints a message for the user
-     * confirming the addition of the task to the Task List.
-     *
-     * @param input The user input.
-     * @param taskSize The current Task List size.
-     * @return The created task.
-     */
-    public Task newEvent(String input, int taskSize) throws DukeException {
-        int fromIndex = input.indexOf(" /from ");
-        int toIndex = input.indexOf(" /to ");
-        Task task = new Event(input.substring(6, fromIndex), input.substring(fromIndex + 7, toIndex),
-                input.substring(toIndex + 5));
-        Ui.addMessage(task, taskSize);
-        return task;
     }
 
     /**

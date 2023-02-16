@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.DukeException;
 import java.util.Scanner;
 
@@ -28,7 +29,8 @@ public class Duke {
         String input = Ui.getInput();
         Parser parser = new Parser(tasks);
         try {
-            parser.parse(input);
+            Command command = parser.parse(input);
+            tasks = command.execute(tasks);
         } catch (DukeException e) {
             Ui.errorMessage(e);
         } finally {
@@ -37,5 +39,13 @@ public class Duke {
                 Ui.farewellMessage();
             }
         }
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(TaskList tasks) {
+        this.tasks = tasks;
     }
 }
