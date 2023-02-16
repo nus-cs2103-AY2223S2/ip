@@ -1,24 +1,29 @@
-# nemo.Duke project template
+# Nemo User Guide
+:ocean::tropical_fish:**If you're a little forgetful (like Dory), don't worry, Nemo's got your back.** :ocean::tropical_fish:
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+**Nemo is a chatbot task tracker that takes in CLI inputs to store and manage tasks, deadlines and events.**
 
-## Setting up in Intellij
+> "I forget things almost instantly. It runs in my family… well, at least I think it does... hmm, where are they?" - Dory
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Quick Start
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/nemo.Duke.java` file, right-click it, and choose `Run nemo.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. Install `Java 11`.
+2. Download Nemo from [here](https://github.com/unfazing/ip/releases).
+3. Put the Nemo `jar` file into your desired folder.
+4. Run `java -jar .\nemo.jar` to start the app.
+
+## Features
+
+### Track your Tasks!
+:writing_hand: Nemo supports the following 3 types of tasks. They can be deletes 
+1. **ToDos** - a task that needs to be completed eventually
+2. **Deadlines** - a task that has a deadline for completion
+3. **Events** - a task that has a start and end date
+
+### Save and Load your Tasks!
+:sunglasses: Nemo will save any changes to your task list into a data directory. This way you can load tasks that you had added in a previous session, or share these tasks with a friend.
+
+### Undo and Redo any changes!
+:astonished: Nemo supports undoing and redoing any changes you make to the task tracker in that session.
+
+![Ui](docs/Ui.png)
