@@ -10,12 +10,12 @@ import page.PageException;
  * Represents a deadline, i.e. a quest with a complete-by date/time.
  */
 public class Deadline extends Quest {
-    /** Formatter for converting inputs in the HHmm dd/MM/yy format into LocalDateTime objects */
+    /** Formatter for converting inputs in the HHmm dd/MM/yy format into LocalDateTime objects. */
     private static DateTimeFormatter inputFormatter =
             DateTimeFormatter.ofPattern("[HHmm dd/MM/yy][dd MMM yyyy hh:mma]");
-    /** Formatter for converting LocalDateTime objects into the dd MMM yyyy hh:mma format for outputting */
+    /** Formatter for converting LocalDateTime objects into the dd MMM yyyy hh:mma format for outputting. */
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
-    /** Complete-by time for the deadline */
+    /** Complete-by time for the deadline. */
     private LocalDateTime by;
 
     /**

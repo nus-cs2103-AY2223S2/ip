@@ -3,7 +3,7 @@ package page.quest;
 /**
  * Represents a quest, i.e. a task that the user must do.
  */
-public class Quest {
+public abstract class Quest {
     /** Description of the quest */
     private String description;
     /** Completion status of the quest */
@@ -46,6 +46,12 @@ public class Quest {
         isCompleted = false;
     }
 
+    /**
+     * Checks if the Quest description contains the given keyword as a substring. (case-insensitive).
+     *
+     * @param keyword The keyword to search for.
+     * @return Whether the quest contains the given keyword.
+     */
     public boolean hasKeyword(String keyword) {
         return description.toLowerCase().contains(keyword.toLowerCase());
     }

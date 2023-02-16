@@ -41,6 +41,7 @@ public class Storage {
             while (s.hasNext()) {
                 String line = s.nextLine();
                 String[] splitLine = line.split(" ", 4);
+                assert splitLine.length == 4 : "data is not correctly formatted";
                 String questType = splitLine[1];
                 String questCompletion = splitLine[2];
                 String restOfLine = splitLine[3];
