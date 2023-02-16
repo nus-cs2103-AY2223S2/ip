@@ -36,7 +36,7 @@ public class Ui {
      * @return the welcome message.
      */
     public String showWelcome() {
-        return "Hello from Duke,\n What can I do for you?";
+        return "Hello from Duke,\nWhat can I do for you?";
     }
 
     /**
