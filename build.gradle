@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "luffy.Luffy"
+    mainClassName = "luffy.ui.Launcher"
 }
 
 checkstyle {
