@@ -83,7 +83,7 @@ public class Help implements Command {
                 ui.showReply(COMMAND_LST);
                 break;
             default:
-                ui.showReply(ERROR);
+                ui.showError(ERROR);
                 break;
         }
     }
