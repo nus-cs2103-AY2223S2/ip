@@ -8,7 +8,7 @@ public class UnmarkCommand extends Command {
     private int index;
 
     public UnmarkCommand(String commandParams) {
-        int index = Integer.parseInt(commandParams);
+        this.index = Integer.parseInt(commandParams);
     }
 
     @Override

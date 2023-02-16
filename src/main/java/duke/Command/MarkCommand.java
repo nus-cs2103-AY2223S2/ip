@@ -8,7 +8,7 @@ public class MarkCommand extends Command {
     private int index;
 
     public MarkCommand(String commandParams) {
-        int index = Integer.parseInt(commandParams);
+        this.index = Integer.parseInt(commandParams);
     }
 
     @Override

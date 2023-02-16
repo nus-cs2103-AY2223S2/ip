@@ -8,7 +8,7 @@ public class DeleteCommand extends Command {
     private int index;
 
     public DeleteCommand(String commandParams) {
-        int index = Integer.parseInt(commandParams);
+        this.index = Integer.parseInt(commandParams);
     }
 
     @Override
