@@ -22,6 +22,7 @@ public class HandleMark {
         try {
             int taskNum = Integer.parseInt(input.substring(5)) - 1;
             tasklist.markTask(taskNum);
+            assert input.trim().split(" ").length > 1 : "There is no task to mark!";
             return ui.showMarkTask(tasklist.getTask(taskNum).toString());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return ui.showError("Please enter a valid task number!");

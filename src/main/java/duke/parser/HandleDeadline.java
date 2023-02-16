@@ -29,6 +29,7 @@ public class HandleDeadline {
         try {
             String taskString = input.substring(9, input.indexOf(" /by "));
             String deadline = input.substring(input.indexOf(" /by ") + 5);
+            assert input.contains("/by") : "Wrong format for deadline task!";
             LocalDate.parse(deadline);
             Task taskDeadline = new Deadline(taskString, deadline);
             if (tasklist.checkDuplicates(taskDeadline)) {

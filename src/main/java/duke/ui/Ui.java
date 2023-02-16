@@ -13,7 +13,7 @@ public class Ui {
      * @return String to greet user
      */
     public String greet() {
-        return "Hello! I'm Bear Bear!! \nNice to meet you! \nWhat can I do for you?";
+        return "Hello! I'm Beary Bear!! \nNice to meet you! \nWhat can I do for you?";
     }
 
     /**
@@ -75,7 +75,7 @@ public class Ui {
      * @return String to inform user that a task has been marked
      */
     public String showMarkTask(String task) {
-        return "WOWWWWWW Good Job!!! \n I've marked this task as done: \n  " + task;
+        return "YAYYYY Good Job!!! \n I've marked this task as done: \n  " + task;
     }
 
     /**

@@ -35,7 +35,7 @@ public class ToDo extends Task {
 
     @Override
     public String toBeSaved() {
-        return "T" + "///" + super.toBeSaved() + "///" + "null" + "///" + "null";
+        return "T" + " /// " + super.toBeSaved() + " /// " + "null" + " /// " + "null";
     }
 
 }

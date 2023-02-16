@@ -1,11 +1,6 @@
 package duke.storage;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,20 +18,38 @@ public class Storage {
     private File taskFile;
 
     /**
-     * Constructor of Storage
+     * Constructor of Storage to create file
      */
     public Storage(String filepath) {
         try {
-            File directory = new File("./data/");
             taskFile = new File(filepath);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
             if (!taskFile.exists()) {
-                taskFile.createNewFile();
+                checkDirectoryExist("./data/");
+                checkFileExist();
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Check if the directory of the file path exists or not, make directory if it does not exist
+     * @param directoryPath
+     */
+    public void checkDirectoryExist(String directoryPath) {
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+    }
+
+    /**
+     * Check if file exist, create a new text file to be stored in directory path if file does not exist
+     * @throws IOException
+     */
+    public void checkFileExist() throws IOException {
+        if (!taskFile.exists()) {
+            taskFile.createNewFile();
         }
     }
 
@@ -51,9 +64,9 @@ public class Storage {
             BufferedReader myReader = new BufferedReader(new FileReader(this.taskFile));
             String line = myReader.readLine();
             while (line != null) {
-                // line is saved in the following format:
-                // taskType///completionStatus///taskDescription///startDate for event or deadline/// endDate
-                String[] str = line.split("///", 5);
+                // task is saved in the following format:
+                // taskType /// completionStatus /// taskDescription /// startDate for event or deadline /// endDate
+                String[] str = line.split(" /// ", 5);
                 Task task = null;
 
                 switch (str[0]) {
@@ -67,7 +80,6 @@ public class Storage {
                     task = new Event(str[2], str[3], str[4]);
                     break;
                 default:
-                    assert false : "Unable to load task!";
                     break;
                 }
                 if (str[1].equals("[X]")) {
@@ -91,12 +103,13 @@ public class Storage {
     public void save(TaskList taskList) {
         try {
             BufferedWriter myWriter = new BufferedWriter(new FileWriter(this.taskFile));
-            for (Task task: taskList.getTaskList()) {
-                myWriter.write(task.toBeSaved() + "\n");
+            for (int i = 0; i < taskList.getSize(); i++) {
+                Task t = taskList.getTaskList().get(i);
+                myWriter.write(t.toBeSaved() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("There is an error in saving tasks.");
+            System.out.println("There is an error in saving tasks!");
         }
     }
 

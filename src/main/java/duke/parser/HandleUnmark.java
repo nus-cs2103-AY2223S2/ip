@@ -22,6 +22,7 @@ public class HandleUnmark {
         try {
             int taskNum = Integer.parseInt(input.substring(7)) - 1;
             tasklist.unmarkTask(taskNum);
+            assert input.trim().split(" ").length > 1 : "There is no task to unmark!";
             return ui.showUnmarkTask(tasklist.getTask(taskNum).toString());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return ui.showError("Please enter a valid task number!");

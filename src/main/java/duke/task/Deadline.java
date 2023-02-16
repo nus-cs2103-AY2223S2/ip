@@ -53,6 +53,6 @@ public class Deadline extends Task {
 
     @Override
     public String toBeSaved() {
-        return "D" + "///" + super.toBeSaved() + "///" + this.deadlineString + "///" + "null";
+        return "D" + " /// " + super.toBeSaved() + " /// " + this.deadlineString + " /// " + "null";
     }
 }

@@ -47,10 +47,6 @@ public abstract class Task {
     }
 
 
-    public String getTaskType() {
-        return this.toString().substring(1, 2);
-    }
-
     /**
      * Get description of task
      * @return String of task description
@@ -74,6 +70,6 @@ public abstract class Task {
     };
 
     public String toBeSaved() {
-        return this.currentTaskStatus() + "///" + this.taskString;
+        return this.currentTaskStatus() + " /// " + this.taskString;
     }
 }

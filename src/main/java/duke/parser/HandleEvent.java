@@ -32,6 +32,7 @@ public class HandleEvent {
             LocalDate.parse(startDate);
             String endDate = input.substring(input.indexOf(" /to ") + 5);
             LocalDate.parse(endDate);
+            assert input.contains("/from") && input.contains("/to"): "Wrong format for event task!";
             Task taskEvent = new Event(taskString, startDate, endDate);
             if (tasklist.checkDuplicates(taskEvent)) {
                 return ui.showError("OOPS! You have added this task before already!");

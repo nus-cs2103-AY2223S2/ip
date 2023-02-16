@@ -62,6 +62,6 @@ public class Event extends Task {
 
     @Override
     public String toBeSaved() {
-        return "E" + "///" + super.toBeSaved() + "///" + this.startDateString + "///" + this.endDateString;
+        return "E" + " /// " + super.toBeSaved() + " /// " + this.startDateString + " /// " + this.endDateString;
     }
 }
