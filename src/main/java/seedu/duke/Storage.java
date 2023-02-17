@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Storage {
-
     private static final int DESCRIPTION_INDEX = 2;
     private static final int BY_INDEX = 3;
     private static final int FROM_INDEX = 3;
