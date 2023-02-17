@@ -46,7 +46,8 @@ public class Storage {
     public void makeFile(File file) throws IOException {
         file.mkdirs();
         file.delete();
-        file.createNewFile();
+        boolean isSucceed = file.createNewFile();
+        assert isSucceed;
     }
 
     /**
@@ -115,7 +116,8 @@ public class Storage {
         br.close();
         bw.close();
         file.delete();
-        boolean successful = fileTemp.renameTo(file);
+        boolean isSucceed = fileTemp.renameTo(file);
+        assert isSucceed:
         bw = new BufferedWriter(new FileWriter(file, true));
     }
 
@@ -145,7 +147,8 @@ public class Storage {
         br.close();
         bw.close();
         file.delete();
-        boolean successful = fileTemp.renameTo(file);
+        boolean isSucceed = fileTemp.renameTo(file);
+        assert isSucceed:
         bw = new BufferedWriter(new FileWriter(file, true));
     }
 
@@ -176,7 +179,8 @@ public class Storage {
         br.close();
         bw.close();
         file.delete();
-        boolean successful = fileTemp.renameTo(file);
+        boolean isSucceed = fileTemp.renameTo(file);
+        assert isSucceed:
         bw = new BufferedWriter(new FileWriter(file, true));
     }
 
