@@ -162,18 +162,3 @@ Exit from Duke.
 4. After the terminal is opened, key in commend `java -jar myIP.jar`
 
 ## Enjoy using Duke!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
