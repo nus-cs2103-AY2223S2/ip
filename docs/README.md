@@ -29,7 +29,7 @@
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `kuromi.jar` from [here]().
+2. Download the latest `kuromi.jar` from [here](https://github.com/gwynethguo/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the *home folder* for your Kuromi.
 4. Double click the jar file to run the application.\
 A GUI similar to the below should appear in a few seconds.\
