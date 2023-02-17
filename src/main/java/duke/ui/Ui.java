@@ -16,7 +16,7 @@ public class Ui {
      */
     public String farewellMessage() {
         return "Bye. Make sure to consume your protein!!\n "
-                + "You can now exit the session by clicking the 'x' on the top left";
+                + "You can now exit the session by clicking the 'x' on the top right";
     }
 }
 
