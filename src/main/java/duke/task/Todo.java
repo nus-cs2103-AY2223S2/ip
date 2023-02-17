@@ -1,10 +1,12 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 /**
  * Represents a Todo, which is a type of Task that has no datetime attached to it.
  */
 public class Todo extends Task {
-    public Todo(String description) {
+    public Todo(String description) throws DukeException {
         super(description);
     }
 
@@ -15,7 +17,7 @@ public class Todo extends Task {
      * @param input of Todo task.
      * @param taskStatus of Todo task.
      */
-    public Todo(String input, String taskStatus) {
+    public Todo(String input, String taskStatus) throws DukeException {
         super(input);
         markTaskIfNeeded(taskStatus, this);
     }

@@ -7,19 +7,21 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
+
 public class TaskTest {
     @Test
-    public void toString_validInput_success() {
+    public void toString_validInput_success() throws DukeException {
         assertEquals("[ ] read book", new Task("read book").toString());
     }
 
     @Test
-    public void getRawTask_validInput_success() {
+    public void getRawTask_validInput_success() throws DukeException {
         assertEquals("T ~ 0 ~ read book\n", new Task("read book").getRawTask());
     }
 
     @Test
-    public void getUrgentMessage_validTypesOfDateTime_success() {
+    public void getUrgentMessage_validTypesOfDateTime_success() throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         LocalDateTime expiredDateTime = LocalDateTime.parse("2020-10-01 12:33", formatter);

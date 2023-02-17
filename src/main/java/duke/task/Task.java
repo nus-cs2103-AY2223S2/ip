@@ -2,6 +2,8 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+import duke.exception.DukeException;
+
 /**
  * Represents a task added by the user.
  * It has a description attached to it and a isDone status.
@@ -16,7 +18,8 @@ public class Task {
      *
      * @param input for Task.
      */
-    public Task(String input) {
+    public Task(String input) throws DukeException {
+        checkDescriptionLength(input);
         description = input;
         this.isDone = false;
     }
@@ -92,6 +95,18 @@ public class Task {
         assert isTaskStatusUnmarkValid || isTaskStatusMarkValid : "Task Status must be 0 or 1";
         if (isTaskStatusMarkValid) {
             task.mark();
+        }
+    }
+
+    /**
+     * Checks if description is empty.
+     *
+     * @param description of task to be checked.
+     * @throws DukeException if description is empty.
+     */
+    protected void checkDescriptionLength(String description) throws DukeException {
+        if (description.trim().equals("")) {
+            throw new DukeException("Description cannot be empty!");
         }
     }
 }

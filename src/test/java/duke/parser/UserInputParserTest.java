@@ -21,7 +21,7 @@ class UserInputParserTest {
     }
 
     @Test
-    void parse_invalidTodoInput_failure() {
+    void parse_invalidTodoInput_failure() throws DukeException {
         AddCommand addTodoCommand = new AddCommand(new Todo("Study CS2103"));
         try {
             assertEquals(addTodoCommand.toString(), UserInputParser.parse("t0Do Study CS2103").toString());
