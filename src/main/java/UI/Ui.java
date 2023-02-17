@@ -154,8 +154,7 @@ public class Ui {
                 .append(System.lineSeparator())
                 .append("Unmark an Entry: unmark <index>")
                 .append(System.lineSeparator())
-                .append("Find entries based on Keyword: find <keyword>")
-                .append(System.lineSeparator());
+                .append("Find entries based on Keyword: find <keyword>");
         return sb.toString();
     }
 
