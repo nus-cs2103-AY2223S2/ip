@@ -15,12 +15,12 @@ Dukie frees your mind of having to remember things you need to do. It's,
  
 Dukie currently supports the following functions:
  
-[x]  Managing tasks
-[x]  Managing deadlines
-[x]  Managing event details
-[ ]  Search / Filter for any task / deadline / event
-[ ]  Reminders (coming soon)
-[ ]  !help (coming soon)
+- [x]  Managing tasks
+- [x]  Managing deadlines
+- [x]  Managing event details
+- [ ]  Search / Filter for any task / deadline / event
+- [ ]  Reminders (coming soon)
+- [ ]  !help (coming soon)
 
 ## Instructions for Installation
 
