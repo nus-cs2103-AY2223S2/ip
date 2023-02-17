@@ -1,4 +1,4 @@
-## Muse: The cute, idol task manager! https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Frtyourhonk%2Fstatus%2F773857378374520833&psig=AOvVaw0W_qFP7nOzzjvio35bUgtp&ust=1676715256417000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNiDy5upnP0CFQAAAAAdAAAAABAH
+## Muse: The cute, idol task manager! ![](https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Frtyourhonk%2Fstatus%2F773857378374520833&psig=AOvVaw0W_qFP7nOzzjvio35bUgtp&ust=1676715256417000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNiDy5upnP0CFQAAAAAdAAAAABAH)
 
 Muse is a simple app that organises 📖 your tasks & life!
 ""Let's get you started!""
