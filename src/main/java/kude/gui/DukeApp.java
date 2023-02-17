@@ -18,7 +18,6 @@ public class DukeApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         var gui = new Gui();
         var storage = new Storage("duke.txt");
-        // TODO rework Ui interface
         var processor = new Processor(gui, storage);
 
         try {

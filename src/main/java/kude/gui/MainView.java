@@ -2,7 +2,6 @@ package kude.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,15 +20,13 @@ public class MainView extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Processor processor;
     private Gui gui;
 
 
-    private Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private final Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     @FXML
     public void initialize() {
