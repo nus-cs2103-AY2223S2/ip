@@ -156,7 +156,7 @@ Noted. I've removed this task  T [ ] poo.
 Now you have 2 tasks in the list
 ```
 
-### `snooze` - displays sorted list of tasks
+### `snooze` - snoozes deadlines to a later date
 
 Example of usage:
 
