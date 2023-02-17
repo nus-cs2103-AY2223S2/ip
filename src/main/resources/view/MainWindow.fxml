@@ -13,14 +13,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@Application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uwuke.view.MainWindow">
   <children>
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: #343540;" vvalue="1.0">
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: #343540;" vbarPolicy="NEVER" vvalue="1.0">
       <content>
-        <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="402.0" style="-fx-background-color: #343540;" />
+        <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="398.0" style="-fx-background-color: #343540;" />
       </content>
     </ScrollPane>
       <HBox layoutY="553.0" prefHeight="48.0" prefWidth="388.0" style="-fx-background-color: #343540;">
          <children>
-          <TextField fx:id="userInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput" prefHeight="48.0" prefWidth="321.0" promptText="Example: deadline Do Stuff /by 17/2/2023 2359" style="-fx-background-color: #40414E;" stylesheets="@Application.css">
+          <TextField fx:id="userInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput" prefHeight="48.0" prefWidth="321.0" promptText="e.g. deadline Sleep /by 17/2/2023 2359" style="-fx-background-color: #40414E;" stylesheets="@Application.css">
                <font>
                   <Font name="Menlo Regular" size="12.0" />
                </font>

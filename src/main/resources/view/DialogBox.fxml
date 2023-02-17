@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: #444653; -fx-border-color: #31363C;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: #444653; -fx-border-color: #31363C;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <ImageView fx:id="displayPicture" fitHeight="41.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="displayPicture" fitHeight="25.0" fitWidth="25.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" translateX="7.0" />
     <Label fx:id="text" text="Hello" textFill="WHITE" wrapText="true">
          <padding>
-            <Insets left="15.0" />
+            <Insets left="20.0" />
          </padding>
          <font>
             <Font name="Menlo Regular" size="12.0" />
