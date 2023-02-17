@@ -10,7 +10,7 @@ public class EventTest {
     public void testToString() {
         try {
             Event event = new Event("Eat food", "08/02/2023 16:00", "08/02/2023 18:00");
-            assertEquals("[E][ ] Eat food (from: 08 Feb 2023 4 PM to: 08 Feb 2023 6 PM)", event.toString());
+            assertEquals("[E][ ] Eat food (from: 08 Feb 2023 4 pm to: 08 Feb 2023 6 pm)", event.toString());
         } catch (DukeException e) {
             System.out.println(e);
         }

@@ -10,7 +10,7 @@ public class DeadlineTest {
     public void testToString() {
         try {
             Deadline deadline = new Deadline("Eat food", "08/02/2023 16:00");
-            assertEquals("[D][ ] Eat food (by: 08 Feb 2023 4 PM)", deadline.toString());
+            assertEquals("[D][ ] Eat food (by: 08 Feb 2023 4 pm)", deadline.toString());
         } catch (DukeException e) {
             System.out.println(e);
         }
