@@ -162,9 +162,6 @@ public class Parser {
             if (curIndex > tasks.size() - 1) {
                 throw new NoSuchTask(curIndex);
             }
-            if (curIndex > tasks.size() - 1) {
-                throw new NoSuchTask(curIndex);
-            }
             Task object = tasks.get(curIndex);
             object.unmark();
             storage.updateList();
@@ -209,9 +206,6 @@ public class Parser {
                 curIndex = Integer.parseInt(strArr[1]) - 1;
             } catch (NumberFormatException e) {
                 throw new EmptyOrder("mark");
-            }
-            if (curIndex > tasks.size() - 1) {
-                throw new NoSuchTask(curIndex);
             }
             if (curIndex > tasks.size() - 1) {
                 throw new NoSuchTask(curIndex);
