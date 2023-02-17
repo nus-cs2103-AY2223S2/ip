@@ -1,0 +1,10 @@
+[T][ ] clean up 
+[T][ ] clean the hosue 
+[D][ ] call parents  (by: Feb 12 2020)
+[D][ ] go home  (by: Oct 10 2020)
+[T][ ] clean the car 
+[T][ ] go home 
+[T][ ] clean ipad 
+[T][ ] clean the car 
+[T][ ] go home 
+[E][ ] go  (from: Oct 10 2020 to: Oct 10 2020)
