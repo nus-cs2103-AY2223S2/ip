@@ -16,6 +16,7 @@ import duke.task.Task;
  */
 public class Storage {
     private File file;
+    private String path;
 
     /**
      * A public constructor to initialize Storage instance.
@@ -24,6 +25,7 @@ public class Storage {
      */
     Storage(String path) {
         this.file = new File(path);
+        this.path = path;
     }
 
     /**
@@ -34,7 +36,9 @@ public class Storage {
     protected void loadData(TaskList tasks) {
         try {
 
-            if (!file.exists()) {
+            File f = new File(path);
+
+            if (!f.exists()) {
                 throw new DukeException("File does not exists!\n");
             }
             Scanner scanner = new Scanner(file);
