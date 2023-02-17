@@ -14,14 +14,41 @@ Allows you to change and view your task list
 Got it I've added a todo
 [T][] myproject
 ```
+***
+
+### `deadline tutorial /by 2023-05-01` - Add deadline tutorial by a date
+
+```
+Got it I've added a deadline
+[D][] tutorial (by: 2023-05-01)
+```
+***
+
+### `event party /from 2023-05-01 /to 2023-05-02` - Add event party from a date to another
+
+```
+Got it I've added an event
+[E][] party (from: 2023-05-01 to: 2023-05-02)
+```
+***
 
 ### `list` - List all tasks
 
 ```
 Here are the tasks in your list
 1.[T][] myproject
+2.[D][] tutorial (by: 2023-05-01)
+3.[E][] party (from: 2023-05-01 to: 2023-05-02)
 ```
+***
 
+### `find yproj` - find task based on substring
+
+```
+Here are the matching tasks in your list
+1.[T][] myproject
+```
+***
 
 ### `mark 1` - mark 1st task
 
@@ -29,6 +56,7 @@ Here are the tasks in your list
 Nice! I've marked this task as done:
 [T][X] myproject
 ```
+***
 
 ### `unmark 1` - unmark 1st task
 
@@ -36,6 +64,8 @@ Nice! I've marked this task as done:
 OK, I've marked this task as not done yet:
 [T][] myproject
 ```
+***
+
 ### `delete 1` - delete 1st task
 
 ```
