@@ -10,6 +10,8 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner sc;
+    private final String SEPARATOR_TOP = "________________________________________________\n";
+    private final String SEPARATOR_BOT = "\n________________________________________________";
     /**
      * Constructs a new UI by initializing a Scanner object for reading user input.
      */
@@ -21,34 +23,32 @@ public class Ui {
      *
      * @param msgs The message(s) to be printed
      */
-    public void printMsg(String[] msgs) {
-        System.out.println("____________________________________________________________");
+    public String formatMsg(String[] msgs) {
+        String res = "";
         for (String msg : msgs) {
-            System.out.println(msg);
+            res = res + msg + "\n";
         }
-        System.out.println("____________________________________________________________");
+        return SEPARATOR_TOP + res + SEPARATOR_BOT;
     }
     /**
      * Prints a message, surrounded by separators.
      *
      * @param msg The message to be printed
      */
-    public void printMsg(String msg) {
-        System.out.println("____________________________________________________________");
-        System.out.println(msg);
-        System.out.println("____________________________________________________________");
+    public String formatMsg(String msg) {
+        return SEPARATOR_TOP + msg + SEPARATOR_BOT;
     }
     /**
      * Prints an array of items as a numbered list, surrounded by separators.
      *
      * @param list The array of items to be printed
      */
-    public void printList(String[] list) {
-        System.out.println("____________________________________________________________");
+    public String listToString(String[] list) {
+        String res = "";
         for (int i = 0; i < list.length; i++) {
-            System.out.println(String.format("%d. %s", i + 1, list[i]));
+            res += String.format("%d. %s\n", i + 1, list[i]);
         }
-        System.out.println("____________________________________________________________");
+        return SEPARATOR_TOP + res + SEPARATOR_BOT;
     }
 
     /**
@@ -57,28 +57,11 @@ public class Ui {
      * @param msg The message to be printed before the list.
      * @param list The array of strings to be printed as a list.
      */
-    public void printList(String msg, String[] list) {
-        System.out.println("____________________________________________________________");
-        System.out.println(msg);
+    public String listToString(String msg, String[] list) {
+        String res = msg + "\n";
         for (int i = 0; i < list.length; i++) {
-            System.out.println(String.format("%d. %s", i + 1, list[i]));
+            res += String.format("%d. %s\n", i + 1, list[i]);
         }
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
-     * Prints a welcome message to the user.
-     */
-    public void printWelcomeMsg() {
-        String[] welcomeMsg = {"Hello I am Duke", "What can I do for you?"};
-        printMsg(welcomeMsg);
-    }
-    /**
-     * Reads a line of input from the user.
-     *
-     * @return The input entered by the user
-     */
-    public String readInput() {
-        return this.sc.nextLine();
+        return SEPARATOR_TOP + res + SEPARATOR_BOT;
     }
 }
