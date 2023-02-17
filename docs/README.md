@@ -36,12 +36,4 @@ Example of usage:
 
 All details and formats for other commands could be obtained using `help`
 
-## Installation
-
-1. Download latest jar file from [here](https://github.com/ginloy/ip/releases).
-2. Put jar file in empty directory.
-3. Double click jar file.
-
-### If double clicking doesn't work:
-- `cd` into directory with jar file on terminal
-- type and enter `java -jar "filename".jar`
+## Installation [here](https://github.com/ginloy/ip/releases)
