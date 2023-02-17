@@ -1,3 +1,3 @@
-T | 1 | read book
-D | 0 | return book | 2023-03-01
-E | 0 | project meeting | 2023-02-01 | 2023-02-28
+E | 0 | Book fair | 2023-03-01 | 2023-03-31
+D | 0 | Write reflection | 2023-03-01
+T | 0 | Read book
