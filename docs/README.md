@@ -102,7 +102,7 @@ delete {index #}
 ---
 **View** your **entire task list**.
 <p align="center">
-  <img width="640" src="./assets/list.png">
+  <img width="640" src="./assets/find.png">
 </p>
 
 ```
@@ -113,7 +113,7 @@ list
 ---
 **View** tasks on a **specific date**.
 <p align="center">
-  <img width="640" src="./assets/list-on.png">
+  <img width="640" src="./assets/list.png">
 </p>
 
 ```
@@ -124,7 +124,7 @@ list /on {hh:mm dd MM yyyy}
 ---
 **Find** tasks with a specific **keyword**.
 <p align="center">
-  <img width="640" src="./assets/find.png">
+  <img width="640" src="./assets/list-on.png">
 </p>
 
 ```
