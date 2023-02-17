@@ -3,8 +3,6 @@ package UI;
 import task.Task;
 import task.TaskList;
 
-import java.util.Scanner;
-
 public class Ui {
     // For all interactions with the user
 
@@ -21,7 +19,7 @@ public class Ui {
      *  in Duke.
      */
     public static String unknownCommand() {
-        return "Sorry sir, didn't quite get that.";
+        return "Woah there, didn't quite get that. Come again?";
     }
 
     /**
@@ -50,7 +48,7 @@ public class Ui {
      * @param message a String that contains the details for why the command failed.
      */
     public static String showInvalidInputError(String message) {
-        return "Whoa. That command doesn't look right. Here's what seems to be wrong:\n" + message;
+        return "Woah. That command doesn't look right. Here's what seems to be wrong:\n" + message;
     }
 
     /**
@@ -93,12 +91,11 @@ public class Ui {
      */
     public static String showListState(TaskList list) {
         StringBuilder sb = new StringBuilder();
+        sb.append("Uh huh yeah. Here's your list yo:").append(System.lineSeparator());
         for (int i = 1; i <= list.size(); i++){
-            sb.append(i).append(". ").append(list.get(i - 1));
-            if (i != list.size()) {
-                sb.append(System.lineSeparator());
-            }
+            sb.append(i).append(". ").append(list.get(i - 1)).append(System.lineSeparator());
         }
+        sb.append(System.lineSeparator()).append(showListLength(list));
         return sb.toString();
     }
 
@@ -116,5 +113,14 @@ public class Ui {
             }
         }
         return sb.toString();
+    }
+
+    public static boolean isError(String input) {
+        String firstWord = input.substring(0,4);
+        if (firstWord.equals("Woah")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

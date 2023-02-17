@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,8 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.paint.Color;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 /**
@@ -55,7 +52,7 @@ public class DialogBox extends HBox {
     /**
      * Sets the appearance of the Skylar textbox to be different from that of the user.
      */
-    private void setNewAppearance() {
+    private void setSkylarAppearance() {
         dialog.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         dialog.setStyle("-fx-background-color: burlywood; " +
                 "-fx-border-color:  chocolate; " +
@@ -66,6 +63,9 @@ public class DialogBox extends HBox {
                 "-fx-background-radius: 5");
     }
 
+    public void setErrorAppearance() {
+        dialog.setTextFill(Color.RED);
+    }
     /**
      * Sets up the user's dialog box.
      * @param text the text to be displayed in the box
@@ -82,10 +82,10 @@ public class DialogBox extends HBox {
      * @param img the user's display icon
      * @return the created dialogbox
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getSkylarDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setNewAppearance();
+        db.setSkylarAppearance();
         return db;
     }
 }

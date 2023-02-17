@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.startMessage(), skylarPic));
+        dialogContainer.getChildren().add(DialogBox.getSkylarDialog(Ui.startMessage(), skylarPic));
     }
 
     public void setSkylar(Skylar d) {
@@ -47,10 +47,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        DialogBox userDialogBox = DialogBox.getUserDialog(input, userPic);;
         String response = skylar.getResponse(input);
+        if (Ui.isError(response)) {
+            userDialogBox.setErrorAppearance();
+        }
+        DialogBox skylarDialogBox = DialogBox.getSkylarDialog(response, skylarPic);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userPic),
-                DialogBox.getDukeDialog(response, skylarPic)
+                userDialogBox,
+                skylarDialogBox
         );
         userInput.clear();
         if (Objects.equals(response, Ui.close())) {

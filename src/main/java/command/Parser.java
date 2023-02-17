@@ -25,6 +25,8 @@ public class Parser {
      */
     public String processInput(String input) {
         String[] inputAnalyzed = input.split(" ");
+        String operationText;
+        String additionText;
         try {
             checkIllegalCharacter(input);
             operationText = checkOperationInputs(input, inputAnalyzed);
