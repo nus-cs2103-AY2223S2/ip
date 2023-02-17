@@ -32,7 +32,7 @@ public class ViewSchedCmd extends Command {
         try {
             LocalDate date = Parser.parseViewScheduleDate(lineInput);
             TaskList schedResult = this.taskList.viewSched(date);
-            return String.format("Here's what you have on %s or before:\n%s",
+            return String.format("Your tasks by %s:\n%s",
                     date.toString(), schedResult.toString());
         } catch (DateTimeParseException e) {
             throw new CommandExecutionError(e.toString());
