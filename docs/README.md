@@ -109,9 +109,37 @@ Here are the matching tasks in your list:
 1. [T][ ]: party
 ```
 
-### `Extension` - waiting to implement!
+### `SortEvent` - Sort task of event type
 
-`some` command will get *Duke* to print a list of commands for in-app reference.
+`SortEvent` command will get *Duke* to print a list of events sorted by their start time.
+
+#### Example
+
+Command: `sortEvent` 
+
+```
+Here are your events sorted by time:
+[E][ ] discussion (from: 2023-02-17T16:00 to:
+2023-02-17T17:30)
+[E][ ] shopping (from: 2023-02-19T12:00 to:
+2023-02-19T13:00)
+[E][ ] sing (from: 2023-02-20T00:00 to: 2023-02-20T01:00)
+```
+
+### `SortDeadline` - Sort task of deadline type
+
+`SortDeadline` command will get *Duke* to print a list of deadlines sorted by their due time.
+
+#### Example
+
+Command: `sortDeadline`
+
+```
+Here are your deadlines sorted by time:
+[D][] code (by: 2023-02-08T12:10)
+[D][ ] ip (by: 2023-02-17T00:00)
+[D][] essay (by: 2023-02-18T00:10)
+```
 
 ### Exit from the Duke program
 
