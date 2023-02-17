@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import duke.exception.FileLoadingException;
-import duke.exception.MissingContentException;
 
 /**
  * Saves tasks into file
