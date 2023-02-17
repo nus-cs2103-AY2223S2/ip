@@ -54,4 +54,13 @@ public class Event extends Task {
     public String toPrint() {
         return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
     }
+
+    /**
+     *  Returns the printed output format on the text file.
+     *
+     */
+    @Override
+    public String toExport() {
+        return "E" + super.toExport() + " | " + this.from + " > " + this.to;
+    }
 }

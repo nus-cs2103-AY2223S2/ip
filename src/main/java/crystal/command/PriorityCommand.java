@@ -33,7 +33,11 @@ public class PriorityCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks);
-        return ui.printPriority(tasks, this.itemNum, this.lvlNum);
+        if (this.lvlNum > 9) {
+            return "Priority Level cannot be more than 9!";
+        } else {
+            return ui.printPriority(tasks, this.itemNum, this.lvlNum);
+        }
     }
 
     /**

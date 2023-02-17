@@ -27,4 +27,13 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     *  Returns the printed output format on the text file.
+     *
+     */
+    @Override
+    public String toExport() {
+        return "T" + super.toExport();
+    }
 }

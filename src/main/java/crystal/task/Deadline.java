@@ -55,4 +55,13 @@ public class Deadline extends Task {
     public String toPrint() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
+
+    /**
+     *  Returns the printed output format on the text file.
+     *
+     */
+    @Override
+    public String toExport() {
+        return "D" + super.toExport() + " | " + this.by;
+    }
 }

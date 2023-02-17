@@ -119,7 +119,7 @@ The task is then stored into the tasklist and indicated as "[E]".
 expected output
 ------------------------------------------------
 Alright, I've added this task:
-[E] [ ] return books (by: Oct 11 2020 0300 PM 
+[E] [ ] return books (from: Oct 11 2020 0300 PM 
 to Nov 12 2020 0100 PM)
 Current number of task: 1
 ------------------------------------------------
@@ -220,7 +220,7 @@ Example of usage:
 
 Expected outcome:
 
-The task is given a priority level.
+The task is given the priority level. The priority level cannot be more than 9.
 
 ```
 expected output

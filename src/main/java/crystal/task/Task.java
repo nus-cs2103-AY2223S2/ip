@@ -79,6 +79,23 @@ public abstract class Task {
 
     }
 
+    //@@author francisyzy-reused
+    //Reused from https://github.com/francisyzy/ip/blob/master/src/main/java/duke/task/Task.java
+    // with minor modifications
+    /**
+     *  Returns the printed output format on the text file.
+     *
+     */
+    public String toExport() {
+        String output = "";
+        if (isDone) {
+            output += "| 0 |";
+        } else {
+            output += "| 1 |";
+        }
+        output += this.num + " " + this.description;
+        return output;
+    }
 
     /**
      *  Returns the String output for when saving the list
