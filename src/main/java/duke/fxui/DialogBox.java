@@ -15,24 +15,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * Dialog box consisting of the response of the chatbot or the query/command by the user. It shows the profile image
- * icon on whom the message is from and the message content itself. The chatbot dialog box would be aligned to the
- * left side, while the one by the user is aligned to the right side.
+ * Dialog box consisting of the response of the chatbot or the query/command by the user.
+ * It shows the profile image icon on whom the message is from and the message content itself. The chatbot dialog box
+ * would be aligned to the left side, while the one by the user is aligned to the right side.
  */
 public class DialogBox extends HBox {
     /**
      * The container for text displayed in the dialog box.
      */
+    @SuppressWarnings("unused")
     @FXML
     private Label dialog;
     /**
      * Icon image of the user/chatbot.
      */
+    @SuppressWarnings("unused")
     @FXML
     private ImageView displayImage;
 
     /**
-     * Constructor for a dialog box with the provided text, with the corresponding\ profile image. It is right aligned.
+     * Constructor for a dialog box with the provided text, with the corresponding profile image.
+     * It is right aligned.
      *
      * @param text  The text to be displayed
      * @param image The profile image

@@ -1,8 +1,8 @@
 package duke.task;
 
 /**
- * A task stores its description and on whether is it done or not. The task can be marked as done or unmarked as not
- * done.
+ * A task stores its description and on whether is it done or not.
+ * The task can be marked as done or unmarked as not done.
  */
 public class Task {
 

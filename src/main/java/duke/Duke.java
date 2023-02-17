@@ -4,11 +4,11 @@ import duke.command.Command;
 import duke.textui.TextUi;
 
 /**
- * A chatbot named duke that can process the commands in command line format. The chatbot allows for the adding of
- * todo, deadline and event tasks into a task list which can be viewed. Furthermore, the tasks can be marked as done
- * or not done to keep track of the progress. The tasks can be deleted as well. Finally, the chatbot is able to save
- * and load the data of the tasks on start and ending of its operation. The user can check all of these commands with
- * the help command.
+ * A chatbot named duke that can process the commands in command line format.
+ * The chatbot allows for the adding of todo, deadline and event tasks into a task list which can be viewed.
+ * Furthermore, the tasks can be marked as done or not done to keep track of the progress. The tasks can be deleted
+ * as well. Finally, the chatbot is able to save and load the data of the tasks on start and ending of its operation.
+ * The user can check all of these commands with the help command.
  */
 public class Duke {
 
@@ -36,8 +36,8 @@ public class Duke {
     }
 
     /**
-     * Setups duke tasklist by reading the data from the file specified by the file path. Returns a string
-     * representing the error if there is any when reading the data.
+     * Setups duke tasklist by reading the data from the file specified by the file path and returns error message.
+     * Returns a string representing the error if there is any when reading the data.
      *
      * @return String representing the error message
      */

@@ -9,7 +9,8 @@ import duke.task.Task;
 import duke.textui.TextUi;
 
 /**
- * A command that stores the command to delete a task. The action of deleting the task can be carried out when called.
+ * A command that stores the command to delete a task.
+ * The action of deleting the task can be carried out when called.
  */
 public class DeleteCommand extends Command {
     /**
@@ -36,6 +37,7 @@ public class DeleteCommand extends Command {
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
      * @return The string of what is printed out after execution
+     * @throws DukeException If index is invalid
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {

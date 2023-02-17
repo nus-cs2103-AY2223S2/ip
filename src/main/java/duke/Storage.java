@@ -46,19 +46,21 @@ public class Storage {
      * Checks on whether the error is due to the file not being found.
      *
      * @param e The error being checked
+     * @throws DukeException If error is not because the file is missing
      */
-    private static void isFileNotFoundError(IOException e) {
+    private static void isFileNotFoundError(IOException e) throws DukeException {
         if (!(e instanceof FileNotFoundException)) {
             throw new DukeException(UNEXPECTED_ERROR_GETTING_DATA);
         }
     }
 
     /**
-     * Attempt to load the tasks based on the data of the tasks provided. If the file does not exist, then a new
-     * blank file is created instead. Throws an exception if the program cannot create a new file or there is an error
-     * obtaining the data from the file path.
+     * Attempt to load the tasks based on the data of the tasks provided.
+     * If the file does not exist, then a new blank file is created instead. Throws an exception if the program
+     * cannot create a new file or there is an error obtaining the data from the file path.
      *
      * @return A list of tasks loaded from the file path
+     * @throws DukeException If file cannot be created or any other error except for missing file
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -72,7 +74,8 @@ public class Storage {
     }
 
     /**
-     * Creates a new file with the given file path. Throws an error if it is not possible.
+     * Creates a new file with the given file path.
+     * Throws an error if it is not possible.
      *
      * @throws DukeException If new file cannot be created
      */
@@ -89,8 +92,8 @@ public class Storage {
     }
 
     /**
-     * Loads the task objects from the file from the file path into an array list after processing each line of task
-     * data.
+     * Loads the task objects from the file from the file path.
+     * The tasks are loaded into an array list after processing each line of task data.
      *
      * @param tasks The list to add tasks into
      * @throws FileNotFoundException If file is not found
@@ -111,8 +114,8 @@ public class Storage {
     }
 
     /**
-     * Saves all the tasks into their corresponding string representation to be loaded in the future. Throws an
-     * exception if there is an error accessing or saving the data to the file path.
+     * Saves all the tasks into their corresponding string representation to be loaded in the future.
+     * Throws an exception if there is an error accessing or saving the data to the file path.
      *
      * @param tasks The list of tasks to be saved
      * @throws DukeException If there is an error saving the data of the tasks

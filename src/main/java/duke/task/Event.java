@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 import duke.DukeException;
 
 /**
- * An event task object that stores its description, the start and end date of the event and on whether is it done or
- * not. The task can be marked as done or unmarked as not done.
+ * An event task object that stores its description, the start and end date of the event and on completeness.
+ * The task can be marked as done or unmarked as not done.
  */
 public class Event extends Task {
 
@@ -24,13 +24,14 @@ public class Event extends Task {
     private final LocalDate to;
 
     /**
-     * Constructor for an event task with the given description, start and end date. It checks on whether the start
-     * and end dates are in the appropriate format first. If it is not, an exception is throw to provide hints on the
-     * start and end dates format.
+     * Constructor for an event task with the given description, start and end date.
+     * It checks on whether the start and end dates are in the appropriate format first. If it is not, an exception
+     * is throw to provide hints on the start and end dates format.
      *
      * @param description The description of the event task
      * @param from        The start date of the event
      * @param to          The end date of the event
+     * @throws DukeException If the datetime format is wrong
      */
     public Event(String description, String from, String to) throws DukeException {
         super(description);
@@ -60,8 +61,8 @@ public class Event extends Task {
     }
 
     /**
-     * Checks on whether the string representation of the event task is the same format as the one exported. If it
-     * is, then a new task is created with the described properties. Otherwise, return an empty task.
+     * Checks on whether the string representation of the event task is the same format as the one exported.
+     * If it is, then a new task is created with the described properties. Otherwise, return an empty task.
      *
      * @param data String representation of an event task
      * @return An event task object that describes the given data of the task
@@ -84,8 +85,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of the event object. The details of its description, completeness and the
-     * start and end date of the task is included.
+     * Returns the string representation of the event object.
+     * The details of its description, completeness and the start and end date of the task is included.
      *
      * @return String representation of the event object for display
      */
@@ -97,8 +98,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the event object into a string representation that can be processed and imported back as an event
-     * object in the future. The details of its descirption, completeness and start and end date is included.
+     * Return string representation of event task to be imported in the future.
+     * The details of its description, completeness and start and end date is included.
      *
      * @return String representation of event object for storage
      */

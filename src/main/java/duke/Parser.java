@@ -17,11 +17,12 @@ import duke.command.UnmarkCommand;
  */
 public class Parser {
     /**
-     * Checks on whether the command is recognised. If it is, a corresponding command is returned. Otherwise, an
-     * exception is throw to inform them that the command does not exit.
+     * Checks on whether the command is recognised. If it is, a corresponding command is returned.
+     * Otherwise, an exception is throw to inform them that the command does not exit.
      *
      * @param fullCommand The full string test command that the user input
      * @return The respective command that the user called for
+     * @throws DukeException If there is data missing
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] inputSplit = fullCommand.split(" ", 2);
@@ -59,8 +60,8 @@ public class Parser {
     }
 
     /**
-     * Checks whether the input split has 2 elements, one for the command and one for the details. If there is no
-     * details in the input, an error is thrown with the provided error message.
+     * Checks whether the input split has 2 elements, one for the command and one for the details.
+     * If there is no details in the input, an error is thrown with the provided error message.
      *
      * @param inputSplit The input split up to command and details
      * @param errorMsg   The error message to be displayed if there is a lack of details

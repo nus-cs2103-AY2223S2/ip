@@ -9,8 +9,8 @@ import duke.task.Task;
 import duke.textui.TextUi;
 
 /**
- * A command that stores the command to unmark a task as not done. The action of unmarking the task can be carried
- * out when called.
+ * A command that stores the command to unmark a task as not done.
+ * The action of unmarking the task can be carried out when called.
  */
 public class UnmarkCommand extends Command {
     /**
@@ -38,6 +38,7 @@ public class UnmarkCommand extends Command {
      * @param ui      UI to deal with the visual output
      * @param storage Storage to deal with input and output of data
      * @return The string of what is printed out after execution
+     * @throws DukeException If index is invalid
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) throws DukeException {

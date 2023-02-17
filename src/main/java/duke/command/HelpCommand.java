@@ -10,8 +10,8 @@ import duke.TaskList;
 import duke.textui.TextUi;
 
 /**
- * A command that stores the command to show help on all the commands available. The action of showing the help text
- * can be carried out when called.
+ * A command that stores the command to show help on all the commands available.
+ * The action of showing the help text can be carried out when called.
  */
 public class HelpCommand extends Command {
     /**
@@ -22,12 +22,13 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Constructor for a command to show help texts.
+     * Returns the help text that shows all the commands with their formats.
      *
      * @param taskList List of tasks that are stored
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
      * @return The string of what is printed out after execution
+     * @throws DukeException If there is a problem reading the help text file
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {

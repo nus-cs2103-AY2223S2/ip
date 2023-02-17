@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 import duke.DukeException;
 
 /**
- * A deadline task object that stores its description, the due date and on whether is it done or not. The task can be
- * marked as done or unmarked as not done.
+ * A deadline task object that stores its description, the due date and on whether is it done or not.
+ * The task can be marked as done or unmarked as not done.
  */
 public class Deadline extends Task {
     /**
@@ -19,11 +19,13 @@ public class Deadline extends Task {
     private final LocalDate by;
 
     /**
-     * Constructor for a deadline task with the given description and due date. It checks on whether the due date is
-     * in the appropriate format first. If it is not, an exception is throw to provide hints on the due date format.
+     * Constructor for a deadline task with the given description and due date.
+     * It checks on whether the due date is in the appropriate format first. If it is not, an exception is throw to
+     * provide hints on the due date format.
      *
      * @param description The description of the deadline task
      * @param by          The due date of the deadline task
+     * @throws DukeException If datetime format is wrong
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -37,9 +39,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for a deadline task with the given description, due date and its status of completion. It checks
-     * on whether the due date is in the appropriate format first. If it is not, an exception is throw to provide
-     * hints on the due date format.
+     * Constructor for a deadline task with the given description, due date and its status of completion.
+     * It checks on whether the due date is in the appropriate format first. If it is not, an exception is throw to
+     * provide hints on the due date format.
      *
      * @param description The description of the deadline task
      * @param by          The due date of the deadline task
@@ -51,8 +53,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Checks on whether the string representation of the deadline task is the same format as the one exported. If it
-     * is, then a new task is created with the described properties. Otherwise, return an empty task.
+     * Checks on whether the string representation of the deadline task and returns the corresponding task.
+     * If the string representation matches the format, then a new task is created with the described properties.
+     * Otherwise, return an empty task.
      *
      * @param data String representation of a deadline task
      * @return A deadline task object that describes the given data of the task
@@ -74,8 +77,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of the deadline object. The details of its description, completeness and the
-     * due date of the task is included.
+     * Returns the string representation of the deadline object.
+     * The details of its description, completeness and the due date of the task is included.
      *
      * @return String representation of the deadline object for display
      */
@@ -86,8 +89,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts the deadline object into a string representation that can be processed and imported back as a
-     * deadline object in the future. The details of its descirption, completeness and due date is included.
+     * Returns string representation of the deadline task to be imported in the future.
+     * The details of its descirption, completeness and due date is included.
      *
      * @return String representation of deadline object for storage
      */

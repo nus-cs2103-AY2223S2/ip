@@ -64,6 +64,7 @@ public class TextUi {
     }
 
     /**
+     * Displays the information for adding tasks.
      * Displays the string representation of the task being added, together with the new updated number of tasks in
      * the task list.
      *
@@ -80,6 +81,7 @@ public class TextUi {
     }
 
     /**
+     * Displays the information for deleting tasks.
      * Displays the string representation of the task being deleted, together with the new updated number of tasks in
      * the task list.
      *

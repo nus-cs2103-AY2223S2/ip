@@ -8,8 +8,8 @@ import duke.task.Todo;
 import duke.textui.TextUi;
 
 /**
- * A command that stores the command to add a new todo task. The action of adding the task can be carried out when
- * called.
+ * A command that stores the command to add a new todo task.
+ * The action of adding the task can be carried out when called.
  */
 public class AddTodoCommand extends Command {
     /**
@@ -34,6 +34,7 @@ public class AddTodoCommand extends Command {
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
      * @return The string of what is printed out after execution
+     * @throws DukeException If data is missing
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {

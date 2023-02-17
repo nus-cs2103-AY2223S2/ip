@@ -19,8 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * The main GUI window where the user input and chatbot responses are shown. The user can key in their commands to be
- * processed by the chatbot here and obtain the corresponding response.
+ * The main GUI window where the user input and chatbot responses are shown.
+ * The user can key in their commands to be processed by the chatbot here and obtain the corresponding response.
  */
 public class MainWindow extends VBox {
     /**
@@ -74,8 +74,9 @@ public class MainWindow extends VBox {
     }
 
     /**
-     * Sets a reference to a new instance of duke chatbot and shows the welcome message by the chatbot. Setup delay to
-     * close the GUI when time is up. Setup the alert box to have a minimum width as the one specified.
+     * Setup all initial status of chatbot and GUI.
+     * Sets a reference to a new instance of duke chatbot and shows the welcome message by the chatbot.Setup delay to
+     * close the GUI when time is up. Set up the alert box to have a minimum width as the one specified.
      *
      * @param filePath File path of saved data;
      */
@@ -95,8 +96,9 @@ public class MainWindow extends VBox {
     }
 
     /**
-     * Handles the command by the user. The command by the user is processed and a response is obtained. Dialog boxes
-     * for the user command and the chatbot response is displayed in the GUI. The text field is cleared afterwards.
+     * Handles the command by the user.
+     * The command by the user is processed and a response is obtained. Dialog boxes for the user command and the
+     * chatbot response is displayed in the GUI. The text field is cleared afterwards.
      */
     @FXML
     private void handleUserInput() {
@@ -116,8 +118,8 @@ public class MainWindow extends VBox {
     }
 
     /**
-     * Handles the call by the user click on the menu item on help about commands. An alert box with the help text on
-     * all the possible commands together with how they are used are displayed.
+     * Handles the call by the user click on the menu item on help about commands.
+     * An alert box with the help text on all the possible commands together with how they are used are displayed.
      */
     @FXML
     private void handleShowCommands() {
@@ -132,8 +134,8 @@ public class MainWindow extends VBox {
     }
 
     /**
-     * Handles the call by the user click on the menu item on about the chatbot. An alert box with the description
-     * of the chatbot.
+     * Handles the call by the user click on the menu item on about the chatbot.
+     * An alert box with the description of the chatbot is displayed.
      */
     @FXML
     private void handleShowAbout() {
@@ -148,8 +150,9 @@ public class MainWindow extends VBox {
     }
 
     /**
-     * Reads the text resource file provided. If the file path does not exist, then an exception with the error
-     * message is thrown. Otherwise, the string of all text in the text resource file is returned.
+     * Reads the text resource file provided.
+     * If the file path does not exist, then an exception with the error message is thrown. Otherwise, the string of
+     * all text in the text resource file is returned.
      *
      * @param path     The path to the text resource file
      * @param errorMsg Error message to be returned if file path does not exist

@@ -8,8 +8,8 @@ import duke.task.Task;
 import duke.textui.TextUi;
 
 /**
- * A command that stores the command to add a new deadline task. The action of adding the task can be carried out
- * when called.
+ * A command that stores the command to add a new deadline task.
+ * The action of adding the task can be carried out when called.
  */
 public class AddDeadlineCommand extends Command {
     /**
@@ -30,18 +30,19 @@ public class AddDeadlineCommand extends Command {
     /**
      * Adds a new deadline task into the task list.
      * The due date is filtered out. If it exists, then a deadline task will be created. Otherwise, an exception
-     * would be thrown stating that a due date was not specified.
+     * would be thrown stating that a description or due date was not specified.
      *
      * @param taskList List of tasks that are stored
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
      * @return The string of what is printed out after execution
+     * @throws DukeException If data is missing
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
         String[] splitData = data.split(" /by ", 2);
         if (splitData.length < 2) {
-            throw new DukeException("Deadline command format error. Missing /by");
+            throw new DukeException("Deadline command format error. Missing description or /by");
         }
 
         assert splitData.length == 2;

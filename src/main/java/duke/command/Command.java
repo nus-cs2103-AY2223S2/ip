@@ -10,8 +10,8 @@ import duke.task.Task;
 import duke.textui.TextUi;
 
 /**
- * A Command stores the command, together with the command string. The appropriate action can be called subsequently
- * that correspond towards the actions specified.
+ * A Command stores the command, together with the command string.
+ * The appropriate action can be called subsequently that correspond towards the actions specified.
  */
 public class Command {
     /**
@@ -41,16 +41,15 @@ public class Command {
     }
 
     /**
-     * Check whether the string representation of the index is an integer. If it is, check again whether it is within
-     * the bounds of the list of tasks stored. Then, return the valid integer representation of the index.
-     * Otherwise, throw an exception stating the issue with the string representation of the index.
+     * Check whether the string representation of the index is an integer.
+     * If it is, check again whether it is within the bounds of the list of tasks stored. Then, return the valid
+     * integer representation of the index. Otherwise, throw an exception stating the issue with the string
+     * representation of the index.
      *
      * @param indexStr String representation of the index being checked
      * @param tasks    List of tasks being referenced upon
-     * @return The integer representation of the index that was in string
-     *     representation
-     * @throws DukeException If the string representation of index is not an
-     *                       integer or out of bounds of task list
+     * @return The integer representation of the index that was in string representation
+     * @throws DukeException If the string representation of index is not an integer or out of bounds of task list
      */
     protected int isValidIndex(String indexStr, ArrayList<Task> tasks) throws DukeException {
         Pattern pattern = Pattern.compile("^[0-9]+$");

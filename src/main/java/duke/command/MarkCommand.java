@@ -9,7 +9,8 @@ import duke.task.Task;
 import duke.textui.TextUi;
 
 /**
- * A command that stores the command to mark a task as done. The action of marking the task as done when called.
+ * A command that stores the command to mark a task as done.
+ * The action of marking the task as done when called.
  */
 public class MarkCommand extends Command {
     /**
@@ -20,8 +21,7 @@ public class MarkCommand extends Command {
     /**
      * Constructor for a command to mark a task as done.
      *
-     * @param indexString The string representation of the index to be marked as
-     *                    done
+     * @param indexString The string representation of the index to be marked as done
      */
     public MarkCommand(String indexString) {
         super(AvailableCommands.MARK);
@@ -37,6 +37,7 @@ public class MarkCommand extends Command {
      * @param ui       UI to deal with the visual output
      * @param storage  Storage to deal with input and output of data
      * @return The string of what is printed out after execution
+     * @throws DukeException If index is invalid
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {
