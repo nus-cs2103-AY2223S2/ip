@@ -1,3 +1,5 @@
+import java.util.List;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,8 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
-import java.util.List;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
