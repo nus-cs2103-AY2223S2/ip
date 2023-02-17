@@ -33,8 +33,8 @@ public class DukeUtils {
     }
 
     /**
-     * Converts an input string to a {@code LocalDate} instance. If the conversion fails, an empty
-     * {@code Optional} is returned.
+     * Converts an input string to a {@code LocalDate} instance, using {@code yyyy-MM-dd} format. If
+     * the conversion fails, an empty {@code Optional} is returned.
      *
      * @param input the input string
      * @return an {@code Optional} instance holding the conversion result
@@ -49,7 +49,16 @@ public class DukeUtils {
         }
     }
 
+    /**
+     * Converts an input string to a {@code LocalDate} instance, using {@code EEE} format. The
+     * returned date will be the nearest day of week (that is represented by the input string), in
+     * the future. If the conversion fails, an empty {@code Optional} is returned.
+     *
+     * @param input the input string
+     * @return an {@code Optional} instance holding the conversion result
+     */
     public static Optional<LocalDate> parseDay(String input) {
+        assert input != null;
         try {
             DayOfWeek day = DayOfWeek.from(DAY_INPUT_FORMAT.parse(input));
             LocalDate date = LocalDate.now().with(TemporalAdjusters.next(day));
@@ -75,6 +84,13 @@ public class DukeUtils {
         }
     }
 
+    /**
+     * Chooses between many {@code Optional} instances.
+     *
+     * @param <T> the type of the objects contained inside the {@code Optional} instances
+     * @param opts an array of {@code Optional} instances
+     * @return the first {@code Optional} instance that contains an object inside it
+     */
     @SafeVarargs
     public static <T> Optional<T> choice(Optional<T>... opts) {
         return Arrays.stream(opts).filter(Optional::isPresent).findFirst().orElse(Optional.empty());

@@ -8,7 +8,7 @@ import duke.model.Model;
 import duke.util.container.ExecutionResult;
 
 /**
- * Controller of the cli-based version of the application.
+ * Controller of the CLI-based version of the application.
  * <p>
  * All methods in this class are static methods, as there is no need to create multiple instances of
  * {@code CliController}. Singleton pattern is unnecessary here.
@@ -20,7 +20,7 @@ public class CliController {
     private static final String INDENTATION = " ".repeat(5);
     private static final Scanner sc = new Scanner(System.in);
     private static Model model = null;
-    private static boolean exitStatus = false;
+    private static boolean shouldExit = false;
 
     private CliController() {}
 
@@ -61,7 +61,7 @@ public class CliController {
         String input = sc.nextLine();
         ExecutionResult result = model.execute(input);
         echo(result.getMessage());
-        exitStatus = result.getExitStatus();
+        shouldExit = result.isExit();
     }
 
     /**
@@ -71,6 +71,6 @@ public class CliController {
      *         command), otherwise {@code false}
      */
     public static boolean shouldExit() {
-        return exitStatus;
+        return shouldExit;
     }
 }

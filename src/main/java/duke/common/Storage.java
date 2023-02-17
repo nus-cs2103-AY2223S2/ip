@@ -11,9 +11,12 @@ import java.nio.file.Path;
 
 import duke.model.task.TaskList;
 
+/**
+ * Reads and writes {@code TaskList} into log a file using static methods.
+ */
 public class Storage {
 
-    private static final Path PATH_TO_FILE = Path.of(".duke", "tasklist.bin");
+    private static final Path PATH_TO_FILE = Path.of(".duke", "tasklist.ser");
 
     /**
      * Checks whether the log file exists or not. If the log file does not exists, a new log file
@@ -30,7 +33,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException ex) {
-            System.out.println("Cannot create new file...");
+            System.err.println("Cannot create new file...");
         }
         return true;
     }
@@ -49,7 +52,7 @@ public class Storage {
                 ObjectInputStream objIn = new ObjectInputStream(in)) {
             return (TaskList) objIn.readObject();
         } catch (IOException | ClassNotFoundException ex) {
-            System.out.println("Something goes wrong with saved log. A new log will be created...");
+            System.err.println("Something goes wrong. A new log will be created...");
             return new TaskList();
         }
     }
@@ -66,7 +69,7 @@ public class Storage {
                 ObjectOutputStream objOut = new ObjectOutputStream(out)) {
             objOut.writeObject(list);
         } catch (IOException ex) {
-            System.out.println("Something goes wrong, cannot write log into file...");
+            System.err.println("Something goes wrong, cannot write into the log file...");
         }
     }
 }

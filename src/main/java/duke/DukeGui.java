@@ -7,17 +7,26 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Driver for the GUI version of the application.
+ */
 public class DukeGui extends Application {
 
     private Model model;
     private MainWindow window;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() {
         model = new Model(Storage.readTaskList());
         window = new MainWindow(model);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(Stage stage) {
         Scene scene = new Scene(window);
@@ -25,9 +34,11 @@ public class DukeGui extends Application {
         stage.show();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stop() {
-        System.out.println("Quit...");
         Storage.writeTaskList(model.getTaskList());
     }
 }

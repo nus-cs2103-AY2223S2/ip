@@ -8,24 +8,24 @@ package duke.util.container;
 public class ExecutionResult {
 
     private String message;
-    private boolean exitStatus;
+    private boolean isExit;
 
     /**
      * Creates a new {@code ExecutionResult} instance.
      *
      * @param message the message generated after executing a command
-     * @param exitStatus the exit status generated after executing a command
+     * @param isExit the exit status generated after executing a command
      */
-    public ExecutionResult(String message, boolean exitStatus) {
+    public ExecutionResult(String message, boolean isExit) {
         this.message = message;
-        this.exitStatus = exitStatus;
+        this.isExit = isExit;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public boolean getExitStatus() {
-        return exitStatus;
+    public boolean isExit() {
+        return isExit;
     }
 }

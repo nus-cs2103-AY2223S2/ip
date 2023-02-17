@@ -56,15 +56,13 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         ExecutionResult result = model.execute(input);
+        if (result.isExit()) {
+            Platform.exit();
+        }
         DialogBox userBox = new DialogBox(input, userImage);
         DialogBox dukeBox = new DialogBox(result.getMessage(), dukeImage);
         dukeBox.flip();
         dialogContainer.getChildren().addAll(userBox, dukeBox);
         userInput.clear();
-        boolean shouldExit = result.getExitStatus();
-        if (shouldExit) {
-            Platform.exit();
-        }
     }
 }
-

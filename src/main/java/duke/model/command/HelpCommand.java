@@ -1,8 +1,16 @@
 package duke.model.command;
 
+import java.util.Optional;
+
 import duke.model.task.TaskList;
 
 public class HelpCommand extends Command {
+
+    private Optional<Keyword> keyword;
+
+    public HelpCommand(Optional<Keyword> keyword) {
+        this.keyword = keyword;
+    }
 
     @Override
     public String execute(TaskList list) {
