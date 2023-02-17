@@ -3,7 +3,6 @@ package gui;
 import duke.Duke;
 import duke.Ui;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,14 +19,17 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/CaptainCTF.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/WushuMaster.png"));
 
+    /**
+     * Initializes the JavaFX controller, binds the scrollPane to the dialogContainer's heightProperty,
+     * creates a new Ui instance to handle user interface interactions, displays a welcome message from the Ui,
+     * and adds the Duke dialog containing the welcome message to the dialogContainer.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

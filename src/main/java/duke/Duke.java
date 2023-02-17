@@ -1,13 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import command.Command;
 import exception.DukeException;
 import task.Tasklist;
@@ -43,30 +35,10 @@ public class Duke {
     }
 
     /**
-     * The main method to start the Duke application.
-     *
-     * @throws DukeException If there's an error during the execution of the Duke application.
-
-    public void start() throws DukeException {
-        userInterface.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = userInterface.readCommand();
-                userInterface.showLine(); // show the divider line ("_______")
-                Parser parser = new Parser(fullCommand);
-                Command command = parser.parseCommand();
-                command.execute(userInterface, tasklist, backend);
-                isExit = command.isExit();
-
-            } catch (DukeException e) {
-                userInterface.displayErrorMessage(e.getMessage());
-            } finally {
-                userInterface.showLine();
-            }
-        }
-    }
-    */
+     * Starts processing the user's input by parsing it into a command and executing it.
+     * @param input the user's input to process
+     * @return the result of executing the command generated from the user's input
+     */
     public String start(String input) {
         try {
             Parser parser = new Parser(input);
@@ -77,10 +49,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes the user's input and returns the Duke's response.
+     * @param input the user's input to process
+     * @return the Duke's response to the user's input
+     */
     public String getResponse(String input) {
         return this.start(input);
     }
-
-
 
 }

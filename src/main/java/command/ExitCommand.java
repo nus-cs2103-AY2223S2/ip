@@ -19,12 +19,4 @@ public class ExitCommand implements Command {
         return ui.getExitReply();
     }
 
-    /**
-     This method implements the isExit method from the Command interface and returns true because ExitCommand represents the command to exit the application.
-     @return boolean value 'true' to indicate that the ExitCommand represents the command to exit the application.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

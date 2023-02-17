@@ -5,35 +5,26 @@ import duke.Ui;
 import task.Tasklist;
 
 /**
- * The {@code ListCommand} class implements the {@code Command} interface.
- *  It is responsible for displaying the list of tasks stored in the {@code Tasklist}.
+ * The ListCommand class implements the Command interface.
+ *  It is responsible for displaying the list of tasks stored in the Tasklist.
  */
 public class ListCommand implements Command {
     /**
-     * Constructs a new {@code ListCommand}.
+     * Constructs a new ListCommand.
      * */
     public ListCommand() {
     }
 
     /**
-     * Executes the {@code ListCommand} by calling the {@code inString()} method
-     of the {@code Tasklist} object.
-     @param ui the user interface
-     @param list the list of tasks
-     @param storage the storage backend
+     * * Executes the ListCommand by calling the inString() method
+     * of the Tasklist object.
+     * @param ui the user interface
+     * @param list the list of tasks
+     * @param storage the storage backend
      */
     @Override
     public String execute(Ui ui, Tasklist list, Storage storage) {
 
         return ui.getListReply(list);
-    }
-
-    /**
-     Returns {@code false} to indicate that the {@code ListCommand} does not exit the program.
-     @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

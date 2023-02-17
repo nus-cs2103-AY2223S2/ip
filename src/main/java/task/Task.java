@@ -37,9 +37,14 @@ public class Task {
      * @return the status icon of the task
      */
     public String getStatusICon() {
-        return (isMarked ? "X" : " ");
+        return (isMarked ? "[X] " : "[ ] ");
     }
 
+    /**
+     * Returns whether the current Task's name contains the specified keyword.
+     * @param keyword the keyword to search for in the task's name
+     * @return true if the task's name contains the specified keyword, false otherwise
+     */
     public boolean contains(String keyword) {
         return this.name.contains(keyword);
     }
@@ -59,7 +64,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusICon() + "] " + this.name;
+        return this.getStatusICon() + this.name;
     }
-
 }

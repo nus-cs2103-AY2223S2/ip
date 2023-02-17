@@ -7,6 +7,8 @@ import java.time.LocalDate;
  * It contains a due date which is a local date.
  */
 public class Deadline extends Task {
+    static final String TASKSYMBOL = "[D]";
+    static final String TASKSAVESYMBOL = "D";
     private LocalDate dueDate;
 
     /**
@@ -23,11 +25,11 @@ public class Deadline extends Task {
     /**
      * Overrides the toSaveFormat method in the super class to add the due date.
      *
-     * @return a string in the format "D | [markToInt] | [name] | [dueDate]"
+     * @return a string in the format "D" | [markToInt] | [name] | [dueDate]"
      */
     @Override
     public String toSaveFormat() {
-        return "D" + super.toSaveFormat() + DIVIDER + dueDate;
+        return TASKSAVESYMBOL + super.toSaveFormat() + DIVIDER + dueDate;
     }
 
     /**
@@ -37,6 +39,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(" + dueDate + ")";
+        return TASKSYMBOL + super.toString() + "(" + dueDate + ")";
     }
 }

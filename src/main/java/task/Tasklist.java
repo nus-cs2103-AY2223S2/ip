@@ -12,7 +12,9 @@ public class Tasklist {
     private Storage backend;
 
     /**
-     * Default constructor for the Tasklist class. Initializes a new empty ArrayList of Task and a new Storage object with the file path "./data/duke.txt".
+     * Default constructor for the Tasklist class.
+     * Initializes a new empty ArrayList of Task and
+     * a new Storage object with the file path "./data/duke.txt".
      */
     public Tasklist() {
         this.list = new ArrayList<>();
@@ -91,16 +93,10 @@ public class Tasklist {
     }
 
     /**
-     * Prints the tasks in the list to the console.
+     * Returns a new Tasklist containing all tasks in the current list that contain the specified keyword.
+     * @param keyword the keyword to match against task descriptions
+     * @return a new Tasklist containing all tasks that match the specified keyword
      */
-    public void inString() {
-        System.out.println("Here are the tasks in your list:\n");
-        for (int i = 0; i < this.list.size(); i++) {
-            int index = i + 1;
-            System.out.println(index + "." + this.list.get(i).toString());
-        }
-    }
-
     public Tasklist find(String keyword) {
         Tasklist matchedList = new Tasklist();
         for (int i = 0; i < this.list.size(); i++) {
@@ -111,23 +107,22 @@ public class Tasklist {
         }
         return matchedList;
     }
-/**
- *
-i nt containsKeywordIndex = 1;
-        for (int i = 0; i < this.list.size(); i++) {
-            if (list.get(i).contains(keyword)) {
-                System.out.println(containsKeywordIndex + "." + this.list.get(i).toString());
-                containsKeywordIndex += 1;
-            }
-        }
- */
 
+    /**
+     * Returns whether the current Tasklist is empty.
+     * @return true if the current Tasklist is empty, false otherwise
+     */
     public boolean isEmpty() {
         return this.list.isEmpty();
     }
 
+    /**
+     * Returns a string representation of the Tasklist.
+     * @return a string representation of the Tasklist
+     */
+    @Override
     public String toString() {
-        String result;
+        String stringTasklist;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 1; i <= list.size(); i++) {
             stringBuilder.append(this.getTask(i));
@@ -135,8 +130,7 @@ i nt containsKeywordIndex = 1;
                 stringBuilder.append("\n");
             }
         }
-        result = stringBuilder.toString();
-        return result;
+        stringTasklist = stringBuilder.toString();
+        return stringTasklist;
     }
-
 }

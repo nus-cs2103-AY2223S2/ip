@@ -13,8 +13,8 @@ public class DeleteCommand implements Command {
     private int index;
 
     /**
-     Constructs a new DeleteCommand with the specified task index.
-     @param index the index of the task to be deleted.
+     * Constructs a new DeleteCommand with the specified task index.
+     * @param index the index of the task to be deleted.
      */
 
     public DeleteCommand(int index) {
@@ -22,11 +22,11 @@ public class DeleteCommand implements Command {
     }
 
     /**
-     Executes the delete command by calling the {@link Tasklist#deleteTask(int)} method
-     with the specified task index.
-     @param ui the User Interface component
-     @param list the task list
-     @param storage the backend storage component
+     * Executes the delete command by calling the {@link Tasklist#deleteTask(int)} method
+     * with the specified task index.
+     * @param ui the User Interface component
+     * @param list the task list
+     * @param storage the backend storage component
      */
     @Override
     public String execute(Ui ui, Tasklist list, Storage storage) {
@@ -36,12 +36,4 @@ public class DeleteCommand implements Command {
         return ui.getDeleteReply(deletedTask, list.size());
     }
 
-    /**
-     Returns false, as this command does not result in an application exit.
-     @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

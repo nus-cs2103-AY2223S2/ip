@@ -13,19 +13,19 @@ public class MarkCommand implements Command {
     private int index;
 
     /**
-     Constructs a {@code MarkCommand} object with the specified task index.
-     @param index the index of the task to mark as done.
+     * Constructs a {@code MarkCommand} object with the specified task index.
+     * @param index the index of the task to mark as done.
      */
     public MarkCommand(int index) {
         this.index = index;
     }
 
     /**
-     Executes this command by marking the task with the specified index in the
-     task list as done.
-     @param ui the user interface to use for input/output
-     @param list the task list
-     @param storage the storage backend to use for persistence
+     * Executes this command by marking the task with the specified index in the
+     * task list as done.
+     * @param ui the user interface to use for input/output
+     * @param list the task list
+     * @param storage the storage backend to use for persistence
      */
     @Override
     public String execute(Ui ui, Tasklist list, Storage storage) {
@@ -35,13 +35,4 @@ public class MarkCommand implements Command {
         return ui.getMarkReply(markedTask);
     }
 
-    /**
-     Returns {@code false} to indicate that this command does not cause the
-     application to exit.
-     @return {@code false}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
