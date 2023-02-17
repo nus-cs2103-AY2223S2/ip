@@ -36,38 +36,13 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-        showExceptions true
-        exceptionFormat "full"
-        showCauses true
-        showStackTraces true
-        showStandardStreams = false
-    }
 }
 
 application {
     mainClassName = "Launcher"
 }
 
-
-sourceSets {
-    main {
-        resources {
-            srcDir './src/main/resources'
-        }
-    }
-}
-
-tasks.withType(Copy).all {
-    duplicatesStrategy 'exclude'
-}
-
 shadowJar {
-    /*from("src/main/resources"){
-        into 'META-INF/resources'
-    }*/
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveBaseName = "Launcher"
     archiveClassifier = null
 }

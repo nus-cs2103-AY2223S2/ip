@@ -25,7 +25,7 @@ public class DOOK {
 
     public DOOK(){
         this.ui = new UI();
-        this.storage = new Storage("./src/main/resources/data/tasks.txt");
+        this.storage = new Storage("data/tasks.txt");
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) { // e should be EmptyTaskListException

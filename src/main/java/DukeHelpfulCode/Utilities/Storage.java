@@ -1,10 +1,17 @@
 package DukeHelpfulCode.Utilities;
 
-import java.io.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,14 +100,11 @@ public class Storage {
          * @param   none
          * @return  taskList    The currently existing stuff from the save file.
          */
-        File taskListText = null;
+        File taskListText = new File("tasks.txt");
         List<Task> taskList = new ArrayList<>();
-        try {
-            taskListText = new File(filePath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (taskListText.exists()) {
+        if (!taskListText.exists()) {
+            taskListText.createNewFile();
+        } else {
             BufferedReader reader = new BufferedReader(new FileReader(this.filePath));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -109,8 +113,6 @@ public class Storage {
             if (taskList.size() == 0) {
                 throw new EmptyTaskListException();
             }
-        } else {
-            taskListText.createNewFile();
         }
 
         return taskList;
