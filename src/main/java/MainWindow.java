@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.equalsIgnoreCase("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
-            delay.setOnFinished( event -> Platform.exit());
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
         userInput.clear();
