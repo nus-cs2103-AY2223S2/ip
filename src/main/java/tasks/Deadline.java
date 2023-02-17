@@ -10,7 +10,12 @@ public class Deadline extends Task {
     private LocalDate deadline;
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu");
 
-    public Deadline(String taskName, String deadline){
+    /**
+     * Execute adding a Deadline command
+     * @param taskName
+     * @param deadline
+     */
+    public Deadline(String taskName, String deadline) {
         super(taskName);
         String[] fromDate = deadline.split(" ", 2);
         LocalDate ld = LocalDate.parse(fromDate[1].replace(" ", ""));
@@ -18,7 +23,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + "(by " + deadline.format(FORMATTER) + ")";
     }
 }

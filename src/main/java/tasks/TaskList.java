@@ -20,7 +20,7 @@ public class TaskList {
      * Prints all the contents in the TaskList
      */
     public void print() {
-        for (int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             System.out.println("\t" + (i + 1) + ". " + task.toString());
         }
@@ -28,6 +28,7 @@ public class TaskList {
 
     /**
      * Function to add task to the list
+     *
      * @param task the task
      */
     public void add(Task task) {
@@ -36,6 +37,7 @@ public class TaskList {
 
     /**
      * Getter to get a task in the specific index
+     *
      * @param idx the index of task
      * @return the task pointed ny the index
      */
@@ -45,6 +47,7 @@ public class TaskList {
 
     /**
      * Function to delete a specific task on an index
+     *
      * @param idx the index
      */
     public void delete(int idx) {
@@ -53,6 +56,7 @@ public class TaskList {
 
     /**
      * Function to get the size of current TaskList
+     *
      * @return the number of Tasks contained in the TaskList
      */
     public int getSize() {
@@ -61,7 +65,8 @@ public class TaskList {
 
     /**
      * Function to replace a task in a specific index with another task
-     * @param idx the index
+     *
+     * @param idx  the index
      * @param task the new task that will replace the old task
      */
     public void set(int idx, Task task) {
@@ -70,11 +75,12 @@ public class TaskList {
 
     /**
      * Find the tasks in hte list that matched with a certain keyword
+     *
      * @param key the keyword
      */
     public void find(String key) {
         int idx = 1;
-        for (int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             if (task.toString().contains(key)) {
                 System.out.println("\t" + (idx) + ". " + task.toString());

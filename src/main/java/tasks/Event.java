@@ -11,6 +11,12 @@ public class Event extends Task {
     private LocalDate to;
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu");
 
+    /**
+     * Execute adding an Event command
+     * @param eventName
+     * @param from
+     * @param to
+     */
     public Event(String eventName, String from, String to) {
         super(eventName);
         String[] fromDate = from.split(" ", 2);
