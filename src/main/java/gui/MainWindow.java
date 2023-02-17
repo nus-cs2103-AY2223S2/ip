@@ -1,5 +1,6 @@
 package gui;
 
+import command.CommandList;
 import duke.Duke;
 import duke.Ui;
 import javafx.application.Platform;
@@ -64,5 +65,12 @@ public class MainWindow extends AnchorPane {
 
     public void printTitle() {
         title.setText("DUKE");
+    }
+
+    public void showCurrentList() {
+        String response = duke.getResponse("list");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
     }
 }
