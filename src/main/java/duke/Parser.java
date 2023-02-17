@@ -57,25 +57,22 @@ public class Parser {
             case "deadline":
                 String[] deadlineDescription = descriptions[1].split("/by ");
                 String deadlineTaskName = deadlineDescription[0];
-                String deadlineEndDate = deadlineDescription[1];
 
                 if (deadlineDescription.length != 2 || deadlineTaskName.equals("")) {
                     throw new DukeException("The description of a deadline cannot be empty.\n");
                 }
 
-                output = tasks.addTask(new Deadline(deadlineTaskName, deadlineEndDate));
+                output = tasks.addTask(new Deadline(deadlineTaskName, deadlineDescription[1]));
                 break;
             case "event":
                 String[] eventDescription = descriptions[1].split("/from | /to ");
                 String eventTaskName = eventDescription[0];
-                String eventStartDate = eventDescription[1];
-                String eventEndDate = eventDescription[2];
 
                 if (eventDescription.length != 3 || eventTaskName.equals("")) {
                     throw new DukeException("The description of an event cannot be empty.\n");
                 }
 
-                output = tasks.addTask(new Event(eventTaskName, eventStartDate, eventEndDate));
+                output = tasks.addTask(new Event(eventTaskName, eventDescription[1], eventDescription[2]));
                 break;
             case "delete":
                 int deleteTaskIndex = Integer.parseInt(descriptions[1]);
