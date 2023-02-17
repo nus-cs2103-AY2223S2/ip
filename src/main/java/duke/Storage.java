@@ -14,7 +14,9 @@ import java.util.Scanner;
  * duke.Storage class encapsulates the whole storing, reading process of chatbot.
  */
 public class Storage {
+    /** Path Object represents the default storing file path in hard disk */
     private static final Path STORING_FILE_PATH = Paths.get(".", ".", ".", "data", "duke.txt");
+    /** Path Object represents the temporary storing file path in the hard disk */
     private static final Path TEMPORARY_STORING_FILE_PATH =
             Paths.get(".", ".", ".", "data", "temp_duke.txt");
 
