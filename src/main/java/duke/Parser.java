@@ -59,6 +59,14 @@ public class Parser {
         }
     }
 
+    public static LocalDateTime parseDateTime(String input) throws DukeException {
+        try {
+            return LocalDateTime.parse(input, INPUTFORMAT);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
+        }
+    }
+
     public static Command parseDeadline(String userInput) throws DukeException {
         int byPos = userInput.indexOf(" /by ");
         if (byPos == -1) {
@@ -69,12 +77,7 @@ public class Parser {
         }
         String description = userInput.substring(9, byPos);
         String by = userInput.substring(byPos + 5);
-        LocalDateTime convertedBy;
-        try {
-            convertedBy = LocalDateTime.parse(by, INPUTFORMAT);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
-        }
+        LocalDateTime convertedBy = parseDateTime(by);
         return new AddDeadlineCommand(description, convertedBy);
     }
 
@@ -93,14 +96,8 @@ public class Parser {
         String description = userInput.substring(6, fromPos);
         String from = userInput.substring(fromPos + 7, toPos);
         String to = userInput.substring(toPos + 5);
-        LocalDateTime convertedFrom;
-        LocalDateTime convertedTo;
-        try {
-            convertedFrom = LocalDateTime.parse(from, INPUTFORMAT);
-            convertedTo = LocalDateTime.parse(to, INPUTFORMAT);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");
-        }
+        LocalDateTime convertedFrom = parseDateTime(from);
+        LocalDateTime convertedTo = parseDateTime(to);
         return new AddEventCommand(description, convertedFrom, convertedTo);
     }
 }
