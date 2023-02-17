@@ -106,9 +106,9 @@ public class AddCommand extends Command {
         try {
             tasks.addTask(addedTask);
             storage.refreshStorage(tasks);
-            ui.display("I have successfully added the following task for you! \n" + addedTask);
+            ui.dukeDisplay("I have successfully added the following task for you! \n" + addedTask);
         } catch (IOException e) {
-            ui.display("Seems like there is something wrong with the storage file \n"
+            ui.dukeDisplay("Seems like there is something wrong with the storage file \n"
                     + "Any updates will not be saved!");
             ui.errorDisplay(e);
             e.printStackTrace();

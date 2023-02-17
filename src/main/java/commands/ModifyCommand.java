@@ -64,13 +64,13 @@ public class ModifyCommand extends Command {
                 throw new IllegalCommandException("Invalid type of ModifyCommand");
             }
             storage.refreshStorage(tasks);
-            ui.display("Task successfully modified! \n" + tasks.getTaskString(taskIndex));
+            ui.dukeDisplay("Task successfully modified! \n" + tasks.getTaskString(taskIndex));
         } catch (NumberFormatException e) {
             throw new IllegalInputException("Invalid task item selected!");
         } catch (TaskListIndexOutOfBoundsException e) {
             ui.errorDisplay(e);
         } catch (IOException e) {
-            ui.display("Seems like there is something wrong with the storage file \n"
+            ui.dukeDisplay("Seems like there is something wrong with the storage file \n"
                     + "Any updates will not be saved!");
             ui.errorDisplay(e);
             e.printStackTrace();
