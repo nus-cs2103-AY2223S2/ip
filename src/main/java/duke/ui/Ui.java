@@ -61,26 +61,28 @@ public class Ui {
     public String getResult(TypeOfTask type, Task task, TaskList taskList) {
         String result = "";
         if (type == TypeOfTask.bye) {
-            result += "Bye. Hope to see you again soon!";
+            result += "Bye! I'm always listening and watching you";
         } else if (type == TypeOfTask.list) {
-            result += "Here are the tasks in your list:";
+            result += "Be a good boy and see your current tasks now!";
         } else if (type == TypeOfTask.mark) {
             // for marking tasks
-            result += "Nice! I've marked this task as done: \n" + task.toString();
+            result += "Well done! Task is marked and you'll receive pets ;) \n" + task.toString();
         } else if (type == TypeOfTask.unmark) {
             // for unmarking tasks
-            result += "OK, I've marked this task as not done yet: \n" + task.toString();
+            result += "Bad boy! Task is unmarked and no food for you \n" + task.toString();
         } else if (type == TypeOfTask.todo) {
             // for todo tasks
-            result += "Got it. I've added this task: \n" + task.toString()
+            result += "Didn't know you have so much on your hands!"
+                    + " I'll make sure I remember these tasks: \n" + task.toString()
                     + "\n"
                     + String.format("Now you have %d tasks in the list", taskList.getSize());
         } else if (type == TypeOfTask.deadline) {
-            result += "Got it. I've added this task: \n" + task.toString()
+            result += "Don't forget about these deadlines or no food for you."
+                    + "I've added this task: \n" + task.toString()
                     + "\n" + String.format("Now you have %d tasks in the list", taskList.getSize());
         } else if (type == TypeOfTask.event) {
             // for event
-            result += "Got it. I've added this task:" + task.toString()
+            result += "Busy with other events? How silly. I've added this task:" + task.toString()
                     + "\n"
                     + String.format("Now you have %d tasks in the list", taskList.getSize());
         } else if (type == TypeOfTask.delete) {
@@ -88,7 +90,7 @@ public class Ui {
         } else if (type == TypeOfTask.find) {
             result += "Here are the matching tasks in your list";
         } else {
-            result += "Oh no! You forgot to type in something useful :p"
+            result += "Don't be a bad boy and type in something useful"
                     + "\nWhat can I do for you?";
         }
         return result;
