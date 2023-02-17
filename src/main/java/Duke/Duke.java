@@ -27,9 +27,11 @@ public class Duke {
         TaskList tasks;
         if (!f.exists()) {
             File data = new File("data");
-            data.mkdirs();
+            boolean buildDirectory = data.mkdirs();
+            assert (buildDirectory);
             File duke = new File("data/duke.txt");
-            duke.createNewFile();
+            boolean buildFile = duke.createNewFile();
+            assert (buildFile);
             storage = new Storage(duke.getPath());
         } else {
             storage = new Storage(filePath);
