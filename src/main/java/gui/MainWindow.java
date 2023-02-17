@@ -1,3 +1,5 @@
+package gui;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,7 +13,7 @@ import javafx.scene.layout.VBox;
 import static java.lang.Thread.sleep;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -29,7 +31,7 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.JPG"));
 
     /**
-     * Initializes the MainWindow layout and loads the data stored.
+     * Initializes the gui.MainWindow layout and loads the data stored.
      */
     @FXML
     public void initialize() {

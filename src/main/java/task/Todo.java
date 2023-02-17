@@ -6,7 +6,7 @@ package task;
  */
 public class Todo extends Task {
     public Todo(String name) {
-        super(name);
+        super(name.substring("todo ".length()));
     }
     @Override
     public String toString() {

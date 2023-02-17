@@ -201,7 +201,7 @@ public class Duke {
         } catch (DukeException exc) {
             return exc.toString();
         } catch (DateTimeParseException exc) {
-            return "Sorry your input date format for the deadline task is wrong :(";
+            return "Sorry your input date format for the deadline task is wrong :(\n" + "Usage: yyyy-MM-dd HHmm";
         }
     }
 }

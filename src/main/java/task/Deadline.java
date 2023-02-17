@@ -1,7 +1,6 @@
 package task;
 
-import java.rmi.server.RemoteRef;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -9,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * It has an additional deadline attribute.
  */
 public class Deadline extends Task {
-    protected LocalDate ddl;
+    protected LocalDateTime ddl;
     protected String name;
 
     /**
@@ -20,16 +19,17 @@ public class Deadline extends Task {
     public Deadline(String name) {
         super(name);
         this.name = name.substring("deadline".length() + 1, name.indexOf("/by") - 1);
-        this.ddl = LocalDate.parse(name.substring(name.indexOf("/by") + 4));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.ddl = LocalDateTime.parse(name.substring(name.indexOf("/by") + 4), formatter);
     }
 
-    public LocalDate getDeadline() {
+    public LocalDateTime getDeadline() {
         return ddl;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString().substring(0, "[ ] ".length())
-                + this.name + " (by: " + ddl.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                + this.name + " (by: " + ddl.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

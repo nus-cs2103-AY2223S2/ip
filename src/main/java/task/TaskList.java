@@ -28,6 +28,12 @@ public class TaskList extends ArrayList<Task> {
         return res;
     }
 
+    /**
+     * Get tasks containing the given keywords.
+     *
+     * @param keywords The input keywords for searching.
+     * @return Tasks containing the keywords.
+     */
     public String getTasksWanted(String... keywords) {
         assert keywords.length >= 1 : "The number of input keywords should not be 0";
         String result = "";

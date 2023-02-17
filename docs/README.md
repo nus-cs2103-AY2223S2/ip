@@ -20,12 +20,11 @@ You can search for tasks containing certain keywords.
 
 ### Manipulate Tasks
 
-You can mark tasks as *done*, *unmark* them , or *delete* them by typing in 
-corresponding numbers.
+You can *mark* tasks, *unmark* them , or *delete* them by typing in corresponding numbers.
 
 ### Store Tasks
 
-The app can store the tasks in current list when it is closed and load this record
+The app can store tasks in the current list when it is closed and load this record
 when it starts again.
 
 
@@ -46,7 +45,7 @@ Expected outcome:
 ```
 Here are the tasks in your list:
 1. [T][ ]: borrow book
-2. [D][X]: return book (by: Oct 15 2019)
+2. [D][X]: return book (by: Oct 15 2019 12:00)
 3. [E][ ]: project meeting (at: Mon 2-4pm)
 ```
 
@@ -77,11 +76,11 @@ This indicates that the *Todo* task has been successfully added to the list.
 ### `deadline` - Add a Deadline task
 
 *Duke* adds a `Deadline` task to the list with the given description and deadline.
-It only accepts datetime inputs in `yyyy-mm-dd HHmm` format.
+It only accepts datetime inputs in `yyyy-MM-dd HHmm` format.
 
 #### Example
 
-`deadline {task_description} yyyy-mm-dd HHmm`
+`deadline {task_description} /by yyyy-MM-dd HHmm`
 
 Expected outcome:
 
@@ -95,18 +94,17 @@ This indicates that the *Deadline* has been successfully added to the list.
 
 ### `event` - Add a Event task
 
-Adds a `Event` task to the storage with the given description, and start/end
-datetime. Accepts datetime inputs in `yyyy-mm-dd HHmm` format.
+*Duke* adds an `Event` task to the storage with the given description, and start/end time. 
 
 #### Example
 
-`event {task_description} /from d/M/yy HHmm /to d/M/yy HHmm`
+`event {task_description} /from {start time} /to {end time}`
 
 Expected outcome:
 
 ```text
 Got it. I've added this task: 
-  [E][ ] {task_description} (from: d MMM YYYY HH:mm to: d MMM YYYY HH:mm)
+  [E][ ] {task_description} (from: {start time} to: {end time})
 Now you have {num_of_tasks} tasks in the list.
 ```
 
@@ -116,23 +114,24 @@ This indicates that the *Event* has been successfully added to the list.
 
 ### `find` - Find task(s)
 
-Searches for tasks in the storage whose description contains the certain keyword.
-Does not accept empty queries.
+*Duke* searches for tasks in the list whose descriptions contain the certain keywords.
+Keywords cannot be empty queries.
 
 #### Example
 
-`find {search_term}`
+`find eat assignment`
 
 Expected outcome:
 
 ```text
-1. [T][ ] {search_term} task
-2. [T][ ] Task {search_term}
+1. [T][X] eat cake
+2. [T][ ] eat Double McSpicy
+3. [T][ ] do math assignment
 ...
 ```
 
-This displays all tasks in the storage that contain the keywords in
-their description, and lists them in the order they were added.
+This displays all tasks in the list that contain the keywords in
+their descriptions.
 
 ---
 
@@ -241,15 +240,14 @@ the successfully deleted tasks.
 
 You may either enter this command or close the window with the ❌ button.
 
-Examples of usage:
+#### Example
 
 `bye`
 
 Expected outcome:
 
 ```text
-It was okay serving you. Might/might not see you again.
-Exiting...
+Bye~ Hope to see you again soon:)
 ```
 
-Rick indicates that the app is closing, and shuts down the app.
+
