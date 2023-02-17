@@ -1,4 +1,4 @@
-#User Guide
+# User Guide
 ![Ui](./Ui.png)<br>
 Duke Individual Project is a **desktop app for managing tasks**, for use via  a **Graphical User Interface (GUI)**. This project is an extension of the CS2103T Duke Individual Project which I worked on for the CS2103T module while studying Computer Science in the National University of Singapore. This application is built entirely with Java and in Semester 2 of Academic Year 22/23.
 
