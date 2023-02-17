@@ -1,0 +1,18 @@
+event nus career fair /from 2pm /to 8pm
+event ma2104 lecture @ lt32 /from Tuesday 12pm /to Tuesday 2pm
+deadline cs4230 assignment /by :-) 8pm
+todo buy kpop concert tickets
+todo rush individual project
+deadline buy groceries /by 6pm Sat 5 Aug 2023
+list
+mark 2
+mark 3
+mark 5
+unmark 2
+list
+deadline do cs2101 reflection /by thursday 19 feb 2023 8am
+list
+mark 6
+unmark 3
+list
+bye
