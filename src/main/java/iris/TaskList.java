@@ -62,7 +62,7 @@ public class TaskList extends ArrayList<Task> {
                 LocalDateTime f = e.getFrom();
                 LocalDateTime t = e.getTo();
                 if (t.isBefore(endDate)
-                        && f.isAfter(startDate)) {
+                        || f.isAfter(startDate)) {
                     filtered.add(e);
                 }
             }

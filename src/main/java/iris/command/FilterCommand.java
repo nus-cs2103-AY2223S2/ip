@@ -58,7 +58,7 @@ public class FilterCommand extends Command {
      */
     @Override
     public String getResponse(TaskList tasks, TaskStore taskStore) {
-        return "In this period: " + filteredTasks;
+        return "Tasks in this period: \n" + filteredTasks;
     }
 
     /**
