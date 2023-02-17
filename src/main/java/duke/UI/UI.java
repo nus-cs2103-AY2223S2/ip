@@ -78,6 +78,15 @@ public class UI {
         printResponse("  " + task);
     }
 
+    public void showError(Exception error) {
+        printResponse(error.getMessage());
+        System.err.println(error);
+    }
+
+    public void printEmptyLine() {
+        System.out.println("\n");
+    }
+
     public void showDelete(Task task, TaskList taskList) {
         printResponse("Understood. I have removed this task:");
         printResponse("\n" + task);

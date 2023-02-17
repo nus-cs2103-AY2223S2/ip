@@ -8,7 +8,6 @@ import duke.command.*;
 
 public class Parser {
     protected static final String INPUT_DATE_FORMAT = "yyyy-MM-dd HH:mm";
-    private static final String LIST = "list";
 
     private Command parseAddCommand(String addCommandType, String taskToAdd) {
         Command command;
@@ -78,7 +77,7 @@ public class Parser {
         return new DeadlineCommand(index);
     }
 
-    private Command parseInput(String userInput) {
+    public Command parseInput(String userInput) {
         Command command;
         String inputCommand = userInput.split(" ", 2)[0];
         if (inputCommand.equals(TodoCommand.COMMAND) || inputCommand.equals(EventCommand.COMMAND)

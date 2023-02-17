@@ -59,4 +59,10 @@ public class TaskList {
     public void addTask(Task taskToAdd, Storage storage) {
         tasks.add(taskToAdd);
     }
+
+    public Task deleteTask(int taskNumber, Storage storage) {
+        assert taskNumber >= 0 : "taskNumber is non-negative";
+        Task taskToBeDeleted = tasks.remove(taskNumber - 1);
+        return taskToBeDeleted;
+    }
 }
