@@ -34,7 +34,7 @@ public class Ui extends AnchorPane {
     private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass()
             .getResourceAsStream("/images/Duke.jpg")));
     private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/User.png")));
+            .getResourceAsStream("/images/User.jpg")));
 
     public Ui() {
     }
