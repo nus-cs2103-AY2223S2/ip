@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.util.Objects;
-
 /**
  * Class that models a ToDo task
  */
