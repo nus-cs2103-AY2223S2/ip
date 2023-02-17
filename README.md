@@ -1,10 +1,15 @@
-# Duke project template
+## Muse: The cute task manager!
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Muse is a simple app that organises 📖 your tasks & life!
+""Let's get you started!""
+
+Here are some basic things you can do: 
+-list out tasks
+-add a task
+-mark/unmark tasks as done
+-set deadlines & events too! 😲
 
 ## Setting up in Intellij
-
-Prerequisites: JDK 11, update Intellij to the most recent version.
 
 1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
 1. Open the project into Intellij as follows:
