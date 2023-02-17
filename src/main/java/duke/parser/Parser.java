@@ -49,6 +49,10 @@ public class Parser {
                 return taskList.addEvent(body);
             case("find"):
                 return taskList.find(body);
+            case("archive"):
+                storage.writeArchive(taskList.getTaskList());
+                taskList.nukeList();
+                return "Archival done";
             default:
                 return taskList.unknownCommand(command);
         }

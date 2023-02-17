@@ -35,6 +35,7 @@ public class Storage {
     /**
      * Checks for the data folder and save.txt
      * Create folder/file if not exist
+     *
      * @throws IOException not able to create file/folder
      */
     public void createFile() throws IOException {
@@ -54,6 +55,15 @@ public class Storage {
                 System.out.println("Successfully created new file at " + this.filePath);
             }
         }
+
+        String archivePath = "data\\archive.txt";
+        File a = new File(archivePath);
+        if(!a.isFile()) {
+            System.out.println("Archive file does not exist!\nCreating new archive file...");
+            if (a.createNewFile()) {
+                System.out.println("Successfully created new file at " + archivePath);
+            }
+        }
     }
 
     /**
@@ -65,7 +75,7 @@ public class Storage {
     public ArrayList<Task> readFile() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
 
-        if (!new File(this.filePath).isFile()) {
+        if (!new File(this.filePath).isFile() || !new File("data\\archive.txt").isFile()) {
             createFile();
         }
 
@@ -108,6 +118,7 @@ public class Storage {
 
     /**
      * Writes current data to save file
+     *
      * @param tasks task list
      */
     public void writeFile(ArrayList<Task> tasks) {
@@ -130,6 +141,31 @@ public class Storage {
             }
         } catch (Exception e) {
             System.out.println("Error occurred writing to save file" + e);
+        }
+    }
+
+    /**
+     * Writes data to an archive file
+     */
+    public void writeArchive(ArrayList<Task> tasks) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("data\\archive.txt"))) {
+            for (Task t : tasks) {
+                int done;
+                if (t instanceof ToDo) {
+                    done = t.isDone() ? 1 : 0;
+                    bw.write("T|" + done + "|" + t.getDesc());
+                } else if (t instanceof Deadline) {
+                    done = t.isDone() ? 1 : 0;
+                    bw.write("D|" + done + "|" + t.getDesc() + "|" + ((Deadline) t).getDeadlineDay());
+                } else if (t instanceof Event) {
+                    done = t.isDone() ? 1 : 0;
+                    bw.write("E|" + done + "|" + t.getDesc() + "|"
+                            + ((Event) t).getFrom() + "|" + ((Event) t).getTo());
+                }
+                bw.write("\n");
+            }
+        } catch (Exception e) {
+            System.out.println("Error occurred writing to archive file" + e);
         }
     }
 }
