@@ -1,7 +1,5 @@
 package jane.task;
 
-import jane.Jane;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -17,7 +15,7 @@ public class Event extends Task {
     @Override
     public String save() {
         int i = 0;
-        if (this.isDone== true) {
+        if (this.isDone) {
             i = 1;
         }
         return String.format("E|%d| %s |%s|%s", i, this.description, this.from, this.to );

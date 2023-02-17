@@ -1,8 +1,5 @@
 package jane.task;
 
-import jane.Jane;
-
-
 public class Todo extends Task {
     public Todo(int num, String description) {
             super(num, description);
@@ -10,7 +7,7 @@ public class Todo extends Task {
         @Override
         public String save() {
             int i = 0;
-            if (this.isDone== true) {
+            if (this.isDone) {
                 i = 1;
             }
             return String.format("T|%d| %s", i, this.description);

@@ -1,7 +1,5 @@
 package jane.task;
 
-import jane.Jane;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +12,7 @@ public class Deadline extends Task {
     @Override
     public String save() {
         int i = 0;
-        if (this.isDone== true) {
+        if (this.isDone) {
             i = 1;
         }
         return String.format("D|%d| %s |%s", i, this.description, this.deadline);

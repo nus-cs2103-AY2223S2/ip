@@ -39,7 +39,7 @@ public class Parser {
         return d;
     }
     /**
-     * Parses user input to a Event object
+     * Parses user input to an Event object
      * @param count the size of TaskList containing this object
      * @param output the user input given
      * @return a Event object
@@ -58,7 +58,7 @@ public class Parser {
         }
         String[] start = s[1].substring(5).split(" ");
         LocalDateTime startE = LocalDateTime.parse(String.format("%sT%s", start[0], start[1]));
-        //here i am assuming an event only lasts 1 day since the day it starts is the day it ends
+        //here I am assuming an event only lasts 1 day since the day it starts is the day it ends
         LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
         jane.task.Event e = new jane.task.Event(count + 1, s[0], startE, end);
         return e;

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import java.util.List;
         /**
          * Creates JaneList.txt if it doesn't exist. Reads data from JaneList.txt otherwise
          * @return ArrayList of all Tasks in duke.txt
-         * @throws IOException if JaneList.txt cannot be created
          */
     public static ArrayList<jane.task.Task> loadList() {
         if (Files.notExists(filePath)) {
@@ -43,27 +41,31 @@ import java.util.List;
             lines = Files.readAllLines(filePath);
         } catch (IOException err) {
             System.out.println("cannot read the list");
-            assert lines != null;
+            assert false;
         }
         assert lines != null;
-        ArrayList<jane.task.Task> tasks = new ArrayList<jane.task.Task>();
+        ArrayList<jane.task.Task> tasks = new ArrayList<>();
         for (String s : lines) {
-            //to separate each portion of the task eg D | taskname | deadline to easily see which type of task and deadline
+            //to separate each portion of the task eg D | task-name | deadline to easily see which type of task and deadline
             String[] line = s.split("\\|");
             int i = Integer.parseInt(line[1]);
             boolean b = (i == 1);
-            if (line[0].equals("T")) {
-                jane.task.Todo T = jane.Parser.parserT(s, tasks.size());
-                T.changeState(b);
-                tasks.add(T);
-            } else if (line[0].equals("D")) {
-                jane.task.Deadline D = jane.Parser.parserD(s, tasks.size() );
-                D.changeState(b);
-                tasks.add(D);
-            } else if (line[0].equals("E")) {
-                jane.task.Event E = jane.Parser.parserE(s, tasks.size() );
-                E.changeState(b);
-                tasks.add(E);
+            switch (line[0]) {
+                case "T":
+                    jane.task.Todo T = Parser.parserT(s, tasks.size());
+                    T.changeState(b);
+                    tasks.add(T);
+                    break;
+                case "D":
+                    jane.task.Deadline D = Parser.parserD(s, tasks.size());
+                    D.changeState(b);
+                    tasks.add(D);
+                    break;
+                case "E":
+                    jane.task.Event E = Parser.parserE(s, tasks.size());
+                    E.changeState(b);
+                    tasks.add(E);
+                    break;
             }
 
         }
@@ -71,8 +73,8 @@ import java.util.List;
     }
     //Writes into JaneList.txt
     public static void updateList(ArrayList<jane.task.Task> tasks) {
-        ArrayList<String> list = new ArrayList<String>();
-        assert tasks.isEmpty()==false;
+        ArrayList<String> list = new ArrayList<>();
+        assert !tasks.isEmpty();
         for (jane.task.Task t : tasks) {
             list.add(t.save());
         }

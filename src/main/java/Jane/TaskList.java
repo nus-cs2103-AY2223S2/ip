@@ -34,11 +34,10 @@ public class TaskList {
                 }
             } else if (output.startsWith("find")) {
                 String[] s = output.split(" ");
-                int count = 0;
                 String action = s[1];
                 for (jane.task.Task i : tasks) {
                     if (i.description.contains(action)) {
-                        finalOutput.append(i.toString());
+                        finalOutput.append(i);
 
                     }
                 }
@@ -50,7 +49,7 @@ public class TaskList {
                     finalOutput.append("Nice! I've marked this task as done");
                     jane.task.Task n = tasks.get(num - 1);
                     n.changeState(true);
-                    finalOutput.append(n.toString());
+                    finalOutput.append(n);
                     return finalOutput.toString();
                 } catch (Exception err) {
                     err.printStackTrace();
@@ -63,12 +62,12 @@ public class TaskList {
             } else if (output.startsWith("todo")) {
                 jane.task.Todo todo = jane.Parser.parserT(output, tasks.size());
                 tasks.add(todo);
-                finalOutput.append(todo.toString());
+                finalOutput.append(todo);
                 return finalOutput.toString();
             } else if (output.startsWith("deadline")) {
                 jane.task.Deadline d = jane.Parser.parserD(output, tasks.size() + 1);
                 tasks.add(d);
-                finalOutput.append(d.toString());
+                finalOutput.append(d);
             } else if (output.startsWith("event")) {
                 String des = output.substring(6);
                 String[] s = des.split("/");
@@ -77,13 +76,10 @@ public class TaskList {
                     return finalOutput.toString();
 
                 }
-                String[] start = s[1].substring(5).split(" ");
-                LocalDateTime startE = LocalDateTime.parse(String.format("%sT%s", start[0], start[1]));
-                //here i am assuming an event only lasts 1 day since the day it starts is the day it ends
-                LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
+                //here I am assuming an event only lasts 1 day since the day it starts is the day it ends
                 jane.task.Event e = jane.Parser.parserE(output, tasks.size() + 1);
                 tasks.add(e);
-                finalOutput.append(e.toString());
+                finalOutput.append(e);
                 return finalOutput.toString();
             } else if (output.startsWith("unmark")) {
                 String[] s = output.split(" ");
@@ -92,7 +88,7 @@ public class TaskList {
                     finalOutput.append("OK, I've marked this task as not done yet" + "\n");
                     jane.task.Task n = tasks.get(num - 1);
                     n.changeState(false);
-                    finalOutput.append(n.toString());
+                    finalOutput.append(n);
                     return finalOutput.toString();
                 } catch (Exception err) {
                     finalOutput.append("Number out of index");
@@ -121,8 +117,8 @@ public class TaskList {
                 }
                 return finalOutput.toString();
             } else if (output.equals("list")) {
-                for (int i = 0; i < tasks.size(); i++) {
-                    String s1 = tasks.get(i).toString() + "\n";
+                for (jane.task.Task task : tasks) {
+                    String s1 = task.toString() + "\n";
                     finalOutput.append(s1);
 
                 }

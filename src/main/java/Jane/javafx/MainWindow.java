@@ -4,13 +4,13 @@ import jane.Jane;
 import jane.Storage;
 import jane.TaskList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Objects;
 
 
 /**
@@ -23,13 +23,9 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
-    private Jane jane;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImg.png"));
-    private Image janeImage = new Image(this.getClass().getResourceAsStream("/images/Jane.png"));
+    private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/UserImg.png")));
+    private final Image janeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Jane.png")));
 
     private TaskList tasks;
     @FXML
@@ -47,7 +43,6 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setJane(Jane j) {
-        jane = j;
     }
 
     /**
