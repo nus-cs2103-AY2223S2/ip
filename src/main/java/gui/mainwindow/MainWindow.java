@@ -1,7 +1,5 @@
 package gui.mainwindow;
 
-import java.util.concurrent.TimeUnit;
-
 import duke.Duke;
 import gui.dialogbox.DialogBox;
 import javafx.application.Platform;
