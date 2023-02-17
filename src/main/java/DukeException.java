@@ -6,20 +6,14 @@
  * @author hhchinh2002
  */
 public class DukeException extends Exception {
-    private static final String DIVIDER_LINE = "____________________________________________________\n";
-    private String description;
-
     /**
-     * Creates a DukeException object with given exception description
+     * Creates a DukeException object with given exception description.
      *
-     * @param description The description for the exception from Duke
+     * @param description The description for the exception from Duke.
      */
     public DukeException(String description) {
-        this.description = description;
+        super(description);
     }
 
-    @Override
-    public String toString() {
-        return this.description;
-    }
+
 }
