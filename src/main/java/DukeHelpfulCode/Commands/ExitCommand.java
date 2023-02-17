@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String toString(){
-        return "bye -> Exits Duke.\n    Format: bye\n";
+        return "bye -> Exits DOOK.\n    Format: bye\n";
     }
 
 }
