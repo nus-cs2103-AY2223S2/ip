@@ -26,6 +26,7 @@ public class ExitCommand extends Command {
      * @return string
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        storage.save(tasks);
         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
         delay.setOnFinished(event -> Platform.exit());
         delay.play();
