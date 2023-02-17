@@ -151,7 +151,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new EmptyOrder("mark");
             }
-            if (curIndex > tasks.size() - 1 | curIndex < 1) {
+            if (curIndex > tasks.size() - 1 | curIndex < 0) {
                 throw new NoSuchTask(curIndex);
             }
             Task object = tasks.get(curIndex);
@@ -171,7 +171,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new EmptyOrder("mark");
             }
-            if (curIndex > tasks.size() - 1 | curIndex < 1) {
+            if (curIndex > tasks.size() - 1 | curIndex < 0) {
                 throw new NoSuchTask(curIndex);
             }
             Task object = tasks.get(curIndex);
@@ -219,7 +219,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new EmptyOrder("mark");
             }
-            if (curIndex > tasks.size() - 1 | curIndex < 1 ) {
+            if (curIndex > tasks.size() - 1 | curIndex < 0 ) {
                 throw new NoSuchTask(curIndex);
             }
             Task object = tasks.get(curIndex);
