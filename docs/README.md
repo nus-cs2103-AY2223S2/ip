@@ -78,6 +78,17 @@ Got it! I've added this task:
 Now you have <number> tasks in the list.
 ```
 
+### `delete` - Delete a task
+
+**Command**: `delete <task number>`
+
+**Expected output:**
+```
+Noted. I've removed this task:
+    <Task information>
+Now you have <number> tasks in the list.
+```
+
 ### `mark` - Mark task as complete
 
 **Command**: `mark <task number>`
