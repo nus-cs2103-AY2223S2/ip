@@ -1,5 +1,5 @@
 # User Guide
-This user guide has been adapted from [SE-EDU's AddressBook-Level3]
+This user guide has been adapted from [SE-EDU's AddressBook-Level3](https://se-education.org/addressbook-level3/UserGuide.html)
 
 Duke is a desktop app for managing tasks, deadlines and events, with an input format suited for individuals who
 are familiar with text-based UIs.
@@ -18,6 +18,7 @@ are familiar with text-based UIs.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar duke.jar` command to run the application.
 5. Type the command in the command box and press Enter to execute it.
 6. Refer to the [Features](#features) below for details of each command.
+
 ## Features
 
 ### Adding a todo task: `todo`
