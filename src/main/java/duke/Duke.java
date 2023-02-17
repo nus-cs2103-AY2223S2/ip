@@ -165,13 +165,13 @@ public class Duke extends Application {
                     response.append(ui.tagTask(tasks, parser));
                     break;
                 default:
-                    response.append("I'm sorry, but I don't know what that means.");
+                    response.append("I don't know what that means.");
                 }
             }
         } catch (DukeException e) {
-            response.append("☹ OOPS!!! ");
+            response.append("Something went wrong... ");
             response.append(e.getMessage());
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return response.toString();
     }

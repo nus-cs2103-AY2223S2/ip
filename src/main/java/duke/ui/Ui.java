@@ -82,7 +82,7 @@ public class Ui {
             sb.append("\n");
             return sb;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid task number.\n");
+            throw new DukeException("Did you input a valid task number?");
         }
     }
 
@@ -103,7 +103,7 @@ public class Ui {
             sb.append("\n");
             return sb;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid task number.\n");
+            throw new DukeException("Did you input a valid task number?");
         }
     }
 
@@ -130,11 +130,11 @@ public class Ui {
      */
     public StringBuilder addToDo(TaskList tasks, Parser parser) throws DukeException {
         if (!parser.hasDescription()) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeException("Did you use the right format (todo <desc>)?");
         }
         String description = parser.parseToDoDescription();
         if (description.isBlank()) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeException("Did you use the right format (todo <desc>)?");
         }
         Task t = new ToDo(description);
         tasks.addTask(t);
@@ -147,7 +147,7 @@ public class Ui {
      * @param tasks List of current tasks.
      * @param parser Parser object to get Deadline details from input.
      */
-    public StringBuilder addDeadline(TaskList tasks, Parser parser) {
+    public StringBuilder addDeadline(TaskList tasks, Parser parser) throws DukeException {
         Task t = new Deadline(parser.parseDeadlineDescription(),
                 parser.parseDeadlineDate());
         tasks.addTask(t);
@@ -160,7 +160,7 @@ public class Ui {
      * @param tasks List of current tasks.
      * @param parser Parser object to get Event details from input.
      */
-    public StringBuilder addEvent(TaskList tasks, Parser parser) {
+    public StringBuilder addEvent(TaskList tasks, Parser parser) throws DukeException {
         Task t = new Event(parser.parseEventDescription(),
                 parser.parseEventFrom(), parser.parseEventTo());
         tasks.addTask(t);
@@ -185,7 +185,7 @@ public class Ui {
             sb.append("Now you have ").append(tasks.getSize()).append(" tasks in the list.\n");
             return sb;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid task number.");
+            throw new DukeException("Did you input a valid task number?");
         }
     }
 
@@ -216,11 +216,11 @@ public class Ui {
      */
     public StringBuilder findAndListTasks(TaskList tasks, Parser parser) throws DukeException {
         if (!parser.hasDescription()) {
-            throw new DukeException("Please enter a keyword to search for.");
+            throw new DukeException("Did you enter a keyword to search for?");
         }
         String keyword = parser.parseFindKeyword();
         if (keyword.isBlank()) {
-            throw new DukeException("Please enter a valid keyword.");
+            throw new DukeException("Did you enter a valid keyword?");
         }
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         int foundCount = 0;
@@ -252,7 +252,7 @@ public class Ui {
             sb.append("\n");
             return sb;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Input a valid task number.\n");
+            throw new DukeException("Did you input a valid task number?");
         }
     }
 

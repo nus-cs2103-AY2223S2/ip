@@ -1,5 +1,7 @@
 package duke.parser;
 
+import duke.exception.DukeException;
+
 /**
  * Class to represent a parser to make sense of user command.
  * Keeps track of the original input (String), the input split
@@ -56,8 +58,13 @@ public class Parser {
      *
      * @return 1-indexed position of task in list.
      */
-    public int getTaskNumber() {
-        return Integer.parseInt(splitInput[1]);
+    public int getTaskNumber() throws DukeException {
+        try{
+            return Integer.parseInt(splitInput[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("You might be missing the task number in your command.");
+        }
+
     }
 
     /**
@@ -84,8 +91,12 @@ public class Parser {
      *
      * @return Description of ToDo.
      */
-    public String parseToDoDescription() {
-        return input.substring(TODO_DESCRIPTION_INDEX);
+    public String parseToDoDescription() throws DukeException {
+        try {
+            return input.substring(TODO_DESCRIPTION_INDEX);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Did you use the right format (todo <desc>)?");
+        }
     }
 
     /**
@@ -93,9 +104,14 @@ public class Parser {
      *
      * @return Description of Deadline.
      */
-    public String parseDeadlineDescription() {
-        int byIndex = input.indexOf("/by");
-        return input.substring(DEADLINE_DESCRIPTION_INDEX, byIndex - 1);
+    public String parseDeadlineDescription() throws DukeException {
+        try {
+            int byIndex = input.indexOf("/by");
+            return input.substring(DEADLINE_DESCRIPTION_INDEX, byIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Did you use the right format (deadline <desc> /by <date>)?");
+        }
+
     }
 
     /**
@@ -103,9 +119,13 @@ public class Parser {
      *
      * @return Date of Deadline.
      */
-    public String parseDeadlineDate() {
-        int byIndex = input.indexOf("/by");
-        return input.substring(byIndex + DEADLINE_DATE_OFFSET);
+    public String parseDeadlineDate() throws DukeException {
+        try {
+            int byIndex = input.indexOf("/by");
+            return input.substring(byIndex + DEADLINE_DATE_OFFSET);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Did you use the right format (deadline <desc> /by <date>)?");
+        }
     }
 
     /**
@@ -113,9 +133,13 @@ public class Parser {
      *
      * @return Description of Event.
      */
-    public String parseEventDescription() {
-        int fromIndex = input.indexOf("/from");
-        return input.substring(EVENT_DESCRIPTION_INDEX, fromIndex - 1);
+    public String parseEventDescription() throws DukeException {
+        try {
+            int fromIndex = input.indexOf("/from");
+            return input.substring(EVENT_DESCRIPTION_INDEX, fromIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Did you use the right format (event <desc> /from <date> /to <date>)?");
+        }
     }
 
     /**
@@ -123,10 +147,14 @@ public class Parser {
      *
      * @return 'From' date of Event.
      */
-    public String parseEventFrom() {
-        int fromIndex = input.indexOf("/from");
-        int toIndex = input.indexOf("/to");
-        return input.substring(fromIndex + EVENT_FROM_OFFSET, toIndex - 1);
+    public String parseEventFrom() throws DukeException {
+        try {
+            int fromIndex = input.indexOf("/from");
+            int toIndex = input.indexOf("/to");
+            return input.substring(fromIndex + EVENT_FROM_OFFSET, toIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Did you use the right format (event <desc> /from <date> /to <date>)?");
+        }
     }
 
     /**
@@ -134,12 +162,20 @@ public class Parser {
      *
      * @return 'To' date of Event.
      */
-    public String parseEventTo() {
-        int toIndex = input.indexOf("/to");
-        return input.substring(toIndex + EVENT_TO_OFFSET);
+    public String parseEventTo() throws DukeException {
+        try {
+            int toIndex = input.indexOf("/to");
+            return input.substring(toIndex + EVENT_TO_OFFSET);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Did you use the right format (event <desc> /from <date> /to <date>)?");
+        }
     }
 
-    public String parseFindKeyword() {
-        return input.substring(FIND_KEYWORD_INDEX);
+    public String parseFindKeyword() throws DukeException {
+        try {
+            return input.substring(FIND_KEYWORD_INDEX);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Did you use the right format (find <keyword>)?");
+        }
     }
 }
