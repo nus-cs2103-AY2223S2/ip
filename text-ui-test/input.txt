@@ -1,0 +1,6 @@
+event 2103T Semi-Auto Test /from 19 Jan 2250 /to 19 Jan 2359
+deadline 2103T Week 2 Commits /by 19 Jan 2359
+todo Curl up and cry
+mark 1
+unmark 1
+bye
