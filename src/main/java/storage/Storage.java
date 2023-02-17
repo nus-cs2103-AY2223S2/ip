@@ -1,11 +1,5 @@
 package storage;
 
-import dukeexception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +8,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import dukeexception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * Storage class to deal with the file.

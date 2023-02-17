@@ -1,10 +1,10 @@
 package userinteraction;
 
+import java.util.Scanner;
+
 import storage.Storage;
 import storage.TaskList;
 import task.Task;
-
-import java.util.Scanner;
 
 /**
  * Ui that displays commands' message.

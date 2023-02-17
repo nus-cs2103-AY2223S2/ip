@@ -1,10 +1,10 @@
 package utils;
 
-import dukeexception.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import dukeexception.DukeException;
 
 /**
  * Local date time formatting.
