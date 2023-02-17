@@ -5,7 +5,6 @@ import Duke.storage.Storage;
 import Duke.task.*;
 
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -75,11 +74,7 @@ public class Parser {
             }
             String input = division[0].trim();
             String time = division[1].trim();
-            try {
-                curTask = new Deadline(input, time);
-            } catch (DateTimeParseException e) {
-                throw e;
-            }
+            curTask = new Deadline(input, time);
             tasks.addTask(curTask);
             storage.updateList();
             reply = "Got it. I've added this task:\n\t"
@@ -105,13 +100,18 @@ public class Parser {
             }
             String input = division[0].trim();
             String[] timeDivision = division[1].split(" /to ");
+            if (timeDivision.length < 2) {
+                throw new EmptyTime(new Event("",
+                    "2022-01-01 0000", "2022-01-01 0000"));
+            }
             String startTime = timeDivision[0].trim();
             String endTime = timeDivision[1].trim();
-            try {
-                curTask = new Event(input, startTime, endTime);
-            } catch (DateTimeParseException e) {
-                throw e;
+            if (startTime.split("").length < 1
+                | endTime.split("").length < 1) {
+                throw new EmptyTime(new Event("",
+                    "2022-01-01 0000", "2022-01-01 0000"));
             }
+            curTask = new Event(input, startTime, endTime);
             tasks.addTask(curTask);
             storage.updateList();
             reply = "Got it. I've added this task:\n\t"
