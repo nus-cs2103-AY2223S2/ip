@@ -67,6 +67,12 @@ public class Ui {
         return wrapString("Current task list: ") + printList(list);
     }
 
+    /**
+     * Return list of reminders for printing,
+     * highlighting those which are overdue
+     * @param reminders ArrayList of Deadline objects
+     * @return Multi-line string for printing
+     */
     public String printReminders(ArrayList<Deadline> reminders) {
         assert reminders != null;
         // No deadline tasks found

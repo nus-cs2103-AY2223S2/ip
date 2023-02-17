@@ -10,6 +10,12 @@ public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
 
+    /**
+     * Creates an instance of an Event with the given description, start date and end date
+     * @param description String representing event description
+     * @param start LocalDate object representing start date
+     * @param end LocalDate object representing end date
+     */
     public Event(String description, LocalDate start, LocalDate end) {
         super(description, "E");
         this.start = start;

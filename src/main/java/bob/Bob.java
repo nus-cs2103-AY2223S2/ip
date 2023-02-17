@@ -32,7 +32,7 @@ public class Bob extends Application {
      */
     public Bob() {
         storage = new Storage("data/taskList.txt");
-        ui = new Ui("-", 30);
+        ui = new Ui("-", 40);
         tasks = new TaskList();
     }
 
@@ -159,9 +159,8 @@ public class Bob extends Application {
                 user,
                 bob
         );
-        
-        userInput.clear();
 
+        userInput.clear();
         // Save task list to data file after every input
         saveTasks();
     }
@@ -198,7 +197,6 @@ public class Bob extends Application {
         stage.getIcons().add(bob);
 
         mainLayout.setPrefSize(400.0, 600.0);
-        mainLayout.setStyle("-fx-background-color: #89D08E");
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);

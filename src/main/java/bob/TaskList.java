@@ -87,6 +87,11 @@ public class TaskList {
         return list.get(index - 1);
     }
 
+    /**
+     * Returns a list of tasks whose description contains the given keyword
+     * @param keyword String keyword for matching
+     * @return ArrayList of Task objects
+     */
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
 
@@ -100,6 +105,10 @@ public class TaskList {
         return filteredTasks;
     }
 
+    /**
+     * Returns a list of deadlines for reminders
+     * @return ArrayList of Deadline objects
+     */
     public ArrayList<Deadline> getReminders() {
         ArrayList<Deadline> reminders = new ArrayList<>();
 
@@ -113,6 +122,10 @@ public class TaskList {
         return reminders;
     }
 
+    /**
+     * Returns list of tasks
+     * @return ArrayList of Task objects
+     */
     public ArrayList<Task> getList() {
         return this.list;
     }

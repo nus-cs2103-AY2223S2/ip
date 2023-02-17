@@ -3,14 +3,13 @@ package bob;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import org.apache.commons.lang3.StringUtils;
+import java.util.regex.Pattern;
 
 /**
  * Utility class to parse commands related to Bob
  */
 public class Parser {
-    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd[ ha]");
+    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     // Check if string can be parsed to LocalDate
     private static boolean isDate(String s) {
@@ -22,86 +21,67 @@ public class Parser {
         }
     }
 
-    //Check that the string is a number
-    private static boolean isInt(String s) {
-        if (s == null) {
-            return false;
-        }
-        // Check that every char is a digit
-        for (int i = 0, len = s.length(); i < len; i++) {
-            char c = s.charAt(i);
-            if (c < '0' || c > '9') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Command: todo <description>
+    /** Determine if a string is a valid todo command */
     private static boolean isTodo(String s) {
-        String[] command = s.split(" ");
-        return command.length > 1 && command[0].equals("todo");
+        // Command: todo <description>
+        boolean isValidTodo = Pattern.matches("^todo [\\w ]+$", s);
+        return isValidTodo;
     }
 
-    // Command: event <description> /from <start> /to <4pm>
+    /** Determine if a string is a valid event command */
     private static boolean isEvent(String s) {
-        // A valid event would have only 1 /to and /from command
-        boolean validMatches = StringUtils.countMatches(s, " /from ") == 1
-                && StringUtils.countMatches(s, " /to ") == 1;
+        // Command: event <description> /from <start> /to <4pm>
+        String regex = "^event [\\w ]+ /from \\d{4}-\\d{2}-\\d{2} /to \\d{4}-\\d{2}-\\d{2}$";
+        boolean hasValidPattern = Pattern.matches(regex, s);
 
-        // A valid command would have 3 different sections with this split
+        // ['from', <startDate>, <endDate>]
         String[] splitCommand = s.split(" /from | /to ");
+        String startDate = splitCommand[1];
+        String endDate = splitCommand[2];
+        boolean hasValidDates = isDate(startDate) && isDate(endDate);
 
-        // Check if a description exists
-        String[] commandAndDescription = splitCommand[0].split(" ");
-
-
-        return validMatches
-                && splitCommand.length == 3
-                && commandAndDescription.length > 1
-                && commandAndDescription[0].equals("event")
-                && s.indexOf("/from") < s.indexOf("/to") // A valid command has /from before /to
-                && isDate(splitCommand[1])
-                && isDate(splitCommand[2]);
+        return hasValidPattern && hasValidDates;
     }
 
-    // Command: deadline <description> /by <deadline>
+    /** Determine if a string is a valid deadline command */
     private static boolean isDeadline(String s) {
+        // Command: deadline <description> /by <deadline>
+        String regex = "^deadline [\\w ]+ /by \\d{4}-\\d{2}-\\d{2}$";
+        boolean hasValidPattern = Pattern.matches(regex, s);
+
+        // ['deadline', <date>]
         String[] splitCommand = s.split(" /by ");
-        String[] commandAndDescription = splitCommand[0].split(" ", 2);
+        String date = splitCommand[1];
+        boolean hasValidDate = isDate(date);
 
-        return splitCommand.length == 2
-                && commandAndDescription.length == 2
-                && commandAndDescription[0].equals("deadline")
-                && isDate(splitCommand[1]);
+        return hasValidPattern && hasValidDate;
     }
 
-    // Determine if a string can be used to mark a task
+    /** Determine if a string is a valid mark command */
     private static boolean isMark(String s) {
-        String[] words = s.split(" ");
+        boolean isValidMark = Pattern.matches("^mark \\d+$", s);
 
-        return words.length == 2
-                && words[0].equals("mark")
-                && isInt(words[1]);
+        return isValidMark;
     }
 
-    // Determine if a string can be used to unmark a task
+    /** Determine if a string is a valid unmark command */
     private static boolean isUnmark(String s) {
-        String[] words = s.split(" ");
+        boolean isValidUnmark = Pattern.matches("^unmark \\d+$", s);
 
-        return words.length == 2
-                && words[0].equals("unmark")
-                && isInt(words[1]);
+        return isValidUnmark;
     }
 
-    private static boolean isDelete(String input) {
-        String[] command = input.split(" ");
-        return command.length == 2 && command[0].equals("delete") && isInt(command[1]);
+    /** Determine if a string is a valid delete command */
+    private static boolean isDelete(String s) {
+        boolean isValidDelete = Pattern.matches("^delete \\d+$", s);
+
+        return isValidDelete;
     }
 
-    private static boolean isFind(String input) {
-        String[] command = input.split(" ", 2);
-        return command.length == 2 && command[0].equals("find");
+    /** Determine if a string is a valid find command */
+    private static boolean isFind(String s) {
+        boolean isValidFind = Pattern.matches("^find [\\w ]+$", s);
+        return isValidFind;
     }
 
     /**
