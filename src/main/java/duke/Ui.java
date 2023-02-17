@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  * duke.Ui class represents User interface when using the chatbox.
@@ -87,5 +88,17 @@ public class Ui {
         reply("Noted. I've removed this task:\n"
                 + target + "\nNow you have " + size + " task(s) in the list\n");
 
+    }
+
+    /**
+     * Prints a message corresponding to the finding action with the list of task found.
+     *
+     * @param resultedTasks An Stream of Task object encapsulating all tasks found.
+     */
+    public static void getFindTaskMessage(Stream<Task> resultedTasks) {
+        Stream<String> searchResult = resultedTasks.map((task) -> task.toString());
+        String listingResultMessage = searchResult.reduce("", (result, element) -> result + element + "\n");
+        reply("Here are the matching tasks in your list:\n"
+                + listingResultMessage);
     }
 }

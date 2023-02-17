@@ -35,6 +35,9 @@ public class Parser {
         } else if (command.startsWith("delete ")) {
             taskList.delete(command);
             return false;
+        } else if (command.startsWith("find ")) {
+            taskList.find(command);
+            return false;
         }
 
         String description = command;

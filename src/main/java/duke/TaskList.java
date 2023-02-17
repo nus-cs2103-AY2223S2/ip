@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * duke.TaskList class encapsulates the information of the tasks keyed in the chatbot by the user.
@@ -74,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task specified in the input of user from the task list
+     * Delete the task specified in the input of user from the task list.
      *
      * @param command User input specifying which task to delete.
      */
@@ -85,5 +87,17 @@ public class TaskList {
         Ui.getDeleteTaskMessage(target, size);
         tasks.remove(index);
         Storage.writeFile(tasks);
+    }
+
+    /**
+     * Find the task specified in the input of the user from the task list.
+     *
+     * @param command User input specifying which task keyword to find.
+     */
+    public void find(String command) {
+        String keyWord = command.substring(5);
+        Predicate<Task> keyWordFilter = task -> (task.getDescription().contains(keyWord));
+        Stream<Task> resultedTasks = tasks.stream().filter(keyWordFilter);
+        Ui.getFindTaskMessage(resultedTasks);
     }
 }
