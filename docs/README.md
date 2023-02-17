@@ -23,7 +23,7 @@ Adds a Deadline to the task list.
 
 Format: `deadline DESCRIPTION /by DEADLINE DAY`
 
-:bulb: Note: Dates should have the format `yyyy/MM/dd HHmm` 24-hour time format
+💡 Note: Dates should have the format `yyyy/MM/dd HHmm` 24-hour time format
 
 Examples: `deadline return book /by 2023/02/18 2359`
 
@@ -32,7 +32,7 @@ Adds an Event to the task list.
 
 Format: `event DESCRIPTION /from START_DATE_TIME /to END_DATE_TIME`
 
-:bulb: Note: Dates should have the format `yyyy/MM/dd HHmm` 24-hour time format
+💡 Note: Dates should have the format `yyyy/MM/dd HHmm` 24-hour time format
 
 Examples: `event book reading event /from 2023/02/15 0800 /to 2023/03/01 1800`
 
@@ -44,18 +44,18 @@ Format: `list`
 ### Mark (Done/ Not done) : `mark` `unmark`
 Marks task as done or not done.
 
-Format: `mark TASK_NUMBER` | `unmark TASK_NUMBER`
+Format: `mark TASK_NUMBER` `unmark TASK_NUMBER`
 
-:bulb: Note: `TASK_NUMBER` is the number as appears in the list
+💡 Note: `TASK_NUMBER` is the number as appears in the list
 
-Examples: `mark 1` | `unmark 3`
+Examples: `mark 1` `unmark 3`
 
 ### Delete : `delete`
 Deletes a task from the task list.
 
 Format: `delete TASK_NUMBER`
 
-:bulb: Note: `TASK_NUMBER` is the number as appears in the list
+💡 Note: `TASK_NUMBER` is the number as appears in the list
 
 Examples: `delete 1`
 
@@ -73,7 +73,7 @@ Stores your current task list into an archive file in `\data\archive.txt`
 
 Format: `archive`
 
-:warning: **IMPORTANT!** This command clears your current task list
+⚠️ **IMPORTANT!** This command clears your current task list
 
 
 ### Exiting the program: `bye`
