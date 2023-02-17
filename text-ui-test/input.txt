@@ -1,0 +1,6 @@
+todo cs2103t stuff
+event project meeting /from 2023-01-22 1100 /to 2023-01-22 1400
+deadline do homework /by 2023-01-22 1400
+deadline return book /by 2023-01-22 1400
+todo everything that is not done hehexd
+bye
