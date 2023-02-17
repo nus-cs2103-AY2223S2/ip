@@ -136,7 +136,7 @@ in the command.
 `mark {TASK NUMBER}`
 
 #### Example Usage:
-`mark 1` will make the first task in the list as complete.
+`mark 1` will mark the first task in the list as complete.
 
 #### Description:
 Marks the task as complete according to the task number given.
@@ -149,7 +149,7 @@ To find out what number a task is, use the `list` command.
 `unmark {TASK NUMBER}`
 
 #### Example Usage:
-`unmark 1` will make the first task in the list as incomplete.
+`unmark 1` will mark the first task in the list as incomplete.
 
 #### Description:
 Marks the task as incomplete according to the task number given.
