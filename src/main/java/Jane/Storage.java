@@ -45,6 +45,7 @@ import java.util.List;
             System.out.println("cannot read the list");
             assert lines != null;
         }
+        assert lines != null;
         ArrayList<jane.task.Task> tasks = new ArrayList<jane.task.Task>();
         for (String s : lines) {
             //to separate each portion of the task eg D | taskname | deadline to easily see which type of task and deadline
@@ -71,6 +72,7 @@ import java.util.List;
     //Writes into JaneList.txt
     public static void updateList(ArrayList<jane.task.Task> tasks) {
         ArrayList<String> list = new ArrayList<String>();
+        assert tasks.isEmpty()==false;
         for (jane.task.Task t : tasks) {
             list.add(t.save());
         }
