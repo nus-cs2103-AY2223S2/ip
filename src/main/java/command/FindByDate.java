@@ -26,8 +26,7 @@ public class FindByDate implements Command {
      * @see Parser
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("findbydate"))
+        return Parser.nextStrIgnoreCase("findbydate")
                 .thenIgnore(Parser.skipSpace())
                 .ignoreThen(Parser.dateParser())
                 .<Command>map(FindByDate::new)

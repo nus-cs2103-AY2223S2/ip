@@ -25,8 +25,7 @@ public class Mark implements Command {
      */
     public static Parser<Command> parser() {
         return Parser.strParserIgnoreCase("mark")
-                .thenIgnore(Parser.skipSpace())
-                .ignoreThen(Parser.decimal())
+                .ignoreThen(Parser.nextInt())
                 .<Command>map(Mark::new)
                 .overrideMsg(FORMAT);
     }

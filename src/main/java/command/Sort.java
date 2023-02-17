@@ -22,8 +22,7 @@ public class Sort implements Command {
      * @return Parser that can parse sort command.
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("sort"))
+        return Parser.nextStrIgnoreCase("sort")
                 .<Command>map(str -> new Sort())
                 .overrideMsg(FORMAT);
     }

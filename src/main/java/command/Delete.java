@@ -25,10 +25,8 @@ public class Delete implements Command {
      * @see Parser
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("delete"))
-                .thenIgnore(Parser.skipSpace())
-                .ignoreThen(Parser.decimal())
+        return Parser.nextStrIgnoreCase("delete")
+                .ignoreThen(Parser.nextInt())
                 .<Command>map(Delete::new)
                 .overrideMsg(FORMAT);
     }

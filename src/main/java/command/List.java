@@ -17,9 +17,8 @@ public class List implements Command {
      * @see Parser
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("list"))
-                .<Command>map(ok -> new List())
+        return Parser.nextStrIgnoreCase("list")
+                .<Command>map(s -> new List())
                 .overrideMsg(FORMAT);
     }
 

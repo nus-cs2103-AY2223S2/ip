@@ -26,10 +26,8 @@ public class Find implements Command {
      * @return Parser that parses find command input
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("find"))
-                .ignoreThen(Parser.nextStr()
-                        .many())
+        return Parser.nextStrIgnoreCase("find")
+                .ignoreThen(Parser.nextStr().many())
                 .map(lst -> lst.stream()
                         .map(String::toLowerCase)
                         .collect(Collectors.toList()))

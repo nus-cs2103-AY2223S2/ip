@@ -25,10 +25,8 @@ public class Unmark implements Command {
      * @see Parser
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("unmark"))
-                .thenIgnore(Parser.skipSpace())
-                .ignoreThen(Parser.decimal())
+        return Parser.nextStrIgnoreCase("unmark")
+                .ignoreThen(Parser.nextInt())
                 .<Command>map(Unmark::new)
                 .overrideMsg(FORMAT);
     }

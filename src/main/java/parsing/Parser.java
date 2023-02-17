@@ -147,6 +147,22 @@ public class Parser<T> {
     }
 
     /**
+     * @param str String to be parsed
+     * @return Parser that parses specific string ignoring leading spaces
+     */
+    public static Parser<String> nextStr(String str) {
+        return skipSpace().ignoreThen(strParser(str));
+    }
+
+    /**
+     * @param str String to be parsed
+     * @return Parser that parses specific string ignoring leading spaces and case
+     */
+    public static Parser<String> nextStrIgnoreCase(String str) {
+        return skipSpace().ignoreThen(strParserIgnoreCase(str));
+    }
+
+    /**
      * @param p Parser to compare against
      * @return Parser that parses a string before another parse succeeds
      */
@@ -194,6 +210,13 @@ public class Parser<T> {
         return positiveDecimal()
                 .or(negativeDecimal())
                 .overrideMsg("Failed to parse integer");
+    }
+
+    /**
+     * @return Parser that parses next integer ignoring leading spaces
+     */
+    public static Parser<Integer> nextInt() {
+        return skipSpace().ignoreThen(decimal());
     }
 
     /**

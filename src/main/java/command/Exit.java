@@ -17,8 +17,7 @@ public class Exit implements Command {
      * @see Parser
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("bye"))
+        return Parser.nextStrIgnoreCase("bye")
                 .<Command>map(s -> new Exit())
                 .overrideMsg(FORMAT);
     }

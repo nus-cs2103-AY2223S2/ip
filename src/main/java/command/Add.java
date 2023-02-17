@@ -34,12 +34,10 @@ public class Add implements Command {
      * @see Todo
      */
     private static Parser<Task> todoParser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("todo"))
-                .thenIgnore(Parser.skipSpace())
+        return Parser.nextStrIgnoreCase("todo")
                 .ignoreThen(Parser.nextLine())
                 .map(Util::cleanup)
-                .<Task>bind(s -> Parser.retn(new Todo(s)))
+                .<Task>map(Todo::new)
                 .overrideMsg(TODO_FORMAT);
     }
 
@@ -49,9 +47,7 @@ public class Add implements Command {
      * @see Deadline
      */
     private static Parser<Task> deadlineParser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("deadline"))
-                .thenIgnore(Parser.skipSpace())
+        return Parser.nextStrIgnoreCase("deadline")
                 .ignoreThen(Parser.strUntil(Parser.strParserIgnoreCase("/by")))
                 .thenIgnore(Parser.skipSpace())
                 .<Task>bind(s -> Parser.dateParser()
@@ -65,9 +61,7 @@ public class Add implements Command {
      * @see Event
      */
     private static Parser<Task> eventParser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("event"))
-                .thenIgnore(Parser.skipSpace())
+        return Parser.nextStrIgnoreCase("event")
                 .ignoreThen(Parser.strUntil(Parser.strParserIgnoreCase("/from")))
                 .thenIgnore(Parser.skipSpace())
                 .<Task>bind(s -> Parser.dateParser()
@@ -85,7 +79,8 @@ public class Add implements Command {
      * @see Add
      */
     public static Parser<Command> parser() {
-        return todoParser().or(deadlineParser())
+        return todoParser()
+                .or(deadlineParser())
                 .or(eventParser())
                 .map(Add::new);
     }

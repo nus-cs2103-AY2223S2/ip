@@ -34,8 +34,7 @@ public class Help implements Command {
      * @return Parser that parses help command.
      */
     public static Parser<Command> parser() {
-        return Parser.skipSpace()
-                .ignoreThen(Parser.strParserIgnoreCase("help"))
+        return Parser.nextStrIgnoreCase("help")
                 .ignoreThen(Parser.nextStr().or(Parser.strParser("")))
                 .map(String::toLowerCase)
                 .map(Help::new);
