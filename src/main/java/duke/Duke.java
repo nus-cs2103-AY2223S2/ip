@@ -11,18 +11,16 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * The construction of duke
+     * Constructs an instance
      * @param filePath file path for saving data
      */
     public Duke(String filePath) {
-        Ui ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
 
         try {
             tasks = storage.load();
         } catch (IOException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -33,15 +31,11 @@ public class Duke {
      * @return response to the user command
      */
     public String getResponse(String input) {
-        String temp = "";
+        String temp;
 
         try {
-            if (input.equals("bye")) {
-                temp += Ui.exit();
-            } else {
-                temp = Parser.parse(input, tasks);
-                storage.updateFile(tasks);
-            }
+            temp = Parser.parse(input, tasks);
+            storage.updateFile(tasks);
             return temp;
         } catch (IOException e) {
             return "Error occurs!";

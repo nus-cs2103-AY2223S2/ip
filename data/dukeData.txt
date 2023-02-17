@@ -1,6 +1,4 @@
-T | 1 | study
-D | 1 | discussion | Jan 1 2019 1630
-T | 1 | play
-T | 0 | tuition
-D | 0 | iu | Sep 3 2023 1830
-E | 0 | jh | Jan 2 2023 1800 | Jan 2 2023 1830
+D | 1 | drink water | Jan 1 2021 1830
+E | 0 | assign1 | Jan 1 2109 1820 | Jan 2 2109 1200
+T | 1 | homework
+T | 0 | drawing

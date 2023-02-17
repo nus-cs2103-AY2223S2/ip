@@ -24,8 +24,8 @@ public class Ui {
     public static String showUserGuide() {
         String userGuide = "If you want to communicate with me, please follow the instructions below: \n"
                 + "1. todo [task name]\n"
-                + "2. deadline [task name] /by yyyy-MM-dd HHmm\n"
-                + "3. event [task name] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm\n"
+                + "2. deadline [task name] /by dd/MM/yyyy HHmm\n"
+                + "3. event [task name] /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm\n"
                 + "4. mark [task index]\n"
                 + "5. unmark [task index]\n"
                 + "6. list\n"
@@ -42,39 +42,10 @@ public class Ui {
      * @return exit message
      */
     public static String exit() {
+        System.exit(0);
         return INDENTATION + "Bye. Hope to see you again soon!";
     }
 
-    /**
-     * Shows loading error
-     * @return error message
-     */
-    public String showLoadingError() {
-        return INDENTATION + "Loading error! please try again"
-                + System.getProperty("line.separator");
-    }
-
-
-    /**
-     * Shows list details
-     * @param task task
-     */
-    public static String showList(TaskList task) {
-        assert task == null : "Invalid task";
-        StringBuilder str = new StringBuilder();
-
-        str.append(INDENTATION + "Here are the tasks in your list: ");
-        str.append(System.getProperty("line.separator"));
-
-        for (int i = 0; i < task.size(); i++) {
-            str.append(INDENTATION).append(i + 1).append(". ").append(task.get(i).toString());
-            str.append(System.getProperty("line.separator"));
-        }
-
-        str.append(INDENTATION).append("There are ").append(task.size()).append(" tasks right now!");
-        str.append(System.getProperty("line.separator"));
-        return str.toString();
-    }
 
     /**
      * Shows that task is marked as done
@@ -88,7 +59,7 @@ public class Ui {
 
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
-        //tasks.get(number).isDone = true;
+
         tasks.get(number).markDone();
 
 
@@ -113,10 +84,9 @@ public class Ui {
 
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
-        //tasks.get(number).isDone = false;
         tasks.get(number).markUndone();
 
-        str.append("Nice! I've marked this task as done:");
+        str.append("Nice! I've marked this task as undone:");
         str.append(System.getProperty("line.separator"));
         str.append(INDENTATION).append(num).append(". ").append(tasks.get(number).toString());
         str.append(System.getProperty("line.separator"));
@@ -142,14 +112,11 @@ public class Ui {
         str.append(System.getProperty("line.separator"));
 
         tasks.remove(index);
-        //Task.taskNum--;
-        //tasks.size();
+
         assert tasks.size() == originalSize - 1;
 
-        //Task.taskNum
         str.append(" Now you have ").append(tasks.size()).append(" tasks in the list.");
         str.append(System.getProperty("line.separator"));
         return str.toString();
     }
 }
-

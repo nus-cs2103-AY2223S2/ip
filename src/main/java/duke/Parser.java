@@ -15,15 +15,6 @@ import duke.tasks.Todo;
  */
 public class Parser {
     private static final String INDENTATION = " ";
-    private Ui ui;
-
-    /**
-     * Parser constructor
-     * @param ui
-     */
-    public Parser(Ui ui) {
-        this.ui = ui;
-    }
 
     /**
      * Inputs commands such as  list, mark, unmark, delete, to do, deadline, and event
@@ -39,7 +30,7 @@ public class Parser {
         case "find":
             return findCommand(cmd, tasks);
         case "list":
-            return Ui.showList(tasks);
+            return showList(tasks);
         case "mark":
             return markCommand(cmd, tasks);
         case "unmark":
@@ -61,8 +52,33 @@ public class Parser {
         }
     }
 
+
     /**
-     * Sorts the command in 3 different groups: todo,deadline, event
+     * Shows list details
+     * @param task task
+     */
+    public static String showList(TaskList task) {
+        StringBuilder str = new StringBuilder();
+
+        if (task.size() == 0) {
+            return "Sorry! There is no task in the list!";
+        }
+        str.append(INDENTATION + "Here are the tasks in your list: ");
+        str.append(System.getProperty("line.separator"));
+
+        for (int i = 0; i < task.size(); i++) {
+            str.append(INDENTATION).append(i + 1).append(". ").append(task.get(i).toString());
+            str.append(System.getProperty("line.separator"));
+        }
+
+        str.append(INDENTATION).append("There are ").append(task.size()).append(" tasks right now!");
+        str.append(System.getProperty("line.separator"));
+        return str.toString();
+    }
+
+
+    /**
+     * Sorts the command in 3 different groups: to-do,deadline, event
      * @param cmd command
      * @param  tasks task
      * @return sort result
@@ -87,14 +103,14 @@ public class Parser {
             if (sortTask.size() != 0) {
                 str.append("Here are the sorted result:\n");
                 for (Task task: sortTask) {
-                    str.append("\u2764 " + task + "\n");
+                    str.append("❤ ").append(task).append("\n");
                 }
                 return str.toString();
             } else {
                 return "Sorry, there is no record of the specified type!";
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "  ☹ OOPS!!! The sort command is missing the task type!\n";
+            return "  ☹ OOPS!!! The format of sort command: sort [todo/deadline/event]!\n";
         }
     }
 
@@ -112,8 +128,12 @@ public class Parser {
         try {
             str += Ui.done(words[1], tasks);
             str += "\n";
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             str += "  ☹ OOPS!!! The index number cannot be empty. \n";
+        } catch (IndexOutOfBoundsException e) {
+            str += "  ☹ OOPS!!! The index number is out of bounds. \n";
+        } catch (NumberFormatException e) {
+            str += "  ☹ OOPS!!! The index number cannot be string. \n";
         }
         return str;
     }
@@ -132,8 +152,12 @@ public class Parser {
         try {
             str += Ui.undone(words[1], tasks);
             str += "\n";
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             str += "  ☹ OOPS!!! The index number cannot be empty. \n";
+        } catch (IndexOutOfBoundsException e) {
+            str += "  ☹ OOPS!!! The index number is out of bounds. \n";
+        } catch (NumberFormatException e) {
+            str += "  ☹ OOPS!!! The index number cannot be string. \n";
         }
 
         return str;
@@ -141,7 +165,6 @@ public class Parser {
 
     /**
      * Deletes the task
-     *
      * @param cmd command
      * @param  tasks task
      * @return delete command
@@ -154,37 +177,49 @@ public class Parser {
         try {
             str += Ui.delete(words[1], tasks);
             str += "\n";
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             str += "  ☹ OOPS!!! The index number cannot be empty. \n";
+        } catch (IndexOutOfBoundsException e) {
+            str += "  ☹ OOPS!!! The index number is out of bounds. \n";
+        } catch (NumberFormatException e) {
+            str += "  ☹ OOPS!!! The index number cannot be string. \n";
         }
         return str;
     }
 
     /**
      * Finds the task
-     *
      * @param cmd command
      * @param  tasks task
      * @return find result
      */
     public static String findCommand(String cmd, TaskList tasks) {
-        String info;
-        String str = "";
+        StringBuilder str = new StringBuilder();
+        boolean isInList = false;
         String command = cmd.trim();
+        String[] words = command.split(" ");
+        String temp = "";
 
         try {
-            info = command.substring(command.indexOf(" ") + 1);
-
             for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).getDescription().contains(info)) {
-                    str += INDENTATION + "Here are the matching tasks in your list:";
-                    str += INDENTATION + (i + 1) + "." + tasks.get(i).toString();
+                if (tasks.get(i).getDescription().contains(words[1])) {
+                    isInList = true;
+                    temp += INDENTATION + (i + 1) + ". " + tasks.get(i).toString() + "\n";
                 }
             }
-        } catch (Exception e) {
-            str += "  ☹ OOPS!!! The description of a find cannot be empty. \n";
+            if (isInList == true) {
+                str.append(INDENTATION + "Here are the matching tasks in your list:\n");
+                str.append(temp + "\n");
+            } else {
+                str.append("Sorry! There is no result!");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            str.append("  ☹ OOPS!!! The description of a find cannot be empty. \n");
         }
-        return str;
+
+
+
+        return str.toString();
     }
 
     /**
@@ -203,13 +238,15 @@ public class Parser {
         try {
             if (!words[1].contains(" ")) {
                 info = command.substring(command.indexOf(" ") + 1);
-                task = new Todo(info, false, tasks, false);
+                task = new Todo(info, false);
                 tasks.add(task);
-                str += new Todo(info, false, tasks, false);
-
+                str += "Got it! I've added this task: \n";
+                str += task;
+                str += "\n";
+                str += "Now you have " + tasks.size() + " tasks in the list!\n";
             }
-        } catch (Exception e) {
-            str += "☹ OOPS!!! The description of a todo cannot be empty.";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            str += "☹ OOPS!!! The description of a todo cannot be empty.\n";
         }
         return str;
     }
@@ -234,16 +271,15 @@ public class Parser {
             LocalDateTime datetime1 = LocalDateTime.parse(deadline, formatter);
 
             task = new Deadline(info,
-                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
-                    false, tasks, false);
-            str += new Deadline(info,
-                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
-                    false, tasks, false);
-            str += "\n";
+                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")), false);
+            str += "Got it! I've added this task: \n";
+            str += task;
             tasks.add(task);
-        } catch (Exception e) {
+            str += "\n";
+            str += "Now you have " + tasks.size() + " tasks in the list!\n";
+        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
             str += "  ☹ OOPS!!! Please follow the format: \n"
-                    + "deadline [task name] /by 01/02/2013 1820 \n";
+                    + "deadline [task name] /by MM/dd/yyyy HHmm \n";
         }
         return str;
     }
@@ -264,35 +300,25 @@ public class Parser {
             info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /from "));
             String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
             String totime = command.substring(command.indexOf(" /to ") + 4);
-            try {
-                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
-                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
-                LocalDateTime datetime1 = LocalDateTime.parse(fromtime, formatter1);
-                LocalDateTime datetime2 = LocalDateTime.parse(totime, formatter2);
 
-                task = new Event(info,
-                        datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
-                        datetime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
-                        false,
-                        tasks,
-                        false);
-                str += new Event(info,
-                        datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
-                        datetime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
-                        false,
-                        tasks,
-                        false
-                );
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
+            LocalDateTime datetime1 = LocalDateTime.parse(fromtime, formatter1);
+            LocalDateTime datetime2 = LocalDateTime.parse(totime, formatter2);
 
-            } catch (DateTimeParseException e) {
-                task = new Event(info, fromtime, totime, false, tasks, false);
-                str += new Event(info, fromtime, totime, false, tasks, false);
-            }
+            task = new Event(info,
+                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
+                    datetime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
+                    false);
+
+            str += "Got it! I've added this task: \n";
+            str += task;
             tasks.add(task);
-        } catch (Exception e) {
-            str += "  ☹ OOPS!!! Please follow the format:\n"
-                    + "event [task name] "
-                    + "/from 01/02/2013 1820 /to 01/02/2013 2030 \n";
+            str += "\n";
+            str += "Now you have " + tasks.size() + " tasks in the list!\n";
+        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+            str += "  ☹ OOPS!!! Please follow the format: \n"
+                    + "event [task name] /from MM/dd/yyyy HHmm /to MM/dd/yyyy HHmm\n";
         }
         return str;
     }

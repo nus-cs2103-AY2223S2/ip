@@ -12,7 +12,7 @@ public class TaskListTest {
     public void testTaskList() {
         TaskList tasklist = new TaskList();
         assertAll(() -> {
-            Task task = new Todo("play", false, tasklist, false);
+            Task task = new Todo("play", false);
             assertEquals("[T][   ] play", task.toString());
         });
     }

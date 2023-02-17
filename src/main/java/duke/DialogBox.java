@@ -62,16 +62,13 @@ public class DialogBox extends HBox {
         r.setWidth(50.0);
         displayPicture.setClip(r);
 
-        this.setSpacing(10);
-        this.setFillHeight(false);
-
         BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
-                new CornerRadii(20.0), new BorderWidths(1.0));
+                new CornerRadii(20.0), new BorderWidths(2.0));
         Border dialogBorder = new Border(borderStroke);
 
+        dialog.setStyle("-fx-padding: 15;  -fx-background-radius: 25; "
+                + "-fx-background-color: #4682B4; -fx-text-fill: black; -fx-opacity: 70%;");
         dialog.setBorder(dialogBorder);
-        //text turn green
-        //dialog.setTextFill(Color.GREEN);
         dialog.setPadding(new Insets(15, 15, 15, 15));
     }
 
@@ -82,7 +79,11 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
+        dialog.setStyle("-fx-padding: 15; -fx-background-radius: 25; "
+                + "-fx-background-color: #A0522D; -fx-text-fill: black; -fx-opacity: 70%;");
+
+
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
