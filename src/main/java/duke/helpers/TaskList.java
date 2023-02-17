@@ -122,6 +122,9 @@ public class TaskList {
      * Returns a String that details the contents of the TaskList's Task objects.
      */
     public String listThings() {
+        if (this.tasks.size() == 0) {
+            return "Oh... You currently have 0 tasks.... @.@";
+        }
         String returnstr = "Alright, here are the things: \n";
         for (int i = 0; i < this.tasks.size(); i++) {
             if (i == this.tasks.size() - 1) {
