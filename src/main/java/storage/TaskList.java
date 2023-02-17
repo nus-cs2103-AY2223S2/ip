@@ -1,6 +1,8 @@
 package storage;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import exception.InvalidArgumentException;
 
@@ -19,6 +21,10 @@ public class TaskList {
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -128,5 +134,35 @@ public class TaskList {
             res.append(String.format("\t%d.%s\n", i + 1, found.taskList.get(i).toString()));
         }
         return res.toString().trim();
+    }
+
+    /**
+     * Function to filter a task list on only contain a certain type of task
+     * @param taskType the type of task to filter by
+     * @return a filtered task list
+     */
+    public TaskList filterBy(Class<? extends Task> taskType) {
+        TaskList filtered = new TaskList();
+        for (Task task : taskList) {
+            if (taskType.isInstance(task)) {
+                filtered.createToDo(task);
+            }
+        }
+        return filtered;
+    }
+
+    /**
+     * Function to sort the task list in ascending or descending order.
+     * @param order the order to sort the task list in
+     * @return a new sorted TaskList
+     */
+    public TaskList sortBy(String order) {
+        if (order.equals("ascending")) {
+            Collections.sort(taskList);
+        } else if (order.equals("descending")) {
+            Comparator<Task> reverseComparator = Collections.reverseOrder();
+            Collections.sort(taskList, reverseComparator);
+        }
+        return new TaskList(taskList);
     }
 }

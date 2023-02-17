@@ -4,7 +4,7 @@ package storage;
  * Represents a single task
  * Consists of a description, and it's status (if it's done or not)
  */
-public class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 

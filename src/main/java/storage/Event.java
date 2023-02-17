@@ -38,6 +38,15 @@ public class Event extends Task {
      */
     @Override
     public String toData() {
-        return String.format("E | %s | %s - %s", super.toData(), from, to);
+        return String.format("E | %s | %s | %s", super.toData(), from, to);
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        if (other instanceof Event) {
+            Event e = (Event) other;
+            return this.from.compareTo(e.from);
+        }
+        return this.description.compareTo(other.description);
     }
 }

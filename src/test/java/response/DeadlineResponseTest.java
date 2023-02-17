@@ -45,7 +45,7 @@ public class DeadlineResponseTest {
         });
         String actualMessage = exception.getMessage();
         String expectedMessage = "The deadline cannot be empty."
-                + "Deadline has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)";
+                + " Deadline has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)";
         assertEquals(expectedMessage, actualMessage);
     }
     @Test

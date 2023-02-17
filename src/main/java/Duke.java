@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import exception.DukeException;
 import javafx.scene.image.Image;
 import parser.Parser;
@@ -5,9 +8,6 @@ import response.Response;
 import storage.Storage;
 import storage.TaskList;
 import ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents the Duke class
@@ -35,7 +35,6 @@ public class Duke {
         if (input.equalsIgnoreCase("bye")) {
             return ui.getExtStr();
         }
-        System.out.println(input);
         assert input.equals("");
         // Parse the user input
         Parser parser = new Parser(input);

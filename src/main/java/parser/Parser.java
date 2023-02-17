@@ -10,6 +10,7 @@ import response.FindResponse;
 import response.ListResponse;
 import response.MarkResponse;
 import response.Response;
+import response.SortResponse;
 import response.UnMarkResponse;
 
 /**
@@ -17,7 +18,7 @@ import response.UnMarkResponse;
  */
 public class Parser {
 
-    private enum Types { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND }
+    private enum Types { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, SORT }
 
     /**
      * Represents the user input
@@ -58,6 +59,8 @@ public class Parser {
             return new DeleteResponse(this.inputContent);
         case "FIND":
             return new FindResponse(this.inputContent);
+        case "SORT":
+            return new SortResponse(this.inputContent);
         default:
             throw new MissingArgumentException("I'm sorry, but I don't know what that means :-(");
         }
