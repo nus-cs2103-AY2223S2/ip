@@ -4,14 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 import duke.DateFormatDukeException;
-import duke.Duke;
 import duke.DukeException;
 import duke.NotRecognizedCommandDukeException;
+
+import java.time.LocalDate;
+
+import task.Todo;
 
 public class ParserTest {
     @Test
@@ -26,11 +27,19 @@ public class ParserTest {
 
     @Test
     public void testParseCommand() {
+        assertThrows(DukeException.class,
+                () -> Parser.parseCommand(" ", false));
+        assertThrows(DukeException.class,
+                () -> Parser.parseCommand("  todo", false));
         assertThrows(NotRecognizedCommandDukeException.class,
                 () -> Parser.parseCommand("test", false));
         assertThrows(NotRecognizedCommandDukeException.class,
                 () -> Parser.parseCommand("unknown", false));
+
+        assertDoesNotThrow(() -> new Todo("find  "));
+        assertDoesNotThrow(() -> new Todo("todo  "));
         assertDoesNotThrow(() -> Parser.parseCommand("todo test", false));
         assertDoesNotThrow(() -> Parser.parseCommand("deadline test /by 2022-10-22", false));
+        assertDoesNotThrow(() -> Parser.parseCommand("deadline test   /by     2022-10-22", false));
     }
 }
