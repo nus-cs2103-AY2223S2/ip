@@ -39,7 +39,7 @@ public class GUi extends Application {
 
     // Image files
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/pixlbot.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/PixlBot.png"));
 
     // Duke behaviour support
     private Storage storage;
@@ -127,6 +127,7 @@ public class GUi extends Application {
     private void welcomeUser() {
         assert dialogContainer != null;
         assert ui != null;
+        dialogContainer.getChildren().add(new ImageView("/images/logo.png"));
         dialogContainer.getChildren().add(new Label(ui.open()));
     }
 

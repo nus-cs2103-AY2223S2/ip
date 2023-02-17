@@ -17,8 +17,8 @@ public class Ui {
      * Welcomes the user by printing a message and the Logo
      */
     public String open() {
-        return "Welcome to\n" + Values.LOGO
-            + "\nEnter a command to start.\n";
+        return "Welcome to PixlBot\n"
+            + "Enter a command to start.\n";
     }
 
     /**
