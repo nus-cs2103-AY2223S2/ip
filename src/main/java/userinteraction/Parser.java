@@ -15,9 +15,9 @@ public class Parser {
      * @return The corresponding command.
      */
     public static Command parse(String input) {
-        if (input.equals("bye")) {
+        if (input.trim().equals("bye")) {
             return new ExitCommand(input);
-        } else if (input.equals("list")) {
+        } else if (input.trim().equals("list")) {
             return new ListCommand(input);
         } else if (input.startsWith("mark")) {
             return new MarkTaskCommand(input, true);
@@ -33,7 +33,7 @@ public class Parser {
             return new DeleteTaskCommand(input);
         } else if (input.startsWith("find")) {
             return new FindTaskCommand(input);
-        } else if (input.equals("help")) {
+        } else if (input.trim().equals("help")) {
             return new HelpCommand(input);
         } else {
             return new InvalidCommand(input);
