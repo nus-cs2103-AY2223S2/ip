@@ -3,6 +3,10 @@ public class ToDo extends Task{
     public ToDo() {
         super.tag = tag;
     }
+    public ToDo(String description) {
+        super.tag = tag;
+        super.description = description;
+    }
 
     @Override
     public void genDscp(String input) throws InvalidTodo{
