@@ -80,7 +80,8 @@ public class Processor {
 
         register("todo", ctx -> {
             var content = ctx.getArg("content");
-            var task = new Todo(content);
+            var place = ctx.getParser().getNamedArg("place");
+            var task = new Todo(content, place);
             ctx.getTasks().add(task);
             ctx.notifyAdded(task);
         });
@@ -88,7 +89,8 @@ public class Processor {
         register("deadline", ctx -> {
             var content = ctx.getArg("content");
             var deadline = ctx.getNamedDateTimeArg("by", "deadline");
-            var task = new Deadline(content, deadline);
+            var place = ctx.getParser().getNamedArg("place");
+            var task = new Deadline(content, place, deadline);
             ctx.getTasks().add(task);
             ctx.notifyAdded(task);
         });
@@ -97,7 +99,8 @@ public class Processor {
             var content = ctx.getArg("content");
             var from = ctx.getNamedDateTimeArg("from", "from");
             var to = ctx.getNamedDateTimeArg("to", "to");
-            var task = new Event(content, from, to);
+            var place = ctx.getParser().getNamedArg("place");
+            var task = new Event(content, place, from, to);
             ctx.getTasks().add(task);
             ctx.notifyAdded(task);
         });

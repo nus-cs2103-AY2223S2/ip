@@ -8,7 +8,7 @@ import java.util.Optional;
  */
 public abstract class Task implements Serializable {
     private final String content;
-    private final Optional<String> place;
+    private final String place;
     private boolean isDone;
 
     /**
@@ -17,7 +17,7 @@ public abstract class Task implements Serializable {
     public Task(String content, Optional<String> place) {
         this.content = content;
         this.isDone = false;
-        this.place = place;
+        this.place = place.orElse(null);
     }
 
     /**
@@ -42,13 +42,13 @@ public abstract class Task implements Serializable {
     }
 
     public Optional<String> getPlace() {
-        return place;
+        return Optional.ofNullable(place);
     }
 
     @Override
     public String toString() {
         var icon = isDone ? "X" : " ";
-        var placeStr = place.map(p -> String.format(" (@ %s)", p)).orElse("");
+        var placeStr = getPlace().map(p -> String.format(" (@ %s)", p)).orElse("");
         return String.format("[%s] %s%s", icon, content, placeStr);
     }
 }
