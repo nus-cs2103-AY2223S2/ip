@@ -13,7 +13,7 @@ import james.task.TaskList;
 public class AddEventCommand extends Command {
     public static final String COMMAND = "event";
 
-    public static final String MESSAGE = COMMAND + ": Adds a type of task event.\n"
+    public static final String MESSAGE = COMMAND + ": Adds a task of type event.\n"
             + "(e.g event project meeting \n"
             + "/from 25/03/2000 1800 /to 25/03/2000 1900)";
 
@@ -56,8 +56,8 @@ public class AddEventCommand extends Command {
         String descriptor2 = "/to";
         boolean hasNoDescriptor1 = !taskInformation.contains(descriptor1);
         boolean hasNoDescriptor2 = !taskInformation.contains(descriptor2);
-        boolean hasNoDate_from = taskInformation.trim().endsWith(descriptor1);
-        boolean hasNoDate_to = taskInformation.trim().endsWith(descriptor2);
+        boolean hasNoDateFrom = taskInformation.trim().endsWith(descriptor1);
+        boolean hasNoDateTo = taskInformation.trim().endsWith(descriptor2);
 
         if (hasNoDescriptor1 || hasNoDescriptor2) {
             throw new JamesException("Task description missing descriptor: "
@@ -66,7 +66,7 @@ public class AddEventCommand extends Command {
                     + MESSAGE_FORMAT);
         }
 
-        if (hasNoDate_from || hasNoDate_to) {
+        if (hasNoDateFrom || hasNoDateTo) {
             throw new JamesException("Task description missing date\n"
                     + MESSAGE_FORMAT);
         }

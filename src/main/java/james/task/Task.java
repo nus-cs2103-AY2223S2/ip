@@ -54,7 +54,7 @@ public class Task {
 
     /**
      * Returns the Task represented by a string to be stored in the taskList
-     * file in user's hard disk.
+     * file in storage file.
      *
      * @return The string representation of stored Task.
      */

@@ -13,7 +13,7 @@ import james.task.TaskList;
 public class AddMarkCommand extends Command {
     public static final String COMMAND = "mark";
 
-    public static final String MESSAGE = COMMAND + ": marks a task at the specified index as complete.\n"
+    public static final String MESSAGE = COMMAND + ": Marks a task at the specified index as complete.\n"
             + "(e.g mark 1)";
 
     public static final String MESSAGE_FORMAT = "Please mark the specified task in the following format:\n"
@@ -48,19 +48,20 @@ public class AddMarkCommand extends Command {
                     + MESSAGE_FORMAT);
         }
 
-        String indexStr = userInput.substring(COMMAND.length()).trim();
-        int index = Integer.parseInt(indexStr) - 1;
+        String indexString = userInput.substring(COMMAND.length()).trim();
+        int index = Integer.parseInt(indexString) - 1;
         boolean isInvalidTask = index >= tasks.size() || index < 0;
-        boolean hasBeenMarked = tasks.get(index).getIsDone();
 
 
         if (isInvalidTask) {
-            throw new JamesException("Task" + String.valueOf(index + 1) + " does not exist"
+            throw new JamesException("Task " + (index + 1) + " does not exist"
                     + "\nPlease check that you have keyed in the right index");
         }
 
+        boolean hasBeenMarked = tasks.get(index).getIsDone();
+
         if (hasBeenMarked) {
-            throw new JamesException("Task" + String.valueOf(index + 1) + "has been marked"
+            throw new JamesException("Task " + (index + 1) + " has been marked"
                     + "\nplease try marking another task");
         }
 

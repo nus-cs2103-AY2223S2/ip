@@ -3,8 +3,9 @@ package james.command;
 import james.exception.JamesException;
 import james.jamesbot.Storage;
 import james.jamesbot.Ui;
-import james.task.TaskList;
 import james.task.Deadline;
+import james.task.TaskList;
+
 
 
 
@@ -14,7 +15,7 @@ import james.task.Deadline;
 public class AddDeadlineCommand extends Command {
     public static final String COMMAND = "deadline";
 
-    public static final String MESSAGE = COMMAND + ": adds a task of type deadline.\n"
+    public static final String MESSAGE = COMMAND + ": Adds a task of type deadline.\n"
             + "(e.g deadline project /by 25/03/2000 1800)";
 
     public static final String MESSAGE_FORMAT = "Please follow the format for deadline:\n"

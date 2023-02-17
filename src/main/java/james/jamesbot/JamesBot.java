@@ -38,17 +38,24 @@ public class JamesBot {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
         } catch (JamesException e) {
             return e.getMessage();
         }
     }
 
+    /**
+     * Checks if the JamesBot program has ended.
+     *
+     * @param input The user input.
+     * @return true if the command exits the JamesBot program.
+     *         false if the command does not exit the JamesBot program.
+     */
     public boolean isEnd(String input) {
         try {
-            Command c = Parser.parse(input);
-            return c.isExit();
+            Command command = Parser.parse(input);
+            return command.isExit();
         } catch (JamesException e) {
             System.out.println(e.getMessage());
             return false;

@@ -18,11 +18,15 @@ import james.task.TaskList;
  */
 public class Ui {
 
+    // Command help prefix.
+    private static final String HELP_PREFIX = " > ";
+
+
     /**
      * Prints farewell words to users.
      */
     public String displayLeaveChat() {
-        String goodbyeWords = "good work today!\nhope to see you again soon";
+        String goodbyeWords = "Good work today!\n Hope to see you again soon";
         return goodbyeWords;
     }
 
@@ -34,8 +38,8 @@ public class Ui {
      */
     public String displayAddTask(Task task, int tasksLength) {
         String addToDoString = "You have added new tasks"
-                + "\n added: " + task.toString()
-                + "\nyou have " + tasksLength + " task(s)";
+                + "\n Added: " + task.toString()
+                + "\n You have " + tasksLength + " task(s)";
         return addToDoString;
     }
 
@@ -81,9 +85,9 @@ public class Ui {
      * @param tasksLength The length of the task list.
      */
     public String displayDeletedTask(Task task, int tasksLength) {
-        return "removing this task from your list...\n\t"
+        return "Removing this task from your list\n"
                 + task.toString()
-                + "\ntask removed! now you have " + String.valueOf(tasksLength) + " task(s)";
+                + "\nTask removed! Now you have " + (tasksLength) + " task(s)";
     }
 
 
@@ -99,7 +103,7 @@ public class Ui {
         if (hasFoundNoTasks) {
             return "No tasks matching this keyword";
         } else {
-            return "here are the tasks i found that match your keyword" + tasks.taskListToString();
+            return "Here are the tasks i found that match your keyword!" + tasks.taskListToString();
         }
     }
 
@@ -112,23 +116,26 @@ public class Ui {
         return e;
     }
 
+    //@@author elizabethhky@github.com-reused
+    //Reused from https://github.com/nus-cs2103-AY2223S1/ip/commit/81e454e31671a1bfe795abd6ce624d5b9b51060c
+    // with minor modifications
     /**
-     * Displays UwuBot program usage instructions.
+     * Displays JamesBot program usage instructions.
      *
-     * @return The instructions to use UwuBot.
+     * @return The instructions to use JamesBot.
      */
     public String displayCommands() {
-        AddEventCommand MarkCommand;
-        return "\u2022 " + AddToDoCommand.MESSAGE
-                + "\n\u2022 " + AddEventCommand.MESSAGE
-                + "\n\u2022 " + AddDeadlineCommand.MESSAGE
-                + "\n\u2022 " + DeleteCommand.MESSAGE
-                + "\n\u2022 " + AddMarkCommand.MESSAGE
-                + "\n\u2022 " + AddUnmarkCommand.MESSAGE
-                + "\n\u2022 " + FindCommand.MESSAGE
-                + "\n\u2022 " + ListTasksCommand.MESSAGE
-                + "\n\u2022 " + HelpCommand.MESSAGE
-                + "\n\u2022 " + ExitCommand.MESSAGE;
+        return HELP_PREFIX + AddToDoCommand.MESSAGE + "\n"
+                + HELP_PREFIX + AddDeadlineCommand.MESSAGE + "\n"
+                + HELP_PREFIX + AddEventCommand.MESSAGE + "\n"
+                + HELP_PREFIX + AddMarkCommand.MESSAGE + "\n"
+                + HELP_PREFIX + AddUnmarkCommand.MESSAGE + "\n"
+                + HELP_PREFIX + DeleteCommand.MESSAGE + "\n"
+                + HELP_PREFIX + ListTasksCommand.MESSAGE + "\n"
+                + HELP_PREFIX + FindCommand.MESSAGE + "\n"
+                + HELP_PREFIX + ExitCommand.MESSAGE + "\n"
+                + HELP_PREFIX + HelpCommand.MESSAGE;
     }
-
+    //@@author
 }
+

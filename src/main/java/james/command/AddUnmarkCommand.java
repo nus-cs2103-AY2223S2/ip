@@ -12,10 +12,10 @@ import james.task.TaskList;
 public class AddUnmarkCommand extends Command {
     public static final String COMMAND = "unmark";
 
-    public static final String MESSAGE = COMMAND + ": unmarks a task at the specified index as incomplete.\n"
+    public static final String MESSAGE = COMMAND + ": Unmarks a task at the specified index as incomplete.\n"
             + "(e.g unmark 1)";
 
-    public static final String MESSAGE_FORMAT = "Please unmark the specified task in the following format:\n"
+    public static final String MESSAGE_FORMAT = "Please follow the format for unmarking a task:\n"
             + "unmark [index of task]";
 
     private String userInput;
@@ -51,14 +51,16 @@ public class AddUnmarkCommand extends Command {
         String indexStr = userInput.substring(COMMAND.length()).trim();
         int index = Integer.parseInt(indexStr) - 1;
         boolean isInvalidTask = index >= tasks.size() || index < 0;
-        boolean hasBeenUnmarked = !tasks.get(index).getIsDone();
+
         if (isInvalidTask) {
             throw new JamesException("Task " + (index + 1) + " does not exist"
                     + "\nPlease check that you have keyed in the right index");
         }
 
+        boolean hasBeenUnmarked = !tasks.get(index).getIsDone();
+
         if (hasBeenUnmarked) {
-            throw new JamesException("Task" + (index + 1) + "has been unmarked"
+            throw new JamesException("Task " + (index + 1) + " has been unmarked"
                     + "\nplease try unmarking another task");
         }
 

@@ -10,14 +10,14 @@ import james.task.TaskList;
 public class ListTasksCommand extends Command {
     public static final String COMMAND = "list";
 
-    public static final String MESSAGE = COMMAND + ": prints out all of your tasks.";
+    public static final String MESSAGE = COMMAND + ": Prints out all of your tasks.";
 
     /**
-     * Executes the ListCommand which is to list all tasks stored in user's hard disk.
+     * Executes the ListCommand which is to list all tasks stored in the storage file.
      *
      * @param tasks The list where tasks are added to.
-     * @param ui The ui to print out JamesBot's response.
-     * @param storage The task list that is stored in the user's hard disk.
+     * @param ui The ui to print out response from JamesBot.
+     * @param storage The task list that is stored in the storage file.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.displayTasks(tasks);

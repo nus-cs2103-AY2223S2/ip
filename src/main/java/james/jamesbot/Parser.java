@@ -48,7 +48,7 @@ public class Parser {
         } else if (lowerCaseUserCmd.startsWith("help")) {
             return new HelpCommand();
         } else {
-            throw new JamesException("sorry \nI do not understand what does that mean.");
+            throw new JamesException("Sorry \nI do not understand what does that mean.");
         }
     }
 }

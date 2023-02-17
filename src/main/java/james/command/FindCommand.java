@@ -11,22 +11,22 @@ import james.task.TaskList;
 public class FindCommand extends Command {
     public static final String COMMAND = "find";
 
-    public static final String MESSAGE = COMMAND + ": finds tasks containing the keywords.\n"
+    public static final String MESSAGE = COMMAND + ": Finds tasks containing the keywords.\n"
             + "(e.g find book)";
 
     public static final String MESSAGE_FORMAT = "to find a task containing keywords, "
             + "use the following format:\n'find [keywords]'\nhere is an example, 'find book'";
 
-    private String userCommand;
+    private String userInput;
     private TaskList matchedTasks;
 
     /**
      * Constructs a FindCommand object.
      *
-     * @param userCommand The user input.
+     * @param userInput The user input.
      */
-    public FindCommand(String userCommand) {
-        this.userCommand = userCommand;
+    public FindCommand(String userInput) {
+        this.userInput = userInput;
         this.matchedTasks = new TaskList();
     }
 
@@ -34,18 +34,19 @@ public class FindCommand extends Command {
      * Executes the FindCommand which finds tasks containing the keyword typed by the user.
      *
      * @param tasks The list where tasks are added to.
-     * @param ui The ui to print out JamesBot's response.
-     * @param storage The task list that is stored in the user's hard disk.
+     * @param ui The ui to print out response from JamesBot.
+     * @param storage The task list that is stored in the storage file.
      * @throws JamesException If keyword is blank.
      */
+
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean hasNoKeyword = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
+        boolean hasNoKeyword = userInput.toLowerCase().replaceFirst(COMMAND, "").isBlank();
         if (hasNoKeyword) {
             throw new JamesException("Keyword is missing!\n"
                     + MESSAGE_FORMAT);
         }
 
-        String keyword = userCommand.substring(COMMAND.length()).trim();
+        String keyword = userInput.substring(COMMAND.length()).trim();
         int tasksLength = tasks.size();
 
         for (int i = 0; i < tasksLength; i++) {

@@ -19,7 +19,7 @@ public class TaskListTest {
 
     @Test
     public void taskListToString_nonzeroTasks_success() {
-        ArrayList<Task> tasksTemp = new ArrayList<Task>(Arrays.asList(new ToDo("read book"),
+        ArrayList<Task> tasksTemp = new ArrayList<>(Arrays.asList(new ToDo("read book"),
                 new ToDo("return book")));
         TaskList tasks = new TaskList();
         tasks.setTaskList(tasksTemp);
@@ -28,7 +28,7 @@ public class TaskListTest {
 
     @Test
     public void taskListToStoreString_nonzeroTasks_success() {
-        ArrayList<Task> tasksTemp = new ArrayList<Task>(Arrays.asList(new ToDo("read book"),
+        ArrayList<Task> tasksTemp = new ArrayList<>(Arrays.asList(new ToDo("read book"),
                 new ToDo("return book")));
         TaskList tasks = new TaskList();
         tasks.setTaskList(tasksTemp);

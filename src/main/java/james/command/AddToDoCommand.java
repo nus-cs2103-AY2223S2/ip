@@ -13,7 +13,7 @@ import james.task.ToDo;
 public class AddToDoCommand extends Command {
     public static final String COMMAND = "todo";
 
-    public static final String MESSAGE = COMMAND + ": adds a task of type todo.\n"
+    public static final String MESSAGE = COMMAND + ": Adds a task of type todo.\n"
             + "(e.g todo return book)";
 
     public static final String MESSAGE_FORMAT = "Please follow the format for todo task:\n"

@@ -64,7 +64,6 @@ public class Storage {
      */
     public TaskList load() throws JamesException {
         TaskList taskList = new TaskList();
-
         try {
             Scanner scan = new Scanner(file);
             while (scan.hasNextLine()) {

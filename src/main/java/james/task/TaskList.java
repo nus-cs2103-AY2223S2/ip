@@ -83,7 +83,7 @@ public class TaskList {
         String taskString = "";
 
         for (int i = 0; i < count; i++) {
-            String listItem = " " + String.valueOf(i + 1) + ". " + taskList.get(i).toString();
+            String listItem = " " + (i + 1) + ". " + taskList.get(i).toString();
 
             taskString = taskString + "\n" + listItem;
         }
@@ -91,27 +91,30 @@ public class TaskList {
         return taskString;
     }
 
-
+    //@@author elizabethhky@github.com-reused
+    //Reused from https://github.com/nus-cs2103-AY2223S1/ip/commit/81e454e31671a1bfe795abd6ce624d5b9b51060c
+    // with minor modifications
     /**
      * Returns the TaskList represented by a string to be stored in the taskList
-     * file in user's hard disk.
+     * file in the storage file.
      *
      * @return The string representation of stored TaskList.
      */
     public String taskListToStoreString() {
         int count = taskList.size();
-        String taskListStorage = "";
+        String storageOfTaskList = "";
 
         for (int i = 0; i < count; i++) {
-            String taskItem = taskList.get(i).toStoreString();
+            String taskInput = taskList.get(i).toStoreString();
 
             if (i == 0) {
-                taskListStorage = taskItem;
+                storageOfTaskList = taskInput;
             } else {
-                taskListStorage = taskListStorage + "\n" + taskItem;
+                storageOfTaskList = storageOfTaskList + "\n" + taskInput;
             }
         }
 
-        return taskListStorage;
+        return storageOfTaskList;
     }
+    //@@author
 }

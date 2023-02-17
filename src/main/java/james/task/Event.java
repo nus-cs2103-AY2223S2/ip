@@ -17,7 +17,7 @@ public class Event extends Task {
      *
      * @param description The task description.
      * @param start The start time of the event.
-     * @param end   The end time of the event.
+     * @param end The end time of the event.
      */
     public Event(String description, String start, String end) {
         super(description);
@@ -28,14 +28,14 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String startFormat =  this.start.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        String startFormat = this.start.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         String endFormat = this.end.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        return "[E]" + super.toString() +  " (from:" + startFormat + " to:" + endFormat + ")";
+        return "[E]" + super.toString() + " (from:" + startFormat + " to:" + endFormat + ")";
     }
 
     @Override
     public String toStoreString() {
-        String startFormat =  this.start.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+        String startFormat = this.start.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
         String endFormat = this.end.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
         return "E | " + super.toStoreString() + " | " + startFormat + " | " + endFormat;
     }
