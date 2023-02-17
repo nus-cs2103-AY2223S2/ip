@@ -58,11 +58,14 @@ public class ApplicativeParser<T> {
     // INSTANCE FIELDS AND CONSTRUCTOR //
     /////////////////////////////////////
 
-    private Function<StringView, Optional<Pair<StringView, T>>> runner;
-    private String errorMessage = null;
+    private final Function<StringView, Optional<Pair<StringView, T>>> runner;
+    private final String errorMessage;
 
-    private ApplicativeParser(Function<StringView, Optional<Pair<StringView, T>>> runner) {
+    private ApplicativeParser(
+            Function<StringView, Optional<Pair<StringView, T>>> runner,
+            String errorMessage) {
         this.runner = runner;
+        this.errorMessage = errorMessage;
     }
 
     //////////////////////
@@ -71,7 +74,7 @@ public class ApplicativeParser<T> {
 
     private static <T> ApplicativeParser<T> fromRunner(
             Function<StringView, Optional<Pair<StringView, T>>> runner) {
-        return new ApplicativeParser<>(runner);
+        return new ApplicativeParser<>(runner, null);
     }
 
     /**
@@ -328,15 +331,23 @@ public class ApplicativeParser<T> {
     }
 
     /**
-     * Prepares to throw an exception (immediately) if this parser fails. The thrown exception will
-     * immediately stop a parsing pipeline.
+     * Returns a new parser that throws an exception (immediately) if this parser fails. The thrown
+     * exception will stop a parsing pipeline.
      *
      * @param errorMessage the error message of the exception
-     * @return this parser
+     * @return a new parser that throws if this parser fails
      */
     public ApplicativeParser<T> throwIfFail(String errorMessage) {
-        this.errorMessage = errorMessage;
-        return this;
+        return new ApplicativeParser<>(runner, errorMessage);
+    }
+
+    /**
+     * Returns a parser that does nothing when fails.
+     *
+     * @return a parser that does nothing when fails.
+     */
+    public ApplicativeParser<T> ignoreIfFail() {
+        return fromRunner(runner);
     }
 
     /**

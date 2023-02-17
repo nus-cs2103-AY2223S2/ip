@@ -30,6 +30,9 @@ public class DukeGui extends Application {
     @Override
     public void start(Stage stage) {
         Scene scene = new Scene(window);
+        stage.setTitle("Duke");
+        stage.setMinHeight(window.getMinHeight());
+        stage.setMinWidth(window.getMinWidth());
         stage.setScene(scene);
         stage.show();
     }

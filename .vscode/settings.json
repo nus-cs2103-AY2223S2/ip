@@ -19,5 +19,6 @@
     "editor.trimAutoWhitespace": true
   },
   "files.trimTrailingWhitespace": true,
-  "java.inlayHints.parameterNames.enabled": "none"
+  "java.inlayHints.parameterNames.enabled": "none",
+  "css.validate": false
 }

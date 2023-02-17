@@ -65,12 +65,19 @@ public class CommandParser {
                     .throwIfFail("incorrect format for an integer argument");
 
     private static final ApplicativeParser<Keyword> KEYWORD_PARSER =
-            NEXT_NON_WHITESPACES_PARSER.map(Keyword::findKeyword);
+            NEXT_NON_WHITESPACES_PARSER
+                    .optionalMap(Keyword::findKeyword)
+                    .throwIfFail("unknown command");
 
     private static final ApplicativeParser<Optional<Keyword>> OPTIONAL_KEYWORD_PARSER =
             KEYWORD_PARSER
+                    .ignoreIfFail()
                     .map(Optional::of)
-                    .or(ApplicativeParser.of(Optional.empty()));
+                    .or(ApplicativeParser
+                            .parseUntilEof()
+                            .filter(String::isBlank)
+                            .takeNext(ApplicativeParser.of(Optional.empty())))
+                    .throwIfFail("unknown command");
 
     private static final ApplicativeParser<String> WORD_PARSER = NEXT_NON_WHITESPACES_PARSER;
 
@@ -210,7 +217,9 @@ public class CommandParser {
             }
             runParser(THROW_IF_TOO_MANY_ARGUMENTS_PARSER);
         } catch (ParserException ex) {
-            throw new ParserException(keyword.getValue() + ": " + ex.getMessage());
+            throw keyword == Keyword.UNKNOWN
+                    ? ex
+                    : new ParserException(keyword.getValue() + ": " + ex.getMessage());
         }
         return cmd;
     }
