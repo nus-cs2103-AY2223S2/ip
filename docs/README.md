@@ -1,9 +1,11 @@
 # User Guide
 We live in a world full of distractions. Notifications from emails, social media requests and news all vie for your limited attention span. 
 
-_**iPman**_ believes that you have the power to manage your limited attention. _**iPman**_ is here to augment your discipline and manifest your innate focusing superpower.
-
-_**iPman**_ is a world-class productivity virtual assistant. _**iPman**_ was developed by productivity optimisers for productivity optimisers.
+_**iPman**_ 
+- believes that you have the power to manage your limited attention. 
+- is here to augment your discipline and manifest your innate focusing superpower.
+- is a world-class productivity virtual assistant. 
+- was developed by productivity optimisers for productivity optimisers.
 
 ![Screenshot](https://jedidiahC.github.io/ip/Ui.png)
 
