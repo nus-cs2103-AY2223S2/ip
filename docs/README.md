@@ -1,6 +1,6 @@
 # User Guide
 
-Bob is a chat-bot made to help you manage your tasks. He accepts CLI commands while having a GUI for display.
+Bob :frog: is a chat-bot made to help you manage your tasks. He accepts CLI commands while having a GUI for display.
 
 ## Installation
 1. Ensure that Java 11 or higher is installed.
@@ -22,8 +22,9 @@ find tasks | `find <keyword>` | `find appointment`
 show reminders | `remind` | `remind`
 
 ## Features 
-### :warning: Usage notes
+### :notebook: Usage notes
 - Fields which are enclosed by `<>` are to be input by user
+- `<description>` accepts alphanumeric strings with any number of spaces, but no special characters
 - `<date>`, `<startDate>`, `<endDate>` require the format YYYY-mm-dd
 - `<index>` refers to the index of the task given by `list` command
 
