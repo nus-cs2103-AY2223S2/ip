@@ -1,0 +1,1 @@
+[T][X] borrow book, [D][ ] return book (by: Jun 12 2022), [T][X] join sports club, [T][ ] borrow book, [D][ ] return book (by: Aug 4 2022), [E][ ] project meeting (from: Sep 12 2022 to: Sep 13 2022)
