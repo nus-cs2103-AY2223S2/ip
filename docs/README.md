@@ -13,15 +13,20 @@
 
 ### Adding Todo : `todo`
 Adds a Todo task to the task list.
+
 Format: `todo DESCRIPTION`
+
 Examples: `todo read book`
 
 ### Adding Deadline : `deadline`
 Adds a Deadline to the task list.
+
 Format: `deadline DESCRIPTION /by DEADLINE DAY`
-:::warning
+
+<p style="background-color: lightblue">
 :bulb: Note: Dates should have the format `yyyy/MM/dd HHmm` 24-hour time format
-:::
+</p>
+
 Examples: `deadline return book /by 2023/02/18 2359`
 
 ### Adding Event : `event`
