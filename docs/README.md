@@ -141,6 +141,10 @@ Here are your deadlines sorted by time:
 [D][] essay (by: 2023-02-18T00:10)
 ```
 
+### `Help` - Search sample commands
+
+`help` command can get access to a list of sample commands for in-app reference.
+
 ### Exit from the Duke program
 
 `bye` command can exit from the program with the current task saved in duke.txt data file.
