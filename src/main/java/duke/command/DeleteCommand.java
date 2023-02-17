@@ -38,8 +38,8 @@ public class DeleteCommand extends Command {
             if (index < 0) {
                 throw new DukeException("Please indicate a positive index to delete");
             }
-            if (index > tasks.getSize()) {
-                throw new DukeException("Please indicate an index less than the size of your list: "
+            if (index >= tasks.getSize()) {
+                throw new DukeException("Please indicate an index less than or equal to the size of your list: "
                         + tasks.getSize());
             }
             Task task = tasks.get(index);
