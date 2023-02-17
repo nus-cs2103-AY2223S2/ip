@@ -82,8 +82,7 @@ public class Ui {
      */
     public String markDoneMessage(String task) {
         return "Understood, I have marked the task as done:\n"
-                + "  "
-                + task;
+                + "  " + task;
     }
 
     /**
@@ -94,8 +93,7 @@ public class Ui {
      */
     public String markUndoneMessage(String task) {
         return "Understood, I have marked the task as undone:\n"
-                + "  "
-                + task;
+                + "  " + task;
     }
 
     /**

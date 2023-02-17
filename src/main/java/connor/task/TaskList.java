@@ -1,6 +1,5 @@
 package connor.task;
 
-import java.util.Collections;
 import java.util.LinkedList;
 
 import connor.ui.Ui;
@@ -103,16 +102,10 @@ public class TaskList {
     public String toString() {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < this.tasks.size(); i++) {
-            str.append(i + 1)
-                    .append(".")
-                    .append(this.tasks.get(i).toString())
-                    .append("\n");
+            str.append(i + 1).append(".").append(this.tasks.get(i).toString()).append("\n");
         }
 
-        str.append("I have ")
-                .append(this.tasks.size())
-                .append(" tasks in my memory")
-                .append("\n");
+        str.append("I have ").append(this.tasks.size()).append(" tasks in my memory").append("\n");
         return str.toString();
     }
 
@@ -128,11 +121,7 @@ public class TaskList {
         int counter = 1;
         for (Task task : this.tasks) {
             if (task.getTaskName().contains(keyword)) {
-                str.append("  ")
-                        .append(counter++)
-                        .append(".")
-                        .append(task)
-                        .append("\n");
+                str.append("  ").append(counter++).append(".").append(task).append("\n");
             }
         }
         return str.toString();
@@ -145,7 +134,7 @@ public class TaskList {
      * @return String that indicates a successful sorting.
      */
     public String sort(Ui ui) {
-        Collections.sort(this.tasks, Task::compareTo);
+        this.tasks.sort(Task::compareTo);
         return ui.sortMessage();
     }
 

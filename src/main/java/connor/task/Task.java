@@ -95,6 +95,7 @@ public abstract class Task implements Comparable<Task> {
         return this.isDone + "|" + this.taskName;
     }
 
+    @Override
     public abstract int compareTo(Task task);
 
     /**
