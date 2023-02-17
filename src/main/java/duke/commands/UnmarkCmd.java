@@ -28,7 +28,7 @@ public class UnmarkCmd extends Command {
     /** Changes the status of the specified task to incomplete. */
     public String execute() throws ListIndexMissing {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
-        Task taskToUnmark = taskList.get(index).markDone();
+        Task taskToUnmark = taskList.get(index).unmarkDone();
         assert taskToUnmark.getIsDone() == false;
         String output = "I've marked this task as incomplete:";
         return String.format("%s\n%s", output,
