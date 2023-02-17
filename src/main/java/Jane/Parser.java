@@ -26,7 +26,7 @@ public class Parser {
      */
     public static jane.task.Deadline parserD(String output, int count) {
         String des = output.substring(9);
-        String[] s = des.split("/");
+        String[] s = des.split("\\|");
         try {
             if (s.length == 1) {
                 throw new JaneException("Please specify when the deadline is :(((");
@@ -35,7 +35,7 @@ public class Parser {
             System.out.println("Please specify when the deadline is :(((");
 
         }
-        jane.task.Deadline d = new jane.task.Deadline(count +1, s[0], LocalDateTime.parse(s[1].substring(3)));
+        jane.task.Deadline d = new jane.task.Deadline(count +1, s[0], LocalDateTime.parse(s[1]));
         return d;
     }
     /**
