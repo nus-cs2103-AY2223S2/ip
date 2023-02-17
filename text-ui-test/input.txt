@@ -1,0 +1,8 @@
+todo task 1
+deadline task 2 /by 2023-05-05
+event task 3 /from 2023-05-05 /to 2023-05-06
+mark 1
+list
+unmark 1
+list
+bye
