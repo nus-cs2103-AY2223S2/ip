@@ -57,6 +57,7 @@ public class Duke extends Application {
     public static void writeOn(Task currtask) throws IOException {
         fw.write(currtask.toString() +System.lineSeparator());
     }
+    Ui ui = new Ui();
 
     /**
      * Runs Duke and begins the program.
@@ -67,26 +68,23 @@ public class Duke extends Application {
      */
     public String run(String input) throws IOException {
         storage = new Storage("/saves/data.txt");
-        Ui ui = new Ui();
         try {
-            ui.hello();
             Parser parser = new Parser(tasklist);
             if (!isBye) {
                 return parser.runParser(input);
             } else {
                 return ui.bye();
             }
-        //} catch (IndexOutOfBoundsException e) {
-        //    return ui.showEmptyError();
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showEmptyError();
         } catch (FileNotFoundException e) {
             return ui.showFileError();
-        } //catch (Exception e) {
-         //   return ui.showLoadingError();
-        //}
+        } catch (Exception e) {
+            return ui.showLoadingError();
+        }
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
@@ -97,7 +95,6 @@ public class Duke extends Application {
         return textToAdd;
     }
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -111,15 +108,25 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+    /**
+     * Get response input from user
+     * @param input entered line from user
+     * @return runs duke
+     * @throws IOException to write on
+     */
     private String getResponse(String input) throws IOException {
         return run(input);
     }
 
+    /**
+     * Starts the dialog GUI.
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     */
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -190,6 +197,8 @@ public class Duke extends Application {
                 throw new RuntimeException(e);
             }
         });
+        Label msg = new Label(ui.hello());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(msg, new ImageView(bot)));
     }
 
 }

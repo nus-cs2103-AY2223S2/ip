@@ -21,15 +21,17 @@ public class Detect {
     /**
      * Returns true if the entered content already exists in the tasklist.
      * If not, false.
-     * @param str
-     * @return
+     * @param input String to check if it is in the list already.
+     * @return boolean result that indicates whether it is duplicated or not.
      */
-    public boolean isDuplicate(String str) {
+    public boolean isDuplicate(String input) {
+        String str = input.replaceAll("\\s", "");
         boolean result = false;
         if(tl.length() > 0) {
             for (int i = 0; i < tl.length(); i++) {
                 Task curr = (Task) tl.get(i);
-                if (curr.getContent().equals(str)) {
+                String currcon = curr.getContent().replaceAll("\\s", "");
+                if (currcon.equals(str)) {
                     result = true;
                 }
             }

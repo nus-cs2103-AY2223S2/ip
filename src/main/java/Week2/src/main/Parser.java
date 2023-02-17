@@ -7,8 +7,6 @@ import Commands.*;
  * Deals with making sense of the user command
  */
 public class Parser {
-    Scanner sc = new Scanner(System.in);
-
     private TaskList tasklist;
     private static boolean isBegin = false;
     Ui ui = new Ui();
@@ -30,6 +28,7 @@ public class Parser {
     public String runParser(String input) throws IOException {
         isBegin = true;
         String c = input;
+        String dup = "Same task already exists in the list.";
         Detect dt = new Detect(this.tasklist);
         if (c.equals("list")) {
             return List.perform(tasklist);
@@ -46,15 +45,16 @@ public class Parser {
         } else if (c.startsWith("todo")) {
             String doit = c.substring(5);
             if(dt.isDuplicate(doit)) {
-                return "Same task already exists in the list.";
+                return dup;
             } else {
                 return Todo.execute(doit, tasklist);
             }
 
         } else if (c.startsWith("deadline")) {
             String doit = c.substring(9);
-            if(dt.isDuplicate(doit)) {
-                return "Same task already exists in the list.";
+            String[] contexts = doit.split("/by");
+            if(dt.isDuplicate(contexts[0])) {
+                return dup;
             } else {
                 return Deadline.execute(doit, tasklist);
             }
@@ -63,18 +63,18 @@ public class Parser {
             String doit = c.substring(6);
             String[] froms = doit.split("/from");
             if(dt.isDuplicate(froms[0])) {
-                return "Same task already exists in the list.";
+                return dup;
             } else {
                 return Event.execute(doit, tasklist);
             }
 
         } else if (c.startsWith("find")) {
             String keyword = c.substring(6);
-            Search sr = new Search(tasklist);
-            return Search.find(keyword);
+            Find sr = new Find(tasklist);
+            return Find.search(keyword);
 
         } else if (!c.equals("bye")) {
-            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "OOPS!!! I'm sorry, but I don't know what that means";
 
         } else {
             Duke.isBye = true;

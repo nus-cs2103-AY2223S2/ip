@@ -1,9 +1,12 @@
 package Week2.src.main;
 
+import javafx.scene.image.Image;
+
 /**
  * Deals with interactions with the user
  */
 public class Ui {
+    private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Ui Constructor
@@ -23,7 +26,7 @@ public class Ui {
      * First interaction with user
      */
     public String hello() {
-        return "Hello! I'm Bada\nWhat can I do for you?";
+        return "Hello-meow! I'm Bada.\nHyunjin's adorable but aggressive cat.\nWhat can I do for you?";
     }
 
     /**
@@ -39,7 +42,7 @@ public class Ui {
      * @return
      */
     public String showEmptyError() {
-        return "OOPS!!! The description of a todo cannot be empty.";
+        return "OOPS!!! The description of a task cannot be empty.";
     }
 
     /**
