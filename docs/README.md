@@ -1,6 +1,6 @@
-# User Guide
+# User Guide 📖
 
-## Features 
+## Features 📄
 
 ### Add task: todo
 
@@ -30,7 +30,7 @@ Deletes task.
 
 Lists all completed and incompleted tasks.
 
-## Usage
+## Keyword Usage 🔑
 
 ### todo
 
