@@ -54,11 +54,11 @@ dependencies {
 }
 
 application {
-    mainClassName = "seedu.duke.Main"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "toto"
     archiveClassifier = null
 }
 
