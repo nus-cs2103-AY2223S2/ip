@@ -102,47 +102,46 @@ public class Parser {
         Command parsedCommand = null;
         String[] arr = splitCommand(command);
         String commandType = arr[0].trim();
-
-            switch (commandType) {
-                case BYE:
-                    parsedCommand = new ExitCommand();
-                    break;
-                case DELETE:
-                    int taskNum = Integer.parseInt(arr[1]);
-                    parsedCommand = new DeleteCommand(taskNum);
-                    break;
-                case TODO:
-                    parsedCommand = new AddCommand(arr[0], arr[1]);
-                    break;
-                case FIND:
-                    parsedCommand = new FindCommand(arr[1]);
-                    break;
-                case DEADLINE:
-                    parsedCommand = new AddCommand(arr[0], arr[1], arr[2]);
-                    break;
-                case EVENT:
-                    parsedCommand = new AddCommand(arr[0], arr[1], arr[2], arr[3]);
-                    break;
-                case UNMARK:
-                    int taskNumber = Integer.parseInt(arr[1].trim());
-                    parsedCommand = new UnmarkCommand(taskNumber);
-                    break;
-                case MARK:
-                    int getTaskNum = Integer.parseInt(arr[1].trim());
-                    parsedCommand = new MarkCommand(getTaskNum);
-                    break;
-                case LIST:
-                    parsedCommand = new ListCommand();
-                    break;
-                case EDIT:
-                    parsedCommand = new EditCommand(arr[1].trim(), arr[2].trim(), arr[3].trim());
-                    break;
-                case HELP:
-                    parsedCommand = new HelpCommand();
-                    break;
-                default:
-                    parsedCommand = new InvalidCommand();
-            }
+        switch (commandType) {
+        case BYE:
+            parsedCommand = new ExitCommand();
+            break;
+        case DELETE:
+            int taskNum = Integer.parseInt(arr[1]);
+            parsedCommand = new DeleteCommand(taskNum);
+            break;
+        case TODO:
+            parsedCommand = new AddCommand(arr[0], arr[1]);
+            break;
+        case FIND:
+            parsedCommand = new FindCommand(arr[1]);
+            break;
+        case DEADLINE:
+            parsedCommand = new AddCommand(arr[0], arr[1], arr[2]);
+            break;
+        case EVENT:
+            parsedCommand = new AddCommand(arr[0], arr[1], arr[2], arr[3]);
+            break;
+        case UNMARK:
+            int taskNumber = Integer.parseInt(arr[1].trim());
+            parsedCommand = new UnmarkCommand(taskNumber);
+            break;
+        case MARK:
+            int getTaskNum = Integer.parseInt(arr[1].trim());
+            parsedCommand = new MarkCommand(getTaskNum);
+            break;
+        case LIST:
+            parsedCommand = new ListCommand();
+            break;
+        case EDIT:
+            parsedCommand = new EditCommand(arr[1].trim(), arr[2].trim(), arr[3].trim());
+            break;
+        case HELP:
+            parsedCommand = new HelpCommand();
+            break;
+        default:
+            parsedCommand = new InvalidCommand();
+        }
         return parsedCommand;
     }
 }
