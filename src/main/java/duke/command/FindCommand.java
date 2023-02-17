@@ -2,6 +2,7 @@ package duke.command;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -24,7 +25,7 @@ public class FindCommand extends Command {
      * @param storage object that handles all Storage actions.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         ArrayList<Task> foundTasks = tasks.findTask(keyword);
         return Ui.getFindOrSortOutput(foundTasks);
     }

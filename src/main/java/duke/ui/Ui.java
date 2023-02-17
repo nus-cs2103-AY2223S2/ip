@@ -59,8 +59,8 @@ public class Ui {
         return "Hope I have been useful to you.\nSee you again soon. Bye!~";
     }
 
-    public static String getFindOrSortOutput(ArrayList<Task> filteredTasks) {
-        String taskStringToBePrinted = filteredTasks.size() > 1 ? "tasks" : "task";
+    public static String getFindOrSortOutput(ArrayList<Task> filteredTasks) throws DukeException {
+        String taskStringToBePrinted = (filteredTasks.size() > 1) ? "tasks" : "task";
         if (filteredTasks.size() > 0) {
             String str = String.format("Here are the matching %s in your list:\n", taskStringToBePrinted);
             for (int i = 1; i <= filteredTasks.size(); i++) {
@@ -68,12 +68,12 @@ public class Ui {
             }
             return str;
         } else {
-            return "Fake Duke can't find any matching tasks to sort :/ ";
+            throw new DukeException("Fake Duke can't find any matching tasks :/");
         }
     }
 
     public static String getStringDateTime(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd-MM-yyyy HH:mma");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd-MM-yyyy HH:mm");
         return dateTime.format(formatter);
     }
 }
