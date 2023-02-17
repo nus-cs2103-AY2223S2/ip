@@ -1,30 +1,4 @@
-todo || 0 ||  read book #notfun
-todo || 0 ||  read book #notfun
-todo || 0 ||  read book #notfun
+event || 0 ||  project meeting || 18:00, Feb 02 2019-18:30, Feb 02 2019
+deadline || 0 ||  || 18:30, Feb 02 2019
 todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-event || 0 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
-todo || 0 ||  read book
-deadline || 0 || meeting  || 18:00, Feb 02 2019
-deadline || 0 || meeting  || 18:00, Feb 02 2019
-todo || 0 ||  eat lunch
-event || 0 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
-event || 0 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
-todo || 0 ||  read book
-deadline || 0 || meeting  || 18:30, Feb 02 2019
-event || 0 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
-event || 0 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
-todo || 0 ||  read book
-deadline || 0 || lunch  || 18:00, Feb 02 2019
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
+event || 0 ||  meeting  || 18:00, Feb 02 2023-18:30, Feb 02 2023

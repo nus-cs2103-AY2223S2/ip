@@ -63,7 +63,8 @@ public class InvalidArgsHandler {
      */
     public void checkForRandomWords(String replies) throws DukeException {
         if (!(toString().startsWith("deadline") || toString().startsWith("todo") || toString().startsWith("list")
-                || toString().startsWith("event") || toString().startsWith("mark") || toString().startsWith("unmark"))) {
+                || toString().startsWith("event") || toString().startsWith("mark") || toString().startsWith("unmark") || toString().startsWith("find") ||
+                toString().startsWith("tag") || toString().startsWith("delete"))) {
             throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

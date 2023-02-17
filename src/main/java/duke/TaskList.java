@@ -26,6 +26,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the list of tasks found using a keyword
+     * @return String representations of tasks that includes the keyword
+     */
     public static String printFind() {
         int count = 1;
         if (searchLists.size() == 0) {

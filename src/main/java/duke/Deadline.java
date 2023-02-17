@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 /**
  * This is the class for Deadline action
- * @author yanlinglim
+ * @author yanlings
  */
 public class Deadline extends Task {
     protected String by;

@@ -1,21 +1,11 @@
 package duke;
 import java.io.IOException;
-import java.util.Scanner;
-import javafx.scene.image.Image;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 
-
-import static duke.Parser.stringForEvent;
 
 /**
  * The Duke program implements an application that takes in an input and places it in a list.
  * If the words are not of any keywords, an error message will be printed.
- * @author yanlinglim
+ * @author yanlings
  *
  */
 public class Duke {
@@ -23,7 +13,9 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
-
+    /**
+     * Constructor for Duke when there is no filePath required.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("text-ui-test/saved-tasks.txt");
@@ -36,7 +28,7 @@ public class Duke {
         }
     }
     /**
-     * This is a constructor for Duke such that we will create a file.
+     * Constructor for Duke such that we will create a file.
      * @param filePath
      */
     public Duke(String filePath) throws IOException {
@@ -54,7 +46,9 @@ public class Duke {
 
 
     /**
-     *
+     * Returns a string representation based on the task typed by the user
+     * Error will be returned if the input does not include deadline,todo,
+     * mark,unmark,event,tag,list,delete,find or bye
      * @param input String input from users
      * @return String representation based on the action
      * @throws IOException

@@ -24,6 +24,14 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Shows the dialog box of Duke and user
+     * @param text text inside dialog box
+     * @param img img inside the chat box
+     */
+    //@@author yanlings -reused
+    // reused from elizabethhky
+    // assert lines
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
