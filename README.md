@@ -7,6 +7,13 @@ Dudu frees your mind of having to remember things you need to do. It's,
 - easy to learn
 - ~FAST~ _SUPER_ FAST to use
 
+## Features
+
+- Managing different type of tasks
+  - Todo Task
+  - Deadline Task
+  - Event Task
+
 ## Setup
 All you have to do is,
 
@@ -20,13 +27,6 @@ java -jar dudu.jar
 ```
 5. add your tasks.
 6. let it manage your tasks for you 😄
-
-## Features
-
-- Managing different type of tasks
-  - Todo Task
-  - Deadline Task
-  - Event Task
 
 ## User Guide
 
