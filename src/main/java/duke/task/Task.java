@@ -1,11 +1,14 @@
 package duke.task;
 
+import java.util.Optional;
+
 /**
  * Class to store duke.task description along with completion status.
  */
 public abstract class Task {
 
     protected String description;
+    protected String tag;
     protected boolean isDone;
 
     /**
@@ -13,8 +16,9 @@ public abstract class Task {
      *
      * @param description String containing Deadline description.
      */
-    public Task(String description) {
+    public Task(String description, String tag) {
         this.description = description;
+        this.tag = tag;
         this.isDone = false;
     }
 
@@ -40,6 +44,23 @@ public abstract class Task {
     }
 
     /**
+     * Sets task tag.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+
+    /**
+     * Returns task tag.
+     *
+     * @return String representing tag.
+     */
+    public String getTag() {
+        return this.tag;
+    }
+
+    /**
      * Returns task status icon.
      * If task is done, returns a space (" ").
      * If task is not done, returns an "X".
@@ -61,6 +82,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return this.description + (this.tag == null ? "" : " (#" + this.tag + ")");
     }
 }

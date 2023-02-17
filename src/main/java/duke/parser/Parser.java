@@ -61,6 +61,15 @@ public class Parser {
     }
 
     /**
+     * Returns tag from parsed input.
+     *
+     * @return Tag to add to task.
+     */
+    public String getTag() {
+        return splitInput[2];
+    }
+
+    /**
      * Tests if input has a description to instantiate a ToDo object
      * by checking if input length is greater than 5.
      *

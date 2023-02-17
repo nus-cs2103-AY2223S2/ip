@@ -6,8 +6,18 @@ package duke.task;
  */
 public class ToDo extends Task {
 
+    /**
+     * Constructor to create a ToDo task.
+     *
+     * @param description String containing ToDo description.
+     * @param tag String containing ToDo tag.
+     */
+    public ToDo(String description, String tag) {
+        super(description, tag);
+    }
+
     public ToDo(String description) {
-        super(description);
+        this(description, null);
     }
 
 

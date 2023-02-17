@@ -21,11 +21,16 @@ public class Event extends Task {
      * @param description String containing Event description.
      * @param from String containing Event begin date.
      * @param to String containing Event end date.
+     * @param tag String containing Event tag
      */
-    public Event(String description, String from, String to) {
-        super(description);
+    public Event(String description, String from, String to, String tag) {
+        super(description, tag);
         this.from = LocalDateTime.parse(from, INPUT_FORMATTER);
         this.to = LocalDateTime.parse(to, INPUT_FORMATTER);
+    }
+
+    public Event(String description, String from, String to) {
+        this(description, from, to, null);
     }
 
     /**

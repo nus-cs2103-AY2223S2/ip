@@ -18,10 +18,15 @@ public class Deadline extends Task {
      *
      * @param description String containing Deadline description.
      * @param by String containing Deadline date.
+     * @param tag String containing Deadline tag.
      */
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String by, String tag) {
+        super(description, tag);
         this.by = LocalDateTime.parse(by, inputFormatter);
+    }
+
+    public Deadline(String description, String by) {
+        this(description, by, null);
     }
 
     /**
