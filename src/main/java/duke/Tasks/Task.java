@@ -4,45 +4,44 @@ package duke.tasks;
  * Represents Task class
  */
 public class Task {
-    private static int taskNum;
     private String description;
     private boolean isDone;
 
 
     /**
-     * Task constructor
+     * Represents Task constructor
      * @param description task name
+     * @param isDone task status
      */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
-        taskNum++;
     }
 
     /**
-     * if isDone is true, gets status icon "X", otherwise " "
-     * @return "X" or " "
+     * Gets the status icon of the task
+     * @return "X" or " " if the task is marked as done, it returns "X". Otherwise, " "
      */
     public String getStatusIcon() {
         return (isDone ? "X" : "   ");
     }
 
     /**
-     * Mark as done
+     * Marks status of task as done
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * Mark as undone
+     * Marks status of task as undone
      */
     public void markUndone() {
         this.isDone = false;
     }
 
     /**
-     * gets description
+     * Gets description of the task
      * @return description
      */
     public String getDescription() {
@@ -50,17 +49,17 @@ public class Task {
     }
 
     /**
-     * Override toString method
-     * @return String
+     * Overrides toString method
+     * @return formatted message
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "]" + this.description;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 
     /**
-     * Override file method, changing into data saving format
-     * @return String
+     * Formats a task into a suitable String
+     * @return formatted message
      */
     public String file() {
         String status = this.isDone ? "1" : "0";

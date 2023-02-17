@@ -111,6 +111,8 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return "  ☹ OOPS!!! The format of sort command: sort [todo/deadline/event]!\n";
+        } catch (Exception e) {
+            return "  ☹ OOPS!!! There is an error \n";
         }
     }
 
@@ -134,6 +136,8 @@ public class Parser {
             str += "  ☹ OOPS!!! The index number is out of bounds. \n";
         } catch (NumberFormatException e) {
             str += "  ☹ OOPS!!! The index number cannot be string. \n";
+        } catch (Exception e) {
+            str += "  ☹ OOPS!!! There is an error \n";
         }
         return str;
     }
@@ -158,6 +162,8 @@ public class Parser {
             str += "  ☹ OOPS!!! The index number is out of bounds. \n";
         } catch (NumberFormatException e) {
             str += "  ☹ OOPS!!! The index number cannot be string. \n";
+        } catch (Exception e) {
+            str += "  ☹ OOPS!!! There is an error \n";
         }
 
         return str;
@@ -183,6 +189,8 @@ public class Parser {
             str += "  ☹ OOPS!!! The index number is out of bounds. \n";
         } catch (NumberFormatException e) {
             str += "  ☹ OOPS!!! The index number cannot be string. \n";
+        } catch (Exception e) {
+            str += "  ☹ OOPS!!! There is an error \n";
         }
         return str;
     }
@@ -209,14 +217,15 @@ public class Parser {
             }
             if (isInList == true) {
                 str.append(INDENTATION + "Here are the matching tasks in your list:\n");
-                str.append(temp + "\n");
+                str.append(temp).append("\n");
             } else {
                 str.append("Sorry! There is no result!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             str.append("  ☹ OOPS!!! The description of a find cannot be empty. \n");
+        } catch (Exception e) {
+            str.append("  ☹ OOPS!!! There is an error \n");
         }
-
 
 
         return str.toString();
@@ -247,6 +256,8 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             str += "☹ OOPS!!! The description of a todo cannot be empty.\n";
+        } catch (Exception e) {
+            str += "  ☹ OOPS!!! There is an error \n";
         }
         return str;
     }
@@ -280,6 +291,8 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
             str += "  ☹ OOPS!!! Please follow the format: \n"
                     + "deadline [task name] /by MM/dd/yyyy HHmm \n";
+        } catch (Exception e) {
+            str += "  ☹ OOPS!!! There is an error \n";
         }
         return str;
     }
@@ -319,6 +332,8 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
             str += "  ☹ OOPS!!! Please follow the format: \n"
                     + "event [task name] /from MM/dd/yyyy HHmm /to MM/dd/yyyy HHmm\n";
+        } catch (Exception e) {
+            str += "  ☹ OOPS!!! There is an error \n";
         }
         return str;
     }

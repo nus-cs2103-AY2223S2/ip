@@ -39,6 +39,7 @@ public class DialogBox extends HBox {
      * @param text input in dialog box
      * @param img image
      */
+
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -53,6 +54,7 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
         this.style();
     }
+
 
     private void style() {
         Rectangle r = new Rectangle();
@@ -79,7 +81,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.CENTER_LEFT);
+        setAlignment(Pos.TOP_LEFT);
         dialog.setStyle("-fx-padding: 15; -fx-background-radius: 25; "
                 + "-fx-background-color: #A0522D; -fx-text-fill: black; -fx-opacity: 70%;");
 
@@ -95,4 +97,5 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
 }

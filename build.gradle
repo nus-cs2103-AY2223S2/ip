@@ -58,22 +58,11 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "DUKE"
     archiveClassifier = null
 }
 
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'duke.Launcher'
-        )
-    }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
 
 run{
     standardInput = System.in
 }
-

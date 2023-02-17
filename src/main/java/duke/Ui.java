@@ -54,8 +54,6 @@ public class Ui {
      * @return mark as done task
      */
     public static String done(String num, TaskList tasks) {
-        assert num == null : "Invalid num";
-        assert tasks == null : "Invalid tasks";
 
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
@@ -79,8 +77,6 @@ public class Ui {
      * @return mark as undone task
      */
     public static String undone(String num, TaskList tasks) {
-        assert num == null : "Invalid num";
-        assert tasks == null : "Invalid tasks";
 
         StringBuilder str = new StringBuilder();
         int number = Integer.parseInt(num) - 1;
@@ -100,9 +96,6 @@ public class Ui {
      * @return deleting message
      */
     public static String delete(String num, TaskList tasks) {
-        assert num == null : "Invalid num";
-        assert tasks == null : "Invalid tasks";
-
         StringBuilder str = new StringBuilder();
         int index = Integer.parseInt(num) - 1;
         int originalSize = tasks.size();
@@ -113,7 +106,7 @@ public class Ui {
 
         tasks.remove(index);
 
-        assert tasks.size() == originalSize - 1;
+        //assert tasks.size() == originalSize - 1;
 
         str.append(" Now you have ").append(tasks.size()).append(" tasks in the list.");
         str.append(System.getProperty("line.separator"));

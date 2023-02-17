@@ -23,7 +23,7 @@ Duke **is a chat box for recording down and managing your daily task** easily.
 + Right-click on the folder and open the terminal.
 + Type command **java -jar myIP.jar**.
 + A GUI similar to the below should appear in a fel seconds.
-![This is an image](docs/screen.png)
+![This is an image](docs/Ui.png)
 
 
 
@@ -139,6 +139,6 @@ Sort tasks by todo, deadline or event.
 ### bye
 Exit system.
 
-Format: bye
+**Format:** bye
 
 ## Let's start using DUKE!

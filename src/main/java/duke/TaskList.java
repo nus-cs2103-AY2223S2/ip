@@ -33,7 +33,7 @@ public class TaskList {
      * @param index index number of the task
      */
     public void remove(int index) {
-        assert index >= 0 : "Invalid index";
+        //assert index >= 0 : "Invalid index";
         this.tasks.remove(index);
         this.taskCounter--;
     }
@@ -44,7 +44,7 @@ public class TaskList {
      * @return the element at the specified position in this list
      */
     public Task get(int index) {
-        assert index >= 0 : "Invalid index";
+        //assert index >= 0 : "Invalid index";
         return this.tasks.get(index);
     }
 

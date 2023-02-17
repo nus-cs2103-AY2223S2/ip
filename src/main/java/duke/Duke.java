@@ -37,7 +37,7 @@ public class Duke {
             temp = Parser.parse(input, tasks);
             storage.updateFile(tasks);
             return temp;
-        } catch (IOException e) {
+        } catch (Exception e) {
             return "Error occurs!";
         }
     }
