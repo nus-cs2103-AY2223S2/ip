@@ -22,6 +22,7 @@ public class Parser {
     private String command;
     private String message;
     private int index;
+    private boolean isBye = false;
 
     /**
      * Constructor for Parser: logic intermediary.
@@ -39,13 +40,15 @@ public class Parser {
      * @param instr Full string instruction
      * @return Determines whether program terminates.
      */
-    public String parse(String instr) {
+    public boolean parse(String instr) {
         this.instruction = instr;
         this.instrSplit = instr.split(" ");
         this.command = instrSplit[0];
 
         switch (command) {
         case "bye":
+            isBye = true;
+            this.taskList.save();
             message = "Bye. Hope to see you again soon!\n";
             break;
         case "list":
@@ -55,25 +58,21 @@ public class Parser {
             index = Integer.parseInt(instrSplit[1]);
             message = "Nice! I've marked this task as done:\n";
             message += "    " + taskList.mark(index) + "\n";
-            this.taskList.save();
             break;
         case "unmark":
             index = Integer.parseInt(instrSplit[1]);
             message = "OK, I've marked this task as not done yet:\n";
             message += "    " + taskList.unmark(index) + "\n";
-            this.taskList.save();
             break;
         case "delete":
             index = Integer.parseInt(instrSplit[1]);
             message = "Noted. I've removed this task:\n";
             message += "    " + taskList.delete(index) + "\n";
-            this.taskList.save();
             break;
         case "todo":
             task = new Todo(instr);
             message = "Got it. I've added this task:\n";
             message += taskList.add(task);
-            this.taskList.save();
             break;
         case "deadline":
             try {
@@ -86,13 +85,11 @@ public class Parser {
             } catch (DukeException e) {
                 message = e.getMessage();
             }
-            this.taskList.save();
             break;
         case "event":
             task = new Event(instruction);
             message = "Got it. I've added this task:\n";
             message += taskList.add(task);
-            this.taskList.save();
             break;
         case "find":
             String keyword = instrSplit[1];
@@ -102,6 +99,7 @@ public class Parser {
             message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
             break;
         }
-        return message;
+        UI.printWithLines(message);
+        return isBye;
     }
 }

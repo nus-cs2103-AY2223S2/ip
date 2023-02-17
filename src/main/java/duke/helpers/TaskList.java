@@ -150,11 +150,7 @@ public class TaskList {
             toWrite += extendedInstr + "\n";
         }
 
-        try {
-            this.db.saveTasks(toWrite);
-        } catch ( IOException e ) {
-            System.out.println("error saving tasks");
-        }
-
+        UI.printWithLines("Saving the following tasks: \n" + this.list());
+        this.db.saveTasks(toWrite);
     }
 }
