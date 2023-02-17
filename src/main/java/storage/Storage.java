@@ -92,10 +92,8 @@ public class Storage {
      * @throws InvalidArgumentException thrown if the format of the dates are wrong
      */
     public Event parseAndCreateEvent(String[] lineArr, String content) throws InvalidArgumentException {
-        String fromTo = lineArr[3].trim();
-        String[] fromToArr = fromTo.split("-");
-        String from = fromToArr[0].trim();
-        String to = fromToArr[1].trim();
+        String from = lineArr[3].trim();
+        String to = lineArr[4].trim();
 
         // Try to create LocalDate object from String
         LocalDate fromDate;

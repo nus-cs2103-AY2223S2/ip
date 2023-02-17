@@ -38,7 +38,7 @@ public class Event extends Task {
      */
     @Override
     public String toData() {
-        return String.format("E | %s | %s - %s", super.toData(), from, to);
+        return String.format("E | %s | %s | %s", super.toData(), from, to);
     }
 
     @Override
