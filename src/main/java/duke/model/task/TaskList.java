@@ -36,6 +36,12 @@ public class TaskList implements Serializable {
         this.tasks = new ArrayList<>(tasks);
     }
 
+    /**
+     * Creates a new {@code TaskList} with the given tasks.
+     *
+     * @param tasks an array of tasks
+     * @return a new {@code TaskList} contains the given tasks
+     */
     public static TaskList of(Task... tasks) {
         return new TaskList(Arrays.asList(tasks));
     }

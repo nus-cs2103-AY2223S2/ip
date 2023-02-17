@@ -6,6 +6,9 @@ import java.util.Objects;
 import duke.common.exception.DukeIllegalArgumentException;
 import duke.util.DukeUtils;
 
+/**
+ * Represents an event task in the application.
+ */
 public class EventTask extends Task {
 
     private static final long serialVersionUID = -150197333726686918L;
@@ -13,6 +16,15 @@ public class EventTask extends Task {
     private LocalDate startTime;
     private LocalDate endTime;
 
+    /**
+     * Creates a new {@code EventTask} with the given description, start time and end time.
+     *
+     * @param description the given description
+     * @param startTime the given start time
+     * @param endTime the given end time
+     * @throws DukeIllegalArgumentException if the description is empty, or if the start time is
+     *         after the end time
+     */
     public EventTask(String description, LocalDate startTime, LocalDate endTime) {
         super(description);
         if (startTime.isAfter(endTime)) {

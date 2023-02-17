@@ -13,7 +13,14 @@ public abstract class Task implements Serializable {
 
     private static final long serialVersionUID = 4852600493024294334L;
 
+    /**
+     * The description of this task.
+     */
     protected String description;
+
+    /**
+     * The current status of this task.
+     */
     protected boolean isDone;
 
     /**
@@ -21,6 +28,7 @@ public abstract class Task implements Serializable {
      * done.
      *
      * @param description a string describes the created task
+     * @throws DukeIllegalArgumentException if the description is empty
      */
     public Task(String description) {
         if (description.isEmpty()) {
@@ -61,12 +69,23 @@ public abstract class Task implements Serializable {
         isDone = false;
     }
 
+    /**
+     * Returns whether this tasks is done or not.
+     *
+     * @return {@code true} if this task is done, otherwise {@code false}
+     */
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * Checks whether this task is the same as another task, based on the runtime classes and the
+     * descriptions.
+     *
+     * @param that the other task
+     * @return {@code true} if this task is the same as the other task, otherwise {@code false}
+     */
     public boolean isSameTask(Task that) {
-        assert that != null;
         Class<?> thisClazz = this.getClass();
         Class<?> thatClazz = that.getClass();
         return thisClazz.equals(thatClazz) && Objects.equals(description, that.description);
