@@ -50,7 +50,7 @@ public class Main extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         //Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("DukeMeister3000");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
