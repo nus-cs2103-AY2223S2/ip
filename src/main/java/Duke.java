@@ -78,7 +78,7 @@ public class Duke {
             isEnd = c.isExit();
             String response = c.execute(tasks, storage);
             String saveMessage = hasSavedSuccessfully(tasks, storage) ? "" : Ui.unsuccessfulSaveResponse;
-            return Ui.addLineBreak(loadMessage, response, saveMessage);
+            return Ui.addLineBreak(loadMessage, response, saveMessage, Ui.askForMoreTaskResponse);
         } catch (DukeException e) {
             return e.toString();
         }

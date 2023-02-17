@@ -19,6 +19,7 @@ public class Ui {
     protected static String unsuccessfulLoadResponse = "Sorry! I was unable to retrieve from memory!";
 
     protected static String askForTaskResponse = "What can I do for you today?";
+    protected static String askForMoreTaskResponse = "What else can I do for you today?";
 
     protected static String unreadableCommandResponse = "I'm sorry, but I don't understand what that means! "
             + "Try re-typing your instruction!";
