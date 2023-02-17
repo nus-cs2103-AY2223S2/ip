@@ -1,24 +1,3 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
-
 import java.io.IOException;
 
 import DukeHelpfulCode.Exceptions.*;
@@ -35,20 +14,29 @@ import DukeHelpfulCode.Commands.*;
  * @since   11 Feb 2023
  */
 
-public class DOOK {//extends Application{
+public class DOOK {
 
     private static String LINEBREAK = "_________________________________________________________________\n";
     private static TaskList USERLIST = new TaskList();
 
-    UI ui;
-    Storage storage;
-    TaskList tasks;
+    private UI ui;
+    private Storage storage;
+    private TaskList tasks;
 
     public DOOK(){
-        new DOOK("./src/main/resources/data/tasks.txt");
+        this.ui = new UI();
+        this.storage = new Storage("./src/main/resources/data/tasks.txt");
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) { // e should be EmptyTaskListException
+            ui.showLoadingError();
+            this.tasks = new TaskList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public DOOK(String filePath) {
+    public void makeDOOK(String filePath) {
         this.ui = new UI();
         this.storage = new Storage(filePath);
         try {
@@ -61,13 +49,10 @@ public class DOOK {//extends Application{
         }
     }
 
+    /**
+     * Runs DOOK.
+     */
     public void run() {
-        /**
-         * Runs DOOK.
-         *
-         * @param none
-         * @return none
-         */
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -75,12 +60,10 @@ public class DOOK {//extends Application{
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
             } finally {
                 ui.showLine();
             }
@@ -94,7 +77,23 @@ public class DOOK {//extends Application{
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (!input.equals("bye")) {
+            try {
+                Command c = Parser.parse(input);
+                return c.execute(tasks);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        }
+        else {
+            try {
+                storage.write(this.tasks);
+                return new ExitCommand().execute(tasks);
+            } catch (IOException e) {
+                return "lol";
+            }
+        }
+
     }
 
     public static void main(String[] args) {

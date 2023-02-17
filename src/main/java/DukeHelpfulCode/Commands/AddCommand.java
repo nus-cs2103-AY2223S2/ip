@@ -3,7 +3,6 @@ package DukeHelpfulCode.Commands;
 import DukeHelpfulCode.Tasks.*;
 import DukeHelpfulCode.Utilities.*;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class AddCommand extends Command{
@@ -16,9 +15,8 @@ public class AddCommand extends Command{
     public AddCommand(){};
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws IOException {
-        taskList.add(task);
-        storage.write(taskList);
+    public String execute(TaskList taskList) {
+        return taskList.add(task);
     };
 
     @Override

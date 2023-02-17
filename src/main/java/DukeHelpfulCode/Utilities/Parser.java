@@ -157,8 +157,6 @@ public class Parser {
             cmd = new MarkCommand(isMark, taskNum);
             // mark command in tasklist need to change from unmark and mark to this boolean
 
-        } else {
-            System.out.println("Sorry, I don't understand.\nBut don't worry, help is here!\n");
         }
         return cmd;
     }

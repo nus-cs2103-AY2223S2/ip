@@ -52,16 +52,18 @@ public class Task {
         }
     }
 
-    public void mark() {
+    public String mark() {
         /**
          * Marks Task as done if not done and vice versa.
          */
         if (isDone) {
-            System.out.println(LINEBREAK + "OK, '" + this.name + "' has been marked as Not Done.\n");
             isDone = false;
+            return LINEBREAK + "OK, '" + this.name + "' has been marked as Not Done.\n";
+
         } else {
-            System.out.println(LINEBREAK + "OK, '" + this.name + "' has been marked as Done.\n");
             isDone = true;
+            return LINEBREAK + "OK, '" + this.name + "' has been marked as Done.\n";
+
         }
     }
 

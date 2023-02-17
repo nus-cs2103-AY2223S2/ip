@@ -32,7 +32,7 @@ public class UI {
         System.out.println("Hello from\n" + logo + LINEBREAK + "Type 'bye' to exit!\n" + LINEBREAK);
     }
 
-    public void showCommands(){
+    public String showCommands(){
         /**
          * Prints the list of commands.
          *
@@ -52,47 +52,41 @@ public class UI {
         for (int i = 0; i < allCmd.length; i++){
             commandList += i+1 + ". " + allCmd[i].toString();
         }
-        System.out.println(commandList);
+        return commandList;
     }
 
-    public void showLine(){
+    public String showLine(){
         /**
          * Prints Linebreak.
          *
          * @param   none
          * @return  none
          */
-        System.out.println(LINEBREAK);
+        return LINEBREAK;
     }
 
-    public void exit(){
+    public String exit(){
         /**
          * Exits DOOK.
          *
          * @param   none
          * @return  none
          */
-        System.out.println(LINEBREAK + "Thanks for using DUKE. Hope you have a great day ahead!");
+        return LINEBREAK + "Thanks for using DOOK. Hope you have a great day ahead!";
     }
 
-    public void showLoadingError(){
-        /**
-         * Prints error message.
-         *
-         * @param   none
-         * @return  none
-         */
-        System.out.println("Oops, there seems to be a problem with loading your previous Task List?\n");
+    public String showLoadingError(){
+        return "Oops, there seems to be a problem with loading your previous Task List?\n";
     }
 
-    public void showError(String message){
+    public String showError(String message){
         /**
          * Prints the error message
          *
          * @param   message The error message to be displayed.
          * @return  none
          */
-        System.out.println(message);
+        return message;
     }
 
     public void showList(){}
