@@ -7,6 +7,9 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents command for marking a task
+ */
 public class MarkCommand extends Command {
     public MarkCommand(String string) {
         super(string);

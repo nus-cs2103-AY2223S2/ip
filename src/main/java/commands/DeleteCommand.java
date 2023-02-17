@@ -7,6 +7,9 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents command for deleting a task
+ */
 public class DeleteCommand extends Command {
     public DeleteCommand(String string) {
         super(string);

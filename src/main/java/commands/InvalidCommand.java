@@ -4,6 +4,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Represents a command when user make a mistake when inputting the fields
+ */
 public class InvalidCommand extends Command {
     public InvalidCommand(String command) {
         super(command);

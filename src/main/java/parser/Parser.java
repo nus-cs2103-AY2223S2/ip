@@ -2,6 +2,9 @@ package parser;
 
 import commands.*;
 
+/**
+ * Provide parsing mechanism for the user inputs
+ */
 public class Parser {
     public static Command parse(String command) {
         String[] splittedCmd = command.split(" ", 2);

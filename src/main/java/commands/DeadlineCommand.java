@@ -7,6 +7,9 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents command for adding a Deadline
+ */
 public class DeadlineCommand extends Command {
     public DeadlineCommand(String string) {
         super(string);

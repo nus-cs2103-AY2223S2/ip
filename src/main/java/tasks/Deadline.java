@@ -3,6 +3,9 @@ package tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that represents Deadline Task
+ */
 public class Deadline extends Task {
     private LocalDate deadline;
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM uuuu");

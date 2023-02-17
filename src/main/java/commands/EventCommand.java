@@ -8,6 +8,9 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents command for adding an event
+ */
 public class EventCommand extends Command {
     public EventCommand(String string) {
         super(string);

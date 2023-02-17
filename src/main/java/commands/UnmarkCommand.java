@@ -7,6 +7,9 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents command for un-marking a task
+ */
 public class UnmarkCommand extends Command {
     public UnmarkCommand(String string) {
         super(string);
