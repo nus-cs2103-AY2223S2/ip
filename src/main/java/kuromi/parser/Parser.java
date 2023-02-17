@@ -152,7 +152,7 @@ public class Parser {
 
     private static Command markCommand(String[] temp, TaskList tasks) throws KuromiException {
         int idx = Integer.parseInt(temp[1]);
-        if (idx > tasks.size()) {
+        if (idx > tasks.size() || idx < 1) {
             throw new KuromiException("OOPS!!! The index does not exist.");
         }
         return new MarkCommand(idx);
@@ -160,7 +160,7 @@ public class Parser {
 
     private static Command unmarkCommand(String[] temp, TaskList tasks) throws KuromiException {
         int idx2 = Integer.parseInt(temp[1]);
-        if (idx2 > tasks.size()) {
+        if (idx2 > tasks.size() || idx2 < 1) {
             throw new KuromiException("OOPS!!! The index does not exist.");
         }
         return new UnmarkCommand(idx2);
@@ -168,7 +168,7 @@ public class Parser {
 
     private static Command deleteCommand(String[] temp, TaskList tasks) throws KuromiException {
         int idx3 = Integer.parseInt(temp[1]);
-        if (idx3 > tasks.size()) {
+        if (idx3 > tasks.size() || idx3 < 1) {
             throw new KuromiException("OOPS!!! The index does not exist.");
         }
         return new DeleteCommand(idx3);

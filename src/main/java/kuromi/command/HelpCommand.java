@@ -27,6 +27,8 @@ public class HelpCommand extends Command {
         msg += "Add a task:\n";
         msg += "todo <description>\n";
         msg += "deadline <description> /by <deadline>\n";
+        msg += "event <description> /from <start_date> /to <end_date>\n" + line;
+        msg += "Delete a task:\n";
         msg += "delete <index>\n" + line;
         msg += "List tasks:\n";
         msg += "list\n" + line;

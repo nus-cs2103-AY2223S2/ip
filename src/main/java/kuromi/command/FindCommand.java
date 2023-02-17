@@ -34,6 +34,10 @@ public class FindCommand extends Command {
     }
 
     private String getReply(TaskList filtered) {
+        if (filtered.size() == 0) {
+            String msg = "You have no task with that keyword :(";
+            return msg;
+        }
         String msg = "Here are the matching tasks in your list:\n";
         msg += filtered.toString();
         return msg;
