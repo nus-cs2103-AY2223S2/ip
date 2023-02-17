@@ -10,7 +10,7 @@ Copy the file to the folder you want to use as the home folder for Pepe.
 
 Open a command terminal, cd into the folder you put the jar file in, and use the java -jar pepe_v1.0.jar command to run the application.
 The application window should appear in a few seconds. 
-![preview_display](docs/Ui.png)
+![preview_display](Ui.png)
 
 ## Features 
 
