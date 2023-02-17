@@ -22,7 +22,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("./data/duke.txt");
+        storage = new Storage("./data/dukeTask.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

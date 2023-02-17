@@ -89,7 +89,7 @@ public class Storage {
                 line = myReader.readLine();
             }
             myReader.close();
-        } catch (IOException e) {
+        } catch (IOException | IndexOutOfBoundsException e) {
             throw new DukeException("Unable to load file");
         }
         return taskList;
