@@ -4,6 +4,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Represents command for printing the current list of tasks
+ */
 public class ListCommand extends Command{
     public ListCommand(String command) {
         super(command);

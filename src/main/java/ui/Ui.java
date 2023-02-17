@@ -5,6 +5,9 @@ import tasks.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user
+ */
 public class Ui {
     private static final String LINE = "-----------------------------------------------------------------------------";
     private Scanner sc;
@@ -62,6 +65,7 @@ public class Ui {
     public void invalidCmdMsg() {
         System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means");
     }
+
 
     public void printListSize(TaskList taskList) {
         System.out.println("\t" + "Now you have " + taskList.getSize() + " tasks in the list");

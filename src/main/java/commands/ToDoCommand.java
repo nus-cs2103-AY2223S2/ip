@@ -8,6 +8,9 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents command for adding a ToDO
+ */
 public class ToDoCommand extends Command {
     public ToDoCommand(String string) {
         super(string);

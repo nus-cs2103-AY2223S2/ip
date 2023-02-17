@@ -1,5 +1,8 @@
 package tasks;
 
+/**
+ * Represents task that can be inserted to the program
+ */
 public class Task {
     private boolean isMarked = false;
     private String taskName;
@@ -10,16 +13,24 @@ public class Task {
         this.taskName = taskName;
     }
 
-    //Marking the task as done
+    /**
+     * Marking the task as done
+     */
     public void mark(){
         this.isMarked = true;
     }
 
-    //Unmark the task
+    /**
+     * Un-Marking the task as not yet done
+     */
     public void unmark(){
         this.isMarked = false;
     }
 
+    /**
+     * String representation of the task
+     * @return task string representation
+     */
     @Override
     public String toString(){
         if (isMarked){

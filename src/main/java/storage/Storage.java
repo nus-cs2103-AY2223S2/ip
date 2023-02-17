@@ -8,6 +8,9 @@ import tasks.ToDo;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private static final String TEMP_PATH = "./data/temp.txt";
     private File file;
@@ -24,12 +27,22 @@ public class Storage {
         bw = new BufferedWriter(new FileWriter(file, true));
     }
 
+    /**
+     * Function to make the directory and the file based on the file path
+     * @param file the file that wants to be created
+     * @throws IOException
+     */
     public void makeFile(File file) throws IOException {
         file.mkdirs();
         file.delete();
         file.createNewFile();
     }
 
+    /**
+     * Loading the previous user data
+     * @return ArrayList that contains tasks from previous session
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> arr = new ArrayList<>(100);
         try {
@@ -64,6 +77,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Modifying the user data when marking a task
+     * @param idx the index of task
+     * @throws IOException
+     */
     public void mark(int idx) throws IOException {
         File fileTemp = new File(TEMP_PATH);
         if (!fileTemp.exists()) {
@@ -88,6 +106,11 @@ public class Storage {
         bw = new BufferedWriter(new FileWriter(file, true));
     }
 
+    /**
+     * Modifying the data when user un-marking a task
+     * @param idx the index of task
+     * @throws IOException
+     */
     public void unmark(int idx) throws IOException {
         File fileTemp = new File(TEMP_PATH);
         if (!fileTemp.exists()) {
@@ -112,6 +135,11 @@ public class Storage {
         bw = new BufferedWriter(new FileWriter(file, true));
     }
 
+    /**
+     * Modifying the data when user deleting a task
+     * @param idx the index of the task
+     * @throws IOException
+     */
     public void delete(int idx) throws IOException {
         File fileTemp = new File(TEMP_PATH);
         if (!fileTemp.exists()) {
@@ -137,16 +165,34 @@ public class Storage {
         bw = new BufferedWriter(new FileWriter(file, true));
     }
 
+    /**
+     * Modifying the data when adding a ToDo
+     * @param task the name of the task
+     * @throws IOException
+     */
     public void todo(String task) throws IOException {
         bw.write("T / 0 / " + task + "\n");
         bw.flush();
     }
 
+    /**
+     * Modifying the data when user adding a deadline
+     * @param task the name of the task
+     * @param date the date of task with format (yyyy-mm-dd)
+     * @throws IOException
+     */
     public void deadline(String task, String date) throws IOException {
         bw.write("D / 0 / " + task + " / " + date + "\n");
         bw.flush();
     }
 
+    /**
+     * Modifying the data when user adding an event
+     * @param task the name of the task
+     * @param from the beginning date of event with format (yyyy-mm-dd)
+     * @param to the end date of event with format (yyyy-mm-dd)
+     * @throws IOException
+     */
     public void event(String task, String from, String to) throws IOException {
         bw.write("E / 0 / " + task + "/ " + from + "/ " + to + "\n");
         bw.flush();

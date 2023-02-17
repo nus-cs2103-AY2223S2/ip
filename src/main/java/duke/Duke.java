@@ -8,6 +8,9 @@ import ui.Ui;
 
 import java.io.*;
 
+/**
+ * The main class to run the program
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
