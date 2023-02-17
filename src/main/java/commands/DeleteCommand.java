@@ -49,14 +49,14 @@ public class DeleteCommand extends Command {
             int deleteIndex = Integer.parseInt(this.params.get(0));
             Task deleted = tasks.delete(deleteIndex);
             storage.refreshStorage(tasks);
-            ui.display("Successfully deleted the following task! \n"
+            ui.dukeDisplay("Successfully deleted the following task! \n"
                     + deleted.toString());
         } catch (NumberFormatException e) {
             throw new IllegalInputException("Invalid task index chosed!");
         } catch (TaskListIndexOutOfBoundsException e) {
             ui.errorDisplay(e);
         } catch (IOException e) {
-            ui.display("Seems like there is something wrong with the storage file \n"
+            ui.dukeDisplay("Seems like there is something wrong with the storage file \n"
                     + "Any updates will not be saved!");
             ui.errorDisplay(e);
             e.printStackTrace();

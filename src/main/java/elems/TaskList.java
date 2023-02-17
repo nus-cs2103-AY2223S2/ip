@@ -28,7 +28,7 @@ public class TaskList {
             loadFromStorageText(storage.load());
         } catch (FileNotFoundException | StorageException e) {
             ui.errorDisplay(e);
-            ui.display("Issue with the storage file, generating empty list!");
+            ui.dukeDisplay("Issue with the storage file, generating empty list!");
             this.taskList = new ArrayList<>();
         }
 
@@ -55,7 +55,7 @@ public class TaskList {
      * @return A string array containing the String representation of
      *      * all the <code>Tasks</code> in the <code>TaskList</code>
      */
-    public String[] enumerate(){
+    public String[] enumerate() {
         int length = this.taskList.size();
         String[] taskStringList = new String[length];
         for (int i = 0; i < length; i++) {
@@ -99,7 +99,8 @@ public class TaskList {
     public String getListStorageText() {
         StringBuilder output = new StringBuilder();
         for (Task task : this.taskList) {
-            output.append(task.generateStorageForm() + System.lineSeparator());
+            String taskText = task.generateStorageForm() + System.lineSeparator();
+            output.append(taskText);
         }
         return output.toString();
     }
@@ -109,9 +110,13 @@ public class TaskList {
         return task.toString();
     }
 
-<<<<<<< HEAD
-    private void loadFromStorageText(ArrayList<String> storageText) throws StorageException {
-=======
+    /**
+     * Returns a String array which contains the String representations of the Tasks in the TaskList
+     * with descriptions that contain the given String search term
+     * @param searchTerm The search term to find in the descriptions of the Tasks
+     * @return A String array which contains the String representations of the Tasks in the TaskList
+     *     with descriptions that contain the given String search term
+     */
     public String[] searchTaskDescription(String searchTerm) {
         ArrayList<String> matchingItems = new ArrayList<>();
         for (Task current : this.taskList) {
@@ -127,9 +132,7 @@ public class TaskList {
         matchingItems.toArray(result);
         return result;
     }
-
-    private void loadFromStorageText(ArrayList<String> storageText) {
->>>>>>> branch-Level-9
+    private void loadFromStorageText(ArrayList<String> storageText) throws StorageException {
         this.taskList = new ArrayList<>();
         String[] taskStringArray = storageText.toArray(new String[0]);
 

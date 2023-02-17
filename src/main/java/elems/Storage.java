@@ -26,9 +26,9 @@ public class Storage {
         try {
             boolean createdFile = dataFile.createNewFile();
             if (createdFile) {
-                ui.display("Data file successfully created!");
+                ui.dukeDisplay("Data file successfully created!");
             } else {
-                ui.display("Data file already exists!");
+                ui.dukeDisplay("Data file already exists!");
             }
         } catch (IOException e) {
             ui.errorDisplay(e);

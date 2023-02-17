@@ -66,42 +66,44 @@ public class VoidCommand extends Command {
         case LIST:
             String[] taskStringList = tasks.enumerate();
             int listSize = taskStringList.length;
+            String listOutput = new String();
             for (int i = 0; i < listSize; i++) {
-                ui.display(i + 1 + ":" + taskStringList[i]);
+                listOutput += i + 1 + ":" + taskStringList[i] + "\n";
             }
+            ui.dukeDisplay(listOutput);
             break;
         case FIND:
             if (this.params.size() > 2) {
                 throw new IllegalInputException("Only 1 word can be searched at a time");
             }
             String[] foundTasks = tasks.searchTaskDescription(this.params.get(0));
-            ui.display("I have found the following tasks!");
+            String findOutput = "I have found the following tasks!\n";
             for (int i = 0; i < foundTasks.length; i++) {
-                String taskString = foundTasks[i];
-                ui.display(i + 1 + ":" + taskString);
+                findOutput += i + 1 + ":" + foundTasks[i] + "\n";
             }
+            ui.dukeDisplay(findOutput);
             break;
         case BYE:
             try {
                 storage.refreshStorage(tasks);
-                ui.display("Tasks saved successfully! Goodbye!");
+                ui.dukeDisplay("Tasks saved successfully! Goodbye!");
                 System.exit(0);
             } catch (IOException e) {
                 ui.errorDisplay(e);
                 e.printStackTrace();
-                ui.display("Tasks were unable to be saved, if you still wish to quit without"
+                ui.dukeDisplay("Tasks were unable to be saved, if you still wish to quit without"
                         + "saving, try using \"forcequit\" ");
             }
             break;
         case FORCEQUIT:
             try {
                 storage.refreshStorage(tasks);
-                ui.display("Tasks saved successfully! Exiting now!");
+                ui.dukeDisplay("Tasks saved successfully! Exiting now!");
                 System.exit(0);
             } catch (IOException e) {
                 e.printStackTrace();
                 ui.errorDisplay(e);
-                ui.display("Tasks not saved, exiting now!");
+                ui.dukeDisplay("Tasks not saved, exiting now!");
                 System.exit(0);
             }
             break;

@@ -21,7 +21,8 @@ public class Parser {
     private static final HashSet<String> addKeywords = new HashSet<>(Arrays.asList("todo",
             "deadline", "event"));
     private static final HashSet<String> deleteKeywords = new HashSet<>(Arrays.asList("delete"));
-    private static final HashSet<String> voidKeywords = new HashSet<>(Arrays.asList("list", "bye", "forcequit", "find"));
+    private static final HashSet<String> voidKeywords = new HashSet<>(Arrays.asList("list",
+            "bye", "forcequit", "find"));
     private static final HashSet<String> modifyKeywords = new HashSet<>(Arrays.asList("mark", "unmark"));
 
     /**
