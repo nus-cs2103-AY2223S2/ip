@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * Parent Exception to all custom exceptions for the Duke project.
