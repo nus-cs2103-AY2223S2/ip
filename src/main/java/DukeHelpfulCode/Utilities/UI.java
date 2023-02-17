@@ -67,7 +67,7 @@ public class UI {
 
     public void exit(){
         /**
-         * Exits Duke.
+         * Exits DOOK.
          *
          * @param   none
          * @return  none

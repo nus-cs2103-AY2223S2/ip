@@ -7,15 +7,15 @@ import DukeHelpfulCode.Commands.*;
 
 
 /**
- * The Duke program is adapted DUKE from NUS SoC CS2103
- * Duke is a glorified to-do list.
+ * The DOOK program is adapted DUKE from NUS SoC CS2103
+ * DOOK is a glorified to-do list.
  *
  * @author  Yuan Hao
  * @version who knows
  * @since   11 Feb 2023
  */
 
-public class Duke {
+public class DOOK {
 
     private static String LINEBREAK = "_________________________________________________________________\n";
     private static TaskList USERLIST = new TaskList();
@@ -24,7 +24,7 @@ public class Duke {
     Storage storage;
     TaskList tasks;
 
-    public Duke(String filePath) {
+    public DOOK(String filePath) {
         this.ui = new UI();
         this.storage = new Storage(filePath);
         try {
@@ -39,7 +39,7 @@ public class Duke {
 
     public void run() {
         /**
-         * Runs Duke.
+         * Runs DOOK.
          *
          * @param none
          * @return none
@@ -64,7 +64,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./src/main/resources/data/tasks.txt").run();
+        new DOOK("./src/main/resources/data/tasks.txt").run();
     }
 
 

@@ -2,6 +2,11 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '10.2'
 }
 
 repositories {
@@ -14,14 +19,9 @@ dependencies {
 }
 
 test {
-
-
-
     useJUnitPlatform()
-
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -33,6 +33,7 @@ test {
 application {
     mainClassName = "Duke"
 }
+
 
 sourceSets {
     main {
@@ -51,7 +52,7 @@ shadowJar {
         into 'META-INF/resources'
     }*/
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveBaseName = "duke"
+    archiveBaseName = "DOOK"
     archiveClassifier = null
 }
 
