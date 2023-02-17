@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Item {
+public abstract class Item {
     private String name;
     private Boolean done;
 
@@ -9,12 +9,21 @@ public class Item {
         this.done = false;
     }
 
+    public Item(String name, boolean isDone) {
+        this.name = name;
+        this.done = isDone;
+    }
+
     public String getName() {
         return this.name;
     }
 
     public Boolean isDone() {
         return this.done;
+    }
+
+    public int isDoneStatus() {
+        return this.isDone() ? 1 : 0;
     }
 
     public void markAsDone() {
@@ -28,6 +37,9 @@ public class Item {
     public String messageWhenAdded() {
         return "DukeyList just added a new item: ";
     }
+
+    public abstract String getLogString();
+
 
     @Override
     public String toString() {

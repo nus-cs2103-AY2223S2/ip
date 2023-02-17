@@ -1,6 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
 
 public class Duke {
     public static final String BYE_MESSAGE = "Goodbye!! Please return to Dukey again soon!! :)";
@@ -38,9 +40,15 @@ public class Duke {
 
 
     public static void initiateDukeyList() {
-        //System.out.println("DukeyList: Type something and Dukey will add it to the list!! Type 'list' to view the list! Type 'bye' to exit!! ");
+        File f = DukeyFile.openFile();
         ItemList.printInstruction();
         ItemList itemList = new ItemList();
+        try {
+            itemList.initiate(f);
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved list found, starting new list.");
+        }
+
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -109,6 +117,7 @@ public class Duke {
 
             //exit
             if (input.equals("bye")) {
+                itemList.save(f);
                 System.out.println("DukeyList: " + BYE_MESSAGE);
                 break;
             }
@@ -117,6 +126,29 @@ public class Duke {
             if (input.equals("list")) {
                 itemList.readList();
                 continue;
+            }
+
+            //save
+            if (input.equals("save")) {
+                itemList.save(f);
+                continue;
+            }
+
+            //clearlist
+            if (input.equals("clearList")) {
+                itemList.clearList();
+                continue;
+            }
+
+            //clearSave
+            if (input.equals("clearSave")) {
+                DukeyFile.clearFile(f);
+                continue;
+            }
+
+            //forceStop
+            if (input.equals("forceStop")) {
+                break;
             }
 
             System.out.println("Error! Unknown command. Try again!");

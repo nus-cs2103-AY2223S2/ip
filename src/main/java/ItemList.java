@@ -1,4 +1,7 @@
+import java.io.File;
 import static java.lang.Integer.parseInt;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -12,8 +15,8 @@ public class ItemList {
 
     public void addItem(Item item) {
         this.list.add(item);
-        System.out.println("");
-        System.out.println(item.messageWhenAdded() + " " + item.toString());
+        System.out.println();
+        System.out.println(item.messageWhenAdded() + " " + item);
         printSize();
     }
 
@@ -103,11 +106,57 @@ public class ItemList {
         } else {
             System.out.println("DukeyList now has " + getSize() + " tasks.");
         }
+    }
+
+    public void clearList() {
+        this.list.clear();
+        System.out.println("DukeyList cleared! DukeyList is now empty.");
+    }
+
+    public void save(File file) {
+        DukeyFile.clearFile(file);
+        Iterator<Item> it = this.list.iterator();
+        it.forEachRemaining(x -> {
+            String logString = x.getLogString();
+            try {
+                DukeyFile.writeToFile(file, logString);
+            } catch (IOException e) {
+                System.out.println("Error! Unable to save!");
+            }
+        });
+        System.out.println("DukeList saved!");
+    }
+
+    public void initiate(File file) throws FileNotFoundException {
+        Scanner fileScanner = new Scanner(file);
+        while (fileScanner.hasNextLine()) {
+            String taskLogString = fileScanner.nextLine();
+            String[] logStringArray = taskLogString.split("/");
+            if (logStringArray[0].equals("T")) {
+                this.list.add(ToDo.createToDoFromLog(logStringArray));
+            } else if (logStringArray[0].equals("D")) {
+                this.list.add(Deadlines.createDeadlineFromLog(logStringArray));
+            } else if (logStringArray[0].equals("E")) {
+                this.list.add(Event.createEventFromLog(logStringArray));
+            }
+        }
+
+        if (this.list.isEmpty()) {
+            System.out.println("No tasks saved, starting a new list.");
+        } else {
+            System.out.println("Saved list loaded:");
+            this.readList();
+        }
 
     }
 
+    public void clearSave(File file) {
+        DukeyFile.deleteFile(file);
+        System.out.println("DukeyList save has been cleared.");
+    }
+
     public static void printInstruction() {
-        System.out.println("DukeyList: Welcome to DukeyList!! The commands are as follows:");
+        System.out.println("DukeyList: Welcome to DukeyList!! To use DukeyList, type the appropriate command and follow the prompts:");
         System.out.println("To list: 'list'");
         System.out.println("To exit: 'bye'");
         System.out.println("To add a todo: 'todo'");
@@ -116,5 +165,8 @@ public class ItemList {
         System.out.println("To mark a task as done: 'mark'");
         System.out.println("To unmark a task: 'unmark'");
         System.out.println("To delete a task: 'delete'");
+        System.out.println("To clear the list: 'clearList");
+        System.out.println("To save the list: 'save'");
+        System.out.println("_________________________________________________________");
     }
 }

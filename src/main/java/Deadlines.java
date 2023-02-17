@@ -9,6 +9,11 @@ public class Deadlines extends Item {
         this.deadline = deadline;
     }
 
+    public Deadlines(String name, String deadline, boolean isMarked) {
+        super(name, isMarked);
+        this.deadline = deadline;
+    }
+
     public static Deadlines createDeadline(Scanner scanner) throws DukeyException {
         System.out.print("Deadline task name: ");
         String deadlineName = scanner.nextLine();
@@ -25,9 +30,25 @@ public class Deadlines extends Item {
 
     }
 
+    public String getDeadline() {
+        return this.deadline;
+    }
+
+    public static Deadlines createDeadlineFromLog(String[] logStringArray) {
+        String name = logStringArray[2];
+        String deadline = logStringArray[3];
+        boolean isMarked = !logStringArray[1].equals("0");
+        return new Deadlines(name, deadline, isMarked);
+    }
+
     @Override
     public String messageWhenAdded() {
         return "DukeyList just added a new deadline:";
+    }
+
+    @Override
+    public String getLogString() {
+        return "D" + "/" + this.isDoneStatus() + "/" + this.getName() + "/" + this.getDeadline();
     }
 
     @Override

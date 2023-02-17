@@ -11,6 +11,12 @@ public class Event extends Item {
         this.end = end;
     }
 
+    public Event(String name, String start, String end, boolean isMarked) {
+        super(name, isMarked);
+        this.start = start;
+        this.end = end;
+    }
+
     public static Event createEvent(Scanner scanner) throws DukeyException{
         System.out.print("Event name: ");
         String eventName = scanner.nextLine();
@@ -31,9 +37,22 @@ public class Event extends Item {
         return new Event(eventName, eventStart, eventEnd);
     }
 
+    public static Event createEventFromLog(String[] logStringArray) {
+        String name = logStringArray[2];
+        String start = logStringArray[3];
+        String end = logStringArray[4];
+        boolean isMarked = !logStringArray[1].equals("0");
+        return new Event(name, start, end, isMarked);
+    }
+
     @Override
     public String messageWhenAdded() {
         return "DukeyList just added a new event:";
+    }
+
+    @Override
+    public String getLogString() {
+        return "E" + "/" + isDoneStatus() + "/" + this.getName() + "/" + this.start + "/" + this.end;
     }
 
     @Override
