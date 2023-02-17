@@ -19,38 +19,38 @@ public class Parser {
     /**
      * Displays the current list of tasks
      */
-    private void showList() {
-        ui.showTaskList(taskList);
+    private String showList() {
+        return ui.showTaskList(taskList);
     }
 
     /**
      * Marks the Task at a specified index as done
      * @param index the index of the Task to be marked as done
      */
-    private void mark(int index) {
+    private String mark(int index) {
         taskList.mark(index);
         Task task = taskList.get(index);
-        ui.showMarkMessage(task, index);
+        return ui.showMarkMessage(task, index);
     }
 
     /**
      * Marks the Task at a specified index as undone
      * @param index the index of the Task to be marked as undone
      */
-    private void unmark(int index) {
+    private String unmark(int index) {
         taskList.unmark(index);
         Task task = taskList.get(index);
-        ui.showUnmarkMessage(task, index);
+        return ui.showUnmarkMessage(task, index);
     }
 
     /**
      * Deletes the Task at a specified index
      * @param index the index of the Task to be deleted
      */
-    private void delete(int index) {
+    private String delete(int index) {
         Task deletedTask = taskList.delete(index);
         int len = taskList.size();
-        ui.showDeleteMessage(deletedTask, len);
+        return ui.showDeleteMessage(deletedTask, len);
     }
 
     /**
@@ -93,10 +93,10 @@ public class Parser {
      * Finds an event with a given keyword in the TaskList
      * @param task the String representing the Task with the keyword to be found
      */
-    private void find(String task) {
+    private String find(String task) {
         String keyword = task.substring(5);
         TaskList matchingTasks = taskList.find(keyword);
-        ui.showTaskList(matchingTasks);
+        return ui.showTaskList(matchingTasks);
     }
 
     /**
@@ -104,20 +104,20 @@ public class Parser {
      * @param task the String containing a single line of user input
      * @throws DukeException if an invalid command is entered
      */
-    public void parse(String task) throws DukeException {
+    public String parse(String task) throws DukeException {
         if (task.equals("list")) {
-            showList();
+            return showList();
         } else if (task.startsWith("mark")) {
             int index = Integer.parseInt(task.substring(5)) - 1;
-            mark(index);
+            return mark(index);
         } else if (task.startsWith("unmark")) {
             int index = Integer.parseInt(task.substring(7)) - 1;
-            unmark(index);
+            return unmark(index);
         } else if (task.startsWith("delete")) {
             int index = Integer.parseInt(task.substring(7)) - 1;
-            delete(index);
+            return delete(index);
         } else if (task.startsWith("find")) {
-            find(task);
+            return find(task);
         } else {
             if (task.startsWith("todo")) {
                 addTodo(task);
@@ -130,7 +130,7 @@ public class Parser {
             }
             int len = taskList.size();
             Task t = taskList.get(len - 1);
-            ui.showAddMessage(t, len);
+            return ui.showAddMessage(t, len);
         }
     }
 

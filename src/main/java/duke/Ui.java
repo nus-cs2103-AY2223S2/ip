@@ -7,8 +7,8 @@ public class Ui {
      * Prints a given String in a format characteristic of the Ui
      * @param toDisplay the String to be displayed in the formatted manner
      */
-    private void printFormatted(String toDisplay) {
-        System.out.println(INDENT_LINE + "\n" + toDisplay + "\n" + INDENT_LINE);
+    private String printFormatted(String toDisplay) {
+        return INDENT_LINE + "\n" + toDisplay + "\n" + INDENT_LINE;
     }
 
     /**
@@ -29,22 +29,22 @@ public class Ui {
      * Prints the list of tasks
      * @param taskList the list of tasks
      */
-    public void showTaskList(TaskList taskList) {
-        printFormatted(getTaskList(taskList));
+    public String showTaskList(TaskList taskList) {
+        return printFormatted(getTaskList(taskList));
     }
 
     /**
      * Prints the initial message characteristic of the Ui
      */
-    public void showInitMessage() {
-        printFormatted("Hello! I'm Vincent\n" + "What can I do for you?");
+    public String showInitMessage() {
+        return printFormatted("Hello! I'm Vincent\n" + "What can I do for you?");
     }
 
     /**
      * Prints a message on encountering the "bye" command
      */
-    public void showByeMessage() {
-        printFormatted("Bye. Hope to see you again soon!");
+    public String showByeMessage() {
+        return printFormatted("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -52,8 +52,8 @@ public class Ui {
      * @param deletedTask the deleted Task
      * @param len the length of the list of tasks after deletion
      */
-    public void showDeleteMessage(Task deletedTask, int len) {
-        printFormatted("Noted. I've removed this task:\n" + deletedTask + "\nNow you have " +
+    public String showDeleteMessage(Task deletedTask, int len) {
+        return printFormatted("Noted. I've removed this task:\n" + deletedTask + "\nNow you have " +
                 len + " tasks in the list.");
     }
 
@@ -62,8 +62,8 @@ public class Ui {
      * @param task the Task marked as done
      * @param index the index of the Task marked as done
      */
-    public void showMarkMessage(Task task, int index) {
-        printFormatted("Nice! I've marked this task as done:\n" +
+    public String showMarkMessage(Task task, int index) {
+        return printFormatted("Nice! I've marked this task as done:\n" +
                 (index + 1) + "." + task);
     }
 
@@ -72,8 +72,8 @@ public class Ui {
      * @param task the Task marked as undone
      * @param index the index of the Task marked as undone
      */
-    public void showUnmarkMessage(Task task, int index) {
-        printFormatted("OK, I've marked this task as not done yet:\n" +
+    public String showUnmarkMessage(Task task, int index) {
+        return printFormatted("OK, I've marked this task as not done yet:\n" +
                 (index + 1) + "." + task);
     }
 
@@ -82,15 +82,15 @@ public class Ui {
      * @param task the Task added to the list
      * @param len the length of the list of tasks after addition
      */
-    public void showAddMessage(Task task, int len) {
-        printFormatted("Got it. I've added this task:\n" + task +
+    public String showAddMessage(Task task, int len) {
+        return printFormatted("Got it. I've added this task:\n" + task +
                 "\nNow you have " + len + " tasks in the list.");
     }
 
     /**
      * Prints a message if the file could not be loaded
      */
-    public void showLoadingError() {
-        printFormatted("The file could not be loaded");
+    public String showLoadingError() {
+        return printFormatted("The file could not be loaded");
     }
 }
