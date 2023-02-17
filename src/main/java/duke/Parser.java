@@ -75,7 +75,7 @@ public class Parser {
                     throw new DukeException("Please insert deadline date after /by");
                 }
 
-                str = tasklist.addDeadline(descriptionBy[0], descriptionBy[1]);
+                str = tasklist.addDeadline(descriptionBy[0].trim(), descriptionBy[1].trim());
                 break;
             case "event":
             case "e":

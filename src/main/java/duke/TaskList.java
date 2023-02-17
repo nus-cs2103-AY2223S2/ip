@@ -46,7 +46,7 @@ public class TaskList {
         ToDo task = new ToDo(taskDetails);
         this.tasks.add(task);
         output = "\t" + task;
-        output = output + "Now you have " + this.tasks.size() + " tasks in the list.";
+        output = output + "\nNow you have " + this.tasks.size() + " tasks in the list.";
         return output;
     }
 
@@ -57,7 +57,7 @@ public class TaskList {
         Deadline task = new Deadline(description, date);
         this.tasks.add(task);
         output = "\t" + task;
-        output = output + "Now you have " + this.tasks.size() + " tasks in the list.";
+        output = output + "\nNow you have " + this.tasks.size() + " tasks in the list.";
         return output;
     }
 
@@ -66,7 +66,7 @@ public class TaskList {
         Event task = new Event(description, from, to);
         this.tasks.add(task);
         output = "\t" + task;
-        output = output + "Now you have " + this.tasks.size() + " tasks in the list.";
+        output = output + "\nNow you have " + this.tasks.size() + " tasks in the list.";
         return output;
     }
 
