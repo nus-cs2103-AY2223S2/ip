@@ -93,7 +93,7 @@ public class TaskList {
         String listOfTasks = "";
 
         if (tasks.size() == 0) {
-            return "You currently have no tasks!";
+            return "No tasks found!";
         }
 
         for (int idx = 0; idx < tasks.size(); idx++) {
