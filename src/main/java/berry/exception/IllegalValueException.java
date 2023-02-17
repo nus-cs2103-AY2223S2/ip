@@ -1,9 +1,11 @@
 package berry.exception;
 
+import berry.Berry;
+
 /**
  * Signals that some given data is not acceptable and does not fulfil certain constraints.
  */
-public class IllegalValueException extends Exception {
+public class IllegalValueException extends BerryException {
 
     /**
      * @param message should contain relevant information on the failed constraint(s)

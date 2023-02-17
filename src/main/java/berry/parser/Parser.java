@@ -9,12 +9,15 @@ import berry.command.Command;
 import berry.command.DeleteCommand;
 import berry.command.ExitCommand;
 import berry.command.FindCommand;
+import berry.command.HelpCommand;
 import berry.command.ListCommand;
 import berry.command.MarkCommand;
 import berry.command.UnmarkCommand;
 import berry.exception.BerryException;
 import berry.exception.EmptyClauseException;
 import berry.exception.EmptyDescriptionException;
+import berry.exception.ExtraArgsException;
+import berry.exception.IllegalValueException;
 import berry.exception.MissingClauseException;
 import berry.exception.UnknownCommandException;
 import berry.task.Deadline;
@@ -37,7 +40,7 @@ public class Parser {
      * Types of commands.
      */
     private enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE, HELP
     }
 
     /**
@@ -75,6 +78,8 @@ public class Parser {
         switch (commandType) {
         case BYE:
             return new ExitCommand();
+        case HELP:
+            return new HelpCommand();
         case LIST:
             return new ListCommand();
         case TODO:
@@ -279,11 +284,20 @@ public class Parser {
         validateCommandWithArgs(commandType, userInput);
     }
 
-    // With args include: LIST, BYE
+    // With no args include: LIST, BYE
     private static void validateCommandWithNoArgs(String userInput) throws BerryException {
-        if (userInput.contains(" ") && userInput.split(" ").length > 1) {
-            throw new BerryException("Too many arguments for LIST and BYE commands.");
+        if (!userInput.contains(" ")) {
+            return;
         }
+
+        String[] splitUserInput = userInput.split(" ");
+        String command = splitUserInput[INDEX_COMMAND_TYPE];
+        int length = splitUserInput.length;
+        if (length == 1) {
+            return;
+        }
+
+        throw new ExtraArgsException(command);
     }
 
     // With args include: MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
@@ -305,13 +319,13 @@ public class Parser {
         String command = commandType.toString().toLowerCase();
         if (userInput.endsWith(command)
                || userInput.split(" ").length <= 1) {
-            throw new BerryException("Too many arguments for LIST and BYE commands!");
+            throw new MissingClauseException("task index");
         }
 
         try {
             int placeholderToCheckIfInt = Integer.parseInt(userInput.split(" ")[1]);
         } catch (NumberFormatException e) {
-            throw new BerryException("your given index clause is not an integer :<");
+            throw new IllegalValueException("Your task index has to be a number!");
         }
     }
 
@@ -391,7 +405,9 @@ public class Parser {
     }
 
     private static boolean isCommandWithNoArgs(CommandType commandType) {
-        return commandType == CommandType.LIST || commandType == CommandType.BYE;
+        return commandType == CommandType.LIST
+                || commandType == CommandType.BYE
+                || commandType == CommandType.HELP;
     }
 
     private static boolean isIndexCommands(CommandType commandType) {

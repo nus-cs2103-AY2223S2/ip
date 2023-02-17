@@ -27,8 +27,9 @@ public class Ui {
 
     public static String showWelcome() {
         String logo = "";
-        return logo + "Hey there! \nI'm Berry the Bunny~ <3 \n"
-                + "What are you looking to plan today?";
+        return logo + "Hey there! \nI'm Berry the Bunny~ <3 "
+                + "\nWhat are you looking to plan today?"
+                + "\nType 'help' for the help menu!";
     }
 
     public static String showGoodbye() {
@@ -72,5 +73,35 @@ public class Ui {
 
     public static String showLoadingError() {
         return "I can't seem to load the file\n";
+    }
+
+    public static String showHelpMenu() {
+        String output = "Here's what berry can do:"
+            + "\n-----------------Adding Tasks------------------"
+                + "\n1. todo <task_name> [#hash_tag] \n\t- Adds a task you have to do"
+            + "\n2. deadline <task_name> \n\t/by<YYYY-MM-DD> [#hash_tag] \n\t- Adds a task with a deadline"
+            + "\n3. event <task_name> /from<YYYY-MM-DD> \n\t/to<YYYY-MM-DD> [#hash_tag]"
+                + "\n\t- Adds an event you have to attend to"
+            + "\n----------------Showing Tasks-----------------"
+            + "\nlist \n\t- Shows all the tasks you have currently"
+            + "\n-----------------Marking tasks-----------------"
+                + "\n1. mark <index> \n\t- Marks a task with index as done"
+            + "\n2. unmark <index> \n\t- Marks a task with the index as not done"
+            + "\n-----------------Deleting tasks-----------------"
+                + "\ndelete <index> \n\t- Deletes a task with index"
+            + "\n-----------------Finding tasks:-----------------"
+                + "\nfind <keyword> "
+            + "\n\t- Shows all the tasks with corresponding task \n\tindex which contains the keyword";
+
+        output += showNotice();
+        return output;
+    }
+
+    public static String showNotice() {
+
+        String output = "\n------------------------------------------------"
+                + "\nNote that '[#hash_tag]' is optional";
+        output += "\nE.g. Berry accepts 'todo sweep room' and\n\t\t'todo sweep room #chores'";
+        return output;
     }
 }
