@@ -8,10 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiHandler extends Application {
     private ScrollPane scrollPane;
@@ -29,6 +33,10 @@ public class GuiHandler extends Application {
     private CommandHandler commandHandler = new CommandHandler();
     private final Storage storage = new Storage("./data/duke.txt");
     private TaskList tasks = this.storage.loadData();
+    private List<String> previousUserInputs = new ArrayList<>();
+    private int upKeyCount = 0;
+    //This is used to keep track of how many previous commands the user wants; ie:
+    // how many times the user presses the up key. Resets to 0 once user inputs a valid command.
 
 
 
@@ -94,6 +102,12 @@ public class GuiHandler extends Application {
             handleUserInput();
         });
 
+        userInput.setOnKeyPressed((event) -> {
+            if (event.getCode().equals(KeyCode.UP)) {
+                handleUpKeyPress();
+            }
+        });
+
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -119,6 +133,9 @@ public class GuiHandler extends Application {
                 DialogBox.getDukeDialog(dukeText, duke)
         );
 
+        previousUserInputs.add(0, userInput.getText());
+        upKeyCount = 0;
+
         if (userInput.getText().equalsIgnoreCase("bye")) {
             Platform.exit();
             System.exit(0);
@@ -132,6 +149,18 @@ public class GuiHandler extends Application {
         String response;
         response = this.commandHandler.handleCommand(command, tasks, storage);
         return response;
+    }
+
+    private void handleUpKeyPress() {
+        userInput.clear();
+        try {
+            userInput.setText(previousUserInputs.get(upKeyCount));
+            userInput.end();
+            upKeyCount++;
+        } catch (IndexOutOfBoundsException e) {
+            //No further command history
+            //No need to throw error
+        }
     }
 
 }
