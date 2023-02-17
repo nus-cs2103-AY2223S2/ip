@@ -64,4 +64,9 @@ public class Ui {
         }
         return SEPARATOR_TOP + res + SEPARATOR_BOT;
     }
+
+    public String greetUserGUI() {
+        String msg = "Hello! I'm Duke\n" + "What can I do for you?";
+        return SEPARATOR_TOP + msg + SEPARATOR_BOT;
+    }
 }
