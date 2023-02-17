@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import Commands.Task;
+import Exceptions.EmptyContentException;
+import Exceptions.UnknownCommandException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,7 +25,7 @@ import javafx.scene.image.ImageView;
  * A simple todo bot that helps you to manage your tasks with deadline or occuring time.
  * @author Park Hyunjin
  */
-public class Duke extends Application {
+public class Bada extends Application {
 
     private static Storage storage;
     static boolean isBye = false;
@@ -60,9 +62,9 @@ public class Duke extends Application {
     Ui ui = new Ui();
 
     /**
-     * Runs Duke and begins the program.
+     * Runs Bada and begins the program.
      * It invokes parser to start managing tasks.
-     * @param input
+     * @param input User input line
      * @return Output line to show to user
      * @throws IOException to write on the data
      */
@@ -75,12 +77,12 @@ public class Duke extends Application {
             } else {
                 return ui.bye();
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (EmptyContentException e) {
             return ui.showEmptyError();
         } catch (FileNotFoundException e) {
             return ui.showFileError();
-        } catch (Exception e) {
-            return ui.showLoadingError();
+        } catch (UnknownCommandException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -95,15 +97,15 @@ public class Duke extends Application {
         return textToAdd;
     }
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Bada's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws IOException {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label badaText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(bot))
+                DialogBox.getBadaDialog(badaText, new ImageView(bot))
         );
         userInput.clear();
     }
@@ -111,7 +113,7 @@ public class Duke extends Application {
     /**
      * Get response input from user
      * @param input entered line from user
-     * @return runs duke
+     * @return runs Bada
      * @throws IOException to write on
      */
     private String getResponse(String input) throws IOException {
@@ -142,7 +144,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Bada");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -198,7 +200,7 @@ public class Duke extends Application {
             }
         });
         Label msg = new Label(ui.hello());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(msg, new ImageView(bot)));
+        dialogContainer.getChildren().addAll(DialogBox.getBadaDialog(msg, new ImageView(bot)));
     }
 
 }

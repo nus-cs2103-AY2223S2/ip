@@ -1,5 +1,5 @@
 package Commands;
-import Week2.src.main.Duke;
+import Week2.src.main.Bada;
 import Week2.src.main.TaskList;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class Unmark {
 
         String str1 = "OK, I've marked this task as not done yet:";
         String str2 = "[ ]" + current.getContent();
-        Duke.writeOn(current);
+        Bada.writeOn(current);
 
         return str1 + "\n" + str2;
     }

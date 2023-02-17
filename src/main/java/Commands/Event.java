@@ -1,6 +1,6 @@
 package Commands;
 
-import Week2.src.main.Duke;
+import Week2.src.main.Bada;
 import Week2.src.main.TaskList;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class Event extends Task {
 
         String str1 = "Got it. I've added this task:";
         String str2 = current.toString();
-        Duke.writeOn(current);
+        Bada.writeOn(current);
 
         return str1 + "\n" + str2;
     }

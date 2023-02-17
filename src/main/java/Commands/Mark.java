@@ -1,5 +1,5 @@
 package Commands;
-import Week2.src.main.Duke;
+import Week2.src.main.Bada;
 import Week2.src.main.TaskList;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class Mark {
 
         String str1 = "Nice! I've marked this task as done:";
         String str2 = "[X] " + current.getContent();
-        Duke.writeOn(current);
+        Bada.writeOn(current);
 
         return str1 + "\n" + str2;
     }

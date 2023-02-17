@@ -1,7 +1,7 @@
 package Commands;
 
+import Week2.src.main.Bada;
 import Week2.src.main.TaskList;
-import Week2.src.main.Duke;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class Todo extends Task {
      * Todo constructor
      * It only contains the content of the task that user has entered.
      * It only contains task context
-     * @param content
+     * @param content Content of the todo task
      */
     public Todo(String content) {
         super(content);
@@ -37,15 +37,13 @@ public class Todo extends Task {
         String str1 = "Got it. I've added this task:";
         String str2 = current.toString();
         String str3 = "Now you have " + tasklist.length() + " tasks in the list";
-        Duke.writeOn(current);
+        Bada.writeOn(current);
         return str1 + "\n" + str2 + "\n" + str3;
     }
 
     /**
      * It overrides toString() method to change information to a string format.
      * @return String format of task data
-     * It overrides toString() method to change the information to a string format.
-     * @return A string format of the given task information
      */
     @Override
     public String toString() {
