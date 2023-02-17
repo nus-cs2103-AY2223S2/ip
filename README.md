@@ -8,6 +8,7 @@ Here are some basic things you can do:
 - add a task ```todo mop the floor```
 - mark/unmark tasks as done ```mark 6```
 - set deadlines & events too! 😲 ```deadline do assignment /by Monday```
+- For more **cool instructions**, simply ask muse! ```help```
 
 ## Setting up in Intellij
 
