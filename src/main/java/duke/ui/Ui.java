@@ -4,7 +4,7 @@ package duke.ui;
  * Class mainly used for displaying and formatting messages.
  */
 public class Ui {
-    private static String welcomeMessage = "Hello from ClashPlanner\n";
+    private static String welcomeMessage = "Hello from 👑👑👑ClashPlanner👑👑👑\n";
     public static String getWelcomeMessage() {
         return welcomeMessage;
     }

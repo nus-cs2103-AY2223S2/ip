@@ -108,8 +108,8 @@ public class TaskList {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Found related tasks:\n");
-        for (int i = 1; i <= foundTasks.size(); i++) {
-            sb.append("    " + i + ". " + foundTasks.get(i - 1) + "\n");
+        for (Task task : foundTasks) {
+            sb.append("    " + task + "\n");
         }
         return sb.toString();
     }

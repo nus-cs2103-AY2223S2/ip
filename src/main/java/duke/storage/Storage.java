@@ -56,11 +56,7 @@ public class Storage {
                 throw new DukeException("Error creating file: " + e.getMessage());
             }
         } else {
-            try {
-                defaultTasks = loadDefaultTasks(new ArrayList<Task>(), allTasks);
-            } catch (FileNotFoundException e) {
-                throw new DukeException("Could not load the default tasks: " + e.getMessage());
-            }
+            defaultTasks = loadDefaultTasks(new ArrayList<Task>(), allTasks);
         }
         return defaultTasks;
     }
@@ -69,13 +65,19 @@ public class Storage {
      * @param tasks default ArrayList of Tasks
      * @param file local file that contains all local tasks
      * @return an ArrayList of Tasks containing all local tasks
-     * @throws FileNotFoundException if the local file is not found.
+     * @throws DukeException if the local file is not found or some lines of the file have wrong format
      */
     private static ArrayList<Task> loadDefaultTasks(ArrayList<Task> tasks, File file)
-            throws FileNotFoundException {
-        Scanner s = new Scanner(file);
+            throws DukeException {
+        Scanner s;
+        try {
+            s = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Cannot find default task file: " + e.getMessage());
+        }
         while (s.hasNext()) {
-            String[] lineArr = s.nextLine().split("/");
+            String inputLine = s.nextLine();
+            String[] lineArr = inputLine.split("/");
             switch (lineArr[0]) {
             case "D":
                 Deadline deadline = new Deadline(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3]);
@@ -99,7 +101,8 @@ public class Storage {
                 tasks.add(event);
                 break;
             default:
-                continue;
+                // if the line of the file scanned is not of the correct format, throw an exception
+                throw new DukeException("Corrupted task file: " + inputLine);
             }
         }
         s.close();
