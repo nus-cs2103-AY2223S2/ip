@@ -3,16 +3,31 @@ package duke;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 /**
  * The main class of the software engineering project Duke.
  * This class is responsible for coordinating the work of the user interface, storage and parser classes.
  *
  * @author owen-yap
  */
-public class Duke {
+public class Duke extends Application {
     private final Parser parser;
     private final Storage storage;
     private final Ui ui;
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        System.out.println("here");
+        stage.setScene(scene); // Setting the stage to show our screen
+        System.out.println("here");
+        stage.show(); // Render the stage.
+        System.out.println("here");
+    }
     /**
      * Constructs a Duke object which takes a file path and initializes the storage, user interface and parser.
      *

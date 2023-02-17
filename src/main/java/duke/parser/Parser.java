@@ -48,7 +48,7 @@ public class Parser {
 
             int idx;
             Task tsk;
-            String markMsg
+            String markMsg;
             String tskNum;
             String cfmMsg = "Got it. I've added this task:";
             String[] desc;
