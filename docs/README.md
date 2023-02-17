@@ -1,16 +1,25 @@
-Smudge is a c(h)at 🐱 bot that frees you from the burden of having to remember what's coming up soon.
+### ***Smudge*** is a c(h)at 🐱 bot that frees you from the burden of having to remember what's coming up soon.
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-3. [Commands](#commands)
-4. [Summary](#summary)
+|Contents|
+| ------ |
+| 1. [Prerequisite](#prerequisite) |
+|2. [Quick Start](#quick-start) |
+|3. [Features](#features) |
+|4. [Commands](#commands) |
+|5. [Summary](#summary) |
+
+## Prerequisite
+You will need Java 11 on your computer. (It is recommended to use Java 11) <br>
+If you already have Java JDK or JRE 11, you may **skip** this segment. <br>
+Otherwise, you can download Java 11 from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 ## Quick Start
 Follow these simple steps and you'll never miss another event or deadline!
 
 1. Download Smudge from [here](https://github.com/nevinlim/ip/releases).
-2. Open a command window (Powershell, Terminal) in the directory you downloaded Smudge
-3. Using the command window, type the following command:
+2. Double click it. (if you've done this, skip 3 and 4)
+3. Open a command window (Powershell, Terminal) in the directory you downloaded Smudge
+4. Using the command window, type the following command:
 `java -jar Smudge.jar`
 4. Start freeing your mind from event dates 😼
 
