@@ -25,10 +25,10 @@ Refer to the Features below for details of each command.
 ---
 ### `list` List Command
 
-####Syntax:
+#### Syntax:
 `list`
 
-####Description:
+#### Description:
 
 Lists out all the tasks in the task list of Duke 
 along with its details, completion state and type of task.
@@ -39,29 +39,29 @@ along with its details, completion state and type of task.
 ### `todo` - Adds a Todo task
 
 
-####Syntax:
+#### Syntax:
 `todo {DETAILS}`
 
-####Example of usage:
+#### Example of usage:
 
 `todo work` saves a todo task with "work" as its description
 
-####Description:
+#### Description:
 
 Adds a ToDo task to the task list of Duke with the details specified.
 Defaults as incomplete.
 ---
 ### `deadline` - Add a Deadline
-####Syntax:
+#### Syntax:
 `deadline {DETAILS} /by {DEADLINE DATETIME}`
 
-####Example usage:
+#### Example usage:
 
 `deadline work /by 18-02-2023 18:00` saves a deadline with 
 "work" as its description and has a deadline of 18 February 2023
 6pm.
 
-####Description:
+#### Description:
 
 Adds a Deadline to the task list of Duke with the details 
  and the deadline datetime specified.
@@ -76,15 +76,15 @@ the datetimes are not in the right format, so make sure
 format your command properly.
 ---
 ### `event` - Add an Event
-####Syntax:
+#### Syntax:
 `event {DETAILS} /from {FROM DATETIME} /to {TO DATETIME}`
 
-####Example Usage:
+#### Example Usage:
 `event work /from 18-02-2023 14:00 /to 18-02-2023 18:00` saves an event with "work" 
 as its description and will last from 18 February 2023 2pm to 18 February 2023
 6pm.
 
-####Description:
+#### Description:
 Adds an event task to the task list of Duke with the details,
 the from datetime and the to datetime specified.
 Defaults as incomplete.
@@ -98,63 +98,63 @@ the datetimes are not in the right format,
 so make sure to format your command properly
 ---
 ### `delete` - Delete a task
-####Syntax:
+#### Syntax:
 `delete {TASK NUMBER}`
 
-####Example Usage:
+#### Example Usage:
 `delete 1` will delete the very first task in the list.
 
-####Description:
+#### Description:
 
 Deletes the task according to the task number given.
 To find out what number a task is, use the `list` command.
 ---
 
 ### `find` - Finds tasks
-####Syntax:
+#### Syntax:
 `find {details}`
 
-####Example Usage:
+#### Example Usage:
 `find CS2103T` will list out all the tasks that have CS2103T in its description.
 
 
-####Description:
+#### Description:
 Shows all tasks that have descriptions which contain the details specified
 in the command.
 ---
 
 ### `mark` - Mark task as complete
-####Syntax:
+#### Syntax:
 `mark {TASK NUMBER}`
 
-####Example Usage:
+#### Example Usage:
 `mark 1` will make the first task in the list as complete.
 
-####Description:
+#### Description:
 Marks the task as complete according to the task number given.
 To find out what number a task is, use the `list` command.
 ---
 
 ### `unmark` - Marks task as incomplete
-####Syntax:
+#### Syntax:
 `unmark {TASK NUMBER}`
 
-####Example Usage:
+#### Example Usage:
 `unmark 1` will make the first task in the list as incomplete.
 
-####Description:
+#### Description:
 Marks the task as incomplete according to the task number given.
 To find out what number a task is, use the `list` command.
 ---
 
 ### `edit` - Edit task details
-####Syntax:
+#### Syntax:
 `edit {TASK NUMBER} {NEW DETAILS}`
-####Example Usage:
+#### Example Usage:
 `edit 1 Finish CS2103T project` will edit the first task in the list to have the description of
 "Finish CS2103T project".
 
-####Description:
+#### Description:
 Edits the task's details according to the task number given to the
 new details specified in the command.
 
@@ -163,10 +163,10 @@ To find out what number a task is, use the `list` command.
 ---
 
 ### `bye` - Exit Command
-####Syntax:
+#### Syntax:
 `bye`
 
-####Description:
+#### Description:
 Closes Duke and saves all relevant information.
 
 __**IMPORTANT:**__
