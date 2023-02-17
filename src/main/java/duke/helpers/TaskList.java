@@ -58,11 +58,11 @@ public class TaskList {
      * @return Task that was marked as completed.
      */
     public Task mark(int index) {
+        assert index < tasks.size(): "index over boundary";
         Task task = tasks.get(index - 1);
         task.setDone();
         return task;
     }
-
     /**
      * Marks task as incomplete.
      *
@@ -70,11 +70,11 @@ public class TaskList {
      * @return Task that was marked as incomplete.
      */
     public Task unmark(int index) {
+        assert index < tasks.size(): "index over boundary";
         Task task = tasks.get(index - 1);
         task.setUndone();
         return task;
     }
-
     /**
      * Deletes task.
      *
@@ -83,6 +83,7 @@ public class TaskList {
      * @return Task that was deleted.
      */
     public Task delete(int index) {
+        assert index < tasks.size(): "index over boundary";
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
         return task;

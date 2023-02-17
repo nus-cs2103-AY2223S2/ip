@@ -46,36 +46,43 @@ public class Parser {
 
         switch (command) {
         case "bye":
+            assert instrSplit.length == 1 : "Invalid no. of arguments";
             message = "Bye. Hope to see you again soon!\n";
             break;
         case "list":
+            assert instrSplit.length == 1 : "Invalid no. of arguments";
             message = "Here are the tasks in your list:\n" + taskList.list();
             break;
         case "mark":
+            assert instrSplit.length == 2 : "Invalid no. of arguments";
             index = Integer.parseInt(instrSplit[1]);
             message = "Nice! I've marked this task as done:\n";
             message += "    " + taskList.mark(index) + "\n";
             this.taskList.save();
             break;
         case "unmark":
+            assert instrSplit.length == 2 : "Invalid no. of arguments";
             index = Integer.parseInt(instrSplit[1]);
             message = "OK, I've marked this task as not done yet:\n";
             message += "    " + taskList.unmark(index) + "\n";
             this.taskList.save();
             break;
         case "delete":
+            assert instrSplit.length == 2 : "Invalid no. of arguments";
             index = Integer.parseInt(instrSplit[1]);
             message = "Noted. I've removed this task:\n";
             message += "    " + taskList.delete(index) + "\n";
             this.taskList.save();
             break;
         case "todo":
+            assert instrSplit.length > 1 : "Invalid no. of arguments";
             task = new Todo(instr);
             message = "Got it. I've added this task:\n";
             message += taskList.add(task);
             this.taskList.save();
             break;
         case "deadline":
+            assert instrSplit.length > 2 : "Invalid no. of arguments";
             try {
                 task = new Deadline(instruction);
                 message = "Got it. I've added this task:\n";
@@ -89,12 +96,14 @@ public class Parser {
             this.taskList.save();
             break;
         case "event":
+            assert instrSplit.length > 3 : "Invalid no. of arguments";
             task = new Event(instruction);
             message = "Got it. I've added this task:\n";
             message += taskList.add(task);
             this.taskList.save();
             break;
         case "find":
+            assert instrSplit.length > 1 : "Invalid no. of arguments";
             String keyword = instrSplit[1];
             message = taskList.find(keyword);
             break;
