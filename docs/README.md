@@ -1,7 +1,7 @@
 # User Guide
 This user guide has been adapted from [SE-EDU's AddressBook-Level3]
 
-Duke is a desktop app for managing tasks, deadlines and events, with a input format suited for individuals who
+Duke is a desktop app for managing tasks, deadlines and events, with an input format suited for individuals who
 are familiar with text-based UIs.
 
 <img src="Ui.png" width="600" />
