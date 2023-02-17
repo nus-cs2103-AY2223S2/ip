@@ -2,6 +2,7 @@ package meggy.gui;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -13,7 +14,9 @@ import meggy.Resource;
  * Controller for gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-
+    /** The button to send message to the chatbot. */
+    @FXML
+    private Button sendButton;
     /** The scroller to move through all dialogs. */
     @FXML
     private ScrollPane scrollPane;
@@ -31,15 +34,20 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         assert scrollPane != null;
         assert dialogContainer != null;
+        assert sendButton != null;
+        assert userInput != null;
+        userInput.setFont(GuiUtil.SPLAT_FONT);
+        sendButton.setFont(GuiUtil.SPLAT_FONT);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setApDimProperty(ReadOnlyDoubleProperty apHeightProperty,ReadOnlyDoubleProperty apWidthProperty){
+    public void setApDimProperty(ReadOnlyDoubleProperty apHeightProperty, ReadOnlyDoubleProperty apWidthProperty) {
         scrollPane.prefHeightProperty().bind(apHeightProperty.subtract(41));
         scrollPane.prefWidthProperty().bind(apWidthProperty);
         userInput.prefWidthProperty().bind(apWidthProperty.subtract(76));
         dialogContainer.prefWidthProperty().bind(apWidthProperty);
     }
+
     /**
      * Updates current chatbot.
      *

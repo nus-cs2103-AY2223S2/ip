@@ -31,7 +31,7 @@ public class GuiUtil {
                 : new Image(dukeImageIn);
 
         // Load fonts
-        final InputStream fontStream = MainApplication.class.getResourceAsStream("/fonts/Splatfont2.ttf");
+        final InputStream fontStream = MainApplication.class.getResourceAsStream("/fonts/Splatoon2.otf");
         if (fontStream == null) {
             SPLAT_FONT = null;
         } else {
