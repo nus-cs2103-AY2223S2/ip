@@ -68,6 +68,10 @@ public class TaskList {
         list.set(idx, task);
     }
 
+    /**
+     * Find the tasks in hte list that matched with a certain keyword
+     * @param key the keyword
+     */
     public void find(String key) {
         int idx = 1;
         for (int i = 0; i < list.size(); i++){
