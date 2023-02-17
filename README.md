@@ -1,7 +1,7 @@
 # Muse: The cute task manager! <img src="https://pbs.twimg.com/media/Cr1LLRDUEAA2vk8.jpg" width=4% height=4%>
 
 Muse is a simple app that organises 📖 your tasks & life!
-""Let's get you started!""
+**Let's get you started!**
 
 Here are some basic things you can do: 
 - list out tasks  ```list```
