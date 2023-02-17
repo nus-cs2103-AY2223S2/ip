@@ -6,7 +6,8 @@ import task.Task;
 import task.Tasklist;
 
 /**
- * The UnMarkCommand class implements the Command interface and represents the command for unmarking a task in the task list.
+ * The UnMarkCommand class implements the Command interface and
+ * represents the command for unmarking a task in the task list.
  */
 public class UnMarkCommand implements Command {
     private int index;
@@ -19,26 +20,17 @@ public class UnMarkCommand implements Command {
     }
 
     /**
-     Unmarks the task at the specified index in the task list
-     @param ui The user interface used to display information to the user
-     @param list The task list being operated on
-     @param storage The storage backend used to persist the task list
+     * Unmarks the task at the specified index in the task list
+     * @param ui The user interface used to display information to the user
+     * @param list The task list being operated on
+     * @param storage The storage backend used to persist the task list
      */
     @Override
     public String execute(Ui ui, Tasklist list, Storage storage) {
         int oneIndex = this.index + 1;
-        Task UnMarkedTask = list.getTask(oneIndex);
+        Task unMarkedTask = list.getTask(oneIndex);
         list.unmarkTask(this.index);
-        return ui.getUnMarkReply(UnMarkedTask);
+        return ui.getUnMarkReply(unMarkedTask);
     }
 
-    /**
-     Returns false as this command does not represent an exit command
-     @return false
-     */
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

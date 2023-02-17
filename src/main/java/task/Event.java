@@ -8,6 +8,8 @@ import java.time.LocalDate;
  * about the start and end date of the event.
  */
 public class Event extends Task {
+    static final String TASKSYMBOL = "[E]";
+    static final String TASKSAVESYMBOL = "E";
     private LocalDate startDetails;
     private LocalDate endDetails;
 
@@ -34,7 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return "E" + super.toSaveFormat() + DIVIDER + startDetails + DIVIDER + endDetails;
+        return TASKSAVESYMBOL + super.toSaveFormat() + DIVIDER + startDetails + DIVIDER + endDetails;
     }
 
     /**
@@ -46,7 +48,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(" + startDetails + " : " + endDetails + ")";
+        return TASKSYMBOL + super.toString() + "(" + startDetails + " : " + endDetails + ")";
     }
 
 

@@ -34,6 +34,11 @@ public class Parser {
         this.input = input;
     }
 
+    /**
+     * Parses the user input and returns the corresponding command object.
+     * @return The command object corresponding to the user input.
+     * @throws DukeException If the input is not recognized or is invalid.
+     */
     public Command parseCommand() throws DukeException {
         input = input.trim();
         String[] splitString = input.split(" ");
@@ -59,8 +64,8 @@ public class Parser {
                 throw new DukeException("Oh no!! Fill in the description of a todo.");
             }
             String taskFullDetails = input.substring(startIndex);
-            Todo task = new Todo(taskFullDetails);
-            return new AddCommand(task);
+            Todo todoTask = new Todo(taskFullDetails);
+            return new AddCommand(todoTask);
         } else if (keyword.equals("deadline")) {
             int startIndex = keyword.length();
             if (startIndex >= input.length()) {
@@ -74,8 +79,8 @@ public class Parser {
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateTime = LocalDate.parse(splitDetails[1].trim(), formatter);
-            Deadline task = new Deadline(splitDetails[0].trim(), dateTime);
-            return new AddCommand(task);
+            Deadline deadlineTask = new Deadline(splitDetails[0].trim(), dateTime);
+            return new AddCommand(deadlineTask);
         } else if (keyword.equals("event")) {
             int startIndex = keyword.length();
             if (startIndex >= input.length()) {
@@ -91,12 +96,12 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate startDate = LocalDate.parse(splitStartAndEnd[0].trim(), formatter);
             LocalDate endDate = LocalDate.parse(splitStartAndEnd[1].trim(), formatter);
-            Event task = new Event(splitDescriptionAndDuration[0], startDate, endDate);
-            return new AddCommand(task);
-        } if (keyword.equals("find")) {
+            Event eventTask = new Event(splitDescriptionAndDuration[0], startDate, endDate);
+            return new AddCommand(eventTask);
+        } else if (keyword.equals("find")) {
             return new FindCommand(splitString[1]);
         } else {
-            throw new DukeException("Oh no!!! What is this? Please try again later!");
+            throw new DukeException("Oh no!!! What is this? Please try again!");
         }
     }
 
