@@ -8,6 +8,7 @@ import duke.tasklist.task_types.Task;
 import duke.tasklist.task_types.ToDo;
 import duke.utility.enums.CommandMap;
 import duke.utility.enums.UpdateType;
+import javafx.application.Platform;
 
 /**
  * Represents a <code>Parser</code> object that perfroms the necessary
@@ -133,7 +134,9 @@ public class Parser {
         if (command.length > 1) {
             throw wrongCommandFormat;
         }
-        return "Bye! See you soon!\n";
+
+        Platform.exit();
+        return "";
     }
 
     /**
