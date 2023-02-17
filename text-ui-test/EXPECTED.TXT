@@ -5,3 +5,66 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this task:
+T | O | read book
+Now you have 3 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this task:
+D | O | return book  | May 06 2022
+Now you have 4 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this task:
+E | O | project meeting  | Aug 6th 2pm  - 4pm
+Now you have 5 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this task:
+T | O | join sports club
+Now you have 6 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this task:
+T | O | borrow book
+Now you have 7 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Nice! duke.Duke has marked this task as done:
+[X] buybook
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Nice! duke.Duke has marked this task as done:
+[X] return book
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.T | X | buybook
+2.E |   | meet  | 2  - 4
+3.T |   | read book
+4.D | X | return book  | May 06 2022
+5.E |   | project meeting  | Aug 6th 2pm  - 4pm
+6.T |   | join sports club
+7.T |   | borrow book
+OOPS! Invalid date and time format. Please change to YYYY-MM-DD
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this task:
+E | O | project meeting  | Mon 2pm  - 4pm
+Now you have 8 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OOPS! Invalid syntax here, double check your spelling
+OOPS! The time element is missing.
+OOPS! Invalid syntax here, double check your spelling
+OOOPS! The task number is not available. Try another number!
+OOOPS! The task number is not available. Try another number!
+OOPS!!! I'm sorry, but I don't know what that means :-( Double check your spellings or spaces
+OOPS!!! I'm sorry, but I don't know what that means :-( Double check your spellings or spaces
+OOPS! The task name is missing.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Noted. I've removed this task:
+T | O | read book
+Now you have 7 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OOOPS! The task number is not available. Try another number!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+duke.Duke says bye bye ~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
