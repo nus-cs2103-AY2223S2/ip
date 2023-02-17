@@ -7,6 +7,8 @@ import duke.command.Command;
 import duke.command.ByeCommand;
 import duke.command.AddCommand;
 import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 import duke.DukeException;
 
 public class Parser {
@@ -31,6 +33,12 @@ public class Parser {
             break;
         case AddCommand.COMMAND:
             command = new AddCommand();
+            break;
+        case MarkCommand.COMMAND:
+            command = new MarkCommand(userInput.split(" "));
+            break;
+        case UnmarkCommand.COMMAND:
+            command = new UnmarkCommand(userInput.split(" "));;
         }
     }
 }
