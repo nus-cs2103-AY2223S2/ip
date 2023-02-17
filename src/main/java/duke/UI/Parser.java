@@ -20,6 +20,17 @@ public class Parser {
 
     private Command parseInput(String userInput) {
         Command command;
-        return userInput;
+        String inputCommand = userInput.split(" ", 2)[0];
+
+        switch (inputCommand) {
+        case ByeCommand.COMMAND:
+            command = new ByeCommand();
+            break;
+        case ListCommand.COMMAND:
+            command = new ListCommand();
+            break;
+        case AddCommand.COMMAND:
+            command = new AddCommand();
+        }
     }
 }
