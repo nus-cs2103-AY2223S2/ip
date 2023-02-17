@@ -131,10 +131,10 @@ Format:
 3. `event <description> /from <date> <time> /to <time>`
 
 Example:
-
 1. `event career fair /from Monday /to Sunday`
 2. `event hackathon /from Monday 2:PM /to Sunday 4:AM`
 3. `event gaming competition /from Monday 2:PM /to 4:PM`
+
 ---
 
 ### `bye` - Exit the program
