@@ -18,12 +18,14 @@ public class Duke {
         try {
             Storage.loadFromFile(tasks);
         } catch (IOException e) {
+            // No file found
             e.printStackTrace();
         }
     }
 
     /**
-     * Gets task list
+     * Gets the task list.
+     *
      * @return task list
      */
     public TaskList getTasks() {

@@ -88,6 +88,8 @@ public class MainWindow extends AnchorPane {
     }
 
     public void greetUser() {
-        displayMessage(Profile.DUKE, "Hoot! How may I assist you on this fine night?", false);
+        String tasksFetchMessage = "(I've fetched " + duke.getTasks().getSize() + " saved tasks)";
+        String greeting = "Hoot! How may I assist you?\n" + tasksFetchMessage;
+        displayMessage(Profile.DUKE, greeting, false);
     }
 }

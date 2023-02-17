@@ -3,7 +3,6 @@ package duke;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -26,7 +25,6 @@ public class Storage {
      * @throws IOException Specified file not found.
      */
     public static void saveToFile(TaskList tasks) throws IOException {
-
         // create directory
         Path path = Paths.get(strDir);
         Files.createDirectories(path);
@@ -45,22 +43,18 @@ public class Storage {
      * @throws IOException Specified file not found.
      */
     public static void loadFromFile(TaskList tasks) throws IOException {
-        try {
-            Path fileNamePath = Path.of(fileName);
-            String strData = Files.readString(fileNamePath);
+        Path fileNamePath = Path.of(fileName);
+        String strData = Files.readString(fileNamePath);
 
-            String[] strTasks = strData.split("\n");
-            for (String strTask : strTasks) {
-                if (strTask.length() <= 1) {
-                    System.out.println("blank line");
-                    continue;
-                }
-                System.out.println(strTask);
-                Task loadedTask = Parser.parseLoadedTask(strTask);
-                tasks.add(loadedTask);
+        String[] strTasks = strData.split("\n");
+        for (String strTask : strTasks) {
+            if (strTask.length() <= 1) {
+                System.out.println("blank line");
+                continue;
             }
-        } catch (NoSuchFileException e) {
-            // do nothing if no file exists (nothing to execute)
+            System.out.println(strTask);
+            Task loadedTask = Parser.parseLoadedTask(strTask);
+            tasks.add(loadedTask);
         }
     }
 

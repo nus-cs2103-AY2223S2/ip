@@ -29,8 +29,8 @@ public class Main extends Application {
             stage.setResizable(true);
             stage.setOnShowing(event -> {
                 MainWindow controller = fxmlLoader.<MainWindow>getController();
-                controller.greetUser();
                 controller.setDuke(this.duke);
+                controller.greetUser();
             });
 
             stage.show();
