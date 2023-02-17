@@ -1,5 +1,5 @@
 # User Guide
-This user guide has been adapted from [SE-EDU's AddressBook-Level3] and 
+This user guide has been adapted from [SE-EDU's AddressBook-Level3]
 
 Duke is a desktop app for managing tasks, deadlines and events, with a input format suited for individuals who
 are familiar with text-based UIs.
