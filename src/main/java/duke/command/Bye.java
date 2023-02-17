@@ -22,6 +22,7 @@ public class Bye extends Command {
      * @param tasks The current Task List.
      * @return The current Task List.
      */
+    @Override
     public TaskList execute(TaskList tasks) {
         return tasks;
     }

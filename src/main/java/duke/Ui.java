@@ -25,6 +25,7 @@ public class Ui {
     }
 
     public static void receiveInput(String input) {
+        assert !input.isEmpty();
         Ui.input = input;
     }
 
@@ -35,7 +36,7 @@ public class Ui {
      */
     public static void listMessage(TaskList tasks) {
         response = "";
-        response += "Here are the tasks in your list:\n";
+        response += "Working on it Sigma. Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int j = i + 1;
             response += j + "." + tasks.get(i).toString() + "\n";
@@ -50,7 +51,7 @@ public class Ui {
      */
     public static void findMessage(String searchFor, TaskList tasks) {
         response = "";
-        response += "Here are the tasks in your list that contain [" + searchFor + "]:\n";
+        response += "Got it Sigma. Here are the tasks in your list that contain [" + searchFor + "]:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int j = i + 1;
             response += j + "." + tasks.get(i).toString() +"\n";
