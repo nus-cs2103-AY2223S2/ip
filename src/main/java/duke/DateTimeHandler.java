@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
@@ -54,7 +55,8 @@ public class DateTimeHandler {
             dtf = new DateTimeFormatterBuilder()
                     .parseCaseInsensitive()
                     .appendPattern(pattern)
-                    .toFormatter();
+                    .toFormatter()
+                    .withResolverStyle(ResolverStyle.STRICT);
             try {
                 t = dtf.parse(input);
                 break;
