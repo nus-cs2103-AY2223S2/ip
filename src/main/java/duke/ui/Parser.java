@@ -195,8 +195,6 @@ public class Parser {
         String regex = "((?=/description|/by|/from|/to)|(?<=/description|/by|/from|/to))";
         String[] updateComponents = update.split(regex);
 
-        System.out.println(Arrays.toString(updateComponents));
-
         /* Creates a list of pairs of task component and the updated information */
         List<Pair<TaskComponent, ?>> updateComponentsList = new ArrayList<>();
         for (int i = 0; i < updateComponents.length - 1; i = i + 2) {
