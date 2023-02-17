@@ -9,13 +9,7 @@ public class UI {
      * @return Welcome message
      */
     public String start() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String out = "Hello from\n" + logo
-                + "\n('v') :: Hiii! I'm duke, here to help you with your tasks!\n"
+        String out = "('v') :: Hiii! I'm panpan, here to help you with your tasks!\n"
                 + "•──────────────────♛─────────────────•";
         return out;
     }
