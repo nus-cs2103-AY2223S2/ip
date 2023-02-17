@@ -7,10 +7,10 @@ import java.time.format.DateTimeFormatter;
  * Represents task of the event deadline
  */
 public class Event extends Task {
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private String strStartTime;
-    private String strEndTime;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
+    private final String strStartTime;
+    private final String strEndTime;
 
     /**
    * Constructor for Event task.

@@ -7,7 +7,7 @@ package Duke.task;
  * is done.
  */
 public class Task {
-    private String string;
+    private final String string;
     private Boolean isMark;
 
     /**
