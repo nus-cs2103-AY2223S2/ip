@@ -1,4 +1,4 @@
-package kude.tui;
+package kude.processor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,10 +21,6 @@ public class Context {
 
     /**
      * Initializes a new Context.
-     * @param parser
-     * @param ui
-     * @param processor
-     * @param tasks
      */
     public Context(Parser parser, Ui ui, Processor processor, TaskList tasks) {
         this.parser = parser;

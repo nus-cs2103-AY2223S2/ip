@@ -1,4 +1,4 @@
-package kude.tui;
+package kude.processor;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -133,31 +133,27 @@ public class Processor {
     }
 
     /**
-     * Main command loop
+     * Runs the command in the given line
+     * @param line Command line
+     * @return true if the process should exit
      */
-    public void run() {
-        ui.writeWelcome();
-
-        while (true) {
-            ui.writePrompt();
-            var line = ui.getCommandLine();
-            if (line.equals("bye")) {
-                ui.writeBye();
-                break;
-            }
-            var parser = new Parser(line);
-            var context = new Context(parser, ui, this, tasks);
-            var cmdOpt = Optional.ofNullable(this.commands.get(parser.getCommand()));
-            cmdOpt.ifPresentOrElse(cmd -> {
-                try {
-                    cmd.run(context);
-                } catch (DukeException de) {
-                    ui.writeError(de.getMessage());
-                } catch (Exception e) {
-                    ui.writeError("An unhandled exception occurred while running the command: " + e);
-                }
-            }, () -> ui.writeError("No such command!"));
+    public boolean runCommand(String line) {
+        var parser = new Parser(line);
+        if (parser.getCommand().equals("bye")) {
+            return true;
         }
+        var context = new Context(parser, ui, this, tasks);
+        var cmdOpt = Optional.ofNullable(this.commands.get(parser.getCommand()));
+        cmdOpt.ifPresentOrElse(cmd -> {
+            try {
+                cmd.run(context);
+            } catch (DukeException de) {
+                ui.writeError(de.getMessage());
+            } catch (Exception e) {
+                ui.writeError("An unhandled exception occurred while running the command: " + e);
+            }
+        }, () -> ui.writeError("No such command!"));
+        return false;
     }
 
     /**

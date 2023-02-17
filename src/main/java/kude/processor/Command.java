@@ -1,4 +1,4 @@
-package kude.tui;
+package kude.processor;
 
 /**
  * Base interface for all commands

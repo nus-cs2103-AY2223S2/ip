@@ -4,10 +4,12 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import kude.processor.Ui;
+
 /**
  * User interface abstraction for the terminal.
  */
-public class Ui {
+public class Tui implements Ui {
     private final PrintStream out;
     private final Scanner scanner;
 
@@ -16,7 +18,7 @@ public class Ui {
      * @param in Input terminal stream
      * @param out Output terminal stream
      */
-    public Ui(InputStream in, PrintStream out) {
+    public Tui(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
         this.out = out;
     }
@@ -52,6 +54,7 @@ public class Ui {
     /**
      * Writes a line of text
      */
+    @Override
     public void writeLine(String line) {
         writeLine(line, 1);
     }
@@ -59,6 +62,7 @@ public class Ui {
     /**
      * Writes a line of text with indentation
      */
+    @Override
     public void writeLine(String line, int indent) {
         out.printf("<%s%s%n", "\t".repeat(indent), line);
     }
@@ -66,6 +70,7 @@ public class Ui {
     /**
      * Writes a line of text as error
      */
+    @Override
     public void writeError(String line) {
         writeError(line, 1);
     }
@@ -73,6 +78,7 @@ public class Ui {
     /**
      * Writes a line of text as error as indentation
      */
+    @Override
     public void writeError(String line, int indent) {
         out.printf("!%s%s%n", "\t".repeat(indent), line);
     }
