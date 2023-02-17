@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Represent list of tasks as a string.
+     *
      * @return String representation of task list
      */
     @Override
@@ -40,6 +41,7 @@ public class TaskList {
 
     /**
      * Removes a task the list at a specified index.
+     *
      * @param index Index of task to remove
      * @return Removed task
      */
@@ -64,6 +66,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
+     *
      * @param task Task to add
      */
     public void add(Task task) {
@@ -80,6 +83,7 @@ public class TaskList {
 
     /**
      * Gets the task from the list at a specified index.
+     *
      * @param index Index of task to get.
      * @return Task to get
      */
@@ -102,6 +106,15 @@ public class TaskList {
             }
         });
         return result;
+    }
+
+    /**
+     * Gets size of the task list.
+     *
+     * @return size of the task list
+     */
+    public int getSize() {
+        return this.tasks.size();
     }
 
     /**

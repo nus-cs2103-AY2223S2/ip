@@ -22,6 +22,10 @@ public class ListCmd extends Command {
 
     /** Executes UI reply. */
     public String execute() {
-        return String.format("Here's your list:\n%s", taskList.toString());
+        if (taskList.getSize() == 0) {
+            return "You have no tasks!";
+        } else {
+            return String.format("Here's your list:\n%s", taskList.toString());
+        }
     }
 }
