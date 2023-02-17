@@ -120,3 +120,4 @@ Here are the matching tasks in your list:
 ```
 Bye. Hope to see you again soon!
 ```
+_App closes after 3 seconds._
