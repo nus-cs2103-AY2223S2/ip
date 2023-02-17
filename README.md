@@ -164,7 +164,7 @@ Example of usage:
 
 Expected outcome:
 
-deadline is snoozed
+deadline is snoozed.
 
 ```
 [D] [ ] pee (by: Oct 10 2020 10 AM) has been snoozed to pee (by: Oct 10 2020 11 AM)
