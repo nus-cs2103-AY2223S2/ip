@@ -66,6 +66,7 @@ public class TaskList {
      * @throws DukeException If index out of bounds.
      */
     public String deleteTask(int index) throws DukeException {
+        assert tasks != null : "tasks array should be initialized";
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Error: Please input a valid task index!");
         }
@@ -84,6 +85,7 @@ public class TaskList {
      * @throws DukeException If index out of bounds.
      */
     public String mark(int index) throws DukeException {
+        assert tasks != null : "tasks array should be initialized";
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Task index out of bounds, please input a valid index");
         } else {
@@ -102,6 +104,7 @@ public class TaskList {
      * @throws DukeException If index out of bounds.
      */
     public String unmark(int index) throws DukeException {
+        assert tasks != null : "tasks array should be initialized";
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Task index out of bounds, please input a valid index");
         } else {
@@ -119,6 +122,7 @@ public class TaskList {
      * @return String with details of Todo Task added.
      */
     public String addTodo(String description) {
+        assert tasks != null : "tasks array should be initialized";
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         tasks.add(new Todo(description));
@@ -133,6 +137,7 @@ public class TaskList {
      * @return String with details of Deadline Task added.
      */
     public String addDeadline(String description, LocalDateTime by) {
+        assert tasks != null : "tasks array should be initialized";
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         tasks.add(new Deadline(description, by));
@@ -148,6 +153,7 @@ public class TaskList {
      * @return String with details of Event added.
      */
     public String addEvent(String description, LocalDateTime from, LocalDateTime to) {
+        assert tasks != null : "tasks array should be initialized";
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         tasks.add(new Event(description, from, to));

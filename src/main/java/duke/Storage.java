@@ -102,6 +102,7 @@ public class Storage {
                 }
                 sb.append(t.toSaveFormat());
             }
+            assert storageFile != null : "Storage file is Null";
             FileWriter fw = new FileWriter(storageFile);
             fw.write(sb.toString());
             fw.close();
