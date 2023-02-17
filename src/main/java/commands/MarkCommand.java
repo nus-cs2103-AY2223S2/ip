@@ -36,4 +36,11 @@ public class MarkCommand extends Command {
             ui.idxErrorMsg();
         }
     }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        int idx = Integer.parseInt(super.getCommand()) - 1;
+        Task task = tasks.get(idx);
+        task.mark();
+        return ui.printMark() + task.toString();
+    }
 }

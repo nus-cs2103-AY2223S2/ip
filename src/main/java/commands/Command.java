@@ -44,4 +44,8 @@ public class Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         return;
     }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        return "ttt";
+    }
 }

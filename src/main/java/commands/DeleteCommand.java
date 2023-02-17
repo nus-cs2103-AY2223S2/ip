@@ -3,6 +3,7 @@ package commands;
 import java.io.IOException;
 
 import storage.Storage;
+import tasks.Deadline;
 import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
@@ -34,5 +35,11 @@ public class DeleteCommand extends Command {
         } catch (Exception e) {
             ui.idxErrorMsg();
         }
+    }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        int idx = Integer.parseInt(super.getCommand()) - 1;
+        Task task = tasks.get(idx);
+        return ui.printRemove() + task.toString();
     }
 }

@@ -15,4 +15,8 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.find(super.getCommand());
     }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.printFind(super.getCommand());
+    }
 }

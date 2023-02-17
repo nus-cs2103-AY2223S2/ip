@@ -18,6 +18,17 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+
+    public Duke() throws IOException {
+        ui = new Ui();
+        storage = new Storage("./data/duke.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            tasks = new TaskList();
+        }
+    }
+
     /**
      * Duke constructor
      * @param filePath
@@ -30,6 +41,20 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
             tasks = new TaskList();
+        }
+    }
+
+    public String greet() {
+        return ui.printGreet();
+    }
+
+    public String getResponse(String command) {
+        try {
+            Command c = Parser.parse(command);
+            c.execute(tasks, ui, storage);
+            return c.generate(tasks, ui, storage);
+        } catch (Exception e) {
+            return "Please input valid request";
         }
     }
 

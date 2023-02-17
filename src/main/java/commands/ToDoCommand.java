@@ -38,4 +38,9 @@ public class ToDoCommand extends Command {
             ui.taskErrorMsg();
         }
     }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        ToDo todo = new ToDo(super.getCommand());
+        return ui.printAddTask() + todo.toString();
+    }
 }

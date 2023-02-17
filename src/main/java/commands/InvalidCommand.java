@@ -15,4 +15,8 @@ public class InvalidCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.invalidCmdMsg();
     }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printInvalid();
+    }
 }

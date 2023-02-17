@@ -1,6 +1,7 @@
 package commands;
 
 import storage.Storage;
+import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 
@@ -14,5 +15,9 @@ public class ListCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.print();
+    }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.concat();
     }
 }
