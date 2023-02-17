@@ -103,11 +103,11 @@ Format: <br/>
 `bye`
 
 ## Command Summary
-| Action | Format                     |
-|--------|----------------------------|
-| Add    | `todo DESCRIPTION`, `deadline DESCRIPTION`, `event DESCRIPTION /from DATE /to DATE`|
-| List   | `list`                     |
-| Find   | `find DESCRIPTION`, `findBy DATE`, `viewSchedule DATE`|
-| Marking | `mark INDEX`, `unmark INDEX`|
-| Delete | `delete INDEX` |
-| Exit | `bye` |
+| Action  | Format                                                                             |
+|---------|------------------------------------------------------------------------------------|
+| Add     | `todo DESCRIPTION`, `deadline DESCRIPTION`, `event DESCRIPTION /from DATE /to DATE`|
+| List    | `list`                                                                             |
+| Find    | `find DESCRIPTION`, `findBy DATE`, `viewSchedule DATE`                             |
+| Marking | `mark INDEX`, `unmark INDEX`                                                       |
+| Delete  | `delete INDEX`                                                                     |
+| Exit    | `bye`                                                                              |
