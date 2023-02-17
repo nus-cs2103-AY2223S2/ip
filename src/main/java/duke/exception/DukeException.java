@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exceptions specific to the duke package

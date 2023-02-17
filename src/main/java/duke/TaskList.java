@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 // class TaskList - handles lists of Task objects using an ArrayList

@@ -68,7 +68,7 @@ Expected outcome:
 todo is added.
 
 ```
-added run
+added: [T][] run
 ```
 
 ### `deadline` - adds deadline
@@ -82,7 +82,7 @@ Expected outcome:
 deadline is added.
 
 ```
-added pee /by 2023-10-10 10AM
+added [D][] pee (by:Oct 10 2023 10 AM)
 ```
 
 ### `event` - adds event
@@ -96,7 +96,7 @@ Expected outcome:
 event is added.
 
 ```
-added dancing from 2023-10-10 10:00AM to 2023-10-10 11:00AM
+added added [E][] dancing (from:Oct 10 2023 10 AM to:Oct 10 2023 11 AM)
 ```
 ### `list` - displays all tasks
 

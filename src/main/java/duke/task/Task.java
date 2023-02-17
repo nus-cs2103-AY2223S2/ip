@@ -1,6 +1,6 @@
-package duke;
+package duke.task;
 
-// custom duke.Task class to store individual tasks that the user enters
+// custom duke.task.Task class to store individual tasks that the user enters
 public abstract class Task {
     protected String description;
     protected boolean isMarked;

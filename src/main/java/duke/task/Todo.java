@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 // class To do - Type of task with just a description
 public class Todo extends Task {

@@ -1,5 +1,9 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -53,42 +57,7 @@ public class Ui {
         return "Here are the tasks I found!\n" + displayTasks(tasks);
     }
 
-    public static String displaySnooze(String s, TaskList tasks) throws DukeException {
-        //edit existing deadline
-        //format: snooze 1 /to
-        try {
-            Parser.getTaskNum(s);
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
-
-        int taskNumber = Parser.getTaskNum(s) - 1;
-
-
-        Task snoozedTask = tasks.get(taskNumber);
-
-        if (!(snoozedTask instanceof Deadline)) {
-            return "    OOPS!!! Task must be a deadline to snooze!";
-        }
-
-        Deadline deadline = (Deadline) snoozedTask;
-
-        String date  = Parser.parseSnooze(s);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-        try {
-            LocalDate.parse(date, formatter);
-        } catch(DateTimeParseException e) {
-            return "    OOPS!!! Date is an invalid format! Should be yyyy-MM-dd HH:mm";
-        }
-
-        if (LocalDateTime.parse(date, formatter).compareTo(deadline.getDeadline()) > 0) {
-            tasks.set(taskNumber, new Deadline(deadline.getDescription(), date));
-            Deadline newDeadline = (Deadline) tasks.get(taskNumber);
-            return deadline + " has been snoozed to " + newDeadline.getDeadline();
-        } else {
-            return  "    OOPS!!! Cannot snooze to an earlier or same timing!";
-        }
+    public static String displaySnooze(String d, String newD) {
+        return d + " has been snoozed to " + newD;
     }
 }

@@ -1,5 +1,14 @@
 package duke;
 
+import duke.exception.DukeDateFormatException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidIndexException;
+import duke.exception.DukeSnoozeDateException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -83,8 +92,8 @@ public class Duke {
                 return displayFind(searchResults);
 
             } else if (Parser.isSnooze(s)) {
-                executeSnooze(s, tasks);
-                return displaySnooze(s, tasks);
+                String[] output = executeSnooze(s, tasks);
+                return displaySnooze(output[0], output[1]);
 
             } else if (Parser.isBye(s)) {
                 return "    Bye. Hope to see you soon!";
@@ -125,14 +134,14 @@ public class Duke {
 
     public static void executeMark(int taskNumber, TaskList tasks) throws DukeException {
         if ( taskNumber > tasks.size() - 1 || taskNumber < 0) {
-            throw new DukeException("     OOPS! Index Out Of Bounds !");
+            throw new DukeInvalidIndexException();
         }
         tasks.get(taskNumber).mark();
     }
 
     public static void executeUnmark(int taskNumber, TaskList tasks) throws DukeException {
         if ( taskNumber > tasks.size() - 1 || taskNumber < 0) {
-            throw new DukeException("     OOPS! Index Out Of Bounds !");
+            throw new DukeInvalidIndexException();
         }
         tasks.get(taskNumber).unmark();
     }
@@ -143,7 +152,7 @@ public class Duke {
      * @param tasks
      * @throws DukeException
      */
-    public static void executeSnooze(String s, TaskList tasks) throws DukeException {
+    public static String[] executeSnooze(String s, TaskList tasks) throws DukeException {
         //edit existing deadline
         //format: snooze 1 /to
         try {
@@ -168,15 +177,15 @@ public class Duke {
         try {
             LocalDate.parse(date, formatter);
         } catch(DateTimeParseException e) {
-            throw new DukeException("Date is an invalid format! Should be yyyy-MM-dd HH:mm");
+            throw new DukeDateFormatException();
         }
 
         if (LocalDateTime.parse(date, formatter).compareTo(deadline.getDeadline()) > 0) {
             tasks.set(taskNumber, new Deadline(deadline.getDescription(), date));
             Deadline newDeadline = (Deadline) tasks.get(taskNumber);
-            throw new DukeException(deadline + " has been snoozed to " + newDeadline);
+            return new String[]{deadline.toString(), newDeadline.toString()};
         } else {
-            throw new DukeException("    OOPS!!! Cannot snooze to an earlier or same timing!");
+            throw new DukeSnoozeDateException();
         }
     }
 

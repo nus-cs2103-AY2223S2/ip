@@ -1,8 +1,9 @@
-package duke;
+package duke.task;
+
+import duke.exception.DukeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 // class Event - Type of task with description, a start date + time and an end time

@@ -1,5 +1,10 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 /**
  * Handles the processing of inputs in the terminal through string processing
  * @author oliverloo
