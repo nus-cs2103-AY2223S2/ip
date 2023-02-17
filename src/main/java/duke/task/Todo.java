@@ -1,12 +1,12 @@
 package duke.task;
 
 /**
- * To do class represents a task of to do type
+ * To do class represents a task of to-do type
  */
 public class Todo extends Task {
 
     /**
-     * constructor method to create a to do type task
+     * constructor method to create a to-do type task
      * @param description name of to do
      */
     public Todo(String description) {
