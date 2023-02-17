@@ -60,7 +60,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates the Duke dialog box.
+     * Creates a Duke dialog box.
      *
      * @param l The text label
      * @param iv The user image
