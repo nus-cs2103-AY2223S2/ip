@@ -8,7 +8,7 @@ public class AlfredExceptionTest {
 
     @Test
     public void testStringConversion() {
-        String test = "OOPS!!! This is a test error!";
+        String test = "ERROR! This is a test error!";
         assertEquals(test, new AlfredException("This is a test error!").toString());
     }
 }
