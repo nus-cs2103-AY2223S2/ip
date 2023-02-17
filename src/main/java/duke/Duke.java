@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Main class for the chatbot.
+ * Class for internal components of the chatbot.
  */
 public class Duke {
     /** Deals with loading tasks from the file and saving tasks in the file */
@@ -26,18 +26,15 @@ public class Duke {
     private final Path filePath;
 
     /**
-     * Initializes the Ui, Storage and TaskList classes.
-     * The filePath and foldPath are initialized here as well.
-     * TaskList is initialized by loading the tasks
-     * from the task file using the Storage.
-     * If the task file does not exist, it will print
-     * the error and create the task file.
+     * Constructs Duke to make use of the UI,
+     * Storage and TaskList in the program.
      */
     public Duke() {
         String fileSep = System.getProperty("file.separator");
         String userDir = System.getProperty("user.dir");
         foldPath = Paths.get( userDir + fileSep + "data");
         filePath = Paths.get(foldPath + fileSep + "duke.txt");
+
         ui = new Ui();
         storage = new Storage(filePath.toString());
         try {
@@ -60,6 +57,8 @@ public class Duke {
                 Files.createFile(filePath);
             } else if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
+            } else {
+                throw new IOException();
             }
         } catch (IOException e) {
             ui.showFileError();
@@ -67,7 +66,7 @@ public class Duke {
     }
 
     /**
-     * Generates a response to user input.
+     * Generates a response to user input to display.
      *
      * @param input Input command from the user.
      * @throws DukeException If the tasks cannot be saved to the file.
@@ -75,7 +74,8 @@ public class Duke {
     public String getResponse(String input) throws DukeException {
         String response = ui.getMessage().toString();
         if (response.isEmpty()) {
-            Parser.parse(input, ui, tasks, storage);
+            Parser p = new Parser(input, ui, tasks, storage);
+            p.parse();
             response = ui.getMessage().toString();
         }
         ui.clearMessage();

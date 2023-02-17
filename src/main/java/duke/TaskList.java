@@ -15,9 +15,11 @@ import java.util.ArrayList;
 public class TaskList {
     /** Array list of tasks */
     private ArrayList<Task> listOfTasks;
+    private static final int MAX_SIZE = 100;
 
     /**
-     * Initializes the list of tasks.
+     * Initializes the list of tasks to read,
+     * write and save tasks.
      *
      * @param listOfTasks Array list of tasks.
      */
@@ -27,7 +29,7 @@ public class TaskList {
     }
 
     public TaskList() {
-        this.listOfTasks = new ArrayList<>(100);
+        this.listOfTasks = new ArrayList<>(MAX_SIZE);
     }
 
     /**
@@ -131,13 +133,15 @@ public class TaskList {
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task task = listOfTasks.get(i);
             assert task != null : "Task should not be null";
-            if (task.toString().indexOf(keyword) > 0) {
+            boolean isMatchingTask = task.toString().indexOf(keyword) > 0;
+            if (isMatchingTask) {
                 matchedListOfTasks.add(task);
                 assert matchedListOfTasks.get(matchedListOfTasks.size() - 1) == task :
                         "Matched task should be added to the matched task list";
             }
         }
-        ui.printMatchingTasks(matchedListOfTasks);
+        String s = "Here are the matching tasks in your list:";
+        ui.listTasks(matchedListOfTasks, s);
     }
 
     public ArrayList<Task> getListOfTasks() {
