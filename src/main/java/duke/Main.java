@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,8 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             stage.setTitle("Shinsoo");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/icon.jpeg")));
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass()
+                                        .getResourceAsStream("/images/icon.jpeg"))));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
