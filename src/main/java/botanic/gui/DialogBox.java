@@ -1,4 +1,4 @@
-package botanic;
+package botanic.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -7,13 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * A class that represents the container for the user's input or for botanic's response,
@@ -33,6 +34,15 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private static final Color USER_COLOR = Color.LIGHTGOLDENRODYELLOW;
+    private static final Color BOTANIC_COLOR = Color.LAVENDERBLUSH;
+    private static final CornerRadii DIALOG_BOX_CORNER_RADII = new CornerRadii(10.0);
+    private static final Insets INSETS = new Insets(-10);
+
+    private static final BorderWidths BORDER_WIDTH = new BorderWidths(1.0);
+    private static final Color BORDER_COLOR = Color.BLACK;
+    private static final BorderStrokeStyle BORDER_STROKE_STYLE = BorderStrokeStyle.SOLID;
+
     /**
      * Instantiates DialogBox.
      *
@@ -50,10 +60,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        this.dialog.setText(text);
+        this.displayPicture.setImage(img);
 
-        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        this.dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
     /**
@@ -63,7 +73,32 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
+    }
+
+    /**
+     * Adds border to the given dialog box.
+     *
+     * @param dialogBox The dialog box to which we add borders to.
+     */
+    private static void designBorder(DialogBox dialogBox) {
+        dialogBox.dialog.setBorder(
+                new Border(new BorderStroke(
+                        DialogBox.BORDER_COLOR, DialogBox.BORDER_STROKE_STYLE,
+                        DialogBox.DIALOG_BOX_CORNER_RADII, DialogBox.BORDER_WIDTH,
+                        DialogBox.INSETS)));
+    }
+
+    /**
+     * Sets the background color of the given dialog box to the given color.
+     *
+     * @param dialogBox The dialog box to which we set the background color.
+     * @param color The color to set the background to.
+     */
+    private static void setBackgroundColor(DialogBox dialogBox, Color color) {
+        dialogBox.dialog.setBackground(
+                new Background(new BackgroundFill(
+                        color, DialogBox.DIALOG_BOX_CORNER_RADII, DialogBox.INSETS)));
     }
 
     /**
@@ -75,7 +110,10 @@ public class DialogBox extends HBox {
      * @return A DialogBox representing the user's input message.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog =  new DialogBox(text, img);
+        designBorder(userDialog);
+        setBackgroundColor(userDialog, DialogBox.USER_COLOR);
+        return userDialog;
     }
 
     /**
@@ -87,8 +125,10 @@ public class DialogBox extends HBox {
      * @return A DialogBox representing Botanic's response message.
      */
     public static DialogBox getBotanicDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        var botanicDialog = new DialogBox(text, img);
+        botanicDialog.flip();
+        designBorder(botanicDialog);
+        setBackgroundColor(botanicDialog, DialogBox.BOTANIC_COLOR);
+        return botanicDialog;
     }
 }

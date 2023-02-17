@@ -1,7 +1,7 @@
-package botanic;
+package botanic.gui;
 
+import botanic.Botanic;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -17,13 +17,12 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
-
     private Botanic botanic;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserIcon.png"));
-    private Image botanicImage = new Image(this.getClass().getResourceAsStream("/images/BotanicIcon.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream(
+            "/images/UserIcon.png"));
+    private Image botanicImage = new Image(this.getClass().getResourceAsStream(
+            "/images/BotanicIcon.png"));
 
     /**
      * Binds the v value property to the height of the dialogContainer.
@@ -40,7 +39,7 @@ public class MainWindow extends AnchorPane {
      */
     public void setBotanic(Botanic botanic) {
         this.botanic = botanic;
-        String welcome = "Aloe there! I am BOTanic! How may I help you today?\n";
+        String welcome = this.botanic.getWelcome();
         this.dialogContainer.getChildren().add(
                 DialogBox.getBotanicDialog(welcome, this.botanicImage)
         );
@@ -54,12 +53,12 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = botanic.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBotanicDialog(response, botanicImage)
+        String input = this.userInput.getText();
+        String response = this.botanic.getResponse(input);
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, this.userImage),
+                DialogBox.getBotanicDialog(response, this.botanicImage)
         );
-        userInput.clear();
+        this.userInput.clear();
     }
 }
