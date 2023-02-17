@@ -1,6 +1,6 @@
 ## User Guide
 
-Elise :spider: is a chat-bot for managing your tasks easily via a Command Line Interface, 
+Elise :spider: is a chat-bot for managing your tasks easily via a Command Line Interface,
 alongside a Graphical User Interface (GUI) for display
 
 ### Getting started
@@ -12,42 +12,53 @@ alongside a Graphical User Interface (GUI) for display
 5. Open a command terminal and run `java -jar elise.jar`
 6. Enter commands to interact with Elise!
 
+---
 ### Features
-
-# Notes
+```
+Notes about the commands:
 * [] are to be replaced completely according to the label and cannot be empty
 * Date and time formats are flexible, / and - can be interchanged
-  * dd/MM/YYYY hhmm `eg. 12/05/2000 1359`
-  * dd/MM/YYYY `eg. 05/20/2023`
-  * DDD `eg. Mon, tue` - Indicates next day of week, exclusive today
+    * dd/MM/YYYY hhmm `eg. 12/05/2000 1359`
+    * dd/MM/YYYY `eg. 05/20/2023`
+    * DDD `eg. Mon, tue` - Indicates next day of week, exclusive of today
 * Incorrect date format will be treated as plain text
 * A folder to store data between instances will be created in the same folder
 
-# Labels
-[M] - Message
-[D] - Date/Time
-[R] - Rank
-[K] - Keyword
+Labels: 
+1. [M] - Message
+2. [D] - Date/Time
+3. [R] - Rank
+4. [K] - Keyword
+```
+#### View Help `help`
+View help mesage
 
-# View Help `help`
+#### List all tasks `list`
+List all tasks created
 
-# List all tasks `list`
+#### Create a todo task `todo [M]`
+Creates a generic task
 
-# Create a todo task `todo [M]`
+#### Create a deadline task `deadline [M] /by [D]`
+Create a task with a deadline
 
-# Create a deadline task `deadline [M] /by [D]`
+#### Create an event task `event [M] /from [D] /to [D]`
+Create an task with start and end date
 
-# Create an event task `event [M] /from [D] /to [D]`
+#### Mark task `mark [R]`
+Mark the task of specified task as done
 
-# Mark task `mark [R]`
+#### Unmark task `unmark [R]`
+Mark the task of specified task as not done
 
-# Unmark task `unmark [R]`
+#### Delete task `delete [R]`
+Delete the task of specified rank
 
-# Delete task `delete [R]`
+#### Find task `find [K]`
+Find a task specified by the keyword
 
-# Find task `find [K]`
-
-# Exit the application `bye`
+#### Exit the application `bye`
+Closes the chat-bot
 
 ### Command Summary
 |  Action  | Format, Examples                                                                            |
