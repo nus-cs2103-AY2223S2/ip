@@ -39,6 +39,8 @@ public class DeleteCommand extends EditCommand {
             return text;
         } catch (DukeException e) {
             return e.getMessage();
+        } catch (NumberFormatException e) {
+            return "Please enter index of task to be edited";
         }
 
     }
