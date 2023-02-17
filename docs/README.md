@@ -1,29 +1,74 @@
 # User Guide
+Duke helps you keep track of your tasks.
 
-## Features 
+## Features
 
-### Feature-ABC
+### Add and Delete tasks
 
-Description of the feature.
+Add todo, deadline, and event tasks to your list.
+Delete tasks that do not require keeping track anymore from your list.
 
-### Feature-XYZ
+### List tasks
 
-Description of the feature.
+Displays the list of tasks.
+
+### Mark and Unmark tasks
+
+Mark a task as completed or not completed.
+
+### Find task
+
+Search and displays tasks by specified keyword.
+
+### Sort tasks
+
+Displays sorted task list based on chronological date.
+Todo tasks will always be at the top of the list.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Add a todo
 
-Describe the action and its outcome.
+Adds an unmarked todo task to the list.
+
+Format: `todo description`
+- The `description` can contain any string.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo cs2100 homework`
+`todo buy cake`
 
-Expected outcome:
+### `deadline` - Add a deadline
 
-Description of the outcome.
+Adds an unmarked deadline task to the list.
 
-```
-expected output
-```
+Format: `todo description /by YYYY-MM-DD`
+- The `description` can contain any string.
+
+Example of usage:
+
+`deadline cs2100 homework /by 2023-02-20`
+`deadline buy a house /by 2026-12-12`
+
+### `event` - Add an event
+
+Adds an unmarked event task to the list.
+
+Format: `event description /from YYYY-MM-DD /to YYYY-MM-DD`
+- The `description` can contain any string.
+
+Example of usage:
+
+`event recess week /from 2023-02-20 /to 2023-02-27`
+`event week six /from 2023-02-13 /to 2023-02-19`
+
+### `sort` - Sorts the list
+
+Sorts the list by date, in chronological order.
+
+Format: `sort`
+
+Example of usage:
+
+`sort`
