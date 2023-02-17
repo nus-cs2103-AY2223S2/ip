@@ -1,0 +1,17 @@
+delete 3
+delete 2
+delete 1
+todo Do project
+deadline Assigment 1 /by 2023-12-18T00:00
+event Aespa concert /from 2023-06-15T01:00 /to 2023-12-01T17:34
+deadline Edit Aespa video /by 2023-06-05T12:30
+mark 1
+mark 4
+unmark 1
+list
+through 2023-09-30T14:20
+delete 2
+find aespa
+list
+blah
+bye
