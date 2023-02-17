@@ -41,6 +41,12 @@ public class Storage {
      */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         File f = new File(filePath);
+
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            return new ArrayList<>();
+        }
+
         Scanner s = new Scanner(f);
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNextLine()) {
