@@ -1,3 +1,0 @@
-todo false clean room
-deadline false submit assignment /by 2000-01-01 00:11
-event false party /from 2020-01-01 12:12 /to 2021-01-01 21:21

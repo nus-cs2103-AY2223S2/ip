@@ -17,7 +17,7 @@ import duke.logic.task.Todo;
  */
 public class Storage {
 
-    protected String filePath;
+    protected File filePath;
 
     /**
      * Constructor for Storage object.
@@ -25,7 +25,7 @@ public class Storage {
      * @param filePath String containing the file path of data text file.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.filePath = new File(filePath);
     }
 
     /**
@@ -105,8 +105,7 @@ public class Storage {
      */
     public void save(TaskList taskList) throws DukeException {
         try {
-            File file = new File("./data/duke.txt");
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(this.filePath);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < taskList.getSize(); i++) {
                 String entry = this.extractTask(taskList.getTask(i));
