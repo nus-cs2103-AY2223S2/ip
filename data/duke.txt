@@ -1,0 +1,4 @@
+T | 1 | go home
+T | 1 | eat lunch
+T | 0 | finish work
+D | 0 | iP | 17-02-2023
