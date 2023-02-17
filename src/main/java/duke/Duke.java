@@ -85,7 +85,12 @@ public class Duke {
                 taskList.add(event);
                 storage.saveTasks();
                 return ui.addTask(event);
-            }
+            } else if (input.startsWith("tag")){
+                int value = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                Task.tasks.get(value).handleTag(input);
+                storage.saveTasks();
+                return ui.stringTag(Task.tasks.get(value));
+             }
             else if (input.startsWith("unmark")) {
                 int value = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                 Task.tasks.get(value).unmark();

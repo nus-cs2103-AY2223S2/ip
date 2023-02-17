@@ -79,12 +79,42 @@ public class Task{
         System.out.println("OK, I've marked this task as not done yet:\n"+ this);
     }
 
+    /**
+     * Handles the task that is tagged
+     * @param input input of the user
+     */
+    public void handleTag (String input) {
+        int value = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+        int inputNo = value + 1;
+        input = input.replaceAll("tag ", "");
+        input = input.replaceAll(String.valueOf(inputNo), "");
+        input = input.replaceAll(" ", "");
+        input = " #" +input;
+        Task.tasks.get(value).tag(input);
+    }
+
+    /**
+     * To add the #tagged description
+     * @param string string of the tagged description
+     */
+    public void tag(String string) {
+        this.description += string;
+    }
+
+    /**
+     * Deletes a task from the list
+     * @param task task to be deleted
+     */
     public static void delete(Task task) {
         Task.actions -= 1;
         Task.tasks.remove(task);
         task.printDelete();
 
     }
+
+    /**
+     * Prints the string representation of a deleted task
+     */
     public void printDelete() {
         System.out.println("Noted. I've removed this task: \n" + this);
         System.out.println("Now you have " + Task.actions + " tasks in the list");

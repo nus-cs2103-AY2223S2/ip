@@ -74,6 +74,16 @@ public class Ui {
         deleted += "Now you have " + Task.actions + " tasks in the list";
         return deleted;
     }
+
+    /**
+     * Prints the string representation of tag task
+     * @param task task that will be tagged
+     * @return String representation of tagged task
+     */
+    public String stringTag(Task task) {
+        System.out.println("Task has been tagged:" + task.description);
+        return "Task has been tagged:" + task.description;
+    }
     /**
      * Prints error
      * @param e

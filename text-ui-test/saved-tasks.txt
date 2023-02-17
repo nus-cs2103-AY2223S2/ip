@@ -1,6 +1,6 @@
-todo || 0 ||  read book
-todo || 0 ||  read book
-todo || 0 ||  read book
+todo || 0 ||  read book #notfun
+todo || 0 ||  read book #notfun
+todo || 0 ||  read book #notfun
 todo || 0 ||  read book
 todo || 0 ||  read book
 todo || 0 ||  read book
@@ -20,6 +20,7 @@ event || 0 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
 event || 0 ||  meeting  || 18:00, Feb 02 2019-18:30, Feb 02 2019
 todo || 0 ||  read book
 deadline || 0 || lunch  || 18:00, Feb 02 2019
+todo || 0 ||  read book
 todo || 0 ||  read book
 todo || 0 ||  read book
 todo || 0 ||  read book
