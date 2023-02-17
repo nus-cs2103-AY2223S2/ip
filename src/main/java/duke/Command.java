@@ -119,7 +119,7 @@ public class Command {
      * @return a String showing which task is deleted.
      */
     public String deleteCommand() {
-        String str = INPUT.replace("delete", "");
+        String str = INPUT.replace("delete ", "");
         int index = Integer.parseInt(str);
         index--;
         Task removedTask = LIST.get(index);
