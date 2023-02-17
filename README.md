@@ -1,24 +1,170 @@
-# duke.duke project template
+### DukeBot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "A goal without a plan is just a wish." Antoine de Saint-Exupéry [source](https://www.quotespedia.org/authors/a/antoine-de-saint-exupery/a-goal-without-a-plan-is-just-a-wish-antoine-de-saint-exupery/)
 
-## Setting up in Intellij
+DukeBot makes planning so much easier, so you can finally reach your goals. It is:
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+- command-line friendly
+- intuitive
+- simple
+- ~beautiful~  **ULTRA SEXY** user interface
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.duke.java` file, right-click it, and choose `Run duke.duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+_You're only one step away from making planning so much more fun and easy!_
+
+All you need to do is download it from [here](https://github.com/Oliverloo0909/ip/releases/tag/A-Jar).
+
+1. wake up duke
+2. tell it your tasks
+3. That's it!
+
+You'll never worry about missing any tasks 😉
+it is **FREE**!
+
+Features:
+- [ ]  Managing tasks
+- [ ]  Managing deadlines
+- [ ] Managing Events
+
+
+# User Guide
+
+## Features
+
+### Add tasks
+
+Add three types of tasks : todo, deadline or event. ``` todo, deadline /by, event /from /to ```
+
+### Show All tasks
+
+Show all tasks you have added. ``` list ```
+
+### Mark/Unmark tasks
+
+Mark a task as done or not done. ``` mark, unmark ```
+
+### Delete tasks
+
+Delete a task from your list. ``` delete ```
+
+### Find
+
+Find specific tasks using keywords ``` find ```
+
+### Snooze
+
+Snooze tasks in your list ``` snooze /to ```
+
+
+## Usage
+
+### `todo` - adds todo
+
+Example of usage:
+
+`todo run`
+
+Expected outcome:
+
+todo is added.
+
+```
+added: [T][] run
+```
+
+### `deadline` - adds deadline
+
+Example of usage:
+
+`deadline pee /by 2023-10-10 10:00`
+
+Expected outcome:
+
+deadline is added.
+
+```
+added [D][] pee (by:Oct 10 2023 10 AM)
+```
+
+### `event` - adds event
+
+Example of usage:
+
+`event dancing /from 2023-10-10 10:00 /to 2023-10-10 11:00`
+
+Expected outcome:
+
+event is added.
+
+```
+added added [E][] dancing (from:Oct 10 2023 10 AM to:Oct 10 2023 11 AM)
+```
+### `list` - displays all tasks
+
+Example of usage:
+
+`list`
+
+Expected outcome:
+
+list of tasks are displayed.
+
+```
+1. T [X] poo
+2. T [ ] pee
+```
+
+### `mark` - marks a task as done
+
+Example of usage:
+
+`mark 1`
+
+Expected outcome:
+
+task is marked as done.
+
+```
+Nice! I've marked this task as done: T [X] poo
+```
+
+### `unmark` - marks a task as not done
+
+Example of usage:
+
+`unmark 1`
+
+Expected outcome:
+
+task is marked as not done.
+
+```
+OK, I've marked this task as not done yet: T [ ] poo
+```
+
+### `delete` - deletes a task from the list
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+task is deleted from the list.
+
+```
+Noted. I've removed this task  T [ ] poo. 
+Now you have 2 tasks in the list
+```
+
+### `snooze` - displays sorted list of tasks
+
+Example of usage:
+
+`snooze 1 /to 2022-10-10 10:00`
+
+Expected outcome:
+
+deadline is snoozed
+
+```
+[D] [ ] pee (by: Oct 10 2020 10 AM) has been snoozed to pee (by: Oct 10 2020 11 AM)
