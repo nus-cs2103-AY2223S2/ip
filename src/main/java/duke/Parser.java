@@ -1,13 +1,13 @@
 package duke;
 
+import commands.AddCommand;
+import commands.ByeCommand;
 import commands.Command;
 import commands.CommandType;
+import commands.DeleteCommand;
+import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
-import commands.AddCommand;
-import commands.DeleteCommand;
-import commands.ByeCommand;
-import commands.FindCommand;
 import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
