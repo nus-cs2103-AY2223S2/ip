@@ -140,7 +140,7 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws IOException {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         String[] splitInput = input.split("\\s+");
         String response = Parser.parseInput(splitInput);
 
