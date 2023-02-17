@@ -1,3 +1,2 @@
-T|true|Study
-E|false|Stand Up Paddling|2023-02-17T16:00|2023-02-17T19:00
-D|true|Finalize CS2103T iP|2023-02-17T23:59
+E|false|Party|2023-02-17T16:00|2023-02-17T19:00
+D|false|Homework|2023-02-17T23:59
