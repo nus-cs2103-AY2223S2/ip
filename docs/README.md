@@ -157,7 +157,7 @@ mark [INDEX]
 unmark [INDEX]
 -unmarks the task based on its index.
 
-update [INDEX] [TYPE] [NEW_VALUE]
+update [INDEX] [TYPE (1. /name, 2. /by, 3. /from, 4. /to)] [NEW_VALUE]
 -updates the value of the task based on the index\n and type (E.g /name /by /from /to).
 
 find [KEYWORD]

@@ -34,7 +34,7 @@ public class Parser {
                                                 "-marks the task based on its index.\n\n" +
                                                 "unmark [INDEX]\n" +
                                                 "-unmarks the task based on its index.\n\n" +
-                                                "update [INDEX] [TYPE] [NEW_VALUE]\n" +
+                                                "update [INDEX] [TYPE (1. /name, 2. /by, 3. /from, 4. /to)] [NEW_VALUE]\n" +
                                                 "-updates the value of the task based on the index\n and type (E.g /name /by /from /to).\n\n" +
                                                 "find [KEYWORD]\n" +
                                                 "-finds all tasks' name that contains the keyword.\n\n" + 
