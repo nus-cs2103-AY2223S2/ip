@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+
+
 /**
  * A todo task.
  */
@@ -12,6 +15,10 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+    }
+
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 
     @Override

@@ -1,10 +1,12 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * A task that contains the description and
  * whether it is marked done or not.
  */
-public class Task {
+abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -49,6 +51,12 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public int containsDate() {
+        return 0;
+    }
+
+    abstract LocalDate getDate();
 
     @Override
     public String toString() {
