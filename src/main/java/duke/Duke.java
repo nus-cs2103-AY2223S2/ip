@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import duke.helpers.TaskList;
 import duke.helpers.UI;
@@ -12,19 +13,21 @@ import duke.helpers.UI;
  * @author jengoc415
  */
 public class Duke {
+    /**
+     * Main Duke program
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException {
+        UI ui = new UI(new TaskList());
+        ui.greeting();
 
-    private TaskList taskList;
-    private UI ui;
+        Scanner sc = new Scanner(System.in);
+        String instruction;
 
-    public Duke() throws IOException {
-        this.ui = new UI(new TaskList());
-    }
-
-    public String getGreeting() {
-        return this.ui.greeting();
-    }
-
-    public String getResponse(String input) throws IOException {
-        return ui.process(input);
+        while (!ui.isTerminated()) {
+            instruction = sc.nextLine();
+            ui.process(instruction);
+        }
     }
 }
