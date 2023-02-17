@@ -366,7 +366,7 @@ public class Parser {
         } else {
             list = list.undo();
             assert list != null: "List should never be null";
-            return Ui.showListState(list);
+            return Ui.showUndoSuccess(list);
         }
     }
 }

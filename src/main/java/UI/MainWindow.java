@@ -38,6 +38,7 @@ public class MainWindow extends AnchorPane {
 
     public void setSkylar(Skylar d) {
         skylar = d;
+
     }
 
     /**
@@ -59,6 +60,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (Objects.equals(response, Ui.close())) {
+            skylar.store();
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
             delay.setOnFinished(event ->  Platform.exit());
             delay.play();

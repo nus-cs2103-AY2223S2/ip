@@ -25,4 +25,8 @@ public class Skylar {
     public String getResponse(String input) {
         return parser.processInput(input);
     }
+
+    public void store() {
+        storage.store(tasks);
+    }
 }

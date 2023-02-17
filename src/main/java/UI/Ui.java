@@ -160,7 +160,14 @@ public class Ui {
     }
 
     public static String showUndoSuccess(TaskList list) {
-        return "Alright yo, just dialed back the list to its previous iteration. Here's what it looks like now:\n" +
-                        showListState(list);
+        StringBuilder sb = new StringBuilder("Alright yo, just dialed back the list to its previous iteration. " +
+                "Here's what it looks like now:\n");
+        for (int i = 1; i <= list.size(); i++){
+            sb.append(i).append(". ").append(list.get(i - 1));
+            if (i != list.size()) {
+                sb.append(System.lineSeparator());
+            }
+        }
+        return sb.toString();
     }
 }
