@@ -10,13 +10,6 @@ import task.Task;
  * Ui that displays commands' message.
  */
 public class Ui {
-    private final String LOGO = "\t  ____        _        \n"
-            + "\t |  _ \\ _   _| | _____ \n"
-            + "\t | | | | | | | |/ / _ \\\n"
-            + "\t | |_| | |_| |   <  __/\n"
-            + "\t |____/ \\__,_|_|\\_\\___|\n";
-
-    private final String BYE_MSG = "\t Bye. Hope to see you again soon!";
 
     private final Scanner scanner;
     public Ui() {
@@ -32,6 +25,12 @@ public class Ui {
      * @return Returns the welcome message.
      */
     public String printWelcomeMsg() {
+        String LOGO = "\t  ____        _        \n"
+                + "\t |  _ \\ _   _| | _____ \n"
+                + "\t | | | | | | | |/ / _ \\\n"
+                + "\t | |_| | |_| |   <  __/\n"
+                + "\t |____/ \\__,_|_|\\_\\___|\n";
+
         String str = LOGO + "\t Hello! I am Duke.\n"
                 + "\t What can I do for you?\n";
         return str;
@@ -114,6 +113,7 @@ public class Ui {
         return storage.loadHelpExplanationFile();
     }
     public String printByeMsg() {
+        String BYE_MSG = "\t Bye. Hope to see you again soon!";
         return BYE_MSG;
     }
 }
