@@ -1,7 +1,6 @@
-import static javafx.application.Platform.exit;
-
 import data.TaskFileReaderWriter;
 import data.TaskManager;
+import javafx.stage.Stage;
 import utils.Parser;
 
 
@@ -14,19 +13,19 @@ public class UwUTaskmaster {
     private final TaskFileReaderWriter taskReaderWriter;
     private final Parser parser;
     private final TaskManager taskManager;
-
+    private final Stage stage;
     /**
-     * Initialises the bot
+     * Initialises an instance of the bot
      */
-    public UwUTaskmaster() {
-
-        // Create a TaskFileReaderWriter instance to read from the txt file
+    public UwUTaskmaster(Stage stage) {
         this.taskReaderWriter = new TaskFileReaderWriter();
-        this.taskManager = taskReaderWriter.loadDataFromFile();
+        this.stage = stage;
 
         if (!taskReaderWriter.createTaskFile()) {
             System.out.println("Error creating data file");
         }
+
+        this.taskManager = taskReaderWriter.loadDataFromFile();
 
         // Create a Parser instance parse user input
         this.parser = new Parser(taskManager);
@@ -44,7 +43,7 @@ public class UwUTaskmaster {
             if (!taskReaderWriter.updateTaskFile(taskManager)) {
                 System.out.println("Error updating data file");
             }
-            exit();
+            stage.close();
             return "";
         }
         return parser.processInput(input);

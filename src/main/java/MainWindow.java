@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
+import ui.Response;
 
 
 /**
@@ -51,10 +51,13 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the TaskMaster object to use for the application.
      *
-     * @param d the TaskMaster object to use
+     * @param taskMaster the TaskMaster object to use
      */
-    public void setTaskMaster(UwUTaskmaster d) {
-        taskmaster = d;
+    public void setTaskMaster(UwUTaskmaster taskMaster) {
+        this.taskmaster = taskMaster;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getTaskmasterDialog(Response.WELCOME_HELP.toString(), taskMasterImage)
+        );
     }
 
     /**
@@ -64,6 +67,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
         String response = taskmaster.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

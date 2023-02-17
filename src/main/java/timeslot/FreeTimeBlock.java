@@ -111,6 +111,7 @@ public class FreeTimeBlock {
         String endTime = end.format(timeFormat);
         String startDate = start.format(dateFormat);
         String endDate = end.format(dateFormat);
-        return String.format("Wooks wike you are free between %s on %s and %s on %s UwU!", startTime, startDate, endTime, endDate);
+        return String.format("Wooks wike you "
+                + "are free between %s on %s and %s on %s UwU!", startTime, startDate, endTime, endDate);
     }
 }

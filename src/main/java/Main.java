@@ -10,9 +10,6 @@ import javafx.stage.Stage;
  * A GUI for UwUTaskMaster using FXML.
  */
 public class Main extends Application {
-
-    private final UwUTaskmaster taskmaster = new UwUTaskmaster();
-
     /**
      * Initializes and displays the main application window.
      *
@@ -24,6 +21,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            UwUTaskmaster taskmaster = new UwUTaskmaster(stage);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setTaskMaster(taskmaster);
             stage.setTitle("UwU TaskMaster");

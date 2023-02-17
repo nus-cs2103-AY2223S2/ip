@@ -117,6 +117,23 @@ public enum Response {
         }
     },
 
+    WELCOME_HELP {
+        @Override
+        public String toString() {
+            return "Hewwo?!?1 I am UwU TaskMaster! Hewes how I c-can hewp!"
+                    + "\n1. Get help: 'help'"
+                    + "\n2. Find free times: 'free [numberOfDesiredHours]'"
+                    + "\n3. See all tasks: 'list'"
+                    + "\n4. Add a to-do: 'to-do [name of to-do]'"
+                    + "\n5. Add a deadline: 'deadline [name of deadline] /by [dd/mm/yyyy HH:mm]'"
+                    + "\n6. Add an event: 'event [name of event] /from [dd/mm/yyyy HH:mm] /to [dd/mm/yyyy HH:mm]'"
+                    + "\n7. Delete a task: 'delete [taskNumber]'"
+                    + "\n8. Mark a task as completed: 'mark [taskNumber]'"
+                    + "\n9. Mark a task as incomplete: 'unmark [taskNumber]'"
+                    + "\n10. Save and say goodbye: 'bye'";
+        }
+    },
+
     DEFAULT {
         @Override
         public String toString() {

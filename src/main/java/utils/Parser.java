@@ -307,6 +307,11 @@ public class Parser {
         case "free":
             output = findFreeTimeEvent(input);
             break;
+
+        case "help":
+            output = Response.WELCOME_HELP.toString();
+            break;
+
         default:
             output = Response.DEFAULT.toString();
             break;
