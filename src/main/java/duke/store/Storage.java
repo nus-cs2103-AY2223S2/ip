@@ -1,10 +1,13 @@
 package duke.store;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -18,10 +21,10 @@ import duke.task.Todo;
  *      Description: duke.store.Storage class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private static final String COMPLETE_MSG = "    ==> COMPLETED!";
-    private static final String INCOMPLETE_MSG = "    ==> INCOMPLETE!";
+    private static final String TODO_TYPE = "T";
+    private static final String DEADLINE_TYPE = "D";
+    private static final String EVENT_TYPE = "E";
     private static String savePath;
-    private static String loadPath;
 
     /**
      * Constructor for the storage.
@@ -47,7 +50,6 @@ public class Storage {
      */
     public Storage(String pathSave, String pathLoad) {
         savePath = pathSave;
-        loadPath = pathLoad;
     }
 
     /**
@@ -58,8 +60,7 @@ public class Storage {
         String root = Paths.get(".").toRealPath().normalize().toString();
         String dir = java.nio.file.Paths.get(root, "src", "data").toString();
         File f = new File(dir);
-        File src = new File(java.nio.file.Paths.get(root, "src").toString());
-        if (src.exists()) {
+        if (f.exists()) {
             System.out.println("Recording changes as usual...");
         } else {
             System.out.println("Missing file directory, creating one now.");
@@ -73,26 +74,19 @@ public class Storage {
      * @throws IOException if the directory is invalid.
      */
     public static void autoSave(TaskList tasks) throws IOException {
-        makeDirectory();
         File f = new File(savePath);
         FileWriter fw = new FileWriter(f.getAbsolutePath());
-        // Header of the save file
-        LocalDateTime now = LocalDateTime.now();
-        fw.write("Last Saved at " + now);
-        fw.write(System.lineSeparator()); // new line
-        fw.write(System.lineSeparator()); // new line
-        // Body of the save file
         try {
-            if (tasks.size() == 0) {
-                fw.write("");
-            } else {
+            if (tasks.size() != 0) {
                 for (int i = 0; i < tasks.size(); i++) {
                     Task task = tasks.getTaskAtIndex(i);
                     fw.write(Storage.readerFriendly(task));
                     fw.write(System.lineSeparator()); // new line
                 }
-                fw.close();
+            } else {
+                fw.write("");
             }
+            fw.close();
         } catch (IOException e) {
             System.out.println("Unable to write to file, check path: " + savePath);
         }
@@ -105,16 +99,66 @@ public class Storage {
      * @return string that is to be saved.
      */
     private static String readerFriendly(Task task) {
-        String status = task.getStatus() ? COMPLETE_MSG : INCOMPLETE_MSG;
+        int status = task.getStatus() ? 1 : 0;
         if (task instanceof Todo) {
             Todo t = (Todo) task;
-            return "Todo: " + t.getDescription() + " " + status;
+            return TODO_TYPE + " | " + status + " | " + t.getDescription();
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return "Deadline: " + d.getDescription() + " by " + d.getBy() + " " + status;
+            return DEADLINE_TYPE + " | " + status + " | " + d.getDescription() + " | by | "
+                    + d.getByDateTime();
         } else { // instance of duke.task.Event
             Event e = (Event) task;
-            return "Event: " + e.getDescription() + " from " + e.getFrom() + " to " + e.getTo() + " " + status;
+            return EVENT_TYPE + " | " + status + " | " + e.getDescription() + " | from | "
+                    + e.getFromDateTime() + " | to | " + e.getToDateTime();
+        }
+    }
+
+    /**
+     * Loads from last save file.
+     * @return
+     */
+    public static void readSave(TaskList tasks) throws IOException {
+        makeDirectory();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        try {
+            File f = new File(savePath);
+            Scanner scanner = new Scanner(f);
+            while (scanner.hasNextLine()) {
+                String curr = scanner.nextLine();
+                String[] tokens = curr.split("\\|");
+                String taskType = tokens[0].trim();
+                boolean isComplete = tokens[1].trim().equals("1");
+                String description = tokens[2].trim();
+                switch (taskType) {
+                case TODO_TYPE:
+                    Todo t = new Todo(description);
+                    t.setStatus(isComplete);
+                    tasks.addTask(t);
+                    break;
+                case DEADLINE_TYPE:
+                    LocalDateTime by = LocalDateTime
+                            .parse(tokens[4].trim());
+                    Deadline d = new Deadline(description, by.format(formatter));
+                    d.setStatus(isComplete);
+                    tasks.addTask(d);
+                    break;
+                case EVENT_TYPE:
+                    LocalDateTime from = LocalDateTime
+                            .parse(tokens[4].trim());
+                    LocalDateTime to = LocalDateTime
+                            .parse(tokens[6].trim());
+                    Event e = new Event(description, from.format(formatter), to.format(formatter));
+                    e.setStatus(isComplete);
+                    tasks.addTask(e);
+                    break;
+                default:
+                    System.out.println("Unknown task type: " + taskType + " or your file may have been corrupted.");
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File directory may be missing: " + savePath);
         }
     }
 }

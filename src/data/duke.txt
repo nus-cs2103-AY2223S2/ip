@@ -1,5 +1,2 @@
-Last Saved at 2023-02-16T14:23:02.598709700
-
-Todo: water plants     ==> INCOMPLETE!
-Todo: water     ==> INCOMPLETE!
-Todo: plant plants     ==> INCOMPLETE!
+D | 0 | fishing | by | 2023-02-02T13:00
+E | 1 | shopee sale | from | 2023-02-01T23:59 | to | 2023-02-02T23:59

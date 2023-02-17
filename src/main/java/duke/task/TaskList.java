@@ -1,9 +1,10 @@
 package duke.task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import duke.exception.DukeException;
+import duke.store.Storage;
 
 /**
  *      File name: duke.task.TaskList.java
@@ -33,11 +34,12 @@ public class TaskList {
     /**
      * Adds a Task object into the duke.task.TaskList.
      *
-     * @param t the Task object to be added.
+     * @param task to be added.
      */
-    public static void addTask(Task t) {
-        tasks.add(t);
-        TaskList.announceAdded();
+    public void addTask(Task task) throws IOException {
+        this.tasks.add(task);
+        TaskList.announceAdded(task);
+        Storage.autoSave(this);
     }
 
     /**
@@ -86,44 +88,27 @@ public class TaskList {
         return sb.toString();
     }
 
-
     /**
-     * Attempts to delete a Task object in the duke.task.TaskList at a specified index if it exists.
-     *
-     * @param i index.
-     */
-    public void deleteTaskAtIndex(Integer i) {
-        try {
-            if (i < 0 || i >= tasks.size()) {
-                throw new DukeException("OOPS!!! The number to delete is invalid.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-        Task toDelete = this.getTaskAtIndex(i);
-        tasks.remove(toDelete);
-        TaskList.announceRemoved(toDelete);
-    }
-
-    /**
-     * Identical to deleteTaskAtIndex() but returns a String.
+     * Returns a string after deleteing task.
      *
      * @return  a String
      */
-    public String deleteTaskAtIndexString(Integer i) {
+    public String deleteTaskAtIndexString(Integer i) throws IOException {
         if (i < 0 || i >= this.size()) {
             return "OOPS!!! The number to delete is invalid.";
         }
         Task toDelete = this.getTaskAtIndex(i);
         this.tasks.remove(toDelete);
+        Storage.autoSave(this);
         return TaskList.announceRemovedString(toDelete);
     }
 
     /**
      * Announces that the task has been added.
      */
-    public static void announceAdded() {
-        System.out.println("Got it. I've added this task:");
+    public static void announceAdded(Task task) {
+        System.out.println("Got it. I've added this task: \n");
+        System.out.println(task.toString());
         System.out.println("Now we have " + tasks.size() + " task(s) in the list.");
     }
 
@@ -131,9 +116,10 @@ public class TaskList {
      * Similar to the announceAdded method.
      * @return a String instead of printing out.
      */
-    public static String announceAddedString() {
+    public static String announceAddedString(Task task) {
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task:\n");
+        sb.append(task.toString() + "\n");
         sb.append("Now we have " + tasks.size() + " task(s) in the list.\n");
         return sb.toString();
     }
@@ -141,81 +127,55 @@ public class TaskList {
     /**
      * Announces that the task has been removed.
      *
-     * @param t task removed.
+     * @param task removed.
      */
-    public static void announceRemoved(Task t) {
+    public static void announceRemoved(Task task) {
         System.out.println("Noted. I've removed this task:");
-        System.out.println(t.toString());
+        System.out.println(task.toString() + "\n");
         System.out.println("Now we have " + tasks.size() + " task(s) in the list.");
     }
 
     /**
      * Similar to the announceRemoved method.
-     * @param t
+     * @param task
      * @return a String instead of printing out.
      */
-    public static String announceRemovedString(Task t) {
+    public static String announceRemovedString(Task task) {
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task:\n");
-        sb.append(t.toString() + "\n");
+        sb.append(task.toString() + "\n");
         sb.append("Now we have " + tasks.size() + " task(s) in the list.\n");
         return sb.toString();
     }
 
     /**
-     * Attempts to mark a Task in duke.task.TaskList as completed if it exists.
-     *
-     * @param i index.
-     */
-    public void taskMarkedAtIndex(Integer i) {
-        try {
-            if (i < 0 || i >= this.size()) {
-                throw new DukeException("☹ OOPS!!! The number to mark is invalid.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-        this.getTaskAtIndex(i).taskDone();
-    }
-
-    /**
-     * Identical to taskMarkedAtIndex() but returns a String.
+     * Returns a string after marking a task.
      * @param i
      * @return a String
      */
-    public String taskMarkedAtIndexString(Integer i) {
+    public String taskMarkedAtIndexString(Integer i) throws IOException {
         if (i < 0 || i >= this.size()) {
             return "OOPS!!! The number to mark is invalid.";
         }
-        return this.getTaskAtIndex(i).taskDoneString();
+        Task t = this.getTaskAtIndex(i);
+        t.taskDone();
+        Storage.autoSave(this);
+        return t.taskDoneString();
     }
 
     /**
-     * Attempts to mark a Task in duke.task.TaskList as incomplete if it exists.
-     *
-     * @param i index.
-     */
-    public void taskUnmarkedAtIndex(Integer i) {
-        try {
-            if (i < 0 || i >= this.size()) {
-                throw new DukeException("OOPS!!! The number to unmark is invalid.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-        this.getTaskAtIndex(i).taskNotDoneString();
-    }
-
-    /**
-     * Identical to taskUnmarkedAtIndex() but returns a String.
+     * Returns a string after un-marking a task.
      * @param i
      * @return a String
      */
-    public String taskUnmarkedAtIndexString(Integer i) {
+    public String taskUnmarkedAtIndexString(Integer i) throws IOException {
         if (i < 0 || i >= this.size()) {
             return "OOPS!!! The number to unmark is invalid.";
         }
-        return this.getTaskAtIndex(i).taskNotDoneString();
+        Task t = this.getTaskAtIndex(i);
+        t.taskNotDone();
+        Storage.autoSave(this);
+        return t.taskNotDoneString();
     }
 
     /**

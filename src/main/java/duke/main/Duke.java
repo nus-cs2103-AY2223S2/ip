@@ -43,6 +43,7 @@ public class Duke extends Application {
     private static Parser logic = new Parser();
     private static Storage store = new Storage();
     private static TaskList tasks = new TaskList();
+    private static boolean isInitialised = false;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Alien.png"));
     private Image jamie = new Image(this.getClass().getResourceAsStream("/images/Jamie.jpg"));
     private ScrollPane scrollPane;
@@ -59,9 +60,8 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         //Step 1. Setting up required components
-
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -105,6 +105,8 @@ public class Duke extends Application {
         //
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+
 
         // Step 3
         sendButton.setOnMouseClicked((event) -> {
@@ -167,15 +169,18 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) throws DukeException, IOException {
+        if (!isInitialised) {
+            Storage.readSave(tasks);
+            isInitialised = true;
+        }
         if (!logic.isValidCommand(input)) {
             return INSTRUCTIONS;
         }
-        Storage.autoSave(tasks);
 
         if (logic.isTaskCommand(input)) {
             Task task = logic.toTask(input);
             tasks.addTask(task);
-            return tasks.announceAddedString();
+            return tasks.announceAddedString(task);
         } else if (input.equals("bye")) {
             return "Thank you and goodbye.";
         } else if (input.equals("list")) {

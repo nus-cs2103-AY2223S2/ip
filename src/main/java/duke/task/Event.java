@@ -47,6 +47,22 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a LocalDateTime object.
+     * @return from date.
+     */
+    public LocalDateTime getFromDateTime() {
+        return fromDateTime;
+    }
+
+    /**
+     * Returns a LocalDateTime object.
+     * @return to date.
+     */
+    public LocalDateTime getToDateTime() {
+        return toDateTime;
+    }
+
+    /**
      * Returns a string representation of the Event object.
      *
      * @return a string.

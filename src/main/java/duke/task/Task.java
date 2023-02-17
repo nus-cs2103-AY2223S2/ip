@@ -59,7 +59,6 @@ public class Task {
         StringBuilder sb = new StringBuilder();
         sb.append("Nice! I've marked this task as done:\n");
         sb.append(this.toString() + "\n");
-        isDone = true;
         return sb.toString();
     }
     /**
@@ -80,7 +79,6 @@ public class Task {
         StringBuilder sb = new StringBuilder();
         sb.append("OK, I've marked this task as not done yet: \n");
         sb.append(this.toString() + "\n");
-        isDone = false;
         return sb.toString();
     }
 
@@ -92,6 +90,14 @@ public class Task {
      */
     public boolean getStatus() {
         return this.isDone;
+    }
+
+    /**
+     * Sets desired boolean to status of isDone.
+     * @param bool
+     */
+    public void setStatus(boolean bool) {
+        this.isDone = bool;
     }
 
     /**

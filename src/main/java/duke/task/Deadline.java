@@ -33,6 +33,14 @@ public class Deadline extends Task {
     }
 
     /**
+     *  Returns a LocalDateTime object.
+     * @return by date.
+     */
+    public LocalDateTime getByDateTime() {
+        return byDateTime;
+    }
+
+    /**
      * Returns a string representation of the Deadline object.
      *
      * @return a string.
