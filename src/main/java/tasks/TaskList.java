@@ -67,4 +67,15 @@ public class TaskList {
     public void set(int idx, Task task) {
         list.set(idx, task);
     }
+
+    public void find(String key) {
+        int idx = 1;
+        for (int i = 0; i < list.size(); i++){
+            Task task = list.get(i);
+            if (task.toString().contains(key)) {
+                System.out.println("\t" + (idx) + ". " + task.toString());
+                idx++;
+            }
+        }
+    }
 }
