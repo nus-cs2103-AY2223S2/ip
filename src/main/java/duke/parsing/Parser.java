@@ -47,8 +47,8 @@ public class Parser {
     /**
      * Used by 'MarkCmd', 'UnmarkCmd' & 'DeleteCmd' class to get the index of the task to execute on.
      *
-     * @param lineInput Command line input that the user entered
-     * @return Integer index of the target task
+     * @param lineInput command line input that the user entered
+     * @return integer index of the target task
      */
     public static int parseMarkUnmarkDeleteIndex(String lineInput) throws ListIndexMissing {
         try {
@@ -62,8 +62,8 @@ public class Parser {
      * Used by 'ToDo' class to initialise a ToDo task.
      * Parses command line input into relevant information needed to initilize a ToDo task.
      *
-     * @param commandInput Command line input that the user entered
-     * @return Task name, wrapped in an array.
+     * @param commandInput command line input that the user entered
+     * @return task name, wrapped in an array.
      */
     public static String[] parseToDoCmd(String commandInput) {
         String[] parseInfo = {commandInput.substring(5)};
@@ -74,8 +74,8 @@ public class Parser {
      * Used by 'Deadline' class to initialise a Deadline task.
      * Parses command line input into relevant information needed to initilize a Deadline task.
      *
-     * @param commandInput Command line input that the user entered
-     * @return Task name & due date, wrapped in an array.
+     * @param commandInput command line input that the user entered
+     * @return task name & due date, wrapped in an array.
      */
     public static String[] parseDeadlineCmd(String commandInput) throws TaskNameNotSpecified, DeadlineByNotSpecified {
         String taskName;
@@ -108,8 +108,8 @@ public class Parser {
      * Used by 'Event' class to initialise an Event task.
      * Parses command line input into relevant information needed to initilize a Event task.
      *
-     * @param commandInput Command line input that the user entered
-     * @return Task name, start date & end date, wrapped in an array.
+     * @param commandInput command line input that the user entered
+     * @return task name, start date & end date, wrapped in an array.
      */
     public static String[] parseEventCmd(String commandInput) throws TaskNameNotSpecified, EventFromToNotSpecified {
         String taskName;
@@ -143,6 +143,14 @@ public class Parser {
         return parseInfo;
     }
 
+    /**
+     * Identifies the search keyword(s) for "find" command.
+     * command on.
+     *
+     * @param commandInput command input from user
+     * @return keyword(s) for searching list
+     * @throws FindKeywordMissing
+     */
     public static String[] parseFindKeyword(String commandInput) throws FindKeywordMissing {
         try {
             return commandInput.substring(6).split(" ");
@@ -151,12 +159,25 @@ public class Parser {
         }
     }
 
+    /**
+     * Identifies the date for a "view" command.
+     *
+     * @param commandInput
+     * @return date for "view" command
+     * @throws DateTimeParseException
+     */
     public static LocalDate parseViewScheduleDate(String commandInput) throws DateTimeParseException {
         String timeInput = commandInput.split(" ")[1];
         timeInput = timeInput.replaceAll("/", "-");
         return LocalDate.parse(timeInput);
     }
 
+    /**
+     * Parses a single task from a data file to initilize into task list.
+     *
+     * @param strTask task to load, in string form
+     * @return loaded task initialized as "Task" object
+     */
     public static Task parseLoadedTask(String strTask) {
         char taskType;
         String taskName;
