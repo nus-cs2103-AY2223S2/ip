@@ -132,6 +132,7 @@ public class TaskList {
 
     /**
      * Method to search through the task list to find a specific task
+     *
      * @param searchString The string to search with.
      * @return The String representation of what is found in the TaskList.
      */
@@ -139,6 +140,7 @@ public class TaskList {
         String res;
         res = "";
         for (int i = 0; i < tasks.size(); i++) {
+            //This is C-BetterSearch.
             if (tasks.get(i).taskDesc.contains(searchString)) {
                 res = res + (i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
