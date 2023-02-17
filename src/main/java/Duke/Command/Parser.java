@@ -229,6 +229,22 @@ public class Parser {
                       + object.taskString();
             break;
         }
+        case HELP: {
+            reply = "Here are some sample commands:\n\t"
+                + "list\n\t"
+                + "todo borrow book\n\t"
+                + "event exam /from 2023-10-10 0900\n\t"
+                + " /to 2023-10-10 1000\n\t"
+                + "deadline ip /by 2023-02-17 0000\n\t"
+                + "mark 1\n\t"
+                + "unmark 2\n\t"
+                + "delete 1\n\t"
+                + "sortEvent\n\t"
+                + "sortDeadline\n\t"
+                + "current duke version only understands\n\t"
+                + "yyyy-mm-dd date format";
+            break;
+        }
         default: {
             throw new DukeException();
         }

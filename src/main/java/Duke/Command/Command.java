@@ -17,7 +17,8 @@ public enum Command {
   FIND("find"),
   BYE("bye"),
   SORTEVENT("sortEvent"),
-  SORTDEADLINE("sortDeadline");
+  SORTDEADLINE("sortDeadline"),
+  HELP("help");
 
     private final String input;
 
