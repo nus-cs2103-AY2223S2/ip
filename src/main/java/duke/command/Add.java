@@ -31,6 +31,7 @@ public class Add extends Command {
      * @param tasks The current Task List.
      * @return The modified Task List.
      */
+    @Override
     public TaskList execute(TaskList tasks) throws DukeException {
         switch(taskType) {
             case "todo":

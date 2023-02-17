@@ -20,7 +20,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes the Command.
+     * Executes the Command. Implemented in subclasses of Command depending on the command to be executed.
      *
      * @param tasks The TaskList the command is executed upon.
      */
