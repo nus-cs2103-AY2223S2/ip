@@ -1,5 +1,11 @@
 # User Guide
 
+BearyBear serves as your personal task tracker that manages different 
+tasks for you! You do not have to keep track of the tasks manually anymore, BearyBear does it all for you! 
+
+You can add or delete different tasks (todo, deadline, events), mark the tasks as done/undone. 
+With BearyBear, you can also view the entire list of task and find tasks with certain keywords!
+
 ## Features 
 
 ### Record tasks
@@ -17,13 +23,18 @@ Tasks previously saved  can be retrieved the next time you start this applicatio
 
 ## Usage
 
+**Please take note of the following:**
+- Enter date in this format: **YYYY-MM-DD** (eg. 2023-02-10)
+- All the command words are to be typed in **lower case**
+  (eg. only `list` is recognized, `LIST` is not recognized)
+
+-----------------------------------------------------------
+
 ### `todo` - Add a task to be done 
 
 The task will be added to the list of tasks and saved locally 
 
-Format:
-
-`todo (task description)`
+Format: `todo (task description)`
 
 Example of usage: 
 
@@ -47,11 +58,7 @@ Now you have 1 tasks in the list.
 
 Add a task with a specified deadline to the task list. 
 
-Format: 
-
-`deadline (task description) /by (deadline date) `
-
-Format for date: **YYYY-MM-DD** (eg. 2023-02-10)
+Format: `deadline (task description) /by (deadline date) `
 
 Example of usage:
 
@@ -76,11 +83,8 @@ Now you have 2 tasks in the list.
 
 Add an event task with the starting date and ending date into the task list. 
 
-Format: 
+Format: `event (task description) /from (start date) /to (end date)`
 
-`event (task description) /from (start date) /to (end date)`
-
-Date in this format: **YYYY-MM-DD** (eg. 2023-10-10)
 
 Example of usage:
 
