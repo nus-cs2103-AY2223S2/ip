@@ -142,13 +142,18 @@ public class TaskList {
             throw new DukeException("\t OOPS!!! The format is invalid, please give a search information.\n");
         }
         assert inputLine.length == 2;
-        ui.printFindTaskMsg();
-        String str = "These are available tasks:\n";
+        boolean availableTasks = false;
+        String str = ui.printFindTaskMsg();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(inputLine[1])) {
+                availableTasks = true;
                 str += "\t " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
         }
-        return str;
+        if (availableTasks) {
+            return str;
+        } else {
+            return "There is no matched tasks!";
+        }
     }
 }
