@@ -1,14 +1,11 @@
 package alfred;
 
-import java.util.concurrent.TimeUnit;
-
 import alfred.command.Command;
 import alfred.exceptions.AlfredException;
 import alfred.parser.Parser;
 import alfred.storage.Storage;
 import alfred.task.TaskList;
 import alfred.ui.Ui;
-import javafx.application.Platform;
 
 /**
  * Represents a Personal Assistant Chat-bot that helps a person to keep track of various things.
@@ -52,10 +49,10 @@ public class Alfred {
         return ui.getOpening();
     }
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from Alfred when the user typed the text into the GUI.
+     * @param input The input from the user.
+     * @return The response from Alfred.
      */
     public String getResponse(String input) {
         try {

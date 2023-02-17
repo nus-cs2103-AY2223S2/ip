@@ -1,8 +1,5 @@
 package alfred.components;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
-
 import alfred.Alfred;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;

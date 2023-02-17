@@ -63,10 +63,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Creates a dialog box that contains the user image and text.
+     * @param text The text that the user typed into the GUI.
+     * @param img The image that represents the user.
+     * @return The dialog box that contains the text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box that contains Alfred image and response.
+     * @param text Alfred's response to the user text.
+     * @param img Alfred's image.
+     * @return The dialog box that contains the text and the response.
+     */
     public static DialogBox getAlfredDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
