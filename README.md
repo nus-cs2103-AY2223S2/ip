@@ -1,6 +1,6 @@
 # Duke
 
-![alt text](https://PawanPatil19.github.io/ip/Ui.png?raw=true)
+![alt text](https://github.com/PawanPatil19/ip/blob/master/docs/Duke.png?raw=true)
 
 Duke is a graphical user interface (GUI) desktop app that helps you track your upcoming tasks. 
 
