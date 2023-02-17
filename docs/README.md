@@ -1,29 +1,40 @@
 # User Guide
 
-## Features 
+Features
 
-### Feature-ABC
+Syntax:
+[ACTION VERB][options]
+<Required argument>[optional argument]
+All commands case insensitive
 
-Description of the feature.
+task/ -> task: task
+deadline/ -> valid date / date-time
+index/ -> index: index
 
-### Feature-XYZ
+Add a todo: todo <task/TASK>
+Adds a todo to the list
+Example: todo finish CS2103T user guide
 
-Description of the feature.
+Add a deadline: deadline <task/TASK> by <deadline/DEADLINE>
+Adds a task with deadline to the list
+Example: deadline finish CS2103T user guide by 17/2/2023
 
-## Usage
+Mark a task in the list as done: mark <index/INDEX>
+Marks the task in the given index of the list as done
+Example: mark 1 
 
-### `Keyword` - Describe action
+Unmark a task in the list as not done: unmark <index/INDEX>
+Marks the task in the given index of the list as not done
+Example: unmark 1 
 
-Describe the action and its outcome.
+Delete a task in the list: delete <task/TASK>
+Deletes the task in the given index of the list from the list
+Example: delete 2
 
-Example of usage: 
+Close the chat: bye
+Closes the chat 
+Example: bye
 
-`keyword (optional arguments)`
+Display the list: list
+Command: list
 
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
