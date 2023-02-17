@@ -30,7 +30,6 @@ Example of usage:
 Expected outcome:
 
 The 'read book' todo task will be added to the list of tasks. 
-
 'T' in the first square bracket means it is a todo task. 
 Second square bracket is empty because this task is not completed yet. 
 
@@ -57,7 +56,6 @@ Example of usage:
 Expected outcome:
 
 The 'return book' deadline task will be added to the task list and deadline will be shown beside the task description.
-
 'D' in the first square bracket means it is a deadline task.
 Second square bracket is empty because this task is not completed yet.
 
@@ -84,8 +82,7 @@ Example of usage:
 
 Expected outcome:
 
-The 'write book' event task will be added to the task list and starting date & ending date  will be shown beside the task description.
-
+The 'write book' event task will be added to the task list and starting date & ending date will be shown beside the task description. 
 'E' in the first square bracket means it is an event task.
 Second square bracket is empty because this task is not completed yet.
 
@@ -161,6 +158,8 @@ Here are some tasks in your list:
 ### `find` - Find tasks containing the target word 
 
 Search and list out the matching list of tasks which has the target word that user is trying to find.
+
+Format of input: find _(target word)_
 
 Example of usage:
 
