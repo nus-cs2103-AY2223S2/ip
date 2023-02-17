@@ -18,14 +18,15 @@ public class Duke {
 
             // level_1 feature: exit when user types "bye"
             if (input.equalsIgnoreCase("bye")) {
+                System.out.println("ok see you brother!");
                 break;
             }
 
-            // test commit 2
-
             output = input;
-            System.out.println("ok see you brother!");
+            System.out.println(output);
+
         }
+
 
 
     }
