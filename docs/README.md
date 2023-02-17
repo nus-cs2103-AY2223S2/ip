@@ -19,15 +19,58 @@ A GUI similar to the below should appear. Note that when the app runs for the fi
 ## Features
 
 Here are all of the features:
+
+### Add Task
+
+Add new tasks to the task list. 
+When a task is added, it is automatically given an index, based on its sequence in the task list.
+Arguments inside `[]` should be replaced with the wanted contents (without the `[]` itself)
+
+*The 3 types of tasks that can be added:* 
+* `todo`: tasks to be done at future
+* `deadline`: tasks with a specific deadline
+* `event`: tasks that continue for a certain period
+
+*The available commands:*
 * `todo [content]`: add a todo task to the task list. Example: `todo play football`
 * `deadline [content] /by [date in dd/mm/yyyy format]`: add a deadline task to the task list, that need to be completed by `date`. Example: `deadline assignment 02/05/2023`
 * `event [content] /from [date1 in dd/mm/yyyy format] /to [date2 in dd/mm/yyyy format]`: add an event task to the task list, that starts from `date1` and ends at `date2`. Example: `event project /from 02/03/2023 /to 05/03/2023`
-* `list`: List out all the tasks in list and their indexes. Tasks are indexed based on their sequences added to the list. 
+
+### Mark/Unmark Task Completion
+
+Mark a specific task to be completed or uncompleted, based on task index.
+
+*The available commands:*
 * `mark [task_index]`: Mark the task with `index` as completed. Example: `mark 2`
 * `unmark [task_index]: Mark the task with `index` as not completed. Example: `unmark 3`
-* `delete [task_index]`: Delete the task with `index` from the task list. Example: `delete 7`
+
+### View Tasks
+
+View all, or a proportion of the tasks, based on keywords or dates.
+
+*The filter criteria:*
+* `list`: View all the tasks in list.
+* `find`: View tasks based on specific keywords.
+* `search`: View tasks based on specific dates.
+
+*The available commands:*
+* `list`: List out all the tasks in list and their indexes. Tasks are indexed based on their sequences added to the list. 
 * `find [key_word]`: Find all the tasks that have `key_word` in their descriptions. Example: `find project`
 * `search [date]`: Find all the tasks that have deadline at the `date` or span over the `date` during the event. Example: `search 03/03/2023`
+
+### Delete Tasks
+
+Delete a specific task, based on task index.
+
+*The available commands:*
+* `delete [task_index]`: Delete the task with `index` from the task list. Example: `delete 7`
+
+### Update Tasks
+
+Update a specific task, based on task index. 
+For each update, the content of the task must be updated, while update of date is optional. Content inside `<>` are optional.
+
+*The avaialble commands:*
 * `update [task_index] [content] </by [date] (for deadline task only)> </from [date] (for event task only)> </to [date] (for event task only)>: Update a specific task in the task list at `index`. Examples:
    * `update 3 play basketball` (for todo task)
    * `update 5 homework` or `update 5 homework /by 02/03/2023` (for deadline task)
