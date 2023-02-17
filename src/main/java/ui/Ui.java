@@ -12,7 +12,9 @@ public class Ui {
             + "\n\t4. list all tasks, using 'list',"
             + "\n\t5. mark a task, using 'mark',"
             + "\n\t6. unmark a task, using 'unmark',"
-            + "\n\t7. exit the program, using 'bye'!";
+            + "\n\t7. find task by keyword, using 'find',"
+            + "\n\t8. sort task by type and order, using 'sort',"
+            + "\n\t9. exit the program, using 'bye'!";
     private final String question = "What can I do for you?";
     private final String extStr = "Bye! Hope to see you again soon!"
             + "\nThis program will exit automatically in 5 seconds.";
