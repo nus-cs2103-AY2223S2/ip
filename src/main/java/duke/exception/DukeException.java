@@ -81,7 +81,7 @@ public class DukeException extends Exception {
      */
     public DukeException() {
         super();
-        this.message = "Oops! I don't understand what it means!";
+        this.message = "Don't be a bad boy and type in something useful";
     }
 
     /**

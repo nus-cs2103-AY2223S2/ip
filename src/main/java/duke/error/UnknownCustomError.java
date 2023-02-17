@@ -23,6 +23,6 @@ public class UnknownCustomError extends CustomError {
      * @return Error message
      */
     public String getErrorMessage(TypeOfTask task, int errorCode) {
-        return "Oops! I don't understand what it means!";
+        return "Don't be a bad boy and type in something useful";
     }
 }
