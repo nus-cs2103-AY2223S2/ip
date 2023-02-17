@@ -94,7 +94,7 @@ public class Parser {
         case (2):
             return getTwoWordCommand(fullCommandArr);
         default:
-            // this line should never happen because max size is 2
+            assert false; // should not reach here.
             throw new InvalidCommandException(command);
         }
     }

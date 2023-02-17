@@ -30,11 +30,11 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         String[] lineArr = controlLine.split("/by ");
-        if (lineArr.length == 1) {
+        if (lineArr.length == 1) { // missing dates in the command
             throw new InvalidCommandException("deadline");
         }
         String[] descriptionArr = lineArr[0].split(" ", 2);
-        if (descriptionArr.length == 1) {
+        if (descriptionArr.length == 1) { // no task name
             throw new InvalidCommandException("deadline");
         }
         Task task = new Deadline(lineArr[0], lineArr[1]);

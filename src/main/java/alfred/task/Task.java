@@ -33,9 +33,6 @@ public abstract class Task {
      */
     public abstract boolean containsDate(LocalDate date);
 
-    // only problem is task: read book, keywords "find book read" will work
-    // need to find the order. Questions only mentions "keyword"
-
     /**
      * Checks if the task description contains the key word. Order doesn't matter.
      * Eg: Keywords: book read. Description: read book. The method will still return true.

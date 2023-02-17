@@ -26,11 +26,11 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws AlfredException {
         String[] lineArr = controlLine.split("/from | /to ");
-        if (lineArr.length < 2) { // not sure how to check if there's /from and /to
+        if (lineArr.length < 2) { // checks if there are /from and /to
             throw new InvalidCommandException("event");
         }
         String[] descriptionArr = lineArr[0].split(" ", 2);
-        if (descriptionArr.length == 1) {
+        if (descriptionArr.length == 1) { // checks if there is a task name
             throw new InvalidCommandException("event");
         }
         Task task = new Event(lineArr[0], lineArr[1], lineArr[2]);

@@ -45,7 +45,7 @@ public class Storage {
             Scanner sc = new Scanner(dataFile);
             return getTasksFromFile(tasks, sc);
         } catch (IOException e) {
-            throw new AlfredException("Error, invalid file path");
+            throw new AlfredException("Error, invalid file path\n");
         }
     }
 
@@ -87,10 +87,10 @@ public class Storage {
                 checkMark.isMark(Integer.parseInt(taskInfoArr[1]), task);
                 break;
             default:
-                throw new AlfredException("I'm sorry but there is an invalid task in the data file");
+                throw new AlfredException("I'm sorry but there is an invalid task in the data file\n");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new AlfredException("There is probably a missing separator in your file");
+            throw new AlfredException("There is probably a missing separator in your file\n");
         }
         return task;
     }
