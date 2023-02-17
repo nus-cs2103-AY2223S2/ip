@@ -6,7 +6,7 @@ alongside a Graphical User Interface (GUI) for display
 ### Getting started
 
 1. Ensure that you have Java 11 or higher installed
-2. Download the latest `elise.jar` from [here](https://github.com/jiexuanc/ip/releases/tag/Level-10)
+2. Download the latest `elise.jar` from [here](https://github.com/jiexuanc/ip/releases/tag/A-Release)
 3. If you do not have JavaFX bundled, you should download `elise-fat.jar`
 4. Copy the file to a folder of your choice
 5. Open a command terminal and run `java -jar elise.jar`
