@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.TaskList;
-import duke.gui.Ui;
 import duke.Values;
+import duke.gui.Ui;
 
 /**
  * A Command subclass for the find command.

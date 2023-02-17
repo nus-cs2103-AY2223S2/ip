@@ -1,11 +1,8 @@
 package duke;
 
-import duke.gui.Ui;
-import javafx.application.Application;
-
-import duke.command.Command;
-import duke.command.ListCommand;
 import duke.gui.GUi;
+
+import javafx.application.Application;
 
 /**
  * The main class for the Duke program.

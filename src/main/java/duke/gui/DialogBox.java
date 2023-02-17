@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 /**
  * Abstraction for a single HBox to display messages.
  */
-public class DialogBox extends HBox{
+public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPic;

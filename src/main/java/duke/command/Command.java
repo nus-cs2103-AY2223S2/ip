@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.gui.Ui;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Abstract class for duke.commands.

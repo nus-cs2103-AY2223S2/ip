@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.gui.Ui;
 import duke.Values;
+import duke.gui.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 

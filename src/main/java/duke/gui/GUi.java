@@ -1,5 +1,12 @@
 package duke.gui;
 
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.command.Command;
+import duke.command.ListCommand;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,21 +20,14 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.command.Command;
-import duke.command.ListCommand;
-
 /**
  * Encapsulates the main GUI scene, creating and styling nodes as appropriate.
  */
 public class GUi extends Application {
 
     // Window support values
-    private final double MIN_WIDTH = 400.0;
-    private final double MIN_HEIGHT = 600.0;
+    private final double minWidth = 400.0;
+    private final double minHeight = 600.0;
 
     // JavaFX components
     private Stage stage;
@@ -62,10 +62,10 @@ public class GUi extends Application {
 
         stage.setTitle("PixlBot");
         stage.setResizable(false);
-        stage.setMinWidth(MIN_WIDTH);
-        stage.setMinHeight(MIN_HEIGHT);
+        stage.setMinWidth(minWidth);
+        stage.setMinHeight(minHeight);
 
-        mainLayout.setPrefSize(MIN_WIDTH, MIN_HEIGHT);
+        mainLayout.setPrefSize(minWidth, minHeight);
 
         styleNodes();
 

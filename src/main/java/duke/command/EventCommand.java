@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.gui.Ui;
 import duke.Values;
+import duke.gui.Ui;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * A Command subclass for the event command.
