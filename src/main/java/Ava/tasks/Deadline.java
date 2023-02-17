@@ -21,6 +21,7 @@ public class Deadline extends Task {
         super(message);
         this.by = by;
         this.tpBy = new TimeParser(this.by);
+        super.deadline = tpBy; //Used for comparing
     }
 
     /**
@@ -46,4 +47,6 @@ public class Deadline extends Task {
     public String getStorageFormat() {
         return TASK_SIGN + "," +this.isMarked()+","+this.message+"," +this.by;
     }
+
+
 }

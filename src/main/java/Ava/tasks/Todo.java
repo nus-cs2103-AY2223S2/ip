@@ -30,4 +30,14 @@ public class Todo extends Task {
     public String getStorageFormat() {
         return TASK_SIGN + "," +this.isMarked()+","+this.message;
     }
+
+    /**
+     * Compare Two Deadlines , first compare the by time and if that fails compare messages.
+     * @param other
+     * @return
+     */
+    @Override
+    public int compareTo(Task other){
+        return super.compareTo(other);
+    }
 }

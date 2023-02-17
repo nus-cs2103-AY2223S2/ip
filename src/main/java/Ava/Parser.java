@@ -1,14 +1,6 @@
 package Ava;
 
-import Ava.commands.AddTask;
-import Ava.commands.DeleteTask;
-import Ava.commands.Enter;
-import Ava.commands.Exit;
-import Ava.commands.FindTask;
-import Ava.commands.ListTask;
-import Ava.commands.MarkTask;
-import Ava.commands.UnmarkTask;
-import Ava.commands.AvaCommand;
+import Ava.commands.*;
 import Ava.exceptions.AvaException;
 import Ava.exceptions.CommandNotFoundException;
 
@@ -46,6 +38,9 @@ public class Parser {
                 break;
             case "list" :
                 command = new ListTask();
+                break;
+            case "sort":
+                command = new SortTasks();
                 break;
             case "bye" :
                 command = new Exit();

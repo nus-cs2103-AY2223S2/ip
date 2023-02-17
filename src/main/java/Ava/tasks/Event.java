@@ -9,8 +9,8 @@ public class Event extends Task {
     public static final String TASK_SIGN = "[E]";
     private String from;
     private String to;
-    private TimeParser fromTp;
-    private TimeParser toTp;
+    private TimeParser tpFrom;
+    private TimeParser tpTo;
 
     /**
      * Contructor for Event message
@@ -23,8 +23,9 @@ public class Event extends Task {
         super(message);
         this.from = from;
         this.to = to;
-        this.fromTp = new TimeParser(this.from);
-        this.toTp = new TimeParser(this.to);
+        this.tpFrom = new TimeParser(this.from);
+        this.tpTo = new TimeParser(this.to);
+        super.deadline = tpTo; //Used for comparing
     }
 
     /**
@@ -32,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String getMessage(){
-        return this.message + " (FROM: " + this.fromTp + " TO: " + this.toTp + ")";
+        return this.message + " (FROM: " + this.tpFrom + " TO: " + this.tpTo + ")";
     }
 
     /**

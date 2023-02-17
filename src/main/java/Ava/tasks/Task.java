@@ -1,10 +1,11 @@
 package Ava.tasks;
 
 
-public class Task {
+public class Task implements Comparable<Task> {
     protected String message;
     protected boolean marked = false;
     public static final String TASK_SIGN = "";
+    protected TimeParser deadline = TimeParser.NO_DEADLINE;
 
     /**
      * Constructor for the Task
@@ -46,6 +47,21 @@ public class Task {
 
         return this.getStatusIcon() + " " + this.getMessage();
     }
+
+    /**
+     * Compares the Deadline, if same compares the message
+     * @param other
+     * @return
+     */
+    @Override
+    public int compareTo(Task other){
+        int first_indi = deadline.compareTo(other.deadline);
+        if (first_indi == 0 ){
+            return message.compareTo(other.message);
+        }
+        return first_indi;
+    }
+
 
     /**
      * Toggles the marked boolean to true

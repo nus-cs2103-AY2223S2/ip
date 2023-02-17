@@ -11,12 +11,13 @@ import Ava.exceptions.CannotCreateDirectory;
 import Ava.exceptions.CannotReadFromFile;
 import Ava.exceptions.DateTimeNotParsed;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Wrapper for List Containing Task Objects
  */
 public class TaskList {
-    private  ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
     private int taskCount = 0;
     private String FILE_NAME = "tasks.txt";
 
@@ -89,6 +90,13 @@ public class TaskList {
                 res +=  formatSpace + (i+1) + ". " + tasks.get(i).getRepresentation() + "\n";
         }
         return res;
+    }
+
+    /**
+     * Sort the tasks inside the list
+     */
+    public void sortTasks(){
+        Collections.sort(this.tasks);
     }
 
     /**

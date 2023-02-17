@@ -13,7 +13,8 @@ import java.util.Locale;
 /**
  * Parses Date and Time String
  */
-public class TimeParser {
+public class TimeParser implements Comparable<TimeParser> {
+    public static final TimeParser NO_DEADLINE = new TimeParser(LocalDateTime.MIN);
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("E,dd'%s' MMMM,yyyy ha", Locale.ENGLISH);
     private static final DateTimeFormatter DATE_PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/y", Locale.ENGLISH);
     private static final DateTimeFormatter TIME_PARSE_FORMAT = DateTimeFormatter.ofPattern("HHMM", Locale.ENGLISH);
@@ -39,6 +40,16 @@ public class TimeParser {
     }
 
     /**
+     * TimeParser Contructor Only for the Sentinel Value
+     * @param ldt
+     */
+    private TimeParser(LocalDateTime ldt){
+        this.ldt  = ldt;
+        this.ld = ldt.toLocalDate();
+        this.lt = ldt.toLocalTime();
+    }
+
+    /**
      * @return Formatted Date Time String
      */
     @Override
@@ -47,6 +58,16 @@ public class TimeParser {
         int day = ldt.getDayOfMonth();
         String daySuff = this.getDaySuffix(day);
         return String.format(DATE_TIME_PATTERN.format(ldt), daySuff);
+    }
+
+    /**
+     * TimeParser elemts are compared to on the basis of LocalDateTime object
+     * @param other
+     * @return
+     */
+    @Override
+    public int compareTo(TimeParser other){
+        return this.ldt.compareTo(other.ldt);
     }
 
     /**
