@@ -231,3 +231,5 @@ Expected outcome:
 Bye. Hope to see you again soon!
 ```
 
+## 👻 Thank you for using Duke! 👻
+
