@@ -147,6 +147,10 @@ public class TaskManagerUsecase implements CommandRegisterable {
      */
     private int getIndex(String indexStr) throws InvalidArgumentException {
         final int index;
+        if (indexStr.isBlank()) {
+            throw new InvalidArgumentException("☹ OOPS, please input a "
+                    + "number!");
+        }
         try {
             index = Integer.parseInt(indexStr) - 1;
         } catch (NumberFormatException exception) {
@@ -173,6 +177,10 @@ public class TaskManagerUsecase implements CommandRegisterable {
         return new IdentifiedCommandable() {
             @Override
             public ExitStatus execute(String[] tokens) {
+                if (tokens.length == 0) {
+                    errorWritable.writeln("☹ OOPS, please input a number!");
+                    return ExitStatus.finishCurrentIteration;
+                }
                 final String indexStr = tokens[0];
                 final int index;
                 try {
