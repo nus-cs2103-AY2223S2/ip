@@ -53,7 +53,8 @@ public class AddEventCommand extends Command {
         Event userTask = new Event(taskName, LocalDate.parse(from), LocalDate.parse(to));
         tasks.addTask(userTask);
         try {
-            storage.appendToFile(storage.getFilePath(), "E | 0 | " + taskName + " | " + from + " | " + to + "\n");
+            storage.appendToFile(storage.getFilePath(), "E | 0 | " + taskName + " | "
+                                    + from + " | " + to + "\n");
         } catch (IOException e) {
             throw new DukeException("Error writing to file");
         }

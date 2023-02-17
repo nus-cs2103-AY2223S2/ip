@@ -27,7 +27,8 @@ public class FindDeadlineCommand extends Command {
             LocalDate by = LocalDate.parse(userInput);
             ArrayList<Task> deadlines = tasks.getDeadlineBefore(by);
             if (deadlines.size() == 0) {
-                ui.showToUser("There's no deadlines before " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n Well done my lady.");
+                ui.showToUser("There's no deadlines before " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                                + "\n Well done my lady.");
             } else {
                 ui.showToUser("Here are the deadlines before "
                         + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":");
