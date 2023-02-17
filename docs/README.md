@@ -148,7 +148,7 @@ Here you go, do you need anything else?
 1. [D][ ] do CS2103T quiz (by: Feb 17 2023 2:00PM)
 ```
 
-### Show statistics for the past week.
+### Show statistics for the past week
 
 Shows the number of tasks completed last week
 
