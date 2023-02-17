@@ -68,6 +68,7 @@ A message will be printed.
 
 ```
 Got it. I've added this task:
+[T][] water plants
 Now we have 1 task(s) in the list.
 ```
 
@@ -85,7 +86,8 @@ A message will be printed.
 
 ```
 Got it. I've added this task:
-Now we have 1 task(s) in the list.
+[D][] water plants (by: 2 February 2023, 2359H)
+Now we have 2 task(s) in the list.
 ```
 
 ### `event` - adds a event into list
