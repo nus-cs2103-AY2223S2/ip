@@ -30,8 +30,8 @@ public class DeleteCommand extends Command {
             return ui.showError("Uhh... Where got this task for me to delete?");
         }
         try {
-            tasks.deleteTask(taskIndex);
             Task currentTask = tasks.getTask(taskIndex);
+            tasks.deleteTask(taskIndex);
             storage.saveData(tasks);
             return ui.showDelete(currentTask);
         } catch (DudeException e) {
