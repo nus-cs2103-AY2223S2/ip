@@ -79,3 +79,9 @@ For each update, the content of the task must be updated, while update of date i
    * `update 5 homework` or `update 5 homework /by 02/03/2023` (for deadline task)
    * `update 7 AI competition` or `update 7 AI competition /from 01/02/2023` or `update 7 AI competition /to 02/04/2023` or `update 7 AI competition /from 01/02/2023 /to 02/04/2023` (for event task)
 
+### Exit the App
+
+Exit and close the app. When the user run the app for the next time, the tasks added for the last time will be preserved.
+
+*The available commands:*
+* `bye`: Close and exit the app.
