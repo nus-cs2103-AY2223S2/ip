@@ -1,20 +1,12 @@
 package Duke.Command;
 
-import Duke.Exceptions.DukeException;
-import Duke.Exceptions.EmptyDescription;
-import Duke.Exceptions.EmptyFind;
-import Duke.Exceptions.EmptyOrder;
-import Duke.Exceptions.EmptyTime;
-import Duke.Exceptions.NoSuchTask;
+import Duke.Exceptions.*;
 import Duke.storage.Storage;
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.task.Todo;
+import Duke.task.*;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Class generates responses to user's command
@@ -127,6 +119,26 @@ public class Parser {
                 + "\n" + "Now you have "
                 + tasks.size()
                 + " task(s) in the list.";
+            break;
+        }
+        case SORTEVENT: {
+            ArrayList<Event> events = tasks.sortEvents();
+            StringBuilder sb = new StringBuilder();
+            for (Task t: events) {
+                sb.append(t.taskString()).append("\n\t");
+            }
+            reply = "Here are your events sorted by time:\n\t"
+                + sb;
+            break;
+        }
+        case SORTDEADLINE: {
+            ArrayList<Deadline> deadlines = tasks.sortDeadlines();
+            StringBuilder sb = new StringBuilder();
+            for (Task t: deadlines) {
+                sb.append(t.taskString()).append("\n\t");
+            }
+            reply = "Here are your deadlines sorted by time:\n\t"
+                + sb;
             break;
         }
         case MARK: {

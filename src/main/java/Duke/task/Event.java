@@ -40,6 +40,9 @@ public class Event extends Task {
     public String getStrEndTime() {
         return strEndTime;
     }
+    public LocalDateTime getStartTime() {
+        return this.startTime;
+    }
 
     /**
    * Method return a String with information about an event task:

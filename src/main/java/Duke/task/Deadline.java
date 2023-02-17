@@ -32,6 +32,9 @@ public class Deadline extends Task {
         return this.strTime;
     }
 
+    public LocalDateTime getStartTime() {
+        return this.time;
+    }
     /**
       * Method return a String with information about a Deadline task:
       * type, marked or not, due time.

@@ -14,7 +14,10 @@ public class TaskList {
    * so it's not null.
    */
     public TaskList() {
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
+    }
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -47,7 +50,9 @@ public class TaskList {
    *
    * @param curIndex receives the index of the task to get.
    */
-    public Task get(int curIndex) { return tasks.get(curIndex); }
+    public Task get(int curIndex) {
+        return tasks.get(curIndex);
+    }
 
     /**
    * list out the tasks in the list with their string information.
@@ -65,6 +70,35 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Sort Events in taskList by time
+     * @return a list of events sorted by start time.
+     */
+    public ArrayList<Event> sortEvents() {
+        ArrayList<Event> eventsList = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t instanceof Event) {
+                eventsList.add((Event) t);
+            }
+        }
+        eventsList.sort(new EventComparator());
+        return eventsList;
+    }
+
+    /**
+     * Sort Deadlines in taskList by time
+     * @return a list of deadlines sorted by time.
+     */
+    public ArrayList<Deadline> sortDeadlines() {
+        ArrayList<Deadline> deadlineList = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t instanceof Deadline) {
+                deadlineList.add((Deadline) t);
+            }
+        }
+        deadlineList.sort(new DeadlineComparator());
+        return deadlineList;
+    }
     /**
    * convert the current taskList into String commands,
    * which will be written into the data file in the future.

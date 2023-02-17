@@ -15,7 +15,9 @@ public enum Command {
   UNMARK("unmark"),
   DELETE("delete"),
   FIND("find"),
-  BYE("bye");
+  BYE("bye"),
+  SORTEVENT("sortEvent"),
+  SORTDEADLINE("sortDeadline");
 
     private final String input;
 
