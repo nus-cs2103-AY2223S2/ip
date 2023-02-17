@@ -71,48 +71,7 @@ public class TaskList {
     }
 
     public void addTask(Task newTask, Storage storage) {
-        /*
-        int len = command.length();
-        String description;
-        Task newTask;
-        if (command.substring(0, 4).equals("todo")) {
-
-            description = command.substring(5);
-            newTask = new Todo(description);
-
-        } else if (command.substring(0, 8).equals("deadline")) {
-            int indexOfBy = -1;
-            for (int i = 0; i < len; i++) {
-                if (command.charAt(i) == '/') {
-                    indexOfBy = i;
-                }
-            }
-            description = command.substring(9, indexOfBy - 1);
-            String by = command.substring(indexOfBy + 4);
-            newTask = new Deadline(description, Parser.parseDateTime(by));
-        } else {
-            int indexOfStart = -1, indexOfEnd = -1;
-            for (int i = 0; i < len; i++) {
-                if (command.charAt(i) == '/') {
-                    if (indexOfStart == -1) {
-                        indexOfStart = i;
-                    } else {
-                        indexOfEnd = i;
-                    }
-                }
-            }
-            description = command.substring(6, indexOfStart - 1);
-            String start = command.substring(indexOfStart + 6, indexOfEnd - 1);
-            String end = command.substring(indexOfEnd + 4);
-            newTask = new Event(description, Parser.parseDateTime(start), Parser.parseDateTime(end));
-        }
-        */
         tasks.add(newTask);
-        /* Delete this
-        ui.indentedPrintln("Got it. I've added this task:");
-        ui.indentedPrintln("  " + newTask);
-        ui.indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
-         */
         try {
             storage.addTaskToFile(newTask);
         } catch (IOException e) {

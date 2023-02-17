@@ -90,7 +90,7 @@ public class Parser {
         return new EventCommand(tokens);
     }
 
-    public Command parseSearchCommand(String userInput) {
+    private Command parseSearchCommand(String userInput) {
         return new SearchCommand(userInput.split(" ", 2));
     }
 
