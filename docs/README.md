@@ -46,7 +46,6 @@ Tasks can be easily deleted via the command line.
 ## Usage
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user. e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter that can be anything the user wants like `todo Read a book`.
-- Items in square brackets are optional. e.g. `todo DESCRIPTION [/prio PRIORITY_NUMBER]` means that both `todo Read` and `todo Read /prio 1` are valid commands, but not `todo Read /prio`.
 - For date time commands, `DD` refers to the date of the month in 2 digits (so the first day of the month will be `01`), `MM` refers to the month in 2 digits, `YYYY` refers to the year in 4 digits, `HH` refers to the hour of the day in 2 digits (so 1a.m. is 01 and 3p.m. is 15) and `mm` refers to the current minute in 2 digits.
 - Commands with `INDEX` parameters should have positive integers used as the `INDEX`. Indexes start at 1 and are the same as the numbers on the list when the `list` command is used.
 
@@ -72,7 +71,7 @@ Adds a todo task to the task list.
 
 Format:
 
-`todo DESCRIPTION [/prio PRIORITY_NUMBER]
+`todo DESCRIPTION /prio PRIORITY_NUMBER`
 
 Example usage:
 
@@ -93,7 +92,7 @@ Adds a deadline task to the task list.
 
 Format:
 
-`deadline DESCRIPTION /by DEADLINE [/prio PRIORITY_NUMBER]`
+`deadline DESCRIPTION /by DEADLINE /prio PRIORITY_NUMBER`
 where `DEADLINE` is of the format `DD-MM-YYYY HH:mm`.
 
 Example usage:
@@ -115,7 +114,7 @@ Adds an event task to the task list.
 
 Format:
 
-`event DESCRIPTION /from START_TIME /to END_TIME [/prio PRIORITY_NUMBER]`
+`event DESCRIPTION /from START_TIME /to END_TIME /prio PRIORITY_NUMBER`
 where both `START_TIME` and `END_TIME` are of the format `DD-MM-YYYY HH:mm`.
 
 Example usage:
