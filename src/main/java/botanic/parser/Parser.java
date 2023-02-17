@@ -17,6 +17,7 @@ import botanic.command.MarkCommand;
 import botanic.command.UnmarkCommand;
 import botanic.exception.IncompleteDescException;
 import botanic.exception.InvalidInputException;
+import botanic.gui.Gui;
 import botanic.task.Deadline;
 import botanic.task.Event;
 import botanic.task.Task;
@@ -29,6 +30,8 @@ public class Parser {
     protected enum CommandEnum {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FINDALLMATCH, FINDFLEX, FINDDATE
     }
+
+    private Gui gui = new Gui();
 
     /**
      * Checks if name of tasks is given in the given input
@@ -43,7 +46,7 @@ public class Parser {
             throws IncompleteDescException {
         if (splitInputs.length <= 1 || splitInputs[1].isBlank()) {
             throw new IncompleteDescException(
-                    "The description of a " + cmdType + " cannot be empty!");
+                    gui.getNoDescErrorMsg(cmdType));
         }
     }
 
@@ -72,7 +75,7 @@ public class Parser {
 
     /**
      * Finds the index of the given keyword
-     * in a section of the input given by user.
+     * in a section of a given string.
      *
      * @param input The section of the user input with the command name removed.
      * @param keyword The keyword to be found.
@@ -85,7 +88,7 @@ public class Parser {
         int index = input.indexOf(keyword);
         if (index < 0) {
             throw new IncompleteDescException(
-                    "Please add the " + keywordType);
+                    gui.getMissingFieldErrorMsg(keywordType));
         }
         return index;
     }
@@ -97,16 +100,15 @@ public class Parser {
      * @param input The string to extract the name from.
      * @param startIndex The starting index of the name in input string.
      * @param endIndex The last index of the name in input string.
-     * @param nameType The task type of the given name.
      * @return The extracted name.
      * @throws IncompleteDescException If no name can be found using the given indexes.
      */
-    private String getName(String input, int startIndex, int endIndex, String nameType)
+    private String getName(String input, int startIndex, int endIndex)
             throws IncompleteDescException {
         String name = input.substring(startIndex, endIndex).strip();
         if (name.isBlank()) {
             throw new IncompleteDescException(
-                    "The description of a " + nameType + " cannot be empty!");
+                    gui.getMissingFieldErrorMsg("name"));
         }
         return name;
     }
@@ -129,14 +131,14 @@ public class Parser {
         String date = input.substring(startIndex, endIndex).strip();
         if (date.isBlank()) {
             throw new IncompleteDescException(
-                    "Please add the " + dateType);
+                    gui.getMissingFieldErrorMsg(dateType));
         }
         try {
             LocalDate localDate = Parser.parseDate(date);
             return localDate;
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(
-                    "Please enter a valid date/time in \"yyyy/mm/dd\" format.");
+                    gui.getInvalidDateErrorMsg());
         }
     }
 
@@ -153,7 +155,7 @@ public class Parser {
         if (dateInput.isBefore(dateToCheckWith)) {
             String dateFormatted = Formatter.formatDateForPrint(dateInput);
             throw new InvalidInputException(
-                    "The given " + dateType + " (yyyy/mm/dd) " + dateFormatted + " has passed.");
+                    gui.getDatePassedErrorMsg(dateType, dateFormatted));
         }
     }
 
@@ -167,10 +169,9 @@ public class Parser {
     private void checkEndIsAfterStart(LocalDate startDate, LocalDate endDate)
             throws InvalidInputException {
         if (startDate.isAfter(endDate)) {
-            String dateFormatted = Formatter.formatDateForPrint(startDate);
+            String startDateFormatted = Formatter.formatDateForPrint(startDate);
             throw new InvalidInputException(
-                    "The given start date " + dateFormatted
-                            + " (yyyy/mm/dd) should be before the end date (yyyy/mm/dd).");
+                    gui.getStartAfterEndErrorMsg(startDateFormatted));
         }
     }
 
@@ -187,7 +188,7 @@ public class Parser {
         checkNameExists(splitInputs, "deadline");
         int endIndex = getKeywordIndex(splitInputs[1], "/by", "due date/time");
 
-        String name = getName(splitInputs[1], 0, endIndex, "deadline");
+        String name = getName(splitInputs[1], 0, endIndex);
         LocalDate endLocalDate = getLocalDate(splitInputs[1], endIndex + 3,
                 splitInputs[1].length(), "due date/time");
         checkDateIsBefore(endLocalDate, LocalDate.now(), "deadline");
@@ -208,7 +209,7 @@ public class Parser {
         checkNameExists(splitInputs, "event");
         int startIndex = getKeywordIndex(splitInputs[1], "/from", "start date/time");
         int endIndex = getKeywordIndex(splitInputs[1], "/to", "end date/time");
-        String name = getName(splitInputs[1], 0, startIndex, "event");
+        String name = getName(splitInputs[1], 0, startIndex);
 
         LocalDate startLocalDate = getLocalDate(splitInputs[1], startIndex + 5,
                 endIndex, "start date/time");

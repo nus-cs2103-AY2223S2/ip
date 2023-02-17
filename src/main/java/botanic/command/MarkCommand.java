@@ -3,7 +3,7 @@ package botanic.command;
 import botanic.exception.BotanicException;
 import botanic.storage.Storage;
 import botanic.task.TaskList;
-import botanic.ui.Ui;
+import botanic.gui.Gui;
 
 /**
  * Encapsulates the related fields and behavior of the command to mark a task as done.
@@ -24,12 +24,12 @@ public class MarkCommand extends Command {
      *
      * @param tasks The ArrayList of tasks.
      * @param storage The class that reads and write program data to hard drive.
-     * @param ui The class that handles interaction with the users.
+     * @param gui The class that handles interaction with the users.
      * @return A string message to signify the success or failure of task executed.
      * @throws BotanicException If given index is out of bounds.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) throws BotanicException {
+    public String execute(TaskList tasks, Storage storage, Gui gui) throws BotanicException {
         return tasks.markIsDone(this.index);
     }
 }

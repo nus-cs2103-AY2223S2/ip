@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import botanic.Formatter;
+import botanic.gui.Gui;
 import botanic.exception.OutOfBoundsException;
 
 /**
@@ -14,6 +15,7 @@ public class TaskList {
      * An ArrayList to store the tasks.
      */
     private ArrayList<Task> tasks;
+    private Gui gui = new Gui();
 
     /**
      * Instantiates TaskList with no arguments given.
@@ -49,9 +51,8 @@ public class TaskList {
     public String add(Task task) {
         boolean hasAdded = this.tasks.add(task);
         assert hasAdded : "Task is not added to the task basket successfully.";
-        String output = "Pear-fect! I've added this task:\n " + task + "\nNow you have "
-                + this.tasks.size() + " task(s) in your basket.\n";
-        return output;
+        String response = gui.getAddSuccessMsg(task, this.tasks.size());
+        return response;
     }
 
     /**
@@ -64,17 +65,13 @@ public class TaskList {
      */
     public String delete(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.tasks.size()) {
-            throw new OutOfBoundsException("Item at given index does not exist! "
-                    + "Please enter a valid index.");
+            throw new OutOfBoundsException(gui.getOutOfBoundsErrorMsg());
         }
         assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
 
         Task removed = this.tasks.remove(index);
         assert removed != null : "Task at index not removed.";
-
-        return "Gourd it! I've removed this task:\n " + " "
-                + removed + "\nNow you have " + this.tasks.size()
-                + " task(s) in your basket.\n";
+        return gui.getDeleteSuccessMsg(removed, this.tasks.size());
     }
 
     /**
@@ -87,14 +84,13 @@ public class TaskList {
      */
     public String markIsDone(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.tasks.size()) {
-            throw new OutOfBoundsException("Item at given index does not exist! "
-                    + "Please enter a valid index.");
+            throw new OutOfBoundsException(gui.getOutOfBoundsErrorMsg());
         }
         assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
 
-        this.tasks.get(index).markIsDone();
-        return "Sweet! I've marked this task as done:\n "
-                + this.tasks.get(index) + "\n";
+        Task task = this.tasks.get(index);
+        task.markIsDone();
+        return gui.getMarkSuccessMsg(task);
     }
 
     /**
@@ -107,14 +103,13 @@ public class TaskList {
      */
     public String unmarkIsDone(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.tasks.size()) {
-            throw new OutOfBoundsException("Item at given index does not exist! "
-                    + "Please enter a valid index.");
+            throw new OutOfBoundsException(gui.getOutOfBoundsErrorMsg());
         }
         assert index > 0 && index < this.tasks.size() : "Index given is out of bounds";
 
-        this.tasks.get(index).unmarkIsDone();
-        return "Grape! I've marked this task as not done:\n "
-                + this.tasks.get(index) + "\n";
+        Task task = this.tasks.get(index);
+        task.unmarkIsDone();
+        return gui.getUnmarkSuccessMsg(task);
     }
 
     /**
@@ -125,17 +120,10 @@ public class TaskList {
     public String print() {
         int size = this.tasks.size();
         if (size == 0) {
-            return "There are no items in your basket.\n"
-                    + "Start adding some!\n";
+            return gui.getNoItemErrorMsg();
         }
         assert size != 0 : "List size is 0";
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your basket:");
-        for (int i = 0; i < size; i++) {
-            sb.append(String.format("\n%d. %s", (i + 1), this.tasks.get(i)));
-        }
-        return sb.toString();
+        return gui.printTasks(this);
     }
 
     /**
@@ -147,23 +135,19 @@ public class TaskList {
      */
     public String findAllMatch(String keyword) {
         int size = this.tasks.size();
-        int currIndex = 0;
-        int printIndex = 1;
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your basket:");
-        while (currIndex < size) {
+        TaskList searchResult = new TaskList();
+        for (int currIndex = 0; currIndex < size; currIndex++) {
             Task curr = this.tasks.get(currIndex);
             if (curr.containKeyword(" " + keyword + " ")) {
-                sb.append(String.format("\n%d. %s", printIndex, curr));
-                printIndex++;
+                searchResult.add(curr);
             }
-            currIndex++;
         }
-        if (printIndex == 1) {
-            return "None of the items in your basket completely matches with \"" + keyword + "\"";
+        int resultSize = searchResult.getTaskList().size();
+        if (resultSize > 0) {
+            return gui.getFindResult(searchResult);
         }
-        assert printIndex > 1 : "Item could not be found.";
-        return sb.toString();
+        assert resultSize < 0 : "Items found but not printed.";
+        return gui.getNoCompleteMatchErrorMsg(keyword);
     }
 
     /**
@@ -175,23 +159,19 @@ public class TaskList {
      */
     public String findFlexibly(String keyword) {
         int size = this.tasks.size();
-        int currIndex = 0;
-        int printIndex = 1;
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your basket:");
-        while (currIndex < size) {
+        TaskList searchResult = new TaskList();
+        for (int currIndex = 0; currIndex < size; currIndex++) {
             Task curr = this.tasks.get(currIndex);
             if (curr.containKeyword(keyword)) {
-                sb.append(String.format("\n%d. %s", printIndex, curr));
-                printIndex++;
+                searchResult.add(curr);
             }
-            currIndex++;
         }
-        if (printIndex == 1) {
-            return "None of the items in your basket contains the keyword \"" + keyword + "\"";
+        int resultSize = searchResult.getTaskList().size();
+        if (resultSize > 0) {
+            return gui.getFindResult(searchResult);
         }
-        assert printIndex > 1 : "Item could not be found.";
-        return sb.toString();
+        assert resultSize < 0 : "Items found but not printed.";
+        return gui.getNoPartialMatchErrorMsg(keyword);
     }
 
     /**
@@ -203,23 +183,34 @@ public class TaskList {
      */
     public String findDate(LocalDate dateToFind) {
         int size = this.tasks.size();
-        int currIndex = 0;
-        int printIndex = 1;
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your basket:");
-        while (currIndex < size) {
+        TaskList searchResult = new TaskList();
+        for (int currIndex = 0; currIndex < size; currIndex++) {
             Task curr = this.tasks.get(currIndex);
             if (curr.containDate(dateToFind)) {
-                sb.append(String.format("\n%d. %s", printIndex, curr));
-                printIndex++;
+                searchResult.add(curr);
             }
-            currIndex++;
         }
-        if (printIndex == 1) {
-            String dateFormatted = Formatter.formatDateForPrint(dateToFind);
-            return "None of the items in your basket have the date \"" + dateFormatted + "\"";
+        int resultSize = searchResult.getTaskList().size();
+        if (resultSize > 0) {
+            return gui.getFindResult(searchResult);
         }
-        assert printIndex > 1 : "Item could not be found.";
+        assert resultSize < 0 : "Items found but not printed.";
+        String dateFormatted = Formatter.formatDateForPrint(dateToFind);
+        return gui.getNoDateMatchErrorMsg(dateFormatted);
+    }
+
+    /**
+     * Gets a string representation of all the tasks in the list.
+     *
+     * @return A string representation of the list.
+     */
+    @Override
+    public String toString() {
+        int size = this.tasks.size();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            sb.append(String.format("%d. %s\n", (i + 1), this.tasks.get(i)));
+        }
         return sb.toString();
     }
 }
