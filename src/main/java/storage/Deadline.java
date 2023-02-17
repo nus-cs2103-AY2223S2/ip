@@ -36,4 +36,13 @@ public class Deadline extends Task {
     public String toData() {
         return String.format("D | %s | %s", super.toData(), by);
     }
+
+    @Override
+    public int compareTo(Task other) {
+        if (other instanceof Deadline) {
+            Deadline d = (Deadline) other;
+            return this.by.compareTo(d.by);
+        }
+        return super.compareTo(other);
+    }
 }
