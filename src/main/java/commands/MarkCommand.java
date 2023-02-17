@@ -10,7 +10,7 @@ public class MarkCommand extends Command {
     private int index;
     public MarkCommand(boolean toMark, int i) {
         this.toMark = toMark;
-        this.index = i;
+        this.index = i-1;
     }
 
     public void execute(TaskList tasklist, Ui ui, Storage storage) {

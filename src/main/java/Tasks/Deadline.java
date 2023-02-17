@@ -12,7 +12,7 @@ import parser.ParsedDate;
 public class Deadline extends Task {
     private ParsedDate endDate;
 
-    public Deadline(String name, LocalDateTime endDate) throws NoTaskDescriptionException{
+    public Deadline(String name, LocalDateTime endDate) throws NoTaskDescriptionException {
         super(name, "Deadline");
         this.endDate = new ParsedDate(endDate);
     }
