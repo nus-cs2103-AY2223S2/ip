@@ -77,12 +77,18 @@ public class Parser {
         }
         if (command.matches(TODO_PATTERN)) {
             String taskDescription = command.substring(5);
+            if (taskDescription.replaceAll("\\s+", "").isBlank()) {
+                throw new DukeException("Empty description detected.");
+            }
             task = new Todo(taskDescription);
         } else if (command.matches(DEADLINE_PATTERN)) {
             String description = command.substring(9);
             String[] temp = description.split("\\s*/by\\s*");
             String taskDescription = temp[0];
             String by = temp[1];
+            if (taskDescription.replaceAll("\\s+", "").isBlank()) {
+                throw new DukeException("Empty description detected.");
+            }
             task = new Deadline(taskDescription, by);
         } else { // (command.matches(EVENT_PATTERN)) {
             String description = command.substring(6);
@@ -93,6 +99,9 @@ public class Parser {
             String to = time[1];
             if (convertDateTime(from).isAfter(convertDateTime(to))) {
                 throw new DukeException("OOPS!!! Wrong date time ordering");
+            }
+            if (taskDescription.replaceAll("\\s+", "").isBlank()) {
+                throw new DukeException("Empty description detected.");
             }
             task = new Event(taskDescription, from, to);
         }

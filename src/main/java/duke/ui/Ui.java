@@ -27,7 +27,7 @@ public class Ui {
         line();
         System.out.println("Hello from\n" + LOGO);
         line();
-        System.out.println("Hello! I'm duke.main.Duke");
+        System.out.println("Hello! I'm Jamie");
         System.out.println("What can I do for you?");
         line();
     }

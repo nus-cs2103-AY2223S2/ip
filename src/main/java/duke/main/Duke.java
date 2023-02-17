@@ -28,18 +28,18 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private static final String INSTRUCTIONS = "Didn't catch that, please input valid command. \n \n"
             + "Help me understand by following this format: \n \n \n"
-            + "todo ### \n \n"
-            + "event ### /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm \n \n"
-            + "deadline ### /by dd/mm/yyyy hhmm \n \n"
+            + "todo {DESCRIPTION} \n \n"
+            + "event {DESCRIPTION} /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm \n \n"
+            + "deadline {DESCRIPTION} /by dd/mm/yyyy hhmm \n \n"
             + "Do ensure that you date time is of the correct format. \n"
             + "\n"
             + "To query or make changes in the list, use: \n"
             + "list \n"
-            + "find ### \n"
-            + "delete INDEX \n"
-            + "mark INDEX \n"
-            + "unmark INDEX \n \n"
-            + "### indicates the task and INDEX indicates the number on the list.";
+            + "find {DESCRIPTION} \n"
+            + "delete {INDEX} \n"
+            + "mark {INDEX} \n"
+            + "unmark {INDEX} \n \n"
+            + "{DESCRIPTION} indicates the task and {INDEX} indicates the number on the list.";
     private static Parser logic = new Parser();
     private static Storage store = new Storage();
     private static TaskList tasks = new TaskList();

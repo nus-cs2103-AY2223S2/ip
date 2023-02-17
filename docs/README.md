@@ -8,8 +8,9 @@ Jamie features a user-friendly interface that allows you to access all its funct
 
 **Notes about the command format:**
 - All `commands` must be in lower case.
+- Commands with missing fields will be ignored. For example, writing a command without a description `todo  <blank>`.
 - The date time format is as such, `dd/mm/yyyy HHmm`.
-- Jamie will reply with the correct format if the input is incorrect. Just follow the instructions and you will be fine.
+- Jamie will remind users of the correct format if the input is incorrect. Follow the instructions and you will be fine.
 
 
 ### Add a - `todo`
