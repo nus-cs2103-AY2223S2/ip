@@ -64,7 +64,7 @@ Adds a Deadline to the list. Fake Duke replies with a confirmation message.
 Got it. I've added this task:
 
 [D][ ] CS2103 IP
-(by: Fri 17-02-2023 23:59PM)
+(by: Fri 17-02-2023 23:59)
 
 Now you have 2 tasks in the list.
 ```
@@ -89,8 +89,8 @@ Adds an Event to the list. Fake Duke replies with a confirmation message.
 Got it. I've added this task:
 
 [E][ ] CS2103 Finals
-(from: Wed 26-04-2023 09:00AM
-to: Wed 26-04-2023 11:00AM)
+(from: Wed 26-04-2023 09:00
+to: Wed 26-04-2023 11:00)
 
 Now you have 3 tasks in the list.
 ```
@@ -114,11 +114,11 @@ Here are the tasks in your list:
 1. [T][ ] Read 1 chapter of a book
 ------------------------------------------
 2. [D][ ] CS2103 IP
-(by: Fri 17-02-2023 23:59PM)
+(by: Fri 17-02-2023 23:59)
 ------------------------------------------
 3. [E][ ] CS2103 Finals
-(from: Wed 26-04-2023 09:00AM
-to: Wed 26-04-2023 11:00AM)
+(from: Wed 26-04-2023 09:00
+to: Wed 26-04-2023 11:00)
 ```
 
 ### `mark` - Marks one or more tasks
@@ -143,7 +143,7 @@ Nice! I've marked:
 [T][X] Read 1 chapter of a book
 ------------------------------------------
 [D][X] CS2103 IP
-(by: Fri 17-02-2023 23:59PM)
+(by: Fri 17-02-2023 23:59)
 ```
 
 ### `unmark` - Unmarks one or more tasks
@@ -168,7 +168,7 @@ OK, I've unmarked:
 [T][ ] Read 1 chapter of a book
 ------------------------------------------
 [D][ ] CS2103 IP
-(by: Fri 17-02-2023 23:59PM)
+(by: Fri 17-02-2023 23:59)
 ```
 
 ### `delete` - Deletes one or more tasks
@@ -193,7 +193,7 @@ Noted. I've removed:
 [T][ ] Read 1 chapter of a book 
 ------------------------------------------
 [D][ ] CS2103 IP 
-(by: Fri 17-02-2023 23:59PM)
+(by: Fri 17-02-2023 23:59)
 
 Now you have 1 task in the list. 
 ```
@@ -218,11 +218,11 @@ Tasks with descriptions containing 'CS' will be replied by Fake Duke.
 Here are the matching tasks in your list:
 ------------------------------------------
 1. [D][ ] CS2103 IP 
-(by: Fri 17-02-2023 23:59PM)
+(by: Fri 17-02-2023 23:59)
 ------------------------------------------
 2. [E][ ] CS2103 Finals 
-(from: Wed 26-04-2023 09:OOAM 
-to: Wed 26-04-2023 11:00AM) 
+(from: Wed 26-04-2023 09:OO 
+to: Wed 26-04-2023 11:00) 
 ```
 
 ### `sort` - Sorts all the deadlines or events based on date time
@@ -246,10 +246,10 @@ A list of sorted deadlines will be replied by Fake Duke.
 Here are the matching tasks in your list:
 ------------------------------------------
 1. [D][ ] CS2103 IP 
-(by: Fri 17-02-2023 23:59PM)
+(by: Fri 17-02-2023 23:59)
 ------------------------------------------
 2. [D][ ] submit proposal 
-(by: Sat 17-02-2024 23:59PM) 
+(by: Sat 17-02-2024 23:59) 
 ```
 
 ### `bye` - Exiting from Fake Duke
