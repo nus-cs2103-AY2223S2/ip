@@ -28,6 +28,10 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Database database) throws DukeException {
         assert this.isActive();
+        if (taskList.length() == 0) {
+            ui.response("I ain't got anything to list yet! Add a task in first");
+            return;
+        }
         StringBuilder res = new StringBuilder(FRAME);
         for (int i = 0; i < taskList.length(); i++) {
             Task task = taskList.getTask(i + 1);
