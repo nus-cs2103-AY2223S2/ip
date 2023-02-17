@@ -3,6 +3,7 @@ package duke.gui;
 import duke.Duke;
 import duke.commands.ByeCmd;
 import duke.commands.Command;
+import duke.commands.CommandInput;
 import duke.exceptions.CommandExecutionError;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -26,10 +27,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /**
+     * Initializes the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
     }
 
     /**
@@ -40,7 +43,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String commandInput = userInput.getText();
         userInput.clear();
-        Command command = duke.getCommand(commandInput);
+        Command command = CommandInput.getCommand(commandInput, duke.getTasks());
         String response;
         try {
             response = command.execute();
@@ -56,10 +59,18 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /** Sets a given duke instance to be the one to perform operations on. */
     public void setDuke(Duke duke) {
         this.duke = duke;
     }
 
+    /**
+     * Displays a specified message in the GUI for a specified profile.
+     *
+     * @param profile profile to attribute the message to
+     * @param message message text
+     * @param highlightError whether to flag the message as an error/invalid message
+     */
     public void displayMessage(Profile profile, String message, boolean highlightError) {
         DialogBox dialogBox;
         switch(profile) {

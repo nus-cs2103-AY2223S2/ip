@@ -31,6 +31,7 @@ public class TaskList {
 
     /**
      * Gets number of tasks in the list.
+     *
      * @return Number of tasks
      */
     public int countTasks() {
@@ -103,6 +104,11 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Gets due date of task.
+     *
+     * @return due date of task
+     */
     public TaskList viewSched(LocalDate date) {
         TaskList result = new TaskList();
         this.tasks.stream().forEach(task -> {

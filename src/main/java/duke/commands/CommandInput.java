@@ -31,8 +31,8 @@ public enum CommandInput {
     /**
      * Gets the type of command that the user entered.
      *
-     * @param commandLine Command line input from user
-     * @return CommandInput type of corresponding command
+     * @param commandLine command line input from user
+     * @return commandInput type of corresponding command
      */
     private static CommandInput getCommandInput(String commandLine) {
         String commandInput = Parser.parseCommandInput(commandLine);
@@ -41,7 +41,15 @@ public enum CommandInput {
         return command.isEmpty() ? UNRECOGNIZED_CMD : command.get();
     }
 
-    public static Command getCommandFromInput(String commandLine, TaskList tasks) {
+    /**
+     * From a given string command input from the user,
+     * get its corresponding "Command" object.
+     *
+     * @param commandLine command input from user
+     * @param tasks task list to perform command on
+     * @return corresponding Command object
+     */
+    public static Command getCommand(String commandLine, TaskList tasks) {
         CommandInput commandInput = getCommandInput(commandLine);
         switch (commandInput) {
         case LIST:

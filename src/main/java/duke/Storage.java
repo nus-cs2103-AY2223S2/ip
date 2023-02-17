@@ -12,7 +12,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 /**
- * Functions related to saving/loading data to/from files.
+ * Methods related to saving/loading data to/from files.
  */
 public class Storage {
 

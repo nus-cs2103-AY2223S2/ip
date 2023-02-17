@@ -12,6 +12,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor method.
+     *
      * @param taskName Task name
      * @param isDone Completion status of task
      */
@@ -21,6 +22,7 @@ public class ToDo extends Task {
 
     /**
      * Factory method.
+     *
      * @param commandInput Command line input that the user entered.
      * @return New ToDo task
      * @throws TaskNameNotSpecified Task name was not specified
@@ -35,13 +37,18 @@ public class ToDo extends Task {
 
     /**
      * Represents fields of this task as a string
+     *
      * @return String representation of fields in this task
      */
     @Override
     public String stringFields() {
         return "";
     }
-
+    /**
+     * Gets due date of task
+     *
+     * @return null, due date is not saved for ToDo
+     */
     @Override
     public LocalDate getEndDate() {
         return null;

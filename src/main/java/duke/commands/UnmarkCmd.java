@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.exceptions.ListIndexMissing;
+import duke.parsing.MessageFormat;
 import duke.parsing.Parser;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -17,8 +17,8 @@ public class UnmarkCmd extends Command {
     /**
      * Constructor method.
      *
-     * @param taskList Task list of the task to unmark
-     * @param lineInput Command line input that the user entered
+     * @param taskList task list of the task to unmark
+     * @param lineInput command line input that the user entered
      */
     public UnmarkCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
@@ -32,6 +32,6 @@ public class UnmarkCmd extends Command {
         assert taskToUnmark.getIsDone() == false;
         String output = "I've marked this task as incomplete:";
         return String.format("%s\n%s", output,
-                Ui.indentString(taskToUnmark.toString(), 1));
+                MessageFormat.indentString(taskToUnmark.toString(), 1));
     }
 }

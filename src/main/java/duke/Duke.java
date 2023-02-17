@@ -2,8 +2,6 @@ package duke;
 
 import java.io.IOException;
 
-import duke.commands.Command;
-import duke.commands.CommandInput;
 import duke.tasks.TaskList;
 
 /**
@@ -12,6 +10,9 @@ import duke.tasks.TaskList;
 public class Duke {
     private TaskList tasks;
 
+    /**
+     * Constructor method. Instantiates and loads a saved task list from a data file.
+     */
     public Duke() {
         tasks = new TaskList();
         try {
@@ -21,10 +22,20 @@ public class Duke {
         }
     }
 
-    public Command getCommand(String commandInput) {
-        return CommandInput.getCommandFromInput(commandInput, this.tasks);
+    /**
+     * Gets task list
+     * @return task list
+     */
+    public TaskList getTasks() {
+        return this.tasks;
     }
 
+    /**
+     * Evaluate if command execution was successful.
+     *
+     * @param response command input from user
+     * @return whether command execution was succesful
+     */
     public boolean isSuccessfulExecution(String response) {
         return response.startsWith("I couldn't do what you asked for.");
     }

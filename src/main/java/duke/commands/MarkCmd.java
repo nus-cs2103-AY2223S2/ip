@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.exceptions.ListIndexMissing;
+import duke.parsing.MessageFormat;
 import duke.parsing.Parser;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -17,8 +17,8 @@ public class MarkCmd extends Command {
     /**
      * Constructor method.
      *
-     * @param taskList Task list of the task to mark
-     * @param lineInput Command line input that the user entered
+     * @param taskList task list of the task to mark
+     * @param lineInput command line input that the user entered
      */
     public MarkCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
@@ -31,6 +31,6 @@ public class MarkCmd extends Command {
         assert taskToMark.getIsDone() == true;
         String output = "Wonderful. You've completed the task:";
         return String.format("%s\n%s", output,
-                Ui.indentString(taskToMark.toString(), 1));
+                MessageFormat.indentString(taskToMark.toString(), 1));
     }
 }

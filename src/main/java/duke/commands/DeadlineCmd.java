@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.exceptions.CommandExecutionError;
+import duke.parsing.MessageFormat;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -19,8 +19,8 @@ public class DeadlineCmd extends Command {
     /**
      * Constructor method.
      *
-     * @param taskList Task list to add the Deadline task to
-     * @param lineInput Command line input that the user entered
+     * @param taskList task list to add the Deadline task to
+     * @param lineInput command line input that the user entered
      */
     public DeadlineCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
@@ -32,7 +32,7 @@ public class DeadlineCmd extends Command {
         taskList.add(this.deadline);
 
         return String.format("Well, well... another task to the list:\n%s\n%s",
-                Ui.indentString(this.deadline.toString(), 1),
-                Ui.numTaskToString(taskList.countTasks()));
+                MessageFormat.indentString(this.deadline.toString(), 1),
+                MessageFormat.numTaskToString(taskList.countTasks()));
     }
 }

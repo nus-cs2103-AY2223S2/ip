@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.exceptions.CommandExecutionError;
+import duke.parsing.MessageFormat;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -20,8 +20,8 @@ public class EventCmd extends Command {
     /**
      * Constructor method.
      *
-     * @param taskList Task list to add the Event task to
-     * @param lineInput Command line input that the user entered
+     * @param taskList task list to add the Event task to
+     * @param lineInput command line input that the user entered
      */
     public EventCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
@@ -33,7 +33,7 @@ public class EventCmd extends Command {
         taskList.add(this.event);
 
         return String.format("A new event! I hope it's at night:\n%s\n%s",
-                Ui.indentString(this.event.toString(), 1),
-                Ui.numTaskToString(taskList.countTasks()));
+                MessageFormat.indentString(this.event.toString(), 1),
+                MessageFormat.numTaskToString(taskList.countTasks()));
     }
 }

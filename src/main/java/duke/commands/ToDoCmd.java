@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.exceptions.CommandExecutionError;
+import duke.parsing.MessageFormat;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
@@ -18,8 +18,8 @@ public class ToDoCmd extends Command {
     /**
      * Constructor method.
      *
-     * @param taskList Task list to add the ToDo task to
-     * @param lineInput Command line input that the user entered
+     * @param taskList task list to add the ToDo task to
+     * @param lineInput command line input that the user entered
      */
     public ToDoCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
@@ -31,7 +31,7 @@ public class ToDoCmd extends Command {
         taskList.add(this.toDo);
 
         return String.format("I'll remember this task:\n%s\n%s",
-                Ui.indentString(this.toDo.toString(), 1),
-                Ui.numTaskToString(taskList.countTasks()));
+                MessageFormat.indentString(this.toDo.toString(), 1),
+                MessageFormat.numTaskToString(taskList.countTasks()));
     };
 }

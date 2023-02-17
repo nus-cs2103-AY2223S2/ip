@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.exceptions.CommandExecutionError;
+import duke.parsing.MessageFormat;
 import duke.parsing.Parser;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -18,8 +18,8 @@ public class DeleteCmd extends Command {
     /**
      * Constructor method.
      *
-     * @param taskList Task list to remove the task from
-     * @param lineInput Command line input that the user entered
+     * @param taskList task list to remove the task from
+     * @param lineInput command line input that the user entered
      */
     public DeleteCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
@@ -31,7 +31,7 @@ public class DeleteCmd extends Command {
         this.task = this.taskList.removeTask(index);
 
         return String.format("The task has disappeared into the night...:\n%s\n%s",
-                Ui.indentString(this.task.toString(), 1),
-                Ui.numTaskToString(taskList.countTasks()));
+                MessageFormat.indentString(this.task.toString(), 1),
+                MessageFormat.numTaskToString(taskList.countTasks()));
     }
 }

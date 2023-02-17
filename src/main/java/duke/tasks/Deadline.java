@@ -18,6 +18,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor method.
+     *
      * @param taskName Task name
      * @param dueDate Due date of task
      * @param isDone Task completion status
@@ -30,6 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Factory method.
+     *
      * @param commandInput Command line input that the user entered.
      * @return New Deadline task
      * @throws TaskNameNotSpecified Task name was not specified
@@ -41,7 +43,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Represents fields of this task as a string
+     * Represents fields of this task as a string.
+     *
      * @return String representation of fields in this task
      */
     @Override
@@ -51,6 +54,11 @@ public class Deadline extends Task {
         return String.format(" (by: %s)", dateString);
     }
 
+    /**
+     * Gets due date of task.
+     *
+     * @return due date of task
+     */
     @Override
     public LocalDate getEndDate() {
         return this.chornoDueDate.get();

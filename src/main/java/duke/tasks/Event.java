@@ -50,6 +50,7 @@ public class Event extends Task {
 
     /**
      * Represents fields of this task as a string
+     *
      * @return String representation of fields in this task
      */
     @Override
@@ -61,6 +62,12 @@ public class Event extends Task {
         return String.format(" (from: %s to: %s)", fromDateString, toDateString);
     }
 
+
+    /**
+     * Gets due date of task.
+     *
+     * @return due date of task
+     */
     @Override
     public LocalDate getEndDate() {
         return this.chronoToDate.get();

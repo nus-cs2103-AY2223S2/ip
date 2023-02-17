@@ -21,6 +21,7 @@ public abstract class Task {
 
     /**
      * Marks this task as completed.
+     *
      * @return This task
      */
     public Task markDone() {
