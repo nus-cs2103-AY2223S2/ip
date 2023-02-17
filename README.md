@@ -19,7 +19,7 @@ Waffles got you covered.
 
 ### Download:
 * [Download](https://github.com/9fc70c892/ip/releases/download/A-Release/9fc70c892_ip.jar)
-* [User Guide](./data/README.md)
+* [User Guide](docs/README.md)
 ---
 If you are a Java programmer, you can experiment or add on to our [Source Code](https://github.com/9fc70c892/ip/)!
 
