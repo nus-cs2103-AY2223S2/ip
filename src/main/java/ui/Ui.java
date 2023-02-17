@@ -1,9 +1,9 @@
 package ui;
 
+import java.util.Scanner;
+
 import tasks.Task;
 import tasks.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user
@@ -16,6 +16,9 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Print the greeting message when booting the program
+     */
     public void greet() {
         System.out.println(LINE);
         System.out.println("\tHello! I'm duke.Duke\n\tWhat can I do for you?");
@@ -71,6 +74,9 @@ public class Ui {
         System.out.println("\t" + "Now you have " + taskList.getSize() + " tasks in the list");
     }
 
+    /**
+     * Message that popped if previous session have data
+     */
     public void saveTaskMsg() {
         System.out.println(LINE);
         System.out.println("\tSaved Tasks From Last Session");

@@ -1,12 +1,12 @@
 package commands;
 
+import java.io.IOException;
+
 import exceptions.EmptyTaskException;
 import storage.Storage;
 import tasks.TaskList;
 import tasks.ToDo;
 import ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents command for adding a ToDO
@@ -16,6 +16,13 @@ public class ToDoCommand extends Command {
         super(string);
     }
 
+    /**
+     * Execute adding a ToDo command
+     * @param tasks the current list of tasks
+     * @param ui the user interface
+     * @param storage the storage where the changes done by command action stored
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             if (super.getCommand().equals("")) {

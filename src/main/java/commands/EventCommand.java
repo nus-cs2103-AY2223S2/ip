@@ -1,12 +1,11 @@
 package commands;
 
-import exceptions.InvalidRequestException;
+import java.io.IOException;
+
 import storage.Storage;
 import tasks.Event;
 import tasks.TaskList;
 import ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents command for adding an event
@@ -16,6 +15,13 @@ public class EventCommand extends Command {
         super(string);
     }
 
+    /**
+     * Execute adding Event command
+     * @param tasks the current list of tasks
+     * @param ui the user interface
+     * @param storage the storage where the changes done by command action stored
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             String[] request = super.getCommand().split("/", 3);
