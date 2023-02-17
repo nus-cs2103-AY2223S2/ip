@@ -234,6 +234,29 @@ public class Ui {
     }
 
     /**
+     * Tags task (selected by position in list).
+     *
+     * @param tasks List of current tasks.
+     * @param parser Parser object to get task number and tag.
+     */
+    public StringBuilder tagTask(TaskList tasks, Parser parser) throws DukeException {
+        int taskNumber;
+        String tag;
+        StringBuilder sb = new StringBuilder();
+        try {
+            taskNumber = parser.getTaskNumber();
+            tag = parser.getTag();
+            tasks.getTask(taskNumber - 1).setTag(tag);
+            sb.append("I've tagged this task as #").append(tag).append("\n");
+            sb.append(tasks.getTask(taskNumber - 1).toString());
+            sb.append("\n");
+            return sb;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Input a valid task number.\n");
+        }
+    }
+
+    /**
      * Prints message to user indicating that loading from storage failed,
      * and that new empty task list will be created.
      */

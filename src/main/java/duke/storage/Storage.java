@@ -66,19 +66,19 @@ public class Storage {
 
             while (s.hasNextLine()) {
                 String taskData = s.nextLine();
-                String[] splitData = taskData.split("[|]", 5);
+                String[] splitData = taskData.split("[|]", 6);
 
                 Task task;
 
                 switch (taskData.charAt(0)) {
                 case 'T':
-                    task = new ToDo(splitData[2]);
+                    task = new ToDo(splitData[2], splitData[3]);
                     break;
                 case 'D':
-                    task = new Deadline(splitData[2], splitData[3]);
+                    task = new Deadline(splitData[2], splitData[3], splitData[4]);
                     break;
                 case 'E':
-                    task = new Event(splitData[2], splitData[3], splitData[4]);
+                    task = new Event(splitData[2], splitData[3], splitData[4], splitData[5]);
                     break;
                 default:
                     throw new DukeException("Invalid storage format.");
@@ -117,16 +117,21 @@ public class Storage {
                 text.append(task.getType()).append("|").append(task.getStatusIcon()).append("|");
 
                 if (task instanceof ToDo) {
-                    text.append(task.getDescription()).append("\n");
+                    text.append(task.getDescription());
                 } else {
                     text.append(task.getDescription()).append("|");
                     if (task instanceof Deadline) {
-                        text.append(((Deadline) task).getBy()).append("\n");
+                        text.append(((Deadline) task).getBy());
                     } else if (task instanceof Event) {
                         text.append(((Event) task).getFrom()).append("|")
-                                .append(((Event) task).getTo()).append("\n");
+                                .append(((Event) task).getTo());
                     }
                 }
+                text.append("|");
+                if (task.getTag() != null) {
+                    text.append(task.getTag());
+                }
+                text.append("\n");
                 fw.write(text.toString());
             }
             fw.close();

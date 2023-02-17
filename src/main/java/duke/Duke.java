@@ -161,6 +161,9 @@ public class Duke extends Application {
                 case "find":
                     response.append(ui.findAndListTasks(tasks, parser));
                     break;
+                case "tag":
+                    response.append(ui.tagTask(tasks, parser));
+                    break;
                 default:
                     response.append("I'm sorry, but I don't know what that means.");
                 }
