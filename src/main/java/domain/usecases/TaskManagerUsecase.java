@@ -326,6 +326,7 @@ public class TaskManagerUsecase implements CommandRegisterable {
         );
         nestable.registerIdentifiableExecutable(getDeleteExecutable());
         nestable.registerDisposable(getDisposable());
+        nestable.registerIdentifiableExecutable(getFindCommand());
         nestable.registerIdentifiableExecutable(getListWhenCommand());
     }
 
