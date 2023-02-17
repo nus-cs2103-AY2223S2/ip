@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -5,6 +7,29 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello Brother\n" + logo + "\nWhats up what can I do for you mi amigo");
+
+        Scanner inputScanner = new Scanner(System.in);
+        String input;
+        String output;
+
+        while(true) {
+            input = inputScanner.nextLine();
+
+            // level_1 feature: exit when user types "bye"
+            if (input.equalsIgnoreCase("bye")) {
+                break;
+            }
+
+            // test commit 2
+
+            output = input;
+            System.out.println("ok see you brother!");
+        }
+
+
     }
+
+
 }
+
