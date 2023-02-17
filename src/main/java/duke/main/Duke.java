@@ -168,7 +168,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) throws DukeException, IOException {
+    public String getResponse(String input) throws IOException {
         if (!isInitialised) {
             Storage.readSave(tasks);
             isInitialised = true;
@@ -176,28 +176,31 @@ public class Duke extends Application {
         if (!logic.isValidCommand(input)) {
             return INSTRUCTIONS;
         }
-
-        if (logic.isTaskCommand(input)) {
-            Task task = logic.toTask(input);
-            tasks.addTask(task);
-            return tasks.announceAddedString(task);
-        } else if (input.equals("bye")) {
-            return "Thank you and goodbye.";
-        } else if (input.equals("list")) {
-            return tasks.toString();
-        } else if (input.startsWith("mark")) {
-            int taskNumber = logic.indexToMark(input);
-            return tasks.taskMarkedAtIndexString(--taskNumber);
-        } else if (input.startsWith("unmark")) {
-            int taskNumber = logic.indexToUnmark(input);
-            return tasks.taskUnmarkedAtIndexString(--taskNumber);
-        } else if (input.startsWith("delete")) {
-            int taskNumber = logic.indexToDelete(input);
-            return tasks.deleteTaskAtIndexString(--taskNumber);
-        } else {
-            assert input.startsWith("find") == true : "unhandled command.";
-            String description = logic.commandToDescription(input); // find command
-            return tasks.matchDescriptionString(description);
+        try {
+            if (logic.isTaskCommand(input)) {
+                Task task = logic.toTask(input);
+                tasks.addTask(task);
+                return tasks.announceAddedString(task);
+            } else if (input.equals("bye")) {
+                return "Thank you and goodbye.";
+            } else if (input.equals("list")) {
+                return tasks.toString();
+            } else if (input.startsWith("mark")) {
+                int taskNumber = logic.indexToMark(input);
+                return tasks.taskMarkedAtIndexString(--taskNumber);
+            } else if (input.startsWith("unmark")) {
+                int taskNumber = logic.indexToUnmark(input);
+                return tasks.taskUnmarkedAtIndexString(--taskNumber);
+            } else if (input.startsWith("delete")) {
+                int taskNumber = logic.indexToDelete(input);
+                return tasks.deleteTaskAtIndexString(--taskNumber);
+            } else {
+                assert input.startsWith("find") == true : "unhandled command.";
+                String description = logic.commandToDescription(input); // find command
+                return tasks.matchDescriptionString(description);
+            }
+        } catch (DukeException e) {
+            return INSTRUCTIONS;
         }
     }
 }
