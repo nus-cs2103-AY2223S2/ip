@@ -1,7 +1,9 @@
 package duke.parser;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 
+import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongCommandException;
 import duke.exception.WrongFormatException;
@@ -41,34 +43,36 @@ public class Parser {
      * @throws WrongCommandException If wrong command word is being entered
      */
     public String performCommand(String input, Ui ui) {
-        String[] arrOfString = input.trim().split(" ");
+        String trimmedInput = input.trim();
+        String[] arrOfString = trimmedInput.split(" ", 2);
         String command = arrOfString[0];
         try {
             this.checkCommand(input, command);
             switch (command) {
             case "bye":
-                return HandleBye.performBye(input, ui);
+                return HandleBye.performBye(trimmedInput, ui);
             case "list":
-                return HandleList.performList(input, taskList, ui);
+                return HandleList.performList(trimmedInput, taskList, ui);
             case "mark":
-                return HandleMark.performMark(input, taskList, ui);
+                return HandleMark.performMark(trimmedInput, taskList, ui);
             case "unmark":
-                return HandleUnmark.performUnmark(input, taskList, ui);
+                return HandleUnmark.performUnmark(trimmedInput, taskList, ui);
             case "todo":
-                return HandleToDo.performToDo(input, taskList, ui);
+                return HandleToDo.performToDo(trimmedInput, taskList, ui);
             case "deadline":
-                return HandleDeadline.performDeadline(input, taskList, ui);
+                return HandleDeadline.performDeadline(trimmedInput, taskList, ui);
             case "event":
-                return HandleEvent.performEvent(input, taskList, ui);
+                return HandleEvent.performEvent(trimmedInput, taskList, ui);
             case "delete":
-                return HandleDelete.performDelete(input, taskList, ui);
+                return HandleDelete.performDelete(trimmedInput, taskList, ui);
             case "find":
-                return HandleFind.performFind(input, taskList, ui);
+                return HandleFind.performFind(trimmedInput, taskList, ui);
             default:
                 assert false : "Unable to process command";
                 return ui.showError("Please enter a valid command and/or task!");
             }
-        } catch (EmptyDescriptionException | WrongCommandException | WrongFormatException e) {
+        } catch (EmptyDescriptionException | WrongCommandException
+                | WrongFormatException | DukeException e) {
             return ui.showError(e.getMessage());
         } catch (DateTimeParseException e) {
             return ui.showError("Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10");

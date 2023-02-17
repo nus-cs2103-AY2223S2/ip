@@ -24,7 +24,7 @@ public class HandleFind {
      * @throws WrongFormatException This exception is thrown when input is not in correct format
      */
     public static String performFind(String input, TaskList tasklist, Ui ui) throws WrongFormatException {
-        boolean correctFormat = input.trim().split(" ").length > 1;
+        boolean correctFormat = input.split(" ").length > 1;
         if (!correctFormat) {
             throw new WrongFormatException("find <Target word>");
         }

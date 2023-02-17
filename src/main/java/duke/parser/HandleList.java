@@ -21,7 +21,7 @@ public class HandleList {
      * @throws WrongFormatException This exception is thrown when input contains more words than "list"
      */
     public static String performList(String input, TaskList tasklist, Ui ui) throws WrongFormatException {
-        boolean correctFormat = input.trim().equals("list");
+        boolean correctFormat = input.equals("list");
 
         if (!correctFormat) {
             throw new WrongFormatException("list");

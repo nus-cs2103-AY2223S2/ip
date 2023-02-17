@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.exception.DukeException;
 import duke.exception.WrongFormatException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -22,17 +23,17 @@ public class HandleToDo {
      * @return A String to respond to user through ui, inform user whether task has been added or not
      * @throws WrongFormatException This exception is thrown when input is not in correct format
      */
-    public static String performToDo(String input, TaskList tasklist, Ui ui) throws WrongFormatException {
+    public static String performToDo(String input, TaskList tasklist, Ui ui) throws DukeException {
         String taskString;
         try {
             taskString = input.trim().substring(5);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new WrongFormatException("todo <Task description>");
+            throw new DukeException("Oi! You didn't enter task description!");
         }
 
         Task taskToDo = new ToDo(taskString);
         if (tasklist.checkDuplicates(taskToDo)) {
-            return ui.showError("OOPS! You have added this task before already!");
+            throw new DukeException("OOPS! You have added this task before already!");
         }
 
         tasklist.addTask(taskToDo);
