@@ -15,7 +15,7 @@ and events while still having the benefits of a Graphical User Interface (GUI).
 * help
 * bye
 
-####Things to take note about the format:
+#### Things to take note about the format:
 Words in `<>` are parameters that **must be supplied** by the user.
 e.g. mark <task number>, the user must key in a task number when using mark commands.
 
