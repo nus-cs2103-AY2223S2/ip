@@ -2,7 +2,9 @@ package Ava.commands;
 
 import Ava.Storage;
 import Ava.TaskList;
-import Ava.exceptions.AvaException;
+import Ava.exceptions.CannotCreateDirectory;
+import Ava.exceptions.CannotReadFromFile;
+import Ava.exceptions.DateTimeNotParsed;
 
 /**
  * Exits the Program
@@ -19,7 +21,7 @@ public class Enter implements AvaCommand {
      * @return False to indicate program has stopped running
      */
     @Override
-    public boolean run(TaskList t, Storage s) throws AvaException {
+    public boolean run(TaskList t, Storage s) throws CannotCreateDirectory,CannotReadFromFile, DateTimeNotParsed {
             t.retreiveStorage(s);
             return true;
     };
@@ -27,6 +29,7 @@ public class Enter implements AvaCommand {
 
     @Override
     public String output(String formatSpace){
+
         return INTRO_MESSAGE + "\n" + GREET + "\n" + ASK_MESSAGE;
     }
 }

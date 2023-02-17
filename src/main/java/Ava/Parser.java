@@ -1,8 +1,17 @@
 package Ava;
 
-import Ava.commands.*;
+import Ava.commands.AddTask;
+import Ava.commands.DeleteTask;
+import Ava.commands.Enter;
+import Ava.commands.Exit;
+import Ava.commands.FindTask;
+import Ava.commands.ListTask;
+import Ava.commands.MarkTask;
+import Ava.commands.UnmarkTask;
+import Ava.commands.AvaCommand;
 import Ava.exceptions.AvaException;
 import Ava.exceptions.CommandNotFoundException;
+
 
 
 public class Parser {
@@ -14,53 +23,57 @@ public class Parser {
         try {
             String indentifier = inputArray[0];
             switch (indentifier) {
-                case "enter":
-                    command = new Enter();
-                    break;
-                case "todo":
-                    command = new AddTask(parseTodo(inputArray[1]), Ava.TASK_TYPE.TODO);
-                    break;
-                case "deadline":
-                    command = new AddTask(parseDeadline(inputArray[1]), Ava.TASK_TYPE.DEADLINE);
-                    break;
-                case "event" :
-                    command = new AddTask(parseEvent(inputArray[1]), Ava.TASK_TYPE.EVENT);
-                    break;
-                case "mark":
-                    command = new MarkTask(parseMarkUnmark(inputArray[1]));
-                    break;
-                case "unmark":
-                    command = new UnmarkTask(parseMarkUnmark(inputArray[1]));
-                    break;
-                case "delete":
-                    command = new DeleteTask(parseDelete(inputArray[1]));
-                    break;
-                case "list" :
-                    command = new ListTask();
-                    break;
-                case "bye" :
-                    command = new Exit();
-                    break;
-                case "find":
-                    command = new FindTask(parseFindTask(inputArray[1]));
-                    break;
-                default:
-                    throw new CommandNotFoundException(input);
+            case "enter":
+                command = new Enter();
+                break;
+            case "todo":
+                command = new AddTask(parseTodo(inputArray[1]), Ava.TASK_TYPE.TODO);
+                break;
+            case "deadline":
+                command = new AddTask(parseDeadline(inputArray[1]), Ava.TASK_TYPE.DEADLINE);
+                break;
+            case "event" :
+                command = new AddTask(parseEvent(inputArray[1]), Ava.TASK_TYPE.EVENT);
+                break;
+            case "mark":
+                command = new MarkTask(parseMarkUnmark(inputArray[1]));
+                break;
+            case "unmark":
+                command = new UnmarkTask(parseMarkUnmark(inputArray[1]));
+                break;
+            case "delete":
+                command = new DeleteTask(parseDelete(inputArray[1]));
+                break;
+            case "list" :
+                command = new ListTask();
+                break;
+            case "bye" :
+                command = new Exit();
+                break;
+            case "find":
+                command = new FindTask(parseFindTask(inputArray[1]));
+                break;
+            default:
+                throw new CommandNotFoundException(input);
             }
             return command;
-        }catch (ArrayIndexOutOfBoundsException e){
-            throw new CommandNotFoundException("");
+        }catch (ArrayIndexOutOfBoundsException | CommandNotFoundException e){
+            //Only these errors are caught as the CommandNotFoundException needs to be supplied the wrong input.
+            throw new CommandNotFoundException(input);
         }
     }
     private String[] splitInput(String input){
+
         return input.split(" " , 2);
     }
 
     private String[] parseTodo(String mes){
+
         return new String[]{mes};
     }
 
     private String[] parseDeadline(String mes) {
+
         return mes.split("/by", 2);
     }
 
@@ -74,13 +87,17 @@ public class Parser {
         return output;
     }
     private String[] parseFindTask(String mes) {
+
         return new String[]{mes.trim()};
     }
 
     private String[] parseMarkUnmark(String mes){
+
         return new String[]{mes.trim()};
     }
+
     private String[] parseDelete(String mes){
+
         return new String[]{mes.trim()};
     }
 

@@ -3,8 +3,8 @@ package Ava.commands;
 
 import Ava.Storage;
 import Ava.TaskList;
-import Ava.exceptions.AvaException;
 import Ava.exceptions.CommandNotFoundException;
+
 
 /**
  * finds Task
@@ -17,9 +17,11 @@ public class FindTask implements AvaCommand {
 
     /**
      * @param parsedInput contains keyword to find
+     * @throws CommandNotFoundException inidicate incorrectly parsed input
      */
-    public FindTask(String[] parsedInput) throws AvaException {
+    public FindTask(String[] parsedInput) throws CommandNotFoundException {
         this.parsedInput = parsedInput;
+        this.isInputCorrect();
     }
 
     /**
@@ -29,7 +31,7 @@ public class FindTask implements AvaCommand {
      * @return
      */
     @Override
-    public boolean run(TaskList t, Storage s) throws AvaException {
+    public boolean run(TaskList t, Storage s) {
         this.keyword = this.parsedInput[0];
         this.tasks = t;
         return true;
@@ -41,6 +43,7 @@ public class FindTask implements AvaCommand {
      */
     @Override
     public String output(String formatSpace){
+
         return MESSAGE + "\n" + this.tasks.find(keyword, formatSpace);
     }
 
