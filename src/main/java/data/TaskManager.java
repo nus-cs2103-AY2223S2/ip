@@ -138,7 +138,7 @@ public class TaskManager {
         ArrayList<FreeTimeBlock> freeTimeBlocks = new ArrayList<>();
 
         if ((
-                eventsList.size() > 0)
+                !eventsList.isEmpty())
                         && (eventsList.get(0)
                 .getStartTime()
                 .compareTo(LocalDateTime.now()) > 0)) {
@@ -149,36 +149,27 @@ public class TaskManager {
 
             if (eventsList.isEmpty()) {
                 freeTimeBlocks.add(new FreeTimeBlock(null, null));
-                return freeTimeBlocks.stream()
-                        .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))
-                        .collect(Collectors.toCollection(ArrayList::new));
             }
-
             Event event = eventsList.get(0);
             freeTimeBlocks.add(new FreeTimeBlock(event.getEndTime(), null));
-            return freeTimeBlocks.stream()
-                    .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
 
-        LocalDateTime freeBlockStart = eventsList.get(0).getEndTime();
-        assert freeBlockStart != null;
-        LocalDateTime freeBlockEnd;
+        } else {
 
-        for (Event event: eventsList.subList(1, eventsList.size())) {
+            LocalDateTime freeBlockStart = eventsList.get(0).getEndTime();
+            assert freeBlockStart != null;
+            LocalDateTime freeBlockEnd;
 
-            if (freeBlockStart.compareTo(event.getStartTime()) < 0) {
-                freeBlockEnd = event.getStartTime();
-                freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, freeBlockEnd));
+            for (Event event: eventsList.subList(1, eventsList.size())) {
+                if (freeBlockStart.compareTo(event.getStartTime()) < 0) {
+                    freeBlockEnd = event.getStartTime();
+                    freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, freeBlockEnd));
+                }
+                if (event.getEndTime().compareTo(freeBlockStart) > 0) {
+                    freeBlockStart = event.getEndTime();
+                }
             }
-
-            if (event.getEndTime().compareTo(freeBlockStart) > 0) {
-                freeBlockStart = event.getEndTime();
-            }
+            freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, null));
         }
-
-        freeTimeBlocks.add(new FreeTimeBlock(freeBlockStart, null));
-
         return freeTimeBlocks.stream()
                 .filter((freeTimeBlock -> freeTimeBlock.isValidSlot(desiredFreeTime)))
                 .collect(Collectors.toCollection(ArrayList::new));
