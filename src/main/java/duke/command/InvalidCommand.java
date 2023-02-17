@@ -4,9 +4,20 @@ package duke.command;
 import duke.storage.TaskList;
 import duke.ui.Ui;
 public class InvalidCommand extends Command {
+    String message = "";
+
+    public InvalidCommand(String msg) {
+        this.message = msg;
+    }
+
+    public InvalidCommand() {}
 
     @Override
     public String execute(TaskList list, Ui ui) {
-        return ui.printInvalidCommandMessage();
+        if (message.equals("")) {
+            return ui.printInvalidCommandMessage();
+        } else {
+            return message;
+        }
     }
 }

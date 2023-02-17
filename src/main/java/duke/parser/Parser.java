@@ -25,8 +25,21 @@ public class Parser {
         return input.split(" ")[0].equals("find");
     }
     public boolean checkTask(String input) {
+        return checkTodo(input) || checkEvent(input) || checkDeadline(input);
+    }
+    public boolean checkDeadline(String input) {
         String cmd = input.split(" ")[0];
-        return cmd.equals("deadline") || cmd.equals("todo") || cmd.equals("event");
+        return cmd.equals("deadline") || cmd.equals("Deadline");
+    }
+
+    public boolean checkEvent(String input) {
+        String cmd = input.split(" ")[0];
+        return cmd.equals("event") || cmd.equals("Event");
+    }
+
+    public boolean checkTodo(String input) {
+        String cmd = input.split(" ")[0];
+        return cmd.equals("todo") || cmd.equals("Todo");
     }
     public boolean checkMark(String input) {
         return input.split(" ")[0].equals("mark");
@@ -44,6 +57,76 @@ public class Parser {
         return input.split(" ")[0].equals("delete");
     }
 
+    public boolean checkValidTask(String input) {
+        String[] inputs = input.split(" ");
+        return inputs.length >= 2;
+    }
+
+    public boolean checkValidDeadline(String input) {
+        String[] nameAndDeadline = input.split(" ", 2)[1].split(" /by ");
+        return nameAndDeadline.length >= 2;
+    }
+
+    public boolean checkValidEvent(String input) {
+        String[] nameAndStart = input.split(" ", 2)[1].split(" /from ");
+        if (nameAndStart.length < 2) {
+            return false;
+        }
+        String[] startAndEnd = nameAndStart[1].split(" /to ");
+        if (startAndEnd.length < 2) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidEvent(String input) {
+        String[] nameAndStart = input.split(" ", 2)[1].split(" /from ");
+        if (!checkValidEvent(input)) {
+            return false;
+        }
+        String[] startAndEnd = nameAndStart[1].split(" /to ");
+        String[] start = startAndEnd[0].split(" ");
+        String[] end = startAndEnd[1].split(" ");
+        if (!isValidDate(start[0]) || !isValidDate(end[0])) {
+            return false;
+        }
+        if (start.length > 1 && (!isValidTime(start[1]) || !isValidTime(end[1]))) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidDate(String input) {
+        String[] date = input.split("/");
+        if (date.length < 3 || date[2].length() != 4 ||
+                date[1].length() > 2 || date[0].length() > 2) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidTime(String input) {
+        String[] time = input.split("");
+        if (time.length != 4 || Integer.parseInt(input) > 2359) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidDeadline(String input) {
+        String[] nameAndDeadline = input.split(" ", 2)[1].split(" /by ");
+        if (!checkValidDeadline(input)) {
+            return false;
+        }
+        String[] deadline = nameAndDeadline[1].split(" ");
+        if (!isValidDate(deadline[0])) {
+            return false;
+        }
+        if (deadline.length == 2 && !isValidTime(deadline[1])) {
+            return false;
+        }
+        return true;
+    }
     public Command parse(String input) {
         Command cmd;
         if (checkList(input)) {
@@ -61,7 +144,17 @@ public class Parser {
             int num = Integer.parseInt(input.split(" ")[1]);
             cmd = new DeleteCommand(num);
         } else if (checkTask(input)) {
-            cmd = new AddCommand(input);
+            if (!checkValidTask(input)) {
+                cmd = new InvalidCommand("Please enter task description!");
+            } else if (checkDeadline(input) && !isValidDeadline(input)) {
+                cmd = new InvalidCommand("Format of deadline should be: " +
+                        "deadline <description> /by: <dd/mm/yyyy hhmm");
+            } else if (checkEvent(input) && !isValidEvent(input)) {
+                cmd = new InvalidCommand("Format of event should be: " +
+                        "event <description> /from: dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm");
+            } else {
+                cmd = new AddCommand(input);
+            }
         } else if (!isValidCommand(input)) {
             cmd = new InvalidCommand();
         } else {
@@ -77,7 +170,7 @@ public class Parser {
         switch(type) {
             case "todo": {
                 if (inputs.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
                 String name = input.split(" ", 2)[1];
                 newTask = new ToDo(name);
@@ -155,4 +248,5 @@ public class Parser {
         }
         return newTask;
     }
+
 }
