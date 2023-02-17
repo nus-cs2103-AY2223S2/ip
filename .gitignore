@@ -2,6 +2,12 @@
 /.idea/
 /out/
 /*.iml
+# Prevent class files from being tracked under git
+*.class
+
+
+# Data logger file
+src/main/data/seedu.duke.txt
 
 # Gradle build files
 /.gradle/
