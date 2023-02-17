@@ -1,8 +1,5 @@
-D | 1 | buying food | by: 11 Aug 2023 11:20
-E | 1 | meeting | from: 23 Feb 2023 20:00 | to: 12 Mar 2023 20:00
-D | 0 | homework | by: 20 Jun 2023 20:00
-T | 0 | eat
-E | 0 | run | from: 20 Feb 2023 20:00 | to: 21 Feb 2023 20:10
-T | 0 | eat
-D | 0 | run | by: 20 Feb 2023 20:00
-T | 0 | run
+T | 0 | forum post
+D | 1 | ip user guide | by: 17 Feb 2023 23:59
+D | 1 | ip release | by: 17 Feb 2023 23:59
+E | 1 | cs2103t lecture | from: 17 Feb 2023 14:00 | to: 17 Feb 2023 15:00
+E | 0 | tp group meeting | from: 19 Feb 2023 22:00 | to: 19 Feb 2023 23:00
