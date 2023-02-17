@@ -72,7 +72,7 @@ Clears all tasks in the existing task list.
 
 Format: `delete all`
 
-### Undo the most recent valid command - `undo`
+### Undoing the most recent valid command - `undo`
 
 Undo the most recent valid command, revert the task list back to before that command.
 
