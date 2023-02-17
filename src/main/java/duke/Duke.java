@@ -11,15 +11,11 @@ public class Duke {
     private TaskList tasks;
     private String filePath;
 
-    /**
-     * A public constructor to initialize Duke instance.
-     *
-     * @param filePath Path of file.
-     */
-    public Duke(String filePath) {
+    /** A public constructor to initialize Duke instance. */
+    public Duke() {
+        this.filePath = "./src/main/data/taskData.txt";
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
-        this.filePath = filePath;
         this.storage.loadData(this.tasks);
     }
 
