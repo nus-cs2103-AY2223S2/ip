@@ -44,7 +44,12 @@ public abstract class UserTask {
         return '/' + keyword + ' ';
     }
 
-    /** Update the completion status of this task. */
+    /** Get task completion status. */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /** Update task completion status. */
     public void setDone(boolean done) {
         isDone = done;
     }

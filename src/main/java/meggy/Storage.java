@@ -4,22 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
-import meggy.exception.Function;
 import meggy.exception.MeggyException;
-import meggy.task.UserTask;
 
 /** Save cross-session data in file. */
 public class Storage {
-    /** From "command" in a data line to the type of {@link UserTask} to be created. */
-    public static final Map<String, Function<String, UserTask>> DATA_ENTRY_TO_TASK = Map.of(
-            Resource.CMD_TODO, Util.TODO_NEW,
-            Resource.CMD_DDL, Util.DDL_NEW,
-            Resource.CMD_EVENT, Util.EVENT_NEW
-    );
     public final File dataFile;
 
     /**
@@ -38,7 +29,7 @@ public class Storage {
      * @param tasks Non-null. The task list to take snapshot.
      * @throws MeggyException If file IO throws {@link IOException}.
      */
-    public void save(ArrayList<UserTask> tasks) throws MeggyException {
+    public void save(TaskList tasks) throws MeggyException {
         final FileWriter fw;
         try {
             dataFile.createNewFile();
@@ -49,9 +40,7 @@ public class Storage {
             throw new MeggyException(Resource.ERR_FILE_WRITE + Resource.ERR_NO_FILE_ACCESS);
         }
         try {
-            for (UserTask t : tasks) {
-                fw.write(t.recreateCmd() + '\n');
-            }
+            fw.write(tasks.recreateCmds());
             fw.flush();
         } catch (IOException e) {
             throw new MeggyException(Resource.ERR_FILE_WRITE + Resource.ERR_IO);
@@ -69,10 +58,10 @@ public class Storage {
      * <p>
      * All file {@link IOException}s are ignored as if the file did not exist.
      *
-     * @param tasks Non-null. The task list to load in data.
+     * @param parser Non-null. The function that parses next line and make changes to the list.
      */
-    public void load(ArrayList<UserTask> tasks) {
-        assert tasks != null;
+    public void load(Consumer<String> parser) {
+        assert parser != null;
         final Scanner fileIn;
         try {
             fileIn = new Scanner(dataFile);
@@ -80,14 +69,7 @@ public class Storage {
             return;
         }
         while (fileIn.hasNextLine()) {
-            final Parser.JobAndArg<UserTask> jobAndArg = Parser.parseJobAndArg(DATA_ENTRY_TO_TASK, fileIn.nextLine());
-            final Function<String, UserTask> taskNew = jobAndArg.job;
-            if (taskNew != null) { // Command recognized
-                try {
-                    tasks.add(taskNew.apply(jobAndArg.args));
-                } catch (MeggyException ignored) {
-                } // If parsing fails for at a line, that line is skipped.
-            }
+            parser.accept(fileIn.nextLine());
         }
         fileIn.close();
     }

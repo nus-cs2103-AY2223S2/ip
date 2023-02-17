@@ -29,4 +29,18 @@ public class TaskList extends ArrayList<UserTask> {
         }
         return ans.toString();
     }
+
+    /** @return The command list that would add all the tasks. Each task completion status is kept. */
+    public String recreateCmds() {
+        final StringBuilder ans = new StringBuilder();
+        int i = 0;
+        for (UserTask task : this) {
+            i++;
+            ans.append(task.recreateCmd()).append('\n');
+            if (task.isDone()) {
+                ans.append(Resource.CMD_MARK).append(' ').append(i).append('\n');
+            }
+        }
+        return ans.toString();
+    }
 }

@@ -12,10 +12,14 @@ import meggy.task.UserTask;
 /** The chatbot. After initialization, interact by calling {@code getResponse} method. */
 public class Meggy {
     /**
-     * What to do when reaching different commands. Keys: non-null strings. Values: Non-null function that accepts
-     * unparsed string arguments and return chatbot response strings.
+     * What to do when reaching different commands.
+     * <p>
+     * Keys: non-null strings.
+     * <p>
+     * Values: Non-null function that accepts unparsed string arguments and return chatbot response strings. Must be the
+     * function that modifies task list of the command requires it.
      */
-    public final Map<String, Function<String, String>> usrCmdToJob;
+    public final Map<String, Function<String, String>> cmdToJob;
 
     /** What to do when the user-typed the command is unknown. Currently: notify user command is unknown. */
     public final Function<String, String> unknownCmdBehavior = s -> {
@@ -29,7 +33,7 @@ public class Meggy {
     /** Creates a chatbot agent instance. */
     public Meggy() {
         tasks = new TaskList();
-        usrCmdToJob = Map.of(
+        cmdToJob = Map.of(
                 Resource.CMD_EXIT, s -> Resource.FAREWELL,
                 Resource.CMD_LIST, s -> Resource.NOTIF_LIST + tasks,
                 Resource.CMD_MARK, s -> markTaskStatus(s, true),
@@ -41,7 +45,7 @@ public class Meggy {
                 Resource.CMD_FIND, this::find
         );
         storage = new Storage(new File(Util.DATA_FILE_PATH));
-        storage.load(tasks);
+        storage.load(this::getResponse);
     }
 
 
@@ -52,7 +56,7 @@ public class Meggy {
      * @param newStatus The task's updated status.
      * @return Response to 'mark/unmark' command.
      */
-    private String markTaskStatus(String args, boolean newStatus) {
+    private String markTaskStatus(String args, boolean newStatus) throws MeggyException {
         assert args != null;
         final int idx;
         try {
@@ -63,6 +67,7 @@ public class Meggy {
         }
         final UserTask task = tasks.get(idx);
         task.setDone(newStatus);
+        storage.save(tasks);
         return (newStatus ? Resource.NOTIF_MARK : Resource.NOTIF_UNMK) + Resource.TASK_STRING_INDENT + task + '\n';
     }
 
@@ -141,7 +146,7 @@ public class Meggy {
     }
 
     /**
-     * Parses and executes user's input line.
+     * Parses and executes user's input line. Changes task list accordingly.
      *
      * @param in Non-null. User's raw input line.
      * @return Complete response of this chatbot. Either the response of a valid query or error message.
@@ -149,12 +154,11 @@ public class Meggy {
     public String getResponse(String in) {
         assert in != null;
         try {
-            final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(usrCmdToJob, in);
+            final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(cmdToJob, in);
             final Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
             return job.apply(jobAndArg.args);
         } catch (MeggyException e) {
             return e.getMessage();
         }
-        // TODO Bye command functionality discontinued
     }
 }
