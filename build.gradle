@@ -49,14 +49,22 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Riddle"
     archiveClassifier = null
 }
 
 run{
     standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'Launcher'
+        )
+    }
 }

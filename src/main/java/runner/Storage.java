@@ -29,7 +29,7 @@ public class Storage {
      */
     public void loadList() {
         try {
-            File f = new File("src/main/data/task_list.txt");
+            File f = new File("task_list.txt");
             System.out.println("Loading List...");
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
@@ -59,7 +59,7 @@ public class Storage {
             System.out.println("task_list.txt Not Found");
             try {
                 System.out.println("Creating the File...");
-                new File("src/main/data/task_list.txt").createNewFile();
+                new File("task_list.txt").createNewFile();
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -71,7 +71,7 @@ public class Storage {
      */
     public void saveList() {
         try {
-            FileWriter fw = new FileWriter("src/main/data/task_list.txt");
+            FileWriter fw = new FileWriter("task_list.txt");
             for (Task tk : taskList.getList()) {
                 fw.write(tk.storeInfo()+"\n");
             }
