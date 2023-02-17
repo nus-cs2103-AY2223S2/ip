@@ -12,7 +12,7 @@ Able to update completion status of tasks and able to delete tasks from the task
 
 ### Save tasks
 
-Tasks will be saved in hard disk at [directory where JAR file is]/data/duke.txt even after the application is closed.
+Tasks will be saved in hard disk at [directory where JAR file is]/data/dukeTask.txt even after the application is closed.
 Tasks previously saved  can be retrieved the next time you start this application. 
 
 ## Usage
