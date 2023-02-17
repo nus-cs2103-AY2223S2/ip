@@ -3,15 +3,17 @@ package Ava.commands;
 import Ava.Ava.TASK_TYPE;
 import Ava.Storage;
 import Ava.TaskList;
-import Ava.exceptions.AvaException;
+import Ava.exceptions.CannotWriteToFile;
+import Ava.exceptions.DateTimeNotParsed;
 import Ava.exceptions.CommandNotFoundException;
+import Ava.exceptions.CannotCreateDirectory;
 import Ava.tasks.Deadline;
 import Ava.tasks.Event;
 import Ava.tasks.Task;
 import Ava.tasks.Todo;
 
 /**
- * Add Task to the TaskList
+ * Command to Add Task to the TaskList
  */
 public class AddTask implements AvaCommand {
     String[] parsedInput;
@@ -36,22 +38,22 @@ public class AddTask implements AvaCommand {
      * @param t TaskList object
      * @param s Storage object
      * @return Nothing
-     * @throws AvaException CommandNotFoundException if parsedInput's contents are not correct
+     * @throws CannotCreateDirectory indicating directory could not be created
+     * @throws CannotWriteToFile indicates that storage was unable to write to File
+     * @throws DateTimeNotParsed indicates Date/Time Format passed is incorrect
      */
     @Override
-    public boolean run(TaskList t, Storage s) throws AvaException {
-        //Already Check parsedInput is valid , if still here then input is invalid
-        assert parsedInput.length >= 1 : "Invalid Input";
+    public boolean run(TaskList t, Storage s) throws CannotCreateDirectory, CannotWriteToFile, DateTimeNotParsed {
 
        switch (this.task) {
-           case DEADLINE:
-               newTask = new Deadline(parsedInput[0], parsedInput[1]);
-               break;
-           case EVENT:
-               newTask = new Event(parsedInput[0] , parsedInput[1] ,parsedInput[2]);
-               break;
-           default:
-               newTask = new Todo(parsedInput[0]);
+       case DEADLINE:
+           newTask = new Deadline(parsedInput[0], parsedInput[1]);
+           break;
+       case EVENT:
+           newTask = new Event(parsedInput[0] , parsedInput[1] ,parsedInput[2]);
+           break;
+       default:
+           newTask = new Todo(parsedInput[0]);
        }
        // Write the Current Task To Storage
         s.writeToStorage(newTask.getStorageFormat());
@@ -68,6 +70,7 @@ public class AddTask implements AvaCommand {
      */
     @Override
     public String output(String formatSpace) {
+
         return MESSAGE + "\n" + formatSpace + newTask.getRepresentation();
     }
 
@@ -77,20 +80,20 @@ public class AddTask implements AvaCommand {
      */
     private void  isInputCorrect() throws CommandNotFoundException {
         switch (this.task) {
-            case EVENT:
-                 if (this.parsedInput.length != 3){
-                     throw new CommandNotFoundException("");
-                 }
-                 break;
-            case DEADLINE:
-                if (this.parsedInput.length != 2){
-                    throw new CommandNotFoundException("");
-                }
-                break;
-            default:
-                if (this.parsedInput.length != 1){
-                    throw new CommandNotFoundException("");
-                }
+        case EVENT:
+             if (this.parsedInput.length != 3){
+                 throw new CommandNotFoundException("");
+             }
+             break;
+        case DEADLINE:
+            if (this.parsedInput.length != 2){
+                throw new CommandNotFoundException("");
+            }
+            break;
+        default:
+            if (this.parsedInput.length != 1){
+                throw new CommandNotFoundException("");
+            }
         }
     }
 }

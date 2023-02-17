@@ -24,7 +24,7 @@ import Ava.exceptions.AvaException;
 public class Ava extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/AvaImage.png"));
     private Image user = new Image(this.getClass().getResourceAsStream("/images/UserImage.png"));
-    private boolean running = true;
+    private boolean isRunning = true;
 
     private String formatSpace = "  ";
 
@@ -97,14 +97,14 @@ public class Ava extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
         //Step 3
             sendButton.setOnMouseClicked((event) -> {
-                if (!running) {
+                if (!isRunning) {
                     stage.close();
                 }
                 this.handleUserInput(userInput, dialogContainer);
             });
 
             userInput.setOnAction((event) -> {
-                if(!running) {
+                if(!isRunning) {
                     stage.close();
                 }
                 this.handleUserInput(userInput, dialogContainer);
@@ -132,8 +132,8 @@ public class Ava extends Application {
         String output = "";
         try {
             AvaCommand c = Ava.parser.parse(input);
-            this.running = c.run(Ava.tasks,Ava.store);
-            if (!running) {
+            this.isRunning = c.run(Ava.tasks,Ava.store);
+            if (!isRunning) {
                 sendButton.setStyle("-fx-background-color: lightpink;");
                 sendButton.setText("Close");
             }

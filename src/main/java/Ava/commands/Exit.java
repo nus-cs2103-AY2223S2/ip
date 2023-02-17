@@ -16,14 +16,16 @@ public class Exit implements AvaCommand {
      * @return False to indicate program has stopped runnign
      */
     private final static String MESSAGE = "Have a nice day !!";;
+
     @Override
     public boolean run(TaskList t, Storage s){
+
         return false;
     }
 
-
     @Override
     public String output(String formatSpace){
+
         return MESSAGE;
     }
 }

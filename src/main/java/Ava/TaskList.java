@@ -1,12 +1,15 @@
 package Ava;
 
-import Ava.exceptions.AvaException;
-import Ava.exceptions.NonExistentTask;
+
 import Ava.tasks.Deadline;
 import Ava.tasks.Event;
 import Ava.tasks.Task;
 import Ava.tasks.Todo;
-
+import Ava.exceptions.CannotWriteToFile;
+import Ava.exceptions.NonExistentTask;
+import Ava.exceptions.CannotCreateDirectory;
+import Ava.exceptions.CannotReadFromFile;
+import Ava.exceptions.DateTimeNotParsed;
 import java.util.ArrayList;
 
 /**
@@ -91,9 +94,9 @@ public class TaskList {
     /**
      * Update current TaskList to storage
      * @param storage a storage Object
-     * @throws AvaException indicate problem in updating storage from TaskList
+     * @throws CannotCreateDirectory, CannotReadFromFile,CannotWriteToFile indicate problem in updating storage from TaskList
      */
-    public void updateStorage(Storage storage) throws AvaException {
+    public void updateStorage(Storage storage) throws CannotCreateDirectory, CannotReadFromFile,CannotWriteToFile {
         storage.deleteFile();
         for(Task t: tasks){
             storage.writeToStorage(t.getStorageFormat());
@@ -103,9 +106,9 @@ public class TaskList {
     /**
      * retrieve current Storage to TaskList
      * @param storage a storage Object
-     * @throws AvaException indicate problem in reading storage
+     * @throws CannotCreateDirectory, CannotReadFromFile,CannotWriteToFile indicate problem in reading storage
      */
-    public void retreiveStorage(Storage storage) throws AvaException {
+    public void retreiveStorage(Storage storage) throws CannotCreateDirectory,CannotReadFromFile,DateTimeNotParsed {
         ArrayList<String> taskStrings = storage.readStorage();
         for (String task : taskStrings){
             String[] parsed = task.split(",");

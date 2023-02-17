@@ -3,8 +3,11 @@ package Ava.commands;
 
 import Ava.Storage;
 import Ava.TaskList;
-import Ava.exceptions.AvaException;
+import Ava.exceptions.CannotWriteToFile;
 import Ava.exceptions.NonExistentTask;
+import Ava.exceptions.CommandNotFoundException;
+import Ava.exceptions.CannotCreateDirectory;
+import Ava.exceptions.CannotReadFromFile;
 import Ava.tasks.Task;
 
 import static java.lang.Character.isDigit;
@@ -20,9 +23,9 @@ public class DeleteTask implements AvaCommand {
     /**
      * DeleteTask contructor
      * @param parsedInput string array containing parsed index of the task that needs to be deleted
-     * @throws AvaException incorrect parsedInput
+     * @throws CommandNotFoundException incorrect parsedInput
      */
-    public DeleteTask(String[] parsedInput) throws AvaException {
+    public DeleteTask(String[] parsedInput) throws CommandNotFoundException {
         this.parsedInput = parsedInput;
         this.isCorrectInput();
     }
@@ -32,16 +35,20 @@ public class DeleteTask implements AvaCommand {
      * @param t TaskList Object
      * @param s Storage Object
      * @return Boolean value indicating programs still running
-     * @throws AvaException parsed Index is not correct or out of bounds.
+     * @throws NonExistentTask idicate array index out of bounds
+     * @throws CannotCreateDirectory indicating directory could not be created
+     * @throws CannotWriteToFile indicating that storage was unable to write to File
+     * @throws CannotReadFromFile indicating that storage was inable to read from File
      */
     @Override
-    public boolean run(TaskList t, Storage s) throws AvaException {
+    public boolean run(TaskList t, Storage s) throws NonExistentTask, CannotReadFromFile,
+            CannotCreateDirectory, CannotWriteToFile {
         //Already Check parsedInput is valid , if still execute until here then input is invalid
         assert parsedInput.length == 1: "Invalid Input";
 
         int index = Integer.valueOf(parsedInput[0]);
-        this.deletedTask = t.deleteTask(index);
-        t.updateStorage(s);
+        this.deletedTask = t.deleteTask(index); // Throws NonExistentTask
+        t.updateStorage(s); // Throws CannotReadFromFile CannotCreateDirectory, CannotWriteToFile
         return true;
     }
 
@@ -57,11 +64,11 @@ public class DeleteTask implements AvaCommand {
 
     /**
      * Before Deleting the Task , check if the parsedInputArray is correct
-     * @throws NonExistentTask parsedInput is incorrect
+     * @throws CommandNotFoundException parsedInput is incorrect
      */
-    private void isCorrectInput() throws NonExistentTask {
+    private void isCorrectInput() throws CommandNotFoundException {
         if (parsedInput.length != 1  || !isDigit(parsedInput[0].charAt(0))) {
-            throw new NonExistentTask("");
+            throw new CommandNotFoundException("");
         }
     }
 }

@@ -31,6 +31,7 @@ public class ListTask implements AvaCommand {
      */
     @Override
     public String output(String formatSpace){
+
         return MESSAGE +"\n" + tasks.formatTasks(formatSpace);
     }
 
