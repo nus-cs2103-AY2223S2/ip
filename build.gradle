@@ -46,7 +46,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Pepev1.0"
+    archiveBaseName = "pepe_v1.0"
     archiveClassifier = null
 }
 
