@@ -45,7 +45,11 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             str += "\t " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
-        return str;
+        if (tasks.size() == 0) {
+            return "There is no task yet!";
+        } else {
+            return str;
+        }
     }
 
     /**
@@ -135,11 +139,11 @@ public class TaskList {
      */
     public String findTask(String input, Ui ui) throws DukeException {
         if (input.trim().equals("find")) {
-            throw new DukeException("\t OOPS!!! The description of a find cannot be empty.\n");
+            throw new DukeException("OOPS!!! The description of a find cannot be empty.\n");
         }
         String[] inputLine = input.split(" ", 2);
         if (inputLine.length < 2) {
-            throw new DukeException("\t OOPS!!! The format is invalid, please give a search information.\n");
+            throw new DukeException("OOPS!!! The format is invalid, please give a search information.\n");
         }
         assert inputLine.length == 2;
         boolean availableTasks = false;

@@ -2,6 +2,7 @@ package storage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,6 +15,7 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+
 /**
  * Storage class to deal with the file.
  */
@@ -21,16 +23,13 @@ public class Storage {
 
     private final String filePath;
 
-    private final String helpFilePath;
-
     /**
      * Class constructor.
      *
      * @param filePath The path of a file to be stored.
      */
-    public Storage(String filePath, String helpFilePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
-        this.helpFilePath = helpFilePath;
         checkFileExit();
     }
 
@@ -112,11 +111,10 @@ public class Storage {
      * @return Returns all available commands.
      */
     public String loadHelpExplanationFile() {
-        Path file = Paths.get(".", helpFilePath);
+        InputStream helpStream = this.getClass().getResourceAsStream("/explanation/help.txt");
         String explanation = "";
         try {
-            byte[] bs = Files.readAllBytes(file);
-            explanation = new String(bs);
+            explanation = new String(helpStream.readAllBytes());
         } catch (FileNotFoundException e) {
             System.out.println("\t File not found.\n");
         } catch (IOException e) {
@@ -124,5 +122,4 @@ public class Storage {
         }
         return explanation;
     }
-
 }

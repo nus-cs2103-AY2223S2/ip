@@ -12,7 +12,6 @@ import userinteraction.Ui;
  */
 public class Duke {
     private static final String FILE_PATH = ".\\src\\data\\duke.txt";
-    private static final String HELP_FILEPATH = ".\\src\\main\\resources\\explanation\\help.txt";
 
     private final Ui ui;
     private final Storage storage;
@@ -23,7 +22,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(FILE_PATH, HELP_FILEPATH);
+        storage = new Storage(FILE_PATH);
         taskList = storage.loadData();
     }
 

@@ -99,7 +99,7 @@ public class Ui {
      * @return The find task message being displayed.
      */
     public String printFindTaskMsg() {
-        String str = "Here are the matching tasks in your list:";
+        String str = "Here are the matching tasks in your list:\n";
         return str;
     }
 
