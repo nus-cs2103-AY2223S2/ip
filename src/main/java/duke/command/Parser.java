@@ -66,14 +66,14 @@ public class Parser {
      */
     public static String undo(TaskList taskList) {
         String commandType = Parser.parseLastCommandType(lastCommand);
+        String[] originalArray = Arrays.copyOf(taskList.readTaskList(), 100);
+        TaskList originalTaskList = new TaskList(originalArray);
         if (commandType.equals("clear") || commandType.equals("undo")) {
-            TaskList originalTaskList = new TaskList(Arrays.copyOf(taskList.readTaskList(), 100));
             taskList.overwrite(lastTaskList);
             Parser.updateLastTaskList(originalTaskList);
             Parser.updateLastCommand("undo");
             return ui.saysUnDo(commandType);
         } else if (!commandType.equals("last command is unable to undo")) {
-            TaskList originalTaskList = new TaskList(Arrays.copyOf(taskList.readTaskList(), 100));
             taskList.overwrite(lastTaskList);
             Parser.updateLastTaskList(originalTaskList);
             Parser.updateLastCommand("undo");
@@ -235,7 +235,7 @@ public class Parser {
                 }
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         }
         return remaining;
     }

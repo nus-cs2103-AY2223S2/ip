@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import duke.exception.FileLoadingException;
+import duke.exception.MissingContentException;
 
 /**
  * Saves tasks into file
@@ -49,7 +50,6 @@ public class Storage {
      */
     public void overwrite(TaskList tasks) throws FileLoadingException {
         String[] arr = tasks.readTaskList();
-
         File myFile = new File(this.path);
         myFile.getParentFile().mkdirs();
         try {

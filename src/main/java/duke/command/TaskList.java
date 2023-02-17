@@ -32,18 +32,13 @@ public class TaskList {
      * @throws IOException if array does not exist
      */
     public String[] readTaskList() {
-        try {
-            try {
-                return this.arr;
-            } catch (IndexOutOfBoundsException e) {
-                throw new MissingContentException();
-            }
-        } catch (MissingContentException e) {
-            System.out.println(e.getMessage());
-        }
         return this.arr;
     }
 
+    /**
+     * Overwrite task list with new task list
+     * @param newTaskList
+     */
     public void overwrite(TaskList newTaskList) {
         this.arr = newTaskList.readTaskList();
     }
@@ -118,21 +113,17 @@ public class TaskList {
      * @return new task list with task unmarked.
      * @throw InvalidIndexException if array at specific index is null
      */
-    public String unmark(int num) throws IOException {
+    public String unmark(int num) throws IOException, InvalidIndexException {
         try {
-            try {
-                String original = arr[num];
-                Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
-                Task newTask = new Task(String.valueOf(original.charAt(1)),
-                        original.substring(7), false);
-                arr[num] = newTask.toString();
-                Parser.updateLastCommandDetail(arr[num]);
-                return ("OK, I've marked this EVIL task as not done yet:" + "\n" + arr[num]);
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidIndexException();
-            }
-        } catch (InvalidIndexException e) {
-            return (e.getMessage());
+            String original = arr[num];
+            Parser.updateLastTaskList(new TaskList(Arrays.copyOf(arr, 100)));
+            Task newTask = new Task(String.valueOf(original.charAt(1)),
+                    original.substring(7), false);
+            arr[num] = newTask.toString();
+            Parser.updateLastCommandDetail(arr[num]);
+            return ("OK, I've marked this EVIL task as not done yet:" + "\n" + arr[num]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException();
         }
     }
 

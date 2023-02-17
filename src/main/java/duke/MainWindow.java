@@ -28,6 +28,7 @@ public class MainWindow extends AnchorPane {
 
     private String welcomeMessage = "WOOF! Bello Boss!\nThe Minions are so useless, let Kyle assist you!\n"
             + "What can Kyle do for you today?";
+    private String exitMessage = "WOOF WOOF WOOF! Kyle is sad to see you leave!";
 
     @FXML
     private void initialize() {
@@ -53,5 +54,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals(exitMessage)) {
+            System.exit(0);
+        }
     }
 }
