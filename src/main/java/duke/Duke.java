@@ -47,7 +47,7 @@ public class Duke {
 
 
     /**
-     * Function to get a response from the duke chatbot.
+     * Gets a response from the duke chatbot.
      *
      * @param fullCommand the command given by the user.
      * @return the result of the command in String.

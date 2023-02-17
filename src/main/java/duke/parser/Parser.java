@@ -33,7 +33,7 @@ public class Parser {
     }
 
     /**
-     * This method parses the string input and breaks it down to its respective inputs, messages, dates.
+     * Parses the string input and breaks it down to its respective inputs, messages, dates.
      *
      * @param cmd String cmd written by the user.
      * @return Command - A command object of the indicated command type

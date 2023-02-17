@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * This method loads the data of the stored tasks from a textfile.
+     * Loads the data of the stored tasks from a textfile.
      *
      * @return ArrayList<> - Returns the Task arraylist that is loaded from the textfile.
      * @throws DukeException - Error of the filed not being found.
@@ -53,7 +53,7 @@ public class Storage {
     }
 
     /**
-     * This method will update the textfile based on the current commands inputed by the user.
+     * Updates the textfile based on the current commands inputed by the user.
      */
     public void updateStorage(TaskList taskList) {
         // create the directory if it is not found

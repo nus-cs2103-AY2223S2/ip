@@ -20,7 +20,7 @@ public class TaskList {
 
 
     /**
-     * This method returns the task based on the id.
+     * Returns the task based on the id.
      *
      * @param i index of the id.
      * @return Task returns the task of given id.
@@ -31,7 +31,7 @@ public class TaskList {
 
 
     /**
-     * This method removes and returns the task based on the selected id.
+     * Removes and returns the task based on the selected id.
      *
      * @param i index of the id.
      * @return Task returns the task of the given id being removed.
@@ -42,7 +42,7 @@ public class TaskList {
 
 
     /**
-     * This method adds a new task to the current tasklist.
+     * Adds a new task to the current tasklist.
      *
      * @param task the given task.
      */
@@ -52,7 +52,7 @@ public class TaskList {
 
 
     /**
-     * This method returns the size of tasks in the list.
+     * Returns the size of tasks in the list.
      *
      * @return int returns the size of the tasklist.
      */
@@ -62,7 +62,7 @@ public class TaskList {
 
 
     /**
-     * This method returns the tasklist in a string format.
+     * Returns the result of tasklist in a string format.
      *
      * @return String returns the output of the list of tasks.
      */
@@ -77,7 +77,7 @@ public class TaskList {
     }
 
     /**
-     * This method checks if the task is a duplicate.
+     * Checks if the task is a duplicate.
      *
      * @param task the task that the user wants to add.
      * @return boolean returns if the task had already been added to the list.

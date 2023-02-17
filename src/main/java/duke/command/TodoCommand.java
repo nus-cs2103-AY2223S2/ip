@@ -23,7 +23,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Override execute method from the abstract class of Command
+     * Overrides execute method from the abstract class of Command
      *
      * @param tl       list of tasks.
      * @param storage  harddisk store using textfile.
