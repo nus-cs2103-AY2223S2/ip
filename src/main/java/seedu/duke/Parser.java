@@ -273,9 +273,9 @@ public class Parser {
         // index in 0-indexing
         int index = checkTaskNumber(taskList, taskNumber);
         TaskList updatedList = taskList.markTask(index);
-        assert updatedList.equals(taskList) : "Task is not marked!";
         Task newTask = updatedList.get(index);
         storage.writeFile(updatedList);
+        assert !updatedList.equals(taskList) : "Task is not marked!";
         return ui.sayMarkedTask(newTask);
     }
 
@@ -292,9 +292,9 @@ public class Parser {
         String taskNumber = getTaskNumber(inputStrings);
         int index = checkTaskNumber(taskList, taskNumber);
         TaskList updatedList = taskList.unmarkTask(index);
-        assert updatedList.equals(taskList) : "Task is not marked!";
         Task newTask = updatedList.get(index);
         storage.writeFile(updatedList);
+        assert !updatedList.equals(taskList) : "Task is not unmarked!";
         return ui.sayUnmarkedTask(newTask);
     }
 

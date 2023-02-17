@@ -1,13 +1,12 @@
 package seedu.duke.gui;
 
-
 import seedu.duke.Duke;
 import seedu.duke.Ui;
 
+import javafx.scene.control.Button;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -45,7 +44,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(this.ui.sayGreetings(), dukeImage)
         );
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     public void setDuke(Duke d) {
@@ -61,38 +60,12 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage));
-        say(response);
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
         userInput.clear();
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         if (input.equals("bye")) {
             handleBye();
-        }
-    }
-
-    /**
-     * Idea of splitting into two dialogue boxes for long replies from @mynameizzhafeez
-     * @param message message to be shown
-     */
-    public void say(String message) {
-        String[] lines = message.split("\n");
-        int i = 0;
-        StringBuilder output = new StringBuilder();
-        while (true) {
-            output.append(lines[i]).append("\n");
-            i++;
-            if (i == lines.length) {
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getDukeDialog(output.toString(), dukeImage)
-                );
-                break;
-            }
-            if (i % 5 == 0) {
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getDukeDialog(output.toString(), dukeImage)
-                );
-                output = new StringBuilder();
-            }
         }
     }
 

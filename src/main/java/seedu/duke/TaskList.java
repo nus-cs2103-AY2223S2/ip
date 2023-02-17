@@ -134,8 +134,23 @@ public class TaskList {
     public boolean equals (Object o) {
         if (o instanceof TaskList) {
             TaskList taskList = (TaskList) o;
-            return taskList.tasks.equals(this.tasks);
+            for (int i = 0; i < taskList.getSize(); i++) {
+                boolean isEqual = taskList.get(i).equals(this.get(i));
+                if (!isEqual) {
+                    return false;
+                }
+            }
+            return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < getSize(); i++) {
+            sb.append(get(i));
+        }
+        return sb.toString();
     }
 }
