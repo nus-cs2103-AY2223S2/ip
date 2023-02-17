@@ -13,6 +13,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+import duke.tasks.Todofor;
 
 /**
  * Save tasks to local hard drive and loading it when program starts.
@@ -63,8 +64,10 @@ public class Storage {
                         task = new Todo(instr);
                     } else if (command.equals("deadline")) {
                         task = new Deadline(instr);
-                    } else {
+                    } else if (command.equals("event")) {
                         task = new Event(instr);
+                    } else {
+                        task = new Todofor(instr);
                     }
                     tasks.add(task);
 

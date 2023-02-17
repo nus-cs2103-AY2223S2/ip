@@ -17,9 +17,10 @@ public class Event extends Task {
     public Event(String instruction) {
         super(instruction);
         this.modifiedInstr = instruction.substring(6);
-        this.description = modifiedInstr.split(" /")[0];
-        this.start = modifiedInstr.split(" /")[1].substring(5);
-        this.end = modifiedInstr.split(" /")[2].substring(3);
+        String[] modInstrSplit = modifiedInstr.split(" /");
+        this.description = modInstrSplit[0];
+        this.start = modInstrSplit[1].substring(5);
+        this.end = modInstrSplit[2].substring(3);
     }
 
     @Override
