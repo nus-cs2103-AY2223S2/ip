@@ -1,6 +1,11 @@
 package alfred.components;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 import alfred.Alfred;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * The MainWindow class represents the initial page of the Graphical User Interface when the user uses the application.
@@ -52,7 +58,14 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (alfred.isExit()) {
-            alfred.handleExit();
+            //@@James_D
+            //Reused from
+            // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
+            // with minor modifications
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+            //@@James_D
         }
     }
 

@@ -27,7 +27,7 @@ public class DeadlineTest {
             new Deadline("This is a test task", "10/012023");
         });
 
-        String expectedMessage = "ERROR! The date format should be given as d/MM/yyyy HHmm\n";
+        String expectedMessage = "ERROR! The date format should be given as dd/mm/yyyy HHmm\n";
         String actualMessage = e.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }

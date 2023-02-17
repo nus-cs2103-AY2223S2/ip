@@ -39,7 +39,7 @@ public class DateTimeParser {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             return LocalDateTime.parse(date, format);
         } catch (DateTimeParseException e) {
-            throw new AlfredException("The date format should be given as d/MM/yyyy HHmm\n");
+            throw new AlfredException("The date format should be given as dd/mm/yyyy HHmm\n");
         }
     }
 }

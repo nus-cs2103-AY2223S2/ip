@@ -77,20 +77,6 @@ public class Alfred {
         return isExit;
     }
 
-
-    /**
-     * Alfred handling the exit when it is time for the program to close.
-     */
-    public void handleExit() {
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage()); // how to show an error?
-        } finally {
-            Platform.exit();
-        }
-    }
-
     /**
      * Creates an Alfred object and run the program
      * @param args No arguments will be given into the program.

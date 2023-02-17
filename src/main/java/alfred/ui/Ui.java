@@ -63,7 +63,7 @@ public class Ui {
      * Displays the goodbye message by the program.
      */
     public String getByeMessage() {
-        String command = "Bye. Hope to see you again soon!";
+        String command = "Bye. Hope to see you again soon!\n";
         return getCommandMessage(command);
     }
 
