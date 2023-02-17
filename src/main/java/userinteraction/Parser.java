@@ -1,11 +1,11 @@
 package userinteraction;
 
-import command.AddDeadLineCommand;
+import command.AddDeadlineCommand;
 import command.AddEventCommand;
-import command.AddToDoCommand;
+import command.AddTodoCommand;
 import command.Command;
 import command.DeleteTaskCommand;
-import command.ExitDukeCommand;
+import command.ExitCommand;
 import command.FindTaskCommand;
 import command.HelpCommand;
 import command.InvalidCommand;
