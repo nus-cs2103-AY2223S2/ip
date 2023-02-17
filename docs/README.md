@@ -154,14 +154,14 @@ As the task `[D][ ] test (by: Oct 22 2922)` appears the first listed by `list`, 
 a task is deleted, the program also shows the number of tasks left.
 
 ## Command Summary
-| Action              |                        Format                        |                                        Examples |
-|:--------------------|:----------------------------------------------------:|------------------------------------------------:|
-| List tasks          |                         list                         |                                            list |
-| Add a todo task     |                   todo [task name]                   |                                       todo task |
-| Add a deadline task |       deadline [task name] /by [deadline date]       |                     deadline task /by 2023-2-14 |
-| Add an event        | event [event name] /from [start date] /to [end date] | event recess week /from 2023-2-20 /to 2023-2-26 |
-| Find a task         |                 find [keyword 1] ...                 |                                find recess 2022 |
-| delete a task       |                    delete [index]                    |                                       delete 10 |
+| Action              |                        Format                        |                                          Examples |
+|:--------------------|:----------------------------------------------------:|--------------------------------------------------:|
+| List tasks          |                         list                         |                                              list |
+| Add a todo task     |                   todo [task name]                   |                                         todo task |
+| Add a deadline task |       deadline [task name] /by [deadline date]       |                      deadline task /by 2023-02-14 |
+| Add an event        | event [event name] /from [start date] /to [end date] | event recess week /from 2023-02-20 /to 2023-02-26 |
+| Find a task         |                 find [keyword 1] ...                 |                                  find recess 2022 |
+| delete a task       |                    delete [index]                    |                                         delete 10 |
 
 ## FAQ
 If you have any issues and enquiries, please contact us at `bo.ai@u.nus.edu`.
