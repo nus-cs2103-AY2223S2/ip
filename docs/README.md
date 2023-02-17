@@ -16,14 +16,13 @@ and events while still having the benefits of a Graphical User Interface (GUI).
 * bye
 
 ####Things to take note about the format:
-Words in `<>` are the parameters that **must be supplied** by the user.
-e.g. in mark <task number>, <task number> is a parameter which can be used as mark 2.
+Words in `<>` are parameters that **must be supplied** by the user.
+e.g. mark <task number>, the user must key in a task number when using mark commands.
 
 Adding **extra parameters** for list and bye commands will be **ignored**.
 e.g. Entering list 123 will be interpreted as list.
 
-Adding **1 or more empty spaces** to find command will **display all the tasks** stored.
-e.g. `find ` will return everything in the list.
+Commands supplied must be in **lowercase**.
 
 ### Usage
 

@@ -55,8 +55,7 @@ public class TaskList {
      * @throws DukeException If task number is invalid
      */
     public String deleteTask(String taskId) throws DukeException {
-        String deleteCommand = "delete";
-        Task task = getTask(taskId, deleteCommand);
+        Task task = getTask(taskId, "delete");
         tasks.remove(task);
         return ui.outputDeleteMsg(task, tasks.size());
     }
@@ -70,8 +69,7 @@ public class TaskList {
      * @throws DukeException If task number is invalid
      */
     public String changeMarkStatus(boolean isDone, String taskId) throws DukeException {
-        String markCommand = "mark";
-        Task taskToMark = getTask(taskId, markCommand);
+        Task taskToMark = getTask(taskId, "mark");
         taskToMark.setIsDone(isDone);
         return ui.outputMarkMsg(isDone, taskToMark);
     }

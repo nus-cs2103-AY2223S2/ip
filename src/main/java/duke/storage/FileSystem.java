@@ -138,7 +138,6 @@ public class FileSystem {
 
         String[] eventArr = input.split(fromSeparator);
         String eventDesc = eventArr[0];
-
         String[] dateTimeArr = eventArr[1].split(toSeparator);
         String from = dateTimeArr[0];
         int endingDateTimeLen = dateTimeArr[1].length() - 1;

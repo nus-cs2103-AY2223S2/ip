@@ -6,21 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.EmptyCommandException;
+import duke.exception.MissingInputsException;
 import duke.helper.Parser;
 
 public class ParserTest {
     @Test
     public void checkTaskDesc_emptyTodo_exceptionThrown() {
-        EmptyCommandException thrown = assertThrows(EmptyCommandException.class, ()
-                -> Parser.checkCommandDesc(new String[]{"todo"}));
-        assertEquals("OOPS!!! The description of a todo command cannot be empty.",
+        MissingInputsException thrown = assertThrows(MissingInputsException.class, ()
+                -> Parser.checkMissingInputs("todo", new String[]{"todo"}));
+        assertEquals("OOPS!!! The todo command has missing inputs.",
                 thrown.toString());
     }
 
     @Test
-    public void checkTaskDesc_normalTodo_noExceptionThrown() throws EmptyCommandException {
-        boolean success = Parser.checkCommandDesc(new String[]{"todo", "ip"});
+    public void checkTaskDesc_normalTodo_noExceptionThrown() throws MissingInputsException {
+        boolean success = Parser.checkMissingInputs("todo", new String[]{"todo", "ip"});
         assertTrue(success);
     }
 }
