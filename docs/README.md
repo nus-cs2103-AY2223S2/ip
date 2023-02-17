@@ -1,10 +1,12 @@
 # User Guide
 
+Fake Duke is a GUI-based chat bot that allows you to manage your tasks easily on a single platform!
+
 ## Features 
 
 ### Manage Tasks Easily
 
-You can manage your tasks easily using the basic CRUD functions.
+You can manage your tasks easily using the actions listed below.
 Moreover, you can also find specific tasks easily from a large pool of tasks.
 Fake Duke also helps to sort deadlines and events!
 
@@ -16,6 +18,7 @@ Any actions performed on the tasks will be stored locally.
 ## Usage
 
 All the actions are non case-sensitive. For example, you can enter `lISt` and it will be interpreted as `list`.
+Datetimes specified should be in the future and should follow this format: `YYYY-MM-DD HH:mm`.
 
 ### `todo` - Adds a Todo task
 
@@ -68,7 +71,7 @@ Now you have 2 tasks in the list.
 
 ### `event` - Adds an Event
 
-Adds an Event to the list.
+Adds an Event to the list. The end datetime specified should be after the start datetime.
 
 Format:
 
@@ -95,6 +98,7 @@ Now you have 3 tasks in the list.
 ### `list` - Lists all tasks
 
 Lists all the tasks, including those stored locally and those added by you.
+Fake Duke will also indicate if the tasks are expired, or going to expire within a week.
 
 Example of usage: 
 
