@@ -1,3 +1,4 @@
 D | 0 | proposal (by: Feb 16 2023 0600 pm)
 E | 0 | dinner(from: tues 6pmto: tues 10pm)
-T | 0 | sleep
+T | 0 | gym
+D | 0 | cs3223 assignment (by: Feb 17 2023 1159 pm)

@@ -35,10 +35,14 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task taskToBeMarked = tasks.getTask(taskNum - 1);
-        assert taskNum - 1 >= 0 : "taskNum should never be less than 0";
-        taskToBeMarked.markAsDone();
-        return ui.showMarkedMsg(taskToBeMarked);
+        if (taskNum - 1 >= tasks.getLength()) {
+            return ui.showNonExistentTask(tasks.getLength());
+        } else {
+            Task taskToBeMarked = tasks.getTask(taskNum - 1);
+            assert taskNum - 1 >= 0 : "taskNum should never be less than 0";
+            taskToBeMarked.markAsDone();
+            return ui.showMarkedMsg(taskToBeMarked);
+        }
     }
 
     /**

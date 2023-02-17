@@ -32,10 +32,14 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task taskToBeDeleted = tasks.getTask(taskNum - 1);
-        tasks.delete(taskNum - 1);
-        storage.delete(taskNum);
-        return ui.showDeleteMessage(taskToBeDeleted, String.valueOf(tasks.getLength()));
+        if (taskNum - 1 >= tasks.getLength() || taskNum == 0) {
+            return ui.showNonExistentTask(tasks.getLength());
+        } else {
+            Task taskToBeDeleted = tasks.getTask(taskNum - 1);
+            tasks.delete(taskNum - 1);
+            storage.delete(taskNum);
+            return ui.showDeleteMessage(taskToBeDeleted, String.valueOf(tasks.getLength()));
+        }
     }
 
     /**

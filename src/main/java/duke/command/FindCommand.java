@@ -29,6 +29,10 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (keyword.isBlank()) {
+            return ui.showEmptyKeywordMsg();
+        }
+
         int totalNumOfTasks = tasks.getLength();
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
 
@@ -39,7 +43,7 @@ public class FindCommand extends Command {
             }
         }
 
-        return ui.showRelevantTasks(tasksWithKeyword);
+        return tasksWithKeyword.isEmpty() ? ui.showNoRelevantTasksMsg() : ui.showRelevantTasks(tasksWithKeyword);
     }
 
     /**

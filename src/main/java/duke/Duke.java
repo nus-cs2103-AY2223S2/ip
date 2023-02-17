@@ -58,18 +58,14 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
-                ui.showLine();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(ui.showInvalidCommandMsg());
+                continue;
             } catch (NullPointerException e) {
                 continue;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Invalid command! Use command 'help' to see the commands available for use :)");
-                continue;
-            } catch (DukeException e) {
-                e.printStackTrace();
             }
         }
     }

@@ -28,6 +28,76 @@ public class EditCommand extends Command {
         this.content = content;
     }
 
+    /**
+     * Check all the relevant fields if they are of the correct format.
+     * @param taskNum
+     * @param partToEdited
+     * @param content
+     * @param tasks
+     * @param ui
+     * @return
+     */
+    public String checkValidity(String taskNum, String partToEdited, String content, TaskList tasks, Ui ui) {
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(taskNum) - 1;
+        } catch (NumberFormatException e) {
+            return ui.showInvalidCommandMsg();
+        }
+        if (isNotExistTask(taskNumber, tasks)) {
+            return ui.showNonExistentTask(tasks.getLength());
+        }
+        if (isNotAvailablePart(partToEdited) || isBlankContent(content)) {
+            return ui.showInvalidCommandMsg();
+        }
+        return "";
+    }
+
+    /**
+     * Reture true if the task do not exist in the task list and false if it exist.
+     * @param taskNum
+     * @param tasks
+     * @return
+     */
+    public boolean isNotExistTask(int taskNum, TaskList tasks) {
+        if (taskNum >= tasks.getLength()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Reture true if the part the user want to edit is not valid and false if it is valid.
+     * @param partToEdit
+     * @return
+     */
+    public boolean isNotAvailablePart(String partToEdit) {
+        if (partToEdit.isBlank()) {
+            return true;
+        } else if (partToEdit.equals("desc")) {
+            return false;
+        } else if (partToEdit.equals("by")) {
+            return false;
+        } else if (partToEdit.equals("from")) {
+            return false;
+        } else if (partToEdit.equals("to")) {
+            return true;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Return true if the content that the users want to change is blank and false if it is not blank.
+     * @param content
+     * @return
+     */
+    public boolean isBlankContent(String content) {
+        if (content.isBlank()) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Edit the task information requested by the user.
@@ -38,6 +108,11 @@ public class EditCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String str = checkValidity(taskNum, partToEdit, content, tasks, ui);
+        if (!str.isBlank()) {
+            return str;
+        }
+
         int taskNumber = Integer.parseInt(taskNum) - 1;
         Task taskToBeEdited = tasks.getTask(taskNumber);
         if (taskToBeEdited.getTaskType().equals("T")) {

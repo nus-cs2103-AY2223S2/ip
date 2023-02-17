@@ -41,7 +41,7 @@ public class Ui {
     }
 
     public String showEditedMsg(Task task) {
-        return task + " has been edited!";
+        return showLine() + task + " has been edited!" + showLine();
     }
 
     /**
@@ -58,8 +58,9 @@ public class Ui {
      *
      * @param errorMsg
      */
-    public static String showError(String errorMsg) {
-        return errorMsg;
+    public String showError(String errorMsg) {
+
+        return showLine() + errorMsg + showLine();
     }
 
     /**
@@ -80,18 +81,55 @@ public class Ui {
                 + "- edit /[task number u want to edit] /[desc/from/to/by] /[content you want change to]: edit task\n"
                 + "- bye: shinchan pangkang!\n";
 
-        return availableHelp;
+        return showLine() + availableHelp + showLine();
     }
 
     /**
      * Print the message when the user type "list" command.
      */
     public String showListMessage() {
-        return "Here are the tasks in your list:";
+        return showLine() + "Here are the tasks in your list:";
     }
 
+    /**
+     * Print the message when users call the command 'list' but the task list is empty
+     * @return String object
+     */
     public String showEmptyListMessage() {
-        return "No tasks created yet!!";
+        return showLine() + "No tasks created yet!!" + showLine();
+    }
+
+    /**
+     * Print the message when the users call a task number that is more than the total number of tasks in the list.
+     * @param totalNumTasks
+     * @return String object
+     */
+    public String showNonExistentTask(int totalNumTasks) {
+        return showLine() + "You only have " + totalNumTasks + " tasks available..." + showLine();
+    }
+
+    /**
+     * Print the message when the users do not key in the keyword when they use the command 'find'
+     * @return String object
+     */
+    public String showEmptyKeywordMsg() {
+        return showLine() + "You have not key in any keyword :(" + showLine();
+    }
+
+    /**
+     * Print the message when shinchan cannot find the relevant tasks containing the keyword.
+     * @return String object
+     */
+    public String showNoRelevantTasksMsg() {
+        return showLine() + "No relevant task found oooopssss" + showLine();
+    }
+
+    /**
+     * Print the message when the users key in an invalid command.
+     * @return String object
+     */
+    public String showInvalidCommandMsg() {
+        return showLine() + "Invalid command! Use command 'help' to see the commands available for use :)" + showLine();
     }
 
     /**
@@ -103,8 +141,8 @@ public class Ui {
      * @return String object containing delete message displayed for user.
      */
     public String showDeleteMessage(Task task, String tasksLen) {
-        return "Action Kamen BEEEEPP BEEEPP BEEEP. I've removed this task:\n  "
-                + task + "\nNow you have " + tasksLen + " tasks in the list.";
+        return showLine() + "Action Kamen BEEEEPP BEEEPP BEEEP. I've removed this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list." + showLine();
     }
 
     /**
@@ -116,8 +154,8 @@ public class Ui {
      * @return String object containing add task message displayed for user.
      */
     public String showAddTaskMsg(Task task, String tasksLen) {
-        return "Being an adult is tiring... I've added this task:\n  "
-                + task + "\nNow you have " + tasksLen + " tasks in the list.";
+        return showLine() + "Being an adult is tiring... I've added this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list." + showLine();
     }
 
     /**
@@ -126,7 +164,7 @@ public class Ui {
      * @return String object containing exit message displayed for user.
      */
     public String exit() {
-        return "Bye. Hope to see you again soon!";
+        return showLine() + "Bye. Hope to see you again soon!" + showLine();
     }
 
     /**
@@ -137,7 +175,7 @@ public class Ui {
      * @return String object containing marked task message displayed for user.
      */
     public String showMarkedMsg(Task task) {
-        return "Action Kamen BEEEEPP BEEEPP BEEEP! This task is marked as done:\n" + task;
+        return showLine() + "Action Kamen BEEEEPP BEEEPP BEEEP! This task is marked as done:\n" + task + showLine();
     }
 
     /**
@@ -148,7 +186,8 @@ public class Ui {
      * @return String object containing unmark task message displayed for user.
      */
     public String showUnmarkedMsg(Task task) {
-        return "Make up your mind!!! No chocobi for you before it is done:\n" + task + "\n" + "marked as incomplete.";
+        return showLine() + "Make up your mind!!! No chocobi for you before it is done:\n" + task + "\n"
+                + "marked as incomplete." + showLine();
     }
 
     /**
@@ -164,7 +203,7 @@ public class Ui {
         for (int i = 0; i < tasklist.size(); i++) {
             currStr = currStr + counter + "." + tasklist.get(i);
         }
-        return currStr;
+        return showLine() + currStr + showLine();
     }
 
     /**
@@ -173,7 +212,7 @@ public class Ui {
      * @return String object containing loading message displayed for user.
      */
     public String showLoadingError() {
-        return "No existing tasklist!";
+        return showLine() + "No existing tasklist!" + showLine();
     }
 
     /**
@@ -196,7 +235,8 @@ public class Ui {
             }
         }
 
-        return showLine() + "BEEEP POOO BEEP POOO ~~ You have " + tasks.size() + " upcoming tasks due\n" + str;
+        return showLine() + "BEEEP POOO BEEP POOO ~~ You have " + tasks.size() + " upcoming tasks due\n"
+                + str + showLine();
     }
 
     /**
@@ -205,7 +245,7 @@ public class Ui {
      * @return String object containing divider lines displayed for user.
      */
     public String showLine() {
-        return "\n---------------------------------\n";
+        return "\n--------------------------------------------\n";
     }
 }
 

@@ -98,10 +98,11 @@ public class Parser {
      * @return Command object.
      */
 
-    public static Command parse(String command) throws DukeException {
+    public static Command parse(String command) throws ArrayIndexOutOfBoundsException {
         Command parsedCommand = null;
         String[] arr = splitCommand(command);
         String commandType = arr[0].trim();
+
         switch (commandType) {
         case BYE:
             parsedCommand = new ExitCommand();
