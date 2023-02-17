@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="762.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutY="709.0" onAction="#handleUserInput" prefHeight="52.0" prefWidth="521.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="709.0" />
+        <Button fx:id="sendButton" layoutX="524.0" layoutY="709.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="52.0" prefWidth="128.0" text="Send" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="709.0" />
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" vvalue="1.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="704.0" prefWidth="651.0" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

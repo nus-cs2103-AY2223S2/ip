@@ -1,0 +1,4 @@
+T | 0 | borrow book
+D | 0 | return book | 2020-05-12 1800
+E | 0 | project meeting | 2020-12-20 2000 | 2020-12-25 2200
+T | 1 | go library
