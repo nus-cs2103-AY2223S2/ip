@@ -25,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Add a tab to every line.
+     * Adds a tab to every line and prints the string.
      * @param string String to print.
      */
     public void printBlock(String string) {
