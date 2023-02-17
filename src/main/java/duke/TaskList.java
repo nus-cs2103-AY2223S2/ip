@@ -26,7 +26,7 @@ public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private final Ui ui = new Ui();
 
-    public TaskList(ArrayList<Task> tasks)  {
+    public TaskList(ArrayList<Task> tasks) {
         TaskList.tasks = tasks;
     }
 
@@ -34,6 +34,10 @@ public class TaskList {
         TaskList.tasks = new ArrayList<>();
     }
 
+    /**
+     * Return the tasks stored in the task list
+     * @return response with tasks listed out
+     */
     public String listTask() {
         if (tasks.size() == 0) {
             return "You dont have any tracked tasks";
@@ -47,6 +51,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Used to mark a task as done
+     * @param body String index of the task
+     * @return confirmation of task marked done
+     */
     public String markTaskDone(String body) {
         int index = Integer.parseInt(body) - 1;
         assert index >= 0;
@@ -54,6 +63,11 @@ public class TaskList {
         return "Marked task as done:\n [X] " + tasks.get(index).getDesc();
     }
 
+    /**
+     * Used to mark a task as not done
+     * @param body String index of the task
+     * @return confirmation of task marked not done
+     */
     public String markTaskNotDone(String body) {
         int index = Integer.parseInt(body) - 1;
         assert index >= 0;
@@ -62,6 +76,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Used to delete a task from the task list
+     * @param body String index of the task
+     * @return confirmation of deletion OR error message from deletion
+     */
     public String deleteTask(String body) {
         try {
             int i = Integer.parseInt(body) - 1;
@@ -74,6 +93,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Tod0 task to the task list
+     * @param body String description of the task
+     * @return confirmation of adding OR error message
+     */
     public String addTodo(String body) {
         try {
             ToDo curr = new ToDo(body, false);
@@ -84,6 +108,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Deadline object to the task list
+     * @param body String description of the task, and deadline date
+     * @return confirmation of adding OR error message
+     */
     public String addDeadline(String body) {
         try {
             Matcher dlMatcher = DEADLINE_PATTERN.matcher(body);
@@ -103,6 +132,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an Event object to the task list
+     * @param body String description of the task, from date and to date
+     * @return confirmation of adding OR error message
+     */
     public String addEvent(String body) {
         try {
             Matcher eMatcher = EVENT_PATTERN.matcher(body);
@@ -129,6 +163,7 @@ public class TaskList {
      * Searches for task description that matches body
      *
      * @param body string to find
+     * @return String of tasks found that matches
      */
     public String find(String body) {
         boolean found = false;
@@ -148,6 +183,11 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Used when command is not recognized
+     * @param command user input that is not recognized
+     * @return error message
+     */
     public String unknownCommand(String command) {
         return ui.ERROR_UNKNOWN_COMMAND + " : " + command;
     }

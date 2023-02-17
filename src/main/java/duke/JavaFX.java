@@ -25,10 +25,12 @@ import java.util.Objects;
  * @version 0
  */
 public class JavaFX extends Application {
-    Duke duke = new Duke("data\\save.txt");;
+    private Duke duke = new Duke("data\\save.txt");
     private final Ui ui = new Ui();
-    private final Image userImg = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private final Image dukeImg = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
+    private final Image userImg = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/DaUser.png")));
+    private final Image dukeImg = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png")));
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -106,7 +108,7 @@ public class JavaFX extends Application {
      * Prints a response to the user via a chat box
      */
     private void handleUserInput() {
-        Parser parser = new Parser(duke.tasks, duke.storage);
+        Parser parser = new Parser(duke.getTaskList(), duke.getStorage());
         Label userText = new Label(userInput.getText());
         String response = "";
 
@@ -116,7 +118,7 @@ public class JavaFX extends Application {
 
         try {
             response = parser.parseCommand(command, body);
-            if(command.equals("bye")) {
+            if (command.equals("bye")) {
                 stop();
             }
         } catch (Exception e) {
