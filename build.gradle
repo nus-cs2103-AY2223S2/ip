@@ -47,7 +47,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 
@@ -68,7 +68,7 @@ shadowJar {
         into 'META-INF/resources'
     }*/
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveBaseName = "DOOK"
+    archiveBaseName = "Launcher"
     archiveClassifier = null
 }
 
