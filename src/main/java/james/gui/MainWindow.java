@@ -1,6 +1,8 @@
 package james.gui;
 
 import james.jamesbot.JamesBot;
+
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import javax.swing.*;
 
 
 /**
@@ -33,7 +37,16 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setOnScroll(event -> {
+            scrollPane.setVvalue(scrollPane.getVvalue() - event.getDeltaX() / dialogContainer.getHeight());
+        });
+
+        dialogContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
+            scrollPane.setVvalue(1.0);
+        });
+
+        sendButton.disableProperty().bind(Bindings.isEmpty(userInput.textProperty()));
+
         dialogContainer.getChildren().add(
                 DialogBox.getJamesDialog("Hello, I am James.\nHow may I be of service to you?", jamesImage));
         assert this.scrollPane != null : "[scrollPane] FXML was improperly configured.";
@@ -47,7 +60,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing James's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
