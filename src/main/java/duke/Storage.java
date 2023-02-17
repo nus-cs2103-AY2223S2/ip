@@ -85,7 +85,6 @@ public class Storage {
             for (int i = 0; i < lst.getSize(); i++) {
                 String line = lst.getTask(i).toSave();
                 writer.write(line);
-
             }
             writer.close();
             System.out.println("('v') :: Data successfully saved!");
