@@ -1,0 +1,8 @@
+todo eat
+deadline submit /by Sunday
+event meeting /from Monday 2pm /to Friday 5pm
+list
+mark 1
+unmark 3
+list
+bye
