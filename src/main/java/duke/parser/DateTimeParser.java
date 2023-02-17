@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Parses datetime and make sure it is in the format suitable for this app: {yyyy-MM-dd HH:mm}.
+ * Parses datetime and makes sure it is in the format suitable for this app: {yyyy-MM-dd HH:mm}.
  */
 public class DateTimeParser {
     /**

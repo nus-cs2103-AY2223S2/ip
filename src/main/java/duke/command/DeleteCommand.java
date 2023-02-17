@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     private Integer[] taskIndexes;
 
     /**
-     * Constructor for DeleteCommand.
+     * Creates a DeleteCommand object.
      *
      * @param taskIndexes to be deleted.
      */

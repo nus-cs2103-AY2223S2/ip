@@ -11,7 +11,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for Task class, used to set description and status of task.
+     * Creates a Task object.
+     * Sets description and status of task.
      *
      * @param input for Task.
      */

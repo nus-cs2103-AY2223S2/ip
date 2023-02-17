@@ -12,7 +12,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Constructor for Duke class.
+     * Creates a Duke object.
      *
      * @param filePath of the local file for tasks storage.
      */

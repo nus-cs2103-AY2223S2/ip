@@ -16,7 +16,8 @@ public class Event extends Task {
     private LocalDateTime endDateTime;
 
     /**
-     * Constructor for Event class that sets the description and event start and end date times.
+     * Creates an Event object.
+     * Sets the description and event start and end date times.
      *
      * @param input for event.
      * @throws DukeException if unable to set date times.

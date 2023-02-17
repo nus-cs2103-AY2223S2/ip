@@ -83,7 +83,7 @@ public class FileInputParser {
      * @param errorMessage to be printed on the program.
      */
     private static void checkFileInputFormat(int inputLength, int minimumLength, String errorMessage) {
-        boolean isValidLength = inputLength >= minimumLength;
+        boolean isValidLength = (inputLength >= minimumLength);
         assert isValidLength : String.format("Local file data/tasks.txt does not have valid format. %s",
                 errorMessage);
     }

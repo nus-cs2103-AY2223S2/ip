@@ -15,7 +15,8 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
-     * Constructor for Deadline class that sets the description and deadline.
+     * Creates a Deadline object.
+     * Sets the description and deadline.
      *
      * @param input for deadline.
      * @throws DukeException if unable to set deadline.

@@ -26,7 +26,7 @@ public class TaskList {
         try {
             return taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Unable to get task.");
+            throw new DukeException(String.format("Unable to get task %d.", taskIndex + 1));
         }
     }
 
@@ -72,7 +72,7 @@ public class TaskList {
         try {
             return taskList.remove(taskIndex).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Task index given is invalid :( Unable to delete.");
+            throw new DukeException("Some task indexes given are invalid :( Unable to delete some tasks.");
         }
     }
 

@@ -20,7 +20,7 @@ public class SortCommand extends Command {
     }
 
     /**
-     * Sorts deadlines or events, depending on the user choice.
+     * Sorts deadlines or events, depending on the user's choice.
      *
      * @param tasks that will be iterated through to filter out irrelevant tasks.
      * @param storage object that handles all Storage actions.

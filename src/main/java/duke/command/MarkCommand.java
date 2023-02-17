@@ -48,9 +48,4 @@ public class MarkCommand extends Command {
         }
         return taskString;
     }
-
-    @Override
-    public String toString() {
-        return String.format("Mark task(s) %s", taskIndexes.toString());
-    }
 }

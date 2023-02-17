@@ -178,7 +178,7 @@ public class UserInputParser {
      */
     private static void checkInputFormat(int inputLength, int minimumLength, String errorMessage)
             throws DukeException {
-        boolean isInvalidLength = inputLength < minimumLength;
+        boolean isInvalidLength = (inputLength < minimumLength);
         if (isInvalidLength) {
             throw new DukeException(errorMessage);
         }

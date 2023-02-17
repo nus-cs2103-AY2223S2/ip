@@ -9,7 +9,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Constructor for Todo class, which sets its description and status.
+     * Creates a Todo object.
+     * Sets its description and status.
      *
      * @param input of Todo task.
      * @param taskStatus of Todo task.
