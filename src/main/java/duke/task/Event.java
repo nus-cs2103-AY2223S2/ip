@@ -45,6 +45,7 @@ public class Event extends Task {
         stringTo = to;
         parseFrom(from);
         parseTo(to);
+        assert !from.isEmpty() && !to.isEmpty();
         if (from == null || to == null) {
             throw new DukeException("Invalid format for /from and /to fields!");
         }
