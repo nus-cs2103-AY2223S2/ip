@@ -7,12 +7,8 @@ This user guide will walk you through all the features of Jamie, so you can get 
 Jamie features a user-friendly interface that allows you to access all its functionalities by typing commands. You can add, edit, delete, and mark your tasks as you complete them.
 
 **Notes about the command format:**
-- Words in UPPER_CASE are parameters to be supplied by the user.
-- INDEX refers to all natural numbers bounded by the maximum number of items currently in your list. 
-$$\text{INDEX} \in \mathbb{N}_{\le \text{size of your list}}$$
 - All `commands` must be in lower case.
-- The date time format is as such,
-$$dd/mm/yyyy \quad HHmm$$
+- The date time format is as such, `dd/mm/yyyy HHmm`.
 - Jamie will reply with the correct format if the input is incorrect. Just follow the instructions and you will be fine.
 
 
@@ -68,6 +64,7 @@ A message will be printed.
 
 ```
 Got it. I've added this task:
+[T][] water plants
 Now we have 1 task(s) in the list.
 ```
 
@@ -85,7 +82,8 @@ A message will be printed.
 
 ```
 Got it. I've added this task:
-Now we have 1 task(s) in the list.
+[D][] water plants (by: 2 February 2023, 2359H)
+Now we have 2 task(s) in the list.
 ```
 
 ### `event` - adds a event into list
@@ -102,7 +100,8 @@ A message will be printed.
 
 ```
 Got it. I've added this task:
-Now we have 1 task(s) in the list.
+[E][] shopee sale (from: 1 February 2023, 2359H to: 2 February 2023, 2359H)
+Now we have 3 task(s) in the list.
 ```
 
 ### `list` - prints all tasks in list
