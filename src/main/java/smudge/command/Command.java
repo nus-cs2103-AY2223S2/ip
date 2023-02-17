@@ -1,16 +1,16 @@
-package duke.command;
+package smudge.command;
 
-import duke.main.DukeException;
-import duke.main.Storage;
-import duke.main.Tasklist;
-import duke.main.Ui;
+import smudge.main.SmudgeException;
+import smudge.main.Storage;
+import smudge.main.Tasklist;
+import smudge.main.Ui;
 
 import java.io.IOException;
 
 public abstract class Command {
     private boolean shouldExit = false;
 
-    public abstract String execute(Tasklist taskList, Ui ui, Storage storage) throws IOException, DukeException;
+    public abstract String execute(Tasklist taskList, Ui ui, Storage storage) throws IOException, SmudgeException;
 
     public void switchExitCondition() {
         this.shouldExit = !(this.shouldExit);

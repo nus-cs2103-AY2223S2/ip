@@ -1,6 +1,6 @@
-package duke.main;
+package smudge.main;
 
-import duke.task.Task;
+import smudge.task.Task;
 import java.util.ArrayList;
 
 /**

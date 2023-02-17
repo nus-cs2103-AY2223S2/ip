@@ -1,6 +1,6 @@
-package duke.main;
+package smudge.main;
 
-import duke.task.*;
+import smudge.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,22 +20,22 @@ public class Storage {
      * Creates file if it does not exist
      *
      * @param filepath the specified path of file location
-     * @throws DukeException when file cannot be created
+     * @throws SmudgeException when file cannot be created
      * @throws IOException when file creation has an error
      */
-    public Storage(String filepath) throws DukeException, IOException {
+    public Storage(String filepath) throws SmudgeException, IOException {
         String[] splits = filepath.split("/");
         File dir = new File(splits[0]);
 
         if (!dir.exists()) {
             if (!dir.mkdir()) {
-                throw new DukeException("Error while creating ./data folder.");
+                throw new SmudgeException("Error while creating ./data folder.");
             }
         }
         File dataFile = new File(filepath);
         if (!dataFile.exists()) {
             if (!dataFile.createNewFile()) {
-                throw new DukeException("Error while creating duke.txt file.");
+                throw new SmudgeException("Error while creating duke.txt file.");
             }
         }
         this.file = dataFile;
@@ -77,10 +77,10 @@ public class Storage {
      * loads the tasks from the specified saved file
      *
      * @return an arraylist of tasks from the saved file or creates a new arraylist if file is empty
-     * @throws DukeException when data from file cannot be read
+     * @throws SmudgeException when data from file cannot be read
      * @throws FileNotFoundException when saved file cannot be found
      */
-    public ArrayList<Task> load() throws DukeException, FileNotFoundException {
+    public ArrayList<Task> load() throws SmudgeException, FileNotFoundException {
             Scanner scan = new Scanner(this.file);
             ArrayList<Task> tasks = new ArrayList<>();
 
@@ -112,7 +112,7 @@ public class Storage {
                         tasks.add(event);
                         break;
                     default:
-                        throw new DukeException("Data from file does not exist, creating new task list");
+                        throw new SmudgeException("Data from file does not exist, creating new task list");
                 }
             }
         return tasks;

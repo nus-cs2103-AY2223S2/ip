@@ -1,12 +1,12 @@
-package duke.main;
+package smudge.main;
 
-import duke.command.Command;
+import smudge.command.Command;
 import java.io.IOException;
 
 /**
- * Main class for Duke program
+ * Main class for Smudge program
  */
-public class Duke {
+public class Smudge {
     private final Ui UI;
     private Tasklist tasks;
     private Storage storage;
@@ -15,7 +15,7 @@ public class Duke {
     /**
      * initialises Ui, storage and tasklist
      */
-    public Duke() {
+    public Smudge() {
         UI = new Ui();
         try {
             String FILEPATH = "data/duke.txt";
@@ -24,7 +24,7 @@ public class Duke {
         } catch (IOException ie) {
             UI.printException(ie);
             System.exit(0);
-        } catch (DukeException de) {
+        } catch (SmudgeException de) {
             UI.printException(de);
             tasks = new Tasklist();
         }
@@ -34,7 +34,7 @@ public class Duke {
      * executes the command that is taken in as input from user
      *
      * @param input string input from user
-     * @return response Duke will provide as a string
+     * @return response Smudge will provide as a string
      */
     public String getResponse(String input) {
         if (shouldExit) {
@@ -44,7 +44,7 @@ public class Duke {
             Command command = Parser.parseCommand(input);
             shouldExit = command.isExit();
             return command.execute(tasks, UI, storage);
-        } catch (DukeException | IOException e) {
+        } catch (SmudgeException | IOException e) {
             return UI.printException(e);
         }
     }

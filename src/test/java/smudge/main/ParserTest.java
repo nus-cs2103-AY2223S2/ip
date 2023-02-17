@@ -1,10 +1,10 @@
-package duke.main;
+package smudge.main;
 
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
+import smudge.command.AddCommand;
+import smudge.command.DeleteCommand;
+import smudge.command.ExitCommand;
+import smudge.command.ListCommand;
+import smudge.command.MarkCommand;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
     @Test
-    void parserTest() throws DukeException  {
+    void parserTest() throws SmudgeException {
         assertTrue(Parser.parseCommand("bye") instanceof ExitCommand);
         assertTrue(Parser.parseCommand("list") instanceof ListCommand);
         assertTrue(Parser.parseCommand("mark 2") instanceof MarkCommand);

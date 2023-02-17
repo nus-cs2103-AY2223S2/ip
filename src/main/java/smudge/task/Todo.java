@@ -1,4 +1,4 @@
-package duke.task;
+package smudge.task;
 
 /**
  * To do class represents a task of to-do type

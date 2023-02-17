@@ -1,9 +1,9 @@
-package duke.command;
+package smudge.command;
 
-import duke.main.DukeException;
-import duke.main.Storage;
-import duke.main.Tasklist;
-import duke.main.Ui;
+import smudge.main.SmudgeException;
+import smudge.main.Storage;
+import smudge.main.Tasklist;
+import smudge.main.Ui;
 
 public class FindCommand extends Command {
     private final String keyword;
@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     public String execute(Tasklist tasklist, Ui ui, Storage storage) {
         try {
             return ui.printFoundTasks(tasklist.findTask(keyword));
-        } catch (DukeException de) {
+        } catch (SmudgeException de) {
             return ui.printException(de);
         }
     }

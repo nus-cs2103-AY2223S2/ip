@@ -1,4 +1,4 @@
-package duke.task;
+package smudge.task;
 
 /**
  * Task class represent a possible task to be added

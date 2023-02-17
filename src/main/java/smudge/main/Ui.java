@@ -1,6 +1,6 @@
-package duke.main;
+package smudge.main;
 
-import duke.task.Task;
+import smudge.task.Task;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * prints bye message when Duke stops
+     * prints bye message when Smudge stops
      * @return bye message as a string
      */
     public String printBye() {
@@ -80,11 +80,11 @@ public class Ui {
      * prints list of tasks found that matched keywords
      * @param foundTasks the tasks that matched keyword
      * @return message containing tasklist matching keyword
-     * @throws DukeException when there are no tasks that matched keyword
+     * @throws SmudgeException when there are no tasks that matched keyword
      */
-    public String printFoundTasks(ArrayList<Task> foundTasks) throws DukeException {
+    public String printFoundTasks(ArrayList<Task> foundTasks) throws SmudgeException {
         if (foundTasks.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! There are no tasks matching that keyword.");
+            throw new SmudgeException("☹ OOPS!!! There are no tasks matching that keyword.");
         }
         StringBuilder toReturn = new StringBuilder();
         toReturn.append("Here are the matching tasks in your list:\n");
@@ -101,5 +101,9 @@ public class Ui {
      */
     public String printException(Exception e) {
         return (e.getMessage());
+    }
+
+    public String printHelp() {
+        return "Visit https://nevinlim.github.io/ip/ for User Guide.";
     }
 }

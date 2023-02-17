@@ -14,10 +14,10 @@
         <URL value="@../css/style.css"/>
     </stylesheets>
     <TextField fx:id="userInput" layoutY="650.0" onAction="#handleUserInput" prefHeight="50.0" prefWidth="515.0"
-               AnchorPane.bottomAnchor="1.0"
+               AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0"
                style="-fx-font-size: 16; -fx-text-fill: white; fx-font-family : verdana; -fx-background-color: dimgray; -fx-border-color:gray;"/>
     <Button fx:id="sendButton" layoutX="515.0" layoutY="648.0" mnemonicParsing="false" onAction="#handleUserInput"
-            prefHeight="50.0" prefWidth="85.0" text="Send" AnchorPane.bottomAnchor="1.0"
+            prefHeight="50.0" prefWidth="85.0" text="Send" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0"
             style="-fx-background-color: dimgray; -fx-text-fill: white; -fx-border-color: gray;"/>
     <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="948.0" prefWidth="600.0"
                 vvalue="5.0" style="-fx-pannable: true; -fx-background-color: black; -fx-text-fill: black;">

@@ -1,4 +1,4 @@
-import duke.main.Duke;
+import smudge.main.Smudge;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,10 +24,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Smudge smudge;
 
     private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/User.png")));
-    private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Duke.png")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Smudge.png")));
 
     @FXML
     public void initialize() {
@@ -36,18 +36,18 @@ public class MainWindow extends AnchorPane {
         greetUser();
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setSmudge(Smudge s) {
+        smudge = s;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Smudge's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = smudge.getResponse(input);
         if (response.equals("Bye. Hope to see you again soon!")) {
             Platform.exit();
         }
@@ -60,7 +60,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void greetUser() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?", dukeImage)
+                DialogBox.getDukeDialog("Hello! I'm Smudge the cat\n" + "What can I do for you?", dukeImage)
         );
     }
 }

@@ -1,10 +1,10 @@
-package duke.command;
+package smudge.command;
 
-import duke.main.DukeException;
-import duke.main.Storage;
-import duke.main.Ui;
-import duke.task.Task;
-import duke.main.Tasklist;
+import smudge.main.SmudgeException;
+import smudge.main.Storage;
+import smudge.main.Ui;
+import smudge.task.Task;
+import smudge.main.Tasklist;
 
 import java.io.IOException;
 
@@ -15,9 +15,9 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
-    public String execute(Tasklist tasklist, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(Tasklist tasklist, Ui ui, Storage storage) throws IOException, SmudgeException {
         if (tasklist.containsTask(this.task)) {
-            throw new DukeException("☹ OOPS!!! This task already exists.");
+            throw new SmudgeException("☹ Meow!!! This task already exists.");
         }
         else {
             int initialSize = tasklist.getTasksNum();

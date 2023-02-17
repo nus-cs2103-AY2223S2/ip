@@ -1,8 +1,8 @@
-package duke.command;
+package smudge.command;
 
-import duke.main.Storage;
-import duke.main.Tasklist;
-import duke.main.Ui;
+import smudge.main.Storage;
+import smudge.main.Tasklist;
+import smudge.main.Ui;
 
 public class ListCommand extends Command {
 

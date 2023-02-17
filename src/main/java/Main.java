@@ -1,5 +1,5 @@
 import java.io.IOException;
-import duke.main.Duke;
+import smudge.main.Smudge;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,11 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Smudge using FXML.
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke();
+    private final Smudge smudge = new Smudge();
 
     @Override
     public void start(Stage stage) {
@@ -20,9 +20,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setSmudge(smudge);
             stage.show();
-            stage.setTitle("Duke");
+            stage.setResizable(false);
+            stage.setTitle("Smudge");
         } catch (IOException e) {
             stage.close();
             e.printStackTrace();

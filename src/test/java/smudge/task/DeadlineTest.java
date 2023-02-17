@@ -1,4 +1,4 @@
-package duke.task;
+package smudge.task;
 
 import org.junit.jupiter.api.Test;
 
