@@ -37,6 +37,16 @@ public class Ui {
     }
 
     /**
+     * Display the help message at start.
+     *
+     * @return Returns the get help message.
+     */
+    public String printGetHelpMsg() {
+        String str = "Input 'help' to see all available commands.\n";
+        return str;
+    }
+
+    /**
      * Display adding task message.
      *
      * @param taskList Stores all tasks.
@@ -44,8 +54,8 @@ public class Ui {
      * @return The add task message being displayed.
      */
     public String printAddTaskMsg(TaskList taskList, Task task) {
-        String str = "\t Got it. I've added this task:\n  " + "\t\t "
-                + task.toString() + "\n\t Now you have "
+        String str = "Got it. I've added this task:\n  " + "\t "
+                + task.toString() + "\nNow you have "
                 + taskList.getSize() + " tasks in the list\n";
         return str;
     }
@@ -60,11 +70,11 @@ public class Ui {
     public String printMarkTaskMsg(boolean isMarked, Task task) {
         String str = "";
         if (isMarked) {
-            str = "\t Nice! I've marked this task as done: \n"
-                    + "\t\t " + task.toString() + "\n";
+            str = "Nice! I've marked this task as done: \n"
+                    + "\t " + task.toString() + "\n";
         } else {
-            str = "\t OK, I've marked this task as not done yet: \n"
-                    + "\t\t " + task.toString() + "\n";
+            str = "OK, I've marked this task as not done yet: \n"
+                    + "\t " + task.toString() + "\n";
         }
         return str;
     }
@@ -77,9 +87,9 @@ public class Ui {
      * @return The delete task message being displayed.
      */
     public String printDeleteTaskMsg(Task task, int size) {
-        String str = "\t Noted. I've removed this task:\n" + "\t\t "
-                + task.toString() + "\n\t Now you have "
-                + size + " tasks in the list.\n";
+        String str = "Noted. I've removed this task:\n" + "\t "
+                + task.toString() + "\nNow you have "
+                + size + " tasks in the list\n";
         return str;
     }
 
@@ -89,7 +99,7 @@ public class Ui {
      * @return The find task message being displayed.
      */
     public String printFindTaskMsg() {
-        String str = "\t Here are the matching tasks in your list:";
+        String str = "Here are the matching tasks in your list:";
         return str;
     }
 
@@ -99,7 +109,7 @@ public class Ui {
      * @return The invalid command message being displayed.
      */
     public String printWrongMsg() {
-        String str = "\t OOPS!!! I'm sorry, but I don't know what that means.\n";
+        String str = "OOPS!!! I'm sorry, but I don't know what that means.\n";
         return str;
     }
 
@@ -119,7 +129,7 @@ public class Ui {
      * @return The bye message.
      */
     public String printByeMsg() {
-        String byeMsg = "\t Bye. Hope to see you again soon!";
+        String byeMsg = "Bye. Hope to see you again soon!";
         return byeMsg;
     }
 }

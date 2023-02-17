@@ -6,7 +6,6 @@ import dukeexception.DukeException;
 import task.Task;
 import userinteraction.Ui;
 
-
 /**
  * Task list class which stores all tasks.
  */
@@ -42,7 +41,7 @@ public class TaskList {
             throw new DukeException("\t OOPS!!! The format is invalid!\n");
         }
         assert inputLine.length == 1;
-        String str = "\t Current tasks are: \n";
+        String str = "Current tasks are: \n";
         for (int i = 0; i < tasks.size(); i++) {
             str += "\t " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
@@ -144,7 +143,7 @@ public class TaskList {
         }
         assert inputLine.length == 2;
         ui.printFindTaskMsg();
-        String str = "";
+        String str = "These are available tasks:\n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(inputLine[1])) {
                 str += "\t " + (i + 1) + ". " + tasks.get(i).toString() + "\n";

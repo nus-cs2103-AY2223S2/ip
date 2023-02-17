@@ -44,6 +44,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
                 duke.getUi().printWelcomeMsg(), dukeImage)
         );
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                duke.getUi().printGetHelpMsg(), dukeImage)
+        );
         delay.setOnFinished(event -> Platform.exit());
     }
 
