@@ -1,0 +1,31 @@
+hi
+todo
+todo read books
+deadline
+deadline study
+deadline /by
+deadline study /by
+deadline study /by tonight
+deadline study /by 2020-12-12
+event
+event buy food
+event buy food /from
+event buy food /from today
+event buy food /from today /to
+event buy food /from today /to tomorrow
+event buy food /from 2020-12-12 /to 2020-12-12
+list
+mark 0
+mark 10
+mark 1
+list
+unmark 0
+unmark 10
+unmark 1
+list
+delete
+delete 0
+delete 10
+delete 2
+list
+bye
