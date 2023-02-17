@@ -1,8 +1,9 @@
 # User Guide
-t4skiezxc is a chat bot that allows helps you manage your tasks.
+t4skiezxc is a nostalgic chatbot that helps you manage your tasks.
 
 1. [Quick Start](#quick-start)
-2. [Features]()
+2. [Features](#features)
+3. [Usage](#usage)
 
 ## Quick Start
 1. Ensure that you have Java 11 or above installed 
