@@ -46,29 +46,36 @@ public class Parser {
                 output = tasks.unmarkTask(tasks.getTask(unmarkTaskIndex - 1));
                 break;
             case "todo":
-                if (descriptions.length != 2) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+                String todoTaskName = descriptions[1];
+
+                if (descriptions.length != 2 || todoTaskName.equals("")) {
+                    throw new DukeException("The description of a todo cannot be empty.\n");
                 }
 
-                output = tasks.addTask(new ToDo(descriptions[1]));
+                output = tasks.addTask(new ToDo(todoTaskName));
                 break;
             case "deadline":
                 String[] deadlineDescription = descriptions[1].split("/by ");
+                String deadlineTaskName = deadlineDescription[0];
+                String deadlineEndDate = deadlineDescription[1];
 
-                if (deadlineDescription.length != 2) {
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
+                if (deadlineDescription.length != 2 || deadlineTaskName.equals("")) {
+                    throw new DukeException("The description of a deadline cannot be empty.\n");
                 }
 
-                output = tasks.addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
+                output = tasks.addTask(new Deadline(deadlineTaskName, deadlineEndDate));
                 break;
             case "event":
                 String[] eventDescription = descriptions[1].split("/from | /to ");
+                String eventTaskName = eventDescription[0];
+                String eventStartDate = eventDescription[1];
+                String eventEndDate = eventDescription[2];
 
-                if (eventDescription.length != 3) {
-                    throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
+                if (eventDescription.length != 3 || eventTaskName.equals("")) {
+                    throw new DukeException("The description of an event cannot be empty.\n");
                 }
 
-                output = tasks.addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
+                output = tasks.addTask(new Event(eventTaskName, eventStartDate, eventEndDate));
                 break;
             case "delete":
                 output = tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
