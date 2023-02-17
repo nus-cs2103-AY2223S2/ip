@@ -37,4 +37,13 @@ public class Event extends Task {
         String endDnT = end.format(customFormat);
         return "[E][" + statusIcon + "] " + this.desc + "(From: " + startDnT + " By: " + endDnT + ")";
     }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        Event tsk = (Event) o;
+        return tsk.desc.equals(this.desc) && tsk.isDone == this.isDone
+                && tsk.start.equals(this.start) && tsk.end.equals(this.end);
+    }
 }

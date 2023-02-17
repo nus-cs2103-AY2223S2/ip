@@ -38,4 +38,13 @@ public class Task {
         String statusIcon = this.getStatusIcon();
         return "[" + statusIcon + "] " + this.desc;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        Task tsk = (Task) o;
+        return tsk.desc == this.desc && tsk.isDone == this.isDone;
+    }
 }

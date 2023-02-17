@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.util.Objects;
+
 /**
  * Class that models a ToDo task
  */
@@ -22,5 +24,14 @@ public class ToDo extends Task {
     public String toString() {
         String statusIcon = this.getStatusIcon();
         return "[T][" + statusIcon + "] " + this.desc;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        ToDo tsk = (ToDo) o;
+        return tsk.desc.equals(this.desc) && tsk.isDone == this.isDone;
     }
 }

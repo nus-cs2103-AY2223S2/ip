@@ -30,6 +30,10 @@ public class TaskList {
         this.tasks.remove(id);
     }
 
+    public boolean handleDup(Task t) {
+        return tasks.contains(t);
+    }
+
     /**
      * Handles the list command from user
      * @return list of all Tasks
@@ -80,20 +84,32 @@ public class TaskList {
 
     private String handleToDo(String input) {
         ToDo processed = Parser.parseToDo(input);
-        addTask(processed);
-        return "Duke done adding todo...\n" + processed;
+        if (!handleDup(processed)) {
+            addTask(processed);
+            return "Duke done adding todo...\n" + processed;
+        } else {
+            return "Task already exists......";
+        }
     }
 
     private String handleDeadline(String input) {
         Deadline dl = Parser.parseDeadline(input);
-        addTask(dl);
-        return "Duke done adding deadline...\n" + dl;
+        if (!handleDup(dl)) {
+            addTask(dl);
+            return "Duke done adding deadline...\n" + dl;
+        } else {
+            return "Task already exists......";
+        }
     }
 
     private String handleEvent(String input) {
         Event ev = Parser.parseEvent(input);
-        addTask(ev);
-        return "Duke done adding event...\n" + ev;
+        if (!handleDup(ev)) {
+            addTask(ev);
+            return "Duke done adding event...\n" + ev;
+        } else {
+            return "Event already exists......";
+        }
     }
 
     private String handleDelete(String input) {

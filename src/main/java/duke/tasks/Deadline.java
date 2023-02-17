@@ -32,4 +32,13 @@ public class Deadline extends Task {
         String parsedDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[D][" + statusIcon + "] " + this.desc + "(By: " + parsedDeadline + ")";
     }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        Deadline tsk = (Deadline) o;
+        return tsk.desc.equals(this.desc) && tsk.isDone == this.isDone
+                && tsk.deadline.equals(this.deadline);
+    }
 }
