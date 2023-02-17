@@ -8,14 +8,6 @@ are familiar with text-based UIs.
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    - [Adding a todo task: `todo`](#adding-a-todo-task--todo)
-    - [Adding a deadline task: `deadline`](#adding-a-deadline-task--deadline)
-    - [Adding an event task: `event`](#adding-an-event-task--event)
-    - [Listing all tasks: `list`](#listing-all-tasks--list)
-    - [Marking a task as done: `mark`](#marking-a-task-as-done--mark)
-    - [Marking a task as not done: `unmark`](#marking-a-task-as-not-done--unmark)
-    - [Deleting a task: `delete`](#deleting-a-task--delete)
-    - [Finding tasks by keyword: `find`](#finding-tasks-by-keyword--find)
 - [Usage](#usage)
 
 ## Quick Start
