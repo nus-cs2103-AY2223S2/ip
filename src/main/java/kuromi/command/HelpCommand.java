@@ -8,7 +8,7 @@ import kuromi.view.Ui;
  * Lists the commands available.
  */
 public class HelpCommand extends Command {
-    String line = "\u2014\u2014\u2014\u2014\u2014\n";
+    private String line = "\u2014\u2014\u2014\u2014\u2014\n";
 
     /**
      * Lists the commands that contain
