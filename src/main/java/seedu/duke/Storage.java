@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
@@ -18,10 +16,8 @@ public class Storage {
     private static final int DESCRIPTION_INDEX = 2;
     private static final int BY_INDEX = 3;
     private static final int FROM_INDEX = 3;
-
     private static final int TO_INDEX = 4;
-
-    private final Path path;
+    private final String path;
 
     /**
      *  Constructor for Storage
@@ -29,8 +25,12 @@ public class Storage {
      *  @param fileName String of the name of the save file
      */
     Storage(String fileName) {
-        String currPath = System.getProperty("user.dir");
-        this.path = Paths.get(currPath, "src", "data", fileName);
+        String absolutePath = new File("").getAbsolutePath() + "/data/" + fileName;
+        File file = new File( absolutePath );
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdir();
+        }
+        this.path = absolutePath;
     }
 
     private TaskList handleTodo(TaskList data, String[] taskDetails, boolean isDone, String taskType) {
@@ -58,8 +58,11 @@ public class Storage {
      */
     public TaskList readFile() throws DukeException {
         TaskList data = new TaskList();
+        File file = new File(this.path);
         try {
-            File file = new File(String.valueOf(this.path));
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             Scanner sc = new Scanner(file);
             // scan and read each line on the duke.txt file
             // need to be able to have a common function that creates the different types of tasks
@@ -83,6 +86,8 @@ public class Storage {
             }
         } catch (FileNotFoundException err) {
             throw new DukeException("Save file does not exist!");
+        } catch (IOException err) {
+            System.out.println(err);
         }
         return data;
     }

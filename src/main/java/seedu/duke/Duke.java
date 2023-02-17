@@ -27,6 +27,7 @@ public class Duke {
             this.tasks = storage.readFile();
         } catch (DukeException err) {
             System.out.println(ui.showLoadingError());
+            System.out.println(err.getErrorMessage());
             this.tasks = new TaskList();
         }
     }
