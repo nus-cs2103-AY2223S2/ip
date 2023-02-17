@@ -16,37 +16,37 @@ public class AddToDoCommand extends Command {
     public static final String MESSAGE = COMMAND + ": adds a task of type todo.\n"
             + "(e.g todo return book)";
 
-    public static final String MESSAGE_FORMAT = "add a todo task using the following format:\n"
+    public static final String MESSAGE_FORMAT = "Please follow the format for todo task:\n"
             + "'todo [task description]'\n"
-            + "here is an example, 'todo return book'";
+            + "Example: 'todo return book'";
 
-    private String userCommand;
+    private String userInput;
 
     /**
      * Constructs an AddToDoCommand object.
      *
-     * @param userCommand The command the user typed.
+     * @param userInput The command the user typed.
      */
-    public AddToDoCommand(String userCommand) {
-        this.userCommand = userCommand;
+    public AddToDoCommand(String userInput) {
+        this.userInput = userInput;
     }
 
     /**
      * Executes the AddToDoCommand which adds a task of type ToDo into a stored task list.
      *
      * @param tasks The list where tasks are added to.
-     * @param ui The ui to print out JamesBot's response.
-     * @param storage The task list that is stored in the user's hard disk.
+     * @param ui The ui to print out response from JamesBot.
+     * @param storage  The task list that is stored in the storage file.
      * @throws JamesException If task description is empty.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
-        if (isTaskDescriptionEmpty) {
+        boolean isDescriptionEmpty = userInput.toLowerCase().replaceFirst(COMMAND, "").isBlank();
+        if (isDescriptionEmpty) {
             throw new JamesException("Task description is empty \n"
                     + MESSAGE_FORMAT);
         }
 
-        String description = userCommand.substring(COMMAND.length()).trim();
+        String description = userInput.substring(COMMAND.length()).trim();
         ToDo todo = new ToDo(description);
         tasks.add(todo);
         storage.save(tasks.taskListToStoreString());

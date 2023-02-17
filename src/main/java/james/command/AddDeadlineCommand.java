@@ -15,43 +15,42 @@ public class AddDeadlineCommand extends Command {
     public static final String COMMAND = "deadline";
 
     public static final String MESSAGE = COMMAND + ": adds a task of type deadline.\n"
-            + "(e.g deadline lab assignment /by 25/03/2000 1800)";
+            + "(e.g deadline project /by 25/03/2000 1800)";
 
-    public static final String MESSAGE_FORMAT = "add a deadline task using the following format:\n"
-            + "'deadline [task description] /by [date and time]'\n"
-            + "make sure that your [date and time] is of the format: d/MM/yyyy HHmm\n"
-            + "here is an example, 'deadline project /by 25/03/2000 1800";
+    public static final String MESSAGE_FORMAT = "Please follow the format for deadline:\n"
+            + "'deadline [description] /by [d/MM/yyyy] HHmm'\n"
+            + "Example: 'deadline project /by 25/03/2000 1800' ";
 
-    private String userCommand;
+    private String userInput;
 
     /**
      * Constructs an AddDeadlineCommand object.
      *
-     * @param userCommand The command the user typed.
+     * @param userInput The input the user typed.
      */
-    public AddDeadlineCommand(String userCommand) {
-        this.userCommand = userCommand;
+    public AddDeadlineCommand(String userInput) {
+        this.userInput = userInput;
     }
 
     /**
      * Executes the AddDeadlineCommand which adds a task of type Deadline into a stored task list.
      *
      * @param tasks The list where tasks are added to.
-     * @param ui The ui to print out JamesBot's response.
-     * @param storage The task list that is stored in the user's hard disk.
-     * @throws JamesException If task description is empty;
-     *                      If task does not contain descriptor;
-     *                      If date is empty for deadline task.
+     * @param ui The ui to print out response from JamesBot.
+     * @param storage The task list that is stored in the storage file.
+     * @throws JamesException If description of task is empty;
+     *                        If descriptor is not present;
+     *                        If deadline timing is empty.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
-        if (isTaskDescriptionEmpty) {
+        boolean isDescriptionEmpty = userInput.toLowerCase().replaceFirst(COMMAND, "").isBlank();
+        if (isDescriptionEmpty) {
             throw new JamesException("Task description is empty!\n"
                     + MESSAGE_FORMAT);
         }
 
         int commandLength = COMMAND.length();
-        String taskInformation = userCommand.substring(commandLength).trim();
+        String taskInformation = userInput.substring(commandLength).trim();
         String descriptor = "/by";
         boolean hasNoDescriptor = !taskInformation.contains(descriptor);
         boolean hasNoDate = taskInformation.trim().endsWith(descriptor);
@@ -67,8 +66,9 @@ public class AddDeadlineCommand extends Command {
                     + MESSAGE_FORMAT);
         }
 
-        int deadlineIndex = userCommand.indexOf(descriptor + " ");
-        String description = userCommand.substring(commandLength, deadlineIndex).trim();
+        int deadlineIndex = userInput.indexOf(descriptor + " ");
+        String description = userInput.substring(commandLength, deadlineIndex).trim();
+
         boolean hasNoDescription = description.isBlank();
 
         if (hasNoDescription) {
@@ -76,7 +76,7 @@ public class AddDeadlineCommand extends Command {
                     + MESSAGE_FORMAT);
         }
 
-        String deadline = userCommand.substring(deadlineIndex + 3).trim();
+        String deadline = userInput.substring(deadlineIndex + 3).trim();
 
         Deadline task = new Deadline(description, deadline);
         tasks.add(task);

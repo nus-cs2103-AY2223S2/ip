@@ -13,46 +13,45 @@ import james.task.TaskList;
 public class AddEventCommand extends Command {
     public static final String COMMAND = "event";
 
-    public static final String MESSAGE = COMMAND + ": adds a task of type event.\n"
+    public static final String MESSAGE = COMMAND + ": Adds a type of task event.\n"
             + "(e.g event project meeting \n"
             + "/from 25/03/2000 1800 /to 25/03/2000 1900)";
 
-    public static final String MESSAGE_FORMAT = "add an event task using the following format:"
-            + "\n'event [task description] /from [date and time] /to [date and time]'\n"
-            + "make sure that your [date and time] is of the format: d/MM/yyyy HHmm\n"
-            + "here is an example, 'event christmas party \n"
-            + "/from 25/03/2000 1800 /to 25/03/2000 1900";
+    public static final String MESSAGE_FORMAT = "Please follow the format for event task:"
+            + "\n'event [task description] /from [d/MM/yyyy HHmm] /to [d/MM/yyyy HHmm]'\n"
+            + "Example: 'event project meeting \n"
+            + "/from 25/03/2000 1800 /to 25/03/2000 1900' ";
 
-    private String userCommand;
+    private String userInput;
 
     /**
      * Constructs an AddEventCommand object.
      *
-     * @param userCommand The command the user typed.
+     * @param userInput The input the user typed.
      */
-    public AddEventCommand(String userCommand) {
-        this.userCommand = userCommand;
+    public AddEventCommand(String userInput) {
+        this.userInput = userInput;
     }
 
     /**
      * Executes the AddEventCommand which adds a task of type Event into a stored task list.
      *
      * @param tasks The list where tasks are added to.
-     * @param ui The ui to print out JamesBot's response.
-     * @param storage The task list that is stored in the user's hard disk.
-     * @throws JamesException If task description is empty;
-     *                      If task does not contain descriptor;
-     *                      If date is empty for event task.
+     * @param ui The ui to print out response from JamesBot.
+     * @param storage The task list that is stored in the storage file.
+     * @throws JamesException If description of task is empty;
+     *                        If descriptor is not present;
+     *                        If event timing is empty.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean isTaskDescriptionEmpty = userCommand.toLowerCase().replaceFirst(COMMAND, "").isBlank();
-        if (isTaskDescriptionEmpty) {
+        boolean isDescriptionEmpty = userInput.toLowerCase().replaceFirst(COMMAND, "").isBlank();
+        if (isDescriptionEmpty) {
             throw new JamesException("Task description is empty! \n"
                     + MESSAGE_FORMAT);
         }
 
         int commandLength = COMMAND.length();
-        String taskInformation = userCommand.substring(commandLength).trim();
+        String taskInformation = userInput.substring(commandLength).trim();
         String descriptor1 = "/from";
         String descriptor2 = "/to";
         boolean hasNoDescriptor1 = !taskInformation.contains(descriptor1);
@@ -72,10 +71,10 @@ public class AddEventCommand extends Command {
                     + MESSAGE_FORMAT);
         }
 
-        int startIndexEvent = userCommand.indexOf(descriptor1 + " ");
-        int endIndexEvent = userCommand.indexOf(descriptor2 + " ");
-        int userCmdLenEvent = userCommand.length();
-        String description = userCommand.substring(commandLength, startIndexEvent).trim();
+        int startIndexEvent = userInput.indexOf(descriptor1 + " ");
+        int endIndexEvent = userInput.indexOf(descriptor2 + " ");
+        int userCmdLenEvent = userInput.length();
+        String description = userInput.substring(commandLength, startIndexEvent).trim();
 
         boolean hasNoDescription = description.isBlank();
 
@@ -84,8 +83,8 @@ public class AddEventCommand extends Command {
             throw new JamesException("your task description is empty\n"
                     + MESSAGE_FORMAT);
         }
-        String startEvent = userCommand.substring(startIndexEvent + 5, endIndexEvent).trim();
-        String endEvent = userCommand.substring(endIndexEvent + 3, userCmdLenEvent).trim();
+        String startEvent = userInput.substring(startIndexEvent + 5, endIndexEvent).trim();
+        String endEvent = userInput.substring(endIndexEvent + 3, userCmdLenEvent).trim();
         Event taskEvent = new Event(description, startEvent, endEvent);
         tasks.add(taskEvent);
         storage.save(tasks.taskListToStoreString());

@@ -35,7 +35,7 @@ public class Ui {
     public String displayAddTask(Task task, int tasksLength) {
         String addToDoString = "You have added new tasks"
                 + "\n added: " + task.toString()
-                + "\nyou have " + String.valueOf(tasksLength) + " task(s)";
+                + "\nyou have " + tasksLength + " task(s)";
         return addToDoString;
     }
 

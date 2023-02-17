@@ -31,5 +31,4 @@ public class James extends Application {
             e.printStackTrace();
         }
     }
-
 }

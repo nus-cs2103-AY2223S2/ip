@@ -14,10 +14,11 @@ public abstract class Command {
      * Executes the user command.
      *
      * @param tasks The list where tasks are added to.
-     * @param ui The ui to print out JamesBot's response.
-     * @param storage The task list that is stored in the user's hard disk.
+     * @param ui The ui to print out response from JamesBot.
+     * @param storage The task list that is stored in the storage file.
      * @throws JamesException If user command is used wrongly.
      */
+
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException;
 
     /**

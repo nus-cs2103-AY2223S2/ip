@@ -16,18 +16,18 @@ public class AddMarkCommand extends Command {
     public static final String MESSAGE = COMMAND + ": marks a task at the specified index as complete.\n"
             + "(e.g mark 1)";
 
-    public static final String MESSAGE_FORMAT = "to mark a task as complete, use the following format:\n"
+    public static final String MESSAGE_FORMAT = "Please mark the specified task in the following format:\n"
             + "mark [index of task]";
 
-    private String userCommand;
+    private String userInput;
 
     /**
      * Constructs a MarkCommand object.
      *
-     * @param userCommand The command the user typed.
+     * @param userInput The command the user typed.
      */
-    public AddMarkCommand(String userCommand) {
-        this.userCommand = userCommand;
+    public AddMarkCommand(String userInput) {
+        this.userInput = userInput;
     }
 
     /**
@@ -35,20 +35,20 @@ public class AddMarkCommand extends Command {
      * specified index.
      *
      * @param tasks The list where tasks are added to.
-     * @param ui The ui to print out JamesBot's response.
-     * @param storage The task list that is stored in the user's hard disk.
+     * @param ui The ui to print out response from JamesBot.
+     * @param storage  The task list that is stored in the storage file.
      * @throws JamesException If task index is out of bounds;
      *                        If task has already been marked;
-     *                        If command does not have index.
+     *                        If input has no index.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JamesException {
-        boolean hasNoIndex = userCommand.toLowerCase().trim().endsWith(COMMAND);
+        boolean hasNoIndex = userInput.toLowerCase().trim().endsWith(COMMAND);
         if (hasNoIndex) {
             throw new JamesException("Index is missing\n"
                     + MESSAGE_FORMAT);
         }
 
-        String indexStr = userCommand.substring(COMMAND.length()).trim();
+        String indexStr = userInput.substring(COMMAND.length()).trim();
         int index = Integer.parseInt(indexStr) - 1;
         boolean isInvalidTask = index >= tasks.size() || index < 0;
         boolean hasBeenMarked = tasks.get(index).getIsDone();
