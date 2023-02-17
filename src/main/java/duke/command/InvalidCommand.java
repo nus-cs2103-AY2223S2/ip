@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class InvalidCommand extends Command {
 
     /**
-     * Print the erorr message when the users key in invalid command.
+     * Prints the erorr message when the users key in invalid command.
      * @param tasks
      * @param ui
      * @param storage
@@ -22,7 +22,7 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

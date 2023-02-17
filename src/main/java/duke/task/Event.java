@@ -25,7 +25,7 @@ public class Event extends Task {
     }
 
     /**
-     * Edit the information of an Event object.
+     * Edits the information of an Event object.
      * @param partToBeEdited
      * @param content
      */
@@ -51,7 +51,7 @@ public class Event extends Task {
     }
 
     /**
-     * Message printed when a new Event task is added.
+     * Returns the Message printed when a new Event task is added.
      *
      * @return String representing the Event task information.
      */

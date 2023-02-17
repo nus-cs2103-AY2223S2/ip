@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Add task into the TaskList object.
+     * Adds task into the TaskList object.
      *
      * @param task
      */
@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Delete a task in the TaskList object.
+     * Deletes a task in the TaskList object.
      *
      * @param taskNum
      */
@@ -51,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Get the number of the tasks in the TaskList.
+     * Returns the number of the tasks in the TaskList.
      *
      * @return Number of tasks.
      */
@@ -60,7 +60,7 @@ public class TaskList {
     }
 
     /**
-     * Get a specific task in the TaskList.
+     * Returns a specific task in the TaskList.
      *
      * @param num
      * @return the Task object.

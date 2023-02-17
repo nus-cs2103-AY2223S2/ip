@@ -30,7 +30,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Edit the information of a Deadline object.
+     * Edits the information of a Deadline object.
      * @param partToBeEdited
      * @param content
      */
@@ -50,7 +50,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the task type of a Deadline object.
+     * Returns the task type of a Deadline object.
      * @return String object
      */
     @Override
@@ -67,7 +67,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Message printed when a new Deadline task is added.
+     * Returns the printed message when a new Deadline task is added.
      *
      * @return String representing the Deadline task information.
      */

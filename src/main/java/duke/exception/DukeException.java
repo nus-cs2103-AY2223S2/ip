@@ -16,9 +16,9 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Get the error message.
+     * Returns the error message.
      *
-     * @return
+     * @return String object
      */
     @Override
     public String getMessage() {

@@ -26,7 +26,7 @@ public class Task {
     }
 
     /**
-     * Display whether the task is completed or not.
+     * Displays whether the task is completed or not.
      *
      * @return String informing users on whether the task is completed.
      */
@@ -35,7 +35,7 @@ public class Task {
     }
 
     /**
-     * Message containing information about the task.
+     * Returns message containing information about the task.
      *
      * @return String representing the task information.
      */
@@ -45,14 +45,14 @@ public class Task {
     }
 
     /**
-     * Mark the task as completed.
+     * Marks the task as completed.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Mark the task as incomplete.
+     * Marks the task as incomplete.
      */
     public void markAsIncomplete() {
         this.isDone = false;

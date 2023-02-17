@@ -35,7 +35,7 @@ public class Parser {
     private static final String HELP = "help";
 
     /**
-     * Split the command into different parts.
+     * Splits the command into different parts.
      *
      * @param command
      * @return a String array containing useful information about the command.
@@ -57,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Split the command for deadline into command, task description and deadline.
+     * Splits the command for deadline into command, task description and deadline.
      * @param tempArr
      */
     public static void splitDeadlineCommand(String[] tempArr) {
@@ -80,7 +80,7 @@ public class Parser {
     }
 
     /**
-     * Split the command for event into command, task description from and by.
+     * Splits the command for event into command, task description from and by.
      * @param tempArr
      */
     public static void splitEventCommand(String[] tempArr) {
@@ -92,7 +92,7 @@ public class Parser {
     }
 
     /**
-     * Parse the command.
+     * Parses the command.
      *
      * @param command
      * @return Command object.

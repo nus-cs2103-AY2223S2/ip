@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Display the welcome message whenever ShinChan is activated.
+     * Displays the welcome message whenever ShinChan is activated.
      */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Display the reminder message to inform users if there is any upcoming deadline.
+     * Displays the reminder message to inform users if there is any upcoming deadline.
      */
 
     public void showReminders() {

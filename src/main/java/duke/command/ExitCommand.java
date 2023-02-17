@@ -13,7 +13,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Terminate duke program.
+     * Terminates duke program.
      *  @param tasks
      * @param ui
      * @param storage
@@ -25,7 +25,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

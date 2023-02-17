@@ -40,7 +40,7 @@ public class Storage {
     }
 
     /**
-     * Set the status of the task based on the input in the tasks.txt file.
+     * Sets the status of the task based on the input in the tasks.txt file.
      * @param status
      * @param task
      */
@@ -53,7 +53,7 @@ public class Storage {
     }
 
     /**
-     * Take in the String object which contains the deadline of the task and format it to a LocalDateTime object
+     * Takes in the String object which contains the deadline of the task and format it to a LocalDateTime object
      * @param str
      * @return a LocalDateTime object
      */
@@ -71,7 +71,7 @@ public class Storage {
     }
 
     /**
-     * Format the String object which consists of the event start date and event end date.
+     * Formats the String object which consists of the event start date and event end date.
      * @param str
      * @return
      */
@@ -85,7 +85,7 @@ public class Storage {
     }
 
     /**
-     * Convert the task information in the txt file to Task objects.
+     * Edits the task information in the txt file to Task objects.
      *
      * @param str
      * @return Task objects.
@@ -113,7 +113,7 @@ public class Storage {
     }
 
     /**
-     * Load the existing task list to Duke.
+     * Loads the existing task list to Duke.
      *
      * @return TaskList.
      * @throws DukeException
@@ -138,7 +138,7 @@ public class Storage {
     }
 
     /**
-     * Check if the directory, data and the text file exists.
+     * Checks if the directory, data and the text file exists.
      * @param filePath
      */
     public void checkPathExists(String filePath) {
@@ -160,7 +160,7 @@ public class Storage {
     }
 
     /**
-     * Update the text file whenever a new task is added by the user.
+     * Updates the text file whenever a new task is added by the user.
      *
      * @param task
      * @throws IOException
@@ -182,7 +182,7 @@ public class Storage {
     }
 
     /**
-     * Sync the tasks.txt file to delete the specific task as well.
+     * Syncs the tasks.txt file to delete the specific task as well.
      * @param taskNum
      */
     public void delete(int taskNum) {

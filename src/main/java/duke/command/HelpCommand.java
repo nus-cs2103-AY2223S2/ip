@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class HelpCommand extends Command {
     /**
-     * Print the help message which contain all the commands available.
+     * Prints the help message which contain all the commands available.
      * @param tasks
      * @param ui
      * @param storage
@@ -21,7 +21,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

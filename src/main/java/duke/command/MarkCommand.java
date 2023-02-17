@@ -27,7 +27,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Mark the task as completed as requested by user.
+     * Marks the task as completed as requested by user.
      *  @param tasks
      * @param ui
      * @param storage
@@ -46,7 +46,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

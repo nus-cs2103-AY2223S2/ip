@@ -28,7 +28,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Message printed when a new Todo task is added.
+     * Returns the message printed when a new Todo task is added.
      *
      * @return String representing the Todo task information.
      */

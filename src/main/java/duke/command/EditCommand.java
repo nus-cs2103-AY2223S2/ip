@@ -29,7 +29,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Check all the relevant fields if they are of the correct format.
+     * Checks all the relevant fields if they are of the correct format.
      * @param taskNum
      * @param partToEdited
      * @param content
@@ -54,7 +54,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Reture true if the task do not exist in the task list and false if it exist.
+     * Returns true if the task do not exist in the task list and false if it exist.
      * @param taskNum
      * @param tasks
      * @return
@@ -67,7 +67,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Reture true if the part the user want to edit is not valid and false if it is valid.
+     * Returns true if the part the user want to edit is not valid and false if it is valid.
      * @param partToEdit
      * @return
      */
@@ -88,7 +88,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Return true if the content that the users want to change is blank and false if it is not blank.
+     * Returns true if the content that the users want to change is blank and false if it is not blank.
      * @param content
      * @return
      */
@@ -100,7 +100,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Edit the task information requested by the user.
+     * Edits the task information requested by the user.
      * @param tasks
      * @param ui
      * @param storage
@@ -133,7 +133,7 @@ public class EditCommand extends Command {
 
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

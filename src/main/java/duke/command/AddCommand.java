@@ -85,7 +85,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Create a new Task object.
+     * Creates a new Task object.
      * @param tasks
      * @param storage
      * @return Task object
@@ -104,7 +104,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Create a new Task object.
+     * Creates a new Task object.
      * @param tasks
      * @param storage
      * @return Task object
@@ -115,7 +115,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add the task into the task list and update the task in the tasks.txt.
+     * Adds the task into the task list and update the task in the tasks.txt.
      * @param tasks
      * @param ui
      * @param storage
@@ -150,7 +150,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

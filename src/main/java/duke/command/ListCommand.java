@@ -13,7 +13,7 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * List all the tasks in the tasklist.
+     * Lists all the tasks in the tasklist.
      *  @param tasks
      * @param ui
      * @param storage
@@ -36,7 +36,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

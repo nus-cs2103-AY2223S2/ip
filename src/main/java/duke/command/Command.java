@@ -13,7 +13,7 @@ import duke.ui.Ui;
 public abstract class Command {
 
     /**
-     * Execute the command.
+     * Executes the command.
      *  @param tasks
      * @param ui
      * @param storage
@@ -22,7 +22,7 @@ public abstract class Command {
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * Check if the command cause duke to terminate.
+     * Checks if the command cause duke to terminate.
      *
      * @return boolean value.
      */

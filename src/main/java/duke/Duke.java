@@ -49,7 +49,7 @@ public class Duke {
     }
 
     /**
-     * Start the Duke program.
+     * Starts the Duke program.
      */
     public void run() {
         System.out.println(ui.showWelcome());
@@ -71,7 +71,7 @@ public class Duke {
     }
 
     /**
-     * Initialise the Duke object.
+     * Initialises the Duke object.
      *
      * @param args
      * @throws DukeException
@@ -82,8 +82,7 @@ public class Duke {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
      */
     public String getResponse(String input) throws DukeException {
         if (!isExit) {
@@ -99,7 +98,4 @@ public class Duke {
             return ui.exit();
         }
     }
-
-
-
 }

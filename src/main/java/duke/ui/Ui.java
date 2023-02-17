@@ -32,7 +32,7 @@ public class Ui {
     }
 
     /**
-     * Print the welcome message when user first run ShinChan.
+     * Returns the welcome message when user first run ShinChan.
      *
      * @return String displaying the welcome message whenever Shinchan is activated.
      */
@@ -45,7 +45,7 @@ public class Ui {
     }
 
     /**
-     * Get the input typed by the user.
+     * Returns the input typed by the user.
      *
      * @return String object containing the input by user.
      */
@@ -54,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Show the error message.
+     * Returns the error message.
      *
      * @param errorMsg
      */
@@ -64,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Display all the commands available for the users to use and how to use it.
+     * Returns all the commands available for the users to use and how to use it.
      * @return
      */
     public String showHelp() {
@@ -85,14 +85,14 @@ public class Ui {
     }
 
     /**
-     * Print the message when the user type "list" command.
+     * Returns the message when the user type "list" command.
      */
     public String showListMessage() {
         return showLine() + "Here are the tasks in your list:";
     }
 
     /**
-     * Print the message when users call the command 'list' but the task list is empty
+     * Returns the message when users call the command 'list' but the task list is empty
      * @return String object
      */
     public String showEmptyListMessage() {
@@ -100,7 +100,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when the users call a task number that is more than the total number of tasks in the list.
+     * Returns the message when the users call a task number that is more than the total number of tasks in the list.
      * @param totalNumTasks
      * @return String object
      */
@@ -109,7 +109,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when the users do not key in the keyword when they use the command 'find'
+     * Returns the message when the users do not key in the keyword when they use the command 'find'
      * @return String object
      */
     public String showEmptyKeywordMsg() {
@@ -117,7 +117,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when shinchan cannot find the relevant tasks containing the keyword.
+     * Returns the message when shinchan cannot find the relevant tasks containing the keyword.
      * @return String object
      */
     public String showNoRelevantTasksMsg() {
@@ -125,7 +125,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when the users key in an invalid command.
+     * Returns the message when the users key in an invalid command.
      * @return String object
      */
     public String showInvalidCommandMsg() {
@@ -133,7 +133,7 @@ public class Ui {
     }
 
     /**
-     * Print message when the user delete a task.
+     * Returns message when the user delete a task.
      *
      * @param task
      * @param tasksLen
@@ -146,7 +146,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when the user add a task.
+     * Returns the message when the user add a task.
      *
      * @param task
      * @param tasksLen
@@ -159,7 +159,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when the user type "exit" command.
+     * Returns the message when the user type "exit" command.
      *
      * @return String object containing exit message displayed for user.
      */
@@ -168,7 +168,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when the user mark a task as done.
+     * Returns the message when the user mark a task as done.
      *
      * @param task
      *
@@ -179,7 +179,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when the user mark a task as not done.
+     * Returns the message when the user mark a task as not done.
      *
      * @param task
      *
@@ -191,7 +191,7 @@ public class Ui {
     }
 
     /**
-     * Print all the tasks containing the keyword requested by user.
+     * Returns all the tasks containing the keyword requested by user.
      *
      * @param tasklist
      *
@@ -207,7 +207,7 @@ public class Ui {
     }
 
     /**
-     * Print the message when user type an unknown command.
+     * Returns the message when user type an unknown command.
      *
      * @return String object containing loading message displayed for user.
      */
@@ -216,7 +216,7 @@ public class Ui {
     }
 
     /**
-     * Show all the upcoming deadlines for the user when Shinchan is launched.
+     * Shows all the upcoming deadlines for the user when Shinchan is launched.
      * @param tasks
      * @return
      */
@@ -240,7 +240,7 @@ public class Ui {
     }
 
     /**
-     * Print divider line.
+     * Returns divider line.
      *
      * @return String object containing divider lines displayed for user.
      */

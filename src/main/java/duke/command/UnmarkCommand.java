@@ -24,7 +24,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Unmark the task to incompleted as requested by user.
+     * Un-marks the task to incompleted as requested by user.
      * @param tasks
      * @param ui
      * @param storage
@@ -43,7 +43,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      * @return whether the program is exited.
      */
     @Override

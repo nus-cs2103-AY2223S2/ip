@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the task in the tasklist and update it in the txt file.
+     * Deletes the task in the tasklist and update it in the txt file.
      *  @param tasks
      * @param ui
      * @param storage
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */

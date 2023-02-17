@@ -16,12 +16,16 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * Constructor for FindCommand object
+     * @param keyword
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
     /**
-     * Store all the tasks containing the keyword in an arraylist and print it out.
+     * Stores all the tasks containing the keyword in an arraylist and print it out.
      * @param tasks
      * @param ui
      * @param storage
@@ -47,7 +51,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Check if this command will result in termination of duke.
+     * Checks if this command will result in termination of duke.
      *
      * @return whether the program is exited.
      */
