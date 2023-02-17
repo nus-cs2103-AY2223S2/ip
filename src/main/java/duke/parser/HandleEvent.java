@@ -29,9 +29,15 @@ public class HandleEvent {
         try {
             String taskString = input.trim().substring(6, input.indexOf(" /from"));
             String startDate = input.substring(input.indexOf(" /from ") + 7, input.lastIndexOf(" /to "));
-            LocalDate.parse(startDate);
+            LocalDate taskStartDate = LocalDate.parse(startDate);
             String endDate = input.substring(input.indexOf(" /to ") + 5);
-            LocalDate.parse(endDate);
+            LocalDate taskEndDate = LocalDate.parse(endDate);
+            if (taskEndDate.isBefore(taskStartDate)) {
+                return ui.showError("Noooo! Your end date is before start date!");
+            }
+            if (taskStartDate.isBefore(java.time.LocalDate.now())) {
+                return ui.showError("Noooo! You're entering dates before today!");
+            }
             assert input.contains("/from") && input.contains("/to"): "Wrong format for event task!";
             Task taskEvent = new Event(taskString, startDate, endDate);
             if (tasklist.checkDuplicates(taskEvent)) {

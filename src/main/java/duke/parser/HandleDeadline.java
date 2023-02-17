@@ -30,7 +30,10 @@ public class HandleDeadline {
             String taskString = input.substring(9, input.indexOf(" /by "));
             String deadline = input.substring(input.indexOf(" /by ") + 5);
             assert input.contains("/by") : "Wrong format for deadline task!";
-            LocalDate.parse(deadline);
+            LocalDate taskDeadlineine = LocalDate.parse(deadline);
+            if (taskDeadlineine.isBefore(java.time.LocalDate.now())) {
+                return ui.showError("Noooo! You're entering a date before today!");
+            }
             Task taskDeadline = new Deadline(taskString, deadline);
             if (tasklist.checkDuplicates(taskDeadline)) {
                 return ui.showError("OOPS! You have added this task before already!");
