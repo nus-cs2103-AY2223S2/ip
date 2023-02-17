@@ -1,3 +1,4 @@
+package duke.main;
 import java.io.*;
 
 public class Duke {

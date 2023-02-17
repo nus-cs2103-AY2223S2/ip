@@ -1,9 +1,10 @@
+package duke.task;
 import java.util.List;
 
-class Todo extends Task {
+public class Todo extends Task {
     private final String taskType;
 
-    Todo(int taskNumber, boolean taskStatus, String task, int totalNumOfTasks) {
+    public Todo(int taskNumber, boolean taskStatus, String task, int totalNumOfTasks) {
         super(taskNumber, taskStatus, task, totalNumOfTasks);
         this.taskType = "[T]";
     }
