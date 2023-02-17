@@ -24,15 +24,15 @@ public class Duke {
      * @return the response from Duke
      */
     public String getResponse(String textInput) {
+        if (textInput.equals("hi")) {
+            return this.ui.welcomeUser();
+        }
         String response;
         this.parser = new Parser();
         this.parser.parse(textInput);
 
         if (this.parser.action.equals("bye")) {
             response = this.ui.goodbyeUser();
-
-        } else if (this.parser.action.equals("hi")) {
-            response = this.ui.welcomeUser();
 
         } else if (this.parser.action.equals("list")) {
             response = this.ui.listTasks(tasks);
@@ -67,15 +67,24 @@ public class Duke {
             }
 
         } else if (this.parser.action.equals("deadline")) {
-            String[] parts = textInput.split("/");
-            response = this.tasks.deadline(parts);
-            this.storage.writeTxt(tasks);
+            try {
+                String[] parts = textInput.split("/");
+                assert parts.length >= 2 : "Invalid input for deadline task";
+                response = this.tasks.deadline(parts);
+                this.storage.writeTxt(tasks);
+            } catch (AssertionError e) {
+                response = e.toString();
+            }
 
         } else if (this.parser.action.equals("event")) {
-            String[] parts = textInput.split("/");
-            response = this.tasks.event(parts);
-            this.storage.writeTxt(tasks);
-
+            try {
+                String[] parts = textInput.split("/");
+                assert parts.length >= 3 : "Invalid input for event task";
+                response = this.tasks.event(parts);
+                this.storage.writeTxt(tasks);
+            } catch (AssertionError e) {
+                response = e.toString();
+            }
         } else {
             response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
