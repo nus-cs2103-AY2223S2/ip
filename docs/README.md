@@ -1,4 +1,16 @@
 # User Guide
+Pepe is a desktop bot for managing (**CRUD**) tasks where you add various types of tasks (`ToDo`, `Deadline`, `Event`) and mark/unmark their completion.
+
+## Quick Start
+1. Ensure you have Java 11 or above installed in your Computer.
+
+2. Download the latest `pepe_v1.0.jar` from [here](https://github.com/astraxq/ip/releases/tag/A-Release).
+
+Copy the file to the folder you want to use as the home folder for Pepe.
+
+Open a command terminal, cd into the folder you put the jar file in, and use the java -jar pepe_v1.0.jar command to run the application.
+The application window should appear in a few seconds. 
+![preview_display](docs/Ui.png)
 
 ## Features 
 
@@ -35,7 +47,7 @@ Now you have 3 tasks in the list.
 
 ```
 
-### `todo ` - Creates a ToDo Task.
+### `todo` - Creates a ToDo Task.
 
 Format: `todo [NAME]`
 
