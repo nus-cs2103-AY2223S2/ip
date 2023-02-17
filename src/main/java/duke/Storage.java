@@ -47,7 +47,7 @@ public class Storage {
      * Writes/updates to the file.
      *
      * @param tasks Tasks that needed to be written to the file.
-     * @throws IOException Update cannot be written to the file.
+     * @throws IOException If update cannot be written to the file.
      */
     public void writeToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.file);

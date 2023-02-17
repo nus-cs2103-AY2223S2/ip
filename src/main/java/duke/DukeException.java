@@ -29,7 +29,7 @@ public class DukeException extends Exception {
 
 class MissingDescriptionException extends DukeException {
     public MissingDescriptionException(String taskType) {
-        super("Oh no, the description of a " + taskType + " is missing! Please try again.");
+        super("Oh no, the description of " + taskType + " is missing/incomplete! Please try again.");
     }
 }
 
@@ -47,7 +47,7 @@ class TaskNotExistException extends DukeException {
 
 class CheckNotFindException extends DukeException {
     public CheckNotFindException() {
-        super("Oh no, you can only check a deadline here. Please try again!");
+        super("On no, your check is in the wrong format! Please try again.");
     }
 }
 

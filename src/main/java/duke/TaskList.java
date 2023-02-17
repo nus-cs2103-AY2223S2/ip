@@ -90,34 +90,40 @@ public class TaskList {
      * @param userInput User input.
      * @return Return marked message.
      * @throws TaskNotExistException If the task does not exist in the list.
-     * @throws MissingNumberException User not specific which task to mark.
+     * @throws MissingNumberException If user not specific which task to mark.
      */
     public String mark(String userInput) throws TaskNotExistException, MissingNumberException {
         int index = checkIndex(userInput, "mark");
+
         assert index >= 1 : "User input index smaller than 1";
         assert index <= lists.size() : "User input index larger than the current list size";
+
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
+
         lists.get(index - 1).setIsDone();
         return "Nice! I've marked this task as done: \n" + lists.get(index - 1);
     }
 
     /**
-     * Mark a specific task as not done.
+     * Marks a specific task as not done.
      *
      * @param userInput User input.
      * @return Return unmarked message.
      * @throws TaskNotExistException If the task does not exist in the list.
-     * @throws MissingNumberException User not specific which task to unmark.
+     * @throws MissingNumberException If user not specific which task to unmark.
      */
     public String unmark(String userInput) throws TaskNotExistException, MissingNumberException {
         int index = checkIndex(userInput, "unmark");
+
         assert index >= 1 : "User input index smaller than 1";
         assert index <= lists.size() : "User input index larger than the current list size";
+
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
+
         lists.get(index - 1).revertIsDone();
         return "Ok! I've marked this task as not done: \n" + lists.get(index - 1);
     }
@@ -127,7 +133,7 @@ public class TaskList {
      *
      * @param userInput User input.
      * @return Return to do task message.
-     * @throws MissingDescriptionException To do task is missing a description.
+     * @throws MissingDescriptionException If to do task is missing a description.
      */
     public String todo(String userInput) throws MissingDescriptionException {
         if ((userInput.split("\\s+")).length == 1) {
@@ -142,12 +148,20 @@ public class TaskList {
                 + lists.size() + " tasks in the list.";
     }
 
+    private boolean isDeadlineValid(String ddDate, String ddDescription) {
+        boolean isMissingDate = (ddDate.trim()).length() == 0;
+        boolean isMissingDescription = (ddDescription.trim()).length() == 0;
+        boolean isInvalidFormat = isMissingDate || isMissingDescription;
+
+        return isInvalidFormat;
+    }
+
     /**
      * Creates a deadline task.
      *
      * @param userInput User input.
      * @return Return deadline message.
-     * @throws MissingDescriptionException Deadline task is missing a description.
+     * @throws MissingDescriptionException If deadline task is missing a description.
      */
     public String deadline(String userInput) throws MissingDescriptionException {
         String ddDate = "";
@@ -156,20 +170,16 @@ public class TaskList {
         String[] input = userInput.split("\\s+");
 
         while (i < input.length) {
-           if(input[i].equals("/by")) {
-               ddDate = input[i + 1] + " " + input[i + 2];
-               i += 3;
-           } else {
-               ddDescription += input[i] + " ";
-               i += 1;
-           }
+            if (input[i].equals("/by")) {
+                ddDate = input[i + 1] + " " + input[i + 2];
+                i += 3;
+            } else {
+                ddDescription += input[i] + " ";
+                i += 1;
+            }
         }
 
-        boolean isMissingDate = (ddDate.trim()).length() == 0;
-        boolean isMissingDescription = (ddDescription.trim()).length() == 0;
-        boolean isInvalidFormat = isMissingDate || isMissingDescription;
-
-        if(isInvalidFormat) {
+        if (isDeadlineValid(ddDate, ddDescription)) {
             throw new MissingDescriptionException("deadline");
         }
 
@@ -179,12 +189,21 @@ public class TaskList {
                 + lists.size() + " tasks in the list.";
     }
 
+    private boolean isEventValid(String eventFrom, String eventTo, String eventDescription) {
+        boolean isMissingFrom = (eventFrom.trim()).length() == 0;
+        boolean isMissingTo = (eventTo.trim()).length() == 0;
+        boolean isMissingDescription = (eventDescription.trim()).length() == 0;
+        boolean isInvalidFormat = isMissingFrom || isMissingTo || isMissingDescription;
+
+        return isInvalidFormat;
+    }
+
     /**
      * Creates an event task.
      *
      * @param userInput User input.
      * @return Return event message.
-     * @throws MissingDescriptionException Event task is missing a description.
+     * @throws MissingDescriptionException If event task is missing a description.
      */
     public String event(String userInput) throws MissingDescriptionException {
         String eventDescription = "";
@@ -193,25 +212,21 @@ public class TaskList {
         int i = 1;
         String[] input = userInput.split("\\s+");
 
-        while(i < input.length) {
-            if(input[i].equals("/from")) {
+        while (i < input.length) {
+            if (input[i].equals("/from")) {
                 eventFrom = input[i + 1] + " " + input[i + 2];
                 i += 3;
-            } else if(input[i].equals("/to")) {
+            } else if (input[i].equals("/to")) {
                 eventTo = input[i + 1] + " " + input[i + 2];
+                i += 3;
             } else {
                 eventDescription += input[i] + " ";
                 i += 1;
             }
         }
 
-        boolean isMissingFrom = (eventFrom.trim()).length() == 0;
-        boolean isMissingTo = (eventTo.trim()).length() == 0;
-        boolean isMissingDescription = (eventDescription.trim()).length() == 0;
-        boolean isInvalidFormat = isMissingFrom || isMissingTo || isMissingDescription;
-
-        if(isInvalidFormat) {
-            throw new MissingDescriptionException("deadline");
+        if (isEventValid(eventFrom, eventTo, eventDescription)) {
+            throw new MissingDescriptionException("event");
         }
 
         Event event = new Event(eventDescription, new TimeConvertor(eventFrom), new TimeConvertor(eventTo));
@@ -225,16 +240,19 @@ public class TaskList {
      *
      * @param userInput User input.
      * @return Return delete messages.
-     * @throws TaskNotExistException The selected task does not exist in the list.
-     * @throws MissingNumberException User not specific which task to delete.
+     * @throws TaskNotExistException If the selected task does not exist in the list.
+     * @throws MissingNumberException If user not specific which task to delete.
      */
     public String delete(String userInput) throws TaskNotExistException, MissingNumberException {
         int index = checkIndex(userInput, "delete");
+
         assert index >= 1 : "User input index smaller than 1";
         assert index <= lists.size() : "User input index larger than the current list size";
+
         if (index > lists.size() || index < 1) {
             throw new TaskNotExistException();
         }
+
         return "Got it. I've remove this task:\n" + lists.remove(index - 1)
                 + "\n" + "Now you have " + lists.size() + " tasks in the list.";
     }
@@ -244,7 +262,7 @@ public class TaskList {
      *
      * @param userInput Search key for finding the tasks.
      * @return Return task is found or not.
-     * @throws MissingNumberException User not specific which task to find.
+     * @throws MissingDescriptionException If user not specific what to find.
      */
     public String find(String userInput) throws MissingDescriptionException {
         if ((userInput.split("\\s+")).length == 1) {
@@ -278,15 +296,16 @@ public class TaskList {
      *
      * @param userInput User input.
      * @return Return the items that fulfill the check condition.
-     * @throws MissingDescriptionException User not specific which task to check.
+     * @throws CheckNotFindException If user not specific which task to check.
      */
     public String check(String userInput) throws CheckNotFindException {
         if (!userInput.contains("/")) {
             throw new CheckNotFindException();
         }
+
         String checkDeadline = userInput.split("/")[1];
 
-        boolean ifDeadlineNotExist = true;
+        boolean isDeadlineNotExist = true;
         String allCheck = "";
 
         for (int i = 0; i < lists.size(); i++) {
@@ -298,29 +317,36 @@ public class TaskList {
 
             Deadline dTask = (Deadline) currT;
             if (dTask.getDeadline().equals(checkDeadline)) {
-                ifDeadlineNotExist = false;
+                isDeadlineNotExist = false;
                 allCheck = allCheck + (i + 1) + "." + dTask + "\n";
             }
         }
 
-        if (ifDeadlineNotExist) {
-            return "No deadline found on " + checkDeadline;
+        if (isDeadlineNotExist) {
+            return "No deadline found";
         }
 
         return allCheck;
     }
 
+
+    /**
+     * Displays the sorted sequence of deadline or event.
+     *
+     * @param userInput What user want to sort.
+     * @return The sorted list of deadline or event based on the user's choice.
+     * @throws NoSortTypeException If sort is not applied to deadline or event type.
+     */
     public String sort(String userInput) throws NoSortTypeException {
         if ((userInput.split("\\s+")).length == 1) {
             throw new NoSortTypeException();
         }
 
         String type = userInput.split(" ")[1].trim();
-
         String result = "";
-
         PriorityQueue<Task> pqTasks = new PriorityQueue<>();
-        for(Task items: lists) {
+
+        for (Task items: lists) {
             if (type.equals("deadline") && items instanceof Deadline) {
                 pqTasks.add(items);
             } else if (type.equals("event") && items instanceof Event) {
@@ -328,11 +354,12 @@ public class TaskList {
             }
         }
 
-        while(!pqTasks.isEmpty()) {
+        while (!pqTasks.isEmpty()) {
             result += "• " + pqTasks.poll() + "\n";
         }
 
-        return result.length() != 0 ? result : "No result return";
+        return result.length() != 0 ? result : "No result return! Either you do not have deadline/event "
+                + "task in your list currently or your sort is not valid. ";
     }
 }
 

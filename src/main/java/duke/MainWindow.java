@@ -1,6 +1,5 @@
 package duke;
 
-import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -38,7 +37,8 @@ public class MainWindow extends VBox {
     public void welcome() {
         String welcome = "Hello! This is Duke! \n" + "How can I help you today? ^_^ \n"
                 + "Please follow the date format: yyyy-MM-dd hh:mm (e.g. 2019-10-15 18:00), "
-                + "otherwise your input will be invalid.";
+                + "otherwise your date input will be invalid. \n"
+                + "To find more details about Duke, please refer to the README - the user guide manual.";
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcome, dukeImage));
         userInput.clear();
     }

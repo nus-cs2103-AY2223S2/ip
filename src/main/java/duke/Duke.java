@@ -3,15 +3,9 @@ package duke;
 import java.io.IOException;
 import java.time.DateTimeException;
 
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-
 /**
  * Main application class.
  */
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -21,7 +15,6 @@ public class Duke {
      *
      * @param filePath To specific a file path to save the previous records.
      */
-
     public Duke(String filePath) {
         try {
             storage = new Storage(filePath);
@@ -33,13 +26,12 @@ public class Duke {
     }
 
     /**
-     * Main application loop.
      * Gets the user input to trigger the run.
+     * Main application loop.
      *
      * @param userInput User input.
      * @return Duke response to the user input respectively.
      */
-
     public String getResponse(String userInput) {
         String temp;
 
@@ -60,20 +52,46 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns error message.
+     * The operation must follow by an integer.
+     *
+     * @return Number format exception message.
+     */
     public String numberFormatExceptionMessage() {
         return "The operation must follow by a integer!";
     }
 
+    /**
+     * Returns error message.
+     * Error occurs when try to get access to the storage file.
+     *
+     * @return Error message.
+     */
     public String ioExceptionMessage() {
         return "Error occurs when try to access your file";
     }
 
+    /**
+     * Returns error message.
+     * User input date time is in the wrong format.
+     *
+     * @return Date time exception message.
+     */
     public String dateTimeExceptionMessage() {
         return "Invalid date time format, please try again!";
     }
 
-    public String arrayIndexOutOfBoundsException() {return "Invalid format, please ensure your input is in the " +
-            "correct format!";}
+    /**
+     * Returns error message.
+     * User does not provide enough information that caused out of bounds.
+     *
+     * @return Array index out of bounds error message.
+     */
+    public String arrayIndexOutOfBoundsException() {
+        return "Invalid format! Please ensure your input is in the "
+                + "correct format!";
+    }
 }
 
 

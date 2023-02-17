@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Generates a <code>Task</code> object.
+     *
      * @param taskDescription The task description.
      */
     public Task(String taskDescription) {
@@ -69,7 +70,7 @@ class Todo extends Task {
         return "[T]" + super.toString();
     }
 }
-class Deadline extends Task implements Comparable<Deadline>{
+class Deadline extends Task implements Comparable<Deadline> {
     private final TimeConvertor by;
 
     public Deadline(String description, TimeConvertor by) {
@@ -92,7 +93,7 @@ class Deadline extends Task implements Comparable<Deadline>{
     }
 }
 
-class Event extends Task implements Comparable<Event>{
+class Event extends Task implements Comparable<Event> {
     private final TimeConvertor from;
     private final TimeConvertor to;
 

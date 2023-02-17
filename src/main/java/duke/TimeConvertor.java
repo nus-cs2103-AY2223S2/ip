@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * The TimeConvertor is to convert the user input time to a date type.
  */
-public class TimeConvertor implements Comparable<TimeConvertor>{
+public class TimeConvertor implements Comparable<TimeConvertor> {
     private final LocalDateTime realDate;
 
     /**
@@ -60,7 +60,7 @@ public class TimeConvertor implements Comparable<TimeConvertor>{
 
     @Override
     public int compareTo(TimeConvertor o) {
-        if(realDate.isBefore(o.realDate)) {
+        if (realDate.isBefore(o.realDate)) {
             return -1;
         } else if (realDate.isAfter(o.realDate)) {
             return 1;

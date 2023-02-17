@@ -41,24 +41,22 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
-        Rectangle clip = new Rectangle((int)displayPicture.getFitWidth(), (int)displayPicture.getFitHeight());
+        Rectangle clip = new Rectangle((int) displayPicture.getFitWidth(), (int) displayPicture.getFitHeight());
         clip.setArcHeight(20);
         clip.setArcWidth(20);
         displayPicture.setClip(clip);
     }
 
-
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.CENTER_LEFT);
-        dialog.setStyle("-fx-padding: 15; -fx-background-insets: 5; -fx-background-color: #659EC7; " +
-                "-fx-background-radius: 10; -fx-text-fill: white;");
+        dialog.setStyle("-fx-padding: 15; -fx-background-insets: 5; -fx-background-color: #659EC7; "
+                + "-fx-background-radius: 10; -fx-text-fill: white;");
     }
 
     /**

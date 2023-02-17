@@ -7,6 +7,16 @@ import javafx.application.Platform;
  * Executes different functions based on the user commend/input.
  */
 public class Parser {
+    private static String getSubstring(String type, String userInput) {
+        if (type.equals("recordType")) {
+            return userInput.substring(0, 3);
+        } else if (type.equals("recordStatus")) {
+            return userInput.substring(3, 6);
+        } else {
+            return userInput.substring(7);
+        }
+    }
+
     /**
      * Interprets the task from the history file.
      *
@@ -14,9 +24,9 @@ public class Parser {
      * @return All the tasks that stored previously in the file.
      */
     public static Task parseFile(String userInput) {
-        String recordType = userInput.substring(0, 3);
-        String recordStatus = userInput.substring(3, 6);
-        String recordDescription = userInput.substring(7);
+        String recordType = getSubstring("recordType", userInput);
+        String recordStatus = getSubstring("recordStatus", userInput);
+        String recordDescription = getSubstring("recordDescription", userInput);
         Task item = null;
 
         switch (recordType) {
@@ -40,11 +50,12 @@ public class Parser {
             break;
         default:
             assert false : "This type of record cannot be parsed";
-
         }
+
         if (recordStatus.equals("[X]") && item != null) {
             item.setIsDone();
         }
+
         return item;
     }
 
@@ -53,12 +64,12 @@ public class Parser {
      *
      * @param list Instantiate <code>TaskList</code> object.
      * @param userInput User input into the application.
-     * @return A boolean value that indicate whether there is
-     *         change that need to be updated due to the task conducted.
-     * @throws TaskNotExistException The task does not exist in the list.
-     * @throws MissingNumberException Not indication of task index number.
-     * @throws MissingDescriptionException No task description.
-     * @throws CheckNotFindException Cannot check for the user input.
+     * @return A string value for the output.
+     * @throws TaskNotExistException If task does not exist in the list.
+     * @throws MissingNumberException If not indication of task index number.
+     * @throws MissingDescriptionException If no task description.
+     * @throws CheckNotFindException If no result find when check for the user input.
+     * @throws NoSortTypeException If the type chosen cannot be sort.
      */
     public static String parseInput(TaskList list, String userInput)
             throws TaskNotExistException, MissingNumberException, MissingDescriptionException, CheckNotFindException,
