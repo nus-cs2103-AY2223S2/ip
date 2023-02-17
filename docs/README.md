@@ -32,9 +32,13 @@ Finds all tasks that contain the user input.
 
 Marks a specific task.
 
-### Unmark task `unmark`
+### Unmark task `mark`
 
 Unmarks a specific task.
+
+### Explanation of commands `help`
+
+Displays all commands explanation.
 
 ### Exit program `bye`
 
@@ -150,6 +154,53 @@ Expected outcome:
 ```
 OK, I've marked this task as not done yet:
 	[T][] Read Operating System Book
+```
+### `help` - help
+
+Displays explanations about all commands.
+
+Example of usage: 
+`help`
+
+Expected outcome:
+
+```
+Available commands:
+
+-help: show the list of all commands.
+ 	   e.g. "help"
+
+-bye: exit the application.
+      e.g. "bye"
+
+-list: list all the tasks that are stored.
+       e.g. "list"
+
+-todo: add a todo task with a description.
+       e.g. "todo borrow book"
+
+-deadline: add a deadline task with description and due date time (after "/by").
+           e.g. "deadline watch lecture /by 2019-09-08 1900"
+
+-event: add an event task with description, start date time (after "/from")
+        and end date time (after "/to").
+        e.g. "event Chinese New Year /from 2023-02-12 0000 /to 2023-02-18 0000"
+
+-find: find any tasks contains the description, support partially search.
+       e.g. "find book" "find bo"
+
+-delete: delete the specific task based on the task number.
+         e.g. "delete 2"
+
+-mark: mark the specific task as completed based on the task number.
+       e.g. "mark 3"
+
+-unmark: unmark the specific task as not completed based on the taks number.
+                 e.g. "unmark 5"
+
+Note: 1. all the date time format is "yyyy-mm-dd HHmm".
+     2. task number must be within the task list size.
+     3. storage file at "./src/data/duke.txt"
 ```
 ### `bye` - bye
 
