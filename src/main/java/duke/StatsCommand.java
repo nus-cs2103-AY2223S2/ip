@@ -23,9 +23,6 @@ public class StatsCommand extends Command {
         LocalDateTime weekAgo = now.minusWeeks(1);
 
         for (Task t : taskList) {
-            System.out.println("task: " + t.toString() + "date: " + t.markDate);
-            System.out.println("now: " + now);
-            System.out.println("week ago: " + weekAgo);
             if (t.isDone && isDateBetweenTwoDates(t.markDate, now, weekAgo)) {
                 noOfCompletedTasksPastWeek++;
             }
