@@ -223,4 +223,83 @@ public class Storage {
     public void bye() throws IOException {
         bw.close();
     }
+
+    public void replaceToDo(int idx, String task) throws IOException {
+        File fileTemp = new File(TEMP_PATH);
+        if (!fileTemp.exists()) {
+            makeFile(fileTemp);
+        }
+        BufferedWriter bw2 = new BufferedWriter(new FileWriter(TEMP_PATH));
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        int idx2 = 0;
+        String currentLine;
+        while ((currentLine = br.readLine()) != null) {
+            if (idx2 == idx) {
+                idx2++;
+                bw.write("T / 0 / " + task + "\n");
+            }
+            bw2.write(currentLine + System.getProperty("line.separator"));
+            idx2++;
+        }
+        bw2.close();
+        br.close();
+        bw.close();
+        file.delete();
+        boolean isSucceed = fileTemp.renameTo(file);
+        assert isSucceed:
+        bw = new BufferedWriter(new FileWriter(file, true));
+    }
+
+    public void replaceDeadline(int idx, String task, String date) throws IOException {
+        File fileTemp = new File(TEMP_PATH);
+        if (!fileTemp.exists()) {
+            makeFile(fileTemp);
+        }
+        BufferedWriter bw2 = new BufferedWriter(new FileWriter(TEMP_PATH));
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        int idx2 = 0;
+        String currentLine;
+        while ((currentLine = br.readLine()) != null) {
+            if (idx2 == idx) {
+                idx2++;
+                bw.write("D / 0 / " + task + " / " + date + "\n");
+            }
+            bw2.write(currentLine + System.getProperty("line.separator"));
+            idx2++;
+        }
+        bw2.close();
+        br.close();
+        bw.close();
+        file.delete();
+        boolean isSucceed = fileTemp.renameTo(file);
+        assert isSucceed:
+        bw = new BufferedWriter(new FileWriter(file, true));
+    }
+
+    public void replaceEvent(int idx, String task, String from, String to) throws IOException {
+        File fileTemp = new File(TEMP_PATH);
+        if (!fileTemp.exists()) {
+            makeFile(fileTemp);
+        }
+        BufferedWriter bw2 = new BufferedWriter(new FileWriter(TEMP_PATH));
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        int idx2 = 0;
+        String currentLine;
+        while ((currentLine = br.readLine()) != null) {
+            if (idx2 == idx) {
+                idx2++;
+                bw.write("E / 0 / " + task + "/ " + from + "/ " + to + "\n");
+            }
+            bw2.write(currentLine + System.getProperty("line.separator"));
+            idx2++;
+        }
+        bw2.close();
+        br.close();
+        bw.close();
+        file.delete();
+        boolean isSucceed = fileTemp.renameTo(file);
+        assert isSucceed:
+        bw = new BufferedWriter(new FileWriter(file, true));
+    }
+
 }

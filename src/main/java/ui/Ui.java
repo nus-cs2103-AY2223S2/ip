@@ -69,6 +69,10 @@ public class Ui {
         return "OK, I've marked this task as done: ";
     }
 
+    public String printReplace() {
+        return "The task has been updated";
+    }
+
     public void unmarkMsg() {
         System.out.println("\tNice! I've unmarked this task as not done yet:");
     }
