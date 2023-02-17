@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class to support Deadline tasks.
@@ -20,12 +23,16 @@ public class Deadline extends Task {
      * @param by String containing Deadline date.
      * @param tag String containing Deadline tag.
      */
-    public Deadline(String description, String by, String tag) {
+    public Deadline(String description, String by, String tag) throws DukeException {
         super(description, tag);
-        this.by = LocalDateTime.parse(by, inputFormatter);
+        try {
+            this.by = LocalDateTime.parse(by, inputFormatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Did you use the right date format (yyyy-mm-dd hh:mm)?");
+        }
     }
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         this(description, by, null);
     }
 
