@@ -20,7 +20,6 @@ jobs:
 
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
-        
       - name: Give execute permissions to Gradle wrapper
         run: chmod +x ./gradlew
 
