@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents task of the type deadline
  */
 public class Deadline extends Task {
-    private LocalDateTime time;
-    private String strTime;
+    private final LocalDateTime time;
+    private final String strTime;
 
     /**
    * Constructor for Deadline task.
