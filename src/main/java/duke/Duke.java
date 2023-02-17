@@ -9,7 +9,6 @@ import java.util.Scanner;
  * @author hhchinh2002
  */
 public class Duke {
-    private static final String DIVIDER_LINE = "____________________________________________________\n";
     private TaskList taskList;
     private Parser parser;
     private Ui ui;
