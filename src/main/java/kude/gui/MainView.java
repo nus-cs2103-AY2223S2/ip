@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import kude.processor.Processor;
@@ -26,6 +27,10 @@ public class MainView extends AnchorPane {
     private Processor processor;
     private Gui gui;
 
+
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.jpg"));
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -36,10 +41,10 @@ public class MainView extends AnchorPane {
         var input = userInput.getText();
         processor.runCommand(input);
         var response = gui.getResponse();
-        /* dialogContainer.getChildren().addAll(
+        dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
-        ); */
+        );
         userInput.clear();
     }
 

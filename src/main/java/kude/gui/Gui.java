@@ -27,7 +27,7 @@ public class Gui implements Ui {
 
     @Override
     public void writeLine(String line, int indent) {
-        outputLines.add(String.format("<%s%s%n", "\t".repeat(indent), line));
+        outputLines.add(String.format("<%s%s", "\t".repeat(indent), line));
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Gui implements Ui {
 
     @Override
     public void writeError(String line, int indent) {
-        errorLines.add(String.format("!%s%s%n", "\t".repeat(indent), line));
+        errorLines.add(String.format("!%s%s", "\t".repeat(indent), line));
     }
 
     /**
