@@ -147,7 +147,7 @@ public class Parser {
         checkCommandDesc(inputs);
         Task toDoTask = new ToDo(inputs[1], false);
         tasks.addToTasks(toDoTask);
-        return ui.outputAddTaskMsg(toDoTask, tasks.getTasks().size());
+        return ui.outputAddTaskMsg(toDoTask, tasks.getTaskList().size());
     }
 
     /**
@@ -217,7 +217,7 @@ public class Parser {
     public String parseFind(String[] inputs) throws EmptyCommandException {
         checkCommandDesc(inputs);
         String keyword = inputs[1];
-        ArrayList<Task> taskList = tasks.getTasks();
+        ArrayList<Task> taskList = tasks.getTaskList();
         ArrayList<Task> output = new ArrayList<>();
         for (Task task : taskList) {
             if (task.toString().contains(keyword)) {

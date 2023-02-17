@@ -102,7 +102,7 @@ public class TaskList {
      *
      * @return tasklist stored
      */
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTaskList() {
         return tasks;
     }
 

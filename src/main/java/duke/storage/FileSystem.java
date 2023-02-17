@@ -48,7 +48,7 @@ public class FileSystem {
         try {
             file.delete();
             file.createNewFile();
-            ArrayList<Task> tasks = taskList.getTasks();
+            ArrayList<Task> tasks = taskList.getTaskList();
 
             for (Task t : tasks) {
                 appendToFile(t.toString());
@@ -62,7 +62,6 @@ public class FileSystem {
      * Loads the tasks from the file into the TaskList
      *
      * @return an ArrayList that contains all the tasks from the file
-     * @throws FileNotFoundException If the file cannot be found
      */
     public ArrayList<Task> loadFromFile() {
         int typePos = 1;
