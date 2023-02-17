@@ -1,4 +1,5 @@
 # Dukie
+
 > “The way to get started is to quit talking and begin doing.”  – Walt Disney [(source)](https://blog.hubspot.com/sales/famous-quotes)
  
 The app is so **easy to use**, you can even use it while doing a dookie. 
@@ -14,16 +15,16 @@ Dukie frees your mind of having to remember things you need to do. It's,
  
 Dukie currently supports the following functions:
  
-* [x]  Managing tasks
-* [x]  Managing deadlines
-* [x]  Managing event details
-* [ ]  Search / Filter for any task / deadline / event
-* [ ]  Reminders (coming soon)
-* [ ]  !help (coming soon)
+[x]  Managing tasks
+[x]  Managing deadlines
+[x]  Managing event details
+[ ]  Search / Filter for any task / deadline / event
+[ ]  Reminders (coming soon)
+[ ]  !help (coming soon)
 
 ## Instructions for Installation
 
-All you need to do is,
+### All you need to do is,
 
 1. download it from [here](https://github.com/securespider/ip.git).
 2. double-click it.
