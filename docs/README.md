@@ -167,6 +167,7 @@ bye
 
 Expected Outcome:
 Program will close.
+Program will also save your current list of tasks for the next usage.
 
 ## Acknowledgements
-Credit to Zetta Zero for the [art](https://www.youtube.com/watch?v=1A5lRjr4bDg&ab_channel=ZettaZero) for Ai-chan
+Credit to Zetta Zero (@ZettaZeroAnimations) for the [art](https://www.youtube.com/watch?v=1A5lRjr4bDg&ab_channel=ZettaZero) for Ai-chan
