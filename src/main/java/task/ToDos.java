@@ -44,6 +44,6 @@ public class ToDos extends Task {
 
     @Override
     public String toString() {
-        return "[T][" + isDone + "]" + description;
+        return "[T]" + getStatusIcon() + " " + description;
     }
 }

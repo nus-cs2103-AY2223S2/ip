@@ -22,16 +22,16 @@ public class Response {
     }
 
     public String getByeResponse() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye Shin-Chan. Hope to see you again soon!";
     }
 
     public String getListResponse(ArrayList<Task> taskList) {
         try {
             if (taskList.size() == 0) {
-                String errMsg = "You have not upload any task yet";
+                String errMsg = "Shin-Chan, you have not upload any task yet.";
                 throw new DukeException(errMsg);
             }
-            String res = "Here are the tasks in your list: \n";
+            String res = "Here are the tasks in Shin-Chan's list: \n";
             int i = 1;
             for (Task task : taskList) {
                 res += i + ". " + task.toString() + "\n";
@@ -49,13 +49,13 @@ public class Response {
             Task currTask = taskList.get(num - 1);
             taskList.remove(currTask);
             storage.update_data(taskList);
-            return "Noted. I've removed this task: \n  " + currTask.toString() + "\n"
+            return "Ai-Chan has removed this task: \n  " + currTask.toString() + "\n"
                     + "Now you have " + (taskList.size()) + " tasks in the list";
         } catch (IndexOutOfBoundsException err1) {
-            String errMsg = "OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
+            String errMsg = "The task number that Shin-Chan have keyed in is invalid.";
             return errMsg;
         } catch (NumberFormatException err2) {
-            String errMsg = "OOPS!!! Please key in a valid Number.";
+            String errMsg = "Shin-Chan! Please key in a valid number.";
             return errMsg;
         }
     }
@@ -67,12 +67,12 @@ public class Response {
             currTask.markAsDone();
             taskList.set(num - 1, currTask);
             storage.update_data(taskList);
-            return "Nice! I've marked this task as done\n" + currTask.getStatusIcon() + " " + currTask.getDes();
+            return "Good Job Shin-Chan! I've marked this task as done\n" + currTask.getStatusIcon() + " " + currTask.getDes();
         } catch (IndexOutOfBoundsException err1) {
-            String errMsg = "OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
+            String errMsg = "The task number that Shin-Chan have keyed in is invalid..";
             return errMsg;
         } catch (NumberFormatException err2) {
-            String errMsg = "OOPS!!! Please key in a valid Number.";
+            String errMsg = "Shin-Chan! Please key in a valid number.";
             return errMsg;
         }
     }
@@ -84,21 +84,20 @@ public class Response {
             currTask.unMark();
             taskList.set(num - 1, currTask);
             storage.update_data(taskList);
-            return "OK, I've marked this task as not done yet\n"
+            return "Ok Shin-Chan, I've marked this task as not done yet\n"
                     + currTask.getStatusIcon() + " " + currTask.getDes();
         } catch (IndexOutOfBoundsException err1) {
-            String errMsg = "OOPS!!! Please the Duke.Task "
-                    + "number that you have keyed in is invalid.";
+            String errMsg = "The task number that Shin-Chan have keyed in is invalid.";
             return errMsg;
         } catch (NumberFormatException err2) {
-            String errMsg = "OOPS!!! Please key in a valid Number.";
+            String errMsg = "Shin-Chan! Please key in a valid number.";
             return errMsg;
         }
     }
 
     public String getToDoResponse(String input, ArrayList<Task> taskList, Storage storage) {
         if (input.length() <= 5) {
-            return "OOPS!!! The description of a todo cannot be empty";
+            return "The description of a todo cannot be empty";
         }
         ToDos todo = new ToDos(input.substring(5), 0);
         taskList.add(todo);
@@ -122,12 +121,12 @@ public class Response {
                 return "added: " + deadline + "\n"
                         + "Now you have " + taskList.size() + " tasks in the list";
             } catch (DateTimeParseException e) {
-                String errMsg = "OOPS!!! The description or date of a "
-                        + "deadline is wrong, plase key in the"
+                String errMsg = "The description or date of a "
+                        + "deadline is not right, please key in the"
                         + "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
                         + "You may key in: deadline hw1 /2001-02-10, "
                         + "Duke.Duke will record your deadline for hw1 as"
-                        + "2001-02-10";
+                        + "by: 10 Feb 2001";
                 throw new DukeException(errMsg);
             }
         } catch (DukeException e) {
@@ -156,12 +155,12 @@ public class Response {
                 return "Got it. I've added this task \n" + "added: " + event + "\n"
                         + "Now you have " + taskList.size() + " tasks in the list";
             } catch (DateTimeParseException e) {
-                String errMsg = "OOPS!!! The description or date for the "
-                        + "event is wrong, plase key in the"
+                String errMsg = "The description or date for the "
+                        + "event is not right, plase key in the"
                         + "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
                         + "You may key in: event hw1 /2001-02-10 /2001-02-12,"
                         + " Duke.Duke will record your event hw1 as"
-                        + "from 2001-02-10 to 2001-02-12";
+                        + "from: 10 Feb 2001 to: 12 Feb 2001";
                 throw new DukeException(errMsg);
             }
         } catch (DukeException e) {
@@ -176,7 +175,7 @@ public class Response {
                 String errMsg = "You have not upload any task yet";
                 throw new DukeException(errMsg);
             }
-            String res = "Here are the matching tasks in your list:\n";
+            String res = "Here are the matching tasks in Shin-Chan's task list:\n";
             int i = 1;
             for (Task task : taskList) {
                 if (task.getDescription().contains(fileInputArr[1])) {
@@ -195,7 +194,7 @@ public class Response {
 
     public String getErrorResponse() {
         try {
-            String errMsg = "OOPS!!! I'm sorry, but I don't know what that means";
+            String errMsg = "Sorry Shin-Chan, I don't know what you mean";
             throw new DukeException(errMsg);
         } catch (DukeException e) {
             return e.toString();
