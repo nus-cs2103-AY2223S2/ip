@@ -142,14 +142,14 @@ Description of all commands.
 
 |    Command Format  | Description |
 | ------------------ | ----------- |
-| deadline [task description] /by [DD/MM/YYYY HHmm] | Creates a task with specified deadline |
-| delete [index] | Deletes the task by specified index |
-| event [task description] /from [DD/MM/YYYY HHmm] /to [DD/MM/YYYY HHmm] | Creates a task within the specified timeframe |
-| bye | Quits and closes the Smudge program |
-| find [keyword] | Finds a list of tasks which contain specified keyword in their description |
-| help | Returns link to this user-guide for help with commands |
-| list | Displays the cumulative list of tasks added by the user |
-| mark [index] | Marks the task at the specified index as done |
-| todo [task description] | Creates a task without date or time |
-| unmark [index] | Marks the task at the specified index as not done |
+| [deadline](#deadline) [task description] /by [DD/MM/YYYY HHmm] | Creates a task with specified deadline |
+| [delete](#delete) [index] | Deletes the task by specified index |
+| [event](#event) [task description] /from [DD/MM/YYYY HHmm] /to [DD/MM/YYYY HHmm] | Creates a task within the specified timeframe |
+| [bye](#bye) | Quits and closes the Smudge program |
+| [find](#find) [keyword] | Finds a list of tasks which contain specified keyword in their description |
+| [help](#help) | Returns link to this user-guide for help with commands |
+| [list](#list) | Displays the cumulative list of tasks added by the user |
+| [mark](#mark) [index] | Marks the task at the specified index as done |
+| [todo](#todo) [task description] | Creates a task without date or time |
+| [unmark](#unmark) [index] | Marks the task at the specified index as not done |
 
