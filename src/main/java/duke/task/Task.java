@@ -3,13 +3,27 @@ package duke.task;
 import duke.exception.DukeException;
 import duke.exception.ERROR;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * An abstraction of all Tasks which contain a description and an isDone flag indicating its completion.
  */
 public abstract class Task {
     private String description;
     private boolean isDone;
-
+    public static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    public static final List<DateTimeFormatter> DATETIME_FORMATS = Arrays.asList(
+            DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"),
+            DateTimeFormatter.ofPattern("yyyy MM dd HH:mm"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    public static final List<DateTimeFormatter> DATE_FORMATS = Arrays.asList(
+            DateTimeFormatter.ofPattern("MMM dd yyyy"),
+            DateTimeFormatter.ofPattern("dd MMM yyyy"),
+            DateTimeFormatter.ofPattern("yyyy MM dd"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     /**
      * Creates a new Task with a description.
      *
@@ -43,15 +57,22 @@ public abstract class Task {
                 throw new DukeException(ERROR.DEADLINE_EMPTY.getMessage());
             }
             String[] params = desc.split(" /by ");
-            assert params.length == 2;
+            if (params.length != 2) {
+                throw new DukeException(ERROR.DEADLINE_WRONG_FORMAT.getMessage());
+            }
             task = new Deadline(params[0], params[1]);
         } else if (s.startsWith("event")) {
             String desc = s.replace("event", "").trim();
             if (desc.isBlank()) {
                 throw new DukeException(ERROR.EVENT_EMPTY.getMessage());
             }
+            if (!desc.contains("/from") || !desc.contains("/to")) {
+                throw new DukeException(ERROR.EVENT_WRONG_FORMAT.getMessage());
+            }
             String[] params = desc.split("( /from | /to )");
-            assert params.length == 3;
+            if (params.length != 3) {
+                throw new DukeException(ERROR.EVENT_WRONG_FORMAT.getMessage());
+            }
             task = new Event(params[0], params[1], params[2]);
         }
 

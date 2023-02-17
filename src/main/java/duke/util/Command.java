@@ -116,6 +116,7 @@ public class Command {
                 break;
             case ADD_TASK:
                 task = Task.parseTaskFromInput(param);
+                assert task != null;
                 taskList.addTask(task);
                 output = String.format(ADD_TASK_OUTPUT, task.toString(), taskList.size());
                 storage.save(taskList);

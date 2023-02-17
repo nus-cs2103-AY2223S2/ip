@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -9,9 +10,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
     private String deadline;
-    private LocalDate date;
+    private LocalDateTime date;
     private boolean isDate;
-    private static final DateTimeFormatter DATE_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
 
     /**
      * Creates an instance of Deadline with a description and a deadline where an attempt
@@ -22,12 +23,28 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) {
         super(description);
+
         // Checks if the deadline provided is a valid date
-        try {
-            this.date = LocalDate.parse(deadline);
-            this.isDate = true;
-        } catch (DateTimeParseException ex) {
-            this.isDate = false;
+        this.isDate = false;
+        for (DateTimeFormatter format: Task.DATETIME_FORMATS) {
+            try {
+                this.date = LocalDateTime.parse(deadline, format);
+                this.isDate = true;
+                break;
+            } catch (DateTimeParseException ex) {
+
+            }
+        }
+        if (!isDate) {
+            for (DateTimeFormatter format: Task.DATE_FORMATS) {
+                try {
+                    this.date = LocalDate.parse(deadline, format).atStartOfDay();
+                    this.isDate = true;
+                    break;
+                } catch (DateTimeParseException ex) {
+
+                }
+            }
         }
         this.deadline = deadline;
     }
@@ -41,13 +58,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         assert !this.isDate || (this.deadline != null);
-        String dateToPrint = this.isDate ? this.date.format(DATE_OUTPUT_FORMAT) : this.deadline;
+        String dateToPrint = this.isDate ? this.date.format(DEFAULT_DATETIME_FORMAT) : this.deadline;
         return String.format("[D]%s (by: %s)", super.toString(), dateToPrint);
     }
 
     @Override
     public String toCsvString() {
-        String dateToPrint = this.isDate ? this.date.format(DATE_OUTPUT_FORMAT) : this.deadline;
+        String dateToPrint = this.isDate ? this.date.format(DEFAULT_DATETIME_FORMAT) : this.deadline;
         return String.format("D,%s,%s", super.toCsvString(), dateToPrint);
     }
 }
