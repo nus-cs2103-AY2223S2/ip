@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDateTime;
+
 public class Parser {
 
     /**
@@ -12,12 +14,14 @@ public class Parser {
     public static Command parse(String command) throws DukeException {
         if (command.equals("list")) {
             return new ListCommand();
+        } else if (command.startsWith("stats")) {
+          return new StatsCommand(LocalDateTime.now());
         } else if (command.startsWith("mark")) {
             int taskNumber = Integer.parseInt(command.split(" ")[1]);
-            return new MarkCommand(taskNumber);
+            return new MarkCommand(taskNumber, LocalDateTime.now());
         } else if (command.startsWith("unmark")) {
             int taskNumber = Integer.parseInt(command.split(" ")[1]);
-            return new UnmarkCommand(taskNumber);
+            return new UnmarkCommand(taskNumber, LocalDateTime.now());
         } else if (command.startsWith("deleteAll")) {
             return new DeleteAllCommand(command.split(" ")[1]);
         } else if (command.startsWith("delete")) {

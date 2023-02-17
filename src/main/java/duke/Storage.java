@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,7 +48,11 @@ public class Storage {
                 }
 
                 if (Integer.parseInt(taskSplit[1]) == 1) {
-                    task.setDone(true);
+                    String markDateString = taskSplit[taskSplit.length - 1];
+
+                    task.setDone(true,
+                            LocalDateTime.parse(markDateString,
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
                 }
 
                 tasks.add(task);
@@ -80,18 +86,20 @@ public class Storage {
 
         for (Task task : taskList) {
             if (task instanceof Todo) {
-                output.printf("T | %d | %s%n", task.getStatusIconInt(), task.getDescription());
+                output.printf("T | %d | %s | %s%n", task.getStatusIconInt(), task.getDescription(), task.getMarkDate());
             } else if (task instanceof Deadline) {
-                output.printf("D | %d | %s | %s%n",
+                output.printf("D | %d | %s | %s | %s%n",
                         task.getStatusIconInt(),
                         task.getDescription(),
-                        ((Deadline) task).getBy());
+                        ((Deadline) task).getBy(),
+                        task.getMarkDate());
             } else if (task instanceof Event) {
-                output.printf("E | %d | %s | %s - %s%n",
+                output.printf("E | %d | %s | %s - %s%n | %s%n",
                         task.getStatusIconInt(),
                         task.getDescription(),
                         ((Event) task).getFrom(),
-                        ((Event) task).getTo());
+                        ((Event) task).getTo(),
+                        task.getMarkDate());
             } else {
                 assert false : task;
             }

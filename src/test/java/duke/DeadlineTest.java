@@ -2,6 +2,8 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
@@ -27,7 +29,7 @@ public class DeadlineTest {
     @Test
     public void doneStatusIconTest() {
         Deadline deadline = new Deadline("Eat lunch", "2023-02-04 14:00");
-        deadline.setDone(true);
+        deadline.setDone(true, LocalDateTime.now());
         assertEquals("X", deadline.getStatusIcon());
     }
 }

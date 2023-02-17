@@ -6,7 +6,6 @@ import java.util.List;
 public class DeleteAllCommand extends Command {
     private String keyword;
 
-
     /**
      * Constructor for a Delete All command.
      *

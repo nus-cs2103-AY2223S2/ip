@@ -20,6 +20,22 @@ public class Response {
     }
 
     /**
+     * Returns message about statistics for the past week.
+     *
+     * @param noOfCompletedTasksPastWeek Number of completed tasks last week.
+     * @return Message about statistics for the past week.
+     */
+    public String showStats(int noOfCompletedTasksPastWeek) {
+        if (noOfCompletedTasksPastWeek == 0) {
+            return "What were you doing last week? You finished nothing.";
+        } else {
+            return "Not too shabby, you managed to finish "
+                    + Integer.toString(noOfCompletedTasksPastWeek)
+                    + " tasks last week.";
+        }
+    }
+
+    /**
      * Returns the tasks in the task list.
      *
      * @param taskList Current list of tasks.

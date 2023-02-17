@@ -1,8 +1,12 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDateTime markDate = null;
 
     public Task(String description) {
         this.description = description;
@@ -40,9 +44,19 @@ public class Task {
      * Sets task as done or not done.
      *
      * @param isDone Status of the task to be set.
+     * @param markDate Date the task was marked as done or not done.
      */
-    public void setDone(boolean isDone) {
+    public void setDone(boolean isDone, LocalDateTime markDate) {
         this.isDone = isDone;
+        this.markDate = markDate;
+    }
+
+    public String getMarkDate() {
+        if (markDate == null) {
+            return "";
+        } else {
+            return markDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        }
     }
 
     @Override
