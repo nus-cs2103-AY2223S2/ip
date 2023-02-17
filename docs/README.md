@@ -38,7 +38,7 @@ Sets the task at specified INDEX as uncompleted <br>
     - INDEX refers to the task number, must be a valid positive integer greater than 0 and less than size of current task list
 
 5. **todo DESCRIPTION** <br>
-Creates a ToDo task with the specified DESCRIPTION
+Creates a ToDo task with the specified DESCRIPTION <br>
 <ins>Format</ins>
     - DESCRIPTION refers to the details of the task
 
