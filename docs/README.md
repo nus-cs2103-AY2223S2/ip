@@ -297,7 +297,7 @@ I know you won't finish the tasks on time :D
 ### `bye`
 
 #### Function
-Ends the conversation with Kuromi and closes the application windw.
+Ends the conversation with Kuromi and closes the application window.
 
 #### Format
 - `bye`
