@@ -142,14 +142,14 @@ Description of all commands.
 
 |    Command Format  | Description |
 | ------------------ | ----------- |
-| [deadline](#deadline) [task description] /by [DD/MM/YYYY HHmm] | Creates a task with specified deadline |
-| [delete](#delete) [index] | Deletes the task by specified index |
-| [event](#event) [task description] /from [DD/MM/YYYY HHmm] /to [DD/MM/YYYY HHmm] | Creates a task within the specified timeframe |
-| [bye](#bye) | Quits and closes the Smudge program |
-| [find](#find) [keyword] | Finds a list of tasks which contain specified keyword in their description |
-| [help](#help) | Returns link to this user-guide for help with commands |
-| [list](#list) | Displays the cumulative list of tasks added by the user |
-| [mark](#mark) [index] | Marks the task at the specified index as done |
-| [todo](#todo) [task description] | Creates a task without date or time |
-| [unmark](#unmark) [index] | Marks the task at the specified index as not done |
+| [deadline](#deadline---add-a-task-which-has-a-deadline) [task description] /by [DD/MM/YYYY HHmm] | Creates a task with specified deadline |
+| [delete](#delete---delete-a-task) [index] | Deletes the task by specified index |
+| [event](#event---add-a-task-which-has-a-specific-timeframe) [task description] /from [DD/MM/YYYY HHmm] /to [DD/MM/YYYY HHmm] | Creates a task within the specified timeframe |
+| [bye](#bye---exits) | Quits and closes the Smudge program |
+| [find](#find---finds-tasks-using-specified-keywords) [keyword] | Finds a list of tasks which contain specified keyword in their description |
+| [help](#help---get-help) | Returns link to this user-guide for help with commands |
+| [list](#list---a-list-of-every-existing-tasks) | Displays the cumulative list of tasks added by the user |
+| [mark](#mark---marks-a-task-as-done) [index] | Marks the task at the specified index as done |
+| [todo](#todo---add-a-task-without-date-or-time) [task description] | Creates a task without date or time |
+| [unmark](#unmark---marks-a-task-as-not-done) [index] | Marks the task at the specified index as not done |
 
