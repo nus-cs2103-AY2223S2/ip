@@ -17,9 +17,9 @@ import task.ToDo;
  * Storage class to save data to file.
  */
 public class Storage {
-    private static final String PATH_STORAGE = "src/data/filepath.txt";
-    private static final String DEFAULT_FILE_PATH = "src/data/tasks.txt";
-    private static final String DEFAULT_DIRECTORY_PATH = "src/data";
+    private static final String PATH_STORAGE = "data/filepath.txt";
+    private static final String DEFAULT_FILE_PATH = "data/tasks.txt";
+    private static final String DEFAULT_DIRECTORY_PATH = "data";
     /**
      * Path to file for saving.
      */
