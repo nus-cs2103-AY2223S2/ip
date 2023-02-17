@@ -2,11 +2,11 @@
 MakimaBot is a chatbot that enables you to manage their tasks easily in a compact app. A Graphical User Interface (GUI) is provided for ease of usage.
 ## Key Features
 
-### :white_check_mark: Adding Different Types of Tasks
+### ✅ Adding Different Types of Tasks
 
 MakimaBot allows you to quickly tasks such as `deadline`, `event` and `todo`.
 
-### :mag: Find Tasks Quickly
+### 🔍 Find Tasks Quickly
 
 MakimaBot can quickly filter any matching description of tasks that you have saved.
 
@@ -17,7 +17,6 @@ MakimaBot can quickly filter any matching description of tasks that you have sav
 <p align="center">
 <em>Main Page</em>
 </p><br/>
-
 
 ## Usage
 
