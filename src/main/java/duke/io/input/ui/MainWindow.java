@@ -78,16 +78,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(isPlaying, userImage));
         if (isPlaying.equals("NO")) {
             Greeting greeting = new Greeting();
-            greeting.setStatus("NOT PLAYING");
-            Event nextEvent = greeting.toNextEvent();
+            Event nextEvent = greeting.toNextEvent("NOT PLAYING");
             this.currentEvent = nextEvent;
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(nextEvent.toString(), dukeImage));
             return 0;
         } else if (isPlaying.equals("YES")) {
             Greeting greeting = new Greeting();
-            greeting.setStatus("PLAYING");
-            Event nextEvent = greeting.toNextEvent();
+            Event nextEvent = greeting.toNextEvent("PLAYING");
             this.currentEvent = nextEvent;
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(nextEvent.toString(), dukeImage));
@@ -110,7 +108,7 @@ public class MainWindow extends AnchorPane {
             if (!this.currentEvent.isFinalEvent()) {
                 String input = userInput.getText();
                 userInput.clear();
-                this.currentEvent = this.currentEvent.toNextGui(input);
+                this.currentEvent = this.currentEvent.toNextEvent(input);
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
                         DialogBox.getDukeDialog(this.currentEvent.toString(), dukeImage));

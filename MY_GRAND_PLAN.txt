@@ -1,2 +1,5 @@
-T true DRINK WATER  
-T true DRINK COFFEE  
+T false ADD TASK  
+T false DATE DINH  
+T false WATCH ANT-MAN  
+T false APP JOB 
+D true iP /BY 23:59 Feb 20 2023

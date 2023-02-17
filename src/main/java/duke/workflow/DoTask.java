@@ -11,6 +11,8 @@ import duke.io.input.exception.UserInputException;
 import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
+import duke.util.Parser;
+
 import duke.util.service.Deadline;
 import duke.util.service.ScheduledEvent;
 import duke.util.service.ToDo;
@@ -48,226 +50,56 @@ public class DoTask extends Event {
         this.taskList = taskList;
     }
 
+    private void parseTask(String userInput) {
+        Task newTask = Parser.parseTask(userInput);
+        this.taskList = this.taskList.addTask(newTask);
+        this.storage = this.storage.addToKeywordStorage(userInput, newTask);
+    }
+
     /**
      * Determines the next possible action after the user has entered an input.
      *
      * @return a new event that follows from the last user input
      */
 
-    public Event toNextEvent() {
-        Scanner sc = new Scanner(System.in);
-        String nextTask = sc.nextLine();
+    public Event toNextEvent(String nextTask) {
+        this.firstTimeUsing = false;
+        this.lastCommand = nextTask;
         if (nextTask.equals("BYE")) {
             return new Ending(this.taskList);
+        } else if (nextTask.equals("LIST")) {
+            return this;
         } else {
             try {
                 UserInputException.checkUserInput(nextTask, this.taskList.getSize());
-                if (nextTask.equals("LIST")) {
-                    this.firstTimeUsing = false;
-                    this.lastCommand = nextTask;
-                    return this;
-                } else {
-                    String[] command = nextTask.split(" ");
-                    List<String> words = Arrays.asList(command);
-                    if (words.get(0).equals("MARK")) {
-                        this.firstTimeUsing = false;
-                        this.lastCommand = nextTask;
-                        this.taskList = this.taskList.markDone(Integer.valueOf(words.get(1)) - 1);
-                        assert (this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).getStatus() == true);
-                        return this;
-                    }
-                    if (words.get(0).equals("UNMARK")) {
-                        this.firstTimeUsing = false;
-                        this.lastCommand = nextTask;
-                        this.taskList = this.taskList.unMark(Integer.valueOf(words.get(1)) - 1);
-                        assert (this.taskList.getTask(Integer.valueOf(words.get(1)) - 1).getStatus() == false);
-                        return this;
-                    }
-                    if (words.get(0).equals("TODO")) {
-                        String[] toDoTask = nextTask.split("TODO ");
-                        List<String> toDoAction = Arrays.asList(toDoTask);
-                        this.firstTimeUsing = false;
-                        this.lastCommand = toDoAction.get(1);
-                        ToDo newTask = new ToDo(toDoAction.get(1));
-                        this.taskList = this.taskList.addTask(newTask);
-                        for (String i : words) {
-                            this.storage = this.storage.addToStorage(i, newTask);
-                        }
-                        return this;
-                    }
-                    if (words.get(0).equals("DEADLINE")) {
-                        String[] toDoTask = nextTask.split(" /BY ");
-                        List<String> deadlineList = Arrays.asList(toDoTask);
-                        String deadlineAction = deadlineList.get(0);
-                        String[] deadlinePhraseArray = deadlineAction.split("DEADLINE ");
-                        List<String> deadlinePhraseList = Arrays.asList(deadlinePhraseArray);
-                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        Deadline newTask = new Deadline(
-                                LocalDateTime.parse(deadlineList.get(1), format),
-                                deadlinePhraseList.get(1));
-                        for (String i : words) {
-                            this.storage = this.storage.addToStorage(i, newTask);
-                        }
-                        this.firstTimeUsing = false;
-                        this.lastCommand = deadlinePhraseList.get(1);
-                        this.taskList = this.taskList.addTask(newTask);
-                        return this;
-                    }
-                    if (words.get(0).equals("EVENT")) {
-                        String[] splitFrom = nextTask.split(" /FROM ");
-                        List<String> eventActionSplit = Arrays.asList(splitFrom);
-                        String timeLinePhrase = eventActionSplit.get(1);
-                        String eventAction = eventActionSplit.get(0);
-                        String[] eventPhraseArray = eventAction.split("EVENT ");
-                        List<String> eventPhraseList = Arrays.asList(eventPhraseArray);
-                        String[] timeFrame = timeLinePhrase.split(" /TO ");
-                        List<String> timeLineSplit = Arrays.asList(timeFrame);
-                        String eventBegin = timeLineSplit.get(0);
-                        String eventEnd = timeLineSplit.get(1);
-                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        ScheduledEvent newTask = new ScheduledEvent(
-                                LocalDateTime.parse(eventBegin, format),
-                                LocalDateTime.parse(eventEnd, format),
-                                eventPhraseList.get(1));
-                        for (String i : words) {
-                            this.storage = this.storage.addToStorage(i, newTask);
-                        }
-                        this.firstTimeUsing = false;
-                        this.lastCommand = eventPhraseList.get(1);
-                        this.taskList = this.taskList.addTask(newTask);
-                        return this;
-                    }
-                    if (words.get(0).equals("DELETE")) {
-                        this.firstTimeUsing = false;
-                        this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
-                        String[] splitRemovedTask = this.removedTask.toString().split(" ");
-                        List<String> removedTaskArray = Arrays.asList(splitRemovedTask);
-                        for (String i : removedTaskArray) {
-                            this.storage = this.storage.removeFromStorage(i, this.removedTask);
-                        }
-                        this.lastCommand = nextTask;
-                        this.taskList = this.taskList.removeTask(Integer.valueOf(words.get(1)) - 1);
-                        return this;
-                    }
-                    if (words.get(0).equals("FIND")) {
-                        String[] toFind = nextTask.split("FIND ");
-                        List<String> keywords = Arrays.asList(toFind);
-                        TaskList findList = this.storage.getTaskList(keywords.get(1));
-                        this.firstTimeUsing = false;
-                        this.foundList = findList;
-                        this.lastCommand = nextTask;
-                        return this;
-                    }
-                }
-            } catch (DukeException exception) {
-                System.out.println(exception);
-            } catch (Exception exception) {
-                System.out.println("ERRRR ERROR ERRR. SYSTEM FAILURE. UNKNOWN EXCEPTION. ERR ERR");
-            }
-        }
-        return this;
-    }
 
-    public Event toNextGui(String nextTask) {
-        if (nextTask.equals("BYE")) {
-            return new Ending(this.taskList);
-        } else {
-            try {
-                UserInputException.checkUserInput(nextTask, this.taskList.getSize());
-                if (nextTask.equals("LIST")) {
-                    this.firstTimeUsing = false;
-                    this.lastCommand = nextTask;
-                    return this;
-                } else {
-                    String[] command = nextTask.split(" ");
-                    List<String> words = Arrays.asList(command);
-                    if (words.get(0).equals("MARK")) {
-                        this.firstTimeUsing = false;
-                        this.lastCommand = nextTask;
-                        this.taskList = this.taskList.markDone(Integer.valueOf(words.get(1)) - 1);
-                        return this;
-                    }
-                    if (words.get(0).equals("UNMARK")) {
-                        this.firstTimeUsing = false;
-                        this.lastCommand = nextTask;
-                        this.taskList = this.taskList.unMark(Integer.valueOf(words.get(1)) - 1);
-                        return this;
-                    }
-                    if (words.get(0).equals("TODO")) {
-                        String[] toDoTask = nextTask.split("TODO ");
-                        List<String> toDoAction = Arrays.asList(toDoTask);
-                        this.firstTimeUsing = false;
-                        this.lastCommand = toDoAction.get(1);
-                        ToDo newTask = new ToDo(toDoAction.get(1));
-                        this.taskList = this.taskList.addTask(newTask);
-                        for (String i : words) {
-                            this.storage = this.storage.addToStorage(i, newTask);
-                        }
-                        return this;
-                    }
-                    if (words.get(0).equals("DEADLINE")) {
-                        String[] toDoTask = nextTask.split(" /BY ");
-                        List<String> deadlineList = Arrays.asList(toDoTask);
-                        String deadlineAction = deadlineList.get(0);
-                        String[] deadlinePhraseArray = deadlineAction.split("DEADLINE ");
-                        List<String> deadlinePhraseList = Arrays.asList(deadlinePhraseArray);
-                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        Deadline newTask = new Deadline(
-                                LocalDateTime.parse(deadlineList.get(1), format),
-                                deadlinePhraseList.get(1));
-                        for (String i : words) {
-                            this.storage = this.storage.addToStorage(i, newTask);
-                        }
-                        this.firstTimeUsing = false;
-                        this.lastCommand = deadlinePhraseList.get(1);
-                        this.taskList = this.taskList.addTask(newTask);
-                        return this;
-                    }
-                    if (words.get(0).equals("EVENT")) {
-                        String[] splitFrom = nextTask.split(" /FROM ");
-                        List<String> eventActionSplit = Arrays.asList(splitFrom);
-                        String timeLinePhrase = eventActionSplit.get(1);
-                        String eventAction = eventActionSplit.get(0);
-                        String[] eventPhraseArray = eventAction.split("EVENT ");
-                        List<String> eventPhraseList = Arrays.asList(eventPhraseArray);
-                        String[] timeFrame = timeLinePhrase.split(" /TO ");
-                        List<String> timeLineSplit = Arrays.asList(timeFrame);
-                        String eventBegin = timeLineSplit.get(0);
-                        String eventEnd = timeLineSplit.get(1);
-                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        ScheduledEvent newTask = new ScheduledEvent(
-                                LocalDateTime.parse(eventBegin, format),
-                                LocalDateTime.parse(eventEnd, format),
-                                eventPhraseList.get(1));
-                        for (String i : words) {
-                            this.storage = this.storage.addToStorage(i, newTask);
-                        }
-                        this.firstTimeUsing = false;
-                        this.lastCommand = eventPhraseList.get(1);
-                        this.taskList = this.taskList.addTask(newTask);
-                        return this;
-                    }
-                    if (words.get(0).equals("DELETE")) {
-                        this.firstTimeUsing = false;
-                        this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
-                        String[] splitRemovedTask = this.removedTask.toString().split(" ");
-                        List<String> removedTaskArray = Arrays.asList(splitRemovedTask);
-                        for (String i : removedTaskArray) {
-                            this.storage = this.storage.removeFromStorage(i, this.removedTask);
-                        }
-                        this.lastCommand = nextTask;
-                        this.taskList = this.taskList.removeTask(Integer.valueOf(words.get(1)) - 1);
-                        return this;
-                    }
-                    if (words.get(0).equals("FIND")) {
-                        String[] toFind = nextTask.split("FIND ");
-                        List<String> keywords = Arrays.asList(toFind);
-                        TaskList findList = this.storage.getTaskList(keywords.get(1));
-                        this.firstTimeUsing = false;
-                        this.foundList = findList;
-                        this.lastCommand = nextTask;
-                        return this;
-                    }
+                String[] userInput = nextTask.split(" ");
+                List<String> userInputSplit = Arrays.asList(userInput);
+                String mainCommand = userInputSplit.get(0);
+
+                if (mainCommand.equals("MARK")) {
+                    assert (userInputSplit.size() > 0);
+                    int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
+                    this.taskList = this.taskList.markDone(indexOfTask);
+                    assert (this.taskList.getTask(indexOfTask).getStatus() == true);
+                } else if (mainCommand.equals("UNMARK")) {
+                    assert (userInputSplit.size() > 0);
+                    int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
+                    this.taskList = this.taskList.unMark(indexOfTask);
+                    assert (this.taskList.getTask(indexOfTask).getStatus() == false);
+                } else if (mainCommand.equals("TODO") || mainCommand.equals("DEADLINE")
+                        || mainCommand.equals("EVENT")) {
+                    parseTask(nextTask);
+                } else if (mainCommand.equals("DELETE")) {
+                    int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
+                    this.removedTask = this.taskList.getTask(indexOfTask);
+                    this.taskList = this.taskList.removeTask(indexOfTask);
+                    this.storage = this.storage.removeFromKeywordStorage(this.removedTask);
+                } else if (mainCommand.equals("FIND")) {
+                    String[] keywordToFind = nextTask.split("FIND ");
+                    List<String> keywords = Arrays.asList(keywordToFind);
+                    TaskList findList = this.storage.getTaskList(keywords.get(1));
+                    this.foundList = findList;
                 }
             } catch (DukeException exception) {
                 System.out.println(exception);

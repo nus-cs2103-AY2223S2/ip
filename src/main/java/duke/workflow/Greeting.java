@@ -4,14 +4,14 @@ import duke.util.Storage;
 import duke.util.TaskList;
 
 /**
- * A more specific implementation of {@code Event}.
+ * A
+ * more specific implementation of {@code Event}.
  *
  * Part of the workflow where the chatbot greets the user
  * and ask whether he/ she would like to begin using Duke.
  */
 
 public class Greeting extends Event {
-    private String status;
 
     /**
      * Constructs the {@code Greeting} event that greets the user.
@@ -20,12 +20,8 @@ public class Greeting extends Event {
      */
     public Greeting() {
         super(false);
-        this.status = "";
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     /**
      * Determine the next event of the workflow based on the user's input.
@@ -34,8 +30,8 @@ public class Greeting extends Event {
      *          {@code DoTask} if the user wants to use Duke.
      */
 
-    public Event toNextEvent() {
-        if (this.status.equals("NOT PLAYING")) {
+    public Event toNextEvent(String nextTask) {
+        if (nextTask.equals("NOT PLAYING")) {
             return new Ending();
         } else {
             DoTask doTask = new DoTask();
@@ -45,11 +41,6 @@ public class Greeting extends Event {
     }
     public TaskList getTaskList() {
         return new TaskList();
-    }
-
-    @Override
-    public Event toNextGui(String nextTask) {
-        return this;
     }
 
     public String greet() {

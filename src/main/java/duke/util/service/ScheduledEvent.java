@@ -3,6 +3,7 @@ package duke.util.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import duke.util.Task;
 
@@ -34,6 +35,10 @@ public class ScheduledEvent extends Task {
         super("E", action, isDone);
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
+    }
+
+    public List<LocalDateTime> getDates() {
+        return List.of(this.dateBegin, this.dateEnd);
     }
 
     @Override

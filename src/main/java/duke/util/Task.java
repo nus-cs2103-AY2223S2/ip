@@ -1,5 +1,8 @@
 package duke.util;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
  * A template to create tasks specified from the user,
  * such as {@code ToDo}, {@code Deadline}, {@code ScheduledEvent}
@@ -67,6 +70,10 @@ public class Task {
 
     public String getNature() {
         return nature;
+    }
+
+    public List<LocalDateTime> getDates() {
+        return List.of();
     }
 
     @Override

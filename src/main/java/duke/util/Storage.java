@@ -3,6 +3,7 @@ package duke.util;
 import duke.util.service.Deadline;
 import duke.util.service.ScheduledEvent;
 import duke.util.service.ToDo;
+import javafx.util.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,10 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Load user's existing plan every duke's start up,
@@ -26,13 +24,14 @@ import java.util.Scanner;
 public class Storage {
 
     private HashMap<String, TaskList> database;
-
+    private HashMap<String, PriorityQueue<Pair<LocalDateTime, Task>>> taskScheduleOnDates;
     /**
      * Construct the {@code Storage} object with
      * empty database
      */
     public Storage() {
         this.database = new HashMap<>();
+        this.taskScheduleOnDates = new HashMap<>();
     }
 
     /**
@@ -40,7 +39,7 @@ public class Storage {
      * output directory.
      */
 
-    public static void saveProgress(TaskList taskList) {
+    private static void saveProgress(TaskList taskList) {
         File savedFile = new File("MY_GRAND_PLAN.txt");
         System.out.println("[X] FILE CREATED");
         try {
@@ -112,8 +111,6 @@ public class Storage {
                     returnTaskList.addTask(
                             new ScheduledEvent(LocalDateTime.parse(dateInfoAsList.get(0), format),
                                     LocalDateTime.parse(dateInfoAsList.get(1), format), eventInfoAsList.get(0), isDone));
-
-
                 }
 
             }
@@ -145,15 +142,17 @@ public class Storage {
      * @return a new {@code Storage} with the task added to the database
      */
 
-    public Storage addToStorage(String keyword, Task task) {
-        if (this.database.containsKey(keyword)) {
-            TaskList currentList = this.database.get(keyword);
-            currentList = currentList.addTask(task);
-            this.database.put(keyword, currentList);
-        } else {
-            TaskList newList = new TaskList();
-            newList = newList.addTask(task);
-            this.database.put(keyword, newList);
+    public Storage addToKeywordStorage(String userInput, Task task) {
+        for (String keyword : userInput.split(" ")) {
+            if (this.database.containsKey(keyword)) {
+                TaskList currentList = this.database.get(keyword);
+                currentList = currentList.addTask(task);
+                this.database.put(keyword, currentList);
+            } else {
+                TaskList newList = new TaskList();
+                newList = newList.addTask(task);
+                this.database.put(keyword, newList);
+            }
         }
         return this;
     }
@@ -167,21 +166,60 @@ public class Storage {
      * @return a new {@code Storage} with the task removed from the database
      */
 
-    public Storage removeFromStorage(String keyword, Task task) {
-        if (this.database.containsKey(keyword)) {
-            TaskList currentList = this.database.get(keyword);
-            int index = -1;
-            for (int i = 0; i < currentList.getSize(); i++) {
-                if (currentList.getTask(i).toString().equals(task.toString())) {
-                    index = i;
-                    break;
+    public Storage removeFromKeywordStorage(Task task) {
+        String removedTask = task.toString();
+        for (String keyword : removedTask.split(" ")) {
+            if (this.database.containsKey(keyword)) {
+                TaskList currentList = this.database.get(keyword);
+                int index = -1;
+                for (int i = 0; i < currentList.getSize(); i++) {
+                    if (currentList.getTask(i).toString().equals(task.toString())) {
+                        index = i;
+                        break;
+                    }
                 }
+                if (index >= 0) {
+                    currentList = currentList.removeTask(index);
+                }
+                this.database.put(keyword, currentList);
             }
-            if (index >= 0) {
-                currentList = currentList.removeTask(index);
-            }
-            this.database.put(keyword, currentList);
         }
         return this;
+    }
+
+    public static void saveProgressQuery(TaskList listOfCurrentTasks) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ");
+        String isSaving = sc.nextLine();
+        if (isSaving.equals("YES")) {
+            saveProgress(listOfCurrentTasks);
+        }
+    }
+
+    public Storage addTaskToSchedule(Task task) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        List<LocalDateTime> eventDates = task.getDates();
+        if (task.getNature().equals("D")) {
+            LocalDateTime deadlineDate = eventDates.get(0);
+            String date = deadlineDate.format(format);
+            if (this.taskScheduleOnDates.containsKey(date)) {
+                PriorityQueue<Pair<LocalDateTime, Task>> currentQueue = this.taskScheduleOnDates.get(date);
+                currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
+                this.taskScheduleOnDates.put(date, currentQueue);
+            } else {
+                PriorityQueue<Pair<LocalDateTime, Task>> currentQueue = new PriorityQueue<>();
+                currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
+                this.taskScheduleOnDates.put(date, currentQueue);
+            }
+            return this;
+        } else if (task.getNature().equals("E")) {
+            return this;
+        } else {
+            return this;
+        }
+    }
+
+    public HashMap<String, PriorityQueue<Pair<LocalDateTime, Task>>> getTaskScheduleOnDates() {
+        return this.taskScheduleOnDates;
     }
 }

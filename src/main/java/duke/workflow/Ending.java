@@ -34,7 +34,7 @@ public class Ending extends Event {
         this.taskList = taskList;
     }
 
-    public Event toNextEvent() {
+    public Event toNextEvent(String nextTask) {
         return this;
     }
 
@@ -44,11 +44,6 @@ public class Ending extends Event {
 
     public TaskList getTaskList() {
         return this.taskList;
-    }
-
-    @Override
-    public Event toNextGui(String nextTask) {
-        return this;
     }
 
     @Override

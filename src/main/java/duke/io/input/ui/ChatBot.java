@@ -115,24 +115,18 @@ public class ChatBot {
         }
 
         if (isUsingDuke.equals("NO")) {
-            greeting.setStatus("NOT PLAYING");
-            Event nextEvent = greeting.toNextEvent();
+            Event nextEvent = greeting.toNextEvent("NOT PLAYING");
             ChatBot.printWithBracket(nextEvent.toString());
         } else if (isUsingDuke.equals("YES")) {
-            greeting.setStatus("PLAYING");
-            Event nextEvent = greeting.toNextEvent();
+            Event nextEvent = greeting.toNextEvent("PLAYING");
             ChatBot.printWithBracket(nextEvent.toString());
 
             while (!nextEvent.isFinalEvent()) {
-                nextEvent = nextEvent.toNextEvent();
+                String nextTask = sc.nextLine();
+                nextEvent = nextEvent.toNextEvent(nextTask);
                 ChatBot.printWithBracket(nextEvent.toString());
             }
-
-            System.out.println("SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ");
-            String isSaving = sc.nextLine();
-            if (isSaving.equals("YES")) {
-                Storage.saveProgress(nextEvent.getTaskList());
-            }
+            Storage.saveProgressQuery(nextEvent.getTaskList());
         }
     }
 }
