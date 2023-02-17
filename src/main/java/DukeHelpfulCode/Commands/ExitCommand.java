@@ -1,6 +1,5 @@
 package DukeHelpfulCode.Commands;
 
-import DukeHelpfulCode.Tasks.Task;
 import DukeHelpfulCode.Utilities.Storage;
 import DukeHelpfulCode.Utilities.TaskList;
 import DukeHelpfulCode.Utilities.UI;
@@ -10,8 +9,8 @@ public class ExitCommand extends Command {
     public ExitCommand(){}
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
-        ui.exit();
+    public String execute(TaskList taskList) {
+        return "Thanks for using DOOK. Hope you have a great day ahead!";
     }
 
     @Override

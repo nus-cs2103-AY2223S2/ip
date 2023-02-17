@@ -16,7 +16,7 @@ public class TaskList {
      */
     private static String LINEBREAK = "_________________________________________________________________\n";
 
-    private static List<Task> taskList = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     public static List<Task> getTaskList() {
         /**
@@ -25,14 +25,14 @@ public class TaskList {
          * @param   none
          * @return  taskList    The current taskList
          */
-        return taskList;
+        return tasks;
     }
 
     public TaskList(List<Task> taskList){
         /**
          * taskList can be empty, but thats fine
          */
-        this.taskList = taskList;
+        this.tasks = taskList;
     }
 
     public TaskList(){}
@@ -46,28 +46,29 @@ public class TaskList {
          *                  Tasks are listed vertically with 1-index
          */
         String result = "";
-        for (int i = 0; i < this.taskList.size(); i++){
-            result += (i+1) +". " + this.taskList.get(i).toString() + "\n";
+        for (int i = 0; i < this.tasks.size(); i++){
+            result += (i+1) +". " + this.tasks.get(i).toString() + "\n";
         }
         return result;
     }
 
-    public void add(Task task){
+    public String add(Task task){
         /**
          * Adds Task to the TaskList.
          *
          * @param   task    The task to be added to the list
          * @return  none
          */
-        if (taskList.contains(task)){
-            System.out.println(LINEBREAK + "Oops, it seems that you have already added this Task to your list!\n");
-        } else {
-            taskList.add(task);
-            System.out.println(LINEBREAK + "Got it. I've added this task: \n" + task.toString() + "\nNow you have " + this.len() + " tasks in your list.\n" + LINEBREAK);
+        /*if (taskList.contains(task)){
+           return "Oops, it seems that you have already added this Task to your list!\n";
         }
+         */
+        this.tasks.add(task);
+        return LINEBREAK + "Got it. I've added this task: \n" + task.toString() + "\nNow you have " + this.len() + " tasks in your list.\n" + LINEBREAK;
+
     }
 
-    public void mark(boolean isMark, int i) throws NoSuchTaskException, TaskAlrMarkException {
+    public String mark(boolean isMark, int i) throws NoSuchTaskException, TaskAlrMarkException {
         /**
          * Marks the i-1 th index Task as done if not done and vice versa.
          * Note: list is 0-index but displayed as 1-index, hence i would be 1-index.
@@ -77,18 +78,18 @@ public class TaskList {
          * @param   isMark      User's command to "mar" or "unmark" a Task as done or not done.
          * @param   i           The index of the Task to be marked. Note that user input i is 1-index, so -1 is needed.
          */
-        if (i > taskList.size()) {
+        if (i > this.tasks.size()) {
             throw new NoSuchTaskException();
-        } else if (isMark && taskList.get(i-1).isDone()) {
+        } else if (isMark && this.tasks.get(i-1).isDone()) {
             throw new TaskAlrMarkException();
-        } else if (!isMark && !taskList.get(i-1).isDone()){
+        } else if (!isMark && !this.tasks.get(i-1).isDone()){
             throw new TaskAlrMarkException();
         } else {
-            taskList.get(i - 1).mark();
+            return this.tasks.get(i - 1).mark();
         }
     }
 
-    public void delete(int taskNum) throws NoSuchTaskException {
+    public String delete(int taskNum) throws NoSuchTaskException {
         /**
          * Deletes the task selected by the user with the indexing
          *
@@ -100,10 +101,12 @@ public class TaskList {
         if (taskNum > this.len() || taskNum <= 0){
             throw new NoSuchTaskException();
         }
-        else if (this.taskList.get(taskNum-1).isDone()) {
-            this.taskList.remove(taskNum - 1);
-            System.out.println("The " + taskNum +"th Task on the list has been removed!\n" + LINEBREAK);
+        else if (this.tasks.get(taskNum-1).isDone()) {
+            this.tasks.remove(taskNum - 1);
+            return "The " + taskNum +"th Task on the list has been removed!\n" + LINEBREAK;
         } else {
+            return "The " + taskNum +"th Task on the list is not yet complete!";
+            /*
             System.out.println("The " + taskNum +"th Task on the list is not yet complete!\nAre you sure you want to remove it? y/n");
             Scanner sc = new Scanner(System.in);
             String yn = sc.next();
@@ -115,6 +118,7 @@ public class TaskList {
             } else {
                 System.out.println("Sorry, I don't understand.\n");
             }
+            */
         }
 
     }
@@ -126,7 +130,7 @@ public class TaskList {
          * @param none
          * @return none
          */
-        return taskList.size();
+        return this.tasks.size();
     }
 
 }

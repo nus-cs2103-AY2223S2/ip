@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 
 import DukeHelpfulCode.Exceptions.*;
@@ -20,11 +19,24 @@ public class DOOK {
     private static String LINEBREAK = "_________________________________________________________________\n";
     private static TaskList USERLIST = new TaskList();
 
-    UI ui;
-    Storage storage;
-    TaskList tasks;
+    private UI ui;
+    private Storage storage;
+    private TaskList tasks;
 
-    public DOOK(String filePath) {
+    public DOOK(){
+        this.ui = new UI();
+        this.storage = new Storage("./src/main/resources/data/tasks.txt");
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) { // e should be EmptyTaskListException
+            ui.showLoadingError();
+            this.tasks = new TaskList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void makeDOOK(String filePath) {
         this.ui = new UI();
         this.storage = new Storage(filePath);
         try {
@@ -37,13 +49,10 @@ public class DOOK {
         }
     }
 
+    /**
+     * Runs DOOK.
+     */
     public void run() {
-        /**
-         * Runs DOOK.
-         *
-         * @param none
-         * @return none
-         */
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -51,20 +60,44 @@ public class DOOK {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
             } finally {
                 ui.showLine();
             }
         }
     }
 
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        if (!input.equals("bye")) {
+            try {
+                Command c = Parser.parse(input);
+                return c.execute(tasks);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        }
+        else {
+            try {
+                storage.write(this.tasks);
+                return new ExitCommand().execute(tasks);
+            } catch (IOException e) {
+                return "lol";
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
-        new DOOK("./src/main/resources/data/tasks.txt").run();
+        new DOOK().run();
     }
 
 

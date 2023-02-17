@@ -1,12 +1,10 @@
 package DukeHelpfulCode.Commands;
 
 import DukeHelpfulCode.Exceptions.NoSuchTaskException;
-import DukeHelpfulCode.Tasks.Task;
 import DukeHelpfulCode.Utilities.Storage;
 import DukeHelpfulCode.Utilities.TaskList;
 import DukeHelpfulCode.Utilities.UI;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class DeleteCommand extends Command{
@@ -19,14 +17,15 @@ public class DeleteCommand extends Command{
     public DeleteCommand(){};
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList) {
+        String res;
         try {
-            taskList.delete(taskNum);
-            storage.write(taskList);
+            res = taskList.delete(taskNum);
         } catch (NoSuchTaskException e) {
-            // do nothing, move onto next command
+            res = e.getMessage();
         }
-    };
+        return res;
+    }
 
     @Override
     public boolean isExit(){

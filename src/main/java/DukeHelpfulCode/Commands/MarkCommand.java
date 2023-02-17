@@ -1,7 +1,5 @@
 package DukeHelpfulCode.Commands;
 
-import java.io.FileWriter;
-
 import DukeHelpfulCode.Exceptions.NoSuchTaskException;
 import DukeHelpfulCode.Exceptions.TaskAlrMarkException;
 import DukeHelpfulCode.Utilities.Storage;
@@ -22,9 +20,9 @@ public class MarkCommand extends Command{
     public MarkCommand(){};
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws TaskAlrMarkException, NoSuchTaskException, IOException {
-        taskList.mark(isMark, taskNum);
-        storage.write(taskList);
+    public String execute(TaskList taskList) throws TaskAlrMarkException, NoSuchTaskException {
+        String res = taskList.mark(isMark, taskNum);
+        return res;
     };
 
     @Override
