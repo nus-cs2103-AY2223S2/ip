@@ -18,7 +18,7 @@ Duke **is a chat box for recording down and managing your daily task** easily.
 
 ## Quick start
 + Ensure you have Java 11 in your computer.
-+ Download the latest duke.jar.
++ Download the latest duke.jar [here](https://github.com/OliviaJHL/ip/releases/tag/A-Release).
 + Put duke.jar inside a folder.
 + Right-click on the folder and open the terminal.
 + Type command **java -jar myIP.jar**.
