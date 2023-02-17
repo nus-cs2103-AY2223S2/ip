@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,8 +7,6 @@ import javafx.stage.Stage;
  * Main runner class for the Duke program.
  */
 public class Duke extends Application {
-    private Scanner scanner;
-    private String horizontalLine = "************************";
     private TaskList taskList;
 
     private Storage storage;
@@ -21,8 +17,6 @@ public class Duke extends Application {
     private boolean isExit;
 
     public Duke() {
-        scanner = new Scanner(System.in);
-
         storage = new Storage("list_storage.txt");
         parser = new Parser();
         taskList = new TaskList(storage);
@@ -32,8 +26,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        System.out.println("start method");
-
         dukeGui.start(stage);
     }
 

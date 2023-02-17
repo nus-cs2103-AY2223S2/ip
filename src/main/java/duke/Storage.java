@@ -58,7 +58,7 @@ public class Storage {
             }
             writer.close();
         } catch (FileNotFoundException e) {
-            System.out.println("storeList: File not found error");
+            System.out.println("File not found");
         } catch (IOException e) {
             System.out.println("IOException");
         }
@@ -108,7 +108,7 @@ public class Storage {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("loadList: File not found error");
+            System.out.println("No stored list found to be loaded");
         }
         return taskArr;
     }
