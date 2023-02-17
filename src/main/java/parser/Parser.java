@@ -25,6 +25,8 @@ public class Parser {
                 return new DeadlineCommand(splittedCmd[1]);
             case "event":
                 return new EventCommand(splittedCmd[1]);
+            case "find":
+                return new FindCommand(splittedCmd[1]);
             default:
                 return new InvalidCommand(splittedCmd[0]);
         }
