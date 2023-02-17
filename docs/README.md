@@ -29,7 +29,7 @@ Just ask berry to help you in app <:
 
 ---
 
-### `todo <task_name> [#<tag_name>]` - adds a task to do 
+### `todo <task_name> [#<hash_tag>]` - adds a task to do 
 
 This adds a new task for berry to manage.
 
@@ -47,7 +47,7 @@ You can do it! I've added this task for ya
 
 ---
 
-### `deadline <task_name> /by<YYYY-MM-DD> [#<tag_name>]` - adds a task with a deadline
+### `deadline <task_name> /by<YYYY-MM-DD> [#<hash_tag>]` - adds a task with a deadline
 
 This adds a new task with a deadline for berry to manage.
 
@@ -65,7 +65,7 @@ You can do it! I've added this task for ya
 
 ---
 
-### `event <task_name> /from<YYYY-MM-DD> /to<YYYY-MM-DD> [#<tag_name>]` - adds an event
+### `event <task_name> /from<YYYY-MM-DD> /to<YYYY-MM-DD> [#<hash_tag>]` - adds an event
 
 This adds a new task as an event between a time period for berry to manage.
 
@@ -102,7 +102,7 @@ Here's what I have for you:
 ```
 
 ---
-### `mark <list_index>` - mark a task with the list index as done
+### `mark <index>` - mark a task with the list index as done
 
 This asks berry to mark the task indexed by the _list index_, that is seen in your most recent call to `list`, as done.
 
@@ -119,7 +119,7 @@ Alright~ I'll set the task as done!
 ```
 
 ---
-### `unmark <list_index>` - mark a task with the list index as not done
+### `unmark <index>` - mark a task with the list index as not done
 
 This asks berry to mark the task indexed by the _list index_, that is seen in your most recent call to `list`, as not done.
 
@@ -136,6 +136,22 @@ Okay! I'll set the task as not done
 ```
 
 ---
+
+### `delete <index>` - deletes a task with the list index
+
+This asks berry to delete the task indexed by the _list index_, that is seen in your most recent call to `list`.
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+```
+Here you go! I've deleted this task for ya
+    [T][ ] get dinner for family
+You now have 2 task(s) in the list
+```
 
 ---
 ### `find <keyword>` - searches for tasks which contain the keyword
