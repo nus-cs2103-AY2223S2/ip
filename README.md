@@ -1,24 +1,45 @@
-# Duke project template
+# Skylar
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "My name is Skyler White yo" - Skyler White ([source](https://knowyourmeme.com/memes/my-name-is-skyler-white-yo))
 
-## Setting up in Intellij
+Thus speaks Skylar, an advanced **chat-bot** here to make your life easier. :bowtie:
+Skylar is text-based, and helps to record and organize any tasks that you need to do, all while responding in an entertaining manner!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Skylar is a sophisticated chat-bot with various features!
+
++ Record various types of tasks
+  + Things to do
+  + Events with time ranges
+  + Deadlines with an end data
++ Search for all the relevant tasks with a keyword
++ Easily delete entries from the list of tasks
++ Load and store the list
+
+## Setting up Skylar
+
+Downloading and using Skylar is easy! Just follow these steps:
+
+1. Download the latest jar from [this link](https://github.com/Zeli0/ip/releases/tag/A-Jar).
+2. Double click to run.
+3. Begin adding tasks!
+
+## For Programmers
+
+If you are looking to learn from or build upon this project, you can take a look inside. The `main` method that starts everything up is here:
+
+```
+public class Hoster {
+    public static void main(String[] args) {
+        Application.launch(Main.class,args);
+    }
+```
+
+## Future Development
+
+More features will be implemented in the future! These include but are not limited to:
+
+- [ ] Detailed, expandable task descriptions
+- [ ] Editing features, like rescheduling
+- [ ] View tasks in a schedule
