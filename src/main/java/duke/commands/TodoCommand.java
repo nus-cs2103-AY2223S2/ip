@@ -6,10 +6,18 @@ import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Encapsulates todo command and its arguments.
+ */
 public class TodoCommand extends AddCommand {
     public static final String COMMAND = "todo";
     private String[] tokens;
 
+    /**
+     * Constructs a new Todo Command.
+     *
+     * @param tokens Arguments of the command.
+     */
     public TodoCommand(String[] tokens) {
         this.tokens = tokens;
     }

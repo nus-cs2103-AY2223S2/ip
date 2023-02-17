@@ -7,6 +7,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
+/**
+ * Encapsulates check_duplicate command and its arguments.
+ */
 public class CheckDuplicateCommand extends Command {
     public static final String COMMAND = "check_duplicate";
 

@@ -9,7 +9,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * A personal assistant chatbox to manage daily tasks.
+ * A personal assistant chat-bot to manage daily tasks.
  */
 public class Duke {
     private Storage storage;
@@ -67,6 +67,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates response after taking in user's command.
+     *
+     * @param input Command entered by user.
+     * @return Response to user's command.
+     */
     public String getResponse(String input) {
         run(input);
         String response = ui.showResponse();

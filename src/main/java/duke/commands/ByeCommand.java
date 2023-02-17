@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates bye command and its arguments.
+ */
 public class ByeCommand extends Command {
     public static final String COMMAND = "bye";
 

@@ -9,10 +9,18 @@ import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Task;
 
+/**
+ * Encapsulates deadline command and its arguments.
+ */
 public class DeadlineCommand extends AddCommand {
     public static final String COMMAND = "deadline";
     private String[] tokens;
 
+    /**
+     * Constructs a new Deadline Command.
+     *
+     * @param tokens Arguments of the command.
+     */
     public DeadlineCommand(String[] tokens) {
         this.tokens = tokens;
     }

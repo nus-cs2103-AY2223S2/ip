@@ -9,10 +9,18 @@ import duke.parser.Parser;
 import duke.task.Event;
 import duke.task.Task;
 
+/**
+ * Encapsulates event command and its arguments.
+ */
 public class EventCommand extends AddCommand {
     public static final String COMMAND = "event";
     private String[] tokens;
 
+    /**
+     * Constructs a new Event Command.
+     *
+     * @param tokens Arguments of the command.
+     */
     public EventCommand(String[] tokens) {
         this.tokens = tokens;
     }

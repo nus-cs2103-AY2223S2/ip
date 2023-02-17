@@ -5,10 +5,18 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
+/**
+ * Encapsulates delete command and its arguments.
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND = "delete";
     private String[] tokens;
 
+    /**
+     * Constructs a new Delete Command.
+     *
+     * @param tokens Arguments of the command.
+     */
     public DeleteCommand(String[] tokens) {
         this.tokens = tokens;
     }

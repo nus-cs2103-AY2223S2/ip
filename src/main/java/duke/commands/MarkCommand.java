@@ -4,10 +4,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates mark command and its arguments.
+ */
 public class MarkCommand extends Command {
     public static final String COMMAND = "mark";
     private String[] tokens;
 
+    /**
+     * Constructs a new Mark Command.
+     *
+     * @param tokens Arguments of the command.
+     */
     public MarkCommand(String[] tokens) {
         this.tokens = tokens;
     }

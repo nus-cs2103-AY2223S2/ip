@@ -4,10 +4,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates unmark command and its arguments.
+ */
 public class UnmarkCommand extends Command {
     public static final String COMMAND = "unmark";
     private String[] tokens;
 
+    /**
+     * Constructs a new Unmark Command.
+     *
+     * @param tokens Arguments of the command.
+     */
     public UnmarkCommand(String[] tokens) {
         this.tokens = tokens;
     }

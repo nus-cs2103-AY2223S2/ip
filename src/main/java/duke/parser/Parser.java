@@ -17,7 +17,7 @@ import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
 
 /**
- * Parses the input command from user to the Duke chatbox.
+ * Parses the input command from user to the Duke chat-bot.
  */
 public class Parser {
     protected static final String INPUT_DATE_PATTERN = "yyyy-MM-dd HH:mm";
@@ -98,7 +98,7 @@ public class Parser {
      * Parses the input command entered by user.
      *
      * @param userInput Input command of user.
-     * @return
+     * @return The Command object that contains the argument information.
      */
     public Command parseInput(String userInput) {
         String inputCommand = userInput.split(" ", 2)[0];
@@ -135,6 +135,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses date and time in String representation to LocalDateTime object.
+     *
+     * @param s String representation of date and time.
+     * @return A LocalDateTime object.
+     */
     public static LocalDateTime parseDateTime(String s) {
         return LocalDateTime.parse(s, DateTimeFormatter.ofPattern(INPUT_DATE_PATTERN));
     }

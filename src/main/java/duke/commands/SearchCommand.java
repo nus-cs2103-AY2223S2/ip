@@ -7,10 +7,18 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
+/**
+ * Encapsulates search command and its arguments.
+ */
 public class SearchCommand extends Command {
     public static final String COMMAND = "search";
     private String[] tokens;
 
+    /**
+     * Constructs a new Search Command.
+     *
+     * @param tokens Arguments of the command.
+     */
     public SearchCommand(String[] tokens) {
         this.tokens = tokens;
     }
