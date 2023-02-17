@@ -2,7 +2,7 @@ package Ava;
 
 import Ava.commands.*;
 import Ava.exceptions.AvaException;
-import Ava.exceptions.CommandNotFoundException;
+import Ava.exceptions.CommandNotFound;
 
 
 
@@ -49,12 +49,12 @@ public class Parser {
                 command = new FindTask(parseFindTask(inputArray[1]));
                 break;
             default:
-                throw new CommandNotFoundException(input);
+                throw new CommandNotFound(input);
             }
             return command;
         } catch (ArrayIndexOutOfBoundsException | AvaException e){
 
-            throw new CommandNotFoundException(input);
+            throw new CommandNotFound(input);
         }
     }
     private String[] splitInput(String input){

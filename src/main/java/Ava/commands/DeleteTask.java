@@ -5,7 +5,7 @@ import Ava.Storage;
 import Ava.TaskList;
 import Ava.exceptions.CannotWriteToFile;
 import Ava.exceptions.NonExistentTask;
-import Ava.exceptions.CommandNotFoundException;
+import Ava.exceptions.CommandNotFound;
 import Ava.exceptions.CannotCreateDirectory;
 import Ava.exceptions.CannotReadFromFile;
 import Ava.tasks.Task;
@@ -23,9 +23,9 @@ public class DeleteTask implements AvaCommand {
     /**
      * DeleteTask contructor
      * @param parsedInput string array containing parsed index of the task that needs to be deleted
-     * @throws CommandNotFoundException incorrect parsedInput
+     * @throws CommandNotFound incorrect parsedInput
      */
-    public DeleteTask(String[] parsedInput) throws CommandNotFoundException {
+    public DeleteTask(String[] parsedInput) throws CommandNotFound {
         this.parsedInput = parsedInput;
         this.isCorrectInput();
     }
@@ -64,11 +64,11 @@ public class DeleteTask implements AvaCommand {
 
     /**
      * Before Deleting the Task , check if the parsedInputArray is correct
-     * @throws CommandNotFoundException parsedInput is incorrect
+     * @throws CommandNotFound parsedInput is incorrect
      */
-    private void isCorrectInput() throws CommandNotFoundException {
+    private void isCorrectInput() throws CommandNotFound {
         if (parsedInput.length != 1  || !isDigit(parsedInput[0].charAt(0))) {
-            throw new CommandNotFoundException("");
+            throw new CommandNotFound("");
         }
     }
 }

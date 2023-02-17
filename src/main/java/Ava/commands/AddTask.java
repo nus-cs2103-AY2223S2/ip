@@ -5,7 +5,7 @@ import Ava.Storage;
 import Ava.TaskList;
 import Ava.exceptions.CannotWriteToFile;
 import Ava.exceptions.DateTimeNotParsed;
-import Ava.exceptions.CommandNotFoundException;
+import Ava.exceptions.CommandNotFound;
 import Ava.exceptions.CannotCreateDirectory;
 import Ava.tasks.Deadline;
 import Ava.tasks.Event;
@@ -25,9 +25,9 @@ public class AddTask implements AvaCommand {
      * Constructor for AddTask Command
      * @param input string array containing parsed task message
      * @param t enum containing the task types
-     * @throws CommandNotFoundException parsedInput is incorrect
+     * @throws CommandNotFound parsedInput is incorrect
      */
-    public AddTask(String[] input, TASK_TYPE t) throws CommandNotFoundException {
+    public AddTask(String[] input, TASK_TYPE t) throws CommandNotFound {
         this.parsedInput = input;
         this.task = t;
         this.isInputCorrect();
@@ -76,23 +76,23 @@ public class AddTask implements AvaCommand {
 
     /**
      * Before Adding the Task , check if the parsedInputArray is correct
-     * @throws CommandNotFoundException parsedInput is incorrect
+     * @throws CommandNotFound parsedInput is incorrect
      */
-    private void  isInputCorrect() throws CommandNotFoundException {
+    private void  isInputCorrect() throws CommandNotFound {
         switch (this.task) {
         case EVENT:
              if (this.parsedInput.length != 3){
-                 throw new CommandNotFoundException("");
+                 throw new CommandNotFound("");
              }
              break;
         case DEADLINE:
             if (this.parsedInput.length != 2){
-                throw new CommandNotFoundException("");
+                throw new CommandNotFound("");
             }
             break;
         default:
             if (this.parsedInput.length != 1){
-                throw new CommandNotFoundException("");
+                throw new CommandNotFound("");
             }
         }
     }

@@ -5,7 +5,7 @@ import Ava.Storage;
 import Ava.TaskList;
 import Ava.exceptions.CannotWriteToFile;
 import Ava.exceptions.NonExistentTask;
-import Ava.exceptions.CommandNotFoundException;
+import Ava.exceptions.CommandNotFound;
 import Ava.exceptions.CannotCreateDirectory;
 import Ava.exceptions.CannotReadFromFile;
 import Ava.tasks.Task;
@@ -23,9 +23,9 @@ public class MarkTask implements AvaCommand {
     /**
      * MarkTask Contructor
      * @param parsedInput string array of the index of the task to be marked.
-     * @throws CommandNotFoundException parsedInput is incorrect
+     * @throws CommandNotFound parsedInput is incorrect
      */
-    public MarkTask(String[] parsedInput) throws CommandNotFoundException {
+    public MarkTask(String[] parsedInput) throws CommandNotFound {
 
         this.parsedInput = parsedInput;
         this.isCorrectInput();
@@ -64,11 +64,11 @@ public class MarkTask implements AvaCommand {
 
     /**
      * Before marking the Task , check if the parsedInputArray is correct
-     * @throws CommandNotFoundException  parsedInput is incorrect
+     * @throws CommandNotFound  parsedInput is incorrect
      */
-    private void isCorrectInput() throws CommandNotFoundException {
+    private void isCorrectInput() throws CommandNotFound {
         if (parsedInput.length != 1  || !isDigit(parsedInput[0].charAt(0))){
-            throw new CommandNotFoundException("");
+            throw new CommandNotFound("");
         }
     }
 }

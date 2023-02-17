@@ -5,7 +5,7 @@ import Ava.Storage;
 import Ava.TaskList;
 import Ava.exceptions.CannotWriteToFile;
 import Ava.exceptions.NonExistentTask;
-import Ava.exceptions.CommandNotFoundException;
+import Ava.exceptions.CommandNotFound;
 import Ava.exceptions.CannotCreateDirectory;
 import Ava.exceptions.CannotReadFromFile;
 import Ava.tasks.Task;
@@ -23,9 +23,9 @@ public class UnmarkTask implements AvaCommand {
     /**
      * UnmarkTask Contructor
      * @param parsedInput
-     * @throws CommandNotFoundException string array of the index of the task to be marked.
+     * @throws CommandNotFound string array of the index of the task to be marked.
      */
-    public UnmarkTask(String[] parsedInput) throws CommandNotFoundException {
+    public UnmarkTask(String[] parsedInput) throws CommandNotFound {
         this.parsedInput = parsedInput;
         this.isCorrectInput();
     }
@@ -63,9 +63,9 @@ public class UnmarkTask implements AvaCommand {
      * Before marking the Task , check if the parsedInputArray is correct
      * @throws NonExistentTask parsedInput is incorrect
      */
-    private void isCorrectInput() throws CommandNotFoundException {
+    private void isCorrectInput() throws CommandNotFound {
         if (parsedInput.length != 1  || !isDigit(parsedInput[0].charAt(0))){
-            throw new CommandNotFoundException("");
+            throw new CommandNotFound("");
         }
     }
 }
