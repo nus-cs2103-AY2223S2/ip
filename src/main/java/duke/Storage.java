@@ -33,7 +33,7 @@ public class Storage {
 
         // output string to file
         PrintWriter out = new PrintWriter(fileName);
-        out.println(tasks.toString());
+        out.print(tasks.toString());
         out.close();
 
     }
@@ -51,9 +51,11 @@ public class Storage {
 
             String[] strTasks = strData.split("\n");
             for (String strTask : strTasks) {
-                if (strTask.length() == 1) {
-                    return; // for handling empty file, it still contains "\n"
+                if (strTask.length() <= 1) {
+                    System.out.println("blank line");
+                    continue;
                 }
+                System.out.println(strTask);
                 Task loadedTask = Parser.parseLoadedTask(strTask);
                 tasks.add(loadedTask);
             }
