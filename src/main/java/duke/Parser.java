@@ -78,7 +78,13 @@ public class Parser {
                 output = tasks.addTask(new Event(eventTaskName, eventStartDate, eventEndDate));
                 break;
             case "delete":
-                output = tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
+                int deleteTaskIndex = Integer.parseInt(descriptions[1]);
+
+                if (deleteTaskIndex < 1 || deleteTaskIndex > tasks.getTaskList().size()) {
+                    throw new DukeException("There is no item numbered " + deleteTaskIndex + ".\n");
+                }
+
+                output = tasks.removeTask( deleteTaskIndex - 1);
                 break;
             case "find":
                 TaskList filteredTasks = new TaskList(tasks.filteredTaskList(descriptions[1]));
