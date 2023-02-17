@@ -59,7 +59,11 @@ public class Task {
                 ? 1
                 : 0;
     }
-    
+
+    public String savedTaskFormat() {
+        return typeOfTask + " | " + isDoneToInt() + " | " + nameOfTask;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatus() + "]" + this.nameOfTask;
