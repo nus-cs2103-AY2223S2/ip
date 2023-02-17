@@ -18,8 +18,8 @@ import duke.tasklist.TaskList;
  * @author Brian Quek
  */
 public class Storage {
-    private static final String FOLDER_PATH = "src/main/java/duke/utility/storage/";
-    private static final String FILE_PATH = "src/main/java/duke/utility/storage/storage.txt";
+    private static final String FOLDER_PATH = "storage/";
+    private static final String FILE_PATH = "storage/storage.txt";
 
 
     /**
