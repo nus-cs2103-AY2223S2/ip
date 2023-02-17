@@ -1,0 +1,4 @@
+T | 1 | study
+D | 0 | homework | 01/01/2021
+T | 1 | play
+D | 0 | hi | Jan 1 2019 1200

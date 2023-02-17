@@ -1,0 +1,4 @@
+T | 1 | read book
+T | 1 | join sports club
+D | 0 | return book | Feb 12 2019 1800
+E | 1 | study | Jan 1 2019 1820 | Feb 2 2019 1820
