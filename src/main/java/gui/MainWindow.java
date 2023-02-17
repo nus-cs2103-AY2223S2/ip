@@ -33,6 +33,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
     }
 
     public void setDuke(Duke d) {
