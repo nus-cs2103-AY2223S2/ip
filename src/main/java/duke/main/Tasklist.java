@@ -4,20 +4,20 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * Tasklist class holds the tasks added and deleted in a session
+ * Tasklist class to hold the tasks added and deleted in a session
  */
 public class Tasklist {
     private final ArrayList<Task> tasks;
 
     /**
-     * constructor to create a tasklist to stores tasks
+     * creates a tasklist to stores tasks
      */
     public Tasklist() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * constructor to create a tasklist from data in the saved file
+     * creates a tasklist from data in the saved file
      * @param tasks arraylist of tasks data from saved file
      */
     public Tasklist(ArrayList<Task> tasks) {
@@ -25,7 +25,8 @@ public class Tasklist {
     }
 
     /**
-     * getter method for arraylist of tasks
+     * gets arraylist of tasks
+     *
      * @return arraylist of tasks
      */
     public ArrayList<Task> getTasks() {
@@ -37,28 +38,39 @@ public class Tasklist {
     }
 
     /**
-     * adder method to add a task
+     *  gets the size of current tasklist
+     * @return size of tasklist in int
+     */
+    public int getTasksNum() {
+        return this.tasks.size();
+    }
+    /**
+     * adds a task to existing tasks
+     *
      * @param task task to be added
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
     /**
-     *  method to delete a task
+     *  deletes a task from existing tasks
+     *
      * @param taskNum task index to be added
      */
     public void deleteTask(int taskNum) {
         tasks.remove(taskNum);
     }
     /**
-     *  method to mark a task as done
+     * marks a task as done
+     *
      * @param taskNum task index to be marked as done
      */
     public void markDone(int taskNum) {
         tasks.get(taskNum).markDone();
     }
     /**
-     *  method to mark a task as not done
+     * marks a task as not done
+     *
      * @param taskNum task index to be marked as not done
      */
     public void markUndone(int taskNum) {

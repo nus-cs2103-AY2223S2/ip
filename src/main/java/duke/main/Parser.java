@@ -23,6 +23,7 @@ public class Parser {
      * Takes in line of input as command from user. process the input
      * and check if valid, if it is then return respective commands,
      * else throw a Duke exception to inform user invalidity of input.
+     *
      * @param fullCommand the line of input from user
      * @return respective command to the input
      * @throws DukeException when input is invalid

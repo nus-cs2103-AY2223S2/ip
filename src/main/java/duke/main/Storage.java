@@ -17,7 +17,8 @@ public class Storage {
     private final File file;
 
     /**
-     * Constructor method that create file if it does not exist
+     * Creates file if it does not exist
+     *
      * @param filepath the specified path of file location
      * @throws DukeException when file cannot be created
      * @throws IOException when file creation has an error
@@ -51,32 +52,20 @@ public class Storage {
 
         for (Task curr : tasklist.getTasks()) {
             if (curr instanceof Todo) {
-                strings.append("T ")
-                        .append("| ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append("| ")
-                        .append(curr.getDescription())
-                        .append("\n");
+                String done = curr.isDone() ? "1 " : "0 ";
+                String toAppend = "T " + "| " + done + "| " + curr.getDescription() + "\n";
+                strings.append(toAppend);
             } else if (curr instanceof Deadline) {
-                strings.append("D ")
-                        .append("| ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append("| ")
-                        .append(curr.getDescription())
-                        .append(" | ")
-                        .append(((Deadline) curr).getBy())
-                        .append("\n");
+                String done = curr.isDone() ? "1 " : "0 ";
+                LocalDateTime by = ((Deadline) curr).getBy();
+                String toAppend = "D " + "| " + done + "| " + curr.getDescription() + " | " + by + "\n";
+                strings.append(toAppend);
             } else if (curr instanceof Event) {
-                strings.append("E ")
-                        .append("| ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append("| ")
-                        .append(curr.getDescription())
-                        .append(" | ")
-                        .append(((Event) curr).getFrom())
-                        .append(" | ")
-                        .append(((Event) curr).getTo())
-                        .append("\n");
+                String done = curr.isDone() ? "1 " : "0 ";
+                LocalDateTime from = ((Event) curr).getFrom();
+                LocalDateTime to = ((Event) curr).getTo();
+                String toAppend = "E " + "| " + done + "| " + curr.getDescription() + " | " + from + " | " + to + "\n";
+                strings.append(toAppend);
             }
         }
         fw.write(strings.toString());
@@ -85,6 +74,7 @@ public class Storage {
 
     /**
      * loads the tasks from the specified saved file
+     *
      * @return an arraylist of tasks from the saved file or creates a new arraylist if file is empty
      * @throws DukeException when data from file cannot be read
      * @throws FileNotFoundException when saved file cannot be found

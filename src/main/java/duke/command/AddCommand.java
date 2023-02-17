@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     public String execute(Tasklist tasklist, Ui ui, Storage storage) throws IOException {
         int initialSize = tasklist.getTasksNum();
         tasklist.addTask(this.task);
-        assert tasklist.getTasksNum() == initialSize - 1 : "tasklist size must increment after addition of task";
+        assert tasklist.getTasksNum() == initialSize + 1 : "tasklist size must increment after addition of task";
         storage.update(tasklist);
         return ui.printAddTaskMessage(this.task, tasklist);
     }

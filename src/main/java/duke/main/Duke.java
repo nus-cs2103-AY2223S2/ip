@@ -13,7 +13,7 @@ public class Duke {
     private boolean shouldExit = false;
 
     /**
-     * Duke constructor to initialise Ui, storage and tasklist
+     * initialises Ui, storage and tasklist
      */
     public Duke() {
         UI = new Ui();
@@ -30,6 +30,12 @@ public class Duke {
         }
     }
 
+    /**
+     * executes the command that is taken in as input from user
+     *
+     * @param input string input from user
+     * @return response Duke will provide as a string
+     */
     public String getResponse(String input) {
         if (shouldExit) {
             return "";
@@ -42,4 +48,5 @@ public class Duke {
             return UI.printException(e);
         }
     }
+
 }
