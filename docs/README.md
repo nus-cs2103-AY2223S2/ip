@@ -14,7 +14,7 @@ Welcome to the task management chatbot. Given below are instructions on how to u
 3. [FAQ](#faq)
 4. [Sample GUI Snapshot](#snapshot)
 
-## Setting up in Intellij
+## 1. Setting up in Intellij
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
@@ -34,17 +34,7 @@ For more information on the commands available, type help.
 
 
 
-## Features 
-
-### Todo
-
-Adds a todo task into your todo list. 
-
-### Deadline
-
-Adds a deadline task into your todo list.
-
-## Usage
+## 2. Features
 
 ## `todo` 
 
@@ -77,21 +67,6 @@ Expected output:
  You now have 2 tasks left.
  ```
 
-## `deadline`
-Adds a deadline task into your todo list.
-
-Example of usage:
-
-`deadline finish homework /by 31/12/23 1200`
-
-
-Expected output:
-
-```
- Got it. I've added this task: finish homework 31/12/23 1200.
- You now have 2 tasks left.
- ```
-
 ## `event`
 Adds a event task into your todo list.
 
@@ -110,12 +85,12 @@ Expected output:
 ## `help`
 Displays a help page with all commands available. 
 
-## `FAQ`
+## 3. `FAQ`
 **Q**: How can I transfer data from one computer to another?
 
 **A**: The data is stored within the `duke.txt` file under `/data`. 
 Just export it to the other device and you're good to go!
 
-## `Snapshot`
+## 4. `Snapshot`
 All done properly, it should look like this.
 ![Display](Ui.png)
