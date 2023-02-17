@@ -46,7 +46,7 @@ public abstract class Parser {
             return new ListTasksCommand();
         case CHECK:
             try {
-                return new CheckCommand(LocalDate.parse(commands[2]));
+                return new CheckCommand(LocalDate.parse(commands[1]));
             } catch (DateTimeParseException e) {
                 throw new InvalidDateFormatException(e.getParsedString());
             }
