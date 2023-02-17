@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Encapsulates the Ui handling logic of Duke.

@@ -2,12 +2,12 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 
-import duke.storage.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulates event command and its arguments.

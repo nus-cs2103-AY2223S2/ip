@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.storage.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 /**
  * Encapsulates todo command and its arguments.
