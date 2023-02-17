@@ -1,7 +1,5 @@
 package duke.parser;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
@@ -74,10 +72,7 @@ public class Parser {
         } catch (EmptyDescriptionException | WrongCommandException
                 | WrongFormatException | DukeException e) {
             return ui.showError(e.getMessage());
-        } catch (DateTimeParseException e) {
-            return ui.showError("Please enter date in the correct format! YYYY-MM-DD, example: 2023-10-10");
         }
-
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -17,7 +18,7 @@ public class HandleMark {
      * @param ui Ui that would generate reply for the user
      * @return A String to respond to user through ui, inform user about status of task
      */
-    public static String performMark(String input, TaskList tasklist, Ui ui) {
+    public static String performMark(String input, TaskList tasklist, Ui ui) throws DukeException {
 
         try {
             int taskNum = Integer.parseInt(input.substring(5)) - 1;
@@ -25,7 +26,7 @@ public class HandleMark {
             assert input.trim().split(" ").length > 1 : "There is no task to mark!";
             return ui.showMarkTask(tasklist.getTask(taskNum).toString());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            return ui.showError("Please enter a valid task number!");
+            throw new DukeException("Please enter a valid task number!");
         }
     }
 }

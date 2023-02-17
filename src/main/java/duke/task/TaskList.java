@@ -18,8 +18,8 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> TaskList) throws DukeException {
-        this.taskList = TaskList;
+    public TaskList(List<Task> taskListInput) throws DukeException {
+        this.taskList = taskListInput;
     }
 
 

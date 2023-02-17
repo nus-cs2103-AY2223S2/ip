@@ -25,7 +25,8 @@ public class HandleEvent {
      * @return A String to respond to user through ui, inform user whether task has been added or not
      * @throws WrongFormatException This exception is thrown when input is not in correct format
      */
-    public static String performEvent(String input, TaskList tasklist, Ui ui) throws WrongFormatException, DukeException {
+    public static String performEvent(
+            String input, TaskList tasklist, Ui ui) throws WrongFormatException, DukeException {
 
         try {
             String taskString = input.substring(6, input.indexOf(" /from")).trim();
@@ -42,7 +43,7 @@ public class HandleEvent {
             if (taskStartDate.isBefore(java.time.LocalDate.now())) {
                 throw new DukeException("Noooo! You're entering dates before today!");
             }
-            assert input.contains("/from") && input.contains("/to"): "Wrong format for event task!";
+            assert input.contains("/from") && input.contains("/to") : "Wrong format for event task!";
             Task taskEvent = new Event(taskString, startDate, endDate);
             if (tasklist.checkDuplicates(taskEvent)) {
                 throw new DukeException("OOPS! You have added this task before already!");

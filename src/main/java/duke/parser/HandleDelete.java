@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -18,7 +19,7 @@ public class HandleDelete {
      * @param ui Ui that would generate reply for the user
      * @return A String to respond to user through ui, inform user if the task has been deleted or not
      */
-    public static String performDelete(String input, TaskList tasklist, Ui ui) {
+    public static String performDelete(String input, TaskList tasklist, Ui ui) throws DukeException {
 
         try {
             int taskNum = Integer.parseInt(input.substring(7)) - 1;
@@ -27,7 +28,7 @@ public class HandleDelete {
             tasklist.deleteTask(taskNum);
             return ui.showDeleteTask(removedTaskStr, tasklist.getSize());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            return ui.showError("Please enter a valid task number!");
+            throw new DukeException("Please enter a valid task number!");
         }
     }
 
