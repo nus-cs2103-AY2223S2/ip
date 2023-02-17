@@ -94,7 +94,6 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    @FXML
     public void showLoadingErrorMessage() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(LOAD_ERROR_MESSAGE, dukeImage)

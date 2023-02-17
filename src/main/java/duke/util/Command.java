@@ -5,6 +5,9 @@ import duke.exception.ERROR;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Class to encapsulate a parsed command which has a defined command type and specific parameters.
  */
@@ -88,6 +91,14 @@ public class Command {
         switch (this.commandType) {
             case EXIT:
                 output = EXIT_OUTPUT;
+                Timer timer = new Timer();
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        System.exit(0);
+                    }
+                };
+                timer.schedule(timerTask, 3000);
                 break;
             case LIST:
                 output = LIST_OUTPUT;
