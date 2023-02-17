@@ -39,7 +39,6 @@ public class Duke{
      * sets initial GUI
      */
     public void setGui(Stage stage) {
-        stage = stage;
         stage.setTitle("Crayon Shin Chan ChatBot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
