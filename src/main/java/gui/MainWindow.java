@@ -1,19 +1,15 @@
 package gui;
 
-import command.CommandList;
 import duke.Duke;
 import duke.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -67,6 +63,9 @@ public class MainWindow extends AnchorPane {
         title.setText("DUKE");
     }
 
+    /**
+     * Show the list stored in file.
+     */
     public void showCurrentList() {
         String response = duke.getResponse("list");
         dialogContainer.getChildren().addAll(
