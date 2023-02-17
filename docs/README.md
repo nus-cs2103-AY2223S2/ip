@@ -1,29 +1,93 @@
 # User Guide
 
+Bob :frog: is a chat-bot made to help you manage your tasks. He accepts CLI commands while having a GUI for display.
+
+## Installation
+1. Ensure that Java 11 or higher is installed.
+2. Download the latest release from [here](https://github.com/LeonardYam/ip/releases).
+3. Copy the executable to folder of choice.
+4. Launch Bob from terminal with `java -jar`.
+5. Enter supported commands to interact with Bob, and close the GUI window once done. 
+
+## Command cheatsheet
+Actions | Format | Example 
+--- | --- | --- 
+add todo | `todo <description>` | `todo assignment` 
+add deadline | `deadline <description> /by <date>` | `deadline submission /by 2023-02-16`
+add event | `event <description> /from <startDate> /to <endDate>` | `event Holiday /from 2023-06-01 /to 2023-09-01`
+mark task | `mark <index>` | `mark 1`
+unmark task | `unmark <index>` | `unmark 1`
+delete task | `delete <index>` | `delete 1`
+find tasks | `find <keyword>` | `find appointment`
+show reminders | `remind` | `remind`
+
 ## Features 
+### :notebook: Usage notes
+- Fields which are enclosed by `<>` are to be input by user
+- `<description>` accepts alphanumeric strings with any number of spaces, but no special characters
+- `<date>`, `<startDate>`, `<endDate>` require the format YYYY-mm-dd
+- `<index>` refers to the index of the task given by `list` command
 
-### Feature-ABC
+### List current tasks: `list`
+Shows all tasks and their status
 
-Description of the feature.
+Format: `list`
 
-### Feature-XYZ
+### Add a task todo: `todo`
+Add a todo with a description
+Format: `todo <description>`
 
-Description of the feature.
+Example: `todo assignment`
 
-## Usage
+### Add a task deadline: `deadline`
+Add a task with a deadline for completion
 
-### `Keyword` - Describe action
+Format: `deadline <description> /by <date>`
 
-Describe the action and its outcome.
+Example: `deadline submission /by 2023-02-16`
 
-Example of usage: 
+### Add an event: `event`
+Add an event that has a start and end date
 
-`keyword (optional arguments)`
+Format: `event <description> /from <startDate> /to <endDate>`
 
-Expected outcome:
+Example: `event Holiday /from 2023-06-01 /to 2023-09-01`
 
-Description of the outcome.
+### Mark a task: `mark`
+Marks a task as done
 
-```
-expected output
-```
+Format: `mark <index>`
+
+Example: `mark 1`
+
+### Unmark a task: `unmark`
+Unmarks a task as not done
+
+Format: `unmark <index>`
+
+Example: `unmark 1`
+
+### Delete a task: `delete`
+Deletes a task from the task list 
+
+Format: `delete <index>`
+
+Example: `delete 1`
+
+### Filter tasks: `find`
+Find tasks whose description contains the keyword phrase.
+
+Format: `find <keyword>`
+
+Example: `find appointment`
+
+### Show reminders: `remind`
+Show all deadlines, and highlights those which are overdue.
+
+Format: `remind`
+
+### Saving tasks
+The tasks are saved to a .txt file automatically after every input.
+
+### Loading tasks
+Any previous tasks are loaded from the .txt file upon starting Bob
