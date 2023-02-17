@@ -12,7 +12,7 @@ Fake Duke also helps to sort deadlines and events!
 
 ### Use of Local Storage
 
-Fake Duke is able to retrieve tasks from your local storage when you execute it.
+Fake Duke is able to retrieve tasks from your local storage (`/data/tasks.txt`) when you execute it.
 Any actions performed on the tasks will be stored locally.
 
 ## Usage
