@@ -9,7 +9,7 @@ Here are some basic things you can do:
 - mark/unmark tasks as done ✔️ (or undone) ```mark 6```
 - Register actual dates (for events) 📆 ```event fireworks /from 14/01/2023 1600/to 16/01/2023 2000```
 - set deadlines & events too! 😲 ```deadline do assignment /by Monday```
-- For more **cool instructions**, simply ask muse! 🗣️ ```help```
+- For more **cool instructions**, simply ask muse **FOR MORE**! 🗣️ ```help```
 
 ## To use the app (JAR file) 😳
 
