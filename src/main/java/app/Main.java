@@ -1,9 +1,11 @@
+package app;
+
 import io.gui.Gui;
 
 /**
  * Main class
  */
-public class Duke {
+public class Main {
     /**
      * Main function
      */

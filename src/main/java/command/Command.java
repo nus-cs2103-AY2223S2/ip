@@ -42,7 +42,7 @@ public interface Command {
     void execute(TaskList taskList, Ui ui, Storage<TaskList> storage);
 
     /**
-     * @return true if Duke should exit after executing this command.
+     * @return true if app.Duke should exit after executing this command.
      */
     default boolean isExit() {
         return false;
