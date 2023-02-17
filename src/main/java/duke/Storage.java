@@ -58,7 +58,7 @@ public class Storage {
 
         String archivePath = "data\\archive.txt";
         File a = new File(archivePath);
-        if(!a.isFile()) {
+        if (!a.isFile()) {
             System.out.println("Archive file does not exist!\nCreating new archive file...");
             if (a.createNewFile()) {
                 System.out.println("Successfully created new file at " + archivePath);
