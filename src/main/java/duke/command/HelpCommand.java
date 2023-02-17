@@ -36,9 +36,9 @@ public class HelpCommand implements Command {
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
         String toDisplay = "I see you asked for help? YOU GOT IT!\n"
-                + "These are the available commands and their respective command formats:\n";
+                + "Try the following commands:\n";
         for (commands c : commands.values()) {
-            toDisplay += String.format("\n|%s| %s\n", c, c.getCommandFormat());
+            toDisplay += String.format("\n- [%s] %s\n", c, c.getCommandFormat());
         }
         ui.displayMessage(toDisplay);
         return toDisplay;
