@@ -23,9 +23,9 @@ public class DeadlineCommand extends AddCommand {
         LocalDateTime by = Parser.parseDateTime(tokens[2]);
         Task newTask = new Deadline(description, by);
         tasks.addTask(newTask, storage);
-        ui.indentedPrintln("Got it. I've added this task:");
-        ui.indentedPrintln("  " + newTask);
-        ui.indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
+        ui.addToResponseMessage("Got it. I've added this task:");
+        ui.addToResponseMessage("  " + newTask);
+        ui.addToResponseMessage("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     @Override

@@ -19,9 +19,9 @@ public class TodoCommand extends AddCommand {
         String description = tokens[1];
         Task newTask = new Todo(description);
         tasks.addTask(newTask, storage);
-        ui.indentedPrintln("Got it. I've added this task:");
-        ui.indentedPrintln("  " + newTask);
-        ui.indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
+        ui.addToResponseMessage("Got it. I've added this task:");
+        ui.addToResponseMessage("  " + newTask);
+        ui.addToResponseMessage("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     @Override

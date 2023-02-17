@@ -1,68 +1,148 @@
 package seedu.duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import seedu.duke.commands.ByeCommand;
+import seedu.duke.commands.CheckDuplicateCommand;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.DeadlineCommand;
+import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.EventCommand;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.MarkCommand;
+import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.TodoCommand;
+import seedu.duke.commands.UnmarkCommand;
+
 /**
  * Parses the input command from user to the Duke chatbox.
  */
 public class Parser {
     private final static String LIST = "list";
-    private final static String MARK = "mark";
-    private final static String UNMARK = "unmark";
-    private final static String DELETE = "delete";
-    private final static String SEARCH = "search";
-    private final static String CHECK_DUPLICATE = "check_duplicate";
+    protected final static String INPUT_DATE_PATTERN = "yyyy-MM-dd HH:mm";
 
-    private void list(TaskList tasks) {
-        Ui.indentedPrintln("Here are the tasks in your list:");
-        int numOfTasks = tasks.size();
-        for (int i = 1; i <= numOfTasks; i++) {
-            Ui.indentedPrintln(i + "." + tasks.get(i - 1));
+    private Command parseAddCommand(String inputCommand, String userInput) {
+        Command command;
+        switch (inputCommand) {
+        case TodoCommand.COMMAND:
+            command = parseTodoCommand(userInput);
+            break;
+        case DeadlineCommand.COMMAND:
+            command = parseDeadlineCommand(userInput);
+            break;
+        case EventCommand.COMMAND:
+            command = parseEventCommand(userInput);
+            break;
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+        return command;
     }
 
-    private boolean isValidTask(String command) {
-        if (command.length() >= 4 && command.substring(0, 4).equals("todo")) {
-            if (command.length() <= 5) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            return true;
-        } else if (command.length() >= 8 && command.substring(0, 8).equals("deadline")) {
-            if (command.length() <= 9) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            }
-            return true;
-        } else if (command.length() >= 5 && command.substring(0, 5).equals("event")) {
-            if (command.length() <= 6) {
-                throw new DukeException("The description of an event cannot be empty.");
-            }
-            return true;
+    private Command parseTodoCommand(String userInput) {
+        String[] tokens = userInput.split(" ");
+        if (tokens.length <= 1 || tokens[1].isEmpty()) {
+            throw new DukeException("The description of a todo cannot be empty.");
         }
-        return false;
+        tokens[1] = tokens[1].trim();
+        if (tokens[1].isEmpty()) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+        return new TodoCommand(tokens);
+    }
+
+    private Command parseDeadlineCommand(String userInput) {
+        String[] tokens = new String[3];
+        String[] splitDate = userInput.split(" /by ");
+        if (splitDate.length <= 1) {
+            throw new DukeException("Invalid format of deadline command.");
+        }
+        String[] temp = splitDate[0].split(" ", 2);
+        if (temp.length <= 1) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+        tokens[0] = temp[0];
+        tokens[1] = temp[1];
+        tokens[2] = temp[2];
+        return new DeadlineCommand(tokens);
+    }
+
+    private Command parseEventCommand(String userInput) {
+        String[] tokens = new String[4];
+        String[] splitStartDate = userInput.split(" /from ");
+        if (splitStartDate.length <= 1) {
+            throw new DukeException("Invalid format of event command.");
+        }
+        String[] splitStartAndEndDate = splitStartDate[1].split(" /to ");
+        if (splitStartAndEndDate.length <= 1) {
+            throw new DukeException("End date/time of event unspecified.");
+        }
+        tokens[2] = splitStartAndEndDate[0];
+        tokens[3] = splitStartAndEndDate[1];
+        String[] commandWithDescription = splitStartDate[0].split(" ", 2);
+        if (commandWithDescription.length <= 1) {
+            throw new DukeException("The description of an event cannot be empty.");
+        }
+        tokens[0] = commandWithDescription[0];
+        tokens[1] = commandWithDescription[1];
+        return new EventCommand(tokens);
+    }
+
+    public Command parseSearchCommand(String userInput) {
+        return new SearchCommand(userInput.split(" ", 2));
     }
 
     /**
      * Parses the input command entered by user.
      *
-     * @param str Input command of user.
-     * @param tasks The entire list of current tasks.
-     * @param storage A storage that manages file operation underlying Duke.
+     * @param userInput Input command of user.
+     * @return
      */
-    public void parseInput(String str, TaskList tasks, Storage storage) {
-        if (str.equals(LIST)) {
-            list(tasks);
-        } else if (str.length() >= 4 && str.substring(0, 4).equals(MARK)) {
-            tasks.mark(Character.getNumericValue(str.charAt(5)), storage);
-        } else if (str.length() >= 6 && str.substring(0, 6).equals(UNMARK)) {
-            tasks.unmark(Character.getNumericValue(str.charAt(7)), storage);
-        } else if (str.length() >= 15 && str.substring(0, 15).equals(CHECK_DUPLICATE)){
-            tasks.checkDuplicate();
-        } else if (isValidTask(str)) {
-            tasks.addTask(str, storage);
-        } else if (str.length() >= 6 && str.substring(0, 6).equals(DELETE)) {
-            tasks.deleteTask(Character.getNumericValue(str.charAt(7)), storage);
-        } else if (str.length() >= 6 && str.substring(0, 6).equals(SEARCH)) {
-            tasks.searchTask(str.substring(7));
-        } else {
+    public Command parseInput(String userInput) {
+        String inputCommand = userInput.split(" ", 2)[0];
+        Command command;
+        if (inputCommand.equals(TodoCommand.COMMAND) || inputCommand.equals(DeadlineCommand.COMMAND)
+                || inputCommand.equals(EventCommand.COMMAND)) {
+            return parseAddCommand(inputCommand, userInput);
+        }
+        switch(inputCommand) {
+        case DeleteCommand.COMMAND:
+            command = new DeleteCommand(userInput.split(" "));
+            break;
+        case MarkCommand.COMMAND:
+            command = new MarkCommand(userInput.split(" "));
+            break;
+        case UnmarkCommand.COMMAND:
+            command = new UnmarkCommand(userInput.split(" "));
+            break;
+        case ByeCommand.COMMAND:
+            command = new ByeCommand();
+            break;
+        case ListCommand.COMMAND:
+            command = new ListCommand();
+            break;
+        case CheckDuplicateCommand.COMMAND:
+            command = new CheckDuplicateCommand();
+            break;
+        case SearchCommand.COMMAND:
+            command = parseSearchCommand(userInput);
+            break;
+        default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+        return command;
+    }
+
+    public static LocalDateTime parseDateTime(String s) {
+        return LocalDateTime.parse(s, DateTimeFormatter.ofPattern(INPUT_DATE_PATTERN));
+    }
+
+    public static LocalDateTime parseDateTimeFromFile(String s) {
+        return LocalDateTime.parse(s, DateTimeFormatter.ofPattern(Ui.OUTPUT_DATE_PATTERN));
+    }
+
+    public String[] parseCommand(String arguments) {
+        return null;
     }
 }

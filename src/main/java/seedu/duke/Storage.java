@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -25,12 +28,12 @@ public class Storage {
         Path filePath = null;
         try {
             String home = System.getProperty("user.home");
-            Path pathToDir = Paths.get(home, "Downloads", "data");
+            Path pathToDir = Paths.get(home, "data");
 
             if (!Files.exists(pathToDir)) {
                 Files.createDirectories(pathToDir);
             }
-            filePath = Paths.get(home, "Downloads", "data", "duke.txt");
+            filePath = Paths.get(home, "data", "duke.txt");
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
             }
@@ -58,7 +61,7 @@ public class Storage {
      * @return The TaskList converted from the file.
      * @throws IOException If reading from the file fails.
      */
-    public TaskList fileToArrayList() throws IOException {
+    public TaskList loadFileToTaskList() throws IOException {
         int lineNumber = Math.toIntExact(Files.lines(filePath).count());
         TaskList tasks = new TaskList(new ArrayList<>());
         for (int i = 0; i < lineNumber; i++) {
@@ -83,16 +86,24 @@ public class Storage {
             task = new Todo(s[2]);
             break;
         case "D":
-            task = new Deadline(s[2], Ui.parseDateTime(s[3]));
+            LocalDateTime t = convertStringToDateTime(s[3]);
+            task = new Deadline(s[2], t);
             break;
         case "E":
-            String[] date = s[3].split(" to "); // to be improved
-            task = new Event(s[2], Ui.parseDateTime(date[0]), Ui.parseDateTime(date[1]));
+            String[] date = s[3].split(" to ");
+            LocalDateTime start = convertStringToDateTime(date[0]);
+            LocalDateTime end = convertStringToDateTime(date[1]);
+            task = new Event(s[2], start, end);
             break;
         default:
             throw new DukeException("Invalid type of task");
         }
         return task;
+    }
+
+    private LocalDateTime convertStringToDateTime(String s) {
+        String[] arr = s.split("T");
+        return LocalDateTime.of(LocalDate.parse(arr[0]), LocalTime.parse(arr[1]));
     }
 
     /**

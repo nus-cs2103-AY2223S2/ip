@@ -30,9 +30,9 @@ public class SearchCommand extends Command {
             }
             index++;
         }
-        ui.indentedPrintln("Here are the matching tasks in your list:");
+        ui.addToResponseMessage("Here are the matching tasks in your list:");
         for (int i = 0; i < results.size(); i++) {
-            ui.indentedPrintln(indices.get(i) + ". " +results.get(i).toString());
+            ui.addToResponseMessage(indices.get(i) + ". " +results.get(i).toString());
         }
     }
 

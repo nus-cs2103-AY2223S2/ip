@@ -16,13 +16,13 @@ public class CheckDuplicateCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             if (map.get(t.toString())!=null) {
-                ui.indentedPrintln("There exist duplicate tasks! Tasks "
+                ui.addToResponseMessage("There exist duplicate tasks! Tasks "
                         + (map.get(t.toString()) + 1) + " and " + (i + 1)  + " are duplicates.");
                 return;
             }
             map.put(t.toString(), i);
         }
-        ui.indentedPrintln("There's no duplicate task :)");
+        ui.addToResponseMessage("There's no duplicate task :)");
     }
 
     @Override

@@ -9,10 +9,10 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.indentedPrintln("Here are the tasks in your list:");
+        ui.addToResponseMessage("Here are the tasks in your list:");
         int numOfTasks = tasks.size();
         for (int i = 1; i <= numOfTasks; i++) {
-            ui.indentedPrintln(i + "." + tasks.get(i - 1));
+            ui.addToResponseMessage(i + "." + tasks.get(i - 1));
         }
     }
 
