@@ -21,7 +21,7 @@ Tasks previously saved  can be retrieved the next time you start this applicatio
 
 The task will be added to the list of tasks and saved locally 
 
-Format of input: todo 'task description'
+Format of input: todo _(task description)_
 
 Example of usage: 
 
@@ -46,9 +46,9 @@ Now you have 1 tasks in the list.
 
 Add a task with a specified deadline to the task list. 
 
-Format of input: deadline 'task description' /by 'deadline date' 
+Format of input: deadline _(task description)_ /by _(deadline date)_ 
 
-Date this format: YYYY-MM-DD (eg. 2023-10-10)
+Format for date: **YYYY-MM-DD** (eg. 2023-02-10)
 
 Example of usage:
 
@@ -74,9 +74,9 @@ Now you have 2 tasks in the list.
 
 Add an event task with the starting date and ending date into the task list. 
 
-Format of input: event 'task description' /from 'start date' /to 'end date'
+Format of input: event _(task description)_ /from _(start date)_ /to _(end date)_
 
-Date in this format: YYYY-MM-DD (eg. 2023-10-10)
+Date in this format: **YYYY-MM-DD** (eg. 2023-10-10)
 
 Example of usage:
 
