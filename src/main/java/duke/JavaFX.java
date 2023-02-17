@@ -4,6 +4,7 @@ import duke.parser.Parser;
 import duke.ui.DialogBox;
 import duke.ui.Ui;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -120,6 +121,7 @@ public class JavaFX extends Application {
             response = parser.parseCommand(command, body);
             if (command.equals("bye")) {
                 stop();
+                Platform.exit();
             }
         } catch (Exception e) {
             response = ui.ERROR_EXCEPTION_CAUGHT + e;
