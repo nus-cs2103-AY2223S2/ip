@@ -3,7 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
-import duke.Ui;
+import duke.exceptions.DukeException;
 
 public class AddCommand extends Command {
     private final Task task;
@@ -13,9 +13,16 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         tasks.addTask(this.task);
-        storage.saveTasklistToFile(tasks);
-        this.cmdOutput = "Okay~ I've added the task for you~\n" + task;
+        setOutput("Okay~ I've added the task for you~",
+                  this.task.toString(),
+                  "Now you have " + tasks.getSize() + " tasks!");
+
+        try {
+            storage.saveTasklistToFile(tasks);
+        } catch (DukeException e) {
+            setOutput(getOutput(), e.getMessage());
+        }
     }
 }

@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
-import duke.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         List<Task> filtered = tasks.findAllTasksWithKeyword(this.keyword);
         if (filtered.size() == 0){
             this.setOutput("Can't find tasks with this keyword yo~");

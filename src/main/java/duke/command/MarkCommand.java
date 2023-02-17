@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.exceptions.InvalidIndexException;
 
 public class MarkCommand extends Command {
     private final boolean isMarked;
@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             if (this.isMarked) {
                 tasks.get(this.idx).markAsDone();
@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
                 setOutput("Neee! Are you kidding me?", tasks.get(this.idx).toString());
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Invalid index yo~");
+            throw new InvalidIndexException();
         }
 
         storage.saveTasklistToFile(tasks);
