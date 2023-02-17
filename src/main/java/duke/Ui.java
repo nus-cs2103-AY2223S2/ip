@@ -70,36 +70,47 @@ public class Ui {
      * Command to toggle whether a task is done or not
      */
     public static String toggleMarked(String s, TaskList t, boolean mark) {
-        int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
-        if (mark && !t.get(taskNumber).getIsDone()) {
-            t.get(taskNumber).toggleMarked();
-        } else if (!mark  && t.get(taskNumber).getIsDone()) {
-            t.get(taskNumber).toggleMarked();
-        } else {
-            return mark ? "    This task is already marked" :
-                    "    This task is already unmarked";
+        try {
+            int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
+            if (mark && !t.get(taskNumber).getIsDone()) {
+                t.get(taskNumber).toggleMarked();
+            } else if (!mark  && t.get(taskNumber).getIsDone()) {
+                t.get(taskNumber).toggleMarked();
+            } else {
+                return mark ? "    This task is already marked" :
+                        "    This task is already unmarked";
+            }
+
+            String output = "";
+            if (s.contains("unmark")) {
+                output += "    OK, I've marked this task as not done yet:";
+            } else {
+                output += "    Nice! I've marked this task as done:";
+            }
+            return output + "  " + t.get(taskNumber).toString();
+
+        } catch (StringIndexOutOfBoundsException e) {
+            return "Incorrect command format.\nUse: mark <index> or unmark <index>";
         }
 
-        String output = "";
-        if (s.contains("unmark")) {
-            output += "    OK, I've marked this task as not done yet:";
-        } else {
-            output += "    Nice! I've marked this task as done:";
-        }
-        return output + "  " + t.get(taskNumber).toString();
     }
 
     /**
      * Command to add a To-Do to the TaskList
      */
     public static String addTodo(String s, TaskList t) {
-        if (s.substring(4).isBlank()) {
-            return "    OOPS!!! The description of a todo cannot be empty.";
-        } else {
-            Task newTask = new Todo(s.substring(5));
-            t.addTask(newTask);
-            return "    added: " + newTask;
+        try {
+            if (s.substring(4).isBlank()) {
+                return "    OOPS!!! The description of a todo cannot be empty.";
+            } else {
+                Task newTask = new Todo(s.substring(5));
+                t.addTask(newTask);
+                return "    added: " + newTask;
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return "Incorrect command format.\nUse: todo <description>";
         }
+
     }
 
     /**
@@ -153,30 +164,40 @@ public class Ui {
      * Command to delete a task from the TaskList
      */
     public static String deleteTask(String s, TaskList t) {
-        if (s.substring(6).isBlank()) {
-            return "    OOPS!!! You have not entered anything to delete.";
-        } else {
-            int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
-            Task deletedTask = t.get(taskNumber);
-            t.remove(taskNumber);
-            return "    Noted. I've removed this task:\n      " + deletedTask +
-                    "\n    Now you have " + t.size()+ " tasks in the list";
+        try {
+            if (s.substring(6).isBlank()) {
+                return "    OOPS!!! You have not entered anything to delete.";
+            } else {
+                int taskNumber = Integer.parseInt(s.substring(s.length() - 1)) - 1;
+                Task deletedTask = t.get(taskNumber);
+                t.remove(taskNumber);
+                return "    Noted. I've removed this task:\n      " + deletedTask +
+                        "\n    Now you have " + t.size()+ " tasks in the list";
 
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return "Incorrect command format.\nUse: delete <index>";
         }
+
     }
 
     /**
      * Command to find a Task in the TaskList
      */
     public static String findTasks(String s, TaskList t) {
-        String findString = s.substring(5);
-        ArrayList<Task> foundTasks = new ArrayList<Task>();
-        for (Task task : t.getTasks()) {
-            if (task.toString().contains(findString)) {
-                foundTasks.add(task);
+        try {
+            String findString = s.substring(5);
+            ArrayList<Task> foundTasks = new ArrayList<Task>();
+            for (Task task : t.getTasks()) {
+                if (task.toString().contains(findString)) {
+                    foundTasks.add(task);
+                }
             }
+            TaskList searchResults = new TaskList(foundTasks);
+            return "Here are the tasks I found!\n" + searchResults.displayTasks();
+        } catch (StringIndexOutOfBoundsException e) {
+            return "Incorrect command format.\nUse: find <keyword>";
         }
-        TaskList searchResults = new TaskList(foundTasks);
-        return "Here are the tasks I found!\n" + searchResults.displayTasks();
+
     }
 }
