@@ -12,6 +12,7 @@ import java.io.IOException;
 /**
  * A GUI for Duke using FXML.
  */
+// GUI design credit to homuntan02
 public class Main extends Application {
 
     private Duke duke = new Duke();
