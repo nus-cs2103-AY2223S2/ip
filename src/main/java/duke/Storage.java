@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage class encapsulates the whole storing, reading process of chatbot.
+ * duke.Storage class encapsulates the whole storing, reading process of chatbot.
  */
 public class Storage {
     private static final Path STORING_FILE_PATH = Paths.get(".", ".", ".", "data", "duke.txt");
@@ -17,7 +19,7 @@ public class Storage {
             Paths.get(".", ".", ".", "data", "temp_duke.txt");
 
     /**
-     * Initializes a new Storage object and try to read the storing file in hard disk, if there is not
+     * Initializes a new duke.Storage object and try to read the storing file in hard disk, if there is not
      * a file existed then create a new one.
      */
     public Storage() {
@@ -56,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Return an ArrayList of Task encapsulting the tasks' information stored in hard disk file.
+     * Return an ArrayList of duke.Task encapsulting the tasks' information stored in hard disk file.
      *
      * @return Tasks list stored in hard disk
      */

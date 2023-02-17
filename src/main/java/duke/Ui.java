@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
- * Ui class represents User interface when using the chatbox.
+ * duke.Ui class represents User interface when using the chatbox.
  */
 public class Ui {
     private static final String DIVIDER_LINE = "____________________________________________________\n";
@@ -13,7 +15,7 @@ public class Ui {
      * Prints the welcoming message.
      */
     public void start() {
-        reply("Hello! I'm Duke\n What can I do for you?" + "\n");
+        reply("Hello! I'm duke.Duke\n What can I do for you?" + "\n");
     }
 
     public static void displayOutro() {
@@ -32,7 +34,7 @@ public class Ui {
     /**
      * Prints the tasks list stored in the bot.
      *
-     * @param taskList A TaskList Object encapsulating the all tasks in the chatbot.
+     * @param taskList A duke.TaskList Object encapsulating the all tasks in the chatbot.
      */
     public static void displayTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
@@ -78,7 +80,7 @@ public class Ui {
     /**
      * Prints a message corresponding to the deleting action of the argument task.
      *
-     * @param target The Task being deleted from the list.
+     * @param target The duke.Task being deleted from the list.
      * @param size The current size of task list.
      */
     public static void getDeleteTaskMessage(Task target, int size) {

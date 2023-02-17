@@ -1,14 +1,16 @@
+package duke;
+
 /**
- * Class ToDo is a subclass of Task, encapsulate details
+ * Class duke.ToDo is a subclass of duke.Task, encapsulate details
  * about a task that the user need to do.
  *
  * @author hhchinh2002
  */
 public class ToDo extends Task {
     /**
-     * Creates a ToDo task object with given description
+     * Creates a duke.ToDo task object with given description
      *
-     * @param description The description for the ToDo task
+     * @param description The description for the duke.ToDo task
      */
     public ToDo(String description) {
         super(description);

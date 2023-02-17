@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Parser class encapsulates the logic implementation of the chatbot.
+ * duke.Parser class encapsulates the logic implementation of the chatbot.
  */
 public class Parser {
     public Parser() {}
@@ -12,7 +14,7 @@ public class Parser {
      * Checks for some incorrect input format.
      *
      * @param command The input from user.
-     * @param taskList A TaskList object encapsulate all tasks' information.
+     * @param taskList A duke.TaskList object encapsulate all tasks' information.
      * @return Returns true if the input is bot terminating command ("bye"), false otherwise.
      * @throws DukeException If the user input is not in the right format.
      */

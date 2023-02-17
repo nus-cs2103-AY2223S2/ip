@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
- * TaskList class encapsulates the information of the tasks keyed in the chatbot by the user.
+ * duke.TaskList class encapsulates the information of the tasks keyed in the chatbot by the user.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -13,7 +15,7 @@ public class TaskList {
     /**
      * Returns true if the task argument is in the task list and false otherwise.
      *
-     * @param task a Task object encapsulate the task we are checking.
+     * @param task a duke.Task object encapsulate the task we are checking.
      * @return Returns true if the task argument is in the task list and false otherwise.
      */
     public boolean contains(Task task) {
@@ -27,7 +29,7 @@ public class TaskList {
     /**
      * Read the tasks' information stored in the hard disk file.
      *
-     * @param tasks an ArrayList of Task Object encapsulating the tasks list from hard disk file.
+     * @param tasks an ArrayList of duke.Task Object encapsulating the tasks list from hard disk file.
      */
     public void readTasksFile(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -36,7 +38,7 @@ public class TaskList {
     /**
      * Add the task argument into the task list.
      *
-     * @param newTask a Task object encapsulating the new task being added.
+     * @param newTask a duke.Task object encapsulating the new task being added.
      */
     public void addTask(Task newTask) {
         int size = tasks.size();

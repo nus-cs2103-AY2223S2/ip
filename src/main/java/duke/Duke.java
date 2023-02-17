@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
- * Class Duke implements a chatbot encapsulates user's tasks and show it
+ * Class duke.Duke implements a chatbot encapsulates user's tasks and show it
  * to the user later by processing the inputs.
  *
  * @author hhchinh2002
@@ -14,7 +16,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Initialize a Duke object with the corresponding object from other supporting classes.
+     * Initialize a duke.Duke object with the corresponding object from other supporting classes.
      */
     public Duke() {
         this.ui = new Ui();

@@ -1,6 +1,8 @@
+package duke;
+
 /**
  * Class Tasks encapsulate details
- * about a user's task in stored in a Duke object.
+ * about a user's task in stored in a duke.Duke object.
  *
  * @author hhchinh2002
  */
@@ -9,7 +11,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Creates a Task object with given description
+     * Creates a duke.Task object with given description
      *
      * @param description The description for the task
      */
