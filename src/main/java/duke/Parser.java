@@ -310,7 +310,7 @@ public class Parser {
     public String addEventFormatted(String input) throws DukeException {
         try {
             String[] constructor = input.split(" ", 2);
-            String desc = constructor[1].split(" ", 2)[0];
+            String desc = constructor[1].split(" /from ")[0];
             String fromStr = constructor[1].split( " /from ")[1].split(" /to ")[0];
             String toStr = constructor[1].split(" /from ")[1].split(" /to ")[1];
             if (desc.length() == 0 || fromStr.length() == 0 || toStr.length() == 0) {
