@@ -2,7 +2,6 @@ package chad.command;
 
 import chad.storage.LocalStorage;
 import chad.storage.TaskList;
-import chad.task.Task;
 
 /**
  * Exit command when user quits the program. New features to be added.
@@ -10,11 +9,13 @@ import chad.task.Task;
 public class ExitCommand extends Command {
 
     private LocalStorage localStorage;
-    private TaskList tasks;
 
-    public ExitCommand(LocalStorage localStorage, TaskList tasks) {
+    /**
+     * Constructor method to create an exit command to quite the program and save the task list into a file.
+     * @param localStorage destination to save the task list.
+     */
+    public ExitCommand(LocalStorage localStorage) {
         this.localStorage = localStorage;
-        this.tasks = tasks;
     }
 
     /**

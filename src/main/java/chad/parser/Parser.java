@@ -96,7 +96,7 @@ public class Parser {
         case FIND:
             return new FindCommand(this.request);
         case BYE:
-            return new ExitCommand(this.localStorage, this.tasks);
+            return new ExitCommand(this.localStorage);
         default:
             assert false : "Should not reach here since unknown command exception is handled.";
             throw new UnknownCommandException();
