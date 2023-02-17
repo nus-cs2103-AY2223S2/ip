@@ -3,6 +3,7 @@ package duke;
 import static java.util.stream.Collectors.toCollection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.task.Task;
 
@@ -19,7 +20,7 @@ public class TaskList {
 
     /** A public constructor to initialize TaskList instance. */
     TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -133,10 +134,19 @@ public class TaskList {
      * @return Filtered task list.
      */
     protected ArrayList<Task> filteredTaskList(String query) {
-        ArrayList<Task> filteredList = tasks.stream()
+        return tasks.stream()
                 .filter(task -> task.toString().contains(query))
                 .collect(toCollection(ArrayList::new));
+    }
 
-        return filteredList;
+    /**
+     * Sorts task list by task name.
+     *
+     * @return Success message.
+     */
+    protected String sort() {
+        Collections.sort(tasks, (task1, task2) -> task1.getTaskName().compareTo(task2.getTaskName()));
+
+        return Ui.sortedMessage();
     }
 }

@@ -77,6 +77,15 @@ public class Ui {
     }
 
     /**
+     * Outputs success message when task list has been sorted.
+     *
+     * @return Success message.
+     */
+    public static String sortedMessage() {
+        return "The list has been sorted.";
+    }
+
+    /**
      * Handles unknown input.
      *
      * @return Unknown input message.

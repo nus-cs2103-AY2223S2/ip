@@ -81,11 +81,14 @@ public class Parser {
                     throw new DukeException("There is no item numbered " + deleteTaskIndex + ".\n");
                 }
 
-                output = tasks.removeTask( deleteTaskIndex - 1);
+                output = tasks.removeTask(deleteTaskIndex - 1);
                 break;
             case "find":
                 TaskList filteredTasks = new TaskList(tasks.filteredTaskList(descriptions[1]));
                 output = filteredTasks.listTasks();
+                break;
+            case "sort":
+                output = tasks.sort();
                 break;
             default:
                 output = Ui.unknownInputMsg();
