@@ -13,5 +13,5 @@ Here are some basic things you can do:
 ## To use the app (JAR file) 😳
 
 1. Go into the CLI, and navicate to the directory this JAR file is in. 🔍
-2. Execute the command ```java -jar duke.jar``` in order to start the app!
-3. Have fun! *Your organized life starts from here...*
+2. Execute the command ```java -jar duke.jar``` in order to start the app! 🔨
+3. Have fun! *Your organized life starts from here...* 
