@@ -37,7 +37,7 @@ public class Storage {
      * Create folder/file if not exist
      * @throws IOException not able to create file/folder
      */
-    void createFile() throws IOException {
+    public void createFile() throws IOException {
         File f = new File(this.filePath);
         File d = new File("data");
 
@@ -62,7 +62,7 @@ public class Storage {
      * @return ArrayList tasks of tasks read from save file
      * @throws IOException error with I/O
      */
-    ArrayList<Task> readFile() throws IOException {
+    public ArrayList<Task> readFile() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         if (!new File(this.filePath).isFile()) {
@@ -110,7 +110,7 @@ public class Storage {
      * Writes current data to save file
      * @param tasks task list
      */
-    void writeFile(ArrayList<Task> tasks) {
+    public void writeFile(ArrayList<Task> tasks) {
         System.out.println("Saving your task list...");
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.filePath))) {
             for (Task t : tasks) {

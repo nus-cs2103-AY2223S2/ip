@@ -4,6 +4,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,90 +26,99 @@ public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private final Ui ui = new Ui();
 
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks)  {
         TaskList.tasks = tasks;
     }
 
-    void listTask() {
+    public TaskList() {
+        TaskList.tasks = new ArrayList<Task>();
+    }
+
+    public String listTask() {
         if (tasks.size() == 0) {
-            System.out.println("You dont have any tracked tasks");
+            return "You dont have any tracked tasks";
         } else {
-            System.out.println("Your current tracked tasks: ");
+            String output = "Your current tracked tasks: \n";
             for (int i = 0; i < tasks.size(); i++) {
                 Task curr = tasks.get(i);
-                System.out.println((i + 1) + "." + curr);
+                output = output + (i + 1) + " . " + curr + "\n";
             }
+            return output;
         }
     }
 
-    void markTaskDone(String body) {
-        body = body.substring(1);
+    public String markTaskDone(String body) {
         int index = Integer.parseInt(body) - 1;
         tasks.get(index).toggleDone();
-        System.out.println("Marked task as done:\n [" + tasks.get(index).getDoneStatus() + "] "
-                + tasks.get(index).getDesc());
+        return "Marked task as done:\n [X] " + tasks.get(index).getDesc();
     }
 
-    void markTaskNotDone(String body) {
-        body = body.substring(1);
+    public String markTaskNotDone(String body) {
         int index = Integer.parseInt(body) - 1;
         tasks.get(index).toggleNotDone();
-        System.out.println("Marked task as not done:\n [" + tasks.get(index).getDoneStatus() + "] "
-                + tasks.get(index).getDesc());
+        return "Marked task as not done:\n [ ] " + tasks.get(index).getDesc();
 
     }
 
-    void deleteTask(String body) {
+    public String deleteTask(String body) {
         try {
-            body = body.substring(1);
             int i = Integer.parseInt(body) - 1;
             Task temp = tasks.get(i);
             tasks.remove(temp);
-            ui.printDelete(temp, tasks.size());
+            return ui.printDeleteMessage(temp, tasks.size());
         } catch (Exception e) {
-            System.out.println(ui.ERROR_DELETE_TASK);
+            return ui.ERROR_DELETE_TASK;
         }
     }
 
-    void addTodo(String body) {
+    public String addTodo(String body) {
         try {
-            body = body.substring(1);
             ToDo curr = new ToDo(body, false);
             tasks.add(curr);
-            ui.printNotif(curr, tasks.size());
+            return ui.printNotification(curr, tasks.size());
         } catch (Exception e) {
-            System.out.println(ui.ERROR_EMPTY_TODO);
+            return ui.ERROR_EMPTY_TODO;
         }
     }
 
-    void addDeadline(String body) {
-        body = body.substring(1);
-        Matcher dlMatcher = DEADLINE_PATTERN.matcher(body);
-        if (dlMatcher.matches()) {
-            String desc = dlMatcher.group(1);
-            String deadlineDay = dlMatcher.group(2);
-            LocalDateTime deadlineDayParsed = LocalDateTime.parse(deadlineDay, DATE_TIME_FORMATTER);
+    public String addDeadline(String body) {
+        try {
+            Matcher dlMatcher = DEADLINE_PATTERN.matcher(body);
+            if (dlMatcher.matches()) {
+                String desc = dlMatcher.group(1);
+                String deadlineDay = dlMatcher.group(2);
+                LocalDateTime deadlineDayParsed = LocalDateTime.parse(deadlineDay, DATE_TIME_FORMATTER);
 
-            Deadline dl = new Deadline(desc, false, deadlineDayParsed);
-            tasks.add(dl);
-            ui.printNotif(dl, tasks.size());
+                Deadline dl = new Deadline(desc, false, deadlineDayParsed);
+                tasks.add(dl);
+                return ui.printNotification(dl, tasks.size());
+            } else {
+                return ui.ERROR_WRONG_DATE_FORMAT;
+            }
+        } catch (Exception e) {
+            return "Error adding Deadline: " + e;
         }
     }
 
-    void addEvent(String body) {
-        body = body.substring(1);
-        Matcher eMatcher = EVENT_PATTERN.matcher(body);
-        if (eMatcher.matches()) {
-            String desc = eMatcher.group(1);
-            String from = eMatcher.group(2);
-            String to = eMatcher.group(3);
+    public String addEvent(String body) {
+        try {
+            Matcher eMatcher = EVENT_PATTERN.matcher(body);
+            if (eMatcher.matches()) {
+                String desc = eMatcher.group(1);
+                String from = eMatcher.group(2);
+                String to = eMatcher.group(3);
 
-            LocalDateTime fromParsed = LocalDateTime.parse(from, DATE_TIME_FORMATTER);
-            LocalDateTime toParsed = LocalDateTime.parse(to, DATE_TIME_FORMATTER);
+                LocalDateTime fromParsed = LocalDateTime.parse(from, DATE_TIME_FORMATTER);
+                LocalDateTime toParsed = LocalDateTime.parse(to, DATE_TIME_FORMATTER);
 
-            Event dl = new Event(desc, false, fromParsed, toParsed);
-            tasks.add(dl);
-            ui.printNotif(dl, tasks.size());
+                Event dl = new Event(desc, false, fromParsed, toParsed);
+                tasks.add(dl);
+                return ui.printNotification(dl, tasks.size());
+            } else {
+                return ui.ERROR_WRONG_DATE_FORMAT;
+            }
+        } catch (Exception e) {
+            return "Error adding Event: " + e;
         }
     }
 
@@ -117,29 +127,32 @@ public class TaskList {
      *
      * @param body string to find
      */
-    void find(String body) {
+    public String find(String body) {
         boolean found = false;
+        String output = "Matching tasks I've found in your list: \n";
 
-        System.out.println("-------------------------------------------------");
-        System.out.println("Matching tasks I've found in your list: ");
         for (Task temp : tasks) {
             if (temp.getDesc().contains(body)) {
                 found = true;
-                System.out.println(temp);
+                output = output + temp + "\n";
             }
         }
 
         if (!found) {
-            System.out.println("No tasks matches your search :(");
+            output += "No tasks matches your search :(";
         }
-        System.out.println("-------------------------------------------------");
+
+        return output;
     }
 
+    public String unknownCommand(String command) {
+        return ui.ERROR_UNKNOWN_COMMAND + " : " + command;
+    }
     /**
      * getter for task list
      * @return task list
      */
-    ArrayList<Task> getTaskList() {
+    public ArrayList<Task> getTaskList() {
         return tasks;
     }
 }
