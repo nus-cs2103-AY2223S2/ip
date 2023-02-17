@@ -164,11 +164,11 @@ Here are the matching task(s) in your list:
     1. [D][] return book (by: Feb 10 2023)
     2. [E][] reading (from: Feb 10 2022 to: Jan 23 2023))
 ```
-### `update` - Updates the date of a task in your task list.
+### `reminders` - Updates the date of a task in your task list.
 
 How to use:
 
-`reminders``
+`reminders`
 
 Example of usage:
 
