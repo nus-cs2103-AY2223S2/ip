@@ -1,0 +1,10 @@
+deadline finish ip /by 2359
+event lecture /from now /to later
+list
+todo survive one more day
+mark 1
+list
+mark 3
+unmark 3
+list
+bye

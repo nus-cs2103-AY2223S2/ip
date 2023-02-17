@@ -2,28 +2,16 @@
 
 ## Features 
 
-### Feature-ABC
+- Add a todo, event or deadline
+- Delete todos, events or deadlines
+- Edit todos, events or deadlines
+- Snooze and unsnooze
+- Mark tasks as done or undone
 
-Description of the feature.
+### Add
 
-### Feature-XYZ
+Add tasks, such as todos, events or deadlines
 
-Description of the feature.
+### Delete
 
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+Delete tasks, such as todos, events or deadlines
