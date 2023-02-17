@@ -8,6 +8,7 @@ import duke.exceptions.DeadlineByNotSpecified;
 import duke.exceptions.EventFromToNotSpecified;
 import duke.exceptions.FindKeywordMissing;
 import duke.exceptions.ListIndexMissing;
+import duke.exceptions.MissingCommandArguments;
 import duke.exceptions.TaskNameNotSpecified;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -166,10 +167,16 @@ public class Parser {
      * @return date for "view" command
      * @throws DateTimeParseException
      */
-    public static LocalDate parseViewScheduleDate(String commandInput) throws DateTimeParseException {
-        String timeInput = commandInput.split(" ")[1];
-        timeInput = timeInput.replaceAll("/", "-");
-        return LocalDate.parse(timeInput);
+    public static LocalDate parseViewScheduleDate(String commandInput) throws DateTimeParseException,
+            MissingCommandArguments {
+        try {
+            String timeInput = commandInput.split(" ")[1];
+            timeInput = timeInput.replaceAll("/", "-");
+            return LocalDate.parse(timeInput);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MissingCommandArguments(
+                    "Missing date for 'view' command! Format: view <YYYY:MM:DD>");
+        }
     }
 
     /**
