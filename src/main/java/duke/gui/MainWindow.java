@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * MainWindow handles the window GUI.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private Label status;

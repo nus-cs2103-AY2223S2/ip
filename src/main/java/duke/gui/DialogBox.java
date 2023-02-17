@@ -10,14 +10,19 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 
+/**
+ * DialogBox represents a GUI dialogue box.
+ */
 public class DialogBox extends HBox {
     private static final String DIALOG_BOX_RESOURCE_PATH = "/view/DialogBox.fxml";
     private static final String ROBOTO_BOLD_RESOURCE_PATH = "/fonts/Roboto-Bold.ttf";
@@ -33,6 +38,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * @param text text in dialogue box
+     * @param img image used for dialogue box
+     * @param paint main color theme for dialogue box
+     * @param style css styling used for dialogue box
+     */
     public DialogBox(String text, Image img, Paint paint, String style) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(DIALOG_BOX_RESOURCE_PATH));

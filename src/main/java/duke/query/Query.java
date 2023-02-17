@@ -2,6 +2,9 @@ package duke.query;
 
 import java.util.HashMap;
 
+/**
+ * Query represents a query to the bot.
+ */
 public class Query {
     private final String command;
     private String param = "";

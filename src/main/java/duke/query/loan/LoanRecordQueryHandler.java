@@ -5,9 +5,12 @@ import duke.loan.LoanShark;
 import duke.query.Query;
 import duke.query.QueryHandler;
 
+/**
+ * LoanRecordQueryHandler handles queries to display the loan-record affiliated with a holder.
+ */
 public class LoanRecordQueryHandler extends QueryHandler {
     private static final String QUERY_SYNTAX = "loan-record <holder>";
-    private LoanShark ls;
+    private static LoanShark ls;
 
     public LoanRecordQueryHandler(LoanShark loanShark) {
         this.ls = loanShark;

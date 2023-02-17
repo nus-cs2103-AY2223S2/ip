@@ -1,5 +1,8 @@
 package duke.loan;
 
+/**
+ * The Owe class represents an amount owed from the user to the holder.
+ */
 public class Owe extends Loan {
     private static final String AMOUNT_NEGATIVE_ERROR_MSG = "Amount cannot be negative!";
 

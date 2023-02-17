@@ -7,6 +7,9 @@ import duke.query.QueryHandler;
 import duke.query.QueryModule;
 import duke.task.TaskTracker;
 
+/**
+ * TaskQueryModule provides query handlers for interfacing with the TaskTracker.
+ */
 public class TaskQueryModule extends QueryModule {
     public static final String LIST_QUERY_TYPE = "list";
     public static final String MARK_QUERY_TYPE = "mark";

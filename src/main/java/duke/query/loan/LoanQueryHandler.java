@@ -7,6 +7,9 @@ import duke.query.Query;
 import duke.query.QueryHandler;
 import duke.query.exception.InvalidCommandParamException;
 
+/**
+ * LoanQueryHandler handles queries to add new loans.
+ */
 public class LoanQueryHandler extends QueryHandler {
     private static final String QUERY_SYNTAX = "loan <amount> /holder <holder> /desc <description>";
     private LoanShark loanShark;

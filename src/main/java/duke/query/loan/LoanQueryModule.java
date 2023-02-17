@@ -7,6 +7,9 @@ import duke.loan.LoanShark;
 import duke.query.QueryHandler;
 import duke.query.QueryModule;
 
+/**
+ * LoanQueryModule provides query handlers for interfacing with the LoanShark.
+ */
 public class LoanQueryModule extends QueryModule {
     public static final String LOAN_QUERY_TYPE = "loan";
     public static final String LOAN_RECORD_QUERY_TYPE = "loan-record";

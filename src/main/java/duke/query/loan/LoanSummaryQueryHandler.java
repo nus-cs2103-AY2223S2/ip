@@ -5,6 +5,9 @@ import duke.loan.LoanShark;
 import duke.query.Query;
 import duke.query.QueryHandler;
 
+/**
+ * LoanRecordQueryHandler handles queries to display the loan-summary.
+ */
 public class LoanSummaryQueryHandler extends QueryHandler {
     private static final String QUERY_SYNTAX = "loan-summary";
     private final LoanShark ls;

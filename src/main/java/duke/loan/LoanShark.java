@@ -1,9 +1,12 @@
 package duke.loan;
 
-import duke.exception.DukeException;
-
 import java.util.HashMap;
 
+import duke.exception.DukeException;
+
+/**
+ * LoanShark handles the tracking of loans.
+ */
 public class LoanShark {
     private final HashMap<String, LoanAccount> loanAccounts;
 
@@ -11,6 +14,13 @@ public class LoanShark {
         loanAccounts = new HashMap<>();
     }
 
+    /**
+     * @param balance balance remaining to be settled between the holder and user
+     * @param amountInCents original amount of the loan
+     * @param description description of the loan
+     * @param holder holder of the loan
+     * @return new loan added
+     */
     public Loan addLoan(int balance, int amountInCents, String description, String holder) {
         LoanAccount loanAccount;
 

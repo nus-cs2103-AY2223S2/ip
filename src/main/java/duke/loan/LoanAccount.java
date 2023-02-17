@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * LoanAccount represents all loans affiliated with a holder.
+ */
 public class LoanAccount {
     private final String holder;
     private final Queue<Loan> activeLoans = new LinkedList<Loan>();
@@ -33,6 +36,12 @@ public class LoanAccount {
                 absBalanceInCents / 100, absBalanceInCents % 100);
     }
 
+    /**
+     * @param balance balance remaining to be settled between the holder and user
+     * @param amountInCents original amount of the loan
+     * @param description description of the loan
+     * @return added owe
+     */
     public Owe addOwe(int balance, int amountInCents, String description) {
         assert amountInCents < 0 : "Owe amount must be negative!";
         int oweBalance = attemptToResolveLoans(balance);
@@ -44,6 +53,12 @@ public class LoanAccount {
         return newOwe;
     }
 
+    /**
+     * @param balance balance remaining to be settled between the holder and user
+     * @param amountInCents original amount of the loan
+     * @param description description of the loan
+     * @return added owed
+     */
     public Owed addOwed(int balance, int amountInCents, String description) {
         assert amountInCents > 0 : "Owed amount must be positive!";
         int owedBalance = attemptToResolveLoans(balance);

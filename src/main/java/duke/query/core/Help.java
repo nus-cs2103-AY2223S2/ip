@@ -1,5 +1,8 @@
 package duke.query.core;
 
+/**
+ * Represents help information for the bot.
+ */
 public class Help {
     private String helpText = "";
 

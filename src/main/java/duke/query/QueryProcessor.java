@@ -1,16 +1,23 @@
 package duke.query;
 
-import duke.exception.DukeException;
-import duke.query.exception.UnknownCommandException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import duke.exception.DukeException;
+import duke.query.exception.UnknownCommandException;
+
+/**
+ * QueryProcessor handles the processing of queries.
+ */
 public class QueryProcessor {
     private static final String UNKNOWN_COMMAND_RES = "I do not know what to do for \"%s\". Please try again.";
     private static final String COMMAND_FAILED_RES = "Sorry, but I could not perform my duties!";
     private final HashMap<String, QueryHandler> commandToQueryHandler;
 
+    /**
+     * @param modules modules to register to the QueryProcessor
+     * @throws DukeException
+     */
     public QueryProcessor(QueryModule... modules) throws DukeException {
         commandToQueryHandler = new HashMap<>();
         for (QueryModule module : modules) {
@@ -19,6 +26,11 @@ public class QueryProcessor {
         }
     }
 
+    /**
+     * Processes query.
+     * @param query query to process
+     * @return response to user
+     */
     public String processQuery(Query query) {
         try {
             QueryHandler queryHandler = getQueryHandler(query.getCommand());

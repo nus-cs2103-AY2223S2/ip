@@ -15,6 +15,9 @@ public class TaskTracker {
     private ArrayList<Task> tasks = new ArrayList<Task>();
     private final TaskStorage taskStorage;
 
+    /**
+     * Creates a new TaskTracker.
+     */
     public TaskTracker() {
         tasks = new ArrayList<Task>();
         taskStorage = new TaskStorage();

@@ -3,12 +3,15 @@ package duke.query;
 import duke.exception.DukeException;
 import duke.query.exception.InvalidCommandParamException;
 
+/**
+ * QueryHandler is an abstract class that processes queries.
+ */
 public abstract class QueryHandler {
     /**
      * Processes a user input string and returns a response string.
      *
-     * @param query a user input string
-     * @return a response string
+     * @param query user input string
+     * @return response string
      * @throws DukeException
      */
     public abstract String processQuery(Query query) throws DukeException;

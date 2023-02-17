@@ -1,5 +1,8 @@
 package duke.loan;
 
+/**
+ * Loan represents an amount owed or lent to a holder.
+ */
 public abstract class Loan {
     protected static final String AMOUNT_NEGATIVE_ERROR_MSG = "Amount cannot be negative!";
 
@@ -8,6 +11,12 @@ public abstract class Loan {
     protected int originalAmount;
     protected String description;
 
+    /**
+     * @param name holder affiliated with the loan
+     * @param balanceInCents balance remaining to be settled between the holder and user
+     * @param originalAmount original amount of the loan
+     * @param description description of the loan
+     */
     public Loan(String name, int balanceInCents, int originalAmount, String description) {
         this.name = name;
         this.balanceInCents = balanceInCents;

@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
-import duke.query.exception.InvalidCommandParamException;
 import duke.query.Query;
+import duke.query.exception.InvalidCommandParamException;
 import duke.task.Task;
 import duke.task.TaskTracker;
 

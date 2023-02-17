@@ -11,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * DukeGUI handles the initialization of the GUI and the bot.
+ */
 public class DukeGui extends Application {
     private static final String MAIN_WINDOW_RESOURCE_PATH = "/view/MainWindow.fxml";
     private static final String STYLESHEET_RESOURCE_PATH = "/view/style.css";
