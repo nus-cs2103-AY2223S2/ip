@@ -77,12 +77,12 @@ public class Ui {
                     + "\n"
                     + String.format("Now you have %d tasks in the list", taskList.getSize());
         } else if (type == TypeOfTask.deadline) {
-            result += "Don't forget about these deadlines or no food for you."
+            result += "Don't forget about these deadlines or no food for you. \n"
                     + "I've added this task: \n" + task.toString()
                     + "\n" + String.format("Now you have %d tasks in the list", taskList.getSize());
         } else if (type == TypeOfTask.event) {
             // for event
-            result += "Busy with other events? How silly. I've added this task:" + task.toString()
+            result += "Busy with other events? How silly. \nI've added this task:" + task.toString()
                     + "\n"
                     + String.format("Now you have %d tasks in the list", taskList.getSize());
         } else if (type == TypeOfTask.delete) {

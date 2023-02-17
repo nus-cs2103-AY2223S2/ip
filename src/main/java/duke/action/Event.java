@@ -34,7 +34,7 @@ public class Event extends Task {
             this.startTime = null;
             this.endDay = endTimeArray[0];
             this.endTime = null;
-        } else if (startTimeArray.length > 2 && endTimeArray.length > 2) {
+        } else if (startTimeArray.length == 2 && endTimeArray.length == 2) {
             // Example: /by Monday 2 pm /to Sunday 4 pm
             this.startDay = startTimeArray[0];
             String slicedStartTime = String.join(" ", Arrays.copyOfRange(startTimeArray, 1, startTimeArray.length));
