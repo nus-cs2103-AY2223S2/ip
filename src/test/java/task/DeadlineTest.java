@@ -1,9 +1,11 @@
 package task;
 
-import dukeexception.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import dukeexception.DukeException;
+
 
 public class DeadlineTest {
     private String input = "deadline buy book /by 2018-09-08 1800";

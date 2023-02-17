@@ -1,9 +1,11 @@
 package utils;
 
-import dukeexception.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import dukeexception.DukeException;
+
 
 public class DateTimeTest {
     @Test
