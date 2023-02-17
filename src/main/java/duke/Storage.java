@@ -57,6 +57,8 @@ public class Storage {
                     case 'E':
                         tasks.add(Event.fromSaveFormat(line));
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + line);
                     }
                 }
             }

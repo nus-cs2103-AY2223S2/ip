@@ -9,7 +9,8 @@ import duke.utils.FormatHelper;
  * Class for methods relating to user interface input and output.
  */
 public class Ui {
-    private static final String linebreak = "    ___________________________________________________________________________________";
+    private static final String linebreak =
+            "    ___________________________________________________________________________________";
     private Scanner input;
     private PrintStream output;
 
