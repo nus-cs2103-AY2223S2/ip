@@ -27,6 +27,6 @@ public class Skylar {
     }
 
     public void store() {
-        storage.store(tasks);
+        storage.store(parser.getList());
     }
 }

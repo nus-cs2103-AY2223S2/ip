@@ -32,6 +32,7 @@ public class Storage {
             outputConstruct.append(curr.toStorageString()).append(System.lineSeparator());
         }
         String finalOut = outputConstruct.toString();
+        System.out.println(list.size());
         try {
             if (!java.nio.file.Files.exists(storePath)) {
                 java.nio.file.Files.createFile(storePath);

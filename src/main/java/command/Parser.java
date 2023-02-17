@@ -371,4 +371,8 @@ public class Parser {
             return Ui.showUndoSuccess(list);
         }
     }
+
+    public TaskList getList() {
+        return list;
+    }
 }
