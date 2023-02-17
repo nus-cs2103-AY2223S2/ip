@@ -32,8 +32,8 @@ public class DialogBox extends HBox {
 
         pictureText = new Label(l.getText(), displayPicture);
         pictureText.setWrapText(true);
-
         pictureText.setContentDisplay(ContentDisplay.RIGHT);
+
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(pictureText);
 

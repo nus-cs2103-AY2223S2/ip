@@ -62,7 +62,6 @@ public class Main extends Application {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
@@ -83,11 +82,10 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Step 3. Add functionality to handle user input.
+        //Handle enter and send button
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
-
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
@@ -98,6 +96,7 @@ public class Main extends Application {
         Scene scene = new Scene(mainLayout);
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
+
         //Starting Duke
         GigaChad = new Duke("data.txt");
         Label dukeText = new Label(getResponse());

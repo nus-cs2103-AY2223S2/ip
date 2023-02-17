@@ -43,10 +43,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the current TaskList.
+     *
+     * @return The current TaskList.
+     */
     public TaskList getTasks() {
         return tasks;
     }
 
+    /**
+     * Modifies the current TaskList.
+     *
+     * @param tasks The new TaskList.
+     */
     public void setTasks(TaskList tasks) {
         this.tasks = tasks;
     }
