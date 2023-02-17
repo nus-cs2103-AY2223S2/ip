@@ -79,6 +79,7 @@ public class Duke {
             response = ui.getMessage().toString();
         }
         ui.clearMessage();
+        assert ui.getMessage().toString().isEmpty() : "User input should have been cleared";
         return response;
     }
 }

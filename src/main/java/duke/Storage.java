@@ -94,6 +94,7 @@ public class Storage {
                 String stringTask = s.nextLine();
                 Task task = readTask(stringTask);
                 listOfTasks.add(task);
+                assert listOfTasks.get(listOfTasks.size() - 1) == task : "Task should be added to the task list";
             }
         } catch (FileNotFoundException | DateTimeParseException e) {
             throw new DukeException();
