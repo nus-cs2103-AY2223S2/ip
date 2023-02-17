@@ -10,6 +10,7 @@ public class TaskList extends ArrayList<Task> {
     // Stores everything in the lists and takes care of adding/removing from the list
     // author: notnoop
     // Reused from https://stackoverflow.com/questions/1096621/
+    TaskList pastVersion;
     public TaskList(List<String> fileData) throws IOException {
         //Somehow gotta read the fileData in
         for (String line : fileData) {
@@ -29,6 +30,7 @@ public class TaskList extends ArrayList<Task> {
                 System.out.println("Invalid input: " + line);
             }
         }
+        pastVersion = new TaskList();
     }
 
     private void initializeNewEvent(String[] lineSplit) {
@@ -60,6 +62,7 @@ public class TaskList extends ArrayList<Task> {
 
     public TaskList() {
         super();
+        pastVersion = new TaskList();
     }
 
     public void mark(int index) throws IndexOutOfBoundsException {
@@ -70,4 +73,16 @@ public class TaskList extends ArrayList<Task> {
         super.get(index).setChecked(false);
     }
 
+    public void setPastVersion(TaskList newPastVersion) {
+        this.pastVersion = newPastVersion;
+    }
+    public TaskList storePastVersion() {
+        TaskList newVersion = (TaskList) this.clone();
+        newVersion.setPastVersion(this);
+        return newVersion;
+    }
+
+    public TaskList undo() {
+        return pastVersion;
+    }
 }

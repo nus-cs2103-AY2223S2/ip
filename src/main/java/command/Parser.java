@@ -25,12 +25,21 @@ public class Parser {
      */
     public String processInput(String input) {
         String[] inputAnalyzed = input.split(" ");
-        String operationText;
-        String additionText;
         try {
             checkIllegalCharacter(input);
-            operationText = checkOperationInputs(input, inputAnalyzed);
-            additionText =  checkAddEntryInputs(input, inputAnalyzed);
+            String miscOperationText = checkMiscOperationInputs(input, inputAnalyzed);
+            String additionText =  checkAddEntryInputs(input, inputAnalyzed);
+            String listOperationText = checkEditOperationInputs(input, inputAnalyzed);
+            assert !input.contains("#"): "Input should not have #";
+            if (miscOperationText != null) {
+                return miscOperationText;
+            } else if (additionText != null) {
+                return additionText;
+            } else if (listOperationText != null){
+                return listOperationText;
+            } else {
+                return Ui.unknownCommand();
+            }
         } catch (InvalidInputException e) {
             return Ui.showInvalidInputError(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
@@ -38,18 +47,11 @@ public class Parser {
         } catch (NumberFormatException e) {
             return Ui.showInvalidInputError("I only take integers for number inputs.");
         }
-        assert !input.contains("#"): "Input should not have #";
-        if (operationText != null) {
-            return operationText;
-        } else if (additionText != null) {
-            return additionText;
-        } else {
-            return Ui.unknownCommand();
-        }
     }
 
     /**
      * Checks if the input contains the # character, which interferes with the storing function of the program.
+     *
      * @param input the user's input
      * @throws InvalidInputException for when the user has written an input with #
      */
@@ -60,8 +62,9 @@ public class Parser {
     }
 
     /**
-     * Checks if the user's input corresponds to one of the commands that operates the list or the program at large, and
+     * Checks if the user's input corresponds to one of the commands that operates the program at large, and
      * calls the corresponding commands if so.
+     *
      * @param input the user's input
      * @param inputAnalyzed the user's input after splitting based on spaces
      * @return the output text to be displayed on the UI, or null if the input does not match
@@ -69,29 +72,55 @@ public class Parser {
      * @throws IndexOutOfBoundsException when the user attempts to access a position in the list that doesn't exist
      * @throws NumberFormatException when the user inputs something other than an integer
      */
-    public String checkOperationInputs(String input, String[] inputAnalyzed) throws InvalidInputException,
+    public String checkMiscOperationInputs(String input, String[] inputAnalyzed) throws InvalidInputException,
             IndexOutOfBoundsException, NumberFormatException {
         switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
         case "bye":
             return processByeOperation(inputAnalyzed);
         case "list":
             return processListOperation(inputAnalyzed);
-        case "mark":
-            return processMarkOperation(inputAnalyzed);
-        case "unmark":
-            return processUnmarkOperation(inputAnalyzed);
-        case "delete":
-            return processDeleteOperation(inputAnalyzed);
         case "find":
             return processFindOperation(input);
+        case "help":
+            return processHelpOperation(inputAnalyzed);
         default:
             return null;
         }
     }
 
     /**
+     * Checks if the user's input corresponds to one of the commands that operates the list, and
+     * calls the corresponding commands if so.
+     *
+     * @param input the user's input
+     * @param inputAnalyzed the user's input after splitting based on spaces
+     * @return the output text to be displayed on the UI, or null if the input does not match
+     * @throws InvalidInputException when the user inputs their command in the wrong format
+     * @throws IndexOutOfBoundsException when the user attempts to access a position in the list that doesn't exist
+     * @throws NumberFormatException when the user inputs something other than an integer
+     */
+    public String checkEditOperationInputs(String input, String[] inputAnalyzed) throws InvalidInputException,
+            IndexOutOfBoundsException, NumberFormatException {
+        switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
+            case "mark":
+                return processMarkOperation(inputAnalyzed);
+            case "unmark":
+                return processUnmarkOperation(inputAnalyzed);
+            case "delete":
+                return processDeleteOperation(inputAnalyzed);
+            case "undo":
+                return processUndoOperation(inputAnalyzed);
+            default:
+                return null;
+        }
+    }
+
+
+
+    /**
      * Checks if the user's input corresponds to one of the commands that adds new elements to the list, and calls the
      * corresponding commands if so.
+     *
      * @param input the user's input
      * @param inputAnalyzed the user's input after splitting based on spaces
      * @return the output text to be displayed on the UI, or null if the input does not match
@@ -115,6 +144,7 @@ public class Parser {
 
     /**
      * Processes user input when the starting command is bye, terminating the program.
+     *
      * @param inputAnalyzed the split-up version of the user's input
      * @throws InvalidInputException for when the user types anything more than bye
      */
@@ -129,6 +159,7 @@ public class Parser {
 
     /**
      * Processes user input when the starting command is list, displaying the details of the entries in the TaskList.
+     *
      * @param inputAnalyzed the split-up version of the user's input
      * @throws InvalidInputException for when the user types anything more than list
      */
@@ -143,6 +174,7 @@ public class Parser {
 
     /**
      * Processes user input when the starting command is mark, marking the task at the index provided as completed.
+     *
      * @param inputAnalyzed the split-up version of the user's input
      * @throws InvalidInputException for when the user types the complete mark command incorrectly
      * @throws IndexOutOfBoundsException for when the user inputs an invalid index
@@ -156,6 +188,7 @@ public class Parser {
                     + "with i being an integer.");
         }
         int index = parseInt(inputAnalyzed[1]);
+        list = list.storePastVersion();
         // List
         list.mark(index - 1);
         // UI.Ui
@@ -166,6 +199,7 @@ public class Parser {
     /**
      * Processes user input when the starting command is unmark, marking the task at the index provided as not
      * completed.
+     *
      * @param inputAnalyzed the split-up version of the user's input
      * @throws InvalidInputException for when the user types the complete unmark command incorrectly
      * @throws IndexOutOfBoundsException for when the user inputs an invalid index
@@ -179,6 +213,7 @@ public class Parser {
                     + "with i being an integer.");
         }
         int index = parseInt(inputAnalyzed[1]);
+        list = list.storePastVersion();
         list.unmark(index - 1);
         return Ui.showUnmarkSuccess(list.get(index - 1));
     }
@@ -186,6 +221,7 @@ public class Parser {
 
     /**
      * Processes user input when the starting command is delete, deleting the task at the provided index.
+     *
      * @param inputAnalyzed the split-up version of the user's input
      * @throws InvalidInputException for when the user types the complete delete command incorrectly
      * @throws IndexOutOfBoundsException for when the user inputs an invalid index
@@ -199,6 +235,7 @@ public class Parser {
                     + "with i being an integer.");
         }
         int index = parseInt(inputAnalyzed[1]);
+        list = list.storePastVersion();
         Task tempTask = list.get(index - 1);
         list.remove(index - 1);
         return Ui.showDeleteSuccess(tempTask, list);
@@ -207,6 +244,7 @@ public class Parser {
 
     /**
      * Processes user input when the starting command is deadline, adding a new deadline task to the TaskList.
+     *
      * @param input the user input
      * @throws InvalidInputException for when the user inputs the deadline command in the incorrect format
      */
@@ -226,6 +264,7 @@ public class Parser {
             throw new InvalidInputException("Missing deadline description.");
         }
         Deadline newDeadline = new Deadline(details, date);
+        list = list.storePastVersion();
         list.add(newDeadline);
         return Ui.showAddTaskSuccess(newDeadline, list);
     }
@@ -233,6 +272,7 @@ public class Parser {
 
     /**
      * Processes user input when the starting command is to-do, adding a new to-do task to the TaskList.
+     *
      * @param input the user input
      * @throws InvalidInputException for when the user inputs the to-do command in the incorrect format
      */
@@ -248,6 +288,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException("Missing to-do description.");
         }
+        list = list.storePastVersion();
         //List
         list.add(newTodo);
         //UI.Ui
@@ -257,6 +298,7 @@ public class Parser {
 
     /**
      * Processes user input when the starting command is event, adding a new event task to the TaskList.
+     *
      * @param input the user input
      * @throws InvalidInputException for when the user inputs the event command in the incorrect format
      */
@@ -281,12 +323,14 @@ public class Parser {
         }
         //Add Item
         Event newEvent = new Event(details, startTime, overTime);
+        list = list.storePastVersion();
         list.add(newEvent);
         return Ui.showAddTaskSuccess(newEvent, list);
     }
 
     /**
      * Returns a list of all the tasks in the TaskList containing the provided keyword.
+     * 
      * @param input the user's input
      * @throws InvalidInputException when the user does not input anything for a keyword
      */
@@ -306,5 +350,23 @@ public class Parser {
             }
         }
         return Ui.showFindListState(foundItems,keyword);
+    }
+
+    private String processHelpOperation(String[] inputAnalyzed) throws InvalidInputException {
+        if (inputAnalyzed.length > 1) {
+            throw new InvalidInputException("Incorrect format. Correct form should be \"help\".");
+        } else {
+            return Ui.showHelp();
+        }
+    }
+
+    private String processUndoOperation(String[] inputAnalyzed) throws InvalidInputException {
+        if (inputAnalyzed.length > 1) {
+            throw new InvalidInputException("Incorrect format. Correct form should be \"help\".");
+        } else {
+            list = list.undo();
+            assert list != null: "List should never be null";
+            return Ui.showListState(list);
+        }
     }
 }

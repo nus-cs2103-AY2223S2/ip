@@ -128,10 +128,12 @@ public class Ui {
         StringBuilder helpString = new StringBuilder();
         helpString.append("Saul Goodman, here's a list of all the commands you can make:")
                 .append(System.lineSeparator())
-                .append()
+                .append(showAddTaskCommands())
+                .append(showOperationCommands());
+        return helpString.toString();
     }
 
-    private String showAddTaskCommands() {
+    private static String showAddTaskCommands() {
         StringBuilder sb = new StringBuilder();
         sb.append("New todo Task: task <title>")
                 .append(System.lineSeparator())
@@ -142,7 +144,23 @@ public class Ui {
         return sb.toString();
     }
 
-    private String showOperationCommands() {
+    private static String showOperationCommands() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("View entire list: list")
+                .append(System.lineSeparator())
+                .append("Delete an Entry: delete <index>")
+                .append(System.lineSeparator())
+                .append("Mark an Entry as Completed: mark <index>")
+                .append(System.lineSeparator())
+                .append("Unmark an Entry: unmark <index>")
+                .append(System.lineSeparator())
+                .append("Find entries based on Keyword: find <keyword>")
+                .append(System.lineSeparator());
+        return sb.toString();
+    }
 
+    public static String showUndoSuccess(TaskList list) {
+        return "Alright yo, just dialed back the list to its previous iteration. Here's what it looks like now:\n" +
+                        showListState(list);
     }
 }
