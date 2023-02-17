@@ -74,8 +74,4 @@ I have removed this task
 ```
 
 Thats it! feel free to use the help function in the app
-whenever you are lost or to check out more advanced task like
- - event
- - deadline
-
-Also, use the find function to search through your list more thoroughly
+whenever you are lost or get a recap of the function in the app itself!
