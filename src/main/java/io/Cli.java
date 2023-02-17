@@ -18,12 +18,12 @@ public class Cli implements Ui {
     private static final int MAX_LINE_LENGTH = 69;
     private static final String OUTPUT_FORMAT = "%4s %s";
 
-    private static final String LOGO = "██████╗\n"
-            + "██╔══██╗\n"
-            + "██║  ██║\n"
-            + "██║  ██║\n"
-            + "██████╔╝\n"
-            + "╚═════╝\n"
+    private static final String LOGO = " _____\n"
+            + "|  __ \\\n"
+            + "| |  | |\n"
+            + "| |  | |\n"
+            + "| |__| |\n"
+            + "|_____/ \n"
             + "___                                                            \n"
             + " |  _.  _ |    _|_ ._ _.  _ |  o ._   _     _ |_   _. _|_ |_   _ _|_\n"
             + " | (_| _> |<    |_ | (_| (_ |< | | | (_|   (_ | | (_|  |_ |_) (_) |_\n"
