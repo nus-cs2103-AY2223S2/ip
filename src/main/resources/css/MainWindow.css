@@ -9,7 +9,7 @@
     -fx-font-size: 13px;
 }
 #sendButton {
-    -fx-background-color: hotpink;
+    -fx-background-color: "659192";
     -fx-border-width: 2px;
     -fx-border-style: solid;
     -fx-border-color: black;
@@ -26,11 +26,11 @@
 }
 
 #mainContainer {
-    -fx-background-color: aquamarine;
+    -fx-background-color: "F79F4B";
 }
 
 #closeProgramButton {
-    -fx-background-color: hotpink;
+    -fx-background-color: "659192";
     -fx-border-width: 2px;
     -fx-border-color: black;
     -fx-border-radius: 10px;
