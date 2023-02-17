@@ -54,7 +54,7 @@ public class Chad {
                     break;
                 }
 
-                Command com = new Parser(request, tasks).processRequest();
+                Command com = new Parser(request, tasks, localStorage).processRequest();
                 String response = com.execute(tasks);
                 ui.printRes(response);
             } catch (DukeException error) {
@@ -76,7 +76,7 @@ public class Chad {
      */
     public String getResponse(String request) {
         try {
-            Command com = new Parser(request, tasks).processRequest();
+            Command com = new Parser(request, tasks, this.localStorage).processRequest();
             String response = com.execute(tasks);
             return response;
         } catch (DukeException e) {
@@ -95,7 +95,7 @@ public class Chad {
         TaskList tasks = new TaskList();
 
         while (!input.equalsIgnoreCase("bye")) {
-            Command com = new Parser(input, tasks).processRequest();
+            Command com = new Parser(input, tasks, localStorage).processRequest();
             String response = com.execute(tasks);
             ui.printRes(response);
             input = sc.nextLine();

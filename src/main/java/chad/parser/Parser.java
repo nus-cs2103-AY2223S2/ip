@@ -11,6 +11,7 @@ import chad.command.MarkCommand;
 import chad.command.RemoveCommand;
 import chad.command.UnmarkCommand;
 import chad.exception.UnknownCommandException;
+import chad.storage.LocalStorage;
 import chad.storage.TaskList;
 
 /**
@@ -21,6 +22,7 @@ public class Parser {
     private final String request;
     private final TaskList tasks;
     private String response;
+    private LocalStorage localStorage;
 
     /**
      * Enum for commands.
@@ -57,9 +59,10 @@ public class Parser {
      * @param request request by the user
      * @param tasks duke.task array to store the tasks added by the user
      */
-    public Parser(String request, TaskList tasks) {
+    public Parser(String request, TaskList tasks, LocalStorage localStorage) {
         this.request = request;
         this.tasks = tasks;
+        this.localStorage = localStorage;
     }
 
     /**
@@ -93,7 +96,7 @@ public class Parser {
         case FIND:
             return new FindCommand(this.request);
         case BYE:
-            return new ExitCommand();
+            return new ExitCommand(this.localStorage, this.tasks);
         default:
             assert false : "Should not reach here since unknown command exception is handled.";
             throw new UnknownCommandException();

@@ -35,8 +35,8 @@ public class InputValidator {
         }
 
         /* Checks for valid description, i.e., description cannot be empty */
-        if (req.length == 0) {
-            throw new MissingArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
+            if (req.length == 0) {
+                throw new MissingArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
         String task = req[1].strip();
