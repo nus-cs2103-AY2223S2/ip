@@ -88,23 +88,10 @@ public class Storage {
      * @param encodedTasks Tasks with extended instructions
      *                     to include completion status.
      */
-    public void saveTasks(String encodedTasks) {
-        try {
-            FileWriter fw = new FileWriter(savedFile);
-            fw.write(encodedTasks);
-            fw.flush();
-            fw.close();
-            for (int i = 0; i < 60; i++) {
-                Thread.sleep(15);
-                System.out.print(".");
-            }
-            System.out.print("\n");
-            Thread.sleep(250);
-            System.out.println("Your tasks have been successfully saved! :-)");
-        } catch (IOException e) {
-            System.out.println("Sorry, unable to save your tasks right now.");
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void saveTasks(String encodedTasks) throws IOException {
+        FileWriter fw = new FileWriter(savedFile);
+        fw.write(encodedTasks);
+        fw.flush();
+        fw.close();
     }
 }
