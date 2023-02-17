@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="400.0" minHeight="-Infinity" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
+  <children>
+    <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="310.0" promptText="The Duke is listening..." style="-fx-background-radius: 10; -fx-background-insets: 5; -fx-min-height: 40; -fx-padding: 10;" AnchorPane.bottomAnchor="1.0">
+         <font>
+            <Font name="Menlo Regular" size="13.0" />
+         </font>
+      </TextField>
+    <Button fx:id="sendButton" alignment="CENTER" contentDisplay="CENTER" layoutX="310.0" layoutY="562.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="33.0" prefWidth="86.0" style="-fx-background-radius: 15; -fx-background-color: #3D5A80;" text="Send" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Menlo Regular" size="13.0" />
+         </font>
+      </Button>
+    <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="560.0" prefWidth="400.0" vvalue="1.0">
+      <content>
+        <VBox fx:id="dialogContainer">
+         </VBox>
+      </content>
+    </ScrollPane>
+  </children>
+</AnchorPane>

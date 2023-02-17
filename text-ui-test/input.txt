@@ -1,0 +1,18 @@
+todo read book
+deadline retun /by June
+event project /from aug 6th /to 4pm
+todo join sports
+todo borrow book
+list
+mark 1
+mark 2
+mark 4
+list
+delete 3
+list
+mark 0
+mark 10
+add
+blah
+
+bye
