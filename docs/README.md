@@ -1,5 +1,12 @@
 # User Guide
 
+## Running DukePro for Pros
+
+1. Download Duke.jar [here](https://github.com/Jxleejiaxin/ip/releases/tag/A-Release)
+2. Right-click the downloaded Duke.jar and click 'open with'.
+3. Click `Java(TM) Platform SE binary`.
+4. DukePro for Pros is now ready to manage your tasks!
+
 ## Features 
 - Keep track of a list of tasks and their status(done/undone)
 - Add ToDos, Deadlines and Events to the task list
@@ -9,10 +16,15 @@
 ### Keep track of a list of tasks
 DukePro saves your task lists into a text file and will load from this text file whenever it is booted up.
 
+DukePro will also display if the task has been marked as done or not done.
+
 ### ToDos, Deadlines, Events
 Tasks that DukePro recognises can be separated into three types: ToDo, Deadline, Event.
+
 ToDo is a task that is not required to be completed within a frame of time.
+
 Deadline is a task that should be completed by the specified deadline.
+
 Event is a task that happens from a specified time to another time.
 
 ### Mark tasks as done
