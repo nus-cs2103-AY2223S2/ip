@@ -23,7 +23,7 @@ public abstract class Task {
     /**
      * Marks this task as completed.
      *
-     * @return This task
+     * @return this task
      */
     public Task markDone() {
         this.isDone = true;
@@ -33,7 +33,7 @@ public abstract class Task {
     /**
      * Marks this task as incomplete.
      *
-     * @return This task
+     * @return this task
      */
     public Task unmarkDone() {
         this.isDone = false;
@@ -46,16 +46,23 @@ public abstract class Task {
 
 
     /**
-     * Represent this task as a string
+     * Represent this task as a string.
      *
-     * @return Task as string
+     * @return task as string
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ", this.taskName + this.stringFields());
+        return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ",
+                this.taskName + this.stringFields());
     }
 
+    /**
+     * Represents this task as a string in format for saving.
+     *
+     * @return string representation of this task in format for saving
+     */
     public String toStringSave() {
-        return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ", this.taskName + this.saveStringFields());
+        return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ",
+                this.taskName + this.saveStringFields());
     }
 }

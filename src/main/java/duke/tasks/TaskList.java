@@ -28,6 +28,11 @@ public class TaskList {
         return result.toString();
     }
 
+    /**
+     * Represent list of tasks as a string in a format for saving to a file.
+     *
+     * @return String representation of task list for saving
+     */
     public String toStringSave() {
         StringBuilder result = new StringBuilder();
         for (int index = 0; index < this.tasks.size(); index++) {

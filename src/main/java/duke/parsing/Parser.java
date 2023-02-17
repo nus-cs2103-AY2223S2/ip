@@ -126,7 +126,7 @@ public class Parser {
         }
 
         try {
-        taskName = commandInput.substring(0, indexOfFrom - 1);
+            taskName = commandInput.substring(0, indexOfFrom - 1);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TaskNameNotSpecified();
         }

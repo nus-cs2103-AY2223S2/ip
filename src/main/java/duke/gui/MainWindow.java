@@ -87,6 +87,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(dialogBox);
     }
 
+    /**
+     * Greets user on initialization of GUI.
+     */
     public void greetUser() {
         String tasksFetchMessage = "(I've fetched " + duke.getTasks().getSize() + " saved tasks)";
         String greeting = "Hoot! How may I assist you?\n" + tasksFetchMessage;
