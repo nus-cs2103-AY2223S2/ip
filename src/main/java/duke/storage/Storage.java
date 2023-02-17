@@ -66,6 +66,7 @@ public class Storage {
             while (line != null) {
                 // task is saved in the following format:
                 // taskType /// completionStatus /// taskDescription /// startDate for event or deadline /// endDate
+                // null will be saved if the task do not have the component
                 String[] str = line.split(" /// ", 5);
                 Task task = null;
 
