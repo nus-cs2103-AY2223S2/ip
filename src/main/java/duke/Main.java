@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 /**
  * A GUI for Duke using FXML.
  */
@@ -30,6 +31,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             Image icon = new Image("/images/testDuke.png");
             stage.setTitle("Duke");
+            stage.setResizable(false);
             stage.getIcons().add(icon);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

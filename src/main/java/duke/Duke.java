@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- * Duke is a personal chatbot that tracks tasks to do.
+ * Duke is a personal chatBot that tracks tasks to do.
  */
 public class Duke {
     private Storage storage;

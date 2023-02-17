@@ -4,6 +4,11 @@ package duke.tasks;
  * ToDo is a task with just a description.
  */
 public class ToDo extends Task {
+    /**
+     * A constructor for ToDo.
+     * @param description Description of task.
+     * @param isDone Completion status of task.
+     */
     public ToDo(String description, Boolean isDone) {
         super(description, isDone);
     }

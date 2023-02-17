@@ -4,13 +4,23 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="9.9999999E7" minHeight="-Infinity" minWidth="-Infinity" prefWidth="668.0" style="-fx-background-color: FFFF00;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Label" wrapText="true" />
+        <Label fx:id="dialog" text="Label" wrapText="true">
+         <HBox.margin>
+            <Insets right="20.0" />
+         </HBox.margin>
+         <font>
+            <Font name="MT Extra" size="12.0" />
+         </font>
+         <padding>
+            <Insets right="20.0" />
+         </padding></Label>
       <Circle fx:id="myCircle" fill="DODGERBLUE" radius="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" HBox.hgrow="ALWAYS">
          <HBox.margin>
-            <Insets />
+            <Insets left="10.0" right="10.0" />
          </HBox.margin></Circle>
     </children>
     <padding>

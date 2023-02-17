@@ -47,6 +47,7 @@ public class DialogBox extends HBox {
         }
         myCircle.setFill(new ImagePattern(img));
         dialog.setText(text);
+        dialog.setStyle("-fx-padding: 10; -fx-border-color:red; -fx-background-color: white;");
 
     }
 
