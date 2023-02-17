@@ -91,7 +91,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
-        return String.format("[E][%s] %s (from: %s to: %s)",
+        return String.format("[E][%s] %s(from: %s to: %s)",
                 isDone ? "X" : " ", description,
                 startDate.format(formatter), endDate.format(formatter));
     }

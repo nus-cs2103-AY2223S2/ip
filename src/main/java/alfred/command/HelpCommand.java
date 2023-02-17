@@ -13,11 +13,17 @@ import alfred.ui.Ui;
 public class HelpCommand extends Command {
 
     private final HashMap<String, String> getCommandGuide = new HashMap<>();
+
+    private final HashMap<String, String> getVariableGuide = new HashMap<>();
     private static final String[] ORDER_OF_TASK = new String[]{
         "todo", "deadline", "event",
         "mark", "unmark", "delete",
         "list", "listDate", "exit",
         "find", "help"
+    };
+
+    private static final String[] ORDER_OF_VARIABLE = new String[] {
+        "dates", "time"
     };
 
     /**
@@ -35,8 +41,14 @@ public class HelpCommand extends Command {
         getCommandGuide.put("mark", "To mark a task: mark <task-index>");
         getCommandGuide.put("todo", "To add a todo task: todo <task-name>");
         getCommandGuide.put("unmark", "To unmark a task: unmark <task-index>");
+
+        fillVariableGuide();
     }
 
+    private void fillVariableGuide() {
+        getVariableGuide.put("dates", "Dates are in the format: dd/mm/yyyy");
+        getVariableGuide.put("time", "Time are in the format: HHmm");
+    }
     /**
      * {@inheritDoc}
      */
@@ -45,13 +57,35 @@ public class HelpCommand extends Command {
         StringBuilder message = new StringBuilder("Here are some commands to help you work your way through"
                 + " the program :)\n");
         for (String task : ORDER_OF_TASK) {
-            message.append("    ");
-            message.append(getCommandGuide.get(task));
+            String[] lineArr = getCommandGuide.get(task).split(": ");
+            String topic = lineArr[0] + ":\n";
+            String help = lineArr[1] + "\n";
+            message.append(ui.getIndent());
+            message.append(topic);
+            message.append(ui.getIndent());
+            message.append(ui.getIndent());
+            message.append(help);
             message.append("\n");
         }
+        addVariableDefinition(message, ui);
         return ui.getCommandMessage(message.toString());
     }
-
+    
+    private void addVariableDefinition(StringBuilder message, Ui ui) {
+        message.append(ui.getLines());
+        message.append("This are some variable definition:\n");
+        for (String task : ORDER_OF_VARIABLE) {
+            String[] lineArr = getVariableGuide.get(task).split(": ");
+            String topic = lineArr[0] + ":\n";
+            String help = lineArr[1] + "\n";
+            message.append(ui.getIndent());
+            message.append(topic);
+            message.append(ui.getIndent());
+            message.append(ui.getIndent());
+            message.append(help);
+            message.append("\n");
+        }
+    }
     /**
      * {@inheritDoc}
      */

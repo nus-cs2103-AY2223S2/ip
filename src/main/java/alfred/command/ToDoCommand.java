@@ -31,8 +31,8 @@ public class ToDoCommand extends Command {
         tasks.addTask(task);
 
         String numTasks = tasks.getSize() == 1 ? "task" : "tasks";
-        String output = String.format("Noted, task added: \n      %s\n"
-                + "    Number of %s in the list: %d\n", task, numTasks, tasks.getSize());
+        String output = String.format("Noted, task added:\n" + ui.getIndent() + "%s\n"
+                + "Number of %s in the list: %d\n", task, numTasks, tasks.getSize());
         return ui.getCommandMessage(output);
     }
 

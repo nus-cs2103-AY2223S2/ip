@@ -30,7 +30,8 @@ public class UnmarkCommand extends Command {
             task.unmarkTask();
             String output = "I have un-mark this task. Remember to complete "
                     + "your task on time!\n";
-            output += String.format("      %s\n", task);
+            output += ui.getIndent();
+            output += String.format("%s\n", task);
             return ui.getCommandMessage(output);
         } catch (NumberFormatException e) {
             throw new AlfredException("To mark, item you need to pass a valid integer!\n");

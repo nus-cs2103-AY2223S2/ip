@@ -10,7 +10,7 @@ public class AlfredException extends Exception {
      * @param message The error message.
      */
     public AlfredException(String message) {
-        super("OOPS!!! " + message);
+        super("ERROR! " + message);
     }
 
     /**

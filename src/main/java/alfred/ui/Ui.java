@@ -46,7 +46,6 @@ public class Ui {
     public String getCommandMessage(String command) {
         StringBuilder message = new StringBuilder();
         message.append(getLines());
-        command = "    " + command;
         message.append(command);
         message.append(getLines());
         return message.toString();
@@ -83,21 +82,32 @@ public class Ui {
 
     /**
      * Displays the opening message from the program.
+     * @return returns the opening message from the program.
      */
     public String getIntro() {
         StringBuilder intro = new StringBuilder();
         intro.append(getLines());
-        intro.append("Hello! I'm Alfred :>\nHow can I help you today?\n");
+        intro.append("Hello! I'm Alfred :>\n");
+        intro.append("How can I help you today?\n");
+        intro.append("Type \"help\" to get all the commands available in the program!\n");
         intro.append(getLines());
         return intro.toString();
     }
 
     /**
      * Displays an empty line that separates commands.
+     * @return returns all the lines.
      */
     public String getLines() {
-        String lines = "    ";
-        lines = lines + "-".repeat(70);
+        String lines = "-".repeat(70);
         return lines + "\n";
+    }
+
+    /**
+     * Creates indentation for sentences.
+     * @return returns the indentation for sentences.
+     */
+    public String getIndent() {
+        return "    ";
     }
 }

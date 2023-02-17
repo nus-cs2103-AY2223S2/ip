@@ -18,21 +18,28 @@ public class InvalidCommandException extends AlfredException {
     private static String getErrorMessage(String command) {
         switch (command) {
         case ("bye"):
-            return "To exit the program type: bye";
+            return "To exit the program type: bye\n";
         case ("list"):
-            return "To list the set of tasks: list";
+            String message = "To list the set of tasks: list\n";
+            message += "OR\n";
+            message += "To list the set of tasks with a given date: list <date>\n";
+            return message;
         case ("mark"):
-            return "To mark a task: mark <task-index>";
+            return "To mark a task: mark <task-index>\n";
         case ("unmark"):
-            return "To unmark a task: unmark <task-index>";
+            return "To unmark a task: unmark <task-index>\n";
         case ("delete"):
-            return "To delete a task: delete <task-index>";
+            return "To delete a task: delete <task-index>\n";
         case("todo"):
-            return "To add a to ToDo task: todo <task-description>";
+            return "To add a to ToDo task: todo <task-description>\n";
         case ("deadline"):
-            return "To add a Deadline task: deadline <TaskName> /by <DueDate>";
+            return "To add a Deadline task: deadline <TaskName> /by <DueDate>\n";
         case ("event"):
-            return "To add an Event task: event <EventName> /from <StartDate> /to <EndDate>";
+            return "To add an Event task: event <EventName> /from <StartDate> /to <EndDate>\n";
+        case ("help"):
+            return "To get all the command: help\n";
+        case ("find"):
+            return "To find tasks with key words: find <key-word>\n";
         default:
             return INVALID_COMMAND;
         }

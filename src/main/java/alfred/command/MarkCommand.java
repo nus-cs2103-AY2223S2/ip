@@ -31,7 +31,8 @@ public class MarkCommand extends Command {
             task.markAsDone();
             String output = "Well done! Good job "
                     + "for completing your task!\n";
-            output += String.format("      %s\n", task);
+            output += ui.getIndent();
+            output += String.format("%s\n", task);
             return ui.getCommandMessage(output);
         } catch (NumberFormatException e) {
             throw new AlfredException("To mark, item you need to pass a valid integer!\n");

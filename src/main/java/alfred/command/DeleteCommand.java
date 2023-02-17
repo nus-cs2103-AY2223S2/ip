@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
             Task task = tasks.getTask(taskIndex);
             tasks.removeTask(taskIndex);
             String output = "Noted. I've removed this task. Remember to clear your remaining tasks!\n";
-            output += String.format("      %s\n", task);
+            output += String.format(ui.getIndent() + "%s\n", task);
             return ui.getCommandMessage(output);
         } catch (NumberFormatException e) {
             throw new AlfredException("To delete, item you need to pass a valid integer!\n");

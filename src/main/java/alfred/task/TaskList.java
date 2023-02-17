@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import alfred.exceptions.AlfredException;
 
@@ -53,8 +52,8 @@ public class TaskList {
         IntStream.range(0, tasks.size())
                 .forEach(index -> listOfItems.append(String.format("    %d. %s\n", index + 1, tasks.get(index))));
 
-        String numTasks = tasks.size() == 1 ? "task" : "tasks";
-        listOfItems.append(String.format("    You have %d %s in the list\n", tasks.size(), numTasks));
+        String numTasks = tasks.size() <= 1 ? "task" : "tasks";
+        listOfItems.append(String.format("You have %d %s in the list\n", tasks.size(), numTasks));
         return listOfItems.toString();
     }
 
@@ -73,8 +72,8 @@ public class TaskList {
                 itemIndex++;
             }
         }
-        String numTasks = (itemIndex - 1) == 1 ? "task" : "tasks";
-        listOfItems.append(String.format("    You have %d %s on %s in the list\n", itemIndex - 1, numTasks, date));
+        String numTasks = (itemIndex - 1) <= 1 ? "task" : "tasks";
+        listOfItems.append(String.format("You have %d %s on %s in the list\n", itemIndex - 1, numTasks, date));
         return listOfItems.toString();
     }
 
@@ -111,8 +110,8 @@ public class TaskList {
                 itemIndex++;
             }
         }
-        String numTasks = (itemIndex - 1) == 1 ? "task" : "tasks";
-        listOfTasks.append(String.format("    You have %d %s in the list with %s", itemIndex - 1, numTasks, keyWords));
+        String numTasks = (itemIndex - 1) <= 1 ? "task" : "tasks";
+        listOfTasks.append(String.format("You have %d %s in the list with %s\n", itemIndex - 1, numTasks, keyWords));
         return listOfTasks.toString();
     }
 
