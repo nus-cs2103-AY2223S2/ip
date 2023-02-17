@@ -29,4 +29,9 @@ public class Todo extends Task {
     public String toData() {
         return "T | " + super.toData();
     }
+
+    @Override
+    public int compareTo(Task other) {
+        return this.description.compareTo(other.description);
+    }
 }

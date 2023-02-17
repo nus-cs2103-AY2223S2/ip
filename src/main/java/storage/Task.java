@@ -4,7 +4,7 @@ package storage;
  * Represents a single task
  * Consists of a description, and it's status (if it's done or not)
  */
-public class Task implements Comparable<Task> {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -56,10 +56,5 @@ public class Task implements Comparable<Task> {
     public String toData() {
         int status = this.isDone ? 1 : 0;
         return String.format("%d | %s", status, this.description);
-    }
-
-    @Override
-    public int compareTo(Task other) {
-        return this.description.compareTo(other.description);
     }
 }

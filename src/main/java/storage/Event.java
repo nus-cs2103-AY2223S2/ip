@@ -47,6 +47,6 @@ public class Event extends Task {
             Event e = (Event) other;
             return this.from.compareTo(e.from);
         }
-        return super.compareTo(other);
+        return this.description.compareTo(other.description);
     }
 }

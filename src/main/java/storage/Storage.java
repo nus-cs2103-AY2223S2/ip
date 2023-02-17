@@ -72,7 +72,7 @@ public class Storage {
                     task = parseAndCreateEvent(lineArr, content);
                     break;
                 default:
-                    task = new Task(content);
+                    task = null;
                     break;
                 }
                 if (status.equals("1")) {

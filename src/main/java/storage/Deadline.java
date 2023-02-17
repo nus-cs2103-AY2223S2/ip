@@ -43,6 +43,6 @@ public class Deadline extends Task {
             Deadline d = (Deadline) other;
             return this.by.compareTo(d.by);
         }
-        return super.compareTo(other);
+        return this.description.compareTo(other.description);
     }
 }
