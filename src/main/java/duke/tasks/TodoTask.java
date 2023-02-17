@@ -10,7 +10,10 @@ public class TodoTask extends Task {
     static final String INDICATOR = "[Todo]";
 
     /**
-     * {@inheritDoc}
+     * Constructor for a Todo task
+     *
+     * @param name Name of Todo task
+     * @throws DukeException If name is empty
      */
     public TodoTask(String name) throws DukeException {
         super(name);

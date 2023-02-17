@@ -13,6 +13,8 @@ public class Duke {
 
     /**
      * Constructor to initialize required components
+     *
+     * @throws DukeException If failed to recover list of tasks
      */
     public Duke() throws DukeException {
         storage = new Storage();
@@ -22,6 +24,7 @@ public class Duke {
 
     /**
      * Executes commands given user input
+     *
      * @param input User input
      * @return String of result from command execution
      * @throws DukeException If command is invalid or there is storage saving issues

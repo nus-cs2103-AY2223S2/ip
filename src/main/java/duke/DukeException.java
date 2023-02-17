@@ -8,6 +8,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructor for DukeException that adds a prefix to the given message
+     *
      * @param message Main body of exception message
      */
     public DukeException(String message) {

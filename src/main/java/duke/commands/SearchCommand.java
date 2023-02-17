@@ -12,7 +12,9 @@ public class SearchCommand extends Command {
     private static final String SEARCH_RESPONSE = "Here are the task search results:";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that searches through list of tasks
+     *
+     * @param input User's input
      */
     public SearchCommand(String input) {
         super(input);

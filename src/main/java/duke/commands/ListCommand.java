@@ -13,7 +13,9 @@ public class ListCommand extends Command {
     private static final String LIST_RESPONSE = "Current tasks in list:";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that lists current tasks
+     *
+     * @param input User's input
      */
     public ListCommand(String input) {
         super(input);

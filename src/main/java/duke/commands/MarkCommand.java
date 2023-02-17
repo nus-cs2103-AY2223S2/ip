@@ -11,7 +11,9 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that marks a task
+     *
+     * @param input User's input
      */
     public MarkCommand(String input) {
         super(input);

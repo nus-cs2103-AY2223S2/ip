@@ -21,6 +21,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Constructor for a task
+     *
      * @param name Given task name
      * @throws DukeException if no name is provided
      */
@@ -54,6 +55,7 @@ public abstract class Task implements Serializable {
 
     /**
      * Checks if name of task contains the keyword
+     *
      * @param keyword to be checked against the name
      * @return Boolean indicating presence of keyword
      */

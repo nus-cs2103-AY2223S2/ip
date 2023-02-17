@@ -14,7 +14,9 @@ public class EventCommand extends Command {
     private static final String PERIOD_END_PREFIX = "/to ";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that creates an Event task
+     *
+     * @param input User's input
      */
     public EventCommand(String input) {
         super(input);

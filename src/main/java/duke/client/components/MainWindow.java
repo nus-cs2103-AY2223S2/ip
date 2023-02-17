@@ -22,14 +22,8 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
-    public static final String EXIT_MESSAGE = "Farewell. Always at your service.";
+    public static final String EXIT_MESSAGE = "Farewell, closing in a bit...";
     public static final String GREET_MESSAGE = "Hello, I'm Ekud! What can I do for you?";
-    private static final String LOGO =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
 
     enum MessageOwner {
         DUKE,
@@ -52,6 +46,8 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(userImageResource);
     private final Image dukeImage = new Image(dukeImageResource);
 
+    private boolean isExiting = false;
+
     /**
      * Initializes main window component in GUI
      */
@@ -71,6 +67,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        // Stop accepting inputs if exit is scheduled
+        if (isExiting) {
+            return;
+        }
+
         String input = userInput.getText();
         displayMessage(input, MessageOwner.USER);
 
@@ -80,17 +81,22 @@ public class MainWindow extends AnchorPane {
         } catch (DukeException exception) {
             response = exception.getMessage();
         }
+        userInput.clear();
+
         if (response.equals(Duke.TERMINATION_INDICATION)) {
+            isExiting = true;
             showExitMessage();
-            Launcher.exit();
+//            Launcher.exit();
+            Launcher.scheduleExit();
             return;
         }
+
         displayMessage(response, MessageOwner.DUKE);
-        userInput.clear();
     }
 
+
     public void showStartMessage() {
-        displayMessage(GREET_MESSAGE + LOGO, MessageOwner.DUKE);
+        displayMessage(GREET_MESSAGE, MessageOwner.DUKE);
     }
     public void showExitMessage() {
         displayMessage(EXIT_MESSAGE, MessageOwner.DUKE);
@@ -103,4 +109,5 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDialog(message, ownerImage, isFlipped)
         );
     }
+
 }

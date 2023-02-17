@@ -26,6 +26,7 @@ public class TaskList implements Serializable {
 
     /**
      * Add a task to the list
+     *
      * @param task Task to be added
      * @return String result of adding task
      */
@@ -39,6 +40,7 @@ public class TaskList implements Serializable {
 
     /**
      * Mark task in list as completed
+     *
      * @param taskIndex Index of task in list
      * @return Result of marking task
      * @throws DukeException If index is invalid
@@ -53,6 +55,7 @@ public class TaskList implements Serializable {
 
     /**
      * Unmark task in list as completed
+     *
      * @param taskIndex Index of task in list
      * @return String result of unmarking task
      * @throws DukeException If index is invalid
@@ -67,6 +70,7 @@ public class TaskList implements Serializable {
 
     /**
      * Delete task in list
+     *
      * @param taskIndex Index of task in list
      * @return String result of deleting task
      * @throws DukeException If index is invalid
@@ -83,6 +87,7 @@ public class TaskList implements Serializable {
 
     /**
      * Searches list of tasks for any that has similar keyword
+     *
      * @param keyword Word to be searched amongst tasks
      * @return String result of all matched tasks
      */

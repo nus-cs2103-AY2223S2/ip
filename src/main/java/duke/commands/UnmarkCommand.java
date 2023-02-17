@@ -11,7 +11,9 @@ public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that unmarks a task
+     *
+     * @param input User's input
      */
     public UnmarkCommand(String input) {
         super(input);

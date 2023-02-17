@@ -12,7 +12,9 @@ public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that creates a Todo task
+     *
+     * @param input User's input
      */
     public TodoCommand(String input) {
         super(input);

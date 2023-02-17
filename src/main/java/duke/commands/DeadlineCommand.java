@@ -13,7 +13,9 @@ public class DeadlineCommand extends Command {
     private static final String DEADLINE_PREFIX = "/by ";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that creates a Deadline task
+     *
+     * @param input User's input
      */
     public DeadlineCommand(String input) {
         super(input);

@@ -27,14 +27,20 @@ public class Main extends Application {
             Duke duke = new Duke();
             URL mainWindowResource = Main.class.getResource(RESOURCE_PATH);
             FXMLLoader fxmlLoader = new FXMLLoader(mainWindowResource);
+
             AnchorPane anchorPane = fxmlLoader.load();
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().initialize();
+
             stage.show();
         } catch (IOException | DukeException exception) {
             exception.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() {
     }
 }

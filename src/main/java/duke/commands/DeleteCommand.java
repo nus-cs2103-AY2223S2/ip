@@ -11,7 +11,9 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     /**
-     * {@inheritDoc}
+     * Constructor for command that deletes a task
+     *
+     * @param input User's input
      */
     public DeleteCommand(String input) {
         super(input);

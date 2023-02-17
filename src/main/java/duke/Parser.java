@@ -29,6 +29,7 @@ public class Parser {
 
     /**
      * Parses user input into a Command
+     *
      * @param input User input
      * @return Support Duke command
      * @throws DukeException If command keyword in input is invalid

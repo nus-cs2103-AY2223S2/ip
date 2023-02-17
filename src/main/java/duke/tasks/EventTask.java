@@ -15,6 +15,7 @@ public class EventTask extends Task {
     static final String PERIOD_END_PREFIX_REPLACEMENT = " | TO: ";
     private static final String INVALID_DATE_EXCEPTION = "Incompatible date format given for start/end of Event";
 
+    private static final String DATE_FORMAT = "MMM dd yyyy";
     private final LocalDate startDate;
     private final LocalDate endDate;
 
@@ -44,9 +45,9 @@ public class EventTask extends Task {
      * @return Formatted period
      */
     private static String formattedPeriod(LocalDate startDate, LocalDate endDate) {
-        // TODO: Abstract into util function
-        String startDateString = startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        String endDateString = endDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        String startDateString = startDate.format(formatter);
+        String endDateString = endDate.format(formatter);
 
         // (FROM: DATE | TO: DATE)
         return String.format(Task.EXTRAS_FORMAT_TEMPLATE, PERIOD_BEGIN_PREFIX_REPLACEMENT + startDateString
