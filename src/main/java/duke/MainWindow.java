@@ -1,9 +1,9 @@
 package duke;
 
-import duke.helpers.UI;
 import java.io.IOException;
 import java.util.Objects;
 
+import duke.helpers.UI;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -29,6 +29,9 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(
             "/images/DaDuke.png")));
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     */
     @FXML
     public void initialize() {
         startUp();

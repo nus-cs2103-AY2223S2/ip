@@ -58,7 +58,7 @@ public class TaskList {
      * @return Task that was marked as completed.
      */
     public Task mark(int index) {
-        assert index < tasks.size(): "index over boundary";
+        assert index < tasks.size() : "index over boundary";
         Task task = tasks.get(index - 1);
         task.setDone();
         return task;
@@ -71,7 +71,7 @@ public class TaskList {
      * @return Task that was marked as incomplete.
      */
     public Task unmark(int index) {
-        assert index < tasks.size(): "index over boundary";
+        assert index < tasks.size() : "index over boundary";
         Task task = tasks.get(index - 1);
         task.setUndone();
         return task;
@@ -85,7 +85,7 @@ public class TaskList {
      * @return Task that was deleted.
      */
     public Task delete(int index) {
-        assert index < tasks.size(): "index over boundary";
+        assert index < tasks.size() : "index over boundary";
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
         return task;
@@ -155,7 +155,7 @@ public class TaskList {
 
         try {
             this.db.saveTasks(toWrite);
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             System.out.println("error saving tasks");
         }
 
