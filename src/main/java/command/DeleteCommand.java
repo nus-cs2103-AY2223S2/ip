@@ -11,7 +11,7 @@ import task.TaskList;
  * Command for deleting a task
  */
 public class DeleteCommand extends TaskCommand {
-    private static int NUM_COMPONENTS = 2;
+    private static final int NUM_COMPONENTS = 2;
 
     /**
      * Default constructor

@@ -4,7 +4,7 @@ package duke;
  * Exception for unrecognized command
  */
 public class NotRecognizedCommandDukeException extends DukeException {
-    private static String ERROR_MESSAGE = "The command could not be recognized!";
+    private static final String ERROR_MESSAGE = "The command could not be recognized!";
 
     /**
      * Constructor.

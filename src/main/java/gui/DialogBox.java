@@ -18,18 +18,18 @@ import javafx.scene.paint.Color;
  * An object to show a dialog box
  */
 public class DialogBox extends HBox {
-    private static double WIDTH = 100.0;
-    private static double HEIGHT = 100.0;
-    private static double BORDER_WIDTH = 8;
-    private static double cornerRadius = 10;
+    private static final double WIDTH = 100.0;
+    private static final double HEIGHT = 100.0;
+    private static final double BORDER_WIDTH = 8;
+    private static final double cornerRadius = 10;
 
     /*
     More info about color can be found at
     https://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html
      */
-    private static Color userBoxColor = Color.ALICEBLUE;
-    private static Color dukeBoxColor = Color.LIGHTSKYBLUE;
-    private static Color errorColor = Color.PINK;
+    private static final Color userBoxColor = Color.ALICEBLUE;
+    private static final Color dukeBoxColor = Color.LIGHTSKYBLUE;
+    private static final Color errorColor = Color.PINK;
 
     /**
      * Constructor

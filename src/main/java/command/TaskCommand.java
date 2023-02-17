@@ -12,6 +12,7 @@ import task.TaskList;
  * A class for many tasks
  */
 public class TaskCommand extends Command {
+    protected static final int SECOND_CHAR_INDEX = 1;
     protected final String commandName;
 
     /**
@@ -34,7 +35,6 @@ public class TaskCommand extends Command {
      * @return a new string whose first character is capitalized
      */
     protected String captalizeFirstChar(String string) {
-        int SECOND_CHAR_INDEX = 1;
         return string.substring(0, SECOND_CHAR_INDEX).toUpperCase() + string.substring(SECOND_CHAR_INDEX);
     }
 

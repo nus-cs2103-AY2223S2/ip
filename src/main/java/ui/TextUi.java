@@ -7,9 +7,9 @@ import java.util.Scanner;
  * The text UI interface that processes user input and prints outputs
  */
 public class TextUi {
-    private static String BYE_STRING = "bye";
-    private static String WELCOME_STRING = "Hello! I'm %s\nWhat can I do for you?";
-    private static String BYE_REPLY_STRING = "Bye. Hope to see you again soon!\n";
+    private static final String BYE_STRING = "bye";
+    private static final String WELCOME_STRING = "Hello! I'm %s\nWhat can I do for you?";
+    private static final String BYE_REPLY_STRING = "Bye. Hope to see you again soon!\n";
 
     protected final String name;
     protected final Scanner scanner;

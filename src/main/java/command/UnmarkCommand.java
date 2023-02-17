@@ -11,7 +11,7 @@ import task.TaskList;
  * Mark a task as undone
  */
 public class UnmarkCommand extends Command {
-    private static int NUM_COMPONENTS = 2;
+    private static final int NUM_COMPONENTS = 2;
 
     /**
      * Default constructor

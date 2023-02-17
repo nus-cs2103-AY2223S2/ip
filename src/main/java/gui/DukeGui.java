@@ -21,7 +21,7 @@ import java.util.Objects;
  * The class that starts the GUI application and interacts with the user.
  */
 public class DukeGui extends Application {
-    private static String SEND_BUTTON_TEXT = "Send";
+    private static final String SEND_BUTTON_TEXT = "Send";
 
     private final Image userImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/user.jpg")));

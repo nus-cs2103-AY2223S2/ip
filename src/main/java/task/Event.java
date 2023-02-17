@@ -11,8 +11,8 @@ import ui.Parser;
  * An even should have a start and an end date.
  */
 public class Event extends Task {
-    protected final String START_DATE_KEYWORD = "/from";
-    protected final String END_DATE_KEYWORD = "/to";
+    protected static final String START_DATE_KEYWORD = "/from";
+    protected static final String END_DATE_KEYWORD = "/to";
     protected LocalDate startTime;
     protected LocalDate endTime;
 

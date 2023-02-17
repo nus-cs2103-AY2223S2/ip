@@ -8,9 +8,9 @@ import task.TaskList;
  * Command for exiting from the program
  */
 public class ExitCommand extends Command {
-    private final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String BYE_STRING = "bye";
-    private static int NUM_COMPONENTS = 1;
+    private static final int NUM_COMPONENTS = 1;
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
      * Default constructor

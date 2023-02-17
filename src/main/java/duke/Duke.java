@@ -17,10 +17,10 @@ import ui.TextUi;
  * to users.
  */
 public class Duke {
-    public final String NAME = "TaskWizard";
-    protected final String RECORD_DIR = "./data";
-    protected final String RECORD_NAME = "/duke.txt";
-    protected final String NUMBER_FORMAT_ERROR = "Please specify the index.";
+    protected static final String NAME = "TaskWizard";
+    protected static final String RECORD_DIR = "./data";
+    protected static final String RECORD_NAME = "/duke.txt";
+    protected static final String NUMBER_FORMAT_ERROR = "Please specify the index.";
     protected final TextUi ui;
     protected final TaskList taskList;
     protected final ArrayList<String> commandList;

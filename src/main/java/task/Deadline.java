@@ -1,6 +1,7 @@
 package task;
 
 import duke.DukeException;
+import duke.IncompleteCommandDukeException;
 
 import java.time.LocalDate;
 
@@ -11,8 +12,8 @@ import ui.Parser;
  * It has a deadline attribute on top of the task.
  */
 public class Deadline extends Task {
+    protected static final String DEADLINE_KEYWORD = "/by";
     protected LocalDate time;
-    protected final String DEADLINE_KEYWORD = "/by";
 
     /***
      * Constructor.
@@ -22,7 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description) throws DukeException {
         super();
-        int indexOfBy = getIndexOfBye(description);
+        int indexOfBy = getIndexOfBy(description);
         this.time = parseDeadline(description);
         this.name = description.substring(0, indexOfBy - " ".length());
         this.type = "D";
@@ -34,7 +35,7 @@ public class Deadline extends Task {
      * @return the index of the bye keyword
      * @throws DukeException when the keyword cannot be found
      */
-    private int getIndexOfBye(String description) throws DukeException {
+    private int getIndexOfBy(String description) throws DukeException {
         return getKeywordIndex(description, DEADLINE_KEYWORD);
     }
 
@@ -44,8 +45,13 @@ public class Deadline extends Task {
      * @throws DukeException when the deadline is unrecognizable or incomplete
      */
     private LocalDate parseDeadline(String description) throws DukeException {
-        int indexOfBy = getIndexOfBye(description);
-        return Parser.parseDate(description.substring(indexOfBy + (DEADLINE_KEYWORD + " ").length()));
+        int indexOfBy = getIndexOfBy(description);
+        try {
+            String deadline = description.substring(indexOfBy + (DEADLINE_KEYWORD + " ").length());
+            return Parser.parseDate(deadline);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new IncompleteCommandDukeException("The deadline date cannot be parsed. ");
+        }
     }
 
     /**

@@ -6,7 +6,7 @@ import duke.DukeException;
  * Command for to-do tasks.
  */
 public class TodoCommand extends TaskCommand {
-    private static int NUM_COMPONENTS = 2;
+    private static final int NUM_COMPONENTS = 2;
 
     /**
      * Constructor

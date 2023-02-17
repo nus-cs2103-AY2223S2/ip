@@ -4,7 +4,7 @@ package duke;
  * Exception for incomplete command
  */
 public class IncompleteCommandDukeException extends DukeException {
-    private static String ERROR_MESSAGE = "The command seems incomplete!";
+    private static final String ERROR_MESSAGE = "The command seems incomplete!";
 
     /**
      * Constructor.

@@ -9,7 +9,7 @@ import task.TaskList;
  * A command for finding a class
  */
 public class FindCommand extends TaskCommand {
-    private static int NUM_COMPONENTS = 2;
+    private static final int NUM_COMPONENTS = 2;
 
     /**
      * Default constructor
