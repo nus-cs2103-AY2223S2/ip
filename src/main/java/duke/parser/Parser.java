@@ -42,7 +42,7 @@ public class Parser {
     }
 
     private Command parseTodoCommand(String userInput) {
-        String[] tokens = userInput.split(" ");
+        String[] tokens = userInput.split(" ", 2);
         if (tokens.length <= 1 || tokens[1].isEmpty()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
