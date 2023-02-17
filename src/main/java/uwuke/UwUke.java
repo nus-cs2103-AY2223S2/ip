@@ -25,7 +25,7 @@ public class UwUke extends Application {
     private static Stage stage;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
 
     @Override
     public void start(Stage stage) {
