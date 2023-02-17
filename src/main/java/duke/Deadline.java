@@ -23,6 +23,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public int containsDate() {
+        return 1;
+    }
+
+    public LocalDate getDate() {
+        return this.byDate;
+    }
+
+    @Override
     public String toString() {
         String datePattern = "MMM d yyyy";
         return "[D]" + super.toString() + " (by: "

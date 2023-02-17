@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A custom class to store tasks given by the user.
@@ -50,6 +52,13 @@ public class TaskList {
      */
     public Task getTask(int taskNumber) {
         return this.tasks.get(taskNumber - 1);
+    }
+
+    public void sortTasks(TaskList taskList, Comparator<Task> comparator) {
+        Collections.sort(taskList.tasks, comparator);
+        for (Task t : taskList.tasks) {
+            System.out.println(t);
+        }
     }
 
     /**

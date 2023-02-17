@@ -29,6 +29,15 @@ public class Event extends Task {
     }
 
     @Override
+    public int containsDate() {
+        return 1;
+    }
+
+    public LocalDate getDate() {
+        return this.startDate;
+    }
+
+    @Override
     public String toString() {
         String datePattern = "MMM d yyyy";
         return "[E]" + super.toString() + " (from: "
