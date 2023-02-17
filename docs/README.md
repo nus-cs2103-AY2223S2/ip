@@ -26,6 +26,8 @@ Well, here's the solution you need!
 * **Edit** descriptions! (*editing times coming soon* >:D)
 * **Filter**, **Find** & **Sort**!
 
+Enjoy flexible inputs with a range of aliases and datetime formats!
+
 ---
 
 ## Commands
