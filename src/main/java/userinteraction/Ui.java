@@ -25,13 +25,13 @@ public class Ui {
      * @return Returns the welcome message.
      */
     public String printWelcomeMsg() {
-        String LOGO = "\t  ____        _        \n"
+        String logo = "\t  ____        _        \n"
                 + "\t |  _ \\ _   _| | _____ \n"
                 + "\t | | | | | | | |/ / _ \\\n"
                 + "\t | |_| | |_| |   <  __/\n"
                 + "\t |____/ \\__,_|_|\\_\\___|\n";
 
-        String str = LOGO + "\t Hello! I am Duke.\n"
+        String str = logo + "\t Hello! I am Duke.\n"
                 + "\t What can I do for you?\n";
         return str;
     }
@@ -112,8 +112,14 @@ public class Ui {
     public String printHelpMsg(Storage storage) {
         return storage.loadHelpExplanationFile();
     }
+
+    /**
+     * Display the bye message when exit the program.
+     *
+     * @return The bye message.
+     */
     public String printByeMsg() {
-        String BYE_MSG = "\t Bye. Hope to see you again soon!";
-        return BYE_MSG;
+        String byeMsg = "\t Bye. Hope to see you again soon!";
+        return byeMsg;
     }
 }
