@@ -80,6 +80,7 @@ public class Duke {
             } else if (cmd.startsWith("find")) {
                 out = findTask(cmd);
             } else if (cmd.equals("help")) {
+                // Extension: C-Help
                 out = getHelp();
             } else if (cmd.equals("retrieve data")) {
                 out = retrieveData();
@@ -187,6 +188,7 @@ public class Duke {
         return ui.showFoundTasks(list.findTask(str));
     }
 
+    // Extension: C-Help
     /**
      * Get help menu
      * @return Help menu

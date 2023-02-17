@@ -145,6 +145,7 @@ public class UI {
         return e.toString();
     }
 
+    // Extension: C-Help
     /**
      * Displays help menu
      * @return Help menu
