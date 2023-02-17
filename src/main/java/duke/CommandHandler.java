@@ -175,15 +175,11 @@ public class CommandHandler {
     }
 
     private String findTasks(String taskToFind, TaskList taskList) {
-        String response = "";
-        TaskList foundTasks = taskList.find(taskToFind);
-        if (foundTasks.isEmpty()) {
+        String response = taskList.find(taskToFind);
+        if (response.isEmpty()) {
             response = "You don't have any tasks matching that description!\n";
         } else {
-            response = "I found these tasks in your task list!\n";
-            for (Task t : foundTasks.getTasks()) {
-                response += t.printTask() + "\n";
-            }
+            response = "I found these tasks in your task list!\n" + response;
         }
         return response;
     }

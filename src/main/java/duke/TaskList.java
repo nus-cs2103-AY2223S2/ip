@@ -67,14 +67,15 @@ public class TaskList {
         return this.lst.size();
     }
 
-    public TaskList find(String taskToFind) {
-        TaskList foundTasks = new TaskList();
-        for (Task t : this.lst) {
-            if (t.getDescription().contains(taskToFind)) {
-                foundTasks.add(t);
+    public String find(String taskToFind) {
+        String response = "";
+
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).getDescription().contains(taskToFind)) {
+                response += String.format("%d. %s \n", (i + 1), this.get(i).printTask());
             }
         }
-        return foundTasks;
+        return response;
     }
     
 }
