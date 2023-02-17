@@ -108,6 +108,11 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Processes descriptive requests given by the user.
+     * @param parsedRequest
+     * @throws LeoTaskException
+     */
     public void processDescriptiveRequest(String[] parsedRequest) throws LeoTaskException{
         try {
             if (parsedRequest.length <= 1) {
@@ -135,6 +140,11 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Processes the request given by the user for GUI.
+     * @param parsedRequest
+     * @throws LeoTaskException
+     */
     public String processRequestGUI(String[] parsedRequest) throws LeoTaskException {
         String response = "";
         if (!Task.commands.contains(parsedRequest[0])) {
@@ -159,6 +169,11 @@ public class TaskList implements Serializable {
         return response;
     }
 
+    /**
+     * Processes descriptive requests given by the user for GUI.
+     * @param parsedRequest
+     * @throws LeoTaskException
+     */
     public String processDescriptiveRequestGUI(String[] parsedRequest) throws LeoTaskException {
         String response = "";
         if (parsedRequest.length <= 1) {
