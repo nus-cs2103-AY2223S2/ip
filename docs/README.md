@@ -30,6 +30,10 @@ Deletes task.
 
 Lists all completed and incompleted tasks.
 
+### Sort task list: sort
+
+Sorts the task list by task name.
+
 ## Keyword Usage 🔑
 
 ### todo
@@ -45,11 +49,9 @@ Expected outcome:
 Outputs success message.
 
 ```
-____________________________________________________________
   Got it. I've added this task:
     [T][ ] read a book
   Now you have 1 task in the list.
-____________________________________________________________
 ```
 
 ### deadline
@@ -65,11 +67,9 @@ Expected outcome:
 Outputs success message.
 
 ```
-____________________________________________________________
   Got it. I've added this task:
     [D][ ] return book (by: Jan 1 2050)
   Now you have 2 tasks in the list.
-____________________________________________________________
 ```
 
 ### event
@@ -85,11 +85,9 @@ Expected outcome:
 Outputs success message.
 
 ```
-____________________________________________________________
   Got it. I've added this task:
     [E][ ] reading event (from: Jan 1 2050 to: Jan 2 2050)
   Now you have 3 tasks in the list.
-____________________________________________________________
 ```
 
 ### mark
@@ -105,11 +103,9 @@ Expected outcome:
 Outputs success message.
 
 ```
-____________________________________________________________
   Got it. I've marked this task:
     [T][X] read a book
   Now you have 3 task in the list.
-____________________________________________________________
 ```
 
 ### unmark
@@ -125,11 +121,9 @@ Expected outcome:
 Outputs success message.
 
 ```
-____________________________________________________________
   Got it. I've unmarked this task:
     [T][ ] read a book
   Now you have 3 task in the list.
-____________________________________________________________
 ```
 
 ### delete
@@ -145,11 +139,9 @@ Expected outcome:
 Outputs success message.
 
 ```
-____________________________________________________________
   Noted. I've removed this task:
     [T][ ] read a book
   Now you have 2 tasks in the list.
-____________________________________________________________
 ```
 
 ### list
@@ -165,10 +157,24 @@ Expected outcome:
 Outputs the list of tasks.
 
 ```
-____________________________________________________________
   Here are the tasks in your list:
   1.[T][ ] borrow book
   2.[D][ ] return book (by: Jan 1 2050)
   3.[E][ ] book event (from: Jan 1 2050 to: Jan 2 2050)
-____________________________________________________________
+```
+
+### sort
+
+Sorts task list by task name and outputs success message.
+
+Example of usage: 
+
+`sort`
+
+Expected outcome:
+
+Outputs the list of tasks.
+
+```
+The list has been sorted.
 ```
