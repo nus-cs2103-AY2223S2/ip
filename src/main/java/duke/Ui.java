@@ -25,6 +25,7 @@ public class Ui {
     }
 
     public static void receiveInput(String input) {
+        assert !input.isEmpty();
         Ui.input = input;
     }
 
