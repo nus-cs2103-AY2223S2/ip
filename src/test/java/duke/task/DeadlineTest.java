@@ -10,14 +10,14 @@ import duke.exception.DukeException;
 public class DeadlineTest {
     @Test
     public void toString_validDateTime_success() throws DukeException {
-        assertEquals("[D][ ] return book\n(by: Tue 02-09-2025 12:22PM)",
+        assertEquals("[D][ ] return book\n(by: Tue 02-09-2025 12:22)",
                 new Deadline("return book /by 2025-09-02 12:22").toString());
     }
 
     @Test
     public void toString_invalidDateTime_dukeExceptionThrown() {
         try {
-            assertEquals("[D][ ] return book\n(by: Tue 02-09-2025 12:22PM)",
+            assertEquals("[D][ ] return book\n(by: Tue 02-09-2025 12:22)",
                     new Deadline("return book /by 2025-09-02 12:22:33").toString());
             fail();
         } catch (DukeException e) {
