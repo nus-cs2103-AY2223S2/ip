@@ -28,17 +28,5 @@
 Features:
 
 Managing tasks
-Managing deadlines (coming soon)
+Managing deadlines (**NEWLY ADDED FEATURE!**)
 Reminders (coming soon)
-
-If you're a Java programmer, you can use it to practice Java too. Here's the main method:
-
-  public class DOOK{
-
-      public static void main(String[] args) {
-
-          new DOOK(<filePath>).run();
-
-      }
-
-  }
