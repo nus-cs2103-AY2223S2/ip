@@ -33,19 +33,19 @@ public class Event extends Task {
      */
     public static Event generate(String input) throws DukeException {
         if (input.trim().equals("event")) {
-            throw new DukeException("\t ☹ OOPS!!! The description of a event cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The description of a event cannot be empty.\n");
         }
         String[] inputLine = input.split(" ", 2);
         if (inputLine.length < 2) {
-            throw new DukeException("\t ☹ OOPS!!! The description of a event cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The description of a event cannot be empty.\n");
         }
         String[] startEndTime = inputLine[1].split(" /from ");
         if (startEndTime.length < 2) {
-            throw new DukeException("\t ☹ OOPS!!! The start time of a event cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The start time of a event cannot be empty.\n");
         }
         String[] dateTime = startEndTime[1].split(" /to ");
         if (dateTime.length < 2) {
-            throw new DukeException("\t ☹ OOPS!!! The end time of a event cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The end time of a event cannot be empty.\n");
         }
         return new Event(startEndTime[0], false,
                 DateTime.dateFormatter(dateTime[0]), DateTime.dateFormatter(dateTime[1]));

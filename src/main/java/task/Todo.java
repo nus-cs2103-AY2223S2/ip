@@ -27,11 +27,11 @@ public class Todo extends Task {
      */
     public static Todo generate(String input) throws DukeException {
         if (input.trim().equals("todo")) {
-            throw new DukeException("\t ☹ OOPS!!! The description of a todo cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The description of a todo cannot be empty.\n");
         }
         String[] inputLine = input.split(" ", 2);
         if (inputLine.length < 2) {
-            throw new DukeException("\t ☹ OOPS!!! The description of a todo cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The description of a todo cannot be empty.\n");
         }
         return new Todo(inputLine[1], false);
     }

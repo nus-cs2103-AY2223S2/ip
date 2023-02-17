@@ -100,7 +100,7 @@ public class Ui {
      * @return The invalid command message being displayed.
      */
     public String printWrongMsg() {
-        String str = "\t ☹ OOPS!!! I'm sorry, but I don't know what that means.\n";
+        String str = "\t OOPS!!! I'm sorry, but I don't know what that means.\n";
         return str;
     }
 

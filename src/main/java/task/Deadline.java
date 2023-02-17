@@ -30,15 +30,15 @@ public class Deadline extends Task {
      */
     public static Deadline generate(String input) throws DukeException {
         if (input.trim().equals("deadline")) {
-            throw new DukeException("\t ☹ OOPS!!! The description of a deadline cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The description of a deadline cannot be empty.\n");
         }
         String[] inputLine = input.split(" ", 2);
         if (inputLine.length < 2) {
-            throw new DukeException("\t ☹ OOPS!!! The description of a deadline cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The description of a deadline cannot be empty.\n");
         }
         String[] descriptions = inputLine[1].split(" /by ", 2);
         if (descriptions.length < 2) {
-            throw new DukeException("\t ☹ OOPS!!! The date time of a deadline cannot be empty.\n");
+            throw new DukeException("\t OOPS!!! The date time of a deadline cannot be empty.\n");
         }
         return new Deadline(descriptions[0], false,
                 DateTime.dateFormatter(descriptions[1]));

@@ -33,7 +33,7 @@ public class Parser {
             return new DeleteTaskCommand(input);
         } else if (input.startsWith("find")) {
             return new FindTaskCommand(input);
-        } else if (input.startsWith("help")) {
+        } else if (input.equals("help")) {
             return new HelpCommand(input);
         } else {
             return new InvalidCommand(input);
