@@ -1,25 +1,24 @@
 package duke.storage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import duke.Deadline;
 import duke.Event;
 import duke.Task;
-import duke.Todo;
 import duke.TaskList;
+import duke.Todo;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
+/**
+ * Storage class to handle all files related activities such as creation of duke.txt,
+ * loading and saving data from duke.txt.
+ */
 public class Storage {
-    /**
-     * Storage class to handle all files related activities such as creation of duke.txt,
-     * loading and saving data from duke.txt.
-     */
     private String filePath;
 
     /**
@@ -77,15 +76,17 @@ public class Storage {
                 String[] data = sc.nextLine().split(" \\| ");
                 Task task = null;
                 switch (data[0]) {
-                    case "T":
-                        task = new Todo(data[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(data[2], data[3]);
-                        break;
-                    case "E":
-                        task = new Event(data[2], data[3], data[4]);
-                        break;
+                case "T":
+                    task = new Todo(data[2]);
+                    break;
+                case "D":
+                    task = new Deadline(data[2], data[3]);
+                    break;
+                case "E":
+                    task = new Event(data[2], data[3], data[4]);
+                    break;
+                default:
+                    task = null;
                 }
                 if (data[1].equals("1")) {
                     task.marked();

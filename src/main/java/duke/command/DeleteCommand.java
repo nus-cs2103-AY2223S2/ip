@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.ui.Ui;
 import duke.Task;
+import duke.TaskList;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
+/**
+ * Handles the appropriate tasks when performing a DeleteCommand by Duke.
+ */
 public class DeleteCommand extends Command {
-    /**
-     * Handles the appropriate tasks when performing an DeleteCommand by Duke.
-     */
     private int taskID;
 
     /**

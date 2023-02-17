@@ -1,10 +1,13 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
-public class ListCommand extends Command{
+/**
+ * Handles the appropriate tasks when performing a ListCommand by Duke.
+ */
+public class ListCommand extends Command {
     /**
      * Overridden method to handle the specific tasks to be carried out when listing out all tasks from the Duke's list.
      * @param tasks a list of tasks.

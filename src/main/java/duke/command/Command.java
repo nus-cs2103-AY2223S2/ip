@@ -1,18 +1,17 @@
 package duke.command;
 
-import duke.Duke;
 import duke.TaskList;
 import duke.exception.DukeException;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
+/**
+ * Represents the abstract Command class which serves as a base template to handle all possible commands by Duke.
+ */
 public abstract class Command {
-    /**
-     * Represents the abstract Command class which serves as a base template to handle all possible commands by Duke.
-     */
 
     /**
-     *
+     * Abstract init method for command class.
      * @param tasks a list of tasks.
      * @param ui Ui class to handle display messages.
      * @param storage Storage to handle saving/loading of data to/from the list of task.

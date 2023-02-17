@@ -1,8 +1,10 @@
 package duke;
+
+/**
+ * Represents the abstract Task class which serves as a base template to handle all possible Tasks
+ */
 public abstract class Task {
-    /**
-     * Represents the abstract Task class which serves as a base template to handle all possible Tasks
-     */
+
     protected String description;
     protected boolean isDone;
 

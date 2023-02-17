@@ -3,9 +3,19 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class to handle all event task
+ */
 public class Event extends Task {
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
+
+    /**
+     * Constructor for Event
+     * @param description
+     * @param startDate
+     * @param endDate
+     */
     public Event(String description, String startDate, String endDate) {
         super(description);
         this.startDate = LocalDateTime.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));

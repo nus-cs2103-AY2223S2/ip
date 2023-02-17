@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * TaskList class to handle all operations relating to tasks.
+ */
 public class TaskList extends ArrayList<Task> {
-    /**
-     * TaskList class to handle all operations relating to tasks.
-     */
     private List<Task> taskList;
 
     /**
@@ -74,6 +73,11 @@ public class TaskList extends ArrayList<Task> {
         return taskList.isEmpty();
     }
 
+    /**
+     * Find any task with the given keyword
+     * @param keyword
+     * @return a list of task
+     */
     public List<Task> find(String keyword) {
         assert keyword != null : "Keyword should not be empty";
         return this.taskList.stream().filter(x -> x.description.contains(keyword)).collect(Collectors.toList());

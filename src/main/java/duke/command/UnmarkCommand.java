@@ -2,9 +2,12 @@ package duke.command;
 
 import duke.Task;
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
+/**
+ * Handles the appropriate tasks when performing a unMarkCommand by Duke.
+ */
 public class UnmarkCommand extends Command {
     private int taskID;
 

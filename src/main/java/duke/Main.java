@@ -26,7 +26,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            stage.setOnCloseRequest( e-> Platform.exit());
+            stage.setOnCloseRequest(e-> Platform.exit());
 
         } catch (IOException e) {
             e.printStackTrace();

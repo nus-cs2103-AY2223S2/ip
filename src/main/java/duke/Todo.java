@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Todo class to handle Todo task
+ */
 public class Todo extends Task {
     /**
      * Constructor method for Todo

@@ -1,10 +1,13 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.ui.Ui;
 import duke.Task;
+import duke.TaskList;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
+/**
+ * Handles the appropriate tasks when performing a MarkCommand by Duke.
+ */
 public class MarkCommand extends Command {
 
     private int taskID;

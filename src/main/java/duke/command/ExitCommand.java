@@ -1,10 +1,13 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 import javafx.application.Platform;
 
+/**
+ * Handles the appropriate tasks when performing an ExitCommand by Duke.
+ */
 public class ExitCommand extends Command {
 
     /**
