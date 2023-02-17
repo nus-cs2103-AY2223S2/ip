@@ -1,0 +1,15 @@
+.scroll-pane{
+   -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+   -fx-background-color: transparent;
+}
+
+.dialog-container {
+    -fx-background-image: url(../images/index_background.png);
+    -fx-background-size: 100%;
+    -fx-background-position: bottom;
+    -fx-padding: 10;
+}
+
