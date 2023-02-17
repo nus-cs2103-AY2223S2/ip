@@ -2,8 +2,8 @@
 
 ![UI](DOOKui.png)
 
-**“My unmatched perspicacity, coupled with sheer indefatigability, makes me a feared opponent in any realm of human endeavor.” 
-– Andrew Tate **
+**“My unmatched perspicacity, coupled with sheer indefatigability, makes me a feared opponent in any realm of human endeavor.”**
+– Andrew Tate
 
 * DOOK frees your mind of having to remember things you need to do. It's,
   * text-based
