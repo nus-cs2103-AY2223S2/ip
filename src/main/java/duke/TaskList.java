@@ -92,6 +92,10 @@ public class TaskList {
     protected String listTasks() {
         String listOfTasks = "";
 
+        if (tasks.size() == 0) {
+            return "You currently have no tasks!";
+        }
+
         for (int idx = 0; idx < tasks.size(); idx++) {
             Task task = this.tasks.get(idx);
             listOfTasks = listOfTasks + "  " + (idx + 1) + "." + task + "\n";
