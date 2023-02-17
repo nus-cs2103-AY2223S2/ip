@@ -6,10 +6,38 @@ Notes about the command format:
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user. e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a
   parameter which can be used as `todo borrow book`
-- Extraneous parameters for commands that do not take in parameters (such as `list` and `bye`) will be ignored. e.g. if
-  the command specifies `list 123`, it will be interpreted as `list`
+- Extraneous parameters for commands that do not take in parameters (such as `list`, `bye` and `help`) will be ignored.
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`
 
 ## Usage
+
+### `help` - Viewing all available commands.
+
+Shows the user all the available commands.
+
+Example of usage:
+
+`help`
+
+Expected outcome:
+
+Shows all the commands that can be used by the user.
+
+```
+Lucy only understands the following:
+1. help
+2. todo DESCRIPTION
+3. deadline DESCRIPTION /by YYYY-MM-DD
+4. event DESCRIPTION /from X /to Y
+5. mark NUMBER
+6. unmark NUMBER
+7. list
+8. find KEYWORD
+9. delete NUMBER
+10. update NUMBER /by YYYY-MM-DD
+11. update NUMBER /from X /to Y
+12. bye
+```
 
 ### `todo` - Creating a new Todo task.
 

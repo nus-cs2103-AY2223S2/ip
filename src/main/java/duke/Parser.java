@@ -41,6 +41,9 @@ public class Parser {
         case "bye": {
             return ui.exit();
         }
+        case "help": {
+            return ui.userGuide();
+        }
         case "todo": {
             String after = arrNext[1];
             inputTask = newTodo(storage, taskList, after);
@@ -260,7 +263,7 @@ public class Parser {
      */
     public static boolean checkEmptyDescription(String[] checkString) throws EmptyDescription {
         if (checkString.length == 1 && !Objects.equals(checkString[0], "list")
-                && !Objects.equals(checkString[0], "bye")) {
+                && !Objects.equals(checkString[0], "bye") && !Objects.equals(checkString[0], "help")) {
             throw new EmptyDescription(" The description of " + checkString[0] + " cannot be empty.");
         }
         return true;
@@ -288,7 +291,7 @@ public class Parser {
      */
     public static void checkWrongTask(String keyword) throws WrongTask {
         List<String> keywords = Arrays.asList("bye", "todo", "deadline", "event", "mark", "unmark", "list",
-                "delete", "find", "update");
+                "delete", "find", "update", "help");
         boolean isKeyword = keywords.contains(keyword);
         if (!isKeyword) {
             throw new WrongTask(" I'm sorry, but I don't know what that means :-(");

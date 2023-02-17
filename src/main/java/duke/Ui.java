@@ -21,7 +21,7 @@ public class Ui {
      */
     public static String dukeGreeting() {
         String greeting = "";
-        greeting = "Hey there! I'm Lucy (=^･ω･^=)\n" + "What can I do for you today?\n" + userGuide();
+        greeting = "Hey there! I'm Lucy (=^･ω･^=)\n" + "What can I do for you today?";
         return greeting;
     }
 
@@ -111,18 +111,20 @@ public class Ui {
      *
      * @return Response to show user the possible commands.
      */
-    public static String userGuide() {
-        return "\nLucy only understands the following:\n"
-                + "1. todo DESCRIPTION\n"
-                + "2. deadline DESCRIPTION /by YYYY-MM-DD\n"
-                + "3. event DESCRIPTION /from X /to Y\n"
-                + "4. mark NUMBER\n"
-                + "5. unmark NUMBER\n"
-                + "6. list\n"
-                + "7. find KEYWORD \n"
-                + "8. delete NUMBER\n"
-                + "9. update NUMBER /by YYYY-MM-DD\n"
-                + "10. update NUMBER /from X /to Y";
+    public String userGuide() {
+        return "Lucy only understands the following:\n"
+                + "1. help\n"
+                + "2. todo DESCRIPTION\n"
+                + "3. deadline DESCRIPTION /by YYYY-MM-DD\n"
+                + "4. event DESCRIPTION /from X /to Y\n"
+                + "5. mark NUMBER\n"
+                + "6. unmark NUMBER\n"
+                + "7. list\n"
+                + "8. find KEYWORD \n"
+                + "9. delete NUMBER\n"
+                + "10. update NUMBER /by YYYY-MM-DD\n"
+                + "11. update NUMBER /from X /to Y\n"
+                + "12. bye";
     }
 
     /**
