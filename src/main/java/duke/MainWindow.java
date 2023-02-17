@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,6 +29,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Delay of 2 second when the program is exiting.
+     */
+    private final javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(Duration.seconds(1));
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -37,6 +44,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
                 duke.getUi().printWelcomeMsg(), dukeImage)
         );
+        delay.setOnFinished(event -> Platform.exit());
     }
 
     /**
@@ -51,13 +59,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if (response.equals(duke.getUi().printByeMsg())) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.exit();
+        String exitMsg = duke.getUi().printByeMsg();
+        if (response.equals(exitMsg)) {
+            delay.play();
         }
         userInput.clear();
     }
