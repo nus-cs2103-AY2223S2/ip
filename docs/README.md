@@ -21,6 +21,8 @@ Tasks previously saved  can be retrieved the next time you start this applicatio
 
 The task will be added to the list of tasks and saved locally 
 
+Format of input: todo 'task description'
+
 Example of usage: 
 
 `todo read book`
