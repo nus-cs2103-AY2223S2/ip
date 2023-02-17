@@ -10,6 +10,6 @@ public class WrongFormatException extends Exception {
      * @param message Shows the correct format of inputs
      */
     public WrongFormatException(String message) {
-        super("HEY!! Pleaseeee enter in a correct format: " + " '" + message + "'");
+        super("HEY!! Pleaseeee enter in a correct format: " + "'" + message + "'");
     }
 }
