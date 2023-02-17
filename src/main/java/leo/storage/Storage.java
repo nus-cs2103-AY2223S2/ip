@@ -37,8 +37,6 @@ public class Storage {
         String root = Paths.get("").toAbsolutePath().toString();
         this.dataFilePath = Paths.get(root, filePath).toString();
 
-        new File(this.dataFilePath).getParentFile().mkdirs();
-
         if (!(new File(this.dataFilePath).exists())) {
             try {
                 new File(this.dataFilePath).createNewFile();

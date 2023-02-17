@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private final Leo leo = new Leo("/leo.txt");
+    private final Leo leo = new Leo("/data/leo.txt");
 
     @Override
     public void start(Stage stage) {
