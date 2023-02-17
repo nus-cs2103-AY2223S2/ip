@@ -22,29 +22,37 @@ public class Parser {
     protected static String parseInput(TaskList tasks, String taskType, String[] descriptions) {
         String output = "";
 
-        switch (taskType) {
-        case "list":
-            output = tasks.listTasks();
-            break;
-        case "mark":
-            output = tasks.markTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
-            break;
-        case "unmark":
-            output = tasks.unmarkTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
-            break;
-        case "todo":
-            try {
+        try {
+            switch (taskType) {
+            case "list":
+                output = tasks.listTasks();
+                break;
+            case "mark":
+                int markTaskIndex = Integer.parseInt(descriptions[1]);
+
+                if (markTaskIndex < 1 || markTaskIndex > tasks.getTaskList().size()) {
+                    throw new DukeException("There is no item numbered " + markTaskIndex + ".\n");
+                }
+
+                output = tasks.markTask(tasks.getTask(markTaskIndex - 1));
+                break;
+            case "unmark":
+                int unmarkTaskIndex = Integer.parseInt(descriptions[1]);
+
+                if (unmarkTaskIndex < 1 || unmarkTaskIndex > tasks.getTaskList().size()) {
+                    throw new DukeException("There is no item numbered " + unmarkTaskIndex + ".\n");
+                }
+
+                output = tasks.unmarkTask(tasks.getTask(unmarkTaskIndex - 1));
+                break;
+            case "todo":
                 if (descriptions.length != 2) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
                 }
 
                 output = tasks.addTask(new ToDo(descriptions[1]));
-            } catch (DukeException error) {
-                output = Ui.errorMsg(error.getMessage());
-            }
-            break;
-        case "deadline":
-            try {
+                break;
+            case "deadline":
                 String[] deadlineDescription = descriptions[1].split("/by ");
 
                 if (deadlineDescription.length != 2) {
@@ -52,12 +60,8 @@ public class Parser {
                 }
 
                 output = tasks.addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
-            } catch (DukeException error) {
-                output = Ui.errorMsg(error.getMessage());
-            }
-            break;
-        case "event":
-            try {
+                break;
+            case "event":
                 String[] eventDescription = descriptions[1].split("/from | /to ");
 
                 if (eventDescription.length != 3) {
@@ -65,20 +69,20 @@ public class Parser {
                 }
 
                 output = tasks.addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
-            } catch (DukeException e) {
-                output = Ui.errorMsg(e.getMessage());
+                break;
+            case "delete":
+                output = tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
+                break;
+            case "find":
+                TaskList filteredTasks = new TaskList(tasks.filteredTaskList(descriptions[1]));
+                output = filteredTasks.listTasks();
+                break;
+            default:
+                output = Ui.unknownInputMsg();
+                break;
             }
-            break;
-        case "delete":
-            output = tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
-            break;
-        case "find":
-            TaskList filteredTasks = new TaskList(tasks.filteredTaskList(descriptions[1]));
-            output = filteredTasks.listTasks();
-            break;
-        default:
-            output = Ui.unknownInputMsg();
-            break;
+        } catch (DukeException e) {
+            output = Ui.errorMsg(e.getMessage());
         }
 
         return output;
