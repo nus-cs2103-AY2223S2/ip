@@ -4,14 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308"
-         maxWidth="1.7976931348623157E308"
-         prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171">
-    <children>
-        <Label fx:id="dialog" minHeight="-Infinity" wrapText="true"/>
-        <ImageView fx:id="profilePic" fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true"/>
-    </children>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308"
+         maxWidth="1.7976931348623157E308" alignment="TOP_RIGHT" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/8.0.171">
     <padding>
-        <Insets bottom="15" left="5" right="5" top="15"/>
+        <Insets bottom="5" left="5" right="5" top="5"/>
     </padding>
+    <Label fx:id="dialog" minHeight="-Infinity" wrapText="true">
+        <padding>
+            <Insets left="5" right="5"/>
+        </padding>
+    </Label>
+    <ImageView fx:id="profilePic" fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true"/>
 </fx:root>

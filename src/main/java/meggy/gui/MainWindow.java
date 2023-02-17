@@ -1,11 +1,13 @@
 package meggy.gui;
 
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import meggy.Meggy;
+import meggy.Resource;
 
 /**
  * Controller for gui.MainWindow. Provides the layout for the other controls.
@@ -32,6 +34,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    public void setApDimProperty(ReadOnlyDoubleProperty apHeightProperty,ReadOnlyDoubleProperty apWidthProperty){
+        scrollPane.prefHeightProperty().bind(apHeightProperty.subtract(41));
+        scrollPane.prefWidthProperty().bind(apWidthProperty);
+        userInput.prefWidthProperty().bind(apWidthProperty.subtract(76));
+        dialogContainer.prefWidthProperty().bind(apWidthProperty);
+    }
     /**
      * Updates current chatbot.
      *
@@ -40,6 +48,7 @@ public class MainWindow extends AnchorPane {
     public void setChatbot(Meggy m) {
         assert m != null;
         meggy = m;
+        dialogContainer.getChildren().add(DialogBox.ofMeggy(Resource.GREETINGS));
     }
 
     /**

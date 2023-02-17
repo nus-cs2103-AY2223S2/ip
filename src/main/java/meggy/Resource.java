@@ -58,6 +58,8 @@ public final class Resource {
     public static final String FAREWELL = "OK gotta go play more Turf Wars. Have a nice day!\n";
     /** Icon for tasks marked 'done'. */
     public static final char DONE_MK = 'X';
+    /** Front page greetings. */
+    public final static String GREETINGS = "Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
 
     /** @deprecated Class stores all resource values statically should not be initialized. */
     private Resource() {

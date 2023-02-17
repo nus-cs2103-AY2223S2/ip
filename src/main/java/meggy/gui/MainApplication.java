@@ -2,6 +2,7 @@ package meggy.gui;
 
 import java.io.IOException;
 
+import com.sun.tools.javac.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,7 +27,10 @@ public class MainApplication extends Application {
             final AnchorPane ap = fxmlLoader.load();
             final Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setChatbot(meggy);
+
+            MainWindow mainWindow=fxmlLoader.getController();
+            mainWindow.setChatbot(meggy);
+            mainWindow.setApDimProperty(ap.heightProperty(),ap.widthProperty());
             stage.show();
         } catch (IOException e) {
             // If FXML file IO causes an error, program must crash.
