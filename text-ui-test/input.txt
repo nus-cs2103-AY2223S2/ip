@@ -1,0 +1,24 @@
+todo read book
+deadline return book /by 2023-02-12
+event project meeting /from 2023-01-27 /to 2023-01-27
+todo join sports club
+mark 1
+mark 4
+delete 1
+todo borrow book
+list
+deadline return book /by 2023-01-29
+event project meeting /from 2023-01-29 /to 2023-01-29
+event climbing camp /from 2023-01-30 /to 2023-02-02
+deadline do homework /by 2023-01-30
+list
+xd
+mark 7
+mark 5
+list
+nani
+unmark 7
+delete 6
+list
+geteventson 2023-01-30
+bye

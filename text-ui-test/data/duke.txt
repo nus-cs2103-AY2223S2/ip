@@ -1,0 +1,7 @@
+deadline ### false ### return book ### 2023-02-12
+event ### false ### project meeting ### 2023-01-27 ### 2023-01-27
+todo ### true ### join sports club
+todo ### false ### borrow book
+deadline ### true ### return book ### 2023-01-29
+event ### false ### climbing camp ### 2023-01-30 ### 2023-02-02
+deadline ### false ### do homework ### 2023-01-30
