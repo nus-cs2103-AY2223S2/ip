@@ -241,7 +241,7 @@ public class Parser {
                 + "delete 1\n\t"
                 + "sortEvent\n\t"
                 + "sortDeadline\n\t"
-                + "current duke version only understands\n\t"
+                + "note: current duke version only understands\n\t"
                 + "yyyy-mm-dd date format";
             break;
         }
