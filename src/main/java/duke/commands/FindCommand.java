@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.Ui;
+import duke.exceptions.NeroException;
 import duke.task.TaskList;
 
 /**
@@ -16,7 +17,7 @@ public class FindCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String executeCommand(String userInput) {
+    public String executeCommand(String userInput) throws NeroException {
         String[] input = userInput.split(" ");
         TaskList newTaskList = taskList.findMatchingTasks(input[1]);
         if (newTaskList.getSize() > 0) {

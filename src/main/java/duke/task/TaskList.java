@@ -1,4 +1,5 @@
 package duke.task;
+import duke.exceptions.EmptyTaskListException;
 import duke.exceptions.NeroException;
 
 import java.util.ArrayList;
@@ -65,7 +66,10 @@ public class TaskList {
     /**
      * Prints the toString of all tasks in the taskList
      */
-    public String printTasks() {
+    public String printTasks() throws NeroException {
+        if (taskList.size() == 0) {
+            throw new EmptyTaskListException();
+        }
         String toPrintTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
             toPrintTasks += String.format("%d. %s", (i + 1), taskList.get(i).toString()) + "\n";

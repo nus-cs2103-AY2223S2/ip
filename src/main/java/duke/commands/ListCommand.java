@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.Ui;
+import duke.exceptions.NeroException;
 import duke.task.TaskList;
 
 /**
@@ -16,7 +17,7 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String executeCommand(String userInput) {
+    public String executeCommand(String userInput) throws NeroException {
         return ui.printTasksMessage() + "\n" + taskList.printTasks();
     }
 
