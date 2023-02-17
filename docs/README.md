@@ -7,12 +7,8 @@ This user guide will walk you through all the features of Jamie, so you can get 
 Jamie features a user-friendly interface that allows you to access all its functionalities by typing commands. You can add, edit, delete, and mark your tasks as you complete them.
 
 **Notes about the command format:**
-- Words in UPPER_CASE are parameters to be supplied by the user.
-- INDEX refers to all natural numbers bounded by the maximum number of items currently in your list. 
-$$\text{INDEX} \in \mathbb{N}_{\le \text{size of your list}}$$
 - All `commands` must be in lower case.
-- The date time format is as such,
-$$dd/mm/yyyy \quad HHmm$$
+- The date time format is as such, `dd/mm/yyyy HHmm`.
 - Jamie will reply with the correct format if the input is incorrect. Just follow the instructions and you will be fine.
 
 
