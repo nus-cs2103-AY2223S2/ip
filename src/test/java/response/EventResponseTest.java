@@ -45,7 +45,7 @@ public class EventResponseTest {
         });
         String actualMessage = exception.getMessage();
         String expectedMessage = "The start date cannot be empty."
-                + "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)";
+                + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)";
         assertEquals(expectedMessage, actualMessage);
     }
     @Test
@@ -57,7 +57,7 @@ public class EventResponseTest {
         });
         String actualMessage = exception.getMessage();
         String expectedMessage = "The end date cannot be empty."
-                + "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)";
+                + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)";
         assertEquals(expectedMessage, actualMessage);
     }
     @Test

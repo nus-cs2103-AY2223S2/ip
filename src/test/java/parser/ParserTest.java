@@ -83,14 +83,7 @@ public class ParserTest {
             parser.parse();
         });
         String actualMessage = exception.getMessage();
-        String expectedMessage = "I'm sorry, but I don't know what that means :-("
-                + "\n\t  To create a new todo, use 'todo ...',"
-                + "\n\t  To create a new event, use 'event ... /from ... /to ...',"
-                + "\n\t  To create a new deadline, use 'deadline ... /by ...',"
-                + "\n\t  To list all tasks, use 'list',"
-                + "\n\t  To mark a task, use 'mark ' with a number,"
-                + "\n\t  To unmark a task, use 'unmark ' with a number,"
-                + "\n\t  Finally to exit the program, use 'bye'!";
+        String expectedMessage = "I'm sorry, but I don't know what that means :-(";
         assertEquals(expectedMessage, actualMessage);
     }
 }
