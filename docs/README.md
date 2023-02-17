@@ -2,7 +2,7 @@
 This is a project template for a greenfield Java project. Kyle is a desktop application for managing your tasks and notes via a Command Lind Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 ## Setting up
 1. Make sure to download JAVA installed in your computer. If not, you can download from [here](https://www.azul.com/downloads/?version=java-11-lts&os=macos&architecture=arm-64-bit&package=jdk-fx).
-2. Install the latest duke.jar from here.
+2. Install the latest duke.jar from [here](https://github.com/dohaduong/ip/releases/tag/A-Release).
 3. Start using your Kyle by typing in command and press *Send* or Enter to execute it. You can try one of the commands from below:
 - `list`
 - `find`
