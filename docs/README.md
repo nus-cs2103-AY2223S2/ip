@@ -10,16 +10,16 @@ Bob is a chat-bot made to help you manage your tasks. He accepts CLI commands wh
 5. Enter supported commands to interact with Bob, and close the GUI window once done. 
 
 ## Command cheatsheet
-| Actions | Format | Example
-| --- | --- | --- |
-| add todo | `todo <description>` | `todo assignment`
-| add deadline | `deadline <description> /by <date>` | `deadline submission /by 2023-02-16`
-| add event | `event <description> /from <startDate> /to <endDate>` | `event Holiday /from 2023-06-01 /to 2023-09-01`
-| mark task | `mark <index>` | `mark 1`
-| unmark task | `unmark <index>` | `unmark 1`
-| delete task | `delete <index>` | `delete 1`
-| find tasks | `find <keyword>` | `find appointment`
-| show reminders | `remind` | `remind`
+Actions | Format | Example 
+--- | --- | --- 
+add todo | `todo <description>` | `todo assignment` 
+add deadline | `deadline <description> /by <date>` | `deadline submission /by 2023-02-16`
+add event | `event <description> /from <startDate> /to <endDate>` | `event Holiday /from 2023-06-01 /to 2023-09-01`
+mark task | `mark <index>` | `mark 1`
+unmark task | `unmark <index>` | `unmark 1`
+delete task | `delete <index>` | `delete 1`
+find tasks | `find <keyword>` | `find appointment`
+show reminders | `remind` | `remind`
 
 ## Features 
 ### :warning: Usage notes
