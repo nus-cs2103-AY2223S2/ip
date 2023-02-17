@@ -29,26 +29,12 @@ public class Ui {
      * Stores the list of tasks in message attribute.
      *
      * @param listOfTasks Array list of tasks.
+     * @param s String to append to message.
      */
-    public void listTasks(ArrayList<Task> listOfTasks) {
-        Task task;
-        message.append("Here are the tasks in your list:");
+    public void listTasks(ArrayList<Task> listOfTasks, String s) {
+        message.append(s);
         for (int i = 1; i <= listOfTasks.size(); i++) {
-            task = listOfTasks.get(i - 1);
-            message.append("\n" + i + "." + task);
-        }
-    }
-
-    /**
-     * Stores the list of matching tasks in message attribute.
-     *
-     * @param listOfTasks Array list of matching tasks.
-     */
-    public void printMatchingTasks(ArrayList<Task> listOfTasks) {
-        Task task;
-        message.append("Here are the matching tasks in your list:");
-        for (int i = 1; i <= listOfTasks.size(); i++) {
-            task = listOfTasks.get(i - 1);
+            Task task = listOfTasks.get(i - 1);
             message.append("\n" + i + "." + task);
         }
     }
@@ -98,8 +84,8 @@ public class Ui {
     }
 
     /**
-     * Stores the error when the data could
-     * not be loaded in message attribute.
+     * Stores the error in message attribute
+     * when the data could not be loaded.
      */
     public void showLoadingError() {
         message.append("Creating new file to store tasks due to a loading error ...");
@@ -109,36 +95,36 @@ public class Ui {
     }
 
     /**
-     * Store the error when file or folder
-     * could not be created in message attribute.
+     * Stores the error in message attribute
+     * when file or folder could not be created.
      */
     public void showFileError() {
         message.append("Error occurred when creating the folder/file.");
     }
 
     /**
-     * Stores error message for unknown command in message attribute.
+     * Stores error message in message attribute for unknown command.
      */
     public void showUnknownError() {
         message.append("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
-     * Stores error message for empty task description in message attribute.
+     * Stores error message in message attribute for empty task description.
      */
     public void showDescriptionError(String task) {
         message.append("OOPS!!! The description of " + task + " task cannot be empty.");
     }
 
     /**
-     * Stores error message for out of bounds index in message attribute.
+     * Stores error message in message attribute for out of bounds index.
      */
     public void showIndexError(int index) {
         message.append("OOPS!!! The index " + index + " for the list of tasks is out of bounds.");
     }
 
     /**
-     * Stores error message for incorrect date time format in message attribute.
+     * Stores error message in message attribute for incorrect date time format.
      */
     public void showDateTimeError() {
         message.append("OOPS!!! Incorrect date time format. Use dd/mm/yyyy HHmm instead.");
@@ -149,7 +135,7 @@ public class Ui {
     }
 
     /**
-     * Clears the message attribute.
+     * Clears the message attribute to reset it.
      */
     public void clearMessage() {
         message.setLength(0);
