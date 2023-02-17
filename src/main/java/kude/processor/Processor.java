@@ -139,7 +139,9 @@ public class Processor {
      */
     public boolean runCommand(String line) {
         var parser = new Parser(line);
-        if (parser.getCommand().equals("bye")) {
+        var cmdName = parser.getCommand();
+        assert cmdName != null;
+        if ("bye".equals(cmdName)) {
             return true;
         }
         var context = new Context(parser, ui, this, tasks);
