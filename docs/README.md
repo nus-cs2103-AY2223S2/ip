@@ -2,7 +2,7 @@
 
 ### Hachi is a desktop app that helps you organize your tasks 🐝
 
-![IMAGE](tangyuantyy/ip/docs/Ui.png)
+![IMAGE](Ui.png)
 
 ## Get started with Hachi
 1. Download `hachi-v1.0.jar` from this page
