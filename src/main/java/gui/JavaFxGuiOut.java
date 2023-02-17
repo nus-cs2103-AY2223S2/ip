@@ -43,7 +43,7 @@ public class JavaFxGuiOut extends Application implements ISpeaker {
      */
     @FXML
     public void handleUserInput() {
-        dialogContainer.getChildren().add(DialogueBoxHelper.ofUser(userInput.getText()));
+        dialogContainer.getChildren().add(DialogueBox.ofUser(userInput.getText()));
         dispatcher.handle(userInput.getText());
         userInput.clear();
     }
@@ -69,6 +69,6 @@ public class JavaFxGuiOut extends Application implements ISpeaker {
 
     @Override
     public void speak(String s) {
-        dialogContainer.getChildren().add(DialogueBoxHelper.ofTach(s));
+        dialogContainer.getChildren().add(DialogueBox.ofTach(s));
     }
 }
