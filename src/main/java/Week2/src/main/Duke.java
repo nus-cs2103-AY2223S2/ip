@@ -62,8 +62,8 @@ public class Duke extends Application {
      * Runs Duke and begins the program.
      * It invokes parser to start managing tasks.
      * @param input
-     * @return
-     * @throws IOException
+     * @return Output line to show to user
+     * @throws IOException to write on the data
      */
     public String run(String input) throws IOException {
         storage = new Storage("/saves/data.txt");
@@ -92,7 +92,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
         return textToAdd;

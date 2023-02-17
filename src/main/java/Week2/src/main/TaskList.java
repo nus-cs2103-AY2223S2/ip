@@ -28,20 +28,17 @@ public class TaskList<Task> {
 
     /**
      * TaskList constructor that loads data from the file of the path.
-     * @param path File to load
      * TaskList constructor.
      * It creates a new ArrayList to contain Task information in it.
      * It first figures out what type of task it is (todo, deadline, or event),
      * and divide the command and contents
-     * @param path
-     * @throws FileNotFoundException
+     * @param path path of the file
      */
     @SuppressWarnings("unchecked")
     public TaskList(String path) throws FileNotFoundException {
         Scanner sc = new Scanner(new File(path));
         this.list = new ArrayList<Task>();
         while (sc.hasNext()) {
-            //this.list.add((Task) new Todo(sc.next()));
             char type = sc.next().toString().charAt(1);
             if(type == 'T') {
                 this.list.add((Task) new Todo(sc.next()));
@@ -72,12 +69,9 @@ public class TaskList<Task> {
      * Gives the task at the given index
      * @param index
      * @return The task at the index
-     * Gives the task of the given index
-     * @param index index of the tasklist
-     * @return task of the given index
      */
     public Task get(int index) {
-        return this.list.get(index);
+        return (Task) this.list.get(index);
     }
 
     /**
@@ -86,8 +80,9 @@ public class TaskList<Task> {
      * @param index index of the task that user wants to remove
      */
     public void removeT(int index) {
-        Task remtask = (Task) this.list.get(index);
-        this.list.remove(remtask);
+        //Task remtask = (Task) this.list.get(index);
+        list.remove(index);
+        size--;
     }
 
     /**
@@ -107,9 +102,6 @@ public class TaskList<Task> {
      * @return
      */
     public boolean isEmpty() {
-        if(this.size == 0) {
-            return true;
-        }
-        return false;
+        return this.size == 0;
     }
 }
