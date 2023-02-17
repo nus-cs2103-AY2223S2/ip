@@ -40,6 +40,9 @@ public class AddTask implements AvaCommand {
      */
     @Override
     public boolean run(TaskList t, Storage s) throws AvaException {
+        //Already Check parsedInput is valid , if still here then input is invalid
+        assert parsedInput.length >= 1 : "Invalid Input";
+
        switch (this.task) {
            case DEADLINE:
                newTask = new Deadline(parsedInput[0], parsedInput[1]);

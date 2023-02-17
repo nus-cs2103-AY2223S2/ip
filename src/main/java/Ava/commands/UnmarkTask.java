@@ -21,8 +21,10 @@ public class UnmarkTask implements AvaCommand {
      * UnmarkTask Contructor
      * @param parsedInput string array of the index of the task to be marked.
      */
-    public UnmarkTask(String[] parsedInput){
+    public UnmarkTask(String[] parsedInput) throws NonExistentTask {
+
         this.parsedInput = parsedInput;
+        this.isCorrectInput();
     }
 
     /**
@@ -34,6 +36,10 @@ public class UnmarkTask implements AvaCommand {
      */
     @Override
     public boolean run(TaskList t, Storage s) throws AvaException {
+        assert this.parsedInput.length == 1 && isDigit(parsedInput[0].charAt(0)): "Invalid Input";
+
+        System.out.println(isDigit(parsedInput[0].charAt(0)));
+
         this.changedTask = t.unmark(Integer.valueOf(this.parsedInput[0]));
         t.updateStorage(s);
         return true;
