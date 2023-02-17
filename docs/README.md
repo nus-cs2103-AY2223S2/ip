@@ -20,6 +20,16 @@ You can hashtag them and put them into categories
 
 ## 🍒Usage🍒
 
+---
+### `help` - shows help menu
+
+Got stuck in between and don't feel like opening this website?
+
+Just ask berry to help you in app <:
+
+
+---
+
 ### `todo <task_name> [#<tag_name>]` - adds a task to do 
 
 This adds a new task for berry to manage.
