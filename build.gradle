@@ -49,11 +49,11 @@ dependencies {
 
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "center.Hoster"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "skylar"
     archiveClassifier = null
 }
 
