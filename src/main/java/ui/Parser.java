@@ -4,6 +4,7 @@ import static java.util.Map.entry;
 
 import duke.DateFormatDukeException;
 import duke.DukeException;
+import duke.IncompleteCommandDukeException;
 import duke.NotRecognizedCommandDukeException;
 
 import java.io.File;
@@ -19,7 +20,7 @@ import command.Command;
  * A string parser that processes user-input commands.
  */
 public class Parser {
-    private static String RUNNING_DIRECTORY = "ip";
+    private static final String RUNNING_DIRECTORY = "ip";
 
     private static Map<String, String> stringToCommandClass = Map.ofEntries(
             entry("list", "ListCommand"),
@@ -56,16 +57,25 @@ public class Parser {
      */
     public static Command parseCommand(String command, boolean suppressPrint) throws DukeException {
         Object object = null;
-        assert getCurrentDirectoryName().equals(RUNNING_DIRECTORY) : "You should run the program in the Main class folder";
+        assert getCurrentDirectoryName().equals(RUNNING_DIRECTORY)
+                : "You should run the program in the Main class folder";
+
         try {
-            Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
+            String commandName = stringToCommandClass.get(command.split(" ")[0]);
+            Class<?> c = Class.forName("command." + commandName);
             Constructor<?> cons = c.getConstructor(String.class, boolean.class);
             object = cons.newInstance(command, !suppressPrint);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            /* the split command list is a null array */
+            throw new IncompleteCommandDukeException("Please ensure the first word is a command name. ");
         } catch (ClassNotFoundException e) {
+            /* Unknown command, such as null */
             throw new NotRecognizedCommandDukeException();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            /* Unknown constructor */
             throw new DukeException(e.toString());
         } catch (InvocationTargetException e) {
+            /* Runtime error, such as parsing error */
             Throwable t = e.getTargetException();
             throw new DukeException(t.toString());
         }
