@@ -1,13 +1,11 @@
 # User Guide
 
 ## Description
----
 A virtual assistant for tracking tasks.
 
 ![](Ui.png)
 
-## Features 
----
+## Features
 ### Adding Task
 - You can add as a task of 3 possible types, Todo/Event/Deadline to `duke.txt`.
 
@@ -28,7 +26,6 @@ A virtual assistant for tracking tasks.
 - You can close the GUI by typing `bye`.
 
 ## Usage
----
 ### `todo` - Add todo to the list
 Inform Ai-chan to add a todo with description provided.
 
@@ -172,5 +169,4 @@ Expected Outcome:
 Program will close.
 
 ## Acknowledgements
---- 
 Credit to Zetta Zero for the [art](https://www.youtube.com/watch?v=1A5lRjr4bDg&ab_channel=ZettaZero) for Ai-chan
