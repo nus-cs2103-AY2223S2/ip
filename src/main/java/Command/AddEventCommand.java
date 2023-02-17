@@ -30,7 +30,7 @@ public class AddEventCommand extends Command {
     /**
      * Checks if command is an exit command.
      *
-     * @return false Add Deadline task is not an exit command.
+     * @return false Add Event task is not an exit command.
      */
     public boolean isExit() {
         return false;

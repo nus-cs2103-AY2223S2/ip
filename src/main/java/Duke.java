@@ -24,6 +24,11 @@ public class Duke {
         this.isEnd = false;
     }
 
+    /**
+     * Loads tasks and returns whether this action is successful.
+     *
+     * @return boolean The boolean indicating if load was successful.
+     */
     private boolean hasLoadedSuccessfully() {
         try {
             this.tasks = new TaskList(storage.loadData());
@@ -34,6 +39,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves tasks and returns whether this action is successful.
+     *
+     * @return boolean The boolean indicating if save was successful.
+     */
     private boolean hasSavedSuccessfully(TaskList tasks, Storage storage) {
         try {
             storage.saveData(tasks);
