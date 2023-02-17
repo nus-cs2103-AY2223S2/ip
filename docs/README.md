@@ -104,7 +104,8 @@ A message will be printed.
 
 ```
 Got it. I've added this task:
-Now we have 1 task(s) in the list.
+[E][] shopee sale (from: 1 February 2023, 2359H to: 2 February 2023, 2359H)
+Now we have 3 task(s) in the list.
 ```
 
 ### `list` - prints all tasks in list
