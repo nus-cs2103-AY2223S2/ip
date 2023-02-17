@@ -21,6 +21,10 @@ All the actions are non case-sensitive. For example, you can enter `lISt` and it
 
 Adds a Todo task to the list.
 
+Format: 
+
+`todo {description}`
+
 Example of usage:
 
 `todo Read 1 chapter of a book`
@@ -40,6 +44,10 @@ Now you have 1 task in the list.
 ### `deadline` - Adds a Deadline
 
 Adds a Deadline to the list.
+
+Format:
+
+`deadline {description} /by {YYYY-MM-DD HH:mm}`
 
 Example of usage:
 
@@ -61,6 +69,10 @@ Now you have 2 tasks in the list.
 ### `event` - Adds an Event
 
 Adds an Event to the list.
+
+Format:
+
+`event {description} /from {YYYY-MM-DD HH:mm} /to {YYYY-MM-DD HH:mm}`
 
 Example of usage:
 
@@ -109,13 +121,17 @@ to: Wed 26-04-2023 11:00AM)
 
 Marks all the tasks whose indexes are specified by you.
 
+Format:
+
+`mark {taskIndex(es)}`
+
 Example of usage:
 
 `mark 1 2`
 
 Expected outcome:
 
-Tasks 1 and 2 will be marked as done.
+Tasks 1 and 2 will be marked as done. Fake Duke will respond with the actions it has taken.
 
 ```
 Nice! I've marked:
@@ -130,13 +146,17 @@ Nice! I've marked:
 
 Unmarks all the tasks whose indexes are specified by you.
 
+Format:
+
+`unmark {taskIndex(es)}`
+
 Example of usage:
 
 `unmark 1 2`
 
 Expected outcome:
 
-Tasks 1 and 2 will be marked as undone.
+Tasks 1 and 2 will be marked as undone. Fake Duke will respond with the actions it has taken.
 
 ```
 OK, I've unmarked:
@@ -151,13 +171,17 @@ OK, I've unmarked:
 
 Deletes all the tasks whose indexes are specified by you.
 
+Format:
+
+`delete {taskIndex(es)}`
+
 Example of usage:
 
 `delete 1 2`
 
 Expected outcome:
 
-Tasks 1 and 2 will be deleted from the list of tasks.
+Tasks 1 and 2 will be deleted from the list of tasks. Fake Duke will respond with the actions it has taken.
 
 ```
 Noted. I've removed:
@@ -173,6 +197,10 @@ Now you have 1 task in the list.
 ### `find` - Finds tasks based on keyword
 
 Returns a list of tasks that match the specified keyword.
+
+Format:
+
+`find {keyword}`
 
 Example of usage:
 
@@ -197,6 +225,10 @@ to: Wed 26-04-2023 11:00AM)
 
 Returns either a list of sorted deadlines or events in ascending date time order, 
 depending on your input.
+
+Format:
+
+`sort {d/e}`
 
 Example of usage:
 
