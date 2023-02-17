@@ -1,0 +1,14 @@
+todo borrow book
+event read book /from 17/01/2023 1720 /to 18/01/2023 1720
+deadline return book /by 20/01/2023 1830
+mark 1
+mark 2
+unmark 2
+list
+mark 1
+unmark -1
+event party
+delete 0
+delete 2
+list
+bye

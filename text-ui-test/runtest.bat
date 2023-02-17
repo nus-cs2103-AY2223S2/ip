@@ -13,9 +13,11 @@ IF ERRORLEVEL 1 (
     exit /b 1
 )
 REM no error here, errorlevel == 0
-
+ECHO "Testcase 1: Add 1 of each task, mark 2 tasks and unmark 1 task, list"
+ECHO "To test errors, tries to mark alr marked task and unmark out of index"
+ECHO "Also tries to add tasks without full command"
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+FC ACTUAL.TXT EXPECTED.TXT >NUL && Echo Same || Echo Different or error
