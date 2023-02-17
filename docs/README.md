@@ -55,7 +55,7 @@ Sure no problem. I've added this task:
 Now you have 1 task in the list
 ```
 
-### Deadline command
+### `deadline` command
 - Adds a task with a deadline.
 - Name is everything before the /by and the deadline is everything after.
 - Date will be reformatted into text if inputted in yyyy-mm-dd format.
@@ -72,7 +72,7 @@ Sure no problem. I've added this task:
 Now you have 2 tasks in the list
 ```
 
-### Event command
+### `event` command
 
 - Adds a task with a start and end duration.
 - Name is before the /from, start time is between /from and /to, end time is everything after.
@@ -90,7 +90,7 @@ Sure no problem. I've added this task:
 Now you have 3 tasks in the list
 ```
 
-### Mark command
+### `mark` command
 
 - Marks a task done based on the index of the task.
 - Index starts at 1, ends at the length of the list.
@@ -107,7 +107,7 @@ Well done! I've marked this task as done:
     [T][X] homework
 ```
 
-### Unmark command
+### `unmark` command
 
 - Marks a task as not done bases on the index of the task.
 - Index starts at 1, ends at the length of the list.
@@ -124,7 +124,7 @@ Okay, I've marked this task as not done:
     [T][ ] homework
 ```
 
-### Delete command
+### `delete` command
 
 - Deletes a task based on index.
 - Index starts at 1, ends at the length of the list.
@@ -141,7 +141,7 @@ Sure thing. This task has been deleted:
 Now you have 2 tasks in the list
 ```
 
-### List command
+### `list` command
 
 - Lists all remaining tasks in the list.
 
@@ -157,7 +157,7 @@ Here are the tasks in your list:
 2. [D][ ] assignment (by: Feb 17 2023)
 ```
 
-### Find command
+### `find` command
 
 - Finds all tasks with a matching keyword in their name.
 
@@ -172,7 +172,7 @@ These are the matching tasks that I have found:
 1. [T][ ] homework
 ```
 
-### Help command
+### `help` command
 
 - Shows the user what commands are available and how to use them
 
