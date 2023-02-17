@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import kude.Storage;
 import kude.processor.Processor;
 
@@ -19,7 +18,6 @@ public class DukeApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         var gui = new Gui();
         var storage = new Storage("duke.txt");
-        // TODO rework Ui interface
         var processor = new Processor(gui, storage);
 
         try {
