@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,11 +16,39 @@ import task.TaskManager;
 import task.ToDo;
 
 /**
- * Contains method for data related operations i.e.
- * saving data to a file or uploading data to destination.
+ * Represents a file management system for the saving and
+ * storage of tasks to and from the hard disk.
+ * <p>
+ * Contains methods for saving data to a file or uploading
+ * data to destination.
  */
 public class FileManager implements Serializable {
-    private static final String FILEPATH = "src/main/java/data/UserTasks.txt";
+    private final String filePath;
+    private final File file;
+
+    /**
+     * Initialises the file manager at a given filepath and
+     * creates a new file if it doesn't currently exist.
+     * @param filePath
+     */
+    public FileManager(String filePath) {
+        //Credit: 2103T forum issue #192 and @jamieeeleow
+        assert filePath != null;
+        assert !filePath.isEmpty();
+        String userDir = Paths.get("").toAbsolutePath().toString();
+        this.filePath = Paths.get(userDir, filePath).toString();
+
+        new File(this.filePath).getParentFile().mkdirs();
+
+        if (!new File(this.filePath).exists()) {
+            try {
+                new File(this.filePath).createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        this.file = new File(this.filePath);
+    }
 
     //Credit to @Junyi00 for the simple and easy to understand serialisation method for level-7
 
@@ -31,8 +60,6 @@ public class FileManager implements Serializable {
      */
     public void saveTasksToFile(TaskManager taskManager) throws DukeException {
         try {
-            assert !FILEPATH.isEmpty();
-            File file = new File(FILEPATH);
             if (!file.isFile() && !file.isDirectory()) {
                 throw new DukeException("File or folder not found! Please create the file or folder.");
             }
@@ -45,7 +72,7 @@ public class FileManager implements Serializable {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("IO Error Occurred in File Manager");
+            throw new DukeException("IO Error has occured in File Manager!");
         }
     }
 
@@ -58,13 +85,10 @@ public class FileManager implements Serializable {
      *      and -1 to indicate unsuccessful load.
      */
     public int loadDataToArrayList(TaskManager taskManager) {
-        assert !FILEPATH.isEmpty();
-        File file = new File(FILEPATH);
-        if (!file.isFile()) {
-            return -1;
-        }
-
         try {
+            if (!file.isFile()) {
+                return -1;
+            }
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String data = s.nextLine();
@@ -89,10 +113,8 @@ public class FileManager implements Serializable {
                 taskManager.addTaskToList(task);
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e);
             return -1;
         } catch (DukeException e) {
-            System.out.println(e);
             return -1;
         }
         return 0;

@@ -16,9 +16,9 @@ public class Duke {
      * Initialises the file manager, task manager, parser and
      * loads data from the hard disk.
      */
-    public Duke() {
+    public Duke(String filePath) {
         this.taskManager = new TaskManager();
-        this.fileManager = new FileManager();
+        this.fileManager = new FileManager(filePath);
         assert this.fileManager.loadDataToArrayList(this.taskManager) != -1;
         this.parser = new Parser(fileManager);
     }
