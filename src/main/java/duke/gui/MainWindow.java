@@ -3,6 +3,7 @@ package duke.gui;
 import duke.Duke;
 import duke.DukeException;
 import duke.Ui;
+
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,6 +31,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Ui ui;
     private Stage stage;
+    private static final int DELAY = 2;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/r2d2.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/c3po.png"));
@@ -73,7 +75,7 @@ public class MainWindow extends AnchorPane {
         //Reused from https://github.com/amoonguss1/ip/commit/d94530b862bc089f5c2d1025fb5737b06283cae6
         // with minor modifications
         if (input.equalsIgnoreCase("bye")) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            PauseTransition delay = new PauseTransition(Duration.seconds(DELAY));
             delay.setOnFinished(event -> stage.close());
             delay.play();
         }
