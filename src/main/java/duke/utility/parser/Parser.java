@@ -71,7 +71,7 @@ public class Parser {
      */
     private static String markTask(String[] command, TaskList list) throws DukeException {
         try {
-            if (command.length > 2) {
+            if (command.length != 2) {
                 throw wrongCommandFormat;
             }
             int index = Integer.parseInt(command[1]) - 1;
@@ -93,7 +93,7 @@ public class Parser {
      */
     private static String unmarkTask(String[] command, TaskList list) throws DukeException {
         try {
-            if (command.length > 2) {
+            if (command.length != 2) {
                 throw wrongCommandFormat;
             }
             int index = Integer.parseInt(command[1]) - 1;
