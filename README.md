@@ -1,24 +1,38 @@
-# duke.main.Duke project template
-
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
-
-## Setting up in Intellij
-
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke/duke.main.Duke.java` file, right-click it, and choose `Run duke.main.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
     ____        _        
    |  _ \ _   _| | _____ 
    | | | | | | | |/ / _ \
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
-   ```
+   
+
+# Duke bot
+>Simplicity is the soul of efficiency. -Austin Freeman [[ source](http://www.vanderburg.org/Misc/Quotes/soft-quotes.html)]
+
+Duke frees your mind of having to remember things you need to do. It's:
+
+- text-based
+- easy to learn
+- FAST SUPER FAST to use
+
+All you need to do is,
+
+1. download it from [here](https://github.com/nevinlim/ip/releases/tag/A-Jar).
+2. double-click it.
+3. add your tasks. 
+4. let it manage your tasks for you 😉
+
+And it is **FREE**❗ ❗ 😃 
+
+Features:
+- [ ]  Managing tasks
+- [ ] Managing deadlines (coming soon)
+- [ ] Reminders (coming soon)
+
+If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+
+`````ruby
+public static void main(String[] args) {
+        System.out.println("Hello! I'm Duke");
+    }
+`````
+
