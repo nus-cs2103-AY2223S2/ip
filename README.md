@@ -1,10 +1,3 @@
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   
-
 # Duke bot
 >Simplicity is the soul of efficiency. -Austin Freeman [[ source](http://www.vanderburg.org/Misc/Quotes/soft-quotes.html)]
 
