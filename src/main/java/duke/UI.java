@@ -1,3 +1,5 @@
+package duke;
+
 public class UI {
     private static final String FIRST_COMMAND_MESSAGE = "You can let me know by typing it below!";
     private static final String NEXT_COMMAND_MESSAGE = "What can I do for you next?";

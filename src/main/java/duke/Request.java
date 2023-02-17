@@ -1,5 +1,4 @@
-
-
+package duke;
 
 // obtained the idea to use enums this way from 4ndrelim
 public enum Request {

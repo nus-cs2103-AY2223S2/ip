@@ -1,5 +1,12 @@
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+package duke;
+
+import duke.DukeException;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.ToDo;
+
+
 import java.io.IOException;
 
 public class Parser {
@@ -90,7 +97,7 @@ public class Parser {
 
                 }
             } catch (DukeException e) {
-                System.out.println("Invalid Duke Request; please re-enter your request!");
+                System.out.println("Invalid duke.Duke duke.Request; please re-enter your request!");
             }
 
 

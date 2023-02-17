@@ -18,7 +18,7 @@ Number of tasks yet to be completed: 1
 ――――――――――――――――――――――――――――――――――――――――――――――――――
 ――――――――――――――――――――――――――――――――――――――――――――――――――
 Got it! I have added the following task:
-    [D][ ] pay fees . Deadline:  6th June
+    [D][ ] pay fees . task.Deadline:  6th June
 You now have 2 tasks in the list
 Number of tasks completed: 0
 Number of tasks yet to be completed: 2
@@ -39,7 +39,7 @@ Number of tasks yet to be completed: 2
 ――――――――――――――――――――――――――――――――――――――――――――――――――
 ――――――――――――――――――――――――――――――――――――――――――――――――――
 Great! I have marked this task as done!
-[D][X] pay fees . Deadline:  6th June
+[D][X] pay fees . task.Deadline:  6th June
 You now have 3 tasks in the list
 Number of tasks completed: 2
 Number of tasks yet to be completed: 1
@@ -53,7 +53,7 @@ Number of tasks yet to be completed: 0
 ――――――――――――――――――――――――――――――――――――――――――――――――――
 ――――――――――――――――――――――――――――――――――――――――――――――――――
 Noted. I have marked this task as undone!
-[D][ ] pay fees . Deadline:  6th June
+[D][ ] pay fees . task.Deadline:  6th June
 You now have 3 tasks in the list
 Number of tasks completed: 2
 Number of tasks yet to be completed: 1
@@ -68,7 +68,7 @@ Number of tasks yet to be completed: 2
 ――――――――――――――――――――――――――――――――――――――――――――――――――
 These are the tasks you have left to complete:
 1.[T][X] buy eggs
-2.[D][ ] pay fees . Deadline:  6th June
+2.[D][ ] pay fees . task.Deadline:  6th June
 3.[E][ ] project meeting . From:  Monday 2pm . To:  4pm
 You now have 3 tasks in the list
 Number of tasks completed: 1

@@ -1,11 +1,11 @@
-import java.io.IOException;
+package task;
+import duke.InvalidDateFormatException;
+
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.temporal.ChronoUnit;
 
 
 public class Deadline extends Task {
@@ -15,7 +15,7 @@ public class Deadline extends Task {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
 
-    public Deadline(String description, String deadlineString) throws InvalidDateFormatException  {
+    public Deadline(String description, String deadlineString) throws InvalidDateFormatException {
         super(description);
         this.deadlineString = deadlineString.strip();
         try {
@@ -28,6 +28,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
-        return (isDone? "[D][X] " : "[D][ ] ") + description + (". Deadline: "  + formattedDate);
+        return (isDone? "[D][X] " : "[D][ ] ") + description + (". task.Deadline: "  + formattedDate);
     }
 }

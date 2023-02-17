@@ -1,15 +1,18 @@
+package duke;
+
+import duke.InvalidDateFormatException;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.ToDo;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import java.nio.file.FileAlreadyExistsException;
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.nio.file.Files;
+
 public class Storage {
 
 
@@ -20,13 +23,13 @@ public class Storage {
         try {
             loadTaskData(Task_Data, list);
         } catch (StorageFileFormatException e) {
-            System.out.println("There is an error in the format of at least one date in the Storage Data File");
+            System.out.println("There is an error in the format of at least one date in the duke.Storage Data File");
         }
 
     }
 
     public File createStorageFile(TaskList list) {
-        File Task_Data = new File("Task Data.txt");
+        File Task_Data = new File("task.Task Data.txt");
         try {
             Task_Data.createNewFile();
         } catch (FileAlreadyExistsException e){ // nothing should be done if the file already exists
@@ -42,7 +45,7 @@ public class Storage {
 
 
     public void updateTasksInFile (TaskList list) throws IOException {
-        PrintWriter logger = new PrintWriter("Task Data.txt");
+        PrintWriter logger = new PrintWriter("task.Task Data.txt");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
             logger.write(list.getTaskAtIndex(i) + "\n");
         }
@@ -60,8 +63,9 @@ public class Storage {
                 char taskIdentifier = task.charAt(1);
                 if (taskIdentifier == 'T') {
                     list.addTaskWhenLoading(new ToDo(taskDescription));
+                    System.out.println(list.getNumberOfTasks());
                     if (isMarked) {
-                       list.markDone(list.getNumberOfTasks() - 1);
+                       list.markDone(list.getNumberOfTasks());
                     }
 
                 } else if (taskIdentifier == 'E') {
@@ -74,7 +78,7 @@ public class Storage {
                     String description = splitDescription[0].strip();
                     list.addTaskWhenLoading(new Event(startDayTime, endDayTime, description));
                     if (isMarked) {
-                        list.markDone(list.getNumberOfTasks() - 1);
+                        list.markDone(list.getNumberOfTasks());
                     }
 
                 } else if (taskIdentifier == 'D') {
@@ -88,7 +92,7 @@ public class Storage {
                         throw new StorageFileFormatException();
                     }
                     if (isMarked) {
-                        list.markDone(list.getNumberOfTasks() - 1);
+                        list.markDone(list.getNumberOfTasks());
                     }
                 } else {
 

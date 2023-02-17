@@ -1,9 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+package task;
+
 import java.util.ArrayList;
-import java.io.PrintWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<Task>();
@@ -35,8 +33,20 @@ public class TaskList {
     }
 
     public void markDone(int taskNumber) {
+
+        if (taskNumber > this.numberOfTasks || taskNumber <= 0) {
+            System.out.println("Please enter a task number between 1 and the total number of tasks!");
+            return;
+        }
         int indexAdjustedTaskNumber = taskNumber - 1;
-        this.list.get(indexAdjustedTaskNumber).mark();
+
+        Task toBeMarked = this.list.get(indexAdjustedTaskNumber);
+        if (toBeMarked.isDone) {
+            System.out.println("This task has already been marked as done!");
+            return;
+        } else {
+            toBeMarked.mark();
+        }
         System.out.println("Great! I have marked this task as done!");
         System.out.println(list.get(indexAdjustedTaskNumber));
         numberUndone--;
@@ -47,8 +57,20 @@ public class TaskList {
 
 
     public void markUndone(int taskNumber) {
+
+        if (taskNumber > this.numberOfTasks || taskNumber <= 0) {
+            System.out.println("Please enter a task number between 1 and the total number of tasks!");
+            return;
+        }
+
         int indexAdjustedTaskNumber = taskNumber - 1;
-        this.list.get(indexAdjustedTaskNumber).unmark();
+        Task toBeUnmarked = this.list.get(indexAdjustedTaskNumber);
+        if (!toBeUnmarked.isDone) {
+            System.out.println("This task is already marked as undone!");
+            return;
+        } else {
+            toBeUnmarked.unmark();
+        }
         System.out.println("Noted. I have marked this task as undone!");
         System.out.println(list.get(indexAdjustedTaskNumber));
         numberUndone++;
@@ -64,7 +86,8 @@ public class TaskList {
     }
 
     public void getTaskDetails() {
-        System.out.println("You now have " + numberOfTasks + " tasks in the list");
+        String pluralCheck = (numberOfTasks == 1 ? " task" : " tasks");
+        System.out.println("You now have " + numberOfTasks +  pluralCheck + " in the list");
         System.out.println("Number of tasks completed: " + numberDone);
         System.out.println("Number of tasks yet to be completed: " + numberUndone);
 
@@ -81,8 +104,11 @@ public class TaskList {
 
 
     public void deleteTask(int taskNumber) {
+
         if (numberOfTasks == 0) {
             System.out.println("You do not have any tasks at the moment!");
+        } else if (taskNumber > numberOfTasks || taskNumber < 0) {
+            System.out.println("Please enter a valid task number!");
         } else {
             System.out.println("Noted! I have deleted this task: \n" + this.list.get(taskNumber - 1));
             boolean isDeletedDone = this.list.get(taskNumber - 1).isDone;
