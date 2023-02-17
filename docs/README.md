@@ -202,8 +202,4 @@ Example of usage:
 
 Expected outcome:
 
-The application will be closed and goodbye message below will be printed in console.
-
-```
-Bye!! Do visit me again! I'll always be free for you :)
-```
+The application will be closed and a goodbye message will be printed in console.
