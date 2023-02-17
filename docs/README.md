@@ -50,7 +50,9 @@ along with its details, completion state and type of task.
 
 Adds a ToDo task to the task list of Duke with the details specified.
 Defaults as incomplete.
+
 ---
+
 ### `deadline` - Add a Deadline
 #### Syntax:
 `deadline {DETAILS} /by {DEADLINE DATETIME}`
@@ -71,10 +73,12 @@ Datetime are currently only accepted in the following format:
 
 DD-MM-YYY HH:MM where HH:MM is in 24-hour form.
 
-An error will occur if "/by" is not included in your command  or if
-the datetimes are not in the right format, so make sure
+An error will occur if "/by" is not included in your command or if
+the datetime are not in the right format, so make sure
 format your command properly.
+
 ---
+
 ### `event` - Add an Event
 #### Syntax:
 `event {DETAILS} /from {FROM DATETIME} /to {TO DATETIME}`
@@ -96,7 +100,9 @@ DD-MM-YYY HH:MM where HH:MM is in 24-hour form.
 An error will occur if "/from" or "/to" is not included in your command or if
 the datetimes are not in the right format,
 so make sure to format your command properly
+
 ---
+
 ### `delete` - Delete a task
 #### Syntax:
 `delete {TASK NUMBER}`
@@ -108,6 +114,7 @@ so make sure to format your command properly
 
 Deletes the task according to the task number given.
 To find out what number a task is, use the `list` command.
+
 ---
 
 ### `find` - Finds tasks
@@ -121,6 +128,7 @@ To find out what number a task is, use the `list` command.
 #### Description:
 Shows all tasks that have descriptions which contain the details specified
 in the command.
+
 ---
 
 ### `mark` - Mark task as complete
@@ -133,6 +141,7 @@ in the command.
 #### Description:
 Marks the task as complete according to the task number given.
 To find out what number a task is, use the `list` command.
+
 ---
 
 ### `unmark` - Marks task as incomplete
@@ -145,6 +154,7 @@ To find out what number a task is, use the `list` command.
 #### Description:
 Marks the task as incomplete according to the task number given.
 To find out what number a task is, use the `list` command.
+
 ---
 
 ### `edit` - Edit task details
