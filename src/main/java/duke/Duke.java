@@ -71,7 +71,8 @@ public class Duke {
         } catch (NullPointerException e) {
             return "Something is missing!";
         } catch (Exception e) {
-            return "Unknown error, please try again!";
+            e.printStackTrace();
+            return e.getMessage();
         }
     }
 

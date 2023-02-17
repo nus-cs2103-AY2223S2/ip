@@ -47,13 +47,13 @@ public class Storage {
             }
             Scanner scanner = new Scanner(fileStoragePath);
             if (scanner.hasNext()) {
-                directoryPath = scanner.nextLine();
-            }
-            if (scanner.hasNext()) {
                 filePath = scanner.nextLine();
             } else {
                 System.out.println("File corrupted, reinitialising file");
                 initFilePath(fileStoragePath);
+            }
+            if (scanner.hasNext()) {
+                directoryPath = scanner.nextLine();
             }
             scanner.close();
         } catch (IOException e) {
@@ -68,14 +68,21 @@ public class Storage {
      */
     private void createFile() throws DukeException {
         try {
-            makeDirectory(directoryPath);
-            makeFile(filePath);
+            if (directoryPath.equals(filePath)) {
+                makeFile(filePath);
+            } else {
+                makeDirectory(directoryPath);
+                makeFile(filePath);
+            }
         } catch (IOException e) {
             throw new DukeException("File unable to be created");
         }
     }
 
     private void makeDirectory(String directoryPath) {
+        if (directoryPath.isEmpty()) {
+            return;
+        }
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             if (directory.mkdirs()) {
@@ -97,8 +104,8 @@ public class Storage {
 
     private void saveFilePath() throws IOException {
         FileWriter fileWriter = new FileWriter(PATH_STORAGE);
-        fileWriter.write(directoryPath + "\n");
-        fileWriter.write(filePath);
+        fileWriter.write(filePath + "\n");
+        fileWriter.write(directoryPath);
         fileWriter.close();
     }
 
@@ -120,8 +127,13 @@ public class Storage {
         if (inputArr.length < 2) {
             throw new DukeException("Invalid command");
         }
-        this.filePath = inputArr[1];
-        this.directoryPath = inputArr[1].substring(0, inputArr[1].lastIndexOf("/"));
+        String[] testFilePath = inputArr[1].split("/");
+        filePath = inputArr[1];
+        if (testFilePath.length < 2) {
+            directoryPath = inputArr[1];
+        } else {
+            directoryPath = inputArr[1].substring(0, inputArr[1].lastIndexOf("/"));
+        }
         createFile();
         try {
             saveFilePath();
