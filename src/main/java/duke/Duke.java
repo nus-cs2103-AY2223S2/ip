@@ -1,11 +1,10 @@
 package duke;
 
-import commands.Command;
-import exceptions.DukeException;
-
-import java.io.File;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import commands.Command;
+import exceptions.DukeException;
 
 /**
  * The main class that represents the application.

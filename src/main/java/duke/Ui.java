@@ -52,7 +52,8 @@ public class Ui {
      * Prints the error message for when there is an error parsing a date-time string.
      */
     public void showDateTimeParseError() {
-        printOutput("Woah.. Error parsing date time for deadline task. Please enter the by datetime in this format yyyy-mm-dd (e.g., 2023-10-15).");
+        printOutput("Woah.. Error parsing date time for deadline task. "
+              + "Please enter the by datetime in this format yyyy-mm-dd (e.g., 2023-10-15).");
     }
 
     /**

@@ -43,7 +43,8 @@ public class MarkCommand extends Command {
             } else {
                 currentTask.markAsNotDone();
             }
-            ui.printOutput("Great :D I knew you could do it! I've marked this task as done:\n\t\t" + currentTask.toString());
+            ui.printOutput("Great :D I knew you could do it! I've marked this task as done:\n\t\t"
+                    + currentTask.toString());
             storage.saveListToFile(list, ui);
         }
     }

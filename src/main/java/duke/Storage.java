@@ -1,16 +1,16 @@
 package duke;
 
-import tasks.Task;
-import tasks.Todo;
-import tasks.Deadline;
-import tasks.Event;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 /**
  * Represents the Storage that helps to store the tasks entered by the user
@@ -55,6 +55,8 @@ public class Storage {
             case "E":
                 initTasks.add(new Event(taskDesc, isCompleted, strArr[3], strArr[4]));
                 break;
+            default:
+                initTasks.add(new Task(taskDesc));
             }
             line = reader.readLine();
         }

@@ -1,9 +1,10 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test

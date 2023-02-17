@@ -1,9 +1,9 @@
 package duke;
 
-import tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import tasks.Task;
 
 /**
  * Represents a list of tasks. It contains methods for adding, retrieving and deleting tasks.
