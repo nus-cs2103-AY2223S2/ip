@@ -1,15 +1,16 @@
 package duke;
 
-import duke.helpers.UI;
 import java.io.IOException;
 import java.util.Objects;
 
+import duke.helpers.UI;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,6 +30,10 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(
             "/images/DaDuke.png")));
 
+    /**
+     * Initializes the user interface defined in the associated FXML file.
+     * This method is automatically invoked by the JavaFX framework when the FXML file is loaded.
+     */
     @FXML
     public void initialize() {
         startUp();

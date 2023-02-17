@@ -152,7 +152,7 @@ public class TaskList {
 
         try {
             this.db.saveTasks(toWrite);
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             System.out.println("error saving tasks");
         }
 
