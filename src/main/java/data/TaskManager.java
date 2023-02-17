@@ -30,7 +30,8 @@ public class TaskManager {
     }
 
     /**
-     * Used to mark a task as complete.
+     * Marks a task as complete.
+     * Throws a DukeInvalidCommandException if the task could not be found
      *
      * @param index the index of the task to mark as complete
      * @throws DukeInvalidCommandException if the task is not found
@@ -46,7 +47,8 @@ public class TaskManager {
     }
 
     /**
-     * Used to mark a task incomplete.
+     * Marks a task as complete.
+     * Throws a DukeInvalidCommandException if the task could not be found
      *
      * @param index the index of the task to mark as complete
      * @throws DukeInvalidCommandException if the task is not found
