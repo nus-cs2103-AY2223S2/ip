@@ -1,8 +1,19 @@
 # User Guide
 
+![screenshot of Duke program](./Ui.png)
+
+## Introduction
+
+This project is an extension of the
+[CS2103T Duke Individual Project](https://github.com/nus-cs2103-AY2223S2/ip)
+which [I (click me to know me more)](https://www.yeohyongjie.com) worked on for 
+the [CS2103T module](https://nusmods.com/modules/CS2103T/software-engineering)
+while studying Computer Science in the National University of Singapore. This
+application is built entirely with Java.
+
 ## Features
 
-* Create up to 3 types of tasks: `Todo`, `Deadline`, `Event`
+* Create **up to 3 types** of tasks: `Todo`, `Deadline`, `Event`
 * Find tasks easily with `find` command
 * Search for tasks happening on a date with `on` command
 * Stay updated with `reminder` feature
@@ -11,8 +22,8 @@
 
 Use the `todo`, `deadline` or `event` command to create a task. The default
 status will be uncompleted. Use the `mark` or `unmark` command to change the
-status of the task. `index` command allows you to view all tasks. Lastly, 
-`delete` command removes a task from the list.
+status of the task. The `index` command allows you to view all tasks. Lastly, 
+the `delete` command removes a task from the list.
 
 > ⚠️ important: all dates must follow the format YYYY-MM-DD
 
