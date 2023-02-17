@@ -1,6 +1,6 @@
 # User Guide
 
-##Quick start
+##  Quick start
 1) Ensure you have Java 11 or above installed in your Computer.
 
 2) Download the latest Duke.jar from [here](https://github.com/igezt/ip/releases).
