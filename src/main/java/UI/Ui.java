@@ -123,4 +123,26 @@ public class Ui {
             return false;
         }
     }
+
+    public static String showHelp() {
+        StringBuilder helpString = new StringBuilder();
+        helpString.append("Saul Goodman, here's a list of all the commands you can make:")
+                .append(System.lineSeparator())
+                .append()
+    }
+
+    private String showAddTaskCommands() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("New todo Task: task <title>")
+                .append(System.lineSeparator())
+                .append("New Deadline: deadline <title> /by <date>")
+                .append(System.lineSeparator())
+                .append("New Event: event <title> /from <start date> /to <end date>")
+                .append(System.lineSeparator());
+        return sb.toString();
+    }
+
+    private String showOperationCommands() {
+
+    }
 }
