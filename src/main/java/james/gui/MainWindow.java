@@ -1,7 +1,9 @@
 package james.gui;
 
-import james.jamesbot.JamesBot;
+import java.util.Objects;
 
+import james.jamesbot.JamesBot;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import javax.swing.*;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,21 +28,20 @@ public class MainWindow extends AnchorPane {
 
     private JamesBot jamesBot;
 
-    private Image jamesImage = new Image(this.getClass().getResourceAsStream("/images/ben.png"));
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/dr.png"));
+    private final Image jamesImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/ben.png")));
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/dr.png")));
 
     /**
      * Initializes the MainWindow.
      */
     @FXML
     public void initialize() {
-        scrollPane.setOnScroll(event -> {
-            scrollPane.setVvalue(scrollPane.getVvalue() - event.getDeltaX() / dialogContainer.getHeight());
-        });
+        scrollPane.setOnScroll(event -> scrollPane.setVvalue(
+                scrollPane.getVvalue() - event.getDeltaX() / dialogContainer.getHeight()));
 
-        dialogContainer.heightProperty().addListener((observable, oldValue, newValue) -> {
-            scrollPane.setVvalue(1.0);
-        });
+        dialogContainer.heightProperty().addListener((observable, oldValue, newValue) -> scrollPane.setVvalue(1.0));
 
         sendButton.disableProperty().bind(Bindings.isEmpty(userInput.textProperty()));
 
@@ -76,8 +74,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (jamesBot.isEnd(input)) {
-            sendButton.setDisable(true);
-            userInput.setDisable(true);
+            Platform.exit();
         }
     }
 }

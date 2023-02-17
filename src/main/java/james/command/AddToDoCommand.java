@@ -6,7 +6,6 @@ import james.jamesbot.Ui;
 import james.task.TaskList;
 import james.task.ToDo;
 
-
 /**
  * Adds a task of type ToDo to the task list.
  */

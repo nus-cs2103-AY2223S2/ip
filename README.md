@@ -7,18 +7,4 @@ JamesBot frees your mind of having to remember things you need to do. It's,
 2. easy to learn
 3. SUPER FAST to use
 
-All you need to do is,
-
-Download it from here.
-Double-click it.
-Add your tasks.
-Let it manage your tasks for you 😉
-And it is FREE!
-
-Features:
-
-Managing tasks
-
-Managing deadlines (coming soon)
-
-Reminders (coming soon)
+Refer to the [User Guide](docs/README.md) for more details about the features available.

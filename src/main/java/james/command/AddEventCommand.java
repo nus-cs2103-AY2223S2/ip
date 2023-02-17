@@ -6,7 +6,6 @@ import james.jamesbot.Ui;
 import james.task.Event;
 import james.task.TaskList;
 
-
 /**
  * Adds a task of type Event to the task list.
  */

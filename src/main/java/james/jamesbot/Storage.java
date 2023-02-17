@@ -13,8 +13,6 @@ import james.task.Event;
 import james.task.TaskList;
 import james.task.ToDo;
 
-
-
 /**
  * Represents the file used to store task list data.
  */

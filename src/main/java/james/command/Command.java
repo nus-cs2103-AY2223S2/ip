@@ -5,7 +5,6 @@ import james.jamesbot.Storage;
 import james.jamesbot.Ui;
 import james.task.TaskList;
 
-
 /**
  * The Command class is an abstract class that represents an executable command.
  */

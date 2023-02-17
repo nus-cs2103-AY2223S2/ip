@@ -6,9 +6,6 @@ import james.jamesbot.Ui;
 import james.task.Deadline;
 import james.task.TaskList;
 
-
-
-
 /**
  * Adds a task of type Deadline to the task list.
  */

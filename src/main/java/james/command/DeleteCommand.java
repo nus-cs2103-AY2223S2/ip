@@ -6,7 +6,6 @@ import james.jamesbot.Ui;
 import james.task.Task;
 import james.task.TaskList;
 
-
 /**
  * Deletes a task from the task list.
  */

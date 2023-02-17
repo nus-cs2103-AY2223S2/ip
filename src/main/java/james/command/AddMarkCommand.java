@@ -6,7 +6,6 @@ import james.jamesbot.Ui;
 import james.task.Task;
 import james.task.TaskList;
 
-
 /**
  * Marks a task in the task list.
  */

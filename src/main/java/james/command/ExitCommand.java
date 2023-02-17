@@ -3,8 +3,6 @@ import james.jamesbot.Storage;
 import james.jamesbot.Ui;
 import james.task.TaskList;
 
-
-
 /**
  * Exits the program.
  */

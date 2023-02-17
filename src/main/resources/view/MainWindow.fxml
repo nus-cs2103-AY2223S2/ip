@@ -7,10 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="james.gui.MainWindow">
@@ -19,8 +15,8 @@
                    AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="70.0"
                    style="-fx-background-radius: 0.5; -fx-background-color: #6370ff; -fx-text-fill: #ffffff;
                    -fx-prompt-text-fill: white;" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
-                AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0"
+        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false"
+                onAction="#handleUserInput" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0"
                 prefHeight="41.0" prefWidth="69.0" style="-fx-background-radius: 0; -fx-background-color: #2E2D88;
                 -fx-text-fill: white;" text="Send">
             <font>
@@ -33,7 +29,7 @@
                     AnchorPane.topAnchor="1.0" AnchorPane.rightAnchor="1.0"
                     stylesheets="@../css/styles.css">
             <content>
-               <VBox styleClass="dialog-container" fx:id="dialogContainer" prefHeight="800.0" prefWidth="500.0" />
+               <VBox styleClass="dialog-container" fx:id="dialogContainer" prefHeight="999.0" prefWidth="500.0" />
             </content>
         </ScrollPane>
     </children>
