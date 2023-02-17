@@ -2,7 +2,7 @@ package duke.backend;
 
 import java.io.IOException;
 
-class Duke {
+public class Duke {
     public static void main(String[] args) throws IOException {
         TaskList taskManager = new TaskList();
         Ui ui = new Ui(taskManager);
@@ -13,5 +13,9 @@ class Duke {
         while (!isProgramEnded) {
             isProgramEnded = ui.readInput();
         }
+    }
+
+    public String getResponse(String input) {
+        return "Hello World!";
     }
 }
