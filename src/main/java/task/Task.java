@@ -3,14 +3,13 @@ package task;
 /**
  * Represents a Task.
  * Expected to turn abstract.
- *
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for a Task object.
+     * Constructs a Task object.
      * Meant for subclasses.
      *
      * @param description String to accompany the task describing the task.
@@ -64,6 +63,7 @@ public class Task {
     }
 
     /**
+     * Returns a boolean for whether another object and this object is equal.
      * Overridden equals method for object.
      * Check if an object and this object can be treated as equal.
      *

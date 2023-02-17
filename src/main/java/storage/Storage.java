@@ -18,7 +18,7 @@ public class Storage {
     // filepath should be "data/duke.txt"
 
     /**
-     * Constructor for Storage object.
+     * Constructs a Storage object.
      *
      * @param filePath String corresponding to relative path of duke.txt which is the saved list between sessions.
      * @return Storage Object.
@@ -104,6 +104,7 @@ public class Storage {
      * Stores the current Arraylist in current session to hard drive.
      *
      * @param listToStore ArrayList of Tasks to be stored in object filepath.
+     * @return String to be output as response
      */
     public String save(ArrayList<Task> listToStore) {
         try {
@@ -128,6 +129,12 @@ public class Storage {
         return "";
     }
 
+    /**
+     * Stores the current Arraylist in current session to hard drive.
+     *
+     * @param listToStore ArrayList of Expenses to be stored in object filepath.
+     * @return String to be output as response.
+     */
     public String saveExpense(ArrayList<Expense> listToStore) {
         while (!listToStore.isEmpty()) {
             try {

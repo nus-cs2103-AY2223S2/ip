@@ -7,7 +7,8 @@ public class Expense {
     private String description;
     private double amountSpent;
     /**
-     * Constructor for a new Expense object.
+     * Constructs a new Expense object.
+     *
      * @param description description of expense object
      * @param amountSpent amount of money spent on the particular expense.
      */
@@ -17,8 +18,9 @@ public class Expense {
     }
 
     /**
-     * Getter function for amountSpent.
-     * @return
+     * Gets amountSpent.
+     *
+     * @return amount of money spent on this expense.
      */
     public double getAmountSpent() {
         return this.amountSpent;

@@ -11,7 +11,7 @@ public class TaskList {
     private static ArrayList<Task> taskList;
 
     /**
-     * Constructor that uses given ArrayList to create a TaskList object.
+     * Constructs to create a TaskList object using given ArrayList of Tasks.
      *
      * @param list ArrayList to be modelled after.
      */
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for a new TaskList object.
+     * Constructs a new TaskList object.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -94,7 +94,8 @@ public class TaskList {
     }
 
     /**
-     * Given a string, find all tasks in the ArrayList in this, and returns them in an ArrayList.
+     * Returns an ArrayList of tasks that contains a given string.
+     *
      * @param find String to match and find.
      * @return ArrayList of Tasks that match the find.
      */

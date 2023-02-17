@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import expense.Expense;
+import expenselist.ExpenseList;
 import task.Task;
 
 /**
@@ -184,5 +185,9 @@ public class Ui {
                     + list.get(i).toString() + "\n";
         }
         return answer;
+    }
+
+    public static String printTotalSpent(ExpenseList list) {
+        return "$" + list.getTotal();
     }
 }

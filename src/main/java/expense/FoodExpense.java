@@ -7,7 +7,8 @@ public class FoodExpense extends Expense {
     private String prefix;
 
     /**
-     * Constructor for a FoodExpense object.
+     * Constructs a FoodExpense object.
+     *
      * @param description Description to describe the type of food bought.
      * @param amountSpent Amount of money spent on expense.
      */

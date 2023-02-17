@@ -17,7 +17,7 @@ public class Event extends Task {
     protected String displayTo;
 
     /**
-     * Constructor for an Event object.
+     * Constructs an Event object.
      *
      * @param description String to accompany the task describing the task.
      * @param from String representing the start time of the event.
@@ -35,7 +35,7 @@ public class Event extends Task {
     }
 
     /**
-     * Construction for an Event object with additional parameter.
+     * Constructs an Event object with additional parameter.
      * Used when loading from file.
      *
      * @param isDone boolean to represent if the task is marked as done.

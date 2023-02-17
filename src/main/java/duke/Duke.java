@@ -24,7 +24,7 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     /**
-     * Constructor for a Duke Object.
+     * Constructs a Duke Object.
      * Initializes the whole program as well as required objects.
      * If path leads to a file that does not exist, the file will be created.
      *

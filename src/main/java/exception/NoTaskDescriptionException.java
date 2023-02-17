@@ -6,7 +6,7 @@ package exception;
  */
 public class NoTaskDescriptionException extends DukeException {
     /**
-     * Constructor for a NoTaskDescriptionException object.
+     * Constructs a NoTaskDescriptionException object.
      *
      * @param errorMessage String to be the error message.
      * @return NoTaskDescriptionException object.

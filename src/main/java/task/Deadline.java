@@ -14,7 +14,7 @@ public class Deadline extends Task {
     protected String displayBy;
 
     /**
-     * Constructor for Deadline object.
+     * Constructs a Deadline object.
      * To be used when a new entry is added.
      *
      * @param description String to accompany the task describing the task.
@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for Deadline object.
+     * Constructs a Deadline object.
      * To be used when constructing object from file.
      *
      * @param isDone boolean to represent if object is marked as done.
@@ -46,8 +46,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns String representation of deadline Object
-     *
+     * Returns String representation of deadline Object.
      *
      * @return String representation of deadline Object
      */

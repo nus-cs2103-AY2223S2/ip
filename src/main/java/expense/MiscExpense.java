@@ -6,9 +6,10 @@ package expense;
 public class MiscExpense extends Expense {
     private String prefix;
     /**
-     * Constructor for a MiscExpense object.
-     * @param description
-     * @param amount
+     * Constructs a MiscExpense object.
+     *
+     * @param description Description to describe the type of expense.
+     * @param amount Amount of money spent on expense.
      */
     public MiscExpense(String description, double amount) {
         super(description, amount);

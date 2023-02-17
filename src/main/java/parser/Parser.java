@@ -89,14 +89,15 @@ public class Parser {
     }
 
     /**
-     * Returns boolean based on whether a corresponding input string has a non-task creation command.
-     * Attempts to carry out command if command is recognised, and returns true.
-     * Else returns false.
+     * Returns String based on the type of echo passed through, which would be the response put out to the UI.
      *
      * @param echo Input String to be parsed for commands.
      * @param tasks TaskList Object which encapsulates the current list of tasks.
      * @param ui Ui Object to call Ui-related methods.
-     * @return Boolean if any tasks are recognised and carried out.
+     * @param storage Storage object to call storage-related methods. Mainly saving.
+     * @param expenses ExpenseList to be saved to storage.
+     * @param expenseStorage Storage object to call storage-related methods. Mainly saving.
+     * @return String of response put out to UI.
      */
     public static String parseCommands(String echo, TaskList tasks, Ui ui, Storage storage, ExpenseList expenses,
                                        Storage expenseStorage) {
@@ -165,7 +166,14 @@ public class Parser {
         return answer;
     }
 
-    public static Expense parseExpenseEcho(String echo) {
+    /**
+     * Returns an expense object depending on the type of echo passed through.
+     *
+     * @param echo String to be parsed.
+     * @return Expense object that corresponds with passed echo.
+     * @throws DukeException in the case of unhandled situations.
+     */
+    public static Expense parseExpenseEcho(String echo) throws DukeException {
         if (echo.startsWith("food")) {
             String foodArguments = echo.substring(4).trim();
             if (foodArguments.isEmpty()) {
@@ -197,8 +205,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a String corresponding to response to action taken.
+     *
+     * @param echo String to be parsed.
+     * @param list ExpenseList object to take actions with.
+     * @return response to be output to UI.
+     */
     public static String parseExpenseCommands(String echo, ExpenseList list) {
         String answer = "";
+        if (echo.equals("total")) {
+            answer += "    OK here's the total amount of expenses in your list:\n";
+            answer += Ui.printTotalSpent(list);
+        }
         if (echo.equals("list")) {
             answer += "    OK here's the expenses in your list:\n";
             answer += Ui.printExpenseArrayList(list.getListOfExpenses());
@@ -207,7 +226,7 @@ public class Parser {
         if (echo.startsWith("delete") || echo.startsWith("remove")) {
             try {
                 int expenseToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
-                Expense removed = list.get(expenseToModify-1);
+                Expense removed = list.get(expenseToModify - 1);
                 list.removeExpense(expenseToModify - 1);
                 answer += Ui.showRemovedExpenseMessage(removed);
             } catch (Exception e) {

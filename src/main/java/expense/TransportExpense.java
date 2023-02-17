@@ -6,9 +6,10 @@ package expense;
 public class TransportExpense extends Expense {
     private String prefix;
     /**
-     * Constructor for a Transport Expense Object
-     * @param description
-     * @param amountSpent
+     * Constructs a Transport Expense Object
+     *
+     * @param description Description for type of transport expense.
+     * @param amountSpent Amount of money spent on expense.
      */
     public TransportExpense(String description, double amountSpent) {
         super(description, amountSpent);

@@ -6,7 +6,7 @@ package exception;
  */
 public class InvalidInputException extends DukeException {
     /**
-     * Constructor for an InvalidInputException object.
+     * Constructs an InvalidInputException object.
      *
      * @param errorMessage String to be used as error message.
      * @return InvalidInputException object.
