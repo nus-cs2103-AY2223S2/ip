@@ -15,12 +15,10 @@ public class TextUi {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static String NEXT_RESPONSE = "\n\nWhat else can I do for you?";
-    private Duke duke;
     private final Scanner in;
 
     public TextUi() {
         in = new Scanner(System.in);
-        this.duke = duke;
     }
 
     public String printGreetings() {

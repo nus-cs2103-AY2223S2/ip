@@ -76,7 +76,7 @@ public class TaskList {
      */
     public List<Task> search(String keyword) throws DukeException {
         List<Task> searched = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i ++) {
             String taskInString = tasks.get(i).toString();
             if (taskInString.contains(keyword)) {
                 searched.add(tasks.get(i));
@@ -112,5 +112,4 @@ public class TaskList {
         }
         return str;
     }
-
 }
