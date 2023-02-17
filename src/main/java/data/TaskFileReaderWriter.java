@@ -101,34 +101,12 @@ public class TaskFileReaderWriter {
     public boolean updateTaskFile(TaskManager taskManager) {
         File taskFile = new File(DIRECTORY_NAME + File.separator + FILE_NAME);
 
-        String taskString = null;
-        String details;
-        boolean isCompleted;
+        String taskString;
 
         try (FileWriter fileWriter = new FileWriter(taskFile)) {
             for (Task task : taskManager.getTasks()) {
-                if (task instanceof Deadline) {
-                    Deadline deadlineTask = (Deadline) task;
-                    details = deadlineTask.getDetails();
-                    String deadline = deadlineTask.getDeadline();
-                    isCompleted = deadlineTask.isCompleted();
-                    taskString = "Deadline|" + isCompleted + "|" + details + "|" + deadline;
-
-                } else if (task instanceof Event) {
-                    Event eventTask = (Event) task;
-                    details = eventTask.getDetails();
-                    String start = eventTask.getStartString();
-                    String end = eventTask.getEndString();
-                    isCompleted = eventTask.isCompleted();
-                    taskString = "Event|" + isCompleted + "|" + details + "|" + start + "|" + end;
-
-                } else if (task instanceof ToDo) {
-                    ToDo toDoTask = (ToDo) task;
-                    details = toDoTask.getDetails();
-                    isCompleted = toDoTask.isCompleted();
-                    taskString = "To-Do|" + isCompleted + "|" + details;
-                }
-                assert taskString != null;
+                taskString = getTaskString(task);
+                assert (taskString != null);
                 fileWriter.write(taskString + System.getProperty("line.separator"));
             }
         } catch (IOException e) {
@@ -137,6 +115,37 @@ public class TaskFileReaderWriter {
         }
         return true;
     }
+
+    /**
+     * Returns a String description of the Task to be stored into the file
+     * @param task a Task object
+     * @return A String representing the details of the task
+     */
+    private String getTaskString(Task task) {
+        String taskString = null;
+        if (task instanceof Deadline) {
+            Deadline deadlineTask = (Deadline) task;
+            String deadline = deadlineTask.getDeadline();
+            taskString = String.format("Deadline|%s|%s|%s",
+                    deadlineTask.isCompleted(),
+                    deadlineTask.getDetails(),
+                    deadline);
+        } else if (task instanceof Event) {
+            Event eventTask = (Event) task;
+            taskString = String.format("Event|%s|%s|%s|%s",
+                    eventTask.isCompleted(),
+                    eventTask.getDetails(),
+                    eventTask.getStartString(),
+                    eventTask.getEndString());
+        } else if (task instanceof ToDo) {
+            ToDo toDoTask = (ToDo) task;
+            taskString = String.format("To-Do|%s|%s",
+                    toDoTask.isCompleted(),
+                    toDoTask.getDetails());
+        }
+        return taskString;
+    }
+
 
     /**
       * Reads data from a file and creates a new TaskManager object.
