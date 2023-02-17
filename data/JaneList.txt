@@ -4,4 +4,6 @@ T|0| list
 T|0| list
 T|0| heyy
 T|1| cry
-D|0| rn book   |2019-02-03T06:30
+D|1| EEP  |2019-02-03T06:30
+D|0| homework  |2019-03-04T10:30
+E|0| submit assignment  |2019-03-05T10:30|2019-03-05T14:50

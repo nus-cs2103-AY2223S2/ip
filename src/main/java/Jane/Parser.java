@@ -47,16 +47,16 @@ public class Parser {
      */
     public static jane.task.Event parserE(String output, int count) {
         String des = output.substring(6);
-        String[] s = des.split("/");
+        String[] s = des.split("\\|");
         try {
             if (s.length == 1) {
                 throw new JaneException("Please specify when the event is :(((");
             }
         } catch (jane.JaneException err) {
             System.out.println("Please specify when event is");
-
         }
-        String[] start = s[1].substring(5).split(" ");
+        String[] start = s[1].split(" ");
+        //input event is "event meeting /2019-02-03 10:30/12:40"
         LocalDateTime startE = LocalDateTime.parse(String.format("%sT%s", start[0], start[1]));
         //here I am assuming an event only lasts 1 day since the day it starts is the day it ends
         LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
