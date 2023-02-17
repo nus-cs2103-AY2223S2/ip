@@ -1,0 +1,15 @@
+list
+hi
+todo breakfast
+deadline do homework /by 10
+event meeting /from 14 /to 20
+todo gym
+list
+mark 1
+deadline assingment 2 /by Jan 20
+mark 3
+mark 2
+unmark 2
+delete 4
+list
+bye
