@@ -30,9 +30,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
+        String datePattern = "MMM d yyyy";
         return "[E]" + super.toString() + " (from: "
-                + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + startDate.format(DateTimeFormatter.ofPattern(datePattern))
                 + " to: "
-                + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + endDate.format(DateTimeFormatter.ofPattern(datePattern)) + ")";
     }
 }
