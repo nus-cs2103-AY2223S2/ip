@@ -18,15 +18,6 @@ public abstract class Task implements java.io.Serializable {
     /**
      * Constructor for Task class.
      * @param description The task details.
-     */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    /**
-     * Constructor for Task class.
-     * @param description The task details.
      * @param tags Tags for the task.
      */
     public Task(String description, ArrayList<String> tags) {

@@ -11,18 +11,6 @@ public class Event extends Task {
     private String endDate;
 
     /**
-     * Constructor for Event class.
-     * @param description The event details.
-     * @param startDate The event start date/time.
-     * @param endDate The event end date/time.
-     */
-    public Event(String description, String startDate, String endDate) {
-        super(description);
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    /**
      * Constructor for Task class.
      * @param description The task details.
      * @param startDate The event start date/time.
@@ -31,6 +19,8 @@ public class Event extends Task {
      */
     public Event(String description, String startDate, String endDate, ArrayList<String> tags) {
         super(description, tags);
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override

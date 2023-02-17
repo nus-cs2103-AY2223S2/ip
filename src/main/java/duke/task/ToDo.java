@@ -8,14 +8,6 @@ import java.util.ArrayList;
 public class ToDo extends Task {
 
     /**
-     * Constructor for ToDo class.
-     * @param description The todo details.
-     */
-    public ToDo(String description) {
-        super(description);
-    }
-
-    /**
      * Constructor for Task class.
      * @param description The task details.
      * @param tags Tags for the task.

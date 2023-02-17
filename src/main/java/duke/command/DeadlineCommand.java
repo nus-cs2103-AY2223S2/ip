@@ -24,7 +24,9 @@ public class DeadlineCommand extends Command {
 
         // Get name and due date of task.
         String taskName = getName(parts, byIndex);
-        String dueDate = getDate(parts, byIndex);
+        String dueDate = tagsIndex == -1
+                ? getDate(parts, byIndex, parts.length)
+                : getDate(parts, byIndex, tagsIndex);
         ArrayList<String> tags = extractTags(parts, tagsIndex);
 
         if (taskName.length() == 0 || dueDate.length() == 0) {
@@ -68,9 +70,9 @@ public class DeadlineCommand extends Command {
      * @param byIndex Index of "/by" in the command.
      * @return The date, as a String.
      */
-    private String getDate(String[] parts, int byIndex) {
+    private String getDate(String[] parts, int byIndex, int nextIndex) {
         StringBuilder dueDate = new StringBuilder();
-        for (int i = byIndex + 1; i < parts.length; i++) {
+        for (int i = byIndex + 1; i < nextIndex; i++) {
             dueDate.append(i == byIndex + 1 ? "" : Values.SPACE);
             dueDate.append(parts[i]);
         }

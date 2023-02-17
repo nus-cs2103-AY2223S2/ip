@@ -24,7 +24,9 @@ public class EventCommand extends Command {
         // Get task name, start date, end date from the command.
         String taskName = getName(parts, fromIndex);
         String startDate = getStartDate(parts, fromIndex, toIndex);
-        String endDate = getEndDate(parts, toIndex);
+        String endDate = tagsIndex == -1
+                ? getEndDate(parts, toIndex, parts.length)
+                : getEndDate(parts, toIndex, tagsIndex);
         ArrayList<String> tags = extractTags(parts, tagsIndex);
 
         if (taskName.length() == 0 || startDate.length() == 0 || endDate.length() == 0) {
@@ -77,9 +79,9 @@ public class EventCommand extends Command {
      * @param toIndex Index of "/to" in the command.
      * @return The end date of the event, as a String.
      */
-    private String getEndDate(String[] parts, int toIndex) {
+    private String getEndDate(String[] parts, int toIndex, int nextIndex) {
         StringBuilder endDate = new StringBuilder();
-        for (int i = toIndex + 1; i < parts.length; i++) {
+        for (int i = toIndex + 1; i < nextIndex; i++) {
             endDate.append(i == toIndex + 1 ? "" : Values.SPACE);
             endDate.append(parts[i]);
         }

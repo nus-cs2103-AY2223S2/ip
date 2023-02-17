@@ -12,16 +12,6 @@ public class Deadline extends Task {
     private LocalDate dueDate;
 
     /**
-     * Constructor for Deadline class.
-     * @param description The deadline details.
-     * @param dueDate The LocalDate for the deadline in "yyyy-mm-dd" format.
-     */
-    public Deadline(String description, LocalDate dueDate) {
-        super(description);
-        this.dueDate = dueDate;
-    }
-
-    /**
      * Constructor for Task class.
      * @param description The task details.
      * @param dueDate The LocalDate for the deadline in "yyyy-mm-dd" format.
@@ -29,6 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate dueDate, ArrayList<String> tags) {
         super(description, tags);
+        this.dueDate = dueDate;
     }
 
     @Override
