@@ -39,6 +39,19 @@ public class ToDoCommand extends Command {
         }
     }
 
+    public void replace(TaskList tasks, Ui ui, Storage storage, int idx) {
+        try {
+            if (super.getCommand().equals("")) {
+                throw new EmptyTaskException("The task cant be empty");
+            }
+            ToDo todo = new ToDo(super.getCommand());
+            tasks.set(idx, todo);
+            storage.replaceToDo(idx, super.getCommand());
+        } catch (Exception e) {
+            ui.taskErrorMsg();
+        }
+    }
+
     public String generate(TaskList tasks, Ui ui, Storage storage) {
         ToDo todo = new ToDo(super.getCommand());
         return ui.printAddTask() + todo.toString();

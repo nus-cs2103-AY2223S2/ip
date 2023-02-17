@@ -2,6 +2,7 @@ package commands;
 
 import java.io.IOException;
 
+import exceptions.EmptyTaskException;
 import storage.Storage;
 import tasks.Deadline;
 import tasks.TaskList;
@@ -39,6 +40,23 @@ public class DeadlineCommand extends Command {
             ui.taskErrorMsg();
         }
     }
+
+    public void replace(TaskList tasks, Ui ui, Storage storage, int idx) {
+        try {
+            if (super.getCommand().equals("")) {
+                throw new EmptyTaskException("The task cant be empty");
+            }
+            String[] request = super.getCommand().split("/", 2);
+            String task = request[0];
+            String date = request[1];
+            Deadline deadline = new Deadline(task, date);
+            tasks.set(idx, deadline);
+            storage.replaceDeadline(idx, task, date);
+        } catch (Exception e) {
+            ui.taskErrorMsg();
+        }
+    }
+
 
     public String generate(TaskList tasks, Ui ui, Storage storage) {
         String[] request = super.getCommand().split("/", 2);

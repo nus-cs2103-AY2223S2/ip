@@ -32,6 +32,8 @@ public class Parser {
             return new EventCommand(splittedCmd[1]);
         case "find":
             return new FindCommand(splittedCmd[1]);
+        case "update":
+            return new UpdateCommand(splittedCmd[1]);
         default:
             return new InvalidCommand(splittedCmd[0]);
         }

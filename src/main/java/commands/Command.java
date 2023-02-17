@@ -45,6 +45,10 @@ public class Command {
         return;
     }
 
+    public void replace(TaskList tasks, Ui ui, Storage storage, int idx) {
+        return;
+    }
+
     public String generate(TaskList tasks, Ui ui, Storage storage) {
         return "ttt";
     }
