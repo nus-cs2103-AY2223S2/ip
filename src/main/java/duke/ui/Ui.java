@@ -14,7 +14,7 @@ public class Ui {
      */
     public String changeToFormat(String message) {
         String lineBreak1 = "-->-->-->-->-->-->-->-->-->-->-->\n    ";
-        String lineBreak2 = "\n<--<--<--<--<--<--<--<--<--<--\n\n";
+        String lineBreak2 = "\n<--<--<--<--<--<--<--<--<--<--<--";
         return (lineBreak1 + message + lineBreak2);
     }
 }
