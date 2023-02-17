@@ -15,6 +15,9 @@ A GUI similar to the below should appear. Note that when the app runs for the fi
 ![StartImage](https://user-images.githubusercontent.com/97591125/219017325-ea973d80-1003-4cc0-9c6e-11a15d36e775.png)
 
 5. Type the command in the command box and press `Send` button or Enter on keyboard to execute.
+A GUI similar to this picture should appear during the usage of the app.
+
+![UsageView](https://user-images.githubusercontent.com/97591125/219632953-aea9e6de-5438-42b6-981e-78143e846c1c.png)
 
 ## Features
 
