@@ -32,10 +32,10 @@ public class GuiUtil {
 
         // Load fonts
         final InputStream fontStream = MainApplication.class.getResourceAsStream("/fonts/Splatfont2.ttf");
-        if(fontStream==null)
-            SPLAT_FONT=null;
-        else{
-            SPLAT_FONT=Font.loadFont(fontStream,12);
+        if (fontStream == null) {
+            SPLAT_FONT = null;
+        } else {
+            SPLAT_FONT = Font.loadFont(fontStream, 12);
             try {
                 fontStream.close();
             } catch (IOException ignored) {

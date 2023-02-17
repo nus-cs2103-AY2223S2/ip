@@ -46,7 +46,9 @@ public class DialogBox extends HBox {
         assert profilePic != null;
 
         dialog.setText(text);
-        dialog.setFont(GuiUtil.SPLAT_FONT);
+        if (GuiUtil.SPLAT_FONT != null) {
+            dialog.setFont(GuiUtil.SPLAT_FONT);
+        }
         profilePic.setImage(img);
         final double profPicRad = Math.max(profilePic.getFitHeight(), profilePic.getFitWidth()) / 2;
         profilePic.setClip(new Circle(profPicRad, profPicRad, profPicRad));
