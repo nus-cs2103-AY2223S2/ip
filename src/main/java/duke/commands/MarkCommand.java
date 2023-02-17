@@ -24,7 +24,7 @@ public class MarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int taskNumber = Character.getNumericValue(tokens[1].charAt(0));
         tasks.mark(taskNumber, storage);
-        ui.showMarkingDone(tasks.get(taskNumber));
+        ui.showMarkingDone(tasks.get(taskNumber - 1));
     }
 
     @Override
