@@ -45,13 +45,11 @@ public class Duke {
             try {
                 cmd = input.nextLine();
                 System.out.println("•──────────────────♛─────────────────•");
+                out = getResponse(cmd);
+                System.out.println(out);
+                // User calls for exit
                 if (cmd.equals("bye")) {
-                    out = getResponse(cmd);
-                    System.out.println(out);
                     return;
-                } else {
-                    out = getResponse(cmd);
-                    System.out.println(out);
                 }
             } catch (DukeException e) {
                 out = ui.showException(e);
@@ -60,6 +58,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Execute the command and return the response string
+     * @param cmd Command by user
+     * @return Appropriate response from Duke
+     * @throws DukeException
+     */
     public String getResponse(String cmd) throws DukeException {
         try {
             String out;
@@ -88,15 +92,30 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    /**
+     * Saves the tasklist and show exit message
+     * @return Exit message
+     */
     private String doBye() {
         storage.save(list);
         return ui.showExit();
     }
 
+    /**
+     * Shows list of tasks
+     * @return String display for tasklist
+     */
     private String doList() {
         return ui.showList(list);
     }
 
+    /**
+     * Marks the task
+     * @param cmd Mark command
+     * @return Mark task message
+     * @throws DukeException
+     */
     private String doMark(String cmd) throws DukeException {
         int num = parser.getMarkNum(cmd, cmd.startsWith("mark"));
         if (list.getSize() < num) {
@@ -109,6 +128,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds task to tasklist
+     * @param cmd add task command
+     * @return Task added message
+     * @throws DukeException
+     */
     private String addTask(String cmd) throws DukeException {
         if (cmd.startsWith("todo")) {
             if (parser.getTodoName(cmd).equals("")) {
@@ -135,6 +160,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Deletes task from tasklist
+     * @param cmd Delete command
+     * @return Deleted task message
+     * @throws DukeException
+     */
     private String deleteTask(String cmd) throws DukeException {
         if (list.getSize() == 0) {
             throw new DukeException("('o')!! :: ☹ OOPS!!! The list is empty!");
@@ -146,15 +177,29 @@ public class Duke {
         return ui.removeTask(list, num);
     }
 
+    /**
+     * Find tasks in the tasklist
+     * @param cmd Find command
+     * @return Found tasks message
+     */
     private String findTask(String cmd) {
         String str = parser.getKeyword(cmd);
         return ui.showFoundTasks(list.findTask(str));
     }
 
+    /**
+     * Get help menu
+     * @return Help menu
+     */
     private String getHelp() {
         return ui.getHelp();
     }
 
+    /**
+     * Connects and retrieves saved data from duke.txt
+     * @return Retrieval message
+     * @throws DukeException
+     */
     private String retrieveData() throws DukeException {
         String out = storage.findData();
         storage.connect();

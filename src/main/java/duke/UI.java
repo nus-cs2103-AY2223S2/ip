@@ -5,7 +5,8 @@ package duke;
  */
 public class UI {
     /**
-     * Displays the welcome message
+     * Generates welcome message
+     * @return Welcome message
      */
     public String start() {
         String logo = " ____        _        \n"
@@ -22,6 +23,7 @@ public class UI {
     /**
      * Displays the tasks in the TaskList
      * @param list Current TaskList
+     * @return String for list of tasks
      */
     public String showList(TaskList list) {
         String out = "('.') :: Here are the task(s) in your list:";
@@ -34,6 +36,7 @@ public class UI {
     /**
      * Displays the tasks that match the keyword
      * @param list List of tasks that match the keyword
+     * @return String for list of found tasks
      */
     public String showFoundTasks(TaskList list) {
         String out = "('v') :: Here are the matching task(s) in your list:";
@@ -47,6 +50,7 @@ public class UI {
      * Marks a task
      * @param list Current TaskList
      * @param index Index of the task to be marked
+     * @return Message for marking task
      */
     public String mark(TaskList list, int index) {
         list.getTask(index - 1).setDone();
@@ -58,6 +62,7 @@ public class UI {
      * Unmarks a task
      * @param list Current TaskList
      * @param index Index of the task to be unmarked
+     * @return Message for unmarking task
      */
     public String unmark(TaskList list, int index) {
         list.getTask(index - 1).setUndone();
@@ -69,6 +74,7 @@ public class UI {
      * Adds a Todo task into the list
      * @param list Current TaskList
      * @param name Description of the Todo task
+     * @return Message for adding todo task
      */
     public String addTodo(TaskList list, String name) {
         list.addTask(new ToDo(name));
@@ -83,6 +89,7 @@ public class UI {
      * @param list Current TaskList
      * @param name Description of the deadline task
      * @param deadline Deadline of the deadline task
+     * @return Message for adding deadline task
      */
     public String addDeadline(TaskList list, String name, String deadline) {
         list.addTask(new Deadline(name, deadline));
@@ -98,6 +105,7 @@ public class UI {
      * @param name Description of the event task
      * @param start Start time/date of the event task
      * @param end End time/date of the event task
+     * @return Message for adding event task
      */
     public String addEvent(TaskList list, String name, String start, String end) {
         list.addTask(new Event(name, start, end));
@@ -111,6 +119,7 @@ public class UI {
      * Removes the task at the given index of the list
      * @param list Description of the event task
      * @param index Index of the task to be removed
+     * @return Message for removing task
      */
     public String removeTask(TaskList list, int index) {
         String out = "('o') :: Noted. I've removed this task :\n";
@@ -120,16 +129,26 @@ public class UI {
     }
 
     /**
-     * Displays the exit message
+     * Show exit message
+     * @return the exit message
      */
     public String showExit() {
         return "('v')!! :: Buhbyeee, hope to see you again soon!";
     }
 
+    /**
+     * Show exception message
+     * @param e DukeException
+     * @return Exception message
+     */
     public String showException(DukeException e) {
         return e.toString();
     }
 
+    /**
+     * Displays help menu
+     * @return Help menu
+     */
     public String getHelp() {
         String out = "Available features: \n";
         out += "'retrieve data' -> retrieve data from where you left off last\n";
