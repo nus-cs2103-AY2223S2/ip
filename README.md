@@ -27,6 +27,28 @@ And it is **FREE**!
 
 Features:
 
-  * Managing tasks
-  * Managing deadlines (**NEWLY ADDED FEATURE!**)
-  * Reminders (coming soon)
+  * 1. help -> Displays the lit of commands.
+
+    * Format: help
+
+  * 2. add -> Adds a Task to your lst
+
+    * Format: add <Task Type> <TaskName> <DateTime>
+
+  * 3. delete -> Removes the specified Task from your list.
+
+    * Format: delete <index>
+
+  * 4. mark / unmark -> Marks / Unmarks the specified Task
+
+    * Format: mark/unmark <index>
+
+  * 5. list > Displays your list.
+
+    * Format: list
+
+  * 6. bye -> Exits DOOK.
+
+    * Format: bye
+
+
