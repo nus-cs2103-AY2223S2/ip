@@ -1,7 +1,12 @@
 package parser;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import commands.AddCommand;
 import commands.CheckCommand;
@@ -10,6 +15,7 @@ import commands.DeleteCommand;
 import commands.ListTasksCommand;
 import commands.MarkCommand;
 import exceptions.InvalidDateFormatException;
+import exceptions.LoadTaskException;
 import exceptions.UnknownTaskException;
 import commands.EnumCommand;
 
@@ -74,4 +80,28 @@ public abstract class Parser {
         }
     }
 
+    public static String stringToParsedDateString(String s) throws LoadTaskException {
+        String[] dateTime = s.split(" ");
+        String mIndex;
+        try {
+            Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(dateTime[0]);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int mth = cal.get(Calendar.MONTH) + 1;
+            if (mth < 10) {
+                mIndex = "0" + mth;
+            } else {
+                mIndex = String.valueOf(mth);
+            }
+        } catch (IllegalArgumentException | NullPointerException | ParseException e) {
+            throw new LoadTaskException();
+        }
+
+        if (dateTime[1].length() == 1) {
+            dateTime[1] = "0" + dateTime[1];
+        }
+        String dateTimeValue = dateTime[2].substring(0,4) + "-" + mIndex + "-" + dateTime[1] 
+                                + "T" + dateTime[4].substring(0,5);
+        return dateTimeValue;
+    } 
 }

@@ -1,11 +1,9 @@
 package storage;
 import java.util.ArrayList;
 
-import exceptions.InsufficientArgumentsException;
-import exceptions.InvalidDateFormatException;
+import exceptions.DukeException;
 import exceptions.LoadTaskException;
-import exceptions.NoTaskDescriptionException;
-import exceptions.UnknownTaskException;
+import parser.Parser;
 import tasks.Task;
 
 
@@ -18,19 +16,25 @@ public class TaskList extends ArrayList<Task> {
     }
 
     public TaskList(String data) throws LoadTaskException {
+
         String[] arr = data.split("\n");
+        
         for (int i = 0; i < arr.length; i++) {
-            String[] taskStrings = arr[i].split("|");
+
+            String[] taskStrings = arr[i].split("\\|");
 
             String[] str = new String[taskStrings.length];
             str[0] = taskStrings[0];
             for (int j = 2; j < taskStrings.length; j++) {
                 str[j-1] = taskStrings[j];
+                if (j > 2) {
+                    str[j-1] = Parser.stringToParsedDateString(str[j-1]);
+                }
             }
             Task task = null;
             try {
                 task = Task.createTask(str);
-            } catch (NoTaskDescriptionException | InvalidDateFormatException | InsufficientArgumentsException | UnknownTaskException e) {
+            } catch (DukeException e) {
                 throw new LoadTaskException();
             }
 

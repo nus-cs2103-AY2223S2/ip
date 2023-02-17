@@ -14,7 +14,7 @@ public class Event extends Task{
     private ParsedDate startTime;
     private ParsedDate endTime;
 
-    public Event(String name, LocalDateTime startTime, LocalDateTime endTime) throws NoTaskDescriptionException{
+    public Event(String name, LocalDateTime startTime, LocalDateTime endTime) throws NoTaskDescriptionException {
         super(name, "Event");
         this.startTime = new ParsedDate(startTime);
         this.endTime = new ParsedDate(endTime);

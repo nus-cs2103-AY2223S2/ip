@@ -18,15 +18,13 @@ public class Storage {
 
     public Storage() {
         this.home = System.getProperty("user.dir");
-        this.path = Paths.get(this.home, "DataDuke");
+        this.path = Paths.get(this.home, "../../../DataDuke");
         this.file = Paths.get(this.path.toString(), "DATA_dUkE.txt").toFile();
 
         if (!Files.exists(this.path)) {
             try {
                 Files.createDirectories(this.path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException ignore) { }
         }
         
     }
@@ -35,13 +33,14 @@ public class Storage {
      * to load previous task list from local storage into the application
      * 
      * @return previous task list in string
+     * @throws FileLoadException
      */
     public String load() throws FileLoadException {
         String data = "";
         try {
             Scanner sc = new Scanner(this.file);
             while (sc.hasNextLine()) {
-                data += sc.nextLine();
+                data += sc.nextLine() + "\n";
             }
             sc.close();
         } catch (FileNotFoundException e) {
@@ -51,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * saves the most updates listed into a txt file
+     * saves the updated listed into a txt file
      * 
      * @throws IOException
      */
@@ -65,7 +64,7 @@ public class Storage {
                 stream = new PrintStream(file.toString());
         } 
         for (int i = 0; i < taskList.size(); i++) {
-            stream.println(taskList.get(i).stringifyTaskToSave());
+            stream.print(taskList.get(i).stringifyTaskToSave() + "\n");
         }
 
         stream.close();

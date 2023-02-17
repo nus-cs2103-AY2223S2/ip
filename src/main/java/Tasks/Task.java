@@ -27,9 +27,6 @@ public abstract class Task {
     }
 
     public static Task createTask(String[] args) throws NoTaskDescriptionException, InvalidDateFormatException, InsufficientArgumentsException, UnknownTaskException {
-        // for (int i = 0; i < args.length; i++) {
-        //     args[i].strip();
-        // }
 
         LocalDateTime[] dates = new LocalDateTime[2];
         
@@ -39,16 +36,16 @@ public abstract class Task {
             EnumTask tt = EnumTask.valueOf(args[0]);
             switch(tt) {
             case TODO:
-                task = new Todo(args[1]);
+                task = new Todo(args[1].strip());
                 break;
             case DEADLINE:
                 dates[0] = LocalDateTime.parse(args[2].strip());
-                task = new Deadline(args[1], dates[0]);
+                task = new Deadline(args[1].strip(), dates[0]);
                 break;
             case EVENT:
                 dates[0] = LocalDateTime.parse(args[2].strip());
                 dates[1] = LocalDateTime.parse(args[3].strip());
-                task = new Event(args[1], dates[0], dates[1]);
+                task = new Event(args[1].strip(), dates[0], dates[1]);
                 break;
             }
         } catch (IllegalArgumentException e) {

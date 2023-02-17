@@ -1,3 +1,4 @@
+package duke;
 import java.io.IOException;
 
 import commands.Command;
@@ -21,7 +22,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-
         new Duke().run();
     }
 
@@ -29,7 +29,8 @@ public class Duke {
         ui.greetUser();
 
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.load());
+            ui.notifySuccessfulLoad();
         } catch (DukeException e) {
             ui.printException(e);
         }
@@ -47,7 +48,7 @@ public class Duke {
             userInput = ui.getUserInput();
         }
 
-        ui.endSession();
+        this.endSession();
     }
 
     private void handleInput(String userInput) {
@@ -59,12 +60,11 @@ public class Duke {
             this.ui.printException(e);
         }
     
-        
-        // try {
-        //     storage.save(tasks);
-        // } catch (IOException e) { // should not encounter this.
-        //     System.out.println(e.getMessage());
-        // }
+    }
+
+    private void endSession() throws IOException {
+        storage.store(tasks);
+        ui.endSession();
     }
 
 }
