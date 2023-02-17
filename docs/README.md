@@ -44,6 +44,10 @@ Now you have 1 tasks in the list.
 
 Add a task with a specified deadline to the task list. 
 
+Format of input: deadline 'task description' /by 'deadline date' 
+
+Date this format: YYYY-MM-DD (eg. 2023-10-10)
+
 Example of usage:
 
 `deadline return book /by 2023-10-10`
@@ -67,6 +71,10 @@ Now you have 2 tasks in the list.
 ### `event` - Add an event task with time period 
 
 Add an event task with the starting date and ending date into the task list. 
+
+Format of input: event 'task description' /from 'start date' /to 'end date'
+
+Date in this format: YYYY-MM-DD (eg. 2023-10-10)
 
 Example of usage:
 
@@ -98,7 +106,7 @@ Example of usage:
 
 Expected outcome:
 
-The task will be marked as completed and the second square bracket will contain a 'X'.
+The first task will be marked as completed and the second square bracket will contain a 'X'.
 
 ```
 YAYYYY Good Job!!!
@@ -117,7 +125,7 @@ Example of usage:
 `unmark 1`
 
 Expected outcome:
-The task will be marked as not completed and the second square bracket will be empty.
+The first task will be marked as not completed and the second square bracket will be empty.
 
 
 ```
