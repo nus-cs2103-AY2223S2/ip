@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import static duke.tool.Parser.process_input;
 
-
 public class Duke {
 
     public static void print(String s) {
@@ -20,3 +19,4 @@ public class Duke {
         process_input(tasks, sc);
     }
 }
+
