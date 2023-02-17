@@ -31,6 +31,7 @@ public abstract class Task {
 
     /**
      * Marks this task as incomplete.
+     *
      * @return This task
      */
     public Task unmarkDone() {
@@ -45,6 +46,7 @@ public abstract class Task {
 
     /**
      * Represent this task as a string
+     *
      * @return Task as string
      */
     @Override

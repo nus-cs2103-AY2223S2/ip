@@ -19,6 +19,7 @@ public class Event extends Task {
 
     /**
      * Constructor method.
+     *
      * @param taskName Task name
      * @param fromDate Start date of task
      * @param toDate End date of task
@@ -38,6 +39,7 @@ public class Event extends Task {
 
     /**
      * Factory method.
+     *
      * @param commandInput Command line input that the user entered.
      * @return New Event task
      * @throws TaskNameNotSpecified Task name was not specified
