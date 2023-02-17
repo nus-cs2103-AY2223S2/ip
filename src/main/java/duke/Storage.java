@@ -1,5 +1,9 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.FileLoadFailedException;
+import duke.exceptions.FileSaveFailedException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,11 +52,9 @@ public class Storage {
         try {
             lines = Files.readAllLines(path);
         } catch (IOException e) {
-            System.out.println("Something went wrong reading the file.");
-            return tasks;
+            throw new FileLoadFailedException();
         }
 
-        // TODO: Exception Handling
         for (String line : lines) {
             List<String> args = List.of(line.split("\\|"));
             String type = args.get(0);
@@ -74,8 +76,7 @@ public class Storage {
                     task = new Event(description, from, to);
                     break;
                 default:
-                    System.out.println("Something went wrong");
-                    throw new DukeException();
+                    throw new FileLoadFailedException();
             }
 
             if (isDone.equals("true")) {
@@ -90,8 +91,9 @@ public class Storage {
      * Saves a TaskList to the supplied file.
      *
      * @param tasks TaskList to save.
+     * @throws DukeException if the tasklist failed to save to the file.
      */
-    public void saveTasklistToFile(TaskList tasks) {
+    public void saveTasklistToFile(TaskList tasks) throws DukeException {
         Path path = Paths.get(filePath);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.getSize(); i++) {
@@ -101,7 +103,7 @@ public class Storage {
         try {
             Files.write(path, sb.toString().getBytes());
         } catch (IOException e) {
-            System.out.println("Something went wrong");
+            throw new FileSaveFailedException();
         }
     }
 }

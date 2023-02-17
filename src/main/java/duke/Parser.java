@@ -7,6 +7,13 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyBodyException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidIndexException;
+import duke.exceptions.MissingIndexException;
+import duke.exceptions.MissingKeywordException;
+import duke.exceptions.UnknownCommandException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,66 +56,129 @@ public class Parser {
                 return new ListCommand();
             case "mark":
             case "unmark":
-                if (!args.hasNext()) {
-                    throw new DukeException("Need an index da yo~");
-                }
-
-                int idx;
-                try {
-                    idx = Integer.parseInt(args.next());
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Not a valid index da yo~");
-                }
-
-                return new MarkCommand(cmdWord.equals("mark"), idx);
+                return parseMark(args, cmdWord);
             case "todo":
-                String name = copyUntilDelimiter(args);
-                return new AddCommand(new Todo(name));
+                return parseTodo(args);
             case "deadline":
-                name = copyUntilDelimiter(args, "/by");
-                Date by;
-                try {
-                    by = parseDate(copyUntilDelimiter(args));
-                } catch (IllegalArgumentException e) {
-                    throw new DukeException("Not a valid date da yo~ I recognise YYYY-MM-DD date formats~");
-                }
-
-                return new AddCommand(new Deadline(name, by));
+                return parseDeadline(args);
             case "event":
-                name = copyUntilDelimiter(args, "/from");
-                Date from;
-                Date to;
-
-                try {
-                    from = parseDate(copyUntilDelimiter(args, "/to"));
-                    to = parseDate(copyUntilDelimiter(args));
-                } catch (IllegalArgumentException e) {
-                    throw new DukeException("Not a valid date da yo~ I recognise YYYY-MM-DD date formats~");
-                }
-
-                return new AddCommand(new Event(name, from, to));
+                return parseEvent(args);
             case "delete":
-                if (!args.hasNext()) {
-                    throw new DukeException("Need an index da yo~");
-                }
-
-                try {
-                    idx = Integer.parseInt(args.next());
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Not a valid index da yo~");
-                }
-                return new DeleteCommand(idx);
+                return parseDelete(args);
             case "find":
-                if (!args.hasNext()) {
-                    throw new DukeException("Need a keyword to search for da yo~");
-                }
-
-                String keyword = args.next();
-                return new FindCommand(keyword);
-
+                return parseFind(args);
             default:
-                throw new DukeException("WAKANDEYO!!! >:(");
+                throw new UnknownCommandException();
         }
+    }
+
+    /**
+     * Parses the "mark" command and returns the corresponding Command object.
+     *
+     * @param args Tokens of the command as strings
+     * @param cmdWord The name of the command; determines if it is "mark" or "unmark"
+     * @return The parsed Command object
+     * @throws DukeException if the command is unsuccessfully parsed.
+     */
+    private static Command parseMark(Iterator<String> args, String cmdWord) throws DukeException {
+        if (!args.hasNext()) {
+            throw new MissingIndexException();
+        }
+
+        int idx;
+        try {
+            idx = Integer.parseInt(args.next());
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+
+        return new MarkCommand(cmdWord.equals("mark"), idx);
+    }
+
+    /**
+     * Parses the "todo" command and returns the corresponding Command object.
+     *
+     * @param args Tokens of the command as strings
+     * @return The parsed Command object
+     * @throws DukeException if the command is unsuccessfully parsed.
+     */
+    private static Command parseTodo(Iterator<String> args) throws DukeException {
+        String name = copyUntilDelimiter(args);
+        if (name.length() == 0) {
+            throw new EmptyBodyException();
+        }
+        return new AddCommand(new Todo(name));
+    }
+
+    /**
+     * Parses the "deadline" command and returns the corresponding Command object.
+     *
+     * @param args Tokens of the command as strings
+     * @return The parsed Command object
+     * @throws DukeException if the command is unsuccessfully parsed.
+     */
+    private static Command parseDeadline(Iterator<String> args) throws DukeException {
+        String name = copyUntilDelimiter(args, "/by");
+        if (name.length() == 0) {
+            throw new EmptyBodyException();
+        }
+        Date by = parseDate(copyUntilDelimiter(args));;
+        return new AddCommand(new Deadline(name, by));
+    }
+
+    /**
+     * Parses the "event" command and returns the corresponding Command object.
+     *
+     * @param args Tokens of the command as strings
+     * @return The parsed Command object
+     * @throws DukeException if the command is unsuccessfully parsed.
+     */
+    private static Command parseEvent(Iterator<String> args) throws DukeException {
+        String name = copyUntilDelimiter(args, "/from");
+        if (name.length() == 0) {
+            throw new EmptyBodyException();
+        }
+        Date from = parseDate(copyUntilDelimiter(args, "/to"));
+        Date to = parseDate(copyUntilDelimiter(args));
+
+        return new AddCommand(new Event(name, from, to));
+    }
+
+    /**
+     * Parses the "delete" command and returns the corresponding Command object.
+     *
+     * @param args Tokens of the command as strings
+     * @return The parsed Command object
+     * @throws DukeException if the command is unsuccessfully parsed.
+     */
+    private static Command parseDelete(Iterator<String> args) throws DukeException {
+        if (!args.hasNext()) {
+            throw new MissingIndexException();
+        }
+
+        int idx;
+        try {
+            idx = Integer.parseInt(args.next());
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+        return new DeleteCommand(idx);
+    }
+
+    /**
+     * Parses the "find" command and returns the corresponding Command object.
+     *
+     * @param args Tokens of the command as strings
+     * @return The parsed Command object
+     * @throws DukeException if the command is unsuccessfully parsed.
+     */
+    private static Command parseFind(Iterator<String> args) throws DukeException {
+        if (!args.hasNext()) {
+            throw new MissingKeywordException();
+        }
+
+        String keyword = args.next();
+        return new FindCommand(keyword);
     }
 
     /**
@@ -191,15 +261,15 @@ public class Parser {
      *
      * @param arg String maybe containing a LocalDate or LocalDateTime.
      * @return Date object if successfully parsed.
-     * @throws DukeException If supplied String cannot be parsed according to the specifications above.
+     * @throws InvalidDateException If supplied String cannot be parsed according to the specifications above.
      */
-    public static Date parseDate(String arg) throws DukeException {
+    public static Date parseDate(String arg) throws InvalidDateException {
         if (isDateTime(arg)) {
             return new Date(LocalDateTime.parse(arg, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         } else if (isDate(arg)) {
             return new Date(LocalDate.parse(arg, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         } else {
-            throw new DukeException();
+            throw new InvalidDateException();
         }
     }
 }

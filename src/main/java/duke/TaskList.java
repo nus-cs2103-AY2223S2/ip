@@ -31,7 +31,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If supplied index is invalid
      */
     public Task get(int idx) throws IndexOutOfBoundsException {
-        return taskList.get(idx);
+        return this.taskList.get(idx);
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      * @param task Task to add
      */
     public void addTask(Task task) {
-        taskList.add(task);
+        this.taskList.add(task);
     }
 
     /**
@@ -50,12 +50,11 @@ public class TaskList {
      * @return The deleted Task object.
      */
     public Task deleteTask(int idx) throws IndexOutOfBoundsException {
-        if (idx < 0 || idx >= taskList.size()) {
+        if (idx < 0 || idx >= this.taskList.size()) {
             throw new IndexOutOfBoundsException();
         }
 
-        return taskList.remove(idx);
-        // printInBanner("Don't need this trash anymore yo~\n" + task + getTasklistSize());
+        return this.taskList.remove(idx);
     }
 
     /**
@@ -65,15 +64,24 @@ public class TaskList {
      */
     public int getSize() {
         return this.taskList.size();
-        // return "\nNow you have " + taskList.size() + " items on your list.";
     }
 
     public List<Task> findAllTasksWithKeyword(String keyword) {
-        return this.taskList.stream().filter(task -> task.doesDescriptionContain(keyword)).collect(Collectors.toList());
+        return this.taskList.stream()
+                            .filter(task -> task.doesDescriptionContain(keyword))
+                            .collect(Collectors.toList());
     }
 
     /**
-     * Public getter for the ArrayList.
+     * Returns true if the tasklist is empty.
+     *
+     * @return true if the tasklist is empty and false otherwise.
+     */
+    public boolean isEmpty() {
+        return this.taskList.size() == 0;
+    }
+    /**
+     * Gets the underlying ArrayList for the TaskList.
      *
      * @return The ArrayList of Tasks.
      */

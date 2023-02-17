@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Class that can store a Event task, which has additional "from" and "to" parameters.
+ * Class that can store an Event task, which has additional "from" and "to" parameters.
  */
 public class Event extends Task {
     protected Date from;
