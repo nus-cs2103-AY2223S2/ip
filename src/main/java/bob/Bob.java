@@ -8,9 +8,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /** Bob is a chat bot that helps manage tasks */
@@ -84,30 +84,36 @@ public class Bob extends Application {
         return ui.printReminders(tasks.getReminders());
     }
 
+    private String handleInput(String input) throws BobException {
+        String response;
+        if (input.equals("list")) {
+            response = handleList();
+        } else if (input.equals("remind")) {
+            response = handleRemind();
+        } else if (input.startsWith("todo")) {
+            response = handleTodo(input);
+        } else if (input.startsWith("event")) {
+            response = handleEvent(input);
+        } else if (input.startsWith("deadline")) {
+            response = handleDeadline(input);
+        } else if (input.startsWith("mark")) {
+            response = handleMark(input);
+        } else if (input.startsWith("unmark")) {
+            response = handleUnmark(input);
+        } else if (input.startsWith("delete")) {
+            response = handleDelete(input);
+        } else if (input.startsWith("find")) {
+            response = handleFind(input);
+        } else { // Invalid command
+            throw new BobException("No valid command was entered!");
+        }
+        return response;
+    }
+
     private String getResponse(String input) {
         String response;
         try {
-            if (input.equals("list")) {
-                response = handleList();
-            } else if (input.startsWith("todo")) {
-                response = handleTodo(input);
-            } else if (input.startsWith("event")) {
-                response = handleEvent(input);
-            } else if (input.startsWith("deadline")) {
-                response = handleDeadline(input);
-            } else if (input.startsWith("mark")) {
-                response = handleMark(input);
-            } else if (input.startsWith("unmark")) {
-                response = handleUnmark(input);
-            } else if (input.startsWith("delete")) {
-                response = handleDelete(input);
-            } else if (input.startsWith("find")) {
-                response = handleFind(input);
-            } else if (input.equals("remind")) {
-                response = handleRemind();
-            } else { // Invalid command
-                throw new BobException("No valid command was entered!");
-            }
+            response = handleInput(input);
         } catch (BobException e) {
             response = ui.errorPrint(e);
         }
@@ -189,6 +195,7 @@ public class Bob extends Application {
         stage.setResizable(false);
         stage.setMinHeight(600);
         stage.setMinWidth(400);
+        stage.getIcons().add(bob);
 
         mainLayout.setPrefSize(400.0, 600.0);
         mainLayout.setStyle("-fx-background-color: #89D08E");

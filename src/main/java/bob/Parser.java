@@ -180,6 +180,13 @@ public class Parser {
         return d;
     }
 
+    /**
+     * Validates and parses a given string,
+     * returns a keyword string if input is a valid find command
+     * @param s String to be validated and parsed
+     * @return Keyword string
+     * @throws BobException
+     */
     public static String parseFind(String s) throws BobException {
         if (!isFind(s)) {
             throw new BobException("Invalid find command!");

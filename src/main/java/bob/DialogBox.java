@@ -43,10 +43,22 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns a dialog box representing the user
+     * @param l Label containing user input
+     * @param iv Image representing the user
+     * @return DialogBox
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Returns a dialog box representing Bob
+     * @param l Label containing Bob's response
+     * @param iv Image representing Bob
+     * @return DialogBox
+     */
     public static DialogBox getBobDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.setStyle("-fx-background-color: #89D08E");
