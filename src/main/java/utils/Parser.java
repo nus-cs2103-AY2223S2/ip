@@ -114,6 +114,10 @@ public class Parser {
             return e.getMessage();
         }
 
+        if (startDate.compareTo(endDate) > 0) {
+            return Response.START_LATER_THAN_END.toString();
+        }
+
         Event event = new Event(details, startDate, endDate);
         taskManager.addTask(event);
         output = Response.EVENT_ADDED + "\n" + Format.displayTasks(false, taskManager);
