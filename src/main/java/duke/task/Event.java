@@ -43,7 +43,7 @@ public class Event extends Task {
         try {
             String dateTimes = input.split(" /from ")[1];
             startDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[0]);
-            endDateTime = DateTimeParser.parse(dateTimes.split(" /to ")[1]);
+            endDateTime = setEndDateTime(dateTimes);
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new DukeException("I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {
@@ -61,6 +61,14 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return String.format("E ~ %d ~ %s ~ %s ~ %s\n", isDone ? 1 : 0, description,
                 formatter.format(startDateTime), formatter.format(endDateTime));
+    }
+
+    private LocalDateTime setEndDateTime(String dateTimes) throws DukeException {
+        LocalDateTime dateTime = DateTimeParser.parse(dateTimes.split(" /to ")[1]);
+        if (dateTime.compareTo(startDateTime) < 0) {
+            throw new DukeException("Fake Duke wants your end datetime to be after your start date time!");
+        }
+        return dateTime;
     }
 
     /**
