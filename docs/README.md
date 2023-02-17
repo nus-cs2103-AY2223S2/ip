@@ -21,6 +21,10 @@ description, or list all tasks tagged to a certain word.
 You can mark your tasks as completed or not completed yet. All 
 tasks will be marked as uncompleted by default.
 
+### Auto-saving
+Duke will save all tasks each time you make a modification, so you
+don't have to manually save it!
+
 ## Notes:
 - Duke is not case-sensitive. Typing ```list``` and ```LIST``` is equivalent
 - Items in square brackets are optional.
@@ -31,6 +35,8 @@ be ignored.
 ## Usage
 
 ### 1. `list` - Lists tasks
+
+Format: `list [{tag}]`
 
 Example of usage: 
 

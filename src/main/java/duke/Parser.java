@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
@@ -31,6 +34,16 @@ import duke.task.ToDo;
  */
 public class Parser {
     public static final String DATE_TIME_READ_FORMAT = "yyyy-MM-dd HH:mm";
+    public static Map<String, String> COMMAND_FORMATS = Stream.of(new String[][] {
+            {"list", "list [{tag}]"},
+            {"mark", "mark {task number}"},
+            {"unmark", "unmark {task number}"},
+            {"delete", "delete {task number}"},
+            {"find", "find {keyword}"},
+            {"todo", "todo {task description} [/tag {tag}]"},
+            {"deadline", "deadline {task descrption} /by {deadline} [/tag {tag}]"},
+            {"event", "event {task description} /from {start} /to {end} [/tag {tag}]"}
+            }).collect(Collectors.toMap(x -> x[0], x -> x[1]));
 
     Command processCommand(String command, TaskList tasks) throws DukeException {
         String[] commandArr = command.split("\\s+");
@@ -56,7 +69,7 @@ public class Parser {
                 throw new InvalidCommandException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new IncompleteCommandException();
+            throw new IncompleteCommandException(commandArr[0].trim());
         } catch (NumberFormatException e) {
             throw new InvalidTaskNumberException(commandArr[1]);
         }

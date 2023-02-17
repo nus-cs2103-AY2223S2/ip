@@ -33,7 +33,7 @@ public class AddTodoCommand extends Command {
             tasks.addTask(task);
             return tasks.addTaskText(task);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new IncompleteCommandException();
+            throw new IncompleteCommandException("todo");
         }
     }
 }
