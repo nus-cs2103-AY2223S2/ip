@@ -1,6 +1,4 @@
-T / 0 / aa
-E / 1 / asasda / from 2121-04-12 / to 2021-04-15
-T / 0 / asdasd
-T / 0 / ada
-T / 0 / makan ada
-D / 0 / ini ada kok  / by 2021-12-12
+T / 0 / asdas
+T / 0 / asdas sadsd
+T / 0 / makan
+T / 0 / makan tahu

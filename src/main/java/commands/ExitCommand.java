@@ -3,6 +3,7 @@ package commands;
 import java.io.IOException;
 
 import storage.Storage;
+import tasks.Event;
 import tasks.TaskList;
 import ui.Ui;
 
@@ -25,6 +26,10 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         ui.bye();
         storage.bye();
+    }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printBye();
     }
 
     @Override

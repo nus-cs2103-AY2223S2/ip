@@ -35,4 +35,11 @@ public class UnmarkCommand extends Command {
             ui.idxErrorMsg();
         }
     }
+
+    public String generate(TaskList tasks, Ui ui, Storage storage) {
+        int idx = Integer.parseInt(super.getCommand()) - 1;
+        Task task = tasks.get(idx);
+        task.unmark();
+        return ui.printUnmark() + task.toString();
+    }
 }

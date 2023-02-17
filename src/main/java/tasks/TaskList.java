@@ -26,6 +26,15 @@ public class TaskList {
         }
     }
 
+    public String concat() {
+        String res = "";
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            res = res + (i + 1) + ". " + task.toString() + "\n" ;
+        }
+        return res;
+    }
+
     /**
      * Function to add task to the list
      *
@@ -87,5 +96,18 @@ public class TaskList {
                 idx++;
             }
         }
+    }
+
+    public String printFind(String key) {
+        String res = "";
+        int idx = 1;
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            if (task.toString().contains(key)) {
+                res = res + (idx) + ". " + task.toString() + "\n";
+                idx++;
+            }
+        }
+        return res;
     }
 }
