@@ -17,9 +17,9 @@ alongside a Graphical User Interface (GUI) for display
 ```
 Notes about the commands:
 * [] are to be replaced completely according to the label and cannot be empty
-* Date and time formats are flexible, / and - can be interchanged
+* Date and time formats are flexible, either / or - can be used
     * dd/MM/YYYY hhmm `eg. 12/05/2000 1359`
-    * dd/MM/YYYY `eg. 05/20/2023`
+    * dd/MM/YYYY `eg. 05-20-2023`
     * DDD `eg. Mon, tue` - Indicates next day of week, exclusive of today
 * Incorrect date format will be treated as plain text
 * A folder to store data between instances will be created in the same folder
@@ -73,4 +73,3 @@ Closes the chat-bot
 | find task | `find [K]` <br/>eg. `find work`                                                              |
 | help message | `help` |
 | exit | `bye` |
-
