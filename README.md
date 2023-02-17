@@ -4,10 +4,10 @@ Muse is a simple app that organises 📖 your tasks & life!
 ""Let's get you started!""
 
 Here are some basic things you can do: 
-- list out tasks '''list'''
-- add a task '''todo mop the floor'''
-- mark/unmark tasks as done '''mark 6''' 
-- set deadlines & events too! 😲 '''deadline do assignment /by Monday'''
+- list out tasks ```list```
+- add a task ```todo mop the floor```
+- mark/unmark tasks as done ```mark 6```
+- set deadlines & events too! 😲 ```deadline do assignment /by Monday```
 
 ## Setting up in Intellij
 
