@@ -198,4 +198,8 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return tasks;
     }
+
+    public void nukeList() {
+        tasks = new ArrayList<Task>();
+    }
 }
