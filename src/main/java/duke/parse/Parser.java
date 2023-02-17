@@ -1,10 +1,13 @@
 package duke.parse;
+import static duke.task.Task.convertDateTime;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
+
 
 /**
  *      File name: duke.parse.Parser.java
@@ -70,7 +73,7 @@ public class Parser {
     public static Task toTask(String command) throws DukeException {
         Task task;
         if (!Parser.isTaskCommand(command)) {
-            throw new DukeException("☹ OOPS!!! You cannot convert a non-task command into a task.");
+            throw new DukeException("OOPS!!! You cannot convert a non-task command into a task.");
         }
         if (command.matches(TODO_PATTERN)) {
             String taskDescription = command.substring(5);
@@ -88,6 +91,9 @@ public class Parser {
             String[] time = temp[1].split("\\s*/to\\s*");
             String from = time[0];
             String to = time[1];
+            if (convertDateTime(from).isAfter(convertDateTime(to))) {
+                throw new DukeException("OOPS!!! Wrong date time ordering");
+            }
             task = new Event(taskDescription, from, to);
         }
         return task;
