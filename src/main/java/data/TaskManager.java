@@ -149,9 +149,10 @@ public class TaskManager {
 
             if (eventsList.isEmpty()) {
                 freeTimeBlocks.add(new FreeTimeBlock(null, null));
+            } else {
+                Event event = eventsList.get(0);
+                freeTimeBlocks.add(new FreeTimeBlock(event.getEndTime(), null));
             }
-            Event event = eventsList.get(0);
-            freeTimeBlocks.add(new FreeTimeBlock(event.getEndTime(), null));
 
         } else {
 

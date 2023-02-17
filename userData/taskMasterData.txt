@@ -1,3 +1,2 @@
-Event|false|hello|14/02/2023 2349|18/02/2023 1300
-Deadline|false|do the dishes|23/04/2023 1300
-To-Do|false|make food
+Event|false|tuition|17/02/2023 1700|17/02/2023 2000
+Event|true|tuition2|17/02/2023 2000|17/02/2023 2300
