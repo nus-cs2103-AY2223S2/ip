@@ -44,6 +44,7 @@ public class AddTask implements AvaCommand {
      */
     @Override
     public boolean run(TaskList t, Storage s) throws CannotCreateDirectory, CannotWriteToFile, DateTimeNotParsed {
+
        switch (this.task) {
        case DEADLINE:
            newTask = new Deadline(parsedInput[0], parsedInput[1]);

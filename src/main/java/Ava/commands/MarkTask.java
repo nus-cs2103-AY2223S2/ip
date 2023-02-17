@@ -44,6 +44,8 @@ public class MarkTask implements AvaCommand {
     @Override
     public boolean run(TaskList t, Storage s) throws NonExistentTask, CannotCreateDirectory,
             CannotWriteToFile, CannotReadFromFile {
+        assert this.parsedInput.length == 1 && isDigit(parsedInput[0].charAt(0)): "Invalid Input";
+
         this.changedTask = t.mark(Integer.valueOf(this.parsedInput[0]));
         t.updateStorage(s);
         return true;

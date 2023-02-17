@@ -43,6 +43,9 @@ public class DeleteTask implements AvaCommand {
     @Override
     public boolean run(TaskList t, Storage s) throws NonExistentTask, CannotReadFromFile,
             CannotCreateDirectory, CannotWriteToFile {
+        //Already Check parsedInput is valid , if still execute until here then input is invalid
+        assert parsedInput.length == 1: "Invalid Input";
+
         int index = Integer.valueOf(parsedInput[0]);
         this.deletedTask = t.deleteTask(index); // Throws NonExistentTask
         t.updateStorage(s); // Throws CannotReadFromFile CannotCreateDirectory, CannotWriteToFile

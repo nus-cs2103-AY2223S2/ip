@@ -57,8 +57,8 @@ public class Parser {
                 throw new CommandNotFoundException(input);
             }
             return command;
-        }catch (ArrayIndexOutOfBoundsException | CommandNotFoundException e){
-            //Only these errors are caught as the CommandNotFoundException needs to be supplied the wrong input.
+        } catch (ArrayIndexOutOfBoundsException | AvaException e){
+
             throw new CommandNotFoundException(input);
         }
     }

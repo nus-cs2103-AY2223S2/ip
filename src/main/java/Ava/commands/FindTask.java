@@ -32,6 +32,9 @@ public class FindTask implements AvaCommand {
      */
     @Override
     public boolean run(TaskList t, Storage s) {
+        //Already Check parsedInput is valid , if still execute until here then input is invalid
+        assert parsedInput.length == 1 : "Invalid Input";
+
         this.keyword = this.parsedInput[0];
         this.tasks = t;
         return true;
