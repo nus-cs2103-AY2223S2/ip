@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 /**
  * A class to represent a task.
  * @author mmaimer33
@@ -10,13 +12,17 @@ public abstract class Task implements java.io.Serializable {
     protected String description;
     // Tracks whether the task is done.
     private boolean isDone;
+    // Tags
+    private ArrayList<String> tags;
 
     /**
      * Constructor for Task class.
      * @param description The task details.
+     * @param tags Tags for the task.
      */
-    public Task(String description) {
+    public Task(String description, ArrayList<String> tags) {
         this.description = description;
+        this.tags = tags;
         this.isDone = false;
     }
 
@@ -47,7 +53,7 @@ public abstract class Task implements java.io.Serializable {
      * @return The formatted representation.
      */
     public String formatTask() {
-        return String.format("[%s][%s] %s", getTaskType(), getStatusIcon(), getDescription());
+        return String.format("[%s][%s] %s%s", getTaskType(), getStatusIcon(), getDescription(), getTagsAsString());
     }
 
     /**
@@ -57,6 +63,19 @@ public abstract class Task implements java.io.Serializable {
      */
     public boolean searchDescription(String word) {
         return description.contains(word);
+    }
+
+    public String getTagsAsString() {
+        if (tags == null) {
+            return "";
+        }
+
+        StringBuilder output = new StringBuilder(" {");
+        for (int i = 0; i < tags.size() - 1; i++) {
+            output.append("#").append(tags.get(i)).append(", ");
+        }
+        output.append("#").append(tags.get(tags.size() - 1)).append("}");
+        return output.toString();
     }
 
     /**

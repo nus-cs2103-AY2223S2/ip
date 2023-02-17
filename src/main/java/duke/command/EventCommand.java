@@ -8,6 +8,8 @@ import duke.Values;
 import duke.task.Event;
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 /**
  * A Command subclass for the event command.
  */
@@ -17,18 +19,22 @@ public class EventCommand extends Command {
         String[] parts = command.split(Values.SPACEX);
         int fromIndex = Parser.getIndexOf(parts, "/from");
         int toIndex = Parser.getIndexOf(parts, "/to");
+        int tagsIndex = Parser.getIndexOf(parts, "/tags");
 
         // Get task name, start date, end date from the command.
         String taskName = getName(parts, fromIndex);
         String startDate = getStartDate(parts, fromIndex, toIndex);
-        String endDate = getEndDate(parts, toIndex);
+        String endDate = tagsIndex == -1
+                ? getEndDate(parts, toIndex, parts.length)
+                : getEndDate(parts, toIndex, tagsIndex);
+        ArrayList<String> tags = extractTags(parts, tagsIndex);
 
         if (taskName.length() == 0 || startDate.length() == 0 || endDate.length() == 0) {
             throw new DukeException("Please provide a description, start date, and end date.\n"
                     + "\tFormat: event <description> /from <start_date> /to <end_date>");
         }
 
-        Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
+        Task task = new Event(taskName, startDate, endDate, tags);
         list.addTask(task);
 
         return ui.pixlPrint("Added new event!\n"
@@ -73,9 +79,9 @@ public class EventCommand extends Command {
      * @param toIndex Index of "/to" in the command.
      * @return The end date of the event, as a String.
      */
-    private String getEndDate(String[] parts, int toIndex) {
+    private String getEndDate(String[] parts, int toIndex, int nextIndex) {
         StringBuilder endDate = new StringBuilder();
-        for (int i = toIndex + 1; i < parts.length; i++) {
+        for (int i = toIndex + 1; i < nextIndex; i++) {
             endDate.append(i == toIndex + 1 ? "" : Values.SPACE);
             endDate.append(parts[i]);
         }

@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.Parser;
@@ -19,10 +20,14 @@ public class DeadlineCommand extends Command {
     public String execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split(Values.SPACEX);
         int byIndex = Parser.getIndexOf(parts, "/by");
+        int tagsIndex = Parser.getIndexOf(parts, "/tags");
 
         // Get name and due date of task.
         String taskName = getName(parts, byIndex);
-        String dueDate = getDate(parts, byIndex);
+        String dueDate = tagsIndex == -1
+                ? getDate(parts, byIndex, parts.length)
+                : getDate(parts, byIndex, tagsIndex);
+        ArrayList<String> tags = extractTags(parts, tagsIndex);
 
         if (taskName.length() == 0 || dueDate.length() == 0) {
             throw new DukeException("Please provide both a deadline description and a due date.\n"
@@ -32,12 +37,12 @@ public class DeadlineCommand extends Command {
         // Convert date string to LocalDate
         LocalDate localDate;
         try {
-            localDate = LocalDate.parse(dueDate.toString());
+            localDate = LocalDate.parse(dueDate);
         } catch (RuntimeException re) {
             throw new DukeException("Could not parse date. Please use format 'yyyy-mm-dd'.");
         }
 
-        Task task = new Deadline(taskName.toString(), localDate);
+        Task task = new Deadline(taskName, localDate, tags);
         list.addTask(task);
         return ui.pixlPrint("Added new deadline!\n"
                 + "\t" + task.formatTask()
@@ -65,9 +70,9 @@ public class DeadlineCommand extends Command {
      * @param byIndex Index of "/by" in the command.
      * @return The date, as a String.
      */
-    private String getDate(String[] parts, int byIndex) {
+    private String getDate(String[] parts, int byIndex, int nextIndex) {
         StringBuilder dueDate = new StringBuilder();
-        for (int i = byIndex + 1; i < parts.length; i++) {
+        for (int i = byIndex + 1; i < nextIndex; i++) {
             dueDate.append(i == byIndex + 1 ? "" : Values.SPACE);
             dueDate.append(parts[i]);
         }

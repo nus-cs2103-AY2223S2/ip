@@ -4,10 +4,27 @@ import duke.DukeException;
 import duke.TaskList;
 import duke.gui.Ui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Abstract class for duke.commands.
  */
 public abstract class Command {
+
+    /**
+     * Extracts the tags of the task.
+     * @param parts Array of command's words (separated by spaces).
+     * @param tagIndex Index of "/tags" in the command.
+     * @return An ArrayList of the tags.
+     */
+    protected ArrayList<String> extractTags(String[] parts, int tagIndex) {
+        if (tagIndex == -1) {
+            return null;
+        }
+        return new ArrayList<String>(Arrays.asList(parts).subList(tagIndex + 1, parts.length));
+    }
+
     /**
      * Executes the command, calling whatever methods necessary from Ui instance and modifying
      *      the TaskList if required.
