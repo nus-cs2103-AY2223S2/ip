@@ -37,6 +37,7 @@ public class Leo {
             Storage.writeObjectToFile(taskList);
             parser.close();
         }
+        assert !response.equals("") : "Response should not be empty\n";
         return response;
     }
 
