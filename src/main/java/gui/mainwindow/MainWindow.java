@@ -1,5 +1,7 @@
 package gui.mainwindow;
 
+import java.util.concurrent.TimeUnit;
+
 import duke.Duke;
 import gui.dialogbox.DialogBox;
 import javafx.application.Platform;
@@ -57,7 +59,7 @@ public class MainWindow extends AnchorPane {
         );
 
         if (response.startsWith("    Saving:")) {
-            Platform.exit();;
+            Platform.exit();
             System.exit(0);
         }
         userInput.clear();

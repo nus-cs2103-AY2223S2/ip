@@ -1,6 +1,5 @@
 package ui;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import expense.Expense;
@@ -25,14 +24,10 @@ public class Ui {
      * Outputs startup sequence to console.
      */
     public static String startUpSequence() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "Bounsweet!!\n";
 
 
-        logo += "Hello! I'm Duke\n";
+        logo += "Hello! I'm Bounsweet\n";
         logo += "What can I do for you?\n";
         return logo;
     }
@@ -52,7 +47,7 @@ public class Ui {
      */
     public static String showAddedMessage(Task item) {
         String answer = "";
-        answer += "    Duke says:\n";
+        answer += "    Bounsweet says:\n";
         answer += "    Added\n";
         answer += "    " + item.toString() + "\n";
         return answer;
@@ -65,7 +60,7 @@ public class Ui {
      */
     public static String showAddedExpenseMessage(Expense expense) {
         String answer = "";
-        answer += "    Duke says:\n";
+        answer += "    Bounsweet says:\n";
         answer += "    Added\n";
         answer += "    " + expense.toString() + "\n";
         return answer;
@@ -77,6 +72,7 @@ public class Ui {
      */
     public static String showRemovedMessage(Task item) {
         String answer = "";
+        answer += "    Bounsweet says:\n";
         answer += "    Noted. I have removed this task:\n";
         answer += "    " + item.toString() + "\n";
         return answer;
@@ -134,7 +130,7 @@ public class Ui {
      */
     public String showClosingMessage() {
         String answer = "";
-        answer += "    Duke says:\n";
+        answer += "    Bounsweet says:\n";
         answer += "    Bye. Hope you run this program again!\n";
         return answer;
     }

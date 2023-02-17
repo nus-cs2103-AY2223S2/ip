@@ -159,6 +159,7 @@ public class Parser {
                 return answer;
             }
             ArrayList<Task> foundList = tasks.findArray(taskToFind);
+            answer += "    Bounsweet says:\n";
             answer += "    Here are the matching tasks in your list:\n";
             answer += Ui.printArrayList(foundList);
         }
@@ -215,10 +216,12 @@ public class Parser {
     public static String parseExpenseCommands(String echo, ExpenseList list) {
         String answer = "";
         if (echo.equals("total")) {
+            answer += "    Bounsweet says:\n";
             answer += "    OK here's the total amount of expenses in your list:\n";
             answer += Ui.printTotalSpent(list);
         }
         if (echo.equals("list")) {
+            answer += "    Bounsweet says:\n";
             answer += "    OK here's the expenses in your list:\n";
             answer += Ui.printExpenseArrayList(list.getListOfExpenses());
         }
@@ -228,6 +231,7 @@ public class Parser {
                 int expenseToModify = Integer.parseInt(echo.replaceAll("[^0-9]", ""));
                 Expense removed = list.get(expenseToModify - 1);
                 list.removeExpense(expenseToModify - 1);
+                answer += "    Bounsweet says:\n";
                 answer += Ui.showRemovedExpenseMessage(removed);
             } catch (Exception e) {
                 // TODO: handle exception
