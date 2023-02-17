@@ -19,7 +19,7 @@
 
 ## Quick Start
 
-1. Ensure you have Java 11 or later installed. Get it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+1. Ensure you have [Java 11](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed.
 2. Download the latest version of Duke [here](https://github.com/pzhengze/iP/releases/latest).
 3. Place `duke.jar` into a folder of your choice.
 4. Double click `duke.jar` to run.
