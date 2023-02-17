@@ -24,7 +24,7 @@ public class UwUke extends Application {
     private AnchorPane anchorPane;
     private static Stage stage;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/face.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
 
     @Override
