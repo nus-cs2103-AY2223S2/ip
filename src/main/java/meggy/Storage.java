@@ -5,9 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
+import meggy.exception.Consumer;
 import meggy.exception.MeggyException;
+
 
 /** Save cross-session data in file. */
 public class Storage {
@@ -59,8 +60,9 @@ public class Storage {
      * All file {@link IOException}s are ignored as if the file did not exist.
      *
      * @param parser Non-null. The function that parses next line and make changes to the list.
+     * @throws MeggyException If file has wrong format. File is potentially not a task list record.
      */
-    public void load(Consumer<String> parser) {
+    public void load(Consumer<String> parser) throws MeggyException {
         assert parser != null;
         final Scanner fileIn;
         try {
@@ -68,9 +70,17 @@ public class Storage {
         } catch (FileNotFoundException e) {
             return;
         }
+        boolean hasErr = false;
         while (fileIn.hasNextLine()) {
-            parser.accept(fileIn.nextLine());
+            try {
+                parser.accept(fileIn.nextLine());
+            } catch (MeggyException e) {
+                hasErr = true;
+            }
         }
         fileIn.close();
+        if (hasErr) {
+            throw new MeggyException(Util.ERROR_WRONG_FILE_0 + dataFile.getAbsolutePath() + Util.ERROR_WRONG_FILE_1);
+        }
     }
 }

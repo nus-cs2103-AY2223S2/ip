@@ -18,6 +18,9 @@ public final class Util {
     public static final String NO_FOUND = "N/A";
     /** Task list data file. */
     public static final String DATA_FILE_PATH = "MeggyData.txt";
+    public static final String ERROR_WRONG_FILE_0 = "This file does NOT look like my task list record: \"";
+    public static final String ERROR_WRONG_FILE_1 = "\". If this file is important, please back up before executing a" +
+            "ny more command because this file will be overwritten!";
 
     /** @deprecated Class stores all values statically should not be initialized. */
     private Util() {

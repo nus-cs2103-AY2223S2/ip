@@ -49,13 +49,13 @@ public final class Resource {
     /** Notification message after 'unmark' command. */
     public static final String NOTIF_UNMK = "OK. Marked this task as not done:\n";
     /** Notification message after syntax error. */
-    public static final String NOTIF_USAGE = "Usage: ";
+    public static final String NOTIF_USAGE = "Correct usage: ";
     /** Notification message after 'delete' command. */
     public static final String NOTIF_DEL = "OK. Removed this task:\n";
     /** Notification message after 'find' command. */
     public static final String NOTIF_FIND = "Here are the matching tasks in your list:\n";
     /** Notification message after 'bye' command. */
-    public static final String FAREWELL = "OK gotta go play more Turf Wars. Have a nice day!\n";
+    public static final String FAREWELL = "OK gotta go play more Turf Wars. Have a fresh day!\n";
     /** Icon for tasks marked 'done'. */
     public static final char DONE_MK = 'X';
     /** Front page greetings. */

@@ -1,14 +1,16 @@
 package meggy.gui;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import meggy.Meggy;
-import meggy.Resource;
+import meggy.exception.MeggyException;
 
 /**
  * Controller for gui.MainWindow. Provides the layout for the other controls.
@@ -29,6 +31,8 @@ public class MainWindow extends AnchorPane {
     /** The chatbot currently being used. */
     private Meggy meggy;
 
+    private ObservableList<Node> chatHistory;
+
     /** WHAT DOES THIS DO? WHEN IS THIS CALLED? */
     @FXML
     public void initialize() {
@@ -39,6 +43,7 @@ public class MainWindow extends AnchorPane {
         userInput.setFont(GuiUtil.SPLAT_FONT);
         sendButton.setFont(GuiUtil.SPLAT_FONT);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        chatHistory = dialogContainer.getChildren();
     }
 
     public void setApDimProperty(ReadOnlyDoubleProperty apHeightProperty, ReadOnlyDoubleProperty apWidthProperty) {
@@ -56,7 +61,7 @@ public class MainWindow extends AnchorPane {
     public void setChatbot(Meggy m) {
         assert m != null;
         meggy = m;
-        dialogContainer.getChildren().add(DialogBox.ofMeggy(Resource.GREETINGS));
+        meggy.bindGui(s -> chatHistory.add(DialogBox.ofMeggy(s)));
     }
 
     /**
@@ -67,12 +72,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         assert userInput != null;
         assert dialogContainer != null;
-        String input = userInput.getText();
-        String response = meggy.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.ofUser(input),
-                DialogBox.ofMeggy(response)
-        );
+        final String input = userInput.getText();
         userInput.clear();
+        chatHistory.add(DialogBox.ofUser(input));
+        String response;
+        try {
+            response = meggy.parseAndGetResponse(input);
+        } catch (MeggyException e) {
+            response = e.getMessage();
+        }
+        chatHistory.add(DialogBox.ofMeggy(response));
     }
 }

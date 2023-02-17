@@ -1,8 +1,9 @@
 package meggy;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Consumer;
 
 import meggy.exception.Function;
 import meggy.exception.MeggyException;
@@ -11,6 +12,10 @@ import meggy.task.UserTask;
 
 /** The chatbot. After initialization, interact by calling {@code getResponse} method. */
 public class Meggy {
+    /** What to do when the user-typed the command is unknown. Currently: notify user command is unknown. */
+    public final static Function<String, String> unknownCmdBehavior = s -> {
+        throw new MeggyException(Resource.errUnknownCmd(Parser.get1stArg(s)));
+    };
     /**
      * What to do when reaching different commands.
      * <p>
@@ -20,15 +25,17 @@ public class Meggy {
      * function that modifies task list of the command requires it.
      */
     public final Map<String, Function<String, String>> cmdToJob;
-
-    /** What to do when the user-typed the command is unknown. Currently: notify user command is unknown. */
-    public final Function<String, String> unknownCmdBehavior = s -> {
-        throw new MeggyException(Resource.errUnknownCmd(Parser.get1stArg(s)));
-    };
+    /** Commmands that changes the task list */
+    public final Set<String> listChangingCmd = Set.of(Resource.CMD_MARK, Resource.CMD_UNMK, Resource.CMD_TODO,
+            Resource.CMD_DDL, Resource.CMD_EVENT, Resource.CMD_DEL);
     /** List of tasks. Allows dupes. */
     private final TaskList tasks;
     /** Location to save cross-session data. */
     private final Storage storage;
+    /** Switch that enables/disables write to storage file. */
+    private boolean fileWrite = true;
+    /** Channel to send extra message. */
+    private Consumer<String> notifMsgSender = System.out::println;
 
     /** Creates a chatbot agent instance. */
     public Meggy() {
@@ -45,9 +52,19 @@ public class Meggy {
                 Resource.CMD_FIND, this::find
         );
         storage = new Storage(new File(Util.DATA_FILE_PATH));
-        storage.load(this::getResponse);
     }
 
+    /** Save task list to storage file. Redirects {@link MeggyException} to {@code notifMsgSender} */
+    private void saveToFile() {
+        if (!fileWrite) {
+            return;
+        }
+        try {
+            storage.save(tasks);
+        } catch (MeggyException e) {
+            notifMsgSender.accept(e.getMessage());
+        }
+    }
 
     /**
      * Updates the status of the user task specified by index.
@@ -63,11 +80,12 @@ public class Meggy {
             idx = Parser.parseIdx(args);
             tasks.boundsCheck(idx);
         } catch (MeggyException e) {
-            return e.getMessage() + Util.usageIdxCmd(newStatus ? Resource.CMD_MARK : Resource.CMD_UNMK);
+            notifMsgSender.accept(Util.usageIdxCmd(newStatus ? Resource.CMD_MARK : Resource.CMD_UNMK));
+            throw e;
         }
         final UserTask task = tasks.get(idx);
         task.setDone(newStatus);
-        storage.save(tasks);
+        saveToFile();
         return (newStatus ? Resource.NOTIF_MARK : Resource.NOTIF_UNMK) + Resource.TASK_STRING_INDENT + task + '\n';
     }
 
@@ -89,7 +107,7 @@ public class Meggy {
             }
         }
         tasks.add(newTask);
-        storage.save(tasks);
+        saveToFile();
         return Resource.NOTIF_ADD + reportChangedTaskAndList(newTask);
     }
 
@@ -98,7 +116,6 @@ public class Meggy {
      *
      * @param arg Non-null. Index (start with 1) string of task to be updated.
      * @return Response to 'delete' command.
-     * @throws MeggyException If storage file IO throws {@link IOException}.
      */
     private String deleteTask(String arg) throws MeggyException {
         assert arg != null;
@@ -107,10 +124,11 @@ public class Meggy {
             idx = Parser.parseIdx(arg);
             tasks.boundsCheck(idx);
         } catch (MeggyException e) {
-            return e.getMessage() + Util.usageIdxCmd(Resource.CMD_DEL);
+            notifMsgSender.accept(Util.usageIdxCmd(Resource.CMD_DEL));
+            throw e;
         }
         final UserTask task = tasks.remove(idx);
-        storage.save(tasks);
+        saveToFile();
         return Resource.NOTIF_DEL + reportChangedTaskAndList(task);
     }
 
@@ -148,17 +166,31 @@ public class Meggy {
     /**
      * Parses and executes user's input line. Changes task list accordingly.
      *
-     * @param in Non-null. User's raw input line.
+     * @param line Non-null. User's raw input line.
      * @return Complete response of this chatbot. Either the response of a valid query or error message.
+     * @throws MeggyException If syntax error occurred during parsing.
      */
-    public String getResponse(String in) {
-        assert in != null;
+    public String parseAndGetResponse(String line) throws MeggyException {
+        assert line != null;
+        final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(cmdToJob, line);
+        final Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
+        return job.apply(jobAndArg.args);
+    }
+
+    /**
+     * Sets new {@code notifMsgSender}, use this channel to send greeting message, and add tasks from file to list.
+     */
+    public void bindGui(Consumer<String> notifMsgSender) {
+        assert notifMsgSender != null;
+        this.notifMsgSender = notifMsgSender;
+        notifMsgSender.accept(Resource.GREETINGS);
+
+        fileWrite = false;
         try {
-            final Parser.JobAndArg<String> jobAndArg = Parser.parseJobAndArg(cmdToJob, in);
-            final Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
-            return job.apply(jobAndArg.args);
+            storage.load(this::parseAndGetResponse);
         } catch (MeggyException e) {
-            return e.getMessage();
+            notifMsgSender.accept(e.getMessage());
         }
+        fileWrite = true;
     }
 }
