@@ -1,5 +1,8 @@
 package duke.commands;
 
+import java.io.IOException;
+
+import duke.Storage;
 import duke.exceptions.CommandExecutionError;
 import duke.parsing.MessageFormat;
 import duke.parsing.Parser;
@@ -29,6 +32,12 @@ public class DeleteCmd extends Command {
     public String execute() throws CommandExecutionError {
         int index = Parser.parseMarkUnmarkDeleteIndex(lineInput);
         this.task = this.taskList.removeTask(index);
+
+        try {
+            Storage.saveToFile(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return String.format("The task has disappeared into the night...:\n%s\n%s",
                 MessageFormat.indentString(this.task.toString(), 1),

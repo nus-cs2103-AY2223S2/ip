@@ -1,5 +1,8 @@
 package duke.commands;
 
+import java.io.IOException;
+
+import duke.Storage;
 import duke.exceptions.CommandExecutionError;
 import duke.parsing.MessageFormat;
 import duke.tasks.Event;
@@ -31,6 +34,12 @@ public class EventCmd extends Command {
     public String execute() throws CommandExecutionError {
         this.event = Event.create(this.lineInput);
         taskList.add(this.event);
+
+        try {
+            Storage.saveToFile(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return String.format("A new event! I hope it's at night:\n%s\n%s",
                 MessageFormat.indentString(this.event.toString(), 1),

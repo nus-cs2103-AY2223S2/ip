@@ -44,6 +44,12 @@ public class ToDo extends Task {
     public String stringFields() {
         return "";
     }
+
+    @Override
+    public String saveStringFields() {
+        return "";
+    }
+
     /**
      * Gets due date of task
      *

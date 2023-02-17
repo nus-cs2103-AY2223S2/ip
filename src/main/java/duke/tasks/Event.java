@@ -2,7 +2,6 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 import duke.exceptions.EventFromToNotSpecified;
 import duke.exceptions.TaskNameNotSpecified;
@@ -14,8 +13,8 @@ import duke.parsing.Parser;
 public class Event extends Task {
     private String fromDate;
     private String toDate;
-    private Optional<LocalDate> chronoFromDate;
-    private Optional<LocalDate> chronoToDate;
+    private LocalDate chronoFromDate;
+    private LocalDate chronoToDate;
 
     /**
      * Constructor method.
@@ -57,11 +56,16 @@ public class Event extends Task {
      */
     @Override
     public String stringFields() {
-        String fromDateString = this.chronoFromDate.isEmpty() ? this.fromDate : this.chronoFromDate.get()
+        String fromDateString = this.chronoFromDate == null ? this.fromDate : this.chronoFromDate
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String toDateString = this.chronoToDate.isEmpty() ? this.toDate : this.chronoToDate.get()
+        String toDateString = this.chronoToDate == null ? this.toDate : this.chronoToDate
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format(" (from: %s to: %s)", fromDateString, toDateString);
+    }
+
+    @Override
+    public String saveStringFields() {
+        return String.format(" (from: %s to: %s)", this.fromDate, this.toDate);
     }
 
 
@@ -72,6 +76,6 @@ public class Event extends Task {
      */
     @Override
     public LocalDate getEndDate() {
-        return this.chronoToDate.get();
+        return this.chronoToDate;
     }
 }

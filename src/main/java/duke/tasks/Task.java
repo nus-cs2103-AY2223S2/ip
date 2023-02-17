@@ -17,6 +17,7 @@ public abstract class Task {
     }
 
     protected abstract String stringFields();
+    protected abstract String saveStringFields();
     public abstract LocalDate getEndDate();
 
     /**
@@ -54,4 +55,7 @@ public abstract class Task {
         return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ", this.taskName + this.stringFields());
     }
 
+    public String toStringSave() {
+        return String.format("[%s][%s] %s", this.type, this.isDone ? "x" : " ", this.taskName + this.saveStringFields());
+    }
 }

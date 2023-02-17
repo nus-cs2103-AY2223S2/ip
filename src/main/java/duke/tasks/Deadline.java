@@ -2,7 +2,6 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 import duke.exceptions.DeadlineByNotSpecified;
 import duke.exceptions.TaskNameNotSpecified;
@@ -14,7 +13,7 @@ import duke.parsing.Parser;
  */
 public class Deadline extends Task {
     private String dueDate;
-    private Optional<LocalDate> chornoDueDate;
+    private LocalDate chornoDueDate;
 
     /**
      * Constructor method.
@@ -49,9 +48,14 @@ public class Deadline extends Task {
      */
     @Override
     public String stringFields() {
-        String dateString = this.chornoDueDate.isEmpty() ? dueDate
-                : chornoDueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String dateString = this.chornoDueDate == null ? dueDate
+                : chornoDueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format(" (by: %s)", dateString);
+    }
+
+    @Override
+    public String saveStringFields() {
+        return String.format(" (by: %s)", this.dueDate);
     }
 
     /**
@@ -61,6 +65,6 @@ public class Deadline extends Task {
      */
     @Override
     public LocalDate getEndDate() {
-        return this.chornoDueDate.get();
+        return this.chornoDueDate;
     }
 }

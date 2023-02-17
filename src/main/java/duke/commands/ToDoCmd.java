@@ -1,5 +1,8 @@
 package duke.commands;
 
+import java.io.IOException;
+
+import duke.Storage;
 import duke.exceptions.CommandExecutionError;
 import duke.parsing.MessageFormat;
 import duke.tasks.Task;
@@ -29,6 +32,12 @@ public class ToDoCmd extends Command {
     public String execute() throws CommandExecutionError {
         this.toDo = ToDo.create(this.lineInput);
         taskList.add(this.toDo);
+
+        try {
+            Storage.saveToFile(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return String.format("I'll remember this task:\n%s\n%s",
                 MessageFormat.indentString(this.toDo.toString(), 1),

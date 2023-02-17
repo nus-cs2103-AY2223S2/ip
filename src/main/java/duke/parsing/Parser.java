@@ -2,7 +2,6 @@ package duke.parsing;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Optional;
 
 import duke.exceptions.DeadlineByNotSpecified;
 import duke.exceptions.EventFromToNotSpecified;
@@ -36,12 +35,13 @@ public class Parser {
      * @param timeInput Command line input that user entered
      * @return CommandInput type
      */
-    public static Optional<LocalDate> parseDate(String timeInput) {
+    public static LocalDate parseDate(String timeInput) {
+        System.out.println(timeInput + "###############");
         try {
             timeInput = timeInput.replaceAll("/", "-");
-            return Optional.of(LocalDate.parse(timeInput));
+            return LocalDate.parse(timeInput);
         } catch (DateTimeParseException e) {
-            return Optional.empty();
+            return null;
         }
     }
 
@@ -87,8 +87,9 @@ public class Parser {
             throw new DeadlineByNotSpecified();
         }
 
-        taskName = commandInput.substring(9, indexOfBy - 1);
-        if (taskName.equals("")) {
+        try {
+            taskName = commandInput.substring(9, indexOfBy - 1);
+        } catch (StringIndexOutOfBoundsException e) {
             throw new TaskNameNotSpecified();
         }
 

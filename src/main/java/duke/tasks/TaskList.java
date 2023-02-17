@@ -1,10 +1,8 @@
 package duke.tasks;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import duke.Storage;
 import duke.exceptions.CommandExecutionError;
 import duke.exceptions.ListIndexOutOfRange;
 
@@ -30,6 +28,15 @@ public class TaskList {
         return result.toString();
     }
 
+    public String toStringSave() {
+        StringBuilder result = new StringBuilder();
+        for (int index = 0; index < this.tasks.size(); index++) {
+            boolean addNewLine = index != 0;
+            result.append((addNewLine ? "\n" : "") + (index + 1) + ". " + this.tasks.get(index).toStringSave());
+        }
+        return result.toString();
+    }
+
     /**
      * Gets number of tasks in the list.
      *
@@ -51,16 +58,9 @@ public class TaskList {
         try {
             removedTask = this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(e.getClass().getName());
             throw new ListIndexOutOfRange();
         }
-
-        try {
-            assert sizeBeforeRemove - this.countTasks() == 1;
-            Storage.saveToFile(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        assert sizeBeforeRemove - this.countTasks() == 1;
         return removedTask;
     }
 
@@ -73,12 +73,6 @@ public class TaskList {
         int sizeBeforeAdd = this.countTasks();
         this.tasks.add(task);
         assert this.countTasks() - sizeBeforeAdd == 1;
-
-        try {
-            Storage.saveToFile(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -124,12 +118,12 @@ public class TaskList {
      */
     public TaskList viewSched(LocalDate date) {
         TaskList result = new TaskList();
-        this.tasks.stream().forEach(task -> {
+        for (Task task : this.tasks) {
             LocalDate endDate = task.getEndDate();
             if (endDate != null && (date.equals(endDate) || date.isAfter(endDate))) {
                 result.add(task);
             }
-        });
+        }
         return result;
     }
 }

@@ -1,5 +1,8 @@
 package duke.commands;
 
+import java.io.IOException;
+
+import duke.Storage;
 import duke.exceptions.CommandExecutionError;
 import duke.parsing.MessageFormat;
 import duke.tasks.Deadline;
@@ -30,6 +33,12 @@ public class DeadlineCmd extends Command {
     public String execute() throws CommandExecutionError {
         this.deadline = Deadline.create(this.lineInput);
         taskList.add(this.deadline);
+
+        try {
+            Storage.saveToFile(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return String.format("Well, well... another task to the list:\n%s\n%s",
                 MessageFormat.indentString(this.deadline.toString(), 1),
