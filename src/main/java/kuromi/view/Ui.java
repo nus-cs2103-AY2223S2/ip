@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Read user's inputs.
+     * Reads user's inputs.
      * @return User input as a string.
      */
     public String readCommand() {
@@ -32,14 +32,14 @@ public class Ui {
     }
 
     /**
-     * Show error if cannot load the file that is in the hard disk.
+     * Shows error if cannot load the file that is in the hard disk.
      */
     public String showLoadingError() {
         return ("Cannot load file. :(\n");
     }
 
     /**
-     * Show welcome message.
+     * Shows welcome message.
      */
     public static String showWelcomeMessage() {
         String msg = "Hello! I'm Kuromi\nWhat can I do for you?\n";
@@ -51,7 +51,7 @@ public class Ui {
     }
 
     /**
-     * Show a message to the user.
+     * Shows a message to the user.
      * @param msg Message to be shown.
      */
     public String show(String msg) {
@@ -59,7 +59,7 @@ public class Ui {
     }
 
     /**
-     * Show bye message to the user.
+     * Shows bye message to the user.
      * @param msg Message to be shown.
      * @return Message
      */

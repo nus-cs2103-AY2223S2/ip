@@ -20,8 +20,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Find the tasks that contain the keyword input from the user.
-     * Ask UI to show the output.
+     * Finds the tasks that contain the keyword input from the user.
+     * Asks UI to show the output.
      *
      * @param tasks Task list.
      * @param ui UI of the application to interact with users.

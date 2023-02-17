@@ -18,7 +18,7 @@ import kuromi.task.TaskList;
 import kuromi.task.Todo;
 
 /**
- * Read data from the file in the hard disk and store data to the same file if there are any updates to the
+ * Reads data from the file in the hard disk and store data to the same file if there are any updates to the
  * current task list.
  */
 public class Storage {
@@ -26,7 +26,7 @@ public class Storage {
     private java.nio.file.Path filePath;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor
+     * Main constructor
      * (for invocation by classes that require updating data to the storage and taking data
      * from the storage.
      *

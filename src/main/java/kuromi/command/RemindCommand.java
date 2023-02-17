@@ -18,6 +18,10 @@ public class RemindCommand extends Command {
     }
 
     private String getReply(TaskList tasks, int numberOfTasks) {
+        if (tasks.size() == 0) {
+            String msg = "You have no upcoming tasks :(";
+            return msg;
+        }
         String msg = "Here are your upcoming " + numberOfTasks + " tasks:\n";
         msg += tasks.getUpcomingTasks(numberOfTasks).toString() + "\n";
         msg += "\u2014\u2014\u2014\u2014\u2014\nNote:\n";

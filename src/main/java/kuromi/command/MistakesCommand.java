@@ -5,7 +5,7 @@ import kuromi.task.TaskList;
 import kuromi.view.Ui;
 
 /**
- * List My Melody's mistakes.
+ * Lists My Melody's mistakes.
  */
 public class MistakesCommand extends Command {
     @Override

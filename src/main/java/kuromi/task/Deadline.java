@@ -50,7 +50,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the detailed description of a deadline.
+     * Gets the detailed description of a deadline.
      * To store the current data into the file.
      *
      * @return Detailed description as a String.

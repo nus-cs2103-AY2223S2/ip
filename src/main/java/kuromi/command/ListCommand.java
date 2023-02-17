@@ -9,7 +9,7 @@ import kuromi.view.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Ask UI to list the tasks.
+     * Asks UI to list the tasks.
      *
      * @param tasks Task list.
      * @param ui UI of the application to interact with users.

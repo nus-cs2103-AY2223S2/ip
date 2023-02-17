@@ -34,7 +34,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Get the detailed description of a Task.
+     * Gets the detailed description of a Task.
      * To store the current data into the file.
      *
      * @return Detailed description as a String.
@@ -44,7 +44,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Get a boolean value of whether the current task's description contains the keyword.
+     * Gets a boolean value of whether the current task's description contains the keyword.
      *
      * @param keyword Keyword to be searched.
      * @return Boolean value of whether the description contains the keyword.
@@ -61,7 +61,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Get the status of a task.
+     * Gets the status of a task.
      *
      * @return Status of a task.
      */
@@ -70,7 +70,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Get the symbol of a task.
+     * Gets the symbol of a task.
      *
      * @return Symbol of a task.
      */
@@ -79,14 +79,14 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Mark task as done.
+     * Marks task as done.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Mark task as not done.
+     * Marks task as not done.
      */
     public void unmark() {
 

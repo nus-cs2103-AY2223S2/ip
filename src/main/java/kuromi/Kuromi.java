@@ -9,8 +9,9 @@ import kuromi.task.TaskList;
 import kuromi.view.Ui;
 
 /**
- * The main class of Kuromi where the application is instantiated through this class. A <code>Kuromi</code> object
- * has three attributes: Storage, TaskList, and Ui that is needed to run the application.
+ * A class where an instance of Kuromi is instantiated to be
+ * used when running the application. A <code>Kuromi</code> object
+ * has three attributes: Storage, TaskList, and Ui.
  */
 public class Kuromi {
     /** Access to the storage of tasks in hard disk **/

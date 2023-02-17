@@ -66,7 +66,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get the detailed description of an event.
+     * Gets the detailed description of an event.
      * To store the current data into the file.
      *
      * @return Detailed description as a String.

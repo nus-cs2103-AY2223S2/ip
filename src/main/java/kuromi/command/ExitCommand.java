@@ -18,8 +18,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Exit the current session.
-     * Ask UI to print output.
+     * Exits the current session.
+     * Asks UI to print output.
      *
      * @param tasks Task list.
      * @param ui UI of the application to interact with users.

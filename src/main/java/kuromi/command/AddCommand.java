@@ -9,11 +9,10 @@ import kuromi.view.Ui;
  * Command to add a task to the TaskList.
  */
 public class AddCommand extends Command {
-    /** The task to be added **/
     private Task task;
 
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor
+     * Main constructor
      *
      * @param task Task to be added.
      */
@@ -22,8 +21,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add the task into the task list.
-     * Ask the UI to print the output.
+     * Adds the task into the task list.
+     * Asks the UI to print the output.
      *
      * @param tasks Task list.
      * @param ui UI of the application to interact with users.

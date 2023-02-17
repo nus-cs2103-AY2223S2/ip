@@ -6,7 +6,7 @@ import kuromi.task.TaskList;
 import kuromi.view.Ui;
 
 /**
- * Mark task as done.
+ * Marks task as done.
  */
 public class MarkCommand extends Command {
     /** Index of the task to be marked **/
@@ -22,7 +22,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Mark the task as done in the task list.
+     * Marks the task as done in the task list.
      * Ask UI to print output.
      *
      * @param tasks Task list.

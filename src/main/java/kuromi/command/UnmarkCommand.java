@@ -6,7 +6,7 @@ import kuromi.task.TaskList;
 import kuromi.view.Ui;
 
 /**
- * Mark task as not done.
+ * Marks task as not done.
  */
 public class UnmarkCommand extends Command {
     /** Index of the task to be unmarked. **/
@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Mark the task as not done.
+     * Marks the task as not done.
      * Ask UI to print the ouput.
      *
      * @param tasks Task list.

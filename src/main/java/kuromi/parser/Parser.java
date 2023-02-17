@@ -24,7 +24,7 @@ import kuromi.view.Ui;
  */
 public class Parser {
     /**
-     * Split the input string from the user to interpret what command is typed by the user.
+     * Splits the input string from the user to interpret what command is typed by the user.
      * Returns a Command that is meant by the user.
      * If the input from the user is incomplete, it will throw an error.
      *

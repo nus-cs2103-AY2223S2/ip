@@ -24,7 +24,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Get the symbol of a Todo.
+     * Gets the symbol of a Todo.
      *
      * @return Symbol of a Todo.
      */

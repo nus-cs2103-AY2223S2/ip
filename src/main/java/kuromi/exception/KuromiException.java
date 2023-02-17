@@ -5,7 +5,7 @@ package kuromi.exception;
  */
 public class KuromiException extends Exception {
     /**
-     * kuromi.gui.component.MainWindow.kuromi.exceptions.KuromiException.Main constructor
+     * Main constructor
      * (for invocation by other classes to throw the exception.
      *
      * @param msg The error message.

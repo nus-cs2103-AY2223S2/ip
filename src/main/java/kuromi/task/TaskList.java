@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task with number idx.
+     * Marks a task with number idx.
      *
      * @param idx Index of the task to be marked.
      * @return Marked task.
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark a task with number idx.
+     * Unmarks a task with number idx.
      *
      * @param idx Index of the task to be unmarked.
      * @return Unmarked task.
@@ -51,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Delete a task with number idx.
+     * Deletes a task with number idx.
      *
      * @param idx Index of the task to be deleted.
      * @return Deleted task.
@@ -63,7 +63,7 @@ public class TaskList {
     }
 
     /**
-     * Add a task to the current ArrayList.
+     * Adds a task to the current ArrayList.
      *
      * @param task Task to be added.
      * @return Added task.
@@ -74,7 +74,7 @@ public class TaskList {
     }
 
     /**
-     * Get the task with number idx.
+     * Gets the task with number idx.
      *
      * @param idx Index of the task.
      * @return Task.
@@ -84,7 +84,7 @@ public class TaskList {
     }
 
     /**
-     * Get number of tasks.
+     * Gets number of tasks.
      *
      * @return Number of tasks.
      */
@@ -93,7 +93,7 @@ public class TaskList {
     }
 
     /**
-     * Get the TaskList that contains the task with the keyword given.
+     * Gets the TaskList that contains the task with the keyword given.
      *
      * @param keyword The keyword to be searched.
      * @return TaskList of current tasks filtered by the keyword.
