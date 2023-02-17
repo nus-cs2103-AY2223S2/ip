@@ -20,7 +20,6 @@ You can hashtag them and put them into categories
 
 ## 🍒Usage🍒
 
----
 ### `help` - shows help menu
 
 Got stuck in between and don't feel like opening this website?
