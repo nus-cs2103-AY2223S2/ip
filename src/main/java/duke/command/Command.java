@@ -15,6 +15,7 @@ public abstract class Command {
      * @param input The user input.
      */
     public Command(String input) {
+        assert !input.isEmpty();
         this.input = input;
     }
 

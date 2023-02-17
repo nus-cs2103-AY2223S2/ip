@@ -82,7 +82,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-
         if (hasTime) {
             return "[D]" + super.toString() + " (by: " + by.format(DISPLAY_DATE_TIME_FORMAT) + ")";
         } else {

@@ -12,6 +12,7 @@ public class Task {
      * Constructor to create a Task.
      */
     public Task(String description) {
+        assert !description.isEmpty();
         this.description = description;
         this.isDone = false;
     }

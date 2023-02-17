@@ -17,6 +17,7 @@ public class Duke {
      * @param filePath The file path to where the list of tasks is stored.
      */
     public Duke(String filePath) {
+        assert !filePath.isEmpty();
         this.storage = new Storage(filePath);
         this.tasks = storage.readData();
         Ui.welcomeMessage();
