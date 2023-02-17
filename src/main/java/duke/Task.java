@@ -29,6 +29,10 @@ public class Task {
         return "";
     }
 
+    public boolean postponeDeadline(String to) {
+        return false;
+    }
+
     public static class Todo extends Task {
 
         /**
@@ -78,6 +82,22 @@ public class Task {
         public Deadline(String description, String by) {
             super(description.strip());
             this.by = LocalDate.parse(by.strip());
+        }
+
+        /**
+         * Changes the current deadline to a later date
+         *
+         * @param to the date to postpone to
+         * @return boolean for whether the date was changed
+         */
+        @Override
+        public boolean postponeDeadline(String to) {
+            LocalDate postponeDate = LocalDate.parse(to);
+            if (postponeDate.isAfter(this.by)) {
+                this.by = postponeDate;
+                return true;
+            }
+            return false;
         }
 
         /**

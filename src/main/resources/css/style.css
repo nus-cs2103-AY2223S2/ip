@@ -1,0 +1,15 @@
+.message {
+    -fx-background-color: #007AFF;
+        -fx-background-radius: 10;
+        -fx-padding: 10;
+        -fx-text-fill: white;
+        -fx-font-family: "monospace";
+}
+
+.user-message {
+    -fx-background-color: #FFCC00;
+}
+
+.bot-message {
+    -fx-background-color: #007AFF;
+}
