@@ -23,8 +23,7 @@ public class TaskList {
      * Adds the task to the end of the list
      * @param task Task to be added
      */
-    public void addTask(Task task) {
-        list.add(task);
+    public void addTask(Task task) {list.add(task);
     }
 
     /**
@@ -41,6 +40,8 @@ public class TaskList {
      * @return Task at the index given
      */
     public Task getTask(int index) {
+        assert 1 <= index + 1 && index + 1 <= getSize() :
+                "('o')!! :: OOPS!!! Index should be a positive integer at most the number of tasks.";
         return list.get(index);
     }
 
@@ -50,10 +51,14 @@ public class TaskList {
      * @return Task that was removed
      */
     public Task removeTask(int index) {
+        assert 1 <= index + 1 && index + 1 <= getSize() :
+                "('o')!! :: OOPS!!! Index should be a positive integer at most the number of tasks.";
         return list.remove(index);
     }
 
     public TaskList findTask(String str) {
+        assert !str.equals("") :
+                "('o')!! :: OOPS!!! Keyword cannot be empty.";
         TaskList result = new TaskList();
         for (int i = 0; i < this.getSize(); i++) {
             if (this.getTask(i).getName().contains(str)) {
