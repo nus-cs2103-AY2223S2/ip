@@ -35,7 +35,7 @@ public class Duke {
 
         if (taskType.equals("bye")) {
             this.storage.saveData(this.filePath, this.tasks);
-            return Ui.exitMsg();
+            System.exit(0);
         }
         return Parser.parseInput(this.tasks, taskType, descriptions);
     }

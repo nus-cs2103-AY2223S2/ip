@@ -20,16 +20,6 @@ public class Ui {
     }
 
     /**
-     * Outputs exit message.
-     *
-     * @return Exit message.
-     */
-    public static String exitMsg() {
-        return "Bye. Hope to see you again soon!\n";
-    }
-
-
-    /**
      * Outputs success message when task has been added to task list.
      *
      * @param task Message regarding the task.
