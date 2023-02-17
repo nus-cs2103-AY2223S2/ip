@@ -1,0 +1,7 @@
+todo cook
+event pay /from 4am /to 7pm
+deadline code /by no idea :-p
+mark 1
+list
+unmark 1
+list
