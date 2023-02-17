@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -32,6 +33,8 @@ public class Gui extends Application {
             stage.setScene(scene);
             mainWindow = fxmlLoader.<MainWindow>getController();
             mainWindow.setDuke(duke);
+            stage.setTitle("DukePro for Pros");
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/DaDuke.png")));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
