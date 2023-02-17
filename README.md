@@ -1,24 +1,137 @@
-# Duke project template
+# User Guide
+```agsl
+Due tomorrow, do tomorrow - CHS 4-1 2016
+```
+Duke is the personal assistant that everybody needs to stop them from procrastinating.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features
 
-## Setting up in Intellij
+### Adding tasks
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+You can add To-Do, Deadline or Event tasks to Duke.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+These are the commands for adding the different types of tasks:
+
+> DATE_TIME inputs must be in the format of yyyy-MM-dd HHmm
+
+- To-Do tasks `todo TASK_DESCRIPTION`
+
+Example Input: `todo Study`
+
+Expected Outcome:
+```
+Got it, I've added this task:
+[T][] Study
+Now you have 1 task in your list.
+```
+
+- Deadline `deadline TASK_DESCRIPTION /by DATE_TIME`
+
+Example Input: `deadline Homework /by 2023-02-17 2359`
+
+Expected Outcome:
+```
+Got it, I've added this task:
+[D][] Homework (By: 17 Feb 2023, 2359)
+Now you have 2 tasks in your list.
+```
+
+- Event `event TASK_DESCRIPTION /from DATE_TIME /to DATE_TIME`
+
+Example Input: `event Party /from 2023-02-17 1600 /to 2023-02-17 1900`
+
+Expected Outcome:
+```
+Got it, I've added this task:
+[E][] Party (From: 17 Feb 2023, 1600 To: 17 Feb 2023, 1900)
+Now you have 3 tasks in your list.
+```
+
+### Checklist for tasks
+
+Mark or unmark the checkbox associated to the specified task.
+
+- Mark task: `mark TASK_NUMBER`
+
+Example Input: `mark 2`
+
+Example Output:
+```
+Nice! I've marke this task as done:
+[D][X] Homework (By: 17 Feb 2023, 2359)
+```
+
+- Unmark task: `unmark TASK_NUMBER`
+
+Example Input: `mark 2`
+
+Example Output:
+```
+Ok, I've marke this task as not done yet:
+[D][] Homework (By: 17 Feb 2023, 2359)
+```
+
+### Listing all tasks
+
+Lists out every task that has been registered by Duke.
+
+Command: `list`
+
+Expected Outcome:
+```
+Here are the tasks in your list:
+1.[T][] Study
+2.[D][] Homework (By: 17 Feb 2023, 2359)
+3.[E][] Party (From: 17 Feb 2023, 1600 To: 17 Feb 2023, 1900)
+```
+
+### Find tasks
+
+Provide a case-sensitive keyword for Duke to filter out the tasks containing the keyword
+
+Command: `find KEYWORD`
+
+Example Input: `find Homewo`
+
+Example Output:
+```
+Here are the matching tasks in your list:
+1.[D][] Homework (By: 17 Feb 2023, 2359)
+```
+
+### Delete tasks
+
+Deletes the specified tasks associated to the task number provided
+
+Command: `delete TASK_NUMBER`
+
+Example Input: `delete 1`
+
+Example Output:
+```
+Noted, I've removed this task:
+[T][] Study 
+Now you have 2 tasks in the list.
+```
+
+### Schedule
+
+Lists out all the tasks on a specific date
+
+Command: `schedule DATE_TIME`
+
+Example Input: `schedule 2023-02-17`
+
+Expected Outcome:
+```
+Here are the scheduled tasks for 17 Feb 2023:
+1.[D][] Homework (By: 17 Feb 2023, 2359)
+2.[E][] Party (From: 17 Feb 2023, 1600 To: 17 Feb 2023, 1900)
+```
+
+### Bye
+
+Exits from the application
+
+Command: `bye`
+
