@@ -138,7 +138,7 @@ public class Storage {
         return "The selected item has been updated";
     }
 
-    //Code extracted from https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
+    //Solution below adapted from https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
 
     /**
      * Loads data from duke.txt
