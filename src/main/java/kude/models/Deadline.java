@@ -1,6 +1,7 @@
 package kude.models;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * Representation of a task with a deadline
@@ -13,8 +14,8 @@ public class Deadline extends Task {
      * @param content Content of the deadline
      * @param deadline Deadline timing as a LocalDateTime
      */
-    public Deadline(String content, LocalDateTime deadline) {
-        super(content);
+    public Deadline(String content, Optional<String> place, LocalDateTime deadline) {
+        super(content, place);
         this.deadline = deadline;
     }
 

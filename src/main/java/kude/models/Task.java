@@ -1,20 +1,23 @@
 package kude.models;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * Base class for all tasks
  */
 public abstract class Task implements Serializable {
     private final String content;
+    private final Optional<String> place;
     private boolean isDone;
 
     /**
      * Initialize this task with the provided content
      */
-    public Task(String content) {
+    public Task(String content, Optional<String> place) {
         this.content = content;
         this.isDone = false;
+        this.place = place;
     }
 
     /**
@@ -38,9 +41,14 @@ public abstract class Task implements Serializable {
         this.isDone = isDone;
     }
 
+    public Optional<String> getPlace() {
+        return place;
+    }
+
     @Override
     public String toString() {
         var icon = isDone ? "X" : " ";
-        return String.format("[%s] %s", icon, content);
+        var placeStr = place.map(p -> String.format(" (@ %s)", p)).orElse("");
+        return String.format("[%s] %s%s", icon, content, placeStr);
     }
 }

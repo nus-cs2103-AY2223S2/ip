@@ -1,6 +1,7 @@
 package kude.models;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import kude.DukeException;
 
@@ -17,8 +18,8 @@ public class Event extends Task {
      * @param from Starting timing of Event as a LocalDateTime
      * @param to Ending timing of Event as a LocalDateTime
      */
-    public Event(String content, LocalDateTime from, LocalDateTime to) {
-        super(content);
+    public Event(String content, Optional<String> place, LocalDateTime from, LocalDateTime to) {
+        super(content, place);
         if (to.isBefore(from)) {
             throw new DukeException("Event's `from` cannot be before `to`");
         }
