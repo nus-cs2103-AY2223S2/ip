@@ -59,8 +59,6 @@ public class Duke {
     }
 
     public String getResponse(String userInput) {
-        //this.parser.parse(userInput);
         return this.parser.parse(userInput);
-        //return "lol";
     }
 }

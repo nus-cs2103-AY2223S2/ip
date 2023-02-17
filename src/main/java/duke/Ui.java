@@ -8,7 +8,7 @@ public class Ui {
      * @return String
      */
     public String savedFileNotFound() {
-        return "[Saved file not found, new List initialised~]";
+        return "[Saved file not found, new List initiated]";
     }
 
     /**
@@ -17,6 +17,10 @@ public class Ui {
      * @return String
      */
     public String savedFileFound() {
-        return "[Saved file found, saved List initialised~]";
+        return "[Saved file found, saved List loaded]";
+    }
+
+    public String fileSaved() {
+        return "[File saved]";
     }
 }
