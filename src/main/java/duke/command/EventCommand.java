@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Event;
@@ -17,12 +18,12 @@ public class EventCommand extends AddCommand {
     }
 
     @Override
-    public void runCommand(TaskList taskList, UI ui) {
+    public void runCommand(TaskList taskList, UI ui, Storage storage) {
         String taskDescription = index[1];
         LocalDateTime from = Parser.parseDateTime(index[2]);
         LocalDateTime to = Parser.parseDateTime(index[3]);
         Task taskToAdd = new Event(taskDescription, from, to);
-        taskList.addTask(taskToAdd);
+        taskList.addTask(taskToAdd, storage);
         ui.printResponse("Alright. I have added this task: \n" + taskToAdd);
         ui.printResponse("Now you have " + taskList.numberOfTasks() + " tasks in your list.");
     }
