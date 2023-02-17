@@ -1,4 +1,6 @@
 package duke.parser;
+import duke.Storage;
+import duke.TaskList;
 
 /**
  * This class deals with user inputs
@@ -7,35 +9,43 @@ package duke.parser;
  * @version 0
  */
 public class Parser {
+
+    TaskList taskList;
+    Storage storage;
+
+    public Parser(TaskList taskList, Storage storage) {
+        this.taskList = taskList;
+        this.storage = storage;
+    }
     /**
      * Returns an integer for different commands
+     *
      * @param command string input from user
-     * @return int representing the command
+     * @param body content of the command
      */
-    public int parseCommand(String command) {
+    public String parseCommand(String command, String body) {
         switch(command) {
-            case ("throwerr"):
-                throw new RuntimeException();
             case ("bye"):
-                return -1;
+                storage.writeFile(taskList.getTaskList());
+                return "Goodbye";
             case ("list"):
-                return 1;
+                return taskList.listTask();
             case ("mark"):
-                return 2;
+                return taskList.markTaskDone(body);
             case ("unmark"):
-                return 3;
+                return taskList.markTaskNotDone(body);
             case ("delete"):
-                return 4;
+                return taskList.deleteTask(body);
             case ("todo"):
-                return 5;
+                return taskList.addTodo(body);
             case ("deadline"):
-                return 6;
+                return taskList.addDeadline(body);
             case ("event"):
-                return 7;
+                return taskList.addEvent(body);
             case("find"):
-                return 8;
+                return taskList.find(body);
             default:
-                return 0;
+                return taskList.unknownCommand(command);
         }
     }
 }
