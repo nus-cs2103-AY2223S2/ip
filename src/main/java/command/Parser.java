@@ -364,8 +364,10 @@ public class Parser {
         if (inputAnalyzed.length > 1) {
             throw new InvalidInputException("Incorrect format. Correct form should be \"help\".");
         } else {
-            list = list.undo();
-            assert list != null: "List should never be null";
+            TaskList temp = list.undo();
+            if (temp != null) {
+                list = temp;
+            }
             return Ui.showUndoSuccess(list);
         }
     }

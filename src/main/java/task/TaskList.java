@@ -30,7 +30,7 @@ public class TaskList extends ArrayList<Task> {
                 System.out.println("Invalid input: " + line);
             }
         }
-        pastVersion = new TaskList();
+        pastVersion = null;
     }
 
     private void initializeNewEvent(String[] lineSplit) {
@@ -62,7 +62,7 @@ public class TaskList extends ArrayList<Task> {
 
     public TaskList() {
         super();
-        pastVersion = new TaskList();
+        pastVersion = null;
     }
 
     public void mark(int index) throws IndexOutOfBoundsException {
