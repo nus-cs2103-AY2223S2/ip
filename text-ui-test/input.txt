@@ -1,0 +1,28 @@
+todo be happy
+deadline do homework /by 2023-02-04 12:00
+event project meeting /from 2023-03-04 12:00 /to 2023-03-04 13:00
+list
+mark 1
+list
+mark 3
+list
+unmark 1
+list
+mark 4
+mark 0
+mark aloha
+mark
+deadline
+deadline nani
+event nani /from sore
+delete 1
+delete 0
+delete 90
+deadline a /by
+deadline ab /by what
+deadline abc /by 2023-02-32 12:00
+deadline abcd /by 2023-02-30 12:00
+find c
+find
+find project meeting
+bye

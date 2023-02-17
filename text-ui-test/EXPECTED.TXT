@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+<<<	Welcome to Kude!
+> <	Added [T][ ] be happy
+<	List now contains 1 tasks
+> <	Added [D][ ] do homework (by: 2023-02-04T12:00)
+<	List now contains 2 tasks
+> <	Added [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+<	List now contains 3 tasks
+> <	1. [T][ ] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	Marked [T][X] be happy
+> <	1. [T][X] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][ ] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	Marked [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	1. [T][X] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <	Unmarked [T][ ] be happy
+> <	1. [T][ ] be happy
+<	2. [D][ ] do homework (by: 2023-02-04T12:00)
+<	3. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> !	Invalid index
+> !	Invalid index
+> !	Index must be integer
+> !	Provide index
+> !	Provide content
+> !	Provide deadline
+> !	Invalid format for from. Use `2023-02-25 23:00`
+> <	Deleted [T][ ] be happy
+<	List now contains 2 tasks
+> !	Invalid index
+> !	Invalid index
+> !	Provide deadline
+> !	Invalid format for deadline. Use `2023-02-25 23:00`
+> !	Invalid format for deadline. Use `2023-02-25 23:00`
+> <	Added [D][ ] abcd (by: 2023-02-28T12:00)
+<	List now contains 3 tasks
+> <	1. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+<	2. [D][ ] abcd (by: 2023-02-28T12:00)
+> !	Provide query
+> <	1. [E][X] project meeting (from: 2023-03-04T12:00, to: 2023-03-04T13:00)
+> <<<	Bye
