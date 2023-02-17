@@ -19,9 +19,11 @@ public abstract class Command {
     protected int numComponents;
 
     /**
-     * Default constructor, saves the command
-     *
+     * Constructor.
      * @param command the user-input command
+     * @param doesPrint whether to print response to console
+     * @param numComponents number of non-blank strings separated by blank spaces
+     * @throws DukeException when any exceptions occur, but typically related to formatting issues
      */
     public Command(String command, boolean doesPrint, int numComponents) throws DukeException {
         assert numComponents >= 0 : "number of components for any command should be larger than zero";
@@ -72,6 +74,7 @@ public abstract class Command {
     /**
      * Get the sub-string after the command key word
      * @param string the command
+     * @param commandName the name of the command, such as list and todo
      * @return the sub-string after the command keyword
      * @throws DukeException if command is incomplete
      */
@@ -85,6 +88,8 @@ public abstract class Command {
 
     /**
      * Throws exceptions if the user-input is not a complete command.
+     *
+     * @throws DukeException when the input command is not complete
      */
     protected void checkInputComponents() throws DukeException {
         String[] splits = command.split(STRING_SPACE);

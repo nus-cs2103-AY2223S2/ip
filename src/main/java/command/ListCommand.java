@@ -14,6 +14,8 @@ public class ListCommand extends Command {
      * Default constructor, saves the command
      *
      * @param command the user-input command
+     * @param doesPrint whether to print response message to the console
+     * @throws DukeException when the input command cannot be parsed
      */
     public ListCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, NUM_COMPONENTS);
@@ -21,6 +23,7 @@ public class ListCommand extends Command {
 
     /**
      * Lists all tasks
+     *
      * @param taskList the list of tasks
      * @return string representation of the task list
      */

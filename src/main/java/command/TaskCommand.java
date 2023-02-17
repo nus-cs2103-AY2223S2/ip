@@ -16,8 +16,11 @@ public class TaskCommand extends Command {
 
     /**
      * Default constructor
+     *
      * @param command the user-input command
      * @param doesPrint whether to print messages
+     * @param numComponents number of non-blank strings separated by spaces
+     * @throws DukeException when the input command cannot be parsed
      */
     public TaskCommand(String command, boolean doesPrint, int numComponents) throws DukeException {
         super(command, doesPrint, numComponents);
@@ -59,8 +62,10 @@ public class TaskCommand extends Command {
 
     /**
      * Handles the task, a subroutine of execute
+     *
      * @param task the task to execute
      * @param taskList the task list
+     * @return the response message of handling the task
      */
     public String handleTask(Task task, TaskList taskList) {
         taskList.add(task);

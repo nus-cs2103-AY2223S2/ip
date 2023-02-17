@@ -17,6 +17,7 @@ public class UnmarkCommand extends Command {
      * Default constructor
      * @param command the command
      * @param doesPrint whether to print messages
+     * @throws DukeException when the input command cannot be parsed
      */
     public UnmarkCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, NUM_COMPONENTS);

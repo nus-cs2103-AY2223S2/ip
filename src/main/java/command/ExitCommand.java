@@ -16,6 +16,7 @@ public class ExitCommand extends Command {
      * Default constructor
      * @param command the user-input command
      * @param doesPrint whether to print messages
+     * @throws DukeException when parsing errors arise
      */
     public ExitCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, NUM_COMPONENTS);

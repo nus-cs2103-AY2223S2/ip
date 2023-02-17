@@ -94,12 +94,13 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a dialog object for duke
-     * @param l duke text
-     * @param iv an image view object to present text
+     * @param label duke text
+     * @param imageView an image view object to present text
+     * @param isError whether the input text is the error message, use a different color scheme if so
      * @return a dialog object for duk e
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv, boolean isError) {
-        DialogBox dialogBox = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(Label label, ImageView imageView, boolean isError) {
+        DialogBox dialogBox = new DialogBox(label, imageView);
         dialogBox.flip();
         // https://www.tabnine.com/code/java/methods/javafx.scene.layout.BackgroundFill/%3Cinit%3E
         dialogBox.setBackground(

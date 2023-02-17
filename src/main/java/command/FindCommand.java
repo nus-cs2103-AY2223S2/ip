@@ -14,7 +14,8 @@ public class FindCommand extends TaskCommand {
     /**
      * Default constructor
      * @param command the user-input command
-     * @param doesPrint whether to print messaegs
+     * @param doesPrint whether to print messages
+     * @throws DukeException when parsing errors occur
      */
     public FindCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, NUM_COMPONENTS);

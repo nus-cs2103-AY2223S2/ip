@@ -10,8 +10,10 @@ public class TodoCommand extends TaskCommand {
 
     /**
      * Constructor
+     *
      * @param command user-input command
      * @param doesPrint whether to print messages
+     * @throws DukeException when the input command cannot be parsed
      */
     public TodoCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, NUM_COMPONENTS);

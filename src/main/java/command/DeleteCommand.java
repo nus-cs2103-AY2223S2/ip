@@ -15,15 +15,18 @@ public class DeleteCommand extends TaskCommand {
 
     /**
      * Default constructor
+     *
      * @param command the user-input command
      * @param doesPrint whether to print messages
+     * @throws DukeException when the command cannot be parsed
      */
     public DeleteCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, NUM_COMPONENTS);
     }
 
     /**
-     * Executes the delete task
+     * Executes the deletion task
+     *
      * @param taskList the list of tasks
      * @throws DukeException when index is invalid
      */

@@ -20,6 +20,7 @@ public class Event extends Task {
      * The default constructor
      *
      * @param description the content of the command
+     * @throws DukeException when the input command cannot be parsed
      */
     public Event(String description) throws DukeException {
         super();
@@ -31,6 +32,7 @@ public class Event extends Task {
 
     /**
      * Parses the event name from user description
+     *
      * @param description user-input description
      * @return the event name
      * @throws DukeException when the name is absent

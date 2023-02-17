@@ -14,9 +14,10 @@ public class MarkCommand extends Command {
     private static int NUM_COMPONENTS = 2;
 
     /**
-     * Default constructor, saves the command
-     *
+     * Constructor.
      * @param command the user-input command
+     * @param doesPrint whether to print response message to console
+     * @throws DukeException when exceptions occur
      */
     public MarkCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, NUM_COMPONENTS);

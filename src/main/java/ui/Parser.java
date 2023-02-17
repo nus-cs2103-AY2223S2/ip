@@ -34,10 +34,10 @@ public class Parser {
     );
 
     /**
-     * Parse the user-input date string into a date object
-     *
+     * * Parse the user-input date string into a date object
      * @param dateString the string representation of the date
-     * @return the date object
+     * @return the parsed date object
+     * @throws DukeException when the date cannot be parsed due to format issues
      */
     public static LocalDate parseDate(String dateString) throws DukeException {
         try {
