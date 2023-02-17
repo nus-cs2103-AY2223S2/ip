@@ -21,7 +21,9 @@ Tasks previously saved  can be retrieved the next time you start this applicatio
 
 The task will be added to the list of tasks and saved locally 
 
-Format of input: todo _(task description)_
+Format:
+
+`todo (task description)`
 
 Example of usage: 
 
@@ -45,7 +47,9 @@ Now you have 1 tasks in the list.
 
 Add a task with a specified deadline to the task list. 
 
-Format of input: deadline _(task description)_ /by _(deadline date)_ 
+Format: 
+
+`deadline (task description) /by (deadline date) `
 
 Format for date: **YYYY-MM-DD** (eg. 2023-02-10)
 
@@ -72,7 +76,9 @@ Now you have 2 tasks in the list.
 
 Add an event task with the starting date and ending date into the task list. 
 
-Format of input: event _(task description)_ /from _(start date)_ /to _(end date)_
+Format: 
+
+`event (task description) /from (start date) /to (end date)`
 
 Date in this format: **YYYY-MM-DD** (eg. 2023-10-10)
 
@@ -99,6 +105,10 @@ Now you have 3 tasks in the list.
 
 Reference to a task using task number and mark this task as completed. 
 
+Format:
+
+`mark (task number)`
+
 Example of usage:
 
 `mark 1`
@@ -118,6 +128,10 @@ I've marked this task as done:
 ### `unmark` - Mark a task as not completed
 
 Reference to a task using task number and mark this task as not completed.
+
+Format:
+
+`unmark (task number)`
 
 Example of usage:
 
@@ -159,7 +173,9 @@ Here are some tasks in your list:
 
 Search and list out the matching list of tasks which has the target word that user is trying to find.
 
-Format of input: find _(target word)_
+Format:
+
+`find (target word)`
 
 Example of usage:
 
