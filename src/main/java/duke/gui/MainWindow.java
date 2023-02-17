@@ -1,14 +1,11 @@
 package duke.gui;
 
-import java.io.IOException;
-
 import duke.Duke;
 import duke.commands.ByeCmd;
 import duke.commands.Command;
 import duke.exceptions.CommandExecutionError;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -28,18 +25,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    public MainWindow(Duke d) {
-        duke = d;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @FXML
     public void initialize() {
@@ -71,7 +56,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    @FXML
+    public void setDuke(Duke duke) {
+        this.duke = duke;
+    }
+
     public void displayMessage(Profile profile, String message, boolean highlightError) {
         DialogBox dialogBox;
         switch(profile) {
@@ -88,7 +76,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(dialogBox);
     }
 
-    @FXML
     public void greetUser() {
         displayMessage(Profile.DUKE, "Hoot! How may I assist you on this fine night?", false);
     }
