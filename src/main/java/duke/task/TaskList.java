@@ -62,7 +62,7 @@ public class TaskList implements Serializable {
 
     /**
      * Finds tasks that contain the query in their description or name and returns
-     * an array of string representation of the tasks.
+     * an array of string representation of the tasks even if the query matches only partially.
      *
      * @param query the string to search for in the task description or name
      * @return an array of string representation of the tasks that contain the query
