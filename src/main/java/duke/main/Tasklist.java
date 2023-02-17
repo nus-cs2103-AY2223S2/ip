@@ -25,6 +25,27 @@ public class Tasklist {
     }
 
     /**
+     * checks if a task is in existing tasklist
+     * @param task task to be passed in for checking
+     * @return true if task exists, otherwise false
+     */
+    public boolean containsTask(Task task) {
+        for (Task each : tasks) {
+            String test = each.toString();
+            String taskString = task.toString();
+            if (test.equals(taskString)) {
+                return true;
+            }
+            test = test.substring(0,4) + " " + test.substring(5);
+            if (test.equals(taskString)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * gets arraylist of tasks
      *
      * @return arraylist of tasks
