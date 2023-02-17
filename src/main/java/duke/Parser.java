@@ -189,7 +189,6 @@ public class Parser {
         } catch (NumberFormatException nfe) {
             return false;
         }
-
         return true;
     }
 }
