@@ -18,7 +18,7 @@ Tasks added will be automatically stored locally. Users will
 be able to go back to view the same TaskList whenever they need.
 
 ## Usage
-###1.  `todo` - Adds a Todo task
+### 1.  `todo` - Adds a Todo task
 
 Input format: `todo <task name>`
 
@@ -34,7 +34,7 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ```
 
-###2. `deadline` - Adds a Deadline task
+### 2. `deadline` - Adds a Deadline task
 
 Input format: `deadline <task name> /by <DateTime>`
 
@@ -52,7 +52,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-###3. `event` - Adds a Event task
+### 3. `event` - Adds a Event task
 
 Input format: `event <task name> /from <DateTime> / to <DateTime>`
 
@@ -71,7 +71,7 @@ Got it. I've added this task:
 Now you have 3 Tasks in the list.
 ```
 
-###4. `List` - Lists out all the task
+### 4. `List` - Lists out all the task
 
 Example of usage:
 
@@ -86,7 +86,7 @@ There is a total of 3 tasks currently:
 3. [E][] Cs Midterms (From: Feb 18 2023 1400 To: Feb 18 2023 1600)
 ```
 
-###5. `Mark` - Mark task as completed
+### 5. `Mark` - Mark task as completed
 
 Input format: `mark <Index of task in list>`
 
@@ -100,7 +100,7 @@ Expected outcome:
 Nice! I've marked this task as done:
 [T][X] Do something
 ```
-###6. `Unmark` - Unmark task as completed
+### 6. `Unmark` - Unmark task as completed
 
 Input format: `unmark <Index of task in list>`
 
@@ -115,7 +115,7 @@ Okay. i've unmarked the following task:
 [T][] Do something
 ```
 
-###7. `Delete` - Delete task in list
+### 7. `Delete` - Delete task in list
 
 Input format: `delete <Index of task in list>`
 
@@ -131,7 +131,7 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
-###8. `Update` - Update task with new details
+### 8. `Update` - Update task with new details
 
 Input format: `update <Index of task in list> /change <Full details of task>`
 
@@ -146,7 +146,7 @@ I have updated the task to the following
 [D][] Leave School (by: Feb 20 2023 1230)
 ```
 
-###9. `Through` - Finds tasks happening through a date
+### 9. `Through` - Finds tasks happening through a date
 
 Input format: `through <DateTime>`
 
@@ -163,7 +163,7 @@ There are the tasks occuring through Feb 19 2023 2359:
 1. [D][] Leave School (by: Feb 20 2023 1230)
 ```
 
-###10. `Find` - Finds tasks with a specific keyword
+### 10. `Find` - Finds tasks with a specific keyword
 
 Input format: `Find <Keyword>`
 
@@ -180,7 +180,7 @@ There are the matching tasks in your list:
 1. [E][] Cs Midterms (From: Feb 18 2023 1400 To: Feb 18 2023 1600)
 ```
 
-###11. `Bye` - Exits Duke program
+### 11. `Bye` - Exits Duke program
 
 Example of usage:
 
