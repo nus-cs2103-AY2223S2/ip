@@ -26,43 +26,65 @@ public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private final Ui ui = new Ui();
 
-    public TaskList(ArrayList<Task> tasks)  {
+    public TaskList(ArrayList<Task> tasks) {
         TaskList.tasks = tasks;
     }
 
     public TaskList() {
-        TaskList.tasks = new ArrayList<Task>();
+        TaskList.tasks = new ArrayList<>();
     }
 
+    /**
+     * Return the tasks stored in the task list
+     * @return response with tasks listed out
+     */
     public String listTask() {
         if (tasks.size() == 0) {
             return "You dont have any tracked tasks";
         } else {
-            String output = "Your current tracked tasks: \n";
+            StringBuilder output = new StringBuilder("Your current tracked tasks: \n");
             for (int i = 0; i < tasks.size(); i++) {
                 Task curr = tasks.get(i);
-                output = output + (i + 1) + " . " + curr + "\n";
+                output.append(i + 1).append(" . ").append(curr).append("\n");
             }
-            return output;
+            return output.toString();
         }
     }
 
+    /**
+     * Used to mark a task as done
+     * @param body String index of the task
+     * @return confirmation of task marked done
+     */
     public String markTaskDone(String body) {
         int index = Integer.parseInt(body) - 1;
+        assert index >= 0;
         tasks.get(index).toggleDone();
         return "Marked task as done:\n [X] " + tasks.get(index).getDesc();
     }
 
+    /**
+     * Used to mark a task as not done
+     * @param body String index of the task
+     * @return confirmation of task marked not done
+     */
     public String markTaskNotDone(String body) {
         int index = Integer.parseInt(body) - 1;
+        assert index >= 0;
         tasks.get(index).toggleNotDone();
         return "Marked task as not done:\n [ ] " + tasks.get(index).getDesc();
 
     }
 
+    /**
+     * Used to delete a task from the task list
+     * @param body String index of the task
+     * @return confirmation of deletion OR error message from deletion
+     */
     public String deleteTask(String body) {
         try {
             int i = Integer.parseInt(body) - 1;
+            assert i >= 0;
             Task temp = tasks.get(i);
             tasks.remove(temp);
             return ui.printDeleteMessage(temp, tasks.size());
@@ -71,6 +93,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Tod0 task to the task list
+     * @param body String description of the task
+     * @return confirmation of adding OR error message
+     */
     public String addTodo(String body) {
         try {
             ToDo curr = new ToDo(body, false);
@@ -81,6 +108,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Deadline object to the task list
+     * @param body String description of the task, and deadline date
+     * @return confirmation of adding OR error message
+     */
     public String addDeadline(String body) {
         try {
             Matcher dlMatcher = DEADLINE_PATTERN.matcher(body);
@@ -100,6 +132,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an Event object to the task list
+     * @param body String description of the task, from date and to date
+     * @return confirmation of adding OR error message
+     */
     public String addEvent(String body) {
         try {
             Matcher eMatcher = EVENT_PATTERN.matcher(body);
@@ -126,25 +163,31 @@ public class TaskList {
      * Searches for task description that matches body
      *
      * @param body string to find
+     * @return String of tasks found that matches
      */
     public String find(String body) {
         boolean found = false;
-        String output = "Matching tasks I've found in your list: \n";
+        StringBuilder output = new StringBuilder("Matching tasks I've found in your list: \n");
 
         for (Task temp : tasks) {
             if (temp.getDesc().contains(body)) {
                 found = true;
-                output = output + temp + "\n";
+                output.append(temp).append("\n");
             }
         }
 
         if (!found) {
-            output += "No tasks matches your search :(";
+            output.append("No tasks matches your search :(");
         }
 
-        return output;
+        return output.toString();
     }
 
+    /**
+     * Used when command is not recognized
+     * @param command user input that is not recognized
+     * @return error message
+     */
     public String unknownCommand(String command) {
         return ui.ERROR_UNKNOWN_COMMAND + " : " + command;
     }

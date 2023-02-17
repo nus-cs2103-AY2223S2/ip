@@ -10,9 +10,14 @@ import duke.TaskList;
  */
 public class Parser {
 
-    TaskList taskList;
-    Storage storage;
+    private TaskList taskList;
+    private Storage storage;
 
+    /**
+     * Constructor Parser object
+     * @param taskList TaskList object
+     * @param storage Storage object
+     */
     public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;

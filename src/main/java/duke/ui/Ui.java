@@ -16,12 +16,11 @@ public class Ui {
     public final String ERROR_UNKNOWN_COMMAND = "Error: Unknown command";
     public final String ERROR_EXCEPTION_CAUGHT = "Fatal Error: Encountered exception: ";
 
-    /*
-     * Deletes task
-     *
-     * @param task, task to be deleted
-     * @param size, size of list
-     * @return String notification of deletion
+    /**
+     * Prints successful deletion message
+     * @param task task that is deleted
+     * @param size size of the task list
+     * @return String confirmation response
      */
     public String printDeleteMessage(Task task, int size) {
         String l1 = "SENDING TASK TO THE VOID (DELETING) \n";
@@ -36,6 +35,7 @@ public class Ui {
      *
      * @param curr single Task object
      * @param size int size of list
+     * @return String confirmation response
      */
     public String printNotification(Task curr, int size) {
         String l1 = "Me add your task to list: \n";
@@ -47,11 +47,13 @@ public class Ui {
 
     /**
      * Prints the initial start-up message
+     *
+     * @return String confirmation response
      */
     public String printWelcomeMessage() {
         String welcome = "Welcome to PUKE, the best bot in existence";
         String prompt = "Input a command";
-        return welcome  + "\n" + prompt;
+        return welcome + "\n" + prompt;
 
 
     }
