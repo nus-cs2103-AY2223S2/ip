@@ -110,7 +110,10 @@ public class Parser {
                 throw new DudeException("Uhh... You also need to put the task after the command");
             } else {
                 try {
-                    Integer.parseInt(cmd[1]);
+                    int index = Integer.parseInt(cmd[1]);
+                    if (index <= 0) {
+                        throw new DudeException("Uhh... You need to use a valid task number also");
+                    }
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new DudeException("Uhh... You need to use a valid task number also");
                 }
