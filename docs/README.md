@@ -52,7 +52,7 @@ Expected outcome:
 Task *increment ip* will be added to the list.
 
 ```
-!<img width="598" alt="image" src="https://user-images.githubusercontent.com/65648138/219869153-851fa751-4765-4d37-b763-1951be8ed441.png">
+![image](https://user-images.githubusercontent.com/65648138/219869153-851fa751-4765-4d37-b763-1951be8ed441.png)
 ```
 
 ### `deadline [TASK] by [DATETIME]` - Adding deadline task.
