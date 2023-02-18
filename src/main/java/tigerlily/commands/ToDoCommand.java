@@ -12,6 +12,10 @@ import tigerlily.tasks.ToDo;
 public class ToDoCommand implements Command {
     private String input;
 
+    /**
+     * Constructor for ToDoCommand
+     * @param input the input given to create a ToDo
+     */
     public ToDoCommand(String input) {
         this.input = input;
     }

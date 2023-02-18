@@ -11,6 +11,10 @@ import tigerlily.tasks.TaskList;
 public class FindCommand implements Command {
     private String input;
 
+    /**
+     * Constructor for FindCommand
+     * @param input the input given to find Tasks
+     */
     public FindCommand(String input) {
         this.input = input;
     }

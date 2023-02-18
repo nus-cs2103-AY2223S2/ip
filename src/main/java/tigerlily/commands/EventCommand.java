@@ -11,6 +11,10 @@ import java.time.LocalDateTime;
 public class EventCommand implements Command {
     private String input;
 
+    /**
+     * Constructor for EventCommand
+     * @param input the input given to create a Event
+     */
     public EventCommand(String input) {
         this.input = input;
     }

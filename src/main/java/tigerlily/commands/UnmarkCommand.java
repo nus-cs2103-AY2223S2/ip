@@ -13,6 +13,10 @@ import tigerlily.tasks.TaskList;
 public class UnmarkCommand implements Command {
     private String input;
 
+    /**
+     * Constructor for UnmarkCommand
+     * @param input the input given to unmark Tasks
+     */
     public UnmarkCommand(String input) {
         this.input = input;
     }

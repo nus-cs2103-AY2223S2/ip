@@ -13,6 +13,10 @@ import tigerlily.tasks.TaskList;
 public class MarkCommand implements Command {
     private String input;
 
+    /**
+     * Constructor for MarkCommand
+     * @param input the input given to mark Tasks
+     */
     public MarkCommand(String input) {
         this.input = input;
     }

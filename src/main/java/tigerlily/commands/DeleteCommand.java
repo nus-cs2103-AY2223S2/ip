@@ -11,6 +11,10 @@ import tigerlily.tasks.Task;
 public class DeleteCommand implements Command {
     private String input;
 
+    /**
+     * Constructor for DeleteCommand
+     * @param input the input given to delete Tasks
+     */
     public DeleteCommand(String input) {
         this.input = input;
     }

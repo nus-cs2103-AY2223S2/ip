@@ -11,6 +11,10 @@ import java.time.LocalDate;
 public class DeadlineCommand implements Command {
     private final String input;
 
+    /**
+     * Constructor for DeadlineCommand
+     * @param input the input given to create a Deadline
+     */
     public DeadlineCommand(String input) {
         this.input = input;
     }
