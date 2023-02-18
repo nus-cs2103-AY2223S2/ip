@@ -19,19 +19,19 @@ public class Ui {
     }
 
     public String showDeletingTask(Task task, TaskList taskList) {
-        return String.format("EEVEE! I have removed this task: \n%s\n "
+        return String.format("EEVEE! I have removed this task:\n%s\n "
                         + "Now you have %d tasks in the list.%n", task.getDescription(),
                 taskList.getTaskListSize()) + askForNextCommand();
     }
 
     public String showAddingNewTask(Task task, TaskList taskList) {
-        return String.format("EEVEE! I have added a new task: \n%s\n" +
+        return String.format("EEVEE! I have added a new task:\n%s\n" +
                         "Now you have %d tasks in the list%n", task.getDescription(),
                 taskList.getTaskListSize()) + askForNextCommand();
     }
 
     public String showFailAddingNewTask(TaskList tasks) {
-        return String.format("Eevee... This task cannot be added as it clashes with another task in the task list: " +
+        return String.format("Eevee... This task cannot be added as it clashes with another task in the task list:" +
                         "\n%s", showList(tasks)) + askForNextCommand();
     }
 
@@ -49,7 +49,7 @@ public class Ui {
         if (tasks.isEmpty()) {
             return "Eevee? No tasks in task list." + askForNextCommand();
         }
-        return String.format("EEVEE! Here are the tasks in your list: \n%s", showList(tasks) + askForNextCommand());
+        return String.format("EEVEE! Here are the tasks in your list:\n%s", showList(tasks) + askForNextCommand());
     }
 
     public String showFindingTask(TaskList tasks) {

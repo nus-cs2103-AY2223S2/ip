@@ -42,7 +42,7 @@ public class Eevee {
     }
 
     public static void main(String[] args) {
-        Eevee eevee = new Eevee("data/tasks.txt");
+        Eevee eevee = new Eevee("/data/tasks.txt");
         System.out.println(eevee.ui.sayHello());
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
