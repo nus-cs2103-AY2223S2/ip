@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import eevee.exception.EeveeException;
+import eevee.exception.NoTaskToDeleteException;
 import eevee.exception.TaskNoContentException;
 import eevee.task.Task;
 import eevee.task.ToDo;
@@ -132,7 +133,8 @@ public class Parser {
     }
     
     public static String handleInput(String command, Ui ui, TaskList tasks, Storage storage) throws EeveeException,
-            IOException, IndexOutOfBoundsException, DateTimeParseException, TaskNoContentException {
+            IOException, IndexOutOfBoundsException, DateTimeParseException, TaskNoContentException,
+            NoTaskToDeleteException {
         String typeOfCommand = getTypeOfCommand(command);
         switch (typeOfCommand) {
         case "bye":

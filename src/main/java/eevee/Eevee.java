@@ -1,6 +1,7 @@
 package eevee;
 
 import eevee.exception.EeveeException;
+import eevee.exception.NoTaskToDeleteException;
 import eevee.exception.TaskNoContentException;
 
 import java.io.IOException;
@@ -27,9 +28,7 @@ public class Eevee {
     protected String getResponse(String input) {
         try {
             return Parser.handleInput(input, ui, tasks, storage);
-        } catch (EeveeException e) {
-            return e.getMessage();
-        } catch (TaskNoContentException e) {
+        } catch (EeveeException | TaskNoContentException | NoTaskToDeleteException e) {
             return e.getMessage();
         } catch (IndexOutOfBoundsException e) {
             return "Eevee... Something went wrong while handling this task.";

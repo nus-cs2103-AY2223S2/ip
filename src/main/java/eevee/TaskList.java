@@ -3,6 +3,7 @@ package eevee;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import eevee.exception.NoTaskToDeleteException;
 import eevee.task.Task;
 
 public class TaskList {
@@ -95,10 +96,14 @@ public class TaskList {
      * @return the task deleted
      * @throws IOException if something goes wrong when updating the deletion to task list
      */
-    public Task deleteTask(int indexOfTask, Storage storage) throws IOException{
-        Task taskToDelete = this.tasks.remove(indexOfTask);
-        storage.updateTaskList(this);
-        return taskToDelete;
+    public Task deleteTask(int indexOfTask, Storage storage) throws IOException, NoTaskToDeleteException {
+        try {
+            Task taskToDelete = this.tasks.remove(indexOfTask);
+            storage.updateTaskList(this);
+            return taskToDelete;
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoTaskToDeleteException();
+        }
     }
 
     /**
