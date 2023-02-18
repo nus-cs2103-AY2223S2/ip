@@ -102,9 +102,8 @@ Gets all tasks in the list.
 ```list```
 
 
-Example: ```list```
+Example: list
 
-```Testing```
 
 #### Connor's reply:
 
