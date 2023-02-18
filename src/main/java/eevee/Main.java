@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Eevee eevee = new Eevee("./data/tasks.txt");
+    private Eevee eevee = new Eevee("/data/tasks.txt");
 
     @Override
     public void start(Stage stage) {

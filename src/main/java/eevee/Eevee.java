@@ -28,7 +28,7 @@ public class Eevee {
         } catch (IndexOutOfBoundsException e) {
             return "Eevee... Something went wrong while handling this task.";
         } catch (IOException e) {
-            return "Eevee :( Something went wrong";
+            return "Eevee :( Something went wrong when saving task to file.";
         } catch (DateTimeParseException e) {
             return "Format of date given is wrong. Please ensure format of date is yyyy-MM-dd HH:mm " +
                     "(e.g. 2022-03-30 14:30)";

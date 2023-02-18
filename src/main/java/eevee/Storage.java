@@ -26,8 +26,9 @@ public class Storage {
         try {
             this.eeveeFilePath = filePath;
             File eeveeTxt = new File(filePath);
-            if (eeveeTxt.createNewFile()) {
-                System.out.printf("Create file: %s\n", eeveeTxt.getName());
+            eeveeTxt.getParentFile().mkdirs();
+            if (!eeveeTxt.exists()) {
+                eeveeTxt.createNewFile();
             }
         } catch (IOException e) {
             System.out.printf("Something went wrong ): %s", e);
