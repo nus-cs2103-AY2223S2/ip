@@ -43,10 +43,21 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpeg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpeg"));
 
+    /**
+     * Empty constructor that is directed by the Launcher class.
+     */
     public Duke() {
         super();
     }
 
+    /**
+     * Starts setting up the stage for the application upon start-up.
+     *
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     */
     @Override
     public void start(Stage stage) {
         ui = new Ui();
@@ -86,6 +97,10 @@ public class Duke extends Application {
         });
     }
 
+    /**
+     * Sets the main layout elements of the stage.
+     * @param stage the desired Stage instance.
+     */
     public void setLayout(Stage stage) {
         setStage(stage);
         setScrollPane();
@@ -93,6 +108,9 @@ public class Duke extends Application {
         setAnchorPlane();
     }
 
+    /**
+     * Sets the requirements of the Scroll Pane for easy viewing.
+     */
     public void setScrollPane() {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -102,6 +120,11 @@ public class Duke extends Application {
         scrollPane.setFitToWidth(true);
     }
 
+    /**
+     * Sets the dimensions of the main Stage.
+     *
+     * @param stage the Stage instance created.
+     */
     public void setStage(Stage stage) {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -118,12 +141,18 @@ public class Duke extends Application {
         mainLayout.setPrefSize(400.0, 600.0);
     }
 
+    /**
+     * Sets dimensions of UI elements that the user sees.
+     */
     public void setUiElements() {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
     }
 
+    /**
+     * Sets dimensions of AnchorPane.
+     */
     public void setAnchorPlane() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);

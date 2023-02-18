@@ -1,4 +1,4 @@
 3
 [T][X] Check L
-[D][X] Check this  (by: 2013-04-21) L
+[D][X] Check this  (by: 2013-04-21) M
 [E][X] Check this  (from: now  to: later) L
