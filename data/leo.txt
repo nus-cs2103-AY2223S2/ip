@@ -1,0 +1,13 @@
+[D][ ] project | 29102023 12:00
+[E][X] meeting | 29012023 20:00 | 29012023 22:00
+[T][ ] run
+[T][ ] sleeping
+[D][X] presentation | 10022023 17:00
+[D][ ] project | 20022023 12:00
+[D][ ] presentation | 20022023 13:00
+[E][ ] birthday | 20022023 12:00 | 23022023 01:00
+[T][ ] draft userguide
+[T][ ] study for midterms
+[D][ ] critical thinking essay | 03032023 23:59
+[E][ ] tutorial | 03032023 12:00 | 03032023 13:00
+[E][X] vacation | 01032023 11:00 | 05032023 10:00
