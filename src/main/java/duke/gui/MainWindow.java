@@ -29,17 +29,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String response = "Hello! I'm Duke!\n" +
-                "currently my functionality includes:\n" +
-                "bye\n" +
-                "todo\n" +
-                "deadline\n" +
-                "event\n" +
-                "list\n" +
-                "mark\n" +
-                "unmark\n" +
-                "delete\n" +
-                "try typing a command! :D";
+        String response = "Hello! I'm Duke!\n"
+                + "currently my functionality includes:\n"
+                + "bye\n"
+                + "todo\n"
+                + "deadline\n"
+                + "event\n"
+                + "list\n"
+                + "mark\n"
+                + "unmark\n"
+                + "delete\n"
+                + "try typing a command! :D";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );

@@ -1,13 +1,12 @@
 package duke.components;
 
-import duke.exceptions.DukeException;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import duke.exceptions.DukeException;
 
 /**
  * This is the Storage class for Duke, the CLI task manager.
@@ -16,7 +15,7 @@ import java.io.ObjectOutputStream;
  */
 
 public class Storage {
-    String filePath;
+    private final String filePath;
 
     /**
      * Creates a Storage object.
@@ -37,7 +36,7 @@ public class Storage {
      */
 
     public TaskList load() throws DukeException {
-        try{
+        try {
             FileInputStream readData = new FileInputStream(filePath);
             ObjectInputStream readStream = new ObjectInputStream(readData);
             return (TaskList) readStream.readObject();
@@ -58,7 +57,7 @@ public class Storage {
             FileOutputStream writeData = new FileOutputStream(filePath);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             writeStream.writeObject(tasks);
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
     }

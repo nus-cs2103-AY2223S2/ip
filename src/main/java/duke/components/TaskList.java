@@ -1,10 +1,9 @@
 package duke.components;
 
-import duke.tasks.Task;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import duke.tasks.Task;
 /***
  * This is the TaskList class for Duke, the CLI task manager.
  * This class is used to store tasks, as well as manipulate them
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  */
 
 public class TaskList implements Serializable {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Returns a new TaskList with no tasks stored.
@@ -51,7 +50,7 @@ public class TaskList implements Serializable {
      * @param markIndex int of index which the Task resides.
      */
     public void mark(int markIndex) {
-        Task currTask = tasks.get(markIndex-1);
+        Task currTask = tasks.get(markIndex - 1);
         currTask.markDone();
     }
 
@@ -61,7 +60,7 @@ public class TaskList implements Serializable {
      * @return Task at the index provided.
      */
     public Task getTask(int index) {
-        return tasks.get(index-1);
+        return tasks.get(index - 1);
     }
 
     /**
@@ -69,7 +68,7 @@ public class TaskList implements Serializable {
      * @param unmarkIndex int of index which the Task resides.
      */
     public void unmark(int unmarkIndex) {
-        Task currTask = tasks.get(unmarkIndex-1);
+        Task currTask = tasks.get(unmarkIndex - 1);
         currTask.unmark();
     }
 

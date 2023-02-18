@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * This is the Event task class to represent events passed to Duke.
@@ -9,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     protected LocalDate from;
-    static DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
     protected LocalDate to;
 
     /***
@@ -30,15 +28,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(format) + " to: " + to.format(format) + ")";
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return {@inheritDoc}
-     */
-    @Override
-    String getTypeIcon() {
-        return "[E]";
+        return "[E]" + super.toString() + " (from: " + from.format(DTFORMAT) + " to: " + to.format(DTFORMAT) + ")";
     }
 }

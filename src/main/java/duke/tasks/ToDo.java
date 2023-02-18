@@ -18,15 +18,6 @@ public class ToDo extends Task {
      * @return {@inheritDoc}
      */
     @Override
-    String getTypeIcon() {
-        return "[T]";
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return {@inheritDoc}
-     */
-    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
