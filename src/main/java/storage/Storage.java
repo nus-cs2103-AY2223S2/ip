@@ -1,17 +1,8 @@
 package storage;
 
-import parser.Parser;
-
-import task.Task;
-
-import tasklist.TaskList;
-
-import ui.Ui;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -24,6 +15,10 @@ import java.util.stream.Stream;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import parser.Parser;
+import task.Task;
+import tasklist.TaskList;
+import ui.Ui;
 
 public class Storage {
 
@@ -31,11 +26,13 @@ public class Storage {
 
 	private String dataFilePath = dataDirectory + File.separator + "shao.txt";
 
-	private String imageFilePath = "assets" + File.separator + "images" + File.separator;
-
 	private File myDir = new File(dataDirectory);
 
 	private File myFile = new File(dataFilePath);
+
+	final private String BOT_IMAGE_URL = "https://i.ibb.co/HrCJ70C/bot.png";
+
+	final private String USER_IMAGE_URL = "https://i.ibb.co/FKkmCs6/user.png";
 
 	/**
 	 * Load and retrieve bot ImageView component.
@@ -44,7 +41,7 @@ public class Storage {
 	 */
 	public ImageView getBotImageView() {
 		try {
-			return loadImageFile("bot.png");
+			return loadImageFile(BOT_IMAGE_URL);
 		} catch (FileNotFoundException ex) {
 			return new ImageView();
 		}
@@ -57,7 +54,7 @@ public class Storage {
 	 */
 	public ImageView getUserImageView() {
 		try {
-			return loadImageFile("user.png");
+			return loadImageFile(USER_IMAGE_URL);
 		} catch (FileNotFoundException ex) {
 			return new ImageView();
 		}
@@ -195,8 +192,8 @@ public class Storage {
 	 * @return ImageView
 	 * @throws FileNotFoundException
 	 */
-	private ImageView loadImageFile(String imageFileName) throws FileNotFoundException {
-		Image image = new Image(new FileInputStream(imageFilePath + imageFileName));
+	private ImageView loadImageFile(String imageUrl) throws FileNotFoundException {
+		Image image = new Image(imageUrl);
 
 		// Setting the image view
 		ImageView imageView = new ImageView(image);
