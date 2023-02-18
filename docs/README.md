@@ -4,7 +4,7 @@
 
 ### Feature-List
 
-#Words in UPPER_CASE are the parameters to be supplied by the user.
+Words in UPPER_CASE are the parameters to be supplied by the user.
 
 Lists all current tasks in tasklist.
 Format: view
@@ -13,14 +13,18 @@ Format: view
 ### Feature-Delete
 
 Description of the feature.
+
 Format: delete INDEX
+
 Examples: - delete 1
           - delete 3
 
 ### Feature-Add Todo Task
 
 Adds Todo Task to tasklist.
+
 Format: todo TASK_DESCRIPTION
+
 Examples: - todo gym
           - todo run
 
