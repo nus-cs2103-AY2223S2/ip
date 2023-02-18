@@ -115,8 +115,8 @@ public class Ui {
      * @param task Task that has been marked.
      */
     public static String printMark(Task task) {
-        return(DIVIDER + "Congrats this has been d:\n"
-            + task + "\n down, Leskooo!\n" + DIVIDER);
+        return(DIVIDER + "Congrats this has been done:\n"
+            + task + "\n Leskooo!\n" + DIVIDER);
     }
 
     /**
