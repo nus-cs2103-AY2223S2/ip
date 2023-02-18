@@ -10,14 +10,15 @@ public class Ui {
      * Displays Tigerlily To-Do's welcome message when user starts session.
      */
     public String showWelcome() {
-        return "welcome to tigerlily to-do,\nadd your tasks here!";
+        return "｡ﾟﾟ･｡･ﾟﾟ｡\n" + "ﾟ。   welcome to tigerlily to-do\n" + "　ﾟ･｡･ﾟ\n" +
+                "let's organize your life\n" + "try 'help' for guidance";
     }
 
     /**
      * Displays Tigerlily To-Do's goodbye message when user ends session.
      */
     public String showGoodbye() {
-        return "bye, see you again soon!";
+        return "｡ﾟﾟ･｡･ﾟﾟ｡\n" + "ﾟ。   bye, see you again soon!\n" + "　ﾟ･｡･ﾟ\n";
     }
 
     /**
@@ -45,5 +46,18 @@ public class Ui {
      */
     public String showError(DukeExceptions error) {
         return "\n" + error;
+    }
+
+    public String showHelp() {
+        return "here is a list of instructions Tigerlily can handle:\n\n" +
+                "❀ deadline [description] /by [deadline due] - creates a new Deadline\n" +
+                "❀ event [description] /from [event start] /to [event end] - creates a new Event\n" +
+                "❀ todo [description] - creates a new ToDo\n\n" +
+                "❀ find [query] - finds Tasks related to the query\n" +
+                "❀ list - lists out all Tasks in TaskList\n\n" +
+                "❀ delete [index # of Task] - deletes corresponding Task\n" +
+                "❀ mark [index # of Task] - marks corresponding Task as completed\n" +
+                "❀ unmark [index # of Task] - marks corresponding Task as uncompleted\n\n" +
+                "❀ bye - closes Tigerlily application\n";
     }
 }

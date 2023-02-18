@@ -1,15 +1,6 @@
 package tigerlily;
 
-import tigerlily.commands.ByeCommand;
-import tigerlily.commands.Command;
-import tigerlily.commands.DeadlineCommand;
-import tigerlily.commands.DeleteCommand;
-import tigerlily.commands.EventCommand;
-import tigerlily.commands.FindCommand;
-import tigerlily.commands.ListCommand;
-import tigerlily.commands.MarkCommand;
-import tigerlily.commands.ToDoCommand;
-import tigerlily.commands.UnmarkCommand;
+import tigerlily.commands.*;
 
 import tigerlily.exceptions.DukeExceptions;
 import tigerlily.exceptions.InvalidFilePathException;
@@ -25,7 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public enum CommandType {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND}
+    public enum CommandType {BYE, LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND, HELP}
 
     /**
      * Handles the commands given by a user and returns the appropriate command to be executed.
@@ -56,6 +47,8 @@ public class Parser {
                 return new DeleteCommand(input);
             case FIND:
                 return new FindCommand(input);
+            case HELP:
+                return new HelpCommand(input);
             default:
                 throw new UnknownCommandException();
             }
