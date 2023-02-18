@@ -172,6 +172,7 @@ public class TaskList {
         assert keyword != null;
 
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
+        ArrayList<Integer> requiredTaskNumbers = new ArrayList<>();
 
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = this.tasks.get(i);
@@ -181,6 +182,7 @@ public class TaskList {
 
             if (findIndex != -1) {
                 tasksWithKeyword.add(task);
+                requiredTaskNumbers.add(i + 1);
             }
 
         }
@@ -195,7 +197,7 @@ public class TaskList {
                     .append(keyword)
                     .append("'...\n");
             for (int i = 0; i < tasksWithKeyword.size(); i++) {
-                response.append(i + 1)
+                response.append(requiredTaskNumbers.get(i))
                         .append(") ")
                         .append(tasksWithKeyword.get(i))
                         .append("\n");
