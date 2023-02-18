@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * This is the Deadline task class to represent deadlines passed to Duke.
@@ -10,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDate by;
-    static DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
      * Creates a new Deadline object
@@ -28,15 +26,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(format) + ")";
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return {@inheritDoc}
-     */
-    @Override
-    public String getTypeIcon(){
-        return "[D]";
+        return "[D]" + super.toString() + " (by: " + by.format(DTFORMAT) + ")";
     }
 }

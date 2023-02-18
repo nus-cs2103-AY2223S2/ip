@@ -1,16 +1,12 @@
 package duke.components;
 
-import duke.commands.Command;
-import duke.components.Parser;
-import duke.components.Storage;
-import duke.components.TaskList;
-import duke.exceptions.DukeException;
-
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 /**
  * This is the driver class for Duke, the CLI task manager.
@@ -22,7 +18,7 @@ import java.nio.file.Paths;
 
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
 
     /**
@@ -44,12 +40,11 @@ public class Duke {
         try {
             Command c = Parser.parse(userInput);
             response = c.execute(tasks, storage);
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             response = e.getMessage();
-        } finally {
             return response;
         }
+        return response;
     }
 
     public static String getFilePath() {
@@ -58,7 +53,7 @@ public class Duke {
             //This method creates a directory if it does not exist yet, but will not
             //throw an error even if it exists, and so is safe to call.
             Files.createDirectories(dirPath);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         Path dataPath = Paths.get(dirPath.toString(), "DukeMem.ser");
