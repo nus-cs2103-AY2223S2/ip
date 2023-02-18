@@ -76,7 +76,7 @@ Example usage:
 ```
 You: mark 1
 Duke: Okay! I've marked this task as done!
-      [T][ ] stuff turkey
+      [T][X] stuff turkey
 ```
 
 ### `unmark` - Marks a task as undone
