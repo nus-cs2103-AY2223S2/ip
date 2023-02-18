@@ -4,15 +4,29 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Task class encapsulates
+ * each task object.
+ */
 public class Task {
 	protected String description;
 	protected boolean isDone;
 
+	/**
+	 * Constructor for the task class.
+	 *
+	 * @param description The description of the task.
+	 */
 	public Task(String description) {
 		this.description = description;
 		this.isDone = false;
 	}
 
+	/**
+	 * Gets the status of the current class
+	 *
+	 * @return A string representation of the status.
+	 */
 	public String getStatusIcon() {
 		return (isDone ? "X" : " ");
 	}
@@ -25,16 +39,23 @@ public class Task {
 		this.isDone = false;
 	}
 
-	public boolean matchesTask(String searchWord) {
-		return this.description.contains(searchWord);
-	}
-
 	@Override
 	public String toString() {
 		return ("[" + this.getStatusIcon() + "] " + this.description);
 	}
 
+
+	/**
+	 * Todo class that encapsulates the
+	 * todo object.
+	 */
 	public static class Todo extends Task {
+
+		/**
+		 * Constructor for the todo class
+		 *
+		 * @param description The description of the todo task.
+		 */
 		public Todo(String description) {
 			super(description);
 		}
@@ -45,11 +66,22 @@ public class Task {
 		}
 	}
 
+	/**
+	 * Deadline class encapsulates a
+	 * deadline object.
+	 */
 	public static class Deadline extends Task {
 		protected LocalDate by;
 		protected LocalTime when;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
+		/**
+		 * Constructor for the deadline class.
+		 *
+		 * @param description: The description of the task.
+		 * @param by The date due for the deadline task.
+		 * @param when The time due for the deadline task.
+		 */
 		public Deadline(String description, LocalDate by, LocalTime when) {
 			super(description);
 			this.by = by;
@@ -62,10 +94,21 @@ public class Task {
 		}
 	}
 
+	/**
+	 * Event class that encapsulates
+	 * an event object.
+	 */
 	public static class Event extends Task {
 		protected String from;
 		protected String to;
 
+		/**
+		 * Constructor for the event class.
+		 *
+		 * @param description Description for the event class.
+		 * @param from The starting time of the event.
+		 * @param to The ending time of the event.
+		 */
 		public Event(String description, String from, String to) {
 			super(description);
 			this.from = from;

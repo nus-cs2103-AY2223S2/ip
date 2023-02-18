@@ -1,10 +1,20 @@
 package duke;
 
+/**
+ * The savelist class encapsulates
+ * the list of saves available to the user.
+ */
 public class SaveList {
     private Save save1;
     private Save save2;
     private Save save3;
 
+    /**
+     * Adds a save file to the list.
+     *
+     * @param saveNo The index of the save.
+     * @param save The save file object.
+     */
     public void addSave(int saveNo, Save save) {
         switch (saveNo) {
         case 1:
@@ -19,6 +29,11 @@ public class SaveList {
         }
     }
 
+    /**
+     * The string representation of a savelist.
+     *
+     * @return String representation of a savelist.
+     */
     @Override
     public String toString() {
         String save1String = save1 == null ? "" : save1 + "\n";
