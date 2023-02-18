@@ -16,6 +16,7 @@
     - [Mark a task as done: **mark**](#mark-a-task-as-done-mark)
     - [Mark a task as not done: **unmark**](#mark-a-task-as-not-done-unmark)
     - [Delete a task: **delete**](#delete-a-task-delete)
+    - [Delete all tasks: **clear**](#delete-all-tasks-clear)
     - [Find tasks with a keyword: **find**](#find-tasks-with-a-keyword-find)
     - [Sort and show all deadlines: **sort-deadlines**](#sort-and-show-all-deadlines-sort-deadlines)
     - [Edit a task's description: **set-description**](#edit-a-tasks-description-set-description)
@@ -119,6 +120,12 @@ Delete a task at the given index.
 
 - You can use `list` to find the exact indicies of the tasks in your list.
 - `index` must be a number that is greater than `0`.
+
+### Delete all tasks: **clear**
+
+Usage:<br>`clear`
+
+Removes all tasks in your list.
 
 ### Find tasks with a keyword: **find**
 
