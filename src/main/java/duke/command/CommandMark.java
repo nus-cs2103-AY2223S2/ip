@@ -9,7 +9,7 @@ import duke.Ui;
  */
 public class CommandMark extends Command {
     private final int index;
-    private final boolean mark;
+    private final boolean isMarked;
 
     /**
      * Returns a mark/unmark command.
@@ -20,7 +20,7 @@ public class CommandMark extends Command {
     public CommandMark(String command, int index, boolean mark) {
         super(command);
         this.index = index;
-        this.mark = mark;
+        this.isMarked = mark;
     }
 
     /**
@@ -31,8 +31,8 @@ public class CommandMark extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.markTask(index, mark);
-        String markedString = (mark)
+        taskList.markTask(index, isMarked);
+        String markedString = (isMarked)
                 ? "Nice! I've marked this task as done:"
                 : "OK, I've marked this task as not done yet:";
         String taskString = (taskList.getTask(index).toString() + "\n");
@@ -47,6 +47,6 @@ public class CommandMark extends Command {
      */
     @Override
     public Command inverseCommand(TaskList taskList) {
-        return new CommandMark(this.getFullCommand(), index, !mark);
+        return new CommandMark(this.getFullCommand(), index, !isMarked);
     }
 }

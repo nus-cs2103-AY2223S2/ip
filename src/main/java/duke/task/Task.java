@@ -65,7 +65,7 @@ public class Task {
     }
 
     /**
-     * Return format of task for backup.
+     * Returns format of task for backup.
      * @return string format.
      */
     public String toBackup() {

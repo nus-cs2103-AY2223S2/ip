@@ -39,7 +39,7 @@ public class Storage {
     }
 
     /**
-     * Load entire task list into the backup file.
+     * Loads entire task list into the backup file.
      *
      * @param arr task list.
      */
