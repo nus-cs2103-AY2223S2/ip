@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+import duke.exception.DukeInvalidDataFileException;
 import duke.task.Task;
 
 import java.io.File;
@@ -66,6 +67,13 @@ public class Storage {
             File tasksFileObject = new File(this.filePath);
             tasksFileObject.createNewFile();
 
+        } catch (DukeException e) {
+            FileWriter fileWriter = new FileWriter(this.filePath);
+            fileWriter.write("");
+            fileWriter.close();
+
+            return new ArrayList<Task>();
+
         } finally {
             return tasks;
         }
@@ -92,7 +100,7 @@ public class Storage {
             fileWriter.close();
 
         } catch (IOException e) {
-            throw new DukeException("An error occurred in writing the data to file :/");
+            throw new DukeInvalidDataFileException("An error occurred in writing the data to file :/");
 
         }
     }

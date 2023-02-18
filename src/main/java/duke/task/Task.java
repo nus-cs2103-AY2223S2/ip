@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.Duke;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidDataFileException;
 import duke.parser.Parser;
 
 import java.time.LocalDateTime;
@@ -39,39 +42,50 @@ public abstract class Task {
      * @param task The String representation of the task in the text file.
      * @return The Task object corresponding to the String representation in the text file.
      */
-    public static Task getTaskFromString(String task) {
-        assert task.contains("~");
+    public static Task getTaskFromString(String task) throws DukeException {
 
-        String[] taskParts = task.split("~");
-        String taskType = taskParts[0];
-        Priority priority = Parser.parsePriority(taskParts[1]);
-        String marked = taskParts[2];
-        String description = taskParts[3];
-
-        Task answer = null;
-
-        if (taskType.equals("T")) {
-            answer = new ToDo(description, priority);
-
-        } else if (taskType.equals("D")) {
-            answer = new Deadline(description,
-                    LocalDateTime.parse(taskParts[4]),
-                    priority);
-
-        } else {
-            answer = new Event(description,
-                    LocalDateTime.parse(taskParts[4]),
-                    LocalDateTime.parse(taskParts[5]),
-                    priority);
-
+        if (!task.contains("~")) {
+            throw new DukeInvalidDataFileException(
+                    "The data file has been corrupted. All data has been erased :/");
         }
 
-        if (answer != null && marked.equals("X")) {
-            answer.mark();
+        try {
+            String[] taskParts = task.split("~");
+            String taskType = taskParts[0];
+            Priority priority = Parser.parsePriority(taskParts[1]);
+            String marked = taskParts[2];
+            String description = taskParts[3];
+
+            Task answer = null;
+
+            if (taskType.equals("T")) {
+                answer = new ToDo(description, priority);
+
+            } else if (taskType.equals("D")) {
+                answer = new Deadline(description,
+                        LocalDateTime.parse(taskParts[4]),
+                        priority);
+
+            } else {
+                answer = new Event(description,
+                        LocalDateTime.parse(taskParts[4]),
+                        LocalDateTime.parse(taskParts[5]),
+                        priority);
+
+            }
+
+            if (answer != null && marked.equals("X")) {
+                answer.mark();
+
+            }
+
+            return answer;
+
+        } catch (Exception e) {
+            throw new DukeInvalidDataFileException(
+                    "The data file has been corrupted. All data has been erased :/");
 
         }
-
-        return answer;
 
     }
 
