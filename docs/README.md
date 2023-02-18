@@ -157,4 +157,3 @@ Command: `bye`
 ```
 The programme terminates and the window automatically closes
 ```
-remote_theme: pages-themes/dinky@v0.2.0
