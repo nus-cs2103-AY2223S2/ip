@@ -12,10 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 
 /**
@@ -27,7 +28,7 @@ public class DialogBox extends HBox {
     private static final String RESOURCE_PATH = "/view/DialogBox.fxml";
 
     @FXML
-    private Label dialogLabel;
+    private TextFlow dialogText;
     @FXML
     private ImageView displayPicture;
 
@@ -42,7 +43,7 @@ public class DialogBox extends HBox {
             exception.printStackTrace();
         }
 
-        dialogLabel.setText(text);
+        dialogText.getChildren().add(new Text(text));
         displayPicture.setImage(image);
     }
 

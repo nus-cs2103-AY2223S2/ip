@@ -1,12 +1,12 @@
 package duke;
 
-import duke.client.Main;
-import javafx.application.Application;
-import javafx.application.Platform;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import duke.client.Main;
+import javafx.application.Application;
+import javafx.application.Platform;
 
 /**
  * A launcher class to workaround classpath issues.

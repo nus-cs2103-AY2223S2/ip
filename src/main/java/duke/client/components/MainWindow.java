@@ -86,7 +86,6 @@ public class MainWindow extends AnchorPane {
         if (response.equals(Duke.TERMINATION_INDICATION)) {
             isExiting = true;
             showExitMessage();
-//            Launcher.exit();
             Launcher.scheduleExit();
             return;
         }
