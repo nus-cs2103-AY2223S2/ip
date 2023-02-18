@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+#kuromiDialog {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 13;
+    -fx-background-color: #e1ddf4;
+    -fx-background-insets: 1;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+}
+
+#dialog {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 13;
+    -fx-background-insets: 1;
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+}
+
+#sendButton {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 13;
+    -fx-background-radius: 15;
+    -fx-background-color: #f2dcf2;
+}
+
+#userInput {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 13;
+    -fx-background-radius: 50;
+    -fx-border-color: #b18fbf;
+    -fx-padding: 5 10 5 10;
+    -fx-faint-focus-color: #b18fbf;
+}
