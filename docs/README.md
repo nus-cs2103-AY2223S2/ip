@@ -104,7 +104,7 @@ Gets all tasks in the list.
 
 Example: ```list```
 
-<break>
+```Testing```
 
 #### Connor's reply:
 
