@@ -97,12 +97,9 @@ E|false|{TASK}|{STARTDATE}|{ENDDATE}
 
 Gets all tasks in the list.
 
-#### Usage format:
-
-```list```
+#### Usage format: ```list```
 
 Example: ```list```
-
 
 #### Connor's reply:
 
