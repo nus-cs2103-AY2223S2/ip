@@ -7,6 +7,7 @@ public class FileLoadException extends DukeException {
 
     /**
      * Creates an exception of Duke being unable to read the previous task list
+     * due to read/write access
      * 
      * @param fileString file path of previous task list txt file
      */
