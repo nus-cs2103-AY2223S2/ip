@@ -4,7 +4,7 @@ package duke;
  * A command class that is abstract.
  */
 public abstract class Command {
-    public String input;
+    private String input;
 
     /**
      * Constructs classes that inherits from command class
@@ -27,6 +27,10 @@ public abstract class Command {
      */
     public boolean isExit() {
         return true;
+    }
+
+    public String getInput() {
+        return this.input;
     }
 
 }

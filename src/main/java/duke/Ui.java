@@ -60,6 +60,10 @@ public class Ui {
         System.out.println(exitMsg);
     }
 
+    /**
+     * Formats goodbye message.
+     * @return Formatted goodbye message.
+     */
     public String formatGoodbye() {
         String exitMsg = spacesPrefix
                 + "Farewell! See you soon!";
@@ -84,6 +88,13 @@ public class Ui {
         System.out.println(spacesPrefix + task);
     }
 
+    /**
+     * Formats add task message.
+     * @param task Added task.
+     * @param taskList taskList for Duke.
+     * @return Formatted string for added task
+     *      and number of remaining tasks in list.
+     */
     public String formatTaskAdded(Task task, TaskList taskList) {
         String addedTask = spacesPrefix + "New task added: " + task;
         String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";
@@ -100,6 +111,13 @@ public class Ui {
         System.out.println(spacesPrefix + task);
     }
 
+    /**
+     * Formats delete task message.
+     * @param task Deleted task.
+     * @param taskList taskList for Duke.
+     * @return Formatted string for deleted task and
+     *      and number of remaining tasks in list.
+     */
     public String formatTaskRemoved(Task task, TaskList taskList) {
         String removedTask = spacesPrefix + "Removed task: " + task;
         String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";
@@ -134,6 +152,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Formats list contents of task list.
+     * @param taskList taskList for Duke.
+     * @return Formatted string for tasks in list.
+     */
     public String formatShowList(TaskList taskList) {
         String finishedList = spacesPrefix + "Here are the tasks in your list:";
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -154,6 +177,13 @@ public class Ui {
         System.out.println(spacesPrefix + task);
     }
 
+    /**
+     * Formats marked task message.
+     * @param task Marked task.
+     * @param taskList taskList for Duke.
+     * @return Formatted string for marked task
+     *      and number of remaining tasks in list.
+     */
     public String formatTaskMarked(Task task, TaskList taskList) {
         String markedTask = spacesPrefix + "Marked task as done: " + task;
         String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";
@@ -170,6 +200,13 @@ public class Ui {
         System.out.println(spacesPrefix + task);
     }
 
+    /**
+     * Formats unmarked task message.
+     * @param task Unmarked task.
+     * @param taskList taskList for Duke.
+     * @return Formatted string for unmarked task
+     *      and number of remaining tasks in list.
+     */
     public String formatTaskUnmarked(Task task, TaskList taskList) {
         String unmarkedTask = spacesPrefix + "Marked task as undone: " + task;
         String numTasks = spacesPrefix + " Now list has " + taskList.getSize() + " tasks.";

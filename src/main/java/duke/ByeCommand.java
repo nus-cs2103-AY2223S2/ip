@@ -27,6 +27,16 @@ public class ByeCommand extends Command {
         ui.showGoodbye();
     }
 
+    /**
+     * Executes the Bye command with given task list,
+     * ui and storage, and also returns output String for bot.
+     *
+     * @param taskList TaskList for Duke.
+     * @param ui Ui for Duke.
+     * @param storage Storage for Duke.
+     * @return Formatted output message.
+     * @throws DukeException If error occurs.
+     */
     public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         return ui.formatGoodbye();
     }

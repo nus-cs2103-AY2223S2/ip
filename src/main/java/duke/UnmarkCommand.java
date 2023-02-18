@@ -23,7 +23,7 @@ public class UnmarkCommand extends Command {
      * @throws DukeException If error occurs.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        int taskNumber = Integer.parseInt(input);
+        int taskNumber = Integer.parseInt(this.getInput());
 
         Task unmarkedTask = taskList.changeMarkStatus(taskNumber);
         storage.writeTasksToFile(taskList.getTaskList().toString());
@@ -31,8 +31,18 @@ public class UnmarkCommand extends Command {
         ui.showNumTasks(taskList);
     }
 
+    /**
+     * Executes the Unmark command with given task list,
+     * ui and storage, and also returns output String for bot.
+     *
+     * @param taskList TaskList for Duke.
+     * @param ui Ui for Duke.
+     * @param storage Storage for Duke.
+     * @return Formatted output message.
+     * @throws DukeException If error occurs.
+     */
     public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        int taskNumber = Integer.parseInt(input);
+        int taskNumber = Integer.parseInt(this.getInput());
 
         Task unmarkedTask = taskList.changeMarkStatus(taskNumber);
         storage.writeTasksToFile(taskList.getTaskList().toString());

@@ -48,8 +48,12 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Given user input, parses it and gets response from
+     * executing the associated Command. If no such command,
+     * returns the error message instead.
+     *
+     * @param input User input message.
+     * @return Response after executing command, or error message.
      */
     public String getResponse(String input) {
         try {

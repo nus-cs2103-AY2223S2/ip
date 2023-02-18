@@ -19,7 +19,7 @@ public class Parser {
      * @return Command to be executed.
      * @throws DukeException If error occurs.
      */
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException {
         try {
             String[] inputSplit = input.split(" ");
             switch (inputSplit[0]) {

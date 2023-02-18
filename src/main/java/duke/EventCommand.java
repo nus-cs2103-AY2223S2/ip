@@ -24,12 +24,12 @@ public class EventCommand extends Command {
      * @throws DukeException If task description is empty.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (input.length() == 0) {
+        if (this.getInput().length() == 0) {
             throw new DukeException(
                     "You can't be doing nothing!! Please try again!");
         }
 
-        String[] descSplit = input.split("/");
+        String[] descSplit = this.getInput().split("/");
         String description = descSplit[0].substring(
                 0, descSplit[0].length() - 1);
         String start = descSplit[1].substring(
@@ -43,13 +43,23 @@ public class EventCommand extends Command {
         ui.showNumTasks(taskList);
     }
 
+    /**
+     * Executes the Event command with given task list,
+     * ui and storage, and also returns output String for bot.
+     *
+     * @param taskList TaskList for Duke.
+     * @param ui Ui for Duke.
+     * @param storage Storage for Duke.
+     * @return Formatted output message.
+     * @throws DukeException If error occurs.
+     */
     public String executeReturnString(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (input.length() == 0) {
+        if (this.getInput().length() == 0) {
             throw new DukeException(
                     "You can't be doing nothing!! Please try again!");
         }
 
-        String[] descSplit = input.split("/");
+        String[] descSplit = this.getInput().split("/");
         String description = descSplit[0].substring(
                 0, descSplit[0].length() - 1);
         String start = descSplit[1].substring(

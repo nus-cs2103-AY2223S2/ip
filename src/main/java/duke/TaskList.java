@@ -54,11 +54,13 @@ public class TaskList {
         return this.tasks.get(taskNumber - 1);
     }
 
+    /**
+     * Sorts the tasks in taskList and reorders them.
+     * @param taskList taskList for Duke.
+     * @param comparator TaskDateComparator to compare task dates.
+     */
     public void sortTasks(TaskList taskList, Comparator<Task> comparator) {
         Collections.sort(taskList.tasks, comparator);
-        for (Task t : taskList.tasks) {
-            System.out.println(t);
-        }
     }
 
     /**
@@ -76,8 +78,8 @@ public class TaskList {
      * @param num Task number starting from 1.
      * @return Task deleted.
      * @throws DukeException If task list is empty,
-     * given task number below 1 or given task number
-     * greater than total number of tasks in task list.
+     *     given task number below 1 or given task number
+     *     greater than total number of tasks in task list.
      */
     public Task deleteTask(int num) throws DukeException {
         int numTasks = this.tasks.size();
@@ -104,8 +106,8 @@ public class TaskList {
      * @param num Task number starting from 1.
      * @return Task after changing mark status.
      * @throws DukeException If task list is empty or
-     * given task number below 1 or given task number
-     * greater than total number of tasks in task list.
+     *     given task number below 1 or given task number
+     *     greater than total number of tasks in task list.
      */
     public Task changeMarkStatus(int num) throws DukeException {
         int numTasks = this.tasks.size();

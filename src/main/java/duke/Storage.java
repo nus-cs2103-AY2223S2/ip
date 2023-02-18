@@ -65,6 +65,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new file at specified Path.
+     */
     void makeDirectory() {
         try {
             if (!checkDirectory()) {
@@ -75,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if directory exists.
+     *
+     * @return True or False whether path exists or not.
+     */
     boolean checkDirectory() {
         return path.exists();
     }
