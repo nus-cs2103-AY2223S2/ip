@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -57,11 +61,15 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (input.strip().equals("bye")) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Timer delay = new Timer();
+            TimerTask exit = new TimerTask() {
+                @Override
+                public void run() {
+                    Main.exit();
+                }
+            };
+            //  Wait 2s before closing.
+            delay.schedule(exit, 2000);
         }
     }
 }
