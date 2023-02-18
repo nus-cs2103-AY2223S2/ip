@@ -58,12 +58,23 @@ public class Ui {
         return "Goodbye";
     }
 
+    /**
+     * Deletes task message
+     * @param task Task
+     * @param count Number of tasks in the list
+     * @return Delete task message
+     */
     public String deleteTaskMsg(Task task, int count){
         assert count > -1 : "Number of tasks cannot be negative";
         return "Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have " + count + " tasks in the list";
     }
 
+    /**
+     * Return list command's message
+     * @param taskList TaskList object
+     * @return List tasks message
+     */
     public String listTasksMsg(TaskList taskList){
         String list = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++){
@@ -72,6 +83,12 @@ public class Ui {
         return list;
     }
 
+    /**
+     * Returns find task message
+     * @param keyword keyword used for finding task
+     * @param taskList TaskList object
+     * @return find task message
+     */
     public String findMsg(String keyword, TaskList taskList){
         String result = "Here are the matching tasks in your list:\n";
         int count = 0;
@@ -87,6 +104,11 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Returns update task message
+     * @param task Task
+     * @return Returns update task message
+     */
     public String updateMsg(Task task){
         return "Ok task has been updated:\n" + task.toString();
     }

@@ -4,6 +4,12 @@ import command.Commands;
 import exception.DukeException;
 
 public class StringParser {
+    /**
+     * Parses the given input and returns correct Command object
+     * @param answer Input from user
+     * @return Command object
+     * @throws DukeException
+     */
     public Command parse(String answer) throws DukeException {
         String[] wordArr = answer.split(" ", 2);
         Commands command = getCommand(wordArr[0]);
@@ -56,6 +62,12 @@ public class StringParser {
         }
     }
 
+    /**
+     * Returns the correct Commands enum based off input
+     * @param input Input
+     * @return Commands enum
+     * @throws DukeException
+     */
     private Commands getCommand(String input) throws DukeException{
         try {
             Commands command = Commands.valueOf(input.toUpperCase());
@@ -66,6 +78,12 @@ public class StringParser {
             throw new DukeException("Null exception encountered");
         }
     }
+
+    /**
+     * Parses todo command to check for errors
+     * @param input Task information
+     * @throws DukeException
+     */
     public void parseTodo(String input) throws DukeException{
         try{
             String[] wordArr = input.split(" ", 2);

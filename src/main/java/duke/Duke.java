@@ -31,6 +31,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns message String of task
+     * @param input
+     * @return Message String of task
+     */
     public String getResponse(String input){
         try{
             Command c = sp.parse(input);

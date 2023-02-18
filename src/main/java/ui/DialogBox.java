@@ -24,7 +24,11 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
+    /**
+     * Constructor for DialogBox object
+     * @param text
+     * @param img
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,10 +53,21 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generate DialogBox for user
+     * @param text User's text
+     * @param img User image
+     * @return DialogBox
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
-
+    /**
+     * Generate DialogBox for Duke
+     * @param text Duke's text
+     * @param img Duke image
+     * @return DialogBox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

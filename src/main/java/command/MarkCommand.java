@@ -6,9 +6,22 @@ import ui.Ui;
 import tasks.Task;
 public class MarkCommand extends Command{
     private int index;
+
+    /**
+     * Constructor for MarkCommand object
+     * @param index Index of task to be marked
+     */
     public MarkCommand(int index){
         this.index = index;
     }
+
+    /**
+     * Marks task in taskList and updates harddrive
+     * @param taskList TaskList object
+     * @param storage Storage object
+     * @param ui Ui object
+     * @return Mark task message
+     */
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui){
         taskList.markTask(index);

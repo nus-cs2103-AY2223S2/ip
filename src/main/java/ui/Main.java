@@ -12,7 +12,13 @@ import java.io.IOException;
  * A GUI for duke.Duke using FXML.
  */
 public class Main extends Application {
-
+    /**
+     * Sets the primary stage for application
+     * @param stage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     */
     @Override
     public void start(Stage stage) {
         try {
