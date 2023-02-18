@@ -95,10 +95,9 @@ public class Parser {
         default:
             throw new InvalidFilePathException();
         }
-
         if (taskStatus.equals("1")) {
             newTask.markDone();
-        } else {
+        } else if (taskStatus.equals("0")) {
             newTask.unmarkDone();
         }
         return newTask;
