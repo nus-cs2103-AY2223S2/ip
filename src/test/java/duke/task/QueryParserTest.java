@@ -1,55 +1,52 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import duke.query.Query;
 import duke.query.QueryParser;
 
 public class QueryParserTest {
     @Test
-    public void testParseQuery() {
+    public void parseQuery_noParamNoArg() {
         String rawQuery = "command";
-        parseAndPrintRawQuery(rawQuery);
+        assertEquals("command : ", QueryParser.parseQuery(rawQuery).toString());
     }
 
     @Test
-    public void testParseQueryWithShortParam() {
+    public void parseQuery_shortParam() {
         String rawQuery = "command param";
-        parseAndPrintRawQuery(rawQuery);
+        assertEquals("command : param", QueryParser.parseQuery(rawQuery).toString());
     }
 
     @Test
-    public void testParseQueryWithLongParam() {
+    public void parseQuery_longParam() {
         String rawQuery = "command pam param, pam pam param";
-        parseAndPrintRawQuery(rawQuery);
+        assertEquals("command : pam param, pam pam param", QueryParser.parseQuery(rawQuery).toString());
     }
 
     @Test
-    public void testParseQueryWithKeywordButNoArg() {
-        String rawQuery = "command pam param, pam pam param /keyword ";
-        parseAndPrintRawQuery(rawQuery);
+    public void parseQuery_paramKeywordNoArg() {
+        String rawQuery = "command pam param, pam pam param /keyword";
+        assertEquals("command : pam param, pam pam param", QueryParser.parseQuery(rawQuery).toString());
     }
 
     @Test
-    public void testParseQueryWithOneArgument() {
+    public void parseQuery_paramKeywordArg() {
         String rawQuery = "command pam param, pam pam param /keyword hi";
-        parseAndPrintRawQuery(rawQuery);
+        assertEquals("command : pam param, pam pam param /keyword:hi", QueryParser.parseQuery(rawQuery).toString());
     }
 
     @Test
-    public void testParseQueryWithDuplicateKeyword() {
+    public void parseQuery_paramDuplicateKeyword() {
         String rawQuery = "command pam param, pam pam param /keyword nice /keyword nice2";
-        parseAndPrintRawQuery(rawQuery);
+        assertEquals("command : pam param, pam pam param /keyword:nice2", QueryParser.parseQuery(rawQuery).toString());
     }
 
     @Test
-    public void testParseQueryWithTwoArguments() {
+    public void parseQuery_paramTwoKeywordArg() {
         String rawQuery = "command pam param, pam pam param /keyword1 hi /keyword2 bye";
-        parseAndPrintRawQuery(rawQuery);
-    }
-
-    private void parseAndPrintRawQuery(String rawQuery) {
-        Query q = QueryParser.parseQuery(rawQuery);
-        System.out.println(q);
+        assertEquals("command : pam param, pam pam param /keyword2:bye /keyword1:hi",
+                QueryParser.parseQuery(rawQuery).toString());
     }
 }
