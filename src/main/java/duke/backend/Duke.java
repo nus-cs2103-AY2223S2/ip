@@ -10,7 +10,7 @@ class Duke {
         //  Flag for program termination
         boolean isProgramEnded = false;
 
-        while(!isProgramEnded) {
+        while (!isProgramEnded) {
             isProgramEnded = ui.readInput();
         }
     }

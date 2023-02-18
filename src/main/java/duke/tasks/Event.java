@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents an Event task, encapsulating a start and end times as Strings.
  */

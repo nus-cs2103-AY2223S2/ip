@@ -61,7 +61,7 @@ class Ui {
             }
         }
         System.out.println(DIVIDER);
-        if (searchResults.size() != 0){
+        if (searchResults.size() != 0) {
             System.out.println("I've found these matching tasks:\n");
             for (Pair p : searchResults) {
                 System.out.println(p.getKey() + ". " + p.getValue());

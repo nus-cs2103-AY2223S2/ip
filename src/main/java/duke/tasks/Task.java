@@ -3,7 +3,7 @@ package duke.tasks;
 /**
  * An abstract task class that encapsulates the description of any type of Task.
  */
-abstract public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -40,7 +40,7 @@ abstract public class Task {
      * Marks this Task as done.
      */
     public void mark() {
-      this.isDone = true;
+        this.isDone = true;
     }
 
     /**
