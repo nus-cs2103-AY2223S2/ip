@@ -12,6 +12,7 @@ public class ByeCommand implements Command {
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         storage.saveData(tasks.retrieveList());
+        ui.exit();
         return ui.displayExitMessage();
     }
 }
