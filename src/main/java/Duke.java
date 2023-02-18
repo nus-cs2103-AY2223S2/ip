@@ -15,9 +15,9 @@ public class Duke {
 
         Scanner inputScanner = new Scanner(System.in);
         String input;
-        String output;
-        String[] storage = new String[100];
+        Task[] storage = new Task[100];
         int storeIndex = 0;
+
 
 
         while(true) {
@@ -29,19 +29,25 @@ public class Duke {
                 break;
             }
 
-            // level_2 feature: add input to array + display array when required
+            // level_3 feature: use input to construct Task object and add to array + display array when required + mark Task as done
             if (input.equalsIgnoreCase("display")) {
-                System.out.println("Here you go my brother!/n" );
+                System.out.println("Here you go my brother!" );
                 for(int i = 0; i < storeIndex; i++) {
-                    System.out.println(i + ". " + storage[i]);
+                    System.out.println((i + 1) + ". " + storage[i].toString());
                 }
-                System.out.println("Anything else I can do for you top dawg/n" );
+                System.out.println("Anything else I can do for you top G" );
+            } else if (input.length() >= 6 && input.substring(0,4).equalsIgnoreCase("mark")) {
+                int i = Integer.parseInt(input.substring(5)) - 1;
+                storage[i].markAsDone();
+                System.out.println("Marked as you wish my brother:");
+                System.out.println(i + ". " + storage[i].toString());
+                System.out.println(" Whats next?");
             } else {
-                storage[storeIndex] = input;
+                storage[storeIndex] = new Task(input);
                 System.out.println("added to list my brother: " + input);
+                storeIndex++;
             }
 
-            storeIndex++;
 
 
 
