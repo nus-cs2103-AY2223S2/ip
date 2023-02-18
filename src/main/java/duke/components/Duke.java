@@ -33,6 +33,8 @@ public class Duke {
         } catch (DukeException e) {
             tasks = new TaskList();
         }
+        assert storage != null : "storage doesn't exist";
+        assert tasks != null : "task-list doesn't exist";
     }
 
     public String getResponse(String userInput) {
@@ -40,9 +42,8 @@ public class Duke {
         try {
             Command c = Parser.parse(userInput);
             response = c.execute(tasks, storage);
-        } catch (DukeException e) {
-            response = e.getMessage();
-            return response;
+        } catch (DukeException error) {
+            return error.getMessage();
         }
         return response;
     }

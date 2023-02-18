@@ -20,6 +20,8 @@ public abstract class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        assert this.description != null : "description not initialized";
+
     }
 
 
