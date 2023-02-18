@@ -2,28 +2,67 @@
 
 ## Features 
 
-### Feature-ABC
+### Logs tasks
 
-Description of the feature.
+Can add new tasks and save them for later loading.
 
-### Feature-XYZ
+### Mark Tasks
 
-Description of the feature.
+Mark done tasks, which can also be removed.
+
+### Find Tasks
+
+Find certain tasks based on given keywords.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Add todo task
 
-Describe the action and its outcome.
+Provide task name as input to create a todo task.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo run`
 
 Expected outcome:
 
-Description of the outcome.
+Creates a new todo task
 
 ```
-expected output
+I'll help add this for now:
+[T][ ] run
+```
+
+### `mark` - Add todo task
+
+Provide index of task to mark as done.
+
+Example of usage:
+
+`mark 1`
+
+Expected outcome:
+
+Marks the task at given index.
+
+```
+You finally did it huh:
+[T][X] run
+```
+
+### `find` - Find specific tasks
+
+Provide keyword as input to find tasks.
+
+Example of usage:
+
+`find run`
+
+Expected outcome:
+
+Find all tasks with the keyword run.
+
+```
+Here you go, now stop wasting my time:
+1. [T][X] run
 ```

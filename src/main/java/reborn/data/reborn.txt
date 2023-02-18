@@ -1,2 +1,1 @@
-T | 0 | dniandw
-D | 0 | dwa | 2102-12-23
+T | 1 | dniandw

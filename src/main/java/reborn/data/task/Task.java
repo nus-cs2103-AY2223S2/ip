@@ -48,7 +48,7 @@ public abstract class Task {
      */
     public String outputMarked() {
         isDone = true;
-        return "Well done. I've marked this tasked as done:\n";
+        return "You finally did it huh:\n";
     }
 
     /**
@@ -57,7 +57,7 @@ public abstract class Task {
      */
     public String outputUnmarked() {
         isDone = false;
-        return "Noted. I've marked this tasked as undone:\n";
+        return "How did you end up undoing this:\n";
     }
 
     /**
