@@ -46,7 +46,7 @@ public class Ui {
     public String getDeleteReply(Task deletedTask, int listSize) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("FINE. I've removed this task:\n").append(deletedTask.toString()).append("\n");
-        stringBuilder.append("Boy you are not bad yourself...you have" + listSize + " tasks in the list.");
+        stringBuilder.append("Boy you are not bad yourself...you have " + listSize + " tasks in the list.");
         return stringBuilder.toString();
     }
 

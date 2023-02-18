@@ -49,9 +49,10 @@ Muahahahh this is Duuk, Duke's evil twin brother. He might be evil but he is iro
 ## Installation <a name="installation"></a>
 
 1. Download the JAR file [here](https://github.com/ChangGittyHub/ip/releases/download/v0.2/duke.jar).
-2. Open the JAR file by typing the command `java -jar duke.jar` on your command line interface (CLI). Make sure that on the CLI, you are in the same directory (folder) that contains the downloaded JAR file.
-3. Proceed to start a chat session with Prof Duke through the graphical user interface (GUI)!
-
+2. Open the command line interface (CLI) and navigate to the directory containing the downloaded JAR file.
+3. Type `java -jar duke.jar` on your command line interface (CLI). 
+4. Make sure that on the CLI, you are in the same directory (folder) that contains the downloaded JAR file. 
+5. Start a chat session with /* ask-prof-duke */ through the graphical user interface (GUI).
 If all goes well, your app should look like this:<br>
 <img width="612" alt="showcase" src="https://user-images.githubusercontent.com/87931905/219394138-73503f76-dbf7-47e4-8712-e11a2d536eff.png">
 
