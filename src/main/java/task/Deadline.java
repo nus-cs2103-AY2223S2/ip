@@ -27,19 +27,35 @@ public class Deadline extends Task {
      * @param taskName Name of task.
      * @param endDate End date of task.
      * @param isTaskDone Status of task.
+     * @param priorityLevel Priority level of task.
      */
-    public Deadline(String taskName, String endDate, Boolean isTaskDone) {
-        super(taskName, isTaskDone);
+    public Deadline(String taskName, String endDate, Boolean isTaskDone, PriorityLevel priorityLevel) {
+        super(taskName, isTaskDone, priorityLevel);
         this.endDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern(this.getDateFormatA()));
     }
 
     @Override
     public String writeToFile() {
-        return this.formatForWriteToFile(this.isDone(), this.getName(), this.endDate);
+        return this.formatForWriteToFile(this.isDone(), this.getName(),
+                this.endDate, this.getPriority());
     }
 
-    private String formatForWriteToFile(Boolean isDone, String taskName, LocalDate endDate) {
-        StringBuilder s = new StringBuilder("D|");
+    private String formatForWriteToFile(Boolean isDone, String taskName,
+                                        LocalDate endDate, PriorityLevel priorityLevel) {
+
+        StringBuilder s = new StringBuilder("D");
+
+        switch (priorityLevel) {
+        case HIGH:
+            s.append("|h|");
+            break;
+        case MID:
+            s.append("|m|");
+            break;
+        default:
+            s.append("|l|");
+            break;
+        }
 
         if (isDone) {
             s.append("X");

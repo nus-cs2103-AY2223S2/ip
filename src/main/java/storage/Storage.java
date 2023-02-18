@@ -8,11 +8,7 @@ import java.util.LinkedList;
 
 import duke.DukeException;
 import duke.Ui;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.ToDo;
+import task.*;
 
 /**
  * Handles file operations.
@@ -96,16 +92,16 @@ public class Storage {
             switch (task.charAt(0)) {
             case 'T':
                 list.add(new ToDo(this.getTaskName(task),
-                        this.getIsTaskDone(task)));
+                        this.getIsTaskDone(task), this.getPriorityLevel(task)));
                 break;
             case 'D':
                 list.add(new Deadline(this.getTaskName(task),
-                        this.getTaskEndDate(task), this.getIsTaskDone(task)));
+                        this.getTaskEndDate(task), this.getIsTaskDone(task), this.getPriorityLevel(task)));
                 break;
             case 'E':
                 list.add(new Event(this.getTaskName(task),
                         this.getTaskStartDate(task), this.getTaskEndDate(task),
-                        this.getIsTaskDone(task)));
+                        this.getIsTaskDone(task), this.getPriorityLevel(task)));
                 break;
             default:
                 throw new DukeException(Ui.getFileCorruptedMessage());
@@ -114,36 +110,49 @@ public class Storage {
         return new TaskList(list);
     }
 
-    private String getTaskName(String task) {
-        String firstIsStatus = task.substring(task.indexOf("|") + 1);
-        String firstIsName = firstIsStatus.substring(firstIsStatus.indexOf("|") + 1);
-
-        if (!firstIsName.contains("|")) {
-            return firstIsName;
+    private PriorityLevel getPriorityLevel(String task) {
+        String startsWithPriority = task.substring(task.indexOf("|") + 1);
+        String priority = startsWithPriority.substring(0, startsWithPriority.indexOf("|"));
+        switch (priority) {
+        case "h":
+            return PriorityLevel.HIGH;
+        case "m":
+            return PriorityLevel.MID;
+        default:
+            return PriorityLevel.LOW;
         }
+    }
 
-        return firstIsName.substring(0, firstIsName.indexOf("|"));
+    private Boolean getIsTaskDone(String task) {
+        String startsWithPriority = task.substring(task.indexOf("|") + 1);
+        String startsWithStatus = startsWithPriority.substring(startsWithPriority.indexOf("|") + 1);
+        String status = startsWithStatus.substring(0, startsWithStatus.indexOf("|"));
+        return status.equals("X");
+    }
+
+    private String getTaskName(String task) {
+        String startsWithPriority = task.substring(task.indexOf("|") + 1);
+        String startsWithStatus = startsWithPriority.substring(startsWithPriority.indexOf("|") + 1);
+        String startsWithName = startsWithStatus.substring(startsWithStatus.indexOf("|") + 1);
+        if (!startsWithName.contains("|")) {
+            return startsWithName;
+        }
+        return startsWithName.substring(0, startsWithName.indexOf("|"));
     }
 
     private String getTaskStartDate(String task) {
-        String firstIsStatus = task.substring(task.indexOf("|") + 1);
-        String firstIsName = firstIsStatus.substring(firstIsStatus.indexOf("|") + 1);
-        String firstIsDate = firstIsName.substring(firstIsName.indexOf("|") + 1);
-
-        if (!firstIsDate.contains("|")) {
-            return firstIsDate;
+        String startsWithPriority = task.substring(task.indexOf("|") + 1);
+        String startsWithStatus = startsWithPriority.substring(startsWithPriority.indexOf("|") + 1);
+        String startsWithName = startsWithStatus.substring(startsWithStatus.indexOf("|") + 1);
+        String startsWithDate = startsWithName.substring(startsWithName.indexOf("|") + 1);
+        if (!startsWithDate.contains("|")) {
+            return startsWithDate;
         }
-
-        return firstIsDate.substring(0, firstIsDate.indexOf("|"));
+        return startsWithDate.substring(0, startsWithDate.indexOf("|"));
     }
 
     private String getTaskEndDate(String task) {
         return task.substring(task.lastIndexOf('|') + 1);
-    }
-
-    private Boolean getIsTaskDone(String task) {
-        String firstIsStatus = task.substring(task.indexOf("|") + 1);
-        return firstIsStatus.substring(0, firstIsStatus.indexOf("|")).equals("X");
     }
 
     /**

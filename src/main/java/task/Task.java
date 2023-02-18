@@ -11,23 +11,27 @@ public abstract class Task {
 
     private Boolean isTaskDone;
 
+    private PriorityLevel priorityLevel;
+
     private final Boolean isTaskDoneDefault = false;
+
+    private final PriorityLevel defaultPriorityLevel = PriorityLevel.LOW;
 
     private final String dateFormatA = "dd/MM/yyyy";
 
     private final String dateFormatB = "dd-MM-yyyy";
-
-    private PriorityLevel level = PriorityLevel.LOW;
 
     /**
      * Constructor for Task.
      *
      * @param taskName Name of task.
      * @param isTaskDone Status of task.
+     * @param priorityLevel Priority level of task.
      */
-    protected Task(String taskName, Boolean isTaskDone) {
+    protected Task(String taskName, Boolean isTaskDone, PriorityLevel priorityLevel) {
         this.taskName = taskName;
         this.isTaskDone = isTaskDone;
+        this.priorityLevel = priorityLevel;
     }
 
     /**
@@ -38,6 +42,7 @@ public abstract class Task {
     protected Task(String taskName) {
         this.taskName = taskName;
         this.isTaskDone = this.isTaskDoneDefault;
+        this.priorityLevel = this.defaultPriorityLevel;
     }
 
     /**
@@ -85,17 +90,17 @@ public abstract class Task {
     }
 
     public String setPriorityHigh() {
-        this.level = PriorityLevel.HIGH;
+        this.priorityLevel = PriorityLevel.HIGH;
         return Ui.setToHighPriorityMessage(this);
     }
 
     public String setPriorityMid() {
-        this.level = PriorityLevel.MID;
+        this.priorityLevel = PriorityLevel.MID;
         return Ui.setToMidPriorityMessage(this);
     }
 
     public String setPriorityLow() {
-        this.level = PriorityLevel.LOW;
+        this.priorityLevel = PriorityLevel.LOW;
         return Ui.setToLowPriorityMessage(this);
     }
 
@@ -113,5 +118,9 @@ public abstract class Task {
 
     public String getDateFormatB() {
         return this.dateFormatB;
+    }
+
+    public PriorityLevel getPriority() {
+        return this.priorityLevel;
     }
 }

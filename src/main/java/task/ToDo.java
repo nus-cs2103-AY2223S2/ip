@@ -19,18 +19,31 @@ public class ToDo extends Task {
      *
      * @param taskName Name of task.
      * @param isTaskDone Status of task.
+     * @param priorityLevel Priority of task.
      */
-    public ToDo(String taskName, Boolean isTaskDone) {
-        super(taskName, isTaskDone);
+    public ToDo(String taskName, Boolean isTaskDone, PriorityLevel priorityLevel) {
+        super(taskName, isTaskDone, priorityLevel);
     }
 
     @Override
     public String writeToFile() {
-        return this.formatForWriteToFile(this.isDone(), this.getName());
+        return this.formatForWriteToFile(this.isDone(), this.getName(), this.getPriority());
     }
 
-    private String formatForWriteToFile(Boolean isDone, String taskName) {
-        StringBuilder s = new StringBuilder("T|");
+    private String formatForWriteToFile(Boolean isDone, String taskName, PriorityLevel priorityLevel) {
+        StringBuilder s = new StringBuilder("T");
+
+        switch (priorityLevel) {
+        case HIGH:
+            s.append("|h|");
+            break;
+        case MID:
+            s.append("|m|");
+            break;
+        default:
+            s.append("|l|");
+            break;
+        }
 
         if (isDone) {
             s.append("X");
