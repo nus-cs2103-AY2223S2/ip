@@ -42,6 +42,9 @@ public class Parser {
             ui.bye();
             return "bye";
         }
+        if (str.equals("help")) {
+            return "help";
+        }
         return "na";
     }
 
@@ -54,65 +57,68 @@ public class Parser {
      */
     public static String parse(String str, TaskList taskList) {
         switch (getSwitch(str)) {
-        case "list":
-            return taskList.recite();
+            case "list":
+                return taskList.recite();
 
-        case "mark":
-            String num = str.split(" ", 2)[1];
-            int n = Integer.parseInt(num) - 1;
-            return taskList.mark(n, true);
+            case "mark":
+                String num = str.split(" ", 2)[1];
+                int n = Integer.parseInt(num) - 1;
+                return taskList.mark(n, true);
 
-        case "unmark":
-            String num1 = str.split(" ", 2)[1];
-            int n1 = Integer.parseInt(num1) - 1;
-            return taskList.mark(n1, false);
+            case "unmark":
+                String num1 = str.split(" ", 2)[1];
+                int n1 = Integer.parseInt(num1) - 1;
+                return taskList.mark(n1, false);
 
-        case "todo":
-            Task a;
-            try {
-                a = new Todo(str.replace("todo ", ""));
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
-            return taskList.addTask(a);
+            case "todo":
+                Task a;
+                try {
+                    a = new Todo(str.replace("todo ", ""));
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
+                return taskList.addTask(a);
 
-        case "deadline":
-            Task b = null;
-            try {
-                String[] descriptionBy = str.replace("deadline ", "").split(" /by ");
-                b = new Deadline(descriptionBy[0], descriptionBy[1]);
-                b.isDate();
-            } catch (Exception e) {
-                return "Your command did not work, please try again";
-            }
-            return taskList.addTask(b);
+            case "deadline":
+                Task b = null;
+                try {
+                    String[] descriptionBy = str.replace("deadline ", "").split(" /by ");
+                    b = new Deadline(descriptionBy[0], descriptionBy[1]);
+                    b.isDate();
+                } catch (Exception e) {
+                    return "Your command did not work, please try again";
+                }
+                return taskList.addTask(b);
 
-        case "event":
-            Task c = null;
-            try {
-                String[] descriptionFromTo = str.replace("event ", "").split(" /from ");
-                String[] fromTo = descriptionFromTo[1].split(" /to ");
-                c = new Event(descriptionFromTo[0], fromTo[0], fromTo[1]);
-                c.isDate();
-            } catch (DukeException e) {
-                return "Your command did not work, please try again";
-            }
-            return taskList.addTask(c);
+            case "event":
+                Task c = null;
+                try {
+                    String[] descriptionFromTo = str.replace("event ", "").split(" /from ");
+                    String[] fromTo = descriptionFromTo[1].split(" /to ");
+                    c = new Event(descriptionFromTo[0], fromTo[0], fromTo[1]);
+                    c.isDate();
+                } catch (DukeException e) {
+                    return "Your command did not work, please try again";
+                }
+                return taskList.addTask(c);
 
-        case "delete":
-            String numD = str.split(" ", 2)[1];
-            int nD = Integer.parseInt(numD) - 1;
-            return taskList.delete(nD);
+            case "delete":
+                String numD = str.split(" ", 2)[1];
+                int nD = Integer.parseInt(numD) - 1;
+                return taskList.delete(nD);
 
-        case "find":
-            String keyword = str.replace("find ", "");
-            return taskList.find(keyword);
+            case "find":
+                String keyword = str.replace("find ", "");
+                return taskList.find(keyword);
 
-        case "na":
-            return ui.unknownCommand();
+            case "na":
+                return ui.unknownCommand();
 
-        case "bye":
-            return ui.bye();
+            case "bye":
+                return ui.bye();
+
+            case "help":
+                return ui.help();
         }
         return "invalid";
     }
