@@ -20,8 +20,10 @@ Adds a deadline task to the task-list
 
 Format: `deadline (DESCRIPTION) /by (DATE) (TIME)
 
+<div markdown="block" class="alert alert-info">
 * `DATE` should be in yyyy-MM-dd format.
 * `TIME` should be in hh:mm format.
+</div>
 
 Examples:
 * `deadline Assignment 1 /by 2022-03-14 23:58`
@@ -51,8 +53,10 @@ Mark a task as done
 
 Format: `mark (INDEX)`
 
+<div markdown="block" class="alert alert-info">
 * `INDEX` is the index of the task to mark. Must be greater than 1.
-
+</div>
+  
 Examples:
 * `mark 2`
 
@@ -62,8 +66,10 @@ Mark a task as undone
 
 Format: `unmark (INDEX)`
 
+<div markdown="block" class="alert alert-info">
 * `INDEX` is the index of the task to unmark. Must be greater than 1.
-
+</div>
+  
 Examples:
 * `unmark 2`
 
@@ -73,7 +79,9 @@ Delete a task
 
 Format: `delete (INDEX)`
 
+<div markdown="block" class="alert alert-info">
 * `INDEX` is the index of the task to delete. Must be greater than 1.
+</div>
 
 Examples:
 * `delete 2`
@@ -90,7 +98,9 @@ Save a task
 
 Format: `save (SAVE_INDEX)`
 
+<div markdown="block" class="alert alert-info">
 * `SAVE_INDEX` can only be an integer from 1 to 3.
+</div>
 
 Examples:
 * `save 1`
@@ -101,7 +111,9 @@ Load a save file.
 
 Format: `load (SAVE_INDEX)`
 
+<div markdown="block" class="alert alert-info">
 * `SAVE_INDEX` needs to refer to an available save
+</div>
 
 Examples:
 * `load 1`
