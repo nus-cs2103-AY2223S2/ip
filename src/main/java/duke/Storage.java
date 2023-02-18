@@ -26,8 +26,8 @@ public class Storage {
     /**
      * Saves user-inputted tasks into a file.
      *
-     * @param tasks to be saved
-     * @throws IOException if file cannot be accessed
+     * @param tasks to be saved.
+     * @throws IOException if file cannot be accessed.
      */
     public void saveTasks(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(DEFAULT_FILEPATH);

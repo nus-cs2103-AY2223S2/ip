@@ -17,6 +17,12 @@ public class PriorityCommand extends Command {
     private final int taskIndex;
     private final Priority priorityLevel;
 
+    /**
+     * Constructor for this Priority command.
+     *
+     * @param taskIndex of the task whose priority is to be updated.
+     * @param priorityLevel to update the task with.
+     */
     public PriorityCommand(int taskIndex, Priority priorityLevel) {
         this.taskIndex = taskIndex;
         this.priorityLevel = priorityLevel;
@@ -27,12 +33,12 @@ public class PriorityCommand extends Command {
      * updates the storage file accordingly.
      * Informs user of successful execution of command via the ui.
      *
-     * @param tasks TaskList that contains all the current tasks
-     * @param ui Ui that communicates with the user
-     * @param storage Storage that backups the saving of tasks
-     * @return string reply to be shown to user after executing this command
-     * @throws IOException when storage file cannot be read
-     * @throws DukeException when user input does not comply with intended uses
+     * @param tasks TaskList that contains all the current tasks.
+     * @param ui Ui that communicates with the user.
+     * @param storage Storage that backups the saving of tasks.
+     * @return string reply to be shown to user after executing this command.
+     * @throws IOException when storage file cannot be read.
+     * @throws DukeException when user input does not comply with intended uses.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (taskIndex >= tasks.size()) {

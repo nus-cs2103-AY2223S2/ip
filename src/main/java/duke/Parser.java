@@ -8,7 +8,6 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.PriorityCommand;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -22,9 +21,9 @@ public class Parser {
     /**
      * Parses user inputs to create a corresponding task.
      *
-     * @param inputs from the user input
-     * @return Task that user wants to add
-     * @throws DukeException when user input does not follow expected format
+     * @param inputs from the user input.
+     * @return Task that user wants to add.
+     * @throws DukeException when user input does not follow expected format.
      */
     private static Task parseTaskCommands(String[] inputs) throws DukeException {
         String taskType = inputs[0];
@@ -49,8 +48,8 @@ public class Parser {
 
             boolean isProperSyntax = byPart[0].equals("by");
             if (!isProperSyntax) {
-                String errorMessage = "Hmm it seem like you are trying to add an deadline here," +
-                        " but I don't quite understand what you're trying to say! \n";
+                String errorMessage = "Hmm it seem like you are trying to add an deadline here,"
+                        + " but I don't quite understand what you're trying to say! \n";
                 errorMessage += "The proper syntax is: \n";
                 errorMessage += "deadline abc /by yyyy-mm-dd";
                 throw new DukeException(errorMessage);
@@ -73,8 +72,8 @@ public class Parser {
 
             boolean isProperSyntax = fromPart[0].equals("from") && toPart[0].equals("to");
             if (!isProperSyntax) {
-                String errorMessage = "Hmm it seem like you are trying to add an event here," +
-                        " but I don't quite understand what you're trying to say! \n";
+                String errorMessage = "Hmm it seem like you are trying to add an event here,"
+                        + " but I don't quite understand what you're trying to say! \n";
                 errorMessage += "The proper syntax is: \n";
                 errorMessage += "event abc /from date1 /to date2";
                 throw new DukeException(errorMessage);
@@ -91,10 +90,10 @@ public class Parser {
     /**
      * Parses user inputs to create a Mark or Delete command.
      *
-     * @param inputs from the user input
-     * @param command to create and execute
-     * @return a Mark or Delete Command
-     * @throws DukeException when user input does not follow expected format
+     * @param inputs from the user input.
+     * @param command to create and execute.
+     * @return a Mark or Delete Command.
+     * @throws DukeException when user input does not follow expected format.
      */
     private static Command parseMarkAndDeleteCommands(String[] inputs, String command) throws DukeException {
         if (inputs.length <= 1) {
@@ -115,9 +114,9 @@ public class Parser {
     /**
      * Parses user inputs to create a Find Command.
      *
-     * @param inputs from the user input
-     * @return a Find Command with user-given keyword
-     * @throws DukeException when user input does not follow expected format
+     * @param inputs from the user input.
+     * @return a Find Command with user-given keyword.
+     * @throws DukeException when user input does not follow expected format.
      */
     private static Command parseFindCommands(String[] inputs) throws DukeException {
         if (inputs.length <= 1) {
@@ -131,15 +130,15 @@ public class Parser {
     /**
      * Parses user inputs to create a Priority command.
      *
-     * @param inputs from the user input
-     * @param command to create and execute
-     * @return a Priority Command
-     * @throws DukeException when user input does not follow expected format
+     * @param inputs from the user input.
+     * @param command to create and execute.
+     * @return a Priority Command.
+     * @throws DukeException when user input does not follow expected format.
      */
     private static Command parsePriorityCommands(String[] inputs, String command) throws DukeException {
         if (inputs.length <= 1) {
-            throw new DukeException("Please input the numbering of the task " +
-                    "you want to update priority for as well!");
+            throw new DukeException("Please input the numbering of the task "
+                    + "you want to update priority for as well!");
         }
 
         String number = inputs[1];
@@ -159,8 +158,8 @@ public class Parser {
     /**
      * Parses the user input to obtain the intended Command.
      *
-     * @param input read from System.in by the Ui
-     * @return the corresponding Command
+     * @param input read from System.in by the Ui.
+     * @return the corresponding Command.
      * @throws DukeException when user input does not follow expected format.
      * @throws NumberFormatException whe user does input an integer for task number.
      */

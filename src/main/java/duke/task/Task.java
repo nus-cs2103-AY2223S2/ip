@@ -2,11 +2,19 @@ package duke.task;
 
 import duke.Priority;
 
+/**
+ * Represents a Task. Can be inherited by various kinds of tasks.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
     protected Priority priority;
 
+    /**
+     * Constructor for a Task.
+     *
+     * @param description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

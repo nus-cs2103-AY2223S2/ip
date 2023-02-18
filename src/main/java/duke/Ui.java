@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Reads the command entered by the user.
      *
-     * @return the input to be parsed
+     * @return the input to be parsed.
      */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);

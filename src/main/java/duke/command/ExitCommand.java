@@ -16,10 +16,10 @@ public class ExitCommand extends Command {
     /**
      * Heeds user goodbye via the ui.
      *
-     * @param tasks TaskList that contains all the current tasks
-     * @param ui Ui that communicates with the user
-     * @param storage Storage that backups the saving of tasks
-     * @return string reply to be shown to user after executing this command
+     * @param tasks TaskList that contains all the current tasks.
+     * @param ui Ui that communicates with the user.
+     * @param storage Storage that backups the saving of tasks.
+     * @return string reply to be shown to user after executing this command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -6,9 +6,19 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
+/**
+ * Represents a Deadline task.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Constructor for a Deadline task.
+     *
+     * @param description of the task.
+     * @param by the deadline of the task.
+     * @throws DukeException if user inputs do not match expected format.
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {

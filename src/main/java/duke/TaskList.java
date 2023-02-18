@@ -22,6 +22,11 @@ public class TaskList {
         this.tasks.add(t);
     }
 
+    /**
+     * Removes a specified task from the Tasklist.
+     *
+     * @param index of the task to be removed.
+     */
     public void remove(int index) {
         assert index < this.tasks.size() : "Index out of bounds. Unable to delete task.";
         this.tasks.remove(index);
@@ -43,7 +48,7 @@ public class TaskList {
     /**
      * Prints out all the tasks in the list by numbering them in order.
      *
-     * @return printed tasks for the list command to show to user
+     * @return printed tasks for the list command to show to user.
      */
     public String print() {
         StringBuilder msg = new StringBuilder();

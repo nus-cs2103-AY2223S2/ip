@@ -1,7 +1,9 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 
 public class DeadlineTest {
@@ -11,7 +13,7 @@ public class DeadlineTest {
         try {
             Deadline t = new Deadline("submit assignment", "2023-05-09");
             assertEquals("[D][ ] submit assignment (by: May 9 2023)", t.toString());
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             assertEquals("Please input the date for deadlines in yyyy-mm-dd format!", e.getMessage());
         }
     }
@@ -21,7 +23,7 @@ public class DeadlineTest {
         try {
             Deadline t = new Deadline("submit assignment", "9 May 2023");
             assertEquals("[D][ ] submit assignment (by: May 9 2023)", t.toString());
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             assertEquals("Please input the date for deadlines in yyyy-mm-dd format!", e.getMessage());
         }
     }
