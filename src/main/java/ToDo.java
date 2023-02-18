@@ -1,7 +1,6 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class ToDo extends Item {
+public class ToDo extends Task {
     private static final String TYPE = "[T]";
 
     public ToDo(String name) {
@@ -35,7 +34,7 @@ public class ToDo extends Item {
 
     @Override
     public String getLogString() {
-        return "T" + "/" + isDoneStatus() + "/" + this.getName();
+        return "T" + "," + isDoneStatus() + "," + this.getName();
     }
 
     @Override

@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class ItemList {
-    private ArrayList<Item> list;
+public class TaskList {
+    private ArrayList<Task> list;
 
-    public ItemList() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    public void addItem(Item item) {
+    public void addItem(Task item) {
         this.list.add(item);
         System.out.println();
         System.out.println(item.messageWhenAdded() + " " + item);
@@ -25,7 +25,7 @@ public class ItemList {
             System.out.println("DukeyList: DukeyList is empty!");
         } else {
             System.out.println("DukeyList:");
-            Iterator<Item> it = this.list.iterator();
+            Iterator<Task> it = this.list.iterator();
             it.forEachRemaining(x -> System.out.println((list.indexOf(x) + 1) + ". " + x.toString()));
         }
     }
@@ -46,7 +46,7 @@ public class ItemList {
             throw new DukeyException("Error! DukeyList only contains " + this.list.size() + " tasks");
         }
 
-        Item itemToMark = this.list.get(itemNumber);
+        Task itemToMark = this.list.get(itemNumber);
         itemToMark.markAsDone();
         System.out.println("DukeyList: Item number " + (itemNumber + 1) + " has been marked as done!");
         System.out.println((itemNumber + 1) + ". " + itemToMark);
@@ -67,7 +67,7 @@ public class ItemList {
         } else if (itemNumber >= this.list.size()) {
             throw new DukeyException("Error! DukeyList only contains " + this.list.size() + " tasks");
         }
-        Item itemToUnmark = this.list.get(itemNumber);
+        Task itemToUnmark = this.list.get(itemNumber);
         itemToUnmark.unmark();
         System.out.println("DukeyList: Item number " + (1 + itemNumber) + " has been unmarked!");
         System.out.println((itemNumber + 1) + ". " + itemToUnmark);
@@ -89,7 +89,7 @@ public class ItemList {
             throw new DukeyException("Error! DukeyList only contains " + this.list.size() + " tasks");
         }
 
-        Item itemToRemove = list.get(itemNumber);
+        Task itemToRemove = list.get(itemNumber);
         System.out.println("DukeyList: The following item has been removed!");
         System.out.println(itemToRemove.toString());
         list.remove(itemNumber);
@@ -115,7 +115,7 @@ public class ItemList {
 
     public void save(File file) {
         DukeyFile.clearFile(file);
-        Iterator<Item> it = this.list.iterator();
+        Iterator<Task> it = this.list.iterator();
         it.forEachRemaining(x -> {
             String logString = x.getLogString();
             try {
@@ -131,11 +131,11 @@ public class ItemList {
         Scanner fileScanner = new Scanner(file);
         while (fileScanner.hasNextLine()) {
             String taskLogString = fileScanner.nextLine();
-            String[] logStringArray = taskLogString.split("/");
+            String[] logStringArray = taskLogString.split(",");
             if (logStringArray[0].equals("T")) {
                 this.list.add(ToDo.createToDoFromLog(logStringArray));
             } else if (logStringArray[0].equals("D")) {
-                this.list.add(Deadlines.createDeadlineFromLog(logStringArray));
+                this.list.add(Deadline.createDeadlineFromLog(logStringArray));
             } else if (logStringArray[0].equals("E")) {
                 this.list.add(Event.createEventFromLog(logStringArray));
             }

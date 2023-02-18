@@ -1,15 +1,13 @@
-import java.util.Scanner;
-
-public abstract class Item {
+public abstract class Task {
     private String name;
     private Boolean done;
 
-    public Item(String name) {
+    public Task(String name) {
         this.name = name;
         this.done = false;
     }
 
-    public Item(String name, boolean isDone) {
+    public Task(String name, boolean isDone) {
         this.name = name;
         this.done = isDone;
     }

@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -41,8 +40,8 @@ public class Duke {
 
     public static void initiateDukeyList() {
         File f = DukeyFile.openFile();
-        ItemList.printInstruction();
-        ItemList itemList = new ItemList();
+        TaskList.printInstruction();
+        TaskList itemList = new TaskList();
         try {
             itemList.initiate(f);
         } catch (FileNotFoundException e) {
@@ -68,7 +67,7 @@ public class Duke {
             //add a new deadline
             if (input.strip().equals("deadline")) {
                 try {
-                    itemList.addItem(Deadlines.createDeadline(scanner));
+                    itemList.addItem(Deadline.createDeadline(scanner));
                 } catch (DukeyException e) {
                     e.printMessage();
                 }
