@@ -86,4 +86,7 @@ public class TaskList {
         }
         return matchedTasks;
     }
+    public boolean isValidTaskNumber(int taskNumber) {
+        return taskNumber <= taskList.size();
+    }
 }
