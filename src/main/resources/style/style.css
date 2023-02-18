@@ -4,3 +4,9 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
+
+.text-flow {
+    -fx-background-color: rgba(160, 125, 55, 0.8);
+    -fx-background-radius: 15px;
+    -fx-padding: 10;
+}

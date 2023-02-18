@@ -15,6 +15,7 @@ public class DialogBox extends HBox {
 
     @FXML
     private Text dialog;
+
     @FXML
     private ImageView displayPicture;
 

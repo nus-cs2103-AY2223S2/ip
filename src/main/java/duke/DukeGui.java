@@ -5,6 +5,7 @@ import duke.controller.MainWindow;
 import duke.model.Model;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -13,7 +14,6 @@ import javafx.stage.Stage;
 public class DukeGui extends Application {
 
     private Model model;
-    private MainWindow window;
 
     /**
      * {@inheritDoc}
@@ -21,7 +21,6 @@ public class DukeGui extends Application {
     @Override
     public void init() {
         model = new Model(Storage.readTaskList());
-        window = new MainWindow(model);
     }
 
     /**
@@ -29,10 +28,11 @@ public class DukeGui extends Application {
      */
     @Override
     public void start(Stage stage) {
-        Scene scene = new Scene(window);
+        MainWindow mainWindow = new MainWindow(model);
+        Scene scene = new Scene(mainWindow);
+        Image icon = new Image(getClass().getResourceAsStream("/images/Icon.jpg"));
         stage.setTitle("Duke");
-        stage.setMinHeight(window.getMinHeight());
-        stage.setMinWidth(window.getMinWidth());
+        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
     }
