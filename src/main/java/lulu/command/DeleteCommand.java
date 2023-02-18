@@ -1,11 +1,16 @@
 package lulu.command;
 
 import lulu.TaskList;
-import lulu.UI;
+import lulu.Ui;
 import lulu.Storage;
 
 import lulu.exception.InvalidCommandException;
 
+/**
+ * This command is used to delete tasks from the user's TaskList.
+ * When executed, the specified task is removed from the TaskList.
+ * It has an additional taskNumber attribute for the task to be deleted.
+ */
 public class DeleteCommand extends Command {
     private int taskNumber;
 
@@ -30,8 +35,9 @@ public class DeleteCommand extends Command {
      * @param tasks   the TaskList to be deleted with a task
      * @param ui      the UI that displays messages
      * @param storage the Storage is not relevant in this command
+     * @return a String that displays the task deleted
      */
-    public String execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String text = ui.showContainer(ui.showDeleteText(tasks.getTaskDescription(taskNumber), tasks.getSize() - 1));
         tasks.remove(taskNumber);
         return text;

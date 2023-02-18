@@ -6,52 +6,30 @@ import lulu.command.LoadCommand;
 
 import lulu.exception.LuluException;
 
+/**
+ * Represents the chatbot, Lulu.
+ * This class has its own TaskList, Storage and Ui to be passed as arguments for Commands.
+ * The Commands will then manipulate the data in these arguments, or utilise the information from the arguments
+ * to achieve their respective execution.
+ */
 public class Lulu {
-    private static final String NAME = "./data/lulu.txt";
+    private static final String SAVE = "./data/lulu.txt";
     private TaskList tasks;
-    private UI ui;
+    private Ui ui;
     private Storage storage;
     private boolean isSaveLoaded = false;
 
     public Lulu() {
-        this.ui = new UI();
+        this.ui = new Ui();
         this.tasks = new TaskList();
-        this.storage = new Storage(NAME);
+        this.storage = new Storage(SAVE);
     }
 
     /**
-     * This method runs the chatbot task manager.
-     */
-    /**
-     public void run() {
-     ui.showGreetText();
-     if (storage.isSavePresent()) {
-     Command c = new LoadCommand();
-     c.execute(tasks, ui, storage);
-     }
-     boolean isExit = false;
-     while (!isExit) {
-     try {
-     String fullCommand = ui.readCommand();
-     Command c = Parser.parse(fullCommand);
-     c.execute(tasks, ui, storage);
-     isExit = c.isExit();
-     } catch (LuluException e) {
-     ui.showLine();
-     System.out.println(e);
-     ui.showLine();
-     } catch (IndexOutOfBoundsException e) {
-     ui.showLine();
-     ui.showOutOfBounds();
-     ui.showLine();
-     }
-     }
-     }
-     */
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the String response from the chatbot to be printed on the screen.
+     *
+     * @param fullCommand a command input by the user, that may or may not be a valid command
+     * @return the String response to be printed
      */
     public String getResponse(String fullCommand) {
         if (!this.isSaveLoaded) {

@@ -1,10 +1,11 @@
 package lulu.exception;
 
-import lulu.exception.LuluException;
-
+/**
+ * Represents an exception to be thrown, when the Command given by the user is invalid.
+ */
 public class InvalidCommandException extends LuluException {
     public InvalidCommandException() {
-        super("(=✖ ᆺ ✖=) That's not a valid command.");
+        super("That's not a valid command.");
     }
 
     @Override

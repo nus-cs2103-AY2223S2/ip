@@ -41,7 +41,7 @@ test {
 }
 
 application {
-    mainClassName = "lulu.Main"
+    mainClassName = "lulu.Launcher"
 }
 
 shadowJar {

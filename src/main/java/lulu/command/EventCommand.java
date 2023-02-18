@@ -1,7 +1,7 @@
 package lulu.command;
 
 import lulu.TaskList;
-import lulu.UI;
+import lulu.Ui;
 import lulu.Storage;
 
 import lulu.task.Task;
@@ -9,6 +9,13 @@ import lulu.task.Event;
 
 import lulu.exception.LuluException;
 
+/**
+ * This command is used to create a new Event task. When an invalid format has been used by the user,
+ * the class throws exceptions to remind the user of the valid format.
+ * When executed, a new Event task is added to TaskList.
+ * It has additional description and to, from attributes for the Event task description and the period
+ * the event lasts.
+ */
 public class EventCommand extends Command {
     private String description;
     private String from;
@@ -37,8 +44,9 @@ public class EventCommand extends Command {
      * @param tasks   the TaskList to be added with an event task
      * @param ui      the UI that displays messages
      * @param storage the Storage is not relevant in this command
+     * @return a String that displays the Event task added
      */
-    public String execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Event(description, from, to);
         tasks.add(t);
         return ui.showContainer(ui.showAddText(tasks.getRecentTaskDescription(), tasks.getSize()));

@@ -3,6 +3,11 @@ package lulu.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an Event task. An Event has additional attributes, from and to, to indicate when
+ * the task starts and ends.
+ * It has an alternative way to display the starting and ending, utilising the Java LocalDate class.
+ */
 public class Event extends Task {
     final int NUMBER_HYPHENS_IN_DATE = 3;
     private LocalDate fromDate;
@@ -28,6 +33,9 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * @return a String representation of an Event
+     */
     @Override
     public String toString() {
         String s1, s2;
@@ -44,6 +52,12 @@ public class Event extends Task {
         return ("[E]" + super.toString() + "(from: " + s1 + " to: " + s2 + ")");
     }
 
+    /**
+     * This method is used to convert an Event's task description and details to a String
+     * to be written to a save file.
+     *
+     * @return a String to be written to a save file.
+     */
     @Override
     public String toMemory() {
         int i = this.isDone ? 1 : 0;
@@ -65,6 +79,11 @@ public class Event extends Task {
         return ("E`" + i + "`" + this.description + "`" + s1 + "`" + s2 + '\n');
     }
 
+    /**
+     * This method is used to update the description of an Event.
+     *
+     * @param text the new description of the Event
+     */
     @Override
     public void update(String text) {
         String[] updateInformation = text.split(" ");

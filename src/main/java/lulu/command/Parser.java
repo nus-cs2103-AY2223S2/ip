@@ -3,7 +3,13 @@ package lulu.command;
 import lulu.exception.InvalidCommandException;
 import lulu.exception.LuluException;
 
+/**
+ * This class makes sense of the user's input by parsing it as valid Commands to be executed.
+ */
 public class Parser {
+    /**
+     * The available valid commands
+     */
     private enum Commands {
         LIST, MARK, UNMARK, DELETE, DEADLINE, EVENT, TODO, BYE, FIND, UPDATE
     }

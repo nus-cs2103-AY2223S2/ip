@@ -1,6 +1,5 @@
 package lulu;
 
-import lulu.exception.LuluException;
 import lulu.task.Deadline;
 import lulu.task.Event;
 import lulu.task.Task;
@@ -8,6 +7,9 @@ import lulu.task.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a TaskList that tracks the users' tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -53,6 +55,12 @@ public class TaskList {
         list.get(taskNumber - 1).markAsUndone();
     }
 
+    /**
+     * Returns a new TaskList.
+     *
+     * @param description the description of the tasks that the user wishes to find
+     * @return a new TaskList, with descriptions matching the input
+     */
     public TaskList find(String description) {
         TaskList tasks = new TaskList();
         this.list.forEach((task) -> {
@@ -63,6 +71,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Returns a string to display the TaskList, starting from 1., 2., 3.
+     *
+     * @return a String that displays the TaskList in a list format
+     */
     public String printList() {
         return this.list.stream()
                 .map(task -> String.format("\n%d. %s", list.indexOf(task) + 1, task.toString()))
@@ -73,7 +86,6 @@ public class TaskList {
         list.get(taskNumber - 1).update(updateText);
     }
 
-    /** this method may be in the wrong spot but will be left here for now */
     /**
      * This method loads tasks into the TaskList, provided it follows a given convention.
      * The convention must be as follows "X`i`Y",

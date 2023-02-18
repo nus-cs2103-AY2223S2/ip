@@ -1,4 +1,5 @@
 package lulu;
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
@@ -6,17 +7,26 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * This class is used mainly during the start of the chatbot and the end of the chatbot when the ByeCommand is executed.
+ * Representative of a storage, it helps to read and write to the file, specified by the String path.
+ */
 public class Storage {
     private File file;
     private String path;
+    private File directoryFile;
+    private static final String DIRECTORY = "./data";
+
     public Storage(String filePath) {
         this.file = new File(filePath);
         path = filePath;
+        directoryFile = new File(DIRECTORY);
+        directoryFile.mkdir();
     }
 
     /**
      * Returns true or false for whether a file at a specified location is present.
-     *
+     * <p>
      * This method checks if a file at a specified directory is present. If it is not, a file will be created at the
      * specified location.
      *
@@ -44,7 +54,7 @@ public class Storage {
         try {
             FileWriter myWriter = new FileWriter(path);
             int size = list.size();
-            for (int i = 0; i < size; i ++) {
+            for (int i = 0; i < size; i++) {
                 myWriter.write(list.get(i));
             }
             myWriter.close();

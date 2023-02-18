@@ -1,7 +1,10 @@
 package lulu.task;
 
-import lulu.exception.LuluException;
-
+/**
+ * Represents a task. A task has a description, and a isDone attribute to indicate whether the task has been completed.
+ * All tasks are initially marked as uncompleted.
+ * A task has methods to update its description and mark or unmark its completion.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;

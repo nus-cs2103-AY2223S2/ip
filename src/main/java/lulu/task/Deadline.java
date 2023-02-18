@@ -3,6 +3,11 @@ package lulu.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Deadline task. A deadline has an additional attribute, by, to indicate when the task is
+ * supposed to be completed.
+ * It has an alternative way to display the deadline, utilising the Java LocalDate class.
+ */
 public class Deadline extends Task {
     final int NUMBER_HYPHENS_IN_DATE = 3;
 
@@ -22,6 +27,9 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * @return a String representation of a Deadline
+     */
     @Override
     public String toString() {
         String s;
@@ -33,6 +41,12 @@ public class Deadline extends Task {
         return ("[D]" + super.toString() + "(by: " + s + ")");
     }
 
+    /**
+     * This method is used to convert a Deadline's task description and details to a String
+     * to be written to a save file.
+     *
+     * @return a String to be written to a save file.
+     */
     @Override
     public String toMemory() {
         int i = this.isDone ? 1 : 0;
@@ -47,6 +61,11 @@ public class Deadline extends Task {
         return ("D`" + i + "`" + this.description + "`" + s + '\n');
     }
 
+    /**
+     * This method is used to update the description of a Deadline.
+     *
+     * @param text the new description of the Deadline
+     */
     @Override
     public void update(String text) {
         String[] updateInformation = text.split(" ");
