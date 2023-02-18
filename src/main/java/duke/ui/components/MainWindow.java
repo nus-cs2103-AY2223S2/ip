@@ -2,6 +2,7 @@ package duke.ui.components;
 
 import duke.Duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -51,6 +52,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
+        if (response.equals("Bye. Have a nice day!")) {
+            Platform.exit();
+        }
+
         userInput.clear();
     }
 }
