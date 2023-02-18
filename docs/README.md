@@ -3,9 +3,10 @@
 Duke is a desktop app for managing your tasks.
 
 - [Features](#features)
-  - [Adding a new todo: `todo`](#adding-a-new-todo--todo)
-  - [Adding a new deadline: `deadline`](#adding-a-new-deadline--deadline)
-  - [Adding a new event: `event`](#adding-a-new-event--event)
+  - [Adding new tasks]()
+    - [Adding a new todo: `todo`](#adding-a-new-todo--todo)
+    - [Adding a new deadline: `deadline`](#adding-a-new-deadline--deadline)
+    - [Adding a new event: `event`](#adding-a-new-event--event)
   - [Listing all tasks: `list`](#listing-all-tasks--list)
   - [Marking a task as done: `mark`](#marking-a-task-as-done--mark)
   - [Unmarking a task: `unmark`](#unmarking-a-task--unmark)
@@ -16,9 +17,14 @@ Duke is a desktop app for managing your tasks.
 - [Command summary](#command-summary)
 
 ---
+
 ## Features 
 
-### Adding a new todo: `todo`
+### Adding new tasks
+
+<br>
+
+#### Adding a new todo: `todo`
 
 Adds a new todo to the task list.
 
@@ -26,7 +32,9 @@ Format: `todo TASK`
 
 Example: `todo submit assignment`
 
-### Adding a new deadline: `deadline`
+<br>
+
+#### Adding a new deadline: `deadline`
 
 Adds a new deadline to the task list.
 
@@ -36,7 +44,9 @@ e.g. 30 April 2022 11am would be `2022-04-31 11:00`.
 
 Example: `deadline complete assignment /by 2022-02-17 23:59`
 
-### Adding a new event: `event`
+<br>
+
+#### Adding a new event: `event`
 
 Adds a  new event to the task list.
 - The given event will not be added if it clashes with an event already inside the task list.
@@ -47,11 +57,15 @@ Format: `event /from START /to END`
 
 Example: `event nus career fest /from 2023-02-10 11:00 /to 2023-02-10 15:00`
 
+---
+
 ### Listing all tasks: `list`
 
 Shows a list of all tasks in the task list.
 
 Format: `list`
+
+---
 
 ### Marking a task as done: `mark`
 
@@ -64,6 +78,8 @@ Format: `mark INDEX`
 
 Example: `mark 2` marks the 2nd task in the task list as done.
 
+---
+
 ### Unmarking a task: `unmark`
 
 Unmarks the specified task if the task was marked as done.
@@ -75,6 +91,8 @@ Format: `unmark INDEX`
   
 Example: `unmark 1` unmarks the 1st task in the task list.
 
+---
+
 ### Deleting a task: `delete`
 
 Deletes the specified task from the task list.
@@ -85,6 +103,8 @@ Format: `delete INDEX`
 - The index **must be a positive integer** 1, 2, 3, ...
 
 Example: `delete 3` deletes the 3rd task in the task list.
+
+---
 
 ### Locating tasks by name: `find`
 
@@ -102,11 +122,15 @@ Examples:
 - `find nus` returns `nus career fest` and `nus well-being day`
 ![`find` example](/find.png)
 
+---
+
 ### Leaving EeveeBot: `bye`
 
 Says bye to EeveeBot and exits the program.
 
 Format: `bye`
+
+---
 
 ### Saving the data
 
