@@ -1,2 +1,4 @@
 T |   | my name
 T |   | hello
+D |   | math |by Dec 12 2012
+T |   | do laundry and dry clothes
