@@ -3,6 +3,8 @@ package eevee;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import eevee.task.Task;
+
 public class TaskList {
 
     private ArrayList<Task> tasks;

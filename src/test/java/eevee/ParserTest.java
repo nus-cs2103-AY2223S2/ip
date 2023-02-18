@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import eevee.task.Task;
+import eevee.task.Events;
+
+
 public class ParserTest {
     @Test
     public void testMakeEvent() {

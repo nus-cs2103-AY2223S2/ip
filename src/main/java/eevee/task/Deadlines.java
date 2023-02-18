@@ -1,4 +1,4 @@
-package eevee;
+package eevee.task;
 
 /**
  * Represents a Task that has a due date.
