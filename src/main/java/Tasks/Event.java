@@ -9,14 +9,14 @@ import parser.ParsedDate;
 /**
  * This class represents an Event Task, which will happen between a start and end date and time
  */
-public class Event extends Task{
+public class Event extends Task {
 
     private ParsedDate startTime;
     private ParsedDate endTime;
 
     /**
      * Creates an event task that start at a specific date or time and ends at a specific date or time
-     * 
+     *
      * @param name {@inheritDoc}
      * @param startTime date that the task starts
      * @param endTime date that the task ends
@@ -30,7 +30,7 @@ public class Event extends Task{
 
     /**
      * Check whether the event spans over the date
-     * 
+     *
      * @param date date to compare with this event's dates
      */
     public boolean contains(LocalDate date) {
@@ -38,7 +38,7 @@ public class Event extends Task{
                 && (this.endTime.isEqualDate(date) || this.endTime.isAfterDate(date));
     }
 
-    /** 
+    /**
      * {@inheritDoc}
      */
     @Override

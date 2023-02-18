@@ -1,7 +1,7 @@
 package commands;
 
-/** 
- * Commands that can be called 
+/**
+ * Commands that can be called
  * {@link #LIST}
  * {@link #MARK}
  * {@link #UNMARK}

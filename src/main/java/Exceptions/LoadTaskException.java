@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * This class is an exception for Duke attempting to import a previous task list from 
+ * This class is an exception for Duke attempting to import a previous task list from
  * a file that does not follow Duke's standards
  */
 public class LoadTaskException extends DukeException {

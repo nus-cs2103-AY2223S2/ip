@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 import exceptions.NoTaskDescriptionException;
 
-/** 
+/**
  * This class represents a Todo Task, which does have any date or time attached to it
  */
 public class Todo extends Task {
 
     /**
      * Creates a todo task
-     * 
+     *
      * @param name {@inheritDoc}
      * @throws NoTaskDescriptionException
      */
@@ -21,7 +21,7 @@ public class Todo extends Task {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @return false because todo task does not contain date
      */
     public boolean contains(LocalDate date) {

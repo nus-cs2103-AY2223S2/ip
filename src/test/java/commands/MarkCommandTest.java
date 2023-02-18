@@ -1,5 +1,10 @@
 package commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.Test;
 
 import exceptions.NoTaskDescriptionException;
@@ -8,13 +13,6 @@ import storage.TaskList;
 import tasks.Todo;
 import ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-
 public class MarkCommandTest {
 
     private final PrintStream standardOut = System.out;
@@ -22,22 +20,23 @@ public class MarkCommandTest {
     @Test
     public void markTest() {
 
+        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+
         Storage storage = new Storage();
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
-    
+
         try {
             tasks.add(new Todo("hello"));
             tasks.add(new Todo("number 2"));
             tasks.add(new Todo("3rd one"));
-        } catch (NoTaskDescriptionException ignore) { }
-
-
-        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStreamCaptor));
+        } catch (NoTaskDescriptionException e) {
+            System.out.println(e.getMessage());
+        }
 
         MarkCommand mc = new MarkCommand(true, 2);
-        mc.execute(tasks, ui, storage);        
+        mc.execute(tasks, ui, storage);
         String actual = outputStreamCaptor.toString();
 
 

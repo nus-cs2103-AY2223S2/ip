@@ -7,7 +7,7 @@ public class InsufficientArgumentsException extends DukeException {
 
     /**
      * Creates an exception to throw if insufficient arguments (separated by '/') are supplied
-     * 
+     *
      * @param taskString type of task as a string ("todo", "deadline", "event")
      */
     public InsufficientArgumentsException(String taskString) {

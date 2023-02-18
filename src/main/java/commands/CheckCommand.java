@@ -16,7 +16,7 @@ public class CheckCommand extends Command {
 
     /**
      * Constructs command to let user know tasks that consist of specified date
-     * 
+     *
      * @param date parsed user specified date
      */
     public CheckCommand(LocalDate date) {
@@ -25,11 +25,10 @@ public class CheckCommand extends Command {
 
     /**
      * Checks whether a task falls within a specified date
-     * 
+     *
      * @param taskList the tasklist to check
      * @param ui {@inheritDoc}
      * @param storage {@inheritDoc}
-     * 
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList taskContainDateList = new TaskList();

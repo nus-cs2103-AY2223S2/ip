@@ -23,10 +23,10 @@ import exceptions.UnknownTaskException;
  * This class parses user input commands into commands that Duke can understand and execute
  */
 public abstract class Parser {
-    
+
     /**
      * Parses the commandString input into an executable command
-     * 
+     *
      * @param commandString
      * @return executable Command object that performs the action requested by the commandString
      * @throws InvalidDateFormatException
@@ -67,17 +67,18 @@ public abstract class Parser {
             default:
                 break; // will not reach here
             }
+            throw new UnknownTaskException(j); // will not reach here
         default:
             String[] commandDetails = new String[4];
             commandDetails[0] = comm.toString();
-            
+
             String taskString = "";
             for (int i = 1; i < commands.length; i++) {
                 taskString += commands[i] + " ";
             }
             String[] args = taskString.split("/");
             for (int i = 0; i < args.length; i++) {
-                commandDetails[i+1] = args[i];
+                commandDetails[i + 1] = args[i];
             }
             return new AddCommand(commandDetails);
         }
@@ -85,7 +86,7 @@ public abstract class Parser {
 
     /**
      * Parses string input into ParsedDate object
-     * 
+     *
      * @param s string input
      * @return ParsedDate object
      * @throws LoadTaskException
@@ -110,8 +111,8 @@ public abstract class Parser {
         if (dateTime[1].length() == 1) {
             dateTime[1] = "0" + dateTime[1];
         }
-        String dateTimeValue = dateTime[2].substring(0,4) + "-" + mIndex + "-" + dateTime[1]
-                                + "T" + dateTime[4].substring(0,5);
+        String dateTimeValue = dateTime[2].substring(0, 4) + "-" + mIndex + "-" + dateTime[1]
+                                + "T" + dateTime[4].substring(0, 5);
         return dateTimeValue;
     }
 }

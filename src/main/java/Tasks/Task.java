@@ -1,13 +1,13 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import exceptions.InsufficientArgumentsException;
 import exceptions.InvalidDateFormatException;
 import exceptions.NoTaskDescriptionException;
 import exceptions.UnknownTaskException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 
 /**
@@ -21,7 +21,7 @@ public abstract class Task {
 
     /**
      * Creates a Task object
-     * 
+     *
      * @param name name of the task
      * @param type type of the task (todo, deadline or event)
      * @throws NoTaskDescriptionException
@@ -29,13 +29,13 @@ public abstract class Task {
     protected Task(String name, String type) throws NoTaskDescriptionException {
         if (name.isBlank()) {
             throw new NoTaskDescriptionException(type);
-        } 
+        }
         this.name = name;
     }
 
     /**
      * Creates Task with the argument input
-     * 
+     *
      * @param args array of strings
      * @return newly created task
      * @throws NoTaskDescriptionException
@@ -43,7 +43,9 @@ public abstract class Task {
      * @throws InsufficientArgumentsException
      * @throws UnknownTaskException
      */
-    public static Task createTask(String[] args) throws NoTaskDescriptionException, InvalidDateFormatException, InsufficientArgumentsException, UnknownTaskException {
+    public static Task createTask(String[] args)
+            throws NoTaskDescriptionException, InvalidDateFormatException,
+            InsufficientArgumentsException, UnknownTaskException {
 
         LocalDateTime[] dates = new LocalDateTime[2];
 
@@ -64,6 +66,8 @@ public abstract class Task {
                 dates[1] = LocalDateTime.parse(args[3].strip());
                 task = new Event(args[1].strip(), dates[0], dates[1]);
                 break;
+            default:
+                break;
             }
         } catch (IllegalArgumentException e) {
             throw new UnknownTaskException(args[0]);
@@ -78,7 +82,7 @@ public abstract class Task {
 
     /**
      * Checks whether the task contains a specified date
-     * 
+     *
      * @param date date to compare date of task to
      * @return true if task contains specified date, false otherwise
      */
@@ -86,7 +90,7 @@ public abstract class Task {
 
     /**
      * Marks a task as done
-     * 
+     *
      * @returns Duke's response for marking a task
      */
     public String mark() {
@@ -100,7 +104,7 @@ public abstract class Task {
 
     /**
      * Marks a task as undone
-     * 
+     *
      * @return Duke's response for unmarking a task
      */
     public String unmark() {
@@ -114,14 +118,14 @@ public abstract class Task {
 
     /**
      * Converts isChecked value of task to string to be printed
-     * 
+     *
      * @return string of whether task is marked in a checkbox lookalike format
      */
     protected String markToString() {
         return this.isChecked ? "[X]" : "[ ]";
     }
 
-    /** 
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -131,7 +135,7 @@ public abstract class Task {
 
     /**
      * Converts a task into a string format for saving into database
-     * 
+     *
      * @return String format of task for database
      */
     public String stringifyTaskToSave() {

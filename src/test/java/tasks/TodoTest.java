@@ -1,11 +1,11 @@
 package tasks;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import exceptions.NoTaskDescriptionException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TodoTest {
 
@@ -13,7 +13,7 @@ public class TodoTest {
     public void initialisationTest() {
         String actual = "";
         try {
-            Todo todo = new Todo("Something to do");   
+            Todo todo = new Todo("Something to do");
             actual = todo.toString();
 
         } catch (NoTaskDescriptionException e) {
@@ -28,7 +28,7 @@ public class TodoTest {
     public void nullNameTest() {
 
         String actual = "";
-        try { 
+        try {
             Todo todo = new Todo("");
             actual = todo.toString();
         } catch (NoTaskDescriptionException e) {

@@ -6,9 +6,9 @@ package exceptions;
 public class NoTaskDescriptionException extends DukeException {
 
     /**
-     * Creates an exception of Duke receiving a command to 
+     * Creates an exception of Duke receiving a command to
      * add a task without a task name
-     * 
+     *
      * @param string
      */
     public NoTaskDescriptionException(String string) {

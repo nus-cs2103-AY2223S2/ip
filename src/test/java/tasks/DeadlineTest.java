@@ -1,20 +1,21 @@
 package tasks;
 
-import org.junit.jupiter.api.Test;
-
-import exceptions.NoTaskDescriptionException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.Test;
+
+import exceptions.NoTaskDescriptionException;
+
+
 public class DeadlineTest {
-    
-    String taskName = "CS2103 iP";
-    LocalDateTime ldt = LocalDateTime.parse("2022-03-04T04:00");
-    @Test 
+
+    private String taskName = "CS2103 iP";
+    private LocalDateTime ldt = LocalDateTime.parse("2022-03-04T04:00");
+
+    @Test
     public void initialisationTest() {
         String actual = "";
         try {
@@ -28,7 +29,7 @@ public class DeadlineTest {
         assertEquals(expected, actual);
     }
 
-    @Test 
+    @Test
     public void nullNameTest() {
         String actual = "";
         try {
@@ -42,7 +43,7 @@ public class DeadlineTest {
         assertEquals(expected, actual);
     }
 
-    @Test 
+    @Test
     public void containsTest() {
         String actual = "";
         try {

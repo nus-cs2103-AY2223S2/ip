@@ -9,15 +9,15 @@ import java.io.InputStreamReader;
  */
 public class Ui {
 
-    /** Reader for faster scanning of input*/
-    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     /** Logo of Duke */
     final String logo = " ____        _        \n"
                         + "|  _ \\ _   _| | _____ \n"
                         + "| | | | | | | |/ / _ \\\n"
                         + "| |_| | |_| |   <  __/\n"
                         + "|____/ \\__,_|_|\\_\\___|\n";
+
+    /** Reader for faster scanning of input*/
+    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     /**
      * Prints Duke's greeting to the user
@@ -40,7 +40,7 @@ public class Ui {
 
     /**
      * Gathers input commands from user
-     * 
+     *
      * @return String of user input
      */
     public String getUserInput() {
@@ -54,7 +54,7 @@ public class Ui {
 
     /**
      * Standardises Duke's response printing format by enclosing the response within 2 horizontal lines
-     * 
+     *
      * @param response Duke's response to User
      */
     public void printResponse(String response) {
@@ -65,13 +65,16 @@ public class Ui {
 
     /**
      * Prints exception message
-     * 
+     *
      * @param e exception thrown
      */
     public void printException(Exception e) {
         printResponse(e.getMessage());
     }
 
+    /**
+     * Prints message to denote end of session
+     */
     public void endSession() {
         printResponse("Bye! Hope you enjoyed using Duke! \n Your list awaits your return!");
         try {

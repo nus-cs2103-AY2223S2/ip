@@ -14,7 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline task that needs to be done before a specific date
-     * 
+     *
      * @param name {@inheritDoc}
      * @param endDate date that the task needs to be done before
      * @throws NoTaskDescriptionException
@@ -26,14 +26,14 @@ public class Deadline extends Task {
 
     /**
      * Check whether the task is due on the date
-     * 
+     *
      * @param date date to compare endDate to
      */
     public boolean contains(LocalDate date) {
         return this.endDate.isEqualDate(date);
     }
 
-    /** 
+    /**
      * {@inheritDoc}
      */
     @Override

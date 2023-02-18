@@ -8,17 +8,17 @@ import storage.Storage;
 import storage.TaskList;
 import ui.Ui;
 
-/** 
+/**
  * This class is the main of the program that allows user to track upcoming tasks
  */
 public class Duke {
-    
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * Constructs new instance of Duke 
+     * Constructs new instance of Duke
      */
     public Duke() {
         ui = new Ui();
@@ -26,9 +26,9 @@ public class Duke {
         tasks = new TaskList();
     }
 
-    /** 
+    /**
      * Runs a new instance of Duke
-     * 
+     *
      * @param args Command-line arguments
      * @throws IOException
      */
@@ -36,9 +36,9 @@ public class Duke {
         new Duke().run();
     }
 
-    /** 
+    /**
      * Runs the program
-     * 
+     *
      * @throws IOException
      */
     public void run() throws IOException {
@@ -52,12 +52,11 @@ public class Duke {
         }
 
         awaitInput();
-
     }
-    
+
     /**
      * Reads user input
-     * 
+     *
      * @throws IOException
      */
     private void awaitInput() throws IOException {
@@ -65,7 +64,7 @@ public class Duke {
         String userInput = ui.getUserInput();
 
         while (!userInput.toUpperCase().equals("BYE")) {
-            this.handleInput(userInput); 
+            this.handleInput(userInput);
             userInput = ui.getUserInput();
         }
 
@@ -74,7 +73,7 @@ public class Duke {
 
     /**
      * Performs execution of user commands
-     * 
+     *
      * @param userInput
      */
     private void handleInput(String userInput) {
@@ -85,17 +84,15 @@ public class Duke {
         } catch (DukeException e) {
             this.ui.printException(e);
         }
-    
     }
 
     /**
      * Terminates the program
-     * 
+     *
      * @throws IOException
      */
     private void endSession() throws IOException {
         storage.store(tasks);
         ui.endSession();
     }
-
 }

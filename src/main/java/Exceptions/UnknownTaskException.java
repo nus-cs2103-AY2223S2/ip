@@ -8,7 +8,7 @@ public class UnknownTaskException extends DukeException {
 
     /**
      * Creates an exception of Duke not understanding a specified command
-     * 
+     *
      * @param s specified user command
      */
     public UnknownTaskException(String s) {

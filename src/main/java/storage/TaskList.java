@@ -13,7 +13,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Creates a task list containing input data
-     * 
+     *
      * @param data string data from list to import
      * @throws LoadTaskException
      */
@@ -55,20 +55,20 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Gets all tasks in this task list as a string output
-     * 
+     *
      * @return string of all tasks in this task list
      */
     public String getAllAsString() {
         String s = "";
         for (int i = 0; i < this.size(); i++) {
-            s += "\n    " + (i+1) + ") " + this.get(i);
+            s += "\n    " + (i + 1) + ") " + this.get(i);
         }
         return s;
     }
 
     /**
      * Gets the size of the task list
-     * 
+     *
      * @return string of Duke's interpretation of the number of tasks in the task list
      */
     public String getSizeAsString() {
@@ -76,10 +76,10 @@ public class TaskList extends ArrayList<Task> {
         if (size == 0) {
             return "There are currently no items in your list.";
         } else {
-            return "Currently, your list has " + size + " task" 
-                    + (size==1
-                        ?"."
-                        :"s.");
+            return "Currently, your list has " + size + " task"
+                    + (size == 1
+                        ? "."
+                        : "s.");
         }
     }
 }

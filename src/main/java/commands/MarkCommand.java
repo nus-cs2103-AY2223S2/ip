@@ -14,24 +14,24 @@ public class MarkCommand extends Command {
 
     /**
      * Creates command to mark or unmark task of specified index
-     * 
+     *
      * @param toMark parsed from user input "mark" or "unmark"
      * @param i user input of index to mark or unmark
      */
     public MarkCommand(boolean toMark, int i) {
         this.toMark = toMark;
-        this.index = i-1;
+        this.index = i - 1;
     }
 
     /**
      * Marks or unmarks task in tasklist
-     * 
+     *
      * @param taskList the list that contains the task
      * @param ui {@inheritDoc}
      * @param storage {@inheritDoc}
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        Task t = tasklist.get(index);
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        Task t = taskList.get(index);
         ui.printResponse(toMark ? t.mark() : t.unmark());
     }
 }

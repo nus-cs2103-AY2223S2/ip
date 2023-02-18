@@ -40,7 +40,7 @@ public class Storage {
 
     /**
      * Load previous task list from local storage into the application
-     * 
+     *
      * @return previous task list data as a string
      * @throws FileLoadException
      */
@@ -60,18 +60,18 @@ public class Storage {
 
     /**
      * Saves the updated listed into a local file
-     * 
+     *
      * @param taskList current task list to be saved for next use
      * @throws IOException
      */
     public void store(TaskList taskList) throws IOException {
 
         PrintStream stream;
-        try { 
+        try {
             stream = new PrintStream(file.toString());
         } catch (FileNotFoundException e) {
-                Files.createDirectories(path);
-                stream = new PrintStream(file.toString());
+            Files.createDirectories(path);
+            stream = new PrintStream(file.toString());
         }
         for (int i = 0; i < taskList.size(); i++) {
             stream.print(taskList.get(i).stringifyTaskToSave() + "\n");
