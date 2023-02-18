@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-class TaskList {
+public class TaskList {
     private final ArrayList<Task> tasks;
     private final Storage saveManager;
 
@@ -24,6 +24,9 @@ class TaskList {
         tasks.add(t);
     }
 
+    public Task get(int idx) {
+        return tasks.get(idx);
+    }
 
     public Task mark(int idx) {
         Task t = tasks.get(idx);

@@ -49,10 +49,19 @@ public class MainWindow extends AnchorPane {
             return;
         }
         String response = duke.getResponse(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog((input), (userImage)),
                 DialogBox.getDukeDialog((response), (dukeImage))
         );
         userInput.clear();
+
+        if (input.strip().equals("bye")) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
