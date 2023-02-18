@@ -7,14 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -38,11 +39,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(195, 177, 225),
+                                            new CornerRadii(30), Insets.EMPTY)));
         displayPicture.setImage(img);
-    }
-
-    public void bind(Region parentControl) {
-        minWidthProperty().bind(parentControl.maxWidthProperty());
+        displayPicture.setPreserveRatio(true);
+        displayPicture.setPickOnBounds(true);
+        displayPicture.setClip(new Circle(45.0, 45.0, 45.0));
     }
 
     /**
@@ -55,13 +57,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox dialogBox = new DialogBox(text, img);
-        return dialogBox;
+    public static DialogBox getPoyoyoDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getNakiriDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
