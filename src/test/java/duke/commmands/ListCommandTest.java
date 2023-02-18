@@ -12,7 +12,8 @@ import duke.tasks.TodoTask;
 public class ListCommandTest {
     static final String NORMAL_INPUT = "list";
     static final String SIMPLE_TASK_NAME = "simpleTask";
-    static final String CORRECT_TASK_OUTPUT = "Current tasks in list:\n1. [Todo] [ ] simpleTask";
+    static final String CORRECT_TASK_OUTPUT = "Current tasks in list:"
+            +  System.lineSeparator() + "1. [Todo] [ ] simpleTask";
 
     @Test
     void execute_simpleInput_outputsCorrectly() throws DukeException {
