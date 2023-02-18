@@ -5,10 +5,12 @@ import static duke.utils.FormatHelper.PRINTFORMAT;
 
 import java.time.LocalDateTime;
 
+
+
 /**
  * Task with a deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
     protected LocalDateTime by;
 
     /**
@@ -51,5 +53,16 @@ public class Deadline extends Task {
             generatedDeadline.setCompleted(true);
         }
         return generatedDeadline;
+    }
+
+    @Override
+    public int compareTo(Deadline otherDeadline) {
+        if (this.by.isBefore(otherDeadline.by)) {
+            return -1;
+        } else if (this.by.isEqual(otherDeadline.by)) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 }

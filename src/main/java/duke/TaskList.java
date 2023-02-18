@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -13,6 +14,10 @@ import duke.task.Todo;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+
+    public TaskList() {
+        this.tasks = new ArrayList<Task>();
+    }
 
     public TaskList(ArrayList<Task> existingTasks) {
         this.tasks = existingTasks;
@@ -184,5 +189,27 @@ public class TaskList {
             response.append("No task matching description");
         }
         return response.toString();
+    }
+
+    public String getSortedDeadlines() {
+        ArrayList<Deadline> deadlineList = new ArrayList<Deadline>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i) instanceof Deadline) {
+                deadlineList.add((Deadline) tasks.get(i));
+            }
+        }
+        if (deadlineList.size() == 0) {
+            return "No Deadlines found!";
+        }
+        Collections.sort(deadlineList);
+        StringBuilder res = new StringBuilder();
+        int i = deadlineList.size() - 1;
+        deadlineList.forEach(d -> {
+            res.append(d);
+            if (i > 0) {
+                res.append("\n");
+            }
+        });
+        return res.toString();
     }
 }
