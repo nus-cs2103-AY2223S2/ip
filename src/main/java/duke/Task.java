@@ -105,7 +105,7 @@ public class Task implements Comparable<Task> {
         if (this.isCompleted) {
             completedString += "[X] ";
         } else {
-            completedString += "[  ] ";
+            completedString += "[ ] ";
         }
         completedString += "[Priority Level: " + priority + "] ";
         completedString += this.name;
@@ -123,7 +123,7 @@ public class Task implements Comparable<Task> {
         if (this.isCompleted) {
             completedString += "[X] ";
         } else {
-            completedString += "[  ] ";
+            completedString += "[ ] ";
         }
 
         completedString += this.name;

@@ -1,8 +1,4 @@
-7
-[T][X] yyyL
-[T][  ] eseL
-[E][X] dskdk  kskda    (from: akds  to: sdja) H
-[T][X] sdaL
-[T][  ] rejL
-[D][  ] jrjaj(by: 2012-04-02) L
-[E][  ] dfsk j jsd(from: 2am  to: midnight) L
+3
+[T][X] Check L
+[D][X] Check this  (by: 2013-04-21) L
+[E][X] Check this  (from: now  to: later) L

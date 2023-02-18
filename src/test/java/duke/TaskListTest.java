@@ -18,12 +18,12 @@ public class TaskListTest {
         lst.addTask();
 
         assertEquals(lst.getSize(), 1);
-        assertEquals(lst.toString(), "[  ] [Priority Level: LOW] Test\n");
+        assertEquals(lst.toString(), "[ ] [Priority Level: LOW] Test\n");
 
         lst.addTask();
         assertEquals(lst.getSize(), 2);
-        assertEquals(lst.toString(), "[  ] [Priority Level: LOW] Test\n" +
-                "[  ] [Priority Level: LOW] Test\n");
+        assertEquals(lst.toString(), "[ ] [Priority Level: LOW] Test\n" +
+                "[ ] [Priority Level: LOW] Test\n");
     }
 
     @Test
@@ -34,7 +34,7 @@ public class TaskListTest {
         lst.deleteTask(1);
 
         assertEquals(lst.getSize(), 1);
-        assertEquals(lst.toString(), "[  ] [Priority Level: LOW] Test\n");
+        assertEquals(lst.toString(), "[ ] [Priority Level: LOW] Test\n");
 
         lst.deleteTask(1);
         assertEquals(lst.getSize(), 0);
@@ -45,7 +45,7 @@ public class TaskListTest {
         lst.deleteTask(2);
 
         assertEquals(lst.getSize(), 1);
-        assertEquals(lst.toString(), "[  ] [Priority Level: LOW] Test\n");
+        assertEquals(lst.toString(), "[ ] [Priority Level: LOW] Test\n");
 
         lst.deleteTask(1);
         assertEquals(lst.getSize(), 0);
@@ -57,17 +57,17 @@ public class TaskListTest {
         TaskList lst = new TaskList();
         lst.addTask();
         String goalFoundOne = "Finding in progress...\n" +
-                "Found 1 task with this keyword\n" + "1. [  ] [Priority Level: LOW] Test\n";
+                "Found 1 task with this keyword\n" + "1. [ ] [Priority Level: LOW] Test\n";
 
         String goalFoundNone = "Finding in progress...\n" +
                 "Didn't manage to find any tasks with this keyword!\n";
 
         String goalFoundTwo = "Finding in progress...\n" +
-                "Found 2 tasks with this keyword\n" + "1. [  ] [Priority Level: LOW] Test\n" +
-                "2. [  ] [Priority Level: LOW] Dummy test\n";
+                "Found 2 tasks with this keyword\n" + "1. [ ] [Priority Level: LOW] Test\n" +
+                "2. [ ] [Priority Level: LOW] Dummy test\n";
 
         String goalFoundDummy = "Finding in progress...\n" +
-                "Found 1 task with this keyword\n" + "1. [  ] [Priority Level: LOW] Dummy test\n";
+                "Found 1 task with this keyword\n" + "1. [ ] [Priority Level: LOW] Dummy test\n";
 
         assertEquals(lst.find("Test"), goalFoundOne);
         assertEquals(lst.find("est"), goalFoundOne);

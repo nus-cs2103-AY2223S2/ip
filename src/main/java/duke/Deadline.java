@@ -40,6 +40,6 @@ public class Deadline extends Task {
      * @return the desired string representation of a Deadline instance.
      */
     public String parse() {
-        return "[D]" + super.parse() + "(by: " + by + ") " + super.addOn();
+        return "[D]" + super.parse() + " (by: " + by + ") " + super.addOn();
     }
 }
