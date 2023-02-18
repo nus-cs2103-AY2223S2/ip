@@ -1,15 +1,120 @@
-Up next I'll be talking about how to make your resume stand out. On average, each corporate job offer attracts 250 resumes but only 4 to 6 people gets chosen to be interviewed, hence it is especially important to make your resume stand out from the rest. I'll be splitting this section into 4 parts, as you can see on the slides.
+# User Guide
 
-The most impotant thing that recruiters are looking for is whether or not you can do the job, and how well can you do it. Hence, it is crucial for you to make your work experience section stand out by showing the recruiters exactly how well you could do the job. One quick tip to do so is to use numbers to describe your accomplishments. Numbers are a hard and fast way for the recruiter to know exactly how well you completed a task in your preious job. You can't argue with numbers. Secondly, you could highlight your top achievements, by placing the most relevant and recent achievements at the forefront of your resume such that it would be impossible for the recruiter to miss. Lastly, if you received awards for the work that you have done, it is good to include it on your resume.
+## Quick Start
 
-Up next, I will be talking about the usage of power words. Now imagine, you are a busy HR manager, and you read hundreds of thousands of resume every day. And every single one of them uses words like "helped, worked, responsible for". They sound the same. They are boring. That is where power words come in. Instead of communicating your job duties, why not show off your job duties? I'm sure that ya'll have been staring at the words on the screen for a while now, so take a moment to think about which of these words are 'power words' and which are not. (*shows words) Did you get them right? Words like 'Administered' and 'Conceptualized' shows how you were an integral part of your previous project, and makes your resume stand out from the rest of the competition.
+## Features
 
-Moving on, here are the top 10 software engineering skills of 2023, as referenced by glassdoor.com. Though these are the skills that recruiters are generally looking for, it is still important to look carefully at the job description and indicate the relevant skills needed for the job. Here are some creative ways to showcase your skills on your resume. These are done using canva.com, a tool that I would touch on later. 
+### Adding a todo task: `todo`
 
-Lastly, you should most definitely omit irrelevant information in your resume. Having a long resume with lots of irrelevant information could bite you in many ways. The recruiter may simply be too lazy to read it, and even if he reads it, he would think that including these pointless information shows that you don't really know what you are looking for. So keep optional sections like 'interests and hobbies' short and concise, and definitely do not showcase your gaming achievements in your resume.
+Adds a todo task to the task-list.
 
-Up next I will be discussing about certain tools that you can use to build and enhance you resume. Well, here I have two tools.
+Format: `todo (DESCRIPTION)`
 
-First up, Canva.com. It's a free website that provides preset templates on everything ranging from brochures to resumes to cover letters. From there, you can choose the design that suits you and the industry that you are working in the most. You can opt for vibrant, elegant, or minimalist designs to make your resume visually stand out from the rest.
+Examples:
+* `todo Call mum`
+* `todo Homework`
 
-Up next, V-mock. I'm sure that those of you who took CFG would remember this. It is basically a website that not only helps you build a resume, but also uses AI to give a score for how good your resume is. Granted, there are many flaws to this scoring feature, but it does give good feedback if your resume is lacking in certain sections, or if certain sentences in your resume are overused and not efective enough.
+### Adding a deadline task: `deadline`
+
+Adds a deadline task to the task-list
+
+Format: `deadline (DESCRIPTION) /by (DATE) (TIME)
+
+* `DATE` should be in yyyy-MM-dd format.
+* `TIME` should be in hh:mm format.
+
+Examples:
+* `deadline Assignment 1 /by 2022-03-14 23:58`
+
+### Adding an event task: `event`
+
+Adds a event task to the task-list
+
+Format: `event (DESCRIPTION) /from (FROM) /to (TO)`
+
+Examples:
+* `event Party /from 7:30pm /to 9.30pm`
+* `event Orientation camp /from Saturday /to Tuesday`
+
+### Finding tasks: `find`
+
+Find tasks from the tasklist
+
+Format: `find (DESCRIPTION)`
+
+Examples:
+* `find math`
+
+### Marking tasks: `mark`
+
+Mark a task as done
+
+Format: `mark (INDEX)`
+
+* `INDEX` is the index of the task to mark. Must be greater than 1.
+
+Examples:
+* `mark 2`
+
+### Unmarking tasks: `unmark`
+
+Mark a task as undone
+
+Format: `unmark (INDEX)`
+
+* `INDEX` is the index of the task to unmark. Must be greater than 1.
+
+Examples:
+* `unmark 2`
+
+### Deleting tasks: `delete`
+
+Delete a task
+
+Format: `delete (INDEX)`
+
+* `INDEX` is the index of the task to delete. Must be greater than 1.
+
+Examples:
+* `delete 2`
+
+### List tasks: `list`
+
+List out all the tasks
+
+Format: `list`
+
+### Saving tasks: `save`
+
+Save a task
+
+Format: `save (SAVE_INDEX)`
+
+* `SAVE_INDEX` can only be an integer from 1 to 3.
+
+Examples:
+* `save 1`
+
+### Loading tasks: `load`
+
+Load a save file.
+
+Format: `load (SAVE_INDEX)`
+
+* `SAVE_INDEX` needs to refer to an available save
+
+Examples:
+* `load 1`
+
+### Showing saves: `showSaves`
+
+Show all the saves available.
+
+Format: `showSaves`
+
+### Exit application: `bye`
+
+Exit the application
+
+Format: `bye`
+
