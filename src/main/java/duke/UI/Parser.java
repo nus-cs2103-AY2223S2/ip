@@ -80,6 +80,10 @@ public class Parser {
         return new DeadlineCommand(index);
     }
 
+    private Command parseFindCommand(String keyword) {
+        return new FindCommand(keyword.split(" ", 2));
+    }
+
     /**
      * Parses the input command provided by the user.
      * @param userInput Input command from the user.
@@ -107,6 +111,10 @@ public class Parser {
             break;
         case DeleteCommand.COMMAND:
             command = new DeleteCommand(userInput.split(" "));
+            break;
+        case FindCommand.COMMAND:
+            command = parseFindCommand(userInput);
+            break;
         default:
             throw new DukeException("I am sorry. I have failed to comprehend your command. Please try again.");
         }
