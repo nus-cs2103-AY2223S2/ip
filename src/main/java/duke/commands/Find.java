@@ -6,11 +6,19 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 
+/**
+ * Command for finding a Task.
+ */
 public class Find extends Command {
 
-    TaskList tasklist;
-    String searchKey;
+    private TaskList tasklist;
+    private String searchKey;
 
+    /**
+     * Constructor for a Find command.
+     * @param searchKey The keyword to search for.
+     * @param tasklist The list to search in.
+     */
     public Find(String searchKey, TaskList tasklist) {
         this.tasklist = tasklist;
         this.searchKey = searchKey;

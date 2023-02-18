@@ -1,4 +1,4 @@
-package duke.frontend;//import javafx.application.Application;
+package duke.frontend;
 //import javafx.fxml.FXML;
 //import javafx.scene.Scene;
 //import javafx.scene.control.Button;
@@ -119,7 +119,6 @@ package duke.frontend;//import javafx.application.Application;
 import java.io.IOException;
 
 import duke.backend.Duke;
-import duke.backend.TaskList;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -145,7 +144,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            this.duke = new Duke(new TaskList());
+            this.duke = new Duke();
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

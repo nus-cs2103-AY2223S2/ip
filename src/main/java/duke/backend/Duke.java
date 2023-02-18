@@ -1,30 +1,32 @@
 package duke.backend;
 
-import duke.tasks.Task;
-
 import java.io.IOException;
 
+/**
+ * Class encapsulating Duke.
+ */
 public class Duke {
     private TaskList tasklist;
-//    private Ui ui;
-private Parser parser;
-    public Duke(TaskList tasklist) {
-        this.tasklist = tasklist;
-//        this.ui = ui;
+    private Parser parser;
+
+    /**
+     * Constructor for Duke.
+     */
+    public Duke() {
+        try {
+            this.tasklist = new TaskList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.parser = new Parser(this.tasklist);
     }
 
-    public static void main(String[] args) throws IOException {
-        TaskList taskManager = new TaskList();
-//        Ui ui = new Ui(taskManager);
-//        ui.welcome();
-        //  Flag for program termination
-        boolean isProgramEnded = false;
-
-    }
-
+    /**
+     * Get Duke's response for a given input.
+     * @param input Input taken from the user.
+     * @return Output from Duke.
+     */
     public String getResponse(String input) {
         return parser.parse(input);
-        //TODO: If response = "BYE. Hope to see you..", then close the program.
     }
 }
