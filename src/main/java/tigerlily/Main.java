@@ -22,6 +22,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setTigerlily(tigerlily);
+            fxmlLoader.<MainWindow>getController().showStartUp();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

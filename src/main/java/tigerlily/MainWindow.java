@@ -34,6 +34,12 @@ public class MainWindow extends AnchorPane {
         tigerlily = t;
     }
 
+    public void showStartUp() {
+        Ui ui = new Ui();
+        dialogContainer.getChildren().addAll(DialogBox.getTigerlilyDialog(ui.showWelcome(), tigerlilyImage));
+        userInput.clear();
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
