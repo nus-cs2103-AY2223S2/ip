@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command that updates a task's description.
+ */
 public class UpdateCommand extends Command {
     private final String details;
 
@@ -21,9 +24,7 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Executes the command to list the currently stored Tasks in chronological order.
-     * Deadlines are sorted by Deadline.by, Events are sorted by Event.from, while ToDos take the lowest precedence.
-     * In the event of tiebreakers, they are sorted according to the order in the original TaskList.
+     * Executes the command to update a task's description.
      * @param tasks TaskList containing all the currently stored Tasks.
      * @param ui Ui that deals with interactions with the user.
      * @param storage Storage that loads and saves tasks to the file containing currently stored Tasks.
@@ -32,8 +33,9 @@ public class UpdateCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            int parseInt = Integer.parseInt(details.substring(0, 1));
-            String newDescription = details.substring(2);
+            int whiteSpaceIndex = findWhiteSpaceIndex(details);
+            int parseInt = Integer.parseInt(details.substring(0, whiteSpaceIndex));
+            String newDescription = details.substring(whiteSpaceIndex + 1);
             Task task = tasks.get(parseInt - 1);
             task.setDescription(newDescription);
             storage.update(tasks);
@@ -44,6 +46,15 @@ public class UpdateCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(":( OOPS!!! There are less than " + this.details + " tasks.");
         }
+    }
+
+    private int findWhiteSpaceIndex(String details) throws NumberFormatException {
+        for(int i = 0; i < details.length(); i++) {
+            if (Character.isWhitespace(details.charAt(i))) {
+                return i;
+            }
+        }
+        throw new NumberFormatException();
     }
 
     /**
