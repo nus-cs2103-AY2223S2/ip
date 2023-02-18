@@ -5,6 +5,7 @@ import eevee.exception.TaskNoContentException;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 public class Eevee {
 
@@ -37,6 +38,15 @@ public class Eevee {
         } catch (DateTimeParseException e) {
             return "EEVEE >:( Format of date given is wrong. Format of date should be yyyy-MM-dd HH:mm " +
                     "(e.g. 2022-03-30 14:30)";
+        }
+    }
+
+    public static void main(String[] args) {
+        Eevee eevee = new Eevee("data/tasks.txt");
+        System.out.println(eevee.ui.sayHello());
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            System.out.println(eevee.getResponse(sc.nextLine()));
         }
     }
 

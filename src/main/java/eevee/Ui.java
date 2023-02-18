@@ -7,7 +7,7 @@ public class Ui {
     public Ui() {}
 
     public String sayHello() {
-        return "Hello! How can I help you?";
+        return "EEVEE! How can I help you?";
     }
 
     public String sayBye() {
