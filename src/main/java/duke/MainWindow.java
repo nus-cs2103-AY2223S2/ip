@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -41,7 +42,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -50,5 +51,14 @@ public class MainWindow extends AnchorPane {
         );
 
         userInput.clear();
+
+        if (response.equals(duke.bye())) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new DukeException(e.getMessage());
+            }
+            System.exit(0);
+        }
     }
 }

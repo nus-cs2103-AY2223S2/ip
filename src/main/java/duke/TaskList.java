@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a tasklist.
