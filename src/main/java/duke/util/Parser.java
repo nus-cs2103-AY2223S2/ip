@@ -7,12 +7,15 @@ import duke.util.service.Deadline;
 import duke.util.service.ScheduledEvent;
 import duke.util.service.ToDo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
+    private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static Task parseTask(String userinput) {
         String[] userInputArray = userinput.split(" ");
         List<String> userInputSplit = Arrays.asList(userInputArray);
@@ -25,7 +28,6 @@ public class Parser {
         } else {
             return parseEvent(userinput);
         }
-
     }
 
     private static Task parseTodo(String userInput) {
@@ -42,9 +44,8 @@ public class Parser {
         String commandAndAction = deadlineTaskAsList.get(0);
         String[] commandAndActionSplit = commandAndAction.split("DEADLINE ");
         List<String> commandAndActionList = Arrays.asList(commandAndActionSplit);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         Deadline newTask = new Deadline(
-                LocalDateTime.parse(deadlineTaskAsList.get(1), format),
+                LocalDateTime.parse(deadlineTaskAsList.get(1), DATETIME_FORMAT),
                 commandAndActionList.get(1));
         return newTask;
     }
@@ -64,13 +65,21 @@ public class Parser {
         String eventBegin = timeRangeAsList.get(0);
         String eventEnd = timeRangeAsList.get(1);
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         ScheduledEvent newTask = new ScheduledEvent(
-                LocalDateTime.parse(eventBegin, format),
-                LocalDateTime.parse(eventEnd, format),
+                LocalDateTime.parse(eventBegin, DATETIME_FORMAT),
+                LocalDateTime.parse(eventEnd, DATETIME_FORMAT),
                 eventPhraseList.get(1));
 
         return newTask;
+    }
+
+    public static LocalDate parseDate(String userInput) {
+        String[] searchDateArray = userInput.split("SCHEDULE ");
+        List<String> searchDateList = Arrays.asList(searchDateArray);
+        String searchDate = searchDateList.get(1);
+
+        LocalDate scheduleDate = LocalDate.parse(searchDate, DATE_FORMAT);
+        return scheduleDate;
     }
 
     public static boolean checkInputValidity(String userCommand, int tasklistSize) {

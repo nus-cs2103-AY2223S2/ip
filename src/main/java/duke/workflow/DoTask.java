@@ -1,13 +1,18 @@
 package duke.workflow;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import duke.io.input.ui.UserInterface;
 import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
 import duke.util.Parser;
+import javafx.util.Pair;
 
 /**
  * A more specific implementation of {@code Event}.
@@ -22,7 +27,7 @@ public class DoTask extends Event {
     private TaskList taskList;
     private Task removedTask;
     private Storage storage;
-    private TaskList foundListFromKeyword;
+    private TaskList taskListFromCommand;
 
     /**
      * Constructs the {@code DoTask} as the user interacts
@@ -34,7 +39,7 @@ public class DoTask extends Event {
         this.userCommand = "LIST";
         this.taskList = new TaskList();
         this.storage = new Storage();
-        this.foundListFromKeyword = new TaskList();
+        this.taskListFromCommand = new TaskList();
     }
 
     public void loadOldTasks(TaskList taskList) {
@@ -43,26 +48,27 @@ public class DoTask extends Event {
 
     public void updateKeywordDatabase(TaskList oldTaskList) {
         for (int i = 0; i < oldTaskList.getSize(); i++) {
-            String toUpdateKeywordDatabase = "";
             Task taskToUpdate = oldTaskList.getTask(i);
-            if (taskToUpdate.getNature().equals("T")) {
-                toUpdateKeywordDatabase = "TODO " + taskToUpdate.getAction();
-            } else if (taskToUpdate.getNature().equals("D")) {
-                toUpdateKeywordDatabase = "DEADLINE " + taskToUpdate.getAction()
-                        + " " + taskToUpdate.getTimeInfo();
-            } else {
-                toUpdateKeywordDatabase = "EVENT " + taskToUpdate.getAction()
-                        + " " + taskToUpdate.getTimeInfo();
-            }
-            this.storage = this.storage.addToKeywordStorage(
-                    toUpdateKeywordDatabase, taskToUpdate);
+            this.storage = this.storage.addToDatabase(taskToUpdate);
         }
     }
 
     private void parseTask(String userInput) {
         Task newTask = Parser.parseTask(userInput);
         this.taskList = this.taskList.addTask(newTask);
-        this.storage = this.storage.addToKeywordStorage(userInput, newTask);
+        this.storage = this.storage.addToDatabase(newTask);
+    }
+
+    private void findTaskOnDate(String userInput) {
+        LocalDate searchDate = Parser.parseDate(userInput);
+        String searchDateAsString = searchDate.toString();
+        PriorityQueue<Pair<LocalDateTime, Task>> eventQueueOnDate
+                = this.storage.getTaskScheduleOnDates(searchDateAsString);
+        TaskList scheduleOnDate = new TaskList();
+        for (Pair<LocalDateTime, Task> pair : eventQueueOnDate) {
+            scheduleOnDate = scheduleOnDate.addTask(pair.getValue());
+        }
+        this.taskListFromCommand = scheduleOnDate;
     }
 
     /**
@@ -81,16 +87,17 @@ public class DoTask extends Event {
             return this;
         } else if (Parser.checkInputValidity(userCommand, this.taskList.getSize())) {
             this.userCommand = userCommand;
-            String[] userInput = userCommand.split(" ");
-            List<String> userInputSplit = Arrays.asList(userInput);
+            String[] userInputArray = userCommand.split(" ");
+            List<String> userInputSplit = Arrays.asList(userInputArray);
             String mainCommand = userInputSplit.get(0);
-            int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
 
             if (mainCommand.equals("MARK")) {
+                int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
                 assert (userInputSplit.size() > 0);
                 this.taskList = this.taskList.markTask(indexOfTask);
                 assert (this.taskList.getTask(indexOfTask).getStatus() == true);
             } else if (mainCommand.equals("UNMARK")) {
+                int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
                 assert (userInputSplit.size() > 0);
                 this.taskList = this.taskList.unmarkTask(indexOfTask);
                 assert (this.taskList.getTask(indexOfTask).getStatus() == false);
@@ -98,14 +105,17 @@ public class DoTask extends Event {
                     || mainCommand.equals("EVENT")) {
                 parseTask(userCommand);
             } else if (mainCommand.equals("DELETE")) {
+                int indexOfTask = Integer.valueOf(userInputSplit.get(1)) - 1;
                 this.removedTask = this.taskList.getTask(indexOfTask);
                 this.taskList = this.taskList.removeTask(indexOfTask);
                 this.storage = this.storage.removeFromKeywordStorage(this.removedTask);
             } else if (mainCommand.equals("FIND")) {
                 String[] keywordToFind = userCommand.split("FIND ");
                 List<String> keywords = Arrays.asList(keywordToFind);
-                TaskList findList = this.storage.getTaskList(keywords.get(1));
-                this.foundListFromKeyword = findList;
+                TaskList findList = this.storage.getTaskWithKeywords(keywords.get(1));
+                this.taskListFromCommand = findList;
+            } else if (mainCommand.equals("SCHEDULE")) {
+                findTaskOnDate(userCommand);
             }
         }
         return this;
@@ -134,7 +144,9 @@ public class DoTask extends Event {
                 int numberOfTasksRemaining = this.taskList.getSize();
                 return UserInterface.printDeletedTask(numberOfTasksRemaining, this.removedTask);
             } else if (mainCommand.equals("FIND")) {
-                return UserInterface.printSearchedTaskFromKeyword(this.foundListFromKeyword);
+                return UserInterface.printSearchedTask(this.taskListFromCommand);
+            } else if (mainCommand.equals("SCHEDULE")) {
+                return UserInterface.printSearchedTask(this.taskListFromCommand);
             } else {
                 int numberOfTasks = this.taskList.getSize();
                 return UserInterface.printAddedTask(this.userCommand, numberOfTasks);

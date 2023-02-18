@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -129,7 +130,7 @@ public class Storage {
      *          the specified keyword
      */
 
-    public TaskList getTaskList(String keyword) {
+    public TaskList getTaskWithKeywords(String keyword) {
         if (this.database.containsKey(keyword)) {
             return this.database.get(keyword);
         } else {
@@ -137,14 +138,19 @@ public class Storage {
         }
     }
 
+    public Storage addToDatabase(Task task) {
+        addTaskToSchedule(task);
+        addToKeywordStorage(task);
+        return this;
+    }
 
     /**
      * Add a task to the database and assign it to a key for easy retrieval.
-     * @param userInput the keywords to assign the {@code Task}
+     * @param task the keywords to assign the {@code Task}
      * @return a new {@code Storage} with the task added to the database
      */
 
-    public Storage addToKeywordStorage(String userInput, Task task) {
+    private void addToKeywordStorage(Task task) {
         String toUpdateKeywordDatabase = "";
         if (task.getNature().equals("T")) {
             toUpdateKeywordDatabase = "TODO " + task.getAction();
@@ -167,7 +173,6 @@ public class Storage {
                 this.database.put(keyword, newList);
             }
         }
-        return this;
     }
 
     /**
@@ -209,30 +214,29 @@ public class Storage {
         }
     }
 
-    public Storage addTaskToSchedule(Task task) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private void addTaskToSchedule(Task task) {
         List<LocalDateTime> eventDates = task.getDates();
         if (task.getNature().equals("D")) {
             LocalDateTime deadlineDate = eventDates.get(0);
-            String date = deadlineDate.format(format);
+            LocalDate convertedDate = deadlineDate.toLocalDate();
+            String date = convertedDate.toString();
             if (this.taskScheduleOnDates.containsKey(date)) {
                 PriorityQueue<Pair<LocalDateTime, Task>> currentQueue = this.taskScheduleOnDates.get(date);
                 currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
                 this.taskScheduleOnDates.put(date, currentQueue);
             } else {
-                PriorityQueue<Pair<LocalDateTime, Task>> currentQueue = new PriorityQueue<>();
+                PriorityQueue<Pair<LocalDateTime, Task>> currentQueue = new PriorityQueue<>(new DatetimeComparator());
                 currentQueue.add(new Pair<LocalDateTime, Task>(deadlineDate, task));
                 this.taskScheduleOnDates.put(date, currentQueue);
             }
-            return this;
         } else if (task.getNature().equals("E")) {
-            return this;
+
         } else {
-            return this;
+            return;
         }
     }
 
-    public HashMap<String, PriorityQueue<Pair<LocalDateTime, Task>>> getTaskScheduleOnDates() {
-        return this.taskScheduleOnDates;
+    public PriorityQueue<Pair<LocalDateTime, Task>> getTaskScheduleOnDates(String searchDate) {
+        return this.taskScheduleOnDates.get(searchDate);
     }
 }

@@ -91,6 +91,8 @@ public class UserInputException extends Exception {
             }
         } else if (command.equals("FIND")) {
 
+        } else if (command.equals("SCHEDULE")) {
+
         } else {
             throw new DukeException("COMMAND NOT FOUND... WHAT ARE YOU UP TO...");
         }

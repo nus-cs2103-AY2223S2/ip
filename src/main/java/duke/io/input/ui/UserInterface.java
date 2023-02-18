@@ -95,7 +95,7 @@ public class UserInterface {
         return toPrintOut;
     }
 
-    public static String printSearchedTaskFromKeyword(TaskList foundListFromKeyword) {
+    public static String printSearchedTask(TaskList foundListFromKeyword) {
         String toPrintOut = "YOU'RE STARTING TO FORGET..." + '\n';
         int numberOfTasksFound = foundListFromKeyword.getSize();
         if (numberOfTasksFound == 0) {
