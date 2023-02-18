@@ -1,12 +1,9 @@
 package duke.controller;
 
-import java.io.IOException;
-
 import duke.model.Model;
 import duke.util.container.ExecutionResult;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -16,7 +13,7 @@ import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends GridPane {
+public class MainWindow extends GridPane implements FxmlComponent {
 
     @FXML
     private ScrollPane scrollPane;
@@ -35,20 +32,12 @@ public class MainWindow extends GridPane {
     private Image dukeImage = new Image(getClass().getResourceAsStream("/images/Patchouli.jpg"));
 
     public MainWindow(Model model) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        loadFxml("/view/MainWindow.fxml");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.prefWidthProperty().bind(widthProperty());
         controlBar.prefWidthProperty().bind(widthProperty());
         this.model = model;
     }
-
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
