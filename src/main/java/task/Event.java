@@ -52,16 +52,12 @@ public class Event extends Task {
 
         StringBuilder s = new StringBuilder("E");
 
-        switch (priorityLevel) {
-        case HIGH:
+        if (priorityLevel.equals(PriorityLevel.HIGH)) {
             s.append("|h|");
-            break;
-        case MID:
+        } else if (priorityLevel.equals(PriorityLevel.MID)) {
             s.append("|m|");
-            break;
-        default:
+        } else {
             s.append("|l|");
-            break;
         }
 
         if (isDone) {
@@ -76,7 +72,6 @@ public class Event extends Task {
         s.append(startDate.format(DateTimeFormatter.ofPattern(this.getDateFormatA())));
         s.append("|");
         s.append(endDate.format(DateTimeFormatter.ofPattern(this.getDateFormatA())));
-
         return s.toString();
     }
 

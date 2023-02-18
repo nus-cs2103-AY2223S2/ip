@@ -33,16 +33,12 @@ public class ToDo extends Task {
     private String formatForWriteToFile(Boolean isDone, String taskName, PriorityLevel priorityLevel) {
         StringBuilder s = new StringBuilder("T");
 
-        switch (priorityLevel) {
-        case HIGH:
+        if (priorityLevel.equals(PriorityLevel.HIGH)) {
             s.append("|h|");
-            break;
-        case MID:
+        } else if (priorityLevel.equals(PriorityLevel.MID)) {
             s.append("|m|");
-            break;
-        default:
+        } else {
             s.append("|l|");
-            break;
         }
 
         if (isDone) {

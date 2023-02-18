@@ -45,16 +45,12 @@ public class Deadline extends Task {
 
         StringBuilder s = new StringBuilder("D");
 
-        switch (priorityLevel) {
-        case HIGH:
+        if (priorityLevel.equals(PriorityLevel.HIGH)) {
             s.append("|h|");
-            break;
-        case MID:
+        } else if (priorityLevel.equals(PriorityLevel.MID)) {
             s.append("|m|");
-            break;
-        default:
+        } else {
             s.append("|l|");
-            break;
         }
 
         if (isDone) {

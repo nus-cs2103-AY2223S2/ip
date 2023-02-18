@@ -36,7 +36,9 @@ public class CommandPriority extends Command {
     public String execute() throws DukeException {
         int i = this.getIndex(index);
         Task task = this.taskList.getTaskAt(i);
-        return this.getPriority(task);
+        String message = this.changePriority(task);
+        this.updateFile();
+        return message;
     }
 
     private int getIndex(String index) throws DukeException {
@@ -47,7 +49,7 @@ public class CommandPriority extends Command {
         }
     }
 
-    private String getPriority(Task task) throws DukeException {
+    private String changePriority(Task task) throws DukeException {
         switch (this.priorityLevel) {
         case "h":
             return task.setPriorityHigh();
@@ -58,6 +60,10 @@ public class CommandPriority extends Command {
         default:
             throw new DukeException(Ui.getInvalidPriorityMessage());
         }
+    }
+
+    private void updateFile() throws DukeException {
+        this.storage.overwriteFile(this.taskList);
     }
 
 
