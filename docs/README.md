@@ -52,7 +52,7 @@ Expected outcome:
 Task *increment ip* will be added to the list.
 
 ```
-<img width="598" alt="image" src="https://user-images.githubusercontent.com/65648138/219869153-851fa751-4765-4d37-b763-1951be8ed441.png">
+!<img width="598" alt="image" src="https://user-images.githubusercontent.com/65648138/219869153-851fa751-4765-4d37-b763-1951be8ed441.png">
 ```
 
 ### `deadline [TASK] by [DATETIME]` - Adding deadline task.
@@ -72,7 +72,7 @@ Expected outcome:
 Task *increment ip* with deadline *2023/02/15 1800* will be added to the list.
 
 ```
-<img width="597" alt="image" src="https://user-images.githubusercontent.com/65648138/219869171-a56904f0-9b56-4f8c-8e4c-b5060fe7f5a1.png">
+!<img width="597" alt="image" src="https://user-images.githubusercontent.com/65648138/219869171-a56904f0-9b56-4f8c-8e4c-b5060fe7f5a1.png">
 ```
 
 ### `event [TASK] from [DATETIME] to [DATETIME]` - Adding event task.
@@ -93,7 +93,7 @@ Expected outcome:
 Task *increment ip* from *2023/02/10 1800* to *2023/02/15 1800* will be added to the list.
 
 ```
-<img width="599" alt="image" src="https://user-images.githubusercontent.com/65648138/219869193-062bdf83-262e-45db-8f64-529afd3d8284.png">
+!<img width="599" alt="image" src="https://user-images.githubusercontent.com/65648138/219869193-062bdf83-262e-45db-8f64-529afd3d8284.png">
 ```
 
 `list` - Shows current list of tasks.
