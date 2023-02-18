@@ -109,7 +109,7 @@ Examples:<br>
 
 ### Add `Todofor` Task
 
-Creates a todo task that tracks a task and how duration needed to complete.<br>
+Creates a todo task that tracks a task and the duration needed to complete.<br>
 
 Format: `todofor [Task Name] /for [Duration]`<br>
 
