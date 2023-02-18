@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
 
     enum MessageOwner {
         DUKE,
-        USER;
+        USER
     }
     private static final String USER_IMAGE_PATH = "/images/doomer.jpg";
     private static final String DUKE_IMAGE_PATH = "/images/chad.jpg";
