@@ -12,6 +12,13 @@ import parser.ParsedDate;
 public class Deadline extends Task {
     private ParsedDate endDate;
 
+    /**
+     * Creates a deadline task that needs to be done before a specific date
+     * 
+     * @param name {@inheritDoc}
+     * @param endDate date that the task needs to be done before
+     * @throws NoTaskDescriptionException
+     */
     public Deadline(String name, LocalDateTime endDate) throws NoTaskDescriptionException {
         super(name, "Deadline");
         this.endDate = new ParsedDate(endDate);
@@ -34,6 +41,9 @@ public class Deadline extends Task {
         return "[D] " + super.toString() + " ( by: " + this.endDate + " )";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String stringifyTaskToSave() {
         return "DEADLINE|" + super.stringifyTaskToSave() + "|" + this.endDate;

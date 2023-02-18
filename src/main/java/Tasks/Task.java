@@ -15,10 +15,17 @@ import java.time.format.DateTimeParseException;
  */
 public abstract class Task {
 
+    /** Name of Task */
     protected String name;
     protected Boolean isChecked = false;
 
-
+    /**
+     * Creates a Task object
+     * 
+     * @param name name of the task
+     * @param type type of the task (todo, deadline or event)
+     * @throws NoTaskDescriptionException
+     */
     protected Task(String name, String type) throws NoTaskDescriptionException {
         if (name.isBlank()) {
             throw new NoTaskDescriptionException(type);
@@ -26,10 +33,20 @@ public abstract class Task {
         this.name = name;
     }
 
+    /**
+     * Creates Task with the argument input
+     * 
+     * @param args array of strings
+     * @return newly created task
+     * @throws NoTaskDescriptionException
+     * @throws InvalidDateFormatException
+     * @throws InsufficientArgumentsException
+     * @throws UnknownTaskException
+     */
     public static Task createTask(String[] args) throws NoTaskDescriptionException, InvalidDateFormatException, InsufficientArgumentsException, UnknownTaskException {
 
         LocalDateTime[] dates = new LocalDateTime[2];
-        
+
         Task task = null;
 
         try {
@@ -59,26 +76,47 @@ public abstract class Task {
         return task;
     }
 
+    /**
+     * Checks whether the task contains a specified date
+     * 
+     * @param date date to compare date of task to
+     * @return true if task contains specified date, false otherwise
+     */
     public abstract boolean contains(LocalDate date);
 
+    /**
+     * Marks a task as done
+     * 
+     * @returns Duke's response for marking a task
+     */
     public String mark() {
         boolean isPrevMarked = this.isChecked;
         this.isChecked = true;
-        String s = isPrevMarked 
-                    ? "This task \n    " + this + "\n had previously already marked as done! Did you forget?" 
+        String s = isPrevMarked
+                    ? "This task \n    " + this + "\n had previously already marked as done! Did you forget?"
                     : "This task is marked as done: \n    " + this;
         return s;
     }
 
+    /**
+     * Marks a task as undone
+     * 
+     * @return Duke's response for unmarking a task
+     */
     public String unmark() {
         boolean isPrevMarked = this.isChecked;
         this.isChecked = false;
-        String s = isPrevMarked  
+        String s = isPrevMarked
                     ? "Okay... Being unproductive I see...: \n    " + this
                     : "This task \n    " + this + "\n hasn't been done! Did you not know?!";
         return s;
     }
 
+    /**
+     * Converts isChecked value of task to string to be printed
+     * 
+     * @return string of whether task is marked in a checkbox lookalike format
+     */
     protected String markToString() {
         return this.isChecked ? "[X]" : "[ ]";
     }
@@ -91,6 +129,11 @@ public abstract class Task {
         return markToString() + " " + this.name;
     }
 
+    /**
+     * Converts a task into a string format for saving into database
+     * 
+     * @return String format of task for database
+     */
     public String stringifyTaskToSave() {
         return this.isChecked.toString() + "|" + this.name;
     }
