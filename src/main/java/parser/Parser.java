@@ -12,13 +12,16 @@ import commands.AddCommand;
 import commands.CheckCommand;
 import commands.Command;
 import commands.DeleteCommand;
+import commands.EnumCommand;
 import commands.ListTasksCommand;
 import commands.MarkCommand;
 import exceptions.InvalidDateFormatException;
 import exceptions.LoadTaskException;
 import exceptions.UnknownTaskException;
-import commands.EnumCommand;
 
+/**
+ * This class parses user input commands into commands that Duke can understand and execute
+ */
 public abstract class Parser {
     
     /**
@@ -57,9 +60,9 @@ public abstract class Parser {
             switch(comm) {
             case MARK:
                 return new MarkCommand(true, index);
-            case UNMARK: 
+            case UNMARK:
                 return new MarkCommand(false, index);
-            case DELETE: 
+            case DELETE:
                 return new DeleteCommand(index);
             default:
                 break; // will not reach here
@@ -80,6 +83,13 @@ public abstract class Parser {
         }
     }
 
+    /**
+     * Parses string input into ParsedDate object
+     * 
+     * @param s string input
+     * @return ParsedDate object
+     * @throws LoadTaskException
+     */
     public static String stringToParsedDateString(String s) throws LoadTaskException {
         String[] dateTime = s.split(" ");
         String mIndex;
@@ -100,8 +110,8 @@ public abstract class Parser {
         if (dateTime[1].length() == 1) {
             dateTime[1] = "0" + dateTime[1];
         }
-        String dateTimeValue = dateTime[2].substring(0,4) + "-" + mIndex + "-" + dateTime[1] 
+        String dateTimeValue = dateTime[2].substring(0,4) + "-" + mIndex + "-" + dateTime[1]
                                 + "T" + dateTime[4].substring(0,5);
         return dateTimeValue;
-    } 
+    }
 }

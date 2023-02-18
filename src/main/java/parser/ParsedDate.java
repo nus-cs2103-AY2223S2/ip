@@ -5,25 +5,49 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+
 /**
- * This class parses LocalDateTime format into String 
+ * This class is Duke's Date Time Object
  */
 public class ParsedDate {
     
     private LocalDateTime ldt;
 
+    /**
+     * Creates Duke's version of LocalDateTime
+     * 
+     * @param ldt parsed LocalDateTime
+     */
     public ParsedDate(LocalDateTime ldt) {
         this.ldt = ldt;
     }
 
+    /**
+     * Checks if date input is the same as this object's stored date
+     * 
+     * @param date date input
+     * @return true if equal, false otherwise
+     */
     public boolean isEqualDate(LocalDate date) {
         return this.ldt.toLocalDate().isEqual(date);
     }
 
+    /**
+     * Checks if this object's stored date comes before the date input
+     * 
+     * @param date date input
+     * @return true if this date is strictly before input date, false otherwise
+     */
     public boolean isBeforeDate(LocalDate date) {
         return this.ldt.toLocalDate().isBefore(date);
     }
 
+    /**
+     * Checks if this object's stored date comes after the date input
+     * 
+     * @param date date input
+     * @return true if this date is strictly after input date, false otherwise
+     */
     public boolean isAfterDate(LocalDate date) {
         return this.ldt.toLocalDate().isAfter(date);
     }
@@ -44,10 +68,10 @@ public class ParsedDate {
         }
         int minute = this.ldt.getMinute();
         DecimalFormat df = new DecimalFormat("00");
-        return month.toString().substring(0,3) 
-                + " " + date + " " + year 
+        return month.toString().substring(0,3)
+                + " " + date + " " + year
                 + ", " + day.toString().substring(0,3)
-                + ", " + df.format(hour%12) 
+                + ", " + df.format(hour%12)
                 + ":" + df.format(minute) + ampm;
     }
 }
