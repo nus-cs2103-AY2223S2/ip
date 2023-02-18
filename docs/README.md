@@ -6,10 +6,8 @@ Angela is a **desktop app for managing tasks, optimized for use via a Command Li
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `angela.jar` from [here](https://github.com/glozxi/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the *home folder* for Angela.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar angela.jar` command to run the application.A GUI similar to the below should appear in a few seconds.
-
-![GUI](Ui.png)
-6. Refer to the Features below for details of each command.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar angela.jar` command to run the application.
+5. Refer to the Features below for details of each command.
 
 ## Features
 
