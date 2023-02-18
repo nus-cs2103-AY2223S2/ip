@@ -9,16 +9,23 @@ import meggy.exception.MeggyNoArgException;
 public abstract class UserTask {
     /** Task description. */
     public final String desc;
+    /** The line (command and extra space removed) that created this task. Stored to avoid repeated regeneration. */
+    final String args;
     /** Task completion status. */
     private boolean isDone;
 
-    /** @param desc Non-null. Description string of task with command removed. */
-    public UserTask(String desc) throws MeggyException {
+    /**
+     * @param desc Non-null. Description string of task with command removed.
+     * @param args Non-null. The line (command and extra space removed) that created this task.
+     */
+    UserTask(String desc, String args) throws MeggyException {
         assert desc != null;
+        assert args != null;
         if (desc.isEmpty()) { // No arguments
             throw new MeggyNoArgException();
         }
         this.desc = desc;
+        this.args = args;
         isDone = false;
     }
 
@@ -54,7 +61,7 @@ public abstract class UserTask {
         isDone = done;
     }
 
-    /** @return Re-create the command that would add the task. */
+    /** @return Re-create the entry line that would create the task. */
     public abstract String recreateCmd();
 
     /** @return The string representation of this task in text UI. */

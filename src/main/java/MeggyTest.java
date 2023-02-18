@@ -20,7 +20,7 @@ public class MeggyTest {
 
     /** @return String that will never be entirely whitespace. */
     private static String randString() {
-        final int strLenMax = 10;
+        final int strLenMax = 50;
         final int printableCharRange = 95;
         while (true) {
             final int len = 1 + RAND.nextInt(strLenMax);

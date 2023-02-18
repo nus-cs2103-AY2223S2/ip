@@ -16,11 +16,12 @@ public class DdlTask extends UserTask {
     public final MeggyTime due;
 
     /**
-     * @param desc Non-null. Description string of task.
-     * @param due  Non-null. Due time.
+     * @param desc   Non-null. Description string of task.
+     * @param due    Non-null. Due time.
+     * @param origin Non-null. The line (command removed) that created this task.
      */
-    private DdlTask(String desc, MeggyTime due) throws MeggyException {
-        super(desc);
+    private DdlTask(String desc, MeggyTime due, String origin) throws MeggyException {
+        super(desc, origin);
         assert due != null;
         this.due = due;
     }
@@ -28,7 +29,7 @@ public class DdlTask extends UserTask {
     /**
      * Factory method. Parses description and due time from arguments.
      *
-     * @param args Non-null. User input line with command removed.
+     * @param args Non-null. The line (command and extra space removed) that created this task.
      */
     public static DdlTask of(String args) throws MeggyException {
         assert args != null;
@@ -43,13 +44,13 @@ public class DdlTask extends UserTask {
             desc = args.substring(0, kwIdx).trim();
             due = MeggyTime.of(args.substring(kwIdx + DUE_LEN));
         }
-        return new DdlTask(desc, due);
+        return new DdlTask(desc, due, args);
     }
 
     /** @inheritDoc */
     @Override
     public String recreateCmd() {
-        return Resource.CMD_DDL + ' ' + desc + DUE_KEYWORD_FORMATTED + due.encode();
+        return Resource.CMD_DDL + ' ' + args;
     }
 
     /** Two {@link DdlTask} objects are equal iff they have same (non-null) description and due time. */

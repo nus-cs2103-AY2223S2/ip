@@ -8,15 +8,16 @@ public class TodoTask extends UserTask {
     /** Bracketed icon of task type. */
     public static final String LABEL = getTaskTypeLabel(Resource.CMD_TODO);
 
-    /** @param desc Non-null. Description string of task with command removed. */
+    /** @param desc Non-null. Parsed description string. */
     public TodoTask(String desc) throws MeggyException {
-        super(desc);
+        // In TodoTasks, args IS description.
+        super(desc, desc);
     }
 
     /** @inheritDoc */
     @Override
     public String recreateCmd() {
-        return Resource.CMD_TODO + ' ' + desc;
+        return Resource.CMD_TODO + ' ' + args;
     }
 
     /** @inheritDoc */

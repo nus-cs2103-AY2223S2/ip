@@ -24,9 +24,10 @@ public class EventTask extends UserTask {
      * @param desc  Non-null. Parsed description string.
      * @param start Non-null. Parsed start time.
      * @param end   Non-null. Parsed end time.
+     * @param args  The line (command and extra space removed) that created this task.
      */
-    private EventTask(String desc, MeggyTime start, MeggyTime end) throws MeggyException {
-        super(desc);
+    private EventTask(String desc, MeggyTime start, MeggyTime end, String args) throws MeggyException {
+        super(desc, args);
         assert start != null;
         assert end != null;
         this.start = start;
@@ -36,7 +37,7 @@ public class EventTask extends UserTask {
     /**
      * Factory method. Parses description, start time, and end time from arguments.
      *
-     * @param args Non-null. User input line with command removed.
+     * @param args Non-null. The line (command and extra space removed) that created this task.
      */
     public static EventTask of(String args) throws MeggyException {
         assert args != null;
@@ -67,14 +68,13 @@ public class EventTask extends UserTask {
         final String start = kwValue.get(START_KEYWORD_FORMATTED);
         // If "end" keyword is in args, write to end time variable. Otherwise use default.
         final String end = kwValue.get(END_KEYWORD_FORMATTED);
-        return new EventTask(desc.trim(), MeggyTime.of(start), MeggyTime.of(end));
+        return new EventTask(desc.trim(), MeggyTime.of(start), MeggyTime.of(end), args);
     }
 
     /** @inheritDoc */
     @Override
     public String recreateCmd() {
-        return Resource.CMD_EVENT + ' ' + desc + START_KEYWORD_FORMATTED + start.encode() + END_KEYWORD_FORMATTED +
-                end.encode();
+        return Resource.CMD_EVENT + ' ' + args;
     }
 
     /** @inheritDoc */
