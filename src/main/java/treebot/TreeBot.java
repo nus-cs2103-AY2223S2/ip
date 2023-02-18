@@ -1,13 +1,13 @@
 package treebot;
 
-import commands.Command;
-import exception.TreeBotException;
+import treebot.commands.Command;
+import treebot.exception.TreeBotException;
 
-import interfaces.IUndoable;
-import tasks.TaskFactory;
-import tasks.TaskList;
-import utils.Parser;
-import utils.Storage;
+import treebot.interfaces.IUndoable;
+import treebot.tasks.TaskFactory;
+import treebot.tasks.TaskList;
+import treebot.utils.Parser;
+import treebot.utils.Storage;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayDeque;
@@ -41,6 +41,7 @@ public class TreeBot {
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
+            handleExitCommand(c);
             c.injectContext(taskList, storage, history);
             saveToHistory(c);
             assert c.isContextExists() : "Must inject context";
@@ -48,6 +49,13 @@ public class TreeBot {
         } catch (TreeBotException e) {
             return e.getMessage();
         }
+    }
+
+    private void handleExitCommand(Command c) {
+        if (!c.isExitCommand()) {
+            return;
+        }
+        System.exit(0);
     }
 
     /**

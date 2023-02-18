@@ -1,4 +1,4 @@
-package exception;
+package treebot.exception;
 
 /**
  * Signals an exception that occurs in the process of making <code>Task</code> objects by

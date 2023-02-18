@@ -1,3 +1,5 @@
+package treebot;
+
 import javafx.application.Application;
 
 /**

@@ -1,4 +1,4 @@
-package ui;
+package treebot.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,11 +30,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        greet(dialogContainer);
+        greet();
 
     }
 
-    private void greet(VBox dialogContainer) {
+    private void greet() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello! I am treebot, how may i be of service?", dukeImage)
         );
@@ -56,6 +56,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
         userInput.clear();
     }
+
+
 }

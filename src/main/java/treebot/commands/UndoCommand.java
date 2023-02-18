@@ -1,4 +1,4 @@
-package commands;
+package treebot.commands;
 
 /**
  * Represents a <code>Command</code> that when executed undoes the most recent command in history.

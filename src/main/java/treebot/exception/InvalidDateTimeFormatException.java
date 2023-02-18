@@ -1,4 +1,4 @@
-package exception;
+package treebot.exception;
 
 /**
  * Signals an exception when an invalid format for <code>DateTime</code> is given in the process

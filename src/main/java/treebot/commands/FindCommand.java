@@ -1,4 +1,4 @@
-package commands;
+package treebot.commands;
 
 /**
  * Represents a <code>Command</code> that when executed finds a task containing a given keyword.

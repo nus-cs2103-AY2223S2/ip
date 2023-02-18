@@ -1,4 +1,4 @@
-package tasks;
+package treebot.tasks;
 
 public abstract class Task {
     protected boolean isDone = false;

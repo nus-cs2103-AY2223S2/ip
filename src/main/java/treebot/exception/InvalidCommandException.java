@@ -1,4 +1,4 @@
-package exception;
+package treebot.exception;
 
 /**
  * Signals an exception that occurs when an invalid command is given.

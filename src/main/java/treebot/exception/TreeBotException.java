@@ -1,4 +1,4 @@
-package exception;
+package treebot.exception;
 
 /**
  * Signals an exception faced by the <code>TreeBot</code>.

@@ -1,10 +1,7 @@
-package commands;
+package treebot.commands;
 
-import exception.TreeBotException;
-import interfaces.IUndoable;
-import tasks.Task;
-import tasks.TaskList;
-import utils.Storage;
+import treebot.interfaces.IUndoable;
+import treebot.tasks.Task;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package exception;
+package treebot.exception;
 
 /**
  * Signals an exception that occurs when task description is not given in the process

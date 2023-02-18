@@ -1,11 +1,11 @@
-package utils;
+package treebot.utils;
 
-import commands.*;
 
-import exception.InvalidCommandException;
-import exception.TaskFactoryException;
-import exception.TreeBotException;
-import tasks.TaskFactory;
+import treebot.commands.*;
+import treebot.exception.InvalidCommandException;
+import treebot.exception.TaskFactoryException;
+import treebot.exception.TreeBotException;
+import treebot.tasks.TaskFactory;
 
 /**
  * Represents a parser that parses raw user input and returns an executable Command.
@@ -26,7 +26,6 @@ public class Parser {
      * @throws TaskFactoryException
      */
     public Command parse(String fullCommand) throws TreeBotException {
-        fullCommand += " ";
         String[] splitStr = fullCommand.split("\\s+", 2);
         String command = splitStr[0];
 
@@ -36,7 +35,7 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
-            return new AddCommand(taskFactory.make(command, splitStr[1]));
+            return new AddCommand(taskFactory.make(command, splitStr.length < 2 ? "" : splitStr[1]));
         case "delete":
             try {
                 return new DeleteCommand(Integer.parseInt(splitStr[1]));
@@ -59,6 +58,8 @@ public class Parser {
             return new FindCommand(splitStr[1]);
         case "undo":
             return new UndoCommand();
+        case "bye":
+            return new ExitCommand();
         default:
             throw new InvalidCommandException("Unknown command");
         }

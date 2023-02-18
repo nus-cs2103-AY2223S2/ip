@@ -1,9 +1,9 @@
-package utils;
+package treebot.utils;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import treebot.tasks.Deadline;
+import treebot.tasks.Event;
+import treebot.tasks.Task;
+import treebot.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

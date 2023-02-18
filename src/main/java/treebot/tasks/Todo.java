@@ -1,4 +1,4 @@
-package tasks;
+package treebot.tasks;
 
 /**
  * Represents a Todo Task.

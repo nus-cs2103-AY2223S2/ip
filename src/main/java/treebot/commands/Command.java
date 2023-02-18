@@ -1,9 +1,8 @@
-package commands;
+package treebot.commands;
 
-import exception.TreeBotException;
-import interfaces.IUndoable;
-import tasks.TaskList;
-import utils.Storage;
+import treebot.interfaces.IUndoable;
+import treebot.tasks.TaskList;
+import treebot.utils.Storage;
 
 import java.util.Deque;
 
@@ -15,6 +14,8 @@ import java.util.Deque;
  *
  */
 public abstract class Command {
+
+    protected boolean isExitCommand = false;
 
     protected TaskList taskList;
     protected Storage storage;
@@ -54,5 +55,9 @@ public abstract class Command {
     public boolean isContextExists() {
         return this.history != null && this.taskList != null
                 && this.storage != null;
+    }
+
+    public boolean isExitCommand() {
+        return isExitCommand;
     }
 }
