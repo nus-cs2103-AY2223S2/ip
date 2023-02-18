@@ -1,5 +1,9 @@
 # User Guide
 
+Welcome to Duke! Duke manages your tasks and frees your mind of having to remember things you need to do. 
+
+![UI](Ui.png)
+
 ## Quick Start
 
 ## Features
