@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
-    public void eventToWriteTest() {
+    public void addEventTest() {
         DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         ArrayList<Task> taskList = new ArrayList<>(100);
-        taskList.add(new Event("project meeting ", LocalDateTime.parse("2020-08-30 18:00", validFormat), false));
-        TaskList tl = new TaskList(taskList);
+        taskList.add(new Event("project meeting ", LocalDateTime.parse("2020-08-30 18:00", validFormat).toString(),
+                LocalDateTime.parse("2020-08-30 18:00", validFormat).toString()));
         String eventToWrite = "E | " + '0' + " | project meeting | 2020-08-30 18:00";
-        String actual = tl.taskList.get(0).toWrite();
+        String actual = taskList.get(0).toString();
         assertEquals(eventToWrite, actual);
     }
 }

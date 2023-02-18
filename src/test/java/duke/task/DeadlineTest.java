@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
-    public void eventToWriteTest() {
+    public void addDeadlineTest() {
         DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         ArrayList<Task> taskList = new ArrayList<>(100);
-        taskList.add(new Event("project meeting ", LocalDateTime.parse("2020-08-30 18:00", validFormat), false));
-        TaskList tl = new TaskList(taskList);
+        taskList.add(new Deadline("project meeting ", LocalDateTime.parse("2020-08-30 18:00", validFormat).toString()));
+        ArrayList<Task> tl = new ArrayList<>(taskList);
         String eventToWrite = "E | " + '0' + " | project meeting | 2020-08-30 18:00";
-        String actual = tl.taskList.get(0).toWrite();
+        String actual = tl.get(0).toString();
         assertEquals(eventToWrite, actual);
     }
 }
