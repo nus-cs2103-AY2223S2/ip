@@ -55,7 +55,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getHelloMessage(Image img) {
-        return getEeveeDialog("EEVEE! I'm EeveeBot! How can I help you today?", img);
+        DialogBox eeveeDialog = getEeveeDialog("EEVEE! I'm EeveeBot! How can I help you today?\n\n" +
+                "Go to https://toh-xinyi.github.io/ip/ to see the list of commands you can use!", img);
+        return eeveeDialog;
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
