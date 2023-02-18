@@ -8,6 +8,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 class Parser {
@@ -62,7 +63,7 @@ class Parser {
                 break;
             case "unmark":
                 try {
-                    Task changedTask = taskManager.unmark(Integer.parseInt(keyword.toString()) - 1);
+                    Task changedTask = taskManager.unmarkIdx(Integer.parseInt(keyword.toString()) - 1);
                     System.out.println(DIVIDER + "OK! I've marked this task as not done yet:\n"
                                                + changedTask + "\n" + DIVIDER);
 //                    return null;
@@ -117,6 +118,9 @@ class Parser {
                 } catch (IndexOutOfBoundsException ioobe) {
                     System.out.println("Sorry, the index number you've entered does not exist.");
                 }
+                break;
+            case "find":
+                ui.find(String.valueOf(keyword));
                 break;
             default:
                 // For unknown commands

@@ -31,7 +31,7 @@ class TaskList {
         return t;
     }
 
-    public Task unmark(int idx) {
+    public Task unmarkIdx(int idx) {
         Task t = tasks.get(idx);
         t.unmark();
         return t;

@@ -37,7 +37,7 @@ class TaskListTest {
         t.mark();
         TaskList list = new TaskList();
         list.add(t);
-        assertFalse(list.unmark(0).isDone());
+        assertFalse(list.unmarkIdx(0).isDone());
     }
 
     @Test
